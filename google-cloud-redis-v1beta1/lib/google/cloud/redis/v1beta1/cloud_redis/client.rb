@@ -52,15 +52,15 @@ module Google
             ##
             # Configure the CloudRedis Client class.
             #
-            # See {Google::Cloud::Redis::V1beta1::CloudRedis::Client::Configuration}
+            # See {::Google::Cloud::Redis::V1beta1::CloudRedis::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all CloudRedis clients:
             #
-            #     Google::Cloud::Redis::V1beta1::CloudRedis::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -110,7 +110,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Redis::V1beta1::CloudRedis::Client::Configuration}
+            # See {::Google::Cloud::Redis::V1beta1::CloudRedis::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -131,13 +131,13 @@ module Google
             # To create a new CloudRedis client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
+            #     client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
             #
             # To create a new CloudRedis client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the CloudRedis client.
@@ -169,8 +169,8 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
-              @cloud_redis_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Redis::V1beta1::CloudRedis::Stub,
+              @cloud_redis_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Redis::V1beta1::CloudRedis::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -181,7 +181,7 @@ module Google
             ##
             # Get the associated client for long-running operations.
             #
-            # @return [Google::Cloud::Redis::V1beta1::CloudRedis::Operations]
+            # @return [::Google::Cloud::Redis::V1beta1::CloudRedis::Operations]
             #
             attr_reader :operations_client
 
@@ -200,12 +200,12 @@ module Google
             #
             # @overload list_instances(request, options = nil)
             #   Pass arguments to `list_instances` via a request object, either of type
-            #   {Google::Cloud::Redis::V1beta1::ListInstancesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Redis::V1beta1::ListInstancesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Redis::V1beta1::ListInstancesRequest, Hash]
+            #   @param request [::Google::Cloud::Redis::V1beta1::ListInstancesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_instances(parent: nil, page_size: nil, page_token: nil)
@@ -213,43 +213,43 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the instance location using the form:
             #         `projects/{project_id}/locations/{location_id}`
             #     where `location_id` refers to a GCP region.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of items to return.
             #
             #     If not specified, a default value of 1000 will be used by the service.
             #     Regardless of the page_size value, the response may include a partial list
             #     and a caller should only rely on response's
-            #     {Google::Cloud::Redis::V1beta1::ListInstancesResponse#next_page_token `next_page_token`}
+            #     {::Google::Cloud::Redis::V1beta1::ListInstancesResponse#next_page_token `next_page_token`}
             #     to determine if there are more instances left to be queried.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The `next_page_token` value returned from a previous
-            #     {Google::Cloud::Redis::V1beta1::CloudRedis::Client#list_instances ListInstances} request, if any.
+            #     {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#list_instances ListInstances} request, if any.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Redis::V1beta1::Instance>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Redis::V1beta1::Instance>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Redis::V1beta1::Instance>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Redis::V1beta1::Instance>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_instances request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Redis::V1beta1::ListInstancesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::V1beta1::ListInstancesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_instances.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -267,12 +267,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_redis_stub.call_rpc :list_instances, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @cloud_redis_stub, :list_instances, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @cloud_redis_stub, :list_instances, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -280,12 +280,12 @@ module Google
             #
             # @overload get_instance(request, options = nil)
             #   Pass arguments to `get_instance` via a request object, either of type
-            #   {Google::Cloud::Redis::V1beta1::GetInstanceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Redis::V1beta1::GetInstanceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Redis::V1beta1::GetInstanceRequest, Hash]
+            #   @param request [::Google::Cloud::Redis::V1beta1::GetInstanceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_instance(name: nil)
@@ -293,32 +293,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Redis instance resource name using the form:
             #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
             #     where `location_id` refers to a GCP region.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Redis::V1beta1::Instance]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Redis::V1beta1::Instance]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Redis::V1beta1::Instance]
+            # @return [::Google::Cloud::Redis::V1beta1::Instance]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_instance request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Redis::V1beta1::GetInstanceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::V1beta1::GetInstanceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_instance.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -339,8 +339,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -359,12 +359,12 @@ module Google
             #
             # @overload create_instance(request, options = nil)
             #   Pass arguments to `create_instance` via a request object, either of type
-            #   {Google::Cloud::Redis::V1beta1::CreateInstanceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Redis::V1beta1::CreateInstanceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Redis::V1beta1::CreateInstanceRequest, Hash]
+            #   @param request [::Google::Cloud::Redis::V1beta1::CreateInstanceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_instance(parent: nil, instance_id: nil, instance: nil)
@@ -372,11 +372,11 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the instance location using the form:
             #         `projects/{project_id}/locations/{location_id}`
             #     where `location_id` refers to a GCP region.
-            #   @param instance_id [String]
+            #   @param instance_id [::String]
             #     Required. The logical name of the Redis instance in the customer project
             #     with the following restrictions:
             #
@@ -385,30 +385,30 @@ module Google
             #     * Must be between 1-40 characters.
             #     * Must end with a number or a letter.
             #     * Must be unique within the customer project / location
-            #   @param instance [Google::Cloud::Redis::V1beta1::Instance, Hash]
+            #   @param instance [::Google::Cloud::Redis::V1beta1::Instance, ::Hash]
             #     Required. A Redis [Instance] resource
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_instance request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Redis::V1beta1::CreateInstanceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::V1beta1::CreateInstanceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_instance.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -426,12 +426,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_redis_stub.call_rpc :create_instance, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -443,12 +443,12 @@ module Google
             #
             # @overload update_instance(request, options = nil)
             #   Pass arguments to `update_instance` via a request object, either of type
-            #   {Google::Cloud::Redis::V1beta1::UpdateInstanceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Redis::V1beta1::UpdateInstanceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Redis::V1beta1::UpdateInstanceRequest, Hash]
+            #   @param request [::Google::Cloud::Redis::V1beta1::UpdateInstanceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_instance(update_mask: nil, instance: nil)
@@ -456,40 +456,40 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Mask of fields to update. At least one path must be supplied in
             #     this field. The elements of the repeated paths field may only include these
-            #     fields from {Google::Cloud::Redis::V1beta1::Instance Instance}:
+            #     fields from {::Google::Cloud::Redis::V1beta1::Instance Instance}:
             #
             #      *   `displayName`
             #      *   `labels`
             #      *   `memorySizeGb`
             #      *   `redisConfig`
-            #   @param instance [Google::Cloud::Redis::V1beta1::Instance, Hash]
+            #   @param instance [::Google::Cloud::Redis::V1beta1::Instance, ::Hash]
             #     Required. Update description.
             #     Only fields specified in update_mask are updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_instance request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Redis::V1beta1::UpdateInstanceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::V1beta1::UpdateInstanceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_instance.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -507,12 +507,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_redis_stub.call_rpc :update_instance, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -521,12 +521,12 @@ module Google
             #
             # @overload upgrade_instance(request, options = nil)
             #   Pass arguments to `upgrade_instance` via a request object, either of type
-            #   {Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest, Hash]
+            #   @param request [::Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload upgrade_instance(name: nil, redis_version: nil)
@@ -534,34 +534,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Redis instance resource name using the form:
             #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
             #     where `location_id` refers to a GCP region.
-            #   @param redis_version [String]
+            #   @param redis_version [::String]
             #     Required. Specifies the target version of Redis software to upgrade to.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def upgrade_instance request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.upgrade_instance.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -579,12 +579,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_redis_stub.call_rpc :upgrade_instance, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -599,12 +599,12 @@ module Google
             #
             # @overload import_instance(request, options = nil)
             #   Pass arguments to `import_instance` via a request object, either of type
-            #   {Google::Cloud::Redis::V1beta1::ImportInstanceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Redis::V1beta1::ImportInstanceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Redis::V1beta1::ImportInstanceRequest, Hash]
+            #   @param request [::Google::Cloud::Redis::V1beta1::ImportInstanceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload import_instance(name: nil, input_config: nil)
@@ -612,34 +612,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Redis instance resource name using the form:
             #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
             #     where `location_id` refers to a GCP region.
-            #   @param input_config [Google::Cloud::Redis::V1beta1::InputConfig, Hash]
+            #   @param input_config [::Google::Cloud::Redis::V1beta1::InputConfig, ::Hash]
             #     Required. Specify data to be imported.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def import_instance request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Redis::V1beta1::ImportInstanceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::V1beta1::ImportInstanceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.import_instance.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -657,12 +657,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_redis_stub.call_rpc :import_instance, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -675,12 +675,12 @@ module Google
             #
             # @overload export_instance(request, options = nil)
             #   Pass arguments to `export_instance` via a request object, either of type
-            #   {Google::Cloud::Redis::V1beta1::ExportInstanceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Redis::V1beta1::ExportInstanceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Redis::V1beta1::ExportInstanceRequest, Hash]
+            #   @param request [::Google::Cloud::Redis::V1beta1::ExportInstanceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload export_instance(name: nil, output_config: nil)
@@ -688,34 +688,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Redis instance resource name using the form:
             #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
             #     where `location_id` refers to a GCP region.
-            #   @param output_config [Google::Cloud::Redis::V1beta1::OutputConfig, Hash]
+            #   @param output_config [::Google::Cloud::Redis::V1beta1::OutputConfig, ::Hash]
             #     Required. Specify data to be exported.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def export_instance request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Redis::V1beta1::ExportInstanceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::V1beta1::ExportInstanceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.export_instance.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -733,12 +733,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_redis_stub.call_rpc :export_instance, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -747,12 +747,12 @@ module Google
             #
             # @overload failover_instance(request, options = nil)
             #   Pass arguments to `failover_instance` via a request object, either of type
-            #   {Google::Cloud::Redis::V1beta1::FailoverInstanceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Redis::V1beta1::FailoverInstanceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Redis::V1beta1::FailoverInstanceRequest, Hash]
+            #   @param request [::Google::Cloud::Redis::V1beta1::FailoverInstanceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload failover_instance(name: nil, data_protection_mode: nil)
@@ -760,35 +760,35 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Redis instance resource name using the form:
             #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
             #     where `location_id` refers to a GCP region.
-            #   @param data_protection_mode [Google::Cloud::Redis::V1beta1::FailoverInstanceRequest::DataProtectionMode]
+            #   @param data_protection_mode [::Google::Cloud::Redis::V1beta1::FailoverInstanceRequest::DataProtectionMode]
             #     Optional. Available data protection modes that the user can choose. If it's
             #     unspecified, data protection mode will be LIMITED_DATA_LOSS by default.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def failover_instance request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Redis::V1beta1::FailoverInstanceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::V1beta1::FailoverInstanceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.failover_instance.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -806,12 +806,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_redis_stub.call_rpc :failover_instance, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -820,12 +820,12 @@ module Google
             #
             # @overload delete_instance(request, options = nil)
             #   Pass arguments to `delete_instance` via a request object, either of type
-            #   {Google::Cloud::Redis::V1beta1::DeleteInstanceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Redis::V1beta1::DeleteInstanceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Redis::V1beta1::DeleteInstanceRequest, Hash]
+            #   @param request [::Google::Cloud::Redis::V1beta1::DeleteInstanceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_instance(name: nil)
@@ -833,32 +833,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Redis instance resource name using the form:
             #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
             #     where `location_id` refers to a GCP region.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_instance request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Redis::V1beta1::DeleteInstanceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::V1beta1::DeleteInstanceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_instance.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -876,12 +876,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_redis_stub.call_rpc :delete_instance, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -891,7 +891,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Redis::V1beta1::CloudRedis::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Redis::V1beta1::CloudRedis::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -902,22 +902,22 @@ module Google
             # To modify the global config, setting the timeout for list_instances
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Redis::V1beta1::CloudRedis::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_instances.timeout = 20_000
+            #     ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_instances.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_instances.timeout = 20_000
+            #     client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_instances.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"redis.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -929,29 +929,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -959,10 +959,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "redis.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -970,14 +970,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -1018,70 +1018,70 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `list_instances`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_instances
                 ##
                 # RPC-specific configuration for `get_instance`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_instance
                 ##
                 # RPC-specific configuration for `create_instance`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_instance
                 ##
                 # RPC-specific configuration for `update_instance`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_instance
                 ##
                 # RPC-specific configuration for `upgrade_instance`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :upgrade_instance
                 ##
                 # RPC-specific configuration for `import_instance`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :import_instance
                 ##
                 # RPC-specific configuration for `export_instance`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :export_instance
                 ##
                 # RPC-specific configuration for `failover_instance`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :failover_instance
                 ##
                 # RPC-specific configuration for `delete_instance`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_instance
 
                 # @private
                 def initialize parent_rpcs = nil
                   list_instances_config = parent_rpcs&.list_instances if parent_rpcs&.respond_to? :list_instances
-                  @list_instances = Gapic::Config::Method.new list_instances_config
+                  @list_instances = ::Gapic::Config::Method.new list_instances_config
                   get_instance_config = parent_rpcs&.get_instance if parent_rpcs&.respond_to? :get_instance
-                  @get_instance = Gapic::Config::Method.new get_instance_config
+                  @get_instance = ::Gapic::Config::Method.new get_instance_config
                   create_instance_config = parent_rpcs&.create_instance if parent_rpcs&.respond_to? :create_instance
-                  @create_instance = Gapic::Config::Method.new create_instance_config
+                  @create_instance = ::Gapic::Config::Method.new create_instance_config
                   update_instance_config = parent_rpcs&.update_instance if parent_rpcs&.respond_to? :update_instance
-                  @update_instance = Gapic::Config::Method.new update_instance_config
+                  @update_instance = ::Gapic::Config::Method.new update_instance_config
                   upgrade_instance_config = parent_rpcs&.upgrade_instance if parent_rpcs&.respond_to? :upgrade_instance
-                  @upgrade_instance = Gapic::Config::Method.new upgrade_instance_config
+                  @upgrade_instance = ::Gapic::Config::Method.new upgrade_instance_config
                   import_instance_config = parent_rpcs&.import_instance if parent_rpcs&.respond_to? :import_instance
-                  @import_instance = Gapic::Config::Method.new import_instance_config
+                  @import_instance = ::Gapic::Config::Method.new import_instance_config
                   export_instance_config = parent_rpcs&.export_instance if parent_rpcs&.respond_to? :export_instance
-                  @export_instance = Gapic::Config::Method.new export_instance_config
+                  @export_instance = ::Gapic::Config::Method.new export_instance_config
                   failover_instance_config = parent_rpcs&.failover_instance if parent_rpcs&.respond_to? :failover_instance
-                  @failover_instance = Gapic::Config::Method.new failover_instance_config
+                  @failover_instance = ::Gapic::Config::Method.new failover_instance_config
                   delete_instance_config = parent_rpcs&.delete_instance if parent_rpcs&.respond_to? :delete_instance
-                  @delete_instance = Gapic::Config::Method.new delete_instance_config
+                  @delete_instance = ::Gapic::Config::Method.new delete_instance_config
 
                   yield self if block_given?
                 end

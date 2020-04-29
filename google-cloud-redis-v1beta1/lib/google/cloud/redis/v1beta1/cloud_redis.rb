@@ -51,7 +51,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/redis/v1beta1/cloud_redis"
-        #     client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
+        #     client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
         #
         module CloudRedis
         end

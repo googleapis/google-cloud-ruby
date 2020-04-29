@@ -23,7 +23,7 @@ require "google/cloud/redis/v1beta1/cloud_redis_pb"
 require "google/cloud/redis/v1beta1/cloud_redis_services_pb"
 require "google/cloud/redis/v1beta1/cloud_redis"
 
-class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
+class ::Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
   def test_list_instances
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Redis::V1beta1::ListInstancesResponse.new
+    grpc_response = ::Google::Cloud::Redis::V1beta1::ListInstancesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -60,7 +60,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
     list_instances_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_instances, name
-      assert_kind_of Google::Cloud::Redis::V1beta1::ListInstancesRequest, request
+      assert_kind_of ::Google::Cloud::Redis::V1beta1::ListInstancesRequest, request
       assert_equal "hello world", request.parent
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
@@ -69,7 +69,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_instances_client_stub do
       # Create client
-      client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
+      client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -88,7 +88,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list_instances Google::Cloud::Redis::V1beta1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_instances ::Google::Cloud::Redis::V1beta1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -102,7 +102,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_instances Google::Cloud::Redis::V1beta1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_instances ::Google::Cloud::Redis::V1beta1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -115,7 +115,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
   def test_get_instance
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Redis::V1beta1::Instance.new
+    grpc_response = ::Google::Cloud::Redis::V1beta1::Instance.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -125,14 +125,14 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
     get_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_instance, name
-      assert_kind_of Google::Cloud::Redis::V1beta1::GetInstanceRequest, request
+      assert_kind_of ::Google::Cloud::Redis::V1beta1::GetInstanceRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_instance_client_stub do
       # Create client
-      client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
+      client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -149,7 +149,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.get_instance Google::Cloud::Redis::V1beta1::GetInstanceRequest.new(name: name) do |response, operation|
+      client.get_instance ::Google::Cloud::Redis::V1beta1::GetInstanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -161,7 +161,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_instance Google::Cloud::Redis::V1beta1::GetInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.get_instance ::Google::Cloud::Redis::V1beta1::GetInstanceRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -173,7 +173,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
   def test_create_instance
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -185,16 +185,16 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
     create_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_instance, name
-      assert_kind_of Google::Cloud::Redis::V1beta1::CreateInstanceRequest, request
+      assert_kind_of ::Google::Cloud::Redis::V1beta1::CreateInstanceRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.instance_id
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Redis::V1beta1::Instance), request.instance
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Redis::V1beta1::Instance), request.instance
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_instance_client_stub do
       # Create client
-      client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
+      client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -213,7 +213,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.create_instance Google::Cloud::Redis::V1beta1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |response, operation|
+      client.create_instance ::Google::Cloud::Redis::V1beta1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -227,7 +227,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_instance Google::Cloud::Redis::V1beta1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), grpc_options do |response, operation|
+      client.create_instance ::Google::Cloud::Redis::V1beta1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -240,7 +240,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
   def test_update_instance
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -251,15 +251,15 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
     update_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_instance, name
-      assert_kind_of Google::Cloud::Redis::V1beta1::UpdateInstanceRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Redis::V1beta1::Instance), request.instance
+      assert_kind_of ::Google::Cloud::Redis::V1beta1::UpdateInstanceRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Redis::V1beta1::Instance), request.instance
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_instance_client_stub do
       # Create client
-      client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
+      client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -278,7 +278,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.update_instance Google::Cloud::Redis::V1beta1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance) do |response, operation|
+      client.update_instance ::Google::Cloud::Redis::V1beta1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -292,7 +292,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_instance Google::Cloud::Redis::V1beta1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance), grpc_options do |response, operation|
+      client.update_instance ::Google::Cloud::Redis::V1beta1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -305,7 +305,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
   def test_upgrade_instance
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -316,7 +316,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
     upgrade_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :upgrade_instance, name
-      assert_kind_of Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest, request
+      assert_kind_of ::Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest, request
       assert_equal "hello world", request.name
       assert_equal "hello world", request.redis_version
       refute_nil options
@@ -324,7 +324,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, upgrade_instance_client_stub do
       # Create client
-      client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
+      client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -343,7 +343,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.upgrade_instance Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest.new(name: name, redis_version: redis_version) do |response, operation|
+      client.upgrade_instance ::Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest.new(name: name, redis_version: redis_version) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -357,7 +357,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.upgrade_instance Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest.new(name: name, redis_version: redis_version), grpc_options do |response, operation|
+      client.upgrade_instance ::Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest.new(name: name, redis_version: redis_version), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -370,7 +370,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
   def test_import_instance
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -381,15 +381,15 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
     import_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_instance, name
-      assert_kind_of Google::Cloud::Redis::V1beta1::ImportInstanceRequest, request
+      assert_kind_of ::Google::Cloud::Redis::V1beta1::ImportInstanceRequest, request
       assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Redis::V1beta1::InputConfig), request.input_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Redis::V1beta1::InputConfig), request.input_config
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, import_instance_client_stub do
       # Create client
-      client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
+      client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -408,7 +408,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.import_instance Google::Cloud::Redis::V1beta1::ImportInstanceRequest.new(name: name, input_config: input_config) do |response, operation|
+      client.import_instance ::Google::Cloud::Redis::V1beta1::ImportInstanceRequest.new(name: name, input_config: input_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -422,7 +422,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.import_instance Google::Cloud::Redis::V1beta1::ImportInstanceRequest.new(name: name, input_config: input_config), grpc_options do |response, operation|
+      client.import_instance ::Google::Cloud::Redis::V1beta1::ImportInstanceRequest.new(name: name, input_config: input_config), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -435,7 +435,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
   def test_export_instance
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -446,15 +446,15 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
     export_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_instance, name
-      assert_kind_of Google::Cloud::Redis::V1beta1::ExportInstanceRequest, request
+      assert_kind_of ::Google::Cloud::Redis::V1beta1::ExportInstanceRequest, request
       assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Redis::V1beta1::OutputConfig), request.output_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Redis::V1beta1::OutputConfig), request.output_config
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, export_instance_client_stub do
       # Create client
-      client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
+      client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -473,7 +473,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.export_instance Google::Cloud::Redis::V1beta1::ExportInstanceRequest.new(name: name, output_config: output_config) do |response, operation|
+      client.export_instance ::Google::Cloud::Redis::V1beta1::ExportInstanceRequest.new(name: name, output_config: output_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -487,7 +487,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.export_instance Google::Cloud::Redis::V1beta1::ExportInstanceRequest.new(name: name, output_config: output_config), grpc_options do |response, operation|
+      client.export_instance ::Google::Cloud::Redis::V1beta1::ExportInstanceRequest.new(name: name, output_config: output_config), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -500,7 +500,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
   def test_failover_instance
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -511,7 +511,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
     failover_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :failover_instance, name
-      assert_kind_of Google::Cloud::Redis::V1beta1::FailoverInstanceRequest, request
+      assert_kind_of ::Google::Cloud::Redis::V1beta1::FailoverInstanceRequest, request
       assert_equal "hello world", request.name
       assert_equal :DATA_PROTECTION_MODE_UNSPECIFIED, request.data_protection_mode
       refute_nil options
@@ -519,7 +519,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, failover_instance_client_stub do
       # Create client
-      client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
+      client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -538,7 +538,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.failover_instance Google::Cloud::Redis::V1beta1::FailoverInstanceRequest.new(name: name, data_protection_mode: data_protection_mode) do |response, operation|
+      client.failover_instance ::Google::Cloud::Redis::V1beta1::FailoverInstanceRequest.new(name: name, data_protection_mode: data_protection_mode) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -552,7 +552,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.failover_instance Google::Cloud::Redis::V1beta1::FailoverInstanceRequest.new(name: name, data_protection_mode: data_protection_mode), grpc_options do |response, operation|
+      client.failover_instance ::Google::Cloud::Redis::V1beta1::FailoverInstanceRequest.new(name: name, data_protection_mode: data_protection_mode), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -565,7 +565,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
   def test_delete_instance
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -575,14 +575,14 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
     delete_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_instance, name
-      assert_kind_of Google::Cloud::Redis::V1beta1::DeleteInstanceRequest, request
+      assert_kind_of ::Google::Cloud::Redis::V1beta1::DeleteInstanceRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, delete_instance_client_stub do
       # Create client
-      client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
+      client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -601,7 +601,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.delete_instance Google::Cloud::Redis::V1beta1::DeleteInstanceRequest.new(name: name) do |response, operation|
+      client.delete_instance ::Google::Cloud::Redis::V1beta1::DeleteInstanceRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -615,7 +615,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_instance Google::Cloud::Redis::V1beta1::DeleteInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_instance ::Google::Cloud::Redis::V1beta1::DeleteInstanceRequest.new(name: name), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -631,7 +631,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
+      client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -641,7 +641,7 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Redis::V1beta1::CloudRedis::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Redis::V1beta1::CloudRedis::Client::Configuration, config
   end
 
   def test_operations_client
@@ -649,11 +649,11 @@ class Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
 
     client = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
+      client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
 
-    assert_kind_of Google::Cloud::Redis::V1beta1::CloudRedis::Operations, client.operations_client
+    assert_kind_of ::Google::Cloud::Redis::V1beta1::CloudRedis::Operations, client.operations_client
   end
 end
