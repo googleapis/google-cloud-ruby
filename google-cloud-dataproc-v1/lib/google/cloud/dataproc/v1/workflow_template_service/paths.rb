@@ -34,9 +34,9 @@ module Google
             # @param project [String]
             # @param location [String]
             #
-            # @return [String]
+            # @return [::String]
             def location_path project:, location:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
             end
@@ -51,9 +51,9 @@ module Google
             # @param project [String]
             # @param region [String]
             #
-            # @return [String]
+            # @return [::String]
             def region_path project:, region:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/regions/#{region}"
             end
@@ -79,25 +79,25 @@ module Google
             #   @param location [String]
             #   @param workflow_template [String]
             #
-            # @return [String]
+            # @return [::String]
             def workflow_template_path **args
               resources = {
                 "project:region:workflow_template"   => (proc do |project:, region:, workflow_template:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
 
                   "projects/#{project}/regions/#{region}/workflowTemplates/#{workflow_template}"
                 end),
                 "location:project:workflow_template" => (proc do |project:, location:, workflow_template:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "projects/#{project}/locations/#{location}/workflowTemplates/#{workflow_template}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 

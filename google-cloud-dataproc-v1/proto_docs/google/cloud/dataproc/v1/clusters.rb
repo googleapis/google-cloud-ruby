@@ -24,18 +24,18 @@ module Google
         # Describes the identifying information, config, and status of
         # a cluster of Compute Engine instances.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Google Cloud Platform project ID that the cluster belongs to.
         # @!attribute [rw] cluster_name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The cluster name. Cluster names within a project must be
         #     unique. Names of deleted clusters can be reused.
         # @!attribute [rw] config
-        #   @return [Google::Cloud::Dataproc::V1::ClusterConfig]
+        #   @return [::Google::Cloud::Dataproc::V1::ClusterConfig]
         #     Required. The cluster config. Note that Dataproc may set
         #     default values, and values may change when clusters are updated.
         # @!attribute [rw] labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels to associate with this cluster.
         #     Label **keys** must contain 1 to 63 characters, and must conform to
         #     [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt).
@@ -44,38 +44,38 @@ module Google
         #     1035](https://www.ietf.org/rfc/rfc1035.txt). No more than 32 labels can be
         #     associated with a cluster.
         # @!attribute [r] status
-        #   @return [Google::Cloud::Dataproc::V1::ClusterStatus]
+        #   @return [::Google::Cloud::Dataproc::V1::ClusterStatus]
         #     Output only. Cluster status.
         # @!attribute [r] status_history
-        #   @return [Array<Google::Cloud::Dataproc::V1::ClusterStatus>]
+        #   @return [::Array<::Google::Cloud::Dataproc::V1::ClusterStatus>]
         #     Output only. The previous cluster status.
         # @!attribute [r] cluster_uuid
-        #   @return [String]
+        #   @return [::String]
         #     Output only. A cluster UUID (Unique Universal Identifier). Dataproc
         #     generates this value when it creates the cluster.
         # @!attribute [r] metrics
-        #   @return [Google::Cloud::Dataproc::V1::ClusterMetrics]
+        #   @return [::Google::Cloud::Dataproc::V1::ClusterMetrics]
         #     Output only. Contains cluster daemon metrics such as HDFS and YARN stats.
         #
         #     **Beta Feature**: This report is available for testing purposes only. It
         #     may be changed before final release.
         class Cluster
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class LabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # The cluster config.
         # @!attribute [rw] config_bucket
-        #   @return [String]
+        #   @return [::String]
         #     Optional. A Cloud Storage bucket used to stage job
         #     dependencies, config files, and job driver console output.
         #     If you do not specify a staging bucket, Cloud
@@ -86,26 +86,26 @@ module Google
         #     [Dataproc staging
         #     bucket](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
         # @!attribute [rw] gce_cluster_config
-        #   @return [Google::Cloud::Dataproc::V1::GceClusterConfig]
+        #   @return [::Google::Cloud::Dataproc::V1::GceClusterConfig]
         #     Optional. The shared Compute Engine config settings for
         #     all instances in a cluster.
         # @!attribute [rw] master_config
-        #   @return [Google::Cloud::Dataproc::V1::InstanceGroupConfig]
+        #   @return [::Google::Cloud::Dataproc::V1::InstanceGroupConfig]
         #     Optional. The Compute Engine config settings for
         #     the master instance in a cluster.
         # @!attribute [rw] worker_config
-        #   @return [Google::Cloud::Dataproc::V1::InstanceGroupConfig]
+        #   @return [::Google::Cloud::Dataproc::V1::InstanceGroupConfig]
         #     Optional. The Compute Engine config settings for
         #     worker instances in a cluster.
         # @!attribute [rw] secondary_worker_config
-        #   @return [Google::Cloud::Dataproc::V1::InstanceGroupConfig]
+        #   @return [::Google::Cloud::Dataproc::V1::InstanceGroupConfig]
         #     Optional. The Compute Engine config settings for
         #     additional worker instances in a cluster.
         # @!attribute [rw] software_config
-        #   @return [Google::Cloud::Dataproc::V1::SoftwareConfig]
+        #   @return [::Google::Cloud::Dataproc::V1::SoftwareConfig]
         #     Optional. The config settings for software inside the cluster.
         # @!attribute [rw] initialization_actions
-        #   @return [Array<Google::Cloud::Dataproc::V1::NodeInitializationAction>]
+        #   @return [::Array<::Google::Cloud::Dataproc::V1::NodeInitializationAction>]
         #     Optional. Commands to execute on each node after config is
         #     completed. By default, executables are run on master and all worker nodes.
         #     You can test a node's `role` metadata to run an executable on
@@ -120,26 +120,26 @@ module Google
         #           ... worker specific actions ...
         #         fi
         # @!attribute [rw] encryption_config
-        #   @return [Google::Cloud::Dataproc::V1::EncryptionConfig]
+        #   @return [::Google::Cloud::Dataproc::V1::EncryptionConfig]
         #     Optional. Encryption settings for the cluster.
         # @!attribute [rw] autoscaling_config
-        #   @return [Google::Cloud::Dataproc::V1::AutoscalingConfig]
+        #   @return [::Google::Cloud::Dataproc::V1::AutoscalingConfig]
         #     Optional. Autoscaling config for the policy associated with the cluster.
         #     Cluster does not autoscale if this field is unset.
         # @!attribute [rw] security_config
-        #   @return [Google::Cloud::Dataproc::V1::SecurityConfig]
+        #   @return [::Google::Cloud::Dataproc::V1::SecurityConfig]
         #     Optional. Security settings for the cluster.
         # @!attribute [rw] lifecycle_config
-        #   @return [Google::Cloud::Dataproc::V1::LifecycleConfig]
+        #   @return [::Google::Cloud::Dataproc::V1::LifecycleConfig]
         #     Optional. Lifecycle setting for the cluster.
         class ClusterConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Autoscaling Policy config associated with the cluster.
         # @!attribute [rw] policy_uri
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The autoscaling policy used by the cluster.
         #
         #     Only resource names including projectid and location (region) are valid.
@@ -150,24 +150,24 @@ module Google
         #
         #     Note that the policy must be in the same project and Dataproc region.
         class AutoscalingConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Encryption settings for the cluster.
         # @!attribute [rw] gce_pd_kms_key_name
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The Cloud KMS key name to use for PD disk encryption for all
         #     instances in the cluster.
         class EncryptionConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Common config settings for resources of Compute Engine cluster
         # instances, applicable to all instances in the cluster.
         # @!attribute [rw] zone_uri
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The zone where the Compute Engine cluster will be located.
         #     On a create request, it is required in the "global" region. If omitted
         #     in a non-global Dataproc region, the service will pick a zone in the
@@ -180,7 +180,7 @@ module Google
         #     * `projects/[project_id]/zones/[zone]`
         #     * `us-central1-f`
         # @!attribute [rw] network_uri
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The Compute Engine network to be used for machine
         #     communications. Cannot be specified with subnetwork_uri. If neither
         #     `network_uri` nor `subnetwork_uri` is specified, the "default" network of
@@ -194,7 +194,7 @@ module Google
         #     * `projects/[project_id]/regions/global/default`
         #     * `default`
         # @!attribute [rw] subnetwork_uri
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The Compute Engine subnetwork to be used for machine
         #     communications. Cannot be specified with network_uri.
         #
@@ -204,7 +204,7 @@ module Google
         #     * `projects/[project_id]/regions/us-east1/subnetworks/sub0`
         #     * `sub0`
         # @!attribute [rw] internal_ip_only
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Optional. If true, all instances in the cluster will only have internal IP
         #     addresses. By default, clusters are not restricted to internal IP
         #     addresses, and will have ephemeral external IP addresses assigned to each
@@ -212,7 +212,7 @@ module Google
         #     subnetwork enabled networks, and all off-cluster dependencies must be
         #     configured to be accessible without external IP addresses.
         # @!attribute [rw] service_account
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The [Dataproc service
         #     account](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/service-accounts#service_accounts_in_cloud_dataproc)
         #     (also see [VM Data Plane
@@ -225,7 +225,7 @@ module Google
         #     account](https://cloud.google.com/compute/docs/access/service-accounts#default_service_account)
         #     is used.
         # @!attribute [rw] service_account_scopes
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. The URIs of service account scopes to be included in
         #     Compute Engine instances. The following base set of scopes is always
         #     included:
@@ -241,43 +241,43 @@ module Google
         #     * https://www.googleapis.com/auth/bigtable.data
         #     * https://www.googleapis.com/auth/devstorage.full_control
         # @!attribute [rw] tags
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     The Compute Engine tags to add to all instances (see [Tagging
         #     instances](https://cloud.google.com/compute/docs/label-or-tag-resources#tags)).
         # @!attribute [rw] metadata
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The Compute Engine metadata entries to add to all instances (see
         #     [Project and instance
         #     metadata](https://cloud.google.com/compute/docs/storing-retrieving-metadata#project_and_instance_metadata)).
         # @!attribute [rw] reservation_affinity
-        #   @return [Google::Cloud::Dataproc::V1::ReservationAffinity]
+        #   @return [::Google::Cloud::Dataproc::V1::ReservationAffinity]
         #     Optional. Reservation Affinity for consuming Zonal reservation.
         class GceClusterConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class MetadataEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # The config settings for Compute Engine resources in
         # an instance group, such as a master or worker group.
         # @!attribute [rw] num_instances
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The number of VM instances in the instance group.
         #     For master instance groups, must be set to 1.
         # @!attribute [r] instance_names
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Output only. The list of instance names. Dataproc derives the names
         #     from `cluster_name`, `num_instances`, and the instance group.
         # @!attribute [rw] image_uri
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The Compute Engine image resource used for cluster instances.
         #
         #     The URI can represent an image or image family.
@@ -297,7 +297,7 @@ module Google
         #     If the URI is unspecified, it will be inferred from
         #     `SoftwareConfig.image_version` or the system default.
         # @!attribute [rw] machine_type_uri
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The Compute Engine machine type used for cluster instances.
         #
         #     A full URL, partial URI, or short name are valid. Examples:
@@ -312,49 +312,49 @@ module Google
         #     feature, you must use the short name of the machine type
         #     resource, for example, `n1-standard-2`.
         # @!attribute [rw] disk_config
-        #   @return [Google::Cloud::Dataproc::V1::DiskConfig]
+        #   @return [::Google::Cloud::Dataproc::V1::DiskConfig]
         #     Optional. Disk option config settings.
         # @!attribute [r] is_preemptible
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Output only. Specifies that this instance group contains preemptible
         #     instances.
         # @!attribute [r] managed_group_config
-        #   @return [Google::Cloud::Dataproc::V1::ManagedGroupConfig]
+        #   @return [::Google::Cloud::Dataproc::V1::ManagedGroupConfig]
         #     Output only. The config for Compute Engine Instance Group
         #     Manager that manages this group.
         #     This is only used for preemptible instance groups.
         # @!attribute [rw] accelerators
-        #   @return [Array<Google::Cloud::Dataproc::V1::AcceleratorConfig>]
+        #   @return [::Array<::Google::Cloud::Dataproc::V1::AcceleratorConfig>]
         #     Optional. The Compute Engine accelerator configuration for these
         #     instances.
         # @!attribute [rw] min_cpu_platform
-        #   @return [String]
+        #   @return [::String]
         #     Optional. Specifies the minimum cpu platform for the Instance Group.
         #     See [Dataproc -> Minimum CPU
         #     Platform](https://cloud.google.com/dataproc/docs/concepts/compute/dataproc-min-cpu).
         class InstanceGroupConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Specifies the resources used to actively manage an instance group.
         # @!attribute [r] instance_template_name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The name of the Instance Template used for the Managed
         #     Instance Group.
         # @!attribute [r] instance_group_manager_name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The name of the Instance Group Manager for this group.
         class ManagedGroupConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Specifies the type and number of accelerator cards attached to the instances
         # of an instance. See [GPUs on Compute
         # Engine](https://cloud.google.com/compute/docs/gpus/).
         # @!attribute [rw] accelerator_type_uri
-        #   @return [String]
+        #   @return [::String]
         #     Full URL, partial URI, or short name of the accelerator type resource to
         #     expose to this instance. See
         #     [Compute Engine
@@ -372,24 +372,24 @@ module Google
         #     feature, you must use the short name of the accelerator type
         #     resource, for example, `nvidia-tesla-k80`.
         # @!attribute [rw] accelerator_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The number of the accelerator cards of this type exposed to this instance.
         class AcceleratorConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Specifies the config of disk options for a group of VM instances.
         # @!attribute [rw] boot_disk_type
-        #   @return [String]
+        #   @return [::String]
         #     Optional. Type of the boot disk (default is "pd-standard").
         #     Valid values: "pd-ssd" (Persistent Disk Solid State Drive) or
         #     "pd-standard" (Persistent Disk Hard Disk Drive).
         # @!attribute [rw] boot_disk_size_gb
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. Size in GB of the boot disk (default is 500GB).
         # @!attribute [rw] num_local_ssds
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. Number of attached SSDs, from 0 to 4 (default is 0).
         #     If SSDs are not attached, the boot disk is used to store runtime logs and
         #     [HDFS](https://hadoop.apache.org/docs/r1.2.1/hdfs_user_guide.html) data.
@@ -397,17 +397,17 @@ module Google
         #     data is spread across them, and the boot disk contains only basic
         #     config and installed binaries.
         class DiskConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Specifies an executable to run on a fully configured node and a
         # timeout period for executable completion.
         # @!attribute [rw] executable_file
-        #   @return [String]
+        #   @return [::String]
         #     Required. Cloud Storage URI of executable file.
         # @!attribute [rw] execution_timeout
-        #   @return [Google::Protobuf::Duration]
+        #   @return [::Google::Protobuf::Duration]
         #     Optional. Amount of time executable has to complete. Default is
         #     10 minutes (see JSON representation of
         #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
@@ -416,28 +416,28 @@ module Google
         #     name of the executable that caused the error and the exceeded timeout
         #     period) if the executable is not completed at end of the timeout period.
         class NodeInitializationAction
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The status of a cluster and its instances.
         # @!attribute [r] state
-        #   @return [Google::Cloud::Dataproc::V1::ClusterStatus::State]
+        #   @return [::Google::Cloud::Dataproc::V1::ClusterStatus::State]
         #     Output only. The cluster's state.
         # @!attribute [r] detail
-        #   @return [String]
+        #   @return [::String]
         #     Optional. Output only. Details of cluster's state.
         # @!attribute [r] state_start_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when this state was entered (see JSON representation of
         #     [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         # @!attribute [r] substate
-        #   @return [Google::Cloud::Dataproc::V1::ClusterStatus::Substate]
+        #   @return [::Google::Cloud::Dataproc::V1::ClusterStatus::Substate]
         #     Output only. Additional state information that includes
         #     status reported by the agent.
         class ClusterStatus
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The cluster state.
           module State
@@ -482,89 +482,89 @@ module Google
 
         # Security related configuration, including Kerberos.
         # @!attribute [rw] kerberos_config
-        #   @return [Google::Cloud::Dataproc::V1::KerberosConfig]
+        #   @return [::Google::Cloud::Dataproc::V1::KerberosConfig]
         #     Kerberos related configuration.
         class SecurityConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Specifies Kerberos related configuration.
         # @!attribute [rw] enable_kerberos
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Optional. Flag to indicate whether to Kerberize the cluster (default: false). Set
         #     this field to true to enable Kerberos on a cluster.
         # @!attribute [rw] root_principal_password_uri
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Cloud Storage URI of a KMS encrypted file containing the root
         #     principal password.
         # @!attribute [rw] kms_key_uri
-        #   @return [String]
+        #   @return [::String]
         #     Required. The uri of the KMS key used to encrypt various sensitive
         #     files.
         # @!attribute [rw] keystore_uri
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The Cloud Storage URI of the keystore file used for SSL
         #     encryption. If not provided, Dataproc will provide a self-signed
         #     certificate.
         # @!attribute [rw] truststore_uri
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The Cloud Storage URI of the truststore file used for SSL
         #     encryption. If not provided, Dataproc will provide a self-signed
         #     certificate.
         # @!attribute [rw] keystore_password_uri
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The Cloud Storage URI of a KMS encrypted file containing the
         #     password to the user provided keystore. For the self-signed certificate,
         #     this password is generated by Dataproc.
         # @!attribute [rw] key_password_uri
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The Cloud Storage URI of a KMS encrypted file containing the
         #     password to the user provided key. For the self-signed certificate, this
         #     password is generated by Dataproc.
         # @!attribute [rw] truststore_password_uri
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The Cloud Storage URI of a KMS encrypted file containing the
         #     password to the user provided truststore. For the self-signed certificate,
         #     this password is generated by Dataproc.
         # @!attribute [rw] cross_realm_trust_realm
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The remote realm the Dataproc on-cluster KDC will trust, should
         #     the user enable cross realm trust.
         # @!attribute [rw] cross_realm_trust_kdc
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The KDC (IP or hostname) for the remote trusted realm in a cross
         #     realm trust relationship.
         # @!attribute [rw] cross_realm_trust_admin_server
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The admin server (IP or hostname) for the remote trusted realm in
         #     a cross realm trust relationship.
         # @!attribute [rw] cross_realm_trust_shared_password_uri
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The Cloud Storage URI of a KMS encrypted file containing the
         #     shared password between the on-cluster Kerberos realm and the remote
         #     trusted realm, in a cross realm trust relationship.
         # @!attribute [rw] kdc_db_key_uri
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The Cloud Storage URI of a KMS encrypted file containing the
         #     master key of the KDC database.
         # @!attribute [rw] tgt_lifetime_hours
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The lifetime of the ticket granting ticket, in hours.
         #     If not specified, or user specifies 0, then default value 10
         #     will be used.
         # @!attribute [rw] realm
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The name of the on-cluster Kerberos realm.
         #     If not specified, the uppercased domain of hostnames will be the realm.
         class KerberosConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Specifies the selection and config of software inside the cluster.
         # @!attribute [rw] image_version
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The version of software inside the cluster. It must be one of the
         #     supported [Dataproc
         #     Versions](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#supported_cloud_dataproc_versions),
@@ -573,7 +573,7 @@ module Google
         #     version](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#other_versions).
         #     If unspecified, it defaults to the latest Debian version.
         # @!attribute [rw] properties
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The properties to set on daemon config files.
         #
         #     Property keys are specified in `prefix:property` format, for example
@@ -593,49 +593,49 @@ module Google
         #     For more information, see [Cluster
         #     properties](https://cloud.google.com/dataproc/docs/concepts/cluster-properties).
         # @!attribute [rw] optional_components
-        #   @return [Array<Google::Cloud::Dataproc::V1::Component>]
+        #   @return [::Array<::Google::Cloud::Dataproc::V1::Component>]
         #     Optional. The set of components to activate on the cluster.
         class SoftwareConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class PropertiesEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Specifies the cluster auto-delete schedule configuration.
         # @!attribute [rw] idle_delete_ttl
-        #   @return [Google::Protobuf::Duration]
+        #   @return [::Google::Protobuf::Duration]
         #     Optional. The duration to keep the cluster alive while idling (when no jobs
         #     are running). Passing this threshold will cause the cluster to be
         #     deleted. Minimum value is 10 minutes; maximum value is 14 days (see JSON
         #     representation of
         #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json).
         # @!attribute [rw] auto_delete_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Optional. The time when cluster will be auto-deleted (see JSON representation of
         #     [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         # @!attribute [rw] auto_delete_ttl
-        #   @return [Google::Protobuf::Duration]
+        #   @return [::Google::Protobuf::Duration]
         #     Optional. The lifetime duration of cluster. The cluster will be
         #     auto-deleted at the end of this period. Minimum value is 10 minutes;
         #     maximum value is 14 days (see JSON representation of
         #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         # @!attribute [r] idle_start_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when cluster became idle (most recent job finished)
         #     and became eligible for deletion due to idleness (see JSON representation
         #     of
         #     [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         class LifecycleConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Contains cluster daemon metrics, such as HDFS and YARN stats.
@@ -643,51 +643,51 @@ module Google
         # **Beta Feature**: This report is available for testing purposes only. It may
         # be changed before final release.
         # @!attribute [rw] hdfs_metrics
-        #   @return [Google::Protobuf::Map{String => Integer}]
+        #   @return [::Google::Protobuf::Map{::String => ::Integer}]
         #     The HDFS metrics.
         # @!attribute [rw] yarn_metrics
-        #   @return [Google::Protobuf::Map{String => Integer}]
+        #   @return [::Google::Protobuf::Map{::String => ::Integer}]
         #     The YARN metrics.
         class ClusterMetrics
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [Integer]
+          #   @return [::Integer]
           class HdfsMetricsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [Integer]
+          #   @return [::Integer]
           class YarnMetricsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # A request to create a cluster.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The ID of the Google Cloud Platform project that the cluster
         #     belongs to.
         # @!attribute [rw] region
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] cluster
-        #   @return [Google::Cloud::Dataproc::V1::Cluster]
+        #   @return [::Google::Cloud::Dataproc::V1::Cluster]
         #     Required. The cluster to create.
         # @!attribute [rw] request_id
-        #   @return [String]
+        #   @return [::String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two {Google::Cloud::Dataproc::V1::CreateClusterRequest CreateClusterRequest} requests  with the same
+        #     receives two {::Google::Cloud::Dataproc::V1::CreateClusterRequest CreateClusterRequest} requests  with the same
         #     id, then the second request will be ignored and the
-        #     first {Google::Longrunning::Operation google.longrunning.Operation} created and stored in the backend
+        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the backend
         #     is returned.
         #
         #     It is recommended to always set this value to a
@@ -696,26 +696,26 @@ module Google
         #     The id must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), and hyphens (-). The maximum length is 40 characters.
         class CreateClusterRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A request to update a cluster.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The ID of the Google Cloud Platform project the
         #     cluster belongs to.
         # @!attribute [rw] region
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] cluster_name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The cluster name.
         # @!attribute [rw] cluster
-        #   @return [Google::Cloud::Dataproc::V1::Cluster]
+        #   @return [::Google::Cloud::Dataproc::V1::Cluster]
         #     Required. The changes to the cluster.
         # @!attribute [rw] graceful_decommission_timeout
-        #   @return [Google::Protobuf::Duration]
+        #   @return [::Google::Protobuf::Duration]
         #     Optional. Timeout for graceful YARN decomissioning. Graceful
         #     decommissioning allows removing nodes from the cluster without
         #     interrupting jobs in progress. Timeout specifies how long to wait for jobs
@@ -726,7 +726,7 @@ module Google
         #
         #     Only supported on Dataproc image versions 1.2 and higher.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Required. Specifies the path, relative to `Cluster`, of
         #     the field to update. For example, to change the number of workers
         #     in a cluster to 5, the `update_mask` parameter would be
@@ -779,11 +779,11 @@ module Google
         #      </tbody>
         #      </table>
         # @!attribute [rw] request_id
-        #   @return [String]
+        #   @return [::String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two {Google::Cloud::Dataproc::V1::UpdateClusterRequest UpdateClusterRequest} requests  with the same
+        #     receives two {::Google::Cloud::Dataproc::V1::UpdateClusterRequest UpdateClusterRequest} requests  with the same
         #     id, then the second request will be ignored and the
-        #     first {Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
+        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
         #     backend is returned.
         #
         #     It is recommended to always set this value to a
@@ -792,31 +792,31 @@ module Google
         #     The id must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), and hyphens (-). The maximum length is 40 characters.
         class UpdateClusterRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A request to delete a cluster.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The ID of the Google Cloud Platform project that the cluster
         #     belongs to.
         # @!attribute [rw] region
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] cluster_name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The cluster name.
         # @!attribute [rw] cluster_uuid
-        #   @return [String]
+        #   @return [::String]
         #     Optional. Specifying the `cluster_uuid` means the RPC should fail
         #     (with error NOT_FOUND) if cluster with specified UUID does not exist.
         # @!attribute [rw] request_id
-        #   @return [String]
+        #   @return [::String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two {Google::Cloud::Dataproc::V1::DeleteClusterRequest DeleteClusterRequest} requests  with the same
+        #     receives two {::Google::Cloud::Dataproc::V1::DeleteClusterRequest DeleteClusterRequest} requests  with the same
         #     id, then the second request will be ignored and the
-        #     first {Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
+        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
         #     backend is returned.
         #
         #     It is recommended to always set this value to a
@@ -825,36 +825,36 @@ module Google
         #     The id must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), and hyphens (-). The maximum length is 40 characters.
         class DeleteClusterRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to get the resource representation for a cluster in a project.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The ID of the Google Cloud Platform project that the cluster
         #     belongs to.
         # @!attribute [rw] region
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] cluster_name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The cluster name.
         class GetClusterRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A request to list the clusters in a project.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The ID of the Google Cloud Platform project that the cluster
         #     belongs to.
         # @!attribute [rw] region
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     Optional. A filter constraining the clusters to list. Filters are
         #     case-sensitive and have the following syntax:
         #
@@ -875,70 +875,70 @@ module Google
         #     status.state = ACTIVE AND clusterName = mycluster
         #     AND labels.env = staging AND labels.starred = *
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The standard List page size.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The standard List page token.
         class ListClustersRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The list of all clusters in a project.
         # @!attribute [r] clusters
-        #   @return [Array<Google::Cloud::Dataproc::V1::Cluster>]
+        #   @return [::Array<::Google::Cloud::Dataproc::V1::Cluster>]
         #     Output only. The clusters in the project.
         # @!attribute [r] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     Output only. This token is included in the response if there are more
         #     results to fetch. To fetch additional results, provide this value as the
         #     `page_token` in a subsequent `ListClustersRequest`.
         class ListClustersResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A request to collect cluster diagnostic information.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The ID of the Google Cloud Platform project that the cluster
         #     belongs to.
         # @!attribute [rw] region
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] cluster_name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The cluster name.
         class DiagnoseClusterRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The location of diagnostic output.
         # @!attribute [r] output_uri
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The Cloud Storage URI of the diagnostic output.
         #     The output report is a plain text file with a summary of collected
         #     diagnostics.
         class DiagnoseClusterResults
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Reservation Affinity for consuming Zonal reservation.
         # @!attribute [rw] consume_reservation_type
-        #   @return [Google::Cloud::Dataproc::V1::ReservationAffinity::Type]
+        #   @return [::Google::Cloud::Dataproc::V1::ReservationAffinity::Type]
         #     Optional. Type of reservation to consume
         # @!attribute [rw] key
-        #   @return [String]
+        #   @return [::String]
         #     Optional. Corresponds to the label key of reservation resource.
         # @!attribute [rw] values
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. Corresponds to the label values of reservation resource.
         class ReservationAffinity
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Indicates whether to consume capacity from an reservation or not.
           module Type

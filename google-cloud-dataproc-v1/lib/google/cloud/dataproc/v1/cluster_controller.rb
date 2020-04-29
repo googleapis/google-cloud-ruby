@@ -37,7 +37,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/dataproc/v1/cluster_controller"
-        #     client = Google::Cloud::Dataproc::V1::ClusterController::Client.new
+        #     client = ::Google::Cloud::Dataproc::V1::ClusterController::Client.new
         #
         module ClusterController
         end
