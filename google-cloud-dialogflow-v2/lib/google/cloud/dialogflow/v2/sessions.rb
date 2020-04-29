@@ -32,14 +32,14 @@ module Google
       module V2
         ##
         # A session represents an interaction with a user. You retrieve user input
-        # and pass it to the {Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent DetectIntent} (or
-        # {Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent StreamingDetectIntent}) method to determine
+        # and pass it to the {::Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent DetectIntent} (or
+        # {::Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent StreamingDetectIntent}) method to determine
         # user intent and respond.
         #
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/dialogflow/v2/sessions"
-        #     client = Google::Cloud::Dialogflow::V2::Sessions::Client.new
+        #     client = ::Google::Cloud::Dialogflow::V2::Sessions::Client.new
         #
         module Sessions
         end

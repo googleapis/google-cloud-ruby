@@ -23,7 +23,7 @@ module Google
       module V2
         # Represents a context.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The unique identifier of the context. Format:
         #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`,
         #     or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
@@ -42,13 +42,13 @@ module Google
         #     * `*_id_dialog_context`
         #     * `*_dialog_params_size`
         # @!attribute [rw] lifespan_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The number of conversational query requests after which the
         #     context expires. The default is `0`. If set to `0`, the context expires
         #     immediately. Contexts expire automatically after 20 minutes if there
         #     are no matching queries.
         # @!attribute [rw] parameters
-        #   @return [Google::Protobuf::Struct]
+        #   @return [::Google::Protobuf::Struct]
         #     Optional. The collection of parameters associated with this context.
         #
         #     Depending on your protocol or client library language, this is a
@@ -65,13 +65,13 @@ module Google
         #             map from composite entity property names to property values
         #         -   Else: parameter value
         class Context
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::Client#list_contexts Contexts.ListContexts}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::Contexts::Client#list_contexts Contexts.ListContexts}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The session to list all contexts from.
         #     Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
         #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
@@ -79,34 +79,34 @@ module Google
         #     If `Environment ID` is not specified, we assume default 'draft'
         #     environment. If `User ID` is not specified, we assume default '-' user.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The maximum number of items to return in a single page. By
         #     default 100 and at most 1000.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The next_page_token value returned from a previous list request.
         class ListContextsRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {Google::Cloud::Dialogflow::V2::Contexts::Client#list_contexts Contexts.ListContexts}.
+        # The response message for {::Google::Cloud::Dialogflow::V2::Contexts::Client#list_contexts Contexts.ListContexts}.
         # @!attribute [rw] contexts
-        #   @return [Array<Google::Cloud::Dialogflow::V2::Context>]
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::Context>]
         #     The list of contexts. There will be a maximum number of items
         #     returned based on the page_size field in the request.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     Token to retrieve the next page of results, or empty if there are no
         #     more results in the list.
         class ListContextsResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::Client#get_context Contexts.GetContext}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::Contexts::Client#get_context Contexts.GetContext}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the context. Format:
         #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
         #     or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
@@ -114,13 +114,13 @@ module Google
         #     If `Environment ID` is not specified, we assume default 'draft'
         #     environment. If `User ID` is not specified, we assume default '-' user.
         class GetContextRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::Client#create_context Contexts.CreateContext}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::Contexts::Client#create_context Contexts.CreateContext}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The session to create a context for.
         #     Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
         #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
@@ -128,28 +128,28 @@ module Google
         #     If `Environment ID` is not specified, we assume default 'draft'
         #     environment. If `User ID` is not specified, we assume default '-' user.
         # @!attribute [rw] context
-        #   @return [Google::Cloud::Dialogflow::V2::Context]
+        #   @return [::Google::Cloud::Dialogflow::V2::Context]
         #     Required. The context to create.
         class CreateContextRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::Client#update_context Contexts.UpdateContext}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::Contexts::Client#update_context Contexts.UpdateContext}.
         # @!attribute [rw] context
-        #   @return [Google::Cloud::Dialogflow::V2::Context]
+        #   @return [::Google::Cloud::Dialogflow::V2::Context]
         #     Required. The context to update.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Optional. The mask to control which fields get updated.
         class UpdateContextRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::Client#delete_context Contexts.DeleteContext}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::Contexts::Client#delete_context Contexts.DeleteContext}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the context to delete. Format:
         #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
         #     or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
@@ -157,13 +157,13 @@ module Google
         #     If `Environment ID` is not specified, we assume default 'draft'
         #     environment. If `User ID` is not specified, we assume default '-' user.
         class DeleteContextRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::Client#delete_all_contexts Contexts.DeleteAllContexts}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::Contexts::Client#delete_all_contexts Contexts.DeleteAllContexts}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the session to delete all contexts from. Format:
         #     `projects/<Project ID>/agent/sessions/<Session ID>` or `projects/<Project
         #     ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
@@ -171,8 +171,8 @@ module Google
         #     If `Environment ID` is not specified we assume default 'draft' environment.
         #     If `User ID` is not specified, we assume default '-' user.
         class DeleteAllContextsRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

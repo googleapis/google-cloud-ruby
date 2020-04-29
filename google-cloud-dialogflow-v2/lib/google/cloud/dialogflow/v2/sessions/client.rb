@@ -28,8 +28,8 @@ module Google
           # Client for the Sessions service.
           #
           # A session represents an interaction with a user. You retrieve user input
-          # and pass it to the {Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent DetectIntent} (or
-          # {Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent StreamingDetectIntent}) method to determine
+          # and pass it to the {::Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent DetectIntent} (or
+          # {::Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent StreamingDetectIntent}) method to determine
           # user intent and respond.
           #
           class Client
@@ -41,15 +41,15 @@ module Google
             ##
             # Configure the Sessions Client class.
             #
-            # See {Google::Cloud::Dialogflow::V2::Sessions::Client::Configuration}
+            # See {::Google::Cloud::Dialogflow::V2::Sessions::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all Sessions clients:
             #
-            #     Google::Cloud::Dialogflow::V2::Sessions::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Dialogflow::V2::Sessions::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -85,7 +85,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Dialogflow::V2::Sessions::Client::Configuration}
+            # See {::Google::Cloud::Dialogflow::V2::Sessions::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -106,13 +106,13 @@ module Google
             # To create a new Sessions client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Dialogflow::V2::Sessions::Client.new
+            #     client = ::Google::Cloud::Dialogflow::V2::Sessions::Client.new
             #
             # To create a new Sessions client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Dialogflow::V2::Sessions::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Dialogflow::V2::Sessions::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Sessions client.
@@ -139,8 +139,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @sessions_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Dialogflow::V2::Sessions::Stub,
+              @sessions_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Dialogflow::V2::Sessions::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -158,12 +158,12 @@ module Google
             #
             # @overload detect_intent(request, options = nil)
             #   Pass arguments to `detect_intent` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::DetectIntentRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::DetectIntentRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::DetectIntentRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::DetectIntentRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload detect_intent(session: nil, query_params: nil, query_input: nil, output_audio_config: nil, output_audio_config_mask: nil, input_audio: nil)
@@ -171,7 +171,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param session [String]
+            #   @param session [::String]
             #     Required. The name of the session this query is sent to. Format:
             #     `projects/<Project ID>/agent/sessions/<Session ID>`, or
             #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
@@ -181,9 +181,9 @@ module Google
             #     `User Id`. They can be a random number or some type of user and session
             #     identifiers (preferably hashed). The length of the `Session ID` and
             #     `User ID` must not exceed 36 characters.
-            #   @param query_params [Google::Cloud::Dialogflow::V2::QueryParameters, Hash]
+            #   @param query_params [::Google::Cloud::Dialogflow::V2::QueryParameters, ::Hash]
             #     The parameters of this query.
-            #   @param query_input [Google::Cloud::Dialogflow::V2::QueryInput, Hash]
+            #   @param query_input [::Google::Cloud::Dialogflow::V2::QueryInput, ::Hash]
             #     Required. The input specification. It can be set to:
             #
             #     1.  an audio config
@@ -192,43 +192,43 @@ module Google
             #     2.  a conversational query in the form of text, or
             #
             #     3.  an event that specifies which intent to trigger.
-            #   @param output_audio_config [Google::Cloud::Dialogflow::V2::OutputAudioConfig, Hash]
+            #   @param output_audio_config [::Google::Cloud::Dialogflow::V2::OutputAudioConfig, ::Hash]
             #     Instructs the speech synthesizer how to generate the output
             #     audio. If this field is not set and agent-level speech synthesizer is not
             #     configured, no output audio is generated.
-            #   @param output_audio_config_mask [Google::Protobuf::FieldMask, Hash]
-            #     Mask for {Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
+            #   @param output_audio_config_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Mask for {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
             #     request-level config should override speech synthesizer settings defined at
             #     agent-level.
             #
-            #     If unspecified or empty, {Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
+            #     If unspecified or empty, {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
             #     config in its entirety.
-            #   @param input_audio [String]
+            #   @param input_audio [::String]
             #     The natural language speech audio to be processed. This field
             #     should be populated iff `query_input` is set to an input audio config.
             #     A single request can contain up to 1 minute of speech audio data.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dialogflow::V2::DetectIntentResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dialogflow::V2::DetectIntentResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dialogflow::V2::DetectIntentResponse]
+            # @return [::Google::Cloud::Dialogflow::V2::DetectIntentResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def detect_intent request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::DetectIntentRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::DetectIntentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.detect_intent.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -249,8 +249,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -258,37 +258,37 @@ module Google
             # and returns structured, actionable data as a result. This method is only
             # available via the gRPC API (not REST).
             #
-            # @param request [Gapic::StreamInput, Enumerable<Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest, Hash>]
-            #   An enumerable of {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest} instances.
-            # @param options [Gapic::CallOptions, Hash]
+            # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest, ::Hash>]
+            #   An enumerable of {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest} instances.
+            # @param options [::Gapic::CallOptions, ::Hash]
             #   Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Enumerable<Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Enumerable<::Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Enumerable<Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse>]
+            # @return [::Enumerable<::Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def streaming_detect_intent request, options = nil
-              unless request.is_a? Enumerable
-                raise ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
+              unless request.is_a? ::Enumerable
+                raise ::ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
                 request = request.to_enum
               end
 
               request = request.lazy.map do |req|
-                Gapic::Protobuf.coerce req, to: Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest
+                ::Gapic::Protobuf.coerce req, to: ::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest
               end
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.streaming_detect_intent.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -303,8 +303,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -314,7 +314,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Dialogflow::V2::Sessions::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Dialogflow::V2::Sessions::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -325,22 +325,22 @@ module Google
             # To modify the global config, setting the timeout for detect_intent
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Dialogflow::V2::Sessions::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.detect_intent.timeout = 20_000
+            #     ::Google::Cloud::Dialogflow::V2::Sessions::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.detect_intent.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Dialogflow::V2::Sessions::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.detect_intent.timeout = 20_000
+            #     client = ::Google::Cloud::Dialogflow::V2::Sessions::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.detect_intent.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"dialogflow.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -352,29 +352,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -382,10 +382,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "dialogflow.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -393,14 +393,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -441,21 +441,21 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `detect_intent`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :detect_intent
                 ##
                 # RPC-specific configuration for `streaming_detect_intent`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :streaming_detect_intent
 
                 # @private
                 def initialize parent_rpcs = nil
                   detect_intent_config = parent_rpcs&.detect_intent if parent_rpcs&.respond_to? :detect_intent
-                  @detect_intent = Gapic::Config::Method.new detect_intent_config
+                  @detect_intent = ::Gapic::Config::Method.new detect_intent_config
                   streaming_detect_intent_config = parent_rpcs&.streaming_detect_intent if parent_rpcs&.respond_to? :streaming_detect_intent
-                  @streaming_detect_intent = Gapic::Config::Method.new streaming_detect_intent_config
+                  @streaming_detect_intent = ::Gapic::Config::Method.new streaming_detect_intent_config
 
                   yield self if block_given?
                 end

@@ -33,7 +33,7 @@ module Google
             #
             # @param project [String]
             #
-            # @return [String]
+            # @return [::String]
             def agent_path project:
               "projects/#{project}/agent"
             end
@@ -48,9 +48,9 @@ module Google
             # @param project [String]
             # @param entity_type [String]
             #
-            # @return [String]
+            # @return [::String]
             def entity_type_path project:, entity_type:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/agent/entityTypes/#{entity_type}"
             end

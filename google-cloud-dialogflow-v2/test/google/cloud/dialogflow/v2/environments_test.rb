@@ -23,7 +23,7 @@ require "google/cloud/dialogflow/v2/environment_pb"
 require "google/cloud/dialogflow/v2/environment_services_pb"
 require "google/cloud/dialogflow/v2/environments"
 
-class Google::Cloud::Dialogflow::V2::Environments::ClientTest < Minitest::Test
+class ::Google::Cloud::Dialogflow::V2::Environments::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Dialogflow::V2::Environments::ClientTest < Minitest::Test
 
   def test_list_environments
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dialogflow::V2::ListEnvironmentsResponse.new
+    grpc_response = ::Google::Cloud::Dialogflow::V2::ListEnvironmentsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -60,7 +60,7 @@ class Google::Cloud::Dialogflow::V2::Environments::ClientTest < Minitest::Test
 
     list_environments_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_environments, name
-      assert_kind_of Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest, request
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest, request
       assert_equal "hello world", request.parent
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
@@ -69,7 +69,7 @@ class Google::Cloud::Dialogflow::V2::Environments::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_environments_client_stub do
       # Create client
-      client = Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -88,7 +88,7 @@ class Google::Cloud::Dialogflow::V2::Environments::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list_environments Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_environments ::Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -102,7 +102,7 @@ class Google::Cloud::Dialogflow::V2::Environments::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_environments Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_environments ::Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -118,7 +118,7 @@ class Google::Cloud::Dialogflow::V2::Environments::ClientTest < Minitest::Test
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -128,6 +128,6 @@ class Google::Cloud::Dialogflow::V2::Environments::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Dialogflow::V2::Environments::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Dialogflow::V2::Environments::Client::Configuration, config
   end
 end

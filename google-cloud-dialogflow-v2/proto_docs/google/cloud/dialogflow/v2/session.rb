@@ -23,7 +23,7 @@ module Google
       module V2
         # The request to detect user's intent.
         # @!attribute [rw] session
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the session this query is sent to. Format:
         #     `projects/<Project ID>/agent/sessions/<Session ID>`, or
         #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
@@ -34,10 +34,10 @@ module Google
         #     identifiers (preferably hashed). The length of the `Session ID` and
         #     `User ID` must not exceed 36 characters.
         # @!attribute [rw] query_params
-        #   @return [Google::Cloud::Dialogflow::V2::QueryParameters]
+        #   @return [::Google::Cloud::Dialogflow::V2::QueryParameters]
         #     The parameters of this query.
         # @!attribute [rw] query_input
-        #   @return [Google::Cloud::Dialogflow::V2::QueryInput]
+        #   @return [::Google::Cloud::Dialogflow::V2::QueryInput]
         #     Required. The input specification. It can be set to:
         #
         #     1.  an audio config
@@ -47,42 +47,42 @@ module Google
         #
         #     3.  an event that specifies which intent to trigger.
         # @!attribute [rw] output_audio_config
-        #   @return [Google::Cloud::Dialogflow::V2::OutputAudioConfig]
+        #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
         #     Instructs the speech synthesizer how to generate the output
         #     audio. If this field is not set and agent-level speech synthesizer is not
         #     configured, no output audio is generated.
         # @!attribute [rw] output_audio_config_mask
-        #   @return [Google::Protobuf::FieldMask]
-        #     Mask for {Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Mask for {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
         #     request-level config should override speech synthesizer settings defined at
         #     agent-level.
         #
-        #     If unspecified or empty, {Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
+        #     If unspecified or empty, {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
         #     config in its entirety.
         # @!attribute [rw] input_audio
-        #   @return [String]
+        #   @return [::String]
         #     The natural language speech audio to be processed. This field
         #     should be populated iff `query_input` is set to an input audio config.
         #     A single request can contain up to 1 minute of speech audio data.
         class DetectIntentRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The message returned from the DetectIntent method.
         # @!attribute [rw] response_id
-        #   @return [String]
+        #   @return [::String]
         #     The unique identifier of the response. It can be used to
         #     locate a response in the training example set or for reporting issues.
         # @!attribute [rw] query_result
-        #   @return [Google::Cloud::Dialogflow::V2::QueryResult]
+        #   @return [::Google::Cloud::Dialogflow::V2::QueryResult]
         #     The selected results of the conversational query or event processing.
         #     See `alternative_query_results` for additional potential results.
         # @!attribute [rw] webhook_status
-        #   @return [Google::Rpc::Status]
+        #   @return [::Google::Rpc::Status]
         #     Specifies the status of the webhook request.
         # @!attribute [rw] output_audio
-        #   @return [String]
+        #   @return [::String]
         #     The audio data bytes encoded as specified in the request.
         #     Note: The output audio is generated based on the values of default platform
         #     text responses found in the `query_result.fulfillment_messages` field. If
@@ -90,50 +90,50 @@ module Google
         #     generating audio. If no default platform text responses exist, the
         #     generated audio content will be empty.
         # @!attribute [rw] output_audio_config
-        #   @return [Google::Cloud::Dialogflow::V2::OutputAudioConfig]
+        #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
         #     The config used by the speech synthesizer to generate the output audio.
         class DetectIntentResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Represents the parameters of the conversational query.
         # @!attribute [rw] time_zone
-        #   @return [String]
+        #   @return [::String]
         #     The time zone of this conversational query from the
         #     [time zone database](https://www.iana.org/time-zones), e.g.,
         #     America/New_York, Europe/Paris. If not provided, the time zone specified in
         #     agent settings is used.
         # @!attribute [rw] geo_location
-        #   @return [Google::Type::LatLng]
+        #   @return [::Google::Type::LatLng]
         #     The geo location of this conversational query.
         # @!attribute [rw] contexts
-        #   @return [Array<Google::Cloud::Dialogflow::V2::Context>]
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::Context>]
         #     The collection of contexts to be activated before this query is
         #     executed.
         # @!attribute [rw] reset_contexts
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Specifies whether to delete all contexts in the current session
         #     before the new ones are activated.
         # @!attribute [rw] session_entity_types
-        #   @return [Array<Google::Cloud::Dialogflow::V2::SessionEntityType>]
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::SessionEntityType>]
         #     Additional session entity types to replace or extend developer
         #     entity types with. The entity synonyms apply to all languages and persist
         #     for the session of this query.
         # @!attribute [rw] payload
-        #   @return [Google::Protobuf::Struct]
+        #   @return [::Google::Protobuf::Struct]
         #     This field can be used to pass custom data to your webhook.
         #     Arbitrary JSON objects are supported.
         #     If supplied, the value is used to populate the
         #     `WebhookRequest.original_detect_intent_request.payload`
         #     field sent to your webhook.
         # @!attribute [rw] sentiment_analysis_request_config
-        #   @return [Google::Cloud::Dialogflow::V2::SentimentAnalysisRequestConfig]
+        #   @return [::Google::Cloud::Dialogflow::V2::SentimentAnalysisRequestConfig]
         #     Configures the type of sentiment analysis to perform. If not
         #     provided, sentiment analysis is not performed.
         class QueryParameters
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Represents the query input. It can contain either:
@@ -145,22 +145,22 @@ module Google
         #
         # 3.  An event that specifies which intent to trigger.
         # @!attribute [rw] audio_config
-        #   @return [Google::Cloud::Dialogflow::V2::InputAudioConfig]
+        #   @return [::Google::Cloud::Dialogflow::V2::InputAudioConfig]
         #     Instructs the speech recognizer how to process the speech audio.
         # @!attribute [rw] text
-        #   @return [Google::Cloud::Dialogflow::V2::TextInput]
+        #   @return [::Google::Cloud::Dialogflow::V2::TextInput]
         #     The natural language text to be processed.
         # @!attribute [rw] event
-        #   @return [Google::Cloud::Dialogflow::V2::EventInput]
+        #   @return [::Google::Cloud::Dialogflow::V2::EventInput]
         #     The event to be processed.
         class QueryInput
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Represents the result of conversational query or event processing.
         # @!attribute [rw] query_text
-        #   @return [String]
+        #   @return [::String]
         #     The original conversational query text:
         #
         #     - If natural language text was provided as input, `query_text` contains
@@ -171,13 +171,13 @@ module Google
         #     - If automatic spell correction is enabled, `query_text` will contain the
         #       corrected user input.
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     The language that was triggered during intent detection.
         #     See [Language
         #     Support](https://cloud.google.com/dialogflow/docs/reference/language)
         #     for a list of the currently supported language codes.
         # @!attribute [rw] speech_recognition_confidence
-        #   @return [Float]
+        #   @return [::Float]
         #     The Speech recognition confidence between 0.0 and 1.0. A higher number
         #     indicates an estimated greater likelihood that the recognized words are
         #     correct. The default of 0.0 is a sentinel value indicating that confidence
@@ -188,10 +188,10 @@ module Google
         #     separate confidence estimates per portion of the audio in
         #     StreamingRecognitionResult.
         # @!attribute [rw] action
-        #   @return [String]
+        #   @return [::String]
         #     The action name from the matched intent.
         # @!attribute [rw] parameters
-        #   @return [Google::Protobuf::Struct]
+        #   @return [::Google::Protobuf::Struct]
         #     The collection of extracted parameters.
         #
         #     Depending on your protocol or client library language, this is a
@@ -208,7 +208,7 @@ module Google
         #             map from composite entity property names to property values
         #         -   Else: parameter value
         # @!attribute [rw] all_required_params_present
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     This field is set to:
         #
         #     - `false` if the matched intent has required parameters and not all of
@@ -216,33 +216,33 @@ module Google
         #     - `true` if all required parameter values have been collected, or if the
         #        matched intent doesn't contain any required parameters.
         # @!attribute [rw] fulfillment_text
-        #   @return [String]
+        #   @return [::String]
         #     The text to be pronounced to the user or shown on the screen.
         #     Note: This is a legacy field, `fulfillment_messages` should be preferred.
         # @!attribute [rw] fulfillment_messages
-        #   @return [Array<Google::Cloud::Dialogflow::V2::Intent::Message>]
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::Intent::Message>]
         #     The collection of rich messages to present to the user.
         # @!attribute [rw] webhook_source
-        #   @return [String]
+        #   @return [::String]
         #     If the query was fulfilled by a webhook call, this field is set to the
         #     value of the `source` field returned in the webhook response.
         # @!attribute [rw] webhook_payload
-        #   @return [Google::Protobuf::Struct]
+        #   @return [::Google::Protobuf::Struct]
         #     If the query was fulfilled by a webhook call, this field is set to the
         #     value of the `payload` field returned in the webhook response.
         # @!attribute [rw] output_contexts
-        #   @return [Array<Google::Cloud::Dialogflow::V2::Context>]
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::Context>]
         #     The collection of output contexts. If applicable,
         #     `output_contexts.parameters` contains entries with name
         #     `<parameter name>.original` containing the original parameter values
         #     before the query.
         # @!attribute [rw] intent
-        #   @return [Google::Cloud::Dialogflow::V2::Intent]
+        #   @return [::Google::Cloud::Dialogflow::V2::Intent]
         #     The intent that matched the conversational query. Some, not
         #     all fields are filled in this message, including but not limited to:
         #     `name`, `display_name`, `end_interaction` and `is_fallback`.
         # @!attribute [rw] intent_detection_confidence
-        #   @return [Float]
+        #   @return [::Float]
         #     The intent detection confidence. Values range from 0.0
         #     (completely uncertain) to 1.0 (completely certain).
         #     This value is for informational purpose only and is only used to
@@ -252,7 +252,7 @@ module Google
         #     If there are `multiple knowledge_answers` messages, this value is set to
         #     the greatest `knowledgeAnswers.match_confidence` value in the list.
         # @!attribute [rw] diagnostic_info
-        #   @return [Google::Protobuf::Struct]
+        #   @return [::Google::Protobuf::Struct]
         #     Free-form diagnostic information for the associated detect intent request.
         #     The fields of this data can change without notice, so you should not write
         #     code that depends on its structure.
@@ -261,35 +261,35 @@ module Google
         #     - webhook call latency
         #     - webhook errors
         # @!attribute [rw] sentiment_analysis_result
-        #   @return [Google::Cloud::Dialogflow::V2::SentimentAnalysisResult]
+        #   @return [::Google::Cloud::Dialogflow::V2::SentimentAnalysisResult]
         #     The sentiment analysis result, which depends on the
         #     `sentiment_analysis_request_config` specified in the request.
         class QueryResult
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The top-level message sent by the client to the
-        # {Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent Sessions.StreamingDetectIntent} method.
+        # {::Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent Sessions.StreamingDetectIntent} method.
         #
         # Multiple request messages should be sent in order:
         #
         # 1.  The first message must contain
-        # {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#session session},
-        #     {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_input query_input} plus optionally
-        #     {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_params query_params}. If the client
+        # {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#session session},
+        #     {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_input query_input} plus optionally
+        #     {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_params query_params}. If the client
         #     wants to receive an audio response, it should also contain
-        #     {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config}.
+        #     {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config}.
         #     The message must not contain
-        #     {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#input_audio input_audio}.
-        # 2.  If {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_input query_input} was set to
-        #     {Google::Cloud::Dialogflow::V2::InputAudioConfig query_input.audio_config}, all subsequent
+        #     {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#input_audio input_audio}.
+        # 2.  If {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_input query_input} was set to
+        #     {::Google::Cloud::Dialogflow::V2::InputAudioConfig query_input.audio_config}, all subsequent
         #     messages must contain
-        #     {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#input_audio input_audio} to continue with
+        #     {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#input_audio input_audio} to continue with
         #     Speech recognition.
         #     If you decide to rather detect an intent from text input after you
         #     already started Speech recognition, please send a message with
-        #     {Google::Cloud::Dialogflow::V2::QueryInput#text query_input.text}.
+        #     {::Google::Cloud::Dialogflow::V2::QueryInput#text query_input.text}.
         #
         #     However, note that:
         #
@@ -300,7 +300,7 @@ module Google
         #
         # After you sent all input, you must half-close or abort the request stream.
         # @!attribute [rw] session
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the session the query is sent to.
         #     Format of the session name:
         #     `projects/<Project ID>/agent/sessions/<Session ID>`, or
@@ -312,10 +312,10 @@ module Google
         #     identifiers (preferably hashed). The length of the `Session ID` and
         #     `User ID` must not exceed 36 characters.
         # @!attribute [rw] query_params
-        #   @return [Google::Cloud::Dialogflow::V2::QueryParameters]
+        #   @return [::Google::Cloud::Dialogflow::V2::QueryParameters]
         #     The parameters of this query.
         # @!attribute [rw] query_input
-        #   @return [Google::Cloud::Dialogflow::V2::QueryInput]
+        #   @return [::Google::Cloud::Dialogflow::V2::QueryInput]
         #     Required. The input specification. It can be set to:
         #
         #     1.  an audio config which instructs the speech recognizer how to process
@@ -325,8 +325,8 @@ module Google
         #
         #     3.  an event that specifies which intent to trigger.
         # @!attribute [rw] single_utterance
-        #   @return [Boolean]
-        #     Please use {Google::Cloud::Dialogflow::V2::InputAudioConfig#single_utterance InputAudioConfig.single_utterance} instead.
+        #   @return [::Boolean]
+        #     Please use {::Google::Cloud::Dialogflow::V2::InputAudioConfig#single_utterance InputAudioConfig.single_utterance} instead.
         #     If `false` (default), recognition does not cease until
         #     the client closes the stream. If `true`, the recognizer will detect a
         #     single spoken utterance in input audio. Recognition ceases when it detects
@@ -335,26 +335,26 @@ module Google
         #     request with a new stream as needed.
         #     This setting is ignored when `query_input` is a piece of text or an event.
         # @!attribute [rw] output_audio_config
-        #   @return [Google::Cloud::Dialogflow::V2::OutputAudioConfig]
+        #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
         #     Instructs the speech synthesizer how to generate the output
         #     audio. If this field is not set and agent-level speech synthesizer is not
         #     configured, no output audio is generated.
         # @!attribute [rw] output_audio_config_mask
-        #   @return [Google::Protobuf::FieldMask]
-        #     Mask for {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Mask for {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
         #     request-level config should override speech synthesizer settings defined at
         #     agent-level.
         #
-        #     If unspecified or empty, {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
+        #     If unspecified or empty, {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
         #     config in its entirety.
         # @!attribute [rw] input_audio
-        #   @return [String]
+        #   @return [::String]
         #     The input audio content to be recognized. Must be sent if
         #     `query_input` was set to a streaming input audio config. The complete audio
         #     over all streaming messages must not exceed 1 minute.
         class StreamingDetectIntentRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The top-level message returned from the
@@ -370,20 +370,20 @@ module Google
         # 2.  The next message contains `response_id`, `query_result`
         #     and optionally `webhook_status` if a WebHook was called.
         # @!attribute [rw] response_id
-        #   @return [String]
+        #   @return [::String]
         #     The unique identifier of the response. It can be used to
         #     locate a response in the training example set or for reporting issues.
         # @!attribute [rw] recognition_result
-        #   @return [Google::Cloud::Dialogflow::V2::StreamingRecognitionResult]
+        #   @return [::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult]
         #     The result of speech recognition.
         # @!attribute [rw] query_result
-        #   @return [Google::Cloud::Dialogflow::V2::QueryResult]
+        #   @return [::Google::Cloud::Dialogflow::V2::QueryResult]
         #     The result of the conversational query or event processing.
         # @!attribute [rw] webhook_status
-        #   @return [Google::Rpc::Status]
+        #   @return [::Google::Rpc::Status]
         #     Specifies the status of the webhook request.
         # @!attribute [rw] output_audio
-        #   @return [String]
+        #   @return [::String]
         #     The audio data bytes encoded as specified in the request.
         #     Note: The output audio is generated based on the values of default platform
         #     text responses found in the `query_result.fulfillment_messages` field. If
@@ -391,11 +391,11 @@ module Google
         #     generating audio. If no default platform text responses exist, the
         #     generated audio content will be empty.
         # @!attribute [rw] output_audio_config
-        #   @return [Google::Cloud::Dialogflow::V2::OutputAudioConfig]
+        #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
         #     The config used by the speech synthesizer to generate the output audio.
         class StreamingDetectIntentResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Contains a speech recognition result corresponding to a portion of the audio
@@ -432,20 +432,20 @@ module Google
         #
         # *  for `END_OF_SINGLE_UTTERANCE`: only `message_type`.
         # @!attribute [rw] message_type
-        #   @return [Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType]
+        #   @return [::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType]
         #     Type of the result message.
         # @!attribute [rw] transcript
-        #   @return [String]
+        #   @return [::String]
         #     Transcript text representing the words that the user spoke.
         #     Populated if and only if `message_type` = `TRANSCRIPT`.
         # @!attribute [rw] is_final
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     If `false`, the `StreamingRecognitionResult` represents an
         #     interim result that may change. If `true`, the recognizer will not return
         #     any further hypotheses about this piece of the audio. May only be populated
         #     for `message_type` = `TRANSCRIPT`.
         # @!attribute [rw] confidence
-        #   @return [Float]
+        #   @return [::Float]
         #     The Speech confidence between 0.0 and 1.0 for the current portion of audio.
         #     A higher number indicates an estimated greater likelihood that the
         #     recognized words are correct. The default of 0.0 is a sentinel value
@@ -454,17 +454,17 @@ module Google
         #     This field is typically only provided if `is_final` is true and you should
         #     not rely on it being accurate or even set.
         # @!attribute [rw] speech_word_info
-        #   @return [Array<Google::Cloud::Dialogflow::V2::SpeechWordInfo>]
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::SpeechWordInfo>]
         #     Word-specific information for the words recognized by Speech in
-        #     {Google::Cloud::Dialogflow::V2::StreamingRecognitionResult#transcript transcript}. Populated if and only if `message_type` = `TRANSCRIPT` and
+        #     {::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult#transcript transcript}. Populated if and only if `message_type` = `TRANSCRIPT` and
         #     [InputAudioConfig.enable_word_info] is set.
         # @!attribute [rw] speech_end_offset
-        #   @return [Google::Protobuf::Duration]
+        #   @return [::Google::Protobuf::Duration]
         #     Time offset of the end of this Speech recognition result relative to the
         #     beginning of the audio. Only populated for `message_type` = `TRANSCRIPT`.
         class StreamingRecognitionResult
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Type of the response message.
           module MessageType
@@ -487,18 +487,18 @@ module Google
 
         # Represents the natural language text to be processed.
         # @!attribute [rw] text
-        #   @return [String]
+        #   @return [::String]
         #     Required. The UTF-8 encoded natural language text to be processed.
         #     Text length must not exceed 256 characters.
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     Required. The language of this conversational query. See [Language
         #     Support](https://cloud.google.com/dialogflow/docs/reference/language)
         #     for a list of the currently supported language codes. Note that queries in
         #     the same session do not necessarily need to specify the same language.
         class TextInput
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Events allow for matching intents by event name instead of the natural
@@ -507,10 +507,10 @@ module Google
         # The parameter `name` may be used by the agent in the response:
         # `"Hello #welcome_event.name! What can I do for you today?"`.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The unique identifier of the event.
         # @!attribute [rw] parameters
-        #   @return [Google::Protobuf::Struct]
+        #   @return [::Google::Protobuf::Struct]
         #     The collection of parameters associated with the event.
         #
         #     Depending on your protocol or client library language, this is a
@@ -527,50 +527,50 @@ module Google
         #             map from composite entity property names to property values
         #         -   Else: parameter value
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     Required. The language of this query. See [Language
         #     Support](https://cloud.google.com/dialogflow/docs/reference/language)
         #     for a list of the currently supported language codes. Note that queries in
         #     the same session do not necessarily need to specify the same language.
         class EventInput
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Configures the types of sentiment analysis to perform.
         # @!attribute [rw] analyze_query_text_sentiment
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Instructs the service to perform sentiment analysis on
         #     `query_text`. If not provided, sentiment analysis is not performed on
         #     `query_text`.
         class SentimentAnalysisRequestConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The result of sentiment analysis as configured by
         # `sentiment_analysis_request_config`.
         # @!attribute [rw] query_text_sentiment
-        #   @return [Google::Cloud::Dialogflow::V2::Sentiment]
+        #   @return [::Google::Cloud::Dialogflow::V2::Sentiment]
         #     The sentiment analysis result for `query_text`.
         class SentimentAnalysisResult
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The sentiment, such as positive/negative feeling or association, for a unit
         # of analysis, such as the query text.
         # @!attribute [rw] score
-        #   @return [Float]
+        #   @return [::Float]
         #     Sentiment score between -1.0 (negative sentiment) and 1.0 (positive
         #     sentiment).
         # @!attribute [rw] magnitude
-        #   @return [Float]
+        #   @return [::Float]
         #     A non-negative number in the [0, +inf) range, which represents the absolute
         #     magnitude of sentiment, regardless of score (positive or negative).
         class Sentiment
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

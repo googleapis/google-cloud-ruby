@@ -55,7 +55,7 @@ module Google
         #
         # *   **User** - entities that are built for an individual user such as
         #     favorites, preferences, playlists, and so on. A user entity is
-        #     represented by the {Google::Cloud::Dialogflow::V2::SessionEntityType SessionEntityType} type.
+        #     represented by the {::Google::Cloud::Dialogflow::V2::SessionEntityType SessionEntityType} type.
         #
         # For more information about entity types, see the
         # [Dialogflow
@@ -64,7 +64,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/dialogflow/v2/entity_types"
-        #     client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
+        #     client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
         #
         module EntityTypes
         end

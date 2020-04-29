@@ -23,7 +23,7 @@ require "google/cloud/dialogflow/v2/agent_pb"
 require "google/cloud/dialogflow/v2/agent_services_pb"
 require "google/cloud/dialogflow/v2/agents"
 
-class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
+class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
   def test_get_agent
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dialogflow::V2::Agent.new
+    grpc_response = ::Google::Cloud::Dialogflow::V2::Agent.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -58,14 +58,14 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
     get_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_agent, name
-      assert_kind_of Google::Cloud::Dialogflow::V2::GetAgentRequest, request
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::GetAgentRequest, request
       assert_equal "hello world", request.parent
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_agent_client_stub do
       # Create client
-      client = Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -82,7 +82,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.get_agent Google::Cloud::Dialogflow::V2::GetAgentRequest.new(parent: parent) do |response, operation|
+      client.get_agent ::Google::Cloud::Dialogflow::V2::GetAgentRequest.new(parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -94,7 +94,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_agent Google::Cloud::Dialogflow::V2::GetAgentRequest.new(parent: parent), grpc_options do |response, operation|
+      client.get_agent ::Google::Cloud::Dialogflow::V2::GetAgentRequest.new(parent: parent), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -106,7 +106,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
   def test_set_agent
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dialogflow::V2::Agent.new
+    grpc_response = ::Google::Cloud::Dialogflow::V2::Agent.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -117,15 +117,15 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
     set_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_agent, name
-      assert_kind_of Google::Cloud::Dialogflow::V2::SetAgentRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Dialogflow::V2::Agent), request.agent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::SetAgentRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::Agent), request.agent
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, set_agent_client_stub do
       # Create client
-      client = Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -142,7 +142,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.set_agent Google::Cloud::Dialogflow::V2::SetAgentRequest.new(agent: agent, update_mask: update_mask) do |response, operation|
+      client.set_agent ::Google::Cloud::Dialogflow::V2::SetAgentRequest.new(agent: agent, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -154,7 +154,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.set_agent Google::Cloud::Dialogflow::V2::SetAgentRequest.new(agent: agent, update_mask: update_mask), grpc_options do |response, operation|
+      client.set_agent ::Google::Cloud::Dialogflow::V2::SetAgentRequest.new(agent: agent, update_mask: update_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -166,7 +166,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
   def test_delete_agent
     # Create GRPC objects.
-    grpc_response = Google::Protobuf::Empty.new
+    grpc_response = ::Google::Protobuf::Empty.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -176,14 +176,14 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
     delete_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_agent, name
-      assert_kind_of Google::Cloud::Dialogflow::V2::DeleteAgentRequest, request
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::DeleteAgentRequest, request
       assert_equal "hello world", request.parent
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, delete_agent_client_stub do
       # Create client
-      client = Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -200,7 +200,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.delete_agent Google::Cloud::Dialogflow::V2::DeleteAgentRequest.new(parent: parent) do |response, operation|
+      client.delete_agent ::Google::Cloud::Dialogflow::V2::DeleteAgentRequest.new(parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -212,7 +212,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_agent Google::Cloud::Dialogflow::V2::DeleteAgentRequest.new(parent: parent), grpc_options do |response, operation|
+      client.delete_agent ::Google::Cloud::Dialogflow::V2::DeleteAgentRequest.new(parent: parent), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -224,7 +224,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
   def test_search_agents
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dialogflow::V2::SearchAgentsResponse.new
+    grpc_response = ::Google::Cloud::Dialogflow::V2::SearchAgentsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -236,7 +236,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
     search_agents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_agents, name
-      assert_kind_of Google::Cloud::Dialogflow::V2::SearchAgentsRequest, request
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::SearchAgentsRequest, request
       assert_equal "hello world", request.parent
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
@@ -245,7 +245,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, search_agents_client_stub do
       # Create client
-      client = Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -264,7 +264,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.search_agents Google::Cloud::Dialogflow::V2::SearchAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.search_agents ::Google::Cloud::Dialogflow::V2::SearchAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -278,7 +278,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.search_agents Google::Cloud::Dialogflow::V2::SearchAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.search_agents ::Google::Cloud::Dialogflow::V2::SearchAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -291,7 +291,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
   def test_train_agent
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -301,14 +301,14 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
     train_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :train_agent, name
-      assert_kind_of Google::Cloud::Dialogflow::V2::TrainAgentRequest, request
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::TrainAgentRequest, request
       assert_equal "hello world", request.parent
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, train_agent_client_stub do
       # Create client
-      client = Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -327,7 +327,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.train_agent Google::Cloud::Dialogflow::V2::TrainAgentRequest.new(parent: parent) do |response, operation|
+      client.train_agent ::Google::Cloud::Dialogflow::V2::TrainAgentRequest.new(parent: parent) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -341,7 +341,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.train_agent Google::Cloud::Dialogflow::V2::TrainAgentRequest.new(parent: parent), grpc_options do |response, operation|
+      client.train_agent ::Google::Cloud::Dialogflow::V2::TrainAgentRequest.new(parent: parent), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -354,7 +354,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
   def test_export_agent
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -365,7 +365,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
     export_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_agent, name
-      assert_kind_of Google::Cloud::Dialogflow::V2::ExportAgentRequest, request
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::ExportAgentRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.agent_uri
       refute_nil options
@@ -373,7 +373,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, export_agent_client_stub do
       # Create client
-      client = Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -392,7 +392,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.export_agent Google::Cloud::Dialogflow::V2::ExportAgentRequest.new(parent: parent, agent_uri: agent_uri) do |response, operation|
+      client.export_agent ::Google::Cloud::Dialogflow::V2::ExportAgentRequest.new(parent: parent, agent_uri: agent_uri) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -406,7 +406,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.export_agent Google::Cloud::Dialogflow::V2::ExportAgentRequest.new(parent: parent, agent_uri: agent_uri), grpc_options do |response, operation|
+      client.export_agent ::Google::Cloud::Dialogflow::V2::ExportAgentRequest.new(parent: parent, agent_uri: agent_uri), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -419,7 +419,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
   def test_import_agent
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -429,14 +429,14 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
     import_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_agent, name
-      assert_kind_of Google::Cloud::Dialogflow::V2::ImportAgentRequest, request
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::ImportAgentRequest, request
       assert_equal "hello world", request.parent
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, import_agent_client_stub do
       # Create client
-      client = Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -455,7 +455,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.import_agent Google::Cloud::Dialogflow::V2::ImportAgentRequest.new(parent: parent) do |response, operation|
+      client.import_agent ::Google::Cloud::Dialogflow::V2::ImportAgentRequest.new(parent: parent) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -469,7 +469,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.import_agent Google::Cloud::Dialogflow::V2::ImportAgentRequest.new(parent: parent), grpc_options do |response, operation|
+      client.import_agent ::Google::Cloud::Dialogflow::V2::ImportAgentRequest.new(parent: parent), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -482,7 +482,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
   def test_restore_agent
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -492,14 +492,14 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
     restore_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :restore_agent, name
-      assert_kind_of Google::Cloud::Dialogflow::V2::RestoreAgentRequest, request
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::RestoreAgentRequest, request
       assert_equal "hello world", request.parent
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, restore_agent_client_stub do
       # Create client
-      client = Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -518,7 +518,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.restore_agent Google::Cloud::Dialogflow::V2::RestoreAgentRequest.new(parent: parent) do |response, operation|
+      client.restore_agent ::Google::Cloud::Dialogflow::V2::RestoreAgentRequest.new(parent: parent) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -532,7 +532,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.restore_agent Google::Cloud::Dialogflow::V2::RestoreAgentRequest.new(parent: parent), grpc_options do |response, operation|
+      client.restore_agent ::Google::Cloud::Dialogflow::V2::RestoreAgentRequest.new(parent: parent), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -545,7 +545,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
   def test_get_validation_result
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dialogflow::V2::ValidationResult.new
+    grpc_response = ::Google::Cloud::Dialogflow::V2::ValidationResult.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -556,7 +556,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
     get_validation_result_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_validation_result, name
-      assert_kind_of Google::Cloud::Dialogflow::V2::GetValidationResultRequest, request
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::GetValidationResultRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.language_code
       refute_nil options
@@ -564,7 +564,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_validation_result_client_stub do
       # Create client
-      client = Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -581,7 +581,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.get_validation_result Google::Cloud::Dialogflow::V2::GetValidationResultRequest.new(parent: parent, language_code: language_code) do |response, operation|
+      client.get_validation_result ::Google::Cloud::Dialogflow::V2::GetValidationResultRequest.new(parent: parent, language_code: language_code) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -593,7 +593,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_validation_result Google::Cloud::Dialogflow::V2::GetValidationResultRequest.new(parent: parent, language_code: language_code), grpc_options do |response, operation|
+      client.get_validation_result ::Google::Cloud::Dialogflow::V2::GetValidationResultRequest.new(parent: parent, language_code: language_code), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -608,7 +608,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -618,7 +618,7 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Dialogflow::V2::Agents::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Dialogflow::V2::Agents::Client::Configuration, config
   end
 
   def test_operations_client
@@ -626,11 +626,11 @@ class Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
     client = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
 
-    assert_kind_of Google::Cloud::Dialogflow::V2::Agents::Operations, client.operations_client
+    assert_kind_of ::Google::Cloud::Dialogflow::V2::Agents::Operations, client.operations_client
   end
 end

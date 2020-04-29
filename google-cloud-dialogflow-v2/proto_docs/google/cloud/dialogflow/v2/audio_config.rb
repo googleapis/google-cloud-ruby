@@ -24,7 +24,7 @@ module Google
         # Hints for the speech recognizer to help with recognition in a specific
         # conversation state.
         # @!attribute [rw] phrases
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. A list of strings containing words and phrases that the speech
         #     recognizer should recognize with higher likelihood.
         #
@@ -38,7 +38,7 @@ module Google
         #     documentation](https://cloud.google.com/speech-to-text/quotas) for usage
         #     limits.
         # @!attribute [rw] boost
-        #   @return [Float]
+        #   @return [::Float]
         #     Optional. Boost for this context compared to other contexts:
         #     * If the boost is positive, Dialogflow will increase the probability that
         #       the phrases in this context are recognized over similar sounding phrases.
@@ -48,26 +48,26 @@ module Google
         #     Dialogflow recommends that you use boosts in the range (0, 20] and that you
         #     find a value that fits your use case with binary search.
         class SpeechContext
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Information for a word recognized by the speech recognizer.
         # @!attribute [rw] word
-        #   @return [String]
+        #   @return [::String]
         #     The word this info is for.
         # @!attribute [rw] start_offset
-        #   @return [Google::Protobuf::Duration]
+        #   @return [::Google::Protobuf::Duration]
         #     Time offset relative to the beginning of the audio that corresponds to the
         #     start of the spoken word. This is an experimental feature and the accuracy
         #     of the time offset can vary.
         # @!attribute [rw] end_offset
-        #   @return [Google::Protobuf::Duration]
+        #   @return [::Google::Protobuf::Duration]
         #     Time offset relative to the beginning of the audio that corresponds to the
         #     end of the spoken word. This is an experimental feature and the accuracy of
         #     the time offset can vary.
         # @!attribute [rw] confidence
-        #   @return [Float]
+        #   @return [::Float]
         #     The Speech confidence between 0.0 and 1.0 for this word. A higher number
         #     indicates an estimated greater likelihood that the recognized word is
         #     correct. The default of 0.0 is a sentinel value indicating that confidence
@@ -76,36 +76,36 @@ module Google
         #     This field is not guaranteed to be fully stable over time for the same
         #     audio input. Users should also not rely on it to always be provided.
         class SpeechWordInfo
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Instructs the speech recognizer how to process the audio content.
         # @!attribute [rw] audio_encoding
-        #   @return [Google::Cloud::Dialogflow::V2::AudioEncoding]
+        #   @return [::Google::Cloud::Dialogflow::V2::AudioEncoding]
         #     Required. Audio encoding of the audio content to process.
         # @!attribute [rw] sample_rate_hertz
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Required. Sample rate (in Hertz) of the audio content sent in the query.
         #     Refer to
         #     [Cloud Speech API
         #     documentation](https://cloud.google.com/speech-to-text/docs/basics) for
         #     more details.
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     Required. The language of the supplied audio. Dialogflow does not do
         #     translations. See [Language
         #     Support](https://cloud.google.com/dialogflow/docs/reference/language)
         #     for a list of the currently supported language codes. Note that queries in
         #     the same session do not necessarily need to specify the same language.
         # @!attribute [rw] enable_word_info
-        #   @return [Boolean]
-        #     If `true`, Dialogflow returns {Google::Cloud::Dialogflow::V2::SpeechWordInfo SpeechWordInfo} in
-        #     {Google::Cloud::Dialogflow::V2::StreamingRecognitionResult StreamingRecognitionResult} with information about the recognized speech
+        #   @return [::Boolean]
+        #     If `true`, Dialogflow returns {::Google::Cloud::Dialogflow::V2::SpeechWordInfo SpeechWordInfo} in
+        #     {::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult StreamingRecognitionResult} with information about the recognized speech
         #     words, e.g. start and end time offsets. If false or unspecified, Speech
         #     doesn't return any word-level information.
         # @!attribute [rw] phrase_hints
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     A list of strings containing words and phrases that the speech
         #     recognizer should recognize with higher likelihood.
         #
@@ -117,14 +117,14 @@ module Google
         #     specify both [phrase_hints]() and [speech_contexts](), Dialogflow will
         #     treat the [phrase_hints]() as a single additional [SpeechContext]().
         # @!attribute [rw] speech_contexts
-        #   @return [Array<Google::Cloud::Dialogflow::V2::SpeechContext>]
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::SpeechContext>]
         #     Context information to assist speech recognition.
         #
         #     See [the Cloud Speech
         #     documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints)
         #     for more details.
         # @!attribute [rw] model
-        #   @return [String]
+        #   @return [::String]
         #     Which Speech model to select for the given request. Select the
         #     model best suited to your domain to get best results. If a model is not
         #     explicitly specified, then we auto-select a model based on the parameters
@@ -137,10 +137,10 @@ module Google
         #     documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model)
         #     for more details.
         # @!attribute [rw] model_variant
-        #   @return [Google::Cloud::Dialogflow::V2::SpeechModelVariant]
-        #     Which variant of the {Google::Cloud::Dialogflow::V2::InputAudioConfig#model Speech model} to use.
+        #   @return [::Google::Cloud::Dialogflow::V2::SpeechModelVariant]
+        #     Which variant of the {::Google::Cloud::Dialogflow::V2::InputAudioConfig#model Speech model} to use.
         # @!attribute [rw] single_utterance
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     If `false` (default), recognition does not cease until the
         #     client closes the stream.
         #     If `true`, the recognizer will detect a single spoken utterance in input
@@ -152,42 +152,42 @@ module Google
         #     Note: When specified, InputAudioConfig.single_utterance takes precedence
         #     over StreamingDetectIntentRequest.single_utterance.
         class InputAudioConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Description of which voice to use for speech synthesis.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The name of the voice. If not set, the service will choose a
         #     voice based on the other parameters such as language_code and
-        #     {Google::Cloud::Dialogflow::V2::VoiceSelectionParams#ssml_gender ssml_gender}.
+        #     {::Google::Cloud::Dialogflow::V2::VoiceSelectionParams#ssml_gender ssml_gender}.
         # @!attribute [rw] ssml_gender
-        #   @return [Google::Cloud::Dialogflow::V2::SsmlVoiceGender]
+        #   @return [::Google::Cloud::Dialogflow::V2::SsmlVoiceGender]
         #     Optional. The preferred gender of the voice. If not set, the service will
         #     choose a voice based on the other parameters such as language_code and
-        #     {Google::Cloud::Dialogflow::V2::VoiceSelectionParams#name name}. Note that this is only a preference, not requirement. If a
+        #     {::Google::Cloud::Dialogflow::V2::VoiceSelectionParams#name name}. Note that this is only a preference, not requirement. If a
         #     voice of the appropriate gender is not available, the synthesizer should
         #     substitute a voice with a different gender rather than failing the request.
         class VoiceSelectionParams
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Configuration of how speech should be synthesized.
         # @!attribute [rw] speaking_rate
-        #   @return [Float]
+        #   @return [::Float]
         #     Optional. Speaking rate/speed, in the range [0.25, 4.0]. 1.0 is the normal
         #     native speed supported by the specific voice. 2.0 is twice as fast, and
         #     0.5 is half as fast. If unset(0.0), defaults to the native 1.0 speed. Any
         #     other values < 0.25 or > 4.0 will return an error.
         # @!attribute [rw] pitch
-        #   @return [Float]
+        #   @return [::Float]
         #     Optional. Speaking pitch, in the range [-20.0, 20.0]. 20 means increase 20
         #     semitones from the original pitch. -20 means decrease 20 semitones from the
         #     original pitch.
         # @!attribute [rw] volume_gain_db
-        #   @return [Float]
+        #   @return [::Float]
         #     Optional. Volume gain (in dB) of the normal native volume supported by the
         #     specific voice, in the range [-96.0, 16.0]. If unset, or set to a value of
         #     0.0 (dB), will play at normal native signal amplitude. A value of -6.0 (dB)
@@ -197,37 +197,37 @@ module Google
         #     to exceed +10 (dB) as there's usually no effective increase in loudness for
         #     any value greater than that.
         # @!attribute [rw] effects_profile_id
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. An identifier which selects 'audio effects' profiles that are
         #     applied on (post synthesized) text to speech. Effects are applied on top of
         #     each other in the order they are given.
         # @!attribute [rw] voice
-        #   @return [Google::Cloud::Dialogflow::V2::VoiceSelectionParams]
+        #   @return [::Google::Cloud::Dialogflow::V2::VoiceSelectionParams]
         #     Optional. The desired voice of the synthesized audio.
         class SynthesizeSpeechConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Instructs the speech synthesizer on how to generate the output audio content.
         # If this audio config is supplied in a request, it overrides all existing
         # text-to-speech settings applied to the agent.
         # @!attribute [rw] audio_encoding
-        #   @return [Google::Cloud::Dialogflow::V2::OutputAudioEncoding]
+        #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioEncoding]
         #     Required. Audio encoding of the synthesized audio content.
         # @!attribute [rw] sample_rate_hertz
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The synthesis sample rate (in hertz) for this audio. If not
         #     provided, then the synthesizer will use the default sample rate based on
         #     the audio encoding. If this is different from the voice's natural sample
         #     rate, then the synthesizer will honor this request by converting to the
         #     desired sample rate (which might result in worse audio quality).
         # @!attribute [rw] synthesize_speech_config
-        #   @return [Google::Cloud::Dialogflow::V2::SynthesizeSpeechConfig]
+        #   @return [::Google::Cloud::Dialogflow::V2::SynthesizeSpeechConfig]
         #     Configuration of how speech should be synthesized.
         class OutputAudioConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Audio encoding of the audio content sent in the conversational query request.
@@ -279,7 +279,7 @@ module Google
           AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
         end
 
-        # Variant of the specified {Google::Cloud::Dialogflow::V2::InputAudioConfig#model Speech model} to use.
+        # Variant of the specified {::Google::Cloud::Dialogflow::V2::InputAudioConfig#model Speech model} to use.
         #
         # See the [Cloud Speech
         # documentation](https://cloud.google.com/speech-to-text/docs/enhanced-models)
@@ -308,7 +308,7 @@ module Google
           # Use an enhanced model variant:
           #
           # * If an enhanced variant does not exist for the given
-          #   {Google::Cloud::Dialogflow::V2::InputAudioConfig#model model} and request language, Dialogflow falls
+          #   {::Google::Cloud::Dialogflow::V2::InputAudioConfig#model model} and request language, Dialogflow falls
           #   back to the standard variant.
           #
           #   The [Cloud Speech

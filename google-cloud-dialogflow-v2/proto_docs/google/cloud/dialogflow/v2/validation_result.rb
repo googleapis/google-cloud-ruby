@@ -23,10 +23,10 @@ module Google
       module V2
         # Represents a single validation error.
         # @!attribute [rw] severity
-        #   @return [Google::Cloud::Dialogflow::V2::ValidationError::Severity]
+        #   @return [::Google::Cloud::Dialogflow::V2::ValidationError::Severity]
         #     The severity of the error.
         # @!attribute [rw] entries
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     The names of the entries that the error is associated with.
         #     Format:
         #
@@ -42,11 +42,11 @@ module Google
         #     - "projects/<Project ID>/agent/entities/<Entity ID>", if the error is
         #     associated with certain entities.
         # @!attribute [rw] error_message
-        #   @return [String]
+        #   @return [::String]
         #     The detailed error messsage.
         class ValidationError
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Represents a level of severity.
           module Severity
@@ -69,11 +69,11 @@ module Google
 
         # Represents the output of agent validation.
         # @!attribute [rw] validation_errors
-        #   @return [Array<Google::Cloud::Dialogflow::V2::ValidationError>]
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::ValidationError>]
         #     Contains all validation errors.
         class ValidationResult
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

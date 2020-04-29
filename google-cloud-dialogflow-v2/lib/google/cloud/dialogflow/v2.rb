@@ -32,7 +32,7 @@ module Google
       # To load this package, including all its services, and instantiate a client:
       #
       #     require "google/cloud/dialogflow/v2"
-      #     client = Google::Cloud::Dialogflow::V2::Agents::Client.new
+      #     client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new
       #
       module V2
       end

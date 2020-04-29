@@ -37,8 +37,8 @@ module Google
         # in your app, product, or service to determine user intent and respond to the
         # user in a natural way.
         #
-        # After you create an agent, you can add {Google::Cloud::Dialogflow::V2::Intents::Client Intents}, {Google::Cloud::Dialogflow::V2::Contexts::Client Contexts},
-        # {Google::Cloud::Dialogflow::V2::EntityTypes::Client Entity Types}, {Google::Cloud::Dialogflow::V2::WebhookRequest Webhooks}, and so on to
+        # After you create an agent, you can add {::Google::Cloud::Dialogflow::V2::Intents::Client Intents}, {::Google::Cloud::Dialogflow::V2::Contexts::Client Contexts},
+        # {::Google::Cloud::Dialogflow::V2::EntityTypes::Client Entity Types}, {::Google::Cloud::Dialogflow::V2::WebhookRequest Webhooks}, and so on to
         # manage the flow of a conversation and match user input to predefined intents
         # and actions.
         #
@@ -48,8 +48,8 @@ module Google
         # Editions](https://cloud.google.com/dialogflow/docs/editions).
         #
         # You can save your agent for backup or versioning by exporting the agent by
-        # using the {Google::Cloud::Dialogflow::V2::Agents::Client#export_agent ExportAgent} method. You can import a saved
-        # agent by using the {Google::Cloud::Dialogflow::V2::Agents::Client#import_agent ImportAgent} method.
+        # using the {::Google::Cloud::Dialogflow::V2::Agents::Client#export_agent ExportAgent} method. You can import a saved
+        # agent by using the {::Google::Cloud::Dialogflow::V2::Agents::Client#import_agent ImportAgent} method.
         #
         # Dialogflow provides several
         # [prebuilt
@@ -64,7 +64,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/dialogflow/v2/agents"
-        #     client = Google::Cloud::Dialogflow::V2::Agents::Client.new
+        #     client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new
         #
         module Agents
         end
