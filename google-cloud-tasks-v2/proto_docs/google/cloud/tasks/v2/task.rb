@@ -23,8 +23,8 @@ module Google
       module V2
         # A unit of scheduled work.
         # @!attribute [rw] name
-        #   @return [String]
-        #     Optionally caller-specified in {Google::Cloud::Tasks::V2::CloudTasks::Client#create_task CreateTask}.
+        #   @return [::String]
+        #     Optionally caller-specified in {::Google::Cloud::Tasks::V2::CloudTasks::Client#create_task CreateTask}.
         #
         #     The task name.
         #
@@ -45,31 +45,31 @@ module Google
         #     * `TASK_ID` can contain only letters ([A-Za-z]), numbers ([0-9]),
         #       hyphens (-), or underscores (_). The maximum length is 500 characters.
         # @!attribute [rw] app_engine_http_request
-        #   @return [Google::Cloud::Tasks::V2::AppEngineHttpRequest]
+        #   @return [::Google::Cloud::Tasks::V2::AppEngineHttpRequest]
         #     HTTP request that is sent to the App Engine app handler.
         #
-        #     An App Engine task is a task that has {Google::Cloud::Tasks::V2::AppEngineHttpRequest AppEngineHttpRequest} set.
+        #     An App Engine task is a task that has {::Google::Cloud::Tasks::V2::AppEngineHttpRequest AppEngineHttpRequest} set.
         # @!attribute [rw] http_request
-        #   @return [Google::Cloud::Tasks::V2::HttpRequest]
+        #   @return [::Google::Cloud::Tasks::V2::HttpRequest]
         #     HTTP request that is sent to the worker.
         #
-        #     An HTTP task is a task that has {Google::Cloud::Tasks::V2::HttpRequest HttpRequest} set.
+        #     An HTTP task is a task that has {::Google::Cloud::Tasks::V2::HttpRequest HttpRequest} set.
         # @!attribute [rw] schedule_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The time when the task is scheduled to be attempted or retried.
         #
         #     `schedule_time` will be truncated to the nearest microsecond.
         # @!attribute [rw] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time that the task was created.
         #
         #     `create_time` will be truncated to the nearest second.
         # @!attribute [rw] dispatch_deadline
-        #   @return [Google::Protobuf::Duration]
+        #   @return [::Google::Protobuf::Duration]
         #     The deadline for requests sent to the worker. If the worker does not
         #     respond by this deadline then the request is cancelled and the attempt
         #     is marked as a `DEADLINE_EXCEEDED` failure. Cloud Tasks will retry the
-        #     task according to the {Google::Cloud::Tasks::V2::RetryConfig RetryConfig}.
+        #     task according to the {::Google::Cloud::Tasks::V2::RetryConfig RetryConfig}.
         #
         #     Note that when the request is cancelled, Cloud Tasks will stop listing for
         #     the response, but whether the worker stops processing depends on the
@@ -78,10 +78,10 @@ module Google
         #
         #     The default and maximum values depend on the type of request:
         #
-        #     * For {Google::Cloud::Tasks::V2::HttpRequest HTTP tasks}, the default is 10 minutes. The deadline
+        #     * For {::Google::Cloud::Tasks::V2::HttpRequest HTTP tasks}, the default is 10 minutes. The deadline
         #       must be in the interval [15 seconds, 30 minutes].
         #
-        #     * For {Google::Cloud::Tasks::V2::AppEngineHttpRequest App Engine tasks}, 0 indicates that the
+        #     * For {::Google::Cloud::Tasks::V2::AppEngineHttpRequest App Engine tasks}, 0 indicates that the
         #       request has the default deadline. The default deadline depends on the
         #       [scaling
         #       type](https://cloud.google.com/appengine/docs/standard/go/how-instances-are-managed#instance_scaling)
@@ -98,32 +98,32 @@ module Google
         #     `dispatch_deadline` will be truncated to the nearest millisecond. The
         #     deadline is an approximate deadline.
         # @!attribute [rw] dispatch_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Output only. The number of attempts dispatched.
         #
         #     This count includes attempts which have been dispatched but haven't
         #     received a response.
         # @!attribute [rw] response_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Output only. The number of attempts which have received a response.
         # @!attribute [rw] first_attempt
-        #   @return [Google::Cloud::Tasks::V2::Attempt]
+        #   @return [::Google::Cloud::Tasks::V2::Attempt]
         #     Output only. The status of the task's first attempt.
         #
-        #     Only {Google::Cloud::Tasks::V2::Attempt#dispatch_time dispatch_time} will be set.
-        #     The other {Google::Cloud::Tasks::V2::Attempt Attempt} information is not retained by Cloud Tasks.
+        #     Only {::Google::Cloud::Tasks::V2::Attempt#dispatch_time dispatch_time} will be set.
+        #     The other {::Google::Cloud::Tasks::V2::Attempt Attempt} information is not retained by Cloud Tasks.
         # @!attribute [rw] last_attempt
-        #   @return [Google::Cloud::Tasks::V2::Attempt]
+        #   @return [::Google::Cloud::Tasks::V2::Attempt]
         #     Output only. The status of the task's last attempt.
         # @!attribute [rw] view
-        #   @return [Google::Cloud::Tasks::V2::Task::View]
-        #     Output only. The view specifies which subset of the {Google::Cloud::Tasks::V2::Task Task} has
+        #   @return [::Google::Cloud::Tasks::V2::Task::View]
+        #     Output only. The view specifies which subset of the {::Google::Cloud::Tasks::V2::Task Task} has
         #     been returned.
         class Task
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The view specifies a subset of {Google::Cloud::Tasks::V2::Task Task} data.
+          # The view specifies a subset of {::Google::Cloud::Tasks::V2::Task Task} data.
           #
           # When a task is returned in a response, not all
           # information is retrieved by default because some data, such as
@@ -138,7 +138,7 @@ module Google
             # sensitive data.
             #
             # This view does not include the
-            # {Google::Cloud::Tasks::V2::AppEngineHttpRequest#body body in AppEngineHttpRequest}.
+            # {::Google::Cloud::Tasks::V2::AppEngineHttpRequest#body body in AppEngineHttpRequest}.
             # Bodies are desirable to return only when needed, because they
             # can be large and because of the sensitivity of the data that you
             # choose to store in it.
@@ -146,38 +146,38 @@ module Google
 
             # All information is returned.
             #
-            # Authorization for {Google::Cloud::Tasks::V2::Task::View::FULL FULL} requires
+            # Authorization for {::Google::Cloud::Tasks::V2::Task::View::FULL FULL} requires
             # `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            # permission on the {Google::Cloud::Tasks::V2::Queue Queue} resource.
+            # permission on the {::Google::Cloud::Tasks::V2::Queue Queue} resource.
             FULL = 2
           end
         end
 
         # The status of a task attempt.
         # @!attribute [rw] schedule_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time that this attempt was scheduled.
         #
         #     `schedule_time` will be truncated to the nearest microsecond.
         # @!attribute [rw] dispatch_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time that this attempt was dispatched.
         #
         #     `dispatch_time` will be truncated to the nearest microsecond.
         # @!attribute [rw] response_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time that this attempt response was received.
         #
         #     `response_time` will be truncated to the nearest microsecond.
         # @!attribute [rw] response_status
-        #   @return [Google::Rpc::Status]
+        #   @return [::Google::Rpc::Status]
         #     Output only. The response from the worker for this attempt.
         #
         #     If `response_time` is unset, then the task has not been attempted or is
         #     currently running and the `response_status` field is meaningless.
         class Attempt
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
