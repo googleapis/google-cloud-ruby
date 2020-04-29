@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-dialogflow
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::Dialogflow::V2::Agents::Credentials`):
+`::Google::Cloud::Dialogflow::V2::Agents::Credentials`):
 
 1. `DIALOGFLOW_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `DIALOGFLOW_KEYFILE` - Path to JSON file, or JSON contents
