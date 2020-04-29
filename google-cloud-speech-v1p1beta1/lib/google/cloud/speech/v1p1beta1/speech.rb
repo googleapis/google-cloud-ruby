@@ -37,7 +37,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/speech/v1p1beta1/speech"
-        #     client = Google::Cloud::Speech::V1p1beta1::Speech::Client.new
+        #     client = ::Google::Cloud::Speech::V1p1beta1::Speech::Client.new
         #
         module Speech
         end

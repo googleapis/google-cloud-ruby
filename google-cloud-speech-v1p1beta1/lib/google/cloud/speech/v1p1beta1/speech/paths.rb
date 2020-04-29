@@ -35,10 +35,10 @@ module Google
             # @param location [String]
             # @param custom_class [String]
             #
-            # @return [String]
+            # @return [::String]
             def custom_class_path project:, location:, custom_class:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/customClasses/#{custom_class}"
             end
@@ -54,10 +54,10 @@ module Google
             # @param location [String]
             # @param phrase_set [String]
             #
-            # @return [String]
+            # @return [::String]
             def phrase_set_path project:, location:, phrase_set:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/phraseSets/#{phrase_set}"
             end

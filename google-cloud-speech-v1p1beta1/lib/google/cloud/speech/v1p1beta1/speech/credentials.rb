@@ -24,7 +24,7 @@ module Google
       module V1p1beta1
         module Speech
           # Credentials for the Speech API.
-          class Credentials < Google::Auth::Credentials
+          class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform"
             ]
