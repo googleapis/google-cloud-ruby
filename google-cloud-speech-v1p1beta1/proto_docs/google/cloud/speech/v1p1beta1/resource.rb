@@ -25,39 +25,39 @@ module Google
         # in your audio, for example a list of passenger ship names. CustomClass items
         # can be substituted into placeholders that you set in PhraseSet phrases.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The resource name of the custom class.
         # @!attribute [rw] custom_class_id
-        #   @return [String]
+        #   @return [::String]
         #     If this custom class is a resource, the custom_class_id is the resource id
         #     of the CustomClass.
         # @!attribute [rw] items
-        #   @return [Array<Google::Cloud::Speech::V1p1beta1::CustomClass::ClassItem>]
+        #   @return [::Array<::Google::Cloud::Speech::V1p1beta1::CustomClass::ClassItem>]
         #     A collection of class items.
         class CustomClass
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # An item of the class.
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           #     The class item's value.
           class ClassItem
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Provides "hints" to the speech recognizer to favor specific words and phrases
         # in the results.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The resource name of the phrase set.
         # @!attribute [rw] phrases
-        #   @return [Array<Google::Cloud::Speech::V1p1beta1::PhraseSet::Phrase>]
+        #   @return [::Array<::Google::Cloud::Speech::V1p1beta1::PhraseSet::Phrase>]
         #     A list of word and phrases.
         # @!attribute [rw] boost
-        #   @return [Float]
+        #   @return [::Float]
         #     Hint Boost. Positive value will increase the probability that a specific
         #     phrase will be recognized over other similar sounding phrases. The higher
         #     the boost, the higher the chance of false positive recognition as well.
@@ -68,8 +68,8 @@ module Google
         #     approach to finding the optimal value for your use case. Speech recognition
         #     will skip PhraseSets with a boost value of 0.
         class PhraseSet
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # A phrases containing words and phrase "hints" so that
           # the speech recognition is more likely to recognize them. This can be used
@@ -91,10 +91,10 @@ module Google
           # e.g. "$\\{my-months}". To refer to custom classes resources, use the class'
           # id wrapped in `${}` (e.g. `${my-months}`).
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           #     The phrase itself.
           # @!attribute [rw] boost
-          #   @return [Float]
+          #   @return [::Float]
           #     Hint Boost. Overrides the boost set at the phrase set level.
           #     Positive value will increase the probability that a specific phrase will
           #     be recognized over other similar sounding phrases. The higher the boost,
@@ -106,26 +106,26 @@ module Google
           #     to finding the optimal value for your use case. Speech recognition
           #     will skip PhraseSets with a boost value of 0.
           class Phrase
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Speech adaptation configuration.
         # @!attribute [rw] phrase_sets
-        #   @return [Array<Google::Cloud::Speech::V1p1beta1::PhraseSet>]
+        #   @return [::Array<::Google::Cloud::Speech::V1p1beta1::PhraseSet>]
         #     A collection of phrase sets. To specify the hints inline, leave the
         #     phrase set's `name` blank and fill in the rest of its fields. Any
         #     phrase set can use any custom class.
         # @!attribute [rw] custom_classes
-        #   @return [Array<Google::Cloud::Speech::V1p1beta1::CustomClass>]
+        #   @return [::Array<::Google::Cloud::Speech::V1p1beta1::CustomClass>]
         #     A collection of custom classes. To specify the classes inline, leave the
         #     class' `name` blank and fill in the rest of its fields, giving it a unique
         #     `custom_class_id`. Refer to the inline defined class in phrase hints by its
         #     `custom_class_id`.
         class SpeechAdaptation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
