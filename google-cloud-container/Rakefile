@@ -86,7 +86,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or CONTAINER_TEST_PROJECT=test123 CONTAINER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/container/v1/cluster_manager/credentials"
-  Google::Cloud::Container::V1::ClusterManager::Credentials.env_vars.each do |path|
+  ::Google::Cloud::Container::V1::ClusterManager::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["CONTAINER_PROJECT"] = project

@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-container
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::Container::V1::ClusterManager::Credentials`):
+`::Google::Cloud::Container::V1::ClusterManager::Credentials`):
 
 1. `CONTAINER_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `CONTAINER_KEYFILE` - Path to JSON file, or JSON contents
