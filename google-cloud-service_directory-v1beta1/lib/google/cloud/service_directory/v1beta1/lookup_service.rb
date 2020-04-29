@@ -36,7 +36,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/service_directory/v1beta1/lookup_service"
-        #     client = Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new
+        #     client = ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new
         #
         module LookupService
         end

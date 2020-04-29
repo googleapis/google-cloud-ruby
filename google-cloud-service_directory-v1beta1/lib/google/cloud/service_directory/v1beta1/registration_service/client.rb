@@ -31,15 +31,15 @@ module Google
           # resource model:
           #
           # - The API has a collection of
-          # {Google::Cloud::ServiceDirectory::V1beta1::Namespace Namespace}
+          # {::Google::Cloud::ServiceDirectory::V1beta1::Namespace Namespace}
           # resources, named `projects/*/locations/*/namespaces/*`.
           #
           # - Each Namespace has a collection of
-          # {Google::Cloud::ServiceDirectory::V1beta1::Service Service} resources, named
+          # {::Google::Cloud::ServiceDirectory::V1beta1::Service Service} resources, named
           # `projects/*/locations/*/namespaces/*/services/*`.
           #
           # - Each Service has a collection of
-          # {Google::Cloud::ServiceDirectory::V1beta1::Endpoint Endpoint}
+          # {::Google::Cloud::ServiceDirectory::V1beta1::Endpoint Endpoint}
           # resources, named
           # `projects/*/locations/*/namespaces/*/services/*/endpoints/*`.
           #
@@ -52,15 +52,15 @@ module Google
             ##
             # Configure the RegistrationService Client class.
             #
-            # See {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client::Configuration}
+            # See {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all RegistrationService clients:
             #
-            #     Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -100,7 +100,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client::Configuration}
+            # See {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -121,13 +121,13 @@ module Google
             # To create a new RegistrationService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new
+            #     client = ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new
             #
             # To create a new RegistrationService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the RegistrationService client.
@@ -154,8 +154,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @registration_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Stub,
+              @registration_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -170,12 +170,12 @@ module Google
             #
             # @overload create_namespace(request, options = nil)
             #   Pass arguments to `create_namespace` via a request object, either of type
-            #   {Google::Cloud::ServiceDirectory::V1beta1::CreateNamespaceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ServiceDirectory::V1beta1::CreateNamespaceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::ServiceDirectory::V1beta1::CreateNamespaceRequest, Hash]
+            #   @param request [::Google::Cloud::ServiceDirectory::V1beta1::CreateNamespaceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_namespace(parent: nil, namespace_id: nil, namespace: nil)
@@ -183,10 +183,10 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the project and location the namespace
             #     will be created in.
-            #   @param namespace_id [String]
+            #   @param namespace_id [::String]
             #     Required. The Resource ID must be 1-63 characters long, and comply with
             #     <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
             #     Specifically, the name must be 1-63 characters long and match the regular
@@ -194,30 +194,30 @@ module Google
             #     character must be a lowercase letter, and all following characters must
             #     be a dash, lowercase letter, or digit, except the last character, which
             #     cannot be a dash.
-            #   @param namespace [Google::Cloud::ServiceDirectory::V1beta1::Namespace, Hash]
+            #   @param namespace [::Google::Cloud::ServiceDirectory::V1beta1::Namespace, ::Hash]
             #     Required. A namespace with initial fields set.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::ServiceDirectory::V1beta1::Namespace]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::ServiceDirectory::V1beta1::Namespace]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::ServiceDirectory::V1beta1::Namespace]
+            # @return [::Google::Cloud::ServiceDirectory::V1beta1::Namespace]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_namespace request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::CreateNamespaceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceDirectory::V1beta1::CreateNamespaceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_namespace.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -238,8 +238,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -247,12 +247,12 @@ module Google
             #
             # @overload list_namespaces(request, options = nil)
             #   Pass arguments to `list_namespaces` via a request object, either of type
-            #   {Google::Cloud::ServiceDirectory::V1beta1::ListNamespacesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ServiceDirectory::V1beta1::ListNamespacesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::ServiceDirectory::V1beta1::ListNamespacesRequest, Hash]
+            #   @param request [::Google::Cloud::ServiceDirectory::V1beta1::ListNamespacesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_namespaces(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
@@ -260,14 +260,14 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the project and location whose namespaces we'd like to
             #     list.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Optional. The maximum number of items to return.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Optional. The next_page_token value returned from a previous List request, if any.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Optional. The filter to list result by.
             #
             #     General filter string syntax:
@@ -291,7 +291,7 @@ module Google
             #     * "doesnotexist.foo=bar" returns an empty list. Note that Namespace doesn't
             #       have a field called "doesnotexist". Since the filter does not match any
             #       Namespaces, it returns no results.
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     Optional. The order to list result by.
             #
             #     General order by string syntax:
@@ -303,26 +303,26 @@ module Google
             #     by name in ascending order.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::ServiceDirectory::V1beta1::Namespace>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ServiceDirectory::V1beta1::Namespace>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::ServiceDirectory::V1beta1::Namespace>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::ServiceDirectory::V1beta1::Namespace>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_namespaces request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::ListNamespacesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceDirectory::V1beta1::ListNamespacesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_namespaces.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -340,12 +340,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @registration_service_stub.call_rpc :list_namespaces, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @registration_service_stub, :list_namespaces, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @registration_service_stub, :list_namespaces, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -353,12 +353,12 @@ module Google
             #
             # @overload get_namespace(request, options = nil)
             #   Pass arguments to `get_namespace` via a request object, either of type
-            #   {Google::Cloud::ServiceDirectory::V1beta1::GetNamespaceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ServiceDirectory::V1beta1::GetNamespaceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::ServiceDirectory::V1beta1::GetNamespaceRequest, Hash]
+            #   @param request [::Google::Cloud::ServiceDirectory::V1beta1::GetNamespaceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_namespace(name: nil)
@@ -366,30 +366,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the namespace to retrieve.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::ServiceDirectory::V1beta1::Namespace]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::ServiceDirectory::V1beta1::Namespace]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::ServiceDirectory::V1beta1::Namespace]
+            # @return [::Google::Cloud::ServiceDirectory::V1beta1::Namespace]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_namespace request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::GetNamespaceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceDirectory::V1beta1::GetNamespaceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_namespace.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -410,8 +410,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -419,12 +419,12 @@ module Google
             #
             # @overload update_namespace(request, options = nil)
             #   Pass arguments to `update_namespace` via a request object, either of type
-            #   {Google::Cloud::ServiceDirectory::V1beta1::UpdateNamespaceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ServiceDirectory::V1beta1::UpdateNamespaceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::ServiceDirectory::V1beta1::UpdateNamespaceRequest, Hash]
+            #   @param request [::Google::Cloud::ServiceDirectory::V1beta1::UpdateNamespaceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_namespace(namespace: nil, update_mask: nil)
@@ -432,32 +432,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param namespace [Google::Cloud::ServiceDirectory::V1beta1::Namespace, Hash]
+            #   @param namespace [::Google::Cloud::ServiceDirectory::V1beta1::Namespace, ::Hash]
             #     Required. The updated namespace.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. List of fields to be updated in this request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::ServiceDirectory::V1beta1::Namespace]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::ServiceDirectory::V1beta1::Namespace]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::ServiceDirectory::V1beta1::Namespace]
+            # @return [::Google::Cloud::ServiceDirectory::V1beta1::Namespace]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_namespace request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::UpdateNamespaceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceDirectory::V1beta1::UpdateNamespaceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_namespace.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -478,8 +478,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -488,12 +488,12 @@ module Google
             #
             # @overload delete_namespace(request, options = nil)
             #   Pass arguments to `delete_namespace` via a request object, either of type
-            #   {Google::Cloud::ServiceDirectory::V1beta1::DeleteNamespaceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ServiceDirectory::V1beta1::DeleteNamespaceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::ServiceDirectory::V1beta1::DeleteNamespaceRequest, Hash]
+            #   @param request [::Google::Cloud::ServiceDirectory::V1beta1::DeleteNamespaceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_namespace(name: nil)
@@ -501,30 +501,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the namespace to delete.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_namespace request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::DeleteNamespaceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceDirectory::V1beta1::DeleteNamespaceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_namespace.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -545,8 +545,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -554,12 +554,12 @@ module Google
             #
             # @overload create_service(request, options = nil)
             #   Pass arguments to `create_service` via a request object, either of type
-            #   {Google::Cloud::ServiceDirectory::V1beta1::CreateServiceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ServiceDirectory::V1beta1::CreateServiceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::ServiceDirectory::V1beta1::CreateServiceRequest, Hash]
+            #   @param request [::Google::Cloud::ServiceDirectory::V1beta1::CreateServiceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_service(parent: nil, service_id: nil, service: nil)
@@ -567,9 +567,9 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the namespace this service will belong to.
-            #   @param service_id [String]
+            #   @param service_id [::String]
             #     Required. The Resource ID must be 1-63 characters long, and comply with
             #     <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
             #     Specifically, the name must be 1-63 characters long and match the regular
@@ -577,30 +577,30 @@ module Google
             #     character must be a lowercase letter, and all following characters must
             #     be a dash, lowercase letter, or digit, except the last character, which
             #     cannot be a dash.
-            #   @param service [Google::Cloud::ServiceDirectory::V1beta1::Service, Hash]
+            #   @param service [::Google::Cloud::ServiceDirectory::V1beta1::Service, ::Hash]
             #     Required. A service  with initial fields set.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::ServiceDirectory::V1beta1::Service]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::ServiceDirectory::V1beta1::Service]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::ServiceDirectory::V1beta1::Service]
+            # @return [::Google::Cloud::ServiceDirectory::V1beta1::Service]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_service request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::CreateServiceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceDirectory::V1beta1::CreateServiceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_service.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -621,8 +621,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -630,12 +630,12 @@ module Google
             #
             # @overload list_services(request, options = nil)
             #   Pass arguments to `list_services` via a request object, either of type
-            #   {Google::Cloud::ServiceDirectory::V1beta1::ListServicesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ServiceDirectory::V1beta1::ListServicesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::ServiceDirectory::V1beta1::ListServicesRequest, Hash]
+            #   @param request [::Google::Cloud::ServiceDirectory::V1beta1::ListServicesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_services(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
@@ -643,15 +643,15 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the namespace whose services we'd
             #     like to list.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Optional. The maximum number of items to return.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Optional. The next_page_token value returned from a previous List request,
             #     if any.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Optional. The filter to list result by.
             #
             #     General filter string syntax:
@@ -675,30 +675,30 @@ module Google
             #     * "doesnotexist.foo=bar" returns an empty list. Note that Service doesn't
             #       have a field called "doesnotexist". Since the filter does not match any
             #       Services, it returns no results.
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     Optional. The order to list result by.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::ServiceDirectory::V1beta1::Service>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ServiceDirectory::V1beta1::Service>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::ServiceDirectory::V1beta1::Service>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::ServiceDirectory::V1beta1::Service>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_services request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::ListServicesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceDirectory::V1beta1::ListServicesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_services.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -716,12 +716,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @registration_service_stub.call_rpc :list_services, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @registration_service_stub, :list_services, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @registration_service_stub, :list_services, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -729,12 +729,12 @@ module Google
             #
             # @overload get_service(request, options = nil)
             #   Pass arguments to `get_service` via a request object, either of type
-            #   {Google::Cloud::ServiceDirectory::V1beta1::GetServiceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ServiceDirectory::V1beta1::GetServiceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::ServiceDirectory::V1beta1::GetServiceRequest, Hash]
+            #   @param request [::Google::Cloud::ServiceDirectory::V1beta1::GetServiceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_service(name: nil)
@@ -742,30 +742,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the service to get.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::ServiceDirectory::V1beta1::Service]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::ServiceDirectory::V1beta1::Service]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::ServiceDirectory::V1beta1::Service]
+            # @return [::Google::Cloud::ServiceDirectory::V1beta1::Service]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_service request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::GetServiceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceDirectory::V1beta1::GetServiceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_service.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -786,8 +786,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -795,12 +795,12 @@ module Google
             #
             # @overload update_service(request, options = nil)
             #   Pass arguments to `update_service` via a request object, either of type
-            #   {Google::Cloud::ServiceDirectory::V1beta1::UpdateServiceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ServiceDirectory::V1beta1::UpdateServiceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::ServiceDirectory::V1beta1::UpdateServiceRequest, Hash]
+            #   @param request [::Google::Cloud::ServiceDirectory::V1beta1::UpdateServiceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_service(service: nil, update_mask: nil)
@@ -808,32 +808,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param service [Google::Cloud::ServiceDirectory::V1beta1::Service, Hash]
+            #   @param service [::Google::Cloud::ServiceDirectory::V1beta1::Service, ::Hash]
             #     Required. The updated service.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. List of fields to be updated in this request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::ServiceDirectory::V1beta1::Service]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::ServiceDirectory::V1beta1::Service]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::ServiceDirectory::V1beta1::Service]
+            # @return [::Google::Cloud::ServiceDirectory::V1beta1::Service]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_service request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::UpdateServiceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceDirectory::V1beta1::UpdateServiceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_service.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -854,8 +854,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -864,12 +864,12 @@ module Google
             #
             # @overload delete_service(request, options = nil)
             #   Pass arguments to `delete_service` via a request object, either of type
-            #   {Google::Cloud::ServiceDirectory::V1beta1::DeleteServiceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ServiceDirectory::V1beta1::DeleteServiceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::ServiceDirectory::V1beta1::DeleteServiceRequest, Hash]
+            #   @param request [::Google::Cloud::ServiceDirectory::V1beta1::DeleteServiceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_service(name: nil)
@@ -877,30 +877,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the service to delete.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_service request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::DeleteServiceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceDirectory::V1beta1::DeleteServiceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_service.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -921,8 +921,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -930,12 +930,12 @@ module Google
             #
             # @overload create_endpoint(request, options = nil)
             #   Pass arguments to `create_endpoint` via a request object, either of type
-            #   {Google::Cloud::ServiceDirectory::V1beta1::CreateEndpointRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ServiceDirectory::V1beta1::CreateEndpointRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::ServiceDirectory::V1beta1::CreateEndpointRequest, Hash]
+            #   @param request [::Google::Cloud::ServiceDirectory::V1beta1::CreateEndpointRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_endpoint(parent: nil, endpoint_id: nil, endpoint: nil)
@@ -943,9 +943,9 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the service that this endpoint provides.
-            #   @param endpoint_id [String]
+            #   @param endpoint_id [::String]
             #     Required. The Resource ID must be 1-63 characters long, and comply with
             #     <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
             #     Specifically, the name must be 1-63 characters long and match the regular
@@ -953,30 +953,30 @@ module Google
             #     character must be a lowercase letter, and all following characters must
             #     be a dash, lowercase letter, or digit, except the last character, which
             #     cannot be a dash.
-            #   @param endpoint [Google::Cloud::ServiceDirectory::V1beta1::Endpoint, Hash]
+            #   @param endpoint [::Google::Cloud::ServiceDirectory::V1beta1::Endpoint, ::Hash]
             #     Required. A endpoint with initial fields set.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
+            # @return [::Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_endpoint request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::CreateEndpointRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceDirectory::V1beta1::CreateEndpointRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_endpoint.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -997,8 +997,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1006,12 +1006,12 @@ module Google
             #
             # @overload list_endpoints(request, options = nil)
             #   Pass arguments to `list_endpoints` via a request object, either of type
-            #   {Google::Cloud::ServiceDirectory::V1beta1::ListEndpointsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ServiceDirectory::V1beta1::ListEndpointsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::ServiceDirectory::V1beta1::ListEndpointsRequest, Hash]
+            #   @param request [::Google::Cloud::ServiceDirectory::V1beta1::ListEndpointsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_endpoints(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
@@ -1019,15 +1019,15 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the service whose endpoints we'd like to
             #     list.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Optional. The maximum number of items to return.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Optional. The next_page_token value returned from a previous List request,
             #     if any.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Optional. The filter to list result by.
             #
             #     General filter string syntax:
@@ -1053,30 +1053,30 @@ module Google
             #     * "doesnotexist.foo=bar" returns an empty list. Note that Endpoint doesn't
             #       have a field called "doesnotexist". Since the filter does not match any
             #       Endpoints, it returns no results.
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     Optional. The order to list result by.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::ServiceDirectory::V1beta1::Endpoint>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ServiceDirectory::V1beta1::Endpoint>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::ServiceDirectory::V1beta1::Endpoint>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::ServiceDirectory::V1beta1::Endpoint>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_endpoints request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::ListEndpointsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceDirectory::V1beta1::ListEndpointsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_endpoints.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1094,12 +1094,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @registration_service_stub.call_rpc :list_endpoints, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @registration_service_stub, :list_endpoints, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @registration_service_stub, :list_endpoints, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1107,12 +1107,12 @@ module Google
             #
             # @overload get_endpoint(request, options = nil)
             #   Pass arguments to `get_endpoint` via a request object, either of type
-            #   {Google::Cloud::ServiceDirectory::V1beta1::GetEndpointRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ServiceDirectory::V1beta1::GetEndpointRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::ServiceDirectory::V1beta1::GetEndpointRequest, Hash]
+            #   @param request [::Google::Cloud::ServiceDirectory::V1beta1::GetEndpointRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_endpoint(name: nil)
@@ -1120,30 +1120,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the endpoint to get.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
+            # @return [::Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_endpoint request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::GetEndpointRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceDirectory::V1beta1::GetEndpointRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_endpoint.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1164,8 +1164,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1173,12 +1173,12 @@ module Google
             #
             # @overload update_endpoint(request, options = nil)
             #   Pass arguments to `update_endpoint` via a request object, either of type
-            #   {Google::Cloud::ServiceDirectory::V1beta1::UpdateEndpointRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ServiceDirectory::V1beta1::UpdateEndpointRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::ServiceDirectory::V1beta1::UpdateEndpointRequest, Hash]
+            #   @param request [::Google::Cloud::ServiceDirectory::V1beta1::UpdateEndpointRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_endpoint(endpoint: nil, update_mask: nil)
@@ -1186,32 +1186,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param endpoint [Google::Cloud::ServiceDirectory::V1beta1::Endpoint, Hash]
+            #   @param endpoint [::Google::Cloud::ServiceDirectory::V1beta1::Endpoint, ::Hash]
             #     Required. The updated endpoint.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. List of fields to be updated in this request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
+            # @return [::Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_endpoint request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::UpdateEndpointRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceDirectory::V1beta1::UpdateEndpointRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_endpoint.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1232,8 +1232,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1241,12 +1241,12 @@ module Google
             #
             # @overload delete_endpoint(request, options = nil)
             #   Pass arguments to `delete_endpoint` via a request object, either of type
-            #   {Google::Cloud::ServiceDirectory::V1beta1::DeleteEndpointRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ServiceDirectory::V1beta1::DeleteEndpointRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::ServiceDirectory::V1beta1::DeleteEndpointRequest, Hash]
+            #   @param request [::Google::Cloud::ServiceDirectory::V1beta1::DeleteEndpointRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_endpoint(name: nil)
@@ -1254,30 +1254,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the endpoint to delete.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_endpoint request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::DeleteEndpointRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceDirectory::V1beta1::DeleteEndpointRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_endpoint.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1298,8 +1298,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1307,12 +1307,12 @@ module Google
             #
             # @overload get_iam_policy(request, options = nil)
             #   Pass arguments to `get_iam_policy` via a request object, either of type
-            #   {Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::GetIamPolicyRequest, Hash]
+            #   @param request [::Google::Iam::V1::GetIamPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_iam_policy(resource: nil, options: nil)
@@ -1320,34 +1320,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy is being requested.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param options [Google::Iam::V1::GetPolicyOptions, Hash]
+            #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
             #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
             #     `GetIamPolicy`. This field is only used by Cloud IAM.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::Policy]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::Policy]
+            # @return [::Google::Iam::V1::Policy]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_iam_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::GetIamPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::GetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_iam_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1368,8 +1368,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1377,12 +1377,12 @@ module Google
             #
             # @overload set_iam_policy(request, options = nil)
             #   Pass arguments to `set_iam_policy` via a request object, either of type
-            #   {Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::SetIamPolicyRequest, Hash]
+            #   @param request [::Google::Iam::V1::SetIamPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_iam_policy(resource: nil, policy: nil)
@@ -1390,36 +1390,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy is being specified.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param policy [Google::Iam::V1::Policy, Hash]
+            #   @param policy [::Google::Iam::V1::Policy, ::Hash]
             #     REQUIRED: The complete policy to be applied to the `resource`. The size of
             #     the policy is limited to a few 10s of KB. An empty policy is a
             #     valid policy but certain Cloud Platform services (such as Projects)
             #     might reject them.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::Policy]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::Policy]
+            # @return [::Google::Iam::V1::Policy]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_iam_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::SetIamPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::SetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_iam_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1440,8 +1440,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1449,12 +1449,12 @@ module Google
             #
             # @overload test_iam_permissions(request, options = nil)
             #   Pass arguments to `test_iam_permissions` via a request object, either of type
-            #   {Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::TestIamPermissionsRequest, Hash]
+            #   @param request [::Google::Iam::V1::TestIamPermissionsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload test_iam_permissions(resource: nil, permissions: nil)
@@ -1462,36 +1462,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy detail is being requested.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param permissions [Array<String>]
+            #   @param permissions [::Array<::String>]
             #     The set of permissions to check for the `resource`. Permissions with
             #     wildcards (such as '*' or 'storage.*') are not allowed. For more
             #     information see
             #     [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::TestIamPermissionsResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::TestIamPermissionsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::TestIamPermissionsResponse]
+            # @return [::Google::Iam::V1::TestIamPermissionsResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def test_iam_permissions request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::TestIamPermissionsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::TestIamPermissionsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.test_iam_permissions.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1512,8 +1512,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1523,7 +1523,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -1534,22 +1534,22 @@ module Google
             # To modify the global config, setting the timeout for create_namespace
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_namespace.timeout = 20_000
+            #     ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_namespace.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_namespace.timeout = 20_000
+            #     client = ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_namespace.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"servicedirectory.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -1561,29 +1561,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -1591,10 +1591,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "servicedirectory.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -1602,14 +1602,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -1650,133 +1650,133 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `create_namespace`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_namespace
                 ##
                 # RPC-specific configuration for `list_namespaces`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_namespaces
                 ##
                 # RPC-specific configuration for `get_namespace`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_namespace
                 ##
                 # RPC-specific configuration for `update_namespace`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_namespace
                 ##
                 # RPC-specific configuration for `delete_namespace`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_namespace
                 ##
                 # RPC-specific configuration for `create_service`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_service
                 ##
                 # RPC-specific configuration for `list_services`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_services
                 ##
                 # RPC-specific configuration for `get_service`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_service
                 ##
                 # RPC-specific configuration for `update_service`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_service
                 ##
                 # RPC-specific configuration for `delete_service`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_service
                 ##
                 # RPC-specific configuration for `create_endpoint`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_endpoint
                 ##
                 # RPC-specific configuration for `list_endpoints`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_endpoints
                 ##
                 # RPC-specific configuration for `get_endpoint`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_endpoint
                 ##
                 # RPC-specific configuration for `update_endpoint`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_endpoint
                 ##
                 # RPC-specific configuration for `delete_endpoint`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_endpoint
                 ##
                 # RPC-specific configuration for `get_iam_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_iam_policy
                 ##
                 # RPC-specific configuration for `set_iam_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_iam_policy
                 ##
                 # RPC-specific configuration for `test_iam_permissions`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :test_iam_permissions
 
                 # @private
                 def initialize parent_rpcs = nil
                   create_namespace_config = parent_rpcs&.create_namespace if parent_rpcs&.respond_to? :create_namespace
-                  @create_namespace = Gapic::Config::Method.new create_namespace_config
+                  @create_namespace = ::Gapic::Config::Method.new create_namespace_config
                   list_namespaces_config = parent_rpcs&.list_namespaces if parent_rpcs&.respond_to? :list_namespaces
-                  @list_namespaces = Gapic::Config::Method.new list_namespaces_config
+                  @list_namespaces = ::Gapic::Config::Method.new list_namespaces_config
                   get_namespace_config = parent_rpcs&.get_namespace if parent_rpcs&.respond_to? :get_namespace
-                  @get_namespace = Gapic::Config::Method.new get_namespace_config
+                  @get_namespace = ::Gapic::Config::Method.new get_namespace_config
                   update_namespace_config = parent_rpcs&.update_namespace if parent_rpcs&.respond_to? :update_namespace
-                  @update_namespace = Gapic::Config::Method.new update_namespace_config
+                  @update_namespace = ::Gapic::Config::Method.new update_namespace_config
                   delete_namespace_config = parent_rpcs&.delete_namespace if parent_rpcs&.respond_to? :delete_namespace
-                  @delete_namespace = Gapic::Config::Method.new delete_namespace_config
+                  @delete_namespace = ::Gapic::Config::Method.new delete_namespace_config
                   create_service_config = parent_rpcs&.create_service if parent_rpcs&.respond_to? :create_service
-                  @create_service = Gapic::Config::Method.new create_service_config
+                  @create_service = ::Gapic::Config::Method.new create_service_config
                   list_services_config = parent_rpcs&.list_services if parent_rpcs&.respond_to? :list_services
-                  @list_services = Gapic::Config::Method.new list_services_config
+                  @list_services = ::Gapic::Config::Method.new list_services_config
                   get_service_config = parent_rpcs&.get_service if parent_rpcs&.respond_to? :get_service
-                  @get_service = Gapic::Config::Method.new get_service_config
+                  @get_service = ::Gapic::Config::Method.new get_service_config
                   update_service_config = parent_rpcs&.update_service if parent_rpcs&.respond_to? :update_service
-                  @update_service = Gapic::Config::Method.new update_service_config
+                  @update_service = ::Gapic::Config::Method.new update_service_config
                   delete_service_config = parent_rpcs&.delete_service if parent_rpcs&.respond_to? :delete_service
-                  @delete_service = Gapic::Config::Method.new delete_service_config
+                  @delete_service = ::Gapic::Config::Method.new delete_service_config
                   create_endpoint_config = parent_rpcs&.create_endpoint if parent_rpcs&.respond_to? :create_endpoint
-                  @create_endpoint = Gapic::Config::Method.new create_endpoint_config
+                  @create_endpoint = ::Gapic::Config::Method.new create_endpoint_config
                   list_endpoints_config = parent_rpcs&.list_endpoints if parent_rpcs&.respond_to? :list_endpoints
-                  @list_endpoints = Gapic::Config::Method.new list_endpoints_config
+                  @list_endpoints = ::Gapic::Config::Method.new list_endpoints_config
                   get_endpoint_config = parent_rpcs&.get_endpoint if parent_rpcs&.respond_to? :get_endpoint
-                  @get_endpoint = Gapic::Config::Method.new get_endpoint_config
+                  @get_endpoint = ::Gapic::Config::Method.new get_endpoint_config
                   update_endpoint_config = parent_rpcs&.update_endpoint if parent_rpcs&.respond_to? :update_endpoint
-                  @update_endpoint = Gapic::Config::Method.new update_endpoint_config
+                  @update_endpoint = ::Gapic::Config::Method.new update_endpoint_config
                   delete_endpoint_config = parent_rpcs&.delete_endpoint if parent_rpcs&.respond_to? :delete_endpoint
-                  @delete_endpoint = Gapic::Config::Method.new delete_endpoint_config
+                  @delete_endpoint = ::Gapic::Config::Method.new delete_endpoint_config
                   get_iam_policy_config = parent_rpcs&.get_iam_policy if parent_rpcs&.respond_to? :get_iam_policy
-                  @get_iam_policy = Gapic::Config::Method.new get_iam_policy_config
+                  @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                   set_iam_policy_config = parent_rpcs&.set_iam_policy if parent_rpcs&.respond_to? :set_iam_policy
-                  @set_iam_policy = Gapic::Config::Method.new set_iam_policy_config
+                  @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                   test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
-                  @test_iam_permissions = Gapic::Config::Method.new test_iam_permissions_config
+                  @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
                   yield self if block_given?
                 end

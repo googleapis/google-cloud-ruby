@@ -23,33 +23,33 @@ module Google
       module V1beta1
         # An individual service. A service contains a name and optional metadata.
         # A service must exist before
-        # {Google::Cloud::ServiceDirectory::V1beta1::Endpoint endpoints} can be
+        # {::Google::Cloud::ServiceDirectory::V1beta1::Endpoint endpoints} can be
         # added to it.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Immutable. The resource name for the service in the format
         #     'projects/*/locations/*/namespaces/*/services/*'.
         # @!attribute [rw] metadata
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Metadata for the service. This data can be consumed by service
         #     clients.  The entire metadata dictionary may contain up to 2000 characters,
         #     spread across all key-value pairs. Metadata that goes beyond any these
         #     limits will be rejected.
         # @!attribute [r] endpoints
-        #   @return [Array<Google::Cloud::ServiceDirectory::V1beta1::Endpoint>]
+        #   @return [::Array<::Google::Cloud::ServiceDirectory::V1beta1::Endpoint>]
         #     Output only. Endpoints associated with this service. Returned on LookupService.Resolve.
         #     Control plane clients should use RegistrationService.ListEndpoints.
         class Service
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class MetadataEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

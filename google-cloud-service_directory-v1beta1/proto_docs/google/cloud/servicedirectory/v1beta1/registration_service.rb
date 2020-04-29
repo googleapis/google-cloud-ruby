@@ -21,13 +21,13 @@ module Google
   module Cloud
     module ServiceDirectory
       module V1beta1
-        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_namespace RegistrationService.CreateNamespace}.
+        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_namespace RegistrationService.CreateNamespace}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the project and location the namespace
         #     will be created in.
         # @!attribute [rw] namespace_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Resource ID must be 1-63 characters long, and comply with
         #     <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
         #     Specifically, the name must be 1-63 characters long and match the regular
@@ -36,26 +36,26 @@ module Google
         #     be a dash, lowercase letter, or digit, except the last character, which
         #     cannot be a dash.
         # @!attribute [rw] namespace
-        #   @return [Google::Cloud::ServiceDirectory::V1beta1::Namespace]
+        #   @return [::Google::Cloud::ServiceDirectory::V1beta1::Namespace]
         #     Required. A namespace with initial fields set.
         class CreateNamespaceRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_namespaces RegistrationService.ListNamespaces}.
+        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_namespaces RegistrationService.ListNamespaces}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the project and location whose namespaces we'd like to
         #     list.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The maximum number of items to return.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The next_page_token value returned from a previous List request, if any.
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The filter to list result by.
         #
         #     General filter string syntax:
@@ -80,7 +80,7 @@ module Google
         #       have a field called "doesnotexist". Since the filter does not match any
         #       Namespaces, it returns no results.
         # @!attribute [rw] order_by
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The order to list result by.
         #
         #     General order by string syntax:
@@ -91,59 +91,59 @@ module Google
         #     Note that an empty order_by string result in default order, which is order
         #     by name in ascending order.
         class ListNamespacesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_namespaces RegistrationService.ListNamespaces}.
+        # The response message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_namespaces RegistrationService.ListNamespaces}.
         # @!attribute [rw] namespaces
-        #   @return [Array<Google::Cloud::ServiceDirectory::V1beta1::Namespace>]
+        #   @return [::Array<::Google::Cloud::ServiceDirectory::V1beta1::Namespace>]
         #     The list of namespaces.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     Token to retrieve the next page of results, or empty if there are no
         #     more results in the list.
         class ListNamespacesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_namespace RegistrationService.GetNamespace}.
+        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_namespace RegistrationService.GetNamespace}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the namespace to retrieve.
         class GetNamespaceRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_namespace RegistrationService.UpdateNamespace}.
+        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_namespace RegistrationService.UpdateNamespace}.
         # @!attribute [rw] namespace
-        #   @return [Google::Cloud::ServiceDirectory::V1beta1::Namespace]
+        #   @return [::Google::Cloud::ServiceDirectory::V1beta1::Namespace]
         #     Required. The updated namespace.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Required. List of fields to be updated in this request.
         class UpdateNamespaceRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_namespace RegistrationService.DeleteNamespace}.
+        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_namespace RegistrationService.DeleteNamespace}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the namespace to delete.
         class DeleteNamespaceRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_service RegistrationService.CreateService}.
+        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_service RegistrationService.CreateService}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the namespace this service will belong to.
         # @!attribute [rw] service_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Resource ID must be 1-63 characters long, and comply with
         #     <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
         #     Specifically, the name must be 1-63 characters long and match the regular
@@ -152,27 +152,27 @@ module Google
         #     be a dash, lowercase letter, or digit, except the last character, which
         #     cannot be a dash.
         # @!attribute [rw] service
-        #   @return [Google::Cloud::ServiceDirectory::V1beta1::Service]
+        #   @return [::Google::Cloud::ServiceDirectory::V1beta1::Service]
         #     Required. A service  with initial fields set.
         class CreateServiceRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_services RegistrationService.ListServices}.
+        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_services RegistrationService.ListServices}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the namespace whose services we'd
         #     like to list.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The maximum number of items to return.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The next_page_token value returned from a previous List request,
         #     if any.
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The filter to list result by.
         #
         #     General filter string syntax:
@@ -197,64 +197,64 @@ module Google
         #       have a field called "doesnotexist". Since the filter does not match any
         #       Services, it returns no results.
         # @!attribute [rw] order_by
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The order to list result by.
         class ListServicesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_services RegistrationService.ListServices}.
+        # The response message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_services RegistrationService.ListServices}.
         # @!attribute [rw] services
-        #   @return [Array<Google::Cloud::ServiceDirectory::V1beta1::Service>]
+        #   @return [::Array<::Google::Cloud::ServiceDirectory::V1beta1::Service>]
         #     The list of services.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     Token to retrieve the next page of results, or empty if there are no
         #     more results in the list.
         class ListServicesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_service RegistrationService.GetService}.
+        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_service RegistrationService.GetService}.
         # This should not be used for looking up a service. Insead, use the `resolve`
         # method as it will contain all endpoints and associated metadata.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the service to get.
         class GetServiceRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_service RegistrationService.UpdateService}.
+        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_service RegistrationService.UpdateService}.
         # @!attribute [rw] service
-        #   @return [Google::Cloud::ServiceDirectory::V1beta1::Service]
+        #   @return [::Google::Cloud::ServiceDirectory::V1beta1::Service]
         #     Required. The updated service.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Required. List of fields to be updated in this request.
         class UpdateServiceRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_service RegistrationService.DeleteService}.
+        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_service RegistrationService.DeleteService}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the service to delete.
         class DeleteServiceRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_endpoint RegistrationService.CreateEndpoint}.
+        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_endpoint RegistrationService.CreateEndpoint}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the service that this endpoint provides.
         # @!attribute [rw] endpoint_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Resource ID must be 1-63 characters long, and comply with
         #     <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
         #     Specifically, the name must be 1-63 characters long and match the regular
@@ -263,27 +263,27 @@ module Google
         #     be a dash, lowercase letter, or digit, except the last character, which
         #     cannot be a dash.
         # @!attribute [rw] endpoint
-        #   @return [Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
+        #   @return [::Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
         #     Required. A endpoint with initial fields set.
         class CreateEndpointRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_endpoints RegistrationService.ListEndpoints}.
+        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_endpoints RegistrationService.ListEndpoints}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the service whose endpoints we'd like to
         #     list.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The maximum number of items to return.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The next_page_token value returned from a previous List request,
         #     if any.
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The filter to list result by.
         #
         #     General filter string syntax:
@@ -310,56 +310,56 @@ module Google
         #       have a field called "doesnotexist". Since the filter does not match any
         #       Endpoints, it returns no results.
         # @!attribute [rw] order_by
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The order to list result by.
         class ListEndpointsRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_endpoints RegistrationService.ListEndpoints}.
+        # The response message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_endpoints RegistrationService.ListEndpoints}.
         # @!attribute [rw] endpoints
-        #   @return [Array<Google::Cloud::ServiceDirectory::V1beta1::Endpoint>]
+        #   @return [::Array<::Google::Cloud::ServiceDirectory::V1beta1::Endpoint>]
         #     The list of endpoints.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     Token to retrieve the next page of results, or empty if there are no
         #     more results in the list.
         class ListEndpointsResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_endpoint RegistrationService.GetEndpoint}.
+        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_endpoint RegistrationService.GetEndpoint}.
         # This should not be used to lookup endpoints at runtime. Instead, use
         # the `resolve` method.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the endpoint to get.
         class GetEndpointRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_endpoint RegistrationService.UpdateEndpoint}.
+        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_endpoint RegistrationService.UpdateEndpoint}.
         # @!attribute [rw] endpoint
-        #   @return [Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
+        #   @return [::Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
         #     Required. The updated endpoint.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Required. List of fields to be updated in this request.
         class UpdateEndpointRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_endpoint RegistrationService.DeleteEndpoint}.
+        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_endpoint RegistrationService.DeleteEndpoint}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the endpoint to delete.
         class DeleteEndpointRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
