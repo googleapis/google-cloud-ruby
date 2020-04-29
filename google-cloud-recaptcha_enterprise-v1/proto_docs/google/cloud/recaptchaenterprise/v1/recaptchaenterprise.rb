@@ -23,28 +23,28 @@ module Google
       module V1
         # The create assessment request message.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the project in which the assessment will be created,
         #     in the format "projects/\\{project}".
         # @!attribute [rw] assessment
-        #   @return [Google::Cloud::RecaptchaEnterprise::V1::Assessment]
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::Assessment]
         #     Required. The assessment details.
         class CreateAssessmentRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The request message to annotate an Assessment.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the Assessment, in the format
         #     "projects/\\{project}/assessments/\\{assessment}".
         # @!attribute [rw] annotation
-        #   @return [Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
         #     Required. The annotation that will be assigned to the Event.
         class AnnotateAssessmentRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Enum that reprensents the types of annotations.
           module Annotation
@@ -69,66 +69,66 @@ module Google
 
         # Empty response for AnnotateAssessment.
         class AnnotateAssessmentResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A recaptcha assessment resource.
         # @!attribute [r] name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The resource name for the Assessment in the format
         #     "projects/\\{project}/assessments/\\{assessment}".
         # @!attribute [rw] event
-        #   @return [Google::Cloud::RecaptchaEnterprise::V1::Event]
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::Event]
         #     The event being assessed.
         # @!attribute [r] risk_analysis
-        #   @return [Google::Cloud::RecaptchaEnterprise::V1::RiskAnalysis]
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::RiskAnalysis]
         #     Output only. The risk analysis result for the event being assessed.
         # @!attribute [r] token_properties
-        #   @return [Google::Cloud::RecaptchaEnterprise::V1::TokenProperties]
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TokenProperties]
         #     Output only. Properties of the provided event token.
         class Assessment
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # @!attribute [rw] token
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The user response token provided by the reCAPTCHA client-side integration
         #     on your site.
         # @!attribute [rw] site_key
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The site key that was used to invoke reCAPTCHA on your site and generate
         #     the token.
         # @!attribute [rw] user_agent
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The user agent present in the request from the user's device related to
         #     this event.
         # @!attribute [rw] user_ip_address
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The IP address in the request from the user's device related to this event.
         # @!attribute [rw] expected_action
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The expected action for this type of event. This should be the same action
         #     provided at token generation time on client-side platforms already
         #     integrated with recaptcha enterprise.
         class Event
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Risk analysis result for an event.
         # @!attribute [rw] score
-        #   @return [Float]
+        #   @return [::Float]
         #     Legitimate event score from 0.0 to 1.0.
         #     (1.0 means very likely legitimate traffic while 0.0 means very likely
         #     non-legitimate traffic).
         # @!attribute [rw] reasons
-        #   @return [Array<Google::Cloud::RecaptchaEnterprise::V1::RiskAnalysis::ClassificationReason>]
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::RiskAnalysis::ClassificationReason>]
         #     Reasons contributing to the risk analysis verdict.
         class RiskAnalysis
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # LINT.IfChange(classification_reason)
           # Reasons contributing to the risk analysis verdict.
@@ -156,27 +156,27 @@ module Google
         end
 
         # @!attribute [rw] valid
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Whether the provided user response token is valid. When valid = false, the
         #     reason could be specified in invalid_reason or it could also be due to
         #     a user failing to solve a challenge or a sitekey mismatch (i.e the sitekey
         #     used to generate the token was different than the one specified in the
         #     assessment).
         # @!attribute [rw] invalid_reason
-        #   @return [Google::Cloud::RecaptchaEnterprise::V1::TokenProperties::InvalidReason]
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TokenProperties::InvalidReason]
         #     Reason associated with the response when valid = false.
         # @!attribute [rw] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The timestamp corresponding to the generation of the token.
         # @!attribute [rw] hostname
-        #   @return [String]
+        #   @return [::String]
         #     The hostname of the page on which the token was generated.
         # @!attribute [rw] action
-        #   @return [String]
+        #   @return [::String]
         #     Action name provided at token generation.
         class TokenProperties
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # LINT.IfChange
           # Enum that represents the types of invalid token reasons.
@@ -203,144 +203,144 @@ module Google
 
         # The create key request message.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the project in which the key will be created, in the
         #     format "projects/\\{project}".
         # @!attribute [rw] key
-        #   @return [Google::Cloud::RecaptchaEnterprise::V1::Key]
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::Key]
         #     Required. Information to create a reCAPTCHA Enterprise key.
         class CreateKeyRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The list keys request message.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the project that contains the keys that will be
         #     listed, in the format "projects/\\{project}".
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The maximum number of keys to return. Default is 10. Max limit is
         #     1000.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The next_page_token value returned from a previous.
         #     ListKeysRequest, if any.
         class ListKeysRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response to request to list keys in a project.
         # @!attribute [rw] keys
-        #   @return [Array<Google::Cloud::RecaptchaEnterprise::V1::Key>]
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::Key>]
         #     Key details.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     Token to retrieve the next page of results. It is set to empty if no keys
         #     remain in results.
         class ListKeysResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The get key request message.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the requested key, in the format
         #     "projects/\\{project}/keys/\\{key}".
         class GetKeyRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The update key request message.
         # @!attribute [rw] key
-        #   @return [Google::Cloud::RecaptchaEnterprise::V1::Key]
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::Key]
         #     Required. The key to update.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Optional. The mask to control which field of the key get updated. If the mask is not
         #     present, all fields will be updated.
         class UpdateKeyRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The delete key request message.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the key to be deleted, in the format
         #     "projects/\\{project}/keys/\\{key}".
         class DeleteKeyRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A key used to identify and configure applications (web and/or mobile) that
         # use reCAPTCHA Enterprise.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The resource name for the Key in the format
         #     "projects/\\{project}/keys/\\{key}".
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Human-readable display name of this key. Modifiable by user.
         # @!attribute [rw] web_settings
-        #   @return [Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings]
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings]
         #     Settings for keys that can be used by websites.
         # @!attribute [rw] android_settings
-        #   @return [Google::Cloud::RecaptchaEnterprise::V1::AndroidKeySettings]
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AndroidKeySettings]
         #     Settings for keys that can be used by Android apps.
         # @!attribute [rw] ios_settings
-        #   @return [Google::Cloud::RecaptchaEnterprise::V1::IOSKeySettings]
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::IOSKeySettings]
         #     Settings for keys that can be used by iOS apps.
         # @!attribute [rw] labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. See <a href="https://cloud.google.com/recaptcha-enterprise/docs/labels">
         #     Creating and managing labels</a>.
         # @!attribute [rw] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The timestamp corresponding to the creation of this Key.
         class Key
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class LabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Settings specific to keys that can be used by websites.
         # @!attribute [rw] allow_all_domains
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     If set to true, it means allowed_domains will not be enforced.
         # @!attribute [rw] allowed_domains
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Domains or subdomains of websites allowed to use the key. All subdomains
         #     of an allowed domain are automatically allowed. A valid domain requires a
         #     host and must not include any path, port, query or fragment.
         #     Examples: 'example.com' or 'subdomain.example.com'
         # @!attribute [rw] allow_amp_traffic
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Required. Whether this key can be used on AMP (Accelerated Mobile Pages) websites.
         # @!attribute [rw] integration_type
-        #   @return [Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings::IntegrationType]
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings::IntegrationType]
         #     Required. Describes how this key is integrated with the website.
         # @!attribute [rw] challenge_security_preference
-        #   @return [Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings::ChallengeSecurityPreference]
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings::ChallengeSecurityPreference]
         #     Settings for the frequency and difficulty at which this key triggers
         #     captcha challenges. This should only be specified for IntegrationTypes
         #     CHECKBOX and INVISIBLE.
         class WebKeySettings
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Enum that represents the integration types for web keys.
           module IntegrationType
@@ -381,22 +381,22 @@ module Google
 
         # Settings specific to keys that can be used by Android apps.
         # @!attribute [rw] allowed_package_names
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Android package names of apps allowed to use the key.
         #     Example: 'com.companyname.appname'
         class AndroidKeySettings
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Settings specific to keys that can be used by iOS apps.
         # @!attribute [rw] allowed_bundle_ids
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     iOS bundle ids of apps allowed to use the key.
         #     Example: 'com.companyname.productname.appname'
         class IOSKeySettings
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
