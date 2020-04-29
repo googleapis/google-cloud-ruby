@@ -23,62 +23,62 @@ module Google
       module Common
         # The POSIX account information associated with a Google account.
         # @!attribute [rw] primary
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Only one POSIX account can be marked as primary.
         # @!attribute [rw] username
-        #   @return [String]
+        #   @return [::String]
         #     The username of the POSIX account.
         # @!attribute [rw] uid
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The user ID.
         # @!attribute [rw] gid
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The default group ID.
         # @!attribute [rw] home_directory
-        #   @return [String]
+        #   @return [::String]
         #     The path to the home directory for this account.
         # @!attribute [rw] shell
-        #   @return [String]
+        #   @return [::String]
         #     The path to the logic shell for this account.
         # @!attribute [rw] gecos
-        #   @return [String]
+        #   @return [::String]
         #     The GECOS (user information) entry for this account.
         # @!attribute [rw] system_id
-        #   @return [String]
+        #   @return [::String]
         #     System identifier for which account the username or uid applies to.
         #     By default, the empty value is used.
         # @!attribute [r] account_id
-        #   @return [String]
+        #   @return [::String]
         #     Output only. A POSIX account identifier.
         # @!attribute [rw] operating_system_type
-        #   @return [Google::Cloud::OsLogin::Common::OperatingSystemType]
+        #   @return [::Google::Cloud::OsLogin::Common::OperatingSystemType]
         #     The operating system type where this account applies.
         # @!attribute [r] name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The canonical resource name.
         class PosixAccount
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The SSH public key information associated with a Google account.
         # @!attribute [rw] key
-        #   @return [String]
+        #   @return [::String]
         #     Public key text in SSH format, defined by
         #     <a href="https://www.ietf.org/rfc/rfc4253.txt" target="_blank">RFC4253</a>
         #     section 6.6.
         # @!attribute [rw] expiration_time_usec
-        #   @return [Integer]
+        #   @return [::Integer]
         #     An expiration time in microseconds since epoch.
         # @!attribute [r] fingerprint
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The SHA-256 fingerprint of the SSH public key.
         # @!attribute [r] name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The canonical resource name.
         class SshPublicKey
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The operating system options for account entries.

@@ -219,11 +219,11 @@ module Google
     # request should verify the included field paths, and return an
     # `INVALID_ARGUMENT` error if any path is unmappable.
     # @!attribute [rw] paths
-    #   @return [Array<String>]
+    #   @return [::Array<::String>]
     #     The set of field mask paths.
     class FieldMask
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
   end
 end

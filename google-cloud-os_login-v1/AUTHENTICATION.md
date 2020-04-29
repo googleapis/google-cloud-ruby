@@ -27,7 +27,7 @@ export OS_LOGIN_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/os_login/v1"
 
-client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+client = ::Google::Cloud::OsLogin::V1::OsLoginService::Client.new
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-os_login-v1
 checks for credentials are configured on the service Credentials class (such as
-{Google::Cloud::OsLogin::V1::OsLoginService::Credentials}):
+{::Google::Cloud::OsLogin::V1::OsLoginService::Credentials}):
 
 1. `OS_LOGIN_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `OS_LOGIN_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/os_login/v1"
 
 ENV["OS_LOGIN_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+client = ::Google::Cloud::OsLogin::V1::OsLoginService::Client.new
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ environment variables. Either on an individual client initialization:
 ```ruby
 require "google/cloud/os_login/v1"
 
-client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new do |config|
+client = ::Google::Cloud::OsLogin::V1::OsLoginService::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -98,11 +98,11 @@ Or configured globally for all clients:
 ```ruby
 require "google/cloud/os_login/v1"
 
-Google::Cloud::OsLogin::V1::OsLoginService::Client.configure do |config|
+::Google::Cloud::OsLogin::V1::OsLoginService::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+client = ::Google::Cloud::OsLogin::V1::OsLoginService::Client.new
 ```
 
 ### Cloud SDK
