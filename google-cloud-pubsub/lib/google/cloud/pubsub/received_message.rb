@@ -78,11 +78,6 @@ module Google
         # The first delivery of a given message will have this value as `1`. The value is calculated at best effort and
         # is approximate.
         #
-        # EXPERIMENTAL: This feature is part of a closed alpha release and is available only to whitelisted partners.
-        # This method will return `nil` if a dead letter policy is not set on the subscription. This API might be
-        # changed in backward-incompatible ways and is not recommended for production use. It is not subject to any SLA
-        # or deprecation policy.
-        #
         # @return [Integer, nil] A delivery attempt value of `1` or greater, or `nil` if a dead letter policy is not set
         #   on the subscription.
         #
