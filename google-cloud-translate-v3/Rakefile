@@ -85,7 +85,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or TRANSLATE_TEST_PROJECT=test123 TRANSLATE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/translate/v3/translation_service/credentials"
-  Google::Cloud::Translate::V3::TranslationService::Credentials.env_vars.each do |path|
+  ::Google::Cloud::Translate::V3::TranslationService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["TRANSLATE_PROJECT"] = project

@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/translate/v3"
 
-client = Google::Cloud::Translate::V3::TranslationService::Client.new
+client = ::Google::Cloud::Translate::V3::TranslationService::Client.new
 request = my_create_request
 response = client.translate_text request
 ```
