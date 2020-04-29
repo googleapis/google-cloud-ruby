@@ -25,14 +25,14 @@ module Google
     # <a href="http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf">WGS84
     # standard</a>. Values must be within normalized ranges.
     # @!attribute [rw] latitude
-    #   @return [Float]
+    #   @return [::Float]
     #     The latitude in degrees. It must be in the range [-90.0, +90.0].
     # @!attribute [rw] longitude
-    #   @return [Float]
+    #   @return [::Float]
     #     The longitude in degrees. It must be in the range [-180.0, +180.0].
     class LatLng
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
   end
 end
