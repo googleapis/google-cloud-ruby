@@ -26,14 +26,14 @@ module Google
         # SCC organization -- they can be modified and viewed by all users who have
         # proper permissions on the organization.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The relative resource name of the SecurityMarks. See:
         #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
         #     Examples:
         #     "organizations/\\{organization_id}/assets/\\{asset_id}/securityMarks"
         #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}/securityMarks".
         # @!attribute [rw] marks
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Mutable user specified security marks belonging to the parent resource.
         #     Constraints are as follows:
         #
@@ -43,16 +43,16 @@ module Google
         #       * Values have leading and trailing whitespace trimmed, remaining
         #         characters must be between 1 - 4096 characters (inclusive)
         class SecurityMarks
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class MarksEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

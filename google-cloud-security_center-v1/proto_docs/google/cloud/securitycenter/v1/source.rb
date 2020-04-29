@@ -26,20 +26,20 @@ module Google
         # container of findings that come from the same scanner, logger, monitor, and
         # other tools.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The relative resource name of this source. See:
         #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
         #     Example:
         #     "organizations/\\{organization_id}/sources/\\{source_id}"
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     The source's display name.
         #     A source's display name must be unique amongst its siblings, for example,
         #     two sources with the same parent can't share the same display name.
         #     The display name must have a length between 1 and 64 characters
         #     (inclusive).
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     The description of the source (max of 1024 characters).
         #     Example:
         #     "Web Security Scanner is a web security scanner for common
@@ -48,8 +48,8 @@ module Google
         #     (XSS), Flash injection, mixed content (HTTP in HTTPS), and
         #     outdated or insecure libraries."
         class Source
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

@@ -35,10 +35,10 @@ module Google
             # @param source [String]
             # @param finding [String]
             #
-            # @return [String]
+            # @return [::String]
             def finding_path organization:, source:, finding:
-              raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
-              raise ArgumentError, "source cannot contain /" if source.to_s.include? "/"
+              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+              raise ::ArgumentError, "source cannot contain /" if source.to_s.include? "/"
 
               "organizations/#{organization}/sources/#{source}/findings/#{finding}"
             end
@@ -53,9 +53,9 @@ module Google
             # @param organization [String]
             # @param notification_config [String]
             #
-            # @return [String]
+            # @return [::String]
             def notification_config_path organization:, notification_config:
-              raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
               "organizations/#{organization}/notificationConfigs/#{notification_config}"
             end
@@ -69,7 +69,7 @@ module Google
             #
             # @param organization [String]
             #
-            # @return [String]
+            # @return [::String]
             def organization_path organization:
               "organizations/#{organization}"
             end
@@ -83,7 +83,7 @@ module Google
             #
             # @param organization [String]
             #
-            # @return [String]
+            # @return [::String]
             def organization_settings_path organization:
               "organizations/#{organization}/organizationSettings"
             end
@@ -108,24 +108,24 @@ module Google
             #   @param source [String]
             #   @param finding [String]
             #
-            # @return [String]
+            # @return [::String]
             def security_marks_path **args
               resources = {
                 "asset:organization"          => (proc do |organization:, asset:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
                   "organizations/#{organization}/assets/#{asset}/securityMarks"
                 end),
                 "finding:organization:source" => (proc do |organization:, source:, finding:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
-                  raise ArgumentError, "source cannot contain /" if source.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "source cannot contain /" if source.to_s.include? "/"
 
                   "organizations/#{organization}/sources/#{source}/findings/#{finding}/securityMarks"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
@@ -139,9 +139,9 @@ module Google
             # @param organization [String]
             # @param source [String]
             #
-            # @return [String]
+            # @return [::String]
             def source_path organization:, source:
-              raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
               "organizations/#{organization}/sources/#{source}"
             end
@@ -156,9 +156,9 @@ module Google
             # @param project [String]
             # @param topic [String]
             #
-            # @return [String]
+            # @return [::String]
             def topic_path project:, topic:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/topics/#{topic}"
             end

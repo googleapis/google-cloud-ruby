@@ -26,33 +26,33 @@ module Google
         # A notification config is a Cloud SCC resource that contains the configuration
         # to send notifications for create/update events of findings, assets and etc.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The relative resource name of this notification config. See:
         #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
         #     Example:
         #     "organizations/\\{organization_id}/notificationConfigs/notify_public_bucket".
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     The description of the notification config (max of 1024 characters).
         # @!attribute [rw] pubsub_topic
-        #   @return [String]
+        #   @return [::String]
         #     The PubSub topic to send notifications to. Its format is
         #     "projects/[project_id]/topics/[topic]".
         # @!attribute [r] service_account
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The service account that needs "pubsub.topics.publish"
         #     permission to publish to the PubSub topic.
         # @!attribute [rw] streaming_config
-        #   @return [Google::Cloud::SecurityCenter::V1::NotificationConfig::StreamingConfig]
+        #   @return [::Google::Cloud::SecurityCenter::V1::NotificationConfig::StreamingConfig]
         #     The config for triggering streaming-based notifications.
         class NotificationConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The config for streaming-based notifications, which send each event as soon
           # as it is detected.
           # @!attribute [rw] filter
-          #   @return [String]
+          #   @return [::String]
           #     Expression that defines the filter to apply across create/update events
           #     of assets or findings as specified by the event type. The expression is a
           #     list of zero or more restrictions combined via logical operators `AND`
@@ -75,8 +75,8 @@ module Google
           #     * integer literals without quotes.
           #     * boolean literals `true` and `false` without quotes.
           class StreamingConfig
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

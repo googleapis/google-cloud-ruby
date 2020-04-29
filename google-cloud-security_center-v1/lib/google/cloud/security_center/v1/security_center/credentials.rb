@@ -24,7 +24,7 @@ module Google
       module V1
         module SecurityCenter
           # Credentials for the SecurityCenter API.
-          class Credentials < Google::Auth::Credentials
+          class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform"
             ]

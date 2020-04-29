@@ -23,7 +23,7 @@ require "google/cloud/securitycenter/v1/securitycenter_service_pb"
 require "google/cloud/securitycenter/v1/securitycenter_service_services_pb"
 require "google/cloud/security_center/v1/security_center"
 
-class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::Test
+class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_create_source
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::Source.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::Source.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -59,15 +59,15 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     create_source_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_source, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::CreateSourceRequest, request
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::CreateSourceRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::SecurityCenter::V1::Source), request.source
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1::Source), request.source
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_source_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -84,7 +84,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.create_source Google::Cloud::SecurityCenter::V1::CreateSourceRequest.new(parent: parent, source: source) do |response, operation|
+      client.create_source ::Google::Cloud::SecurityCenter::V1::CreateSourceRequest.new(parent: parent, source: source) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -96,7 +96,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.create_source Google::Cloud::SecurityCenter::V1::CreateSourceRequest.new(parent: parent, source: source), grpc_options do |response, operation|
+      client.create_source ::Google::Cloud::SecurityCenter::V1::CreateSourceRequest.new(parent: parent, source: source), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -108,7 +108,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_create_finding
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::Finding.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::Finding.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -120,16 +120,16 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     create_finding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_finding, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::CreateFindingRequest, request
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::CreateFindingRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.finding_id
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::SecurityCenter::V1::Finding), request.finding
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1::Finding), request.finding
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_finding_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -146,7 +146,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.create_finding Google::Cloud::SecurityCenter::V1::CreateFindingRequest.new(parent: parent, finding_id: finding_id, finding: finding) do |response, operation|
+      client.create_finding ::Google::Cloud::SecurityCenter::V1::CreateFindingRequest.new(parent: parent, finding_id: finding_id, finding: finding) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -158,7 +158,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.create_finding Google::Cloud::SecurityCenter::V1::CreateFindingRequest.new(parent: parent, finding_id: finding_id, finding: finding), grpc_options do |response, operation|
+      client.create_finding ::Google::Cloud::SecurityCenter::V1::CreateFindingRequest.new(parent: parent, finding_id: finding_id, finding: finding), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -170,7 +170,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_create_notification_config
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::NotificationConfig.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::NotificationConfig.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -182,16 +182,16 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     create_notification_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_notification_config, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest, request
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.config_id
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::SecurityCenter::V1::NotificationConfig), request.notification_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1::NotificationConfig), request.notification_config
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_notification_config_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -208,7 +208,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.create_notification_config Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest.new(parent: parent, config_id: config_id, notification_config: notification_config) do |response, operation|
+      client.create_notification_config ::Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest.new(parent: parent, config_id: config_id, notification_config: notification_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -220,7 +220,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.create_notification_config Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest.new(parent: parent, config_id: config_id, notification_config: notification_config), grpc_options do |response, operation|
+      client.create_notification_config ::Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest.new(parent: parent, config_id: config_id, notification_config: notification_config), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -232,7 +232,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_delete_notification_config
     # Create GRPC objects.
-    grpc_response = Google::Protobuf::Empty.new
+    grpc_response = ::Google::Protobuf::Empty.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -242,14 +242,14 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     delete_notification_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_notification_config, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest, request
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, delete_notification_config_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -266,7 +266,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.delete_notification_config Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest.new(name: name) do |response, operation|
+      client.delete_notification_config ::Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -278,7 +278,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.delete_notification_config Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_notification_config ::Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -290,7 +290,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_get_iam_policy
     # Create GRPC objects.
-    grpc_response = Google::Iam::V1::Policy.new
+    grpc_response = ::Google::Iam::V1::Policy.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -301,15 +301,15 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
-      assert_kind_of Google::Iam::V1::GetIamPolicyRequest, request
+      assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
       assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Iam::V1::GetPolicyOptions), request.options
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request.options
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -326,7 +326,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.get_iam_policy Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -338,7 +338,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.get_iam_policy Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
+      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -350,7 +350,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_get_notification_config
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::NotificationConfig.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::NotificationConfig.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -360,14 +360,14 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     get_notification_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_notification_config, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest, request
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_notification_config_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -384,7 +384,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.get_notification_config Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest.new(name: name) do |response, operation|
+      client.get_notification_config ::Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -396,7 +396,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.get_notification_config Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest.new(name: name), grpc_options do |response, operation|
+      client.get_notification_config ::Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -408,7 +408,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_get_organization_settings
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::OrganizationSettings.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::OrganizationSettings.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -418,14 +418,14 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     get_organization_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_organization_settings, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::GetOrganizationSettingsRequest, request
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::GetOrganizationSettingsRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_organization_settings_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -442,7 +442,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.get_organization_settings Google::Cloud::SecurityCenter::V1::GetOrganizationSettingsRequest.new(name: name) do |response, operation|
+      client.get_organization_settings ::Google::Cloud::SecurityCenter::V1::GetOrganizationSettingsRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -454,7 +454,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.get_organization_settings Google::Cloud::SecurityCenter::V1::GetOrganizationSettingsRequest.new(name: name), grpc_options do |response, operation|
+      client.get_organization_settings ::Google::Cloud::SecurityCenter::V1::GetOrganizationSettingsRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -466,7 +466,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_get_source
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::Source.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::Source.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -476,14 +476,14 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     get_source_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_source, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::GetSourceRequest, request
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::GetSourceRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_source_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -500,7 +500,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.get_source Google::Cloud::SecurityCenter::V1::GetSourceRequest.new(name: name) do |response, operation|
+      client.get_source ::Google::Cloud::SecurityCenter::V1::GetSourceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -512,7 +512,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.get_source Google::Cloud::SecurityCenter::V1::GetSourceRequest.new(name: name), grpc_options do |response, operation|
+      client.get_source ::Google::Cloud::SecurityCenter::V1::GetSourceRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -524,7 +524,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_group_assets
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::GroupAssetsResponse.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::GroupAssetsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -540,12 +540,12 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     group_assets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :group_assets, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::GroupAssetsRequest, request
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::GroupAssetsRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.filter
       assert_equal "hello world", request.group_by
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::Duration), request.compare_duration
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::Timestamp), request.read_time
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.compare_duration
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.read_time
       assert_equal "hello world", request.page_token
       assert_equal 42, request.page_size
       refute_nil options
@@ -553,7 +553,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, group_assets_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -572,7 +572,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.group_assets Google::Cloud::SecurityCenter::V1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size) do |response, operation|
+      client.group_assets ::Google::Cloud::SecurityCenter::V1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -586,7 +586,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.group_assets Google::Cloud::SecurityCenter::V1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.group_assets ::Google::Cloud::SecurityCenter::V1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -599,7 +599,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_group_findings
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::GroupFindingsResponse.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::GroupFindingsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -615,12 +615,12 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     group_findings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :group_findings, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::GroupFindingsRequest, request
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::GroupFindingsRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.filter
       assert_equal "hello world", request.group_by
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::Timestamp), request.read_time
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::Duration), request.compare_duration
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.read_time
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.compare_duration
       assert_equal "hello world", request.page_token
       assert_equal 42, request.page_size
       refute_nil options
@@ -628,7 +628,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, group_findings_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -647,7 +647,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.group_findings Google::Cloud::SecurityCenter::V1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size) do |response, operation|
+      client.group_findings ::Google::Cloud::SecurityCenter::V1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -661,7 +661,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.group_findings Google::Cloud::SecurityCenter::V1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.group_findings ::Google::Cloud::SecurityCenter::V1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -674,7 +674,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_list_assets
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::ListAssetsResponse.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::ListAssetsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -691,13 +691,13 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     list_assets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_assets, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::ListAssetsRequest, request
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::ListAssetsRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.filter
       assert_equal "hello world", request.order_by
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::Timestamp), request.read_time
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::Duration), request.compare_duration
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.field_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.read_time
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.compare_duration
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
       assert_equal "hello world", request.page_token
       assert_equal 42, request.page_size
       refute_nil options
@@ -705,7 +705,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_assets_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -724,7 +724,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.list_assets Google::Cloud::SecurityCenter::V1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size) do |response, operation|
+      client.list_assets ::Google::Cloud::SecurityCenter::V1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -738,7 +738,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_assets Google::Cloud::SecurityCenter::V1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_assets ::Google::Cloud::SecurityCenter::V1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -751,7 +751,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_list_findings
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::ListFindingsResponse.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::ListFindingsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -768,13 +768,13 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     list_findings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_findings, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::ListFindingsRequest, request
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::ListFindingsRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.filter
       assert_equal "hello world", request.order_by
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::Timestamp), request.read_time
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::Duration), request.compare_duration
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.field_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.read_time
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.compare_duration
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
       assert_equal "hello world", request.page_token
       assert_equal 42, request.page_size
       refute_nil options
@@ -782,7 +782,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_findings_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -801,7 +801,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.list_findings Google::Cloud::SecurityCenter::V1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size) do |response, operation|
+      client.list_findings ::Google::Cloud::SecurityCenter::V1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -815,7 +815,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_findings Google::Cloud::SecurityCenter::V1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_findings ::Google::Cloud::SecurityCenter::V1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -828,7 +828,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_list_notification_configs
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::ListNotificationConfigsResponse.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::ListNotificationConfigsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -840,7 +840,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     list_notification_configs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_notification_configs, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest, request
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.page_token
       assert_equal 42, request.page_size
@@ -849,7 +849,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_notification_configs_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -868,7 +868,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.list_notification_configs Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+      client.list_notification_configs ::Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -882,7 +882,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_notification_configs Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_notification_configs ::Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -895,7 +895,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_list_sources
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::ListSourcesResponse.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::ListSourcesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -907,7 +907,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     list_sources_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_sources, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::ListSourcesRequest, request
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::ListSourcesRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.page_token
       assert_equal 42, request.page_size
@@ -916,7 +916,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_sources_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -935,7 +935,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.list_sources Google::Cloud::SecurityCenter::V1::ListSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+      client.list_sources ::Google::Cloud::SecurityCenter::V1::ListSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -949,7 +949,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_sources Google::Cloud::SecurityCenter::V1::ListSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_sources ::Google::Cloud::SecurityCenter::V1::ListSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -962,7 +962,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_run_asset_discovery
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -972,14 +972,14 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     run_asset_discovery_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_asset_discovery, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::RunAssetDiscoveryRequest, request
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::RunAssetDiscoveryRequest, request
       assert_equal "hello world", request.parent
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, run_asset_discovery_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -998,7 +998,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.run_asset_discovery Google::Cloud::SecurityCenter::V1::RunAssetDiscoveryRequest.new(parent: parent) do |response, operation|
+      client.run_asset_discovery ::Google::Cloud::SecurityCenter::V1::RunAssetDiscoveryRequest.new(parent: parent) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1012,7 +1012,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.run_asset_discovery Google::Cloud::SecurityCenter::V1::RunAssetDiscoveryRequest.new(parent: parent), grpc_options do |response, operation|
+      client.run_asset_discovery ::Google::Cloud::SecurityCenter::V1::RunAssetDiscoveryRequest.new(parent: parent), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1025,7 +1025,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_set_finding_state
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::Finding.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::Finding.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1037,16 +1037,16 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     set_finding_state_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_finding_state, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::SetFindingStateRequest, request
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::SetFindingStateRequest, request
       assert_equal "hello world", request.name
       assert_equal :STATE_UNSPECIFIED, request.state
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::Timestamp), request.start_time
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.start_time
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, set_finding_state_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1063,7 +1063,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.set_finding_state Google::Cloud::SecurityCenter::V1::SetFindingStateRequest.new(name: name, state: state, start_time: start_time) do |response, operation|
+      client.set_finding_state ::Google::Cloud::SecurityCenter::V1::SetFindingStateRequest.new(name: name, state: state, start_time: start_time) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1075,7 +1075,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.set_finding_state Google::Cloud::SecurityCenter::V1::SetFindingStateRequest.new(name: name, state: state, start_time: start_time), grpc_options do |response, operation|
+      client.set_finding_state ::Google::Cloud::SecurityCenter::V1::SetFindingStateRequest.new(name: name, state: state, start_time: start_time), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1087,7 +1087,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_set_iam_policy
     # Create GRPC objects.
-    grpc_response = Google::Iam::V1::Policy.new
+    grpc_response = ::Google::Iam::V1::Policy.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1098,15 +1098,15 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
-      assert_kind_of Google::Iam::V1::SetIamPolicyRequest, request
+      assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
       assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Iam::V1::Policy), request.policy
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request.policy
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1123,7 +1123,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.set_iam_policy Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy) do |response, operation|
+      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1135,7 +1135,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.set_iam_policy Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
+      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1147,7 +1147,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_test_iam_permissions
     # Create GRPC objects.
-    grpc_response = Google::Iam::V1::TestIamPermissionsResponse.new
+    grpc_response = ::Google::Iam::V1::TestIamPermissionsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1158,7 +1158,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :test_iam_permissions, name
-      assert_kind_of Google::Iam::V1::TestIamPermissionsRequest, request
+      assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
       assert_equal "hello world", request.resource
       assert_equal ["hello world"], request.permissions
       refute_nil options
@@ -1166,7 +1166,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1183,7 +1183,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.test_iam_permissions Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1195,7 +1195,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
+      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1207,7 +1207,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_update_finding
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::Finding.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::Finding.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1218,15 +1218,15 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     update_finding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_finding, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::UpdateFindingRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::SecurityCenter::V1::Finding), request.finding
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::UpdateFindingRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1::Finding), request.finding
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_finding_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1243,7 +1243,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.update_finding Google::Cloud::SecurityCenter::V1::UpdateFindingRequest.new(finding: finding, update_mask: update_mask) do |response, operation|
+      client.update_finding ::Google::Cloud::SecurityCenter::V1::UpdateFindingRequest.new(finding: finding, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1255,7 +1255,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.update_finding Google::Cloud::SecurityCenter::V1::UpdateFindingRequest.new(finding: finding, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_finding ::Google::Cloud::SecurityCenter::V1::UpdateFindingRequest.new(finding: finding, update_mask: update_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1267,7 +1267,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_update_notification_config
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::NotificationConfig.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::NotificationConfig.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1278,15 +1278,15 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     update_notification_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_notification_config, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::SecurityCenter::V1::NotificationConfig), request.notification_config
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1::NotificationConfig), request.notification_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_notification_config_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1303,7 +1303,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.update_notification_config Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest.new(notification_config: notification_config, update_mask: update_mask) do |response, operation|
+      client.update_notification_config ::Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest.new(notification_config: notification_config, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1315,7 +1315,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.update_notification_config Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest.new(notification_config: notification_config, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_notification_config ::Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest.new(notification_config: notification_config, update_mask: update_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1327,7 +1327,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_update_organization_settings
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::OrganizationSettings.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::OrganizationSettings.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1338,15 +1338,15 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     update_organization_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_organization_settings, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::UpdateOrganizationSettingsRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::SecurityCenter::V1::OrganizationSettings), request.organization_settings
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::UpdateOrganizationSettingsRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1::OrganizationSettings), request.organization_settings
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_organization_settings_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1363,7 +1363,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.update_organization_settings Google::Cloud::SecurityCenter::V1::UpdateOrganizationSettingsRequest.new(organization_settings: organization_settings, update_mask: update_mask) do |response, operation|
+      client.update_organization_settings ::Google::Cloud::SecurityCenter::V1::UpdateOrganizationSettingsRequest.new(organization_settings: organization_settings, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1375,7 +1375,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.update_organization_settings Google::Cloud::SecurityCenter::V1::UpdateOrganizationSettingsRequest.new(organization_settings: organization_settings, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_organization_settings ::Google::Cloud::SecurityCenter::V1::UpdateOrganizationSettingsRequest.new(organization_settings: organization_settings, update_mask: update_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1387,7 +1387,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_update_source
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::Source.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::Source.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1398,15 +1398,15 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     update_source_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_source, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::UpdateSourceRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::SecurityCenter::V1::Source), request.source
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::UpdateSourceRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1::Source), request.source
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_source_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1423,7 +1423,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.update_source Google::Cloud::SecurityCenter::V1::UpdateSourceRequest.new(source: source, update_mask: update_mask) do |response, operation|
+      client.update_source ::Google::Cloud::SecurityCenter::V1::UpdateSourceRequest.new(source: source, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1435,7 +1435,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.update_source Google::Cloud::SecurityCenter::V1::UpdateSourceRequest.new(source: source, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_source ::Google::Cloud::SecurityCenter::V1::UpdateSourceRequest.new(source: source, update_mask: update_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1447,7 +1447,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
   def test_update_security_marks
     # Create GRPC objects.
-    grpc_response = Google::Cloud::SecurityCenter::V1::SecurityMarks.new
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::SecurityMarks.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1459,16 +1459,16 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     update_security_marks_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_security_marks, name
-      assert_kind_of Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::SecurityCenter::V1::SecurityMarks), request.security_marks
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::Timestamp), request.start_time
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1::SecurityMarks), request.security_marks
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.start_time
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_security_marks_client_stub do
       # Create client
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1485,7 +1485,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.update_security_marks Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest.new(security_marks: security_marks, update_mask: update_mask, start_time: start_time) do |response, operation|
+      client.update_security_marks ::Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest.new(security_marks: security_marks, update_mask: update_mask, start_time: start_time) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1497,7 +1497,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.update_security_marks Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest.new(security_marks: security_marks, update_mask: update_mask, start_time: start_time), grpc_options do |response, operation|
+      client.update_security_marks ::Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest.new(security_marks: security_marks, update_mask: update_mask, start_time: start_time), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1512,7 +1512,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -1522,7 +1522,7 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client::Configuration, config
   end
 
   def test_operations_client
@@ -1530,11 +1530,11 @@ class Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest::
 
     client = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
 
-    assert_kind_of Google::Cloud::SecurityCenter::V1::SecurityCenter::Operations, client.operations_client
+    assert_kind_of ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Operations, client.operations_client
   end
 end

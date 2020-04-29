@@ -24,34 +24,34 @@ module Google
         # User specified settings that are attached to the Cloud Security Command
         # Center (Cloud SCC) organization.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The relative resource name of the settings. See:
         #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
         #     Example:
         #     "organizations/\\{organization_id}/organizationSettings".
         # @!attribute [rw] enable_asset_discovery
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     A flag that indicates if Asset Discovery should be enabled. If the flag is
         #     set to `true`, then discovery of assets will occur. If it is set to `false,
         #     all historical assets will remain, but discovery of future assets will not
         #     occur.
         # @!attribute [rw] asset_discovery_config
-        #   @return [Google::Cloud::SecurityCenter::V1::OrganizationSettings::AssetDiscoveryConfig]
+        #   @return [::Google::Cloud::SecurityCenter::V1::OrganizationSettings::AssetDiscoveryConfig]
         #     The configuration used for Asset Discovery runs.
         class OrganizationSettings
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The configuration used for Asset Discovery runs.
           # @!attribute [rw] project_ids
-          #   @return [Array<String>]
+          #   @return [::Array<::String>]
           #     The project ids to use for filtering asset discovery.
           # @!attribute [rw] inclusion_mode
-          #   @return [Google::Cloud::SecurityCenter::V1::OrganizationSettings::AssetDiscoveryConfig::InclusionMode]
+          #   @return [::Google::Cloud::SecurityCenter::V1::OrganizationSettings::AssetDiscoveryConfig::InclusionMode]
           #     The mode to use for filtering asset discovery.
           class AssetDiscoveryConfig
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # The mode of inclusion when running Asset Discovery.
             # Asset discovery can be limited by explicitly identifying projects to be

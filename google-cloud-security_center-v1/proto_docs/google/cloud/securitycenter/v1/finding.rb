@@ -29,20 +29,20 @@ module Google
         # cross-site scripting (XSS) vulnerability in an App Engine application is a
         # finding.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The relative resource name of this finding. See:
         #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
         #     Example:
         #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}"
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     The relative resource name of the source the finding belongs to. See:
         #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
         #     This field is immutable after creation time.
         #     For example:
         #     "organizations/\\{organization_id}/sources/\\{source_id}"
         # @!attribute [rw] resource_name
-        #   @return [String]
+        #   @return [::String]
         #     For findings on Google Cloud Platform (GCP) resources, the full resource
         #     name of the GCP resource this finding is for. See:
         #     https://cloud.google.com/apis/design/resource_names#full_resource_name
@@ -50,48 +50,48 @@ module Google
         #     customer or partner defined string.
         #     This field is immutable after creation time.
         # @!attribute [rw] state
-        #   @return [Google::Cloud::SecurityCenter::V1::Finding::State]
+        #   @return [::Google::Cloud::SecurityCenter::V1::Finding::State]
         #     The state of the finding.
         # @!attribute [rw] category
-        #   @return [String]
+        #   @return [::String]
         #     The additional taxonomy group within findings from a given source.
         #     This field is immutable after creation time.
         #     Example: "XSS_FLASH_INJECTION"
         # @!attribute [rw] external_uri
-        #   @return [String]
+        #   @return [::String]
         #     The URI that, if available, points to a web page outside of Cloud SCC
         #     where additional information about the finding can be found. This field is
         #     guaranteed to be either empty or a well formed URL.
         # @!attribute [rw] source_properties
-        #   @return [Google::Protobuf::Map{String => Google::Protobuf::Value}]
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
         #     Source specific properties. These properties are managed by the source
         #     that writes the finding. The key names in the source_properties map must be
         #     between 1 and 255 characters, and must start with a letter and contain
         #     alphanumeric characters or underscores only.
         # @!attribute [r] security_marks
-        #   @return [Google::Cloud::SecurityCenter::V1::SecurityMarks]
+        #   @return [::Google::Cloud::SecurityCenter::V1::SecurityMarks]
         #     Output only. User specified security marks. These marks are entirely
         #     managed by the user and come from the SecurityMarks resource that belongs
         #     to the finding.
         # @!attribute [rw] event_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the event took place. For example, if the finding
         #     represents an open firewall it would capture the time the detector believes
         #     the firewall became open. The accuracy is determined by the detector.
         # @!attribute [rw] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the finding was created in Cloud SCC.
         class Finding
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [Google::Protobuf::Value]
+          #   @return [::Google::Protobuf::Value]
           class SourcePropertiesEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # The state of the finding.
