@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-speech
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::Speech::V1::Speech::Credentials`):
+`::Google::Cloud::Speech::V1::Speech::Credentials`):
 
 1. `SPEECH_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `SPEECH_KEYFILE` - Path to JSON file, or JSON contents
