@@ -26,7 +26,7 @@ module Google
       # To load this package, including all its services, and instantiate a client:
       #
       #     require "google/cloud/language/v1beta2"
-      #     client = Google::Cloud::Language::V1beta2::LanguageService::Client.new
+      #     client = ::Google::Cloud::Language::V1beta2::LanguageService::Client.new
       #
       module V1beta2
       end
