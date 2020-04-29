@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-vision
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::Vision::V1::ProductSearch::Credentials`):
+`::Google::Cloud::Vision::V1::ProductSearch::Credentials`):
 
 1. `VISION_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `VISION_KEYFILE` - Path to JSON file, or JSON contents
