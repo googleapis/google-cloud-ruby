@@ -24,24 +24,24 @@ module Google
         module V1
           # Avro schema.
           # @!attribute [rw] schema
-          #   @return [String]
+          #   @return [::String]
           #     Json serialized schema, as described at
           #     https://avro.apache.org/docs/1.8.1/spec.html.
           class AvroSchema
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Avro rows.
           # @!attribute [rw] serialized_binary_rows
-          #   @return [String]
+          #   @return [::String]
           #     Binary serialized rows in a block.
           # @!attribute [rw] row_count
-          #   @return [Integer]
+          #   @return [::Integer]
           #     The count of rows in the returning block.
           class AvroRows
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

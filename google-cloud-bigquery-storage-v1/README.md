@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/bigquery/storage/v1"
 
-client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
+client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
 request = my_create_request
 response = client.create_read_session request
 ```

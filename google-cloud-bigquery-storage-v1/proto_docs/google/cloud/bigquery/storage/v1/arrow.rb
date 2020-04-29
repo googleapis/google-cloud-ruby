@@ -29,23 +29,23 @@ module Google
           #
           # See code samples on how this message can be deserialized.
           # @!attribute [rw] serialized_schema
-          #   @return [String]
+          #   @return [::String]
           #     IPC serialized Arrow schema.
           class ArrowSchema
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Arrow RecordBatch.
           # @!attribute [rw] serialized_record_batch
-          #   @return [String]
+          #   @return [::String]
           #     IPC-serialized Arrow RecordBatch.
           # @!attribute [rw] row_count
-          #   @return [Integer]
+          #   @return [::Integer]
           #     The count of rows in `serialized_record_batch`.
           class ArrowRecordBatch
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end
