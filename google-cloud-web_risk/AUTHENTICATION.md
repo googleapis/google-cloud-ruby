@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-web_risk
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::WebRisk::V1::WebRiskService::Credentials`):
+`::Google::Cloud::WebRisk::V1::WebRiskService::Credentials`):
 
 1. `WEBRISK_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `WEBRISK_KEYFILE` - Path to JSON file, or JSON contents
