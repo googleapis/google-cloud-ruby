@@ -26,7 +26,7 @@ module Google
       # To load this package, including all its services, and instantiate a client:
       #
       #     require "google/cloud/asset/v1"
-      #     client = Google::Cloud::Asset::V1::AssetService::Client.new
+      #     client = ::Google::Cloud::Asset::V1::AssetService::Client.new
       #
       module V1
       end

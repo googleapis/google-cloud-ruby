@@ -27,32 +27,32 @@ module Google
         # access policy is globally visible within an organization, and the
         # restrictions it specifies apply to all projects within an organization.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. Resource name of the `AccessPolicy`. Format:
         #     `accessPolicies/{policy_id}`
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The parent of this `AccessPolicy` in the Cloud Resource
         #     Hierarchy. Currently immutable once created. Format:
         #     `organizations/{organization_id}`
         # @!attribute [rw] title
-        #   @return [String]
+        #   @return [::String]
         #     Required. Human readable title. Does not affect behavior.
         # @!attribute [rw] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time the `AccessPolicy` was created in UTC.
         # @!attribute [rw] update_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time the `AccessPolicy` was updated in UTC.
         # @!attribute [rw] etag
-        #   @return [String]
+        #   @return [::String]
         #     Output only. An opaque identifier for the current version of the
         #     `AccessPolicy`. This will always be a strongly validated etag, meaning that
         #     two Access Polices will be identical if and only if their etags are
         #     identical. Clients should not expect this to be in any specific format.
         class AccessPolicy
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

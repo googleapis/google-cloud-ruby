@@ -32,25 +32,25 @@ module Google
         # a single Google Cloud project may belong to multiple Service Perimeter
         # Bridges.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name for the ServicePerimeter.  The `short_name`
         #     component must begin with a letter and only include alphanumeric and '_'.
         #     Format: `accessPolicies/{policy_id}/servicePerimeters/{short_name}`
         # @!attribute [rw] title
-        #   @return [String]
+        #   @return [::String]
         #     Human readable title. Must be unique within the Policy.
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     Description of the `ServicePerimeter` and its use. Does not affect
         #     behavior.
         # @!attribute [rw] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time the `ServicePerimeter` was created in UTC.
         # @!attribute [rw] update_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time the `ServicePerimeter` was updated in UTC.
         # @!attribute [rw] perimeter_type
-        #   @return [Google::Identity::AccessContextManager::V1::ServicePerimeter::PerimeterType]
+        #   @return [::Google::Identity::AccessContextManager::V1::ServicePerimeter::PerimeterType]
         #     Perimeter type indicator. A single project is
         #     allowed to be a member of single regular perimeter, but multiple service
         #     perimeter bridges. A project cannot be a included in a perimeter bridge
@@ -58,18 +58,18 @@ module Google
         #     the restricted service list as well as access level lists must be
         #     empty.
         # @!attribute [rw] status
-        #   @return [Google::Identity::AccessContextManager::V1::ServicePerimeterConfig]
+        #   @return [::Google::Identity::AccessContextManager::V1::ServicePerimeterConfig]
         #     Current ServicePerimeter configuration. Specifies sets of resources,
         #     restricted services and access levels that determine perimeter
         #     content and boundaries.
         # @!attribute [rw] spec
-        #   @return [Google::Identity::AccessContextManager::V1::ServicePerimeterConfig]
+        #   @return [::Google::Identity::AccessContextManager::V1::ServicePerimeterConfig]
         #     Proposed (or dry run) ServicePerimeter configuration. This configuration
         #     allows to specify and test ServicePerimeter configuration without enforcing
         #     actual access restrictions. Only allowed to be set when the
         #     "use_explicit_dry_run_spec" flag is set.
         # @!attribute [rw] use_explicit_dry_run_spec
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Use explicit dry run spec flag. Ordinarily, a dry-run spec implicitly
         #     exists  for all Service Perimeters, and that spec is identical to the
         #     status for those Service Perimeters. When this flag is set, it inhibits the
@@ -81,8 +81,8 @@ module Google
         #     restrictions. use_explicit_dry_run_spec must bet set to True if any of the
         #     fields in the spec are set to non-default values.
         class ServicePerimeter
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Specifies the type of the Perimeter. There are two types: regular and
           # bridge. Regular Service Perimeter contains resources, access levels, and
@@ -111,11 +111,11 @@ module Google
         # `ServicePerimeterConfig` specifies a set of Google Cloud resources that
         # describe specific Service Perimeter configuration.
         # @!attribute [rw] resources
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     A list of Google Cloud resources that are inside of the service perimeter.
         #     Currently only projects are allowed. Format: `projects/{project_number}`
         # @!attribute [rw] access_levels
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     A list of `AccessLevel` resource names that allow resources within the
         #     `ServicePerimeter` to be accessed from the internet. `AccessLevels` listed
         #     must be in the same policy as this `ServicePerimeter`. Referencing a
@@ -125,31 +125,31 @@ module Google
         #     `"accessPolicies/MY_POLICY/accessLevels/MY_LEVEL"`.
         #     For Service Perimeter Bridge, must be empty.
         # @!attribute [rw] restricted_services
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Google Cloud services that are subject to the Service Perimeter
         #     restrictions. For example, if `storage.googleapis.com` is specified, access
         #     to the storage buckets inside the perimeter must meet the perimeter's
         #     access restrictions.
         # @!attribute [rw] vpc_accessible_services
-        #   @return [Google::Identity::AccessContextManager::V1::ServicePerimeterConfig::VpcAccessibleServices]
+        #   @return [::Google::Identity::AccessContextManager::V1::ServicePerimeterConfig::VpcAccessibleServices]
         #     Configuration for APIs allowed within Perimeter.
         class ServicePerimeterConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Specifies how APIs are allowed to communicate within the Service
           # Perimeter.
           # @!attribute [rw] enable_restriction
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     Whether to restrict API calls within the Service Perimeter to the list of
           #     APIs specified in 'allowed_services'.
           # @!attribute [rw] allowed_services
-          #   @return [Array<String>]
+          #   @return [::Array<::String>]
           #     The list of APIs usable within the Service Perimeter. Must be empty
           #     unless 'enable_restriction' is True.
           class VpcAccessibleServices
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end
