@@ -52,7 +52,7 @@ module Google
 
           ##
           # A URL locating the endpoint to which messages should be pushed. For
-          # example, a Webhook endpoint might use "https://example.com/push".
+          # example, a Webhook endpoint might use `https://example.com/push`.
           #
           # @return [String]
           def endpoint
@@ -62,7 +62,7 @@ module Google
           ##
           # Sets the URL locating the endpoint to which messages should be
           # pushed. For example, a Webhook endpoint might use
-          # "https://example.com/push".
+          # `https://example.com/push`.
           #
           # @param [String, nil] new_endpoint New URL value
           def endpoint= new_endpoint

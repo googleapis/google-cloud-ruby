@@ -188,7 +188,7 @@ module Google
         ##
         # Returns the URL locating the endpoint to which messages should be
         # pushed. For example, a Webhook endpoint might use
-        # "https://example.com/push".
+        # `https://example.com/push`.
         #
         # Makes an API call to retrieve the endpoint value when called on a
         # reference object. See {#reference?}.
@@ -202,7 +202,7 @@ module Google
 
         ##
         # Sets the URL locating the endpoint to which messages should be pushed.
-        # For example, a Webhook endpoint might use "https://example.com/push".
+        # For example, a Webhook endpoint might use `https://example.com/push`.
         #
         # @param [String] new_endpoint The new endpoint value.
         #
