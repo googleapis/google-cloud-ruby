@@ -29,8 +29,8 @@ module Google
         # any other HTTP response code is returned or no response is received, the
         # task will be retried according to the following:
         #
-        # * User-specified throttling: {Google::Cloud::Tasks::V2::Queue#retry_config retry configuration},
-        #   {Google::Cloud::Tasks::V2::Queue#rate_limits rate limits}, and the [queue's state][google.cloud.tasks.v2.Queue.state].
+        # * User-specified throttling: {::Google::Cloud::Tasks::V2::Queue#retry_config retry configuration},
+        #   {::Google::Cloud::Tasks::V2::Queue#rate_limits rate limits}, and the [queue's state][google.cloud.tasks.v2.Queue.state].
         #
         # * System throttling: To prevent the worker from overloading, Cloud Tasks may
         #   temporarily reduce the queue's effective rate. User-specified settings
@@ -39,7 +39,7 @@ module Google
         #  System throttling happens because:
         #
         #   * Cloud Tasks backs off on all errors. Normally the backoff specified in
-        #     {Google::Cloud::Tasks::V2::Queue#rate_limits rate limits} will be used. But if the worker returns
+        #     {::Google::Cloud::Tasks::V2::Queue#rate_limits rate limits} will be used. But if the worker returns
         #     `429` (Too Many Requests), `503` (Service Unavailable), or the rate of
         #     errors is high, Cloud Tasks will use a higher backoff rate. The retry
         #     specified in the `Retry-After` HTTP response header is considered.
@@ -50,7 +50,7 @@ module Google
         #     spikes in create task rates, the queue being unpaused, or many tasks
         #     that are scheduled at the same time).
         # @!attribute [rw] url
-        #   @return [String]
+        #   @return [::String]
         #     Required. The full url path that the request will be sent to.
         #
         #     This string must begin with either "http://" or "https://". Some examples
@@ -61,10 +61,10 @@ module Google
         #     The `Location` header response from a redirect response [`300` - `399`]
         #     may be followed. The redirect is not counted as a separate attempt.
         # @!attribute [rw] http_method
-        #   @return [Google::Cloud::Tasks::V2::HttpMethod]
+        #   @return [::Google::Cloud::Tasks::V2::HttpMethod]
         #     The HTTP method to use for the request. The default is POST.
         # @!attribute [rw] headers
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     HTTP request headers.
         #
         #     This map contains the header field names and values.
@@ -77,7 +77,7 @@ module Google
         #     A partial list of headers that will be ignored or replaced is:
         #
         #     * Host: This will be computed by Cloud Tasks and derived from
-        #       {Google::Cloud::Tasks::V2::HttpRequest#url HttpRequest.url}.
+        #       {::Google::Cloud::Tasks::V2::HttpRequest#url HttpRequest.url}.
         #     * Content-Length: This will be computed by Cloud Tasks.
         #     * User-Agent: This will be set to `"Google-Cloud-Tasks"`.
         #     * X-Google-*: Google use only.
@@ -94,14 +94,14 @@ module Google
         #
         #     The size of the headers must be less than 80KB.
         # @!attribute [rw] body
-        #   @return [String]
+        #   @return [::String]
         #     HTTP request body.
         #
         #     A request body is allowed only if the
-        #     {Google::Cloud::Tasks::V2::HttpRequest#http_method HTTP method} is POST, PUT, or PATCH. It is an
-        #     error to set body on a task with an incompatible {Google::Cloud::Tasks::V2::HttpMethod HttpMethod}.
+        #     {::Google::Cloud::Tasks::V2::HttpRequest#http_method HTTP method} is POST, PUT, or PATCH. It is an
+        #     error to set body on a task with an incompatible {::Google::Cloud::Tasks::V2::HttpMethod HttpMethod}.
         # @!attribute [rw] oauth_token
-        #   @return [Google::Cloud::Tasks::V2::OAuthToken]
+        #   @return [::Google::Cloud::Tasks::V2::OAuthToken]
         #     If specified, an
         #     [OAuth token](https://developers.google.com/identity/protocols/OAuth2)
         #     will be generated and attached as an `Authorization` header in the HTTP
@@ -110,7 +110,7 @@ module Google
         #     This type of authorization should generally only be used when calling
         #     Google APIs hosted on *.googleapis.com.
         # @!attribute [rw] oidc_token
-        #   @return [Google::Cloud::Tasks::V2::OidcToken]
+        #   @return [::Google::Cloud::Tasks::V2::OidcToken]
         #     If specified, an
         #     [OIDC](https://developers.google.com/identity/protocols/OpenIDConnect)
         #     token will be generated and attached as an `Authorization` header in the
@@ -120,16 +120,16 @@ module Google
         #     calling Cloud Run, or endpoints where you intend to validate the token
         #     yourself.
         class HttpRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class HeadersEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -138,7 +138,7 @@ module Google
         # The message defines the HTTP request that is sent to an App Engine app when
         # the task is dispatched.
         #
-        # Using {Google::Cloud::Tasks::V2::AppEngineHttpRequest AppEngineHttpRequest} requires
+        # Using {::Google::Cloud::Tasks::V2::AppEngineHttpRequest AppEngineHttpRequest} requires
         # [`appengine.applications.get`](https://cloud.google.com/appengine/docs/admin-api/access-control)
         # Google IAM permission for the project
         # and the following scope:
@@ -158,7 +158,7 @@ module Google
         # The request to the handler, however, will appear to have used the HTTP
         # protocol.
         #
-        # The {Google::Cloud::Tasks::V2::AppEngineRouting AppEngineRouting} used to construct the URL that the task is
+        # The {::Google::Cloud::Tasks::V2::AppEngineRouting AppEngineRouting} used to construct the URL that the task is
         # delivered to can be set at the queue-level or task-level:
         #
         # * If [app_engine_routing_override is set on the
@@ -169,8 +169,8 @@ module Google
         #
         # The `url` that the task will be sent to is:
         #
-        # * `url =` {Google::Cloud::Tasks::V2::AppEngineRouting#host host} `+`
-        #   {Google::Cloud::Tasks::V2::AppEngineHttpRequest#relative_uri relative_uri}
+        # * `url =` {::Google::Cloud::Tasks::V2::AppEngineRouting#host host} `+`
+        #   {::Google::Cloud::Tasks::V2::AppEngineHttpRequest#relative_uri relative_uri}
         #
         # Tasks can be dispatched to secure app handlers, unsecure app handlers, and
         # URIs restricted with
@@ -185,16 +185,16 @@ module Google
         # The task attempt has succeeded if the app's request handler returns an HTTP
         # response code in the range [`200` - `299`]. The task attempt has failed if
         # the app's handler returns a non-2xx response code or Cloud Tasks does
-        # not receive response before the {Google::Cloud::Tasks::V2::Task#dispatch_deadline deadline}. Failed
+        # not receive response before the {::Google::Cloud::Tasks::V2::Task#dispatch_deadline deadline}. Failed
         # tasks will be retried according to the
-        # {Google::Cloud::Tasks::V2::Queue#retry_config retry configuration}. `503` (Service Unavailable) is
+        # {::Google::Cloud::Tasks::V2::Queue#retry_config retry configuration}. `503` (Service Unavailable) is
         # considered an App Engine system error instead of an application error and
         # will cause Cloud Tasks' traffic congestion control to temporarily throttle
         # the queue's dispatches. Unlike other types of task targets, a `429` (Too Many
         # Requests) response from an app handler does not cause traffic congestion
         # control to throttle the queue.
         # @!attribute [rw] http_method
-        #   @return [Google::Cloud::Tasks::V2::HttpMethod]
+        #   @return [::Google::Cloud::Tasks::V2::HttpMethod]
         #     The HTTP method to use for the request. The default is POST.
         #
         #     The app's request handler for the task's target URL must be able to handle
@@ -207,7 +207,7 @@ module Google
         #     [Python Request
         #     Handler](https://cloud.google.com/appengine/docs/python/tools/webapp/requesthandlerclass).
         # @!attribute [rw] app_engine_routing
-        #   @return [Google::Cloud::Tasks::V2::AppEngineRouting]
+        #   @return [::Google::Cloud::Tasks::V2::AppEngineRouting]
         #     Task-level setting for App Engine routing.
         #
         #     * If [app_engine_routing_override is set on the
@@ -215,7 +215,7 @@ module Google
         #        tasks in the queue, no matter what the setting is for the [task-level
         #        app_engine_routing][AppEngineHttpRequest.app_engine_routing].
         # @!attribute [rw] relative_uri
-        #   @return [String]
+        #   @return [::String]
         #     The relative URI.
         #
         #     The relative URI must begin with "/" and must be a valid HTTP relative URI.
@@ -223,12 +223,12 @@ module Google
         #     If the relative URI is empty, then the root path "/" will be used.
         #     No spaces are allowed, and the maximum length allowed is 2083 characters.
         # @!attribute [rw] headers
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     HTTP request headers.
         #
         #     This map contains the header field names and values.
         #     Headers can be set when the
-        #     {Google::Cloud::Tasks::V2::CloudTasks::Client#create_task task is created}.
+        #     {::Google::Cloud::Tasks::V2::CloudTasks::Client#create_task task is created}.
         #     Repeated headers are not supported but a header value can contain commas.
         #
         #     Cloud Tasks sets some headers to default values:
@@ -239,13 +239,13 @@ module Google
         #       `"AppEngine-Google; (+http://code.google.com/appengine)"` to the
         #       modified `User-Agent`.
         #
-        #     If the task has a {Google::Cloud::Tasks::V2::AppEngineHttpRequest#body body}, Cloud
+        #     If the task has a {::Google::Cloud::Tasks::V2::AppEngineHttpRequest#body body}, Cloud
         #     Tasks sets the following headers:
         #
         #     * `Content-Type`: By default, the `Content-Type` header is set to
         #       `"application/octet-stream"`. The default can be overridden by explicitly
         #       setting `Content-Type` to a particular media type when the
-        #       {Google::Cloud::Tasks::V2::CloudTasks::Client#create_task task is created}.
+        #       {::Google::Cloud::Tasks::V2::CloudTasks::Client#create_task task is created}.
         #       For example, `Content-Type` can be set to `"application/json"`.
         #     * `Content-Length`: This is computed by Cloud Tasks. This value is
         #       output only.   It cannot be changed.
@@ -264,25 +264,25 @@ module Google
         #     visible when the task is returned in a Cloud Tasks response.
         #
         #     Although there is no specific limit for the maximum number of headers or
-        #     the size, there is a limit on the maximum size of the {Google::Cloud::Tasks::V2::Task Task}. For more
-        #     information, see the {Google::Cloud::Tasks::V2::CloudTasks::Client#create_task CreateTask} documentation.
+        #     the size, there is a limit on the maximum size of the {::Google::Cloud::Tasks::V2::Task Task}. For more
+        #     information, see the {::Google::Cloud::Tasks::V2::CloudTasks::Client#create_task CreateTask} documentation.
         # @!attribute [rw] body
-        #   @return [String]
+        #   @return [::String]
         #     HTTP request body.
         #
         #     A request body is allowed only if the HTTP method is POST or PUT. It is
-        #     an error to set a body on a task with an incompatible {Google::Cloud::Tasks::V2::HttpMethod HttpMethod}.
+        #     an error to set a body on a task with an incompatible {::Google::Cloud::Tasks::V2::HttpMethod HttpMethod}.
         class AppEngineHttpRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class HeadersEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -301,50 +301,50 @@ module Google
         # and [App Engine Flex request
         # routing](https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed).
         #
-        # Using {Google::Cloud::Tasks::V2::AppEngineRouting AppEngineRouting} requires
+        # Using {::Google::Cloud::Tasks::V2::AppEngineRouting AppEngineRouting} requires
         # [`appengine.applications.get`](https://cloud.google.com/appengine/docs/admin-api/access-control)
         # Google IAM permission for the project
         # and the following scope:
         #
         # `https://www.googleapis.com/auth/cloud-platform`
         # @!attribute [rw] service
-        #   @return [String]
+        #   @return [::String]
         #     App service.
         #
         #     By default, the task is sent to the service which is the default
         #     service when the task is attempted.
         #
         #     For some queues or tasks which were created using the App Engine
-        #     Task Queue API, {Google::Cloud::Tasks::V2::AppEngineRouting#host host} is not parsable
-        #     into {Google::Cloud::Tasks::V2::AppEngineRouting#service service},
-        #     {Google::Cloud::Tasks::V2::AppEngineRouting#version version}, and
-        #     {Google::Cloud::Tasks::V2::AppEngineRouting#instance instance}. For example, some tasks
+        #     Task Queue API, {::Google::Cloud::Tasks::V2::AppEngineRouting#host host} is not parsable
+        #     into {::Google::Cloud::Tasks::V2::AppEngineRouting#service service},
+        #     {::Google::Cloud::Tasks::V2::AppEngineRouting#version version}, and
+        #     {::Google::Cloud::Tasks::V2::AppEngineRouting#instance instance}. For example, some tasks
         #     which were created using the App Engine SDK use a custom domain
         #     name; custom domains are not parsed by Cloud Tasks. If
-        #     {Google::Cloud::Tasks::V2::AppEngineRouting#host host} is not parsable, then
-        #     {Google::Cloud::Tasks::V2::AppEngineRouting#service service},
-        #     {Google::Cloud::Tasks::V2::AppEngineRouting#version version}, and
-        #     {Google::Cloud::Tasks::V2::AppEngineRouting#instance instance} are the empty string.
+        #     {::Google::Cloud::Tasks::V2::AppEngineRouting#host host} is not parsable, then
+        #     {::Google::Cloud::Tasks::V2::AppEngineRouting#service service},
+        #     {::Google::Cloud::Tasks::V2::AppEngineRouting#version version}, and
+        #     {::Google::Cloud::Tasks::V2::AppEngineRouting#instance instance} are the empty string.
         # @!attribute [rw] version
-        #   @return [String]
+        #   @return [::String]
         #     App version.
         #
         #     By default, the task is sent to the version which is the default
         #     version when the task is attempted.
         #
         #     For some queues or tasks which were created using the App Engine
-        #     Task Queue API, {Google::Cloud::Tasks::V2::AppEngineRouting#host host} is not parsable
-        #     into {Google::Cloud::Tasks::V2::AppEngineRouting#service service},
-        #     {Google::Cloud::Tasks::V2::AppEngineRouting#version version}, and
-        #     {Google::Cloud::Tasks::V2::AppEngineRouting#instance instance}. For example, some tasks
+        #     Task Queue API, {::Google::Cloud::Tasks::V2::AppEngineRouting#host host} is not parsable
+        #     into {::Google::Cloud::Tasks::V2::AppEngineRouting#service service},
+        #     {::Google::Cloud::Tasks::V2::AppEngineRouting#version version}, and
+        #     {::Google::Cloud::Tasks::V2::AppEngineRouting#instance instance}. For example, some tasks
         #     which were created using the App Engine SDK use a custom domain
         #     name; custom domains are not parsed by Cloud Tasks. If
-        #     {Google::Cloud::Tasks::V2::AppEngineRouting#host host} is not parsable, then
-        #     {Google::Cloud::Tasks::V2::AppEngineRouting#service service},
-        #     {Google::Cloud::Tasks::V2::AppEngineRouting#version version}, and
-        #     {Google::Cloud::Tasks::V2::AppEngineRouting#instance instance} are the empty string.
+        #     {::Google::Cloud::Tasks::V2::AppEngineRouting#host host} is not parsable, then
+        #     {::Google::Cloud::Tasks::V2::AppEngineRouting#service service},
+        #     {::Google::Cloud::Tasks::V2::AppEngineRouting#version version}, and
+        #     {::Google::Cloud::Tasks::V2::AppEngineRouting#instance instance} are the empty string.
         # @!attribute [rw] instance
-        #   @return [String]
+        #   @return [::String]
         #     App instance.
         #
         #     By default, the task is sent to an instance which is available when
@@ -359,21 +359,21 @@ module Google
         #     and [App Engine Flex request
         #     routing](https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed).
         # @!attribute [rw] host
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The host that the task is sent to.
         #
         #     The host is constructed from the domain name of the app associated with
         #     the queue's project ID (for example <app-id>.appspot.com), and the
-        #     {Google::Cloud::Tasks::V2::AppEngineRouting#service service}, {Google::Cloud::Tasks::V2::AppEngineRouting#version version},
-        #     and {Google::Cloud::Tasks::V2::AppEngineRouting#instance instance}. Tasks which were created using
+        #     {::Google::Cloud::Tasks::V2::AppEngineRouting#service service}, {::Google::Cloud::Tasks::V2::AppEngineRouting#version version},
+        #     and {::Google::Cloud::Tasks::V2::AppEngineRouting#instance instance}. Tasks which were created using
         #     the App Engine SDK might have a custom domain name.
         #
         #     For more information, see
         #     [How Requests are
         #     Routed](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed).
         class AppEngineRouting
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Contains information needed for generating an
@@ -381,20 +381,20 @@ module Google
         # This type of authorization should generally only be used when calling Google
         # APIs hosted on *.googleapis.com.
         # @!attribute [rw] service_account_email
-        #   @return [String]
+        #   @return [::String]
         #     [Service account email](https://cloud.google.com/iam/docs/service-accounts)
         #     to be used for generating OAuth token.
         #     The service account must be within the same project as the queue. The
         #     caller must have iam.serviceAccounts.actAs permission for the service
         #     account.
         # @!attribute [rw] scope
-        #   @return [String]
+        #   @return [::String]
         #     OAuth scope to be used for generating OAuth access token.
         #     If not specified, "https://www.googleapis.com/auth/cloud-platform"
         #     will be used.
         class OAuthToken
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Contains information needed for generating an
@@ -404,19 +404,19 @@ module Google
         # calling Cloud Run, or endpoints where you intend to validate the token
         # yourself.
         # @!attribute [rw] service_account_email
-        #   @return [String]
+        #   @return [::String]
         #     [Service account email](https://cloud.google.com/iam/docs/service-accounts)
         #     to be used for generating OIDC token.
         #     The service account must be within the same project as the queue. The
         #     caller must have iam.serviceAccounts.actAs permission for the service
         #     account.
         # @!attribute [rw] audience
-        #   @return [String]
+        #   @return [::String]
         #     Audience to be used when generating OIDC token. If not specified, the URI
         #     specified in target will be used.
         class OidcToken
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The HTTP method used to deliver the task.

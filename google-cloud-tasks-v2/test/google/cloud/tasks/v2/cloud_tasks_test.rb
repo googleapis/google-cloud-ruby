@@ -23,7 +23,7 @@ require "google/cloud/tasks/v2/cloudtasks_pb"
 require "google/cloud/tasks/v2/cloudtasks_services_pb"
 require "google/cloud/tasks/v2/cloud_tasks"
 
-class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
+class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
   def test_list_queues
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Tasks::V2::ListQueuesResponse.new
+    grpc_response = ::Google::Cloud::Tasks::V2::ListQueuesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -61,7 +61,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     list_queues_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_queues, name
-      assert_kind_of Google::Cloud::Tasks::V2::ListQueuesRequest, request
+      assert_kind_of ::Google::Cloud::Tasks::V2::ListQueuesRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.filter
       assert_equal 42, request.page_size
@@ -71,7 +71,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_queues_client_stub do
       # Create client
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -90,7 +90,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list_queues Google::Cloud::Tasks::V2::ListQueuesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_queues ::Google::Cloud::Tasks::V2::ListQueuesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -104,7 +104,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_queues Google::Cloud::Tasks::V2::ListQueuesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_queues ::Google::Cloud::Tasks::V2::ListQueuesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -117,7 +117,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
   def test_get_queue
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Tasks::V2::Queue.new
+    grpc_response = ::Google::Cloud::Tasks::V2::Queue.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -127,14 +127,14 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     get_queue_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_queue, name
-      assert_kind_of Google::Cloud::Tasks::V2::GetQueueRequest, request
+      assert_kind_of ::Google::Cloud::Tasks::V2::GetQueueRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_queue_client_stub do
       # Create client
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -151,7 +151,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.get_queue Google::Cloud::Tasks::V2::GetQueueRequest.new(name: name) do |response, operation|
+      client.get_queue ::Google::Cloud::Tasks::V2::GetQueueRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -163,7 +163,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_queue Google::Cloud::Tasks::V2::GetQueueRequest.new(name: name), grpc_options do |response, operation|
+      client.get_queue ::Google::Cloud::Tasks::V2::GetQueueRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -175,7 +175,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
   def test_create_queue
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Tasks::V2::Queue.new
+    grpc_response = ::Google::Cloud::Tasks::V2::Queue.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -186,15 +186,15 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     create_queue_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_queue, name
-      assert_kind_of Google::Cloud::Tasks::V2::CreateQueueRequest, request
+      assert_kind_of ::Google::Cloud::Tasks::V2::CreateQueueRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Tasks::V2::Queue), request.queue
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Tasks::V2::Queue), request.queue
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_queue_client_stub do
       # Create client
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -211,7 +211,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.create_queue Google::Cloud::Tasks::V2::CreateQueueRequest.new(parent: parent, queue: queue) do |response, operation|
+      client.create_queue ::Google::Cloud::Tasks::V2::CreateQueueRequest.new(parent: parent, queue: queue) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -223,7 +223,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_queue Google::Cloud::Tasks::V2::CreateQueueRequest.new(parent: parent, queue: queue), grpc_options do |response, operation|
+      client.create_queue ::Google::Cloud::Tasks::V2::CreateQueueRequest.new(parent: parent, queue: queue), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -235,7 +235,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
   def test_update_queue
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Tasks::V2::Queue.new
+    grpc_response = ::Google::Cloud::Tasks::V2::Queue.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -246,15 +246,15 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     update_queue_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_queue, name
-      assert_kind_of Google::Cloud::Tasks::V2::UpdateQueueRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Tasks::V2::Queue), request.queue
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
+      assert_kind_of ::Google::Cloud::Tasks::V2::UpdateQueueRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Tasks::V2::Queue), request.queue
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_queue_client_stub do
       # Create client
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -271,7 +271,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.update_queue Google::Cloud::Tasks::V2::UpdateQueueRequest.new(queue: queue, update_mask: update_mask) do |response, operation|
+      client.update_queue ::Google::Cloud::Tasks::V2::UpdateQueueRequest.new(queue: queue, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -283,7 +283,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_queue Google::Cloud::Tasks::V2::UpdateQueueRequest.new(queue: queue, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_queue ::Google::Cloud::Tasks::V2::UpdateQueueRequest.new(queue: queue, update_mask: update_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -295,7 +295,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
   def test_delete_queue
     # Create GRPC objects.
-    grpc_response = Google::Protobuf::Empty.new
+    grpc_response = ::Google::Protobuf::Empty.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -305,14 +305,14 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     delete_queue_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_queue, name
-      assert_kind_of Google::Cloud::Tasks::V2::DeleteQueueRequest, request
+      assert_kind_of ::Google::Cloud::Tasks::V2::DeleteQueueRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, delete_queue_client_stub do
       # Create client
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -329,7 +329,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.delete_queue Google::Cloud::Tasks::V2::DeleteQueueRequest.new(name: name) do |response, operation|
+      client.delete_queue ::Google::Cloud::Tasks::V2::DeleteQueueRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -341,7 +341,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_queue Google::Cloud::Tasks::V2::DeleteQueueRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_queue ::Google::Cloud::Tasks::V2::DeleteQueueRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -353,7 +353,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
   def test_purge_queue
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Tasks::V2::Queue.new
+    grpc_response = ::Google::Cloud::Tasks::V2::Queue.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -363,14 +363,14 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     purge_queue_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :purge_queue, name
-      assert_kind_of Google::Cloud::Tasks::V2::PurgeQueueRequest, request
+      assert_kind_of ::Google::Cloud::Tasks::V2::PurgeQueueRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, purge_queue_client_stub do
       # Create client
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -387,7 +387,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.purge_queue Google::Cloud::Tasks::V2::PurgeQueueRequest.new(name: name) do |response, operation|
+      client.purge_queue ::Google::Cloud::Tasks::V2::PurgeQueueRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -399,7 +399,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.purge_queue Google::Cloud::Tasks::V2::PurgeQueueRequest.new(name: name), grpc_options do |response, operation|
+      client.purge_queue ::Google::Cloud::Tasks::V2::PurgeQueueRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -411,7 +411,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
   def test_pause_queue
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Tasks::V2::Queue.new
+    grpc_response = ::Google::Cloud::Tasks::V2::Queue.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -421,14 +421,14 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     pause_queue_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :pause_queue, name
-      assert_kind_of Google::Cloud::Tasks::V2::PauseQueueRequest, request
+      assert_kind_of ::Google::Cloud::Tasks::V2::PauseQueueRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, pause_queue_client_stub do
       # Create client
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -445,7 +445,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.pause_queue Google::Cloud::Tasks::V2::PauseQueueRequest.new(name: name) do |response, operation|
+      client.pause_queue ::Google::Cloud::Tasks::V2::PauseQueueRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -457,7 +457,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.pause_queue Google::Cloud::Tasks::V2::PauseQueueRequest.new(name: name), grpc_options do |response, operation|
+      client.pause_queue ::Google::Cloud::Tasks::V2::PauseQueueRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -469,7 +469,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
   def test_resume_queue
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Tasks::V2::Queue.new
+    grpc_response = ::Google::Cloud::Tasks::V2::Queue.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -479,14 +479,14 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     resume_queue_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :resume_queue, name
-      assert_kind_of Google::Cloud::Tasks::V2::ResumeQueueRequest, request
+      assert_kind_of ::Google::Cloud::Tasks::V2::ResumeQueueRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, resume_queue_client_stub do
       # Create client
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -503,7 +503,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.resume_queue Google::Cloud::Tasks::V2::ResumeQueueRequest.new(name: name) do |response, operation|
+      client.resume_queue ::Google::Cloud::Tasks::V2::ResumeQueueRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -515,7 +515,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.resume_queue Google::Cloud::Tasks::V2::ResumeQueueRequest.new(name: name), grpc_options do |response, operation|
+      client.resume_queue ::Google::Cloud::Tasks::V2::ResumeQueueRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -527,7 +527,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
   def test_get_iam_policy
     # Create GRPC objects.
-    grpc_response = Google::Iam::V1::Policy.new
+    grpc_response = ::Google::Iam::V1::Policy.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -538,15 +538,15 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
-      assert_kind_of Google::Iam::V1::GetIamPolicyRequest, request
+      assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
       assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Iam::V1::GetPolicyOptions), request.options
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request.options
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -563,7 +563,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.get_iam_policy Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -575,7 +575,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_iam_policy Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
+      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -587,7 +587,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
   def test_set_iam_policy
     # Create GRPC objects.
-    grpc_response = Google::Iam::V1::Policy.new
+    grpc_response = ::Google::Iam::V1::Policy.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -598,15 +598,15 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
-      assert_kind_of Google::Iam::V1::SetIamPolicyRequest, request
+      assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
       assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Iam::V1::Policy), request.policy
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request.policy
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -623,7 +623,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.set_iam_policy Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy) do |response, operation|
+      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -635,7 +635,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.set_iam_policy Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
+      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -647,7 +647,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
   def test_test_iam_permissions
     # Create GRPC objects.
-    grpc_response = Google::Iam::V1::TestIamPermissionsResponse.new
+    grpc_response = ::Google::Iam::V1::TestIamPermissionsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -658,7 +658,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :test_iam_permissions, name
-      assert_kind_of Google::Iam::V1::TestIamPermissionsRequest, request
+      assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
       assert_equal "hello world", request.resource
       assert_equal ["hello world"], request.permissions
       refute_nil options
@@ -666,7 +666,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -683,7 +683,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.test_iam_permissions Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -695,7 +695,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
+      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -707,7 +707,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
   def test_list_tasks
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Tasks::V2::ListTasksResponse.new
+    grpc_response = ::Google::Cloud::Tasks::V2::ListTasksResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -720,7 +720,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     list_tasks_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_tasks, name
-      assert_kind_of Google::Cloud::Tasks::V2::ListTasksRequest, request
+      assert_kind_of ::Google::Cloud::Tasks::V2::ListTasksRequest, request
       assert_equal "hello world", request.parent
       assert_equal :VIEW_UNSPECIFIED, request.response_view
       assert_equal 42, request.page_size
@@ -730,7 +730,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_tasks_client_stub do
       # Create client
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -749,7 +749,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list_tasks Google::Cloud::Tasks::V2::ListTasksRequest.new(parent: parent, response_view: response_view, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_tasks ::Google::Cloud::Tasks::V2::ListTasksRequest.new(parent: parent, response_view: response_view, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -763,7 +763,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_tasks Google::Cloud::Tasks::V2::ListTasksRequest.new(parent: parent, response_view: response_view, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_tasks ::Google::Cloud::Tasks::V2::ListTasksRequest.new(parent: parent, response_view: response_view, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -776,7 +776,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
   def test_get_task
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Tasks::V2::Task.new
+    grpc_response = ::Google::Cloud::Tasks::V2::Task.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -787,7 +787,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     get_task_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_task, name
-      assert_kind_of Google::Cloud::Tasks::V2::GetTaskRequest, request
+      assert_kind_of ::Google::Cloud::Tasks::V2::GetTaskRequest, request
       assert_equal "hello world", request.name
       assert_equal :VIEW_UNSPECIFIED, request.response_view
       refute_nil options
@@ -795,7 +795,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_task_client_stub do
       # Create client
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -812,7 +812,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.get_task Google::Cloud::Tasks::V2::GetTaskRequest.new(name: name, response_view: response_view) do |response, operation|
+      client.get_task ::Google::Cloud::Tasks::V2::GetTaskRequest.new(name: name, response_view: response_view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -824,7 +824,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_task Google::Cloud::Tasks::V2::GetTaskRequest.new(name: name, response_view: response_view), grpc_options do |response, operation|
+      client.get_task ::Google::Cloud::Tasks::V2::GetTaskRequest.new(name: name, response_view: response_view), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -836,7 +836,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
   def test_create_task
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Tasks::V2::Task.new
+    grpc_response = ::Google::Cloud::Tasks::V2::Task.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -848,16 +848,16 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     create_task_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_task, name
-      assert_kind_of Google::Cloud::Tasks::V2::CreateTaskRequest, request
+      assert_kind_of ::Google::Cloud::Tasks::V2::CreateTaskRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Tasks::V2::Task), request.task
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Tasks::V2::Task), request.task
       assert_equal :VIEW_UNSPECIFIED, request.response_view
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_task_client_stub do
       # Create client
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -874,7 +874,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.create_task Google::Cloud::Tasks::V2::CreateTaskRequest.new(parent: parent, task: task, response_view: response_view) do |response, operation|
+      client.create_task ::Google::Cloud::Tasks::V2::CreateTaskRequest.new(parent: parent, task: task, response_view: response_view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -886,7 +886,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_task Google::Cloud::Tasks::V2::CreateTaskRequest.new(parent: parent, task: task, response_view: response_view), grpc_options do |response, operation|
+      client.create_task ::Google::Cloud::Tasks::V2::CreateTaskRequest.new(parent: parent, task: task, response_view: response_view), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -898,7 +898,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
   def test_delete_task
     # Create GRPC objects.
-    grpc_response = Google::Protobuf::Empty.new
+    grpc_response = ::Google::Protobuf::Empty.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -908,14 +908,14 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     delete_task_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_task, name
-      assert_kind_of Google::Cloud::Tasks::V2::DeleteTaskRequest, request
+      assert_kind_of ::Google::Cloud::Tasks::V2::DeleteTaskRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, delete_task_client_stub do
       # Create client
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -932,7 +932,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.delete_task Google::Cloud::Tasks::V2::DeleteTaskRequest.new(name: name) do |response, operation|
+      client.delete_task ::Google::Cloud::Tasks::V2::DeleteTaskRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -944,7 +944,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_task Google::Cloud::Tasks::V2::DeleteTaskRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_task ::Google::Cloud::Tasks::V2::DeleteTaskRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -956,7 +956,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
   def test_run_task
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Tasks::V2::Task.new
+    grpc_response = ::Google::Cloud::Tasks::V2::Task.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -967,7 +967,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     run_task_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_task, name
-      assert_kind_of Google::Cloud::Tasks::V2::RunTaskRequest, request
+      assert_kind_of ::Google::Cloud::Tasks::V2::RunTaskRequest, request
       assert_equal "hello world", request.name
       assert_equal :VIEW_UNSPECIFIED, request.response_view
       refute_nil options
@@ -975,7 +975,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, run_task_client_stub do
       # Create client
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -992,7 +992,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.run_task Google::Cloud::Tasks::V2::RunTaskRequest.new(name: name, response_view: response_view) do |response, operation|
+      client.run_task ::Google::Cloud::Tasks::V2::RunTaskRequest.new(name: name, response_view: response_view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1004,7 +1004,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.run_task Google::Cloud::Tasks::V2::RunTaskRequest.new(name: name, response_view: response_view), grpc_options do |response, operation|
+      client.run_task ::Google::Cloud::Tasks::V2::RunTaskRequest.new(name: name, response_view: response_view), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1019,7 +1019,7 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
+      client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -1029,6 +1029,6 @@ class Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Tasks::V2::CloudTasks::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Tasks::V2::CloudTasks::Client::Configuration, config
   end
 end
