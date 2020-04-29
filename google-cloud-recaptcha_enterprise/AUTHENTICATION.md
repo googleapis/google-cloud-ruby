@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-recaptcha_enterprise
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Credentials`):
+`::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Credentials`):
 
 1. `RECAPTCHA_ENTERPRISE_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `RECAPTCHA_ENTERPRISE_KEYFILE` - Path to JSON file, or JSON contents
