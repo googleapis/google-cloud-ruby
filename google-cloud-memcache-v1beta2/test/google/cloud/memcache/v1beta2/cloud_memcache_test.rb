@@ -23,7 +23,7 @@ require "google/cloud/memcache/v1beta2/cloud_memcache_pb"
 require "google/cloud/memcache/v1beta2/cloud_memcache_services_pb"
 require "google/cloud/memcache/v1beta2/cloud_memcache"
 
-class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Test
+class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
   def test_list_instances
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Memcache::V1beta2::ListInstancesResponse.new
+    grpc_response = ::Google::Cloud::Memcache::V1beta2::ListInstancesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -62,7 +62,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
     list_instances_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_instances, name
-      assert_kind_of Google::Cloud::Memcache::V1beta2::ListInstancesRequest, request
+      assert_kind_of ::Google::Cloud::Memcache::V1beta2::ListInstancesRequest, request
       assert_equal "hello world", request.parent
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
@@ -73,7 +73,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_instances_client_stub do
       # Create client
-      client = Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -92,7 +92,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.list_instances Google::Cloud::Memcache::V1beta2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      client.list_instances ::Google::Cloud::Memcache::V1beta2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -106,7 +106,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.list_instances Google::Cloud::Memcache::V1beta2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_instances ::Google::Cloud::Memcache::V1beta2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -119,7 +119,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
   def test_get_instance
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Memcache::V1beta2::Instance.new
+    grpc_response = ::Google::Cloud::Memcache::V1beta2::Instance.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -129,14 +129,14 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
     get_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_instance, name
-      assert_kind_of Google::Cloud::Memcache::V1beta2::GetInstanceRequest, request
+      assert_kind_of ::Google::Cloud::Memcache::V1beta2::GetInstanceRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_instance_client_stub do
       # Create client
-      client = Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -153,7 +153,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.get_instance Google::Cloud::Memcache::V1beta2::GetInstanceRequest.new(name: name) do |response, operation|
+      client.get_instance ::Google::Cloud::Memcache::V1beta2::GetInstanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -165,7 +165,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.get_instance Google::Cloud::Memcache::V1beta2::GetInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.get_instance ::Google::Cloud::Memcache::V1beta2::GetInstanceRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -177,7 +177,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
   def test_create_instance
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -189,16 +189,16 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
     create_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_instance, name
-      assert_kind_of Google::Cloud::Memcache::V1beta2::CreateInstanceRequest, request
+      assert_kind_of ::Google::Cloud::Memcache::V1beta2::CreateInstanceRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.instance_id
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Memcache::V1beta2::Instance), request.resource
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Memcache::V1beta2::Instance), request.resource
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_instance_client_stub do
       # Create client
-      client = Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -217,7 +217,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.create_instance Google::Cloud::Memcache::V1beta2::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, resource: resource) do |response, operation|
+      client.create_instance ::Google::Cloud::Memcache::V1beta2::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, resource: resource) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -231,7 +231,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.create_instance Google::Cloud::Memcache::V1beta2::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, resource: resource), grpc_options do |response, operation|
+      client.create_instance ::Google::Cloud::Memcache::V1beta2::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, resource: resource), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -244,7 +244,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
   def test_update_instance
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -255,15 +255,15 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
     update_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_instance, name
-      assert_kind_of Google::Cloud::Memcache::V1beta2::UpdateInstanceRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Memcache::V1beta2::Instance), request.resource
+      assert_kind_of ::Google::Cloud::Memcache::V1beta2::UpdateInstanceRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Memcache::V1beta2::Instance), request.resource
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_instance_client_stub do
       # Create client
-      client = Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -282,7 +282,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.update_instance Google::Cloud::Memcache::V1beta2::UpdateInstanceRequest.new(update_mask: update_mask, resource: resource) do |response, operation|
+      client.update_instance ::Google::Cloud::Memcache::V1beta2::UpdateInstanceRequest.new(update_mask: update_mask, resource: resource) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -296,7 +296,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.update_instance Google::Cloud::Memcache::V1beta2::UpdateInstanceRequest.new(update_mask: update_mask, resource: resource), grpc_options do |response, operation|
+      client.update_instance ::Google::Cloud::Memcache::V1beta2::UpdateInstanceRequest.new(update_mask: update_mask, resource: resource), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -309,7 +309,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
   def test_update_parameters
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -321,16 +321,16 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
     update_parameters_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_parameters, name
-      assert_kind_of Google::Cloud::Memcache::V1beta2::UpdateParametersRequest, request
+      assert_kind_of ::Google::Cloud::Memcache::V1beta2::UpdateParametersRequest, request
       assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Memcache::V1beta2::MemcacheParameters), request.parameters
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Memcache::V1beta2::MemcacheParameters), request.parameters
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_parameters_client_stub do
       # Create client
-      client = Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -349,7 +349,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.update_parameters Google::Cloud::Memcache::V1beta2::UpdateParametersRequest.new(name: name, update_mask: update_mask, parameters: parameters) do |response, operation|
+      client.update_parameters ::Google::Cloud::Memcache::V1beta2::UpdateParametersRequest.new(name: name, update_mask: update_mask, parameters: parameters) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -363,7 +363,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.update_parameters Google::Cloud::Memcache::V1beta2::UpdateParametersRequest.new(name: name, update_mask: update_mask, parameters: parameters), grpc_options do |response, operation|
+      client.update_parameters ::Google::Cloud::Memcache::V1beta2::UpdateParametersRequest.new(name: name, update_mask: update_mask, parameters: parameters), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -376,7 +376,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
   def test_delete_instance
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -386,14 +386,14 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
     delete_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_instance, name
-      assert_kind_of Google::Cloud::Memcache::V1beta2::DeleteInstanceRequest, request
+      assert_kind_of ::Google::Cloud::Memcache::V1beta2::DeleteInstanceRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, delete_instance_client_stub do
       # Create client
-      client = Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -412,7 +412,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.delete_instance Google::Cloud::Memcache::V1beta2::DeleteInstanceRequest.new(name: name) do |response, operation|
+      client.delete_instance ::Google::Cloud::Memcache::V1beta2::DeleteInstanceRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -426,7 +426,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.delete_instance Google::Cloud::Memcache::V1beta2::DeleteInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_instance ::Google::Cloud::Memcache::V1beta2::DeleteInstanceRequest.new(name: name), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -439,7 +439,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
   def test_apply_parameters
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -451,7 +451,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
     apply_parameters_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :apply_parameters, name
-      assert_kind_of Google::Cloud::Memcache::V1beta2::ApplyParametersRequest, request
+      assert_kind_of ::Google::Cloud::Memcache::V1beta2::ApplyParametersRequest, request
       assert_equal "hello world", request.name
       assert_equal ["hello world"], request.node_ids
       assert_equal true, request.apply_all
@@ -460,7 +460,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, apply_parameters_client_stub do
       # Create client
-      client = Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -479,7 +479,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.apply_parameters Google::Cloud::Memcache::V1beta2::ApplyParametersRequest.new(name: name, node_ids: node_ids, apply_all: apply_all) do |response, operation|
+      client.apply_parameters ::Google::Cloud::Memcache::V1beta2::ApplyParametersRequest.new(name: name, node_ids: node_ids, apply_all: apply_all) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -493,7 +493,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.apply_parameters Google::Cloud::Memcache::V1beta2::ApplyParametersRequest.new(name: name, node_ids: node_ids, apply_all: apply_all), grpc_options do |response, operation|
+      client.apply_parameters ::Google::Cloud::Memcache::V1beta2::ApplyParametersRequest.new(name: name, node_ids: node_ids, apply_all: apply_all), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -509,7 +509,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -519,7 +519,7 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Memcache::V1beta2::CloudMemcache::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client::Configuration, config
   end
 
   def test_operations_client
@@ -527,11 +527,11 @@ class Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Te
 
     client = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
 
-    assert_kind_of Google::Cloud::Memcache::V1beta2::CloudMemcache::Operations, client.operations_client
+    assert_kind_of ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Operations, client.operations_client
   end
 end
