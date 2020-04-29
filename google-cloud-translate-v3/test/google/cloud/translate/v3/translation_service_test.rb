@@ -23,7 +23,7 @@ require "google/cloud/translate/v3/translation_service_pb"
 require "google/cloud/translate/v3/translation_service_services_pb"
 require "google/cloud/translate/v3/translation_service"
 
-class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::Test
+class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
   def test_translate_text
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Translate::V3::TranslateTextResponse.new
+    grpc_response = ::Google::Cloud::Translate::V3::TranslateTextResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -65,21 +65,21 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
     translate_text_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :translate_text, name
-      assert_kind_of Google::Cloud::Translate::V3::TranslateTextRequest, request
+      assert_kind_of ::Google::Cloud::Translate::V3::TranslateTextRequest, request
       assert_equal ["hello world"], request.contents
       assert_equal "hello world", request.mime_type
       assert_equal "hello world", request.source_language_code
       assert_equal "hello world", request.target_language_code
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.model
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Translate::V3::TranslateTextGlossaryConfig), request.glossary_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig), request.glossary_config
       assert_equal({}, request.labels.to_h)
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, translate_text_client_stub do
       # Create client
-      client = Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -96,7 +96,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
       end
 
       # Use protobuf object
-      client.translate_text Google::Cloud::Translate::V3::TranslateTextRequest.new(contents: contents, mime_type: mime_type, source_language_code: source_language_code, target_language_code: target_language_code, parent: parent, model: model, glossary_config: glossary_config, labels: labels) do |response, operation|
+      client.translate_text ::Google::Cloud::Translate::V3::TranslateTextRequest.new(contents: contents, mime_type: mime_type, source_language_code: source_language_code, target_language_code: target_language_code, parent: parent, model: model, glossary_config: glossary_config, labels: labels) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -108,7 +108,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
       end
 
       # Use protobuf object with options
-      client.translate_text Google::Cloud::Translate::V3::TranslateTextRequest.new(contents: contents, mime_type: mime_type, source_language_code: source_language_code, target_language_code: target_language_code, parent: parent, model: model, glossary_config: glossary_config, labels: labels), grpc_options do |response, operation|
+      client.translate_text ::Google::Cloud::Translate::V3::TranslateTextRequest.new(contents: contents, mime_type: mime_type, source_language_code: source_language_code, target_language_code: target_language_code, parent: parent, model: model, glossary_config: glossary_config, labels: labels), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -120,7 +120,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
   def test_detect_language
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Translate::V3::DetectLanguageResponse.new
+    grpc_response = ::Google::Cloud::Translate::V3::DetectLanguageResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -130,14 +130,14 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
     detect_language_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :detect_language, name
-      assert_kind_of Google::Cloud::Translate::V3::DetectLanguageRequest, request
+      assert_kind_of ::Google::Cloud::Translate::V3::DetectLanguageRequest, request
       assert_equal "hello world", request.parent
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, detect_language_client_stub do
       # Create client
-      client = Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -154,7 +154,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
       end
 
       # Use protobuf object
-      client.detect_language Google::Cloud::Translate::V3::DetectLanguageRequest.new(parent: parent) do |response, operation|
+      client.detect_language ::Google::Cloud::Translate::V3::DetectLanguageRequest.new(parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -166,7 +166,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
       end
 
       # Use protobuf object with options
-      client.detect_language Google::Cloud::Translate::V3::DetectLanguageRequest.new(parent: parent), grpc_options do |response, operation|
+      client.detect_language ::Google::Cloud::Translate::V3::DetectLanguageRequest.new(parent: parent), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -178,7 +178,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
   def test_get_supported_languages
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Translate::V3::SupportedLanguages.new
+    grpc_response = ::Google::Cloud::Translate::V3::SupportedLanguages.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -190,7 +190,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
     get_supported_languages_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_supported_languages, name
-      assert_kind_of Google::Cloud::Translate::V3::GetSupportedLanguagesRequest, request
+      assert_kind_of ::Google::Cloud::Translate::V3::GetSupportedLanguagesRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.display_language_code
       assert_equal "hello world", request.model
@@ -199,7 +199,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_supported_languages_client_stub do
       # Create client
-      client = Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -216,7 +216,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
       end
 
       # Use protobuf object
-      client.get_supported_languages Google::Cloud::Translate::V3::GetSupportedLanguagesRequest.new(parent: parent, display_language_code: display_language_code, model: model) do |response, operation|
+      client.get_supported_languages ::Google::Cloud::Translate::V3::GetSupportedLanguagesRequest.new(parent: parent, display_language_code: display_language_code, model: model) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -228,7 +228,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
       end
 
       # Use protobuf object with options
-      client.get_supported_languages Google::Cloud::Translate::V3::GetSupportedLanguagesRequest.new(parent: parent, display_language_code: display_language_code, model: model), grpc_options do |response, operation|
+      client.get_supported_languages ::Google::Cloud::Translate::V3::GetSupportedLanguagesRequest.new(parent: parent, display_language_code: display_language_code, model: model), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -240,7 +240,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
   def test_batch_translate_text
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -257,13 +257,13 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
     batch_translate_text_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_translate_text, name
-      assert_kind_of Google::Cloud::Translate::V3::BatchTranslateTextRequest, request
+      assert_kind_of ::Google::Cloud::Translate::V3::BatchTranslateTextRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.source_language_code
       assert_equal ["hello world"], request.target_language_codes
       assert_equal({}, request.models.to_h)
-      assert_kind_of Google::Cloud::Translate::V3::InputConfig, request.input_configs.first
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Translate::V3::OutputConfig), request.output_config
+      assert_kind_of ::Google::Cloud::Translate::V3::InputConfig, request.input_configs.first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Translate::V3::OutputConfig), request.output_config
       assert_equal({}, request.glossaries.to_h)
       assert_equal({}, request.labels.to_h)
       refute_nil options
@@ -271,7 +271,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, batch_translate_text_client_stub do
       # Create client
-      client = Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -290,7 +290,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
       end
 
       # Use protobuf object
-      client.batch_translate_text Google::Cloud::Translate::V3::BatchTranslateTextRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, models: models, input_configs: input_configs, output_config: output_config, glossaries: glossaries, labels: labels) do |response, operation|
+      client.batch_translate_text ::Google::Cloud::Translate::V3::BatchTranslateTextRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, models: models, input_configs: input_configs, output_config: output_config, glossaries: glossaries, labels: labels) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -304,7 +304,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
       end
 
       # Use protobuf object with options
-      client.batch_translate_text Google::Cloud::Translate::V3::BatchTranslateTextRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, models: models, input_configs: input_configs, output_config: output_config, glossaries: glossaries, labels: labels), grpc_options do |response, operation|
+      client.batch_translate_text ::Google::Cloud::Translate::V3::BatchTranslateTextRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, models: models, input_configs: input_configs, output_config: output_config, glossaries: glossaries, labels: labels), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -317,7 +317,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
   def test_create_glossary
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -328,15 +328,15 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
     create_glossary_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_glossary, name
-      assert_kind_of Google::Cloud::Translate::V3::CreateGlossaryRequest, request
+      assert_kind_of ::Google::Cloud::Translate::V3::CreateGlossaryRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Translate::V3::Glossary), request.glossary
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Translate::V3::Glossary), request.glossary
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_glossary_client_stub do
       # Create client
-      client = Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -355,7 +355,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
       end
 
       # Use protobuf object
-      client.create_glossary Google::Cloud::Translate::V3::CreateGlossaryRequest.new(parent: parent, glossary: glossary) do |response, operation|
+      client.create_glossary ::Google::Cloud::Translate::V3::CreateGlossaryRequest.new(parent: parent, glossary: glossary) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -369,7 +369,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
       end
 
       # Use protobuf object with options
-      client.create_glossary Google::Cloud::Translate::V3::CreateGlossaryRequest.new(parent: parent, glossary: glossary), grpc_options do |response, operation|
+      client.create_glossary ::Google::Cloud::Translate::V3::CreateGlossaryRequest.new(parent: parent, glossary: glossary), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -382,7 +382,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
   def test_list_glossaries
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Translate::V3::ListGlossariesResponse.new
+    grpc_response = ::Google::Cloud::Translate::V3::ListGlossariesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -395,7 +395,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
     list_glossaries_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_glossaries, name
-      assert_kind_of Google::Cloud::Translate::V3::ListGlossariesRequest, request
+      assert_kind_of ::Google::Cloud::Translate::V3::ListGlossariesRequest, request
       assert_equal "hello world", request.parent
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
@@ -405,7 +405,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_glossaries_client_stub do
       # Create client
-      client = Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -424,7 +424,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
       end
 
       # Use protobuf object
-      client.list_glossaries Google::Cloud::Translate::V3::ListGlossariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      client.list_glossaries ::Google::Cloud::Translate::V3::ListGlossariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -438,7 +438,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
       end
 
       # Use protobuf object with options
-      client.list_glossaries Google::Cloud::Translate::V3::ListGlossariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options do |response, operation|
+      client.list_glossaries ::Google::Cloud::Translate::V3::ListGlossariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -451,7 +451,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
   def test_get_glossary
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Translate::V3::Glossary.new
+    grpc_response = ::Google::Cloud::Translate::V3::Glossary.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -461,14 +461,14 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
     get_glossary_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_glossary, name
-      assert_kind_of Google::Cloud::Translate::V3::GetGlossaryRequest, request
+      assert_kind_of ::Google::Cloud::Translate::V3::GetGlossaryRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_glossary_client_stub do
       # Create client
-      client = Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -485,7 +485,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
       end
 
       # Use protobuf object
-      client.get_glossary Google::Cloud::Translate::V3::GetGlossaryRequest.new(name: name) do |response, operation|
+      client.get_glossary ::Google::Cloud::Translate::V3::GetGlossaryRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -497,7 +497,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
       end
 
       # Use protobuf object with options
-      client.get_glossary Google::Cloud::Translate::V3::GetGlossaryRequest.new(name: name), grpc_options do |response, operation|
+      client.get_glossary ::Google::Cloud::Translate::V3::GetGlossaryRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -509,7 +509,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
   def test_delete_glossary
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -519,14 +519,14 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
     delete_glossary_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_glossary, name
-      assert_kind_of Google::Cloud::Translate::V3::DeleteGlossaryRequest, request
+      assert_kind_of ::Google::Cloud::Translate::V3::DeleteGlossaryRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, delete_glossary_client_stub do
       # Create client
-      client = Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -545,7 +545,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
       end
 
       # Use protobuf object
-      client.delete_glossary Google::Cloud::Translate::V3::DeleteGlossaryRequest.new(name: name) do |response, operation|
+      client.delete_glossary ::Google::Cloud::Translate::V3::DeleteGlossaryRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -559,7 +559,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
       end
 
       # Use protobuf object with options
-      client.delete_glossary Google::Cloud::Translate::V3::DeleteGlossaryRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_glossary ::Google::Cloud::Translate::V3::DeleteGlossaryRequest.new(name: name), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -575,7 +575,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -585,7 +585,7 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Translate::V3::TranslationService::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Translate::V3::TranslationService::Client::Configuration, config
   end
 
   def test_operations_client
@@ -593,11 +593,11 @@ class Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::T
 
     client = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
 
-    assert_kind_of Google::Cloud::Translate::V3::TranslationService::Operations, client.operations_client
+    assert_kind_of ::Google::Cloud::Translate::V3::TranslationService::Operations, client.operations_client
   end
 end

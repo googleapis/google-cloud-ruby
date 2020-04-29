@@ -26,7 +26,7 @@ module Google
       # To load this package, including all its services, and instantiate a client:
       #
       #     require "google/cloud/translate/v3"
-      #     client = Google::Cloud::Translate::V3::TranslationService::Client.new
+      #     client = ::Google::Cloud::Translate::V3::TranslationService::Client.new
       #
       module V3
       end

@@ -24,41 +24,41 @@ module Google
         # Configures which glossary should be used for a specific target language,
         # and defines options for applying that glossary.
         # @!attribute [rw] glossary
-        #   @return [String]
+        #   @return [::String]
         #     Required. Specifies the glossary used for this translation. Use
         #     this format: projects/*/locations/*/glossaries/*
         # @!attribute [rw] ignore_case
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Optional. Indicates match is case-insensitive.
         #     Default value is false if missing.
         class TranslateTextGlossaryConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The request message for synchronous translation.
         # @!attribute [rw] contents
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Required. The content of the input in string format.
         #     We recommend the total content be less than 30k codepoints.
         #     Use BatchTranslateText for larger text.
         # @!attribute [rw] mime_type
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The format of the source text, for example, "text/html",
         #      "text/plain". If left blank, the MIME type defaults to "text/html".
         # @!attribute [rw] source_language_code
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The BCP-47 language code of the input text if
         #     known, for example, "en-US" or "sr-Latn". Supported language codes are
         #     listed in Language Support. If the source language isn't specified, the API
         #     attempts to identify the source language automatically and returns the
         #     source language within the response.
         # @!attribute [rw] target_language_code
-        #   @return [String]
+        #   @return [::String]
         #     Required. The BCP-47 language code to use for translation of the input
         #     text, set to one of the language codes listed in Language Support.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. Project or location to make a call. Must refer to a caller's
         #     project.
         #
@@ -74,7 +74,7 @@ module Google
         #     Models and glossaries must be within the same region (have same
         #     location-id), otherwise an INVALID_ARGUMENT (400) error is returned.
         # @!attribute [rw] model
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The `model` type requested for this translation.
         #
         #     The format depends on model type:
@@ -93,12 +93,12 @@ module Google
         #
         #     If missing, the system decides which google base model to use.
         # @!attribute [rw] glossary_config
-        #   @return [Google::Cloud::Translate::V3::TranslateTextGlossaryConfig]
+        #   @return [::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig]
         #     Optional. Glossary to be applied. The glossary must be
         #     within the same region (have the same location-id) as the model, otherwise
         #     an INVALID_ARGUMENT (400) error is returned.
         # @!attribute [rw] labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels with user-defined metadata for the request.
         #
         #     Label keys and values can be no longer than 63 characters
@@ -108,42 +108,42 @@ module Google
         #
         #     See https://cloud.google.com/translate/docs/labels for more information.
         class TranslateTextRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class LabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # @!attribute [rw] translations
-        #   @return [Array<Google::Cloud::Translate::V3::Translation>]
+        #   @return [::Array<::Google::Cloud::Translate::V3::Translation>]
         #     Text translation responses with no glossary applied.
         #     This field has the same length as
-        #     {Google::Cloud::Translate::V3::TranslateTextRequest#contents `contents`}.
+        #     {::Google::Cloud::Translate::V3::TranslateTextRequest#contents `contents`}.
         # @!attribute [rw] glossary_translations
-        #   @return [Array<Google::Cloud::Translate::V3::Translation>]
+        #   @return [::Array<::Google::Cloud::Translate::V3::Translation>]
         #     Text translation responses if a glossary is provided in the request.
         #     This can be the same as
-        #     {Google::Cloud::Translate::V3::TranslateTextResponse#translations `translations`}
+        #     {::Google::Cloud::Translate::V3::TranslateTextResponse#translations `translations`}
         #     if no terms apply. This field has the same length as
-        #     {Google::Cloud::Translate::V3::TranslateTextRequest#contents `contents`}.
+        #     {::Google::Cloud::Translate::V3::TranslateTextRequest#contents `contents`}.
         class TranslateTextResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A single translation response.
         # @!attribute [rw] translated_text
-        #   @return [String]
+        #   @return [::String]
         #     Text translated into the target language.
         # @!attribute [rw] model
-        #   @return [String]
+        #   @return [::String]
         #     Only present when `model` is present in the request.
         #     `model` here is normalized to have project number.
         #
@@ -153,22 +153,22 @@ module Google
         #     `model` here would be normalized to
         #     `projects/{project-number}/locations/{location-id}/models/general/nmt`.
         # @!attribute [rw] detected_language_code
-        #   @return [String]
+        #   @return [::String]
         #     The BCP-47 language code of source text in the initial request, detected
         #     automatically, if no source language was passed within the initial
         #     request. If the source language was passed, auto-detection of the language
         #     does not occur and this field is empty.
         # @!attribute [rw] glossary_config
-        #   @return [Google::Cloud::Translate::V3::TranslateTextGlossaryConfig]
+        #   @return [::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig]
         #     The `glossary_config` used for this translation.
         class Translation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The request message for language detection.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. Project or location to make a call. Must refer to a caller's
         #     project.
         #
@@ -181,7 +181,7 @@ module Google
         #     Only models within the same region (has same location-id) can be used.
         #     Otherwise an INVALID_ARGUMENT (400) error is returned.
         # @!attribute [rw] model
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The language detection model to be used.
         #
         #     Format:
@@ -192,14 +192,14 @@ module Google
         #
         #     If not specified, the default model is used.
         # @!attribute [rw] content
-        #   @return [String]
+        #   @return [::String]
         #     The content of the input stored as a string.
         # @!attribute [rw] mime_type
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The format of the source text, for example, "text/html",
         #     "text/plain". If left blank, the MIME type defaults to "text/html".
         # @!attribute [rw] labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels with user-defined metadata for the request.
         #
         #     Label keys and values can be no longer than 63 characters
@@ -209,45 +209,45 @@ module Google
         #
         #     See https://cloud.google.com/translate/docs/labels for more information.
         class DetectLanguageRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class LabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # The response message for language detection.
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     The BCP-47 language code of source content in the request, detected
         #     automatically.
         # @!attribute [rw] confidence
-        #   @return [Float]
+        #   @return [::Float]
         #     The confidence of the detection result for this language.
         class DetectedLanguage
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The response message for language detection.
         # @!attribute [rw] languages
-        #   @return [Array<Google::Cloud::Translate::V3::DetectedLanguage>]
+        #   @return [::Array<::Google::Cloud::Translate::V3::DetectedLanguage>]
         #     A list of detected languages sorted by detection confidence in descending
         #     order. The most probable language first.
         class DetectLanguageResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The request message for discovering supported languages.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. Project or location to make a call. Must refer to a caller's
         #     project.
         #
@@ -262,12 +262,12 @@ module Google
         #     Only models within the same region (have same location-id) can be used,
         #     otherwise an INVALID_ARGUMENT (400) error is returned.
         # @!attribute [rw] display_language_code
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The language to use to return localized, human readable names
         #     of supported languages. If missing, then display names are not returned
         #     in a response.
         # @!attribute [rw] model
-        #   @return [String]
+        #   @return [::String]
         #     Optional. Get supported languages of this model.
         #
         #     The format depends on model type:
@@ -283,61 +283,61 @@ module Google
         #     Returns languages supported by the specified model.
         #     If missing, we get supported languages of Google general base (PBMT) model.
         class GetSupportedLanguagesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The response message for discovering supported languages.
         # @!attribute [rw] languages
-        #   @return [Array<Google::Cloud::Translate::V3::SupportedLanguage>]
+        #   @return [::Array<::Google::Cloud::Translate::V3::SupportedLanguage>]
         #     A list of supported language responses. This list contains an entry
         #     for each language the Translation API supports.
         class SupportedLanguages
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A single supported language response corresponds to information related
         # to one supported language.
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     Supported language code, generally consisting of its ISO 639-1
         #     identifier, for example, 'en', 'ja'. In certain cases, BCP-47 codes
         #     including language and region identifiers are returned (for example,
         #     'zh-TW' and 'zh-CN')
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Human readable name of the language localized in the display language
         #     specified in the request.
         # @!attribute [rw] support_source
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Can be used as source language.
         # @!attribute [rw] support_target
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Can be used as target language.
         class SupportedLanguage
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The Google Cloud Storage location for the input content.
         # @!attribute [rw] input_uri
-        #   @return [String]
+        #   @return [::String]
         #     Required. Source data URI. For example, `gs://my_bucket/my_object`.
         class GcsSource
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Input configuration for BatchTranslateText request.
         # @!attribute [rw] mime_type
-        #   @return [String]
+        #   @return [::String]
         #     Optional. Can be "text/plain" or "text/html".
         #     For `.tsv`, "text/html" is used if mime_type is missing.
         #     For `.html`, this field must be "text/html" or empty.
         #     For `.txt`, this field must be "text/plain" or empty.
         # @!attribute [rw] gcs_source
-        #   @return [Google::Cloud::Translate::V3::GcsSource]
+        #   @return [::Google::Cloud::Translate::V3::GcsSource]
         #     Required. Google Cloud Storage location for the source input.
         #     This can be a single file (for example,
         #     `gs://translation-test/input.tsv`) or a wildcard (for example,
@@ -357,24 +357,24 @@ module Google
         #     The other supported file extensions are `.txt` or `.html`, which is
         #     treated as a single large chunk of text.
         class InputConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The Google Cloud Storage location for the output content.
         # @!attribute [rw] output_uri_prefix
-        #   @return [String]
+        #   @return [::String]
         #     Required. There must be no files under 'output_uri_prefix'.
         #     'output_uri_prefix' must end with "/" and start with "gs://", otherwise an
         #     INVALID_ARGUMENT (400) error is returned.
         class GcsDestination
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Output configuration for BatchTranslateText request.
         # @!attribute [rw] gcs_destination
-        #   @return [Google::Cloud::Translate::V3::GcsDestination]
+        #   @return [::Google::Cloud::Translate::V3::GcsDestination]
         #     Google Cloud Storage destination for output content.
         #     For every single input file (for example, gs://a/b/c.[extension]), we
         #     generate at most 2 * n output files. (n is the # of target_language_codes
@@ -442,13 +442,13 @@ module Google
         #     generated that contains error details. glossary_error_file has format of
         #     gs://translation_test/a_b_c_'trg'_glossary_errors.[extension]
         class OutputConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The batch translation request.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. Location to make a call. Must refer to a caller's project.
         #
         #     Format: `projects/{project-number-or-id}/locations/{location-id}`.
@@ -459,13 +459,13 @@ module Google
         #     the same location-id) can be used, otherwise an INVALID_ARGUMENT (400)
         #     error is returned.
         # @!attribute [rw] source_language_code
-        #   @return [String]
+        #   @return [::String]
         #     Required. Source language code.
         # @!attribute [rw] target_language_codes
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Required. Specify up to 10 language codes here.
         # @!attribute [rw] models
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The models to use for translation. Map's key is target language
         #     code. Map's value is model name. Value can be a built-in general model,
         #     or an AutoML Translation model.
@@ -483,22 +483,22 @@ module Google
         #     If the map is empty or a specific model is
         #     not requested for a language pair, then default google model (nmt) is used.
         # @!attribute [rw] input_configs
-        #   @return [Array<Google::Cloud::Translate::V3::InputConfig>]
+        #   @return [::Array<::Google::Cloud::Translate::V3::InputConfig>]
         #     Required. Input configurations.
         #     The total number of files matched should be <= 1000.
         #     The total content size should be <= 100M Unicode codepoints.
         #     The files must use UTF-8 encoding.
         # @!attribute [rw] output_config
-        #   @return [Google::Cloud::Translate::V3::OutputConfig]
+        #   @return [::Google::Cloud::Translate::V3::OutputConfig]
         #     Required. Output configuration.
         #     If 2 input configs match to the same file (that is, same input path),
         #     we don't generate output for duplicate inputs.
         # @!attribute [rw] glossaries
-        #   @return [Google::Protobuf::Map{String => Google::Cloud::Translate::V3::TranslateTextGlossaryConfig}]
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig}]
         #     Optional. Glossaries to be applied for translation.
         #     It's keyed by target language code.
         # @!attribute [rw] labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels with user-defined metadata for the request.
         #
         #     Label keys and values can be no longer than 63 characters
@@ -508,59 +508,59 @@ module Google
         #
         #     See https://cloud.google.com/translate/docs/labels for more information.
         class BatchTranslateTextRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class ModelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [Google::Cloud::Translate::V3::TranslateTextGlossaryConfig]
+          #   @return [::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig]
           class GlossariesEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class LabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # State metadata for the batch translation operation.
         # @!attribute [rw] state
-        #   @return [Google::Cloud::Translate::V3::BatchTranslateMetadata::State]
+        #   @return [::Google::Cloud::Translate::V3::BatchTranslateMetadata::State]
         #     The state of the operation.
         # @!attribute [rw] translated_characters
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Number of successfully translated characters so far (Unicode codepoints).
         # @!attribute [rw] failed_characters
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Number of characters that have failed to process so far (Unicode
         #     codepoints).
         # @!attribute [rw] total_characters
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Total number of characters (Unicode codepoints).
         #     This is the total number of codepoints from input files times the number of
         #     target languages and appears here shortly after the call is submitted.
         # @!attribute [rw] submit_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Time when the operation was submitted.
         class BatchTranslateMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # State of the job.
           module State
@@ -589,34 +589,34 @@ module Google
         end
 
         # Stored in the
-        # {Google::Longrunning::Operation#response google.longrunning.Operation.response}
+        # {::Google::Longrunning::Operation#response google.longrunning.Operation.response}
         # field returned by BatchTranslateText if at least one sentence is translated
         # successfully.
         # @!attribute [rw] total_characters
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Total number of characters (Unicode codepoints).
         # @!attribute [rw] translated_characters
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Number of successfully translated characters (Unicode codepoints).
         # @!attribute [rw] failed_characters
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Number of characters that have failed to process (Unicode codepoints).
         # @!attribute [rw] submit_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Time when the operation was submitted.
         # @!attribute [rw] end_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The time when the operation is finished and
-        #     {Google::Longrunning::Operation#done google.longrunning.Operation.done} is
+        #     {::Google::Longrunning::Operation#done google.longrunning.Operation.done} is
         #     set to true.
         class BatchTranslateResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Input configuration for glossaries.
         # @!attribute [rw] gcs_source
-        #   @return [Google::Cloud::Translate::V3::GcsSource]
+        #   @return [::Google::Cloud::Translate::V3::GcsSource]
         #     Required. Google Cloud Storage location of glossary data.
         #     File format is determined based on the filename extension. API returns
         #     [google.rpc.Code.INVALID_ARGUMENT] for unsupported URI-s and file
@@ -640,147 +640,147 @@ module Google
         #       Toolkit and documented in [Use a
         #       glossary](https://support.google.com/translatortoolkit/answer/6306379?hl=en).
         class GlossaryInputConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Represents a glossary built from user provided data.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the glossary. Glossary names have the form
         #     `projects/{project-number-or-id}/locations/{location-id}/glossaries/{glossary-id}`.
         # @!attribute [rw] language_pair
-        #   @return [Google::Cloud::Translate::V3::Glossary::LanguageCodePair]
+        #   @return [::Google::Cloud::Translate::V3::Glossary::LanguageCodePair]
         #     Used with unidirectional glossaries.
         # @!attribute [rw] language_codes_set
-        #   @return [Google::Cloud::Translate::V3::Glossary::LanguageCodesSet]
+        #   @return [::Google::Cloud::Translate::V3::Glossary::LanguageCodesSet]
         #     Used with equivalent term set glossaries.
         # @!attribute [rw] input_config
-        #   @return [Google::Cloud::Translate::V3::GlossaryInputConfig]
+        #   @return [::Google::Cloud::Translate::V3::GlossaryInputConfig]
         #     Required. Provides examples to build the glossary from.
         #     Total glossary must not exceed 10M Unicode codepoints.
         # @!attribute [r] entry_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Output only. The number of entries defined in the glossary.
         # @!attribute [r] submit_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. When CreateGlossary was called.
         # @!attribute [r] end_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. When the glossary creation was finished.
         class Glossary
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Used with unidirectional glossaries.
           # @!attribute [rw] source_language_code
-          #   @return [String]
+          #   @return [::String]
           #     Required. The BCP-47 language code of the input text, for example,
           #     "en-US". Expected to be an exact match for GlossaryTerm.language_code.
           # @!attribute [rw] target_language_code
-          #   @return [String]
+          #   @return [::String]
           #     Required. The BCP-47 language code for translation output, for example,
           #     "zh-CN". Expected to be an exact match for GlossaryTerm.language_code.
           class LanguageCodePair
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Used with equivalent term set glossaries.
           # @!attribute [rw] language_codes
-          #   @return [Array<String>]
+          #   @return [::Array<::String>]
           #     The BCP-47 language code(s) for terms defined in the glossary.
           #     All entries are unique. The list contains at least two entries.
           #     Expected to be an exact match for GlossaryTerm.language_code.
           class LanguageCodesSet
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Request message for CreateGlossary.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The project name.
         # @!attribute [rw] glossary
-        #   @return [Google::Cloud::Translate::V3::Glossary]
+        #   @return [::Google::Cloud::Translate::V3::Glossary]
         #     Required. The glossary to create.
         class CreateGlossaryRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for GetGlossary.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the glossary to retrieve.
         class GetGlossaryRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for DeleteGlossary.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the glossary to delete.
         class DeleteGlossaryRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for ListGlossaries.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the project from which to list all of the glossaries.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. Requested page size. The server may return fewer glossaries than
         #     requested. If unspecified, the server picks an appropriate default.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Optional. A token identifying a page of results the server should return.
         #     Typically, this is the value of [ListGlossariesResponse.next_page_token]
         #     returned from the previous call to `ListGlossaries` method.
         #     The first page is returned if `page_token`is empty or missing.
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     Optional. Filter specifying constraints of a list operation.
         #     Filtering is not supported yet, and the parameter currently has no effect.
         #     If missing, no filtering is performed.
         class ListGlossariesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response message for ListGlossaries.
         # @!attribute [rw] glossaries
-        #   @return [Array<Google::Cloud::Translate::V3::Glossary>]
+        #   @return [::Array<::Google::Cloud::Translate::V3::Glossary>]
         #     The list of glossaries for a project.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     A token to retrieve a page of results. Pass this value in the
         #     [ListGlossariesRequest.page_token] field in the subsequent call to
         #     `ListGlossaries` method to retrieve the next page of results.
         class ListGlossariesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Stored in the
-        # {Google::Longrunning::Operation#metadata google.longrunning.Operation.metadata}
+        # {::Google::Longrunning::Operation#metadata google.longrunning.Operation.metadata}
         # field returned by CreateGlossary.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The name of the glossary that is being created.
         # @!attribute [rw] state
-        #   @return [Google::Cloud::Translate::V3::CreateGlossaryMetadata::State]
+        #   @return [::Google::Cloud::Translate::V3::CreateGlossaryMetadata::State]
         #     The current state of the glossary creation operation.
         # @!attribute [rw] submit_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The time when the operation was submitted to the server.
         class CreateGlossaryMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Enumerates the possible states that the creation request can be in.
           module State
@@ -806,20 +806,20 @@ module Google
         end
 
         # Stored in the
-        # {Google::Longrunning::Operation#metadata google.longrunning.Operation.metadata}
+        # {::Google::Longrunning::Operation#metadata google.longrunning.Operation.metadata}
         # field returned by DeleteGlossary.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The name of the glossary that is being deleted.
         # @!attribute [rw] state
-        #   @return [Google::Cloud::Translate::V3::DeleteGlossaryMetadata::State]
+        #   @return [::Google::Cloud::Translate::V3::DeleteGlossaryMetadata::State]
         #     The current state of the glossary deletion operation.
         # @!attribute [rw] submit_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The time when the operation was submitted to the server.
         class DeleteGlossaryMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Enumerates the possible states that the creation request can be in.
           module State
@@ -845,22 +845,22 @@ module Google
         end
 
         # Stored in the
-        # {Google::Longrunning::Operation#response google.longrunning.Operation.response}
+        # {::Google::Longrunning::Operation#response google.longrunning.Operation.response}
         # field returned by DeleteGlossary.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The name of the deleted glossary.
         # @!attribute [rw] submit_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The time when the operation was submitted to the server.
         # @!attribute [rw] end_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The time when the glossary deletion is finished and
-        #     {Google::Longrunning::Operation#done google.longrunning.Operation.done} is
+        #     {::Google::Longrunning::Operation#done google.longrunning.Operation.done} is
         #     set to true.
         class DeleteGlossaryResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
