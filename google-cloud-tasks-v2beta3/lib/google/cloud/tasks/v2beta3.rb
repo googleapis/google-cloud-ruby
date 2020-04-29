@@ -26,7 +26,7 @@ module Google
       # To load this package, including all its services, and instantiate a client:
       #
       #     require "google/cloud/tasks/v2beta3"
-      #     client = Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new
+      #     client = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new
       #
       module V2beta3
       end

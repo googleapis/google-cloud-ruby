@@ -24,7 +24,7 @@ module Google
       module V2beta3
         module CloudTasks
           # Credentials for the CloudTasks API.
-          class Credentials < Google::Auth::Credentials
+          class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform"
             ]

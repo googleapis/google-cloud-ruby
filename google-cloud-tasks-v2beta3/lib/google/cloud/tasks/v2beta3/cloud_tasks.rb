@@ -37,7 +37,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/tasks/v2beta3/cloud_tasks"
-        #     client = Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new
+        #     client = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new
         #
         module CloudTasks
         end
