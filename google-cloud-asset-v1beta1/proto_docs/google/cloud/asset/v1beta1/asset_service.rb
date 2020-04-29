@@ -23,63 +23,63 @@ module Google
       module V1beta1
         # Export asset request.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The relative name of the root asset. This can only be an
         #     organization number (such as "organizations/123"), a project ID (such as
         #     "projects/my-project-id"), a project number (such as "projects/12345"), or
         #     a folder number (such as "folders/123").
         # @!attribute [rw] read_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Timestamp to take an asset snapshot. This can only be set to a timestamp
         #     between 2018-10-02 UTC (inclusive) and the current time. If not specified,
         #     the current time will be used. Due to delays in resource data collection
         #     and indexing, there is a volatile window during which running the same
         #     query may get different results.
         # @!attribute [rw] asset_types
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     A list of asset types of which to take a snapshot for. For example:
         #     "google.compute.Disk". If specified, only matching assets will be returned.
         #     See [Introduction to Cloud Asset
         #     Inventory](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview)
         #     for all supported asset types.
         # @!attribute [rw] content_type
-        #   @return [Google::Cloud::Asset::V1beta1::ContentType]
+        #   @return [::Google::Cloud::Asset::V1beta1::ContentType]
         #     Asset content type. If not specified, no content but the asset name will be
         #     returned.
         # @!attribute [rw] output_config
-        #   @return [Google::Cloud::Asset::V1beta1::OutputConfig]
+        #   @return [::Google::Cloud::Asset::V1beta1::OutputConfig]
         #     Required. Output configuration indicating where the results will be output
         #     to. All results will be in newline delimited JSON format.
         class ExportAssetsRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The export asset response. This message is returned by the
         # google.longrunning.Operations.GetOperation
         # method in the returned
-        # {Google::Longrunning::Operation#response google.longrunning.Operation.response}
+        # {::Google::Longrunning::Operation#response google.longrunning.Operation.response}
         # field.
         # @!attribute [rw] read_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Time the snapshot was taken.
         # @!attribute [rw] output_config
-        #   @return [Google::Cloud::Asset::V1beta1::OutputConfig]
+        #   @return [::Google::Cloud::Asset::V1beta1::OutputConfig]
         #     Output configuration indicating where the results were output to.
         #     All results are in JSON format.
         class ExportAssetsResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Batch get assets history request.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The relative name of the root asset. It can only be an
         #     organization number (such as "organizations/123"), a project ID (such as
         #     "projects/my-project-id")", or a project number (such as "projects/12345").
         # @!attribute [rw] asset_names
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     A list of the full names of the assets. For example:
         #     `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
         #     See [Resource
@@ -89,10 +89,10 @@ module Google
         #     The request becomes a no-op if the asset name list is empty, and the max
         #     size of the asset name list is 100 in one request.
         # @!attribute [rw] content_type
-        #   @return [Google::Cloud::Asset::V1beta1::ContentType]
+        #   @return [::Google::Cloud::Asset::V1beta1::ContentType]
         #     Optional. The content type.
         # @!attribute [rw] read_time_window
-        #   @return [Google::Cloud::Asset::V1beta1::TimeWindow]
+        #   @return [::Google::Cloud::Asset::V1beta1::TimeWindow]
         #     Optional. The time window for the asset history. Both start_time and
         #     end_time are optional and if set, it must be after 2018-10-02 UTC. If
         #     end_time is not set, it is default to current timestamp. If start_time is
@@ -100,38 +100,38 @@ module Google
         #     returned results contain all temporal assets whose time window overlap with
         #     read_time_window.
         class BatchGetAssetsHistoryRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Batch get assets history response.
         # @!attribute [rw] assets
-        #   @return [Array<Google::Cloud::Asset::V1beta1::TemporalAsset>]
+        #   @return [::Array<::Google::Cloud::Asset::V1beta1::TemporalAsset>]
         #     A list of assets with valid time windows.
         class BatchGetAssetsHistoryResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Output configuration for export assets destination.
         # @!attribute [rw] gcs_destination
-        #   @return [Google::Cloud::Asset::V1beta1::GcsDestination]
+        #   @return [::Google::Cloud::Asset::V1beta1::GcsDestination]
         #     Destination on Cloud Storage.
         class OutputConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A Cloud Storage location.
         # @!attribute [rw] uri
-        #   @return [String]
+        #   @return [::String]
         #     The uri of the Cloud Storage object. It's the same uri that is used by
         #     gsutil. For example: "gs://bucket_name/object_name". See [Viewing and
         #     Editing Object
         #     Metadata](https://cloud.google.com/storage/docs/viewing-editing-metadata)
         #     for more information.
         # @!attribute [rw] uri_prefix
-        #   @return [String]
+        #   @return [::String]
         #     The uri prefix of all generated Cloud Storage objects. For example:
         #     "gs://bucket_name/object_name_prefix". Each object uri is in format:
         #     "gs://bucket_name/object_name_prefix/<asset type>/<shard number> and only
@@ -141,8 +141,8 @@ module Google
         #     An INVALID_ARGUMENT error will be returned if file with the same name
         #     "gs://bucket_name/object_name_prefix" already exists.
         class GcsDestination
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Asset content type.
