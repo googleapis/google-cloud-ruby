@@ -24,7 +24,7 @@ module Google
       module V1
         module SecretManagerService
           # Credentials for the SecretManagerService API.
-          class Credentials < Google::Auth::Credentials
+          class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform"
             ]
