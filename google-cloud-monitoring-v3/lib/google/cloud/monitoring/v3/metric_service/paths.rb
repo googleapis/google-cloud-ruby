@@ -33,7 +33,7 @@ module Google
             #
             # @param folder [String]
             #
-            # @return [String]
+            # @return [::String]
             def folder_path folder:
               "folders/#{folder}"
             end
@@ -65,28 +65,28 @@ module Google
             #   @param folder [String]
             #   @param monitored_resource_descriptor [String]
             #
-            # @return [String]
+            # @return [::String]
             def monitored_resource_descriptor_path **args
               resources = {
                 "monitored_resource_descriptor:project"      => (proc do |project:, monitored_resource_descriptor:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/monitoredResourceDescriptors/#{monitored_resource_descriptor}"
                 end),
                 "monitored_resource_descriptor:organization" => (proc do |organization:, monitored_resource_descriptor:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
                   "organizations/#{organization}/monitoredResourceDescriptors/#{monitored_resource_descriptor}"
                 end),
                 "folder:monitored_resource_descriptor"       => (proc do |folder:, monitored_resource_descriptor:|
-                  raise ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/monitoredResourceDescriptors/#{monitored_resource_descriptor}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
@@ -99,7 +99,7 @@ module Google
             #
             # @param organization [String]
             #
-            # @return [String]
+            # @return [::String]
             def organization_path organization:
               "organizations/#{organization}"
             end
@@ -113,7 +113,7 @@ module Google
             #
             # @param project [String]
             #
-            # @return [String]
+            # @return [::String]
             def project_path project:
               "projects/#{project}"
             end

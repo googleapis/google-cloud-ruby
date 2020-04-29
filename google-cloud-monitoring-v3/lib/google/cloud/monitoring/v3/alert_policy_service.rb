@@ -44,7 +44,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/monitoring/v3/alert_policy_service"
-        #     client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
+        #     client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
         #
         module AlertPolicyService
         end

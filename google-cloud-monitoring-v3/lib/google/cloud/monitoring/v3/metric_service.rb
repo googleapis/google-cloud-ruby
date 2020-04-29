@@ -37,7 +37,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/monitoring/v3/metric_service"
-        #     client = Google::Cloud::Monitoring::V3::MetricService::Client.new
+        #     client = ::Google::Cloud::Monitoring::V3::MetricService::Client.new
         #
         module MetricService
         end

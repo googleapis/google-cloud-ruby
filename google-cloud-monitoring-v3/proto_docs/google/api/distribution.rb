@@ -34,16 +34,16 @@ module Google
     # non-finite values (infinities or NaNs) in the population of values, as this
     # will render the `mean` and `sum_of_squared_deviation` fields meaningless.
     # @!attribute [rw] count
-    #   @return [Integer]
+    #   @return [::Integer]
     #     The number of values in the population. Must be non-negative. This value
     #     must equal the sum of the values in `bucket_counts` if a histogram is
     #     provided.
     # @!attribute [rw] mean
-    #   @return [Float]
+    #   @return [::Float]
     #     The arithmetic mean of the values in the population. If `count` is zero
     #     then this field must be zero.
     # @!attribute [rw] sum_of_squared_deviation
-    #   @return [Float]
+    #   @return [::Float]
     #     The sum of squared deviations from the mean of the values in the
     #     population. For values x_i this is:
     #
@@ -54,15 +54,15 @@ module Google
     #
     #     If `count` is zero then this field must be zero.
     # @!attribute [rw] range
-    #   @return [Google::Api::Distribution::Range]
+    #   @return [::Google::Api::Distribution::Range]
     #     If specified, contains the range of the population values. The field
     #     must not be present if the `count` is zero.
     # @!attribute [rw] bucket_options
-    #   @return [Google::Api::Distribution::BucketOptions]
+    #   @return [::Google::Api::Distribution::BucketOptions]
     #     Defines the histogram bucket boundaries. If the distribution does not
     #     contain a histogram, then omit this field.
     # @!attribute [rw] bucket_counts
-    #   @return [Array<Integer>]
+    #   @return [::Array<::Integer>]
     #     The number of values in each bucket of the histogram, as described in
     #     `bucket_options`. If the distribution does not have a histogram, then omit
     #     this field. If there is a histogram, then the sum of the values in
@@ -79,22 +79,22 @@ module Google
     #     counts for the finite buckets (number 1 through N-2). The N'th value in
     #     `bucket_counts` is the count for the overflow bucket (number N-1).
     # @!attribute [rw] exemplars
-    #   @return [Array<Google::Api::Distribution::Exemplar>]
+    #   @return [::Array<::Google::Api::Distribution::Exemplar>]
     #     Must be in increasing order of `value` field.
     class Distribution
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
 
       # The range of the population values.
       # @!attribute [rw] min
-      #   @return [Float]
+      #   @return [::Float]
       #     The minimum of the population values.
       # @!attribute [rw] max
-      #   @return [Float]
+      #   @return [::Float]
       #     The maximum of the population values.
       class Range
-        include Google::Protobuf::MessageExts
-        extend Google::Protobuf::MessageExts::ClassMethods
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
       end
 
       # `BucketOptions` describes the bucket boundaries used to create a histogram
@@ -113,17 +113,17 @@ module Google
       # upper bound of the overflow bucket is +infinity. The finite buckets are
       # so-called because both bounds are finite.
       # @!attribute [rw] linear_buckets
-      #   @return [Google::Api::Distribution::BucketOptions::Linear]
+      #   @return [::Google::Api::Distribution::BucketOptions::Linear]
       #     The linear bucket.
       # @!attribute [rw] exponential_buckets
-      #   @return [Google::Api::Distribution::BucketOptions::Exponential]
+      #   @return [::Google::Api::Distribution::BucketOptions::Exponential]
       #     The exponential buckets.
       # @!attribute [rw] explicit_buckets
-      #   @return [Google::Api::Distribution::BucketOptions::Explicit]
+      #   @return [::Google::Api::Distribution::BucketOptions::Explicit]
       #     The explicit buckets.
       class BucketOptions
-        include Google::Protobuf::MessageExts
-        extend Google::Protobuf::MessageExts::ClassMethods
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
 
         # Specifies a linear sequence of buckets that all have the same width
         # (except overflow and underflow). Each bucket represents a constant
@@ -135,17 +135,17 @@ module Google
         #    Upper bound (0 <= i < N-1):     offset + (width * i).
         #    Lower bound (1 <= i < N):       offset + (width * (i - 1)).
         # @!attribute [rw] num_finite_buckets
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Must be greater than 0.
         # @!attribute [rw] width
-        #   @return [Float]
+        #   @return [::Float]
         #     Must be greater than 0.
         # @!attribute [rw] offset
-        #   @return [Float]
+        #   @return [::Float]
         #     Lower bound of the first bucket.
         class Linear
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Specifies an exponential sequence of buckets that have a width that is
@@ -158,17 +158,17 @@ module Google
         #    Upper bound (0 <= i < N-1):     scale * (growth_factor ^ i).
         #    Lower bound (1 <= i < N):       scale * (growth_factor ^ (i - 1)).
         # @!attribute [rw] num_finite_buckets
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Must be greater than 0.
         # @!attribute [rw] growth_factor
-        #   @return [Float]
+        #   @return [::Float]
         #     Must be greater than 1.
         # @!attribute [rw] scale
-        #   @return [Float]
+        #   @return [::Float]
         #     Must be greater than 0.
         class Exponential
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Specifies a set of buckets with arbitrary widths.
@@ -183,11 +183,11 @@ module Google
         # only one element, then there are no finite buckets, and that single
         # element is the common boundary of the overflow and underflow buckets.
         # @!attribute [rw] bounds
-        #   @return [Array<Float>]
+        #   @return [::Array<::Float>]
         #     The values must be monotonically increasing.
         class Explicit
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
 
@@ -197,14 +197,14 @@ module Google
       # was active when a value was added. They may contain further information,
       # such as a example values and timestamps, origin, etc.
       # @!attribute [rw] value
-      #   @return [Float]
+      #   @return [::Float]
       #     Value of the exemplar point. This value determines to which bucket the
       #     exemplar belongs.
       # @!attribute [rw] timestamp
-      #   @return [Google::Protobuf::Timestamp]
+      #   @return [::Google::Protobuf::Timestamp]
       #     The observation (sampling) time of the above value.
       # @!attribute [rw] attachments
-      #   @return [Array<Google::Protobuf::Any>]
+      #   @return [::Array<::Google::Protobuf::Any>]
       #     Contextual information about the example value. Examples are:
       #
       #       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
@@ -217,8 +217,8 @@ module Google
       #     There may be only a single attachment of any given message type in a
       #     single exemplar, and this is enforced by the system.
       class Exemplar
-        include Google::Protobuf::MessageExts
-        extend Google::Protobuf::MessageExts::ClassMethods
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
       end
     end
   end

@@ -39,15 +39,15 @@ module Google
             ##
             # Configure the MetricService Client class.
             #
-            # See {Google::Cloud::Monitoring::V3::MetricService::Client::Configuration}
+            # See {::Google::Cloud::Monitoring::V3::MetricService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all MetricService clients:
             #
-            #     Google::Cloud::Monitoring::V3::MetricService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Monitoring::V3::MetricService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -131,7 +131,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Monitoring::V3::MetricService::Client::Configuration}
+            # See {::Google::Cloud::Monitoring::V3::MetricService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -152,13 +152,13 @@ module Google
             # To create a new MetricService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Monitoring::V3::MetricService::Client.new
+            #     client = ::Google::Cloud::Monitoring::V3::MetricService::Client.new
             #
             # To create a new MetricService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the MetricService client.
@@ -185,8 +185,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @metric_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Monitoring::V3::MetricService::Stub,
+              @metric_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Monitoring::V3::MetricService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -201,12 +201,12 @@ module Google
             #
             # @overload list_monitored_resource_descriptors(request, options = nil)
             #   Pass arguments to `list_monitored_resource_descriptors` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_monitored_resource_descriptors(name: nil, filter: nil, page_size: nil, page_token: nil)
@@ -214,45 +214,45 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The project on which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
-            #   @param filter [String]
+            #   @param filter [::String]
             #     An optional [filter](https://cloud.google.com/monitoring/api/v3/filters)
             #     describing the descriptors to be returned.  The filter can reference the
             #     descriptor's type and labels. For example, the following filter returns
             #     only Google Compute Engine descriptors that have an `id` label:
             #
             #         resource.type = starts_with("gce_") AND resource.label:id
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     A positive number that is the maximum number of results to return.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     If this field is not empty then it must contain the `nextPageToken` value
             #     returned by a previous call to this method.  Using this field causes the
             #     method to return additional results from the previous method call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Api::MonitoredResourceDescriptor>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Api::MonitoredResourceDescriptor>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Api::MonitoredResourceDescriptor>]
+            # @return [::Gapic::PagedEnumerable<::Google::Api::MonitoredResourceDescriptor>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_monitored_resource_descriptors request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_monitored_resource_descriptors.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -270,12 +270,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @metric_service_stub.call_rpc :list_monitored_resource_descriptors, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @metric_service_stub, :list_monitored_resource_descriptors, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @metric_service_stub, :list_monitored_resource_descriptors, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -283,12 +283,12 @@ module Google
             #
             # @overload get_monitored_resource_descriptor(request, options = nil)
             #   Pass arguments to `get_monitored_resource_descriptor` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::GetMonitoredResourceDescriptorRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::GetMonitoredResourceDescriptorRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::GetMonitoredResourceDescriptorRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::GetMonitoredResourceDescriptorRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_monitored_resource_descriptor(name: nil)
@@ -296,7 +296,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The monitored resource descriptor to get.  The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/monitoredResourceDescriptors/[RESOURCE_TYPE]
@@ -305,26 +305,26 @@ module Google
             #     `cloudsql_database`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Api::MonitoredResourceDescriptor]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Api::MonitoredResourceDescriptor]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Api::MonitoredResourceDescriptor]
+            # @return [::Google::Api::MonitoredResourceDescriptor]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_monitored_resource_descriptor request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::GetMonitoredResourceDescriptorRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::GetMonitoredResourceDescriptorRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_monitored_resource_descriptor.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -345,8 +345,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -354,12 +354,12 @@ module Google
             #
             # @overload list_metric_descriptors(request, options = nil)
             #   Pass arguments to `list_metric_descriptors` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::ListMetricDescriptorsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::ListMetricDescriptorsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::ListMetricDescriptorsRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::ListMetricDescriptorsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_metric_descriptors(name: nil, filter: nil, page_size: nil, page_token: nil)
@@ -367,11 +367,11 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The project on which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
-            #   @param filter [String]
+            #   @param filter [::String]
             #     If this field is empty, all custom and
             #     system-defined metric descriptors are returned.
             #     Otherwise, the [filter](https://cloud.google.com/monitoring/api/v3/filters)
@@ -380,34 +380,34 @@ module Google
             #     [custom metrics](https://cloud.google.com/monitoring/custom-metrics):
             #
             #         metric.type = starts_with("custom.googleapis.com/")
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     A positive number that is the maximum number of results to return.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     If this field is not empty then it must contain the `nextPageToken` value
             #     returned by a previous call to this method.  Using this field causes the
             #     method to return additional results from the previous method call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Api::MetricDescriptor>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Api::MetricDescriptor>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Api::MetricDescriptor>]
+            # @return [::Gapic::PagedEnumerable<::Google::Api::MetricDescriptor>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_metric_descriptors request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::ListMetricDescriptorsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::ListMetricDescriptorsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_metric_descriptors.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -425,12 +425,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @metric_service_stub.call_rpc :list_metric_descriptors, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @metric_service_stub, :list_metric_descriptors, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @metric_service_stub, :list_metric_descriptors, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -438,12 +438,12 @@ module Google
             #
             # @overload get_metric_descriptor(request, options = nil)
             #   Pass arguments to `get_metric_descriptor` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_metric_descriptor(name: nil)
@@ -451,7 +451,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The metric descriptor on which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID]
@@ -460,26 +460,26 @@ module Google
             #     `"compute.googleapis.com/instance/disk/read_bytes_count"`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Api::MetricDescriptor]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Api::MetricDescriptor]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Api::MetricDescriptor]
+            # @return [::Google::Api::MetricDescriptor]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_metric_descriptor request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_metric_descriptor.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -500,8 +500,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -511,12 +511,12 @@ module Google
             #
             # @overload create_metric_descriptor(request, options = nil)
             #   Pass arguments to `create_metric_descriptor` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_metric_descriptor(name: nil, metric_descriptor: nil)
@@ -524,35 +524,35 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The project on which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
-            #   @param metric_descriptor [Google::Api::MetricDescriptor, Hash]
+            #   @param metric_descriptor [::Google::Api::MetricDescriptor, ::Hash]
             #     Required. The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
             #     descriptor.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Api::MetricDescriptor]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Api::MetricDescriptor]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Api::MetricDescriptor]
+            # @return [::Google::Api::MetricDescriptor]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_metric_descriptor request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_metric_descriptor.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -573,8 +573,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -584,12 +584,12 @@ module Google
             #
             # @overload delete_metric_descriptor(request, options = nil)
             #   Pass arguments to `delete_metric_descriptor` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::DeleteMetricDescriptorRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::DeleteMetricDescriptorRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::DeleteMetricDescriptorRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::DeleteMetricDescriptorRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_metric_descriptor(name: nil)
@@ -597,7 +597,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The metric descriptor on which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID]
@@ -606,26 +606,26 @@ module Google
             #     `"custom.googleapis.com/my_test_metric"`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_metric_descriptor request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::DeleteMetricDescriptorRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::DeleteMetricDescriptorRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_metric_descriptor.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -646,8 +646,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -655,12 +655,12 @@ module Google
             #
             # @overload list_time_series(request, options = nil)
             #   Pass arguments to `list_time_series` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::ListTimeSeriesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::ListTimeSeriesRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_time_series(name: nil, filter: nil, interval: nil, aggregation: nil, order_by: nil, view: nil, page_size: nil, page_token: nil)
@@ -668,11 +668,11 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The project on which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
             #     that specifies which time series should be returned.  The filter must
             #     specify a single metric type, and can additionally specify metric labels
@@ -680,53 +680,53 @@ module Google
             #
             #         metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
             #             metric.labels.instance_name = "my-instance-name"
-            #   @param interval [Google::Cloud::Monitoring::V3::TimeInterval, Hash]
+            #   @param interval [::Google::Cloud::Monitoring::V3::TimeInterval, ::Hash]
             #     Required. The time interval for which results should be returned. Only time series
             #     that contain data points in the specified interval are included
             #     in the response.
-            #   @param aggregation [Google::Cloud::Monitoring::V3::Aggregation, Hash]
+            #   @param aggregation [::Google::Cloud::Monitoring::V3::Aggregation, ::Hash]
             #     Specifies the alignment of data points in individual time series as
             #     well as how to combine the retrieved time series across specified labels.
             #
             #     By default (if no `aggregation` is explicitly specified), the raw time
             #     series data is returned.
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     Unsupported: must be left blank. The points in each time series are
             #     currently returned in reverse time order (most recent to oldest).
-            #   @param view [Google::Cloud::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView]
+            #   @param view [::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView]
             #     Required. Specifies which information is returned about the time series.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     A positive number that is the maximum number of results to return. If
             #     `page_size` is empty or more than 100,000 results, the effective
             #     `page_size` is 100,000 results. If `view` is set to `FULL`, this is the
             #     maximum number of `Points` returned. If `view` is set to `HEADERS`, this is
             #     the maximum number of `TimeSeries` returned.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     If this field is not empty then it must contain the `nextPageToken` value
             #     returned by a previous call to this method.  Using this field causes the
             #     method to return additional results from the previous method call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Monitoring::V3::TimeSeries>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::V3::TimeSeries>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Monitoring::V3::TimeSeries>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::V3::TimeSeries>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_time_series request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::ListTimeSeriesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_time_series.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -744,12 +744,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @metric_service_stub.call_rpc :list_time_series, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @metric_service_stub, :list_time_series, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @metric_service_stub, :list_time_series, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -760,12 +760,12 @@ module Google
             #
             # @overload create_time_series(request, options = nil)
             #   Pass arguments to `create_time_series` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_time_series(name: nil, time_series: nil)
@@ -773,11 +773,11 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The project on which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
-            #   @param time_series [Array<Google::Cloud::Monitoring::V3::TimeSeries, Hash>]
+            #   @param time_series [::Array<::Google::Cloud::Monitoring::V3::TimeSeries, ::Hash>]
             #     Required. The new data to be added to a list of time series.
             #     Adds at most one data point to each of several time series.  The new data
             #     point must be more recent than any other point in its time series.  Each
@@ -787,26 +787,26 @@ module Google
             #     The maximum number of `TimeSeries` objects per `Create` request is 200.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_time_series request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_time_series.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -827,8 +827,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -838,7 +838,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Monitoring::V3::MetricService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Monitoring::V3::MetricService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -849,22 +849,22 @@ module Google
             # To modify the global config, setting the timeout for list_monitored_resource_descriptors
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Monitoring::V3::MetricService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_monitored_resource_descriptors.timeout = 20_000
+            #     ::Google::Cloud::Monitoring::V3::MetricService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_monitored_resource_descriptors.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_monitored_resource_descriptors.timeout = 20_000
+            #     client = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_monitored_resource_descriptors.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"monitoring.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -876,29 +876,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -906,10 +906,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "monitoring.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -917,14 +917,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -965,63 +965,63 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `list_monitored_resource_descriptors`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_monitored_resource_descriptors
                 ##
                 # RPC-specific configuration for `get_monitored_resource_descriptor`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_monitored_resource_descriptor
                 ##
                 # RPC-specific configuration for `list_metric_descriptors`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_metric_descriptors
                 ##
                 # RPC-specific configuration for `get_metric_descriptor`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_metric_descriptor
                 ##
                 # RPC-specific configuration for `create_metric_descriptor`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_metric_descriptor
                 ##
                 # RPC-specific configuration for `delete_metric_descriptor`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_metric_descriptor
                 ##
                 # RPC-specific configuration for `list_time_series`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_time_series
                 ##
                 # RPC-specific configuration for `create_time_series`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_time_series
 
                 # @private
                 def initialize parent_rpcs = nil
                   list_monitored_resource_descriptors_config = parent_rpcs&.list_monitored_resource_descriptors if parent_rpcs&.respond_to? :list_monitored_resource_descriptors
-                  @list_monitored_resource_descriptors = Gapic::Config::Method.new list_monitored_resource_descriptors_config
+                  @list_monitored_resource_descriptors = ::Gapic::Config::Method.new list_monitored_resource_descriptors_config
                   get_monitored_resource_descriptor_config = parent_rpcs&.get_monitored_resource_descriptor if parent_rpcs&.respond_to? :get_monitored_resource_descriptor
-                  @get_monitored_resource_descriptor = Gapic::Config::Method.new get_monitored_resource_descriptor_config
+                  @get_monitored_resource_descriptor = ::Gapic::Config::Method.new get_monitored_resource_descriptor_config
                   list_metric_descriptors_config = parent_rpcs&.list_metric_descriptors if parent_rpcs&.respond_to? :list_metric_descriptors
-                  @list_metric_descriptors = Gapic::Config::Method.new list_metric_descriptors_config
+                  @list_metric_descriptors = ::Gapic::Config::Method.new list_metric_descriptors_config
                   get_metric_descriptor_config = parent_rpcs&.get_metric_descriptor if parent_rpcs&.respond_to? :get_metric_descriptor
-                  @get_metric_descriptor = Gapic::Config::Method.new get_metric_descriptor_config
+                  @get_metric_descriptor = ::Gapic::Config::Method.new get_metric_descriptor_config
                   create_metric_descriptor_config = parent_rpcs&.create_metric_descriptor if parent_rpcs&.respond_to? :create_metric_descriptor
-                  @create_metric_descriptor = Gapic::Config::Method.new create_metric_descriptor_config
+                  @create_metric_descriptor = ::Gapic::Config::Method.new create_metric_descriptor_config
                   delete_metric_descriptor_config = parent_rpcs&.delete_metric_descriptor if parent_rpcs&.respond_to? :delete_metric_descriptor
-                  @delete_metric_descriptor = Gapic::Config::Method.new delete_metric_descriptor_config
+                  @delete_metric_descriptor = ::Gapic::Config::Method.new delete_metric_descriptor_config
                   list_time_series_config = parent_rpcs&.list_time_series if parent_rpcs&.respond_to? :list_time_series
-                  @list_time_series = Gapic::Config::Method.new list_time_series_config
+                  @list_time_series = ::Gapic::Config::Method.new list_time_series_config
                   create_time_series_config = parent_rpcs&.create_time_series if parent_rpcs&.respond_to? :create_time_series
-                  @create_time_series = Gapic::Config::Method.new create_time_series_config
+                  @create_time_series = ::Gapic::Config::Method.new create_time_series_config
 
                   yield self if block_given?
                 end

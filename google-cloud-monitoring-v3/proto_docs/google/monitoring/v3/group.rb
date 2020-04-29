@@ -48,7 +48,7 @@ module Google
         # depending on what resources exist and what filters are associated with the
         # group and its ancestors.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The name of this group. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
@@ -57,26 +57,26 @@ module Google
         #     consisting of the project specified in the call to `CreateGroup`
         #     and a unique `[GROUP_ID]` that is generated automatically.
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     A user-assigned name for this group, used only for display purposes.
         # @!attribute [rw] parent_name
-        #   @return [String]
+        #   @return [::String]
         #     The name of the group's parent, if it has one. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
         #
         #     For groups with no parent, `parent_name` is the empty string, `""`.
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     The filter used to determine which monitored resources belong to this
         #     group.
         # @!attribute [rw] is_cluster
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     If true, the members of this group are considered to be a cluster.
         #     The system can perform additional analysis on groups that are clusters.
         class Group
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

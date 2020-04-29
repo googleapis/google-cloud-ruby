@@ -49,15 +49,15 @@ module Google
             ##
             # Configure the GroupService Client class.
             #
-            # See {Google::Cloud::Monitoring::V3::GroupService::Client::Configuration}
+            # See {::Google::Cloud::Monitoring::V3::GroupService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all GroupService clients:
             #
-            #     Google::Cloud::Monitoring::V3::GroupService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Monitoring::V3::GroupService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -131,7 +131,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Monitoring::V3::GroupService::Client::Configuration}
+            # See {::Google::Cloud::Monitoring::V3::GroupService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -152,13 +152,13 @@ module Google
             # To create a new GroupService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Monitoring::V3::GroupService::Client.new
+            #     client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new
             #
             # To create a new GroupService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the GroupService client.
@@ -185,8 +185,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @group_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Monitoring::V3::GroupService::Stub,
+              @group_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Monitoring::V3::GroupService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -201,12 +201,12 @@ module Google
             #
             # @overload list_groups(request, options = nil)
             #   Pass arguments to `list_groups` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::ListGroupsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::ListGroupsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::ListGroupsRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::ListGroupsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_groups(name: nil, children_of_group: nil, ancestors_of_group: nil, descendants_of_group: nil, page_size: nil, page_token: nil)
@@ -214,18 +214,18 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The project whose groups are to be listed. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
-            #   @param children_of_group [String]
+            #   @param children_of_group [::String]
             #     A group name. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
             #
             #     Returns groups whose `parent_name` field contains the group
             #     name.  If no groups have this parent, the results are empty.
-            #   @param ancestors_of_group [String]
+            #   @param ancestors_of_group [::String]
             #     A group name. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
@@ -234,7 +234,7 @@ module Google
             #     The groups are returned in order, starting with the immediate parent and
             #     ending with the most distant ancestor.  If the specified group has no
             #     immediate parent, the results are empty.
-            #   @param descendants_of_group [String]
+            #   @param descendants_of_group [::String]
             #     A group name. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
@@ -242,34 +242,34 @@ module Google
             #     Returns the descendants of the specified group.  This is a superset of
             #     the results returned by the `children_of_group` filter, and includes
             #     children-of-children, and so forth.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     A positive number that is the maximum number of results to return.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     If this field is not empty then it must contain the `next_page_token` value
             #     returned by a previous call to this method.  Using this field causes the
             #     method to return additional results from the previous method call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Monitoring::V3::Group>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::V3::Group>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Monitoring::V3::Group>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::V3::Group>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_groups request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::ListGroupsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::ListGroupsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_groups.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -287,12 +287,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @group_service_stub.call_rpc :list_groups, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @group_service_stub, :list_groups, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @group_service_stub, :list_groups, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -300,12 +300,12 @@ module Google
             #
             # @overload get_group(request, options = nil)
             #   Pass arguments to `get_group` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::GetGroupRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::GetGroupRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::GetGroupRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::GetGroupRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_group(name: nil)
@@ -313,32 +313,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The group to retrieve. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Monitoring::V3::Group]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Monitoring::V3::Group]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Monitoring::V3::Group]
+            # @return [::Google::Cloud::Monitoring::V3::Group]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_group request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::GetGroupRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::GetGroupRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_group.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -359,8 +359,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -368,12 +368,12 @@ module Google
             #
             # @overload create_group(request, options = nil)
             #   Pass arguments to `create_group` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::CreateGroupRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::CreateGroupRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::CreateGroupRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::CreateGroupRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_group(name: nil, group: nil, validate_only: nil)
@@ -381,37 +381,37 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The project in which to create the group. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
-            #   @param group [Google::Cloud::Monitoring::V3::Group, Hash]
+            #   @param group [::Google::Cloud::Monitoring::V3::Group, ::Hash]
             #     Required. A group definition. It is an error to define the `name` field because
             #     the system assigns the name.
-            #   @param validate_only [Boolean]
+            #   @param validate_only [::Boolean]
             #     If true, validate this request but do not create the group.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Monitoring::V3::Group]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Monitoring::V3::Group]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Monitoring::V3::Group]
+            # @return [::Google::Cloud::Monitoring::V3::Group]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_group request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::CreateGroupRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::CreateGroupRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_group.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -432,8 +432,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -442,12 +442,12 @@ module Google
             #
             # @overload update_group(request, options = nil)
             #   Pass arguments to `update_group` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::UpdateGroupRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::UpdateGroupRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::UpdateGroupRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::UpdateGroupRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_group(group: nil, validate_only: nil)
@@ -455,33 +455,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param group [Google::Cloud::Monitoring::V3::Group, Hash]
+            #   @param group [::Google::Cloud::Monitoring::V3::Group, ::Hash]
             #     Required. The new definition of the group.  All fields of the existing group,
             #     excepting `name`, are replaced with the corresponding fields of this group.
-            #   @param validate_only [Boolean]
+            #   @param validate_only [::Boolean]
             #     If true, validate this request but do not update the existing group.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Monitoring::V3::Group]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Monitoring::V3::Group]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Monitoring::V3::Group]
+            # @return [::Google::Cloud::Monitoring::V3::Group]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_group request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::UpdateGroupRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::UpdateGroupRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_group.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -502,8 +502,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -511,12 +511,12 @@ module Google
             #
             # @overload delete_group(request, options = nil)
             #   Pass arguments to `delete_group` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::DeleteGroupRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::DeleteGroupRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::DeleteGroupRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::DeleteGroupRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_group(name: nil, recursive: nil)
@@ -524,36 +524,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The group to delete. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
-            #   @param recursive [Boolean]
+            #   @param recursive [::Boolean]
             #     If this field is true, then the request means to delete a group with all
             #     its descendants. Otherwise, the request means to delete a group only when
             #     it has no descendants. The default value is false.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_group request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::DeleteGroupRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::DeleteGroupRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_group.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -574,8 +574,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -583,12 +583,12 @@ module Google
             #
             # @overload list_group_members(request, options = nil)
             #   Pass arguments to `list_group_members` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::ListGroupMembersRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::ListGroupMembersRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::ListGroupMembersRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::ListGroupMembersRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_group_members(name: nil, page_size: nil, page_token: nil, filter: nil, interval: nil)
@@ -596,17 +596,17 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The group whose members are listed. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     A positive number that is the maximum number of results to return.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     If this field is not empty then it must contain the `next_page_token` value
             #     returned by a previous call to this method.  Using this field causes the
             #     method to return additional results from the previous method call.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     An optional [list
             #     filter](https://cloud.google.com/monitoring/api/learn_more#filtering)
             #     describing the members to be returned.  The filter may reference the type,
@@ -615,33 +615,33 @@ module Google
             #     use this filter:
             #
             #         `resource.type = "gce_instance"`
-            #   @param interval [Google::Cloud::Monitoring::V3::TimeInterval, Hash]
+            #   @param interval [::Google::Cloud::Monitoring::V3::TimeInterval, ::Hash]
             #     An optional time interval for which results should be returned. Only
             #     members that were part of the group during the specified interval are
             #     included in the response.  If no interval is provided then the group
             #     membership over the last minute is returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Api::MonitoredResource>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Api::MonitoredResource>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Api::MonitoredResource>]
+            # @return [::Gapic::PagedEnumerable<::Google::Api::MonitoredResource>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_group_members request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::ListGroupMembersRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::ListGroupMembersRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_group_members.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -659,12 +659,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @group_service_stub.call_rpc :list_group_members, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @group_service_stub, :list_group_members, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @group_service_stub, :list_group_members, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -674,7 +674,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Monitoring::V3::GroupService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Monitoring::V3::GroupService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -685,22 +685,22 @@ module Google
             # To modify the global config, setting the timeout for list_groups
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Monitoring::V3::GroupService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_groups.timeout = 20_000
+            #     ::Google::Cloud::Monitoring::V3::GroupService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_groups.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_groups.timeout = 20_000
+            #     client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_groups.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"monitoring.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -712,29 +712,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -742,10 +742,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "monitoring.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -753,14 +753,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -801,49 +801,49 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `list_groups`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_groups
                 ##
                 # RPC-specific configuration for `get_group`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_group
                 ##
                 # RPC-specific configuration for `create_group`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_group
                 ##
                 # RPC-specific configuration for `update_group`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_group
                 ##
                 # RPC-specific configuration for `delete_group`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_group
                 ##
                 # RPC-specific configuration for `list_group_members`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_group_members
 
                 # @private
                 def initialize parent_rpcs = nil
                   list_groups_config = parent_rpcs&.list_groups if parent_rpcs&.respond_to? :list_groups
-                  @list_groups = Gapic::Config::Method.new list_groups_config
+                  @list_groups = ::Gapic::Config::Method.new list_groups_config
                   get_group_config = parent_rpcs&.get_group if parent_rpcs&.respond_to? :get_group
-                  @get_group = Gapic::Config::Method.new get_group_config
+                  @get_group = ::Gapic::Config::Method.new get_group_config
                   create_group_config = parent_rpcs&.create_group if parent_rpcs&.respond_to? :create_group
-                  @create_group = Gapic::Config::Method.new create_group_config
+                  @create_group = ::Gapic::Config::Method.new create_group_config
                   update_group_config = parent_rpcs&.update_group if parent_rpcs&.respond_to? :update_group
-                  @update_group = Gapic::Config::Method.new update_group_config
+                  @update_group = ::Gapic::Config::Method.new update_group_config
                   delete_group_config = parent_rpcs&.delete_group if parent_rpcs&.respond_to? :delete_group
-                  @delete_group = Gapic::Config::Method.new delete_group_config
+                  @delete_group = ::Gapic::Config::Method.new delete_group_config
                   list_group_members_config = parent_rpcs&.list_group_members if parent_rpcs&.respond_to? :list_group_members
-                  @list_group_members = Gapic::Config::Method.new list_group_members_config
+                  @list_group_members = ::Gapic::Config::Method.new list_group_members_config
 
                   yield self if block_given?
                 end

@@ -23,7 +23,7 @@ require "google/monitoring/v3/alert_service_pb"
 require "google/monitoring/v3/alert_service_services_pb"
 require "google/cloud/monitoring/v3/alert_policy_service"
 
-class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::Test
+class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
 
   def test_list_alert_policies
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::V3::ListAlertPoliciesResponse.new
+    grpc_response = ::Google::Cloud::Monitoring::V3::ListAlertPoliciesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -62,7 +62,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
 
     list_alert_policies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_alert_policies, name
-      assert_kind_of Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest, request
       assert_equal "hello world", request.name
       assert_equal "hello world", request.filter
       assert_equal "hello world", request.order_by
@@ -73,7 +73,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_alert_policies_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -92,7 +92,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.list_alert_policies Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new(name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_alert_policies ::Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new(name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -106,7 +106,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_alert_policies Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new(name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_alert_policies ::Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new(name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -119,7 +119,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
 
   def test_get_alert_policy
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::V3::AlertPolicy.new
+    grpc_response = ::Google::Cloud::Monitoring::V3::AlertPolicy.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -129,14 +129,14 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
 
     get_alert_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_alert_policy, name
-      assert_kind_of Google::Cloud::Monitoring::V3::GetAlertPolicyRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::V3::GetAlertPolicyRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_alert_policy_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -153,7 +153,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.get_alert_policy Google::Cloud::Monitoring::V3::GetAlertPolicyRequest.new(name: name) do |response, operation|
+      client.get_alert_policy ::Google::Cloud::Monitoring::V3::GetAlertPolicyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -165,7 +165,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.get_alert_policy Google::Cloud::Monitoring::V3::GetAlertPolicyRequest.new(name: name), grpc_options do |response, operation|
+      client.get_alert_policy ::Google::Cloud::Monitoring::V3::GetAlertPolicyRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -177,7 +177,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
 
   def test_create_alert_policy
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::V3::AlertPolicy.new
+    grpc_response = ::Google::Cloud::Monitoring::V3::AlertPolicy.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -188,15 +188,15 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
 
     create_alert_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_alert_policy, name
-      assert_kind_of Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest, request
       assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Monitoring::V3::AlertPolicy), request.alert_policy
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::AlertPolicy), request.alert_policy
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_alert_policy_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -213,7 +213,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.create_alert_policy Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest.new(name: name, alert_policy: alert_policy) do |response, operation|
+      client.create_alert_policy ::Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest.new(name: name, alert_policy: alert_policy) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -225,7 +225,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.create_alert_policy Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest.new(name: name, alert_policy: alert_policy), grpc_options do |response, operation|
+      client.create_alert_policy ::Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest.new(name: name, alert_policy: alert_policy), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -237,7 +237,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
 
   def test_delete_alert_policy
     # Create GRPC objects.
-    grpc_response = Google::Protobuf::Empty.new
+    grpc_response = ::Google::Protobuf::Empty.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -247,14 +247,14 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
 
     delete_alert_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_alert_policy, name
-      assert_kind_of Google::Cloud::Monitoring::V3::DeleteAlertPolicyRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::V3::DeleteAlertPolicyRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, delete_alert_policy_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -271,7 +271,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.delete_alert_policy Google::Cloud::Monitoring::V3::DeleteAlertPolicyRequest.new(name: name) do |response, operation|
+      client.delete_alert_policy ::Google::Cloud::Monitoring::V3::DeleteAlertPolicyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -283,7 +283,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.delete_alert_policy Google::Cloud::Monitoring::V3::DeleteAlertPolicyRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_alert_policy ::Google::Cloud::Monitoring::V3::DeleteAlertPolicyRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -295,7 +295,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
 
   def test_update_alert_policy
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::V3::AlertPolicy.new
+    grpc_response = ::Google::Cloud::Monitoring::V3::AlertPolicy.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -306,15 +306,15 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
 
     update_alert_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_alert_policy, name
-      assert_kind_of Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Monitoring::V3::AlertPolicy), request.alert_policy
+      assert_kind_of ::Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::AlertPolicy), request.alert_policy
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_alert_policy_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -331,7 +331,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.update_alert_policy Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest.new(update_mask: update_mask, alert_policy: alert_policy) do |response, operation|
+      client.update_alert_policy ::Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest.new(update_mask: update_mask, alert_policy: alert_policy) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -343,7 +343,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.update_alert_policy Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest.new(update_mask: update_mask, alert_policy: alert_policy), grpc_options do |response, operation|
+      client.update_alert_policy ::Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest.new(update_mask: update_mask, alert_policy: alert_policy), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -358,7 +358,7 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -368,6 +368,6 @@ class Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest::
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Monitoring::V3::AlertPolicyService::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client::Configuration, config
   end
 end

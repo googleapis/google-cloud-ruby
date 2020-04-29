@@ -27,115 +27,115 @@ module Google
         # Cloud Monitoring, a `Service` acts as the root resource under which
         # operational aspects of the service are accessible.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Resource name for this Service. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Name used for UI elements listing this Service.
         # @!attribute [rw] custom
-        #   @return [Google::Cloud::Monitoring::V3::Service::Custom]
+        #   @return [::Google::Cloud::Monitoring::V3::Service::Custom]
         #     Custom service type.
         # @!attribute [rw] app_engine
-        #   @return [Google::Cloud::Monitoring::V3::Service::AppEngine]
+        #   @return [::Google::Cloud::Monitoring::V3::Service::AppEngine]
         #     Type used for App Engine services.
         # @!attribute [rw] cloud_endpoints
-        #   @return [Google::Cloud::Monitoring::V3::Service::CloudEndpoints]
+        #   @return [::Google::Cloud::Monitoring::V3::Service::CloudEndpoints]
         #     Type used for Cloud Endpoints services.
         # @!attribute [rw] cluster_istio
-        #   @return [Google::Cloud::Monitoring::V3::Service::ClusterIstio]
+        #   @return [::Google::Cloud::Monitoring::V3::Service::ClusterIstio]
         #     Type used for Istio services that live in a Kubernetes cluster.
         # @!attribute [rw] mesh_istio
-        #   @return [Google::Cloud::Monitoring::V3::Service::MeshIstio]
+        #   @return [::Google::Cloud::Monitoring::V3::Service::MeshIstio]
         #     Type used for Istio services scoped to an Istio mesh.
         # @!attribute [rw] telemetry
-        #   @return [Google::Cloud::Monitoring::V3::Service::Telemetry]
+        #   @return [::Google::Cloud::Monitoring::V3::Service::Telemetry]
         #     Configuration for how to query telemetry on a Service.
         class Service
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Custom view of service telemetry. Currently a place-holder pending final
           # design.
           class Custom
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # App Engine service. Learn more at https://cloud.google.com/appengine.
           # @!attribute [rw] module_id
-          #   @return [String]
+          #   @return [::String]
           #     The ID of the App Engine module underlying this service. Corresponds to
           #     the `module_id` resource label in the `gae_app` monitored resource:
           #     https://cloud.google.com/monitoring/api/resources#tag_gae_app
           class AppEngine
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Cloud Endpoints service. Learn more at https://cloud.google.com/endpoints.
           # @!attribute [rw] service
-          #   @return [String]
+          #   @return [::String]
           #     The name of the Cloud Endpoints service underlying this service.
           #     Corresponds to the `service` resource label in the `api` monitored
           #     resource: https://cloud.google.com/monitoring/api/resources#tag_api
           class CloudEndpoints
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Istio service scoped to a single Kubernetes cluster. Learn more at
           # http://istio.io.
           # @!attribute [rw] location
-          #   @return [String]
+          #   @return [::String]
           #     The location of the Kubernetes cluster in which this Istio service is
           #     defined. Corresponds to the `location` resource label in `k8s_cluster`
           #     resources.
           # @!attribute [rw] cluster_name
-          #   @return [String]
+          #   @return [::String]
           #     The name of the Kubernetes cluster in which this Istio service is
           #     defined. Corresponds to the `cluster_name` resource label in
           #     `k8s_cluster` resources.
           # @!attribute [rw] service_namespace
-          #   @return [String]
+          #   @return [::String]
           #     The namespace of the Istio service underlying this service. Corresponds
           #     to the `destination_service_namespace` metric label in Istio metrics.
           # @!attribute [rw] service_name
-          #   @return [String]
+          #   @return [::String]
           #     The name of the Istio service underlying this service. Corresponds to the
           #     `destination_service_name` metric label in Istio metrics.
           class ClusterIstio
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Istio service scoped to an Istio mesh
           # @!attribute [rw] mesh_uid
-          #   @return [String]
+          #   @return [::String]
           #     Identifier for the mesh in which this Istio service is defined.
           #     Corresponds to the `mesh_uid` metric label in Istio metrics.
           # @!attribute [rw] service_namespace
-          #   @return [String]
+          #   @return [::String]
           #     The namespace of the Istio service underlying this service. Corresponds
           #     to the `destination_service_namespace` metric label in Istio metrics.
           # @!attribute [rw] service_name
-          #   @return [String]
+          #   @return [::String]
           #     The name of the Istio service underlying this service. Corresponds to the
           #     `destination_service_name` metric label in Istio metrics.
           class MeshIstio
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Configuration for how to query telemetry on a Service.
           # @!attribute [rw] resource_name
-          #   @return [String]
+          #   @return [::String]
           #     The full name of the resource that defines this service. Formatted as
           #     described in https://cloud.google.com/apis/design/resource_names.
           class Telemetry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -146,34 +146,34 @@ module Google
         # "99% of requests in each rolling week have latency below 200 milliseconds" or
         # "99.5% of requests in each calendar month return successfully."
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Resource name for this `ServiceLevelObjective`. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Name used for UI elements listing this SLO.
         # @!attribute [rw] service_level_indicator
-        #   @return [Google::Cloud::Monitoring::V3::ServiceLevelIndicator]
+        #   @return [::Google::Cloud::Monitoring::V3::ServiceLevelIndicator]
         #     The definition of good service, used to measure and calculate the quality
         #     of the `Service`'s performance with respect to a single aspect of service
         #     quality.
         # @!attribute [rw] goal
-        #   @return [Float]
+        #   @return [::Float]
         #     The fraction of service that must be good in order for this objective to be
         #     met. `0 < goal <= 0.999`.
         # @!attribute [rw] rolling_period
-        #   @return [Google::Protobuf::Duration]
+        #   @return [::Google::Protobuf::Duration]
         #     A rolling time period, semantically "in the past `<rolling_period>`".
         #     Must be an integer multiple of 1 day no larger than 30 days.
         # @!attribute [rw] calendar_period
-        #   @return [Google::Type::CalendarPeriod]
+        #   @return [::Google::Type::CalendarPeriod]
         #     A calendar period, semantically "since the start of the current
         #     `<calendar_period>`". At this time, only `DAY`, `WEEK`, `FORTNIGHT`, and
         #     `MONTH` are supported.
         class ServiceLevelObjective
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # `ServiceLevelObjective.View` determines what form of
           # `ServiceLevelObjective` is returned from `GetServiceLevelObjective`,
@@ -209,17 +209,17 @@ module Google
         # one aspect of service quality, such as fraction of successful queries or
         # fast-enough queries.
         # @!attribute [rw] basic_sli
-        #   @return [Google::Cloud::Monitoring::V3::BasicSli]
+        #   @return [::Google::Cloud::Monitoring::V3::BasicSli]
         #     Basic SLI on a well-known service type.
         # @!attribute [rw] request_based
-        #   @return [Google::Cloud::Monitoring::V3::RequestBasedSli]
+        #   @return [::Google::Cloud::Monitoring::V3::RequestBasedSli]
         #     Request-based SLIs
         # @!attribute [rw] windows_based
-        #   @return [Google::Cloud::Monitoring::V3::WindowsBasedSli]
+        #   @return [::Google::Cloud::Monitoring::V3::WindowsBasedSli]
         #     Windows-based SLIs
         class ServiceLevelIndicator
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # An SLI measuring performance on a well-known service type. Performance will
@@ -229,52 +229,52 @@ module Google
         # monitoring filter to filter that metric down to just the data relevant to
         # this service.
         # @!attribute [rw] method
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     OPTIONAL: The set of RPCs to which this SLI is relevant. Telemetry from
         #     other methods will not be used to calculate performance for this SLI. If
         #     omitted, this SLI applies to all the Service's methods. For service types
         #     that don't support breaking down by method, setting this field will result
         #     in an error.
         # @!attribute [rw] location
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     OPTIONAL: The set of locations to which this SLI is relevant. Telemetry
         #     from other locations will not be used to calculate performance for this
         #     SLI. If omitted, this SLI applies to all locations in which the Service has
         #     activity. For service types that don't support breaking down by location,
         #     setting this field will result in an error.
         # @!attribute [rw] version
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     OPTIONAL: The set of API versions to which this SLI is relevant. Telemetry
         #     from other API versions will not be used to calculate performance for this
         #     SLI. If omitted, this SLI applies to all API versions. For service types
         #     that don't support breaking down by version, setting this field will result
         #     in an error.
         # @!attribute [rw] availability
-        #   @return [Google::Cloud::Monitoring::V3::BasicSli::AvailabilityCriteria]
+        #   @return [::Google::Cloud::Monitoring::V3::BasicSli::AvailabilityCriteria]
         #     Good service is defined to be the count of requests made to this service
         #     that return successfully.
         # @!attribute [rw] latency
-        #   @return [Google::Cloud::Monitoring::V3::BasicSli::LatencyCriteria]
+        #   @return [::Google::Cloud::Monitoring::V3::BasicSli::LatencyCriteria]
         #     Good service is defined to be the count of requests made to this service
         #     that are fast enough with respect to `latency.threshold`.
         class BasicSli
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Future parameters for the availability SLI.
           class AvailabilityCriteria
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Parameters for a latency threshold SLI.
           # @!attribute [rw] threshold
-          #   @return [Google::Protobuf::Duration]
+          #   @return [::Google::Protobuf::Duration]
           #     Good service is defined to be the count of requests made to this service
           #     that return in no more than `threshold`.
           class LatencyCriteria
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -282,31 +282,31 @@ module Google
         # open range "< range.max" is desired, set `range.min = -infinity`. If the open
         # range ">= range.min" is desired, set `range.max = infinity`.
         # @!attribute [rw] min
-        #   @return [Float]
+        #   @return [::Float]
         #     Range minimum.
         # @!attribute [rw] max
-        #   @return [Float]
+        #   @return [::Float]
         #     Range maximum.
         class Range
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Service Level Indicators for which atomic units of service are counted
         # directly.
         # @!attribute [rw] good_total_ratio
-        #   @return [Google::Cloud::Monitoring::V3::TimeSeriesRatio]
+        #   @return [::Google::Cloud::Monitoring::V3::TimeSeriesRatio]
         #     `good_total_ratio` is used when the ratio of `good_service` to
         #     `total_service` is computed from two `TimeSeries`.
         # @!attribute [rw] distribution_cut
-        #   @return [Google::Cloud::Monitoring::V3::DistributionCut]
+        #   @return [::Google::Cloud::Monitoring::V3::DistributionCut]
         #     `distribution_cut` is used when `good_service` is a count of values
         #     aggregated in a `Distribution` that fall into a good range. The
         #     `total_service` is the total count of all values aggregated in the
         #     `Distribution`.
         class RequestBasedSli
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A `TimeSeriesRatio` specifies two `TimeSeries` to use for computing the
@@ -316,27 +316,27 @@ module Google
         # exactly two of good, bad, and total, and the relationship `good_service +
         # bad_service = total_service` will be assumed.
         # @!attribute [rw] good_service_filter
-        #   @return [String]
+        #   @return [::String]
         #     A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
         #     specifying a `TimeSeries` quantifying good service provided. Must have
         #     `ValueType = DOUBLE` or `ValueType = INT64` and must have `MetricKind =
         #     DELTA` or `MetricKind = CUMULATIVE`.
         # @!attribute [rw] bad_service_filter
-        #   @return [String]
+        #   @return [::String]
         #     A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
         #     specifying a `TimeSeries` quantifying bad service, either demanded service
         #     that was not provided or demanded service that was of inadequate quality.
         #     Must have `ValueType = DOUBLE` or `ValueType = INT64` and must have
         #     `MetricKind = DELTA` or `MetricKind = CUMULATIVE`.
         # @!attribute [rw] total_service_filter
-        #   @return [String]
+        #   @return [::String]
         #     A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
         #     specifying a `TimeSeries` quantifying total demanded service. Must have
         #     `ValueType = DOUBLE` or `ValueType = INT64` and must have `MetricKind =
         #     DELTA` or `MetricKind = CUMULATIVE`.
         class TimeSeriesRatio
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A `DistributionCut` defines a `TimeSeries` and thresholds used for measuring
@@ -345,60 +345,60 @@ module Google
         # computed `good_service` will be the count of values x in the `Distribution`
         # such that `range.min <= x < range.max`.
         # @!attribute [rw] distribution_filter
-        #   @return [String]
+        #   @return [::String]
         #     A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
         #     specifying a `TimeSeries` aggregating values. Must have `ValueType =
         #     DISTRIBUTION` and `MetricKind = DELTA` or `MetricKind = CUMULATIVE`.
         # @!attribute [rw] range
-        #   @return [Google::Cloud::Monitoring::V3::Range]
+        #   @return [::Google::Cloud::Monitoring::V3::Range]
         #     Range of values considered "good." For a one-sided range, set one bound to
         #     an infinite value.
         class DistributionCut
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A `WindowsBasedSli` defines `good_service` as the count of time windows for
         # which the provided service was of good quality. Criteria for determining
         # if service was good are embedded in the `window_criterion`.
         # @!attribute [rw] good_bad_metric_filter
-        #   @return [String]
+        #   @return [::String]
         #     A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
         #     specifying a `TimeSeries` with `ValueType = BOOL`. The window is good if
         #     any `true` values appear in the window.
         # @!attribute [rw] good_total_ratio_threshold
-        #   @return [Google::Cloud::Monitoring::V3::WindowsBasedSli::PerformanceThreshold]
+        #   @return [::Google::Cloud::Monitoring::V3::WindowsBasedSli::PerformanceThreshold]
         #     A window is good if its `performance` is high enough.
         # @!attribute [rw] metric_mean_in_range
-        #   @return [Google::Cloud::Monitoring::V3::WindowsBasedSli::MetricRange]
+        #   @return [::Google::Cloud::Monitoring::V3::WindowsBasedSli::MetricRange]
         #     A window is good if the metric's value is in a good range, averaged
         #     across returned streams.
         # @!attribute [rw] metric_sum_in_range
-        #   @return [Google::Cloud::Monitoring::V3::WindowsBasedSli::MetricRange]
+        #   @return [::Google::Cloud::Monitoring::V3::WindowsBasedSli::MetricRange]
         #     A window is good if the metric's value is in a good range, summed across
         #     returned streams.
         # @!attribute [rw] window_period
-        #   @return [Google::Protobuf::Duration]
+        #   @return [::Google::Protobuf::Duration]
         #     Duration over which window quality is evaluated. Must be an integer
         #     fraction of a day and at least `60s`.
         class WindowsBasedSli
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # A `PerformanceThreshold` is used when each window is good when that window
           # has a sufficiently high `performance`.
           # @!attribute [rw] performance
-          #   @return [Google::Cloud::Monitoring::V3::RequestBasedSli]
+          #   @return [::Google::Cloud::Monitoring::V3::RequestBasedSli]
           #     `RequestBasedSli` to evaluate to judge window quality.
           # @!attribute [rw] basic_sli_performance
-          #   @return [Google::Cloud::Monitoring::V3::BasicSli]
+          #   @return [::Google::Cloud::Monitoring::V3::BasicSli]
           #     `BasicSli` to evaluate to judge window quality.
           # @!attribute [rw] threshold
-          #   @return [Float]
+          #   @return [::Float]
           #     If window `performance >= threshold`, the window is counted as good.
           class PerformanceThreshold
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A `MetricRange` is used when each window is good when the value x of a
@@ -406,16 +406,16 @@ module Google
           # `TimeSeries` must have `ValueType = INT64` or `ValueType = DOUBLE` and
           # `MetricKind = GAUGE`.
           # @!attribute [rw] time_series
-          #   @return [String]
+          #   @return [::String]
           #     A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
           #     specifying the `TimeSeries` to use for evaluating window quality.
           # @!attribute [rw] range
-          #   @return [Google::Cloud::Monitoring::V3::Range]
+          #   @return [::Google::Cloud::Monitoring::V3::Range]
           #     Range of values considered "good." For a one-sided range, set one bound
           #     to an infinite value.
           class MetricRange
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

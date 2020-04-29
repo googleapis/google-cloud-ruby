@@ -39,15 +39,15 @@ module Google
             ##
             # Configure the NotificationChannelService Client class.
             #
-            # See {Google::Cloud::Monitoring::V3::NotificationChannelService::Client::Configuration}
+            # See {::Google::Cloud::Monitoring::V3::NotificationChannelService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all NotificationChannelService clients:
             #
-            #     Google::Cloud::Monitoring::V3::NotificationChannelService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -141,7 +141,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Monitoring::V3::NotificationChannelService::Client::Configuration}
+            # See {::Google::Cloud::Monitoring::V3::NotificationChannelService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -162,13 +162,13 @@ module Google
             # To create a new NotificationChannelService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new
+            #     client = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new
             #
             # To create a new NotificationChannelService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the NotificationChannelService client.
@@ -195,8 +195,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @notification_channel_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Monitoring::V3::NotificationChannelService::Stub,
+              @notification_channel_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Monitoring::V3::NotificationChannelService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -212,12 +212,12 @@ module Google
             #
             # @overload list_notification_channel_descriptors(request, options = nil)
             #   Pass arguments to `list_notification_channel_descriptors` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_notification_channel_descriptors(name: nil, page_size: nil, page_token: nil)
@@ -225,7 +225,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The REST resource name of the parent from which to retrieve
             #     the notification channel descriptors. The expected syntax is:
             #
@@ -233,38 +233,38 @@ module Google
             #
             #     Note that this names the parent container in which to look for the
             #     descriptors; to retrieve a single descriptor by name, use the
-            #     {Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel_descriptor GetNotificationChannelDescriptor}
+            #     {::Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel_descriptor GetNotificationChannelDescriptor}
             #     operation, instead.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of results to return in a single response. If
             #     not set to a positive number, a reasonable value will be chosen by the
             #     service.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     If non-empty, `page_token` must contain a value returned as the
             #     `next_page_token` in a previous response to request the next set
             #     of results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Monitoring::V3::NotificationChannelDescriptor>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::V3::NotificationChannelDescriptor>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Monitoring::V3::NotificationChannelDescriptor>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::V3::NotificationChannelDescriptor>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_notification_channel_descriptors request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_notification_channel_descriptors.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -282,12 +282,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @notification_channel_service_stub.call_rpc :list_notification_channel_descriptors, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @notification_channel_service_stub, :list_notification_channel_descriptors, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @notification_channel_service_stub, :list_notification_channel_descriptors, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -296,12 +296,12 @@ module Google
             #
             # @overload get_notification_channel_descriptor(request, options = nil)
             #   Pass arguments to `get_notification_channel_descriptor` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_notification_channel_descriptor(name: nil)
@@ -309,32 +309,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The channel type for which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/notificationChannelDescriptors/[CHANNEL_TYPE]
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Monitoring::V3::NotificationChannelDescriptor]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Monitoring::V3::NotificationChannelDescriptor]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Monitoring::V3::NotificationChannelDescriptor]
+            # @return [::Google::Cloud::Monitoring::V3::NotificationChannelDescriptor]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_notification_channel_descriptor request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_notification_channel_descriptor.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -355,8 +355,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -364,12 +364,12 @@ module Google
             #
             # @overload list_notification_channels(request, options = nil)
             #   Pass arguments to `list_notification_channels` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_notification_channels(name: nil, filter: nil, order_by: nil, page_size: nil, page_token: nil)
@@ -377,7 +377,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The project on which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
@@ -386,51 +386,51 @@ module Google
             #     in which to look for the notification channels; it does not name a
             #     specific channel. To query a specific channel by REST resource name, use
             #     the
-            #     {Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel `GetNotificationChannel`}
+            #     {::Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel `GetNotificationChannel`}
             #     operation.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     If provided, this field specifies the criteria that must be met by
             #     notification channels to be included in the response.
             #
             #     For more details, see [sorting and
             #     filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     A comma-separated list of fields by which to sort the result. Supports
             #     the same set of fields as in `filter`. Entries can be prefixed with
             #     a minus sign to sort in descending rather than ascending order.
             #
             #     For more details, see [sorting and
             #     filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of results to return in a single response. If
             #     not set to a positive number, a reasonable value will be chosen by the
             #     service.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     If non-empty, `page_token` must contain a value returned as the
             #     `next_page_token` in a previous response to request the next set
             #     of results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Monitoring::V3::NotificationChannel>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::V3::NotificationChannel>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Monitoring::V3::NotificationChannel>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::V3::NotificationChannel>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_notification_channels request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_notification_channels.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -448,12 +448,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @notification_channel_service_stub.call_rpc :list_notification_channels, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @notification_channel_service_stub, :list_notification_channels, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @notification_channel_service_stub, :list_notification_channels, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -465,12 +465,12 @@ module Google
             #
             # @overload get_notification_channel(request, options = nil)
             #   Pass arguments to `get_notification_channel` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::GetNotificationChannelRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::GetNotificationChannelRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::GetNotificationChannelRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::GetNotificationChannelRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_notification_channel(name: nil)
@@ -478,32 +478,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The channel for which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Monitoring::V3::NotificationChannel]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Monitoring::V3::NotificationChannel]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Monitoring::V3::NotificationChannel]
+            # @return [::Google::Cloud::Monitoring::V3::NotificationChannel]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_notification_channel request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::GetNotificationChannelRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::GetNotificationChannelRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_notification_channel.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -524,8 +524,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -534,12 +534,12 @@ module Google
             #
             # @overload create_notification_channel(request, options = nil)
             #   Pass arguments to `create_notification_channel` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_notification_channel(name: nil, notification_channel: nil)
@@ -547,7 +547,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The project on which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
@@ -556,30 +556,30 @@ module Google
             #     written, this does not name the newly created channel. The resulting
             #     channel's name will have a normalized version of this field as a prefix,
             #     but will add `/notificationChannels/[CHANNEL_ID]` to identify the channel.
-            #   @param notification_channel [Google::Cloud::Monitoring::V3::NotificationChannel, Hash]
+            #   @param notification_channel [::Google::Cloud::Monitoring::V3::NotificationChannel, ::Hash]
             #     Required. The definition of the `NotificationChannel` to create.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Monitoring::V3::NotificationChannel]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Monitoring::V3::NotificationChannel]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Monitoring::V3::NotificationChannel]
+            # @return [::Google::Cloud::Monitoring::V3::NotificationChannel]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_notification_channel request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_notification_channel.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -600,8 +600,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -610,12 +610,12 @@ module Google
             #
             # @overload update_notification_channel(request, options = nil)
             #   Pass arguments to `update_notification_channel` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_notification_channel(update_mask: nil, notification_channel: nil)
@@ -623,35 +623,35 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The fields to update.
-            #   @param notification_channel [Google::Cloud::Monitoring::V3::NotificationChannel, Hash]
+            #   @param notification_channel [::Google::Cloud::Monitoring::V3::NotificationChannel, ::Hash]
             #     Required. A description of the changes to be applied to the specified
             #     notification channel. The description must provide a definition for
             #     fields to be updated; the names of these fields should also be
             #     included in the `update_mask`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Monitoring::V3::NotificationChannel]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Monitoring::V3::NotificationChannel]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Monitoring::V3::NotificationChannel]
+            # @return [::Google::Cloud::Monitoring::V3::NotificationChannel]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_notification_channel request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_notification_channel.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -672,8 +672,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -681,12 +681,12 @@ module Google
             #
             # @overload delete_notification_channel(request, options = nil)
             #   Pass arguments to `delete_notification_channel` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_notification_channel(name: nil, force: nil)
@@ -694,37 +694,37 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The channel for which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]
-            #   @param force [Boolean]
+            #   @param force [::Boolean]
             #     If true, the notification channel will be deleted regardless of its
             #     use in alert policies (the policies will be updated to remove the
             #     channel). If false, channels that are still referenced by an existing
             #     alerting policy will fail to be deleted in a delete operation.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_notification_channel request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_notification_channel.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -745,8 +745,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -755,12 +755,12 @@ module Google
             #
             # @overload send_notification_channel_verification_code(request, options = nil)
             #   Pass arguments to `send_notification_channel_verification_code` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload send_notification_channel_verification_code(name: nil)
@@ -768,30 +768,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The notification channel to which to send a verification code.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def send_notification_channel_verification_code request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.send_notification_channel_verification_code.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -812,8 +812,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -841,12 +841,12 @@ module Google
             #
             # @overload get_notification_channel_verification_code(request, options = nil)
             #   Pass arguments to `get_notification_channel_verification_code` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_notification_channel_verification_code(name: nil, expire_time: nil)
@@ -854,11 +854,11 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The notification channel for which a verification code is to be generated
             #     and retrieved. This must name a channel that is already verified; if
             #     the specified channel is not verified, the request will fail.
-            #   @param expire_time [Google::Protobuf::Timestamp, Hash]
+            #   @param expire_time [::Google::Protobuf::Timestamp, ::Hash]
             #     The desired expiration time. If specified, the API will guarantee that
             #     the returned code will not be valid after the specified timestamp;
             #     however, the API cannot guarantee that the returned code will be
@@ -870,26 +870,26 @@ module Google
             #     impose an upper limit on the maximum expiration that is permitted).
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeResponse]
+            # @return [::Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_notification_channel_verification_code request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_notification_channel_verification_code.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -910,8 +910,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -921,12 +921,12 @@ module Google
             #
             # @overload verify_notification_channel(request, options = nil)
             #   Pass arguments to `verify_notification_channel` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload verify_notification_channel(name: nil, code: nil)
@@ -934,9 +934,9 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The notification channel to verify.
-            #   @param code [String]
+            #   @param code [::String]
             #     Required. The verification code that was delivered to the channel as
             #     a result of invoking the `SendNotificationChannelVerificationCode` API
             #     method or that was retrieved from a verified channel via
@@ -946,26 +946,26 @@ module Google
             #     make any assumptions regarding the structure or format of the code).
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Monitoring::V3::NotificationChannel]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Monitoring::V3::NotificationChannel]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Monitoring::V3::NotificationChannel]
+            # @return [::Google::Cloud::Monitoring::V3::NotificationChannel]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def verify_notification_channel request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.verify_notification_channel.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -986,8 +986,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -997,7 +997,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Monitoring::V3::NotificationChannelService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Monitoring::V3::NotificationChannelService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -1008,22 +1008,22 @@ module Google
             # To modify the global config, setting the timeout for list_notification_channel_descriptors
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Monitoring::V3::NotificationChannelService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_notification_channel_descriptors.timeout = 20_000
+            #     ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_notification_channel_descriptors.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_notification_channel_descriptors.timeout = 20_000
+            #     client = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_notification_channel_descriptors.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"monitoring.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -1035,29 +1035,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -1065,10 +1065,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "monitoring.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -1076,14 +1076,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -1124,77 +1124,77 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `list_notification_channel_descriptors`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_notification_channel_descriptors
                 ##
                 # RPC-specific configuration for `get_notification_channel_descriptor`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_notification_channel_descriptor
                 ##
                 # RPC-specific configuration for `list_notification_channels`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_notification_channels
                 ##
                 # RPC-specific configuration for `get_notification_channel`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_notification_channel
                 ##
                 # RPC-specific configuration for `create_notification_channel`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_notification_channel
                 ##
                 # RPC-specific configuration for `update_notification_channel`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_notification_channel
                 ##
                 # RPC-specific configuration for `delete_notification_channel`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_notification_channel
                 ##
                 # RPC-specific configuration for `send_notification_channel_verification_code`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :send_notification_channel_verification_code
                 ##
                 # RPC-specific configuration for `get_notification_channel_verification_code`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_notification_channel_verification_code
                 ##
                 # RPC-specific configuration for `verify_notification_channel`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :verify_notification_channel
 
                 # @private
                 def initialize parent_rpcs = nil
                   list_notification_channel_descriptors_config = parent_rpcs&.list_notification_channel_descriptors if parent_rpcs&.respond_to? :list_notification_channel_descriptors
-                  @list_notification_channel_descriptors = Gapic::Config::Method.new list_notification_channel_descriptors_config
+                  @list_notification_channel_descriptors = ::Gapic::Config::Method.new list_notification_channel_descriptors_config
                   get_notification_channel_descriptor_config = parent_rpcs&.get_notification_channel_descriptor if parent_rpcs&.respond_to? :get_notification_channel_descriptor
-                  @get_notification_channel_descriptor = Gapic::Config::Method.new get_notification_channel_descriptor_config
+                  @get_notification_channel_descriptor = ::Gapic::Config::Method.new get_notification_channel_descriptor_config
                   list_notification_channels_config = parent_rpcs&.list_notification_channels if parent_rpcs&.respond_to? :list_notification_channels
-                  @list_notification_channels = Gapic::Config::Method.new list_notification_channels_config
+                  @list_notification_channels = ::Gapic::Config::Method.new list_notification_channels_config
                   get_notification_channel_config = parent_rpcs&.get_notification_channel if parent_rpcs&.respond_to? :get_notification_channel
-                  @get_notification_channel = Gapic::Config::Method.new get_notification_channel_config
+                  @get_notification_channel = ::Gapic::Config::Method.new get_notification_channel_config
                   create_notification_channel_config = parent_rpcs&.create_notification_channel if parent_rpcs&.respond_to? :create_notification_channel
-                  @create_notification_channel = Gapic::Config::Method.new create_notification_channel_config
+                  @create_notification_channel = ::Gapic::Config::Method.new create_notification_channel_config
                   update_notification_channel_config = parent_rpcs&.update_notification_channel if parent_rpcs&.respond_to? :update_notification_channel
-                  @update_notification_channel = Gapic::Config::Method.new update_notification_channel_config
+                  @update_notification_channel = ::Gapic::Config::Method.new update_notification_channel_config
                   delete_notification_channel_config = parent_rpcs&.delete_notification_channel if parent_rpcs&.respond_to? :delete_notification_channel
-                  @delete_notification_channel = Gapic::Config::Method.new delete_notification_channel_config
+                  @delete_notification_channel = ::Gapic::Config::Method.new delete_notification_channel_config
                   send_notification_channel_verification_code_config = parent_rpcs&.send_notification_channel_verification_code if parent_rpcs&.respond_to? :send_notification_channel_verification_code
-                  @send_notification_channel_verification_code = Gapic::Config::Method.new send_notification_channel_verification_code_config
+                  @send_notification_channel_verification_code = ::Gapic::Config::Method.new send_notification_channel_verification_code_config
                   get_notification_channel_verification_code_config = parent_rpcs&.get_notification_channel_verification_code if parent_rpcs&.respond_to? :get_notification_channel_verification_code
-                  @get_notification_channel_verification_code = Gapic::Config::Method.new get_notification_channel_verification_code_config
+                  @get_notification_channel_verification_code = ::Gapic::Config::Method.new get_notification_channel_verification_code_config
                   verify_notification_channel_config = parent_rpcs&.verify_notification_channel if parent_rpcs&.respond_to? :verify_notification_channel
-                  @verify_notification_channel = Gapic::Config::Method.new verify_notification_channel_config
+                  @verify_notification_channel = ::Gapic::Config::Method.new verify_notification_channel_config
 
                   yield self if block_given?
                 end

@@ -24,7 +24,7 @@ module Google
       module V3
         module UptimeCheckService
           # Credentials for the UptimeCheckService API.
-          class Credentials < Google::Auth::Credentials
+          class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform",
               "https://www.googleapis.com/auth/monitoring",

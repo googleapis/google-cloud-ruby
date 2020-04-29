@@ -51,28 +51,28 @@ module Google
             #   @param folder [String]
             #   @param alert_policy [String]
             #
-            # @return [String]
+            # @return [::String]
             def alert_policy_path **args
               resources = {
                 "alert_policy:project"      => (proc do |project:, alert_policy:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/alertPolicies/#{alert_policy}"
                 end),
                 "alert_policy:organization" => (proc do |organization:, alert_policy:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
                   "organizations/#{organization}/alertPolicies/#{alert_policy}"
                 end),
                 "alert_policy:folder"       => (proc do |folder:, alert_policy:|
-                  raise ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/alertPolicies/#{alert_policy}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
@@ -106,31 +106,31 @@ module Google
             #   @param alert_policy [String]
             #   @param condition [String]
             #
-            # @return [String]
+            # @return [::String]
             def alert_policy_condition_path **args
               resources = {
                 "alert_policy:condition:project"      => (proc do |project:, alert_policy:, condition:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "alert_policy cannot contain /" if alert_policy.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "alert_policy cannot contain /" if alert_policy.to_s.include? "/"
 
                   "projects/#{project}/alertPolicies/#{alert_policy}/conditions/#{condition}"
                 end),
                 "alert_policy:condition:organization" => (proc do |organization:, alert_policy:, condition:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
-                  raise ArgumentError, "alert_policy cannot contain /" if alert_policy.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "alert_policy cannot contain /" if alert_policy.to_s.include? "/"
 
                   "organizations/#{organization}/alertPolicies/#{alert_policy}/conditions/#{condition}"
                 end),
                 "alert_policy:condition:folder"       => (proc do |folder:, alert_policy:, condition:|
-                  raise ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
-                  raise ArgumentError, "alert_policy cannot contain /" if alert_policy.to_s.include? "/"
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+                  raise ::ArgumentError, "alert_policy cannot contain /" if alert_policy.to_s.include? "/"
 
                   "folders/#{folder}/alertPolicies/#{alert_policy}/conditions/#{condition}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
@@ -143,7 +143,7 @@ module Google
             #
             # @param folder [String]
             #
-            # @return [String]
+            # @return [::String]
             def folder_path folder:
               "folders/#{folder}"
             end
@@ -157,7 +157,7 @@ module Google
             #
             # @param organization [String]
             #
-            # @return [String]
+            # @return [::String]
             def organization_path organization:
               "organizations/#{organization}"
             end
@@ -171,7 +171,7 @@ module Google
             #
             # @param project [String]
             #
-            # @return [String]
+            # @return [::String]
             def project_path project:
               "projects/#{project}"
             end

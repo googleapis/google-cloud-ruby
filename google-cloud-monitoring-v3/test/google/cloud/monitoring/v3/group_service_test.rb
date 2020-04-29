@@ -23,7 +23,7 @@ require "google/monitoring/v3/group_service_pb"
 require "google/monitoring/v3/group_service_services_pb"
 require "google/cloud/monitoring/v3/group_service"
 
-class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
+class ::Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
   def test_list_groups
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::V3::ListGroupsResponse.new
+    grpc_response = ::Google::Cloud::Monitoring::V3::ListGroupsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -58,14 +58,14 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
     list_groups_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_groups, name
-      assert_kind_of Google::Cloud::Monitoring::V3::ListGroupsRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::V3::ListGroupsRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, list_groups_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -84,7 +84,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list_groups Google::Cloud::Monitoring::V3::ListGroupsRequest.new(name: name) do |response, operation|
+      client.list_groups ::Google::Cloud::Monitoring::V3::ListGroupsRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -98,7 +98,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_groups Google::Cloud::Monitoring::V3::ListGroupsRequest.new(name: name), grpc_options do |response, operation|
+      client.list_groups ::Google::Cloud::Monitoring::V3::ListGroupsRequest.new(name: name), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -111,7 +111,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
   def test_get_group
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::V3::Group.new
+    grpc_response = ::Google::Cloud::Monitoring::V3::Group.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -121,14 +121,14 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
     get_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_group, name
-      assert_kind_of Google::Cloud::Monitoring::V3::GetGroupRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::V3::GetGroupRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_group_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -145,7 +145,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.get_group Google::Cloud::Monitoring::V3::GetGroupRequest.new(name: name) do |response, operation|
+      client.get_group ::Google::Cloud::Monitoring::V3::GetGroupRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -157,7 +157,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_group Google::Cloud::Monitoring::V3::GetGroupRequest.new(name: name), grpc_options do |response, operation|
+      client.get_group ::Google::Cloud::Monitoring::V3::GetGroupRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -169,7 +169,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
   def test_create_group
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::V3::Group.new
+    grpc_response = ::Google::Cloud::Monitoring::V3::Group.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -181,16 +181,16 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
     create_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_group, name
-      assert_kind_of Google::Cloud::Monitoring::V3::CreateGroupRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::V3::CreateGroupRequest, request
       assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Monitoring::V3::Group), request.group
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::Group), request.group
       assert_equal true, request.validate_only
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_group_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -207,7 +207,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.create_group Google::Cloud::Monitoring::V3::CreateGroupRequest.new(name: name, group: group, validate_only: validate_only) do |response, operation|
+      client.create_group ::Google::Cloud::Monitoring::V3::CreateGroupRequest.new(name: name, group: group, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -219,7 +219,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_group Google::Cloud::Monitoring::V3::CreateGroupRequest.new(name: name, group: group, validate_only: validate_only), grpc_options do |response, operation|
+      client.create_group ::Google::Cloud::Monitoring::V3::CreateGroupRequest.new(name: name, group: group, validate_only: validate_only), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -231,7 +231,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
   def test_update_group
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::V3::Group.new
+    grpc_response = ::Google::Cloud::Monitoring::V3::Group.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -242,15 +242,15 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
     update_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_group, name
-      assert_kind_of Google::Cloud::Monitoring::V3::UpdateGroupRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Monitoring::V3::Group), request.group
+      assert_kind_of ::Google::Cloud::Monitoring::V3::UpdateGroupRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::Group), request.group
       assert_equal true, request.validate_only
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_group_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -267,7 +267,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.update_group Google::Cloud::Monitoring::V3::UpdateGroupRequest.new(group: group, validate_only: validate_only) do |response, operation|
+      client.update_group ::Google::Cloud::Monitoring::V3::UpdateGroupRequest.new(group: group, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -279,7 +279,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_group Google::Cloud::Monitoring::V3::UpdateGroupRequest.new(group: group, validate_only: validate_only), grpc_options do |response, operation|
+      client.update_group ::Google::Cloud::Monitoring::V3::UpdateGroupRequest.new(group: group, validate_only: validate_only), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -291,7 +291,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
   def test_delete_group
     # Create GRPC objects.
-    grpc_response = Google::Protobuf::Empty.new
+    grpc_response = ::Google::Protobuf::Empty.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -302,7 +302,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
     delete_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_group, name
-      assert_kind_of Google::Cloud::Monitoring::V3::DeleteGroupRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::V3::DeleteGroupRequest, request
       assert_equal "hello world", request.name
       assert_equal true, request.recursive
       refute_nil options
@@ -310,7 +310,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_group_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -327,7 +327,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.delete_group Google::Cloud::Monitoring::V3::DeleteGroupRequest.new(name: name, recursive: recursive) do |response, operation|
+      client.delete_group ::Google::Cloud::Monitoring::V3::DeleteGroupRequest.new(name: name, recursive: recursive) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -339,7 +339,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_group Google::Cloud::Monitoring::V3::DeleteGroupRequest.new(name: name, recursive: recursive), grpc_options do |response, operation|
+      client.delete_group ::Google::Cloud::Monitoring::V3::DeleteGroupRequest.new(name: name, recursive: recursive), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -351,7 +351,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
   def test_list_group_members
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::V3::ListGroupMembersResponse.new
+    grpc_response = ::Google::Cloud::Monitoring::V3::ListGroupMembersResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -365,18 +365,18 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
     list_group_members_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_group_members, name
-      assert_kind_of Google::Cloud::Monitoring::V3::ListGroupMembersRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::V3::ListGroupMembersRequest, request
       assert_equal "hello world", request.name
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
       assert_equal "hello world", request.filter
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Monitoring::V3::TimeInterval), request.interval
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::TimeInterval), request.interval
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, list_group_members_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -395,7 +395,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list_group_members Google::Cloud::Monitoring::V3::ListGroupMembersRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, interval: interval) do |response, operation|
+      client.list_group_members ::Google::Cloud::Monitoring::V3::ListGroupMembersRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, interval: interval) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -409,7 +409,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_group_members Google::Cloud::Monitoring::V3::ListGroupMembersRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, interval: interval), grpc_options do |response, operation|
+      client.list_group_members ::Google::Cloud::Monitoring::V3::ListGroupMembersRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, interval: interval), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -425,7 +425,7 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -435,6 +435,6 @@ class Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Monitoring::V3::GroupService::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Monitoring::V3::GroupService::Client::Configuration, config
   end
 end

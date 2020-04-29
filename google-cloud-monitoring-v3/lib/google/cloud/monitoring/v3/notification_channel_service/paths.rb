@@ -33,7 +33,7 @@ module Google
             #
             # @param folder [String]
             #
-            # @return [String]
+            # @return [::String]
             def folder_path folder:
               "folders/#{folder}"
             end
@@ -65,28 +65,28 @@ module Google
             #   @param folder [String]
             #   @param notification_channel [String]
             #
-            # @return [String]
+            # @return [::String]
             def notification_channel_path **args
               resources = {
                 "notification_channel:project"      => (proc do |project:, notification_channel:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/notificationChannels/#{notification_channel}"
                 end),
                 "notification_channel:organization" => (proc do |organization:, notification_channel:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
                   "organizations/#{organization}/notificationChannels/#{notification_channel}"
                 end),
                 "folder:notification_channel"       => (proc do |folder:, notification_channel:|
-                  raise ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/notificationChannels/#{notification_channel}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
@@ -117,28 +117,28 @@ module Google
             #   @param folder [String]
             #   @param channel_descriptor [String]
             #
-            # @return [String]
+            # @return [::String]
             def notification_channel_descriptor_path **args
               resources = {
                 "channel_descriptor:project"      => (proc do |project:, channel_descriptor:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/notificationChannelDescriptors/#{channel_descriptor}"
                 end),
                 "channel_descriptor:organization" => (proc do |organization:, channel_descriptor:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
                   "organizations/#{organization}/notificationChannelDescriptors/#{channel_descriptor}"
                 end),
                 "channel_descriptor:folder"       => (proc do |folder:, channel_descriptor:|
-                  raise ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/notificationChannelDescriptors/#{channel_descriptor}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
@@ -151,7 +151,7 @@ module Google
             #
             # @param organization [String]
             #
-            # @return [String]
+            # @return [::String]
             def organization_path organization:
               "organizations/#{organization}"
             end
@@ -165,7 +165,7 @@ module Google
             #
             # @param project [String]
             #
-            # @return [String]
+            # @return [::String]
             def project_path project:
               "projects/#{project}"
             end

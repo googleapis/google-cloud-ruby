@@ -23,7 +23,7 @@ require "google/monitoring/v3/uptime_service_pb"
 require "google/monitoring/v3/uptime_service_services_pb"
 require "google/cloud/monitoring/v3/uptime_check_service"
 
-class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::Test
+class ::Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
 
   def test_list_uptime_check_configs
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::V3::ListUptimeCheckConfigsResponse.new
+    grpc_response = ::Google::Cloud::Monitoring::V3::ListUptimeCheckConfigsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -60,7 +60,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
 
     list_uptime_check_configs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_uptime_check_configs, name
-      assert_kind_of Google::Cloud::Monitoring::V3::ListUptimeCheckConfigsRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::V3::ListUptimeCheckConfigsRequest, request
       assert_equal "hello world", request.parent
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
@@ -69,7 +69,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_uptime_check_configs_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -88,7 +88,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.list_uptime_check_configs Google::Cloud::Monitoring::V3::ListUptimeCheckConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_uptime_check_configs ::Google::Cloud::Monitoring::V3::ListUptimeCheckConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -102,7 +102,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_uptime_check_configs Google::Cloud::Monitoring::V3::ListUptimeCheckConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_uptime_check_configs ::Google::Cloud::Monitoring::V3::ListUptimeCheckConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -115,7 +115,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
 
   def test_get_uptime_check_config
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::V3::UptimeCheckConfig.new
+    grpc_response = ::Google::Cloud::Monitoring::V3::UptimeCheckConfig.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -125,14 +125,14 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
 
     get_uptime_check_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_uptime_check_config, name
-      assert_kind_of Google::Cloud::Monitoring::V3::GetUptimeCheckConfigRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::V3::GetUptimeCheckConfigRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_uptime_check_config_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -149,7 +149,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.get_uptime_check_config Google::Cloud::Monitoring::V3::GetUptimeCheckConfigRequest.new(name: name) do |response, operation|
+      client.get_uptime_check_config ::Google::Cloud::Monitoring::V3::GetUptimeCheckConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -161,7 +161,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.get_uptime_check_config Google::Cloud::Monitoring::V3::GetUptimeCheckConfigRequest.new(name: name), grpc_options do |response, operation|
+      client.get_uptime_check_config ::Google::Cloud::Monitoring::V3::GetUptimeCheckConfigRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -173,7 +173,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
 
   def test_create_uptime_check_config
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::V3::UptimeCheckConfig.new
+    grpc_response = ::Google::Cloud::Monitoring::V3::UptimeCheckConfig.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -184,15 +184,15 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
 
     create_uptime_check_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_uptime_check_config, name
-      assert_kind_of Google::Cloud::Monitoring::V3::CreateUptimeCheckConfigRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::V3::CreateUptimeCheckConfigRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Monitoring::V3::UptimeCheckConfig), request.uptime_check_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::UptimeCheckConfig), request.uptime_check_config
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_uptime_check_config_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -209,7 +209,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.create_uptime_check_config Google::Cloud::Monitoring::V3::CreateUptimeCheckConfigRequest.new(parent: parent, uptime_check_config: uptime_check_config) do |response, operation|
+      client.create_uptime_check_config ::Google::Cloud::Monitoring::V3::CreateUptimeCheckConfigRequest.new(parent: parent, uptime_check_config: uptime_check_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -221,7 +221,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.create_uptime_check_config Google::Cloud::Monitoring::V3::CreateUptimeCheckConfigRequest.new(parent: parent, uptime_check_config: uptime_check_config), grpc_options do |response, operation|
+      client.create_uptime_check_config ::Google::Cloud::Monitoring::V3::CreateUptimeCheckConfigRequest.new(parent: parent, uptime_check_config: uptime_check_config), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -233,7 +233,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
 
   def test_update_uptime_check_config
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::V3::UptimeCheckConfig.new
+    grpc_response = ::Google::Cloud::Monitoring::V3::UptimeCheckConfig.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -244,15 +244,15 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
 
     update_uptime_check_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_uptime_check_config, name
-      assert_kind_of Google::Cloud::Monitoring::V3::UpdateUptimeCheckConfigRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Monitoring::V3::UptimeCheckConfig), request.uptime_check_config
+      assert_kind_of ::Google::Cloud::Monitoring::V3::UpdateUptimeCheckConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::UptimeCheckConfig), request.uptime_check_config
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_uptime_check_config_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -269,7 +269,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.update_uptime_check_config Google::Cloud::Monitoring::V3::UpdateUptimeCheckConfigRequest.new(update_mask: update_mask, uptime_check_config: uptime_check_config) do |response, operation|
+      client.update_uptime_check_config ::Google::Cloud::Monitoring::V3::UpdateUptimeCheckConfigRequest.new(update_mask: update_mask, uptime_check_config: uptime_check_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -281,7 +281,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.update_uptime_check_config Google::Cloud::Monitoring::V3::UpdateUptimeCheckConfigRequest.new(update_mask: update_mask, uptime_check_config: uptime_check_config), grpc_options do |response, operation|
+      client.update_uptime_check_config ::Google::Cloud::Monitoring::V3::UpdateUptimeCheckConfigRequest.new(update_mask: update_mask, uptime_check_config: uptime_check_config), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -293,7 +293,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
 
   def test_delete_uptime_check_config
     # Create GRPC objects.
-    grpc_response = Google::Protobuf::Empty.new
+    grpc_response = ::Google::Protobuf::Empty.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -303,14 +303,14 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
 
     delete_uptime_check_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_uptime_check_config, name
-      assert_kind_of Google::Cloud::Monitoring::V3::DeleteUptimeCheckConfigRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::V3::DeleteUptimeCheckConfigRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, delete_uptime_check_config_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -327,7 +327,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.delete_uptime_check_config Google::Cloud::Monitoring::V3::DeleteUptimeCheckConfigRequest.new(name: name) do |response, operation|
+      client.delete_uptime_check_config ::Google::Cloud::Monitoring::V3::DeleteUptimeCheckConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -339,7 +339,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.delete_uptime_check_config Google::Cloud::Monitoring::V3::DeleteUptimeCheckConfigRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_uptime_check_config ::Google::Cloud::Monitoring::V3::DeleteUptimeCheckConfigRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -351,7 +351,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
 
   def test_list_uptime_check_ips
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::V3::ListUptimeCheckIpsResponse.new
+    grpc_response = ::Google::Cloud::Monitoring::V3::ListUptimeCheckIpsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -362,7 +362,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
 
     list_uptime_check_ips_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_uptime_check_ips, name
-      assert_kind_of Google::Cloud::Monitoring::V3::ListUptimeCheckIpsRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::V3::ListUptimeCheckIpsRequest, request
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
       refute_nil options
@@ -370,7 +370,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_uptime_check_ips_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -389,7 +389,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.list_uptime_check_ips Google::Cloud::Monitoring::V3::ListUptimeCheckIpsRequest.new(page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_uptime_check_ips ::Google::Cloud::Monitoring::V3::ListUptimeCheckIpsRequest.new(page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -403,7 +403,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_uptime_check_ips Google::Cloud::Monitoring::V3::ListUptimeCheckIpsRequest.new(page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_uptime_check_ips ::Google::Cloud::Monitoring::V3::ListUptimeCheckIpsRequest.new(page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -419,7 +419,7 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -429,6 +429,6 @@ class Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Monitoring::V3::UptimeCheckService::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Monitoring::V3::UptimeCheckService::Client::Configuration, config
   end
 end

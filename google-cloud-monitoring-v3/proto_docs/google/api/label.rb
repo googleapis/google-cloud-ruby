@@ -21,17 +21,17 @@ module Google
   module Api
     # A description of a label.
     # @!attribute [rw] key
-    #   @return [String]
+    #   @return [::String]
     #     The label key.
     # @!attribute [rw] value_type
-    #   @return [Google::Api::LabelDescriptor::ValueType]
+    #   @return [::Google::Api::LabelDescriptor::ValueType]
     #     The type of data that can be assigned to the label.
     # @!attribute [rw] description
-    #   @return [String]
+    #   @return [::String]
     #     A human-readable description for the label.
     class LabelDescriptor
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
 
       # Value types that can be used as label values.
       module ValueType

@@ -37,7 +37,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/monitoring/v3/notification_channel_service"
-        #     client = Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new
+        #     client = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new
         #
         module NotificationChannelService
         end

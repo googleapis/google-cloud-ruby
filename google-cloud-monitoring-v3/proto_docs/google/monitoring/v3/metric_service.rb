@@ -23,12 +23,12 @@ module Google
       module V3
         # The `ListMonitoredResourceDescriptors` request.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The project on which to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     An optional [filter](https://cloud.google.com/monitoring/api/v3/filters)
         #     describing the descriptors to be returned.  The filter can reference the
         #     descriptor's type and labels. For example, the following filter returns
@@ -36,36 +36,36 @@ module Google
         #
         #         resource.type = starts_with("gce_") AND resource.label:id
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     A positive number that is the maximum number of results to return.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     If this field is not empty then it must contain the `nextPageToken` value
         #     returned by a previous call to this method.  Using this field causes the
         #     method to return additional results from the previous method call.
         class ListMonitoredResourceDescriptorsRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The `ListMonitoredResourceDescriptors` response.
         # @!attribute [rw] resource_descriptors
-        #   @return [Array<Google::Api::MonitoredResourceDescriptor>]
+        #   @return [::Array<::Google::Api::MonitoredResourceDescriptor>]
         #     The monitored resource descriptors that are available to this project
         #     and that match `filter`, if present.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     If there are more results than have been returned, then this field is set
         #     to a non-empty value.  To see the additional results,
         #     use that value as `page_token` in the next call to this method.
         class ListMonitoredResourceDescriptorsResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The `GetMonitoredResourceDescriptor` request.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The monitored resource descriptor to get.  The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]/monitoredResourceDescriptors/[RESOURCE_TYPE]
@@ -73,18 +73,18 @@ module Google
         #     The `[RESOURCE_TYPE]` is a predefined type, such as
         #     `cloudsql_database`.
         class GetMonitoredResourceDescriptorRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The `ListMetricDescriptors` request.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The project on which to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     If this field is empty, all custom and
         #     system-defined metric descriptors are returned.
         #     Otherwise, the [filter](https://cloud.google.com/monitoring/api/v3/filters)
@@ -94,36 +94,36 @@ module Google
         #
         #         metric.type = starts_with("custom.googleapis.com/")
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     A positive number that is the maximum number of results to return.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     If this field is not empty then it must contain the `nextPageToken` value
         #     returned by a previous call to this method.  Using this field causes the
         #     method to return additional results from the previous method call.
         class ListMetricDescriptorsRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The `ListMetricDescriptors` response.
         # @!attribute [rw] metric_descriptors
-        #   @return [Array<Google::Api::MetricDescriptor>]
+        #   @return [::Array<::Google::Api::MetricDescriptor>]
         #     The metric descriptors that are available to the project
         #     and that match the value of `filter`, if present.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     If there are more results than have been returned, then this field is set
         #     to a non-empty value.  To see the additional results,
         #     use that value as `page_token` in the next call to this method.
         class ListMetricDescriptorsResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The `GetMetricDescriptor` request.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The metric descriptor on which to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID]
@@ -131,28 +131,28 @@ module Google
         #     An example value of `[METRIC_ID]` is
         #     `"compute.googleapis.com/instance/disk/read_bytes_count"`.
         class GetMetricDescriptorRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The `CreateMetricDescriptor` request.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The project on which to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] metric_descriptor
-        #   @return [Google::Api::MetricDescriptor]
+        #   @return [::Google::Api::MetricDescriptor]
         #     Required. The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
         #     descriptor.
         class CreateMetricDescriptorRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The `DeleteMetricDescriptor` request.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The metric descriptor on which to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID]
@@ -160,18 +160,18 @@ module Google
         #     An example of `[METRIC_ID]` is:
         #     `"custom.googleapis.com/my_test_metric"`.
         class DeleteMetricDescriptorRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The `ListTimeSeries` request.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The project on which to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
         #     that specifies which time series should be returned.  The filter must
         #     specify a single metric type, and can additionally specify metric labels
@@ -180,39 +180,39 @@ module Google
         #         metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
         #             metric.labels.instance_name = "my-instance-name"
         # @!attribute [rw] interval
-        #   @return [Google::Cloud::Monitoring::V3::TimeInterval]
+        #   @return [::Google::Cloud::Monitoring::V3::TimeInterval]
         #     Required. The time interval for which results should be returned. Only time series
         #     that contain data points in the specified interval are included
         #     in the response.
         # @!attribute [rw] aggregation
-        #   @return [Google::Cloud::Monitoring::V3::Aggregation]
+        #   @return [::Google::Cloud::Monitoring::V3::Aggregation]
         #     Specifies the alignment of data points in individual time series as
         #     well as how to combine the retrieved time series across specified labels.
         #
         #     By default (if no `aggregation` is explicitly specified), the raw time
         #     series data is returned.
         # @!attribute [rw] order_by
-        #   @return [String]
+        #   @return [::String]
         #     Unsupported: must be left blank. The points in each time series are
         #     currently returned in reverse time order (most recent to oldest).
         # @!attribute [rw] view
-        #   @return [Google::Cloud::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView]
+        #   @return [::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView]
         #     Required. Specifies which information is returned about the time series.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     A positive number that is the maximum number of results to return. If
         #     `page_size` is empty or more than 100,000 results, the effective
         #     `page_size` is 100,000 results. If `view` is set to `FULL`, this is the
         #     maximum number of `Points` returned. If `view` is set to `HEADERS`, this is
         #     the maximum number of `TimeSeries` returned.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     If this field is not empty then it must contain the `nextPageToken` value
         #     returned by a previous call to this method.  Using this field causes the
         #     method to return additional results from the previous method call.
         class ListTimeSeriesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Controls which fields are returned by `ListTimeSeries`.
           module TimeSeriesView
@@ -228,30 +228,30 @@ module Google
 
         # The `ListTimeSeries` response.
         # @!attribute [rw] time_series
-        #   @return [Array<Google::Cloud::Monitoring::V3::TimeSeries>]
+        #   @return [::Array<::Google::Cloud::Monitoring::V3::TimeSeries>]
         #     One or more time series that match the filter included in the request.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     If there are more results than have been returned, then this field is set
         #     to a non-empty value.  To see the additional results,
         #     use that value as `page_token` in the next call to this method.
         # @!attribute [rw] execution_errors
-        #   @return [Array<Google::Rpc::Status>]
+        #   @return [::Array<::Google::Rpc::Status>]
         #     Query execution errors that may have caused the time series data returned
         #     to be incomplete.
         class ListTimeSeriesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The `CreateTimeSeries` request.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The project on which to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] time_series
-        #   @return [Array<Google::Cloud::Monitoring::V3::TimeSeries>]
+        #   @return [::Array<::Google::Cloud::Monitoring::V3::TimeSeries>]
         #     Required. The new data to be added to a list of time series.
         #     Adds at most one data point to each of several time series.  The new data
         #     point must be more recent than any other point in its time series.  Each
@@ -260,105 +260,105 @@ module Google
         #
         #     The maximum number of `TimeSeries` objects per `Create` request is 200.
         class CreateTimeSeriesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # DEPRECATED. Used to hold per-time-series error status.
         # @!attribute [rw] time_series
-        #   @return [Google::Cloud::Monitoring::V3::TimeSeries]
+        #   @return [::Google::Cloud::Monitoring::V3::TimeSeries]
         #     DEPRECATED. Time series ID that resulted in the `status` error.
         # @!attribute [rw] status
-        #   @return [Google::Rpc::Status]
+        #   @return [::Google::Rpc::Status]
         #     DEPRECATED. The status of the requested write operation for `time_series`.
         class CreateTimeSeriesError
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Summary of the result of a failed request to write data to a time series.
         # @!attribute [rw] total_point_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The number of points in the request.
         # @!attribute [rw] success_point_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The number of points that were successfully written.
         # @!attribute [rw] errors
-        #   @return [Array<Google::Cloud::Monitoring::V3::CreateTimeSeriesSummary::Error>]
+        #   @return [::Array<::Google::Cloud::Monitoring::V3::CreateTimeSeriesSummary::Error>]
         #     The number of points that failed to be written. Order is not guaranteed.
         class CreateTimeSeriesSummary
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Detailed information about an error category.
           # @!attribute [rw] status
-          #   @return [Google::Rpc::Status]
+          #   @return [::Google::Rpc::Status]
           #     The status of the requested write operation.
           # @!attribute [rw] point_count
-          #   @return [Integer]
+          #   @return [::Integer]
           #     The number of points that couldn't be written because of `status`.
           class Error
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # The `QueryTimeSeries` request.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The project on which to execute the request. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] query
-        #   @return [String]
+        #   @return [::String]
         #     Required. The query in the monitoring query language format. The default
         #     time zone is in UTC.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     A positive number that is the maximum number of time_series_data to return.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     If this field is not empty then it must contain the `nextPageToken` value
         #     returned by a previous call to this method.  Using this field causes the
         #     method to return additional results from the previous method call.
         class QueryTimeSeriesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The `QueryTimeSeries` response.
         # @!attribute [rw] time_series_descriptor
-        #   @return [Google::Cloud::Monitoring::V3::TimeSeriesDescriptor]
+        #   @return [::Google::Cloud::Monitoring::V3::TimeSeriesDescriptor]
         #     The descriptor for the time series data.
         # @!attribute [rw] time_series_data
-        #   @return [Array<Google::Cloud::Monitoring::V3::TimeSeriesData>]
+        #   @return [::Array<::Google::Cloud::Monitoring::V3::TimeSeriesData>]
         #     The time series data.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     If there are more results than have been returned, then this field is set
         #     to a non-empty value.  To see the additional results, use that value as
         #     `page_token` in the next call to this method.
         # @!attribute [rw] partial_errors
-        #   @return [Array<Google::Rpc::Status>]
+        #   @return [::Array<::Google::Rpc::Status>]
         #     Query execution errors that may have caused the time series data returned
         #     to be incomplete. The available data will be available in the
         #     response.
         class QueryTimeSeriesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # This is an error detail intended to be used with INVALID_ARGUMENT errors.
         # @!attribute [rw] errors
-        #   @return [Array<Google::Cloud::Monitoring::V3::QueryError>]
+        #   @return [::Array<::Google::Cloud::Monitoring::V3::QueryError>]
         #     Errors in parsing the time series query language text. The number of errors
         #     in the response may be limited.
         # @!attribute [rw] error_summary
-        #   @return [String]
+        #   @return [::String]
         #     A summary of all the errors.
         class QueryErrorList
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
