@@ -86,7 +86,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or BILLING_TEST_PROJECT=test123 BILLING_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/billing/v1/cloud_billing/credentials"
-  Google::Cloud::Billing::V1::CloudBilling::Credentials.env_vars.each do |path|
+  ::Google::Cloud::Billing::V1::CloudBilling::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["BILLING_PROJECT"] = project
