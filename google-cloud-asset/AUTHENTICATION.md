@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-asset
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::Asset::V1::AssetService::Credentials`):
+`::Google::Cloud::Asset::V1::AssetService::Credentials`):
 
 1. `ASSET_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `ASSET_KEYFILE` - Path to JSON file, or JSON contents
