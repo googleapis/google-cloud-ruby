@@ -26,7 +26,7 @@ module Google
       # To load this package, including all its services, and instantiate a client:
       #
       #     require "google/cloud/recommender/v1"
-      #     client = Google::Cloud::Recommender::V1::Recommender::Client.new
+      #     client = ::Google::Cloud::Recommender::V1::Recommender::Client.new
       #
       module V1
       end

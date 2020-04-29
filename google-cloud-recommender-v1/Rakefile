@@ -85,7 +85,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or RECOMMENDER_TEST_PROJECT=test123 RECOMMENDER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/recommender/v1/recommender/credentials"
-  Google::Cloud::Recommender::V1::Recommender::Credentials.env_vars.each do |path|
+  ::Google::Cloud::Recommender::V1::Recommender::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["RECOMMENDER_PROJECT"] = project

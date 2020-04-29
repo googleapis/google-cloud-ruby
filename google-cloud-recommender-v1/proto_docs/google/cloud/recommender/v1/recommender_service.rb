@@ -23,7 +23,7 @@ module Google
       module V1
         # Request for the `ListRecommendations` method.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The container resource on which to execute the request.
         #     Acceptable formats:
         #
@@ -33,126 +33,126 @@ module Google
         #     LOCATION here refers to GCP Locations:
         #     https://cloud.google.com/about/locations/
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The maximum number of results to return from this request.  Non-positive
         #     values are ignored. If not specified, the server will determine the number
         #     of results to return.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Optional. If present, retrieves the next batch of results from the preceding call to
         #     this method. `page_token` must be the value of `next_page_token` from the
         #     previous response. The values of other method parameters must be identical
         #     to those in the previous call.
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     Filter expression to restrict the recommendations returned. Supported
         #     filter fields: state_info.state
         #     Eg: `state_info.state:"DISMISSED" or state_info.state:"FAILED"
         class ListRecommendationsRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response to the `ListRecommendations` method.
         # @!attribute [rw] recommendations
-        #   @return [Array<Google::Cloud::Recommender::V1::Recommendation>]
+        #   @return [::Array<::Google::Cloud::Recommender::V1::Recommendation>]
         #     The set of recommendations for the `parent` resource.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     A token that can be used to request the next page of results. This field is
         #     empty if there are no additional results.
         class ListRecommendationsResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to the `GetRecommendation` method.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Name of the recommendation.
         class GetRecommendationRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request for the `MarkRecommendationClaimed` Method.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Name of the recommendation.
         # @!attribute [rw] state_metadata
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     State properties to include with this state. Overwrites any existing
         #     `state_metadata`.
         #     Keys must match the regex /^[a-z0-9][a-z0-9_.-]\\{0,62}$/.
         #     Values must match the regex /^[a-zA-Z0-9_./-]\\{0,255}$/.
         # @!attribute [rw] etag
-        #   @return [String]
+        #   @return [::String]
         #     Required. Fingerprint of the Recommendation. Provides optimistic locking.
         class MarkRecommendationClaimedRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class StateMetadataEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Request for the `MarkRecommendationSucceeded` Method.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Name of the recommendation.
         # @!attribute [rw] state_metadata
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     State properties to include with this state. Overwrites any existing
         #     `state_metadata`.
         #     Keys must match the regex /^[a-z0-9][a-z0-9_.-]\\{0,62}$/.
         #     Values must match the regex /^[a-zA-Z0-9_./-]\\{0,255}$/.
         # @!attribute [rw] etag
-        #   @return [String]
+        #   @return [::String]
         #     Required. Fingerprint of the Recommendation. Provides optimistic locking.
         class MarkRecommendationSucceededRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class StateMetadataEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Request for the `MarkRecommendationFailed` Method.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Name of the recommendation.
         # @!attribute [rw] state_metadata
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     State properties to include with this state. Overwrites any existing
         #     `state_metadata`.
         #     Keys must match the regex /^[a-z0-9][a-z0-9_.-]\\{0,62}$/.
         #     Values must match the regex /^[a-zA-Z0-9_./-]\\{0,255}$/.
         # @!attribute [rw] etag
-        #   @return [String]
+        #   @return [::String]
         #     Required. Fingerprint of the Recommendation. Provides optimistic locking.
         class MarkRecommendationFailedRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class StateMetadataEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

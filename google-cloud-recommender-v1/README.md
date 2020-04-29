@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/recommender/v1"
 
-client = Google::Cloud::Recommender::V1::Recommender::Client.new
+client = ::Google::Cloud::Recommender::V1::Recommender::Client.new
 request = my_create_request
 response = client.list_recommendations request
 ```
