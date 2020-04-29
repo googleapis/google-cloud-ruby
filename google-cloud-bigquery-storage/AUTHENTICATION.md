@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-bigquery-storage
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Credentials`):
+`::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Credentials`):
 
 1. `BIGQUERY_STORAGE_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `BIGQUERY_STORAGE_KEYFILE` - Path to JSON file, or JSON contents
