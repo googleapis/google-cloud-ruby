@@ -38,15 +38,15 @@ module Google
             ##
             # Configure the CloudBilling Client class.
             #
-            # See {Google::Cloud::Billing::V1::CloudBilling::Client::Configuration}
+            # See {::Google::Cloud::Billing::V1::CloudBilling::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all CloudBilling clients:
             #
-            #     Google::Cloud::Billing::V1::CloudBilling::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Billing::V1::CloudBilling::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -152,7 +152,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Billing::V1::CloudBilling::Client::Configuration}
+            # See {::Google::Cloud::Billing::V1::CloudBilling::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -173,13 +173,13 @@ module Google
             # To create a new CloudBilling client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #     client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new
             #
             # To create a new CloudBilling client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the CloudBilling client.
@@ -206,8 +206,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @cloud_billing_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Billing::V1::CloudBilling::Stub,
+              @cloud_billing_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Billing::V1::CloudBilling::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -224,12 +224,12 @@ module Google
             #
             # @overload get_billing_account(request, options = nil)
             #   Pass arguments to `get_billing_account` via a request object, either of type
-            #   {Google::Cloud::Billing::V1::GetBillingAccountRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Billing::V1::GetBillingAccountRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Billing::V1::GetBillingAccountRequest, Hash]
+            #   @param request [::Google::Cloud::Billing::V1::GetBillingAccountRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_billing_account(name: nil)
@@ -237,31 +237,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the billing account to retrieve. For example,
             #     `billingAccounts/012345-567890-ABCDEF`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Billing::V1::BillingAccount]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Billing::V1::BillingAccount]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Billing::V1::BillingAccount]
+            # @return [::Google::Cloud::Billing::V1::BillingAccount]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_billing_account request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Billing::V1::GetBillingAccountRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Billing::V1::GetBillingAccountRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_billing_account.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -282,8 +282,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -293,12 +293,12 @@ module Google
             #
             # @overload list_billing_accounts(request, options = nil)
             #   Pass arguments to `list_billing_accounts` via a request object, either of type
-            #   {Google::Cloud::Billing::V1::ListBillingAccountsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Billing::V1::ListBillingAccountsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Billing::V1::ListBillingAccountsRequest, Hash]
+            #   @param request [::Google::Cloud::Billing::V1::ListBillingAccountsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_billing_accounts(page_size: nil, page_token: nil, filter: nil)
@@ -306,14 +306,14 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Requested page size. The maximum page size is 100; this is also the
             #     default.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     A token identifying a page of results to return. This should be a
             #     `next_page_token` value returned from a previous `ListBillingAccounts`
             #     call. If unspecified, the first page of results is returned.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Options for how to filter the returned billing accounts.
             #     Currently this only supports filtering for
             #     [subaccounts](https://cloud.google.com/billing/docs/concepts) under a
@@ -322,26 +322,26 @@ module Google
             #     Boolean algebra and other fields are not currently supported.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Billing::V1::BillingAccount>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Billing::V1::BillingAccount>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Billing::V1::BillingAccount>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Billing::V1::BillingAccount>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_billing_accounts request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Billing::V1::ListBillingAccountsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Billing::V1::ListBillingAccountsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_billing_accounts.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -353,12 +353,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :list_billing_accounts, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @cloud_billing_stub, :list_billing_accounts, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @cloud_billing_stub, :list_billing_accounts, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -371,12 +371,12 @@ module Google
             #
             # @overload update_billing_account(request, options = nil)
             #   Pass arguments to `update_billing_account` via a request object, either of type
-            #   {Google::Cloud::Billing::V1::UpdateBillingAccountRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Billing::V1::UpdateBillingAccountRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Billing::V1::UpdateBillingAccountRequest, Hash]
+            #   @param request [::Google::Cloud::Billing::V1::UpdateBillingAccountRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_billing_account(name: nil, account: nil, update_mask: nil)
@@ -384,35 +384,35 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the billing account resource to be updated.
-            #   @param account [Google::Cloud::Billing::V1::BillingAccount, Hash]
+            #   @param account [::Google::Cloud::Billing::V1::BillingAccount, ::Hash]
             #     Required. The billing account resource to replace the resource on the server.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The update mask applied to the resource.
             #     Only "display_name" is currently supported.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Billing::V1::BillingAccount]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Billing::V1::BillingAccount]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Billing::V1::BillingAccount]
+            # @return [::Google::Cloud::Billing::V1::BillingAccount]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_billing_account request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Billing::V1::UpdateBillingAccountRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Billing::V1::UpdateBillingAccountRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_billing_account.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -433,8 +433,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -451,12 +451,12 @@ module Google
             #
             # @overload create_billing_account(request, options = nil)
             #   Pass arguments to `create_billing_account` via a request object, either of type
-            #   {Google::Cloud::Billing::V1::CreateBillingAccountRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Billing::V1::CreateBillingAccountRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Billing::V1::CreateBillingAccountRequest, Hash]
+            #   @param request [::Google::Cloud::Billing::V1::CreateBillingAccountRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_billing_account(billing_account: nil)
@@ -464,33 +464,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param billing_account [Google::Cloud::Billing::V1::BillingAccount, Hash]
+            #   @param billing_account [::Google::Cloud::Billing::V1::BillingAccount, ::Hash]
             #     Required. The billing account resource to create.
             #     Currently CreateBillingAccount only supports subaccount creation, so
             #     any created billing accounts must be under a provided master billing
             #     account.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Billing::V1::BillingAccount]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Billing::V1::BillingAccount]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Billing::V1::BillingAccount]
+            # @return [::Google::Cloud::Billing::V1::BillingAccount]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_billing_account request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Billing::V1::CreateBillingAccountRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Billing::V1::CreateBillingAccountRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_billing_account.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -505,8 +505,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -517,12 +517,12 @@ module Google
             #
             # @overload list_project_billing_info(request, options = nil)
             #   Pass arguments to `list_project_billing_info` via a request object, either of type
-            #   {Google::Cloud::Billing::V1::ListProjectBillingInfoRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Billing::V1::ListProjectBillingInfoRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Billing::V1::ListProjectBillingInfoRequest, Hash]
+            #   @param request [::Google::Cloud::Billing::V1::ListProjectBillingInfoRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_project_billing_info(name: nil, page_size: nil, page_token: nil)
@@ -530,38 +530,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the billing account associated with the projects that
             #     you want to list. For example, `billingAccounts/012345-567890-ABCDEF`.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Requested page size. The maximum page size is 100; this is also the
             #     default.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     A token identifying a page of results to be returned. This should be a
             #     `next_page_token` value returned from a previous `ListProjectBillingInfo`
             #     call. If unspecified, the first page of results is returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Billing::V1::ProjectBillingInfo>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Billing::V1::ProjectBillingInfo>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Billing::V1::ProjectBillingInfo>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Billing::V1::ProjectBillingInfo>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_project_billing_info request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Billing::V1::ListProjectBillingInfoRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Billing::V1::ListProjectBillingInfoRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_project_billing_info.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -579,12 +579,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :list_project_billing_info, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @cloud_billing_stub, :list_project_billing_info, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @cloud_billing_stub, :list_project_billing_info, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -595,12 +595,12 @@ module Google
             #
             # @overload get_project_billing_info(request, options = nil)
             #   Pass arguments to `get_project_billing_info` via a request object, either of type
-            #   {Google::Cloud::Billing::V1::GetProjectBillingInfoRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Billing::V1::GetProjectBillingInfoRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Billing::V1::GetProjectBillingInfoRequest, Hash]
+            #   @param request [::Google::Cloud::Billing::V1::GetProjectBillingInfoRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_project_billing_info(name: nil)
@@ -608,31 +608,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the project for which billing information is
             #     retrieved. For example, `projects/tokyo-rain-123`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Billing::V1::ProjectBillingInfo]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Billing::V1::ProjectBillingInfo]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Billing::V1::ProjectBillingInfo]
+            # @return [::Google::Cloud::Billing::V1::ProjectBillingInfo]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_project_billing_info request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Billing::V1::GetProjectBillingInfoRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Billing::V1::GetProjectBillingInfoRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_project_billing_info.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -653,8 +653,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -692,12 +692,12 @@ module Google
             #
             # @overload update_project_billing_info(request, options = nil)
             #   Pass arguments to `update_project_billing_info` via a request object, either of type
-            #   {Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest, Hash]
+            #   @param request [::Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_project_billing_info(name: nil, project_billing_info: nil)
@@ -705,34 +705,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the project associated with the billing information
             #     that you want to update. For example, `projects/tokyo-rain-123`.
-            #   @param project_billing_info [Google::Cloud::Billing::V1::ProjectBillingInfo, Hash]
+            #   @param project_billing_info [::Google::Cloud::Billing::V1::ProjectBillingInfo, ::Hash]
             #     The new billing information for the project. Read-only fields are ignored;
             #     thus, you can leave empty all fields except `billing_account_name`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Billing::V1::ProjectBillingInfo]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Billing::V1::ProjectBillingInfo]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Billing::V1::ProjectBillingInfo]
+            # @return [::Google::Cloud::Billing::V1::ProjectBillingInfo]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_project_billing_info request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_project_billing_info.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -753,8 +753,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -765,12 +765,12 @@ module Google
             #
             # @overload get_iam_policy(request, options = nil)
             #   Pass arguments to `get_iam_policy` via a request object, either of type
-            #   {Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::GetIamPolicyRequest, Hash]
+            #   @param request [::Google::Iam::V1::GetIamPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_iam_policy(resource: nil, options: nil)
@@ -778,34 +778,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy is being requested.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param options [Google::Iam::V1::GetPolicyOptions, Hash]
+            #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
             #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
             #     `GetIamPolicy`. This field is only used by Cloud IAM.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::Policy]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::Policy]
+            # @return [::Google::Iam::V1::Policy]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_iam_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::GetIamPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::GetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_iam_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -826,8 +826,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -839,12 +839,12 @@ module Google
             #
             # @overload set_iam_policy(request, options = nil)
             #   Pass arguments to `set_iam_policy` via a request object, either of type
-            #   {Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::SetIamPolicyRequest, Hash]
+            #   @param request [::Google::Iam::V1::SetIamPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_iam_policy(resource: nil, policy: nil)
@@ -852,36 +852,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy is being specified.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param policy [Google::Iam::V1::Policy, Hash]
+            #   @param policy [::Google::Iam::V1::Policy, ::Hash]
             #     REQUIRED: The complete policy to be applied to the `resource`. The size of
             #     the policy is limited to a few 10s of KB. An empty policy is a
             #     valid policy but certain Cloud Platform services (such as Projects)
             #     might reject them.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::Policy]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::Policy]
+            # @return [::Google::Iam::V1::Policy]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_iam_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::SetIamPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::SetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_iam_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -902,8 +902,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -913,12 +913,12 @@ module Google
             #
             # @overload test_iam_permissions(request, options = nil)
             #   Pass arguments to `test_iam_permissions` via a request object, either of type
-            #   {Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::TestIamPermissionsRequest, Hash]
+            #   @param request [::Google::Iam::V1::TestIamPermissionsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload test_iam_permissions(resource: nil, permissions: nil)
@@ -926,36 +926,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy detail is being requested.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param permissions [Array<String>]
+            #   @param permissions [::Array<::String>]
             #     The set of permissions to check for the `resource`. Permissions with
             #     wildcards (such as '*' or 'storage.*') are not allowed. For more
             #     information see
             #     [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::TestIamPermissionsResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::TestIamPermissionsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::TestIamPermissionsResponse]
+            # @return [::Google::Iam::V1::TestIamPermissionsResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def test_iam_permissions request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::TestIamPermissionsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::TestIamPermissionsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.test_iam_permissions.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Billing::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -976,8 +976,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -987,7 +987,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Billing::V1::CloudBilling::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Billing::V1::CloudBilling::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -998,22 +998,22 @@ module Google
             # To modify the global config, setting the timeout for get_billing_account
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Billing::V1::CloudBilling::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.get_billing_account.timeout = 20_000
+            #     ::Google::Cloud::Billing::V1::CloudBilling::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.get_billing_account.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.get_billing_account.timeout = 20_000
+            #     client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.get_billing_account.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"cloudbilling.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -1025,29 +1025,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -1055,10 +1055,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "cloudbilling.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -1066,14 +1066,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -1114,77 +1114,77 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `get_billing_account`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_billing_account
                 ##
                 # RPC-specific configuration for `list_billing_accounts`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_billing_accounts
                 ##
                 # RPC-specific configuration for `update_billing_account`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_billing_account
                 ##
                 # RPC-specific configuration for `create_billing_account`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_billing_account
                 ##
                 # RPC-specific configuration for `list_project_billing_info`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_project_billing_info
                 ##
                 # RPC-specific configuration for `get_project_billing_info`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_project_billing_info
                 ##
                 # RPC-specific configuration for `update_project_billing_info`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_project_billing_info
                 ##
                 # RPC-specific configuration for `get_iam_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_iam_policy
                 ##
                 # RPC-specific configuration for `set_iam_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_iam_policy
                 ##
                 # RPC-specific configuration for `test_iam_permissions`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :test_iam_permissions
 
                 # @private
                 def initialize parent_rpcs = nil
                   get_billing_account_config = parent_rpcs&.get_billing_account if parent_rpcs&.respond_to? :get_billing_account
-                  @get_billing_account = Gapic::Config::Method.new get_billing_account_config
+                  @get_billing_account = ::Gapic::Config::Method.new get_billing_account_config
                   list_billing_accounts_config = parent_rpcs&.list_billing_accounts if parent_rpcs&.respond_to? :list_billing_accounts
-                  @list_billing_accounts = Gapic::Config::Method.new list_billing_accounts_config
+                  @list_billing_accounts = ::Gapic::Config::Method.new list_billing_accounts_config
                   update_billing_account_config = parent_rpcs&.update_billing_account if parent_rpcs&.respond_to? :update_billing_account
-                  @update_billing_account = Gapic::Config::Method.new update_billing_account_config
+                  @update_billing_account = ::Gapic::Config::Method.new update_billing_account_config
                   create_billing_account_config = parent_rpcs&.create_billing_account if parent_rpcs&.respond_to? :create_billing_account
-                  @create_billing_account = Gapic::Config::Method.new create_billing_account_config
+                  @create_billing_account = ::Gapic::Config::Method.new create_billing_account_config
                   list_project_billing_info_config = parent_rpcs&.list_project_billing_info if parent_rpcs&.respond_to? :list_project_billing_info
-                  @list_project_billing_info = Gapic::Config::Method.new list_project_billing_info_config
+                  @list_project_billing_info = ::Gapic::Config::Method.new list_project_billing_info_config
                   get_project_billing_info_config = parent_rpcs&.get_project_billing_info if parent_rpcs&.respond_to? :get_project_billing_info
-                  @get_project_billing_info = Gapic::Config::Method.new get_project_billing_info_config
+                  @get_project_billing_info = ::Gapic::Config::Method.new get_project_billing_info_config
                   update_project_billing_info_config = parent_rpcs&.update_project_billing_info if parent_rpcs&.respond_to? :update_project_billing_info
-                  @update_project_billing_info = Gapic::Config::Method.new update_project_billing_info_config
+                  @update_project_billing_info = ::Gapic::Config::Method.new update_project_billing_info_config
                   get_iam_policy_config = parent_rpcs&.get_iam_policy if parent_rpcs&.respond_to? :get_iam_policy
-                  @get_iam_policy = Gapic::Config::Method.new get_iam_policy_config
+                  @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                   set_iam_policy_config = parent_rpcs&.set_iam_policy if parent_rpcs&.respond_to? :set_iam_policy
-                  @set_iam_policy = Gapic::Config::Method.new set_iam_policy_config
+                  @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                   test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
-                  @test_iam_permissions = Gapic::Config::Method.new test_iam_permissions_config
+                  @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
                   yield self if block_given?
                 end

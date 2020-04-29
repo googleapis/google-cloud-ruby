@@ -33,7 +33,7 @@ module Google
             #
             # @param billing_account [String]
             #
-            # @return [String]
+            # @return [::String]
             def billing_account_path billing_account:
               "billingAccounts/#{billing_account}"
             end
