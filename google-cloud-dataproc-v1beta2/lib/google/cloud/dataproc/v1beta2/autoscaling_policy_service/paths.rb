@@ -45,25 +45,25 @@ module Google
             #   @param region [String]
             #   @param autoscaling_policy [String]
             #
-            # @return [String]
+            # @return [::String]
             def autoscaling_policy_path **args
               resources = {
                 "autoscaling_policy:location:project" => (proc do |project:, location:, autoscaling_policy:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "projects/#{project}/locations/#{location}/autoscalingPolicies/#{autoscaling_policy}"
                 end),
                 "autoscaling_policy:project:region"   => (proc do |project:, region:, autoscaling_policy:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
 
                   "projects/#{project}/regions/#{region}/autoscalingPolicies/#{autoscaling_policy}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
@@ -77,9 +77,9 @@ module Google
             # @param project [String]
             # @param location [String]
             #
-            # @return [String]
+            # @return [::String]
             def location_path project:, location:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
             end
@@ -94,9 +94,9 @@ module Google
             # @param project [String]
             # @param region [String]
             #
-            # @return [String]
+            # @return [::String]
             def region_path project:, region:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/regions/#{region}"
             end

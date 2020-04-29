@@ -23,22 +23,22 @@ module Google
       module V1beta2
         # The runtime logging config of the job.
         # @!attribute [rw] driver_log_levels
-        #   @return [Google::Protobuf::Map{String => Google::Cloud::Dataproc::V1beta2::LoggingConfig::Level}]
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dataproc::V1beta2::LoggingConfig::Level}]
         #     The per-package log levels for the driver. This may include
         #     "root" package name to configure rootLogger.
         #     Examples:
         #       'com.google = FATAL', 'root = INFO', 'org.apache = DEBUG'
         class LoggingConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [Google::Cloud::Dataproc::V1beta2::LoggingConfig::Level]
+          #   @return [::Google::Cloud::Dataproc::V1beta2::LoggingConfig::Level]
           class DriverLogLevelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # The Log4j level for job execution. When running an
@@ -80,56 +80,56 @@ module Google
         # jobs on [Apache Hadoop
         # YARN](https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/YARN.html).
         # @!attribute [rw] main_jar_file_uri
-        #   @return [String]
+        #   @return [::String]
         #     The HCFS URI of the jar file containing the main class.
         #     Examples:
         #         'gs://foo-bucket/analytics-binaries/extract-useful-metrics-mr.jar'
         #         'hdfs:/tmp/test-samples/custom-wordcount.jar'
         #         'file:///home/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar'
         # @!attribute [rw] main_class
-        #   @return [String]
+        #   @return [::String]
         #     The name of the driver's main class. The jar file containing the class
         #     must be in the default CLASSPATH or specified in `jar_file_uris`.
         # @!attribute [rw] args
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. The arguments to pass to the driver. Do not
         #     include arguments, such as `-libjars` or `-Dfoo=bar`, that can be set as
         #     job properties, since a collision may occur that causes an incorrect job
         #     submission.
         # @!attribute [rw] jar_file_uris
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. Jar file URIs to add to the CLASSPATHs of the
         #     Hadoop driver and tasks.
         # @!attribute [rw] file_uris
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. HCFS (Hadoop Compatible Filesystem) URIs of files to be copied
         #     to the working directory of Hadoop drivers and distributed tasks. Useful
         #     for naively parallel tasks.
         # @!attribute [rw] archive_uris
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. HCFS URIs of archives to be extracted in the working directory of
         #     Hadoop drivers and tasks. Supported file types:
         #     .jar, .tar, .tar.gz, .tgz, or .zip.
         # @!attribute [rw] properties
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. A mapping of property names to values, used to configure Hadoop.
         #     Properties that conflict with values set by the Dataproc API may be
         #     overwritten. Can include properties set in /etc/hadoop/conf/*-site and
         #     classes in user code.
         # @!attribute [rw] logging_config
-        #   @return [Google::Cloud::Dataproc::V1beta2::LoggingConfig]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::LoggingConfig]
         #     Optional. The runtime log config for job execution.
         class HadoopJob
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class PropertiesEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -141,50 +141,50 @@ module Google
         # `CommonJob.jar_file_uris`, and then specify the main class name in
         # `main_class`.
         # @!attribute [rw] main_jar_file_uri
-        #   @return [String]
+        #   @return [::String]
         #     The HCFS URI of the jar file that contains the main class.
         # @!attribute [rw] main_class
-        #   @return [String]
+        #   @return [::String]
         #     The name of the driver's main class. The jar file that contains the class
         #     must be in the default CLASSPATH or specified in `jar_file_uris`.
         # @!attribute [rw] args
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. The arguments to pass to the driver. Do not include arguments,
         #     such as `--conf`, that can be set as job properties, since a collision may
         #     occur that causes an incorrect job submission.
         # @!attribute [rw] jar_file_uris
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. HCFS URIs of jar files to add to the CLASSPATHs of the
         #     Spark driver and tasks.
         # @!attribute [rw] file_uris
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. HCFS URIs of files to be copied to the working directory of
         #     Spark drivers and distributed tasks. Useful for naively parallel tasks.
         # @!attribute [rw] archive_uris
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. HCFS URIs of archives to be extracted in the working directory
         #     of Spark drivers and tasks. Supported file types:
         #     .jar, .tar, .tar.gz, .tgz, and .zip.
         # @!attribute [rw] properties
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. A mapping of property names to values, used to configure Spark.
         #     Properties that conflict with values set by the Dataproc API may be
         #     overwritten. Can include properties set in
         #     /etc/spark/conf/spark-defaults.conf and classes in user code.
         # @!attribute [rw] logging_config
-        #   @return [Google::Cloud::Dataproc::V1beta2::LoggingConfig]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::LoggingConfig]
         #     Optional. The runtime log config for job execution.
         class SparkJob
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class PropertiesEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -193,56 +193,56 @@ module Google
         # PySpark](https://spark.apache.org/docs/0.9.0/python-programming-guide.html)
         # applications on YARN.
         # @!attribute [rw] main_python_file_uri
-        #   @return [String]
+        #   @return [::String]
         #     Required. The HCFS URI of the main Python file to use as the driver. Must
         #     be a .py file.
         # @!attribute [rw] args
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. The arguments to pass to the driver.  Do not include arguments,
         #     such as `--conf`, that can be set as job properties, since a collision may
         #     occur that causes an incorrect job submission.
         # @!attribute [rw] python_file_uris
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. HCFS file URIs of Python files to pass to the PySpark
         #     framework. Supported file types: .py, .egg, and .zip.
         # @!attribute [rw] jar_file_uris
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. HCFS URIs of jar files to add to the CLASSPATHs of the
         #     Python driver and tasks.
         # @!attribute [rw] file_uris
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. HCFS URIs of files to be copied to the working directory of
         #     Python drivers and distributed tasks. Useful for naively parallel tasks.
         # @!attribute [rw] archive_uris
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. HCFS URIs of archives to be extracted in the working directory of
         #     .jar, .tar, .tar.gz, .tgz, and .zip.
         # @!attribute [rw] properties
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. A mapping of property names to values, used to configure PySpark.
         #     Properties that conflict with values set by the Dataproc API may be
         #     overwritten. Can include properties set in
         #     /etc/spark/conf/spark-defaults.conf and classes in user code.
         # @!attribute [rw] logging_config
-        #   @return [Google::Cloud::Dataproc::V1beta2::LoggingConfig]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::LoggingConfig]
         #     Optional. The runtime log config for job execution.
         class PySparkJob
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class PropertiesEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # A list of queries to run on a cluster.
         # @!attribute [rw] queries
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Required. The queries to execute. You do not need to terminate a query
         #     with a semicolon. Multiple queries can be specified in one string
         #     by separating each with a semicolon. Here is an example of an Cloud
@@ -258,157 +258,157 @@ module Google
         #           }
         #         }
         class QueryList
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A Dataproc job for running [Apache Hive](https://hive.apache.org/)
         # queries on YARN.
         # @!attribute [rw] query_file_uri
-        #   @return [String]
+        #   @return [::String]
         #     The HCFS URI of the script that contains Hive queries.
         # @!attribute [rw] query_list
-        #   @return [Google::Cloud::Dataproc::V1beta2::QueryList]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::QueryList]
         #     A list of queries.
         # @!attribute [rw] continue_on_failure
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Optional. Whether to continue executing queries if a query fails.
         #     The default value is `false`. Setting to `true` can be useful when
         #     executing independent parallel queries.
         # @!attribute [rw] script_variables
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Mapping of query variable names to values (equivalent to the
         #     Hive command: `SET name="value";`).
         # @!attribute [rw] properties
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. A mapping of property names and values, used to configure Hive.
         #     Properties that conflict with values set by the Dataproc API may be
         #     overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml,
         #     /etc/hive/conf/hive-site.xml, and classes in user code.
         # @!attribute [rw] jar_file_uris
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. HCFS URIs of jar files to add to the CLASSPATH of the
         #     Hive server and Hadoop MapReduce (MR) tasks. Can contain Hive SerDes
         #     and UDFs.
         class HiveJob
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class ScriptVariablesEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class PropertiesEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # A Dataproc job for running [Apache Spark
         # SQL](http://spark.apache.org/sql/) queries.
         # @!attribute [rw] query_file_uri
-        #   @return [String]
+        #   @return [::String]
         #     The HCFS URI of the script that contains SQL queries.
         # @!attribute [rw] query_list
-        #   @return [Google::Cloud::Dataproc::V1beta2::QueryList]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::QueryList]
         #     A list of queries.
         # @!attribute [rw] script_variables
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Mapping of query variable names to values (equivalent to the
         #     Spark SQL command: SET `name="value";`).
         # @!attribute [rw] properties
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. A mapping of property names to values, used to configure
         #     Spark SQL's SparkConf. Properties that conflict with values set by the
         #     Dataproc API may be overwritten.
         # @!attribute [rw] jar_file_uris
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. HCFS URIs of jar files to be added to the Spark CLASSPATH.
         # @!attribute [rw] logging_config
-        #   @return [Google::Cloud::Dataproc::V1beta2::LoggingConfig]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::LoggingConfig]
         #     Optional. The runtime log config for job execution.
         class SparkSqlJob
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class ScriptVariablesEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class PropertiesEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # A Dataproc job for running [Apache Pig](https://pig.apache.org/)
         # queries on YARN.
         # @!attribute [rw] query_file_uri
-        #   @return [String]
+        #   @return [::String]
         #     The HCFS URI of the script that contains the Pig queries.
         # @!attribute [rw] query_list
-        #   @return [Google::Cloud::Dataproc::V1beta2::QueryList]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::QueryList]
         #     A list of queries.
         # @!attribute [rw] continue_on_failure
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Optional. Whether to continue executing queries if a query fails.
         #     The default value is `false`. Setting to `true` can be useful when
         #     executing independent parallel queries.
         # @!attribute [rw] script_variables
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Mapping of query variable names to values (equivalent to the Pig
         #     command: `name=[value]`).
         # @!attribute [rw] properties
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. A mapping of property names to values, used to configure Pig.
         #     Properties that conflict with values set by the Dataproc API may be
         #     overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml,
         #     /etc/pig/conf/pig.properties, and classes in user code.
         # @!attribute [rw] jar_file_uris
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. HCFS URIs of jar files to add to the CLASSPATH of
         #     the Pig Client and Hadoop MapReduce (MR) tasks. Can contain Pig UDFs.
         # @!attribute [rw] logging_config
-        #   @return [Google::Cloud::Dataproc::V1beta2::LoggingConfig]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::LoggingConfig]
         #     Optional. The runtime log config for job execution.
         class PigJob
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class ScriptVariablesEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class PropertiesEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -416,43 +416,43 @@ module Google
         # [Apache SparkR](https://spark.apache.org/docs/latest/sparkr.html)
         # applications on YARN.
         # @!attribute [rw] main_r_file_uri
-        #   @return [String]
+        #   @return [::String]
         #     Required. The HCFS URI of the main R file to use as the driver.
         #     Must be a .R file.
         # @!attribute [rw] args
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. The arguments to pass to the driver.  Do not include arguments,
         #     such as `--conf`, that can be set as job properties, since a collision may
         #     occur that causes an incorrect job submission.
         # @!attribute [rw] file_uris
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. HCFS URIs of files to be copied to the working directory of
         #     R drivers and distributed tasks. Useful for naively parallel tasks.
         # @!attribute [rw] archive_uris
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. HCFS URIs of archives to be extracted in the working directory of
         #     Spark drivers and tasks. Supported file types:
         #     .jar, .tar, .tar.gz, .tgz, and .zip.
         # @!attribute [rw] properties
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. A mapping of property names to values, used to configure SparkR.
         #     Properties that conflict with values set by the Dataproc API may be
         #     overwritten. Can include properties set in
         #     /etc/spark/conf/spark-defaults.conf and classes in user code.
         # @!attribute [rw] logging_config
-        #   @return [Google::Cloud::Dataproc::V1beta2::LoggingConfig]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::LoggingConfig]
         #     Optional. The runtime log config for job execution.
         class SparkRJob
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class PropertiesEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -461,76 +461,76 @@ module Google
         # Component](/dataproc/docs/concepts/components/presto) must be enabled when
         # the cluster is created to submit a Presto job to the cluster.
         # @!attribute [rw] query_file_uri
-        #   @return [String]
+        #   @return [::String]
         #     The HCFS URI of the script that contains SQL queries.
         # @!attribute [rw] query_list
-        #   @return [Google::Cloud::Dataproc::V1beta2::QueryList]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::QueryList]
         #     A list of queries.
         # @!attribute [rw] continue_on_failure
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Optional. Whether to continue executing queries if a query fails.
         #     The default value is `false`. Setting to `true` can be useful when
         #     executing independent parallel queries.
         # @!attribute [rw] output_format
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The format in which query output will be displayed. See the
         #     Presto documentation for supported output formats
         # @!attribute [rw] client_tags
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. Presto client tags to attach to this query
         # @!attribute [rw] properties
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. A mapping of property names to values. Used to set Presto
         #     [session properties](https://prestodb.io/docs/current/sql/set-session.html)
         #     Equivalent to using the --session flag in the Presto CLI
         # @!attribute [rw] logging_config
-        #   @return [Google::Cloud::Dataproc::V1beta2::LoggingConfig]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::LoggingConfig]
         #     Optional. The runtime log config for job execution.
         class PrestoJob
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class PropertiesEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Dataproc job config.
         # @!attribute [rw] cluster_name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the cluster where the job will be submitted.
         # @!attribute [r] cluster_uuid
-        #   @return [String]
+        #   @return [::String]
         #     Output only. A cluster UUID generated by the Dataproc service when
         #     the job is submitted.
         class JobPlacement
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Dataproc job status.
         # @!attribute [r] state
-        #   @return [Google::Cloud::Dataproc::V1beta2::JobStatus::State]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::JobStatus::State]
         #     Output only. A state message specifying the overall job state.
         # @!attribute [r] details
-        #   @return [String]
+        #   @return [::String]
         #     Output only. Optional Job state details, such as an error
         #     description if the state is <code>ERROR</code>.
         # @!attribute [r] state_start_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when this state was entered.
         # @!attribute [r] substate
-        #   @return [Google::Cloud::Dataproc::V1beta2::JobStatus::Substate]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::JobStatus::Substate]
         #     Output only. Additional state information, which includes
         #     status reported by the agent.
         class JobStatus
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The job state.
           module State
@@ -598,19 +598,19 @@ module Google
 
         # Encapsulates the full scoping used to reference a job.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The ID of the Google Cloud Platform project that the job
         #     belongs to.
         # @!attribute [rw] job_id
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The job ID, which must be unique within the project.
         #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), or hyphens (-). The maximum length is 100 characters.
         #
         #     If not specified by the caller, the job ID will be provided by the server.
         class JobReference
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A YARN application created by a job. Application information is a subset of
@@ -619,23 +619,23 @@ module Google
         # **Beta Feature**: This report is available for testing purposes only. It may
         # be changed before final release.
         # @!attribute [r] name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The application name.
         # @!attribute [r] state
-        #   @return [Google::Cloud::Dataproc::V1beta2::YarnApplication::State]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::YarnApplication::State]
         #     Output only. The application state.
         # @!attribute [r] progress
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. The numerical progress of the application, from 1 to 100.
         # @!attribute [r] tracking_url
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The HTTP URL of the ApplicationMaster, HistoryServer, or
         #     TimelineServer that provides application-specific information. The URL uses
         #     the internal hostname, and requires a proxy server for resolution and,
         #     possibly, access.
         class YarnApplication
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The application state, corresponding to
           # <code>YarnProtos.YarnApplicationStateProto</code>.
@@ -671,68 +671,68 @@ module Google
 
         # A Dataproc job resource.
         # @!attribute [rw] reference
-        #   @return [Google::Cloud::Dataproc::V1beta2::JobReference]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::JobReference]
         #     Optional. The fully qualified reference to the job, which can be used to
         #     obtain the equivalent REST path of the job resource. If this property
         #     is not specified when a job is created, the server generates a
         #     <code>job_id</code>.
         # @!attribute [rw] placement
-        #   @return [Google::Cloud::Dataproc::V1beta2::JobPlacement]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::JobPlacement]
         #     Required. Job information, including how, when, and where to
         #     run the job.
         # @!attribute [rw] hadoop_job
-        #   @return [Google::Cloud::Dataproc::V1beta2::HadoopJob]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::HadoopJob]
         #     Optional. Job is a Hadoop job.
         # @!attribute [rw] spark_job
-        #   @return [Google::Cloud::Dataproc::V1beta2::SparkJob]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::SparkJob]
         #     Optional. Job is a Spark job.
         # @!attribute [rw] pyspark_job
-        #   @return [Google::Cloud::Dataproc::V1beta2::PySparkJob]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::PySparkJob]
         #     Optional. Job is a PySpark job.
         # @!attribute [rw] hive_job
-        #   @return [Google::Cloud::Dataproc::V1beta2::HiveJob]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::HiveJob]
         #     Optional. Job is a Hive job.
         # @!attribute [rw] pig_job
-        #   @return [Google::Cloud::Dataproc::V1beta2::PigJob]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::PigJob]
         #     Optional. Job is a Pig job.
         # @!attribute [rw] spark_r_job
-        #   @return [Google::Cloud::Dataproc::V1beta2::SparkRJob]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::SparkRJob]
         #     Optional. Job is a SparkR job.
         # @!attribute [rw] spark_sql_job
-        #   @return [Google::Cloud::Dataproc::V1beta2::SparkSqlJob]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::SparkSqlJob]
         #     Optional. Job is a SparkSql job.
         # @!attribute [rw] presto_job
-        #   @return [Google::Cloud::Dataproc::V1beta2::PrestoJob]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::PrestoJob]
         #     Optional. Job is a Presto job.
         # @!attribute [r] status
-        #   @return [Google::Cloud::Dataproc::V1beta2::JobStatus]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::JobStatus]
         #     Output only. The job status. Additional application-specific
         #     status information may be contained in the <code>type_job</code>
         #     and <code>yarn_applications</code> fields.
         # @!attribute [r] status_history
-        #   @return [Array<Google::Cloud::Dataproc::V1beta2::JobStatus>]
+        #   @return [::Array<::Google::Cloud::Dataproc::V1beta2::JobStatus>]
         #     Output only. The previous job status.
         # @!attribute [r] yarn_applications
-        #   @return [Array<Google::Cloud::Dataproc::V1beta2::YarnApplication>]
+        #   @return [::Array<::Google::Cloud::Dataproc::V1beta2::YarnApplication>]
         #     Output only. The collection of YARN applications spun up by this job.
         #
         #     **Beta** Feature: This report is available for testing purposes only. It
         #     may be changed before final release.
         # @!attribute [r] submitted_by
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The email address of the user submitting the job. For jobs
         #     submitted on the cluster, the address is <code>username@hostname</code>.
         # @!attribute [r] driver_output_resource_uri
-        #   @return [String]
+        #   @return [::String]
         #     Output only. A URI pointing to the location of the stdout of the job's
         #     driver program.
         # @!attribute [r] driver_control_files_uri
-        #   @return [String]
+        #   @return [::String]
         #     Output only. If present, the location of miscellaneous control files
         #     which may be used as part of job setup and handling. If not present,
         #     control files may be placed in the same location as `driver_output_uri`.
         # @!attribute [rw] labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels to associate with this job.
         #     Label **keys** must contain 1 to 63 characters, and must conform to
         #     [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt).
@@ -741,36 +741,36 @@ module Google
         #     1035](https://www.ietf.org/rfc/rfc1035.txt). No more than 32 labels can be
         #     associated with a job.
         # @!attribute [rw] scheduling
-        #   @return [Google::Cloud::Dataproc::V1beta2::JobScheduling]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::JobScheduling]
         #     Optional. Job scheduling configuration.
         # @!attribute [r] job_uuid
-        #   @return [String]
+        #   @return [::String]
         #     Output only. A UUID that uniquely identifies a job within the project
         #     over time. This is in contrast to a user-settable reference.job_id that
         #     may be reused over time.
         # @!attribute [r] done
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Output only. Indicates whether the job is completed. If the value is `false`,
         #     the job is still in progress. If `true`, the job is completed, and
         #     `status.state` field will indicate if it was successful, failed,
         #     or cancelled.
         class Job
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class LabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Job scheduling options.
         # @!attribute [rw] max_failures_per_hour
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. Maximum number of times per hour a driver may be restarted as
         #     a result of driver terminating with non-zero code before job is
         #     reported failed.
@@ -780,45 +780,45 @@ module Google
         #
         #     Maximum value is 10.
         class JobScheduling
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Job Operation metadata.
         # @!attribute [r] job_id
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The job id.
         # @!attribute [r] status
-        #   @return [Google::Cloud::Dataproc::V1beta2::JobStatus]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::JobStatus]
         #     Output only. Most recent job status.
         # @!attribute [r] operation_type
-        #   @return [String]
+        #   @return [::String]
         #     Output only. Operation type.
         # @!attribute [r] start_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Job submission time.
         class JobMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A request to submit a job.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The ID of the Google Cloud Platform project that the job
         #     belongs to.
         # @!attribute [rw] region
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] job
-        #   @return [Google::Cloud::Dataproc::V1beta2::Job]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::Job]
         #     Required. The job resource.
         # @!attribute [rw] request_id
-        #   @return [String]
+        #   @return [::String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two {Google::Cloud::Dataproc::V1beta2::SubmitJobRequest SubmitJobRequest} requests  with the same
+        #     receives two {::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest SubmitJobRequest} requests  with the same
         #     id, then the second request will be ignored and the
-        #     first {Google::Cloud::Dataproc::V1beta2::Job Job} created and stored in the backend
+        #     first {::Google::Cloud::Dataproc::V1beta2::Job Job} created and stored in the backend
         #     is returned.
         #
         #     It is recommended to always set this value to a
@@ -827,53 +827,53 @@ module Google
         #     The id must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), and hyphens (-). The maximum length is 40 characters.
         class SubmitJobRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A request to get the resource representation for a job in a project.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The ID of the Google Cloud Platform project that the job
         #     belongs to.
         # @!attribute [rw] region
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] job_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The job ID.
         class GetJobRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A request to list jobs in a project.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The ID of the Google Cloud Platform project that the job
         #     belongs to.
         # @!attribute [rw] region
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The number of results to return in each response.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The page token, returned by a previous call, to request the
         #     next page of results.
         # @!attribute [rw] cluster_name
-        #   @return [String]
+        #   @return [::String]
         #     Optional. If set, the returned jobs list includes only jobs that were
         #     submitted to the named cluster.
         # @!attribute [rw] job_state_matcher
-        #   @return [Google::Cloud::Dataproc::V1beta2::ListJobsRequest::JobStateMatcher]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::ListJobsRequest::JobStateMatcher]
         #     Optional. Specifies enumerated categories of jobs to list.
         #     (default = match ALL jobs).
         #
         #     If `filter` is provided, `jobStateMatcher` will be ignored.
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     Optional. A filter constraining the jobs to list. Filters are
         #     case-sensitive and have the following syntax:
         #
@@ -889,8 +889,8 @@ module Google
         #
         #     status.state = ACTIVE AND labels.env = staging AND labels.starred = *
         class ListJobsRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # A matcher that specifies categories of job states.
           module JobStateMatcher
@@ -908,20 +908,20 @@ module Google
 
         # A request to update a job.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The ID of the Google Cloud Platform project that the job
         #     belongs to.
         # @!attribute [rw] region
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] job_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The job ID.
         # @!attribute [rw] job
-        #   @return [Google::Cloud::Dataproc::V1beta2::Job]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::Job]
         #     Required. The changes to the job.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Required. Specifies the path, relative to <code>Job</code>, of
         #     the field to update. For example, to update the labels of a Job the
         #     <code>update_mask</code> parameter would be specified as
@@ -929,54 +929,54 @@ module Google
         #     value. <strong>Note:</strong> Currently, <code>labels</code> is the only
         #     field that can be updated.
         class UpdateJobRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A list of jobs in a project.
         # @!attribute [r] jobs
-        #   @return [Array<Google::Cloud::Dataproc::V1beta2::Job>]
+        #   @return [::Array<::Google::Cloud::Dataproc::V1beta2::Job>]
         #     Output only. Jobs list.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     Optional. This token is included in the response if there are more results
         #     to fetch. To fetch additional results, provide this value as the
         #     `page_token` in a subsequent <code>ListJobsRequest</code>.
         class ListJobsResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A request to cancel a job.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The ID of the Google Cloud Platform project that the job
         #     belongs to.
         # @!attribute [rw] region
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] job_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The job ID.
         class CancelJobRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A request to delete a job.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The ID of the Google Cloud Platform project that the job
         #     belongs to.
         # @!attribute [rw] region
-        #   @return [String]
+        #   @return [::String]
         #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] job_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The job ID.
         class DeleteJobRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

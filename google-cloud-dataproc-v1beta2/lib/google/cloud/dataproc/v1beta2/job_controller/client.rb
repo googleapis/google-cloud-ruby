@@ -36,15 +36,15 @@ module Google
             ##
             # Configure the JobController Client class.
             #
-            # See {Google::Cloud::Dataproc::V1beta2::JobController::Client::Configuration}
+            # See {::Google::Cloud::Dataproc::V1beta2::JobController::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all JobController clients:
             #
-            #     Google::Cloud::Dataproc::V1beta2::JobController::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Dataproc::V1beta2::JobController::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -132,7 +132,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Dataproc::V1beta2::JobController::Client::Configuration}
+            # See {::Google::Cloud::Dataproc::V1beta2::JobController::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -153,13 +153,13 @@ module Google
             # To create a new JobController client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Dataproc::V1beta2::JobController::Client.new
+            #     client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new
             #
             # To create a new JobController client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the JobController client.
@@ -191,8 +191,8 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
-              @job_controller_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Dataproc::V1beta2::JobController::Stub,
+              @job_controller_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Dataproc::V1beta2::JobController::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -203,7 +203,7 @@ module Google
             ##
             # Get the associated client for long-running operations.
             #
-            # @return [Google::Cloud::Dataproc::V1beta2::JobController::Operations]
+            # @return [::Google::Cloud::Dataproc::V1beta2::JobController::Operations]
             #
             attr_reader :operations_client
 
@@ -214,12 +214,12 @@ module Google
             #
             # @overload submit_job(request, options = nil)
             #   Pass arguments to `submit_job` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1beta2::SubmitJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1beta2::SubmitJobRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload submit_job(project_id: nil, region: nil, job: nil, request_id: nil)
@@ -227,18 +227,18 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. The ID of the Google Cloud Platform project that the job
             #     belongs to.
-            #   @param region [String]
+            #   @param region [::String]
             #     Required. The Dataproc region in which to handle the request.
-            #   @param job [Google::Cloud::Dataproc::V1beta2::Job, Hash]
+            #   @param job [::Google::Cloud::Dataproc::V1beta2::Job, ::Hash]
             #     Required. The job resource.
-            #   @param request_id [String]
+            #   @param request_id [::String]
             #     Optional. A unique id used to identify the request. If the server
-            #     receives two {Google::Cloud::Dataproc::V1beta2::SubmitJobRequest SubmitJobRequest} requests  with the same
+            #     receives two {::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest SubmitJobRequest} requests  with the same
             #     id, then the second request will be ignored and the
-            #     first {Google::Cloud::Dataproc::V1beta2::Job Job} created and stored in the backend
+            #     first {::Google::Cloud::Dataproc::V1beta2::Job Job} created and stored in the backend
             #     is returned.
             #
             #     It is recommended to always set this value to a
@@ -248,26 +248,26 @@ module Google
             #     underscores (_), and hyphens (-). The maximum length is 40 characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dataproc::V1beta2::Job]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dataproc::V1beta2::Job]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dataproc::V1beta2::Job]
+            # @return [::Google::Cloud::Dataproc::V1beta2::Job]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def submit_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1beta2::SubmitJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.submit_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -289,8 +289,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -298,12 +298,12 @@ module Google
             #
             # @overload submit_job_as_operation(request, options = nil)
             #   Pass arguments to `submit_job_as_operation` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1beta2::SubmitJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1beta2::SubmitJobRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload submit_job_as_operation(project_id: nil, region: nil, job: nil, request_id: nil)
@@ -311,18 +311,18 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. The ID of the Google Cloud Platform project that the job
             #     belongs to.
-            #   @param region [String]
+            #   @param region [::String]
             #     Required. The Dataproc region in which to handle the request.
-            #   @param job [Google::Cloud::Dataproc::V1beta2::Job, Hash]
+            #   @param job [::Google::Cloud::Dataproc::V1beta2::Job, ::Hash]
             #     Required. The job resource.
-            #   @param request_id [String]
+            #   @param request_id [::String]
             #     Optional. A unique id used to identify the request. If the server
-            #     receives two {Google::Cloud::Dataproc::V1beta2::SubmitJobRequest SubmitJobRequest} requests  with the same
+            #     receives two {::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest SubmitJobRequest} requests  with the same
             #     id, then the second request will be ignored and the
-            #     first {Google::Cloud::Dataproc::V1beta2::Job Job} created and stored in the backend
+            #     first {::Google::Cloud::Dataproc::V1beta2::Job Job} created and stored in the backend
             #     is returned.
             #
             #     It is recommended to always set this value to a
@@ -332,26 +332,26 @@ module Google
             #     underscores (_), and hyphens (-). The maximum length is 40 characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def submit_job_as_operation request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1beta2::SubmitJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.submit_job_as_operation.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -370,12 +370,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :submit_job_as_operation, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -383,12 +383,12 @@ module Google
             #
             # @overload get_job(request, options = nil)
             #   Pass arguments to `get_job` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1beta2::GetJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1beta2::GetJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1beta2::GetJobRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1beta2::GetJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_job(project_id: nil, region: nil, job_id: nil)
@@ -396,35 +396,35 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. The ID of the Google Cloud Platform project that the job
             #     belongs to.
-            #   @param region [String]
+            #   @param region [::String]
             #     Required. The Dataproc region in which to handle the request.
-            #   @param job_id [String]
+            #   @param job_id [::String]
             #     Required. The job ID.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dataproc::V1beta2::Job]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dataproc::V1beta2::Job]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dataproc::V1beta2::Job]
+            # @return [::Google::Cloud::Dataproc::V1beta2::Job]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1beta2::GetJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1beta2::GetJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -447,8 +447,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -456,12 +456,12 @@ module Google
             #
             # @overload list_jobs(request, options = nil)
             #   Pass arguments to `list_jobs` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1beta2::ListJobsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1beta2::ListJobsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1beta2::ListJobsRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1beta2::ListJobsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_jobs(project_id: nil, region: nil, page_size: nil, page_token: nil, cluster_name: nil, job_state_matcher: nil, filter: nil)
@@ -469,25 +469,25 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. The ID of the Google Cloud Platform project that the job
             #     belongs to.
-            #   @param region [String]
+            #   @param region [::String]
             #     Required. The Dataproc region in which to handle the request.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Optional. The number of results to return in each response.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Optional. The page token, returned by a previous call, to request the
             #     next page of results.
-            #   @param cluster_name [String]
+            #   @param cluster_name [::String]
             #     Optional. If set, the returned jobs list includes only jobs that were
             #     submitted to the named cluster.
-            #   @param job_state_matcher [Google::Cloud::Dataproc::V1beta2::ListJobsRequest::JobStateMatcher]
+            #   @param job_state_matcher [::Google::Cloud::Dataproc::V1beta2::ListJobsRequest::JobStateMatcher]
             #     Optional. Specifies enumerated categories of jobs to list.
             #     (default = match ALL jobs).
             #
             #     If `filter` is provided, `jobStateMatcher` will be ignored.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Optional. A filter constraining the jobs to list. Filters are
             #     case-sensitive and have the following syntax:
             #
@@ -504,26 +504,26 @@ module Google
             #     status.state = ACTIVE AND labels.env = staging AND labels.starred = *
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Dataproc::V1beta2::Job>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataproc::V1beta2::Job>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Dataproc::V1beta2::Job>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dataproc::V1beta2::Job>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_jobs request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1beta2::ListJobsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1beta2::ListJobsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_jobs.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -542,12 +542,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :list_jobs, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @job_controller_stub, :list_jobs, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @job_controller_stub, :list_jobs, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -555,12 +555,12 @@ module Google
             #
             # @overload update_job(request, options = nil)
             #   Pass arguments to `update_job` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1beta2::UpdateJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1beta2::UpdateJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1beta2::UpdateJobRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1beta2::UpdateJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_job(project_id: nil, region: nil, job_id: nil, job: nil, update_mask: nil)
@@ -568,16 +568,16 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. The ID of the Google Cloud Platform project that the job
             #     belongs to.
-            #   @param region [String]
+            #   @param region [::String]
             #     Required. The Dataproc region in which to handle the request.
-            #   @param job_id [String]
+            #   @param job_id [::String]
             #     Required. The job ID.
-            #   @param job [Google::Cloud::Dataproc::V1beta2::Job, Hash]
+            #   @param job [::Google::Cloud::Dataproc::V1beta2::Job, ::Hash]
             #     Required. The changes to the job.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Specifies the path, relative to <code>Job</code>, of
             #     the field to update. For example, to update the labels of a Job the
             #     <code>update_mask</code> parameter would be specified as
@@ -586,26 +586,26 @@ module Google
             #     field that can be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dataproc::V1beta2::Job]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dataproc::V1beta2::Job]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dataproc::V1beta2::Job]
+            # @return [::Google::Cloud::Dataproc::V1beta2::Job]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1beta2::UpdateJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1beta2::UpdateJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -628,8 +628,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -641,12 +641,12 @@ module Google
             #
             # @overload cancel_job(request, options = nil)
             #   Pass arguments to `cancel_job` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1beta2::CancelJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1beta2::CancelJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1beta2::CancelJobRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1beta2::CancelJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload cancel_job(project_id: nil, region: nil, job_id: nil)
@@ -654,35 +654,35 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. The ID of the Google Cloud Platform project that the job
             #     belongs to.
-            #   @param region [String]
+            #   @param region [::String]
             #     Required. The Dataproc region in which to handle the request.
-            #   @param job_id [String]
+            #   @param job_id [::String]
             #     Required. The job ID.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dataproc::V1beta2::Job]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dataproc::V1beta2::Job]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dataproc::V1beta2::Job]
+            # @return [::Google::Cloud::Dataproc::V1beta2::Job]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def cancel_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1beta2::CancelJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1beta2::CancelJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.cancel_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -705,8 +705,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -715,12 +715,12 @@ module Google
             #
             # @overload delete_job(request, options = nil)
             #   Pass arguments to `delete_job` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1beta2::DeleteJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1beta2::DeleteJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1beta2::DeleteJobRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1beta2::DeleteJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_job(project_id: nil, region: nil, job_id: nil)
@@ -728,35 +728,35 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. The ID of the Google Cloud Platform project that the job
             #     belongs to.
-            #   @param region [String]
+            #   @param region [::String]
             #     Required. The Dataproc region in which to handle the request.
-            #   @param job_id [String]
+            #   @param job_id [::String]
             #     Required. The job ID.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1beta2::DeleteJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1beta2::DeleteJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -779,8 +779,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -790,7 +790,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Dataproc::V1beta2::JobController::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Dataproc::V1beta2::JobController::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -801,22 +801,22 @@ module Google
             # To modify the global config, setting the timeout for submit_job
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Dataproc::V1beta2::JobController::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.submit_job.timeout = 20_000
+            #     ::Google::Cloud::Dataproc::V1beta2::JobController::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.submit_job.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.submit_job.timeout = 20_000
+            #     client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.submit_job.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"dataproc.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -828,29 +828,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -858,10 +858,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "dataproc.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -869,14 +869,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -917,56 +917,56 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `submit_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :submit_job
                 ##
                 # RPC-specific configuration for `submit_job_as_operation`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :submit_job_as_operation
                 ##
                 # RPC-specific configuration for `get_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_job
                 ##
                 # RPC-specific configuration for `list_jobs`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_jobs
                 ##
                 # RPC-specific configuration for `update_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_job
                 ##
                 # RPC-specific configuration for `cancel_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :cancel_job
                 ##
                 # RPC-specific configuration for `delete_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_job
 
                 # @private
                 def initialize parent_rpcs = nil
                   submit_job_config = parent_rpcs&.submit_job if parent_rpcs&.respond_to? :submit_job
-                  @submit_job = Gapic::Config::Method.new submit_job_config
+                  @submit_job = ::Gapic::Config::Method.new submit_job_config
                   submit_job_as_operation_config = parent_rpcs&.submit_job_as_operation if parent_rpcs&.respond_to? :submit_job_as_operation
-                  @submit_job_as_operation = Gapic::Config::Method.new submit_job_as_operation_config
+                  @submit_job_as_operation = ::Gapic::Config::Method.new submit_job_as_operation_config
                   get_job_config = parent_rpcs&.get_job if parent_rpcs&.respond_to? :get_job
-                  @get_job = Gapic::Config::Method.new get_job_config
+                  @get_job = ::Gapic::Config::Method.new get_job_config
                   list_jobs_config = parent_rpcs&.list_jobs if parent_rpcs&.respond_to? :list_jobs
-                  @list_jobs = Gapic::Config::Method.new list_jobs_config
+                  @list_jobs = ::Gapic::Config::Method.new list_jobs_config
                   update_job_config = parent_rpcs&.update_job if parent_rpcs&.respond_to? :update_job
-                  @update_job = Gapic::Config::Method.new update_job_config
+                  @update_job = ::Gapic::Config::Method.new update_job_config
                   cancel_job_config = parent_rpcs&.cancel_job if parent_rpcs&.respond_to? :cancel_job
-                  @cancel_job = Gapic::Config::Method.new cancel_job_config
+                  @cancel_job = ::Gapic::Config::Method.new cancel_job_config
                   delete_job_config = parent_rpcs&.delete_job if parent_rpcs&.respond_to? :delete_job
-                  @delete_job = Gapic::Config::Method.new delete_job_config
+                  @delete_job = ::Gapic::Config::Method.new delete_job_config
 
                   yield self if block_given?
                 end

@@ -24,7 +24,7 @@ module Google
       module V1beta2
         module AutoscalingPolicyService
           # Credentials for the AutoscalingPolicyService API.
-          class Credentials < Google::Auth::Credentials
+          class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform"
             ]

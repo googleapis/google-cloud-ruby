@@ -23,7 +23,7 @@ require "google/cloud/dataproc/v1beta2/jobs_pb"
 require "google/cloud/dataproc/v1beta2/jobs_services_pb"
 require "google/cloud/dataproc/v1beta2/job_controller"
 
-class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Test
+class ::Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
   def test_submit_job
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dataproc::V1beta2::Job.new
+    grpc_response = ::Google::Cloud::Dataproc::V1beta2::Job.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -61,17 +61,17 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
     submit_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :submit_job, name
-      assert_kind_of Google::Cloud::Dataproc::V1beta2::SubmitJobRequest, request
+      assert_kind_of ::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest, request
       assert_equal "hello world", request.project_id
       assert_equal "hello world", request.region
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Dataproc::V1beta2::Job), request.job
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::Job), request.job
       assert_equal "hello world", request.request_id
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, submit_job_client_stub do
       # Create client
-      client = Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -88,7 +88,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.submit_job Google::Cloud::Dataproc::V1beta2::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id) do |response, operation|
+      client.submit_job ::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -100,7 +100,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.submit_job Google::Cloud::Dataproc::V1beta2::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id), grpc_options do |response, operation|
+      client.submit_job ::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -112,7 +112,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
   def test_submit_job_as_operation
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -125,17 +125,17 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
     submit_job_as_operation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :submit_job_as_operation, name
-      assert_kind_of Google::Cloud::Dataproc::V1beta2::SubmitJobRequest, request
+      assert_kind_of ::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest, request
       assert_equal "hello world", request.project_id
       assert_equal "hello world", request.region
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Dataproc::V1beta2::Job), request.job
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::Job), request.job
       assert_equal "hello world", request.request_id
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, submit_job_as_operation_client_stub do
       # Create client
-      client = Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -154,7 +154,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.submit_job_as_operation Google::Cloud::Dataproc::V1beta2::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id) do |response, operation|
+      client.submit_job_as_operation ::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -168,7 +168,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.submit_job_as_operation Google::Cloud::Dataproc::V1beta2::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id), grpc_options do |response, operation|
+      client.submit_job_as_operation ::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -181,7 +181,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
   def test_get_job
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dataproc::V1beta2::Job.new
+    grpc_response = ::Google::Cloud::Dataproc::V1beta2::Job.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -193,7 +193,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
     get_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_job, name
-      assert_kind_of Google::Cloud::Dataproc::V1beta2::GetJobRequest, request
+      assert_kind_of ::Google::Cloud::Dataproc::V1beta2::GetJobRequest, request
       assert_equal "hello world", request.project_id
       assert_equal "hello world", request.region
       assert_equal "hello world", request.job_id
@@ -202,7 +202,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_job_client_stub do
       # Create client
-      client = Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -219,7 +219,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.get_job Google::Cloud::Dataproc::V1beta2::GetJobRequest.new(project_id: project_id, region: region, job_id: job_id) do |response, operation|
+      client.get_job ::Google::Cloud::Dataproc::V1beta2::GetJobRequest.new(project_id: project_id, region: region, job_id: job_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -231,7 +231,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.get_job Google::Cloud::Dataproc::V1beta2::GetJobRequest.new(project_id: project_id, region: region, job_id: job_id), grpc_options do |response, operation|
+      client.get_job ::Google::Cloud::Dataproc::V1beta2::GetJobRequest.new(project_id: project_id, region: region, job_id: job_id), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -243,7 +243,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
   def test_list_jobs
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dataproc::V1beta2::ListJobsResponse.new
+    grpc_response = ::Google::Cloud::Dataproc::V1beta2::ListJobsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -259,7 +259,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
     list_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_jobs, name
-      assert_kind_of Google::Cloud::Dataproc::V1beta2::ListJobsRequest, request
+      assert_kind_of ::Google::Cloud::Dataproc::V1beta2::ListJobsRequest, request
       assert_equal "hello world", request.project_id
       assert_equal "hello world", request.region
       assert_equal 42, request.page_size
@@ -272,7 +272,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_jobs_client_stub do
       # Create client
-      client = Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -291,7 +291,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.list_jobs Google::Cloud::Dataproc::V1beta2::ListJobsRequest.new(project_id: project_id, region: region, page_size: page_size, page_token: page_token, cluster_name: cluster_name, job_state_matcher: job_state_matcher, filter: filter) do |response, operation|
+      client.list_jobs ::Google::Cloud::Dataproc::V1beta2::ListJobsRequest.new(project_id: project_id, region: region, page_size: page_size, page_token: page_token, cluster_name: cluster_name, job_state_matcher: job_state_matcher, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -305,7 +305,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.list_jobs Google::Cloud::Dataproc::V1beta2::ListJobsRequest.new(project_id: project_id, region: region, page_size: page_size, page_token: page_token, cluster_name: cluster_name, job_state_matcher: job_state_matcher, filter: filter), grpc_options do |response, operation|
+      client.list_jobs ::Google::Cloud::Dataproc::V1beta2::ListJobsRequest.new(project_id: project_id, region: region, page_size: page_size, page_token: page_token, cluster_name: cluster_name, job_state_matcher: job_state_matcher, filter: filter), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -318,7 +318,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
   def test_update_job
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dataproc::V1beta2::Job.new
+    grpc_response = ::Google::Cloud::Dataproc::V1beta2::Job.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -332,18 +332,18 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
     update_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_job, name
-      assert_kind_of Google::Cloud::Dataproc::V1beta2::UpdateJobRequest, request
+      assert_kind_of ::Google::Cloud::Dataproc::V1beta2::UpdateJobRequest, request
       assert_equal "hello world", request.project_id
       assert_equal "hello world", request.region
       assert_equal "hello world", request.job_id
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Dataproc::V1beta2::Job), request.job
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::Job), request.job
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_job_client_stub do
       # Create client
-      client = Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -360,7 +360,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.update_job Google::Cloud::Dataproc::V1beta2::UpdateJobRequest.new(project_id: project_id, region: region, job_id: job_id, job: job, update_mask: update_mask) do |response, operation|
+      client.update_job ::Google::Cloud::Dataproc::V1beta2::UpdateJobRequest.new(project_id: project_id, region: region, job_id: job_id, job: job, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -372,7 +372,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.update_job Google::Cloud::Dataproc::V1beta2::UpdateJobRequest.new(project_id: project_id, region: region, job_id: job_id, job: job, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_job ::Google::Cloud::Dataproc::V1beta2::UpdateJobRequest.new(project_id: project_id, region: region, job_id: job_id, job: job, update_mask: update_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -384,7 +384,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
   def test_cancel_job
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dataproc::V1beta2::Job.new
+    grpc_response = ::Google::Cloud::Dataproc::V1beta2::Job.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -396,7 +396,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
     cancel_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :cancel_job, name
-      assert_kind_of Google::Cloud::Dataproc::V1beta2::CancelJobRequest, request
+      assert_kind_of ::Google::Cloud::Dataproc::V1beta2::CancelJobRequest, request
       assert_equal "hello world", request.project_id
       assert_equal "hello world", request.region
       assert_equal "hello world", request.job_id
@@ -405,7 +405,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, cancel_job_client_stub do
       # Create client
-      client = Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -422,7 +422,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.cancel_job Google::Cloud::Dataproc::V1beta2::CancelJobRequest.new(project_id: project_id, region: region, job_id: job_id) do |response, operation|
+      client.cancel_job ::Google::Cloud::Dataproc::V1beta2::CancelJobRequest.new(project_id: project_id, region: region, job_id: job_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -434,7 +434,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.cancel_job Google::Cloud::Dataproc::V1beta2::CancelJobRequest.new(project_id: project_id, region: region, job_id: job_id), grpc_options do |response, operation|
+      client.cancel_job ::Google::Cloud::Dataproc::V1beta2::CancelJobRequest.new(project_id: project_id, region: region, job_id: job_id), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -446,7 +446,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
   def test_delete_job
     # Create GRPC objects.
-    grpc_response = Google::Protobuf::Empty.new
+    grpc_response = ::Google::Protobuf::Empty.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -458,7 +458,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
     delete_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_job, name
-      assert_kind_of Google::Cloud::Dataproc::V1beta2::DeleteJobRequest, request
+      assert_kind_of ::Google::Cloud::Dataproc::V1beta2::DeleteJobRequest, request
       assert_equal "hello world", request.project_id
       assert_equal "hello world", request.region
       assert_equal "hello world", request.job_id
@@ -467,7 +467,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_job_client_stub do
       # Create client
-      client = Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -484,7 +484,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.delete_job Google::Cloud::Dataproc::V1beta2::DeleteJobRequest.new(project_id: project_id, region: region, job_id: job_id) do |response, operation|
+      client.delete_job ::Google::Cloud::Dataproc::V1beta2::DeleteJobRequest.new(project_id: project_id, region: region, job_id: job_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -496,7 +496,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.delete_job Google::Cloud::Dataproc::V1beta2::DeleteJobRequest.new(project_id: project_id, region: region, job_id: job_id), grpc_options do |response, operation|
+      client.delete_job ::Google::Cloud::Dataproc::V1beta2::DeleteJobRequest.new(project_id: project_id, region: region, job_id: job_id), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -511,7 +511,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -521,7 +521,7 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Dataproc::V1beta2::JobController::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Dataproc::V1beta2::JobController::Client::Configuration, config
   end
 
   def test_operations_client
@@ -529,11 +529,11 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
 
     client = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
 
-    assert_kind_of Google::Cloud::Dataproc::V1beta2::JobController::Operations, client.operations_client
+    assert_kind_of ::Google::Cloud::Dataproc::V1beta2::JobController::Operations, client.operations_client
   end
 end

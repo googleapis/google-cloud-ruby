@@ -37,7 +37,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/dataproc/v1beta2/autoscaling_policy_service"
-        #     client = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.new
+        #     client = ::Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.new
         #
         module AutoscalingPolicyService
         end
