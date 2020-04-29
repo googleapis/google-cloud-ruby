@@ -35,10 +35,10 @@ module Google
             # @param location [String]
             # @param job [String]
             #
-            # @return [String]
+            # @return [::String]
             def job_path project:, location:, job:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/jobs/#{job}"
             end
@@ -53,9 +53,9 @@ module Google
             # @param project [String]
             # @param location [String]
             #
-            # @return [String]
+            # @return [::String]
             def location_path project:, location:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
             end
@@ -70,9 +70,9 @@ module Google
             # @param project [String]
             # @param topic [String]
             #
-            # @return [String]
+            # @return [::String]
             def topic_path project:, topic:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/topics/#{topic}"
             end
