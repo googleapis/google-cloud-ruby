@@ -223,7 +223,8 @@ module Google
         # to block until the writer is stopped.
         #
         # @param [Number, nil] timeout The maximum number of seconds to wait for
-        #   shutdown to complete. The default value is `nil`.
+        #   shutdown to complete. Will wait forever when the value is `nil`. The
+        #   default value is `nil`.
         #
         # @return [AsyncWriter] returns self so calls can be chained.
         def wait! timeout = nil
@@ -241,7 +242,8 @@ module Google
         # Stop this asynchronous writer and block until it has been stopped.
         #
         # @param [Number, nil] timeout The maximum number of seconds to wait for
-        #   shutdown to complete. The default value is `nil`.
+        #   shutdown to complete. Will wait forever when the value is `nil`. The
+        #   default value is `nil`.
         # @param [Boolean] force If set to true, and the writer hasn't stopped
         #   within the given timeout, kill it forcibly by terminating the
         #   thread. This should be used with extreme caution, as it can
