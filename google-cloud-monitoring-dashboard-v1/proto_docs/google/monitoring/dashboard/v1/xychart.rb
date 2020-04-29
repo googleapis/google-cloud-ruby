@@ -24,54 +24,54 @@ module Google
         module V1
           # A chart that displays data on a 2D (X and Y axes) plane.
           # @!attribute [rw] data_sets
-          #   @return [Array<Google::Cloud::Monitoring::Dashboard::V1::XyChart::DataSet>]
+          #   @return [::Array<::Google::Cloud::Monitoring::Dashboard::V1::XyChart::DataSet>]
           #     The data displayed in this chart.
           # @!attribute [rw] timeshift_duration
-          #   @return [Google::Protobuf::Duration]
+          #   @return [::Google::Protobuf::Duration]
           #     The duration used to display a comparison chart. A comparison chart
           #     simultaneously shows values from two similar-length time periods
           #     (e.g., week-over-week metrics).
           #     The duration must be positive, and it can only be applied to charts with
           #     data sets of LINE plot type.
           # @!attribute [rw] thresholds
-          #   @return [Array<Google::Cloud::Monitoring::Dashboard::V1::Threshold>]
+          #   @return [::Array<::Google::Cloud::Monitoring::Dashboard::V1::Threshold>]
           #     Threshold lines drawn horizontally across the chart.
           # @!attribute [rw] x_axis
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::XyChart::Axis]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::XyChart::Axis]
           #     The properties applied to the X axis.
           # @!attribute [rw] y_axis
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::XyChart::Axis]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::XyChart::Axis]
           #     The properties applied to the Y axis.
           # @!attribute [rw] chart_options
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::ChartOptions]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::ChartOptions]
           #     Display options for the chart.
           class XyChart
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Groups a time series query definition with charting options.
             # @!attribute [rw] time_series_query
-            #   @return [Google::Cloud::Monitoring::Dashboard::V1::TimeSeriesQuery]
+            #   @return [::Google::Cloud::Monitoring::Dashboard::V1::TimeSeriesQuery]
             #     Fields for querying time series data from the
             #     Stackdriver metrics API.
             # @!attribute [rw] plot_type
-            #   @return [Google::Cloud::Monitoring::Dashboard::V1::XyChart::DataSet::PlotType]
+            #   @return [::Google::Cloud::Monitoring::Dashboard::V1::XyChart::DataSet::PlotType]
             #     How this data should be plotted on the chart.
             # @!attribute [rw] legend_template
-            #   @return [String]
+            #   @return [::String]
             #     A template string for naming `TimeSeries` in the resulting data set.
             #     This should be a string with interpolations of the form $\\{label_name},
             #     which will resolve to the label's value.
             # @!attribute [rw] min_alignment_period
-            #   @return [Google::Protobuf::Duration]
+            #   @return [::Google::Protobuf::Duration]
             #     Optional. The lower bound on data point frequency for this data set, implemented by
             #     specifying the minimum alignment period to use in a time series query
             #     For example, if the data is published once every 10 minutes, the
             #     `min_alignment_period` should be at least 10 minutes. It would not
             #     make sense to fetch and align data at one minute intervals.
             class DataSet
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
 
               # The types of plotting strategies for data sets.
               module PlotType
@@ -103,14 +103,14 @@ module Google
 
             # A chart axis.
             # @!attribute [rw] label
-            #   @return [String]
+            #   @return [::String]
             #     The label of the axis.
             # @!attribute [rw] scale
-            #   @return [Google::Cloud::Monitoring::Dashboard::V1::XyChart::Axis::Scale]
+            #   @return [::Google::Cloud::Monitoring::Dashboard::V1::XyChart::Axis::Scale]
             #     The axis scale. By default, a linear scale is used.
             class Axis
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
 
               # Types of scales used in axes.
               module Scale
@@ -128,11 +128,11 @@ module Google
 
           # Options to control visual rendering of a chart.
           # @!attribute [rw] mode
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::ChartOptions::Mode]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::ChartOptions::Mode]
           #     The chart mode.
           class ChartOptions
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Chart mode options.
             module Mode

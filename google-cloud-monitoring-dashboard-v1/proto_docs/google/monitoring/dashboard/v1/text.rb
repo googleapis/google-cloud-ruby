@@ -24,14 +24,14 @@ module Google
         module V1
           # A widget that displays textual content.
           # @!attribute [rw] content
-          #   @return [String]
+          #   @return [::String]
           #     The text content to be displayed.
           # @!attribute [rw] format
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::Text::Format]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Text::Format]
           #     How the text content is formatted.
           class Text
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # The format type of the text content.
             module Format

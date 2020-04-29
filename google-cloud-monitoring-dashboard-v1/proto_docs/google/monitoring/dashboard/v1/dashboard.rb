@@ -25,13 +25,13 @@ module Google
           # A Google Stackdriver dashboard. Dashboards define the content and layout
           # of pages in the Stackdriver web application.
           # @!attribute [rw] name
-          #   @return [String]
+          #   @return [::String]
           #     The resource name of the dashboard.
           # @!attribute [rw] display_name
-          #   @return [String]
+          #   @return [::String]
           #     The mutable, human-readable name.
           # @!attribute [rw] etag
-          #   @return [String]
+          #   @return [::String]
           #     `etag` is used for optimistic concurrency control as a way to help
           #     prevent simultaneous updates of a policy from overwriting each other.
           #     An `etag` is returned in the response to `GetDashboard`, and
@@ -40,20 +40,20 @@ module Google
           #     Dashboard configuration. The field should not be passed during
           #     dashboard creation.
           # @!attribute [rw] grid_layout
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::GridLayout]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::GridLayout]
           #     Content is arranged with a basic layout that re-flows a simple list of
           #     informational elements like widgets or tiles.
           # @!attribute [rw] row_layout
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::RowLayout]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::RowLayout]
           #     The content is divided into equally spaced rows and the widgets are
           #     arranged horizontally.
           # @!attribute [rw] column_layout
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::ColumnLayout]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::ColumnLayout]
           #     The content is divided into equally spaced columns and the widgets are
           #     arranged vertically.
           class Dashboard
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

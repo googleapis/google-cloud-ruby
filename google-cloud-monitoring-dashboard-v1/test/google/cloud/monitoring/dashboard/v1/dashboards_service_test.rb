@@ -23,7 +23,7 @@ require "google/monitoring/dashboard/v1/dashboards_service_pb"
 require "google/monitoring/dashboard/v1/dashboards_service_services_pb"
 require "google/cloud/monitoring/dashboard/v1/dashboards_service"
 
-class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < Minitest::Test
+class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
 
   def test_create_dashboard
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::Dashboard::V1::Dashboard.new
+    grpc_response = ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -59,15 +59,15 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
 
     create_dashboard_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_dashboard, name
-      assert_kind_of Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Monitoring::Dashboard::V1::Dashboard), request.dashboard
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard), request.dashboard
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_dashboard_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -84,7 +84,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
       end
 
       # Use protobuf object
-      client.create_dashboard Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest.new(parent: parent, dashboard: dashboard) do |response, operation|
+      client.create_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest.new(parent: parent, dashboard: dashboard) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -96,7 +96,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.create_dashboard Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest.new(parent: parent, dashboard: dashboard), grpc_options do |response, operation|
+      client.create_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest.new(parent: parent, dashboard: dashboard), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -108,7 +108,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
 
   def test_list_dashboards
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsResponse.new
+    grpc_response = ::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -120,7 +120,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
 
     list_dashboards_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_dashboards, name
-      assert_kind_of Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest, request
       assert_equal "hello world", request.parent
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
@@ -129,7 +129,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_dashboards_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -148,7 +148,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
       end
 
       # Use protobuf object
-      client.list_dashboards Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_dashboards ::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.list_dashboards Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_dashboards ::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -175,7 +175,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
 
   def test_get_dashboard
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::Dashboard::V1::Dashboard.new
+    grpc_response = ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -185,14 +185,14 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
 
     get_dashboard_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_dashboard, name
-      assert_kind_of Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_dashboard_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -209,7 +209,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
       end
 
       # Use protobuf object
-      client.get_dashboard Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest.new(name: name) do |response, operation|
+      client.get_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -221,7 +221,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_dashboard Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest.new(name: name), grpc_options do |response, operation|
+      client.get_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -233,7 +233,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
 
   def test_delete_dashboard
     # Create GRPC objects.
-    grpc_response = Google::Protobuf::Empty.new
+    grpc_response = ::Google::Protobuf::Empty.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -243,14 +243,14 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
 
     delete_dashboard_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_dashboard, name
-      assert_kind_of Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest, request
+      assert_kind_of ::Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, delete_dashboard_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -267,7 +267,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
       end
 
       # Use protobuf object
-      client.delete_dashboard Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest.new(name: name) do |response, operation|
+      client.delete_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -279,7 +279,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.delete_dashboard Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -291,7 +291,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
 
   def test_update_dashboard
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Monitoring::Dashboard::V1::Dashboard.new
+    grpc_response = ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -301,14 +301,14 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
 
     update_dashboard_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_dashboard, name
-      assert_kind_of Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Monitoring::Dashboard::V1::Dashboard), request.dashboard
+      assert_kind_of ::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard), request.dashboard
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_dashboard_client_stub do
       # Create client
-      client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -325,7 +325,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
       end
 
       # Use protobuf object
-      client.update_dashboard Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest.new(dashboard: dashboard) do |response, operation|
+      client.update_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest.new(dashboard: dashboard) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -337,7 +337,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.update_dashboard Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest.new(dashboard: dashboard), grpc_options do |response, operation|
+      client.update_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest.new(dashboard: dashboard), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -352,7 +352,7 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
+      client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -362,6 +362,6 @@ class Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < 
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client::Configuration, config
   end
 end
