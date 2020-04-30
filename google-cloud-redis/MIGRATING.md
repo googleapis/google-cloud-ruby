@@ -195,7 +195,7 @@ parent = "projects/my-project/locations/-"
 
 # Use a hash to wrap the normal call arguments (or pass a request object), and
 # then add further keyword arguments for the call options.
-response = client.analyze_sentiment({ parent: parent }, timeout: 10.0)
+response = client.list_instances({ parent: parent }, timeout: 10.0)
 ```
 
 ### Resource Path Helpers
