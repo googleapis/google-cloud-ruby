@@ -6,5 +6,3 @@ gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-env", path: "../google-cloud-env"
 gem "google-cloud-errors", path: "../google-cloud-errors"
 gem "google-cloud-bigquery-data_transfer-v1", path: "../google-cloud-bigquery-data_transfer-v1"
-
-gem "rake"
