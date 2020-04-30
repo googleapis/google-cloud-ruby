@@ -23,17 +23,15 @@ def quickstart project_id:
   # project_id = "YOUR_PROJECT_ID"
 
   # Instantiate a client
-  data_transfer = Google::Cloud::Bigquery::DataTransfer.new
+  data_transfer = Google::Cloud::Bigquery::DataTransfer.data_transfer_service
 
   # Get the full path to your project.
-  project_path = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_path(
-    project_id
-  )
+  project_path = data_transfer.project_path project: project_id
 
   puts "Supported Data Sources:"
 
   # Iterate over all possible data sources.
-  data_transfer.list_data_sources(project_path).each do |data_source|
+  data_transfer.list_data_sources(parent: project_path).each do |data_source|
     puts "Data source: #{data_source.display_name}"
     puts "ID: #{data_source.data_source_id}"
     puts "Full path: #{data_source.name}"
