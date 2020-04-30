@@ -63,7 +63,6 @@ module Google
             expires ||= 60*60*24
             p["expiration"] = (now + expires).strftime "%Y-%m-%dT%H:%M:%SZ"
 
-
             policy_str = escape_characters p.to_json
 
             policy = Base64.strict_encode64(policy_str).force_encoding "utf-8"
@@ -164,7 +163,6 @@ module Google
 
           def required_fields issuer, time
             {
-              "bucket" => @bucket_name,
               "key" => @file_name,
               "x-goog-date" => time.strftime("%Y%m%dT%H%M%SZ"),
               "x-goog-credential" => "#{issuer}/#{time.strftime '%Y%m%d'}/auto/storage/goog4_request",
@@ -175,6 +173,8 @@ module Google
           def policy_conditions base_fields, user_conditions, user_fields
             # Convert each pair in base_fields hash to a single-entry hash in an array.
             conditions = base_fields.to_a.map { |f| Hash[*f] }
+            # Add the bucket to the head of the base_fields. This is not returned in the PostObject fields.
+            conditions.unshift "bucket" => @bucket_name
             # Add user-provided conditions to the head of the conditions array.
             conditions.unshift user_conditions if user_conditions && !user_conditions.empty?
             if user_fields

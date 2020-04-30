@@ -29,6 +29,15 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
   it "generates a signed post object v4 simple" do
     post_object = bucket.generate_signed_post_policy_v4 "test-object", expires: 10
 
+    _(post_object.fields.keys.sort).must_equal [
+      "key",
+      "policy",
+      "x-goog-algorithm",
+      "x-goog-credential",
+      "x-goog-date",
+      "x-goog-signature"
+    ]
+
     form_data = [['file', File.open(data)]]
 
     post_object.fields.each do |key, value|
@@ -54,6 +63,15 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
 
   it "generates a signed post object v4 virtual hosted style" do
     post_object = bucket.generate_signed_post_policy_v4 "test-object", expires: 10, virtual_hosted_style: true
+
+    _(post_object.fields.keys.sort).must_equal [
+      "key",
+      "policy",
+      "x-goog-algorithm",
+      "x-goog-credential",
+      "x-goog-date",
+      "x-goog-signature"
+    ]
 
     form_data = [['file', File.open(data)]]
 
@@ -84,6 +102,17 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
     }
     post_object = bucket.generate_signed_post_policy_v4 "test-object", expires: 10, fields: fields
 
+    _(post_object.fields.keys.sort).must_equal [
+      "acl",
+      "cache-control",
+      "key",
+      "policy",
+      "x-goog-algorithm",
+      "x-goog-credential",
+      "x-goog-date",
+      "x-goog-signature"
+    ]
+
     form_data = [['file', File.open(data)]]
 
     post_object.fields.each do |key, value|
@@ -112,6 +141,16 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
       "success_action_status" => "200"
     }
     post_object = bucket.generate_signed_post_policy_v4 "test-object", expires: 10, fields: fields
+
+    _(post_object.fields.keys.sort).must_equal [
+      "key",
+      "policy",
+      "success_action_status",
+      "x-goog-algorithm",
+      "x-goog-credential",
+      "x-goog-date",
+      "x-goog-signature"
+    ]
 
     form_data = [['file', File.open(data)]]
 
