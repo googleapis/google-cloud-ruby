@@ -212,25 +212,27 @@ def speech_streaming_recognize audio_file_path: nil
 
   # [START speech_ruby_migration_streaming_response]
   # [START speech_ruby_migration_streaming_request]
-  audio_content  = File.binread audio_file_path
-  bytes_total    = audio_content.size
-  bytes_sent     = 0
-  chunk_size     = 32_000
+  audio_content = File.binread audio_file_path
+  bytes_total   = audio_content.size
+  bytes_sent    = 0
+  chunk_size    = 32_000
 
   input_stream = Gapic::StreamInput.new
   output_stream = speech.streaming_recognize input_stream
 
-  config = { config: { encoding:                 :LINEAR16,
-             sample_rate_hertz:        16_000,
-             language_code:            "en-US",
-             enable_word_time_offsets: true }
-  }
-  input_stream.push({ streaming_config: config })
+  config = { config: {
+              encoding:                 :LINEAR16,
+              sample_rate_hertz:        16_000,
+              language_code:            "en-US",
+              enable_word_time_offsets: true
+             }
+           }
+  input_stream.push(streaming_config: config)
 
   # Simulated streaming from a microphone
   # Stream bytes...
   while bytes_sent < bytes_total
-    input_stream.push({ audio_content: audio_content[bytes_sent, chunk_size]})
+    input_stream.push(audio_content: audio_content[bytes_sent, chunk_size])
     bytes_sent += chunk_size
     sleep 1
   end
