@@ -12,14 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative "../speech_samples"
-require "rspec"
-require "google/cloud/speech"
+
 require "google/cloud/storage"
+require_relative "helper"
+require_relative "../speech_samples.rb"
 
 describe "Google Cloud Speech API samples" do
+  parallelize_me!
   before do
-    @bucket_name = ENV["GOOGLE_CLOUD_STORAGE_BUCKET"]
+    @bucket_name = ENV["GCLOUD_TEST_STORAGE_BUCKET"]
     @storage     = Google::Cloud::Storage.new
     @bucket      = @storage.bucket @bucket_name
 
@@ -35,121 +36,128 @@ describe "Google Cloud Speech API samples" do
     @audio_file_transcript = "how old is the Brooklyn Bridge"
   end
 
-  # Capture and return STDOUT output by block
-  def capture
-    real_stdout = $stdout
-    $stdout = StringIO.new
-    yield
-    @captured_output = $stdout.string
-  ensure
-    $stdout = real_stdout
-  end
-  attr_reader :captured_output
-
-  example "transcribe audio file" do
-    expect {
+  it "transcribe audio file" do
+    out, _err = capture_io do
       speech_sync_recognize audio_file_path: @audio_file_path
-    }.to output("Transcription: #{@audio_file_transcript}\n").to_stdout
+    end
+
+    assert_match "Transcription: #{@audio_file_transcript}", out
   end
 
-  example "transcribe audio file with words" do
-    capture do
+  it "transcribe audio file with words" do
+    out, _err = capture_io do
       speech_sync_recognize_words audio_file_path: @audio_file_path
     end
 
-    expect(captured_output).to include "Transcription: how old is the Brooklyn Bridge"
-    expect(captured_output).to include "Word: how 0.0 0.3"
-    expect(captured_output).to include "Word: old 0.3 0.6"
-    expect(captured_output).to include "Word: is 0.6 0.8"
-    expect(captured_output).to include "Word: the 0.8 0.9"
-    expect(captured_output).to include "Word: Brooklyn 0.9 1.1"
-    expect(captured_output).to include "Word: Bridge 1.1 1.4"
+    assert_match "Transcription: how old is the Brooklyn Bridge", out
+    assert_match "Word: how 0.0 0.3", out
+    assert_match "Word: old 0.3 0.6", out
+    assert_match "Word: is 0.6 0.8", out
+    assert_match "Word: the 0.8 0.9", out
+    assert_match "Word: Brooklyn 0.9 1.1", out
+    assert_match "Word: Bridge 1.1 1.4", out
   end
 
-  example "transcribe audio file from GCS" do
+  it "transcribe audio file from GCS" do
     file = @bucket.upload_file @audio_file_path, "audio.raw"
     path = "gs://#{file.bucket}/audio.raw"
 
-    expect {
+    out, _err = capture_io do
       speech_sync_recognize_gcs storage_path: path
-    }.to output("Transcription: #{@audio_file_transcript}\n").to_stdout
+    end
+
+    assert_match "Transcription: #{@audio_file_transcript}", out
   end
 
-  example "async operation to transcribe audio file" do
-    expect {
+  it "async operation to transcribe audio file" do
+    out, _err = capture_io do
       speech_async_recognize audio_file_path: @audio_file_path
-    }.to output("Operation started\nTranscription: #{@audio_file_transcript}\n").to_stdout
+    end
+
+    assert_match "Operation started", out
+    assert_match "Transcription: #{@audio_file_transcript}", out
   end
 
-  example "async operation to transcribe audio file from GCS" do
+  it "async operation to transcribe audio file from GCS" do
     file = @bucket.upload_file @audio_file_path, "audio.raw"
     path = "gs://#{file.bucket}/audio.raw"
 
-    expect {
+    out, _err = capture_io do
       speech_async_recognize_gcs storage_path: path
-    }.to output("Operation started\nTranscription: #{@audio_file_transcript}\n").to_stdout
+    end
+
+    assert_match "Operation started", out
+    assert_match "Transcription: #{@audio_file_transcript}\n", out
   end
 
-  example "async operation to transcribe audio file from GCS with words" do
+  it "async operation to transcribe audio file from GCS with words" do
     file = @bucket.upload_file @audio_file_path, "audio.raw"
     path = "gs://#{file.bucket}/audio.raw"
 
-    capture do
+    out, _err = capture_io do
       speech_async_recognize_gcs_words storage_path: path
     end
 
-    expect(captured_output).to include "Operation started"
-    expect(captured_output).to include "Transcription: how old is the Brooklyn Bridge"
-    expect(captured_output).to include "Word: how 0.0 0.3"
-    expect(captured_output).to include "Word: old 0.3 0.6"
-    expect(captured_output).to include "Word: is 0.6 0.8"
-    expect(captured_output).to include "Word: the 0.8 0.9"
-    expect(captured_output).to include "Word: Brooklyn 0.9 1.1"
-    expect(captured_output).to include "Word: Bridge 1.1 1.4"
+    assert_match "Operation started", out
+    assert_match "Transcription: how old is the Brooklyn Bridge", out
+    assert_match "Word: how 0.0 0.3", out
+    assert_match "Word: old 0.3 0.6", out
+    assert_match "Word: is 0.6 0.8", out
+    assert_match "Word: the 0.8 0.9", out
+    assert_match "Word: Brooklyn 0.9 1.1", out
+    assert_match "Word: Bridge 1.1 1.4", out
   end
 
-  example "streaming operation to transcribe audio file" do
-    expect {
+  it "streaming operation to transcribe audio file" do
+    out, _err = capture_io do
       speech_streaming_recognize audio_file_path: @audio_file_path
-    }.to output(
-      /how old is the Brooklyn Bridge/
-    ).to_stdout
+    end
+
+    assert_match "how old is the Brooklyn Bridge", out
   end
 
-  example "transcribe audio file with automatic punctuation" do
+  it "transcribe audio file with automatic punctuation" do
     audio_file_path = File.expand_path "../resources/commercial_mono.wav", __dir__
-    expect {
+
+    out, _err = capture_io do
       speech_transcribe_auto_punctuation audio_file_path: audio_file_path
-    }.to output(/I'm here\./).to_stdout
+    end
+    assert_match "I'm here", out
   end
 
-  example "transcribe audio file with enhanced phone call model" do
+  it "transcribe audio file with enhanced phone call model" do
     audio_file_path = File.expand_path "../resources/commercial_mono.wav", __dir__
-    expect {
+    out, _err = capture_io do
       speech_transcribe_enhanced_model audio_file_path: audio_file_path
-    }.to output(/Chrome/).to_stdout
+    end
+    assert_match "Chrome", out
   end
 
-  example "transcribe audio file with enhanced video model" do
+  it "transcribe audio file with enhanced video model" do
     video_file_path = File.expand_path "../resources/Google_Gnome.wav", __dir__
-    expect {
+    out, _err = capture_io do
       speech_transcribe_model_selection file_path: video_file_path, model: "video"
-    }.to output(/the weather outside is sunny/).to_stdout
+    end
+
+    assert_match "the weather outside is sunny", out
   end
 
-  example "transcribe audio file with multichannel" do
+  it "transcribe audio file with multichannel" do
     audio_file_path = File.expand_path "../resources/multi.wav", __dir__
-    expect {
+    out, _err = capture_io do
       speech_transcribe_multichannel audio_file_path: audio_file_path
-    }.to output(/how are you doing/).to_stdout
+    end
+
+    assert_match "how are you doing", out
   end
 
-  example "transcribe audio file with multichannel from GCS" do
+  it "transcribe audio file with multichannel from GCS" do
     file = @bucket.upload_file @multi_file_path, "multi.wav"
     path = "gs://#{file.bucket}/multi.wav"
 
-    expect {
+    out, _err = capture_io do
       speech_transcribe_multichannel_gcs storage_path: path
-    }.to output(/how are you doing/).to_stdout
+    end
+    assert_match "how are you doing", out
   end
 end

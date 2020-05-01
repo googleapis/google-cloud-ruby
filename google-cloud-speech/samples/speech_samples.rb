@@ -18,7 +18,7 @@ def speech_sync_recognize audio_file_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.new
+  speech = Google::Cloud::Speech.speech
 
   # [START speech_ruby_migration_sync_response]
   audio_file = File.binread audio_file_path
@@ -27,7 +27,7 @@ def speech_sync_recognize audio_file_path: nil
                  language_code:     "en-US" }
   audio      = { content: audio_file }
 
-  response = speech.recognize config, audio
+  response = speech.recognize config: config, audio: audio
 
   results = response.results
 
@@ -45,7 +45,7 @@ def speech_sync_recognize_words audio_file_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.new
+  speech = Google::Cloud::Speech.speech
 
   audio_file = File.binread audio_file_path
 
@@ -55,7 +55,7 @@ def speech_sync_recognize_words audio_file_path: nil
              enable_word_time_offsets: true }
   audio  = { content: audio_file }
 
-  response = speech.recognize config, audio
+  response = speech.recognize config: config, audio: audio
 
   results = response.results
 
@@ -79,7 +79,7 @@ def speech_sync_recognize_gcs storage_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.new
+  speech = Google::Cloud::Speech.speech
 
   # [START speech_ruby_migration_config_gcs]
   config = { encoding:          :LINEAR16,
@@ -87,7 +87,7 @@ def speech_sync_recognize_gcs storage_path: nil
              language_code:     "en-US" }
   audio  = { uri: storage_path }
 
-  response = speech.recognize config, audio
+  response = speech.recognize config: config, audio: audio
   # [END speech_ruby_migration_config_gcs]
 
   results = response.results
@@ -105,7 +105,7 @@ def speech_async_recognize audio_file_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.new
+  speech = Google::Cloud::Speech.speech
 
   # [START speech_ruby_migration_async_response]
   # [START speech_ruby_migration_async_request]
@@ -115,7 +115,7 @@ def speech_async_recognize audio_file_path: nil
                  language_code:     "en-US" }
   audio      = { content: audio_file }
 
-  operation = speech.long_running_recognize config, audio
+  operation = speech.long_running_recognize config: config, audio: audio
 
   puts "Operation started"
 
@@ -140,14 +140,14 @@ def speech_async_recognize_gcs storage_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.new
+  speech = Google::Cloud::Speech.speech
 
   config = { encoding:          :LINEAR16,
              sample_rate_hertz: 16_000,
              language_code:     "en-US" }
   audio = { uri: storage_path }
 
-  operation = speech.long_running_recognize config, audio
+  operation = speech.long_running_recognize config: config, audio: audio
 
   puts "Operation started"
 
@@ -170,7 +170,7 @@ def speech_async_recognize_gcs_words storage_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.new
+  speech = Google::Cloud::Speech.speech
 
   config = { encoding:                 :LINEAR16,
              sample_rate_hertz:        16_000,
@@ -178,7 +178,7 @@ def speech_async_recognize_gcs_words storage_path: nil
              enable_word_time_offsets: true }
   audio  = { uri: storage_path }
 
-  operation = speech.long_running_recognize config, audio
+  operation = speech.long_running_recognize config: config, audio: audio
 
   puts "Operation started"
 
@@ -208,7 +208,7 @@ def speech_streaming_recognize audio_file_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.new
+  speech = Google::Cloud::Speech.speech
 
   # [START speech_ruby_migration_streaming_response]
   # [START speech_ruby_migration_streaming_request]
@@ -217,34 +217,32 @@ def speech_streaming_recognize audio_file_path: nil
   bytes_sent     = 0
   chunk_size     = 32_000
 
-  streaming_config = { config:          { encoding:                 :LINEAR16,
-                                          sample_rate_hertz:        16_000,
-                                          language_code:            "en-US",
-                                          enable_word_time_offsets: true },
-                       interim_results: true }
+  input_stream = Gapic::StreamInput.new
+  output_stream = speech.streaming_recognize input_stream
 
-  stream = speech.streaming_recognize streaming_config
+  config = { config: { encoding:                 :LINEAR16,
+             sample_rate_hertz:        16_000,
+             language_code:            "en-US",
+             enable_word_time_offsets: true }
+  }
+  input_stream.push({ streaming_config: config })
 
   # Simulated streaming from a microphone
   # Stream bytes...
   while bytes_sent < bytes_total
-    stream.send audio_content[bytes_sent, chunk_size]
+    input_stream.push({ audio_content: audio_content[bytes_sent, chunk_size]})
     bytes_sent += chunk_size
     sleep 1
   end
 
   puts "Stopped passing"
-  stream.stop
+  input_stream.close
 
-  # Wait until processing is complete...
-  stream.wait_until_complete!
-
-  results = stream.results
+  results = output_stream
   # [END speech_ruby_migration_streaming_request]
 
-  alternatives = results.first.alternatives
-  alternatives.each do |result|
-    puts "Transcript: #{result.transcript}"
+  results.each do |result|
+    puts "Transcript: #{result}"
   end
   # [END speech_ruby_migration_streaming_response]
   # [END speech_transcribe_streaming]
@@ -256,7 +254,7 @@ def speech_transcribe_auto_punctuation audio_file_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.new
+  speech = Google::Cloud::Speech.speech
 
   config = {
     encoding:                     :LINEAR16,
@@ -268,7 +266,7 @@ def speech_transcribe_auto_punctuation audio_file_path: nil
   audio_file = File.binread audio_file_path
   audio      = { content: audio_file }
 
-  operation = speech.long_running_recognize config, audio
+  operation = speech.long_running_recognize config: config, audio: audio
 
   puts "Operation started"
 
@@ -293,7 +291,7 @@ def speech_transcribe_enhanced_model audio_file_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.new
+  speech = Google::Cloud::Speech.speech
 
   config = {
     encoding:          :LINEAR16,
@@ -306,7 +304,7 @@ def speech_transcribe_enhanced_model audio_file_path: nil
   audio_file = File.binread audio_file_path
   audio      = { content: audio_file }
 
-  operation = speech.long_running_recognize config, audio
+  operation = speech.long_running_recognize config: config, audio: audio
 
   puts "Operation started"
 
@@ -331,7 +329,7 @@ def speech_transcribe_model_selection file_path: nil, model: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.new
+  speech = Google::Cloud::Speech.speech
 
   config = {
     encoding:          :LINEAR16,
@@ -343,7 +341,7 @@ def speech_transcribe_model_selection file_path: nil, model: nil
   file  = File.binread file_path
   audio = { content: file }
 
-  operation = speech.long_running_recognize config, audio
+  operation = speech.long_running_recognize config: config, audio: audio
 
   puts "Operation started"
 
@@ -368,7 +366,7 @@ def speech_transcribe_multichannel audio_file_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.new
+  speech = Google::Cloud::Speech.speech
 
   config = {
     encoding:                                :LINEAR16,
@@ -381,7 +379,7 @@ def speech_transcribe_multichannel audio_file_path: nil
   audio_file = File.binread audio_file_path
   audio      = { content: audio_file }
 
-  response = speech.recognize config, audio
+  response = speech.recognize config: config, audio: audio
 
   results = response.results
 
@@ -401,7 +399,7 @@ def speech_transcribe_multichannel_gcs storage_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.new
+  speech = Google::Cloud::Speech.speech
 
   config = {
     encoding:                                :LINEAR16,
@@ -413,7 +411,7 @@ def speech_transcribe_multichannel_gcs storage_path: nil
 
   audio = { uri: storage_path }
 
-  response = speech.recognize config, audio
+  response = speech.recognize config: config, audio: audio
 
   results = response.results
 
