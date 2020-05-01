@@ -19,7 +19,7 @@ gem "google-cloud-speech-v1", path: "../../google-cloud-speech-v1"
 
 group :test do
   gem "google-cloud-storage"
-  gem "minitest", "~> 5.13"
+  gem "minitest", "~> 5.14"
   gem "minitest-junit"
   gem "rake"
 end
