@@ -17,10 +17,10 @@ def list_voices
   # Lists the available voices.
   require "google/cloud/text_to_speech"
 
-  client = Google::Cloud::TextToSpeech.new
+  client = Google::Cloud::TextToSpeech.text_to_speech
 
   # Performs the list voices request
-  voices = client.list_voices.voices
+  voices = client.list_voices({}).voices
 
   voices.each do |voice|
     # Display the voice's name. Example: tpc-vocoded

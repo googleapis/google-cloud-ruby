@@ -14,6 +14,8 @@
 
 source "https://rubygems.org"
 
+master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
+
 gem "google-cloud-text_to_speech", path: master ? "../../google-cloud-text_to_speech" : nil
 gem "google-cloud-text_to_speech-v1", path: master ? "../../google-cloud-text_to_speech-v1" : nil
 gem "google-cloud-text_to_speech-v1beta1", path: master ? "../../google-cloud-text_to_speech-v1beta1" : nil

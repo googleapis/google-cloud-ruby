@@ -16,7 +16,7 @@ def synthesize_text text:
   # [START tts_synthesize_text]
   require "google/cloud/text_to_speech"
 
-  client = Google::Cloud::TextToSpeech.new
+  client = Google::Cloud::TextToSpeech.text_to_speech
 
   input_text = { text: text }
 
@@ -29,7 +29,11 @@ def synthesize_text text:
 
   audio_config = { audio_encoding: "MP3" }
 
-  response = client.synthesize_speech input_text, voice, audio_config
+  response = client.synthesize_speech(
+    input: input_text, 
+    voice: voice, 
+    audio_config: audio_config
+  )
 
   # The response's audio_content is binary.
   File.open "output.mp3", "wb" do |file|
@@ -45,7 +49,7 @@ def synthesize_ssml ssml:
   # [START tts_synthesize_ssml]
   require "google/cloud/text_to_speech"
 
-  client = Google::Cloud::TextToSpeech.new
+  client = Google::Cloud::TextToSpeech.text_to_speech
 
   input_text = { ssml: ssml }
 
@@ -58,7 +62,11 @@ def synthesize_ssml ssml:
 
   audio_config = { audio_encoding: "MP3" }
 
-  response = client.synthesize_speech input_text, voice, audio_config
+  response = client.synthesize_speech(
+    input: input_text, 
+    voice: voice, 
+    audio_config: audio_config
+  )
 
   # The response's audio_content is binary.
   File.open "output.mp3", "wb" do |file|

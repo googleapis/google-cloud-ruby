@@ -20,7 +20,7 @@
 require "google/cloud/text_to_speech"
 
 # Instantiates a client
-client = Google::Cloud::TextToSpeech.new
+client = Google::Cloud::TextToSpeech.text_to_speech
 
 # Set the text input to be synthesized
 synthesis_input = { text: "Hello, World!" }
@@ -37,7 +37,11 @@ audio_config = { audio_encoding: "MP3" }
 
 # Perform the text-to-speech request on the text input with the selected
 # voice parameters and audio file type
-response = client.synthesize_speech synthesis_input, voice, audio_config
+response = client.synthesize_speech(
+  input: synthesis_input, 
+  voice: voice, 
+  audio_config: audio_config
+)
 
 # The response's audio_content is binary.
 File.open "output.mp3", "wb" do |file|
