@@ -13,21 +13,14 @@
 # limitations under the License.
 
 
-require "google/cloud/storage"
 require_relative "helper"
 require_relative "../speech_samples.rb"
 
 describe "Google Cloud Speech API samples" do
   parallelize_me!
   before do
-    @bucket_name = ENV["GCLOUD_TEST_STORAGE_BUCKET"]
-    @storage     = Google::Cloud::Storage.new
-    @bucket      = @storage.bucket @bucket_name
-
-    @storage.create_bucket @bucket_name unless @storage.bucket @bucket_name
-
     # Path to RAW audio file with sample rate of 16000 using LINEAR16 encoding
-    @audio_file_path = File.expand_path "../resources/audio.raw", __dir__
+    @audio_file_path = File.expand_path "../resources/brooklyn_bridge.raw", __dir__
 
     # Path to WAV audio file with sample rate of 44100 using LINEAR16 encoding with 2 channels
     @multi_file_path = File.expand_path "../resources/multi.wav", __dir__
@@ -59,8 +52,7 @@ describe "Google Cloud Speech API samples" do
   end
 
   it "transcribe audio file from GCS" do
-    file = @bucket.upload_file @audio_file_path, "audio.raw"
-    path = "gs://#{file.bucket}/audio.raw"
+    path = "gs://cloud-samples-data/speech/brooklyn_bridge.raw"
 
     out, _err = capture_io do
       speech_sync_recognize_gcs storage_path: path
@@ -79,8 +71,7 @@ describe "Google Cloud Speech API samples" do
   end
 
   it "async operation to transcribe audio file from GCS" do
-    file = @bucket.upload_file @audio_file_path, "audio.raw"
-    path = "gs://#{file.bucket}/audio.raw"
+    path = "gs://cloud-samples-data/speech/brooklyn_bridge.raw"
 
     out, _err = capture_io do
       speech_async_recognize_gcs storage_path: path
@@ -91,8 +82,7 @@ describe "Google Cloud Speech API samples" do
   end
 
   it "async operation to transcribe audio file from GCS with words" do
-    file = @bucket.upload_file @audio_file_path, "audio.raw"
-    path = "gs://#{file.bucket}/audio.raw"
+    path = "gs://cloud-samples-data/speech/brooklyn_bridge.raw"
 
     out, _err = capture_io do
       speech_async_recognize_gcs_words storage_path: path
@@ -152,8 +142,7 @@ describe "Google Cloud Speech API samples" do
   end
 
   it "transcribe audio file with multichannel from GCS" do
-    file = @bucket.upload_file @multi_file_path, "multi.wav"
-    path = "gs://#{file.bucket}/multi.wav"
+    path = "gs://cloud-samples-data/speech/multi.wav"
 
     out, _err = capture_io do
       speech_transcribe_multichannel_gcs storage_path: path

@@ -25,7 +25,7 @@ def quickstart
   # [END speech_ruby_migration_client]
 
   # The name of the audio file to transcribe
-  file_name = "./resources/audio.raw"
+  file_name = "./resources/brooklyn_bridge.raw"
 
   # [START speech_ruby_migration_sync_request]
   # [START speech_ruby_migration_config]

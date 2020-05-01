@@ -17,7 +17,7 @@ require_relative "../quickstart.rb"
 
 describe "Speech Quickstart" do
   parallelize_me!
-  it "transcribes a sample audio.raw file" do
+  it "transcribes a sample brooklyn_bridge.raw file" do
     out, _err = capture_io do
       quickstart
     end
