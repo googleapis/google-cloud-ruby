@@ -1,4 +1,4 @@
-# Copyright 2018 Google, Inc
+# Copyright 2020 Google, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,38 +12,39 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "rspec"
-
+require "minitest/autorun"
 require_relative "../synthesize_file"
 
 describe "Synthesize File" do
-  example "synthesizes text file" do
-    expect {
+  it "synthesizes text file" do
+    out, err = capture_io do
       synthesize_text_file text_file: "resources/hello.txt"
-    }.to output(
-      /Audio content written to file/
-    ).to_stdout
+    end
+
+    assert_empty err
+    assert_match(/Audio content written to file/, out)
 
     output_filepath = File.expand_path "../output.mp3", __dir__
-    expect(File.exist?(output_filepath)).to be true
-    expect(File.size(output_filepath)).to be > 0
+    assert File.exist?(output_filepath)
+    assert File.size(output_filepath).positive?
 
     File.delete output_filepath
-    expect(File.exist?(output_filepath)).to be false
+    refute File.exist?(output_filepath)
   end
 
-  example "synthesizes ssml file" do
-    expect {
+  it "synthesizes ssml file" do
+    out, err = capture_io do
       synthesize_ssml_file ssml_file: "resources/hello.ssml"
-    }.to output(
-      /Audio content written to file/
-    ).to_stdout
+    end
+
+    assert_empty err
+    assert_match(/Audio content written to file/, out)
 
     output_filepath = File.expand_path "../output.mp3", __dir__
-    expect(File.exist?(output_filepath)).to be true
-    expect(File.size(output_filepath)).to be > 0
+    assert File.exist?(output_filepath)
+    assert File.size(output_filepath).positive?
 
     File.delete output_filepath
-    expect(File.exist?(output_filepath)).to be false
+    refute File.exist?(output_filepath)
   end
 end

@@ -1,4 +1,4 @@
-# Copyright 2018 Google, Inc
+# Copyright 2020 Google, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,15 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "rspec"
-
+require "minitest/autorun"
 require_relative "../list_voices"
 
 describe "List Voices" do
-  example "lists voices" do
-    result = expect { list_voices }
-    result.to output(/en-US/).to_stdout
-    result.to output(/SSML Voice Gender: MALE/).to_stdout
-    result.to output(/SSML Voice Gender: FEMALE/).to_stdout
+  it "lists voices to stdout" do
+    out, err = capture_io do
+      list_voices
+    end
+
+    assert_empty err
+    assert_match(/en-US/, out)
+    assert_match(/SSML Voice Gender: MALE/, out)
+    assert_match(/SSML Voice Gender: FEMALE/, out)
   end
 end
