@@ -38,8 +38,7 @@ describe "CloudTasks" do
   end
 
   it "can create an HTTP task" do
-
-    out, err = capture_io do
+    out, _err = capture_io do
       create_http_task GOOGLE_CLOUD_PROJECT, LOCATION_ID, QUEUE_ID, "http://example.com/taskhandler"
     end
 

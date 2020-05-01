@@ -38,9 +38,7 @@ def create_http_task project_id, location_id, queue_id, url, payload: nil, secon
   }
 
   # Add payload to task body.
-  if payload
-    task[:http_request][:body] = payload
-  end
+  task[:http_request][:body] = payload if payload
 
   # Add scheduled time to task.
   if seconds
@@ -53,9 +51,7 @@ def create_http_task project_id, location_id, queue_id, url, payload: nil, secon
   puts "Sending task #{task}"
   response = client.create_task parent, task
 
-  if response.name
-    puts "Created task #{response.name}"
-  end
+  puts "Created task #{response.name}" if response.name
 end
 # [END cloud_tasks_create_http_task]
 
