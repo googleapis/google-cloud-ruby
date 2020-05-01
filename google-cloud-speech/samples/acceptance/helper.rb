@@ -1,4 +1,4 @@
-# Copyright 2020 Google, Inc
+# Copyright 2020 Google, LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,14 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source "https://rubygems.org"
-
-gem "google-cloud-speech", path: "../../google-cloud-speech"
-gem "google-cloud-speech-v1", path: "../../google-cloud-speech-v1"
-
-group :test do
-  gem "google-cloud-storage"
-  gem "minitest", "~> 5.13"
-  gem "minitest-junit"
-  gem "rake"
-end
+require "minitest/autorun"

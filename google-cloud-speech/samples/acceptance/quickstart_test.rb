@@ -1,4 +1,4 @@
-# Copyright 2016 Google, Inc
+# Copyright 2020 Google, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,20 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "rspec"
-require "google/cloud/speech"
+require_relative "helper"
+require_relative "../quickstart.rb"
 
 describe "Speech Quickstart" do
+  parallelize_me!
   it "transcribes a sample audio.raw file" do
-    speech = Google::Cloud::Speech.new
+    out, _err = capture_io do
+      quickstart project_id: ENV["GOOGLE_CLOUD_PROJECT"]
+    end
 
-    expect(Google::Cloud::Speech).to receive(:new)
-      .and_return(speech)
-
-    expect {
-      load File.expand_path("../quickstart.rb", __dir__)
-    }.to output(
-      "Transcription: how old is the Brooklyn Bridge\n"
-    ).to_stdout
+    assert_match "Transcription: how old is the Brooklyn Bridge", out
   end
 end
