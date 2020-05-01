@@ -140,7 +140,7 @@ end
 def timed_retry
   5.times do
     begin
-      yield
+      return yield
     rescue StandardError => e
       puts "\n#{e} Gonna try again"
       sleep 5

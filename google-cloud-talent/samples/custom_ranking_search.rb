@@ -32,7 +32,10 @@ def sample_custom_ranking_search project_id, tenant_id
   }
   importance_level = :EXTREME
   ranking_expression = "(someFieldLong + 25) * 0.25"
-  custom_ranking_info = { importance_level: importance_level, ranking_expression: ranking_expression }
+  custom_ranking_info = {
+    importance_level:   importance_level,
+    ranking_expression: ranking_expression
+  }
   order_by = "custom_ranking desc"
 
   # Iterate over all results.

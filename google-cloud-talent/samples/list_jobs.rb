@@ -24,7 +24,7 @@ def sample_list_jobs project_id, tenant_id, filter
   formatted_parent = job_service.tenant_path project: project_id, tenant: tenant_id
 
   # Iterate over all results.
-  # filter = "companyName=\"projects/my-project/companies/company-id\"""
+  # filter = "companyName=\"projects/my-project/companies/company-id\""
   job_service.list_jobs(parent: formatted_parent, filter: filter).each do |element|
     puts "Job name: #{element.name}"
     puts "Job requisition ID: #{element.requisition_id}"
