@@ -7,6 +7,7 @@ AllCops:
     - "Rakefile"
     - "acceptance/**/*"
     - "test/**/*"
+    - '**/vendor/**/*'
 
 Bundler/OrderedGems:
   Enabled: false
