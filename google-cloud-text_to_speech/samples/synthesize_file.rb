@@ -31,8 +31,8 @@ def synthesize_text_file text_file:, output_file:
   audio_config = { audio_encoding: "MP3" }
 
   response = client.synthesize_speech(
-    input: input_text, 
-    voice: voice, 
+    input:        input_text,
+    voice:        voice,
     audio_config: audio_config
   )
 
@@ -65,8 +65,8 @@ def synthesize_ssml_file ssml_file:, output_file:
   audio_config = { audio_encoding: "MP3" }
 
   response = client.synthesize_speech(
-    input: input_text, 
-    voice: voice, 
+    input:        input_text,
+    voice:        voice,
     audio_config: audio_config
   )
 

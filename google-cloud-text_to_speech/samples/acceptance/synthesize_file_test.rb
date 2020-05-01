@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require "minitest/autorun"
-require 'securerandom'
+require "securerandom"
 require_relative "../synthesize_file"
 
 describe "Synthesize File" do
