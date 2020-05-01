@@ -267,7 +267,7 @@ results = stream.results
 
 New:
 ```
-client = Google::Cloud::Speech.new
+client = Google::Cloud::Speech.speech
 
 input_stream = Gapic::StreamInput.new
 output_stream = client.streaming_recognize input_stream
@@ -277,8 +277,10 @@ config = {
   sample_rate_hertz: 44_100,
   encoding: :FLAC
 }
-input_stream.push({ config: config })
-input_stream.push({ bytes: File.read("my_input.flac", mode: "rb") })
+streaming_config = { config: config }
+
+input_stream.push({ streaming_config: streaming_config })
+input_stream.push({ audio_content: File.read("my_input.flac", mode: "rb") })
 input_stream.close
 
 output_stream.each do |response|
