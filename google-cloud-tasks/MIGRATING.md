@@ -9,7 +9,7 @@ do to update your usage.
 
 To summarize:
 
- *  The library has been broken out into three libraries. The new gems
+ *  The library has been broken out into four libraries. The new gems
     `google-cloud-tasks-v2`, `google-cloud-tasks-v2beta2`, and `google-cloud-tasks-v2beta3` contain the
     actual client classes for the various versions of the Cloud Tasks
     service, and the gem `google-cloud-tasks` now simply provides a
