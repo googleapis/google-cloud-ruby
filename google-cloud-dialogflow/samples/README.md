@@ -131,5 +131,19 @@ Usage: ruby session_entity_type_management.rb [commang] [arguments]
 
 ## Run tests
 
-1. Follow https://cloud.google.com/dialogflow-enterprise/docs/quickstart-client-libraries (including importing the zip).
-2. `bundle install && bundle exec rspec --format documentation`
+You will need a project with Dialogflow enabled, and a service account key with
+permissions to call Dialogflow.
+
+To run against the latest library releases:
+
+    bundle install && \
+      GOOGLE_CLOUD_PROJECT=your-project-id \
+      GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/keyfile.json \
+      bundle exec rake test
+
+To run against the current git master:
+
+    GOOGLE_CLOUD_SAMPLES_TEST=master bundle install && \
+      GOOGLE_CLOUD_SAMPLES_TEST=master GOOGLE_CLOUD_PROJECT=your-project-id \
+      GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/keyfile.json \
+      bundle exec rake test
