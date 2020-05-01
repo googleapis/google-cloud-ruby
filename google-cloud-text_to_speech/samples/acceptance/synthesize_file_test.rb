@@ -13,18 +13,20 @@
 # limitations under the License.
 
 require "minitest/autorun"
+require 'securerandom'
 require_relative "../synthesize_file"
 
 describe "Synthesize File" do
   it "synthesizes text file" do
+    output_file = "output_#{SecureRandom.hex}.mp3"
     out, err = capture_io do
-      synthesize_text_file text_file: "resources/hello.txt"
+      synthesize_text_file text_file: "resources/hello.txt", output_file: output_file
     end
 
     assert_empty err
     assert_match(/Audio content written to file/, out)
 
-    output_filepath = File.expand_path "../output.mp3", __dir__
+    output_filepath = File.expand_path "../#{output_file}", __dir__
     assert File.exist?(output_filepath)
     assert File.size(output_filepath).positive?
 
@@ -33,14 +35,15 @@ describe "Synthesize File" do
   end
 
   it "synthesizes ssml file" do
+    output_file = "output_#{SecureRandom.hex}.mp3"
     out, err = capture_io do
-      synthesize_ssml_file ssml_file: "resources/hello.ssml"
+      synthesize_ssml_file ssml_file: "resources/hello.ssml", output_file: output_file
     end
 
     assert_empty err
     assert_match(/Audio content written to file/, out)
 
-    output_filepath = File.expand_path "../output.mp3", __dir__
+    output_filepath = File.expand_path "../#{output_file}", __dir__
     assert File.exist?(output_filepath)
     assert File.size(output_filepath).positive?
 

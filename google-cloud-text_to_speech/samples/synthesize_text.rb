@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def synthesize_text text:
+def synthesize_text text:, output_file:
   # [START tts_synthesize_text]
   require "google/cloud/text_to_speech"
 
@@ -36,16 +36,16 @@ def synthesize_text text:
   )
 
   # The response's audio_content is binary.
-  File.open "output.mp3", "wb" do |file|
+  File.open output_file, "wb" do |file|
     # Write the response to the output file.
     file.write response.audio_content
   end
 
-  puts "Audio content written to file 'output.mp3'"
+  puts "Audio content written to file '#{output_file}'"
   # [END tts_synthesize_text]
 end
 
-def synthesize_ssml ssml:
+def synthesize_ssml ssml:, output_file:
   # [START tts_synthesize_ssml]
   require "google/cloud/text_to_speech"
 
@@ -69,12 +69,12 @@ def synthesize_ssml ssml:
   )
 
   # The response's audio_content is binary.
-  File.open "output.mp3", "wb" do |file|
+  File.open output_file, "wb" do |file|
     # Write the response to the output file.
     file.write response.audio_content
   end
 
-  puts "Audio content written to file 'output.mp3'"
+  puts "Audio content written to file '#{output_file}'"
   # [END tts_synthesize_ssml]
 end
 
