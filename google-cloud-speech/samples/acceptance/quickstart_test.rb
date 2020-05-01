@@ -19,7 +19,7 @@ describe "Speech Quickstart" do
   parallelize_me!
   it "transcribes a sample audio.raw file" do
     out, _err = capture_io do
-      quickstart project_id: ENV["GOOGLE_CLOUD_PROJECT"]
+      quickstart
     end
 
     assert_match "Transcription: how old is the Brooklyn Bridge", out

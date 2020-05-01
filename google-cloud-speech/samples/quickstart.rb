@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def quickstart project_id:
+def quickstart
   # [START speech_quickstart]
   # Imports the Google Cloud client library
   # [START speech_ruby_migration_import]
