@@ -29,6 +29,11 @@ To summarize:
     resource paths. These paths are now instance methods on the client objects,
     and are also available in a separate paths module. See
     [Resource Path Helpers](#resource-path-helpers) for more info.
+ *  Previously, the client included a method supporting bidirectional streaming
+    recognition requests, both incremental audio and incremental results. The
+    current client retains this method, but improves it with a more powerful
+    interface to match streaming methods in other Ruby clients. See
+    [Streaming Interface](#streaming-interface) for more info.
  *  Some classes have moved into different namespaces. See
     [Class Namespaces](#class-namespaces) for more info.
 
@@ -283,6 +288,94 @@ def foo
 
   # Do something with response...
 end
+```
+
+### Streaming Interface
+
+The client library includes one special streaming method `streaming_detect_intent`.
+In the older client, this method provided only a very basic Enumerable-based
+interface, and required you to write wrappers if you wanted more flexibility.
+In version 1.0, we have standardized the streaming interfaces across the various
+Ruby client libraries. The `streaming_detect_intent` call takes an input stream
+object that can be written to incrementally, and returns a lazy enumerable that
+you can query for incremental results.
+
+Old:
+```
+client = Google::Cloud::Dialogflow::Sessions.new
+
+# Build requests
+session = "projects/my-project/agent/sessions/my-session"
+header = {
+  session: session,
+  query_input: {
+    audio_config: {
+      audio_encoding: Google::Cloud:Dialogflow::V2::AudioEncoding::AUDIO_ENCODING_FLAC,
+      sample_rate_hertz: 44_000,
+      language_code: "en-US
+    }
+  }
+}
+data1 = {
+  session: session,
+  input_audio: File.read("data1.flac", mode: "rb")
+}
+data2 = {
+  session: session,
+  input_audio: File.read("data2.flac", mode: "rb")
+}
+
+# Issue the call
+responses = client.streaming_detect_intent [header, data1, data2]
+
+# Handle responses as they arrive
+responses.each do |response|
+  puts "received: #{response}"
+end
+```
+
+New:
+```
+client = Google::Cloud::Dialogflow.sessions
+
+# Create a request stream, initiate the call, and get a response stream.
+request_stream = Gapic::StreamInput.new
+response_stream = client.streaming_detect_response request_stream
+
+# You can now interact with both streams, even concurrently.
+# For example, you can handle responses in a background thread
+response_thread = Thread.new
+  response_stream.each do |response|
+    puts "received: #{response}"
+  end
+end
+
+# Send requests on the stream
+session = "projects/my-project/agent/sessions/my-session"
+request_stream << {
+  session: session,
+  query_input: {
+    audio_config: {
+      audio_encoding: Google::Cloud:Dialogflow::V2::AudioEncoding::AUDIO_ENCODING_FLAC,
+      sample_rate_hertz: 44_000,
+      language_code: "en-US
+    }
+  }
+}
+request_stream << {
+  session: session,
+  input_audio: File.read("data1.flac", mode: "rb")
+}
+request_stream << {
+  session: session,
+  input_audio: File.read("data2.flac", mode: "rb")
+}
+
+# Close the request stream when finished.
+request_stream.close
+
+# Wait for the response handling to finish
+response_thread.join
 ```
 
 ### Class Namespaces
