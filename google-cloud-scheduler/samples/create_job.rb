@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def create_job project_id, location_id, service_id
+def create_job project_id:, location_id:, service_id:
   # [START cloud_scheduler_create_job]
   require "google/cloud/scheduler"
 
   # Create a client.
-  client = Google::Cloud::Scheduler.new
+  client = Google::Cloud::Scheduler.cloud_scheduler
 
   # TODO(developer): Uncomment and set the following variables
   # project_id = "PROJECT_ID"
@@ -25,7 +25,7 @@ def create_job project_id, location_id, service_id
   # service_id = "my-serivce"
 
   # Construct the fully qualified location path.
-  parent = client.location_path project_id, location_id
+  parent = client.location_path project: project_id, location: location_id
 
   # Construct the request body.
   job = {
@@ -42,7 +42,7 @@ def create_job project_id, location_id, service_id
   }
 
   # Use the client to send the job creation request.
-  response = client.create_job parent, job
+  response = client.create_job parent: parent, job: job
 
   puts "Created job: #{response.name}"
   # [END cloud_scheduler_create_job]

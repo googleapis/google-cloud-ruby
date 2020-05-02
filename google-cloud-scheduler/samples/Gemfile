@@ -17,9 +17,13 @@ source "https://rubygems.org"
 master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
 
 gem "google-cloud-scheduler", path: master ? "../../google-cloud-scheduler" : nil
+gem "google-cloud-scheduler-v1", path: master ? "../../google-cloud-scheduler-v1" : nil
+gem "google-cloud-scheduler-v1beta1", path: master ? "../../google-cloud-scheduler-v1beta1" : nil
 gem "sinatra"
 
 group :test do
+  gem "google-style", "~> 1.24.0"
+  gem "minitest", "~> 5.14"
   gem "rack-test"
   gem "rspec"
   gem "rspec_junit_formatter"

@@ -22,17 +22,17 @@ require "google/cloud/scheduler"
 describe "CloudScheduler", type: :feature do
   include Rack::Test::Methods
 
-  before(:all) do
+  before :all do
     GOOGLE_CLOUD_PROJECT = ENV["GOOGLE_CLOUD_PROJECT"]
-    LOCATION_ID          = "us-east1"
+    LOCATION_ID          = "us-east1".freeze
 
-    client = Google::Cloud::Scheduler.new
+    client = Google::Cloud::Scheduler.cloud_scheduler
     location_path = "projects/#{GOOGLE_CLOUD_PROJECT}/locations/#{LOCATION_ID}"
 
     begin
-      client.list_jobs(location_path)
-    rescue
-      LOCATION_ID = "us-east4"
+      client.list_jobs parent: location_path
+    rescue Google::Cloud::Error
+      LOCATION_ID = "us-east4".freeze
     end
   end
 
@@ -49,15 +49,15 @@ describe "CloudScheduler", type: :feature do
     post "/log_payload", "Hello"
     expect(last_response.body).to include("Printed job payload")
   end
-  
+
   it "can create and delete a job" do
-    response = create_job(GOOGLE_CLOUD_PROJECT, LOCATION_ID, "my-service")
-    expect(response).to include('projects/')
+    response = create_job project_id: GOOGLE_CLOUD_PROJECT, location_id: LOCATION_ID, service_id: "my-service"
+    expect(response).to include("projects/")
 
-    job_name = response.split('/')[-1]
+    job_name = response.split("/")[-1]
 
-    expect {
-      delete_job(GOOGLE_CLOUD_PROJECT, LOCATION_ID, job_name)
-    }.to output(/Job deleted/).to_stdout
+    expect do
+      delete_job project_id: GOOGLE_CLOUD_PROJECT, location_id: LOCATION_ID, job_name: job_name
+    end.to output(/Job deleted/).to_stdout
   end
 end
