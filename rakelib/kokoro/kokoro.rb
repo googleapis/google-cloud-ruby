@@ -9,7 +9,7 @@ require_relative "kokoro_builder.rb"
 
 class Kokoro < Command
   # Normally true. Set to false temporarily when releases are frozen.
-  RELEASE_PLEASE_ENABLED = false
+  RELEASE_PLEASE_ENABLED = true
 
   attr_reader :tag
 
