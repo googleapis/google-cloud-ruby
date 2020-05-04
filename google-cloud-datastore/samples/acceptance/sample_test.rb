@@ -479,7 +479,8 @@ describe "Datastore sample" do
     properties_by_kind = property_run_query
 
     refute properties_by_kind.empty?
-    assert_equal ["category", "created", "description", "done", "percent_complete", "priority", "tag"], properties_by_kind["Task"]
+    props = ["category", "created", "description", "done", "percent_complete", "priority", "tag"]
+    assert_equal props, properties_by_kind["Task"]
   end
 
   it "supports property_by_kind_run_query" do
