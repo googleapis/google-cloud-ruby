@@ -21,6 +21,8 @@ describe "Spanner Database Backup", :spanner do
   let(:expire_time) { Time.now + 36000 }
 
   it "creates, get, updates, restore and delete a database backup" do
+    skip if emulator_enabled?
+
     backup_id = "#{$spanner_database_id}-crud"
     database = spanner.database instance_id, database_id
     _(database).wont_be :nil?
@@ -108,6 +110,8 @@ describe "Spanner Database Backup", :spanner do
   end
 
   it "cancel create backup operation" do
+    skip if emulator_enabled?
+
     backup_id = "#{$spanner_database_id}-cancel"
     database = spanner.database instance_id, database_id
 
@@ -124,6 +128,8 @@ describe "Spanner Database Backup", :spanner do
   end
 
   it "lists and gets database backups" do
+    skip if emulator_enabled?
+
     backup_id = "#{$spanner_database_id}-list"
     database = spanner.database instance_id, database_id
     _(database).wont_be :nil?

@@ -30,6 +30,8 @@ describe "Spanner Client", :pdml, :spanner do
   end
 
   it "executes a simple Partitioned DML statement" do
+    skip if emulator_enabled?
+
     prior_results = db.execute_sql "SELECT * FROM accounts WHERE active = TRUE"
     _(prior_results.rows.count).must_equal 2
 
@@ -41,6 +43,8 @@ describe "Spanner Client", :pdml, :spanner do
   end
 
   it "executes a simple Partitioned DML statement with query options" do
+    skip if emulator_enabled?
+
     prior_results = db.execute_sql "SELECT * FROM accounts WHERE active = TRUE"
     _(prior_results.rows.count).must_equal 2
 

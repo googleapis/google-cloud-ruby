@@ -85,6 +85,8 @@ namespace :acceptance do
     if project.nil? || keyfile.nil?
       fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or SPANNER_TEST_PROJECT=test123 SPANNER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
     end
+    emulator_host = ENV["SPANNER_EMULATOR_HOST"]
+
     # clear any env var already set
     require "google/cloud/spanner/credentials"
     (Google::Cloud::Spanner::Credentials::PATH_ENV_VARS +
@@ -98,7 +100,7 @@ namespace :acceptance do
     $LOAD_PATH.unshift "lib"
     require "google/cloud/spanner"
     puts "Cleaning up Spanner instances and databases."
-    Google::Cloud::Spanner.new.instances.all do |instance|
+    Google::Cloud::Spanner.new(emulator_host: emulator_host).instances.all do |instance|
       begin
         instance.databases.all.each &:drop
         instance.delete

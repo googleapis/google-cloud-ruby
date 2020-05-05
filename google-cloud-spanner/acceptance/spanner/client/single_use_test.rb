@@ -31,6 +31,8 @@ describe "Spanner Client", :single_use, :spanner do
   end
 
   it "runs a query with strong option" do
+    skip if emulator_enabled?
+
     results = db.execute_sql "SELECT * FROM accounts", single_use: { strong: true }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -57,6 +59,8 @@ describe "Spanner Client", :single_use, :spanner do
   end
 
   it "runs a query with timestamp option" do
+    skip if emulator_enabled?
+
     results = db.execute_sql "SELECT * FROM accounts", single_use: { timestamp: @setup_timestamp }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -83,6 +87,8 @@ describe "Spanner Client", :single_use, :spanner do
   end
 
   it "runs a query with staleness option" do
+    skip if emulator_enabled?
+
     results = db.execute_sql "SELECT * FROM accounts", single_use: { staleness: 0.0001 }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -109,6 +115,8 @@ describe "Spanner Client", :single_use, :spanner do
   end
 
   it "runs a query with bounded_timestamp option" do
+    skip if emulator_enabled?
+
     results = db.execute_sql "SELECT * FROM accounts", single_use: { bounded_timestamp: @setup_timestamp }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -135,6 +143,8 @@ describe "Spanner Client", :single_use, :spanner do
   end
 
   it "runs a query with bounded_staleness option" do
+    skip if emulator_enabled?
+
     results = db.execute_sql "SELECT * FROM accounts", single_use: { bounded_staleness: 0.0001 }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
