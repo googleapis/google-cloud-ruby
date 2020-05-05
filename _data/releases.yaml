@@ -1113,6 +1113,7 @@ google-cloud-vision-v1p3beta1:
 google-cloud-web_risk-v1:
 - v0.1.0
 google-cloud-web_risk-v1beta1:
+- v0.1.1
 - v0.1.0
 google-cloud-webrisk:
 - v0.5.0
