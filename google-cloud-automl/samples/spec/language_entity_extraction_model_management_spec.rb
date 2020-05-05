@@ -1,0 +1,53 @@
+# Copyright 2019 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+require_relative "../language_entity_extraction_create_model"
+require_relative "../deploy_model"
+require_relative "../undeploy_model"
+
+require "spec_helper"
+require "google/cloud/storage"
+
+describe "Language Entity Extraction Model Management" do
+  let(:project_id) { ENV["AUTOML_PROJECT_ID"] }
+  let(:dataset_id) { ENV["AUTOML_EXTRACTION_DATASET_ID"] }
+  let(:model_id) { ENV["AUTOML_EXTRACTION_MODEL_ID"] }
+
+  example "Create a model", :slow do
+    skip "The model operation is not cancellable"
+
+    display_name = "test_create_model#{Time.now.strftime '%Y%m%d%H%M%S'}"
+    operation_name = nil
+
+    capture do
+      entity_extraction_create_model actual_project_id: project_id, actual_dataset_id: dataset_id,
+                                     actual_display_name: display_name
+    end
+
+    expect(captured_output).to include "Training started..."
+    expect(captured_output).to include "Training complete."
+  end
+
+  example "Undeploy and deploy a model", :slow do
+    capture do
+      undeploy_model actual_project_id: project_id, actual_model_id: model_id
+    end
+    expect(captured_output).to include "Model undeployment finished."
+
+    capture do
+      deploy_model actual_project_id: project_id, actual_model_id: model_id
+    end
+    expect(captured_output).to include "Model deployment finished."
+  end
+end

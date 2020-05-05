@@ -1,0 +1,3 @@
+TRAIN,gs://ruby-docs-samples-tests-vcm/en-ja-train.tmx
+VALIDATION,gs://ruby-docs-samples-tests-vcm/en-ja-validation.tmx
+TEST,gs://ruby-docs-samples-tests-vcm/en-ja-test.tmx

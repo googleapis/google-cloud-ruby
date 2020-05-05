@@ -1,0 +1,2 @@
+{"id":"my_first_id","text_snippet":{ "content":"dog car cat"},"text_features":[{"text_segment":{"start_offset":4, "end_offset":6},"structural_type":"PARAGRAPH","bounding_poly":{"normalized_vertices":[{"x":0.1, "y":0.1},{"x":0.1, "y":0.3},{"x":0.3, "y":0.3},{"x":0.3, "y":0.1}]}}]}
+{"id":"2","text_snippet":{"content":"Extended sample content","mime_type":"text/plain"}}
