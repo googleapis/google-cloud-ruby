@@ -1,5 +1,11 @@
 # Release History
 
+### 0.1.4 / 2020-05-05
+
+#### Documentation
+
+* Clarify that timeouts are in seconds.
+
 ### 0.1.3 / 2020-04-22
 
 #### Bug Fixes
