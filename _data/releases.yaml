@@ -790,6 +790,8 @@ google-cloud-security_center:
 google-cloud-security_center-v1:
 - v0.1.1
 - v0.1.0
+google-cloud-security_center-v1p1beta1:
+- v0.1.1
 google-cloud-service_directory:
 - v0.2.0
 - v0.1.0
