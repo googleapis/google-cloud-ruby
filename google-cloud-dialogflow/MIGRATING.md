@@ -340,10 +340,10 @@ client = Google::Cloud::Dialogflow.sessions
 
 # Create a request stream, initiate the call, and get a response stream.
 request_stream = Gapic::StreamInput.new
-response_stream = client.streaming_detect_response request_stream
+response_stream = client.streaming_detect_intent request_stream
 
 # You can now interact with both streams, even concurrently.
-# For example, you can handle responses in a background thread
+# For example, you can handle responses in a background thread.
 response_thread = Thread.new
   response_stream.each do |response|
     puts "received: #{response}"
