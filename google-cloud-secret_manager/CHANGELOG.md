@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.1 / 2020-05-05
+
+#### Bug Fixes
+
+* Eliminated a circular require warning.
+
 ### 0.4.0 / 2020-04-13
 
 #### Features
