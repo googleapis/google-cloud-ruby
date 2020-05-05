@@ -499,6 +499,7 @@ google-cloud-kms-v1:
 - v0.1.1
 - v0.1.0
 google-cloud-language:
+- v1.1.1
 - v1.1.0
 - v1.0.0
 - v0.36.0
