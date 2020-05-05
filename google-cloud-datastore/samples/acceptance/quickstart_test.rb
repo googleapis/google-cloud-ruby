@@ -20,9 +20,8 @@ describe "Datastore Quickstart" do
   let(:task_key) { datastore.key "Task", "sampletask1" }
 
   before do
-    if (task = datastore.find task_key)
-      datastore.delete task
-    end
+    task = datastore.find task_key
+    datastore.delete task if task
 
     refute datastore.find(task_key)
   end
