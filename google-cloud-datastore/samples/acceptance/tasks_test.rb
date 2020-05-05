@@ -22,8 +22,9 @@ describe "Datastore task list" do
     delete_tasks
   end
 
-  def wait_until times: 5
+  def wait_until times: 5, duration: 1
     times.times do
+      sleep duration
       return if yield
     end
   end
