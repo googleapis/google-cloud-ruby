@@ -714,6 +714,7 @@ google-cloud-redis:
 - v0.2.0
 - v0.1.0
 google-cloud-redis-v1:
+- v0.1.1
 - v0.1.0
 google-cloud-resource_manager:
 - v0.33.1
