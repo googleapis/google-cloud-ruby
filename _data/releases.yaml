@@ -1081,6 +1081,7 @@ google-cloud-vision:
 - v0.20.1
 - v0.20.0
 google-cloud-vision-v1:
+- v0.1.5
 - v0.1.2
 - v0.1.1
 - v0.1.0
