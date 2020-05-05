@@ -1,5 +1,12 @@
 # Release History
 
+### 0.5.1 / 2020-05-05
+
+#### Documentation
+
+* Clarify that timeouts are in seconds.
+* Fix markdown formatting in SpeechContext reference.
+
 ### 0.5.0 / 2020-04-23
 
 #### Features
