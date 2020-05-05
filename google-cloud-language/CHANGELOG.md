@@ -1,5 +1,15 @@
 # Release History
 
+### 1.1.1 / 2020-05-05
+
+#### Bug Fixes
+
+* Eliminated a circular require warning.
+
+#### Documentation
+
+* Updated the sample timeouts in the migration guide to reflect seconds
+
 ### 1.1.0 / 2020-04-13
 
 #### Features
