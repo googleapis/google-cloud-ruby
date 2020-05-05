@@ -926,6 +926,8 @@ google-cloud-talent:
 - v0.4.0
 - v0.3.0
 - v0.1.0
+google-cloud-talent-v4beta1:
+- v0.1.1
 google-cloud-tasks:
 - v1.5.0
 - v1.4.0
