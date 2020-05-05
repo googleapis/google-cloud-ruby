@@ -5,7 +5,7 @@ This sample provides example code for
 
 ## Setup
 
-Before you can run or test the sample, you will need to enable the Cloud Datastore API in the [Google Developers Console](https://console.developers.google.com/projectselector/apis/api/datastore/overview).
+Before you can run or test the sample, you will need to enable the Cloud Datastore API in the [Google Cloud Console](https://console.cloud.google.com/apis/library/datastore.googleapis.com).
 
 ## Testing
 
@@ -19,26 +19,23 @@ project ID:
 
 * `DATASTORE_DATASET`
 * `DATASTORE_PROJECT`
-* `GCLOUD_PROJECT`
 * `GOOGLE_CLOUD_PROJECT`
 
 Set one of the following environment variables to the path to your Google Cloud
 Platform keyfile:
 
 * `DATASTORE_KEYFILE`
-* `GCLOUD_KEYFILE`
 * `GOOGLE_CLOUD_KEYFILE`
 * `DATASTORE_KEYFILE_JSON`
-* `GCLOUD_KEYFILE_JSON`
 * `GOOGLE_CLOUD_KEYFILE_JSON`
 
 For more information, see
-[Authentication](https://googlecloudplatform.github.io/gcloud-ruby/#/docs/guides/authentication).
+[Authentication](https://googleapis.dev/ruby/google-cloud-datastore/latest/file.AUTHENTICATION.html).
 
 ### Creating the Datastore indexes
 
 Install the [gcloud command-line
-tool](https://developers.google.com/cloud/sdk/gcloud/) and use it to create the
+tool](https://cloud.google.com/sdk/gcloud) and use it to create the
 indexes used in the tests. From the Datastore samples directory:
 
 ``` sh
