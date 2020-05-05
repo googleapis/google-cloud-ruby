@@ -1,5 +1,11 @@
 # Release History
 
+### 1.10.5 / 2020-05-05
+
+#### Bug Fixes
+
+* Prevent error when calling stop! on unused AsyncWriter
+
 ### 1.10.4 / 2020-04-20
 
 #### Documentation
