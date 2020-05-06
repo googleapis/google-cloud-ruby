@@ -1,5 +1,25 @@
 # Release History
 
+### 0.11.0 / 2020-05-06
+
+#### ⚠ BREAKING CHANGES
+
+* **dataproc:** Convert google-cloud-dataproc to a wrapper
+
+#### Features
+
+* Convert google-cloud-dataproc to a wrapper
+* Let Bundler.require load the gem without an extra explicit require call.
+
+#### Bug Fixes
+
+* Eliminated a circular require warning.
+
+#### Documentation
+
+* Cover multi-pattern path helpers in the migration guide
+* Updated the sample timeouts in the migration guide to reflect seconds
+
 ### 0.10.0 / 2020-03-11
 
 #### Features
