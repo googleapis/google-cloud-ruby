@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module TextToSpeech
-      VERSION = "0.7.0"
+      VERSION = "1.0.0"
     end
   end
 end
