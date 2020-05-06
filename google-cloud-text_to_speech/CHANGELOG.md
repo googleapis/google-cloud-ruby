@@ -1,5 +1,15 @@
 # Release History
 
+### 0.8.0 / 2020-05-06
+
+#### ⚠ BREAKING CHANGES
+
+* **text_to_speech:** Convert google-cloud-text_to_speech to a wrapper gem
+
+#### Features
+
+* Convert google-cloud-text_to_speech to a wrapper gem
+
 ### 0.7.0 / 2020-04-10
 
 #### Features
