@@ -9,4 +9,6 @@
 # explicitly taken by someone else.
 *                               @googleapis/yoshi-ruby
 
-/google-cloud-storage/        @GoogleCloudPlatform/storage-dpe @googleapis/yoshi-ruby
+/google-cloud-storage/          @GoogleCloudPlatform/storage-dpe @googleapis/yoshi-ruby
+/google-cloud-bigtable/         @GoogleCloudPlatform/bigtable-dpe @googleapis/yoshi-ruby
+/google-cloud-firestore/        @GoogleCloudPlatform/firestore-dpe @googleapis/yoshi-ruby
