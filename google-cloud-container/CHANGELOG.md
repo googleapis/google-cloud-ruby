@@ -1,5 +1,19 @@
 # Release History
 
+### 0.12.0 / 2020-05-06
+
+#### ⚠ BREAKING CHANGES
+
+* **container:** Change google-cloud-container to a wrapper gem
+
+#### Features
+
+* Change google-cloud-container to a wrapper gem
+
+#### Bug Fixes
+
+* Eliminated a circular require warning.
+
 ### 0.11.0 / 2020-04-10
 
 #### Features
