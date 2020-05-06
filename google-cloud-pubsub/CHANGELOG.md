@@ -1,5 +1,13 @@
 # Release History
 
+### 1.6.1 / 2020-05-06
+
+#### Documentation
+
+* Fix example in Emulator documentation
+* Remove experimental notice from ReceivedMessage#delivery_attempt
+* Wrap example URLs in backticks
+
 ### 1.6.0 / 2020-04-06
 
 #### Features
