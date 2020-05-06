@@ -168,11 +168,6 @@ module Google
           #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::MetricAbsence]
           #     A condition that checks that a time series continues to
           #     receive new data points.
-          # @!attribute [rw] condition_time_series_query_language
-          #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::TimeSeriesQueryLanguageCondition]
-          #     A condition that uses the Monitoring Query Language to define
-          #     alerts.
-          #     If set, no other conditions can be present.
           class Condition
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -323,22 +318,6 @@ module Google
             #     condition will trigger if the comparison is true for any of the
             #     time series that have been identified by `filter` and `aggregations`.
             class MetricAbsence
-              include ::Google::Protobuf::MessageExts
-              extend ::Google::Protobuf::MessageExts::ClassMethods
-            end
-
-            # A condition type that allows alert policies to be defined using
-            # Monitoring Query Language.
-            # @!attribute [rw] query
-            #   @return [::String]
-            #     Monitoring Query Language query that generates time series data and
-            #     describes a condition for alerting on that data.
-            # @!attribute [rw] summary
-            #   @return [::String]
-            #     A short explanation of what the query represents. For example:
-            #
-            #       "Error ratio exceeds 15% for >5% of servers in >2 regions"
-            class TimeSeriesQueryLanguageCondition
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
