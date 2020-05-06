@@ -1,5 +1,28 @@
 # Release History
 
+### 0.16.0 / 2020-05-06
+
+#### ⚠ BREAKING CHANGES
+
+* **dialogflow:** use clients created by the new generator
+
+#### Features
+
+* Add factory method for Environments service.
+* Let Bundler.require load the gem without an extra explicit require call.
+* use clients created by the new generator
+
+#### Bug Fixes
+
+* Eliminated a circular require warning.
+
+#### Documentation
+
+* Updated the sample timeouts in the migration guide to reflect seconds
+* Add section on streaming methods to the migration guide
+* Cover multi-pattern path helpers in the migration guide
+* Removed some extraneous syntax in the Dialogflow module docs.
+
 ### 0.15.0 / 2020-03-11
 
 #### Features
