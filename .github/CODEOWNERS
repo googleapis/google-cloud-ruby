@@ -12,3 +12,4 @@
 /google-cloud-storage/          @GoogleCloudPlatform/storage-dpe @googleapis/yoshi-ruby
 /google-cloud-bigtable/         @GoogleCloudPlatform/bigtable-dpe @googleapis/yoshi-ruby
 /google-cloud-firestore/        @GoogleCloudPlatform/firestore-dpe @googleapis/yoshi-ruby
+/google-cloud-datastore/        @GoogleCloudPlatform/firestore-dpe @googleapis/yoshi-ruby
