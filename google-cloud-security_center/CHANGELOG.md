@@ -1,5 +1,25 @@
 # Release History
 
+### 0.11.0 / 2020-05-06
+
+#### ⚠ BREAKING CHANGES
+
+* **security_center:** Convert google-cloud-security_center to a wrapper
+
+#### Features
+
+* Convert google-cloud-security_center to a wrapper
+* Let Bundler.require load the gem without an extra explicit require call.
+
+#### Bug Fixes
+
+* Eliminated a circular require warning.
+
+#### Documentation
+
+* Added a section on resource path helpers to the migration guide
+* Updated the sample timeouts in the migration guide to reflect seconds
+
 ### 0.10.0 / 2020-04-01
 
 #### Features
