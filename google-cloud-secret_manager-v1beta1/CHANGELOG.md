@@ -4,7 +4,7 @@
 
 #### Documentation
 
-* Annotate several fields/arguments as required.
+* Annotate several additional fields/arguments as required.
 
 ### 0.5.1 / 2020-05-05
 
