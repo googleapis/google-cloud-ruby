@@ -288,7 +288,7 @@ module Google
             #     contain uppercase and lowercase letters, numerals, and the hyphen (`-`) and
             #     underscore (`_`) characters.
             #   @param secret [::Google::Cloud::SecretManager::V1beta1::Secret, ::Hash]
-            #     A {::Google::Cloud::SecretManager::V1beta1::Secret Secret} with initial field values.
+            #     Required. A {::Google::Cloud::SecretManager::V1beta1::Secret Secret} with initial field values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecretManager::V1beta1::Secret]
