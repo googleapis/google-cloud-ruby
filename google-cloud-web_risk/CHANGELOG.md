@@ -6,6 +6,7 @@ This is a major update over the older google-cloud-webrisk gem, with significant
 
 Among the highlights:
 
+* Support for version V1 of the service.
 * Separate client libraries are now provided for specific service versions.
 * A new configuration mechanism makes it easier to control parameters such as endpoint address, network timeouts, and retry.
 * A consistent method interface using keyword arguments for all fields, and supporting request proto objects.
