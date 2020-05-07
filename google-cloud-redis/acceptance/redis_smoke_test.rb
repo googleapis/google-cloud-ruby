@@ -26,7 +26,7 @@ class RedisSmokeTest < Minitest::Test
 
     client = Google::Cloud::Redis.cloud_redis version: :v1
     parent = "projects/#{project_id}/locations/-"
-    response = client.list_instances parent: parent
+    client.list_instances parent: parent
   end
 
   def test_list_instances_v1beta1
@@ -37,6 +37,6 @@ class RedisSmokeTest < Minitest::Test
 
     client = Google::Cloud::Redis.cloud_redis version: :v1beta1
     parent = "projects/#{project_id}/locations/-"
-    response = client.list_instances parent: parent
+    client.list_instances parent: parent
   end
 end
