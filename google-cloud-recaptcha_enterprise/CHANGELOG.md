@@ -1,5 +1,24 @@
 # Release History
 
+### 0.7.0 / 2020-05-07
+
+#### ⚠ BREAKING CHANGES
+
+* **recaptcha_enterprise:** Convert google-cloud-recaptcha_enterprise to a wrapper
+
+#### Features
+
+* Convert google-cloud-recaptcha_enterprise to a wrapper
+
+#### Bug Fixes
+
+* Eliminated a circular require warning.
+
+#### Documentation
+
+* Minor corrections to the migration guide
+* Updated the sample timeouts in the migration guide to reflect seconds
+
 ### 0.6.0 / 2020-04-08
 
 #### Features
