@@ -1,5 +1,15 @@
 # Release History
 
+### 0.8.0 / 2020-05-07
+
+#### ⚠ BREAKING CHANGES
+
+* **os_login:** Convert os_login to a wrapper gem
+
+#### Features
+
+* Convert os_login to a wrapper gem
+
 ### 0.7.0 / 2020-04-08
 
 #### Features
