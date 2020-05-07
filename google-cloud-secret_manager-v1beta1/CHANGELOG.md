@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.2 / 2020-05-07
+
+#### Documentation
+
+* Annotate several fields/arguments as required.
+
 ### 0.5.1 / 2020-05-05
 
 #### Documentation
