@@ -2,9 +2,10 @@
 
 ### 0.6.0 / 2020-05-08
 
-#### Features
-
-* Deprecate google-cloud-webrisk
+This library is now deprecated, and will no longer receive updates.
+Please use the google-cloud-web_risk library instead.
+For detailed information on the differences, see the migration guide at
+https://googleapis.dev/ruby/google-cloud-web_risk/latest/file.MIGRATING.html
 
 ### 0.5.1 / 2020-04-01
 
