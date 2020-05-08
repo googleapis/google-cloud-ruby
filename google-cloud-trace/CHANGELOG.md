@@ -1,5 +1,11 @@
 # Release History
 
+### 0.38.1 / 2020-05-08
+
+#### Bug Fixes
+
+* Add service_address and service_port to v2 factory method
+
 ### 0.38.0 / 2020-03-11
 
 #### Features
