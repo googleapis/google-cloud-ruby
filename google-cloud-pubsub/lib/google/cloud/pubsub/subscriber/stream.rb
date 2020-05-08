@@ -363,6 +363,7 @@ module Google
               req.stream_ack_deadline_seconds = @subscriber.deadline
               req.modify_deadline_ack_ids += @inventory.ack_ids
               req.modify_deadline_seconds += @inventory.ack_ids.map { @subscriber.deadline }
+              req.client_id = @subscriber.service.client_id
             end
           end
 
