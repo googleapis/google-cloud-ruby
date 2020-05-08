@@ -32,7 +32,7 @@ def SecureRandom.int64
 end
 
 def emulator_enabled?
-  !ENV["SPANNER_EMULATOR_HOST"].nil?
+  ENV["SPANNER_EMULATOR_HOST"]
 end
 
 # Create shared spanner object so we don't create new for each test
