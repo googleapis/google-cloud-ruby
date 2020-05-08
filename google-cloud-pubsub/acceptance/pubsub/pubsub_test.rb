@@ -37,6 +37,8 @@ describe Google::Cloud::PubSub, :pubsub do
   let(:dead_letter_topic_name) { $topic_names[8] }
   let(:dead_letter_topic_name_2) { $topic_names[9] }
   let(:labels) { { "foo" => "bar" } }
+  let(:retry_minimum_backoff) { 12.123 }
+  let(:retry_maximum_backoff) { 123.321 }
 
   before do
     # create all topics
@@ -136,23 +138,34 @@ describe Google::Cloud::PubSub, :pubsub do
     end
 
     it "should allow create and update of subscription with options" do
-      begin
-        # create
-        subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true, retention: 600, labels: labels
-        _(subscription).wont_be :nil?
-        _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
-        assert subscription.retain_acked
-        _(subscription.retention).must_equal 600
-        _(subscription.labels).must_equal labels
-        _(subscription.labels).must_be :frozen?
+      # create
+      subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true,
+                                                              retention: 600,
+                                                              labels: labels,
+                                                              retry_minimum_backoff: retry_minimum_backoff,
+                                                              retry_maximum_backoff: retry_maximum_backoff
+      _(subscription).wont_be :nil?
+      _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
+      assert subscription.retain_acked
+      _(subscription.retention).must_equal 600
+      _(subscription.labels).must_equal labels
+      _(subscription.labels).must_be :frozen?
+      _(subscription.retry_minimum_backoff).must_equal retry_minimum_backoff
+      _(subscription.retry_maximum_backoff).must_equal retry_maximum_backoff
 
-        # update
-        subscription.labels = {}
-        _(subscription.labels).must_be :empty?
-      ensure
-        # delete
-        subscription.delete
-      end
+      # update
+      subscription.labels = {}
+      _(subscription.labels).must_be :empty?
+      subscription.retry_minimum_backoff = nil
+      _(subscription.retry_minimum_backoff).must_equal 10 # Default value
+      subscription.retry_maximum_backoff = nil
+      _(subscription.retry_maximum_backoff).must_equal 600 # Default value
+      subscription.retry_minimum_backoff = retry_minimum_backoff
+      _(subscription.retry_minimum_backoff).must_equal retry_minimum_backoff
+      subscription.retry_maximum_backoff = retry_maximum_backoff
+      _(subscription.retry_maximum_backoff).must_equal retry_maximum_backoff
+      # delete
+      subscription.delete
     end
 
     it "should not error when asking for a non-existent subscription" do
@@ -165,6 +178,8 @@ describe Google::Cloud::PubSub, :pubsub do
         subscription = topic.subscribe "#{$topic_prefix}-sub4"
         _(subscription).wont_be :nil?
         _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
+        _(subscription.retry_minimum_backoff).must_be :nil?
+        _(subscription.retry_maximum_backoff).must_be :nil?
         # No messages, should be empty
         received_messages = subscription.pull
         _(received_messages).must_be :empty?

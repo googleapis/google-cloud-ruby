@@ -174,7 +174,9 @@ class MockPubsub < Minitest::Spec
                         endpoint = "http://example.com/callback",
                         labels: nil,
                         dead_letter_topic: nil,
-                        max_delivery_attempts: nil
+                        max_delivery_attempts: nil,
+                        retry_minimum_backoff: nil,
+                        retry_maximum_backoff: nil
     raise "dead_letter_topic is required" if max_delivery_attempts && !dead_letter_topic
     hsh = { name: subscription_path(sub_name),
       topic: topic_path(topic_name),
@@ -195,6 +197,10 @@ class MockPubsub < Minitest::Spec
       dead_letter_topic: dead_letter_topic,
       max_delivery_attempts: max_delivery_attempts
     } if dead_letter_topic
+    hsh[:retry_policy] = {
+      minimum_backoff: retry_minimum_backoff,
+      maximum_backoff: retry_maximum_backoff
+    } if retry_minimum_backoff || retry_maximum_backoff
     hsh
   end
 
