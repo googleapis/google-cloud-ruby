@@ -249,7 +249,8 @@ module Google
             #     `include_gcp_public_datasets` is considered invalid. Data Catalog will
             #     return an error in such a case.
             #   @param query [::String]
-            #     Required. The query string in search query syntax. The query must be non-empty.
+            #     Required. The query string in search query syntax. The query must be
+            #     non-empty.
             #
             #     Query strings can be simple as "x" or more qualified as:
             #
@@ -266,8 +267,8 @@ module Google
             #     for page_size is 1000. Throws an invalid argument for page_size > 1000.
             #   @param page_token [::String]
             #     Optional. Pagination token returned in an earlier
-            #     {::Google::Cloud::DataCatalog::V1::SearchCatalogResponse#next_page_token SearchCatalogResponse.next_page_token}, which
-            #     indicates that this is a continuation of a prior
+            #     {::Google::Cloud::DataCatalog::V1::SearchCatalogResponse#next_page_token SearchCatalogResponse.next_page_token},
+            #     which indicates that this is a continuation of a prior
             #     {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog SearchCatalogRequest}
             #     call, and that the system should return the next page of data. If empty,
             #     the first page is returned.
@@ -650,16 +651,16 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the location that contains the entry groups, which can be
-            #     provided in URL format. Example:
+            #     Required. The name of the location that contains the entry groups, which
+            #     can be provided in URL format. Example:
             #
             #     * projects/\\{project_id}/locations/\\{location}
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
-            #     Throws an invalid argument for `page_size > 1000`.
+            #     Optional. The maximum number of items to return. Default is 10. Max limit
+            #     is 1000. Throws an invalid argument for `page_size > 1000`.
             #   @param page_token [::String]
-            #     Optional. Token that specifies which page is requested. If empty, the first page is
-            #     returned.
+            #     Optional. Token that specifies which page is requested. If empty, the first
+            #     page is returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DataCatalog::V1::EntryGroup>]
@@ -1689,7 +1690,8 @@ module Google
             #
             #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}/fields/\\{tag_template_field_id}
             #   @param new_tag_template_field_id [::String]
-            #     Required. The new ID of this tag template field. For example, `my_new_field`.
+            #     Required. The new ID of this tag template field. For example,
+            #     `my_new_field`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::TagTemplateField]
@@ -1837,8 +1839,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the resource to attach this tag to. Tags can be attached to
-            #     Entries. Example:
+            #     Required. The name of the resource to attach this tag to. Tags can be
+            #     attached to Entries. Example:
             #
             #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}/entries/\\{entry_id}
             #
@@ -2048,8 +2050,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the Data Catalog resource to list the tags of. The resource
-            #     could be an {::Google::Cloud::DataCatalog::V1::Entry Entry} or an
+            #     Required. The name of the Data Catalog resource to list the tags of. The
+            #     resource could be an {::Google::Cloud::DataCatalog::V1::Entry Entry} or an
             #     {::Google::Cloud::DataCatalog::V1::EntryGroup EntryGroup}.
             #
             #     Examples:

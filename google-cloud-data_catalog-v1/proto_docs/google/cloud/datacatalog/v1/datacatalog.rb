@@ -31,7 +31,8 @@ module Google
         #     return an error in such a case.
         # @!attribute [rw] query
         #   @return [::String]
-        #     Required. The query string in search query syntax. The query must be non-empty.
+        #     Required. The query string in search query syntax. The query must be
+        #     non-empty.
         #
         #     Query strings can be simple as "x" or more qualified as:
         #
@@ -50,8 +51,8 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. Pagination token returned in an earlier
-        #     {::Google::Cloud::DataCatalog::V1::SearchCatalogResponse#next_page_token SearchCatalogResponse.next_page_token}, which
-        #     indicates that this is a continuation of a prior
+        #     {::Google::Cloud::DataCatalog::V1::SearchCatalogResponse#next_page_token SearchCatalogResponse.next_page_token},
+        #     which indicates that this is a continuation of a prior
         #     {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog SearchCatalogRequest}
         #     call, and that the system should return the next page of data. If empty,
         #     the first page is returned.
@@ -217,18 +218,18 @@ module Google
         # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entry_groups ListEntryGroups}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the location that contains the entry groups, which can be
-        #     provided in URL format. Example:
+        #     Required. The name of the location that contains the entry groups, which
+        #     can be provided in URL format. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
-        #     Throws an invalid argument for `page_size > 1000`.
+        #     Optional. The maximum number of items to return. Default is 10. Max limit
+        #     is 1000. Throws an invalid argument for `page_size > 1000`.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. Token that specifies which page is requested. If empty, the first page is
-        #     returned.
+        #     Optional. Token that specifies which page is requested. If empty, the first
+        #     page is returned.
         class ListEntryGroupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -407,8 +408,8 @@ module Google
         #     through Data Catalog must use `user_specified_type`.
         # @!attribute [r] integrated_system
         #   @return [::Google::Cloud::DataCatalog::V1::IntegratedSystem]
-        #     Output only. This field indicates the entry's source system that Data Catalog
-        #     integrates with, such as BigQuery or Pub/Sub.
+        #     Output only. This field indicates the entry's source system that Data
+        #     Catalog integrates with, such as BigQuery or Pub/Sub.
         # @!attribute [rw] user_specified_system
         #   @return [::String]
         #     This field indicates the entry's source system that Data Catalog does not
@@ -474,7 +475,8 @@ module Google
         #     string.
         # @!attribute [r] data_catalog_timestamps
         #   @return [::Google::Cloud::DataCatalog::V1::SystemTimestamps]
-        #     Output only. Timestamps about this EntryGroup. Default value is empty timestamps.
+        #     Output only. Timestamps about this EntryGroup. Default value is empty
+        #     timestamps.
         class EntryGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -553,8 +555,8 @@ module Google
         # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag CreateTag}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the resource to attach this tag to. Tags can be attached to
-        #     Entries. Example:
+        #     Required. The name of the resource to attach this tag to. Tags can be
+        #     attached to Entries. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}/entries/\\{entry_id}
         #
@@ -659,7 +661,8 @@ module Google
         #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}/fields/\\{tag_template_field_id}
         # @!attribute [rw] new_tag_template_field_id
         #   @return [::String]
-        #     Required. The new ID of this tag template field. For example, `my_new_field`.
+        #     Required. The new ID of this tag template field. For example,
+        #     `my_new_field`.
         class RenameTagTemplateFieldRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -686,8 +689,8 @@ module Google
         # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_tags ListTags}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the Data Catalog resource to list the tags of. The resource
-        #     could be an {::Google::Cloud::DataCatalog::V1::Entry Entry} or an
+        #     Required. The name of the Data Catalog resource to list the tags of. The
+        #     resource could be an {::Google::Cloud::DataCatalog::V1::Entry Entry} or an
         #     {::Google::Cloud::DataCatalog::V1::EntryGroup EntryGroup}.
         #
         #     Examples:
