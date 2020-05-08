@@ -85,7 +85,6 @@ namespace :acceptance do
     if project.nil? || keyfile.nil?
       fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or SPANNER_TEST_PROJECT=test123 SPANNER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
     end
-
     # clear any env var already set
     require "google/cloud/spanner/credentials"
     (Google::Cloud::Spanner::Credentials::PATH_ENV_VARS +
