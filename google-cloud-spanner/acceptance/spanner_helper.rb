@@ -31,16 +31,12 @@ def SecureRandom.int64
   random_bytes(8).unpack("q")[0]
 end
 
-def emulator_host
-  ENV["SPANNER_EMULATOR_HOST"]
-end
-
 def emulator_enabled?
-  !emulator_host.nil?
+  !ENV["SPANNER_EMULATOR_HOST"].nil?
 end
 
 # Create shared spanner object so we don't create new for each test
-$spanner = Google::Cloud::Spanner.new(emulator_host: emulator_host)
+$spanner = Google::Cloud::Spanner.new
 
 module Acceptance
   ##
