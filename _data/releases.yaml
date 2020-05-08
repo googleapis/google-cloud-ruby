@@ -1012,6 +1012,7 @@ google-cloud-text_to_speech:
 google-cloud-text_to_speech-v1:
 - v0.1.0
 google-cloud-trace:
+- v0.38.1
 - v0.38.0
 - v0.37.1
 - v0.36.0
