@@ -399,6 +399,8 @@ module Google
             #   @param location_id [::String]
             #     The geographic location to process content inspection. Reserved for future
             #     extensions.
+            #     When inspecting images location is restricted to 'global', 'us', 'asia',
+            #     and 'europe'.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dlp::V2::InspectContentResponse]
@@ -475,6 +477,7 @@ module Google
             #   @param location_id [::String]
             #     The geographic location to process the request. Reserved for future
             #     extensions.
+            #     Location is restricted to 'global', 'us', 'asia', and 'europe'.
             #   @param inspect_config [::Google::Cloud::Dlp::V2::InspectConfig, ::Hash]
             #     Configuration for the inspector.
             #   @param image_redaction_configs [::Array<::Google::Cloud::Dlp::V2::RedactImageRequest::ImageRedactionConfig, ::Hash>]
@@ -897,8 +900,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of organization and inspectTemplate to be updated,
-            #     for example `organizations/433245324/inspectTemplates/432452342` or
+            #     Required. Resource name of organization and inspectTemplate to be updated, for
+            #     example `organizations/433245324/inspectTemplates/432452342` or
             #     projects/project-id/inspectTemplates/432452342.
             #   @param inspect_template [::Google::Cloud::Dlp::V2::InspectTemplate, ::Hash]
             #     New InspectTemplate value.
@@ -970,8 +973,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the organization and inspectTemplate to be read,
-            #     for example `organizations/433245324/inspectTemplates/432452342` or
+            #     Required. Resource name of the organization and inspectTemplate to be read, for
+            #     example `organizations/433245324/inspectTemplates/432452342` or
             #     projects/project-id/inspectTemplates/432452342.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1131,9 +1134,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the organization and inspectTemplate to be
-            #     deleted, for example `organizations/433245324/inspectTemplates/432452342`
-            #     or projects/project-id/inspectTemplates/432452342.
+            #     Required. Resource name of the organization and inspectTemplate to be deleted, for
+            #     example `organizations/433245324/inspectTemplates/432452342` or
+            #     projects/project-id/inspectTemplates/432452342.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -1281,9 +1284,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of organization and deidentify template to be
-            #     updated, for example
-            #     `organizations/433245324/deidentifyTemplates/432452342` or
+            #     Required. Resource name of organization and deidentify template to be updated, for
+            #     example `organizations/433245324/deidentifyTemplates/432452342` or
             #     projects/project-id/deidentifyTemplates/432452342.
             #   @param deidentify_template [::Google::Cloud::Dlp::V2::DeidentifyTemplate, ::Hash]
             #     New DeidentifyTemplate value.
@@ -1356,9 +1358,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the organization and deidentify template to be
-            #     read, for example `organizations/433245324/deidentifyTemplates/432452342`
-            #     or projects/project-id/deidentifyTemplates/432452342.
+            #     Required. Resource name of the organization and deidentify template to be read, for
+            #     example `organizations/433245324/deidentifyTemplates/432452342` or
+            #     projects/project-id/deidentifyTemplates/432452342.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
@@ -1519,9 +1521,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the organization and deidentify template to be
-            #     deleted, for example
-            #     `organizations/433245324/deidentifyTemplates/432452342` or
+            #     Required. Resource name of the organization and deidentify template to be deleted,
+            #     for example `organizations/433245324/deidentifyTemplates/432452342` or
             #     projects/project-id/deidentifyTemplates/432452342.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1743,8 +1744,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the trigger to execute a hybrid inspect on, for
-            #     example `projects/dlp-test-project/jobTriggers/53234423`.
+            #     Required. Resource name of the trigger to execute a hybrid inspect on, for example
+            #     `projects/dlp-test-project/jobTriggers/53234423`.
             #   @param hybrid_item [::Google::Cloud::Dlp::V2::HybridContentItem, ::Hash]
             #     The item to inspect.
             #
@@ -2629,8 +2630,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of organization and storedInfoType to be updated,
-            #     for example `organizations/433245324/storedInfoTypes/432452342` or
+            #     Required. Resource name of organization and storedInfoType to be updated, for
+            #     example `organizations/433245324/storedInfoTypes/432452342` or
             #     projects/project-id/storedInfoTypes/432452342.
             #   @param config [::Google::Cloud::Dlp::V2::StoredInfoTypeConfig, ::Hash]
             #     Updated configuration for the storedInfoType. If not provided, a new
@@ -2705,8 +2706,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the organization and storedInfoType to be read,
-            #     for example `organizations/433245324/storedInfoTypes/432452342` or
+            #     Required. Resource name of the organization and storedInfoType to be read, for
+            #     example `organizations/433245324/storedInfoTypes/432452342` or
             #     projects/project-id/storedInfoTypes/432452342.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -2869,8 +2870,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the organization and storedInfoType to be
-            #     deleted, for example `organizations/433245324/storedInfoTypes/432452342` or
+            #     Required. Resource name of the organization and storedInfoType to be deleted, for
+            #     example `organizations/433245324/storedInfoTypes/432452342` or
             #     projects/project-id/storedInfoTypes/432452342.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -2942,8 +2943,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the job to execute a hybrid inspect on, for
-            #     example `projects/dlp-test-project/dlpJob/53234423`.
+            #     Required. Resource name of the job to execute a hybrid inspect on, for example
+            #     `projects/dlp-test-project/dlpJob/53234423`.
             #   @param hybrid_item [::Google::Cloud::Dlp::V2::HybridContentItem, ::Hash]
             #     The item to inspect.
             #

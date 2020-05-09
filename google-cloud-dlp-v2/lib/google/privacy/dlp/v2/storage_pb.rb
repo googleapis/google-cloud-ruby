@@ -194,6 +194,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :BINARY_FILE, 1
       value :TEXT_FILE, 2
       value :IMAGE, 3
+      value :WORD, 5
+      value :PDF, 6
       value :AVRO, 7
     end
   end
