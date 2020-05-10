@@ -37,3 +37,16 @@ library = gapic.ruby_library(
 )
 
 s.copy(library, merge=ruby.global_merge)
+
+# Temporary: Remove docs for the obsolete ServiceTier module which contain
+# broken links.
+s.replace(
+    'proto_docs/google/monitoring/v3/common.rb',
+    '(\n        #[^\n]*)+\n        module ServiceTier\n',
+    '\n        # Obsolete.\n        module ServiceTier\n'
+)
+s.replace(
+    'proto_docs/google/monitoring/v3/common.rb',
+    '(\n          #[^\n]*)+\n          SERVICE_TIER_',
+    '\n          # Obsolete.\n          SERVICE_TIER_'
+)
