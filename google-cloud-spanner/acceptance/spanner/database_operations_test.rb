@@ -20,6 +20,8 @@ describe "Spanner Database Operations", :spanner do
   let(:database_id) { $spanner_database_id }
 
   it "list database operations" do
+    skip if emulator_enabled?
+
     instance = spanner.instance instance_id
     _(instance).wont_be :nil?
 

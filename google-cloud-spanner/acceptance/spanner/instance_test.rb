@@ -30,6 +30,8 @@ describe "Spanner Instances", :spanner do
     let(:service_account) { spanner.service.credentials.client.issuer }
 
     it "allows policy to be updated on an instance" do
+      skip if emulator_enabled?
+
       all_instances = spanner.instances.all.to_a
       instance = spanner.instance all_instances.first.instance_id
       # Check permissions first

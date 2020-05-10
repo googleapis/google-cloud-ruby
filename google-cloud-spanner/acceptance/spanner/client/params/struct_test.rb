@@ -181,6 +181,8 @@ describe "Spanner Client", :params, :struct, :spanner do
   end
 
   it "queries and returns a struct array" do
+    skip if emulator_enabled?
+
     struct_sql = "SELECT ARRAY(SELECT AS STRUCT message, repeat FROM (SELECT 'hello' AS message, 1 AS repeat UNION ALL SELECT 'hola' AS message, 2 AS repeat))"
     results = db.execute_query struct_sql
 
