@@ -18,6 +18,7 @@ require "google/cloud/errors"
 require "google/cloud/pubsub/subscription/list"
 require "google/cloud/pubsub/subscription/push_config"
 require "google/cloud/pubsub/received_message"
+require "google/cloud/pubsub/retry_policy"
 require "google/cloud/pubsub/snapshot"
 require "google/cloud/pubsub/subscriber"
 require "google/cloud/pubsub/v1"
@@ -484,107 +485,62 @@ module Google
         end
 
         ##
-        # The minimum delay between consecutive deliveries of a given message.
-        #
-        # If set, the subscription will have a retry policy that specifies how Cloud Pub/Sub retries message delivery.
-        # Retry delay will be exponential based on provided minimum and maximum backoffs. Retry Policy will be
-        # triggered on NACKs or acknowledgement deadline exceeded events for a given message. Retry Policy is
-        # implemented on a best effort basis. At times, the delay between consecutive deliveries may not match the
-        # configuration. That is, delay can be more or less than configured backoff.
-        #
-        # If the subscription does not have a retry policy, the default retry policy is applied. This generally
-        # implies that messages will be retried as soon as possible for healthy subscribers. Retry Policy will be
-        # triggered on NACKs or acknowledgement deadline exceeded events for a given message.
+        # A policy that specifies how Cloud Pub/Sub retries message delivery for this subscription. If `nil`, the
+        # default retry policy is applied. This generally implies that messages will be retried as soon as possible
+        # for healthy subscribers. Retry Policy will be triggered on NACKs or acknowledgement deadline exceeded events
+        # for a given message.
         #
         # **EXPERIMENTAL:** This API might be changed in backward-incompatible ways and is not recommended for
         # production use. It is not subject to any SLA or deprecation policy.
         #
-        # @return [Numeric, nil] A value between 0 and 600 seconds, or `nil` if no retry policy is configured. If the
-        #   subscription has a retry policy, the default value is 10 seconds.
+        # @return [RetryPolicy, nil] The retry policy for the subscription, or `nil`.
         #
-        def retry_minimum_backoff
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #
+        #   sub.retry_policy = Google::Cloud::PubSub::RetryPolicy.new minimum_backoff: 5, maximum_backoff: 300
+        #
+        #   sub.retry_policy.minimum_backoff #=> 5
+        #   sub.retry_policy.maximum_backoff #=> 300
+        #
+        def retry_policy
           ensure_grpc!
-          Convert.duration_to_number @grpc.retry_policy&.minimum_backoff
+          return nil unless @grpc.retry_policy
+          RetryPolicy.from_grpc @grpc.retry_policy
         end
 
         ##
-        # The minimum delay between consecutive deliveries of a given message.
-        #
-        # If set, the subscription will have a retry policy that specifies how Cloud Pub/Sub retries message delivery.
-        # Retry delay will be exponential based on provided minimum and maximum backoffs. Retry Policy will be
-        # triggered on NACKs or acknowledgement deadline exceeded events for a given message. Retry Policy is
-        # implemented on a best effort basis. At times, the delay between consecutive deliveries may not match the
-        # configuration. That is, delay can be more or less than configured backoff.
-        #
-        # If the subscription does not have a retry policy, the default retry policy is applied. This generally
-        # implies that messages will be retried as soon as possible for healthy subscribers. Retry Policy will be
-        # triggered on NACKs or acknowledgement deadline exceeded events for a given message.
+        # Sets a policy that specifies how Cloud Pub/Sub retries message delivery for this subscription. If `nil`, the
+        # default retry policy is applied. This generally implies that messages will be retried as soon as possible
+        # for healthy subscribers. Retry Policy will be triggered on NACKs or acknowledgement deadline exceeded events
+        # for a given message.
         #
         # **EXPERIMENTAL:** This API might be changed in backward-incompatible ways and is not recommended for
         # production use. It is not subject to any SLA or deprecation policy.
         #
-        # @param [Numeric] new_minimum_backoff Value should be between 0 and 600 seconds. The default value is 10
-        #   seconds.
+        # @param [RetryPolicy, nil] new_retry_policy A new retry policy for the subscription, or `nil`.
         #
-        def retry_minimum_backoff= new_minimum_backoff
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #
+        #   sub.retry_policy = Google::Cloud::PubSub::RetryPolicy.new minimum_backoff: 5, maximum_backoff: 300
+        #
+        #   sub.retry_policy.minimum_backoff #=> 5
+        #   sub.retry_policy.maximum_backoff #=> 300
+        #
+        def retry_policy= new_retry_policy
           ensure_grpc!
-          retry_policy = @grpc.retry_policy || Google::Cloud::PubSub::V1::RetryPolicy.new
-          retry_policy.minimum_backoff = Convert.number_to_duration new_minimum_backoff
-          update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, retry_policy: retry_policy
+          new_retry_policy = new_retry_policy.to_grpc if new_retry_policy
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, retry_policy: new_retry_policy
           @grpc = service.update_subscription update_grpc, :retry_policy
-          @resource_name = nil
-        end
-
-        ##
-        # The maximum delay between consecutive deliveries of a given message.
-        #
-        # If set, the subscription will have a retry policy that specifies how Cloud Pub/Sub retries message delivery.
-        # Retry delay will be exponential based on provided minimum and maximum backoffs. Retry Policy will be
-        # triggered on NACKs or acknowledgement deadline exceeded events for a given message. Retry Policy is
-        # implemented on a best effort basis. At times, the delay between consecutive deliveries may not match the
-        # configuration. That is, delay can be more or less than configured backoff.
-        #
-        # If the subscription does not have a retry policy, the default retry policy is applied. This generally
-        # implies that messages will be retried as soon as possible for healthy subscribers. Retry Policy will be
-        # triggered on NACKs or acknowledgement deadline exceeded events for a given message.
-        #
-        # **EXPERIMENTAL:** This API might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
-        # @return [Numeric, nil] A value between 0 and 600 seconds, or `nil` if no retry policy is configured. If the
-        #   subscription has a retry policy, the default value is 600 seconds.
-        #
-        def retry_maximum_backoff
-          ensure_grpc!
-          Convert.duration_to_number @grpc.retry_policy&.maximum_backoff
-        end
-
-        #
-        # The maximum delay between consecutive deliveries of a given message.
-        #
-        # If set, the subscription will have a retry policy that specifies how Cloud Pub/Sub retries message delivery.
-        # Retry delay will be exponential based on provided minimum and maximum backoffs. Retry Policy will be
-        # triggered on NACKs or acknowledgement deadline exceeded events for a given message. Retry Policy is
-        # implemented on a best effort basis. At times, the delay between consecutive deliveries may not match the
-        # configuration. That is, delay can be more or less than configured backoff.
-        #
-        # If the subscription does not have a retry policy, the default retry policy is applied. This generally
-        # implies that messages will be retried as soon as possible for healthy subscribers. Retry Policy will be
-        # triggered on NACKs or acknowledgement deadline exceeded events for a given message.
-        #
-        # **EXPERIMENTAL:** This API might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
-        # @param [Numeric] new_maximum_backoff Value should be between 0 and 600 seconds. The default value is 600
-        #   seconds.
-        #
-        def retry_maximum_backoff= new_maximum_backoff
-          ensure_grpc!
-          retry_policy = @grpc.retry_policy || Google::Cloud::PubSub::V1::RetryPolicy.new
-          retry_policy.maximum_backoff = Convert.number_to_duration new_maximum_backoff
-          update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, retry_policy: retry_policy
-          @grpc = service.update_subscription update_grpc, :retry_policy
-          @resource_name = nil
         end
 
         ##

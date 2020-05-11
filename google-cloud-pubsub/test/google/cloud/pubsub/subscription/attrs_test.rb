@@ -91,11 +91,11 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
   end
 
   it "gets retry_minimum_backoff from the Google API object" do
-    _(subscription.retry_minimum_backoff).must_equal retry_minimum_backoff
+    _(subscription.retry_policy.minimum_backoff).must_equal retry_minimum_backoff
   end
 
   it "gets retry_maximum_backoff from the Google API object" do
-    _(subscription.retry_maximum_backoff).must_equal retry_maximum_backoff
+    _(subscription.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
   end
 
   describe "reference subscription object of a subscription that does exist" do
@@ -194,7 +194,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
 
-      _(subscription.retry_minimum_backoff).must_equal retry_minimum_backoff
+      _(subscription.retry_policy.minimum_backoff).must_equal retry_minimum_backoff
 
       mock.verify
     end
@@ -205,7 +205,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
 
-      _(subscription.retry_maximum_backoff).must_equal retry_maximum_backoff
+      _(subscription.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
 
       mock.verify
     end
@@ -327,7 +327,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
       end.must_raise Google::Cloud::NotFoundError
     end
 
-    it "raises NotFoundError when retrieving retry_minimum_backoff" do
+    it "raises NotFoundError when retrieving retry_policy" do
       stub = Object.new
       def stub.get_subscription *args
         gax_error = Google::Gax::GaxError.new "not found"
@@ -337,21 +337,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
       subscription.service.mocked_subscriber = stub
 
       expect do
-        subscription.retry_minimum_backoff
-      end.must_raise Google::Cloud::NotFoundError
-    end
-
-    it "raises NotFoundError when retrieving retry_maximum_backoff" do
-      stub = Object.new
-      def stub.get_subscription *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
-      end
-      subscription.service.mocked_subscriber = stub
-
-      expect do
-        subscription.retry_maximum_backoff
+        subscription.retry_policy
       end.must_raise Google::Cloud::NotFoundError
     end
   end

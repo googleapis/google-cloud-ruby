@@ -256,7 +256,7 @@ module Google
               labels:                     labels,
               enable_message_ordering:    message_ordering,
               dead_letter_policy:         dead_letter_policy(options),
-              retry_policy:               retry_policy(options),
+              retry_policy:               options[:retry_policy],
               options:                    default_options
           end
         end
@@ -491,18 +491,6 @@ module Google
           policy = Google::Cloud::PubSub::V1::DeadLetterPolicy.new dead_letter_topic: options[:dead_letter_topic_name]
           if options[:dead_letter_max_delivery_attempts]
             policy.max_delivery_attempts = options[:dead_letter_max_delivery_attempts]
-          end
-          policy
-        end
-
-        def retry_policy options
-          return nil unless options[:retry_minimum_backoff] || options[:retry_maximum_backoff]
-          policy = Google::Cloud::PubSub::V1::RetryPolicy.new
-          if options[:retry_minimum_backoff]
-            policy.minimum_backoff = Convert.number_to_duration options[:retry_minimum_backoff]
-          end
-          if options[:retry_maximum_backoff]
-            policy.maximum_backoff = Convert.number_to_duration options[:retry_maximum_backoff]
           end
           policy
         end

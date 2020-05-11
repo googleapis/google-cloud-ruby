@@ -34,6 +34,12 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
   let(:dead_letter_topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(dead_letter_topic_name)), pubsub.service }
   let(:retry_minimum_backoff) { 12.123 }
   let(:retry_maximum_backoff) { 123.321 }
+  let(:retry_policy) do
+    Google::Cloud::PubSub::RetryPolicy.new(
+      minimum_backoff: retry_minimum_backoff,
+      maximum_backoff: retry_maximum_backoff
+    )
+  end
 
   it "knows its name" do
     _(topic.name).must_equal topic_path(topic_name)
@@ -193,18 +199,18 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
   it "creates a subscription with retry_minimum_backoff and retry_maximum_backoff" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
     create_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, new_sub_name, retry_minimum_backoff: retry_minimum_backoff, retry_maximum_backoff: retry_maximum_backoff)
-    retry_policy = Google::Cloud::PubSub::V1::RetryPolicy.new minimum_backoff: retry_minimum_backoff, maximum_backoff: retry_maximum_backoff
+    retry_policy_grpc = Google::Cloud::PubSub::V1::RetryPolicy.new minimum_backoff: retry_minimum_backoff, maximum_backoff: retry_maximum_backoff
     mock = Minitest::Mock.new
-    mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: false, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, dead_letter_policy: nil, retry_policy: retry_policy, options: default_options]
+    mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: false, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, dead_letter_policy: nil, retry_policy: retry_policy_grpc, options: default_options]
     topic.service.mocked_subscriber = mock
 
-    sub = topic.subscribe new_sub_name, retry_minimum_backoff: retry_minimum_backoff, retry_maximum_backoff: retry_maximum_backoff
+    sub = topic.subscribe new_sub_name, retry_policy: retry_policy
 
     mock.verify
 
     _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
-    _(sub.retry_minimum_backoff).must_equal retry_minimum_backoff
-    _(sub.retry_maximum_backoff).must_equal retry_maximum_backoff
+    _(sub.retry_policy.minimum_backoff).must_equal retry_minimum_backoff
+    _(sub.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
   end
 
   it "raises when creating a subscription that already exists" do

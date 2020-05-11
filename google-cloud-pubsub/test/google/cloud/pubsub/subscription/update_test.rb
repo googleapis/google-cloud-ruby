@@ -269,12 +269,12 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
     subscription.service.mocked_subscriber = mock
 
-    subscription.retry_minimum_backoff = new_retry_minimum_backoff
+    subscription.retry_policy = Google::Cloud::PubSub::RetryPolicy.new minimum_backoff: new_retry_minimum_backoff, maximum_backoff: retry_maximum_backoff
 
     mock.verify
 
-    _(subscription.retry_minimum_backoff).must_equal new_retry_minimum_backoff
-    _(subscription.retry_maximum_backoff).must_equal retry_maximum_backoff
+    _(subscription.retry_policy.minimum_backoff).must_equal new_retry_minimum_backoff
+    _(subscription.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
   end
 
   it "updates retry_maximum_backoff" do
@@ -285,12 +285,12 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
     subscription.service.mocked_subscriber = mock
 
-    subscription.retry_maximum_backoff = new_retry_maximum_backoff
+    subscription.retry_policy = Google::Cloud::PubSub::RetryPolicy.new minimum_backoff: retry_minimum_backoff, maximum_backoff: new_retry_maximum_backoff
 
     mock.verify
 
-    _(subscription.retry_minimum_backoff).must_equal retry_minimum_backoff
-    _(subscription.retry_maximum_backoff).must_equal new_retry_maximum_backoff
+    _(subscription.retry_policy.minimum_backoff).must_equal retry_minimum_backoff
+    _(subscription.retry_policy.maximum_backoff).must_equal new_retry_maximum_backoff
   end
 
   describe :reference do
