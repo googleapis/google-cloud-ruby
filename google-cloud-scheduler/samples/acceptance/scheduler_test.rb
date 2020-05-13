@@ -21,8 +21,6 @@ require "minitest/autorun"
 require "rack/test"
 require "google/cloud/scheduler"
 
-GOOGLE_CLOUD_PROJECT = ENV["GOOGLE_CLOUD_PROJECT"]
-
 # Test the Cloud Scheduler sample calls.
 class SchedulerSampleServerTest < Minitest::Test
   include Rack::Test::Methods
@@ -30,10 +28,11 @@ class SchedulerSampleServerTest < Minitest::Test
   parallelize_me!
 
   def setup
-    @location_id = "us-east1"
+    @project = ENV["GOOGLE_CLOUD_PROJECT"]
+    @location_id = ENV["LOCATION_ID"] || "us-central1"
 
     client = Google::Cloud::Scheduler.cloud_scheduler
-    location_path = "projects/#{GOOGLE_CLOUD_PROJECT}/locations/#{@location_id}"
+    location_path = "projects/#{@project}/locations/#{@location_id}"
 
     begin
       client.list_jobs parent: location_path
@@ -43,13 +42,13 @@ class SchedulerSampleServerTest < Minitest::Test
   end
 
   def test_create_and_delete_a_job
-    response = create_job project_id: GOOGLE_CLOUD_PROJECT, location_id: @location_id, service_id: "my-service"
+    response = create_job project_id: @project, location_id: @location_id, service_id: "my-service"
     assert_match "projects/", response
 
     job_name = response.split("/")[-1]
 
     assert_output(/Job deleted/) do
-      delete_job project_id: GOOGLE_CLOUD_PROJECT, location_id: @location_id, job_name: job_name
+      delete_job project_id: @project, location_id: @location_id, job_name: job_name
     end
   end
 end
