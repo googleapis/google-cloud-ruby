@@ -195,7 +195,7 @@ module Google
         end
 
         def call_options parent: nil, token: nil
-          Google::Gax::CallOptions.new({
+          Google::Gax::CallOptions.new(**{
             metadata:   default_headers(parent),
             page_token: token
           }.delete_if { |_, v| v.nil? })
