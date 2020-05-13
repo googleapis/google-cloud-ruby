@@ -24,10 +24,12 @@ require "google/cloud/tasks"
 # @param [Integer] seconds The delay, in seconds, to process your task.
 def create_http_task project_id, location_id, queue_id, url, payload: nil, seconds: nil
   # Instantiates a client.
-  client = Google::Cloud::Tasks.new
+  client = Google::Cloud::Tasks.cloud_tasks
 
   # Construct the fully qualified queue name.
-  parent = client.queue_path project_id, location_id, queue_id
+  parent = client.queue_path(project: project_id,
+                             location: location_id,
+                             queue: queue_id)
 
   # Construct task.
   task = {
@@ -49,7 +51,8 @@ def create_http_task project_id, location_id, queue_id, url, payload: nil, secon
 
   # Send create task request.
   puts "Sending task #{task}"
-  response = client.create_task parent, task
+
+  response = client.create_task parent: parent, task: task
 
   puts "Created task #{response.name}" if response.name
 end

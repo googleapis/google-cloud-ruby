@@ -22,24 +22,27 @@ describe "CloudTasks" do
   include Rack::Test::Methods
 
   before do
-    GOOGLE_CLOUD_PROJECT = ENV["GOOGLE_CLOUD_PROJECT"]
-    location_id          = ENV["LOCATION_ID"] || "us-east1"
-    QUEUE_ID             = "my-queue".freeze
+    @project    = ENV["GOOGLE_CLOUD_PROJECT"]
+    location_id = ENV["LOCATION_ID"] || "us-east1"
+    @queue_id   = "my-queue".freeze
 
-    client = Google::Cloud::Tasks::V2.new
-    parent = client.queue_path GOOGLE_CLOUD_PROJECT, location_id, QUEUE_ID
+    client = Google::Cloud::Tasks.cloud_tasks
+
+    queue_name  = client.queue_path(project: @project,
+                               location: location_id,
+                               queue: @queue_id)
 
     begin
-      client.get_queue parent
-    rescue StandardError
+      client.get_queue name: queue_name
+    rescue StandardError => e
       location_id = "us-east4"
     end
-    LOCATION_ID = location_id.freeze
+    @location = location_id.freeze
   end
 
   it "can create an HTTP task" do
     out, _err = capture_io do
-      create_http_task GOOGLE_CLOUD_PROJECT, LOCATION_ID, QUEUE_ID, "http://example.com/taskhandler"
+      create_http_task @project, @location, @queue_id, "http://example.com/taskhandler"
     end
 
     assert_match "Created task", out
