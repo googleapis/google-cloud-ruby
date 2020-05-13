@@ -226,3 +226,16 @@ s.replace(
     'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
     'https://googleapis.dev/ruby/google-cloud-firestore/latest/file.AUTHENTICATION.html'
 )
+
+# Mark v1beta1 client as deprecated
+# https://github.com/googleapis/google-cloud-ruby/issues/5952
+s.replace(
+    'lib/google/cloud/firestore/v1beta1/firestore_client.rb',
+    'module V1beta1',
+    'module V1beta1\n        # @deprecated Use Google::Cloud::Firestore::V1::FirestoreClient instead.\n        #'
+)
+s.replace(
+    'lib/google/cloud/firestore/v1beta1.rb',
+    '^      ##$',
+    '      ##\n      # @deprecated Use Google::Cloud::Firestore::V1 instead.\n      #'
+)
