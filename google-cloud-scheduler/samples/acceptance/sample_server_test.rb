@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2018 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,21 +14,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-STDOUT.sync = true
+require_relative "../app"
 
-# [START cloud_scheduler_app]
-require "sinatra"
+require "minitest/autorun"
+require "rack/test"
 
-# Define relative URI for job endpoint
-post "/log_payload" do
-  # Log the request payload
-  data = request.body.read
-  puts "Received job with payload: #{data}"
-  "Printed job payload: #{data}"
-end
-# [END cloud_scheduler_app]
+# Test the Sinatra server for the Cloud Scheduler sample.
+class SchedulerSampleServerTest < Minitest::Test
+  include Rack::Test::Methods
 
-get "/" do
-  # Basic index to verify app is serving
-  "Hello World!"
+  parallelize_me!
+
+  def app
+    Sinatra::Application
+  end
+
+  def test_returns_hello_world
+    get "/"
+    assert_match "Hello World!", last_response.body
+  end
+
+  def test_posts_to_log_payload
+    post "/log_payload", "Hello"
+    assert_match "Printed job payload", last_response.body
+  end
 end
