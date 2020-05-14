@@ -328,6 +328,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    parent = "hello world"
     language_code = "hello world"
     filter = "hello world"
     location_id = "hello world"
@@ -335,6 +336,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     list_info_types_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_info_types, name
       assert_kind_of ::Google::Cloud::Dlp::V2::ListInfoTypesRequest, request
+      assert_equal "hello world", request.parent
       assert_equal "hello world", request.language_code
       assert_equal "hello world", request.filter
       assert_equal "hello world", request.location_id
@@ -348,31 +350,31 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_info_types({ language_code: language_code, filter: filter, location_id: location_id }) do |response, operation|
+      client.list_info_types({ parent: parent, language_code: language_code, filter: filter, location_id: location_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_info_types language_code: language_code, filter: filter, location_id: location_id do |response, operation|
+      client.list_info_types parent: parent, language_code: language_code, filter: filter, location_id: location_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_info_types ::Google::Cloud::Dlp::V2::ListInfoTypesRequest.new(language_code: language_code, filter: filter, location_id: location_id) do |response, operation|
+      client.list_info_types ::Google::Cloud::Dlp::V2::ListInfoTypesRequest.new(parent: parent, language_code: language_code, filter: filter, location_id: location_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_info_types({ language_code: language_code, filter: filter, location_id: location_id }, grpc_options) do |response, operation|
+      client.list_info_types({ parent: parent, language_code: language_code, filter: filter, location_id: location_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_info_types ::Google::Cloud::Dlp::V2::ListInfoTypesRequest.new(language_code: language_code, filter: filter, location_id: location_id), grpc_options do |response, operation|
+      client.list_info_types ::Google::Cloud::Dlp::V2::ListInfoTypesRequest.new(parent: parent, language_code: language_code, filter: filter, location_id: location_id), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
