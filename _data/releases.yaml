@@ -461,6 +461,7 @@ google-cloud-error_reporting:
 google-cloud-errors:
 - v1.0.0
 google-cloud-firestore:
+- v1.4.2
 - v1.4.1
 - v1.4.0
 - v1.2.4
