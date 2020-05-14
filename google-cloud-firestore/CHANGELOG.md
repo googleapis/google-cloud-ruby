@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.2 / 2020-05-14
+
+#### Bug Fixes
+
+* Fix Ruby 2.7 keyword argument warning
+
 ### 1.4.1 / 2020-04-14
 
 #### Bug Fixes
