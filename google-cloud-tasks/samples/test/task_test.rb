@@ -14,28 +14,27 @@
 
 require "minitest/autorun"
 require "rack/test"
-require "google/cloud/tasks/v2"
+require "google/cloud/tasks"
 require_relative "../create_http_task.rb"
-require "cgi"
 
 describe "CloudTasks" do
   include Rack::Test::Methods
 
   before do
     @project    = ENV["GOOGLE_CLOUD_PROJECT"]
-    location_id = ENV["LOCATION_ID"] || "us-east1"
+    location_id = ENV["LOCATION_ID"] || "us-central1"
     @queue_id   = "my-queue".freeze
 
     client = Google::Cloud::Tasks.cloud_tasks
 
-    queue_name  = client.queue_path(project: @project,
-                               location: location_id,
-                               queue: @queue_id)
+    queue_name = client.queue_path(project:  @project,
+                                   location: location_id,
+                                   queue:    @queue_id)
 
     begin
       client.get_queue name: queue_name
-    rescue StandardError => e
-      location_id = "us-east4"
+    rescue StandardError
+      location_id = "us-central1"
     end
     @location = location_id.freeze
   end
