@@ -270,6 +270,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :description, :string, 4
     end
     add_message "google.privacy.dlp.v2.ListInfoTypesRequest" do
+      optional :parent, :string, 4
       optional :language_code, :string, 1
       optional :filter, :string, 2
       optional :location_id, :string, 3
