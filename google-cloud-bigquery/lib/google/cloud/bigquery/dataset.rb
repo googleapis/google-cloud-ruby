@@ -636,12 +636,20 @@ module Google
         #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
         #   dialect. Optional. The default value is false.
         # @param [Array<String>, String] udfs User-defined function resources
-        #   used in the query. May be either a code resource to load from a
-        #   Google Cloud Storage URI (`gs://bucket/path`), or an inline resource
+        #   used in a legacy SQL query. May be either a code resource to load from
+        #   a Google Cloud Storage URI (`gs://bucket/path`), or an inline resource
         #   that contains code for a user-defined function (UDF). Providing an
         #   inline code resource is equivalent to providing a URI for a file
-        #   containing the same code. See [User-Defined
-        #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        #   containing the same code.
+        #
+        #   This parameter is used for defining User Defined Function (UDF)
+        #   resources only when using legacy SQL. Users of standard SQL should
+        #   leverage either DDL (e.g. `CREATE [TEMPORARY] FUNCTION ...`) or the
+        #   Routines API to define UDF resources.
+        #
+        #   For additional information on migrating, see: [Migrating to
+        #   standard SQL - Differences in user-defined JavaScript
+        #   functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_user-defined_javascript_functions)
         #
         # @return [Google::Cloud::Bigquery::Table] A new table object.
         #
@@ -1171,12 +1179,20 @@ module Google
         #   list must have a different key. See [Requirements for
         #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
         # @param [Array<String>, String] udfs User-defined function resources
-        #   used in the query. May be either a code resource to load from a
-        #   Google Cloud Storage URI (`gs://bucket/path`), or an inline resource
+        #   used in a legacy SQL query. May be either a code resource to load from
+        #   a Google Cloud Storage URI (`gs://bucket/path`), or an inline resource
         #   that contains code for a user-defined function (UDF). Providing an
         #   inline code resource is equivalent to providing a URI for a file
-        #   containing the same code. See [User-Defined
-        #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        #   containing the same code.
+        #
+        #   This parameter is used for defining User Defined Function (UDF)
+        #   resources only when using legacy SQL. Users of standard SQL should
+        #   leverage either DDL (e.g. `CREATE [TEMPORARY] FUNCTION ...`) or the
+        #   Routines API to define UDF resources.
+        #
+        #   For additional information on migrating, see: [Migrating to
+        #   standard SQL - Differences in user-defined JavaScript
+        #   functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_user-defined_javascript_functions)
         # @param [Integer] maximum_billing_tier Deprecated: Change the billing
         #   tier to allow high-compute queries.
         # @yield [job] a job configuration object
