@@ -1,4 +1,4 @@
-# Copyright 2018 Google, Inc
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License")
 # you may not use this file except in compliance with the License.
@@ -28,9 +28,7 @@ def create_http_task project_id, location_id, queue_id, url, payload: nil, secon
   client = Google::Cloud::Tasks.cloud_tasks
 
   # Construct the fully qualified queue name.
-  parent = client.queue_path(project: project_id,
-                             location: location_id,
-                             queue: queue_id)
+  parent = client.queue_path project: project_id, location: location_id, queue: queue_id
 
   # Construct task.
   task = {
