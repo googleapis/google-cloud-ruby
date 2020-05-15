@@ -88,11 +88,11 @@ Google::Cloud::OsLogin::V1::OsLoginService::Client.configure do |config|
 end
 ```
 
-Defaults for certain configurations can be set for all Redis versions
+Defaults for certain configurations can be set for all OSLogin versions
 globally:
 
 ```
-Google::Cloud::Redis.configure do |config|
+Google::Cloud::OsLogin.configure do |config|
   config.credentials = "/path/to/credentials.json"
   config.timeout = 10.0
 end
