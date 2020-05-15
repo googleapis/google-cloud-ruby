@@ -43,6 +43,4 @@ def stackoverflow
   # [END bigquery_simple_app_all]
 end
 
-if $PROGRAM_NAME == __FILE__
-  stackoverflow
-end
+stackoverflow if $PROGRAM_NAME == __FILE__
