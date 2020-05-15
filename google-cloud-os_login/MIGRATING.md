@@ -11,7 +11,7 @@ To summarize:
 
  *  The library has been broken out into three libraries. The new gems
     `google-cloud-os_login-v1` and `google-cloud-os_login-v1beta` contain the
-    actual client classes for versions V1 and V1beta of the OSLogin
+    actual client classes for versions V1 and V1beta of the OS Login
     service, and the gem `google-cloud-os_login` now simply provides a
     convenience wrapper. See [Library Structure](#library-structure) for more
     info.
@@ -36,7 +36,7 @@ To summarize:
 ### Library Structure
 
 Older 0.x releases of the `google-cloud-os_login` gem were all-in-one gems that
-included potentially multiple clients for multiple versions of the OSLogin
+included potentially multiple clients for multiple versions of the OS Login
 service. The `Google::Cloud::OsLogin.new` factory method would
 return you an instance of a `Google::Cloud::OsLogin::V1::OsLoginServiceClient`
 object for the V1 version of the service, or a
@@ -70,7 +70,7 @@ constructor. It was also extremely difficult to customize the default settings.
 With the 1.0 release, a configuration interface provides control over these
 parameters, including defaults for all instances of a client, and settings for
 each specific client instance. For example, to set default credentials and
-timeout for all OSLogin V1 clients:
+timeout for all OS Login V1 clients:
 
 ```
 Google::Cloud::OsLogin::V1::OsLoginService::Client.configure do |config|
@@ -88,11 +88,11 @@ Google::Cloud::OsLogin::V1::OsLoginService::Client.configure do |config|
 end
 ```
 
-Defaults for certain configurations can be set for all Redis versions
+Defaults for certain configurations can be set for all OS Login versions
 globally:
 
 ```
-Google::Cloud::Redis.configure do |config|
+Google::Cloud::OsLogin.configure do |config|
   config.credentials = "/path/to/credentials.json"
   config.timeout = 10.0
 end
