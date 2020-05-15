@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Monitoring
-      VERSION = "0.0.1"
+      VERSION = "0.38.0"
     end
   end
 end
