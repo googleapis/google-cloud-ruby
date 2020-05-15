@@ -17,7 +17,7 @@ This sample queries the [Stack Overflow public
 dataset][stackoverflow_dataset] for top questions tagged with
 `google-bigquery`.
 
-[stackoverflow_dataset]: https://cloud.google.com/bigquery/public-data/stackoverflow
+[stackoverflow_dataset]: https://console.cloud.google.com/marketplace/details/stack-exchange/stack-overflow
 
 ## Run the tests
 
