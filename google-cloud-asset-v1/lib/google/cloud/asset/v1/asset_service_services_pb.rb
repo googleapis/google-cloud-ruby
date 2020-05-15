@@ -35,8 +35,9 @@ module Google
 
             # Exports assets with time and resource types to a given Cloud Storage
             # location. The output format is newline-delimited JSON.
-            # This API implements the [google.longrunning.Operation][google.longrunning.Operation] API allowing you
-            # to keep track of the export.
+            # This API implements the
+            # [google.longrunning.Operation][google.longrunning.Operation] API allowing
+            # you to keep track of the export.
             rpc :ExportAssets, ExportAssetsRequest, Google::Longrunning::Operation
             # Batch gets the update history of assets that overlap a time window.
             # For RESOURCE content, this API outputs history with asset in both
@@ -57,6 +58,16 @@ module Google
             rpc :UpdateFeed, UpdateFeedRequest, Feed
             # Deletes an asset feed.
             rpc :DeleteFeed, DeleteFeedRequest, Google::Protobuf::Empty
+            # Searches all the resources within the given accessible scope (e.g., a
+            # project, a folder or an organization). Callers should have
+            # cloud.assets.SearchAllResources permission upon the requested scope,
+            # otherwise the request will be rejected.
+            rpc :SearchAllResources, SearchAllResourcesRequest, SearchAllResourcesResponse
+            # Searches all the IAM policies within the given accessible scope (e.g., a
+            # project, a folder or an organization). Callers should have
+            # cloud.assets.SearchAllIamPolicies permission upon the requested scope,
+            # otherwise the request will be rejected.
+            rpc :SearchAllIamPolicies, SearchAllIamPoliciesRequest, SearchAllIamPoliciesResponse
           end
 
           Stub = Service.rpc_stub_class
