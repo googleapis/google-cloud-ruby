@@ -1,0 +1,27 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "acceptance/**/*"
+    - "support/**/*"
+    - "test/**/*"
+Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Exclude:
+    - "lib/google/cloud/translate/v2.rb"
+Metrics/BlockLength:
+  Exclude:
+    - "google-cloud-translate-v2.gemspec"
+    - "Rakefile"
+Metrics/LineLength:
+  Exclude:
+    - "google-cloud-translate-v2.gemspec"
+Metrics/MethodLength:
+  Exclude:
+    - "lib/google/cloud/translate-v2.rb"
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-translate-v2.rb"
