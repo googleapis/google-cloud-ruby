@@ -1,6 +1,6 @@
 # Authentication
 
-In general, the google-cloud-translate library uses [Service
+In general, the google-cloud-translate-v2 library uses [Service
 Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
 credentials to connect to Google Cloud services. When running on Google Cloud
 Platform (GCP), including Google Compute Engine (GCE), Google Kubernetes Engine
@@ -15,7 +15,7 @@ recommended during development.
 
 ## Project and Credential Lookup
 
-The google-cloud-translate library aims to make authentication as simple as
+The google-cloud-translate-v2 library aims to make authentication as simple as
 possible, and provides several mechanisms to configure your system without
 providing **Project ID** and **Service Account Credentials** directly in code.
 
@@ -90,27 +90,12 @@ on {Google::Cloud::Translate::V2::Credentials}:
 5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
-require "google/cloud/translate"
+require "google/cloud/translate/v2"
 
 ENV["TRANSLATE_PROJECT"]     = "my-project-id"
 ENV["TRANSLATE_CREDENTIALS"] = "path/to/keyfile.json"
 
-translate = Google::Cloud::Translate.new
-```
-
-### Configuration
-
-The **Project ID** and **Credentials JSON** can be configured instead of placing them in environment variables or providing them as arguments.
-
-```ruby
-require "google/cloud/translate"
-
-Google::Cloud::Translate.configure do |config|
-  config.project_id  = "my-project-id"
-  config.credentials = "path/to/keyfile.json"
-end
-
-translate = Google::Cloud::Translate.new
+translate = Google::Cloud::Translate::V2.new
 ```
 
 ### Cloud SDK
@@ -174,8 +159,3 @@ Developers service account.
 
    The key file you download will be used by this library to authenticate API
    requests and should be stored in a secure location.
-
-## Troubleshooting
-
-If you're having trouble authenticating you can ask for help by following the
-{file:TROUBLESHOOTING.md Troubleshooting Guide}.
