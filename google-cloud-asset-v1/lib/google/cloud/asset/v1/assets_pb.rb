@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/annotations_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/orgpolicy/v1/orgpolicy_pb'
 require 'google/iam/v1/policy_pb'
@@ -12,7 +13,6 @@ require 'google/identity/accesscontextmanager/v1/service_perimeter_pb'
 require 'google/protobuf/any_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/asset/v1/assets.proto", :syntax => :proto3) do
     add_message "google.cloud.asset.v1.TemporalAsset" do
@@ -44,6 +44,30 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :resource_url, :string, 4
       optional :parent, :string, 5
       optional :data, :message, 6, "google.protobuf.Struct"
+      optional :location, :string, 8
+    end
+    add_message "google.cloud.asset.v1.ResourceSearchResult" do
+      optional :name, :string, 1
+      optional :asset_type, :string, 2
+      optional :project, :string, 3
+      optional :display_name, :string, 4
+      optional :description, :string, 5
+      optional :location, :string, 6
+      map :labels, :string, :string, 7
+      repeated :network_tags, :string, 8
+      optional :additional_attributes, :message, 9, "google.protobuf.Struct"
+    end
+    add_message "google.cloud.asset.v1.IamPolicySearchResult" do
+      optional :resource, :string, 1
+      optional :project, :string, 2
+      optional :policy, :message, 3, "google.iam.v1.Policy"
+      optional :explanation, :message, 4, "google.cloud.asset.v1.IamPolicySearchResult.Explanation"
+    end
+    add_message "google.cloud.asset.v1.IamPolicySearchResult.Explanation" do
+      map :matched_permissions, :string, :message, 1, "google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions"
+    end
+    add_message "google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions" do
+      repeated :permissions, :string, 1
     end
   end
 end
@@ -56,6 +80,10 @@ module Google
         TimeWindow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.TimeWindow").msgclass
         Asset = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.Asset").msgclass
         Resource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.Resource").msgclass
+        ResourceSearchResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ResourceSearchResult").msgclass
+        IamPolicySearchResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicySearchResult").msgclass
+        IamPolicySearchResult::Explanation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicySearchResult.Explanation").msgclass
+        IamPolicySearchResult::Explanation::Permissions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions").msgclass
       end
     end
   end
