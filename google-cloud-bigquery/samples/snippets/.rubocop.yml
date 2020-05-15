@@ -1,0 +1,12 @@
+inherit_gem:
+    google-style: google-style.yml
+
+Lint/UselessAssignment:
+    Enabled: false
+Metrics/BlockLength:
+    Exclude:
+        - "acceptance/*.rb"
+Style/GlobalVars:
+    Enabled: false
+Style/IfUnlessModifier:
+    Enabled: false
