@@ -387,7 +387,7 @@ linked from the README documents listed below for each service.
 
 - `gem install google-cloud-webrisk`
 - [google-cloud-webrisk README](google-cloud-webrisk/README.md)
-- [google-cloud-automl API documentation](https://googleapis.dev/ruby/google-cloud-webrisk/latest)
+- [google-cloud-webrisk API documentation](https://googleapis.dev/ruby/google-cloud-webrisk/latest)
 - [google-cloud-webrisk on RubyGems](https://rubygems.org/gems/google-cloud-webrisk/)
 
 
