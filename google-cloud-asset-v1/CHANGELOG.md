@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2020-05-18
+
+#### Features
+
+* Support search_all_resources and search_all_iam_policies methods
+
 ### 0.2.3 / 2020-05-05
 
 #### Documentation
