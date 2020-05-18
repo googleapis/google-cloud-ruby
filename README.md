@@ -21,8 +21,8 @@ This client supports the following Google Cloud Platform services:
 * [Cloud Dataproc](#cloud-dataproc)
 * [Cloud Datastore](#cloud-datastore)
 * [Cloud Debugger](#stackdriver-debugger)
-* [Dialogflow API](#dialogflow-api)
 * [Data Loss Prevention](#data-loss-prevention)
+* [Dialogflow API](#dialogflow-api)
 * [Cloud DNS](#cloud-dns)
 * [Cloud Error Reporting](#stackdriver-error-reporting)
 * [Cloud Firestore](#cloud-firestore)
@@ -117,30 +117,6 @@ linked from the README documents listed below for each service.
 - [google-cloud-billing API documentation](https://googleapis.dev/ruby/google-cloud-billing/latest)
 - [google-cloud-billing on RubyGems](https://rubygems.org/gems/google-cloud-billing/)
 
-### Cloud Datastore
-
-- `gem install google-cloud-datastore`
-- [google-cloud-datastore README](google-cloud-datastore/README.md)
-- [google-cloud-datastore API documentation](https://googleapis.dev/ruby/google-cloud-datastore/latest)
-- [google-cloud-datastore on RubyGems](https://rubygems.org/gems/google-cloud-datastore)
-- [Google Cloud Datastore documentation](https://cloud.google.com/datastore/docs)
-
-### Cloud Debugger
-
-- `gem install google-cloud-debugger`
-- [google-cloud-debugger README](google-cloud-debugger/README.md)
-- [google-cloud-debugger instrumentation documentation](./google-cloud-debugger/INSTRUMENTATION.md)
-- [google-cloud-debugger on RubyGems](https://rubygems.org/gems/google-cloud-debugger)
-- [Cloud Debugger documentation](https://cloud.google.com/debugger/docs)
-
-### Cloud DNS
-
-- `gem install google-cloud-dns`
-- [google-cloud-dns README](google-cloud-dns/README.md)
-- [google-cloud-dns API documentation](https://googleapis.dev/ruby/google-cloud-dns/latest)
-- [google-cloud-dns on RubyGems](https://rubygems.org/gems/google-cloud-dns)
-- [Google Cloud DNS documentation](https://cloud.google.com/dns/docs)
-
 ### Container Analysis
 
 - `gem install google-cloud-container_analysis`
@@ -165,13 +141,21 @@ linked from the README documents listed below for each service.
 - [google-cloud-dataproc on RubyGems](https://rubygems.org/gems/google-cloud-dataproc)
 - [Google Cloud Dataproc documentation](https://cloud.google.com/dataproc/docs)
 
-### Data Loss Prevention
+### Cloud Datastore
 
-- `gem install google-cloud-dlp`
-- [google-cloud-dlp README](google-cloud-dlp/README.md)
-- [google-cloud-dlp API documentation](https://googleapis.dev/ruby/google-cloud-dlp/latest)
-- [google-cloud-dlp on RubyGems](https://rubygems.org/gems/google-cloud-dlp)
-- [Data Loss Prevention documentation](https://cloud.google.com/dlp/docs)
+- `gem install google-cloud-datastore`
+- [google-cloud-datastore README](google-cloud-datastore/README.md)
+- [google-cloud-datastore API documentation](https://googleapis.dev/ruby/google-cloud-datastore/latest)
+- [google-cloud-datastore on RubyGems](https://rubygems.org/gems/google-cloud-datastore)
+- [Google Cloud Datastore documentation](https://cloud.google.com/datastore/docs)
+
+### Cloud Debugger
+
+- `gem install google-cloud-debugger`
+- [google-cloud-debugger README](google-cloud-debugger/README.md)
+- [google-cloud-debugger instrumentation documentation](./google-cloud-debugger/INSTRUMENTATION.md)
+- [google-cloud-debugger on RubyGems](https://rubygems.org/gems/google-cloud-debugger)
+- [Cloud Debugger documentation](https://cloud.google.com/debugger/docs)
 
 ### Dialogflow API
 
@@ -180,6 +164,22 @@ linked from the README documents listed below for each service.
 - [google-cloud-dialogflow API documentation](https://googleapis.dev/ruby/google-cloud-dialogflow/latest)
 - [google-cloud-dialogflow on RubyGems](https://rubygems.org/gems/google-cloud-dialogflow)
 - [Dialogflow API documentation](https://cloud.google.com/dialogflow-enterprise/docs/)
+
+### Data Loss Prevention
+
+- `gem install google-cloud-dlp`
+- [google-cloud-dlp README](google-cloud-dlp/README.md)
+- [google-cloud-dlp API documentation](https://googleapis.dev/ruby/google-cloud-dlp/latest)
+- [google-cloud-dlp on RubyGems](https://rubygems.org/gems/google-cloud-dlp)
+- [Data Loss Prevention documentation](https://cloud.google.com/dlp/docs)
+
+### Cloud DNS
+
+- `gem install google-cloud-dns`
+- [google-cloud-dns README](google-cloud-dns/README.md)
+- [google-cloud-dns API documentation](https://googleapis.dev/ruby/google-cloud-dns/latest)
+- [google-cloud-dns on RubyGems](https://rubygems.org/gems/google-cloud-dns)
+- [Google Cloud DNS documentation](https://cloud.google.com/dns/docs)
 
 ### Cloud Error Reporting
 
@@ -205,6 +205,14 @@ linked from the README documents listed below for each service.
 - [google-cloud-kms on RubyGems](https://rubygems.org/gems/google-cloud-kms)
 - [Google Cloud KMS documentation](https://cloud.google.com/kms/docs/)
 
+### Cloud Natural Language API
+
+- `gem install google-cloud-language`
+- [google-cloud-language README](google-cloud-language/README.md)
+- [google-cloud-language API documentation](https://googleapis.dev/ruby/google-cloud-language/latest)
+- [google-cloud-language on RubyGems](https://rubygems.org/gems/google-cloud-language)
+- [Google Cloud Natural Language API documentation](https://cloud.google.com/natural-language/docs)
+
 ### Cloud Logging
 
 - `gem install google-cloud-logging`
@@ -213,13 +221,13 @@ linked from the README documents listed below for each service.
 - [google-cloud-logging on RubyGems](https://rubygems.org/gems/google-cloud-logging)
 - [Cloud Logging documentation](https://cloud.google.com/logging/docs/)
 
-### Cloud Natural Language API
+### Cloud Monitoring API
 
-- `gem install google-cloud-language`
-- [google-cloud-language README](google-cloud-language/README.md)
-- [google-cloud-language API documentation](https://googleapis.dev/ruby/google-cloud-language/latest)
-- [google-cloud-language on RubyGems](https://rubygems.org/gems/google-cloud-language)
-- [Google Cloud Natural Language API documentation](https://cloud.google.com/natural-language/docs)
+- `gem install google-cloud-monitoring`
+- [google-cloud-monitoring README](google-cloud-monitoring/README.md)
+- [google-cloud-monitoring API documentation](https://googleapis.dev/ruby/google-cloud-monitoring/latest)
+- [google-cloud-monitoring on RubyGems](https://rubygems.org/gems/google-cloud-monitoring)
+- [Google Cloud Monitoring API documentation](https://cloud.google.com/monitoring/docs)
 
 ### Cloud OS Login
 
@@ -276,14 +284,6 @@ linked from the README documents listed below for each service.
 - [google-cloud-resource_manager API documentation](https://googleapis.dev/ruby/google-cloud-resource_manager/latest)
 - [google-cloud-resource_manager on RubyGems](https://rubygems.org/gems/google-cloud-resource_manager)
 - [Google Cloud Resource Manager documentation](https://cloud.google.com/resource-manager/)
-
-### Cloud Trace
-
-- `gem install google-cloud-trace`
-- [google-cloud-trace README](google-cloud-trace/README.md)
-- [google-cloud-trace instrumentation documentation](./google-cloud-trace/INSTRUMENTATION.md)
-- [google-cloud-trace on RubyGems](https://rubygems.org/gems/google-cloud-trace)
-- [Cloud Trace documentation](https://cloud.google.com/trace/docs/)
 
 ### Cloud Spanner API
 
@@ -355,6 +355,14 @@ linked from the README documents listed below for each service.
 - [google-cloud-text_to_speech on RubyGems](https://rubygems.org/gems/google-cloud-text_to_speech/)
 - [Google Cloud Text-to-Speech documentation](https://cloud.google.com/text-to-speech/docs)
 
+### Cloud Trace
+
+- `gem install google-cloud-trace`
+- [google-cloud-trace README](google-cloud-trace/README.md)
+- [google-cloud-trace instrumentation documentation](./google-cloud-trace/INSTRUMENTATION.md)
+- [google-cloud-trace on RubyGems](https://rubygems.org/gems/google-cloud-trace)
+- [Cloud Trace documentation](https://cloud.google.com/trace/docs/)
+
 ### Cloud Translation API
 
 - `gem install google-cloud-translate`
@@ -363,22 +371,6 @@ linked from the README documents listed below for each service.
 - [google-cloud-translate on RubyGems](https://rubygems.org/gems/google-cloud-translate)
 - [Google Cloud Translation API documentation](https://cloud.google.com/translation/docs)
 
-### Cloud Vision API
-
-- `gem install google-cloud-vision`
-- [google-cloud-vision README](google-cloud-vision/README.md)
-- [google-cloud-vision API documentation](https://googleapis.dev/ruby/google-cloud-vision/latest)
-- [google-cloud-vision on RubyGems](https://rubygems.org/gems/google-cloud-vision)
-- [Google Cloud Vision API documentation](https://cloud.google.com/vision/docs)
-
-### Cloud Monitoring API
-
-- `gem install google-cloud-monitoring`
-- [google-cloud-monitoring README](google-cloud-monitoring/README.md)
-- [google-cloud-monitoring API documentation](https://googleapis.dev/ruby/google-cloud-monitoring/latest)
-- [google-cloud-monitoring on RubyGems](https://rubygems.org/gems/google-cloud-monitoring)
-- [Google Cloud Monitoring API documentation](https://cloud.google.com/monitoring/docs)
-
 ### Cloud Video Intelligence API
 
 - `gem install google-cloud-video_intelligence`
@@ -386,6 +378,14 @@ linked from the README documents listed below for each service.
 - [google-cloud-video_intelligence API documentation](https://googleapis.dev/ruby/google-cloud-video_intelligence/latest)
 - [google-cloud-video_intelligence on RubyGems](https://rubygems.org/gems/google-cloud-video_intelligence)
 - [Google Cloud Video Intelligence API documentation](https://cloud.google.com/video-intelligence/docs)
+
+### Cloud Vision API
+
+- `gem install google-cloud-vision`
+- [google-cloud-vision README](google-cloud-vision/README.md)
+- [google-cloud-vision API documentation](https://googleapis.dev/ruby/google-cloud-vision/latest)
+- [google-cloud-vision on RubyGems](https://rubygems.org/gems/google-cloud-vision)
+- [Google Cloud Vision API documentation](https://cloud.google.com/vision/docs)
 
 ### Web Risk API
 
