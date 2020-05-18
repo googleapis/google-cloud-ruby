@@ -78,6 +78,7 @@ linked from the README documents listed below for each service.
 - [google-cloud-asset README](google-cloud-asset/README.md)
 - [google-cloud-asset API documentation](https://googleapis.dev/ruby/google-cloud-asset/latest)
 - [google-cloud-asset on RubyGems](https://rubygems.org/gems/google-cloud-asset/)
+- [Google Cloud Asset API documentation](https://cloud.google.com/asset-inventory/docs)
 
 ### Cloud AutoML API
 
@@ -85,6 +86,7 @@ linked from the README documents listed below for each service.
 - [google-cloud-automl README](google-cloud-automl/README.md)
 - [google-cloud-automl API documentation](https://googleapis.dev/ruby/google-cloud-automl/latest)
 - [google-cloud-automl on RubyGems](https://rubygems.org/gems/google-cloud-automl/)
+- [Google Cloud AutoML API documentation](https://cloud.google.com/automl/docs)
 
 ### BigQuery
 
@@ -108,7 +110,7 @@ linked from the README documents listed below for each service.
 - [google-cloud-bigtable README](google-cloud-bigtable/README.md)
 - [google-cloud-bigtable API documentation](https://googleapis.dev/ruby/google-cloud-bigtable/latest)
 - [google-cloud-bigtable on RubyGems](https://rubygems.org/gems/google-cloud-bigtable)
-- [Cloud Bigtable documentation](https://cloud.google.com/bigtable/docs)
+- [Google Cloud Bigtable documentation](https://cloud.google.com/bigtable/docs)
 
 ### Cloud Billing API
 
@@ -116,6 +118,7 @@ linked from the README documents listed below for each service.
 - [google-cloud-billing README](google-cloud-billing/README.md)
 - [google-cloud-billing API documentation](https://googleapis.dev/ruby/google-cloud-billing/latest)
 - [google-cloud-billing on RubyGems](https://rubygems.org/gems/google-cloud-billing/)
+- [Google Cloud Billing documentation](https://cloud.google.com/billing/docs)
 
 ### Container Analysis
 
@@ -155,7 +158,7 @@ linked from the README documents listed below for each service.
 - [google-cloud-debugger README](google-cloud-debugger/README.md)
 - [google-cloud-debugger instrumentation documentation](./google-cloud-debugger/INSTRUMENTATION.md)
 - [google-cloud-debugger on RubyGems](https://rubygems.org/gems/google-cloud-debugger)
-- [Cloud Debugger documentation](https://cloud.google.com/debugger/docs)
+- [Google Cloud Debugger documentation](https://cloud.google.com/debugger/docs)
 
 ### Dialogflow API
 
@@ -187,7 +190,7 @@ linked from the README documents listed below for each service.
 - [google-cloud-error_reporting README](google-cloud-error_reporting/README.md)
 - [google-cloud-error_reporting instrumentation documentation](./google-cloud-error_reporting/INSTRUMENTATION.md)
 - [google-cloud-error_reporting on RubyGems](https://rubygems.org/gems/google-cloud-error_reporting)
-- [Cloud Error Reporting documentation](https://cloud.google.com/error-reporting/docs)
+- [Google Cloud Error Reporting documentation](https://cloud.google.com/error-reporting/docs)
 
 ### Cloud Firestore
 
@@ -219,7 +222,7 @@ linked from the README documents listed below for each service.
 - [google-cloud-logging README](google-cloud-logging/README.md)
 - [google-cloud-logging API documentation](https://googleapis.dev/ruby/google-cloud-logging/latest)
 - [google-cloud-logging on RubyGems](https://rubygems.org/gems/google-cloud-logging)
-- [Cloud Logging documentation](https://cloud.google.com/logging/docs/)
+- [Google Cloud Logging documentation](https://cloud.google.com/logging/docs/)
 
 ### Cloud Monitoring API
 
@@ -261,12 +264,13 @@ linked from the README documents listed below for each service.
 - [google-cloud-recaptcha_enterprise on RubyGems](https://rubygems.org/gems/google-cloud-recaptcha_enterprise)
 - [Recaptcha Enterprise documentation](https://cloud.google.com/recaptcha-enterprise/docs/)
 
-### Cloud Recommender API
+### Recommender
 
 - `gem install google-cloud-recommender`
 - [google-cloud-recommender README](google-cloud-recommender/README.md)
 - [google-cloud-automl API documentation](https://googleapis.dev/ruby/google-cloud-recommender/latest)
 - [google-cloud-recommender on RubyGems](https://rubygems.org/gems/google-cloud-recommender/)
+- [Google Recommender documentation](https://cloud.google.com/recommender/docs)
 
 ### Cloud Redis API
 
@@ -274,8 +278,7 @@ linked from the README documents listed below for each service.
 - [google-cloud-redis README](google-cloud-redis/README.md)
 - [google-cloud-redis API documentation](https://googleapis.dev/ruby/google-cloud-redis/latest)
 - [google-cloud-redis on RubyGems](https://rubygems.org/gems/google-cloud-redis)
-- [Cloud Redis API documentation](https://cloud.google.com/memorystore/docs/redis/)
-
+- [Google Cloud Redis API documentation](https://cloud.google.com/memorystore/docs/redis/)
 
 ### Cloud Resource Manager
 
@@ -309,12 +312,13 @@ linked from the README documents listed below for each service.
 - [google-cloud-scheduler on RubyGems](https://rubygems.org/gems/google-cloud-scheduler)
 - [Google Cloud Scheduler API documentation](https://cloud.google.com/scheduler/docs)
 
-### Secret Manager API
+### Secret Manager
 
 - `gem install google-cloud-secret_manager`
 - [google-cloud-secret_manager README](google-cloud-secret_manager/README.md)
 - [google-cloud-automl API documentation](https://googleapis.dev/ruby/google-cloud-secret_manager/latest)
 - [google-cloud-secret_manager on RubyGems](https://rubygems.org/gems/google-cloud-secret_manager/)
+- [Google Secret Manager documentation](https://cloud.google.com/secret-manager/docs)
 
 ### Cloud Security Center API
 
@@ -346,6 +350,7 @@ linked from the README documents listed below for each service.
 - [google-cloud-tasks README](google-cloud-tasks/README.md)
 - [google-cloud-tasks API documentation](https://googleapis.dev/ruby/google-cloud-tasks/latest)
 - [google-cloud-tasks on RubyGems](https://rubygems.org/gems/google-cloud-tasks/)
+- [Google Cloud Tasks documentation](https://cloud.google.com/tasks/docs)
 
 ### Cloud Text To Speech API
 
@@ -361,7 +366,7 @@ linked from the README documents listed below for each service.
 - [google-cloud-trace README](google-cloud-trace/README.md)
 - [google-cloud-trace instrumentation documentation](./google-cloud-trace/INSTRUMENTATION.md)
 - [google-cloud-trace on RubyGems](https://rubygems.org/gems/google-cloud-trace)
-- [Cloud Trace documentation](https://cloud.google.com/trace/docs/)
+- [Google Cloud Trace documentation](https://cloud.google.com/trace/docs/)
 
 ### Cloud Translation API
 
@@ -393,6 +398,7 @@ linked from the README documents listed below for each service.
 - [google-cloud-webrisk README](google-cloud-webrisk/README.md)
 - [google-cloud-webrisk API documentation](https://googleapis.dev/ruby/google-cloud-webrisk/latest)
 - [google-cloud-webrisk on RubyGems](https://rubygems.org/gems/google-cloud-webrisk/)
+- [Google Web Risk documentation](https://cloud.google.com/web-risk/docs)
 
 
 ## Supported Ruby Versions
