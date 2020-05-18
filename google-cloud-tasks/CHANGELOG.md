@@ -2,13 +2,16 @@
 
 ### 2.0.0 / 2020-05-18
 
-#### ⚠ BREAKING CHANGES
+This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
 
-* **tasks:** Convert google-cloud-tasks to a wrapper gem
+Among the highlights:
 
-#### Features
+* Separate client libraries are now provided for specific service versions.
+* A new configuration mechanism makes it easier to control parameters such as endpoint address, network timeouts, and retry.
+* A consistent method interface using keyword arguments for all fields, and supporting request proto objects.
+* Helper methods for generating resource paths are more accessible.
 
-* Convert google-cloud-tasks to a wrapper gem
+See the MIGRATING file in the documentation for more detailed information, and instructions for migrating from earlier versions.
 
 ### 1.5.1 / 2020-04-01
 
