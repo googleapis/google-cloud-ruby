@@ -1,5 +1,15 @@
 # Release History
 
+### 2.0.0 / 2020-05-18
+
+#### ⚠ BREAKING CHANGES
+
+* **scheduler:** Convert google-cloud-scheduler to a wrapper gem
+
+#### Features
+
+* Convert google-cloud-scheduler to a wrapper gem
+
 ### 1.3.1 / 2020-04-01
 
 #### Documentation
