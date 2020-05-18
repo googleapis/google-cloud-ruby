@@ -1,14 +1,12 @@
 # Google Cloud Ruby Client
 
-Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/)
-services.
+Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) services.
 
 [![Coverage Status](https://codecov.io/gh/googleapis/google-cloud-ruby/branch/master/graph/badge.svg)](https://codecov.io/gh/googleapis/google-cloud-ruby)
 [![Gem Version](https://badge.fury.io/rb/google-cloud.svg)](http://badge.fury.io/rb/google-cloud)
 
 * [Homepage](https://googleapis.github.io/google-cloud-ruby/)
 * [API documentation](https://googleapis.github.io/google-cloud-ruby/docs)
-* [google-cloud on RubyGems](https://rubygems.org/gems/google-cloud)
 
 This client supports the following Google Cloud Platform services:
 
@@ -54,22 +52,7 @@ This client supports the following Google Cloud Platform services:
 * [Cloud Vision API](#cloud-vision-api)
 * [Web Risk API](#web-risk-api)
 
-The support for each service is distributed as a separate gem. However, for your
-convenience, the `google-cloud` gem lets you install the entire collection.
-
-If you need support for other Google APIs, check out the [Google API Ruby Client
-library](https://github.com/google/google-api-ruby-client).
-
-## Quick Start
-
-```sh
-$ gem install google-cloud
-```
-
-The `google-cloud` gem shown above provides all of the individual service gems
-in the google-cloud-ruby project, making it easy to explore Google Cloud
-Platform. To avoid unnecessary dependencies, you can also install the service
-gems independently.
+The support for each service is distributed as a separate gem.
 
 ### Authentication
 
@@ -86,15 +69,8 @@ the account (or the JSON itself) in environment variables. Additionally, Cloud
 SDK credentials can also be discovered automatically, but this is only
 recommended during development.
 
-General instructions, environment variables, and configuration options are
-covered in the general [Authentication
-guide](./google-cloud/AUTHENTICATION.md)
-for the `google-cloud` umbrella package. Specific instructions and environment
-variables for each individual service are linked from the README documents
-listed below for each service.
-
-The preview examples below demonstrate how to provide the **Project ID** and
-**Credentials JSON file path** directly in code.
+Specific instructions and environment variables for each individual service are
+linked from the README documents listed below for each service.
 
 ### Cloud Asset API
 
