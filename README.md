@@ -133,35 +133,6 @@ $ gem install google-cloud-automl
 $ gem install google-cloud-bigquery
 ```
 
-#### Preview
-
-```ruby
-require "google/cloud/bigquery"
-
-bigquery = Google::Cloud::Bigquery.new
-dataset = bigquery.create_dataset "my_dataset"
-
-table = dataset.create_table "my_table" do |t|
-  t.name = "My Table"
-  t.description = "A description of my table."
-  t.schema do |s|
-    s.string "first_name", mode: :required
-    s.string "last_name", mode: :required
-    s.integer "age", mode: :required
-  end
-end
-
-# Load data into the table from Google Cloud Storage
-table.load "gs://my-bucket/file-name.csv"
-
-# Run a query
-data = dataset.query "SELECT first_name FROM my_table"
-
-data.each do |row|
-  puts row[:first_name]
-end
-```
-
 ### BigQuery Data Transfer API
 
 - [google-bigquery-data_transfer README](google-cloud-bigquery-data_transfer/README.md)
@@ -175,28 +146,6 @@ end
 $ gem install google-cloud-bigquery-data_transfer
 ```
 
-#### Preview
-
-```rb
-require "google/cloud/bigquery/data_transfer"
-
-data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new
-formatted_parent = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_path(project_id)
-
-# Iterate over all results.
-data_transfer_service_client.list_data_sources(formatted_parent).each do |element|
-  # Process element.
-end
-
-# Or iterate over results one page at a time.
-data_transfer_service_client.list_data_sources(formatted_parent).each_page do |page|
-  # Process each page at a time.
-  page.each do |element|
-    # Process element.
-  end
-end
-```
-
 ### Cloud Bigtable
 
 - [google-cloud-bigtable README](google-cloud-bigtable/README.md)
@@ -208,26 +157,6 @@ end
 
 ```sh
 $ gem install google-cloud-bigtable
-```
-
-#### Preview
-
-```ruby
-require "google/cloud/bigtable"
-
-bigtable = Google::Cloud::Bigtable.new
-
-table = bigtable.table("my-instance", "my-table")
-
-entry = table.new_mutation_entry("user-1")
-entry.set_cell(
-  "cf-1",
-  "field-1",
-  "XYZ",
-  timestamp: Time.now.to_i * 1000 # Time stamp in milli seconds.
-).delete_cells("cf2", "field02")
-
-table.mutate_row(entry)
 ```
 
 ### Cloud Billing API
@@ -257,33 +186,6 @@ $ gem install google-cloud-billing
 $ gem install google-cloud-datastore
 ```
 
-#### Preview
-
-```ruby
-require "google/cloud/datastore"
-
-datastore = Google::Cloud::Datastore.new(
-  project_id: "my-todo-project",
-  credentials: "/path/to/keyfile.json"
-)
-
-# Create a new task to demo datastore
-task = datastore.entity "Task", "sampleTask" do |t|
-  t["type"] = "Personal"
-  t["done"] = false
-  t["priority"] = 4
-  t["description"] = "Learn Cloud Datastore"
-end
-
-# Save the new task
-datastore.save task
-
-# Run a query for all completed tasks
-query = datastore.query("Task").
-  where("done", "=", false)
-tasks = datastore.run query
-```
-
 ### Stackdriver Debugger
 
 - [google-cloud-debugger README](google-cloud-debugger/README.md)
@@ -295,15 +197,6 @@ tasks = datastore.run query
 
 ```
 $ gem install google-cloud-debugger
-```
-
-#### Preview
-
-```ruby
-require "google/cloud/debugger"
-
-debugger = Google::Cloud::Debugger.new
-debugger.start
 ```
 
 ### Cloud DNS
@@ -319,29 +212,6 @@ debugger.start
 $ gem install google-cloud-dns
 ```
 
-#### Preview
-
-```ruby
-require "google/cloud/dns"
-
-dns = Google::Cloud::Dns.new
-
-# Retrieve a zone
-zone = dns.zone "example-com"
-
-# Update records in the zone
-change = zone.update do |tx|
-  tx.add     "www", "A",  86400, "1.2.3.4"
-  tx.remove  "example.com.", "TXT"
-  tx.replace "example.com.", "MX", 86400, ["10 mail1.example.com.",
-                                           "20 mail2.example.com."]
-  tx.modify "www.example.com.", "CNAME" do |r|
-    r.ttl = 86400 # only change the TTL
-  end
-end
-
-```
-
 ### Container Analysis
 
 - [google-cloud-container_analysis README](google-cloud-container_analysis/README.md)
@@ -353,19 +223,6 @@ end
 
 ```sh
 $ gem install google-cloud-container_analysis
-```
-
-#### Preview
-
-```ruby
-require "google/cloud/container_analysis"
-
-container_analysis_client = Google::Cloud::ContainerAnalysis.new
-grafeas_client = container_analysis_client.grafeas_client
-parent = Grafeas::V1::GrafeasClient.project_path "my-project"
-results = grafeas_client.list_occurrences(parent).each do |occurrence|
-  # do something with occurrence
-end
 ```
 
 ### Container Engine
@@ -381,17 +238,6 @@ end
 $ gem install google-cloud-container
 ```
 
-#### Preview
-
-```ruby
-require "google/cloud/container"
-
-cluster_manager_client = Google::Cloud::Container.new
-project_id_2 = project_id
-zone = "us-central1-a"
-response = cluster_manager_client.list_clusters(project_id_2, zone)
-```
-
 ### Cloud Dataproc
 
 - [google-cloud-dataproc README](google-cloud-dataproc/README.md)
@@ -405,29 +251,6 @@ response = cluster_manager_client.list_clusters(project_id_2, zone)
 $ gem install google-cloud-dataproc
 ```
 
-#### Preview
-
-```ruby
-require "google/cloud/dataproc"
-
-cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new
-project_id_2 = project_id
-region = "global"
-
-# Iterate over all results.
-cluster_controller_client.list_clusters(project_id_2, region).each do |element|
-  # Process element.
-end
-
-# Or iterate over results one page at a time.
-cluster_controller_client.list_clusters(project_id_2, region).each_page do |page|
-  # Process each page at a time.
-  page.each do |element|
-    # Process element.
-  end
-end
-```
-
 ### Data Loss Prevention
 
 - [google-cloud-dlp README](google-cloud-dlp/README.md)
@@ -439,21 +262,6 @@ end
 
 ```sh
 $ gem install google-cloud-dlp
-```
-
-#### Preview
-
-```ruby
-require "google/cloud/dlp"
-
-dlp_service_client = Google::Cloud::Dlp.new
-min_likelihood = :POSSIBLE
-inspect_config = { min_likelihood: min_likelihood }
-type = "text/plain"
-value = "my phone number is 215-512-1212"
-items_element = { type: type, value: value }
-items = [items_element]
-response = dlp_service_client.inspect_content(inspect_config, items)
 ```
 
 ### Dialogflow API
@@ -482,19 +290,6 @@ $ gem install google-cloud-dialogflow
 $ gem install google-cloud-error_reporting
 ```
 
-#### Preview
-
-```ruby
-require "google/cloud/error_reporting"
-
-# Report an exception
-begin
-  fail "Boom!"
-rescue => exception
-  Google::Cloud::ErrorReporting.report exception
-end
-```
-
 ### Cloud Firestore
 
 - [google-cloud-firestore README](google-cloud-firestore/README.md)
@@ -506,29 +301,6 @@ end
 
 ```sh
 $ gem install google-cloud-firestore
-```
-
-#### Preview
-
-```ruby
-require "google/cloud/firestore"
-
-firestore = Google::Cloud::Firestore.new(
-  project_id: "my-project",
-  credentials: "/path/to/keyfile.json"
-)
-
-city = firestore.col("cities").doc("SF")
-city.set({ name: "San Francisco",
-           state: "CA",
-           country: "USA",
-           capital: false,
-           population: 860000 })
-
-firestore.transaction do |tx|
-  new_population = tx.get(city).data[:population] + 1
-  tx.update(city, { population: new_population })
-end
 ```
 
 ### Cloud Key Management Service
@@ -544,27 +316,6 @@ end
 $ gem install google-cloud-kms
 ```
 
-#### Preview
-
-```ruby
-require "google/cloud/kms"
-
-# Create a client for a project and given credentials
-kms = Google::Cloud::Kms.new credentials: "/path/to/keyfile.json"
-
-# Where to create key rings
-key_ring_parent = kms.class.location_path "my-project", "us-central1"
-
-# Create a new key ring
-key_ring = kms.create_key_ring key_ring_parent, "my-ring", {}
-puts "Created at #{Time.new key_ring.create_time.seconds}"
-
-# Iterate over created key rings
-kms.list_key_rings(key_ring_parent).each do |key_ring|
-  puts "Found ring called #{key_ring.name}"
-end
-```
-
 ### Stackdriver Logging
 
 - [google-cloud-logging README](google-cloud-logging/README.md)
@@ -578,32 +329,6 @@ end
 $ gem install google-cloud-logging
 ```
 
-#### Preview
-
-```ruby
-require "google/cloud/logging"
-
-logging = Google::Cloud::Logging.new
-
-# List all log entries
-logging.entries.each do |e|
-  puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
-end
-
-# List only entries from a single log
-entries = logging.entries filter: "log:syslog"
-
-# Write a log entry
-entry = logging.entry
-entry.payload = "Job started."
-entry.log_name = "my_app_log"
-entry.resource.type = "gae_app"
-entry.resource.labels[:module_id] = "1"
-entry.resource.labels[:version_id] = "20150925t173233"
-
-logging.write_entries entry
-```
-
 ### Cloud Natural Language API
 
 - [google-cloud-language README](google-cloud-language/README.md)
@@ -615,27 +340,6 @@ logging.write_entries entry
 
 ```sh
 $ gem install google-cloud-language
-```
-
-#### Preview
-
-```ruby
-require "google/cloud/language"
-
-language = Google::Cloud::Language.new(
-  project_id: "my-todo-project",
-  credentials: "/path/to/keyfile.json"
-)
-
-content = "Star Wars is a great movie. The Death Star is fearsome."
-document = language.document content
-annotation = document.annotate
-
-annotation.entities.count #=> 3
-annotation.sentiment.score #=> 0.10000000149011612
-annotation.sentiment.magnitude #=> 1.100000023841858
-annotation.sentences.count #=> 2
-annotation.tokens.count #=> 13
 ```
 
 ### Cloud OS Login
@@ -675,38 +379,6 @@ $ gem install google-cloud-phishing_protection
 
 ```sh
 $ gem install google-cloud-pubsub
-```
-
-#### Preview
-
-```ruby
-require "google/cloud/pubsub"
-
-pubsub = Google::Cloud::Pubsub.new(
-  project_id: "my-todo-project",
-  credentials: "/path/to/keyfile.json"
-)
-
-# Retrieve a topic
-topic = pubsub.topic "my-topic"
-
-# Publish a new message
-msg = topic.publish "new-message"
-
-# Retrieve a subscription
-sub = pubsub.subscription "my-topic-sub"
-
-# Create a subscriber to listen for available messages
-subscriber = sub.listen do |received_message|
-  # process message
-  received_message.acknowledge!
-end
-
-# Start background threads that will call the block passed to listen.
-subscriber.start
-
-# Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop.wait!
 ```
 
 ### Recaptcha Enterprise
@@ -761,28 +433,6 @@ $ gem install google-cloud-redis
 $ gem install google-cloud-resource_manager
 ```
 
-#### Preview
-
-```ruby
-require "google/cloud/resource_manager"
-
-resource_manager = Google::Cloud::ResourceManager.new
-
-# List all projects
-resource_manager.projects.each do |project|
-  puts projects.project_id
-end
-
-# Label a project as production
-project = resource_manager.project "tokyo-rain-123"
-project.update do |p|
-  p.labels["env"] = "production"
-end
-
-# List only projects with the "production" label
-projects = resource_manager.projects filter: "labels.env:production"
-```
-
 ### Stackdriver Trace
 
 - [google-cloud-trace README](google-cloud-trace/README.md)
@@ -794,19 +444,6 @@ projects = resource_manager.projects filter: "labels.env:production"
 
 ```sh
 $ gem install google-cloud-trace
-```
-
-#### Preview
-
-```ruby
-require "google/cloud/trace"
-
-trace = Google::Cloud::Trace.new
-
-result_set = trace.list_traces Time.now - 3600, Time.now
-result_set.each do |trace_record|
-  puts "Retrieved trace ID: #{trace_record.trace_id}"
-end
 ```
 
 ### Cloud Spanner API
@@ -822,24 +459,6 @@ end
 $ gem install google-cloud-spanner
 ```
 
-#### Preview
-
-```ruby
-require "google/cloud/spanner"
-
-spanner = Google::Cloud::Spanner.new
-
-db = spanner.client "my-instance", "my-database"
-
-db.transaction do |tx|
-  results = tx.execute "SELECT * FROM users"
-
-  results.rows.each do |row|
-    puts "User #{row[:id]} is #{row[:name]}"
-  end
-end
-```
-
 ### Cloud Speech API
 
 - [google-cloud-speech README](google-cloud-speech/README.md)
@@ -853,76 +472,17 @@ end
 $ gem install google-cloud-speech
 ```
 
-#### Preview
-
-```ruby
-require "google/cloud/speech"
-
-speech = Google::Cloud::Speech.new
-
-audio = speech.audio "path/to/audio.raw",
-                     encoding: :raw, sample_rate: 16000
-results = audio.recognize
-
-result = results.first
-result.transcript #=> "how old is the Brooklyn Bridge"
-result.confidence #=> 0.9826789498329163
-```
-
 ### Cloud Scheduler
 
-- [Client Library Documentation][]
-- [Product Documentation][]
+- [google-cloud-scheduler README](google-cloud-scheduler/README.md)
+- [google-cloud-scheduler API documentation](https://googleapis.dev/ruby/google-cloud-scheduler/latest)
+- [google-cloud-scheduler on RubyGems](https://rubygems.org/gems/google-cloud-scheduler)
+- [Google Cloud Scheduler API documentation](https://cloud.google.com/scheduler/docs)
 
-## Quick Start
-In order to use this library, you first need to go through the following
-steps:
+#### Quick Start
 
-1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-3. [Enable the Cloud Scheduler API.](https://console.cloud.google.com/apis/library/cloudscheduler.googleapis.com)
-4. [Setup Authentication.](./google-cloud-scheduler/AUTHENTICATION.md)
-
-### Installation
-```
+```sh
 $ gem install google-cloud-scheduler
-```
-
-### Next Steps
-- Read the [Client Library Documentation][] for Cloud Scheduler API
-  to see other available methods on the client.
-- Read the [Cloud Scheduler API Product documentation][Product Documentation]
-  to learn more about the product and see How-to Guides.
-- View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
-  to see the full list of Cloud APIs that we cover.
-
-[Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-scheduler/latest
-[Product Documentation]: https://cloud.google.com/scheduler
-
-## Enabling Logging
-
-To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
-The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below,
-or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
-that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
-and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
-
-Configuring a Ruby stdlib logger:
-
-```ruby
-require "logger"
-
-module MyLogger
-  LOGGER = Logger.new $stderr, level: Logger::WARN
-  def logger
-    LOGGER
-  end
-end
-
-# Define a gRPC module-level logger method before grpc/logconfig.rb loads.
-module GRPC
-  extend MyLogger
-end
 ```
 
 ### Secret Manager API
@@ -963,28 +523,6 @@ $ gem install google-cloud-security_center
 $ gem install google-cloud-storage
 ```
 
-#### Preview
-
-```ruby
-require "google/cloud/storage"
-
-storage = Google::Cloud::Storage.new(
-  project_id: "my-todo-project",
-  credentials: "/path/to/keyfile.json"
-)
-
-bucket = storage.bucket "task-attachments"
-
-file = bucket.file "path/to/my-file.ext"
-
-# Download the file to the local file system
-file.download "/tasks/attachments/#{file.name}"
-
-# Copy the file to a backup bucket
-backup = storage.bucket "task-attachment-backups"
-file.copy backup, file.name
-```
-
 ### Cloud Talent Solutions API
 
 - [google-cloud-talent README](google-cloud-talent/README.md)
@@ -996,31 +534,6 @@ file.copy backup, file.name
 
 ```sh
 $ gem install google-cloud-talent
-```
-
-#### Preview
-
-```rb
- require "google/cloud/talent"
-
- require "google/cloud/talent"
- job_service_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
- formatted_parent = job_service_client.project_path("[PROJECT]")
-
- # TODO: Initialize `filter`:
- filter = ''
- # Iterate over all results.
- job_service_client.list_jobs(formatted_parent, filter).each do |element|
-   # Process element.
- end
-
- # Or iterate over results one page at a time.
- job_service_client.list_jobs(formatted_parent, filter).each_page do |page|
-   # Process each page at a time.
-   page.each do |element|
-     # Process element.
-   end
- end
 ```
 
 ### Cloud Tasks API
@@ -1035,50 +548,12 @@ $ gem install google-cloud-talent
 $ gem install google-cloud-tasks
 ```
 
-#### Preview
-
-```rb
- require "google/cloud/tasks/v2beta2"
-
- cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
- formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path("[PROJECT]", "[LOCATION]")
-
- # Iterate over all results.
- cloud_tasks_client.list_queues(formatted_parent).each do |element|
-   # Process element.
- end
-
- # Or iterate over results one page at a time.
- cloud_tasks_client.list_queues(formatted_parent).each_page do |page|
-   # Process each page at a time.
-   page.each do |element|
-     # Process element.
-   end
- end
-```
-
 ### Cloud Text To Speech API
 
 #### Quick Start
 
 ```sh
 $ gem install google-cloud-text_to_speech
-```
-
-#### Preview
-
-```rb
-require "google/cloud/text_to_speech"
-
-text_to_speech_client = Google::Cloud::TextToSpeech.new
-text = "test"
-input = { text: text }
-language_code = "en-US"
-voice = { language_code: language_code }
-audio_encoding = :MP3
-audio_config = { audio_encoding: audio_encoding }
-response = text_to_speech_client.synthesize_speech(input, voice, audio_config)
-File.write("example.mp3", response.audio_content, mode: "wb")
 ```
 
 ### Cloud Translation API
@@ -1094,23 +569,6 @@ File.write("example.mp3", response.audio_content, mode: "wb")
 $ gem install google-cloud-translate
 ```
 
-#### Preview
-
-```ruby
-require "google/cloud/translate"
-
-translate = Google::Cloud::Translate.new
-
-translation = translate.translate "Hello world!", to: "la"
-
-puts translation #=> Salve mundi!
-
-translation.from #=> "en"
-translation.origin #=> "Hello world!"
-translation.to #=> "la"
-translation.text #=> "Salve mundi!"
-```
-
 ### Cloud Vision API
 
 - [google-cloud-vision README](google-cloud-vision/README.md)
@@ -1122,23 +580,6 @@ translation.text #=> "Salve mundi!"
 
 ```sh
 $ gem install google-cloud-vision
-```
-
-#### Preview
-
-```ruby
-require "google/cloud/vision"
-
-image_annotator_client = Google::Cloud::Vision::ImageAnnotator.new
-gcs_image_uri = "gs://gapic-toolkit/President_Barack_Obama.jpg"
-source = { gcs_image_uri: gcs_image_uri }
-image = { source: source }
-type = :FACE_DETECTION
-features_element = { type: type }
-features = [features_element]
-requests_element = { image: image, features: features }
-requests = [requests_element]
-response = image_annotator_client.batch_annotate_images(requests)
 ```
 
 ### Stackdriver Monitoring API
@@ -1154,29 +595,6 @@ response = image_annotator_client.batch_annotate_images(requests)
 $ gem install google-cloud-monitoring
 ```
 
-#### Preview
-```rb
- require "google/cloud/monitoring/v3"
-
- MetricServiceClient = Google::Cloud::Monitoring::V3::MetricServiceClient
-
- metric_service_client = MetricServiceClient.new
- formatted_name = MetricServiceClient.project_path(project_id)
-
- # Iterate over all results.
- metric_service_client.list_monitored_resource_descriptors(formatted_name).each do |element|
-   # Process element.
- end
-
- # Or iterate over results one page at a time.
- metric_service_client.list_monitored_resource_descriptors(formatted_name).each_page do |page|
-   # Process each page at a time.
-   page.each do |element|
-     # Process element.
-   end
- end
-```
-
 ### Cloud Video Intelligence API
 
 - [google-cloud-video_intelligence README](google-cloud-video_intelligence/README.md)
@@ -1188,44 +606,6 @@ $ gem install google-cloud-monitoring
 
 ```sh
 $ gem install google-cloud-video_intelligence
-```
-
-#### Preview
-
-```rb
- require "google/cloud/video_intelligence/v1beta2"
-
- video_intelligence_service_client = Google::Cloud::VideoIntelligence.new
- input_uri = "gs://cloud-ml-sandbox/video/chicago.mp4"
- features_element = :LABEL_DETECTION
- features = [features_element]
-
- # Register a callback during the method call.
- operation = video_intelligence_service_client.annotate_video(input_uri: input_uri, features: features) do |op|
-   raise op.results.message if op.error?
-   op_results = op.results
-   # Process the results.
-
-   metadata = op.metadata
-   # Process the metadata.
- end
-
- # Or use the return value to register a callback.
- operation.on_done do |op|
-   raise op.results.message if op.error?
-   op_results = op.results
-   # Process the results.
-
-   metadata = op.metadata
-   # Process the metadata.
- end
-
- # Manually reload the operation.
- operation.reload!
-
- # Or block until the operation completes, triggering callbacks on
- # completion.
- operation.wait_until_done!
 ```
 
 ### Web Risk API
