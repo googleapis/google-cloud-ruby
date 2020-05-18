@@ -550,6 +550,7 @@ namespace :kokoro do
 
   task :presubmit do
     kokoro.presubmit
+    puts "**** Kokoro exit status is #{kokoro.exit_status}"
     exit kokoro.exit_status
   end
 

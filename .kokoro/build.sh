@@ -69,6 +69,7 @@ elif [ "$JOB_TYPE" = "release" ]; then
 else
     for version in "${versions[@]}"; do
         rbenv global "$version"
+        echo "**** Running presubmit for $version ..."
         (bundle update && bundle exec rake kokoro:presubmit) || set_failed_status
     done
 fi
