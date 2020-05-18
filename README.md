@@ -350,6 +350,10 @@ linked from the README documents listed below for each service.
 ### Cloud Text To Speech API
 
 - `gem install google-cloud-text_to_speech`
+- [google-cloud-text_to_speech README](google-cloud-text_to_speech/README.md)
+- [google-cloud-text_to_speech API documentation](https://googleapis.dev/ruby/google-cloud-text_to_speech/latest)
+- [google-cloud-text_to_speech on RubyGems](https://rubygems.org/gems/google-cloud-text_to_speech/)
+- [Google Cloud Text-to-Speech documentation](https://cloud.google.com/text-to-speech/docs)
 
 ### Cloud Translation API
 
