@@ -13,15 +13,15 @@ This client supports the following Google Cloud Platform services:
 * [Cloud Asset](#cloud-asset)
 * [Cloud AutoML API](#cloud-automl-api)
 * [BigQuery](#bigquery)
-* [BigQuery Data Transfer](#bigquery-data-transfer-api)
+* [BigQuery Data Transfer](#bigquery-data-transfer)
 * [Cloud Bigtable](#cloud-bigtable)
 * [Cloud Billing API](#cloud-billing-api)
 * [Container Analysis](#container-analysis)
 * [Container Engine](#container-engine)
+* [Data Loss Prevention](#data-loss-prevention)
 * [Cloud Dataproc](#cloud-dataproc)
 * [Cloud Datastore](#cloud-datastore)
 * [Cloud Debugger](#cloud-debugger)
-* [Data Loss Prevention](#data-loss-prevention)
 * [Dialogflow API](#dialogflow-api)
 * [Cloud DNS](#cloud-dns)
 * [Cloud Error Reporting](#cloud-error-reporting)
@@ -29,26 +29,26 @@ This client supports the following Google Cloud Platform services:
 * [Cloud Key Management Service](#cloud-key-management-service)
 * [Cloud Natural Language API](#cloud-natural-language-api)
 * [Cloud Logging](#cloud-logging)
-* [Cloud Monitoring API](#cloud-monitoring-api)
+* [Cloud Monitoring](#cloud-monitoring)
 * [Cloud OS Login](#cloud-os-login)
 * [Phishing Protection](#phishing-protection)
 * [Cloud Pub/Sub](#cloud-pubsub)
 * [Recaptcha Enterprise](#recaptcha-enterprise)
-* [Cloud Recommender API](#cloud-recommender-api)
-* [Cloud Redis](#cloud-redis-api)
+* [Recommender](#recommender)
+* [Cloud Redis](#cloud-redis)
 * [Cloud Resource Manager](#cloud-resource-manager)
 * [Cloud Scheduler](#cloud-scheduler)
-* [Secret Manager API](#secret-manager-api)
+* [Secret Manager](#secret-manager)
 * [Cloud Security Center](#cloud-security-center)
-* [Cloud Spanner API](#cloud-spanner-api)
-* [Cloud Speech API](#cloud-speech-api)
+* [Cloud Spanner](#cloud-spanner)
+* [Cloud Speech-to-Text](#cloud-speech-to-text)
 * [Cloud Storage](#cloud-storage)
-* [Cloud Talent Solutions API](#cloud-talent-solutions-api)
-* [Cloud Tasks API](#cloud-tasks-api)
-* [Cloud Text-To-Speech API](#cloud-text-to-speech-api)
+* [Cloud Talent Solution](#cloud-talent-solution)
+* [Cloud Tasks](#cloud-tasks)
+* [Cloud Text-To-Speech](#cloud-text-to-speech)
 * [Cloud Trace](#cloud-trace)
 * [Cloud Translation API](#cloud-translation-api)
-* [Cloud Video Intelligence API](#cloud-video-intelligence-api)
+* [Video Intelligence API](#video-intelligence-api)
 * [Cloud Vision API](#cloud-vision-api)
 * [Web Risk API](#web-risk-api)
 
@@ -72,7 +72,7 @@ recommended during development.
 Specific instructions and environment variables for each individual service are
 linked from the README documents listed below for each service.
 
-### Cloud Asset API
+### Cloud Asset
 
 - `gem install google-cloud-asset`
 - [google-cloud-asset README](google-cloud-asset/README.md)
@@ -96,7 +96,7 @@ linked from the README documents listed below for each service.
 - [google-cloud-bigquery on RubyGems](https://rubygems.org/gems/google-cloud-bigquery)
 - [Google BigQuery documentation](https://cloud.google.com/bigquery/docs)
 
-### BigQuery Data Transfer API
+### BigQuery Data Transfer
 
 - `gem install google-cloud-bigquery-data_transfer`
 - [google-bigquery-data_transfer README](google-cloud-bigquery-data_transfer/README.md)
@@ -136,6 +136,14 @@ linked from the README documents listed below for each service.
 - [google-cloud-container on RubyGems](https://rubygems.org/gems/google-cloud-container)
 - [Container Engine documentation](https://cloud.google.com/kubernetes-engine/docs/)
 
+### Data Loss Prevention
+
+- `gem install google-cloud-dlp`
+- [google-cloud-dlp README](google-cloud-dlp/README.md)
+- [google-cloud-dlp API documentation](https://googleapis.dev/ruby/google-cloud-dlp/latest)
+- [google-cloud-dlp on RubyGems](https://rubygems.org/gems/google-cloud-dlp)
+- [Data Loss Prevention documentation](https://cloud.google.com/dlp/docs)
+
 ### Cloud Dataproc
 
 - `gem install google-cloud-dataproc`
@@ -167,14 +175,6 @@ linked from the README documents listed below for each service.
 - [google-cloud-dialogflow API documentation](https://googleapis.dev/ruby/google-cloud-dialogflow/latest)
 - [google-cloud-dialogflow on RubyGems](https://rubygems.org/gems/google-cloud-dialogflow)
 - [Dialogflow API documentation](https://cloud.google.com/dialogflow-enterprise/docs/)
-
-### Data Loss Prevention
-
-- `gem install google-cloud-dlp`
-- [google-cloud-dlp README](google-cloud-dlp/README.md)
-- [google-cloud-dlp API documentation](https://googleapis.dev/ruby/google-cloud-dlp/latest)
-- [google-cloud-dlp on RubyGems](https://rubygems.org/gems/google-cloud-dlp)
-- [Data Loss Prevention documentation](https://cloud.google.com/dlp/docs)
 
 ### Cloud DNS
 
@@ -224,13 +224,13 @@ linked from the README documents listed below for each service.
 - [google-cloud-logging on RubyGems](https://rubygems.org/gems/google-cloud-logging)
 - [Google Cloud Logging documentation](https://cloud.google.com/logging/docs/)
 
-### Cloud Monitoring API
+### Cloud Monitoring
 
 - `gem install google-cloud-monitoring`
 - [google-cloud-monitoring README](google-cloud-monitoring/README.md)
 - [google-cloud-monitoring API documentation](https://googleapis.dev/ruby/google-cloud-monitoring/latest)
 - [google-cloud-monitoring on RubyGems](https://rubygems.org/gems/google-cloud-monitoring)
-- [Google Cloud Monitoring API documentation](https://cloud.google.com/monitoring/docs)
+- [Google Cloud Monitoring documentation](https://cloud.google.com/monitoring/docs)
 
 ### Cloud OS Login
 
@@ -272,13 +272,13 @@ linked from the README documents listed below for each service.
 - [google-cloud-recommender on RubyGems](https://rubygems.org/gems/google-cloud-recommender/)
 - [Google Recommender documentation](https://cloud.google.com/recommender/docs)
 
-### Cloud Redis API
+### Cloud Redis
 
 - `gem install google-cloud-redis`
 - [google-cloud-redis README](google-cloud-redis/README.md)
 - [google-cloud-redis API documentation](https://googleapis.dev/ruby/google-cloud-redis/latest)
 - [google-cloud-redis on RubyGems](https://rubygems.org/gems/google-cloud-redis)
-- [Google Cloud Redis API documentation](https://cloud.google.com/memorystore/docs/redis/)
+- [Google Cloud Memorystore for Redis documentation](https://cloud.google.com/memorystore/docs/redis/)
 
 ### Cloud Resource Manager
 
@@ -287,22 +287,6 @@ linked from the README documents listed below for each service.
 - [google-cloud-resource_manager API documentation](https://googleapis.dev/ruby/google-cloud-resource_manager/latest)
 - [google-cloud-resource_manager on RubyGems](https://rubygems.org/gems/google-cloud-resource_manager)
 - [Google Cloud Resource Manager documentation](https://cloud.google.com/resource-manager/)
-
-### Cloud Spanner API
-
-- `gem install google-cloud-spanner`
-- [google-cloud-spanner README](google-cloud-spanner/README.md)
-- [google-cloud-spanner API documentation](https://googleapis.dev/ruby/google-cloud-spanner/latest)
-- [google-cloud-spanner on RubyGems](https://rubygems.org/gems/google-cloud-spanner)
-- [Google Cloud Spanner API documentation](https://cloud.google.com/spanner/docs)
-
-### Cloud Speech API
-
-- `gem install google-cloud-speech`
-- [google-cloud-speech README](google-cloud-speech/README.md)
-- [google-cloud-speech API documentation](https://googleapis.dev/ruby/google-cloud-speech/latest)
-- [google-cloud-speech on RubyGems](https://rubygems.org/gems/google-cloud-speech)
-- [Google Cloud Speech API documentation](https://cloud.google.com/speech/docs)
 
 ### Cloud Scheduler
 
@@ -320,13 +304,29 @@ linked from the README documents listed below for each service.
 - [google-cloud-secret_manager on RubyGems](https://rubygems.org/gems/google-cloud-secret_manager/)
 - [Google Secret Manager documentation](https://cloud.google.com/secret-manager/docs)
 
-### Cloud Security Center API
+### Cloud Security Center
 
 - `gem install google-cloud-security_center`
 - [google-cloud-security_center README](google-cloud-security_center/README.md)
 - [google-cloud-security_center API documentation](https://googleapis.dev/ruby/google-cloud-security_center/latest)
 - [google-cloud-security_center on RubyGems](https://rubygems.org/gems/google-cloud-security_center)
-- [Google Cloud Security Center API documentation](https://cloud.google.com/security-command-center/docs)
+- [Google Cloud Security Center documentation](https://cloud.google.com/security-command-center/docs)
+
+### Cloud Spanner
+
+- `gem install google-cloud-spanner`
+- [google-cloud-spanner README](google-cloud-spanner/README.md)
+- [google-cloud-spanner API documentation](https://googleapis.dev/ruby/google-cloud-spanner/latest)
+- [google-cloud-spanner on RubyGems](https://rubygems.org/gems/google-cloud-spanner)
+- [Google Cloud Spanner documentation](https://cloud.google.com/spanner/docs)
+
+### Cloud Speech-to-Text
+
+- `gem install google-cloud-speech`
+- [google-cloud-speech README](google-cloud-speech/README.md)
+- [google-cloud-speech API documentation](https://googleapis.dev/ruby/google-cloud-speech/latest)
+- [google-cloud-speech on RubyGems](https://rubygems.org/gems/google-cloud-speech)
+- [Google Cloud Speech-to-Text documentation](https://cloud.google.com/speech/docs)
 
 ### Cloud Storage
 
@@ -336,15 +336,15 @@ linked from the README documents listed below for each service.
 - [google-cloud-storage on RubyGems](https://rubygems.org/gems/google-cloud-storage)
 - [Google Cloud Storage documentation](https://cloud.google.com/storage/docs)
 
-### Cloud Talent Solutions API
+### Cloud Talent Solution
 
 - `gem install google-cloud-talent`
 - [google-cloud-talent README](google-cloud-talent/README.md)
 - [google-cloud-talent API documentation](https://googleapis.dev/ruby/google-cloud-talent/latest)
 - [google-cloud-talent on RubyGems](https://rubygems.org/gems/google-cloud-talent/)
-- [Google Cloud Talent Solutions documentation](https://cloud.google.com/talent-solution/docs)
+- [Google Cloud Talent Solution documentation](https://cloud.google.com/talent-solution/docs)
 
-### Cloud Tasks API
+### Cloud Tasks
 
 - `gem install google-cloud-tasks`
 - [google-cloud-tasks README](google-cloud-tasks/README.md)
@@ -352,7 +352,7 @@ linked from the README documents listed below for each service.
 - [google-cloud-tasks on RubyGems](https://rubygems.org/gems/google-cloud-tasks/)
 - [Google Cloud Tasks documentation](https://cloud.google.com/tasks/docs)
 
-### Cloud Text To Speech API
+### Cloud Text-to-Speech
 
 - `gem install google-cloud-text_to_speech`
 - [google-cloud-text_to_speech README](google-cloud-text_to_speech/README.md)
@@ -376,7 +376,7 @@ linked from the README documents listed below for each service.
 - [google-cloud-translate on RubyGems](https://rubygems.org/gems/google-cloud-translate)
 - [Google Cloud Translation API documentation](https://cloud.google.com/translation/docs)
 
-### Cloud Video Intelligence API
+### Video Intelligence API
 
 - `gem install google-cloud-video_intelligence`
 - [google-cloud-video_intelligence README](google-cloud-video_intelligence/README.md)
