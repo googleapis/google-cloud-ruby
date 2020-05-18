@@ -1,5 +1,15 @@
 # Release History
 
+### 2.0.0 / 2020-05-18
+
+#### ⚠ BREAKING CHANGES
+
+* **tasks:** Convert google-cloud-tasks to a wrapper gem
+
+#### Features
+
+* Convert google-cloud-tasks to a wrapper gem
+
 ### 1.5.1 / 2020-04-01
 
 #### Documentation
