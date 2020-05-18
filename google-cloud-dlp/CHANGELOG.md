@@ -1,5 +1,24 @@
 # Release History
 
+### 0.16.0 / 2020-05-18
+
+#### ⚠ BREAKING CHANGES
+
+* **dlp:** Convert google-cloud-dlp to a wrapper
+
+#### Features
+
+* Convert google-cloud-dlp to a wrapper
+
+#### Bug Fixes
+
+* Eliminated a circular require warning.
+* Update dependency on dlp-v2 to 0.2
+
+#### Documentation
+
+* Updated the sample timeouts in the migration guide to reflect seconds
+
 ### 0.15.0 / 2020-03-18
 
 #### Features
