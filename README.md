@@ -20,16 +20,16 @@ This client supports the following Google Cloud Platform services:
 * [Container Engine](#container-engine)
 * [Cloud Dataproc](#cloud-dataproc)
 * [Cloud Datastore](#cloud-datastore)
-* [Stackdriver Debugger](#stackdriver-debugger)
+* [Cloud Debugger](#stackdriver-debugger)
 * [Dialogflow API](#dialogflow-api)
 * [Data Loss Prevention](#data-loss-prevention)
 * [Cloud DNS](#cloud-dns)
-* [Stackdriver Error Reporting](#stackdriver-error-reporting)
+* [Cloud Error Reporting](#stackdriver-error-reporting)
 * [Cloud Firestore](#cloud-firestore)
 * [Cloud Key Management Service](#cloud-key-management-service)
 * [Cloud Natural Language API](#cloud-natural-language-api)
-* [Stackdriver Logging](#stackdriver-logging)
-* [Stackdriver Monitoring API](#stackdriver-monitoring-api)
+* [Cloud Logging](#stackdriver-logging)
+* [Cloud Monitoring API](#stackdriver-monitoring-api)
 * [Cloud OS Login](#cloud-os-login)
 * [Phishing Protection](#phishing-protection)
 * [Cloud Pub/Sub](#cloud-pubsub)
@@ -46,7 +46,7 @@ This client supports the following Google Cloud Platform services:
 * [Cloud Talent Solutions API](#cloud-talent-solutions-api)
 * [Cloud Tasks API](#cloud-tasks-api)
 * [Cloud Text-To-Speech API](#cloud-text-to-speech-api)
-* [Stackdriver Trace](#stackdriver-trace)
+* [Cloud Trace](#stackdriver-trace)
 * [Cloud Translation API](#cloud-translation-api)
 * [Cloud Video Intelligence API](#cloud-video-intelligence-api)
 * [Cloud Vision API](#cloud-vision-api)
@@ -125,13 +125,13 @@ linked from the README documents listed below for each service.
 - [google-cloud-datastore on RubyGems](https://rubygems.org/gems/google-cloud-datastore)
 - [Google Cloud Datastore documentation](https://cloud.google.com/datastore/docs)
 
-### Stackdriver Debugger
+### Cloud Debugger
 
 - `gem install google-cloud-debugger`
 - [google-cloud-debugger README](google-cloud-debugger/README.md)
 - [google-cloud-debugger instrumentation documentation](./google-cloud-debugger/INSTRUMENTATION.md)
 - [google-cloud-debugger on RubyGems](https://rubygems.org/gems/google-cloud-debugger)
-- [Stackdriver Debugger documentation](https://cloud.google.com/debugger/docs)
+- [Cloud Debugger documentation](https://cloud.google.com/debugger/docs)
 
 ### Cloud DNS
 
@@ -181,13 +181,13 @@ linked from the README documents listed below for each service.
 - [google-cloud-dialogflow on RubyGems](https://rubygems.org/gems/google-cloud-dialogflow)
 - [Dialogflow API documentation](https://cloud.google.com/dialogflow-enterprise/docs/)
 
-### Stackdriver Error Reporting
+### Cloud Error Reporting
 
 - `gem install google-cloud-error_reporting`
 - [google-cloud-error_reporting README](google-cloud-error_reporting/README.md)
 - [google-cloud-error_reporting instrumentation documentation](./google-cloud-error_reporting/INSTRUMENTATION.md)
 - [google-cloud-error_reporting on RubyGems](https://rubygems.org/gems/google-cloud-error_reporting)
-- [Stackdriver Error Reporting documentation](https://cloud.google.com/error-reporting/docs)
+- [Cloud Error Reporting documentation](https://cloud.google.com/error-reporting/docs)
 
 ### Cloud Firestore
 
@@ -205,13 +205,13 @@ linked from the README documents listed below for each service.
 - [google-cloud-kms on RubyGems](https://rubygems.org/gems/google-cloud-kms)
 - [Google Cloud KMS documentation](https://cloud.google.com/kms/docs/)
 
-### Stackdriver Logging
+### Cloud Logging
 
 - `gem install google-cloud-logging`
 - [google-cloud-logging README](google-cloud-logging/README.md)
 - [google-cloud-logging API documentation](https://googleapis.dev/ruby/google-cloud-logging/latest)
 - [google-cloud-logging on RubyGems](https://rubygems.org/gems/google-cloud-logging)
-- [Stackdriver Logging documentation](https://cloud.google.com/logging/docs/)
+- [Cloud Logging documentation](https://cloud.google.com/logging/docs/)
 
 ### Cloud Natural Language API
 
@@ -277,13 +277,13 @@ linked from the README documents listed below for each service.
 - [google-cloud-resource_manager on RubyGems](https://rubygems.org/gems/google-cloud-resource_manager)
 - [Google Cloud Resource Manager documentation](https://cloud.google.com/resource-manager/)
 
-### Stackdriver Trace
+### Cloud Trace
 
 - `gem install google-cloud-trace`
 - [google-cloud-trace README](google-cloud-trace/README.md)
 - [google-cloud-trace instrumentation documentation](./google-cloud-trace/INSTRUMENTATION.md)
 - [google-cloud-trace on RubyGems](https://rubygems.org/gems/google-cloud-trace)
-- [Stackdriver Trace documentation](https://cloud.google.com/trace/docs/)
+- [Cloud Trace documentation](https://cloud.google.com/trace/docs/)
 
 ### Cloud Spanner API
 
@@ -371,7 +371,7 @@ linked from the README documents listed below for each service.
 - [google-cloud-vision on RubyGems](https://rubygems.org/gems/google-cloud-vision)
 - [Google Cloud Vision API documentation](https://cloud.google.com/vision/docs)
 
-### Stackdriver Monitoring API
+### Cloud Monitoring API
 
 - `gem install google-cloud-monitoring`
 - [google-cloud-monitoring README](google-cloud-monitoring/README.md)
