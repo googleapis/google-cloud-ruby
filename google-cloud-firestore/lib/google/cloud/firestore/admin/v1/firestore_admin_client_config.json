@@ -4,9 +4,14 @@
       "retry_codes": {
         "idempotent": [
           "DEADLINE_EXCEEDED",
+          "INTERNAL",
           "UNAVAILABLE"
         ],
-        "non_idempotent": []
+        "non_idempotent": [],
+        "idempotent2": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ]
       },
       "retry_params": {
         "default": {
@@ -37,22 +42,22 @@
         },
         "ListIndexes": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "idempotent2",
           "retry_params_name": "default"
         },
         "GetIndex": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "idempotent2",
           "retry_params_name": "default"
         },
         "GetField": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "idempotent2",
           "retry_params_name": "default"
         },
         "ListFields": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "idempotent2",
           "retry_params_name": "default"
         },
         "ExportDocuments": {
