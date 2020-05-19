@@ -29,13 +29,16 @@ require "google/cloud/config"
 
 # Set the default configuration
 ::Google::Cloud.configure.add_config! :service_directory do |config|
-  config.add_field! :credentials,  nil, match: [::String, ::Hash, ::Google::Auth::Credentials]
-  config.add_field! :lib_name,     nil, match: ::String
-  config.add_field! :lib_version,  nil, match: ::String
-  config.add_field! :interceptors, nil, match: ::Array
-  config.add_field! :timeout,      nil, match: ::Numeric
-  config.add_field! :metadata,     nil, match: ::Hash
-  config.add_field! :retry_policy, nil, match: [::Hash, ::Proc]
+  config.add_field! :endpoint,      "servicedirectory.googleapis.com", match: ::String
+  config.add_field! :credentials,   nil, match: [::String, ::Hash, ::Google::Auth::Credentials]
+  config.add_field! :scope,         nil, match: [::Array, ::String]
+  config.add_field! :lib_name,      nil, match: ::String
+  config.add_field! :lib_version,   nil, match: ::String
+  config.add_field! :interceptors,  nil, match: ::Array
+  config.add_field! :timeout,       nil, match: ::Numeric
+  config.add_field! :metadata,      nil, match: ::Hash
+  config.add_field! :retry_policy,  nil, match: [::Hash, ::Proc]
+  config.add_field! :quota_project, nil, match: ::String
 end
 
 module Google
@@ -151,3 +154,6 @@ module Google
     end
   end
 end
+
+helper_path = ::File.join __dir__, "service_directory", "helpers.rb"
+require "google/cloud/service_directory/helpers" if ::File.file? helper_path
