@@ -235,6 +235,14 @@ module Google
               &Google::Cloud::Translate::V3::TranslationService::Stub.method(:new)
             )
 
+            @delete_glossary = Google::Gax.create_api_call(
+              @translation_service_stub.method(:delete_glossary),
+              defaults["delete_glossary"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
             @translate_text = Google::Gax.create_api_call(
               @translation_service_stub.method(:translate_text),
               defaults["translate_text"],
@@ -291,17 +299,71 @@ module Google
                 {'name' => request.name}
               end
             )
-            @delete_glossary = Google::Gax.create_api_call(
-              @translation_service_stub.method(:delete_glossary),
-              defaults["delete_glossary"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
           end
 
           # Service calls
+
+          # Deletes a glossary, or cancels glossary construction
+          # if the glossary isn't created yet.
+          # Returns NOT_FOUND, if the glossary doesn't exist.
+          #
+          # @param name [String]
+          #   Required. The name of the glossary to delete.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Gax::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/translate"
+          #
+          #   translation_client = Google::Cloud::Translate.new(version: :v3)
+          #   formatted_name = Google::Cloud::Translate::V3::TranslationServiceClient.glossary_path("[PROJECT]", "[LOCATION]", "[GLOSSARY]")
+          #
+          #   # Register a callback during the method call.
+          #   operation = translation_client.delete_glossary(formatted_name) do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Or use the return value to register a callback.
+          #   operation.on_done do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Manually reload the operation.
+          #   operation.reload!
+          #
+          #   # Or block until the operation completes, triggering callbacks on
+          #   # completion.
+          #   operation.wait_until_done!
+
+          def delete_glossary \
+              name,
+              options: nil
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Translate::V3::DeleteGlossaryRequest)
+            operation = Google::Gax::Operation.new(
+              @delete_glossary.call(req, options),
+              @operations_client,
+              Google::Cloud::Translate::V3::DeleteGlossaryResponse,
+              Google::Cloud::Translate::V3::DeleteGlossaryMetadata,
+              call_options: options
+            )
+            operation.on_done { |operation| yield(operation) } if block_given?
+            operation
+          end
 
           # Translates input text and returns translated text.
           #
@@ -860,68 +922,6 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Translate::V3::GetGlossaryRequest)
             @get_glossary.call(req, options, &block)
-          end
-
-          # Deletes a glossary, or cancels glossary construction
-          # if the glossary isn't created yet.
-          # Returns NOT_FOUND, if the glossary doesn't exist.
-          #
-          # @param name [String]
-          #   Required. The name of the glossary to delete.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @return [Google::Gax::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/translate"
-          #
-          #   translation_client = Google::Cloud::Translate.new(version: :v3)
-          #   formatted_name = Google::Cloud::Translate::V3::TranslationServiceClient.glossary_path("[PROJECT]", "[LOCATION]", "[GLOSSARY]")
-          #
-          #   # Register a callback during the method call.
-          #   operation = translation_client.delete_glossary(formatted_name) do |op|
-          #     raise op.results.message if op.error?
-          #     op_results = op.results
-          #     # Process the results.
-          #
-          #     metadata = op.metadata
-          #     # Process the metadata.
-          #   end
-          #
-          #   # Or use the return value to register a callback.
-          #   operation.on_done do |op|
-          #     raise op.results.message if op.error?
-          #     op_results = op.results
-          #     # Process the results.
-          #
-          #     metadata = op.metadata
-          #     # Process the metadata.
-          #   end
-          #
-          #   # Manually reload the operation.
-          #   operation.reload!
-          #
-          #   # Or block until the operation completes, triggering callbacks on
-          #   # completion.
-          #   operation.wait_until_done!
-
-          def delete_glossary \
-              name,
-              options: nil
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Translate::V3::DeleteGlossaryRequest)
-            operation = Google::Gax::Operation.new(
-              @delete_glossary.call(req, options),
-              @operations_client,
-              Google::Cloud::Translate::V3::DeleteGlossaryResponse,
-              Google::Cloud::Translate::V3::DeleteGlossaryMetadata,
-              call_options: options
-            )
-            operation.on_done { |operation| yield(operation) } if block_given?
-            operation
           end
         end
       end
