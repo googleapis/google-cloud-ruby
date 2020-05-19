@@ -216,6 +216,22 @@ module Google
               &Google::Logging::V2::MetricsServiceV2::Stub.method(:new)
             )
 
+            @update_log_metric = Google::Gax.create_api_call(
+              @metrics_service_v2_stub.method(:update_log_metric),
+              defaults["update_log_metric"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'metric_name' => request.metric_name}
+              end
+            )
+            @delete_log_metric = Google::Gax.create_api_call(
+              @metrics_service_v2_stub.method(:delete_log_metric),
+              defaults["delete_log_metric"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'metric_name' => request.metric_name}
+              end
+            )
             @list_log_metrics = Google::Gax.create_api_call(
               @metrics_service_v2_stub.method(:list_log_metrics),
               defaults["list_log_metrics"],
@@ -240,25 +256,86 @@ module Google
                 {'parent' => request.parent}
               end
             )
-            @update_log_metric = Google::Gax.create_api_call(
-              @metrics_service_v2_stub.method(:update_log_metric),
-              defaults["update_log_metric"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'metric_name' => request.metric_name}
-              end
-            )
-            @delete_log_metric = Google::Gax.create_api_call(
-              @metrics_service_v2_stub.method(:delete_log_metric),
-              defaults["delete_log_metric"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'metric_name' => request.metric_name}
-              end
-            )
           end
 
           # Service calls
+
+          # Creates or updates a logs-based metric.
+          #
+          # @param metric_name [String]
+          #   Required. The resource name of the metric to update:
+          #
+          #       "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+          #
+          #   The updated metric must be provided in the request and it's
+          #   `name` field must be the same as `[METRIC_ID]` If the metric
+          #   does not exist in `[PROJECT_ID]`, then a new metric is created.
+          # @param metric [Google::Logging::V2::LogMetric | Hash]
+          #   Required. The updated metric.
+          #   A hash of the same form as `Google::Logging::V2::LogMetric`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Logging::V2::LogMetric]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Logging::V2::LogMetric]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2"
+          #
+          #   metrics_client = Google::Cloud::Logging::V2::MetricsServiceV2Client.new
+          #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.log_metric_path("[PROJECT]", "[METRIC]")
+          #
+          #   # TODO: Initialize `metric`:
+          #   metric = {}
+          #   response = metrics_client.update_log_metric(formatted_metric_name, metric)
+
+          def update_log_metric \
+              metric_name,
+              metric,
+              options: nil,
+              &block
+            req = {
+              metric_name: metric_name,
+              metric: metric
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::UpdateLogMetricRequest)
+            @update_log_metric.call(req, options, &block)
+          end
+
+          # Deletes a logs-based metric.
+          #
+          # @param metric_name [String]
+          #   Required. The resource name of the metric to delete:
+          #
+          #       "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2"
+          #
+          #   metrics_client = Google::Cloud::Logging::V2::MetricsServiceV2Client.new
+          #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.log_metric_path("[PROJECT]", "[METRIC]")
+          #   metrics_client.delete_log_metric(formatted_metric_name)
+
+          def delete_log_metric \
+              metric_name,
+              options: nil,
+              &block
+            req = {
+              metric_name: metric_name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::DeleteLogMetricRequest)
+            @delete_log_metric.call(req, options, &block)
+            nil
+          end
 
           # Lists logs-based metrics.
           #
@@ -390,83 +467,6 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::CreateLogMetricRequest)
             @create_log_metric.call(req, options, &block)
-          end
-
-          # Creates or updates a logs-based metric.
-          #
-          # @param metric_name [String]
-          #   Required. The resource name of the metric to update:
-          #
-          #       "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
-          #
-          #   The updated metric must be provided in the request and it's
-          #   `name` field must be the same as `[METRIC_ID]` If the metric
-          #   does not exist in `[PROJECT_ID]`, then a new metric is created.
-          # @param metric [Google::Logging::V2::LogMetric | Hash]
-          #   Required. The updated metric.
-          #   A hash of the same form as `Google::Logging::V2::LogMetric`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Logging::V2::LogMetric]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Logging::V2::LogMetric]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/logging/v2"
-          #
-          #   metrics_client = Google::Cloud::Logging::V2::MetricsServiceV2Client.new
-          #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.log_metric_path("[PROJECT]", "[METRIC]")
-          #
-          #   # TODO: Initialize `metric`:
-          #   metric = {}
-          #   response = metrics_client.update_log_metric(formatted_metric_name, metric)
-
-          def update_log_metric \
-              metric_name,
-              metric,
-              options: nil,
-              &block
-            req = {
-              metric_name: metric_name,
-              metric: metric
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Logging::V2::UpdateLogMetricRequest)
-            @update_log_metric.call(req, options, &block)
-          end
-
-          # Deletes a logs-based metric.
-          #
-          # @param metric_name [String]
-          #   Required. The resource name of the metric to delete:
-          #
-          #       "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result []
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/logging/v2"
-          #
-          #   metrics_client = Google::Cloud::Logging::V2::MetricsServiceV2Client.new
-          #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.log_metric_path("[PROJECT]", "[METRIC]")
-          #   metrics_client.delete_log_metric(formatted_metric_name)
-
-          def delete_log_metric \
-              metric_name,
-              options: nil,
-              &block
-            req = {
-              metric_name: metric_name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Logging::V2::DeleteLogMetricRequest)
-            @delete_log_metric.call(req, options, &block)
-            nil
           end
         end
       end
