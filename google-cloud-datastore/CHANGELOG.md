@@ -1,5 +1,11 @@
 # Release History
 
+### 1.8.1 / 2020-05-19
+
+#### Bug Fixes
+
+* Adjusted some default timeout and retry settings
+
 ### 1.8.0 / 2020-03-11
 
 #### Features
