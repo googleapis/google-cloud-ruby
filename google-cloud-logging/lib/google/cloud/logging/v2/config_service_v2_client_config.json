@@ -4,9 +4,14 @@
       "retry_codes": {
         "idempotent": [
           "DEADLINE_EXCEEDED",
+          "INTERNAL",
           "UNAVAILABLE"
         ],
-        "non_idempotent": []
+        "non_idempotent": [],
+        "idempotent2": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ]
       },
       "retry_params": {
         "default": {
@@ -20,14 +25,29 @@
         }
       },
       "methods": {
-        "ListBuckets": {
+        "DeleteSink": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
-        "GetBucket": {
+        "UpdateSink": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteExclusion": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "ListBuckets": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent2",
+          "retry_params_name": "default"
+        },
+        "GetBucket": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent2",
           "retry_params_name": "default"
         },
         "UpdateBucket": {
@@ -37,12 +57,12 @@
         },
         "ListSinks": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "idempotent2",
           "retry_params_name": "default"
         },
         "GetSink": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "idempotent2",
           "retry_params_name": "default"
         },
         "CreateSink": {
@@ -50,24 +70,14 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "UpdateSink": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "DeleteSink": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
         "ListExclusions": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "idempotent2",
           "retry_params_name": "default"
         },
         "GetExclusion": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "idempotent2",
           "retry_params_name": "default"
         },
         "CreateExclusion": {
@@ -80,14 +90,9 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "DeleteExclusion": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
         "GetCmekSettings": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "idempotent2",
           "retry_params_name": "default"
         },
         "UpdateCmekSettings": {
