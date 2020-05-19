@@ -209,14 +209,6 @@ module Google
               &Google::Devtools::Cloudtrace::V2::TraceService::Stub.method(:new)
             )
 
-            @batch_write_spans = Google::Gax.create_api_call(
-              @trace_service_stub.method(:batch_write_spans),
-              defaults["batch_write_spans"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
             @create_span = Google::Gax.create_api_call(
               @trace_service_stub.method(:create_span),
               defaults["create_span"],
@@ -225,51 +217,17 @@ module Google
                 {'name' => request.name}
               end
             )
+            @batch_write_spans = Google::Gax.create_api_call(
+              @trace_service_stub.method(:batch_write_spans),
+              defaults["batch_write_spans"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
           end
 
           # Service calls
-
-          # Sends new spans to new or existing traces. You cannot update
-          # existing spans.
-          #
-          # @param name [String]
-          #   Required. The name of the project where the spans belong. The format is
-          #   `projects/[PROJECT_ID]`.
-          # @param spans [Array<Google::Devtools::Cloudtrace::V2::Span | Hash>]
-          #   Required. A list of new spans. The span names must not match existing
-          #   spans, or the results are undefined.
-          #   A hash of the same form as `Google::Devtools::Cloudtrace::V2::Span`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result []
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/trace"
-          #
-          #   trace_client = Google::Cloud::Trace.new(version: :v2)
-          #   formatted_name = Google::Cloud::Trace::V2::TraceServiceClient.project_path("[PROJECT]")
-          #
-          #   # TODO: Initialize `spans`:
-          #   spans = []
-          #   trace_client.batch_write_spans(formatted_name, spans)
-
-          def batch_write_spans \
-              name,
-              spans,
-              options: nil,
-              &block
-            req = {
-              name: name,
-              spans: spans
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Devtools::Cloudtrace::V2::BatchWriteSpansRequest)
-            @batch_write_spans.call(req, options, &block)
-            nil
-          end
 
           # Creates a new span.
           #
@@ -404,6 +362,48 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Devtools::Cloudtrace::V2::Span)
             @create_span.call(req, options, &block)
+          end
+
+          # Sends new spans to new or existing traces. You cannot update
+          # existing spans.
+          #
+          # @param name [String]
+          #   Required. The name of the project where the spans belong. The format is
+          #   `projects/[PROJECT_ID]`.
+          # @param spans [Array<Google::Devtools::Cloudtrace::V2::Span | Hash>]
+          #   Required. A list of new spans. The span names must not match existing
+          #   spans, or the results are undefined.
+          #   A hash of the same form as `Google::Devtools::Cloudtrace::V2::Span`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/trace"
+          #
+          #   trace_client = Google::Cloud::Trace.new(version: :v2)
+          #   formatted_name = Google::Cloud::Trace::V2::TraceServiceClient.project_path("[PROJECT]")
+          #
+          #   # TODO: Initialize `spans`:
+          #   spans = []
+          #   trace_client.batch_write_spans(formatted_name, spans)
+
+          def batch_write_spans \
+              name,
+              spans,
+              options: nil,
+              &block
+            req = {
+              name: name,
+              spans: spans
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Devtools::Cloudtrace::V2::BatchWriteSpansRequest)
+            @batch_write_spans.call(req, options, &block)
+            nil
           end
         end
       end
