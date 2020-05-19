@@ -25,6 +25,7 @@ versions=($RUBY_VERSIONS)
 # Capture failures
 EXIT_STATUS=0 # everything passed
 function set_failed_status {
+    echo "**** FAILURE DETECTED ****"
     EXIT_STATUS=1
 }
 
