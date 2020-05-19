@@ -89,6 +89,10 @@ module Google
         #     multiple default text responses exist, they will be concatenated when
         #     generating audio. If no default platform text responses exist, the
         #     generated audio content will be empty.
+        #
+        #     In some scenarios, multiple output audio fields may be present in the
+        #     response structure. In these cases, only the top-most-level audio output
+        #     has content.
         # @!attribute [rw] output_audio_config
         #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
         #     The config used by the speech synthesizer to generate the output audio.
@@ -390,6 +394,10 @@ module Google
         #     multiple default text responses exist, they will be concatenated when
         #     generating audio. If no default platform text responses exist, the
         #     generated audio content will be empty.
+        #
+        #     In some scenarios, multiple output audio fields may be present in the
+        #     response structure. In these cases, only the top-most-level audio output
+        #     has content.
         # @!attribute [rw] output_audio_config
         #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
         #     The config used by the speech synthesizer to generate the output audio.
