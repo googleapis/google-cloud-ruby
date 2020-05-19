@@ -13,7 +13,7 @@ This client supports the following Google Cloud Platform services:
 * [Cloud Asset](#cloud-asset)
 * [Cloud AutoML API](#cloud-automl-api)
 * [BigQuery](#bigquery)
-* [BigQuery Data Transfer](#bigquery-data-transfer)
+* [BigQuery Data Transfer Service](#bigquery-data-transfer-service)
 * [Cloud Bigtable](#cloud-bigtable)
 * [Cloud Billing API](#cloud-billing-api)
 * [Container Analysis](#container-analysis)
@@ -96,13 +96,13 @@ linked from the README documents listed below for each service.
 - [google-cloud-bigquery on RubyGems](https://rubygems.org/gems/google-cloud-bigquery)
 - [Google BigQuery documentation](https://cloud.google.com/bigquery/docs)
 
-### BigQuery Data Transfer
+### BigQuery Data Transfer Service
 
 - `gem install google-cloud-bigquery-data_transfer`
 - [google-bigquery-data_transfer README](google-cloud-bigquery-data_transfer/README.md)
 - [google-bigquery-data_transfer API documentation](https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer/latest)
 - [google-bigquery-data_transfer on RubyGems](https://rubygems.org/gems/google-cloud-bigquery-data_transfer/)
-- [Google BigQuery Data Transfer documentation](https://cloud.google.com/bigquery/transfer/)
+- [Google BigQuery Data Transfer Service documentation](https://cloud.google.com/bigquery/transfer/)
 
 ### Cloud Bigtable
 
