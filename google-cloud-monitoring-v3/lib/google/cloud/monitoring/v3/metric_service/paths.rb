@@ -39,6 +39,58 @@ module Google
             end
 
             ##
+            # Create a fully-qualified MetricDescriptor resource string.
+            #
+            # @overload metric_descriptor_path(project:, metric_descriptor:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/metricDescriptors/{metric_descriptor=**}`
+            #
+            #   @param project [String]
+            #   @param metric_descriptor [String]
+            #
+            # @overload metric_descriptor_path(organization:, metric_descriptor:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/metricDescriptors/{metric_descriptor=**}`
+            #
+            #   @param organization [String]
+            #   @param metric_descriptor [String]
+            #
+            # @overload metric_descriptor_path(folder:, metric_descriptor:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/metricDescriptors/{metric_descriptor=**}`
+            #
+            #   @param folder [String]
+            #   @param metric_descriptor [String]
+            #
+            # @return [::String]
+            def metric_descriptor_path **args
+              resources = {
+                "metric_descriptor:project"      => (proc do |project:, metric_descriptor:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/metricDescriptors/#{metric_descriptor}"
+                end),
+                "metric_descriptor:organization" => (proc do |organization:, metric_descriptor:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+                  "organizations/#{organization}/metricDescriptors/#{metric_descriptor}"
+                end),
+                "folder:metric_descriptor"       => (proc do |folder:, metric_descriptor:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+
+                  "folders/#{folder}/metricDescriptors/#{metric_descriptor}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified MonitoredResourceDescriptor resource string.
             #
             # @overload monitored_resource_descriptor_path(project:, monitored_resource_descriptor:)
