@@ -26,7 +26,7 @@ library = gapic.ruby_library(
     "bigquery/datatransfer", "v1",
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-bigquery-data_transfer",
-        "ruby-cloud-title": "BigQuery Data Transfer",
+        "ruby-cloud-title": "BigQuery Data Transfer Service",
         "ruby-cloud-description": "Schedules queries and transfers external data from SaaS applications to Google BigQuery on a regular basis.",
         "ruby-cloud-env-prefix": "DATA_TRANSFER",
         "ruby-cloud-wrapper-of": "v1:0.0",
