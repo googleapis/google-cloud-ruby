@@ -47,7 +47,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Represents an environment state. When a environment is pointed to a new
+          # Represents an environment state. When an environment is pointed to a new
           # agent version, the environment is temporarily set to the `LOADING` state.
           # During that time, the environment keeps on serving the previous version of
           # the agent. After the new agent version is done loading, the environment is
