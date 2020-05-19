@@ -1,5 +1,11 @@
 # Release History
 
+### 1.10.6 / 2020-05-19
+
+#### Bug Fixes
+
+* Adjusted some default timeout and retry settings
+
 ### 1.10.5 / 2020-05-05
 
 #### Bug Fixes
