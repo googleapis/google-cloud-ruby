@@ -552,6 +552,7 @@ google-cloud-language-v1beta2:
 - v0.1.4
 - v0.1.1
 google-cloud-logging:
+- v1.10.6
 - v1.10.5
 - v1.10.4
 - v1.10.2
