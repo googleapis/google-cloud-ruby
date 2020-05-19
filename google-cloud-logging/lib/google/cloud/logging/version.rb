@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Logging
-      VERSION = "1.10.5".freeze
+      VERSION = "1.10.6".freeze
     end
   end
 end
