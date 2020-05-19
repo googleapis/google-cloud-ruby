@@ -68,6 +68,119 @@ end
 
 describe Google::Cloud::Translate::V3::TranslationServiceClient do
 
+  describe 'delete_glossary' do
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Translate::V3::TranslationServiceClient#delete_glossary."
+
+    it 'invokes delete_glossary without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Translate::V3::TranslationServiceClient.glossary_path("[PROJECT]", "[LOCATION]", "[GLOSSARY]")
+
+      # Create expected grpc response
+      name_2 = "name2-1052831874"
+      expected_response = { name: name_2 }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Translate::V3::DeleteGlossaryResponse)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/delete_glossary_test',
+        done: true,
+        response: result
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Translate::V3::DeleteGlossaryRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v3.new(:delete_glossary, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockTranslationServiceCredentials_v3.new("delete_glossary")
+
+      Google::Cloud::Translate::V3::TranslationService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Translate::V3::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Translate.new(version: :v3)
+
+          # Call method
+          response = client.delete_glossary(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes delete_glossary and returns an operation error.' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Translate::V3::TranslationServiceClient.glossary_path("[PROJECT]", "[LOCATION]", "[GLOSSARY]")
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Translate::V3::TranslationServiceClient#delete_glossary.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/delete_glossary_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Translate::V3::DeleteGlossaryRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v3.new(:delete_glossary, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockTranslationServiceCredentials_v3.new("delete_glossary")
+
+      Google::Cloud::Translate::V3::TranslationService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Translate::V3::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Translate.new(version: :v3)
+
+          # Call method
+          response = client.delete_glossary(formatted_name)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
+      end
+    end
+
+    it 'invokes delete_glossary with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Translate::V3::TranslationServiceClient.glossary_path("[PROJECT]", "[LOCATION]", "[GLOSSARY]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Translate::V3::DeleteGlossaryRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v3.new(:delete_glossary, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockTranslationServiceCredentials_v3.new("delete_glossary")
+
+      Google::Cloud::Translate::V3::TranslationService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Translate::V3::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Translate.new(version: :v3)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
+            client.delete_glossary(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'translate_text' do
     custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Translate::V3::TranslationServiceClient#translate_text."
 
@@ -735,119 +848,6 @@ describe Google::Cloud::Translate::V3::TranslationServiceClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
             client.get_glossary(formatted_name)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'delete_glossary' do
-    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Translate::V3::TranslationServiceClient#delete_glossary."
-
-    it 'invokes delete_glossary without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Translate::V3::TranslationServiceClient.glossary_path("[PROJECT]", "[LOCATION]", "[GLOSSARY]")
-
-      # Create expected grpc response
-      name_2 = "name2-1052831874"
-      expected_response = { name: name_2 }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Translate::V3::DeleteGlossaryResponse)
-      result = Google::Protobuf::Any.new
-      result.pack(expected_response)
-      operation = Google::Longrunning::Operation.new(
-        name: 'operations/delete_glossary_test',
-        done: true,
-        response: result
-      )
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Translate::V3::DeleteGlossaryRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: operation)
-      end
-      mock_stub = MockGrpcClientStub_v3.new(:delete_glossary, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockTranslationServiceCredentials_v3.new("delete_glossary")
-
-      Google::Cloud::Translate::V3::TranslationService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Translate::V3::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Translate.new(version: :v3)
-
-          # Call method
-          response = client.delete_glossary(formatted_name)
-
-          # Verify the response
-          assert_equal(expected_response, response.response)
-        end
-      end
-    end
-
-    it 'invokes delete_glossary and returns an operation error.' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Translate::V3::TranslationServiceClient.glossary_path("[PROJECT]", "[LOCATION]", "[GLOSSARY]")
-
-      # Create expected grpc response
-      operation_error = Google::Rpc::Status.new(
-        message: 'Operation error for Google::Cloud::Translate::V3::TranslationServiceClient#delete_glossary.'
-      )
-      operation = Google::Longrunning::Operation.new(
-        name: 'operations/delete_glossary_test',
-        done: true,
-        error: operation_error
-      )
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Translate::V3::DeleteGlossaryRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: operation)
-      end
-      mock_stub = MockGrpcClientStub_v3.new(:delete_glossary, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockTranslationServiceCredentials_v3.new("delete_glossary")
-
-      Google::Cloud::Translate::V3::TranslationService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Translate::V3::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Translate.new(version: :v3)
-
-          # Call method
-          response = client.delete_glossary(formatted_name)
-
-          # Verify the response
-          assert(response.error?)
-          assert_equal(operation_error, response.error)
-        end
-      end
-    end
-
-    it 'invokes delete_glossary with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Translate::V3::TranslationServiceClient.glossary_path("[PROJECT]", "[LOCATION]", "[GLOSSARY]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Translate::V3::DeleteGlossaryRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v3.new(:delete_glossary, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockTranslationServiceCredentials_v3.new("delete_glossary")
-
-      Google::Cloud::Translate::V3::TranslationService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Translate::V3::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Translate.new(version: :v3)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v3 do
-            client.delete_glossary(formatted_name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
