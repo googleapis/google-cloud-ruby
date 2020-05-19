@@ -1,25 +1,18 @@
 {
   "sources": [
     {
-      "generator": {
-        "name": "artman",
-        "version": "2.0.0",
-        "dockerImage": "googleapis/artman@sha256:b3b47805231a305d0f40c4bf069df20f6a2635574e6d4259fac651d3f9f6e098"
-      }
-    },
-    {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "bfb4ac7296cdebe457a7bcb093b7ec4755a616e0"
+        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
+        "sha": "483151140cd13608264a5c69036242497154118f"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "5a90d467aa65e7f038f87585e8fbb45d74475e7c",
-        "internalRef": "312088359"
+        "sha": "247c6514750a2cfca836d946c4e008ca1a5fd1d1",
+        "internalRef": "312319867"
       }
     }
   ],
@@ -30,8 +23,7 @@
         "apiName": "translate",
         "apiVersion": "v3",
         "language": "ruby",
-        "generator": "gapic",
-        "config": "google/cloud/translate/artman_translate_v3.yaml"
+        "generator": "gapic-generator-ruby"
       }
     }
   ]
