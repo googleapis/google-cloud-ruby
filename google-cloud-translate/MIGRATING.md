@@ -70,29 +70,37 @@ In the 3.0 release, there are separate class methods for creating clients of the
 modern (V3) and legacy (V2) Translation services. To create a V2 client, use the
 `translation_v2_service` class method, which takes the same keyword arguments
 you would have used previously. To create a V3 (or later) client, use the
-`translation_service` class method and set options in a configuration block
-rather than passing keyword arguments.
+`translation_service` class method and set options in a configuration block.
 
-Old:
+Old (V3):
 ```
 client = Google::Cloud::Translate.new credentials: "/path/to/credentials.json"
 ```
 
-New (V2):
+Old (V2):
 ```
-client = Google::Cloud::Translate.translation_v2_service(
-  credentials: "/path/to/credentials.json")
+client = Google::Cloud::Translate.new version: :v2,
+                                      credentials: "/path/to/credentials.json"
 ```
 
 New (V3):
 ```
-# Using default settings
-client1 = Google::Cloud::Translate.translation_service
-
-# Overriding default settings
-client2 = Google::Cloud::Translate.translation_service do |config|
+# Call the translation_service method to create a V3 client,
+# and pass a block to configure the client.
+client = Google::Cloud::Translate.translation_service do |config|
   config.credentials = "/path/to/credentials.json"
 end
+
+# You can omit the block if you're keeping the default configuration
+default_client = Google::Cloud::Translate.translation_service
+```
+
+New (V2):
+```
+# Call the separate translation_v2_service method to create a legacy V2 client,
+# and pass configuration as keyword arguments.
+client = Google::Cloud::Translate.translation_v2_service(
+  credentials: "/path/to/credentials.json")
 ```
 
 ### Passing Arguments
@@ -104,9 +112,9 @@ With the 3.0 release, the V2 client interface remains the same, but in the V3
 client interface, all RPC arguments are passed as keyword arguments, regardless
 of whether they are required or optional. For example:
 
-Old:
+Old (V3):
 ```
-client = Google::Cloud::Translate.new version: :v3
+client = Google::Cloud::Translate.new
 
 # Contents, target language, and project are positional arguments, but
 # mime type is a keyword argument
@@ -114,7 +122,7 @@ response = client.translate_text ["Hello, world!"], "es", "my-project",
                                  mime_type: "text/plain"
 ```
 
-New:
+New (V3):
 ```
 client = Google::Cloud::Translate.translation_service
 
@@ -128,7 +136,7 @@ response = client.translate_text content: ["Hello, world!"],
 In the 3.0 release, it is also possible to pass a request object, either
 as a hash or as a protocol buffer.
 
-New:
+New (V3):
 ```
 client = Google::Cloud::Translate.translation_service
 
@@ -147,9 +155,9 @@ Finally, in older releases, to provide call options, you would pass a
 `Google::Gax::CallOptions` object with the `:options` keyword argument. In the
 3.0 release, pass call options using a _second set_ of keyword arguments.
 
-Old:
+Old (V3):
 ```
-client = Google::Cloud::Translate.new version: :v3
+client = Google::Cloud::Translate.new
 
 options = Google::Gax::CallOptions.new timeout: 10.0
 
@@ -158,7 +166,7 @@ response = client.translate_text ["Hello, world!"], "es", "my-project",
                                  options: options
 ```
 
-New:
+New (V3):
 ```
 client = Google::Cloud::Translate.translation_service
 
@@ -186,9 +194,9 @@ two ways:
 
 Following is an example involving using a resource path helper.
 
-Old:
+Old (V3):
 ```
-client = Google::Cloud::Translate.new version: :v3
+client = Google::Cloud::Translate.new
 
 # Call the helper on the client class
 name = Google::Cloud::Translate::V3::TranslationServiceClient.glossary_path(
@@ -198,7 +206,7 @@ name = Google::Cloud::Translate::V3::TranslationServiceClient.glossary_path(
 response = client.get_glossary name
 ```
 
-New:
+New (V3):
 ```
 client = Google::Cloud::Translate.translation_service
 
@@ -211,7 +219,7 @@ response = client.get_glossary name: name
 
 In the 3.0 client, you can also use the paths module as a convenience module.
 
-New:
+New (V3):
 ```
 # Bring the path methods into the current class
 include Google::Cloud::Translate::V3::TranslationService::Paths
@@ -238,11 +246,11 @@ In the 3.0 release, the client object is of class
 Note that most users will use the `Google::Cloud::Translate.translation_service`
 factory method to create instances of the client object, so you may not need to
 reference the actual class directly. See [Creating Clients](#creating-clients).
-The V2 client classes have not been renamed.
 
 In older releases, the V3 credentials object was of class
 `Google::Cloud::Translate::V3::Credentials`.
 In the 3.0 release, the credentials object is of class
 `Google::Cloud::Translate::V3::TranslationService::Credentials`.
 Again, most users will not need to reference this class directly.
-The V2 credentials class has not been renamed.
+
+The V2 classes have not been renamed.
