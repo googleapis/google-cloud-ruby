@@ -286,7 +286,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::RetryPolicy" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 10), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
       mock_subscriber.expect :update_subscription, subscription_resp, [Google::Cloud::PubSub::V1::Subscription, Google::Protobuf::FieldMask, Hash]
     end
   end
@@ -445,7 +445,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Subscription#retry_policy" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 10), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
       mock_subscriber.expect :update_subscription, subscription_resp, [Google::Cloud::PubSub::V1::Subscription, Google::Protobuf::FieldMask, Hash]
     end
   end
