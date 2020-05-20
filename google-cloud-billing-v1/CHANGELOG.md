@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2020-05-20
+
+#### Features
+
+* The quota_project can be set via configuration
+
 ### 0.4.1 / 2020-05-05
 
 #### Documentation
