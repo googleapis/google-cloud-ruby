@@ -226,6 +226,7 @@ google-cloud-container-v1:
 - v0.1.0
 - v0.0.1
 google-cloud-container-v1beta1:
+- v0.2.0
 - v0.1.0
 google-cloud-container_analysis:
 - v0.4.1
