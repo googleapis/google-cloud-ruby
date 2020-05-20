@@ -1,5 +1,15 @@
 # Release History
 
+### 0.6.0 / 2020-05-20
+
+#### Features
+
+* The quota_project can be set via configuration
+
+#### Documentation
+
+* Cover multiple audio fields in intent detection responses.
+
 ### 0.5.1 / 2020-05-05
 
 #### Documentation
