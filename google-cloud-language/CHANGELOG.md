@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.0 / 2020-05-20
+
+#### Features
+
+* The endpoint, scope, and quota_project can be set via configuration
+
 ### 1.1.1 / 2020-05-05
 
 #### Bug Fixes
