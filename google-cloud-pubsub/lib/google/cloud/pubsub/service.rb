@@ -256,6 +256,7 @@ module Google
               labels:                     labels,
               enable_message_ordering:    message_ordering,
               dead_letter_policy:         dead_letter_policy(options),
+              retry_policy:               options[:retry_policy],
               options:                    default_options
           end
         end
