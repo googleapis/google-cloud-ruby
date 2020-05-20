@@ -1106,6 +1106,8 @@ google-cloud-video_intelligence:
 - v0.22.0
 - v0.21.0
 - v0.20.0
+google-cloud-video_intelligence-v1:
+- v0.2.0
 google-cloud-video_intelligence-v1beta2:
 - v0.1.1
 google-cloud-video_intelligence-v1p1beta1:
