@@ -22,11 +22,13 @@ def disable_bucket_lifecycle_management bucket_name:
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
 
-  bucket.lifecycle(&:clear)
+  bucket.lifecycle do |l|
+    l.clear
+  end
 
   puts "Lifecycle management is disabled for bucket #{bucket_name}"
-  bucket
   # [END storage_disable_bucket_lifecycle_management]
+  bucket
 end
 
 disable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
