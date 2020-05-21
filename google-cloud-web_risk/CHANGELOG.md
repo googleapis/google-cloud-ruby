@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 / 2020-05-21
+
+#### Features
+
+* The endpoint, scope, and quota_project can be set via configuration
+
 ### 1.0.0 / 2020-05-07
 
 This is a major update over the older google-cloud-webrisk gem, with significant new features, improved documentation, and a fair number of breaking changes.
@@ -14,4 +20,3 @@ Among the highlights:
 * More consistent spelling of module names.
 
 See the MIGRATING file in the documentation for more detailed information, and instructions for migrating from google-cloud-webrisk.
-
