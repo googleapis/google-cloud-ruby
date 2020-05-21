@@ -22,9 +22,9 @@ def disable_bucket_lifecycle_management bucket_name:
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
 
-  rules = bucket.lifecycle(&:clear)
+  bucket.lifecycle(&:clear)
 
-  puts "Lifecycle management is disabled for bucket #{bucket_name} and the rules are #{rules}"
+  puts "Lifecycle management is disabled for bucket #{bucket_name}"
   bucket
   # [END storage_disable_bucket_lifecycle_management]
 end

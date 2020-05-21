@@ -22,10 +22,6 @@ def enable_bucket_lifecycle_management bucket_name:
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
 
-  rules = bucket.lifecycle
-
-  puts "Lifecycle management rules for bucket #{bucket_name} are #{rules}"
-
   rules = bucket.lifecycle do |l|
     l.add_delete_rule age: 2
   end

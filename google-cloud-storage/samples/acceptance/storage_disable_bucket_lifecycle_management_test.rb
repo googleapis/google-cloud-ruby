@@ -31,6 +31,6 @@ describe "disable_bucket_lifecycle_management" do
       assert_empty updated_bucket.lifecycle
     end
 
-    assert_includes out, "[]"
+    assert_includes out, "Lifecycle management is disabled"
   end
 end

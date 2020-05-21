@@ -27,7 +27,6 @@ describe "enable_bucket_lifecycle_management" do
       refute_empty updated_bucket.lifecycle
     end
 
-    assert_includes out, "[]"
     assert_includes out, "Lifecycle management is enabled"
   end
 end
