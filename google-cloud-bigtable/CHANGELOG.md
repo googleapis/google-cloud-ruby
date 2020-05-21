@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.1 / 2020-05-21
+
+#### Bug Fixes
+
+* Disable streaming RPC retries in lower-level client
+
 ### 1.2.0 / 2020-03-11
 
 #### Features
