@@ -1,5 +1,16 @@
 # Release History
 
+### 1.7.0 / 2020-05-21
+
+#### Features
+
+* Add Retry Policy support
+  * Add RetryPolicy
+  * Add retry_policy param to Topic#subscribe
+  * Add Subscription#retry_policy
+  * Add Subscription#retry_policy=
+* Set client-scoped UUID in initial StreamingPullRequest#client_id
+
 ### 1.6.1 / 2020-05-06
 
 #### Documentation
