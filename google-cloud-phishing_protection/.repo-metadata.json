@@ -1,9 +1,5 @@
 {
-    "name": "phishingprotection",
     "language": "ruby",
     "distribution_name": "google-cloud-phishing_protection",
-    "module_name": "PhishingProtection",
-    "module_name_credentials": "PhishingProtection::V1beta1",
-    "env_var_prefix": "PHISHING_PROTECTION",
     "client_documentation": "https://googleapis.dev/ruby/google-cloud-phishing_protection/latest"
 }
