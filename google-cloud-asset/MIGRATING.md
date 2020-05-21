@@ -29,6 +29,10 @@ To summarize:
     resource paths. These paths are now instance methods on the client objects,
     and are also available in a separate paths module. See
     [Resource Path Helpers](#resource-path-helpers) for more info.
+ *  Previously, RPC exceptions were subclasses of `Google::Gax::GaxError`,
+    defined in the `google-gax` gem. Now, RPSs throw exceptions subclassing
+    `Google::Cloud::Error`, defined in the `google-cloud-errors` gem. See
+    [Error Handling](#error-handling) for more info.
  *  Some classes have moved into different namespaces. See
     [Class Namespaces](#class-namespaces) for more info.
 
@@ -266,6 +270,47 @@ def foo
   response = client.get_feed name: name
 
   # Do something with response...
+end
+```
+
+### Handling Errors
+
+The client reports standard HTTP and gRPC error codes by raising exceptions.
+In older releases, these exceptions were located in the `Google::Gax` namespace
+and were subclasses of the `Google::Gax::GaxError` base class, defined in the
+`google-gax` gem. However, these exception classes were different from the
+standard exceptions (subclasses of `Google::Cloud::Error`) thrown by other
+client libraries such as `google-cloud-storage`.
+
+The 1.0 client library now uses the `Google::Cloud::Error` exception hierarchy
+for consistency across all the Google Cloud client libraries. In general, these
+exceptions have the same name as their counterparts from older releases, but
+are located in the `Google::Cloud` namespace rather than the `Google::Gax`
+namespace.
+
+Old:
+```
+client = Google::Cloud::Asset.new
+
+name = "projects/my-project/feeds/my-feed"
+
+begin
+  client.get_feed name
+rescue Google::Gax::Error => e
+  # Handle exceptions that subclass Google::Gax::Error
+end
+```
+
+New:
+```
+client = Google::Cloud::Asset.asset_service
+
+name = "projects/my-project/feeds/my-feed"
+
+begin
+  client.get_feed name: name
+rescue Google::Cloud::Error => e
+  # Handle exceptions that subclass Google::Cloud::Error
 end
 ```
 
