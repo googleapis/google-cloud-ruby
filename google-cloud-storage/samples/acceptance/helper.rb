@@ -78,10 +78,10 @@ def get_kms_key_new project_id
   crypto_key = {
     purpose: :ENCRYPT_DECRYPT
   }
-  crypto_key_path = kms_client.crypto_key_path project: project_id,
-                                                location: "us",
-                                                key_ring: key_ring_id,
-                                                crypto_key: crypto_key_id
+  crypto_key_path = kms_client.crypto_key_path project:    project_id,
+                                               location:   "us",
+                                               key_ring:   key_ring_id,
+                                               crypto_key: crypto_key_id
   begin
     kms_client.get_crypto_key(name: crypto_key_path).name
   rescue Google::Cloud::NotFoundError
