@@ -55,6 +55,41 @@ def retry_resource_exhaustion
 end
 
 def get_kms_key project_id
+  if ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
+    get_kms_key_new project_id
+  else
+    get_kms_key_old project_id
+  end
+end
+
+def get_kms_key_new project_id
+  kms_client = Google::Cloud::Kms.key_management_service
+
+  key_ring_id = "ruby_docs_test_ring_id"
+  location_path = kms_client.location_path project: project_id, location: "us"
+  key_ring_path = kms_client.key_ring_path project: project_id, location: "us", key_ring: key_ring_id
+  begin
+    kms_client.get_key_ring name: key_ring_path
+  rescue Google::Cloud::NotFoundError
+    kms_client.create_key_ring parent: location_path, key_ring_id: key_ring_id, key_ring: {}
+  end
+
+  crypto_key_id = "ruby_docs_test_key"
+  crypto_key = {
+    purpose: :ENCRYPT_DECRYPT
+  }
+  crypto_key_path = kms_client.crypto_key_path project: project_id,
+                                                location: "us",
+                                                key_ring: key_ring_id,
+                                                crypto_key: crypto_key_id
+  begin
+    kms_client.get_crypto_key(name: crypto_key_path).name
+  rescue Google::Cloud::NotFoundError
+    kms_client.create_crypto_key(parent: key_ring_path, crypto_key_id: crypto_key_id, crypto_key: crypto_key).name
+  end
+end
+
+def get_kms_key_old project_id
   kms_client = Google::Cloud::Kms.new
 
   key_ring_id = "ruby_docs_test_ring_id"
