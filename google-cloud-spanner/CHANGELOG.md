@@ -1,5 +1,15 @@
 # Release History
 
+### 1.16.1 / 2020-05-21
+
+#### Bug Fixes
+
+* Increased default timeouts to match clients in other languages
+* run system test against emulator skip not supported tests by emulator ([#5937](https://www.github.com/googleapis/google-cloud-ruby/issues/5937))
+  * run system test against emulator
+* update backup RPC timeouts from 30secs to 10mins
+* update to not require key file when running against the emulator. ([#5949](https://www.github.com/googleapis/google-cloud-ruby/issues/5949))
+
 ### 1.16.0 / 2020-03-20
 
 #### Features
