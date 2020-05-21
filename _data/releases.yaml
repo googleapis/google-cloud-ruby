@@ -663,6 +663,8 @@ google-cloud-os_login:
 - v0.1.0
 google-cloud-os_login-v1:
 - v0.1.0
+google-cloud-os_login-v1beta:
+- v0.2.0
 google-cloud-phishing_protection:
 - v0.5.0
 - v0.4.1
