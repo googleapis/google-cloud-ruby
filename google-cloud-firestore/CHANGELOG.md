@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.3 / 2020-05-21
+
+#### Bug Fixes
+
+* Adjusted some default timeout and retry settings
+
 ### 1.4.2 / 2020-05-14
 
 #### Bug Fixes
