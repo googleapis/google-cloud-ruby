@@ -29,6 +29,10 @@ To summarize:
     resource paths. These paths are now instance methods on the client objects,
     and are also available in a separate paths module. See
     [Resource Path Helpers](#resource-path-helpers) for more info.
+ *  Previously, clients reported RPC errors by raising instances of
+    `Google::Gax::GaxError` and its subclasses. Now, RPC exceptions are of type
+    `Google::Cloud::Error` and its subclasses. See
+    [Handling Errors](#handling-errors) for more info.
  *  Some classes have moved into different namespaces. See
     [Class Namespaces](#class-namespaces) for more info.
 
@@ -234,6 +238,48 @@ def foo
   response = client.get_glossary name: name
 
   # Do something with response...
+end
+```
+
+### Handling Errors
+
+The client reports standard
+[gRPC error codes](https://github.com/grpc/grpc/blob/master/doc/statuscodes.md)
+by raising exceptions. In older releases, these exceptions were located in the
+`Google::Gax` namespace and were subclasses of the `Google::Gax::GaxError` base
+exception class, defined in the `google-gax` gem. However, these classes were
+different from the standard exceptions (subclasses of `Google::Cloud::Error`)
+thrown by other client libraries such as `google-cloud-storage`.
+
+The 3.0 client library now uses the `Google::Cloud::Error` exception hierarchy,
+for consistency across all the Google Cloud client libraries. In general, these
+exceptions have the same name as their counterparts from older releases, but
+are located in the `Google::Cloud` namespace rather than the `Google::Gax`
+namespace.
+
+Old (V3):
+```
+client = Google::Cloud::Translate.new
+
+begin
+  response = client.translate_text ["Hello, world!"], "es", "my-project",
+                                   mime_type: "text/plain"
+rescue Google::Gax::Error => e
+  # Handle exceptions that subclass Google::Gax::Error
+end
+```
+
+New (V3):
+```
+client = Google::Cloud::Translate.translation_service
+
+begin
+  response = client.translate_text content: ["Hello, world!"],
+                                  target_language_code: "es",
+                                  parent: "my-project",
+                                  mime_type: "text/plain"
+rescue Google::Cloud::Error => e
+  # Handle exceptions that subclass Google::Cloud::Error
 end
 ```
 
