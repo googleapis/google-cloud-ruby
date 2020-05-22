@@ -85,6 +85,8 @@ module Google
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
+              @quota_project_id = @config.quota_project
+              @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
               @operations_stub = ::Gapic::ServiceStub.new(
                 ::Google::Longrunning::Operations::Stub,
