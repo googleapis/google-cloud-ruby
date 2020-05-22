@@ -253,7 +253,7 @@ In the 0.10 client, you can also use the paths module as a convenience module.
 
 New:
 ```
-# Bring the project_path method into the current class
+# Bring the path helper methods into the current class
 include Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Paths
 
 def foo
