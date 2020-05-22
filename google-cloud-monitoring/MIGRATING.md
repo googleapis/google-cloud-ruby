@@ -266,7 +266,7 @@ Finally, in the 1.0 client, you can also use the paths module as a convenience m
 
 New:
 ```
-# Bring the session_path method into the current class
+# Bring the path helper methods into the current class
 include Google::Cloud::Monitoring::V3::UptimeCheckService::Paths
 
 def foo
