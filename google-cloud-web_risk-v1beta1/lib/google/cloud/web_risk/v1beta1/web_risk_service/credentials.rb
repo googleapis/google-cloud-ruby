@@ -23,7 +23,7 @@ module Google
     module WebRisk
       module V1beta1
         module WebRiskService
-          # Credentials for the WebRiskServiceV1Beta1 API.
+          # Credentials for the WebRiskService API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform"
