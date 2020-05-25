@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.1 / 2020-05-25
+
+#### Documentation
+
+* Use the preferred service name in the client docs
+
 ### 0.2.0 / 2020-05-20
 
 #### Features
