@@ -25,24 +25,24 @@ module Google
       module V1beta1
         module WebRiskService
           ##
-          # Client for the WebRiskServiceV1Beta1 service.
+          # Client for the WebRiskService service.
           #
           # Web Risk v1beta1 API defines an interface to detect malicious URLs on your
           # website and in client applications.
           #
           class Client
             # @private
-            attr_reader :web_risk_service_v1_beta1_stub
+            attr_reader :web_risk_service_stub
 
             ##
-            # Configure the WebRiskServiceV1Beta1 Client class.
+            # Configure the WebRiskService Client class.
             #
             # See {::Google::Cloud::WebRisk::V1beta1::WebRiskService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
-            # To modify the configuration for all WebRiskServiceV1Beta1 clients:
+            # To modify the configuration for all WebRiskService clients:
             #
             #     ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.configure do |config|
             #       config.timeout = 10.0
@@ -95,7 +95,7 @@ module Google
             end
 
             ##
-            # Configure the WebRiskServiceV1Beta1 Client instance.
+            # Configure the WebRiskService Client instance.
             #
             # The configuration is set to the derived mode, meaning that values can be changed,
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
@@ -115,23 +115,23 @@ module Google
             end
 
             ##
-            # Create a new WebRiskServiceV1Beta1 client object.
+            # Create a new WebRiskService client object.
             #
             # ## Examples
             #
-            # To create a new WebRiskServiceV1Beta1 client with the default
+            # To create a new WebRiskService client with the default
             # configuration:
             #
             #     client = ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new
             #
-            # To create a new WebRiskServiceV1Beta1 client with a custom
+            # To create a new WebRiskService client with a custom
             # configuration:
             #
             #     client = ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new do |config|
             #       config.timeout = 10.0
             #     end
             #
-            # @yield [config] Configure the WebRiskServiceV1Beta1 client.
+            # @yield [config] Configure the WebRiskService client.
             # @yieldparam config [Client::Configuration]
             #
             def initialize
@@ -156,7 +156,7 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
-              @web_risk_service_v1_beta1_stub = ::Gapic::ServiceStub.new(
+              @web_risk_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::WebRisk::V1beta1::WebRiskServiceV1Beta1::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
@@ -224,7 +224,7 @@ module Google
               options.apply_defaults metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @web_risk_service_v1_beta1_stub.call_rpc :compute_threat_list_diff, request, options: options do |response, operation|
+              @web_risk_service_stub.call_rpc :compute_threat_list_diff, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -286,7 +286,7 @@ module Google
               options.apply_defaults metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @web_risk_service_v1_beta1_stub.call_rpc :search_uris, request, options: options do |response, operation|
+              @web_risk_service_stub.call_rpc :search_uris, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -353,7 +353,7 @@ module Google
               options.apply_defaults metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @web_risk_service_v1_beta1_stub.call_rpc :search_hashes, request, options: options do |response, operation|
+              @web_risk_service_stub.call_rpc :search_hashes, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -362,9 +362,9 @@ module Google
             end
 
             ##
-            # Configuration class for the WebRiskServiceV1Beta1 API.
+            # Configuration class for the WebRiskService API.
             #
-            # This class represents the configuration for WebRiskServiceV1Beta1,
+            # This class represents the configuration for WebRiskService,
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
@@ -480,7 +480,7 @@ module Google
               end
 
               ##
-              # Configuration RPC class for the WebRiskServiceV1Beta1 API.
+              # Configuration RPC class for the WebRiskService API.
               #
               # Includes fields providing the configuration for each RPC in this service.
               # Each configuration object is of type `Gapic::Config::Method` and includes
