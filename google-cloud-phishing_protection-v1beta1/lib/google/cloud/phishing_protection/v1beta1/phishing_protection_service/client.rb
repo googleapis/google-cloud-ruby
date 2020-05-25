@@ -25,7 +25,7 @@ module Google
       module V1beta1
         module PhishingProtectionService
           ##
-          # Client for the PhishingProtectionServiceV1Beta1 service.
+          # Client for the PhishingProtectionService service.
           #
           # Service to report phishing URIs.
           #
@@ -33,17 +33,17 @@ module Google
             include Paths
 
             # @private
-            attr_reader :phishing_protection_service_v1_beta1_stub
+            attr_reader :phishing_protection_service_stub
 
             ##
-            # Configure the PhishingProtectionServiceV1Beta1 Client class.
+            # Configure the PhishingProtectionService Client class.
             #
             # See {::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
-            # To modify the configuration for all PhishingProtectionServiceV1Beta1 clients:
+            # To modify the configuration for all PhishingProtectionService clients:
             #
             #     ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.configure do |config|
             #       config.timeout = 10.0
@@ -74,7 +74,7 @@ module Google
             end
 
             ##
-            # Configure the PhishingProtectionServiceV1Beta1 Client instance.
+            # Configure the PhishingProtectionService Client instance.
             #
             # The configuration is set to the derived mode, meaning that values can be changed,
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
@@ -94,23 +94,23 @@ module Google
             end
 
             ##
-            # Create a new PhishingProtectionServiceV1Beta1 client object.
+            # Create a new PhishingProtectionService client object.
             #
             # ## Examples
             #
-            # To create a new PhishingProtectionServiceV1Beta1 client with the default
+            # To create a new PhishingProtectionService client with the default
             # configuration:
             #
             #     client = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new
             #
-            # To create a new PhishingProtectionServiceV1Beta1 client with a custom
+            # To create a new PhishingProtectionService client with a custom
             # configuration:
             #
             #     client = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new do |config|
             #       config.timeout = 10.0
             #     end
             #
-            # @yield [config] Configure the PhishingProtectionServiceV1Beta1 client.
+            # @yield [config] Configure the PhishingProtectionService client.
             # @yieldparam config [Client::Configuration]
             #
             def initialize
@@ -135,7 +135,7 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
-              @phishing_protection_service_v1_beta1_stub = ::Gapic::ServiceStub.new(
+              @phishing_protection_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionServiceV1Beta1::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
@@ -213,7 +213,7 @@ module Google
               options.apply_defaults metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @phishing_protection_service_v1_beta1_stub.call_rpc :report_phishing, request, options: options do |response, operation|
+              @phishing_protection_service_stub.call_rpc :report_phishing, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -222,9 +222,9 @@ module Google
             end
 
             ##
-            # Configuration class for the PhishingProtectionServiceV1Beta1 API.
+            # Configuration class for the PhishingProtectionService API.
             #
-            # This class represents the configuration for PhishingProtectionServiceV1Beta1,
+            # This class represents the configuration for PhishingProtectionService,
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
@@ -340,7 +340,7 @@ module Google
               end
 
               ##
-              # Configuration RPC class for the PhishingProtectionServiceV1Beta1 API.
+              # Configuration RPC class for the PhishingProtectionService API.
               #
               # Includes fields providing the configuration for each RPC in this service.
               # Each configuration object is of type `Gapic::Config::Method` and includes
