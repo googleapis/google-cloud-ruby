@@ -39,3 +39,10 @@ library = gapic.ruby_library(
 )
 
 s.copy(library, merge=ruby.global_merge)
+
+# Fixes for some misformatted markdown links.
+# See internal issue b/153077040.
+s.replace(
+    "proto_docs/google/cloud/automl/v1/io.rb",
+    "https:\n\\s+# //",
+    "https://")
