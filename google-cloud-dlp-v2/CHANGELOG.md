@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.1 / 2020-05-26
+
+#### Bug Fixes
+
+* Removed unused google/cloud/common_resources_pb file
+
 ### 0.3.0 / 2020-05-20
 
 #### Features
