@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.1 / 2020-05-26
+
+#### Documentation
+
+* Cover exception changes in the migration guide
+
 ### 1.1.0 / 2020-05-20
 
 #### Features
