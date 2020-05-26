@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "google/cloud/translate/v2"
+require "minitest/focus"
 
 module Google
   module Cloud
