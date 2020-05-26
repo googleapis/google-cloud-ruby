@@ -723,8 +723,7 @@ module Google
         #         that wraps the same "ID" : "<id_value>" but here followed by
         #         exactly one
         #
-        # [`google.rpc.Status`](https:
-        # //github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
+        # [`google.rpc.Status`](https://github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
         #         containing only `code` and `message`fields.
         #
         #  *  For Image Object Detection:
@@ -745,8 +744,7 @@ module Google
         #         that wraps the same "ID" : "<id_value>" but here followed by
         #         exactly one
         #
-        # [`google.rpc.Status`](https:
-        # //github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
+        # [`google.rpc.Status`](https://github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
         #         containing only `code` and `message`fields.
         #  *  For Video Classification:
         #         In the created directory a video_classification.csv file, and a .JSON
@@ -820,8 +818,7 @@ module Google
         #         proto that wraps input text snippet or input text file followed by
         #         exactly one
         #
-        # [`google.rpc.Status`](https:
-        # //github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
+        # [`google.rpc.Status`](https://github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
         #         containing only `code` and `message`.
         #
         #  *  For Text Sentiment:
@@ -844,8 +841,7 @@ module Google
         #         proto that wraps input text snippet or input text file followed by
         #         exactly one
         #
-        # [`google.rpc.Status`](https:
-        # //github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
+        # [`google.rpc.Status`](https://github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
         #         containing only `code` and `message`.
         #
         #   *  For Text Extraction:
@@ -880,8 +876,7 @@ module Google
         #         or the document proto (in case of document) but here followed by
         #         exactly one
         #
-        # [`google.rpc.Status`](https:
-        # //github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
+        # [`google.rpc.Status`](https://github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
         #         containing only `code` and `message`.
         #
         #  *  For Tables:
@@ -933,8 +928,7 @@ module Google
         #             will have analogous format as `tables_*.csv`, but always with a
         #             single target column having
         #
-        # [`google.rpc.Status`](https:
-        # //github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
+        # [`google.rpc.Status`](https://github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
         #             represented as a JSON string, and containing only `code` and
         #             `message`.
         #         BigQuery case:
@@ -972,8 +966,7 @@ module Google
         # {::Google::Cloud::AutoML::V1beta1::ColumnSpec#display_name display_name}>",
         #           and as a value has
         #
-        # [`google.rpc.Status`](https:
-        # //github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
+        # [`google.rpc.Status`](https://github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
         #           represented as a STRUCT, and containing only `code` and `message`.
         # @!attribute [rw] gcs_destination
         #   @return [::Google::Cloud::AutoML::V1beta1::GcsDestination]
