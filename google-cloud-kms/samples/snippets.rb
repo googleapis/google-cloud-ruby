@@ -26,10 +26,10 @@ def create_key_asymmetric_decrypt project_id:, location_id:, key_ring_id:, id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the parent key ring name.
-  key_ring_name = client.key_ring_path project_id, location_id, key_ring_id
+  key_ring_name = client.key_ring_path project: project_id, location: location_id, key_ring: key_ring_id
 
   # Build the key.
   key = {
@@ -40,7 +40,7 @@ def create_key_asymmetric_decrypt project_id:, location_id:, key_ring_id:, id:
   }
 
   # Call the API.
-  created_key = client.create_crypto_key key_ring_name, id, key
+  created_key = client.create_crypto_key parent: key_ring_name, crypto_key_id: id, crypto_key: key
   puts "Created asymmetric decryption key: #{created_key.name}"
   # [END kms_create_key_asymmetric_decrypt]
 
@@ -59,10 +59,10 @@ def create_key_asymmetric_sign project_id:, location_id:, key_ring_id:, id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the parent key ring name.
-  key_ring_name = client.key_ring_path project_id, location_id, key_ring_id
+  key_ring_name = client.key_ring_path project: project_id, location: location_id, key_ring: key_ring_id
 
   # Build the key.
   key = {
@@ -73,7 +73,7 @@ def create_key_asymmetric_sign project_id:, location_id:, key_ring_id:, id:
   }
 
   # Call the API.
-  created_key = client.create_crypto_key key_ring_name, id, key
+  created_key = client.create_crypto_key parent: key_ring_name, crypto_key_id: id, crypto_key: key
   puts "Created asymmetric signing key: #{created_key.name}"
   # [END kms_create_key_asymmetric_sign]
 
@@ -92,10 +92,10 @@ def create_key_hsm project_id:, location_id:, key_ring_id:, id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the parent key ring name.
-  key_ring_name = client.key_ring_path project_id, location_id, key_ring_id
+  key_ring_name = client.key_ring_path project: project_id, location: location_id, key_ring: key_ring_id
 
   # Build the key.
   key = {
@@ -107,7 +107,7 @@ def create_key_hsm project_id:, location_id:, key_ring_id:, id:
   }
 
   # Call the API.
-  created_key = client.create_crypto_key key_ring_name, id, key
+  created_key = client.create_crypto_key parent: key_ring_name, crypto_key_id: id, crypto_key: key
   puts "Created hsm key: #{created_key.name}"
   # [END kms_create_key_hsm]
 
@@ -126,10 +126,10 @@ def create_key_labels project_id:, location_id:, key_ring_id:, id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the parent key ring name.
-  key_ring_name = client.key_ring_path project_id, location_id, key_ring_id
+  key_ring_name = client.key_ring_path project: project_id, location: location_id, key_ring: key_ring_id
 
   # Build the key.
   key = {
@@ -144,7 +144,7 @@ def create_key_labels project_id:, location_id:, key_ring_id:, id:
   }
 
   # Call the API.
-  created_key = client.create_crypto_key key_ring_name, id, key
+  created_key = client.create_crypto_key parent: key_ring_name, crypto_key_id: id, crypto_key: key
   puts "Created labeled key: #{created_key.name}"
   # [END kms_create_key_labels]
 
@@ -162,16 +162,16 @@ def create_key_ring project_id:, location_id:, id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the parent location name.
-  location_name = client.location_path project_id, location_id
+  location_name = client.location_path project: project_id, location: location_id
 
   # Build the key ring.
   key_ring = {}
 
   # Call the API.
-  created_key_ring = client.create_key_ring location_name, id, key_ring
+  created_key_ring = client.create_key_ring parent: location_name, key_ring_id: id, key_ring: key_ring
   puts "Created key ring: #{created_key_ring.name}"
   # [END kms_create_key_ring]
 
@@ -190,10 +190,10 @@ def create_key_rotation_schedule project_id:, location_id:, key_ring_id:, id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the parent key ring name.
-  key_ring_name = client.key_ring_path project_id, location_id, key_ring_id
+  key_ring_name = client.key_ring_path project: project_id, location: location_id, key_ring: key_ring_id
 
   # Build the key.
   key = {
@@ -214,7 +214,7 @@ def create_key_rotation_schedule project_id:, location_id:, key_ring_id:, id:
   }
 
   # Call the API.
-  created_key = client.create_crypto_key key_ring_name, id, key
+  created_key = client.create_crypto_key parent: key_ring_name, crypto_key_id: id, crypto_key: key
   puts "Created rotating key: #{created_key.name}"
   # [END kms_create_key_rotation_schedule]
 
@@ -233,10 +233,10 @@ def create_key_symmetric_encrypt_decrypt project_id:, location_id:, key_ring_id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the parent key ring name.
-  key_ring_name = client.key_ring_path project_id, location_id, key_ring_id
+  key_ring_name = client.key_ring_path project: project_id, location: location_id, key_ring: key_ring_id
 
   # Build the key.
   key = {
@@ -247,7 +247,7 @@ def create_key_symmetric_encrypt_decrypt project_id:, location_id:, key_ring_id:
   }
 
   # Call the API.
-  created_key = client.create_crypto_key key_ring_name, id, key
+  created_key = client.create_crypto_key parent: key_ring_name, crypto_key_id: id, crypto_key: key
   puts "Created symmetric key: #{created_key.name}"
   # [END kms_create_key_symmetric_encrypt_decrypt]
 
@@ -266,16 +266,19 @@ def create_key_version project_id:, location_id:, key_ring_id:, key_id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the parent key name.
-  key_name = client.crypto_key_path project_id, location_id, key_ring_id, key_id
+  key_name = client.crypto_key_path project:    project_id,
+                                    location:   location_id,
+                                    key_ring:   key_ring_id,
+                                    crypto_key: key_id
 
   # Build the version.
   version = {}
 
   # Call the API.
-  created_version = client.create_crypto_key_version key_name, version
+  created_version = client.create_crypto_key_version parent: key_name, crypto_key_version: version
   puts "Created key version: #{created_version.name}"
   # [END kms_create_key_version]
 
@@ -296,10 +299,14 @@ def decrypt_asymmetric project_id:, location_id:, key_ring_id:, key_id:, version
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the key version name.
-  key_version_name = client.crypto_key_version_path project_id, location_id, key_ring_id, key_id, version_id
+  key_version_name = client.crypto_key_version_path project:            project_id,
+                                                    location:           location_id,
+                                                    key_ring:           key_ring_id,
+                                                    crypto_key:         key_id,
+                                                    crypto_key_version: version_id
 
   # Call the API.
   response = client.asymmetric_decrypt key_version_name, ciphertext
@@ -322,13 +329,16 @@ def decrypt_symmetric project_id:, location_id:, key_ring_id:, key_id:, cipherte
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
-  # Build the key name.
-  key_name = client.crypto_key_path project_id, location_id, key_ring_id, key_id
+  # Build the parent key name.
+  key_name = client.crypto_key_path project:    project_id,
+                                    location:   location_id,
+                                    key_ring:   key_ring_id,
+                                    crypto_key: key_id
 
   # Call the API.
-  response = client.decrypt key_name, ciphertext
+  response = client.decrypt name: key_name, ciphertext: ciphertext
   puts "Plaintext: #{response.plaintext}"
   # [END kms_decrypt_symmetric]
 
@@ -348,13 +358,17 @@ def destroy_key_version project_id:, location_id:, key_ring_id:, key_id:, versio
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the key version name.
-  key_version_name = client.crypto_key_version_path project_id, location_id, key_ring_id, key_id, version_id
+  key_version_name = client.crypto_key_version_path project:            project_id,
+                                                    location:           location_id,
+                                                    key_ring:           key_ring_id,
+                                                    crypto_key:         key_id,
+                                                    crypto_key_version: version_id
 
   # Call the API.
-  destroyed_version = client.destroy_crypto_key_version key_version_name
+  destroyed_version = client.destroy_crypto_key_version name: key_version_name
   puts "Destroyed key version: #{destroyed_version.name}"
   # [END kms_destroy_key_version]
 
@@ -374,10 +388,14 @@ def disable_key_version project_id:, location_id:, key_ring_id:, key_id:, versio
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the key version name.
-  key_version_name = client.crypto_key_version_path project_id, location_id, key_ring_id, key_id, version_id
+  key_version_name = client.crypto_key_version_path project:            project_id,
+                                                    location:           location_id,
+                                                    key_ring:           key_ring_id,
+                                                    crypto_key:         key_id,
+                                                    crypto_key_version: version_id
 
   # Create the updated version.
   version = {
@@ -389,7 +407,7 @@ def disable_key_version project_id:, location_id:, key_ring_id:, key_id:, versio
   update_mask = { paths: ["state"] }
 
   # Call the API.
-  disabled_version = client.update_crypto_key_version version, update_mask
+  disabled_version = client.update_crypto_key_version crypto_key_version: version, update_mask: update_mask
   puts "Disabled key version: #{disabled_version.name}"
   # [END kms_disable_key_version]
 
@@ -409,10 +427,14 @@ def enable_key_version project_id:, location_id:, key_ring_id:, key_id:, version
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the key version name.
-  key_version_name = client.crypto_key_version_path project_id, location_id, key_ring_id, key_id, version_id
+  key_version_name = client.crypto_key_version_path project:            project_id,
+                                                    location:           location_id,
+                                                    key_ring:           key_ring_id,
+                                                    crypto_key:         key_id,
+                                                    crypto_key_version: version_id
 
   # Create the updated version.
   version = {
@@ -424,7 +446,7 @@ def enable_key_version project_id:, location_id:, key_ring_id:, key_id:, version
   update_mask = { paths: ["state"] }
 
   # Call the API.
-  enabled_version = client.update_crypto_key_version version, update_mask
+  enabled_version = client.update_crypto_key_version crypto_key_version: version, update_mask: update_mask
   puts "Enabled key version: #{enabled_version.name}"
   # [END kms_enable_key_version]
 
@@ -458,13 +480,16 @@ def encrypt_symmetric project_id:, location_id:, key_ring_id:, key_id:, plaintex
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
-  # Build the key name.
-  key_name = client.crypto_key_path project_id, location_id, key_ring_id, key_id
+  # Build the parent key name.
+  key_name = client.crypto_key_path project:    project_id,
+                                    location:   location_id,
+                                    key_ring:   key_ring_id,
+                                    crypto_key: key_id
 
   # Call the API.
-  response = client.encrypt key_name, plaintext
+  response = client.encrypt name: key_name, plaintext: plaintext
   puts "Ciphertext: #{Base64.strict_encode64 response.ciphertext}"
   # [END kms_encrypt_symmetric]
 
@@ -483,13 +508,16 @@ def get_key_labels project_id:, location_id:, key_ring_id:, key_id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
-  # Build the key name.
-  key_name = client.crypto_key_path project_id, location_id, key_ring_id, key_id
+  # Build the parent key name.
+  key_name = client.crypto_key_path project:    project_id,
+                                    location:   location_id,
+                                    key_ring:   key_ring_id,
+                                    crypto_key: key_id
 
   # Call the API.
-  key = client.get_crypto_key key_name
+  key = client.get_crypto_key name: key_name
 
   # Example of iterating over labels.
   key.labels.each do |k, v|
@@ -513,13 +541,17 @@ def get_key_version_attestation project_id:, location_id:, key_ring_id:, key_id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the key version name.
-  key_version_name = client.crypto_key_version_path project_id, location_id, key_ring_id, key_id, version_id
+  key_version_name = client.crypto_key_version_path project:            project_id,
+                                                    location:           location_id,
+                                                    key_ring:           key_ring_id,
+                                                    crypto_key:         key_id,
+                                                    crypto_key_version: version_id
 
   # Call the API.
-  version = client.get_crypto_key_version key_version_name
+  version = client.get_crypto_key_version name: key_version_name
 
   # Only HSM keys have an attestation. For other key types, the attestion will
   # be nil.
@@ -547,13 +579,17 @@ def get_public_key project_id:, location_id:, key_ring_id:, key_id:, version_id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the key version name.
-  key_version_name = client.crypto_key_version_path project_id, location_id, key_ring_id, key_id, version_id
+  key_version_name = client.crypto_key_version_path project:            project_id,
+                                                    location:           location_id,
+                                                    key_ring:           key_ring_id,
+                                                    crypto_key:         key_id,
+                                                    crypto_key_version: version_id
 
   # Call the API.
-  public_key = client.get_public_key key_version_name
+  public_key = client.get_public_key name: key_version_name
   puts "Public key: #{public_key.pem}"
   # [END kms_get_public_key]
 
@@ -573,16 +609,22 @@ def iam_add_member project_id:, location_id:, key_ring_id:, key_id:, member:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the resource name.
-  resource_name = client.crypto_key_path project_id, location_id, key_ring_id, key_id
+  resource_name = client.crypto_key_path project:    project_id,
+                                         location:   location_id,
+                                         key_ring:   key_ring_id,
+                                         crypto_key: key_id
 
   # The resource name could also be a key ring.
-  # resource_name = client.key_ring_path(project_id, location_id, key_ring_id)
+  # resource_name = client.key_ring_path project: project_id, location: location_id, key_ring: key_ring_id
+
+  # Create the IAM client.
+  iam_client = Google::Cloud::Kms::V1::IAMPolicy::Client.new
 
   # Get the current IAM policy.
-  policy = client.get_iam_policy resource_name
+  policy = iam_client.get_iam_policy resource: resource_name
 
   # Add the member to the policy.
   policy.bindings << Google::Iam::V1::Binding.new(
@@ -591,7 +633,7 @@ def iam_add_member project_id:, location_id:, key_ring_id:, key_id:, member:
   )
 
   # Save the updated policy.
-  updated_policy = client.set_iam_policy resource_name, policy
+  updated_policy = iam_client.set_iam_policy resource: resource_name, policy: policy
   puts "Added #{member}"
   # [END kms_iam_add_member]
 
@@ -610,16 +652,22 @@ def iam_get_policy project_id:, location_id:, key_ring_id:, key_id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the resource name.
-  resource_name = client.crypto_key_path project_id, location_id, key_ring_id, key_id
+  resource_name = client.crypto_key_path project:    project_id,
+                                         location:   location_id,
+                                         key_ring:   key_ring_id,
+                                         crypto_key: key_id
 
   # The resource name could also be a key ring.
-  # resource_name = client.key_ring_path(project_id, location_id, key_ring_id)
+  # resource_name = client.key_ring_path project: project_id, location: location_id, key_ring: key_ring_id
+
+  # Create the IAM client.
+  iam_client = Google::Cloud::Kms::V1::IAMPolicy::Client.new
 
   # Get the current IAM policy.
-  policy = client.get_iam_policy resource_name
+  policy = iam_client.get_iam_policy resource: resource_name
 
   # Print the policy.
   puts "Policy for #{resource_name}"
@@ -646,16 +694,22 @@ def iam_remove_member project_id:, location_id:, key_ring_id:, key_id:, member:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the resource name.
-  resource_name = client.crypto_key_path project_id, location_id, key_ring_id, key_id
+  resource_name = client.crypto_key_path project:    project_id,
+                                         location:   location_id,
+                                         key_ring:   key_ring_id,
+                                         crypto_key: key_id
 
   # The resource name could also be a key ring.
-  # resource_name = client.key_ring_path(project_id, location_id, key_ring_id)
+  # resource_name = client.key_ring_path project: project_id, location: location_id, key_ring: key_ring_id
+
+  # Create the IAM client.
+  iam_client = Google::Cloud::Kms::V1::IAMPolicy::Client.new
 
   # Get the current IAM policy.
-  policy = client.get_iam_policy resource_name
+  policy = iam_client.get_iam_policy resource: resource_name
 
   # Remove the member from the current bindings
   policy.bindings.each do |bind|
@@ -665,7 +719,7 @@ def iam_remove_member project_id:, location_id:, key_ring_id:, key_id:, member:
   end
 
   # Save the updated policy.
-  updated_policy = client.set_iam_policy resource_name, policy
+  updated_policy = iam_client.set_iam_policy resource: resource_name, policy: policy
   puts "Removed #{member}"
   # [END kms_iam_remove_member]
 
@@ -682,13 +736,13 @@ def quickstart project_id:, location_id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the parent location name.
-  location_name = client.location_path project_id, location_id
+  location_name = client.location_path project: project_id, location: location_id
 
   # Call the API.
-  key_rings = client.list_key_rings location_name
+  key_rings = client.list_key_rings parent: location_name
 
   # Example of iterating over key rings.
   puts "Key rings in #{location_name}"
@@ -713,13 +767,17 @@ def restore_key_version project_id:, location_id:, key_ring_id:, key_id:, versio
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the key version name.
-  key_version_name = client.crypto_key_version_path project_id, location_id, key_ring_id, key_id, version_id
+  key_version_name = client.crypto_key_version_path project:            project_id,
+                                                    location:           location_id,
+                                                    key_ring:           key_ring_id,
+                                                    crypto_key:         key_id,
+                                                    crypto_key_version: version_id
 
   # Call the API.
-  restored_version = client.restore_crypto_key_version key_version_name
+  restored_version = client.restore_crypto_key_version name: key_version_name
   puts "Restored key version: #{restored_version.name}"
   # [END kms_restore_key_version]
 
@@ -743,10 +801,14 @@ def sign_asymmetric project_id:, location_id:, key_ring_id:, key_id:, version_id
   require "digest"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the key version name.
-  key_version_name = client.crypto_key_version_path project_id, location_id, key_ring_id, key_id, version_id
+  key_version_name = client.crypto_key_version_path project:            project_id,
+                                                    location:           location_id,
+                                                    key_ring:           key_ring_id,
+                                                    crypto_key:         key_id,
+                                                    crypto_key_version: version_id
 
   # Calculate the hash.
   #
@@ -755,7 +817,7 @@ def sign_asymmetric project_id:, location_id:, key_ring_id:, key_id:, version_id
   digest = { sha256: Digest::SHA256.digest(message) }
 
   # Call the API.
-  sign_response = client.asymmetric_sign key_version_name, digest
+  sign_response = client.asymmetric_sign name: key_version_name, digest: digest
   puts "Signature: #{Base64.strict_encode64 sign_response.signature}"
   # [END kms_sign_asymmetric]
 
@@ -774,10 +836,13 @@ def update_key_add_rotation project_id:, location_id:, key_ring_id:, key_id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
-  # Build the key name.
-  key_name = client.crypto_key_path project_id, location_id, key_ring_id, key_id
+  # Build the parent key name.
+  key_name = client.crypto_key_path project:    project_id,
+                                    location:   location_id,
+                                    key_ring:   key_ring_id,
+                                    crypto_key: key_id
 
   # Build the key.
   key = {
@@ -798,7 +863,7 @@ def update_key_add_rotation project_id:, location_id:, key_ring_id:, key_id:
   update_mask = { paths: ["rotation_period", "next_rotation_time"] }
 
   # Call the API.
-  updated_key = client.update_crypto_key key, update_mask
+  updated_key = client.update_crypto_key crypto_key: key, update_mask: update_mask
   puts "Updated key: #{updated_key.name}"
   # [END kms_update_key_add_rotation_schedule]
 
@@ -817,10 +882,13 @@ def update_key_remove_labels project_id:, location_id:, key_ring_id:, key_id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
-  # Build the key name.
-  key_name = client.crypto_key_path project_id, location_id, key_ring_id, key_id
+  # Build the parent key name.
+  key_name = client.crypto_key_path project:    project_id,
+                                    location:   location_id,
+                                    key_ring:   key_ring_id,
+                                    crypto_key: key_id
 
   # Build the key.
   key = {
@@ -832,7 +900,7 @@ def update_key_remove_labels project_id:, location_id:, key_ring_id:, key_id:
   update_mask = { paths: ["labels"] }
 
   # Call the API.
-  updated_key = client.update_crypto_key key, update_mask
+  updated_key = client.update_crypto_key crypto_key: key, update_mask: update_mask
   puts "Updated key: #{updated_key.name}"
   # [END kms_update_key_remove_labels]
 
@@ -851,10 +919,13 @@ def update_key_remove_rotation project_id:, location_id:, key_ring_id:, key_id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
-  # Build the key name.
-  key_name = client.crypto_key_path project_id, location_id, key_ring_id, key_id
+  # Build the parent key name.
+  key_name = client.crypto_key_path project:    project_id,
+                                    location:   location_id,
+                                    key_ring:   key_ring_id,
+                                    crypto_key: key_id
 
   # Build the key.
   key = {
@@ -867,7 +938,7 @@ def update_key_remove_rotation project_id:, location_id:, key_ring_id:, key_id:
   update_mask = { paths: ["rotation_period", "next_rotation_time"] }
 
   # Call the API.
-  updated_key = client.update_crypto_key key, update_mask
+  updated_key = client.update_crypto_key crypto_key: key, update_mask: update_mask
   puts "Updated key: #{updated_key.name}"
   # [END kms_update_key_remove_rotation_schedule]
 
@@ -887,13 +958,16 @@ def update_key_set_primary project_id:, location_id:, key_ring_id:, key_id:, ver
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
-  # Build the key name.
-  key_name = client.crypto_key_path project_id, location_id, key_ring_id, key_id
+  # Build the parent key name.
+  key_name = client.crypto_key_path project:    project_id,
+                                    location:   location_id,
+                                    key_ring:   key_ring_id,
+                                    crypto_key: key_id
 
   # Call the API.
-  updated_key = client.update_crypto_key_primary_version key_name, version_id
+  updated_key = client.update_crypto_key_primary_version name: key_name, crypto_key_version_id: version_id
   puts "Updated primary #{updated_key.name} to #{version_id}"
   # [END kms_update_key_set_primary]
 
@@ -912,10 +986,13 @@ def update_key_update_labels project_id:, location_id:, key_ring_id:, key_id:
   require "google/cloud/kms"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
-  # Build the key name.
-  key_name = client.crypto_key_path project_id, location_id, key_ring_id, key_id
+  # Build the parent key name.
+  key_name = client.crypto_key_path project:    project_id,
+                                    location:   location_id,
+                                    key_ring:   key_ring_id,
+                                    crypto_key: key_id
 
   # Build the key.
   key = {
@@ -929,7 +1006,7 @@ def update_key_update_labels project_id:, location_id:, key_ring_id:, key_id:
   update_mask = { paths: ["labels"] }
 
   # Call the API.
-  updated_key = client.update_crypto_key key, update_mask
+  updated_key = client.update_crypto_key crypto_key: key, update_mask: update_mask
   puts "Updated key: #{updated_key.name}"
   # [END kms_update_key_update_labels]
 
@@ -952,13 +1029,17 @@ def verify_asymmetric_signature_ec project_id:, location_id:, key_ring_id:, key_
   require "openssl"
 
   # Create the client.
-  client = Google::Cloud::Kms.new
+  client = Google::Cloud::Kms.key_management_service
 
   # Build the key version name.
-  key_version_name = client.crypto_key_version_path project_id, location_id, key_ring_id, key_id, version_id
+  key_version_name = client.crypto_key_version_path project:            project_id,
+                                                    location:           location_id,
+                                                    key_ring:           key_ring_id,
+                                                    crypto_key:         key_id,
+                                                    crypto_key_version: version_id
 
   # Get the public key.
-  public_key = client.get_public_key key_version_name
+  public_key = client.get_public_key name: key_version_name
 
   # Parse the public key.
   ec_key = OpenSSL::PKey::EC.new public_key.pem
@@ -989,13 +1070,17 @@ if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("2.5.0")
     require "openssl"
 
     # Create the client.
-    client = Google::Cloud::Kms.new
+    client = Google::Cloud::Kms.key_management_service
 
     # Build the key version name.
-    key_version_name = client.crypto_key_version_path project_id, location_id, key_ring_id, key_id, version_id
+    key_version_name = client.crypto_key_version_path project:            project_id,
+                                                      location:           location_id,
+                                                      key_ring:           key_ring_id,
+                                                      crypto_key:         key_id,
+                                                      crypto_key_version: version_id
 
     # Get the public key.
-    public_key = client.get_public_key key_version_name
+    public_key = client.get_public_key name: key_version_name
 
     # Parse the public key.
     rsa_key = OpenSSL::PKey::RSA.new public_key.pem

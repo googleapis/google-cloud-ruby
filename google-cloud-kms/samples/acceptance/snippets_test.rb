@@ -24,61 +24,76 @@ require_relative "../snippets"
 describe "Cloud KMS samples" do
   let(:rotation_period_seconds) { 60 * 60 * 24 * 30 }
   before :all do
-    @client      = Google::Cloud::Kms.new
+    @client      = Google::Cloud::Kms.key_management_service
     @project_id  = ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT")
     @location_id = "us-east1"
 
     @key_ring_id = SecureRandom.uuid
-    location_name = @client.location_path @project_id, @location_id
-    @client.create_key_ring location_name, @key_ring_id, {}
-    @key_ring_name = @client.key_ring_path @project_id, @location_id, @key_ring_id
+    location_name = @client.location_path project: @project_id, location: @location_id
+    @client.create_key_ring parent: location_name, key_ring_id: @key_ring_id, key_ring: {}
+    @key_ring_name = @client.key_ring_path project: @project_id, location: @location_id, key_ring: @key_ring_id
 
 
     @asymmetric_sign_ec_key_id = SecureRandom.uuid
-    @client.create_crypto_key(@key_ring_name, @asymmetric_sign_ec_key_id,
-                              purpose:          :ASYMMETRIC_SIGN,
-                              version_template: {
-                                algorithm: :EC_SIGN_P256_SHA256
-                              },
-                              labels:           { "foo" => "bar", "zip" => "zap" })
+    @client.create_crypto_key parent:        @key_ring_name,
+                              crypto_key_id: @asymmetric_sign_ec_key_id,
+                              crypto_key:    {
+                                purpose:          :ASYMMETRIC_SIGN,
+                                version_template: {
+                                  algorithm: :EC_SIGN_P256_SHA256
+                                },
+                                labels:           { "foo" => "bar", "zip" => "zap" }
+                              }
 
     @asymmetric_sign_rsa_key_id = SecureRandom.uuid
-    @client.create_crypto_key(@key_ring_name, @asymmetric_sign_rsa_key_id,
-                              purpose:          :ASYMMETRIC_SIGN,
-                              version_template: {
-                                algorithm: :RSA_SIGN_PSS_2048_SHA256
-                              },
-                              labels:           { "foo" => "bar", "zip" => "zap" })
+    @client.create_crypto_key parent:        @key_ring_name,
+                              crypto_key_id: @asymmetric_sign_rsa_key_id,
+                              crypto_key:    {
+                                purpose:          :ASYMMETRIC_SIGN,
+                                version_template: {
+                                  algorithm: :RSA_SIGN_PSS_2048_SHA256
+                                },
+                                labels:           { "foo" => "bar", "zip" => "zap" }
+                              }
 
 
     @symmetric_key_id = SecureRandom.uuid
-    @client.create_crypto_key(@key_ring_name, @symmetric_key_id,
-                              purpose:          :ENCRYPT_DECRYPT,
-                              version_template: {
-                                algorithm: :GOOGLE_SYMMETRIC_ENCRYPTION
-                              },
-                              labels:           { "foo" => "bar", "zip" => "zap" })
+    @client.create_crypto_key parent:        @key_ring_name,
+                              crypto_key_id: @symmetric_key_id,
+                              crypto_key:    {
+                                purpose:          :ENCRYPT_DECRYPT,
+                                version_template: {
+                                  algorithm: :GOOGLE_SYMMETRIC_ENCRYPTION
+                                },
+                                labels:           { "foo" => "bar", "zip" => "zap" }
+                              }
 
     @hsm_key_id = SecureRandom.uuid
-    @client.create_crypto_key(@key_ring_name, @hsm_key_id,
-                              purpose:          :ENCRYPT_DECRYPT,
-                              version_template: {
-                                algorithm:        :GOOGLE_SYMMETRIC_ENCRYPTION,
-                                protection_level: "HSM"
-                              },
-                              labels:           { "foo" => "bar", "zip" => "zap" })
+    @client.create_crypto_key parent:        @key_ring_name,
+                              crypto_key_id: @hsm_key_id,
+                              crypto_key:    {
+                                purpose:          :ENCRYPT_DECRYPT,
+                                version_template: {
+                                  algorithm:        :GOOGLE_SYMMETRIC_ENCRYPTION,
+                                  protection_level: "HSM"
+                                },
+                                labels:           { "foo" => "bar", "zip" => "zap" }
+                              }
 
     @asymmetric_decrypt_key_id = SecureRandom.uuid
-    @client.create_crypto_key(@key_ring_name, @asymmetric_decrypt_key_id,
-                              purpose:          :ASYMMETRIC_DECRYPT,
-                              version_template: {
-                                algorithm: :RSA_DECRYPT_OAEP_2048_SHA256
-                              },
-                              labels:           { "foo" => "bar", "zip" => "zap" })
+    @client.create_crypto_key parent:        @key_ring_name,
+                              crypto_key_id: @asymmetric_decrypt_key_id,
+                              crypto_key:    {
+                                purpose:          :ASYMMETRIC_DECRYPT,
+                                version_template: {
+                                  algorithm: :RSA_DECRYPT_OAEP_2048_SHA256
+                                },
+                                labels:           { "foo" => "bar", "zip" => "zap" }
+                              }
   end
 
   after :all do
-    @client.list_crypto_keys(@key_ring_name).each do |key|
+    @client.list_crypto_keys(parent: @key_ring_name).each do |key|
       if key.rotation_period || key.next_rotation_time
         updated_key = {
           name:               key.name,
@@ -86,12 +101,12 @@ describe "Cloud KMS samples" do
           next_rotation_time: nil
         }
         update_mask = { paths: ["rotation_period", "next_rotation_time"] }
-        @client.update_crypto_key updated_key, update_mask
+        @client.update_crypto_key crypto_key: updated_key, update_mask: update_mask
       end
 
       filter = "state != DESTROYED AND state != DESTROY_SCHEDULED"
-      @client.list_crypto_key_versions(key.name, filter: filter).each do |version|
-        @client.destroy_crypto_key_version version.name
+      @client.list_crypto_key_versions(parent: key.name, filter: filter).each do |version|
+        @client.destroy_crypto_key_version name: version.name
       end
     end
   end
@@ -235,8 +250,11 @@ describe "Cloud KMS samples" do
   it "decrypt_symmetric" do
     plaintext = "my message"
 
-    key_name = @client.crypto_key_path @project_id, @location_id, @key_ring_id, @symmetric_key_id
-    encrypt_response = @client.encrypt key_name, plaintext
+    key_name = @client.crypto_key_path project:    @project_id,
+                                       location:   @location_id,
+                                       key_ring:   @key_ring_id,
+                                       crypto_key: @symmetric_key_id
+    encrypt_response = @client.encrypt name: key_name, plaintext: plaintext
     ciphertext = encrypt_response.ciphertext
 
     out = capture_io do
@@ -255,8 +273,11 @@ describe "Cloud KMS samples" do
   end
 
   it " destroy|restore)_key_version" do
-    key_name = @client.crypto_key_path @project_id, @location_id, @key_ring_id, @symmetric_key_id
-    version = @client.create_crypto_key_version key_name, {}
+    key_name = @client.crypto_key_path project:    @project_id,
+                                       location:   @location_id,
+                                       key_ring:   @key_ring_id,
+                                       crypto_key: @symmetric_key_id
+    version = @client.create_crypto_key_version parent: key_name, crypto_key_version: {}
     version_id = version.name.split("/").last
 
     out = capture_io do
@@ -289,8 +310,11 @@ describe "Cloud KMS samples" do
   end
 
   it "(disable|enable)_key_version" do
-    key_name = @client.crypto_key_path @project_id, @location_id, @key_ring_id, @symmetric_key_id
-    version = @client.create_crypto_key_version key_name, {}
+    key_name = @client.crypto_key_path project:    @project_id,
+                                       location:   @location_id,
+                                       key_ring:   @key_ring_id,
+                                       crypto_key: @symmetric_key_id
+    version = @client.create_crypto_key_version parent: key_name, crypto_key_version: {}
     version_id = version.name.split("/").last
 
     out = capture_io do
@@ -345,8 +369,11 @@ describe "Cloud KMS samples" do
     end
     assert_match(/Ciphertext/, out.first)
 
-    key_name = @client.crypto_key_path @project_id, @location_id, @key_ring_id, @symmetric_key_id
-    decrypt_response = @client.decrypt key_name, ciphertext
+    key_name = @client.crypto_key_path project:    @project_id,
+                                       location:   @location_id,
+                                       key_ring:   @key_ring_id,
+                                       crypto_key: @symmetric_key_id
+    decrypt_response = @client.decrypt name: key_name, ciphertext: ciphertext
     assert_equal plaintext, decrypt_response.plaintext
   end
 
@@ -567,13 +594,15 @@ describe "Cloud KMS samples" do
 
   it "verify_asymmetric_signature_ec" do
     message = "my message"
-    key_version_name = @client.crypto_key_version_path @project_id,
-                                                       @location_id,
-                                                       @key_ring_id,
-                                                       @asymmetric_sign_ec_key_id,
-                                                       "1"
-    sign_response = @client.asymmetric_sign(key_version_name,
-                                            sha256: Digest::SHA256.digest(message))
+    key_version_name = @client.crypto_key_version_path project:            @project_id,
+                                                       location:           @location_id,
+                                                       key_ring:           @key_ring_id,
+                                                       crypto_key:         @asymmetric_sign_ec_key_id,
+                                                       crypto_key_version: "1"
+    sign_response = @client.asymmetric_sign name:   key_version_name,
+                                            digest: {
+                                              sha256: Digest::SHA256.digest(message)
+                                            }
 
     out = capture_io do
       verified = verify_asymmetric_signature_ec(
@@ -594,13 +623,15 @@ describe "Cloud KMS samples" do
   if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("2.5.0")
     it "verify_asymmetric_signature_rsa" do
       message = "my message"
-      key_version_name = @client.crypto_key_version_path @project_id,
-                                                         @location_id,
-                                                         @key_ring_id,
-                                                         @asymmetric_sign_rsa_key_id,
-                                                         "1"
-      sign_response = @client.asymmetric_sign(key_version_name,
-                                              sha256: Digest::SHA256.digest(message))
+      key_version_name = @client.crypto_key_version_path project:            @project_id,
+                                                         location:           @location_id,
+                                                         key_ring:           @key_ring_id,
+                                                         crypto_key:         @asymmetric_sign_rsa_key_id,
+                                                         crypto_key_version: "1"
+      sign_response = @client.asymmetric_sign name:   key_version_name,
+                                              digest: {
+                                                sha256: Digest::SHA256.digest(message)
+                                              }
 
       out = capture_io do
         verified = verify_asymmetric_signature_rsa(
