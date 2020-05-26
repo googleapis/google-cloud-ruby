@@ -818,6 +818,7 @@ google-cloud-scheduler:
 - v0.2.0
 - v0.1.0
 google-cloud-scheduler-v1:
+- v0.2.1
 - v0.2.0
 google-cloud-scheduler-v1beta1:
 - v0.2.0
