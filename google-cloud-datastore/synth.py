@@ -88,3 +88,10 @@ s.replace(
     'Gem.loaded_specs\[.*\]\.version\.version',
     'Google::Cloud::Datastore::VERSION'
 )
+
+# Fix a broken upstream link
+s.replace(
+    "lib/google/cloud/datastore/v1/doc/google/protobuf/timestamp.rb",
+    "/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString]",
+    "/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)"
+)
