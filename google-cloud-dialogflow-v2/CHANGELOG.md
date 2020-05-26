@@ -1,5 +1,12 @@
 # Release History
 
+### 0.6.1 / 2020-05-26
+
+#### Bug Fixes
+
+* Removed unused google/cloud/common_resources_pb file
+* The long-running operations client honors the quota_project config
+
 ### 0.6.0 / 2020-05-20
 
 #### Features
