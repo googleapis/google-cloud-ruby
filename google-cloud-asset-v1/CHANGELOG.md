@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.2 / 2020-05-27
+
+#### Documentation
+
+* Properly format some literal strings
+
 ### 0.4.1 / 2020-05-26
 
 #### Bug Fixes
