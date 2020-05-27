@@ -73,6 +73,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.pubsub.v1.DeleteTopicRequest" do
     optional :topic, :string, 1
   end
+  add_message "google.pubsub.v1.DetachSubscriptionRequest" do
+    optional :subscription, :string, 1
+  end
+  add_message "google.pubsub.v1.DetachSubscriptionResponse" do
+  end
   add_message "google.pubsub.v1.Subscription" do
     optional :name, :string, 1
     optional :topic, :string, 2
@@ -228,6 +233,8 @@ module Google::Cloud::PubSub::V1
   ListTopicSnapshotsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicSnapshotsRequest").msgclass
   ListTopicSnapshotsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicSnapshotsResponse").msgclass
   DeleteTopicRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DeleteTopicRequest").msgclass
+  DetachSubscriptionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DetachSubscriptionRequest").msgclass
+  DetachSubscriptionResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DetachSubscriptionResponse").msgclass
   Subscription = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Subscription").msgclass
   RetryPolicy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.RetryPolicy").msgclass
   DeadLetterPolicy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DeadLetterPolicy").msgclass

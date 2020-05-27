@@ -336,6 +336,14 @@ module Google
                 {'resource' => request.resource}
               end
             )
+            @detach_subscription = Google::Gax.create_api_call(
+              @publisher_stub.method(:detach_subscription),
+              defaults["detach_subscription"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'subscription' => request.subscription}
+              end
+            )
           end
 
           # Service calls
@@ -572,7 +580,7 @@ module Google
             @list_topics.call(req, options, &block)
           end
 
-          # Lists the names of the subscriptions on this topic.
+          # Lists the names of the attached subscriptions on this topic.
           #
           # @param topic [String]
           #   Required. The name of the topic that subscriptions are attached to.
@@ -859,6 +867,40 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Iam::V1::TestIamPermissionsRequest)
             @test_iam_permissions.call(req, options, &block)
+          end
+
+          # Detaches a subscription from this topic. All messages retained in the
+          # subscription are dropped. Subsequent `Pull` and `StreamingPull` requests
+          # will return FAILED_PRECONDITION. If the subscription is a push
+          # subscription, pushes to the endpoint will stop.
+          #
+          # @param subscription [String]
+          #   Required. The subscription to detach.
+          #   Format is `projects/{project}/subscriptions/{subscription}`.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::PubSub::V1::DetachSubscriptionResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::PubSub::V1::DetachSubscriptionResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub"
+          #
+          #   publisher_client = Google::Cloud::PubSub::Publisher.new(version: :v1)
+          #   formatted_subscription = Google::Cloud::PubSub::V1::PublisherClient.topic_path("[PROJECT]", "[TOPIC]")
+          #   response = publisher_client.detach_subscription(formatted_subscription)
+
+          def detach_subscription \
+              subscription,
+              options: nil,
+              &block
+            req = {
+              subscription: subscription
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::PubSub::V1::DetachSubscriptionRequest)
+            @detach_subscription.call(req, options, &block)
           end
         end
       end

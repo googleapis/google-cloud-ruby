@@ -173,7 +173,7 @@ module Google
       # Response for the `ListTopicSubscriptions` method.
       # @!attribute [rw] subscriptions
       #   @return [Array<String>]
-      #     The names of the subscriptions that match the request.
+      #     The names of subscriptions attached to the topic specified in the request.
       # @!attribute [rw] next_page_token
       #   @return [String]
       #     If not empty, indicates that there may be more subscriptions that match
@@ -213,6 +213,17 @@ module Google
       #     Required. Name of the topic to delete.
       #     Format is `projects/{project}/topics/{topic}`.
       class DeleteTopicRequest; end
+
+      # Request for the DetachSubscription method.
+      # @!attribute [rw] subscription
+      #   @return [String]
+      #     Required. The subscription to detach.
+      #     Format is `projects/{project}/subscriptions/{subscription}`.
+      class DetachSubscriptionRequest; end
+
+      # Response for the DetachSubscription method.
+      # Reserved for future use.
+      class DetachSubscriptionResponse; end
 
       # A subscription resource.
       # @!attribute [rw] name
