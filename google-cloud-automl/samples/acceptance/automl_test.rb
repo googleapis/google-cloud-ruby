@@ -39,13 +39,16 @@ describe "Automl Samples" do
     # fake_model_id = "TRL0000000000000000000"
 
     it "deletes a model" do
-      # assert_raises Google::Cloud::NotFoundError do
-      #   delete_model project_id: project_id, model_id: fake_model_id
-      
-      # end
-      assert_output(/Model deleted./) do
-        delete_model project_id: project_id, model_id: model_id
+      fake_model_id = "TRL0000000000000000000"
+
+
+      # require "pry"
+      # binding.pry
+      assert_raises Google::Gax::NotFoundError, /The model does not exist/ do
+        delete_model project_id: project_id, model_id: fake_model_id
       end
+
+
     end
     
   end
