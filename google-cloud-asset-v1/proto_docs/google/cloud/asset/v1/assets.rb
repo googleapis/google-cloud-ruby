@@ -37,7 +37,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A time window specified by its "start_time" and "end_time".
+        # A time window specified by its `start_time` and `end_time`.
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Start time of the time window (exclusive).
@@ -58,14 +58,14 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The full name of the asset. For example:
-        #     "//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1"
+        #     `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`
         #
         #     See [Resource
         #     names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
         #     for more information.
         # @!attribute [rw] asset_type
         #   @return [::String]
-        #     The type of the asset. For example: "compute.googleapis.com/Disk"
+        #     The type of the asset. For example: `compute.googleapis.com/Disk`
         #
         #     See [Supported asset
         #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
@@ -114,19 +114,19 @@ module Google
         # A representation of a Google Cloud resource.
         # @!attribute [rw] version
         #   @return [::String]
-        #     The API version. For example: "v1"
+        #     The API version. For example: `v1`
         # @!attribute [rw] discovery_document_uri
         #   @return [::String]
         #     The URL of the discovery document containing the resource's JSON schema.
         #     For example:
-        #     "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest"
+        #     `https://www.googleapis.com/discovery/v1/apis/compute/v1/rest`
         #
         #     This value is unspecified for resources that do not have an API based on a
         #     discovery document, such as Cloud Bigtable.
         # @!attribute [rw] discovery_name
         #   @return [::String]
         #     The JSON schema name listed in the discovery document. For example:
-        #     "Project"
+        #     `Project`
         #
         #     This value is unspecified for resources that do not have an API based on a
         #     discovery document, such as Cloud Bigtable.
@@ -134,7 +134,7 @@ module Google
         #   @return [::String]
         #     The REST URL for accessing the resource. An HTTP `GET` request using this
         #     URL returns the resource itself. For example:
-        #     "https://cloudresourcemanager.googleapis.com/v1/projects/my-project-123"
+        #     `https://cloudresourcemanager.googleapis.com/v1/projects/my-project-123`
         #
         #     This value is unspecified for resources without a REST API.
         # @!attribute [rw] parent
@@ -148,7 +148,7 @@ module Google
         #     [Cloud IAM policy
         #     hierarchy](https://cloud.google.com/iam/docs/overview#policy_hierarchy).
         #     For example:
-        #     "//cloudresourcemanager.googleapis.com/projects/my_project_123"
+        #     `//cloudresourcemanager.googleapis.com/projects/my_project_123`
         #
         #     For third-party assets, this field may be set differently.
         # @!attribute [rw] data
@@ -168,7 +168,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The full resource name of this resource. Example:
-        #     "//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1".
+        #     `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
         #     See [Cloud Asset Inventory Resource Name
         #     Format](https://cloud.google.com/asset-inventory/docs/resource-name-format)
         #     for more information.
@@ -179,7 +179,7 @@ module Google
         #     * use a free text query. Example: `"instance1"`
         # @!attribute [rw] asset_type
         #   @return [::String]
-        #     The type of this resource. Example: "compute.googleapis.com/Disk".
+        #     The type of this resource. Example: `compute.googleapis.com/Disk`.
         #
         #     To search against the `asset_type`:
         #
@@ -211,8 +211,8 @@ module Google
         #     * use a free text query. Example: `"*important instance*"`
         # @!attribute [rw] location
         #   @return [::String]
-        #     Location can be "global", regional like "us-east1", or zonal like
-        #     "us-west1-b".
+        #     Location can be `global`, regional like `us-east1`, or zonal like
+        #     `us-west1-b`.
         #
         #     To search against the `location`:
         #
@@ -245,13 +245,13 @@ module Google
         # @!attribute [rw] additional_attributes
         #   @return [::Google::Protobuf::Struct]
         #     The additional attributes of this resource. The attributes may vary from
-        #     one resource type to another. Examples: "projectId" for Project,
-        #     "dnsName" for DNS ManagedZone.
+        #     one resource type to another. Examples: `projectId` for Project,
+        #     `dnsName` for DNS ManagedZone.
         #
         #     To search against the `additional_attributes`:
         #
         #     * use a free text query to match the attributes values. Example: to search
-        #       additional_attributes = { dnsName: "foobar" }, you can issue a query
+        #       `additional_attributes = { dnsName: "foobar" }`, you can issue a query
         #       `"foobar"`.
         class ResourceSearchResult
           include ::Google::Protobuf::MessageExts
@@ -272,7 +272,7 @@ module Google
         #   @return [::String]
         #     The full resource name of the resource associated with this IAM policy.
         #     Example:
-        #     "//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1".
+        #     `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
         #     See [Cloud Asset Inventory Resource Name
         #     Format](https://cloud.google.com/asset-inventory/docs/resource-name-format)
         #     for more information.
@@ -322,7 +322,7 @@ module Google
           #     permission query (i.e., a query containing `policy.role.permissions:`).
           #     Example: if query `policy.role.permissions : "compute.disk.get"`
           #     matches a policy binding that contains owner role, the
-          #     matched_permissions will be \\{"roles/owner": ["compute.disk.get"]}. The
+          #     matched_permissions will be `{"roles/owner": ["compute.disk.get"]}`. The
           #     roles can also be found in the returned `policy` bindings. Note that the
           #     map is populated only for requests with permission queries.
           class Explanation
@@ -332,7 +332,7 @@ module Google
             # IAM permissions
             # @!attribute [rw] permissions
             #   @return [::Array<::String>]
-            #     A list of permissions. A sample permission string: "compute.disk.get".
+            #     A list of permissions. A sample permission string: `compute.disk.get`.
             class Permissions
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
