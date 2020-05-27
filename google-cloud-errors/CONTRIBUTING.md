@@ -48,19 +48,6 @@ there is a small amount of setup:
    $ bundle exec rake bundleupdate
    ```
 
-## Console
-
-In order to run code interactively, you can automatically load
-google-cloud and its dependencies in IRB. This requires that your
-developer environment has already been configured by following the steps
-described in the {file:AUTHENTICATION.md Authentication Guide}. An IRB console
-can be created with:
-
-```sh
-$ cd google-cloud-errors/
-$ bundle exec rake console
-```
-
 ## Google Cloud Tests
 
 Tests are very important part of google-cloud. All contributions

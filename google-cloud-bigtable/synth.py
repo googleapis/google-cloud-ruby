@@ -238,3 +238,13 @@ s.replace(
     'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
     'https://googleapis.dev/ruby/google-cloud-bigtable/latest/file.AUTHENTICATION.html'
 )
+
+# Fix product links
+s.replace(
+    [
+        "lib/google/cloud/bigtable/admin/v2.rb",
+        "lib/google/cloud/bigtable/admin.rb"
+    ],
+    "https://cloud.google.com/bigtable-admin",
+    "https://cloud.google.com/bigtable/docs/reference/admin/rpc"
+)

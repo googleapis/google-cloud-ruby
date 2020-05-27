@@ -239,3 +239,13 @@ s.replace(
     '^      ##$',
     '      ##\n      # @deprecated Use Google::Cloud::Firestore::V1 instead.\n      #'
 )
+
+# Fix product links
+s.replace(
+    [
+        "lib/google/cloud/firestore/admin/v1.rb",
+        "lib/google/cloud/firestore/admin.rb"
+    ],
+    "https://cloud.google.com/firestore-admin",
+    "https://cloud.google.com/firestore/docs/reference/rpc"
+)
