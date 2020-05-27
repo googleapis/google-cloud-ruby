@@ -657,6 +657,7 @@ google-cloud-monitoring:
 google-cloud-monitoring-v3:
 - v0.1.0
 google-cloud-os_login:
+- v1.1.1
 - v1.1.0
 - v1.0.1
 - v1.0.0
