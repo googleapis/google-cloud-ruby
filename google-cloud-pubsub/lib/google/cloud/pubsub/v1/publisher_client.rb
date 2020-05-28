@@ -98,6 +98,12 @@ module Google
 
           private_constant :PROJECT_PATH_TEMPLATE
 
+          SUBSCRIPTION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/subscriptions/{subscription}"
+          )
+
+          private_constant :SUBSCRIPTION_PATH_TEMPLATE
+
           TOPIC_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/topics/{topic}"
           )
@@ -110,6 +116,17 @@ module Google
           def self.project_path project
             PROJECT_PATH_TEMPLATE.render(
               :"project" => project
+            )
+          end
+
+          # Returns a fully-qualified subscription resource name string.
+          # @param project [String]
+          # @param subscription [String]
+          # @return [String]
+          def self.subscription_path project, subscription
+            SUBSCRIPTION_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"subscription" => subscription
             )
           end
 
@@ -889,7 +906,7 @@ module Google
           #   require "google/cloud/pubsub"
           #
           #   publisher_client = Google::Cloud::PubSub::Publisher.new(version: :v1)
-          #   formatted_subscription = Google::Cloud::PubSub::V1::PublisherClient.topic_path("[PROJECT]", "[TOPIC]")
+          #   formatted_subscription = Google::Cloud::PubSub::V1::PublisherClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
           #   response = publisher_client.detach_subscription(formatted_subscription)
 
           def detach_subscription \
