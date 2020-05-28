@@ -53,11 +53,3 @@ List fixtures that were previously created for the tests by running `bundle exec
 Create missing fixtures for the tests by running `bundle exec rake fixtures:create`.
 
 Run the acceptance tests for the samples by running `bundle exec rake test`.
-
-## Contributing changes
-
-* See [CONTRIBUTING.md](../CONTRIBUTING.md)
-
-## Licensing
-
-* See [LICENSE](../LICENSE)
