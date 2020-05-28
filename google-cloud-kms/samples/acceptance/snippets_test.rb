@@ -45,15 +45,14 @@ describe "Cloud KMS samples" do
     # Clear rotation schedules
     key_ring_name = client.key_ring_path project: project_id, location: location_id, key_ring: key_ring_id
     client.list_crypto_keys(parent: key_ring_name).each do |key|
-      if key.rotation_period || key.next_rotation_time
-        updated_key = {
-          name:               key.name,
-          rotation_period:    nil,
-          next_rotation_time: nil
-        }
-        update_mask = { paths: ["rotation_period", "next_rotation_time"] }
-        client.update_crypto_key crypto_key: updated_key, update_mask: update_mask
-      end
+      next unless key.rotation_period || key.next_rotation_time
+      updated_key = {
+        name:               key.name,
+        rotation_period:    nil,
+        next_rotation_time: nil
+      }
+      update_mask = { paths: ["rotation_period", "next_rotation_time"] }
+      client.update_crypto_key crypto_key: updated_key, update_mask: update_mask
     end
   end
 
@@ -197,9 +196,9 @@ describe "Cloud KMS samples" do
     plaintext = "my message"
 
     key_name = client.crypto_key_path project:    project_id,
-                                       location:   location_id,
-                                       key_ring:   key_ring_id,
-                                       crypto_key: symmetric_key_id
+                                      location:   location_id,
+                                      key_ring:   key_ring_id,
+                                      crypto_key: symmetric_key_id
     encrypt_response = client.encrypt name: key_name, plaintext: plaintext
     ciphertext = encrypt_response.ciphertext
 
@@ -220,9 +219,9 @@ describe "Cloud KMS samples" do
 
   it " destroy|restore)_key_version" do
     key_name = client.crypto_key_path project:    project_id,
-                                       location:   location_id,
-                                       key_ring:   key_ring_id,
-                                       crypto_key: symmetric_key_id
+                                      location:   location_id,
+                                      key_ring:   key_ring_id,
+                                      crypto_key: symmetric_key_id
     version = client.create_crypto_key_version parent: key_name, crypto_key_version: {}
     version_id = version.name.split("/").last
 
@@ -257,9 +256,9 @@ describe "Cloud KMS samples" do
 
   it "(disable|enable)_key_version" do
     key_name = client.crypto_key_path project:    project_id,
-                                       location:   location_id,
-                                       key_ring:   key_ring_id,
-                                       crypto_key: symmetric_key_id
+                                      location:   location_id,
+                                      key_ring:   key_ring_id,
+                                      crypto_key: symmetric_key_id
     version = client.create_crypto_key_version parent: key_name, crypto_key_version: {}
     version_id = version.name.split("/").last
 
@@ -316,9 +315,9 @@ describe "Cloud KMS samples" do
     assert_match(/Ciphertext/, out.first)
 
     key_name = client.crypto_key_path project:    project_id,
-                                       location:   location_id,
-                                       key_ring:   key_ring_id,
-                                       crypto_key: symmetric_key_id
+                                      location:   location_id,
+                                      key_ring:   key_ring_id,
+                                      crypto_key: symmetric_key_id
     decrypt_response = client.decrypt name: key_name, ciphertext: ciphertext
     assert_equal plaintext, decrypt_response.plaintext
   end
@@ -541,14 +540,14 @@ describe "Cloud KMS samples" do
   it "verify_asymmetric_signature_ec" do
     message = "my message"
     key_version_name = client.crypto_key_version_path project:            project_id,
-                                                       location:           location_id,
-                                                       key_ring:           key_ring_id,
-                                                       crypto_key:         asymmetric_sign_ec_key_id,
-                                                       crypto_key_version: "1"
+                                                      location:           location_id,
+                                                      key_ring:           key_ring_id,
+                                                      crypto_key:         asymmetric_sign_ec_key_id,
+                                                      crypto_key_version: "1"
     sign_response = client.asymmetric_sign name:   key_version_name,
-                                            digest: {
-                                              sha256: Digest::SHA256.digest(message)
-                                            }
+                                           digest: {
+                                             sha256: Digest::SHA256.digest(message)
+                                           }
 
     out = capture_io do
       verified = verify_asymmetric_signature_ec(
@@ -570,14 +569,14 @@ describe "Cloud KMS samples" do
     it "verify_asymmetric_signature_rsa" do
       message = "my message"
       key_version_name = client.crypto_key_version_path project:            project_id,
-                                                         location:           location_id,
-                                                         key_ring:           key_ring_id,
-                                                         crypto_key:         asymmetric_sign_rsa_key_id,
-                                                         crypto_key_version: "1"
+                                                        location:           location_id,
+                                                        key_ring:           key_ring_id,
+                                                        crypto_key:         asymmetric_sign_rsa_key_id,
+                                                        crypto_key_version: "1"
       sign_response = client.asymmetric_sign name:   key_version_name,
-                                              digest: {
-                                                sha256: Digest::SHA256.digest(message)
-                                              }
+                                             digest: {
+                                               sha256: Digest::SHA256.digest(message)
+                                             }
 
       out = capture_io do
         verified = verify_asymmetric_signature_rsa(

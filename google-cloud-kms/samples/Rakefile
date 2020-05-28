@@ -26,7 +26,7 @@ namespace :fixtures do
   task :list do
     require "google/cloud/kms"
     client = Google::Cloud::Kms.key_management_service
-    project_id  = ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT")
+    project_id = ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT")
     location_id = "us-east1"
     location_name = client.location_path project: project_id, location: location_id
 
@@ -52,7 +52,7 @@ namespace :fixtures do
   task :create do
     require "google/cloud/kms"
     client = Google::Cloud::Kms.key_management_service
-    project_id  = ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT")
+    project_id = ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT")
     location_id = "us-east1"
     location_name = client.location_path project: project_id, location: location_id
 
