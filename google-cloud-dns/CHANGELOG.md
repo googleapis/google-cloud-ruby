@@ -1,5 +1,11 @@
 # Release History
 
+### 0.32.1 / 2020-05-28
+
+#### Documentation
+
+* Fix a few broken links
+
 ### 0.32.0 / 2019-10-29
 
 This release requires Ruby 2.4 or later.
