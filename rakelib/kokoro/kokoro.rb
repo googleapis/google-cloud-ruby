@@ -129,6 +129,27 @@ class Kokoro < Command
     @tag = "#{@gem}/v#{version}"
   end
 
+  def all_local_docs_tests
+    all_broken_links = {}
+    @gems.each do |gem|
+      run_ci gem, true do
+        broken_links = local_docs_test
+        all_broken_links[gem] = broken_links unless broken_links.empty?
+      end
+    end
+    all_broken_links.each do |gem, links|
+      puts
+      puts "**** BROKEN: #{gem} ****"
+      links.each { |link| puts "  #{link}" }
+    end
+  end
+
+  def one_local_docs_test gem
+    run_ci gem, true do
+      local_docs_test
+    end
+  end
+
   def exit_status
     @failed ? 1 : 0
   end
@@ -143,7 +164,7 @@ class Kokoro < Command
         puts err
       end
       checked_links = out.split "\n"
-      checked_links.select! { |link| link =~ /\[\d+\]/ && !link.include?("[200]") }
+      checked_links.select! { |link| link =~ /^\[\d+\]/ && !link.include?("[200]") }
       unless checked_links.empty?
         @failed = true
         broken_links[location] += checked_links
@@ -156,6 +177,7 @@ class Kokoro < Command
     run "bundle exec rake yard"
     broken_links = check_links ["doc"], ".", " -r"
     puts_broken_links broken_links
+    broken_links["doc"]
   end
 
   def should_link_check? gem = nil

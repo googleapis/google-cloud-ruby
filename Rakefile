@@ -602,6 +602,17 @@ namespace :kokoro do
     Rake::Task["docs:republish_all"].invoke
   end
 
+  task :all_local_docs_tests do
+    kokoro.all_local_docs_tests
+    exit kokoro.exit_status
+  end
+
+  task :one_local_docs_test, [:gem] do |t, args|
+    gem = args[:gem]
+    kokoro.one_local_docs_test gem
+    exit kokoro.exit_status
+  end
+  
   def kokoro
     @kokoro ||= Kokoro.new KOKORO_RUBY_VERSIONS,
                            gems,
