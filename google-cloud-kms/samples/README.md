@@ -46,9 +46,13 @@ These samples show how to use the [Google Cloud KMS API]
 
     The output will show the help text.
 
-## Run the tests
+## Running the tests
 
-Run the tests for the samples by running `bundle exec rake test`.
+List fixtures that were previously created for the tests by running `bundle exec rake fixtures:list`.
+
+Create missing fixtures for the tests by running `bundle exec rake fixtures:create`.
+
+Run the acceptance tests for the samples by running `bundle exec rake test`.
 
 ## Contributing changes
 
