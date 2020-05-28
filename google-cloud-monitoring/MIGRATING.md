@@ -134,6 +134,20 @@ The configuration block is optional. If you do not provide it, or you do not
 set some configuration parameters, then the default configuration is used. See
 [Client Configuration](#client-configuration).
 
+A similar change was made for the monitoring dashboards service:
+
+Old:
+```
+client = Google::Cloud::Monitoring::Dashboard.new credentials: "/path/to/credentials.json"
+```
+
+New:
+```
+client = Google::Cloud::Monitoring::Dashboard.dashboards_service do |config|
+  config.credentials = "/path/to/credentials.json"
+end
+```
+
 ### Passing Arguments
 
 In older releases, required arguments would be passed as positional method
