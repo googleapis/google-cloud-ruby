@@ -2,8 +2,11 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "rake"
+gem "google-cloud-core", path: "../google-cloud-core"
+gem "google-cloud-env", path: "../google-cloud-env"
+gem "google-cloud-errors", path: "../google-cloud-errors"
+gem "google-cloud-monitoring-v3", path: "../google-cloud-monitoring-v3"
+gem "google-cloud-monitoring-dashboard-v1", path: "../google-cloud-monitoring-dashboard-v1"
 
-# Pin minitest to 5.11.x to avoid warnings emitted by 5.12.
-# See https://github.com/googleapis/google-cloud-ruby/issues/4110
-gem "minitest", "~> 5.11.3"
+# google-protobuf 3.12.0 requires Ruby 2.5 or later, so pin to 3.11 on older Rubies
+gem "google-protobuf", (RUBY_VERSION < "2.5" ? "~> 3.11.4" : "~> 3.12")
