@@ -37,6 +37,7 @@ describe Google::Cloud::PubSub, :pubsub do
   let(:dead_letter_topic_name) { $topic_names[8] }
   let(:dead_letter_topic_name_2) { $topic_names[9] }
   let(:labels) { { "foo" => "bar" } }
+  let(:filter) { "attributes.event_type = \"1\"" }
 
   before do
     # create all topics
@@ -148,6 +149,7 @@ describe Google::Cloud::PubSub, :pubsub do
       subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true,
                                                               retention: 600,
                                                               labels: labels,
+                                                              filter: filter,
                                                               retry_policy: retry_policy
       _(subscription).wont_be :nil?
       _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
@@ -155,12 +157,16 @@ describe Google::Cloud::PubSub, :pubsub do
       _(subscription.retention).must_equal 600
       _(subscription.labels).must_equal labels
       _(subscription.labels).must_be :frozen?
+      _(subscription.filter).must_equal filter
+      _(subscription.filter).must_be :frozen?
       _(subscription.retry_policy.minimum_backoff).must_equal retry_minimum_backoff
       _(subscription.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
 
       # update
       subscription.labels = {}
       _(subscription.labels).must_be :empty?
+      subscription.filter = nil
+      _(subscription.filter).must_be :nil?
       subscription.retry_policy = nil
       subscription.reload!
       _(subscription.retry_policy).must_be :nil?
