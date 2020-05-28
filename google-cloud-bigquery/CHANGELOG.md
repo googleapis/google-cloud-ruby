@@ -1,5 +1,11 @@
 # Release History
 
+### 1.21.1 / 2020-05-28
+
+#### Documentation
+
+* Fix a few broken links
+
 ### 1.21.0 / 2020-03-31
 
 #### Features
