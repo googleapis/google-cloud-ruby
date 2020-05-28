@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.4 / 2020-05-28
+
+#### Documentation
+
+* Fix a few broken links
+
 ### 1.4.3 / 2020-05-21
 
 #### Bug Fixes
