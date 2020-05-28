@@ -897,6 +897,7 @@ google-cloud-service_directory-v1beta1:
 - v0.2.0
 - v0.1.0
 google-cloud-spanner:
+- v1.16.2
 - v1.16.1
 - v1.16.0
 - v1.15.0
