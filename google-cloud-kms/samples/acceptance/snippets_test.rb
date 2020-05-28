@@ -22,78 +22,29 @@ require "minitest/hooks/default"
 require_relative "../snippets"
 
 describe "Cloud KMS samples" do
+  let(:client) { Google::Cloud::Kms.key_management_service }
+  let(:project_id) { ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT") }
+  let(:location_id) { "us-east1" }
+
+  # ID prefix: See Rake fixtures:create and fixtures:list
+  let(:prefix) { "google-cloud-ruby-samples" }
+
+  # key ring: See Rake fixtures:create and fixtures:list
+  let(:key_ring_id) { "#{prefix}-key-ring-1" }
+
+  # crypto keys: See Rake fixtures:create and fixtures:list
+  let(:asymmetric_sign_ec_key_id) { "#{prefix}-asymmetric_sign_ec_key" }
+  let(:asymmetric_sign_rsa_key_id) { "#{prefix}-asymmetric_sign_rsa_key" }
+  let(:symmetric_key_id) { "#{prefix}-symmetric_key" }
+  let(:hsm_key_id) { "#{prefix}-hsm_key" }
+  let(:asymmetric_decrypt_key_id) { "#{prefix}-asymmetric_decrypt_key" }
+
   let(:rotation_period_seconds) { 60 * 60 * 24 * 30 }
-  before :all do
-    @client      = Google::Cloud::Kms.key_management_service
-    @project_id  = ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT")
-    @location_id = "us-east1"
-
-    @key_ring_id = SecureRandom.uuid
-    location_name = @client.location_path project: @project_id, location: @location_id
-    @client.create_key_ring parent: location_name, key_ring_id: @key_ring_id, key_ring: {}
-    @key_ring_name = @client.key_ring_path project: @project_id, location: @location_id, key_ring: @key_ring_id
-
-
-    @asymmetric_sign_ec_key_id = SecureRandom.uuid
-    @client.create_crypto_key parent:        @key_ring_name,
-                              crypto_key_id: @asymmetric_sign_ec_key_id,
-                              crypto_key:    {
-                                purpose:          :ASYMMETRIC_SIGN,
-                                version_template: {
-                                  algorithm: :EC_SIGN_P256_SHA256
-                                },
-                                labels:           { "foo" => "bar", "zip" => "zap" }
-                              }
-
-    @asymmetric_sign_rsa_key_id = SecureRandom.uuid
-    @client.create_crypto_key parent:        @key_ring_name,
-                              crypto_key_id: @asymmetric_sign_rsa_key_id,
-                              crypto_key:    {
-                                purpose:          :ASYMMETRIC_SIGN,
-                                version_template: {
-                                  algorithm: :RSA_SIGN_PSS_2048_SHA256
-                                },
-                                labels:           { "foo" => "bar", "zip" => "zap" }
-                              }
-
-
-    @symmetric_key_id = SecureRandom.uuid
-    @client.create_crypto_key parent:        @key_ring_name,
-                              crypto_key_id: @symmetric_key_id,
-                              crypto_key:    {
-                                purpose:          :ENCRYPT_DECRYPT,
-                                version_template: {
-                                  algorithm: :GOOGLE_SYMMETRIC_ENCRYPTION
-                                },
-                                labels:           { "foo" => "bar", "zip" => "zap" }
-                              }
-
-    @hsm_key_id = SecureRandom.uuid
-    @client.create_crypto_key parent:        @key_ring_name,
-                              crypto_key_id: @hsm_key_id,
-                              crypto_key:    {
-                                purpose:          :ENCRYPT_DECRYPT,
-                                version_template: {
-                                  algorithm:        :GOOGLE_SYMMETRIC_ENCRYPTION,
-                                  protection_level: "HSM"
-                                },
-                                labels:           { "foo" => "bar", "zip" => "zap" }
-                              }
-
-    @asymmetric_decrypt_key_id = SecureRandom.uuid
-    @client.create_crypto_key parent:        @key_ring_name,
-                              crypto_key_id: @asymmetric_decrypt_key_id,
-                              crypto_key:    {
-                                purpose:          :ASYMMETRIC_DECRYPT,
-                                version_template: {
-                                  algorithm: :RSA_DECRYPT_OAEP_2048_SHA256
-                                },
-                                labels:           { "foo" => "bar", "zip" => "zap" }
-                              }
-  end
 
   after :all do
-    @client.list_crypto_keys(parent: @key_ring_name).each do |key|
+    # Clear rotation schedules
+    key_ring_name = client.key_ring_path project: project_id, location: location_id, key_ring: key_ring_id
+    client.list_crypto_keys(parent: key_ring_name).each do |key|
       if key.rotation_period || key.next_rotation_time
         updated_key = {
           name:               key.name,
@@ -101,12 +52,7 @@ describe "Cloud KMS samples" do
           next_rotation_time: nil
         }
         update_mask = { paths: ["rotation_period", "next_rotation_time"] }
-        @client.update_crypto_key crypto_key: updated_key, update_mask: update_mask
-      end
-
-      filter = "state != DESTROYED AND state != DESTROY_SCHEDULED"
-      @client.list_crypto_key_versions(parent: key.name, filter: filter).each do |version|
-        @client.destroy_crypto_key_version name: version.name
+        client.update_crypto_key crypto_key: updated_key, update_mask: update_mask
       end
     end
   end
@@ -114,9 +60,9 @@ describe "Cloud KMS samples" do
   it "create_key_asymmetric_decrypt" do
     out = capture_io do
       key = create_key_asymmetric_decrypt(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
         id:          SecureRandom.uuid
       )
 
@@ -131,9 +77,9 @@ describe "Cloud KMS samples" do
   it "create_key_asymmetric_sign" do
     out = capture_io do
       key = create_key_asymmetric_sign(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
         id:          SecureRandom.uuid
       )
 
@@ -148,9 +94,9 @@ describe "Cloud KMS samples" do
   it "create_key_hsm" do
     out = capture_io do
       key = create_key_hsm(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
         id:          SecureRandom.uuid
       )
 
@@ -166,9 +112,9 @@ describe "Cloud KMS samples" do
   it "create_key_labels" do
     out = capture_io do
       key = create_key_labels(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
         id:          SecureRandom.uuid
       )
 
@@ -183,13 +129,13 @@ describe "Cloud KMS samples" do
   it "create_key_ring" do
     out = capture_io do
       key_ring = create_key_ring(
-        project_id:  @project_id,
-        location_id: @location_id,
+        project_id:  project_id,
+        location_id: location_id,
         id:          SecureRandom.uuid
       )
 
       assert key_ring
-      assert_includes key_ring.name, @location_id
+      assert_includes key_ring.name, location_id
     end
     assert_match(/Created key ring/, out.first)
   end
@@ -197,9 +143,9 @@ describe "Cloud KMS samples" do
   it "create_key_rotation_schedule" do
     out = capture_io do
       key = create_key_rotation_schedule(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
         id:          SecureRandom.uuid
       )
 
@@ -214,9 +160,9 @@ describe "Cloud KMS samples" do
   it "create_key_symmetric_encrypt_decrypt" do
     out = capture_io do
       key = create_key_symmetric_encrypt_decrypt(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
         id:          SecureRandom.uuid
       )
 
@@ -231,14 +177,14 @@ describe "Cloud KMS samples" do
   it "create_key_version" do
     out = capture_io do
       version = create_key_version(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @symmetric_key_id
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      symmetric_key_id
       )
 
       assert version
-      assert_includes version.name, @key_ring_id
+      assert_includes version.name, key_ring_id
     end
     assert_match(/Created key version/, out.first)
   end
@@ -250,19 +196,19 @@ describe "Cloud KMS samples" do
   it "decrypt_symmetric" do
     plaintext = "my message"
 
-    key_name = @client.crypto_key_path project:    @project_id,
-                                       location:   @location_id,
-                                       key_ring:   @key_ring_id,
-                                       crypto_key: @symmetric_key_id
-    encrypt_response = @client.encrypt name: key_name, plaintext: plaintext
+    key_name = client.crypto_key_path project:    project_id,
+                                       location:   location_id,
+                                       key_ring:   key_ring_id,
+                                       crypto_key: symmetric_key_id
+    encrypt_response = client.encrypt name: key_name, plaintext: plaintext
     ciphertext = encrypt_response.ciphertext
 
     out = capture_io do
       decrypt_response = decrypt_symmetric(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @symmetric_key_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      symmetric_key_id,
         ciphertext:  ciphertext
       )
 
@@ -273,19 +219,19 @@ describe "Cloud KMS samples" do
   end
 
   it " destroy|restore)_key_version" do
-    key_name = @client.crypto_key_path project:    @project_id,
-                                       location:   @location_id,
-                                       key_ring:   @key_ring_id,
-                                       crypto_key: @symmetric_key_id
-    version = @client.create_crypto_key_version parent: key_name, crypto_key_version: {}
+    key_name = client.crypto_key_path project:    project_id,
+                                       location:   location_id,
+                                       key_ring:   key_ring_id,
+                                       crypto_key: symmetric_key_id
+    version = client.create_crypto_key_version parent: key_name, crypto_key_version: {}
     version_id = version.name.split("/").last
 
     out = capture_io do
       version = destroy_key_version(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @symmetric_key_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      symmetric_key_id,
         version_id:  version_id
       )
 
@@ -296,10 +242,10 @@ describe "Cloud KMS samples" do
 
     out = capture_io do
       version = restore_key_version(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @symmetric_key_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      symmetric_key_id,
         version_id:  version_id
       )
 
@@ -310,19 +256,19 @@ describe "Cloud KMS samples" do
   end
 
   it "(disable|enable)_key_version" do
-    key_name = @client.crypto_key_path project:    @project_id,
-                                       location:   @location_id,
-                                       key_ring:   @key_ring_id,
-                                       crypto_key: @symmetric_key_id
-    version = @client.create_crypto_key_version parent: key_name, crypto_key_version: {}
+    key_name = client.crypto_key_path project:    project_id,
+                                       location:   location_id,
+                                       key_ring:   key_ring_id,
+                                       crypto_key: symmetric_key_id
+    version = client.create_crypto_key_version parent: key_name, crypto_key_version: {}
     version_id = version.name.split("/").last
 
     out = capture_io do
       version = disable_key_version(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @symmetric_key_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      symmetric_key_id,
         version_id:  version_id
       )
 
@@ -333,10 +279,10 @@ describe "Cloud KMS samples" do
 
     out = capture_io do
       version = enable_key_version(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @symmetric_key_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      symmetric_key_id,
         version_id:  version_id
       )
 
@@ -356,10 +302,10 @@ describe "Cloud KMS samples" do
 
     out = capture_io do
       encrypt_response = encrypt_symmetric(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @symmetric_key_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      symmetric_key_id,
         plaintext:   plaintext
       )
 
@@ -369,21 +315,21 @@ describe "Cloud KMS samples" do
     end
     assert_match(/Ciphertext/, out.first)
 
-    key_name = @client.crypto_key_path project:    @project_id,
-                                       location:   @location_id,
-                                       key_ring:   @key_ring_id,
-                                       crypto_key: @symmetric_key_id
-    decrypt_response = @client.decrypt name: key_name, ciphertext: ciphertext
+    key_name = client.crypto_key_path project:    project_id,
+                                       location:   location_id,
+                                       key_ring:   key_ring_id,
+                                       crypto_key: symmetric_key_id
+    decrypt_response = client.decrypt name: key_name, ciphertext: ciphertext
     assert_equal plaintext, decrypt_response.plaintext
   end
 
   it "get_key_labels" do
     out = capture_io do
       key = get_key_labels(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @symmetric_key_id
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      symmetric_key_id
       )
 
       assert key
@@ -396,10 +342,10 @@ describe "Cloud KMS samples" do
   it "get_key_version_attestation" do
     out = capture_io do
       attestation = get_key_version_attestation(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @hsm_key_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      hsm_key_id,
         version_id:  "1"
       )
 
@@ -412,10 +358,10 @@ describe "Cloud KMS samples" do
   it "get_key_version_attestation" do
     out = capture_io do
       public_key = get_public_key(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @asymmetric_decrypt_key_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      asymmetric_decrypt_key_id,
         version_id:  "1"
       )
 
@@ -428,10 +374,10 @@ describe "Cloud KMS samples" do
   it "iam_add_member" do
     out = capture_io do
       policy = iam_add_member(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @symmetric_key_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      symmetric_key_id,
         member:      "group:test@google.com"
       )
 
@@ -449,10 +395,10 @@ describe "Cloud KMS samples" do
   it "iam_get_policy" do
     out = capture_io do
       policy = iam_get_policy(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @symmetric_key_id
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      symmetric_key_id
       )
 
       assert policy
@@ -463,10 +409,10 @@ describe "Cloud KMS samples" do
   it "iam_remove_member" do
     out = capture_io do
       policy = iam_remove_member(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @symmetric_key_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      symmetric_key_id,
         member:      "group:test@google.com"
       )
 
@@ -483,8 +429,8 @@ describe "Cloud KMS samples" do
   it "quickstart" do
     out = capture_io do
       key_rings = quickstart(
-        project_id:  @project_id,
-        location_id: @location_id
+        project_id:  project_id,
+        location_id: location_id
       )
 
       assert key_rings
@@ -497,10 +443,10 @@ describe "Cloud KMS samples" do
 
     out = capture_io do
       signature = sign_asymmetric(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @asymmetric_sign_ec_key_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      asymmetric_sign_ec_key_id,
         version_id:  "1",
         message:     message
       )
@@ -515,10 +461,10 @@ describe "Cloud KMS samples" do
   it "update_key_add_rotation" do
     out = capture_io do
       key = update_key_add_rotation(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @symmetric_key_id
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      symmetric_key_id
       )
 
       assert key
@@ -532,10 +478,10 @@ describe "Cloud KMS samples" do
   it "update_key_remove_labels" do
     out = capture_io do
       key = update_key_remove_labels(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @asymmetric_decrypt_key_id
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      asymmetric_decrypt_key_id
       )
 
       assert key
@@ -547,10 +493,10 @@ describe "Cloud KMS samples" do
   it "update_key_remove_rotation" do
     out = capture_io do
       key = update_key_remove_rotation(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @symmetric_key_id
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      symmetric_key_id
       )
 
       assert key
@@ -563,10 +509,10 @@ describe "Cloud KMS samples" do
   it "update_key_set_primary" do
     out = capture_io do
       key = update_key_set_primary(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @symmetric_key_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      symmetric_key_id,
         version_id:  "1"
       )
 
@@ -580,10 +526,10 @@ describe "Cloud KMS samples" do
   it "update_key_update_labels" do
     out = capture_io do
       key = update_key_update_labels(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @asymmetric_sign_ec_key_id
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      asymmetric_sign_ec_key_id
       )
 
       assert key
@@ -594,22 +540,22 @@ describe "Cloud KMS samples" do
 
   it "verify_asymmetric_signature_ec" do
     message = "my message"
-    key_version_name = @client.crypto_key_version_path project:            @project_id,
-                                                       location:           @location_id,
-                                                       key_ring:           @key_ring_id,
-                                                       crypto_key:         @asymmetric_sign_ec_key_id,
+    key_version_name = client.crypto_key_version_path project:            project_id,
+                                                       location:           location_id,
+                                                       key_ring:           key_ring_id,
+                                                       crypto_key:         asymmetric_sign_ec_key_id,
                                                        crypto_key_version: "1"
-    sign_response = @client.asymmetric_sign name:   key_version_name,
+    sign_response = client.asymmetric_sign name:   key_version_name,
                                             digest: {
                                               sha256: Digest::SHA256.digest(message)
                                             }
 
     out = capture_io do
       verified = verify_asymmetric_signature_ec(
-        project_id:  @project_id,
-        location_id: @location_id,
-        key_ring_id: @key_ring_id,
-        key_id:      @asymmetric_sign_ec_key_id,
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      asymmetric_sign_ec_key_id,
         version_id:  "1",
         message:     message,
         signature:   sign_response.signature
@@ -623,22 +569,22 @@ describe "Cloud KMS samples" do
   if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("2.5.0")
     it "verify_asymmetric_signature_rsa" do
       message = "my message"
-      key_version_name = @client.crypto_key_version_path project:            @project_id,
-                                                         location:           @location_id,
-                                                         key_ring:           @key_ring_id,
-                                                         crypto_key:         @asymmetric_sign_rsa_key_id,
+      key_version_name = client.crypto_key_version_path project:            project_id,
+                                                         location:           location_id,
+                                                         key_ring:           key_ring_id,
+                                                         crypto_key:         asymmetric_sign_rsa_key_id,
                                                          crypto_key_version: "1"
-      sign_response = @client.asymmetric_sign name:   key_version_name,
+      sign_response = client.asymmetric_sign name:   key_version_name,
                                               digest: {
                                                 sha256: Digest::SHA256.digest(message)
                                               }
 
       out = capture_io do
         verified = verify_asymmetric_signature_rsa(
-          project_id:  @project_id,
-          location_id: @location_id,
-          key_ring_id: @key_ring_id,
-          key_id:      @asymmetric_sign_rsa_key_id,
+          project_id:  project_id,
+          location_id: location_id,
+          key_ring_id: key_ring_id,
+          key_id:      asymmetric_sign_rsa_key_id,
           version_id:  "1",
           message:     message,
           signature:   sign_response.signature
