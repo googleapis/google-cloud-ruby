@@ -39,15 +39,15 @@ namespace :fixtures do
     key_ring_name = client.key_ring_path project: project_id, location: location_id, key_ring: key_ring_id
     begin
       key_ring = client.get_key_ring name: key_ring_name
-      puts "\ncrypto keys for key ring #{key_ring.name.split("/").last} (filter: \"name: cryptoKeys/#{$prefix}-\"):\n\n"
+      puts "\ncrypto keys for key ring #{key_ring.name.split('/').last} (filter: \"name: cryptoKeys/#{$prefix}-\"):\n\n"
       client.list_crypto_keys(parent: key_ring.name, filter: "name: cryptoKeys/#{$prefix}-").each do |key|
         puts key.name.split("/").last
         puts "  primary version:"
-        puts "  -  #{key.primary&.name&.split("/")&.last} - #{key.primary&.state}"
+        puts "  -  #{key.primary&.name&.split('/')&.last} - #{key.primary&.state}"
         puts "  all versions:"
         versions = client.list_crypto_key_versions(parent: key.name).to_a
         versions.each do |version|
-          puts "  -  #{version.name.split("/").last} - #{version.state}"
+          puts "  -  #{version.name.split('/').last} - #{version.state}"
         end
       end
     rescue Google::Cloud::NotFoundError
