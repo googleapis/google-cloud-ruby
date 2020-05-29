@@ -30,7 +30,7 @@ describe "Cloud KMS samples" do
   let(:prefix) { "google-cloud-ruby-samples" }
 
   # key ring: See Rake fixtures:create and fixtures:list
-  let(:key_ring_id) { "#{prefix}-key-ring-1" }
+  let(:key_ring_id) { "#{prefix}-key-ring-2" }
 
   # crypto keys: See Rake fixtures:create and fixtures:list
   let(:asymmetric_sign_ec_key_id) { "#{prefix}-asymmetric_sign_ec_key" }
@@ -40,21 +40,6 @@ describe "Cloud KMS samples" do
   let(:asymmetric_decrypt_key_id) { "#{prefix}-asymmetric_decrypt_key" }
 
   let(:rotation_period_seconds) { 60 * 60 * 24 * 30 }
-
-  after :all do
-    # Clear rotation schedules
-    key_ring_name = client.key_ring_path project: project_id, location: location_id, key_ring: key_ring_id
-    client.list_crypto_keys(parent: key_ring_name).each do |key|
-      next unless key.rotation_period || key.next_rotation_time
-      updated_key = {
-        name:               key.name,
-        rotation_period:    nil,
-        next_rotation_time: nil
-      }
-      update_mask = { paths: ["rotation_period", "next_rotation_time"] }
-      client.update_crypto_key crypto_key: updated_key, update_mask: update_mask
-    end
-  end
 
   it "create_key_asymmetric_decrypt" do
     out = capture_io do
