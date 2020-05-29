@@ -16,6 +16,5 @@ require "rake/testtask"
 
 Rake::TestTask.new "test" do |t|
   t.test_files = FileList["acceptance/*_test.rb"]
-  t.options = "--junit --junit-filename=sponge_log.xml"
   t.warning = false
 end

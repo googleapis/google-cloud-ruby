@@ -17,9 +17,7 @@ require_relative "../metrics.rb"
 
 describe "metrics", :monitoring do
   let(:metric_type) { "custom.googleapis.com/my_metric_#{random_id}" }
-  let(:metric_name) {
-    client.metric_descriptor_path project: project_id, metric_descriptor: metric_type
-  }
+  let(:metric_name) { client.metric_descriptor_path project: project_id, metric_descriptor: metric_type }
 
   describe "create_metric_descriptor" do
     after do
@@ -56,7 +54,7 @@ describe "metrics", :monitoring do
       out, _err = capture_io do
         list_metric_descriptors project_id: project_id
       end
-      assert_match(/logging.googleapis.com\/byte_count/, out)
+      assert_match %r{logging.googleapis.com/byte_count}, out
     end
   end
 
@@ -108,10 +106,10 @@ describe "metrics", :monitoring do
       view = Google::Cloud::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView::FULL
 
       received_time_series = retry_block 3 do
-        response = client.list_time_series name: project_path,
-                                           filter: filter,
+        response = client.list_time_series name:     project_path,
+                                           filter:   filter,
                                            interval: interval,
-                                           view: view
+                                           view:     view
         response = response.to_a
         raise "Time series not returned" if response.empty?
         response.first

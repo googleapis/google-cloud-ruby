@@ -41,3 +41,9 @@ environment variable to the path to the key file, for example:
 ## Run Quickstart
 
     bundle exec ruby quickstart.rb
+
+## Running the tests
+
+* Authenticate by setting the `GOOGLE_APPLICATION_CREDENTIALS` environment variable as described above.
+* Set the `GOOGLE_CLOUD_PROJECT` environment variable to the project ID used for testing.
+* Run the acceptance tests for the samples by running `bundle exec rake test`.

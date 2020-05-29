@@ -32,10 +32,10 @@ describe "quickstart", :monitoring do
     view = Google::Cloud::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView::FULL
 
     received_time_series = retry_block 3 do
-      response = client.list_time_series name: project_path,
-                                         filter: filter,
+      response = client.list_time_series name:     project_path,
+                                         filter:   filter,
                                          interval: interval,
-                                         view: view
+                                         view:     view
       response = response.to_a
       raise "Time series not returned" if response.empty?
       response.first

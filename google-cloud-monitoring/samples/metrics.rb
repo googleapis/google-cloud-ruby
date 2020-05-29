@@ -32,7 +32,7 @@ def create_metric_descriptor project_id:, metric_type:
     description: "This is a simple example of a custom metric."
   )
 
-  result = client.create_metric_descriptor name: project_name,
+  result = client.create_metric_descriptor name:              project_name,
                                            metric_descriptor: descriptor
   p "Created #{result.name}"
   p result
@@ -48,7 +48,7 @@ def delete_metric_descriptor project_id:, metric_type:
   # metric_type = "custom.googleapis.com/my_metric"
 
   client = Google::Cloud::Monitoring.metric_service
-  metric_name = client.metric_descriptor_path project: project_id,
+  metric_name = client.metric_descriptor_path project:           project_id,
                                               metric_descriptor: metric_type
 
   client.delete_metric_descriptor name: metric_name
@@ -97,16 +97,16 @@ def list_time_series project_id:
   interval = Google::Cloud::Monitoring::V3::TimeInterval.new
   now = Time.now
   interval.end_time = Google::Protobuf::Timestamp.new seconds: now.to_i,
-                                                      nanos: now.nsec
+                                                      nanos:   now.nsec
   interval.start_time = Google::Protobuf::Timestamp.new seconds: now.to_i - 1200,
-                                                        nanos: now.nsec
+                                                        nanos:   now.nsec
   filter = 'metric.type = "compute.googleapis.com/instance/cpu/utilization"'
   view = Google::Cloud::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView::FULL
 
-  results = client.list_time_series name: project_name,
-                                    filter: filter,
+  results = client.list_time_series name:     project_name,
+                                    filter:   filter,
                                     interval: interval,
-                                    view: view
+                                    view:     view
   results.each do |result|
     p result
   end
@@ -124,16 +124,16 @@ def list_time_series_header project_id:
   interval = Google::Cloud::Monitoring::V3::TimeInterval.new
   now = Time.now
   interval.end_time = Google::Protobuf::Timestamp.new seconds: now.to_i,
-                                                      nanos: now.nsec
+                                                      nanos:   now.nsec
   interval.start_time = Google::Protobuf::Timestamp.new seconds: now.to_i - 1200,
-                                                        nanos: now.nsec
+                                                        nanos:   now.nsec
   filter = 'metric.type = "compute.googleapis.com/instance/cpu/utilization"'
   view = Google::Cloud::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView::HEADERS
 
-  results = client.list_time_series name: project_name,
-                                    filter: filter,
+  results = client.list_time_series name:     project_name,
+                                    filter:   filter,
                                     interval: interval,
-                                    view: view
+                                    view:     view
   results.each do |result|
     p result
   end
@@ -151,9 +151,9 @@ def list_time_series_aggregate project_id:
   interval = Google::Cloud::Monitoring::V3::TimeInterval.new
   now = Time.now
   interval.end_time = Google::Protobuf::Timestamp.new seconds: now.to_i,
-                                                      nanos: now.nsec
+                                                      nanos:   now.nsec
   interval.start_time = Google::Protobuf::Timestamp.new seconds: now.to_i - 1200,
-                                                        nanos: now.nsec
+                                                        nanos:   now.nsec
   filter = 'metric.type = "compute.googleapis.com/instance/cpu/utilization"'
   view = Google::Cloud::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView::FULL
   aggregation = Google::Cloud::Monitoring::V3::Aggregation.new(
@@ -161,10 +161,10 @@ def list_time_series_aggregate project_id:
     per_series_aligner: Google::Cloud::Monitoring::V3::Aggregation::Aligner::ALIGN_MEAN
   )
 
-  results = client.list_time_series name: project_name,
-                                    filter: filter,
-                                    interval: interval,
-                                    view: view,
+  results = client.list_time_series name:        project_name,
+                                    filter:      filter,
+                                    interval:    interval,
+                                    view:        view,
                                     aggregation: aggregation
   results.each do |result|
     p result
@@ -184,9 +184,9 @@ def list_time_series_reduce project_id:
   interval = Google::Cloud::Monitoring::V3::TimeInterval.new
   now = Time.now
   interval.end_time = Google::Protobuf::Timestamp.new seconds: now.to_i,
-                                                      nanos: now.nsec
+                                                      nanos:   now.nsec
   interval.start_time = Google::Protobuf::Timestamp.new seconds: now.to_i - 1200,
-                                                        nanos: now.nsec
+                                                        nanos:   now.nsec
   filter = 'metric.type = "compute.googleapis.com/instance/cpu/utilization"'
   view = Google::Cloud::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView::FULL
   aggregation = Google::Cloud::Monitoring::V3::Aggregation.new(
@@ -196,10 +196,10 @@ def list_time_series_reduce project_id:
     group_by_fields:      ["resource.zone"]
   )
 
-  results = client.list_time_series name: project_name,
-                                    filter: filter,
-                                    interval: interval,
-                                    view: view,
+  results = client.list_time_series name:        project_name,
+                                    filter:      filter,
+                                    interval:    interval,
+                                    view:        view,
                                     aggregation: aggregation
   results.each do |result|
     p result
@@ -248,7 +248,7 @@ def get_monitored_resource_descriptor project_id:, resource_type:
 
   client = Google::Cloud::Monitoring.metric_service
   resource_path = client.monitored_resource_descriptor_path(
-    project: project_id,
+    project:                       project_id,
     monitored_resource_descriptor: resource_type
   )
 
@@ -266,7 +266,7 @@ def get_metric_descriptor project_id:, metric_type:
   # metric_type = "custom.googleapis.com/my_metric"
 
   client = Google::Cloud::Monitoring.metric_service
-  metric_name = client.metric_descriptor_path project: project_id,
+  metric_name = client.metric_descriptor_path project:           project_id,
                                               metric_descriptor: metric_type
 
   descriptor = client.get_metric_descriptor name: metric_name
