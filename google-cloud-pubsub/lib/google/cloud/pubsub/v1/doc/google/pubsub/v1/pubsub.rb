@@ -17,6 +17,7 @@ module Google
   module Cloud
   module PubSub
     module V1
+      # A policy constraining the storage of messages published to the topic.
       # @!attribute [rw] allowed_persistence_regions
       #   @return [Array<String>]
       #     A list of IDs of GCP regions where messages that are published to the topic
