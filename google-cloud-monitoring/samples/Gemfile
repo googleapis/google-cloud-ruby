@@ -27,5 +27,6 @@ group :test do
   gem "irb"
   gem "minitest", "~> 5.14"
   gem "minitest-focus", "~> 1.1"
+  gem "minitest-hooks", "~> 1.5"
   gem "rake", ">= 12.0"
 end
