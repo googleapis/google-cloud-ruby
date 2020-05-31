@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def set_endpoint image_path: nil
+def detect_text_with_custom_endpoint image_path: nil
   # image_path = "Google Cloud Storage URI, eg. 'gs://my-bucket/image.png'"
   # [START vision_set_endpoint]
   require "google/cloud/vision"
@@ -35,6 +35,4 @@ def set_endpoint image_path: nil
   end
 end
 
-if $PROGRAM_NAME == __FILE__
-  set_endpoint image_path: ARGV.first
-end
+detect_text_with_custom_endpoint image_path: ARGV.first if $PROGRAM_NAME == __FILE__
