@@ -31,6 +31,8 @@ namespace :fixtures do
     upload_fixture_file bucket, "logos.png"
     upload_fixture_file bucket, "pdf_ocr.pdf"
     upload_fixture_file bucket, "puppies.jpg"
+    upload_fixture_file bucket, "kafka.pdf"
+    upload_fixture_file bucket, "wakeupcat.jpg"
   end
 end
 
