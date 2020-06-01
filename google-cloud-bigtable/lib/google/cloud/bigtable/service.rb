@@ -735,6 +735,53 @@ module Google
         end
 
         ##
+        # Starts creating a new backup. The underlying Google::Longrunning::Operation tracks creation of the backup.
+        #
+        # @return [Google::Gax::Operation]
+        #
+        def create_backup instance_id, cluster_id, backup_id, source_table_id, expire_time
+          backup = Google::Bigtable::Admin::V2::Backup.new source_table: table_path(instance_id, source_table_id),
+                                                           expire_time:  expire_time
+          execute do
+            tables.create_backup cluster_path(instance_id, cluster_id), backup_id, backup
+          end
+        end
+
+        ##
+        # @return [Google::Bigtable::Admin::V2::Backup]
+        #
+        def get_backup instance_id, cluster_id, backup_id
+          execute do
+            tables.get_backup backup_path(instance_id, cluster_id, backup_id)
+          end
+        end
+
+        ##
+        # @return [Google::Gax::PagedEnumerable<Google::Bigtable::Admin::V2::Backup>]
+        #
+        def list_backups instance_id, cluster_id
+          execute do
+            tables.list_backups cluster_path(instance_id, cluster_id)
+          end
+        end
+
+        ##
+        # @param backup [Google::Bigtable::Admin::V2::Backup | Hash]
+        #
+        def update_backup backup, *fields
+          mask = Google::Protobuf::FieldMask.new paths: fields.map(&:to_s)
+          execute do
+            tables.update_backup backup, mask
+          end
+        end
+
+        def delete_backup instance_id, cluster_id, backup_id
+          execute do
+            tables.delete_backup backup_path(instance_id, cluster_id, backup_id)
+          end
+        end
+
+        ##
         # Executes the API call and wrap errors to {Google::Cloud::Error}.
         #
         # @raise [Google::Cloud::Error]
@@ -819,6 +866,19 @@ module Google
         #
         def app_profile_path instance_id, app_profile_id
           Admin::V2::BigtableInstanceAdminClient.app_profile_path project_id, instance_id, app_profile_id
+        end
+
+        ##
+        # Creates a formatted backup path.
+        #
+        # @param instance_id [String]
+        # @param backup_id [String]
+        # @return [String]
+        #   Formatted snapshot path
+        #   +projects/<project>/instances/<instance>/clusters/<cluster>/backups/<backup>+
+        #
+        def backup_path instance_id, cluster_id, backup_id
+          Admin::V2::BigtableTableAdminClient.backup_path project_id, instance_id, cluster_id, backup_id
         end
 
         ##
