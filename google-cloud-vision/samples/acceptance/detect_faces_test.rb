@@ -1,4 +1,4 @@
-# Copyright 2020 Google, Inc
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ describe "Detect Faces" do
 
   it "detect faces from image file in Google Cloud Storage" do
     assert_output(/Surprise: LIKELY/) do
-      detect_faces image_path: image_path("face_surprise.jpg")
+      detect_faces image_path: gs_url("face_surprise.jpg")
     end
   end
 end

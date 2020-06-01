@@ -14,22 +14,12 @@
 
 require_relative "helper"
 
-require "google/cloud/storage"
+require_relative "../batch_annotate_files_gcs"
 
-require_relative "../detect_landmarks"
-
-describe "Detect Landmarks" do
-  it "detect landmarks from local image file" do
-    assert_output(/Palace/) do
-      detect_landmarks image_path: image_path("palace_of_fine_arts.jpg")
-    end
-  end
-
-  it "detect landmarks from image file in Google Cloud Storage" do
-    gcs_uri = "gs://cloud-samples-data/vision/palace_of_fine_arts.jpg"
-
-    assert_output(/Palace/) do
-      detect_landmarks_gcs image_path: gcs_uri
+describe "Batch annotate files" do
+  it "batch detects text from a file in Google Cloud Storage" do
+    assert_output(/Gregor's back was also more elastic than he had thought/) do
+      sample_batch_annotate_files_gcs gs_url("kafka.pdf")
     end
   end
 end

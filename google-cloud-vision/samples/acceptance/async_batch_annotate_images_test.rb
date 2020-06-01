@@ -14,22 +14,12 @@
 
 require_relative "helper"
 
-require "google/cloud/storage"
+require_relative "../async_batch_annotate_images"
 
-require_relative "../detect_landmarks"
-
-describe "Detect Landmarks" do
-  it "detect landmarks from local image file" do
-    assert_output(/Palace/) do
-      detect_landmarks image_path: image_path("palace_of_fine_arts.jpg")
-    end
-  end
-
-  it "detect landmarks from image file in Google Cloud Storage" do
-    gcs_uri = "gs://cloud-samples-data/vision/palace_of_fine_arts.jpg"
-
-    assert_output(/Palace/) do
-      detect_landmarks_gcs image_path: gcs_uri
+describe "Batch annotate images async" do
+  it "batch detects images asynchronously" do
+    assert_output(/Output written to GCS with prefix/) do
+      sample_async_batch_annotate_images gs_url("wakeupcat.jpg"), gs_url("output/")
     end
   end
 end
