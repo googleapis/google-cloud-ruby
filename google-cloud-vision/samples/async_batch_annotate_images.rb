@@ -16,9 +16,8 @@
 #   title: Async Batch Image Annotation
 #   description: Perform async batch image annotation
 
-require "google/cloud/vision"
-
 # [START vision_async_batch_annotate_images]
+require "google/cloud/vision"
 
 # Perform async batch image annotation
 def sample_async_batch_annotate_images input_image_uri, output_uri

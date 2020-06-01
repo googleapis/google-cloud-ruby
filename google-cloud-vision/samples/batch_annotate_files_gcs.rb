@@ -16,9 +16,8 @@
 #   title:
 #   description: Perform batch file annotation
 
-require "google/cloud/vision"
-
 # [START vision_batch_annotate_files_gcs]
+require "google/cloud/vision"
 
 # Perform batch file annotation
 #
