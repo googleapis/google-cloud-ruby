@@ -3,9 +3,20 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "acceptance/**/*"
     - "grafeas.gemspec"
-    - "lib/**/*"
     - "Rakefile"
-    - "support/**/*"
+    - "acceptance/**/*"
     - "test/**/*"
+
+Bundler/OrderedGems:
+  Enabled: false
+Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "samples/**/acceptance/*.rb"
+
+Naming/FileName:
+  Exclude:
+    - "lib/grafeas.rb"
