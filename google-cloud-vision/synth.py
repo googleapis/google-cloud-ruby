@@ -37,3 +37,10 @@ library = gapic.ruby_library(
 )
 
 s.copy(library, merge=ruby.global_merge)
+
+# TEMP: Remove when microgenerator 0.5.2 is live.
+s.replace(
+    '.rubocop.yml',
+    'samples/acceptance/\\*\\.rb',
+    'samples/**/acceptance/*.rb'
+)
