@@ -1,5 +1,25 @@
 # Release History
 
+### 2.0.0 / 2020-06-01
+
+#### ⚠ BREAKING CHANGES
+
+* **kms:** Convert google-cloud-kms to a wrapper gem
+
+#### Features
+
+* Convert google-cloud-kms to a wrapper gem
+* The endpoint, scope, and quota_project can be set via configuration
+
+#### Bug Fixes
+
+* Eliminated a circular require warning.
+
+#### Documentation
+
+* Cover exception changes in the migration guide
+* Updated the sample timeouts in the migration guide to reflect seconds
+
 ### 1.6.0 / 2020-04-08
 
 #### Features
