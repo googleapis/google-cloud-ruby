@@ -1,5 +1,15 @@
 # Release History
 
+### 0.39.0 / 2020-06-01
+
+#### ⚠ BREAKING CHANGES
+
+* **monitoring:** Change google-cloud-monitoring to a wrapper gem
+
+#### Features
+
+* Change google-cloud-monitoring to a wrapper gem
+
 ### 0.38.0 / 2020-04-21
 
 #### Features
