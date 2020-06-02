@@ -25,7 +25,7 @@ function cleanup() {
 
 cd $REPO_DIR
 
-versions=(2.4.9 2.5.7 2.6.5)
+versions=(2.4.10 2.5.8 2.6.6 2.7.1)
 
 STARTTIME=$(date +%s)
 
