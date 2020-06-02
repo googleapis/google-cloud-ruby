@@ -32,7 +32,7 @@ if [[ $JOB_TYPE = "presubmit" ]]; then
     if [[ $COMMIT_MESSAGE = *"[ci skip]"* || $COMMIT_MESSAGE = *"[skip ci]"* ]]; then
         echo "[ci skip] found. Exiting"
     else
-        version=${versions[2]}
+        version=${versions[3]}
         if [[ $rvm_versions != *$version* ]]; then
             rvm install $version
         fi
