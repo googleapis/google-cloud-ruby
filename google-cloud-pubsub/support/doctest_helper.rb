@@ -139,6 +139,15 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  # DeadLetterPolicy
+
+  doctest.before "Google::Cloud::PubSub::DeadLetterPolicy" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 10), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :update_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 10), [Google::Cloud::PubSub::V1::Subscription, Google::Protobuf::FieldMask, Hash]
+    end
+  end
+
   # Policy
 
   doctest.before "Google::Cloud::PubSub::Policy" do
@@ -338,7 +347,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::PubSub::Subscription#dead_letter" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 10), [Hash]
-      mock_subscriber.expect :update_subscription, subscription_resp, [Hash]
+      mock_subscriber.expect :update_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 10), [Hash]
     end
   end
 

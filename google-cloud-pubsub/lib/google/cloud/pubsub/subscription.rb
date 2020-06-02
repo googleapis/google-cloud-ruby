@@ -15,6 +15,7 @@
 
 require "google/cloud/pubsub/convert"
 require "google/cloud/errors"
+require "google/cloud/pubsub/dead_letter_policy"
 require "google/cloud/pubsub/subscription/list"
 require "google/cloud/pubsub/subscription/push_config"
 require "google/cloud/pubsub/received_message"
@@ -501,6 +502,72 @@ module Google
           update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, dead_letter_policy: dead_letter_policy
           @grpc = service.update_subscription update_grpc, :dead_letter_policy
           @resource_name = nil
+        end
+
+        ##
+        # A policy that specifies the conditions for dead lettering messages in a subscription.
+        #
+        # Dead lettering is done on a best effort basis. The same message might be dead lettered multiple times.
+        #
+        # If validation on any of the fields fails at subscription creation/updation, the create/update subscription
+        # request will fail.
+        #
+        # @return [DeadLetterPolicy, nil] The dead letter policy for the subscription, or `nil`.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic", skip_lookup: true
+        #   sub.dead_letter_policy = Google::Cloud::PubSub::DeadLetterPolicy.new(
+        #     dead_letter_topic:     dead_letter_topic,
+        #     max_delivery_attempts: 20
+        #   )
+        #
+        #   sub.dead_letter_policy.dead_letter_topic.name #=> "projects/my-project/topics/my-dead-letter-topic"
+        #   sub.dead_letter_policy.max_delivery_attempts #=> 10
+        #
+        def dead_letter_policy
+          ensure_grpc!
+          return nil unless @grpc.dead_letter_policy
+          DeadLetterPolicy.from_grpc @grpc.dead_letter_policy, service
+        end
+
+        ##
+        # Sets a policy that specifies the conditions for dead lettering messages in a subscription.
+        #
+        # Dead lettering is done on a best effort basis. The same message might be dead lettered multiple times.
+        #
+        # If validation on any of the fields fails at subscription creation/updation, the create/update subscription
+        # request will fail.
+        #
+        # @param [DeadLetterPolicy, nil] new_dead_letter_policy A new dead_letter policy for the subscription, or `nil`.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic", skip_lookup: true
+        #   sub.dead_letter_policy = Google::Cloud::PubSub::DeadLetterPolicy.new(
+        #     dead_letter_topic:     dead_letter_topic,
+        #     max_delivery_attempts: 20
+        #   )
+        #
+        #   sub.dead_letter_policy.dead_letter_topic.name #=> "projects/my-project/topics/my-dead-letter-topic"
+        #   sub.dead_letter_policy.max_delivery_attempts #=> 10
+        #
+        def dead_letter_policy= new_dead_letter_policy
+          ensure_grpc!
+          new_dead_letter_policy = new_dead_letter_policy.to_grpc if new_dead_letter_policy
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new(
+            name:               name,
+            dead_letter_policy: new_dead_letter_policy
+          )
+          @grpc = service.update_subscription update_grpc, :dead_letter_policy
         end
 
         ##
