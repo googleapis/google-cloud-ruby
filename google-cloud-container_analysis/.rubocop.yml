@@ -4,13 +4,18 @@ inherit_gem:
 AllCops:
   Exclude:
     - "google-cloud-container_analysis.gemspec"
-    - "lib/google/**/*"
     - "Rakefile"
-    - "test/**/*"
     - "acceptance/**/*"
+    - "test/**/*"
 
+Bundler/OrderedGems:
+  Enabled: false
 Documentation:
   Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "samples/**/acceptance/*.rb"
 
 Naming/FileName:
   Exclude:
