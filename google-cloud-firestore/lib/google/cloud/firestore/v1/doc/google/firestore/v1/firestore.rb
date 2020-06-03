@@ -33,7 +33,7 @@ module Google
       # @!attribute [rw] read_time
       #   @return [Google::Protobuf::Timestamp]
       #     Reads the version of the document at the given time.
-      #     This may not be older than 60 seconds.
+      #     This may not be older than 270 seconds.
       class GetDocumentRequest; end
 
       # The request for {Google::Firestore::V1::Firestore::ListDocuments Firestore::ListDocuments}.
@@ -70,7 +70,7 @@ module Google
       # @!attribute [rw] read_time
       #   @return [Google::Protobuf::Timestamp]
       #     Reads documents as they were at the given time.
-      #     This may not be older than 60 seconds.
+      #     This may not be older than 270 seconds.
       # @!attribute [rw] show_missing
       #   @return [true, false]
       #     If the list should show missing documents. A missing document is a
@@ -182,7 +182,7 @@ module Google
       # @!attribute [rw] read_time
       #   @return [Google::Protobuf::Timestamp]
       #     Reads documents as they were at the given time.
-      #     This may not be older than 60 seconds.
+      #     This may not be older than 270 seconds.
       class BatchGetDocumentsRequest; end
 
       # The streamed response for {Google::Firestore::V1::Firestore::BatchGetDocuments Firestore::BatchGetDocuments}.
@@ -285,7 +285,7 @@ module Google
       # @!attribute [rw] read_time
       #   @return [Google::Protobuf::Timestamp]
       #     Reads documents as they were at the given time.
-      #     This may not be older than 60 seconds.
+      #     This may not be older than 270 seconds.
       class RunQueryRequest; end
 
       # The response for {Google::Firestore::V1::Firestore::RunQuery Firestore::RunQuery}.
@@ -313,6 +313,78 @@ module Google
       #     The number of results that have been skipped due to an offset between
       #     the last response and the current response.
       class RunQueryResponse; end
+
+      # The request for {Google::Firestore::V1::Firestore::PartitionQuery Firestore::PartitionQuery}.
+      # @!attribute [rw] parent
+      #   @return [String]
+      #     Required. The parent resource name. In the format:
+      #     `projects/{project_id}/databases/{database_id}/documents`.
+      #     Document resource names are not supported; only database resource names
+      #     can be specified.
+      # @!attribute [rw] structured_query
+      #   @return [Google::Firestore::V1::StructuredQuery]
+      #     A structured query.
+      #     Filters, order bys, limits, offsets, and start/end cursors are not
+      #     supported.
+      # @!attribute [rw] partition_count
+      #   @return [Integer]
+      #     The desired maximum number of partition points.
+      #     The partitions may be returned across multiple pages of results.
+      #     The number must be strictly positive. The actual number of partitions
+      #     returned may be fewer.
+      #
+      #     For example, this may be set to one fewer than the number of parallel
+      #     queries to be run, or in running a data pipeline job, one fewer than the
+      #     number of workers or compute instances available.
+      # @!attribute [rw] page_token
+      #   @return [String]
+      #     The `next_page_token` value returned from a previous call to
+      #     PartitionQuery that may be used to get an additional set of results.
+      #     There are no ordering guarantees between sets of results. Thus, using
+      #     multiple sets of results will require merging the different result sets.
+      #
+      #     For example, two subsequent calls using a page_token may return:
+      #
+      #     * cursor B, cursor M, cursor Q
+      #       * cursor A, cursor U, cursor W
+      #
+      #       To obtain a complete result set ordered with respect to the results of the
+      #       query supplied to PartitionQuery, the results sets should be merged:
+      #       cursor A, cursor B, cursor M, cursor Q, cursor U, cursor W
+      # @!attribute [rw] page_size
+      #   @return [Integer]
+      #     The maximum number of partitions to return in this call, subject to
+      #     `partition_count`.
+      #
+      #     For example, if `partition_count` = 10 and `page_size` = 8, the first call
+      #     to PartitionQuery will return up to 8 partitions and a `next_page_token`
+      #     if more results exist. A second call to PartitionQuery will return up to
+      #     2 partitions, to complete the total of 10 specified in `partition_count`.
+      class PartitionQueryRequest; end
+
+      # The response for {Google::Firestore::V1::Firestore::PartitionQuery Firestore::PartitionQuery}.
+      # @!attribute [rw] partitions
+      #   @return [Array<Google::Firestore::V1::Cursor>]
+      #     Partition results.
+      #     Each partition is a split point that can be used by RunQuery as a starting
+      #     or end point for the query results. The RunQuery requests must be made with
+      #     the same query supplied to this PartitionQuery request. The partition
+      #     cursors will be ordered according to same ordering as the results of the
+      #     query supplied to PartitionQuery.
+      #
+      #     For example, if a PartitionQuery request returns partition cursors A and B,
+      #     running the following three queries will return the entire result set of
+      #     the original query:
+      #
+      #     * query, end_at A
+      #       * query, start_at A, end_at B
+      #     * query, start_at B
+      # @!attribute [rw] next_page_token
+      #   @return [String]
+      #     A page token that may be used to request an additional set of results, up
+      #     to the number specified by `partition_count` in the PartitionQuery request.
+      #     If blank, there are no more results.
+      class PartitionQueryResponse; end
 
       # The request for {Google::Firestore::V1::Firestore::Write Firestore::Write}.
       #
@@ -561,6 +633,38 @@ module Google
       #   @return [String]
       #     A page token that may be used to continue the list.
       class ListCollectionIdsResponse; end
+
+      # The request for {Google::Firestore::V1::Firestore::BatchWrite Firestore::BatchWrite}.
+      # @!attribute [rw] database
+      #   @return [String]
+      #     Required. The database name. In the format:
+      #     `projects/{project_id}/databases/{database_id}`.
+      # @!attribute [rw] writes
+      #   @return [Array<Google::Firestore::V1::Write>]
+      #     The writes to apply.
+      #
+      #     Method does not apply writes atomically and does not guarantee ordering.
+      #     Each write succeeds or fails independently. You cannot write to the same
+      #     document more than once per request.
+      # @!attribute [rw] labels
+      #   @return [Hash{String => String}]
+      #     Labels associated with this batch write.
+      class BatchWriteRequest; end
+
+      # The response from {Google::Firestore::V1::Firestore::BatchWrite Firestore::BatchWrite}.
+      # @!attribute [rw] write_results
+      #   @return [Array<Google::Firestore::V1::WriteResult>]
+      #     The result of applying the writes.
+      #
+      #     This i-th write result corresponds to the i-th write in the
+      #     request.
+      # @!attribute [rw] status
+      #   @return [Array<Google::Rpc::Status>]
+      #     The status of applying the writes.
+      #
+      #     This i-th write status corresponds to the i-th write in the
+      #     request.
+      class BatchWriteResponse; end
     end
   end
 end
