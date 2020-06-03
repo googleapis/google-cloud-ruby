@@ -13,21 +13,24 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../quickstart.rb"
+require_relative "../storage_disable_bucket_lifecycle_management.rb"
 
-describe "Storage Quickstart" do
-  let(:storage_client) { Google::Cloud::Storage.new }
-  let(:bucket_name)    { "ruby_storage_sample_#{SecureRandom.hex}" }
+describe "disable_bucket_lifecycle_management" do
+  parallelize_me!
 
-  after do
-    delete_bucket_helper bucket_name
-  end
+  let(:bucket) { create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}" }
+  after { delete_bucket_helper bucket.name }
 
-  it "creates a new bucket" do
-    assert_output "Bucket #{bucket_name} was created.\n" do
-      quickstart bucket_name: bucket_name
+  it "can disable bucket lifecycle management" do
+    bucket.lifecycle do |l|
+      l.add_delete_rule age: 2
     end
 
-    assert storage_client.bucket bucket_name
+    out, _err = capture_io do
+      updated_bucket = disable_bucket_lifecycle_management bucket_name: bucket.name
+      assert_empty updated_bucket.lifecycle
+    end
+
+    assert_includes out, "Lifecycle management is disabled"
   end
 end

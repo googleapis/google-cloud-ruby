@@ -18,3 +18,5 @@ Style/IfUnlessModifier:
     Enabled: false
 Style/Next:
     Enabled: false
+Style/SymbolProc:
+    Enabled: false
