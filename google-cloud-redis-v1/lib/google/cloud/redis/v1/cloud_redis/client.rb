@@ -346,7 +346,7 @@ module Google
             # Creates a Redis instance based on the specified tier and memory size.
             #
             # By default, the instance is accessible from the project's
-            # [default network](/compute/docs/networks-and-firewalls#networks).
+            # [default network](https://cloud.google.com/vpc/docs/vpc).
             #
             # The creation is executed asynchronously and callers may check the returned
             # operation to track its progress. Once the operation is completed the Redis
@@ -924,7 +924,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if @parent_config&.respond_to? :rpcs
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
