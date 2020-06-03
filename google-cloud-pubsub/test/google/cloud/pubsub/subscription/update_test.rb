@@ -27,7 +27,9 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
   end
   let(:dead_letter_topic_name) { "topic-name-dead-letter" }
   let(:dead_letter_topic_path) { topic_path(dead_letter_topic_name) }
+  let(:dead_letter_topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(dead_letter_topic_name)), pubsub.service }
   let(:new_dead_letter_topic_name) { "topic-name-dead-letter-2" }
+  let(:new_dead_letter_topic_path) { topic_path(new_dead_letter_topic_name) }
   let(:new_dead_letter_topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(new_dead_letter_topic_name)), pubsub.service }
   let(:retry_minimum_backoff) { 12.123 }
   let(:new_retry_minimum_backoff) { 13 }
@@ -219,10 +221,79 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     _(subscription.push_config.authentication.audience).must_equal "some-header-value"
   end
 
-  it "updates dead_letter_topic" do
-    dead_letter_policy = Google::Cloud::PubSub::V1::DeadLetterPolicy.new(dead_letter_topic: new_dead_letter_topic.name, max_delivery_attempts: 6)
+  it "updates dead_letter_policy dead_letter_topic" do
+    dead_letter_policy_gapi = Google::Cloud::PubSub::V1::DeadLetterPolicy.new(dead_letter_topic: new_dead_letter_topic_path, max_delivery_attempts: 6)
     update_sub = Google::Cloud::PubSub::V1::Subscription.new \
-      name: sub_path, dead_letter_policy: dead_letter_policy
+      name: sub_path, dead_letter_policy: dead_letter_policy_gapi
+    update_mask = Google::Protobuf::FieldMask.new paths: ["dead_letter_policy"]
+    mock = Minitest::Mock.new
+    mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+    subscription.service.mocked_subscriber = mock
+
+    subscription.dead_letter_policy = Google::Cloud::PubSub::DeadLetterPolicy.new(
+      dead_letter_topic:     new_dead_letter_topic,
+      max_delivery_attempts: 6
+    )
+    mock.verify
+
+    # read using DeadLetterPolicy value object
+    dead_letter_policy = subscription.dead_letter_policy
+    _(dead_letter_policy).must_be_kind_of Google::Cloud::PubSub::DeadLetterPolicy
+    _(dead_letter_policy.dead_letter_topic.name).must_equal new_dead_letter_topic_path
+    _(dead_letter_policy.max_delivery_attempts).must_equal 6
+    # read using subscription helpers
+    _(subscription.dead_letter_topic.name).must_equal new_dead_letter_topic_path
+    _(subscription.dead_letter_max_delivery_attempts).must_equal 6
+  end
+
+  it "updates dead_letter_policy max_delivery_attempts" do
+    dead_letter_policy_gapi = Google::Cloud::PubSub::V1::DeadLetterPolicy.new(dead_letter_topic: dead_letter_topic_path, max_delivery_attempts: 7)
+    update_sub = Google::Cloud::PubSub::V1::Subscription.new \
+      name: sub_path, dead_letter_policy: dead_letter_policy_gapi
+    update_mask = Google::Protobuf::FieldMask.new paths: ["dead_letter_policy"]
+    mock = Minitest::Mock.new
+    mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+    subscription.service.mocked_subscriber = mock
+
+    subscription.dead_letter_policy = Google::Cloud::PubSub::DeadLetterPolicy.new(
+      dead_letter_topic:     dead_letter_topic,
+      max_delivery_attempts: 7
+    )
+
+    mock.verify
+
+    # read using DeadLetterPolicy value object
+    dead_letter_policy = subscription.dead_letter_policy
+    _(dead_letter_policy).must_be_kind_of Google::Cloud::PubSub::DeadLetterPolicy
+    _(dead_letter_policy.dead_letter_topic.name).must_equal dead_letter_topic_path
+    _(dead_letter_policy.max_delivery_attempts).must_equal 7
+    # read using subscription helpers
+    _(subscription.dead_letter_topic.name).must_equal dead_letter_topic_path
+    _(subscription.dead_letter_max_delivery_attempts).must_equal 7
+  end
+
+  it "updates dead_letter_policy to nil" do
+    update_sub = Google::Cloud::PubSub::V1::Subscription.new name: sub_path, dead_letter_policy: nil
+    update_mask = Google::Protobuf::FieldMask.new paths: ["dead_letter_policy"]
+    mock = Minitest::Mock.new
+    mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+    subscription.service.mocked_subscriber = mock
+
+    subscription.dead_letter_policy = nil
+
+    mock.verify
+
+    # read using DeadLetterPolicy value object
+    _(subscription.dead_letter_policy).must_be :nil?
+    # read using subscription helpers
+    _(subscription.dead_letter_topic).must_be :nil?
+    _(subscription.dead_letter_max_delivery_attempts).must_be :nil?
+  end
+
+  it "updates dead_letter_topic" do
+    dead_letter_policy_gapi = Google::Cloud::PubSub::V1::DeadLetterPolicy.new(dead_letter_topic: new_dead_letter_topic_path, max_delivery_attempts: 6)
+    update_sub = Google::Cloud::PubSub::V1::Subscription.new \
+      name: sub_path, dead_letter_policy: dead_letter_policy_gapi
     update_mask = Google::Protobuf::FieldMask.new paths: ["dead_letter_policy"]
     mock = Minitest::Mock.new
     mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
@@ -232,14 +303,20 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
     mock.verify
 
-    _(subscription.dead_letter_topic.name).must_equal new_dead_letter_topic.name
+    # read using DeadLetterPolicy value object
+    dead_letter_policy = subscription.dead_letter_policy
+    _(dead_letter_policy).must_be_kind_of Google::Cloud::PubSub::DeadLetterPolicy
+    _(dead_letter_policy.dead_letter_topic.name).must_equal new_dead_letter_topic_path
+    _(dead_letter_policy.max_delivery_attempts).must_equal 6
+    # read using subscription helpers
+    _(subscription.dead_letter_topic.name).must_equal new_dead_letter_topic_path
     _(subscription.dead_letter_max_delivery_attempts).must_equal 6
   end
 
   it "updates dead_letter_max_delivery_attempts" do
-    dead_letter_policy = Google::Cloud::PubSub::V1::DeadLetterPolicy.new(dead_letter_topic: dead_letter_topic_path, max_delivery_attempts: 7)
+    dead_letter_policy_gapi = Google::Cloud::PubSub::V1::DeadLetterPolicy.new(dead_letter_topic: dead_letter_topic_path, max_delivery_attempts: 7)
     update_sub = Google::Cloud::PubSub::V1::Subscription.new \
-      name: sub_path, dead_letter_policy: dead_letter_policy
+      name: sub_path, dead_letter_policy: dead_letter_policy_gapi
     update_mask = Google::Protobuf::FieldMask.new paths: ["dead_letter_policy"]
     mock = Minitest::Mock.new
     mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
@@ -249,6 +326,12 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
     mock.verify
 
+    # read using DeadLetterPolicy value object
+    dead_letter_policy = subscription.dead_letter_policy
+    _(dead_letter_policy).must_be_kind_of Google::Cloud::PubSub::DeadLetterPolicy
+    _(dead_letter_policy.dead_letter_topic.name).must_equal dead_letter_topic_path
+    _(dead_letter_policy.max_delivery_attempts).must_equal 7
+    # read using subscription helpers
     _(subscription.dead_letter_topic.name).must_equal dead_letter_topic_path
     _(subscription.dead_letter_max_delivery_attempts).must_equal 7
   end

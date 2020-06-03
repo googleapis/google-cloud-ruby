@@ -91,6 +91,12 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     _(subscription.filter).must_equal filter
   end
 
+  it "gets dead_letter_policy from the Google API object" do
+    dead_letter_policy = subscription.dead_letter_policy
+    _(dead_letter_policy.dead_letter_topic.name).must_equal dead_letter_topic_path
+    _(dead_letter_policy.max_delivery_attempts).must_equal 6
+  end
+
   it "gets dead_letter_topic from the Google API object" do
     _(subscription.dead_letter_topic.name).must_equal dead_letter_topic_path
   end
@@ -206,6 +212,12 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
       mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
       subscription.service.mocked_subscriber = mock
 
+      # read using DeadLetterPolicy value object
+      dead_letter_policy = subscription.dead_letter_policy
+      _(dead_letter_policy).must_be_kind_of Google::Cloud::PubSub::DeadLetterPolicy
+      _(dead_letter_policy.dead_letter_topic.name).must_equal dead_letter_topic_path
+      _(dead_letter_policy.max_delivery_attempts).must_equal 7
+      # read using subscription helpers
       _(subscription.dead_letter_topic.name).must_equal dead_letter_topic_path
       _(subscription.dead_letter_max_delivery_attempts).must_equal 7
 

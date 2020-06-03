@@ -239,6 +239,12 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     mock.verify
 
     _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    # read using DeadLetterPolicy value object
+    dead_letter_policy = sub.dead_letter_policy
+    _(dead_letter_policy).must_be_kind_of Google::Cloud::PubSub::DeadLetterPolicy
+    _(dead_letter_policy.dead_letter_topic.name).must_equal topic_path(dead_letter_topic_name)
+    _(dead_letter_policy.max_delivery_attempts).must_equal 7
+    # read using subscription helpers
     _(sub.dead_letter_topic.name).must_equal topic_path(dead_letter_topic_name)
     _(sub.dead_letter_max_delivery_attempts).must_equal 7
   end
