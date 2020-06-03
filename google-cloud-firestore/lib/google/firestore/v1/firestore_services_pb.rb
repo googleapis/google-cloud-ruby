@@ -63,12 +63,26 @@ module Google
           rpc :Rollback, RollbackRequest, Google::Protobuf::Empty
           # Runs a query.
           rpc :RunQuery, RunQueryRequest, stream(RunQueryResponse)
+          # Partitions a query by returning partition cursors that can be used to run
+          # the query in parallel. The returned partition cursors are split points that
+          # can be used by RunQuery as starting/end points for the query results.
+          rpc :PartitionQuery, PartitionQueryRequest, PartitionQueryResponse
           # Streams batches of document updates and deletes, in order.
           rpc :Write, stream(WriteRequest), stream(WriteResponse)
           # Listens to changes.
           rpc :Listen, stream(ListenRequest), stream(ListenResponse)
           # Lists all the collection IDs underneath a document.
           rpc :ListCollectionIds, ListCollectionIdsRequest, ListCollectionIdsResponse
+          # Applies a batch of write operations.
+          #
+          # The BatchWrite method does not apply the write operations atomically
+          # and can apply them out of order. Method does not allow more than one write
+          # per document. Each write succeeds or fails independently. See the
+          # [BatchWriteResponse][google.firestore.v1.BatchWriteResponse] for the success status of each write.
+          #
+          # If you require an atomically applied set of writes, use
+          # [Commit][google.firestore.v1.Firestore.Commit] instead.
+          rpc :BatchWrite, BatchWriteRequest, BatchWriteResponse
           # Creates a new document.
           rpc :CreateDocument, CreateDocumentRequest, Document
         end

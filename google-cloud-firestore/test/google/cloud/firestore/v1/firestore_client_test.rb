@@ -1027,4 +1027,149 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
       end
     end
   end
+
+  describe 'partition_query' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Firestore::V1::FirestoreClient#partition_query."
+
+    it 'invokes partition_query without error' do
+      # Create request parameters
+      parent = ''
+
+      # Create expected grpc response
+      next_page_token = ""
+      partitions_element = {}
+      partitions = [partitions_element]
+      expected_response = { next_page_token: next_page_token, partitions: partitions }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Firestore::V1::PartitionQueryResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Firestore::V1::PartitionQueryRequest, request)
+        assert_equal(parent, request.parent)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:partition_query, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockFirestoreCredentials_v1.new("partition_query")
+
+      Google::Firestore::V1::Firestore::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Firestore::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Firestore::V1.new
+
+          # Call method
+          response = client.partition_query(parent)
+
+          # Verify the response
+          assert(response.instance_of?(Google::Gax::PagedEnumerable))
+          assert_equal(expected_response, response.page.response)
+          assert_nil(response.next_page)
+          assert_equal(expected_response.partitions.to_a, response.to_a)
+        end
+      end
+    end
+
+    it 'invokes partition_query with error' do
+      # Create request parameters
+      parent = ''
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Firestore::V1::PartitionQueryRequest, request)
+        assert_equal(parent, request.parent)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:partition_query, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockFirestoreCredentials_v1.new("partition_query")
+
+      Google::Firestore::V1::Firestore::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Firestore::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Firestore::V1.new
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.partition_query(parent)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'batch_write' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Firestore::V1::FirestoreClient#batch_write."
+
+    it 'invokes batch_write without error' do
+      # Create request parameters
+      database = ''
+
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Firestore::V1::BatchWriteResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Firestore::V1::BatchWriteRequest, request)
+        assert_equal(database, request.database)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:batch_write, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockFirestoreCredentials_v1.new("batch_write")
+
+      Google::Firestore::V1::Firestore::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Firestore::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Firestore::V1.new
+
+          # Call method
+          response = client.batch_write(database)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.batch_write(database) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes batch_write with error' do
+      # Create request parameters
+      database = ''
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Firestore::V1::BatchWriteRequest, request)
+        assert_equal(database, request.database)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:batch_write, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockFirestoreCredentials_v1.new("batch_write")
+
+      Google::Firestore::V1::Firestore::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Firestore::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Firestore::V1.new
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.batch_write(database)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
 end
