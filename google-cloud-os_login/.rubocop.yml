@@ -15,7 +15,7 @@ Documentation:
 
 Metrics/BlockLength:
   Exclude:
-    - "samples/acceptance/*.rb"
+    - "samples/**/acceptance/*.rb"
 
 Naming/FileName:
   Exclude:
