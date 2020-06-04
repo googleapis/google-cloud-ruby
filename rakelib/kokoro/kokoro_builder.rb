@@ -13,6 +13,7 @@ class KokoroBuilder < Command
   end
 
   def build
+    remove_old_ruby_versions
     build_kokoro_configs
     generate_dockerfiles
   end
@@ -31,6 +32,14 @@ class KokoroBuilder < Command
     File.open output, "w" do |f|
       config = ERB.new File.read(template)
       f.write config.result(binding)
+    end
+  end
+
+  def remove_old_ruby_versions
+    files = Dir.glob "./.kokoro/**/*.cfg"
+    files.select! { |file| file.match(/ruby_\d+\.\d+\.\d+\.cfg/) }
+    files.each do |file|
+      FileUtils.remove_file file
     end
   end
 
