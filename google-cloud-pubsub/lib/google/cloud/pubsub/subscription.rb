@@ -504,6 +504,72 @@ module Google
         end
 
         ##
+        # Removes an existing dead letter policy. A dead letter policy specifies the conditions for dead lettering
+        # messages in the subscription. If a dead letter policy is not set, dead lettering is disabled.
+        #
+        # See {#dead_letter_topic}, {#dead_letter_topic=}, {#dead_letter_max_delivery_attempts}, and
+        # {#dead_letter_max_delivery_attempts=}.
+        #
+        # @return [Boolean] `true` if an existing dead letter policy was removed, `false` if no existing dead letter
+        #   policy was present.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #
+        #   sub.dead_letter_topic.name #=> "projects/my-project/topics/my-dead-letter-topic"
+        #   sub.dead_letter_max_delivery_attempts #=> 10
+        #
+        #   sub.dead_letter_policy? #=> true
+        #   sub.remove_dead_letter_policy!
+        #   sub.dead_letter_policy? #=> false
+        #
+        #   sub.dead_letter_topic #=> nil
+        #   sub.dead_letter_max_delivery_attempts #=> nil
+        #
+        def remove_dead_letter_policy!
+          ensure_grpc!
+          return false unless dead_letter_policy?
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, dead_letter_policy: nil
+          @grpc = service.update_subscription update_grpc, :dead_letter_policy
+          true
+        end
+
+        ##
+        # Whether the subscription has a dead letter policy. A dead letter policy specifies the conditions for dead
+        # lettering messages in the subscription. If a dead letter policy is not set, dead lettering is disabled.
+        #
+        # See {#dead_letter_topic}, {#dead_letter_topic=}, {#dead_letter_max_delivery_attempts}, and
+        # {#dead_letter_max_delivery_attempts=}.
+        #
+        # @return [Boolean] `true` if the subscription has a dead letter policy, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #
+        #   sub.dead_letter_topic.name #=> "projects/my-project/topics/my-dead-letter-topic"
+        #   sub.dead_letter_max_delivery_attempts #=> 10
+        #
+        #   sub.dead_letter_policy? #=> true
+        #   sub.remove_dead_letter_policy!
+        #   sub.dead_letter_policy? #=> false
+        #
+        #   sub.dead_letter_topic #=> nil
+        #   sub.dead_letter_max_delivery_attempts #=> nil
+        #
+        def dead_letter_policy?
+          ensure_grpc!
+          !@grpc.dead_letter_policy.nil?
+        end
+
+        ##
         # A policy that specifies how Cloud Pub/Sub retries message delivery for this subscription. If `nil`, the
         # default retry policy is applied. This generally implies that messages will be retried as soon as possible
         # for healthy subscribers. Retry Policy will be triggered on NACKs or acknowledgement deadline exceeded events

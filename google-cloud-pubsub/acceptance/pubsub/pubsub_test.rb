@@ -307,6 +307,7 @@ describe Google::Cloud::PubSub, :pubsub do
 
     if $project_number
       it "should be able to direct messages to a dead letter topic" do
+        dead_letter_subscription_2 = nil
         begin
           dead_letter_topic = retrieve_topic dead_letter_topic_name
           dead_letter_subscription = dead_letter_topic.subscribe "#{$topic_prefix}-dead-letter-sub1"
@@ -320,22 +321,15 @@ describe Google::Cloud::PubSub, :pubsub do
 
           # create
           subscription = topic.subscribe "#{$topic_prefix}-sub6", dead_letter_topic: dead_letter_topic, dead_letter_max_delivery_attempts: 6
+          _(subscription.dead_letter_policy?).must_equal true
+          _(subscription.dead_letter_topic.name).must_equal dead_letter_topic.name
           _(subscription.dead_letter_max_delivery_attempts).must_equal 6
-          _(subscription.dead_letter_topic.reload!.name).must_equal dead_letter_topic.name
-
-          # update
-          subscription.dead_letter_max_delivery_attempts = 5
-          _(subscription.dead_letter_max_delivery_attempts).must_equal 5
-          dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2
-          dead_letter_subscription_2 = dead_letter_topic_2.subscribe "#{$topic_prefix}-dead-letter-sub2"
-          subscription.dead_letter_topic = dead_letter_topic_2
-          _(subscription.dead_letter_topic.reload!.name).must_equal dead_letter_topic_2.name
 
           # Publish a new message
           msg = topic.publish "dead-letter-#{rand(1000)}"
           _(msg).wont_be :nil?
 
-          # Check it pulls the message
+          # Nack the message
           (1..7).each do |i|
             received_messages = pull_with_retry subscription
             _(received_messages.count).must_equal 1
@@ -346,17 +340,38 @@ describe Google::Cloud::PubSub, :pubsub do
           end
 
           # Check the dead letter subscription pulls the message
-          received_messages = dead_letter_subscription.pull
+          received_messages = pull_with_retry dead_letter_subscription
           _(received_messages).wont_be :empty?
           _(received_messages.count).must_equal 1
           received_message = received_messages.first
           _(received_message).wont_be :nil?
           _(received_message.msg.data).must_equal msg.data
           _(received_message.delivery_attempt).must_be :nil?
+
+          # update
+          dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2
+          dead_letter_subscription_2 = dead_letter_topic_2.subscribe "#{$topic_prefix}-dead-letter-sub2"
+          subscription.dead_letter_topic = dead_letter_topic_2
+          _(subscription.dead_letter_policy?).must_equal true
+          _(subscription.dead_letter_topic.name).must_equal dead_letter_topic_2.name
+          _(subscription.dead_letter_max_delivery_attempts).must_equal 6
+
+          subscription.dead_letter_max_delivery_attempts = 5
+          _(subscription.dead_letter_policy?).must_equal true
+          _(subscription.dead_letter_topic.name).must_equal dead_letter_topic_2.name
+          _(subscription.dead_letter_max_delivery_attempts).must_equal 5
+
+          # delete
+          subscription.remove_dead_letter_policy!
+          _(subscription.dead_letter_policy?).must_equal false
+          _(subscription.dead_letter_topic).must_be :nil?
+          _(subscription.dead_letter_max_delivery_attempts).must_be :nil?
+
         ensure
-          # Remove the subscription
-          subscription.delete
-          dead_letter_subscription.delete
+          # cleanup
+          subscription.delete if subscription
+          dead_letter_subscription.delete if dead_letter_subscription
+          dead_letter_subscription_2.delete if dead_letter_subscription_2
         end
       end
     end
