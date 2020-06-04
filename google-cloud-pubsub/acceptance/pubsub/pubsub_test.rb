@@ -355,7 +355,7 @@ describe Google::Cloud::PubSub, :pubsub do
           dead_letter_subscription_2.delete
 
           # Check the dead letter subscription pulls the message
-          received_messages = dead_letter_subscription.pull
+          received_messages = pull_with_retry dead_letter_subscription
           _(received_messages).wont_be :empty?
           _(received_messages.count).must_equal 1
           received_message = received_messages.first

@@ -512,7 +512,8 @@ module Google
         # If validation on any of the fields fails at subscription creation/updation, the create/update subscription
         # request will fail.
         #
-        # @return [DeadLetterPolicy, nil] The dead letter policy for the subscription, or `nil`.
+        # @return [DeadLetterPolicy, nil] The dead letter policy for the subscription, or `nil` for no policy,
+        #   indicating that dead lettering is disabled.
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -543,7 +544,8 @@ module Google
         # If validation on any of the fields fails at subscription creation/updation, the create/update subscription
         # request will fail.
         #
-        # @param [DeadLetterPolicy, nil] new_dead_letter_policy A new dead_letter policy for the subscription, or `nil`.
+        # @param [DeadLetterPolicy, nil] new_dead_letter_policy A new dead_letter policy for the subscription, or `nil`
+        #   for no policy, indicating that dead lettering is disabled.
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -559,6 +561,15 @@ module Google
         #
         #   sub.dead_letter_policy.dead_letter_topic.name #=> "projects/my-project/topics/my-dead-letter-topic"
         #   sub.dead_letter_policy.max_delivery_attempts #=> 10
+        #
+        # @example Remove an existing policy to disable dead lettering:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic", skip_lookup: true
+        #   sub.dead_letter_policy = nil
         #
         def dead_letter_policy= new_dead_letter_policy
           ensure_grpc!
