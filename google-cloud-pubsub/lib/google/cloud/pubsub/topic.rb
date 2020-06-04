@@ -289,10 +289,6 @@ module Google
         # @param [String] filter An expression written in the Cloud Pub/Sub filter language. If non-empty, then only
         #   {Message} instances whose `attributes` field matches the filter are delivered on this subscription. If
         #   empty, then no messages are filtered out. Optional.
-        #
-        #   **EXPERIMENTAL:** This feature is part of a closed alpha release. This API might be changed in
-        #   backward-incompatible ways and is not recommended for production use. It is not subject to any SLA or
-        #   deprecation policy.
         # @param [Topic] dead_letter_topic The {Topic} to which dead letter messages for the subscription should be
         #   published. Dead lettering is done on a best effort basis. The same message might be dead lettered multiple
         #   times. The Cloud Pub/Sub service account associated with the enclosing subscription's parent project (i.e.,
