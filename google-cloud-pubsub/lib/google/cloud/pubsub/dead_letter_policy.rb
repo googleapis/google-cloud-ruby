@@ -27,7 +27,7 @@ module Google
       # If validation on any of the fields fails at subscription creation/updation, the create/update subscription
       # request will fail.
       #
-      # @attr [Numeric] dead_letter_topic The topic to which dead letter messages for the subscription should be
+      # @attr [Topic] dead_letter_topic The topic to which dead letter messages for the subscription should be
       #   published. Dead lettering is done on a best effort basis. The same message might be dead lettered multiple
       #   times. The Cloud Pub/Sub service account associated with the enclosing subscription's parent project (i.e.,
       #   `service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com`) must have permission to Publish() to this
@@ -66,15 +66,14 @@ module Google
         ##
         # Creates a new, immutable DeadLetterPolicy value object.
         #
-        # @attr [Topic, nil] dead_letter_topic The topic to which dead letter messages for the subscription should be
+        # @param [Topic] dead_letter_topic The topic to which dead letter messages for the subscription should be
         #   published. Dead lettering is done on a best effort basis. The same message might be dead lettered multiple
         #   times. The Cloud Pub/Sub service account associated with the enclosing subscription's parent project (i.e.,
         #   `service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com`) must have permission to Publish() to
-        #   this topic.
-        #
-        #   The operation will fail if the topic does not exist. Users should ensure that there is a subscription
-        #   attached to this topic since messages published to a topic with no subscriptions are lost.
-        # @attr [Integer, nil] max_delivery_attempts The maximum number of delivery attempts for any message in the
+        #   this topic. The operation will fail if the topic does not exist. Users should ensure that there is a
+        #   subscription attached to this topic since messages published to a topic with no subscriptions are lost.
+        #   Required.
+        # @param [Integer, nil] max_delivery_attempts The maximum number of delivery attempts for any message in the
         #   subscription's dead letter policy. Dead lettering is done on a best effort basis. The same message might be
         #   dead lettered multiple times. The value must be between 5 and 100.
         #

@@ -330,11 +330,13 @@ describe Google::Cloud::PubSub, :pubsub do
           # update using DeadLetterPolicy value object
           dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2
           dead_letter_subscription_2 = dead_letter_topic_2.subscribe "#{$topic_prefix}-dead-letter-sub2"
-          subscription.dead_letter_policy = Google::Cloud::PubSub::DeadLetterPolicy.new(
+          updated_dead_letter_policy = Google::Cloud::PubSub::DeadLetterPolicy.new(
             dead_letter_topic:     dead_letter_topic_2,
-            max_delivery_attempts: 5
+            max_delivery_attempts: nil
           )
+          subscription.dead_letter_policy = updated_dead_letter_policy
           _(subscription.dead_letter_policy.dead_letter_topic.name).must_equal dead_letter_topic_2.name
+          _(updated_dead_letter_policy.max_delivery_attempts).must_be :nil?
           _(subscription.dead_letter_policy.max_delivery_attempts).must_equal 5
           subscription.reload!
           _(subscription.dead_letter_policy.dead_letter_topic.name).must_equal dead_letter_topic_2.name
@@ -351,16 +353,6 @@ describe Google::Cloud::PubSub, :pubsub do
 
           # fixture cleanup
           dead_letter_subscription_2.delete
-
-          # Check it pulls the message
-          (1..7).each do |i|
-            received_messages = pull_with_retry subscription
-            _(received_messages.count).must_equal 1
-            received_message = received_messages.first
-            _(received_message.msg.data).must_equal msg.data
-            _(received_message.delivery_attempt).must_be :>, 0
-            received_message.nack!
-          end
 
           # Check the dead letter subscription pulls the message
           received_messages = dead_letter_subscription.pull
