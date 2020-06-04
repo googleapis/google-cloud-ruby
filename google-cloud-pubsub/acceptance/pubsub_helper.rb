@@ -27,7 +27,7 @@ if ENV["GCLOUD_TEST_GENERATE_XML_REPORT"]
 end
 
 # Create shared pubsub object so we don't create new for each test
-$pubsub = Google::Cloud::PubSub.new endpoint: "staging-pubsub.sandbox.googleapis.com"
+$pubsub = Google::Cloud::PubSub.new
 
 # Dead Letter Queue (DLQ) testing requires IAM bindings to the Cloud Pub/Sub service account that is automatically
 # created and managed by the service team in a private project.

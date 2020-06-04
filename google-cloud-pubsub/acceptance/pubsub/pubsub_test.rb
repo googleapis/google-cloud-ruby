@@ -165,8 +165,6 @@ describe Google::Cloud::PubSub, :pubsub do
       # update
       subscription.labels = {}
       _(subscription.labels).must_be :empty?
-      subscription.filter = nil
-      _(subscription.filter).must_be :nil?
       subscription.retry_policy = nil
       subscription.reload!
       _(subscription.retry_policy).must_be :nil?
