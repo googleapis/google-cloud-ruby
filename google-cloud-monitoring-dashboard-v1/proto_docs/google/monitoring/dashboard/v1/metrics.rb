@@ -35,7 +35,7 @@ module Google
           #     The unit of data contained in fetched time series. If non-empty, this
           #     unit will override any unit that accompanies fetched data. The format is
           #     the same as the
-          #     [`unit`](/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors)
+          #     [`unit`](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors)
           #     field in `MetricDescriptor`.
           class TimeSeriesQuery
             include ::Google::Protobuf::MessageExts
@@ -44,11 +44,11 @@ module Google
 
           # A filter that defines a subset of time series data that is displayed in a
           # widget. Time series data is fetched using the
-          # [`ListTimeSeries`](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list)
+          # [`ListTimeSeries`](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list)
           # method.
           # @!attribute [rw] filter
           #   @return [::String]
-          #     Required. The [monitoring filter](/monitoring/api/v3/filters) that identifies the
+          #     Required. The [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters) that identifies the
           #     metric types, resources, and projects to query.
           # @!attribute [rw] aggregation
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Aggregation]
@@ -92,7 +92,7 @@ module Google
             # TimeSeriesFilterRatio.
             # @!attribute [rw] filter
             #   @return [::String]
-            #     Required. The [monitoring filter](/monitoring/api/v3/filters) that identifies the
+            #     Required. The [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters) that identifies the
             #     metric types, resources, and projects to query.
             # @!attribute [rw] aggregation
             #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Aggregation]
