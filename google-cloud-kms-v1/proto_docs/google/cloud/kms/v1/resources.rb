@@ -96,7 +96,7 @@ module Google
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels with user-defined metadata. For more information, see
-        #     [Labeling Keys](/kms/docs/labeling-keys).
+        #     [Labeling Keys](https://cloud.google.com/kms/docs/labeling-keys).
         class CryptoKey
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
