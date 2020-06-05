@@ -1243,6 +1243,7 @@ google-cloud-vision:
 - v0.20.1
 - v0.20.0
 google-cloud-vision-v1:
+- v0.2.2
 - v0.2.1
 - v0.2.0
 - v0.1.5
