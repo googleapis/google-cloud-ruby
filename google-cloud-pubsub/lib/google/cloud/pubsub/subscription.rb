@@ -450,8 +450,7 @@ module Google
         #
         # Makes an API call to retrieve the value when called on a reference object. See {#reference?}.
         #
-        # @return [Integer, nil] A value between `5` and `100`, or `nil` if no dead letter policy is configured. If this
-        #   value was set to `0` or `nil`, a default value of `5` is used.
+        # @return [Integer, nil] A value between `5` and `100`, or `nil` if no dead letter policy is configured.
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -478,7 +477,7 @@ module Google
         #
         # This field will be honored on a best effort basis. If this parameter is 0, a default value of 5 is used.
         #
-        # The dead letter topic must also be set. See {#dead_letter_topic=}, {#dead_letter_topic},
+        # The dead letter topic must be set first. See {#dead_letter_topic=}, {#dead_letter_topic},
         # {#dead_letter_policy?} and {#remove_dead_letter_policy!}.
         #
         # @param [Integer, nil] new_dead_letter_max_delivery_attempts A value between 5 and 100. If this parameter is
@@ -528,11 +527,11 @@ module Google
         #
         #   sub.dead_letter_topic.name #=> "projects/my-project/topics/my-dead-letter-topic"
         #   sub.dead_letter_max_delivery_attempts #=> 10
-        #
         #   sub.dead_letter_policy? #=> true
-        #   sub.remove_dead_letter_policy!
-        #   sub.dead_letter_policy? #=> false
         #
+        #   sub.remove_dead_letter_policy!
+        #
+        #   sub.dead_letter_policy? #=> false
         #   sub.dead_letter_topic #=> nil
         #   sub.dead_letter_max_delivery_attempts #=> nil
         #
@@ -562,11 +561,11 @@ module Google
         #
         #   sub.dead_letter_topic.name #=> "projects/my-project/topics/my-dead-letter-topic"
         #   sub.dead_letter_max_delivery_attempts #=> 10
-        #
         #   sub.dead_letter_policy? #=> true
-        #   sub.remove_dead_letter_policy!
-        #   sub.dead_letter_policy? #=> false
         #
+        #   sub.remove_dead_letter_policy!
+        #
+        #   sub.dead_letter_policy? #=> false
         #   sub.dead_letter_topic #=> nil
         #   sub.dead_letter_max_delivery_attempts #=> nil
         #
