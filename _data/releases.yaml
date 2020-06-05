@@ -988,6 +988,7 @@ google-cloud-speech-v1:
 - v0.1.1
 - v0.1.0
 google-cloud-speech-v1p1beta1:
+- v0.3.2
 - v0.2.1
 - v0.1.1
 google-cloud-storage:
