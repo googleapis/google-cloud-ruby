@@ -1110,6 +1110,7 @@ google-cloud-text_to_speech-v1:
 - v0.2.1
 - v0.1.0
 google-cloud-text_to_speech-v1beta1:
+- v0.2.2
 - v0.2.1
 - v0.2.0
 google-cloud-trace:
