@@ -771,6 +771,8 @@ google-cloud-recaptcha_enterprise:
 - v0.3.1
 - v0.1.1
 - v0.1.0
+google-cloud-recaptcha_enterprise-v1:
+- v0.2.2
 google-cloud-recaptcha_enterprise-v1beta1:
 - v0.2.1
 - v0.2.0
