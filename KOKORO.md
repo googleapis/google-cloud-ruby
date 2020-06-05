@@ -37,17 +37,6 @@
   - The parent gem has been updated
   - Any of the child gems of the parent gem have been updated
 
-##### Presubmits
-
-- Run when a PR is opened, or when a commit is pushed to an open PR. They run unit tests only.
-
-- Runs tests for every sample where:
-  - The sample has been updated
-  - The parent gem has been updated
-  - Any of the child gems of the parent gem have been updated
-
-- Installs the gems locally if possible
-
 ##### Continuous
 
 - Run when a PR is merged to master.
