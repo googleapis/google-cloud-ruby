@@ -20,14 +20,12 @@ module Google
         # A request to return an individual group.
         # @!attribute [rw] group_name
         #   @return [String]
-        #     Required. The group resource name. Written as
-        #     <code>projects/<var>projectID</var>/groups/<var>group_name</var></code>.
-        #     Call
-        #     <a href="/error-reporting/reference/rest/v1beta1/projects.groupStats/list">
-        #     <code>groupStats.list</code></a> to return a list of groups belonging to
-        #     this project.
+        #     The group resource name. Written as
+        #     `projects/{projectID}/groups/{group_name}`. Call
+        #     [`groupStats.list`](https://cloud.google.com/error-reporting/reference/rest/v1beta1/projects.groupStats/list)
+        #     to return a list of groups belonging to this project.
         #
-        #     Example: <code>projects/my-project-123/groups/my-group</code>
+        #     Example: `projects/my-project-123/groups/my-group`
         class GetGroupRequest; end
 
         # A request to replace the existing data for the given group.

@@ -35,7 +35,7 @@ module Google
         # @!attribute [rw] url
         #   @return [String]
         #     A URL pointing to a related entry in an issue tracking system.
-        #     Example: https://github.com/user/project/issues/4
+        #     Example: `https://github.com/user/project/issues/4`
         class TrackingIssue; end
 
         # An error event which is returned by the Error Reporting system.
