@@ -57,34 +57,7 @@ module Google
       #
       # ## About Agents
       #
-      # Agents are best described as Natural Language Understanding (NLU) modules
-      # that transform user requests into actionable data. You can include agents
-      # in your app, product, or service to determine user intent and respond to the
-      # user in a natural way.
-      #
-      # After you create an agent, you can add Intents, Contexts,
-      # Entity Types, Webhooks, and so on to
-      # manage the flow of a conversation and match user input to predefined intents
-      # and actions.
-      #
-      # You can create an agent using both Dialogflow Standard Edition and
-      # Dialogflow Enterprise Edition. For details, see
-      # [Dialogflow
-      # Editions](https://cloud.google.com/dialogflow/docs/editions).
-      #
-      # You can save your agent for backup or versioning by exporting the agent by
-      # using the ExportAgent method. You can import a saved
-      # agent by using the ImportAgent method.
-      #
-      # Dialogflow provides several
-      # [prebuilt
-      # agents](https://cloud.google.com/dialogflow/docs/agents-prebuilt)
-      # for common conversation scenarios such as determining a date and time,
-      # converting currency, and so on.
-      #
-      # For more information about agents, see the
-      # [Dialogflow
-      # documentation](https://cloud.google.com/dialogflow/docs/agents-overview).
+      # Service for managing Agents.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
