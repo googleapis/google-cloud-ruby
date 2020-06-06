@@ -26,6 +26,31 @@
 - Run when autorelease triggers them. Autorelease scans the googleapis repos for open PRs with the "autorelease: pending" tag every 15 minutes. It will trigger a build when a PR opened by either [releasetool](https://github.com/googleapis/releasetool) or [release-please](https://github.com/googleapis/release-please) is merged and the release has been tagged.
 - Will, after publishing the gem to rubygems.org, build and push the ref docs to a staging bucket. This bucket is scanned once an hour. Upon finding changes docpublisher will copy the ref docs into the bucket used to serve googleapis.dev.
 
+#### Samples
+
+##### Presubmits
+
+- Run when a PR is opened, or when a commit is pushed to an open PR. They run unit tests only.
+
+- Runs tests for every sample where:
+  - The sample has been updated
+  - The parent gem has been updated
+  - Any of the child gems of the parent gem have been updated
+
+##### Continuous
+
+- Run when a PR is merged to master.
+
+- Runs all tests for every sample.
+
+- Installs gems from master branch.
+
+##### Nightly
+
+- Runs all tests for every sample.
+
+- Installs latest version of gem from rubygems.
+
 ### Ubuntu
 
 - Uses the default kokoro ubuntu GCE image.
@@ -67,6 +92,7 @@
 1. Ensure you have access to the cloud-devrel-kokoro-resources GCP project.
 1. Run `bundle exec rake kokoro:build[publish]`. This will generate Dockerfiles using .kokoro/templates/\*.Dockerfile.erb and build and push the images to gcr.io/cloud-devrel-kokoro-resources/yoshi-ruby/. It will also update .kokoro/osx.sh to use the ruby versions set by "KOKORO_RUBY_VERSIONS". The windows Dockerfile and image need to be updated manually.
 1. Open a PR.
+1. Create the internal configs by following the steps [outlined here](https://docs.google.com/document/d/17Wg3ar8wlFTtut2CcAV9Geg8K9x28MK_UtUsYoyEx2s/edit#heading=h.o8nsr6d5n4va)
 
 ### Updating the windows docker image
 

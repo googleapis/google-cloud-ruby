@@ -66,15 +66,11 @@ class Kokoro < Command
   end
 
   def samples_presubmit
-    unless Dir.entries(@gem).include? "samples"
-      return header "No samples for #{@gem}. Exiting"
-    end
-    unless updated_samples.include? @gem
-      return header "No changes for #{@gem}'s samples'. Exiting"
-    end
-    header "Found changes for #{@gem}"
-    run_ci do
-      run "bundle exec rake samples:master", 3600
+    samples_to_be_tested.each do |gem|
+      header "Found changes for #{gem}. Running sample tests"
+      run_ci gem do
+        run "bundle exec rake samples:master", 3600
+      end
     end
   end
 
@@ -274,12 +270,20 @@ class Kokoro < Command
     verify_in_gemfile gem unless local
   end
 
-  def updated_samples
-    updated_directories = `git --no-pager diff --name-only HEAD^ HEAD | grep "/" | cut -d/ -f 1-2 | sort | uniq || true`
-    updated_directories = updated_directories.split "\n"
-    updated_directories.select! { |dir| dir.split("/")[1] == "samples" }
-    updated_directories.map! { |dir| dir.split("/").first }
-    updated_directories.select { |dir| gems.include? dir.split("/").first }
+  def sample_dirs
+    gems.select do |gem|
+      Dir.entries(gem).include? "samples"
+    end
+  end
+
+  # returns a list of every gem where either its sample
+  # or its related gems have changed.
+  def samples_to_be_tested
+    sample_dirs.select do |dir|
+      @updated_gems.any? do |gem|
+        gem.include? dir
+      end
+    end
   end
 
   def verify_in_gemfile gem = nil
