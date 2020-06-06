@@ -1,9 +1,0 @@
-{
-    "name": "irm",
-    "language": "ruby",
-    "distribution_name": "google-cloud-irm",
-    "module_name": "Irm",
-    "module_name_credentials": "Irm::V1alpha2",
-    "env_var_prefix": "IRM",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-irm/latest"
-}
