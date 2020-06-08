@@ -354,6 +354,18 @@ module Google
         end
 
         ##
+        # An expression written in the Cloud Pub/Sub filter language. If non-empty, then only {Message} instances whose
+        # `attributes` field matches the filter are delivered on this subscription. If empty, then no messages are
+        # filtered out.
+        #
+        # @return [String] The frozen filter string.
+        #
+        def filter
+          ensure_grpc!
+          @grpc.filter.freeze
+        end
+
+        ##
         # Returns the {Topic} to which dead letter messages should be published if a dead letter policy is configured,
         # otherwise `nil`. Dead lettering is done on a best effort basis. The same message might be dead lettered
         # multiple times.

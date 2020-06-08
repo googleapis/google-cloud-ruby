@@ -286,6 +286,9 @@ module Google
         #   Managing Labels](https://cloud.google.com/pubsub/docs/labels).
         # @param [Boolean] message_ordering Whether to enable message ordering
         #   on the subscription.
+        # @param [String] filter An expression written in the Cloud Pub/Sub filter language. If non-empty, then only
+        #   {Message} instances whose `attributes` field matches the filter are delivered on this subscription. If
+        #   empty, then no messages are filtered out. Optional.
         # @param [Topic] dead_letter_topic The {Topic} to which dead letter messages for the subscription should be
         #   published. Dead lettering is done on a best effort basis. The same message might be dead lettered multiple
         #   times. The Cloud Pub/Sub service account associated with the enclosing subscription's parent project (i.e.,
@@ -359,11 +362,11 @@ module Google
         #   sub = topic.subscribe "my-topic-sub", retry_policy: retry_policy
         #
         def subscribe subscription_name, deadline: nil, retain_acked: false, retention: nil, endpoint: nil, labels: nil,
-                      message_ordering: nil, dead_letter_topic: nil, dead_letter_max_delivery_attempts: nil,
-                      retry_policy: nil
+                      message_ordering: nil, filter: nil, dead_letter_topic: nil,
+                      dead_letter_max_delivery_attempts: nil, retry_policy: nil
           ensure_service!
           options = { deadline: deadline, retain_acked: retain_acked, retention: retention, endpoint: endpoint,
-                      labels: labels, message_ordering: message_ordering,
+                      labels: labels, message_ordering: message_ordering, filter: filter,
                       dead_letter_max_delivery_attempts: dead_letter_max_delivery_attempts }
           options[:dead_letter_topic_name] = dead_letter_topic.name if dead_letter_topic
           if options[:dead_letter_max_delivery_attempts] && !options[:dead_letter_topic_name]
