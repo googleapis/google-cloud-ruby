@@ -143,14 +143,15 @@ describe Google::Cloud::PubSub, :pubsub do
         _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
       end
     end
-
+focus
     it "should allow create and update of subscription with options" do
       # create
       subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true,
                                                               retention: 600,
                                                               labels: labels,
                                                               filter: filter,
-                                                              retry_policy: retry_policy
+                                                              retry_policy: retry_policy,
+                                                              detached: true
       _(subscription).wont_be :nil?
       _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
       assert subscription.retain_acked
@@ -161,6 +162,7 @@ describe Google::Cloud::PubSub, :pubsub do
       _(subscription.filter).must_be :frozen?
       _(subscription.retry_policy.minimum_backoff).must_equal retry_minimum_backoff
       _(subscription.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
+      _(subscription.detached?).must_equal true
 
       # update
       subscription.labels = {}

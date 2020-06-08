@@ -231,6 +231,22 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     _(sub.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
   end
 
+  it "creates a subscription with detached" do
+    new_sub_name = "new-sub-#{Time.now.to_i}"
+    create_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, new_sub_name, detached: true)
+    mock = Minitest::Mock.new
+    mock.expect :create_subscription, create_res, create_subscription_args(new_sub_name, topic_name, detached: true)
+    topic.service.mocked_subscriber = mock
+
+    sub = topic.subscribe new_sub_name, detached: true
+
+    mock.verify
+
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub.detached?).must_equal true
+  end
+
   it "raises when creating a subscription that already exists" do
     existing_sub_name = "existing-sub"
 

@@ -308,6 +308,11 @@ module Google
         #
         #   **EXPERIMENTAL:** This API might be changed in backward-incompatible ways and is not recommended for
         #   production use. It is not subject to any SLA or deprecation policy.
+        # @param [Boolean] detached Indicates whether the subscription is detached from its topic. Detached
+        #   subscriptions don't receive messages from their topic and don't retain any backlog. {Subscription#pull} and
+        #   {Subscription#listen} (pull and streaming pull) operations will raise `FAILED_PRECONDITION`. If the
+        #   subscription is a push subscription (see {Subscription#push_config}), pushes to the endpoint will not be
+        #   made. The default value is `false`.
         #
         # @return [Google::Cloud::PubSub::Subscription]
         #
@@ -363,11 +368,12 @@ module Google
         #
         def subscribe subscription_name, deadline: nil, retain_acked: false, retention: nil, endpoint: nil, labels: nil,
                       message_ordering: nil, filter: nil, dead_letter_topic: nil,
-                      dead_letter_max_delivery_attempts: nil, retry_policy: nil
+                      dead_letter_max_delivery_attempts: nil, retry_policy: nil, detached: false
           ensure_service!
           options = { deadline: deadline, retain_acked: retain_acked, retention: retention, endpoint: endpoint,
                       labels: labels, message_ordering: message_ordering, filter: filter,
-                      dead_letter_max_delivery_attempts: dead_letter_max_delivery_attempts }
+                      dead_letter_max_delivery_attempts: dead_letter_max_delivery_attempts, detached: detached }
+
           options[:dead_letter_topic_name] = dead_letter_topic.name if dead_letter_topic
           if options[:dead_letter_max_delivery_attempts] && !options[:dead_letter_topic_name]
             # Service error message "3:Invalid resource name given (name=)." does not identify param.

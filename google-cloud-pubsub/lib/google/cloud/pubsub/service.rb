@@ -241,19 +241,19 @@ module Google
                             push_endpoint: options[:endpoint],
                             attributes:    (options[:attributes] || {}).to_h
                         end
-          mrd = Convert.number_to_duration options[:retention]
           execute do
             subscriber.create_subscription \
               name, topic,
               push_config:                push_config,
               ack_deadline_seconds:       options[:deadline],
               retain_acked_messages:      options[:retain_acked],
-              message_retention_duration: mrd,
+              message_retention_duration: Convert.number_to_duration(options[:retention]),
               labels:                     options[:labels],
               enable_message_ordering:    options[:message_ordering],
               filter:                     options[:filter],
               dead_letter_policy:         dead_letter_policy(options),
               retry_policy:               options[:retry_policy],
+              detached:                   options[:detached],
               options:                    default_options
           end
         end

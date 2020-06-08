@@ -323,7 +323,7 @@ module Google
         # If {#expires_in=} is not set, a *default* value of of 31 days will be
         # used. The minimum allowed value is 1 day.
         #
-        # Makes an API call to retrieve the labels value when called on a
+        # Makes an API call to retrieve the value when called on a
         # reference object. See {#reference?}.
         #
         # @return [Numeric, nil] The expiration duration, or `nil` if unset.
@@ -566,7 +566,7 @@ module Google
         #
         # See {Topic#publish_async}, {#listen}, and {Message#ordering_key}.
         #
-        # Makes an API call to retrieve the retain_acked value when called on a
+        # Makes an API call to retrieve the enable_message_ordering value when called on a
         # reference object. See {#reference?}.
         #
         # @return [Boolean]
@@ -574,6 +574,27 @@ module Google
         def message_ordering?
           ensure_grpc!
           @grpc.enable_message_ordering
+        end
+
+        ##
+        # Whether message ordering has been enabled. When enabled, messages
+        # published with the same `ordering_key` will be delivered in the order
+        # they were published. When disabled, messages may be delivered in any
+        # order.
+        #
+        # @note At the time of this release, ordering keys are not yet publicly
+        #   enabled and requires special project enablements.
+        #
+        # See {Topic#publish_async}, {#listen}, and {Message#ordering_key}.
+        #
+        # Makes an API call to retrieve the value when called on a
+        # reference object. See {#reference?}.
+        #
+        # @return [Boolean]
+        #
+        def detached?
+          ensure_grpc!
+          @grpc.detached
         end
 
         ##

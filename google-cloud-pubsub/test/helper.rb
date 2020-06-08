@@ -177,7 +177,8 @@ class MockPubsub < Minitest::Spec
                         dead_letter_topic: nil,
                         max_delivery_attempts: nil,
                         retry_minimum_backoff: nil,
-                        retry_maximum_backoff: nil
+                        retry_maximum_backoff: nil,
+                        detached: false
     raise "dead_letter_topic is required" if max_delivery_attempts && !dead_letter_topic
     hsh = { name: subscription_path(sub_name),
       topic: topic_path(topic_name),
@@ -194,6 +195,7 @@ class MockPubsub < Minitest::Spec
       filter: filter,
       labels: labels,
       expiration_policy: { ttl: { seconds: 172800, nanos: 0 } }, # 2 days
+      detached: detached
     }
     hsh[:dead_letter_policy] = {
       dead_letter_topic: dead_letter_topic,
@@ -216,7 +218,8 @@ class MockPubsub < Minitest::Spec
                                enable_message_ordering: nil,
                                filter: nil,
                                dead_letter_policy: nil,
-                               retry_policy: nil
+                               retry_policy: nil,
+                               detached: false
     [
       subscription_path(sub_name),
       topic_path(topic_name),
@@ -229,6 +232,7 @@ class MockPubsub < Minitest::Spec
       filter: filter,
       dead_letter_policy: dead_letter_policy,
       retry_policy: retry_policy,
+      detached: detached,
       options: default_options
     ]
   end
