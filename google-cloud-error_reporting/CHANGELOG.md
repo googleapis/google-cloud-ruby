@@ -4,7 +4,6 @@
 
 #### Documentation
 
-* Fix a few broken links
 * Fixed broken links in the reference documentation
 
 ### 0.35.1 / 2020-05-19
