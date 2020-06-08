@@ -46,3 +46,9 @@ s.replace(
     "proto_docs/google/cloud/automl/v1/io.rb",
     "https:\n\\s+# //",
     "https://")
+
+# See internal issue b/158466893
+s.replace(
+    "proto_docs/google/cloud/automl/v1/io.rb",
+    "\\[display_name-s\\]\\[google\\.cloud\\.automl\\.v1\\.ColumnSpec\\.display_name\\]",
+    "display_name-s")

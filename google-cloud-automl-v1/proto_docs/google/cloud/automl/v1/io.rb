@@ -884,7 +884,7 @@ module Google
         # The column names must contain the model's
         #
         # [input_feature_column_specs'][google.cloud.automl.v1.TablesModelMetadata.input_feature_column_specs]
-        # [display_name-s][google.cloud.automl.v1.ColumnSpec.display_name]
+        # display_name-s
         # (order doesn't matter). The columns corresponding to the model's
         # input feature column specs must contain values compatible with the
         # column spec's data types. Prediction on all the rows, i.e. the CSV
@@ -907,7 +907,7 @@ module Google
         # The column names must contain the model's
         #
         # [input_feature_column_specs'][google.cloud.automl.v1.TablesModelMetadata.input_feature_column_specs]
-        # [display_name-s][google.cloud.automl.v1.ColumnSpec.display_name]
+        # display_name-s
         # (order doesn't matter). The columns corresponding to the model's
         # input feature column specs must contain values compatible with the
         # column spec's data types. Prediction on all the rows of the table
