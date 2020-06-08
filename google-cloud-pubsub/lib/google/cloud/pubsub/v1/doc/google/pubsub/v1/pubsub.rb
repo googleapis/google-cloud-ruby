@@ -330,6 +330,13 @@ module Google
       #     that messages will be retried as soon as possible for healthy subscribers.
       #     RetryPolicy will be triggered on NACKs or acknowledgement deadline
       #     exceeded events for a given message.
+      # @!attribute [rw] detached
+      #   @return [true, false]
+      #     Indicates whether the subscription is detached from its topic. Detached
+      #     subscriptions don't receive messages from their topic and don't retain any
+      #     backlog. `Pull` and `StreamingPull` requests will return
+      #     FAILED_PRECONDITION. If the subscription is a push subscription, pushes to
+      #     the endpoint will not be made.
       class Subscription; end
 
       # A policy that specifies how Cloud Pub/Sub retries message delivery.

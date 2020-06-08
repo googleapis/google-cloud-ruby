@@ -535,6 +535,12 @@ module Google
           #   exceeded events for a given message.
           #   A hash of the same form as `Google::Cloud::PubSub::V1::RetryPolicy`
           #   can also be provided.
+          # @param detached [true, false]
+          #   Indicates whether the subscription is detached from its topic. Detached
+          #   subscriptions don't receive messages from their topic and don't retain any
+          #   backlog. `Pull` and `StreamingPull` requests will return
+          #   FAILED_PRECONDITION. If the subscription is a push subscription, pushes to
+          #   the endpoint will not be made.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -564,6 +570,7 @@ module Google
               filter: nil,
               dead_letter_policy: nil,
               retry_policy: nil,
+              detached: nil,
               options: nil,
               &block
             req = {
@@ -578,7 +585,8 @@ module Google
               expiration_policy: expiration_policy,
               filter: filter,
               dead_letter_policy: dead_letter_policy,
-              retry_policy: retry_policy
+              retry_policy: retry_policy,
+              detached: detached
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::PubSub::V1::Subscription)
             @create_subscription.call(req, options, &block)
