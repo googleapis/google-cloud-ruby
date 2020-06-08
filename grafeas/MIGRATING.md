@@ -163,8 +163,10 @@ end
 ```
 
 If you want to continue using Google's Cloud Container Analysis implementation,
-we recommend using the `google-cloud-container_analysis` gem, which retains the
-Google-specific defaults and features.
+we recommend using the `google-cloud-container_analysis` gem, which provides
+the Google-specific default endpoint and credentials. Using the Container
+Analysis client library, you can obtain a Grafeas client object connected and
+authenticated with the Google backend.
 
 New:
 ```
