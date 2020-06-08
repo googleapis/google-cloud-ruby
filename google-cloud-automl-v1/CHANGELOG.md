@@ -1,5 +1,15 @@
 # Release History
 
+### 0.2.3 / 2020-06-08
+
+#### Bug Fixes
+
+* Eliminate a Ruby warning that appeared in some cases when accessing rpc-scoped configs
+
+#### Documentation
+
+* Fix additional broken/misformatted links
+
 ### 0.2.2 / 2020-05-28
 
 #### Documentation
