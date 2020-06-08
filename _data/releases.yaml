@@ -463,6 +463,7 @@ google-cloud-env:
 - v1.0.1
 - v1.0.0
 google-cloud-error_reporting:
+- v0.35.2
 - v0.35.0
 - v0.34.2
 - v0.34.1
