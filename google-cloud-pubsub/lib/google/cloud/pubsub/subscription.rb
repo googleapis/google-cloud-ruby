@@ -577,15 +577,12 @@ module Google
         end
 
         ##
-        # Whether message ordering has been enabled. When enabled, messages
-        # published with the same `ordering_key` will be delivered in the order
-        # they were published. When disabled, messages may be delivered in any
-        # order.
+        # Whether the subscription is detached from its topic. Detached subscriptions don't receive messages from their
+        # topic and don't retain any backlog. {#pull} and {#listen} (pull and streaming pull) operations will raise
+        # `FAILED_PRECONDITION`. If the subscription is a push subscription (see {#push_config}), pushes to the endpoint
+        # will not be made. The default value is `false`.
         #
-        # @note At the time of this release, ordering keys are not yet publicly
-        #   enabled and requires special project enablements.
-        #
-        # See {Topic#publish_async}, {#listen}, and {Message#ordering_key}.
+        # See {Topic#subscribe} and {#detach}.
         #
         # Makes an API call to retrieve the value when called on a
         # reference object. See {#reference?}.
@@ -642,6 +639,29 @@ module Google
           ensure_service!
           service.delete_subscription name
           true
+        end
+
+        ##
+        # Detaches a subscription from its topic, then calls {#reload!}. All messages retained in the subscription are
+        # dropped. Detached subscriptions don't receive messages from their topic and don't retain any backlog.
+        # Subsequent {#pull} and {#listen} (pull and streaming pull) operations will raise `FAILED_PRECONDITION`. If the
+        # subscription is a push subscription (see {#push_config}), pushes to the endpoint will stop.
+        #
+        # @return [Boolean] Returns `true` if the subscription was detached.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   sub.detach
+        #
+        def detach
+          ensure_service!
+          service.detach_subscription name
+          reload!
+          detached?
         end
 
         ##

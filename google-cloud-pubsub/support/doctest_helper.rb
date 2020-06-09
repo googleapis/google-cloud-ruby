@@ -371,6 +371,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::PubSub::Subscription#detach" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_publisher.expect :detach_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::PubSub::Subscription#policy" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp("my-subscription"), ["projects/my-project/subscriptions/my-subscription", Hash]

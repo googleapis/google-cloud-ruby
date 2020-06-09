@@ -61,17 +61,6 @@ describe Google::Cloud::PubSub::Subscription, :mock_pubsub do
     mock.verify
   end
 
-  it "can delete itself" do
-    del_res = nil
-    mock = Minitest::Mock.new
-    mock.expect :delete_subscription, del_res, [subscription_path(subscription_name), options: default_options]
-    pubsub.service.mocked_subscriber = mock
-
-    subscription.delete
-
-    mock.verify
-  end
-
   it "can pull a message" do
     rec_message_msg = "pulled-message"
     pull_res = Google::Cloud::PubSub::V1::PullResponse.new rec_messages_hash(rec_message_msg)

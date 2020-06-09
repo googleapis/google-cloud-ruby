@@ -144,7 +144,7 @@ describe Google::Cloud::PubSub, :pubsub do
       end
     end
 focus
-    it "should allow create and update of subscription with options" do
+    it "should allow create, update and delete of detached subscription" do
       # create
       subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true,
                                                               retention: 600,
@@ -191,8 +191,8 @@ focus
       subscription = topic.get_subscription "non-existent-subscription"
       _(subscription).must_be :nil?
     end
-
-    it "should be able to pull and ack" do
+focus
+    it "should be able to pull and ack, then be detached" do
       begin
         subscription = topic.subscribe "#{$topic_prefix}-sub4"
         _(subscription).wont_be :nil?
@@ -215,6 +215,11 @@ focus
         _(received_message.msg.published_at).wont_be :nil?
         # Acknowledge the message
         subscription.ack received_message.ack_id
+ 
+        # detach
+        detached = subscription.detach
+        _(detached).must_equal true
+        _(subscription.detached?).must_equal true
       ensure
         # Remove the subscription
         subscription.delete
