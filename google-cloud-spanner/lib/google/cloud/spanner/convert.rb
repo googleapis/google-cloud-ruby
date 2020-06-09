@@ -17,6 +17,7 @@ require "time"
 require "date"
 require "stringio"
 require "base64"
+require "bigdecimal"
 require "google/cloud/spanner/data"
 
 module Google
@@ -67,6 +68,9 @@ module Google
               Google::Protobuf::Value.new bool_value: false
             when Integer
               Google::Protobuf::Value.new string_value: obj.to_s
+            # BigDecimal must be put before Numeric.
+            when BigDecimal
+              Google::Protobuf::Value.new string_value: obj.to_s("F")
             when Numeric
               if obj == Float::INFINITY
                 Google::Protobuf::Value.new string_value: "Infinity"
@@ -125,6 +129,9 @@ module Google
               :BOOL
             when Integer
               :INT64
+            # BigDecimal must be put before Numeric.
+            when BigDecimal
+              :NUMERIC
             when Numeric
               :FLOAT64
             when Time
@@ -214,6 +221,8 @@ module Google
               end
             when :STRUCT
               Data.from_grpc value.list_value.values, type.struct_type.fields
+            when :NUMERIC
+              BigDecimal value.string_value
             end
           end
 
