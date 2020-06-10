@@ -23,6 +23,7 @@ require "gapic/config/method"
 require "google/cloud/monitoring/dashboard/v1/version"
 
 require "google/cloud/monitoring/dashboard/v1/dashboards_service/credentials"
+require "google/cloud/monitoring/dashboard/v1/dashboards_service/paths"
 require "google/cloud/monitoring/dashboard/v1/dashboards_service/client"
 
 module Google

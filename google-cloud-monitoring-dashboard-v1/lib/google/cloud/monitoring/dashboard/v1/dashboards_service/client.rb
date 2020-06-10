@@ -32,6 +32,8 @@ module Google
             # widgets in a specific layout.
             #
             class Client
+              include Paths
+
               # @private
               attr_reader :dashboards_service_stub
 
@@ -167,9 +169,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The project on which to execute the request. The format is
-              #     `"projects/{project_id_or_number}"`. The \\{project_id_or_number} must match
-              #     the dashboard resource name.
+              #     Required. The project on which to execute the request. The format is:
+              #
+              #         projects/[PROJECT_ID_OR_NUMBER]
+              #
+              #     The `[PROJECT_ID_OR_NUMBER]` must match the dashboard resource name.
               #   @param dashboard [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard, ::Hash]
               #     Required. The initial dashboard specification.
               #
@@ -241,8 +245,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The scope of the dashboards to list. A project scope must be
-              #     specified in the form of `"projects/{project_id_or_number}"`.
+              #     Required. The scope of the dashboards to list. The format is:
+              #
+              #         projects/[PROJECT_ID_OR_NUMBER]
               #   @param page_size [::Integer]
               #     A positive number that is the maximum number of results to return.
               #     If unspecified, a default of 1000 is used.
@@ -320,10 +325,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The resource name of the Dashboard. The format is one of
-              #     `"dashboards/{dashboard_id}"` (for system dashboards) or
-              #     `"projects/{project_id_or_number}/dashboards/{dashboard_id}"`
-              #     (for custom dashboards).
+              #     Required. The resource name of the Dashboard. The format is one of:
+              #
+              #      -  `dashboards/[DASHBOARD_ID]` (for system dashboards)
+              #      -  `projects/[PROJECT_ID_OR_NUMBER]/dashboards/[DASHBOARD_ID]`
+              #           (for custom dashboards).
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
@@ -393,8 +399,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The resource name of the Dashboard. The format is
-              #     `"projects/{project_id_or_number}/dashboards/{dashboard_id}"`.
+              #     Required. The resource name of the Dashboard. The format is:
+              #
+              #         projects/[PROJECT_ID_OR_NUMBER]/dashboards/[DASHBOARD_ID]
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]

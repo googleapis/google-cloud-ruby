@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/monitoring/dashboard/v1/metrics_pb'
 require 'google/protobuf/duration_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do

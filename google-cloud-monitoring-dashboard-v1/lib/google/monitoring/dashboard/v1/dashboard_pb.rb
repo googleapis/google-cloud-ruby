@@ -3,6 +3,8 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/monitoring/dashboard/v1/layouts_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/monitoring/dashboard/v1/dashboard.proto", :syntax => :proto3) do
