@@ -767,8 +767,9 @@ module Google
 
         ##
         # @param backup [Google::Bigtable::Admin::V2::Backup | Hash]
+        # @param fields [Array(String|Symbol)] the paths of fields to be updated
         #
-        def update_backup backup, *fields
+        def update_backup backup, fields
           mask = Google::Protobuf::FieldMask.new paths: fields.map(&:to_s)
           execute do
             tables.update_backup backup, mask

@@ -15,9 +15,10 @@
 # limitations under the License.
 
 
-require "google/cloud/bigtable/convert"
-# require "google/cloud/bigtable/backup/list"
 require "google/cloud/bigtable/backup/job"
+require "google/cloud/bigtable/backup/list"
+require "google/cloud/bigtable/convert"
+
 
 module Google
   module Cloud
@@ -58,7 +59,6 @@ module Google
         def initialize grpc, service
           @grpc = grpc
           @service = service
-          @updates = []
         end
 
         ##
@@ -235,8 +235,7 @@ module Google
         #
         def save
           ensure_service!
-          @grpc = service.update_backup @grpc, @updates.uniq!
-          @updates = []
+          @grpc = service.update_backup @grpc, [:expire_time]
           true
         end
         alias update save

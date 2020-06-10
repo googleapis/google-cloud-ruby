@@ -22,12 +22,14 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
   let(:cluster) { instance.clusters.first }
   let(:table) { bigtable_read_table }
   let(:backup_id) { "my-backup-id-#{Time.now.to_i}" }
-  let(:seven_hours) { 60 * 60 * 7 }
-  let(:expire_time) { Time.now + seven_hours }
+  let(:now) { Time.now }
+  let(:expire_time) { now + 60 * 60 * 7 }
+  let(:expire_time_2) { now + 60 * 60 * 8 }
 focus
   it "creates a backup" do
     backup = nil
     begin
+      # create
       job = cluster.create_backup table, backup_id, expire_time
       _(job).must_be_kind_of Google::Cloud::Bigtable::Backup::Job
       job.wait_until_done!
@@ -41,14 +43,31 @@ focus
       source_table_full = backup.source_table perform_lookup: true
       _(source_table_full).must_be_kind_of Google::Cloud::Bigtable::Table
       _(source_table_full.path).must_equal table.path
-      _(backup.expire_time).must_be_kind_of Time
+      _(backup.expire_time).must_equal expire_time
       _(backup.start_time).must_be_kind_of Time
       _(backup.end_time).must_be_kind_of Time
       _(backup.size_bytes).must_be_kind_of Integer
       _(backup.state).must_equal :READY
       _(backup.creating?).must_equal false
       _(backup.ready?).must_equal true
+
+      # list
+      backups = cluster.backups
+      _(backups).must_be_kind_of Google::Cloud::Bigtable::Backup::List
+      _(backups).wont_be :empty?
+      _(backups.first).must_be_kind_of Google::Cloud::Bigtable::Backup
+
+      # get
+      backup = cluster.backup backup_id
+      _(backup).must_be_kind_of Google::Cloud::Bigtable::Backup
+      _(backup.backup_id).must_equal backup_id
+
+      # update
+      backup.expire_time = expire_time_2
+      backup.save
+      _(backup.expire_time).must_equal expire_time_2
     ensure
+      # delete
       backup.delete if backup
     end
   end

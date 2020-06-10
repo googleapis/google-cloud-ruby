@@ -207,6 +207,11 @@ module Google
           Backup.from_grpc grpc, service
         end
 
+        def backups
+          grpc = service.list_backups instance_id, cluster_id
+          Backup::List.from_grpc grpc, service
+        end
+
         ##
         # Updates the cluster.
         #
