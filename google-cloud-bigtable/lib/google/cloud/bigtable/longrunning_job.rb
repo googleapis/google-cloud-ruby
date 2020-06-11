@@ -97,6 +97,17 @@ module Google
           @grpc.wait_until_done!
         end
 
+        ##
+        # @private Gets the metadata object of the operation.
+        #
+        # @return [Object, nil] `nil` if the operation is not complete.
+        #
+        def metadata
+          return nil unless done?
+          return nil unless @grpc.grpc_op.result == :response
+          @grpc.metadata
+        end
+
         # @private
         # New BasicJob from a Google::Gax::Operation object.
         def self.from_grpc grpc, service

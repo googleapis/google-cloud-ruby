@@ -72,6 +72,9 @@ focus
       _(list_backup.expire_time).must_equal expire_time_2
 
       # restore
+
+      # Wait 2 minutes so that the RestoreTable API will trigger an optimize restored table operation.
+      sleep(120)
       restore_job = backup.restore restore_table_id
       _(restore_job).must_be_kind_of Google::Cloud::Bigtable::Table::RestoreJob
       restore_job.wait_until_done!
@@ -79,6 +82,11 @@ focus
       restore_table = restore_job.table
       _(restore_table).must_be_kind_of Google::Cloud::Bigtable::Table
       _(restore_table.name).must_equal restore_table_id
+
+      # optimize
+      _(restore_job.optimize_table_operation_name).wont_be :nil?
+      _(restore_job.optimize_table_operation_name).must_be_kind_of String
+      _(restore_job.optimize_table_operation_name).must_include restore_table_id
     ensure
       # delete
       backup.delete if backup

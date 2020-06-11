@@ -74,6 +74,35 @@ module Google
           #     table = job.table
           #   end
           #
+          def optimize_table_operation_name
+            metadata.optimize_table_operation_name
+          end
+
+          ##
+          # Get the table object from operation results.
+          #
+          # @return [Google::Cloud::Bigtable::Table, nil] The table instance, or `nil` if the operation is not complete.
+          #
+          # @example
+          #   require "google/cloud/bigtable"
+          #
+          #   bigtable = Google::Cloud::Bigtable.new
+          #   instance = bigtable.instance("my-instance")
+          #   cluster = instance.cluster("my-cluster")
+          #
+          #   backup = cluster.backup("my-backup")
+          #
+          #   job = backup.restore("my-new-table")
+          #
+          #   job.wait_until_done!
+          #   job.done? #=> true
+          #
+          #   if job.error?
+          #     status = job.error
+          #   else
+          #     table = job.table
+          #   end
+          #
           def table
             Table.from_grpc results, service if results
           end
