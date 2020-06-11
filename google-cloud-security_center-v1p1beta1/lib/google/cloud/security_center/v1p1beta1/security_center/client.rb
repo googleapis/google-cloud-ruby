@@ -65,15 +65,15 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.create_source.timeout = 60.0
+                default_config.rpcs.create_source.timeout = 600.0
 
-                default_config.rpcs.create_finding.timeout = 60.0
+                default_config.rpcs.create_finding.timeout = 600.0
 
-                default_config.rpcs.create_notification_config.timeout = 60.0
+                default_config.rpcs.create_notification_config.timeout = 600.0
 
-                default_config.rpcs.delete_notification_config.timeout = 60.0
+                default_config.rpcs.delete_notification_config.timeout = 600.0
 
-                default_config.rpcs.get_iam_policy.timeout = 60.0
+                default_config.rpcs.get_iam_policy.timeout = 600.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -81,7 +81,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.get_notification_config.timeout = 60.0
+                default_config.rpcs.get_notification_config.timeout = 600.0
                 default_config.rpcs.get_notification_config.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -89,7 +89,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.get_organization_settings.timeout = 60.0
+                default_config.rpcs.get_organization_settings.timeout = 600.0
                 default_config.rpcs.get_organization_settings.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -97,7 +97,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.get_source.timeout = 60.0
+                default_config.rpcs.get_source.timeout = 600.0
                 default_config.rpcs.get_source.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -105,7 +105,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.group_assets.timeout = 60.0
+                default_config.rpcs.group_assets.timeout = 600.0
                 default_config.rpcs.group_assets.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -113,7 +113,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.group_findings.timeout = 60.0
+                default_config.rpcs.group_findings.timeout = 600.0
                 default_config.rpcs.group_findings.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -121,7 +121,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.list_assets.timeout = 60.0
+                default_config.rpcs.list_assets.timeout = 600.0
                 default_config.rpcs.list_assets.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -129,7 +129,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.list_findings.timeout = 60.0
+                default_config.rpcs.list_findings.timeout = 600.0
                 default_config.rpcs.list_findings.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -137,7 +137,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.list_notification_configs.timeout = 60.0
+                default_config.rpcs.list_notification_configs.timeout = 600.0
                 default_config.rpcs.list_notification_configs.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -145,7 +145,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.list_sources.timeout = 60.0
+                default_config.rpcs.list_sources.timeout = 600.0
                 default_config.rpcs.list_sources.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -153,13 +153,13 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.run_asset_discovery.timeout = 60.0
+                default_config.rpcs.run_asset_discovery.timeout = 600.0
 
-                default_config.rpcs.set_finding_state.timeout = 60.0
+                default_config.rpcs.set_finding_state.timeout = 600.0
 
-                default_config.rpcs.set_iam_policy.timeout = 60.0
+                default_config.rpcs.set_iam_policy.timeout = 600.0
 
-                default_config.rpcs.test_iam_permissions.timeout = 60.0
+                default_config.rpcs.test_iam_permissions.timeout = 600.0
                 default_config.rpcs.test_iam_permissions.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -167,15 +167,15 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.update_finding.timeout = 60.0
+                default_config.rpcs.update_finding.timeout = 600.0
 
-                default_config.rpcs.update_notification_config.timeout = 60.0
+                default_config.rpcs.update_notification_config.timeout = 600.0
 
-                default_config.rpcs.update_organization_settings.timeout = 60.0
+                default_config.rpcs.update_organization_settings.timeout = 600.0
 
-                default_config.rpcs.update_source.timeout = 60.0
+                default_config.rpcs.update_source.timeout = 600.0
 
-                default_config.rpcs.update_security_marks.timeout = 60.0
+                default_config.rpcs.update_security_marks.timeout = 600.0
 
                 default_config
               end
@@ -841,7 +841,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload group_assets(parent: nil, filter: nil, group_by: nil, compare_duration: nil, read_time: nil, having: nil, page_token: nil, page_size: nil)
+            # @overload group_assets(parent: nil, filter: nil, group_by: nil, compare_duration: nil, read_time: nil, page_token: nil, page_size: nil)
             #   Pass arguments to `group_assets` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -883,15 +883,15 @@ module Google
             #
             #       Usage: This should be milliseconds since epoch or an RFC3339 string.
             #       Examples:
-            #         "update_time = \"2019-06-10T16:07:18-07:00\""
-            #         "update_time = 1560208038000"
+            #         `update_time = "2019-06-10T16:07:18-07:00"`
+            #         `update_time = 1560208038000`
             #
             #     * create_time: `=`, `>`, `<`, `>=`, `<=`
             #
             #       Usage: This should be milliseconds since epoch or an RFC3339 string.
             #       Examples:
-            #         "create_time = \"2019-06-10T16:07:18-07:00\""
-            #         "create_time = 1560208038000"
+            #         `create_time = "2019-06-10T16:07:18-07:00"`
+            #         `create_time = 1560208038000`
             #
             #     * iam_policy.policy_blob: `=`, `:`
             #     * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
@@ -906,6 +906,12 @@ module Google
             #     * security_center_properties.resource_owners: `=`, `:`
             #
             #     For example, `resource_properties.size = 100` is a valid filter string.
+            #
+            #     Use a partial match on the empty string to filter based on a property
+            #     existing: `resource_properties.my_property : ""`
+            #
+            #     Use a negated partial match on the empty string to filter based on a
+            #     property not existing: `-resource_properties.my_property : ""`
             #   @param group_by [::String]
             #     Required. Expression that defines what assets fields to use for grouping.
             #     The string value should follow SQL syntax: comma separated list of fields.
@@ -958,10 +964,6 @@ module Google
             #     to assets existing at the supplied time and their values are those at that
             #     specific time. Absence of this field will default to the API's version of
             #     NOW.
-            #   @param having [::String]
-            #     Filter that specifies what fields to further filter on *after* the query
-            #     filter has been executed. Currently only `state_change` is supported and
-            #     requires compare_duration to be specified.
             #   @param page_token [::String]
             #     The value returned by the last `GroupAssetsResponse`; indicates
             #     that this is a continuation of a prior `GroupAssets` call, and that the
@@ -1033,7 +1035,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload group_findings(parent: nil, filter: nil, group_by: nil, read_time: nil, compare_duration: nil, having: nil, page_token: nil, page_size: nil)
+            # @overload group_findings(parent: nil, filter: nil, group_by: nil, read_time: nil, compare_duration: nil, page_token: nil, page_size: nil)
             #   Pass arguments to `group_findings` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1080,13 +1082,19 @@ module Google
             #
             #       Usage: This should be milliseconds since epoch or an RFC3339 string.
             #       Examples:
-            #         "event_time = \"2019-06-10T16:07:18-07:00\""
-            #         "event_time = 1560208038000"
+            #         `event_time = "2019-06-10T16:07:18-07:00"`
+            #         `event_time = 1560208038000`
             #
             #     * security_marks.marks: `=`, `:`
             #     * source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
             #
             #     For example, `source_properties.size = 100` is a valid filter string.
+            #
+            #     Use a partial match on the empty string to filter based on a property
+            #     existing: `source_properties.my_property : ""`
+            #
+            #     Use a negated partial match on the empty string to filter based on a
+            #     property not existing: `-source_properties.my_property : ""`
             #   @param group_by [::String]
             #     Required. Expression that defines what assets fields to use for grouping
             #     (including `state_change`). The string value should follow SQL syntax:
@@ -1121,12 +1129,18 @@ module Google
             #
             #     Possible "state_change" values when compare_duration is specified:
             #
-            #     * "CHANGED":   indicates that the finding was present at the start of
-            #                      compare_duration, but changed its state at read_time.
-            #     * "UNCHANGED": indicates that the finding was present at the start of
-            #                      compare_duration and did not change state at read_time.
-            #     * "ADDED":     indicates that the finding was not present at the start
-            #                      of compare_duration, but was present at read_time.
+            #     * "CHANGED":   indicates that the finding was present and matched the given
+            #                      filter at the start of compare_duration, but changed its
+            #                      state at read_time.
+            #     * "UNCHANGED": indicates that the finding was present and matched the given
+            #                      filter at the start of compare_duration and did not change
+            #                      state at read_time.
+            #     * "ADDED":     indicates that the finding did not match the given filter or
+            #                      was not present at the start of compare_duration, but was
+            #                      present at read_time.
+            #     * "REMOVED":   indicates that the finding was present and matched the
+            #                      filter at the start of compare_duration, but did not match
+            #                      the filter at read_time.
             #
             #     If compare_duration is not specified, then the only possible state_change
             #     is "UNUSED",  which will be the state_change set for all findings present
@@ -1134,10 +1148,6 @@ module Google
             #
             #     If this field is set then `state_change` must be a specified field in
             #     `group_by`.
-            #   @param having [::String]
-            #     Filter that specifies what fields to further filter on *after* the query
-            #     filter has been executed. Currently only `finding.state` and `state_change`
-            #     are supported and requires compare_duration to be specified.
             #   @param page_token [::String]
             #     The value returned by the last `GroupFindingsResponse`; indicates
             #     that this is a continuation of a prior `GroupFindings` call, and
@@ -1205,7 +1215,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_assets(parent: nil, filter: nil, order_by: nil, read_time: nil, compare_duration: nil, having: nil, field_mask: nil, page_token: nil, page_size: nil)
+            # @overload list_assets(parent: nil, filter: nil, order_by: nil, read_time: nil, compare_duration: nil, field_mask: nil, page_token: nil, page_size: nil)
             #   Pass arguments to `list_assets` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1247,15 +1257,15 @@ module Google
             #
             #       Usage: This should be milliseconds since epoch or an RFC3339 string.
             #       Examples:
-            #         "update_time = \"2019-06-10T16:07:18-07:00\""
-            #         "update_time = 1560208038000"
+            #         `update_time = "2019-06-10T16:07:18-07:00"`
+            #         `update_time = 1560208038000`
             #
             #     * create_time: `=`, `>`, `<`, `>=`, `<=`
             #
             #       Usage: This should be milliseconds since epoch or an RFC3339 string.
             #       Examples:
-            #         "create_time = \"2019-06-10T16:07:18-07:00\""
-            #         "create_time = 1560208038000"
+            #         `create_time = "2019-06-10T16:07:18-07:00"`
+            #         `create_time = 1560208038000`
             #
             #     * iam_policy.policy_blob: `=`, `:`
             #     * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
@@ -1270,6 +1280,12 @@ module Google
             #     * security_center_properties.resource_owners: `=`, `:`
             #
             #     For example, `resource_properties.size = 100` is a valid filter string.
+            #
+            #     Use a partial match on the empty string to filter based on a property
+            #     existing: `resource_properties.my_property : ""`
+            #
+            #     Use a negated partial match on the empty string to filter based on a
+            #     property not existing: `-resource_properties.my_property : ""`
             #   @param order_by [::String]
             #     Expression that defines what fields and order to use for sorting. The
             #     string value should follow SQL syntax: comma separated list of fields. For
@@ -1322,10 +1338,6 @@ module Google
             #     If compare_duration is not specified, then the only possible state_change
             #     is "UNUSED",  which will be the state_change set for all assets present at
             #     read_time.
-            #   @param having [::String]
-            #     Filter that specifies what fields to further filter on *after* the query
-            #     filter has been executed. Currently only `state_change` is supported and
-            #     requires compare_duration to be specified.
             #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional.
             #     A field mask to specify the ListAssetsResult fields to be listed in the
@@ -1401,7 +1413,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_findings(parent: nil, filter: nil, order_by: nil, read_time: nil, compare_duration: nil, having: nil, field_mask: nil, page_token: nil, page_size: nil)
+            # @overload list_findings(parent: nil, filter: nil, order_by: nil, read_time: nil, compare_duration: nil, field_mask: nil, page_token: nil, page_size: nil)
             #   Pass arguments to `list_findings` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1448,13 +1460,19 @@ module Google
             #
             #       Usage: This should be milliseconds since epoch or an RFC3339 string.
             #       Examples:
-            #         "event_time = \"2019-06-10T16:07:18-07:00\""
-            #         "event_time = 1560208038000"
+            #         `event_time = "2019-06-10T16:07:18-07:00"`
+            #         `event_time = 1560208038000`
             #
             #     security_marks.marks: `=`, `:`
             #     source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
             #
             #     For example, `source_properties.size = 100` is a valid filter string.
+            #
+            #     Use a partial match on the empty string to filter based on a property
+            #     existing: `source_properties.my_property : ""`
+            #
+            #     Use a negated partial match on the empty string to filter based on a
+            #     property not existing: `-source_properties.my_property : ""`
             #   @param order_by [::String]
             #     Expression that defines what fields and order to use for sorting. The
             #     string value should follow SQL syntax: comma separated list of fields. For
@@ -1494,20 +1512,22 @@ module Google
             #
             #     Possible "state_change" values when compare_duration is specified:
             #
-            #     * "CHANGED":   indicates that the finding was present at the start of
-            #                      compare_duration, but changed its state at read_time.
-            #     * "UNCHANGED": indicates that the finding was present at the start of
-            #                      compare_duration and did not change state at read_time.
-            #     * "ADDED":     indicates that the finding was not present at the start
-            #                      of compare_duration, but was present at read_time.
+            #     * "CHANGED":   indicates that the finding was present and matched the given
+            #                      filter at the start of compare_duration, but changed its
+            #                      state at read_time.
+            #     * "UNCHANGED": indicates that the finding was present and matched the given
+            #                      filter at the start of compare_duration and did not change
+            #                      state at read_time.
+            #     * "ADDED":     indicates that the finding did not match the given filter or
+            #                      was not present at the start of compare_duration, but was
+            #                      present at read_time.
+            #     * "REMOVED":   indicates that the finding was present and matched the
+            #                      filter at the start of compare_duration, but did not match
+            #                      the filter at read_time.
             #
             #     If compare_duration is not specified, then the only possible state_change
             #     is "UNUSED", which will be the state_change set for all findings present at
             #     read_time.
-            #   @param having [::String]
-            #     Filter that specifies what fields to further filter on *after* the query
-            #     filter has been executed. Currently only `finding.state` and `state_change`
-            #     are supported and requires compare_duration to be specified.
             #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional.
             #     A field mask to specify the Finding fields to be listed in the response.

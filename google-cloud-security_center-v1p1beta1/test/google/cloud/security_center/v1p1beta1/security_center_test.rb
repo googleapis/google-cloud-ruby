@@ -534,7 +534,6 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     group_by = "hello world"
     compare_duration = {}
     read_time = {}
-    having = "hello world"
     page_token = "hello world"
     page_size = 42
 
@@ -546,7 +545,6 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
       assert_equal "hello world", request.group_by
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.compare_duration
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.read_time
-      assert_equal "hello world", request.having
       assert_equal "hello world", request.page_token
       assert_equal 42, request.page_size
       refute_nil options
@@ -559,35 +557,35 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
       end
 
       # Use hash object
-      client.group_assets({ parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, having: having, page_token: page_token, page_size: page_size }) do |response, operation|
+      client.group_assets({ parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.group_assets parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, having: having, page_token: page_token, page_size: page_size do |response, operation|
+      client.group_assets parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.group_assets ::Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, having: having, page_token: page_token, page_size: page_size) do |response, operation|
+      client.group_assets ::Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.group_assets({ parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, having: having, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      client.group_assets({ parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.group_assets ::Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, having: having, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.group_assets ::Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -611,7 +609,6 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     group_by = "hello world"
     read_time = {}
     compare_duration = {}
-    having = "hello world"
     page_token = "hello world"
     page_size = 42
 
@@ -623,7 +620,6 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
       assert_equal "hello world", request.group_by
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.read_time
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.compare_duration
-      assert_equal "hello world", request.having
       assert_equal "hello world", request.page_token
       assert_equal 42, request.page_size
       refute_nil options
@@ -636,35 +632,35 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
       end
 
       # Use hash object
-      client.group_findings({ parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, having: having, page_token: page_token, page_size: page_size }) do |response, operation|
+      client.group_findings({ parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.group_findings parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, having: having, page_token: page_token, page_size: page_size do |response, operation|
+      client.group_findings parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.group_findings ::Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, having: having, page_token: page_token, page_size: page_size) do |response, operation|
+      client.group_findings ::Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.group_findings({ parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, having: having, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      client.group_findings({ parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.group_findings ::Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, having: having, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.group_findings ::Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -688,7 +684,6 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     order_by = "hello world"
     read_time = {}
     compare_duration = {}
-    having = "hello world"
     field_mask = {}
     page_token = "hello world"
     page_size = 42
@@ -701,7 +696,6 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
       assert_equal "hello world", request.order_by
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.read_time
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.compare_duration
-      assert_equal "hello world", request.having
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
       assert_equal "hello world", request.page_token
       assert_equal 42, request.page_size
@@ -715,35 +709,35 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
       end
 
       # Use hash object
-      client.list_assets({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, having: having, field_mask: field_mask, page_token: page_token, page_size: page_size }) do |response, operation|
+      client.list_assets({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_assets parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, having: having, field_mask: field_mask, page_token: page_token, page_size: page_size do |response, operation|
+      client.list_assets parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_assets ::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, having: having, field_mask: field_mask, page_token: page_token, page_size: page_size) do |response, operation|
+      client.list_assets ::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_assets({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, having: having, field_mask: field_mask, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      client.list_assets({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_assets ::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, having: having, field_mask: field_mask, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_assets ::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -767,7 +761,6 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     order_by = "hello world"
     read_time = {}
     compare_duration = {}
-    having = "hello world"
     field_mask = {}
     page_token = "hello world"
     page_size = 42
@@ -780,7 +773,6 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
       assert_equal "hello world", request.order_by
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.read_time
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.compare_duration
-      assert_equal "hello world", request.having
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
       assert_equal "hello world", request.page_token
       assert_equal 42, request.page_size
@@ -794,35 +786,35 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
       end
 
       # Use hash object
-      client.list_findings({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, having: having, field_mask: field_mask, page_token: page_token, page_size: page_size }) do |response, operation|
+      client.list_findings({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_findings parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, having: having, field_mask: field_mask, page_token: page_token, page_size: page_size do |response, operation|
+      client.list_findings parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_findings ::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, having: having, field_mask: field_mask, page_token: page_token, page_size: page_size) do |response, operation|
+      client.list_findings ::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_findings({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, having: having, field_mask: field_mask, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      client.list_findings({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_findings ::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, having: having, field_mask: field_mask, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_findings ::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
