@@ -46,9 +46,19 @@ describe "Asset Quickstart" do
     sleep 3
     asset_name_list
   end
+  let :dataset do
+    create_dataset_helper "ruby_asset_sample_#{SecureRandom.hex}"
+  end
+  let :dataset_name do
+    dataset_name = "/datasets/#{dataset.dataset_id}"
+    # ensure read_time_window is after dataset creation
+    sleep 3
+    dataset_name
+  end
 
   after do
     delete_bucket_helper bucket.name
+    delete_dataset_helper dataset.dataset_id
   end
 
   describe "export_assets" do
@@ -91,6 +101,33 @@ describe "Asset Quickstart" do
       assert match
       asset_service.get_feed name: match[1]
       asset_service.delete_feed name: match[1]
+    end
+  end
+
+  describe "search_all_resources" do
+    it "searches all datasets with the given name" do
+      project = ENV["GOOGLE_CLOUD_PROJECT"]
+      out, _err = capture_io do
+        search_all_resources(
+          scope: "projects/#{project}",
+          query: "name:#{dataset_name}"
+        )
+      end
+      assert out.match(/#{dataset_name}/)
+    end
+  end
+
+  describe "search_all_iam_policies" do
+    it "searches all policies bound to the owner" do
+      project = ENV["GOOGLE_CLOUD_PROJECT"]
+      role = "roles/owner"
+      out, _err = capture_io do
+        search_all_iam_policies(
+          scope: "projects/#{project}",
+          query: "policy:#{role}"
+        )
+      end
+      assert out.match(/#{role}/)
     end
   end
 end

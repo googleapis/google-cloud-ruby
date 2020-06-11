@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "google/cloud/bigquery"
 require "google/cloud/errors"
 require "google/cloud/storage"
 require "minitest/autorun"
@@ -34,6 +35,24 @@ def delete_bucket_helper bucket_name
     bucket.files.each(&:release_event_based_hold!)
     bucket.files.each(&:delete)
     bucket.delete
+  end
+end
+
+def create_dataset_helper dataset_id
+  bigquery_client = Google::Cloud::Bigquery.new
+
+  retry_resource_exhaustion do
+    return bigquery_client.create_dataset dataset_id, location: "US"
+  end
+end
+
+def delete_dataset_helper dataset_id
+  bigquery_client = Google::Cloud::Bigquery.new
+
+  retry_resource_exhaustion do
+    dataset = bigquery_client.dataset dataset_id
+    return unless dataset
+    dataset.delete
   end
 end
 
