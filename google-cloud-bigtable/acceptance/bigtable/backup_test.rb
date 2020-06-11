@@ -25,9 +25,11 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
   let(:now) { Time.now }
   let(:expire_time) { now + 60 * 60 * 7 }
   let(:expire_time_2) { now + 60 * 60 * 8 }
+  let(:restore_table_id) { "test-table-#{random_str}" }
 focus
   it "creates a backup" do
     backup = nil
+    restore_table = nil
     begin
       # create
       job = cluster.create_backup table, backup_id, expire_time
@@ -51,12 +53,6 @@ focus
       _(backup.creating?).must_equal false
       _(backup.ready?).must_equal true
 
-      # list
-      backups = cluster.backups
-      _(backups).must_be_kind_of Google::Cloud::Bigtable::Backup::List
-      _(backups).wont_be :empty?
-      _(backups.first).must_be_kind_of Google::Cloud::Bigtable::Backup
-
       # get
       backup = cluster.backup backup_id
       _(backup).must_be_kind_of Google::Cloud::Bigtable::Backup
@@ -66,9 +62,28 @@ focus
       backup.expire_time = expire_time_2
       backup.save
       _(backup.expire_time).must_equal expire_time_2
+
+      # list
+      backups = cluster.backups
+      _(backups).must_be_kind_of Google::Cloud::Bigtable::Backup::List
+      _(backups).wont_be :empty?
+      list_backup = backups.find { |b| b.backup_id == backup_id }
+      _(list_backup).must_be_kind_of Google::Cloud::Bigtable::Backup
+      _(list_backup.expire_time).must_equal expire_time_2
+
+      # restore
+      restore_job = backup.restore restore_table_id
+      _(restore_job).must_be_kind_of Google::Cloud::Bigtable::Table::RestoreJob
+      restore_job.wait_until_done!
+      _(restore_job.error).must_be :nil?
+      restore_table = restore_job.table
+      _(restore_table).must_be_kind_of Google::Cloud::Bigtable::Table
+      _(restore_table.name).must_equal restore_table_id
     ensure
       # delete
       backup.delete if backup
+      # delete
+      restore_table.delete if restore_table
     end
   end
 end

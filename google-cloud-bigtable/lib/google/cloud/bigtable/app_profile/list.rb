@@ -118,7 +118,7 @@ module Google
           #
           #   instance = bigtable.instance("my-instance")
           #
-          #   all_snapshot_ids = instance.app_profiles.all.map do |app_profile|
+          #   all_app_profile_ids = instance.app_profiles.all.map do |app_profile|
           #     app_profile.name
           #   end
           #

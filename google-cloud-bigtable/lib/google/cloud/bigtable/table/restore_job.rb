@@ -16,14 +16,14 @@
 module Google
   module Cloud
     module Bigtable
-      class Backup
+      class Table
         ##
-        # # Job
+        # # RestoreJob
         #
-        # A resource representing the long-running, asynchronous processing of an backup create or update operation. The
-        # job can be refreshed to retrieve the backup object once the operation has been completed.
+        # A resource representing the long-running, asynchronous processing of an table create or update operation. The
+        # job can be refreshed to retrieve the table object once the operation has been completed.
         #
-        # See {Cluster#create_backup}.
+        # See {Backup#restore}.
         #
         # @see https://cloud.google.com/bigtable/docs/reference/admin/rpc/google.longrunning#google.longrunning.Operation
         #   Long-running Operation
@@ -34,10 +34,10 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   instance = bigtable.instance("my-instance")
         #   cluster = instance.cluster("my-cluster")
-        #   table = instance.table("my-instance")
         #
-        #   expire_time = Time.now + 60 * 60 * 7
-        #   job = cluster.create_backup(table, "my-backup", expire_time)
+        #   backup = cluster.backup("my-backup")
+        #
+        #   job = backup.restore("my-new-table")
         #
         #   job.wait_until_done!
         #   job.done? #=> true
@@ -45,15 +45,14 @@ module Google
         #   if job.error?
         #     status = job.error
         #   else
-        #     backup = job.backup
+        #     table = job.table
         #   end
         #
-        class Job < LongrunningJob
+        class RestoreJob < LongrunningJob
           ##
-          # Get the backup object from operation results.
+          # Get the table object from operation results.
           #
-          # @return [Google::Cloud::Bigtable::Backup, nil] The backup instance, or `nil` if the operation is not
-          #   complete.
+          # @return [Google::Cloud::Bigtable::Table, nil] The table instance, or `nil` if the operation is not complete.
           #
           # @example
           #   require "google/cloud/bigtable"
@@ -61,10 +60,10 @@ module Google
           #   bigtable = Google::Cloud::Bigtable.new
           #   instance = bigtable.instance("my-instance")
           #   cluster = instance.cluster("my-cluster")
-          #   table = instance.table("my-instance")
           #
-          #   expire_time = Time.now + 60 * 60 * 7
-          #   job = cluster.create_backup(table, "my-backup", expire_time)
+          #   backup = cluster.backup("my-backup")
+          #
+          #   job = backup.restore("my-new-table")
           #
           #   job.wait_until_done!
           #   job.done? #=> true
@@ -72,11 +71,11 @@ module Google
           #   if job.error?
           #     status = job.error
           #   else
-          #     backup = job.backup
+          #     table = job.table
           #   end
           #
-          def backup
-            Backup.from_grpc results, service if results
+          def table
+            Table.from_grpc results, service if results
           end
         end
       end

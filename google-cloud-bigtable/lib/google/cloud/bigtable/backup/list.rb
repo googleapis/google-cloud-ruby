@@ -110,10 +110,8 @@ module Google
           #   instance = bigtable.instance("my-instance")
           #   cluster = instance.cluster("my-cluster")
           #
-          #   backups = cluster.backups
-          #
-          #   instance.backups.all do |backup|
-          #     puts backup.name
+          #   cluster.backups.all do |backup|
+          #     puts backup.backup_id
           #   end
           #
           # @example Using the enumerator by not passing a block:
@@ -124,8 +122,8 @@ module Google
           #   instance = bigtable.instance("my-instance")
           #   cluster = instance.cluster("my-cluster")
           #
-          #   all_snapshot_ids = cluster.backups.all.map do |backup|
-          #     backup.name
+          #   all_backup_ids = cluster.backups.all.map do |backup|
+          #     backup.backup_id
           #   end
           #
           def all

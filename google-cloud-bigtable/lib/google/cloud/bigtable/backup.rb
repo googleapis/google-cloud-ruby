@@ -18,6 +18,7 @@
 require "google/cloud/bigtable/backup/job"
 require "google/cloud/bigtable/backup/list"
 require "google/cloud/bigtable/convert"
+require "google/cloud/bigtable/table/restore_job"
 
 
 module Google
@@ -209,6 +210,11 @@ module Google
         #
         def ready?
           state == :READY
+        end
+
+        def restore table_id
+          grpc = service.restore_table table_id, instance_id, cluster_id, backup_id
+          Table::RestoreJob.from_grpc grpc, service
         end
 
         ##

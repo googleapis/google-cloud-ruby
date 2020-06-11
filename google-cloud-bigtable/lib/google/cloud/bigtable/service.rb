@@ -783,6 +783,27 @@ module Google
         end
 
         ##
+        # Create a new table by restoring from a completed backup.
+        #
+        # @param table_id [String] The table ID for the new table. This table must not yet exist.
+        # @param instance_id [String] The instance ID for the source backup. The table will be created in this instance.
+        # @param cluster_id [String] The cluster ID for the source backup.
+        # @param backup_id [String] The backup ID for the source backup.
+        #
+        # @return [Google::Gax::Operation] The {Google::Longrunning::Operation#metadata metadata} field type is
+        #   {Google::Bigtable::Admin::RestoreTableMetadata RestoreTableMetadata}. The
+        #   {Google::Longrunning::Operation#response response} type is {Google::Bigtable::Admin::V2::Table Table}, if
+        #   successful.
+        #
+        def restore_table table_id, instance_id, cluster_id, backup_id
+          execute do
+            tables.restore_table instance_path(instance_id),
+                                 table_id: table_id,
+                                 backup:   backup_path(instance_id, cluster_id, backup_id)
+          end
+        end
+
+        ##
         # Executes the API call and wrap errors to {Google::Cloud::Error}.
         #
         # @raise [Google::Cloud::Error]
