@@ -21,12 +21,13 @@ module Google
   module Cloud
     module SecurityCenter
       module V1
-        # Cloud Security Command Center's (Cloud SCC) representation of a Google Cloud
-        # Platform (GCP) resource.
+        # Security Command Center representation of a Google Cloud
+        # resource.
         #
-        # The Asset is a Cloud SCC resource that captures information about a single
-        # GCP resource. All modifications to an Asset are only within the context of
-        # Cloud SCC and don't affect the referenced GCP resource.
+        # The Asset is a Security Command Center resource that captures information
+        # about a single Google Cloud resource. All modifications to an Asset are only
+        # within the context of Security Command Center and don't affect the referenced
+        # Google Cloud resource.
         # @!attribute [rw] name
         #   @return [::String]
         #     The relative resource name of this asset. See:
@@ -35,45 +36,46 @@ module Google
         #     "organizations/\\{organization_id}/assets/\\{asset_id}".
         # @!attribute [rw] security_center_properties
         #   @return [::Google::Cloud::SecurityCenter::V1::Asset::SecurityCenterProperties]
-        #     Cloud SCC managed properties. These properties are managed by
-        #     Cloud SCC and cannot be modified by the user.
+        #     Security Command Center managed properties. These properties are managed by
+        #     Security Command Center and cannot be modified by the user.
         # @!attribute [rw] resource_properties
         #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
         #     Resource managed properties. These properties are managed and defined by
-        #     the GCP resource and cannot be modified by the user.
+        #     the Google Cloud resource and cannot be modified by the user.
         # @!attribute [rw] security_marks
         #   @return [::Google::Cloud::SecurityCenter::V1::SecurityMarks]
         #     User specified security marks. These marks are entirely managed by the user
         #     and come from the SecurityMarks resource that belongs to the asset.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time at which the asset was created in Cloud SCC.
+        #     The time at which the asset was created in Security Command Center.
         # @!attribute [rw] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time at which the asset was last updated, added, or deleted in Cloud
-        #     SCC.
+        #     The time at which the asset was last updated, added, or deleted in Security
+        #     Command Center.
         # @!attribute [rw] iam_policy
         #   @return [::Google::Cloud::SecurityCenter::V1::Asset::IamPolicy]
-        #     IAM Policy information associated with the GCP resource described by the
-        #     Cloud SCC asset. This information is managed and defined by the GCP
-        #     resource and cannot be modified by the user.
+        #     Cloud IAM Policy information associated with the Google Cloud resource
+        #     described by the Security Command Center asset. This information is managed
+        #     and defined by the Google Cloud resource and cannot be modified by the
+        #     user.
         class Asset
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Cloud SCC managed properties. These properties are managed by Cloud SCC and
-          # cannot be modified by the user.
+          # Security Command Center managed properties. These properties are managed by
+          # Security Command Center and cannot be modified by the user.
           # @!attribute [rw] resource_name
           #   @return [::String]
-          #     The full resource name of the GCP resource this asset
+          #     The full resource name of the Google Cloud resource this asset
           #     represents. This field is immutable after create time. See:
           #     https://cloud.google.com/apis/design/resource_names#full_resource_name
           # @!attribute [rw] resource_type
           #   @return [::String]
-          #     The type of the GCP resource. Examples include: APPLICATION,
+          #     The type of the Google Cloud resource. Examples include: APPLICATION,
           #     PROJECT, and ORGANIZATION. This is a case insensitive field defined by
-          #     Cloud SCC and/or the producer of the resource and is immutable
-          #     after create time.
+          #     Security Command Center and/or the producer of the resource and is
+          #     immutable after create time.
           # @!attribute [rw] resource_parent
           #   @return [::String]
           #     The full resource name of the immediate parent of the resource. See:
@@ -99,9 +101,10 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # IAM Policy information associated with the GCP resource described by the
-          # Cloud SCC asset. This information is managed and defined by the GCP
-          # resource and cannot be modified by the user.
+          # Cloud IAM Policy information associated with the Google Cloud resource
+          # described by the Security Command Center asset. This information is managed
+          # and defined by the Google Cloud resource and cannot be modified by the
+          # user.
           # @!attribute [rw] policy_blob
           #   @return [::String]
           #     The JSON representation of the Policy associated with the asset.

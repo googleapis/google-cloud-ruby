@@ -21,18 +21,24 @@ module Google
   module Cloud
     module SecurityCenter
       module V1
-        # Cloud SCC's Notification
-        # @!attribute [rw] notification_config_name
+        # Information related to the Google Cloud resource.
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Name of the notification config that generated current notification.
-        # @!attribute [rw] finding
-        #   @return [::Google::Cloud::SecurityCenter::V1::Finding]
-        #     If it's a Finding based notification config, this field will be
-        #     populated.
-        # @!attribute [rw] resource
-        #   @return [::Google::Cloud::SecurityCenter::V1::Resource]
-        #     The Cloud resource tied to this notification's Finding.
-        class NotificationMessage
+        #     The full resource name of the resource. See:
+        #     https://cloud.google.com/apis/design/resource_names#full_resource_name
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     The full resource name of project that the resource belongs to.
+        # @!attribute [rw] project_display_name
+        #   @return [::String]
+        #     The human readable name of project that the resource belongs to.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     The full resource name of resource's parent.
+        # @!attribute [rw] parent_display_name
+        #   @return [::String]
+        #     The human readable name of resource's parent.
+        class Resource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

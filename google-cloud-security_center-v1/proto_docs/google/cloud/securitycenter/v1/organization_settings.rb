@@ -21,8 +21,8 @@ module Google
   module Cloud
     module SecurityCenter
       module V1
-        # User specified settings that are attached to the Cloud Security Command
-        # Center (Cloud SCC) organization.
+        # User specified settings that are attached to the Security Command
+        # Center organization.
         # @!attribute [rw] name
         #   @return [::String]
         #     The relative resource name of the settings. See:
