@@ -19,15 +19,18 @@ Rake::TestTask.new "test" do |t|
   t.warning = false
 end
 
-task "clean_fixtures" do
-  require "google/cloud/monitoring"
-  project_id = ENV["GOOGLE_CLOUD_PROJECT"]
-  raise "Set the environment variable GOOGLE_CLOUD_PROJECT." if project_id.nil?
-  client = Google::Cloud::Monitoring.uptime_check_service
-  project_name = client.project_path project: project_id
-  configs = client.list_uptime_check_configs parent: project_name
-  configs.each do |config|
-    puts "Cleaning #{config.name}..."
-    client.delete_uptime_check_config name: config.name
+namespace :fixtures do
+  desc "Cleans out any fixture data that has been left behind by previous tests"
+  task :clean do
+    require "google/cloud/monitoring"
+    project_id = ENV["GOOGLE_CLOUD_PROJECT"]
+    raise "Set the environment variable GOOGLE_CLOUD_PROJECT." if project_id.nil?
+    client = Google::Cloud::Monitoring.uptime_check_service
+    project_name = client.project_path project: project_id
+    configs = client.list_uptime_check_configs parent: project_name
+    configs.each do |config|
+      puts "Cleaning #{config.name}..."
+      client.delete_uptime_check_config name: config.name
+    end
   end
 end
