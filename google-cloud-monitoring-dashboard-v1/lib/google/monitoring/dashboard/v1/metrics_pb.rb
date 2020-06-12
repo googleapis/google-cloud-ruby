@@ -12,11 +12,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :source do
         optional :time_series_filter, :message, 1, "google.monitoring.dashboard.v1.TimeSeriesFilter"
         optional :time_series_filter_ratio, :message, 2, "google.monitoring.dashboard.v1.TimeSeriesFilterRatio"
+        optional :time_series_query_language, :string, 3
       end
     end
     add_message "google.monitoring.dashboard.v1.TimeSeriesFilter" do
       optional :filter, :string, 1
       optional :aggregation, :message, 2, "google.monitoring.dashboard.v1.Aggregation"
+      optional :secondary_aggregation, :message, 3, "google.monitoring.dashboard.v1.Aggregation"
       oneof :output_filter do
         optional :pick_time_series_filter, :message, 4, "google.monitoring.dashboard.v1.PickTimeSeriesFilter"
         optional :statistical_time_series_filter, :message, 5, "google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter"

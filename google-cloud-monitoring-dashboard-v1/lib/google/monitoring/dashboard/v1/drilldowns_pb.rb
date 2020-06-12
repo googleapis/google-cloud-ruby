@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/monitoring/dashboard/v1/common_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/monitoring/dashboard/v1/drilldowns.proto", :syntax => :proto3) do
   end

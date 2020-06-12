@@ -25,7 +25,7 @@ module Google
           # A chart that displays data on a 2D (X and Y axes) plane.
           # @!attribute [rw] data_sets
           #   @return [::Array<::Google::Cloud::Monitoring::Dashboard::V1::XyChart::DataSet>]
-          #     The data displayed in this chart.
+          #     Required. The data displayed in this chart.
           # @!attribute [rw] timeshift_duration
           #   @return [::Google::Protobuf::Duration]
           #     The duration used to display a comparison chart. A comparison chart
@@ -52,7 +52,7 @@ module Google
             # Groups a time series query definition with charting options.
             # @!attribute [rw] time_series_query
             #   @return [::Google::Cloud::Monitoring::Dashboard::V1::TimeSeriesQuery]
-            #     Fields for querying time series data from the
+            #     Required. Fields for querying time series data from the
             #     Stackdriver metrics API.
             # @!attribute [rw] plot_type
             #   @return [::Google::Cloud::Monitoring::Dashboard::V1::XyChart::DataSet::PlotType]
@@ -60,7 +60,7 @@ module Google
             # @!attribute [rw] legend_template
             #   @return [::String]
             #     A template string for naming `TimeSeries` in the resulting data set.
-            #     This should be a string with interpolations of the form $\\{label_name},
+            #     This should be a string with interpolations of the form `${label_name}`,
             #     which will resolve to the label's value.
             # @!attribute [rw] min_alignment_period
             #   @return [::Google::Protobuf::Duration]
