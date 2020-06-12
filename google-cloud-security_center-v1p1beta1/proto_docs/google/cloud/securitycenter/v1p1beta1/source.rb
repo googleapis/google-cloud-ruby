@@ -21,7 +21,7 @@ module Google
   module Cloud
     module SecurityCenter
       module V1p1beta1
-        # Cloud Security Command Center's (Cloud SCC) finding source. A finding source
+        # Security Command Center finding source. A finding source
         # is an entity or a mechanism that can produce a finding. A source is like a
         # container of findings that come from the same scanner, logger, monitor, etc.
         # @!attribute [rw] name
@@ -41,7 +41,7 @@ module Google
         #   @return [::String]
         #     The description of the source (max of 1024 characters).
         #     Example:
-        #     "Cloud Security Scanner is a web security scanner for common
+        #     "Web Security Scanner is a web security scanner for common
         #     vulnerabilities in App Engine applications. It can automatically
         #     scan and detect four common vulnerabilities, including cross-site-scripting
         #     (XSS), Flash injection, mixed content (HTTP in HTTPS), and
