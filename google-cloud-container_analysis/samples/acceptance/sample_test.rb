@@ -147,7 +147,7 @@ describe "Container Analysis API samples" do
     # test pubsub while creating occurrences
     try = 0
     total_num = 3
-    while count != total_num && try < @try_limit
+    while count < total_num && try < @try_limit
       # start the pubsub function listening in its own thread
       t2 = Thread.new do
         timeout = (total_num * @sleep_time) + 10
@@ -167,10 +167,13 @@ describe "Container Analysis API samples" do
         delete_occurrence occurrence_id: occurrence_id, project_id: @project_id
       end
       # check to ensure the numbers match
+      # Note: because it is possible multiple tests may be running at a time,
+      # we check that we received pubsub messages for AT LEAST the number of
+      # occurrences created, rather than exactly the number.
       t2.join
       count = t2[:output]
     end
-    _(count).must_equal total_num
+    _(count).must_be :>=, total_num
   end
 
   it "runs poll_discovery_finished" do
