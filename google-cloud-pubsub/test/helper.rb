@@ -218,8 +218,7 @@ class MockPubsub < Minitest::Spec
                                enable_message_ordering: nil,
                                filter: nil,
                                dead_letter_policy: nil,
-                               retry_policy: nil,
-                               detached: false
+                               retry_policy: nil
     [
       subscription_path(sub_name),
       topic_path(topic_name),
@@ -232,7 +231,6 @@ class MockPubsub < Minitest::Spec
       filter: filter,
       dead_letter_policy: dead_letter_policy,
       retry_policy: retry_policy,
-      detached: detached,
       options: default_options
     ]
   end

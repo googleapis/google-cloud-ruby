@@ -253,7 +253,6 @@ module Google
               filter:                     options[:filter],
               dead_letter_policy:         dead_letter_policy(options),
               retry_policy:               options[:retry_policy],
-              detached:                   options[:detached],
               options:                    default_options
           end
         end

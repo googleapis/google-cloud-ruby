@@ -143,15 +143,14 @@ describe Google::Cloud::PubSub, :pubsub do
         _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
       end
     end
-focus
-    it "should allow create, update and delete of detached subscription" do
+
+    it "should create, update, detach and delete a subscription" do
       # create
       subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true,
                                                               retention: 600,
                                                               labels: labels,
                                                               filter: filter,
-                                                              retry_policy: retry_policy,
-                                                              detached: true
+                                                              retry_policy: retry_policy
       _(subscription).wont_be :nil?
       _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
       assert subscription.retain_acked
@@ -162,7 +161,7 @@ focus
       _(subscription.filter).must_be :frozen?
       _(subscription.retry_policy.minimum_backoff).must_equal retry_minimum_backoff
       _(subscription.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
-      _(subscription.detached?).must_equal true
+      _(subscription.detached?).must_equal false
 
       # update
       subscription.labels = {}
@@ -182,6 +181,11 @@ focus
       subscription.retry_policy = Google::Cloud::PubSub::RetryPolicy.new maximum_backoff: retry_maximum_backoff
       _(subscription.retry_policy.minimum_backoff).must_equal 10 # Default value
       _(subscription.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
+ 
+      # detach
+      detached = subscription.detach
+      _(detached).must_equal true
+      _(subscription.detached?).must_equal true
 
       # delete
       subscription.delete
@@ -191,8 +195,8 @@ focus
       subscription = topic.get_subscription "non-existent-subscription"
       _(subscription).must_be :nil?
     end
-focus
-    it "should be able to pull and ack, then be detached" do
+
+    it "should be able to pull and ack" do
       begin
         subscription = topic.subscribe "#{$topic_prefix}-sub4"
         _(subscription).wont_be :nil?
@@ -215,11 +219,6 @@ focus
         _(received_message.msg.published_at).wont_be :nil?
         # Acknowledge the message
         subscription.ack received_message.ack_id
- 
-        # detach
-        detached = subscription.detach
-        _(detached).must_equal true
-        _(subscription.detached?).must_equal true
       ensure
         # Remove the subscription
         subscription.delete
