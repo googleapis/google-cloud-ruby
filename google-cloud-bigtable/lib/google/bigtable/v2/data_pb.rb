@@ -131,26 +131,26 @@ end
 
 module Google
   module Bigtable
-    module V2
-      Row = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Row").msgclass
-      Family = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Family").msgclass
-      Column = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Column").msgclass
-      Cell = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Cell").msgclass
-      RowRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.RowRange").msgclass
-      RowSet = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.RowSet").msgclass
-      ColumnRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ColumnRange").msgclass
-      TimestampRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.TimestampRange").msgclass
-      ValueRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ValueRange").msgclass
-      RowFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.RowFilter").msgclass
-      RowFilter::Chain = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.RowFilter.Chain").msgclass
-      RowFilter::Interleave = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.RowFilter.Interleave").msgclass
-      RowFilter::Condition = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.RowFilter.Condition").msgclass
-      Mutation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Mutation").msgclass
-      Mutation::SetCell = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Mutation.SetCell").msgclass
-      Mutation::DeleteFromColumn = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Mutation.DeleteFromColumn").msgclass
-      Mutation::DeleteFromFamily = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Mutation.DeleteFromFamily").msgclass
-      Mutation::DeleteFromRow = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Mutation.DeleteFromRow").msgclass
-      ReadModifyWriteRule = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadModifyWriteRule").msgclass
-    end
   end
+end
+module Google::Bigtable::V2
+  Row = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Row").msgclass
+  Family = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Family").msgclass
+  Column = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Column").msgclass
+  Cell = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Cell").msgclass
+  RowRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.RowRange").msgclass
+  RowSet = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.RowSet").msgclass
+  ColumnRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ColumnRange").msgclass
+  TimestampRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.TimestampRange").msgclass
+  ValueRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ValueRange").msgclass
+  RowFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.RowFilter").msgclass
+  RowFilter::Chain = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.RowFilter.Chain").msgclass
+  RowFilter::Interleave = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.RowFilter.Interleave").msgclass
+  RowFilter::Condition = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.RowFilter.Condition").msgclass
+  Mutation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Mutation").msgclass
+  Mutation::SetCell = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Mutation.SetCell").msgclass
+  Mutation::DeleteFromColumn = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Mutation.DeleteFromColumn").msgclass
+  Mutation::DeleteFromFamily = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Mutation.DeleteFromFamily").msgclass
+  Mutation::DeleteFromRow = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Mutation.DeleteFromRow").msgclass
+  ReadModifyWriteRule = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadModifyWriteRule").msgclass
 end

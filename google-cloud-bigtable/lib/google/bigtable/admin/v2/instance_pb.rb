@@ -59,16 +59,16 @@ end
 module Google
   module Bigtable
     module Admin
-      module V2
-        Instance = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Instance").msgclass
-        Instance::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Instance.State").enummodule
-        Instance::Type = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Instance.Type").enummodule
-        Cluster = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Cluster").msgclass
-        Cluster::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Cluster.State").enummodule
-        AppProfile = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile").msgclass
-        AppProfile::MultiClusterRoutingUseAny = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile.MultiClusterRoutingUseAny").msgclass
-        AppProfile::SingleClusterRouting = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile.SingleClusterRouting").msgclass
-      end
     end
   end
+end
+module Google::Bigtable::Admin::V2
+  Instance = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Instance").msgclass
+  Instance::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Instance.State").enummodule
+  Instance::Type = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Instance.Type").enummodule
+  Cluster = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Cluster").msgclass
+  Cluster::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Cluster.State").enummodule
+  AppProfile = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile").msgclass
+  AppProfile::MultiClusterRoutingUseAny = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile.MultiClusterRoutingUseAny").msgclass
+  AppProfile::SingleClusterRouting = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile.SingleClusterRouting").msgclass
 end
