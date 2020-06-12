@@ -1,5 +1,11 @@
 # Release History
 
+### 1.10.8 / 2020-06-12
+
+#### Documentation
+
+* Provide more details on low-level monitored resource data types
+
 ### 1.10.7 / 2020-05-28
 
 #### Documentation
