@@ -143,6 +143,20 @@ namespace :acceptance do
   end
 end
 
+task :samples do
+  Rake::Task["samples:latest"].invoke
+end
+
+namespace :samples do
+  task :latest do
+    puts "The google-cloud-bigtable gem has no sample tests."
+  end
+
+  task :master do
+    puts "The google-cloud-bigtable gem has no sample tests."
+  end
+end
+
 require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new do |y|
