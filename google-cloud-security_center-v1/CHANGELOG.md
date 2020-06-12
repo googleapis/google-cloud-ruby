@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2020-06-12
+
+#### Features
+
+* Provide resource information in notifications.
+
 ### 0.2.2 / 2020-06-05
 
 #### Bug Fixes
