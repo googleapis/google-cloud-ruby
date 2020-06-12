@@ -249,3 +249,22 @@ s.replace(
     "https://cloud.google.com/firestore-admin",
     "https://cloud.google.com/firestore/docs/reference/rpc"
 )
+
+# We recently added ruby_package proto options, but we want those to apply only
+# when we move to the microgenerator. Undo their effect while the monolith is
+# still in use.
+s.replace(
+    'lib/google/firestore/v1/*_pb.rb',
+    '\nmodule Google::Cloud::Firestore::V1\n',
+    '\nmodule Google\n  module Firestore\n  end\nend\nmodule Google::Firestore::V1\n',
+)
+s.replace(
+    'lib/google/firestore/v1beta1/*_pb.rb',
+    '\nmodule Google::Cloud::Firestore::V1beta1\n',
+    '\nmodule Google\n  module Firestore\n  end\nend\nmodule Google::Firestore::V1beta1\n',
+)
+s.replace(
+    'lib/google/firestore/admin/v1/*_pb.rb',
+    '\nmodule Google::Cloud::Firestore::Admin::V1\n',
+    '\nmodule Google\n  module Firestore\n    module Admin\n    end\n  end\nend\nmodule Google::Firestore::Admin::V1\n',
+)

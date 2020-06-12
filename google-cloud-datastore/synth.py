@@ -95,3 +95,17 @@ s.replace(
     "/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString]",
     "/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)"
 )
+
+# We recently added ruby_package proto options, but we want those to apply only
+# when we move to the microgenerator. Undo their effect while the monolith is
+# still in use.
+s.replace(
+    'lib/google/datastore/v1/*_pb.rb',
+    '\nmodule Google::Cloud::Datastore::V1\n',
+    '\nmodule Google\n  module Datastore\n  end\nend\nmodule Google::Datastore::V1\n',
+)
+s.replace(
+    'lib/google/datastore/admin/v1/*_pb.rb',
+    '\nmodule Google::Cloud::Datastore::Admin::V1\n',
+    '\nmodule Google\n  module Datastore\n    module Admin\n    end\n  end\nend\nmodule Google::Datastore::Admin::V1\n',
+)
