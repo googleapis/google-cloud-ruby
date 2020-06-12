@@ -64,17 +64,17 @@ end
 
 module Google
   module Logging
-    module V2
-      DeleteLogRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.DeleteLogRequest").msgclass
-      WriteLogEntriesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.WriteLogEntriesRequest").msgclass
-      WriteLogEntriesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.WriteLogEntriesResponse").msgclass
-      WriteLogEntriesPartialErrors = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.WriteLogEntriesPartialErrors").msgclass
-      ListLogEntriesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogEntriesRequest").msgclass
-      ListLogEntriesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogEntriesResponse").msgclass
-      ListMonitoredResourceDescriptorsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListMonitoredResourceDescriptorsRequest").msgclass
-      ListMonitoredResourceDescriptorsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListMonitoredResourceDescriptorsResponse").msgclass
-      ListLogsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogsRequest").msgclass
-      ListLogsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogsResponse").msgclass
-    end
   end
+end
+module Google::Logging::V2
+  DeleteLogRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.DeleteLogRequest").msgclass
+  WriteLogEntriesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.WriteLogEntriesRequest").msgclass
+  WriteLogEntriesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.WriteLogEntriesResponse").msgclass
+  WriteLogEntriesPartialErrors = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.WriteLogEntriesPartialErrors").msgclass
+  ListLogEntriesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogEntriesRequest").msgclass
+  ListLogEntriesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogEntriesResponse").msgclass
+  ListMonitoredResourceDescriptorsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListMonitoredResourceDescriptorsRequest").msgclass
+  ListMonitoredResourceDescriptorsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListMonitoredResourceDescriptorsResponse").msgclass
+  ListLogsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogsRequest").msgclass
+  ListLogsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogsResponse").msgclass
 end

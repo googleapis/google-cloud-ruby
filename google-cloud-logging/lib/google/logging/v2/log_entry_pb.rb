@@ -50,10 +50,10 @@ end
 
 module Google
   module Logging
-    module V2
-      LogEntry = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogEntry").msgclass
-      LogEntryOperation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogEntryOperation").msgclass
-      LogEntrySourceLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogEntrySourceLocation").msgclass
-    end
   end
+end
+module Google::Logging::V2
+  LogEntry = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogEntry").msgclass
+  LogEntryOperation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogEntryOperation").msgclass
+  LogEntrySourceLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogEntrySourceLocation").msgclass
 end
