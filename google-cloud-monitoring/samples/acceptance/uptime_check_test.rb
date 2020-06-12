@@ -20,16 +20,6 @@ describe "Monitoring uptime check" do
     @project_id = ENV["GOOGLE_CLOUD_PROJECT"]
     raise "Set the environment variable GOOGLE_CLOUD_PROJECT." if @project_id.nil?
 
-    # Delete all uptime checks before running tests.
-    client = Google::Cloud::Monitoring.uptime_check_service
-    project_name = client.project_path project: @project_id
-    configs = client.list_uptime_check_configs parent: project_name
-    configs.each do |config|
-      capture_io do
-        delete_uptime_check_config config.name
-      end
-    end
-
     capture_io do
       @configs = [create_uptime_check_config(project_id: @project_id),
                   create_uptime_check_config(project_id: @project_id)]

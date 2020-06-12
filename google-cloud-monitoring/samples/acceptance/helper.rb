@@ -15,6 +15,7 @@
 require "minitest/autorun"
 require "minitest/spec"
 require "minitest/focus"
+require "minitest/hooks/default"
 
 require "google/cloud/monitoring"
 require "google/cloud/monitoring/v3"
