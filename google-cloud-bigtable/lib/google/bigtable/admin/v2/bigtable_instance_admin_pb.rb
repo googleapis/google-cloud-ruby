@@ -116,30 +116,30 @@ end
 module Google
   module Bigtable
     module Admin
-      module V2
-        CreateInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateInstanceRequest").msgclass
-        GetInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetInstanceRequest").msgclass
-        ListInstancesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListInstancesRequest").msgclass
-        ListInstancesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListInstancesResponse").msgclass
-        PartialUpdateInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.PartialUpdateInstanceRequest").msgclass
-        DeleteInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteInstanceRequest").msgclass
-        CreateClusterRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateClusterRequest").msgclass
-        GetClusterRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetClusterRequest").msgclass
-        ListClustersRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListClustersRequest").msgclass
-        ListClustersResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListClustersResponse").msgclass
-        DeleteClusterRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteClusterRequest").msgclass
-        CreateInstanceMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateInstanceMetadata").msgclass
-        UpdateInstanceMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateInstanceMetadata").msgclass
-        CreateClusterMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateClusterMetadata").msgclass
-        UpdateClusterMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateClusterMetadata").msgclass
-        CreateAppProfileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateAppProfileRequest").msgclass
-        GetAppProfileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetAppProfileRequest").msgclass
-        ListAppProfilesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListAppProfilesRequest").msgclass
-        ListAppProfilesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListAppProfilesResponse").msgclass
-        UpdateAppProfileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateAppProfileRequest").msgclass
-        DeleteAppProfileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteAppProfileRequest").msgclass
-        UpdateAppProfileMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateAppProfileMetadata").msgclass
-      end
     end
   end
+end
+module Google::Bigtable::Admin::V2
+  CreateInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateInstanceRequest").msgclass
+  GetInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetInstanceRequest").msgclass
+  ListInstancesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListInstancesRequest").msgclass
+  ListInstancesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListInstancesResponse").msgclass
+  PartialUpdateInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.PartialUpdateInstanceRequest").msgclass
+  DeleteInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteInstanceRequest").msgclass
+  CreateClusterRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateClusterRequest").msgclass
+  GetClusterRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetClusterRequest").msgclass
+  ListClustersRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListClustersRequest").msgclass
+  ListClustersResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListClustersResponse").msgclass
+  DeleteClusterRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteClusterRequest").msgclass
+  CreateInstanceMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateInstanceMetadata").msgclass
+  UpdateInstanceMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateInstanceMetadata").msgclass
+  CreateClusterMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateClusterMetadata").msgclass
+  UpdateClusterMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateClusterMetadata").msgclass
+  CreateAppProfileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateAppProfileRequest").msgclass
+  GetAppProfileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetAppProfileRequest").msgclass
+  ListAppProfilesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListAppProfilesRequest").msgclass
+  ListAppProfilesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListAppProfilesResponse").msgclass
+  UpdateAppProfileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateAppProfileRequest").msgclass
+  DeleteAppProfileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteAppProfileRequest").msgclass
+  UpdateAppProfileMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateAppProfileMetadata").msgclass
 end

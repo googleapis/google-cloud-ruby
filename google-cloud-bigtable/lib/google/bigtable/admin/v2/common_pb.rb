@@ -21,10 +21,10 @@ end
 module Google
   module Bigtable
     module Admin
-      module V2
-        OperationProgress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.OperationProgress").msgclass
-        StorageType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.StorageType").enummodule
-      end
     end
   end
+end
+module Google::Bigtable::Admin::V2
+  OperationProgress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.OperationProgress").msgclass
+  StorageType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.StorageType").enummodule
 end
