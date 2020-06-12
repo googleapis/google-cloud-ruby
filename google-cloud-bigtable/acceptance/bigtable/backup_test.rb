@@ -63,6 +63,12 @@ focus
       backup.save
       _(backup.expire_time).must_equal expire_time_2
 
+      # reload
+      backup.expire_time = expire_time
+      _(backup.expire_time).must_equal expire_time # not persisted with #save
+      backup.reload!
+      _(backup.expire_time).must_equal expire_time_2
+
       # list
       backups = cluster.backups
       _(backups).must_be_kind_of Google::Cloud::Bigtable::Backup::List

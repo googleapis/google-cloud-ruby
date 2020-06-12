@@ -202,11 +202,51 @@ module Google
           Backup::Job.from_grpc grpc, service
         end
 
+        ##
+        # Gets a backup in the cluster.
+        #
+        # @param backup_id [String] The unique ID of the requested backup.
+        #
+        # @return [Google::Cloud::Bigtable::Backup, nil] The backup object, or `nil` if not found in the service.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #   cluster = instance.cluster("my-cluster")
+        #
+        #   backup = cluster.backup("my-backup")
+        #
+        #   if backup
+        #     puts backup.backup_id
+        #   end
+        #
         def backup backup_id
           grpc = service.get_backup instance_id, cluster_id, backup_id
           Backup.from_grpc grpc, service
+        rescue Google::Cloud::NotFoundError
+          nil
         end
 
+        ##
+        # Lists all backups in the cluster.
+        #
+        # @return [Array<Google::Cloud::Bigtable::Backup>] (See {Google::Cloud::Bigtable::Backup::List})
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #   cluster = instance.cluster("my-cluster")
+        #
+        #   cluster.backups.all do |backup|
+        #     puts backup.backup_id
+        #   end
+        #
         def backups
           grpc = service.list_backups instance_id, cluster_id
           Backup::List.from_grpc grpc, service

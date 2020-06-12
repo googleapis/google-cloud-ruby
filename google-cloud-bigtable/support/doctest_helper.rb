@@ -233,6 +233,22 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::Cluster#backup" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_tables.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Cluster#backups" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_tables.expect :list_backups, backups_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigtable::Cluster#save" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]

@@ -252,7 +252,7 @@ module Google
         # @return [Google::Cloud::Bigtable::Backup]
         #
         def reload!
-          @grpc = service.get_backup instance_id, backup_id
+          @grpc = service.get_backup instance_id, cluster_id, backup_id
           self
         end
 
