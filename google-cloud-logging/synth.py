@@ -158,3 +158,12 @@ s.replace(
     '\{Google::Logging::V2::ConfigServiceV2::GetCmekSettings GetCmekSettings\}',
     '{Google::Cloud::Logging::V2::ConfigServiceV2Client#get_cmek_settings}'
 )
+
+# We recently added ruby_package proto options, but we want those to apply only
+# when we move to the microgenerator. Undo their effect while the monolith is
+# still in use.
+s.replace(
+    'lib/google/logging/v2/*_pb.rb',
+    '\nmodule Google::Cloud::Logging::V2\n',
+    '\nmodule Google\n  module Logging\n  end\nend\nmodule Google::Logging::V2\n',
+)

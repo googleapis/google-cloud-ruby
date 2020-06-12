@@ -262,3 +262,22 @@ s.replace(
     'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
     'https://googleapis.dev/ruby/google-cloud-spanner/latest/file.AUTHENTICATION.html'
 )
+
+# We recently added ruby_package proto options, but we want those to apply only
+# when we move to the microgenerator. Undo their effect while the monolith is
+# still in use.
+s.replace(
+    'lib/google/spanner/v1/*_pb.rb',
+    '\nmodule Google::Cloud::Spanner::V1\n',
+    '\nmodule Google\n  module Spanner\n  end\nend\nmodule Google::Spanner::V1\n',
+)
+s.replace(
+    'lib/google/spanner/admin/database/v1/*_pb.rb',
+    '\nmodule Google::Cloud::Spanner::Admin::Database::V1\n',
+    '\nmodule Google\n  module Spanner\n    module Admin\n      module Database\n      end\n    end\n  end\nend\nmodule Google::Spanner::Admin::Database::V1\n',
+)
+s.replace(
+    'lib/google/spanner/admin/instance/v1/*_pb.rb',
+    '\nmodule Google::Cloud::Spanner::Admin::Instance::V1\n',
+    '\nmodule Google\n  module Spanner\n    module Admin\n      module Instance\n      end\n    end\n  end\nend\nmodule Google::Spanner::Admin::Instance::V1\n',
+)
