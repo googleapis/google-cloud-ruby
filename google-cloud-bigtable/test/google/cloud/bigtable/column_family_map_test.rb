@@ -77,7 +77,7 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     cfm.freeze
 
     error = expect { cfm.add cf_name }.must_raise frozen_error_class
-    _(error.message).must_equal "can't modify frozen Hash"
+    _(error.message).must_match(/can't modify frozen Hash/)
   end
 
   it "updates a column family" do
@@ -119,7 +119,7 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     cfm.freeze
 
     error = expect { cfm.update cf_name }.must_raise frozen_error_class
-    _(error.message).must_equal "can't modify frozen Hash"
+    _(error.message).must_match(/can't modify frozen Hash/)
   end
 
   it "deletes a column family" do
@@ -146,6 +146,6 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     cfm.freeze
 
     error = expect { cfm.delete cf_name }.must_raise frozen_error_class
-    _(error.message).must_equal "can't modify frozen Hash"
+    _(error.message).must_match(/can't modify frozen Hash/)
   end
 end
