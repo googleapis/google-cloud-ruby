@@ -109,24 +109,24 @@ end
 
 module Google
   module Datastore
-    module V1
-      EntityResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.EntityResult").msgclass
-      EntityResult::ResultType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.EntityResult.ResultType").enummodule
-      Query = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Query").msgclass
-      KindExpression = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.KindExpression").msgclass
-      PropertyReference = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.PropertyReference").msgclass
-      Projection = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Projection").msgclass
-      PropertyOrder = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.PropertyOrder").msgclass
-      PropertyOrder::Direction = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.PropertyOrder.Direction").enummodule
-      Filter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Filter").msgclass
-      CompositeFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.CompositeFilter").msgclass
-      CompositeFilter::Operator = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.CompositeFilter.Operator").enummodule
-      PropertyFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.PropertyFilter").msgclass
-      PropertyFilter::Operator = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.PropertyFilter.Operator").enummodule
-      GqlQuery = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.GqlQuery").msgclass
-      GqlQueryParameter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.GqlQueryParameter").msgclass
-      QueryResultBatch = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.QueryResultBatch").msgclass
-      QueryResultBatch::MoreResultsType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.QueryResultBatch.MoreResultsType").enummodule
-    end
   end
+end
+module Google::Datastore::V1
+  EntityResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.EntityResult").msgclass
+  EntityResult::ResultType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.EntityResult.ResultType").enummodule
+  Query = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Query").msgclass
+  KindExpression = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.KindExpression").msgclass
+  PropertyReference = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.PropertyReference").msgclass
+  Projection = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Projection").msgclass
+  PropertyOrder = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.PropertyOrder").msgclass
+  PropertyOrder::Direction = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.PropertyOrder.Direction").enummodule
+  Filter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Filter").msgclass
+  CompositeFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.CompositeFilter").msgclass
+  CompositeFilter::Operator = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.CompositeFilter.Operator").enummodule
+  PropertyFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.PropertyFilter").msgclass
+  PropertyFilter::Operator = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.PropertyFilter.Operator").enummodule
+  GqlQuery = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.GqlQuery").msgclass
+  GqlQueryParameter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.GqlQueryParameter").msgclass
+  QueryResultBatch = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.QueryResultBatch").msgclass
+  QueryResultBatch::MoreResultsType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.QueryResultBatch.MoreResultsType").enummodule
 end
