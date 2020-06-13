@@ -114,28 +114,28 @@ module Google
   module Spanner
     module Admin
       module Database
-        module V1
-          RestoreInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreInfo").msgclass
-          Database = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.Database").msgclass
-          Database::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.Database.State").enummodule
-          ListDatabasesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListDatabasesRequest").msgclass
-          ListDatabasesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListDatabasesResponse").msgclass
-          CreateDatabaseRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CreateDatabaseRequest").msgclass
-          CreateDatabaseMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CreateDatabaseMetadata").msgclass
-          GetDatabaseRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.GetDatabaseRequest").msgclass
-          UpdateDatabaseDdlRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.UpdateDatabaseDdlRequest").msgclass
-          UpdateDatabaseDdlMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.UpdateDatabaseDdlMetadata").msgclass
-          DropDatabaseRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.DropDatabaseRequest").msgclass
-          GetDatabaseDdlRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.GetDatabaseDdlRequest").msgclass
-          GetDatabaseDdlResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.GetDatabaseDdlResponse").msgclass
-          ListDatabaseOperationsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListDatabaseOperationsRequest").msgclass
-          ListDatabaseOperationsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListDatabaseOperationsResponse").msgclass
-          RestoreDatabaseRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreDatabaseRequest").msgclass
-          RestoreDatabaseMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreDatabaseMetadata").msgclass
-          OptimizeRestoredDatabaseMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.OptimizeRestoredDatabaseMetadata").msgclass
-          RestoreSourceType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreSourceType").enummodule
-        end
       end
     end
   end
+end
+module Google::Spanner::Admin::Database::V1
+  RestoreInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreInfo").msgclass
+  Database = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.Database").msgclass
+  Database::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.Database.State").enummodule
+  ListDatabasesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListDatabasesRequest").msgclass
+  ListDatabasesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListDatabasesResponse").msgclass
+  CreateDatabaseRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CreateDatabaseRequest").msgclass
+  CreateDatabaseMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CreateDatabaseMetadata").msgclass
+  GetDatabaseRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.GetDatabaseRequest").msgclass
+  UpdateDatabaseDdlRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.UpdateDatabaseDdlRequest").msgclass
+  UpdateDatabaseDdlMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.UpdateDatabaseDdlMetadata").msgclass
+  DropDatabaseRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.DropDatabaseRequest").msgclass
+  GetDatabaseDdlRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.GetDatabaseDdlRequest").msgclass
+  GetDatabaseDdlResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.GetDatabaseDdlResponse").msgclass
+  ListDatabaseOperationsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListDatabaseOperationsRequest").msgclass
+  ListDatabaseOperationsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListDatabaseOperationsResponse").msgclass
+  RestoreDatabaseRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreDatabaseRequest").msgclass
+  RestoreDatabaseMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreDatabaseMetadata").msgclass
+  OptimizeRestoredDatabaseMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.OptimizeRestoredDatabaseMetadata").msgclass
+  RestoreSourceType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreSourceType").enummodule
 end

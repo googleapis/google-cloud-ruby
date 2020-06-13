@@ -34,11 +34,11 @@ end
 
 module Google
   module Spanner
-    module V1
-      Type = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Type").msgclass
-      StructType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.StructType").msgclass
-      StructType::Field = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.StructType.Field").msgclass
-      TypeCode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TypeCode").enummodule
-    end
   end
+end
+module Google::Spanner::V1
+  Type = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Type").msgclass
+  StructType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.StructType").msgclass
+  StructType::Field = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.StructType.Field").msgclass
+  TypeCode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TypeCode").enummodule
 end
