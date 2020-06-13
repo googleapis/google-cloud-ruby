@@ -119,29 +119,29 @@ end
 
 module Google
   module Datastore
-    module V1
-      LookupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.LookupRequest").msgclass
-      LookupResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.LookupResponse").msgclass
-      RunQueryRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.RunQueryRequest").msgclass
-      RunQueryResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.RunQueryResponse").msgclass
-      BeginTransactionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.BeginTransactionRequest").msgclass
-      BeginTransactionResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.BeginTransactionResponse").msgclass
-      RollbackRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.RollbackRequest").msgclass
-      RollbackResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.RollbackResponse").msgclass
-      CommitRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.CommitRequest").msgclass
-      CommitRequest::Mode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.CommitRequest.Mode").enummodule
-      CommitResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.CommitResponse").msgclass
-      AllocateIdsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.AllocateIdsRequest").msgclass
-      AllocateIdsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.AllocateIdsResponse").msgclass
-      ReserveIdsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.ReserveIdsRequest").msgclass
-      ReserveIdsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.ReserveIdsResponse").msgclass
-      Mutation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Mutation").msgclass
-      MutationResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.MutationResult").msgclass
-      ReadOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.ReadOptions").msgclass
-      ReadOptions::ReadConsistency = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.ReadOptions.ReadConsistency").enummodule
-      TransactionOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.TransactionOptions").msgclass
-      TransactionOptions::ReadWrite = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.TransactionOptions.ReadWrite").msgclass
-      TransactionOptions::ReadOnly = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.TransactionOptions.ReadOnly").msgclass
-    end
   end
+end
+module Google::Datastore::V1
+  LookupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.LookupRequest").msgclass
+  LookupResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.LookupResponse").msgclass
+  RunQueryRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.RunQueryRequest").msgclass
+  RunQueryResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.RunQueryResponse").msgclass
+  BeginTransactionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.BeginTransactionRequest").msgclass
+  BeginTransactionResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.BeginTransactionResponse").msgclass
+  RollbackRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.RollbackRequest").msgclass
+  RollbackResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.RollbackResponse").msgclass
+  CommitRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.CommitRequest").msgclass
+  CommitRequest::Mode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.CommitRequest.Mode").enummodule
+  CommitResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.CommitResponse").msgclass
+  AllocateIdsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.AllocateIdsRequest").msgclass
+  AllocateIdsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.AllocateIdsResponse").msgclass
+  ReserveIdsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.ReserveIdsRequest").msgclass
+  ReserveIdsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.ReserveIdsResponse").msgclass
+  Mutation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Mutation").msgclass
+  MutationResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.MutationResult").msgclass
+  ReadOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.ReadOptions").msgclass
+  ReadOptions::ReadConsistency = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.ReadOptions.ReadConsistency").enummodule
+  TransactionOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.TransactionOptions").msgclass
+  TransactionOptions::ReadWrite = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.TransactionOptions.ReadWrite").msgclass
+  TransactionOptions::ReadOnly = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.TransactionOptions.ReadOnly").msgclass
 end
