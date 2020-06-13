@@ -23,10 +23,10 @@ end
 module Google
   module Firestore
     module Admin
-      module V1
-        Field = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Field").msgclass
-        Field::IndexConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Field.IndexConfig").msgclass
-      end
     end
   end
+end
+module Google::Firestore::Admin::V1
+  Field = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Field").msgclass
+  Field::IndexConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Field.IndexConfig").msgclass
 end

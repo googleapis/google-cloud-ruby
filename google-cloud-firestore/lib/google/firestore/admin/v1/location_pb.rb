@@ -14,9 +14,9 @@ end
 module Google
   module Firestore
     module Admin
-      module V1
-        LocationMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.LocationMetadata").msgclass
-      end
     end
   end
+end
+module Google::Firestore::Admin::V1
+  LocationMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.LocationMetadata").msgclass
 end
