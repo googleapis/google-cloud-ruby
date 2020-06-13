@@ -26,9 +26,9 @@ end
 
 module Google
   module Spanner
-    module V1
-      KeyRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.KeyRange").msgclass
-      KeySet = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.KeySet").msgclass
-    end
   end
+end
+module Google::Spanner::V1
+  KeyRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.KeyRange").msgclass
+  KeySet = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.KeySet").msgclass
 end

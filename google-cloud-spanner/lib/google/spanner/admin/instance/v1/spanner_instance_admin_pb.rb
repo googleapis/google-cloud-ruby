@@ -101,25 +101,25 @@ module Google
   module Spanner
     module Admin
       module Instance
-        module V1
-          ReplicaInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ReplicaInfo").msgclass
-          ReplicaInfo::ReplicaType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ReplicaInfo.ReplicaType").enummodule
-          InstanceConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.InstanceConfig").msgclass
-          Instance = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.Instance").msgclass
-          Instance::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.Instance.State").enummodule
-          ListInstanceConfigsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ListInstanceConfigsRequest").msgclass
-          ListInstanceConfigsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ListInstanceConfigsResponse").msgclass
-          GetInstanceConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.GetInstanceConfigRequest").msgclass
-          GetInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.GetInstanceRequest").msgclass
-          CreateInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.CreateInstanceRequest").msgclass
-          ListInstancesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ListInstancesRequest").msgclass
-          ListInstancesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ListInstancesResponse").msgclass
-          UpdateInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.UpdateInstanceRequest").msgclass
-          DeleteInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.DeleteInstanceRequest").msgclass
-          CreateInstanceMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.CreateInstanceMetadata").msgclass
-          UpdateInstanceMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.UpdateInstanceMetadata").msgclass
-        end
       end
     end
   end
+end
+module Google::Spanner::Admin::Instance::V1
+  ReplicaInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ReplicaInfo").msgclass
+  ReplicaInfo::ReplicaType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ReplicaInfo.ReplicaType").enummodule
+  InstanceConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.InstanceConfig").msgclass
+  Instance = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.Instance").msgclass
+  Instance::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.Instance.State").enummodule
+  ListInstanceConfigsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ListInstanceConfigsRequest").msgclass
+  ListInstanceConfigsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ListInstanceConfigsResponse").msgclass
+  GetInstanceConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.GetInstanceConfigRequest").msgclass
+  GetInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.GetInstanceRequest").msgclass
+  CreateInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.CreateInstanceRequest").msgclass
+  ListInstancesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ListInstancesRequest").msgclass
+  ListInstancesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ListInstancesResponse").msgclass
+  UpdateInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.UpdateInstanceRequest").msgclass
+  DeleteInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.DeleteInstanceRequest").msgclass
+  CreateInstanceMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.CreateInstanceMetadata").msgclass
+  UpdateInstanceMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.UpdateInstanceMetadata").msgclass
 end

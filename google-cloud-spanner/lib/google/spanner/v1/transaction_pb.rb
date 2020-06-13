@@ -44,13 +44,13 @@ end
 
 module Google
   module Spanner
-    module V1
-      TransactionOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions").msgclass
-      TransactionOptions::ReadWrite = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions.ReadWrite").msgclass
-      TransactionOptions::PartitionedDml = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions.PartitionedDml").msgclass
-      TransactionOptions::ReadOnly = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions.ReadOnly").msgclass
-      Transaction = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Transaction").msgclass
-      TransactionSelector = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionSelector").msgclass
-    end
   end
+end
+module Google::Spanner::V1
+  TransactionOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions").msgclass
+  TransactionOptions::ReadWrite = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions.ReadWrite").msgclass
+  TransactionOptions::PartitionedDml = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions.PartitionedDml").msgclass
+  TransactionOptions::ReadOnly = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions.ReadOnly").msgclass
+  Transaction = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Transaction").msgclass
+  TransactionSelector = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionSelector").msgclass
 end
