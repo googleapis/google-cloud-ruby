@@ -115,6 +115,7 @@ module Google
     #     * `min`   minute
     #     * `h`     hour
     #     * `d`     day
+    #     * `1`     dimensionless
     #
     #     **Prefixes (PREFIX)**
     #
