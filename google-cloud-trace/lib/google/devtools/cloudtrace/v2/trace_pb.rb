@@ -109,24 +109,24 @@ end
 module Google
   module Devtools
     module Cloudtrace
-      module V2
-        Span = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span").msgclass
-        Span::Attributes = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.Attributes").msgclass
-        Span::TimeEvent = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.TimeEvent").msgclass
-        Span::TimeEvent::Annotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.TimeEvent.Annotation").msgclass
-        Span::TimeEvent::MessageEvent = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.TimeEvent.MessageEvent").msgclass
-        Span::TimeEvent::MessageEvent::Type = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.TimeEvent.MessageEvent.Type").enummodule
-        Span::TimeEvents = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.TimeEvents").msgclass
-        Span::Link = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.Link").msgclass
-        Span::Link::Type = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.Link.Type").enummodule
-        Span::Links = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.Links").msgclass
-        AttributeValue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.AttributeValue").msgclass
-        StackTrace = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.StackTrace").msgclass
-        StackTrace::StackFrame = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.StackTrace.StackFrame").msgclass
-        StackTrace::StackFrames = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.StackTrace.StackFrames").msgclass
-        Module = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Module").msgclass
-        TruncatableString = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.TruncatableString").msgclass
-      end
     end
   end
+end
+module Google::Devtools::Cloudtrace::V2
+  Span = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span").msgclass
+  Span::Attributes = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.Attributes").msgclass
+  Span::TimeEvent = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.TimeEvent").msgclass
+  Span::TimeEvent::Annotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.TimeEvent.Annotation").msgclass
+  Span::TimeEvent::MessageEvent = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.TimeEvent.MessageEvent").msgclass
+  Span::TimeEvent::MessageEvent::Type = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.TimeEvent.MessageEvent.Type").enummodule
+  Span::TimeEvents = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.TimeEvents").msgclass
+  Span::Link = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.Link").msgclass
+  Span::Link::Type = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.Link.Type").enummodule
+  Span::Links = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.Links").msgclass
+  AttributeValue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.AttributeValue").msgclass
+  StackTrace = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.StackTrace").msgclass
+  StackTrace::StackFrame = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.StackTrace.StackFrame").msgclass
+  StackTrace::StackFrames = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.StackTrace.StackFrames").msgclass
+  Module = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Module").msgclass
+  TruncatableString = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.TruncatableString").msgclass
 end
