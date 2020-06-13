@@ -58,7 +58,6 @@ describe "Asset Quickstart" do
 
   after do
     delete_bucket_helper bucket.name
-    delete_dataset_helper dataset.dataset_id
   end
 
   describe "export_assets" do
@@ -105,6 +104,9 @@ describe "Asset Quickstart" do
   end
 
   describe "search_all_resources" do
+    after do
+      delete_dataset_helper dataset.dataset_id
+    end
     it "searches all datasets with the given name" do
       project = ENV["GOOGLE_CLOUD_PROJECT"]
       out, _err = capture_io do
@@ -113,7 +115,7 @@ describe "Asset Quickstart" do
           query: "name:#{dataset_name}"
         )
       end
-      assert out.match(/#{dataset_name}/)
+      assert_match(/#{dataset_name}/, out)
     end
   end
 
@@ -127,7 +129,7 @@ describe "Asset Quickstart" do
           query: "policy:#{role}"
         )
       end
-      assert out.match(/#{role}/)
+      assert_match(/#{role}/, out)
     end
   end
 end

@@ -102,7 +102,7 @@ end
 
 def search_all_resources scope: "", query: "", asset_types: [], page_size: 0, page_token: "", order_by: ""
   # [START asset_quickstart_search_all_resources]
-  require "google/cloud/asset/v1"
+  require "google/cloud/asset"
 
   # scope = 'SCOPE_OF_THE_QUERY'
   # query = 'QUERY_STATEMENT'
@@ -110,7 +110,7 @@ def search_all_resources scope: "", query: "", asset_types: [], page_size: 0, pa
   # page_size = 'SIZE_OF_EACH_RESULT_PAGE'
   # page_token = 'TOKEN_PRODUCED_BY_THE_PRECEDING_CALL'
   # order_by = 'FIELDS_TO_SORT_THE RESULTS'
-  asset_service = ::Google::Cloud::Asset::V1::AssetService::Client.new
+  asset_service = Google::Cloud::Asset.asset_service
 
   response = asset_service.search_all_resources(
     scope:       scope,
@@ -129,13 +129,13 @@ end
 
 def search_all_iam_policies scope: "", query: "", page_size: 0, page_token: ""
   # [START asset_quickstart_search_all_iam_policies]
-  require "google/cloud/asset/v1"
+  require "google/cloud/asset"
 
   # scope = 'SCOPE_OF_THE_QUERY'
   # query = 'QUERY_STATEMENT'
   # page_size = 'SIZE_OF_EACH_RESULT_PAGE'
   # page_token = 'TOKEN_PRODUCED_BY_THE_PRECEDING_CALL'
-  asset_service = ::Google::Cloud::Asset::V1::AssetService::Client.new
+  asset_service = Google::Cloud::Asset.asset_service
 
   response = asset_service.search_all_iam_policies(
     scope:      scope,
