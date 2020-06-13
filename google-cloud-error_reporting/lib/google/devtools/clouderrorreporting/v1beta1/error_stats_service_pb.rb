@@ -96,21 +96,21 @@ end
 module Google
   module Devtools
     module Clouderrorreporting
-      module V1beta1
-        ListGroupStatsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ListGroupStatsRequest").msgclass
-        ListGroupStatsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ListGroupStatsResponse").msgclass
-        ErrorGroupStats = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ErrorGroupStats").msgclass
-        TimedCount = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.TimedCount").msgclass
-        ListEventsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ListEventsRequest").msgclass
-        ListEventsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ListEventsResponse").msgclass
-        QueryTimeRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.QueryTimeRange").msgclass
-        QueryTimeRange::Period = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.QueryTimeRange.Period").enummodule
-        ServiceContextFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ServiceContextFilter").msgclass
-        DeleteEventsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.DeleteEventsRequest").msgclass
-        DeleteEventsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.DeleteEventsResponse").msgclass
-        TimedCountAlignment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.TimedCountAlignment").enummodule
-        ErrorGroupOrder = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ErrorGroupOrder").enummodule
-      end
     end
   end
+end
+module Google::Devtools::Clouderrorreporting::V1beta1
+  ListGroupStatsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ListGroupStatsRequest").msgclass
+  ListGroupStatsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ListGroupStatsResponse").msgclass
+  ErrorGroupStats = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ErrorGroupStats").msgclass
+  TimedCount = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.TimedCount").msgclass
+  ListEventsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ListEventsRequest").msgclass
+  ListEventsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ListEventsResponse").msgclass
+  QueryTimeRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.QueryTimeRange").msgclass
+  QueryTimeRange::Period = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.QueryTimeRange.Period").enummodule
+  ServiceContextFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ServiceContextFilter").msgclass
+  DeleteEventsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.DeleteEventsRequest").msgclass
+  DeleteEventsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.DeleteEventsResponse").msgclass
+  TimedCountAlignment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.TimedCountAlignment").enummodule
+  ErrorGroupOrder = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ErrorGroupOrder").enummodule
 end

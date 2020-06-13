@@ -50,15 +50,15 @@ end
 module Google
   module Devtools
     module Clouderrorreporting
-      module V1beta1
-        ErrorGroup = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ErrorGroup").msgclass
-        TrackingIssue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.TrackingIssue").msgclass
-        ErrorEvent = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ErrorEvent").msgclass
-        ServiceContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ServiceContext").msgclass
-        ErrorContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ErrorContext").msgclass
-        HttpRequestContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.HttpRequestContext").msgclass
-        SourceLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.SourceLocation").msgclass
-      end
     end
   end
+end
+module Google::Devtools::Clouderrorreporting::V1beta1
+  ErrorGroup = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ErrorGroup").msgclass
+  TrackingIssue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.TrackingIssue").msgclass
+  ErrorEvent = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ErrorEvent").msgclass
+  ServiceContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ServiceContext").msgclass
+  ErrorContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ErrorContext").msgclass
+  HttpRequestContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.HttpRequestContext").msgclass
+  SourceLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.SourceLocation").msgclass
 end

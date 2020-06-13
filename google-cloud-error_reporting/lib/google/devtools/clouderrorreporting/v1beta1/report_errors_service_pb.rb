@@ -28,11 +28,11 @@ end
 module Google
   module Devtools
     module Clouderrorreporting
-      module V1beta1
-        ReportErrorEventRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ReportErrorEventRequest").msgclass
-        ReportErrorEventResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ReportErrorEventResponse").msgclass
-        ReportedErrorEvent = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ReportedErrorEvent").msgclass
-      end
     end
   end
+end
+module Google::Devtools::Clouderrorreporting::V1beta1
+  ReportErrorEventRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ReportErrorEventRequest").msgclass
+  ReportErrorEventResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ReportErrorEventResponse").msgclass
+  ReportedErrorEvent = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ReportedErrorEvent").msgclass
 end
