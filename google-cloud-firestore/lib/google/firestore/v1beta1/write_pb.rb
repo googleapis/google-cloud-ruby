@@ -64,16 +64,16 @@ end
 
 module Google
   module Firestore
-    module V1beta1
-      Write = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.Write").msgclass
-      DocumentTransform = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.DocumentTransform").msgclass
-      DocumentTransform::FieldTransform = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.DocumentTransform.FieldTransform").msgclass
-      DocumentTransform::FieldTransform::ServerValue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.DocumentTransform.FieldTransform.ServerValue").enummodule
-      WriteResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.WriteResult").msgclass
-      DocumentChange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.DocumentChange").msgclass
-      DocumentDelete = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.DocumentDelete").msgclass
-      DocumentRemove = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.DocumentRemove").msgclass
-      ExistenceFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.ExistenceFilter").msgclass
-    end
   end
+end
+module Google::Firestore::V1beta1
+  Write = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.Write").msgclass
+  DocumentTransform = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.DocumentTransform").msgclass
+  DocumentTransform::FieldTransform = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.DocumentTransform.FieldTransform").msgclass
+  DocumentTransform::FieldTransform::ServerValue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.DocumentTransform.FieldTransform.ServerValue").enummodule
+  WriteResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.WriteResult").msgclass
+  DocumentChange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.DocumentChange").msgclass
+  DocumentDelete = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.DocumentDelete").msgclass
+  DocumentRemove = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.DocumentRemove").msgclass
+  ExistenceFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.ExistenceFilter").msgclass
 end

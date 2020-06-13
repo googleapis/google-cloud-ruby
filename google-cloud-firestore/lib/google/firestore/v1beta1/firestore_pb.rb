@@ -190,33 +190,33 @@ end
 
 module Google
   module Firestore
-    module V1beta1
-      GetDocumentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.GetDocumentRequest").msgclass
-      ListDocumentsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.ListDocumentsRequest").msgclass
-      ListDocumentsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.ListDocumentsResponse").msgclass
-      CreateDocumentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.CreateDocumentRequest").msgclass
-      UpdateDocumentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.UpdateDocumentRequest").msgclass
-      DeleteDocumentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.DeleteDocumentRequest").msgclass
-      BatchGetDocumentsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.BatchGetDocumentsRequest").msgclass
-      BatchGetDocumentsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.BatchGetDocumentsResponse").msgclass
-      BeginTransactionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.BeginTransactionRequest").msgclass
-      BeginTransactionResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.BeginTransactionResponse").msgclass
-      CommitRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.CommitRequest").msgclass
-      CommitResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.CommitResponse").msgclass
-      RollbackRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.RollbackRequest").msgclass
-      RunQueryRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.RunQueryRequest").msgclass
-      RunQueryResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.RunQueryResponse").msgclass
-      WriteRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.WriteRequest").msgclass
-      WriteResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.WriteResponse").msgclass
-      ListenRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.ListenRequest").msgclass
-      ListenResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.ListenResponse").msgclass
-      Target = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.Target").msgclass
-      Target::DocumentsTarget = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.Target.DocumentsTarget").msgclass
-      Target::QueryTarget = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.Target.QueryTarget").msgclass
-      TargetChange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.TargetChange").msgclass
-      TargetChange::TargetChangeType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.TargetChange.TargetChangeType").enummodule
-      ListCollectionIdsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.ListCollectionIdsRequest").msgclass
-      ListCollectionIdsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.ListCollectionIdsResponse").msgclass
-    end
   end
+end
+module Google::Firestore::V1beta1
+  GetDocumentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.GetDocumentRequest").msgclass
+  ListDocumentsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.ListDocumentsRequest").msgclass
+  ListDocumentsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.ListDocumentsResponse").msgclass
+  CreateDocumentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.CreateDocumentRequest").msgclass
+  UpdateDocumentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.UpdateDocumentRequest").msgclass
+  DeleteDocumentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.DeleteDocumentRequest").msgclass
+  BatchGetDocumentsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.BatchGetDocumentsRequest").msgclass
+  BatchGetDocumentsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.BatchGetDocumentsResponse").msgclass
+  BeginTransactionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.BeginTransactionRequest").msgclass
+  BeginTransactionResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.BeginTransactionResponse").msgclass
+  CommitRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.CommitRequest").msgclass
+  CommitResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.CommitResponse").msgclass
+  RollbackRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.RollbackRequest").msgclass
+  RunQueryRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.RunQueryRequest").msgclass
+  RunQueryResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.RunQueryResponse").msgclass
+  WriteRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.WriteRequest").msgclass
+  WriteResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.WriteResponse").msgclass
+  ListenRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.ListenRequest").msgclass
+  ListenResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.ListenResponse").msgclass
+  Target = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.Target").msgclass
+  Target::DocumentsTarget = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.Target.DocumentsTarget").msgclass
+  Target::QueryTarget = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.Target.QueryTarget").msgclass
+  TargetChange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.TargetChange").msgclass
+  TargetChange::TargetChangeType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.TargetChange.TargetChangeType").enummodule
+  ListCollectionIdsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.ListCollectionIdsRequest").msgclass
+  ListCollectionIdsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.ListCollectionIdsResponse").msgclass
 end

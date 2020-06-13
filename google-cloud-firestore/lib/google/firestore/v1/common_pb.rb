@@ -34,12 +34,12 @@ end
 
 module Google
   module Firestore
-    module V1
-      DocumentMask = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.DocumentMask").msgclass
-      Precondition = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.Precondition").msgclass
-      TransactionOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.TransactionOptions").msgclass
-      TransactionOptions::ReadWrite = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.TransactionOptions.ReadWrite").msgclass
-      TransactionOptions::ReadOnly = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.TransactionOptions.ReadOnly").msgclass
-    end
   end
+end
+module Google::Firestore::V1
+  DocumentMask = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.DocumentMask").msgclass
+  Precondition = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.Precondition").msgclass
+  TransactionOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.TransactionOptions").msgclass
+  TransactionOptions::ReadWrite = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.TransactionOptions.ReadWrite").msgclass
+  TransactionOptions::ReadOnly = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.TransactionOptions.ReadOnly").msgclass
 end

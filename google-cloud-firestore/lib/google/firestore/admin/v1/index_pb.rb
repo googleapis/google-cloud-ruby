@@ -45,14 +45,14 @@ end
 module Google
   module Firestore
     module Admin
-      module V1
-        Index = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index").msgclass
-        Index::IndexField = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index.IndexField").msgclass
-        Index::IndexField::Order = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index.IndexField.Order").enummodule
-        Index::IndexField::ArrayConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index.IndexField.ArrayConfig").enummodule
-        Index::QueryScope = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index.QueryScope").enummodule
-        Index::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index.State").enummodule
-      end
     end
   end
+end
+module Google::Firestore::Admin::V1
+  Index = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index").msgclass
+  Index::IndexField = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index.IndexField").msgclass
+  Index::IndexField::Order = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index.IndexField.Order").enummodule
+  Index::IndexField::ArrayConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index.IndexField.ArrayConfig").enummodule
+  Index::QueryScope = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index.QueryScope").enummodule
+  Index::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index.State").enummodule
 end
