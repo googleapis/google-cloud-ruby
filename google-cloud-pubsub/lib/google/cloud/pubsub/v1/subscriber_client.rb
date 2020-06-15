@@ -510,7 +510,8 @@ module Google
           #   A hash of the same form as `Google::Cloud::PubSub::V1::ExpirationPolicy`
           #   can also be provided.
           # @param filter [String]
-          #   An expression written in the Cloud Pub/Sub filter language. If non-empty,
+          #   An expression written in the Pub/Sub [filter
+          #   language](https://cloud.google.com/pubsub/docs/filtering). If non-empty,
           #   then only `PubsubMessage`s whose `attributes` field matches the filter are
           #   delivered on this subscription. If empty, then no messages are filtered
           #   out.
