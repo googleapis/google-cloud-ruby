@@ -1,5 +1,15 @@
 # Release History
 
+### 0.4.0 / 2020-06-15
+
+#### ⚠ BREAKING CHANGES
+
+* **grafeas:** Convert grafeas to a wrapper gem
+
+#### Features
+
+* Convert grafeas to a wrapper gem
+
 ### 0.3.1 / 2020-04-01
 
 #### Documentation
