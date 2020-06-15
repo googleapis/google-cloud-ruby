@@ -39,7 +39,7 @@ def inspect_string project_id: nil, content: nil, max_findings: 0
   item_to_inspect = { value: content }
 
   # Run request
-  parent = "projects/#{project_id}"
+  parent = "projects/#{project_id}/locations/global"
   response = dlp.inspect_content parent:         parent,
                                  inspect_config: inspect_config,
                                  item:           item_to_inspect
@@ -85,7 +85,7 @@ def inspect_file project_id: nil, filename: nil, max_findings: 0
   item_to_inspect = { byte_item: { type: :BYTES_TYPE_UNSPECIFIED, data: file.read } }
 
   # Run request
-  parent = "projects/#{project_id}"
+  parent = "projects/#{project_id}/locations/global"
   response = dlp.inspect_content parent:         parent,
                                  inspect_config: inspect_config,
                                  item:           item_to_inspect

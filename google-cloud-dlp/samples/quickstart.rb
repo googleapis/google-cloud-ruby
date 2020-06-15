@@ -37,7 +37,7 @@ request_configuration = {
 item_to_inspect = { value: "Robert Frost" }
 
 # Run request
-parent = "projects/#{ENV['GOOGLE_CLOUD_PROJECT']}"
+parent = "projects/#{ENV['GOOGLE_CLOUD_PROJECT']}/locations/global"
 response = dlp.inspect_content parent:         parent,
                                inspect_config: request_configuration,
                                item:           item_to_inspect
