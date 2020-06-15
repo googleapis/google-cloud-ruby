@@ -1,5 +1,31 @@
 # Release History
 
+### 0.5.0 / 2020-06-15
+
+#### ⚠ BREAKING CHANGES
+
+* **container_analysis:** Convert google-cloud-container_analysis to a wrapper
+* **container_analysis:** Update network configuration for IAM methods
+
+#### Features
+
+* Convert google-cloud-container_analysis to a wrapper
+* Support separate project setting for quota/billing
+
+#### Bug Fixes
+
+* Restore note_path and occurrence_path resource path helpers
+  * Update network configuration
+
+#### Performance Improvements
+
+* Update network configuration for IAM methods
+
+#### Documentation
+
+* Remove a broken troubleshooting link in the auth guide.
+* Update copyright year
+
 ### 0.5.0 / 2020-01-14
 
 #### ⚠ BREAKING CHANGES
