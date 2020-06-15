@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.0 / 2020-06-15
+
+#### Features
+
+* Add support for secondary_aggregation and Monitoring Query Language
+
 ### 0.1.1 / 2020-06-08
 
 #### Bug Fixes
