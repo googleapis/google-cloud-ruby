@@ -184,8 +184,7 @@ module Google
         end
 
         ##
-        # The current state of the backup.
-        # Possible values are `:CREATING` and `:READY`.
+        # The current state of the backup. Possible values are `:CREATING` and `:READY`.
         #
         # @return [Symbol]
         #
@@ -194,8 +193,7 @@ module Google
         end
 
         ##
-        # The backup is currently being created, and may be destroyed if the
-        # creation process encounters an error.
+        # The backup is currently being created, and may be destroyed if the creation process encounters an error.
         #
         # @return [Boolean]
         #
@@ -222,9 +220,8 @@ module Google
         #
         # `serve_nodes` is the only updatable field.
         #
-        # @return [Google::Cloud::Bigtable::Backup::Job]
-        #   The job representing the long-running, asynchronous processing of
-        #   an update backup operation.
+        # @return [Google::Cloud::Bigtable::Backup::Job] The job representing the long-running, asynchronous processing
+        #   of an update backup operation.
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -280,8 +277,7 @@ module Google
 
         # @private
         #
-        # Creates a new Backup instance from a
-        # Google::Bigtable::Admin::V2::Backup.
+        # Creates a new Backup instance from a Google::Bigtable::Admin::V2::Backup.
         #
         # @param grpc [Google::Bigtable::Admin::V2::Backup]
         # @param service [Google::Cloud::Bigtable::Service]
@@ -294,8 +290,7 @@ module Google
 
         # @private
         #
-        # Raise an error unless an active connection to the service is
-        # available.
+        # Raise an error unless an active connection to the service is available.
         def ensure_service!
           raise "Must have active connection to service" unless service
         end

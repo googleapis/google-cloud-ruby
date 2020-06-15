@@ -26,7 +26,7 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
   let(:expire_time) { now + 60 * 60 * 7 }
   let(:expire_time_2) { now + 60 * 60 * 8 }
   let(:restore_table_id) { "test-table-#{random_str}" }
-focus
+
   it "creates a backup" do
     backup = nil
     restore_table = nil

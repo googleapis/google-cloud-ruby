@@ -87,15 +87,13 @@ module Google
           end
 
           ##
-          # Retrieves remaining results by repeatedly invoking {#next} until
-          # {#next?} returns `false`. Calls the given block once for each
-          # result, which is passed as the argument to the block.
+          # Retrieves remaining results by repeatedly invoking {#next} until {#next?} returns `false`. Calls the given
+          # block once for each result, which is passed as the argument to the block.
           #
           # An enumerator is returned if no block is given.
           #
-          # This method will make repeated API calls until all remaining results
-          # are retrieved (unlike `#each`, for example, which merely iterates
-          # over the results returned by a single API call). Use with caution.
+          # This method will make repeated API calls until all remaining results are retrieved (unlike `#each`, for
+          # example, which merely iterates over the results returned by a single API call). Use with caution.
           #
           # @yield [backup] The block for accessing each backup.
           # @yieldparam [Backup] backup The backup object.

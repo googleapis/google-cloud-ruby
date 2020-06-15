@@ -196,6 +196,44 @@ module Google
           @grpc.location
         end
 
+        ##
+        # Creates a new Cloud Bigtable Backup.
+        #
+        # @param source_table [Table, String] The table object, or the name of the table,
+        #   from which the backup is to be created. The table needs to be in the same
+        #   instance as the backup. Required.
+        # @param backup_id [String] The id of the backup to be created. This string must
+        #   be between 1 and 50 characters in length and match the regex
+        #   `[_a-zA-Z0-9][-_.a-zA-Z0-9]*`. Required.
+        # @param expire_time [Time] The expiration time of the backup, with microseconds
+        #     granularity that must be at least 6 hours and at most 30 days
+        #     from the time the request is received. Once the `expire_time`
+        #     has passed, Cloud Bigtable will delete the backup and free the
+        #     resources used by the backup. Required.
+        # @return [Google::Cloud::Bigtable::Backup::Job]
+        #   The job representing the long-running, asynchronous processing of
+        #   a backup create operation.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   instance = bigtable.instance("my-instance")
+        #   cluster = instance.cluster("my-cluster")
+        #   table = instance.table("my-instance")
+        #
+        #   expire_time = Time.now + 60 * 60 * 7
+        #   job = cluster.create_backup(table, "my-backup", expire_time)
+        #
+        #   job.wait_until_done!
+        #   job.done? #=> true
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     backup = job.backup
+        #   end
+        #
         def create_backup source_table, backup_id, expire_time
           source_table_id = source_table.respond_to?(:name) ? source_table.name : source_table
           grpc = service.create_backup instance_id, cluster_id, backup_id, source_table_id, expire_time
