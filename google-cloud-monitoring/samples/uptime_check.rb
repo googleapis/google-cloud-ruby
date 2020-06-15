@@ -26,7 +26,7 @@ def list_ips
 end
 # [END monitoring_uptime_check_list_ips]
 
-# [START monitoring_uptime_check_create]
+# [START monitoring_uptime_check_create_get]
 def create_uptime_check_config project_id: nil, host_name: nil, display_name: nil
   require "google/cloud/monitoring"
 
@@ -48,7 +48,31 @@ def create_uptime_check_config project_id: nil, host_name: nil, display_name: ni
   puts new_config.name
   new_config
 end
-# [END monitoring_uptime_check_create]
+# [END monitoring_uptime_check_create_get]
+
+# [START monitoring_uptime_check_create_post]
+def create_uptime_check_config_post project_id: nil, host_name: nil, display_name: nil
+  require "google/cloud/monitoring"
+
+  client = Google::Cloud::Monitoring.uptime_check_service
+  project_name = client.project_path project: project_id
+  config = {
+    display_name:       display_name.nil? ? "New uptime check" : display_name,
+    monitored_resource: {
+      type:   "uptime_url",
+      labels: { "host" => host_name.nil? ? "example.com" : host_name }
+    },
+    http_check:         { method: "POST", path: "/", port: 80 },
+    timeout:            { seconds: 10 },
+    period:             { seconds: 300 }
+  }
+  new_config = client.create_uptime_check_config \
+    parent:              project_name,
+    uptime_check_config: config
+  puts new_config.name
+  new_config
+end
+# [END monitoring_uptime_check_create_post]
 
 # [START monitoring_uptime_check_delete]
 def delete_uptime_check_config config_name
