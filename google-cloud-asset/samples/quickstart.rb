@@ -99,3 +99,53 @@ def create_feed project_id:, feed_id:, pubsub_topic:, asset_names:
   puts "Created feed: #{response.name}"
   # [END asset_quickstart_create_feed]
 end
+
+def search_all_resources scope: "", query: "", asset_types: [], page_size: 0, page_token: "", order_by: ""
+  # [START asset_quickstart_search_all_resources]
+  require "google/cloud/asset"
+
+  # scope = 'SCOPE_OF_THE_QUERY'
+  # query = 'QUERY_STATEMENT'
+  # asset_types = 'AN_ARRAY_OF_ASSET_TYPES_TO_SEARCH_FOR'
+  # page_size = 'SIZE_OF_EACH_RESULT_PAGE'
+  # page_token = 'TOKEN_PRODUCED_BY_THE_PRECEDING_CALL'
+  # order_by = 'FIELDS_TO_SORT_THE RESULTS'
+  asset_service = Google::Cloud::Asset.asset_service
+
+  response = asset_service.search_all_resources(
+    scope:       scope,
+    query:       query,
+    asset_types: asset_types,
+    page_size:   page_size,
+    page_token:  page_token,
+    order_by:    order_by
+  )
+  # Do things with the response
+  response.page.each do |resource|
+    puts resource
+  end
+  # [END asset_quickstart_search_all_resources]
+end
+
+def search_all_iam_policies scope: "", query: "", page_size: 0, page_token: ""
+  # [START asset_quickstart_search_all_iam_policies]
+  require "google/cloud/asset"
+
+  # scope = 'SCOPE_OF_THE_QUERY'
+  # query = 'QUERY_STATEMENT'
+  # page_size = 'SIZE_OF_EACH_RESULT_PAGE'
+  # page_token = 'TOKEN_PRODUCED_BY_THE_PRECEDING_CALL'
+  asset_service = Google::Cloud::Asset.asset_service
+
+  response = asset_service.search_all_iam_policies(
+    scope:      scope,
+    query:      query,
+    page_size:  page_size,
+    page_token: page_token
+  )
+  # Do things with the response
+  response.page.each do |policy|
+    puts policy
+  end
+  # [END asset_quickstart_search_all_iam_policies]
+end
