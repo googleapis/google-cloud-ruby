@@ -16,6 +16,7 @@ require "minitest/autorun"
 require "rack/test"
 require "google/cloud/tasks"
 require_relative "../create_http_task.rb"
+require_relative "../create_http_task_with_token.rb"
 
 describe "CloudTasks" do
   include Rack::Test::Methods
@@ -41,7 +42,15 @@ describe "CloudTasks" do
 
   it "can create an HTTP task" do
     out, _err = capture_io do
-      create_http_task @project, @location, @queue_id, "http://example.com/taskhandler"
+      create_http_task @project, @location, @queue_id, "https://example.com/taskhandler"
+    end
+
+    assert_match "Created task", out
+  end
+
+  it "can create an HTTP task with token" do
+    out, _err = capture_io do
+      create_http_task_with_token @project, @location, @queue_id, "https://example.com/taskhandler", "ruby-docs-samples-testing@ruby-docs-samples-testing.iam.gserviceaccount.com"
     end
 
     assert_match "Created task", out
