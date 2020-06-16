@@ -15,6 +15,7 @@
 # limitations under the License.
 
 
+require "google/cloud/bigtable/backup"
 require "google/cloud/bigtable/cluster/list"
 require "google/cloud/bigtable/cluster/job"
 
@@ -220,7 +221,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   instance = bigtable.instance("my-instance")
         #   cluster = instance.cluster("my-cluster")
-        #   table = instance.table("my-instance")
+        #   table = instance.table("my-table")
         #
         #   expire_time = Time.now + 60 * 60 * 7
         #   job = cluster.create_backup(table, "my-backup", expire_time)

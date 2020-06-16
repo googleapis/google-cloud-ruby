@@ -198,6 +198,20 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::Backup#restore" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_tables.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup"]
+      mocked_tables.expect :restore_table, mocked_job, ["projects/my-project/instances/my-instance", { table_id: "my-new-table", backup: "projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup" }]
+      mocked_job.expect :wait_until_done!, nil, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error, nil, []
+    end
+  end
+
   doctest.before "Google::Cloud::Bigtable::Backup::Job" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]

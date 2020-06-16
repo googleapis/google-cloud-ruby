@@ -20,7 +20,7 @@ module Google
         ##
         # # RestoreJob
         #
-        # A resource representing the long-running, asynchronous processing of an table create or update operation. The
+        # A resource representing the long-running, asynchronous processing of a backup restore operation. The
         # job can be refreshed to retrieve the table object once the operation has been completed.
         #
         # See {Backup#restore}.
@@ -46,13 +46,15 @@ module Google
         #     status = job.error
         #   else
         #     table = job.table
+        #     optimized = job.optimize_table_operation_name
         #   end
         #
         class RestoreJob < LongrunningJob
           ##
-          # Get the table object from operation results.
+          # The optimize table operation name from operation metadata.
           #
-          # @return [Google::Cloud::Bigtable::Table, nil] The table instance, or `nil` if the operation is not complete.
+          # @return [String, nil] The optimize table operation name, or `nil` if the optimize table operation is not
+          #   complete.
           #
           # @example
           #   require "google/cloud/bigtable"
@@ -72,6 +74,7 @@ module Google
           #     status = job.error
           #   else
           #     table = job.table
+          #     optimized = job.optimize_table_operation_name
           #   end
           #
           def optimize_table_operation_name
@@ -79,7 +82,7 @@ module Google
           end
 
           ##
-          # Get the table object from operation results.
+          # Gets the table object from operation results.
           #
           # @return [Google::Cloud::Bigtable::Table, nil] The table instance, or `nil` if the operation is not complete.
           #
@@ -101,6 +104,7 @@ module Google
           #     status = job.error
           #   else
           #     table = job.table
+          #     optimized = job.optimize_table_operation_name
           #   end
           #
           def table

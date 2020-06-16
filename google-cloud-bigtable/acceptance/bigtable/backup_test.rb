@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2018 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
   let(:instance) { bigtable_instance }
   let(:cluster) { instance.clusters.first }
   let(:table) { bigtable_read_table }
-  let(:backup_id) { "my-backup-id-#{Time.now.to_i}" }
+  let(:backup_id) { "test-backup-#{random_str}" }
   let(:now) { Time.now }
   let(:expire_time) { now + 60 * 60 * 7 }
   let(:expire_time_2) { now + 60 * 60 * 8 }
@@ -36,15 +36,10 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
       _(job).must_be_kind_of Google::Cloud::Bigtable::Backup::Job
       job.wait_until_done!
       _(job.error).must_be :nil?
+
       backup = job.backup
       _(backup).must_be_kind_of Google::Cloud::Bigtable::Backup
       _(backup.backup_id).must_equal backup_id
-      source_table = backup.source_table
-      _(source_table).must_be_kind_of Google::Cloud::Bigtable::Table
-      _(source_table.path).must_equal table.path
-      source_table_full = backup.source_table perform_lookup: true
-      _(source_table_full).must_be_kind_of Google::Cloud::Bigtable::Table
-      _(source_table_full.path).must_equal table.path
       _(backup.expire_time).must_equal expire_time
       _(backup.start_time).must_be_kind_of Time
       _(backup.end_time).must_be_kind_of Time
@@ -53,10 +48,19 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
       _(backup.creating?).must_equal false
       _(backup.ready?).must_equal true
 
+      source_table = backup.source_table
+      _(source_table).must_be_kind_of Google::Cloud::Bigtable::Table
+      _(source_table.path).must_equal table.path
+
+      source_table_full = backup.source_table perform_lookup: true
+      _(source_table_full).must_be_kind_of Google::Cloud::Bigtable::Table
+      _(source_table_full.path).must_equal table.path
+
       # get
       backup = cluster.backup backup_id
       _(backup).must_be_kind_of Google::Cloud::Bigtable::Backup
       _(backup.backup_id).must_equal backup_id
+      _(backup.expire_time).must_equal expire_time
 
       # update
       backup.expire_time = expire_time_2
@@ -65,7 +69,7 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
 
       # reload
       backup.expire_time = expire_time
-      _(backup.expire_time).must_equal expire_time # not persisted with #save
+      _(backup.expire_time).must_equal expire_time # not yet persisted with #save
       backup.reload!
       _(backup.expire_time).must_equal expire_time_2
 
@@ -73,13 +77,13 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
       backups = cluster.backups
       _(backups).must_be_kind_of Google::Cloud::Bigtable::Backup::List
       _(backups).wont_be :empty?
-      list_backup = backups.find { |b| b.backup_id == backup_id }
+      list_backup = backups.all.find { |b| b.backup_id == backup_id }
       _(list_backup).must_be_kind_of Google::Cloud::Bigtable::Backup
       _(list_backup.expire_time).must_equal expire_time_2
 
       # restore
-
       # Wait 2 minutes so that the RestoreTable API will trigger an optimize restored table operation.
+      # https://github.com/googleapis/java-bigtable/blob/33ffd938c06352108ccf7c1e5c970cce27771c72/google-cloud-bigtable/src/test/java/com/google/cloud/bigtable/admin/v2/it/BigtableBackupIT.java#L307-L309
       sleep(120)
       restore_job = backup.restore restore_table_id
       _(restore_job).must_be_kind_of Google::Cloud::Bigtable::Table::RestoreJob

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +22,8 @@ module Google
         ##
         # # Job
         #
-        # A resource representing the long-running, asynchronous processing of an backup create or update operation. The
-        # job can be refreshed to retrieve the backup object once the operation has been completed.
+        # A resource representing the long-running, asynchronous processing of an backup create operation. The job can
+        # be refreshed to retrieve the backup object once the operation has been completed.
         #
         # See {Cluster#create_backup}.
         #
@@ -34,7 +36,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   instance = bigtable.instance("my-instance")
         #   cluster = instance.cluster("my-cluster")
-        #   table = instance.table("my-instance")
+        #   table = instance.table("my-table")
         #
         #   expire_time = Time.now + 60 * 60 * 7
         #   job = cluster.create_backup(table, "my-backup", expire_time)
@@ -61,7 +63,7 @@ module Google
           #   bigtable = Google::Cloud::Bigtable.new
           #   instance = bigtable.instance("my-instance")
           #   cluster = instance.cluster("my-cluster")
-          #   table = instance.table("my-instance")
+          #   table = instance.table("my-table")
           #
           #   expire_time = Time.now + 60 * 60 * 7
           #   job = cluster.create_backup(table, "my-backup", expire_time)

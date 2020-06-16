@@ -893,11 +893,8 @@ module Google
         ##
         # Creates a formatted backup path.
         #
-        # @param instance_id [String]
-        # @param backup_id [String]
-        # @return [String]
-        #   Formatted snapshot path
-        #   +projects/<project>/instances/<instance>/clusters/<cluster>/backups/<backup>+
+        # @return [String] Formatted backup path
+        #   `projects/<project>/instances/<instance>/clusters/<cluster>/backups/<backup>`
         #
         def backup_path instance_id, cluster_id, backup_id
           Admin::V2::BigtableTableAdminClient.backup_path project_id, instance_id, cluster_id, backup_id

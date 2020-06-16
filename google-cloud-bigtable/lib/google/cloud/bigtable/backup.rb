@@ -27,7 +27,7 @@ module Google
       ##
       # # Backup
       #
-      # A backup of a Cloud Bigtable table.
+      # A backup of a Cloud Bigtable table. See {Cluster#create_backup}, {Cluster#backup} and {Cluster#backups}.
       #
       # @example
       #   require "google/cloud/bigtable"
@@ -111,14 +111,10 @@ module Google
         ##
         # The table from which this backup was created.
         #
-        # @param perform_lookup [Boolean] Creates table object without verifying
-        #   that the table resource exists.
-        #   Calls made on this object will raise errors if the table
-        #   does not exist. Default value is `false`. Optional.
-        #   Helps to reduce admin API calls.
-        # @param view [Symbol] Table view type.
-        #   Default view type is `:SCHEMA_VIEW`.
-        #   Valid view types are:
+        # @param perform_lookup [Boolean] Creates table object without verifying that the table resource exists. Calls
+        #   made on this object will raise errors if the table does not exist. Default value is `false`. Optional. Helps
+        #   to reduce admin API calls.
+        # @param view [Symbol] Table view type. Default view type is `:SCHEMA_VIEW`. Valid view types are:
         #
         #   * `:NAME_ONLY` - Only populates `name`.
         #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema.
@@ -135,7 +131,7 @@ module Google
 
         ##
         # The expiration time of the backup, with microseconds granularity that must be at least 6 hours and at most 30
-        # days from the time the request is received. Once the `expire_time` has passed, Cloud Bigtable will delete the
+        # days from the time the request is received. Once the expire time has passed, Cloud Bigtable will delete the
         # backup and free the resources used by the backup.
         #
         # @return [Time]
@@ -146,7 +142,7 @@ module Google
 
         ##
         # Sets the expiration time of the backup, with microseconds granularity that must be at least 6 hours and at
-        # most 30 days from the time the request is received. Once the `expire_time` has passed, Cloud Bigtable will
+        # most 30 days from the time the request is received. Once the {#expire_time} has passed, Cloud Bigtable will
         # delete the backup and free the resources used by the backup.
         #
         # @param [Time] new_expire_time The new expiration time of the backup.
@@ -210,6 +206,35 @@ module Google
           state == :READY
         end
 
+        ##
+        # Creates a new table by restoring from a completed backup.
+        #
+        # @param table_id [String] The table ID for the new table. This table must not yet exist. Required.
+        #
+        # @return [Google::Cloud::Bigtable::Table::RestoreJob] The job representing the long-running, asynchronous
+        #   processing of a backup restore table operation.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   instance = bigtable.instance("my-instance")
+        #   cluster = instance.cluster("my-cluster")
+        #
+        #   backup = cluster.backup("my-backup")
+        #
+        #   job = backup.restore("my-new-table")
+        #
+        #   job.wait_until_done!
+        #   job.done? #=> true
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     table = job.table
+        #     optimized = job.optimize_table_operation_name
+        #   end
+        #
         def restore table_id
           grpc = service.restore_table table_id, instance_id, cluster_id, backup_id
           Table::RestoreJob.from_grpc grpc, service
@@ -218,10 +243,9 @@ module Google
         ##
         # Updates the backup.
         #
-        # `serve_nodes` is the only updatable field.
+        # `expire_time` is the only updatable field.
         #
-        # @return [Google::Cloud::Bigtable::Backup::Job] The job representing the long-running, asynchronous processing
-        #   of an update backup operation.
+        # @return [Boolean] Returns `true` if the update succeeded.
         #
         # @example
         #   require "google/cloud/bigtable"
