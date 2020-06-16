@@ -15,8 +15,8 @@ These samples show how to use the [Google Cloud DLP API](https://cloud.google.co
     Follow instructions from the available [quickstarts](https://cloud.google.com/sdk/docs/quickstarts)
 1.  **Clone the repo** and cd into this directory
     ```
-    $ git clone https://github.com/GoogleCloudPlatform/ruby-docs-samples
-    $ cd ruby-docs-samples/dlp
+    $ git clone https://github.com/GoogleCloudPlatform/google-cloud-ruby
+    $ cd google-cloud-ruby/google-cloud-dlp/samples
     ```
 
 1. **Install Dependencies** via [Bundler](https://bundler.io).
