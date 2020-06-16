@@ -1,0 +1,96 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+require "rake/testtask"
+
+Rake::TestTask.new "test" do |t|
+  t.test_files = FileList["*/acceptance/*_test.rb"]
+  t.warning = false
+end
+
+# rubocop:disable Metrics/BlockLength
+
+namespace :fixtures do
+  desc "Creates the needed fixtures"
+  task :create do
+    require "google/cloud/translate"
+    project_id = ENV["GOOGLE_CLOUD_PROJECT"]
+    location_id = "us-central1"
+    listable_glossary = "glossary-listable"
+    raise "Set the environment variable GOOGLE_CLOUD_PROJECT." if project_id.nil?
+
+    client = Google::Cloud::Translate.translation_service
+    parent = client.location_path project: project_id, location: location_id
+    name = client.glossary_path project: project_id, location: location_id, glossary: listable_glossary
+
+    begin
+      client.get_glossary name: name
+      puts "Fixtures already present."
+    rescue Google::Cloud::NotFoundError
+      input_uri = "gs://cloud-samples-data/translation/glossary_ja.csv"
+      glossary = {
+        name:               name,
+        language_codes_set: { language_codes: ["en", "ja"] },
+        input_config:       { gcs_source: { input_uri: input_uri } }
+      }
+      puts "Creating #{name} ..."
+      operation = client.create_glossary parent: parent, glossary: glossary
+      operation.wait_until_done!
+      if operation.error?
+        puts "Error creating #{name}"
+      elsif operation.response?
+        puts "Finished creating #{name}"
+      else
+        puts "Did not finish creating #{name}"
+      end
+    end
+  end
+
+  desc "Cleans out any extra fixture data that has been left behind by previous tests"
+  task :clean do
+    require "google/cloud/translate"
+    project_id = ENV["GOOGLE_CLOUD_PROJECT"]
+    location_id = "us-central1"
+    listable_glossary = "glossary-listable"
+    raise "Set the environment variable GOOGLE_CLOUD_PROJECT." if project_id.nil?
+
+    client = Google::Cloud::Translate.translation_service
+    parent = client.location_path project: project_id, location: location_id
+    responses = client.list_glossaries parent: parent
+
+    threads = responses.map do |response|
+      name = response.name
+      if name.end_with? listable_glossary
+        puts "Keeping #{name}"
+        nil
+      else
+        puts "Deleting #{name} ..."
+        operation = client.delete_glossary name: name
+        Thread.new do
+          operation.wait_until_done!
+          if operation.error?
+            puts "Error deleting #{name}"
+          elsif operation.response?
+            puts "Finished deleting #{name}"
+          else
+            puts "Did not finish deleting #{name}"
+          end
+        end
+      end
+    end
+    threads.compact.each(&:join)
+  end
+end
+
+# rubocop:enable Metrics/BlockLength
