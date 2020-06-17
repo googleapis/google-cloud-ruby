@@ -2104,7 +2104,8 @@ module Google
             end
 
             ##
-            # Updates a notification config.
+            # Updates a notification config. The following update
+            # fields are allowed: description, pubsub_topic, streaming_config.filter
             #
             # @overload update_notification_config(request, options = nil)
             #   Pass arguments to `update_notification_config` via a request object, either of type
