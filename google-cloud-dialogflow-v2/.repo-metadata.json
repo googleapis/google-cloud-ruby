@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "dialogflow.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-dialogflow-v2/latest",
     "distribution_name": "google-cloud-dialogflow-v2",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-dialogflow-v2/latest"
+    "language": "ruby",
+    "name": "dialogflow",
+    "name_pretty": "Dialogflow V2 API",
+    "product_documentation": "https://cloud.google.com/dialogflow",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }
