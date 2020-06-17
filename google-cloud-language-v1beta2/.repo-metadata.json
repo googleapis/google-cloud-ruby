@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "language.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-language-v1beta2/latest",
     "distribution_name": "google-cloud-language-v1beta2",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-language-v1beta2/latest"
+    "language": "ruby",
+    "name": "language",
+    "name_pretty": "Natural Language V1beta2 API",
+    "product_documentation": "https://cloud.google.com/natural-language",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }
