@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "cloudtasks.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-tasks-v2/latest",
     "distribution_name": "google-cloud-tasks-v2",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-tasks-v2/latest"
+    "language": "ruby",
+    "name": "cloudtasks",
+    "name_pretty": "Cloud Tasks V2 API",
+    "product_documentation": "https://cloud.google.com/tasks",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }
