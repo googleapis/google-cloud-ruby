@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "containeranalysis.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-container_analysis/latest",
     "distribution_name": "google-cloud-container_analysis",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-container_analysis/latest"
+    "language": "ruby",
+    "name": "containeranalysis",
+    "name_pretty": "Container Analysis API",
+    "product_documentation": "https://cloud.google.com/container-registry/docs/container-analysis",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }
