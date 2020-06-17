@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "servicedirectory.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-service_directory/latest",
     "distribution_name": "google-cloud-service_directory",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-service_directory/latest"
+    "language": "ruby",
+    "name": "servicedirectory",
+    "name_pretty": "Service Directory API",
+    "product_documentation": "https://cloud.google.com/service-directory",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }
