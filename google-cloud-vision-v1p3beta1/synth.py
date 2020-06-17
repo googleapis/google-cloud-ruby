@@ -33,6 +33,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Cloud Vision API allows developers to easily integrate vision detection features within applications, including image labeling, face and landmark detection, optical character recognition (OCR), and tagging of explicit content.",
         "ruby-cloud-env-prefix": "VISION",
         "ruby-cloud-grpc-service-config": "google/cloud/vision/v1p3beta1/vision_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/vision",
+        "ruby-cloud-api-id": "vision.googleapis.com",
+        "ruby-cloud-api-shortname": "vision",
     }
 )
 

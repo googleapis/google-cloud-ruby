@@ -32,6 +32,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "The BigQuery Storage API provides fast access to BigQuery managed storage.",
         "ruby-cloud-env-prefix": "BIGQUERY_STORAGE",
         "ruby-cloud-grpc-service-config": "google/cloud/bigquery/storage/v1/bigquerystorage_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/bigquery/docs/reference/storage",
+        "ruby-cloud-api-id": "bigquerystorage.googleapis.com",
+        "ruby-cloud-api-shortname": "bigquerystorage",
     }
 )
 

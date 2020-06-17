@@ -31,7 +31,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "PHISHING_PROTECTION",
         "ruby-cloud-wrapper-of": "v1beta1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/phishing-protection",
-        "ruby-cloud-api-id": "phishingprotection",
+        "ruby-cloud-api-id": "phishingprotection.googleapis.com",
+        "ruby-cloud-api-shortname": "phishingprotection",
         "ruby-cloud-migration-version": "0.10",
         "ruby-cloud-service-override": "PhishingProtectionServiceV1Beta1=PhishingProtectionService",
     }

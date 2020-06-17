@@ -31,7 +31,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "BILLING",
         "ruby-cloud-wrapper-of": "v1:0.1",
         "ruby-cloud-product-url": "https://cloud.google.com/billing",
-        "ruby-cloud-api-id": "cloudbilling",
+        "ruby-cloud-api-id": "cloudbilling.googleapis.com",
+        "ruby-cloud-api-shortname": "cloudbilling",
         "ruby-cloud-factory-method-suffix": "_service",
     }
 )

@@ -33,6 +33,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Secret Manager is a secure and convenient storage system for API keys, passwords, certificates, and other sensitive data. Secret Manager provides a central place and single source of truth to manage, access, and audit secrets across Google Cloud.",
         "ruby-cloud-env-prefix": "SECRET_MANAGER",
         "ruby-cloud-grpc-service-config": "google/cloud/secrets/v1beta1/secretmanager_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/secret-manager",
+        "ruby-cloud-api-id": "secretmanager.googleapis.com",
+        "ruby-cloud-api-shortname": "secretmanager",
     }
 )
 

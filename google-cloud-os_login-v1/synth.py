@@ -35,6 +35,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Use OS Login to manage SSH access to your instances using IAM without having to create and manage individual SSH keys. OS Login maintains a consistent Linux user identity across VM instances and is the recommended way to manage many users across multiple instances or projects.",
         "ruby-cloud-env-prefix": "OS_LOGIN",
         "ruby-cloud-grpc-service-config": "google/cloud/oslogin/v1/oslogin_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/compute/docs/oslogin",
+        "ruby-cloud-api-id": "oslogin.googleapis.com",
+        "ruby-cloud-api-shortname": "oslogin",
     }
 )
 

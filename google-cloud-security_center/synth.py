@@ -31,7 +31,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "SECURITY_CENTER",
         "ruby-cloud-wrapper-of": "v1:0.0;v1p1beta1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/security-command-center",
-        "ruby-cloud-api-id": "securitycenter",
+        "ruby-cloud-api-id": "securitycenter.googleapis.com",
+        "ruby-cloud-api-shortname": "securitycenter",
         "ruby-cloud-migration-version": "1.0",
     }
 )

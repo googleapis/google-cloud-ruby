@@ -31,7 +31,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "TRANSLATE",
         "ruby-cloud-wrapper-of": "v3:0.0;v2:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/translate",
-        "ruby-cloud-api-id": "translate",
+        "ruby-cloud-api-id": "translate.googleapis.com",
+        "ruby-cloud-api-shortname": "translate",
         "ruby-cloud-migration-version": "3.0",
     }
 )

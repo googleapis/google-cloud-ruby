@@ -32,6 +32,10 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Cloud Monitoring Dashboards V1",
         "ruby-cloud-description": "Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation. The Dashboards API manages arrangements of display widgets.",
         "ruby-cloud-env-prefix": "MONITORING_DASHBOARD",
+        "ruby-cloud-grpc-service-config": "google/monitoring/dashboard/v1/dashboards_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/monitoring",
+        "ruby-cloud-api-id": "monitoring.googleapis.com",
+        "ruby-cloud-api-shortname": "monitoring",
     }
 )
 

@@ -33,6 +33,9 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "DATA_TRANSFER",
         "ruby-cloud-grpc-service-config": "google/cloud/bigquery/datatransfer/v1/bigquerydatatransfer_grpc_service_config.json",
         "ruby-cloud-yard-strict": "false",
+        "ruby-cloud-product-url": "https://cloud.google.com/bigquery/transfer",
+        "ruby-cloud-api-id": "bigquerydatatransfer.googleapis.com",
+        "ruby-cloud-api-shortname": "bigquerydatatransfer",
     }
 )
 

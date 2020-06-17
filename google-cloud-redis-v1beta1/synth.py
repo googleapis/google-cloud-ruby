@@ -32,6 +32,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Creates and manages Redis instances on the Google Cloud Platform.",
         "ruby-cloud-env-prefix": "REDIS",
         "ruby-cloud-grpc-service-config": "google/cloud/redis/v1beta1/redis_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/memorystore/docs/redis",
+        "ruby-cloud-api-id": "redis.googleapis.com",
+        "ruby-cloud-api-shortname": "redis",
     }
 )
 

@@ -31,7 +31,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "VISION",
         "ruby-cloud-wrapper-of": "v1:0.0;v1p3beta1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/vision",
-        "ruby-cloud-api-id": "vision",
+        "ruby-cloud-api-id": "vision.googleapis.com",
+        "ruby-cloud-api-shortname": "vision",
         "ruby-cloud-migration-version": "1.0",
     }
 )

@@ -32,7 +32,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "DLP",
         "ruby-cloud-wrapper-of": "v2:0.2",
         "ruby-cloud-product-url": "https://cloud.google.com/dlp",
-        "ruby-cloud-api-id": "dlp",
+        "ruby-cloud-api-id": "dlp.googleapis.com",
+        "ruby-cloud-api-shortname": "dlp",
         "ruby-cloud-migration-version": "1.0",
     }
 )

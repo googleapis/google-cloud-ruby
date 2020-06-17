@@ -34,7 +34,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "MONITORING",
         "ruby-cloud-wrapper-of": "v3:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/monitoring",
-        "ruby-cloud-api-id": "monitoring",
+        "ruby-cloud-api-id": "monitoring.googleapis.com",
+        "ruby-cloud-api-shortname": "monitoring",
         "ruby-cloud-migration-version": "1.0",
     }
 )
@@ -51,7 +52,8 @@ library2 = gapic.ruby_library(
         "ruby-cloud-env-prefix": "MONITORING_DASHBOARD",
         "ruby-cloud-wrapper-of": "v1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/monitoring",
-        "ruby-cloud-api-id": "monitoring",
+        "ruby-cloud-api-id": "monitoring.googleapis.com",
+        "ruby-cloud-api-shortname": "monitoring",
         "ruby-cloud-migration-version": "1.0",
     }
 )

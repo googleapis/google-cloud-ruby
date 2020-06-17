@@ -33,6 +33,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Builds and manages container-based applications, powered by the open source Kubernetes technology.",
         "ruby-cloud-env-prefix": "CONTAINER",
         "ruby-cloud-grpc-service-config": "google/container/v1/container_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/kubernetes-engine",
+        "ruby-cloud-api-id": "container.googleapis.com",
+        "ruby-cloud-api-shortname": "container",
     }
 )
 

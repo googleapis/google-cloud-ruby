@@ -33,6 +33,9 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "WEBRISK",
         "ruby-cloud-grpc-service-config": "google/cloud/webrisk/v1beta1/webrisk_grpc_service_config.json",
         "ruby-cloud-service-override": "WebRiskServiceV1Beta1=WebRiskService",
+        "ruby-cloud-product-url": "https://cloud.google.com/web-risk",
+        "ruby-cloud-api-id": "webrisk.googleapis.com",
+        "ruby-cloud-api-shortname": "webrisk",
     }
 )
 

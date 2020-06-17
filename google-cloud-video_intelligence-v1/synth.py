@@ -32,6 +32,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Detects objects, explicit content, and scene changes in videos. It also specifies the region for annotation and transcribes speech to text. Supports both asynchronous API and streaming API.",
         "ruby-cloud-env-prefix": "VIDEO_INTELLIGENCE",
         "ruby-cloud-grpc-service-config": "google/cloud/videointelligence/v1/videointelligence_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/video-intelligence",
+        "ruby-cloud-api-id": "videointelligence.googleapis.com",
+        "ruby-cloud-api-shortname": "videointelligence",
     }
 )
 

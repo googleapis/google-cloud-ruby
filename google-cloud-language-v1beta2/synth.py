@@ -32,6 +32,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations.",
         "ruby-cloud-env-prefix": "LANGUAGE",
         "ruby-cloud-grpc-service-config": "google/cloud/language/v1beta2/language_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/natural-language",
+        "ruby-cloud-api-id": "language.googleapis.com",
+        "ruby-cloud-api-shortname": "language",
     }
 )
 

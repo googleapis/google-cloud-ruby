@@ -35,6 +35,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "A metadata inventory service that allows you to view, monitor, and analyze all your GCP and Anthos assets across projects and services.",
         "ruby-cloud-env-prefix": "ASSET",
         "ruby-cloud-grpc-service-config": "google/cloud/asset/v1beta1/cloudasset_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/asset-inventory/",
+        "ruby-cloud-api-id": "cloudasset.googleapis.com",
+        "ruby-cloud-api-shortname": "cloudasset",
     }
 )
 
