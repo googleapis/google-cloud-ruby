@@ -600,6 +600,7 @@ google-cloud-language-v1beta2:
 - v0.1.4
 - v0.1.1
 google-cloud-logging:
+- v1.10.9
 - v1.10.8
 - v1.10.7
 - v1.10.6
