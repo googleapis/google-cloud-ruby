@@ -13,7 +13,6 @@
 # limitations under the License.
 
 # [START cloud_tasks_create_http_task_with_token]
-#require "google/cloud/tasks"
 require "google/cloud/tasks"
 
 # Create a Task with an HTTP Target With Token
