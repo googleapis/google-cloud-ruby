@@ -18,6 +18,7 @@ In order to use this library, you first need to go through the following steps:
 
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
 1. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+1. [Enable the API.](https://console.cloud.google.com/apis/library/datacatalog.googleapis.com)
 1. {file:AUTHENTICATION.md Set up authentication.}
 
 ## Quick Start
@@ -32,6 +33,9 @@ response = client.search_catalog request
 
 View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-data_catalog-v1/latest)
 for class and method documentation.
+
+See also the [Product Documentation](https://cloud.google.com/data-catalog)
+for general usage information.
 
 ## Enabling Logging
 
