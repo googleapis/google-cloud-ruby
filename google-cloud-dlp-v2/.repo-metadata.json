@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "dlp.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-dlp-v2/latest",
     "distribution_name": "google-cloud-dlp-v2",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-dlp-v2/latest"
+    "language": "ruby",
+    "name": "dlp",
+    "name_pretty": "Cloud Data Loss Prevention (DLP) V2 API",
+    "product_documentation": "https://cloud.google.com/dlp",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }
