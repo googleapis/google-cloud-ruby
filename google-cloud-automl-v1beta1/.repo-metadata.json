@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "automl.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-automl-v1beta1/latest",
     "distribution_name": "google-cloud-automl-v1beta1",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-automl-v1beta1/latest"
+    "language": "ruby",
+    "name": "automl",
+    "name_pretty": "Cloud AutoML V1beta1 API",
+    "product_documentation": "https://cloud.google.com/automl",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }
