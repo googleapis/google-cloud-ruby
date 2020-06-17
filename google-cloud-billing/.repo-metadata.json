@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "cloudbilling.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-billing/latest",
     "distribution_name": "google-cloud-billing",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-billing/latest"
+    "language": "ruby",
+    "name": "cloudbilling",
+    "name_pretty": "Billing API",
+    "product_documentation": "https://cloud.google.com/billing",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }
