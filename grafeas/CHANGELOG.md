@@ -1,6 +1,6 @@
 # Release History
 
-### 1.0.0 / 2020-06-15
+### 1.0.0 / 2020-06-17
 
 This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
 
