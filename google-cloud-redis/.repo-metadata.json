@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "redis.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-redis/latest",
     "distribution_name": "google-cloud-redis",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-redis/latest"
+    "language": "ruby",
+    "name": "redis",
+    "name_pretty": "Google Cloud Memorystore for Redis API",
+    "product_documentation": "https://cloud.google.com/memorystore/docs/redis",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }
