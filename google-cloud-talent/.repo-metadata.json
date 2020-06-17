@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "jobs.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-talent/latest",
     "distribution_name": "google-cloud-talent",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-talent/latest"
+    "language": "ruby",
+    "name": "jobs",
+    "name_pretty": "Cloud Talent Solution API",
+    "product_documentation": "https://cloud.google.com/solutions/talent-solution",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }
