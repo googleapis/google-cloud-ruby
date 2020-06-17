@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/asset/v1/assets_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
@@ -87,6 +88,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :asset_types, :string, 3
       optional :content_type, :enum, 4, "google.cloud.asset.v1.ContentType"
       optional :feed_output_config, :message, 5, "google.cloud.asset.v1.FeedOutputConfig"
+      optional :condition, :message, 6, "google.type.Expr"
     end
     add_message "google.cloud.asset.v1.SearchAllResourcesRequest" do
       optional :scope, :string, 1
