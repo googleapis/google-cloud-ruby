@@ -31,7 +31,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "ACCESS_APPROVAL",
         "ruby-cloud-wrapper-of": "v1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/access-approval/",
-        "ruby-cloud-api-id": "accessapproval",
+        "ruby-cloud-api-id": "accessapproval.googleapis.com",
+        "ruby-cloud-api-shortname": "accessapproval",
     }
 )
 

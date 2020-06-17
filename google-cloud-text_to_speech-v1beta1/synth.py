@@ -32,6 +32,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Text-to-Speech converts text or Speech Synthesis Markup Language (SSML) input into audio data of natural human speech.",
         "ruby-cloud-env-prefix": "TEXTTOSPEECH",
         "ruby-cloud-grpc-service-config": "google/cloud/texttospeech/v1beta1/texttospeech_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/text-to-speech",
+        "ruby-cloud-api-id": "texttospeech.googleapis.com",
+        "ruby-cloud-api-shortname": "texttospeech",
     }
 )
 

@@ -32,6 +32,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "CONTAINER_ANALYSIS",
         "ruby-cloud-wrapper-of": "v1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/container-registry/docs/container-analysis",
+        "ruby-cloud-api-id": "containeranalysis.googleapis.com",
+        "ruby-cloud-api-shortname": "containeranalysis",
         "ruby-cloud-migration-version": "1.0",
     }
 )

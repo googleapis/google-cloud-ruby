@@ -31,7 +31,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "TASKS",
         "ruby-cloud-wrapper-of": "v2:0.0;v2beta2:0.0;v2beta3:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/tasks",
-        "ruby-cloud-api-id": "cloudtasks",
+        "ruby-cloud-api-id": "cloudtasks.googleapis.com",
+        "ruby-cloud-api-shortname": "cloudtasks",
         "ruby-cloud-migration-version": "2.0",
     }
 )

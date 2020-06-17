@@ -31,7 +31,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "DATA_TRANSFER",
         "ruby-cloud-wrapper-of": "v1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/bigquery/transfer",
-        "ruby-cloud-api-id": "bigquerydatatransfer",
+        "ruby-cloud-api-id": "bigquerydatatransfer.googleapis.com",
+        "ruby-cloud-api-shortname": "bigquerydatatransfer",
         "ruby-cloud-migration-version": "1.0",
     }
 )

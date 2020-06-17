@@ -31,7 +31,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "SCHEDULER",
         "ruby-cloud-wrapper-of": "v1:0.0;v1beta1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/scheduler",
-        "ruby-cloud-api-id": "cloudscheduler",
+        "ruby-cloud-api-id": "cloudscheduler.googleapis.com",
+        "ruby-cloud-api-shortname": "cloudscheduler",
         "ruby-cloud-migration-version": "2.0",
     }
 )

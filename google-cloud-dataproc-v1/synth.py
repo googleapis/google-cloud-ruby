@@ -32,6 +32,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Manages Hadoop-based clusters and jobs on Google Cloud Platform.",
         "ruby-cloud-env-prefix": "DATAPROC",
         "ruby-cloud-grpc-service-config": "google/cloud/dataproc/v1/dataproc_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/dataproc",
+        "ruby-cloud-api-id": "dataproc.googleapis.com",
+        "ruby-cloud-api-shortname": "dataproc",
     }
 )
 

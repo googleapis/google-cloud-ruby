@@ -31,7 +31,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "SERVICE_DIRECTORY",
         "ruby-cloud-wrapper-of": "v1beta1:0.1",
         "ruby-cloud-product-url": "https://cloud.google.com/service-directory",
-        "ruby-cloud-api-id": "servicedirectory",
+        "ruby-cloud-api-id": "servicedirectory.googleapis.com",
+        "ruby-cloud-api-shortname": "servicedirectory",
     }
 )
 

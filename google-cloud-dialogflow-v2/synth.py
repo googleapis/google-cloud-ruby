@@ -32,6 +32,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Dialogflow is an end-to-end, build-once deploy-everywhere development suite for creating conversational interfaces for websites, mobile applications, popular messaging platforms, and IoT devices. You can use it to build interfaces (such as chatbots and conversational IVR) that enable natural and rich interactions between your users and your business.",
         "ruby-cloud-env-prefix": "DIALOGFLOW",
         "ruby-cloud-grpc-service-config": "google/cloud/dialogflow/v2/dialogflow_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/dialogflow",
+        "ruby-cloud-api-id": "dialogflow.googleapis.com",
+        "ruby-cloud-api-shortname": "dialogflow",
     }
 )
 

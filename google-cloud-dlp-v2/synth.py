@@ -33,6 +33,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.",
         "ruby-cloud-env-prefix": "DLP",
         "ruby-cloud-grpc-service-config": "google/privacy/dlp/v2/dlp_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/dlp",
+        "ruby-cloud-api-id": "dlp.googleapis.com",
+        "ruby-cloud-api-shortname": "dlp",
     }
 )
 

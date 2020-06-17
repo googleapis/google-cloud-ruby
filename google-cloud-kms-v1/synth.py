@@ -33,6 +33,9 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "KMS",
         "ruby-cloud-grpc-service-config": "google/cloud/kms/v1/cloudkms_grpc_service_config.json",
         "ruby-cloud-common-services": "google.iam.v1.IAMPolicy=google.cloud.kms.v1.KeyManagementService",
+        "ruby-cloud-product-url": "https://cloud.google.com/kms",
+        "ruby-cloud-api-id": "cloudkms.googleapis.com",
+        "ruby-cloud-api-shortname": "cloudkms",
     }
 )
 

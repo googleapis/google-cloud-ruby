@@ -28,10 +28,13 @@ library = gapic.ruby_library(
     extra_proto_files=["google/cloud/common_resources.proto"],
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-memcache-v1beta2",
-        "ruby-cloud-title": "Google Cloud Memorystore for Memcached API",
+        "ruby-cloud-title": "Google Cloud Memorystore for Memcached",
         "ruby-cloud-description": "Google Cloud Memorystore for Memcached API is used for creating and managing Memcached instances in GCP.",
         "ruby-cloud-env-prefix": "MEMCACHE",
         "ruby-cloud-grpc-service-config": "google/cloud/memcache/v1beta2/memcache_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/memorystore/docs/memcached/",
+        "ruby-cloud-api-id": "memcache.googleapis.com",
+        "ruby-cloud-api-shortname": "memcache",
     }
 )
 

@@ -32,6 +32,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Cloud Scheduler is a fully managed enterprise-grade cron job scheduler. It allows you to schedule virtually any job, including batch, big data jobs, cloud infrastructure operations, and more. You can automate everything, including retries in case of failure to reduce manual toil and intervention. Cloud Scheduler even acts as a single pane of glass, allowing you to manage all your automation tasks from one place.",
         "ruby-cloud-env-prefix": "SCHEDULER",
         "ruby-cloud-grpc-service-config": "google/cloud/scheduler/v1/cloudscheduler_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/scheduler",
+        "ruby-cloud-api-id": "cloudscheduler.googleapis.com",
+        "ruby-cloud-api-shortname": "cloudscheduler",
     }
 )
 

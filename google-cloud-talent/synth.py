@@ -31,7 +31,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "TALENT",
         "ruby-cloud-wrapper-of": "v4beta1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/solutions/talent-solution",
-        "ruby-cloud-api-id": "jobs",
+        "ruby-cloud-api-id": "jobs.googleapis.com",
+        "ruby-cloud-api-shortname": "jobs",
         "ruby-cloud-migration-version": "0.20",
     }
 )
