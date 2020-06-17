@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "securitycenter.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-security_center/latest",
     "distribution_name": "google-cloud-security_center",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-security_center/latest"
+    "language": "ruby",
+    "name": "securitycenter",
+    "name_pretty": "Security Command Center API",
+    "product_documentation": "https://cloud.google.com/security-command-center",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }
