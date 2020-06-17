@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "recaptchaenterprise.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-recaptcha_enterprise/latest",
     "distribution_name": "google-cloud-recaptcha_enterprise",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-recaptcha_enterprise/latest"
+    "language": "ruby",
+    "name": "recaptchaenterprise",
+    "name_pretty": "reCAPTCHA Enterprise API",
+    "product_documentation": "https://cloud.google.com/recaptcha-enterprise",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }
