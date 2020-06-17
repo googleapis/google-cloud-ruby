@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "bigquerydatatransfer.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer/latest",
     "distribution_name": "google-cloud-bigquery-data_transfer",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer/latest"
+    "language": "ruby",
+    "name": "bigquerydatatransfer",
+    "name_pretty": "BigQuery Data Transfer Service API",
+    "product_documentation": "https://cloud.google.com/bigquery/transfer",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }
