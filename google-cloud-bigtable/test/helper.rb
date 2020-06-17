@@ -195,10 +195,14 @@ class MockBigtable < Minitest::Spec
                   backup_id,
                   source_table_id,
                   expire_time,
-                  start_time: (Time.now + 60),
-                  end_time: (Time.now + 120),
+                  start_time: nil,
+                  end_time: nil,
                   size_bytes: 123456,
                   state: :READY
+    now = Time.now.round 0
+    start_time ||= now + 60
+    end_time ||= now + 120
+
     Google::Bigtable::Admin::V2::Backup.new(
       name: backup_path(instance_id, cluster_id, backup_id),
       source_table: table_path(instance_id, source_table_id),
@@ -211,6 +215,7 @@ class MockBigtable < Minitest::Spec
   end
 
   def backups_grpc count: 2, expire_time: (Time.now + 60 * 60 * 7)
+    expire_time = Time.now.round(0) + 60 * 60 * 7
     arr = Array.new(count) do |i|
       backup_grpc "my-instance", "my-cluster", "my-backup-#{i}", "my-source-table", expire_time
     end

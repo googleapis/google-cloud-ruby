@@ -30,10 +30,11 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
   let :target_table_grpc do
     Google::Bigtable::Admin::V2::Table.new table_hash(name: table_path(instance_id, target_table_id))
   end
-  let(:expire_time) { Time.now + 60 * 60 * 7 }
-  let(:expire_time_2) { Time.now + 60 * 60 * 8 }
-  let(:start_time) { Time.now + 60 }
-  let(:end_time) { Time.now + 120 }
+  let(:now) { Time.now.round 0 }
+  let(:expire_time) { now + 60 * 60 * 7 }
+  let(:expire_time_2) { now + 60 * 60 * 8 }
+  let(:start_time) { now + 60 }
+  let(:end_time) { now + 120 }
   let(:size_bytes) { 123456 }
   let(:state) { :READY }
   let :backup_res do

@@ -32,7 +32,7 @@ describe Google::Cloud::Bigtable::Cluster, :backup, :mock_bigtable do
   let(:cluster) { Google::Cloud::Bigtable::Cluster.from_grpc cluster_grpc, bigtable.service }
   let(:backup_id) { "test-backup" }
   let(:source_table_id) { "test-table-source" }
-  let(:expire_time) { Time.now + 60 * 60 * 7 }
+  let(:expire_time) { Time.now.round(0) + 60 * 60 * 7 }
   let :backup_grpc do
     Google::Bigtable::Admin::V2::Backup.new source_table: table_path(instance_id, source_table_id),
                                             expire_time:  expire_time

@@ -22,7 +22,7 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
   let(:cluster) { instance.clusters.first }
   let(:table) { bigtable_read_table }
   let(:backup_id) { "test-backup-#{random_str}" }
-  let(:now) { Time.now }
+  let(:now) { Time.now.round 0 }
   let(:expire_time) { now + 60 * 60 * 7 }
   let(:expire_time_2) { now + 60 * 60 * 8 }
   let(:restore_table_id) { "test-table-#{random_str}" }
