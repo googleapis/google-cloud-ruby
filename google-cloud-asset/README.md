@@ -18,7 +18,7 @@ client gems:
 [google-cloud-asset-v1](https://googleapis.dev/ruby/google-cloud-asset-v1/latest),
 [google-cloud-asset-v1beta1](https://googleapis.dev/ruby/google-cloud-asset-v1beta1/latest).
 
-See also the [Product Documentation](https://cloud.google.com/resource-manager)
+See also the [Product Documentation](https://cloud.google.com/asset-inventory/)
 for more usage information.
 
 ## Quick Start
