@@ -32,9 +32,34 @@ module Google
         # @!attribute [rw] asset
         #   @return [::Google::Cloud::Asset::V1::Asset]
         #     An asset in Google Cloud.
+        # @!attribute [rw] prior_asset_state
+        #   @return [::Google::Cloud::Asset::V1::TemporalAsset::PriorAssetState]
+        #     State of prior_asset.
+        # @!attribute [rw] prior_asset
+        #   @return [::Google::Cloud::Asset::V1::Asset]
+        #     Prior copy of the asset. Populated if prior_asset_state is PRESENT.
+        #     Currently this is only set for responses in Real-Time Feed.
         class TemporalAsset
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # State of prior asset.
+          module PriorAssetState
+            # prior_asset is not applicable for the current asset.
+            PRIOR_ASSET_STATE_UNSPECIFIED = 0
+
+            # prior_asset is populated correctly.
+            PRESENT = 1
+
+            # Failed to set prior_asset.
+            INVALID = 2
+
+            # Current asset is the first known state.
+            DOES_NOT_EXIST = 3
+
+            # prior_asset is a deletion.
+            DELETED = 4
+          end
         end
 
         # A time window specified by its `start_time` and `end_time`.
@@ -54,10 +79,17 @@ module Google
         # [resource
         # hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy),
         # a resource outside the Google Cloud resource hierarchy (such as Google
-        # Kubernetes Engine clusters and objects), or a Cloud IAM policy.
+        # Kubernetes Engine clusters and objects), or a policy (e.g. Cloud IAM policy).
+        # See [Supported asset
+        # types](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
+        # for more information.
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The last update timestamp of an asset. update_time is updated when
+        #     create/update/delete operation is performed.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The full name of the asset. For example:
+        #     The full name of the asset. Example:
         #     `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`
         #
         #     See [Resource
@@ -65,7 +97,7 @@ module Google
         #     for more information.
         # @!attribute [rw] asset_type
         #   @return [::String]
-        #     The type of the asset. For example: `compute.googleapis.com/Disk`
+        #     The type of the asset. Example: `compute.googleapis.com/Disk`
         #
         #     See [Supported asset
         #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
@@ -92,10 +124,16 @@ module Google
         #     set on a given resource.
         # @!attribute [rw] access_policy
         #   @return [::Google::Identity::AccessContextManager::V1::AccessPolicy]
+        #     Please also refer to the [access policy user
+        #     guide](https://cloud.google.com/access-context-manager/docs/overview#access-policies).
         # @!attribute [rw] access_level
         #   @return [::Google::Identity::AccessContextManager::V1::AccessLevel]
+        #     Please also refer to the [access level user
+        #     guide](https://cloud.google.com/access-context-manager/docs/overview#access-levels).
         # @!attribute [rw] service_perimeter
         #   @return [::Google::Identity::AccessContextManager::V1::ServicePerimeter]
+        #     Please also refer to the [service perimeter user
+        #     guide](https://cloud.google.com/vpc-service-controls/docs/overview).
         # @!attribute [rw] ancestors
         #   @return [::Array<::String>]
         #     The ancestry path of an asset in Google Cloud [resource
@@ -105,7 +143,7 @@ module Google
         #     is a project, folder, or organization, the ancestry path starts from the
         #     asset itself.
         #
-        #     For example: `["projects/123456789", "folders/5432", "organizations/1234"]`
+        #     Example: `["projects/123456789", "folders/5432", "organizations/1234"]`
         class Asset
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -114,18 +152,18 @@ module Google
         # A representation of a Google Cloud resource.
         # @!attribute [rw] version
         #   @return [::String]
-        #     The API version. For example: `v1`
+        #     The API version. Example: `v1`
         # @!attribute [rw] discovery_document_uri
         #   @return [::String]
         #     The URL of the discovery document containing the resource's JSON schema.
-        #     For example:
+        #     Example:
         #     `https://www.googleapis.com/discovery/v1/apis/compute/v1/rest`
         #
         #     This value is unspecified for resources that do not have an API based on a
         #     discovery document, such as Cloud Bigtable.
         # @!attribute [rw] discovery_name
         #   @return [::String]
-        #     The JSON schema name listed in the discovery document. For example:
+        #     The JSON schema name listed in the discovery document. Example:
         #     `Project`
         #
         #     This value is unspecified for resources that do not have an API based on a
@@ -133,7 +171,7 @@ module Google
         # @!attribute [rw] resource_url
         #   @return [::String]
         #     The REST URL for accessing the resource. An HTTP `GET` request using this
-        #     URL returns the resource itself. For example:
+        #     URL returns the resource itself. Example:
         #     `https://cloudresourcemanager.googleapis.com/v1/projects/my-project-123`
         #
         #     This value is unspecified for resources without a REST API.
@@ -147,7 +185,7 @@ module Google
         #     For Google Cloud assets, this value is the parent resource defined in the
         #     [Cloud IAM policy
         #     hierarchy](https://cloud.google.com/iam/docs/overview#policy_hierarchy).
-        #     For example:
+        #     Example:
         #     `//cloudresourcemanager.googleapis.com/projects/my_project_123`
         #
         #     For third-party assets, this field may be set differently.

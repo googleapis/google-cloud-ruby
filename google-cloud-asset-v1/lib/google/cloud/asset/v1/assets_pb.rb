@@ -13,18 +13,29 @@ require 'google/identity/accesscontextmanager/v1/service_perimeter_pb'
 require 'google/protobuf/any_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/rpc/code_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/asset/v1/assets.proto", :syntax => :proto3) do
     add_message "google.cloud.asset.v1.TemporalAsset" do
       optional :window, :message, 1, "google.cloud.asset.v1.TimeWindow"
       optional :deleted, :bool, 2
       optional :asset, :message, 3, "google.cloud.asset.v1.Asset"
+      optional :prior_asset_state, :enum, 4, "google.cloud.asset.v1.TemporalAsset.PriorAssetState"
+      optional :prior_asset, :message, 5, "google.cloud.asset.v1.Asset"
+    end
+    add_enum "google.cloud.asset.v1.TemporalAsset.PriorAssetState" do
+      value :PRIOR_ASSET_STATE_UNSPECIFIED, 0
+      value :PRESENT, 1
+      value :INVALID, 2
+      value :DOES_NOT_EXIST, 3
+      value :DELETED, 4
     end
     add_message "google.cloud.asset.v1.TimeWindow" do
       optional :start_time, :message, 1, "google.protobuf.Timestamp"
       optional :end_time, :message, 2, "google.protobuf.Timestamp"
     end
     add_message "google.cloud.asset.v1.Asset" do
+      optional :update_time, :message, 11, "google.protobuf.Timestamp"
       optional :name, :string, 1
       optional :asset_type, :string, 2
       optional :resource, :message, 3, "google.cloud.asset.v1.Resource"
@@ -77,6 +88,7 @@ module Google
     module Asset
       module V1
         TemporalAsset = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.TemporalAsset").msgclass
+        TemporalAsset::PriorAssetState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.TemporalAsset.PriorAssetState").enummodule
         TimeWindow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.TimeWindow").msgclass
         Asset = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.Asset").msgclass
         Resource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.Resource").msgclass
