@@ -1215,6 +1215,7 @@ google-cloud-translate:
 google-cloud-translate-v2:
 - v0.1.0
 google-cloud-translate-v3:
+- v0.1.2
 - v0.1.0
 google-cloud-video_intelligence:
 - v2.1.0
