@@ -17,20 +17,20 @@ Authentication is typically done through [Application Default Credentials](https
 environment has credentials. You have a few options for setting up
 authentication:
 
-1. When running locally, use the [Google Cloud SDK](https://cloud.google.com/sdk/)
+1.  When running locally, use the [Google Cloud SDK](https://cloud.google.com/sdk/)
 
-    `gcloud auth application-default login`
+        gcloud auth application-default login
 
-1. When running on App Engine or Compute Engine, credentials are already set-up.
-However, you may need to configure your Compute Engine instance with
-[additional scopes](https://cloud.google.com/compute/docs/authentication#using).
+1.  When running on App Engine or Compute Engine, credentials are already set-up.
+    However, you may need to configure your Compute Engine instance with
+    [additional scopes](https://cloud.google.com/compute/docs/authentication#using).
 
-1. You can create a [Service Account key file](https://cloud.google.com/docs/authentication#service_accounts)
-. This file can be used to authenticate to Google Cloud Platform services from
-any environment. To use the file, set the `GOOGLE_APPLICATION_CREDENTIALS`
-environment variable to the path to the key file, for example:
+1.  You can create a [Service Account key file](https://cloud.google.com/docs/authentication#service_accounts).
+    This file can be used to authenticate to Google Cloud Platform services from
+    any environment. To use the file, set the `GOOGLE_APPLICATION_CREDENTIALS`
+    environment variable to the path to the key file, for example:
 
-    `export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service_account.json`
+        export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service_account.json
 
 ### Set Project ID
 
@@ -38,66 +38,33 @@ Next, set the *GOOGLE_CLOUD_PROJECT* environment variable to the project name
 set in the
 [Google Cloud Platform Developer Console](https://console.cloud.google.com):
 
-    `export GOOGLE_CLOUD_PROJECT="YOUR-PROJECT-ID"`
-
-### Set AutoML Translation Model ID
-
-To run the V3 tests that use an AutoML Translation Model, set the
-*AUTOML_TRANSLATION_MODEL_ID* environment variable to the model ID
-you want to use to translate your content. See
-[Using the AutoML API](https://cloud.google.com/translate/automl/docs/predict#using_the).
-
-    `export AUTOML_TRANSLATION_MODEL_ID="YOUR-MODEL-ID"`
+    export GOOGLE_CLOUD_PROJECT="YOUR-PROJECT-ID"
 
 ### Install Dependencies
 
-1. Install the [Bundler](http://bundler.io/) gem.
+1.  Install the [Bundler](http://bundler.io/) gem.
 
-1. Install dependencies using:
+2.  Decide whether to run against the current code in git, or the latest gem
+    release. To run against the current git code:
 
-    `bundle install`
+        export GOOGLE_CLOUD_SAMPLES_TEST=master
 
-## Run all samples
+    To run against the latest gem release, unset that variable.
 
-Run all samples:
+3.  Install dependencies using:
 
-    bundle exec rspec
+        bundle install
 
-Run only the V3 samples:
+### Install fixtures
 
-    bundle exec rspec spec/translate_v3_samples_spec.rb
+Some samples require a test fixture to be installed in your project
+(specifically, a glossary that is used for testing get and list commands).
+To install this fixture:
 
-Run one specific V3 sample:
+    bundle exec rake fixtures:create
 
-    bundle exec rspec -t translate_v3_translate_text
+This is a task that needs to be run only once per project.
 
-Run a group of V3 samples that share the same example description:
+## Testing samples
 
-    bundle exec rspec -e "Translating Text"
-
-Some samples require additional environment variables:
-
-    AUTOML_TRANSLATION_MODEL_ID=TRL123 TRANSLATE_BUCKET=trnslt bundle exec rspec
-
-## Run samples (old)
-
-Run the sample:
-
-    bundle exec ruby translate_samples.rb
-
-Usage:
-
-  Usage: ruby translate_samples.rb <command> [arguments]
-
-  Commands:
-    translate       <desired-language-code> <text>
-    detect_language <text>
-    list_names      <language-code-for-display>
-    list_codes
-
-  Examples:
-
-    ruby translate_samples.rb translate fr "Hello World"
-    ruby translate_samples.rb detect_language "Hello World"
-    ruby translate_samples.rb list_codes
-    ruby translate_samples.rb list_names en
+    bundle exec rake test
