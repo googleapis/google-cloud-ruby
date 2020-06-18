@@ -2,22 +2,16 @@
 
 ### 3.0.0 / 2020-06-18
 
-#### ⚠ BREAKING CHANGES
+This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
 
-* **translate:** Convert google-cloud-translate to a wrapper
+Among the highlights:
 
-#### Features
+* Separate client libraries are now provided for specific service versions.
+* A new configuration mechanism makes it easier to control parameters such as endpoint address, network timeouts, and retry.
+* A consistent method interface using keyword arguments for all fields, and supporting request proto objects.
+* Helper methods for generating resource paths are more accessible.
 
-* Convert google-cloud-translate to a wrapper
-
-#### Bug Fixes
-
-* Adjusted some default timeout and retry settings
-* Endpoint host can be customized as a hostname rather than a full URL
-
-#### Documentation
-
-* Cover exception changes in the migration guide
+See the MIGRATING file in the documentation for more detailed information, and instructions for migrating from earlier versions.
 
 ### 2.3.0 / 2020-03-28
 
