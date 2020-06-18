@@ -21,7 +21,7 @@ require "minitest/rg"
 require "google/cloud/translate/v2"
 
 # Create shared translate object so we don't create new for each test
-$translate = Google::Cloud::Translate::V2.new retries: 10
+$translate = Google::Cloud::Translate.translation_v2_service retries: 10
 
 module Acceptance
   ##
