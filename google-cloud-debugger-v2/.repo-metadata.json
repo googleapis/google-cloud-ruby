@@ -1,0 +1,11 @@
+{
+    "api_id": "clouddebugger.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-debugger-v2/latest",
+    "distribution_name": "google-cloud-debugger-v2",
+    "language": "ruby",
+    "name": "clouddebugger",
+    "name_pretty": "Cloud Debugger V2 API",
+    "product_documentation": "https://cloud.google.com/debugger",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
