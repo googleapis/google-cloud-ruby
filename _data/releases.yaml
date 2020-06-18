@@ -700,6 +700,8 @@ google-cloud-monitoring-dashboard-v1:
 google-cloud-monitoring-v3:
 - v0.1.1
 - v0.1.0
+google-cloud-os_config:
+- v0.1.0
 google-cloud-os_config-v1:
 - v0.1.0
 google-cloud-os_login:
