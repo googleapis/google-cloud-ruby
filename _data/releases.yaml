@@ -247,6 +247,7 @@ google-cloud-container:
 - v0.2.0
 - v0.1.0
 google-cloud-container-v1:
+- v0.2.3
 - v0.2.0
 - v0.1.0
 - v0.0.1
