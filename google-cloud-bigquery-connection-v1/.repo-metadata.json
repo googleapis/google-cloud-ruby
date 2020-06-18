@@ -1,0 +1,11 @@
+{
+    "api_id": "bigqueryconnection.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-bigquery-connection-v1/latest",
+    "distribution_name": "google-cloud-bigquery-connection-v1",
+    "language": "ruby",
+    "name": "bigqueryconnection",
+    "name_pretty": "BigQuery Connection V1 API",
+    "product_documentation": "https://cloud.google.com/bigquery/docs/reference/bigqueryconnection",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
