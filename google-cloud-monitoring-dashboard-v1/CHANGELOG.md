@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.1 / 2020-06-18
+
+#### Bug Fixes
+
+* Set the correct timeout and retry policy defaults.
+
 ### 0.2.0 / 2020-06-15
 
 #### Features

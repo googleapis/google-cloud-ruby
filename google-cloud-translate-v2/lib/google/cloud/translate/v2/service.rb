@@ -28,7 +28,7 @@ module Google
         # Represents the Translation API REST service, exposing the API calls.
         class Service #:nodoc:
           API_VERSION = "v2".freeze
-          API_URL = "https://translation.googleapis.com".freeze
+          API_HOST = "translate.googleapis.com".freeze
 
           # @private
           attr_accessor :project_id, :credentials, :retries, :timeout, :key
@@ -41,7 +41,7 @@ module Google
             @retries = retries
             @timeout = timeout
             @key = key
-            @host = host || API_URL
+            @url = "https://#{host || API_HOST}"
           end
 
           ##
@@ -102,7 +102,7 @@ module Google
           # The HTTP object that makes calls to API.
           # This must be a Faraday object.
           def http
-            @http ||= Faraday.new url: @host, request: {
+            @http ||= Faraday.new url: @url, request: {
               open_timeout: @timeout, timeout: @timeout
             }.delete_if { |_k, v| v.nil? }
           end

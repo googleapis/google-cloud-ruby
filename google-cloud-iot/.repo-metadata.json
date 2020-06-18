@@ -1,0 +1,11 @@
+{
+    "api_id": "cloudiot.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-iot/latest",
+    "distribution_name": "google-cloud-iot",
+    "language": "ruby",
+    "name": "cloudiot",
+    "name_pretty": "Cloud IoT API",
+    "product_documentation": "https://cloud.google.com/iot",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
