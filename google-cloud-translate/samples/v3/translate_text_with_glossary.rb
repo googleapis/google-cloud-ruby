@@ -45,7 +45,7 @@ def translate_v3_translate_text_with_glossary project_id:, location_id:, glossar
                                    mime_type:            mime_type
 
   # Display the translation for each input text provided
-  response.translations.each do |translation|
+  response.glossary_translations.each do |translation|
     puts "Translated text: #{translation.translated_text}"
   end
   # [END translate_v3_translate_text_with_glossary]
