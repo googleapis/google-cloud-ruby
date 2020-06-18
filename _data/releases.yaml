@@ -1306,6 +1306,7 @@ google-cloud-web_risk:
 - v1.1.0
 - v1.0.0
 google-cloud-web_risk-v1:
+- v0.2.3
 - v0.2.2
 - v0.1.0
 google-cloud-web_risk-v1beta1:
