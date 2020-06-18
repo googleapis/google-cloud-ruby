@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2020-06-18
+
+#### Features
+
+* Support for real-time notification conditions
+
 ### 0.4.3 / 2020-06-05
 
 #### Bug Fixes
