@@ -1,5 +1,24 @@
 # Release History
 
+### 3.0.0 / 2020-06-18
+
+#### ⚠ BREAKING CHANGES
+
+* **translate:** Convert google-cloud-translate to a wrapper
+
+#### Features
+
+* Convert google-cloud-translate to a wrapper
+
+#### Bug Fixes
+
+* Adjusted some default timeout and retry settings
+* Endpoint host can be customized as a hostname rather than a full URL
+
+#### Documentation
+
+* Cover exception changes in the migration guide
+
 ### 2.3.0 / 2020-03-28
 
 #### Features
