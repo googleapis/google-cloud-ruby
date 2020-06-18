@@ -22,8 +22,8 @@ describe Google::Cloud::Storage::Bucket, :storage do
   end
   let(:created_before) { Date.parse "2013-01-15" }
   let(:created_before_2) { Date.parse "2013-01-16" }
-  let(:noncurrent_time_before) { DateTime.parse "2013-01-20T11:22:33" }
-  let(:noncurrent_time_before_2) { DateTime.parse "2013-01-21T12:33:44" }
+  let(:noncurrent_time_before) { DateTime.parse "1980-01-31T21:47:33+06:00" }
+  let(:noncurrent_time_before_2) { DateTime.parse "1981-01-31T22:47:33+06:00" }
 
   before do
     # always reset the bucket permissions
@@ -173,13 +173,23 @@ describe Google::Cloud::Storage::Bucket, :storage do
     bucket.lifecycle do |l|
       l.last.storage_class = "COLDLINE"
       l.last.age = 20
-      l.last.created_before = created_before_2
+      l.last.created_before = "2013-01-16"
       l.last.days_since_noncurrent_time = 15
       l.last.is_live = false
       l.last.matches_storage_class = ["NEARLINE"]
-      l.last.noncurrent_time_before = noncurrent_time_before_2
+      l.last.noncurrent_time_before = "1981-01-31T22:47:33+06:00"
       l.last.num_newer_versions = 4
+
+
+      _(l.last.created_before).must_be_kind_of String
+      _(l.last.noncurrent_time_before).must_be_kind_of String
     end
+
+    _(bucket.lifecycle.last.created_before).must_be_kind_of Date
+    _(bucket.lifecycle.last.created_before).must_equal created_before_2
+    _(bucket.lifecycle.last.noncurrent_time_before).must_be_kind_of DateTime
+    _(bucket.lifecycle.last.noncurrent_time_before).must_equal noncurrent_time_before_2
+
 
     bucket.reload!
 
@@ -188,10 +198,12 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(bucket.lifecycle.last.action).must_equal "SetStorageClass"
     _(bucket.lifecycle.last.storage_class).must_equal "COLDLINE"
     _(bucket.lifecycle.last.age).must_equal 20
+    _(bucket.lifecycle.last.created_before).must_be_kind_of Date
     _(bucket.lifecycle.last.created_before).must_equal created_before_2
     _(bucket.lifecycle.last.days_since_noncurrent_time).must_equal 15
     _(bucket.lifecycle.last.is_live).must_equal false
     _(bucket.lifecycle.last.matches_storage_class).must_equal ["NEARLINE"]
+    _(bucket.lifecycle.last.noncurrent_time_before).must_be_kind_of DateTime
     _(bucket.lifecycle.last.noncurrent_time_before).must_equal noncurrent_time_before_2
     _(bucket.lifecycle.last.num_newer_versions).must_equal 4
 

@@ -122,7 +122,7 @@ module Google
           #   classes. Arguments will be converted from symbols and lower-case
           #   to upper-case strings.
           # @param [String,DateTime] noncurrent_time_before A timestamp string in
-          #   RFC3339 format (for example: `1980-01-31T21:47:33+6:00`) or
+          #   RFC3339 format (for example: `1980-01-31T21:47:33+06:00`) or
           #   equivalent DateTime object. The condition is satisfied when the
           #   noncurrent time on an object is before this timestamp.
           # @param [Integer] num_newer_versions Relevant only for versioned
@@ -192,7 +192,7 @@ module Google
           #   classes. Arguments will be converted from symbols and lower-case
           #   to upper-case strings.
           # @param [String,DateTime] noncurrent_time_before A timestamp string in
-          #   RFC3339 format (for example: `1980-01-31T21:47:33+6:00`) or
+          #   RFC3339 format (for example: `1980-01-31T21:47:33+06:00`) or
           #   equivalent DateTime object. The condition is satisfied when the
           #   noncurrent time on an object is before this timestamp.
           # @param [Integer] num_newer_versions Relevant only for versioned
@@ -269,10 +269,11 @@ module Google
           #   action. Required only if the action is `SetStorageClass`.
           # @attr [Integer] age The age of a file (in days). This condition is
           #   satisfied when a file reaches the specified age.
-          # @attr [String,Date] created_before A date in RFC 3339 format with
+          # @attr [String,Date,nil] created_before A date in RFC 3339 format with
           #   only the date part (for instance, "2013-01-15"). This condition is
           #   satisfied when a file is created before midnight of the specified
-          #   date in UTC.
+          #   date in UTC. When returned by the service, a non-empty value will
+          #   always be a Date object.
           # @attr [Integer] days_since_noncurrent_time Represents the number of
           #   days elapsed since the noncurrent timestamp of an object. The
           #   condition is satisfied if the days elapsed is at least this number.
@@ -287,10 +288,12 @@ module Google
           #   Values include `STANDARD`, `NEARLINE`, `COLDLINE`, and `ARCHIVE`.
           #   `REGIONAL`, `MULTI_REGIONAL`, and `DURABLE_REDUCED_AVAILABILITY`
           #   are supported as legacy storage classes.
-          # @attr [String,DateTime] noncurrent_time_before A timestamp string in
-          #   RFC3339 format (for example: `1980-01-31T21:47:33+6:00`) or
+          # @attr [String,DateTime,nil] noncurrent_time_before A timestamp string
+          #   in RFC3339 format (for example: `1980-01-31T21:47:33+06:00`) or
           #   equivalent DateTime object. The condition is satisfied when the
-          #   noncurrent time on an object is before this timestamp.
+          #   noncurrent time on an object is before this timestamp. When
+          #   returned by the service, a non-empty value will always be a
+          #   DateTime object.
           # @attr [Integer] num_newer_versions Relevant only for versioned
           #   files. If the value is N, this condition is satisfied when there
           #   are at least N versions (including the live version) newer than
