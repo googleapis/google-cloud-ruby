@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.3 / 2020-06-18
+
+#### Documentation
+
+* Add documentation and API enablement links to the readme
+
 ### 0.4.2 / 2020-06-05
 
 #### Bug Fixes
