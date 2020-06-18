@@ -39,6 +39,8 @@ require "google/cloud/config"
   config.add_field! :metadata,      nil, match: ::Hash
   config.add_field! :retry_policy,  nil, match: [::Hash, ::Proc]
   config.add_field! :quota_project, nil, match: ::String
+  config.add_field! :key,           nil, match: ::String
+  config.add_field! :retries,       nil, match: ::Integer
 end
 
 module Google

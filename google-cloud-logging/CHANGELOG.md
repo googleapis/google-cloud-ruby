@@ -1,5 +1,11 @@
 # Release History
 
+### 1.10.9 / 2020-06-17
+
+#### Documentation
+
+* Improved field descriptions in the low-level interface.
+
 ### 1.10.8 / 2020-06-12
 
 #### Documentation

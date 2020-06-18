@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.1 / 2020-06-18
+
+#### Documentation
+
+* Added an Enable API link to the README
+
 ### 1.0.0 / 2020-06-15
 
 This is a major update with significant new features, improved documentation, and a fair number of breaking changes.

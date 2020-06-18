@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.2 / 2020-06-18
+
+#### Documentation
+
+* Updated the product URL in the readme
+
 ### 1.1.1 / 2020-05-26
 
 #### Documentation

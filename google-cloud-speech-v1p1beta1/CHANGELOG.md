@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.3 / 2020-06-18
+
+#### Documentation
+
+* Add documentation and API enablement links to the readme
+
 ### 0.3.2 / 2020-06-05
 
 #### Bug Fixes
