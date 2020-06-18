@@ -164,9 +164,15 @@ class MockStorage < Minitest::Spec
     Google::Apis::StorageV1::Bucket::Lifecycle.new rule: Array(rules)
   end
 
-  def lifecycle_rule_gapi action, storage_class: nil, age: nil,
-                     created_before: nil, is_live: nil,
-                     matches_storage_class: nil, num_newer_versions: nil
+  def lifecycle_rule_gapi action,
+                          storage_class: nil,
+                          age: nil,
+                          created_before: nil,
+                          days_since_noncurrent_time: nil,
+                          is_live: nil,
+                          matches_storage_class: nil,
+                          noncurrent_time_before: nil,
+                          num_newer_versions: nil
     Google::Apis::StorageV1::Bucket::Lifecycle::Rule.new(
       action: Google::Apis::StorageV1::Bucket::Lifecycle::Rule::Action.new(
         storage_class: storage_class,
@@ -175,8 +181,10 @@ class MockStorage < Minitest::Spec
       condition: Google::Apis::StorageV1::Bucket::Lifecycle::Rule::Condition.new(
         age: age,
         created_before: created_before,
+        days_since_noncurrent_time: days_since_noncurrent_time,
         is_live: is_live,
         matches_storage_class: Array(matches_storage_class),
+        noncurrent_time_before: noncurrent_time_before,
         num_newer_versions: num_newer_versions
       )
     )

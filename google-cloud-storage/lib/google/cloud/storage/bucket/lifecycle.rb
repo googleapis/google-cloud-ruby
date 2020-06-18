@@ -105,6 +105,12 @@ module Google
           #   only the date part (for instance, "2013-01-15"). This condition is
           #   satisfied when a file is created before midnight of the specified
           #   date in UTC.
+          # @param [Integer] days_since_noncurrent_time Represents the number of
+          #   days elapsed since the noncurrent timestamp of an object. The
+          #   condition is satisfied if the days elapsed is at least this number.
+          #   The value of the field must be a nonnegative integer. If it's zero,
+          #   the object version will become eligible for Lifecycle action as
+          #   soon as it becomes noncurrent.
           # @param [Boolean] is_live Relevant only for versioned files. If the
           #   value is `true`, this condition matches live files; if the value
           #   is `false`, it matches archived files.
@@ -115,6 +121,10 @@ module Google
           #   `DURABLE_REDUCED_AVAILABILITY` are supported as legacy storage
           #   classes. Arguments will be converted from symbols and lower-case
           #   to upper-case strings.
+          # @param [String,DateTime] noncurrent_time_before A timestamp string in
+          #   RFC3339 format (for example: `1980-01-31T21:47:33+6:00`) or
+          #   equivalent DateTime object. The condition is satisfied when the
+          #   noncurrent time on an object is before this timestamp.
           # @param [Integer] num_newer_versions Relevant only for versioned
           #   files. If the value is N, this condition is satisfied when there
           #   are at least N versions (including the live version) newer than
@@ -129,16 +139,25 @@ module Google
           #     b.lifecycle.add_set_storage_class_rule "COLDLINE", age: 10
           #   end
           #
-          def add_set_storage_class_rule storage_class, age: nil,
-                                         created_before: nil, is_live: nil,
+          def add_set_storage_class_rule storage_class,
+                                         age: nil,
+                                         created_before: nil,
+                                         days_since_noncurrent_time: nil,
+                                         is_live: nil,
                                          matches_storage_class: nil,
+                                         noncurrent_time_before: nil,
                                          num_newer_versions: nil
-            push Rule.new \
+            push Rule.new(
               "SetStorageClass",
               storage_class: storage_class_for(storage_class),
-              age: age, created_before: created_before, is_live: is_live,
+              age: age,
+              created_before: created_before,
+              days_since_noncurrent_time: days_since_noncurrent_time,
+              is_live: is_live,
               matches_storage_class: storage_class_for(matches_storage_class),
+              noncurrent_time_before: noncurrent_time_before,
               num_newer_versions: num_newer_versions
+            )
           end
 
           ##
@@ -156,6 +175,12 @@ module Google
           #   only the date part (for instance, "2013-01-15"). This condition is
           #   satisfied when a file is created before midnight of the specified
           #   date in UTC.
+          # @param [Integer] days_since_noncurrent_time Represents the number of
+          #   days elapsed since the noncurrent timestamp of an object. The
+          #   condition is satisfied if the days elapsed is at least this number.
+          #   The value of the field must be a nonnegative integer. If it's zero,
+          #   the object version will become eligible for Lifecycle action as
+          #   soon as it becomes noncurrent.
           # @param [Boolean] is_live Relevant only for versioned files. If the
           #   value is `true`, this condition matches live files; if the value
           #   is `false`, it matches archived files.
@@ -166,6 +191,10 @@ module Google
           #   `DURABLE_REDUCED_AVAILABILITY` are supported as legacy storage
           #   classes. Arguments will be converted from symbols and lower-case
           #   to upper-case strings.
+          # @param [String,DateTime] noncurrent_time_before A timestamp string in
+          #   RFC3339 format (for example: `1980-01-31T21:47:33+6:00`) or
+          #   equivalent DateTime object. The condition is satisfied when the
+          #   noncurrent time on an object is before this timestamp.
           # @param [Integer] num_newer_versions Relevant only for versioned
           #   files. If the value is N, this condition is satisfied when there
           #   are at least N versions (including the live version) newer than
@@ -180,14 +209,23 @@ module Google
           #     b.lifecycle.add_delete_rule age: 30, is_live: false
           #   end
           #
-          def add_delete_rule age: nil, created_before: nil, is_live: nil,
+          def add_delete_rule age: nil,
+                              created_before: nil,
+                              days_since_noncurrent_time: nil,
+                              is_live: nil,
                               matches_storage_class: nil,
+                              noncurrent_time_before: nil,
                               num_newer_versions: nil
-            push Rule.new \
+            push Rule.new(
               "Delete",
-              age: age, created_before: created_before, is_live: is_live,
+              age: age,
+              created_before: created_before,
+              days_since_noncurrent_time: days_since_noncurrent_time,
+              is_live: is_live,
               matches_storage_class: storage_class_for(matches_storage_class),
+              noncurrent_time_before: noncurrent_time_before,
               num_newer_versions: num_newer_versions
+            )
           end
 
           # @private
@@ -235,6 +273,12 @@ module Google
           #   only the date part (for instance, "2013-01-15"). This condition is
           #   satisfied when a file is created before midnight of the specified
           #   date in UTC.
+          # @attr [Integer] days_since_noncurrent_time Represents the number of
+          #   days elapsed since the noncurrent timestamp of an object. The
+          #   condition is satisfied if the days elapsed is at least this number.
+          #   The value of the field must be a nonnegative integer. If it's zero,
+          #   the object version will become eligible for Lifecycle action as
+          #   soon as it becomes noncurrent.
           # @attr [Boolean] is_live Relevant only for versioned files. If the
           #   value is `true`, this condition matches live files; if the value
           #   is `false`, it matches archived files.
@@ -243,6 +287,10 @@ module Google
           #   Values include `STANDARD`, `NEARLINE`, `COLDLINE`, and `ARCHIVE`.
           #   `REGIONAL`, `MULTI_REGIONAL`, and `DURABLE_REDUCED_AVAILABILITY`
           #   are supported as legacy storage classes.
+          # @attr [String,DateTime] noncurrent_time_before A timestamp string in
+          #   RFC3339 format (for example: `1980-01-31T21:47:33+6:00`) or
+          #   equivalent DateTime object. The condition is satisfied when the
+          #   noncurrent time on an object is before this timestamp.
           # @attr [Integer] num_newer_versions Relevant only for versioned
           #   files. If the value is N, this condition is satisfied when there
           #   are at least N versions (including the live version) newer than
@@ -285,28 +333,49 @@ module Google
           #   end
           #
           class Rule
-            attr_accessor :action, :storage_class, :age, :created_before,
-                          :is_live, :matches_storage_class, :num_newer_versions
+            attr_accessor :action,
+                          :storage_class,
+                          :age,
+                          :created_before,
+                          :days_since_noncurrent_time,
+                          :is_live,
+                          :matches_storage_class,
+                          :noncurrent_time_before,
+                          :num_newer_versions
 
             # @private
-            def initialize action, storage_class: nil, age: nil,
-                           created_before: nil, is_live: nil,
-                           matches_storage_class: nil, num_newer_versions: nil
+            def initialize action,
+                           storage_class: nil,
+                           age: nil,
+                           created_before: nil,
+                           days_since_noncurrent_time: nil,
+                           is_live: nil,
+                           matches_storage_class: nil,
+                           noncurrent_time_before: nil,
+                           num_newer_versions: nil
               @action = action
               @storage_class = storage_class
               @age = age
               @created_before = created_before
+              @days_since_noncurrent_time = days_since_noncurrent_time
               @is_live = is_live
               @matches_storage_class = Array(matches_storage_class)
+              @noncurrent_time_before = noncurrent_time_before
               @num_newer_versions = num_newer_versions
             end
 
             # @private
             # @return [Google::Apis::StorageV1::Bucket::Lifecycle]
             def to_gapi
-              condition = condition_gapi(age, created_before, is_live,
-                                         matches_storage_class,
-                                         num_newer_versions)
+              condition = condition_gapi(
+                age,
+                created_before,
+                days_since_noncurrent_time,
+                is_live,
+                matches_storage_class,
+                noncurrent_time_before,
+                num_newer_versions
+              )
               Google::Apis::StorageV1::Bucket::Lifecycle::Rule.new(
                 action: action_gapi(action, storage_class),
                 condition: condition
@@ -316,18 +385,26 @@ module Google
             # @private
             def action_gapi action, storage_class
               Google::Apis::StorageV1::Bucket::Lifecycle::Rule::Action.new(
-                type: action, storage_class: storage_class
+                type: action,
+                storage_class: storage_class
               )
             end
 
             # @private
-            def condition_gapi age, created_before, is_live,
-                               matches_storage_class, num_newer_versions
+            def condition_gapi age,
+                               created_before,
+                               days_since_noncurrent_time,
+                               is_live,
+                               matches_storage_class,
+                               noncurrent_time_before,
+                               num_newer_versions
               Google::Apis::StorageV1::Bucket::Lifecycle::Rule::Condition.new(
                 age: age,
                 created_before: created_before,
+                days_since_noncurrent_time: days_since_noncurrent_time,
                 is_live: is_live,
                 matches_storage_class: Array(matches_storage_class),
+                noncurrent_time_before: noncurrent_time_before,
                 num_newer_versions: num_newer_versions
               )
             end
@@ -337,12 +414,17 @@ module Google
             def self.from_gapi gapi
               action = gapi.action
               c = gapi.condition
-              new action.type, storage_class: action.storage_class,
-                               age: c.age,
-                               created_before: c.created_before,
-                               is_live: c.is_live,
-                               matches_storage_class: c.matches_storage_class,
-                               num_newer_versions: c.num_newer_versions
+              new(
+                action.type,
+                storage_class: action.storage_class,
+                age: c.age,
+                created_before: c.created_before,
+                days_since_noncurrent_time: c.days_since_noncurrent_time,
+                is_live: c.is_live,
+                matches_storage_class: c.matches_storage_class,
+                noncurrent_time_before: c.noncurrent_time_before,
+                num_newer_versions: c.num_newer_versions
+              )
             end
 
             # @private

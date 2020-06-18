@@ -144,8 +144,10 @@ describe Google::Cloud::Storage::Bucket, :storage do
       l.add_set_storage_class_rule "NEARLINE",
                                    age: 10,
                                    created_before: Date.parse("2013-01-15"), # string in RFC 3339 date format also ok
+                                   days_since_noncurrent_time: 14,
                                    is_live: true,
                                    matches_storage_class: ["STANDARD"],
+                                   noncurrent_time_before: DateTime.parse("2013-01-16"), # string in RFC 3339 date format also ok
                                    num_newer_versions: 3
 
     end
@@ -156,8 +158,10 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(bucket.lifecycle.last.storage_class).must_equal "NEARLINE"
     _(bucket.lifecycle.last.age).must_equal 10
     _(bucket.lifecycle.last.created_before).must_equal Date.parse("2013-01-15")
+    _(bucket.lifecycle.last.days_since_noncurrent_time).must_equal 14
     _(bucket.lifecycle.last.is_live).must_equal true
     _(bucket.lifecycle.last.matches_storage_class).must_equal ["STANDARD"]
+    _(bucket.lifecycle.last.noncurrent_time_before).must_equal Date.parse("2013-01-16")
     _(bucket.lifecycle.last.num_newer_versions).must_equal 3
 
     bucket.reload!
@@ -166,8 +170,10 @@ describe Google::Cloud::Storage::Bucket, :storage do
       l.last.storage_class = "COLDLINE"
       l.last.age = 20
       l.last.created_before = "2013-01-20"
+      l.last.days_since_noncurrent_time = 15
       l.last.is_live = false
       l.last.matches_storage_class = ["NEARLINE"]
+      l.last.noncurrent_time_before = "2013-01-17"
       l.last.num_newer_versions = 4
     end
 
@@ -179,8 +185,10 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(bucket.lifecycle.last.storage_class).must_equal "COLDLINE"
     _(bucket.lifecycle.last.age).must_equal 20
     _(bucket.lifecycle.last.created_before).must_equal Date.parse("2013-01-20")
+    _(bucket.lifecycle.last.days_since_noncurrent_time).must_equal 15
     _(bucket.lifecycle.last.is_live).must_equal false
     _(bucket.lifecycle.last.matches_storage_class).must_equal ["NEARLINE"]
+    _(bucket.lifecycle.last.noncurrent_time_before).must_equal Date.parse("2013-01-17")
     _(bucket.lifecycle.last.num_newer_versions).must_equal 4
 
     bucket.lifecycle do |l|
