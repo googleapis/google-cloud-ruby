@@ -560,11 +560,14 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
 
     # Create request parameters for a unary method.
     parent = "hello world"
+    requested_time_range = {}
 
     start_manual_transfer_runs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :start_manual_transfer_runs, name
       assert_kind_of ::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest, request
       assert_equal "hello world", request.parent
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest::TimeRange), request.requested_time_range
+      assert_equal :requested_time_range, request.time
       refute_nil options
     end
 
@@ -575,31 +578,31 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
       end
 
       # Use hash object
-      client.start_manual_transfer_runs({ parent: parent }) do |response, operation|
+      client.start_manual_transfer_runs({ parent: parent, requested_time_range: requested_time_range }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.start_manual_transfer_runs parent: parent do |response, operation|
+      client.start_manual_transfer_runs parent: parent, requested_time_range: requested_time_range do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.start_manual_transfer_runs ::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest.new(parent: parent) do |response, operation|
+      client.start_manual_transfer_runs ::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest.new(parent: parent, requested_time_range: requested_time_range) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.start_manual_transfer_runs({ parent: parent }, grpc_options) do |response, operation|
+      client.start_manual_transfer_runs({ parent: parent, requested_time_range: requested_time_range }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.start_manual_transfer_runs ::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest.new(parent: parent), grpc_options do |response, operation|
+      client.start_manual_transfer_runs ::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest.new(parent: parent, requested_time_range: requested_time_range), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
