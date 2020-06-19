@@ -54,24 +54,14 @@ describe "Datastore task list" do
   end
 
   it "list_tasks" do
-    task1 = datastore.entity "Task" do |t|
-      t["description"] = "Test 1."
-      t["created"]     = Time.now
-      t["done"]        = false
-      t.exclude_from_indexes! "description", true
-    end
-    task2 = datastore.entity "Task" do |t|
-      t["description"] = "Test 2."
-      t["created"]     = Time.now
-      t["done"]        = false
-      t.exclude_from_indexes! "description", true
-    end
+    task1 = task_entity "Task"
+    task2 = task_entity "Task"
     datastore.save task1, task2
 
     query = datastore.query("Task").order "created"
     wait_until { datastore.run(query).any? }
 
-    assert_output(/Test 1/) do
+    assert_output(/ID:/) do
       list_tasks
     end
   end

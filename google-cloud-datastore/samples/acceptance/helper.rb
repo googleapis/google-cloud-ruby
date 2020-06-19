@@ -20,3 +20,15 @@ require "securerandom"
 def time_plus_random
   "#{Time.now.to_i}_#{SecureRandom.hex 4}"
 end
+
+def task_entity key
+  datastore.entity key do |t|
+    t["category"] = "Personal"
+    t["created"] = Time.utc 1999, 12, rand(1..31)
+    t["done"] = false
+    t["priority"] = 4
+    t["percent_complete"] = 10.0
+    t["description"] = "A task description."
+    t["tag"] = ["fun", "programming"]
+  end
+end

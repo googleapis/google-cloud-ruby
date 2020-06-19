@@ -514,18 +514,6 @@ describe "Datastore sample" do
     t
   end
 
-  def task_entity key
-    datastore.entity key do |t|
-      t["category"] = "Personal"
-      t["created"] = Time.utc 1999, 12, rand(1..31)
-      t["done"] = false
-      t["priority"] = 4
-      t["percent_complete"] = 10.0
-      t["description"] = "A task description."
-      t["tag"] = ["fun", "programming"]
-    end
-  end
-
   def assert_basic_task task
     assert_equal "Task", task.key.kind
     assert_equal "Personal", task["category"]
