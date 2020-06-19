@@ -255,6 +255,7 @@ class ::Google::Cloud::Speech::V1::Speech::ClientTest < Minitest::Test
         request.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Speech::V1::StreamingRecognizeRequest, r
           assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Speech::V1::StreamingRecognitionConfig), r.streaming_config
+          assert_equal :streaming_config, r.streaming_request
         end
       end
     end
