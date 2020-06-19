@@ -679,6 +679,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       assert_equal :lookup_entry, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::LookupEntryRequest, request
       assert_equal "hello world", request.linked_resource
+      assert_equal :linked_resource, request.target_name
       refute_nil options
     end
 
