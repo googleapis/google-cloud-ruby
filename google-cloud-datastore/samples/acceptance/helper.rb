@@ -15,3 +15,8 @@
 require "minitest/autorun"
 require "minitest/focus"
 require "google/cloud/datastore"
+require "securerandom"
+
+def time_plus_random
+  "#{Time.now.to_i}_#{SecureRandom.hex 4}"
+end

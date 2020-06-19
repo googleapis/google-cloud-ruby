@@ -17,7 +17,8 @@ require_relative "../quickstart.rb"
 
 describe "Datastore Quickstart" do
   let(:datastore) { Google::Cloud::Datastore.new }
-  let(:task_key) { datastore.key "Task", "sampletask1" }
+  let(:task_name) { "test_task_#{time_plus_random}" }
+  let(:task_key) { datastore.key "Task", task_name }
 
   before do
     task = datastore.find task_key
@@ -27,8 +28,8 @@ describe "Datastore Quickstart" do
   end
 
   it "creates a new entity" do
-    assert_output "Saved sampletask1: Buy milk\n" do
-      quickstart
+    assert_output "Saved #{task_name}: Buy milk\n" do
+      quickstart task_name: task_name
     end
 
     task = datastore.find task_key
