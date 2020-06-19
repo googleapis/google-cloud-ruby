@@ -22,8 +22,8 @@ describe "List tables" do
   end
 
   it "lists tables in a dataset" do
-    table1 = @dataset.create_table "test_table1_#{Time.now.to_i}"
-    table2 = @dataset.create_table "test_table2_#{Time.now.to_i}"
+    table1 = @dataset.create_table "test_table1_#{time_plus_random}"
+    table2 = @dataset.create_table "test_table2_#{time_plus_random}"
 
     output = capture_io { list_tables @dataset.dataset_id }
     assert_match table1.table_id, output.first

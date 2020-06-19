@@ -17,7 +17,7 @@ require_relative "helper"
 
 describe "Create dataset" do
   let(:bigquery) { Google::Cloud::Bigquery.new }
-  let(:dataset_id) { "test_dataset_#{Time.now.to_i}" }
+  let(:dataset_id) { "test_dataset_#{time_plus_random}" }
   let(:dataset_location) { "US" }
 
   after do

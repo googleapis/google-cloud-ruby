@@ -21,7 +21,7 @@ describe "Delete table" do
   end
 
   it "deletes a table" do
-    table = @dataset.create_table "test_table_#{Time.now.to_i}"
+    table = @dataset.create_table "test_table_#{time_plus_random}"
 
     delete_table @dataset.dataset_id, table.table_id
 

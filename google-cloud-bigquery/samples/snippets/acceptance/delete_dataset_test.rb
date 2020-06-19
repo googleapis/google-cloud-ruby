@@ -18,7 +18,7 @@ require_relative "helper"
 describe "Delete dataset" do
   it "deletes a dataset" do
     bigquery = Google::Cloud::Bigquery.new
-    dataset = bigquery.create_dataset "test_empty_dataset_#{Time.now.to_i}"
+    dataset = bigquery.create_dataset "test_empty_dataset_#{time_plus_random}"
 
     delete_dataset dataset.dataset_id
 

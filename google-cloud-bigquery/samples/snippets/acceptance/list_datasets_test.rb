@@ -19,8 +19,8 @@ require_relative "helper"
 describe "List datasets" do
   it "lists datasets in a project" do
     bigquery = Google::Cloud::Bigquery.new
-    dataset1 = bigquery.create_dataset "test_dataset1_#{Time.now.to_i}"
-    dataset2 = bigquery.create_dataset "test_dataset2_#{Time.now.to_i}"
+    dataset1 = bigquery.create_dataset "test_dataset1_#{time_plus_random}"
+    dataset2 = bigquery.create_dataset "test_dataset2_#{time_plus_random}"
     register_temp_datasets dataset1, dataset2
 
     output = capture_io { list_datasets bigquery.name }

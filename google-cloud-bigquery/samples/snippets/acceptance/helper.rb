@@ -14,8 +14,13 @@
 
 require "minitest/autorun"
 require "minitest/focus"
+require "securerandom"
 
 $temp_datasets = []
+
+def time_plus_random
+  "#{Time.now.to_i}_#{SecureRandom.hex(4)}"
+end
 
 def register_temp_datasets *datasets
   $temp_datasets += datasets
@@ -23,7 +28,7 @@ end
 
 def create_temp_dataset
   bigquery = Google::Cloud::Bigquery.new
-  dataset = bigquery.create_dataset "test_dataset_#{Time.now.to_i}"
+  dataset = bigquery.create_dataset "test_dataset_#{time_plus_random}"
   register_temp_datasets dataset
   dataset
 end
