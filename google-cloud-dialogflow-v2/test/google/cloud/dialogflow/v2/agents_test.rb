@@ -427,11 +427,14 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     parent = "hello world"
+    agent_uri = "hello world"
 
     import_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_agent, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::ImportAgentRequest, request
       assert_equal "hello world", request.parent
+      assert_equal "hello world", request.agent_uri
+      assert_equal :agent_uri, request.agent
       refute_nil options
     end
 
@@ -442,35 +445,35 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.import_agent({ parent: parent }) do |response, operation|
+      client.import_agent({ parent: parent, agent_uri: agent_uri }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_agent parent: parent do |response, operation|
+      client.import_agent parent: parent, agent_uri: agent_uri do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_agent ::Google::Cloud::Dialogflow::V2::ImportAgentRequest.new(parent: parent) do |response, operation|
+      client.import_agent ::Google::Cloud::Dialogflow::V2::ImportAgentRequest.new(parent: parent, agent_uri: agent_uri) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_agent({ parent: parent }, grpc_options) do |response, operation|
+      client.import_agent({ parent: parent, agent_uri: agent_uri }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_agent ::Google::Cloud::Dialogflow::V2::ImportAgentRequest.new(parent: parent), grpc_options do |response, operation|
+      client.import_agent ::Google::Cloud::Dialogflow::V2::ImportAgentRequest.new(parent: parent, agent_uri: agent_uri), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -490,11 +493,14 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     parent = "hello world"
+    agent_uri = "hello world"
 
     restore_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :restore_agent, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::RestoreAgentRequest, request
       assert_equal "hello world", request.parent
+      assert_equal "hello world", request.agent_uri
+      assert_equal :agent_uri, request.agent
       refute_nil options
     end
 
@@ -505,35 +511,35 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.restore_agent({ parent: parent }) do |response, operation|
+      client.restore_agent({ parent: parent, agent_uri: agent_uri }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.restore_agent parent: parent do |response, operation|
+      client.restore_agent parent: parent, agent_uri: agent_uri do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.restore_agent ::Google::Cloud::Dialogflow::V2::RestoreAgentRequest.new(parent: parent) do |response, operation|
+      client.restore_agent ::Google::Cloud::Dialogflow::V2::RestoreAgentRequest.new(parent: parent, agent_uri: agent_uri) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.restore_agent({ parent: parent }, grpc_options) do |response, operation|
+      client.restore_agent({ parent: parent, agent_uri: agent_uri }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.restore_agent ::Google::Cloud::Dialogflow::V2::RestoreAgentRequest.new(parent: parent), grpc_options do |response, operation|
+      client.restore_agent ::Google::Cloud::Dialogflow::V2::RestoreAgentRequest.new(parent: parent, agent_uri: agent_uri), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
