@@ -19,7 +19,7 @@ require "securerandom"
 $temp_datasets = []
 
 def time_plus_random
-  "#{Time.now.to_i}_#{SecureRandom.hex(4)}"
+  "#{Time.now.to_i}_#{SecureRandom.hex 4}"
 end
 
 def register_temp_datasets *datasets
