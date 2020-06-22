@@ -20,7 +20,7 @@ require "google/cloud/storage"
 describe "Extract table" do
   before do
     @storage = Google::Cloud::Storage.new
-    @bucket = @storage.create_bucket "test_bucket_#{Time.now.to_i}"
+    @bucket = @storage.create_bucket "test_bucket_#{time_plus_random}"
     @dataset = create_temp_dataset
     file_path = File.expand_path "../resources/people.csv", __dir__
     load_from_file @dataset.dataset_id, file_path
