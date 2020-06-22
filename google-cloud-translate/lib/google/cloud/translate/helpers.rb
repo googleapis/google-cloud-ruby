@@ -95,6 +95,13 @@ module Google
                                          timeout:     timeout,
                                          endpoint:    endpoint
       end
+
+      # Additional config keys used by V2
+      configure do |config|
+        config.add_field! :project_id, nil, match: ::String
+        config.add_field! :key,        nil, match: ::String
+        config.add_field! :retries,    nil, match: ::Integer
+      end
     end
   end
 end
