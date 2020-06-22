@@ -16,8 +16,6 @@ require_relative "helper"
 require_relative "../hmac.rb"
 
 describe "HMAC Snippets" do
-  parallelize_me!
-
   let(:storage_client)        { Google::Cloud::Storage.new }
   let(:project_id)            { storage_client.project }
   let(:service_account_email) { "#{project_id}@appspot.gserviceaccount.com" }

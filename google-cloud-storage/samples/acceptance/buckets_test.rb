@@ -16,8 +16,6 @@ require_relative "helper"
 require_relative "../buckets.rb"
 
 describe "Buckets Snippets" do
-  parallelize_me!
-
   let(:storage_client)   { Google::Cloud::Storage.new }
   let(:kms_key)          { get_kms_key storage_client.project }
   let(:retention_period) { rand 1..99 }

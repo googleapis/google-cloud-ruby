@@ -16,8 +16,6 @@ require_relative "helper"
 require_relative "../storage_enable_bucket_lifecycle_management.rb"
 
 describe "enable_bucket_lifecycle_management" do
-  parallelize_me!
-
   let(:bucket) { create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}" }
   after { delete_bucket_helper bucket.name }
 

@@ -16,8 +16,6 @@ require_relative "helper"
 require_relative "../iam.rb"
 
 describe "IAM Snippets" do
-  parallelize_me!
-
   let :bucket do
     create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}"
   end
