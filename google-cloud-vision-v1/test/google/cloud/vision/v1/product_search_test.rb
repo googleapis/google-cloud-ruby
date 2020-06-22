@@ -1163,11 +1163,16 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     product_set_purge_config = {}
+    parent = "hello world"
+    force = true
 
     purge_products_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :purge_products, name
       assert_kind_of ::Google::Cloud::Vision::V1::PurgeProductsRequest, request
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::ProductSetPurgeConfig), request.product_set_purge_config
+      assert_equal :product_set_purge_config, request.target
+      assert_equal "hello world", request.parent
+      assert_equal true, request.force
       refute_nil options
     end
 
@@ -1178,35 +1183,35 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.purge_products({ product_set_purge_config: product_set_purge_config }) do |response, operation|
+      client.purge_products({ product_set_purge_config: product_set_purge_config, parent: parent, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.purge_products product_set_purge_config: product_set_purge_config do |response, operation|
+      client.purge_products product_set_purge_config: product_set_purge_config, parent: parent, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.purge_products ::Google::Cloud::Vision::V1::PurgeProductsRequest.new(product_set_purge_config: product_set_purge_config) do |response, operation|
+      client.purge_products ::Google::Cloud::Vision::V1::PurgeProductsRequest.new(product_set_purge_config: product_set_purge_config, parent: parent, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.purge_products({ product_set_purge_config: product_set_purge_config }, grpc_options) do |response, operation|
+      client.purge_products({ product_set_purge_config: product_set_purge_config, parent: parent, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.purge_products ::Google::Cloud::Vision::V1::PurgeProductsRequest.new(product_set_purge_config: product_set_purge_config), grpc_options do |response, operation|
+      client.purge_products ::Google::Cloud::Vision::V1::PurgeProductsRequest.new(product_set_purge_config: product_set_purge_config, parent: parent, force: force), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
