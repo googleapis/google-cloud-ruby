@@ -90,6 +90,8 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
+                default_config.rpcs.create_submission.timeout = 60.0
+
                 default_config
               end
               yield @configure if block_given?
