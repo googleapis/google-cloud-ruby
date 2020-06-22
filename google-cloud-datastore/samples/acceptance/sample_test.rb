@@ -17,7 +17,9 @@ require_relative "../sample"
 
 describe "Datastore sample" do
   let(:datastore) { Google::Cloud::Datastore.new }
-  let(:task_list_key) { datastore.key "TaskList", "default" }
+  let(:user_name) { "test_user_#{time_plus_random}" }
+  let(:task_list_name) { "test_task_list_#{time_plus_random}" }
+  let(:task_list_key) { datastore.key "TaskList", task_list_name }
   let :task_list do
     tl = datastore.find task_list_key
     if tl.nil?
@@ -26,9 +28,12 @@ describe "Datastore sample" do
     end
     tl
   end
-  let(:sample_task) { find_or_save_task datastore.key("Task", "sampleTask") }
-  let(:sample_task_1) { find_or_save_task datastore.key("Task", "sampleTask1") }
-  let(:sample_task_2) { find_or_save_task datastore.key("Task", "sampleTask2") }
+  let(:task_name) { "test_task_#{time_plus_random}" }
+  let(:task_name_1) { "#{task_name}_1" }
+  let(:task_name_2) { "test_task_#{task_name}_2" }
+  let(:sample_task) { find_or_save_task datastore.key("Task", task_name) }
+  let(:sample_task_1) { find_or_save_task datastore.key("Task", task_name_1) }
+  let(:sample_task_2) { find_or_save_task datastore.key("Task", task_name_2) }
   let :list_task do
     task_key = datastore.key "Task", "listTask"
     task_key.parent = task_list.key
@@ -46,7 +51,8 @@ describe "Datastore sample" do
     datastore = Google::Cloud::Datastore.new
     tasks = datastore.run datastore.query("Task")
     datastore.delete(*tasks.map(&:key)) unless tasks.empty?
-    datastore.delete datastore.key("TaskList", "default")
+    task_lists = datastore.run datastore.query("TaskList")
+    datastore.delete(*task_lists.map(&:key)) unless task_lists.empty?
     accounts = datastore.run datastore.query("Account")
     datastore.delete(*accounts.map(&:key)) unless accounts.empty?
   end
@@ -59,33 +65,33 @@ describe "Datastore sample" do
   end
 
   it "supports named_key" do
-    task_key = named_key
+    task_key = named_key task_name: task_name
 
     assert_equal "Task", task_key.kind
-    assert_equal "sampleTask", task_key.name
+    assert_equal task_name, task_key.name
   end
 
   it "supports key_with_parent" do
-    task_key = key_with_parent
+    task_key = key_with_parent task_list_name: task_list_name, task_name: task_name
 
     assert_equal "Task", task_key.kind
-    assert_equal "sampleTask", task_key.name
-    assert_equal [["TaskList", "default"], ["Task", "sampleTask"]], task_key.path
+    assert_equal task_name, task_key.name
+    assert_equal [["TaskList", task_list_name], ["Task", task_name]], task_key.path
   end
 
   it "supports key_with_multilevel_parent" do
-    task_key = key_with_multilevel_parent
+    task_key = key_with_multilevel_parent user_name: user_name, task_list_name: task_list_name, task_name: task_name
 
     assert_equal "Task", task_key.kind
-    assert_equal "sampleTask", task_key.name
-    assert_equal [["User", "alice"], ["TaskList", "default"], ["Task", "sampleTask"]], task_key.path
+    assert_equal task_name, task_key.name
+    assert_equal [["User", user_name], ["TaskList", task_list_name], ["Task", task_name]], task_key.path
   end
 
   it "supports entity_with_parent" do
-    task = entity_with_parent
+    task = entity_with_parent task_list_name: task_list_name, task_name: task_name
 
-    assert_equal "sampleTask", task.key.name
-    assert_equal [["TaskList", "default"], ["Task", "sampleTask"]], task.key.path
+    assert_equal task_name, task.key.name
+    assert_equal [["TaskList", task_list_name], ["Task", task_name]], task.key.path
     refute task.persisted?
     assert_basic_task task
   end
@@ -106,7 +112,7 @@ describe "Datastore sample" do
   end
 
   it "supports array_value" do
-    task = array_value
+    task = array_value task_name: task_name
 
     assert_equal 2, task.properties.to_h.size
     assert_equal ["fun", "programming"], task["tags"]
@@ -121,10 +127,10 @@ describe "Datastore sample" do
   end
 
   it "supports upsert" do
-    task = upsert
+    task = upsert task_name: task_name
 
     assert task.key.id.nil?
-    assert_equal "sampleTask", task.key.name
+    assert_equal task_name, task.key.name
     assert task.persisted?
     assert_basic_task task
   end
@@ -139,16 +145,16 @@ describe "Datastore sample" do
   end
 
   it "supports lookup" do
-    task = lookup
+    task = lookup task_name: task_name
 
     assert task.key.id.nil?
-    assert_equal "sampleTask", task.key.name
+    assert_equal task_name, task.key.name
     assert task.persisted?
     assert_basic_task task
   end
 
   it "supports update" do
-    task = update
+    task = update task_name: task_name
 
     assert task.persisted?
     assert_equal 4, task.properties.to_h.size
@@ -159,9 +165,9 @@ describe "Datastore sample" do
   end
 
   it "supports delete" do
-    task_key = delete
+    task_key = delete task_name: task_name
 
-    assert_equal "sampleTask", task_key.name
+    assert_equal task_name, task_key.name
     task = datastore.find task_key
     assert task.nil?
   end
@@ -176,17 +182,17 @@ describe "Datastore sample" do
   end
 
   it "supports batch_lookup" do
-    tasks = batch_lookup
+    tasks = batch_lookup task_name_1: task_name_1, task_name_2: task_name_2
 
     assert_equal 2, tasks.size
     assert_basic_task tasks.first
   end
 
   it "supports batch_delete" do
-    task_key1, task_key2 = batch_delete
+    task_key1, task_key2 = batch_delete task_name_1: task_name_1, task_name_2: task_name_2
 
-    assert_equal "sampleTask1", task_key1.name
-    assert_equal "sampleTask2", task_key2.name
+    assert_equal task_name_1, task_key1.name
+    assert_equal task_name_2, task_key2.name
     tasks = datastore.find_all task_key1, task_key2
     assert tasks.empty?
   end
@@ -264,7 +270,7 @@ describe "Datastore sample" do
   end
 
   it "supports ancestor_query" do
-    query = ancestor_query
+    query = ancestor_query task_list_name: task_list_name
     tasks = datastore.run query
 
     refute tasks.empty?
@@ -384,7 +390,7 @@ describe "Datastore sample" do
   end
 
   it "supports eventual_consistent_query" do
-    tasks = eventual_consistent_query
+    tasks = eventual_consistent_query task_list_name: task_list_name
 
     refute tasks.empty?
     assert_equal "Task", tasks.first.key.kind
@@ -445,18 +451,18 @@ describe "Datastore sample" do
   end
 
   it "supports transactional_get_or_create" do
-    task_key = datastore.key "Task", "sampleTask"
+    task_key = datastore.key "Task", task_name
 
     task = transactional_get_or_create task_key
 
     assert task.key.id.nil?
-    assert_equal "sampleTask", task.key.name
+    assert_equal task_name, task.key.name
     assert task.persisted?
     assert_basic_task task
   end
 
   it "supports transactional_single_entity_group_read_only" do
-    tasks_in_list = transactional_single_entity_group_read_only
+    tasks_in_list = transactional_single_entity_group_read_only task_list_name: task_list_name
 
     refute tasks_in_list.empty?
     assert_equal "Task", tasks_in_list.first.key.kind
@@ -506,18 +512,6 @@ describe "Datastore sample" do
       datastore.save t
     end
     t
-  end
-
-  def task_entity key
-    datastore.entity key do |t|
-      t["category"] = "Personal"
-      t["created"] = Time.utc 1999, 12, rand(1..31)
-      t["done"] = false
-      t["priority"] = 4
-      t["percent_complete"] = 10.0
-      t["description"] = "A task description."
-      t["tag"] = ["fun", "programming"]
-    end
   end
 
   def assert_basic_task task

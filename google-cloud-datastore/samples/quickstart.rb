@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def quickstart
+def quickstart task_name:
   # [START datastore_quickstart]
   # [START require_library]
   # Imports the Google Cloud client library
@@ -25,9 +25,9 @@ def quickstart
   # The kind for the new entity
   kind = "Task"
   # The name/ID for the new entity
-  name = "sampletask1"
+  # task_name = "sampleTask"
   # The Cloud Datastore key for the new entity
-  task_key = datastore.key kind, name
+  task_key = datastore.key kind, task_name
 
   # Prepares the new entity
   task = datastore.entity task_key do |t|

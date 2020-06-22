@@ -22,43 +22,51 @@ def incomplete_key
   # [END datastore_incomplete_key]
 end
 
-def named_key
+def named_key task_name:
   datastore = Google::Cloud::Datastore.new
 
   # [START datastore_named_key]
-  task_key = datastore.key "Task", "sampleTask"
+  # task_name = "sampleTask"
+  task_key = datastore.key "Task", task_name
   # [END datastore_named_key]
 end
 
-def key_with_parent
+def key_with_parent task_list_name:, task_name:
   datastore = Google::Cloud::Datastore.new
 
   # [START datastore_key_with_parent]
-  task_key = datastore.key [["TaskList", "default"], ["Task", "sampleTask"]]
+  # task_list_name = "default"
+  # task_name = "sampleTask"
+  task_key = datastore.key [["TaskList", task_list_name], ["Task", task_name]]
   # [END datastore_key_with_parent]
 
   task_key
 end
 
-def key_with_multilevel_parent
+def key_with_multilevel_parent user_name:, task_list_name:, task_name:
   datastore = Google::Cloud::Datastore.new
 
   # [START datastore_key_with_multilevel_parent]
+  # user_name = "alice"
+  # task_list_name = "default"
+  # task_name = "sampleTask"
   task_key = datastore.key([
-                             ["User", "alice"],
-                             ["TaskList", "default"],
-                             ["Task", "sampleTask"]
+                             ["User", user_name],
+                             ["TaskList", task_list_name],
+                             ["Task", task_name]
                            ])
   # [END datastore_key_with_multilevel_parent]
 
   task_key
 end
 
-def entity_with_parent
+def entity_with_parent task_list_name:, task_name:
   datastore = Google::Cloud::Datastore.new
 
   # [START datastore_entity_with_parent]
-  task_key = datastore.key [["TaskList", "default"], ["Task", "sampleTask"]]
+  # task_list_name = "default"
+  # task_name = "sampleTask"
+  task_key = datastore.key [["TaskList", task_list_name], ["Task", task_name]]
 
   task = datastore.entity task_key do |t|
     t["category"] = "Personal"
@@ -89,11 +97,12 @@ def properties
   task
 end
 
-def array_value
+def array_value task_name:
   datastore = Google::Cloud::Datastore.new
 
   # [START datastore_array_value]
-  task = datastore.entity "Task", "sampleTask" do |t|
+  # task_name = "sampleTask"
+  task = datastore.entity "Task", task_name do |t|
     t["tags"] = ["fun", "programming"]
     t["collaborators"] = ["alice", "bob"]
   end
@@ -115,11 +124,12 @@ def basic_entity
   task
 end
 
-def upsert
+def upsert task_name:
   datastore = Google::Cloud::Datastore.new
 
   # [START datastore_upsert]
-  task = datastore.entity "Task", "sampleTask" do |t|
+  # task_name = "sampleTask"
+  task = datastore.entity "Task", task_name do |t|
     t["category"] = "Personal"
     t["done"] = false
     t["priority"] = 4
@@ -150,21 +160,22 @@ def insert
   task
 end
 
-def lookup
+def lookup task_name:
   datastore = Google::Cloud::Datastore.new
 
   # [START datastore_lookup]
-  task_key = datastore.key "Task", "sampleTask"
+  # task_name = "sampleTask"
+  task_key = datastore.key "Task", task_name
   task = datastore.find task_key
   # [END datastore_lookup]
 
   task
 end
 
-def update
+def update task_name:
   datastore = Google::Cloud::Datastore.new
 
-  task = datastore.entity "Task", "sampleTask" do |t|
+  task = datastore.entity "Task", task_name do |t|
     t["category"] = "Personal"
     t["done"] = false
     t["priority"] = 4
@@ -173,8 +184,9 @@ def update
   datastore.save task
 
   # [START datastore_update]
+  # task_name = "sampleTask"
   datastore.transaction do |_tx|
-    task = datastore.find "Task", "sampleTask"
+    task = datastore.find "Task", task_name
     task["priority"] = 5
     datastore.save task
   end
@@ -183,11 +195,12 @@ def update
   task
 end
 
-def delete
+def delete task_name:
   datastore = Google::Cloud::Datastore.new
 
   # [START datastore_delete]
-  task_key = datastore.key "Task", "sampleTask"
+  # task_name = "sampleTask"
+  task_key = datastore.key "Task", task_name
   datastore.delete task_key
   # [END datastore_delete]
 
@@ -198,48 +211,52 @@ def batch_upsert
   datastore = Google::Cloud::Datastore.new
 
   # [START datastore_batch_upsert]
-  task1 = datastore.entity "Task" do |t|
+  task_1 = datastore.entity "Task" do |t|
     t["category"] = "Personal"
     t["done"] = false
     t["priority"] = 4
     t["description"] = "Learn Cloud Datastore"
   end
 
-  task2 = datastore.entity "Task" do |t|
+  task_2 = datastore.entity "Task" do |t|
     t["category"] = "Personal"
     t["done"] = false
     t["priority"] = 5
     t["description"] = "Integrate Cloud Datastore"
   end
 
-  tasks = datastore.save task1, task2
-  task_key1 = tasks[0].key
-  task_key2 = tasks[1].key
+  tasks = datastore.save task_1, task_2
+  task_key_1 = tasks[0].key
+  task_key_2 = tasks[1].key
   # [END datastore_batch_upsert]
 
-  [task_key1, task_key2]
+  [task_key_1, task_key_2]
 end
 
-def batch_lookup
+def batch_lookup task_name_1:, task_name_2:
   datastore = Google::Cloud::Datastore.new
 
   # [START datastore_batch_lookup]
-  task_key1 = datastore.key "Task", "sampleTask1"
-  task_key2 = datastore.key "Task", "sampleTask2"
-  tasks = datastore.find_all task_key1, task_key2
+  # task_name_1 = "sampleTask1"
+  # task_name_2 = "sampleTask2"
+  task_key_1 = datastore.key "Task", task_name_1
+  task_key_2 = datastore.key "Task", task_name_2
+  tasks = datastore.find_all task_key_1, task_key_2
   # [END datastore_batch_lookup]
 end
 
-def batch_delete
+def batch_delete task_name_1:, task_name_2:
   datastore = Google::Cloud::Datastore.new
 
   # [START datastore_batch_delete]
-  task_key1 = datastore.key "Task", "sampleTask1"
-  task_key2 = datastore.key "Task", "sampleTask2"
-  datastore.delete task_key1, task_key2
+  # task_name_1 = "sampleTask1"
+  # task_name_2 = "sampleTask2"
+  task_key_1 = datastore.key "Task", task_name_1
+  task_key_2 = datastore.key "Task", task_name_2
+  datastore.delete task_key_1, task_key_2
   # [END datastore_batch_delete]
 
-  [task_key1, task_key2]
+  [task_key_1, task_key_2]
 end
 
 def basic_query
@@ -325,11 +342,12 @@ def kindless_query
   query
 end
 
-def ancestor_query
+def ancestor_query task_list_name:
   datastore = Google::Cloud::Datastore.new
 
   # [START datastore_ancestor_query]
-  ancestor_key = datastore.key "TaskList", "default"
+  # task_list_name = "default"
+  ancestor_key = datastore.key "TaskList", task_list_name
 
   query = datastore.query("Task")
                    .ancestor(ancestor_key)
@@ -489,9 +507,10 @@ def cursor_paging
   # [END datastore_cursor_paging]
 end
 
-def eventual_consistent_query
+def eventual_consistent_query task_list_name:
   # [START datastore_eventual_consistent_query]
-  ancestor_key = datastore.key "TaskList", "default"
+  # task_list_name = "default"
+  ancestor_key = datastore.key "TaskList", task_list_name
 
   query = datastore.query("Task")
                    .ancestor(ancestor_key)
@@ -566,10 +585,11 @@ def transactional_get_or_create task_key
   task
 end
 
-def transactional_single_entity_group_read_only
+def transactional_single_entity_group_read_only task_list_name:
   tasks_in_list = nil
   # [START datastore_transactional_single_entity_group_read_only]
-  task_list_key = datastore.key "TaskList", "default"
+  # task_list_name = "default"
+  task_list_key = datastore.key "TaskList", task_list_name
   datastore.read_only_transaction do |tx|
     task_list = tx.find task_list_key
     query = datastore.query("Task").ancestor(task_list)
