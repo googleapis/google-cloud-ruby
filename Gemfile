@@ -18,8 +18,6 @@ gem "gems", "~> 0.8"
 gem "actionpack", "~> 5.0"
 gem "railties", "~> 5.0"
 gem "rack", ">= 0.1"
-# google-protobuf 3.12.0 requires Ruby 2.5 or later, so pin to 3.11 on older Rubies
-gem "google-protobuf", (RUBY_VERSION < "2.5" ? "~> 3.11.4" : "~> 3.12")
 
 gem "google-cloud-access_approval", path: "google-cloud-access_approval"
 gem "google-cloud-access_approval-v1", path: "google-cloud-access_approval-v1"

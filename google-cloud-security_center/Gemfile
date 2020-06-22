@@ -4,6 +4,3 @@ gemspec
 
 gem "google-cloud-security_center-v1", path: "../google-cloud-security_center-v1"
 gem "google-cloud-security_center-v1p1beta1", path: "../google-cloud-security_center-v1p1beta1"
-
-# google-protobuf 3.12.0 requires Ruby 2.5 or later, so pin to 3.11 on older Rubies
-gem "google-protobuf", (RUBY_VERSION < "2.5" ? "~> 3.11.4" : "~> 3.12")
