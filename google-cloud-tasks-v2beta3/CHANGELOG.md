@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2020-06-22
+
+#### Features
+
+* Include the type in the queue object
+
 ### 0.2.3 / 2020-06-18
 
 #### Documentation
