@@ -1,5 +1,11 @@
 # Release History
 
+### 3.0.1 / 2020-06-22
+
+#### Bug Fixes
+
+* Declare the project_id configuration key (used by the V2 client)
+
 ### 3.0.0 / 2020-06-18
 
 This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
