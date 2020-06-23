@@ -31,6 +31,7 @@ describe "HMAC Snippets" do
 
   describe "list_hmac_keys" do
     it "lists the hmac keys for a GCP project" do
+      skip "hmac"
       access_id = hmac_key.access_id
 
       out, _err = capture_io do
@@ -44,6 +45,7 @@ describe "HMAC Snippets" do
 
   describe "create_hmac_key" do
     it "creates an hmac key" do
+      skip "hmac"
       out, _err = capture_io do
         create_hmac_key service_account_email: service_account_email
       end
@@ -58,6 +60,7 @@ describe "HMAC Snippets" do
 
   describe "get_hmac_key" do
     it "gets an hmac key from an access_id" do
+      skip "hmac"
       access_id = hmac_key.access_id
 
       out, _err = capture_io do
@@ -70,6 +73,7 @@ describe "HMAC Snippets" do
 
   describe "activate_hmac_key" do
     it "activates an hmac key from an access_id" do
+      skip "hmac"
       hmac_key.inactive!
 
       out, _err = capture_io do
@@ -84,6 +88,7 @@ describe "HMAC Snippets" do
 
   describe "deactivate_hmac_key" do
     it "deactivates an hmac key from an access_id" do
+      skip "hmac"
       out, _err = capture_io do
         deactivate_hmac_key access_id: hmac_key.access_id
       end
@@ -96,6 +101,7 @@ describe "HMAC Snippets" do
 
   describe "delete_hmac_key" do
     it "deletes an hmac key from an access_id" do
+      skip "hmac"
       hmac_key.inactive!
       access_id = hmac_key.access_id
 
