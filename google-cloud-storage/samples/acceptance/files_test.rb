@@ -14,14 +14,13 @@
 
 require_relative "helper"
 require_relative "../files.rb"
+require "minitest/hooks/default"
 
 describe "Files Snippets" do
-  let :bucket do
-    create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}"
-  end
 
-  let :secondary_bucket do
-    create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}_secondary"
+  before :all do
+    @bucket = create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}"
+    @secondary_bucket = create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}_secondary"
   end
 
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -30,117 +29,99 @@ describe "Files Snippets" do
   let(:kms_key)          { get_kms_key storage_client.project }
   let(:remote_file_name) { "path/file_name.txt" }
   let(:downloaded_file)  { "test_download_#{SecureRandom.hex}" }
+  let(:bucket) { @bucket }
+  let(:secondary_bucket) { @secondary_bucket }
 
   after do
+    bucket.files.each(&:delete)
     File.delete downloaded_file if File.file? downloaded_file
-    delete_bucket_helper bucket.name
-    delete_bucket_helper secondary_bucket.name
   end
 
-  describe "list_bucket_contents" do
-    it "puts the bucket's contents" do
-      bucket.create_file local_file, "foo.txt"
-      bucket.create_file local_file, "bar.txt"
-
-      out, _err = capture_io do
-        list_bucket_contents bucket_name: bucket.name
-      end
-
-      assert_match "foo.txt", out
-      assert_match "bar.txt", out
-    end
+  after :all do
+    delete_bucket_helper @bucket.name
+    delete_bucket_helper @secondary_bucket.name
   end
 
-  describe "list_bucket_contents_with_prefix" do
-    it "puts the bucket's contents that begin with the prefix" do
-      ["foo/file.txt", "foo/data.txt", "bar/file.txt", "bar/data.txt"].each do |file|
-        bucket.create_file local_file, file
-      end
+  it "list_bucket_contents" do
+    bucket.create_file local_file, "foo.txt"
+    bucket.create_file local_file, "bar.txt"
 
-      out, _err = capture_io do
-        list_bucket_contents_with_prefix bucket_name: bucket.name, prefix: "foo/"
-      end
-
-      assert_match "foo/file.txt", out
-      assert_match "foo/data.txt", out
+    out, _err = capture_io do
+      list_bucket_contents bucket_name: bucket.name
     end
 
-    it "omits the bucket's contents that don't begin with the prefix" do
-      ["foo/file.txt", "foo/data.txt", "bar/file.txt", "bar/data.txt"].each do |file|
-        bucket.create_file local_file, file
-      end
-
-      out, _err = capture_io do
-        list_bucket_contents_with_prefix bucket_name: bucket.name, prefix: "foo/"
-      end
-
-      refute_match "bar/file.txt", out
-      refute_match "bar/data.txt", out
-    end
+    assert_match "foo.txt", out
+    assert_match "bar.txt", out
   end
 
-  describe "generate_encryption_key_base64" do
-    it "can generate a base64 encoded encryption key" do
-      mock_cipher = Minitest::Mock.new
+  it "list_bucket_contents_with_prefix" do
+    ["foo/file.txt", "foo/data.txt", "bar/file.txt", "bar/data.txt"].each do |file|
+      bucket.create_file local_file, file
+    end
 
-      def mock_cipher.encrypt
-        self
-      end
+    out, _err = capture_io do
+      list_bucket_contents_with_prefix bucket_name: bucket.name, prefix: "foo/"
+    end
 
-      def mock_cipher.random_key
-        @key ||= OpenSSL::Cipher.new("aes-256-cfb").encrypt.random_key
-      end
+    assert_match "foo/file.txt", out
+    assert_match "foo/data.txt", out
+    refute_match "bar/file.txt", out
+    refute_match "bar/data.txt", out
+  end
 
-      encryption_key_base64 = Base64.encode64 mock_cipher.random_key
+  it "generate_encryption_key_base64" do
+    mock_cipher = Minitest::Mock.new
 
-      OpenSSL::Cipher.stub :new, mock_cipher do
-        assert_output "Sample encryption key: #{encryption_key_base64}" do
-          generate_encryption_key_base64
-        end
+    def mock_cipher.encrypt
+      self
+    end
+
+    def mock_cipher.random_key
+      @key ||= OpenSSL::Cipher.new("aes-256-cfb").encrypt.random_key
+    end
+
+    encryption_key_base64 = Base64.encode64 mock_cipher.random_key
+
+    OpenSSL::Cipher.stub :new, mock_cipher do
+      assert_output "Sample encryption key: #{encryption_key_base64}" do
+        generate_encryption_key_base64
       end
     end
   end
 
-  describe "upload_file" do
-    it "uploads a file to a storage bucket" do
-      assert_output "Uploaded #{remote_file_name}\n" do
-        upload_file bucket_name: bucket.name, local_file_path: local_file, storage_file_path: remote_file_name
-      end
-
-      assert_equal bucket.files.first.name, remote_file_name
+  it "upload_file" do
+    assert_output "Uploaded #{remote_file_name}\n" do
+      upload_file bucket_name: bucket.name, local_file_path: local_file, storage_file_path: remote_file_name
     end
+
+    assert_equal bucket.files.first.name, remote_file_name
   end
 
-  describe "upload_encrypted_file" do
-    it "uploads a file to a storage bucket with an encryption key" do
-      assert_output "Uploaded #{remote_file_name} with encryption key\n" do
-        upload_encrypted_file bucket_name:       bucket.name,
-                              local_file_path:   local_file,
-                              storage_file_path: remote_file_name,
-                              encryption_key:    encryption_key
-      end
-
-      assert_equal bucket.files.first.name, remote_file_name
-      refute_nil bucket.files.first.encryption_key_sha256
-    end
-  end
-
-  describe "upload_with_kms_key" do
-    it "uploads a file to a storage bucket with an encryption key" do
-      assert_output(/Uploaded #{remote_file_name} and encrypted service side using #{kms_key}/) do
-        upload_with_kms_key bucket_name:       bucket.name,
+  it "upload_encrypted_file" do
+    assert_output "Uploaded #{remote_file_name} with encryption key\n" do
+      upload_encrypted_file bucket_name:       bucket.name,
                             local_file_path:   local_file,
                             storage_file_path: remote_file_name,
-                            kms_key:           kms_key
-      end
-
-      assert_equal bucket.files.first.name, remote_file_name
-      assert_match kms_key, bucket.files.first.kms_key
+                            encryption_key:    encryption_key
     end
+
+    assert_equal bucket.files.first.name, remote_file_name
+    refute_nil bucket.files.first.encryption_key_sha256
   end
 
-  describe "download_file" do
-    it "downloads a file from a storage bucket" do
+  it "upload_with_kms_key" do
+    assert_output(/Uploaded #{remote_file_name} and encrypted service side using #{kms_key}/) do
+      upload_with_kms_key bucket_name:       bucket.name,
+                          local_file_path:   local_file,
+                          storage_file_path: remote_file_name,
+                          kms_key:           kms_key
+    end
+
+    assert_equal bucket.files.first.name, remote_file_name
+    assert_match kms_key, bucket.files.first.kms_key
+  end
+
+  it "download_file" do
       bucket.create_file local_file, remote_file_name
 
       assert_output "Downloaded #{remote_file_name}\n" do
@@ -150,11 +131,9 @@ describe "Files Snippets" do
       end
 
       assert File.file? downloaded_file
-    end
   end
 
-  describe "download_public_file" do
-    it "downloads a file from a public storage bucket" do
+  it "download_public_file" do
       bucket.create_file local_file, remote_file_name
 
       assert_output "Downloaded #{remote_file_name}\n" do
@@ -164,11 +143,9 @@ describe "Files Snippets" do
       end
 
       assert File.file? downloaded_file
-    end
   end
 
-  describe "download_file_requester_pays" do
-    it "downloads a file from a bucket using requester pays" do
+  it "download_file_requester_pays" do
       bucket.requester_pays = true
       bucket.create_file local_file, remote_file_name
 
@@ -179,11 +156,9 @@ describe "Files Snippets" do
       end
 
       assert File.file? downloaded_file
-    end
   end
 
-  describe "download_encrypted_file" do
-    it "downloads an encrypted file from storage bucket" do
+  it "download_encrypted_file" do
       bucket.create_file local_file, remote_file_name, encryption_key: encryption_key
 
       assert_output "Downloaded encrypted #{remote_file_name}\n" do
@@ -195,11 +170,9 @@ describe "Files Snippets" do
 
       assert File.file? downloaded_file
       assert_equal File.read(local_file), File.read(downloaded_file)
-    end
   end
 
-  describe "delete_file" do
-    it "deletes a file from storage bucket" do
+  it "delete_file" do
       bucket.create_file local_file, remote_file_name
 
       assert_output "Deleted #{remote_file_name}\n" do
@@ -208,11 +181,9 @@ describe "Files Snippets" do
       end
 
       assert_nil bucket.file remote_file_name
-    end
   end
 
-  describe "list_file_details" do
-    it "puts the details of a file from storage bucket" do
+  it "list_file_details" do
       bucket.create_file local_file, remote_file_name
 
       file = bucket.file remote_file_name
@@ -246,11 +217,9 @@ describe "Files Snippets" do
         list_file_details bucket_name: bucket.name,
                           file_name:   remote_file_name
       end
-    end
   end
 
-  describe "set_metadata" do
-    it "sets the metadata for a file in a storage bucket" do
+  it "set_metadata" do
       bucket.create_file local_file, remote_file_name
 
       metadata_key   = "test-metadata-key"
@@ -266,11 +235,9 @@ describe "Files Snippets" do
       end
 
       assert_equal bucket.file(remote_file_name).metadata[metadata_key], metadata_value
-    end
   end
 
-  describe "make_file_public" do
-    it "makes a file from a storage bucket publicly accessible from a url" do
+  it "make_file_public" do
       bucket.create_file local_file, remote_file_name
       response = Net::HTTP.get URI(bucket.file(remote_file_name).public_url)
       refute_equal File.read(local_file), response
@@ -282,11 +249,9 @@ describe "Files Snippets" do
 
       response = Net::HTTP.get URI(bucket.file(remote_file_name).public_url)
       assert_equal File.read(local_file), response
-    end
   end
 
-  describe "rename_file" do
-    it "renames a file in a storage bucket" do
+  it "rename_file" do
       bucket.create_file local_file, remote_file_name
 
       new_name = "path/new_name.txt"
@@ -300,11 +265,9 @@ describe "Files Snippets" do
 
       assert_nil bucket.file remote_file_name
       refute_nil bucket.file new_name
-    end
   end
 
-  describe "copy_file" do
-    it "copies a file from one storage bucket to another" do
+  it "copy_file" do
       bucket.create_file local_file, remote_file_name
       assert_nil secondary_bucket.file remote_file_name
 
@@ -317,11 +280,9 @@ describe "Files Snippets" do
 
       refute_nil bucket.file remote_file_name
       refute_nil secondary_bucket.file remote_file_name
-    end
   end
 
-  describe "rotate_encryption_key" do
-    it "changes the encryption key used for a file in a storage bucket" do
+  it "rotate_encryption_key" do
       bucket.create_file local_file, remote_file_name, encryption_key: encryption_key
 
       new_encryption_key = OpenSSL::Cipher.new("aes-256-cfb").encrypt.random_key
@@ -337,11 +298,9 @@ describe "Files Snippets" do
       bucket.file(remote_file_name).download downloaded_file, encryption_key: new_encryption_key
       downloaded_contents = File.read downloaded_file
       assert_equal file_contents, downloaded_contents
-    end
   end
 
-  describe "generate_signed_url" do
-    it "generates a signed url for a file in a bucket" do
+  it "generate_signed_url" do
       bucket.create_file local_file, remote_file_name
 
       out, _err = capture_io do
@@ -355,11 +314,9 @@ describe "Files Snippets" do
 
       file_contents = Net::HTTP.get URI(signed_url)
       assert_equal file_contents, File.read(local_file)
-    end
   end
 
-  describe "generate_signed_get_url_v4" do
-    it "generates a v4 signed get url for a file in a bucket" do
+  it "generate_signed_get_url_v4" do
       bucket.create_file local_file, remote_file_name
 
       out, _err = capture_io do
@@ -372,11 +329,9 @@ describe "Files Snippets" do
 
       file_contents = Net::HTTP.get URI(signed_url)
       assert_equal file_contents, File.read(local_file)
-    end
   end
 
-  describe "generate_signed_put_url_v4" do
-    it "generates a v4 signed put url for a file in a bucket" do
+  it "generate_signed_put_url_v4" do
       refute bucket.file remote_file_name
 
       out, _err = capture_io do
@@ -398,11 +353,9 @@ describe "Files Snippets" do
       assert_equal response.code, "200"
 
       assert bucket.file remote_file_name
-    end
   end
 
-  describe "generate_signed_post_policy_v4" do
-    it "generates a v4 signed post policy v4 for a file in a bucket" do
+  it "generate_signed_post_policy_v4" do
       refute bucket.file remote_file_name
 
       out, _err = capture_io do
@@ -419,11 +372,9 @@ describe "Files Snippets" do
       assert_includes out, "<input name='policy'"
       assert_includes out, "<input name='x-goog-meta-test' value='data'"
       assert_includes out, "<input type='file' name='file'/>"
-    end
   end
 
-  describe "set_event_based_hold" do
-    it "sets an event-based hold for a file in a bucket" do
+  it "set_event_based_hold" do
       bucket.create_file local_file, remote_file_name
 
       assert_output "Event-based hold was set for #{remote_file_name}.\n" do
@@ -433,11 +384,9 @@ describe "Files Snippets" do
 
       assert bucket.file(remote_file_name).event_based_hold?
       bucket.file(remote_file_name).release_event_based_hold!
-    end
   end
 
-  describe "release_event_based_hold" do
-    it "releases an event-based hold for a file in a bucket" do
+  it "release_event_based_hold" do
       bucket.create_file local_file, remote_file_name
       bucket.file(remote_file_name).set_event_based_hold!
       assert bucket.file(remote_file_name).event_based_hold?
@@ -448,11 +397,9 @@ describe "Files Snippets" do
       end
 
       refute bucket.file(remote_file_name).event_based_hold?
-    end
   end
 
-  describe "set_temporary_hold" do
-    it "sets a temporary hold for a file in a bucket" do
+  it "set_temporary_hold" do
       bucket.create_file local_file, remote_file_name
       refute bucket.file(remote_file_name).temporary_hold?
 
@@ -463,11 +410,22 @@ describe "Files Snippets" do
 
       assert bucket.file(remote_file_name).temporary_hold?
       bucket.file(remote_file_name).release_temporary_hold!
-    end
   end
 
-  describe "release_temporary_hold" do
-    it "releases a temporary hold for a file in a bucket" do
+  it "release_temporary_hold" do
+      bucket.create_file local_file, remote_file_name
+      bucket.file(remote_file_name).set_temporary_hold!
+      assert bucket.file(remote_file_name).temporary_hold?
+
+      assert_output "Temporary hold was released for #{remote_file_name}.\n" do
+        release_temporary_hold bucket_name: bucket.name,
+                               file_name:   remote_file_name
+      end
+
+      refute bucket.file(remote_file_name).temporary_hold?
+  end
+
+  it "release_temporary_hold" do
       bucket.create_file local_file, remote_file_name
       bucket.file(remote_file_name).set_temporary_hold!
       assert bucket.file(remote_file_name).temporary_hold?
@@ -479,20 +437,4 @@ describe "Files Snippets" do
 
       refute bucket.file(remote_file_name).temporary_hold?
     end
-  end
-
-  describe "release_temporary_hold" do
-    it "releases a temporary hold for a file in a bucket" do
-      bucket.create_file local_file, remote_file_name
-      bucket.file(remote_file_name).set_temporary_hold!
-      assert bucket.file(remote_file_name).temporary_hold?
-
-      assert_output "Temporary hold was released for #{remote_file_name}.\n" do
-        release_temporary_hold bucket_name: bucket.name,
-                               file_name:   remote_file_name
-      end
-
-      refute bucket.file(remote_file_name).temporary_hold?
-    end
-  end
 end
