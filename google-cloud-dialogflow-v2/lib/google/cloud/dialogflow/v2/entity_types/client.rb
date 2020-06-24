@@ -92,54 +92,12 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.list_entity_types.timeout = 60.0
-                default_config.rpcs.list_entity_types.retry_policy = {
+                default_config.timeout = 60.0
+                default_config.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.get_entity_type.timeout = 60.0
-                default_config.rpcs.get_entity_type.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.create_entity_type.timeout = 60.0
-
-                default_config.rpcs.update_entity_type.timeout = 60.0
-
-                default_config.rpcs.delete_entity_type.timeout = 60.0
-                default_config.rpcs.delete_entity_type.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.batch_update_entity_types.timeout = 60.0
-
-                default_config.rpcs.batch_delete_entity_types.timeout = 60.0
-                default_config.rpcs.batch_delete_entity_types.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.batch_create_entities.timeout = 60.0
-
-                default_config.rpcs.batch_update_entities.timeout = 60.0
-
-                default_config.rpcs.batch_delete_entities.timeout = 60.0
-                default_config.rpcs.batch_delete_entities.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["UNAVAILABLE"]
                 }
 
                 default_config

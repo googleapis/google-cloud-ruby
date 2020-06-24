@@ -65,62 +65,12 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.get_agent.timeout = 60.0
-                default_config.rpcs.get_agent.retry_policy = {
+                default_config.timeout = 60.0
+                default_config.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.set_agent.timeout = 60.0
-                default_config.rpcs.set_agent.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.delete_agent.timeout = 60.0
-                default_config.rpcs.delete_agent.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.search_agents.timeout = 60.0
-                default_config.rpcs.search_agents.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.train_agent.timeout = 60.0
-                default_config.rpcs.train_agent.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.export_agent.timeout = 60.0
-                default_config.rpcs.export_agent.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.import_agent.timeout = 60.0
-
-                default_config.rpcs.restore_agent.timeout = 60.0
-                default_config.rpcs.restore_agent.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["UNAVAILABLE"]
                 }
 
                 default_config
@@ -645,9 +595,15 @@ module Google
             #
             # Uploads new intents and entity types without deleting the existing ones.
             # Intents and entity types with the same name are replaced with the new
-            # versions from ImportAgentRequest.
+            # versions from {::Google::Cloud::Dialogflow::V2::ImportAgentRequest ImportAgentRequest}. After the import, the imported draft
+            # agent will be trained automatically (unless disabled in agent settings).
+            # However, once the import is done, training may not be completed yet. Please
+            # call {::Google::Cloud::Dialogflow::V2::Agents::Client#train_agent TrainAgent} and wait for the operation it returns in order to train
+            # explicitly.
             #
             # Operation <response: {::Google::Protobuf::Empty google.protobuf.Empty}>
+            # An operation which tracks when importing is complete. It only tracks
+            # when the draft agent is updated not when it is done training.
             #
             # @overload import_agent(request, options = nil)
             #   Pass arguments to `import_agent` via a request object, either of type
@@ -723,9 +679,15 @@ module Google
             # Restores the specified agent from a ZIP file.
             #
             # Replaces the current agent version with a new one. All the intents and
-            # entity types in the older version are deleted.
+            # entity types in the older version are deleted. After the restore, the
+            # restored draft agent will be trained automatically (unless disabled in
+            # agent settings). However, once the restore is done, training may not be
+            # completed yet. Please call {::Google::Cloud::Dialogflow::V2::Agents::Client#train_agent TrainAgent} and wait for the operation it
+            # returns in order to train explicitly.
             #
             # Operation <response: {::Google::Protobuf::Empty google.protobuf.Empty}>
+            # An operation which tracks when restoring is complete. It only tracks
+            # when the draft agent is updated not when it is done training.
             #
             # @overload restore_agent(request, options = nil)
             #   Pass arguments to `restore_agent` via a request object, either of type

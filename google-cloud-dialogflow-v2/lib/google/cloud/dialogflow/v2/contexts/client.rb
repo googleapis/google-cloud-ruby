@@ -82,40 +82,12 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.list_contexts.timeout = 60.0
-                default_config.rpcs.list_contexts.retry_policy = {
+                default_config.timeout = 60.0
+                default_config.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.get_context.timeout = 60.0
-                default_config.rpcs.get_context.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.create_context.timeout = 60.0
-
-                default_config.rpcs.update_context.timeout = 60.0
-
-                default_config.rpcs.delete_context.timeout = 60.0
-                default_config.rpcs.delete_context.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.delete_all_contexts.timeout = 60.0
-                default_config.rpcs.delete_all_contexts.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["UNAVAILABLE"]
                 }
 
                 default_config

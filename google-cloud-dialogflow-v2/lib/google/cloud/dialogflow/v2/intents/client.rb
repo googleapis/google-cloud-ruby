@@ -96,42 +96,12 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.list_intents.timeout = 60.0
-                default_config.rpcs.list_intents.retry_policy = {
+                default_config.timeout = 60.0
+                default_config.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.get_intent.timeout = 60.0
-                default_config.rpcs.get_intent.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.create_intent.timeout = 60.0
-
-                default_config.rpcs.update_intent.timeout = 60.0
-
-                default_config.rpcs.delete_intent.timeout = 60.0
-                default_config.rpcs.delete_intent.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.batch_update_intents.timeout = 60.0
-
-                default_config.rpcs.batch_delete_intents.timeout = 60.0
-                default_config.rpcs.batch_delete_intents.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["UNAVAILABLE"]
                 }
 
                 default_config
