@@ -665,6 +665,28 @@ module Google
       #     to the same value so that state associated with the old stream can be
       #     transferred to the new stream. The same client_id should not be used for
       #     different client instances.
+      # @!attribute [rw] max_outstanding_messages
+      #   @return [Integer]
+      #     Flow control settings for the maximum number of outstanding messages. When
+      #     there are `max_outstanding_messages` or more currently sent to the
+      #     streaming pull client that have not yet been acked or nacked, the server
+      #     stops sending more messages. The sending of messages resumes once the
+      #     number of outstanding messages is less than this value. If the value is
+      #     <= 0, there is no limit to the number of outstanding messages. This
+      #     property can only be set on the initial StreamingPullRequest. If it is set
+      #     on a subsequent request, the stream will be aborted with status
+      #     `INVALID_ARGUMENT`.
+      # @!attribute [rw] max_outstanding_bytes
+      #   @return [Integer]
+      #     Flow control settings for the maximum number of outstanding bytes. When
+      #     there are `max_outstanding_bytes` or more worth of messages currently sent
+      #     to the streaming pull client that have not yet been acked or nacked, the
+      #     server will stop sending more messages. The sending of messages resumes
+      #     once the number of outstanding bytes is less than this value. If the value
+      #     is <= 0, there is no limit to the number of outstanding bytes. This
+      #     property can only be set on the initial StreamingPullRequest. If it is set
+      #     on a subsequent request, the stream will be aborted with status
+      #     `INVALID_ARGUMENT`.
       class StreamingPullRequest; end
 
       # Response for the `StreamingPull` method. This response is used to stream

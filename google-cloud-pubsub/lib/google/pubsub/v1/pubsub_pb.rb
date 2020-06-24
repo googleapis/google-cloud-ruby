@@ -167,6 +167,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :modify_deadline_ack_ids, :string, 4
     optional :stream_ack_deadline_seconds, :int32, 5
     optional :client_id, :string, 6
+    optional :max_outstanding_messages, :int64, 7
+    optional :max_outstanding_bytes, :int64, 8
   end
   add_message "google.pubsub.v1.StreamingPullResponse" do
     repeated :received_messages, :message, 1, "google.pubsub.v1.ReceivedMessage"
