@@ -15,36 +15,36 @@
 # [START video_quickstart]
 require "google/cloud/video_intelligence"
 
-video_client = Google::Cloud::VideoIntelligence.new
+video_client = Google::Cloud::VideoIntelligence.video_intelligence_service
 features     = [:LABEL_DETECTION]
 path         = "gs://cloud-samples-data/video/cat.mp4"
 
 # Register a callback during the method call
-operation = video_client.annotate_video features, input_uri: path do |ops|
-  raise ops.results.message? if ops.error?
-  puts "Finished Processing."
-
-  labels = ops.results.annotation_results.first.segment_label_annotations
-
-  labels.each do |label|
-    puts "Label description: #{label.entity.description}"
-
-    label.category_entities.each do |category_entity|
-      puts "Label category description: #{category_entity.description}"
-    end
-
-    label.segments.each do |segment|
-      start_time = (segment.segment.start_time_offset.seconds +
-                     segment.segment.start_time_offset.nanos / 1e9)
-      end_time =   (segment.segment.end_time_offset.seconds +
-                     segment.segment.end_time_offset.nanos / 1e9)
-
-      puts "Segment: #{start_time} to #{end_time}"
-      puts "Confidence: #{segment.confidence}"
-    end
-  end
-end
+operation = video_client.annotate_video features: features, input_uri: path
 
 puts "Processing video for label annotations:"
 operation.wait_until_done!
+
+raise operation.results.message? if operation.error?
+puts "Finished Processing."
+
+labels = operation.results.annotation_results.first.segment_label_annotations
+
+labels.each do |label|
+  puts "Label description: #{label.entity.description}"
+
+  label.category_entities.each do |category_entity|
+    puts "Label category description: #{category_entity.description}"
+  end
+
+  label.segments.each do |segment|
+    start_time = (segment.segment.start_time_offset.seconds +
+                   segment.segment.start_time_offset.nanos / 1e9)
+    end_time =   (segment.segment.end_time_offset.seconds +
+                   segment.segment.end_time_offset.nanos / 1e9)
+
+    puts "Segment: #{start_time} to #{end_time}"
+    puts "Confidence: #{segment.confidence}"
+  end
+end
 # [END video_quickstart]

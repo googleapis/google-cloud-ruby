@@ -81,7 +81,7 @@ def print_text_annotations text_annotations
 
     # Print information about the first segment of the text.
     text_segment = text_annotation.segments.first
-    print_segment_times text_segment
+    print_segment_times text_segment.segment
 
     puts "Confidence: #{text_segment.confidence}"
 
@@ -121,8 +121,8 @@ def print_object_annotations object_annotations
 end
 
 def print_segment_times segment
-  start_time_offset = segment.segment.start_time_offset
-  end_time_offset = segment.segment.end_time_offset
+  start_time_offset = segment.start_time_offset
+  end_time_offset = segment.end_time_offset
   start_time = (start_time_offset.seconds +
                 start_time_offset.nanos / 1e9)
   end_time =   (end_time_offset.seconds +

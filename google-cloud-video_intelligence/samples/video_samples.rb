@@ -20,19 +20,18 @@ def analyze_labels_gcs path:
 
   require "google/cloud/video_intelligence"
 
-  video = Google::Cloud::VideoIntelligence.new
+  video = Google::Cloud::VideoIntelligence.video_intelligence_service
 
   # Register a callback during the method call
-  op_promise = video.annotate_video [:LABEL_DETECTION], input_uri: path do |operation|
-    raise operation.results.message? if operation.error?
-    puts "Finished Processing."
-
-    labels = operation.results.annotation_results.first.segment_label_annotations
-    print_labels labels
-  end
-
+  operation = video.annotate_video features: [:LABEL_DETECTION], input_uri: path
   puts "Processing video for label annotations:"
-  op_promise.wait_until_done!
+  operation.wait_until_done!
+
+  raise operation.results.message? if operation.error?
+  puts "Finished Processing."
+
+  labels = operation.results.annotation_results.first.segment_label_annotations
+  print_labels labels
   # [END video_analyze_labels_gcs]
 end
 
@@ -42,21 +41,21 @@ def analyze_labels_local path:
 
   require "google/cloud/video_intelligence"
 
-  video = Google::Cloud::VideoIntelligence.new
+  video = Google::Cloud::VideoIntelligence.video_intelligence_service
 
   video_contents = File.binread path
 
   # Register a callback during the method call
-  op_promise = video.annotate_video [:LABEL_DETECTION], input_content: video_contents do |operation|
-    raise operation.results.message? if operation.error?
-    puts "Finished Processing."
-
-    labels = operation.results.annotation_results.first.segment_label_annotations
-    print_labels labels
-  end
+  operation = video.annotate_video features: [:LABEL_DETECTION], input_content: video_contents
 
   puts "Processing video for label annotations:"
-  op_promise.wait_until_done!
+  operation.wait_until_done!
+
+  raise operation.results.message? if operation.error?
+  puts "Finished Processing."
+
+  labels = operation.results.annotation_results.first.segment_label_annotations
+  print_labels labels
   # [END video_analyze_labels]
 end
 
@@ -66,20 +65,20 @@ def analyze_shots path:
 
   require "google/cloud/video_intelligence"
 
-  video = Google::Cloud::VideoIntelligence.new
+  video = Google::Cloud::VideoIntelligence.video_intelligence_service
 
   # Register a callback during the method call
-  op_promise = video.annotate_video [:SHOT_CHANGE_DETECTION], input_uri: path do |operation|
-    raise operation.results.message? if operation.error?
-    puts "Finished processing."
-
-    # first result is retrieved because a single video was processed
-    annotation_result = operation.results.annotation_results.first
-    print_annotations annotation_result
-  end
+  operation = video.annotate_video features: [:SHOT_CHANGE_DETECTION], input_uri: path
 
   puts "Processing video for shot change annotations:"
-  op_promise.wait_until_done!
+  operation.wait_until_done!
+
+  raise operation.results.message? if operation.error?
+  puts "Finished processing."
+
+  # first result is retrieved because a single video was processed
+  annotation_result = operation.results.annotation_results.first
+  print_annotations annotation_result
   # [END video_analyze_shots]
 end
 
@@ -89,19 +88,19 @@ def analyze_explicit_content path:
 
   require "google/cloud/video_intelligence"
 
-  video = Google::Cloud::VideoIntelligence.new
+  video = Google::Cloud::VideoIntelligence.video_intelligence_service
 
   # Register a callback during the method call
-  op_promise = video.annotate_video [:EXPLICIT_CONTENT_DETECTION], input_uri: path do |operation|
-    raise operation.results.message? if operation.error?
-    puts "Finished Processing."
-
-    explicit_annotation = operation.results.annotation_results.first.explicit_annotation
-    print_explicit_annotation_frames explicit_annotation
-  end
+  operation = video.annotate_video features: [:EXPLICIT_CONTENT_DETECTION], input_uri: path
 
   puts "Processing video for label annotations:"
-  op_promise.wait_until_done!
+  operation.wait_until_done!
+
+  raise operation.results.message? if operation.error?
+  puts "Finished Processing."
+
+  explicit_annotation = operation.results.annotation_results.first.explicit_annotation
+  print_explicit_annotation_frames explicit_annotation
   # [END video_analyze_explicit_content]
 end
 
@@ -111,7 +110,7 @@ def transcribe_speech_gcs path:
 
   require "google/cloud/video_intelligence"
 
-  video = Google::Cloud::VideoIntelligence.new
+  video = Google::Cloud::VideoIntelligence.video_intelligence_service
 
   context = {
     speech_transcription_config: {
@@ -121,16 +120,16 @@ def transcribe_speech_gcs path:
   }
 
   # Register a callback during the method call
-  op_promise = video.annotate_video [:SPEECH_TRANSCRIPTION], input_uri: path, video_context: context do |operation|
-    raise operation.results.message? if operation.error?
-    puts "Finished Processing."
-
-    transcriptions = operation.results.annotation_results.first.speech_transcriptions
-    print_transcriptions transcriptions
-  end
+  operation = video.annotate_video features: [:SPEECH_TRANSCRIPTION], input_uri: path, video_context: context
 
   puts "Processing video for speech transcriptions:"
-  op_promise.wait_until_done!
+  operation.wait_until_done!
+
+  raise operation.results.message? if operation.error?
+  puts "Finished Processing."
+
+  transcriptions = operation.results.annotation_results.first.speech_transcriptions
+  print_transcriptions transcriptions
   # [END video_speech_transcription_gcs]
 end
 
@@ -140,19 +139,19 @@ def detect_text_gcs path:
 
   require "google/cloud/video_intelligence"
 
-  video = Google::Cloud::VideoIntelligence.new
+  video = Google::Cloud::VideoIntelligence.video_intelligence_service
 
   # Register a callback during the method call
-  op_promise = video.annotate_video [:TEXT_DETECTION], input_uri: path do |operation|
-    raise operation.results.message? if operation.error?
-    puts "Finished Processing."
-
-    text_annotations = operation.results.annotation_results.first.text_annotations
-    print_text_annotations text_annotations
-  end
+  operation = video.annotate_video features: [:TEXT_DETECTION], input_uri: path
 
   puts "Processing video for text detection:"
-  op_promise.wait_until_done!
+  operation.wait_until_done!
+
+  raise operation.results.message? if operation.error?
+  puts "Finished Processing."
+
+  text_annotations = operation.results.annotation_results.first.text_annotations
+  print_text_annotations text_annotations
   # [END video_detect_text_gcs]
 end
 
@@ -162,21 +161,22 @@ def detect_text_local path:
 
   require "google/cloud/video_intelligence"
 
-  video = Google::Cloud::VideoIntelligence.new
+  video = Google::Cloud::VideoIntelligence.video_intelligence_service
 
   video_contents = File.binread path
 
   # Register a callback during the method call
-  op_promise = video.annotate_video [:TEXT_DETECTION], input_content: video_contents do |operation|
-    raise operation.results.message? if operation.error?
-    puts "Finished Processing."
-
-    text_annotations = operation.results.annotation_results.first.text_annotations
-    print_text_annotations text_annotations
-  end
+  operation = video.annotate_video features: [:TEXT_DETECTION], input_content: video_contents
 
   puts "Processing video for text detection:"
-  op_promise.wait_until_done!
+  operation.wait_until_done!
+
+  raise operation.results.message? if operation.error?
+  puts "Finished Processing."
+
+  text_annotations = operation.results.annotation_results.first.text_annotations
+  print_text_annotations text_annotations
+
   # [END video_detect_text]
 end
 
@@ -186,19 +186,19 @@ def track_objects_gcs path:
 
   require "google/cloud/video_intelligence"
 
-  video = Google::Cloud::VideoIntelligence.new
+  video = Google::Cloud::VideoIntelligence.video_intelligence_service
 
   # Register a callback during the method call
-  op_promise = video.annotate_video [:OBJECT_TRACKING], input_uri: path do |operation|
-    raise operation.results.message? if operation.error?
-    puts "Finished Processing."
-
-    object_annotations = operation.results.annotation_results.first.object_annotations
-    print_object_annotations object_annotations
-  end
+  operation = video.annotate_video features: [:OBJECT_TRACKING], input_uri: path
 
   puts "Processing video for object tracking:"
-  op_promise.wait_until_done!
+  operation.wait_until_done!
+
+  raise operation.results.message? if operation.error?
+  puts "Finished Processing."
+
+  object_annotations = operation.results.annotation_results.first.object_annotations
+  print_object_annotations object_annotations
   # [END video_object_tracking_gcs]
 end
 
@@ -208,21 +208,21 @@ def track_objects_local path:
 
   require "google/cloud/video_intelligence"
 
-  video = Google::Cloud::VideoIntelligence.new
+  video = Google::Cloud::VideoIntelligence.video_intelligence_service
 
   video_contents = File.binread path
 
   # Register a callback during the method call
-  op_promise = video.annotate_video [:OBJECT_TRACKING], input_content: video_contents do |operation|
-    raise operation.results.message? if operation.error?
-    puts "Finished Processing."
-
-    object_annotations = operation.results.annotation_results.first.object_annotations
-    print_object_annotations object_annotations
-  end
+  operation = video.annotate_video features: [:OBJECT_TRACKING], input_content: video_contents
 
   puts "Processing video for object tracking:"
-  op_promise.wait_until_done!
+  operation.wait_until_done!
+
+  raise operation.results.message? if operation.error?
+  puts "Finished Processing."
+
+  object_annotations = operation.results.annotation_results.first.object_annotations
+  print_object_annotations object_annotations
   # [END video_object_tracking]
 end
 
