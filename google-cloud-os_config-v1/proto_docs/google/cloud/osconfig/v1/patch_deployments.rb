@@ -58,7 +58,7 @@ module Google
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time the patch deployment was last updated. Timestamp is in
-        #     [RFC3339]("https://www.ietf.org/rfc/rfc3339.txt) text format.
+        #     [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
         # @!attribute [r] last_execute_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last time a patch job was started by this deployment.
