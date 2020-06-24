@@ -14,17 +14,27 @@
 
 require_relative "helper"
 require_relative "../storage_enable_bucket_lifecycle_management.rb"
+require_relative "../storage_disable_bucket_lifecycle_management.rb"
 
-describe "enable_bucket_lifecycle_management" do
+describe "bucket_lifecycle_management" do
   let(:bucket) { create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}" }
   after { delete_bucket_helper bucket.name }
 
-  it "can enable bucket lifecycle management" do
+  it "enable_bucket_lifecycle_management, disable_bucket_lifecycle_management" do
+    # enable_bucket_lifecycle_management
     out, _err = capture_io do
       updated_bucket = enable_bucket_lifecycle_management bucket_name: bucket.name
       refute_empty updated_bucket.lifecycle
     end
 
     assert_includes out, "Lifecycle management is enabled"
+
+    # disable_bucket_lifecycle_management
+    out, _err = capture_io do
+      updated_bucket = disable_bucket_lifecycle_management bucket_name: bucket.name
+      assert_empty updated_bucket.lifecycle
+    end
+
+    assert_includes out, "Lifecycle management is disabled"
   end
 end
