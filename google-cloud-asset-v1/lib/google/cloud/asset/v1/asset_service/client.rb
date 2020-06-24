@@ -75,6 +75,34 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
+                default_config.rpcs.create_feed.timeout = 60.0
+
+                default_config.rpcs.get_feed.timeout = 60.0
+                default_config.rpcs.get_feed.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                }
+
+                default_config.rpcs.list_feeds.timeout = 60.0
+                default_config.rpcs.list_feeds.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                }
+
+                default_config.rpcs.update_feed.timeout = 60.0
+
+                default_config.rpcs.delete_feed.timeout = 60.0
+                default_config.rpcs.delete_feed.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                }
+
                 default_config.rpcs.search_all_resources.timeout = 15.0
                 default_config.rpcs.search_all_resources.retry_policy = {
                   initial_delay: 0.1,
