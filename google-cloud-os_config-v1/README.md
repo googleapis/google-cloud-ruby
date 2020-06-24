@@ -34,7 +34,7 @@ response = client.execute_patch_job request
 View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-os_config-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/compute/docs/osconfig/)
+See also the [Product Documentation](https://cloud.google.com/compute/docs/manage-os)
 for general usage information.
 
 ## Enabling Logging
