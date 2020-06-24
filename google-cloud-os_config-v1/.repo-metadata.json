@@ -5,7 +5,7 @@
     "language": "ruby",
     "name": "osconfig",
     "name_pretty": "Cloud OS Config V1 API",
-    "product_documentation": "https://cloud.google.com/compute/docs/osconfig/",
+    "product_documentation": "https://cloud.google.com/compute/docs/manage-os",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true
 }
