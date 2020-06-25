@@ -1,5 +1,9 @@
 # Release History
 
+### 1.0.0 / 2020-06-24
+
+Promote to version 1.0.0
+
 ### 0.5.0 / 2020-05-20
 
 #### Features
