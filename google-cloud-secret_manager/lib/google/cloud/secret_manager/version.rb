@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module SecretManager
-      VERSION = "0.5.0".freeze
+      VERSION = "1.0.0".freeze
     end
   end
 end
