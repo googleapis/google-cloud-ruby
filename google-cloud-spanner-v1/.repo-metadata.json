@@ -1,0 +1,11 @@
+{
+    "api_id": "spanner.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-spanner-v1/latest",
+    "distribution_name": "google-cloud-spanner-v1",
+    "language": "ruby",
+    "name": "spanner",
+    "name_pretty": "Cloud Spanner V1 API",
+    "product_documentation": "https://cloud.google.com/spanner",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
