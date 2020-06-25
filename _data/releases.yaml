@@ -892,6 +892,7 @@ google-cloud-scheduler-v1beta1:
 - v0.2.2
 - v0.2.0
 google-cloud-secret_manager:
+- v1.0.0
 - v0.4.1
 - v0.4.0
 - v0.3.0
