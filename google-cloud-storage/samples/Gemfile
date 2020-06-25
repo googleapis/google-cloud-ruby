@@ -33,5 +33,6 @@ group :test do
   gem "google-style", "~> 1.24.0"
   gem "minitest", "~> 5.14"
   gem "minitest-focus", "~> 1.1"
+  gem "minitest-hooks", "~> 1.5"
   gem "rake"
 end

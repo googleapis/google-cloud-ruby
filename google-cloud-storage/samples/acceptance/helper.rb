@@ -17,6 +17,7 @@ require "google/cloud/kms"
 require "google/cloud/storage"
 require "minitest/autorun"
 require "minitest/focus"
+require "minitest/hooks/default"
 require "net/http"
 require "securerandom"
 require "uri"
@@ -48,7 +49,7 @@ def retry_resource_exhaustion
       return
     rescue Google::Cloud::ResourceExhaustedError => e
       puts "\n#{e} Gonna try again"
-      sleep rand(3..5)
+      sleep rand(10..16)
     end
   end
   raise Google::Cloud::ResourceExhaustedError, "Maybe take a break from creating and deleting buckets for a bit"

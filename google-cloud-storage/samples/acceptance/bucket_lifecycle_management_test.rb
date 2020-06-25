@@ -13,19 +13,23 @@
 # limitations under the License.
 
 require_relative "helper"
+require_relative "../storage_enable_bucket_lifecycle_management.rb"
 require_relative "../storage_disable_bucket_lifecycle_management.rb"
 
-describe "disable_bucket_lifecycle_management" do
-  parallelize_me!
-
+describe "bucket_lifecycle_management" do
   let(:bucket) { create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}" }
   after { delete_bucket_helper bucket.name }
 
-  it "can disable bucket lifecycle management" do
-    bucket.lifecycle do |l|
-      l.add_delete_rule age: 2
+  it "enable_bucket_lifecycle_management, disable_bucket_lifecycle_management" do
+    # enable_bucket_lifecycle_management
+    out, _err = capture_io do
+      updated_bucket = enable_bucket_lifecycle_management bucket_name: bucket.name
+      refute_empty updated_bucket.lifecycle
     end
 
+    assert_includes out, "Lifecycle management is enabled"
+
+    # disable_bucket_lifecycle_management
     out, _err = capture_io do
       updated_bucket = disable_bucket_lifecycle_management bucket_name: bucket.name
       assert_empty updated_bucket.lifecycle
