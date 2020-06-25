@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.4 / 2020-06-25
+
+#### Bug Fixes
+
+* Updates to retry policies
+
 ### 0.6.3 / 2020-06-18
 
 #### Documentation
