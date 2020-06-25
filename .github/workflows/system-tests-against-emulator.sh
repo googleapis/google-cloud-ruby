@@ -15,15 +15,16 @@
 # limitations under the License..
 
 # Fail on any error
-set -eo pipefail
+set -e
 
 # Display commands being run
 set -x
 
 set +e # Run all tests, don't stop after the first failure.
 exit_code=0
+
 # Run tests.
-for i in `find . -name Gemfile.lock`; do
+for i in `find . -name Gemfile`; do
   pushd `dirname $i`;
     # Run integration tests against an emulator.
     if [ -f "emulator_test.sh" ]; then

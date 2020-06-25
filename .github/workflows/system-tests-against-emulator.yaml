@@ -13,4 +13,4 @@ jobs:
         with:
           ruby-version: '2.6'
       - run: ruby --version
-      - run: sh .github/workflows/system-tests-against-emulator.sh
+      - run: bash .github/workflows/system-tests-against-emulator.sh
