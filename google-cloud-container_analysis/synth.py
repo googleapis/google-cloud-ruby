@@ -46,6 +46,6 @@ s.copy(library, merge=ruby.global_merge)
 # separate repos, whichever comes first.
 s.replace(
     'Gemfile',
-    '\ngem "google-cloud-container_analysis-v1", path: "\\.\\./google-cloud-container_analysis-v1"\n\n',
-    '\ngem "google-cloud-container_analysis-v1", path: "../google-cloud-container_analysis-v1"\ngem "grafeas-v1", path: "../grafeas-v1"\n\n'
+    '\ngem "google-cloud-container_analysis-v1", path: "\\.\\./google-cloud-container_analysis-v1"\n',
+    '\ngem "google-cloud-container_analysis-v1", path: "../google-cloud-container_analysis-v1"\ngem "grafeas-v1", path: "../grafeas-v1"\n'
 )
