@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.1 / 2020-06-25
+
+#### Bug Fixes
+
+* Update timeouts and retry settings for feed-related calls
+
 ### 0.5.0 / 2020-06-18
 
 #### Features
