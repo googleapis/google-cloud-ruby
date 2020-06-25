@@ -47,6 +47,6 @@ s.copy(library, merge=ruby.global_merge)
 # separate repos, whichever comes first.
 s.replace(
     'Gemfile',
-    '\ngemspec\n\n',
-    '\ngemspec\ngem "grafeas-v1", path: "../grafeas-v1"\n\n'
+    '\ngemspec\n',
+    '\ngemspec\ngem "grafeas-v1", path: "../grafeas-v1"\n'
 )
