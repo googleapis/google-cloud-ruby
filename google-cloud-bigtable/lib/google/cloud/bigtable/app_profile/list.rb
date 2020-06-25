@@ -97,7 +97,7 @@ module Google
           # @yield [app_profile] The block for accessing each app profile.
           # @yieldparam [AppProfile] app_profile The app profile object.
           #
-          # @return [Enumerator]
+          # @return [Enumerator,nil] An enumerator is returned if no block is given, otherwise `nil`.
           #
           # @example Iterating each app profile by passing a block:
           #   require "google/cloud/bigtable"

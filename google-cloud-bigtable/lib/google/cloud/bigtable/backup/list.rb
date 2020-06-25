@@ -98,7 +98,7 @@ module Google
           # @yield [backup] The block for accessing each backup.
           # @yieldparam [Backup] backup The backup object.
           #
-          # @return [Enumerator]
+          # @return [Enumerator,nil] An enumerator is returned if no block is given, otherwise `nil`.
           #
           # @example Iterating each backup by passing a block:
           #   require "google/cloud/bigtable"
