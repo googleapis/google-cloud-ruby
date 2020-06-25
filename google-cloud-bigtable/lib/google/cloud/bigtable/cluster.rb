@@ -237,7 +237,11 @@ module Google
         #
         def create_backup source_table, backup_id, expire_time
           source_table_id = source_table.respond_to?(:name) ? source_table.name : source_table
-          grpc = service.create_backup instance_id, cluster_id, backup_id, source_table_id, expire_time
+          grpc = service.create_backup instance_id:     instance_id,
+                                       cluster_id:      cluster_id,
+                                       backup_id:       backup_id,
+                                       source_table_id: source_table_id,
+                                       expire_time:     expire_time
           Backup::Job.from_grpc grpc, service
         end
 
