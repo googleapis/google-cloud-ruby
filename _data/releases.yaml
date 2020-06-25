@@ -407,6 +407,7 @@ google-cloud-dialogflow:
 - v0.2.0
 - v0.1.0
 google-cloud-dialogflow-v2:
+- v0.6.4
 - v0.5.1
 - v0.5.0
 - v0.4.1
