@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Talent
-      VERSION = "0.19.99"
+      VERSION = "0.20.0"
     end
   end
 end

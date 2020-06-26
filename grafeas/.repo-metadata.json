@@ -1,9 +1,9 @@
 {
-  "name": "grafeas",
-  "language": "ruby",
-  "distribution_name": "grafeas",
-  "module_name": "Grafeas",
-  "module_name_credentials": "Grafeas::V1",
-  "env_var_prefix": "GRAFEAS",
-  "client_documentation": "https://googleapis.dev/ruby/grafeas/latest"
+    "client_documentation": "https://googleapis.dev/ruby/grafeas/latest",
+    "distribution_name": "grafeas",
+    "language": "ruby",
+    "name_pretty": "Grafeas API",
+    "product_documentation": "https://grafeas.io",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }

@@ -226,3 +226,45 @@ s.replace(
     'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
     'https://googleapis.dev/ruby/google-cloud-firestore/latest/file.AUTHENTICATION.html'
 )
+
+# Mark v1beta1 client as deprecated
+# https://github.com/googleapis/google-cloud-ruby/issues/5952
+s.replace(
+    'lib/google/cloud/firestore/v1beta1/firestore_client.rb',
+    'module V1beta1',
+    'module V1beta1\n        # @deprecated Use Google::Cloud::Firestore::V1::FirestoreClient instead.\n        #'
+)
+s.replace(
+    'lib/google/cloud/firestore/v1beta1.rb',
+    '^      ##$',
+    '      ##\n      # @deprecated Use Google::Cloud::Firestore::V1 instead.\n      #'
+)
+
+# Fix product links
+s.replace(
+    [
+        "lib/google/cloud/firestore/admin/v1.rb",
+        "lib/google/cloud/firestore/admin.rb"
+    ],
+    "https://cloud.google.com/firestore-admin",
+    "https://cloud.google.com/firestore/docs/reference/rpc"
+)
+
+# We recently added ruby_package proto options, but we want those to apply only
+# when we move to the microgenerator. Undo their effect while the monolith is
+# still in use.
+s.replace(
+    'lib/google/firestore/v1/*_pb.rb',
+    '\nmodule Google::Cloud::Firestore::V1\n',
+    '\nmodule Google\n  module Firestore\n  end\nend\nmodule Google::Firestore::V1\n',
+)
+s.replace(
+    'lib/google/firestore/v1beta1/*_pb.rb',
+    '\nmodule Google::Cloud::Firestore::V1beta1\n',
+    '\nmodule Google\n  module Firestore\n  end\nend\nmodule Google::Firestore::V1beta1\n',
+)
+s.replace(
+    'lib/google/firestore/admin/v1/*_pb.rb',
+    '\nmodule Google::Cloud::Firestore::Admin::V1\n',
+    '\nmodule Google\n  module Firestore\n    module Admin\n    end\n  end\nend\nmodule Google::Firestore::Admin::V1\n',
+)

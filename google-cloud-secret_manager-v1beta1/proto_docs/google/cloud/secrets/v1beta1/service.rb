@@ -71,7 +71,7 @@ module Google
         #     underscore (`_`) characters.
         # @!attribute [rw] secret
         #   @return [::Google::Cloud::SecretManager::V1beta1::Secret]
-        #     A {::Google::Cloud::SecretManager::V1beta1::Secret Secret} with initial field values.
+        #     Required. A {::Google::Cloud::SecretManager::V1beta1::Secret Secret} with initial field values.
         class CreateSecretRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

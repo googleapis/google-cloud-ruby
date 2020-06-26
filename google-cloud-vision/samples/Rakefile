@@ -1,0 +1,47 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+require "rake/testtask"
+
+namespace :fixtures do
+  desc "Creates vision test fixtures for the current project"
+  task :create do
+    require "google/cloud/storage"
+    storage = Google::Cloud::Storage.new
+    bucket_name = ENV["GOOGLE_CLOUD_STORAGE_BUCKET"] || "ruby-vision-samples-test"
+    bucket = storage.bucket bucket_name
+    bucket ||= storage.create_bucket bucket_name,
+                                     acl: "public", default_acl: "public"
+
+    upload_fixture_file bucket, "otter_crossing.jpg"
+    upload_fixture_file bucket, "face_no_surprise.png"
+    upload_fixture_file bucket, "face_surprise.jpg"
+    upload_fixture_file bucket, "palace_of_fine_arts.jpg"
+    upload_fixture_file bucket, "logos.png"
+    upload_fixture_file bucket, "pdf_ocr.pdf"
+    upload_fixture_file bucket, "puppies.jpg"
+    upload_fixture_file bucket, "kafka.pdf"
+    upload_fixture_file bucket, "wakeupcat.jpg"
+  end
+end
+
+def upload_fixture_file bucket, name
+  path = File.expand_path "resources/#{name}", __dir__
+  bucket.upload_file path, name
+end
+
+Rake::TestTask.new "test" do |t|
+  t.test_files = FileList["acceptance/*_test.rb"] + FileList["product_search/acceptance/*_test.rb"]
+  t.warning = false
+end

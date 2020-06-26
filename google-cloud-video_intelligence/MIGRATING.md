@@ -27,6 +27,10 @@ To summarize:
     specifies whether they are required or optional. Additionally, you can pass
     a proto request object instead of separate arguments. See
     [Passing Arguments](#passing-arguments) for more info.
+ *  Previously, clients reported RPC errors by raising instances of
+    `Google::Gax::GaxError` and its subclasses. Now, RPC exceptions are of type
+    `Google::Cloud::Error` and its subclasses. See
+    [Handling Errors](#handling-errors) for more info.
  *  Some classes have moved into different namespaces. See
     [Class Namespaces](#class-namespaces) for more info.
 
@@ -201,6 +205,49 @@ response = client.annotate_video(
   timeout: 10.0)
 ```
 
+### Handling Errors
+
+The client reports standard
+[gRPC error codes](https://github.com/grpc/grpc/blob/master/doc/statuscodes.md)
+by raising exceptions. In older releases, these exceptions were located in the
+`Google::Gax` namespace and were subclasses of the `Google::Gax::GaxError` base
+exception class, defined in the `google-gax` gem. However, these classes were
+different from the standard exceptions (subclasses of `Google::Cloud::Error`)
+thrown by other client libraries such as `google-cloud-storage`.
+
+The 3.0 client library now uses the `Google::Cloud::Error` exception hierarchy,
+for consistency across all the Google Cloud client libraries. In general, these
+exceptions have the same name as their counterparts from older releases, but
+are located in the `Google::Cloud` namespace rather than the `Google::Gax`
+namespace.
+
+Old:
+```
+client = Google::Cloud::VideoIntelligence.new
+
+features = [Google::Cloud::VideoIntelligence::V1::Feature::FACE_DETECTION]
+input_uri = "gs://my-bucket/my-video"
+
+begin
+  response = client.annotate_video features, input_uri: input_uri
+rescue Google::Gax::Error => e
+  # Handle exceptions that subclass Google::Gax::Error
+end
+```
+
+New:
+```
+client = Google::Cloud::VideoIntelligence.video_intelligence_service
+
+features = [Google::Cloud::VideoIntelligence::V1::Feature::FACE_DETECTION]
+input_uri = "gs://my-bucket/my-video"
+
+begin
+  response = client.annotate_video features: features, input_uri: input_uri
+rescue Google::Cloud::Error => e
+  # Handle exceptions that subclass Google::Cloud::Error
+end
+```
 
 ### Class Namespaces
 

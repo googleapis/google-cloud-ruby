@@ -129,8 +129,8 @@ module Google
       # @!attribute [rw] string_value
       #   @return [String]
       #     A UTF-8 encoded string value.
-      #     When `exclude_from_indexes` is false (it is indexed) , may have at most 1500 bytes.
-      #     Otherwise, may be set to at least 1,000,000 bytes.
+      #     When `exclude_from_indexes` is false (it is indexed), may have at most
+      #     1500 bytes. Otherwise, may be set to at most 1,000,000 bytes.
       # @!attribute [rw] blob_value
       #   @return [String]
       #     A blob value.

@@ -142,32 +142,32 @@ end
 
 module Google
   module Logging
-    module V2
-      LogBucket = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogBucket").msgclass
-      LogSink = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogSink").msgclass
-      LogSink::VersionFormat = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogSink.VersionFormat").enummodule
-      BigQueryOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.BigQueryOptions").msgclass
-      ListBucketsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListBucketsRequest").msgclass
-      ListBucketsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListBucketsResponse").msgclass
-      UpdateBucketRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateBucketRequest").msgclass
-      GetBucketRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetBucketRequest").msgclass
-      ListSinksRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListSinksRequest").msgclass
-      ListSinksResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListSinksResponse").msgclass
-      GetSinkRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetSinkRequest").msgclass
-      CreateSinkRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CreateSinkRequest").msgclass
-      UpdateSinkRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateSinkRequest").msgclass
-      DeleteSinkRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.DeleteSinkRequest").msgclass
-      LogExclusion = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogExclusion").msgclass
-      ListExclusionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListExclusionsRequest").msgclass
-      ListExclusionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListExclusionsResponse").msgclass
-      GetExclusionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetExclusionRequest").msgclass
-      CreateExclusionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CreateExclusionRequest").msgclass
-      UpdateExclusionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateExclusionRequest").msgclass
-      DeleteExclusionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.DeleteExclusionRequest").msgclass
-      GetCmekSettingsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetCmekSettingsRequest").msgclass
-      UpdateCmekSettingsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateCmekSettingsRequest").msgclass
-      CmekSettings = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CmekSettings").msgclass
-      LifecycleState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LifecycleState").enummodule
-    end
   end
+end
+module Google::Logging::V2
+  LogBucket = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogBucket").msgclass
+  LogSink = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogSink").msgclass
+  LogSink::VersionFormat = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogSink.VersionFormat").enummodule
+  BigQueryOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.BigQueryOptions").msgclass
+  ListBucketsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListBucketsRequest").msgclass
+  ListBucketsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListBucketsResponse").msgclass
+  UpdateBucketRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateBucketRequest").msgclass
+  GetBucketRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetBucketRequest").msgclass
+  ListSinksRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListSinksRequest").msgclass
+  ListSinksResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListSinksResponse").msgclass
+  GetSinkRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetSinkRequest").msgclass
+  CreateSinkRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CreateSinkRequest").msgclass
+  UpdateSinkRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateSinkRequest").msgclass
+  DeleteSinkRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.DeleteSinkRequest").msgclass
+  LogExclusion = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogExclusion").msgclass
+  ListExclusionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListExclusionsRequest").msgclass
+  ListExclusionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListExclusionsResponse").msgclass
+  GetExclusionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetExclusionRequest").msgclass
+  CreateExclusionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CreateExclusionRequest").msgclass
+  UpdateExclusionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateExclusionRequest").msgclass
+  DeleteExclusionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.DeleteExclusionRequest").msgclass
+  GetCmekSettingsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetCmekSettingsRequest").msgclass
+  UpdateCmekSettingsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateCmekSettingsRequest").msgclass
+  CmekSettings = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CmekSettings").msgclass
+  LifecycleState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LifecycleState").enummodule
 end

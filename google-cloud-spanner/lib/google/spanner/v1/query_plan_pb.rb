@@ -37,12 +37,12 @@ end
 
 module Google
   module Spanner
-    module V1
-      PlanNode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PlanNode").msgclass
-      PlanNode::ChildLink = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PlanNode.ChildLink").msgclass
-      PlanNode::ShortRepresentation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PlanNode.ShortRepresentation").msgclass
-      PlanNode::Kind = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PlanNode.Kind").enummodule
-      QueryPlan = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.QueryPlan").msgclass
-    end
   end
+end
+module Google::Spanner::V1
+  PlanNode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PlanNode").msgclass
+  PlanNode::ChildLink = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PlanNode.ChildLink").msgclass
+  PlanNode::ShortRepresentation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PlanNode.ShortRepresentation").msgclass
+  PlanNode::Kind = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PlanNode.Kind").enummodule
+  QueryPlan = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.QueryPlan").msgclass
 end

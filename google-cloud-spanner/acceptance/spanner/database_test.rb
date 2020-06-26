@@ -23,7 +23,7 @@ describe "Spanner Databases", :spanner do
 
     job = spanner.create_database instance_id, database_id
     _(job).must_be_kind_of Google::Cloud::Spanner::Database::Job
-    _(job).wont_be :done?
+    _(job).wont_be :done? unless emulator_enabled?
     job.wait_until_done!
 
     _(job).must_be :done?
@@ -40,7 +40,7 @@ describe "Spanner Databases", :spanner do
     job2 = database.update statements: "CREATE TABLE users (id INT64 NOT NULL) PRIMARY KEY(id)"
 
     _(job2).must_be_kind_of Google::Cloud::Spanner::Database::Job
-    _(job2).wont_be :done?
+    _(job2).wont_be :done? unless emulator_enabled?
     job2.wait_until_done!
 
     _(job2).must_be :done?

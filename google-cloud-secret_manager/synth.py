@@ -33,7 +33,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "SECRET_MANAGER",
         "ruby-cloud-wrapper-of": "v1:0.1;v1beta1:0.3",
         "ruby-cloud-product-url": "https://cloud.google.com/secret-manager",
-        "ruby-cloud-api-id": "secretmanager",
+        "ruby-cloud-api-id": "secretmanager.googleapis.com",
+        "ruby-cloud-api-shortname": "secretmanager",
     }
 )
 

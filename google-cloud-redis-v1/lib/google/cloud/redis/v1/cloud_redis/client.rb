@@ -160,7 +160,8 @@ module Google
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
-              @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
+              @quota_project_id = @config.quota_project
+              @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
@@ -345,7 +346,7 @@ module Google
             # Creates a Redis instance based on the specified tier and memory size.
             #
             # By default, the instance is accessible from the project's
-            # [default network](/compute/docs/networks-and-firewalls#networks).
+            # [default network](https://cloud.google.com/vpc/docs/vpc).
             #
             # The creation is executed asynchronously and callers may check the returned
             # operation to track its progress. Once the operation is completed the Redis
@@ -886,24 +887,28 @@ module Google
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
+            # @!attribute [rw] quota_project
+            #   A separate project against which to charge quota.
+            #   @return [::String]
             #
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,     "redis.googleapis.com", String
-              config_attr :credentials,  nil do |value|
+              config_attr :endpoint,      "redis.googleapis.com", ::String
+              config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, ::String, ::Array, nil
-              config_attr :lib_name,     nil, ::String, nil
-              config_attr :lib_version,  nil, ::String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
-              config_attr :interceptors, nil, ::Array, nil
-              config_attr :timeout,      nil, ::Numeric, nil
-              config_attr :metadata,     nil, ::Hash, nil
-              config_attr :retry_policy, nil, ::Hash, Proc, nil
+              config_attr :scope,         nil, ::String, ::Array, nil
+              config_attr :lib_name,      nil, ::String, nil
+              config_attr :lib_version,   nil, ::String, nil
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors,  nil, ::Array, nil
+              config_attr :timeout,       nil, ::Numeric, nil
+              config_attr :metadata,      nil, ::Hash, nil
+              config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
+              config_attr :quota_project, nil, ::String, nil
 
               # @private
               def initialize parent_config = nil
@@ -919,7 +924,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if @parent_config&.respond_to? :rpcs
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end

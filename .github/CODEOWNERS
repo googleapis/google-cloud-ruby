@@ -1,0 +1,15 @@
+# Code owners file.
+# This file controls who is tagged for review for any given pull request.
+#
+# For syntax help see:
+# https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners#codeowners-syntax
+
+
+# The yoshi-ruby team is the default owner for anything not
+# explicitly taken by someone else.
+*                               @googleapis/yoshi-ruby
+
+/google-cloud-storage/          @googleapis/storage-dpe @googleapis/yoshi-ruby
+/google-cloud-bigtable/         @googleapis/bigtable-dpe @googleapis/yoshi-ruby
+/google-cloud-firestore/        @googleapis/firestore-dpe @googleapis/yoshi-ruby
+/google-cloud-datastore/        @googleapis/firestore-dpe @googleapis/yoshi-ruby

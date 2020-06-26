@@ -92,13 +92,19 @@ module Google
         #   or the specified config is missing data points.
         # @param timeout [Numeric]
         #   The default timeout, in seconds, for calls made through this client.
+        # @param service_address [String]
+        #   Override for the service hostname, or `nil` to leave as the default.
+        # @param service_port [Integer]
+        #   Override for the service port, or `nil` to leave as the default.
         def self.new \
             credentials: nil,
             scopes: nil,
             client_config: nil,
             timeout: nil,
             lib_name: nil,
-            lib_version: nil
+            lib_version: nil,
+            service_address: nil,
+            service_port: nil
           kwargs = {
             credentials: credentials,
             scopes: scopes,

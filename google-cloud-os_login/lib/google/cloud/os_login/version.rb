@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module OsLogin
-      VERSION = "0.7.0"
+      VERSION = "1.1.1"
     end
   end
 end

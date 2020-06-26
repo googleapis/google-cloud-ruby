@@ -178,7 +178,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The type of data being sent to in data.
+          # The type of data being sent for inspection.
           module BytesType
             # Unused
             BYTES_TYPE_UNSPECIFIED = 0
@@ -200,6 +200,12 @@ module Google
 
             # plain text
             TEXT_UTF8 = 5
+
+            # docx, docm, dotx, dotm
+            WORD_DOCUMENT = 7
+
+            # pdf
+            PDF = 8
 
             # avro
             AVRO = 11
@@ -300,13 +306,9 @@ module Google
         # @!attribute [rw] trigger_name
         #   @return [::String]
         #     Job trigger name, if applicable, for this finding.
-        #     (-- api-linter: core::0122::name-suffix=disabled
-        #         aip.dev/not-precedent: AIP-122 discourages _name suffixes for
-        #         resource names, but this has existed as part of the bigquery schema
-        #         before this rule existed. --)
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     The labels associated with this `InspectFinding`.
+        #     The labels associated with this `Finding`.
         #
         #     Label keys must be between 1 and 63 characters long and must conform
         #     to the following regular expression: `[a-z]([-a-z0-9]*[a-z0-9])?`.
@@ -325,10 +327,6 @@ module Google
         # @!attribute [rw] job_name
         #   @return [::String]
         #     The job that stored the finding.
-        #     (-- api-linter: core::0122::name-suffix=disabled
-        #         aip.dev/not-precedent: AIP-122 discourages _name suffixes for
-        #         resource names, but this has existed as part of the bigquery schema
-        #         before this rule existed. --)
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -391,6 +389,9 @@ module Google
         # @!attribute [rw] document_location
         #   @return [::Google::Cloud::Dlp::V2::DocumentLocation]
         #     Location data for document files.
+        # @!attribute [rw] metadata_location
+        #   @return [::Google::Cloud::Dlp::V2::MetadataLocation]
+        #     Location within the metadata for inspected content.
         # @!attribute [rw] container_timestamp
         #   @return [::Google::Protobuf::Timestamp]
         #     Findings container modification timestamp, if applicable.
@@ -402,6 +403,26 @@ module Google
         #     Findings container version, if available
         #     ("generation" for Google Cloud Storage).
         class ContentLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata Location
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Dlp::V2::MetadataType]
+        #     Type of metadata containing the finding.
+        # @!attribute [rw] storage_label
+        #   @return [::Google::Cloud::Dlp::V2::StorageMetadataLabel]
+        #     Storage metadata.
+        class MetadataLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Storage metadata label to indicate which metadata entry contains findings.
+        # @!attribute [rw] key
+        #   @return [::String]
+        class StorageMetadataLabel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -434,7 +455,12 @@ module Google
         # Location of a finding within a table.
         # @!attribute [rw] row_index
         #   @return [::Integer]
-        #     The zero-based index of the row where the finding is located.
+        #     The zero-based index of the row where the finding is located. Only
+        #     populated for resources that have a natural ordering, not BigQuery. In
+        #     BigQuery, to identify the row a finding came from, populate
+        #     BigQueryOptions.identifying_fields with your primary key column names and
+        #     when you store the findings the value of those columns will be stored
+        #     inside of Finding.
         class TableLocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -529,11 +555,11 @@ module Google
         # by covering it with a colored rectangle.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The parent resource name, for example projects/my-project-id.
+        #     The parent resource name, for example projects/my-project-id
+        #     or projects/my-project-id/locations/\\{location_id}.
         # @!attribute [rw] location_id
         #   @return [::String]
-        #     The geographic location to process the request. Reserved for future
-        #     extensions.
+        #     Deprecated. This field has no effect.
         # @!attribute [rw] inspect_config
         #   @return [::Google::Cloud::Dlp::V2::InspectConfig]
         #     Configuration for the inspector.
@@ -607,7 +633,8 @@ module Google
         # Request to de-identify a list of items.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The parent resource name, for example projects/my-project-id.
+        #     The parent resource name, for example projects/my-project-id
+        #     or projects/my-project-id/locations/\\{location_id}.
         # @!attribute [rw] deidentify_config
         #   @return [::Google::Cloud::Dlp::V2::DeidentifyConfig]
         #     Configuration for the de-identification of the content item.
@@ -637,8 +664,7 @@ module Google
         #     are recursively merged.
         # @!attribute [rw] location_id
         #   @return [::String]
-        #     The geographic location to process de-identification. Reserved for future
-        #     extensions.
+        #     Deprecated. This field has no effect.
         class DeidentifyContentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -695,8 +721,7 @@ module Google
         #     are recursively merged.
         # @!attribute [rw] location_id
         #   @return [::String]
-        #     The geographic location to process content reidentification.  Reserved for
-        #     future extensions.
+        #     Deprecated. This field has no effect.
         class ReidentifyContentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -717,7 +742,8 @@ module Google
         # Request to search for potentially sensitive info in a ContentItem.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The parent resource name, for example projects/my-project-id.
+        #     The parent resource name, for example projects/my-project-id
+        #     or projects/my-project-id/locations/\\{location_id}
         # @!attribute [rw] inspect_config
         #   @return [::Google::Cloud::Dlp::V2::InspectConfig]
         #     Configuration for the inspector. What specified here will override
@@ -734,8 +760,7 @@ module Google
         #     are recursively merged.
         # @!attribute [rw] location_id
         #   @return [::String]
-        #     The geographic location to process content inspection. Reserved for future
-        #     extensions.
+        #     Deprecated. This field has no effect.
         class InspectContentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -906,6 +931,9 @@ module Google
         end
 
         # Request for the list of infoTypes.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     The parent resource name, for example locations/\\{location_id}
         # @!attribute [rw] language_code
         #   @return [::String]
         #     BCP-47 language code for localized infoType friendly
@@ -917,8 +945,7 @@ module Google
         #     API. Defaults to supported_by=INSPECT.
         # @!attribute [rw] location_id
         #   @return [::String]
-        #     The geographic location to list info types. Reserved for future
-        #     extensions.
+        #     Deprecated. This field has no effect.
         class ListInfoTypesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2028,7 +2055,7 @@ module Google
         #
         #     This annotation identifies the surrogate when inspecting content using the
         #     custom infoType
-        #     [`SurrogateType`](/dlp/docs/reference/rest/v2/InspectConfig#surrogatetype).
+        #     [`SurrogateType`](https://cloud.google.com/dlp/docs/reference/rest/v2/InspectConfig#surrogatetype).
         #     This facilitates reversal of the surrogate when it occurs in free text.
         #
         #     In order for inspection to work properly, the name of this infoType must
@@ -2052,16 +2079,16 @@ module Google
             # Unused.
             FFX_COMMON_NATIVE_ALPHABET_UNSPECIFIED = 0
 
-            # [0-9] (radix of 10)
+            # `[0-9]` (radix of 10)
             NUMERIC = 1
 
-            # [0-9A-F] (radix of 16)
+            # `[0-9A-F]` (radix of 16)
             HEXADECIMAL = 2
 
-            # [0-9A-Z] (radix of 36)
+            # `[0-9A-Z]` (radix of 36)
             UPPER_CASE_ALPHA_NUMERIC = 3
 
-            # [0-9A-Za-z] (radix of 62)
+            # `[0-9A-Za-z]` (radix of 62)
             ALPHA_NUMERIC = 4
           end
         end
@@ -2500,8 +2527,8 @@ module Google
         #     a single Schedule trigger and must have at least one object.
         # @!attribute [r] errors
         #   @return [::Array<::Google::Cloud::Dlp::V2::Error>]
-        #     Output only. A stream of errors encountered when the trigger was activated.
-        #     Repeated errors may result in the JobTrigger automatically being paused.
+        #     Output only. A stream of errors encountered when the trigger was activated. Repeated
+        #     errors may result in the JobTrigger automatically being paused.
         #     Will return the last 100 errors. Whenever the JobTrigger is modified
         #     this list will be cleared.
         # @!attribute [r] create_time
@@ -2594,7 +2621,7 @@ module Google
           # Publish a message into given Pub/Sub topic when DlpJob has completed. The
           # message contains a single field, `DlpJobName`, which is equal to the
           # finished job's
-          # [`DlpJob.name`](/dlp/docs/reference/rest/v2/projects.dlpJobs#DlpJob).
+          # [`DlpJob.name`](https://cloud.google.com/dlp/docs/reference/rest/v2/projects.dlpJobs#DlpJob).
           # Compatible with: Inspect, Risk
           # @!attribute [rw] topic
           #   @return [::String]
@@ -2658,7 +2685,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name, for example projects/my-project-id or
-        #     organizations/my-org-id.
+        #     organizations/my-org-id or projects/my-project-id/locations/\\{location-id}.
         # @!attribute [rw] inspect_template
         #   @return [::Google::Cloud::Dlp::V2::InspectTemplate]
         #     Required. The InspectTemplate to create.
@@ -2670,8 +2697,7 @@ module Google
         #     characters. Can be empty to allow the system to generate one.
         # @!attribute [rw] location_id
         #   @return [::String]
-        #     The geographic location to store the inspection template. Reserved for
-        #     future extensions.
+        #     Deprecated. This field has no effect.
         class CreateInspectTemplateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2709,7 +2735,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name, for example projects/my-project-id or
-        #     organizations/my-org-id.
+        #     organizations/my-org-id or projects/my-project-id/locations/\\{location_id}.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Page token to continue retrieval. Comes from previous call
@@ -2735,8 +2761,7 @@ module Google
         #     - `display_name`: corresponds to template's display name.
         # @!attribute [rw] location_id
         #   @return [::String]
-        #     The geographic location where inspection templates will be retrieved from.
-        #     Use `-` for all locations. Reserved for future extensions.
+        #     Deprecated. This field has no effect.
         class ListInspectTemplatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2769,7 +2794,8 @@ module Google
         # Request message for CreateJobTrigger.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name, for example projects/my-project-id.
+        #     Required. The parent resource name, for example projects/my-project-id
+        #     or projects/my-project-id/locations/\\{location_id}.
         # @!attribute [rw] job_trigger
         #   @return [::Google::Cloud::Dlp::V2::JobTrigger]
         #     Required. The JobTrigger to create.
@@ -2781,8 +2807,7 @@ module Google
         #     characters. Can be empty to allow the system to generate one.
         # @!attribute [rw] location_id
         #   @return [::String]
-        #     The geographic location to store the job trigger. Reserved for
-        #     future extensions.
+        #     Deprecated. This field has no effect.
         class CreateJobTriggerRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2829,7 +2854,8 @@ module Google
         # Storage.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name, for example projects/my-project-id.
+        #     Required. The parent resource name, for example projects/my-project-id
+        #     or projects/my-project-id/locations/\\{location_id}.
         # @!attribute [rw] inspect_job
         #   @return [::Google::Cloud::Dlp::V2::InspectJobConfig]
         #     Set to control what and how to inspect.
@@ -2844,8 +2870,7 @@ module Google
         #     characters. Can be empty to allow the system to generate one.
         # @!attribute [rw] location_id
         #   @return [::String]
-        #     The geographic location to store and process the job. Reserved for
-        #     future extensions.
+        #     Deprecated. This field has no effect.
         class CreateDlpJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2854,7 +2879,8 @@ module Google
         # Request message for ListJobTriggers.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name, for example `projects/my-project-id`.
+        #     Required. The parent resource name, for example `projects/my-project-id`
+        #     or projects/my-project-id/locations/\\{location_id}.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Page token to continue retrieval. Comes from previous call
@@ -2908,8 +2934,7 @@ module Google
         #     The length of this field should be no more than 500 characters.
         # @!attribute [rw] location_id
         #   @return [::String]
-        #     The geographic location where job triggers will be retrieved from.
-        #     Use `-` for all locations. Reserved for future extensions.
+        #     Deprecated. This field has no effect.
         class ListJobTriggersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3035,7 +3060,8 @@ module Google
         # The request message for listing DLP jobs.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name, for example projects/my-project-id.
+        #     Required. The parent resource name, for example projects/my-project-id
+        #     or projects/my-project-id/locations/\\{location_id}.
         # @!attribute [rw] filter
         #   @return [::String]
         #     Allows filtering.
@@ -3092,8 +3118,7 @@ module Google
         #     - `state`: corresponds to `state`
         # @!attribute [rw] location_id
         #   @return [::String]
-        #     The geographic location where jobs will be retrieved from.
-        #     Use `-` for all locations. Reserved for future extensions.
+        #     Deprecated. This field has no effect.
         class ListDlpJobsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3142,7 +3167,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name, for example projects/my-project-id or
-        #     organizations/my-org-id.
+        #     organizations/my-org-id or projects/my-project-id/locations/\\{location_id}.
         # @!attribute [rw] deidentify_template
         #   @return [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
         #     Required. The DeidentifyTemplate to create.
@@ -3154,8 +3179,7 @@ module Google
         #     characters. Can be empty to allow the system to generate one.
         # @!attribute [rw] location_id
         #   @return [::String]
-        #     The geographic location to store the deidentification template. Reserved
-        #     for future extensions.
+        #     Deprecated. This field has no effect.
         class CreateDeidentifyTemplateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3194,7 +3218,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name, for example projects/my-project-id or
-        #     organizations/my-org-id.
+        #     organizations/my-org-id or projects/my-project-id/locations/\\{location_id}.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Page token to continue retrieval. Comes from previous call
@@ -3220,8 +3244,7 @@ module Google
         #     - `display_name`: corresponds to template's display name.
         # @!attribute [rw] location_id
         #   @return [::String]
-        #     The geographic location where deidentifications templates will be retrieved
-        #     from. Use `-` for all locations. Reserved for future extensions.
+        #     Deprecated. This field has no effect.
         class ListDeidentifyTemplatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3374,7 +3397,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name, for example projects/my-project-id or
-        #     organizations/my-org-id.
+        #     organizations/my-org-id or projects/my-project-id/locations/\\{location_id}
         # @!attribute [rw] config
         #   @return [::Google::Cloud::Dlp::V2::StoredInfoTypeConfig]
         #     Required. Configuration of the storedInfoType to create.
@@ -3386,8 +3409,7 @@ module Google
         #     characters. Can be empty to allow the system to generate one.
         # @!attribute [rw] location_id
         #   @return [::String]
-        #     The geographic location to store the stored infoType. Reserved for
-        #     future extensions.
+        #     Deprecated. This field has no effect.
         class CreateStoredInfoTypeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3396,8 +3418,8 @@ module Google
         # Request message for UpdateStoredInfoType.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name of organization and storedInfoType to be updated,
-        #     for example `organizations/433245324/storedInfoTypes/432452342` or
+        #     Required. Resource name of organization and storedInfoType to be updated, for
+        #     example `organizations/433245324/storedInfoTypes/432452342` or
         #     projects/project-id/storedInfoTypes/432452342.
         # @!attribute [rw] config
         #   @return [::Google::Cloud::Dlp::V2::StoredInfoTypeConfig]
@@ -3427,7 +3449,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name, for example projects/my-project-id or
-        #     organizations/my-org-id.
+        #     organizations/my-org-id or projects/my-project-id/locations/\\{location_id}.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Page token to continue retrieval. Comes from previous call
@@ -3454,8 +3476,7 @@ module Google
         #     - `display_name`: corresponds to info type's display name.
         # @!attribute [rw] location_id
         #   @return [::String]
-        #     The geographic location where stored infoTypes will be retrieved from.
-        #     Use `-` for all locations. Reserved for future extensions.
+        #     Deprecated. This field has no effect.
         class ListStoredInfoTypesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3650,6 +3671,15 @@ module Google
 
           # Images found in the data.
           CONTENT_IMAGE = 2
+        end
+
+        # Type of metadata containing the finding.
+        module MetadataType
+          # Unused
+          METADATATYPE_UNSPECIFIED = 0
+
+          # General file metadata provided by GCS.
+          STORAGE_METADATA = 2
         end
 
         # Parts of the APIs which use certain infoTypes.

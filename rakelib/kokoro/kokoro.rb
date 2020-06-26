@@ -9,7 +9,7 @@ require_relative "kokoro_builder.rb"
 
 class Kokoro < Command
   # Normally true. Set to false temporarily when releases are frozen.
-  RELEASE_PLEASE_ENABLED = false
+  RELEASE_PLEASE_ENABLED = true
 
   attr_reader :tag
 
@@ -43,7 +43,7 @@ class Kokoro < Command
         run "bundle exec rake ci", 1800
         # TODO: Remove date requirement
         require "date"
-        next unless Date.today > Date.new(2020, 4, 30)
+        next unless Date.today > Date.new(2020, 6, 15)
         local_docs_test if should_link_check? gem || (
           autorelease_pending? && @should_release
         )
@@ -66,15 +66,11 @@ class Kokoro < Command
   end
 
   def samples_presubmit
-    unless Dir.entries(@gem).include? "samples"
-      return header "No samples for #{@gem}. Exiting"
-    end
-    unless updated_samples.include? @gem
-      return header "No changes for #{@gem}'s samples'. Exiting"
-    end
-    header "Found changes for #{@gem}"
-    run_ci do
-      run "bundle exec rake samples:master", 3600
+    samples_to_be_tested.each do |gem|
+      header "Found changes for #{gem}. Running sample tests"
+      run_ci gem do
+        run "bundle exec rake samples:master", 3600
+      end
     end
   end
 
@@ -129,6 +125,27 @@ class Kokoro < Command
     @tag = "#{@gem}/v#{version}"
   end
 
+  def all_local_docs_tests
+    all_broken_links = {}
+    @gems.each do |gem|
+      run_ci gem, true do
+        broken_links = local_docs_test
+        all_broken_links[gem] = broken_links unless broken_links.empty?
+      end
+    end
+    all_broken_links.each do |gem, links|
+      puts
+      puts "**** BROKEN: #{gem} ****"
+      links.each { |link| puts "  #{link}" }
+    end
+  end
+
+  def one_local_docs_test gem
+    run_ci gem, true do
+      local_docs_test
+    end
+  end
+
   def exit_status
     @failed ? 1 : 0
   end
@@ -143,7 +160,7 @@ class Kokoro < Command
         puts err
       end
       checked_links = out.split "\n"
-      checked_links.select! { |link| link =~ /\[\d+\]/ && !link.include?("[200]") }
+      checked_links.select! { |link| link =~ /^\[\d+\]/ && !link.include?("[200]") }
       unless checked_links.empty?
         @failed = true
         broken_links[location] += checked_links
@@ -156,6 +173,7 @@ class Kokoro < Command
     run "bundle exec rake yard"
     broken_links = check_links ["doc"], ".", " -r"
     puts_broken_links broken_links
+    broken_links["doc"]
   end
 
   def should_link_check? gem = nil
@@ -252,12 +270,20 @@ class Kokoro < Command
     verify_in_gemfile gem unless local
   end
 
-  def updated_samples
-    updated_directories = `git --no-pager diff --name-only HEAD^ HEAD | grep "/" | cut -d/ -f 1-2 | sort | uniq || true`
-    updated_directories = updated_directories.split "\n"
-    updated_directories.select! { |dir| dir.split("/")[1] == "samples" }
-    updated_directories.map! { |dir| dir.split("/").first }
-    updated_directories.select { |dir| gems.include? dir.split("/").first }
+  def sample_dirs
+    gems.select do |gem|
+      Dir.entries(gem).include? "samples"
+    end
+  end
+
+  # returns a list of every gem where either its sample
+  # or its related gems have changed.
+  def samples_to_be_tested
+    sample_dirs.select do |dir|
+      @updated_gems.any? do |gem|
+        gem.include? dir
+      end
+    end
   end
 
   def verify_in_gemfile gem = nil

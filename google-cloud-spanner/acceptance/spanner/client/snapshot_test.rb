@@ -31,6 +31,8 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "runs a query" do
+    skip if emulator_enabled?
+
     results = nil
     db.snapshot do |snp|
       _(snp.transaction_id).wont_be :nil?
@@ -47,6 +49,8 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "runs a query with query options" do
+    skip if emulator_enabled?
+
     query_options = { optimizer_version: "latest" }
     results = nil
     db.snapshot do |snp|
@@ -80,6 +84,8 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "runs a query with strong option" do
+    skip if emulator_enabled?
+
     results = nil
     db.snapshot strong: true do |snp|
       _(snp.transaction_id).wont_be :nil?
@@ -112,6 +118,8 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "runs a query with timestamp option" do
+    skip if emulator_enabled?
+
     results = nil
     db.snapshot timestamp: @setup_timestamp do |snp|
       _(snp.transaction_id).wont_be :nil?
@@ -144,6 +152,8 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "runs a query with staleness option" do
+    skip if emulator_enabled?
+
     results = nil
     db.snapshot staleness: 0.0001 do |snp|
       _(snp.transaction_id).wont_be :nil?
@@ -174,6 +184,7 @@ describe "Spanner Client", :snapshot, :spanner do
       assert_accounts_equal expected, actual
     end
   end
+
 
   it "strong reads are consistent even when updates happen" do
     first_row = default_account_rows.first
@@ -264,6 +275,8 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "staleness reads are consistent even when updates happen" do
+    skip if emulator_enabled?
+
     first_row = default_account_rows.first
     sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
     modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
@@ -286,6 +299,8 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "staleness queries are consistent even when updates happen" do
+    skip if emulator_enabled?
+
     first_row = default_account_rows.first
     sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
     modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }

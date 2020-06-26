@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "bigquerystorage.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-bigquery-storage/latest",
     "distribution_name": "google-cloud-bigquery-storage",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-bigquery-storage/latest"
+    "language": "ruby",
+    "name": "bigquerystorage",
+    "name_pretty": "BigQuery Storage API",
+    "product_documentation": "https://cloud.google.com/bigquery/docs/reference/storage",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }

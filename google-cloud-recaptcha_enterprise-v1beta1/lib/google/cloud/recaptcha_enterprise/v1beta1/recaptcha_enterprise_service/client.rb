@@ -25,7 +25,7 @@ module Google
       module V1beta1
         module RecaptchaEnterpriseService
           ##
-          # Client for the RecaptchaEnterpriseServiceV1Beta1 service.
+          # Client for the RecaptchaEnterpriseService service.
           #
           # Service to determine the likelihood an event is legitimate.
           #
@@ -33,17 +33,17 @@ module Google
             include Paths
 
             # @private
-            attr_reader :recaptcha_enterprise_service_v1_beta1_stub
+            attr_reader :recaptcha_enterprise_service_stub
 
             ##
-            # Configure the RecaptchaEnterpriseServiceV1Beta1 Client class.
+            # Configure the RecaptchaEnterpriseService Client class.
             #
             # See {::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
-            # To modify the configuration for all RecaptchaEnterpriseServiceV1Beta1 clients:
+            # To modify the configuration for all RecaptchaEnterpriseService clients:
             #
             #     ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.configure do |config|
             #       config.timeout = 10.0
@@ -86,7 +86,7 @@ module Google
             end
 
             ##
-            # Configure the RecaptchaEnterpriseServiceV1Beta1 Client instance.
+            # Configure the RecaptchaEnterpriseService Client instance.
             #
             # The configuration is set to the derived mode, meaning that values can be changed,
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
@@ -106,23 +106,23 @@ module Google
             end
 
             ##
-            # Create a new RecaptchaEnterpriseServiceV1Beta1 client object.
+            # Create a new RecaptchaEnterpriseService client object.
             #
             # ## Examples
             #
-            # To create a new RecaptchaEnterpriseServiceV1Beta1 client with the default
+            # To create a new RecaptchaEnterpriseService client with the default
             # configuration:
             #
             #     client = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
             #
-            # To create a new RecaptchaEnterpriseServiceV1Beta1 client with a custom
+            # To create a new RecaptchaEnterpriseService client with a custom
             # configuration:
             #
             #     client = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new do |config|
             #       config.timeout = 10.0
             #     end
             #
-            # @yield [config] Configure the RecaptchaEnterpriseServiceV1Beta1 client.
+            # @yield [config] Configure the RecaptchaEnterpriseService client.
             # @yieldparam config [Client::Configuration]
             #
             def initialize
@@ -144,9 +144,10 @@ module Google
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
-              @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
+              @quota_project_id = @config.quota_project
+              @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
-              @recaptcha_enterprise_service_v1_beta1_stub = ::Gapic::ServiceStub.new(
+              @recaptcha_enterprise_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseServiceV1Beta1::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
@@ -218,7 +219,7 @@ module Google
               options.apply_defaults metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @recaptcha_enterprise_service_v1_beta1_stub.call_rpc :create_assessment, request, options: options do |response, operation|
+              @recaptcha_enterprise_service_stub.call_rpc :create_assessment, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -288,7 +289,7 @@ module Google
               options.apply_defaults metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @recaptcha_enterprise_service_v1_beta1_stub.call_rpc :annotate_assessment, request, options: options do |response, operation|
+              @recaptcha_enterprise_service_stub.call_rpc :annotate_assessment, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -357,7 +358,7 @@ module Google
               options.apply_defaults metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @recaptcha_enterprise_service_v1_beta1_stub.call_rpc :create_key, request, options: options do |response, operation|
+              @recaptcha_enterprise_service_stub.call_rpc :create_key, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -430,8 +431,8 @@ module Google
               options.apply_defaults metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @recaptcha_enterprise_service_v1_beta1_stub.call_rpc :list_keys, request, options: options do |response, operation|
-                response = ::Gapic::PagedEnumerable.new @recaptcha_enterprise_service_v1_beta1_stub, :list_keys, request, response, operation, options
+              @recaptcha_enterprise_service_stub.call_rpc :list_keys, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @recaptcha_enterprise_service_stub, :list_keys, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
@@ -498,7 +499,7 @@ module Google
               options.apply_defaults metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @recaptcha_enterprise_service_v1_beta1_stub.call_rpc :get_key, request, options: options do |response, operation|
+              @recaptcha_enterprise_service_stub.call_rpc :get_key, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -567,7 +568,7 @@ module Google
               options.apply_defaults metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @recaptcha_enterprise_service_v1_beta1_stub.call_rpc :update_key, request, options: options do |response, operation|
+              @recaptcha_enterprise_service_stub.call_rpc :update_key, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -634,7 +635,7 @@ module Google
               options.apply_defaults metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
-              @recaptcha_enterprise_service_v1_beta1_stub.call_rpc :delete_key, request, options: options do |response, operation|
+              @recaptcha_enterprise_service_stub.call_rpc :delete_key, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -643,9 +644,9 @@ module Google
             end
 
             ##
-            # Configuration class for the RecaptchaEnterpriseServiceV1Beta1 API.
+            # Configuration class for the RecaptchaEnterpriseService API.
             #
-            # This class represents the configuration for RecaptchaEnterpriseServiceV1Beta1,
+            # This class represents the configuration for RecaptchaEnterpriseService,
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
@@ -718,24 +719,28 @@ module Google
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
+            # @!attribute [rw] quota_project
+            #   A separate project against which to charge quota.
+            #   @return [::String]
             #
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,     "recaptchaenterprise.googleapis.com", String
-              config_attr :credentials,  nil do |value|
+              config_attr :endpoint,      "recaptchaenterprise.googleapis.com", ::String
+              config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, ::String, ::Array, nil
-              config_attr :lib_name,     nil, ::String, nil
-              config_attr :lib_version,  nil, ::String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
-              config_attr :interceptors, nil, ::Array, nil
-              config_attr :timeout,      nil, ::Numeric, nil
-              config_attr :metadata,     nil, ::Hash, nil
-              config_attr :retry_policy, nil, ::Hash, Proc, nil
+              config_attr :scope,         nil, ::String, ::Array, nil
+              config_attr :lib_name,      nil, ::String, nil
+              config_attr :lib_version,   nil, ::String, nil
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors,  nil, ::Array, nil
+              config_attr :timeout,       nil, ::Numeric, nil
+              config_attr :metadata,      nil, ::Hash, nil
+              config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
+              config_attr :quota_project, nil, ::String, nil
 
               # @private
               def initialize parent_config = nil
@@ -751,13 +756,13 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if @parent_config&.respond_to? :rpcs
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
 
               ##
-              # Configuration RPC class for the RecaptchaEnterpriseServiceV1Beta1 API.
+              # Configuration RPC class for the RecaptchaEnterpriseService API.
               #
               # Includes fields providing the configuration for each RPC in this service.
               # Each configuration object is of type `Gapic::Config::Method` and includes

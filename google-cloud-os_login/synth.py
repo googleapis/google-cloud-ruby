@@ -34,7 +34,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "OS_LOGIN",
         "ruby-cloud-wrapper-of": "v1:0.0;v1beta:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/compute/docs/oslogin",
-        "ruby-cloud-api-id": "oslogin",
+        "ruby-cloud-api-id": "oslogin.googleapis.com",
+        "ruby-cloud-api-shortname": "oslogin",
         "ruby-cloud-migration-version": "1.0",
     }
 )

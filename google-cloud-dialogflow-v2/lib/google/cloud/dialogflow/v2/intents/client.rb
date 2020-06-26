@@ -96,42 +96,12 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.list_intents.timeout = 60.0
-                default_config.rpcs.list_intents.retry_policy = {
+                default_config.timeout = 60.0
+                default_config.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.get_intent.timeout = 60.0
-                default_config.rpcs.get_intent.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.create_intent.timeout = 60.0
-
-                default_config.rpcs.update_intent.timeout = 60.0
-
-                default_config.rpcs.delete_intent.timeout = 60.0
-                default_config.rpcs.delete_intent.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.batch_update_intents.timeout = 60.0
-
-                default_config.rpcs.batch_delete_intents.timeout = 60.0
-                default_config.rpcs.batch_delete_intents.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["UNAVAILABLE"]
                 }
 
                 default_config
@@ -199,7 +169,8 @@ module Google
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
-              @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
+              @quota_project_id = @config.quota_project
+              @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
@@ -836,24 +807,28 @@ module Google
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
+            # @!attribute [rw] quota_project
+            #   A separate project against which to charge quota.
+            #   @return [::String]
             #
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,     "dialogflow.googleapis.com", String
-              config_attr :credentials,  nil do |value|
+              config_attr :endpoint,      "dialogflow.googleapis.com", ::String
+              config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, ::String, ::Array, nil
-              config_attr :lib_name,     nil, ::String, nil
-              config_attr :lib_version,  nil, ::String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
-              config_attr :interceptors, nil, ::Array, nil
-              config_attr :timeout,      nil, ::Numeric, nil
-              config_attr :metadata,     nil, ::Hash, nil
-              config_attr :retry_policy, nil, ::Hash, Proc, nil
+              config_attr :scope,         nil, ::String, ::Array, nil
+              config_attr :lib_name,      nil, ::String, nil
+              config_attr :lib_version,   nil, ::String, nil
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors,  nil, ::Array, nil
+              config_attr :timeout,       nil, ::Numeric, nil
+              config_attr :metadata,      nil, ::Hash, nil
+              config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
+              config_attr :quota_project, nil, ::String, nil
 
               # @private
               def initialize parent_config = nil
@@ -869,7 +844,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if @parent_config&.respond_to? :rpcs
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end

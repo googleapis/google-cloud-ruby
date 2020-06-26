@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Registers and manages IoT (Internet of Things) devices that connect to the Google Cloud Platform."
-  gem.summary       = "API Client library for the Cloud IoT API V1 API"
+  gem.summary       = "API Client library for the Cloud IoT V1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -23,12 +23,14 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.4"
 
-  gem.add_dependency "gapic-common", "~> 0.2"
+  gem.add_dependency "gapic-common", "~> 0.3"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
   gem.add_dependency "grpc-google-iam-v1", ">= 0.6.10", "< 2.0"
 
   gem.add_development_dependency "google-style", "~> 1.24.0"
-  gem.add_development_dependency "minitest", "~> 5.10"
+  gem.add_development_dependency "minitest", "~> 5.14"
+  gem.add_development_dependency "minitest-focus", "~> 1.1"
+  gem.add_development_dependency "minitest-rg", "~> 5.2"
   gem.add_development_dependency "rake", ">= 12.0"
   gem.add_development_dependency "redcarpet", "~> 3.0"
   gem.add_development_dependency "simplecov", "~> 0.18"

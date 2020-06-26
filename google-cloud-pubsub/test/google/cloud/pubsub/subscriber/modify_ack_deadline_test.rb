@@ -27,6 +27,7 @@ describe Google::Cloud::PubSub::Subscriber, :modify_ack_deadline, :mock_pubsub d
                           rec_message_hash("rec_message2-msg-goes-here", 1112) }
   let(:rec_msg3_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.new \
                           rec_message_hash("rec_message3-msg-goes-here", 1113) }
+  let(:client_id) { "my-client-uuid" }
 
   it "can modify_ack_deadline a single message" do
     rec_message_msg = "pulled-message"
@@ -38,6 +39,8 @@ describe Google::Cloud::PubSub::Subscriber, :modify_ack_deadline, :mock_pubsub d
     called = false
 
     subscription.service.mocked_subscriber = stub
+    subscription.service.client_id = client_id
+
     subscriber = subscription.listen streams: 1 do |msg|
       # flush the initial buffer before any callbacks are processed
       subscriber.buffer.flush! unless called
@@ -63,6 +66,7 @@ describe Google::Cloud::PubSub::Subscriber, :modify_ack_deadline, :mock_pubsub d
 
     _(stub.requests.map(&:to_a)).must_equal [
       [Google::Cloud::PubSub::V1::StreamingPullRequest.new(
+        client_id: client_id,
         subscription: sub_path,
         stream_ack_deadline_seconds: 60
       )]
@@ -92,6 +96,8 @@ describe Google::Cloud::PubSub::Subscriber, :modify_ack_deadline, :mock_pubsub d
     called = 0
 
     subscription.service.mocked_subscriber = stub
+    subscription.service.client_id = client_id
+
     subscriber = subscription.listen streams: 1 do |msg|
       # flush the initial buffer before any callbacks are processed
       subscriber.buffer.flush! if called.zero?
@@ -114,6 +120,7 @@ describe Google::Cloud::PubSub::Subscriber, :modify_ack_deadline, :mock_pubsub d
 
     _(stub.requests.map(&:to_a)).must_equal [
       [Google::Cloud::PubSub::V1::StreamingPullRequest.new(
+        client_id: client_id,
         subscription: sub_path,
         stream_ack_deadline_seconds: 60
       )]

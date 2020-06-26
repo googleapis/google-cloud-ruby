@@ -1,5 +1,21 @@
 # Release History
 
+### 1.0.0 / 2020-06-24
+
+Promote to version 1.0.0
+
+### 0.5.0 / 2020-05-20
+
+#### Features
+
+* The endpoint, scope, and quota_project can be set via configuration
+
+### 0.4.1 / 2020-05-05
+
+#### Bug Fixes
+
+* Eliminated a circular require warning.
+
 ### 0.4.0 / 2020-04-13
 
 #### Features

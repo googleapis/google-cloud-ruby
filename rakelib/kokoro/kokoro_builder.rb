@@ -13,6 +13,7 @@ class KokoroBuilder < Command
   end
 
   def build
+    remove_old_ruby_versions
     build_kokoro_configs
     generate_dockerfiles
   end
@@ -27,10 +28,18 @@ class KokoroBuilder < Command
     end
   end
 
-  def from_template template, output, gem: nil, base: nil
+  def from_template template, output, gem: nil, base: nil, ruby_version: nil
     File.open output, "w" do |f|
       config = ERB.new File.read(template)
       f.write config.result(binding)
+    end
+  end
+
+  def remove_old_ruby_versions
+    files = Dir.glob "./.kokoro/**/*.cfg"
+    files.select! { |file| file.match(/ruby_\d+\.\d+\.\d+\.cfg/) }
+    files.each do |file|
+      FileUtils.remove_file file
     end
   end
 
@@ -38,10 +47,9 @@ class KokoroBuilder < Command
     gems.each do |gem|
       name = gem.split("google-cloud-").last
       build_types = [:continuous, :nightly]
-      build_types += [:samples_latest, :samples_presubmit] unless name =~ /-v\d\w*$/
+      build_types << :samples_latest unless name =~ /-v\d\w*$/
       [:linux, :windows, :osx].each do |os_version|
         build_types.each do |build_type|
-          next if build_type == :samples_presubmit && os_version != :linux
           from_template "./.kokoro/templates/#{os_version}.cfg.erb",
                         "./.kokoro/#{build_type}/#{os_version}/#{name}.cfg",
                         gem: gem
@@ -50,6 +58,11 @@ class KokoroBuilder < Command
       from_template "./.kokoro/templates/release.cfg.erb",
                     "./.kokoro/release/#{name}.cfg",
                     gem: gem
+    end
+    KOKORO_RUBY_VERSIONS.each do |ruby_version|
+      from_template "./.kokoro/templates/linux.cfg.erb",
+                    "./.kokoro/samples_presubmit/linux/ruby_#{ruby_version}.cfg",
+                    ruby_version: ruby_version
     end
     from_template "./.kokoro/templates/linux.cfg.erb",
                   "./.kokoro/continuous/linux/post.cfg",

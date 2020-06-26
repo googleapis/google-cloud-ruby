@@ -510,13 +510,11 @@ module Google
           #   A hash of the same form as `Google::Cloud::PubSub::V1::ExpirationPolicy`
           #   can also be provided.
           # @param filter [String]
-          #   An expression written in the Cloud Pub/Sub filter language. If non-empty,
+          #   An expression written in the Pub/Sub [filter
+          #   language](https://cloud.google.com/pubsub/docs/filtering). If non-empty,
           #   then only `PubsubMessage`s whose `attributes` field matches the filter are
           #   delivered on this subscription. If empty, then no messages are filtered
           #   out.
-          #   <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
-          #   API might be changed in backward-incompatible ways and is not recommended
-          #   for production use. It is not subject to any SLA or deprecation policy.
           # @param dead_letter_policy [Google::Cloud::PubSub::V1::DeadLetterPolicy | Hash]
           #   A policy that specifies the conditions for dead lettering messages in
           #   this subscription. If dead_letter_policy is not set, dead lettering
@@ -529,18 +527,21 @@ module Google
           #   A hash of the same form as `Google::Cloud::PubSub::V1::DeadLetterPolicy`
           #   can also be provided.
           # @param retry_policy [Google::Cloud::PubSub::V1::RetryPolicy | Hash]
-          #   A policy that specifies how Cloud Pub/Sub retries message delivery for this
+          #   A policy that specifies how Pub/Sub retries message delivery for this
           #   subscription.
           #
           #   If not set, the default retry policy is applied. This generally implies
           #   that messages will be retried as soon as possible for healthy subscribers.
           #   RetryPolicy will be triggered on NACKs or acknowledgement deadline
           #   exceeded events for a given message.
-          #   <b>EXPERIMENTAL:</b> This API might be changed in backward-incompatible
-          #   ways and is not recommended for production use. It is not subject to any
-          #   SLA or deprecation policy.
           #   A hash of the same form as `Google::Cloud::PubSub::V1::RetryPolicy`
           #   can also be provided.
+          # @param detached [true, false]
+          #   Indicates whether the subscription is detached from its topic. Detached
+          #   subscriptions don't receive messages from their topic and don't retain any
+          #   backlog. `Pull` and `StreamingPull` requests will return
+          #   FAILED_PRECONDITION. If the subscription is a push subscription, pushes to
+          #   the endpoint will not be made.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -570,6 +571,7 @@ module Google
               filter: nil,
               dead_letter_policy: nil,
               retry_policy: nil,
+              detached: nil,
               options: nil,
               &block
             req = {
@@ -584,7 +586,8 @@ module Google
               expiration_policy: expiration_policy,
               filter: filter,
               dead_letter_policy: dead_letter_policy,
-              retry_policy: retry_policy
+              retry_policy: retry_policy,
+              detached: detached
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::PubSub::V1::Subscription)
             @create_subscription.call(req, options, &block)

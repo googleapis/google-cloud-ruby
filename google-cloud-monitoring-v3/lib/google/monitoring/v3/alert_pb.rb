@@ -34,7 +34,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :condition do
         optional :condition_threshold, :message, 1, "google.monitoring.v3.AlertPolicy.Condition.MetricThreshold"
         optional :condition_absent, :message, 2, "google.monitoring.v3.AlertPolicy.Condition.MetricAbsence"
-        optional :condition_time_series_query_language, :message, 14, "google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition"
       end
     end
     add_message "google.monitoring.v3.AlertPolicy.Condition.Trigger" do
@@ -59,10 +58,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :duration, :message, 2, "google.protobuf.Duration"
       optional :trigger, :message, 3, "google.monitoring.v3.AlertPolicy.Condition.Trigger"
     end
-    add_message "google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition" do
-      optional :query, :string, 1
-      optional :summary, :string, 2
-    end
     add_enum "google.monitoring.v3.AlertPolicy.ConditionCombinerType" do
       value :COMBINE_UNSPECIFIED, 0
       value :AND, 1
@@ -82,7 +77,6 @@ module Google
         AlertPolicy::Condition::Trigger = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition.Trigger").msgclass
         AlertPolicy::Condition::MetricThreshold = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition.MetricThreshold").msgclass
         AlertPolicy::Condition::MetricAbsence = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition.MetricAbsence").msgclass
-        AlertPolicy::Condition::TimeSeriesQueryLanguageCondition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition").msgclass
         AlertPolicy::ConditionCombinerType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.ConditionCombinerType").enummodule
       end
     end

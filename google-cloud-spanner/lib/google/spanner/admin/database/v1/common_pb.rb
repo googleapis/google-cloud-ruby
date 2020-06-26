@@ -19,10 +19,10 @@ module Google
   module Spanner
     module Admin
       module Database
-        module V1
-          OperationProgress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.OperationProgress").msgclass
-        end
       end
     end
   end
+end
+module Google::Spanner::Admin::Database::V1
+  OperationProgress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.OperationProgress").msgclass
 end

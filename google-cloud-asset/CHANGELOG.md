@@ -1,5 +1,33 @@
 # Release History
 
+### 1.1.2 / 2020-06-18
+
+#### Documentation
+
+* Updated the product URL in the readme
+
+### 1.1.1 / 2020-05-26
+
+#### Documentation
+
+* Cover exception changes in the migration guide
+
+### 1.1.0 / 2020-05-20
+
+#### Features
+
+* The endpoint, scope, and quota_project can be set via configuration
+
+### 1.0.2 / 2020-05-05
+
+#### Bug Fixes
+
+* Eliminated a circular require warning.
+
+#### Documentation
+
+* Updated the sample timeouts in the migration guide to reflect seconds
+
 ### 1.0.1 / 2020-04-24
 
 #### Documentation

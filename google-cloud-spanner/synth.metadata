@@ -11,15 +11,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "83ac07884f9553d6a3af45397a2a04ba15fd25ec"
+        "sha": "2bdd89702c7aa606b4a46069694fedeedfd71a5e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "cdf13efacdea0649e940452f9c5d320b93735974",
-        "internalRef": "306783437"
+        "sha": "b5653ef55579186841dee924592248d821902a12",
+        "internalRef": "316144276"
       }
     }
   ],

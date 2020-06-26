@@ -37,14 +37,14 @@ end
 module Google
   module Devtools
     module Clouddebugger
-      module V2
-        RegisterDebuggeeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.RegisterDebuggeeRequest").msgclass
-        RegisterDebuggeeResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.RegisterDebuggeeResponse").msgclass
-        ListActiveBreakpointsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.ListActiveBreakpointsRequest").msgclass
-        ListActiveBreakpointsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.ListActiveBreakpointsResponse").msgclass
-        UpdateActiveBreakpointRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.UpdateActiveBreakpointRequest").msgclass
-        UpdateActiveBreakpointResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.UpdateActiveBreakpointResponse").msgclass
-      end
     end
   end
+end
+module Google::Devtools::Clouddebugger::V2
+  RegisterDebuggeeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.RegisterDebuggeeRequest").msgclass
+  RegisterDebuggeeResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.RegisterDebuggeeResponse").msgclass
+  ListActiveBreakpointsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.ListActiveBreakpointsRequest").msgclass
+  ListActiveBreakpointsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.ListActiveBreakpointsResponse").msgclass
+  UpdateActiveBreakpointRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.UpdateActiveBreakpointRequest").msgclass
+  UpdateActiveBreakpointResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.UpdateActiveBreakpointResponse").msgclass
 end

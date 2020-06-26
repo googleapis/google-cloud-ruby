@@ -29,7 +29,11 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
   let(:dead_letter_topic_path) { topic_path(dead_letter_topic_name) }
   let(:new_dead_letter_topic_name) { "topic-name-dead-letter-2" }
   let(:new_dead_letter_topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(new_dead_letter_topic_name)), pubsub.service }
-  let(:sub_hash) { subscription_hash topic_name, sub_name, labels: labels, dead_letter_topic: dead_letter_topic_path, max_delivery_attempts: 6 }
+  let(:retry_minimum_backoff) { 12.123 }
+  let(:new_retry_minimum_backoff) { 13 }
+  let(:retry_maximum_backoff) { 123.321 }
+  let(:new_retry_maximum_backoff) { 130 }
+  let(:sub_hash) { subscription_hash topic_name, sub_name, labels: labels, dead_letter_topic: dead_letter_topic_path, max_delivery_attempts: 6, retry_minimum_backoff: retry_minimum_backoff, retry_maximum_backoff: retry_maximum_backoff }
   let(:sub_deadline) { sub_hash["ack_deadline_seconds"] }
   let(:sub_endpoint) { sub_hash["push_config"]["push_endpoint"] }
   let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.new(sub_hash) }
@@ -255,6 +259,38 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     assert_raises ArgumentError do
       subscription_without_dead_letter.dead_letter_max_delivery_attempts = 7
     end
+  end
+
+  it "updates retry_minimum_backoff" do
+    retry_policy = Google::Cloud::PubSub::V1::RetryPolicy.new minimum_backoff: new_retry_minimum_backoff, maximum_backoff: retry_maximum_backoff
+    update_sub = Google::Cloud::PubSub::V1::Subscription.new name: sub_path, retry_policy: retry_policy
+    update_mask = Google::Protobuf::FieldMask.new paths: ["retry_policy"]
+    mock = Minitest::Mock.new
+    mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+    subscription.service.mocked_subscriber = mock
+
+    subscription.retry_policy = Google::Cloud::PubSub::RetryPolicy.new minimum_backoff: new_retry_minimum_backoff, maximum_backoff: retry_maximum_backoff
+
+    mock.verify
+
+    _(subscription.retry_policy.minimum_backoff).must_equal new_retry_minimum_backoff
+    _(subscription.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
+  end
+
+  it "updates retry_maximum_backoff" do
+    retry_policy = Google::Cloud::PubSub::V1::RetryPolicy.new minimum_backoff: retry_minimum_backoff, maximum_backoff: new_retry_maximum_backoff
+    update_sub = Google::Cloud::PubSub::V1::Subscription.new name: sub_path, retry_policy: retry_policy
+    update_mask = Google::Protobuf::FieldMask.new paths: ["retry_policy"]
+    mock = Minitest::Mock.new
+    mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+    subscription.service.mocked_subscriber = mock
+
+    subscription.retry_policy = Google::Cloud::PubSub::RetryPolicy.new minimum_backoff: retry_minimum_backoff, maximum_backoff: new_retry_maximum_backoff
+
+    mock.verify
+
+    _(subscription.retry_policy.minimum_backoff).must_equal retry_minimum_backoff
+    _(subscription.retry_policy.maximum_backoff).must_equal new_retry_maximum_backoff
   end
 
   describe :reference do

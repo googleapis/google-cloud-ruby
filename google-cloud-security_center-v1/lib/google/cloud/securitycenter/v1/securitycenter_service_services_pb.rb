@@ -86,8 +86,8 @@ module Google
             # Creates or updates a finding. The corresponding source must exist for a
             # finding creation to succeed.
             rpc :UpdateFinding, Google::Cloud::SecurityCenter::V1::UpdateFindingRequest, Google::Cloud::SecurityCenter::V1::Finding
-            #
-            # Updates a notification config.
+            # Updates a notification config. The following update
+            # fields are allowed: description, pubsub_topic, streaming_config.filter
             rpc :UpdateNotificationConfig, Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest, Google::Cloud::SecurityCenter::V1::NotificationConfig
             # Updates an organization's settings.
             rpc :UpdateOrganizationSettings, Google::Cloud::SecurityCenter::V1::UpdateOrganizationSettingsRequest, Google::Cloud::SecurityCenter::V1::OrganizationSettings

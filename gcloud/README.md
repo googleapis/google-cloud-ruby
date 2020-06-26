@@ -21,7 +21,7 @@ $ gem install gcloud
 ## Authentication
 
 Instructions and configuration options are covered in the [Authentication
-Guide](https://googleapis.dev/gcloud/latest/file.AUTHENTICATION.html).
+Guide](https://googleapis.dev/ruby/gcloud/latest/file.AUTHENTICATION.html).
 
 ## Example
 

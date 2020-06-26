@@ -28,9 +28,12 @@ library = gapic.ruby_library(
     extra_proto_files=["google/cloud/common_resources.proto"],
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-access_approval-v1",
-        "ruby-cloud-title": "Access Approval API V1",
+        "ruby-cloud-title": "Access Approval V1",
         "ruby-cloud-description": "An API for controlling access to data by Google personnel.",
         "ruby-cloud-env-prefix": "ACCESS_APPROVAL",
+        "ruby-cloud-product-url": "https://cloud.google.com/access-approval/",
+        "ruby-cloud-api-id": "accessapproval.googleapis.com",
+        "ruby-cloud-api-shortname": "accessapproval",
     }
 )
 

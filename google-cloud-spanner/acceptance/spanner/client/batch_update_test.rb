@@ -37,6 +37,8 @@ describe "Spanner Client", :batch_update, :spanner do
   end
 
   it "executes multiple DML statements in a batch" do
+    skip if emulator_enabled?
+
     prior_results = db.execute_sql "SELECT * FROM accounts"
     _(prior_results.rows.count).must_equal 3
 
@@ -64,17 +66,19 @@ describe "Spanner Client", :batch_update, :spanner do
   end
 
   it "raises InvalidArgumentError when no DML statements are executed in a batch" do
-      prior_results = db.execute_sql "SELECT * FROM accounts"
-      _(prior_results.rows.count).must_equal 3
+    skip if emulator_enabled?
 
-      timestamp = db.transaction do |tx|
-        _(tx.transaction_id).wont_be :nil?
+    prior_results = db.execute_sql "SELECT * FROM accounts"
+    _(prior_results.rows.count).must_equal 3
 
-        err = expect do
-          tx.batch_update do |b| end
-        end.must_raise Google::Cloud::InvalidArgumentError
+    timestamp = db.transaction do |tx|
+      _(tx.transaction_id).wont_be :nil?
+
+      err = expect do
+        tx.batch_update do |b| end
+      end.must_raise Google::Cloud::InvalidArgumentError
         _(err.message).must_equal "3:No statements in batch DML request."
-      end
+    end
     _(timestamp).must_be_kind_of Time
   end
 
@@ -108,6 +112,8 @@ describe "Spanner Client", :batch_update, :spanner do
   end
 
   it "runs execute_update and batch_update in the same transaction" do
+    skip if emulator_enabled?
+
     prior_results = db.execute_sql "SELECT * FROM accounts"
     _(prior_results.rows.count).must_equal 3
 

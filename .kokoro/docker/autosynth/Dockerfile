@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM ubuntu:latest
+FROM ubuntu:bionic
 
 ENTRYPOINT /bin/bash
 
@@ -45,8 +45,8 @@ RUN git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ru
 # Install ruby
 ENV RUBY_CONFIGURE_OPTS --disable-install-doc
 RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc
-RUN rbenv install 2.6.5 && rbenv global 2.6.5 \
-    && gem install bundler:1.17.3 bundler:2.0.2 rake
+RUN rbenv install 2.7.1 && rbenv global 2.7.1 \
+    && gem install bundler:1.17.3 bundler:2.1.4 rake
 
 # Install pyenv
 RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv

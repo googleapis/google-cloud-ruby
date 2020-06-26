@@ -1,7 +1,7 @@
 require "bundler/setup"
 require "fileutils"
 
-KOKORO_RUBY_VERSIONS = ["2.4.9", "2.5.7", "2.6.5"].freeze
+KOKORO_RUBY_VERSIONS = ["2.4.10", "2.5.8", "2.6.6", "2.7.1"].freeze
 
 task :bundleupdate do
   valid_gems.each do |gem|
@@ -602,6 +602,17 @@ namespace :kokoro do
     Rake::Task["docs:republish_all"].invoke
   end
 
+  task :all_local_docs_tests do
+    kokoro.all_local_docs_tests
+    exit kokoro.exit_status
+  end
+
+  task :one_local_docs_test, [:gem] do |t, args|
+    gem = args[:gem]
+    kokoro.one_local_docs_test gem
+    exit kokoro.exit_status
+  end
+
   def kokoro
     @kokoro ||= Kokoro.new KOKORO_RUBY_VERSIONS,
                            gems,
@@ -624,7 +635,7 @@ end
 
 def update_supported_ruby_versions
   readme_text = ""
-  File.open "./README.md", "r+" do |f| 
+  File.open "./README.md", "r+" do |f|
     readme_text = f.read
   end
 
@@ -633,7 +644,7 @@ def update_supported_ruby_versions
   new_content = readme_text.gsub /#{ruby_version_text}(.*)\+/,
                                  "#{ruby_version_text}#{earliest_ruby}+"
 
-  File.open "./README.md", "w" do |f| 
+  File.open "./README.md", "w" do |f|
     f.write new_content
   end
 end

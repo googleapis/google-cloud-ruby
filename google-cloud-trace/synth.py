@@ -151,3 +151,17 @@ for version in ['v1', 'v2']:
         'Gem.loaded_specs\[.*\]\.version\.version',
         'Google::Cloud::Trace::VERSION'
     )
+
+# We recently added ruby_package proto options, but we want those to apply only
+# when we move to the microgenerator. Undo their effect while the monolith is
+# still in use.
+s.replace(
+    'lib/google/devtools/cloudtrace/v1/*_pb.rb',
+    '\nmodule Google::Cloud::Trace::V1\n',
+    '\nmodule Google\n  module Devtools\n    module Cloudtrace\n    end\n  end\nend\nmodule Google::Devtools::Cloudtrace::V1\n',
+)
+s.replace(
+    'lib/google/devtools/cloudtrace/v2/*_pb.rb',
+    '\nmodule Google::Cloud::Trace::V2\n',
+    '\nmodule Google\n  module Devtools\n    module Cloudtrace\n    end\n  end\nend\nmodule Google::Devtools::Cloudtrace::V2\n',
+)

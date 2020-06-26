@@ -1,5 +1,19 @@
 # Release History
 
+### 1.0.0 / 2020-06-17
+
+This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
+
+Among the highlights:
+
+* Generic defaults do not default to Google's implementation. (Use the google-cloud-container_analysis gem for a Google-specific client.)
+* Separate client libraries are now provided for specific service versions.
+* A new configuration mechanism makes it easier to control parameters such as endpoint address, network timeouts, and retry.
+* A consistent method interface using keyword arguments for all fields, and supporting request proto objects.
+* Helper methods for generating resource paths are more accessible.
+
+See the MIGRATING file in the documentation for more detailed information, and instructions for migrating from earlier versions.
+
 ### 0.3.1 / 2020-04-01
 
 #### Documentation

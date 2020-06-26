@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "cloudscheduler.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-scheduler/latest",
     "distribution_name": "google-cloud-scheduler",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-scheduler/latest"
+    "language": "ruby",
+    "name": "cloudscheduler",
+    "name_pretty": "Cloud Scheduler API",
+    "product_documentation": "https://cloud.google.com/scheduler",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }

@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "secretmanager.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-secret_manager-v1/latest",
     "distribution_name": "google-cloud-secret_manager-v1",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-secret_manager-v1/latest"
+    "language": "ruby",
+    "name": "secretmanager",
+    "name_pretty": "Secret Manager V1 API",
+    "product_documentation": "https://cloud.google.com/secret-manager",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }

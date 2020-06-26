@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Schedules queries and transfers external data from SaaS applications to Google BigQuery on a regular basis."
-  gem.summary       = "API Client library for the BigQuery Data Transfer API"
+  gem.summary       = "API Client library for the BigQuery Data Transfer Service API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -22,13 +22,11 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.4"
 
-  gem.add_dependency "google-cloud-core", "~> 1.5"
   gem.add_dependency "google-cloud-bigquery-data_transfer-v1", "~> 0.0"
+  gem.add_dependency "google-cloud-core", "~> 1.5"
 
-  gem.add_development_dependency "autotest-suffix", "~> 1.1"
   gem.add_development_dependency "google-style", "~> 1.24.0"
   gem.add_development_dependency "minitest", "~> 5.14"
-  gem.add_development_dependency "minitest-autotest", "~> 1.0"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"
   gem.add_development_dependency "rake", ">= 12.0"

@@ -1,4 +1,4 @@
-# Copyright 2020 Google, LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,9 @@ describe "Storage Quickstart" do
 
   it "creates a new bucket" do
     assert_output "Bucket #{bucket_name} was created.\n" do
-      quickstart bucket_name: bucket_name
+      retry_resource_exhaustion do
+        quickstart bucket_name: bucket_name
+      end
     end
 
     assert storage_client.bucket bucket_name

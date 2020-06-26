@@ -24,7 +24,7 @@ command curl -sSL https://rvm.io/mpapis.asc | gpg --import -
 command curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
 rvm get head --auto-dotfiles
 
-versions=(2.4.9 2.5.7 2.6.5)
+versions=(2.4.10 2.5.8 2.6.6 2.7.1)
 rvm_versions=$(rvm list rubies)
 
 if [[ $JOB_TYPE = "presubmit" ]]; then
@@ -32,7 +32,7 @@ if [[ $JOB_TYPE = "presubmit" ]]; then
     if [[ $COMMIT_MESSAGE = *"[ci skip]"* || $COMMIT_MESSAGE = *"[skip ci]"* ]]; then
         echo "[ci skip] found. Exiting"
     else
-        version=${versions[2]}
+        version=${versions[3]}
         if [[ $rvm_versions != *$version* ]]; then
             rvm install $version
         fi

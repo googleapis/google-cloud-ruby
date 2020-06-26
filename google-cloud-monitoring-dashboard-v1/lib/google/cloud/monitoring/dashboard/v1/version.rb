@@ -22,7 +22,7 @@ module Google
     module Monitoring
       module Dashboard
         module V1
-          VERSION = "0.0.1"
+          VERSION = "0.2.1"
         end
       end
     end

@@ -21,12 +21,12 @@ module Google
   module Cloud
     module SecurityCenter
       module V1p1beta1
-        # Cloud Security Command Center (Cloud SCC) finding.
+        # Security Command Center finding.
         #
         # A finding is a record of assessment data (security, risk, health or privacy)
-        # ingested into Cloud SCC for presentation, notification, analysis,
-        # policy testing, and enforcement. For example, an XSS vulnerability in an
-        # App Engine application is a finding.
+        # ingested into Security Command Center for presentation, notification,
+        # analysis, policy testing, and enforcement. For example, an XSS vulnerability
+        # in an App Engine application is a finding.
         # @!attribute [rw] name
         #   @return [::String]
         #     The relative resource name of this finding. See:
@@ -42,12 +42,12 @@ module Google
         #     "organizations/\\{organization_id}/sources/\\{source_id}"
         # @!attribute [rw] resource_name
         #   @return [::String]
-        #     For findings on Google Cloud Platform (GCP) resources, the full resource
-        #     name of the GCP resource this finding is for. See:
+        #     For findings on Google Cloud resources, the full resource
+        #     name of the Google Cloud resource this finding is for. See:
         #     https://cloud.google.com/apis/design/resource_names#full_resource_name
-        #     When the finding is for a non-GCP resource, the resourceName can be a
-        #     customer or partner defined string.
-        #     This field is immutable after creation time.
+        #     When the finding is for a non-Google Cloud resource, the resourceName can
+        #     be a customer or partner defined string. This field is immutable after
+        #     creation time.
         # @!attribute [rw] state
         #   @return [::Google::Cloud::SecurityCenter::V1p1beta1::Finding::State]
         #     The state of the finding.
@@ -58,9 +58,9 @@ module Google
         #     Example: "XSS_FLASH_INJECTION"
         # @!attribute [rw] external_uri
         #   @return [::String]
-        #     The URI that, if available, points to a web page outside of Cloud SCC
-        #     where additional information about the finding can be found. This field is
-        #     guaranteed to be either empty or a well formed URL.
+        #     The URI that, if available, points to a web page outside of Security
+        #     Command Center where additional information about the finding can be found.
+        #     This field is guaranteed to be either empty or a well formed URL.
         # @!attribute [rw] source_properties
         #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
         #     Source specific properties. These properties are managed by the source
@@ -79,7 +79,7 @@ module Google
         #     the firewall became open. The accuracy is determined by the detector.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time at which the finding was created in Cloud SCC.
+        #     The time at which the finding was created in Security Command Center.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

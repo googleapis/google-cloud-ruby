@@ -32,6 +32,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Service directory is the single place to register, browse, and resolve application services.",
         "ruby-cloud-env-prefix": "SERVICE_DIRECTORY",
         "ruby-cloud-grpc-service-config": "google/cloud/servicedirectory/v1beta1/servicedirectory_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/service-directory",
+        "ruby-cloud-api-id": "servicedirectory.googleapis.com",
+        "ruby-cloud-api-shortname": "servicedirectory",
     }
 )
 

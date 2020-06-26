@@ -22,7 +22,7 @@ module Google
     module PhishingProtection
       module V1beta1
         module PhishingProtectionService
-          # Path helper methods for the PhishingProtectionServiceV1Beta1 API.
+          # Path helper methods for the PhishingProtectionService API.
           module Paths
             ##
             # Create a fully-qualified Project resource string.

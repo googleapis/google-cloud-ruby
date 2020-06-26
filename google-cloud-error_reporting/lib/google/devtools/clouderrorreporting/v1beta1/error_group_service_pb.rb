@@ -21,10 +21,10 @@ end
 module Google
   module Devtools
     module Clouderrorreporting
-      module V1beta1
-        GetGroupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.GetGroupRequest").msgclass
-        UpdateGroupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.UpdateGroupRequest").msgclass
-      end
     end
   end
+end
+module Google::Devtools::Clouderrorreporting::V1beta1
+  GetGroupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.GetGroupRequest").msgclass
+  UpdateGroupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.UpdateGroupRequest").msgclass
 end

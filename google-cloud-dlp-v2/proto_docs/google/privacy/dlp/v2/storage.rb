@@ -154,7 +154,7 @@ module Google
 
           # Message for detecting output from deidentification transformations
           # such as
-          # [`CryptoReplaceFfxFpeConfig`](/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+          # [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
           # These types of transformations are
           # those that perform pseudonymization, thereby producing a "surrogate" as
           # output. This should be used in conjunction with a field on the
@@ -373,6 +373,9 @@ module Google
         #     If empty, all files are scanned and available data format processors
         #     are applied. In addition, the binary content of the selected files
         #     is always scanned as well.
+        #     Images are scanned only as binary if the specified region
+        #     does not support image inspection and no file_types were specified.
+        #     Image inspection is restricted to 'global', 'us', 'asia', and 'europe'.
         # @!attribute [rw] sample_method
         #   @return [::Google::Cloud::Dlp::V2::CloudStorageOptions::SampleMethod]
         # @!attribute [rw] files_limit_percent
@@ -783,7 +786,16 @@ module Google
           # Included file extensions:
           #   bmp, gif, jpg, jpeg, jpe, png.
           # bytes_limit_per_file has no effect on image files.
+          # Image inspection is restricted to 'global', 'us', 'asia', and 'europe'.
           IMAGE = 3
+
+          # Included file extensions:
+          #   docx, dotx, docm, dotm
+          WORD = 5
+
+          # Included file extensions:
+          #   pdf
+          PDF = 6
 
           # Included file extensions:
           #   avro

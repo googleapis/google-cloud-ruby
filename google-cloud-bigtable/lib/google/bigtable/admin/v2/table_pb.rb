@@ -104,24 +104,24 @@ end
 module Google
   module Bigtable
     module Admin
-      module V2
-        RestoreInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.RestoreInfo").msgclass
-        Table = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Table").msgclass
-        Table::ClusterState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Table.ClusterState").msgclass
-        Table::ClusterState::ReplicationState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Table.ClusterState.ReplicationState").enummodule
-        Table::TimestampGranularity = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Table.TimestampGranularity").enummodule
-        Table::View = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Table.View").enummodule
-        ColumnFamily = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ColumnFamily").msgclass
-        GcRule = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GcRule").msgclass
-        GcRule::Intersection = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GcRule.Intersection").msgclass
-        GcRule::Union = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GcRule.Union").msgclass
-        Snapshot = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Snapshot").msgclass
-        Snapshot::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Snapshot.State").enummodule
-        Backup = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Backup").msgclass
-        Backup::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Backup.State").enummodule
-        BackupInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.BackupInfo").msgclass
-        RestoreSourceType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.RestoreSourceType").enummodule
-      end
     end
   end
+end
+module Google::Bigtable::Admin::V2
+  RestoreInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.RestoreInfo").msgclass
+  Table = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Table").msgclass
+  Table::ClusterState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Table.ClusterState").msgclass
+  Table::ClusterState::ReplicationState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Table.ClusterState.ReplicationState").enummodule
+  Table::TimestampGranularity = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Table.TimestampGranularity").enummodule
+  Table::View = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Table.View").enummodule
+  ColumnFamily = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ColumnFamily").msgclass
+  GcRule = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GcRule").msgclass
+  GcRule::Intersection = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GcRule.Intersection").msgclass
+  GcRule::Union = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GcRule.Union").msgclass
+  Snapshot = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Snapshot").msgclass
+  Snapshot::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Snapshot.State").enummodule
+  Backup = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Backup").msgclass
+  Backup::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Backup.State").enummodule
+  BackupInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.BackupInfo").msgclass
+  RestoreSourceType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.RestoreSourceType").enummodule
 end

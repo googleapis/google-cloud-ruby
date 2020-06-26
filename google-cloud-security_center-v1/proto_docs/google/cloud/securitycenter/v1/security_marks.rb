@@ -21,9 +21,9 @@ module Google
   module Cloud
     module SecurityCenter
       module V1
-        # User specified security marks that are attached to the parent Cloud Security
-        # Command Center (Cloud SCC) resource. Security marks are scoped within a Cloud
-        # SCC organization -- they can be modified and viewed by all users who have
+        # User specified security marks that are attached to the parent Security
+        # Command Center resource. Security marks are scoped within a Security Command
+        # Center organization -- they can be modified and viewed by all users who have
         # proper permissions on the organization.
         # @!attribute [rw] name
         #   @return [::String]

@@ -23,6 +23,11 @@ module Google
     ##
     # # Ruby Client for Web Risk API
     #
+    # **This library is deprecated, and will no longer receive updates. Please use the
+    # [`google-cloud-web_risk`](https://rubygems.org/gems/google-cloud-web_risk)
+    # library instead. For detailed information on the differences, see the
+    # [migration guide](https://googleapis.dev/ruby/google-cloud-web_risk/latest/file.MIGRATING.html).**
+    #
     # [Web Risk API][Product Documentation]:
     #
     # - [Product Documentation][]

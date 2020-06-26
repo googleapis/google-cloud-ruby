@@ -23,7 +23,7 @@ module Google
     module RecaptchaEnterprise
       module V1beta1
         module RecaptchaEnterpriseService
-          # Credentials for the RecaptchaEnterpriseServiceV1Beta1 API.
+          # Credentials for the RecaptchaEnterpriseService API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform"

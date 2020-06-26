@@ -44,7 +44,11 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A closed time interval. It extends from the start time to the end time, and includes both: `[startTime, endTime]`. Valid time intervals depend on the [`MetricKind`](/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors#MetricKind) of the metric value. In no case can the end time be earlier than the start time.
+        # A closed time interval. It extends from the start time to the end time, and
+        # includes both: `[startTime, endTime]`. Valid time intervals depend on the
+        # [`MetricKind`](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors#MetricKind)
+        # of the metric value. In no case can the end time be earlier than the start
+        # time.
         #
         # * For a `GAUGE` metric, the `startTime` value is technically optional; if
         #   no value is specified, the start time defaults to the value of the
@@ -447,27 +451,15 @@ module Google
           COMPARISON_NE = 6
         end
 
-        # The tier of service for a Workspace. Please see the
-        # [service tiers
-        # documentation](https://cloud.google.com/monitoring/workspaces/tiers) for more
-        # details.
+        # Obsolete.
         module ServiceTier
-          # An invalid sentinel value, used to indicate that a tier has not
-          # been provided explicitly.
+          # Obsolete.
           SERVICE_TIER_UNSPECIFIED = 0
 
-          # The Stackdriver Basic tier, a free tier of service that provides basic
-          # features, a moderate allotment of logs, and access to built-in metrics.
-          # A number of features are not available in this tier. For more details,
-          # see [the service tiers
-          # documentation](https://cloud.google.com/monitoring/workspaces/tiers).
+          # Obsolete.
           SERVICE_TIER_BASIC = 1
 
-          # The Stackdriver Premium tier, a higher, more expensive tier of service
-          # that provides access to all Stackdriver features, lets you use Stackdriver
-          # with AWS accounts, and has a larger allotments for logs and metrics. For
-          # more details, see [the service tiers
-          # documentation](https://cloud.google.com/monitoring/workspaces/tiers).
+          # Obsolete.
           SERVICE_TIER_PREMIUM = 2
         end
       end

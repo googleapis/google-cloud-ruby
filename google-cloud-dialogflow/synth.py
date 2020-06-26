@@ -31,7 +31,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "DIALOGFLOW",
         "ruby-cloud-wrapper-of": "v2:0.1",
         "ruby-cloud-product-url": "https://cloud.google.com/dialogflow",
-        "ruby-cloud-api-id": "dialogflow",
+        "ruby-cloud-api-id": "dialogflow.googleapis.com",
+        "ruby-cloud-api-shortname": "dialogflow",
         "ruby-cloud-migration-version": "1.0",
     }
 )

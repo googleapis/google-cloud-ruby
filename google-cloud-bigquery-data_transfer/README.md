@@ -1,6 +1,6 @@
-# Ruby Client for the BigQuery Data Transfer API
+# Ruby Client for the BigQuery Data Transfer Service API
 
-API Client library for the BigQuery Data Transfer API
+API Client library for the BigQuery Data Transfer Service API
 
 Schedules queries and transfers external data from SaaS applications to Google BigQuery on a regular basis.
 

@@ -52,13 +52,13 @@ end
 
 module Google
   module Datastore
-    module V1
-      PartitionId = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.PartitionId").msgclass
-      Key = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Key").msgclass
-      Key::PathElement = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Key.PathElement").msgclass
-      ArrayValue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.ArrayValue").msgclass
-      Value = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Value").msgclass
-      Entity = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Entity").msgclass
-    end
   end
+end
+module Google::Datastore::V1
+  PartitionId = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.PartitionId").msgclass
+  Key = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Key").msgclass
+  Key::PathElement = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Key.PathElement").msgclass
+  ArrayValue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.ArrayValue").msgclass
+  Value = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Value").msgclass
+  Entity = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Entity").msgclass
 end

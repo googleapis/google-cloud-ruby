@@ -91,18 +91,18 @@ end
 module Google
   module Devtools
     module Clouddebugger
-      module V2
-        FormatMessage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.FormatMessage").msgclass
-        StatusMessage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.StatusMessage").msgclass
-        StatusMessage::Reference = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.StatusMessage.Reference").enummodule
-        SourceLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.SourceLocation").msgclass
-        Variable = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.Variable").msgclass
-        StackFrame = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.StackFrame").msgclass
-        Breakpoint = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.Breakpoint").msgclass
-        Breakpoint::Action = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.Breakpoint.Action").enummodule
-        Breakpoint::LogLevel = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.Breakpoint.LogLevel").enummodule
-        Debuggee = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.Debuggee").msgclass
-      end
     end
   end
+end
+module Google::Devtools::Clouddebugger::V2
+  FormatMessage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.FormatMessage").msgclass
+  StatusMessage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.StatusMessage").msgclass
+  StatusMessage::Reference = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.StatusMessage.Reference").enummodule
+  SourceLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.SourceLocation").msgclass
+  Variable = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.Variable").msgclass
+  StackFrame = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.StackFrame").msgclass
+  Breakpoint = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.Breakpoint").msgclass
+  Breakpoint::Action = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.Breakpoint.Action").enummodule
+  Breakpoint::LogLevel = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.Breakpoint.LogLevel").enummodule
+  Debuggee = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.Debuggee").msgclass
 end

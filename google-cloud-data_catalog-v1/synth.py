@@ -32,6 +32,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "DataCatalog is a centralized and unified data catalog service for all your Cloud resources, where users and systems can discover data, explore and curate its semantics, understand how to act on it, and help govern its usage.",
         "ruby-cloud-env-prefix": "DATA_CATALOG",
         "ruby-cloud-grpc-service-config": "google/cloud/datacatalog/v1/datacatalog_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/data-catalog",
+        "ruby-cloud-api-id": "datacatalog.googleapis.com",
+        "ruby-cloud-api-shortname": "datacatalog",
     }
 )
 

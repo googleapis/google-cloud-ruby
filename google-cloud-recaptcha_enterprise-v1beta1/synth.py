@@ -32,8 +32,10 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "reCAPTCHA Enterprise is a service that protects your site from spam and abuse.",
         "ruby-cloud-env-prefix": "RECAPTCHA_ENTERPRISE",
         "ruby-cloud-grpc-service-config": "google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise_grpc_service_config.json",
-        "ruby-cloud-path-override": "recaptcha_enterprise_service_v1_beta1=recaptcha_enterprise_service",
-        "ruby-cloud-namespace-override": "RecaptchaEnterpriseServiceV1Beta1=RecaptchaEnterpriseService",
+        "ruby-cloud-product-url": "https://cloud.google.com/recaptcha-enterprise",
+        "ruby-cloud-api-id": "recaptchaenterprise.googleapis.com",
+        "ruby-cloud-api-shortname": "recaptchaenterprise",
+        "ruby-cloud-service-override": "RecaptchaEnterpriseServiceV1Beta1=RecaptchaEnterpriseService",
     }
 )
 

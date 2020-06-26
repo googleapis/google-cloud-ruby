@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module RecaptchaEnterprise
-      VERSION = "0.6.0"
+      VERSION = "1.1.1"
     end
   end
 end

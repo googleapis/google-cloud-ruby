@@ -2,8 +2,4 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "rake", "~> 12.0"
-
-# Pin minitest to 5.11.x to avoid warnings emitted by 5.12.
-# See https://github.com/googleapis/google-cloud-ruby/issues/4110
-gem "minitest", "~> 5.11.3"
+gem "google-cloud-phishing_protection-v1beta1", path: "../google-cloud-phishing_protection-v1beta1"

@@ -31,6 +31,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Google Speech-to-Text enables developers to convert audio to text by applying powerful neural network models in an easy-to-use API. The API recognizes more than 120 languages and variants to support your global user base. You can enable voice command-and-control, transcribe audio from call centers, and more. It can process real-time streaming or prerecorded audio, using Google's machine learning technology.",
         "ruby-cloud-env-prefix": "SPEECH",
         "ruby-cloud-grpc-service-config": "google/cloud/speech/v1p1beta1/speech_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/speech-to-text",
+        "ruby-cloud-api-id": "speech.googleapis.com",
+        "ruby-cloud-api-shortname": "speech",
     }
 )
 

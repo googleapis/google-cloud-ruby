@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/asset/v1/assets_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
@@ -87,6 +88,29 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :asset_types, :string, 3
       optional :content_type, :enum, 4, "google.cloud.asset.v1.ContentType"
       optional :feed_output_config, :message, 5, "google.cloud.asset.v1.FeedOutputConfig"
+      optional :condition, :message, 6, "google.type.Expr"
+    end
+    add_message "google.cloud.asset.v1.SearchAllResourcesRequest" do
+      optional :scope, :string, 1
+      optional :query, :string, 2
+      repeated :asset_types, :string, 3
+      optional :page_size, :int32, 4
+      optional :page_token, :string, 5
+      optional :order_by, :string, 6
+    end
+    add_message "google.cloud.asset.v1.SearchAllResourcesResponse" do
+      repeated :results, :message, 1, "google.cloud.asset.v1.ResourceSearchResult"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.asset.v1.SearchAllIamPoliciesRequest" do
+      optional :scope, :string, 1
+      optional :query, :string, 2
+      optional :page_size, :int32, 3
+      optional :page_token, :string, 4
+    end
+    add_message "google.cloud.asset.v1.SearchAllIamPoliciesResponse" do
+      repeated :results, :message, 1, "google.cloud.asset.v1.IamPolicySearchResult"
+      optional :next_page_token, :string, 2
     end
     add_enum "google.cloud.asset.v1.ContentType" do
       value :CONTENT_TYPE_UNSPECIFIED, 0
@@ -118,6 +142,10 @@ module Google
         PubsubDestination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.PubsubDestination").msgclass
         FeedOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.FeedOutputConfig").msgclass
         Feed = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.Feed").msgclass
+        SearchAllResourcesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.SearchAllResourcesRequest").msgclass
+        SearchAllResourcesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.SearchAllResourcesResponse").msgclass
+        SearchAllIamPoliciesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.SearchAllIamPoliciesRequest").msgclass
+        SearchAllIamPoliciesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.SearchAllIamPoliciesResponse").msgclass
         ContentType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ContentType").enummodule
       end
     end

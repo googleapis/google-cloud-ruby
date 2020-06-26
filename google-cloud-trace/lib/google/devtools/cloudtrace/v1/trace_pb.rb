@@ -66,17 +66,17 @@ end
 module Google
   module Devtools
     module Cloudtrace
-      module V1
-        Trace = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.Trace").msgclass
-        Traces = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.Traces").msgclass
-        TraceSpan = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.TraceSpan").msgclass
-        TraceSpan::SpanKind = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.TraceSpan.SpanKind").enummodule
-        ListTracesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.ListTracesRequest").msgclass
-        ListTracesRequest::ViewType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.ListTracesRequest.ViewType").enummodule
-        ListTracesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.ListTracesResponse").msgclass
-        GetTraceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.GetTraceRequest").msgclass
-        PatchTracesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.PatchTracesRequest").msgclass
-      end
     end
   end
+end
+module Google::Devtools::Cloudtrace::V1
+  Trace = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.Trace").msgclass
+  Traces = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.Traces").msgclass
+  TraceSpan = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.TraceSpan").msgclass
+  TraceSpan::SpanKind = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.TraceSpan.SpanKind").enummodule
+  ListTracesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.ListTracesRequest").msgclass
+  ListTracesRequest::ViewType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.ListTracesRequest.ViewType").enummodule
+  ListTracesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.ListTracesResponse").msgclass
+  GetTraceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.GetTraceRequest").msgclass
+  PatchTracesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v1.PatchTracesRequest").msgclass
 end

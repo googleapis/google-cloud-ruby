@@ -40,11 +40,11 @@ end
 
 module Google
   module Firestore
-    module V1beta1
-      Document = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.Document").msgclass
-      Value = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.Value").msgclass
-      ArrayValue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.ArrayValue").msgclass
-      MapValue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.MapValue").msgclass
-    end
   end
+end
+module Google::Firestore::V1beta1
+  Document = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.Document").msgclass
+  Value = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.Value").msgclass
+  ArrayValue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.ArrayValue").msgclass
+  MapValue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.MapValue").msgclass
 end

@@ -32,6 +32,8 @@ module Google
             # widgets in a specific layout.
             #
             class Client
+              include Paths
+
               # @private
               attr_reader :dashboards_service_stub
 
@@ -64,6 +66,20 @@ module Google
                                     namespace.pop
                                   end
                   default_config = Client::Configuration.new parent_config
+
+                  default_config.timeout = 30.0
+                  default_config.retry_policy = {
+                    initial_delay: 1.0,
+                    max_delay:     10.0,
+                    multiplier:    1.3,
+                    retry_codes:   ["UNAVAILABLE", "UNKNOWN"]
+                  }
+
+                  default_config.rpcs.create_dashboard.timeout = 30.0
+
+                  default_config.rpcs.delete_dashboard.timeout = 30.0
+
+                  default_config.rpcs.update_dashboard.timeout = 30.0
 
                   default_config
                 end
@@ -130,7 +146,8 @@ module Google
                 if credentials.is_a?(String) || credentials.is_a?(Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
-                @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
+                @quota_project_id = @config.quota_project
+                @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
                 @dashboards_service_stub = ::Gapic::ServiceStub.new(
                   ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Stub,
@@ -166,9 +183,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The project on which to execute the request. The format is
-              #     `"projects/{project_id_or_number}"`. The \\{project_id_or_number} must match
-              #     the dashboard resource name.
+              #     Required. The project on which to execute the request. The format is:
+              #
+              #         projects/[PROJECT_ID_OR_NUMBER]
+              #
+              #     The `[PROJECT_ID_OR_NUMBER]` must match the dashboard resource name.
               #   @param dashboard [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard, ::Hash]
               #     Required. The initial dashboard specification.
               #
@@ -240,8 +259,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The scope of the dashboards to list. A project scope must be
-              #     specified in the form of `"projects/{project_id_or_number}"`.
+              #     Required. The scope of the dashboards to list. The format is:
+              #
+              #         projects/[PROJECT_ID_OR_NUMBER]
               #   @param page_size [::Integer]
               #     A positive number that is the maximum number of results to return.
               #     If unspecified, a default of 1000 is used.
@@ -319,10 +339,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The resource name of the Dashboard. The format is one of
-              #     `"dashboards/{dashboard_id}"` (for system dashboards) or
-              #     `"projects/{project_id_or_number}/dashboards/{dashboard_id}"`
-              #     (for custom dashboards).
+              #     Required. The resource name of the Dashboard. The format is one of:
+              #
+              #      -  `dashboards/[DASHBOARD_ID]` (for system dashboards)
+              #      -  `projects/[PROJECT_ID_OR_NUMBER]/dashboards/[DASHBOARD_ID]`
+              #           (for custom dashboards).
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
@@ -392,8 +413,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The resource name of the Dashboard. The format is
-              #     `"projects/{project_id_or_number}/dashboards/{dashboard_id}"`.
+              #     Required. The resource name of the Dashboard. The format is:
+              #
+              #         projects/[PROJECT_ID_OR_NUMBER]/dashboards/[DASHBOARD_ID]
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]
@@ -586,24 +608,28 @@ module Google
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
+              # @!attribute [rw] quota_project
+              #   A separate project against which to charge quota.
+              #   @return [::String]
               #
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,     "monitoring.googleapis.com", String
-                config_attr :credentials,  nil do |value|
+                config_attr :endpoint,      "monitoring.googleapis.com", ::String
+                config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                   allowed.any? { |klass| klass === value }
                 end
-                config_attr :scope,        nil, ::String, ::Array, nil
-                config_attr :lib_name,     nil, ::String, nil
-                config_attr :lib_version,  nil, ::String, nil
-                config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
-                config_attr :interceptors, nil, ::Array, nil
-                config_attr :timeout,      nil, ::Numeric, nil
-                config_attr :metadata,     nil, ::Hash, nil
-                config_attr :retry_policy, nil, ::Hash, Proc, nil
+                config_attr :scope,         nil, ::String, ::Array, nil
+                config_attr :lib_name,      nil, ::String, nil
+                config_attr :lib_version,   nil, ::String, nil
+                config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+                config_attr :interceptors,  nil, ::Array, nil
+                config_attr :timeout,       nil, ::Numeric, nil
+                config_attr :metadata,      nil, ::Hash, nil
+                config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
+                config_attr :quota_project, nil, ::String, nil
 
                 # @private
                 def initialize parent_config = nil
@@ -619,7 +645,7 @@ module Google
                 def rpcs
                   @rpcs ||= begin
                     parent_rpcs = nil
-                    parent_rpcs = @parent_config.rpcs if @parent_config&.respond_to? :rpcs
+                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
                     Rpcs.new parent_rpcs
                   end
                 end

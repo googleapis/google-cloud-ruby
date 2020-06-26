@@ -1,0 +1,11 @@
+{
+    "api_id": "bigqueryreservation.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-bigquery-reservation-v1/latest",
+    "distribution_name": "google-cloud-bigquery-reservation-v1",
+    "language": "ruby",
+    "name": "bigqueryreservation",
+    "name_pretty": "BigQuery Reservation V1 API",
+    "product_documentation": "https://cloud.google.com/bigquery/docs/reference/reservations",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}

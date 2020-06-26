@@ -38,11 +38,11 @@ end
 
 module Google
   module Spanner
-    module V1
-      ResultSet = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ResultSet").msgclass
-      PartialResultSet = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartialResultSet").msgclass
-      ResultSetMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ResultSetMetadata").msgclass
-      ResultSetStats = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ResultSetStats").msgclass
-    end
   end
+end
+module Google::Spanner::V1
+  ResultSet = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ResultSet").msgclass
+  PartialResultSet = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartialResultSet").msgclass
+  ResultSetMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ResultSetMetadata").msgclass
+  ResultSetStats = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ResultSetStats").msgclass
 end

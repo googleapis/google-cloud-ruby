@@ -159,7 +159,7 @@ def clean_up_bigquery_datasets
   $bigquery.datasets.all do |dataset|
     if dataset.dataset_id.start_with? $prefix
       dataset.tables.all(&:delete)
-      dataset.delete
+      dataset.delete force: true
     end
   end
 rescue => e

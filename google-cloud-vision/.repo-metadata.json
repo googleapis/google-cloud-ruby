@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "vision.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-vision/latest",
     "distribution_name": "google-cloud-vision",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-vision/latest"
+    "language": "ruby",
+    "name": "vision",
+    "name_pretty": "Cloud Vision API",
+    "product_documentation": "https://cloud.google.com/vision",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }

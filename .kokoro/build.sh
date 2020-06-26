@@ -25,6 +25,7 @@ versions=($RUBY_VERSIONS)
 # Capture failures
 EXIT_STATUS=0 # everything passed
 function set_failed_status {
+    echo "**** FAILURE DETECTED ****"
     EXIT_STATUS=1
 }
 
@@ -43,6 +44,7 @@ elif [ "$JOB_TYPE" = "continuous" ]; then
         (bundle update && bundle exec rake kokoro:continuous) || set_failed_status
     done
 elif [ "$JOB_TYPE" = "samples_presubmit" ]; then
+    rbenv global "$KOKORO_RUBY_VERSION"
     (bundle update && bundle exec rake kokoro:samples_presubmit) || set_failed_status
 elif [ "$JOB_TYPE" = "samples_latest" ]; then
     for version in "${versions[@]}"; do

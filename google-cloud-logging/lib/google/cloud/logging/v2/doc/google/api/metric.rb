@@ -18,15 +18,41 @@ module Google
     # Defines a metric type and its schema. Once a metric descriptor is created,
     # deleting or altering it stops data collection and makes the metric type's
     # existing data unusable.
+    #
+    # The following are specific rules for service defined Monitoring metric
+    # descriptors:
+    #
+    # * `type`, `metric_kind`, `value_type`, `description`, `display_name`,
+    #   `launch_stage` fields are all required. The `unit` field must be specified
+    #   if the `value_type` is any of DOUBLE, INT64, DISTRIBUTION.
+    # * Maximum of default 500 metric descriptors per service is allowed.
+    # * Maximum of default 10 labels per metric descriptor is allowed.
+    #
+    # The default maximum limit can be overridden. Please follow
+    # https://cloud.google.com/monitoring/quotas
     # @!attribute [rw] name
     #   @return [String]
     #     The resource name of the metric descriptor.
     # @!attribute [rw] type
     #   @return [String]
     #     The metric type, including its DNS name prefix. The type is not
-    #     URL-encoded.  All user-defined metric types have the DNS name
-    #     `custom.googleapis.com` or `external.googleapis.com`.  Metric types should
-    #     use a natural hierarchical grouping. For example:
+    #     URL-encoded.
+    #
+    #     All service defined metrics must be prefixed with the service name, in the
+    #     format of `{service name}/{relative metric name}`, such as
+    #     `cloudsql.googleapis.com/database/cpu/utilization`. The relative metric
+    #     name must follow:
+    #
+    #     * Only upper and lower-case letters, digits, '/' and underscores '_' are
+    #       allowed.
+    #     * The maximum number of characters allowed for the relative_metric_name is
+    #       100.
+    #
+    #     All user-defined metric types have the DNS name
+    #     `custom.googleapis.com`, `external.googleapis.com`, or
+    #     `logging.googleapis.com/user/`.
+    #
+    #     Metric types should use a natural hierarchical grouping. For example:
     #
     #         "custom.googleapis.com/invoice/paid/amount"
     #         "external.googleapis.com/prometheus/up"
@@ -34,7 +60,16 @@ module Google
     # @!attribute [rw] labels
     #   @return [Array<Google::Api::LabelDescriptor>]
     #     The set of labels that can be used to describe a specific
-    #     instance of this metric type. For example, the
+    #     instance of this metric type.
+    #
+    #     The label key name must follow:
+    #
+    #     * Only upper and lower-case letters, digits and underscores (_) are
+    #       allowed.
+    #     * Label name must start with a letter or digit.
+    #     * The maximum length of a label name is 100 characters.
+    #
+    #     For example, the
     #     `appengine.googleapis.com/http/server/response_latencies` metric
     #     type has a label for the HTTP response code, `response_code`, so
     #     you can look at latencies for successful responses or just
@@ -64,7 +99,7 @@ module Google
     #     `s{CPU}` (or equivalently `1s{CPU}` or just `s`). If the job uses 12,005
     #     CPU-seconds, then the value is written as `12005`.
     #
-    #     Alternatively, if you want a custome metric to record data in a more
+    #     Alternatively, if you want a custom metric to record data in a more
     #     granular way, you can create a `DOUBLE CUMULATIVE` metric whose `unit` is
     #     `ks{CPU}`, and then write the value `12.005` (which is `12005/1000`),
     #     or use `Kis{CPU}` and write `11.723` (which is `12005/1024`).
@@ -80,6 +115,7 @@ module Google
     #     * `min`   minute
     #     * `h`     hour
     #     * `d`     day
+    #     * `1`     dimensionless
     #
     #     **Prefixes (PREFIX)**
     #
@@ -165,12 +201,18 @@ module Google
     # @!attribute [rw] launch_stage
     #   @return [Google::Api::LaunchStage]
     #     Optional. The launch stage of the metric definition.
+    # @!attribute [rw] monitored_resource_types
+    #   @return [Array<String>]
+    #     Read-only. If present, then a [time
+    #     series][google.monitoring.v3.TimeSeries], which is identified partially by
+    #     a metric type and a {Google::Api::MonitoredResourceDescriptor MonitoredResourceDescriptor}, that is associated
+    #     with this metric type can only be associated with one of the monitored
+    #     resource types listed here.
     class MetricDescriptor
       # Additional annotations that can be used to guide the usage of a metric.
       # @!attribute [rw] launch_stage
       #   @return [Google::Api::LaunchStage]
-      #     Deprecated. Please use the MetricDescriptor.launch_stage instead.
-      #     The launch stage of the metric definition.
+      #     Deprecated. Must use the {Google::Api::MetricDescriptor#launch_stage MetricDescriptor#launch_stage} instead.
       # @!attribute [rw] sample_period
       #   @return [Google::Protobuf::Duration]
       #     The sampling period of metric data points. For metrics which are written

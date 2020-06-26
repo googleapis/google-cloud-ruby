@@ -187,14 +187,6 @@ module Google
               &Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupService::Stub.method(:new)
             )
 
-            @get_group = Google::Gax.create_api_call(
-              @error_group_service_stub.method(:get_group),
-              defaults["get_group"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'group_name' => request.group_name}
-              end
-            )
             @update_group = Google::Gax.create_api_call(
               @error_group_service_stub.method(:update_group),
               defaults["update_group"],
@@ -203,46 +195,17 @@ module Google
                 {'group.name' => request.group.name}
               end
             )
+            @get_group = Google::Gax.create_api_call(
+              @error_group_service_stub.method(:get_group),
+              defaults["get_group"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'group_name' => request.group_name}
+              end
+            )
           end
 
           # Service calls
-
-          # Get the specified group.
-          #
-          # @param group_name [String]
-          #   Required. The group resource name. Written as
-          #   <code>projects/<var>projectID</var>/groups/<var>group_name</var></code>.
-          #   Call
-          #   <a href="/error-reporting/reference/rest/v1beta1/projects.groupStats/list">
-          #   <code>groupStats.list</code></a> to return a list of groups belonging to
-          #   this project.
-          #
-          #   Example: <code>projects/my-project-123/groups/my-group</code>
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroup]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroup]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/error_reporting"
-          #
-          #   error_group_client = Google::Cloud::ErrorReporting::ErrorGroup.new(version: :v1beta1)
-          #   formatted_group_name = Google::Cloud::ErrorReporting::V1beta1::ErrorGroupServiceClient.error_group_path("[PROJECT]", "[GROUP]")
-          #   response = error_group_client.get_group(formatted_group_name)
-
-          def get_group \
-              group_name,
-              options: nil,
-              &block
-            req = {
-              group_name: group_name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Devtools::Clouderrorreporting::V1beta1::GetGroupRequest)
-            @get_group.call(req, options, &block)
-          end
 
           # Replace the data for the specified group.
           # Fails if the group does not exist.
@@ -277,6 +240,41 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Devtools::Clouderrorreporting::V1beta1::UpdateGroupRequest)
             @update_group.call(req, options, &block)
+          end
+
+          # Get the specified group.
+          #
+          # @param group_name [String]
+          #   The group resource name. Written as
+          #   `projects/{projectID}/groups/{group_name}`. Call
+          #   [`groupStats.list`](https://cloud.google.com/error-reporting/reference/rest/v1beta1/projects.groupStats/list)
+          #   to return a list of groups belonging to this project.
+          #
+          #   Example: `projects/my-project-123/groups/my-group`
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroup]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroup]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/error_reporting"
+          #
+          #   error_group_client = Google::Cloud::ErrorReporting::ErrorGroup.new(version: :v1beta1)
+          #   formatted_group_name = Google::Cloud::ErrorReporting::V1beta1::ErrorGroupServiceClient.error_group_path("[PROJECT]", "[GROUP]")
+          #   response = error_group_client.get_group(formatted_group_name)
+
+          def get_group \
+              group_name,
+              options: nil,
+              &block
+            req = {
+              group_name: group_name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Devtools::Clouderrorreporting::V1beta1::GetGroupRequest)
+            @get_group.call(req, options, &block)
           end
         end
       end

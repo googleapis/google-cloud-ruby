@@ -124,43 +124,58 @@ module Google
             # Unspecified. This value must not be used.
             OPERATOR_UNSPECIFIED = 0
 
-            # Less than. Requires that the field come first in `order_by`.
+            # The given `field` is less than the given `value`.
+            #
+            # Requires:
+            #
+            # * That `field` come first in `order_by`.
             LESS_THAN = 1
 
-            # Less than or equal. Requires that the field come first in `order_by`.
+            # The given `field` is less than or equal to the given `value`.
+            #
+            # Requires:
+            #
+            # * That `field` come first in `order_by`.
             LESS_THAN_OR_EQUAL = 2
 
-            # Greater than. Requires that the field come first in `order_by`.
+            # The given `field` is greater than the given `value`.
+            #
+            # Requires:
+            #
+            # * That `field` come first in `order_by`.
             GREATER_THAN = 3
 
-            # Greater than or equal. Requires that the field come first in
-            # `order_by`.
+            # The given `field` is greater than or equal to the given `value`.
+            #
+            # Requires:
+            #
+            # * That `field` come first in `order_by`.
             GREATER_THAN_OR_EQUAL = 4
 
-            # Equal.
+            # The given `field` is equal to the given `value`.
             EQUAL = 5
 
-            # Contains. Requires that the field is an array.
+            # The given `field` is an array that contains the given `value`.
             ARRAY_CONTAINS = 7
 
-            # In. Requires that `value` is a non-empty ArrayValue with at most 10
-            # values.
+            # The given `field` is equal to at least one value in the given array.
+            #
+            # Requires:
+            #
+            # * That `value` is a non-empty `ArrayValue` with at most 10 values.
+            # * No other `IN`, `ARRAY_CONTAINS_ANY`, or `NOT_IN`.
             IN = 8
 
-            # Contains any. Requires that the field is an array and
-            # `value` is a non-empty ArrayValue with at most 10 values.
+            # The given `field` is an array that contains any of the values in the
+            # given array.
+            #
+            # Requires:
+            #
+            # * That `value` is a non-empty `ArrayValue` with at most 10 values.
+            # * No other `IN`, `ARRAY_CONTAINS_ANY`, or `NOT_IN`.
             ARRAY_CONTAINS_ANY = 9
           end
         end
-
-        # The projection of document's fields to return.
-        # @!attribute [rw] fields
-        #   @return [Array<Google::Firestore::V1::StructuredQuery::FieldReference>]
-        #     The fields to return.
-        #
-        #     If empty, all fields are returned. To only return the name
-        #     of the document, use `['__name__']`.
-        class Projection; end
 
         # A filter with a single operand.
         # @!attribute [rw] op
@@ -175,18 +190,13 @@ module Google
             # Unspecified. This value must not be used.
             OPERATOR_UNSPECIFIED = 0
 
-            # Test if a field is equal to NaN.
+            # The given `field` is equal to `NaN`.
             IS_NAN = 2
 
-            # Test if an expression evaluates to Null.
+            # The given `field` is equal to `NULL`.
             IS_NULL = 3
           end
         end
-
-        # A reference to a field, such as `max(messages.time) as max_time`.
-        # @!attribute [rw] field_path
-        #   @return [String]
-        class FieldReference; end
 
         # An order on a field.
         # @!attribute [rw] field
@@ -196,6 +206,20 @@ module Google
         #   @return [Google::Firestore::V1::StructuredQuery::Direction]
         #     The direction to order by. Defaults to `ASCENDING`.
         class Order; end
+
+        # A reference to a field, such as `max(messages.time) as max_time`.
+        # @!attribute [rw] field_path
+        #   @return [String]
+        class FieldReference; end
+
+        # The projection of document's fields to return.
+        # @!attribute [rw] fields
+        #   @return [Array<Google::Firestore::V1::StructuredQuery::FieldReference>]
+        #     The fields to return.
+        #
+        #     If empty, all fields are returned. To only return the name
+        #     of the document, use `['__name__']`.
+        class Projection; end
 
         # A sort direction.
         module Direction

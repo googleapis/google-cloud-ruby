@@ -2,13 +2,4 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "google-cloud-core", path: "../google-cloud-core"
-gem "google-cloud-env", path: "../google-cloud-env"
-gem "google-cloud-errors", path: "../google-cloud-errors"
 gem "google-cloud-kms-v1", path: "../google-cloud-kms-v1"
-
-gem "rake"
-
-# Pin minitest to 5.11.x to avoid warnings emitted by 5.12.
-# See https://github.com/googleapis/google-cloud-ruby/issues/4110
-gem "minitest", "~> 5.11.3"

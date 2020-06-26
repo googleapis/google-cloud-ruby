@@ -30,9 +30,10 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Cloud Data Loss Prevention (DLP)",
         "ruby-cloud-description": "Provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.",
         "ruby-cloud-env-prefix": "DLP",
-        "ruby-cloud-wrapper-of": "v2:0.0",
+        "ruby-cloud-wrapper-of": "v2:0.2",
         "ruby-cloud-product-url": "https://cloud.google.com/dlp",
-        "ruby-cloud-api-id": "dlp",
+        "ruby-cloud-api-id": "dlp.googleapis.com",
+        "ruby-cloud-api-shortname": "dlp",
         "ruby-cloud-migration-version": "1.0",
     }
 )

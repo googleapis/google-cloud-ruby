@@ -31,7 +31,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "DATA_CATALOG",
         "ruby-cloud-wrapper-of": "v1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/data-catalog",
-        "ruby-cloud-api-id": "datacatalog",
+        "ruby-cloud-api-id": "datacatalog.googleapis.com",
+        "ruby-cloud-api-shortname": "datacatalog",
     }
 )
 

@@ -115,6 +115,13 @@ module Google
         #     Configuration options for writing logs to
         #     [Stackdriver Logging](https://cloud.google.com/logging/docs/). If this
         #     field is unset, then no logs are written.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Tasks::V2beta3::Queue::Type]
+        #     Immutable. The type of a queue (push or pull).
+        #
+        #     `Queue.type` is an immutable property of the queue that is set at the queue
+        #     creation time. When left unspecified, the default value of `PUSH` is
+        #     selected.
         class Queue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -154,6 +161,18 @@ module Google
             # To permanently delete this queue and all of its tasks, call
             # {::Google::Cloud::Tasks::V2beta3::CloudTasks::Client#delete_queue DeleteQueue}.
             DISABLED = 3
+          end
+
+          # The type of the queue.
+          module Type
+            # Default value.
+            TYPE_UNSPECIFIED = 0
+
+            # A pull queue.
+            PULL = 1
+
+            # A push queue.
+            PUSH = 2
           end
         end
 
@@ -314,7 +333,7 @@ module Google
         #     A task's retry interval starts at
         #     {::Google::Cloud::Tasks::V2beta3::RetryConfig#min_backoff min_backoff}, then doubles
         #     `max_doublings` times, then increases linearly, and finally
-        #     retries retries at intervals of
+        #     retries at intervals of
         #     {::Google::Cloud::Tasks::V2beta3::RetryConfig#max_backoff max_backoff} up to
         #     {::Google::Cloud::Tasks::V2beta3::RetryConfig#max_attempts max_attempts} times.
         #

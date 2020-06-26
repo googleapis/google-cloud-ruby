@@ -176,24 +176,25 @@ describe Google::Cloud::Bigquery, :bigquery do
 
   it "should run a query job with job labels" do
     job = bigquery.query_job publicdata_query, labels: labels
-    _(job).must_be_kind_of Google::Cloud::Bigquery::Job
+    job.wait_until_done!
+    _(job).wont_be :failed?
     _(job.labels).must_equal labels
   end
 
-  it "should run a query job with user defined function resources" do
+  it "receives error when a standard SQL query job is passed a udfs param" do
     job = bigquery.query_job publicdata_query, udfs: udfs
-    _(job).must_be_kind_of Google::Cloud::Bigquery::Job
-    _(job.udfs).must_equal udfs
+    job.wait_until_done!
+    _(job).must_be :failed?
+    _(job.error["message"]).must_match /Legacy SQL UDFs cannot be used in Standard SQL queries/
   end
 
-  it "should run a query job with job labels and user defined function resources in a block updater" do
+  it "should run a query job with job labels in a block updater" do
     job = bigquery.query_job publicdata_query do |j|
       j.labels = labels
-      j.udfs = udfs
     end
-    _(job).must_be_kind_of Google::Cloud::Bigquery::Job
+    job.wait_until_done!
+    _(job).wont_be :failed?
     _(job.labels).must_equal labels
-    _(job.udfs).must_equal udfs
   end
 
   it "should get a list of jobs" do

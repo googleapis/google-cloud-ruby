@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "cloudkms.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-kms/latest",
     "distribution_name": "google-cloud-kms",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-kms/latest"
+    "language": "ruby",
+    "name": "cloudkms",
+    "name_pretty": "Cloud Key Management Service (KMS) API",
+    "product_documentation": "https://cloud.google.com/kms",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }

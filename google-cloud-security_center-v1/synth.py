@@ -32,6 +32,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Security Command Center API provides access to temporal views of assets and findings within an organization.",
         "ruby-cloud-env-prefix": "SECURITY_CENTER",
         "ruby-cloud-grpc-service-config": "google/cloud/securitycenter/v1/securitycenter_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/security-command-center",
+        "ruby-cloud-api-id": "securitycenter.googleapis.com",
+        "ruby-cloud-api-shortname": "securitycenter",
     }
 )
 

@@ -53,7 +53,7 @@ there is a small amount of setup:
 In order to run code interactively, you can automatically load
 google-cloud-spanner and its dependencies in IRB. This requires that your
 developer environment has already been configured by following the steps
-described in the [Authentication Guide](AUTHENTICATION.md). An IRB console
+described in the {file:AUTHENTICATION.md Authentication Guide}. An IRB console
 can be created with:
 
 ```sh
@@ -119,7 +119,7 @@ If you alter an example's title, you may encounter breaking tests.
 ### Spanner Acceptance Tests
 
 The Spanner acceptance tests interact with the live service API. Follow the
-instructions in the [Authentication Guide](AUTHENTICATION.md) for enabling
+instructions in the {file:AUTHENTICATION.md Authentication Guide} for enabling
 the Spanner API. Occasionally, some API features may not yet be generally
 available, making it difficult for some contributors to successfully run the
 entire acceptance test suite. However, please ensure that you do successfully
@@ -127,7 +127,7 @@ run acceptance tests for any code areas covered by your pull request.
 
 To run the acceptance tests, first create and configure a project in the Google
 Developers Console, as described in the
-[Authentication Guide](AUTHENTICATION.md). Be sure to download the JSON KEY
+{file:AUTHENTICATION.md Authentication Guide}. Be sure to download the JSON KEY
 file. Make note of the PROJECT_ID and the KEYFILE location on your system.
 
 Before you can run the Spanner acceptance tests, you must first create indexes
@@ -184,5 +184,5 @@ $ bundle exec rake rubocop
 ## Code of Conduct
 
 Please note that this project is released with a Contributor Code of Conduct. By
-participating in this project you agree to abide by its terms. See
-[Code of Conduct](CODE_OF_CONDUCT.md) for more information.
+participating in this project you agree to abide by its terms. See the
+{file:CODE_OF_CONDUCT.md Code of Conduct} for more information.

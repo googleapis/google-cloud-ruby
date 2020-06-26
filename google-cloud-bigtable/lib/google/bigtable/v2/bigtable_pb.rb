@@ -92,22 +92,22 @@ end
 
 module Google
   module Bigtable
-    module V2
-      ReadRowsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadRowsRequest").msgclass
-      ReadRowsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadRowsResponse").msgclass
-      ReadRowsResponse::CellChunk = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadRowsResponse.CellChunk").msgclass
-      SampleRowKeysRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.SampleRowKeysRequest").msgclass
-      SampleRowKeysResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.SampleRowKeysResponse").msgclass
-      MutateRowRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowRequest").msgclass
-      MutateRowResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowResponse").msgclass
-      MutateRowsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowsRequest").msgclass
-      MutateRowsRequest::Entry = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowsRequest.Entry").msgclass
-      MutateRowsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowsResponse").msgclass
-      MutateRowsResponse::Entry = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowsResponse.Entry").msgclass
-      CheckAndMutateRowRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.CheckAndMutateRowRequest").msgclass
-      CheckAndMutateRowResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.CheckAndMutateRowResponse").msgclass
-      ReadModifyWriteRowRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadModifyWriteRowRequest").msgclass
-      ReadModifyWriteRowResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadModifyWriteRowResponse").msgclass
-    end
   end
+end
+module Google::Bigtable::V2
+  ReadRowsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadRowsRequest").msgclass
+  ReadRowsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadRowsResponse").msgclass
+  ReadRowsResponse::CellChunk = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadRowsResponse.CellChunk").msgclass
+  SampleRowKeysRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.SampleRowKeysRequest").msgclass
+  SampleRowKeysResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.SampleRowKeysResponse").msgclass
+  MutateRowRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowRequest").msgclass
+  MutateRowResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowResponse").msgclass
+  MutateRowsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowsRequest").msgclass
+  MutateRowsRequest::Entry = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowsRequest.Entry").msgclass
+  MutateRowsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowsResponse").msgclass
+  MutateRowsResponse::Entry = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowsResponse.Entry").msgclass
+  CheckAndMutateRowRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.CheckAndMutateRowRequest").msgclass
+  CheckAndMutateRowResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.CheckAndMutateRowResponse").msgclass
+  ReadModifyWriteRowRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadModifyWriteRowRequest").msgclass
+  ReadModifyWriteRowResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadModifyWriteRowResponse").msgclass
 end

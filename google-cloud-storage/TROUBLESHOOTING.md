@@ -24,14 +24,8 @@ improved, *please* create a new issue on GitHub so we can talk about it.
 
   - [New issue][gh-ruby]
 
-Or, you can ask questions on the [Google Cloud Platform Slack][slack-ruby]. You
-can use the "ruby" channel for general Ruby questions, or use the
-"google-cloud-ruby" channel if you have questions about this gem in particular.
-
 [so-ruby]: http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby+storage
 
-[gh-search-ruby]: https://github.com/googlecloudplatform/google-cloud-ruby/issues?q=label%3A%22api%3A+storage%22
+[gh-search-ruby]: https://github.com/googleapis/google-cloud-ruby/issues?q=label%3A%22api%3A+storage%22
 
-[gh-ruby]: https://github.com/googlecloudplatform/google-cloud-ruby/issues/new
-
-[slack-ruby]: https://gcp-slack.appspot.com/
+[gh-ruby]: https://github.com/googleapis/google-cloud-ruby/issues/new

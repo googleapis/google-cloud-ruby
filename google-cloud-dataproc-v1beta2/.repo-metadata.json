@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "dataproc.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-dataproc-v1beta2/latest",
     "distribution_name": "google-cloud-dataproc-v1beta2",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-dataproc-v1beta2/latest"
+    "language": "ruby",
+    "name": "dataproc",
+    "name_pretty": "Cloud Dataproc V1beta2 API",
+    "product_documentation": "https://cloud.google.com/dataproc",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }

@@ -58,15 +58,15 @@ end
 
 module Google
   module Logging
-    module V2
-      LogMetric = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogMetric").msgclass
-      LogMetric::ApiVersion = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogMetric.ApiVersion").enummodule
-      ListLogMetricsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogMetricsRequest").msgclass
-      ListLogMetricsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogMetricsResponse").msgclass
-      GetLogMetricRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetLogMetricRequest").msgclass
-      CreateLogMetricRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CreateLogMetricRequest").msgclass
-      UpdateLogMetricRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateLogMetricRequest").msgclass
-      DeleteLogMetricRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.DeleteLogMetricRequest").msgclass
-    end
   end
+end
+module Google::Logging::V2
+  LogMetric = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogMetric").msgclass
+  LogMetric::ApiVersion = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogMetric.ApiVersion").enummodule
+  ListLogMetricsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogMetricsRequest").msgclass
+  ListLogMetricsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogMetricsResponse").msgclass
+  GetLogMetricRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetLogMetricRequest").msgclass
+  CreateLogMetricRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CreateLogMetricRequest").msgclass
+  UpdateLogMetricRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateLogMetricRequest").msgclass
+  DeleteLogMetricRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.DeleteLogMetricRequest").msgclass
 end

@@ -40,11 +40,18 @@ Instructions and configuration options are covered in the [Authentication Guide]
 require "google/cloud/bigtable"
 
 bigtable = Google::Cloud::Bigtable.new
+
 table = bigtable.table("my-instance", "my-table")
 
-table.read_rows(limit: 10).each do |row|
-  puts row
-end
+entry = table.new_mutation_entry("user-1")
+entry.set_cell(
+  "cf-1",
+  "field-1",
+  "XYZ",
+  timestamp: Time.now.to_i * 1000 # Time stamp in milli seconds.
+).delete_cells("cf2", "field02")
+
+table.mutate_row(entry)
 ```
 
 ## Enabling Logging

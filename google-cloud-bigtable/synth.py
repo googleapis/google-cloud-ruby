@@ -238,3 +238,27 @@ s.replace(
     'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
     'https://googleapis.dev/ruby/google-cloud-bigtable/latest/file.AUTHENTICATION.html'
 )
+
+# Fix product links
+s.replace(
+    [
+        "lib/google/cloud/bigtable/admin/v2.rb",
+        "lib/google/cloud/bigtable/admin.rb"
+    ],
+    "https://cloud.google.com/bigtable-admin",
+    "https://cloud.google.com/bigtable/docs/reference/admin/rpc"
+)
+
+# We recently added ruby_package proto options, but we want those to apply only
+# when we move to the microgenerator. Undo their effect while the monolith is
+# still in use.
+s.replace(
+    'lib/google/bigtable/v2/*_pb.rb',
+    '\nmodule Google::Cloud::Bigtable::V2\n',
+    '\nmodule Google\n  module Bigtable\n  end\nend\nmodule Google::Bigtable::V2\n',
+)
+s.replace(
+    'lib/google/bigtable/admin/v2/*_pb.rb',
+    '\nmodule Google::Cloud::Bigtable::Admin::V2\n',
+    '\nmodule Google\n  module Bigtable\n    module Admin\n    end\n  end\nend\nmodule Google::Bigtable::Admin::V2\n',
+)

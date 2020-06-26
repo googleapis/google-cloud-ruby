@@ -344,7 +344,8 @@ module Google
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
-              @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
+              @quota_project_id = @config.quota_project
+              @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
               @dlp_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Dlp::V2::DlpService::Stub,
@@ -384,7 +385,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     The parent resource name, for example projects/my-project-id.
+            #     The parent resource name, for example projects/my-project-id
+            #     or projects/my-project-id/locations/\\{location_id}
             #   @param inspect_config [::Google::Cloud::Dlp::V2::InspectConfig, ::Hash]
             #     Configuration for the inspector. What specified here will override
             #     the template referenced by the inspect_template_name argument.
@@ -397,8 +399,7 @@ module Google
             #     template. Repeated fields are appended. Singular sub-messages and groups
             #     are recursively merged.
             #   @param location_id [::String]
-            #     The geographic location to process content inspection. Reserved for future
-            #     extensions.
+            #     Deprecated. This field has no effect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dlp::V2::InspectContentResponse]
@@ -471,10 +472,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     The parent resource name, for example projects/my-project-id.
+            #     The parent resource name, for example projects/my-project-id
+            #     or projects/my-project-id/locations/\\{location_id}.
             #   @param location_id [::String]
-            #     The geographic location to process the request. Reserved for future
-            #     extensions.
+            #     Deprecated. This field has no effect.
             #   @param inspect_config [::Google::Cloud::Dlp::V2::InspectConfig, ::Hash]
             #     Configuration for the inspector.
             #   @param image_redaction_configs [::Array<::Google::Cloud::Dlp::V2::RedactImageRequest::ImageRedactionConfig, ::Hash>]
@@ -556,7 +557,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     The parent resource name, for example projects/my-project-id.
+            #     The parent resource name, for example projects/my-project-id
+            #     or projects/my-project-id/locations/\\{location_id}.
             #   @param deidentify_config [::Google::Cloud::Dlp::V2::DeidentifyConfig, ::Hash]
             #     Configuration for the de-identification of the content item.
             #     Items specified here will override the template referenced by the
@@ -580,8 +582,7 @@ module Google
             #     template. Repeated fields are appended. Singular sub-messages and groups
             #     are recursively merged.
             #   @param location_id [::String]
-            #     The geographic location to process de-identification. Reserved for future
-            #     extensions.
+            #     Deprecated. This field has no effect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dlp::V2::DeidentifyContentResponse]
@@ -680,8 +681,7 @@ module Google
             #     template. Repeated fields are appended. Singular sub-messages and groups
             #     are recursively merged.
             #   @param location_id [::String]
-            #     The geographic location to process content reidentification.  Reserved for
-            #     future extensions.
+            #     Deprecated. This field has no effect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dlp::V2::ReidentifyContentResponse]
@@ -743,11 +743,13 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_info_types(language_code: nil, filter: nil, location_id: nil)
+            # @overload list_info_types(parent: nil, language_code: nil, filter: nil, location_id: nil)
             #   Pass arguments to `list_info_types` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param parent [::String]
+            #     The parent resource name, for example locations/\\{location_id}
             #   @param language_code [::String]
             #     BCP-47 language code for localized infoType friendly
             #     names. If omitted, or if localized strings are not available,
@@ -756,8 +758,7 @@ module Google
             #     filter to only return infoTypes supported by certain parts of the
             #     API. Defaults to supported_by=INSPECT.
             #   @param location_id [::String]
-            #     The geographic location to list info types. Reserved for future
-            #     extensions.
+            #     Deprecated. This field has no effect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dlp::V2::ListInfoTypesResponse]
@@ -820,7 +821,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent resource name, for example projects/my-project-id or
-            #     organizations/my-org-id.
+            #     organizations/my-org-id or projects/my-project-id/locations/\\{location-id}.
             #   @param inspect_template [::Google::Cloud::Dlp::V2::InspectTemplate, ::Hash]
             #     Required. The InspectTemplate to create.
             #   @param template_id [::String]
@@ -829,8 +830,7 @@ module Google
             #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
             #     characters. Can be empty to allow the system to generate one.
             #   @param location_id [::String]
-            #     The geographic location to store the inspection template. Reserved for
-            #     future extensions.
+            #     Deprecated. This field has no effect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dlp::V2::InspectTemplate]
@@ -1040,7 +1040,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent resource name, for example projects/my-project-id or
-            #     organizations/my-org-id.
+            #     organizations/my-org-id or projects/my-project-id/locations/\\{location_id}.
             #   @param page_token [::String]
             #     Page token to continue retrieval. Comes from previous call
             #     to `ListInspectTemplates`.
@@ -1062,8 +1062,7 @@ module Google
             #     - `name`: corresponds to template's name.
             #     - `display_name`: corresponds to template's display name.
             #   @param location_id [::String]
-            #     The geographic location where inspection templates will be retrieved from.
-            #     Use `-` for all locations. Reserved for future extensions.
+            #     Deprecated. This field has no effect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::InspectTemplate>]
@@ -1203,7 +1202,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent resource name, for example projects/my-project-id or
-            #     organizations/my-org-id.
+            #     organizations/my-org-id or projects/my-project-id/locations/\\{location_id}.
             #   @param deidentify_template [::Google::Cloud::Dlp::V2::DeidentifyTemplate, ::Hash]
             #     Required. The DeidentifyTemplate to create.
             #   @param template_id [::String]
@@ -1212,8 +1211,7 @@ module Google
             #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
             #     characters. Can be empty to allow the system to generate one.
             #   @param location_id [::String]
-            #     The geographic location to store the deidentification template. Reserved
-            #     for future extensions.
+            #     Deprecated. This field has no effect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
@@ -1427,7 +1425,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent resource name, for example projects/my-project-id or
-            #     organizations/my-org-id.
+            #     organizations/my-org-id or projects/my-project-id/locations/\\{location_id}.
             #   @param page_token [::String]
             #     Page token to continue retrieval. Comes from previous call
             #     to `ListDeidentifyTemplates`.
@@ -1449,8 +1447,7 @@ module Google
             #     - `name`: corresponds to template's name.
             #     - `display_name`: corresponds to template's display name.
             #   @param location_id [::String]
-            #     The geographic location where deidentifications templates will be retrieved
-            #     from. Use `-` for all locations. Reserved for future extensions.
+            #     Deprecated. This field has no effect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::DeidentifyTemplate>]
@@ -1590,7 +1587,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name, for example projects/my-project-id.
+            #     Required. The parent resource name, for example projects/my-project-id
+            #     or projects/my-project-id/locations/\\{location_id}.
             #   @param job_trigger [::Google::Cloud::Dlp::V2::JobTrigger, ::Hash]
             #     Required. The JobTrigger to create.
             #   @param trigger_id [::String]
@@ -1599,8 +1597,7 @@ module Google
             #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
             #     characters. Can be empty to allow the system to generate one.
             #   @param location_id [::String]
-            #     The geographic location to store the job trigger. Reserved for
-            #     future extensions.
+            #     Deprecated. This field has no effect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dlp::V2::JobTrigger]
@@ -1881,7 +1878,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name, for example `projects/my-project-id`.
+            #     Required. The parent resource name, for example `projects/my-project-id`
+            #     or projects/my-project-id/locations/\\{location_id}.
             #   @param page_token [::String]
             #     Page token to continue retrieval. Comes from previous call
             #     to ListJobTriggers. `order_by` field must not
@@ -1930,8 +1928,7 @@ module Google
             #
             #     The length of this field should be no more than 500 characters.
             #   @param location_id [::String]
-            #     The geographic location where job triggers will be retrieved from.
-            #     Use `-` for all locations. Reserved for future extensions.
+            #     Deprecated. This field has no effect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::JobTrigger>]
@@ -2140,7 +2137,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name, for example projects/my-project-id.
+            #     Required. The parent resource name, for example projects/my-project-id
+            #     or projects/my-project-id/locations/\\{location_id}.
             #   @param inspect_job [::Google::Cloud::Dlp::V2::InspectJobConfig, ::Hash]
             #     Set to control what and how to inspect.
             #   @param risk_job [::Google::Cloud::Dlp::V2::RiskAnalysisJobConfig, ::Hash]
@@ -2151,8 +2149,7 @@ module Google
             #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
             #     characters. Can be empty to allow the system to generate one.
             #   @param location_id [::String]
-            #     The geographic location to store and process the job. Reserved for
-            #     future extensions.
+            #     Deprecated. This field has no effect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dlp::V2::DlpJob]
@@ -2220,7 +2217,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name, for example projects/my-project-id.
+            #     Required. The parent resource name, for example projects/my-project-id
+            #     or projects/my-project-id/locations/\\{location_id}.
             #   @param filter [::String]
             #     Allows filtering.
             #
@@ -2271,8 +2269,7 @@ module Google
             #     - `name`: corresponds to job's name.
             #     - `state`: corresponds to `state`
             #   @param location_id [::String]
-            #     The geographic location where jobs will be retrieved from.
-            #     Use `-` for all locations. Reserved for future extensions.
+            #     Deprecated. This field has no effect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::DlpJob>]
@@ -2550,7 +2547,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent resource name, for example projects/my-project-id or
-            #     organizations/my-org-id.
+            #     organizations/my-org-id or projects/my-project-id/locations/\\{location_id}
             #   @param config [::Google::Cloud::Dlp::V2::StoredInfoTypeConfig, ::Hash]
             #     Required. Configuration of the storedInfoType to create.
             #   @param stored_info_type_id [::String]
@@ -2559,8 +2556,7 @@ module Google
             #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
             #     characters. Can be empty to allow the system to generate one.
             #   @param location_id [::String]
-            #     The geographic location to store the stored infoType. Reserved for
-            #     future extensions.
+            #     Deprecated. This field has no effect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dlp::V2::StoredInfoType]
@@ -2629,8 +2625,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of organization and storedInfoType to be updated,
-            #     for example `organizations/433245324/storedInfoTypes/432452342` or
+            #     Required. Resource name of organization and storedInfoType to be updated, for
+            #     example `organizations/433245324/storedInfoTypes/432452342` or
             #     projects/project-id/storedInfoTypes/432452342.
             #   @param config [::Google::Cloud::Dlp::V2::StoredInfoTypeConfig, ::Hash]
             #     Updated configuration for the storedInfoType. If not provided, a new
@@ -2776,7 +2772,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent resource name, for example projects/my-project-id or
-            #     organizations/my-org-id.
+            #     organizations/my-org-id or projects/my-project-id/locations/\\{location_id}.
             #   @param page_token [::String]
             #     Page token to continue retrieval. Comes from previous call
             #     to `ListStoredInfoTypes`.
@@ -2799,8 +2795,7 @@ module Google
             #     - `name`: corresponds to resource name.
             #     - `display_name`: corresponds to info type's display name.
             #   @param location_id [::String]
-            #     The geographic location where stored infoTypes will be retrieved from.
-            #     Use `-` for all locations. Reserved for future extensions.
+            #     Deprecated. This field has no effect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::StoredInfoType>]
@@ -3138,24 +3133,28 @@ module Google
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
+            # @!attribute [rw] quota_project
+            #   A separate project against which to charge quota.
+            #   @return [::String]
             #
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,     "dlp.googleapis.com", String
-              config_attr :credentials,  nil do |value|
+              config_attr :endpoint,      "dlp.googleapis.com", ::String
+              config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, ::String, ::Array, nil
-              config_attr :lib_name,     nil, ::String, nil
-              config_attr :lib_version,  nil, ::String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
-              config_attr :interceptors, nil, ::Array, nil
-              config_attr :timeout,      nil, ::Numeric, nil
-              config_attr :metadata,     nil, ::Hash, nil
-              config_attr :retry_policy, nil, ::Hash, Proc, nil
+              config_attr :scope,         nil, ::String, ::Array, nil
+              config_attr :lib_name,      nil, ::String, nil
+              config_attr :lib_version,   nil, ::String, nil
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors,  nil, ::Array, nil
+              config_attr :timeout,       nil, ::Numeric, nil
+              config_attr :metadata,      nil, ::Hash, nil
+              config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
+              config_attr :quota_project, nil, ::String, nil
 
               # @private
               def initialize parent_config = nil
@@ -3171,7 +3170,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if @parent_config&.respond_to? :rpcs
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end

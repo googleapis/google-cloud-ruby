@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-memcache-v1beta2", path: "../google-cloud-memcache-v1beta2"

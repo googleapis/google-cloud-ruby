@@ -197,7 +197,8 @@ module Google
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
-              @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
+              @quota_project_id = @config.quota_project
+              @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
               @data_catalog_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::DataCatalog::V1::DataCatalog::Stub,
@@ -249,7 +250,8 @@ module Google
             #     `include_gcp_public_datasets` is considered invalid. Data Catalog will
             #     return an error in such a case.
             #   @param query [::String]
-            #     Required. The query string in search query syntax. The query must be non-empty.
+            #     Required. The query string in search query syntax. The query must be
+            #     non-empty.
             #
             #     Query strings can be simple as "x" or more qualified as:
             #
@@ -266,8 +268,8 @@ module Google
             #     for page_size is 1000. Throws an invalid argument for page_size > 1000.
             #   @param page_token [::String]
             #     Optional. Pagination token returned in an earlier
-            #     {::Google::Cloud::DataCatalog::V1::SearchCatalogResponse#next_page_token SearchCatalogResponse.next_page_token}, which
-            #     indicates that this is a continuation of a prior
+            #     {::Google::Cloud::DataCatalog::V1::SearchCatalogResponse#next_page_token SearchCatalogResponse.next_page_token},
+            #     which indicates that this is a continuation of a prior
             #     {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog SearchCatalogRequest}
             #     call, and that the system should return the next page of data. If empty,
             #     the first page is returned.
@@ -650,16 +652,16 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the location that contains the entry groups, which can be
-            #     provided in URL format. Example:
+            #     Required. The name of the location that contains the entry groups, which
+            #     can be provided in URL format. Example:
             #
             #     * projects/\\{project_id}/locations/\\{location}
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
-            #     Throws an invalid argument for `page_size > 1000`.
+            #     Optional. The maximum number of items to return. Default is 10. Max limit
+            #     is 1000. Throws an invalid argument for `page_size > 1000`.
             #   @param page_token [::String]
-            #     Optional. Token that specifies which page is requested. If empty, the first page is
-            #     returned.
+            #     Optional. Token that specifies which page is requested. If empty, the first
+            #     page is returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DataCatalog::V1::EntryGroup>]
@@ -1689,7 +1691,8 @@ module Google
             #
             #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}/fields/\\{tag_template_field_id}
             #   @param new_tag_template_field_id [::String]
-            #     Required. The new ID of this tag template field. For example, `my_new_field`.
+            #     Required. The new ID of this tag template field. For example,
+            #     `my_new_field`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::TagTemplateField]
@@ -1837,8 +1840,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the resource to attach this tag to. Tags can be attached to
-            #     Entries. Example:
+            #     Required. The name of the resource to attach this tag to. Tags can be
+            #     attached to Entries. Example:
             #
             #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}/entries/\\{entry_id}
             #
@@ -2048,8 +2051,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the Data Catalog resource to list the tags of. The resource
-            #     could be an {::Google::Cloud::DataCatalog::V1::Entry Entry} or an
+            #     Required. The name of the Data Catalog resource to list the tags of. The
+            #     resource could be an {::Google::Cloud::DataCatalog::V1::Entry Entry} or an
             #     {::Google::Cloud::DataCatalog::V1::EntryGroup EntryGroup}.
             #
             #     Examples:
@@ -2438,24 +2441,28 @@ module Google
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
+            # @!attribute [rw] quota_project
+            #   A separate project against which to charge quota.
+            #   @return [::String]
             #
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,     "datacatalog.googleapis.com", String
-              config_attr :credentials,  nil do |value|
+              config_attr :endpoint,      "datacatalog.googleapis.com", ::String
+              config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, ::String, ::Array, nil
-              config_attr :lib_name,     nil, ::String, nil
-              config_attr :lib_version,  nil, ::String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
-              config_attr :interceptors, nil, ::Array, nil
-              config_attr :timeout,      nil, ::Numeric, nil
-              config_attr :metadata,     nil, ::Hash, nil
-              config_attr :retry_policy, nil, ::Hash, Proc, nil
+              config_attr :scope,         nil, ::String, ::Array, nil
+              config_attr :lib_name,      nil, ::String, nil
+              config_attr :lib_version,   nil, ::String, nil
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors,  nil, ::Array, nil
+              config_attr :timeout,       nil, ::Numeric, nil
+              config_attr :metadata,      nil, ::Hash, nil
+              config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
+              config_attr :quota_project, nil, ::String, nil
 
               # @private
               def initialize parent_config = nil
@@ -2471,7 +2478,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if @parent_config&.respond_to? :rpcs
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end

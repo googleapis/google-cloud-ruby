@@ -1,32 +1,18 @@
 {
   "sources": [
     {
-      "generator": {
-        "name": "artman",
-        "version": "2.0.0",
-        "dockerImage": "googleapis/artman@sha256:b3b47805231a305d0f40c4bf069df20f6a2635574e6d4259fac651d3f9f6e098"
-      }
-    },
-    {
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "f4a254c0e8efb0ee10cca9c3ac5f61bb779cd0b3"
+        "sha": "22be4c2663fe386237a030b7913034a3c9dcc6d9"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "bcc476396e799806d3355e87246c6becf6250a70",
-        "internalRef": "306974763"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "6980131905b652563280e4d2482384d4acc9eafc"
+        "sha": "cd3ce2651c3921670217e664303976cdf76e9fe2",
+        "internalRef": "312123588"
       }
     }
   ],
@@ -37,18 +23,16 @@
         "apiName": "monitoring",
         "apiVersion": "v3",
         "language": "ruby",
-        "generator": "gapic",
-        "config": "google/monitoring/artman_monitoring.yaml"
+        "generator": "gapic-generator-ruby"
       }
     },
     {
       "client": {
         "source": "googleapis",
-        "apiName": "monitoring",
+        "apiName": "monitoring/dashboard",
         "apiVersion": "v1",
         "language": "ruby",
-        "generator": "gapic",
-        "config": "google/monitoring/dashboard/v1/artman_monitoring.yaml"
+        "generator": "gapic-generator-ruby"
       }
     }
   ]

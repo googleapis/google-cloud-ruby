@@ -148,7 +148,7 @@ module Google
         end
 
         # A secret payload resource in the Secret Manager API. This contains the
-        # sensitive secret data that is associated with a {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+        # sensitive secret payload that is associated with a {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
         # @!attribute [rw] data
         #   @return [::String]
         #     The secret data. Must be no larger than 64KiB.

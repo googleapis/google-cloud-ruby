@@ -1,5 +1,35 @@
 # Release History
 
+### 1.10.9 / 2020-06-17
+
+#### Documentation
+
+* Improved field descriptions in the low-level interface.
+
+### 1.10.8 / 2020-06-12
+
+#### Documentation
+
+* Provide more details on low-level monitored resource data types
+
+### 1.10.7 / 2020-05-28
+
+#### Documentation
+
+* Fix a few broken links
+
+### 1.10.6 / 2020-05-19
+
+#### Bug Fixes
+
+* Adjusted some default timeout and retry settings
+
+### 1.10.5 / 2020-05-05
+
+#### Bug Fixes
+
+* Prevent error when calling stop! on unused AsyncWriter
+
 ### 1.10.4 / 2020-04-20
 
 #### Documentation

@@ -53,7 +53,7 @@ module Google
       #   roles with an array of members. See [Understanding
       #   Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
       #   listing of primitive and curated roles. See
-      #   [Binding](https://cloud.google.com/resource-manager/reference/rpc/google.iam.v1#binding)
+      #   [Binding](https://cloud.google.com/resource-manager/reference/rest/Shared.Types/Binding)
       #   for a listing of values and patterns for members.
       #
       # @example
@@ -87,7 +87,7 @@ module Google
         # See [Understanding
         # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
         # listing of primitive and curated roles. See
-        # [Binding](https://cloud.google.com/resource-manager/reference/rpc/google.iam.v1#binding)
+        # [Binding](https://cloud.google.com/resource-manager/reference/rest/Shared.Types/Binding)
         # for a listing of values and patterns for members.
         #
         # @param [String] role_name A Cloud IAM role, such as `"roles/owner"`.
@@ -113,7 +113,7 @@ module Google
         # policy. See [Understanding
         # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
         # listing of primitive and curated roles. See
-        # [Binding](https://cloud.google.com/resource-manager/reference/rpc/google.iam.v1#binding)
+        # [Binding](https://cloud.google.com/resource-manager/reference/rest/Shared.Types/Binding)
         # for a listing of values and patterns for members.
         #
         # @param [String] role_name A Cloud IAM role, such as `"roles/owner"`.
@@ -140,7 +140,7 @@ module Google
         # {#roles}. See [Understanding
         # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
         # listing of primitive and curated roles. See
-        # [Binding](https://cloud.google.com/resource-manager/reference/rpc/google.iam.v1#binding)
+        # [Binding](https://cloud.google.com/resource-manager/reference/rest/Shared.Types/Binding)
         # for a listing of values and patterns for members.
         #
         # @return [Array<String>] The members strings, or an empty array.

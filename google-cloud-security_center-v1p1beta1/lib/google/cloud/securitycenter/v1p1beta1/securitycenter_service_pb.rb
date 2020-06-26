@@ -56,7 +56,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :group_by, :string, 3
       optional :compare_duration, :message, 4, "google.protobuf.Duration"
       optional :read_time, :message, 5, "google.protobuf.Timestamp"
-      optional :having, :string, 6
       optional :page_token, :string, 7
       optional :page_size, :int32, 8
     end
@@ -72,7 +71,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :group_by, :string, 3
       optional :read_time, :message, 4, "google.protobuf.Timestamp"
       optional :compare_duration, :message, 5, "google.protobuf.Duration"
-      optional :having, :string, 6
       optional :page_token, :string, 7
       optional :page_size, :int32, 8
     end
@@ -110,7 +108,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :order_by, :string, 3
       optional :read_time, :message, 4, "google.protobuf.Timestamp"
       optional :compare_duration, :message, 5, "google.protobuf.Duration"
-      optional :having, :string, 6
       optional :field_mask, :message, 7, "google.protobuf.FieldMask"
       optional :page_token, :string, 8
       optional :page_size, :int32, 9
@@ -137,7 +134,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :order_by, :string, 3
       optional :read_time, :message, 4, "google.protobuf.Timestamp"
       optional :compare_duration, :message, 5, "google.protobuf.Duration"
-      optional :having, :string, 6
       optional :field_mask, :message, 7, "google.protobuf.FieldMask"
       optional :page_token, :string, 8
       optional :page_size, :int32, 9

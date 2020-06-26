@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:bionic
 
 ENTRYPOINT /bin/bash
 
@@ -12,16 +12,16 @@ RUN apt-get update && apt-get install -y git curl autoconf bison build-essential
     libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev \
     make libbz2-dev libreadline-dev wget llvm libncursesw5-dev xz-utils liblzma-dev python-openssl \
     sqlite3 libsqlite3-dev
-RUN apt-get -y autoclean 
+RUN apt-get -y autoclean
 
 # Install Ruby
 RUN mkdir $HOME/.ruby
 RUN git clone https://github.com/rbenv/ruby-build.git $HOME/.ruby-build
-RUN $HOME/.ruby-build/bin/ruby-build 2.6.5 $HOME/.ruby
+RUN $HOME/.ruby-build/bin/ruby-build 2.7.1 $HOME/.ruby
 ENV PATH /root/.ruby/bin:$PATH
 ENV RUBY_CONFIGURE_OPTS --disable-install-doc
 RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc
-RUN gem install bundler:1.17.3 bundler:2.0.2 && gem update --system
+RUN gem install bundler:1.17.3 bundler:2.1.4 && gem update --system
 
 # Install Python
 RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv

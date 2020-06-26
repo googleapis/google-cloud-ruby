@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Tasks
-      VERSION = "1.5.1"
+      VERSION = "2.1.1"
     end
   end
 end

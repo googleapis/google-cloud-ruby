@@ -32,8 +32,10 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Phishing Protection helps prevent users from accessing phishing sites by identifying various signals associated with malicious content, including the use of your brand assets, classifying malicious content that uses your brand and reporting the unsafe URLs to Google Safe Browsing.",
         "ruby-cloud-env-prefix": "PHISHING_PROTECTION",
         "ruby-cloud-grpc-service-config": "google/cloud/phishingprotection/v1beta1/phishingprotection_grpc_service_config.json",
-        "ruby-cloud-path-override": "phishing_protection_service_v1_beta1=phishing_protection_service",
-        "ruby-cloud-namespace-override": "PhishingProtectionServiceV1Beta1=PhishingProtectionService",
+        "ruby-cloud-product-url": "https://cloud.google.com/phishing-protection",
+        "ruby-cloud-api-id": "phishingprotection.googleapis.com",
+        "ruby-cloud-api-shortname": "phishingprotection",
+        "ruby-cloud-service-override": "PhishingProtectionServiceV1Beta1=PhishingProtectionService",
     }
 )
 

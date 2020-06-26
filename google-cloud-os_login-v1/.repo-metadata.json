@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "oslogin.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-os_login-v1/latest",
     "distribution_name": "google-cloud-os_login-v1",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-os_login-v1/latest"
+    "language": "ruby",
+    "name": "oslogin",
+    "name_pretty": "Cloud OS Login V1 API",
+    "product_documentation": "https://cloud.google.com/compute/docs/oslogin",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }

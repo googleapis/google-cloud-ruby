@@ -4,10 +4,19 @@ inherit_gem:
 AllCops:
   Exclude:
     - "google-cloud-phishing_protection.gemspec"
-    - "lib/google/**/*"
     - "Rakefile"
-    - "test/**/*"
     - "acceptance/**/*"
+    - "test/**/*"
 
+Bundler/OrderedGems:
+  Enabled: false
 Documentation:
   Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "samples/**/acceptance/*.rb"
+
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-phishing_protection.rb"

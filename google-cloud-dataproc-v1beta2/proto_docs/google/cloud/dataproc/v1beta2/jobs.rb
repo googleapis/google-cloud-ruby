@@ -458,8 +458,9 @@ module Google
 
         # A Dataproc job for running [Presto](https://prestosql.io/) queries.
         # **IMPORTANT**: The [Dataproc Presto Optional
-        # Component](/dataproc/docs/concepts/components/presto) must be enabled when
-        # the cluster is created to submit a Presto job to the cluster.
+        # Component](https://cloud.google.com/dataproc/docs/concepts/components/presto)
+        # must be enabled when the cluster is created to submit a Presto job to the
+        # cluster.
         # @!attribute [rw] query_file_uri
         #   @return [::String]
         #     The HCFS URI of the script that contains SQL queries.

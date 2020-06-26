@@ -21,6 +21,7 @@ if ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
   gem "google-cloud-asset", path: "../../google-cloud-asset"
   gem "google-cloud-asset-v1", path: "../../google-cloud-asset-v1"
   gem "google-cloud-asset-v1beta1", path: "../../google-cloud-asset-v1beta1"
+  gem "google-cloud-bigquery", group: :test, path: "../../google-cloud-bigquery"
   gem "google-cloud-pubsub", group: :test, path: "../../google-cloud-pubsub"
   gem "google-cloud-storage", group: :test, path: "../../google-cloud-storage"
 else
@@ -28,6 +29,7 @@ else
   # [START asset_dependencies]
   gem "google-cloud-asset"
   # [END asset_dependencies]
+  gem "google-cloud-bigquery", group: :test
   gem "google-cloud-pubsub", group: :test
   gem "google-cloud-storage", group: :test
   # rubocop:enable Bundler/DuplicatedGem

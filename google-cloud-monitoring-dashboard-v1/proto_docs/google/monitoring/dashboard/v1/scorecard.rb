@@ -26,7 +26,7 @@ module Google
           # one or more thresholds.
           # @!attribute [rw] time_series_query
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::TimeSeriesQuery]
-          #     Fields for querying time series data from the
+          #     Required. Fields for querying time series data from the
           #     Stackdriver metrics API.
           # @!attribute [rw] gauge_view
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Scorecard::GaugeView]
@@ -97,7 +97,7 @@ module Google
             # timeseries.
             # @!attribute [rw] spark_chart_type
             #   @return [::Google::Cloud::Monitoring::Dashboard::V1::SparkChartType]
-            #     The type of sparkchart to show in this chartView.
+            #     Required. The type of sparkchart to show in this chartView.
             # @!attribute [rw] min_alignment_period
             #   @return [::Google::Protobuf::Duration]
             #     The lower bound on data point frequency in the chart implemented by

@@ -26,10 +26,10 @@ module Google
           # of pages in the Stackdriver web application.
           # @!attribute [rw] name
           #   @return [::String]
-          #     The resource name of the dashboard.
+          #     Immutable. The resource name of the dashboard.
           # @!attribute [rw] display_name
           #   @return [::String]
-          #     The mutable, human-readable name.
+          #     Required. The mutable, human-readable name.
           # @!attribute [rw] etag
           #   @return [::String]
           #     `etag` is used for optimistic concurrency control as a way to help

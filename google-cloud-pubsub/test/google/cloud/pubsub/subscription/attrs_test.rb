@@ -18,8 +18,11 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
   let(:labels) { { "foo" => "bar" } }
   let(:topic_name) { "topic-name-goes-here" }
   let(:dead_letter_topic_path) { topic_path("topic-name-dead-letter") }
+  let(:retry_minimum_backoff) { 12.123 }
+  let(:retry_maximum_backoff) { 123.321 }
+  let(:filter) { "attributes.event_type = \"1\"" }
   let(:sub_name) { "subscription-name-goes-here" }
-  let(:sub_hash) { subscription_hash topic_name, sub_name, labels: labels, dead_letter_topic: dead_letter_topic_path, max_delivery_attempts: 6 }
+  let(:sub_hash) { subscription_hash topic_name, sub_name, labels: labels, dead_letter_topic: dead_letter_topic_path, max_delivery_attempts: 6, retry_minimum_backoff: retry_minimum_backoff, retry_maximum_backoff: retry_maximum_backoff, filter: filter }
   let(:sub_deadline) { sub_hash[:ack_deadline_seconds] }
   let(:sub_endpoint) { sub_hash[:push_config][:push_endpoint] }
   let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.new(sub_hash) }
@@ -80,12 +83,24 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     _(subscription.labels).must_equal labels
   end
 
+  it "gets filter from the Google API object" do
+    _(subscription.filter).must_equal filter
+  end
+
   it "gets dead_letter_topic from the Google API object" do
     _(subscription.dead_letter_topic.name).must_equal dead_letter_topic_path
   end
 
   it "gets dead_letter_max_delivery_attempts from the Google API object" do
     _(subscription.dead_letter_max_delivery_attempts).must_equal 6
+  end
+
+  it "gets retry_minimum_backoff from the Google API object" do
+    _(subscription.retry_policy.minimum_backoff).must_equal retry_minimum_backoff
+  end
+
+  it "gets retry_maximum_backoff from the Google API object" do
+    _(subscription.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
   end
 
   describe "reference subscription object of a subscription that does exist" do
@@ -166,6 +181,17 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
       mock.verify
     end
 
+    it "makes an HTTP API call to retrieve filter" do
+      get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name, filter: filter)
+      mock = Minitest::Mock.new
+      mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
+      subscription.service.mocked_subscriber = mock
+
+      _(subscription.filter).must_equal filter
+
+      mock.verify
+    end
+
     it "makes an HTTP API call to retrieve dead_letter_topic and dead_letter_max_delivery_attempts" do
       get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name, dead_letter_topic: dead_letter_topic_path, max_delivery_attempts: 7)
       mock = Minitest::Mock.new
@@ -178,13 +204,24 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
       mock.verify
     end
 
-    it "makes an HTTP API call to retrieve labels" do
-      get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name, labels: labels)
+    it "makes an HTTP API call to retrieve retry_minimum_backoff" do
+      get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name, retry_minimum_backoff: retry_minimum_backoff)
       mock = Minitest::Mock.new
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
 
-      _(subscription.labels).must_equal labels
+      _(subscription.retry_policy.minimum_backoff).must_equal retry_minimum_backoff
+
+      mock.verify
+    end
+
+    it "makes an HTTP API call to retrieve retry_maximum_backoff" do
+      get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name, retry_maximum_backoff: retry_maximum_backoff)
+      mock = Minitest::Mock.new
+      mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
+      subscription.service.mocked_subscriber = mock
+
+      _(subscription.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
 
       mock.verify
     end
@@ -272,6 +309,20 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
       end.must_raise Google::Cloud::NotFoundError
     end
 
+    it "raises NotFoundError when retrieving filter" do
+      stub = Object.new
+      def stub.get_subscription *args
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
+      end
+      subscription.service.mocked_subscriber = stub
+
+      expect do
+        subscription.filter
+      end.must_raise Google::Cloud::NotFoundError
+    end
+
     it "does not raise NotFoundError when accessing push_config" do
       _(subscription.push_config).must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
       _(subscription.push_config.endpoint).must_be :empty?
@@ -303,6 +354,20 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
 
       expect do
         subscription.dead_letter_max_delivery_attempts
+      end.must_raise Google::Cloud::NotFoundError
+    end
+
+    it "raises NotFoundError when retrieving retry_policy" do
+      stub = Object.new
+      def stub.get_subscription *args
+        gax_error = Google::Gax::GaxError.new "not found"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
+        raise gax_error
+      end
+      subscription.service.mocked_subscriber = stub
+
+      expect do
+        subscription.retry_policy
       end.must_raise Google::Cloud::NotFoundError
     end
   end

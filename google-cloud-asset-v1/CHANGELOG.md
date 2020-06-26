@@ -1,5 +1,54 @@
 # Release History
 
+### 0.5.1 / 2020-06-25
+
+#### Bug Fixes
+
+* Update timeouts and retry settings for feed-related calls
+
+### 0.5.0 / 2020-06-18
+
+#### Features
+
+* Support for real-time notification conditions
+
+### 0.4.3 / 2020-06-05
+
+#### Bug Fixes
+
+* Eliminate a Ruby warning that appeared in some cases when accessing rpc-scoped configs
+
+### 0.4.2 / 2020-05-27
+
+#### Documentation
+
+* Properly format some literal strings
+
+### 0.4.1 / 2020-05-26
+
+#### Bug Fixes
+
+* Removed unused google/cloud/common_resources_pb file
+* The long-running operations client honors the quota_project config
+
+### 0.4.0 / 2020-05-20
+
+#### Features
+
+* The quota_project can be set via configuration
+
+### 0.3.0 / 2020-05-18
+
+#### Features
+
+* Support search_all_resources and search_all_iam_policies methods
+
+### 0.2.3 / 2020-05-05
+
+#### Documentation
+
+* Clarify that timeouts are in seconds.
+
 ### 0.2.2 / 2020-04-22
 
 #### Bug Fixes

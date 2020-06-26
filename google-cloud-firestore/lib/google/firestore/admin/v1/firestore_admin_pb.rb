@@ -66,19 +66,19 @@ end
 module Google
   module Firestore
     module Admin
-      module V1
-        CreateIndexRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.CreateIndexRequest").msgclass
-        ListIndexesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ListIndexesRequest").msgclass
-        ListIndexesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ListIndexesResponse").msgclass
-        GetIndexRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.GetIndexRequest").msgclass
-        DeleteIndexRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.DeleteIndexRequest").msgclass
-        UpdateFieldRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.UpdateFieldRequest").msgclass
-        GetFieldRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.GetFieldRequest").msgclass
-        ListFieldsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ListFieldsRequest").msgclass
-        ListFieldsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ListFieldsResponse").msgclass
-        ExportDocumentsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ExportDocumentsRequest").msgclass
-        ImportDocumentsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ImportDocumentsRequest").msgclass
-      end
     end
   end
+end
+module Google::Firestore::Admin::V1
+  CreateIndexRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.CreateIndexRequest").msgclass
+  ListIndexesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ListIndexesRequest").msgclass
+  ListIndexesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ListIndexesResponse").msgclass
+  GetIndexRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.GetIndexRequest").msgclass
+  DeleteIndexRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.DeleteIndexRequest").msgclass
+  UpdateFieldRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.UpdateFieldRequest").msgclass
+  GetFieldRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.GetFieldRequest").msgclass
+  ListFieldsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ListFieldsRequest").msgclass
+  ListFieldsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ListFieldsResponse").msgclass
+  ExportDocumentsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ExportDocumentsRequest").msgclass
+  ImportDocumentsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ImportDocumentsRequest").msgclass
 end

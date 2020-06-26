@@ -1,5 +1,19 @@
 # Release History
 
+### 1.16.2 / 2020-05-28
+
+#### Documentation
+
+* Fix a few broken links
+
+### 1.16.1 / 2020-05-21
+
+#### Bug Fixes
+
+* Increased default timeouts to match clients in other languages
+* Run system tests against the emulator, skipping those not supported by the emulator
+* Do not require a key file when running against the emulator
+
 ### 1.16.0 / 2020-03-20
 
 #### Features

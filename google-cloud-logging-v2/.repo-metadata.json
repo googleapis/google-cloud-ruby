@@ -1,0 +1,11 @@
+{
+    "api_id": "logging.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-logging-v2/latest",
+    "distribution_name": "google-cloud-logging-v2",
+    "language": "ruby",
+    "name": "logging",
+    "name_pretty": "Cloud Logging V2 API",
+    "product_documentation": "https://cloud.google.com/logging",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}

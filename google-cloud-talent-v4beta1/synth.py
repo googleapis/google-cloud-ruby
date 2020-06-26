@@ -32,6 +32,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Transform your job search and candidate matching capabilities with Cloud Talent Solution, designed to support enterprise talent acquisition technology and evolve with your growing needs. This AI solution includes features such as Job Search and Profile Search to provide candidates and employers with an enhanced talent acquisition experience.",
         "ruby-cloud-env-prefix": "TALENT",
         "ruby-cloud-grpc-service-config": "google/cloud/talent/v4beta1/talent_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/solutions/talent-solution",
+        "ruby-cloud-api-id": "jobs.googleapis.com",
+        "ruby-cloud-api-shortname": "jobs",
     }
 )
 

@@ -22,7 +22,7 @@ module Google
     module RecaptchaEnterprise
       module V1beta1
         module RecaptchaEnterpriseService
-          # Path helper methods for the RecaptchaEnterpriseServiceV1Beta1 API.
+          # Path helper methods for the RecaptchaEnterpriseService API.
           module Paths
             ##
             # Create a fully-qualified Assessment resource string.

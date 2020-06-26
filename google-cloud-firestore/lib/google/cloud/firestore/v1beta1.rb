@@ -21,6 +21,8 @@ module Google
       # rubocop:disable LineLength
 
       ##
+      # @deprecated Use Google::Cloud::Firestore::V1 instead.
+      #
       # # Ruby Client for Google Cloud Firestore API
       #
       # [Google Cloud Firestore API][Product Documentation]:

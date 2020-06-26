@@ -1,9 +1,11 @@
 {
-    "name": "monitoring",
-    "language": "ruby",
+    "api_id": "monitoring.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-monitoring/latest",
     "distribution_name": "google-cloud-monitoring",
-    "module_name": "Monitoring",
-    "module_name_credentials": "Monitoring::V3",
-    "env_var_prefix": "MONITORING",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-monitoring/latest"
+    "language": "ruby",
+    "name": "monitoring",
+    "name_pretty": "Cloud Monitoring API",
+    "product_documentation": "https://cloud.google.com/monitoring",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }

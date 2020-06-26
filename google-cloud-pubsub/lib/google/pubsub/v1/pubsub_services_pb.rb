@@ -53,7 +53,7 @@ module Google::Cloud::PubSub::V1
       rpc :GetTopic, GetTopicRequest, Topic
       # Lists matching topics.
       rpc :ListTopics, ListTopicsRequest, ListTopicsResponse
-      # Lists the names of the subscriptions on this topic.
+      # Lists the names of the attached subscriptions on this topic.
       rpc :ListTopicSubscriptions, ListTopicSubscriptionsRequest, ListTopicSubscriptionsResponse
       # Lists the names of the snapshots on this topic. Snapshots are used in
       # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
@@ -68,6 +68,11 @@ module Google::Cloud::PubSub::V1
       # configuration or subscriptions. Existing subscriptions to this topic are
       # not deleted, but their `topic` field is set to `_deleted-topic_`.
       rpc :DeleteTopic, DeleteTopicRequest, Google::Protobuf::Empty
+      # Detaches a subscription from this topic. All messages retained in the
+      # subscription are dropped. Subsequent `Pull` and `StreamingPull` requests
+      # will return FAILED_PRECONDITION. If the subscription is a push
+      # subscription, pushes to the endpoint will stop.
+      rpc :DetachSubscription, DetachSubscriptionRequest, DetachSubscriptionResponse
     end
 
     Stub = Service.rpc_stub_class

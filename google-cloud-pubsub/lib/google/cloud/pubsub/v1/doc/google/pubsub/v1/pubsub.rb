@@ -17,6 +17,7 @@ module Google
   module Cloud
   module PubSub
     module V1
+      # A policy constraining the storage of messages published to the topic.
       # @!attribute [rw] allowed_persistence_regions
       #   @return [Array<String>]
       #     A list of IDs of GCP regions where messages that are published to the topic
@@ -67,7 +68,8 @@ module Google
       # @!attribute [rw] attributes
       #   @return [Hash{String => String}]
       #     Attributes for this message. If this field is empty, the message must
-      #     contain non-empty data.
+      #     contain non-empty data. This can be used to filter messages on the
+      #     subscription.
       # @!attribute [rw] message_id
       #   @return [String]
       #     ID of this message, assigned by the server when the message is published.
@@ -173,7 +175,7 @@ module Google
       # Response for the `ListTopicSubscriptions` method.
       # @!attribute [rw] subscriptions
       #   @return [Array<String>]
-      #     The names of the subscriptions that match the request.
+      #     The names of subscriptions attached to the topic specified in the request.
       # @!attribute [rw] next_page_token
       #   @return [String]
       #     If not empty, indicates that there may be more subscriptions that match
@@ -213,6 +215,17 @@ module Google
       #     Required. Name of the topic to delete.
       #     Format is `projects/{project}/topics/{topic}`.
       class DeleteTopicRequest; end
+
+      # Request for the DetachSubscription method.
+      # @!attribute [rw] subscription
+      #   @return [String]
+      #     Required. The subscription to detach.
+      #     Format is `projects/{project}/subscriptions/{subscription}`.
+      class DetachSubscriptionRequest; end
+
+      # Response for the DetachSubscription method.
+      # Reserved for future use.
+      class DetachSubscriptionResponse; end
 
       # A subscription resource.
       # @!attribute [rw] name
@@ -295,13 +308,11 @@ module Google
       #     value for `expiration_policy.ttl` is 1 day.
       # @!attribute [rw] filter
       #   @return [String]
-      #     An expression written in the Cloud Pub/Sub filter language. If non-empty,
+      #     An expression written in the Pub/Sub [filter
+      #     language](https://cloud.google.com/pubsub/docs/filtering). If non-empty,
       #     then only `PubsubMessage`s whose `attributes` field matches the filter are
       #     delivered on this subscription. If empty, then no messages are filtered
       #     out.
-      #     <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
-      #     API might be changed in backward-incompatible ways and is not recommended
-      #     for production use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] dead_letter_policy
       #   @return [Google::Cloud::PubSub::V1::DeadLetterPolicy]
       #     A policy that specifies the conditions for dead lettering messages in
@@ -314,16 +325,20 @@ module Google
       #     permission to Acknowledge() messages on this subscription.
       # @!attribute [rw] retry_policy
       #   @return [Google::Cloud::PubSub::V1::RetryPolicy]
-      #     A policy that specifies how Cloud Pub/Sub retries message delivery for this
+      #     A policy that specifies how Pub/Sub retries message delivery for this
       #     subscription.
       #
       #     If not set, the default retry policy is applied. This generally implies
       #     that messages will be retried as soon as possible for healthy subscribers.
       #     RetryPolicy will be triggered on NACKs or acknowledgement deadline
       #     exceeded events for a given message.
-      #     <b>EXPERIMENTAL:</b> This API might be changed in backward-incompatible
-      #     ways and is not recommended for production use. It is not subject to any
-      #     SLA or deprecation policy.
+      # @!attribute [rw] detached
+      #   @return [true, false]
+      #     Indicates whether the subscription is detached from its topic. Detached
+      #     subscriptions don't receive messages from their topic and don't retain any
+      #     backlog. `Pull` and `StreamingPull` requests will return
+      #     FAILED_PRECONDITION. If the subscription is a push subscription, pushes to
+      #     the endpoint will not be made.
       class Subscription; end
 
       # A policy that specifies how Cloud Pub/Sub retries message delivery.
@@ -455,8 +470,11 @@ module Google
       #     The message.
       # @!attribute [rw] delivery_attempt
       #   @return [Integer]
-      #     Delivery attempt counter is 1 + (the sum of number of NACKs and number of
-      #     ack_deadline exceeds) for this message.
+      #     The approximate number of times that Cloud Pub/Sub has attempted to deliver
+      #     the associated message to a subscriber.
+      #
+      #     More precisely, this is 1 + (number of NACKs) +
+      #     (number of ack_deadline exceeds) for this message.
       #
       #     A NACK is any call to ModifyAckDeadline with a 0 deadline. An ack_deadline
       #     exceeds event is whenever a message is not acknowledged within
@@ -464,13 +482,10 @@ module Google
       #     Subscription.ackDeadlineSeconds, but may get extended automatically by
       #     the client library.
       #
-      #     The first delivery of a given message will have this value as 1. The value
-      #     is calculated at best effort and is approximate.
+      #     Upon the first delivery of a given message, `delivery_attempt` will have a
+      #     value of 1. The value is calculated at best effort and is approximate.
       #
       #     If a DeadLetterPolicy is not set on the subscription, this will be 0.
-      #     <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
-      #     API might be changed in backward-incompatible ways and is not recommended
-      #     for production use. It is not subject to any SLA or deprecation policy.
       class ReceivedMessage; end
 
       # Request for the GetSubscription method.
@@ -650,6 +665,28 @@ module Google
       #     to the same value so that state associated with the old stream can be
       #     transferred to the new stream. The same client_id should not be used for
       #     different client instances.
+      # @!attribute [rw] max_outstanding_messages
+      #   @return [Integer]
+      #     Flow control settings for the maximum number of outstanding messages. When
+      #     there are `max_outstanding_messages` or more currently sent to the
+      #     streaming pull client that have not yet been acked or nacked, the server
+      #     stops sending more messages. The sending of messages resumes once the
+      #     number of outstanding messages is less than this value. If the value is
+      #     <= 0, there is no limit to the number of outstanding messages. This
+      #     property can only be set on the initial StreamingPullRequest. If it is set
+      #     on a subsequent request, the stream will be aborted with status
+      #     `INVALID_ARGUMENT`.
+      # @!attribute [rw] max_outstanding_bytes
+      #   @return [Integer]
+      #     Flow control settings for the maximum number of outstanding bytes. When
+      #     there are `max_outstanding_bytes` or more worth of messages currently sent
+      #     to the streaming pull client that have not yet been acked or nacked, the
+      #     server will stop sending more messages. The sending of messages resumes
+      #     once the number of outstanding bytes is less than this value. If the value
+      #     is <= 0, there is no limit to the number of outstanding bytes. This
+      #     property can only be set on the initial StreamingPullRequest. If it is set
+      #     on a subsequent request, the stream will be aborted with status
+      #     `INVALID_ARGUMENT`.
       class StreamingPullRequest; end
 
       # Response for the `StreamingPull` method. This response is used to stream

@@ -15,16 +15,17 @@
 require "simplecov"
 require "minitest/autorun"
 require "minitest/spec"
+require "minitest/focus"
 
 require "google/cloud/container_analysis"
 
 describe "GrafeasService V1 smoke test" do
   it "runs one smoke test with list_occurrences" do
-    ca_client = Google::Cloud::ContainerAnalysis.new
+    ca_client = Google::Cloud::ContainerAnalysis.container_analysis
     client = ca_client.grafeas_client
-    parent = Grafeas::V1::GrafeasClient.project_path(ENV["CONTAINER_ANALYSIS_PROJECT"])
-    results = client.list_occurrences(parent, page_size: 2)
+    parent = client.project_path project: ENV["CONTAINER_ANALYSIS_PROJECT"]
+    results = client.list_occurrences parent: parent, page_size: 2
     page = results.page
-    assert(page.to_a.size > 0)
+    refute_empty page.to_a
   end
 end

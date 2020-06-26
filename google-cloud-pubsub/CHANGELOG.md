@@ -1,5 +1,30 @@
 # Release History
 
+### 1.7.1 / 2020-05-28
+
+#### Documentation
+
+* Fix a few broken links
+
+### 1.7.0 / 2020-05-21
+
+#### Features
+
+* Add Retry Policy support
+  * Add RetryPolicy
+  * Add retry_policy param to Topic#subscribe
+  * Add Subscription#retry_policy
+  * Add Subscription#retry_policy=
+* Set client-scoped UUID in initial StreamingPullRequest#client_id
+
+### 1.6.1 / 2020-05-06
+
+#### Documentation
+
+* Fix example in Emulator documentation
+* Remove experimental notice from ReceivedMessage#delivery_attempt
+* Wrap example URLs in backticks
+
 ### 1.6.0 / 2020-04-06
 
 #### Features

@@ -32,8 +32,10 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Web Risk is an enterprise security product that lets your client applications check URLs against Google's constantly updated lists of unsafe web resources.",
         "ruby-cloud-env-prefix": "WEBRISK",
         "ruby-cloud-grpc-service-config": "google/cloud/webrisk/v1beta1/webrisk_grpc_service_config.json",
-        "ruby-cloud-path-override": "web_risk_service_v1_beta1=web_risk_service",
-        "ruby-cloud-namespace-override": "WebRiskServiceV1Beta1=WebRiskService",
+        "ruby-cloud-service-override": "WebRiskServiceV1Beta1=WebRiskService",
+        "ruby-cloud-product-url": "https://cloud.google.com/web-risk",
+        "ruby-cloud-api-id": "webrisk.googleapis.com",
+        "ruby-cloud-api-shortname": "webrisk",
     }
 )
 

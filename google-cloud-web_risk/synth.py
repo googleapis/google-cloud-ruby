@@ -31,7 +31,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "WEBRISK",
         "ruby-cloud-wrapper-of": "v1:0.0;v1beta1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/web-risk",
-        "ruby-cloud-api-id": "webrisk",
+        "ruby-cloud-api-id": "webrisk.googleapis.com",
+        "ruby-cloud-api-shortname": "webrisk",
         "ruby-cloud-migration-version": "1.0",
     }
 )

@@ -70,6 +70,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :IMAGE_PNG, 3
       value :IMAGE_SVG, 4
       value :TEXT_UTF8, 5
+      value :WORD_DOCUMENT, 7
+      value :PDF, 8
       value :AVRO, 11
     end
     add_message "google.privacy.dlp.v2.ContentItem" do
@@ -118,7 +120,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :record_location, :message, 2, "google.privacy.dlp.v2.RecordLocation"
         optional :image_location, :message, 3, "google.privacy.dlp.v2.ImageLocation"
         optional :document_location, :message, 5, "google.privacy.dlp.v2.DocumentLocation"
+        optional :metadata_location, :message, 8, "google.privacy.dlp.v2.MetadataLocation"
       end
+    end
+    add_message "google.privacy.dlp.v2.MetadataLocation" do
+      optional :type, :enum, 1, "google.privacy.dlp.v2.MetadataType"
+      oneof :label do
+        optional :storage_label, :message, 3, "google.privacy.dlp.v2.StorageMetadataLabel"
+      end
+    end
+    add_message "google.privacy.dlp.v2.StorageMetadataLabel" do
+      optional :key, :string, 1
     end
     add_message "google.privacy.dlp.v2.DocumentLocation" do
       optional :file_offset, :int64, 1
@@ -258,6 +270,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :description, :string, 4
     end
     add_message "google.privacy.dlp.v2.ListInfoTypesRequest" do
+      optional :parent, :string, 4
       optional :language_code, :string, 1
       optional :filter, :string, 2
       optional :location_id, :string, 3
@@ -987,6 +1000,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CONTENT_TEXT, 1
       value :CONTENT_IMAGE, 2
     end
+    add_enum "google.privacy.dlp.v2.MetadataType" do
+      value :METADATATYPE_UNSPECIFIED, 0
+      value :STORAGE_METADATA, 2
+    end
     add_enum "google.privacy.dlp.v2.InfoTypeSupportedBy" do
       value :ENUM_TYPE_UNSPECIFIED, 0
       value :INSPECT, 1
@@ -1027,6 +1044,8 @@ module Google
         Finding = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Finding").msgclass
         Location = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Location").msgclass
         ContentLocation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ContentLocation").msgclass
+        MetadataLocation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.MetadataLocation").msgclass
+        StorageMetadataLabel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.StorageMetadataLabel").msgclass
         DocumentLocation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DocumentLocation").msgclass
         RecordLocation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.RecordLocation").msgclass
         TableLocation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.TableLocation").msgclass
@@ -1192,6 +1211,7 @@ module Google
         RelationalOperator = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.RelationalOperator").enummodule
         MatchingType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.MatchingType").enummodule
         ContentOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ContentOption").enummodule
+        MetadataType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.MetadataType").enummodule
         InfoTypeSupportedBy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InfoTypeSupportedBy").enummodule
         DlpJobType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DlpJobType").enummodule
         StoredInfoTypeState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.StoredInfoTypeState").enummodule

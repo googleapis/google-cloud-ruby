@@ -23,7 +23,7 @@ module Google
     module PhishingProtection
       module V1beta1
         module PhishingProtectionService
-          # Credentials for the PhishingProtectionServiceV1Beta1 API.
+          # Credentials for the PhishingProtectionService API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform"

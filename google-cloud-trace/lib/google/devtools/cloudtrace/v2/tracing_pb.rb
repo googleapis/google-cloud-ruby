@@ -21,9 +21,9 @@ end
 module Google
   module Devtools
     module Cloudtrace
-      module V2
-        BatchWriteSpansRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.BatchWriteSpansRequest").msgclass
-      end
     end
   end
+end
+module Google::Devtools::Cloudtrace::V2
+  BatchWriteSpansRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.BatchWriteSpansRequest").msgclass
 end

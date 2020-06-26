@@ -96,3 +96,12 @@ s.replace(
     'Gem.loaded_specs\[.*\]\.version\.version',
     'Google::Cloud::ErrorReporting::VERSION'
 )
+
+# We recently added ruby_package proto options, but we want those to apply only
+# when we move to the microgenerator. Undo their effect while the monolith is
+# still in use.
+s.replace(
+    'lib/google/devtools/clouderrorreporting/v1beta1/*_pb.rb',
+    '\nmodule Google::Cloud::ErrorReporting::V1beta1\n',
+    '\nmodule Google\n  module Devtools\n    module Clouderrorreporting\n    end\n  end\nend\nmodule Google::Devtools::Clouderrorreporting::V1beta1\n',
+)

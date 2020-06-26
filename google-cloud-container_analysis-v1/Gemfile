@@ -1,0 +1,4 @@
+source "https://rubygems.org"
+
+gemspec
+gem "grafeas-v1", path: "../grafeas-v1"

@@ -25,9 +25,11 @@ module Google
           # The `CreateDashboard` request.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The project on which to execute the request. The format is
-          #     `"projects/{project_id_or_number}"`. The \\{project_id_or_number} must match
-          #     the dashboard resource name.
+          #     Required. The project on which to execute the request. The format is:
+          #
+          #         projects/[PROJECT_ID_OR_NUMBER]
+          #
+          #     The `[PROJECT_ID_OR_NUMBER]` must match the dashboard resource name.
           # @!attribute [rw] dashboard
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
           #     Required. The initial dashboard specification.
@@ -39,8 +41,9 @@ module Google
           # The `ListDashboards` request.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The scope of the dashboards to list. A project scope must be
-          #     specified in the form of `"projects/{project_id_or_number}"`.
+          #     Required. The scope of the dashboards to list. The format is:
+          #
+          #         projects/[PROJECT_ID_OR_NUMBER]
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     A positive number that is the maximum number of results to return.
@@ -63,7 +66,7 @@ module Google
           #   @return [::String]
           #     If there are more results than have been returned, then this field is set
           #     to a non-empty value.  To see the additional results,
-          #     use that value as `pageToken` in the next call to this method.
+          #     use that value as `page_token` in the next call to this method.
           class ListDashboardsResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -72,10 +75,11 @@ module Google
           # The `GetDashboard` request.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The resource name of the Dashboard. The format is one of
-          #     `"dashboards/{dashboard_id}"` (for system dashboards) or
-          #     `"projects/{project_id_or_number}/dashboards/{dashboard_id}"`
-          #     (for custom dashboards).
+          #     Required. The resource name of the Dashboard. The format is one of:
+          #
+          #      -  `dashboards/[DASHBOARD_ID]` (for system dashboards)
+          #      -  `projects/[PROJECT_ID_OR_NUMBER]/dashboards/[DASHBOARD_ID]`
+          #           (for custom dashboards).
           class GetDashboardRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -84,8 +88,9 @@ module Google
           # The `DeleteDashboard` request.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The resource name of the Dashboard. The format is
-          #     `"projects/{project_id_or_number}/dashboards/{dashboard_id}"`.
+          #     Required. The resource name of the Dashboard. The format is:
+          #
+          #         projects/[PROJECT_ID_OR_NUMBER]/dashboards/[DASHBOARD_ID]
           class DeleteDashboardRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

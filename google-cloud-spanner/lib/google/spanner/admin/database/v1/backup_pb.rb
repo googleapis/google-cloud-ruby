@@ -78,21 +78,21 @@ module Google
   module Spanner
     module Admin
       module Database
-        module V1
-          Backup = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.Backup").msgclass
-          Backup::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.Backup.State").enummodule
-          CreateBackupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CreateBackupRequest").msgclass
-          CreateBackupMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CreateBackupMetadata").msgclass
-          UpdateBackupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.UpdateBackupRequest").msgclass
-          GetBackupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.GetBackupRequest").msgclass
-          DeleteBackupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.DeleteBackupRequest").msgclass
-          ListBackupsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListBackupsRequest").msgclass
-          ListBackupsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListBackupsResponse").msgclass
-          ListBackupOperationsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListBackupOperationsRequest").msgclass
-          ListBackupOperationsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListBackupOperationsResponse").msgclass
-          BackupInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.BackupInfo").msgclass
-        end
       end
     end
   end
+end
+module Google::Spanner::Admin::Database::V1
+  Backup = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.Backup").msgclass
+  Backup::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.Backup.State").enummodule
+  CreateBackupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CreateBackupRequest").msgclass
+  CreateBackupMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CreateBackupMetadata").msgclass
+  UpdateBackupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.UpdateBackupRequest").msgclass
+  GetBackupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.GetBackupRequest").msgclass
+  DeleteBackupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.DeleteBackupRequest").msgclass
+  ListBackupsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListBackupsRequest").msgclass
+  ListBackupsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListBackupsResponse").msgclass
+  ListBackupOperationsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListBackupOperationsRequest").msgclass
+  ListBackupOperationsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListBackupOperationsResponse").msgclass
+  BackupInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.BackupInfo").msgclass
 end

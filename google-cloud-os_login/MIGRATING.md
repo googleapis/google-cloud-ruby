@@ -11,7 +11,7 @@ To summarize:
 
  *  The library has been broken out into three libraries. The new gems
     `google-cloud-os_login-v1` and `google-cloud-os_login-v1beta` contain the
-    actual client classes for versions V1 and V1beta of the OSLogin
+    actual client classes for versions V1 and V1beta of the OS Login
     service, and the gem `google-cloud-os_login` now simply provides a
     convenience wrapper. See [Library Structure](#library-structure) for more
     info.
@@ -30,13 +30,17 @@ To summarize:
     resource paths. These paths are now instance methods on the client objects,
     and are also available in a separate paths module. See
     [Resource Path Helpers](#resource-path-helpers) for more info.
+ *  Previously, clients reported RPC errors by raising instances of
+    `Google::Gax::GaxError` and its subclasses. Now, RPC exceptions are of type
+    `Google::Cloud::Error` and its subclasses. See
+    [Handling Errors](#handling-errors) for more info.
  *  Some classes have moved into different namespaces. See
     [Class Namespaces](#class-namespaces) for more info.
 
 ### Library Structure
 
 Older 0.x releases of the `google-cloud-os_login` gem were all-in-one gems that
-included potentially multiple clients for multiple versions of the OSLogin
+included potentially multiple clients for multiple versions of the OS Login
 service. The `Google::Cloud::OsLogin.new` factory method would
 return you an instance of a `Google::Cloud::OsLogin::V1::OsLoginServiceClient`
 object for the V1 version of the service, or a
@@ -70,7 +74,7 @@ constructor. It was also extremely difficult to customize the default settings.
 With the 1.0 release, a configuration interface provides control over these
 parameters, including defaults for all instances of a client, and settings for
 each specific client instance. For example, to set default credentials and
-timeout for all OSLogin V1 clients:
+timeout for all OS Login V1 clients:
 
 ```
 Google::Cloud::OsLogin::V1::OsLoginService::Client.configure do |config|
@@ -88,11 +92,11 @@ Google::Cloud::OsLogin::V1::OsLoginService::Client.configure do |config|
 end
 ```
 
-Defaults for certain configurations can be set for all Redis versions
+Defaults for certain configurations can be set for all OS Login versions
 globally:
 
 ```
-Google::Cloud::Redis.configure do |config|
+Google::Cloud::OsLogin.configure do |config|
   config.credentials = "/path/to/credentials.json"
   config.timeout = 10.0
 end
@@ -238,7 +242,7 @@ In the 1.0 client, you can also use the paths module as a convenience module.
 
 New:
 ```
-# Bring the session_path method into the current class
+# Bring the path helper methods into the current class
 include Google::Cloud::OsLogin::V1::OsLoginService::Paths
 
 def foo
@@ -250,6 +254,48 @@ def foo
   response = client.get_ssh_public_key name: key_name
 
   # Do something with response...
+end
+```
+
+### Handling Errors
+
+The client reports standard
+[gRPC error codes](https://github.com/grpc/grpc/blob/master/doc/statuscodes.md)
+by raising exceptions. In older releases, these exceptions were located in the
+`Google::Gax` namespace and were subclasses of the `Google::Gax::GaxError` base
+exception class, defined in the `google-gax` gem. However, these classes were
+different from the standard exceptions (subclasses of `Google::Cloud::Error`)
+thrown by other client libraries such as `google-cloud-storage`.
+
+The 1.0 client library now uses the `Google::Cloud::Error` exception hierarchy,
+for consistency across all the Google Cloud client libraries. In general, these
+exceptions have the same name as their counterparts from older releases, but
+are located in the `Google::Cloud` namespace rather than the `Google::Gax`
+namespace.
+
+Old:
+```
+client = Google::Cloud::OsLogin.new
+
+key_name = "users/my-user/sshPublicKeys/12345"
+
+begin
+  response = client.get_ssh_public_key key_name
+rescue Google::Gax::Error => e
+  # Handle exceptions that subclass Google::Gax::Error
+end
+```
+
+New:
+```
+client = Google::Cloud::OsLogin.os_login_service
+
+key_name = "users/my-user/sshPublicKeys/12345"
+
+begin
+  response = client.get_ssh_public_key name: key_name
+rescue Google::Cloud::Error => e
+  # Handle exceptions that subclass Google::Cloud::Error
 end
 ```
 

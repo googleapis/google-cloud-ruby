@@ -28,10 +28,13 @@ library = gapic.ruby_library(
     extra_proto_files=["google/cloud/common_resources.proto"],
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-iot-v1",
-        "ruby-cloud-title": "Cloud IoT API V1",
+        "ruby-cloud-title": "Cloud IoT V1",
         "ruby-cloud-description": "Registers and manages IoT (Internet of Things) devices that connect to the Google Cloud Platform.",
         "ruby-cloud-env-prefix": "IOT",
         "ruby-cloud-grpc-service-config": "google/cloud/iot/v1/cloudiot_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/iot",
+        "ruby-cloud-api-id": "cloudiot.googleapis.com",
+        "ruby-cloud-api-shortname": "cloudiot",
     }
 )
 

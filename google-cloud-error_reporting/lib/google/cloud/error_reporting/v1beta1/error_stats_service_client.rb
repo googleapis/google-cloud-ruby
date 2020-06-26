@@ -200,6 +200,14 @@ module Google
               &Google::Devtools::Clouderrorreporting::V1beta1::ErrorStatsService::Stub.method(:new)
             )
 
+            @delete_events = Google::Gax.create_api_call(
+              @error_stats_service_stub.method(:delete_events),
+              defaults["delete_events"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project_name' => request.project_name}
+              end
+            )
             @list_group_stats = Google::Gax.create_api_call(
               @error_stats_service_stub.method(:list_group_stats),
               defaults["list_group_stats"],
@@ -216,17 +224,43 @@ module Google
                 {'project_name' => request.project_name}
               end
             )
-            @delete_events = Google::Gax.create_api_call(
-              @error_stats_service_stub.method(:delete_events),
-              defaults["delete_events"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'project_name' => request.project_name}
-              end
-            )
           end
 
           # Service calls
+
+          # Deletes all error events of a given project.
+          #
+          # @param project_name [String]
+          #   Required. The resource name of the Google Cloud Platform project. Written
+          #   as `projects/` plus the
+          #   [Google Cloud Platform project
+          #   ID](https://support.google.com/cloud/answer/6158840).
+          #   Example: `projects/my-project-123`.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/error_reporting"
+          #
+          #   error_stats_client = Google::Cloud::ErrorReporting::ErrorStats.new(version: :v1beta1)
+          #   formatted_project_name = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.project_path("[PROJECT]")
+          #   response = error_stats_client.delete_events(formatted_project_name)
+
+          def delete_events \
+              project_name,
+              options: nil,
+              &block
+            req = {
+              project_name: project_name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsRequest)
+            @delete_events.call(req, options, &block)
+          end
 
           # Lists the specified groups.
           #
@@ -415,40 +449,6 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Devtools::Clouderrorreporting::V1beta1::ListEventsRequest)
             @list_events.call(req, options, &block)
-          end
-
-          # Deletes all error events of a given project.
-          #
-          # @param project_name [String]
-          #   Required. The resource name of the Google Cloud Platform project. Written
-          #   as `projects/` plus the
-          #   [Google Cloud Platform project
-          #   ID](https://support.google.com/cloud/answer/6158840).
-          #   Example: `projects/my-project-123`.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsResponse]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsResponse]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/error_reporting"
-          #
-          #   error_stats_client = Google::Cloud::ErrorReporting::ErrorStats.new(version: :v1beta1)
-          #   formatted_project_name = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.project_path("[PROJECT]")
-          #   response = error_stats_client.delete_events(formatted_project_name)
-
-          def delete_events \
-              project_name,
-              options: nil,
-              &block
-            req = {
-              project_name: project_name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsRequest)
-            @delete_events.call(req, options, &block)
           end
         end
       end

@@ -19,6 +19,7 @@ require "google/cloud/pubsub/convert"
 require "google/cloud/pubsub/version"
 require "google/cloud/pubsub/v1"
 require "google/gax/errors"
+require "securerandom"
 
 module Google
   module Cloud
@@ -28,6 +29,12 @@ module Google
       # methods.
       class Service
         attr_accessor :project, :credentials, :host, :timeout, :client_config
+        ###
+        # The same client_id is used across all streaming pull connections that are created by this client. This is
+        # intentional, as it indicates to the server that any guarantees, such as message ordering, made for a stream
+        # that is disconnected will be made for the stream that is created to replace it. The attr_accessor allows the
+        # value to be replaced for unit testing.
+        attr_accessor :client_id
 
         ##
         # Creates a new Service instance.
@@ -38,6 +45,7 @@ module Google
           @host = host || V1::PublisherClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
+          @client_id = SecureRandom.uuid.freeze
         end
 
         def channel
@@ -233,21 +241,19 @@ module Google
                             push_endpoint: options[:endpoint],
                             attributes:    (options[:attributes] || {}).to_h
                         end
-          deadline = options[:deadline]
-          retain_acked = options[:retain_acked]
           mrd = Convert.number_to_duration options[:retention]
-          labels = options[:labels]
-          message_ordering = options[:message_ordering]
           execute do
             subscriber.create_subscription \
               name, topic,
               push_config:                push_config,
-              ack_deadline_seconds:       deadline,
-              retain_acked_messages:      retain_acked,
+              ack_deadline_seconds:       options[:deadline],
+              retain_acked_messages:      options[:retain_acked],
               message_retention_duration: mrd,
-              labels:                     labels,
-              enable_message_ordering:    message_ordering,
+              labels:                     options[:labels],
+              enable_message_ordering:    options[:message_ordering],
+              filter:                     options[:filter],
               dead_letter_policy:         dead_letter_policy(options),
+              retry_policy:               options[:retry_policy],
               options:                    default_options
           end
         end

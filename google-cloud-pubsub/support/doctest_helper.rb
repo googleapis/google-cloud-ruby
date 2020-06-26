@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "minitest/focus"
+
 require "google/cloud/pubsub"
 
 class File
@@ -280,6 +282,16 @@ YARD::Doctest.configure do |doctest|
   end
 
   ##
+  # RetryPolicy
+
+  doctest.before "Google::Cloud::PubSub::RetryPolicy" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :update_subscription, subscription_resp, [Google::Cloud::PubSub::V1::Subscription, Google::Protobuf::FieldMask, Hash]
+    end
+  end
+
+  ##
   # Snapshot
 
   doctest.before "Google::Cloud::PubSub::Snapshot" do
@@ -430,6 +442,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
   doctest.skip "Google::Cloud::PubSub::Subscription#refresh!"
+
+  doctest.before "Google::Cloud::PubSub::Subscription#retry_policy" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :update_subscription, subscription_resp, [Google::Cloud::PubSub::V1::Subscription, Google::Protobuf::FieldMask, Hash]
+    end
+  end
 
   doctest.before "Google::Cloud::PubSub::Subscription#push_config" do
     mock_pubsub do |mock_publisher, mock_subscriber|
@@ -741,7 +760,8 @@ def subscription_hash topic_name, sub_name,
     ack_deadline_seconds: deadline,
     retain_acked_messages: true,
     message_retention_duration: { seconds: 600, nanos: 900000000 }, # 600.9 seconds
-    labels: labels
+    labels: labels,
+    retry_policy: { minimum_backoff: 5, maximum_backoff: 300 }
   }
   hsh[:dead_letter_policy] = {
     dead_letter_topic: topic_path(dead_letter_topic),

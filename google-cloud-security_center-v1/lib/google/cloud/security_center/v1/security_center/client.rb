@@ -242,7 +242,8 @@ module Google
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
-              @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
+              @quota_project_id = @config.quota_project
+              @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
@@ -882,15 +883,15 @@ module Google
             #
             #       Usage: This should be milliseconds since epoch or an RFC3339 string.
             #       Examples:
-            #         "update_time = \"2019-06-10T16:07:18-07:00\""
-            #         "update_time = 1560208038000"
+            #         `update_time = "2019-06-10T16:07:18-07:00"`
+            #         `update_time = 1560208038000`
             #
             #     * create_time: `=`, `>`, `<`, `>=`, `<=`
             #
             #       Usage: This should be milliseconds since epoch or an RFC3339 string.
             #       Examples:
-            #         "create_time = \"2019-06-10T16:07:18-07:00\""
-            #         "create_time = 1560208038000"
+            #         `create_time = "2019-06-10T16:07:18-07:00"`
+            #         `create_time = 1560208038000`
             #
             #     * iam_policy.policy_blob: `=`, `:`
             #     * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
@@ -905,6 +906,12 @@ module Google
             #     * security_center_properties.resource_owners: `=`, `:`
             #
             #     For example, `resource_properties.size = 100` is a valid filter string.
+            #
+            #     Use a partial match on the empty string to filter based on a property
+            #     existing:`resource_properties.my_property : ""`
+            #
+            #     Use a negated partial match on the empty string to filter based on a
+            #     property not existing: `-resource_properties.my_property : ""`
             #   @param group_by [::String]
             #     Required. Expression that defines what assets fields to use for grouping.
             #     The string value should follow SQL syntax: comma separated list of fields.
@@ -1075,13 +1082,19 @@ module Google
             #
             #       Usage: This should be milliseconds since epoch or an RFC3339 string.
             #       Examples:
-            #         "event_time = \"2019-06-10T16:07:18-07:00\""
-            #         "event_time = 1560208038000"
+            #         `event_time = "2019-06-10T16:07:18-07:00"`
+            #         `event_time = 1560208038000`
             #
             #     * security_marks.marks: `=`, `:`
             #     * source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
             #
             #     For example, `source_properties.size = 100` is a valid filter string.
+            #
+            #     Use a partial match on the empty string to filter based on a property
+            #     existing: `source_properties.my_property : ""`
+            #
+            #     Use a negated partial match on the empty string to filter based on a
+            #     property not existing: `-source_properties.my_property : ""`
             #   @param group_by [::String]
             #     Required. Expression that defines what assets fields to use for grouping
             #     (including `state_change`). The string value should follow SQL syntax:
@@ -1244,15 +1257,15 @@ module Google
             #
             #       Usage: This should be milliseconds since epoch or an RFC3339 string.
             #       Examples:
-            #         "update_time = \"2019-06-10T16:07:18-07:00\""
-            #         "update_time = 1560208038000"
+            #         `update_time = "2019-06-10T16:07:18-07:00"`
+            #         `update_time = 1560208038000`
             #
             #     * create_time: `=`, `>`, `<`, `>=`, `<=`
             #
             #       Usage: This should be milliseconds since epoch or an RFC3339 string.
             #       Examples:
-            #         "create_time = \"2019-06-10T16:07:18-07:00\""
-            #         "create_time = 1560208038000"
+            #         `create_time = "2019-06-10T16:07:18-07:00"`
+            #         `create_time = 1560208038000`
             #
             #     * iam_policy.policy_blob: `=`, `:`
             #     * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
@@ -1267,6 +1280,12 @@ module Google
             #     * security_center_properties.resource_owners: `=`, `:`
             #
             #     For example, `resource_properties.size = 100` is a valid filter string.
+            #
+            #     Use a partial match on the empty string to filter based on a property
+            #     existing: `resource_properties.my_property : ""`
+            #
+            #     Use a negated partial match on the empty string to filter based on a
+            #     property not existing: `-resource_properties.my_property : ""`
             #   @param order_by [::String]
             #     Expression that defines what fields and order to use for sorting. The
             #     string value should follow SQL syntax: comma separated list of fields. For
@@ -1439,13 +1458,19 @@ module Google
             #
             #       Usage: This should be milliseconds since epoch or an RFC3339 string.
             #       Examples:
-            #         "event_time = \"2019-06-10T16:07:18-07:00\""
-            #         "event_time = 1560208038000"
+            #         `event_time = "2019-06-10T16:07:18-07:00"`
+            #         `event_time = 1560208038000`
             #
             #     security_marks.marks: `=`, `:`
             #     source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
             #
             #     For example, `source_properties.size = 100` is a valid filter string.
+            #
+            #     Use a partial match on the empty string to filter based on a property
+            #     existing: `source_properties.my_property : ""`
+            #
+            #     Use a negated partial match on the empty string to filter based on a
+            #     property not existing: `-source_properties.my_property : ""`
             #   @param order_by [::String]
             #     Expression that defines what fields and order to use for sorting. The
             #     string value should follow SQL syntax: comma separated list of fields. For
@@ -2079,7 +2104,8 @@ module Google
             end
 
             ##
-            # Updates a notification config.
+            # Updates a notification config. The following update
+            # fields are allowed: description, pubsub_topic, streaming_config.filter
             #
             # @overload update_notification_config(request, options = nil)
             #   Pass arguments to `update_notification_config` via a request object, either of type
@@ -2440,24 +2466,28 @@ module Google
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
+            # @!attribute [rw] quota_project
+            #   A separate project against which to charge quota.
+            #   @return [::String]
             #
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,     "securitycenter.googleapis.com", String
-              config_attr :credentials,  nil do |value|
+              config_attr :endpoint,      "securitycenter.googleapis.com", ::String
+              config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, ::String, ::Array, nil
-              config_attr :lib_name,     nil, ::String, nil
-              config_attr :lib_version,  nil, ::String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
-              config_attr :interceptors, nil, ::Array, nil
-              config_attr :timeout,      nil, ::Numeric, nil
-              config_attr :metadata,     nil, ::Hash, nil
-              config_attr :retry_policy, nil, ::Hash, Proc, nil
+              config_attr :scope,         nil, ::String, ::Array, nil
+              config_attr :lib_name,      nil, ::String, nil
+              config_attr :lib_version,   nil, ::String, nil
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors,  nil, ::Array, nil
+              config_attr :timeout,       nil, ::Numeric, nil
+              config_attr :metadata,      nil, ::Hash, nil
+              config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
+              config_attr :quota_project, nil, ::String, nil
 
               # @private
               def initialize parent_config = nil
@@ -2473,7 +2503,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if @parent_config&.respond_to? :rpcs
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end

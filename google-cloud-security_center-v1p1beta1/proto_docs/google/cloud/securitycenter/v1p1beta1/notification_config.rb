@@ -21,10 +21,11 @@ module Google
   module Cloud
     module SecurityCenter
       module V1p1beta1
-        # Cloud Security Command Center (Cloud SCC) notification configs.
+        # Security Command Center notification configs.
         #
-        # A notification config is a Cloud SCC resource that contains the configuration
-        # to send notifications for create/update events of findings, assets and etc.
+        # A notification config is a Security Command Center resource that contains the
+        # configuration to send notifications for create/update events of findings,
+        # assets and etc.
         # @!attribute [rw] name
         #   @return [::String]
         #     The relative resource name of this notification config. See:
@@ -39,12 +40,12 @@ module Google
         #     The type of events the config is for, e.g. FINDING.
         # @!attribute [rw] pubsub_topic
         #   @return [::String]
-        #     The PubSub topic to send notifications to. Its format is
+        #     The Pub/Sub topic to send notifications to. Its format is
         #     "projects/[project_id]/topics/[topic]".
         # @!attribute [r] service_account
         #   @return [::String]
         #     Output only. The service account that needs "pubsub.topics.publish"
-        #     permission to publish to the PubSub topic.
+        #     permission to publish to the Pub/Sub topic.
         # @!attribute [rw] streaming_config
         #   @return [::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig::StreamingConfig]
         #     The config for triggering streaming-based notifications.

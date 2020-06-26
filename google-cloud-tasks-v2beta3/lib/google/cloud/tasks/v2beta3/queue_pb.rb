@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/tasks/v2beta3/target_pb'
 require 'google/protobuf/duration_pb'
@@ -17,6 +18,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state, :enum, 6, "google.cloud.tasks.v2beta3.Queue.State"
       optional :purge_time, :message, 7, "google.protobuf.Timestamp"
       optional :stackdriver_logging_config, :message, 10, "google.cloud.tasks.v2beta3.StackdriverLoggingConfig"
+      optional :type, :enum, 11, "google.cloud.tasks.v2beta3.Queue.Type"
       oneof :queue_type do
         optional :app_engine_http_queue, :message, 3, "google.cloud.tasks.v2beta3.AppEngineHttpQueue"
       end
@@ -26,6 +28,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :RUNNING, 1
       value :PAUSED, 2
       value :DISABLED, 3
+    end
+    add_enum "google.cloud.tasks.v2beta3.Queue.Type" do
+      value :TYPE_UNSPECIFIED, 0
+      value :PULL, 1
+      value :PUSH, 2
     end
     add_message "google.cloud.tasks.v2beta3.RateLimits" do
       optional :max_dispatches_per_second, :double, 1
@@ -51,6 +58,7 @@ module Google
       module V2beta3
         Queue = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.Queue").msgclass
         Queue::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.Queue.State").enummodule
+        Queue::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.Queue.Type").enummodule
         RateLimits = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.RateLimits").msgclass
         RetryConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.RetryConfig").msgclass
         StackdriverLoggingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.StackdriverLoggingConfig").msgclass

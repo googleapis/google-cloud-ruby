@@ -172,3 +172,12 @@ s.replace(
     'https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger',
     'https://googleapis.dev/ruby/google-cloud-logging/latest'
 )
+
+# We recently added ruby_package proto options, but we want those to apply only
+# when we move to the microgenerator. Undo their effect while the monolith is
+# still in use.
+s.replace(
+    'lib/google/devtools/clouddebugger/v2/*_pb.rb',
+    '\nmodule Google::Cloud::Debugger::V2\n',
+    '\nmodule Google\n  module Devtools\n    module Clouddebugger\n    end\n  end\nend\nmodule Google::Devtools::Clouddebugger::V2\n',
+)

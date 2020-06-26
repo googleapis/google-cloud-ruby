@@ -37,7 +37,7 @@ module Google
         #     running the same query may get different results.
         # @!attribute [rw] asset_types
         #   @return [::Array<::String>]
-        #     A list of asset types of which to take a snapshot for. For example:
+        #     A list of asset types of which to take a snapshot for. Example:
         #     "compute.googleapis.com/Disk". If specified, only matching assets will be
         #     returned. See [Introduction to Cloud Asset
         #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
@@ -49,22 +49,23 @@ module Google
         # @!attribute [rw] output_config
         #   @return [::Google::Cloud::Asset::V1::OutputConfig]
         #     Required. Output configuration indicating where the results will be output
-        #     to. All results will be in newline delimited JSON format.
+        #     to.
         class ExportAssetsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The export asset response. This message is returned by the
-        # google.longrunning.Operations.GetOperation method in the returned
-        # {::Google::Longrunning::Operation#response google.longrunning.Operation.response} field.
+        # google.longrunning.Operations.GetOperation
+        # method in the returned
+        # {::Google::Longrunning::Operation#response google.longrunning.Operation.response}
+        # field.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Time the snapshot was taken.
         # @!attribute [rw] output_config
         #   @return [::Google::Cloud::Asset::V1::OutputConfig]
         #     Output configuration indicating where the results were output to.
-        #     All results are in JSON format.
         class ExportAssetsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -78,13 +79,11 @@ module Google
         #     "projects/my-project-id")", or a project number (such as "projects/12345").
         # @!attribute [rw] asset_names
         #   @return [::Array<::String>]
-        #     A list of the full names of the assets. For example:
+        #     A list of the full names of the assets.
+        #     See: https://cloud.google.com/asset-inventory/docs/resource-name-format
+        #     Example:
+        #
         #     `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
-        #     See [Resource
-        #     Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
-        #     and [Resource Name
-        #     Format](https://cloud.google.com/asset-inventory/docs/resource-name-format)
-        #     for more info.
         #
         #     The request becomes a no-op if the asset name list is empty, and the max
         #     size of the asset name list is 100 in one request.
@@ -127,9 +126,8 @@ module Google
         #     be unique under a specific parent project/folder/organization.
         # @!attribute [rw] feed
         #   @return [::Google::Cloud::Asset::V1::Feed]
-        #     Required. The feed details. The field `name` must be empty and it will be generated
-        #     in the format of:
-        #     projects/project_number/feeds/feed_id
+        #     Required. The feed details. The field `name` must be empty and it will be
+        #     generated in the format of: projects/project_number/feeds/feed_id
         #     folders/folder_number/feeds/feed_id
         #     organizations/organization_number/feeds/feed_id
         class CreateFeedRequest
@@ -171,8 +169,8 @@ module Google
         # Update asset feed request.
         # @!attribute [rw] feed
         #   @return [::Google::Cloud::Asset::V1::Feed]
-        #     Required. The new values of feed details. It must match an existing feed and the
-        #     field `name` must be in the format of:
+        #     Required. The new values of feed details. It must match an existing feed
+        #     and the field `name` must be in the format of:
         #     projects/project_number/feeds/feed_id or
         #     folders/folder_number/feeds/feed_id or
         #     organizations/organization_number/feeds/feed_id.
@@ -204,9 +202,7 @@ module Google
         # @!attribute [rw] bigquery_destination
         #   @return [::Google::Cloud::Asset::V1::BigQueryDestination]
         #     Destination on BigQuery. The output table stores the fields in asset
-        #     proto as columns in BigQuery. The resource/iam_policy field is converted
-        #     to a record with each field to a column, except metadata to a single JSON
-        #     string.
+        #     proto as columns in BigQuery.
         class OutputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -216,16 +212,16 @@ module Google
         # @!attribute [rw] uri
         #   @return [::String]
         #     The uri of the Cloud Storage object. It's the same uri that is used by
-        #     gsutil. For example: "gs://bucket_name/object_name". See [Viewing and
+        #     gsutil. Example: "gs://bucket_name/object_name". See [Viewing and
         #     Editing Object
         #     Metadata](https://cloud.google.com/storage/docs/viewing-editing-metadata)
         #     for more information.
         # @!attribute [rw] uri_prefix
         #   @return [::String]
-        #     The uri prefix of all generated Cloud Storage objects. For example:
+        #     The uri prefix of all generated Cloud Storage objects. Example:
         #     "gs://bucket_name/object_name_prefix". Each object uri is in format:
         #     "gs://bucket_name/object_name_prefix/<asset type>/<shard number> and only
-        #     contains assets for that type. <shard number> starts from 0. For example:
+        #     contains assets for that type. <shard number> starts from 0. Example:
         #     "gs://bucket_name/object_name_prefix/compute.googleapis.com/Disk/0" is
         #     the first shard of output objects containing all
         #     compute.googleapis.com/Disk assets. An INVALID_ARGUMENT error will be
@@ -236,7 +232,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A BigQuery destination.
+        # A BigQuery destination for exporting assets to.
         # @!attribute [rw] dataset
         #   @return [::String]
         #     Required. The BigQuery dataset in format
@@ -263,7 +259,7 @@ module Google
         # @!attribute [rw] topic
         #   @return [::String]
         #     The name of the Pub/Sub topic to publish to.
-        #     For example: `projects/PROJECT_ID/topics/TOPIC_ID`.
+        #     Example: `projects/PROJECT_ID/topics/TOPIC_ID`.
         class PubsubDestination
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -296,8 +292,8 @@ module Google
         #   @return [::Array<::String>]
         #     A list of the full names of the assets to receive updates. You must specify
         #     either or both of asset_names and asset_types. Only asset updates matching
-        #     specified asset_names and asset_types are exported to the feed. For
-        #     example:
+        #     specified asset_names or asset_types are exported to the feed.
+        #     Example:
         #     `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
         #     See [Resource
         #     Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
@@ -306,8 +302,8 @@ module Google
         #   @return [::Array<::String>]
         #     A list of types of the assets to receive updates. You must specify either
         #     or both of asset_names and asset_types. Only asset updates matching
-        #     specified asset_names and asset_types are exported to the feed.
-        #     For example: `"compute.googleapis.com/Disk"`
+        #     specified asset_names or asset_types are exported to the feed.
+        #     Example: `"compute.googleapis.com/Disk"`
         #
         #     See [this
         #     topic](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
@@ -320,7 +316,177 @@ module Google
         #   @return [::Google::Cloud::Asset::V1::FeedOutputConfig]
         #     Required. Feed output configuration defining where the asset updates are
         #     published to.
+        # @!attribute [rw] condition
+        #   @return [::Google::Type::Expr]
+        #     A condition which determines whether an asset update should be published.
+        #     If specified, an asset will be returned only when the expression evaluates
+        #     to true.
+        #     When set, `expression` field in the `Expr` must be a valid [CEL expression]
+        #     (https://github.com/google/cel-spec) on a TemporalAsset with name
+        #     `temporal_asset`. Example: a Feed with expression ("temporal_asset.deleted
+        #     == true") will only publish Asset deletions. Other fields in `Expr` are
+        #     optional.
         class Feed
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Search all resources request.
+        # @!attribute [rw] scope
+        #   @return [::String]
+        #     Required. A scope can be a project, a folder or an organization. The search
+        #     is limited to the resources within the `scope`.
+        #
+        #     The allowed values are:
+        #
+        #     * projects/\\{PROJECT_ID}
+        #     * projects/\\{PROJECT_NUMBER}
+        #     * folders/\\{FOLDER_NUMBER}
+        #     * organizations/\\{ORGANIZATION_NUMBER}
+        # @!attribute [rw] query
+        #   @return [::String]
+        #     Optional. The query statement. An empty query can be specified to search
+        #     all the resources of certain `asset_types` within the given `scope`.
+        #
+        #     Examples:
+        #
+        #     * `name : "Important"` to find Cloud resources whose name contains
+        #       "Important" as a word.
+        #     * `displayName : "Impor*"` to find Cloud resources whose display name
+        #       contains "Impor" as a word prefix.
+        #     * `description : "*por*"` to find Cloud resources whose description
+        #       contains "por" as a substring.
+        #     * `location : "us-west*"` to find Cloud resources whose location is
+        #       prefixed with "us-west".
+        #     * `labels : "prod"` to find Cloud resources whose labels contain "prod" as
+        #       a key or value.
+        #     * `labels.env : "prod"` to find Cloud resources which have a label "env"
+        #       and its value is "prod".
+        #     * `labels.env : *` to find Cloud resources which have a label "env".
+        #     * `"Important"` to find Cloud resources which contain "Important" as a word
+        #       in any of the searchable fields.
+        #     * `"Impor*"` to find Cloud resources which contain "Impor" as a word prefix
+        #       in any of the searchable fields.
+        #     * `"*por*"` to find Cloud resources which contain "por" as a substring in
+        #       any of the searchable fields.
+        #     * `("Important" AND location : ("us-west1" OR "global"))` to find Cloud
+        #       resources which contain "Important" as a word in any of the searchable
+        #       fields and are also located in the "us-west1" region or the "global"
+        #       location.
+        #
+        #     See [how to construct a
+        #     query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
+        #     for more details.
+        # @!attribute [rw] asset_types
+        #   @return [::Array<::String>]
+        #     Optional. A list of asset types that this request searches for. If empty,
+        #     it will search all the [searchable asset
+        #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The page size for search result pagination. Page size is capped
+        #     at 500 even if a larger value is given. If set to zero, server will pick an
+        #     appropriate default. Returned results may be fewer than requested. When
+        #     this happens, there could be more results as long as `next_page_token` is
+        #     returned.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. If present, then retrieve the next batch of results from the
+        #     preceding call to this method. `page_token` must be the value of
+        #     `next_page_token` from the previous response. The values of all other
+        #     method parameters, must be identical to those in the previous call.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. A comma separated list of fields specifying the sorting order of
+        #     the results. The default order is ascending. Add " DESC" after the field
+        #     name to indicate descending order. Redundant space characters are ignored.
+        #     Example: "location DESC, name". See [supported resource metadata
+        #     fields](https://cloud.google.com/asset-inventory/docs/searching-resources#query_on_resource_metadata_fields)
+        #     for more details.
+        class SearchAllResourcesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Search all resources response.
+        # @!attribute [rw] results
+        #   @return [::Array<::Google::Cloud::Asset::V1::ResourceSearchResult>]
+        #     A list of Resources that match the search query. It contains the resource
+        #     standard metadata information.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     If there are more results than those appearing in this response, then
+        #     `next_page_token` is included. To get the next set of results, call this
+        #     method again using the value of `next_page_token` as `page_token`.
+        class SearchAllResourcesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Search all IAM policies request.
+        # @!attribute [rw] scope
+        #   @return [::String]
+        #     Required. A scope can be a project, a folder or an organization. The search
+        #     is limited to the IAM policies within the `scope`.
+        #
+        #     The allowed values are:
+        #
+        #     * projects/\\{PROJECT_ID}
+        #     * projects/\\{PROJECT_NUMBER}
+        #     * folders/\\{FOLDER_NUMBER}
+        #     * organizations/\\{ORGANIZATION_NUMBER}
+        # @!attribute [rw] query
+        #   @return [::String]
+        #     Optional. The query statement. An empty query can be specified to search
+        #     all the IAM policies within the given `scope`.
+        #
+        #     Examples:
+        #
+        #     * `policy : "amy@gmail.com"` to find Cloud IAM policy bindings that
+        #       specify user "amy@gmail.com".
+        #     * `policy : "roles/compute.admin"` to find Cloud IAM policy bindings that
+        #       specify the Compute Admin role.
+        #     * `policy.role.permissions : "storage.buckets.update"` to find Cloud IAM
+        #       policy bindings that specify a role containing "storage.buckets.update"
+        #       permission.
+        #     * `resource : "organizations/123"` to find Cloud IAM policy bindings that
+        #       are set on "organizations/123".
+        #     * `(resource : ("organizations/123" OR "folders/1234") AND policy : "amy")`
+        #       to find Cloud IAM policy bindings that are set on "organizations/123" or
+        #       "folders/1234", and also specify user "amy".
+        #
+        #     See [how to construct a
+        #     query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
+        #     for more details.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The page size for search result pagination. Page size is capped
+        #     at 500 even if a larger value is given. If set to zero, server will pick an
+        #     appropriate default. Returned results may be fewer than requested. When
+        #     this happens, there could be more results as long as `next_page_token` is
+        #     returned.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. If present, retrieve the next batch of results from the preceding
+        #     call to this method. `page_token` must be the value of `next_page_token`
+        #     from the previous response. The values of all other method parameters must
+        #     be identical to those in the previous call.
+        class SearchAllIamPoliciesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Search all IAM policies response.
+        # @!attribute [rw] results
+        #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicySearchResult>]
+        #     A list of IamPolicy that match the search query. Related information such
+        #     as the associated resource is returned along with the policy.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Set if there are more results than those appearing in this response; to get
+        #     the next set of results, call this method again, using this value as the
+        #     `page_token`.
+        class SearchAllIamPoliciesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

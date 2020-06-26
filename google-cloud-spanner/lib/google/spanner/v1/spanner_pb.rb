@@ -149,31 +149,31 @@ end
 
 module Google
   module Spanner
-    module V1
-      CreateSessionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.CreateSessionRequest").msgclass
-      BatchCreateSessionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.BatchCreateSessionsRequest").msgclass
-      BatchCreateSessionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.BatchCreateSessionsResponse").msgclass
-      Session = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Session").msgclass
-      GetSessionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.GetSessionRequest").msgclass
-      ListSessionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ListSessionsRequest").msgclass
-      ListSessionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ListSessionsResponse").msgclass
-      DeleteSessionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.DeleteSessionRequest").msgclass
-      ExecuteSqlRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest").msgclass
-      ExecuteSqlRequest::QueryOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest.QueryOptions").msgclass
-      ExecuteSqlRequest::QueryMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest.QueryMode").enummodule
-      ExecuteBatchDmlRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteBatchDmlRequest").msgclass
-      ExecuteBatchDmlRequest::Statement = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteBatchDmlRequest.Statement").msgclass
-      ExecuteBatchDmlResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteBatchDmlResponse").msgclass
-      PartitionOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartitionOptions").msgclass
-      PartitionQueryRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartitionQueryRequest").msgclass
-      PartitionReadRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartitionReadRequest").msgclass
-      Partition = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Partition").msgclass
-      PartitionResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartitionResponse").msgclass
-      ReadRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ReadRequest").msgclass
-      BeginTransactionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.BeginTransactionRequest").msgclass
-      CommitRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.CommitRequest").msgclass
-      CommitResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.CommitResponse").msgclass
-      RollbackRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.RollbackRequest").msgclass
-    end
   end
+end
+module Google::Spanner::V1
+  CreateSessionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.CreateSessionRequest").msgclass
+  BatchCreateSessionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.BatchCreateSessionsRequest").msgclass
+  BatchCreateSessionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.BatchCreateSessionsResponse").msgclass
+  Session = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Session").msgclass
+  GetSessionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.GetSessionRequest").msgclass
+  ListSessionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ListSessionsRequest").msgclass
+  ListSessionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ListSessionsResponse").msgclass
+  DeleteSessionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.DeleteSessionRequest").msgclass
+  ExecuteSqlRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest").msgclass
+  ExecuteSqlRequest::QueryOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest.QueryOptions").msgclass
+  ExecuteSqlRequest::QueryMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest.QueryMode").enummodule
+  ExecuteBatchDmlRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteBatchDmlRequest").msgclass
+  ExecuteBatchDmlRequest::Statement = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteBatchDmlRequest.Statement").msgclass
+  ExecuteBatchDmlResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteBatchDmlResponse").msgclass
+  PartitionOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartitionOptions").msgclass
+  PartitionQueryRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartitionQueryRequest").msgclass
+  PartitionReadRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartitionReadRequest").msgclass
+  Partition = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Partition").msgclass
+  PartitionResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartitionResponse").msgclass
+  ReadRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ReadRequest").msgclass
+  BeginTransactionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.BeginTransactionRequest").msgclass
+  CommitRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.CommitRequest").msgclass
+  CommitResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.CommitResponse").msgclass
+  RollbackRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.RollbackRequest").msgclass
 end

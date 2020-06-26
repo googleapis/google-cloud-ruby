@@ -192,6 +192,14 @@ module Google
                 {'project_id' => request.project_id}
               end
             )
+            @reserve_ids = Google::Gax.create_api_call(
+              @datastore_stub.method(:reserve_ids),
+              defaults["reserve_ids"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'project_id' => request.project_id}
+              end
+            )
             @begin_transaction = Google::Gax.create_api_call(
               @datastore_stub.method(:begin_transaction),
               defaults["begin_transaction"],
@@ -219,14 +227,6 @@ module Google
             @allocate_ids = Google::Gax.create_api_call(
               @datastore_stub.method(:allocate_ids),
               defaults["allocate_ids"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'project_id' => request.project_id}
-              end
-            )
-            @reserve_ids = Google::Gax.create_api_call(
-              @datastore_stub.method(:reserve_ids),
-              defaults["reserve_ids"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'project_id' => request.project_id}
@@ -340,6 +340,53 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Datastore::V1::RunQueryRequest)
             @run_query.call(req, options, &block)
+          end
+
+          # Prevents the supplied keys' IDs from being auto-allocated by Cloud
+          # Datastore.
+          #
+          # @param project_id [String]
+          #   Required. The ID of the project against which to make the request.
+          # @param keys [Array<Google::Datastore::V1::Key | Hash>]
+          #   Required. A list of keys with complete key paths whose numeric IDs should not be
+          #   auto-allocated.
+          #   A hash of the same form as `Google::Datastore::V1::Key`
+          #   can also be provided.
+          # @param database_id [String]
+          #   If not empty, the ID of the database against which to make the request.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Datastore::V1::ReserveIdsResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Datastore::V1::ReserveIdsResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/datastore"
+          #
+          #   datastore_client = Google::Cloud::Datastore.new(version: :v1)
+          #
+          #   # TODO: Initialize `project_id`:
+          #   project_id = ''
+          #
+          #   # TODO: Initialize `keys`:
+          #   keys = []
+          #   response = datastore_client.reserve_ids(project_id, keys)
+
+          def reserve_ids \
+              project_id,
+              keys,
+              database_id: nil,
+              options: nil,
+              &block
+            req = {
+              project_id: project_id,
+              keys: keys,
+              database_id: database_id
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Datastore::V1::ReserveIdsRequest)
+            @reserve_ids.call(req, options, &block)
           end
 
           # Begins a new transaction.
@@ -522,53 +569,6 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Datastore::V1::AllocateIdsRequest)
             @allocate_ids.call(req, options, &block)
-          end
-
-          # Prevents the supplied keys' IDs from being auto-allocated by Cloud
-          # Datastore.
-          #
-          # @param project_id [String]
-          #   Required. The ID of the project against which to make the request.
-          # @param keys [Array<Google::Datastore::V1::Key | Hash>]
-          #   Required. A list of keys with complete key paths whose numeric IDs should not be
-          #   auto-allocated.
-          #   A hash of the same form as `Google::Datastore::V1::Key`
-          #   can also be provided.
-          # @param database_id [String]
-          #   If not empty, the ID of the database against which to make the request.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Datastore::V1::ReserveIdsResponse]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Datastore::V1::ReserveIdsResponse]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/datastore"
-          #
-          #   datastore_client = Google::Cloud::Datastore.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `keys`:
-          #   keys = []
-          #   response = datastore_client.reserve_ids(project_id, keys)
-
-          def reserve_ids \
-              project_id,
-              keys,
-              database_id: nil,
-              options: nil,
-              &block
-            req = {
-              project_id: project_id,
-              keys: keys,
-              database_id: database_id
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Datastore::V1::ReserveIdsRequest)
-            @reserve_ids.call(req, options, &block)
           end
         end
       end

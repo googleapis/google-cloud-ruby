@@ -45,6 +45,8 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
   end
 
   it "reads all by default" do
+    skip if emulator_enabled?
+
     _(batch_snapshot.timestamp).must_be_kind_of Time
     serialized_snapshot = batch_snapshot.dump
 
@@ -73,6 +75,8 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
   end
 
   it "queries all by default" do
+    skip if emulator_enabled?
+
     batch_snapshot = batch_client.batch_snapshot
     serialized_snapshot = batch_snapshot.dump
 
@@ -98,6 +102,8 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
   end
 
   it "queries all by default with query options" do
+    skip if emulator_enabled?
+
     batch_snapshot = batch_client.batch_snapshot
     serialized_snapshot = batch_snapshot.dump
 

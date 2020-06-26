@@ -3,24 +3,20 @@ inherit_gem:
 
 AllCops:
   Exclude:
+    - "google-cloud-translate.gemspec"
+    - "Rakefile"
     - "acceptance/**/*"
-    - "lib/google/cloud/translate/v3.rb"
-    - "lib/google/cloud/translate/v3/**/*"
-    - "support/**/*"
     - "test/**/*"
+
+Bundler/OrderedGems:
+  Enabled: false
 Documentation:
   Enabled: false
 
-Metrics/AbcSize:
-  Exclude:
-    - "lib/google/cloud/translate/v2.rb"
 Metrics/BlockLength:
   Exclude:
-    - "google-cloud-translate.gemspec"
-    - "Rakefile"
-Metrics/MethodLength:
-  Exclude:
-    - "lib/google/cloud/translate.rb"
+    - "samples/**/acceptance/*.rb"
+
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-translate.rb"

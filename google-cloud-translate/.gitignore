@@ -1,13 +1,22 @@
+# Ignore bundler lockfiles
 Gemfile.lock
-coverage/*
+gems.locked
+
+# Ignore documentation output
 doc/*
+.yardoc/*
+
+# Ignore test output
+coverage/*
+
+# Ignore build artifacts
 pkg/*
-html/*
-jsondoc/*
 
-# Ignore YARD stuffs
-.yardoc
-
-# IDE settings
+# Ignore files commonly present in certain dev environments
+.vagrant
+.DS_STORE
 .idea
 *.iml
+
+# Ignore synth output
+__pycache__

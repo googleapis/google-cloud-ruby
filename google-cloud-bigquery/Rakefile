@@ -106,7 +106,7 @@ namespace :acceptance do
     Google::Cloud.bigquery.datasets.all do |ds|
       begin
         ds.tables.all(&:delete)
-        ds.delete
+        ds.delete force: true
       rescue Google::Cloud::Error => e
         puts e.message
       end
@@ -187,6 +187,46 @@ namespace :ci do
   task :a do
     # This is a handy shortcut to save typing
     Rake::Task["ci:acceptance"].invoke
+  end
+end
+
+task :samples do
+  Rake::Task["samples:latest"].invoke
+end
+
+namespace :samples do
+  task :latest do
+    Dir.chdir "samples/simple_app" do
+      Bundler.with_clean_env do
+        ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
+        sh "bundle update"
+        sh "bundle exec rake test"
+      end
+    end
+    Dir.chdir "samples/snippets" do
+      Bundler.with_clean_env do
+        ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
+        sh "bundle update"
+        sh "bundle exec rake test"
+      end
+    end
+  end
+
+  task :master do
+    Dir.chdir "samples/simple_app" do
+      Bundler.with_clean_env do
+        ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
+        sh "bundle update"
+        sh "bundle exec rake test"
+      end
+    end
+    Dir.chdir "samples/snippets" do
+      Bundler.with_clean_env do
+        ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
+        sh "bundle update"
+        sh "bundle exec rake test"
+      end
+    end
   end
 end
 

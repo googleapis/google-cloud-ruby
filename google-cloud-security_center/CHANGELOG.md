@@ -1,5 +1,30 @@
 # Release History
 
+### 1.1.1 / 2020-05-26
+
+#### Documentation
+
+* Cover exception changes in the migration guide
+
+### 1.1.0 / 2020-05-20
+
+#### Features
+
+* The endpoint, scope, and quota_project can be set via configuration
+
+### 1.0.0 / 2020-05-06
+
+This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
+
+Among the highlights:
+
+* Separate client libraries are now provided for specific service versions.
+* A new configuration mechanism makes it easier to control parameters such as endpoint address, network timeouts, and retry.
+* A consistent method interface using keyword arguments for all fields, and supporting request proto objects.
+* Helper methods for generating resource paths are more accessible.
+
+See the MIGRATING file in the documentation for more detailed information, and instructions for migrating from earlier versions.
+
 ### 0.10.0 / 2020-04-01
 
 #### Features

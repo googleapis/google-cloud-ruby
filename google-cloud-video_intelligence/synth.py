@@ -31,7 +31,8 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "VIDEO_INTELLIGENCE",
         "ruby-cloud-wrapper-of": "v1:0.0;v1beta2:0.0;v1p1beta1:0.0;v1p2beta1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/video-intelligence",
-        "ruby-cloud-api-id": "videointelligence",
+        "ruby-cloud-api-id": "videointelligence.googleapis.com",
+        "ruby-cloud-api-shortname": "videointelligence",
         "ruby-cloud-migration-version": "3.0",
     }
 )

@@ -60,18 +60,18 @@ end
 module Google
   module Devtools
     module Clouddebugger
-      module V2
-        SetBreakpointRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.SetBreakpointRequest").msgclass
-        SetBreakpointResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.SetBreakpointResponse").msgclass
-        GetBreakpointRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.GetBreakpointRequest").msgclass
-        GetBreakpointResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.GetBreakpointResponse").msgclass
-        DeleteBreakpointRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.DeleteBreakpointRequest").msgclass
-        ListBreakpointsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.ListBreakpointsRequest").msgclass
-        ListBreakpointsRequest::BreakpointActionValue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.ListBreakpointsRequest.BreakpointActionValue").msgclass
-        ListBreakpointsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.ListBreakpointsResponse").msgclass
-        ListDebuggeesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.ListDebuggeesRequest").msgclass
-        ListDebuggeesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.ListDebuggeesResponse").msgclass
-      end
     end
   end
+end
+module Google::Devtools::Clouddebugger::V2
+  SetBreakpointRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.SetBreakpointRequest").msgclass
+  SetBreakpointResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.SetBreakpointResponse").msgclass
+  GetBreakpointRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.GetBreakpointRequest").msgclass
+  GetBreakpointResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.GetBreakpointResponse").msgclass
+  DeleteBreakpointRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.DeleteBreakpointRequest").msgclass
+  ListBreakpointsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.ListBreakpointsRequest").msgclass
+  ListBreakpointsRequest::BreakpointActionValue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.ListBreakpointsRequest.BreakpointActionValue").msgclass
+  ListBreakpointsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.ListBreakpointsResponse").msgclass
+  ListDebuggeesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.ListDebuggeesRequest").msgclass
+  ListDebuggeesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouddebugger.v2.ListDebuggeesResponse").msgclass
 end

@@ -35,21 +35,28 @@ desc "Run the spanner acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
   project ||= ENV["SPANNER_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
-  keyfile = args[:keyfile]
-  keyfile ||= ENV["SPANNER_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
-  if keyfile
-    keyfile = File.read keyfile
+  if ENV["SPANNER_EMULATOR_HOST"].nil?
+    keyfile = args[:keyfile]
+    keyfile ||= ENV["SPANNER_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+    if keyfile
+      keyfile = File.read keyfile
+    else
+      keyfile ||= ENV["SPANNER_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+    end
+    if project.nil? || keyfile.nil?
+      fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or SPANNER_TEST_PROJECT=test123 SPANNER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    end
+    # clear any env var already set
+    require "google/cloud/spanner/credentials"
+    (Google::Cloud::Spanner::Credentials::PATH_ENV_VARS +
+     Google::Cloud::Spanner::Credentials::JSON_ENV_VARS).each do |path|
+      ENV[path] = nil
+    end
   else
-    keyfile ||= ENV["SPANNER_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
-  end
-  if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or SPANNER_TEST_PROJECT=test123 SPANNER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
-  end
-  # clear any env var already set
-  require "google/cloud/spanner/credentials"
-  (Google::Cloud::Spanner::Credentials::PATH_ENV_VARS +
-   Google::Cloud::Spanner::Credentials::JSON_ENV_VARS).each do |path|
-    ENV[path] = nil
+    if project.nil?
+      fail "You must provide a project. e.g. rake acceptance[test123] or SPANNER_TEST_PROJECT=test123 rake acceptance"
+    end
+    keyfile = "{}"
   end
   # always overwrite when running tests
   ENV["SPANNER_PROJECT"] = project

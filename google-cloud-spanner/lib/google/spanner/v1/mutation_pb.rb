@@ -30,10 +30,10 @@ end
 
 module Google
   module Spanner
-    module V1
-      Mutation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Mutation").msgclass
-      Mutation::Write = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Mutation.Write").msgclass
-      Mutation::Delete = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Mutation.Delete").msgclass
-    end
   end
+end
+module Google::Spanner::V1
+  Mutation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Mutation").msgclass
+  Mutation::Write = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Mutation.Write").msgclass
+  Mutation::Delete = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Mutation.Delete").msgclass
 end

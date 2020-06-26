@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module SecurityCenter
-      VERSION = "0.10.0"
+      VERSION = "1.1.1"
     end
   end
 end

@@ -30,12 +30,15 @@ module Google
           # @!attribute [rw] time_series_filter_ratio
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::TimeSeriesFilterRatio]
           #     Parameters to fetch a ratio between two time series filters.
+          # @!attribute [rw] time_series_query_language
+          #   @return [::String]
+          #     A query used to fetch time series.
           # @!attribute [rw] unit_override
           #   @return [::String]
           #     The unit of data contained in fetched time series. If non-empty, this
           #     unit will override any unit that accompanies fetched data. The format is
           #     the same as the
-          #     [`unit`](/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors)
+          #     [`unit`](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors)
           #     field in `MetricDescriptor`.
           class TimeSeriesQuery
             include ::Google::Protobuf::MessageExts
@@ -44,23 +47,27 @@ module Google
 
           # A filter that defines a subset of time series data that is displayed in a
           # widget. Time series data is fetched using the
-          # [`ListTimeSeries`](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list)
+          # [`ListTimeSeries`](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list)
           # method.
           # @!attribute [rw] filter
           #   @return [::String]
-          #     Required. The [monitoring filter](/monitoring/api/v3/filters) that identifies the
-          #     metric types, resources, and projects to query.
+          #     Required. The [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
+          #     that identifies the metric types, resources, and projects to query.
           # @!attribute [rw] aggregation
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Aggregation]
           #     By default, the raw time series data is returned.
           #     Use this field to combine multiple time series for different views of the
           #     data.
+          # @!attribute [rw] secondary_aggregation
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Aggregation]
+          #     Apply a second aggregation after `aggregation` is applied.
           # @!attribute [rw] pick_time_series_filter
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::PickTimeSeriesFilter]
           #     Ranking based time series filter.
           # @!attribute [rw] statistical_time_series_filter
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::StatisticalTimeSeriesFilter]
           #     Statistics based time series filter.
+          #     Note: This field is deprecated and completely ignored by the API.
           class TimeSeriesFilter
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -84,6 +91,7 @@ module Google
           # @!attribute [rw] statistical_time_series_filter
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::StatisticalTimeSeriesFilter]
           #     Statistics based time series filter.
+          #     Note: This field is deprecated and completely ignored by the API.
           class TimeSeriesFilterRatio
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -92,8 +100,9 @@ module Google
             # TimeSeriesFilterRatio.
             # @!attribute [rw] filter
             #   @return [::String]
-            #     Required. The [monitoring filter](/monitoring/api/v3/filters) that identifies the
-            #     metric types, resources, and projects to query.
+            #     Required. The [monitoring
+            #     filter](https://cloud.google.com/monitoring/api/v3/filters) that
+            #     identifies the metric types, resources, and projects to query.
             # @!attribute [rw] aggregation
             #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Aggregation]
             #     By default, the raw time series data is returned.

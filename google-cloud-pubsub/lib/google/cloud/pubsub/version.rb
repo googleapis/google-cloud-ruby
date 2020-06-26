@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module PubSub
-      VERSION = "1.6.0".freeze
+      VERSION = "1.7.1".freeze
     end
 
     Pubsub = PubSub unless const_defined? :Pubsub

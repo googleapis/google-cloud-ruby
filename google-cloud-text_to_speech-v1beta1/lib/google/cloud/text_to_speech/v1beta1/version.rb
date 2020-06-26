@@ -21,7 +21,7 @@ module Google
   module Cloud
     module TextToSpeech
       module V1beta1
-        VERSION = "0.0.1"
+        VERSION = "0.2.3"
       end
     end
   end

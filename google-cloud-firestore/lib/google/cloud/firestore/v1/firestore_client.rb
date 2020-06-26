@@ -67,7 +67,11 @@ module Google
             "list_collection_ids" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
-              "collection_ids")
+              "collection_ids"),
+            "partition_query" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "partitions")
           }.freeze
 
           private_constant :PAGE_DESCRIPTORS
@@ -284,6 +288,22 @@ module Google
                 {'parent' => request.parent}
               end
             )
+            @partition_query = Google::Gax.create_api_call(
+              @firestore_stub.method(:partition_query),
+              defaults["partition_query"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @batch_write = Google::Gax.create_api_call(
+              @firestore_stub.method(:batch_write),
+              defaults["batch_write"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'database' => request.database}
+              end
+            )
           end
 
           # Service calls
@@ -304,7 +324,7 @@ module Google
           #   Reads the document in a transaction.
           # @param read_time [Google::Protobuf::Timestamp | Hash]
           #   Reads the version of the document at the given time.
-          #   This may not be older than 60 seconds.
+          #   This may not be older than 270 seconds.
           #   A hash of the same form as `Google::Protobuf::Timestamp`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -372,7 +392,7 @@ module Google
           #   Reads documents in a transaction.
           # @param read_time [Google::Protobuf::Timestamp | Hash]
           #   Reads documents as they were at the given time.
-          #   This may not be older than 60 seconds.
+          #   This may not be older than 270 seconds.
           #   A hash of the same form as `Google::Protobuf::Timestamp`
           #   can also be provided.
           # @param show_missing [true, false]
@@ -643,7 +663,7 @@ module Google
           #   can also be provided.
           # @param read_time [Google::Protobuf::Timestamp | Hash]
           #   Reads documents as they were at the given time.
-          #   This may not be older than 60 seconds.
+          #   This may not be older than 270 seconds.
           #   A hash of the same form as `Google::Protobuf::Timestamp`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -833,7 +853,7 @@ module Google
           #   can also be provided.
           # @param read_time [Google::Protobuf::Timestamp | Hash]
           #   Reads documents as they were at the given time.
-          #   This may not be older than 60 seconds.
+          #   This may not be older than 270 seconds.
           #   A hash of the same form as `Google::Protobuf::Timestamp`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -1003,6 +1023,141 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Firestore::V1::ListCollectionIdsRequest)
             @list_collection_ids.call(req, options, &block)
+          end
+
+          # Partitions a query by returning partition cursors that can be used to run
+          # the query in parallel. The returned partition cursors are split points that
+          # can be used by RunQuery as starting/end points for the query results.
+          #
+          # @param parent [String]
+          #   Required. The parent resource name. In the format:
+          #   `projects/{project_id}/databases/{database_id}/documents`.
+          #   Document resource names are not supported; only database resource names
+          #   can be specified.
+          # @param structured_query [Google::Firestore::V1::StructuredQuery | Hash]
+          #   A structured query.
+          #   Filters, order bys, limits, offsets, and start/end cursors are not
+          #   supported.
+          #   A hash of the same form as `Google::Firestore::V1::StructuredQuery`
+          #   can also be provided.
+          # @param partition_count [Integer]
+          #   The desired maximum number of partition points.
+          #   The partitions may be returned across multiple pages of results.
+          #   The number must be strictly positive. The actual number of partitions
+          #   returned may be fewer.
+          #
+          #   For example, this may be set to one fewer than the number of parallel
+          #   queries to be run, or in running a data pipeline job, one fewer than the
+          #   number of workers or compute instances available.
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Firestore::V1::Cursor>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Gax::PagedEnumerable<Google::Firestore::V1::Cursor>]
+          #   An enumerable of Google::Firestore::V1::Cursor instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/firestore/v1"
+          #
+          #   firestore_client = Google::Cloud::Firestore::V1.new
+          #
+          #   # TODO: Initialize `parent`:
+          #   parent = ''
+          #
+          #   # Iterate over all results.
+          #   firestore_client.partition_query(parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   firestore_client.partition_query(parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def partition_query \
+              parent,
+              structured_query: nil,
+              partition_count: nil,
+              page_size: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              structured_query: structured_query,
+              partition_count: partition_count,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Firestore::V1::PartitionQueryRequest)
+            @partition_query.call(req, options, &block)
+          end
+
+          # Applies a batch of write operations.
+          #
+          # The BatchWrite method does not apply the write operations atomically
+          # and can apply them out of order. Method does not allow more than one write
+          # per document. Each write succeeds or fails independently. See the
+          # {Google::Firestore::V1::BatchWriteResponse BatchWriteResponse} for the success status of each write.
+          #
+          # If you require an atomically applied set of writes, use
+          # {Google::Firestore::V1::Firestore::Commit Commit} instead.
+          #
+          # @param database [String]
+          #   Required. The database name. In the format:
+          #   `projects/{project_id}/databases/{database_id}`.
+          # @param writes [Array<Google::Firestore::V1::Write | Hash>]
+          #   The writes to apply.
+          #
+          #   Method does not apply writes atomically and does not guarantee ordering.
+          #   Each write succeeds or fails independently. You cannot write to the same
+          #   document more than once per request.
+          #   A hash of the same form as `Google::Firestore::V1::Write`
+          #   can also be provided.
+          # @param labels [Hash{String => String}]
+          #   Labels associated with this batch write.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Firestore::V1::BatchWriteResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Firestore::V1::BatchWriteResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/firestore/v1"
+          #
+          #   firestore_client = Google::Cloud::Firestore::V1.new
+          #
+          #   # TODO: Initialize `database`:
+          #   database = ''
+          #   response = firestore_client.batch_write(database)
+
+          def batch_write \
+              database,
+              writes: nil,
+              labels: nil,
+              options: nil,
+              &block
+            req = {
+              database: database,
+              writes: writes,
+              labels: labels
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Firestore::V1::BatchWriteRequest)
+            @batch_write.call(req, options, &block)
           end
         end
       end

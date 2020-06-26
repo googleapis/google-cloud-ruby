@@ -27,10 +27,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-tasks-v2beta2", "~> 0.0"
   gem.add_dependency "google-cloud-tasks-v2beta3", "~> 0.0"
 
-  gem.add_development_dependency "autotest-suffix", "~> 1.1"
   gem.add_development_dependency "google-style", "~> 1.24.0"
   gem.add_development_dependency "minitest", "~> 5.14"
-  gem.add_development_dependency "minitest-autotest", "~> 1.0"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"
   gem.add_development_dependency "rake", ">= 12.0"

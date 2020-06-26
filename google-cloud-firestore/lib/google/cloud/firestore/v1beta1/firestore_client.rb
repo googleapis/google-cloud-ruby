@@ -33,6 +33,8 @@ module Google
   module Cloud
     module Firestore
       module V1beta1
+        # @deprecated Use Google::Cloud::Firestore::V1::FirestoreClient instead.
+        #
         # The Cloud Firestore service.
         #
         # This service exposes several types of comparable timestamps:

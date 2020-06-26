@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "videointelligence.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-video_intelligence-v1beta2/latest",
     "distribution_name": "google-cloud-video_intelligence-v1beta2",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-video_intelligence-v1beta2/latest"
+    "language": "ruby",
+    "name": "videointelligence",
+    "name_pretty": "Cloud Video Intelligence V1beta2 API",
+    "product_documentation": "https://cloud.google.com/video-intelligence",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }

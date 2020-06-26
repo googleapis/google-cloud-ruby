@@ -31,6 +31,10 @@ def SecureRandom.int64
   random_bytes(8).unpack("q")[0]
 end
 
+def emulator_enabled?
+  ENV["SPANNER_EMULATOR_HOST"]
+end
+
 # Create shared spanner object so we don't create new for each test
 $spanner = Google::Cloud::Spanner.new
 
@@ -280,8 +284,10 @@ def clean_up_spanner_objects
   instance = $spanner.instance($spanner_instance_id)
 
   # Delete test database backups.
-  instance.backups(filter: "name:#{$spanner_database_id}").all.each do |backup|
-    backup.delete
+  unless emulator_enabled?
+    instance.backups(filter: "name:#{$spanner_database_id}").all.each do |backup|
+      backup.delete
+    end
   end
 
   # Delete test restored database.

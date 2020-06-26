@@ -1,6 +1,19 @@
 # Format: //devtools/kokoro/config/proto/build.proto
 
-env_vars: {
-    key: "PACKAGE"
-    value: "<%= gem %>"
-}
+<%=
+    lines = []
+    if gem
+        lines << "env_vars: {"
+        lines << "    key: \"PACKAGE\""
+        lines << "    value: \"#{gem}\""
+        lines << "}\n"
+    end
+
+    if ruby_version
+        lines << "env_vars: {"
+        lines << "    key: \"KOKORO_RUBY_VERSION\""
+        lines << "    value: \"#{ruby_version}\""
+        lines << "}\n"
+    end
+    lines.join "\n"
+%>

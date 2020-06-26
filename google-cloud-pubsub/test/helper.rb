@@ -173,8 +173,11 @@ class MockPubsub < Minitest::Spec
                         deadline = 60,
                         endpoint = "http://example.com/callback",
                         labels: nil,
+                        filter: nil,
                         dead_letter_topic: nil,
-                        max_delivery_attempts: nil
+                        max_delivery_attempts: nil,
+                        retry_minimum_backoff: nil,
+                        retry_maximum_backoff: nil
     raise "dead_letter_topic is required" if max_delivery_attempts && !dead_letter_topic
     hsh = { name: subscription_path(sub_name),
       topic: topic_path(topic_name),
@@ -188,6 +191,7 @@ class MockPubsub < Minitest::Spec
       ack_deadline_seconds: deadline,
       retain_acked_messages: true,
       message_retention_duration: { seconds: 600, nanos: 900000000 }, # 600.9 seconds
+      filter: filter,
       labels: labels,
       expiration_policy: { ttl: { seconds: 172800, nanos: 0 } }, # 2 days
     }
@@ -195,7 +199,38 @@ class MockPubsub < Minitest::Spec
       dead_letter_topic: dead_letter_topic,
       max_delivery_attempts: max_delivery_attempts
     } if dead_letter_topic
+    hsh[:retry_policy] = {
+      minimum_backoff: retry_minimum_backoff,
+      maximum_backoff: retry_maximum_backoff
+    } if retry_minimum_backoff || retry_maximum_backoff
     hsh
+  end
+
+  def create_subscription_args sub_name,
+                               topic_name,
+                               push_config: nil,
+                               ack_deadline_seconds: nil,
+                               retain_acked_messages: false,
+                               message_retention_duration: nil,
+                               labels: nil,
+                               enable_message_ordering: nil,
+                               filter: nil,
+                               dead_letter_policy: nil,
+                               retry_policy: nil
+    [
+      subscription_path(sub_name),
+      topic_path(topic_name),
+      push_config: push_config,
+      ack_deadline_seconds: ack_deadline_seconds,
+      retain_acked_messages: retain_acked_messages,
+      message_retention_duration: message_retention_duration,
+      labels: labels,
+      enable_message_ordering: enable_message_ordering,
+      filter: filter,
+      dead_letter_policy: dead_letter_policy,
+      retry_policy: retry_policy,
+      options: default_options
+    ]
   end
 
   def snapshots_hash topic_name, num_snapshots, token = nil

@@ -22,6 +22,8 @@ describe "Spanner Database Backup Operations", :spanner do
   let(:expire_time) { Time.now + 36000 }
 
   it "list backup operations" do
+    skip if emulator_enabled?
+
     instance = spanner.instance instance_id
     _(instance).wont_be :nil?
 

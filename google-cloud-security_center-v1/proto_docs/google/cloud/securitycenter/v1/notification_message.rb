@@ -29,6 +29,9 @@ module Google
         #   @return [::Google::Cloud::SecurityCenter::V1::Finding]
         #     If it's a Finding based notification config, this field will be
         #     populated.
+        # @!attribute [rw] resource
+        #   @return [::Google::Cloud::SecurityCenter::V1::Resource]
+        #     The Cloud resource tied to this notification's Finding.
         class NotificationMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

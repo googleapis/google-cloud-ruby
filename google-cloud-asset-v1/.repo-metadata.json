@@ -1,5 +1,11 @@
 {
-    "language": "ruby",
+    "api_id": "cloudasset.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-asset-v1/latest",
     "distribution_name": "google-cloud-asset-v1",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-asset-v1/latest"
+    "language": "ruby",
+    "name": "cloudasset",
+    "name_pretty": "Cloud Asset V1 API",
+    "product_documentation": "https://cloud.google.com/asset-inventory/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
 }

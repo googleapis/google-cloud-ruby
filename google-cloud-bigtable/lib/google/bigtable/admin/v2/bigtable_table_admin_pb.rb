@@ -170,39 +170,39 @@ end
 module Google
   module Bigtable
     module Admin
-      module V2
-        CreateTableRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateTableRequest").msgclass
-        CreateTableRequest::Split = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateTableRequest.Split").msgclass
-        CreateTableFromSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateTableFromSnapshotRequest").msgclass
-        DropRowRangeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DropRowRangeRequest").msgclass
-        ListTablesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListTablesRequest").msgclass
-        ListTablesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListTablesResponse").msgclass
-        GetTableRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetTableRequest").msgclass
-        DeleteTableRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteTableRequest").msgclass
-        ModifyColumnFamiliesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ModifyColumnFamiliesRequest").msgclass
-        ModifyColumnFamiliesRequest::Modification = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ModifyColumnFamiliesRequest.Modification").msgclass
-        GenerateConsistencyTokenRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GenerateConsistencyTokenRequest").msgclass
-        GenerateConsistencyTokenResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GenerateConsistencyTokenResponse").msgclass
-        CheckConsistencyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CheckConsistencyRequest").msgclass
-        CheckConsistencyResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CheckConsistencyResponse").msgclass
-        SnapshotTableRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.SnapshotTableRequest").msgclass
-        GetSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetSnapshotRequest").msgclass
-        ListSnapshotsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListSnapshotsRequest").msgclass
-        ListSnapshotsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListSnapshotsResponse").msgclass
-        DeleteSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteSnapshotRequest").msgclass
-        SnapshotTableMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.SnapshotTableMetadata").msgclass
-        CreateTableFromSnapshotMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateTableFromSnapshotMetadata").msgclass
-        CreateBackupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateBackupRequest").msgclass
-        CreateBackupMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateBackupMetadata").msgclass
-        GetBackupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetBackupRequest").msgclass
-        UpdateBackupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateBackupRequest").msgclass
-        DeleteBackupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteBackupRequest").msgclass
-        ListBackupsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListBackupsRequest").msgclass
-        ListBackupsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListBackupsResponse").msgclass
-        RestoreTableRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.RestoreTableRequest").msgclass
-        RestoreTableMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.RestoreTableMetadata").msgclass
-        OptimizeRestoredTableMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.OptimizeRestoredTableMetadata").msgclass
-      end
     end
   end
+end
+module Google::Bigtable::Admin::V2
+  CreateTableRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateTableRequest").msgclass
+  CreateTableRequest::Split = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateTableRequest.Split").msgclass
+  CreateTableFromSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateTableFromSnapshotRequest").msgclass
+  DropRowRangeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DropRowRangeRequest").msgclass
+  ListTablesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListTablesRequest").msgclass
+  ListTablesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListTablesResponse").msgclass
+  GetTableRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetTableRequest").msgclass
+  DeleteTableRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteTableRequest").msgclass
+  ModifyColumnFamiliesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ModifyColumnFamiliesRequest").msgclass
+  ModifyColumnFamiliesRequest::Modification = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ModifyColumnFamiliesRequest.Modification").msgclass
+  GenerateConsistencyTokenRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GenerateConsistencyTokenRequest").msgclass
+  GenerateConsistencyTokenResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GenerateConsistencyTokenResponse").msgclass
+  CheckConsistencyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CheckConsistencyRequest").msgclass
+  CheckConsistencyResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CheckConsistencyResponse").msgclass
+  SnapshotTableRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.SnapshotTableRequest").msgclass
+  GetSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetSnapshotRequest").msgclass
+  ListSnapshotsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListSnapshotsRequest").msgclass
+  ListSnapshotsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListSnapshotsResponse").msgclass
+  DeleteSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteSnapshotRequest").msgclass
+  SnapshotTableMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.SnapshotTableMetadata").msgclass
+  CreateTableFromSnapshotMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateTableFromSnapshotMetadata").msgclass
+  CreateBackupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateBackupRequest").msgclass
+  CreateBackupMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateBackupMetadata").msgclass
+  GetBackupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetBackupRequest").msgclass
+  UpdateBackupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateBackupRequest").msgclass
+  DeleteBackupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteBackupRequest").msgclass
+  ListBackupsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListBackupsRequest").msgclass
+  ListBackupsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListBackupsResponse").msgclass
+  RestoreTableRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.RestoreTableRequest").msgclass
+  RestoreTableMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.RestoreTableMetadata").msgclass
+  OptimizeRestoredTableMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.OptimizeRestoredTableMetadata").msgclass
 end

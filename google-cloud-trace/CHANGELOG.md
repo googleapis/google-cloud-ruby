@@ -1,5 +1,23 @@
 # Release History
 
+### 0.38.3 / 2020-05-28
+
+#### Documentation
+
+* Fix a few broken links
+
+### 0.38.2 / 2020-05-19
+
+#### Bug Fixes
+
+* Adjusted some default timeout and retry settings
+
+### 0.38.1 / 2020-05-08
+
+#### Bug Fixes
+
+* Add service_address and service_port to v2 factory method
+
 ### 0.38.0 / 2020-03-11
 
 #### Features

@@ -74,17 +74,17 @@ end
 module Google
   module Firestore
     module Admin
-      module V1
-        IndexOperationMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.IndexOperationMetadata").msgclass
-        FieldOperationMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.FieldOperationMetadata").msgclass
-        FieldOperationMetadata::IndexConfigDelta = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.FieldOperationMetadata.IndexConfigDelta").msgclass
-        FieldOperationMetadata::IndexConfigDelta::ChangeType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.FieldOperationMetadata.IndexConfigDelta.ChangeType").enummodule
-        ExportDocumentsMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ExportDocumentsMetadata").msgclass
-        ImportDocumentsMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ImportDocumentsMetadata").msgclass
-        ExportDocumentsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ExportDocumentsResponse").msgclass
-        Progress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Progress").msgclass
-        OperationState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.OperationState").enummodule
-      end
     end
   end
+end
+module Google::Firestore::Admin::V1
+  IndexOperationMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.IndexOperationMetadata").msgclass
+  FieldOperationMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.FieldOperationMetadata").msgclass
+  FieldOperationMetadata::IndexConfigDelta = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.FieldOperationMetadata.IndexConfigDelta").msgclass
+  FieldOperationMetadata::IndexConfigDelta::ChangeType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.FieldOperationMetadata.IndexConfigDelta.ChangeType").enummodule
+  ExportDocumentsMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ExportDocumentsMetadata").msgclass
+  ImportDocumentsMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ImportDocumentsMetadata").msgclass
+  ExportDocumentsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ExportDocumentsResponse").msgclass
+  Progress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Progress").msgclass
+  OperationState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.OperationState").enummodule
 end

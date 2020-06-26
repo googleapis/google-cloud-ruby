@@ -29,13 +29,16 @@ require "google/cloud/config"
 
 # Set the default configuration
 ::Google::Cloud.configure.add_config! :recaptcha_enterprise do |config|
-  config.add_field! :credentials,  nil, match: [::String, ::Hash, ::Google::Auth::Credentials]
-  config.add_field! :lib_name,     nil, match: ::String
-  config.add_field! :lib_version,  nil, match: ::String
-  config.add_field! :interceptors, nil, match: ::Array
-  config.add_field! :timeout,      nil, match: ::Numeric
-  config.add_field! :metadata,     nil, match: ::Hash
-  config.add_field! :retry_policy, nil, match: [::Hash, ::Proc]
+  config.add_field! :endpoint,      "recaptchaenterprise.googleapis.com", match: ::String
+  config.add_field! :credentials,   nil, match: [::String, ::Hash, ::Google::Auth::Credentials]
+  config.add_field! :scope,         nil, match: [::Array, ::String]
+  config.add_field! :lib_name,      nil, match: ::String
+  config.add_field! :lib_version,   nil, match: ::String
+  config.add_field! :interceptors,  nil, match: ::Array
+  config.add_field! :timeout,       nil, match: ::Numeric
+  config.add_field! :metadata,      nil, match: ::Hash
+  config.add_field! :retry_policy,  nil, match: [::Hash, ::Proc]
+  config.add_field! :quota_project, nil, match: ::String
 end
 
 module Google
@@ -107,3 +110,6 @@ module Google
     end
   end
 end
+
+helper_path = ::File.join __dir__, "recaptcha_enterprise", "helpers.rb"
+require "google/cloud/recaptcha_enterprise/helpers" if ::File.file? helper_path

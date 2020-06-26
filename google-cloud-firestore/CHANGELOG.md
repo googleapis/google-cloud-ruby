@@ -1,5 +1,23 @@
 # Release History
 
+### 1.4.4 / 2020-05-28
+
+#### Documentation
+
+* Fix a few broken links
+
+### 1.4.3 / 2020-05-21
+
+#### Bug Fixes
+
+* Adjusted some default timeout and retry settings
+
+### 1.4.2 / 2020-05-14
+
+#### Bug Fixes
+
+* Fix Ruby 2.7 keyword argument warning
+
 ### 1.4.1 / 2020-04-14
 
 #### Bug Fixes

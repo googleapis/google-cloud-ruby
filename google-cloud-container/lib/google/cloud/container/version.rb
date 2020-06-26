@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Container
-      VERSION = "0.11.0"
+      VERSION = "1.1.1"
     end
   end
 end

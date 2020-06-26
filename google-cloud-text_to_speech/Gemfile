@@ -2,8 +2,5 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "google-cloud-core", path: "../google-cloud-core"
-gem "google-cloud-env", path: "../google-cloud-env"
-gem "google-cloud-errors", path: "../google-cloud-errors"
 gem "google-cloud-text_to_speech-v1", path: "../google-cloud-text_to_speech-v1"
 gem "google-cloud-text_to_speech-v1beta1", path: "../google-cloud-text_to_speech-v1beta1"

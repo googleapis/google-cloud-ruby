@@ -1,4 +1,4 @@
-# Copyright 2020 Google, LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@ require "google/cloud/errors"
 require "google/cloud/kms"
 require "google/cloud/storage"
 require "minitest/autorun"
+require "minitest/focus"
+require "minitest/hooks/default"
 require "net/http"
 require "securerandom"
 require "uri"
@@ -47,33 +49,36 @@ def retry_resource_exhaustion
       return
     rescue Google::Cloud::ResourceExhaustedError => e
       puts "\n#{e} Gonna try again"
-      sleep rand(3..5)
+      sleep rand(10..16)
     end
   end
   raise Google::Cloud::ResourceExhaustedError, "Maybe take a break from creating and deleting buckets for a bit"
 end
 
 def get_kms_key project_id
-  kms_client = Google::Cloud::Kms.new
+  kms_client = Google::Cloud::Kms.key_management_service
 
   key_ring_id = "ruby_docs_test_ring_id"
-  location_path = kms_client.location_path project_id, "us"
-  key_ring_path = kms_client.key_ring_path project_id, "us", key_ring_id
+  location_path = kms_client.location_path project: project_id, location: "us"
+  key_ring_path = kms_client.key_ring_path project: project_id, location: "us", key_ring: key_ring_id
   begin
-    kms_client.get_key_ring key_ring_path
-  rescue Google::Gax::RetryError
-    kms_client.create_key_ring location_path, key_ring_id, {}
+    kms_client.get_key_ring name: key_ring_path
+  rescue Google::Cloud::NotFoundError
+    kms_client.create_key_ring parent: location_path, key_ring_id: key_ring_id, key_ring: {}
   end
 
   crypto_key_id = "ruby_docs_test_key"
   crypto_key = {
     purpose: :ENCRYPT_DECRYPT
   }
-  crypto_key_path = kms_client.crypto_key_path project_id, "us", key_ring_id, crypto_key_id
+  crypto_key_path = kms_client.crypto_key_path project:    project_id,
+                                               location:   "us",
+                                               key_ring:   key_ring_id,
+                                               crypto_key: crypto_key_id
   begin
-    kms_client.get_crypto_key(crypto_key_path).name
-  rescue Google::Gax::GaxError
-    kms_client.create_crypto_key(key_ring_path, crypto_key_id, crypto_key).name
+    kms_client.get_crypto_key(name: crypto_key_path).name
+  rescue Google::Cloud::NotFoundError
+    kms_client.create_crypto_key(parent: key_ring_path, crypto_key_id: crypto_key_id, crypto_key: crypto_key).name
   end
 end
 

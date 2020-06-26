@@ -24,34 +24,7 @@ module Google
     module Dialogflow
       module V2
         module Agents
-          # Agents are best described as Natural Language Understanding (NLU) modules
-          # that transform user requests into actionable data. You can include agents
-          # in your app, product, or service to determine user intent and respond to the
-          # user in a natural way.
-          #
-          # After you create an agent, you can add [Intents][google.cloud.dialogflow.v2.Intents], [Contexts][google.cloud.dialogflow.v2.Contexts],
-          # [Entity Types][google.cloud.dialogflow.v2.EntityTypes], [Webhooks][google.cloud.dialogflow.v2.WebhookRequest], and so on to
-          # manage the flow of a conversation and match user input to predefined intents
-          # and actions.
-          #
-          # You can create an agent using both Dialogflow Standard Edition and
-          # Dialogflow Enterprise Edition. For details, see
-          # [Dialogflow
-          # Editions](https://cloud.google.com/dialogflow/docs/editions).
-          #
-          # You can save your agent for backup or versioning by exporting the agent by
-          # using the [ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent] method. You can import a saved
-          # agent by using the [ImportAgent][google.cloud.dialogflow.v2.Agents.ImportAgent] method.
-          #
-          # Dialogflow provides several
-          # [prebuilt
-          # agents](https://cloud.google.com/dialogflow/docs/agents-prebuilt)
-          # for common conversation scenarios such as determining a date and time,
-          # converting currency, and so on.
-          #
-          # For more information about agents, see the
-          # [Dialogflow
-          # documentation](https://cloud.google.com/dialogflow/docs/agents-overview).
+          # Service for managing [Agents][google.cloud.dialogflow.v2.Agent].
           class Service
 
             include GRPC::GenericService
@@ -86,16 +59,28 @@ module Google
             #
             # Uploads new intents and entity types without deleting the existing ones.
             # Intents and entity types with the same name are replaced with the new
-            # versions from ImportAgentRequest.
+            # versions from [ImportAgentRequest][google.cloud.dialogflow.v2.ImportAgentRequest]. After the import, the imported draft
+            # agent will be trained automatically (unless disabled in agent settings).
+            # However, once the import is done, training may not be completed yet. Please
+            # call [TrainAgent][google.cloud.dialogflow.v2.Agents.TrainAgent] and wait for the operation it returns in order to train
+            # explicitly.
             #
             # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            # An operation which tracks when importing is complete. It only tracks
+            # when the draft agent is updated not when it is done training.
             rpc :ImportAgent, ImportAgentRequest, Google::Longrunning::Operation
             # Restores the specified agent from a ZIP file.
             #
             # Replaces the current agent version with a new one. All the intents and
-            # entity types in the older version are deleted.
+            # entity types in the older version are deleted. After the restore, the
+            # restored draft agent will be trained automatically (unless disabled in
+            # agent settings). However, once the restore is done, training may not be
+            # completed yet. Please call [TrainAgent][google.cloud.dialogflow.v2.Agents.TrainAgent] and wait for the operation it
+            # returns in order to train explicitly.
             #
             # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            # An operation which tracks when restoring is complete. It only tracks
+            # when the draft agent is updated not when it is done training.
             rpc :RestoreAgent, RestoreAgentRequest, Google::Longrunning::Operation
             # Gets agent validation result. Agent validation is performed during
             # training time and is updated automatically when training is completed.

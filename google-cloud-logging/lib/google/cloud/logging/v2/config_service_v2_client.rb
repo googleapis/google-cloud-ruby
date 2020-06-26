@@ -388,6 +388,30 @@ module Google
               &Google::Logging::V2::ConfigServiceV2::Stub.method(:new)
             )
 
+            @delete_sink = Google::Gax.create_api_call(
+              @config_service_v2_stub.method(:delete_sink),
+              defaults["delete_sink"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'sink_name' => request.sink_name}
+              end
+            )
+            @update_sink = Google::Gax.create_api_call(
+              @config_service_v2_stub.method(:update_sink),
+              defaults["update_sink"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'sink_name' => request.sink_name}
+              end
+            )
+            @delete_exclusion = Google::Gax.create_api_call(
+              @config_service_v2_stub.method(:delete_exclusion),
+              defaults["delete_exclusion"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
             @list_buckets = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:list_buckets),
               defaults["list_buckets"],
@@ -436,22 +460,6 @@ module Google
                 {'parent' => request.parent}
               end
             )
-            @update_sink = Google::Gax.create_api_call(
-              @config_service_v2_stub.method(:update_sink),
-              defaults["update_sink"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'sink_name' => request.sink_name}
-              end
-            )
-            @delete_sink = Google::Gax.create_api_call(
-              @config_service_v2_stub.method(:delete_sink),
-              defaults["delete_sink"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'sink_name' => request.sink_name}
-              end
-            )
             @list_exclusions = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:list_exclusions),
               defaults["list_exclusions"],
@@ -484,14 +492,6 @@ module Google
                 {'name' => request.name}
               end
             )
-            @delete_exclusion = Google::Gax.create_api_call(
-              @config_service_v2_stub.method(:delete_exclusion),
-              defaults["delete_exclusion"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
             @get_cmek_settings = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:get_cmek_settings),
               defaults["get_cmek_settings"],
@@ -511,6 +511,173 @@ module Google
           end
 
           # Service calls
+
+          # Deletes a sink. If the sink has a unique `writer_identity`, then that
+          # service account is also deleted.
+          #
+          # @param sink_name [String]
+          #   Required. The full resource name of the sink to delete, including the parent
+          #   resource and the sink identifier:
+          #
+          #       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
+          #       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+          #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+          #
+          #   Example: `"projects/my-project-id/sinks/my-sink-id"`.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2"
+          #
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #
+          #   # TODO: Initialize `sink_name`:
+          #   sink_name = ''
+          #   config_client.delete_sink(sink_name)
+
+          def delete_sink \
+              sink_name,
+              options: nil,
+              &block
+            req = {
+              sink_name: sink_name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::DeleteSinkRequest)
+            @delete_sink.call(req, options, &block)
+            nil
+          end
+
+          # Updates a sink. This method replaces the following fields in the existing
+          # sink with values from the new sink: `destination`, and `filter`.
+          #
+          # The updated sink might also have a new `writer_identity`; see the
+          # `unique_writer_identity` field.
+          #
+          # @param sink_name [String]
+          #   Required. The full resource name of the sink to update, including the parent
+          #   resource and the sink identifier:
+          #
+          #       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
+          #       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+          #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+          #
+          #   Example: `"projects/my-project-id/sinks/my-sink-id"`.
+          # @param sink [Google::Logging::V2::LogSink | Hash]
+          #   Required. The updated sink, whose name is the same identifier that appears as part
+          #   of `sink_name`.
+          #   A hash of the same form as `Google::Logging::V2::LogSink`
+          #   can also be provided.
+          # @param unique_writer_identity [true, false]
+          #   Optional. See {Google::Logging::V2::ConfigServiceV2#create_sink}
+          #   for a description of this field. When updating a sink, the effect of this
+          #   field on the value of `writer_identity` in the updated sink depends on both
+          #   the old and new values of this field:
+          #
+          #   * If the old and new values of this field are both false or both true,
+          #     then there is no change to the sink's `writer_identity`.
+          #   * If the old value is false and the new value is true, then
+          #     `writer_identity` is changed to a unique service account.
+          #   * It is an error if the old value is true and the new value is
+          #     set to false or defaulted to false.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   Optional. Field mask that specifies the fields in `sink` that need
+          #   an update. A sink field will be overwritten if, and only if, it is
+          #   in the update mask. `name` and output only fields cannot be updated.
+          #
+          #   An empty updateMask is temporarily treated as using the following mask
+          #   for backwards compatibility purposes:
+          #     destination,filter,includeChildren
+          #   At some point in the future, behavior will be removed and specifying an
+          #   empty updateMask will be an error.
+          #
+          #   For a detailed `FieldMask` definition, see
+          #   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+          #
+          #   Example: `updateMask=filter`.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Logging::V2::LogSink]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Logging::V2::LogSink]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2"
+          #
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #
+          #   # TODO: Initialize `sink_name`:
+          #   sink_name = ''
+          #
+          #   # TODO: Initialize `sink`:
+          #   sink = {}
+          #   response = config_client.update_sink(sink_name, sink)
+
+          def update_sink \
+              sink_name,
+              sink,
+              unique_writer_identity: nil,
+              update_mask: nil,
+              options: nil,
+              &block
+            req = {
+              sink_name: sink_name,
+              sink: sink,
+              unique_writer_identity: unique_writer_identity,
+              update_mask: update_mask
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::UpdateSinkRequest)
+            @update_sink.call(req, options, &block)
+          end
+
+          # Deletes an exclusion.
+          #
+          # @param name [String]
+          #   Required. The resource name of an existing exclusion to delete:
+          #
+          #       "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+          #       "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+          #       "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+          #
+          #   Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2"
+          #
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   config_client.delete_exclusion(name)
+
+          def delete_exclusion \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::DeleteExclusionRequest)
+            @delete_exclusion.call(req, options, &block)
+            nil
+          end
 
           # Lists buckets (Beta).
           #
@@ -854,134 +1021,6 @@ module Google
             @create_sink.call(req, options, &block)
           end
 
-          # Updates a sink. This method replaces the following fields in the existing
-          # sink with values from the new sink: `destination`, and `filter`.
-          #
-          # The updated sink might also have a new `writer_identity`; see the
-          # `unique_writer_identity` field.
-          #
-          # @param sink_name [String]
-          #   Required. The full resource name of the sink to update, including the parent
-          #   resource and the sink identifier:
-          #
-          #       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
-          #       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
-          #       "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
-          #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
-          #
-          #   Example: `"projects/my-project-id/sinks/my-sink-id"`.
-          # @param sink [Google::Logging::V2::LogSink | Hash]
-          #   Required. The updated sink, whose name is the same identifier that appears as part
-          #   of `sink_name`.
-          #   A hash of the same form as `Google::Logging::V2::LogSink`
-          #   can also be provided.
-          # @param unique_writer_identity [true, false]
-          #   Optional. See {Google::Logging::V2::ConfigServiceV2#create_sink}
-          #   for a description of this field. When updating a sink, the effect of this
-          #   field on the value of `writer_identity` in the updated sink depends on both
-          #   the old and new values of this field:
-          #
-          #   * If the old and new values of this field are both false or both true,
-          #     then there is no change to the sink's `writer_identity`.
-          #   * If the old value is false and the new value is true, then
-          #     `writer_identity` is changed to a unique service account.
-          #   * It is an error if the old value is true and the new value is
-          #     set to false or defaulted to false.
-          # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   Optional. Field mask that specifies the fields in `sink` that need
-          #   an update. A sink field will be overwritten if, and only if, it is
-          #   in the update mask. `name` and output only fields cannot be updated.
-          #
-          #   An empty updateMask is temporarily treated as using the following mask
-          #   for backwards compatibility purposes:
-          #     destination,filter,includeChildren
-          #   At some point in the future, behavior will be removed and specifying an
-          #   empty updateMask will be an error.
-          #
-          #   For a detailed `FieldMask` definition, see
-          #   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
-          #
-          #   Example: `updateMask=filter`.
-          #   A hash of the same form as `Google::Protobuf::FieldMask`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Logging::V2::LogSink]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Logging::V2::LogSink]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/logging/v2"
-          #
-          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-          #
-          #   # TODO: Initialize `sink_name`:
-          #   sink_name = ''
-          #
-          #   # TODO: Initialize `sink`:
-          #   sink = {}
-          #   response = config_client.update_sink(sink_name, sink)
-
-          def update_sink \
-              sink_name,
-              sink,
-              unique_writer_identity: nil,
-              update_mask: nil,
-              options: nil,
-              &block
-            req = {
-              sink_name: sink_name,
-              sink: sink,
-              unique_writer_identity: unique_writer_identity,
-              update_mask: update_mask
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Logging::V2::UpdateSinkRequest)
-            @update_sink.call(req, options, &block)
-          end
-
-          # Deletes a sink. If the sink has a unique `writer_identity`, then that
-          # service account is also deleted.
-          #
-          # @param sink_name [String]
-          #   Required. The full resource name of the sink to delete, including the parent
-          #   resource and the sink identifier:
-          #
-          #       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
-          #       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
-          #       "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
-          #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
-          #
-          #   Example: `"projects/my-project-id/sinks/my-sink-id"`.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result []
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/logging/v2"
-          #
-          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-          #
-          #   # TODO: Initialize `sink_name`:
-          #   sink_name = ''
-          #   config_client.delete_sink(sink_name)
-
-          def delete_sink \
-              sink_name,
-              options: nil,
-              &block
-            req = {
-              sink_name: sink_name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Logging::V2::DeleteSinkRequest)
-            @delete_sink.call(req, options, &block)
-            nil
-          end
-
           # Lists all the exclusions in a parent resource.
           #
           # @param parent [String]
@@ -1191,45 +1230,6 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::UpdateExclusionRequest)
             @update_exclusion.call(req, options, &block)
-          end
-
-          # Deletes an exclusion.
-          #
-          # @param name [String]
-          #   Required. The resource name of an existing exclusion to delete:
-          #
-          #       "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
-          #       "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
-          #       "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
-          #       "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
-          #
-          #   Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result []
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/logging/v2"
-          #
-          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-          #
-          #   # TODO: Initialize `name`:
-          #   name = ''
-          #   config_client.delete_exclusion(name)
-
-          def delete_exclusion \
-              name,
-              options: nil,
-              &block
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Logging::V2::DeleteExclusionRequest)
-            @delete_exclusion.call(req, options, &block)
-            nil
           end
 
           # Gets the Logs Router CMEK settings for the given resource.

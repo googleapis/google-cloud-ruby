@@ -32,6 +32,9 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Cloud Translation can dynamically translate text between thousands of language pairs. Translation lets websites and programs programmatically integrate with the translation service.",
         "ruby-cloud-env-prefix": "TRANSLATE",
         "ruby-cloud-grpc-service-config": "google/cloud/translate/v3/translate_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/translate",
+        "ruby-cloud-api-id": "translate.googleapis.com",
+        "ruby-cloud-api-shortname": "translate",
     }
 )
 
