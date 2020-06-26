@@ -327,6 +327,9 @@ in the order in which they were published. Ordering does not require sacrificing
 high throughput or scalability, as the service automatically distributes
 messages for different ordering keys across subscribers.
 
+Note: At the time of this release, ordering keys are not yet publicly enabled
+and requires special project enablements.
+
 ### Publishing Ordered Messages
 
 To use ordering keys when publishing messages, a call to
