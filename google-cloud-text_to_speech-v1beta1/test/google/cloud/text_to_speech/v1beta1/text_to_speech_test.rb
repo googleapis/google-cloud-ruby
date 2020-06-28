@@ -36,10 +36,10 @@ class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::ClientTest < Minites
       @requests = []
     end
 
-    def call_rpc *args
+    def call_rpc *args, **kwargs
       @call_rpc_count += 1
 
-      @requests << @block&.call(*args)
+      @requests << @block&.call(*args, **kwargs)
 
       yield @response, @operation if block_given?
 
