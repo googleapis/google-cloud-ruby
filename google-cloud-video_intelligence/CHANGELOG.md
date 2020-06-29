@@ -2,23 +2,15 @@
 
 ### 3.0.0 / 2020-06-29
 
-#### ⚠ BREAKING CHANGES
+This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
 
-* **video_intelligence:** Convert google-cloud-video_intelligence to a wrapper
+Among the highlights:
 
-#### Features
+* Separate client libraries are now provided for specific service versions.
+* A new configuration mechanism makes it easier to control parameters such as endpoint address, network timeouts, and retry.
+* A consistent method interface using keyword arguments for all fields, and supporting request proto objects.
 
-* Convert google-cloud-video_intelligence to a wrapper
-* The endpoint, scope, and quota_project can be set via configuration
-
-#### Bug Fixes
-
-* Eliminated a circular require warning.
-
-#### Documentation
-
-* Cover exception changes in the migration guide
-* Updated the sample timeouts in the migration guide to reflect seconds
+See the MIGRATING file in the documentation for more detailed information, and instructions for migrating from earlier versions.
 
 ### 2.1.1 / 2020-04-01
 
