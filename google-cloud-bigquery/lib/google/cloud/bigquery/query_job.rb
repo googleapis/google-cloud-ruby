@@ -675,9 +675,12 @@ module Google
         #
         #   job.wait_until_done!
         #   data = job.data
+        #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:word]
         #   end
+        #   # Retrieve the next page of results
         #   data = data.next if data.next?
         #
         def data token: nil, max: nil, start: nil
