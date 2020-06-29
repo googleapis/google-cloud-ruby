@@ -232,6 +232,8 @@ google-cloud-billing-v1:
 - v0.3.1
 - v0.1.1
 - v0.1.0
+google-cloud-build-v1:
+- v0.1.0
 google-cloud-container:
 - v1.1.0
 - v1.0.0
