@@ -4,7 +4,6 @@
 
 #### Features
 
-* Add detached to Subscription
 * Add Subscription#filter
 
 ### 1.7.1 / 2020-05-28
