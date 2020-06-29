@@ -1,5 +1,11 @@
 # Release History
 
+### 1.8.0 / 2020-06-29
+
+#### Features
+
+* Add Subscription#filter
+
 ### 1.7.1 / 2020-05-28
 
 #### Documentation
