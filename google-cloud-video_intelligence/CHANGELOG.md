@@ -1,5 +1,25 @@
 # Release History
 
+### 3.0.0 / 2020-06-29
+
+#### ⚠ BREAKING CHANGES
+
+* **video_intelligence:** Convert google-cloud-video_intelligence to a wrapper
+
+#### Features
+
+* Convert google-cloud-video_intelligence to a wrapper
+* The endpoint, scope, and quota_project can be set via configuration
+
+#### Bug Fixes
+
+* Eliminated a circular require warning.
+
+#### Documentation
+
+* Cover exception changes in the migration guide
+* Updated the sample timeouts in the migration guide to reflect seconds
+
 ### 2.1.1 / 2020-04-01
 
 #### Documentation
