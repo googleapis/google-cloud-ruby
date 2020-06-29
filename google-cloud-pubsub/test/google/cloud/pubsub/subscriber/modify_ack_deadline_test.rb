@@ -68,7 +68,9 @@ describe Google::Cloud::PubSub::Subscriber, :modify_ack_deadline, :mock_pubsub d
       [Google::Cloud::PubSub::V1::StreamingPullRequest.new(
         client_id: client_id,
         subscription: sub_path,
-        stream_ack_deadline_seconds: 60
+        stream_ack_deadline_seconds: 60,
+        max_outstanding_messages: 1000,
+        max_outstanding_bytes: 100 * 1000 * 1000
       )]
     ]
 
@@ -122,7 +124,9 @@ describe Google::Cloud::PubSub::Subscriber, :modify_ack_deadline, :mock_pubsub d
       [Google::Cloud::PubSub::V1::StreamingPullRequest.new(
         client_id: client_id,
         subscription: sub_path,
-        stream_ack_deadline_seconds: 60
+        stream_ack_deadline_seconds: 60,
+        max_outstanding_messages: 1000,
+        max_outstanding_bytes: 100 * 1000 * 1000
       )]
     ]
 
