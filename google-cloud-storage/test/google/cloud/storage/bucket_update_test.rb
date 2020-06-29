@@ -32,12 +32,15 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
     response_header: ["X-My-Custom-Header"]) }
   let(:bucket_cors_hash) { JSON.parse bucket_cors_gapi.to_json }
   let(:bucket_lifecycle_created_before) { Date.parse("2013-01-15") }
+  let(:bucket_lifecycle_custom_time_before) { DateTime.parse("2019-01-15T11:22:33") }
   let(:bucket_lifecycle_noncurrent_time_before) { DateTime.parse("2020-01-15T11:22:33") }
   let(:bucket_lifecycle_gapi) do
     lifecycle_gapi lifecycle_rule_gapi("SetStorageClass",
                                        storage_class: "NEARLINE",
                                        age: 32,
                                        created_before: bucket_lifecycle_created_before,
+                                       custom_time_before: bucket_lifecycle_custom_time_before,
+                                       days_since_custom_time: 4,
                                        days_since_noncurrent_time: 14,
                                        is_live: true,
                                        matches_storage_class: ["STANDARD"],
@@ -499,6 +502,8 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
         l.add_set_storage_class_rule "NEARLINE",
                                      age: 32,
                                      created_before: bucket_lifecycle_created_before,
+                                     custom_time_before: bucket_lifecycle_custom_time_before,
+                                     days_since_custom_time: 4,
                                      days_since_noncurrent_time: 14,
                                      is_live: true,
                                      matches_storage_class: ["STANDARD"],
@@ -514,6 +519,8 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
       _(rule.storage_class).must_equal "NEARLINE"
       _(rule.age).must_equal 32
       _(rule.created_before).must_equal bucket_lifecycle_created_before
+      _(rule.custom_time_before).must_equal bucket_lifecycle_custom_time_before
+      _(rule.days_since_custom_time).must_equal 4
       _(rule.days_since_noncurrent_time).must_equal 14
       _(rule.is_live).must_equal true
       _(rule.matches_storage_class).must_equal ["STANDARD"]
@@ -536,6 +543,8 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
                               storage_class: "COLDLINE",
                               age: 32,
                               created_before: bucket_lifecycle_created_before,
+                              custom_time_before: bucket_lifecycle_custom_time_before,
+                              days_since_custom_time: 4,
                               days_since_noncurrent_time: 14,
                               is_live: true,
                               matches_storage_class: ["STANDARD"],
@@ -596,6 +605,8 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
                                 storage_class: "NEARLINE",
                                 age: 32,
                                 created_before: bucket_lifecycle_created_before,
+                                custom_time_before: bucket_lifecycle_custom_time_before,
+                                days_since_custom_time: 4,
                                 days_since_noncurrent_time: 14,
                                 is_live: true,
                                 matches_storage_class: ["STANDARD"],
@@ -631,6 +642,8 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
                                 storage_class: "NEARLINE",
                                 age: 32,
                                 created_before: bucket_lifecycle_created_before,
+                                custom_time_before: bucket_lifecycle_custom_time_before,
+                                days_since_custom_time: 4,
                                 days_since_noncurrent_time: 14,
                                 is_live: true,
                                 matches_storage_class: ["STANDARD"],

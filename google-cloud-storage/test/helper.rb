@@ -168,6 +168,8 @@ class MockStorage < Minitest::Spec
                           storage_class: nil,
                           age: nil,
                           created_before: nil,
+                          custom_time_before: nil,
+                          days_since_custom_time: nil,
                           days_since_noncurrent_time: nil,
                           is_live: nil,
                           matches_storage_class: nil,
@@ -181,6 +183,8 @@ class MockStorage < Minitest::Spec
       condition: Google::Apis::StorageV1::Bucket::Lifecycle::Rule::Condition.new(
         age: age,
         created_before: created_before,
+        custom_time_before: custom_time_before,
+        days_since_custom_time: days_since_custom_time,
         days_since_noncurrent_time: days_since_noncurrent_time,
         is_live: is_live,
         matches_storage_class: Array(matches_storage_class),

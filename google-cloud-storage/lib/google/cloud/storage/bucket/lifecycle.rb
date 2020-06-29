@@ -105,6 +105,15 @@ module Google
           #   only the date part (for instance, "2013-01-15"). This condition is
           #   satisfied when a file is created before midnight of the specified
           #   date in UTC.
+          # @param [String,DateTime] custom_time_before A timestamp string in
+          #   RFC3339 format (for example: `1980-01-31T21:47:33+06:00`) or
+          #   equivalent `DateTime` object. The condition is satisfied when the
+          #   custom time on an object is before this timestamp.
+          # @param [Integer] days_since_custom_time Represents the number of
+          #   days elapsed since the user-specified timestamp set on an object.
+          #   The condition is satisfied if the days elapsed is at least this
+          #   number. If no custom timestamp is specified on an object, the
+          #   condition does not apply.
           # @param [Integer] days_since_noncurrent_time Represents the number of
           #   days elapsed since the noncurrent timestamp of an object. The
           #   condition is satisfied if the days elapsed is at least this number.
@@ -123,7 +132,7 @@ module Google
           #   to upper-case strings.
           # @param [String,DateTime] noncurrent_time_before A timestamp string in
           #   RFC3339 format (for example: `1980-01-31T21:47:33+06:00`) or
-          #   equivalent DateTime object. The condition is satisfied when the
+          #   equivalent `DateTime` object. The condition is satisfied when the
           #   noncurrent time on an object is before this timestamp.
           # @param [Integer] num_newer_versions Relevant only for versioned
           #   files. If the value is N, this condition is satisfied when there
@@ -142,6 +151,8 @@ module Google
           def add_set_storage_class_rule storage_class,
                                          age: nil,
                                          created_before: nil,
+                                         custom_time_before: nil,
+                                         days_since_custom_time: nil,
                                          days_since_noncurrent_time: nil,
                                          is_live: nil,
                                          matches_storage_class: nil,
@@ -152,6 +163,8 @@ module Google
               storage_class: storage_class_for(storage_class),
               age: age,
               created_before: created_before,
+              custom_time_before: custom_time_before,
+              days_since_custom_time: days_since_custom_time,
               days_since_noncurrent_time: days_since_noncurrent_time,
               is_live: is_live,
               matches_storage_class: storage_class_for(matches_storage_class),
@@ -175,6 +188,15 @@ module Google
           #   only the date part (for instance, "2013-01-15"). This condition is
           #   satisfied when a file is created before midnight of the specified
           #   date in UTC.
+          # @param [String,DateTime] custom_time_before A timestamp string in
+          #   RFC3339 format (for example: `1980-01-31T21:47:33+06:00`) or
+          #   equivalent `DateTime` object. The condition is satisfied when the
+          #   custom time on an object is before this timestamp.
+          # @param [Integer] days_since_custom_time Represents the number of
+          #   days elapsed since the user-specified timestamp set on an object.
+          #   The condition is satisfied if the days elapsed is at least this
+          #   number. If no custom timestamp is specified on an object, the
+          #   condition does not apply.
           # @param [Integer] days_since_noncurrent_time Represents the number of
           #   days elapsed since the noncurrent timestamp of an object. The
           #   condition is satisfied if the days elapsed is at least this number.
@@ -211,6 +233,8 @@ module Google
           #
           def add_delete_rule age: nil,
                               created_before: nil,
+                              custom_time_before: nil,
+                              days_since_custom_time: nil,
                               days_since_noncurrent_time: nil,
                               is_live: nil,
                               matches_storage_class: nil,
@@ -220,6 +244,8 @@ module Google
               "Delete",
               age: age,
               created_before: created_before,
+              custom_time_before: custom_time_before,
+              days_since_custom_time: days_since_custom_time,
               days_since_noncurrent_time: days_since_noncurrent_time,
               is_live: is_live,
               matches_storage_class: storage_class_for(matches_storage_class),
@@ -274,6 +300,15 @@ module Google
           #   satisfied when a file is created before midnight of the specified
           #   date in UTC. When returned by the service, a non-empty value will
           #   always be a Date object.
+          # @attr [String,DateTime,nil] custom_time_before A timestamp string in
+          #   RFC3339 format (for example: `1980-01-31T21:47:33+06:00`) or
+          #   equivalent `DateTime` object. The condition is satisfied when the
+          #   custom time on an object is before this timestamp.
+          # @attr [Integer,nil] days_since_custom_time Represents the number of
+          #   days elapsed since the user-specified timestamp set on an object.
+          #   The condition is satisfied if the days elapsed is at least this
+          #   number. If no custom timestamp is specified on an object, the
+          #   condition does not apply.
           # @attr [Integer] days_since_noncurrent_time Represents the number of
           #   days elapsed since the noncurrent timestamp of an object. The
           #   condition is satisfied if the days elapsed is at least this number.
@@ -340,6 +375,8 @@ module Google
                           :storage_class,
                           :age,
                           :created_before,
+                          :custom_time_before,
+                          :days_since_custom_time,
                           :days_since_noncurrent_time,
                           :is_live,
                           :matches_storage_class,
@@ -351,6 +388,8 @@ module Google
                            storage_class: nil,
                            age: nil,
                            created_before: nil,
+                           custom_time_before: nil,
+                           days_since_custom_time: nil,
                            days_since_noncurrent_time: nil,
                            is_live: nil,
                            matches_storage_class: nil,
@@ -360,6 +399,8 @@ module Google
               @storage_class = storage_class
               @age = age
               @created_before = created_before
+              @custom_time_before = custom_time_before
+              @days_since_custom_time = days_since_custom_time
               @days_since_noncurrent_time = days_since_noncurrent_time
               @is_live = is_live
               @matches_storage_class = Array(matches_storage_class)
@@ -373,6 +414,8 @@ module Google
               condition = condition_gapi(
                 age,
                 created_before,
+                custom_time_before,
+                days_since_custom_time,
                 days_since_noncurrent_time,
                 is_live,
                 matches_storage_class,
@@ -396,6 +439,8 @@ module Google
             # @private
             def condition_gapi age,
                                created_before,
+                               custom_time_before,
+                               days_since_custom_time,
                                days_since_noncurrent_time,
                                is_live,
                                matches_storage_class,
@@ -404,6 +449,8 @@ module Google
               Google::Apis::StorageV1::Bucket::Lifecycle::Rule::Condition.new(
                 age: age,
                 created_before: created_before,
+                custom_time_before: custom_time_before,
+                days_since_custom_time: days_since_custom_time,
                 days_since_noncurrent_time: days_since_noncurrent_time,
                 is_live: is_live,
                 matches_storage_class: Array(matches_storage_class),
@@ -422,6 +469,8 @@ module Google
                 storage_class: action.storage_class,
                 age: c.age,
                 created_before: c.created_before,
+                custom_time_before: c.custom_time_before,
+                days_since_custom_time: c.days_since_custom_time,
                 days_since_noncurrent_time: c.days_since_noncurrent_time,
                 is_live: c.is_live,
                 matches_storage_class: c.matches_storage_class,
