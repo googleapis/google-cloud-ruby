@@ -53,9 +53,15 @@ module Google
     #   bigquery = gcloud.bigquery
     #   dataset = bigquery.dataset "my_dataset"
     #   table = dataset.table "my_table"
-    #   table.data.each do |row|
-    #     puts row
+    #
+    #   data = table.data
+    #
+    #   # Iterate over the first page of results
+    #   data.each do |row|
+    #     puts row[:name]
     #   end
+    #   # Retrieve the next page of results
+    #   data = data.next if data.next?
     #
     # @example The default scope can be overridden with the `scope` option:
     #   require "google/cloud"

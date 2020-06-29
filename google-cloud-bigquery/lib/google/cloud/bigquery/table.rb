@@ -1286,12 +1286,13 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   data = table.data
+        #
+        #   # Iterate over the first page of results
         #   data.each do |row|
-        #     puts row[:first_name]
+        #     puts row[:name]
         #   end
-        #   if data.next?
-        #     more_data = data.next if data.next?
-        #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         # @example Retrieve all rows of data: (See {Data#all})
         #   require "google/cloud/bigquery"
@@ -1301,8 +1302,9 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   data = table.data
+        #
         #   data.all do |row|
-        #     puts row[:first_name]
+        #     puts row[:name]
         #   end
         #
         # @!group Data

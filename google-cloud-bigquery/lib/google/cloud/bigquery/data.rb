@@ -41,9 +41,12 @@ module Google
       #
       #   data.count # 100000
       #   data.total # 164656
+      #
+      #   # Iterate over the first page of results
       #   data.each do |row|
       #     puts row[:word]
       #   end
+      #   # Retrieve the next page of results
       #   data = data.next if data.next?
       #
       class Data < DelegateClass(::Array)
@@ -117,9 +120,12 @@ module Google
         #
         #   data.count # 100000
         #   data.total # 164656
+        #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:word]
         #   end
+        #   # Retrieve the next page of results
         #   data = data.next if data.next?
         #
         def total
@@ -375,9 +381,12 @@ module Google
         #
         #   data.count # 100000
         #   data.total # 164656
+        #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:word]
         #   end
+        #   # Retrieve the next page of results
         #   data = data.next if data.next?
         #
         def next?
@@ -402,9 +411,12 @@ module Google
         #
         #   data.count # 100000
         #   data.total # 164656
+        #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:word]
         #   end
+        #   # Retrieve the next page of results
         #   data = data.next if data.next?
         #
         def next

@@ -717,9 +717,12 @@ module Google
         #   sql = "SELECT name FROM `my_project.my_dataset.my_table`"
         #   data = bigquery.query sql
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         # @example Query using legacy SQL:
         #   require "google/cloud/bigquery"
@@ -729,9 +732,12 @@ module Google
         #   sql = "SELECT name FROM [my_project:my_dataset.my_table]"
         #   data = bigquery.query sql, legacy_sql: true
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         # @example Retrieve all rows: (See {Data#all})
         #   require "google/cloud/bigquery"
@@ -754,9 +760,12 @@ module Google
         #                         "WHERE id = ?",
         #                         params: [1]
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         # @example Query using named query parameters:
         #   require "google/cloud/bigquery"
@@ -768,9 +777,12 @@ module Google
         #                         "WHERE id = @id",
         #                         params: { id: 1 }
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         # @example Query using named query parameters with types:
         #   require "google/cloud/bigquery"
@@ -783,9 +795,12 @@ module Google
         #                         params: { ids: [] },
         #                         types: { ids: [:INT64] }
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         # @example Execute a DDL statement:
         #   require "google/cloud/bigquery"
@@ -824,9 +839,12 @@ module Google
         #     query.table = dataset.table "my_table", skip_lookup: true
         #   end
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         def query query, params: nil, types: nil, external: nil, max: nil, cache: true, dataset: nil, project: nil,
                   standard_sql: nil, legacy_sql: nil, &block
@@ -888,9 +906,12 @@ module Google
         #   data = bigquery.query "SELECT * FROM my_ext_table",
         #                         external: { my_ext_table: csv_table }
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         def external url, format: nil
           ext = External.from_urls url, format
@@ -1284,9 +1305,12 @@ module Google
         #                         "WHERE time_of_date = @time",
         #                         params: { time: fourpm }
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         # @example Create Time with fractional seconds:
         #   require "google/cloud/bigquery"
@@ -1299,9 +1323,12 @@ module Google
         #                         "WHERE time_of_date >= @time",
         #                         params: { time: precise_time }
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         def time hour, minute, second
           Bigquery::Time.new "#{hour}:#{minute}:#{second}"
