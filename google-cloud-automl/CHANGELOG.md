@@ -1,5 +1,25 @@
 # Release History
 
+### 0.8.0 / 2020-06-30
+
+#### ⚠ BREAKING CHANGES
+
+* **automl:** Convert google-cloud-automl to a wrapper gem
+
+#### Features
+
+* Convert google-cloud-automl to a wrapper gem
+* The endpoint, scope, and quota_project can be set via configuration
+
+#### Bug Fixes
+
+* Eliminated a circular require warning.
+
+#### Documentation
+
+* Cover exception changes in the migration guide
+* Updated the sample timeouts in the migration guide to reflect seconds
+
 ### 0.7.1 / 2020-04-01
 
 #### Documentation
