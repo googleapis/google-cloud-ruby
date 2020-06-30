@@ -4,6 +4,7 @@ gemspec
 
 gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-env", path: "../google-cloud-env"
+gem "google-cloud-error_reporting-v1beta1", path: "../google-cloud-error_reporting-v1beta1"
 gem "google-cloud-errors", path: "../google-cloud-errors"
 gem "stackdriver-core", path: "../stackdriver-core"
 

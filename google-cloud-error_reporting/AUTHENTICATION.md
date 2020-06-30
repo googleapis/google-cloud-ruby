@@ -76,7 +76,8 @@ The environment variables that google-cloud-error_reporting checks for project I
 1. `ERROR_REPORTING_PROJECT`
 2. `GOOGLE_CLOUD_PROJECT`
 
-The environment variables that google-cloud-error_reporting checks for credentials are configured on {Google::Cloud::ErrorReporting::V1beta1::Credentials}:
+The environment variables that google-cloud-error_reporting checks for credentials
+are configured on {Google::Cloud::ErrorReporting::Credentials}:
 
 1. `ERROR_REPORTING_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `ERROR_REPORTING_KEYFILE` - Path to JSON file, or JSON contents
