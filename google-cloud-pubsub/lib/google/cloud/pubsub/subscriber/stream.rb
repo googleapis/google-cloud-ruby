@@ -364,6 +364,8 @@ module Google
               req.modify_deadline_ack_ids += @inventory.ack_ids
               req.modify_deadline_seconds += @inventory.ack_ids.map { @subscriber.deadline }
               req.client_id = @subscriber.service.client_id
+              req.max_outstanding_messages = @inventory.limit
+              req.max_outstanding_bytes = @inventory.bytesize
             end
           end
 

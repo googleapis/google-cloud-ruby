@@ -1474,9 +1474,12 @@ module Google
         #
         #   data = dataset.query "SELECT name FROM my_table"
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         # @example Query using legacy SQL:
         #   require "google/cloud/bigquery"
@@ -1487,9 +1490,12 @@ module Google
         #   data = dataset.query "SELECT name FROM my_table",
         #                        legacy_sql: true
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         # @example Query using positional query parameters:
         #   require "google/cloud/bigquery"
@@ -1500,9 +1506,12 @@ module Google
         #   data = dataset.query "SELECT name FROM my_table WHERE id = ?",
         #                        params: [1]
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         # @example Query using named query parameters:
         #   require "google/cloud/bigquery"
@@ -1513,9 +1522,12 @@ module Google
         #   data = dataset.query "SELECT name FROM my_table WHERE id = @id",
         #                        params: { id: 1 }
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         # @example Query using named query parameters with types:
         #   require "google/cloud/bigquery"
@@ -1528,9 +1540,12 @@ module Google
         #                        params: { ids: [] },
         #                        types: { ids: [:INT64] }
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         # @example Execute a DDL statement:
         #   require "google/cloud/bigquery"
@@ -1569,9 +1584,12 @@ module Google
         #     query.table = dataset.table "my_table", skip_lookup: true
         #   end
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         # @!group Data
         #

@@ -58,8 +58,13 @@ module Google
       ##
       # # SignedUrlUnavailable Error
       #
-      # This is raised when File#signed_url is unable to generate a URL due to
-      # missing credentials needed to create the URL.
+      # Raised by signed URL methods if the service account credentials
+      # are missing. Service account credentials are acquired by following the
+      # steps in [Service Account Authentication](
+      # https://cloud.google.com/iam/docs/service-accounts).
+      #
+      # @see https://cloud.google.com/storage/docs/access-control/signed-urls Signed URLs
+      #
       class SignedUrlUnavailable < Google::Cloud::Error
       end
     end

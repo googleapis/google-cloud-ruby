@@ -34,9 +34,12 @@ module Google
       #                         "WHERE time_of_date = @time",
       #                         params: { time: fourpm }
       #
+      #   # Iterate over the first page of results
       #   data.each do |row|
       #     puts row[:name]
       #   end
+      #   # Retrieve the next page of results
+      #   data = data.next if data.next?
       #
       # @example Create Time with fractional seconds:
       #   require "google/cloud/bigquery"
@@ -49,9 +52,12 @@ module Google
       #                         "WHERE time_of_date >= @time",
       #                         params: { time: precise_time }
       #
+      #   # Iterate over the first page of results
       #   data.each do |row|
       #     puts row[:name]
       #   end
+      #   # Retrieve the next page of results
+      #   data = data.next if data.next?
       #
       Time = Struct.new :value
     end
