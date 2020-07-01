@@ -148,14 +148,15 @@ Google::Cloud.configure.add_config! :error_reporting do |config|
   default_version = Google::Cloud::Config.deferred do
     ENV["ERROR_REPORTING_VERSION"]
   end
+  default_scopes = ["https://www.googleapis.com/auth/cloud-platform"]
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
-  config.add_field! :credentials, nil,
+  config.add_field! :credentials, default_creds,
                     match: [String, Hash, Google::Auth::Credentials],
                     allow_nil: true
   config.add_alias! :keyfile, :credentials
-  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :scope, default_scopes, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :client_config, nil, match: Hash
   config.add_field! :endpoint, "clouderrorreporting.googleapis.com", match: String
