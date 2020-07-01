@@ -208,25 +208,19 @@ line_trace_callback(rb_event_flag_t event, VALUE data, VALUE obj, ID mid, VALUE 
 static VALUE
 disable_line_trace_for_thread(VALUE thread)
 {
-    VALUE thread_variables_hash;
     VALUE line_trace_set;
-    ID locals_id;
     ID line_trace_thread_id;
-    VALUE line_trace_thread_flag;
 
-    CONST_ID(locals_id, "locals");
     CONST_ID(line_trace_thread_id, "gcloud_line_trace_set");
-    line_trace_thread_flag = ID2SYM(line_trace_thread_id);
 
     if (!RTEST(thread)) {
         thread = rb_thread_current();
     }
-    thread_variables_hash = rb_ivar_get(thread, locals_id);
-    line_trace_set = rb_hash_aref(thread_variables_hash, line_trace_thread_flag);
+    line_trace_set = rb_ivar_get(thread, line_trace_thread_id);
 
     if (RTEST(line_trace_set)) {
         rb_thread_remove_event_hook(thread, line_trace_callback);
-        rb_hash_aset(thread_variables_hash, line_trace_thread_flag, Qfalse);
+        rb_ivar_set(thread, line_trace_thread_id, Qfalse);
     }
 
     return Qnil;
@@ -241,23 +235,17 @@ static VALUE
 enable_line_trace_for_thread(VALUE self)
 {
     VALUE current_thread;
-    VALUE thread_variables_hash;
     VALUE line_trace_set;
-    ID locals_id;
     ID line_trace_thread_id;
-    VALUE line_trace_thread_flag;
 
-    CONST_ID(locals_id, "locals");
     CONST_ID(line_trace_thread_id, "gcloud_line_trace_set");
-    line_trace_thread_flag = ID2SYM(line_trace_thread_id);
 
     current_thread = rb_thread_current();
-    thread_variables_hash = rb_ivar_get(current_thread, locals_id);
-    line_trace_set = rb_hash_aref(thread_variables_hash, line_trace_thread_flag);
+    line_trace_set = rb_ivar_get(current_thread, line_trace_thread_id);
 
     if (!RTEST(line_trace_set)) {
         rb_thread_add_event_hook(current_thread, line_trace_callback, RUBY_EVENT_LINE, self);
-        rb_hash_aset(thread_variables_hash, line_trace_thread_flag, Qtrue);
+        rb_ivar_set(current_thread, line_trace_thread_id, Qtrue);
     }
 
     return Qnil;
@@ -331,25 +319,19 @@ return_trace_callback(void *data, rb_trace_arg_t *trace_arg)
 static VALUE
 disable_return_trace_for_thread(VALUE thread)
 {
-    VALUE thread_variables_hash;
     VALUE return_trace_set;
-    ID locals_id;
     ID return_trace_thread_id;
-    VALUE return_trace_thread_flag;
 
-    CONST_ID(locals_id, "locals");
     CONST_ID(return_trace_thread_id, "gcloud_return_trace_set");
-    return_trace_thread_flag = ID2SYM(return_trace_thread_id);
 
     if (!RTEST(thread)) {
         thread = rb_thread_current();
     }
-    thread_variables_hash = rb_ivar_get(thread, locals_id);
-    return_trace_set = rb_hash_aref(thread_variables_hash, return_trace_thread_flag);
+    return_trace_set = rb_ivar_get(thread, return_trace_thread_id);
 
     if (RTEST(return_trace_set)) {
         rb_thread_remove_event_hook(thread, (rb_event_hook_func_t)return_trace_callback);
-        rb_hash_aset(thread_variables_hash, return_trace_thread_flag, Qfalse);
+        rb_ivar_set(thread, return_trace_thread_id, Qfalse);
     }
 
     return Qnil;
@@ -364,24 +346,17 @@ static VALUE
 enable_return_trace_for_thread(VALUE self)
 {
     VALUE current_thread;
-    VALUE thread_variables_hash;
     VALUE return_trace_set;
-
-    ID locals_id;
     ID return_trace_thread_id;
-    VALUE return_trace_thread_flag;
 
-    CONST_ID(locals_id, "locals");
     CONST_ID(return_trace_thread_id, "gcloud_return_trace_set");
-    return_trace_thread_flag = ID2SYM(return_trace_thread_id);
 
     current_thread = rb_thread_current();
-    thread_variables_hash = rb_ivar_get(current_thread, locals_id);
-    return_trace_set = rb_hash_aref(thread_variables_hash, return_trace_thread_flag);
+    return_trace_set = rb_ivar_get(current_thread, return_trace_thread_id);
 
     if (!RTEST(return_trace_set)) {
         rb_thread_add_event_hook2(current_thread, (rb_event_hook_func_t)return_trace_callback, RETURN_TRACEPOINT_EVENTS, self, RUBY_EVENT_HOOK_FLAG_RAW_ARG | RUBY_EVENT_HOOK_FLAG_SAFE);
-        rb_hash_aset(thread_variables_hash, return_trace_thread_flag, Qtrue);
+        rb_ivar_set(current_thread, return_trace_thread_id, Qtrue);
     }
 
     return Qnil;
