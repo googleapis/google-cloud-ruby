@@ -102,8 +102,14 @@ To configure your system for this, simply:
 2. Authenticate using OAuth 2.0 `$ gcloud auth login`
 3. Write code as if already authenticated.
 
-**NOTE:** This is _not_ recommended for running in production. The Cloud SDK
-*should* only be used during development.
+**NOTE:** The use of Cloud SDK credentials is _not_ recommended for running in
+production. The Cloud SDK *should* only be used during development.
+
+**NOTE:** The use of Cloud SDK credentials may not support certain methods such as
+those that produce
+[signed URLs](https://cloud.google.com/storage/docs/access-control/signed-urls) and
+post objects. For these methods, authentication using a service account JSON key file
+is required.
 
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.cloud.google.com/project

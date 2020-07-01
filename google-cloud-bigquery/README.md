@@ -42,9 +42,12 @@ table.load "gs://my-bucket/file-name.csv"
 # Run a query
 data = dataset.query "SELECT first_name FROM my_table"
 
+# Iterate over the first page of results
 data.each do |row|
   puts row[:first_name]
 end
+# Retrieve the next page of results
+data = data.next if data.next?
 ```
 
 ## Enabling Logging

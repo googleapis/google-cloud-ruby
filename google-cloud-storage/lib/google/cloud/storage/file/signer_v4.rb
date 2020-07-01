@@ -51,7 +51,6 @@ module Google
                           bucket_bound_hostname: nil
             i = determine_issuer issuer, client_email
             s = determine_signing_key signing_key, private_key
-            raise SignedUrlUnavailable unless i && s
 
             now = Time.now.utc
             base_fields = required_fields i, now
@@ -192,14 +191,19 @@ module Google
           def determine_issuer issuer, client_email
             # Parse the Service Account and get client id and private key
             issuer = issuer || client_email || @service.credentials.issuer
-            raise SignedUrlUnavailable, "issuer (client_email) missing" unless issuer
+            raise SignedUrlUnavailable, error_msg("issuer (client_email)") unless issuer
             issuer
           end
 
           def determine_signing_key signing_key, private_key
             signing_key = signing_key || private_key || @service.credentials.signing_key
-            raise SignedUrlUnavailable, "signing_key (private_key) missing" unless signing_key
+            raise SignedUrlUnavailable, error_msg("signing_key (private_key)") unless signing_key
             signing_key
+          end
+
+          def error_msg attr_name
+            "Service account credentials '#{attr_name}' is missing. To generate service account credentials " \
+            "see https://cloud.google.com/iam/docs/service-accounts"
           end
 
           def service_account_signer signer

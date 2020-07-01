@@ -89,7 +89,7 @@ YARD::Doctest.configure do |doctest|
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
-      mock.expect :list_table_data, table_data_gapi.to_json, ["my-project", "my_dataset", "my_table", Hash]
+      mock.expect :list_table_data, table_data_gapi(token: nil).to_json, ["my-project", "my_dataset", "my_table", Hash]
     end
   end
 

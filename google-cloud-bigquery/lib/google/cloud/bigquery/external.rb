@@ -45,9 +45,12 @@ module Google
       #   data = bigquery.query "SELECT * FROM my_ext_table",
       #                         external: { my_ext_table: csv_table }
       #
+      #   # Iterate over the first page of results
       #   data.each do |row|
       #     puts row[:name]
       #   end
+      #   # Retrieve the next page of results
+      #   data = data.next if data.next?
       #
       module External
         ##
@@ -138,9 +141,12 @@ module Google
         #   data = bigquery.query "SELECT * FROM my_ext_table",
         #                         external: { my_ext_table: avro_table }
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         class DataSource
           ##
@@ -575,9 +581,12 @@ module Google
         #   data = bigquery.query "SELECT * FROM my_ext_table",
         #                         external: { my_ext_table: csv_table }
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         class CsvSource < External::DataSource
           ##
@@ -1037,9 +1046,12 @@ module Google
         #   data = bigquery.query "SELECT * FROM my_ext_table",
         #                         external: { my_ext_table: json_table }
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         class JsonSource < External::DataSource
           ##
@@ -1173,9 +1185,12 @@ module Google
         #   data = bigquery.query "SELECT * FROM my_ext_table",
         #                         external: { my_ext_table: sheets_table }
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         class SheetsSource < External::DataSource
           ##
@@ -1318,9 +1333,12 @@ module Google
         #   data = bigquery.query "SELECT * FROM my_ext_table",
         #                         external: { my_ext_table: bigtable_table }
         #
+        #   # Iterate over the first page of results
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #   # Retrieve the next page of results
+        #   data = data.next if data.next?
         #
         class BigtableSource < External::DataSource
           ##
@@ -1516,9 +1534,12 @@ module Google
           #   data = bigquery.query "SELECT * FROM my_ext_table",
           #                         external: { my_ext_table: bigtable_table }
           #
+          #   # Iterate over the first page of results
           #   data.each do |row|
           #     puts row[:name]
           #   end
+          #   # Retrieve the next page of results
+          #   data = data.next if data.next?
           #
           class ColumnFamily
             ##
@@ -2053,9 +2074,12 @@ module Google
           #   data = bigquery.query "SELECT * FROM my_ext_table",
           #                         external: { my_ext_table: bigtable_table }
           #
+          #   # Iterate over the first page of results
           #   data.each do |row|
           #     puts row[:name]
           #   end
+          #   # Retrieve the next page of results
+          #   data = data.next if data.next?
           #
           class Column
             ##

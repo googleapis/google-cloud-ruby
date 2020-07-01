@@ -77,13 +77,20 @@ module Google
           end
 
           def determine_signing_key options = {}
-            options[:signing_key] || options[:private_key] ||
-              @service.credentials.signing_key
+            signing_key = options[:signing_key] || options[:private_key] || @service.credentials.signing_key
+            raise SignedUrlUnavailable, error_msg("signing_key (private_key)") unless signing_key
+            signing_key
           end
 
           def determine_issuer options = {}
-            options[:issuer] || options[:client_email] ||
-              @service.credentials.issuer
+            issuer = options[:issuer] || options[:client_email] || @service.credentials.issuer
+            raise SignedUrlUnavailable, error_msg("issuer (client_email)") unless issuer
+            issuer
+          end
+
+          def error_msg attr_name
+            "Service account credentials '#{attr_name}' is missing. To generate service account credentials " \
+            "see https://cloud.google.com/iam/docs/service-accounts"
           end
 
           def post_object options
@@ -98,8 +105,6 @@ module Google
 
             i = determine_issuer options
             s = determine_signing_key options
-
-            raise SignedUrlUnavailable unless i && s
 
             policy_str = p.to_json
             policy = Base64.strict_encode64(policy_str).delete "\n"
@@ -118,8 +123,6 @@ module Google
 
             i = determine_issuer options
             s = determine_signing_key options
-
-            raise SignedUrlUnavailable unless i && s
 
             sig = generate_signature s, signature_str(options)
             generate_signed_url i, sig, options[:expires], options[:query]
