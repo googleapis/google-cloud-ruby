@@ -28,7 +28,7 @@ require "google/cloud/recommender/v1"
 
 client = ::Google::Cloud::Recommender::V1::Recommender::Client.new
 request = my_create_request
-response = client.list_recommendations request
+response = client.list_insights request
 ```
 
 View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-recommender-v1/latest)

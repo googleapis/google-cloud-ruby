@@ -20,6 +20,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :content, :message, 7, "google.cloud.recommender.v1.RecommendationContent"
       optional :state_info, :message, 10, "google.cloud.recommender.v1.RecommendationStateInfo"
       optional :etag, :string, 11
+      repeated :associated_insights, :message, 14, "google.cloud.recommender.v1.Recommendation.InsightReference"
+    end
+    add_message "google.cloud.recommender.v1.Recommendation.InsightReference" do
+      optional :insight, :string, 1
     end
     add_message "google.cloud.recommender.v1.RecommendationContent" do
       repeated :operation_groups, :message, 2, "google.cloud.recommender.v1.OperationGroup"
@@ -83,6 +87,7 @@ module Google
     module Recommender
       module V1
         Recommendation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Recommendation").msgclass
+        Recommendation::InsightReference = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Recommendation.InsightReference").msgclass
         RecommendationContent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.RecommendationContent").msgclass
         OperationGroup = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.OperationGroup").msgclass
         Operation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Operation").msgclass

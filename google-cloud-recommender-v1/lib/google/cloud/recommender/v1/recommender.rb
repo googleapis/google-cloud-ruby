@@ -31,10 +31,10 @@ module Google
     module Recommender
       module V1
         ##
-        # Provides recommendations for cloud customers for various categories like
-        # performance optimization, cost savings, reliability, feature discovery, etc.
-        # These recommendations are generated automatically based on analysis of user
-        # resources, configuration and monitoring metrics.
+        # Provides insights and recommendations for cloud customers for various
+        # categories like performance optimization, cost savings, reliability, feature
+        # discovery, etc. Insights and recommendations are generated automatically
+        # based on analysis of user resources, configuration and monitoring metrics.
         #
         # To load this service and instantiate a client:
         #

@@ -47,6 +47,195 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
     end
   end
 
+  def test_list_insights
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Recommender::V1::ListInsightsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_insights_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_insights, name
+      assert_kind_of ::Google::Cloud::Recommender::V1::ListInsightsRequest, request
+      assert_equal "hello world", request.parent
+      assert_equal 42, request.page_size
+      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request.filter
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_insights_client_stub do
+      # Create client
+      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_insights({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_insights parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_insights ::Google::Cloud::Recommender::V1::ListInsightsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_insights({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_insights ::Google::Cloud::Recommender::V1::ListInsightsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_insights_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_insight
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Recommender::V1::Insight.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_insight_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_insight, name
+      assert_kind_of ::Google::Cloud::Recommender::V1::GetInsightRequest, request
+      assert_equal "hello world", request.name
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_insight_client_stub do
+      # Create client
+      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_insight({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_insight name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_insight ::Google::Cloud::Recommender::V1::GetInsightRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_insight({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_insight ::Google::Cloud::Recommender::V1::GetInsightRequest.new(name: name), grpc_options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_insight_client_stub.call_rpc_count
+    end
+  end
+
+  def test_mark_insight_accepted
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Recommender::V1::Insight.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    state_metadata = {}
+    etag = "hello world"
+
+    mark_insight_accepted_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :mark_insight_accepted, name
+      assert_kind_of ::Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest, request
+      assert_equal "hello world", request.name
+      assert_equal({}, request.state_metadata.to_h)
+      assert_equal "hello world", request.etag
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, mark_insight_accepted_client_stub do
+      # Create client
+      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.mark_insight_accepted({ name: name, state_metadata: state_metadata, etag: etag }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.mark_insight_accepted name: name, state_metadata: state_metadata, etag: etag do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.mark_insight_accepted ::Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest.new(name: name, state_metadata: state_metadata, etag: etag) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.mark_insight_accepted({ name: name, state_metadata: state_metadata, etag: etag }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.mark_insight_accepted ::Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, mark_insight_accepted_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_recommendations
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Recommender::V1::ListRecommendationsResponse.new
