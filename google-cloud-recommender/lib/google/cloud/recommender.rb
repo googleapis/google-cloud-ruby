@@ -57,10 +57,10 @@ module Google
       #
       # ## About Recommender
       #
-      # Provides recommendations for cloud customers for various categories like
-      # performance optimization, cost savings, reliability, feature discovery, etc.
-      # These recommendations are generated automatically based on analysis of user
-      # resources, configuration and monitoring metrics.
+      # Provides insights and recommendations for cloud customers for various
+      # categories like performance optimization, cost savings, reliability, feature
+      # discovery, etc. Insights and recommendations are generated automatically
+      # based on analysis of user resources, configuration and monitoring metrics.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
