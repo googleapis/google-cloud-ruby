@@ -76,6 +76,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :update_mask, :message, 1, "google.protobuf.FieldMask"
       optional :instance, :message, 2, "google.cloud.redis.v1.Instance"
     end
+    add_message "google.cloud.redis.v1.UpgradeInstanceRequest" do
+      optional :name, :string, 1
+      optional :redis_version, :string, 2
+    end
     add_message "google.cloud.redis.v1.DeleteInstanceRequest" do
       optional :name, :string, 1
     end
@@ -142,6 +146,7 @@ module Google
         GetInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.GetInstanceRequest").msgclass
         CreateInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.CreateInstanceRequest").msgclass
         UpdateInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.UpdateInstanceRequest").msgclass
+        UpgradeInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.UpgradeInstanceRequest").msgclass
         DeleteInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.DeleteInstanceRequest").msgclass
         GcsSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.GcsSource").msgclass
         InputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.InputConfig").msgclass

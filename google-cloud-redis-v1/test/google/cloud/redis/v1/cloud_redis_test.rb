@@ -304,6 +304,71 @@ class ::Google::Cloud::Redis::V1::CloudRedis::ClientTest < Minitest::Test
     end
   end
 
+  def test_upgrade_instance
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    redis_version = "hello world"
+
+    upgrade_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :upgrade_instance, name
+      assert_kind_of ::Google::Cloud::Redis::V1::UpgradeInstanceRequest, request
+      assert_equal "hello world", request.name
+      assert_equal "hello world", request.redis_version
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, upgrade_instance_client_stub do
+      # Create client
+      client = ::Google::Cloud::Redis::V1::CloudRedis::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.upgrade_instance({ name: name, redis_version: redis_version }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.upgrade_instance name: name, redis_version: redis_version do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.upgrade_instance ::Google::Cloud::Redis::V1::UpgradeInstanceRequest.new(name: name, redis_version: redis_version) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.upgrade_instance({ name: name, redis_version: redis_version }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.upgrade_instance ::Google::Cloud::Redis::V1::UpgradeInstanceRequest.new(name: name, redis_version: redis_version), grpc_options do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, upgrade_instance_client_stub.call_rpc_count
+    end
+  end
+
   def test_import_instance
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
