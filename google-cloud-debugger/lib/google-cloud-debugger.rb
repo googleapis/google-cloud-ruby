@@ -48,8 +48,7 @@ module Google
     #   * `https://www.googleapis.com/auth/logging.admin`
     #
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config A hash of values to override the default
-    #   behavior of the API client. Optional.
+    # @param [Hash] client_config Unused.
     #
     # @return [Google::Cloud::Debugger::Project]
     #
@@ -105,8 +104,7 @@ module Google
     #   * `https://www.googleapis.com/auth/logging.admin`
     #
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config A hash of values to override the default
-    #   behavior of the API client. Optional.
+    # @param [Hash] client_config Unused.
     #
     # @return [Google::Cloud::Debugger::Project]
     #
