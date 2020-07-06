@@ -113,7 +113,10 @@ module Google
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
         Debugger::Project.new(
-          Debugger::Service.new(project_id, credentials, host: endpoint, timeout: timeout),
+          Debugger::Service.new(
+            project_id, credentials,
+            host: endpoint, timeout: timeout, client_config: client_config
+          ),
           service_name: service_name,
           service_version: service_version
         )
