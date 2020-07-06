@@ -147,7 +147,7 @@ module Google
 
           ##
           # @private New ResourceDescriptor::List from a
-          # Google::Logging::V2::ListMonitoredResourceDescriptorsResponse
+          # Google::Cloud::Logging::V2::ListMonitoredResourceDescriptorsResponse
           # object.
           def self.from_grpc grpc_list, service, max = nil
             rds = new(Array(grpc_list.resource_descriptors).map do |grpc|

@@ -16,7 +16,6 @@
 require "google/cloud/errors"
 require "google/cloud/logging/version"
 require "google/cloud/logging/v2"
-require "google/gax/errors"
 require "uri"
 
 module Google
@@ -30,57 +29,53 @@ module Google
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, timeout: nil, client_config: nil,
-                       host: nil
+        def initialize project, credentials, timeout: nil, host: nil, client_config: nil
           @project = project
           @credentials = credentials
           @timeout = timeout
           @client_config = client_config || {}
-          @host = host || V2::LoggingServiceV2Client::SERVICE_ADDRESS
+          @host = host
         end
 
         def logging
           return mocked_logging if mocked_logging
           @logging ||= \
-            V2::LoggingServiceV2Client.new(
-              credentials:     credentials,
-              timeout:         timeout,
-              client_config:   client_config,
-              service_address: service_address,
-              service_port:    service_port,
-              lib_name:        "gccl",
-              lib_version:     Google::Cloud::Logging::VERSION
-            )
+            V2::LoggingService::Client.new do |config|
+              config.credentials = credentials if credentials
+              config.timeout = timeout if timeout
+              config.endpoint = host if host
+              config.lib_name = "gccl"
+              config.lib_version = Google::Cloud::Logging::VERSION
+              config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
+            end
         end
         attr_accessor :mocked_logging
 
         def sinks
           return mocked_sinks if mocked_sinks
           @sinks ||= \
-            V2::ConfigServiceV2Client.new(
-              credentials:     credentials,
-              timeout:         timeout,
-              client_config:   client_config,
-              service_address: service_address,
-              service_port:    service_port,
-              lib_name:        "gccl",
-              lib_version:     Google::Cloud::Logging::VERSION
-            )
+            V2::ConfigService::Client.new do |config|
+              config.credentials = credentials if credentials
+              config.timeout = timeout if timeout
+              config.endpoint = host if host
+              config.lib_name = "gccl"
+              config.lib_version = Google::Cloud::Logging::VERSION
+              config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
+            end
         end
         attr_accessor :mocked_sinks
 
         def metrics
           return mocked_metrics if mocked_metrics
           @metrics ||= \
-            V2::MetricsServiceV2Client.new(
-              credentials:     credentials,
-              timeout:         timeout,
-              client_config:   client_config,
-              service_address: service_address,
-              service_port:    service_port,
-              lib_name:        "gccl",
-              lib_version:     Google::Cloud::Logging::VERSION
-            )
+            V2::MetricsService::Client.new do |config|
+              config.credentials = credentials if credentials
+              config.timeout = timeout if timeout
+              config.endpoint = host if host
+              config.lib_name = "gccl"
+              config.lib_version = Google::Cloud::Logging::VERSION
+              config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
+            end
         end
         attr_accessor :mocked_metrics
 
@@ -90,20 +85,12 @@ module Google
           project_ids = Array(projects).map { |p| "projects/#{p}" }
           resource_names = Array(resources) + project_ids
           resource_names = ["projects/#{@project}"] if resource_names.empty?
-          call_opts = default_options
-          if token
-            call_opts = Google::Gax::CallOptions.new(
-              kwargs:     default_headers,
-              page_token: token
-            )
-          end
-
-          execute do
-            paged_enum = logging.list_log_entries \
-              resource_names, filter: filter, order_by: order, page_size: max,
-                              options: call_opts
-            paged_enum.page.response
-          end
+          paged_enum = logging.list_log_entries resource_names: resource_names,
+                                                filter:         filter,
+                                                order_by:       order,
+                                                page_size:      max,
+                                                page_token:     token
+          paged_enum.response
         end
 
         def write_entries entries, log_name: nil, resource: nil, labels: nil,
@@ -114,157 +101,93 @@ module Google
           end
           resource = resource.to_grpc if resource
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
-
-          execute do
-            logging.write_log_entries entries,
-                                      log_name: log_path(log_name),
-                                      resource: resource, labels: labels,
-                                      partial_success: partial_success,
-                                      options: default_options
-          end
+          logging.write_log_entries entries:         entries,
+                                    log_name:        log_path(log_name),
+                                    resource:        resource,
+                                    labels:          labels,
+                                    partial_success: partial_success
         end
 
         def list_logs resource: nil, token: nil, max: nil
           parent = resource || "projects/#{@project}"
-          call_opts = default_options
-          if token
-            call_opts = Google::Gax::CallOptions.new(
-              kwargs:     default_headers,
-              page_token: token
-            )
-          end
-
-          execute do
-            paged_enum = logging.list_logs parent, page_size: max,
-                                                   options:   call_opts
-            paged_enum.page.response
-          end
+          paged_enum = logging.list_logs parent:     parent,
+                                         page_size:  max,
+                                         page_token: token
+          paged_enum.response
         end
 
         def delete_log name
-          execute do
-            logging.delete_log log_path(name), options: default_options
-          end
+          logging.delete_log log_name: log_path(name)
         end
 
         def list_resource_descriptors token: nil, max: nil
-          call_opts = default_options
-          if token
-            call_opts = Google::Gax::CallOptions.new(
-              kwargs:     default_headers,
-              page_token: token
-            )
-          end
-
-          execute do
-            logging.list_monitored_resource_descriptors \
-              page_size: max, options: call_opts
-          end
+          logging.list_monitored_resource_descriptors page_size: max, page_token: token
         end
 
         def list_sinks token: nil, max: nil
-          call_opts = default_options
-          if token
-            call_opts = Google::Gax::CallOptions.new(
-              kwargs:     default_headers,
-              page_token: token
-            )
-          end
-
-          execute do
-            paged_enum = sinks.list_sinks \
-              project_path, page_size: max, options: call_opts
-            paged_enum.page.response
-          end
+          paged_enum = sinks.list_sinks parent: project_path, page_size: max, page_token: token
+          paged_enum.response
         end
 
         def create_sink name, destination, filter, unique_writer_identity: nil
-          sink = Google::Logging::V2::LogSink.new({
-            name: name, destination: destination, filter: filter
-          }.delete_if { |_, v| v.nil? })
-
-          execute do
-            sinks.create_sink project_path, sink,
-                              unique_writer_identity: unique_writer_identity,
-                              options:                default_options
-          end
-        end
-
-        def get_sink name
-          execute { sinks.get_sink sink_path(name), options: default_options }
-        end
-
-        def update_sink name, destination, filter, unique_writer_identity: nil
-          sink = Google::Logging::V2::LogSink.new(
+          sink = Google::Cloud::Logging::V2::LogSink.new(
             {
               name: name, destination: destination, filter: filter
             }.delete_if { |_, v| v.nil? }
           )
+          sinks.create_sink parent:                 project_path,
+                            sink:                   sink,
+                            unique_writer_identity: unique_writer_identity
+        end
 
-          execute do
-            sinks.update_sink sink_path(name), sink,
-                              unique_writer_identity: unique_writer_identity,
-                              options:                default_options
-          end
+        def get_sink name
+          sinks.get_sink sink_name: sink_path(name)
+        end
+
+        def update_sink name, destination, filter, unique_writer_identity: nil
+          sink = Google::Cloud::Logging::V2::LogSink.new(
+            {
+              name: name, destination: destination, filter: filter
+            }.delete_if { |_, v| v.nil? }
+          )
+          sinks.update_sink sink_name:              sink_path(name),
+                            sink:                   sink,
+                            unique_writer_identity: unique_writer_identity
         end
 
         def delete_sink name
-          execute do
-            sinks.delete_sink sink_path(name), options: default_options
-          end
+          sinks.delete_sink sink_name: sink_path(name)
         end
 
         def list_metrics token: nil, max: nil
-          call_opts = default_options
-          if token
-            call_opts = Google::Gax::CallOptions.new(
-              kwargs:     default_headers,
-              page_token: token
-            )
-          end
-
-          execute do
-            paged_enum = metrics.list_log_metrics \
-              project_path, page_size: max, options: call_opts
-            paged_enum.page.response
-          end
+          paged_enum = metrics.list_log_metrics parent:     project_path,
+                                                page_size:  max,
+                                                page_token: token
+          paged_enum.response
         end
 
         def create_metric name, filter, description
-          metric = Google::Logging::V2::LogMetric.new(
+          metric = Google::Cloud::Logging::V2::LogMetric.new(
             { name: name, description: description,
               filter: filter }.delete_if { |_, v| v.nil? }
           )
-
-          execute do
-            metrics.create_log_metric project_path, metric,
-                                      options: default_options
-          end
+          metrics.create_log_metric parent: project_path, metric: metric
         end
 
         def get_metric name
-          execute do
-            metrics.get_log_metric metric_path(name), options: default_options
-          end
+          metrics.get_log_metric metric_name: metric_path(name)
         end
 
         def update_metric name, description, filter
-          metric = Google::Logging::V2::LogMetric.new(
+          metric = Google::Cloud::Logging::V2::LogMetric.new(
             { name: name, description: description,
               filter: filter }.delete_if { |_, v| v.nil? }
           )
-
-          execute do
-            metrics.update_log_metric metric_path(name), metric,
-                                      options: default_options
-          end
+          metrics.update_log_metric metric_name: metric_path(name), metric: metric
         end
 
         def delete_metric name
-          execute do
-            metrics.delete_log_metric metric_path(name),
-                                      options: default_options
-          end
+          metrics.delete_log_metric metric_name: metric_path(name)
         end
 
         def log_path log_name
@@ -280,16 +203,6 @@ module Google
 
         protected
 
-        def service_address
-          return nil if host.nil?
-          URI.parse("//#{host}").host
-        end
-
-        def service_port
-          return nil if host.nil?
-          URI.parse("//#{host}").port
-        end
-
         def project_path
           "projects/#{@project}"
         end
@@ -302,14 +215,6 @@ module Google
         def metric_path metric_name
           return metric_name if metric_name.to_s.include? "/"
           "#{project_path}/metrics/#{metric_name}"
-        end
-
-        def default_headers
-          { "google-cloud-resource-prefix" => "projects/#{@project}" }
-        end
-
-        def default_options
-          Google::Gax::CallOptions.new kwargs: default_headers
         end
 
         ##
@@ -328,13 +233,6 @@ module Google
           return nil if timestamp.nil?
           # Time.at takes microseconds, so convert nano seconds to microseconds
           Time.at timestamp.seconds, Rational(timestamp.nanos, 1000)
-        end
-
-        def execute
-          yield
-        rescue Google::Gax::GaxError => e
-          # GaxError wraps BadStatus, but exposes it as #cause
-          raise Google::Cloud::Error.from_error(e.cause)
         end
       end
     end

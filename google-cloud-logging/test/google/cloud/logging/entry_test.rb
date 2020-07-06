@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Logging::Entry, :mock_logging do
   let(:entry_hash) { random_entry_hash }
-  let(:entry_grpc) { Google::Logging::V2::LogEntry.new entry_hash }
+  let(:entry_grpc) { Google::Cloud::Logging::V2::LogEntry.new entry_hash }
   let(:entry) { Google::Cloud::Logging::Entry.from_grpc entry_grpc }
 
   it "knows its attributes" do

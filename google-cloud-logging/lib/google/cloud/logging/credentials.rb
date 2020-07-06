@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/logging/v2/credentials"
+require "google/cloud/logging/v2/logging_service/credentials"
 
 module Google
   module Cloud
@@ -37,7 +37,7 @@ module Google
       #
       #   logging.project_id #=> "my-project"
       #
-      class Credentials < Google::Cloud::Logging::V2::Credentials
+      class Credentials < Google::Cloud::Logging::V2::LoggingService::Credentials
       end
     end
   end

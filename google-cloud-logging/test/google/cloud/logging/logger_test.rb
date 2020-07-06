@@ -27,26 +27,25 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
   let(:labels) { { "env" => "production" } }
   let(:insert_id) { "abc-123" }
   let(:logger) { Google::Cloud::Logging::Logger.new logging, log_name, resource, labels }
-  let(:write_res) { Google::Logging::V2::WriteLogEntriesResponse.new }
+  let(:write_res) { Google::Cloud::Logging::V2::WriteLogEntriesResponse.new }
   let(:timestamp) { Time.parse "2016-10-02T15:01:23.045123456Z" }
 
   def write_req_args severity, extra_labels: {}, log_name_override: nil,
                      trace: nil, trace_sampled: nil
     timestamp_grpc = Google::Protobuf::Timestamp.new seconds: timestamp.to_i,
                                                      nanos: timestamp.nsec
-    entry = Google::Logging::V2::LogEntry.new(insert_id: insert_id,
+    entry = Google::Cloud::Logging::V2::LogEntry.new(insert_id: insert_id,
                                               text_payload: "Danger Will Robinson!",
                                               severity: severity,
                                               timestamp: timestamp_grpc)
     entry.trace = trace if trace
     entry.trace_sampled = trace_sampled unless trace_sampled.nil?
     [
-      [entry],
+      entries: [entry],
       log_name: "projects/test/logs/#{log_name_override || log_name}",
       resource: resource.to_grpc,
       labels: labels.merge(extra_labels),
-      partial_success: nil,
-      options: default_options
+      partial_success: nil
     ]
   end
 

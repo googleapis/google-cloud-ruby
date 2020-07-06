@@ -61,10 +61,10 @@ module Google
 
           ##
           # @private Exports the Operation to a
-          # Google::Logging::V2::LogEntryOperation object.
+          # Google::Cloud::Logging::V2::LogEntryOperation object.
           def to_grpc
             return nil if empty?
-            Google::Logging::V2::LogEntryOperation.new(
+            Google::Cloud::Logging::V2::LogEntryOperation.new(
               id:       id.to_s,
               producer: producer.to_s,
               first:    !(!first),
@@ -74,7 +74,7 @@ module Google
 
           ##
           # @private New Google::Cloud::Logging::Entry::Operation from a
-          # Google::Logging::V2::LogEntryOperation object.
+          # Google::Cloud::Logging::V2::LogEntryOperation object.
           def self.from_grpc grpc
             return new if grpc.nil?
             new.tap do |o|

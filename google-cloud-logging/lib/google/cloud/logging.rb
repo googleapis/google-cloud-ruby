@@ -186,4 +186,7 @@ module Google
       end
     end
   end
+
+  # @private
+  Logging = Cloud::Logging
 end

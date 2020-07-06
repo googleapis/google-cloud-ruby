@@ -21,7 +21,6 @@ describe Google::Cloud do
       stubbed_logging = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil, host: nil) {
         _(project).must_be_nil
         _(keyfile).must_be_nil
-        _(scope).must_be_nil
         _(timeout).must_be_nil
         _(client_config).must_be_nil
         _(host).must_be_nil
@@ -38,7 +37,6 @@ describe Google::Cloud do
       stubbed_logging = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil, host: nil) {
         _(project).must_equal "project-id"
         _(keyfile).must_equal "keyfile-path"
-        _(scope).must_be_nil
         _(timeout).must_be_nil
         _(client_config).must_be_nil
         _(host).must_be_nil
@@ -96,7 +94,6 @@ describe Google::Cloud do
     it "uses provided project_id and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be_nil
         "logging-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
@@ -104,7 +101,7 @@ describe Google::Cloud do
         _(credentials).must_equal "logging-credentials"
         _(timeout).must_be_nil
         _(client_config).must_be_nil
-        _(host).must_be_nil
+        _(host).must_equal "logging.googleapis.com"
         OpenStruct.new project: project
       }
 
@@ -154,7 +151,6 @@ describe Google::Cloud do
     it "uses provided project_id and credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be_nil
         "logging-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
@@ -162,7 +158,7 @@ describe Google::Cloud do
         _(credentials).must_equal "logging-credentials"
         _(timeout).must_be_nil
         _(client_config).must_be_nil
-        _(host).must_be_nil
+        _(host).must_equal "logging.googleapis.com"
         OpenStruct.new project: project
       }
 
@@ -208,7 +204,6 @@ describe Google::Cloud do
     it "uses provided project and keyfile aliases" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be_nil
         "logging-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
@@ -216,7 +211,7 @@ describe Google::Cloud do
         _(credentials).must_equal "logging-credentials"
         _(timeout).must_be_nil
         _(client_config).must_be_nil
-        _(host).must_be_nil
+        _(host).must_equal "logging.googleapis.com"
         OpenStruct.new project: project
       }
 
@@ -240,7 +235,6 @@ describe Google::Cloud do
     it "gets project_id from credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be_nil
         OpenStruct.new project_id: "project-id"
       }
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
@@ -249,7 +243,7 @@ describe Google::Cloud do
         _(credentials.project_id).must_equal "project-id"
         _(timeout).must_be_nil
         _(client_config).must_be_nil
-        _(host).must_be_nil
+        _(host).must_equal "logging.googleapis.com"
         OpenStruct.new project: project
       }
       empty_env = OpenStruct.new
@@ -296,7 +290,6 @@ describe Google::Cloud do
     it "uses shared config for project and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
         "logging-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
@@ -304,7 +297,7 @@ describe Google::Cloud do
         _(credentials).must_equal "logging-credentials"
         _(timeout).must_be :nil?
         _(client_config).must_be :nil?
-        _(host).must_be :nil?
+        _(host).must_equal "logging.googleapis.com"
         OpenStruct.new project: project
       }
 
@@ -334,7 +327,6 @@ describe Google::Cloud do
     it "uses shared config for project_id and credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
         "logging-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
@@ -342,7 +334,7 @@ describe Google::Cloud do
         _(credentials).must_equal "logging-credentials"
         _(timeout).must_be :nil?
         _(client_config).must_be :nil?
-        _(host).must_be :nil?
+        _(host).must_equal "logging.googleapis.com"
         OpenStruct.new project: project
       }
 
@@ -372,7 +364,6 @@ describe Google::Cloud do
     it "uses logging config for project and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
         "logging-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
@@ -380,7 +371,7 @@ describe Google::Cloud do
         _(credentials).must_equal "logging-credentials"
         _(timeout).must_equal 42
         _(client_config).must_equal logging_client_config
-        _(host).must_be_nil
+        _(host).must_equal "logging.googleapis.com"
         OpenStruct.new project: project
       }
 
@@ -440,7 +431,6 @@ describe Google::Cloud do
     it "uses logging config for project_id and credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
         "logging-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
@@ -448,7 +438,7 @@ describe Google::Cloud do
         _(credentials).must_equal "logging-credentials"
         _(timeout).must_equal 42
         _(client_config).must_equal logging_client_config
-        _(host).must_be_nil
+        _(host).must_equal "logging.googleapis.com"
         OpenStruct.new project: project
       }
 

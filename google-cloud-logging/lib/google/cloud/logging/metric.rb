@@ -43,14 +43,14 @@ module Google
         attr_accessor :service
 
         ##
-        # @private The gRPC Google::Logging::V2::LogMetric object.
+        # @private The gRPC Google::Cloud::Logging::V2::LogMetric object.
         attr_accessor :grpc
 
         ##
         # @private Create an empty Metric object.
         def initialize
           @service = nil
-          @grpc = Google::Logging::V2::LogMetric.new
+          @grpc = Google::Cloud::Logging::V2::LogMetric.new
         end
 
         ##

@@ -141,7 +141,7 @@ module Google
 
           ##
           # @private New Sink::List from a
-          # Google::Logging::V2::ListSinksResponse object.
+          # Google::Cloud::Logging::V2::ListSinksResponse object.
           def self.from_grpc grpc_list, service, max = nil
             sinks = new(Array(grpc_list.sinks).map do |grpc|
               Sink.from_grpc grpc, service

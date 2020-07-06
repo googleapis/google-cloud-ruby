@@ -68,7 +68,7 @@ module Google
         # @private Create an empty Sink object.
         def initialize
           @service = nil
-          @grpc = Google::Logging::V2::LogSink.new
+          @grpc = Google::Cloud::Logging::V2::LogSink.new
         end
 
         ##
@@ -275,7 +275,7 @@ module Google
         end
 
         ##
-        # @private New Sink from a Google::Logging::V2::LogSink object.
+        # @private New Sink from a Google::Cloud::Logging::V2::LogSink object.
         def self.from_grpc grpc, service
           new.tap do |f|
             f.grpc = grpc
