@@ -24,7 +24,9 @@ describe Google::Cloud::Debugger, :debugger do
     wait_until do
       trigger_breakpoint
 
-      response = @vtk_debugger_client.get_breakpoint(debuggee_id, breakpoint_id, @agent_version)
+      response = @vtk_debugger_client.get_breakpoint debuggee_id: debuggee_id,
+                                                     breakpoint_id: breakpoint_id,
+                                                     client_version: @agent_version
       breakpoint = response.breakpoint
 
       breakpoint.is_final_state

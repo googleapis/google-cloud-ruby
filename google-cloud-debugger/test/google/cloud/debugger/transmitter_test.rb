@@ -20,7 +20,7 @@ describe Google::Cloud::Debugger::Transmitter, :mock_debugger do
     let(:mocked_service) { Minitest::Mock.new }
 
     let(:breakpoint_hash) { random_breakpoint_hash }
-    let(:breakpoint_grpc) { Google::Devtools::Clouddebugger::V2::Breakpoint.new breakpoint_hash }
+    let(:breakpoint_grpc) { Google::Cloud::Debugger::V2::Breakpoint.new breakpoint_hash }
     let(:breakpoint) { Google::Cloud::Debugger::Breakpoint.from_grpc breakpoint_grpc }
 
     before do
@@ -37,7 +37,11 @@ describe Google::Cloud::Debugger::Transmitter, :mock_debugger do
     end
 
     it "submits a breakpoint to the API" do
-      mocked_service.expect :update_active_breakpoint, nil, ["", breakpoint_grpc, Hash]
+      expected_args = {
+        debuggee_id: "",
+        breakpoint: breakpoint_grpc
+      }
+      mocked_service.expect :update_active_breakpoint, nil, [expected_args]
 
       transmitter.start
       transmitter.submit breakpoint

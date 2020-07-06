@@ -68,13 +68,7 @@ task :acceptance, :project, :keyfile do |t, args|
   end
   # clear any env var already set
   require "google/cloud/debugger/credentials"
-  (Google::Cloud::Debugger::Credentials::PATH_ENV_VARS +
-   Google::Cloud::Debugger::Credentials::JSON_ENV_VARS).each do |path|
-    ENV[path] = nil
-  end
-  require "google/cloud/logging/credentials"
-  (Google::Cloud::Logging::Credentials::PATH_ENV_VARS +
-   Google::Cloud::Logging::Credentials::JSON_ENV_VARS).each do |path|
+  Google::Cloud::Debugger::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   # always overwrite when running tests

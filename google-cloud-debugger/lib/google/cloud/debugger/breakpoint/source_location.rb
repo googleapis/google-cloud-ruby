@@ -41,7 +41,7 @@ module Google
 
           ##
           # @private New Google::Cloud::Debugger::Breakpoint::SourceLocation
-          # from a Google::Devtools::Clouddebugger::V2::SourceLocation object.
+          # from a Google::Cloud::Debugger::V2::SourceLocation object.
           def self.from_grpc grpc
             return new if grpc.nil?
             new.tap do |o|
@@ -59,10 +59,10 @@ module Google
 
           ##
           # @private Exports the SourceLocation to a
-          # Google::Devtools::Clouddebugger::V2::SourceLocation object.
+          # Google::Cloud::Debugger::V2::SourceLocation object.
           def to_grpc
             return nil if empty?
-            Google::Devtools::Clouddebugger::V2::SourceLocation.new(
+            Google::Cloud::Debugger::V2::SourceLocation.new(
               path: path.to_s,
               line: line
             )

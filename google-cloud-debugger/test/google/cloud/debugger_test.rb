@@ -113,7 +113,6 @@ describe Google::Cloud do
     it "uses provided project_id and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be_nil
         "debugger-credentials"
       }
       stubbed_service_name = "utest-service"
@@ -123,7 +122,7 @@ describe Google::Cloud do
         _(credentials).must_equal "debugger-credentials"
         _(timeout).must_be_nil
         _(client_config).must_be_nil
-        _(host).must_be_nil
+        _(host).must_equal "clouddebugger.googleapis.com"
         OpenStruct.new project: project
       }
 
@@ -193,7 +192,6 @@ describe Google::Cloud do
     it "uses provided project_id, credentials, service_name, and service_version" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be_nil
         "debugger-credentials"
       }
       stubbed_service_name = "utest-service"
@@ -203,7 +201,7 @@ describe Google::Cloud do
         _(credentials).must_equal "debugger-credentials"
         _(timeout).must_be :nil?
         _(client_config).must_be :nil?
-        _(host).must_be :nil?
+        _(host).must_equal "clouddebugger.googleapis.com"
         OpenStruct.new project: project
       }
 
@@ -255,7 +253,6 @@ describe Google::Cloud do
     it "uses provided project (alias), keyfile (alias), service_name, and service_version" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be_nil
         "debugger-credentials"
       }
       stubbed_service_name = "utest-service"
@@ -265,7 +262,7 @@ describe Google::Cloud do
         _(credentials).must_equal "debugger-credentials"
         _(timeout).must_be :nil?
         _(client_config).must_be :nil?
-        _(host).must_be :nil?
+        _(host).must_equal "clouddebugger.googleapis.com"
         OpenStruct.new project: project
       }
 
@@ -291,7 +288,6 @@ describe Google::Cloud do
     it "gets project_id from credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be_nil
         OpenStruct.new project_id: "project-id"
       }
       stubbed_service_name = "utest-service"
@@ -302,7 +298,7 @@ describe Google::Cloud do
         _(credentials.project_id).must_equal "project-id"
         _(timeout).must_be_nil
         _(client_config).must_be_nil
-        _(host).must_be_nil
+        _(host).must_equal "clouddebugger.googleapis.com"
         OpenStruct.new project: project
       }
       empty_env = OpenStruct.new
@@ -334,11 +330,6 @@ describe Google::Cloud do
       creds
     end
     let(:found_credentials) { "{}" }
-    let :debugger_client_config do
-      {"interfaces"=>
-        {"google.debugger.v1.Debugger"=>
-          {"retry_codes"=>{"idempotent"=>["DEADLINE_EXCEEDED", "UNAVAILABLE"]}}}}
-    end
 
     after do
       Google::Cloud.configure.reset!
@@ -347,7 +338,6 @@ describe Google::Cloud do
     it "uses shared config for project and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
         "debugger-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
@@ -355,7 +345,7 @@ describe Google::Cloud do
         _(credentials).must_equal "debugger-credentials"
         _(timeout).must_be :nil?
         _(client_config).must_be :nil?
-        _(host).must_be :nil?
+        _(host).must_equal "clouddebugger.googleapis.com"
         OpenStruct.new project: project
       }
 
@@ -385,7 +375,6 @@ describe Google::Cloud do
     it "uses shared config for project_id and credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
         "debugger-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
@@ -393,7 +382,7 @@ describe Google::Cloud do
         _(credentials).must_equal "debugger-credentials"
         _(timeout).must_be :nil?
         _(client_config).must_be :nil?
-        _(host).must_be :nil?
+        _(host).must_equal "clouddebugger.googleapis.com"
         OpenStruct.new project: project
       }
 
@@ -423,14 +412,12 @@ describe Google::Cloud do
     it "uses debugger config for project and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
         "debugger-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "debugger-credentials"
         _(timeout).must_equal 42
-        _(client_config).must_equal debugger_client_config
         OpenStruct.new project: project
       }
 
@@ -441,7 +428,6 @@ describe Google::Cloud do
           config.project = "project-id"
           config.keyfile = "path/to/keyfile.json"
           config.timeout = 42
-          config.client_config = debugger_client_config
         end
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
@@ -461,11 +447,10 @@ describe Google::Cloud do
 
     it "uses debugger config for endpoint" do
       endpoint = "debugger-endpoint2.example.com"
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal default_credentials
         _(timeout).must_be :nil?
-        _(client_config).must_be :nil?
         _(host).must_equal endpoint
         OpenStruct.new project: project
       }
@@ -490,14 +475,12 @@ describe Google::Cloud do
     it "uses debugger config for project_id and credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
         "debugger-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "debugger-credentials"
         _(timeout).must_equal 42
-        _(client_config).must_equal debugger_client_config
         OpenStruct.new project: project
       }
 
@@ -508,7 +491,6 @@ describe Google::Cloud do
           config.project_id = "project-id"
           config.credentials = "path/to/keyfile.json"
           config.timeout = 42
-          config.client_config = debugger_client_config
         end
 
         File.stub :file?, true, ["path/to/keyfile.json"] do

@@ -23,8 +23,7 @@ describe Google::Cloud::Debugger::Breakpoint::VariableTable, :mock_debugger do
 
   describe ".from_grpc" do
     it "knows all the attributes" do
-      variable_grpc = Google::Devtools::Clouddebugger::V2::Variable.new \
-                        random_variable_integer_hash
+      variable_grpc = Google::Cloud::Debugger::V2::Variable.new random_variable_integer_hash
       variable = Google::Cloud::Debugger::Breakpoint::Variable.from_grpc variable_grpc
       var_table_grpc = [variable_grpc, variable_grpc]
 
@@ -41,8 +40,7 @@ describe Google::Cloud::Debugger::Breakpoint::VariableTable, :mock_debugger do
 
   describe ".to_grpc" do
     it "converts all the attributes" do
-      variable_grpc = Google::Devtools::Clouddebugger::V2::Variable.new \
-                        random_variable_integer_hash
+      variable_grpc = Google::Cloud::Debugger::V2::Variable.new random_variable_integer_hash
       variable = Google::Cloud::Debugger::Breakpoint::Variable.from_grpc variable_grpc
 
       var_table.add variable

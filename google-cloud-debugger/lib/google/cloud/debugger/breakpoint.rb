@@ -30,7 +30,7 @@ module Google
       #
       # Abstract class that represents a breakpoint, which can be set and
       # triggered in a debuggee application. Maps to gRPC struct
-      # {Google::Devtools::Clouddebugger::V2::Breakpoint}.
+      # {Google::Cloud::Debugger::V2::Breakpoint}.
       #
       class Breakpoint
         include MonitorMixin
@@ -174,7 +174,7 @@ module Google
 
         ##
         # @private New Google::Cloud::Debugger::Breakpoint
-        # from a Google::Devtools::Clouddebugger::V2::Breakpoint object.
+        # from a Google::Cloud::Debugger::V2::Breakpoint object.
         def self.from_grpc grpc
           return new if grpc.nil?
 
@@ -337,9 +337,9 @@ module Google
 
         ##
         # @private Exports the Breakpoint to a
-        # Google::Devtools::Clouddebugger::V2::Breakpoint object.
+        # Google::Cloud::Debugger::V2::Breakpoint object.
         def to_grpc
-          Google::Devtools::Clouddebugger::V2::Breakpoint.new(
+          Google::Cloud::Debugger::V2::Breakpoint.new(
             id: id.to_s,
             location: location.to_grpc,
             condition: condition.to_s,
@@ -398,7 +398,7 @@ module Google
 
         ##
         # @private Formats the labels so they can be saved to a
-        # Google::Devtools::Clouddebugger::V2::Breakpoint object.
+        # Google::Cloud::Debugger::V2::Breakpoint object.
         def labels_to_grpc
           # Coerce symbols to strings
           Hash[labels.map do |k, v|
@@ -408,21 +408,21 @@ module Google
 
         ##
         # @private Exports the Breakpoint stack_frames to an array of
-        # Google::Devtools::Clouddebugger::V2::StackFrame objects.
+        # Google::Cloud::Debugger::V2::StackFrame objects.
         def stack_frames_to_grpc
           stack_frames.nil? ? [] : stack_frames.map(&:to_grpc)
         end
 
         ##
         # @private Exports the Breakpoint stack_frames to an array of
-        # Google::Devtools::Clouddebugger::V2::Variable objects.
+        # Google::Cloud::Debugger::V2::Variable objects.
         def evaluated_expressions_to_grpc
           evaluated_expressions.nil? ? [] : evaluated_expressions.map(&:to_grpc)
         end
 
         ##
         # @private Exports Breakpoint status to
-        # Google::Devtools::Clouddebugger::V2::StatusMessage object
+        # Google::Cloud::Debugger::V2::StatusMessage object
         def status_to_grpc
           status.nil? ? nil : status.to_grpc
         end

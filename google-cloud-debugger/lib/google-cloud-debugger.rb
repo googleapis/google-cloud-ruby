@@ -160,6 +160,13 @@ Google::Cloud.configure.add_config! :debugger do |config|
   default_version = Google::Cloud::Config.deferred do
     ENV["DEBUGGER_SERVICE_VERSION"]
   end
+  default_scopes = [
+    "https://www.googleapis.com/auth/cloud-platform",
+    "https://www.googleapis.com/auth/cloud_debugger",
+    "https://www.googleapis.com/auth/logging.admin",
+    "https://www.googleapis.com/auth/logging.read",
+    "https://www.googleapis.com/auth/logging.write"
+  ]
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
@@ -173,10 +180,10 @@ Google::Cloud.configure.add_config! :debugger do |config|
                     match: String, allow_nil: true
   config.add_field! :app_root, nil, match: String
   config.add_field! :root, nil, match: String
-  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :scope, default_scopes, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :client_config, nil, match: Hash
-  config.add_field! :endpoint, nil, match: String
+  config.add_field! :endpoint, "clouddebugger.googleapis.com", match: String
   config.add_field! :allow_mutating_methods, false
   config.add_field! :evaluation_time_limit, 0.05, match: Numeric
   config.add_field! :on_error, nil, match: Proc

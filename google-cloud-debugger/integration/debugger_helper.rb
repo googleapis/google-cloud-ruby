@@ -21,7 +21,7 @@ require "json"
 require "google/cloud/debugger"
 require_relative "../../integration/helper"
 
-$vtk_debugger_client = Google::Cloud::Debugger::V2::Debugger2Client.new
+$vtk_debugger_client = Google::Cloud::Debugger::V2::Debugger::Client.new
 
 module Integration
   class DebuggerTest < Minitest::Test
@@ -51,7 +51,7 @@ module Integration
         "expressions" => ["local_var"]
       }
 
-      Google::Devtools::Clouddebugger::V2::Breakpoint.new breakpoint_hash
+      Google::Cloud::Debugger::V2::Breakpoint.new breakpoint_hash
     end
 
     ##
@@ -72,7 +72,7 @@ module Integration
         "expressions" => ["local_var"]
       }
 
-      Google::Devtools::Clouddebugger::V2::Breakpoint.new breakpoint_hash
+      Google::Cloud::Debugger::V2::Breakpoint.new breakpoint_hash
     end
 
     ##
@@ -80,7 +80,9 @@ module Integration
     def set_test_snappoint debuggee_id, agent_version, file_path, line
       breakpoint = sample_snappoint file_path, line
 
-      response = @vtk_debugger_client.set_breakpoint debuggee_id, breakpoint, agent_version
+      response = @vtk_debugger_client.set_breakpoint debuggee_id: debuggee_id,
+                                                     breakpoint: breakpoint,
+                                                     client_version: agent_version
       response.breakpoint.id
     end
 
@@ -89,7 +91,9 @@ module Integration
     def set_test_logpoint debuggee_id, agent_version, file_path, line, token
       breakpoint = sample_logpoint file_path, line, token
 
-      response = @vtk_debugger_client.set_breakpoint debuggee_id, breakpoint, agent_version
+      response = @vtk_debugger_client.set_breakpoint debuggee_id: debuggee_id,
+                                                     breakpoint: breakpoint,
+                                                     client_version: agent_version
       response.breakpoint.id
     end
 

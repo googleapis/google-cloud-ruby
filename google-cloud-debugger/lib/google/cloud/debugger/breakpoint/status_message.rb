@@ -50,7 +50,7 @@ module Google
 
           ##
           # New Google::Cloud::Debugger::Breakpoint::StatusMessage
-          # from a Google::Devtools::Clouddebugger::V2::StatusMessage object.
+          # from a Google::Cloud::Debugger::V2::StatusMessage object.
           def self.from_grpc grpc
             return nil if grpc.nil?
             new.tap do |s|
@@ -76,14 +76,12 @@ module Google
 
           ##
           # Exports the StatusMessage to a
-          # Google::Devtools::Clouddebugger::V2::StatusMessage object.
+          # Google::Cloud::Debugger::V2::StatusMessage object.
           def to_grpc
             return nil if empty?
-            description_grpc =
-              Google::Devtools::Clouddebugger::V2::FormatMessage.new \
-                format: description.to_s
+            description_grpc = Google::Cloud::Debugger::V2::FormatMessage.new format: description.to_s
 
-            Google::Devtools::Clouddebugger::V2::StatusMessage.new \
+            Google::Cloud::Debugger::V2::StatusMessage.new \
               is_error: true,
               refers_to: refers_to,
               description: description_grpc

@@ -27,7 +27,7 @@ describe Google::Cloud::Debugger::Breakpoint::StatusMessage, :mock_debugger do
     }
   end
   let(:status_message_grpc) {
-    Google::Devtools::Clouddebugger::V2::StatusMessage.new status_message_hash
+    Google::Cloud::Debugger::V2::StatusMessage.new status_message_hash
   }
   let(:status_message) {
     Google::Cloud::Debugger::Breakpoint::StatusMessage.from_grpc status_message_grpc
@@ -45,7 +45,7 @@ describe Google::Cloud::Debugger::Breakpoint::StatusMessage, :mock_debugger do
     it "exports all of the content" do
       grpc = status_message.to_grpc
 
-      _(grpc).must_be_kind_of Google::Devtools::Clouddebugger::V2::StatusMessage
+      _(grpc).must_be_kind_of Google::Cloud::Debugger::V2::StatusMessage
       _(grpc.is_error).must_equal true
       _(grpc.refers_to).must_equal :UNSPECIFIED
       _(grpc.description.format).must_equal "test error message"

@@ -147,12 +147,9 @@ For further information on the Debugger API, see
 ```ruby
 require "google/cloud/debugger/v2"
 
-Controller2Client = Google::Cloud::Debugger::V2::Controller2Client
-Debuggee = Google::Devtools::Clouddebugger::V2::Debuggee
-
-controller2_client = Controller2Client.new
-debuggee = Debuggee.new
-response = controller2_client.register_debuggee(debuggee)
+controller_client = Google::Cloud::Debugger::V2::Controller::Client.new
+debuggee = Google::Cloud::Debugger::V2::Debuggee.new
+response = controller_client.register_debuggee debuggee: debuggee
 debuggee_id = response.debuggee.id
 ```
 See [Stackdriver Debugger Debuggee
@@ -163,22 +160,17 @@ Upon successful registration, the response debuggee object will contain a
 debuggee_id that's later needed to interact with the other Stackdriver Debugger
 API.
 
-See {Google::Cloud::Debugger::V2::Controller2Client} for details.
-
 ### List Active Breakpoints
 
 ```ruby
 require "google/cloud/debugger/v2"
 
-Controller2Client = Google::Cloud::Debugger::V2::Controller2Client
-controller2_client = Controller2Client.new
+controller_client = Google::Cloud::Debugger::V2::Controller::Client.new
 
 debuggee_id = ''
-response = controller2_client.list_active_breakpoints(debuggee_id)
+response = controller_client.list_active_breakpoints debuggee_id: debuggee_id
 breakpoints = response.breakpoints
 ```
-
-See {Google::Cloud::Debugger::V2::Controller2Client} for details.
 
 ### Update Active Breakpoint
 
@@ -187,109 +179,86 @@ Users can send custom snapshots for active breakpoints using this API.
 ```ruby
 require "google/cloud/debugger/v2"
 
-Breakpoint = Google::Devtools::Clouddebugger::V2::Breakpoint
-Controller2Client = Google::Cloud::Debugger::V2::Controller2Client
-
-controller2_client = Controller2Client.new
+controller_client = Google::Cloud::Debugger::V2::Controller::Client.new
 debuggee_id = ''
-breakpoint = Breakpoint.new
-response =
-  controller2_client.update_active_breakpoint(debuggee_id, breakpoint)
+breakpoint = Google::Cloud::Debugger::V2::Breakpoint.new
+response = controller_client.update_active_breakpoint(
+  debuggee_id: debuggee_id, breakpoint: breakpoint)
 ```
 
 See [Stackdriver Debugger Breakpoint
 doc](https://cloud.google.com/debugger/api/reference/rpc/google.devtools.clouddebugger.v2#google.devtools.clouddebugger.v2.Breakpoint)
 for all available fields for breakpoint.
 
-See {Google::Cloud::Debugger::V2::Controller2Client} for details.
-
 ### Set Breakpoint
 
 ```ruby
 require "google/cloud/debugger/v2"
 
-Breakpoint = Google::Devtools::Clouddebugger::V2::Breakpoint
-Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
-
-debugger2_client = Debugger2Client.new
+debugger_client = Google::Cloud::Debugger::V2::Debugger::Client.new
 debuggee_id = ''
-breakpoint = Breakpoint.new
+breakpoint = Google::Cloud::Debugger::V2::Breakpoint.new
 client_version = ''
-response = debugger2_client.set_breakpoint(
-             debuggee_id, breakpoint, client_version)
+response = debugger_client.set_breakpoint(
+  debuggee_id: debuggee_id, breakpoint: breakpoint,
+  client_version: client_version)
 ```
 
 See [Stackdriver Debugger Breakpoint
 doc](https://cloud.google.com/debugger/api/reference/rpc/google.devtools.clouddebugger.v2#google.devtools.clouddebugger.v2.Breakpoint)
 for fields needed to specify breakpoint location.
 
-See {Google::Cloud::Debugger::V2::Debugger2Client} for details.
-
 ### Get Breakpoint
 
 ```ruby
 require "google/cloud/debugger/v2"
 
-Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
-
-debugger2_client = Debugger2Client.new
+debugger_client = Google::Cloud::Debugger::V2::Debugger::Client.new
 debuggee_id = ''
 breakpoint_id = ''
 client_version = ''
-response = debugger2_client.get_breakpoint(
-             debuggee_id, breakpoint_id, client_version)
+response = debugger_client.get_breakpoint(
+  debuggee_id: debuggee_id, breakpoint_id: breakpoint_id,
+  client_version: client_version)
 ```
-
-See {Google::Cloud::Debugger::V2::Debugger2Client} for details.
 
 ### Delete Breakpoint
 
 ```ruby
 require "google/cloud/debugger/v2"
 
-Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
-
-debugger2_client = Debugger2Client.new
+debugger_client = Google::Cloud::Debugger::V2::Debugger::Client.new
 debuggee_id = ''
 breakpoint_id = ''
 client_version = ''
-debugger2_client.delete_breakpoint(
-  debuggee_id, breakpoint_id, client_version)
+debugger_client.delete_breakpoint(
+  debuggee_id: debuggee_id, breakpoint_id: breakpoint_id,
+  client_version: client_version)
 ```
-
-See {Google::Cloud::Debugger::V2::Debugger2Client} for details.
 
 ### List Breakpoints
 
 ```ruby
 require "google/cloud/debugger/v2"
 
-Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
-
-Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
-
-debugger2_client = Debugger2Client.new
+debugger_client = Google::Cloud::Debugger::V2::Debugger::Client.new
 debuggee_id = ''
 client_version = ''
-response = debugger2_client.list_breakpoints(debuggee_id, client_version)
+response = debugger_client.list_breakpoints(
+  debuggee_id: debuggee_id, client_version: client_version)
 ```
-
-See {Google::Cloud::Debugger::V2::Debugger2Client} for details.
 
 ### List Debuggees
 
 ```ruby
 require "google/cloud/debugger/v2"
 
-Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
-
-debugger2_client = Debugger2Client.new
+debugger_client = Google::Cloud::Debugger::V2::Debugger::Client.new
 project = ''
 client_version = ''
-response = debugger2_client.list_debuggees(project, client_version)
+response = debugger_client.list_debuggees(
+  project: project, client_version: client_version)
 ```
-
-See {Google::Cloud::Debugger::V2::Debugger2Client} for details.
 
 ## Additional information
 
