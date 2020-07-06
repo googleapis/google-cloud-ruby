@@ -44,7 +44,7 @@ class Kokoro < Command
         # TODO: Remove date requirement
         require "date"
         next unless Date.today > Date.new(2020, 6, 15)
-        local_docs_test if should_link_check? gem || (
+        local_docs_test gem if should_link_check? gem || (
           autorelease_pending? && @should_release
         )
       end
@@ -60,7 +60,7 @@ class Kokoro < Command
         header "Gem Unchanged - Skipping Acceptance"
         run "bundle exec rake ci", 3600
       end
-      local_docs_test if should_link_check?
+      local_docs_test @gem if should_link_check?
     end
     release_please if @should_release && @updated
   end
@@ -129,7 +129,7 @@ class Kokoro < Command
     all_broken_links = {}
     @gems.each do |gem|
       run_ci gem, true do
-        broken_links = local_docs_test
+        broken_links = local_docs_test gem
         all_broken_links[gem] = broken_links unless broken_links.empty?
       end
     end
@@ -142,7 +142,7 @@ class Kokoro < Command
 
   def one_local_docs_test gem
     run_ci gem, true do
-      local_docs_test
+      local_docs_test gem
     end
   end
 
@@ -169,9 +169,9 @@ class Kokoro < Command
     broken_links
   end
 
-  def local_docs_test
+  def local_docs_test gem
     run "bundle exec rake yard"
-    broken_links = check_links ["doc"], ".", " -r"
+    broken_links = check_links ["doc"], ".", " -r --skip '^https://googleapis.dev/ruby/#{gem}/latest'"
     puts_broken_links broken_links
     broken_links["doc"]
   end
