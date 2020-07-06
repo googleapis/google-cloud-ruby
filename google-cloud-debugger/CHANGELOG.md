@@ -1,5 +1,11 @@
 # Release History
 
+### 0.36.3 / 2020-07-06
+
+#### Bug Fixes
+
+* Fix segfaults on Ruby 2.7
+
 ### 0.36.2 / 2020-05-28
 
 #### Documentation
