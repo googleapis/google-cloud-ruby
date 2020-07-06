@@ -89,7 +89,7 @@ module Google
           ##
           # @private Predefined regex. Saves time during runtime.
           FUNC_CALL_FLAG_BLACKLIST_REGEX =
-            /<callinfo!.+#{FUNC_CALL_FLAG_BLACKLIST.join '|'}/.freeze
+            /<call(info|data)!.+#{FUNC_CALL_FLAG_BLACKLIST.join '|'}/.freeze
 
           ##
           # @private Predefined regex. Saves time during runtime.
