@@ -232,7 +232,7 @@ module Google
           # Creates a new span.
           #
           # @param name [String]
-          #   The resource name of the span in the following format:
+          #   Required. The resource name of the span in the following format:
           #
           #       projects/[PROJECT_ID]/traces/[TRACE_ID]/spans/[SPAN_ID]
           #
@@ -242,9 +242,9 @@ module Google
           #   [SPAN_ID] is a unique identifier for a span within a trace; it
           #   is a 16-character hexadecimal encoding of an 8-byte array.
           # @param span_id [String]
-          #   The [SPAN_ID] portion of the span's resource name.
+          #   Required. The [SPAN_ID] portion of the span's resource name.
           # @param display_name [Google::Devtools::Cloudtrace::V2::TruncatableString | Hash]
-          #   A description of the span's operation (up to 128 bytes).
+          #   Required. A description of the span's operation (up to 128 bytes).
           #   Stackdriver Trace displays the description in the
           #   Google Cloud Platform Console.
           #   For example, the display name can be a qualified method name or a file name
@@ -254,13 +254,13 @@ module Google
           #   A hash of the same form as `Google::Devtools::Cloudtrace::V2::TruncatableString`
           #   can also be provided.
           # @param start_time [Google::Protobuf::Timestamp | Hash]
-          #   The start time of the span. On the client side, this is the time kept by
+          #   Required. The start time of the span. On the client side, this is the time kept by
           #   the local machine where the span execution starts. On the server side, this
           #   is the time when the server's application handler starts running.
           #   A hash of the same form as `Google::Protobuf::Timestamp`
           #   can also be provided.
           # @param end_time [Google::Protobuf::Timestamp | Hash]
-          #   The end time of the span. On the client side, this is the time kept by
+          #   Required. The end time of the span. On the client side, this is the time kept by
           #   the local machine where the span execution ends. On the server side, this
           #   is the time when the server application handler stops running.
           #   A hash of the same form as `Google::Protobuf::Timestamp`
@@ -302,6 +302,10 @@ module Google
           #   was active. If set, allows implementation to detect missing child spans.
           #   A hash of the same form as `Google::Protobuf::Int32Value`
           #   can also be provided.
+          # @param span_kind [Google::Devtools::Cloudtrace::V2::Span::SpanKind]
+          #   Optional. Distinguishes between spans generated in a particular context. For example,
+          #   two spans with the same name may be distinguished using `CLIENT` (caller)
+          #   and `SERVER` (callee) to identify an RPC call.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -343,6 +347,7 @@ module Google
               status: nil,
               same_process_as_parent_span: nil,
               child_span_count: nil,
+              span_kind: nil,
               options: nil,
               &block
             req = {
@@ -358,7 +363,8 @@ module Google
               links: links,
               status: status,
               same_process_as_parent_span: same_process_as_parent_span,
-              child_span_count: child_span_count
+              child_span_count: child_span_count,
+              span_kind: span_kind
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Devtools::Cloudtrace::V2::Span)
             @create_span.call(req, options, &block)
