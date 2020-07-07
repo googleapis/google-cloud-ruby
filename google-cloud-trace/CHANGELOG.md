@@ -1,5 +1,11 @@
 # Release History
 
+### 0.39.0 / 2020-07-07
+
+#### Features
+
+* Added support for span kind in the low-level V2 API
+
 ### 0.38.3 / 2020-05-28
 
 #### Documentation
