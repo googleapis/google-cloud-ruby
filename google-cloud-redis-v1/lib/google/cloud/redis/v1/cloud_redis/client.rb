@@ -87,6 +87,8 @@ module Google
 
                 default_config.rpcs.update_instance.timeout = 600.0
 
+                default_config.rpcs.upgrade_instance.timeout = 600.0
+
                 default_config.rpcs.import_instance.timeout = 600.0
 
                 default_config.rpcs.export_instance.timeout = 600.0
@@ -506,6 +508,78 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_redis_stub.call_rpc :update_instance, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Upgrades Redis instance to the newer Redis version specified in the
+            # request.
+            #
+            # @overload upgrade_instance(request, options = nil)
+            #   Pass arguments to `upgrade_instance` via a request object, either of type
+            #   {::Google::Cloud::Redis::V1::UpgradeInstanceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Redis::V1::UpgradeInstanceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload upgrade_instance(name: nil, redis_version: nil)
+            #   Pass arguments to `upgrade_instance` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Redis instance resource name using the form:
+            #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+            #     where `location_id` refers to a GCP region.
+            #   @param redis_version [::String]
+            #     Required. Specifies the target version of Redis software to upgrade to.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def upgrade_instance request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::V1::UpgradeInstanceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.upgrade_instance.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Redis::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.upgrade_instance.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.upgrade_instance.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_redis_stub.call_rpc :upgrade_instance, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -968,6 +1042,11 @@ module Google
                 #
                 attr_reader :update_instance
                 ##
+                # RPC-specific configuration for `upgrade_instance`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :upgrade_instance
+                ##
                 # RPC-specific configuration for `import_instance`
                 # @return [::Gapic::Config::Method]
                 #
@@ -998,6 +1077,8 @@ module Google
                   @create_instance = ::Gapic::Config::Method.new create_instance_config
                   update_instance_config = parent_rpcs&.update_instance if parent_rpcs&.respond_to? :update_instance
                   @update_instance = ::Gapic::Config::Method.new update_instance_config
+                  upgrade_instance_config = parent_rpcs&.upgrade_instance if parent_rpcs&.respond_to? :upgrade_instance
+                  @upgrade_instance = ::Gapic::Config::Method.new upgrade_instance_config
                   import_instance_config = parent_rpcs&.import_instance if parent_rpcs&.respond_to? :import_instance
                   @import_instance = ::Gapic::Config::Method.new import_instance_config
                   export_instance_config = parent_rpcs&.export_instance if parent_rpcs&.respond_to? :export_instance

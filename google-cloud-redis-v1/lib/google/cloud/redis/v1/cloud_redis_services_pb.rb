@@ -78,6 +78,9 @@ module Google
             # in the response field. The returned operation is automatically deleted
             # after a few hours, so there is no need to call DeleteOperation.
             rpc :UpdateInstance, UpdateInstanceRequest, Google::Longrunning::Operation
+            # Upgrades Redis instance to the newer Redis version specified in the
+            # request.
+            rpc :UpgradeInstance, UpgradeInstanceRequest, Google::Longrunning::Operation
             # Import a Redis RDB snapshot file from Cloud Storage into a Redis instance.
             #
             # Redis may stop serving during this operation. Instance state will be

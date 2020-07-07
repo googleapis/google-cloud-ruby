@@ -133,9 +133,8 @@ module Google
         #     operation.
         # @!attribute [rw] connect_mode
         #   @return [::Google::Cloud::Redis::V1::Instance::ConnectMode]
-        #     Optional. The connect mode of Redis instance.
-        #     If not provided, default one will be used.
-        #     Current default: DIRECT_PEERING.
+        #     Optional. The network connect mode of the Redis instance.
+        #     If not provided, the connect mode defaults to DIRECT_PEERING.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -207,11 +206,12 @@ module Google
             # Not set.
             CONNECT_MODE_UNSPECIFIED = 0
 
-            # Connect via directly peering with memorystore redis hosted service.
+            # Connect via direct peering to the Memorystore for Redis hosted service.
             DIRECT_PEERING = 1
 
-            # Connect with google via private service access and share connection
-            # across google managed services.
+            # Connect your Memorystore for Redis instance using Private Service
+            # Access. Private services access provides an IP address range for multiple
+            # Google Cloud services, including Memorystore.
             PRIVATE_SERVICE_ACCESS = 2
           end
         end
@@ -316,6 +316,20 @@ module Google
         #     Required. Update description.
         #     Only fields specified in update_mask are updated.
         class UpdateInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for {::Google::Cloud::Redis::V1::CloudRedis::Client#upgrade_instance UpgradeInstance}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Redis instance resource name using the form:
+        #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+        #     where `location_id` refers to a GCP region.
+        # @!attribute [rw] redis_version
+        #   @return [::String]
+        #     Required. Specifies the target version of Redis software to upgrade to.
+        class UpgradeInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
