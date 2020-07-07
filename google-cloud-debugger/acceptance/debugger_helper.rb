@@ -122,7 +122,7 @@ module Acceptance
 
       breakpoint = sample_snappoint
 
-      response = @vtk_debugger_client.set_breakpoint debugger_id: debuggee_id,
+      response = @vtk_debugger_client.set_breakpoint debuggee_id: debuggee_id,
                                                      breakpoint: breakpoint,
                                                      client_version: @agent_version
       response.breakpoint.id
@@ -140,7 +140,7 @@ module Acceptance
 
       breakpoint = sample_logpoint token
 
-      response = @vtk_debugger_client.set_breakpoint debugger_id: debuggee_id,
+      response = @vtk_debugger_client.set_breakpoint debuggee_id: debuggee_id,
                                                      breakpoint: breakpoint,
                                                      client_version: @agent_version
       response.breakpoint.id
