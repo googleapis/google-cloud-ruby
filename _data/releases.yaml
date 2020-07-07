@@ -1227,6 +1227,8 @@ google-cloud-trace:
 - v0.23.0
 - v0.22.0
 - v0.21.0
+google-cloud-trace-v2:
+- v0.1.0
 google-cloud-translate:
 - v3.0.1
 - v3.0.0
