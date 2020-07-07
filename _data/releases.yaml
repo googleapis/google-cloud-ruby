@@ -519,6 +519,8 @@ google-cloud-error_reporting:
 - v0.21.2
 - v0.21.1
 - v0.21.0
+google-cloud-error_reporting-v1beta1:
+- v0.1.0
 google-cloud-errors:
 - v1.0.1
 - v1.0.0
