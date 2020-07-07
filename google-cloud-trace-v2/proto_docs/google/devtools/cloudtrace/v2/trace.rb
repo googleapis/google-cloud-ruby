@@ -29,7 +29,7 @@ module Google
         # gaps or overlaps between spans in a trace.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name of the span in the following format:
+        #     Required. The resource name of the span in the following format:
         #
         #         projects/[PROJECT_ID]/traces/[TRACE_ID]/spans/[SPAN_ID]
         #
@@ -40,14 +40,14 @@ module Google
         #     is a 16-character hexadecimal encoding of an 8-byte array.
         # @!attribute [rw] span_id
         #   @return [::String]
-        #     The [SPAN_ID] portion of the span's resource name.
+        #     Required. The [SPAN_ID] portion of the span's resource name.
         # @!attribute [rw] parent_span_id
         #   @return [::String]
         #     The [SPAN_ID] of this span's parent span. If this is a root span,
         #     then this field must be empty.
         # @!attribute [rw] display_name
         #   @return [::Google::Cloud::Trace::V2::TruncatableString]
-        #     A description of the span's operation (up to 128 bytes).
+        #     Required. A description of the span's operation (up to 128 bytes).
         #     Stackdriver Trace displays the description in the
         #     Google Cloud Platform Console.
         #     For example, the display name can be a qualified method name or a file name
@@ -56,12 +56,12 @@ module Google
         #     This makes it easier to correlate spans in different traces.
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The start time of the span. On the client side, this is the time kept by
+        #     Required. The start time of the span. On the client side, this is the time kept by
         #     the local machine where the span execution starts. On the server side, this
         #     is the time when the server's application handler starts running.
         # @!attribute [rw] end_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The end time of the span. On the client side, this is the time kept by
+        #     Required. The end time of the span. On the client side, this is the time kept by
         #     the local machine where the span execution ends. On the server side, this
         #     is the time when the server application handler stops running.
         # @!attribute [rw] attributes
@@ -91,6 +91,11 @@ module Google
         #   @return [::Google::Protobuf::Int32Value]
         #     Optional. The number of child spans that were generated while this span
         #     was active. If set, allows implementation to detect missing child spans.
+        # @!attribute [rw] span_kind
+        #   @return [::Google::Cloud::Trace::V2::Span::SpanKind]
+        #     Optional. Distinguishes between spans generated in a particular context. For example,
+        #     two spans with the same name may be distinguished using `CLIENT` (caller)
+        #     and `SERVER` (callee) to identify an RPC call.
         class Span
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -102,10 +107,9 @@ module Google
           #     long. The value can be a string up to 256 bytes, a signed 64-bit integer,
           #     or the Boolean values `true` and `false`. For example:
           #
-          #         "/instance_id": "my-instance"
-          #         "/http/user_agent": ""
-          #         "/http/request_bytes": 300
-          #         "abc.com/myattribute": true
+          #         "/instance_id": { "string_value": { "value": "my-instance" } }
+          #         "/http/request_bytes": { "int_value": 300 }
+          #         "abc.com/myattribute": { "bool_value": false }
           # @!attribute [rw] dropped_attributes_count
           #   @return [::Integer]
           #     The number of attributes that were discarded. Attributes can be discarded
@@ -254,6 +258,37 @@ module Google
           class Links
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Type of span. Can be used to specify additional relationships between spans
+          # in addition to a parent/child relationship.
+          module SpanKind
+            # Unspecified. Do NOT use as default.
+            # Implementations MAY assume SpanKind.INTERNAL to be default.
+            SPAN_KIND_UNSPECIFIED = 0
+
+            # Indicates that the span is used internally. Default value.
+            INTERNAL = 1
+
+            # Indicates that the span covers server-side handling of an RPC or other
+            # remote network request.
+            SERVER = 2
+
+            # Indicates that the span covers the client-side wrapper around an RPC or
+            # other remote request.
+            CLIENT = 3
+
+            # Indicates that the span describes producer sending a message to a broker.
+            # Unlike client and  server, there is no direct critical path latency
+            # relationship between producer and consumer spans (e.g. publishing a
+            # message to a pubsub service).
+            PRODUCER = 4
+
+            # Indicates that the span describes consumer receiving a message from a
+            # broker. Unlike client and  server, there is no direct critical path
+            # latency relationship between producer and consumer spans (e.g. receiving
+            # a message from a pubsub service subscription).
+            CONSUMER = 5
           end
         end
 

@@ -242,13 +242,13 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_span(name: nil, span_id: nil, parent_span_id: nil, display_name: nil, start_time: nil, end_time: nil, attributes: nil, stack_trace: nil, time_events: nil, links: nil, status: nil, same_process_as_parent_span: nil, child_span_count: nil)
+            # @overload create_span(name: nil, span_id: nil, parent_span_id: nil, display_name: nil, start_time: nil, end_time: nil, attributes: nil, stack_trace: nil, time_events: nil, links: nil, status: nil, same_process_as_parent_span: nil, child_span_count: nil, span_kind: nil)
             #   Pass arguments to `create_span` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     The resource name of the span in the following format:
+            #     Required. The resource name of the span in the following format:
             #
             #         projects/[PROJECT_ID]/traces/[TRACE_ID]/spans/[SPAN_ID]
             #
@@ -258,12 +258,12 @@ module Google
             #     [SPAN_ID] is a unique identifier for a span within a trace; it
             #     is a 16-character hexadecimal encoding of an 8-byte array.
             #   @param span_id [::String]
-            #     The [SPAN_ID] portion of the span's resource name.
+            #     Required. The [SPAN_ID] portion of the span's resource name.
             #   @param parent_span_id [::String]
             #     The [SPAN_ID] of this span's parent span. If this is a root span,
             #     then this field must be empty.
             #   @param display_name [::Google::Cloud::Trace::V2::TruncatableString, ::Hash]
-            #     A description of the span's operation (up to 128 bytes).
+            #     Required. A description of the span's operation (up to 128 bytes).
             #     Stackdriver Trace displays the description in the
             #     Google Cloud Platform Console.
             #     For example, the display name can be a qualified method name or a file name
@@ -271,11 +271,11 @@ module Google
             #     the same display name within an application and at the same call point.
             #     This makes it easier to correlate spans in different traces.
             #   @param start_time [::Google::Protobuf::Timestamp, ::Hash]
-            #     The start time of the span. On the client side, this is the time kept by
+            #     Required. The start time of the span. On the client side, this is the time kept by
             #     the local machine where the span execution starts. On the server side, this
             #     is the time when the server's application handler starts running.
             #   @param end_time [::Google::Protobuf::Timestamp, ::Hash]
-            #     The end time of the span. On the client side, this is the time kept by
+            #     Required. The end time of the span. On the client side, this is the time kept by
             #     the local machine where the span execution ends. On the server side, this
             #     is the time when the server application handler stops running.
             #   @param attributes [::Google::Cloud::Trace::V2::Span::Attributes, ::Hash]
@@ -298,6 +298,10 @@ module Google
             #   @param child_span_count [::Google::Protobuf::Int32Value, ::Hash]
             #     Optional. The number of child spans that were generated while this span
             #     was active. If set, allows implementation to detect missing child spans.
+            #   @param span_kind [::Google::Cloud::Trace::V2::Span::SpanKind]
+            #     Optional. Distinguishes between spans generated in a particular context. For example,
+            #     two spans with the same name may be distinguished using `CLIENT` (caller)
+            #     and `SERVER` (callee) to identify an RPC call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Trace::V2::Span]
