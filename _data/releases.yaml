@@ -673,6 +673,8 @@ google-cloud-logging:
 - v0.21.0
 - v0.20.1
 - v0.20.0
+google-cloud-logging-v2:
+- v0.1.0
 google-cloud-memcache-v1beta2:
 - v0.1.1
 google-cloud-monitoring:
