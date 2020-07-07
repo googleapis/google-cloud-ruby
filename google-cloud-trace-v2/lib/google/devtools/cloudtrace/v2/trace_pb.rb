@@ -3,12 +3,12 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
 require 'google/rpc/status_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/devtools/cloudtrace/v2/trace.proto", :syntax => :proto3) do
     add_message "google.devtools.cloudtrace.v2.Span" do
@@ -25,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :status, :message, 11, "google.rpc.Status"
       optional :same_process_as_parent_span, :message, 12, "google.protobuf.BoolValue"
       optional :child_span_count, :message, 13, "google.protobuf.Int32Value"
+      optional :span_kind, :enum, 14, "google.devtools.cloudtrace.v2.Span.SpanKind"
     end
     add_message "google.devtools.cloudtrace.v2.Span.Attributes" do
       map :attribute_map, :string, :message, 1, "google.devtools.cloudtrace.v2.AttributeValue"
@@ -71,6 +72,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.devtools.cloudtrace.v2.Span.Links" do
       repeated :link, :message, 1, "google.devtools.cloudtrace.v2.Span.Link"
       optional :dropped_links_count, :int32, 2
+    end
+    add_enum "google.devtools.cloudtrace.v2.Span.SpanKind" do
+      value :SPAN_KIND_UNSPECIFIED, 0
+      value :INTERNAL, 1
+      value :SERVER, 2
+      value :CLIENT, 3
+      value :PRODUCER, 4
+      value :CONSUMER, 5
     end
     add_message "google.devtools.cloudtrace.v2.AttributeValue" do
       oneof :value do
@@ -121,6 +130,7 @@ module Google
         Span::Link = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.Link").msgclass
         Span::Link::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.Link.Type").enummodule
         Span::Links = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.Links").msgclass
+        Span::SpanKind = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.Span.SpanKind").enummodule
         AttributeValue = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.AttributeValue").msgclass
         StackTrace = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.StackTrace").msgclass
         StackTrace::StackFrame = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudtrace.v2.StackTrace.StackFrame").msgclass

@@ -128,6 +128,7 @@ class ::Google::Cloud::Trace::V2::TraceService::ClientTest < Minitest::Test
     status = {}
     same_process_as_parent_span = {}
     child_span_count = {}
+    span_kind = :SPAN_KIND_UNSPECIFIED
 
     create_span_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_span, name
@@ -145,6 +146,7 @@ class ::Google::Cloud::Trace::V2::TraceService::ClientTest < Minitest::Test
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Rpc::Status), request.status
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::BoolValue), request.same_process_as_parent_span
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int32Value), request.child_span_count
+      assert_equal :SPAN_KIND_UNSPECIFIED, request.span_kind
       refute_nil options
     end
 
@@ -155,31 +157,31 @@ class ::Google::Cloud::Trace::V2::TraceService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.create_span({ name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count }) do |response, operation|
+      client.create_span({ name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_span name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count do |response, operation|
+      client.create_span name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_span ::Google::Cloud::Trace::V2::Span.new(name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count) do |response, operation|
+      client.create_span ::Google::Cloud::Trace::V2::Span.new(name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_span({ name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count }, grpc_options) do |response, operation|
+      client.create_span({ name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_span ::Google::Cloud::Trace::V2::Span.new(name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count), grpc_options do |response, operation|
+      client.create_span ::Google::Cloud::Trace::V2::Span.new(name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
