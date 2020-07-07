@@ -25,6 +25,46 @@ module Google
           # Path helper methods for the Recommender API.
           module Paths
             ##
+            # Create a fully-qualified Insight resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/insightTypes/{insight_type}/insights/{insight}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param insight_type [String]
+            # @param insight [String]
+            #
+            # @return [::String]
+            def insight_path project:, location:, insight_type:, insight:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "insight_type cannot contain /" if insight_type.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/insightTypes/#{insight_type}/insights/#{insight}"
+            end
+
+            ##
+            # Create a fully-qualified InsightType resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/insightTypes/{insight_type}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param insight_type [String]
+            #
+            # @return [::String]
+            def insight_type_path project:, location:, insight_type:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/insightTypes/#{insight_type}"
+            end
+
+            ##
             # Create a fully-qualified Recommendation resource string.
             #
             # The resource will be in the following format:

@@ -21,6 +21,85 @@ module Google
   module Cloud
     module Recommender
       module V1
+        # Request for the `ListInsights` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The container resource on which to execute the request.
+        #     Acceptable formats:
+        #
+        #     1.
+        #     "projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]",
+        #
+        #     LOCATION here refers to GCP Locations:
+        #     https://cloud.google.com/about/locations/
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of results to return from this request.  Non-positive
+        #     values are ignored. If not specified, the server will determine the number
+        #     of results to return.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. If present, retrieves the next batch of results from the preceding call to
+        #     this method. `page_token` must be the value of `next_page_token` from the
+        #     previous response. The values of other method parameters must be identical
+        #     to those in the previous call.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter expression to restrict the insights returned. Supported
+        #     filter fields: state
+        #     Eg: `state:"DISMISSED" or state:"ACTIVE"
+        class ListInsightsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response to the `ListInsights` method.
+        # @!attribute [rw] insights
+        #   @return [::Array<::Google::Cloud::Recommender::V1::Insight>]
+        #     The set of insights for the `parent` resource.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token that can be used to request the next page of results. This field is
+        #     empty if there are no additional results.
+        class ListInsightsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to the `GetInsight` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the insight.
+        class GetInsightRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for the `MarkInsightAccepted` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the insight.
+        # @!attribute [rw] state_metadata
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. State properties user wish to include with this state.  Full replace of the
+        #     current state_metadata.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Required. Fingerprint of the Insight. Provides optimistic locking.
+        class MarkInsightAcceptedRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class StateMetadataEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Request for the `ListRecommendations` method.
         # @!attribute [rw] parent
         #   @return [::String]

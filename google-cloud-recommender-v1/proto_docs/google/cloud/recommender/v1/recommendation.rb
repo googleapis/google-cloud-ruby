@@ -64,9 +64,22 @@ module Google
         #   @return [::String]
         #     Fingerprint of the Recommendation. Provides optimistic locking when
         #     updating states.
+        # @!attribute [rw] associated_insights
+        #   @return [::Array<::Google::Cloud::Recommender::V1::Recommendation::InsightReference>]
+        #     Insights that led to this recommendation.
         class Recommendation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Reference to an associated insight.
+          # @!attribute [rw] insight
+          #   @return [::String]
+          #     Insight resource name, e.g.
+          #     projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/insights/[INSIGHT_ID]
+          class InsightReference
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Contains what resources are changing and how they are changing.
@@ -264,7 +277,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Represents Recommendation State
+          # Represents Recommendation State.
           module State
             # Default state. Don't use directly.
             STATE_UNSPECIFIED = 0

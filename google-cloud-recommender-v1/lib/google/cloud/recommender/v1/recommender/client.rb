@@ -27,10 +27,10 @@ module Google
           ##
           # Client for the Recommender service.
           #
-          # Provides recommendations for cloud customers for various categories like
-          # performance optimization, cost savings, reliability, feature discovery, etc.
-          # These recommendations are generated automatically based on analysis of user
-          # resources, configuration and monitoring metrics.
+          # Provides insights and recommendations for cloud customers for various
+          # categories like performance optimization, cost savings, reliability, feature
+          # discovery, etc. Insights and recommendations are generated automatically
+          # based on analysis of user resources, configuration and monitoring metrics.
           #
           class Client
             include Paths
@@ -168,6 +168,237 @@ module Google
             end
 
             # Service calls
+
+            ##
+            # Lists insights for a Cloud project. Requires the recommender.*.list IAM
+            # permission for the specified insight type.
+            #
+            # @overload list_insights(request, options = nil)
+            #   Pass arguments to `list_insights` via a request object, either of type
+            #   {::Google::Cloud::Recommender::V1::ListInsightsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Recommender::V1::ListInsightsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_insights(parent: nil, page_size: nil, page_token: nil, filter: nil)
+            #   Pass arguments to `list_insights` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The container resource on which to execute the request.
+            #     Acceptable formats:
+            #
+            #     1.
+            #     "projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]",
+            #
+            #     LOCATION here refers to GCP Locations:
+            #     https://cloud.google.com/about/locations/
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of results to return from this request.  Non-positive
+            #     values are ignored. If not specified, the server will determine the number
+            #     of results to return.
+            #   @param page_token [::String]
+            #     Optional. If present, retrieves the next batch of results from the preceding call to
+            #     this method. `page_token` must be the value of `next_page_token` from the
+            #     previous response. The values of other method parameters must be identical
+            #     to those in the previous call.
+            #   @param filter [::String]
+            #     Optional. Filter expression to restrict the insights returned. Supported
+            #     filter fields: state
+            #     Eg: `state:"DISMISSED" or state:"ACTIVE"
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Recommender::V1::Insight>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Recommender::V1::Insight>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def list_insights request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Recommender::V1::ListInsightsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_insights.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Recommender::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_insights.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_insights.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recommender_stub.call_rpc :list_insights, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @recommender_stub, :list_insights, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets the requested insight. Requires the recommender.*.get IAM permission
+            # for the specified insight type.
+            #
+            # @overload get_insight(request, options = nil)
+            #   Pass arguments to `get_insight` via a request object, either of type
+            #   {::Google::Cloud::Recommender::V1::GetInsightRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Recommender::V1::GetInsightRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_insight(name: nil)
+            #   Pass arguments to `get_insight` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the insight.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Recommender::V1::Insight]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Recommender::V1::Insight]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def get_insight request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Recommender::V1::GetInsightRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_insight.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Recommender::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_insight.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_insight.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recommender_stub.call_rpc :get_insight, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Marks the Insight State as Accepted. Users can use this method to
+            # indicate to the Recommender API that they have applied some action based
+            # on the insight. This stops the insight content from being updated.
+            #
+            # MarkInsightAccepted can be applied to insights in ACTIVE state. Requires
+            # the recommender.*.update IAM permission for the specified insight.
+            #
+            # @overload mark_insight_accepted(request, options = nil)
+            #   Pass arguments to `mark_insight_accepted` via a request object, either of type
+            #   {::Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload mark_insight_accepted(name: nil, state_metadata: nil, etag: nil)
+            #   Pass arguments to `mark_insight_accepted` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the insight.
+            #   @param state_metadata [::Hash{::String => ::String}]
+            #     Optional. State properties user wish to include with this state.  Full replace of the
+            #     current state_metadata.
+            #   @param etag [::String]
+            #     Required. Fingerprint of the Insight. Provides optimistic locking.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Recommender::V1::Insight]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Recommender::V1::Insight]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def mark_insight_accepted request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.mark_insight_accepted.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Recommender::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.mark_insight_accepted.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.mark_insight_accepted.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recommender_stub.call_rpc :mark_insight_accepted, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
 
             ##
             # Lists recommendations for a Cloud project. Requires the recommender.*.list
@@ -325,10 +556,10 @@ module Google
             end
 
             ##
-            # Mark the Recommendation State as Claimed. Users can use this method to
+            # Marks the Recommendation State as Claimed. Users can use this method to
             # indicate to the Recommender API that they are starting to apply the
             # recommendation themselves. This stops the recommendation content from being
-            # updated.
+            # updated. Associated insights are frozen and placed in the ACCEPTED state.
             #
             # MarkRecommendationClaimed can be applied to recommendations in CLAIMED,
             # SUCCEEDED, FAILED, or ACTIVE state.
@@ -407,10 +638,11 @@ module Google
             end
 
             ##
-            # Mark the Recommendation State as Succeeded. Users can use this method to
+            # Marks the Recommendation State as Succeeded. Users can use this method to
             # indicate to the Recommender API that they have applied the recommendation
             # themselves, and the operation was successful. This stops the recommendation
-            # content from being updated.
+            # content from being updated. Associated insights are frozen and placed in
+            # the ACCEPTED state.
             #
             # MarkRecommendationSucceeded can be applied to recommendations in ACTIVE,
             # CLAIMED, SUCCEEDED, or FAILED state.
@@ -489,10 +721,11 @@ module Google
             end
 
             ##
-            # Mark the Recommendation State as Failed. Users can use this method to
+            # Marks the Recommendation State as Failed. Users can use this method to
             # indicate to the Recommender API that they have applied the recommendation
             # themselves, and the operation failed. This stops the recommendation content
-            # from being updated.
+            # from being updated. Associated insights are frozen and placed in the
+            # ACCEPTED state.
             #
             # MarkRecommendationFailed can be applied to recommendations in ACTIVE,
             # CLAIMED, SUCCEEDED, or FAILED state.
@@ -585,19 +818,19 @@ module Google
             #
             # # Examples
             #
-            # To modify the global config, setting the timeout for list_recommendations
+            # To modify the global config, setting the timeout for list_insights
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
             #     ::Google::Cloud::Recommender::V1::Recommender::Client.configure do |config|
             #       config.timeout = 10.0
-            #       config.rpcs.list_recommendations.timeout = 20.0
+            #       config.rpcs.list_insights.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
             #     client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
             #       config.timeout = 10.0
-            #       config.rpcs.list_recommendations.timeout = 20.0
+            #       config.rpcs.list_insights.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
@@ -707,6 +940,21 @@ module Google
               #
               class Rpcs
                 ##
+                # RPC-specific configuration for `list_insights`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_insights
+                ##
+                # RPC-specific configuration for `get_insight`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_insight
+                ##
+                # RPC-specific configuration for `mark_insight_accepted`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :mark_insight_accepted
+                ##
                 # RPC-specific configuration for `list_recommendations`
                 # @return [::Gapic::Config::Method]
                 #
@@ -734,6 +982,12 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
+                  list_insights_config = parent_rpcs&.list_insights if parent_rpcs&.respond_to? :list_insights
+                  @list_insights = ::Gapic::Config::Method.new list_insights_config
+                  get_insight_config = parent_rpcs&.get_insight if parent_rpcs&.respond_to? :get_insight
+                  @get_insight = ::Gapic::Config::Method.new get_insight_config
+                  mark_insight_accepted_config = parent_rpcs&.mark_insight_accepted if parent_rpcs&.respond_to? :mark_insight_accepted
+                  @mark_insight_accepted = ::Gapic::Config::Method.new mark_insight_accepted_config
                   list_recommendations_config = parent_rpcs&.list_recommendations if parent_rpcs&.respond_to? :list_recommendations
                   @list_recommendations = ::Gapic::Config::Method.new list_recommendations_config
                   get_recommendation_config = parent_rpcs&.get_recommendation if parent_rpcs&.respond_to? :get_recommendation
