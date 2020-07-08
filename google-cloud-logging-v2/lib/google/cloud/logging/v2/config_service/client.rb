@@ -70,7 +70,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
                 }
 
                 default_config.rpcs.get_sink.timeout = 60.0
@@ -78,7 +78,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
                 }
 
                 default_config.rpcs.create_sink.timeout = 120.0
@@ -88,7 +88,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
                 }
 
                 default_config.rpcs.delete_sink.timeout = 60.0
@@ -96,7 +96,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
                 }
 
                 default_config.rpcs.list_exclusions.timeout = 60.0
@@ -104,7 +104,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
                 }
 
                 default_config.rpcs.get_exclusion.timeout = 60.0
@@ -112,7 +112,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
                 }
 
                 default_config.rpcs.create_exclusion.timeout = 120.0
@@ -124,7 +124,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
                 }
 
                 default_config
@@ -1287,7 +1287,8 @@ module Google
             # the GCP organization.
             #
             # See [Enabling CMEK for Logs
-            # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
+            # Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+            # for more information.
             #
             # @overload get_cmek_settings(request, options = nil)
             #   Pass arguments to `get_cmek_settings` via a request object, either of type
@@ -1377,7 +1378,8 @@ module Google
             # 3) access to the key is disabled.
             #
             # See [Enabling CMEK for Logs
-            # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
+            # Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+            # for more information.
             #
             # @overload update_cmek_settings(request, options = nil)
             #   Pass arguments to `update_cmek_settings` via a request object, either of type
@@ -1411,7 +1413,8 @@ module Google
             #     Required. The CMEK settings to update.
             #
             #     See [Enabling CMEK for Logs
-            #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
+            #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+            #     for more information.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. Field mask identifying which fields from `cmek_settings` should
             #     be updated. A field will be overwritten if and only if it is in the update

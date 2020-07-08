@@ -81,12 +81,14 @@ module Google
         #     The sink's `writer_identity`, set when the sink is created, must
         #     have permission to write to the destination or else the log
         #     entries are not exported. For more information, see
-        #     [Exporting Logs with Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
+        #     [Exporting Logs with
+        #     Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries). The only
-        #     exported log entries are those that are in the resource owning the sink and
-        #     that match the filter. For example:
+        #     Optional. An [advanced logs
+        #     filter](https://cloud.google.com/logging/docs/view/advanced-queries). The
+        #     only exported log entries are those that are in the resource owning the
+        #     sink and that match the filter. For example:
         #
         #         logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity>=ERROR
         # @!attribute [rw] description
@@ -99,8 +101,7 @@ module Google
         #     export any log entries.
         # @!attribute [rw] output_version_format
         #   @return [::Google::Cloud::Logging::V2::LogSink::VersionFormat]
-        #     Deprecated. The log entry format to use for this sink's exported log
-        #     entries. The v2 format is used by default and cannot be changed.
+        #     Deprecated. This field is unused.
         # @!attribute [r] writer_identity
         #   @return [::String]
         #     Output only. An IAM identity–a service account or group&mdash;under which Logging
@@ -147,9 +148,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Available log entry formats. Log entries can be written to
-          # Logging in either format and can be exported in either format.
-          # Version 2 is the preferred format.
+          # Deprecated. This is unused.
           module VersionFormat
             # An unspecified format version that will default to V2.
             VERSION_FORMAT_UNSPECIFIED = 0
@@ -166,12 +165,13 @@ module Google
         # @!attribute [rw] use_partitioned_tables
         #   @return [::Boolean]
         #     Optional. Whether to use [BigQuery's partition
-        #     tables](https://cloud.google.com/bigquery/docs/partitioned-tables). By default, Logging
-        #     creates dated tables based on the log entries' timestamps, e.g.
-        #     syslog_20170523. With partitioned tables the date suffix is no longer
+        #     tables](https://cloud.google.com/bigquery/docs/partitioned-tables). By
+        #     default, Logging creates dated tables based on the log entries' timestamps,
+        #     e.g. syslog_20170523. With partitioned tables the date suffix is no longer
         #     present and [special query
-        #     syntax](https://cloud.google.com/bigquery/docs/querying-partitioned-tables) has to be used instead.
-        #     In both cases, tables are sharded based on UTC timezone.
+        #     syntax](https://cloud.google.com/bigquery/docs/querying-partitioned-tables)
+        #     has to be used instead. In both cases, tables are sharded based on UTC
+        #     timezone.
         # @!attribute [r] uses_timestamp_column_partitioning
         #   @return [::Boolean]
         #     Output only. True if new timestamp column based partitioning is in use,
@@ -449,9 +449,10 @@ module Google
         #     Optional. A description of this exclusion.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Required. An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced-queries)
-        #     that matches the log entries to be excluded. By using the
-        #     [sample function](https://cloud.google.com/logging/docs/view/advanced-queries#sample),
+        #     Required. An [advanced logs
+        #     filter](https://cloud.google.com/logging/docs/view/advanced-queries) that
+        #     matches the log entries to be excluded. By using the [sample
+        #     function](https://cloud.google.com/logging/docs/view/advanced-queries#sample),
         #     you can exclude less than 100% of the matching log entries.
         #     For example, the following query matches 99% of low-severity log
         #     entries from Google Cloud Storage buckets:
@@ -601,8 +602,9 @@ module Google
         # The parameters to
         # {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#get_cmek_settings GetCmekSettings}.
         #
-        # See [Enabling CMEK for Logs Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
-        # for more information.
+        # See [Enabling CMEK for Logs
+        # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
+        # more information.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource for which to retrieve CMEK settings.
@@ -625,8 +627,9 @@ module Google
         # The parameters to
         # {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#update_cmek_settings UpdateCmekSettings}.
         #
-        # See [Enabling CMEK for Logs Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
-        # for more information.
+        # See [Enabling CMEK for Logs
+        # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
+        # more information.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name for the CMEK settings to update.
@@ -646,7 +649,8 @@ module Google
         #     Required. The CMEK settings to update.
         #
         #     See [Enabling CMEK for Logs
-        #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
+        #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+        #     for more information.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Optional. Field mask identifying which fields from `cmek_settings` should
@@ -668,8 +672,9 @@ module Google
         # organizations. Once configured, it applies to all projects and folders in the
         # GCP organization.
         #
-        # See [Enabling CMEK for Logs Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
-        # for more information.
+        # See [Enabling CMEK for Logs
+        # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
+        # more information.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name of the CMEK settings.
@@ -698,7 +703,8 @@ module Google
         #     To disable CMEK for the Logs Router, set this field to an empty string.
         #
         #     See [Enabling CMEK for Logs
-        #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
+        #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+        #     for more information.
         # @!attribute [r] service_account_id
         #   @return [::String]
         #     Output only. The service account that will be used by the Logs Router to access your
@@ -711,7 +717,8 @@ module Google
         #     obtain the service account ID.
         #
         #     See [Enabling CMEK for Logs
-        #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
+        #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+        #     for more information.
         class CmekSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
