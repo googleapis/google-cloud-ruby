@@ -70,7 +70,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
                 }
 
                 default_config.rpcs.write_log_entries.timeout = 60.0
@@ -78,7 +78,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
                 }
 
                 default_config.rpcs.list_log_entries.timeout = 60.0
@@ -86,7 +86,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
                 }
 
                 default_config.rpcs.list_monitored_resource_descriptors.timeout = 60.0
@@ -94,7 +94,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
                 }
 
                 default_config.rpcs.list_logs.timeout = 60.0
@@ -102,7 +102,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
                 }
 
                 default_config
@@ -335,15 +335,16 @@ module Google
             #     the entries later in the list. See the `entries.list` method.
             #
             #     Log entries with timestamps that are more than the
-            #     [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
-            #     24 hours in the future will not be available when calling `entries.list`.
-            #     However, those log entries can still be
-            #     [exported with LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
+            #     [logs retention period](https://cloud.google.com/logging/quota-policy) in
+            #     the past or more than 24 hours in the future will not be available when
+            #     calling `entries.list`. However, those log entries can still be [exported
+            #     with
+            #     LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
             #
             #     To improve throughput and to avoid exceeding the
-            #     [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
-            #     you should try to include several log entries in this list,
-            #     rather than calling this method for each individual log entry.
+            #     [quota limit](https://cloud.google.com/logging/quota-policy) for calls to
+            #     `entries.write`, you should try to include several log entries in this
+            #     list, rather than calling this method for each individual log entry.
             #   @param partial_success [::Boolean]
             #     Optional. Whether valid entries should be written even if some other
             #     entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any
@@ -397,7 +398,8 @@ module Google
             ##
             # Lists log entries.  Use this method to retrieve log entries that originated
             # from a project/folder/organization/billing account.  For ways to export log
-            # entries, see [Exporting Logs](https://cloud.google.com/logging/docs/export).
+            # entries, see [Exporting
+            # Logs](https://cloud.google.com/logging/docs/export).
             #
             # @overload list_log_entries(request, options = nil)
             #   Pass arguments to `list_log_entries` via a request object, either of type
@@ -427,12 +429,12 @@ module Google
             #     Projects listed in the `project_ids` field are added to this list.
             #   @param filter [::String]
             #     Optional. A filter that chooses which log entries to return.  See [Advanced
-            #     Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
-            #     match the filter are returned.  An empty filter matches all log entries in
-            #     the resources listed in `resource_names`. Referencing a parent resource
-            #     that is not listed in `resource_names` will cause the filter to return no
-            #     results.
-            #     The maximum length of the filter is 20000 characters.
+            #     Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).
+            #     Only log entries that match the filter are returned.  An empty filter
+            #     matches all log entries in the resources listed in `resource_names`.
+            #     Referencing a parent resource that is not listed in `resource_names` will
+            #     cause the filter to return no results. The maximum length of the filter is
+            #     20000 characters.
             #   @param order_by [::String]
             #     Optional. How the results should be sorted.  Presently, the only permitted
             #     values are `"timestamp asc"` (default) and `"timestamp desc"`. The first
@@ -442,7 +444,8 @@ module Google
             #     timestamps are returned in order of their `insert_id` values.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of results to return from this request.
-            #     Non-positive values are ignored.  The presence of `next_page_token` in the
+            #     Default is 50. If the value is negative or exceeds 1000,
+            #     the request is rejected. The presence of `next_page_token` in the
             #     response indicates that more results might be available.
             #   @param page_token [::String]
             #     Optional. If present, then retrieve the next batch of results from the

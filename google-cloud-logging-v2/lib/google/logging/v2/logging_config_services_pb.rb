@@ -86,7 +86,8 @@ module Google
             # the GCP organization.
             #
             # See [Enabling CMEK for Logs
-            # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
+            # Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+            # for more information.
             rpc :GetCmekSettings, Google::Cloud::Logging::V2::GetCmekSettingsRequest, Google::Cloud::Logging::V2::CmekSettings
             # Updates the Logs Router CMEK settings for the given resource.
             #
@@ -101,7 +102,8 @@ module Google
             # 3) access to the key is disabled.
             #
             # See [Enabling CMEK for Logs
-            # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
+            # Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+            # for more information.
             rpc :UpdateCmekSettings, Google::Cloud::Logging::V2::UpdateCmekSettingsRequest, Google::Cloud::Logging::V2::CmekSettings
           end
 
