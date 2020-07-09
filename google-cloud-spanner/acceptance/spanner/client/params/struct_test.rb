@@ -181,9 +181,7 @@ describe "Spanner Client", :params, :struct, :spanner do
   end
 
   it "queries and returns a struct array" do
-    skip if emulator_enabled?
-
-    struct_sql = "SELECT ARRAY(SELECT AS STRUCT message, repeat FROM (SELECT 'hello' AS message, 1 AS repeat UNION ALL SELECT 'hola' AS message, 2 AS repeat))"
+    struct_sql = "SELECT ARRAY(SELECT AS STRUCT message, repeat FROM (SELECT 'hello' AS message, 1 AS repeat UNION ALL SELECT 'hola' AS message, 2 AS repeat) ORDER BY repeat ASC)"
     results = db.execute_query struct_sql
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -199,5 +197,4 @@ describe "Spanner Client", :params, :struct, :spanner do
     _(results.fields.to_h).must_equal({ 0 => [db.fields(0 => :STRING, 1 => :INT64)] })
     _(results.rows.first.to_h).must_equal({ 0 => [] })
   end
-
 end

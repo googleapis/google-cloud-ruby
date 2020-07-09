@@ -31,9 +31,7 @@ describe "Spanner Client", :single_use, :spanner do
   end
 
   it "runs a query with strong option" do
-    skip if emulator_enabled?
-
-    results = db.execute_sql "SELECT * FROM accounts", single_use: { strong: true }
+    results = db.execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", single_use: { strong: true }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal fields_hash
@@ -59,9 +57,7 @@ describe "Spanner Client", :single_use, :spanner do
   end
 
   it "runs a query with timestamp option" do
-    skip if emulator_enabled?
-
-    results = db.execute_sql "SELECT * FROM accounts", single_use: { timestamp: @setup_timestamp }
+    results = db.execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", single_use: { timestamp: @setup_timestamp }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal fields_hash
@@ -87,9 +83,7 @@ describe "Spanner Client", :single_use, :spanner do
   end
 
   it "runs a query with staleness option" do
-    skip if emulator_enabled?
-
-    results = db.execute_sql "SELECT * FROM accounts", single_use: { staleness: 0.0001 }
+    results = db.execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", single_use: { staleness: 0.0001 }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal fields_hash
@@ -115,9 +109,7 @@ describe "Spanner Client", :single_use, :spanner do
   end
 
   it "runs a query with bounded_timestamp option" do
-    skip if emulator_enabled?
-
-    results = db.execute_sql "SELECT * FROM accounts", single_use: { bounded_timestamp: @setup_timestamp }
+    results = db.execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", single_use: { bounded_timestamp: @setup_timestamp }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal fields_hash
@@ -143,9 +135,7 @@ describe "Spanner Client", :single_use, :spanner do
   end
 
   it "runs a query with bounded_staleness option" do
-    skip if emulator_enabled?
-
-    results = db.execute_sql "SELECT * FROM accounts", single_use: { bounded_staleness: 0.0001 }
+    results = db.execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", single_use: { bounded_staleness: 0.0001 }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal fields_hash

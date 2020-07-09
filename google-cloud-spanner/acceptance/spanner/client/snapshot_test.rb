@@ -31,14 +31,12 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "runs a query" do
-    skip if emulator_enabled?
-
     results = nil
     db.snapshot do |snp|
       _(snp.transaction_id).wont_be :nil?
       _(snp.timestamp).wont_be :nil?
 
-      results = snp.execute_sql "SELECT * FROM accounts"
+      results = snp.execute_sql "SELECT * FROM accounts ORDER BY account_id ASC"
     end
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -49,15 +47,13 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "runs a query with query options" do
-    skip if emulator_enabled?
-
     query_options = { optimizer_version: "latest" }
     results = nil
     db.snapshot do |snp|
       _(snp.transaction_id).wont_be :nil?
       _(snp.timestamp).wont_be :nil?
 
-      results = snp.execute_sql "SELECT * FROM accounts", query_options: query_options
+      results = snp.execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", query_options: query_options
     end
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -84,14 +80,12 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "runs a query with strong option" do
-    skip if emulator_enabled?
-
     results = nil
     db.snapshot strong: true do |snp|
       _(snp.transaction_id).wont_be :nil?
       _(snp.timestamp).wont_be :nil?
 
-      results = snp.execute_sql "SELECT * FROM accounts"
+      results = snp.execute_sql "SELECT * FROM accounts ORDER BY account_id ASC"
     end
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -118,14 +112,12 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "runs a query with timestamp option" do
-    skip if emulator_enabled?
-
     results = nil
     db.snapshot timestamp: @setup_timestamp do |snp|
       _(snp.transaction_id).wont_be :nil?
       _(snp.timestamp).wont_be :nil?
 
-      results = snp.execute_sql "SELECT * FROM accounts"
+      results = snp.execute_sql "SELECT * FROM accounts ORDER BY account_id ASC"
     end
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -152,14 +144,12 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "runs a query with staleness option" do
-    skip if emulator_enabled?
-
     results = nil
     db.snapshot staleness: 0.0001 do |snp|
       _(snp.transaction_id).wont_be :nil?
       _(snp.timestamp).wont_be :nil?
 
-      results = snp.execute_sql "SELECT * FROM accounts"
+      results = snp.execute_sql "SELECT * FROM accounts ORDER BY account_id ASC"
     end
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -275,13 +265,11 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "staleness reads are consistent even when updates happen" do
-    skip if emulator_enabled?
-
     first_row = default_account_rows.first
     sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
     modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
-    db.snapshot staleness: 0.01 do |snp|
+    db.snapshot staleness: 0.0001 do |snp|
       _(snp.transaction_id).wont_be :nil?
       _(snp.timestamp).wont_be :nil?
 
@@ -299,13 +287,11 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "staleness queries are consistent even when updates happen" do
-    skip if emulator_enabled?
-
     first_row = default_account_rows.first
     sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
     modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
-    db.snapshot staleness: 0.01 do |snp|
+    db.snapshot staleness: 0.0001 do |snp|
       _(snp.transaction_id).wont_be :nil?
       _(snp.timestamp).wont_be :nil?
 

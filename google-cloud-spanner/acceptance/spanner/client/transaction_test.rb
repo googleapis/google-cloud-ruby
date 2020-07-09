@@ -128,7 +128,7 @@ describe "Spanner Client", :transaction, :spanner do
   end
 
   it "supports tx isolation with read and update" do
-    skip if emulator_enabled?
+    skip "The emulator only supports one transaction at a time" if emulator_enabled?
 
     results = db.read "accounts", [:reputation], keys: 1, limit: 1
     original_val = results.rows.first[:reputation]
