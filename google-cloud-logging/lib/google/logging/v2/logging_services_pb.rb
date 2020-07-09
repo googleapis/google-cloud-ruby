@@ -50,7 +50,8 @@ module Google::Logging::V2
       rpc :WriteLogEntries, WriteLogEntriesRequest, WriteLogEntriesResponse
       # Lists log entries.  Use this method to retrieve log entries that originated
       # from a project/folder/organization/billing account.  For ways to export log
-      # entries, see [Exporting Logs](https://cloud.google.com/logging/docs/export).
+      # entries, see [Exporting
+      # Logs](https://cloud.google.com/logging/docs/export).
       rpc :ListLogEntries, ListLogEntriesRequest, ListLogEntriesResponse
       # Lists the descriptors for monitored resource types used by Logging.
       rpc :ListMonitoredResourceDescriptors, ListMonitoredResourceDescriptorsRequest, ListMonitoredResourceDescriptorsResponse

@@ -1239,7 +1239,8 @@ module Google
           # the GCP organization.
           #
           # See [Enabling CMEK for Logs
-          # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
+          # Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+          # for more information.
           #
           # @param name [String]
           #   Required. The resource for which to retrieve CMEK settings.
@@ -1295,7 +1296,8 @@ module Google
           # 3) access to the key is disabled.
           #
           # See [Enabling CMEK for Logs
-          # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
+          # Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+          # for more information.
           #
           # @param name [String]
           #   Required. The resource name for the CMEK settings to update.
@@ -1314,7 +1316,8 @@ module Google
           #   Required. The CMEK settings to update.
           #
           #   See [Enabling CMEK for Logs
-          #   Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
+          #   Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+          #   for more information.
           #   A hash of the same form as `Google::Logging::V2::CmekSettings`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
