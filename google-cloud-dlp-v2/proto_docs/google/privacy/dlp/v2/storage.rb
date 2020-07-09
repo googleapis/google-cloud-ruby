@@ -767,12 +767,17 @@ module Google
           VERY_LIKELY = 5
         end
 
-        # Definitions of file type groups to scan.
+        # Definitions of file type groups to scan. New types will be added to this
+        # list.
         module FileType
           # Includes all files.
           FILE_TYPE_UNSPECIFIED = 0
 
-          # Includes all file extensions not covered by text file types.
+          # Includes all file extensions not covered by another entry. Binary
+          # scanning attempts to convert the content of the file to utf_8 to scan
+          # the file.
+          # If you wish to avoid this fall back, specify one or more of the other
+          # FileType's in your storage scan.
           BINARY_FILE = 1
 
           # Included file extensions:
@@ -789,10 +794,12 @@ module Google
           # Image inspection is restricted to 'global', 'us', 'asia', and 'europe'.
           IMAGE = 3
 
+          # Word files >30 MB will be scanned as binary files.
           # Included file extensions:
           #   docx, dotx, docm, dotm
           WORD = 5
 
+          # PDF files >30 MB will be scanned as binary files.
           # Included file extensions:
           #   pdf
           PDF = 6
@@ -800,6 +807,14 @@ module Google
           # Included file extensions:
           #   avro
           AVRO = 7
+
+          # Included file extensions:
+          #   csv
+          CSV = 8
+
+          # Included file extensions:
+          #   tsv
+          TSV = 9
         end
       end
     end
