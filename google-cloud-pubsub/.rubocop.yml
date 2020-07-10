@@ -5,8 +5,6 @@ AllCops:
   Exclude:
     - "acceptance/**/*"
     - "lib/google/pubsub/**/*"
-    - "lib/google/cloud/pubsub/v1.rb"
-    - "lib/google/cloud/pubsub/v1/**/*"
     - "lib/google/iam/**/*"
     - "support/**/*"
     - "test/**/*"
