@@ -55,12 +55,12 @@ describe Google::Cloud do
         _(keyfile).must_equal "keyfile-path"
         _(scope).must_equal "http://example.com/scope"
         _(timeout).must_equal 60
-        _(client_config).must_equal({ "gax" => "options" })
+        _(client_config).must_be_nil
         _(host).must_be_nil
         "logging-project-object-scoped"
       }
       Google::Cloud.stub :logging, stubbed_logging do
-        project = gcloud.logging scope: "http://example.com/scope", timeout: 60, client_config: { "gax" => "options" }
+        project = gcloud.logging scope: "http://example.com/scope", timeout: 60
         _(project).must_equal "logging-project-object-scoped"
       end
     end

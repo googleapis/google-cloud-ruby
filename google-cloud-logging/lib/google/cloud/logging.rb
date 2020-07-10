@@ -63,8 +63,7 @@ module Google
       #   * `https://www.googleapis.com/auth/logging.admin`
       #
       # @param [Integer] timeout Default timeout to use in requests. Optional.
-      # @param [Hash] client_config A hash of values to override the default
-      #   behavior of the API client. Optional.
+      # @param [Hash] client_config Unused and deprecated.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
@@ -127,8 +126,7 @@ module Google
       # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       # * `timeout` - (Integer) Default timeout to use in requests.
-      # * `client_config` - (Hash) A hash of values to override the default
-      #   behavior of the API client.
+      # * `client_config` - (Hash) Unused and deprecated.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
       # * `log_name` - (String) Name of the application log file. Default:
