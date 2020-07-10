@@ -3,7 +3,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
@@ -16,6 +15,7 @@ require 'google/rpc/status_pb'
 require 'google/type/date_pb'
 require 'google/type/dayofweek_pb'
 require 'google/type/timeofday_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/privacy/dlp/v2/dlp.proto", :syntax => :proto3) do
     add_message "google.privacy.dlp.v2.ExcludeInfoTypes" do
@@ -73,6 +73,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :WORD_DOCUMENT, 7
       value :PDF, 8
       value :AVRO, 11
+      value :CSV, 12
+      value :TSV, 13
     end
     add_message "google.privacy.dlp.v2.ContentItem" do
       oneof :data_item do
