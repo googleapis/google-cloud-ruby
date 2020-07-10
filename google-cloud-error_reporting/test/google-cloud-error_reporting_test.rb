@@ -59,13 +59,12 @@ describe Google::Cloud do
           _(keyfile).must_equal "/path/to/a/keyfile"
           _(scope).must_equal "http://example.com/scope"
           _(timeout).must_equal 60
-          _(client_config).must_equal({ "gax" => "options" })
+          _(client_config).must_be :nil?
           "error_reporting-project-object"
         }
       Google::Cloud.stub :error_reporting, stubbed_error_reporting do
         project = gcloud.error_reporting scope: "http://example.com/scope",
-                                         timeout: 60,
-                                         client_config: { "gax" => "options" }
+                                         timeout: 60
         _(project).must_equal "error_reporting-project-object"
       end
     end
@@ -114,13 +113,12 @@ describe Google::Cloud do
           _(credentials).must_equal "/path/to/a/keyfile"
           _(scope).must_equal "http://example.com/scope"
           _(timeout).must_equal 60
-          _(client_config).must_equal({ "gax" => "options" })
+          _(client_config).must_be :nil?
           "error_reporting-project-object"
         }
       Google::Cloud::ErrorReporting.stub :new, stubbed_new do
         project = gcloud.error_reporting scope: "http://example.com/scope",
-                                         timeout: 60,
-                                         client_config: { "gax" => "options" }
+                                         timeout: 60
         _(project).must_equal "error_reporting-project-object"
       end
     end
