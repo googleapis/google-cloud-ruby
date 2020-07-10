@@ -45,12 +45,11 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
   end
 
   it "reads all by default" do
-    skip if emulator_enabled?
-
     _(batch_snapshot.timestamp).must_be_kind_of Time
     serialized_snapshot = batch_snapshot.dump
 
     columns = [:id]
+    rows = []
     partitions = batch_snapshot.partition_read table_name, columns
     partitions.each do |partition|
       _(partition.read.partition_token).wont_be_nil
@@ -67,20 +66,22 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
       _(new_batch_snapshot.timestamp).must_be_kind_of Time
       results = new_batch_snapshot.execute_partition partition
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
+
       unless results.fields.to_a.empty? # With so little data, just one partition should get the entire result set
-        _(results.rows.map(&:to_h)).must_equal [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }, { id: 9 }, { id: 10 }, { id: 11 }, { id: 12 }]
+        rows.concat(results.rows.map(&:to_h))
       end
     end
+
+    _(rows).must_equal [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }, { id: 9 }, { id: 10 }, { id: 11 }, { id: 12 }]
     batch_snapshot.close
   end
 
   it "queries all by default" do
-    skip if emulator_enabled?
-
     batch_snapshot = batch_client.batch_snapshot
     serialized_snapshot = batch_snapshot.dump
 
     sql = "SELECT s.id, s.bool FROM stuffs AS s WHERE s.id = 2 AND s.bool = false"
+    rows = []
     partitions = batch_snapshot.partition_query sql
     partitions.each do |partition|
       _(partition.execute.partition_token).wont_be_nil
@@ -95,20 +96,21 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
       results = new_batch_snapshot.execute_partition partition
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       unless results.fields.to_a.empty? # With so little data, just one partition should get the entire result set
-        _(results.rows.map(&:to_h)).must_equal [{:id=>2, :bool=>false}]
+        rows.concat(results.rows.map(&:to_h))
       end
     end
+
+    _(rows).must_equal [{:id=>2, :bool=>false}]
     batch_snapshot.close
   end
 
   it "queries all by default with query options" do
-    skip if emulator_enabled?
-
     batch_snapshot = batch_client.batch_snapshot
     serialized_snapshot = batch_snapshot.dump
 
     sql = "SELECT s.id, s.bool FROM stuffs AS s WHERE s.id = 2 AND s.bool = false"
     query_options = { optimizer_version: "1" }
+    rows = []
     partitions = batch_snapshot.partition_query sql, query_options: query_options
     partitions.each do |partition|
       _(partition.execute.partition_token).wont_be_nil
@@ -123,9 +125,11 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
       results = new_batch_snapshot.execute_partition partition
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       unless results.fields.to_a.empty? # With so little data, just one partition should get the entire result set
-        _(results.rows.map(&:to_h)).must_equal [{:id=>2, :bool=>false}]
+        rows.concat(results.rows.map(&:to_h))
       end
     end
+
+    _(rows).must_equal [{:id=>2, :bool=>false}]
     batch_snapshot.close
   end
 end
