@@ -210,7 +210,10 @@ module Google
       # @return [String,nil]
       #
       def project_id
-        env["GCLOUD_PROJECT"] || env["DEVSHELL_PROJECT_ID"] || lookup_metadata("project", "project-id")
+        env["GOOGLE_CLOUD_PROJECT"] ||
+          env["GCLOUD_PROJECT"] ||
+          env["DEVSHELL_PROJECT_ID"] ||
+          lookup_metadata("project", "project-id")
       end
 
       ##
