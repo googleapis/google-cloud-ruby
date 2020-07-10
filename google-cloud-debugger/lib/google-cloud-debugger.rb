@@ -48,7 +48,7 @@ module Google
     #   * `https://www.googleapis.com/auth/logging.admin`
     #
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config Unused.
+    # @param [Hash] client_config Unused and deprecated.
     #
     # @return [Google::Cloud::Debugger::Project]
     #
@@ -104,7 +104,7 @@ module Google
     #   * `https://www.googleapis.com/auth/logging.admin`
     #
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config Unused.
+    # @param [Hash] client_config Unused and deprecated.
     #
     # @return [Google::Cloud::Debugger::Project]
     #

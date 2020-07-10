@@ -67,12 +67,12 @@ describe Google::Cloud do
         _(service_version).must_equal "vUTest"
         _(scope).must_equal "http://example.com/scope"
         _(timeout).must_equal 60
-        _(client_config).must_equal({ "gax" => "options" })
+        _(client_config).must_be_nil
         _(host).must_be_nil
         "debugger-project-object-scoped"
       }
       Google::Cloud.stub :debugger, stubbed_debugger do
-        project = gcloud.debugger service_name: "utest-service", service_version: "vUTest", scope: "http://example.com/scope", timeout: 60, client_config: { "gax" => "options" }
+        project = gcloud.debugger service_name: "utest-service", service_version: "vUTest", scope: "http://example.com/scope", timeout: 60
         _(project).must_equal "debugger-project-object-scoped"
       end
     end
