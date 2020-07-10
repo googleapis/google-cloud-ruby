@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.3 / 2020-07-10
+
+#### Bug Fixes
+
+* Project ID logic honors GOOGLE_CLOUD_PROJECT
+
 ### 1.3.2 / 2020-05-28
 
 #### Documentation
