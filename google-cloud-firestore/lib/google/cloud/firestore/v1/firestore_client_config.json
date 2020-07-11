@@ -7,6 +7,10 @@
           "INTERNAL",
           "UNAVAILABLE"
         ],
+        "aborted_unavailable": [
+          "ABORTED",
+          "UNAVAILABLE"
+        ],
         "non_idempotent": [],
         "idempotent2": [
           "DEADLINE_EXCEEDED",
@@ -64,6 +68,11 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "streaming"
         },
+        "BatchWrite": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "aborted_unavailable",
+          "retry_params_name": "default"
+        },
         "BeginTransaction": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
@@ -100,11 +109,6 @@
           "retry_params_name": "default"
         },
         "PartitionQuery": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "BatchWrite": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
