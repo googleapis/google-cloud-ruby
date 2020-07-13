@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2020-07-10
+
+#### Features
+
+* Support CSV and TSV storage file types.
+
 ### 0.3.3 / 2020-06-18
 
 #### Documentation
