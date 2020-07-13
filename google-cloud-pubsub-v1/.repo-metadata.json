@@ -1,0 +1,11 @@
+{
+    "api_id": "pubsub.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-pubsub-v1/latest",
+    "distribution_name": "google-cloud-pubsub-v1",
+    "language": "ruby",
+    "name": "pubsub",
+    "name_pretty": "Cloud Pub/Sub V1 API",
+    "product_documentation": "https://cloud.google.com/pubsub",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
