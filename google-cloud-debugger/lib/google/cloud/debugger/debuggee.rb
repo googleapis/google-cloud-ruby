@@ -179,7 +179,7 @@ module Google
         # project ID if available (and if it matches the project set in the
         # configuration). Otherwise, use the configured project.
         def project_id_for_request_arg
-          if project_id == @env.project_id
+          if project_id == @env.lookup_metadata("project", "project-id")
             numeric_id = @env.numeric_project_id
             return numeric_id.to_s if numeric_id
           end
