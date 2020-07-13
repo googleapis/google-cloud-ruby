@@ -88,7 +88,7 @@ module Google
     #   * `https://www.googleapis.com/auth/cloud-platform`
     #
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config Unused.
+    # @param [Hash] client_config Unused and deprecated.
     #
     # @return [Google::Cloud::ErrorReporting::Project]
     #
