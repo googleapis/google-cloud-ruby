@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/spanner/v1/type.proto", :syntax => :proto3) do
@@ -29,6 +30,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :BYTES, 7
       value :ARRAY, 8
       value :STRUCT, 9
+      value :NUMERIC, 10
     end
   end
 end
