@@ -106,6 +106,17 @@ module Google
         # Encoded as `list`, where list element `i` is represented according
         # to [struct_type.fields[i]][google.spanner.v1.StructType.fields].
         STRUCT = 9
+
+        # Encoded as `string`, in decimal format or scientific notation format.
+        # <br>Decimal format:
+        # <br>`[+-]Digits[.[Digits]]` or
+        # <br>`{Digits +-}.Digits`
+        #
+        # Scientific notation:
+        # <br>`[+-]Digits[.[Digits]][ExponentIndicator[+-]Digits]` or
+        # <br>`{Digits +-}.Digits[ExponentIndicator[+-]Digits]`
+        # <br>(ExponentIndicator is `"e"` or `"E"`)
+        NUMERIC = 10
       end
     end
   end
