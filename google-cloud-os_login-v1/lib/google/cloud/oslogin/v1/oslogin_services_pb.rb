@@ -45,14 +45,14 @@ module Google
             # on Google Compute Engine.
             rpc :GetLoginProfile, Google::Cloud::OsLogin::V1::GetLoginProfileRequest, Google::Cloud::OsLogin::V1::LoginProfile
             # Retrieves an SSH public key.
-            rpc :GetSshPublicKey, Google::Cloud::OsLogin::V1::GetSshPublicKeyRequest, Google::Cloud::OsLogin::Common::SshPublicKey
+            rpc :GetSshPublicKey, Google::Cloud::OsLogin::V1::GetSshPublicKeyRequest, Google::Cloud::OsLogin::Common::Google::Cloud::Oslogin::Common::SshPublicKey
             # Adds an SSH public key and returns the profile information. Default POSIX
             # account information is set when no username and UID exist as part of the
             # login profile.
             rpc :ImportSshPublicKey, Google::Cloud::OsLogin::V1::ImportSshPublicKeyRequest, Google::Cloud::OsLogin::V1::ImportSshPublicKeyResponse
             # Updates an SSH public key and returns the profile information. This method
             # supports patch semantics.
-            rpc :UpdateSshPublicKey, Google::Cloud::OsLogin::V1::UpdateSshPublicKeyRequest, Google::Cloud::OsLogin::Common::SshPublicKey
+            rpc :UpdateSshPublicKey, Google::Cloud::OsLogin::V1::UpdateSshPublicKeyRequest, Google::Cloud::OsLogin::Common::Google::Cloud::Oslogin::Common::SshPublicKey
           end
 
           Stub = Service.rpc_stub_class
