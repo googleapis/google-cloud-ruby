@@ -65,15 +65,15 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.create_source.timeout = 600.0
+                default_config.rpcs.create_source.timeout = 60.0
 
-                default_config.rpcs.create_finding.timeout = 600.0
+                default_config.rpcs.create_finding.timeout = 60.0
 
-                default_config.rpcs.create_notification_config.timeout = 600.0
+                default_config.rpcs.create_notification_config.timeout = 60.0
 
-                default_config.rpcs.delete_notification_config.timeout = 600.0
+                default_config.rpcs.delete_notification_config.timeout = 60.0
 
-                default_config.rpcs.get_iam_policy.timeout = 600.0
+                default_config.rpcs.get_iam_policy.timeout = 60.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -81,7 +81,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.get_notification_config.timeout = 600.0
+                default_config.rpcs.get_notification_config.timeout = 60.0
                 default_config.rpcs.get_notification_config.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -89,7 +89,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.get_organization_settings.timeout = 600.0
+                default_config.rpcs.get_organization_settings.timeout = 60.0
                 default_config.rpcs.get_organization_settings.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -97,7 +97,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.get_source.timeout = 600.0
+                default_config.rpcs.get_source.timeout = 60.0
                 default_config.rpcs.get_source.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -105,7 +105,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.group_assets.timeout = 600.0
+                default_config.rpcs.group_assets.timeout = 480.0
                 default_config.rpcs.group_assets.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -113,7 +113,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.group_findings.timeout = 600.0
+                default_config.rpcs.group_findings.timeout = 480.0
                 default_config.rpcs.group_findings.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -121,7 +121,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.list_assets.timeout = 600.0
+                default_config.rpcs.list_assets.timeout = 480.0
                 default_config.rpcs.list_assets.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -129,7 +129,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.list_findings.timeout = 600.0
+                default_config.rpcs.list_findings.timeout = 480.0
                 default_config.rpcs.list_findings.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -137,7 +137,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.list_notification_configs.timeout = 600.0
+                default_config.rpcs.list_notification_configs.timeout = 60.0
                 default_config.rpcs.list_notification_configs.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -145,7 +145,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.list_sources.timeout = 600.0
+                default_config.rpcs.list_sources.timeout = 60.0
                 default_config.rpcs.list_sources.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -153,13 +153,13 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.run_asset_discovery.timeout = 600.0
+                default_config.rpcs.run_asset_discovery.timeout = 60.0
 
-                default_config.rpcs.set_finding_state.timeout = 600.0
+                default_config.rpcs.set_finding_state.timeout = 60.0
 
-                default_config.rpcs.set_iam_policy.timeout = 600.0
+                default_config.rpcs.set_iam_policy.timeout = 60.0
 
-                default_config.rpcs.test_iam_permissions.timeout = 600.0
+                default_config.rpcs.test_iam_permissions.timeout = 60.0
                 default_config.rpcs.test_iam_permissions.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -167,15 +167,15 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.update_finding.timeout = 600.0
+                default_config.rpcs.update_finding.timeout = 60.0
 
-                default_config.rpcs.update_notification_config.timeout = 600.0
+                default_config.rpcs.update_notification_config.timeout = 60.0
 
-                default_config.rpcs.update_organization_settings.timeout = 600.0
+                default_config.rpcs.update_organization_settings.timeout = 60.0
 
-                default_config.rpcs.update_source.timeout = 600.0
+                default_config.rpcs.update_source.timeout = 60.0
 
-                default_config.rpcs.update_security_marks.timeout = 600.0
+                default_config.rpcs.update_security_marks.timeout = 480.0
 
                 default_config
               end
