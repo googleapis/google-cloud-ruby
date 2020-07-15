@@ -238,6 +238,14 @@ module Google
                 {'database' => request.database}
               end
             )
+            @batch_write = Google::Gax.create_api_call(
+              @firestore_stub.method(:batch_write),
+              defaults["batch_write"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'database' => request.database}
+              end
+            )
             @begin_transaction = Google::Gax.create_api_call(
               @firestore_stub.method(:begin_transaction),
               defaults["begin_transaction"],
@@ -294,14 +302,6 @@ module Google
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'parent' => request.parent}
-              end
-            )
-            @batch_write = Google::Gax.create_api_call(
-              @firestore_stub.method(:batch_write),
-              defaults["batch_write"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'database' => request.database}
               end
             )
           end
@@ -704,6 +704,61 @@ module Google
             @batch_get_documents.call(req, options)
           end
 
+          # Applies a batch of write operations.
+          #
+          # The BatchWrite method does not apply the write operations atomically
+          # and can apply them out of order. Method does not allow more than one write
+          # per document. Each write succeeds or fails independently. See the
+          # {Google::Firestore::V1::BatchWriteResponse BatchWriteResponse} for the success status of each write.
+          #
+          # If you require an atomically applied set of writes, use
+          # {Google::Firestore::V1::Firestore::Commit Commit} instead.
+          #
+          # @param database [String]
+          #   Required. The database name. In the format:
+          #   `projects/{project_id}/databases/{database_id}`.
+          # @param writes [Array<Google::Firestore::V1::Write | Hash>]
+          #   The writes to apply.
+          #
+          #   Method does not apply writes atomically and does not guarantee ordering.
+          #   Each write succeeds or fails independently. You cannot write to the same
+          #   document more than once per request.
+          #   A hash of the same form as `Google::Firestore::V1::Write`
+          #   can also be provided.
+          # @param labels [Hash{String => String}]
+          #   Labels associated with this batch write.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Firestore::V1::BatchWriteResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Firestore::V1::BatchWriteResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/firestore/v1"
+          #
+          #   firestore_client = Google::Cloud::Firestore::V1.new
+          #
+          #   # TODO: Initialize `database`:
+          #   database = ''
+          #   response = firestore_client.batch_write(database)
+
+          def batch_write \
+              database,
+              writes: nil,
+              labels: nil,
+              options: nil,
+              &block
+            req = {
+              database: database,
+              writes: writes,
+              labels: labels
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Firestore::V1::BatchWriteRequest)
+            @batch_write.call(req, options, &block)
+          end
+
           # Starts a new transaction.
           #
           # @param database [String]
@@ -1103,61 +1158,6 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Firestore::V1::PartitionQueryRequest)
             @partition_query.call(req, options, &block)
-          end
-
-          # Applies a batch of write operations.
-          #
-          # The BatchWrite method does not apply the write operations atomically
-          # and can apply them out of order. Method does not allow more than one write
-          # per document. Each write succeeds or fails independently. See the
-          # {Google::Firestore::V1::BatchWriteResponse BatchWriteResponse} for the success status of each write.
-          #
-          # If you require an atomically applied set of writes, use
-          # {Google::Firestore::V1::Firestore::Commit Commit} instead.
-          #
-          # @param database [String]
-          #   Required. The database name. In the format:
-          #   `projects/{project_id}/databases/{database_id}`.
-          # @param writes [Array<Google::Firestore::V1::Write | Hash>]
-          #   The writes to apply.
-          #
-          #   Method does not apply writes atomically and does not guarantee ordering.
-          #   Each write succeeds or fails independently. You cannot write to the same
-          #   document more than once per request.
-          #   A hash of the same form as `Google::Firestore::V1::Write`
-          #   can also be provided.
-          # @param labels [Hash{String => String}]
-          #   Labels associated with this batch write.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Firestore::V1::BatchWriteResponse]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Firestore::V1::BatchWriteResponse]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/firestore/v1"
-          #
-          #   firestore_client = Google::Cloud::Firestore::V1.new
-          #
-          #   # TODO: Initialize `database`:
-          #   database = ''
-          #   response = firestore_client.batch_write(database)
-
-          def batch_write \
-              database,
-              writes: nil,
-              labels: nil,
-              options: nil,
-              &block
-            req = {
-              database: database,
-              writes: writes,
-              labels: labels
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Firestore::V1::BatchWriteRequest)
-            @batch_write.call(req, options, &block)
           end
         end
       end
