@@ -105,7 +105,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.group_assets.timeout = 60.0
+                default_config.rpcs.group_assets.timeout = 480.0
                 default_config.rpcs.group_assets.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -113,7 +113,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.group_findings.timeout = 60.0
+                default_config.rpcs.group_findings.timeout = 480.0
                 default_config.rpcs.group_findings.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -121,7 +121,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.list_assets.timeout = 60.0
+                default_config.rpcs.list_assets.timeout = 480.0
                 default_config.rpcs.list_assets.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -129,7 +129,7 @@ module Google
                   retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                 }
 
-                default_config.rpcs.list_findings.timeout = 60.0
+                default_config.rpcs.list_findings.timeout = 480.0
                 default_config.rpcs.list_findings.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
@@ -175,7 +175,7 @@ module Google
 
                 default_config.rpcs.update_source.timeout = 60.0
 
-                default_config.rpcs.update_security_marks.timeout = 60.0
+                default_config.rpcs.update_security_marks.timeout = 480.0
 
                 default_config
               end
