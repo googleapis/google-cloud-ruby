@@ -57,8 +57,7 @@ module Google
       #
       #   * `https://www.googleapis.com/auth/pubsub`
       # @param [Integer] timeout Default timeout to use in requests. Optional.
-      # @param [Hash] client_config A hash of values to override the default
-      #   behavior of the API client. Optional.
+      # @param [Hash] client_config Unused and deprecated.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
       # @param [String] emulator_host Pub/Sub emulator host. Optional.
@@ -77,12 +76,18 @@ module Google
       #   topic = pubsub.topic "my-topic"
       #   topic.publish "task completed"
       #
-      def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil, endpoint: nil,
-                   emulator_host: nil, project: nil, keyfile: nil
+      def self.new project_id: nil,
+                   credentials: nil,
+                   scope: nil,
+                   timeout: nil,
+                   client_config: nil, # rubocop:disable Lint/UnusedMethodArgument
+                   endpoint: nil,
+                   emulator_host: nil,
+                   project: nil,
+                   keyfile: nil
         project_id    ||= (project || default_project_id)
         scope         ||= configure.scope
         timeout       ||= configure.timeout
-        client_config ||= configure.client_config
         endpoint      ||= configure.endpoint
         emulator_host ||= configure.emulator_host
 
@@ -92,7 +97,7 @@ module Google
 
           return PubSub::Project.new(
             PubSub::Service.new(
-              project_id, :this_channel_is_insecure, host: emulator_host, timeout: timeout, client_config: client_config
+              project_id, :this_channel_is_insecure, host: emulator_host, timeout: timeout
             )
           )
         end
@@ -108,7 +113,7 @@ module Google
 
         PubSub::Project.new(
           PubSub::Service.new(
-            project_id, credentials, timeout: timeout, host: endpoint, client_config: client_config
+            project_id, credentials, timeout: timeout, host: endpoint
           )
         )
       end
@@ -131,8 +136,7 @@ module Google
       # * `retries` - (Integer) Number of times to retry requests on server
       #   error.
       # * `timeout` - (Integer) Default timeout to use in requests.
-      # * `client_config` - (Hash) A hash of values to override the default
-      #   behavior of the API client.
+      # * `client_config` - (Hash) Unused and deprecated.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
       # * `emulator_host` - (String) Host name of the emulator. Defaults to

@@ -76,7 +76,8 @@ The environment variables that google-cloud-pubsub checks for project ID are:
 1. `PUBSUB_PROJECT`
 2. `GOOGLE_CLOUD_PROJECT`
 
-The environment variables that google-cloud-pubsub checks for credentials are configured on {Google::Cloud::PubSub::V1::Credentials}:
+The environment variables that google-cloud-pubsub checks for credentials
+are configured on {Google::Cloud::PubSub::Credentials}:
 
 1. `PUBSUB_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `PUBSUB_KEYFILE` - Path to JSON file, or JSON contents

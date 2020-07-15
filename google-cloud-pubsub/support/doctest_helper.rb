@@ -75,13 +75,6 @@ def mock_pubsub
 end
 
 YARD::Doctest.configure do |doctest|
-  ##
-  # SKIP
-  #
-
-  # Skip all GAPIC for now
-  doctest.skip "Google::Cloud::PubSub::V1"
-
   # Skip all aliases, since tests would be exact duplicates
   doctest.skip "Google::Cloud::PubSub::Message#msg_id"
   doctest.skip "Google::Cloud::PubSub::Project#get_topic"
