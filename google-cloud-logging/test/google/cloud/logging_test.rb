@@ -18,11 +18,10 @@ describe Google::Cloud do
   describe "#logging" do
     it "calls out to Google::Cloud.logging" do
       gcloud = Google::Cloud.new
-      stubbed_logging = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil, host: nil) {
+      stubbed_logging = ->(project, keyfile, scope: nil, timeout: nil, host: nil) {
         _(project).must_be_nil
         _(keyfile).must_be_nil
         _(timeout).must_be_nil
-        _(client_config).must_be_nil
         _(host).must_be_nil
         "logging-project-object-empty"
       }
@@ -34,11 +33,10 @@ describe Google::Cloud do
 
     it "passes project and keyfile to Google::Cloud.logging" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_logging = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil, host: nil) {
+      stubbed_logging = ->(project, keyfile, scope: nil, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(keyfile).must_equal "keyfile-path"
         _(timeout).must_be_nil
-        _(client_config).must_be_nil
         _(host).must_be_nil
         "logging-project-object"
       }
@@ -50,12 +48,11 @@ describe Google::Cloud do
 
     it "passes project and keyfile and options to Google::Cloud.logging" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_logging = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil, host: nil) {
+      stubbed_logging = ->(project, keyfile, scope: nil, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(keyfile).must_equal "keyfile-path"
         _(scope).must_equal "http://example.com/scope"
         _(timeout).must_equal 60
-        _(client_config).must_be_nil
         _(host).must_be_nil
         "logging-project-object-scoped"
       }
