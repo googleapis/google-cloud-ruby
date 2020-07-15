@@ -41,7 +41,6 @@ module Google
     #   * `https://www.googleapis.com/auth/cloud-platform`
     #
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config Unused and deprecated.
     #
     # @return [Google::Cloud::ErrorReporting::Project]
     #
@@ -58,11 +57,10 @@ module Google
     #                                             service_version: "v8"
     #   error_reporting.report error_event
     #
-    def error_reporting scope: nil, timeout: nil, client_config: nil
+    def error_reporting scope: nil, timeout: nil
       Google::Cloud.error_reporting @project, @keyfile,
                                     scope: scope,
-                                    timeout: (timeout || @timeout),
-                                    client_config: client_config
+                                    timeout: (timeout || @timeout)
     end
 
     ##
@@ -88,7 +86,6 @@ module Google
     #   * `https://www.googleapis.com/auth/cloud-platform`
     #
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config Unused and deprecated.
     #
     # @return [Google::Cloud::ErrorReporting::Project]
     #
@@ -105,13 +102,11 @@ module Google
     #                                             service_version: "v8"
     #   error_reporting.report error_event
     #
-    def self.error_reporting project_id = nil, credentials = nil, scope: nil,
-                             timeout: nil, client_config: nil
+    def self.error_reporting project_id = nil, credentials = nil, scope: nil, timeout: nil
       require "google/cloud/error_reporting"
       Google::Cloud::ErrorReporting.new project_id: project_id,
                                         credentials: credentials,
-                                        scope: scope, timeout: timeout,
-                                        client_config: client_config
+                                        scope: scope, timeout: timeout
     end
   end
 end
@@ -156,7 +151,6 @@ Google::Cloud.configure.add_config! :error_reporting do |config|
   config.add_alias! :keyfile, :credentials
   config.add_field! :scope, default_scopes, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
-  config.add_field! :client_config, nil, match: Hash
   config.add_field! :endpoint, "clouderrorreporting.googleapis.com", match: String
   config.add_field! :service_name, default_service,
                     match: String, allow_nil: true
