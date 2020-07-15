@@ -60,7 +60,7 @@ class Kokoro < Command
         header "Gem Unchanged - Skipping Acceptance"
         run "bundle exec rake ci", 3600
       end
-      local_docs_test @gem if should_link_check?
+      local_docs_test if should_link_check?
     end
     release_please if @should_release && @updated
   end
@@ -169,7 +169,8 @@ class Kokoro < Command
     broken_links
   end
 
-  def local_docs_test gem
+  def local_docs_test gem = nil
+    gem ||= @gem
     run "bundle exec rake yard"
     broken_links = check_links ["doc"], ".", " -r --skip '^https://googleapis.dev/ruby/#{gem}/latest'"
     puts_broken_links broken_links
