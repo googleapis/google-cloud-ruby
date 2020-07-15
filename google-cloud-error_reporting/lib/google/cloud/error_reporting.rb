@@ -77,8 +77,14 @@ module Google
       #   error_reporting = Google::Cloud::ErrorReporting.new
       #   # ...
       #
-      def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
-                   client_config: nil, endpoint: nil, project: nil, keyfile: nil
+      def self.new project_id: nil,
+                   credentials: nil,
+                   scope: nil,
+                   timeout: nil,
+                   client_config: nil, # rubocop:disable Lint/UnusedMethodArgument
+                   endpoint: nil,
+                   project: nil,
+                   keyfile: nil
         project_id    ||= project
         project_id    ||= ErrorReporting::Project.default_project_id
         scope         ||= configure.scope
@@ -89,12 +95,8 @@ module Google
         credentials = resolve_credentials credentials, scope
         project_id = resolve_project_id project_id, credentials
 
-        ErrorReporting::Project.new(
-          ErrorReporting::Service.new(
-            project_id, credentials,
-            host: endpoint, timeout: timeout, client_config: client_config
-          )
-        )
+        service = ErrorReporting::Service.new project_id, credentials, host: endpoint, timeout: timeout
+        ErrorReporting::Project.new service
       end
 
       ##

@@ -25,16 +25,14 @@ module Google
       # @private Represents the gRPC Error Reporting service, including all the
       #   API methods.
       class Service
-        attr_accessor :project, :credentials, :timeout, :client_config, :host
+        attr_accessor :project, :credentials, :timeout, :host
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, timeout: nil, client_config: nil,
-                       host: nil
+        def initialize project, credentials, timeout: nil, host: nil
           @project = project
           @credentials = credentials
           @timeout = timeout
-          @client_config = client_config || {}
           @host = host
         end
 
