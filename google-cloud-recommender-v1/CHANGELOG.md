@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2020-07-16
+
+#### Features
+
+* Add methods for interacting with insights
+
 ### 0.4.3 / 2020-06-18
 
 #### Documentation
