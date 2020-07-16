@@ -66,8 +66,9 @@ def mock_pubsub
 
     pubsub.service.mocked_publisher = Minitest::Mock.new
     pubsub.service.mocked_subscriber = Minitest::Mock.new
+    pubsub.service.mocked_iam = Minitest::Mock.new
     if block_given?
-      yield pubsub.service.mocked_publisher, pubsub.service.mocked_subscriber
+      yield pubsub.service.mocked_publisher, pubsub.service.mocked_subscriber, pubsub.service.mocked_iam
     end
 
     pubsub
@@ -101,22 +102,22 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud.pubsub" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message], Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
     end
   end
 
   doctest.before "Google::Cloud#pubsub" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message], Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message], Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
     end
   end
 
@@ -124,9 +125,9 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Message" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message], Hash]
-      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
       mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
@@ -137,10 +138,10 @@ YARD::Doctest.configure do |doctest|
   # Policy
 
   doctest.before "Google::Cloud::PubSub::Policy" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :get_iam_policy, policy_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :set_iam_policy, policy_resp, ["projects/my-project/topics/my-topic", Google::Iam::V1::Policy, Hash]
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam|
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_iam.expect :get_iam_policy, policy_resp, [Hash]
+      mock_iam.expect :set_iam_policy, policy_resp, [Hash]
     end
   end
 
@@ -149,65 +150,65 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Project" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message("task completed")], Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Project#topic" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/existing-topic", Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Project#topic@By default `nil` will be returned if topic does not exist." do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/non-existing-topic", Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Project#topic@Create topic in a different project with the `project` flag." do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/another-topic", Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Project#topic@Configuring AsyncPublisher to increase concurrent callbacks:" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message("task completed")], Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Project#create_topic" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :create_topic, nil, ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :create_topic, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Project#topics" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :list_topics, list_topics_paged_enum, ["projects/my-project", Hash]
+      mock_publisher.expect :list_topics, list_topics_paged_enum, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Project#subscription" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-sub", Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Project#subscriptions" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :list_subscriptions, list_subscriptions_resp, ["projects/my-project", Hash]
-      mock_subscriber.expect :list_subscriptions, list_subscriptions_resp(nil), ["projects/my-project", Hash]
+      mock_subscriber.expect :list_subscriptions, list_subscriptions_resp, [Hash]
+      mock_subscriber.expect :list_subscriptions, list_subscriptions_resp(nil), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Project#snapshots" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :list_snapshots, list_snapshots_resp, ["projects/my-project", Hash]
-      mock_subscriber.expect :list_snapshots, list_snapshots_resp(nil), ["projects/my-project", Hash]
+      mock_subscriber.expect :list_snapshots, list_snapshots_resp, [Hash]
+      mock_subscriber.expect :list_snapshots, list_snapshots_resp(nil), [Hash]
     end
   end
 
@@ -216,7 +217,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::ReceivedMessage" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
       mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
@@ -227,26 +228,26 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::ReceivedMessage#delivery_attempt" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", "projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-topic-sub"), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::ReceivedMessage#modify_ack_deadline!" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
       mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
-      mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 120, Hash]
+      mock_subscriber.expect :modify_ack_deadline, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::ReceivedMessage#reject!" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), [Hash]
       mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
@@ -255,22 +256,22 @@ YARD::Doctest.configure do |doctest|
   end
   doctest.before "Google::Cloud::PubSub::ReceivedMessage#nack!" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
       mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
-      mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 0, Hash]
+      mock_subscriber.expect :modify_ack_deadline, nil, [Hash]
     end
   end
   doctest.before "Google::Cloud::PubSub::ReceivedMessage#ignore!" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
       mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
-      mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 0, Hash]
+      mock_subscriber.expect :modify_ack_deadline, nil, [Hash]
     end
   end
 
@@ -279,8 +280,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::RetryPolicy" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :update_subscription, subscription_resp, [Google::Cloud::PubSub::V1::Subscription, Google::Protobuf::FieldMask, Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), [Hash]
+      mock_subscriber.expect :update_subscription, subscription_resp, [Hash]
     end
   end
 
@@ -289,17 +290,17 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Snapshot" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-sub", Hash]
-      mock_subscriber.expect :create_snapshot, snapshot_resp, ["projects/my-project/snapshots/my-snapshot", "projects/my-project/subscriptions/my-sub", Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
+      mock_subscriber.expect :create_snapshot, snapshot_resp, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Snapshot#delete" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :list_snapshots, list_snapshots_resp, ["projects/my-project", Hash]
-      mock_subscriber.expect :delete_snapshot, nil, [String, Hash]
-      mock_subscriber.expect :delete_snapshot, nil, [String, Hash]
-      mock_subscriber.expect :delete_snapshot, nil, [String, Hash]
+      mock_subscriber.expect :list_snapshots, list_snapshots_resp, [Hash]
+      mock_subscriber.expect :delete_snapshot, nil, [Hash]
+      mock_subscriber.expect :delete_snapshot, nil, [Hash]
+      mock_subscriber.expect :delete_snapshot, nil, [Hash]
     end
   end
 
@@ -308,8 +309,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Snapshot::List" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :list_snapshots, list_snapshots_resp, ["projects/my-project", Hash]
-      mock_subscriber.expect :list_snapshots, list_snapshots_resp(nil), ["projects/my-project", Hash]
+      mock_subscriber.expect :list_snapshots, list_snapshots_resp, [Hash]
+      mock_subscriber.expect :list_snapshots, list_snapshots_resp(nil), [Hash]
     end
   end
 
@@ -319,48 +320,48 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Subscription" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), [Hash]
       mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
-      mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], Hash]
+      mock_subscriber.expect :acknowledge, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Subscription#dead_letter" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 10), ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :update_subscription, subscription_resp, [Google::Cloud::PubSub::V1::Subscription, Google::Protobuf::FieldMask, Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 10), [Hash]
+      mock_subscriber.expect :update_subscription, subscription_resp, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Subscription#modify_ack_deadline" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-topic-sub", 100, Hash]
-      mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], 120, Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), [Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), [Hash]
+      mock_subscriber.expect :modify_ack_deadline, nil, [Hash]
     end
   end
   doctest.before "Google::Cloud::PubSub::Subscription#pull" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-topic-sub", 100, Hash]
-      mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), [Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), [Hash]
+      mock_subscriber.expect :acknowledge, nil, [Hash]
     end
   end
   doctest.before "Google::Cloud::PubSub::Subscription#wait_for_messages" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-topic-sub", 100, Hash]
-      mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), [Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), [Hash]
+      mock_subscriber.expect :acknowledge, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Subscription#delete" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :delete_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), [Hash]
+      mock_subscriber.expect :delete_subscription, subscription_resp, [Hash]
     end
   end
 
@@ -373,93 +374,93 @@ YARD::Doctest.configure do |doctest|
   end
 
   doctest.before "Google::Cloud::PubSub::Subscription#policy" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-subscription"), ["projects/my-project/subscriptions/my-subscription", Hash]
-      mock_subscriber.expect :get_iam_policy, policy_resp, ["projects/my-project/subscriptions/my-subscription", Hash]
-      mock_subscriber.expect :set_iam_policy, policy_resp, ["projects/my-project/subscriptions/my-subscription", Google::Iam::V1::Policy, Hash]
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-subscription"), [Hash]
+      mock_iam.expect :get_iam_policy, policy_resp, [Hash]
+      mock_iam.expect :set_iam_policy, policy_resp, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Subscription#update_policy" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-subscription"), ["projects/my-project/subscriptions/my-subscription", Hash]
-      mock_subscriber.expect :get_iam_policy, policy_resp, ["projects/my-project/subscriptions/my-subscription", Hash]
-      mock_subscriber.expect :set_iam_policy, policy_resp, ["projects/my-project/subscriptions/my-subscription", Google::Iam::V1::Policy, Hash]
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-subscription"), [Hash]
+      mock_iam.expect :get_iam_policy, policy_resp, [Hash]
+      mock_iam.expect :set_iam_policy, policy_resp, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Subscription#pull@A maximum number of messages returned can also be specified:" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-topic-sub", 10, Hash]
-      mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), [Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), [Hash]
+      mock_subscriber.expect :acknowledge, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Subscription#test_permissions" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-subscription"), ["projects/my-project/subscriptions/my-subscription", Hash]
-      mock_subscriber.expect :get_iam_policy, policy_resp, ["projects/my-project/subscriptions/my-subscription", Hash]
-      mock_subscriber.expect :test_iam_permissions, subscription_permissions_resp, ["projects/my-project/subscriptions/my-subscription", ["pubsub.subscriptions.get", "pubsub.subscriptions.consume"], Hash]
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-subscription"), [Hash]
+      mock_iam.expect :get_iam_policy, policy_resp, [Hash]
+      mock_iam.expect :test_iam_permissions, subscription_permissions_resp, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Subscription#topic" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-topic-sub", 100, Hash]
-      mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), [Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), [Hash]
+      mock_subscriber.expect :acknowledge, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Subscription#create_snapshot" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-sub", Hash]
-      mock_subscriber.expect :create_snapshot, snapshot_resp, ["projects/my-project/snapshots/my-snapshot", "projects/my-project/subscriptions/my-sub", Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
+      mock_subscriber.expect :create_snapshot, snapshot_resp, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Subscription#create_snapshot@Without providing a name:" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-sub", Hash]
-      mock_subscriber.expect :create_snapshot, snapshot_resp("gcr-analysis-..."), [nil, "projects/my-project/subscriptions/my-sub", Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
+      mock_subscriber.expect :create_snapshot, snapshot_resp("gcr-analysis-..."), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Subscription#seek" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-sub"), ["projects/my-project/subscriptions/my-sub", Hash]
-      mock_subscriber.expect :create_snapshot, snapshot_resp("gcr-analysis-..."), [nil, "projects/my-project/subscriptions/my-sub", Hash]
-      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
-      mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-sub", ["2"], Hash]
-      mock_subscriber.expect :seek, nil, ["projects/my-project/subscriptions/my-sub", Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-sub"), [Hash]
+      mock_subscriber.expect :create_snapshot, snapshot_resp("gcr-analysis-..."), [Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), [Hash]
+      mock_subscriber.expect :acknowledge, nil, [Hash]
+      mock_subscriber.expect :seek, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Subscription#reload!" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp, [String, Hash]
-      mock_subscriber.expect :get_subscription, subscription_resp, [String, Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
     end
   end
   doctest.skip "Google::Cloud::PubSub::Subscription#refresh!"
 
   doctest.before "Google::Cloud::PubSub::Subscription#retry_policy" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :update_subscription, subscription_resp, [Google::Cloud::PubSub::V1::Subscription, Google::Protobuf::FieldMask, Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), [Hash]
+      mock_subscriber.expect :update_subscription, subscription_resp, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Subscription#push_config" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp, [String, Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
     end
   end
   doctest.before "Google::Cloud::PubSub::Subscription#push_config@Update the push configuration by passing a block:" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp, [String, Hash]
-      mock_subscriber.expect :update_subscription, subscription_resp, [Google::Cloud::PubSub::V1::Subscription, Google::Protobuf::FieldMask, Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
+      mock_subscriber.expect :update_subscription, subscription_resp, [Hash]
     end
   end
 
@@ -467,7 +468,7 @@ YARD::Doctest.configure do |doctest|
     mock_pubsub do |mock_publisher, mock_subscriber|
       ordered_subscription_resp = subscription_resp "my-ordered-topic-sub"
       ordered_subscription_resp.enable_message_ordering = true
-      mock_subscriber.expect :get_subscription, ordered_subscription_resp, ["projects/my-project/subscriptions/my-ordered-topic-sub", Hash]
+      mock_subscriber.expect :get_subscription, ordered_subscription_resp, [Hash]
       mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
@@ -481,13 +482,13 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Subscription::PushConfig" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp, [String, Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
     end
   end
   doctest.before "Google::Cloud::PubSub::Subscription::PushConfig@Update the push configuration by passing a block:" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp, [String, Hash]
-      mock_subscriber.expect :update_subscription, subscription_resp, [Google::Cloud::PubSub::V1::Subscription, Google::Protobuf::FieldMask, Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
+      mock_subscriber.expect :update_subscription, subscription_resp, [Hash]
     end
   end
 
@@ -496,8 +497,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Subscription::List" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :list_subscriptions, list_subscriptions_resp, ["projects/my-project", Hash]
-      mock_subscriber.expect :list_subscriptions, list_subscriptions_resp(nil), ["projects/my-project", Hash]
+      mock_subscriber.expect :list_subscriptions, list_subscriptions_resp, [Hash]
+      mock_subscriber.expect :list_subscriptions, list_subscriptions_resp(nil), [Hash]
     end
   end
 
@@ -506,12 +507,12 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Subscriber" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), [Hash]
       mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
-      mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], Hash]
+      mock_subscriber.expect :acknowledge, nil, [Hash]
     end
   end
 
@@ -520,144 +521,144 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Topic" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message("task completed")], Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#kms_key" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       this_topic = topic_resp "my-topic", kms_key_name: "projects/a/locations/b/keyRings/c/cryptoKeys/d"
-      mock_publisher.expect :get_topic, this_topic, ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :get_topic, this_topic, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#kms_key=" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       this_topic = topic_resp "my-topic", kms_key_name: "projects/a/locations/b/keyRings/c/cryptoKeys/d"
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :update_topic, this_topic, [this_topic, Google::Protobuf::FieldMask.new(paths: ["kms_key_name"]), Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_publisher.expect :update_topic, this_topic, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#persistence_regions" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       this_topic = topic_resp "my-topic", persistence_regions: ["us-central1", "us-central2"]
-      mock_publisher.expect :get_topic, this_topic, ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :get_topic, this_topic, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#persistence_regions=" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       this_topic = topic_resp "my-topic", persistence_regions: ["us-central1", "us-central2"]
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :update_topic, this_topic, [this_topic, Google::Protobuf::FieldMask.new(paths: ["message_storage_policy"]), Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_publisher.expect :update_topic, this_topic, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#delete" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :delete_topic, nil, ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_publisher.expect :delete_topic, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#policy" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :get_iam_policy, policy_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :set_iam_policy, policy_resp, ["projects/my-project/topics/my-topic", Google::Iam::V1::Policy, Hash]
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam|
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_iam.expect :get_iam_policy, policy_resp, [Hash]
+      mock_iam.expect :set_iam_policy, policy_resp, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#update_policy" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :get_iam_policy, policy_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :set_iam_policy, policy_resp, ["projects/my-project/topics/my-topic", Google::Iam::V1::Policy, Hash]
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam|
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_iam.expect :get_iam_policy, policy_resp, [Hash]
+      mock_iam.expect :set_iam_policy, policy_resp, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#publish" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message("task completed")], Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#publish@Additionally, a message can be published with attributes:" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message("task completed", {"foo"=>"bar", "this"=>"that"})], Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#publish@Multiple messages can be sent at the same time using a block:" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
       messages = [
         pubsub_message("task 1 completed", { "foo" => "bar" }),
         pubsub_message("task 2 completed", { "foo" => "baz" }),
         pubsub_message("task 3 completed", { "foo" => "bif" })
       ]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1", "2", "3"]), ["projects/my-project/topics/my-topic", messages, Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1", "2", "3"]), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#publish_async@Ordered messages are supported using ordering_key:" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-ordered-topic", Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-ordered-topic", [pubsub_message("task completed")], Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#subscribe" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", "projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-topic-sub"), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#subscribe@Configure a Dead Letter Queues policy:" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp("my-dead-letter-topic"), ["projects/my-project/topics/my-dead-letter-topic", Hash]
-      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-dead-letter-sub"), ["projects/my-project/subscriptions/my-dead-letter-sub", "projects/my-project/topics/my-dead-letter-topic", Hash]
-      mock_publisher.expect :get_iam_policy, policy_resp, ["projects/my-project/topics/my-dead-letter-topic", Hash]
-      mock_subscriber.expect :get_iam_policy, policy_resp, ["projects/my-project/subscriptions/my-dead-letter-sub", Hash]
-      mock_publisher.expect :set_iam_policy, policy_resp, ["projects/my-project/topics/my-dead-letter-topic", Google::Iam::V1::Policy, Hash]
-      mock_subscriber.expect :set_iam_policy, policy_resp, ["projects/my-project/subscriptions/my-dead-letter-sub", Google::Iam::V1::Policy, Hash]
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", "projects/my-project/topics/my-topic", Hash]
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam|
+      mock_publisher.expect :get_topic, topic_resp("my-dead-letter-topic"), [Hash]
+      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-dead-letter-sub"), [Hash]
+      mock_iam.expect :get_iam_policy, policy_resp, [Hash]
+      mock_iam.expect :get_iam_policy, policy_resp, [Hash]
+      mock_iam.expect :set_iam_policy, policy_resp, [Hash]
+      mock_iam.expect :set_iam_policy, policy_resp, [Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-topic-sub"), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#subscription" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#subscriptions" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :list_topic_subscriptions, list_topic_subscriptions_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :list_topic_subscriptions, list_topic_subscriptions_resp(nil), ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_publisher.expect :list_topic_subscriptions, list_topic_subscriptions_resp, [Hash]
+      mock_publisher.expect :list_topic_subscriptions, list_topic_subscriptions_resp(nil), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#test_permissions" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :get_iam_policy, policy_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :test_iam_permissions, topic_permissions_resp, ["projects/my-project/topics/my-topic", ["pubsub.topics.get", "pubsub.topics.publish"], Hash]
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam|
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_publisher.expect :get_iam_policy, policy_resp, [Hash]
+      mock_iam.expect :test_iam_permissions, topic_permissions_resp, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#reload!" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, [String, Hash]
-      mock_publisher.expect :get_topic, topic_resp, [String, Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
     end
   end
   doctest.skip "Google::Cloud::PubSub::Topic#refresh!"
@@ -667,7 +668,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Topic::List" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :list_topics, list_topics_paged_enum, ["projects/my-project", Hash]
+      mock_publisher.expect :list_topics, list_topics_paged_enum, [Hash]
     end
   end
 
@@ -676,17 +677,15 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::BatchPublisher" do
     mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
       messages = [
         pubsub_message("task 1 completed", { "foo" => "bar" }),
         pubsub_message("task 2 completed", { "foo" => "baz" }),
         pubsub_message("task 3 completed", { "foo" => "bif" })
       ]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1", "2", "3"]), ["projects/my-project/topics/my-topic", messages, Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1", "2", "3"]), [Hash]
     end
   end
-
-
 end
 
 # Fixture helpers
