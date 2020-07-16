@@ -1018,6 +1018,7 @@ google-cloud-spanner:
 google-cloud-spanner-admin-database-v1:
 - v0.1.0
 google-cloud-spanner-v1:
+- v0.2.0
 - v0.1.0
 google-cloud-speech:
 - v1.1.1
