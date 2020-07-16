@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.2 / 2020-07-16
+
+#### Bug Fixes
+
+* Update timeout settings
+
 ### 0.3.1 / 2020-06-18
 
 #### Documentation
