@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2020-07-16
+
+#### Features
+
+* Support for the upgrade_instance operation
+
 ### 0.2.3 / 2020-06-18
 
 #### Documentation
