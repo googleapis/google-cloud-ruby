@@ -122,6 +122,28 @@ module Google
 
                 default_config.rpcs.run_build_trigger.timeout = 600.0
 
+                default_config.rpcs.create_worker_pool.timeout = 600.0
+
+                default_config.rpcs.get_worker_pool.timeout = 600.0
+                default_config.rpcs.get_worker_pool.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                }
+
+                default_config.rpcs.delete_worker_pool.timeout = 600.0
+
+                default_config.rpcs.update_worker_pool.timeout = 600.0
+
+                default_config.rpcs.list_worker_pools.timeout = 600.0
+                default_config.rpcs.list_worker_pools.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                }
+
                 default_config
               end
               yield @configure if block_given?
