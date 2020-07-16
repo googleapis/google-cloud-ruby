@@ -28,6 +28,7 @@ library = gapic.ruby_library(
     proto_path="google/pubsub/v1",
     extra_proto_files=[
         "google/cloud/common_resources.proto",
+        "google/iam/v1/iam_policy.proto"
     ],
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-pubsub-v1",
@@ -35,6 +36,7 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Cloud Pub/Sub is a fully-managed real-time messaging service that allows you to send and receive messages between independent applications.",
         "ruby-cloud-env-prefix": "PUBSUB",
         "ruby-cloud-grpc-service-config": "google/pubsub/v1/pubsub_grpc_service_config.json",
+        "ruby-cloud-common-services": "google.iam.v1.IAMPolicy=google.pubsub.v1.Publisher",
         "ruby-cloud-path-override": "pub_sub=pubsub",
         "ruby-cloud-namespace-override": "Pubsub=PubSub",
         "ruby-cloud-product-url": "https://cloud.google.com/pubsub",
