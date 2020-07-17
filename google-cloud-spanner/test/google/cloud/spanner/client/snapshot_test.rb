@@ -18,13 +18,13 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
-  let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
+  let(:session_grpc) { Google::Cloud::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
   let(:transaction_id) { "tx789" }
-  let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id }
+  let(:transaction_grpc) { Google::Cloud::Spanner::V1::Transaction.new id: transaction_id }
   let(:snapshot) { Google::Cloud::Spanner::Snapshot.from_grpc transaction_grpc, session }
-  let(:tx_selector) { Google::Spanner::V1::TransactionSelector.new id: transaction_id }
-  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
+  let(:tx_selector) { Google::Cloud::Spanner::V1::TransactionSelector.new id: transaction_id }
+  let(:default_options) { { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } } }
   let :results_hash do
     {
       metadata: {
@@ -58,16 +58,16 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
       ]
     }
   end
-  let(:results_grpc) { Google::Spanner::V1::PartialResultSet.new results_hash }
+  let(:results_grpc) { Google::Cloud::Spanner::V1::PartialResultSet.new results_hash }
   let(:results_enum) { Array(results_grpc).to_enum }
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
-  let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new return_read_timestamp: true }
-  let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new read_only: snp_opts }
-  
+  let(:snp_opts) { Google::Cloud::Spanner::V1::TransactionOptions::ReadOnly.new return_read_timestamp: true }
+  let(:tx_opts) { Google::Cloud::Spanner::V1::TransactionOptions.new read_only: snp_opts }
+
   def mock_builder
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts }, default_options]
     spanner.service.mocked_service = mock
     expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, options: default_options
     mock
@@ -105,7 +105,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
   end
 
   describe :strong do
-    let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new strong: true, return_read_timestamp: true }
+    let(:snp_opts) { Google::Cloud::Spanner::V1::TransactionOptions::ReadOnly.new strong: true, return_read_timestamp: true }
 
     it "can execute a simple query with the strong option" do
       mock = mock_builder()
@@ -128,7 +128,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
     let(:snapshot_time) { Time.now }
     let(:snapshot_datetime) { snapshot_time.to_datetime }
     let(:snapshot_timestamp) { Google::Cloud::Spanner::Convert.time_to_timestamp snapshot_time }
-    let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new read_timestamp: snapshot_timestamp, return_read_timestamp: true }
+    let(:snp_opts) { Google::Cloud::Spanner::V1::TransactionOptions::ReadOnly.new read_timestamp: snapshot_timestamp, return_read_timestamp: true }
 
     it "can execute a simple query with the timestamp option (Time)" do
       mock = mock_builder()
@@ -198,7 +198,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
   describe :staleness do
     let(:snapshot_staleness) { 60 }
     let(:duration_staleness) { Google::Cloud::Spanner::Convert.number_to_duration snapshot_staleness }
-    let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new exact_staleness: duration_staleness, return_read_timestamp: true }
+    let(:snp_opts) { Google::Cloud::Spanner::V1::TransactionOptions::ReadOnly.new exact_staleness: duration_staleness, return_read_timestamp: true }
 
     it "can execute a simple query with the staleness option" do
       mock = mock_builder()

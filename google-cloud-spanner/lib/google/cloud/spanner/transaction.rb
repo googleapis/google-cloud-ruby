@@ -933,7 +933,7 @@ module Google
         # The TransactionSelector to be used for queries
         def tx_selector
           return nil if transaction_id.nil?
-          Google::Spanner::V1::TransactionSelector.new id: transaction_id
+          V1::TransactionSelector.new id: transaction_id
         end
 
         ##

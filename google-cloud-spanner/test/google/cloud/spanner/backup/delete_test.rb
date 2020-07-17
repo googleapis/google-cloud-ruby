@@ -20,7 +20,7 @@ describe Google::Cloud::Spanner::Backup, :delete, :mock_spanner do
   let(:database_id) { "my-database-id" }
   let(:backup_id) { "my-backup-id" }
   let(:backup_grpc) {
-    Google::Spanner::Admin::Database::V1::Backup.new(
+    Google::Cloud::Spanner::Admin::Database::V1::Backup.new(
       backup_hash(instance_id: instance_id, database_id: database_id, backup_id: backup_id)
     )
   }
@@ -28,7 +28,7 @@ describe Google::Cloud::Spanner::Backup, :delete, :mock_spanner do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_backup, nil, [backup_grpc.name]
+    mock.expect :delete_backup, nil, [name: backup_grpc.name]
     spanner.service.mocked_databases = mock
 
     _(backup.delete).must_equal true

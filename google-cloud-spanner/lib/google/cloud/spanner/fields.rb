@@ -372,9 +372,9 @@ module Google
         ##
         # @private
         def to_grpc_type
-          Google::Spanner::V1::Type.new(
+          V1::Type.new(
             code: :STRUCT,
-            struct_type: Google::Spanner::V1::StructType.new(
+            struct_type: V1::StructType.new(
               fields: @grpc_fields
             )
           )
@@ -382,7 +382,7 @@ module Google
 
         ##
         # @private Creates a new Fields instance from a
-        # Google::Spanner::V1::Metadata::Row_type::Fields.
+        # V1::Metadata::Row_type::Fields.
         def self.from_grpc fields
           new([]).tap do |f|
             f.instance_variable_set :@grpc_fields, Array(fields)
@@ -412,18 +412,18 @@ module Google
           if pair.is_a?(Array)
             if pair.count == 2
               if pair.first.is_a?(Integer)
-                Google::Spanner::V1::StructType::Field.new(
+                V1::StructType::Field.new(
                   type: Convert.grpc_type_for_field(pair.last)
                 )
               else
-                Google::Spanner::V1::StructType::Field.new(
+                V1::StructType::Field.new(
                   name: String(pair.first),
                   type: Convert.grpc_type_for_field(pair.last)
                 )
               end
             else
-              Google::Spanner::V1::StructType::Field.new(
-                type: Google::Spanner::V1::Type.new(
+              V1::StructType::Field.new(
+                type: V1::Type.new(
                   code: :ARRAY,
                   array_element_type: Convert.grpc_type_for_field(pair.last)
                 )
@@ -435,7 +435,7 @@ module Google
             unless pair.is_a?(Symbol)
               raise ArgumentError, "type must be a symbol"
             end
-            Google::Spanner::V1::StructType::Field.new(
+            V1::StructType::Field.new(
               type: Convert.grpc_type_for_field(pair)
             )
           end

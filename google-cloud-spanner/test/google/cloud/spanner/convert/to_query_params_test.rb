@@ -23,55 +23,55 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
   it "converts a bool value" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params active: true
     _(combined_params).must_equal({ "active" => [Google::Protobuf::Value.new(bool_value: true),
-                                              Google::Spanner::V1::Type.new(code: :BOOL)] })
+                                              Google::Cloud::Spanner::V1::Type.new(code: :BOOL)] })
   end
 
   it "converts a nil bool value" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params({active: nil}, {active: :BOOL})
     _(combined_params).must_equal({ "active" => [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-                                              Google::Spanner::V1::Type.new(code: :BOOL)] })
+                                              Google::Cloud::Spanner::V1::Type.new(code: :BOOL)] })
   end
 
   it "converts a int value" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params age: 29
     _(combined_params).must_equal({ "age" => [Google::Protobuf::Value.new(string_value: "29"),
-                                           Google::Spanner::V1::Type.new(code: :INT64)] })
+                                           Google::Cloud::Spanner::V1::Type.new(code: :INT64)] })
   end
 
   it "converts a nil int value" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params({age: nil}, {age: :INT64})
     _(combined_params).must_equal({ "age" => [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-                                           Google::Spanner::V1::Type.new(code: :INT64)] })
+                                           Google::Cloud::Spanner::V1::Type.new(code: :INT64)] })
   end
 
   it "converts a float value" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params score: 0.9
     _(combined_params).must_equal({ "score" => [Google::Protobuf::Value.new(number_value: 0.9),
-                                             Google::Spanner::V1::Type.new(code: :FLOAT64)] })
+                                             Google::Cloud::Spanner::V1::Type.new(code: :FLOAT64)] })
   end
 
   it "converts a float value (Infinity)" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params score: Float::INFINITY
     _(combined_params).must_equal({ "score" => [Google::Protobuf::Value.new(string_value: "Infinity"),
-                                             Google::Spanner::V1::Type.new(code: :FLOAT64)] })
+                                             Google::Cloud::Spanner::V1::Type.new(code: :FLOAT64)] })
   end
 
   it "converts a float value (-Infinity)" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params score: -Float::INFINITY
     _(combined_params).must_equal({ "score" => [Google::Protobuf::Value.new(string_value: "-Infinity"),
-                                             Google::Spanner::V1::Type.new(code: :FLOAT64)] })
+                                             Google::Cloud::Spanner::V1::Type.new(code: :FLOAT64)] })
   end
 
   it "converts a float value (NaN)" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params score: Float::NAN
     _(combined_params).must_equal({ "score" => [Google::Protobuf::Value.new(string_value: "NaN"),
-                                             Google::Spanner::V1::Type.new(code: :FLOAT64)] })
+                                             Google::Cloud::Spanner::V1::Type.new(code: :FLOAT64)] })
   end
 
   it "converts a nil float value" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params({score: nil}, {score: :FLOAT64})
     _(combined_params).must_equal({ "score" => [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-                                             Google::Spanner::V1::Type.new(code: :FLOAT64)] })
+                                             Google::Cloud::Spanner::V1::Type.new(code: :FLOAT64)] })
   end
 
   it "converts a Time value" do
@@ -79,7 +79,7 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
 
     combined_params = Google::Cloud::Spanner::Convert.to_query_params updated_at: timestamp
     _(combined_params).must_equal({ "updated_at" => [Google::Protobuf::Value.new(string_value: "2017-01-02T03:04:05.060000000Z"),
-                                                  Google::Spanner::V1::Type.new(code: :TIMESTAMP)] })
+                                                  Google::Cloud::Spanner::V1::Type.new(code: :TIMESTAMP)] })
   end
 
   it "converts a DateTime value" do
@@ -87,13 +87,13 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
 
     combined_params = Google::Cloud::Spanner::Convert.to_query_params updated_at: timestamp
     _(combined_params).must_equal({ "updated_at" => [Google::Protobuf::Value.new(string_value: "2017-01-02T03:04:05.060000000Z"),
-                                                  Google::Spanner::V1::Type.new(code: :TIMESTAMP)] })
+                                                  Google::Cloud::Spanner::V1::Type.new(code: :TIMESTAMP)] })
   end
 
   it "converts a nil value" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params({updated_at: nil}, {updated_at: :TIMESTAMP})
     _(combined_params).must_equal({ "updated_at" => [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-                                                  Google::Spanner::V1::Type.new(code: :TIMESTAMP)] })
+                                                  Google::Cloud::Spanner::V1::Type.new(code: :TIMESTAMP)] })
   end
 
   it "converts a Date value" do
@@ -101,31 +101,31 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
 
     combined_params = Google::Cloud::Spanner::Convert.to_query_params birthday: date
     _(combined_params).must_equal({ "birthday" => [Google::Protobuf::Value.new(string_value: "2017-01-02"),
-                                                Google::Spanner::V1::Type.new(code: :DATE)] })
+                                                Google::Cloud::Spanner::V1::Type.new(code: :DATE)] })
   end
 
   it "converts a nil Date value" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params({birthday: nil}, {birthday: :DATE})
     _(combined_params).must_equal({ "birthday" => [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-                                                Google::Spanner::V1::Type.new(code: :DATE)] })
+                                                Google::Cloud::Spanner::V1::Type.new(code: :DATE)] })
   end
 
   it "converts a String value" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params name: "Charlie"
     _(combined_params).must_equal({ "name" => [Google::Protobuf::Value.new(string_value: "Charlie"),
-                                            Google::Spanner::V1::Type.new(code: :STRING)] })
+                                            Google::Cloud::Spanner::V1::Type.new(code: :STRING)] })
   end
 
   it "converts a Symbol value" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params name: :foo
     _(combined_params).must_equal({ "name" => [Google::Protobuf::Value.new(string_value: "foo"),
-                                            Google::Spanner::V1::Type.new(code: :STRING)] })
+                                            Google::Cloud::Spanner::V1::Type.new(code: :STRING)] })
   end
 
   it "converts a nil String value" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params({name: nil}, {name: :STRING})
     _(combined_params).must_equal({ "name" => [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-                                            Google::Spanner::V1::Type.new(code: :STRING)] })
+                                            Google::Cloud::Spanner::V1::Type.new(code: :STRING)] })
   end
 
   it "converts a IO-ish value" do
@@ -133,13 +133,13 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
 
     combined_params = Google::Cloud::Spanner::Convert.to_query_params avatar: file
     _(combined_params).must_equal({ "avatar" => [Google::Protobuf::Value.new(string_value: Base64.strict_encode64("contents")),
-                                              Google::Spanner::V1::Type.new(code: :BYTES)] })
+                                              Google::Cloud::Spanner::V1::Type.new(code: :BYTES)] })
   end
 
   it "converts a nil IO-ish value" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params({avatar: nil}, {avatar: :BYTES})
     _(combined_params).must_equal({ "avatar" => [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-                                              Google::Spanner::V1::Type.new(code: :BYTES)] })
+                                              Google::Cloud::Spanner::V1::Type.new(code: :BYTES)] })
   end
 
   it "converts an Array of Integer values" do
@@ -147,19 +147,19 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
 
     combined_params = Google::Cloud::Spanner::Convert.to_query_params list: array
     _(combined_params).must_equal({ "list" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")])),
-                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64))] })
+                                            Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :INT64))] })
   end
 
   it "converts an empty Array of Integer values" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params({list: []}, {list: [:INT64]})
     _(combined_params).must_equal({ "list" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])),
-                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64))] })
+                                            Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :INT64))] })
   end
 
   it "converts a nil Array of Integer values" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params({list: nil}, {list: [:INT64]})
     _(combined_params).must_equal({ "list" => [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64))] })
+                                            Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :INT64))] })
   end
 
   it "converts an Array of String values" do
@@ -167,19 +167,19 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
 
     combined_params = Google::Cloud::Spanner::Convert.to_query_params list: array
     _(combined_params).must_equal({ "list" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "foo"), Google::Protobuf::Value.new(string_value: "bar"), Google::Protobuf::Value.new(string_value: "baz")])),
-                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRING))] })
+                                            Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :STRING))] })
   end
 
   it "converts an empty Array of String values" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params({list: []}, list: [:STRING])
     _(combined_params).must_equal({ "list" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])),
-                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRING))] })
+                                            Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :STRING))] })
   end
 
   it "converts a nil Array of String values" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params({list: nil}, {list: [:STRING]})
     _(combined_params).must_equal({ "list" => [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRING))] })
+                                            Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :STRING))] })
   end
 
   it "converts an Array of IO-ish values" do
@@ -189,61 +189,61 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
 
     combined_params = Google::Cloud::Spanner::Convert.to_query_params list: array
     _(combined_params).must_equal({ "list" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: foo), Google::Protobuf::Value.new(string_value: bar), Google::Protobuf::Value.new(string_value: baz)])),
-                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :BYTES))] })
+                                            Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :BYTES))] })
   end
 
   it "converts an empty Array of IO-ish values" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params({list: []}, list: [:BYTES])
     _(combined_params).must_equal({ "list" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])),
-                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :BYTES))] })
+                                            Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :BYTES))] })
   end
 
   it "converts a nil Array of IO-ish values" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params({list: nil}, {list: [:BYTES]})
     _(combined_params).must_equal({ "list" => [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :BYTES))] })
+                                            Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :BYTES))] })
   end
 
   it "converts a simple Hash value" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params settings: { foo: :bar }
     _(combined_params).must_equal({ "settings" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "bar")])),
-                                                Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "foo", type: Google::Spanner::V1::Type.new(code: :STRING))]))] })
+                                                Google::Cloud::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Cloud::Spanner::V1::StructType.new(fields: [Google::Cloud::Spanner::V1::StructType::Field.new(name: "foo", type: Google::Cloud::Spanner::V1::Type.new(code: :STRING))]))] })
   end
 
   it "converts a complex Hash value" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params settings: { env: "production", score: 0.9, project_ids: [1,2,3] }
     _(combined_params).must_equal({ "settings" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [ Google::Protobuf::Value.new(string_value: "production"), Google::Protobuf::Value.new(number_value: 0.9), Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")] )) ])),
-                                                Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [ Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "score", type: Google::Spanner::V1::Type.new(code: :FLOAT64)), Google::Spanner::V1::StructType::Field.new(name: "project_ids", type: Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64))) ] ))] })
+                                                Google::Cloud::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Cloud::Spanner::V1::StructType.new(fields: [ Google::Cloud::Spanner::V1::StructType::Field.new(name: "env", type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)), Google::Cloud::Spanner::V1::StructType::Field.new(name: "score", type: Google::Cloud::Spanner::V1::Type.new(code: :FLOAT64)), Google::Cloud::Spanner::V1::StructType::Field.new(name: "project_ids", type: Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :INT64))) ] ))] })
   end
 
   it "converts an emtpy Hash value" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params settings: {}
     _(combined_params).must_equal({ "settings" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])),
-                                                Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: []))] })
+                                                Google::Cloud::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Cloud::Spanner::V1::StructType.new(fields: []))] })
   end
 
   it "converts an empty Array of Data values" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params({list: []}, list: [fields(foo: :STRING)])
     _(combined_params).must_equal({ "list" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])),
-                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "foo", type: Google::Spanner::V1::Type.new(code: :STRING))])))] })
+                                            Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Cloud::Spanner::V1::StructType.new(fields: [Google::Cloud::Spanner::V1::StructType::Field.new(name: "foo", type: Google::Cloud::Spanner::V1::Type.new(code: :STRING))])))] })
   end
 
   it "converts a nil Array of Data values" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params({list: nil}, list: [fields(foo: :STRING)])
     _(combined_params).must_equal({ "list" => [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "foo", type: Google::Spanner::V1::Type.new(code: :STRING))])))] })
+                                            Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Cloud::Spanner::V1::StructType.new(fields: [Google::Cloud::Spanner::V1::StructType::Field.new(name: "foo", type: Google::Cloud::Spanner::V1::Type.new(code: :STRING))])))] })
   end
 
   it "converts an Array of simple Data values" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params list: [{ foo: :bar }]
     _(combined_params).must_equal({ "list" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "bar")]))])),
-                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRUCT,struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "foo", type: Google::Spanner::V1::Type.new(code: :STRING))]))) ]})
+                                            Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :STRUCT,struct_type: Google::Cloud::Spanner::V1::StructType.new(fields: [Google::Cloud::Spanner::V1::StructType::Field.new(name: "foo", type: Google::Cloud::Spanner::V1::Type.new(code: :STRING))]))) ]})
   end
 
   it "converts an Array complex Data values" do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params list: [{ env: "production", score: 0.9, project_ids: [1,2,3] }]
     _(combined_params).must_equal({ "list" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "production"), Google::Protobuf::Value.new(number_value: 0.9), Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")]))]))])),
-                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "score", type: Google::Spanner::V1::Type.new(code: :FLOAT64)), Google::Spanner::V1::StructType::Field.new(name: "project_ids", type: Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)))]))) ]})
+                                            Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Cloud::Spanner::V1::StructType.new(fields: [Google::Cloud::Spanner::V1::StructType::Field.new(name: "env", type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)), Google::Cloud::Spanner::V1::StructType::Field.new(name: "score", type: Google::Cloud::Spanner::V1::Type.new(code: :FLOAT64)), Google::Cloud::Spanner::V1::StructType::Field.new(name: "project_ids", type: Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)))]))) ]})
   end
 
   describe "Struct Parameters Query Examples" do
@@ -265,17 +265,17 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 ]
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: [
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "threadf",
-                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                   ),
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "userf",
-                    type: Google::Spanner::V1::Type.new(code: :STRING)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)
                   )
                 ]
               )
@@ -283,7 +283,7 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
           ],
           "p4" => [
             Google::Protobuf::Value.new(string_value: "10"),
-            Google::Spanner::V1::Type.new(code: :INT64)
+            Google::Cloud::Spanner::V1::Type.new(code: :INT64)
           ]
         })
       end
@@ -303,17 +303,17 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 ]
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: [
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "threadf",
-                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                   ),
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "userf",
-                    type: Google::Spanner::V1::Type.new(code: :STRING)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)
                   )
                 ]
               )
@@ -321,7 +321,7 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
           ],
           "p4" => [
             Google::Protobuf::Value.new(string_value: "10"),
-            Google::Spanner::V1::Type.new(code: :INT64)
+            Google::Cloud::Spanner::V1::Type.new(code: :INT64)
           ]
         })
       end
@@ -342,17 +342,17 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 ]
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: [
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "threadf",
-                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                   ),
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "userf",
-                    type: Google::Spanner::V1::Type.new(code: :STRING)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)
                   )
                 ]
               )
@@ -360,7 +360,7 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
           ],
           "p4" => [
             Google::Protobuf::Value.new(string_value: "10"),
-            Google::Spanner::V1::Type.new(code: :INT64)
+            Google::Cloud::Spanner::V1::Type.new(code: :INT64)
           ]
         })
       end
@@ -378,17 +378,17 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
         _(combined_params).must_equal({
           "struct_param" => [
             Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: [
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "threadf",
-                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                   ),
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "userf",
-                    type: Google::Spanner::V1::Type.new(code: :STRING)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)
                   )
                 ]
               )
@@ -421,19 +421,19 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 ]
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: [
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "structf",
-                    type: Google::Spanner::V1::Type.new(
+                    type: Google::Cloud::Spanner::V1::Type.new(
                       code: :STRUCT,
-                      struct_type: Google::Spanner::V1::StructType.new(
+                      struct_type: Google::Cloud::Spanner::V1::StructType.new(
                         fields: [
-                          Google::Spanner::V1::StructType::Field.new(
+                          Google::Cloud::Spanner::V1::StructType::Field.new(
                             name: "nestedf",
-                            type: Google::Spanner::V1::Type.new(code: :STRING)
+                            type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)
                           )
                         ]
                       )
@@ -466,19 +466,19 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 ]
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: [
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "structf",
-                    type: Google::Spanner::V1::Type.new(
+                    type: Google::Cloud::Spanner::V1::Type.new(
                       code: :STRUCT,
-                      struct_type: Google::Spanner::V1::StructType.new(
+                      struct_type: Google::Cloud::Spanner::V1::StructType.new(
                         fields: [
-                          Google::Spanner::V1::StructType::Field.new(
+                          Google::Cloud::Spanner::V1::StructType::Field.new(
                             name: "nestedf",
-                            type: Google::Spanner::V1::Type.new(code: :STRING)
+                            type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)
                           )
                         ]
                       )
@@ -512,19 +512,19 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 ]
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: [
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "structf",
-                    type: Google::Spanner::V1::Type.new(
+                    type: Google::Cloud::Spanner::V1::Type.new(
                       code: :STRUCT,
-                      struct_type: Google::Spanner::V1::StructType.new(
+                      struct_type: Google::Cloud::Spanner::V1::StructType.new(
                         fields: [
-                          Google::Spanner::V1::StructType::Field.new(
+                          Google::Cloud::Spanner::V1::StructType::Field.new(
                             name: "nestedf",
-                            type: Google::Spanner::V1::Type.new(code: :STRING)
+                            type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)
                           )
                         ]
                       )
@@ -550,19 +550,19 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
         _(combined_params).must_equal({
           "struct_param" => [
             Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: [
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "structf",
-                    type: Google::Spanner::V1::Type.new(
+                    type: Google::Cloud::Spanner::V1::Type.new(
                       code: :STRUCT,
-                      struct_type: Google::Spanner::V1::StructType.new(
+                      struct_type: Google::Cloud::Spanner::V1::StructType.new(
                         fields: [
-                          Google::Spanner::V1::StructType::Field.new(
+                          Google::Cloud::Spanner::V1::StructType::Field.new(
                             name: "nestedf",
-                            type: Google::Spanner::V1::Type.new(code: :STRING)
+                            type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)
                           )
                         ]
                       )
@@ -591,9 +591,9 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 values: []
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: []
               )
             )
@@ -613,9 +613,9 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 values: []
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: []
               )
             )
@@ -636,9 +636,9 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 values: []
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: []
               )
             )
@@ -659,9 +659,9 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
         _(combined_params).must_equal({
           "struct_param" => [
             Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: []
               )
             )
@@ -688,13 +688,13 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 ]
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: [
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "f1",
-                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                   )
                 ]
               )
@@ -718,13 +718,13 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 ]
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: [
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "f1",
-                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                   )
                 ]
               )
@@ -752,17 +752,17 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 ]
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: [
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "threadf",
-                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                   ),
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "userf",
-                    type: Google::Spanner::V1::Type.new(code: :STRING)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)
                   )
                 ]
               )
@@ -786,17 +786,17 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 ]
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: [
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "threadf",
-                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                   ),
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "userf",
-                    type: Google::Spanner::V1::Type.new(code: :STRING)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)
                   )
                 ]
               )
@@ -821,17 +821,17 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 ]
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: [
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "threadf",
-                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                   ),
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "userf",
-                    type: Google::Spanner::V1::Type.new(code: :STRING)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)
                   )
                 ]
               )
@@ -865,19 +865,19 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 ]
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :ARRAY,
-              array_element_type: Google::Spanner::V1::Type.new(
+              array_element_type: Google::Cloud::Spanner::V1::Type.new(
                 code: :STRUCT,
-                struct_type: Google::Spanner::V1::StructType.new(
+                struct_type: Google::Cloud::Spanner::V1::StructType.new(
                   fields: [
-                    Google::Spanner::V1::StructType::Field.new(
+                    Google::Cloud::Spanner::V1::StructType::Field.new(
                       name: "threadf",
-                      type: Google::Spanner::V1::Type.new(code: :INT64)
+                      type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                     ),
-                    Google::Spanner::V1::StructType::Field.new(
+                    Google::Cloud::Spanner::V1::StructType::Field.new(
                       name: "userf",
-                      type: Google::Spanner::V1::Type.new(code: :STRING)
+                      type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)
                     )
                   ]
                 )
@@ -908,19 +908,19 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 ]
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :ARRAY,
-              array_element_type: Google::Spanner::V1::Type.new(
+              array_element_type: Google::Cloud::Spanner::V1::Type.new(
                 code: :STRUCT,
-                struct_type: Google::Spanner::V1::StructType.new(
+                struct_type: Google::Cloud::Spanner::V1::StructType.new(
                   fields: [
-                    Google::Spanner::V1::StructType::Field.new(
+                    Google::Cloud::Spanner::V1::StructType::Field.new(
                       name: "threadf",
-                      type: Google::Spanner::V1::Type.new(code: :INT64)
+                      type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                     ),
-                    Google::Spanner::V1::StructType::Field.new(
+                    Google::Cloud::Spanner::V1::StructType::Field.new(
                       name: "userf",
-                      type: Google::Spanner::V1::Type.new(code: :STRING)
+                      type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)
                     )
                   ]
                 )
@@ -952,19 +952,19 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 ]
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :ARRAY,
-              array_element_type: Google::Spanner::V1::Type.new(
+              array_element_type: Google::Cloud::Spanner::V1::Type.new(
                 code: :STRUCT,
-                struct_type: Google::Spanner::V1::StructType.new(
+                struct_type: Google::Cloud::Spanner::V1::StructType.new(
                   fields: [
-                    Google::Spanner::V1::StructType::Field.new(
+                    Google::Cloud::Spanner::V1::StructType::Field.new(
                       name: "threadf",
-                      type: Google::Spanner::V1::Type.new(code: :INT64)
+                      type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                     ),
-                    Google::Spanner::V1::StructType::Field.new(
+                    Google::Cloud::Spanner::V1::StructType::Field.new(
                       name: "userf",
-                      type: Google::Spanner::V1::Type.new(code: :STRING)
+                      type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)
                     )
                   ]
                 )
@@ -995,25 +995,25 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 ]
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: [
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "intf",
-                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                   ),
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "arraysf",
-                    type: Google::Spanner::V1::Type.new(
+                    type: Google::Cloud::Spanner::V1::Type.new(
                       code: :ARRAY,
-                      array_element_type: Google::Spanner::V1::Type.new(
+                      array_element_type: Google::Cloud::Spanner::V1::Type.new(
                         code: :STRUCT,
-                        struct_type: Google::Spanner::V1::StructType.new(
+                        struct_type: Google::Cloud::Spanner::V1::StructType.new(
                           fields: [
-                            Google::Spanner::V1::StructType::Field.new(
+                            Google::Cloud::Spanner::V1::StructType::Field.new(
                               name: "threadid",
-                              type: Google::Spanner::V1::Type.new(code: :INT64)
+                              type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                             )
                           ]
                         )
@@ -1043,25 +1043,25 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                 ]
               )
             ),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :STRUCT,
-              struct_type: Google::Spanner::V1::StructType.new(
+              struct_type: Google::Cloud::Spanner::V1::StructType.new(
                 fields: [
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "intf",
-                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                    type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                   ),
-                  Google::Spanner::V1::StructType::Field.new(
+                  Google::Cloud::Spanner::V1::StructType::Field.new(
                     name: "arraysf",
-                    type: Google::Spanner::V1::Type.new(
+                    type: Google::Cloud::Spanner::V1::Type.new(
                       code: :ARRAY,
-                      array_element_type: Google::Spanner::V1::Type.new(
+                      array_element_type: Google::Cloud::Spanner::V1::Type.new(
                         code: :STRUCT,
-                        struct_type: Google::Spanner::V1::StructType.new(
+                        struct_type: Google::Cloud::Spanner::V1::StructType.new(
                           fields: [
-                            Google::Spanner::V1::StructType::Field.new(
+                            Google::Cloud::Spanner::V1::StructType::Field.new(
                               name: "threadid",
-                              type: Google::Spanner::V1::Type.new(code: :INT64)
+                              type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                             )
                           ]
                         )
@@ -1088,15 +1088,15 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
         _(combined_params).must_equal({
           "struct_arr_param" => [
             Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-            Google::Spanner::V1::Type.new(
+            Google::Cloud::Spanner::V1::Type.new(
               code: :ARRAY,
-              array_element_type: Google::Spanner::V1::Type.new(
+              array_element_type: Google::Cloud::Spanner::V1::Type.new(
                 code: :STRUCT,
-                struct_type: Google::Spanner::V1::StructType.new(
+                struct_type: Google::Cloud::Spanner::V1::StructType.new(
                   fields: [
-                    Google::Spanner::V1::StructType::Field.new(
+                    Google::Cloud::Spanner::V1::StructType::Field.new(
                       name: "threadid",
-                      type: Google::Spanner::V1::Type.new(code: :INT64)
+                      type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)
                     )
                   ]
                 )

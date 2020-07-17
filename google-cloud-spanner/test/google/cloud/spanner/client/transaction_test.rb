@@ -18,13 +18,13 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
-  let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
+  let(:session_grpc) { Google::Cloud::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
   let(:transaction_id) { "tx789" }
-  let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id }
+  let(:transaction_grpc) { Google::Cloud::Spanner::V1::Transaction.new id: transaction_id }
   let(:transaction) { Google::Cloud::Spanner::Transaction.from_grpc transaction_grpc, session }
-  let(:tx_selector) { Google::Spanner::V1::TransactionSelector.new id: transaction_id }
-  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
+  let(:tx_selector) { Google::Cloud::Spanner::V1::TransactionSelector.new id: transaction_id }
+  let(:default_options) { { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } } }
   let :results_hash do
     {
       metadata: {
@@ -58,22 +58,22 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
       ]
     }
   end
-  let(:results_grpc) { Google::Spanner::V1::PartialResultSet.new results_hash }
+  let(:results_grpc) { Google::Cloud::Spanner::V1::PartialResultSet.new results_hash }
   let(:results_enum) { Array(results_grpc).to_enum }
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
-  let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new(read_write: Google::Spanner::V1::TransactionOptions::ReadWrite.new) }
+  let(:tx_opts) { Google::Cloud::Spanner::V1::TransactionOptions.new(read_write: Google::Cloud::Spanner::V1::TransactionOptions::ReadWrite.new) }
   let(:commit_time) { Time.now }
-  let(:commit_resp) { Google::Spanner::V1::CommitResponse.new commit_timestamp: Google::Cloud::Spanner::Convert.time_to_timestamp(commit_time) }
+  let(:commit_resp) { Google::Cloud::Spanner::V1::CommitResponse.new commit_timestamp: Google::Cloud::Spanner::Convert.time_to_timestamp(commit_time) }
 
   it "can execute a simple query" do
     mock = Minitest::Mock.new
     spanner.service.mocked_service = mock
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
     expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
-    mock.expect :commit, commit_resp, [session_grpc.name, [], transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: [], transaction_id: transaction_id, single_use_transaction: nil}, default_options]
     # transaction checkin
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
 
     results = nil
     timestamp = client.transaction do |tx|
@@ -91,8 +91,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
 
   it "updates" do
     mutations = [
-      Google::Spanner::V1::Mutation.new(
-        update: Google::Spanner::V1::Mutation::Write.new(
+      Google::Cloud::Spanner::V1::Mutation.new(
+        update: Google::Cloud::Spanner::V1::Mutation::Write.new(
           table: "users", columns: %w(id name active),
           values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1, "Charlie", false]).list_value]
         )
@@ -100,11 +100,11 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: transaction_id, single_use_transaction: nil }, default_options]
     # transaction checkin
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.transaction do |tx|
@@ -119,8 +119,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
 
   it "inserts" do
     mutations = [
-      Google::Spanner::V1::Mutation.new(
-        insert: Google::Spanner::V1::Mutation::Write.new(
+      Google::Cloud::Spanner::V1::Mutation.new(
+        insert: Google::Cloud::Spanner::V1::Mutation::Write.new(
           table: "users", columns: %w(id name active),
           values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([2, "Harvey", true]).list_value]
         )
@@ -128,11 +128,11 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: transaction_id, single_use_transaction: nil }, default_options]
     # transaction checkin
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.transaction do |tx|
@@ -147,8 +147,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
 
   it "upserts" do
     mutations = [
-      Google::Spanner::V1::Mutation.new(
-        insert_or_update: Google::Spanner::V1::Mutation::Write.new(
+      Google::Cloud::Spanner::V1::Mutation.new(
+        insert_or_update: Google::Cloud::Spanner::V1::Mutation::Write.new(
           table: "users", columns: %w(id name active),
           values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([3, "Marley", false]).list_value]
         )
@@ -156,11 +156,11 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: transaction_id, single_use_transaction: nil }, default_options]
     # transaction checkin
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.transaction do |tx|
@@ -175,8 +175,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
 
   it "upserts using save alias" do
     mutations = [
-      Google::Spanner::V1::Mutation.new(
-        insert_or_update: Google::Spanner::V1::Mutation::Write.new(
+      Google::Cloud::Spanner::V1::Mutation.new(
+        insert_or_update: Google::Cloud::Spanner::V1::Mutation::Write.new(
           table: "users", columns: %w(id name active),
           values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([3, "Marley", false]).list_value]
         )
@@ -184,11 +184,11 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: transaction_id, single_use_transaction: nil }, default_options]
     # transaction checkin
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.transaction do |tx|
@@ -203,8 +203,8 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
 
   it "replaces" do
     mutations = [
-      Google::Spanner::V1::Mutation.new(
-        replace: Google::Spanner::V1::Mutation::Write.new(
+      Google::Cloud::Spanner::V1::Mutation.new(
+        replace: Google::Cloud::Spanner::V1::Mutation::Write.new(
           table: "users", columns: %w(id name active),
           values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([4, "Henry", true]).list_value]
         )
@@ -212,11 +212,11 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: transaction_id, single_use_transaction: nil }, default_options]
     # transaction checkin
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.transaction do |tx|
@@ -231,9 +231,9 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
 
   it "deletes multiple rows of keys" do
     mutations = [
-      Google::Spanner::V1::Mutation.new(
-        delete: Google::Spanner::V1::Mutation::Delete.new(
-          table: "users", key_set: Google::Spanner::V1::KeySet.new(
+      Google::Cloud::Spanner::V1::Mutation.new(
+        delete: Google::Cloud::Spanner::V1::Mutation::Delete.new(
+          table: "users", key_set: Google::Cloud::Spanner::V1::KeySet.new(
             keys: [1, 2, 3, 4, 5].map do |i|
               Google::Cloud::Spanner::Convert.object_to_grpc_value([i]).list_value
             end
@@ -243,11 +243,11 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: transaction_id, single_use_transaction: nil }, default_options]
     # transaction checkin
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.transaction do |tx|
@@ -262,9 +262,9 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
 
   it "deletes multiple rows of key ranges" do
     mutations = [
-      Google::Spanner::V1::Mutation.new(
-        delete: Google::Spanner::V1::Mutation::Delete.new(
-          table: "users", key_set: Google::Spanner::V1::KeySet.new(
+      Google::Cloud::Spanner::V1::Mutation.new(
+        delete: Google::Cloud::Spanner::V1::Mutation::Delete.new(
+          table: "users", key_set: Google::Cloud::Spanner::V1::KeySet.new(
             ranges: [Google::Cloud::Spanner::Convert.to_key_range(1..100)]
           )
         )
@@ -272,11 +272,11 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: transaction_id, single_use_transaction: nil }, default_options]
     # transaction checkin
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.transaction do |tx|
@@ -291,9 +291,9 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
 
   it "deletes a single rows" do
     mutations = [
-      Google::Spanner::V1::Mutation.new(
-        delete: Google::Spanner::V1::Mutation::Delete.new(
-          table: "users", key_set: Google::Spanner::V1::KeySet.new(
+      Google::Cloud::Spanner::V1::Mutation.new(
+        delete: Google::Cloud::Spanner::V1::Mutation::Delete.new(
+          table: "users", key_set: Google::Cloud::Spanner::V1::KeySet.new(
             keys: [5].map do |i|
               Google::Cloud::Spanner::Convert.object_to_grpc_value([i]).list_value
             end
@@ -303,11 +303,11 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: transaction_id, single_use_transaction: nil }, default_options]
     # transaction checkin
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.transaction do |tx|
@@ -322,19 +322,19 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
 
   it "deletes all rows" do
     mutations = [
-      Google::Spanner::V1::Mutation.new(
-        delete: Google::Spanner::V1::Mutation::Delete.new(
-          table: "users", key_set: Google::Spanner::V1::KeySet.new(all: true)
+      Google::Cloud::Spanner::V1::Mutation.new(
+        delete: Google::Cloud::Spanner::V1::Mutation::Delete.new(
+          table: "users", key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true)
         )
       )
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: transaction_id, single_use_transaction: nil }, default_options]
     # transaction checkin
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.transaction do |tx|
@@ -349,33 +349,33 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
 
   it "commits multiple mutations" do
     mutations = [
-      Google::Spanner::V1::Mutation.new(
-        update: Google::Spanner::V1::Mutation::Write.new(
+      Google::Cloud::Spanner::V1::Mutation.new(
+        update: Google::Cloud::Spanner::V1::Mutation::Write.new(
           table: "users", columns: %w(id name active),
           values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1, "Charlie", false]).list_value]
         )
       ),
-      Google::Spanner::V1::Mutation.new(
-        insert: Google::Spanner::V1::Mutation::Write.new(
+      Google::Cloud::Spanner::V1::Mutation.new(
+        insert: Google::Cloud::Spanner::V1::Mutation::Write.new(
           table: "users", columns: %w(id name active),
           values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([2, "Harvey", true]).list_value]
         )
       ),
-      Google::Spanner::V1::Mutation.new(
-        insert_or_update: Google::Spanner::V1::Mutation::Write.new(
+      Google::Cloud::Spanner::V1::Mutation.new(
+        insert_or_update: Google::Cloud::Spanner::V1::Mutation::Write.new(
           table: "users", columns: %w(id name active),
           values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([3, "Marley", false]).list_value]
         )
       ),
-      Google::Spanner::V1::Mutation.new(
-        replace: Google::Spanner::V1::Mutation::Write.new(
+      Google::Cloud::Spanner::V1::Mutation.new(
+        replace: Google::Cloud::Spanner::V1::Mutation::Write.new(
           table: "users", columns: %w(id name active),
           values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([4, "Henry", true]).list_value]
         )
       ),
-      Google::Spanner::V1::Mutation.new(
-        delete: Google::Spanner::V1::Mutation::Delete.new(
-          table: "users", key_set: Google::Spanner::V1::KeySet.new(
+      Google::Cloud::Spanner::V1::Mutation.new(
+        delete: Google::Cloud::Spanner::V1::Mutation::Delete.new(
+          table: "users", key_set: Google::Cloud::Spanner::V1::KeySet.new(
             keys: [1, 2, 3, 4, 5].map do |i|
               Google::Cloud::Spanner::Convert.object_to_grpc_value([i]).list_value
             end
@@ -385,11 +385,11 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: transaction_id, single_use_transaction: nil }, default_options]
     # transaction checkin
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
     spanner.service.mocked_service = mock
 
     timestamp = client.transaction do |tx|

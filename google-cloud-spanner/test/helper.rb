@@ -24,29 +24,6 @@ require "base64"
 require "google/cloud/spanner"
 require "grpc"
 
-##
-# Monkey-Patch CallOptions to support Mocks
-class Google::Gax::CallOptions
-  ##
-  # Minitest Mock depends on === to match same-value objects.
-  # By default, CallOptions objects do not match with ===.
-  # Therefore, we must add this capability.
-  def === other
-    return false unless other.is_a? Google::Gax::CallOptions
-    timeout === other.timeout &&
-      retry_options === other.retry_options &&
-      page_token === other.page_token &&
-      kwargs === other.kwargs
-  end
-  def == other
-    return false unless other.is_a? Google::Gax::CallOptions
-    timeout == other.timeout &&
-      retry_options == other.retry_options &&
-      page_token == other.page_token &&
-      kwargs == other.kwargs
-  end
-end
-
 class MockSpanner < Minitest::Spec
   let(:project) { "test" }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
@@ -159,55 +136,60 @@ class MockSpanner < Minitest::Spec
   end
 
   def project_path
-    Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.project_path project
+    Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Paths.project_path \
+      project: project
   end
 
   def instance_path name
-    return name if name.to_s.include? "/"
-    Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path(
-      project, name)
+    Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Paths.instance_path \
+      project: project, instance: name
   end
 
   def database_path instance, name
-    Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path(
-      project, instance, name)
+    Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Paths.database_path \
+      project: project, instance: instance, database: name
   end
 
   def instance_config_path name
-    return name if name.to_s.include? "/"
-    Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_config_path(
-      project, name)
+    Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Paths.instance_config_path \
+      project: project, instance_config: name
   end
 
   def session_path instance_id, database_id, session_id
-    Google::Cloud::Spanner::V1::SpannerClient.session_path(
-      project, instance_id, database_id, session_id)
+    Google::Cloud::Spanner::V1::Spanner::Paths.session_path \
+      project: project, instance: instance_id, database: database_id, session: session_id
   end
 
   def backup_path instance, backup
-    Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.backup_path(
-      project, instance, backup)
+    Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Paths.backup_path \
+     project: project, instance: instance, backup: backup
   end
 
   def paged_enum_struct response
-    OpenStruct.new page: OpenStruct.new(response: response)
+    OpenStruct.new(response: response)
   end
 
   def expect_execute_streaming_sql results_enum, session_name, sql,
-                                   transaction: nil, params: nil, param_types: nil, 
+                                   transaction: nil, params: nil, param_types: nil,
                                    resume_token: nil, partition_token: nil, seqno: nil,
-                                   options: nil, query_options: nil
-    spanner.service.mocked_service.expect :execute_streaming_sql, results_enum do |session, sql_query, **kargs|
-      session == session_name &&
-        sql_query == sql_query &&
-        kargs[:transaction] == transaction &&
-        kargs[:params] == params &&
-        kargs[:param_types] == param_types &&
-        kargs[:resume_token] == resume_token &&
-        kargs[:partition_token] == partition_token &&
-        kargs[:seqno] == seqno &&
-        kargs[:options] == options &&
-        kargs[:query_options] == query_options
+                                   query_options: nil, options: nil
+    spanner.service.mocked_service.expect :execute_streaming_sql, results_enum do |request, gapic_options|
+      request[:session] == session_name &&
+        request[:sql] == sql &&
+        request[:transaction] == transaction &&
+        request[:params] == params &&
+        request[:param_types] == param_types &&
+        request[:resume_token] == resume_token &&
+        request[:partition_token] == partition_token &&
+        request[:seqno] == seqno &&
+        gapic_options == options &&
+        request[:query_options] == query_options
+    end
+  end
+
+  def expect_begin_transaction transaction, tx_opts, options
+    spanner.service.mocked_service.expect :begin_transaction, transaction do |request, gapic_options|
+      request[:session].instance_of?(String) && request[:options] == tx_opts && gapic_options == options
     end
   end
 end

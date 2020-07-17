@@ -21,7 +21,7 @@ describe Google::Cloud::Spanner::Backup, :referencing_databases, :mock_spanner d
   let(:backup_id) { "my-backup-id" }
   let(:referencing_database_id) { "referencing-db1" }
   let(:backup_grpc) {
-    Google::Spanner::Admin::Database::V1::Backup.new \
+    Google::Cloud::Spanner::Admin::Database::V1::Backup.new \
       backup_hash(
         instance_id: instance_id,
         database_id: database_id,
@@ -32,9 +32,9 @@ describe Google::Cloud::Spanner::Backup, :referencing_databases, :mock_spanner d
   let(:backup) { Google::Cloud::Spanner::Backup.from_grpc backup_grpc, spanner.service }
 
   it "get referencing databases" do
-    get_res = Google::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: referencing_database_id)
+    get_res = Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: referencing_database_id)
     mock = Minitest::Mock.new
-    mock.expect :get_database, get_res, [database_path(instance_id, referencing_database_id)]
+    mock.expect :get_database, get_res, [name: database_path(instance_id, referencing_database_id)]
     spanner.service.mocked_databases = mock
 
     referencing_databases = backup.referencing_databases

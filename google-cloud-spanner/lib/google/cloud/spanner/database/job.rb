@@ -89,7 +89,7 @@ module Google
             return nil unless done?
             return nil unless @grpc.grpc_op.result == :response
             return nil unless @grpc.results.instance_of? \
-              Google::Spanner::Admin::Database::V1::Database
+              Admin::Database::V1::Database
             Database.from_grpc @grpc.results, service
           end
 

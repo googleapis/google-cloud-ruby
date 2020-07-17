@@ -17,16 +17,16 @@ require "helper"
 describe Google::Cloud::Spanner::Database, :ddl, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
-  let(:database_grpc) { Google::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id) }
+  let(:database_grpc) { Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id) }
   let(:database) { Google::Cloud::Spanner::Database.from_grpc database_grpc, spanner.service }
   let(:statements) { ["CREATE TABLE table1", "CREATE TABLE table2", "CREATE TABLE table3"] }
 
   it "gets the DDL statements" do
-    update_res = Google::Spanner::Admin::Database::V1::GetDatabaseDdlResponse.new(
+    update_res = Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlResponse.new(
       statements: statements
     )
     mock = Minitest::Mock.new
-    mock.expect :get_database_ddl, update_res, [database_path(instance_id, database_id)]
+    mock.expect :get_database_ddl, update_res, [database: database_path(instance_id, database_id)]
     spanner.service.mocked_databases = mock
 
     ddl = database.ddl
@@ -47,11 +47,11 @@ describe Google::Cloud::Spanner::Database, :ddl, :mock_spanner do
     cached_ddl = database.ddl
     _(cached_ddl).must_equal statements
 
-    update_res = Google::Spanner::Admin::Database::V1::GetDatabaseDdlResponse.new(
+    update_res = Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlResponse.new(
       statements: statements.reverse
     )
     mock = Minitest::Mock.new
-    mock.expect :get_database_ddl, update_res, [database_path(instance_id, database_id)]
+    mock.expect :get_database_ddl, update_res, [database: database_path(instance_id, database_id)]
     spanner.service.mocked_databases = mock
 
     ddl = database.ddl force: true

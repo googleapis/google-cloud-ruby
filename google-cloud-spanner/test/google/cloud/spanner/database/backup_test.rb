@@ -17,30 +17,30 @@ require "helper"
 
 describe Google::Cloud::Spanner::Database, :backups, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
-  let(:databases_grpc) { Google::Spanner::Admin::Database::V1::Database.new database_hash }
+  let(:databases_grpc) { Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash }
   let(:database) { Google::Cloud::Spanner::Database.from_grpc databases_grpc, spanner.service }
   let(:first_page) do
     h = backups_hash instance_id: instance_id
     h[:next_page_token] = "next_page_token"
-    Google::Spanner::Admin::Database::V1::ListBackupsResponse.new h
+    Google::Cloud::Spanner::Admin::Database::V1::ListBackupsResponse.new h
   end
   let(:second_page) do
     h = backups_hash instance_id: instance_id
     h[:next_page_token] = "second_page_token"
-    Google::Spanner::Admin::Database::V1::ListBackupsResponse.new h
+    Google::Cloud::Spanner::Admin::Database::V1::ListBackupsResponse.new h
   end
   let(:last_page) do
     h = backups_hash instance_id: instance_id
     h[:backups].pop
-    Google::Spanner::Admin::Database::V1::ListBackupsResponse.new h
+    Google::Cloud::Spanner::Admin::Database::V1::ListBackupsResponse.new h
   end
-  let(:next_page_options) { Google::Gax::CallOptions.new page_token: "next_page_token" }
+  let(:next_page_options) { "next_page_token" }
   let(:backup_filter) { "database:#{database.database_id}" }
 
   it "lists backups" do
     get_res =  MockPagedEnumerable.new([first_page])
     mock = Minitest::Mock.new
-    mock.expect :list_backups, get_res, [instance_path(instance_id), backup_filter, page_size: nil]
+    mock.expect :list_backups, get_res, [parent: instance_path(instance_id), filter: backup_filter, page_size: nil, page_token: nil]
     database.service.mocked_databases = mock
 
     backups = database.backups
@@ -53,7 +53,7 @@ describe Google::Cloud::Spanner::Database, :backups, :mock_spanner do
   it "paginates backups with page size" do
     get_res =  MockPagedEnumerable.new([first_page])
     mock = Minitest::Mock.new
-    mock.expect :list_backups, get_res, [instance_path(instance_id), backup_filter, page_size: 3]
+    mock.expect :list_backups, get_res, [parent: instance_path(instance_id), filter: backup_filter, page_size: 3, page_token: nil]
     database.service.mocked_databases = mock
 
     backups = database.backups page_size: 3
@@ -66,7 +66,7 @@ describe Google::Cloud::Spanner::Database, :backups, :mock_spanner do
   it "paginates backups with next? and next" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_backups, get_res, [instance_path(instance_id), backup_filter, page_size: nil]
+    mock.expect :list_backups, get_res, [parent: instance_path(instance_id), filter: backup_filter, page_size: nil, page_token: nil]
     database.service.mocked_databases = mock
 
     list = database.backups
@@ -82,7 +82,7 @@ describe Google::Cloud::Spanner::Database, :backups, :mock_spanner do
   it "paginates backups with next? and next and page size" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_backups, get_res, [instance_path(instance_id), backup_filter, page_size: 3]
+    mock.expect :list_backups, get_res, [parent: instance_path(instance_id), filter: backup_filter, page_size: 3, page_token: nil]
     database.service.mocked_databases = mock
 
     list = database.backups page_size: 3
@@ -98,7 +98,7 @@ describe Google::Cloud::Spanner::Database, :backups, :mock_spanner do
   it "paginates backups with all" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_backups, get_res, [instance_path(instance_id), backup_filter, page_size: nil]
+    mock.expect :list_backups, get_res, [parent: instance_path(instance_id), filter: backup_filter, page_size: nil, page_token: nil]
     database.service.mocked_databases = mock
 
     backups = database.backups.all.to_a
@@ -111,7 +111,7 @@ describe Google::Cloud::Spanner::Database, :backups, :mock_spanner do
   it "paginates backups with all and page size" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_backups, get_res, [instance_path(instance_id), backup_filter, page_size: 3]
+    mock.expect :list_backups, get_res, [parent: instance_path(instance_id), filter: backup_filter, page_size: 3, page_token: nil]
     database.service.mocked_databases = mock
 
     backups = database.backups(page_size: 3).all.to_a
@@ -124,7 +124,7 @@ describe Google::Cloud::Spanner::Database, :backups, :mock_spanner do
   it "iterates backups with all using Enumerator" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_backups, get_res, [instance_path(instance_id), backup_filter, page_size: nil]
+    mock.expect :list_backups, get_res, [parent: instance_path(instance_id), filter: backup_filter, page_size: nil, page_token: nil]
     database.service.mocked_databases = mock
 
     backups = database.backups.all.take(5)

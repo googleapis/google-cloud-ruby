@@ -18,9 +18,9 @@ describe Google::Cloud::Spanner::Client, :admin, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
-  let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
+  let(:session_grpc) { Google::Cloud::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
-  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
+  let(:default_options) { { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
 
   after do
@@ -40,9 +40,9 @@ describe Google::Cloud::Spanner::Client, :admin, :mock_spanner do
   end
 
   it "retrieves the instance" do
-    get_res = Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id)
+    get_res = Google::Cloud::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id)
     mock = Minitest::Mock.new
-    mock.expect :get_instance, get_res, [instance_path(instance_id)]
+    mock.expect :get_instance, get_res, [name: instance_path(instance_id)]
     spanner.service.mocked_instances = mock
 
     instance = spanner.instance instance_id
@@ -59,9 +59,9 @@ describe Google::Cloud::Spanner::Client, :admin, :mock_spanner do
   end
 
   it "retrieves the database" do
-    get_res = Google::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id)
+    get_res = Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id)
     mock = Minitest::Mock.new
-    mock.expect :get_database, get_res, [database_path(instance_id, database_id)]
+    mock.expect :get_database, get_res, [name: database_path(instance_id, database_id)]
     spanner.service.mocked_databases = mock
 
     database = client.database

@@ -19,11 +19,11 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:databases_grpc) {
-    Google::Spanner::Admin::Database::V1::Database.new database_hash(
+    Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(
       instance_id: instance_id, database_id: database_id)
   }
   let(:database) { Google::Cloud::Spanner::Database.from_grpc databases_grpc, spanner.service }
-  let(:database_grpc) { Google::Spanner::Admin::Database::V1::Database.new database_hash }
+  let(:database_grpc) { Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash }
   let(:database_metadata_filter) {
     format(
       Google::Cloud::Spanner::Database::DATBASE_OPERATION_METADAT_FILTER_TEMPLATE,
@@ -36,7 +36,7 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
       name: job_name,
       metadata: {
         type_url: "type.googleapis.com/google.spanner.admin.database.v1.CreateDatabaseMetadata",
-        value: Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata.new.to_proto
+        value: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata.new.to_proto
       }
     }
   end
@@ -46,7 +46,7 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
       name:"1234567890",
       metadata: Google::Protobuf::Any.new(
         type_url: "google.spanner.admin.database.v1.CreateDatabaseMetadata",
-        value: Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata.new.to_proto
+        value: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata.new.to_proto
       ),
       done: true,
       response: Google::Protobuf::Any.new(
@@ -61,26 +61,27 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
   let(:first_page) do
     h = { operations: jobs_hash }
     h[:next_page_token] = "next_page_token"
-    Google::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse.new h
+    Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse.new h
   end
   let(:second_page) do
     h = { operations: jobs_hash }
     h[:next_page_token] = "second_page_token"
-    Google::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse.new h
+    Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse.new h
   end
   let(:last_page) do
     h = { operations: jobs_hash }
     h[:operations].pop
-    Google::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse.new h
+    Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse.new h
   end
 
   it "list database operations" do
     list_res =  MockPagedEnumerable.new([first_page])
 
     mock = Minitest::Mock.new
-    mock.expect :list_database_operations, list_res, [instance_path(instance_id), database_metadata_filter, page_size: nil]
+    mock.expect :list_database_operations, list_res, [parent: instance_path(instance_id), filter: database_metadata_filter, page_size: nil, page_token: nil]
     3.times do
-      mock.expect :get_operation, job_grpc_done, [job_name, Hash]
+      gapic_operation = Gapic::Operation.new job_grpc_done, mock
+      mock.expect :get_operation, gapic_operation, [{ name: job_name }, Gapic::CallOptions]
     end
     mock.expect :instance_variable_get, mock, ["@operations_client"]
     database.service.mocked_databases = mock
@@ -108,9 +109,10 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
     list_res =  MockPagedEnumerable.new([first_page])
 
     mock = Minitest::Mock.new
-    mock.expect :list_database_operations, list_res, [instance_path(instance_id), database_metadata_filter, page_size: 3]
+    mock.expect :list_database_operations, list_res, [parent: instance_path(instance_id), filter: database_metadata_filter, page_size: 3, page_token: nil]
     3.times do
-      mock.expect :get_operation, job_grpc_done.dup, [job_name, Hash]
+      gapic_operation = Gapic::Operation.new job_grpc_done, mock
+      mock.expect :get_operation, gapic_operation, [{ name: job_name }, Gapic::CallOptions]
     end
     mock.expect :instance_variable_get, mock, ["@operations_client"]
     database.service.mocked_databases = mock
@@ -137,7 +139,8 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
   it "paginates database operations with next? and next" do
     list_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_database_operations, list_res, [instance_path(instance_id), database_metadata_filter, page_size: nil]
+    mock.expect :list_database_operations, list_res, [{ parent: instance_path(instance_id), filter: database_metadata_filter, page_size: nil, page_token: nil}]
+
     2.times do
       mock.expect :instance_variable_get, mock, ["@operations_client"]
     end
@@ -156,7 +159,7 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
   it "paginates database operations with all" do
     list_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_database_operations, list_res, [instance_path(instance_id), database_metadata_filter, page_size: nil]
+    mock.expect :list_database_operations, list_res, [parent: instance_path(instance_id), filter: database_metadata_filter, page_size: nil, page_token: nil]
     2.times do
       mock.expect :instance_variable_get, mock, ["@operations_client"]
     end
@@ -172,7 +175,7 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
   it "paginates database operations with all and page size" do
     list_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_database_operations, list_res, [instance_path(instance_id), database_metadata_filter, page_size: 3]
+    mock.expect :list_database_operations, list_res, [parent:  instance_path(instance_id), filter: database_metadata_filter, page_size: 3, page_token: nil]
     2.times do
       mock.expect :instance_variable_get, mock, ["@operations_client"]
     end
@@ -188,7 +191,7 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
   it "iterates database operations with all using Enumerator" do
     list_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_database_operations, list_res, [instance_path(instance_id), database_metadata_filter, page_size: nil]
+    mock.expect :list_database_operations, list_res, [parent: instance_path(instance_id), filter: database_metadata_filter, page_size: nil, page_token: nil]
     2.times do
       mock.expect :instance_variable_get, mock, ["@operations_client"]
     end
@@ -208,7 +211,7 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
     )
     list_res =  MockPagedEnumerable.new([first_page])
     mock = Minitest::Mock.new
-    mock.expect :list_database_operations, list_res, [instance_path(instance_id), filter, page_size: nil ]
+    mock.expect :list_database_operations, list_res, [parent: instance_path(instance_id), filter: filter, page_size: nil, page_token: nil]
     mock.expect :instance_variable_get, mock, ["@operations_client"]
     database.service.mocked_databases = mock
 
@@ -226,7 +229,7 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
     )
     list_res =  MockPagedEnumerable.new([first_page])
     mock = Minitest::Mock.new
-    mock.expect :list_database_operations, list_res, [instance_path(instance_id), filter, page_size: 3 ]
+    mock.expect :list_database_operations, list_res, [parent: instance_path(instance_id), filter: filter, page_size: 3, page_token: nil]
     mock.expect :instance_variable_get, mock, ["@operations_client"]
     database.service.mocked_databases = mock
 

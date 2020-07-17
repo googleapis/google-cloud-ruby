@@ -20,7 +20,7 @@ describe Google::Cloud::Spanner::Backup, :restore_database, :mock_spanner do
   let(:database_id) { "my-database-id" }
   let(:backup_id) { "my-backup-id" }
   let(:backup_grpc) {
-    Google::Spanner::Admin::Database::V1::Backup.new(
+    Google::Cloud::Spanner::Admin::Database::V1::Backup.new(
       backup_hash(instance_id: instance_id, database_id: database_id, backup_id: backup_id)
     )
   }
@@ -38,12 +38,12 @@ describe Google::Cloud::Spanner::Backup, :restore_database, :mock_spanner do
       name:"1234567890",
       metadata: Google::Protobuf::Any.new(
         type_url: "google.spanner.admin.database.v1.RestoreDatabaseMetadata",
-        value: Google::Spanner::Admin::Database::V1::RestoreDatabaseMetadata.new.to_proto
+        value: Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata.new.to_proto
       ),
       done: true,
       response: Google::Protobuf::Any.new(
         type_url: "type.googleapis.com/google.spanner.admin.database.v1.Database",
-        value: Google::Spanner::Admin::Database::V1::RestoreDatabaseMetadata.new.to_proto
+        value: Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata.new.to_proto
       )
     )
   end
@@ -51,18 +51,22 @@ describe Google::Cloud::Spanner::Backup, :restore_database, :mock_spanner do
 
   it "restore a database in the same instance as the backup instance" do
     mock = Minitest::Mock.new
-    restore_res = Google::Gax::Operation.new(
-                  job_grpc,
-                  mock,
-                  Google::Spanner::Admin::Database::V1::Database,
-                  Google::Spanner::Admin::Database::V1::RestoreDatabaseMetadata,
-                 )
+    restore_res = Gapic::Operation.new(
+      job_grpc, mock,
+      result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
+      metadata_type: Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata,
+    )
+    operation_done = Gapic::Operation.new(
+      job_grpc_done, mock,
+      result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
+      metadata_type: Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata,
+    )
     mock.expect :restore_database, restore_res, [
-      instance_path(instance_id),
-      "restored-database",
+      parent: instance_path(instance_id),
+      database_id: "restored-database",
       backup: backup_path(instance_id, backup_id)
     ]
-    mock.expect :get_operation, job_grpc_done, ["1234567890", Hash]
+    mock.expect :get_operation, operation_done, [{ name: "1234567890" }, Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
     job = backup.restore "restored-database"
@@ -82,18 +86,22 @@ describe Google::Cloud::Spanner::Backup, :restore_database, :mock_spanner do
 
   it "restore a database in a different instance than the backup instance" do
     mock = Minitest::Mock.new
-    restore_res = Google::Gax::Operation.new(
-                  job_grpc,
-                  mock,
-                  Google::Spanner::Admin::Database::V1::Database,
-                  Google::Spanner::Admin::Database::V1::RestoreDatabaseMetadata,
-                 )
+    restore_res = Gapic::Operation.new(
+      job_grpc, mock,
+      result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
+      metadata_type: Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata,
+    )
+    operation_done = Gapic::Operation.new(
+      job_grpc_done, mock,
+      result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
+      metadata_type: Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata,
+    )
     mock.expect :restore_database, restore_res, [
-      instance_path("other-instance"),
-      "restored-database",
+      parent: instance_path("other-instance"),
+      database_id: "restored-database",
       backup: backup_path(instance_id, backup_id)
     ]
-    mock.expect :get_operation, job_grpc_done, ["1234567890", Hash]
+    mock.expect :get_operation, operation_done, [{ name: "1234567890" } , Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
     job = backup.restore "restored-database", instance_id: "other-instance"

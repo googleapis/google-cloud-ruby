@@ -76,7 +76,7 @@ The environment variables that google-cloud-spanner checks for project ID are:
 1. `SPANNER_PROJECT`
 2. `GOOGLE_CLOUD_PROJECT`
 
-The environment variables that google-cloud-spanner checks for credentials are configured on {Google::Cloud::Spanner::V1::Credentials}:
+The environment variables that google-cloud-spanner checks for credentials are configured on {Google::Cloud::Spanner::V1::Spanner::Credentials}:
 
 1. `SPANNER_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `SPANNER_KEYFILE` - Path to JSON file, or JSON contents

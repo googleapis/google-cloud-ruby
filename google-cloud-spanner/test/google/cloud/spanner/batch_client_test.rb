@@ -18,16 +18,16 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
-  let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
+  let(:session_grpc) { Google::Cloud::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
   let(:transaction_id) { "tx789" }
   let(:timestamp) { Google::Protobuf::Timestamp.new seconds: 1412262083, nanos: 45123456 }
   let(:timestamp_time) { Google::Cloud::Spanner::Convert.timestamp_to_time timestamp }
-  let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id, read_timestamp: timestamp }
+  let(:transaction_grpc) { Google::Cloud::Spanner::V1::Transaction.new id: transaction_id, read_timestamp: timestamp }
   let(:batch_tx_hash) { { session: Base64.strict_encode64(session_grpc.to_proto), transaction: Base64.strict_encode64(transaction_grpc.to_proto) } }
-  let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new return_read_timestamp: true }
-  let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new read_only: snp_opts }
-  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
+  let(:snp_opts) { Google::Cloud::Spanner::V1::TransactionOptions::ReadOnly.new return_read_timestamp: true }
+  let(:tx_opts) { Google::Cloud::Spanner::V1::TransactionOptions.new read_only: snp_opts }
+  let(:default_options) { { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } } }
   let(:batch_client) { spanner.batch_client instance_id, database_id }
 
   let(:labels) { { "env" => "production" } }
@@ -46,9 +46,9 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
   end
 
   it "retrieves the instance" do
-    get_res = Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id)
+    get_res = Google::Cloud::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id)
     mock = Minitest::Mock.new
-    mock.expect :get_instance, get_res, [instance_path(instance_id)]
+    mock.expect :get_instance, get_res, [{ name: instance_path(instance_id) }]
     spanner.service.mocked_instances = mock
 
     instance = spanner.instance instance_id
@@ -65,9 +65,9 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
   end
 
   it "retrieves the database" do
-    get_res = Google::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id)
+    get_res = Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id)
     mock = Minitest::Mock.new
-    mock.expect :get_database, get_res, [database_path(instance_id, database_id)]
+    mock.expect :get_database, get_res, [{ name: database_path(instance_id, database_id) }]
     spanner.service.mocked_databases = mock
 
     database = batch_client.database
@@ -82,8 +82,8 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
   it "creates a batch_snapshot" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts }, default_options]
     spanner.service.mocked_service = mock
 
     batch_snapshot = batch_client.batch_snapshot
@@ -97,10 +97,10 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
   it "creates a batch_snapshot with session labels" do
     mock = Minitest::Mock.new
-    session_labels_grpc = Google::Spanner::V1::Session.new labels: labels
-    session_labels_resp_grpc = Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id), labels: labels
-    mock.expect :create_session, session_labels_resp_grpc, [database_path(instance_id, database_id), session: session_labels_grpc, options: default_options]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+    session_labels_grpc = Google::Cloud::Spanner::V1::Session.new labels: labels
+    session_labels_resp_grpc = Google::Cloud::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id), labels: labels
+    mock.expect :create_session, session_labels_resp_grpc, [{ database: database_path(instance_id, database_id), session: session_labels_grpc }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts }, default_options]
     spanner.service.mocked_service = mock
 
     batch_snapshot = batch_client_labels.batch_snapshot
@@ -113,12 +113,12 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
   end
 
   describe :strong do
-    let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new strong: true, return_read_timestamp: true }
+    let(:snp_opts) { Google::Cloud::Spanner::V1::TransactionOptions::ReadOnly.new strong: true, return_read_timestamp: true }
 
     it "creates a batch_snapshot with strong timestamp bound" do
       mock = Minitest::Mock.new
-      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+      mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+      mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts }, default_options]
       spanner.service.mocked_service = mock
 
       batch_snapshot = batch_client.batch_snapshot strong: true
@@ -135,12 +135,12 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
     let(:snapshot_time) { Time.now }
     let(:snapshot_datetime) { snapshot_time.to_datetime }
     let(:snapshot_timestamp) { Google::Cloud::Spanner::Convert.time_to_timestamp snapshot_time }
-    let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new read_timestamp: snapshot_timestamp, return_read_timestamp: true }
+    let(:snp_opts) { Google::Cloud::Spanner::V1::TransactionOptions::ReadOnly.new read_timestamp: snapshot_timestamp, return_read_timestamp: true }
 
     it "creates a batch_snapshot with timestamp option (Time)" do
       mock = Minitest::Mock.new
-      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+      mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+      mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts }, default_options]
       spanner.service.mocked_service = mock
 
       batch_snapshot = batch_client.batch_snapshot timestamp: snapshot_time
@@ -154,8 +154,8 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
     it "creates a batch_snapshot with read_timestamp option (Time)" do
       mock = Minitest::Mock.new
-      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+      mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+      mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts }, default_options]
       spanner.service.mocked_service = mock
 
       batch_snapshot = batch_client.batch_snapshot read_timestamp: snapshot_time
@@ -169,8 +169,8 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
     it "creates a batch_snapshot with timestamp option (DateTime)" do
       mock = Minitest::Mock.new
-      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+      mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+      mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts }, default_options]
       spanner.service.mocked_service = mock
 
       batch_snapshot = batch_client.batch_snapshot timestamp: snapshot_datetime
@@ -184,8 +184,8 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
     it "creates a batch_snapshot with read_timestamp option (DateTime)" do
       mock = Minitest::Mock.new
-      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+      mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+      mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts }, default_options]
       spanner.service.mocked_service = mock
 
       batch_snapshot = batch_client.batch_snapshot read_timestamp: snapshot_datetime
@@ -201,12 +201,12 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
   describe :staleness do
     let(:snapshot_staleness) { 60 }
     let(:duration_staleness) { Google::Cloud::Spanner::Convert.number_to_duration snapshot_staleness }
-    let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new exact_staleness: duration_staleness, return_read_timestamp: true }
+    let(:snp_opts) { Google::Cloud::Spanner::V1::TransactionOptions::ReadOnly.new exact_staleness: duration_staleness, return_read_timestamp: true }
 
     it "creates a batch_snapshot with the staleness option" do
       mock = Minitest::Mock.new
-      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+      mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+      mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts }, default_options]
       spanner.service.mocked_service = mock
 
       batch_snapshot = batch_client.batch_snapshot staleness: snapshot_staleness
@@ -220,8 +220,8 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
     it "creates a batch_snapshot with the exact_staleness option" do
       mock = Minitest::Mock.new
-      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+      mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+      mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts }, default_options]
       spanner.service.mocked_service = mock
 
       batch_snapshot = batch_client.batch_snapshot exact_staleness: snapshot_staleness

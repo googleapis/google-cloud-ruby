@@ -154,7 +154,7 @@ module Google
                 service.databases.instance_variable_get "@operations_client"
               jobs = new(Array(grpc.response.operations).map do |job_grpc|
                 Job.from_grpc \
-                  Google::Gax::Operation.new(job_grpc, operations_client),
+                  Gapic::Operation.new(job_grpc, operations_client),
                   service
               end)
               jobs.grpc = grpc

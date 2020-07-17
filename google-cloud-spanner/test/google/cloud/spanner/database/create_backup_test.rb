@@ -19,7 +19,7 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:backup_id) { "my-backup-id" }
-  let(:database_grpc) { Google::Spanner::Admin::Database::V1::Database.new \
+  let(:database_grpc) { Google::Cloud::Spanner::Admin::Database::V1::Database.new \
       database_hash(instance_id: instance_id, database_id: database_id)
   }
   let(:job_grpc) do
@@ -27,7 +27,7 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
       name: "1234567890",
       metadata: {
         type_url: "type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata",
-        value: Google::Spanner::Admin::Database::V1::CreateBackupMetadata.new(
+        value: Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata.new(
           progress: { start_time: Time.now }
         ).to_proto
       }
@@ -38,8 +38,8 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
       name:"1234567890",
       metadata: Google::Protobuf::Any.new(
         type_url: "google.spanner.admin.database.v1.CreateBackupMetadata",
-        value: Google::Spanner::Admin::Database::V1::CreateBackupMetadata.new(
-          progress: { 
+        value: Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata.new(
+          progress: {
             start_time: Time.now,
             end_time: Time.now + 100,
             progress_percent: 100
@@ -49,7 +49,7 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
       done: true,
       response: Google::Protobuf::Any.new(
         type_url: "google.spanner.admin.database.v1.Backup",
-        value: Google::Spanner::Admin::Database::V1::Backup.new.to_proto
+        value: Google::Cloud::Spanner::Admin::Database::V1::Backup.new.to_proto
       )
     )
   end
@@ -58,7 +58,7 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
       name:"1234567890",
       metadata: Google::Protobuf::Any.new(
         type_url: "google.spanner.admin.database.v1.CreateBackupMetadata",
-        value: Google::Spanner::Admin::Database::V1::CreateBackupMetadata.new(
+        value: Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata.new(
           progress: {
             start_time: Time.now,
             end_time: Time.now + 100,
@@ -80,18 +80,22 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
       database: database_path(instance_id, database_id),
       expire_time: expire_time
     }
-    create_res = Google::Gax::Operation.new(
-                   job_grpc,
-                   mock,
-                   Google::Spanner::Admin::Database::V1::Backup,
-                   Google::Spanner::Admin::Database::V1::CreateBackupMetadata
-                 )
+    create_res = Gapic::Operation.new(
+      job_grpc, mock,
+      result_type: Google::Cloud::Spanner::Admin::Database::V1::Backup,
+      metadata_type:  Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata
+    )
+    operation_done = Gapic::Operation.new(
+      job_grpc_done, mock,
+      result_type: Google::Cloud::Spanner::Admin::Database::V1::Backup,
+      metadata_type:  Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata
+    )
     mock.expect :create_backup, create_res, [
-      instance_path(instance_id),
-      backup_id,
-      create_req
+      parent: instance_path(instance_id),
+      backup_id: backup_id,
+      backup: create_req
     ]
-    mock.expect :get_operation, job_grpc_done, ["1234567890", Hash]
+    mock.expect :get_operation, operation_done, [{ name: "1234567890" }, Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
     job = database.create_backup backup_id, expire_time
@@ -123,19 +127,23 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
       database: database_path(instance_id, database_id),
       expire_time: expire_time
     }
-    create_res = Google::Gax::Operation.new(
-                   job_grpc,
-                   mock,
-                   Google::Spanner::Admin::Database::V1::Backup,
-                   Google::Spanner::Admin::Database::V1::CreateBackupMetadata
-                 )
+    create_res = Gapic::Operation.new(
+      job_grpc, mock,
+      result_type: Google::Cloud::Spanner::Admin::Database::V1::Backup,
+      metadata_type:  Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata
+    )
+    operation_cancel = Gapic::Operation.new(
+      job_grpc_cancel, mock,
+      result_type: Google::Cloud::Spanner::Admin::Database::V1::Backup,
+      metadata_type:  Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata
+    )
     mock.expect :create_backup, create_res, [
-      instance_path(instance_id),
-      backup_id,
-      create_req
+      parent: instance_path(instance_id),
+      backup_id: backup_id,
+      backup: create_req
     ]
-    mock.expect :cancel_operation, nil , ["1234567890"]
-    mock.expect :get_operation, job_grpc_cancel, ["1234567890", Hash]
+    mock.expect :cancel_operation, nil , [{ name: "1234567890" }, Gapic::CallOptions]
+    mock.expect :get_operation, operation_cancel, [{ name: "1234567890" }, Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
     job = database.create_backup backup_id, expire_time
@@ -165,6 +173,6 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
 
     assert_raises Google::Cloud::Error do
       database.create_backup backup_id, Time.now - 36000
-    end 
+    end
   end
 end

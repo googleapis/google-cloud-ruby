@@ -96,8 +96,8 @@ module Google
           rows.delete_if(&:nil?)
           rows.delete_if(&:empty?)
           @mutations += rows.map do |row|
-            Google::Spanner::V1::Mutation.new(
-              insert_or_update: Google::Spanner::V1::Mutation::Write.new(
+            V1::Mutation.new(
+              insert_or_update: V1::Mutation::Write.new(
                 table: table, columns: row.keys.map(&:to_s),
                 values: [Convert.object_to_grpc_value(row.values).list_value]
               )
@@ -154,8 +154,8 @@ module Google
           rows.delete_if(&:nil?)
           rows.delete_if(&:empty?)
           @mutations += rows.map do |row|
-            Google::Spanner::V1::Mutation.new(
-              insert: Google::Spanner::V1::Mutation::Write.new(
+            V1::Mutation.new(
+              insert: V1::Mutation::Write.new(
                 table: table, columns: row.keys.map(&:to_s),
                 values: [Convert.object_to_grpc_value(row.values).list_value]
               )
@@ -211,8 +211,8 @@ module Google
           rows.delete_if(&:nil?)
           rows.delete_if(&:empty?)
           @mutations += rows.map do |row|
-            Google::Spanner::V1::Mutation.new(
-              update: Google::Spanner::V1::Mutation::Write.new(
+            V1::Mutation.new(
+              update: V1::Mutation::Write.new(
                 table: table, columns: row.keys.map(&:to_s),
                 values: [Convert.object_to_grpc_value(row.values).list_value]
               )
@@ -270,8 +270,8 @@ module Google
           rows.delete_if(&:nil?)
           rows.delete_if(&:empty?)
           @mutations += rows.map do |row|
-            Google::Spanner::V1::Mutation.new(
-              replace: Google::Spanner::V1::Mutation::Write.new(
+            V1::Mutation.new(
+              replace: V1::Mutation::Write.new(
                 table: table, columns: row.keys.map(&:to_s),
                 values: [Convert.object_to_grpc_value(row.values).list_value]
               )
@@ -306,8 +306,8 @@ module Google
         #
         def delete table, keys = []
           @mutations += [
-            Google::Spanner::V1::Mutation.new(
-              delete: Google::Spanner::V1::Mutation::Delete.new(
+            V1::Mutation.new(
+              delete: V1::Mutation::Delete.new(
                 table: table, key_set: key_set(keys)
               )
             )
@@ -323,20 +323,20 @@ module Google
         protected
 
         def key_set keys
-          return Google::Spanner::V1::KeySet.new all: true if keys.nil?
+          return V1::KeySet.new all: true if keys.nil?
           keys = [keys] unless keys.is_a? Array
-          return Google::Spanner::V1::KeySet.new all: true if keys.empty?
+          return V1::KeySet.new all: true if keys.empty?
           if keys_are_ranges? keys
             key_ranges = keys.map do |r|
               Convert.to_key_range r
             end
-            return Google::Spanner::V1::KeySet.new ranges: key_ranges
+            return V1::KeySet.new ranges: key_ranges
           end
           key_list = keys.map do |key|
             key = [key] unless key.is_a? Array
             Convert.object_to_grpc_value(key).list_value
           end
-          Google::Spanner::V1::KeySet.new keys: key_list
+          V1::KeySet.new keys: key_list
         end
 
         def keys_are_ranges? keys

@@ -164,16 +164,16 @@ describe Google::Cloud::Spanner::Results, :deeply_nested_list, :mock_spanner do
       ] }}] }
   end
   let(:results_enum) do
-    [Google::Spanner::V1::PartialResultSet.new(results_metadata),
-     Google::Spanner::V1::PartialResultSet.new(results_values1),
-     Google::Spanner::V1::PartialResultSet.new(results_values2),
-     Google::Spanner::V1::PartialResultSet.new(results_values3),
-     Google::Spanner::V1::PartialResultSet.new(results_values4),
-     Google::Spanner::V1::PartialResultSet.new(results_values5),
-     Google::Spanner::V1::PartialResultSet.new(results_values6),
-     Google::Spanner::V1::PartialResultSet.new(results_values7),
-     Google::Spanner::V1::PartialResultSet.new(results_values8),
-     Google::Spanner::V1::PartialResultSet.new(results_values9)].to_enum
+    [Google::Cloud::Spanner::V1::PartialResultSet.new(results_metadata),
+     Google::Cloud::Spanner::V1::PartialResultSet.new(results_values1),
+     Google::Cloud::Spanner::V1::PartialResultSet.new(results_values2),
+     Google::Cloud::Spanner::V1::PartialResultSet.new(results_values3),
+     Google::Cloud::Spanner::V1::PartialResultSet.new(results_values4),
+     Google::Cloud::Spanner::V1::PartialResultSet.new(results_values5),
+     Google::Cloud::Spanner::V1::PartialResultSet.new(results_values6),
+     Google::Cloud::Spanner::V1::PartialResultSet.new(results_values7),
+     Google::Cloud::Spanner::V1::PartialResultSet.new(results_values8),
+     Google::Cloud::Spanner::V1::PartialResultSet.new(results_values9)].to_enum
   end
   let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service }
 

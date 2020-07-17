@@ -24,7 +24,7 @@ describe Google::Cloud::Spanner::Convert, :to_key_range, :mock_spanner do
     range = Google::Cloud::Spanner::Range.new 1, 100
     key_range = Google::Cloud::Spanner::Convert.to_key_range range
 
-    _(key_range).must_be_kind_of Google::Spanner::V1::KeyRange
+    _(key_range).must_be_kind_of Google::Cloud::Spanner::V1::KeyRange
     _(key_range.start_closed).must_equal Google::Cloud::Spanner::Convert.object_to_grpc_value([1]).list_value
     _(key_range.start_open).must_be :nil?
     _(key_range.end_closed).must_equal Google::Cloud::Spanner::Convert.object_to_grpc_value([100]).list_value
@@ -35,7 +35,7 @@ describe Google::Cloud::Spanner::Convert, :to_key_range, :mock_spanner do
     range = Google::Cloud::Spanner::Range.new 1, 100, exclude_begin: true, exclude_end: true
     key_range = Google::Cloud::Spanner::Convert.to_key_range range
 
-    _(key_range).must_be_kind_of Google::Spanner::V1::KeyRange
+    _(key_range).must_be_kind_of Google::Cloud::Spanner::V1::KeyRange
     _(key_range.start_closed).must_be :nil?
     _(key_range.start_open).must_equal Google::Cloud::Spanner::Convert.object_to_grpc_value([1]).list_value
     _(key_range.end_closed).must_be :nil?
@@ -46,7 +46,7 @@ describe Google::Cloud::Spanner::Convert, :to_key_range, :mock_spanner do
     range = Google::Cloud::Spanner::Range.new 1, 100, exclude_begin: true
     key_range = Google::Cloud::Spanner::Convert.to_key_range range
 
-    _(key_range).must_be_kind_of Google::Spanner::V1::KeyRange
+    _(key_range).must_be_kind_of Google::Cloud::Spanner::V1::KeyRange
     _(key_range.start_closed).must_be :nil?
     _(key_range.start_open).must_equal Google::Cloud::Spanner::Convert.object_to_grpc_value([1]).list_value
     _(key_range.end_closed).must_equal Google::Cloud::Spanner::Convert.object_to_grpc_value([100]).list_value
@@ -57,7 +57,7 @@ describe Google::Cloud::Spanner::Convert, :to_key_range, :mock_spanner do
     range = Google::Cloud::Spanner::Range.new 1, 100, exclude_end: true
     key_range = Google::Cloud::Spanner::Convert.to_key_range range
 
-    _(key_range).must_be_kind_of Google::Spanner::V1::KeyRange
+    _(key_range).must_be_kind_of Google::Cloud::Spanner::V1::KeyRange
     _(key_range.start_closed).must_equal Google::Cloud::Spanner::Convert.object_to_grpc_value([1]).list_value
     _(key_range.start_open).must_be :nil?
     _(key_range.end_closed).must_be :nil?
@@ -68,7 +68,7 @@ describe Google::Cloud::Spanner::Convert, :to_key_range, :mock_spanner do
     range = 1..100
     key_range = Google::Cloud::Spanner::Convert.to_key_range range
 
-    _(key_range).must_be_kind_of Google::Spanner::V1::KeyRange
+    _(key_range).must_be_kind_of Google::Cloud::Spanner::V1::KeyRange
     _(key_range.start_closed).must_equal Google::Cloud::Spanner::Convert.object_to_grpc_value([1]).list_value
     _(key_range.start_open).must_be :nil?
     _(key_range.end_closed).must_equal Google::Cloud::Spanner::Convert.object_to_grpc_value([100]).list_value
@@ -79,7 +79,7 @@ describe Google::Cloud::Spanner::Convert, :to_key_range, :mock_spanner do
     range = 1...100
     key_range = Google::Cloud::Spanner::Convert.to_key_range range
 
-    _(key_range).must_be_kind_of Google::Spanner::V1::KeyRange
+    _(key_range).must_be_kind_of Google::Cloud::Spanner::V1::KeyRange
     _(key_range.start_closed).must_equal Google::Cloud::Spanner::Convert.object_to_grpc_value([1]).list_value
     _(key_range.start_open).must_be :nil?
     _(key_range.end_closed).must_be :nil?

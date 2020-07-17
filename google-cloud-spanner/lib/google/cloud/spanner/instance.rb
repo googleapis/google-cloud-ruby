@@ -869,13 +869,6 @@ module Google
         def ensure_service!
           raise "Must have active connection to service" unless service
         end
-
-        def instance_config_path name
-          return name if name.to_s.include? "/"
-          Admin::Instance::V1::InstanceAdminClient.instance_config_path(
-            project, name.to_s
-          )
-        end
       end
     end
   end

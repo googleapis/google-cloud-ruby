@@ -31,14 +31,14 @@ describe Google::Cloud::Spanner::Project, :create_database, :mock_spanner do
     instance_id = "my-instance-id"
     database_id = "new-database"
 
-    create_res = Google::Gax::Operation.new(
-                   job_grpc,
-                   Object.new,
-                   Google::Spanner::Admin::Database::V1::Database,
-                   Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata
-                 )
+    create_res = \
+      Gapic::Operation.new(
+        job_grpc, Object.new,
+        result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
+        metadata_type: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata
+      )
     mock = Minitest::Mock.new
-    mock.expect :create_database, create_res, [instance_path(instance_id), "CREATE DATABASE `#{database_id}`", extra_statements: []]
+    mock.expect :create_database, create_res, [parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: []]
     spanner.service.mocked_databases = mock
 
     job = spanner.create_database instance_id, database_id
@@ -53,14 +53,14 @@ describe Google::Cloud::Spanner::Project, :create_database, :mock_spanner do
     instance_id = "my-instance-id"
     database_id = "new-database"
 
-    create_res = Google::Gax::Operation.new(
-                   job_grpc,
-                   Object.new,
-                   Google::Spanner::Admin::Database::V1::Database,
-                   Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata
-                 )
+    create_res = \
+      Gapic::Operation.new(
+        job_grpc, Object.new,
+        result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
+        metadata_type: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata
+    )
     mock = Minitest::Mock.new
-    mock.expect :create_database, create_res, [instance_path(instance_id), "CREATE DATABASE `#{database_id}`", extra_statements: ["CREATE TABLE table1;", "CREATE TABLE table2;"]]
+    mock.expect :create_database, create_res, [parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: ["CREATE TABLE table1;", "CREATE TABLE table2;"]]
     spanner.service.mocked_databases = mock
 
     job = spanner.create_database instance_id, database_id, statements: [

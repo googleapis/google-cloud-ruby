@@ -20,7 +20,7 @@ describe Google::Cloud::Spanner::Backup, :mock_spanner do
   let(:database_id) { "my-database-id" }
   let(:backup_id) { "my-backup-id" }
   let(:backup_grpc) {
-    Google::Spanner::Admin::Database::V1::Backup.new(
+    Google::Cloud::Spanner::Admin::Database::V1::Backup.new(
       backup_hash(
         instance_id: instance_id,
         database_id: database_id,

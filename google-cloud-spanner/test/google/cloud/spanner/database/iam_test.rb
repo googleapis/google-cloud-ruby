@@ -17,7 +17,7 @@ require "helper"
 describe Google::Cloud::Spanner::Database, :iam, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
-  let(:database_grpc) { Google::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id) }
+  let(:database_grpc) { Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id) }
   let(:database) { Google::Cloud::Spanner::Database.from_grpc database_grpc, spanner.service }
   let(:viewer_policy_hash) do
     {
@@ -47,7 +47,7 @@ describe Google::Cloud::Spanner::Database, :iam, :mock_spanner do
   it "gets the IAM Policy" do
     get_res = Google::Iam::V1::Policy.new viewer_policy_hash
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [database.path]
+    mock.expect :get_iam_policy, get_res, [resource: database.path]
     database.service.mocked_databases = mock
 
     policy = database.policy
@@ -67,7 +67,7 @@ describe Google::Cloud::Spanner::Database, :iam, :mock_spanner do
   it "sets the IAM Policy" do
     get_res = Google::Iam::V1::Policy.new owner_policy_hash
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [database.path]
+    mock.expect :get_iam_policy, get_res, [resource: database.path]
 
     updated_policy_hash = owner_policy_hash.dup
     updated_policy_hash[:bindings].first[:members].shift
@@ -75,7 +75,7 @@ describe Google::Cloud::Spanner::Database, :iam, :mock_spanner do
 
     set_req = Google::Iam::V1::Policy.new updated_policy_hash
     set_res = Google::Iam::V1::Policy.new updated_policy_hash.merge(etag: "\b\x10")
-    mock.expect :set_iam_policy, set_res, [database.path, set_req]
+    mock.expect :set_iam_policy, set_res, [resource: database.path, policy: set_req]
     database.service.mocked_databases = mock
 
     policy = database.policy
@@ -99,10 +99,9 @@ describe Google::Cloud::Spanner::Database, :iam, :mock_spanner do
   end
 
   it "sets the IAM Policy in a block" do
-
     get_res = Google::Iam::V1::Policy.new owner_policy_hash
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [database.path]
+    mock.expect :get_iam_policy, get_res, [resource: database.path]
 
     updated_policy_hash = owner_policy_hash.dup
     updated_policy_hash[:bindings].first[:members].shift
@@ -110,7 +109,7 @@ describe Google::Cloud::Spanner::Database, :iam, :mock_spanner do
 
     set_req = Google::Iam::V1::Policy.new updated_policy_hash
     set_res = Google::Iam::V1::Policy.new updated_policy_hash.merge(etag: "\b\x10")
-    mock.expect :set_iam_policy, set_res, [database.path, set_req]
+    mock.expect :set_iam_policy, set_res, [resource: database.path, policy: set_req]
     database.service.mocked_databases = mock
 
     policy = database.policy do |p|
@@ -137,7 +136,7 @@ describe Google::Cloud::Spanner::Database, :iam, :mock_spanner do
       permissions: ["spanner.databases.get"]
     )
     mock = Minitest::Mock.new
-    mock.expect :test_iam_permissions, test_res, [database.path, permissions]
+    mock.expect :test_iam_permissions, test_res, [resource: database.path, permissions: permissions]
     database.service.mocked_databases = mock
 
     permissions = database.test_permissions "spanner.databases.get",

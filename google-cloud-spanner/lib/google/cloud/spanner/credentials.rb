@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/spanner/v1/credentials"
+require "google/cloud/spanner/v1/spanner/credentials"
 
 module Google
   module Cloud
@@ -37,7 +37,7 @@ module Google
       #
       #   spanner.project_id #=> "my-project"
       #
-      class Credentials < Google::Cloud::Spanner::V1::Credentials
+      class Credentials < Google::Cloud::Spanner::V1::Spanner::Credentials
       end
     end
   end

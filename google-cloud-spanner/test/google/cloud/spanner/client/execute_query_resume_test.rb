@@ -18,8 +18,8 @@ describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner 
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
-  let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
-  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
+  let(:session_grpc) { Google::Cloud::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
+  let(:default_options) { { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } } }
   let :results_hash1 do
     {
       metadata: {
@@ -85,30 +85,30 @@ describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner 
   end
   let(:results_enum1) do
     [
-      Google::Spanner::V1::PartialResultSet.new(results_hash1),
-      Google::Spanner::V1::PartialResultSet.new(results_hash2),
-      Google::Spanner::V1::PartialResultSet.new(results_hash3),
-      Google::Spanner::V1::PartialResultSet.new(results_hash4),
-      Google::Spanner::V1::PartialResultSet.new(results_hash5),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash1),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash2),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash3),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash4),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash5),
       GRPC::Unavailable,
-      Google::Spanner::V1::PartialResultSet.new(results_hash6)
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash6)
     ].to_enum
   end
   let(:results_enum2) do
     [
-      Google::Spanner::V1::PartialResultSet.new(results_hash1),
-      Google::Spanner::V1::PartialResultSet.new(results_hash5),
-      Google::Spanner::V1::PartialResultSet.new(results_hash6)
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash1),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash5),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash6)
     ].to_enum
   end
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
 
   it "resumes broken response streams" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
     spanner.service.mocked_service = mock
     expect_execute_streaming_sql RaiseableEnumerator.new(results_enum1), session_grpc.name, "SELECT * FROM users", options: default_options
-    expect_execute_streaming_sql RaiseableEnumerator.new(results_enum2), session_grpc.name, "SELECT * FROM users", resume_token: "abc123", options: default_options    
+    expect_execute_streaming_sql RaiseableEnumerator.new(results_enum2), session_grpc.name, "SELECT * FROM users", resume_token: "abc123", options: default_options
 
     results = client.execute_query "SELECT * FROM users"
 

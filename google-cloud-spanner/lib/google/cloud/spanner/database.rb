@@ -384,10 +384,9 @@ module Google
             )
           end
 
-          grpc = service.list_database_operations \
-            instance_id,
-            filter: database_filter,
-            page_size: page_size
+          grpc = service.list_database_operations instance_id,
+                                                  filter: database_filter,
+                                                  page_size: page_size
           Database::Job::List.from_grpc grpc, service
         end
 

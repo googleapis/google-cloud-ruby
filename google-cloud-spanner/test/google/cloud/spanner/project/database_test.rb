@@ -20,9 +20,9 @@ describe Google::Cloud::Spanner::Project, :database, :mock_spanner do
   it "gets an database" do
     database_id = "found-database"
 
-    get_res = Google::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id)
+    get_res = Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id)
     mock = Minitest::Mock.new
-    mock.expect :get_database, get_res, [database_path(instance_id, database_id)]
+    mock.expect :get_database, get_res, [name: database_path(instance_id, database_id)]
     spanner.service.mocked_databases = mock
 
     database = spanner.database instance_id, database_id
@@ -45,7 +45,7 @@ describe Google::Cloud::Spanner::Project, :database, :mock_spanner do
 
     stub = Object.new
     def stub.get_database *args
-      gax_error = Google::Gax::GaxError.new "not found"
+      gax_error = Google::Cloud::NotFoundError.new "not found"
       gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
       raise gax_error
     end

@@ -24,7 +24,7 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
         chunked_value: true },
       { values: [{ string_value: "ghi" }] }
     ]
-    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
+    results_enum = results_hashes.map { |hash| Google::Cloud::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -50,7 +50,7 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
         chunked_value: true },
       { values: [{ list_value: { values: [{ string_value: "i" }, { string_value: "jkl" }] }}]}
     ]
-    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
+    results_enum = results_hashes.map { |hash| Google::Cloud::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -76,7 +76,7 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
         chunked_value: true },
       { values: [{ list_value: { values: [{ null_value: "NULL_VALUE" }, { string_value: "jkl" }] }}]}
     ]
-    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
+    results_enum = results_hashes.map { |hash| Google::Cloud::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -102,7 +102,7 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
         chunked_value: true },
       { values: [{ list_value: { values: [{ string_value: "" }, { string_value: "jkl" }] }}]}
     ]
-    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
+    results_enum = results_hashes.map { |hash| Google::Cloud::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -128,7 +128,7 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
         chunked_value: true },
       { values: [{ list_value: { values: [{ string_value: "ghi" }] }}]}
     ]
-    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
+    results_enum = results_hashes.map { |hash| Google::Cloud::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -154,7 +154,7 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
         chunked_value: true },
       { values: [{ list_value: { values: [{ null_value: "NULL_VALUE" }, { string_value: "5" }] }}]}
     ]
-    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
+    results_enum = results_hashes.map { |hash| Google::Cloud::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -180,7 +180,7 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
         chunked_value: true },
       { values: [{ list_value: { values: [{ null_value: "NULL_VALUE" }, { number_value: 3.0 }] }}]}
     ]
-    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
+    results_enum = results_hashes.map { |hash| Google::Cloud::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -207,7 +207,7 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
         chunked_value: true },
       { values: [{ string_value: "f" }] }
     ]
-    results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
+    results_enum = results_hashes.map { |hash| Google::Cloud::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results

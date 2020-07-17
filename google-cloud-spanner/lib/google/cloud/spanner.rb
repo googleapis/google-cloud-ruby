@@ -59,8 +59,6 @@ module Google
       #   * `https://www.googleapis.com/auth/spanner`
       #   * `https://www.googleapis.com/auth/spanner.data`
       # @param [Integer] timeout Default timeout to use in requests. Optional.
-      # @param [Hash] client_config A hash of values to override the default
-      #   behavior of the API client. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
@@ -91,12 +89,11 @@ module Google
       #   spanner = Google::Cloud::Spanner.new
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
-                   client_config: nil, endpoint: nil, project: nil, keyfile: nil,
+                   endpoint: nil, project: nil, keyfile: nil,
                    emulator_host: nil, lib_name: nil, lib_version: nil
         project_id    ||= (project || default_project_id)
         scope         ||= configure.scope
         timeout       ||= configure.timeout
-        client_config ||= configure.client_config
         endpoint      ||= configure.endpoint
         credentials   ||= (keyfile || default_credentials(scope: scope))
         emulator_host ||= configure.emulator_host
@@ -122,8 +119,8 @@ module Google
         Spanner::Project.new(
           Spanner::Service.new(
             project_id, credentials,
-            host: endpoint, timeout: timeout, client_config: client_config,
-            lib_name: lib_name, lib_version: lib_version
+            host: endpoint, timeout: timeout, lib_name: lib_name,
+            lib_version: lib_version
           ),
           query_options: configure.query_options
         )
@@ -145,8 +142,6 @@ module Google
       # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       # * `timeout` - (Integer) Default timeout to use in requests.
-      # * `client_config` - (Hash) A hash of values to override the default
-      #   behavior of the API client.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
       # * `emulator_host` - (String) Host name of the emulator. Defaults to

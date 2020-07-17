@@ -17,7 +17,7 @@ require "helper"
 describe Google::Cloud::Spanner::Database, :update, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
-  let(:database_grpc) { Google::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id) }
+  let(:database_grpc) { Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id) }
   let(:database) { Google::Cloud::Spanner::Database.from_grpc database_grpc, spanner.service }
   let(:job_grpc) do
     Google::Longrunning::Operation.new(
@@ -30,14 +30,14 @@ describe Google::Cloud::Spanner::Database, :update, :mock_spanner do
   end
 
   it "updates with single statement" do
-    update_res = Google::Gax::Operation.new(
-                   job_grpc,
-                   Object.new,
-                   Google::Spanner::Admin::Database::V1::Database,
-                   Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest
-                 )
+    update_res = \
+      Gapic::Operation.new(
+        job_grpc, Object.new,
+        result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
+        metadata_type: Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest
+      )
     mock = Minitest::Mock.new
-    mock.expect :update_database_ddl, update_res, [database_path(instance_id, database_id), ["CREATE TABLE table4"], operation_id: nil]
+    mock.expect :update_database_ddl, update_res, [database: database_path(instance_id, database_id), statements: ["CREATE TABLE table4"], operation_id: nil]
     spanner.service.mocked_databases = mock
 
     job = database.update statements: "CREATE TABLE table4"
@@ -49,14 +49,14 @@ describe Google::Cloud::Spanner::Database, :update, :mock_spanner do
   end
 
   it "updates with multiple statements" do
-    update_res = Google::Gax::Operation.new(
-                   job_grpc,
-                   Object.new,
-                   Google::Spanner::Admin::Database::V1::Database,
-                   Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest
-                 )
+    update_res = \
+      Gapic::Operation.new(
+        job_grpc, Object.new,
+        result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
+        metadata_type: Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest
+      )
     mock = Minitest::Mock.new
-    mock.expect :update_database_ddl, update_res, [database_path(instance_id, database_id), ["CREATE TABLE table4", "CREATE TABLE table5"], operation_id: nil]
+    mock.expect :update_database_ddl, update_res, [database: database_path(instance_id, database_id), statements: ["CREATE TABLE table4", "CREATE TABLE table5"], operation_id: nil]
     spanner.service.mocked_databases = mock
 
     job = database.update statements: ["CREATE TABLE table4", "CREATE TABLE table5"]
@@ -68,14 +68,14 @@ describe Google::Cloud::Spanner::Database, :update, :mock_spanner do
   end
 
   it "updates with operation_id" do
-    update_res = Google::Gax::Operation.new(
-                   job_grpc,
-                   Object.new,
-                   Google::Spanner::Admin::Database::V1::Database,
-                   Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest
-                 )
+    update_res = \
+      Gapic::Operation.new(
+        job_grpc, Object.new,
+        result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
+        metadata_type: Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest
+      )
     mock = Minitest::Mock.new
-    mock.expect :update_database_ddl, update_res, [database_path(instance_id, database_id), ["CREATE TABLE table4", "CREATE TABLE table5"], operation_id: "update123"]
+    mock.expect :update_database_ddl, update_res, [database: database_path(instance_id, database_id), statements: ["CREATE TABLE table4", "CREATE TABLE table5"], operation_id: "update123"]
     spanner.service.mocked_databases = mock
 
     job = database.update statements: ["CREATE TABLE table4", "CREATE TABLE table5"], operation_id: "update123"

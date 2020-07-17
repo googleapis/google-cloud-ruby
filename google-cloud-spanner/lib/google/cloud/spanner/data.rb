@@ -216,9 +216,9 @@ module Google
         ##
         # @private
         def to_grpc_type
-          Google::Spanner::V1::Type.new(
+          V1::Type.new(
             code: :STRUCT,
-            struct_type: Google::Spanner::V1::StructType.new(
+            struct_type: V1::StructType.new(
               fields: @grpc_fields
             )
           )

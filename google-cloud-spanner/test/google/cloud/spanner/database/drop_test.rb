@@ -17,12 +17,12 @@ require "helper"
 describe Google::Cloud::Spanner::Database, :drop, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
-  let(:database_grpc) { Google::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id) }
+  let(:database_grpc) { Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id) }
   let(:database) { Google::Cloud::Spanner::Database.from_grpc database_grpc, spanner.service }
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :drop_database, nil, [database_path(instance_id, database_id)]
+    mock.expect :drop_database, nil, [database: database_path(instance_id, database_id)]
     spanner.service.mocked_databases = mock
 
     database.drop

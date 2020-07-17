@@ -44,8 +44,8 @@ describe Google::Cloud::Spanner::Results, :duplicate, :mock_spanner do
     }
   end
   let(:results_enum) do
-    [Google::Spanner::V1::PartialResultSet.new(results_types),
-     Google::Spanner::V1::PartialResultSet.new(results_values)].to_enum
+    [Google::Cloud::Spanner::V1::PartialResultSet.new(results_types),
+     Google::Cloud::Spanner::V1::PartialResultSet.new(results_values)].to_enum
   end
   let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service }
 

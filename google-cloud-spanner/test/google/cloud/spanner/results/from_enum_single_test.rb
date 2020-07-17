@@ -49,7 +49,7 @@ describe Google::Cloud::Spanner::Results, :from_enum, :single_response, :mock_sp
     }
   end
   let(:results_enum) do
-    [Google::Spanner::V1::PartialResultSet.new(results_hash)].to_enum
+    [Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash)].to_enum
   end
   let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service }
 

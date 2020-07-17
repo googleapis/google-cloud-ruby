@@ -18,8 +18,8 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
-  let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
-  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
+  let(:session_grpc) { Google::Cloud::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
+  let(:default_options) { { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } } }
   let :results_header do
     {
       metadata: {
@@ -86,27 +86,32 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
 
   it "returns all rows even when there is no resume_token" do
     no_tokens_enum = [
-      Google::Spanner::V1::PartialResultSet.new(results_header),
-      Google::Spanner::V1::PartialResultSet.new(results_hash1),
-      Google::Spanner::V1::PartialResultSet.new(results_hash2),
-      Google::Spanner::V1::PartialResultSet.new(results_hash3),
-      Google::Spanner::V1::PartialResultSet.new(results_hash4),
-      Google::Spanner::V1::PartialResultSet.new(results_hash5),
-      Google::Spanner::V1::PartialResultSet.new(results_hash1),
-      Google::Spanner::V1::PartialResultSet.new(results_hash2),
-      Google::Spanner::V1::PartialResultSet.new(results_hash3),
-      Google::Spanner::V1::PartialResultSet.new(results_hash4),
-      Google::Spanner::V1::PartialResultSet.new(results_hash5),
-      Google::Spanner::V1::PartialResultSet.new(results_hash1),
-      Google::Spanner::V1::PartialResultSet.new(results_hash2),
-      Google::Spanner::V1::PartialResultSet.new(results_hash3),
-      Google::Spanner::V1::PartialResultSet.new(results_hash4),
-      Google::Spanner::V1::PartialResultSet.new(results_hash5)
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_header),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash1),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash2),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash3),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash4),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash5),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash1),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash2),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash3),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash4),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash5),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash1),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash2),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash3),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash4),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash5)
     ].to_enum
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :streaming_read, no_tokens_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :streaming_read, no_tokens_enum, [{
+      session: session_grpc.name, table: "my-table",
+      columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
+      key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true),
+      transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil
+    }, default_options]
     spanner.service.mocked_service = mock
 
     results = client.read "my-table", columns
@@ -123,27 +128,32 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
 
   it "returns all rows even when all requests have resume_token" do
     all_tokens_enum = [
-      Google::Spanner::V1::PartialResultSet.new(results_header),
-      Google::Spanner::V1::PartialResultSet.new(results_hash1.merge(resume_token: Base64.strict_encode64("xyz123"))),
-      Google::Spanner::V1::PartialResultSet.new(results_hash2.merge(resume_token: Base64.strict_encode64("xyz124"))),
-      Google::Spanner::V1::PartialResultSet.new(results_hash3.merge(resume_token: Base64.strict_encode64("xyz125"))),
-      Google::Spanner::V1::PartialResultSet.new(results_hash4.merge(resume_token: Base64.strict_encode64("xyz126"))),
-      Google::Spanner::V1::PartialResultSet.new(results_hash5.merge(resume_token: Base64.strict_encode64("xyz127"))),
-      Google::Spanner::V1::PartialResultSet.new(results_hash1.merge(resume_token: Base64.strict_encode64("xyz128"))),
-      Google::Spanner::V1::PartialResultSet.new(results_hash2.merge(resume_token: Base64.strict_encode64("xyz129"))),
-      Google::Spanner::V1::PartialResultSet.new(results_hash3.merge(resume_token: Base64.strict_encode64("xyz130"))),
-      Google::Spanner::V1::PartialResultSet.new(results_hash4.merge(resume_token: Base64.strict_encode64("xyz131"))),
-      Google::Spanner::V1::PartialResultSet.new(results_hash5.merge(resume_token: Base64.strict_encode64("xyz132"))),
-      Google::Spanner::V1::PartialResultSet.new(results_hash1.merge(resume_token: Base64.strict_encode64("xyz133"))),
-      Google::Spanner::V1::PartialResultSet.new(results_hash2.merge(resume_token: Base64.strict_encode64("xyz134"))),
-      Google::Spanner::V1::PartialResultSet.new(results_hash3.merge(resume_token: Base64.strict_encode64("xyz135"))),
-      Google::Spanner::V1::PartialResultSet.new(results_hash4.merge(resume_token: Base64.strict_encode64("xyz137"))),
-      Google::Spanner::V1::PartialResultSet.new(results_hash5.merge(resume_token: Base64.strict_encode64("xyz128")))
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_header),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash1.merge(resume_token: Base64.strict_encode64("xyz123"))),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash2.merge(resume_token: Base64.strict_encode64("xyz124"))),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash3.merge(resume_token: Base64.strict_encode64("xyz125"))),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash4.merge(resume_token: Base64.strict_encode64("xyz126"))),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash5.merge(resume_token: Base64.strict_encode64("xyz127"))),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash1.merge(resume_token: Base64.strict_encode64("xyz128"))),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash2.merge(resume_token: Base64.strict_encode64("xyz129"))),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash3.merge(resume_token: Base64.strict_encode64("xyz130"))),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash4.merge(resume_token: Base64.strict_encode64("xyz131"))),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash5.merge(resume_token: Base64.strict_encode64("xyz132"))),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash1.merge(resume_token: Base64.strict_encode64("xyz133"))),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash2.merge(resume_token: Base64.strict_encode64("xyz134"))),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash3.merge(resume_token: Base64.strict_encode64("xyz135"))),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash4.merge(resume_token: Base64.strict_encode64("xyz137"))),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash5.merge(resume_token: Base64.strict_encode64("xyz128")))
     ].to_enum
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :streaming_read, all_tokens_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :streaming_read, all_tokens_enum, [{
+      session: session_grpc.name, table: "my-table",
+      columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
+      key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true),
+      transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil
+    }, default_options]
     spanner.service.mocked_service = mock
 
     results = client.read "my-table", columns
@@ -160,28 +170,33 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
 
   it "returns buffered responses once it hits the buffer bounds, but will re-raise if there is no resume_token" do
     bounds_with_abort_enum = [
-      Google::Spanner::V1::PartialResultSet.new(results_header),
-      Google::Spanner::V1::PartialResultSet.new(results_hash1.merge(resume_token: Base64.strict_encode64("xyz123"))),
-      Google::Spanner::V1::PartialResultSet.new(results_hash2),
-      Google::Spanner::V1::PartialResultSet.new(results_hash3),
-      Google::Spanner::V1::PartialResultSet.new(results_hash4),
-      Google::Spanner::V1::PartialResultSet.new(results_hash5),
-      Google::Spanner::V1::PartialResultSet.new(results_hash1),
-      Google::Spanner::V1::PartialResultSet.new(results_hash2),
-      Google::Spanner::V1::PartialResultSet.new(results_hash3),
-      Google::Spanner::V1::PartialResultSet.new(results_hash4),
-      Google::Spanner::V1::PartialResultSet.new(results_hash5),
-      Google::Spanner::V1::PartialResultSet.new(results_hash1),
-      Google::Spanner::V1::PartialResultSet.new(results_hash2),
-      Google::Spanner::V1::PartialResultSet.new(results_hash3),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_header),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash1.merge(resume_token: Base64.strict_encode64("xyz123"))),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash2),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash3),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash4),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash5),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash1),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash2),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash3),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash4),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash5),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash1),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash2),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash3),
       GRPC::Unavailable,
-      Google::Spanner::V1::PartialResultSet.new(results_hash4),
-      Google::Spanner::V1::PartialResultSet.new(results_hash5)
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash4),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash5)
     ].to_enum
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :streaming_read, RaiseableEnumerator.new(bounds_with_abort_enum), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :streaming_read, RaiseableEnumerator.new(bounds_with_abort_enum), [{
+      session: session_grpc.name, table: "my-table",
+      columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
+      key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true),
+      transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil
+    }, default_options]
     spanner.service.mocked_service = mock
 
     results = client.read "my-table", columns
