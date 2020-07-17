@@ -268,11 +268,6 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
     let(:topic) { Google::Cloud::PubSub::Topic.from_name topic_name,
                                                  pubsub.service,
                                                  autocreate: false }
-    let(:gax_error) do
-      Google::Gax::GaxError.new("not found").tap do |e|
-        e.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-      end
-    end
 
     it "publishes a message" do
       messages = [
@@ -281,10 +276,7 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
 
       stub = Object.new
       def stub.publish *args
-        err = Google::Gax::GaxError.new("not found").tap do |e|
-          e.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        end
-        raise err
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       pubsub.service.mocked_publisher = stub
 

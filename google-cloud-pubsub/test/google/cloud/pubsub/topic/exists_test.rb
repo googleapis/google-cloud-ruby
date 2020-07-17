@@ -32,7 +32,7 @@ describe Google::Cloud::PubSub::Topic, :exists, :mock_pubsub do
     it "checks if the topic exists by making an HTTP call" do
       get_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name)
       mock = Minitest::Mock.new
-      mock.expect :get_topic, get_res, [topic_path(topic_name), options: default_options]
+      mock.expect :get_topic, get_res, [topic: topic_path(topic_name)]
       topic.service.mocked_publisher = mock
 
       _(topic).must_be :exists?
@@ -49,9 +49,7 @@ describe Google::Cloud::PubSub::Topic, :exists, :mock_pubsub do
     it "checks if the topic exists by making an HTTP call" do
       stub = Object.new
       def stub.get_topic *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       topic.service.mocked_publisher = stub
 

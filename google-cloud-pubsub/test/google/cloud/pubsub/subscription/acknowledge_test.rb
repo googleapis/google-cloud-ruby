@@ -34,7 +34,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
     ack_id = rec_message1.ack_id
     ack_res = nil
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [subscription_path(sub_name), [ack_id], options: default_options]
+    mock.expect :acknowledge, ack_res, [subscription: subscription_path(sub_name), ack_ids: [ack_id]]
     subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge ack_id
@@ -46,7 +46,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
     ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
     ack_res = nil
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids, options: default_options]
+    mock.expect :acknowledge, ack_res, [subscription: subscription_path(sub_name), ack_ids: ack_ids]
     subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge(*ack_ids)
@@ -58,7 +58,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
     ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
     ack_res = nil
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids, options: default_options]
+    mock.expect :acknowledge, ack_res, [subscription: subscription_path(sub_name), ack_ids: ack_ids]
     subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge ack_ids
@@ -69,7 +69,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
   it "can acknowledge a message" do
     ack_res = nil
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [subscription_path(sub_name), [rec_message1.ack_id], options: default_options]
+    mock.expect :acknowledge, ack_res, [subscription: subscription_path(sub_name), ack_ids: [rec_message1.ack_id]]
     subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge rec_message1
@@ -82,7 +82,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
     ack_ids = rec_messages.map(&:ack_id)
     ack_res = nil
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids, options: default_options]
+    mock.expect :acknowledge, ack_res, [subscription: subscription_path(sub_name), ack_ids: ack_ids]
     subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge(*rec_messages)
@@ -95,7 +95,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
     ack_ids = rec_messages.map(&:ack_id)
     ack_res = nil
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids, options: default_options]
+    mock.expect :acknowledge, ack_res, [subscription: subscription_path(sub_name), ack_ids: ack_ids]
     subscription.service.mocked_subscriber = mock
 
     subscription.acknowledge rec_messages
@@ -113,7 +113,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
       ack_id = rec_message1.ack_id
       ack_res = nil
       mock = Minitest::Mock.new
-      mock.expect :acknowledge, ack_res, [subscription_path(sub_name), [ack_id], options: default_options]
+      mock.expect :acknowledge, ack_res, [subscription: subscription_path(sub_name), ack_ids: [ack_id]]
       subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge ack_id
@@ -125,7 +125,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
       ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
       ack_res = nil
       mock = Minitest::Mock.new
-      mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids, options: default_options]
+      mock.expect :acknowledge, ack_res, [subscription: subscription_path(sub_name), ack_ids: ack_ids]
       subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge(*ack_ids)
@@ -137,7 +137,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
       ack_ids = [rec_message1.ack_id, rec_message3.ack_id, rec_message3.ack_id]
       ack_res = nil
       mock = Minitest::Mock.new
-      mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids, options: default_options]
+      mock.expect :acknowledge, ack_res, [subscription: subscription_path(sub_name), ack_ids: ack_ids]
       subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge ack_ids
@@ -148,7 +148,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
     it "can acknowledge a message" do
       ack_res = nil
       mock = Minitest::Mock.new
-      mock.expect :acknowledge, ack_res, [subscription_path(sub_name), [rec_message1.ack_id], options: default_options]
+      mock.expect :acknowledge, ack_res, [subscription: subscription_path(sub_name), ack_ids: [rec_message1.ack_id]]
       subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge rec_message1
@@ -161,7 +161,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
       ack_ids = rec_messages.map(&:ack_id)
       ack_res = nil
       mock = Minitest::Mock.new
-      mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids, options: default_options]
+      mock.expect :acknowledge, ack_res, [subscription: subscription_path(sub_name), ack_ids: ack_ids]
       subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge(*rec_messages)
@@ -174,7 +174,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
       ack_ids = rec_messages.map(&:ack_id)
       ack_res = nil
       mock = Minitest::Mock.new
-      mock.expect :acknowledge, ack_res, [subscription_path(sub_name), ack_ids, options: default_options]
+      mock.expect :acknowledge, ack_res, [subscription: subscription_path(sub_name), ack_ids: ack_ids]
       subscription.service.mocked_subscriber = mock
 
       subscription.acknowledge rec_messages
@@ -194,9 +194,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
 
       stub = Object.new
       def stub.acknowledge *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       subscription.service.mocked_subscriber = stub
 
@@ -210,9 +208,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
 
       stub = Object.new
       def stub.acknowledge *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       subscription.service.mocked_subscriber = stub
 
@@ -226,9 +222,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
 
       stub = Object.new
       def stub.acknowledge *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       subscription.service.mocked_subscriber = stub
 
@@ -240,9 +234,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
     it "raises NotFoundError when acknowledging a message" do
       stub = Object.new
       def stub.acknowledge *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       subscription.service.mocked_subscriber = stub
 
@@ -256,9 +248,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
 
       stub = Object.new
       def stub.acknowledge *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       subscription.service.mocked_subscriber = stub
 
@@ -272,9 +262,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
 
       stub = Object.new
       def stub.acknowledge *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       subscription.service.mocked_subscriber = stub
 

@@ -25,7 +25,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
     rec_message_msg = "pulled-message"
     pull_res = Google::Cloud::PubSub::V1::PullResponse.new rec_messages_hash(rec_message_msg)
     mock = Minitest::Mock.new
-    mock.expect :pull, pull_res, [subscription_path(sub_name), 100, return_immediately: true, options: default_options]
+    mock.expect :pull, pull_res, [subscription: subscription_path(sub_name), max_messages: 100, return_immediately: true]
     subscription.service.mocked_subscriber = mock
 
     rec_messages = subscription.pull
@@ -38,15 +38,14 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
 
   describe "reference subscription object of a subscription that does exist" do
     let :subscription do
-      Google::Cloud::PubSub::Subscription.from_name sub_name,
-                                            pubsub.service
+      Google::Cloud::PubSub::Subscription.from_name sub_name, pubsub.service
     end
 
     it "can pull messages" do
       rec_message_msg = "pulled-message"
       pull_res = Google::Cloud::PubSub::V1::PullResponse.new rec_messages_hash(rec_message_msg)
       mock = Minitest::Mock.new
-      mock.expect :pull, pull_res, [subscription_path(sub_name), 100, return_immediately: true, options: default_options]
+      mock.expect :pull, pull_res, [subscription: subscription_path(sub_name), max_messages: 100, return_immediately: true]
       subscription.service.mocked_subscriber = mock
 
       rec_messages = subscription.pull
@@ -67,9 +66,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
     it "raises NotFoundError when pulling messages" do
       stub = Object.new
       def stub.pull *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       subscription.service.mocked_subscriber = stub
 

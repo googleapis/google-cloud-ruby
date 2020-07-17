@@ -24,7 +24,7 @@ describe Google::Cloud::PubSub::Topic, :subscriptions, :mock_pubsub do
 
   it "lists subscriptions" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: default_options]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic: topic_path(topic_name), page_size: nil, page_token: nil]
     topic.service.mocked_publisher = mock
 
     subs = topic.subscriptions
@@ -44,7 +44,7 @@ describe Google::Cloud::PubSub::Topic, :subscriptions, :mock_pubsub do
 
     it "lists subscriptions" do
       mock = Minitest::Mock.new
-      mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: default_options]
+      mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic: topic_path(topic_name), page_size: nil, page_token: nil]
       topic.service.mocked_publisher = mock
 
       subs = topic.subscriptions
@@ -66,9 +66,7 @@ describe Google::Cloud::PubSub::Topic, :subscriptions, :mock_pubsub do
     it "lists subscriptions" do
       stub = Object.new
       def stub.list_topic_subscriptions *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       topic.service.mocked_publisher = stub
 

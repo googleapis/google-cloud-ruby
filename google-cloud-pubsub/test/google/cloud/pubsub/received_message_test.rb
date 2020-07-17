@@ -82,7 +82,7 @@ describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
   it "can acknowledge" do
     ack_res = nil
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), [rec_message.ack_id], options: default_options]
+    mock.expect :acknowledge, ack_res, [subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id]]
     subscription.service.mocked_subscriber = mock
 
     rec_message.acknowledge!
@@ -93,7 +93,7 @@ describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
   it "can ack" do
     ack_res = nil
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, [subscription_path(subscription_name), [rec_message.ack_id], options: default_options]
+    mock.expect :acknowledge, ack_res, [subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id]]
     subscription.service.mocked_subscriber = mock
 
     rec_message.ack!
@@ -105,7 +105,7 @@ describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
     new_deadline = 42
     mad_res = nil
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, mad_res, [subscription_path(subscription_name), [rec_message.ack_id], new_deadline, options: default_options]
+    mock.expect :modify_ack_deadline, mad_res, [subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id], ack_deadline_seconds: new_deadline]
     subscription.service.mocked_subscriber = mock
 
     rec_message.modify_ack_deadline! new_deadline
@@ -115,7 +115,7 @@ describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
 
   it "can reject" do
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, nil, [subscription_path(subscription_name), [rec_message.ack_id], 0, options: default_options]
+    mock.expect :modify_ack_deadline, nil, [subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id], ack_deadline_seconds: 0]
     subscription.service.mocked_subscriber = mock
 
     rec_message.reject!
@@ -125,7 +125,7 @@ describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
 
   it "can nack" do
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, nil, [subscription_path(subscription_name), [rec_message.ack_id], 0, options: default_options]
+    mock.expect :modify_ack_deadline, nil, [subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id], ack_deadline_seconds: 0]
     subscription.service.mocked_subscriber = mock
 
     rec_message.nack!
@@ -135,7 +135,7 @@ describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
 
   it "can ignore" do
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, nil, [subscription_path(subscription_name), [rec_message.ack_id], 0, options: default_options]
+    mock.expect :modify_ack_deadline, nil, [subscription: subscription_path(subscription_name), ack_ids: [rec_message.ack_id], ack_deadline_seconds: 0]
     subscription.service.mocked_subscriber = mock
 
     rec_message.ignore!

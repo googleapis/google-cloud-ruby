@@ -54,7 +54,7 @@ describe Google::Cloud::PubSub::Snapshot, :mock_pubsub do
     update_sub.labels = new_labels_map
     update_mask = Google::Protobuf::FieldMask.new paths: ["labels"]
     mock = Minitest::Mock.new
-    mock.expect :update_snapshot, update_sub, [update_sub, update_mask, options: default_options]
+    mock.expect :update_snapshot, update_sub, [snapshot: update_sub, update_mask: update_mask]
     snapshot.service.mocked_subscriber = mock
 
     snapshot.labels = new_labels
@@ -72,7 +72,7 @@ describe Google::Cloud::PubSub::Snapshot, :mock_pubsub do
 
     update_mask = Google::Protobuf::FieldMask.new paths: ["labels"]
     mock = Minitest::Mock.new
-    mock.expect :update_snapshot, update_sub, [update_sub, update_mask, options: default_options]
+    mock.expect :update_snapshot, update_sub, [snapshot: update_sub, update_mask: update_mask]
     snapshot.service.mocked_subscriber = mock
 
     snapshot.labels = {}
@@ -94,7 +94,7 @@ describe Google::Cloud::PubSub::Snapshot, :mock_pubsub do
   it "can delete itself" do
     del_res = nil
     mock = Minitest::Mock.new
-    mock.expect :delete_snapshot, del_res, [snapshot_path(snapshot_name), options: default_options]
+    mock.expect :delete_snapshot, del_res, [snapshot: snapshot_path(snapshot_name)]
     pubsub.service.mocked_subscriber = mock
 
     snapshot.delete

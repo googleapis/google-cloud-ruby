@@ -43,7 +43,7 @@ describe Google::Cloud::PubSub::Subscription, :name, :mock_pubsub do
     _(sub_resource).must_be :resource?
 
     mock = Minitest::Mock.new
-    mock.expect :get_subscription, sub_grpc_new, [sub_path, options: default_options]
+    mock.expect :get_subscription, sub_grpc_new, [subscription: sub_path]
     pubsub.service.mocked_subscriber = mock
 
     sub_resource.reload!
@@ -65,7 +65,7 @@ describe Google::Cloud::PubSub::Subscription, :name, :mock_pubsub do
     _(sub_reference).wont_be :resource?
 
     mock = Minitest::Mock.new
-    mock.expect :get_subscription, sub_grpc_new, [sub_path, options: default_options]
+    mock.expect :get_subscription, sub_grpc_new, [subscription: sub_path]
     pubsub.service.mocked_subscriber = mock
 
     sub_reference.reload!

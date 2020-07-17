@@ -30,7 +30,7 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
+    mock.expect :publish, publish_res, [topic: topic_path(topic_name), messages: messages]
     topic.service.mocked_publisher = mock
 
     msg = topic.publish message1
@@ -47,7 +47,7 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
+    mock.expect :publish, publish_res, [topic: topic_path(topic_name), messages: messages]
     topic.service.mocked_publisher = mock
 
     msg = topic.publish "あ"
@@ -65,7 +65,7 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
+    mock.expect :publish, publish_res, [topic: topic_path(topic_name), messages: messages]
     topic.service.mocked_publisher = mock
 
     msg = nil
@@ -89,7 +89,7 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
+    mock.expect :publish, publish_res, [topic: topic_path(topic_name), messages: messages]
     topic.service.mocked_publisher = mock
 
     msg = topic.publish message1, format: :text
@@ -109,7 +109,7 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1", "msg2", "msg3"] })
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
+    mock.expect :publish, publish_res, [topic: topic_path(topic_name), messages: messages]
     topic.service.mocked_publisher = mock
 
     msgs = topic.publish do |batch|
@@ -136,7 +136,7 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
       ]
       publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
       mock = Minitest::Mock.new
-      mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
+      mock.expect :publish, publish_res, [topic: topic_path(topic_name), messages: messages]
       topic.service.mocked_publisher = mock
 
       msg = topic.publish message1
@@ -153,7 +153,7 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
       ]
       publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
       mock = Minitest::Mock.new
-      mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
+      mock.expect :publish, publish_res, [topic: topic_path(topic_name), messages: messages]
       topic.service.mocked_publisher = mock
 
       msg = topic.publish message1, format: :text
@@ -173,7 +173,7 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
       ]
       publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1", "msg2", "msg3"] })
       mock = Minitest::Mock.new
-      mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
+      mock.expect :publish, publish_res, [topic: topic_path(topic_name), messages: messages]
       topic.service.mocked_publisher = mock
 
       msgs = topic.publish do |batch|
@@ -198,9 +198,7 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
     it "publishes a message" do
       stub = Object.new
       def stub.publish *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       pubsub.service.mocked_publisher = stub
 
@@ -212,9 +210,7 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
     it "publishes a message with attributes" do
       stub = Object.new
       def stub.publish *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       pubsub.service.mocked_publisher = stub
 
@@ -226,9 +222,7 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
     it "publishes multiple messages with a block" do
       stub = Object.new
       def stub.publish *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       pubsub.service.mocked_publisher = stub
 

@@ -28,7 +28,7 @@ describe Google::Cloud::PubSub::Subscription, :seek, :mock_pubsub do
     time = Time.now
     mock = Minitest::Mock.new
     timestamp = Google::Protobuf::Timestamp.new seconds: time.to_i, nanos: time.nsec
-    mock.expect :seek, nil, [subscription_path(sub_name), time: timestamp, options: default_options]
+    mock.expect :seek, nil, [subscription: subscription_path(sub_name), time: timestamp]
     subscription.service.mocked_subscriber = mock
 
     subscription.seek time
@@ -38,7 +38,7 @@ describe Google::Cloud::PubSub::Subscription, :seek, :mock_pubsub do
 
   it "can seek using a snapshot name" do
     mock = Minitest::Mock.new
-    mock.expect :seek, nil, [subscription_path(sub_name), snapshot: snapshot_path(snapshot_name), options: default_options]
+    mock.expect :seek, nil, [subscription: subscription_path(sub_name), snapshot: snapshot_path(snapshot_name)]
     subscription.service.mocked_subscriber = mock
 
     subscription.seek snapshot_name
@@ -48,7 +48,7 @@ describe Google::Cloud::PubSub::Subscription, :seek, :mock_pubsub do
 
   it "can seek using a snapshot object" do
     mock = Minitest::Mock.new
-    mock.expect :seek, nil, [subscription_path(sub_name), snapshot: snapshot.name, options: default_options]
+    mock.expect :seek, nil, [subscription: subscription_path(sub_name), snapshot: snapshot.name]
     subscription.service.mocked_subscriber = mock
     subscription.seek snapshot
 
@@ -64,7 +64,7 @@ describe Google::Cloud::PubSub::Subscription, :seek, :mock_pubsub do
     it "can seek using a snapshot name" do
       mock = Minitest::Mock.new
       snapshot_name = "my-snapshot"
-      mock.expect :seek, nil, [subscription_path(sub_name), snapshot: snapshot_path(snapshot_name), options: default_options]
+      mock.expect :seek, nil, [subscription: subscription_path(sub_name), snapshot: snapshot_path(snapshot_name)]
       subscription.service.mocked_subscriber = mock
 
       subscription.seek snapshot_name
@@ -82,9 +82,7 @@ describe Google::Cloud::PubSub::Subscription, :seek, :mock_pubsub do
     it "raises NotFoundError when seeking" do
       stub = Object.new
       def stub.seek *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       subscription.service.mocked_subscriber = stub
 
