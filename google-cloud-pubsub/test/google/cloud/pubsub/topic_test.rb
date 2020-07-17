@@ -19,16 +19,13 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
   let(:labels) { { "foo" => "bar" } }
   let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name, labels: labels)), pubsub.service }
   let(:subscriptions_with_token) do
-    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(3, "next_page_token")
-    paged_enum_struct response
+    Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(3, "next_page_token")
   end
   let(:subscriptions_without_token) do
-    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(2)
-    paged_enum_struct response
+    Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(2)
   end
   let(:subscriptions_with_token_2) do
-    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(3, "next_page_token")
-    paged_enum_struct response
+    Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(3, "next_page_token")
   end
   let(:filter) { "attributes.event_type = \"1\"" }
   let(:dead_letter_topic_name) { "topic-name-dead-letter" }

@@ -106,7 +106,7 @@ module Google
                                              page_size:  options[:max],
                                              page_token: options[:token]
 
-          paged_enum.page.response
+          paged_enum.response
         end
 
         ##
@@ -157,11 +157,9 @@ module Google
         ##
         # Lists matching subscriptions by project and topic.
         def list_topics_subscriptions topic, options = {}
-          paged_enum = publisher.list_topic_subscriptions topic:      topic_path(topic, options),
-                                                          page_size:  options[:max],
-                                                          page_token: options[:token]
-
-          paged_enum.page.response
+          publisher.list_topic_subscriptions topic:      topic_path(topic, options),
+                                             page_size:  options[:max],
+                                             page_token: options[:token]
         end
 
         ##
@@ -171,7 +169,7 @@ module Google
                                                      page_size:  options[:max],
                                                      page_token: options[:token]
 
-          paged_enum.page.response
+          paged_enum.response
         end
 
         ##
@@ -265,7 +263,7 @@ module Google
                                                  page_size:  options[:max],
                                                  page_token: options[:token]
 
-          paged_enum.page.response
+          paged_enum.response
         end
 
         ##

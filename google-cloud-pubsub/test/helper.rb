@@ -266,7 +266,7 @@ class MockPubsub < Minitest::Spec
   end
 
   def paged_enum_struct response
-    OpenStruct.new page: OpenStruct.new(response: response)
+    OpenStruct.new response: response
   end
 
   # Register this spec type for when :storage is used.

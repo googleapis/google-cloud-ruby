@@ -18,8 +18,7 @@ describe Google::Cloud::PubSub::Topic, :subscriptions, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name)), pubsub.service }
   let(:subscriptions_with_token) do
-    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(3, "next_page_token")
-    paged_enum_struct response
+    Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(3, "next_page_token")
   end
 
   it "lists subscriptions" do

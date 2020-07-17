@@ -104,7 +104,7 @@ describe Google::Cloud::PubSub, :pubsub do
       end
     end
 
-    it "should list all subscriptions registered to the topic" do
+    it "should list all subscriptions registered to the project" do
       subscriptions = pubsub.subscriptions.all
       subscriptions.each do |subscription|
         # subscriptions on project are objects...

@@ -695,7 +695,7 @@ def pubsub_message data = "task completed", attributes = {}
 end
 
 def list_topics_paged_enum
-  OpenStruct.new(page: OpenStruct.new(response: OpenStruct.new(topics: [])))
+  paged_enum_struct OpenStruct.new(topics: [])
 end
 
 
@@ -827,7 +827,7 @@ def snapshot_path snapshot_name
 end
 
 def paged_enum_struct response
-  OpenStruct.new page: OpenStruct.new(response: response)
+  OpenStruct.new response: response
 end
 
 

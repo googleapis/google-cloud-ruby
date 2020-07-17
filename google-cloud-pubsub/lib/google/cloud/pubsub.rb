@@ -95,11 +95,8 @@ module Google
           project_id = project_id.to_s # Always cast to a string
           raise ArgumentError, "project_id is missing" if project_id.empty?
 
-          return PubSub::Project.new(
-            PubSub::Service.new(
-              project_id, :this_channel_is_insecure, host: emulator_host, timeout: timeout
-            )
-          )
+          service = PubSub::Service.new project_id, :this_channel_is_insecure, host: emulator_host, timeout: timeout
+          return PubSub::Project.new service
         end
 
         credentials ||= (keyfile || default_credentials(scope: scope))
@@ -111,11 +108,8 @@ module Google
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        PubSub::Project.new(
-          PubSub::Service.new(
-            project_id, credentials, timeout: timeout, host: endpoint
-          )
-        )
+        service = PubSub::Service.new project_id, credentials, host: endpoint, timeout: timeout
+        PubSub::Project.new service
       end
 
       # rubocop:enable Metrics/AbcSize
