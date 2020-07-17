@@ -65,7 +65,7 @@ module Google
             V1::Spanner::Client.new do |config|
               config.credentials = channel
               config.timeout = timeout if timeout
-              config.endpoit = host if host
+              config.endpoint = host if host
               config.lib_name = lib_name_with_prefix
               config.lib_version = Google::Cloud::Spanner::VERSION
               config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
@@ -79,7 +79,7 @@ module Google
             Admin::Instance::V1::InstanceAdmin::Client.new do |config|
               config.credentials = channel
               config.timeout = timeout if timeout
-              config.endpoit = host if host
+              config.endpoint = host if host
               config.lib_name = lib_name_with_prefix
               config.lib_version = Google::Cloud::Spanner::VERSION
               config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
@@ -93,7 +93,7 @@ module Google
             Admin::Database::V1::DatabaseAdmin::Client.new do |config|
               config.credentials = channel
               config.timeout = timeout if timeout
-              config.endpoit = host if host
+              config.endpoint = host if host
               config.lib_name = lib_name_with_prefix
               config.lib_version = Google::Cloud::Spanner::VERSION
               config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
