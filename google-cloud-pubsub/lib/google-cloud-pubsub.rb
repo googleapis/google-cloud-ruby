@@ -42,7 +42,6 @@ module Google
     #
     #   * `https://www.googleapis.com/auth/pubsub`
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config Unused and deprecated.
     #
     # @return [Google::Cloud::PubSub::Project]
     #
@@ -61,9 +60,7 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   pubsub = gcloud.pubsub scope: platform_scope
     #
-    def pubsub scope: nil,
-               timeout: nil,
-               client_config: nil # rubocop:disable Lint/UnusedMethodArgument
+    def pubsub scope: nil, timeout: nil
       timeout ||= @timeout
       Google::Cloud.pubsub @project, @keyfile, scope: scope, timeout: timeout
     end
@@ -91,7 +88,6 @@ module Google
     #
     #   * `https://www.googleapis.com/auth/pubsub`
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config Unused and deprecated.
     #
     # @return [Google::Cloud::PubSub::Project]
     #
@@ -106,8 +102,7 @@ module Google
     def self.pubsub project_id = nil,
                     credentials = nil,
                     scope: nil,
-                    timeout: nil,
-                    client_config: nil # rubocop:disable Lint/UnusedMethodArgument
+                    timeout: nil
       require "google/cloud/pubsub"
       Google::Cloud::PubSub.new project_id: project_id, credentials: credentials, scope: scope, timeout: timeout
     end

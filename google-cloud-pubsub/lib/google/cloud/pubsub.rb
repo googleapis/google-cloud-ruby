@@ -57,7 +57,6 @@ module Google
       #
       #   * `https://www.googleapis.com/auth/pubsub`
       # @param [Integer] timeout Default timeout to use in requests. Optional.
-      # @param [Hash] client_config Unused and deprecated.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
       # @param [String] emulator_host Pub/Sub emulator host. Optional.
@@ -80,7 +79,6 @@ module Google
                    credentials: nil,
                    scope: nil,
                    timeout: nil,
-                   client_config: nil, # rubocop:disable Lint/UnusedMethodArgument
                    endpoint: nil,
                    emulator_host: nil,
                    project: nil,
@@ -130,7 +128,6 @@ module Google
       # * `retries` - (Integer) Number of times to retry requests on server
       #   error.
       # * `timeout` - (Integer) Default timeout to use in requests.
-      # * `client_config` - (Hash) Unused and deprecated.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
       # * `emulator_host` - (String) Host name of the emulator. Defaults to
