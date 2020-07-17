@@ -229,7 +229,6 @@ module Google
           true
         end
 
-
         # @private
         DATBASE_OPERATION_METADAT_FILTER_TEMPLATE = [
           "(metadata.@type:CreateDatabaseMetadata AND " \
@@ -610,7 +609,7 @@ module Google
 
         ##
         # @private Creates a new Database instance from a
-        # Google::Spanner::Admin::Database::V1::Database.
+        # {Google::Cloud::Spanner::Admin::Database::V1::Database}.
         def self.from_grpc grpc, service
           new grpc, service
         end

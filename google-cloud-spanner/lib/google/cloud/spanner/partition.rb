@@ -194,7 +194,7 @@ module Google
         end
 
         ##
-        # @private New Partition from a Google::Spanner::V1::ExecuteSqlRequest
+        # @private New Partition from a {Google::Cloud::Spanner::V1::ExecuteSqlRequest}
         # object.
         def self.from_execute_sql_grpc grpc
           new.tap do |p|
@@ -203,7 +203,7 @@ module Google
         end
 
         ##
-        # @private New Partition from a Google::Spanner::V1::ReadRequest object.
+        # @private New Partition from a {Google::Cloud::Spanner::V1::ReadRequest} object.
         def self.from_read_grpc grpc
           new.tap do |p|
             p.instance_variable_set :@read, grpc

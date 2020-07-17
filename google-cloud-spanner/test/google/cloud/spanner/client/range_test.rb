@@ -18,9 +18,6 @@ describe Google::Cloud::Spanner::Client, :range, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
-  let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
-  let(:commit_resp) { Google::Spanner::V1::CommitResponse.new commit_timestamp: Google::Protobuf::Timestamp.new() }
-  let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new(read_write: Google::Spanner::V1::TransactionOptions::ReadWrite.new) }
   let(:default_options) { { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } } }
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
 

@@ -920,7 +920,7 @@ module Google
 
         ##
         # @private Creates a new Transaction instance from a
-        # Google::Spanner::V1::Transaction.
+        # {Google::Cloud::Spanner::V1::Transaction}.
         def self.from_grpc grpc, session
           new.tap do |s|
             s.instance_variable_set :@grpc,    grpc

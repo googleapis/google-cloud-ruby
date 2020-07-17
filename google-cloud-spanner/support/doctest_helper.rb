@@ -110,7 +110,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Spanner::Instance" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_instances.expect :create_instance, create_instance_resp(client: mock_client), ["projects/my-project", "my-new-instance", Google::Spanner::Admin::Instance::V1::Instance]
+      mock_instances.expect :create_instance, create_instance_resp(client: mock_client), ["projects/my-project", "my-new-instance", Google::Cloud::Spanner::Admin::Instance::V1::Instance]
       mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
       mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-new-instance"]
     end
@@ -226,10 +226,10 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Spanner::BatchClient" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
-      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
-      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Spanner::V1::Partition.new(partition_token: "partition-token")]),
-                  ["session-name", "users", Google::Spanner::V1::KeySet, Hash]
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]),
+                  ["session-name", "users", Google::Cloud::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
       mock.expect :delete_session, session_grpc, ["session-name", Hash]
     end
   end
@@ -239,10 +239,10 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Spanner::BatchSnapshot" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
-      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
-      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Spanner::V1::Partition.new(partition_token: "partition-token")]),
-                  ["session-name", "users", Google::Spanner::V1::KeySet, Hash]
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]),
+                  ["session-name", "users", Google::Cloud::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
       mock.expect :delete_session, session_grpc, ["session-name", Hash]
     end
   end
@@ -250,8 +250,8 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Spanner::BatchSnapshot#partition_query" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
-      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
-      mock.expect :partition_query, OpenStruct.new(partitions: [Google::Spanner::V1::Partition.new(partition_token: "partition-token")]),
+      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+      mock.expect :partition_query, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]),
                   ["session-name", String, Hash]
       mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
       mock.expect :delete_session, session_grpc, ["session-name", Hash]
@@ -262,7 +262,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
@@ -273,7 +273,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
@@ -283,10 +283,10 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Spanner::BatchSnapshot#execute_partition" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
-      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
-      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Spanner::V1::Partition.new(partition_token: "partition-token")]),
-                  ["session-name", "users", Google::Spanner::V1::KeySet, Hash]
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]),
+                  ["session-name", "users", Google::Cloud::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
       mock.expect :delete_session, session_grpc, ["session-name", Hash]
     end
   end
@@ -294,10 +294,10 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Spanner::BatchSnapshot#execute_sql_partition" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
-      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
-      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Spanner::V1::Partition.new(partition_token: "partition-token")]),
-                  ["session-name", "users", Google::Spanner::V1::KeySet, Hash]
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]),
+                  ["session-name", "users", Google::Cloud::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
       mock.expect :delete_session, session_grpc, ["session-name", Hash]
     end
   end
@@ -308,9 +308,9 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
-      mock.expect :execute_batch_dml, batch_response_grpc, ["session-name", Google::Spanner::V1::TransactionSelector, Array, Integer, Hash]
+      mock.expect :execute_batch_dml, batch_response_grpc, ["session-name", Google::Cloud::Spanner::V1::TransactionSelector, Array, Integer, Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
     end
   end
@@ -320,10 +320,10 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Spanner::Partition" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
-      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
-      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Spanner::V1::Partition.new(partition_token: "partition-token")]),
-                  ["session-name", "users", Google::Spanner::V1::KeySet, Hash]
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]),
+                  ["session-name", "users", Google::Cloud::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
       mock.expect :delete_session, session_grpc, ["session-name", Hash]
     end
   end
@@ -351,7 +351,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
@@ -361,10 +361,10 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Spanner::Project#batch_client" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
-      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
-      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Spanner::V1::Partition.new(partition_token: "partition-token")]),
-                  ["session-name", "users", Google::Spanner::V1::KeySet, Hash]
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]),
+                  ["session-name", "users", Google::Cloud::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
       mock.expect :delete_session, session_grpc, ["session-name", Hash]
     end
   end
@@ -373,7 +373,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
@@ -384,7 +384,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
       mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
-      mock_instances.expect :create_instance, create_instance_resp(client: mock_client), ["projects/my-project", "my-new-instance", Google::Spanner::Admin::Instance::V1::Instance]
+      mock_instances.expect :create_instance, create_instance_resp(client: mock_client), ["projects/my-project", "my-new-instance", Google::Cloud::Spanner::Admin::Instance::V1::Instance]
       mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-new-instance"]
     end
   end
@@ -450,7 +450,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
@@ -475,7 +475,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       6.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
     end
@@ -485,7 +485,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
     end
@@ -495,7 +495,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
       mock.expect :rollback, nil, ["session-name", "tx-001-02", Hash]
@@ -507,7 +507,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
@@ -518,7 +518,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
     end
@@ -530,9 +530,9 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
     end
   end
 
@@ -540,9 +540,9 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
     end
   end
 
@@ -552,7 +552,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
     end
@@ -668,7 +668,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
     end
@@ -680,9 +680,9 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
     end
   end
 
@@ -701,7 +701,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
       mock.expect :rollback, nil, ["session-name", "tx-001-02", Hash]
@@ -714,7 +714,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
@@ -725,7 +725,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users WHERE active = @active", Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
@@ -736,9 +736,9 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
     end
   end
 
@@ -746,9 +746,9 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
     end
   end
@@ -768,10 +768,10 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
-      mock.expect :streaming_read, results_enum_marketing, ["session-name", "Albums", ["marketing_budget"], Google::Spanner::V1::KeySet, Hash]
-      mock.expect :streaming_read, results_enum_marketing, ["session-name", "Albums", ["marketing_budget"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum_marketing, ["session-name", "Albums", ["marketing_budget"], Google::Cloud::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum_marketing, ["session-name", "Albums", ["marketing_budget"], Google::Cloud::Spanner::V1::KeySet, Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
     end
   end
@@ -780,9 +780,9 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
-      mock.expect :execute_batch_dml, batch_response_grpc, ["session-name", Google::Spanner::V1::TransactionSelector, Array, Integer, Hash]
+      mock.expect :execute_batch_dml, batch_response_grpc, ["session-name", Google::Cloud::Spanner::V1::TransactionSelector, Array, Integer, Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
     end
   end
@@ -791,7 +791,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
@@ -802,7 +802,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
@@ -813,7 +813,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
@@ -824,7 +824,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
       mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users WHERE active = @active", Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
@@ -835,9 +835,9 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
     end
   end
@@ -846,9 +846,9 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
       end
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
       mock.expect :commit, commit_resp, ["session-name", Array, Hash]
     end
   end
@@ -914,7 +914,7 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
       mock_databases.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/backups/my-backup"]
-      mock_databases.expect :update_backup, backup_resp, [Google::Spanner::Admin::Database::V1::Backup, Google::Protobuf::FieldMask]
+      mock_databases.expect :update_backup, backup_resp, [Google::Cloud::Spanner::Admin::Database::V1::Backup, Google::Protobuf::FieldMask]
     end
   end
 
@@ -1071,11 +1071,11 @@ def job_grpc type_url, value: ""
 end
 
 def create_instance_resp client: nil
-  Google::Gax::Operation.new(
+  Gapic::Operation.new(
     job_grpc("google.spanner.admin.database.v1.UpdateDatabaseDdlRequest"),
     client,
-    Google::Spanner::Admin::Instance::V1::Instance,
-    Google::Spanner::Admin::Instance::V1::CreateInstanceMetadata
+    result_type: Google::Cloud::Spanner::Admin::Instance::V1::Instance,
+    metadata_type: Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceMetadata
   )
 end
 
@@ -1097,13 +1097,13 @@ def instance_config_hash
 end
 
 def instance_config_resp
-  Google::Spanner::Admin::Instance::V1::InstanceConfig.new instance_config_hash
+  Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig.new instance_config_hash
 end
 
 def instance_configs_resp token: nil
   h = instance_configs_hash
   h[:next_page_token] = token if token
-  response = Google::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse.new h
+  response = Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse.new h
   paged_enum_struct response
 end
 
@@ -1125,16 +1125,16 @@ end
 def instances_resp token: nil
   h = instances_hash
   h[:next_page_token] = token if token
-  response = Google::Spanner::Admin::Instance::V1::ListInstancesResponse.new h
+  response = Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesResponse.new h
   paged_enum_struct response
 end
 
 def create_database_resp client: nil
-  Google::Gax::Operation.new(
+  Gapic::Operation.new(
     job_grpc("google.spanner.admin.database.v1.CreateDatabaseRequest"),
     client,
-    Google::Spanner::Admin::Database::V1::Database,
-    Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata
+    result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
+    metadata_type: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata
   )
 end
 
@@ -1150,24 +1150,24 @@ def database_hash instance_id: "my-instance", database_id: "my-database", state:
 end
 
 def database_resp instance_id: "my-instance", database_id: "my-database"
-  Google::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id)
+  Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id)
 end
 
 def databases_resp token: nil
   h = databases_hash
   h[:next_page_token] = token if token
-  response = Google::Spanner::Admin::Database::V1::ListDatabasesResponse.new h
+  response = Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesResponse.new h
   paged_enum_struct response
 end
 
 def database_ddl_resp
-  Google::Spanner::Admin::Database::V1::GetDatabaseDdlResponse.new(
+  Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlResponse.new(
     statements: ["CREATE TABLE table1", "CREATE TABLE table2", "CREATE TABLE table3"]
   )
 end
 
 def session_grpc
-  Google::Spanner::V1::Session.new(name: "session-name")
+  Google::Cloud::Spanner::V1::Session.new(name: "session-name")
 end
 
 def policy_hash
@@ -1198,7 +1198,7 @@ def paged_enum_struct response
 end
 
 def tx_resp
-  Google::Spanner::V1::Transaction.new(id: "tx-001-02")
+  Google::Cloud::Spanner::V1::Transaction.new(id: "tx-001-02")
 end
 
 def results_hash1
@@ -1246,20 +1246,20 @@ def results_hash_marketing_2
 end
 
 def results_enum
-  [Google::Spanner::V1::PartialResultSet.new(results_hash1)].to_enum
+  [Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash1)].to_enum
 end
 
 def results_enum_marketing
   [
-    Google::Spanner::V1::PartialResultSet.new(results_hash_marketing),
-    Google::Spanner::V1::PartialResultSet.new(results_hash_marketing_2)
+    Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash_marketing),
+    Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash_marketing_2)
   ].to_enum
 end
 
 def batch_result_sets_grpc count, row_count_exact: 1
   count.times.map do
-    Google::Spanner::V1::ResultSet.new(
-      stats: Google::Spanner::V1::ResultSetStats.new(
+    Google::Cloud::Spanner::V1::ResultSet.new(
+      stats: Google::Cloud::Spanner::V1::ResultSetStats.new(
         row_count_exact: row_count_exact
       )
     )
@@ -1267,7 +1267,7 @@ def batch_result_sets_grpc count, row_count_exact: 1
 end
 
 def batch_response_grpc count = 1
-  Google::Spanner::V1::ExecuteBatchDmlResponse.new(
+  Google::Cloud::Spanner::V1::ExecuteBatchDmlResponse.new(
     result_sets: batch_result_sets_grpc(count),
     status: Google::Rpc::Status.new(code: 0)
   )
@@ -1278,7 +1278,7 @@ def commit_timestamp
 end
 
 def commit_resp
-  Google::Spanner::V1::CommitResponse.new commit_timestamp: commit_timestamp
+  Google::Cloud::Spanner::V1::CommitResponse.new commit_timestamp: commit_timestamp
 end
 
 def backup_hash \
@@ -1302,16 +1302,16 @@ def backups_hash instance_id: "my-instance"
 end
 
 def create_backup_resp client: nil
-  Google::Gax::Operation.new(
+  Gapic::Operation.new(
     job_grpc("google.spanner.admin.database.v1.CreateBackupRequest"),
     client,
-    Google::Spanner::Admin::Database::V1::Backup,
-    Google::Spanner::Admin::Database::V1::CreateBackupMetadata
+    result_type: Google::Cloud::Spanner::Admin::Database::V1::Backup,
+    metadata_type: Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata
   )
 end
 
 def backup_resp instance_id: "my-instance", database_id: "my-database", backup_id: "my-backup", referencing_databases: ["db1"]
-  Google::Spanner::Admin::Database::V1::Backup.new backup_hash(
+  Google::Cloud::Spanner::Admin::Database::V1::Backup.new backup_hash(
     instance_id: instance_id,
     database_id: database_id,
     backup_id: backup_id,
@@ -1322,7 +1322,7 @@ end
 def backups_resp token: nil
   h = backups_hash
   h[:next_page_token] = token if token
-  response = Google::Spanner::Admin::Database::V1::ListBackupsResponse.new h
+  response = Google::Cloud::Spanner::Admin::Database::V1::ListBackupsResponse.new h
   OpenStruct.new response: response
 end
 
@@ -1331,12 +1331,12 @@ def backup_operation_grpc
     name: "1234567890",
     metadata: Google::Protobuf::Any.new(
       type_url: "google.spanner.admin.database.v1.CreateBackupMetadata",
-      value: Google::Spanner::Admin::Database::V1::CreateBackupMetadata.new.to_proto
+      value: Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata.new.to_proto
     ),
     done: true,
     response: Google::Protobuf::Any.new(
       type_url: "google.spanner.admin.database.v1.Backup",
-      value: Google::Spanner::Admin::Database::V1::Backup.new(backup_hash).to_proto
+      value: Google::Cloud::Spanner::Admin::Database::V1::Backup.new(backup_hash).to_proto
     )
   })
 end
@@ -1348,7 +1348,7 @@ end
 def backup_operations_resp token: nil
   h = backup_operations_hash
   h[:next_page_token] = token if token
-  response = Google::Spanner::Admin::Database::V1::ListBackupOperationsResponse.new h
+  response = Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsResponse.new h
   OpenStruct.new response: response
 end
 
@@ -1357,12 +1357,12 @@ def database_operation_grpc
     name: "1234567890",
     metadata: Google::Protobuf::Any.new(
       type_url: "google.spanner.admin.database.v1.CreateDatabaseMetadata",
-      value: Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata.new.to_proto
+      value: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata.new.to_proto
     ),
     done: true,
     response: Google::Protobuf::Any.new(
       type_url: "google.spanner.admin.database.v1.Database",
-      value: Google::Spanner::Admin::Database::V1::Database.new(database_hash).to_proto
+      value: Google::Cloud::Spanner::Admin::Database::V1::Database.new(database_hash).to_proto
     )
   )
 end
@@ -1374,15 +1374,15 @@ end
 def database_operations_resp token: nil
   h = database_operations_hash
   h[:next_page_token] = token if token
-  response = Google::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse.new h
+  response = Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse.new h
   OpenStruct.new response: response
 end
 
 def create_backup_restore_resp client: nil
-  Google::Gax::Operation.new(
+  Gapic::Operation.new(
     job_grpc("google.spanner.admin.database.v1.RestoreDatabaseRequest"),
     client,
-    Google::Spanner::Admin::Database::V1::Database,
-    Google::Spanner::Admin::Database::V1::RestoreDatabaseMetadata
+    result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
+    metadata_type: Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata
   )
 end
