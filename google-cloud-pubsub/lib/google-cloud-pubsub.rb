@@ -127,14 +127,18 @@ Google::Cloud.configure.add_config! :pubsub do |config|
   default_emulator = Google::Cloud::Config.deferred do
     ENV["PUBSUB_EMULATOR_HOST"]
   end
+  default_scopes = [
+    "https://www.googleapis.com/auth/cloud-platform",
+    "https://www.googleapis.com/auth/pubsub"
+  ]
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
   config.add_field! :credentials, default_creds, match: [String, Hash, Google::Auth::Credentials], allow_nil: true
   config.add_alias! :keyfile, :credentials
-  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :scope, default_scopes, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
   config.add_field! :on_error, nil, match: Proc
-  config.add_field! :endpoint, nil, match: String
+  config.add_field! :endpoint, "pubsub.googleapis.com", match: String
 end
