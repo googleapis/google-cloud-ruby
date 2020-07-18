@@ -15,6 +15,7 @@
 require "minitest/focus"
 
 require "google/cloud/spanner"
+require "grpc"
 require "grpc/errors"
 
 module Google
@@ -55,12 +56,14 @@ def mock_spanner
   end
 end
 
-YARD::Doctest.configure do |doctest|
-  # Current mocking does not support testing GAPIC layer. (Auth failures occur.)
-  doctest.skip "Google::Cloud::Spanner::V1"
-  doctest.skip "Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient"
-  doctest.skip "Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient"
+def verify_mock_params actual, expected
+  expected.all? do |name, value|
+    value === actual[name] || value == actual[value]
+  end
+end
 
+
+YARD::Doctest.configure do |doctest|
   # Skip private classes and methods
   doctest.skip "Google::Cloud::Spanner::Session"
   doctest.skip "Google::Cloud::Spanner::Client#fields"
@@ -110,88 +113,100 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Spanner::Instance" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_instances.expect :create_instance, create_instance_resp(client: mock_client), ["projects/my-project", "my-new-instance", Google::Cloud::Spanner::Admin::Instance::V1::Instance]
-      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-new-instance"]
+      mock_instances.expect :create_instance, create_instance_resp(client: mock_client) do |req|
+        verify_mock_params(req, parent: "projects/my-project", instance_id: "my-new-instance", instance: Google::Cloud::Spanner::Admin::Instance::V1::Instance)
+      end
+      operation = job_grpc("google.spanner.admin.instance.v1.CreateInstanceMetadata", done: true)
+      mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-new-instance"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#create_database" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
-      mock_databases.expect :create_database, create_database_resp(client: mock_client), ["projects/my-project/instances/my-instance", "CREATE DATABASE `my-new-database`", {:extra_statements=>[]}]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      operation = job_grpc("google.spanner.admin.database.v1.CreateDatabaseMetadata", done: true)
+      mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
+      mock_databases.expect :create_database, create_database_resp(client: mock_client), [parent: "projects/my-project/instances/my-instance", create_statement: "CREATE DATABASE `my-new-database`", extra_statements: []]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#database" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_database, database_resp, [name: "projects/my-project/instances/my-instance/databases/my-database"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#database@Will return `nil` if instance does not exist." do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :get_database, nil, ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_database, nil, [name: "projects/my-project/instances/my-instance/databases/my-database"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#databases" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :list_databases, databases_resp(token: "token"), ["projects/my-project/instances/my-instance", Hash]
-      mock_databases.expect :list_databases, databases_resp, ["projects/my-project/instances/my-instance", Hash]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :list_databases, databases_resp(token: "token"), [parent: "projects/my-project/instances/my-instance", page_size: nil, page_token: nil]
+      mock_databases.expect :list_databases, databases_resp, [parent: "projects/my-project/instances/my-instance", page_size: nil, page_token: "token"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#policy" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_instances.expect :get_iam_policy, policy_resp, ["projects/my-project/instances/my-instance"]
-      mock_instances.expect :set_iam_policy, policy_resp, ["projects/my-project/instances/my-instance", Google::Iam::V1::Policy]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_iam_policy, policy_resp, [resource: "projects/my-project/instances/my-instance"]
+      mock_instances.expect :set_iam_policy, policy_resp do |req|
+        verify_mock_params(req, resource: "projects/my-project/instances/my-instance", policy: Google::Iam::V1::Policy)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#update_policy" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_instances.expect :get_iam_policy, policy_resp, ["projects/my-project/instances/my-instance"]
-      mock_instances.expect :set_iam_policy, policy_resp, ["projects/my-project/instances/my-instance", Google::Iam::V1::Policy]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_iam_policy, policy_resp, [resource: "projects/my-project/instances/my-instance"]
+      mock_instances.expect :set_iam_policy, policy_resp do |req|
+        verify_mock_params(req, resource: "projects/my-project/instances/my-instance", policy: Google::Iam::V1::Policy)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#test_permissions" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_instances.expect :test_iam_permissions, test_permissions_res, ["projects/my-project/instances/my-instance", ["spanner.instances.get", "spanner.instances.update"]]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_instances.expect :test_iam_permissions, test_permissions_res, [resource: "projects/my-project/instances/my-instance", permissions: ["spanner.instances.get", "spanner.instances.update"]]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#delete" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_instances.expect :delete_instance, nil, ["projects/my-project/instances/my-instance"]
+       mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_instances.expect :delete_instance, nil, [name: "projects/my-project/instances/my-instance"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#database_operations" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
       mock_databases.expect :instance_variable_get, mock_client, ["@operations_client"]
-      mock_databases.expect :list_database_operations, database_operations_resp, ["projects/my-project/instances/my-instance", nil, Hash]
+      mock_databases.expect :list_database_operations, database_operations_resp do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance")
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#database_operations@Filter and list" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
       mock_databases.expect :instance_variable_get, mock_client, ["@operations_client"]
-      mock_databases.expect :list_database_operations, database_operations_resp, ["projects/my-project/instances/my-instance", String, Hash]
+      mock_databases.expect :list_database_operations, database_operations_resp do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance", filter: String)
+      end
     end
   end
 
@@ -199,7 +214,9 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Instance::Config" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :list_instance_configs, instance_configs_resp, ["projects/my-project", Hash]
+      mock_instances.expect :list_instance_configs, instance_configs_resp do |req|
+        verify_mock_params(req, parent: "projects/my-project")
+      end
     end
   end
 
@@ -207,8 +224,12 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Instance::List" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :list_instances, instances_resp(token: "token"), ["projects/my-project", Hash]
-      mock_instances.expect :list_instances, instances_resp, ["projects/my-project", Hash]
+      mock_instances.expect :list_instances, instances_resp(token: "token") do |req|
+        verify_mock_params(req, parent: "projects/my-project")
+      end
+      mock_instances.expect :list_instances, instances_resp do |req|
+        verify_mock_params(req, parent: "projects/my-project", page_token: "token")
+      end
     end
   end
 
@@ -216,8 +237,12 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Instance::Config::List" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :list_instance_configs, instance_configs_resp(token: "token"), ["projects/my-project", Hash]
-      mock_instances.expect :list_instance_configs, instance_configs_resp, ["projects/my-project", Hash]
+      mock_instances.expect :list_instance_configs, instance_configs_resp(token: "token") do |req|
+        verify_mock_params(req, parent: "projects/my-project", page_size: nil, page_token: nil)
+      end
+      mock_instances.expect :list_instance_configs, instance_configs_resp do |req|
+        verify_mock_params(req, parent: "projects/my-project", page_size: nil, page_token: "token")
+      end
     end
   end
 
@@ -225,12 +250,17 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::BatchClient" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
-      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
-      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]),
-                  ["session-name", "users", Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :delete_session, session_grpc, ["session-name", Hash]
+      mock.expect :create_session, session_grpc, [{ database: "projects/my-project/instances/my-instance/databases/my-database", session: nil }, Hash]
+      mock.expect :begin_transaction, tx_resp do |req|
+        verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+      end
+      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]) do |req|
+        verify_mock_params(req, session: "session-name", table: "users", key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :streaming_read, results_enum do |req|
+        verify_mock_params(req, session: "session-name", table: "users", columns: ["id", "name"], key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :delete_session, session_grpc, [{ name: "session-name" }, Hash]
     end
   end
 
@@ -238,67 +268,99 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::BatchSnapshot" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
-      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
-      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]),
-                  ["session-name", "users", Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :delete_session, session_grpc, ["session-name", Hash]
+      mock.expect :create_session, session_grpc, [{ database: "projects/my-project/instances/my-instance/databases/my-database", session: nil }, Hash]
+      mock.expect :begin_transaction, tx_resp do |req|
+        verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+      end
+      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]) do |req|
+        verify_mock_params(req, session: "session-name", table: "users", key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :streaming_read, results_enum do |req|
+        verify_mock_params(req, session: "session-name", table: "users", columns: ["id", "name"], key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :delete_session, session_grpc, [{ name: "session-name" }, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::BatchSnapshot#partition_query" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
-      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
-      mock.expect :partition_query, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]),
-                  ["session-name", String, Hash]
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
-      mock.expect :delete_session, session_grpc, ["session-name", Hash]
+      mock.expect :create_session, session_grpc, [{ database: "projects/my-project/instances/my-instance/databases/my-database", session: nil }, Hash]
+      mock.expect :begin_transaction, tx_resp do |req|
+        verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+      end
+      mock.expect :partition_query, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]) do |req|
+        verify_mock_params(req, session: "session-name", sql: String)
+      end
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: String)
+      end
+      mock.expect :delete_session, session_grpc, [{ name: "session-name" }, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::BatchSnapshot#execute" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
+      mock.expect :create_session, session_grpc, [{ database: "projects/my-project/instances/my-instance/databases/my-database", session: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: String, transaction: Google::Cloud::Spanner::V1::TransactionSelector)
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::BatchSnapshot#execute_sql" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
+      mock.expect :create_session, session_grpc, [{ database: "projects/my-project/instances/my-instance/databases/my-database", session: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: String)
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::BatchSnapshot#execute_partition" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
-      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
-      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]),
-                  ["session-name", "users", Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :delete_session, session_grpc, ["session-name", Hash]
+      mock.expect :create_session, session_grpc, [{ database: "projects/my-project/instances/my-instance/databases/my-database", session: nil }, Hash]
+      mock.expect :begin_transaction, tx_resp do |req|
+        verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+      end
+      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]) do |req|
+        verify_mock_params(req, session: "session-name", table: "users", key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :streaming_read, results_enum do |req|
+        verify_mock_params(req, session: "session-name", table: "users", columns: ["id", "name"], key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :delete_session, session_grpc, [{ name: "session-name" }, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::BatchSnapshot#execute_sql_partition" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
-      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
-      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]),
-                  ["session-name", "users", Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :delete_session, session_grpc, ["session-name", Hash]
+      mock.expect :create_session, session_grpc, [{ database: "projects/my-project/instances/my-instance/databases/my-database", session: nil }, Hash]
+      mock.expect :begin_transaction, tx_resp do |req|
+        verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+      end
+      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]) do |req|
+        verify_mock_params(req, session: "session-name", table: "users", key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :streaming_read, results_enum do |req|
+        verify_mock_params(req, session: "session-name", table: "users", columns: ["id", "name"], key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :delete_session, session_grpc, [{ name: "session-name" }, Hash]
     end
   end
 
@@ -306,12 +368,18 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::BatchUpdate" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil}, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_batch_dml, batch_response_grpc, ["session-name", Google::Cloud::Spanner::V1::TransactionSelector, Array, Integer, Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :execute_batch_dml, batch_response_grpc do |req|
+        verify_mock_params(req, session: "session-name", transaction: Google::Cloud::Spanner::V1::TransactionSelector, statements: Array, seqno: Integer)
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
@@ -319,12 +387,17 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Partition" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
-      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
-      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]),
-                  ["session-name", "users", Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :delete_session, session_grpc, ["session-name", Hash]
+      mock.expect :create_session, session_grpc, [{ database: "projects/my-project/instances/my-instance/databases/my-database", session: nil }, Hash]
+      mock.expect :begin_transaction, tx_resp do |req|
+        verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+      end
+      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]) do |req|
+        verify_mock_params(req, session: "session-name", table: "users", key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :streaming_read, results_enum do |req|
+        verify_mock_params(req, session: "session-name", table: "users", columns: ["id", "name"], key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :delete_session, session_grpc, [{ name: "session-name" }, Hash]
     end
   end
 
@@ -332,9 +405,11 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Policy" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_instances.expect :get_iam_policy, policy_resp, ["projects/my-project/instances/my-instance"]
-      mock_instances.expect :set_iam_policy, policy_resp, ["projects/my-project/instances/my-instance", Google::Iam::V1::Policy]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_iam_policy, policy_resp, [resource: "projects/my-project/instances/my-instance"]
+      mock_instances.expect :set_iam_policy, policy_resp do |req|
+        verify_mock_params(req, resource: "projects/my-project/instances/my-instance", policy: Google::Iam::V1::Policy)
+      end
     end
   end
 
@@ -342,105 +417,125 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Project" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_database, database_resp, [name: "projects/my-project/instances/my-instance/databases/my-database"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Project@Obtaining a client for use with a database." do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{ database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil}, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: "SELECT * FROM users")
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Project#batch_client" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
-      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
-      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]),
-                  ["session-name", "users", Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :delete_session, session_grpc, ["session-name", Hash]
+      mock.expect :create_session, session_grpc, [{ database: "projects/my-project/instances/my-instance/databases/my-database", session: nil }, Hash]
+      mock.expect :begin_transaction, tx_resp do |req|
+        verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+      end
+      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")]) do |req|
+        verify_mock_params(req, session: "session-name", table: "users", key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :streaming_read, results_enum do |req|
+        verify_mock_params(req, session: "session-name", table: "users", columns: ["id", "name"], key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :delete_session, session_grpc, [{ session: "session-name" }, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Project#client" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{ database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil}, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: "SELECT * FROM users")
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Project#create_instance" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
-      mock_instances.expect :create_instance, create_instance_resp(client: mock_client), ["projects/my-project", "my-new-instance", Google::Cloud::Spanner::Admin::Instance::V1::Instance]
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-new-instance"]
+      mock_instances.expect :create_instance, create_instance_resp(client: mock_client) do |req|
+        verify_mock_params(req, parent: "projects/my-project", instance_id: "my-new-instance", instance: Google::Cloud::Spanner::Admin::Instance::V1::Instance)
+      end
+      operation = job_grpc("google.spanner.admin.instance.v1.CreateInstanceMetadata", done: true)
+      mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-new-instance"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Project#instance" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Project#instance@Will return `nil` if instance does not exist." do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/non-existing"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/non-existing"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Project#instances" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :list_instances, instances_resp(token: "token"), ["projects/my-project", Hash]
-      mock_instances.expect :list_instances, instances_resp, ["projects/my-project", Hash]
+      mock_instances.expect :list_instances, instances_resp(token: "token"), [{ parent: "projects/my-project", page_size: nil, page_token: nil }]
+      mock_instances.expect :list_instances, instances_resp, [{ parent: "projects/my-project", page_size: nil, page_token: "token" }]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Project#instance_config" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance_config, instance_config_resp, ["projects/my-project/instanceConfigs/regional-us-central1"]
+      mock_instances.expect :get_instance_config, instance_config_resp, [name: "projects/my-project/instanceConfigs/regional-us-central1"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Project#instance_config@Will return `nil` if instance config does not exist." do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance_config, instance_config_resp, ["projects/my-project/instanceConfigs/non-existing"]
+      mock_instances.expect :get_instance_config, instance_config_resp, [name: "projects/my-project/instanceConfigs/non-existing"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Project#instance_configs" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :list_instance_configs, instance_configs_resp(token: "token"), ["projects/my-project", Hash]
-      mock_instances.expect :list_instance_configs, instance_configs_resp, ["projects/my-project", Hash]
+      mock_instances.expect :list_instance_configs, instance_configs_resp(token: "token"), [{ parent: "projects/my-project", page_size: nil, page_token: nil }]
+      mock_instances.expect :list_instance_configs, instance_configs_resp, [{ parent: "projects/my-project", page_size: nil, page_token: "token" }]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Project#create_database" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      #mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
-      mock_databases.expect :create_database, create_database_resp(client: mock_client), ["projects/my-project/instances/my-instance", "CREATE DATABASE `my-new-database`", {:extra_statements=>[]}]
+      operation = job_grpc("google.spanner.admin.database.v1.CreateDatabaseMetadata", done: true)
+      mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
+      mock_databases.expect :create_database, create_database_resp(client: mock_client), [parent: "projects/my-project/instances/my-instance", create_statement: "CREATE DATABASE `my-new-database`", extra_statements: []]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Project#databases" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :list_databases, databases_resp(token: "token"), ["projects/my-project/instances/my-instance", Hash]
-      mock_databases.expect :list_databases, databases_resp, ["projects/my-project/instances/my-instance", Hash]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :list_databases, databases_resp(token: "token"), [{ parent: "projects/my-project/instances/my-instance", page_size: nil, page_token: nil }]
+      mock_databases.expect :list_databases, databases_resp, [{ parent: "projects/my-project/instances/my-instance", page_size: nil, page_token: "token" }]
     end
   end
 
@@ -448,79 +543,113 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Client" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: "SELECT * FROM users")
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Client#execute" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: String)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Client#execute_sql" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: String)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Client#execute_partition_update" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       6.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: String)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Client#execute_pdml" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: String)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Client#transaction" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
-      mock.expect :rollback, nil, ["session-name", "tx-001-02", Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: "SELECT * FROM users")
+      end
+      mock.expect :rollback, nil, [{ session: "session-name", transaction_id: "tx-001-02"}, Hash]
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Client#snapshot" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: "SELECT * FROM users")
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Client#fields" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
 
     # TODO: Failing 1) wrong num args in Fields#data  2) undefined method `empty?' for #<Google::Cloud::Spanner::Data
@@ -528,21 +657,29 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Client#range" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum do |req|
+        verify_mock_params(req, session: "session-name", table: "users", columns: ["id", "name"], key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Client#read" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum do |req|
+        verify_mock_params(req, session: "session-name", table: "users", columns: ["id", "name"], key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
     end
   end
 
@@ -550,11 +687,15 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Commit" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
@@ -562,8 +703,10 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Data" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: "SELECT * FROM users")
+      end
     end
   end
 
@@ -572,74 +715,83 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Spanner::Database" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
-      mock_databases.expect :create_database, create_database_resp(client: mock_client), ["projects/my-project/instances/my-instance", "CREATE DATABASE `my-new-database`", {:extra_statements=>[]}]
-      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-new-database"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      operation = job_grpc("google.spanner.admin.database.v1.CreateDatabaseMetadata", done: true)
+      mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
+      mock_databases.expect :create_database, create_database_resp(client: mock_client), [parent: "projects/my-project/instances/my-instance", create_statement: "CREATE DATABASE `my-new-database`", extra_statements: []]
+      mock_databases.expect :get_database, database_resp, [name: "projects/my-project/instances/my-instance/databases/my-new-database"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Database#ddl" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
-      mock_databases.expect :get_database_ddl, database_ddl_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
-      mock_databases.expect :get_database_ddl, database_ddl_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :get_database, database_resp, [name: "projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :get_database_ddl, database_ddl_resp, [database: "projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :get_database_ddl, database_ddl_resp, [database: "projects/my-project/instances/my-instance/databases/my-database"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Database#policy" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
-      mock_databases.expect :get_iam_policy, policy_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
-      mock_databases.expect :set_iam_policy, policy_resp, ["projects/my-project/instances/my-instance/databases/my-database", Google::Iam::V1::Policy]
+      mock_databases.expect :get_database, database_resp, [name: "projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :get_iam_policy, policy_resp, [resource: "projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :set_iam_policy, policy_resp do |req|
+        verify_mock_params(req, resource: "projects/my-project/instances/my-instance/databases/my-database", policy: Google::Iam::V1::Policy)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Database#test_permissions" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :get_database, database_resp, [name: "projects/my-project/instances/my-instance/databases/my-database"]
       mock_databases.expect :test_iam_permissions, test_permissions_res(permissions: ["spanner.databases.get"]),
-                            ["projects/my-project/instances/my-instance/databases/my-database", ["spanner.databases.get", "spanner.databases.update"]]
+                            [resource: "projects/my-project/instances/my-instance/databases/my-database", permissions: ["spanner.databases.get", "spanner.databases.update"]]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Database#update" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
-      mock_databases.expect :update_database_ddl, nil, ["projects/my-project/instances/my-instance/databases/my-database", Array, Hash]
+      mock_databases.expect :get_database, database_resp, [name: "projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :update_database_ddl, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Database#update_policy" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
-      mock_databases.expect :get_iam_policy, policy_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
-      mock_databases.expect :set_iam_policy, policy_resp, ["projects/my-project/instances/my-instance/databases/my-database", Google::Iam::V1::Policy]
+      mock_databases.expect :get_database, database_resp, [name: "projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :get_iam_policy, policy_resp, [resource: "projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :set_iam_policy, policy_resp do |req|
+        req[:resource] == "projects/my-project/instances/my-instance/databases/my-database" && req[:policy].is_a?(Google::Iam::V1::Policy)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Database#drop" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
-      mock_databases.expect :drop_database, nil, ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :get_database, database_resp, [name: "projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :drop_database, nil, [database: "projects/my-project/instances/my-instance/databases/my-database"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Database#database_operations" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :get_database, database_resp, [name: "projects/my-project/instances/my-instance/databases/my-database"]
       mock_databases.expect :instance_variable_get, mock_client, ["@operations_client"]
-      mock_databases.expect :list_database_operations, database_operations_resp, ["projects/my-project/instances/my-instance", String, Hash]
+      mock_databases.expect :list_database_operations, database_operations_resp do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance")
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Database#database_operations@Filter and list" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :get_database, database_resp, [name: "projects/my-project/instances/my-instance/databases/my-database"]
       mock_databases.expect :instance_variable_get, mock_client, ["@operations_client"]
-      mock_databases.expect :list_database_operations, database_operations_resp, ["projects/my-project/instances/my-instance", String, Hash]
+      mock_databases.expect :list_database_operations, database_operations_resp do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance", filter: String)
+      end
     end
   end
 
@@ -647,9 +799,13 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Database::List" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :list_databases, databases_resp(token: "token"), ["projects/my-project/instances/my-instance", Hash]
-      mock_databases.expect :list_databases, databases_resp, ["projects/my-project/instances/my-instance", Hash]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :list_databases, databases_resp(token: "token") do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance")
+      end
+      mock_databases.expect :list_databases, databases_resp do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance", page_token: "token")
+      end
     end
   end
 
@@ -657,8 +813,10 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Fields" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: "SELECT * FROM users")
+      end
     end
   end
 
@@ -666,11 +824,15 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::ColumnValue" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
@@ -678,11 +840,15 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Range" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum do |req|
+        verify_mock_params(req, session: "session-name", table: "users", columns: ["id", "name"], key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
     end
   end
 
@@ -690,8 +856,10 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Results" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: "SELECT * FROM users")
+      end
     end
   end
 
@@ -699,12 +867,16 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Rollback" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
-      mock.expect :rollback, nil, ["session-name", "tx-001-02", Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: "SELECT * FROM users")
+      end
+      mock.expect :rollback, nil, [{ session: "session-name", transaction_id: "tx-001-02" }, Hash]
     end
   end
 
@@ -712,53 +884,75 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Snapshot" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: String)
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Snapshot#execute_sql@Query using query parameters:" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users WHERE active = @active", Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: "SELECT * FROM users WHERE active = @active")
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Snapshot#range" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum do |req|
+        verify_mock_params(req, session: "session-name", table: "users", columns: ["id", "name"], key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Snapshot#read" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :streaming_read, results_enum do |req|
+        verify_mock_params(req, session: "session-name", table: "users", columns: ["id", "name"], key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Status" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      #mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
-      mock_databases.expect :create_database, create_database_resp(client: mock_client), ["projects/my-project/instances/my-instance", "CREATE DATABASE `my-new-database`", {:extra_statements=>[]}]
+      operation  = job_grpc("google.spanner.admin.database.v1.CreateDatabaseMetadata", done: true)
+      mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
+      mock_databases.expect :create_database, create_database_resp(client: mock_client), [parent: "projects/my-project/instances/my-instance", create_statement: "CREATE DATABASE `my-new-database`", extra_statements: []]
     end
   end
 
@@ -766,90 +960,140 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Transaction" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :streaming_read, results_enum_marketing, ["session-name", "Albums", ["marketing_budget"], Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :streaming_read, results_enum_marketing, ["session-name", "Albums", ["marketing_budget"], Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :streaming_read, results_enum_marketing do |req|
+        verify_mock_params(req, session: "session-name", table: "Albums", columns: ["marketing_budget"], key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :streaming_read, results_enum_marketing do |req|
+        verify_mock_params(req, session: "session-name", table: "Albums", columns: ["marketing_budget"], key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Transaction#batch_update" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_batch_dml, batch_response_grpc, ["session-name", Google::Cloud::Spanner::V1::TransactionSelector, Array, Integer, Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :execute_batch_dml, batch_response_grpc do |req|
+        verify_mock_params(req, session: "session-name", transaction: Google::Cloud::Spanner::V1::TransactionSelector, statements: Array, seqno: Integer)
+        end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Transaction#execute" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: String)
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Transaction#execute_sql" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: String)
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Transaction#execute_update" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: String)
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Transaction#execute_sql@Query using query parameters:" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users WHERE active = @active", Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :execute_streaming_sql, results_enum do |req|
+        verify_mock_params(req, session: "session-name", sql: "SELECT * FROM users WHERE active = @active")
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Transaction#range" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :streaming_read, results_enum do |req|
+        verify_mock_params(req, session: "session-name", table: "users", columns: ["id", "name"], key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+     end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Transaction#read" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
       5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Cloud::Spanner::V1::TransactionOptions, Hash]
+        mock.expect :begin_transaction, tx_resp do |req|
+          verify_mock_params(req, session: "session-name", options: Google::Cloud::Spanner::V1::TransactionOptions)
+        end
       end
-      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Cloud::Spanner::V1::KeySet, Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+      mock.expect :streaming_read, results_enum do |req|
+        verify_mock_params(req, session: "session-name", table: "users", columns: ["id", "name"], key_set: Google::Cloud::Spanner::V1::KeySet)
+      end
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
     end
   end
 
@@ -858,130 +1102,159 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Spanner::Database#create_backup" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
-      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
-      mock_databases.expect :create_backup, create_backup_resp(client: mock_client), ["projects/my-project/instances/my-instance", "my-backup", Hash]
+      mock_databases.expect :get_database, database_resp, [name: "projects/my-project/instances/my-instance/databases/my-database"]
+      operation = job_grpc("type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata", done: true)
+      mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
+      mock_databases.expect :create_backup, create_backup_resp(client: mock_client) do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance", backup_id: "my-backup", backup: Hash)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#backup" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/backups/my-backup"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_backup, backup_resp, [name: "projects/my-project/instances/my-instance/backups/my-backup"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#backup@Will return `nil` if backup does not exist." do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :get_backup, nil, ["projects/my-project/instances/my-instance/backups/non-existing-backup"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_backup, nil, [name: "projects/my-project/instances/my-instance/backups/non-existing-backup"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#backups" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :list_backups, backups_resp(token: "token"), ["projects/my-project/instances/my-instance", nil, Hash]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :list_backups, backups_resp(token: "token") do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance", page_size: nil, page_token: nil)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#backups@Filter and list backups" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :list_backups, backups_resp(token: "token"), ["projects/my-project/instances/my-instance", String, Hash]
-      mock_databases.expect :list_backups, backups_resp, ["projects/my-project/instances/my-instance", String, Hash]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :list_backups, backups_resp(token: "token") do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance", filter: String)
+      end
+      mock_databases.expect :list_backups, backups_resp(token: "token") do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance", filter: String)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Database#backups" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_databases.expect :get_database, OpenStruct.new(database_hash), ["projects/my-project/instances/my-instance/databases/my-database"]
-      mock_databases.expect :list_backups, backups_resp(token: "token"), ["projects/my-project/instances/my-instance", String, Hash]
-      mock_databases.expect :list_backups, backups_resp, ["projects/my-project/instances/my-instance", String, Hash]
+      mock_databases.expect :get_database, OpenStruct.new(database_hash), [name: "projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :list_backups, backups_resp(token: "token") do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance", filter: String)
+      end
+      mock_databases.expect :list_backups, backups_resp(token: "token") do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance", filter: String)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Backup" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
-      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
-      mock_databases.expect :create_backup, create_backup_resp(client: mock_client), ["projects/my-project/instances/my-instance", "my-backup", Hash]
+      mock_databases.expect :get_database, database_resp, [name: "projects/my-project/instances/my-instance/databases/my-database"]
+      operation = job_grpc("google.spanner.admin.database.v1.CreateBackupMetadata", done: true)
+      mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
+      mock_databases.expect :create_backup, create_backup_resp(client: mock_client) do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance", backup_id: "my-backup", backup: Hash)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Backup#expire_time=" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/backups/my-backup"]
-      mock_databases.expect :update_backup, backup_resp, [Google::Cloud::Spanner::Admin::Database::V1::Backup, Google::Protobuf::FieldMask]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_backup, backup_resp, [name: "projects/my-project/instances/my-instance/backups/my-backup"]
+      mock_databases.expect :update_backup, backup_resp do |req|
+        verify_mock_params(req, backup: Google::Cloud::Spanner::Admin::Database::V1::Backup, update_mask: Google::Protobuf::FieldMask)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Backup#delete" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/backups/my-backup"]
-      mock_databases.expect :delete_backup, nil, ["projects/my-project/instances/my-instance/backups/my-backup"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_backup, backup_resp, [name: "projects/my-project/instances/my-instance/backups/my-backup"]
+      mock_databases.expect :delete_backup, nil, [name: "projects/my-project/instances/my-instance/backups/my-backup"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Backup#referencing_databases" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :get_backup, backup_resp(referencing_databases: ["my-database"]), ["projects/my-project/instances/my-instance/backups/my-backup"]
-      mock_databases.expect :get_database, database_resp(database_id: "my-database"), ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_backup, backup_resp(referencing_databases: ["my-database"]), [name: "projects/my-project/instances/my-instance/backups/my-backup"]
+      mock_databases.expect :get_database, database_resp(database_id: "my-database"), [name: "projects/my-project/instances/my-instance/databases/my-database"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Backup::Job#cancel" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
-      mock_client.expect :cancel_operation, nil, ["1234567890"]
-      mock_databases.expect :create_backup, create_backup_resp(client: mock_client), ["projects/my-project/instances/my-instance", "my-backup", Hash]
+      mock_databases.expect :get_database, database_resp, [name: "projects/my-project/instances/my-instance/databases/my-database"]
+      mock_client.expect :cancel_operation, nil, [{ name: "1234567890"}, Gapic::CallOptions]
+      mock_databases.expect :create_backup, create_backup_resp(client: mock_client) do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance", backup_id: "my-backup", backup: Hash)
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Backup#restore" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/backups/my-backup"]
-      mock_databases.expect :restore_database, create_backup_restore_resp(client: mock_client), [
-        "projects/my-project/instances/my-instance",
-        "my-restored-database",
-        { backup: "projects/my-project/instances/my-instance/backups/my-backup"}
-      ]
-      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {options: nil}]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_backup, backup_resp, [name: "projects/my-project/instances/my-instance/backups/my-backup"]
+      mock_databases.expect :restore_database, create_backup_restore_resp(client: mock_client) do |req|
+        verify_mock_params(req,
+          parent: "projects/my-project/instances/my-instance",
+          database_id: "my-restored-database",
+          backup: "projects/my-project/instances/my-instance/backups/my-backup"
+        )
+      end
+      operation = job_grpc("google.spanner.admin.database.v1.RestoreDatabaseMetadata", done: true)
+      mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Backup#restore@Restore database in provided instance id" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/backups/my-backup"]
-      mock_databases.expect :restore_database, create_backup_restore_resp(client: mock_client), [
-        "projects/my-project/instances/other-instance",
-        "my-restored-database",
-        { backup: "projects/my-project/instances/my-instance/backups/my-backup"}
-      ]
-      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {options: nil}]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_backup, backup_resp, [name: "projects/my-project/instances/my-instance/backups/my-backup"]
+      mock_databases.expect :restore_database, create_backup_restore_resp(client: mock_client) do |req|
+        verify_mock_params(req,
+          parent: "projects/my-project/instances/other-instance",
+          database_id: "my-restored-database",
+          backup: "projects/my-project/instances/my-instance/backups/my-backup"
+        )
+      end
+      operation = job_grpc("google.spanner.admin.database.v1.RestoreDatabaseMetadata", done: true)
+      mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Backup::Restore::Job" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/backups/my-backup"]
-      mock_databases.expect :restore_database, create_backup_restore_resp(client: mock_client), [
-        "projects/my-project/instances/my-instance",
-        "my-restored-database",
-        { backup: "projects/my-project/instances/my-instance/backups/my-backup" }
-      ]
-      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {options:nil}]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_backup, backup_resp, [name: "projects/my-project/instances/my-instance/backups/my-backup"]
+      mock_databases.expect :restore_database, create_backup_restore_resp(client: mock_client) do |req|
+        verify_mock_params(req,
+          parent: "projects/my-project/instances/my-instance",
+          database_id: "my-restored-database",
+          backup: "projects/my-project/instances/my-instance/backups/my-backup"
+        )
+      end
+      operation = job_grpc("google.spanner.admin.database.v1.RestoreDatabaseMetadata", done: true)
+      mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
     end
   end
 
@@ -989,9 +1262,13 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Backup::List" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
-      mock_databases.expect :list_backups, backups_resp(token: "token"), ["projects/my-project/instances/my-instance", nil, Hash]
-      mock_databases.expect :list_backups, backups_resp, ["projects/my-project/instances/my-instance", nil, Hash]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
+      mock_databases.expect :list_backups, backups_resp(token: "token") do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance")
+      end
+      mock_databases.expect :list_backups, backups_resp(token: "token") do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance")
+      end
     end
   end
 
@@ -1000,9 +1277,11 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Spanner::Database::Job::List" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
       mock_databases.expect :instance_variable_get, mock_client, ["@operations_client"]
-      mock_databases.expect :list_database_operations, database_operations_resp, ["projects/my-project/instances/my-instance", nil, Hash]
+      mock_databases.expect :list_database_operations, database_operations_resp do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance")
+      end
     end
   end
 
@@ -1011,9 +1290,11 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Spanner::Backup::Job::List" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
       mock_databases.expect :instance_variable_get, mock_client, ["@operations_client"]
-      mock_databases.expect :list_backup_operations, backup_operations_resp, ["projects/my-project/instances/my-instance", nil, Hash]
+      mock_databases.expect :list_backup_operations, backup_operations_resp do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance")
+      end
     end
   end
 
@@ -1022,18 +1303,22 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Spanner::Instance#backup_operations" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
       mock_databases.expect :instance_variable_get, mock_client, ["@operations_client"]
-      mock_databases.expect :list_backup_operations, backup_operations_resp, ["projects/my-project/instances/my-instance", nil, Hash]
+      mock_databases.expect :list_backup_operations, backup_operations_resp do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance")
+      end
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#backup_operations@Filter and list" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [name: "projects/my-project/instances/my-instance"]
       mock_databases.expect :instance_variable_get, mock_client, ["@operations_client"]
-      mock_databases.expect :list_backup_operations, backup_operations_resp, ["projects/my-project/instances/my-instance", String, Hash]
+      mock_databases.expect :list_backup_operations, backup_operations_resp do |req|
+        verify_mock_params(req, parent: "projects/my-project/instances/my-instance")
+      end
     end
   end
 end
@@ -1060,9 +1345,10 @@ def instance_hash name: "my-instance", nodes: 1, state: "READY", labels: {}
   }
 end
 
-def job_grpc type_url, value: ""
+def job_grpc type_url, value: "", done: false
   Google::Longrunning::Operation.new(
     name: "1234567890",
+    done: done,
     metadata: {
       type_url: type_url,
       value: value
@@ -1072,7 +1358,7 @@ end
 
 def create_instance_resp client: nil
   Gapic::Operation.new(
-    job_grpc("google.spanner.admin.database.v1.UpdateDatabaseDdlRequest"),
+    job_grpc("google.spanner.admin.instance.v1.CreateInstanceMetadata"),
     client,
     result_type: Google::Cloud::Spanner::Admin::Instance::V1::Instance,
     metadata_type: Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceMetadata
@@ -1194,7 +1480,7 @@ def test_permissions_res permissions: ["spanner.instances.get"]
 end
 
 def paged_enum_struct response
-  OpenStruct.new page: OpenStruct.new(response: response)
+  OpenStruct.new(response: response)
 end
 
 def tx_resp

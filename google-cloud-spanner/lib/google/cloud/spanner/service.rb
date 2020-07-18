@@ -171,7 +171,6 @@ module Google
             parent:     instance_path(instance_id),
             page_size:  max,
             page_token: token
-
           paged_enum.response
         end
 

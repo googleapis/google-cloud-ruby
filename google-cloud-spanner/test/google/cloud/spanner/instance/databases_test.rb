@@ -23,7 +23,6 @@ describe Google::Cloud::Spanner::Instance, :databases, :mock_spanner do
     h[:next_page_token] = "next_page_token"
     response = Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesResponse.new h
     paged_enum_struct response
-
   end
   let(:second_page) do
     h = databases_hash instance_id: instance_id
