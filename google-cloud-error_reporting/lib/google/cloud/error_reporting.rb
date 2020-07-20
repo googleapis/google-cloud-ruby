@@ -288,4 +288,14 @@ module Google
       private_class_method :default_credentials
     end
   end
+
+  # Aliases for compatibility with older spellings.
+  # @private
+  class Devtools
+    # @private
+    class Clouderrorreporting
+      # @private
+      V1beta1 = ::Google::Cloud::ErrorReporting::V1beta1
+    end
+  end
 end
