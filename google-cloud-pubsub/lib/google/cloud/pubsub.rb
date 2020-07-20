@@ -162,7 +162,9 @@ module Google
       end
     end
 
-    ## Legacy namespace
+    ## Legacy veneer namespace
     Pubsub = PubSub unless const_defined? :Pubsub
   end
+  ## Legacy generated client namespace
+  Pubsub = Cloud::PubSub unless const_defined? :Pubsub
 end
