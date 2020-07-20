@@ -4,8 +4,6 @@ inherit_gem:
 AllCops:
   Exclude:
     - "acceptance/**/*"
-    - "lib/google/pubsub/**/*"
-    - "lib/google/iam/**/*"
     - "support/**/*"
     - "test/**/*"
 
