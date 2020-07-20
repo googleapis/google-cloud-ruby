@@ -184,5 +184,5 @@ module Google
   end
 
   # @private
-  Logging = Cloud::Logging
+  Logging = Cloud::Logging unless const_defined? :Logging
 end
