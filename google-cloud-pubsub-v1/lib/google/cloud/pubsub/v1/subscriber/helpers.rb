@@ -15,26 +15,9 @@
 # limitations under the License.
 
 
-module Google
-  module Cloud
-    module PubSub
-      module V1
-        module Subscriber
-          ##
-          # Additional configuration for the client.
-          # The max_send_message_length and max_receive_message_length settings were originally added in
-          # https://github.com/googleapis/google-cloud-ruby/pull/1513.
-          #
-          class Client
-            configure do |config|
-              config.channel_args ||= {}
-              config.channel_args["grpc.max_send_message_length"] = -1
-              config.channel_args["grpc.max_receive_message_length"] = -1
-              config.channel_args["grpc.keepalive_time_ms"] = 300_000
-            end
-          end
-        end
-      end
-    end
-  end
+Google::Cloud::PubSub::V1::Subscriber::Client.configure do |config|
+  config.channel_args ||= {}
+  config.channel_args["grpc.max_send_message_length"] = -1
+  config.channel_args["grpc.max_receive_message_length"] = -1
+  config.channel_args["grpc.keepalive_time_ms"] = 300_000
 end
