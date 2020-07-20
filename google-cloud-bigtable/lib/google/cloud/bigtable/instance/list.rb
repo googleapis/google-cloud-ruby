@@ -106,7 +106,7 @@ module Google
           # @yield [instance] The block for accessing each instance.
           # @yieldparam [Instance] instance The instance object.
           #
-          # @return [Enumerator]
+          # @return [Enumerator,nil] An enumerator is returned if no block is given, otherwise `nil`.
           #
           # @example Iterating each instance by passing a block:
           #   require "google/cloud/bigtable"

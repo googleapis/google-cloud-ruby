@@ -15,6 +15,7 @@
 # limitations under the License.
 
 
+require "google/cloud/bigtable/backup"
 require "google/cloud/bigtable/cluster/list"
 require "google/cloud/bigtable/cluster/job"
 
@@ -194,6 +195,104 @@ module Google
         #
         def location_path
           @grpc.location
+        end
+
+        ##
+        # Creates a new Cloud Bigtable Backup.
+        #
+        # @param source_table [Table, String] The table object, or the name of the table,
+        #   from which the backup is to be created. The table needs to be in the same
+        #   instance as the backup. Required.
+        # @param backup_id [String] The id of the backup to be created. This string must
+        #   be between 1 and 50 characters in length and match the regex
+        #   `[_a-zA-Z0-9][-_.a-zA-Z0-9]*`. Required.
+        # @param expire_time [Time] The expiration time of the backup, with microseconds
+        #     granularity that must be at least 6 hours and at most 30 days
+        #     from the time the request is received. Once the `expire_time`
+        #     has passed, Cloud Bigtable will delete the backup and free the
+        #     resources used by the backup. Required.
+        # @return [Google::Cloud::Bigtable::Backup::Job]
+        #   The job representing the long-running, asynchronous processing of
+        #   a backup create operation.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   instance = bigtable.instance("my-instance")
+        #   cluster = instance.cluster("my-cluster")
+        #   table = instance.table("my-table")
+        #
+        #   expire_time = Time.now + 60 * 60 * 7
+        #   job = cluster.create_backup(table, "my-backup", expire_time)
+        #
+        #   job.wait_until_done!
+        #   job.done? #=> true
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     backup = job.backup
+        #   end
+        #
+        def create_backup source_table, backup_id, expire_time
+          source_table_id = source_table.respond_to?(:name) ? source_table.name : source_table
+          grpc = service.create_backup instance_id:     instance_id,
+                                       cluster_id:      cluster_id,
+                                       backup_id:       backup_id,
+                                       source_table_id: source_table_id,
+                                       expire_time:     expire_time
+          Backup::Job.from_grpc grpc, service
+        end
+
+        ##
+        # Gets a backup in the cluster.
+        #
+        # @param backup_id [String] The unique ID of the requested backup.
+        #
+        # @return [Google::Cloud::Bigtable::Backup, nil] The backup object, or `nil` if not found in the service.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #   cluster = instance.cluster("my-cluster")
+        #
+        #   backup = cluster.backup("my-backup")
+        #
+        #   if backup
+        #     puts backup.backup_id
+        #   end
+        #
+        def backup backup_id
+          grpc = service.get_backup instance_id, cluster_id, backup_id
+          Backup.from_grpc grpc, service
+        rescue Google::Cloud::NotFoundError
+          nil
+        end
+
+        ##
+        # Lists all backups in the cluster.
+        #
+        # @return [Array<Google::Cloud::Bigtable::Backup>] (See {Google::Cloud::Bigtable::Backup::List})
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #   cluster = instance.cluster("my-cluster")
+        #
+        #   cluster.backups.all do |backup|
+        #     puts backup.backup_id
+        #   end
+        #
+        def backups
+          grpc = service.list_backups instance_id, cluster_id
+          Backup::List.from_grpc grpc, service
         end
 
         ##

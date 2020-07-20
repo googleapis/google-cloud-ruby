@@ -19,9 +19,6 @@ describe Google::Cloud::Bigtable::Instance, :save, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:display_name) { "Test instance" }
   let(:labels) { { "env" => "test" } }
-  let(:ops_name) {
-    "operations/1234567890"
-  }
   let(:instance_grpc){
     Google::Bigtable::Admin::V2::Instance.new(
       instance_hash(
@@ -34,28 +31,19 @@ describe Google::Cloud::Bigtable::Instance, :save, :mock_bigtable do
     )
   }
   let(:instance) { Google::Cloud::Bigtable::Instance.from_grpc(instance_grpc, bigtable.service) }
-  let(:job_data) {
-    {
-      name: ops_name,
-      metadata: {
-        type_url: "type.googleapis.com/google.bigtable.admin.v2.UpdateInstanceMetadata",
-        value: ""
-      }
-    }
+  let(:ops_name) {
+    "operations/projects/#{project_id}/instances/#{instance_id}/locations/us-east-1b/operations/1234567890"
   }
-  let(:job_grpc) { Google::Longrunning::Operation.new(job_data) }
-  let(:job_grpc_done) do
-    Google::Longrunning::Operation.new(
-      name: ops_name,
-      metadata: Google::Protobuf::Any.new(
-        type_url: "type.googleapis.com/google.bigtable.admin.v2.UpdateInstanceMetadata",
-        value: Google::Bigtable::Admin::V2::UpdateInstanceMetadata.new.to_proto
-      ),
-      done: true,
-      response: Google::Protobuf::Any.new(
-        type_url: "type.googleapis.com/google.bigtable.admin.v2.Instance",
-        value: instance_grpc.to_proto
-      )
+  let(:job_grpc) do
+    operation_pending_grpc ops_name, "type.googleapis.com/google.bigtable.admin.v2.UpdateInstanceMetadata"
+  end
+  let :job_done_grpc do
+    operation_done_grpc(
+      ops_name,
+      "type.googleapis.com/google.bigtable.admin.v2.UpdateInstanceMetadata",
+      Google::Bigtable::Admin::V2::UpdateInstanceMetadata.new,
+      "type.googleapis.com/google.bigtable.admin.v2.Instance",
+      instance_grpc
     )
   end
 
@@ -73,7 +61,7 @@ describe Google::Cloud::Bigtable::Instance, :save, :mock_bigtable do
                  )
     mask = Google::Protobuf::FieldMask.new(paths: %w[labels display_name type])
     mock.expect :partial_update_instance, update_res, [instance_grpc, mask]
-    mock.expect :get_operation, job_grpc_done, [ops_name, Hash]
+    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
     bigtable.service.mocked_instances = mock
 
     job = instance.save
@@ -106,7 +94,7 @@ describe Google::Cloud::Bigtable::Instance, :save, :mock_bigtable do
                  )
     mask = Google::Protobuf::FieldMask.new(paths: %w[labels display_name type])
     mock.expect :partial_update_instance, update_res, [instance_grpc, mask]
-    mock.expect :get_operation, job_grpc_done, [ops_name, Hash]
+    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
     bigtable.service.mocked_instances = mock
 
     job = instance.save

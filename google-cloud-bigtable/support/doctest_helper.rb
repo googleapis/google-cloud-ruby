@@ -188,12 +188,91 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::Backup" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_tables.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup"]
+      mocked_tables.expect :update_backup, backup_resp, [Google::Bigtable::Admin::V2::Backup, Google::Protobuf::FieldMask]
+      mocked_tables.expect :delete_backup, nil, ["projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Backup#restore" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_tables.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup"]
+      mocked_tables.expect :restore_table, mocked_job, ["projects/my-project/instances/my-instance", { table_id: "my-new-table", backup: "projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup" }]
+      mocked_job.expect :wait_until_done!, nil, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error, nil, []
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Backup::Job" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_tables.expect :create_backup, mocked_job, ["projects/my-project/instances/my-instance/clusters/my-cluster", String, Google::Bigtable::Admin::V2::Backup]
+      mocked_job.expect :wait_until_done!, nil, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error, nil, []
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Backup::List" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_tables.expect :list_backups, backups_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_job.expect :wait_until_done!, nil, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error, nil, []
+    end
+  end
+
   doctest.before "Google::Cloud::Bigtable::Cluster" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
       mocked_instances.expect :get_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
       mocked_instances.expect :update_cluster, mocked_job, ["projects/my-project/instances/my-instance/clusters/my-cluster", "projects/my-project/locations/us-east-1b", 3]
       mocked_instances.expect :delete_cluster, true, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Cluster#create_backup" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_tables.expect :create_backup, mocked_job, ["projects/my-project/instances/my-instance/clusters/my-cluster", String, Google::Bigtable::Admin::V2::Backup]
+      mocked_job.expect :wait_until_done!, nil, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error, nil, []
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Cluster#backup" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_tables.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Cluster#backups" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_tables.expect :list_backups, backups_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
     end
   end
 
@@ -694,6 +773,20 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::Table::RestoreJob" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_tables.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup"]
+      mocked_tables.expect :restore_table, mocked_job, ["projects/my-project/instances/my-instance", { table_id: "my-new-table", backup: "projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup" }]
+      mocked_job.expect :wait_until_done!, nil, []
+      mocked_job.expect :done?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error?, true, []
+      mocked_job.expect :error, nil, []
+    end
+  end
+
 end
 
 # Stubs
@@ -784,6 +877,32 @@ def app_profiles_resp count = 2
   end
   response_struct(
     OpenStruct.new app_profiles: arr
+  )
+end
+
+def backup_hash name:, source_table:, expire_time: nil
+  {
+    name: name,
+    source_table: source_table,
+    expire_time: expire_time
+  }.delete_if { |_, v| v.nil? }
+end
+
+def backup_resp backup_id = "my-backup"
+  Google::Bigtable::Admin::V2::Backup.new(
+    backup_hash(
+      name: "projects/my-project/instances/my-instance/clusters/my-cluster/backups/#{backup_id}",
+      source_table: "projects/my-project/instances/my-instance/tables/my-table"
+    )
+  )
+end
+
+def backups_resp count = 2
+  arr = Array.new(count) do |i|
+    backup_resp "my-backup-#{i}"
+  end
+  response_struct(
+    OpenStruct.new backups: arr
   )
 end
 

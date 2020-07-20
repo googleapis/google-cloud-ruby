@@ -21,6 +21,8 @@ module Google
       class Table
         ##
         # Table::ClusterState is the state of a table's data in a particular cluster.
+        #
+        # @attr [String] cluster_name The name of the cluster.
         class ClusterState
           attr_reader :cluster_name
 
@@ -39,6 +41,10 @@ module Google
           #   * `:PLANNED_MAINTENANCE` - The table is temporarily unable to serve.
           #   * `:UNPLANNED_MAINTENANCE` - The table is temporarily unable to serve.
           #   * `:READY` - The table can serve.
+          #   * `:READY_OPTIMIZING` - The table is fully created and ready for use
+          #     after a restore, and is being optimized for performance. When
+          #     optimizations are complete, the table will transition to `READY`
+          #     state.
           #
           # @return [Symbol] The state of replication.
           #
@@ -51,7 +57,7 @@ module Google
           # over pre-existing data from other clusters before it can begin
           # receiving live replication updates and serving.
           #
-          # @return [Boolean] `true` if the cluster is initializing.
+          # @return [Boolean] `true` if the table in this cluster is initializing.
           #
           def initializing?
             replication_state == :INITIALIZING
@@ -61,7 +67,8 @@ module Google
           # The table is temporarily unable to serve
           # requests from this cluster due to planned internal maintenance.
           #
-          # @return [Boolean] `true` if the cluster is in planned maintenance.
+          # @return [Boolean] `true` if the table in this cluster is in planned
+          #   maintenance.
           #
           def planned_maintenance?
             replication_state == :PLANNED_MAINTENANCE
@@ -71,7 +78,8 @@ module Google
           # The table is temporarily unable to serve requests from this
           # cluster due to unplanned or emergency maintenance.
           #
-          # @return [Boolean] `true` if the cluster is in unplanned maintenance.
+          # @return [Boolean] `true` if the table in this cluster is in unplanned
+          #   maintenance.
           #
           def unplanned_maintenance?
             replication_state == :UNPLANNED_MAINTENANCE
@@ -82,10 +90,23 @@ module Google
           # Depending on replication delay, reads may not immediately
           # reflect the state of the table in other clusters.
           #
-          # @return [Boolean] `true` if the cluster is ready.
+          # @return [Boolean] `true` if the table in this cluster is ready.
           #
           def ready?
             replication_state == :READY
+          end
+
+          ##
+          # The table is fully created and ready for use after a
+          # restore, and is being optimized for performance. When
+          # optimizations are complete, the table will transition to `READY`
+          # state.
+          #
+          # @return [Boolean] `true` if the table in this cluster is being
+          #   optimized.
+          #
+          def ready_optimizing?
+            replication_state == :READY_OPTIMIZING
           end
 
           # @private

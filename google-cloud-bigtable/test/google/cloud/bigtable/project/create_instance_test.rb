@@ -19,9 +19,6 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
   let(:instance_id) { "new-instance" }
   let(:display_name) { "Test instance" }
   let(:labels) { { "env" => "test" } }
-  let(:ops_name) {
-    "operations/projects/#{project_id}/instances/#{instance_id}/locations/us-east-1b/operations/1234567890"
-  }
   let(:instance_grpc){
     Google::Bigtable::Admin::V2::Instance.new(
       name: instance_path(instance_id),
@@ -31,28 +28,19 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
       labels: labels
     )
   }
-  let(:job_data) {
-    {
-      name: ops_name,
-      metadata: {
-        type_url: "type.googleapis.com/google.bigtable.admin.v2.CreateInstanceMetadata",
-        value: ""
-      }
-    }
+  let(:ops_name) {
+    "operations/projects/#{project_id}/instances/#{instance_id}/locations/us-east-1b/operations/1234567890"
   }
-  let(:job_grpc) { Google::Longrunning::Operation.new(job_data) }
-  let(:job_grpc_done) do
-    Google::Longrunning::Operation.new(
-      name: ops_name,
-      metadata: Google::Protobuf::Any.new(
-        type_url: "type.googleapis.com/google.bigtable.admin.v2.CreateInstanceMetadata",
-        value: Google::Bigtable::Admin::V2::CreateInstanceMetadata.new.to_proto
-      ),
-      done: true,
-      response: Google::Protobuf::Any.new(
-        type_url: "type.googleapis.com/google.bigtable.admin.v2.Instance",
-        value: instance_grpc.to_proto
-      )
+  let(:job_grpc) do
+    operation_pending_grpc ops_name, "type.googleapis.com/google.bigtable.admin.v2.CreateInstanceMetadata"
+  end
+  let :job_done_grpc do
+    operation_done_grpc(
+      ops_name,
+      "type.googleapis.com/google.bigtable.admin.v2.CreateInstanceMetadata",
+      Google::Bigtable::Admin::V2::CreateInstanceMetadata.new,
+      "type.googleapis.com/google.bigtable.admin.v2.Instance",
+      instance_grpc
     )
   end
 
@@ -75,7 +63,7 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
     mock.expect :create_instance, create_res, [
       project_path, instance_id, instance, clusters_map
     ]
-    mock.expect :get_operation, job_grpc_done, [ops_name, Hash]
+    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
     bigtable.service.mocked_instances = mock
 
     job = bigtable.create_instance(
@@ -124,7 +112,7 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
     mock.expect :create_instance, create_res, [
       project_path, instance_id, instance, clusters_map
     ]
-    mock.expect :get_operation, job_grpc_done, [ops_name, Hash]
+    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
     bigtable.service.mocked_instances = mock
 
     job = bigtable.create_instance(

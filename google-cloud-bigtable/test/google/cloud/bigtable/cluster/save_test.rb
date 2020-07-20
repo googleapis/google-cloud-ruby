@@ -32,31 +32,17 @@ describe Google::Cloud::Bigtable::Cluster, :save, :mock_bigtable do
   let(:cluster) {
     Google::Cloud::Bigtable::Cluster.from_grpc(cluster_grpc, bigtable.service)
   }
-  let(:ops_name) {
-    "operations/1234567890"
-  }
-  let(:job_data) {
-    {
-      name: ops_name,
-      metadata: {
-        type_url: "type.googleapis.com/google.bigtable.admin.v2.UpdateInstanceMetadata",
-        value: ""
-      }
-    }
-  }
-  let(:job_grpc) { Google::Longrunning::Operation.new(job_data) }
-  let(:job_grpc_done) do
-    Google::Longrunning::Operation.new(
-      name: ops_name,
-      metadata: Google::Protobuf::Any.new(
-        type_url: "type.googleapis.com/google.bigtable.admin.v2.UpdateClusterMetadata",
-        value: Google::Bigtable::Admin::V2::UpdateClusterMetadata.new.to_proto
-      ),
-      done: true,
-      response: Google::Protobuf::Any.new(
-        type_url: "type.googleapis.com/google.bigtable.admin.v2.Cluster",
-        value: cluster_grpc.to_proto
-      )
+  let(:ops_name) { "operations/1234567890" }
+  let(:job_grpc) do
+    operation_pending_grpc ops_name, "type.googleapis.com/google.bigtable.admin.v2.UpdateClusterMetadata"
+  end
+  let :job_done_grpc do
+    operation_done_grpc(
+      ops_name,
+      "type.googleapis.com/google.bigtable.admin.v2.UpdateClusterMetadata",
+      Google::Bigtable::Admin::V2::UpdateClusterMetadata.new,
+      "type.googleapis.com/google.bigtable.admin.v2.Cluster",
+      cluster_grpc
     )
   end
 
@@ -77,7 +63,7 @@ describe Google::Cloud::Bigtable::Cluster, :save, :mock_bigtable do
       location_path(location),
       serve_nodes
     ]
-    mock.expect :get_operation, job_grpc_done, [ops_name, Hash]
+    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
     bigtable.service.mocked_instances = mock
 
     job = cluster.save

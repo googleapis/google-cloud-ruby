@@ -109,7 +109,7 @@ module Google
           # @yield [cluster] The block for accessing each cluster.
           # @yieldparam [Cluster] cluster The cluster object.
           #
-          # @return [Enumerator]
+          # @return [Enumerator,nil] An enumerator is returned if no block is given, otherwise `nil`.
           #
           # @example Iterating each cluster by passing a block:
           #   require "google/cloud/bigtable"

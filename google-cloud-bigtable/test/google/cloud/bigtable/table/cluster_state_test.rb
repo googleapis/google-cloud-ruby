@@ -32,5 +32,6 @@ describe Google::Cloud::Bigtable::Table::ClusterState, :mock_bigtable do
     _(cluster_state.initializing?).wont_equal true
     _(cluster_state.planned_maintenance?).wont_equal true
     _(cluster_state.unplanned_maintenance?).wont_equal true
+    _(cluster_state.ready_optimizing?).wont_equal true
   end
 end

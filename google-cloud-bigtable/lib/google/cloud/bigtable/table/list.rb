@@ -94,7 +94,7 @@ module Google
           # @yield [table] The block for accessing each table instance.
           # @yieldparam [Table] table The table instance object.
           #
-          # @return [Enumerator]
+          # @return [Enumerator,nil] An enumerator is returned if no block is given, otherwise `nil`.
           #
           # @example Iterating each table by passing a block:
           #   require "google/cloud/bigtable"

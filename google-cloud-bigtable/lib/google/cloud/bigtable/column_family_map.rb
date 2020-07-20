@@ -117,7 +117,7 @@ module Google
         # @yieldparam [String] name the column family name.
         # @yieldparam [ColumnFamily] column_family the column family object.
         #
-        # @return [Enumerator]
+        # @return [Enumerator,nil] An enumerator is returned if no block is given, otherwise `nil`.
         #
         def each
           return enum_for :each unless block_given?

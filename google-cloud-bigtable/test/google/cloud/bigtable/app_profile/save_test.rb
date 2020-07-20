@@ -28,31 +28,17 @@ describe Google::Cloud::Bigtable::AppProfile, :save, :mock_bigtable do
   let(:app_profile) {
     Google::Cloud::Bigtable::AppProfile.from_grpc(app_profile_grpc, bigtable.service)
   }
-  let(:ops_name) {
-    "operations/1234567890"
-  }
-  let(:job_data) {
-    {
-      name: ops_name,
-      metadata:  {
-        type_url: "type.googleapis.com/google.protobuf.Any",
-        value: ""
-      }
-    }
-  }
-  let(:job_grpc) { Google::Longrunning::Operation.new(job_data) }
-  let(:job_grpc_done) do
-    Google::Longrunning::Operation.new(
-      name: ops_name,
-      metadata: Google::Protobuf::Any.new(
-        type_url: "type.googleapis.com/google.bigtable.admin.v2.UpdateClusterMetadata",
-        value: Google::Bigtable::Admin::V2::UpdateClusterMetadata.new.to_proto
-      ),
-      done: true,
-      response: Google::Protobuf::Any.new(
-        type_url: "type.googleapis.com/google.bigtable.admin.v2.AppProfile",
-        value: app_profile_grpc.to_proto
-      )
+  let(:ops_name) { "operations/1234567890" }
+  let(:job_grpc) do
+    operation_pending_grpc ops_name, "type.googleapis.com/google.protobuf.Any"
+  end
+  let :job_done_grpc do
+    operation_done_grpc(
+      ops_name,
+      "type.googleapis.com/google.bigtable.admin.v2.UpdateAppProfileMetadata",
+      Google::Bigtable::Admin::V2::UpdateAppProfileMetadata.new,
+      "type.googleapis.com/google.bigtable.admin.v2.AppProfile",
+      app_profile_grpc
     )
   end
 
@@ -78,7 +64,7 @@ describe Google::Cloud::Bigtable::AppProfile, :save, :mock_bigtable do
       update_mask,
       ignore_warnings: false
     ]
-    mock.expect :get_operation, job_grpc_done, [ops_name, Hash]
+    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
     bigtable.service.mocked_instances = mock
 
     job = app_profile.save
@@ -117,7 +103,7 @@ describe Google::Cloud::Bigtable::AppProfile, :save, :mock_bigtable do
       update_mask,
       ignore_warnings: true
     ]
-    mock.expect :get_operation, job_grpc_done, [ops_name, Hash]
+    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
     bigtable.service.mocked_instances = mock
 
     job = app_profile.save(ignore_warnings: true)

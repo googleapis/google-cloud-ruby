@@ -190,6 +190,38 @@ class MockBigtable < Minitest::Spec
     Google::Bigtable::Admin::V2::ListAppProfilesResponse.new app_profiles: arr
   end
 
+  def backup_grpc instance_id,
+                  cluster_id,
+                  backup_id,
+                  source_table_id,
+                  expire_time,
+                  start_time: nil,
+                  end_time: nil,
+                  size_bytes: 123456,
+                  state: :READY
+    now = Time.now.round 0
+    start_time ||= now + 60
+    end_time ||= now + 120
+
+    Google::Bigtable::Admin::V2::Backup.new(
+      name: backup_path(instance_id, cluster_id, backup_id),
+      source_table: table_path(instance_id, source_table_id),
+      expire_time: expire_time,
+      start_time: start_time,
+      end_time: end_time,
+      size_bytes: size_bytes,
+      state: state
+    )
+  end
+
+  def backups_grpc count: 2, expire_time: (Time.now + 60 * 60 * 7)
+    expire_time = Time.now.round(0) + 60 * 60 * 7
+    arr = Array.new(count) do |i|
+      backup_grpc "my-instance", "my-cluster", "my-backup-#{i}", "my-source-table", expire_time
+    end
+    Google::Bigtable::Admin::V2::ListBackupsResponse.new backups: arr
+  end
+
   def project_path
     Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.project_path(project_id)
   end
@@ -241,13 +273,47 @@ class MockBigtable < Minitest::Spec
     )
   end
 
+  def backup_path instance_id, cluster_id, backup_id
+    Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.backup_path(
+      project_id,
+      instance_id,
+      cluster_id,
+      backup_id
+    )
+  end
+
   def paged_enum_struct response
     OpenStruct.new(page: OpenStruct.new(response: response))
   end
 
-# A microseconds integer rounded to the nearest millisecond. For example: `1564257960168000`.
+  # A microseconds integer rounded to the nearest millisecond. For example: `1564257960168000`.
   def timestamp_micros
     (Time.now.to_f * 1000000).round(-3)
+  end
+
+  def operation_pending_grpc ops_name, metadata_type_url
+    Google::Longrunning::Operation.new(
+      name: ops_name,
+      metadata: Google::Protobuf::Any.new(
+        type_url: metadata_type_url,
+        value: ""
+      )
+    )
+  end
+
+  def operation_done_grpc ops_name, metadata_type_url, metadata_value_grpc, response_type_url, response_value_grpc
+    Google::Longrunning::Operation.new(
+      name: ops_name,
+      metadata: Google::Protobuf::Any.new(
+        type_url: metadata_type_url,
+        value: metadata_value_grpc.to_proto
+      ),
+      done: true,
+      response: Google::Protobuf::Any.new(
+        type_url: response_type_url,
+        value: response_value_grpc.to_proto
+      )
+    )
   end
 end
 
