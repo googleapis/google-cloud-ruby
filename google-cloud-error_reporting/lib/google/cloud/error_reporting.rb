@@ -291,11 +291,8 @@ module Google
 
   # Aliases for compatibility with older spellings.
   # @private
-  class Devtools
+  module Devtools
     # @private
-    class Clouderrorreporting
-      # @private
-      V1beta1 = ::Google::Cloud::ErrorReporting::V1beta1
-    end
+    Clouderrorreporting = ::Google::Cloud::ErrorReporting unless const_defined? :Clouderrorreporting
   end
 end
