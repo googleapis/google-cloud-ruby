@@ -47,7 +47,7 @@ describe Google::Cloud::PubSub, :pubsub do
   end
 
   it "should raise when endpoint is not the Pub/Sub service" do
-    pubsub_invalid_endpoint = Google::Cloud::Pubsub.new endpoint: "example.com"
+    pubsub_invalid_endpoint = Google::Cloud::PubSub.new endpoint: "example.com"
     expect { pubsub_invalid_endpoint.topics }.must_raise Google::Cloud::UnimplementedError
   end
 
