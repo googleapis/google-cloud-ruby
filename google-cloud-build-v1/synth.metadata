@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "f8378095fa3814db457a7533e6d643476f0bf12e"
+        "sha": "cbbc77e65f90746b606f464269f99bb83d2e4099"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "796aa1fbd863a217a1935db1b4c2e9ea5a204b4b",
-        "internalRef": "318184637"
+        "sha": "17edd4b49024f85db4d543e34f541404b8a5fbaf",
+        "internalRef": "321573910"
       }
     }
   ],
@@ -26,5 +26,40 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-build-v1.gemspec",
+    "lib/google-cloud-build-v1.rb",
+    "lib/google/cloud/build/v1.rb",
+    "lib/google/cloud/build/v1/cloud_build.rb",
+    "lib/google/cloud/build/v1/cloud_build/client.rb",
+    "lib/google/cloud/build/v1/cloud_build/credentials.rb",
+    "lib/google/cloud/build/v1/cloud_build/operations.rb",
+    "lib/google/cloud/build/v1/version.rb",
+    "lib/google/devtools/cloudbuild/v1/cloudbuild_pb.rb",
+    "lib/google/devtools/cloudbuild/v1/cloudbuild_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/devtools/cloudbuild/v1/cloudbuild.rb",
+    "proto_docs/google/longrunning/operations.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/duration.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/rpc/status.rb",
+    "test/google/cloud/build/v1/cloud_build_operations_test.rb",
+    "test/google/cloud/build/v1/cloud_build_test.rb",
+    "test/helper.rb"
   ]
 }
