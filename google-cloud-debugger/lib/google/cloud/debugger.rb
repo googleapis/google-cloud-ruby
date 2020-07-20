@@ -249,4 +249,14 @@ module Google
       end
     end
   end
+
+  # Aliases for compatibility with older spellings.
+  # @private
+  module Devtools
+    # @private
+    module Clouddebugger
+      # @private
+      V2 = ::Google::Cloud::Debugger::V2
+    end
+  end
 end
