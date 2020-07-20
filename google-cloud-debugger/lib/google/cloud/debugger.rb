@@ -254,9 +254,6 @@ module Google
   # @private
   module Devtools
     # @private
-    module Clouddebugger
-      # @private
-      V2 = ::Google::Cloud::Debugger::V2
-    end
+    Clouddebugger = ::Google::Cloud::Debugger unless const_defined? :Clouddebugger
   end
 end
