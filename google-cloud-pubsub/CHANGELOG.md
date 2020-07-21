@@ -1,5 +1,11 @@
 # Release History
 
+### 1.9.0 / 2020-07-21
+
+#### Features
+
+* Add support for server-side flow control
+
 ### 1.8.0 / 2020-06-29
 
 #### Features
