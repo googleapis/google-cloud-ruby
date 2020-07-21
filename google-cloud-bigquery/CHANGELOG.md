@@ -1,5 +1,11 @@
 # Release History
 
+### 1.21.2 / 2020-07-21
+
+#### Documentation
+
+* Update Data#each samples
+
 ### 1.21.1 / 2020-05-28
 
 #### Documentation
