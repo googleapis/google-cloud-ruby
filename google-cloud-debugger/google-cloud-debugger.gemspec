@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "binding_of_caller", "~> 0.7"
   gem.add_dependency "google-cloud-core", "~> 1.5"
   gem.add_dependency "google-cloud-debugger-v2", "~> 0.0"
-  gem.add_dependency "google-cloud-logging", "~> 1.0"
+  gem.add_dependency "google-cloud-logging", "~> 2.0"
   gem.add_dependency "stackdriver-core", "~> 1.3"
   gem.add_dependency "concurrent-ruby", "~> 1.1"
 
