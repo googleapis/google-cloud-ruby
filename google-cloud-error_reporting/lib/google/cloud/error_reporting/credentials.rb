@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/error_reporting/v1beta1/credentials"
+require "google/cloud/error_reporting/v1beta1/report_errors_service/credentials"
 
 module Google
   module Cloud
@@ -37,7 +37,7 @@ module Google
       #
       #   error_reporting.project_id #=> "my-project"
       #
-      class Credentials < Google::Cloud::ErrorReporting::V1beta1::Credentials
+      class Credentials < Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::Credentials
       end
     end
   end

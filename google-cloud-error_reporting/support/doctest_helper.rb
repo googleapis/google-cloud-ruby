@@ -68,27 +68,18 @@ end
 
 YARD::Doctest.configure do |doctest|
   ##
-  # SKIP
-  #
-
-  # Skip all GAPIC for now
-  doctest.skip "Google::Cloud::ErrorReporting::V1beta1::ErrorGroupServiceClient"
-  doctest.skip "Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient"
-  doctest.skip "Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient"
-
-  ##
   # BEFORE (mocking)
   #
 
   doctest.before "Google::Cloud#error_reporting" do
     mock_error_reporting do |mock|
-      mock.expect :report_error_event, nil, [String, Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
+      mock.expect :report_error_event, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud.error_reporting" do
     mock_error_reporting do |mock|
-      mock.expect :report_error_event, nil, [String, Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
+      mock.expect :report_error_event, nil, [Hash]
     end
   end
 
@@ -98,13 +89,13 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::ErrorReporting::ErrorEvent" do
     mock_error_reporting do |mock|
-      mock.expect :report_error_event, nil, [String, Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
+      mock.expect :report_error_event, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::ErrorReporting::Project" do
     mock_error_reporting do |mock|
-      mock.expect :report_error_event, nil, [String, Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
+      mock.expect :report_error_event, nil, [Hash]
     end
   end
 
@@ -112,7 +103,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::ErrorReporting::Service" do
     mock_error_reporting do |mock|
-      mock.expect :report_error_event, nil, [String, Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
+      mock.expect :report_error_event, nil, [Hash]
     end
   end
 end

@@ -23,8 +23,7 @@ module Google
       # service.
       #
       # Google::Cloud::ErrorReporting::ErrorEvent is able to be transformed
-      # into
-      # {Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent}
+      # into the `Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent`
       # gRPC structure. Once an error event is reported, the GCP
       # Stackdriver ErrorReporting service is able to parse the message and
       # backtrace, then group the error events by content.
@@ -119,13 +118,10 @@ module Google
 
         ##
         # Build a new ErrorEvent from a
-        # Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent
-        # object.
+        # `Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent` object.
         #
-        # @param [
-        #   Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
-        #   grpc A
-        #   Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent
+        # @param [Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent]
+        #   grpc A `Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent`
         #   object
         #
         # @return [ErrorEvent] A new ErrorEvent instance derived from given grpc
@@ -233,10 +229,10 @@ module Google
         ##
         # Convert ErrorEvent object to gRPC struct.
         #
-        # @return [Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
+        # @return [Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent]
         #   gRPC struct that represent an ErrorEvent.
         def to_grpc
-          Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent.new(
+          Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent.new(
             event_time: event_time_grpc,
             message: message.to_s,
             service_context: service_context_grpc,
@@ -259,11 +255,11 @@ module Google
 
         ##
         # @private Formats the service_name and service_version as a
-        # Google::Devtools::Clouderrorreporting::V1beta1::ServiceContext.
+        # Google::Cloud::ErrorReporting::V1beta1::ServiceContext.
         #
         def service_context_grpc
           return nil if !service_name && !service_version
-          Devtools::Clouderrorreporting::V1beta1::ServiceContext.new(
+          Google::Cloud::ErrorReporting::V1beta1::ServiceContext.new(
             service: service_name.to_s,
             version: service_version.to_s
           )
@@ -271,12 +267,12 @@ module Google
 
         ##
         # @private Formats the http request context as a
-        # Google::Devtools::Clouderrorreporting::V1beta1::HttpRequestContext
+        # Google::Cloud::ErrorReporting::V1beta1::HttpRequestContext
         #
         def http_request_grpc
           return nil if !http_method && !http_url && !http_user_agent &&
                         !http_referrer && !http_status && !http_remote_ip
-          Devtools::Clouderrorreporting::V1beta1::HttpRequestContext.new(
+          Google::Cloud::ErrorReporting::V1beta1::HttpRequestContext.new(
             method: http_method.to_s,
             url: http_url.to_s,
             user_agent: http_user_agent.to_s,
@@ -288,11 +284,11 @@ module Google
 
         ##
         # @private Formats the source location as a
-        # Google::Devtools::Clouderrorreporting::V1beta1::SourceLocation
+        # Google::Cloud::ErrorReporting::V1beta1::SourceLocation
         #
         def source_location_grpc
           return nil if !file_path && !line_number && !function_name
-          Devtools::Clouderrorreporting::V1beta1::SourceLocation.new(
+          Google::Cloud::ErrorReporting::V1beta1::SourceLocation.new(
             file_path: file_path.to_s,
             line_number: line_number.to_i,
             function_name: function_name.to_s
@@ -301,13 +297,13 @@ module Google
 
         ##
         # @private Formats the error context info as a
-        # Google::Devtools::Clouderrorreporting::V1beta1::ErrorContext
+        # Google::Cloud::ErrorReporting::V1beta1::ErrorContext
         #
         def error_context_grpc
           http_request = http_request_grpc
           source_location = source_location_grpc
           return nil if !http_request && !source_location && !user
-          Devtools::Clouderrorreporting::V1beta1::ErrorContext.new(
+          Google::Cloud::ErrorReporting::V1beta1::ErrorContext.new(
             http_request: http_request,
             user: user.to_s,
             report_location: source_location

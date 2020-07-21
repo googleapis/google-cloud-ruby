@@ -16,7 +16,6 @@
 require "google/cloud/errors"
 require "google/cloud/error_reporting/version"
 require "google/cloud/error_reporting/v1beta1"
-require "google/gax/errors"
 require "uri"
 
 module Google
@@ -26,31 +25,27 @@ module Google
       # @private Represents the gRPC Error Reporting service, including all the
       #   API methods.
       class Service
-        attr_accessor :project, :credentials, :timeout, :client_config, :host
+        attr_accessor :project, :credentials, :timeout, :host
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, timeout: nil, client_config: nil,
-                       host: nil
+        def initialize project, credentials, timeout: nil, host: nil
           @project = project
           @credentials = credentials
           @timeout = timeout
-          @client_config = client_config || {}
-          @host = host || V1beta1::ReportErrorsServiceClient::SERVICE_ADDRESS
+          @host = host
         end
 
         def error_reporting
           return mocked_error_reporting if mocked_error_reporting
           @error_reporting ||= \
-            V1beta1::ReportErrorsServiceClient.new(
-              credentials: credentials,
-              timeout: timeout,
-              client_config: client_config,
-              service_address: service_address,
-              service_port: service_port,
-              lib_name: "gccl",
-              lib_version: Google::Cloud::ErrorReporting::VERSION
-            )
+            V1beta1::ReportErrorsService::Client.new do |config|
+              config.credentials = credentials if credentials
+              config.timeout = timeout if timeout
+              config.endpoint = host if host
+              config.lib_name = "gccl"
+              config.lib_version = Google::Cloud::ErrorReporting::VERSION
+            end
         end
         attr_accessor :mocked_error_reporting
 
@@ -81,32 +76,13 @@ module Google
 
           error_event_grpc = error_event.to_grpc
 
-          execute do
-            error_reporting.report_error_event project_path, error_event_grpc
-          end
+          error_reporting.report_error_event project_name: project_path, event: error_event_grpc
         end
 
         protected
 
-        def service_address
-          return nil if host.nil?
-          URI.parse("//#{host}").host
-        end
-
-        def service_port
-          return nil if host.nil?
-          URI.parse("//#{host}").port
-        end
-
         def project_path
-          V1beta1::ReportErrorsServiceClient.project_path project
-        end
-
-        def execute
-          yield
-        rescue Google::Gax::GaxError => e
-          # GaxError wraps BadStatus, but exposes it as #cause
-          raise Google::Cloud::Error.from_error(e.cause)
+          V1beta1::ReportErrorsService::Paths.project_path project: project
         end
       end
     end

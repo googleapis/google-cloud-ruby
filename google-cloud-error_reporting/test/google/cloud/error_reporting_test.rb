@@ -16,6 +16,9 @@
 require "helper"
 
 describe Google::Cloud::ErrorReporting, :mock_error_reporting do
+  let(:default_scopes) { ["https://www.googleapis.com/auth/cloud-platform"] }
+  let(:default_endpoint) { "clouderrorreporting.googleapis.com" }
+
   describe ".new" do
     let(:default_credentials) do
       creds = OpenStruct.new empty: true
@@ -42,7 +45,7 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
     it "uses provided project_id, credentials, service, and version" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "/path/to/a/keyfile"
-        _(scope).must_be_nil
+        _(scope).must_equal default_scopes
         "error_reporting-credentials"
       }
 
@@ -63,11 +66,10 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
 
     it "uses provided endpoint" do
       endpoint = "errorreporting-endpoint2.example.com"
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal default_credentials
         _(timeout).must_be :nil?
-        _(client_config).must_be :nil?
         _(host).must_equal endpoint
         OpenStruct.new project: project
       }
@@ -86,7 +88,7 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
     it "uses provided project (alias), keyfile (alias), service, and version" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "/path/to/a/keyfile"
-        _(scope).must_be_nil
+        _(scope).must_equal default_scopes
         "error_reporting-credentials"
       }
 
@@ -302,11 +304,6 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
       creds
     end
     let(:found_credentials) { "{}" }
-    let :error_reporting_client_config do
-      {"interfaces"=>
-        {"google.error_reporting.v1.ErrorReporting"=>
-          {"retry_codes"=>{"idempotent"=>["DEADLINE_EXCEEDED", "UNAVAILABLE"]}}}}
-    end
 
     after do
       Google::Cloud.configure.reset!
@@ -315,15 +312,14 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
     it "uses shared config for project and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
+        _(scope).must_equal default_scopes
         "error_reporting-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "error_reporting-credentials"
         _(timeout).must_be :nil?
-        _(client_config).must_be :nil?
-        _(host).must_be :nil?
+        _(host).must_equal default_endpoint
         OpenStruct.new project: project
       }
 
@@ -353,15 +349,14 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
     it "uses shared config for project_id and credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
+        _(scope).must_equal default_scopes
         "error_reporting-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "error_reporting-credentials"
         _(timeout).must_be :nil?
-        _(client_config).must_be :nil?
-        _(host).must_be :nil?
+        _(host).must_equal default_endpoint
         OpenStruct.new project: project
       }
 
@@ -391,15 +386,14 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
     it "uses error_reporting config for project and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
+        _(scope).must_equal default_scopes
         "error_reporting-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "error_reporting-credentials"
         _(timeout).must_equal 42
-        _(client_config).must_equal error_reporting_client_config
-        _(host).must_be :nil?
+        _(host).must_equal default_endpoint
         OpenStruct.new project: project
       }
 
@@ -410,7 +404,6 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
           config.project = "project-id"
           config.keyfile = "path/to/keyfile.json"
           config.timeout = 42
-          config.client_config = error_reporting_client_config
         end
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
@@ -430,11 +423,10 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
 
     it "uses error_reporting config for endpoint" do
       endpoint = "errorreporting-endpoint2.example.com"
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal default_credentials
         _(timeout).must_be :nil?
-        _(client_config).must_be :nil?
         _(host).must_equal endpoint
         OpenStruct.new project: project
       }
@@ -459,15 +451,14 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
     it "uses error_reporting config for project_id and credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
+        _(scope).must_equal default_scopes
         "error_reporting-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil, host: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "error_reporting-credentials"
         _(timeout).must_equal 42
-        _(client_config).must_equal error_reporting_client_config
-        _(host).must_be :nil?
+        _(host).must_equal default_endpoint
         OpenStruct.new project: project
       }
 
@@ -478,7 +469,6 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
           config.project_id = "project-id"
           config.credentials = "path/to/keyfile.json"
           config.timeout = 42
-          config.client_config = error_reporting_client_config
         end
 
         File.stub :file?, true, ["path/to/keyfile.json"] do

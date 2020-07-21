@@ -31,8 +31,8 @@ describe Google::Cloud::ErrorReporting, :error_reporting do
 
     # Query for error group
     project_id = Google::Cloud::ErrorReporting.default_reporter.error_reporting.project
-    formatted_project = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.project_path project_id
-    v1beta1 = Google::Devtools::Clouderrorreporting::V1beta1
+    formatted_project = @error_stats_vtk_client.project_path project: project_id
+    v1beta1 = Google::Cloud::ErrorReporting::V1beta1
     time_range = v1beta1::QueryTimeRange.new period: v1beta1::QueryTimeRange::Period::PERIOD_1_HOUR
     sort_order = v1beta1::ErrorGroupOrder::LAST_SEEN_DESC
     service_filter = v1beta1::ServiceContextFilter.new service: service_name,
@@ -40,7 +40,7 @@ describe Google::Cloud::ErrorReporting, :error_reporting do
 
     error_group_stats = nil
     wait_until do
-      response = @error_stats_vtk_client.list_group_stats formatted_project,
+      response = @error_stats_vtk_client.list_group_stats project_name: formatted_project,
                                                           time_range: time_range,
                                                           order: sort_order,
                                                           service_filter: service_filter
@@ -54,8 +54,8 @@ describe Google::Cloud::ErrorReporting, :error_reporting do
 
     error_event = nil
     wait_until do
-      response = @error_stats_vtk_client.list_events formatted_project,
-                                                     error_group_id
+      response = @error_stats_vtk_client.list_events project_name: formatted_project,
+                                                     group_id: error_group_id
       error_events = response.page.response.error_events
 
       error_event = error_events.find do |event|

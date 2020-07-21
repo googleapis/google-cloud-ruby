@@ -22,7 +22,9 @@ require "google/cloud/error_reporting"
 require "grpc"
 
 er_credentials = Google::Cloud::ErrorReporting::Credentials.default
-$error_stats_vtk_client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.new credentials: er_credentials
+$error_stats_vtk_client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new do |config|
+  config.credentials = er_credentials
+end
 
 Google::Cloud::ErrorReporting.configure do |config|
   error_callback = ->(error) { raise error }
