@@ -1,0 +1,9 @@
+{
+    "api_id": "analyticsadmin.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-analytics-admin-v1alpha/latest",
+    "distribution_name": "google-analytics-admin-v1alpha",
+    "language": "ruby",
+    "name_pretty": "Google Analytics Admin V1alpha API",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
