@@ -507,7 +507,7 @@ module Google
 
         def session_path instance_id, database_id, session_id
           V1::Spanner::Paths.session_path \
-            project: project, instance: instance_id, database: database_id, \
+            project: project, instance: instance_id, database: database_id,
             session: session_id
         end
 
