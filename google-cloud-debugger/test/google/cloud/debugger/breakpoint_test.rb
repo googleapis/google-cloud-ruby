@@ -18,7 +18,7 @@ require "helper"
 describe Google::Cloud::Debugger::Breakpoint, :mock_debugger do
   let(:breakpoint_hash) { random_breakpoint_hash }
   let(:breakpoint_grpc) {
-    Google::Devtools::Clouddebugger::V2::Breakpoint.new breakpoint_hash
+    Google::Cloud::Debugger::V2::Breakpoint.new breakpoint_hash
   }
   let(:breakpoint) {
     Google::Cloud::Debugger::Breakpoint.from_grpc breakpoint_grpc
@@ -105,7 +105,7 @@ describe Google::Cloud::Debugger::Breakpoint, :mock_debugger do
       timestamp = Time.parse "2014-10-02T15:01:23.045123456Z"
 
       grpc = breakpoint.to_grpc
-      _(grpc).must_be_kind_of Google::Devtools::Clouddebugger::V2::Breakpoint
+      _(grpc).must_be_kind_of Google::Cloud::Debugger::V2::Breakpoint
 
       _(grpc.id).must_equal "abc123"
       _(grpc.create_time.seconds).must_equal timestamp.to_i

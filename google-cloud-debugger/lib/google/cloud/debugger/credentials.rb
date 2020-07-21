@@ -12,9 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-require "google/cloud/debugger/v2/credentials"
-require "google/cloud/logging/credentials"
+require "google/cloud/debugger/v2/debugger/credentials"
 
 module Google
   module Cloud
@@ -38,9 +36,14 @@ module Google
       #
       #   debugger.project_id #=> "my-project"
       #
-      class Credentials < Google::Cloud::Debugger::V2::Credentials
-        SCOPE = (Google::Cloud::Debugger::V2::Credentials::SCOPE +
-                 Google::Cloud::Logging::Credentials::SCOPE).uniq.freeze
+      class Credentials < Google::Cloud::Debugger::V2::Debugger::Credentials
+        self.scope = [
+          "https://www.googleapis.com/auth/cloud-platform",
+          "https://www.googleapis.com/auth/cloud_debugger",
+          "https://www.googleapis.com/auth/logging.admin",
+          "https://www.googleapis.com/auth/logging.read",
+          "https://www.googleapis.com/auth/logging.write"
+        ]
       end
     end
   end

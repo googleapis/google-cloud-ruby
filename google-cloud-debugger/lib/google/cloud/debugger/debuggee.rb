@@ -28,7 +28,7 @@ module Google
       #
       # Represent a debuggee application. Contains information that identifies
       # debuggee applications from each other. Maps to gRPC struct
-      # {Google::Devtools::Clouddebugger::V2::Debuggee}.
+      # Google::Cloud::Debugger::V2::Debuggee.
       #
       # It also automatically loads source context information generated from
       # Cloud SDK. See [Stackdriver Debugger
@@ -111,10 +111,10 @@ module Google
 
         ##
         # Convert this debuggee into a gRPC
-        # Google::Devtools::Clouddebugger::V2::Debuggee struct.
+        # Google::Cloud::Debugger::V2::Debuggee struct.
         def to_grpc
           source_context = source_context_from_json_file "source-context.json"
-          Google::Devtools::Clouddebugger::V2::Debuggee.new(
+          Google::Cloud::Debugger::V2::Debuggee.new(
             id: id.to_s,
             project: project_id_for_request_arg.to_s,
             description: description.to_s,
@@ -179,7 +179,7 @@ module Google
         # project ID if available (and if it matches the project set in the
         # configuration). Otherwise, use the configured project.
         def project_id_for_request_arg
-          if project_id == @env.project_id
+          if project_id == @env.lookup_metadata("project", "project-id")
             numeric_id = @env.numeric_project_id
             return numeric_id.to_s if numeric_id
           end

@@ -18,12 +18,10 @@ require "helper"
 describe Google::Cloud::Debugger::Breakpoint::SourceLocation, :mock_debugger do
   let(:source_location_hash) { random_source_location_hash }
   let(:source_location_grpc) {
-    Google::Devtools::Clouddebugger::V2::SourceLocation.new \
-      source_location_hash
+    Google::Cloud::Debugger::V2::SourceLocation.new source_location_hash
   }
   let(:source_loc) {
-    Google::Cloud::Debugger::Breakpoint::SourceLocation.from_grpc \
-      source_location_grpc
+    Google::Cloud::Debugger::Breakpoint::SourceLocation.from_grpc source_location_grpc
   }
 
   it "knows its attributes" do

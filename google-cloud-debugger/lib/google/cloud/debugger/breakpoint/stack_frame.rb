@@ -55,7 +55,7 @@ module Google
 
           ##
           # @private New Google::Cloud::Debugger::Breakpoint::SourceLocation
-          # from a Google::Devtools::Clouddebugger::V2::SourceLocation object.
+          # from a Google::Cloud::Debugger::V2::SourceLocation object.
           def self.from_grpc grpc
             new.tap do |o|
               o.function = grpc.function
@@ -76,10 +76,10 @@ module Google
 
           ##
           # @private Exports the StackFrame to a
-          # Google::Devtools::Clouddebugger::V2::StackFrame object.
+          # Google::Cloud::Debugger::V2::StackFrame object.
           def to_grpc
             return nil if empty?
-            Google::Devtools::Clouddebugger::V2::StackFrame.new(
+            Google::Cloud::Debugger::V2::StackFrame.new(
               function: function.to_s,
               location: location.to_grpc,
               arguments: arguments_to_grpc,
@@ -91,14 +91,14 @@ module Google
 
           ##
           # @private Exports the StackFrame arguments to an array of
-          # Google::Devtools::Clouddebugger::V2::Variable objects.
+          # Google::Cloud::Debugger::V2::Variable objects.
           def arguments_to_grpc
             arguments.nil? ? [] : arguments.map(&:to_grpc)
           end
 
           ##
           # @private Exports the StackFrame locals to an array of
-          # Google::Devtools::Clouddebugger::V2::Variable objects.
+          # Google::Cloud::Debugger::V2::Variable objects.
           def locals_to_grpc
             locals.nil? ? [] : locals.map(&:to_grpc)
           end

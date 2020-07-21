@@ -67,8 +67,6 @@ module Google
       #   * `https://www.googleapis.com/auth/logging.admin`
       #
       # @param [Integer] timeout Default timeout to use in requests. Optional.
-      # @param [Hash] client_config A hash of values to override the default
-      #   behavior of the API client. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
       # @param [String] project Project identifier for the Stackdriver Debugger
@@ -84,15 +82,20 @@ module Google
       #   debugger = Google::Cloud::Debugger.new
       #   debugger.start
       #
-      def self.new project_id: nil, credentials: nil, service_name: nil,
-                   service_version: nil, scope: nil, timeout: nil,
-                   client_config: nil, endpoint: nil, project: nil, keyfile: nil
+      def self.new project_id: nil,
+                   credentials: nil,
+                   service_name: nil,
+                   service_version: nil,
+                   scope: nil,
+                   timeout: nil,
+                   endpoint: nil,
+                   project: nil,
+                   keyfile: nil
         project_id      ||= (project || default_project_id)
         service_name    ||= default_service_name
         service_version ||= default_service_version
         scope           ||= configure.scope
         timeout         ||= configure.timeout
-        client_config   ||= configure.client_config
         endpoint        ||= configure.endpoint
 
         service_name = service_name.to_s
@@ -114,14 +117,8 @@ module Google
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        Debugger::Project.new(
-          Debugger::Service.new(
-            project_id, credentials,
-            host: endpoint, timeout: timeout, client_config: client_config
-          ),
-          service_name: service_name,
-          service_version: service_version
-        )
+        service = Debugger::Service.new project_id, credentials, host: endpoint, timeout: timeout
+        Debugger::Project.new service, service_name: service_name, service_version: service_version
       end
 
       # rubocop:enable all
@@ -147,8 +144,6 @@ module Google
       # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       # * `timeout` - (Integer) Default timeout to use in requests.
-      # * `client_config` - (Hash) A hash of values to override the default
-      #   behavior of the API client.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
       # * `allow_mutating_methods` - (boolean) Whether expressions and
@@ -253,5 +248,12 @@ module Google
         evaluator.allow_mutating_methods!(&block)
       end
     end
+  end
+
+  # Aliases for compatibility with older spellings.
+  # @private
+  module Devtools
+    # @private
+    Clouddebugger = ::Google::Cloud::Debugger unless const_defined? :Clouddebugger
   end
 end

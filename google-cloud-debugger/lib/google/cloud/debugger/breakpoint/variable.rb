@@ -408,7 +408,7 @@ module Google
 
           ##
           # @private New Google::Cloud::Debugger::Breakpoint::Variable
-          # from a Google::Devtools::Clouddebugger::V2::Variable object.
+          # from a Google::Cloud::Debugger::V2::Variable object.
           def self.from_grpc grpc
             return new if grpc.nil?
             new.tap do |o|
@@ -423,7 +423,7 @@ module Google
 
           ##
           # @private New array of Google::Cloud::Debugger::Breakpoint::Variable
-          # from an array of Google::Devtools::Clouddebugger::V2::Variable
+          # from an array of Google::Cloud::Debugger::V2::Variable
           # objects.
           def self.from_grpc_list grpc_list
             return [] if grpc_list.nil?
@@ -458,10 +458,10 @@ module Google
 
           ##
           # Exports the Variable to a
-          # Google::Devtools::Clouddebugger::V2::Variable object.
+          # Google::Cloud::Debugger::V2::Variable object.
           def to_grpc
             return nil if empty?
-            Google::Devtools::Clouddebugger::V2::Variable.new(
+            Google::Cloud::Debugger::V2::Variable.new(
               name: name.to_s,
               value: value.to_s,
               type: type.to_s,
@@ -584,7 +584,7 @@ module Google
 
           ##
           # @private Exports the Variable members to an array of
-          # Google::Devtools::Clouddebugger::V2::Variable objects.
+          # Google::Cloud::Debugger::V2::Variable objects.
           def members_to_grpc
             members.nil? ? nil : members.map(&:to_grpc)
           end

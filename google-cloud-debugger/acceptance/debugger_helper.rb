@@ -42,7 +42,9 @@ module Acceptance
       debugger_credentials = @debugger.service.credentials
       debugger_channel_cred = GRPC::Core::ChannelCredentials.new.compose \
         GRPC::Core::CallCredentials.new debugger_credentials.client.updater_proc
-      @vtk_debugger_client = Google::Cloud::Debugger::V2::Debugger2Client.new credentials: debugger_channel_cred
+      @vtk_debugger_client = Google::Cloud::Debugger::V2::Debugger::Client.new do |config|
+        config.credentials = debugger_channel_cred
+      end
 
       @debugger.start
 
@@ -81,7 +83,7 @@ module Acceptance
         "expressions" => ["local_var"]
       }
 
-      Google::Devtools::Clouddebugger::V2::Breakpoint.new breakpoint_hash
+      Google::Cloud::Debugger::V2::Breakpoint.new breakpoint_hash
     end
 
     ##
@@ -105,7 +107,7 @@ module Acceptance
         "expressions" => ["local_var"]
       }
 
-      Google::Devtools::Clouddebugger::V2::Breakpoint.new breakpoint_hash
+      Google::Cloud::Debugger::V2::Breakpoint.new breakpoint_hash
     end
 
     ##
@@ -120,7 +122,9 @@ module Acceptance
 
       breakpoint = sample_snappoint
 
-      response = @vtk_debugger_client.set_breakpoint debuggee_id, breakpoint, @agent_version
+      response = @vtk_debugger_client.set_breakpoint debuggee_id: debuggee_id,
+                                                     breakpoint: breakpoint,
+                                                     client_version: @agent_version
       response.breakpoint.id
     end
 
@@ -136,7 +140,9 @@ module Acceptance
 
       breakpoint = sample_logpoint token
 
-      response = @vtk_debugger_client.set_breakpoint debuggee_id, breakpoint, @agent_version
+      response = @vtk_debugger_client.set_breakpoint debuggee_id: debuggee_id,
+                                                     breakpoint: breakpoint,
+                                                     client_version: @agent_version
       response.breakpoint.id
     end
 

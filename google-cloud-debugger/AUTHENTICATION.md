@@ -76,7 +76,8 @@ The environment variables that google-cloud-debugger checks for project ID are:
 1. `DEBUGGER_PROJECT`
 2. `GOOGLE_CLOUD_PROJECT`
 
-The environment variables that google-cloud-debugger checks for credentials are configured on {Google::Cloud::Debugger::V2::Credentials}:
+The environment variables that google-cloud-debugger checks for credentials are
+configured on `Google::Cloud::Debugger::V2::Debugger::Credentials`:
 
 1. `DEBUGGER_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `DEBUGGER_KEYFILE` - Path to JSON file, or JSON contents

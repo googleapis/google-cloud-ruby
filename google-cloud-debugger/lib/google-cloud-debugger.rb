@@ -48,8 +48,6 @@ module Google
     #   * `https://www.googleapis.com/auth/logging.admin`
     #
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config A hash of values to override the default
-    #   behavior of the API client. Optional.
     #
     # @return [Google::Cloud::Debugger::Project]
     #
@@ -68,14 +66,12 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   debugger = gcloud.debugger scope: platform_scope
     #
-    def debugger service_name: nil, service_version: nil, scope: nil,
-                 timeout: nil, client_config: nil
+    def debugger service_name: nil, service_version: nil, scope: nil, timeout: nil
       Google::Cloud.debugger @project, @keyfile,
                              service_name: service_name,
                              service_version: service_version,
                              scope: scope,
-                             timeout: (timeout || @timeout),
-                             client_config: client_config
+                             timeout: (timeout || @timeout)
     end
 
     ##
@@ -105,8 +101,6 @@ module Google
     #   * `https://www.googleapis.com/auth/logging.admin`
     #
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config A hash of values to override the default
-    #   behavior of the API client. Optional.
     #
     # @return [Google::Cloud::Debugger::Project]
     #
@@ -118,15 +112,13 @@ module Google
     #   debugger.start
     #
     def self.debugger project_id = nil, credentials = nil, service_name: nil,
-                      service_version: nil, scope: nil, timeout: nil,
-                      client_config: nil
+                      service_version: nil, scope: nil, timeout: nil
       require "google/cloud/debugger"
       Google::Cloud::Debugger.new project_id: project_id,
                                   credentials: credentials,
                                   service_name: service_name,
                                   service_version: service_version,
-                                  scope: scope, timeout: timeout,
-                                  client_config: client_config
+                                  scope: scope, timeout: timeout
     end
   end
 end
@@ -160,6 +152,13 @@ Google::Cloud.configure.add_config! :debugger do |config|
   default_version = Google::Cloud::Config.deferred do
     ENV["DEBUGGER_SERVICE_VERSION"]
   end
+  default_scopes = [
+    "https://www.googleapis.com/auth/cloud-platform",
+    "https://www.googleapis.com/auth/cloud_debugger",
+    "https://www.googleapis.com/auth/logging.admin",
+    "https://www.googleapis.com/auth/logging.read",
+    "https://www.googleapis.com/auth/logging.write"
+  ]
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
@@ -173,10 +172,9 @@ Google::Cloud.configure.add_config! :debugger do |config|
                     match: String, allow_nil: true
   config.add_field! :app_root, nil, match: String
   config.add_field! :root, nil, match: String
-  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :scope, default_scopes, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
-  config.add_field! :client_config, nil, match: Hash
-  config.add_field! :endpoint, nil, match: String
+  config.add_field! :endpoint, "clouddebugger.googleapis.com", match: String
   config.add_field! :allow_mutating_methods, false
   config.add_field! :evaluation_time_limit, 0.05, match: Numeric
   config.add_field! :on_error, nil, match: Proc

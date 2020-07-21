@@ -18,7 +18,7 @@ require "helper"
 describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
   let(:breakpoint_hash) { random_breakpoint_hash }
   let(:breakpoint_grpc) {
-    Google::Devtools::Clouddebugger::V2::Breakpoint.new breakpoint_hash
+    Google::Cloud::Debugger::V2::Breakpoint.new breakpoint_hash
   }
   let(:snappoint) {
     Google::Cloud::Debugger::Snappoint.from_grpc breakpoint_grpc

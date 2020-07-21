@@ -18,12 +18,10 @@ require "helper"
 describe Google::Cloud::Debugger::Breakpoint::StackFrame, :mock_debugger do
   let(:stack_frame_hash) { random_stack_frame_hash }
   let(:stack_frame_grpc) {
-    Google::Devtools::Clouddebugger::V2::StackFrame.new \
-      stack_frame_hash
+    Google::Cloud::Debugger::V2::StackFrame.new stack_frame_hash
   }
   let(:stack_frame) {
-    Google::Cloud::Debugger::Breakpoint::StackFrame.from_grpc \
-      stack_frame_grpc
+    Google::Cloud::Debugger::Breakpoint::StackFrame.from_grpc stack_frame_grpc
   }
 
   describe ".from_grpc" do

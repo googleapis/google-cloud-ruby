@@ -99,7 +99,7 @@ describe Google::Cloud::Debugger::Debuggee, :mock_debugger do
 
   describe "#compute_uniquifier" do
     let(:partial_debuggee) {
-      Google::Devtools::Clouddebugger::V2::Debuggee.new(
+      Google::Cloud::Debugger::V2::Debuggee.new(
         id: debuggee_id,
         project: project
       )

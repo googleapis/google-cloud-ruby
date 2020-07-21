@@ -18,7 +18,7 @@ require "helper"
 describe Google::Cloud::Debugger::Logpoint, :mock_debugger do
   let(:breakpoint_hash) { random_breakpoint_hash }
   let(:breakpoint_grpc) {
-    Google::Devtools::Clouddebugger::V2::Breakpoint.new breakpoint_hash
+    Google::Cloud::Debugger::V2::Breakpoint.new breakpoint_hash
   }
   let(:logpoint) {
     breakpoint_hash[:action] = :LOG

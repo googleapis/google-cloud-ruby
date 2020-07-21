@@ -74,9 +74,9 @@ YARD::Doctest.configure do |doctest|
   #
 
   # Skip all GAPIC and GRPC classes
-  doctest.skip "Google::Cloud::Debugger::V2::Controller2Client"
-  doctest.skip "Google::Cloud::Debugger::V2::Debugger2Client"
-  doctest.skip "Google::Devtools::Clouddebugger::V2"
+  doctest.skip "Google::Cloud::Debugger::V2::Controller::Client"
+  doctest.skip "Google::Cloud::Debugger::V2::Debugger::Client"
+  doctest.skip "Google::Cloud::Debugger::V2"
 
   # Skip methods that work only during evaluation
   doctest.skip "Google::Cloud::Debugger.allow_mutating_methods!"

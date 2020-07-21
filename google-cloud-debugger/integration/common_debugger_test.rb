@@ -46,7 +46,9 @@ describe Google::Cloud::Debugger, :debugger do
       # Send request to trigger debugger
       send_request "test_debugger"
 
-      response = @vtk_debugger_client.get_breakpoint(debuggee_id, breakpoint_id, agent_version)
+      response = @vtk_debugger_client.get_breakpoint debuggee_id: debuggee_id,
+                                                     breakpoint_id: breakpoint_id,
+                                                     client_version: agent_version
       breakpoint = response.breakpoint
 
       breakpoint.is_final_state
