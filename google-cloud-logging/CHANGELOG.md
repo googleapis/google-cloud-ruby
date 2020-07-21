@@ -4,8 +4,8 @@
 
 This is a major update that removes the "low-level" client interface code, and
 instead adds the new `google-cloud-logging-v2` gem as a dependency.
-This is a rewritten low-level client produced by a next-generation client code
-generator, with improved performance and stability.
+The new dependency is a rewritten low-level client, produced by a next-
+generation client code generator, with improved performance and stability.
 
 This change should have no effect on the high-level interface that most users
 will use. The one exception is that the (mostly undocumented) `client_config`
