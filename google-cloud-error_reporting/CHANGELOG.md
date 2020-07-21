@@ -17,10 +17,11 @@ Substantial changes have been made in the low-level interfaces, however. If you
 are using the low-level classes under the `Google::Cloud::ErrorReporting::V1beta1`
 module, please review the docs for the new `google-cloud-error_reporting-v1beta1`
 gem. In particular:
+
 * Some classes have been renamed, notably the client class itself.
 * The client constructor takes a configuration block instead of configuration
   keyword arguments.
-* All method arguments are now keyword arguments.
+* All RPC method arguments are now keyword arguments.
 
 ### 0.35.2 / 2020-06-08
 
