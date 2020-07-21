@@ -4,10 +4,7 @@
 
 #### Features
 
-* Add support for server-side flow control ([#6992](https://www.github.com/googleapis/google-cloud-ruby/issues/6992))
-  * chore: Remove note that ordering keys is not yet released.
-  * Revert "chore: Remove note that ordering keys is not yet released."
-  * feat: Add support for server-side flow control
+* Add support for server-side flow control
 
 ### 1.8.0 / 2020-06-29
 
