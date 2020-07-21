@@ -142,7 +142,7 @@ module Google
 
             ##
             # @private New Instance::Config::List from a
-            # {Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse}
+            # `Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse`
             # object.
             def self.from_grpc grpc, service, max = nil
               configs = List.new(Array(grpc.instance_configs).map do |config|

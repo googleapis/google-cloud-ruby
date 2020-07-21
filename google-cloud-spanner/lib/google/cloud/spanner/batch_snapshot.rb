@@ -663,17 +663,15 @@ module Google
         def self.load data, service: nil, query_options: nil
           data = JSON.parse data, symbolize_names: true unless data.is_a? Hash
 
-          session_grpc = V1::Session.decode \
-            Base64.decode64(data[:session])
-          transaction_grpc = V1::Transaction.decode \
-            Base64.decode64(data[:transaction])
+          session_grpc = V1::Session.decode Base64.decode64(data[:session])
+          transaction_grpc = V1::Transaction.decode Base64.decode64(data[:transaction])
 
           from_grpc transaction_grpc, Session.from_grpc(session_grpc, service, query_options: query_options)
         end
 
         ##
         # @private Creates a new BatchSnapshot instance from a
-        # {Google::Cloud::Spanner::V1::Transaction}.
+        # `Google::Cloud::Spanner::V1::Transaction`.
         def self.from_grpc grpc, session
           new grpc, session
         end

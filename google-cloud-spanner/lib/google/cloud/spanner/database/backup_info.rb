@@ -94,7 +94,7 @@ module Google
 
           ##
           # @private Creates a new Database::BackupInfo instance from a
-          # {Google::Cloud::Spanner::Admin::Database::V1::BackupInfo}.
+          # `Google::Cloud::Spanner::Admin::Database::V1::BackupInfo`.
           def self.from_grpc grpc
             new grpc
           end

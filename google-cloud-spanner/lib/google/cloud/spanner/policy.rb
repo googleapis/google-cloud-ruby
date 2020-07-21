@@ -159,7 +159,7 @@ module Google
         end
 
         ##
-        # @private Convert the Policy to a Google::Iam::V1::Policy object.
+        # @private Convert the Policy to a `Google::Iam::V1::Policy` object.
         def to_grpc
           Google::Iam::V1::Policy.new(
             etag: etag,
@@ -174,7 +174,7 @@ module Google
         end
 
         ##
-        # @private New Policy from a Google::Iam::V1::Policy object.
+        # @private New Policy from a `Google::Iam::V1::Policy` object.
         def self.from_grpc grpc
           roles = grpc.bindings.each_with_object({}) do |binding, memo|
             memo[binding.role] = binding.members.to_a

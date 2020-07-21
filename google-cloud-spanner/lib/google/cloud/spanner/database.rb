@@ -247,10 +247,10 @@ module Google
         #   response.
         #
         #   The response returns a list of
-        #   {Google::Longrunning::Operation long-running operations} whose names
+        #   `Google::Longrunning::Operation` long-running operations whose names
         #   are prefixed by a database name within the specified instance.
         #   The long-running operation
-        #   {Google::Longrunning::Operation#metadata metadata} field type
+        #   `Google::Longrunning::Operation#metadata` metadata field type
         #   `metadata.type_url` describes the type of the metadata.
         #
         #   The filter expression must specify the field name,
@@ -571,20 +571,22 @@ module Google
         #
         #   The permissions that can be checked on a database are:
         #
-        #   * pubsub.databases.create
-        #   * pubsub.databases.list
-        #   * pubsub.databases.update
-        #   * pubsub.databases.updateDdl
-        #   * pubsub.databases.get
-        #   * pubsub.databases.getDdl
-        #   * pubsub.databases.getIamPolicy
-        #   * pubsub.databases.setIamPolicy
-        #   * pubsub.databases.beginReadOnlyTransaction
-        #   * pubsub.databases.beginOrRollbackReadWriteTransaction
-        #   * pubsub.databases.read
-        #   * pubsub.databases.select
-        #   * pubsub.databases.write
-        #   * pubsub.databases.drop
+        #  * spanner.databases.beginPartitionedDmlTransaction
+        #  * spanner.databases.create
+        #  * spanner.databases.createBackup
+        #  * spanner.databases.list
+        #  * spanner.databases.update
+        #  * spanner.databases.updateDdl
+        #  * spanner.databases.get
+        #  * spanner.databases.getDdl
+        #  * spanner.databases.getIamPolicy
+        #  * spanner.databases.setIamPolicy
+        #  * spanner.databases.beginReadOnlyTransaction
+        #  * spanner.databases.beginOrRollbackReadWriteTransaction
+        #  * spanner.databases.read
+        #  * spanner.databases.select
+        #  * spanner.databases.write
+        #  * spanner.databases.drop
         #
         # @return [Array<Strings>] The permissions that have access.
         #
@@ -609,7 +611,7 @@ module Google
 
         ##
         # @private Creates a new Database instance from a
-        # {Google::Cloud::Spanner::Admin::Database::V1::Database}.
+        # `Google::Cloud::Spanner::Admin::Database::V1::Database`.
         def self.from_grpc grpc, service
           new grpc, service
         end

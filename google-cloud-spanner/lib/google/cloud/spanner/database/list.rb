@@ -142,7 +142,7 @@ module Google
 
           ##
           # @private New Database::List from a
-          # {Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesResponse}
+          # `Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesResponse`
           # object.
           def self.from_grpc grpc, service, instance_id, max = nil
             databases = List.new(Array(grpc.databases).map do |database|

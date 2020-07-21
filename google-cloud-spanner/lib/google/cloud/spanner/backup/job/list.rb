@@ -146,7 +146,7 @@ module Google
             # @private
             #
             # New Backup::Job::List from a
-            # Google::Gax::PagedEnumerable<Google::Longrunning::Operation>
+            # `Gapic::PagedEnumerable<Google::Longrunning::Operation>`
             # object. Operation object is a backup operation.
             #
             def self.from_grpc grpc, service
