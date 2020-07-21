@@ -1,5 +1,15 @@
 # Release History
 
+### 0.37.0 / 2020-07-21
+
+#### ⚠ BREAKING CHANGES
+
+* **debugger:** Use new generated client classes
+
+#### Features
+
+* Use new generated client classes
+
 ### 0.36.3 / 2020-07-06
 
 #### Bug Fixes
