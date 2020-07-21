@@ -80,6 +80,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     _(file.content_encoding).must_be :nil?
     _(file.content_language).must_be :nil?
     _(file.content_type).must_be :nil?
+    _(file.custom_time).must_be :nil?
 
     _(file.metadata).must_be_kind_of Hash
     _(file.metadata).must_be :empty?

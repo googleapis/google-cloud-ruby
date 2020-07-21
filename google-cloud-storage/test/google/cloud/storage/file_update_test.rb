@@ -16,7 +16,9 @@ require "helper"
 
 describe Google::Cloud::Storage::File, :update, :mock_storage do
   let(:bucket_name) { "new-bucket-#{Time.now.to_i}" }
-  let(:file_hash) { random_file_hash bucket_name, "file.ext" }
+  let(:custom_time) { DateTime.new 2020, 2, 3, 4, 5, 6 }
+  let(:custom_time_2) { DateTime.new 2020, 3, 4, 5, 6, 7 }
+  let(:file_hash) { random_file_hash bucket_name, "file.ext", custom_time: custom_time }
   let(:file_gapi) { Google::Apis::StorageV1::Object.from_json file_hash.to_json }
   let(:file) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service }
   let(:file_user_project) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service, user_project: true }
@@ -87,6 +89,20 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
 
     _(file.content_type).must_equal "text/plain"
     file.content_type = "application/json"
+
+    mock.verify
+  end
+
+  it "updates its custom_time" do
+    mock = Minitest::Mock.new
+    patch_file_gapi = Google::Apis::StorageV1::Object.new custom_time: custom_time_2
+    mock.expect :patch_object, file_gapi,
+      [bucket_name, file.name, patch_file_gapi, predefined_acl: nil, user_project: nil]
+
+    file.service.mocked_service = mock
+
+    _(file.custom_time).must_equal custom_time
+    file.custom_time = custom_time_2
 
     mock.verify
   end
@@ -229,6 +245,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
       content_encoding: "deflate",
       content_language: "de",
       content_type: "application/json",
+      custom_time: custom_time_2,
       metadata: { "player" => "Bob", "score" => "10" }
     )
     mock.expect :patch_object, file_gapi,
@@ -242,6 +259,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
       f.content_encoding = "deflate"
       f.content_language = "de"
       f.content_type = "application/json"
+      f.custom_time = custom_time_2
       f.metadata["player"] = "Bob"
       f.metadata["score"] = "10"
     end
@@ -257,6 +275,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
       content_encoding: "deflate",
       content_language: "de",
       content_type: "application/json",
+      custom_time: custom_time_2,
       metadata: { "player" => "Bob", "score" => "10" }
     )
     mock.expect :patch_object, file_gapi,
@@ -270,6 +289,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
       f.content_encoding = "deflate"
       f.content_language = "de"
       f.content_type = "application/json"
+      f.custom_time = custom_time_2
       f.metadata["player"] = "Bob"
       f.metadata["score"] = "10"
     end

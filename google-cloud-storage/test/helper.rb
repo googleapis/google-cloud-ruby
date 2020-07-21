@@ -90,7 +90,7 @@ class MockStorage < Minitest::Spec
     { "requesterPays" => requester_pays} unless requester_pays.nil?
   end
 
-  def random_file_hash bucket=random_bucket_name, name=random_file_path, generation="1234567890", kms_key_name="path/to/encryption_key_name"
+  def random_file_hash bucket=random_bucket_name, name=random_file_path, generation="1234567890", kms_key_name="path/to/encryption_key_name", custom_time: nil
     { "kind" => "storage#object",
       "id" => "#{bucket}/#{name}/1234567890",
       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket}/o/#{name}",
@@ -104,6 +104,7 @@ class MockStorage < Minitest::Spec
       "contentEncoding" => "gzip",
       "contentLanguage" => "en",
       "contentType" => "text/plain",
+      "customTime" => custom_time,
       "updated" => Time.now,
       "storageClass" => "STANDARD",
       "size" => rand(10_000),

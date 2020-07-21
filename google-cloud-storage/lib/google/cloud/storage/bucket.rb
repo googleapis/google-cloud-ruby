@@ -1128,6 +1128,8 @@ module Google
         # @param [String] content_type The
         #   [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17)
         #   response header to be returned when the file is downloaded.
+        # @param [DateTime] custom_time A custom time specified by the user for
+        #   the file.
         # @param [String] crc32c The CRC32c checksum of the file data, as
         #   described in [RFC 4960, Appendix
         #   B](http://tools.ietf.org/html/rfc4960#appendix-B).
@@ -1249,7 +1251,7 @@ module Google
         #
         def create_file file, path = nil, acl: nil, cache_control: nil,
                         content_disposition: nil, content_encoding: nil,
-                        content_language: nil, content_type: nil,
+                        content_language: nil, content_type: nil, custom_time: nil,
                         crc32c: nil, md5: nil, metadata: nil,
                         storage_class: nil, encryption_key: nil, kms_key: nil,
                         temporary_hold: nil, event_based_hold: nil
@@ -1264,6 +1266,7 @@ module Google
                                                        md5: md5,
                                                        cache_control: cache_control,
                                                        content_type: content_type,
+                                                       custom_time: custom_time,
                                                        content_disposition: content_disposition,
                                                        crc32c: crc32c,
                                                        content_encoding: content_encoding,
