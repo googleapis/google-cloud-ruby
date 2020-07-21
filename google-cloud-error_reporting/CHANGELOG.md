@@ -1,5 +1,18 @@
 # Release History
 
+### 0.40.0 / 2020-07-21
+
+This is a major update that removes the "low-level" client interface code, and
+instead adds the new `google-cloud-error_reporting-v1beta1` gem as a dependency.
+This is a rewritten low-level client produced by a next-generation client code
+generator, with improved performance and stability.
+
+This change should have no effect on most of the main high-level interface.
+The one exception is that the (mostly undocumented) `client_config` argument
+for creating client objects, has been removed. If you need to adjust low-level
+client parameters such as RPC retry settings, use the configuration interface
+in `google-cloud-error_reporting-v1beta1`.
+
 ### 0.35.2 / 2020-06-08
 
 #### Documentation
