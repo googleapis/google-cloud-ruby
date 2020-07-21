@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency "google-cloud-debugger", "~> 0.32"
   gem.add_runtime_dependency "google-cloud-error_reporting", "~> 0.30"
-  gem.add_runtime_dependency "google-cloud-logging", "~> 1.5"
+  gem.add_runtime_dependency "google-cloud-logging", "~> 2.0"
   gem.add_runtime_dependency "google-cloud-trace", "~> 0.33"
 
   gem.add_development_dependency "autotest-suffix", "~> 1.1"
