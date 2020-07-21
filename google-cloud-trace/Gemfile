@@ -5,6 +5,8 @@ gemspec
 gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-env", path: "../google-cloud-env"
 gem "google-cloud-errors", path: "../google-cloud-errors"
+gem "google-cloud-trace-v1", path: "../google-cloud-trace-v1"
+gem "google-cloud-trace-v2", path: "../google-cloud-trace-v2"
 gem "stackdriver-core", path: "../stackdriver-core"
 
 gem "rake"
