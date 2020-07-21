@@ -22,9 +22,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "google-cloud-core", "~> 1.2"
   gem.add_dependency "stackdriver-core", "~> 1.3"
-  gem.add_dependency "google-gax", "~> 1.8"
-  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"
-  gem.add_dependency "googleapis-common-protos-types", ">= 1.0.4", "< 2.0"
   gem.add_dependency "concurrent-ruby", "~> 1.1"
 
   gem.add_development_dependency "google-style", "~> 1.24.0"
