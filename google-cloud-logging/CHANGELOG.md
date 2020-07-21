@@ -1,5 +1,15 @@
 # Release History
 
+### 2.0.0 / 2020-07-21
+
+#### ⚠ BREAKING CHANGES
+
+* **logging:** Use new generated client classes
+
+#### Features
+
+* Use new generated client classes
+
 ### 1.10.9 / 2020-06-17
 
 #### Documentation
