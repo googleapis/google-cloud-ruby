@@ -15,7 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Logging::Entry::Operation, :mock_logging do
-  let(:operation_grpc) { Google::Logging::V2::LogEntryOperation.new random_operation_hash }
+  let(:operation_grpc) { Google::Cloud::Logging::V2::LogEntryOperation.new random_operation_hash }
   let(:operation) { Google::Cloud::Logging::Entry::Operation.from_grpc operation_grpc }
 
   it "has attributes" do

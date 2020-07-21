@@ -145,7 +145,7 @@ module Google
 
           ##
           # @private New Entry::List from a
-          # Google::Logging::V2::ListLogEntryResponse object.
+          # Google::Cloud::Logging::V2::ListLogEntryResponse object.
           def self.from_grpc grpc_list, service, resources: nil, filter: nil,
                              order: nil, max: nil, projects: nil
             entries = new(Array(grpc_list.entries).map do |grpc_entry|

@@ -125,10 +125,10 @@ module Google
 
           ##
           # @private Exports the HttpRequest to a
-          # Google::Logging::Type::HttpRequest object.
+          # Google::Cloud::Logging::Type::HttpRequest object.
           def to_grpc
             return nil if empty?
-            Google::Logging::Type::HttpRequest.new(
+            Google::Cloud::Logging::Type::HttpRequest.new(
               request_method:                     request_method.to_s,
               request_url:                        url.to_s,
               request_size:                       size.to_i,
@@ -143,7 +143,7 @@ module Google
           end
 
           ##
-          # @private New HttpRequest from a Google::Logging::Type::HttpRequest
+          # @private New HttpRequest from a Google::Cloud::Logging::Type::HttpRequest
           # object.
           def self.from_grpc grpc
             return new if grpc.nil?

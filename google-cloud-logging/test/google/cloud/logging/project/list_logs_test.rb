@@ -18,10 +18,10 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
   it "lists logs" do
     num_logs = 3
 
-    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(num_logs))))
+    list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(num_logs)))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, list_res, ["projects/#{project}", page_size: nil, options: default_options]
+    mock.expect :list_logs, list_res, [parent: "projects/#{project}", page_size: nil, page_token: nil]
     logging.service.mocked_logging = mock
 
     logs = logging.logs
@@ -35,10 +35,10 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
   it "lists logs with find_logs alias" do
     num_logs = 3
 
-    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(num_logs))))
+    list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(num_logs)))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, list_res, ["projects/#{project}", page_size: nil, options: default_options]
+    mock.expect :list_logs, list_res, [parent: "projects/#{project}", page_size: nil, page_token: nil]
     logging.service.mocked_logging = mock
 
     logs = logging.find_logs
@@ -50,12 +50,12 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
   end
 
   it "paginates logs" do
-    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token"))))
-    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(2))))
+    first_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token")))
+    second_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(2)))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, first_list_res, ["projects/#{project}", page_size: nil, options: default_options]
-    mock.expect :list_logs, second_list_res, ["projects/#{project}", page_size: nil, options: token_options("next_page_token")]
+    mock.expect :list_logs, first_list_res, [parent: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_logs, second_list_res, [parent: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
     logging.service.mocked_logging = mock
 
     first_logs = logging.logs
@@ -74,12 +74,12 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
   end
 
   it "paginates logs using next? and next" do
-    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token"))))
-    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(2))))
+    first_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token")))
+    second_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(2)))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, first_list_res, ["projects/#{project}", page_size: nil, options: default_options]
-    mock.expect :list_logs, second_list_res, ["projects/#{project}", page_size: nil, options: token_options("next_page_token")]
+    mock.expect :list_logs, first_list_res, [parent: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_logs, second_list_res, [parent: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
     logging.service.mocked_logging = mock
 
     first_logs = logging.logs
@@ -97,12 +97,12 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
   end
 
   it "paginates logs using all" do
-    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token"))))
-    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(2))))
+    first_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token")))
+    second_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(2)))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, first_list_res, ["projects/#{project}", page_size: nil, options: default_options]
-    mock.expect :list_logs, second_list_res, ["projects/#{project}", page_size: nil, options: token_options("next_page_token")]
+    mock.expect :list_logs, first_list_res, [parent: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_logs, second_list_res, [parent: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
     logging.service.mocked_logging = mock
 
     all_logs = logging.logs.all.to_a
@@ -114,12 +114,12 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
   end
 
   it "paginates logs using all using Enumerator" do
-    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token"))))
-    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "second_page_token"))))
+    first_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token")))
+    second_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "second_page_token")))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, first_list_res, ["projects/#{project}", page_size: nil, options: default_options]
-    mock.expect :list_logs, second_list_res, ["projects/#{project}", page_size: nil, options: token_options("next_page_token")]
+    mock.expect :list_logs, first_list_res, [parent: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_logs, second_list_res, [parent: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
     logging.service.mocked_logging = mock
 
     all_logs = logging.logs.all.take(5)
@@ -131,12 +131,12 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
   end
 
   it "paginates logs using all with request_limit set" do
-    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token"))))
-    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "second_page_token"))))
+    first_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token")))
+    second_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "second_page_token")))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, first_list_res, ["projects/#{project}", page_size: nil, options: default_options]
-    mock.expect :list_logs, second_list_res, ["projects/#{project}", page_size: nil, options: token_options("next_page_token")]
+    mock.expect :list_logs, first_list_res, [parent: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_logs, second_list_res, [parent: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
     logging.service.mocked_logging = mock
 
     all_logs = logging.logs.all(request_limit: 1).to_a
@@ -148,10 +148,10 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
   end
 
   it "paginates logs with a resource" do
-    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token"))))
+    list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token")))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, list_res, ["projects/project1", page_size: nil, options: default_options]
+    mock.expect :list_logs, list_res, [parent: "projects/project1", page_size: nil, page_token: nil]
     logging.service.mocked_logging = mock
 
     logs = logging.logs resource: "projects/project1"
@@ -165,12 +165,12 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
   end
 
   it "paginates logs with a resource" do
-    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token"))))
-    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(2, "second_page_token"))))
+    first_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token")))
+    second_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(2, "second_page_token")))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, first_list_res, ["projects/project1", page_size: nil, options: default_options]
-    mock.expect :list_logs, second_list_res, ["projects/project1", page_size: nil, options: token_options("next_page_token")]
+    mock.expect :list_logs, first_list_res, [parent: "projects/project1", page_size: nil, page_token: nil]
+    mock.expect :list_logs, second_list_res, [parent: "projects/project1", page_size: nil, page_token: "next_page_token"]
     logging.service.mocked_logging = mock
 
     first_logs = logging.logs resource: "projects/project1"
@@ -198,12 +198,12 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
   end
 
   it "paginates logs with a resource" do
-    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token"))))
-    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(2, "second_page_token"))))
+    first_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token")))
+    second_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(2, "second_page_token")))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, first_list_res, ["projects/#{project}", page_size: 3, options: default_options]
-    mock.expect :list_logs, second_list_res, ["projects/#{project}", page_size: 3, options: token_options("next_page_token")]
+    mock.expect :list_logs, first_list_res, [parent: "projects/#{project}", page_size: 3, page_token: nil]
+    mock.expect :list_logs, second_list_res, [parent: "projects/#{project}", page_size: 3, page_token: "next_page_token"]
     logging.service.mocked_logging = mock
 
     first_logs = logging.logs max: 3

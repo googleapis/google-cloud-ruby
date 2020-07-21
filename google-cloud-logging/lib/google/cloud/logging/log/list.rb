@@ -129,7 +129,7 @@ module Google
 
           ##
           # @private New Log::List from a
-          # Google::Logging::V2::ListLogsResponse object.
+          # Google::Cloud::Logging::V2::ListLogsResponse object.
           def self.from_grpc grpc_list, service, resource: nil, max: nil
             logs = new Array(grpc_list.log_names)
             token = grpc_list.next_page_token

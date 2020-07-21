@@ -26,7 +26,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
   end
   let(:labels1) { { "env" => "production" } }
   let(:labels2) { { "env" => "staging" } }
-  let(:write_res) { Google::Logging::V2::WriteLogEntriesResponse.new }
+  let(:write_res) { Google::Cloud::Logging::V2::WriteLogEntriesResponse.new }
   let(:async_writer) { Google::Cloud::Logging::AsyncWriter.new logging, partial_success: true }
 
   def entries payload, labels = labels1
@@ -45,7 +45,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
   def write_req_args payload, labels = labels1
     full_log_name = "projects/test/logs/#{log_name}"
     entries = Array(payload).map do |str|
-      Google::Logging::V2::LogEntry.new(
+      Google::Cloud::Logging::V2::LogEntry.new(
         insert_id: "insert_#{str}_id",
         text_payload: str,
         severity: :INFO,
@@ -54,7 +54,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
         labels: labels
       )
     end
-    [entries, log_name: nil, resource: nil, labels: nil, partial_success: true, options: default_options]
+    [entries: entries, log_name: nil, resource: nil, labels: nil, partial_success: true]
   end
 
   it "does not raise error on empty entries" do
@@ -127,7 +127,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
     payload1_request = write_req_args(["payload1"], labels1)
     payload2_request = write_req_args("payload2", labels2)
     combined_request = payload1_request.dup.tap do |req|
-      req.first.concat payload2_request.first
+      req.first[:entries].concat payload2_request.first[:entries]
     end
 
     mock.expect :write_log_entries, write_res, combined_request

@@ -422,9 +422,9 @@ module Google
         end
 
         ##
-        # @private Exports the Entry to a Google::Logging::V2::LogEntry object.
+        # @private Exports the Entry to a Google::Cloud::Logging::V2::LogEntry object.
         def to_grpc
-          grpc = Google::Logging::V2::LogEntry.new(
+          grpc = Google::Cloud::Logging::V2::LogEntry.new(
             log_name:        log_name.to_s,
             timestamp:       timestamp_grpc,
             # TODO: verify severity is the correct type?
@@ -444,7 +444,7 @@ module Google
         end
 
         ##
-        # @private New Entry from a Google::Logging::V2::LogEntry object.
+        # @private New Entry from a Google::Cloud::Logging::V2::LogEntry object.
         def self.from_grpc grpc
           return new if grpc.nil?
           new.tap do |e|
@@ -483,7 +483,7 @@ module Google
 
         ##
         # @private Formats the labels so they can be saved to a
-        # Google::Logging::V2::LogEntry object.
+        # Google::Cloud::Logging::V2::LogEntry object.
         def labels_grpc
           return {} if labels.nil?
           # Coerce symbols to strings
@@ -494,7 +494,7 @@ module Google
         end
 
         ##
-        # @private Adds the payload data to a Google::Logging::V2::LogEntry
+        # @private Adds the payload data to a Google::Cloud::Logging::V2::LogEntry
         # object.
         def append_payload grpc
           grpc.proto_payload = nil

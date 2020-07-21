@@ -57,10 +57,10 @@ module Google
 
           ##
           # @private Exports the SourceLocation to a
-          # Google::Logging::V2::LogEntrySourceLocation object.
+          # Google::Cloud::Logging::V2::LogEntrySourceLocation object.
           def to_grpc
             return nil if empty?
-            Google::Logging::V2::LogEntrySourceLocation.new(
+            Google::Cloud::Logging::V2::LogEntrySourceLocation.new(
               file:     file.to_s,
               line:     line,
               function: function.to_s
@@ -69,7 +69,7 @@ module Google
 
           ##
           # @private New Google::Cloud::Logging::Entry::SourceLocation from a
-          # Google::Logging::V2::LogEntrySourceLocation object.
+          # Google::Cloud::Logging::V2::LogEntrySourceLocation object.
           def self.from_grpc grpc
             return new if grpc.nil?
             new.tap do |o|

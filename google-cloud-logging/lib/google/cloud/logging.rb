@@ -63,8 +63,6 @@ module Google
       #   * `https://www.googleapis.com/auth/logging.admin`
       #
       # @param [Integer] timeout Default timeout to use in requests. Optional.
-      # @param [Hash] client_config A hash of values to override the default
-      #   behavior of the API client. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
@@ -83,12 +81,16 @@ module Google
       #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
       #   end
       #
-      def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
-                   client_config: nil, endpoint: nil, project: nil, keyfile: nil
+      def self.new project_id: nil,
+                   credentials: nil,
+                   scope: nil,
+                   timeout: nil,
+                   endpoint: nil,
+                   project: nil,
+                   keyfile: nil
         project_id    ||= (project || default_project_id)
         scope         ||= configure.scope
         timeout       ||= configure.timeout
-        client_config ||= configure.client_config
         endpoint      ||= configure.endpoint
         credentials   ||= (keyfile || default_credentials(scope: scope))
 
@@ -102,12 +104,8 @@ module Google
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        Logging::Project.new(
-          Logging::Service.new(
-            project_id, credentials,
-            host: endpoint, timeout: timeout, client_config: client_config
-          )
-        )
+        service = Logging::Service.new project_id, credentials, host: endpoint, timeout: timeout
+        Logging::Project.new service
       end
 
       ##
@@ -127,8 +125,6 @@ module Google
       # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       # * `timeout` - (Integer) Default timeout to use in requests.
-      # * `client_config` - (Hash) A hash of values to override the default
-      #   behavior of the API client.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
       # * `log_name` - (String) Name of the application log file. Default:
@@ -186,4 +182,7 @@ module Google
       end
     end
   end
+
+  # @private
+  Logging = Cloud::Logging unless const_defined? :Logging
 end

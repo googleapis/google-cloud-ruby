@@ -109,11 +109,6 @@ YARD::Doctest.configure do |doctest|
   # SKIP
   #
 
-  # Skip all GAPIC for now
-  doctest.skip "Google::Cloud::Logging::V2::LoggingServiceV2Client"
-  doctest.skip "Google::Cloud::Logging::V2::MetricsServiceV2Client"
-  doctest.skip "Google::Cloud::Logging::V2::ConfigServiceV2Client"  # Sinks
-
   # Skip all aliases, since tests would be exact duplicates
   doctest.skip "Google::Cloud::Logging::Logger#log"
   doctest.skip "Google::Cloud::Logging::Logger#sev_threshold="
@@ -148,25 +143,25 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud.logging" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :list_log_entries, list_entries_res, [Array, Hash]
+      mock.expect :list_log_entries, list_entries_res, [Hash]
     end
   end
 
   doctest.before "Google::Cloud#logging" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :list_log_entries, list_entries_res, [Array, Hash]
+      mock.expect :list_log_entries, list_entries_res, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :list_log_entries, list_entries_res, [Array, Hash]
+      mock.expect :list_log_entries, list_entries_res, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging.new" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :list_log_entries, list_entries_res, [Array, Hash]
+      mock.expect :list_log_entries, list_entries_res, [Hash]
     end
   end
 
@@ -174,45 +169,45 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Logging::Project" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :list_log_entries, list_entries_res, [Array, Hash]
+      mock.expect :list_log_entries, list_entries_res, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Project#entry" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :write_log_entries, nil, [Array, Hash]
+      mock.expect :write_log_entries, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Project#entries" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :list_log_entries, list_entries_res("next_page_token"), [Array, Hash]
-      mock.expect :list_log_entries, list_entries_res, [Array, Hash]
+      mock.expect :list_log_entries, list_entries_res("next_page_token"), [Hash]
+      mock.expect :list_log_entries, list_entries_res, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Project#write_entries" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :write_log_entries, nil, [Array, Hash]
+      mock.expect :write_log_entries, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Project#entry" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :write_log_entries, nil, [Array, Hash]
+      mock.expect :write_log_entries, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Project#logs" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :list_logs, list_logs_res("next_page_token"), ["projects/my-project", Hash]
-      mock.expect :list_logs, list_logs_res, ["projects/my-project", Hash]
+      mock.expect :list_logs, list_logs_res("next_page_token"), [Hash]
+      mock.expect :list_logs, list_logs_res, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Project#delete_log" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :delete_log, nil, ["projects/my-project/logs/my_app_log", Hash]
+      mock.expect :delete_log, nil, [Hash]
     end
   end
 
@@ -224,43 +219,43 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Logging::Project#sink" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_sinks.expect :get_sink, nil, ["projects/my-project/sinks/existing-sink", Hash]
+      mock_sinks.expect :get_sink, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Project#sink@By default `nil` will be returned if the sink does not exist." do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_sinks.expect :get_sink, nil, ["projects/my-project/sinks/non-existing-sink", Hash]
+      mock_sinks.expect :get_sink, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Project#sinks" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_sinks.expect :list_sinks, list_sinks_res, ["projects/my-project", Hash]
+      mock_sinks.expect :list_sinks, list_sinks_res, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Project#create_metric" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_metrics.expect :create_log_metric, nil, ["projects/my-project", Google::Logging::V2::LogMetric, Hash]
+      mock_metrics.expect :create_log_metric, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Project#metric" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_metrics.expect :get_log_metric, nil, ["projects/my-project/metrics/existing_metric", Hash]
+      mock_metrics.expect :get_log_metric, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Project#metric@By default `nil` will be returned if metric does not exist." do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_metrics.expect :get_log_metric, nil, ["projects/my-project/metrics/non_existing_metric", Hash]
+      mock_metrics.expect :get_log_metric, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Project#metrics" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_metrics.expect :list_log_metrics, list_metrics_res, ["projects/my-project", Hash]
+      mock_metrics.expect :list_log_metrics, list_metrics_res, [Hash]
     end
   end
 
@@ -270,7 +265,7 @@ YARD::Doctest.configure do |doctest|
       mock.expect :insert_bucket_access_control, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::BucketAccessControl, Hash]
     end
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_sinks.expect :create_sink, nil, ["projects/my-project", Google::Logging::V2::LogSink, Hash]
+      mock_sinks.expect :create_sink, nil, [Hash]
     end
   end
 
@@ -286,84 +281,84 @@ YARD::Doctest.configure do |doctest|
       mock.expect :insert_bucket_access_control, object_access_control_gapi, ["my-bucket", Google::Apis::StorageV1::BucketAccessControl, Hash]
     end
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_sinks.expect :create_sink, nil, ["projects/my-project", Google::Logging::V2::LogSink, Hash]
+      mock_sinks.expect :create_sink, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Sink#delete" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_sinks.expect :get_sink, nil, ["projects/my-project/sinks/severe_errors", Hash]
+      mock_sinks.expect :get_sink, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Entry" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :write_log_entries, nil, [Array, Hash]
+      mock.expect :write_log_entries, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Entry::List" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :list_log_entries, list_entries_res, [Array, Hash]
+      mock.expect :list_log_entries, list_entries_res, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Log::List" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock.expect :list_logs, list_logs_res, ["projects/my-project", Hash]
+      mock.expect :list_logs, list_logs_res, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Metric" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_metrics.expect :create_log_metric, nil, ["projects/my-project", Google::Logging::V2::LogMetric, Hash]
+      mock_metrics.expect :create_log_metric, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Metric#save" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_metrics.expect :get_log_metric, OpenStruct.new(name: "severe_errors"), ["projects/my-project/metrics/severe_errors", Hash]
-      mock_metrics.expect :update_log_metric, nil, ["projects/my-project/metrics/severe_errors", Google::Logging::V2::LogMetric, Hash]
+      mock_metrics.expect :get_log_metric, OpenStruct.new(name: "severe_errors"), [Hash]
+      mock_metrics.expect :update_log_metric, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Metric#delete" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_metrics.expect :get_log_metric, OpenStruct.new(name: "severe_errors"), ["projects/my-project/metrics/severe_errors", Hash]
-      mock_metrics.expect :delete_log_metric, nil, ["projects/my-project/metrics/severe_errors", Hash]
+      mock_metrics.expect :get_log_metric, OpenStruct.new(name: "severe_errors"), [Hash]
+      mock_metrics.expect :delete_log_metric, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Metric#reload!" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_metrics.expect :get_log_metric, OpenStruct.new(name: "severe_errors", filter: "logName:syslog"), ["projects/my-project/metrics/severe_errors", Hash]
-      mock_metrics.expect :get_log_metric, OpenStruct.new(filter: "logName:syslog"), ["projects/my-project/metrics/severe_errors", Hash]
+      mock_metrics.expect :get_log_metric, OpenStruct.new(name: "severe_errors", filter: "logName:syslog"), [Hash]
+      mock_metrics.expect :get_log_metric, OpenStruct.new(filter: "logName:syslog"), [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Metric::List" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_metrics.expect :list_log_metrics, list_metrics_res, ["projects/my-project", Hash]
+      mock_metrics.expect :list_log_metrics, list_metrics_res, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Sink#save" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_sinks.expect :get_sink, OpenStruct.new(name: "severe_errors"), ["projects/my-project/sinks/severe_errors", Hash]
-      mock_sinks.expect :update_sink, nil, ["projects/my-project/sinks/severe_errors", Google::Logging::V2::LogSink, Hash]
+      mock_sinks.expect :get_sink, OpenStruct.new(name: "severe_errors"), [Hash]
+      mock_sinks.expect :update_sink, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Sink#delete" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_sinks.expect :get_sink, OpenStruct.new(name: "severe_errors"), ["projects/my-project/sinks/severe_errors", Hash]
-      mock_sinks.expect :delete_sink, nil, ["projects/my-project/sinks/severe_errors", Hash]
+      mock_sinks.expect :get_sink, OpenStruct.new(name: "severe_errors"), [Hash]
+      mock_sinks.expect :delete_sink, nil, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Logging::Sink::List" do
     mock_logging do |mock, mock_metrics, mock_sinks|
-      mock_sinks.expect :list_sinks, list_sinks_res, ["projects/my-project", Hash]
+      mock_sinks.expect :list_sinks, list_sinks_res, [Hash]
     end
   end
 
@@ -396,42 +391,34 @@ end
 
 def list_entries_res token = nil
   OpenStruct.new(
-    page: OpenStruct.new(
-      response: Google::Logging::V2::ListLogEntriesResponse.new(list_entries_hash(3, token))
-    )
+    response: Google::Cloud::Logging::V2::ListLogEntriesResponse.new(list_entries_hash(3, token))
   )
 end
 
 def list_logs_res token = nil
   OpenStruct.new(
-    page: OpenStruct.new(
-      response: Google::Logging::V2::ListLogsResponse.new(list_logs_hash(3, token))
-    )
+    response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(3, token))
   )
 end
 
 def list_resource_descriptors_res
-  Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(3))
+  Google::Cloud::Logging::V2::ListMonitoredResourceDescriptorsResponse.new(list_resource_descriptors_hash(3))
 end
 
 
 def get_sink_res
-  Google::Logging::V2::LogSink.new(random_sink_hash.merge(name:  sink_name).to_hash)
+  Google::Cloud::Logging::V2::LogSink.new(random_sink_hash.merge(name:  sink_name).to_hash)
 end
 
 def list_sinks_res
   OpenStruct.new(
-    page: OpenStruct.new(
-      response: Google::Logging::V2::ListSinksResponse.new(list_sinks_hash(3))
-    )
+    response: Google::Cloud::Logging::V2::ListSinksResponse.new(list_sinks_hash(3))
   )
 end
 
 def list_metrics_res
   OpenStruct.new(
-    page: OpenStruct.new(
-      response: Google::Logging::V2::ListLogMetricsResponse.new(list_metrics_hash(3))
-    )
+    response: Google::Cloud::Logging::V2::ListLogMetricsResponse.new(list_metrics_hash(3))
   )
 end
 

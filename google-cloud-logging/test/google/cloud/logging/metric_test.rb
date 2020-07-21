@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Logging::Metric, :mock_logging do
   let(:metric_hash) { random_metric_hash }
-  let(:metric_grpc) { Google::Logging::V2::LogMetric.new metric_hash }
+  let(:metric_grpc) { Google::Cloud::Logging::V2::LogMetric.new metric_hash }
   let(:metric) { Google::Cloud::Logging::Metric.from_grpc metric_grpc, logging.service }
 
   it "knows its attributes" do
@@ -28,13 +28,13 @@ describe Google::Cloud::Logging::Metric, :mock_logging do
   it "can save itself" do
     new_metric_description = "New Metric Description"
     new_metric_filter = "logName:syslog AND severity>=WARN"
-    new_metric = Google::Logging::V2::LogMetric.new(
+    new_metric = Google::Cloud::Logging::V2::LogMetric.new(
       name: metric.name,
       description: new_metric_description,
       filter: new_metric_filter
     )
     mock = Minitest::Mock.new
-    mock.expect :update_log_metric, metric_grpc, ["projects/test/metrics/#{metric.name}", new_metric, options: default_options]
+    mock.expect :update_log_metric, metric_grpc, [metric_name: "projects/test/metrics/#{metric.name}", metric: new_metric]
     metric.service.mocked_metrics = mock
 
     metric.description = new_metric_description
@@ -50,7 +50,7 @@ describe Google::Cloud::Logging::Metric, :mock_logging do
 
   it "can refresh itself" do
     mock = Minitest::Mock.new
-    mock.expect :get_log_metric, metric_grpc, ["projects/test/metrics/#{metric.name}", options: default_options]
+    mock.expect :get_log_metric, metric_grpc, [metric_name: "projects/test/metrics/#{metric.name}"]
     metric.service.mocked_metrics = mock
 
     metric.refresh!
@@ -60,7 +60,7 @@ describe Google::Cloud::Logging::Metric, :mock_logging do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_log_metric, metric_grpc, ["projects/test/metrics/#{metric.name}", options: default_options]
+    mock.expect :delete_log_metric, metric_grpc, [metric_name: "projects/test/metrics/#{metric.name}"]
     metric.service.mocked_metrics = mock
 
     metric.delete

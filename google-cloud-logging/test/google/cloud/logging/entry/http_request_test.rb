@@ -15,7 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Logging::Entry::HttpRequest, :mock_logging do
-  let(:http_request_grpc) { Google::Logging::Type::HttpRequest.new random_http_request_hash }
+  let(:http_request_grpc) { Google::Cloud::Logging::Type::HttpRequest.new random_http_request_hash }
   let(:http_request) { Google::Cloud::Logging::Entry::HttpRequest.from_grpc http_request_grpc }
 
   it "has attributes" do

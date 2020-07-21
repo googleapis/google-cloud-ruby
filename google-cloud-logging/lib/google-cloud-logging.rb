@@ -43,8 +43,6 @@ module Google
     #   * `https://www.googleapis.com/auth/logging.admin`
     #
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config A hash of values to override the default
-    #   behavior of the API client. Optional.
     #
     # @return [Google::Cloud::Logging::Project]
     #
@@ -66,11 +64,10 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   logging = gcloud.logging scope: platform_scope
     #
-    def logging scope: nil, timeout: nil, client_config: nil
+    def logging scope: nil, timeout: nil
       timeout ||= @timeout
-      Google::Cloud.logging @project, @keyfile, scope:         scope,
-                                                timeout:       timeout,
-                                                client_config: client_config
+      Google::Cloud.logging @project, @keyfile, scope:   scope,
+                                                timeout: timeout
     end
 
     ##
@@ -96,8 +93,6 @@ module Google
     #   * `https://www.googleapis.com/auth/logging.admin`
     #
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config A hash of values to override the default
-    #   behavior of the API client. Optional.
     #
     # @return [Google::Cloud::Logging::Project]
     #
@@ -111,13 +106,11 @@ module Google
     #     puts "[#{e.timestamp}] #{e.log_name} #{e.payload.inspect}"
     #   end
     #
-    def self.logging project_id = nil, credentials = nil, scope: nil,
-                     timeout: nil, client_config: nil
+    def self.logging project_id = nil, credentials = nil, scope: nil, timeout: nil
       require "google/cloud/logging"
       Google::Cloud::Logging.new project_id: project_id,
                                  credentials: credentials,
-                                 scope: scope, timeout: timeout,
-                                 client_config: client_config
+                                 scope: scope, timeout: timeout
     end
   end
 end
@@ -139,6 +132,13 @@ Google::Cloud.configure.add_config! :logging do |config|
       "LOGGING_CREDENTIALS", "LOGGING_CREDENTIALS_JSON",
       "LOGGING_KEYFILE", "LOGGING_KEYFILE_JSON"
   end
+  default_scopes = [
+    "https://www.googleapis.com/auth/cloud-platform",
+    "https://www.googleapis.com/auth/cloud-platform.read-only",
+    "https://www.googleapis.com/auth/logging.admin",
+    "https://www.googleapis.com/auth/logging.read",
+    "https://www.googleapis.com/auth/logging.write"
+  ]
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
@@ -146,10 +146,9 @@ Google::Cloud.configure.add_config! :logging do |config|
                     match:     [String, Hash, Google::Auth::Credentials],
                     allow_nil: true
   config.add_alias! :keyfile, :credentials
-  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :scope, default_scopes, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
-  config.add_field! :client_config, nil, match: Hash
-  config.add_field! :endpoint, nil, match: String
+  config.add_field! :endpoint, "logging.googleapis.com", match: String
   config.add_field! :log_name, nil, match: String
   config.add_field! :log_name_map, nil, match: Hash
   config.add_field! :labels, nil, match: Hash
