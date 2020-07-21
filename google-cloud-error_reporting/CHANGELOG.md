@@ -1,5 +1,15 @@
 # Release History
 
+### 0.36.0 / 2020-07-21
+
+#### ⚠ BREAKING CHANGES
+
+* **error_reporting:** Use new generated client classes
+
+#### Features
+
+* Use new generated client classes
+
 ### 0.35.2 / 2020-06-08
 
 #### Documentation
