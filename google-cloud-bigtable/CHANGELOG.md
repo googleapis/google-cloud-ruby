@@ -1,5 +1,15 @@
 # Release History
 
+### 1.3.0 / 2020-07-21
+
+#### Features
+
+* Add Managed Backups
+  * Add Cluster#create_backup, Cluster#backup and Cluster#backups
+  * Add Backup, Backup::Job and Backup::List
+  * Add Table::RestoreJob
+  * Add ClusterState#ready_optimizing?
+
 ### 1.2.2 / 2020-05-28
 
 #### Documentation
