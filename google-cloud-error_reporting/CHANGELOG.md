@@ -7,11 +7,20 @@ instead adds the new `google-cloud-error_reporting-v1beta1` gem as a dependency.
 This is a rewritten low-level client produced by a next-generation client code
 generator, with improved performance and stability.
 
-This change should have no effect on most of the main high-level interface.
-The one exception is that the (mostly undocumented) `client_config` argument
-for creating client objects, has been removed. If you need to adjust low-level
-client parameters such as RPC retry settings, use the configuration interface
-in `google-cloud-error_reporting-v1beta1`.
+This change should have no effect on the high-level interface that most users
+will use. The one exception is that the (mostly undocumented) `client_config`
+argument, for adjusting low-level parameters such as RPC retry settings on
+client objects, has been removed. If you need to adjust these parameters, use
+the configuration interface in `google-cloud-error_reporting-v1beta1`.
+
+Substantial changes have been made in the low-level interfaces, however. If you
+are using the low-level classes under the `Google::Cloud::ErrorReporting::V1beta1`
+module, please review the docs for the new `google-cloud-error_reporting-v1beta1`
+gem. In particular:
+* Some classes have been renamed, notably the client class itself.
+* The client constructor takes a configuration block instead of configuration
+  keyword arguments.
+* All method arguments are now keyword arguments.
 
 ### 0.35.2 / 2020-06-08
 
