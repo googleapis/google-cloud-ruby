@@ -766,6 +766,7 @@ def subscription_hash topic_name, sub_name,
       }
     },
     ack_deadline_seconds: deadline,
+    detached: true,
     retain_acked_messages: true,
     message_retention_duration: { seconds: 600, nanos: 900000000 }, # 600.9 seconds
     labels: labels,

@@ -589,6 +589,17 @@ module Google
         #
         # @return [Boolean]
         #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   sub.detach
+        #
+        #   # sleep 120
+        #   sub.detached? #=> true
+        #
         def detached?
           ensure_grpc!
           @grpc.detached
@@ -642,10 +653,11 @@ module Google
         end
 
         ##
-        # Detaches a subscription from its topic, then calls {#reload!}. All messages retained in the subscription are
-        # dropped. Detached subscriptions don't receive messages from their topic and don't retain any backlog.
-        # Subsequent {#pull} and {#listen} (pull and streaming pull) operations will raise `FAILED_PRECONDITION`. If the
-        # subscription is a push subscription (see {#push_config}), pushes to the endpoint will stop.
+        # Detaches a subscription from its topic. All messages retained in the subscription are dropped. Detached
+        # subscriptions don't receive messages from their topic and don't retain any backlog. Subsequent {#pull} and
+        # {#listen} (pull and streaming pull) operations will raise `FAILED_PRECONDITION`. If the subscription is a push
+        # subscription (see {#push_config}), pushes to the endpoint will stop. It may take a few minutes for the
+        # subscription's detached state to be reflected in subsequent calls to {#detached?}.
         #
         # @return [Boolean] Returns `true` if the detach operation was successful.
         #
@@ -656,6 +668,9 @@ module Google
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   sub.detach
+        #
+        #   # sleep 120
+        #   sub.detached? #=> true
         #
         def detach
           ensure_service!
