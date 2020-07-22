@@ -124,7 +124,7 @@ module Google
             #
             # This API is experimental.
             rpc :UpdateWorkerPool, Google::Cloud::Build::V1::UpdateWorkerPoolRequest, Google::Cloud::Build::V1::WorkerPool
-            # List project's `WorkerPool`s.
+            # List project's `WorkerPools`.
             #
             # This API is experimental.
             rpc :ListWorkerPools, Google::Cloud::Build::V1::ListWorkerPoolsRequest, Google::Cloud::Build::V1::ListWorkerPoolsResponse

@@ -1276,7 +1276,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request to list `WorkerPool`s.
+        # Request to list `WorkerPools`.
         # @!attribute [rw] parent
         #   @return [::String]
         #     ID of the parent project.
