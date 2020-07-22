@@ -26,7 +26,7 @@ describe Google::Cloud::Trace::Project, :mock_trace do
   let(:simple_span_end_proto) { Google::Protobuf::Timestamp.new seconds: 10002, nanos: 456000 }
   let(:simple_span_labels) { { "foo" => "bar" } }
   let(:simple_span_proto) {
-    Google::Devtools::Cloudtrace::V1::TraceSpan.new \
+    Google::Cloud::Trace::V1::TraceSpan.new \
       span_id: simple_span_id,
       kind: :RPC_SERVER,
       name: simple_span_name,
@@ -36,13 +36,13 @@ describe Google::Cloud::Trace::Project, :mock_trace do
       labels: simple_span_labels
   }
   let(:simple_trace_proto) {
-    Google::Devtools::Cloudtrace::V1::Trace.new \
+    Google::Cloud::Trace::V1::Trace.new \
       project_id: project,
       trace_id: simple_trace_id,
       spans: [simple_span_proto]
   }
   let(:simple_traces_proto) {
-    traces_proto = Google::Devtools::Cloudtrace::V1::Traces.new
+    traces_proto = Google::Cloud::Trace::V1::Traces.new
     traces_proto.traces.push simple_trace_proto
     traces_proto
   }
@@ -67,7 +67,7 @@ describe Google::Cloud::Trace::Project, :mock_trace do
   let(:second_span_end_proto) { Google::Protobuf::Timestamp.new seconds: 10004, nanos: 456000 }
   let(:second_span_labels) { { "foo" => "baz" } }
   let(:second_span_proto) {
-    Google::Devtools::Cloudtrace::V1::TraceSpan.new \
+    Google::Cloud::Trace::V1::TraceSpan.new \
       span_id: second_span_id,
       kind: :RPC_SERVER,
       name: second_span_name,
@@ -77,7 +77,7 @@ describe Google::Cloud::Trace::Project, :mock_trace do
       labels: second_span_labels
   }
   let(:second_trace_proto) {
-    Google::Devtools::Cloudtrace::V1::Trace.new \
+    Google::Cloud::Trace::V1::Trace.new \
       project_id: project,
       trace_id: second_trace_id,
       spans: [second_span_proto]
@@ -99,17 +99,14 @@ describe Google::Cloud::Trace::Project, :mock_trace do
   let(:range_start) { Time.at 10000, 0 }
   let(:range_end) { Time.at 10010, 0 }
 
-  let(:default_options) { Google::Gax::CallOptions.new }
   let(:next_page_token) { "next" }
-  let(:gax_page) {
-    response = {
-      resource: [simple_trace_proto, second_trace_proto],
-      page_token: next_page_token
-    }
-    Google::Gax::PagedEnumerable::Page.new response, :page_token, :resource
+  let(:gapic_page) {
+    response = OpenStruct.new(resource: [simple_trace_proto, second_trace_proto],
+                              next_page_token: next_page_token)
+    Gapic::PagedEnumerable::Page.new response, :resource, nil
   }
-  let(:gax_paged_enum) {
-    MockPagedEnum.new gax_page
+  let(:gapic_paged_enum) {
+    MockPagedEnum.new gapic_page
   }
 
   it "knows the project identifier" do
@@ -130,7 +127,7 @@ describe Google::Cloud::Trace::Project, :mock_trace do
 
   it "lists traces" do
     mock = Minitest::Mock.new
-    mock.expect :list_traces, gax_paged_enum,
+    mock.expect :list_traces, gapic_paged_enum,
                 [project,
                   start_time: range_start_proto,
                   end_time: range_end_proto,
@@ -138,7 +135,7 @@ describe Google::Cloud::Trace::Project, :mock_trace do
                   page_size: nil,
                   filter: nil,
                   order_by: nil,
-                  options: default_options]
+                  page_token: nil]
     tracer.service.mocked_lowlevel_client = mock
 
     actual_result = tracer.list_traces range_start, range_end

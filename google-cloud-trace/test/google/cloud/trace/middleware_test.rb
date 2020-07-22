@@ -39,7 +39,7 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
     }
   }
   let(:span_proto) {
-    Google::Devtools::Cloudtrace::V1::TraceSpan.new \
+    Google::Cloud::Trace::V1::TraceSpan.new \
       span_id: my_span_id,
       name: my_path,
       kind: :SPAN_KIND_UNSPECIFIED,
@@ -49,13 +49,13 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
       labels: span_labels
   }
   let(:trace_proto) {
-    Google::Devtools::Cloudtrace::V1::Trace.new \
+    Google::Cloud::Trace::V1::Trace.new \
       project_id: project,
       trace_id: my_trace_id,
       spans: [span_proto]
   }
   let(:traces_proto) {
-    traces_proto = Google::Devtools::Cloudtrace::V1::Traces.new
+    traces_proto = Google::Cloud::Trace::V1::Traces.new
     traces_proto.traces.push trace_proto
     traces_proto
   }

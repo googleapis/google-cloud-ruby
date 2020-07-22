@@ -158,7 +158,9 @@ module Google
         def next_page
           return nil unless results_pending?
           service.list_traces \
-            project, start_time, end_time,
+            project,
+            start_time,
+            end_time,
             filter: filter,
             order_by: order_by,
             view: view,
@@ -167,26 +169,32 @@ module Google
         end
 
         ##
-        # Create a new ResultSet given a Google::Gax::PagedEnumerable::Page,
+        # Create a new ResultSet given a Gapic::PagedEnumerable::Page,
         # and all the query parameters.
         #
         # @private
         #
-        def self.from_gax_page service, project_id,
-                               page, start_time, end_time,
-                               filter: nil,
-                               order_by: nil,
-                               view: nil,
-                               page_size: nil,
-                               page_token: nil
+        def self.from_gapic_page service,
+                                 project_id,
+                                 page,
+                                 start_time,
+                                 end_time,
+                                 filter: nil,
+                                 order_by: nil,
+                                 view: nil,
+                                 page_size: nil,
+                                 page_token: nil
           next_page_token = page.next_page_token
           next_page_token = nil unless page.next_page_token?
           results = page.map do |proto|
             Google::Cloud::Trace::TraceRecord.from_grpc proto
           end
-          new service, project_id,
-              results, next_page_token,
-              start_time, end_time,
+          new service,
+              project_id,
+              results,
+              next_page_token,
+              start_time,
+              end_time,
               filter: filter,
               order_by: order_by,
               view: view,

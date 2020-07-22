@@ -140,7 +140,7 @@ module Google
         # Create a new Span object from a TraceSpan protobuf and insert it
         # into the given trace.
         #
-        # @param [Google::Devtools::Cloudtrace::V1::TraceSpan] span_proto The
+        # @param [Google::Cloud::Trace::V1::Tracespan] span_proto The
         #     span protobuf from the V1 gRPC Trace API.
         # @param [Google::Cloud::Trace::TraceRecord] trace The trace object
         #     to contain the span.
@@ -169,13 +169,13 @@ module Google
         #
         # @param [Integer] default_parent_id The parent span ID to use if the
         #     span has no parent in the trace tree. Optional; defaults to 0.
-        # @return [Google::Devtools::Cloudtrace::V1::TraceSpan] The generated
+        # @return [Google::Cloud::Trace::V1::TraceSpan] The generated
         #     protobuf.
         #
         def to_grpc default_parent_id = 0
           start_proto = Google::Cloud::Trace::Utils.time_to_grpc start_time
           end_proto = Google::Cloud::Trace::Utils.time_to_grpc end_time
-          Google::Devtools::Cloudtrace::V1::TraceSpan.new \
+          Google::Cloud::Trace::V1::TraceSpan.new \
             span_id: span_id.to_i,
             kind: kind.to_sym,
             name: name,

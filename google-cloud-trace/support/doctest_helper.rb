@@ -70,8 +70,8 @@ YARD::Doctest.configure do |doctest|
   #
 
   # Skip all GAPIC for now
-  doctest.skip "Google::Cloud::Trace::V1::TraceServiceClient"
-  doctest.skip "Google::Cloud::Trace::V2::TraceServiceClient"
+  doctest.skip "Google::Cloud::Trace::V1::TraceService::Client"
+  doctest.skip "Google::Cloud::Trace::V2::TraceService::Client"
 
   ##
   # BEFORE (mocking)
@@ -117,7 +117,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Trace::Project#patch_traces" do
     mock_trace do |mock|
-      mock.expect :patch_traces, stubbed_list_traces, [String, Google::Devtools::Cloudtrace::V1::Traces]
+      mock.expect :patch_traces, stubbed_list_traces, [String, Google::Cloud::Trace::V1::Traces]
     end
   end
 
