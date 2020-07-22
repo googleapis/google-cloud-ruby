@@ -137,6 +137,12 @@ module Google
                     }
 
                     default_config.rpcs.update_backup.timeout = 3600.0
+                    default_config.rpcs.update_backup.retry_policy = {
+                      initial_delay: 1.0,
+                      max_delay:     32.0,
+                      multiplier:    1.3,
+                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    }
 
                     default_config.rpcs.delete_backup.timeout = 3600.0
                     default_config.rpcs.delete_backup.retry_policy = {
