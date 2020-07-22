@@ -647,7 +647,7 @@ module Google
         # Subsequent {#pull} and {#listen} (pull and streaming pull) operations will raise `FAILED_PRECONDITION`. If the
         # subscription is a push subscription (see {#push_config}), pushes to the endpoint will stop.
         #
-        # @return [Boolean] Returns `true` if the subscription was detached.
+        # @return [Boolean] Returns `true` if the detach operation was successful.
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -660,8 +660,7 @@ module Google
         def detach
           ensure_service!
           service.detach_subscription name
-          reload!
-          detached?
+          true
         end
 
         ##

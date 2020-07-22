@@ -27,9 +27,7 @@ describe Google::Cloud::PubSub::Subscription, :detach, :mock_pubsub do
     it "can detach itself" do
       mock = Minitest::Mock.new
       mock.expect :detach_subscription, nil, [sub_path, options: default_options]
-      mock.expect :get_subscription, sub_grpc, [sub_path, options: default_options]
       pubsub.service.mocked_publisher = mock
-      pubsub.service.mocked_subscriber = mock
 
       subscription.detach
 
@@ -43,9 +41,7 @@ describe Google::Cloud::PubSub::Subscription, :detach, :mock_pubsub do
     it "can detach itself if it exists" do
       mock = Minitest::Mock.new
       mock.expect :detach_subscription, nil, [sub_path, options: default_options]
-      mock.expect :get_subscription, sub_grpc, [sub_path, options: default_options]
       pubsub.service.mocked_publisher = mock
-      pubsub.service.mocked_subscriber = mock
 
       subscription.detach
 
