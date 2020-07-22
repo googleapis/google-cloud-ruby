@@ -323,7 +323,7 @@ module Google
         # If {#expires_in=} is not set, a *default* value of of 31 days will be
         # used. The minimum allowed value is 1 day.
         #
-        # Makes an API call to retrieve the labels value when called on a
+        # Makes an API call to retrieve the value when called on a
         # reference object. See {#reference?}.
         #
         # @return [Numeric, nil] The expiration duration, or `nil` if unset.
@@ -566,7 +566,7 @@ module Google
         #
         # See {Topic#publish_async}, {#listen}, and {Message#ordering_key}.
         #
-        # Makes an API call to retrieve the retain_acked value when called on a
+        # Makes an API call to retrieve the enable_message_ordering value when called on a
         # reference object. See {#reference?}.
         #
         # @return [Boolean]
@@ -574,6 +574,35 @@ module Google
         def message_ordering?
           ensure_grpc!
           @grpc.enable_message_ordering
+        end
+
+        ##
+        # Whether the subscription is detached from its topic. Detached subscriptions don't receive messages from their
+        # topic and don't retain any backlog. {#pull} and {#listen} (pull and streaming pull) operations will raise
+        # `FAILED_PRECONDITION`. If the subscription is a push subscription (see {#push_config}), pushes to the endpoint
+        # will not be made. The default value is `false`.
+        #
+        # See {Topic#subscribe} and {#detach}.
+        #
+        # Makes an API call to retrieve the value when called on a
+        # reference object. See {#reference?}.
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   sub.detach
+        #
+        #   # sleep 120
+        #   sub.detached? #=> true
+        #
+        def detached?
+          ensure_grpc!
+          @grpc.detached
         end
 
         ##
@@ -620,6 +649,32 @@ module Google
         def delete
           ensure_service!
           service.delete_subscription name
+          true
+        end
+
+        ##
+        # Detaches a subscription from its topic. All messages retained in the subscription are dropped. Detached
+        # subscriptions don't receive messages from their topic and don't retain any backlog. Subsequent {#pull} and
+        # {#listen} (pull and streaming pull) operations will raise `FAILED_PRECONDITION`. If the subscription is a push
+        # subscription (see {#push_config}), pushes to the endpoint will stop. It may take a few minutes for the
+        # subscription's detached state to be reflected in subsequent calls to {#detached?}.
+        #
+        # @return [Boolean] Returns `true` if the detach operation was successful.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   sub.detach
+        #
+        #   # sleep 120
+        #   sub.detached? #=> true
+        #
+        def detach
+          ensure_service!
+          service.detach_subscription name
           true
         end
 

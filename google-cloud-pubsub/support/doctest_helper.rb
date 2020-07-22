@@ -371,6 +371,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::PubSub::Subscription#detach" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_publisher.expect :detach_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::PubSub::Subscription#policy" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp("my-subscription"), ["projects/my-project/subscriptions/my-subscription", Hash]
@@ -758,6 +766,7 @@ def subscription_hash topic_name, sub_name,
       }
     },
     ack_deadline_seconds: deadline,
+    detached: true,
     retain_acked_messages: true,
     message_retention_duration: { seconds: 600, nanos: 900000000 }, # 600.9 seconds
     labels: labels,

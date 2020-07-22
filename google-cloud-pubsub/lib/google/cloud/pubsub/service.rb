@@ -241,14 +241,13 @@ module Google
                             push_endpoint: options[:endpoint],
                             attributes:    (options[:attributes] || {}).to_h
                         end
-          mrd = Convert.number_to_duration options[:retention]
           execute do
             subscriber.create_subscription \
               name, topic,
               push_config:                push_config,
               ack_deadline_seconds:       options[:deadline],
               retain_acked_messages:      options[:retain_acked],
-              message_retention_duration: mrd,
+              message_retention_duration: Convert.number_to_duration(options[:retention]),
               labels:                     options[:labels],
               enable_message_ordering:    options[:message_ordering],
               filter:                     options[:filter],
@@ -266,12 +265,20 @@ module Google
         end
 
         ##
-        # Deletes an existing subscription.
-        # All pending messages in the subscription are immediately dropped.
+        # Deletes an existing subscription. All pending messages in the subscription are immediately dropped.
         def delete_subscription subscription
           execute do
-            subscriber.delete_subscription subscription_path(subscription),
-                                           options: default_options
+            subscriber.delete_subscription subscription_path(subscription), options: default_options
+          end
+        end
+
+        ##
+        # Detaches a subscription from its topic. All messages retained in the subscription are dropped. Subsequent
+        # `Pull` and `StreamingPull` requests will raise `FAILED_PRECONDITION`. If the subscription is a push
+        # subscription, pushes to the endpoint will stop.
+        def detach_subscription subscription
+          execute do
+            publisher.detach_subscription subscription_path(subscription), options: default_options
           end
         end
 

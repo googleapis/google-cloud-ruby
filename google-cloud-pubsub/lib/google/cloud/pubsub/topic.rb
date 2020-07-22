@@ -368,6 +368,7 @@ module Google
           options = { deadline: deadline, retain_acked: retain_acked, retention: retention, endpoint: endpoint,
                       labels: labels, message_ordering: message_ordering, filter: filter,
                       dead_letter_max_delivery_attempts: dead_letter_max_delivery_attempts }
+
           options[:dead_letter_topic_name] = dead_letter_topic.name if dead_letter_topic
           if options[:dead_letter_max_delivery_attempts] && !options[:dead_letter_topic_name]
             # Service error message "3:Invalid resource name given (name=)." does not identify param.

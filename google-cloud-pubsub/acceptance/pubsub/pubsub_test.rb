@@ -144,13 +144,14 @@ describe Google::Cloud::PubSub, :pubsub do
       end
     end
 
-    it "should allow create and update of subscription with options" do
+    it "should create, update, detach and delete a subscription" do
       # create
-      subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true,
-                                                              retention: 600,
-                                                              labels: labels,
-                                                              filter: filter,
-                                                              retry_policy: retry_policy
+      # `testdetachsubsxyz` is a special prefix to test the detach feature while pre-release in prod.
+      subscription = topic.subscribe "testdetachsubsxyz-#{$topic_prefix}-sub-detach", retain_acked: true,
+                                                                                      retention: 600,
+                                                                                      labels: labels,
+                                                                                      filter: filter,
+                                                                                      retry_policy: retry_policy
       _(subscription).wont_be :nil?
       _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
       assert subscription.retain_acked
@@ -161,6 +162,7 @@ describe Google::Cloud::PubSub, :pubsub do
       _(subscription.filter).must_be :frozen?
       _(subscription.retry_policy.minimum_backoff).must_equal retry_minimum_backoff
       _(subscription.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
+      _(subscription.detached?).must_equal false
 
       # update
       subscription.labels = {}
@@ -180,6 +182,14 @@ describe Google::Cloud::PubSub, :pubsub do
       subscription.retry_policy = Google::Cloud::PubSub::RetryPolicy.new maximum_backoff: retry_maximum_backoff
       _(subscription.retry_policy.minimum_backoff).must_equal 10 # Default value
       _(subscription.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
+ 
+      # detach
+      subscription.detach
+
+      # Per #6493, it can take 120 sec+ for the detachment to propagate. In the interim, the detached state is undefined.
+      sleep 120
+      subscription.reload!
+      _(subscription.detached?).must_equal true
 
       # delete
       subscription.delete
