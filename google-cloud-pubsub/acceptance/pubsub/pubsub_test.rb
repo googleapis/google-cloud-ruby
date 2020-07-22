@@ -146,11 +146,12 @@ describe Google::Cloud::PubSub, :pubsub do
 
     it "should create, update, detach and delete a subscription" do
       # create
-      subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true,
-                                                              retention: 600,
-                                                              labels: labels,
-                                                              filter: filter,
-                                                              retry_policy: retry_policy
+      # `testdetachsubsxyz` is a special prefix to test the detach feature while pre-release in prod.
+      subscription = topic.subscribe "testdetachsubsxyz-#{$topic_prefix}-sub-detach", retain_acked: true,
+                                                                                      retention: 600,
+                                                                                      labels: labels,
+                                                                                      filter: filter,
+                                                                                      retry_policy: retry_policy
       _(subscription).wont_be :nil?
       _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
       assert subscription.retain_acked
@@ -183,8 +184,11 @@ describe Google::Cloud::PubSub, :pubsub do
       _(subscription.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
  
       # detach
-      detached = subscription.detach
-      _(detached).must_equal true
+      subscription.detach
+
+      # Per #6493, it can take 120 sec+ for the detachment to propagate. In the interim, the detached state is undefined.
+      sleep 120
+      subscription.reload!
       _(subscription.detached?).must_equal true
 
       # delete
