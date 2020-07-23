@@ -42,3 +42,13 @@ library = gapic.ruby_library(
 )
 
 s.copy(library, merge=ruby.global_merge)
+
+# Disable Style/AsciiComments due to the following failure in
+# lib/google/cloud/bigtable/admin/v2/bigtable_table_admin/client.rb:1582:54:
+# C: Style/AsciiComments: Use only ascii symbols in comments.
+# #     <, >, <=, >=, !=, =, or :. Colon ‘:’ represents a HAS operator which is
+s.replace(
+    '.rubocop.yml',
+    'Style/CaseEquality:\n  Enabled: false\n',
+    'Style/AsciiComments:\n  Enabled: false\nStyle/CaseEquality:\n  Enabled: false\n'
+)
