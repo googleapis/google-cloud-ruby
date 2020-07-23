@@ -282,4 +282,11 @@ module Google
       end
     end
   end
+
+  # Aliases for compatibility with older spellings.
+  # @private
+  module Devtools
+    # @private
+    Cloudtrace = ::Google::Cloud::Trace unless const_defined? :Cloudtrace
+  end
 end
