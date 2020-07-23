@@ -178,8 +178,8 @@ module Google
           Spanner::Credentials.default(scope: scope)
       end
     end
-
-    # @private
-    Spanner = Cloud::Spanner unless const_defined? :Spanner
   end
+
+  # @private
+  Spanner = Cloud::Spanner unless const_defined? :Spanner
 end
