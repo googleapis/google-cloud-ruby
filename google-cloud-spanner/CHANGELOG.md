@@ -1,5 +1,28 @@
 # Release History
 
+### 2.0.0 / 2020-07-23
+
+This is a major update that removes the "low-level" client interface code, and
+instead adds `google-cloud-spanner-v1`, `google-cloud-spanner-admin-database-v1`,
+and `google-cloud-spanner-admin-instance-v1` as dependencies.
+The new dependencies are rewritten low-level clients, produced by a next-
+generation client code generator, with improved performance and stability.
+
+This change should have no effect on the high-level interface that most users
+will use. The one exception is that the (mostly undocumented) `client_config`
+argument, for adjusting low-level parameters such as RPC retry settings on
+client objects, has been removed. If you need to adjust these parameters, use
+the configuration interface in low-level clients.
+
+Substantial changes have been made in the low-level interfaces, however. If you
+are using the low-level classes under the old `Google::Spanner::V1` module,
+please review the docs for the new `google-cloud-spanner-v1` gem. In particular:
+
+* Some classes have been renamed, notably the client class itself.
+* The client constructor takes a configuration block instead of configuration
+  keyword arguments.
+* All RPC method arguments are now keyword arguments.
+
 ### 1.16.2 / 2020-05-28
 
 #### Documentation
