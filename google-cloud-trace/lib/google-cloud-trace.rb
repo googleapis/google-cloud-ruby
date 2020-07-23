@@ -98,11 +98,15 @@ module Google
     #     puts "Retrieved trace ID: #{trace.trace_id}"
     #   end
     #
-    def self.trace project_id = nil, credentials = nil, scope: nil,
+    def self.trace project_id = nil,
+                   credentials = nil,
+                   scope: nil,
                    timeout: nil
       require "google/cloud/trace"
-      Google::Cloud::Trace.new project_id: project_id, credentials: credentials,
-                               scope: scope, timeout: timeout
+      Google::Cloud::Trace.new project_id: project_id,
+                               credentials: credentials,
+                               scope: scope,
+                               timeout: timeout
     end
   end
 end

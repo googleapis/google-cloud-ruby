@@ -31,7 +31,10 @@ module Google
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, timeout: nil, host: nil
+        def initialize project,
+                       credentials,
+                       timeout: nil,
+                       host: nil
           @project = project
           @credentials = credentials
           @timeout = timeout
@@ -67,21 +70,23 @@ module Google
             traces_proto.traces.push trace.to_grpc
           end
 
-          lowlevel_client.patch_traces @project, traces_proto
+          lowlevel_client.patch_traces project_id: @project, traces: traces_proto
           traces
         end
 
         ##
         # Returns a trace given its ID
         def get_trace trace_id
-          trace_proto = lowlevel_client.get_trace @project, trace_id
+          trace_proto = lowlevel_client.get_trace project_id: @project, trace_id: trace_id
           Google::Cloud::Trace::TraceRecord.from_grpc trace_proto
         end
 
         ##
         # Searches for traces matching the given criteria.
         #
-        def list_traces project_id, start_time, end_time,
+        def list_traces project_id,
+                        start_time,
+                        end_time,
                         filter: nil,
                         order_by: nil,
                         view: nil,
@@ -89,7 +94,7 @@ module Google
                         page_token: nil
           start_proto = Google::Cloud::Trace::Utils.time_to_grpc start_time
           end_proto = Google::Cloud::Trace::Utils.time_to_grpc end_time
-          paged_enum = lowlevel_client.list_traces  project_id,
+          paged_enum = lowlevel_client.list_traces  project_id: project_id,
                                                     view: view,
                                                     page_size: page_size,
                                                     start_time: start_proto,
@@ -99,8 +104,11 @@ module Google
                                                     page_token: page_token
 
           Google::Cloud::Trace::ResultSet.from_gapic_page \
-            self, project_id,
-            paged_enum.page, start_time, end_time,
+            self,
+            project_id,
+            paged_enum.page,
+            start_time,
+            end_time,
             filter: filter,
             order_by: order_by,
             view: view,

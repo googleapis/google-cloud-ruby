@@ -66,14 +66,6 @@ end
 
 YARD::Doctest.configure do |doctest|
   ##
-  # SKIP
-  #
-
-  # Skip all GAPIC for now
-  doctest.skip "Google::Cloud::Trace::V1::TraceService::Client"
-  doctest.skip "Google::Cloud::Trace::V2::TraceService::Client"
-
-  ##
   # BEFORE (mocking)
   #
 
@@ -85,19 +77,19 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud#trace" do
     mock_trace do |mock|
-      mock.expect :list_traces, stubbed_list_traces, [String, Hash]
+      mock.expect :list_traces, stubbed_list_traces, [Hash]
     end
   end
 
   doctest.before "Google::Cloud.trace" do
     mock_trace do |mock|
-      mock.expect :list_traces, stubbed_list_traces, [String, Hash]
+      mock.expect :list_traces, stubbed_list_traces, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Trace" do
     mock_trace do |mock|
-      mock.expect :list_traces, stubbed_list_traces, [String, Hash]
+      mock.expect :list_traces, stubbed_list_traces, [Hash]
     end
   end
 
@@ -105,19 +97,19 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Trace::Project" do
     mock_trace do |mock|
-      mock.expect :list_traces, stubbed_list_traces, [String, Hash]
+      mock.expect :list_traces, stubbed_list_traces, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Trace::Project#get_trace" do
     mock_trace do |mock|
-      mock.expect :get_trace, stubbed_list_traces, [String, String]
+      mock.expect :get_trace, stubbed_list_traces, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Trace::Project#patch_traces" do
     mock_trace do |mock|
-      mock.expect :patch_traces, stubbed_list_traces, [String, Google::Cloud::Trace::V1::Traces]
+      mock.expect :patch_traces, stubbed_list_traces, [Hash]
     end
   end
 
