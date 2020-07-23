@@ -38,6 +38,7 @@ gem "google-cloud-bigquery-reservation-v1", path: "google-cloud-bigquery-reserva
 gem "google-cloud-bigquery-storage", path: "google-cloud-bigquery-storage"
 gem "google-cloud-bigquery-storage-v1", path: "google-cloud-bigquery-storage-v1"
 gem "google-cloud-bigtable", path: "google-cloud-bigtable"
+gem "google-cloud-bigtable-admin-v2", path: "google-cloud-bigtable-admin-v2"
 gem "google-cloud-bigtable-v2", path: "google-cloud-bigtable-v2"
 gem "google-cloud-billing", path: "google-cloud-billing"
 gem "google-cloud-billing-v1", path: "google-cloud-billing-v1"
