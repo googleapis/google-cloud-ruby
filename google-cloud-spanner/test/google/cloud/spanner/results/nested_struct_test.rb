@@ -36,7 +36,7 @@ describe Google::Cloud::Spanner::Results, :nested_struct, :mock_spanner do
               {values:[{string_value: "b"}, {string_value: "2"}]}}]}}]}
   end
   let(:results_enum) do
-    [Google::Spanner::V1::PartialResultSet.new(results_hash)].to_enum
+    [Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash)].to_enum
   end
   let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service }
 

@@ -50,7 +50,7 @@ describe "Spanner Database Operations", :spanner do
     jobs = instance.database_operations(filter: filter).all.to_a
     _(jobs).wont_be :empty?
     jobs.each do |job|
-      _(job.grpc.metadata).must_be_kind_of Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata
+      _(job.grpc.metadata).must_be_kind_of Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata
     end
   end
 end

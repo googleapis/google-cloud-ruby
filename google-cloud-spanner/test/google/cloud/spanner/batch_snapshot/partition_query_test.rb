@@ -18,19 +18,19 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
-  let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
+  let(:session_grpc) { Google::Cloud::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
   let(:transaction_id) { "tx789" }
-  let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id }
+  let(:transaction_grpc) { Google::Cloud::Spanner::V1::Transaction.new id: transaction_id }
   let(:batch_snapshot) { Google::Cloud::Spanner::BatchSnapshot.from_grpc transaction_grpc, session }
-  let(:tx_selector) { Google::Spanner::V1::TransactionSelector.new id: transaction_id }
-  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
-  let(:partitions_resp) { Google::Spanner::V1::PartitionResponse.new partitions: [Google::Spanner::V1::Partition.new(partition_token: "partition-token")] }
+  let(:tx_selector) { Google::Cloud::Spanner::V1::TransactionSelector.new id: transaction_id }
+  let(:default_options) { { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } } }
+  let(:partitions_resp) { Google::Cloud::Spanner::V1::PartitionResponse.new partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")] }
 
   it "can execute a simple query" do
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users"
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: nil, param_types: nil, partition_options: nil, options: default_options]
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: nil, param_types: nil, partition_options: nil }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_query sql
@@ -50,8 +50,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE active = @active"
     params = Google::Protobuf::Struct.new(fields: { "active" => Google::Protobuf::Value.new(bool_value: true) })
-    param_types = { "active" => Google::Spanner::V1::Type.new(code: :BOOL) }
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
+    param_types = { "active" => Google::Cloud::Spanner::V1::Type.new(code: :BOOL) }
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_query sql, params: { active: true }
@@ -71,8 +71,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE age = @age"
     params = Google::Protobuf::Struct.new(fields: { "age" => Google::Protobuf::Value.new(string_value: "29") })
-    param_types = { "age" => Google::Spanner::V1::Type.new(code: :INT64) }
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
+    param_types = { "age" => Google::Cloud::Spanner::V1::Type.new(code: :INT64) }
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_query sql, params: { age: 29 }
@@ -92,8 +92,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE score = @score"
     params = Google::Protobuf::Struct.new(fields: { "score" => Google::Protobuf::Value.new(number_value: 0.9) })
-    param_types = { "score" => Google::Spanner::V1::Type.new(code: :FLOAT64) }
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
+    param_types = { "score" => Google::Cloud::Spanner::V1::Type.new(code: :FLOAT64) }
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_query sql, params: { score: 0.9 }
@@ -115,8 +115,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE updated_at = @updated_at"
     params = Google::Protobuf::Struct.new(fields: { "updated_at" => Google::Protobuf::Value.new(string_value: "2017-01-02T03:04:05.060000000Z") })
-    param_types = { "updated_at" => Google::Spanner::V1::Type.new(code: :TIMESTAMP) }
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
+    param_types = { "updated_at" => Google::Cloud::Spanner::V1::Type.new(code: :TIMESTAMP) }
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_query sql, params: { updated_at: timestamp }
@@ -138,8 +138,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE birthday = @birthday"
     params = Google::Protobuf::Struct.new(fields: { "birthday" => Google::Protobuf::Value.new(string_value: "2017-01-02") })
-    param_types = { "birthday" => Google::Spanner::V1::Type.new(code: :DATE) }
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
+    param_types = { "birthday" => Google::Cloud::Spanner::V1::Type.new(code: :DATE) }
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_query sql, params: { birthday: date }
@@ -159,8 +159,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE name = @name"
     params = Google::Protobuf::Struct.new(fields: { "name" => Google::Protobuf::Value.new(string_value: "Charlie") })
-    param_types = { "name" => Google::Spanner::V1::Type.new(code: :STRING) }
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
+    param_types = { "name" => Google::Cloud::Spanner::V1::Type.new(code: :STRING) }
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_query sql, params: { name: "Charlie" }
@@ -182,8 +182,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE avatar = @avatar"
     params = Google::Protobuf::Struct.new(fields: { "avatar" => Google::Protobuf::Value.new(string_value: Base64.strict_encode64("contents")) })
-    param_types = { "avatar" => Google::Spanner::V1::Type.new(code: :BYTES) }
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
+    param_types = { "avatar" => Google::Cloud::Spanner::V1::Type.new(code: :BYTES) }
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_query sql, params: { avatar: file }
@@ -203,8 +203,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE project_ids = @list"
     params = Google::Protobuf::Struct.new(fields: { "list" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")])) })
-    param_types = { "list" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)) }
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
+    param_types = { "list" => Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)) }
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_query sql, params: { list: [1,2,3] }
@@ -224,8 +224,9 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE project_ids = @list"
     params = Google::Protobuf::Struct.new(fields: { "list" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])) })
-    param_types = { "list" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)) }
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
+    param_types = { "list" => Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)) }
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil }, default_options]
+
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_query sql, params: { list: [] }, types: { list: [:INT64] }
@@ -245,8 +246,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE settings = @dict"
     params = Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "production")])) })
-    param_types = { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING))])) }
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
+    param_types = { "dict" => Google::Cloud::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Cloud::Spanner::V1::StructType.new(fields: [Google::Cloud::Spanner::V1::StructType::Field.new(name: "env", type: Google::Cloud::Spanner::V1::Type.new(code: :STRING))])) }
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_query sql, params: { dict: { env: :production } }
@@ -266,8 +267,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE settings = @dict"
     params = Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "production"), Google::Protobuf::Value.new(number_value: 0.9), Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")] )) ])) })
-    param_types = { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "score", type: Google::Spanner::V1::Type.new(code: :FLOAT64)), Google::Spanner::V1::StructType::Field.new(name: "project_ids", type: Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)))] )) }
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
+    param_types = { "dict" => Google::Cloud::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Cloud::Spanner::V1::StructType.new(fields: [Google::Cloud::Spanner::V1::StructType::Field.new(name: "env", type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)), Google::Cloud::Spanner::V1::StructType::Field.new(name: "score", type: Google::Cloud::Spanner::V1::Type.new(code: :FLOAT64)), Google::Cloud::Spanner::V1::StructType::Field.new(name: "project_ids", type: Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)))] )) }
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_query sql, params: { dict: { env: "production", score: 0.9, project_ids: [1,2,3] } }
@@ -287,8 +288,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE STRUCT<name STRING, email STRING>(name, email) IN UNNEST(@data)"
     params = Google::Protobuf::Struct.new(fields: { "data" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "mike"), Google::Protobuf::Value.new(string_value: "mike@example.net")] )), Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "chris"), Google::Protobuf::Value.new(string_value: "chris@example.net")] ))] )) } )
-    param_types = { "data" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [ Google::Spanner::V1::StructType::Field.new(name: "name", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "email", type: Google::Spanner::V1::Type.new(code: :STRING))] ))) }
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
+    param_types = { "data" => Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Cloud::Spanner::V1::StructType.new(fields: [ Google::Cloud::Spanner::V1::StructType::Field.new(name: "name", type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)), Google::Cloud::Spanner::V1::StructType::Field.new(name: "email", type: Google::Cloud::Spanner::V1::Type.new(code: :STRING))] ))) }
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     struct_fields = Google::Cloud::Spanner::Fields.new name: :STRING, email: :STRING
@@ -309,8 +310,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE STRUCT<name STRING, email STRING>(name, email) IN UNNEST(@data)"
     params = Google::Protobuf::Struct.new(fields: { "data" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "mike"), Google::Protobuf::Value.new(string_value: "mike@example.net")] )), Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "chris"), Google::Protobuf::Value.new(string_value: "chris@example.net")] ))] )) } )
-    param_types = { "data" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [ Google::Spanner::V1::StructType::Field.new(name: "name", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "email", type: Google::Spanner::V1::Type.new(code: :STRING))] ))) }
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
+    param_types = { "data" => Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Cloud::Spanner::V1::StructType.new(fields: [ Google::Cloud::Spanner::V1::StructType::Field.new(name: "name", type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)), Google::Cloud::Spanner::V1::StructType::Field.new(name: "email", type: Google::Cloud::Spanner::V1::Type.new(code: :STRING))] ))) }
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     struct_fields = Google::Cloud::Spanner::Fields.new name: :STRING, email: :STRING
@@ -331,8 +332,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE settings = @dict"
     params = Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])) })
-    param_types = { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [])) }
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
+    param_types = { "dict" => Google::Cloud::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Cloud::Spanner::V1::StructType.new(fields: [])) }
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_query sql, params: { dict: { } }
@@ -350,10 +351,10 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
 
   it "can execute a query with partition_size_bytes" do
     partition_size_bytes = 65536
-    partition_options = Google::Spanner::V1::PartitionOptions.new partition_size_bytes: partition_size_bytes, max_partitions: 0
+    partition_options = Google::Cloud::Spanner::V1::PartitionOptions.new partition_size_bytes: partition_size_bytes, max_partitions: 0
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users"
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: nil, param_types: nil, partition_options: partition_options, options: default_options]
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: nil, param_types: nil, partition_options: partition_options }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_query sql, partition_size_bytes: partition_size_bytes
@@ -371,10 +372,10 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
 
   it "can execute a query with max_partitions" do
     max_partitions = 4
-    partition_options = Google::Spanner::V1::PartitionOptions.new partition_size_bytes: 0, max_partitions: max_partitions
+    partition_options = Google::Cloud::Spanner::V1::PartitionOptions.new partition_size_bytes: 0, max_partitions: max_partitions
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users"
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: nil, param_types: nil, partition_options: partition_options, options: default_options]
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: nil, param_types: nil, partition_options: partition_options }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_query sql, max_partitions: max_partitions
@@ -394,7 +395,7 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     expect_query_options = { optimizer_version: "1" }
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users"
-    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: nil, param_types: nil, partition_options: nil, options: default_options]
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: nil, param_types: nil, partition_options: nil }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_query sql, query_options: expect_query_options

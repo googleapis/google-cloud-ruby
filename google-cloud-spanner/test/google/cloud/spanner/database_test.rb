@@ -28,7 +28,7 @@ describe Google::Cloud::Spanner::Instance, :mock_spanner do
     )
   end
   let(:database_grpc) do
-    Google::Spanner::Admin::Database::V1::Database.new \
+    Google::Cloud::Spanner::Admin::Database::V1::Database.new \
       database_hash(instance_id: instance_id, database_id: database_id, restore_info: restore_info)
   end
   let(:database) { Google::Cloud::Spanner::Database.from_grpc database_grpc, spanner.service }

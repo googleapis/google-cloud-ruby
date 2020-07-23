@@ -155,7 +155,7 @@ module Google
               Convert.to_input_params_and_types params, types
             # param_types is a grpc map field, can't be nil
             converted_types ||= {}
-            Google::Spanner::V1::ExecuteBatchDmlRequest::Statement.new(
+            V1::ExecuteBatchDmlRequest::Statement.new(
               sql: sql,
               params: converted_params,
               param_types: converted_types

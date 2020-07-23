@@ -172,13 +172,13 @@ module Google
           new.tap do |p|
             if data[:execute]
               execute_sql_grpc = \
-                Google::Spanner::V1::ExecuteSqlRequest.decode(
+                V1::ExecuteSqlRequest.decode(
                   Base64.decode64(data[:execute])
                 )
               p.instance_variable_set :@execute, execute_sql_grpc
             end
             if data[:read]
-              read_grpc = Google::Spanner::V1::ReadRequest.decode \
+              read_grpc = V1::ReadRequest.decode \
                 Base64.decode64(data[:read])
               p.instance_variable_set :@read, read_grpc
             end
@@ -194,7 +194,7 @@ module Google
         end
 
         ##
-        # @private New Partition from a Google::Spanner::V1::ExecuteSqlRequest
+        # @private New Partition from a `Google::Cloud::Spanner::V1::ExecuteSqlRequest`
         # object.
         def self.from_execute_sql_grpc grpc
           new.tap do |p|
@@ -203,7 +203,7 @@ module Google
         end
 
         ##
-        # @private New Partition from a Google::Spanner::V1::ReadRequest object.
+        # @private New Partition from a `Google::Cloud::Spanner::V1::ReadRequest` object.
         def self.from_read_grpc grpc
           new.tap do |p|
             p.instance_variable_set :@read, grpc

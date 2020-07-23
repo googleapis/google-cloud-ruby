@@ -18,9 +18,9 @@ describe Google::Cloud::Spanner::Project, :instance, :mock_spanner do
   it "gets an instance" do
     instance_id = "found-instance"
 
-    get_res = Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id)
+    get_res = Google::Cloud::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id)
     mock = Minitest::Mock.new
-    mock.expect :get_instance, get_res, [instance_path(instance_id)]
+    mock.expect :get_instance, get_res, [name: instance_path(instance_id)]
     spanner.service.mocked_instances = mock
 
     instance = spanner.instance instance_id
@@ -39,7 +39,7 @@ describe Google::Cloud::Spanner::Project, :instance, :mock_spanner do
 
     stub = Object.new
     def stub.get_instance *args
-      gax_error = Google::Gax::GaxError.new "not found"
+      gax_error = Google::Cloud::NotFoundError.new "not found"
       gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
       raise gax_error
     end

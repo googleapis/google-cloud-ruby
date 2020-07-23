@@ -342,10 +342,10 @@ module Google
         #   response.
         #
         #   The response returns a list of
-        #   {Google::Longrunning::Operation long-running operations} whose names
+        #  `Google::Longrunning::Operation` long-running operations whose names
         #   are prefixed by a database name within the specified instance.
         #   The long-running operation
-        #   {Google::Longrunning::Operation#metadata metadata} field type
+        #   `Google::Longrunning::Operation#metadata` metadata field type
         #   `metadata.type_url` describes the type of the metadata.
         #
         #   The filter expression must specify the field name,
@@ -603,10 +603,10 @@ module Google
         #   response.
         #
         #   The response returns a list of
-        #   {Google::Longrunning::Operation long-running operations} whose names
+        #   `Google::Longrunning::Operation` long-running operations whose names
         #   are prefixed by a backup name within the specified instance.
         #   The long-running operation
-        #   {Google::Longrunning::Operation#metadata metadata} field type
+        #   `Google::Longrunning::Operation#metadata` metadata field type
         #   `metadata.type_url` describes the type of the metadata.
         #
         #   The filter expression must specify the field name of an operation, a
@@ -856,7 +856,7 @@ module Google
 
         ##
         # @private Creates a new Instance instance from a
-        # Google::Spanner::Admin::Instance::V1::Instance.
+        # `Google::Cloud::Spanner::Admin::Instance::V1::Instance`.
         def self.from_grpc grpc, service
           new grpc, service
         end
@@ -868,13 +868,6 @@ module Google
         # available.
         def ensure_service!
           raise "Must have active connection to service" unless service
-        end
-
-        def instance_config_path name
-          return name if name.to_s.include? "/"
-          Admin::Instance::V1::InstanceAdminClient.instance_config_path(
-            project, name.to_s
-          )
         end
       end
     end

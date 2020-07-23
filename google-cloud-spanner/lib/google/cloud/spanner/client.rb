@@ -1336,8 +1336,8 @@ module Google
         def create_new_session
           ensure_service!
           grpc = @project.service.create_session \
-            Admin::Database::V1::DatabaseAdminClient.database_path(
-              project_id, instance_id, database_id
+            Admin::Database::V1::DatabaseAdmin::Paths.database_path(
+              project: project_id, instance: instance_id, database: database_id
             ),
             labels: @session_labels
           Session.from_grpc grpc, @project.service, query_options: @query_options
@@ -1364,8 +1364,8 @@ module Google
         def batch_create_sessions session_count
           ensure_service!
           resp = @project.service.batch_create_sessions \
-            Admin::Database::V1::DatabaseAdminClient.database_path(
-              project_id, instance_id, database_id
+            Admin::Database::V1::DatabaseAdmin::Paths.database_path(
+              project: project_id, instance: instance_id, database: database_id
             ),
             session_count,
             labels: @session_labels
@@ -1421,9 +1421,9 @@ module Google
           bounded_staleness = Convert.number_to_duration \
             opts[:bounded_staleness] || opts[:max_staleness]
 
-          Google::Spanner::V1::TransactionSelector.new(single_use:
-            Google::Spanner::V1::TransactionOptions.new(read_only:
-              Google::Spanner::V1::TransactionOptions::ReadOnly.new({
+          V1::TransactionSelector.new(single_use:
+            V1::TransactionOptions.new(read_only:
+              V1::TransactionOptions::ReadOnly.new({
                 strong: opts[:strong],
                 read_timestamp: exact_timestamp,
                 exact_staleness: exact_staleness,
@@ -1435,7 +1435,7 @@ module Google
 
         def pdml_transaction session
           pdml_tx_grpc = @project.service.create_pdml session.path
-          Google::Spanner::V1::TransactionSelector.new id: pdml_tx_grpc.id
+          V1::TransactionSelector.new id: pdml_tx_grpc.id
         end
 
         ##

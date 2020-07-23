@@ -920,7 +920,7 @@ module Google
 
         ##
         # @private Creates a new Transaction instance from a
-        # Google::Spanner::V1::Transaction.
+        # `Google::Cloud::Spanner::V1::Transaction`.
         def self.from_grpc grpc, session
           new.tap do |s|
             s.instance_variable_set :@grpc,    grpc
@@ -933,7 +933,7 @@ module Google
         # The TransactionSelector to be used for queries
         def tx_selector
           return nil if transaction_id.nil?
-          Google::Spanner::V1::TransactionSelector.new id: transaction_id
+          V1::TransactionSelector.new id: transaction_id
         end
 
         ##

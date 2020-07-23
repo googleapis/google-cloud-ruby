@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "googleauth"
+require "google/cloud/spanner/admin/instance/v1/instance_admin/credentials"
 
 module Google
   module Cloud
@@ -23,7 +23,7 @@ module Google
           ##
           # @deprecated Use version-specific credentials classes
           #
-          Credentials = Google::Cloud::Spanner::Admin::Instance::V1::Credentials
+          Credentials = V1::InstanceAdmin::Credentials
         end
       end
     end

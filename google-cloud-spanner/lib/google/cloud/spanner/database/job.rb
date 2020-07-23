@@ -52,7 +52,7 @@ module Google
         #
         class Job
           ##
-          # @private The Google::Gax::Operation gRPC object.
+          # @private The `Gapic::Operation` gRPC object.
           attr_accessor :grpc
 
           ##
@@ -89,7 +89,7 @@ module Google
             return nil unless done?
             return nil unless @grpc.grpc_op.result == :response
             return nil unless @grpc.results.instance_of? \
-              Google::Spanner::Admin::Database::V1::Database
+              Admin::Database::V1::Database
             Database.from_grpc @grpc.results, service
           end
 
@@ -201,7 +201,7 @@ module Google
           end
 
           ##
-          # @private New Database::Job from a Google::Gax::Operation object.
+          # @private New Database::Job from a `Gapic::Operation` object.
           def self.from_grpc grpc, service
             new.tap do |job|
               job.instance_variable_set :@grpc, grpc

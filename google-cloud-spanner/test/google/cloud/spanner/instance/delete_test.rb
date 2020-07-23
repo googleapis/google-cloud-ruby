@@ -16,12 +16,12 @@ require "helper"
 
 describe Google::Cloud::Spanner::Instance, :delete, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
-  let(:instance_grpc) { Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id) }
+  let(:instance_grpc) { Google::Cloud::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id) }
   let(:instance) { Google::Cloud::Spanner::Instance.from_grpc instance_grpc, spanner.service }
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_instance, nil, [instance_grpc.name]
+    mock.expect :delete_instance, nil, [name: instance_grpc.name]
     spanner.service.mocked_instances = mock
 
     instance.delete

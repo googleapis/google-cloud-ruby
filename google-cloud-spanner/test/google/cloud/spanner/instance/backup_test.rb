@@ -18,16 +18,16 @@ require "helper"
 describe Google::Cloud::Spanner::Instance, :backup, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
-  let(:instance_grpc) { Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id) }
+  let(:instance_grpc) { Google::Cloud::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id) }
   let(:instance) { Google::Cloud::Spanner::Instance.from_grpc instance_grpc, spanner.service }
 
   it "gets a database backup" do
     backup_id = "found-backup"
 
-    get_res = Google::Spanner::Admin::Database::V1::Backup.new \
+    get_res = Google::Cloud::Spanner::Admin::Database::V1::Backup.new \
       backup_hash(instance_id: instance_id, database_id: database_id, backup_id: backup_id)
     mock = Minitest::Mock.new
-    mock.expect :get_backup, get_res, [backup_path(instance_id, backup_id)]
+    mock.expect :get_backup, get_res, [name: backup_path(instance_id, backup_id)]
     instance.service.mocked_databases = mock
 
     backup = instance.backup backup_id
@@ -51,7 +51,7 @@ describe Google::Cloud::Spanner::Instance, :backup, :mock_spanner do
 
     stub = Object.new
     def stub.get_backup *args
-      gax_error = Google::Gax::GaxError.new "not found"
+      gax_error = Google::Cloud::NotFoundError.new "not found"
       gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
       raise gax_error
     end

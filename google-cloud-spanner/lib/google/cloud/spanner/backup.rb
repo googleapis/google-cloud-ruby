@@ -296,7 +296,7 @@ module Google
         ##
         # @private
         # Creates a new Backup instance from a
-        # {Google::Spanner::Admin::Database::V1::Backup}.
+        # `Google::Cloud::Spanner::Admin::Database::V1::Backup`.
         def self.from_grpc grpc, service
           new grpc, service
         end

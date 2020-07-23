@@ -18,10 +18,9 @@ describe Google::Cloud::Spanner::Project, :instance_config, :mock_spanner do
   it "gets an instance config" do
     config_name = "found-config"
 
-
-    get_res = Google::Spanner::Admin::Instance::V1::InstanceConfig.new instance_config_hash
+    get_res = Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig.new instance_config_hash
     mock = Minitest::Mock.new
-    mock.expect :get_instance_config, get_res, [instance_config_path(config_name)]
+    mock.expect :get_instance_config, get_res, [name: instance_config_path(config_name)]
     spanner.service.mocked_instances = mock
 
     config = spanner.instance_config config_name
@@ -40,7 +39,7 @@ describe Google::Cloud::Spanner::Project, :instance_config, :mock_spanner do
 
     stub = Object.new
     def stub.get_instance_config *args
-      gax_error = Google::Gax::GaxError.new "not found"
+      gax_error = Google::Cloud::NotFoundError.new "not found"
       gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
       raise gax_error
     end

@@ -53,7 +53,7 @@ module Google
         #
         class Job
           ##
-          # @private The Google::Gax::Operation gRPC object.
+          # @private The `Gapic::Operation` gRPC object.
           attr_accessor :grpc
 
           ##
@@ -260,7 +260,7 @@ module Google
           end
 
           ##
-          # @private New Backup::Job from a Google::Gax::Operation object.
+          # @private New Backup::Job from a `Gapic::Operation` object.
           def self.from_grpc grpc, service
             new.tap do |job|
               job.instance_variable_set :@grpc, grpc

@@ -67,9 +67,9 @@ describe "Spanner Database Backup", :spanner do
     backup = instance.backup backup_id
     _(backup.expire_time.to_i).must_equal((expire_time + 3600).to_i)
 
-    _ { proc {
+    _ {
       backup.expire_time = Time.now - 36000
-    } }.must_raise Google::Cloud::Error
+    }.must_raise Google::Cloud::InvalidArgumentError
     _(backup.expire_time.to_i).must_equal((expire_time + 3600 ).to_i)
 
     # Restore

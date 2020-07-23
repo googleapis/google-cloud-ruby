@@ -18,12 +18,14 @@ describe Google::Cloud::Spanner::Client, :close, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
-  let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
+  let(:session_grpc) { Google::Cloud::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
-  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
+  let(:default_options) { { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0, max: 4 } }
   let(:pool) { client.instance_variable_get :@pool }
-  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
+  let(:default_options) {
+    { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) }}
+  }
 
   before do
     session.instance_variable_set :@last_updated_at, Time.now
@@ -34,7 +36,7 @@ describe Google::Cloud::Spanner::Client, :close, :mock_spanner do
 
   it "deletes sessions when closed" do
     mock = Minitest::Mock.new
-    mock.expect :delete_session, nil, [session_grpc.name, options: default_options]
+    mock.expect :delete_session, nil, [{name: session_grpc.name},  default_options]
     session.service.mocked_service = mock
 
     client.close
@@ -46,7 +48,7 @@ describe Google::Cloud::Spanner::Client, :close, :mock_spanner do
 
   it "cannot be used after being closed" do
     mock = Minitest::Mock.new
-    mock.expect :delete_session, nil, [session_grpc.name, options: default_options]
+    mock.expect :delete_session, nil, [{name: session_grpc.name}, default_options]
     session.service.mocked_service = mock
 
     client.close

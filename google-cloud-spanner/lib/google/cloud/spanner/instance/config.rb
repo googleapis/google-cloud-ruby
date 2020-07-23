@@ -77,7 +77,7 @@ module Google
 
           ##
           # @private Creates a new Instance::Config instance from a
-          # Google::Spanner::Admin::Instance::V1::InstanceConfig.
+          # `Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig`.
           def self.from_grpc grpc
             new grpc
           end

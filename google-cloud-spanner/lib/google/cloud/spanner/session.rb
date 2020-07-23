@@ -42,7 +42,7 @@ module Google
       #
       class Session
         ##
-        # @private The Google::Spanner::V1::Session object
+        # @private The `Google::Cloud::Spanner::V1::Session` object
         attr_accessor :grpc
 
         ##
@@ -150,7 +150,7 @@ module Google
         #     specified using a {Fields} object.
         #
         #   Types are optional.
-        # @param [Google::Spanner::V1::TransactionSelector] transaction The
+        # @param [Google::Cloud::Spanner::V1::TransactionSelector] transaction The
         #   transaction selector value to send. Only used for single-use
         #   transactions.
         # @param [Integer] seqno A per-transaction sequence number used to
@@ -297,7 +297,7 @@ module Google
         ##
         # Executes DML statements in a batch.
         #
-        # @param [Google::Spanner::V1::TransactionSelector] transaction The
+        # @param [Google::Cloud::Spanner::V1::TransactionSelector] transaction The
         #   transaction selector value to send. Only used for single-use
         #   transactions.
         # @param [Integer] seqno A per-transaction sequence number used to
@@ -346,7 +346,7 @@ module Google
         #   Optional.
         # @param [Integer] limit If greater than zero, no more than this number
         #   of rows will be returned. The default is no limit.
-        # @param [Google::Spanner::V1::TransactionSelector] transaction The
+        # @param [Google::Cloud::Spanner::V1::TransactionSelector] transaction The
         #   transaction selector value to send. Only used for single-use
         #   transactions.
         #
@@ -675,8 +675,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           labels = @grpc.labels.to_h unless @grpc.labels.to_h.empty?
           @grpc = service.create_session \
-            Admin::Database::V1::DatabaseAdminClient.database_path(
-              project_id, instance_id, database_id
+            V1::Spanner::Paths.database_path(
+              project: project_id, instance: instance_id, database: database_id
             ),
             labels: labels
           @last_updated_at = Time.now
@@ -693,8 +693,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           labels = @grpc.labels.to_h unless @grpc.labels.to_h.empty?
           @grpc = service.create_session \
-            Admin::Database::V1::DatabaseAdminClient.database_path(
-              project_id, instance_id, database_id
+            V1::Spanner::Paths.database_path(
+              project: project_id, instance: instance_id, database: database_id
             ),
             labels: labels
           false
@@ -718,7 +718,7 @@ module Google
 
         ##
         # @private Creates a new Session instance from a
-        # Google::Spanner::V1::Session.
+        # `Google::Cloud::Spanner::V1::Session`.
         def self.from_grpc grpc, service, query_options: nil
           new grpc, service, query_options: query_options
         end

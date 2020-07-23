@@ -52,7 +52,7 @@ module Google
 
           ##
           # @private Creates a new Database::RestoreInfo instance from a
-          # Google::Spanner::Admin::Database::V1::RestoreInfo.
+          # `Google::Cloud::Spanner::Admin::Database::V1::RestoreInfo`
           def self.from_grpc grpc
             new grpc
           end

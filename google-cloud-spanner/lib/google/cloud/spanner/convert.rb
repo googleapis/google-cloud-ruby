@@ -169,12 +169,12 @@ module Google
             return field.to_grpc_type if field.respond_to? :to_grpc_type
 
             if Array === field
-              Google::Spanner::V1::Type.new(
+              V1::Type.new(
                 code: :ARRAY,
                 array_element_type: grpc_type_for_field(field.first)
               )
             else
-              Google::Spanner::V1::Type.new(code: field)
+              V1::Type.new(code: field)
             end
           end
 
@@ -274,24 +274,24 @@ module Google
               range_opts.delete :end_closed
             end
 
-            Google::Spanner::V1::KeyRange.new range_opts
+            V1::KeyRange.new range_opts
           end
 
           def to_key_set keys
-            return Google::Spanner::V1::KeySet.new(all: true) if keys.nil?
+            return V1::KeySet.new(all: true) if keys.nil?
             keys = [keys] unless keys.is_a? Array
-            return Google::Spanner::V1::KeySet.new(all: true) if keys.empty?
+            return V1::KeySet.new(all: true) if keys.empty?
 
             if keys_are_ranges? keys
               key_ranges = keys.map { |r| to_key_range(r) }
-              return Google::Spanner::V1::KeySet.new(ranges: key_ranges)
+              return V1::KeySet.new(ranges: key_ranges)
             end
 
             key_list = keys.map do |key|
               key = [key] unless key.is_a? Array
               object_to_grpc_value(key).list_value
             end
-            Google::Spanner::V1::KeySet.new keys: key_list
+            V1::KeySet.new keys: key_list
           end
 
           def keys_are_ranges? keys

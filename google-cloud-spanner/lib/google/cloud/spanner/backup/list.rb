@@ -143,8 +143,7 @@ module Google
           ##
           # @private
           # New Backup::List from a
-          # Google::Gax::PagedEnumerable<Google::Spanner::Admin::Database::\
-          #   V1::Backup>
+          # `Gapic::PagedEnumerable<Google::Cloud::Spanner::Admin::Database::V1::Backup>`
           # object.
           def self.from_grpc grpc, service
             backups = List.new(Array(grpc.response.backups).map do |backup|

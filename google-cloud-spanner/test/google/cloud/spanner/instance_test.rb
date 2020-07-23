@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Spanner::Instance, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
-  let(:instance_grpc) { Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id) }
+  let(:instance_grpc) { Google::Cloud::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id) }
   let(:instance) { Google::Cloud::Spanner::Instance.from_grpc instance_grpc, spanner.service }
 
   it "knows the identifiers" do

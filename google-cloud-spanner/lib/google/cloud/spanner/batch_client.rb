@@ -407,8 +407,8 @@ module Google
         def session
           ensure_service!
           grpc = @project.service.create_session \
-            Admin::Database::V1::DatabaseAdminClient.database_path(
-              project_id, instance_id, database_id
+            V1::Spanner::Paths.database_path(
+              project: project_id, instance: instance_id, database: database_id
             ),
             labels: @session_labels
           Session.from_grpc grpc, @project.service, query_options: @query_options

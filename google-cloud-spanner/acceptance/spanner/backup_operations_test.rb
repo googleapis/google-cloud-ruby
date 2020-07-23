@@ -72,7 +72,7 @@ describe "Spanner Database Backup Operations", :spanner do
     jobs = instance.backup_operations(filter: filter).all.to_a
     _(jobs).wont_be :empty?
     jobs.each do |job|
-      _(job.grpc.metadata).must_be_kind_of Google::Spanner::Admin::Database::V1::CreateBackupMetadata
+      _(job.grpc.metadata).must_be_kind_of Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata
     end
 
     # Filter by job start time

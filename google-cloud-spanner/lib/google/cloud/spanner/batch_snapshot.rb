@@ -207,7 +207,7 @@ module Google
                               max_partitions: max_partitions
           results.partitions.map do |grpc|
             # Convert partition protos to execute sql request protos
-            execute_sql_grpc = Google::Spanner::V1::ExecuteSqlRequest.new(
+            execute_sql_grpc = V1::ExecuteSqlRequest.new(
               {
                 session: session.path,
                 sql: sql,
@@ -282,7 +282,7 @@ module Google
 
           results.partitions.map do |grpc|
             # Convert partition protos to read request protos
-            read_grpc = Google::Spanner::V1::ReadRequest.new(
+            read_grpc = V1::ReadRequest.new(
               {
                 session: session.path,
                 table: table,
@@ -663,17 +663,15 @@ module Google
         def self.load data, service: nil, query_options: nil
           data = JSON.parse data, symbolize_names: true unless data.is_a? Hash
 
-          session_grpc = Google::Spanner::V1::Session.decode \
-            Base64.decode64(data[:session])
-          transaction_grpc = Google::Spanner::V1::Transaction.decode \
-            Base64.decode64(data[:transaction])
+          session_grpc = V1::Session.decode Base64.decode64(data[:session])
+          transaction_grpc = V1::Transaction.decode Base64.decode64(data[:transaction])
 
           from_grpc transaction_grpc, Session.from_grpc(session_grpc, service, query_options: query_options)
         end
 
         ##
         # @private Creates a new BatchSnapshot instance from a
-        # Google::Spanner::V1::Transaction.
+        # `Google::Cloud::Spanner::V1::Transaction`.
         def self.from_grpc grpc, session
           new grpc, session
         end
@@ -682,7 +680,7 @@ module Google
 
         # The TransactionSelector to be used for queries
         def tx_selector
-          Google::Spanner::V1::TransactionSelector.new id: transaction_id
+          V1::TransactionSelector.new id: transaction_id
         end
 
         ##

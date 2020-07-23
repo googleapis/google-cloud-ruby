@@ -18,22 +18,25 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_read, :mock_spanner d
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
-  let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
+  let(:session_grpc) { Google::Cloud::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
   let(:transaction_id) { "tx789" }
-  let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id }
+  let(:transaction_grpc) { Google::Cloud::Spanner::V1::Transaction.new id: transaction_id }
   let(:batch_snapshot) { Google::Cloud::Spanner::BatchSnapshot.from_grpc transaction_grpc, session }
-  let(:tx_selector) { Google::Spanner::V1::TransactionSelector.new id: transaction_id }
-  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
+  let(:tx_selector) { Google::Cloud::Spanner::V1::TransactionSelector.new id: transaction_id }
+  let(:default_options) { { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } } }
   let(:columns) { [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids] }
   let(:columns_arg) { ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"] }
-  let(:partitions_resp) { Google::Spanner::V1::PartitionResponse.new partitions: [Google::Spanner::V1::Partition.new(partition_token: "partition-token")] }
+  let(:partitions_resp) { Google::Cloud::Spanner::V1::PartitionResponse.new partitions: [Google::Cloud::Spanner::V1::Partition.new(partition_token: "partition-token")] }
 
   it "can read all rows" do
 
     mock = Minitest::Mock.new
-    key_set = Google::Spanner::V1::KeySet.new(all: true)
-    mock.expect :partition_read, partitions_resp, [session.path, "my-table", key_set, {transaction: tx_selector, index: nil, columns: columns_arg, partition_options: nil, options: default_options}]
+    key_set = Google::Cloud::Spanner::V1::KeySet.new(all: true)
+    mock.expect :partition_read, partitions_resp, [{
+      session: session.path, table: "my-table", key_set: key_set,
+      transaction: tx_selector, index: nil, columns: columns_arg, partition_options: nil
+    }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_read "my-table", columns
@@ -50,10 +53,12 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_read, :mock_spanner d
   end
 
   it "can read rows by id" do
-
     mock = Minitest::Mock.new
-    key_set = Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([2]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([3]).list_value])
-    mock.expect :partition_read, partitions_resp, [session.path, "my-table", key_set, {transaction: tx_selector, index: nil, columns: columns_arg, partition_options: nil, options: default_options}]
+    key_set = Google::Cloud::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([2]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([3]).list_value])
+    mock.expect :partition_read, partitions_resp, [{
+      session: session.path, table: "my-table", key_set: key_set,
+      transaction: tx_selector, index: nil, columns: columns_arg, partition_options: nil
+    }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_read "my-table", columns, keys: [1, 2, 3]
@@ -72,8 +77,11 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_read, :mock_spanner d
   it "can read rows with index" do
 
     mock = Minitest::Mock.new
-    key_set = Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1,1]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([2,2]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([3,3]).list_value])
-    mock.expect :partition_read, partitions_resp, [session.path, "my-table", key_set, {transaction: tx_selector, index: "MyTableCompositeKey", columns: columns_arg, partition_options: nil, options: default_options}]
+    key_set = Google::Cloud::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1,1]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([2,2]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([3,3]).list_value])
+    mock.expect :partition_read, partitions_resp, [{
+      session: session.path, table: "my-table", key_set: key_set,
+      transaction: tx_selector, index: "MyTableCompositeKey", columns: columns_arg, partition_options: nil
+    }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_read "my-table", columns, keys: [[1,1], [2,2], [3,3]], index: "MyTableCompositeKey"
@@ -92,8 +100,11 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_read, :mock_spanner d
   it "can read rows with index and range" do
 
     mock = Minitest::Mock.new
-    key_set = Google::Spanner::V1::KeySet.new(ranges: [Google::Cloud::Spanner::Convert.to_key_range([1,1]..[3,3])])
-    mock.expect :partition_read, partitions_resp, [session.path, "my-table", key_set, {transaction: tx_selector, index: "MyTableCompositeKey", columns: columns_arg, partition_options: nil, options: default_options}]
+    key_set = Google::Cloud::Spanner::V1::KeySet.new(ranges: [Google::Cloud::Spanner::Convert.to_key_range([1,1]..[3,3])])
+    mock.expect :partition_read, partitions_resp, [{
+      session: session.path, table: "my-table", key_set: key_set,
+      transaction: tx_selector, index: "MyTableCompositeKey", columns: columns_arg, partition_options: nil
+    }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     lookup_range = Google::Cloud::Spanner::Range.new [1,1], [3,3]
@@ -112,10 +123,13 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_read, :mock_spanner d
 
   it "can read all rows with partition_size_bytes" do
     partition_size_bytes = 65536
-    partition_options = Google::Spanner::V1::PartitionOptions.new partition_size_bytes: partition_size_bytes, max_partitions: 0
+    partition_options = Google::Cloud::Spanner::V1::PartitionOptions.new partition_size_bytes: partition_size_bytes, max_partitions: 0
     mock = Minitest::Mock.new
-    key_set = Google::Spanner::V1::KeySet.new(all: true)
-    mock.expect :partition_read, partitions_resp, [session.path, "my-table", key_set, {transaction: tx_selector, index: nil, columns: columns_arg, partition_options: partition_options, options: default_options}]
+    key_set = Google::Cloud::Spanner::V1::KeySet.new(all: true)
+    mock.expect :partition_read, partitions_resp, [{
+      session: session.path, table: "my-table", key_set: key_set,
+      transaction: tx_selector, index: nil, columns: columns_arg, partition_options: partition_options
+    }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_read "my-table", columns, partition_size_bytes: partition_size_bytes
@@ -133,10 +147,13 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_read, :mock_spanner d
 
   it "can read all rows with max_partitions" do
     max_partitions = 4
-    partition_options = Google::Spanner::V1::PartitionOptions.new partition_size_bytes: 0, max_partitions: max_partitions
+    partition_options = Google::Cloud::Spanner::V1::PartitionOptions.new partition_size_bytes: 0, max_partitions: max_partitions
     mock = Minitest::Mock.new
-    key_set = Google::Spanner::V1::KeySet.new(all: true)
-    mock.expect :partition_read, partitions_resp, [session.path, "my-table", key_set, {transaction: tx_selector, index: nil, columns: columns_arg, partition_options: partition_options, options: default_options}]
+    key_set = Google::Cloud::Spanner::V1::KeySet.new(all: true)
+    mock.expect :partition_read, partitions_resp, [{
+      session: session.path, table: "my-table", key_set: key_set,
+      transaction: tx_selector, index: nil, columns: columns_arg, partition_options: partition_options
+    }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
     partitions = batch_snapshot.partition_read "my-table", columns, max_partitions: max_partitions

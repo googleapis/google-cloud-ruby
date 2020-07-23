@@ -17,14 +17,14 @@ require "helper"
 describe Google::Cloud::Spanner::Results, :row_count, :mock_spanner do
   it "knows exact row count" do
     results_enum = [
-      Google::Spanner::V1::PartialResultSet.new(
-        metadata: Google::Spanner::V1::ResultSetMetadata.new(
-          row_type: Google::Spanner::V1::StructType.new(
+      Google::Cloud::Spanner::V1::PartialResultSet.new(
+        metadata: Google::Cloud::Spanner::V1::ResultSetMetadata.new(
+          row_type: Google::Cloud::Spanner::V1::StructType.new(
             fields: []
           )
         ),
         values: [],
-        stats: Google::Spanner::V1::ResultSetStats.new(
+        stats: Google::Cloud::Spanner::V1::ResultSetStats.new(
           row_count_exact: 1
         )
       )
@@ -40,14 +40,14 @@ describe Google::Cloud::Spanner::Results, :row_count, :mock_spanner do
 
   it "knows lower bound row count" do
     results_enum = [
-      Google::Spanner::V1::PartialResultSet.new(
-        metadata: Google::Spanner::V1::ResultSetMetadata.new(
-          row_type: Google::Spanner::V1::StructType.new(
+      Google::Cloud::Spanner::V1::PartialResultSet.new(
+        metadata: Google::Cloud::Spanner::V1::ResultSetMetadata.new(
+          row_type: Google::Cloud::Spanner::V1::StructType.new(
             fields: []
           )
         ),
         values: [],
-        stats: Google::Spanner::V1::ResultSetStats.new(
+        stats: Google::Cloud::Spanner::V1::ResultSetStats.new(
           row_count_lower_bound: 42
         )
       )
@@ -63,9 +63,9 @@ describe Google::Cloud::Spanner::Results, :row_count, :mock_spanner do
 
   it "does not present row_count if none is provided" do
     results_enum = [
-      Google::Spanner::V1::PartialResultSet.new(
-        metadata: Google::Spanner::V1::ResultSetMetadata.new(
-          row_type: Google::Spanner::V1::StructType.new(
+      Google::Cloud::Spanner::V1::PartialResultSet.new(
+        metadata: Google::Cloud::Spanner::V1::ResultSetMetadata.new(
+          row_type: Google::Cloud::Spanner::V1::StructType.new(
             fields: []
           )
         ),

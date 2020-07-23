@@ -9,9 +9,6 @@ AllCops:
     - "Rakefile"
     - "test/**/*"
     - "benchmark/**/*"
-    - "lib/google/spanner/**/*"
-    - "lib/google/cloud/spanner/v1/**/*"
-    - "lib/google/cloud/spanner/admin/**/*"
 
 Documentation:
   Enabled: false

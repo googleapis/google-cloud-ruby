@@ -18,8 +18,8 @@ describe Google::Cloud::Spanner::Client, :read, :error, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
-  let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
-  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
+  let(:session_grpc) { Google::Cloud::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
+  let(:default_options) { { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } } }
   let :results_hash1 do
     {
       metadata: {
@@ -85,13 +85,13 @@ describe Google::Cloud::Spanner::Client, :read, :error, :mock_spanner do
   end
   let(:results_enum1) do
     [
-      Google::Spanner::V1::PartialResultSet.new(results_hash1),
-      Google::Spanner::V1::PartialResultSet.new(results_hash2),
-      Google::Spanner::V1::PartialResultSet.new(results_hash3),
-      Google::Spanner::V1::PartialResultSet.new(results_hash4),
-      Google::Spanner::V1::PartialResultSet.new(results_hash5),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash1),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash2),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash3),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash4),
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash5),
       GRPC::InvalidArgument,
-      Google::Spanner::V1::PartialResultSet.new(results_hash6)
+      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash6)
     ].to_enum
   end
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
@@ -100,8 +100,13 @@ describe Google::Cloud::Spanner::Client, :read, :error, :mock_spanner do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :streaming_read, RaiseableEnumerator.new(results_enum1), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :streaming_read, RaiseableEnumerator.new(results_enum1), [{
+      session: session_grpc.name,
+      table: "my-table",
+      columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
+      key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true), transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil
+    }, default_options]
     spanner.service.mocked_service = mock
 
     assert_raises Google::Cloud::InvalidArgumentError do

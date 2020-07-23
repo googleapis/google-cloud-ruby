@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Spanner::Instance, :save, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
-  let(:instance_grpc) { Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id) }
+  let(:instance_grpc) { Google::Cloud::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id) }
   let(:instance) { Google::Cloud::Spanner::Instance.from_grpc instance_grpc, spanner.service }
   let(:job_grpc) do
     Google::Longrunning::Operation.new(
@@ -33,15 +33,15 @@ describe Google::Cloud::Spanner::Instance, :save, :mock_spanner do
     instance.nodes = 99
     instance.labels = { "env" => "production" }
 
-    update_res = Google::Gax::Operation.new(
-                   job_grpc,
-                   Object.new,
-                   Google::Spanner::Admin::Instance::V1::Instance,
-                   Google::Spanner::Admin::Instance::V1::CreateInstanceMetadata
-                 )
+    update_res = \
+      Gapic::Operation.new(
+        job_grpc, Object.new,
+        result_type: Google::Cloud::Spanner::Admin::Instance::V1::Instance,
+        metadata_type: Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceMetadata
+      )
     mask = Google::Protobuf::FieldMask.new paths: ["display_name", "node_count", "labels"]
     mock = Minitest::Mock.new
-    mock.expect :update_instance, update_res, [instance_grpc, mask]
+    mock.expect :update_instance, update_res, [instance: instance_grpc, field_mask: mask]
     spanner.service.mocked_instances = mock
 
     job = instance.save
@@ -57,15 +57,15 @@ describe Google::Cloud::Spanner::Instance, :save, :mock_spanner do
     instance.nodes = 99
     instance.labels["env"] = "production"
 
-    update_res = Google::Gax::Operation.new(
-                   job_grpc,
-                   Object.new,
-                   Google::Spanner::Admin::Instance::V1::Instance,
-                   Google::Spanner::Admin::Instance::V1::CreateInstanceMetadata
-                 )
+    update_res = \
+      Gapic::Operation.new(
+        job_grpc, Object.new,
+        result_type: Google::Cloud::Spanner::Admin::Instance::V1::Instance,
+        metadata_type: Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceMetadata
+      )
     mask = Google::Protobuf::FieldMask.new paths: ["display_name", "node_count", "labels"]
     mock = Minitest::Mock.new
-    mock.expect :update_instance, update_res, [instance_grpc, mask]
+    mock.expect :update_instance, update_res, [instance: instance_grpc, field_mask: mask]
     spanner.service.mocked_instances = mock
 
     job = instance.save

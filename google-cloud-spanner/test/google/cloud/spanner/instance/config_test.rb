@@ -16,13 +16,13 @@ require "helper"
 
 describe Google::Cloud::Spanner::Instance, :config, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
-  let(:instance_grpc) { Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id) }
+  let(:instance_grpc) { Google::Cloud::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id) }
   let(:instance) { Google::Cloud::Spanner::Instance.from_grpc instance_grpc, spanner.service }
 
   it "gets an instance config object" do
-    get_res = Google::Spanner::Admin::Instance::V1::InstanceConfig.new instance_config_hash
+    get_res = Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig.new instance_config_hash
     mock = Minitest::Mock.new
-    mock.expect :get_instance_config, get_res, [instance_grpc.config]
+    mock.expect :get_instance_config, get_res, [name: instance_grpc.config]
     spanner.service.mocked_instances = mock
 
     config = instance.config

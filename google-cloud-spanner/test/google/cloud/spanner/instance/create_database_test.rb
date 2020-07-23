@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Spanner::Instance, :create_database, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
-  let(:instance_grpc) { Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id) }
+  let(:instance_grpc) { Google::Cloud::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id) }
   let(:instance) { Google::Cloud::Spanner::Instance.from_grpc instance_grpc, spanner.service }
   let(:job_grpc) do
     Google::Longrunning::Operation.new(
@@ -28,7 +28,7 @@ describe Google::Cloud::Spanner::Instance, :create_database, :mock_spanner do
     )
   end
   let(:database_grpc) do
-    Google::Spanner::Admin::Database::V1::Database.new(
+    Google::Cloud::Spanner::Admin::Database::V1::Database.new(
       name: "projects/bustling-kayak-91516/instances/my-new-instance",
       state: :READY,
       create_time: Time.now
@@ -39,7 +39,7 @@ describe Google::Cloud::Spanner::Instance, :create_database, :mock_spanner do
       name:"1234567890",
       metadata: Google::Protobuf::Any.new(
         type_url: "google.spanner.admin.database.v1.CreateDatabaseMetadata",
-        value: Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata.new.to_proto
+        value: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata.new.to_proto
       ),
       done: true,
       response: Google::Protobuf::Any.new(
@@ -54,14 +54,20 @@ describe Google::Cloud::Spanner::Instance, :create_database, :mock_spanner do
     database_id = "new-database"
 
     mock = Minitest::Mock.new
-    create_res = Google::Gax::Operation.new(
-                   job_grpc,
-                   mock,
-                   Google::Spanner::Admin::Database::V1::Database,
-                   Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata
-                 )
-    mock.expect :create_database, create_res, [instance_path(instance_id), "CREATE DATABASE `#{database_id}`", extra_statements: []]
-    mock.expect :get_operation, job_grpc_done, ["1234567890", Hash]
+    create_res = \
+      Gapic::Operation.new(
+        job_grpc, mock,
+        result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
+        metadata_type: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata
+    )
+    operation_done = \
+      Gapic::Operation.new(
+        job_grpc_done, mock,
+        result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
+        metadata_type: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata
+      )
+    mock.expect :create_database, create_res, [parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: []]
+    mock.expect :get_operation, operation_done, [{ name: "1234567890" }, Gapic::CallOptions]
     instance.service.mocked_databases = mock
 
     job = instance.create_database database_id
@@ -85,14 +91,14 @@ describe Google::Cloud::Spanner::Instance, :create_database, :mock_spanner do
     instance_id = "my-instance-id"
     database_id = "new-database"
 
-    create_res = Google::Gax::Operation.new(
-                   job_grpc,
-                   Object.new,
-                   Google::Spanner::Admin::Database::V1::Database,
-                   Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata
-                 )
+    create_res = \
+      Gapic::Operation.new(
+        job_grpc, Object.new,
+        result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
+        metadata_type: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata
+      )
     mock = Minitest::Mock.new
-    mock.expect :create_database, create_res, [instance_path(instance_id), "CREATE DATABASE `#{database_id}`", extra_statements: ["CREATE TABLE table1;", "CREATE TABLE table2;"]]
+    mock.expect :create_database, create_res, [parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: ["CREATE TABLE table1;", "CREATE TABLE table2;"]]
     instance.service.mocked_databases = mock
 
     job = instance.create_database database_id, statements: [

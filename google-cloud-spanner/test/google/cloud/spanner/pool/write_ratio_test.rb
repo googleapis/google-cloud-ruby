@@ -18,8 +18,8 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0, max: 4 } }
-  let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new(read_write: Google::Spanner::V1::TransactionOptions::ReadWrite.new) }
-  let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
+  let(:tx_opts) { Google::Cloud::Spanner::V1::TransactionOptions.new(read_write: Google::Cloud::Spanner::V1::TransactionOptions::ReadWrite.new) }
+  let(:default_options) { { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } } }
   let(:client_pool) do
     session.instance_variable_set :@last_updated_at, Time.now
     p = client.instance_variable_get :@pool
@@ -34,15 +34,15 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
 
   it "creates two sessions and one transaction" do
     mock = Minitest::Mock.new
-    sessions = Google::Spanner::V1::BatchCreateSessionsResponse.new(
+    spanner.service.mocked_service = mock
+    sessions = Google::Cloud::Spanner::V1::BatchCreateSessionsResponse.new(
       session: [
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-001")),
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-002"))
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-001")),
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-002"))
       ]
     )
-    mock.expect :batch_create_sessions, sessions, [database_path(instance_id, database_id), 2, session_template: nil, options: default_options]
-    mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-002-01"), [String, tx_opts, options: default_options]
-    spanner.service.mocked_service = mock
+    mock.expect :batch_create_sessions, sessions, [{ database: database_path(instance_id, database_id), session_count: 2, session_template: nil }, default_options]
+    expect_begin_transaction Google::Cloud::Spanner::V1::Transaction.new(id: "tx-002-01"), tx_opts, default_options
 
     pool = Google::Cloud::Spanner::Pool.new client, min: 2, write_ratio: 0.5
 
@@ -57,20 +57,20 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
 
   it "calls batch_create_sessions until min number of sessions are returned" do
     mock = Minitest::Mock.new
-    sessions = Google::Spanner::V1::BatchCreateSessionsResponse.new(
-      session: [
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-001")),
-      ]
-    )
-    sessions_2 = Google::Spanner::V1::BatchCreateSessionsResponse.new(
-      session: [
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-002")),
-      ]
-    )
-    mock.expect :batch_create_sessions, sessions, [database_path(instance_id, database_id), 2, session_template: nil, options: default_options]
-    mock.expect :batch_create_sessions, sessions_2, [database_path(instance_id, database_id), 1, session_template: nil, options: default_options]
-    mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-002-01"), [String, tx_opts, options: default_options]
     spanner.service.mocked_service = mock
+    sessions = Google::Cloud::Spanner::V1::BatchCreateSessionsResponse.new(
+      session: [
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-001")),
+      ]
+    )
+    sessions_2 = Google::Cloud::Spanner::V1::BatchCreateSessionsResponse.new(
+      session: [
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-002")),
+      ]
+    )
+    mock.expect :batch_create_sessions, sessions, [{ database: database_path(instance_id, database_id), session_count: 2, session_template: nil }, default_options]
+    mock.expect :batch_create_sessions, sessions_2, [{ database: database_path(instance_id, database_id), session_count: 1, session_template: nil }, default_options]
+    expect_begin_transaction Google::Cloud::Spanner::V1::Transaction.new(id: "tx-002-01"), tx_opts, default_options
 
     pool = Google::Cloud::Spanner::Pool.new client, min: 2, write_ratio: 0.5
 
@@ -85,20 +85,20 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
 
   it "creates five sessions and three transactions" do
     mock = Minitest::Mock.new
-    sessions = Google::Spanner::V1::BatchCreateSessionsResponse.new(
+    spanner.service.mocked_service = mock
+    sessions = Google::Cloud::Spanner::V1::BatchCreateSessionsResponse.new(
       session: [
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-001")),
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-002")),
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-003")),
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-004")),
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-005"))
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-001")),
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-002")),
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-003")),
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-004")),
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-005"))
       ]
     )
-    mock.expect :batch_create_sessions, sessions, [database_path(instance_id, database_id), 5, session_template: nil, options: default_options]
-    mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-003-01"), [String, tx_opts, options: default_options]
-    mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-004-01"), [String, tx_opts, options: default_options]
-    mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-005-01"), [String, tx_opts, options: default_options]
-    spanner.service.mocked_service = mock
+    mock.expect :batch_create_sessions, sessions, [{ database: database_path(instance_id, database_id), session_count: 5, session_template: nil }, default_options]
+    expect_begin_transaction Google::Cloud::Spanner::V1::Transaction.new(id: "tx-003-01"), tx_opts, default_options
+    expect_begin_transaction Google::Cloud::Spanner::V1::Transaction.new(id: "tx-004-01"), tx_opts, default_options
+    expect_begin_transaction Google::Cloud::Spanner::V1::Transaction.new(id: "tx-005-01"), tx_opts, default_options
 
     pool = Google::Cloud::Spanner::Pool.new client, min: 5, write_ratio: 0.5
 
@@ -113,22 +113,22 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
 
   it "creates eight sessions and three transactions" do
     mock = Minitest::Mock.new
-    sessions = Google::Spanner::V1::BatchCreateSessionsResponse.new(
+    spanner.service.mocked_service = mock
+    sessions = Google::Cloud::Spanner::V1::BatchCreateSessionsResponse.new(
       session: [
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-001")),
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-002")),
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-003")),
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-004")),
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-005")),
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-006")),
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-007")),
-        Google::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-008"))
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-001")),
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-002")),
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-003")),
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-004")),
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-005")),
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-006")),
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-007")),
+        Google::Cloud::Spanner::V1::Session.new(name: session_path(instance_id, database_id, "session-008"))
       ]
     )
-    mock.expect :batch_create_sessions, sessions, [database_path(instance_id, database_id), 8, session_template: nil, options: default_options]
-    mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-007-01"), [String, tx_opts, options: default_options]
-    mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-008-01"), [String, tx_opts, options: default_options]
-    spanner.service.mocked_service = mock
+    mock.expect :batch_create_sessions, sessions, [{ database: database_path(instance_id, database_id), session_count: 8, session_template: nil }, default_options]
+    expect_begin_transaction Google::Cloud::Spanner::V1::Transaction.new(id: "tx-007-01"), tx_opts, default_options
+    expect_begin_transaction Google::Cloud::Spanner::V1::Transaction.new(id: "tx-008-01"), tx_opts, default_options
 
     pool = Google::Cloud::Spanner::Pool.new client, min: 8, write_ratio: 0.3
 

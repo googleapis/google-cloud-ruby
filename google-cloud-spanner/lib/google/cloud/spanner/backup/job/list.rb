@@ -146,7 +146,7 @@ module Google
             # @private
             #
             # New Backup::Job::List from a
-            # Google::Gax::PagedEnumerable<Google::Longrunning::Operation>
+            # `Gapic::PagedEnumerable<Google::Longrunning::Operation>`
             # object. Operation object is a backup operation.
             #
             def self.from_grpc grpc, service
@@ -154,7 +154,7 @@ module Google
                 service.databases.instance_variable_get "@operations_client"
               jobs = new(Array(grpc.response.operations).map do |job_grpc|
                 Job.from_grpc \
-                  Google::Gax::Operation.new(job_grpc, operations_client),
+                  Gapic::Operation.new(job_grpc, operations_client),
                   service
               end)
               jobs.grpc = grpc

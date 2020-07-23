@@ -20,7 +20,7 @@ describe Google::Cloud::Spanner::Backup, :expire_time=, :mock_spanner do
   let(:database_id) { "my-database-id" }
   let(:backup_id) { "my-backup-id" }
   let(:backup_grpc) {
-    Google::Spanner::Admin::Database::V1::Backup.new(
+    Google::Cloud::Spanner::Admin::Database::V1::Backup.new(
       backup_hash(instance_id: instance_id, database_id: database_id, backup_id: backup_id)
     )
   }
@@ -29,7 +29,7 @@ describe Google::Cloud::Spanner::Backup, :expire_time=, :mock_spanner do
   it "update backup expire time" do
     mask = Google::Protobuf::FieldMask.new paths: ["expire_time"]
     mock = Minitest::Mock.new
-    mock.expect :update_backup, backup_grpc, [backup_grpc, mask]
+    mock.expect :update_backup, backup_grpc, [backup: backup_grpc, update_mask: mask]
     spanner.service.mocked_databases = mock
 
     expire_time = Time.now + 36000
