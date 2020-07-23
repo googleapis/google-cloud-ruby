@@ -1,5 +1,11 @@
 # Release History
 
+### 1.10.0 / 2020-07-23
+
+#### Features
+
+* Add Subscription#detach and #detached?
+
 ### 1.9.0 / 2020-07-21
 
 #### Features
