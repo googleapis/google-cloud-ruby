@@ -184,7 +184,7 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
   describe ".call" do
     it "sends a trace" do
       mock = Minitest::Mock.new
-      mock.expect :patch_traces, nil, [project, traces_proto]
+      mock.expect :patch_traces, nil, [{project_id: project, traces: traces_proto}]
       tracer.service.mocked_lowlevel_client = mock
 
       env = rack_env sample: true, span_id: nil
@@ -205,7 +205,7 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
 
     it "provides app access to the trace structure" do
       mock = Minitest::Mock.new
-      mock.expect :patch_traces, nil, [project, traces_proto]
+      mock.expect :patch_traces, nil, [{project_id: project, traces: traces_proto}]
       tracer.service.mocked_lowlevel_client = mock
 
       env = rack_env sample: true, span_id: nil
