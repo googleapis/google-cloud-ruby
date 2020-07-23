@@ -32,13 +32,13 @@ module Google
                   "https://www.googleapis.com/auth/spanner.admin"
                 ]
                 self.env_vars = [
-                  "SPANNER_INSTANCE_ADMIN_CREDENTIALS",
-                  "SPANNER_INSTANCE_ADMIN_KEYFILE",
+                  "SPANNER_CREDENTIALS",
+                  "SPANNER_KEYFILE",
                   "GOOGLE_CLOUD_CREDENTIALS",
                   "GOOGLE_CLOUD_KEYFILE",
                   "GCLOUD_KEYFILE",
-                  "SPANNER_INSTANCE_ADMIN_CREDENTIALS_JSON",
-                  "SPANNER_INSTANCE_ADMIN_KEYFILE_JSON",
+                  "SPANNER_CREDENTIALS_JSON",
+                  "SPANNER_KEYFILE_JSON",
                   "GOOGLE_CLOUD_CREDENTIALS_JSON",
                   "GOOGLE_CLOUD_KEYFILE_JSON",
                   "GCLOUD_KEYFILE_JSON"

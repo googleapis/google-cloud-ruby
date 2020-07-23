@@ -19,7 +19,7 @@ during development.
 2. Set the [environment variable](#environment-variables).
 
 ```sh
-export SPANNER_DATABASE_ADMIN_CREDENTIALS=path/to/keyfile.json
+export SPANNER_CREDENTIALS=path/to/keyfile.json
 ```
 
 3. Initialize the client.
@@ -66,8 +66,8 @@ The environment variables that google-cloud-spanner-admin-database-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Credentials}):
 
-1. `SPANNER_DATABASE_ADMIN_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `SPANNER_DATABASE_ADMIN_KEYFILE` - Path to JSON file, or JSON contents
+1. `SPANNER_CREDENTIALS` - Path to JSON file, or JSON contents
+2. `SPANNER_KEYFILE` - Path to JSON file, or JSON contents
 3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
 4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
 5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
@@ -75,7 +75,7 @@ checks for credentials are configured on the service Credentials class (such as
 ```ruby
 require "google/cloud/spanner/admin/database/v1"
 
-ENV["SPANNER_DATABASE_ADMIN_CREDENTIALS"] = "path/to/keyfile.json"
+ENV["SPANNER_CREDENTIALS"] = "path/to/keyfile.json"
 
 client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
 ```
