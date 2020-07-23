@@ -69,29 +69,29 @@ desc "Run the google-cloud-spanner-admin-instance-v1 acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
   project ||=
-    ENV["SPANNER_INSTANCE_ADMIN_TEST_PROJECT"] ||
+    ENV["SPANNER_TEST_PROJECT"] ||
     ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
   keyfile ||=
-    ENV["SPANNER_INSTANCE_ADMIN_TEST_KEYFILE"] ||
+    ENV["SPANNER_TEST_KEYFILE"] ||
     ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
     keyfile ||=
-      ENV["SPANNER_INSTANCE_ADMIN_TEST_KEYFILE_JSON"] ||
+      ENV["SPANNER_TEST_KEYFILE_JSON"] ||
       ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or SPANNER_INSTANCE_ADMIN_TEST_PROJECT=test123 SPANNER_INSTANCE_ADMIN_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or SPANNER_TEST_PROJECT=test123 SPANNER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/spanner/admin/instance/v1/instance_admin/credentials"
   ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
-  ENV["SPANNER_INSTANCE_ADMIN_PROJECT"] = project
-  ENV["SPANNER_INSTANCE_ADMIN_TEST_PROJECT"] = project
-  ENV["SPANNER_INSTANCE_ADMIN_KEYFILE_JSON"] = keyfile
+  ENV["SPANNER_PROJECT"] = project
+  ENV["SPANNER_TEST_PROJECT"] = project
+  ENV["SPANNER_KEYFILE_JSON"] = keyfile
 
   Rake::Task["acceptance:run"].invoke
 end

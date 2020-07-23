@@ -33,7 +33,7 @@ library = gapic.ruby_library(
         "ruby-cloud-gem-name": "google-cloud-spanner-admin-instance-v1",
         "ruby-cloud-title": "Cloud Spanner Instance Admin V1",
         "ruby-cloud-description": "Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service.",
-        "ruby-cloud-env-prefix": "SPANNER_INSTANCE_ADMIN",
+        "ruby-cloud-env-prefix": "SPANNER",
         "ruby-cloud-grpc-service-config": "google/spanner/admin/instance/v1/spanner_admin_instance_grpc_service_config.json",
         "ruby-cloud-product-url": "https://cloud.google.com/spanner",
         "ruby-cloud-api-id": "spanner.googleapis.com",
