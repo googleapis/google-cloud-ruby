@@ -1,5 +1,23 @@
 # Release History
 
+### 2.0.0 / 2020-07-23
+
+#### ⚠ BREAKING CHANGES
+
+* **spanner:** Use new generated client classes (#7052)
+
+#### Features
+
+* Use new generated client classes ([#7052](https://www.github.com/googleapis/google-cloud-ruby/issues/7052))
+  * spanner migrration to microgenerator
+  * fix service endpoint typo
+  * Fix docs and test cases
+  * update doctest
+  * updatdd spanner v1 version
+  * doc fixes
+  * format session path
+  * fix spanner backward compatibility
+
 ### 1.16.2 / 2020-05-28
 
 #### Documentation
