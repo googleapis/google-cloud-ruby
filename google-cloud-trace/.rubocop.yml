@@ -6,11 +6,6 @@ AllCops:
     - "acceptance/**/*"
     - "integration/**/*"
     - "google-cloud-trace.gemspec"
-    - "lib/google/devtools/**/*"
-    - "lib/google/cloud/trace/v1/**/*"
-    - "lib/google/cloud/trace/v1.rb"
-    - "lib/google/cloud/trace/v2/**/*"
-    - "lib/google/cloud/trace/v2.rb"
     - "Rakefile"
     - "support/**/*"
     - "test/**/*"
@@ -23,6 +18,9 @@ Layout/AlignHash:
 Lint/RescueException:
   Exclude:
     - "lib/google/cloud/trace/rails.rb"
+Metrics/BlockLength:
+  Exclude:
+    - "lib/google-cloud-trace.rb"
 Metrics/ClassLength:
   Enabled: false
 Naming/FileName:

@@ -76,7 +76,7 @@ The environment variables that google-cloud-trace checks for project ID are:
 1. `TRACE_PROJECT`
 2. `GOOGLE_CLOUD_PROJECT`
 
-The environment variables that google-cloud-trace checks for credentials are configured on {Google::Cloud::Trace::V2::Credentials}:
+The environment variables that google-cloud-trace checks for credentials are configured on {Google::Cloud::Trace::Credentials}:
 
 1. `TRACE_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `TRACE_KEYFILE` - Path to JSON file, or JSON contents

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/trace/v1/credentials"
+require "google/cloud/trace/v1/trace_service/credentials"
 
 module Google
   module Cloud
@@ -37,7 +37,7 @@ module Google
       #
       #   trace.project_id #=> "my-project"
       #
-      class Credentials < Google::Cloud::Trace::V1::Credentials
+      class Credentials < Google::Cloud::Trace::V1::TraceService::Credentials
       end
     end
   end

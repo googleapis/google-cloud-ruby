@@ -220,11 +220,11 @@ describe Google::Cloud::Trace::TraceRecord do
                      start_time: sub_start, end_time: sub_end,
                      labels: sub_labels
 
-    proto = Google::Devtools::Cloudtrace::V1::Trace.new \
+    proto = Google::Cloud::Trace::V1::Trace.new \
       project_id: project_id,
       trace_id: my_trace_id,
       spans: [
-        Google::Devtools::Cloudtrace::V1::TraceSpan.new(
+        Google::Cloud::Trace::V1::TraceSpan.new(
           span_id: span_id,
           kind: :RPC_SERVER,
           name: span_name,
@@ -232,7 +232,7 @@ describe Google::Cloud::Trace::TraceRecord do
           end_time: span_end_p,
           parent_span_id: 0,
           labels: span_labels),
-        Google::Devtools::Cloudtrace::V1::TraceSpan.new(
+        Google::Cloud::Trace::V1::TraceSpan.new(
           span_id: sub_id,
           kind: :RPC_CLIENT,
           name: sub_name,
@@ -276,11 +276,11 @@ describe Google::Cloud::Trace::TraceRecord do
                      start_time: sub_start, end_time: sub_end,
                      labels: sub_labels
 
-    proto = Google::Devtools::Cloudtrace::V1::Trace.new \
+    proto = Google::Cloud::Trace::V1::Trace.new \
       project_id: project_id,
       trace_id: my_trace_id,
       spans: [
-        Google::Devtools::Cloudtrace::V1::TraceSpan.new(
+        Google::Cloud::Trace::V1::TraceSpan.new(
           span_id: span_id,
           kind: :RPC_SERVER,
           name: span_name,
@@ -288,7 +288,7 @@ describe Google::Cloud::Trace::TraceRecord do
           end_time: span_end_p,
           parent_span_id: context_span_id,
           labels: span_labels),
-        Google::Devtools::Cloudtrace::V1::TraceSpan.new(
+        Google::Cloud::Trace::V1::TraceSpan.new(
           span_id: sub_id,
           kind: :RPC_CLIENT,
           name: sub_name,

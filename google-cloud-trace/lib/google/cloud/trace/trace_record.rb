@@ -76,7 +76,7 @@ module Google
         ##
         # Create a new Trace object from a trace protobuf.
         #
-        # @param [Google::Devtools::Cloudtrace::V1::Trace] trace_proto The
+        # @param [Google::Cloud::Trace::V1::Trace] trace_proto The
         #     trace protobuf from the V1 gRPC Trace API.
         # @return [Trace, nil] A corresponding Trace object, or `nil` if the
         #     proto does not represent an existing trace object.
@@ -104,14 +104,14 @@ module Google
         # Convert this Trace object to an equivalent Trace protobuf suitable
         # for the V1 gRPC Trace API.
         #
-        # @return [Google::Devtools::Cloudtrace::V1::Trace] The generated
+        # @return [Google::Cloud::Trace::V1::Trace] The generated
         #     protobuf.
         #
         def to_grpc
           span_protos = @spans_by_id.values.map do |span|
             span.to_grpc trace_context.span_id.to_i
           end
-          Google::Devtools::Cloudtrace::V1::Trace.new \
+          Google::Cloud::Trace::V1::Trace.new \
             project_id: project_id,
             trace_id: trace_id,
             spans: span_protos

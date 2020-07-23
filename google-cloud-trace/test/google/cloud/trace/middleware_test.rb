@@ -39,7 +39,7 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
     }
   }
   let(:span_proto) {
-    Google::Devtools::Cloudtrace::V1::TraceSpan.new \
+    Google::Cloud::Trace::V1::TraceSpan.new \
       span_id: my_span_id,
       name: my_path,
       kind: :SPAN_KIND_UNSPECIFIED,
@@ -49,13 +49,13 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
       labels: span_labels
   }
   let(:trace_proto) {
-    Google::Devtools::Cloudtrace::V1::Trace.new \
+    Google::Cloud::Trace::V1::Trace.new \
       project_id: project,
       trace_id: my_trace_id,
       spans: [span_proto]
   }
   let(:traces_proto) {
-    traces_proto = Google::Devtools::Cloudtrace::V1::Traces.new
+    traces_proto = Google::Cloud::Trace::V1::Traces.new
     traces_proto.traces.push trace_proto
     traces_proto
   }
@@ -184,7 +184,7 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
   describe ".call" do
     it "sends a trace" do
       mock = Minitest::Mock.new
-      mock.expect :patch_traces, nil, [project, traces_proto]
+      mock.expect :patch_traces, nil, [{project_id: project, traces: traces_proto}]
       tracer.service.mocked_lowlevel_client = mock
 
       env = rack_env sample: true, span_id: nil
@@ -205,7 +205,7 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
 
     it "provides app access to the trace structure" do
       mock = Minitest::Mock.new
-      mock.expect :patch_traces, nil, [project, traces_proto]
+      mock.expect :patch_traces, nil, [{project_id: project, traces: traces_proto}]
       tracer.service.mocked_lowlevel_client = mock
 
       env = rack_env sample: true, span_id: nil

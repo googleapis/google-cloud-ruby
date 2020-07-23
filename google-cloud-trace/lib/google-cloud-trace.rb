@@ -57,10 +57,9 @@ module Google
     #     puts "Retrieved trace ID: #{trace.trace_id}"
     #   end
     #
-    def trace scope: nil, timeout: nil, client_config: nil
+    def trace scope: nil, timeout: nil
       Google::Cloud.trace @project, @keyfile, scope: scope,
-                                              timeout: (timeout || @timeout),
-                                              client_config: client_config
+                                              timeout: (timeout || @timeout)
     end
 
     ##
@@ -99,12 +98,15 @@ module Google
     #     puts "Retrieved trace ID: #{trace.trace_id}"
     #   end
     #
-    def self.trace project_id = nil, credentials = nil, scope: nil,
-                   timeout: nil, client_config: nil
+    def self.trace project_id = nil,
+                   credentials = nil,
+                   scope: nil,
+                   timeout: nil
       require "google/cloud/trace"
-      Google::Cloud::Trace.new project_id: project_id, credentials: credentials,
-                               scope: scope, timeout: timeout,
-                               client_config: client_config
+      Google::Cloud::Trace.new project_id: project_id,
+                               credentials: credentials,
+                               scope: scope,
+                               timeout: timeout
     end
   end
 end
@@ -127,17 +129,23 @@ Google::Cloud.configure.add_config! :trace do |config|
       "TRACE_KEYFILE", "TRACE_KEYFILE_JSON"
     )
   end
+  endpoint = "cloudtrace.googleapis.com".freeze
+  scopes = [
+    "https://www.googleapis.com/auth/cloud-platform",
+    "https://www.googleapis.com/auth/trace.append",
+    "https://www.googleapis.com/auth/trace.readonly"
+  ].freeze
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
-  config.add_field! :credentials, default_creds,
+  config.add_field! :credentials,
+                    default_creds,
                     match: [String, Hash, Google::Auth::Credentials],
                     allow_nil: true
   config.add_alias! :keyfile, :credentials
-  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :scope, scopes, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
-  config.add_field! :client_config, nil, match: Hash
-  config.add_field! :endpoint, nil, match: String
+  config.add_field! :endpoint, endpoint, match: String
   config.add_field! :capture_stack, nil, enum: [true, false]
   config.add_field! :sampler, nil
   config.add_field! :span_id_generator, nil, match: Proc

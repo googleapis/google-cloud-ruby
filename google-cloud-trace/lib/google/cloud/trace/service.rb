@@ -16,7 +16,6 @@
 require "google/cloud/errors"
 require "google/cloud/trace/version"
 require "google/cloud/trace/v1"
-require "google/gax/errors"
 require "uri"
 
 module Google
@@ -28,17 +27,18 @@ module Google
       # @private
       #
       class Service
-        attr_accessor :project, :credentials, :timeout, :client_config, :host
+        attr_accessor :project, :credentials, :timeout, :host
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, timeout: nil, client_config: nil,
+        def initialize project,
+                       credentials,
+                       timeout: nil,
                        host: nil
           @project = project
           @credentials = credentials
           @timeout = timeout
-          @client_config = client_config || {}
-          @host = host || V1::TraceServiceClient::SERVICE_ADDRESS
+          @host = host
         end
 
         def lowlevel_client
@@ -50,15 +50,13 @@ module Google
               require "google/cloud/trace/patches/active_call_with_trace"
               require "google/cloud/trace/patches/call_with_trace"
 
-              V1::TraceServiceClient.new(
-                credentials: credentials,
-                timeout: timeout,
-                client_config: client_config,
-                service_address: service_address,
-                service_port: service_port,
-                lib_name: "gccl",
-                lib_version: Google::Cloud::Trace::VERSION
-              )
+              V1::TraceService::Client.new do |config|
+                config.credentials = credentials if credentials
+                config.timeout = timeout if timeout
+                config.endpoint = host if host
+                config.lib_name = "gccl"
+                config.lib_version = Google::Cloud::Trace::VERSION
+              end
             end
         end
         attr_accessor :mocked_lowlevel_client
@@ -67,55 +65,50 @@ module Google
         # Sends new traces to Stackdriver Trace or updates existing traces.
         def patch_traces traces
           traces = Array(traces)
-          traces_proto = Google::Devtools::Cloudtrace::V1::Traces.new
+          traces_proto = Google::Cloud::Trace::V1::Traces.new
           traces.each do |trace|
             traces_proto.traces.push trace.to_grpc
           end
-          execute do
-            lowlevel_client.patch_traces @project, traces_proto
-          end
+
+          lowlevel_client.patch_traces project_id: @project, traces: traces_proto
           traces
         end
 
         ##
         # Returns a trace given its ID
         def get_trace trace_id
-          trace_proto = execute do
-            lowlevel_client.get_trace @project, trace_id
-          end
+          trace_proto = lowlevel_client.get_trace project_id: @project, trace_id: trace_id
           Google::Cloud::Trace::TraceRecord.from_grpc trace_proto
         end
 
         ##
         # Searches for traces matching the given criteria.
         #
-        def list_traces project_id, start_time, end_time,
+        def list_traces project_id,
+                        start_time,
+                        end_time,
                         filter: nil,
                         order_by: nil,
                         view: nil,
                         page_size: nil,
                         page_token: nil
-          call_opts = if page_token
-                        Google::Gax::CallOptions.new page_token: page_token
-                      else
-                        Google::Gax::CallOptions.new
-                      end
           start_proto = Google::Cloud::Trace::Utils.time_to_grpc start_time
           end_proto = Google::Cloud::Trace::Utils.time_to_grpc end_time
-          paged_enum = execute do
-            lowlevel_client.list_traces project_id,
-                                        view: view,
-                                        page_size: page_size,
-                                        start_time: start_proto,
-                                        end_time: end_proto,
-                                        filter: filter,
-                                        order_by: order_by,
-                                        options: call_opts
-          end
+          paged_enum = lowlevel_client.list_traces  project_id: project_id,
+                                                    view: view,
+                                                    page_size: page_size,
+                                                    start_time: start_proto,
+                                                    end_time: end_proto,
+                                                    filter: filter,
+                                                    order_by: order_by,
+                                                    page_token: page_token
 
-          Google::Cloud::Trace::ResultSet.from_gax_page \
-            self, project_id,
-            paged_enum.page, start_time, end_time,
+          Google::Cloud::Trace::ResultSet.from_gapic_page \
+            self,
+            project_id,
+            paged_enum.page,
+            start_time,
+            end_time,
             filter: filter,
             order_by: order_by,
             view: view,
@@ -126,25 +119,6 @@ module Google
         # @private
         def inspect
           "#{self.class}(#{@project})"
-        end
-
-        protected
-
-        def service_address
-          return nil if host.nil?
-          URI.parse("//#{host}").host
-        end
-
-        def service_port
-          return nil if host.nil?
-          URI.parse("//#{host}").port
-        end
-
-        def execute
-          yield
-        rescue Google::Gax::GaxError => e
-          # GaxError wraps BadStatus, but exposes it as #cause
-          raise Google::Cloud::Error.from_error(e.cause)
         end
       end
     end
