@@ -1,0 +1,11 @@
+{
+    "api_id": "firestore.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-firestore-v1/latest",
+    "distribution_name": "google-cloud-firestore-v1",
+    "language": "ruby",
+    "name": "firestore",
+    "name_pretty": "Cloud Firestore V1 API",
+    "product_documentation": "https://cloud.google.com/firestore",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
