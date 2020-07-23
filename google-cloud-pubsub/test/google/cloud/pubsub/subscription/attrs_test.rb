@@ -237,7 +237,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to retrieve detached" do
       get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name, detached: true)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
+      mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
       subscription.service.mocked_subscriber = mock
 
       _(subscription.detached?).must_equal true
@@ -375,9 +375,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     it "raises NotFoundError when retrieving detached" do
       stub = Object.new
       def stub.get_subscription *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       subscription.service.mocked_subscriber = stub
 
