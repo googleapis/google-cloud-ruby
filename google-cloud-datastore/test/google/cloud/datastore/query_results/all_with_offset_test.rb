@@ -18,7 +18,7 @@ describe Google::Cloud::Datastore::Dataset, :all_with_offset, :mock_datastore do
   let(:first_run_query) { Google::Cloud::Datastore::Query.new.kind("Task").offset(5).to_grpc }
   let(:first_run_query_res) do
     run_query_res_entities = 25.times.map do |i|
-      Google::Datastore::V1::EntityResult.new(
+      Google::Cloud::Datastore::V1::EntityResult.new(
         entity: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test", 1005+i
           e["name"] = "thingamajig"
@@ -26,8 +26,8 @@ describe Google::Cloud::Datastore::Dataset, :all_with_offset, :mock_datastore do
         cursor: "result-cursor-1-#{i}".force_encoding("ASCII-8BIT")
       )
     end
-    Google::Datastore::V1::RunQueryResponse.new(
-      batch: Google::Datastore::V1::QueryResultBatch.new(
+    Google::Cloud::Datastore::V1::RunQueryResponse.new(
+      batch: Google::Cloud::Datastore::V1::QueryResultBatch.new(
         entity_results: run_query_res_entities,
         more_results: :NOT_FINISHED,
         end_cursor: "second-page-cursor".force_encoding("ASCII-8BIT")
@@ -41,7 +41,7 @@ describe Google::Cloud::Datastore::Dataset, :all_with_offset, :mock_datastore do
     end
   let(:next_run_query_res) do
     run_query_res_entities = 25.times.map do |i|
-      Google::Datastore::V1::EntityResult.new(
+      Google::Cloud::Datastore::V1::EntityResult.new(
         entity: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test", 2005+i
           e["name"] = "thingamajig"
@@ -49,8 +49,8 @@ describe Google::Cloud::Datastore::Dataset, :all_with_offset, :mock_datastore do
         cursor: "result-cursor-2-#{i}".force_encoding("ASCII-8BIT")
       )
     end
-    Google::Datastore::V1::RunQueryResponse.new(
-      batch: Google::Datastore::V1::QueryResultBatch.new(
+    Google::Cloud::Datastore::V1::RunQueryResponse.new(
+      batch: Google::Cloud::Datastore::V1::QueryResultBatch.new(
         entity_results: run_query_res_entities,
         more_results: :NOT_FINISHED,
         end_cursor: "third-page-cursor".force_encoding("ASCII-8BIT")
@@ -60,8 +60,8 @@ describe Google::Cloud::Datastore::Dataset, :all_with_offset, :mock_datastore do
 
   before do
     dataset.service.mocked_service = Minitest::Mock.new
-    dataset.service.mocked_service.expect :run_query, first_run_query_res, [project, partition_id: nil, read_options: nil, query: first_run_query, gql_query: nil, options: default_options]
-    dataset.service.mocked_service.expect :run_query, next_run_query_res, [project, partition_id: nil, read_options: nil, query: next_run_query, gql_query: nil, options: default_options]
+    dataset.service.mocked_service.expect :run_query, first_run_query_res, [project_id: project, partition_id: nil, read_options: nil, query: first_run_query, gql_query: nil]
+    dataset.service.mocked_service.expect :run_query, next_run_query_res, [project_id: project, partition_id: nil, read_options: nil, query: next_run_query, gql_query: nil]
   end
 
   after do

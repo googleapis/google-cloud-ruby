@@ -268,7 +268,7 @@ module Google
         end
 
         ##
-        # @private Convert the Key to a Google::Datastore::V1::Key object.
+        # @private Convert the Key to a Google::Cloud::Datastore::V1::Key object.
         def to_grpc
           grpc_path = path.map do |pe_kind, pe_id_or_name|
             path_args = { kind: pe_kind }
@@ -277,11 +277,11 @@ module Google
             elsif pe_id_or_name.is_a? String
               path_args[:name] = pe_id_or_name unless pe_id_or_name.empty?
             end
-            Google::Datastore::V1::Key::PathElement.new path_args
+            Google::Cloud::Datastore::V1::Key::PathElement.new path_args
           end
-          grpc = Google::Datastore::V1::Key.new path: grpc_path
+          grpc = Google::Cloud::Datastore::V1::Key.new path: grpc_path
           if project || namespace
-            grpc.partition_id = Google::Datastore::V1::PartitionId.new(
+            grpc.partition_id = Google::Cloud::Datastore::V1::PartitionId.new(
               project_id: project.to_s, namespace_id: namespace.to_s
             )
           end
@@ -289,7 +289,7 @@ module Google
         end
 
         ##
-        # @private Create a new Key from a Google::Datastore::V1::Key
+        # @private Create a new Key from a Google::Cloud::Datastore::V1::Key
         # object.
         def self.from_grpc grpc
           return nil if grpc.nil?

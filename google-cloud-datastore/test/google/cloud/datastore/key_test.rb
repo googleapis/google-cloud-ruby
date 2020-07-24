@@ -182,11 +182,11 @@ describe Google::Cloud::Datastore::Key, :mock_datastore do
   end
 
   it "can be created with a GRPC object" do
-    grpc = Google::Datastore::V1::Key.new
-    grpc.path << Google::Datastore::V1::Key::PathElement.new(
+    grpc = Google::Cloud::Datastore::V1::Key.new
+    grpc.path << Google::Cloud::Datastore::V1::Key::PathElement.new(
       kind: "AnotherThing", id: 56789
     )
-    grpc.partition_id = Google::Datastore::V1::PartitionId.new(
+    grpc.partition_id = Google::Cloud::Datastore::V1::PartitionId.new(
       project_id: "custom-ds", namespace_id: "custom-ns"
     )
     key = Google::Cloud::Datastore::Key.from_grpc grpc

@@ -75,9 +75,9 @@ describe Google::Cloud::Datastore::Entity, :mock_datastore do
   end
 
   it "can be created with a GRPC object" do
-    grpc = Google::Datastore::V1::Entity.new
-    grpc.key = Google::Datastore::V1::Key.new
-    grpc.key.path << Google::Datastore::V1::Key::PathElement.new
+    grpc = Google::Cloud::Datastore::V1::Entity.new
+    grpc.key = Google::Cloud::Datastore::V1::Key.new
+    grpc.key.path << Google::Cloud::Datastore::V1::Key::PathElement.new
     grpc.key.path.first.kind = "User"
     grpc.key.path.first.id = 123456
     grpc.properties["name"] = Google::Cloud::Datastore::Convert.to_value "User McNumber"
@@ -159,9 +159,9 @@ describe Google::Cloud::Datastore::Entity, :mock_datastore do
   end
 
   it "raises when setting a key when persisted" do
-    grpc = Google::Datastore::V1::Entity.new
-    grpc.key = Google::Datastore::V1::Key.new
-    grpc.key.path << Google::Datastore::V1::Key::PathElement.new(kind: "User", id: 123456)
+    grpc = Google::Cloud::Datastore::V1::Entity.new
+    grpc.key = Google::Cloud::Datastore::V1::Key.new
+    grpc.key.path << Google::Cloud::Datastore::V1::Key::PathElement.new(kind: "User", id: 123456)
     grpc.properties["name"] = Google::Cloud::Datastore::Convert.to_value "User McNumber"
     grpc.properties["email"] = Google::Cloud::Datastore::Convert.to_value "number@example.net"
 

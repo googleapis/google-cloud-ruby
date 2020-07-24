@@ -61,7 +61,7 @@ module Google
         #   query = Google::Cloud::Datastore::Query.new
         #
         def initialize
-          @grpc = Google::Datastore::V1::Query.new
+          @grpc = Google::Cloud::Datastore::V1::Query.new
         end
 
         ##
@@ -83,7 +83,7 @@ module Google
         #
         def kind *kinds
           kinds.each do |kind|
-            grpc_kind = Google::Datastore::V1::KindExpression.new(
+            grpc_kind = Google::Cloud::Datastore::V1::KindExpression.new(
               name: kind
             )
             @grpc.kind << grpc_kind
@@ -177,15 +177,15 @@ module Google
         #   tasks = datastore.run query
         #
         def where name, operator, value
-          @grpc.filter ||= Google::Datastore::V1::Filter.new(
-            composite_filter: Google::Datastore::V1::CompositeFilter.new(
+          @grpc.filter ||= Google::Cloud::Datastore::V1::Filter.new(
+            composite_filter: Google::Cloud::Datastore::V1::CompositeFilter.new(
               op: :AND
             )
           )
           @grpc.filter.composite_filter.filters << \
-            Google::Datastore::V1::Filter.new(
-              property_filter: Google::Datastore::V1::PropertyFilter.new(
-                property: Google::Datastore::V1::PropertyReference.new(
+            Google::Cloud::Datastore::V1::Filter.new(
+              property_filter: Google::Cloud::Datastore::V1::PropertyFilter.new(
+                property: Google::Cloud::Datastore::V1::PropertyReference.new(
                   name: name
                 ),
                 op: Convert.to_prop_filter_op(operator),
@@ -273,8 +273,8 @@ module Google
         #   tasks = datastore.run query
         #
         def order name, direction = :asc
-          @grpc.order << Google::Datastore::V1::PropertyOrder.new(
-            property: Google::Datastore::V1::PropertyReference.new(
+          @grpc.order << Google::Cloud::Datastore::V1::PropertyOrder.new(
+            property: Google::Cloud::Datastore::V1::PropertyReference.new(
               name: name
             ),
             direction: prop_order_direction(direction)
@@ -384,8 +384,8 @@ module Google
         #
         def select *names
           names.each do |name|
-            grpc_projection = Google::Datastore::V1::Projection.new(
-              property: Google::Datastore::V1::PropertyReference.new(
+            grpc_projection = Google::Cloud::Datastore::V1::Projection.new(
+              property: Google::Cloud::Datastore::V1::PropertyReference.new(
                 name: name
               )
             )
@@ -414,7 +414,7 @@ module Google
         #
         def group_by *names
           names.each do |name|
-            grpc_property = Google::Datastore::V1::PropertyReference.new(
+            grpc_property = Google::Cloud::Datastore::V1::PropertyReference.new(
               name: name
             )
             @grpc.distinct_on << grpc_property

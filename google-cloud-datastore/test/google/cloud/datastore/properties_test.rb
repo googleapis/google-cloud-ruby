@@ -27,7 +27,7 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
   # Testing implementation, not behavior.
 
   it "decodes empty value" do
-    value = Google::Datastore::V1::Value.new
+    value = Google::Cloud::Datastore::V1::Value.new
     raw = Google::Cloud::Datastore::Convert.from_value value
     _(raw).must_be :nil?
   end
@@ -41,7 +41,7 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
 
   it "decodes a string" do
     str = "ohai, i am also a string"
-    value = Google::Datastore::V1::Value.new
+    value = Google::Cloud::Datastore::V1::Value.new
     value.string_value = str
     raw = Google::Cloud::Datastore::Convert.from_value value
     _(raw).must_equal str
@@ -54,7 +54,7 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
   end
 
   it "decodes NULL" do
-    value = Google::Datastore::V1::Value.new
+    value = Google::Cloud::Datastore::V1::Value.new
     value.null_value = :NULL_VALUE
     raw = Google::Cloud::Datastore::Convert.from_value value
     _(raw).must_be :nil?
@@ -67,7 +67,7 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
   end
 
   it "decodes true" do
-    value = Google::Datastore::V1::Value.new
+    value = Google::Cloud::Datastore::V1::Value.new
     value.boolean_value = true
     raw = Google::Cloud::Datastore::Convert.from_value value
     _(raw).must_equal true
@@ -80,7 +80,7 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
   end
 
   it "decodes false" do
-    value = Google::Datastore::V1::Value.new
+    value = Google::Cloud::Datastore::V1::Value.new
     value.boolean_value = false
     raw = Google::Cloud::Datastore::Convert.from_value value
     _(raw).must_equal false
@@ -95,7 +95,7 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
 
   it "decodes integer" do
     num = 1234
-    value = Google::Datastore::V1::Value.new
+    value = Google::Cloud::Datastore::V1::Value.new
     value.integer_value = num
     raw = Google::Cloud::Datastore::Convert.from_value value
     _(raw).must_equal num
@@ -110,7 +110,7 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
 
   it "decodes float" do
     num = 12.34
-    value = Google::Datastore::V1::Value.new
+    value = Google::Cloud::Datastore::V1::Value.new
     value.double_value = num
     raw = Google::Cloud::Datastore::Convert.from_value value
     _(raw).must_equal num
@@ -125,11 +125,11 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
 
   it "decodes Key" do
     key = Google::Cloud::Datastore::Key.new "Thing", 123
-    value = Google::Datastore::V1::Value.new
+    value = Google::Cloud::Datastore::V1::Value.new
     value.key_value = key.to_grpc
     raw = Google::Cloud::Datastore::Convert.from_value value
     assert_kind_of Google::Cloud::Datastore::Key, raw
-    refute_kind_of Google::Datastore::V1::Key, raw
+    refute_kind_of Google::Cloud::Datastore::V1::Key, raw
     _(raw.to_grpc).must_equal key.to_grpc
   end
 
@@ -147,11 +147,11 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
     entity = Google::Cloud::Datastore::Entity.new
     entity.key = Google::Cloud::Datastore::Key.new "Thing", 123
     entity["name"] = "Thing 1"
-    value = Google::Datastore::V1::Value.new
+    value = Google::Cloud::Datastore::V1::Value.new
     value.entity_value = entity.to_grpc
     raw = Google::Cloud::Datastore::Convert.from_value value
     assert_kind_of Google::Cloud::Datastore::Entity, raw
-    refute_kind_of Google::Datastore::V1::Entity, raw
+    refute_kind_of Google::Cloud::Datastore::V1::Entity, raw
     raw_grpc = raw.to_grpc
     entity_grpc = entity.to_grpc
     _(raw_grpc).must_equal entity_grpc
@@ -161,19 +161,19 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
     array = ["string", 123, true]
     value = Google::Cloud::Datastore::Convert.to_value array
     _(value.value_type).must_equal :array_value
-    _(value.array_value).must_equal Google::Datastore::V1::ArrayValue.new(
-      values: [Google::Datastore::V1::Value.new(string_value: "string"),
-               Google::Datastore::V1::Value.new(integer_value: 123),
-               Google::Datastore::V1::Value.new(boolean_value: true)]
+    _(value.array_value).must_equal Google::Cloud::Datastore::V1::ArrayValue.new(
+      values: [Google::Cloud::Datastore::V1::Value.new(string_value: "string"),
+               Google::Cloud::Datastore::V1::Value.new(integer_value: 123),
+               Google::Cloud::Datastore::V1::Value.new(boolean_value: true)]
     )
   end
 
   it "decodes Array" do
-    value = Google::Datastore::V1::Value.new
-    value.array_value = Google::Datastore::V1::ArrayValue.new(
-      values: [ Google::Datastore::V1::Value.new.tap { |v| v.string_value = "string" },
-                Google::Datastore::V1::Value.new.tap { |v| v.integer_value = 123 },
-                Google::Datastore::V1::Value.new.tap { |v| v.boolean_value = true }]
+    value = Google::Cloud::Datastore::V1::Value.new
+    value.array_value = Google::Cloud::Datastore::V1::ArrayValue.new(
+      values: [ Google::Cloud::Datastore::V1::Value.new.tap { |v| v.string_value = "string" },
+                Google::Cloud::Datastore::V1::Value.new.tap { |v| v.integer_value = 123 },
+                Google::Cloud::Datastore::V1::Value.new.tap { |v| v.boolean_value = true }]
     )
     raw = Google::Cloud::Datastore::Convert.from_value value
     assert_kind_of Array, raw
@@ -204,7 +204,7 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
   end
 
   it "decodes timestamp" do
-    value = Google::Datastore::V1::Value.new
+    value = Google::Cloud::Datastore::V1::Value.new
     value.timestamp_value = time_grpc
     raw = Google::Cloud::Datastore::Convert.from_value value
     _(raw).must_equal time_obj
@@ -235,7 +235,7 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
   end
 
   it "decodes blob to StringIO" do
-    value = Google::Datastore::V1::Value.new
+    value = Google::Cloud::Datastore::V1::Value.new
     value.blob_value = File.read("acceptance/data/CloudPlatform_128px_Retina.png", mode: "rb").force_encoding("ASCII-8BIT")
     raw = Google::Cloud::Datastore::Convert.from_value value
     _(raw).must_be_kind_of StringIO
@@ -250,7 +250,7 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
   end
 
   it "decodes geo_point" do
-    value = Google::Datastore::V1::Value.new
+    value = Google::Cloud::Datastore::V1::Value.new
     value.geo_point_value = Google::Type::LatLng.new(latitude: 37.4220041, longitude: -122.0862462)
     raw = Google::Cloud::Datastore::Convert.from_value value
     _(raw).must_equal({latitude: 37.4220041, longitude: -122.0862462})

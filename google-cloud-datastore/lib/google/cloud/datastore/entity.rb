@@ -427,10 +427,10 @@ module Google
         end
 
         ##
-        # @private Convert the Entity to a Google::Datastore::V1::Entity
+        # @private Convert the Entity to a Google::Cloud::Datastore::V1::Entity
         # object.
         def to_grpc
-          grpc = Google::Datastore::V1::Entity.new(
+          grpc = Google::Cloud::Datastore::V1::Entity.new(
             properties: @properties.to_grpc
           )
           grpc.key = @key.to_grpc unless @key.nil?
@@ -439,7 +439,7 @@ module Google
         end
 
         ##
-        # @private Create a new Entity from a Google::Datastore::V1::Key
+        # @private Create a new Entity from a Google::Cloud::Datastore::V1::Key
         # object.
         def self.from_grpc grpc
           entity = Entity.new

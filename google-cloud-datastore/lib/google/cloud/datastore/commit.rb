@@ -136,16 +136,16 @@ module Google
         def mutations
           mutations = []
           mutations += @shared_upserts.map do |entity|
-            Google::Datastore::V1::Mutation.new upsert: entity.to_grpc
+            Google::Cloud::Datastore::V1::Mutation.new upsert: entity.to_grpc
           end
           mutations += @shared_inserts.map do |entity|
-            Google::Datastore::V1::Mutation.new insert: entity.to_grpc
+            Google::Cloud::Datastore::V1::Mutation.new insert: entity.to_grpc
           end
           mutations += @shared_updates.map do |entity|
-            Google::Datastore::V1::Mutation.new update: entity.to_grpc
+            Google::Cloud::Datastore::V1::Mutation.new update: entity.to_grpc
           end
           mutations += @shared_deletes.map do |key|
-            Google::Datastore::V1::Mutation.new delete: key.to_grpc
+            Google::Cloud::Datastore::V1::Mutation.new delete: key.to_grpc
           end
           mutations
         end
