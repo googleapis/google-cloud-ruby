@@ -26,17 +26,15 @@ module Google
       # @private Represents the GAX Datastore service, including all the API
       # methods.
       class Service
-        attr_accessor :project, :credentials, :host, :timeout, :client_config
+        attr_accessor :project, :credentials, :host, :timeout
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, timeout: nil,
-                       client_config: nil
+        def initialize project, credentials, host: nil, timeout: nil
           @project = project
           @credentials = credentials
           @host = host || V1::DatastoreClient::SERVICE_ADDRESS
           @timeout = timeout
-          @client_config = client_config || {}
         end
 
         def channel
@@ -60,7 +58,6 @@ module Google
           @service ||= V1::DatastoreClient.new(
             credentials: channel,
             timeout: timeout,
-            client_config: client_config,
             lib_name: "gccl",
             lib_version: Google::Cloud::Datastore::VERSION
           )

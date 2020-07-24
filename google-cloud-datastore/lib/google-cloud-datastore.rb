@@ -42,8 +42,6 @@ module Google
     #
     #   * `https://www.googleapis.com/auth/datastore`
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config A hash of values to override the default
-    #   behavior of the API client. See Google::Gax::CallSettings. Optional.
     #
     # @return [Google::Cloud::Datastore::Dataset]
     #
@@ -69,10 +67,9 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   datastore = gcloud.datastore scope: platform_scope
     #
-    def datastore scope: nil, timeout: nil, client_config: nil
+    def datastore scope: nil, timeout: nil
       Google::Cloud.datastore @project, @keyfile,
-                              scope: scope, timeout: (timeout || @timeout),
-                              client_config: client_config
+                              scope: scope, timeout: (timeout || @timeout)
     end
 
     ##
@@ -96,8 +93,6 @@ module Google
     #
     #   * `https://www.googleapis.com/auth/datastore`
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config A hash of values to override the default
-    #   behavior of the API client. See Google::Gax::CallSettings. Optional.
     #
     # @return [Google::Cloud::Datastore::Dataset]
     #
@@ -117,12 +112,11 @@ module Google
     #   datastore.save task
     #
     def self.datastore project_id = nil, credentials = nil, scope: nil,
-                       timeout: nil, client_config: nil
+                       timeout: nil
       require "google/cloud/datastore"
       Google::Cloud::Datastore.new project_id: project_id,
                                    credentials: credentials,
-                                   scope: scope, timeout: timeout,
-                                   client_config: client_config
+                                   scope: scope, timeout: timeout
     end
   end
 end
@@ -150,7 +144,6 @@ Google::Cloud.configure.add_config! :datastore do |config|
   config.add_alias! :keyfile, :credentials
   config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
-  config.add_field! :client_config, nil, match: Hash
   config.add_field! :emulator_host, default_emulator,
                     match: String, allow_nil: true
   config.add_field! :endpoint, nil, match: String
