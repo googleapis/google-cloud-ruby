@@ -16,6 +16,13 @@ require "helper"
 require "google/cloud/datastore"
 
 describe Google::Cloud do
+  let(:default_scope) do
+    [
+      "https://www.googleapis.com/auth/cloud-platform",
+      "https://www.googleapis.com/auth/datastore"
+    ]
+  end
+  let(:default_host) { "datastore.googleapis.com" }
   describe "#datastore" do
     it "calls out to Google::Cloud.datastore" do
       gcloud = Google::Cloud.new
@@ -94,14 +101,14 @@ describe Google::Cloud do
     it "uses provided project_id and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
+        _(scope).must_equal default_scope
         "datastore-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "datastore-credentials"
         _(timeout).must_be :nil?
-        _(host).must_be :nil?
+        _(host).must_equal default_host
         OpenStruct.new project: project
       }
 
@@ -155,14 +162,14 @@ describe Google::Cloud do
     it "uses provided project_id and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
+        _(scope).must_equal default_scope
         "datastore-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "datastore-credentials"
         _(timeout).must_be :nil?
-        _(host).must_be :nil?
+        _(host).must_equal default_host
         OpenStruct.new project: project
       }
 
@@ -186,14 +193,14 @@ describe Google::Cloud do
     it "uses provided project and keyfile aliases" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
+        _(scope).must_equal default_scope
         "datastore-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "datastore-credentials"
         _(timeout).must_be :nil?
-        _(host).must_be :nil?
+        _(host).must_equal default_host
         OpenStruct.new project: project
       }
 
@@ -273,7 +280,7 @@ describe Google::Cloud do
     it "gets project_id from credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
+        _(scope).must_equal default_scope
         OpenStruct.new project_id: "project-id"
       }
       stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
@@ -281,7 +288,7 @@ describe Google::Cloud do
         _(credentials).must_be_kind_of OpenStruct
         _(credentials.project_id).must_equal "project-id"
         _(timeout).must_be :nil?
-        _(host).must_be :nil?
+        _(host).must_equal default_host
         OpenStruct.new project: project
       }
       empty_env = OpenStruct.new
@@ -316,14 +323,14 @@ describe Google::Cloud do
     it "uses shared config for project and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
+        _(scope).must_equal default_scope
         "datastore-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "datastore-credentials"
         _(timeout).must_be :nil?
-        _(host).must_be :nil?
+        _(host).must_equal default_host
         OpenStruct.new project: project
       }
 
@@ -353,14 +360,14 @@ describe Google::Cloud do
     it "uses shared config for project_id and credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
+        _(scope).must_equal default_scope
         "datastore-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "datastore-credentials"
         _(timeout).must_be :nil?
-        _(host).must_be :nil?
+        _(host).must_equal default_host
         OpenStruct.new project: project
       }
 
@@ -390,14 +397,14 @@ describe Google::Cloud do
     it "uses datastore config for project and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
+        _(scope).must_equal default_scope
         "datastore-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "datastore-credentials"
         _(timeout).must_equal 42
-        _(host).must_be :nil?
+        _(host).must_equal default_host
         OpenStruct.new project: project
       }
 
@@ -428,14 +435,14 @@ describe Google::Cloud do
     it "uses datastore config for project_id and credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
+        _(scope).must_equal default_scope
         "datastore-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "datastore-credentials"
         _(timeout).must_equal 42
-        _(host).must_be :nil?
+        _(host).must_equal default_host
         OpenStruct.new project: project
       }
 
@@ -466,7 +473,7 @@ describe Google::Cloud do
     it "uses datastore config for endpoint" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
-        _(scope).must_be :nil?
+        _(scope).must_equal default_scope
         "datastore-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, host: nil) {

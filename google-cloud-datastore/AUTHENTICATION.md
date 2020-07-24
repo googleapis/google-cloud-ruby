@@ -76,7 +76,8 @@ The environment variables that google-cloud-datastore checks for project ID are:
 1. `DATASTORE_PROJECT`
 2. `GOOGLE_CLOUD_PROJECT`
 
-The environment variables that google-cloud-datastore checks for credentials are configured on {Google::Cloud::Datastore::V1::Credentials}:
+The environment variables that google-cloud-datastore checks for credentials are configured on
+{Google::Cloud::Datastore::Credentials}:
 
 1. `DATASTORE_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `DATASTORE_KEYFILE` - Path to JSON file, or JSON contents
