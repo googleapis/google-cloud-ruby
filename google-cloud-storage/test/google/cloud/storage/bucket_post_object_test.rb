@@ -38,6 +38,7 @@ describe Google::Cloud::Storage::Bucket, :post_object, :mock_storage do
       signing_key_mock = Minitest::Mock.new
 
       json_policy = Base64.strict_encode64(policy.to_json).delete("\n")
+      signing_key_mock.expect :is_a?, false, [Proc]
       signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, json_policy]
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
@@ -54,10 +55,43 @@ describe Google::Cloud::Storage::Bucket, :post_object, :mock_storage do
     end
   end
 
+  it "uses passed in issuer and signer to generate signed post objects" do
+    Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
+      policy = {
+        expiration: Time.now.iso8601,
+        conditions: [
+          {bucket: bucket_name},
+          {acl: "public-read"},
+          {success_action_status: 201},
+          [:eq, "$Content-Type", "image/jpg"]
+        ]
+      }
+
+      signer_mock = Minitest::Mock.new
+
+      json_policy = Base64.strict_encode64(policy.to_json).delete("\n")
+      signer_mock.expect :is_a?, true, [Proc]
+      signer_mock.expect :call, "native-signature", [json_policy]
+
+
+      signed_post = bucket.post_object file_path, policy: policy,
+                                                  issuer: "native_client_email",
+                                                  signer: signer_mock
+
+      _(signed_post.url).must_equal Google::Cloud::Storage::GOOGLEAPIS_URL
+      _(signed_post.fields[:GoogleAccessId]).must_equal "native_client_email"
+      _(signed_post.fields[:signature]).must_equal Base64.strict_encode64("native-signature").delete("\n")
+      _(signed_post.fields[:key]).must_equal [bucket_name, file_path_encoded].join("/")
+
+      signer_mock.verify
+    end
+  end
+
   it "gives a signature even when not specifying a policy" do
     signing_key_mock = Minitest::Mock.new
 
     json_policy = Base64.strict_encode64("{}").delete("\n")
+    signing_key_mock.expect :is_a?, false, [Proc]
     signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, json_policy]
     credentials.issuer = "native_client_email"
     credentials.signing_key = signing_key_mock
@@ -79,6 +113,7 @@ describe Google::Cloud::Storage::Bucket, :post_object, :mock_storage do
     signing_key_mock = Minitest::Mock.new
 
     json_policy = Base64.strict_encode64("{}").delete("\n")
+    signing_key_mock.expect :is_a?, false, [Proc]
     signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, json_policy]
     credentials.issuer = "native_client_email"
     credentials.signing_key = signing_key_mock

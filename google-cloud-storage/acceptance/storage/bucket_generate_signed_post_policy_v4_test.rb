@@ -13,8 +13,9 @@
 # limitations under the License.
 
 require "storage_helper"
-require 'net/http'
-require 'uri'
+require "google/apis/iamcredentials_v1"
+require "net/http"
+require "uri"
 
 describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :storage do
   let(:bucket_name) { $bucket_names.first }
@@ -61,8 +62,29 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
     end
   end
 
-  focus; it "generates a signed post object v4 using signBlob API" do
-    post_object = bucket.generate_signed_post_policy_v4 "test-object", expires: 10
+  it "generates a signed post object v4 using signBlob API" do
+    iam_credentials_client = Google::Apis::IamcredentialsV1::IAMCredentialsService.new
+    # Get the environment configured authorization
+    scopes =  ['https://www.googleapis.com/auth/cloud-platform']
+    iam_credentials_client.authorization = Google::Auth.get_application_default(scopes)
+
+    # Only defined when using a service account
+    issuer = iam_credentials_client.authorization.issuer
+    signer = lambda do |string_to_sign|
+      request = {
+           "payload": string_to_sign,
+      }
+      response = iam_credentials_client.sign_service_account_blob(
+       "projects/-/serviceAccounts/#{issuer}",
+       request,
+       {}
+      )
+      response.signed_blob
+    end
+
+    post_object = bucket.generate_signed_post_policy_v4 "test-object", expires: 10,
+                                                        issuer: issuer,
+                                                        signer: signer
 
     _(post_object.fields.keys.sort).must_equal [
       "key",

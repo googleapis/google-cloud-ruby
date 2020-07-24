@@ -77,7 +77,8 @@ module Google
           end
 
           def determine_signing_key options = {}
-            signing_key = options[:signing_key] || options[:private_key] || @service.credentials.signing_key || options[:signer]
+            signing_key = options[:signing_key] || options[:private_key] ||
+                          options[:signer] || @service.credentials.signing_key
             raise SignedUrlUnavailable, error_msg("signing_key (private_key, signer)") unless signing_key
             signing_key
           end

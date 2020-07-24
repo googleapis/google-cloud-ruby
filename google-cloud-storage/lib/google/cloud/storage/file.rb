@@ -1622,8 +1622,8 @@ module Google
           version ||= :v2
           case version.to_sym
           when :v2
-            signer = File::SignerV2.from_file self
-            signer.signed_url method: method,
+            sign = File::SignerV2.from_file self
+            sign.signed_url method: method,
                               expires: expires,
                               headers: headers,
                               content_type: content_type,
@@ -1635,8 +1635,8 @@ module Google
                               signer: signer,
                               query: query
           when :v4
-            signer = File::SignerV4.from_file self
-            signer.signed_url method: method,
+            sign = File::SignerV4.from_file self
+            sign.signed_url method: method,
                               expires: expires,
                               headers: headers,
                               issuer: issuer,

@@ -198,7 +198,7 @@ module Google
           end
 
           def determine_signing_key signing_key, private_key, signer
-            signing_key = signing_key || private_key || @service.credentials.signing_key || signer
+            signing_key = signing_key || private_key || signer || @service.credentials.signing_key
             raise SignedUrlUnavailable, error_msg("signing_key (private_key, signer)") unless signing_key
             signing_key
           end
@@ -209,12 +209,18 @@ module Google
           end
 
           def service_account_signer signer
-            return signer if signer.is_a? Proc
-            signer = OpenSSL::PKey::RSA.new signer unless signer.respond_to? :sign
-            # Sign string to sign
-            lambda do |string_to_sign|
-              sig = signer.sign OpenSSL::Digest::SHA256.new, string_to_sign
-              sig.unpack("H*").first
+            if signer.is_a? Proc
+              lambda do |string_to_sign|
+                sig = signer.call string_to_sign
+                sig.unpack("H*").first
+              end
+            else
+              signer = OpenSSL::PKey::RSA.new signer unless signer.respond_to? :sign
+              # Sign string to sign
+              lambda do |string_to_sign|
+                sig = signer.sign OpenSSL::Digest::SHA256.new, string_to_sign
+                sig.unpack("H*").first
+              end
             end
           end
 

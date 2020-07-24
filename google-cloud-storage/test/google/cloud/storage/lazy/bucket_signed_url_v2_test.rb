@@ -23,6 +23,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v2, :lazy, :mock_storage 
   it "uses the credentials' issuer and signing_key to generate signed_url" do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
       signing_key_mock = Minitest::Mock.new
+      signing_key_mock.expect :is_a?, false, [Proc]
       signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\n/bucket/file.ext"]
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
@@ -43,6 +44,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v2, :lazy, :mock_storage 
       credentials.signing_key = PoisonSigningKey.new
 
       signing_key_mock = Minitest::Mock.new
+      signing_key_mock.expect :is_a?, false, [Proc]
       signing_key_mock.expect :sign, "option-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\n/bucket/file.ext"]
 
       signed_url = bucket.signed_url file_path, issuer: "option_issuer",
@@ -82,6 +84,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v2, :lazy, :mock_storage 
   it "allows headers to be passed in as options" do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
       signing_key_mock = Minitest::Mock.new
+      signing_key_mock.expect :is_a?, false, [Proc]
       signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\nx-goog-acl:public-read\nx-goog-meta-foo:bar,baz\n/bucket/file.ext"]
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
@@ -121,6 +124,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v2, :lazy, :mock_storage 
     it "properly escapes the path when generating signed_url" do
       Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
         signing_key_mock = Minitest::Mock.new
+        signing_key_mock.expect :is_a?, false, [Proc]
         signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\n/bucket/hello%20world.txt"]
         credentials.issuer = "native_client_email"
         credentials.signing_key = signing_key_mock
@@ -142,6 +146,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v2, :lazy, :mock_storage 
   it "allows query params to be passed in" do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
       signing_key_mock = Minitest::Mock.new
+      signing_key_mock.expect :is_a?, false, [Proc]
       signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\n/bucket/file.ext"]
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock

@@ -1595,8 +1595,8 @@ module Google
           version ||= :v2
           case version.to_sym
           when :v2
-            signer = File::SignerV2.from_bucket self, path
-            signer.signed_url method: method,
+            sign = File::SignerV2.from_bucket self, path
+            sign.signed_url method: method,
                               expires: expires,
                               headers: headers,
                               content_type: content_type,
@@ -1608,8 +1608,8 @@ module Google
                               signer: signer,
                               query: query
           when :v4
-            signer = File::SignerV4.from_bucket self, path
-            signer.signed_url method: method,
+            sign = File::SignerV4.from_bucket self, path
+            sign.signed_url method: method,
                               expires: expires,
                               headers: headers,
                               issuer: issuer,
@@ -1784,8 +1784,8 @@ module Google
                         private_key: nil,
                         signer: nil
           ensure_service!
-          signer = File::SignerV2.from_bucket self, path
-          signer.post_object issuer: issuer,
+          sign = File::SignerV2.from_bucket self, path
+          sign.post_object issuer: issuer,
                              client_email: client_email,
                              signing_key: signing_key,
                              private_key: private_key,
@@ -1900,7 +1900,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
-                #   conditions = [["starts-with", "$acl","public"]]
+        #   conditions = [["starts-with", "$acl","public"]]
         #   post = bucket.generate_signed_post_policy_v4 "avatars/heidi/400x400.png", expires: 10,
         #                                                                             conditions: conditions,
         #                                                                             issuer: issuer,
@@ -1927,8 +1927,8 @@ module Google
                                            virtual_hosted_style: nil,
                                            bucket_bound_hostname: nil
           ensure_service!
-          signer = File::SignerV4.from_bucket self, path
-          signer.post_object issuer: issuer,
+          sign = File::SignerV4.from_bucket self, path
+          sign.post_object issuer: issuer,
                              client_email: client_email,
                              signing_key: signing_key,
                              private_key: private_key,
