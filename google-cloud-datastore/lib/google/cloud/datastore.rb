@@ -190,4 +190,6 @@ module Google
       end
     end
   end
+  ## Legacy generated client namespace
+  Datastore = Cloud::Datastore unless const_defined? :Datastore
 end

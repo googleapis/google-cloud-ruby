@@ -15,6 +15,12 @@
 require "helper"
 require "google/cloud/datastore"
 
+describe Google do
+  it "aliases Google::Datastore to Google::Cloud::Datastore" do
+    assert defined?(::Google::Datastore)
+  end
+end
+
 describe Google::Cloud do
   let(:default_scope) do
     [
