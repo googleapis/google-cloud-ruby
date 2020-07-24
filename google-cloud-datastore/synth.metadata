@@ -3,15 +3,15 @@
     {
       "generator": {
         "name": "artman",
-        "version": "2.0.0",
-        "dockerImage": "googleapis/artman@sha256:b3b47805231a305d0f40c4bf069df20f6a2635574e6d4259fac651d3f9f6e098"
+        "version": "2.4.3",
+        "dockerImage": "googleapis/artman@sha256:06ae8054c82902900496e7c0eef67a4b3c0e07320f180240867909f098b32e86"
       }
     },
     {
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "2bdd89702c7aa606b4a46069694fedeedfd71a5e"
+        "sha": "b02240c67416e1710ec08afb2b0746a098dc70af"
       }
     },
     {
