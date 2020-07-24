@@ -7,39 +7,43 @@ require 'google/protobuf'
 require 'google/protobuf/timestamp_pb'
 require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
-  add_message "google.firestore.v1beta1.DocumentMask" do
-    repeated :field_paths, :string, 1
-  end
-  add_message "google.firestore.v1beta1.Precondition" do
-    oneof :condition_type do
-      optional :exists, :bool, 1
-      optional :update_time, :message, 2, "google.protobuf.Timestamp"
+  add_file("google/firestore/v1beta1/common.proto", :syntax => :proto3) do
+    add_message "google.firestore.v1beta1.DocumentMask" do
+      repeated :field_paths, :string, 1
     end
-  end
-  add_message "google.firestore.v1beta1.TransactionOptions" do
-    oneof :mode do
-      optional :read_only, :message, 2, "google.firestore.v1beta1.TransactionOptions.ReadOnly"
-      optional :read_write, :message, 3, "google.firestore.v1beta1.TransactionOptions.ReadWrite"
+    add_message "google.firestore.v1beta1.Precondition" do
+      oneof :condition_type do
+        optional :exists, :bool, 1
+        optional :update_time, :message, 2, "google.protobuf.Timestamp"
+      end
     end
-  end
-  add_message "google.firestore.v1beta1.TransactionOptions.ReadWrite" do
-    optional :retry_transaction, :bytes, 1
-  end
-  add_message "google.firestore.v1beta1.TransactionOptions.ReadOnly" do
-    oneof :consistency_selector do
-      optional :read_time, :message, 2, "google.protobuf.Timestamp"
+    add_message "google.firestore.v1beta1.TransactionOptions" do
+      oneof :mode do
+        optional :read_only, :message, 2, "google.firestore.v1beta1.TransactionOptions.ReadOnly"
+        optional :read_write, :message, 3, "google.firestore.v1beta1.TransactionOptions.ReadWrite"
+      end
+    end
+    add_message "google.firestore.v1beta1.TransactionOptions.ReadWrite" do
+      optional :retry_transaction, :bytes, 1
+    end
+    add_message "google.firestore.v1beta1.TransactionOptions.ReadOnly" do
+      oneof :consistency_selector do
+        optional :read_time, :message, 2, "google.protobuf.Timestamp"
+      end
     end
   end
 end
 
 module Google
-  module Firestore
+  module Cloud
+    module Firestore
+      module V1beta1
+        DocumentMask = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.DocumentMask").msgclass
+        Precondition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.Precondition").msgclass
+        TransactionOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.TransactionOptions").msgclass
+        TransactionOptions::ReadWrite = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.TransactionOptions.ReadWrite").msgclass
+        TransactionOptions::ReadOnly = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.TransactionOptions.ReadOnly").msgclass
+      end
+    end
   end
-end
-module Google::Firestore::V1beta1
-  DocumentMask = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.DocumentMask").msgclass
-  Precondition = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.Precondition").msgclass
-  TransactionOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.TransactionOptions").msgclass
-  TransactionOptions::ReadWrite = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.TransactionOptions.ReadWrite").msgclass
-  TransactionOptions::ReadOnly = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1beta1.TransactionOptions.ReadOnly").msgclass
 end
