@@ -1467,10 +1467,15 @@ module Google
         #   use the signed URL.
         # @param [String] issuer Service Account's Client Email.
         # @param [String] client_email Service Account's Client Email.
-        # @param [OpenSSL::PKey::RSA, String] signing_key Service Account's
-        #   Private Key.
-        # @param [OpenSSL::PKey::RSA, String] private_key Service Account's
-        #   Private Key.
+        # @param [OpenSSL::PKey::RSA, String, Proc] signing_key Service Account's
+        #   Private Key or a Proc that accepts a single parameter which is used
+        #   to generate a valid RSA SHA256 signature.
+        # @param [OpenSSL::PKey::RSA, String, Proc] private_key Service Account's
+        #   Private Key or a Proc that accepts a single parameter which is used
+        #   to generate a valid RSA SHA256 signature.
+        # @param [OpenSSL::PKey::RSA, String, Proc] signer Service Account's
+        #   Private Key or a Proc that accepts a single parameter which is used
+        #   to generate a valid RSA SHA256 signature.
         # @param [Hash] query Query string parameters to include in the signed
         #   URL. The given parameters are not verified by the signature.
         #
@@ -1561,6 +1566,43 @@ module Google
         #   # Send the `x-goog-resumable:start` header and the content type
         #   # with the resumable upload POST request.
         #
+        # @example Using the `issuer` and `signer` options:
+        #   require "google/cloud/storage"
+        #   require "google/apis/iamcredentials_v1"
+        #   require "googleauth"
+        #
+        #   # Issuer is the service account email that the Signed URL will be signed with
+        #   # and any permission granted in the Signed URL must be granted to the
+        #   # Google Service Account.
+        #   issuer = "service-account@project-id.iam.gserviceaccount.com"
+        #
+        #   # Create a lambda that accepts the string_to_sign
+        #   signer = lambda do |string_to_sign|
+        #     IAMCredentials = Google::Apis::IamcredentialsV1
+        #     iam_credentials_client = IAMCredentials::IAMCredentialsService.new
+        #
+        #     # Get the environment configured authorization
+        #     scopes =  ["https://www.googleapis.com/auth/cloud-platform"]
+        #     iam_credentials_client.authorization = Google::Auth.get_application_default(scopes)
+        #
+        #     request = {
+        #       "payload": string_to_sign,
+        #     }
+        #     response = iam_credentials_client.sign_service_account_blob(
+        #       "projects/-/serviceAccounts/#{issuer}",
+        #       request,
+        #       {}
+        #     )
+        #     response.signed_blob
+        #   end
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #   file = bucket.file "avatars/heidi/400x400.png", skip_lookup: true
+        #   url = file.signed_url method: "GET", issuer: issuer,
+        #                         signer: signer
+        #
         def signed_url method: "GET",
                        expires: nil,
                        content_type: nil,
@@ -1570,6 +1612,7 @@ module Google
                        client_email: nil,
                        signing_key: nil,
                        private_key: nil,
+                       signer: nil,
                        query: nil,
                        scheme: "HTTPS",
                        virtual_hosted_style: nil,
@@ -1589,6 +1632,7 @@ module Google
                               client_email: client_email,
                               signing_key: signing_key,
                               private_key: private_key,
+                              signer: signer,
                               query: query
           when :v4
             signer = File::SignerV4.from_file self
@@ -1599,6 +1643,7 @@ module Google
                               client_email: client_email,
                               signing_key: signing_key,
                               private_key: private_key,
+                              signer: signer,
                               query: query,
                               scheme: scheme,
                               virtual_hosted_style: virtual_hosted_style,

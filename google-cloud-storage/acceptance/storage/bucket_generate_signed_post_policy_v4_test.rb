@@ -61,6 +61,41 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
     end
   end
 
+  focus; it "generates a signed post object v4 using signBlob API" do
+    post_object = bucket.generate_signed_post_policy_v4 "test-object", expires: 10
+
+    _(post_object.fields.keys.sort).must_equal [
+      "key",
+      "policy",
+      "x-goog-algorithm",
+      "x-goog-credential",
+      "x-goog-date",
+      "x-goog-signature"
+    ]
+
+    form_data = [['file', File.open(data)]]
+
+    post_object.fields.each do |key, value|
+      form_data.push [key, value]
+    end
+
+    http = Net::HTTP.new uri.host, uri.port
+    http.use_ssl = true
+    request = Net::HTTP::Post.new post_object.url
+    request.set_form form_data, 'multipart/form-data'
+
+    response = http.request request
+
+    _(response.code).must_equal "204"
+    file = bucket.file(post_object.fields["key"])
+    _(file).wont_be :nil?
+    Tempfile.open ["google-cloud-logo", ".jpg"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = file.download tmpfile
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(data, mode: "rb")
+    end
+  end
+
   it "generates a signed post object v4 virtual hosted style" do
     post_object = bucket.generate_signed_post_policy_v4 "test-object", expires: 10, virtual_hosted_style: true
 
