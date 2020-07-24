@@ -164,8 +164,9 @@ def mock_pubsub
 
     pubsub.service.mocked_publisher = Minitest::Mock.new
     pubsub.service.mocked_subscriber = Minitest::Mock.new
+    pubsub.service.mocked_iam = Minitest::Mock.new
     if block_given?
-      yield pubsub.service.mocked_publisher, pubsub.service.mocked_subscriber
+      yield pubsub.service.mocked_publisher, pubsub.service.mocked_subscriber, pubsub.service.mocked_iam
     end
 
     pubsub
@@ -281,10 +282,10 @@ YARD::Doctest.configure do |doctest|
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#create_notification" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :create_topic, topic_gapi, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :get_iam_policy, policy_gapi_v1, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :set_iam_policy, policy_gapi_v1, ["projects/my-project/topics/my-topic", Google::Iam::V1::Policy, Hash]
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam|
+      mock_publisher.expect :create_topic, topic_gapi, [Hash]
+      mock_iam.expect :get_iam_policy, policy_gapi_v1, [Hash]
+      mock_iam.expect :set_iam_policy, policy_gapi_v1, [Hash]
     end
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
@@ -1091,10 +1092,10 @@ YARD::Doctest.configure do |doctest|
   # Notification
 
   doctest.before "Google::Cloud::Storage::Notification" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_publisher.expect :create_topic, topic_gapi, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :get_iam_policy, policy_gapi_v1, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :set_iam_policy, policy_gapi_v1, ["projects/my-project/topics/my-topic", Google::Iam::V1::Policy, Hash]
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam|
+      mock_publisher.expect :create_topic, topic_gapi, [Hash]
+      mock_iam.expect :get_iam_policy, policy_gapi_v1, [Hash]
+      mock_iam.expect :set_iam_policy, policy_gapi_v1, [Hash]
     end
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
