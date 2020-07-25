@@ -24,10 +24,10 @@ module Google
     module Dialogflow
       module V2
         module Sessions
-          # A session represents an interaction with a user. You retrieve user input
-          # and pass it to the [DetectIntent][google.cloud.dialogflow.v2.Sessions.DetectIntent] (or
-          # [StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent]) method to determine
-          # user intent and respond.
+          # A service used for session interactions.
+          #
+          # For more information, see the [API interactions
+          # guide](https://cloud.google.com/dialogflow/docs/api-overview).
           class Service
 
             include GRPC::GenericService

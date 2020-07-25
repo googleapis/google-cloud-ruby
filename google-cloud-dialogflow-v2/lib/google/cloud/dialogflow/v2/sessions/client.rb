@@ -27,10 +27,10 @@ module Google
           ##
           # Client for the Sessions service.
           #
-          # A session represents an interaction with a user. You retrieve user input
-          # and pass it to the {::Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent DetectIntent} (or
-          # {::Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent StreamingDetectIntent}) method to determine
-          # user intent and respond.
+          # A service used for session interactions.
+          #
+          # For more information, see the [API interactions
+          # guide](https://cloud.google.com/dialogflow/docs/api-overview).
           #
           class Client
             include Paths
@@ -196,6 +196,9 @@ module Google
             #     `User Id`. They can be a random number or some type of user and session
             #     identifiers (preferably hashed). The length of the `Session ID` and
             #     `User ID` must not exceed 36 characters.
+            #
+            #     For more information, see the [API interactions
+            #     guide](https://cloud.google.com/dialogflow/docs/api-overview).
             #   @param query_params [::Google::Cloud::Dialogflow::V2::QueryParameters, ::Hash]
             #     The parameters of this query.
             #   @param query_input [::Google::Cloud::Dialogflow::V2::QueryInput, ::Hash]

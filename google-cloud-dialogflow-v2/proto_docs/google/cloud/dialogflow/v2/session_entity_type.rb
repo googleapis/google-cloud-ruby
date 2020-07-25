@@ -21,13 +21,14 @@ module Google
   module Cloud
     module Dialogflow
       module V2
-        # Represents a session entity type.
+        # A session represents a conversation between a Dialogflow agent and an
+        # end-user. You can create special entities, called session entities, during a
+        # session. Session entities can extend or replace custom entity types and only
+        # exist during the session that they were created for. All session data,
+        # including session entities, is stored by Dialogflow for 20 minutes.
         #
-        # Extends or replaces a custom entity type at the user session level (we
-        # refer to the entity types defined at the agent level as "custom entity
-        # types").
-        #
-        # Note: session entity types apply to all queries, regardless of the language.
+        # For more information, see the [session entity
+        # guide](https://cloud.google.com/dialogflow/docs/entities-session).
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The unique identifier of this session entity type. Format:

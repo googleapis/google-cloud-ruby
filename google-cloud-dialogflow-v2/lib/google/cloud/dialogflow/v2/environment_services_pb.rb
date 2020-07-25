@@ -24,7 +24,7 @@ module Google
     module Dialogflow
       module V2
         module Environments
-          # Manages agent environments.
+          # Service for managing [Environments][google.cloud.dialogflow.v2.Environment].
           class Service
 
             include GRPC::GenericService
