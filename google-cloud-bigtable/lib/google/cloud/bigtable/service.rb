@@ -29,7 +29,7 @@ module Google
       # gRPC Cloud Bigtable service, including API methods.
       class Service
         # @private
-        attr_accessor :project_id, :credentials, :host, :timeout, :client_config
+        attr_accessor :project_id, :credentials, :host, :timeout
 
         # @private
         # Creates a new Service instance.
@@ -49,16 +49,12 @@ module Google
         #   generally, to give OAuth credentials.
         # @param timeout [Integer]
         #   The default timeout, in seconds, for calls made through this client.
-        # @param client_config [Hash]
-        #   A hash for call options for each method. See Google::Gax#construct_settings for the structure of this data.
-        #   Falls back to the default config if not specified or the specified config is missing data points.
         #
-        def initialize project_id, credentials, host: nil, timeout: nil, client_config: nil
+        def initialize project_id, credentials, host: nil, timeout: nil
           @project_id = project_id
           @credentials = credentials
           @host = host
           @timeout = timeout
-          @client_config = client_config || {}
         end
 
         def channel default_host
@@ -86,11 +82,10 @@ module Google
         def instances
           return mocked_instances if mocked_instances
           @instances ||= Admin::V2::BigtableInstanceAdminClient.new(
-            credentials:   channel(Admin::V2::BigtableInstanceAdminClient::SERVICE_ADDRESS),
-            timeout:       timeout,
-            client_config: client_config,
-            lib_name:      "gccl",
-            lib_version:   Google::Cloud::Bigtable::VERSION
+            credentials: channel(Admin::V2::BigtableInstanceAdminClient::SERVICE_ADDRESS),
+            timeout:     timeout,
+            lib_name:    "gccl",
+            lib_version: Google::Cloud::Bigtable::VERSION
           )
         end
         attr_accessor :mocked_instances
@@ -103,11 +98,10 @@ module Google
         def tables
           return mocked_tables if mocked_tables
           @tables ||= Admin::V2::BigtableTableAdminClient.new(
-            credentials:   channel(Admin::V2::BigtableTableAdminClient::SERVICE_ADDRESS),
-            timeout:       timeout,
-            client_config: client_config,
-            lib_name:      "gccl",
-            lib_version:   Google::Cloud::Bigtable::VERSION
+            credentials: channel(Admin::V2::BigtableTableAdminClient::SERVICE_ADDRESS),
+            timeout:     timeout,
+            lib_name:    "gccl",
+            lib_version: Google::Cloud::Bigtable::VERSION
           )
         end
         attr_accessor :mocked_tables
@@ -120,11 +114,10 @@ module Google
         def client
           return mocked_client if mocked_client
           @client ||= V2::BigtableClient.new(
-            credentials:   channel(V2::BigtableClient::SERVICE_ADDRESS),
-            timeout:       timeout,
-            client_config: client_config,
-            lib_name:      "gccl",
-            lib_version:   Google::Cloud::Bigtable::VERSION
+            credentials: channel(V2::BigtableClient::SERVICE_ADDRESS),
+            timeout:     timeout,
+            lib_name:    "gccl",
+            lib_version: Google::Cloud::Bigtable::VERSION
           )
         end
         attr_accessor :mocked_client
