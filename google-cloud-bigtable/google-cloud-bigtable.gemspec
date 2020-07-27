@@ -1,4 +1,4 @@
-# -*- ruby -*-
+ # -*- ruby -*-
 # encoding: utf-8
 
 require File.expand_path("lib/google/cloud/bigtable/version", __dir__)
@@ -23,11 +23,9 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.4"
 
-  gem.add_dependency "google-cloud-core", "~> 1.1"
-  gem.add_dependency "google-gax", "~> 1.8"
-  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"
-  gem.add_dependency "googleapis-common-protos-types", ">= 1.0.4", "< 2.0"
-  gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"
+  gem.add_dependency "google-cloud-bigtable-admin-v2", "~> 0.0"
+  gem.add_dependency "google-cloud-bigtable-v2", "~> 0.0"
+  gem.add_dependency "google-cloud-core", "~> 1.5"
 
   gem.add_development_dependency "google-style", "~> 1.24.0"
   gem.add_development_dependency "minitest", "~> 5.14"
