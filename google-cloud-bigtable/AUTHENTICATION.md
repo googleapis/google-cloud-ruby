@@ -76,7 +76,7 @@ The environment variables that google-cloud-bigtable checks for project ID are:
 1. `BIGTABLE_PROJECT`
 2. `GOOGLE_CLOUD_PROJECT`
 
-The environment variables that google-cloud-bigtable checks for credentials are configured on {Google::Cloud::Bigtable::V2::Credentials}:
+The environment variables that google-cloud-bigtable checks for credentials are configured on {Google::Cloud::Bigtable::Credentials}:
 
 1. `BIGTABLE_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `BIGTABLE_KEYFILE` - Path to JSON file, or JSON contents

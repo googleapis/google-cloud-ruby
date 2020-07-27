@@ -137,6 +137,21 @@ Google::Cloud.configure.add_config! :bigtable do |config|
   default_emulator = Google::Cloud::Config.deferred do
     ENV["BIGTABLE_EMULATOR_HOST"]
   end
+  default_scopes = [
+    "https://www.googleapis.com/auth/bigtable.admin",
+    "https://www.googleapis.com/auth/bigtable.admin.cluster",
+    "https://www.googleapis.com/auth/bigtable.admin.instance",
+    "https://www.googleapis.com/auth/bigtable.admin.table",
+    "https://www.googleapis.com/auth/bigtable.data",
+    "https://www.googleapis.com/auth/bigtable.data.readonly",
+    "https://www.googleapis.com/auth/cloud-bigtable.admin",
+    "https://www.googleapis.com/auth/cloud-bigtable.admin.cluster",
+    "https://www.googleapis.com/auth/cloud-bigtable.admin.table",
+    "https://www.googleapis.com/auth/cloud-bigtable.data",
+    "https://www.googleapis.com/auth/cloud-bigtable.data.readonly",
+    "https://www.googleapis.com/auth/cloud-platform",
+    "https://www.googleapis.com/auth/cloud-platform.read-only"
+  ]
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
@@ -150,9 +165,9 @@ Google::Cloud.configure.add_config! :bigtable do |config|
                       Proc
                     ],
                     allow_nil: true
-  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :scope, default_scopes, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
-  config.add_field! :emulator_host, default_emulator,
-                    match: String, allow_nil: true
-  config.add_field! :endpoint, nil, match: String
+  config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
+  config.add_field! :endpoint, "bigtable.googleapis.com", match: String
+  config.add_field! :endpoint_admin, "bigtableadmin.googleapis.com", match: String
 end
