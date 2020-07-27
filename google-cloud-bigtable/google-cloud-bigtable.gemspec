@@ -1,4 +1,4 @@
- # -*- ruby -*-
+# -*- ruby -*-
 # encoding: utf-8
 
 require File.expand_path("lib/google/cloud/bigtable/version", __dir__)
