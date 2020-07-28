@@ -341,6 +341,55 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
     assert_results results
   end
 
+  it "can execute a simple query with custom timeout and retry policy" do
+    timeout = 30
+    retry_policy = {
+      initial_delay: 0.25,
+      max_delay:     32.0,
+      multiplier:    1.3,
+      retry_codes:   ["UNAVAILABLE"]
+    }
+    expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+
+    mock = Minitest::Mock.new
+    batch_snapshot.session.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session.path, sql, transaction: tx_selector, param_types: {}, partition_token: partition_token, options: expect_options
+
+    results = batch_snapshot.execute_partition partition(sql: sql), timeout: timeout, retry_policy: retry_policy
+
+    mock.verify
+
+    assert_results results
+  end
+
+  it "can read all rows with custom timeout and retry policy" do
+    timeout = 30
+    retry_policy = {
+      initial_delay: 0.25,
+      max_delay:     32.0,
+      multiplier:    1.3,
+      retry_codes:   ["UNAVAILABLE"]
+    }
+    expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+
+    columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
+
+    mock = Minitest::Mock.new
+    mock.expect :streaming_read, results_enum, [{
+      session: session.path, table: "my-table",
+      columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
+      key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true),
+      transaction: tx_selector, index: "", limit: nil, resume_token: nil, partition_token: partition_token
+    }, expect_options]
+    batch_snapshot.session.service.mocked_service = mock
+
+    results = batch_snapshot.execute_partition partition(table: "my-table", columns: columns), timeout: timeout, retry_policy: retry_policy
+
+    mock.verify
+
+    assert_results results
+  end
+
   def partition table: nil, keys: nil, columns: nil, index: nil, sql: nil,
                 params: nil, param_types: nil, query_options: nil
     if table

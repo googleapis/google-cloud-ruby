@@ -406,6 +406,39 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     mock.verify
   end
 
+  it "can execute a simple query with custom timeout and retry policy" do
+    timeout = 30
+    retry_policy = {
+      initial_delay: 0.25,
+      max_delay:     32.0,
+      multiplier:    1.3,
+      retry_codes:   ["UNAVAILABLE"]
+    }
+    expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+
+    mock = Minitest::Mock.new
+    spanner.service.mocked_service = mock
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: [], transaction_id: transaction_id, single_use_transaction: nil}, expect_options]
+    # transaction checkin
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
+
+    results = nil
+    timestamp = client.transaction timeout: timeout, retry_policy: retry_policy do |tx|
+      _(tx).must_be_kind_of Google::Cloud::Spanner::Transaction
+      results = tx.execute_query "SELECT * FROM users"
+    end
+    _(timestamp).must_equal commit_time
+
+    shutdown_client! client
+
+    mock.verify
+
+    assert_results results
+  end
+
   def assert_results results
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
 

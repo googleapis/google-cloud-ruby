@@ -122,6 +122,30 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
     end
   end
 
+  it "can execute a single DML query with custom timeout and retry policy" do
+    timeout = 30
+    retry_policy = {
+      initial_delay: 0.25,
+      max_delay:     32.0,
+      multiplier:    1.3,
+      retry_codes:   ["UNAVAILABLE"]
+    }
+    expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+
+    mock = Minitest::Mock.new
+    mock.expect :execute_batch_dml, batch_response_grpc, [{ session: session_grpc.name, transaction: tx_selector, statements: [statement_grpc("UPDATE users SET active = true")], seqno: 1 }, expect_options]
+    session.service.mocked_service = mock
+
+    row_counts = transaction.batch_update timeout: timeout, retry_policy: retry_policy do |b|
+      b.batch_update "UPDATE users SET active = true"
+    end
+
+    mock.verify
+
+    _(row_counts.count).must_equal 1
+    _(row_counts.first).must_equal 1
+  end
+
   def statement_grpc sql, params: nil, param_types: {}
     Google::Cloud::Spanner::V1::ExecuteBatchDmlRequest::Statement.new \
       sql: sql, params: params, param_types: param_types

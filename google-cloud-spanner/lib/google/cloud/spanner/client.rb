@@ -336,7 +336,7 @@ module Google
         #   end
         #
         def execute_query sql, params: nil, types: nil, single_use: nil,
-                          query_options: nil
+                          query_options: nil, timeout: nil, retry_policy: nil
           validate_single_use_args! single_use
           ensure_service!
 
@@ -347,7 +347,8 @@ module Google
           @pool.with_session do |session|
             results = session.execute_query \
               sql, params: params, types: types, transaction: single_use_tx,
-              query_options: query_options
+              query_options: query_options, timeout: timeout,
+              retry_policy: retry_policy
           end
           results
         end
@@ -530,7 +531,8 @@ module Google
         #    "UPDATE users SET friends = NULL WHERE active = false",
         #    query_options: { optimizer_version: "1" }
         def execute_partition_update sql, params: nil, types: nil,
-                                     query_options: nil
+                                     query_options: nil, timeout: nil,
+                                     retry_policy: nil
           ensure_service!
 
           params, types = Convert.to_input_params_and_types params, types
@@ -539,7 +541,8 @@ module Google
             results = session.execute_query \
               sql, params: params, types: types,
               transaction: pdml_transaction(session),
-              query_options: query_options
+              query_options: query_options, timeout: timeout,
+              retry_policy: retry_policy
           end
           # Stream all PartialResultSet to get ResultSetStats
           results.rows.to_a
@@ -650,7 +653,7 @@ module Google
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil,
-                 single_use: nil
+                 single_use: nil, timeout: nil, retry_policy: nil
           validate_single_use_args! single_use
           ensure_service!
 
@@ -662,7 +665,8 @@ module Google
           @pool.with_session do |session|
             results = session.read \
               table, columns, keys: keys, index: index, limit: limit,
-                              transaction: single_use_tx
+                              transaction: single_use_tx, timeout: timeout,
+                              retry_policy: retry_policy
           end
           results
         end
@@ -717,9 +721,9 @@ module Google
         #   db.upsert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def upsert table, *rows
+        def upsert table, *rows, timeout: nil, retry_policy: nil
           @pool.with_session do |session|
-            session.upsert table, rows
+            session.upsert table, rows, timeout: timeout, retry_policy: retry_policy
           end
         end
         alias save upsert
@@ -773,9 +777,9 @@ module Google
         #   db.insert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def insert table, *rows
+        def insert table, *rows, timeout: nil, retry_policy: nil
           @pool.with_session do |session|
-            session.insert table, rows
+            session.insert table, rows, timeout: timeout, retry_policy: retry_policy
           end
         end
 
@@ -828,9 +832,9 @@ module Google
         #   db.update "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def update table, *rows
+        def update table, *rows, timeout: nil, retry_policy: nil
           @pool.with_session do |session|
-            session.update table, rows
+            session.update table, rows, timeout: timeout, retry_policy: retry_policy
           end
         end
 
@@ -885,9 +889,10 @@ module Google
         #   db.replace "users", [{ id: 1, name: "Charlie", active: false },
         #                        { id: 2, name: "Harvey",  active: true }]
         #
-        def replace table, *rows
+        def replace table, *rows, timeout: nil, retry_policy: nil
           @pool.with_session do |session|
-            session.replace table, rows
+            session.replace table, rows, timeout: timeout,
+                            retry_policy: retry_policy
           end
         end
 
@@ -923,9 +928,10 @@ module Google
         #
         #   db.delete "users", [1, 2, 3]
         #
-        def delete table, keys = []
+        def delete table, keys = [], timeout: nil, retry_policy: nil
           @pool.with_session do |session|
-            session.delete table, keys
+            session.delete table, keys, timeout: timeout,
+                           retry_policy: retry_policy
           end
         end
 
@@ -961,11 +967,11 @@ module Google
         #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
         #   end
         #
-        def commit &block
+        def commit timeout: nil, retry_policy: nil, &block
           raise ArgumentError, "Must provide a block" unless block_given?
 
           @pool.with_session do |session|
-            session.commit(&block)
+            session.commit(timeout: timeout, retry_policy: retry_policy, &block)
           end
         end
 
@@ -1029,7 +1035,7 @@ module Google
         #     end
         #   end
         #
-        def transaction deadline: 120
+        def transaction deadline: 120, timeout: nil, retry_policy: nil
           ensure_service!
           unless Thread.current[:transaction_id].nil?
             raise "Nested transactions are not allowed"
@@ -1044,7 +1050,9 @@ module Google
               Thread.current[:transaction_id] = tx.transaction_id
               yield tx
               commit_resp = @project.service.commit \
-                tx.session.path, tx.mutations, transaction_id: tx.transaction_id
+                tx.session.path, tx.mutations,
+                transaction_id: tx.transaction_id, timeout: timeout,
+                retry_policy: retry_policy
               return Convert.timestamp_to_time commit_resp.commit_timestamp
             rescue GRPC::Aborted, Google::Cloud::AbortedError => err
               # Re-raise if deadline has passed

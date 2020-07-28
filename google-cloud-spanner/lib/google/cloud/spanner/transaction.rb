@@ -274,7 +274,8 @@ module Google
         #     end
         #   end
         #
-        def execute_query sql, params: nil, types: nil, query_options: nil
+        def execute_query sql, params: nil, types: nil, query_options: nil,
+                          timeout: nil, retry_policy: nil
           ensure_session!
 
           @seqno += 1
@@ -282,7 +283,9 @@ module Google
           params, types = Convert.to_input_params_and_types params, types
           session.execute_query sql, params: params, types: types,
                                      transaction: tx_selector, seqno: @seqno,
-                                     query_options: query_options
+                                     query_options: query_options,
+                                     timeout: timeout,
+                                     retry_policy: retry_policy
         end
         alias execute execute_query
         alias query execute_query
@@ -393,9 +396,11 @@ module Google
         #     )
         #   end
         #
-        def execute_update sql, params: nil, types: nil, query_options: nil
+        def execute_update sql, params: nil, types: nil, query_options: nil,
+                           timeout: nil, retry_policy: nil
           results = execute_query sql, params: params, types: types,
-                                  query_options: query_options
+                                  query_options: query_options,
+                                  timeout: timeout, retry_policy: retry_policy
           # Stream all PartialResultSet to get ResultSetStats
           results.rows.to_a
           # Raise an error if there is not a row count returned
@@ -464,10 +469,11 @@ module Google
         #     end
         #   end
         #
-        def batch_update &block
+        def batch_update timeout: nil, retry_policy: nil, &block
           ensure_session!
           @seqno += 1
-          session.batch_update tx_selector, @seqno, &block
+          session.batch_update tx_selector, @seqno, timeout: timeout,
+                               retry_policy: retry_policy, &block
         end
 
         ##
@@ -504,14 +510,17 @@ module Google
         #     end
         #   end
         #
-        def read table, columns, keys: nil, index: nil, limit: nil
+        def read table, columns, keys: nil, index: nil, limit: nil,
+                 timeout: nil, retry_policy: nil
           ensure_session!
 
           columns = Array(columns).map(&:to_s)
           keys = Convert.to_key_set keys
 
           session.read table, columns, keys: keys, index: index, limit: limit,
-                                       transaction: tx_selector
+                                       transaction: tx_selector,
+                                       timeout: timeout,
+                                       retry_policy: retry_policy
         end
 
         ##

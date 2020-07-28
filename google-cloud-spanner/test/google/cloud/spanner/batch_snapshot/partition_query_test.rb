@@ -407,6 +407,34 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     end
   end
 
+  it "can execute a simple query with custom timeout and retry policy" do
+    timeout = 30
+    retry_policy = {
+      initial_delay: 0.25,
+      max_delay:     32.0,
+      multiplier:    1.3,
+      retry_codes:   ["UNAVAILABLE"]
+    }
+    expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+
+    mock = Minitest::Mock.new
+    sql = "SELECT * FROM users"
+    mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: nil, param_types: nil, partition_options: nil }, expect_options]
+    batch_snapshot.session.service.mocked_service = mock
+
+    partitions = batch_snapshot.partition_query sql, timeout: timeout, retry_policy: retry_policy
+
+    mock.verify
+
+    assert_partitions partitions
+
+    serialized_partitions = partitions.map(&:dump)
+    deserialized_partitions = serialized_partitions.map do |sp|
+      Google::Cloud::Spanner::Partition.load sp
+    end
+    assert_partitions deserialized_partitions
+  end
+
   def assert_partitions partitions, sql = "SELECT * FROM users", params: nil, types: nil
     _(partitions).must_be_kind_of Array
     _(partitions).wont_be :empty?
