@@ -67,8 +67,7 @@ describe Google::Cloud::Storage::Bucket, :post_object, :v2, :storage do
 
     iam_credentials_client = Google::Apis::IamcredentialsV1::IAMCredentialsService.new
     # Get the environment configured authorization
-    scopes =  ["https://www.googleapis.com/auth/cloud-platform"]
-    iam_credentials_client.authorization = Google::Auth.get_application_default scopes
+    iam_credentials_client.authorization = bucket.service.credentials.client
 
     # Only defined when using a service account
     issuer = iam_credentials_client.authorization.issuer

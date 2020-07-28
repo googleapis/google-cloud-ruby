@@ -28,7 +28,8 @@ if ENV["GCLOUD_TEST_GENERATE_XML_REPORT"]
 end
 
 # Create shared storage object so we don't create new for each test
-$storage = Google::Cloud.new.storage retries: 10
+scopes = ["https://www.googleapis.com/auth/devstorage.full_control", "https://www.googleapis.com/auth/iam"]
+$storage = Google::Cloud.new.storage retries: 10, scope: scopes
 
 # Create second storage object for tests requiring one, such as requester pays and user project.
 if (proj = ENV["GCLOUD_TEST_STORAGE_REQUESTER_PAYS_PROJECT"]) &&
