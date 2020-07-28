@@ -54,6 +54,22 @@ describe Google::Cloud::Bigquery, :bigquery do
     t
   end
   let(:dataset_with_access_id) { "#{prefix}_dataset_with_access" }
+  let(:model_id) { "model_#{SecureRandom.hex(4)}" }
+  let :model_sql do
+    model_sql = <<~MODEL_SQL
+    CREATE MODEL #{dataset.dataset_id}.#{model_id}
+    OPTIONS (
+        model_type='linear_reg',
+        max_iteration=1,
+        learn_rate=0.4,
+        learn_rate_strategy='constant'
+    ) AS (
+        SELECT 'a' AS f1, 2.0 AS label
+        UNION ALL
+        SELECT 'b' AS f1, 3.8 AS label
+    )
+    MODEL_SQL
+  end
 
   before do
     dataset_2
@@ -221,6 +237,29 @@ describe Google::Cloud::Bigquery, :bigquery do
       dest_file_name = random_file_destination_name
       extract_url = "gs://#{bucket.name}/#{dest_file_name}"
       result = bigquery.extract samples_public_table, extract_url do |j|
+        j.location = "US"
+      end
+      _(result).must_equal true
+
+      extract_file = bucket.file dest_file_name
+      downloaded_file = extract_file.download tmp.path
+      _(downloaded_file.size).must_be :>, 0
+    end
+  end
+focus
+  it "extracts a model to a GCS url with extract" do
+    job = dataset.query_job model_sql
+    job.wait_until_done!
+    _(job).wont_be :failed?
+
+    # can get the model
+    model = dataset.model model_id
+    _(model).must_be_kind_of Google::Cloud::Bigquery::Model
+
+    Tempfile.open "temp_extract_model" do |tmp|
+      dest_file_name = random_file_destination_name_model
+      extract_url = "gs://#{bucket.name}/#{dest_file_name}"
+      result = bigquery.extract model, extract_url do |j|
         j.location = "US"
       end
       _(result).must_equal true
