@@ -46,13 +46,13 @@ describe Google::Cloud::Storage::Bucket, :post_object, :v2, :storage do
     request = Net::HTTP::Post.new post_object.url
 
     form_data = [
-      ['file', File.open(data)],
-      ['key', post_object.fields[:key]],
-      ['GoogleAccessId', post_object.fields[:GoogleAccessId]],
-      ['policy', post_object.fields[:policy]],
-      ['signature', post_object.fields[:signature]]
+      ["file", File.open(data)],
+      ["key", post_object.fields[:key]],
+      ["GoogleAccessId", post_object.fields[:GoogleAccessId]],
+      ["policy", post_object.fields[:policy]],
+      ["signature", post_object.fields[:signature]]
     ]
-    request.set_form form_data, 'multipart/form-data'
+    request.set_form form_data, "multipart/form-data"
 
     response = http.request request
 
@@ -91,13 +91,13 @@ describe Google::Cloud::Storage::Bucket, :post_object, :v2, :storage do
     request = Net::HTTP::Post.new post_object.url
 
     form_data = [
-      ['file', File.open(data)],
-      ['key', post_object.fields[:key]],
-      ['GoogleAccessId', post_object.fields[:GoogleAccessId]],
-      ['policy', post_object.fields[:policy]],
-      ['signature', post_object.fields[:signature]]
+      ["file", File.open(data)],
+      ["key", post_object.fields[:key]],
+      ["GoogleAccessId", post_object.fields[:GoogleAccessId]],
+      ["policy", post_object.fields[:policy]],
+      ["signature", post_object.fields[:signature]]
     ]
-    request.set_form form_data, 'multipart/form-data'
+    request.set_form form_data, "multipart/form-data"
 
     response = http.request request
 
@@ -119,13 +119,13 @@ describe Google::Cloud::Storage::Bucket, :post_object, :v2, :storage do
     request = Net::HTTP::Post.new post_object.url
 
     form_data = [
-      ['file', File.open(data)],
-      ['key', post_object.fields[:key]],
-      ['GoogleAccessId', post_object.fields[:GoogleAccessId]],
-      ['policy', post_object.fields[:policy]],
-      ['signature', post_object.fields[:signature]]
+      ["file", File.open(data)],
+      ["key", post_object.fields[:key]],
+      ["GoogleAccessId", post_object.fields[:GoogleAccessId]],
+      ["policy", post_object.fields[:policy]],
+      ["signature", post_object.fields[:signature]]
     ]
-    request.set_form form_data, 'multipart/form-data'
+    request.set_form form_data, "multipart/form-data"
 
     response = http.request request
 

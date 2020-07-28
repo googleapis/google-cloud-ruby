@@ -39,7 +39,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
       "x-goog-signature"
     ]
 
-    form_data = [['file', File.open(data)]]
+    form_data = [["file", File.open(data)]]
 
     post_object.fields.each do |key, value|
       form_data.push [key, value]
@@ -48,7 +48,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
     request = Net::HTTP::Post.new post_object.url
-    request.set_form form_data, 'multipart/form-data'
+    request.set_form form_data, "multipart/form-data"
 
     response = http.request request
 
@@ -94,7 +94,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
       "x-goog-signature"
     ]
 
-    form_data = [['file', File.open(data)]]
+    form_data = [["file", File.open(data)]]
 
     post_object.fields.each do |key, value|
       form_data.push [key, value]
@@ -103,7 +103,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
     request = Net::HTTP::Post.new post_object.url
-    request.set_form form_data, 'multipart/form-data'
+    request.set_form form_data, "multipart/form-data"
 
     response = http.request request
 
@@ -129,7 +129,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
       "x-goog-signature"
     ]
 
-    form_data = [['file', File.open(data)]]
+    form_data = [["file", File.open(data)]]
 
     post_object.fields.each do |key, value|
       form_data.push [key, value]
@@ -138,7 +138,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
     request = Net::HTTP::Post.new post_object.url
-    request.set_form form_data, 'multipart/form-data'
+    request.set_form form_data, "multipart/form-data"
 
     response = http.request request
     _(response.code).must_equal "204"
@@ -169,7 +169,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
       "x-goog-signature"
     ]
 
-    form_data = [['file', File.open(data)]]
+    form_data = [["file", File.open(data)]]
 
     post_object.fields.each do |key, value|
       form_data.push [key, value]
@@ -178,7 +178,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
     request = Net::HTTP::Post.new post_object.url
-    request.set_form form_data, 'multipart/form-data'
+    request.set_form form_data, "multipart/form-data"
 
     response = http.request request
 
@@ -208,7 +208,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
       "x-goog-signature"
     ]
 
-    form_data = [['file', File.open(data)]]
+    form_data = [["file", File.open(data)]]
 
     post_object.fields.each do |key, value|
       form_data.push [key, value]
@@ -217,7 +217,7 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
     request = Net::HTTP::Post.new post_object.url
-    request.set_form form_data, 'multipart/form-data'
+    request.set_form form_data, "multipart/form-data"
 
     response = http.request request
 
