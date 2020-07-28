@@ -605,20 +605,17 @@ module Google
         #   # Create a lambda that accepts the string_to_sign
         #   signer = lambda do |string_to_sign|
         #     IAMCredentials = Google::Apis::IamcredentialsV1
-        #     iam_credentials_client = IAMCredentials::IAMCredentialsService.new
+        #     iam_client = IAMCredentials::IAMCredentialsService.new
         #
         #     # Get the environment configured authorization
-        #     scopes =  ["https://www.googleapis.com/auth/cloud-platform"]
-        #     iam_credentials_client.authorization = Google::Auth.get_application_default scopes
+        #     scopes = ["https://www.googleapis.com/auth/iam"]
+        #     iam_client.authorization = Google::Auth.get_application_default scopes
         #
         #     request = {
         #       "payload": string_to_sign,
         #     }
-        #     response = iam_credentials_client.sign_service_account_blob(
-        #       "projects/-/serviceAccounts/#{issuer}",
-        #       request,
-        #       {}
-        #     )
+        #     resource = "projects/-/serviceAccounts/#{issuer}"
+        #     response = iam_client.sign_service_account_blob resource, request, {}
         #     response.signed_blob
         #   end
         #

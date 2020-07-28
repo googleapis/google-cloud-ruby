@@ -65,21 +65,18 @@ describe Google::Cloud::Storage::Bucket, :post_object, :v2, :storage do
 
     _(bucket.file(file_name)).must_be :nil?
 
-    iam_credentials_client = Google::Apis::IamcredentialsV1::IAMCredentialsService.new
+    iam_client = Google::Apis::IamcredentialsV1::IAMCredentialsService.new
     # Get the environment configured authorization
-    iam_credentials_client.authorization = bucket.service.credentials.client
+    iam_client.authorization = bucket.service.credentials.client
 
     # Only defined when using a service account
-    issuer = iam_credentials_client.authorization.issuer
+    issuer = iam_client.authorization.issuer
     signer = lambda do |string_to_sign|
       request = {
         "payload": string_to_sign,
       }
-      response = iam_credentials_client.sign_service_account_blob(
-        "projects/-/serviceAccounts/#{issuer}",
-        request,
-        {}
-      )
+      resource = "projects/-/serviceAccounts/#{issuer}"
+      response = iam_client.sign_service_account_blob resource, request, {}
       response.signed_blob
     end
 
