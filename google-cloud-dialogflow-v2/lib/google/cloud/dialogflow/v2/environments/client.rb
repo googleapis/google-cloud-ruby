@@ -27,7 +27,7 @@ module Google
           ##
           # Client for the Environments service.
           #
-          # Manages agent environments.
+          # Service for managing {::Google::Cloud::Dialogflow::V2::Environment Environments}.
           #
           class Client
             include Paths

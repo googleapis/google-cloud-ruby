@@ -31,7 +31,7 @@ module Google
     module Dialogflow
       module V2
         ##
-        # Manages agent environments.
+        # Service for managing {::Google::Cloud::Dialogflow::V2::Environment Environments}.
         #
         # To load this service and instantiate a client:
         #
