@@ -21,7 +21,7 @@ describe Google::Cloud do
   describe "#bigtable" do
     it "calls out to Google::Cloud.bigtable" do
       gcloud = Google::Cloud.new
-      stubbed_bigtable = lambda { |project_id: nil, credentials: nil, scope: nil, timeout: nil, host: nil]
+      stubbed_bigtable = lambda { |project_id: nil, credentials: nil, scope: nil, timeout: nil, host: nil|
         _(project_id).must_be :nil?
         _(credentials).must_be :nil?
         _(scope).must_be :nil?
@@ -37,7 +37,7 @@ describe Google::Cloud do
 
     it "passes project and credentials(keyfile) to Google::Cloud.bigtable" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_bigtable = lambda  { |project_id: nil, credentials: nil, scope: nil, timeout: nil, host: nil]
+      stubbed_bigtable = lambda { |project_id: nil, credentials: nil, scope: nil, timeout: nil, host: nil|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "keyfile-path"
         _(scope).must_be :nil?
@@ -54,7 +54,7 @@ describe Google::Cloud do
 
     it "passes project and credentials(keyfile) and options to Google::Cloud.bigtable" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_bigtable = lambda { |project_id: nil, credentials: nil, scope: nil, timeout: nil, host: nil]
+      stubbed_bigtable = lambda { |project_id: nil, credentials: nil, scope: nil, timeout: nil, host: nil|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "keyfile-path"
         _(scope).must_equal "http://example.com/scope"
@@ -103,7 +103,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil]
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(timeout).must_be :nil?
@@ -157,7 +157,7 @@ describe Google::Cloud do
     end
 
     it "uses provided endpoint" do
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil]
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil|
         _(credentials).must_equal default_credentials
         _(timeout).must_be :nil?
         _(host).must_equal "bigtable-endpoint2.example.com"
@@ -181,7 +181,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil]
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(timeout).must_be :nil?
@@ -212,7 +212,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil]
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(timeout).must_be :nil?
@@ -278,7 +278,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         OpenStruct.new project_id: "project-id"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil]
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil|
         _(project_id).must_equal "project-id"
         _(credentials).must_be_kind_of OpenStruct
         _(credentials.project_id).must_equal "project-id"
@@ -321,7 +321,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil]
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(timeout).must_be :nil?
@@ -358,7 +358,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil]
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(timeout).must_be :nil?
@@ -395,7 +395,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil]
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(timeout).must_equal 42
@@ -433,7 +433,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil]
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(timeout).must_equal 42
@@ -471,7 +471,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil]
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(host).must_equal "bigtable-endpoint2.example.com"

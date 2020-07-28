@@ -193,7 +193,7 @@ module Google
         #
         def routing_policy= policy
           routing_policy_grpc = policy.to_grpc
-          if routing_policy_grpc.is_a? Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting
+          if routing_policy_grpc.is_a? Google::Cloud::Bigtable::Admin::V2::AppProfile::SingleClusterRouting
             @grpc.single_cluster_routing = routing_policy_grpc
             @changed_fields["routing_policy"] = "single_cluster_routing"
           else

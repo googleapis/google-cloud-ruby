@@ -21,14 +21,14 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
   let(:description) { "Test instance app profile" }
   let(:routing_policy_grpc) { multi_cluster_routing_grpc }
   let(:app_profile_grpc) do
-    Google::Bigtable::Admin::V2::AppProfile.new(
+    Google::Cloud::Bigtable::Admin::V2::AppProfile.new(
       name: app_profile_path(instance_id, app_profile_id),
       description: description,
       multi_cluster_routing_use_any: routing_policy_grpc
     )
   end
   let(:app_profile) { Google::Cloud::Bigtable::AppProfile.from_grpc(app_profile_grpc, bigtable.service) }
-
+focus
   it "knows the identifiers" do
     _(app_profile).must_be_kind_of Google::Cloud::Bigtable::AppProfile
     _(app_profile.project_id).must_equal project_id
@@ -40,9 +40,9 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
     _(app_profile.routing_policy.to_grpc).must_equal routing_policy_grpc
     _(app_profile.single_cluster_routing).must_be :nil?
   end
-
+focus
   it "set multi_cluster_routing policy" do
-    app_profile_grpc = Google::Bigtable::Admin::V2::AppProfile.new(
+    app_profile_grpc = Google::Cloud::Bigtable::Admin::V2::AppProfile.new(
       name: app_profile_path(instance_id, app_profile_id)
     )
     app_profile = Google::Cloud::Bigtable::AppProfile.from_grpc(app_profile_grpc, bigtable.service)
@@ -55,9 +55,9 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
     _(app_profile.routing_policy).must_be_kind_of Google::Cloud::Bigtable::MultiClusterRoutingUseAny
     _(app_profile.routing_policy.to_grpc).must_equal routing_policy.to_grpc
   end
-
+focus
   it "set single_cluster_routing policy" do
-    app_profile_grpc = Google::Bigtable::Admin::V2::AppProfile.new(
+    app_profile_grpc = Google::Cloud::Bigtable::Admin::V2::AppProfile.new(
       name: app_profile_path(instance_id, app_profile_id)
     )
     app_profile = Google::Cloud::Bigtable::AppProfile.from_grpc(app_profile_grpc, bigtable.service)
@@ -73,7 +73,7 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
     _(app_profile.routing_policy).must_be_kind_of Google::Cloud::Bigtable::SingleClusterRouting
     _(app_profile.routing_policy.to_grpc).must_equal routing_policy.to_grpc
   end
-
+focus
   it "reloads its state" do
     mock = Minitest::Mock.new
     mock.expect :get_app_profile, app_profile_grpc, [app_profile_path(instance_id, app_profile_id)]

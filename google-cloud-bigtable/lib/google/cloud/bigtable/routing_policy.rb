@@ -99,7 +99,7 @@ module Google
       class MultiClusterRoutingUseAny < RoutingPolicy
         # @private
         def to_grpc
-          Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny.new
+          Google::Cloud::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny.new
         end
       end
 
@@ -161,7 +161,7 @@ module Google
 
         # @private
         def to_grpc
-          Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting.new(
+          Google::Cloud::Bigtable::Admin::V2::AppProfile::SingleClusterRouting.new(
             cluster_id:                 cluster_id,
             allow_transactional_writes: allow_transactional_writes
           )

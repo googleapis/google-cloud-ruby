@@ -146,7 +146,7 @@ class MockBigtable < Minitest::Spec
   end
 
   def multi_cluster_routing_grpc
-    Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny.new
+    Google::Cloud::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny.new
   end
 
   def table_hash name: nil, cluster_states: nil, column_families: nil, granularity: nil
@@ -266,10 +266,10 @@ class MockBigtable < Minitest::Spec
   end
 
   def app_profile_path instance_id, app_profile_id
-    Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.app_profile_path(
-      project_id,
-      instance_id,
-      app_profile_id
+    Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Paths.app_profile_path(
+      project: project_id,
+      instance: instance_id,
+      app_profile: app_profile_id
     )
   end
 

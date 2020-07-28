@@ -28,7 +28,7 @@ module Google
           # Creates a simple filter instance.
           #
           def initialize
-            @grpc = Google::Bigtable::V2::RowFilter.new
+            @grpc = Google::Cloud::Bigtable::V2::RowFilter.new
           end
 
           ##
