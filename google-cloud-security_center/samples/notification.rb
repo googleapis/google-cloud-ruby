@@ -62,7 +62,7 @@ def update_notification_config org_id:, config_id:, description: nil, pubsub_top
   # The PubSub topic where notifications will be published.
   # pubsub_topic = "YOUR_TOPIC"
 
-  # Updated filter string for Notification config. 
+  # Updated filter string for Notification config.
   # filter = "UPDATED_FILTER"
 
   client = Google::Cloud::SecurityCenter.security_center
