@@ -121,19 +121,19 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
 
       iam_credentials_client = Google::Apis::IamcredentialsV1::IAMCredentialsService.new
       # Get the environment configured authorization
-      scopes =  ['https://www.googleapis.com/auth/cloud-platform']
-      iam_credentials_client.authorization = Google::Auth.get_application_default(scopes)
+      scopes =  ["https://www.googleapis.com/auth/cloud-platform"]
+      iam_credentials_client.authorization = Google::Auth.get_application_default scopes
 
       # Only defined when using a service account
       issuer = iam_credentials_client.authorization.issuer
       signer = lambda do |string_to_sign|
         request = {
-             "payload": string_to_sign,
+          "payload": string_to_sign,
         }
         response = iam_credentials_client.sign_service_account_blob(
-         "projects/-/serviceAccounts/#{issuer}",
-         request,
-         {}
+          "projects/-/serviceAccounts/#{issuer}",
+          request,
+          {}
         )
         response.signed_blob
       end

@@ -65,26 +65,26 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
   it "generates a signed post object v4 using signBlob API" do
     iam_credentials_client = Google::Apis::IamcredentialsV1::IAMCredentialsService.new
     # Get the environment configured authorization
-    scopes =  ['https://www.googleapis.com/auth/cloud-platform']
-    iam_credentials_client.authorization = Google::Auth.get_application_default(scopes)
+    scopes =  ["https://www.googleapis.com/auth/cloud-platform"]
+    iam_credentials_client.authorization = Google::Auth.get_application_default scopes
 
     # Only defined when using a service account
     issuer = iam_credentials_client.authorization.issuer
     signer = lambda do |string_to_sign|
       request = {
-           "payload": string_to_sign,
+        "payload": string_to_sign,
       }
       response = iam_credentials_client.sign_service_account_blob(
-       "projects/-/serviceAccounts/#{issuer}",
-       request,
-       {}
+        "projects/-/serviceAccounts/#{issuer}",
+        request,
+        {}
       )
       response.signed_blob
     end
 
-    post_object = bucket.generate_signed_post_policy_v4 "test-object", expires: 10,
-                                                        issuer: issuer,
-                                                        signer: signer
+    post_object = bucket.generate_signed_post_policy_v4(
+      "test-object", expires: 10, issuer: issuer, signer: signer
+    )
 
     _(post_object.fields.keys.sort).must_equal [
       "key",

@@ -1503,7 +1503,7 @@ module Google
         #                                  issuer: "service-account@gcloud.com",
         #                                  signing_key: key
         #
-        # @example Using the `issuer` and `signer` options:
+        # @example Using Cloud IAMCredentials signBlob to create the signature:
         #   require "google/cloud/storage"
         #   require "google/apis/iamcredentials_v1"
         #   require "googleauth"
@@ -1520,7 +1520,7 @@ module Google
         #
         #     # Get the environment configured authorization
         #     scopes =  ["https://www.googleapis.com/auth/cloud-platform"]
-        #     iam_credentials_client.authorization = Google::Auth.get_application_default(scopes)
+        #     iam_credentials_client.authorization = Google::Auth.get_application_default scopes
         #
         #     request = {
         #       "payload": string_to_sign,
@@ -1597,30 +1597,30 @@ module Google
           when :v2
             sign = File::SignerV2.from_bucket self, path
             sign.signed_url method: method,
-                              expires: expires,
-                              headers: headers,
-                              content_type: content_type,
-                              content_md5: content_md5,
-                              issuer: issuer,
-                              client_email: client_email,
-                              signing_key: signing_key,
-                              private_key: private_key,
-                              signer: signer,
-                              query: query
+                            expires: expires,
+                            headers: headers,
+                            content_type: content_type,
+                            content_md5: content_md5,
+                            issuer: issuer,
+                            client_email: client_email,
+                            signing_key: signing_key,
+                            private_key: private_key,
+                            signer: signer,
+                            query: query
           when :v4
             sign = File::SignerV4.from_bucket self, path
             sign.signed_url method: method,
-                              expires: expires,
-                              headers: headers,
-                              issuer: issuer,
-                              client_email: client_email,
-                              signing_key: signing_key,
-                              private_key: private_key,
-                              signer: signer,
-                              query: query,
-                              scheme: scheme,
-                              virtual_hosted_style: virtual_hosted_style,
-                              bucket_bound_hostname: bucket_bound_hostname
+                            expires: expires,
+                            headers: headers,
+                            issuer: issuer,
+                            client_email: client_email,
+                            signing_key: signing_key,
+                            private_key: private_key,
+                            signer: signer,
+                            query: query,
+                            scheme: scheme,
+                            virtual_hosted_style: virtual_hosted_style,
+                            bucket_bound_hostname: bucket_bound_hostname
           else
             raise ArgumentError, "version '#{version}' not supported"
           end
@@ -1733,7 +1733,7 @@ module Google
         #   post.fields[:signature] #=> "ABC...XYZ="
         #   post.fields[:policy] #=> "ABC...XYZ="
         #
-        # @example Using the `issuer` and `signer` options:
+        # @example Using Cloud IAMCredentials signBlob to create the signature:
         #   require "google/cloud/storage"
         #   require "google/apis/iamcredentials_v1"
         #   require "googleauth"
@@ -1750,7 +1750,7 @@ module Google
         #
         #     # Get the environment configured authorization
         #     scopes =  ["https://www.googleapis.com/auth/cloud-platform"]
-        #     iam_credentials_client.authorization = Google::Auth.get_application_default(scopes)
+        #     iam_credentials_client.authorization = Google::Auth.get_application_default scopes
         #
         #     request = {
         #       "payload": string_to_sign,
@@ -1786,11 +1786,11 @@ module Google
           ensure_service!
           sign = File::SignerV2.from_bucket self, path
           sign.post_object issuer: issuer,
-                             client_email: client_email,
-                             signing_key: signing_key,
-                             private_key: private_key,
-                             signer: signer,
-                             policy: policy
+                           client_email: client_email,
+                           signing_key: signing_key,
+                           private_key: private_key,
+                           signer: signer,
+                           policy: policy
         end
 
         ##
@@ -1867,7 +1867,7 @@ module Google
         #   post.fields["x-goog-date"] #=> "20200128T000000Z"
         #   post.fields["x-goog-signature"] #=> "4893a0e...cd82"
         #
-        # @example Using the `issuer` and `signer` options:
+        # @example Using Cloud IAMCredentials signBlob to create the signature:
         #   require "google/cloud/storage"
         #   require "google/apis/iamcredentials_v1"
         #   require "googleauth"
@@ -1884,7 +1884,7 @@ module Google
         #
         #     # Get the environment configured authorization
         #     scopes =  ["https://www.googleapis.com/auth/cloud-platform"]
-        #     iam_credentials_client.authorization = Google::Auth.get_application_default(scopes)
+        #     iam_credentials_client.authorization = Google::Auth.get_application_default scopes
         #
         #     request = {
         #       "payload": string_to_sign,
@@ -1901,10 +1901,10 @@ module Google
         #
         #   bucket = storage.bucket "my-todo-app"
         #   conditions = [["starts-with", "$acl","public"]]
-        #   post = bucket.generate_signed_post_policy_v4 "avatars/heidi/400x400.png", expires: 10,
-        #                                                                             conditions: conditions,
-        #                                                                             issuer: issuer,
-        #                                                                             signer: signer
+        #   post = bucket.generate_signed_post_policy_v4(
+        #     "avatars/heidi/400x400.png", expires: 10,
+        #     conditions: conditions, issuer: issuer, signer: signer
+        #   )
         #
         #   post.url #=> "https://storage.googleapis.com/my-todo-app/"
         #   post.fields["key"] #=> "my-todo-app/avatars/heidi/400x400.png"
@@ -1929,16 +1929,16 @@ module Google
           ensure_service!
           sign = File::SignerV4.from_bucket self, path
           sign.post_object issuer: issuer,
-                             client_email: client_email,
-                             signing_key: signing_key,
-                             private_key: private_key,
-                             signer: signer,
-                             expires: expires,
-                             fields: fields,
-                             conditions: conditions,
-                             scheme: scheme,
-                             virtual_hosted_style: virtual_hosted_style,
-                             bucket_bound_hostname: bucket_bound_hostname
+                           client_email: client_email,
+                           signing_key: signing_key,
+                           private_key: private_key,
+                           signer: signer,
+                           expires: expires,
+                           fields: fields,
+                           conditions: conditions,
+                           scheme: scheme,
+                           virtual_hosted_style: virtual_hosted_style,
+                           bucket_bound_hostname: bucket_bound_hostname
         end
 
         ##

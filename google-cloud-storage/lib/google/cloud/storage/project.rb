@@ -585,7 +585,7 @@ module Google
         #                                   issuer: issuer_email,
         #                                   signing_key: key
         #
-        # @example Using the `issuer` and `signer` options:
+        # @example Using Cloud IAMCredentials signBlob to create the signature:
         #   require "google/cloud/storage"
         #   require "google/apis/iamcredentials_v1"
         #   require "googleauth"
@@ -602,7 +602,7 @@ module Google
         #
         #     # Get the environment configured authorization
         #     scopes =  ["https://www.googleapis.com/auth/cloud-platform"]
-        #     iam_credentials_client.authorization = Google::Auth.get_application_default(scopes)
+        #     iam_credentials_client.authorization = Google::Auth.get_application_default scopes
         #
         #     request = {
         #       "payload": string_to_sign,
@@ -675,30 +675,30 @@ module Google
           when :v2
             sign = File::SignerV2.new bucket, path, service
             sign.signed_url method: method,
-                              expires: expires,
-                              headers: headers,
-                              content_type: content_type,
-                              content_md5: content_md5,
-                              issuer: issuer,
-                              client_email: client_email,
-                              signing_key: signing_key,
-                              private_key: private_key,
-                              signer: signer,
-                              query: query
+                            expires: expires,
+                            headers: headers,
+                            content_type: content_type,
+                            content_md5: content_md5,
+                            issuer: issuer,
+                            client_email: client_email,
+                            signing_key: signing_key,
+                            private_key: private_key,
+                            signer: signer,
+                            query: query
           when :v4
             sign = File::SignerV4.new bucket, path, service
             sign.signed_url method: method,
-                              expires: expires,
-                              headers: headers,
-                              issuer: issuer,
-                              client_email: client_email,
-                              signing_key: signing_key,
-                              private_key: private_key,
-                              signer: signer,
-                              query: query,
-                              scheme: scheme,
-                              virtual_hosted_style: virtual_hosted_style,
-                              bucket_bound_hostname: bucket_bound_hostname
+                            expires: expires,
+                            headers: headers,
+                            issuer: issuer,
+                            client_email: client_email,
+                            signing_key: signing_key,
+                            private_key: private_key,
+                            signer: signer,
+                            query: query,
+                            scheme: scheme,
+                            virtual_hosted_style: virtual_hosted_style,
+                            bucket_bound_hostname: bucket_bound_hostname
           else
             raise ArgumentError, "version '#{version}' not supported"
           end
