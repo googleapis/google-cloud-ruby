@@ -1,5 +1,11 @@
 # Release History
 
+### 1.26.3 / 2020-07-28
+
+#### Documentation
+
+* Update documentation of SignedUrlUnavailable
+
 ### 1.26.2 / 2020-05-28
 
 #### Documentation
