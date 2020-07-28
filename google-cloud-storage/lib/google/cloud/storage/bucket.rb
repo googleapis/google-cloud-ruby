@@ -1442,6 +1442,13 @@ module Google
         # @param [OpenSSL::PKey::RSA, String, Proc] signer Service Account's
         #   Private Key or a Proc that accepts a single String parameter and returns a
         #   RSA SHA256 signature using a valid Google Service Account Private Key.
+        #
+        #   When using this method in environments such as GAE Flexible Environment,
+        #   GKE, or Cloud Functions where the private key is unavailable, it may be
+        #   necessary to provide a Proc (or lambda) via the signer parameter. This
+        #   Proc should return a signature created using a RPC call to the
+        #   [Service Account Credentials signBlob](https://cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signBlob)
+        #   method as shown in the example below.
         # @param [Hash] query Query string parameters to include in the signed
         #   URL. The given parameters are not verified by the signature.
         #
@@ -1668,6 +1675,12 @@ module Google
         #   Private Key or a Proc that accepts a single String parameter and returns a
         #   RSA SHA256 signature using a valid Google Service Account Private Key.
         #
+        #   When using this method in environments such as GAE Flexible Environment,
+        #   GKE, or Cloud Functions where the private key is unavailable, it may be
+        #   necessary to provide a Proc (or lambda) via the signer parameter. This
+        #   Proc should return a signature created using a RPC call to the
+        #   [Service Account Credentials signBlob](https://cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signBlob)
+        #   method as shown in the example below.
         # @return [PostObject] An object containing the URL, fields, and values needed to upload files via html forms.
         #
         # @raise [SignedUrlUnavailable] If the service account credentials
@@ -1824,6 +1837,13 @@ module Google
         # @param [OpenSSL::PKey::RSA, String, Proc] signer Service Account's
         #   Private Key or a Proc that accepts a single String parameter and returns a
         #   RSA SHA256 signature using a valid Google Service Account Private Key.
+        #
+        #   When using this method in environments such as GAE Flexible Environment,
+        #   GKE, or Cloud Functions where the private key is unavailable, it may be
+        #   necessary to provide a Proc (or lambda) via the signer parameter. This
+        #   Proc should return a signature created using a RPC call to the
+        #   [Service Account Credentials signBlob](https://cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signBlob)
+        #   method as shown in the example below.
         # @param [Integer] expires The number of seconds until the URL expires.
         #   The default is 604800 (7 days).
         # @param [Hash] fields User-supplied form fields such as `acl`,
