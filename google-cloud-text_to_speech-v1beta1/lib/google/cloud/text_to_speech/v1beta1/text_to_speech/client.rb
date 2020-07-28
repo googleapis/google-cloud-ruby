@@ -63,16 +63,8 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.list_voices.timeout = 600.0
-                default_config.rpcs.list_voices.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
-                }
-
-                default_config.rpcs.synthesize_speech.timeout = 600.0
-                default_config.rpcs.synthesize_speech.retry_policy = {
+                default_config.timeout = 300.0
+                default_config.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
@@ -239,7 +231,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload synthesize_speech(input: nil, voice: nil, audio_config: nil)
+            # @overload synthesize_speech(input: nil, voice: nil, audio_config: nil, enable_time_pointing: nil)
             #   Pass arguments to `synthesize_speech` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -250,6 +242,8 @@ module Google
             #     Required. The desired voice of the synthesized audio.
             #   @param audio_config [::Google::Cloud::TextToSpeech::V1beta1::AudioConfig, ::Hash]
             #     Required. The configuration of the synthesized audio.
+            #   @param enable_time_pointing [::Array<::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest::TimepointType>]
+            #     Whether and what timepoints should be returned in the response.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechResponse]
