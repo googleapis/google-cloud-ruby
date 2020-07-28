@@ -350,15 +350,16 @@ module Google
           end
 
           def generate_signature signing_key, data
+            packed_signature = nil
             if signing_key.is_a? Proc
-              signing_key.call(data).unpack("H*").first.force_encoding "utf-8"
+              packed_signature = signing_key.call data
             else
               unless signing_key.respond_to? :sign
                 signing_key = OpenSSL::PKey::RSA.new signing_key
               end
-              signature = signing_key.sign OpenSSL::Digest::SHA256.new, data
-              signature.unpack("H*").first.force_encoding "utf-8"
+              packed_signature = signing_key.sign OpenSSL::Digest::SHA256.new, data
             end
+            packed_signature.unpack("H*").first.force_encoding "utf-8"
           end
         end
       end
