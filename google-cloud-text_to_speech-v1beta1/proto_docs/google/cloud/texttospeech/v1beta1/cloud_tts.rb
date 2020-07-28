@@ -76,9 +76,21 @@ module Google
         # @!attribute [rw] audio_config
         #   @return [::Google::Cloud::TextToSpeech::V1beta1::AudioConfig]
         #     Required. The configuration of the synthesized audio.
+        # @!attribute [rw] enable_time_pointing
+        #   @return [::Array<::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest::TimepointType>]
+        #     Whether and what timepoints should be returned in the response.
         class SynthesizeSpeechRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of timepoint information that is returned in the response.
+          module TimepointType
+            # Not specified. No timepoint information will be returned.
+            TIMEPOINT_TYPE_UNSPECIFIED = 0
+
+            # Timepoint information of `<mark>` tags in SSML input will be returned.
+            SSML_MARK = 1
+          end
         end
 
         # Contains text input to be synthesized. Either `text` or `ssml` must be
@@ -184,7 +196,27 @@ module Google
         #     For LINEAR16 audio, we include the WAV header. Note: as
         #     with all bytes fields, protobuffers use a pure binary representation,
         #     whereas JSON representations use base64.
+        # @!attribute [rw] timepoints
+        #   @return [::Array<::Google::Cloud::TextToSpeech::V1beta1::Timepoint>]
+        #     A link between a position in the original request input and a corresponding
+        #     time in the output audio. It's only supported via `<mark>` of SSML input.
+        # @!attribute [rw] audio_config
+        #   @return [::Google::Cloud::TextToSpeech::V1beta1::AudioConfig]
+        #     The audio metadata of `audio_content`.
         class SynthesizeSpeechResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # This contains a mapping between a certain point in the input text and a
+        # corresponding time in the output audio.
+        # @!attribute [rw] mark_name
+        #   @return [::String]
+        #     Timepoint name as received from the client within `<mark>` tag.
+        # @!attribute [rw] time_seconds
+        #   @return [::Float]
+        #     Time offset in seconds from the start of the synthesized audio.
+        class Timepoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -205,7 +237,7 @@ module Google
           # A female voice.
           FEMALE = 2
 
-          # A gender-neutral voice.
+          # A gender-neutral voice. This voice is not yet supported.
           NEUTRAL = 3
         end
 
@@ -222,11 +254,18 @@ module Google
           # MP3 audio at 32kbps.
           MP3 = 2
 
+          # MP3 at 64kbps.
+          MP3_64_KBPS = 4
+
           # Opus encoded audio wrapped in an ogg container. The result will be a
           # file which can be played natively on Android, and in browsers (at least
           # Chrome and Firefox). The quality of the encoding is considerably higher
           # than MP3 while using approximately the same bitrate.
           OGG_OPUS = 3
+
+          # 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
+          # Audio content returned as MULAW also contains a WAV header.
+          MULAW = 5
         end
       end
     end

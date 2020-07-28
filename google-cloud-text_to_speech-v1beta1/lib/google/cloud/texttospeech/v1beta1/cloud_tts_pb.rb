@@ -24,6 +24,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :input, :message, 1, "google.cloud.texttospeech.v1beta1.SynthesisInput"
       optional :voice, :message, 2, "google.cloud.texttospeech.v1beta1.VoiceSelectionParams"
       optional :audio_config, :message, 3, "google.cloud.texttospeech.v1beta1.AudioConfig"
+      repeated :enable_time_pointing, :enum, 4, "google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest.TimepointType"
+    end
+    add_enum "google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest.TimepointType" do
+      value :TIMEPOINT_TYPE_UNSPECIFIED, 0
+      value :SSML_MARK, 1
     end
     add_message "google.cloud.texttospeech.v1beta1.SynthesisInput" do
       oneof :input_source do
@@ -46,6 +51,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.texttospeech.v1beta1.SynthesizeSpeechResponse" do
       optional :audio_content, :bytes, 1
+      repeated :timepoints, :message, 2, "google.cloud.texttospeech.v1beta1.Timepoint"
+      optional :audio_config, :message, 4, "google.cloud.texttospeech.v1beta1.AudioConfig"
+    end
+    add_message "google.cloud.texttospeech.v1beta1.Timepoint" do
+      optional :mark_name, :string, 4
+      optional :time_seconds, :double, 3
     end
     add_enum "google.cloud.texttospeech.v1beta1.SsmlVoiceGender" do
       value :SSML_VOICE_GENDER_UNSPECIFIED, 0
@@ -57,7 +68,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :AUDIO_ENCODING_UNSPECIFIED, 0
       value :LINEAR16, 1
       value :MP3, 2
+      value :MP3_64_KBPS, 4
       value :OGG_OPUS, 3
+      value :MULAW, 5
     end
   end
 end
@@ -70,10 +83,12 @@ module Google
         ListVoicesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1beta1.ListVoicesResponse").msgclass
         Voice = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1beta1.Voice").msgclass
         SynthesizeSpeechRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest").msgclass
+        SynthesizeSpeechRequest::TimepointType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest.TimepointType").enummodule
         SynthesisInput = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1beta1.SynthesisInput").msgclass
         VoiceSelectionParams = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1beta1.VoiceSelectionParams").msgclass
         AudioConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1beta1.AudioConfig").msgclass
         SynthesizeSpeechResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1beta1.SynthesizeSpeechResponse").msgclass
+        Timepoint = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1beta1.Timepoint").msgclass
         SsmlVoiceGender = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1beta1.SsmlVoiceGender").enummodule
         AudioEncoding = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.texttospeech.v1beta1.AudioEncoding").enummodule
       end
