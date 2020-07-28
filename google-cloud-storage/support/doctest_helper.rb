@@ -42,7 +42,7 @@ module Google
         def signed_url bucket, path, method: nil, expires: nil,
                        content_type: nil, content_md5: nil, headers: nil,
                        issuer: nil, client_email: nil, signing_key: nil,
-                       private_key: nil, version: nil
+                       signer: nil, private_key: nil, version: nil
           # no-op stub, but ensures that calls match this copied signature
         end
       end
@@ -59,7 +59,8 @@ module Google
                         issuer: nil,
                         client_email: nil,
                         signing_key: nil,
-                        private_key: nil
+                        private_key: nil,
+                        signer: nil
           Google::Cloud::Storage::PostObject.new "https://storage.googleapis.com",
             { key: "my-todo-app/avatars/heidi/400x400.png",
               GoogleAccessId: "0123456789@gserviceaccount.com",
@@ -72,6 +73,7 @@ module Google
                                            client_email: nil,
                                            signing_key: nil,
                                            private_key: nil,
+                                           signer: nil,
                                            expires: nil,
                                            fields: nil,
                                            conditions: nil,
@@ -98,7 +100,7 @@ module Google
         def signed_url method: nil, expires: nil, content_type: nil,
                        content_md5: nil, headers: nil, issuer: nil,
                        client_email: nil, signing_key: nil, private_key: nil,
-                       version: nil
+                       signer: nil, version: nil
           # no-op stub, but ensures that calls match this copied signature
         end
       end

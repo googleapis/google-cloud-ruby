@@ -43,6 +43,7 @@ module Google
                           client_email: nil,
                           signing_key: nil,
                           private_key: nil,
+                          signer: nil,
                           expires: nil,
                           fields: nil,
                           conditions: nil,
@@ -50,7 +51,7 @@ module Google
                           virtual_hosted_style: nil,
                           bucket_bound_hostname: nil
             i = determine_issuer issuer, client_email
-            s = determine_signing_key signing_key, private_key
+            s = determine_signing_key signing_key, private_key, signer
 
             now = Time.now.utc
             base_fields = required_fields i, now
@@ -81,12 +82,13 @@ module Google
                          client_email: nil,
                          signing_key: nil,
                          private_key: nil,
+                         signer: nil,
                          query: nil,
                          scheme: "https",
                          virtual_hosted_style: nil,
                          bucket_bound_hostname: nil
             raise ArgumentError, "method is required" unless method
-            issuer, signer = issuer_and_signer issuer, client_email, signing_key, private_key
+            issuer, signer = issuer_and_signer issuer, client_email, signing_key, private_key, signer
             datetime_now = Time.now.utc
             goog_date = datetime_now.strftime "%Y%m%dT%H%M%SZ"
             datestamp = datetime_now.strftime "%Y%m%d"
@@ -195,9 +197,9 @@ module Google
             issuer
           end
 
-          def determine_signing_key signing_key, private_key
-            signing_key = signing_key || private_key || @service.credentials.signing_key
-            raise SignedUrlUnavailable, error_msg("signing_key (private_key)") unless signing_key
+          def determine_signing_key signing_key, private_key, signer
+            signing_key = signing_key || private_key || signer || @service.credentials.signing_key
+            raise SignedUrlUnavailable, error_msg("signing_key (private_key, signer)") unless signing_key
             signing_key
           end
 
@@ -207,17 +209,24 @@ module Google
           end
 
           def service_account_signer signer
-            signer = OpenSSL::PKey::RSA.new signer unless signer.respond_to? :sign
-            # Sign string to sign
-            lambda do |string_to_sign|
-              sig = signer.sign OpenSSL::Digest::SHA256.new, string_to_sign
-              sig.unpack("H*").first
+            if signer.is_a? Proc
+              lambda do |string_to_sign|
+                sig = signer.call string_to_sign
+                sig.unpack("H*").first
+              end
+            else
+              signer = OpenSSL::PKey::RSA.new signer unless signer.respond_to? :sign
+              # Sign string to sign
+              lambda do |string_to_sign|
+                sig = signer.sign OpenSSL::Digest::SHA256.new, string_to_sign
+                sig.unpack("H*").first
+              end
             end
           end
 
-          def issuer_and_signer issuer, client_email, signing_key, private_key
+          def issuer_and_signer issuer, client_email, signing_key, private_key, signer
             issuer = determine_issuer issuer, client_email
-            signing_key = determine_signing_key signing_key, private_key
+            signing_key = determine_signing_key signing_key, private_key, signer
             signer = service_account_signer signing_key
             [issuer, signer]
           end
@@ -341,11 +350,16 @@ module Google
           end
 
           def generate_signature signing_key, data
-            unless signing_key.respond_to? :sign
-              signing_key = OpenSSL::PKey::RSA.new signing_key
+            packed_signature = nil
+            if signing_key.is_a? Proc
+              packed_signature = signing_key.call data
+            else
+              unless signing_key.respond_to? :sign
+                signing_key = OpenSSL::PKey::RSA.new signing_key
+              end
+              packed_signature = signing_key.sign OpenSSL::Digest::SHA256.new, data
             end
-            signature = signing_key.sign OpenSSL::Digest::SHA256.new, data
-            signature.unpack("H*").first.force_encoding "utf-8"
+            packed_signature.unpack("H*").first.force_encoding "utf-8"
           end
         end
       end

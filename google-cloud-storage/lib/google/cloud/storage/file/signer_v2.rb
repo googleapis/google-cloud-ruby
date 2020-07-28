@@ -77,8 +77,9 @@ module Google
           end
 
           def determine_signing_key options = {}
-            signing_key = options[:signing_key] || options[:private_key] || @service.credentials.signing_key
-            raise SignedUrlUnavailable, error_msg("signing_key (private_key)") unless signing_key
+            signing_key = options[:signing_key] || options[:private_key] ||
+                          options[:signer] || @service.credentials.signing_key
+            raise SignedUrlUnavailable, error_msg("signing_key (private_key, signer)") unless signing_key
             signing_key
           end
 
@@ -129,11 +130,16 @@ module Google
           end
 
           def generate_signature signing_key, secret
-            unless signing_key.respond_to? :sign
-              signing_key = OpenSSL::PKey::RSA.new signing_key
+            unencoded_signature = ""
+            if signing_key.is_a? Proc
+              unencoded_signature = signing_key.call secret
+            else
+              unless signing_key.respond_to? :sign
+                signing_key = OpenSSL::PKey::RSA.new signing_key
+              end
+              unencoded_signature = signing_key.sign OpenSSL::Digest::SHA256.new, secret
             end
-            signature = signing_key.sign OpenSSL::Digest::SHA256.new, secret
-            Base64.strict_encode64(signature).delete "\n"
+            Base64.strict_encode64(unencoded_signature).delete "\n"
           end
 
           def generate_signed_url issuer, signed_string, expires, query

@@ -13,8 +13,9 @@
 # limitations under the License.
 
 require "storage_helper"
-require 'net/http'
-require 'uri'
+require "google/apis/iamcredentials_v1"
+require "net/http"
+require "uri"
 
 describe Google::Cloud::Storage::Bucket, :post_object, :v2, :storage do
   let(:bucket_name) { $bucket_names.first }
@@ -45,13 +46,55 @@ describe Google::Cloud::Storage::Bucket, :post_object, :v2, :storage do
     request = Net::HTTP::Post.new post_object.url
 
     form_data = [
-      ['file', File.open(data)],
-      ['key', post_object.fields[:key]],
-      ['GoogleAccessId', post_object.fields[:GoogleAccessId]],
-      ['policy', post_object.fields[:policy]],
-      ['signature', post_object.fields[:signature]]
+      ["file", File.open(data)],
+      ["key", post_object.fields[:key]],
+      ["GoogleAccessId", post_object.fields[:GoogleAccessId]],
+      ["policy", post_object.fields[:policy]],
+      ["signature", post_object.fields[:signature]]
     ]
-    request.set_form form_data, 'multipart/form-data'
+    request.set_form form_data, "multipart/form-data"
+
+    response = http.request request
+
+    _(response.code).must_equal "204"
+    _(bucket.file(file_name)).wont_be :nil?
+  end
+
+  it "generates a signed post object using signBlob API" do
+    file_name = "logo-#{SecureRandom.hex(4).downcase}.jpg"
+
+    _(bucket.file(file_name)).must_be :nil?
+
+    iam_client = Google::Apis::IamcredentialsV1::IAMCredentialsService.new
+    # Get the environment configured authorization
+    iam_client.authorization = bucket.service.credentials.client
+
+    # Only defined when using a service account
+    issuer = iam_client.authorization.issuer
+    signer = lambda do |string_to_sign|
+      request = {
+        "payload": string_to_sign,
+      }
+      resource = "projects/-/serviceAccounts/#{issuer}"
+      response = iam_client.sign_service_account_blob resource, request, {}
+      response.signed_blob
+    end
+
+    post_object = bucket.post_object file_name, policy: policy,
+                                                issuer: issuer,
+                                                signer: signer
+    http = Net::HTTP.new uri.host, uri.port
+    http.use_ssl = true
+    request = Net::HTTP::Post.new post_object.url
+
+    form_data = [
+      ["file", File.open(data)],
+      ["key", post_object.fields[:key]],
+      ["GoogleAccessId", post_object.fields[:GoogleAccessId]],
+      ["policy", post_object.fields[:policy]],
+      ["signature", post_object.fields[:signature]]
+    ]
+    request.set_form form_data, "multipart/form-data"
 
     response = http.request request
 
@@ -73,13 +116,13 @@ describe Google::Cloud::Storage::Bucket, :post_object, :v2, :storage do
     request = Net::HTTP::Post.new post_object.url
 
     form_data = [
-      ['file', File.open(data)],
-      ['key', post_object.fields[:key]],
-      ['GoogleAccessId', post_object.fields[:GoogleAccessId]],
-      ['policy', post_object.fields[:policy]],
-      ['signature', post_object.fields[:signature]]
+      ["file", File.open(data)],
+      ["key", post_object.fields[:key]],
+      ["GoogleAccessId", post_object.fields[:GoogleAccessId]],
+      ["policy", post_object.fields[:policy]],
+      ["signature", post_object.fields[:signature]]
     ]
-    request.set_form form_data, 'multipart/form-data'
+    request.set_form form_data, "multipart/form-data"
 
     response = http.request request
 

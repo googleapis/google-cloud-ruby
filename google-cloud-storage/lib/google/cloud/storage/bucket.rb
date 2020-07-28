@@ -1433,10 +1433,22 @@ module Google
         #   use the signed URL.
         # @param [String] issuer Service Account's Client Email.
         # @param [String] client_email Service Account's Client Email.
-        # @param [OpenSSL::PKey::RSA, String] signing_key Service Account's
-        #   Private Key.
-        # @param [OpenSSL::PKey::RSA, String] private_key Service Account's
-        #   Private Key.
+        # @param [OpenSSL::PKey::RSA, String, Proc] signing_key Service Account's
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
+        # @param [OpenSSL::PKey::RSA, String, Proc] private_key Service Account's
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
+        # @param [OpenSSL::PKey::RSA, String, Proc] signer Service Account's
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
+        #
+        #   When using this method in environments such as GAE Flexible Environment,
+        #   GKE, or Cloud Functions where the private key is unavailable, it may be
+        #   necessary to provide a Proc (or lambda) via the signer parameter. This
+        #   Proc should return a signature created using a RPC call to the
+        #   [Service Account Credentials signBlob](https://cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signBlob)
+        #   method as shown in the example below.
         # @param [Hash] query Query string parameters to include in the signed
         #   URL. The given parameters are not verified by the signature.
         #
@@ -1498,6 +1510,40 @@ module Google
         #                                  issuer: "service-account@gcloud.com",
         #                                  signing_key: key
         #
+        # @example Using Cloud IAMCredentials signBlob to create the signature:
+        #   require "google/cloud/storage"
+        #   require "google/apis/iamcredentials_v1"
+        #   require "googleauth"
+        #
+        #   # Issuer is the service account email that the Signed URL will be signed with
+        #   # and any permission granted in the Signed URL must be granted to the
+        #   # Google Service Account.
+        #   issuer = "service-account@project-id.iam.gserviceaccount.com"
+        #
+        #   # Create a lambda that accepts the string_to_sign
+        #   signer = lambda do |string_to_sign|
+        #     IAMCredentials = Google::Apis::IamcredentialsV1
+        #     iam_client = IAMCredentials::IAMCredentialsService.new
+        #
+        #     # Get the environment configured authorization
+        #     scopes = ["https://www.googleapis.com/auth/iam"]
+        #     iam_client.authorization = Google::Auth.get_application_default scopes
+        #
+        #     request = {
+        #       "payload": string_to_sign,
+        #     }
+        #     resource = "projects/-/serviceAccounts/#{issuer}"
+        #     response = iam_client.sign_service_account_blob resource, request, {}
+        #     response.signed_blob
+        #   end
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket_name = "my-todo-app"
+        #   file_path = "avatars/heidi/400x400.png"
+        #   url = storage.signed_url bucket_name, file_path,
+        #                            method: "GET", issuer: issuer,
+        #                            signer: signer
         # @example Using the `headers` option:
         #   require "google/cloud/storage"
         #
@@ -1543,6 +1589,7 @@ module Google
                        client_email: nil,
                        signing_key: nil,
                        private_key: nil,
+                       signer: nil,
                        query: nil,
                        scheme: "HTTPS",
                        virtual_hosted_style: nil,
@@ -1552,30 +1599,32 @@ module Google
           version ||= :v2
           case version.to_sym
           when :v2
-            signer = File::SignerV2.from_bucket self, path
-            signer.signed_url method: method,
-                              expires: expires,
-                              headers: headers,
-                              content_type: content_type,
-                              content_md5: content_md5,
-                              issuer: issuer,
-                              client_email: client_email,
-                              signing_key: signing_key,
-                              private_key: private_key,
-                              query: query
+            sign = File::SignerV2.from_bucket self, path
+            sign.signed_url method: method,
+                            expires: expires,
+                            headers: headers,
+                            content_type: content_type,
+                            content_md5: content_md5,
+                            issuer: issuer,
+                            client_email: client_email,
+                            signing_key: signing_key,
+                            private_key: private_key,
+                            signer: signer,
+                            query: query
           when :v4
-            signer = File::SignerV4.from_bucket self, path
-            signer.signed_url method: method,
-                              expires: expires,
-                              headers: headers,
-                              issuer: issuer,
-                              client_email: client_email,
-                              signing_key: signing_key,
-                              private_key: private_key,
-                              query: query,
-                              scheme: scheme,
-                              virtual_hosted_style: virtual_hosted_style,
-                              bucket_bound_hostname: bucket_bound_hostname
+            sign = File::SignerV4.from_bucket self, path
+            sign.signed_url method: method,
+                            expires: expires,
+                            headers: headers,
+                            issuer: issuer,
+                            client_email: client_email,
+                            signing_key: signing_key,
+                            private_key: private_key,
+                            signer: signer,
+                            query: query,
+                            scheme: scheme,
+                            virtual_hosted_style: virtual_hosted_style,
+                            bucket_bound_hostname: bucket_bound_hostname
           else
             raise ArgumentError, "version '#{version}' not supported"
           end
@@ -1613,11 +1662,22 @@ module Google
         #   for more information.
         # @param [String] issuer Service Account's Client Email.
         # @param [String] client_email Service Account's Client Email.
-        # @param [OpenSSL::PKey::RSA, String] signing_key Service Account's
-        #   Private Key.
-        # @param [OpenSSL::PKey::RSA, String] private_key Service Account's
-        #   Private Key.
+        # @param [OpenSSL::PKey::RSA, String, Proc] signing_key Service Account's
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
+        # @param [OpenSSL::PKey::RSA, String, Proc] private_key Service Account's
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
+        # @param [OpenSSL::PKey::RSA, String, Proc] signer Service Account's
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
         #
+        #   When using this method in environments such as GAE Flexible Environment,
+        #   GKE, or Cloud Functions where the private key is unavailable, it may be
+        #   necessary to provide a Proc (or lambda) via the signer parameter. This
+        #   Proc should return a signature created using a RPC call to the
+        #   [Service Account Credentials signBlob](https://cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signBlob)
+        #   method as shown in the example below.
         # @return [PostObject] An object containing the URL, fields, and values needed to upload files via html forms.
         #
         # @raise [SignedUrlUnavailable] If the service account credentials
@@ -1683,19 +1743,61 @@ module Google
         #   post.fields[:signature] #=> "ABC...XYZ="
         #   post.fields[:policy] #=> "ABC...XYZ="
         #
+        # @example Using Cloud IAMCredentials signBlob to create the signature:
+        #   require "google/cloud/storage"
+        #   require "google/apis/iamcredentials_v1"
+        #   require "googleauth"
+        #
+        #   # Issuer is the service account email that the Signed URL will be signed with
+        #   # and any permission granted in the Signed URL must be granted to the
+        #   # Google Service Account.
+        #   issuer = "service-account@project-id.iam.gserviceaccount.com"
+        #
+        #   # Create a lambda that accepts the string_to_sign
+        #   signer = lambda do |string_to_sign|
+        #     IAMCredentials = Google::Apis::IamcredentialsV1
+        #     iam_client = IAMCredentials::IAMCredentialsService.new
+        #
+        #     # Get the environment configured authorization
+        #     scopes = ["https://www.googleapis.com/auth/iam"]
+        #     iam_client.authorization = Google::Auth.get_application_default scopes
+        #
+        #     request = {
+        #       "payload": string_to_sign,
+        #     }
+        #     resource = "projects/-/serviceAccounts/#{issuer}"
+        #     response = iam_client.sign_service_account_blob resource, request, {}
+        #     response.signed_blob
+        #   end
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #   post = bucket.post_object "avatars/heidi/400x400.png",
+        #                             issuer: issuer,
+        #                             signer: signer
+        #
+        #   post.url #=> "https://storage.googleapis.com"
+        #   post.fields[:key] #=> "my-todo-app/avatars/heidi/400x400.png"
+        #   post.fields[:GoogleAccessId] #=> "0123456789@gserviceaccount.com"
+        #   post.fields[:signature] #=> "ABC...XYZ="
+        #   post.fields[:policy] #=> "ABC...XYZ="
+        #
         def post_object path,
                         policy: nil,
                         issuer: nil,
                         client_email: nil,
                         signing_key: nil,
-                        private_key: nil
+                        private_key: nil,
+                        signer: nil
           ensure_service!
-          signer = File::SignerV2.from_bucket self, path
-          signer.post_object issuer: issuer,
-                             client_email: client_email,
-                             signing_key: signing_key,
-                             private_key: private_key,
-                             policy: policy
+          sign = File::SignerV2.from_bucket self, path
+          sign.post_object issuer: issuer,
+                           client_email: client_email,
+                           signing_key: signing_key,
+                           private_key: private_key,
+                           signer: signer,
+                           policy: policy
         end
 
         ##
@@ -1720,10 +1822,22 @@ module Google
         # @param [String] path Path to the file in Google Cloud Storage.
         # @param [String] issuer Service Account's Client Email.
         # @param [String] client_email Service Account's Client Email.
-        # @param [OpenSSL::PKey::RSA, String] signing_key Service Account's
-        #   Private Key.
-        # @param [OpenSSL::PKey::RSA, String] private_key Service Account's
-        #   Private Key.
+        # @param [OpenSSL::PKey::RSA, String, Proc] signing_key Service Account's
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
+        # @param [OpenSSL::PKey::RSA, String, Proc] private_key Service Account's
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
+        # @param [OpenSSL::PKey::RSA, String, Proc] signer Service Account's
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
+        #
+        #   When using this method in environments such as GAE Flexible Environment,
+        #   GKE, or Cloud Functions where the private key is unavailable, it may be
+        #   necessary to provide a Proc (or lambda) via the signer parameter. This
+        #   Proc should return a signature created using a RPC call to the
+        #   [Service Account Credentials signBlob](https://cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signBlob)
+        #   method as shown in the example below.
         # @param [Integer] expires The number of seconds until the URL expires.
         #   The default is 604800 (7 days).
         # @param [Hash] fields User-supplied form fields such as `acl`,
@@ -1767,11 +1881,56 @@ module Google
         #   post.fields["x-goog-date"] #=> "20200128T000000Z"
         #   post.fields["x-goog-signature"] #=> "4893a0e...cd82"
         #
+        # @example Using Cloud IAMCredentials signBlob to create the signature:
+        #   require "google/cloud/storage"
+        #   require "google/apis/iamcredentials_v1"
+        #   require "googleauth"
+        #
+        #   # Issuer is the service account email that the Signed URL will be signed with
+        #   # and any permission granted in the Signed URL must be granted to the
+        #   # Google Service Account.
+        #   issuer = "service-account@project-id.iam.gserviceaccount.com"
+        #
+        #   # Create a lambda that accepts the string_to_sign
+        #   signer = lambda do |string_to_sign|
+        #     IAMCredentials = Google::Apis::IamcredentialsV1
+        #     iam_client = IAMCredentials::IAMCredentialsService.new
+        #
+        #     # Get the environment configured authorization
+        #     scopes = ["https://www.googleapis.com/auth/iam"]
+        #     iam_client.authorization = Google::Auth.get_application_default scopes
+        #
+        #     request = {
+        #       "payload": string_to_sign,
+        #     }
+        #     resource = "projects/-/serviceAccounts/#{issuer}"
+        #     response = iam_client.sign_service_account_blob resource, request, {}
+        #     response.signed_blob
+        #   end
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #   conditions = [["starts-with", "$acl","public"]]
+        #   post = bucket.generate_signed_post_policy_v4(
+        #     "avatars/heidi/400x400.png", expires: 10,
+        #     conditions: conditions, issuer: issuer, signer: signer
+        #   )
+        #
+        #   post.url #=> "https://storage.googleapis.com/my-todo-app/"
+        #   post.fields["key"] #=> "my-todo-app/avatars/heidi/400x400.png"
+        #   post.fields["policy"] #=> "ABC...XYZ"
+        #   post.fields["x-goog-algorithm"] #=> "GOOG4-RSA-SHA256"
+        #   post.fields["x-goog-credential"] #=> "cred@pid.iam.gserviceaccount.com/20200123/auto/storage/goog4_request"
+        #   post.fields["x-goog-date"] #=> "20200128T000000Z"
+        #   post.fields["x-goog-signature"] #=> "4893a0e...cd82"
+        #
         def generate_signed_post_policy_v4 path,
                                            issuer: nil,
                                            client_email: nil,
                                            signing_key: nil,
                                            private_key: nil,
+                                           signer: nil,
                                            expires: nil,
                                            fields: nil,
                                            conditions: nil,
@@ -1779,17 +1938,18 @@ module Google
                                            virtual_hosted_style: nil,
                                            bucket_bound_hostname: nil
           ensure_service!
-          signer = File::SignerV4.from_bucket self, path
-          signer.post_object issuer: issuer,
-                             client_email: client_email,
-                             signing_key: signing_key,
-                             private_key: private_key,
-                             expires: expires,
-                             fields: fields,
-                             conditions: conditions,
-                             scheme: scheme,
-                             virtual_hosted_style: virtual_hosted_style,
-                             bucket_bound_hostname: bucket_bound_hostname
+          sign = File::SignerV4.from_bucket self, path
+          sign.post_object issuer: issuer,
+                           client_email: client_email,
+                           signing_key: signing_key,
+                           private_key: private_key,
+                           signer: signer,
+                           expires: expires,
+                           fields: fields,
+                           conditions: conditions,
+                           scheme: scheme,
+                           virtual_hosted_style: virtual_hosted_style,
+                           bucket_bound_hostname: bucket_bound_hostname
         end
 
         ##
