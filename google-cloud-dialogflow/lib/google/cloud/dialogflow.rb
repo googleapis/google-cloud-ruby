@@ -87,24 +87,7 @@ module Google
       #
       # ## About Contexts
       #
-      # A context represents additional information included with user input or with
-      # an intent returned by the Dialogflow API. Contexts are helpful for
-      # differentiating user input which may be vague or have a different meaning
-      # depending on additional details from your application such as user setting
-      # and preferences, previous user input, where the user is in your application,
-      # geographic location, and so on.
-      #
-      # You can include contexts as input parameters of a
-      # DetectIntent (or
-      # StreamingDetectIntent) request,
-      # or as output contexts included in the returned intent.
-      # Contexts expire when an intent is matched, after the number of `DetectIntent`
-      # requests specified by the `lifespan_count` parameter, or after 20 minutes
-      # if no intents are matched for a `DetectIntent` request.
-      #
-      # For more information about contexts, see the
-      # [Dialogflow
-      # documentation](https://cloud.google.com/dialogflow/docs/contexts-overview).
+      # Service for managing Contexts.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
@@ -134,34 +117,7 @@ module Google
       #
       # ## About EntityTypes
       #
-      # Entities are extracted from user input and represent parameters that are
-      # meaningful to your application. For example, a date range, a proper name
-      # such as a geographic location or landmark, and so on. Entities represent
-      # actionable data for your application.
-      #
-      # When you define an entity, you can also include synonyms that all map to
-      # that entity. For example, "soft drink", "soda", "pop", and so on.
-      #
-      # There are three types of entities:
-      #
-      # *   **System** - entities that are defined by the Dialogflow API for common
-      #     data types such as date, time, currency, and so on. A system entity is
-      #     represented by the `EntityType` type.
-      #
-      # *   **Custom** - entities that are defined by you that represent
-      #     actionable data that is meaningful to your application. For example,
-      #     you could define a `pizza.sauce` entity for red or white pizza sauce,
-      #     a `pizza.cheese` entity for the different types of cheese on a pizza,
-      #     a `pizza.topping` entity for different toppings, and so on. A custom
-      #     entity is represented by the `EntityType` type.
-      #
-      # *   **User** - entities that are built for an individual user such as
-      #     favorites, preferences, playlists, and so on. A user entity is
-      #     represented by the SessionEntityType type.
-      #
-      # For more information about entity types, see the
-      # [Dialogflow
-      # documentation](https://cloud.google.com/dialogflow/docs/entities-overview).
+      # Service for managing EntityTypes.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
@@ -191,7 +147,7 @@ module Google
       #
       # ## About Environments
       #
-      # Manages agent environments.
+      # Service for managing Environments.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
@@ -221,38 +177,7 @@ module Google
       #
       # ## About Intents
       #
-      # An intent represents a mapping between input from a user and an action to
-      # be taken by your application. When you pass user input to the
-      # DetectIntent (or
-      # StreamingDetectIntent) method, the
-      # Dialogflow API analyzes the input and searches
-      # for a matching intent. If no match is found, the Dialogflow API returns a
-      # fallback intent (`is_fallback` = true).
-      #
-      # You can provide additional information for the Dialogflow API to use to
-      # match user input to an intent by adding the following to your intent.
-      #
-      # *   **Contexts** - provide additional context for intent analysis. For
-      #     example, if an intent is related to an object in your application that
-      #     plays music, you can provide a context to determine when to match the
-      #     intent if the user input is "turn it off". You can include a context
-      #     that matches the intent when there is previous user input of
-      #     "play music", and not when there is previous user input of
-      #     "turn on the light".
-      #
-      # *   **Events** - allow for matching an intent by using an event name
-      #     instead of user input. Your application can provide an event name and
-      #     related parameters to the Dialogflow API to match an intent. For
-      #     example, when your application starts, you can send a welcome event
-      #     with a user name parameter to the Dialogflow API to match an intent with
-      #     a personalized welcome message for the user.
-      #
-      # *   **Training phrases** - provide examples of user input to train the
-      #     Dialogflow API agent to better match intents.
-      #
-      # For more information about intents, see the
-      # [Dialogflow
-      # documentation](https://cloud.google.com/dialogflow/docs/intents-overview).
+      # Service for managing Intents.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
@@ -282,23 +207,7 @@ module Google
       #
       # ## About SessionEntityTypes
       #
-      # Entities are extracted from user input and represent parameters that are
-      # meaningful to your application. For example, a date range, a proper name
-      # such as a geographic location or landmark, and so on. Entities represent
-      # actionable data for your application.
-      #
-      # Session entity types are referred to as **User** entity types and are
-      # entities that are built for an individual user such as
-      # favorites, preferences, playlists, and so on. You can redefine a session
-      # entity type at the session level.
-      #
-      # Session entity methods do not work with Google Assistant integration.
-      # Contact Dialogflow support if you need to use session entities
-      # with Google Assistant integration.
-      #
-      # For more information about entity types, see the
-      # [Dialogflow
-      # documentation](https://cloud.google.com/dialogflow/docs/entities-overview).
+      # Service for managing SessionEntityTypes.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
@@ -328,10 +237,10 @@ module Google
       #
       # ## About Sessions
       #
-      # A session represents an interaction with a user. You retrieve user input
-      # and pass it to the DetectIntent (or
-      # StreamingDetectIntent) method to determine
-      # user intent and respond.
+      # A service used for session interactions.
+      #
+      # For more information, see the [API interactions
+      # guide](https://cloud.google.com/dialogflow/docs/api-overview).
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
