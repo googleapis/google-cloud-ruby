@@ -1434,14 +1434,14 @@ module Google
         # @param [String] issuer Service Account's Client Email.
         # @param [String] client_email Service Account's Client Email.
         # @param [OpenSSL::PKey::RSA, String, Proc] signing_key Service Account's
-        #   Private Key or a Proc that accepts a single parameter which is used
-        #   to generate a valid RSA SHA256 signature.
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
         # @param [OpenSSL::PKey::RSA, String, Proc] private_key Service Account's
-        #   Private Key or a Proc that accepts a single parameter which is used
-        #   to generate a valid RSA SHA256 signature.
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
         # @param [OpenSSL::PKey::RSA, String, Proc] signer Service Account's
-        #   Private Key or a Proc that accepts a single parameter which is used
-        #   to generate a valid RSA SHA256 signature.
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
         # @param [Hash] query Query string parameters to include in the signed
         #   URL. The given parameters are not verified by the signature.
         #
@@ -1659,14 +1659,14 @@ module Google
         # @param [String] issuer Service Account's Client Email.
         # @param [String] client_email Service Account's Client Email.
         # @param [OpenSSL::PKey::RSA, String, Proc] signing_key Service Account's
-        #   Private Key or a Proc that accepts a single parameter which is used
-        #   to generate a valid RSA SHA256 signature.
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
         # @param [OpenSSL::PKey::RSA, String, Proc] private_key Service Account's
-        #   Private Key or a Proc that accepts a single parameter which is used
-        #   to generate a valid RSA SHA256 signature.
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
         # @param [OpenSSL::PKey::RSA, String, Proc] signer Service Account's
-        #   Private Key or a Proc that accepts a single parameter which is used
-        #   to generate a valid RSA SHA256 signature.
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
         #
         # @return [PostObject] An object containing the URL, fields, and values needed to upload files via html forms.
         #
@@ -1816,14 +1816,14 @@ module Google
         # @param [String] issuer Service Account's Client Email.
         # @param [String] client_email Service Account's Client Email.
         # @param [OpenSSL::PKey::RSA, String, Proc] signing_key Service Account's
-        #   Private Key or a Proc that accepts a single parameter which is used
-        #   to generate a valid RSA SHA256 signature.
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
         # @param [OpenSSL::PKey::RSA, String, Proc] private_key Service Account's
-        #   Private Key or a Proc that accepts a single parameter which is used
-        #   to generate a valid RSA SHA256 signature.
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
         # @param [OpenSSL::PKey::RSA, String, Proc] signer Service Account's
-        #   Private Key or a Proc that accepts a single parameter which is used
-        #   to generate a valid RSA SHA256 signature.
+        #   Private Key or a Proc that accepts a single String parameter and returns a
+        #   RSA SHA256 signature using a valid Google Service Account Private Key.
         # @param [Integer] expires The number of seconds until the URL expires.
         #   The default is 604800 (7 days).
         # @param [Hash] fields User-supplied form fields such as `acl`,
