@@ -169,12 +169,7 @@ describe "Files Snippets" do
   end
 
   it "download_encrypted_file" do
-    require 'base64'
-    begin
-      bucket.create_file local_file, remote_file_name, encryption_key: encryption_key
-    rescue
-      raise "ENCRYPTIONKEY: #{Base64.strict_encode64(encryption_key)}"
-    end
+    bucket.create_file local_file, remote_file_name, encryption_key: encryption_key
 
     Tempfile.open [downloaded_file] do |tmpfile|
       tmpfile.binmode
