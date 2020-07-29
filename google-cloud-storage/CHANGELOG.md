@@ -1,5 +1,26 @@
 # Release History
 
+### 1.27.0 / 2020-07-29
+
+#### Features
+
+* storage support signing with IAMCredentials SignBlob API ([#7091](https://www.github.com/googleapis/google-cloud-ruby/issues/7091))
+  * feat: support signer lambda
+  * feat: support IAMCredentials SignBlob API in Storage
+  * address comments in style
+  * address signer Proc documentation
+  * refactor generate signature in v2/v4
+  * add debugging for sample failure
+  * address permission/scopes
+  * revert debug statements
+  * update single-quote to double-quote
+  * address signer documentation
+  * drop parenthesis
+
+#### Documentation
+
+* Update documentation of SignedUrlUnavailable
+
 ### 1.26.2 / 2020-05-28
 
 #### Documentation
