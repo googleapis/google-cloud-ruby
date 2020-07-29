@@ -4,18 +4,9 @@
 
 #### Features
 
-* storage support signing with IAMCredentials SignBlob API ([#7091](https://www.github.com/googleapis/google-cloud-ruby/issues/7091))
-  * feat: support signer lambda
-  * feat: support IAMCredentials SignBlob API in Storage
-  * address comments in style
-  * address signer Proc documentation
-  * refactor generate signature in v2/v4
-  * add debugging for sample failure
-  * address permission/scopes
-  * revert debug statements
-  * update single-quote to double-quote
-  * address signer documentation
-  * drop parenthesis
+* Add support for signing URLs with IAMCredentials SignBlob API
+  * Add signer parameter accepting Procs to #signed_url and #post_object methods in Project, Bucket and File
+  * Update signer aliases signing_key and private_key to similarly support Procs
 
 #### Documentation
 
