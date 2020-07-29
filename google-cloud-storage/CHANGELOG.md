@@ -5,7 +5,12 @@
 #### Features
 
 * Add support for signing URLs with IAMCredentials SignBlob API
-  * Add signer parameter accepting Procs to #signed_url and #post_object methods in Project, Bucket and File
+  * Add signer parameter accepting Procs to the following methods:
+    * Project#signed_url
+    * Bucket#generate_signed_post_policy_v4
+    * Bucket#post_object
+    * Bucket#signed_url
+    * File#signed_url
   * Update signer aliases signing_key and private_key to similarly support Procs
 
 #### Documentation
