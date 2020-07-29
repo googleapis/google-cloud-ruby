@@ -595,11 +595,11 @@ module Google
           #
           # Gets a gRPC object of RowFilter with interleave filter.
           #
-          # @return [Google::Bigtable::V2::RowFilter]
+          # @return [Google::Cloud::Bigtable::V2::RowFilter]
           #
           def to_grpc
-            Google::Bigtable::V2::RowFilter.new(
-              interleave: Google::Bigtable::V2::RowFilter::Interleave.new(filters: @filters.map(&:to_grpc))
+            Google::Cloud::Bigtable::V2::RowFilter.new(
+              interleave: Google::Cloud::Bigtable::V2::RowFilter::Interleave.new(filters: @filters.map(&:to_grpc))
             )
           end
 

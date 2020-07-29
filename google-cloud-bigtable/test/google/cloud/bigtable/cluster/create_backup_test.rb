@@ -21,7 +21,7 @@ describe Google::Cloud::Bigtable::Cluster, :create_backup, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:cluster_id) { "test-cluster" }
   let :cluster_grpc do
-    Google::Bigtable::Admin::V2::Cluster.new(
+    Google::Cloud::Bigtable::Admin::V2::Cluster.new(
       name: cluster_path(instance_id, cluster_id),
       serve_nodes: 3,
       location: location_path("us-east-1b"),
@@ -38,7 +38,7 @@ describe Google::Cloud::Bigtable::Cluster, :create_backup, :mock_bigtable do
     operation_done_grpc(
       ops_name,
       "type.googleapis.com/google.bigtable.admin.v2.CreateBackupMetadata",
-      Google::Bigtable::Admin::V2::CreateBackupMetadata.new,
+      Google::Cloud::Bigtable::Admin::V2::CreateBackupMetadata.new,
       "type.googleapis.com/google.bigtable.admin.v2.Backup",
       backup_grpc
     )
@@ -46,19 +46,19 @@ describe Google::Cloud::Bigtable::Cluster, :create_backup, :mock_bigtable do
   let(:backup_id) { "test-backup" }
   let(:source_table_id) { "test-table-source" }
   let :source_table_grpc do
-    Google::Bigtable::Admin::V2::Table.new table_hash(name: table_path(instance_id, source_table_id))
+    Google::Cloud::Bigtable::Admin::V2::Table.new table_hash(name: table_path(instance_id, source_table_id))
   end
   let(:source_table) { Google::Cloud::Bigtable::Table.from_grpc source_table_grpc, bigtable.service }
   let(:expire_time) { Time.now.round(0) + 60 * 60 * 7 }
   let :backup_grpc do
-    Google::Bigtable::Admin::V2::Backup.new source_table: table_path(instance_id, source_table_id),
+    Google::Cloud::Bigtable::Admin::V2::Backup.new source_table: table_path(instance_id, source_table_id),
                                             expire_time:  expire_time
   end
 
   it "creates a backup with table as string ID" do
     mock = Minitest::Mock.new
-    mock.expect :create_backup, operation_grpc(mock), [cluster_path(instance_id, cluster_id), backup_id, backup_grpc]
-    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
+    mock.expect :create_backup, operation_grpc(job_grpc, mock), [parent: cluster_path(instance_id, cluster_id), backup_id: backup_id, backup: backup_grpc]
+    mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_tables = mock
 
     job = cluster.create_backup source_table_id, backup_id, expire_time
@@ -80,8 +80,8 @@ describe Google::Cloud::Bigtable::Cluster, :create_backup, :mock_bigtable do
 
   it "creates a backup with table object" do
     mock = Minitest::Mock.new
-    mock.expect :create_backup, operation_grpc(mock), [cluster_path(instance_id, cluster_id), backup_id, backup_grpc]
-    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
+    mock.expect :create_backup, operation_grpc(job_grpc, mock), [parent: cluster_path(instance_id, cluster_id), backup_id: backup_id, backup: backup_grpc]
+    mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_tables = mock
 
     job = cluster.create_backup source_table, backup_id, expire_time
@@ -101,12 +101,12 @@ describe Google::Cloud::Bigtable::Cluster, :create_backup, :mock_bigtable do
     mock.verify
   end
 
-  def operation_grpc mock
-    Google::Gax::Operation.new(
-      job_grpc,
+  def operation_grpc longrunning_grpc, mock
+    Gapic::Operation.new(
+      longrunning_grpc,
       mock,
-      Google::Bigtable::Admin::V2::Backup,
-      Google::Bigtable::Admin::V2::CreateBackupMetadata
+      result_type: Google::Cloud::Bigtable::Admin::V2::Backup,
+      metadata_type: Google::Cloud::Bigtable::Admin::V2::CreateBackupMetadata
     )
   end
 end

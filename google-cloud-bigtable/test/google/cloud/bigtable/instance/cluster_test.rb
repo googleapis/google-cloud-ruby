@@ -19,7 +19,7 @@ describe Google::Cloud::Bigtable::Instance, :cluster, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:location_id) { "us-east-1b" }
   let(:instance_grpc){
-    Google::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id))
+    Google::Cloud::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id))
   }
   let(:instance) {
     Google::Cloud::Bigtable::Instance.from_grpc(instance_grpc, bigtable.service)
@@ -28,7 +28,7 @@ describe Google::Cloud::Bigtable::Instance, :cluster, :mock_bigtable do
   it "gets an cluster" do
     cluster_id = "found-cluster"
 
-    get_res = Google::Bigtable::Admin::V2::Cluster.new(
+    get_res = Google::Cloud::Bigtable::Admin::V2::Cluster.new(
       cluster_hash(
         name: cluster_path(instance_id, cluster_id),
         nodes: 3,
@@ -39,7 +39,7 @@ describe Google::Cloud::Bigtable::Instance, :cluster, :mock_bigtable do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :get_cluster, get_res, [cluster_path(instance_id, cluster_id)]
+    mock.expect :get_cluster, get_res, [name: cluster_path(instance_id, cluster_id)]
     bigtable.service.mocked_instances = mock
     cluster = instance.cluster(cluster_id)
 
@@ -60,9 +60,7 @@ describe Google::Cloud::Bigtable::Instance, :cluster, :mock_bigtable do
 
     stub = Object.new
     def stub.get_cluster *args
-      gax_error = Google::Gax::GaxError.new "not found"
-      gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-      raise gax_error
+      raise Google::Cloud::NotFoundError.new("not found")
     end
 
     bigtable.service.mocked_instances = stub

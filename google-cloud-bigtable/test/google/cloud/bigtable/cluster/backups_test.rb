@@ -19,7 +19,7 @@ describe Google::Cloud::Bigtable::Cluster, :backups, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:cluster_id) { "test-cluster" }
   let :cluster_grpc do
-    Google::Bigtable::Admin::V2::Cluster.new(
+    Google::Cloud::Bigtable::Admin::V2::Cluster.new(
       name: cluster_path(instance_id, cluster_id),
       serve_nodes: 3,
       location: location_path("us-east-1b"),
@@ -46,7 +46,7 @@ describe Google::Cloud::Bigtable::Cluster, :backups, :mock_bigtable do
   it "list backups" do
     get_res =  MockPagedEnumerable.new([first_page])
     mock = Minitest::Mock.new
-    mock.expect :list_backups, get_res, [cluster_path(instance_id, cluster_id)]
+    mock.expect :list_backups, get_res, [parent: cluster_path(instance_id, cluster_id)]
     bigtable.service.mocked_tables = mock
 
     backups = cluster.backups
@@ -59,7 +59,7 @@ describe Google::Cloud::Bigtable::Cluster, :backups, :mock_bigtable do
   it "paginates backups with next? and next" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_backups, get_res, [cluster_path(instance_id, cluster_id)]
+    mock.expect :list_backups, get_res, [parent: cluster_path(instance_id, cluster_id)]
     bigtable.service.mocked_tables = mock
 
     list = cluster.backups
@@ -75,7 +75,7 @@ describe Google::Cloud::Bigtable::Cluster, :backups, :mock_bigtable do
   it "paginates backups with all" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_backups, get_res, [cluster_path(instance_id, cluster_id)]
+    mock.expect :list_backups, get_res, [parent: cluster_path(instance_id, cluster_id)]
     bigtable.service.mocked_tables = mock
 
     backups = cluster.backups.all.to_a
@@ -88,7 +88,7 @@ describe Google::Cloud::Bigtable::Cluster, :backups, :mock_bigtable do
   it "iterates backups with all using Enumerator" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_backups, get_res, [cluster_path(instance_id, cluster_id)]
+    mock.expect :list_backups, get_res, [parent: cluster_path(instance_id, cluster_id)]
     bigtable.service.mocked_tables = mock
 
     backups = cluster.backups.all.take(5)

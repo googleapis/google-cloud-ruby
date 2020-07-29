@@ -431,7 +431,7 @@ module Google
             location:             location
           }.delete_if { |_, v| v.nil? }
 
-          cluster = Google::Bigtable::Admin::V2::Cluster.new attrs
+          cluster = Google::Cloud::Bigtable::Admin::V2::Cluster.new attrs
           grpc = service.create_cluster instance_id, cluster_id, cluster
           Cluster::Job.from_grpc grpc, service
         end
@@ -566,7 +566,7 @@ module Google
         #     * Tablet 3 : `[customer_1, customer_2) => {"customer_1"}`
         #     * Tablet 4 : `[customer_2, other)      => {"customer_2"}`
         #     * Tablet 5 : `[other, )                => {"other", "zz"}`
-        #   A hash in the form of `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
+        #   A hash in the form of `Google::Cloud::Bigtable::Admin::V2::CreateTableRequest::Split`
         #   can also be provided.
         # @yield [column_families] A block for adding column families.
         # @yieldparam [Google::Cloud::Bigtable::ColumnFamilyMap] column_families
@@ -709,7 +709,7 @@ module Google
         def create_app_profile name, routing_policy, description: nil, etag: nil, ignore_warnings: false
           ensure_service!
           routing_policy_grpc = routing_policy.to_grpc
-          if routing_policy_grpc.is_a? Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny
+          if routing_policy_grpc.is_a? Google::Cloud::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny
             multi_cluster_routing = routing_policy_grpc
           else
             single_cluster_routing = routing_policy_grpc
@@ -725,7 +725,7 @@ module Google
           grpc = service.create_app_profile(
             instance_id,
             name,
-            Google::Bigtable::Admin::V2::AppProfile.new(app_profile_attrs),
+            Google::Cloud::Bigtable::Admin::V2::AppProfile.new(app_profile_attrs),
             ignore_warnings: ignore_warnings
           )
           AppProfile.from_grpc grpc, service
@@ -909,9 +909,9 @@ module Google
         # @private
         #
         # Creates a new Instance instance from a
-        # Google::Bigtable::Admin::V2::Instance.
+        # Google::Cloud::Bigtable::Admin::V2::Instance.
         #
-        # @param grpc [Google::Bigtable::Admin::V2::Instance]
+        # @param grpc [Google::Cloud::Bigtable::Admin::V2::Instance]
         # @param service [Google::Cloud::Bigtable::Service]
         # @return [Google::Cloud::Bigtable::Instance]
         #

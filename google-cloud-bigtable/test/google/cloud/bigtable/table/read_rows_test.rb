@@ -36,13 +36,13 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
       "CgJSSxIDCgFBGgMKAUMgZDILdmFsdWUtVkFMXzJIAQ=="
     ]
     chunks = chunks_base64.map do |chunk|
-      Google::Bigtable::V2::ReadRowsResponse::CellChunk.decode(Base64.decode64(chunk))
+      Google::Cloud::Bigtable::V2::ReadRowsResponse::CellChunk.decode(Base64.decode64(chunk))
     end
-    get_res = [Google::Bigtable::V2::ReadRowsResponse.new(chunks: chunks)]
+    get_res = [Google::Cloud::Bigtable::V2::ReadRowsResponse.new(chunks: chunks)]
 
     mock.expect :read_rows, get_res, [
-      table_path(instance_id, table_id),
-      rows: Google::Bigtable::V2::RowSet.new,
+      table_name: table_path(instance_id, table_id),
+      rows: Google::Cloud::Bigtable::V2::RowSet.new,
       filter: nil,
       rows_limit: nil,
       app_profile_id: nil
@@ -69,15 +69,15 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
       "CgJSSxIDCgFBGgMKAUMgZDILdmFsdWUtVkFMXzJIAQ=="
     ]
     chunks = chunks_base64.map do |chunk|
-      Google::Bigtable::V2::ReadRowsResponse::CellChunk.decode(Base64.decode64(chunk))
+      Google::Cloud::Bigtable::V2::ReadRowsResponse::CellChunk.decode(Base64.decode64(chunk))
     end
 
     mock = OpenStruct.new(
       retry_count: 0,
-      read_response: [Google::Bigtable::V2::ReadRowsResponse.new(chunks: chunks)]
+      read_response: [Google::Cloud::Bigtable::V2::ReadRowsResponse.new(chunks: chunks)]
     )
 
-    def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
+    def mock.read_rows table_name: nil, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil
       if retry_count == 0
         self.retry_count += 1
         raise GRPC::DeadlineExceeded, "Dead line exceeded"
@@ -105,7 +105,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
   it "do not retry on successive 3 failure" do
     mock = OpenStruct.new(retry_count: 0)
 
-    def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
+    def mock.read_rows table_name: nil, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil
       self.retry_count += 1
       raise GRPC::DeadlineExceeded, "Dead line exceeded"
     end
@@ -121,7 +121,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
 
   it "reads rows with not successive faliure errors" do
     read_resp_base64 = "ChwKBXRlc3QxEgQKAmNmGggKBmZpZWxkMTIBQUgBChwKBXRlc3QyEgQKAmNm\nGggKBmZpZWxkMTIBQkgBChwKBXRlc3QzEgQKAmNmGggKBmZpZWxkMTIBQ0gB\n"
-    read_response = Google::Bigtable::V2::ReadRowsResponse.decode(Base64.decode64(read_resp_base64))
+    read_response = Google::Cloud::Bigtable::V2::ReadRowsResponse.decode(Base64.decode64(read_resp_base64))
 
     mock_itr = OpenStruct.new(
       read_response: read_response,
@@ -146,7 +146,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
       mock_itr: mock_itr,
       retry_count: 0
     )
-    def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
+    def mock.read_rows table_name: nil, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil
       mock_itr
     end
 
@@ -176,7 +176,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
   it "raise error if retry limit reached" do
     mock = OpenStruct.new(retry_count: 0)
 
-    def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
+    def mock.read_rows table_name: nil, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil
       self.retry_count += 1
       raise GRPC::DeadlineExceeded, "Dead line exceeded"
     end
@@ -195,16 +195,14 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     mock.expect :read_rows,
                 [],
                 [
-                  "projects/test/instances/test-instance/tables/test-table",
-                  { 
-                    rows: Google::Bigtable::V2::RowSet.new(
-                      row_keys: ["A", "B"],
-                      row_ranges: []
-                    ),
-                    filter: nil,
-                    rows_limit: nil,
-                    app_profile_id: nil
-                  }
+                  table_name: "projects/test/instances/test-instance/tables/test-table",
+                  rows: Google::Cloud::Bigtable::V2::RowSet.new(
+                    row_keys: ["A", "B"],
+                    row_ranges: []
+                  ),
+                  filter: nil,
+                  rows_limit: nil,
+                  app_profile_id: nil
                 ]
 
     bigtable.service.mocked_client = mock
@@ -217,10 +215,10 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
   it "read rows using single row range" do
     mock = self
 
-    def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
+    def mock.read_rows table_name: nil, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil
       _(rows.row_ranges.length).must_equal 1
       rows.row_ranges.each do |r|
-        _(r).must_be_kind_of Google::Bigtable::V2::RowRange
+        _(r).must_be_kind_of Google::Cloud::Bigtable::V2::RowRange
       end
       return []
     end
@@ -235,10 +233,10 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
   it "read rows using multiple row ranges" do
     mock = self
 
-    def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
+    def mock.read_rows table_name: nil, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil
       _(rows.row_ranges.length).must_equal 2
       rows.row_ranges.each do |r|
-        _(r).must_be_kind_of Google::Bigtable::V2::RowRange
+        _(r).must_be_kind_of Google::Cloud::Bigtable::V2::RowRange
       end
       return []
     end
@@ -254,7 +252,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
   it "read rows using rows limit" do
     mock = self
 
-    def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
+    def mock.read_rows table_name: nil, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil
       _(rows_limit).must_equal 100
       return []
     end
@@ -267,8 +265,8 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
   it "read rows using rows filter" do
     mock = self
 
-    def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
-      _(filter).must_be_kind_of Google::Bigtable::V2::RowFilter
+    def mock.read_rows table_name: nil, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil
+      _(filter).must_be_kind_of Google::Cloud::Bigtable::V2::RowFilter
       return []
     end
 

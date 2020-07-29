@@ -59,7 +59,7 @@ module Google
         # @private
         # Creates a value range instance.
         def initialize
-          @grpc = Google::Bigtable::V2::ValueRange.new
+          @grpc = Google::Cloud::Bigtable::V2::ValueRange.new
         end
 
         ##
@@ -170,7 +170,7 @@ module Google
 
         # @private
         #
-        # @return [Google::Bigtable::V2::ValueRange]
+        # @return [Google::Cloud::Bigtable::V2::ValueRange]
         #
         def to_grpc
           @grpc

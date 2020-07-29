@@ -22,7 +22,7 @@ describe Google::Cloud::Bigtable::ColumnRange, :column_range, :mock_bigtable do
     family_name = "cf"
     range = Google::Cloud::Bigtable::ColumnRange.new(family_name)
     grpc = range.to_grpc
-    _(grpc).must_be_kind_of Google::Bigtable::V2::ColumnRange
+    _(grpc).must_be_kind_of Google::Cloud::Bigtable::V2::ColumnRange
     _(grpc.family_name).must_equal family_name
   end
 

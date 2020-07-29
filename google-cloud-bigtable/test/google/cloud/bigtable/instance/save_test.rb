@@ -20,7 +20,7 @@ describe Google::Cloud::Bigtable::Instance, :save, :mock_bigtable do
   let(:display_name) { "Test instance" }
   let(:labels) { { "env" => "test" } }
   let(:instance_grpc){
-    Google::Bigtable::Admin::V2::Instance.new(
+    Google::Cloud::Bigtable::Admin::V2::Instance.new(
       instance_hash(
         name: instance_id,
         display_name: display_name,
@@ -41,7 +41,7 @@ describe Google::Cloud::Bigtable::Instance, :save, :mock_bigtable do
     operation_done_grpc(
       ops_name,
       "type.googleapis.com/google.bigtable.admin.v2.UpdateInstanceMetadata",
-      Google::Bigtable::Admin::V2::UpdateInstanceMetadata.new,
+      Google::Cloud::Bigtable::Admin::V2::UpdateInstanceMetadata.new,
       "type.googleapis.com/google.bigtable.admin.v2.Instance",
       instance_grpc
     )
@@ -53,15 +53,9 @@ describe Google::Cloud::Bigtable::Instance, :save, :mock_bigtable do
     instance.labels = { "env" => "production" }
 
     mock = Minitest::Mock.new
-    update_res = Google::Gax::Operation.new(
-                   job_grpc,
-                   mock,
-                   Google::Bigtable::Admin::V2::Instance,
-                   Google::Bigtable::Admin::V2::UpdateInstanceMetadata
-                 )
     mask = Google::Protobuf::FieldMask.new(paths: %w[labels display_name type])
-    mock.expect :partial_update_instance, update_res, [instance_grpc, mask]
-    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
+    mock.expect :partial_update_instance, operation_grpc(job_grpc, mock), [instance: instance_grpc, update_mask: mask]
+    mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_instances = mock
 
     job = instance.save
@@ -86,15 +80,9 @@ describe Google::Cloud::Bigtable::Instance, :save, :mock_bigtable do
     instance.labels["env"] = "production"
 
     mock = Minitest::Mock.new
-    update_res = Google::Gax::Operation.new(
-                   job_grpc,
-                   mock,
-                   Google::Bigtable::Admin::V2::Instance,
-                   Google::Bigtable::Admin::V2::UpdateInstanceMetadata
-                 )
     mask = Google::Protobuf::FieldMask.new(paths: %w[labels display_name type])
-    mock.expect :partial_update_instance, update_res, [instance_grpc, mask]
-    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
+    mock.expect :partial_update_instance, operation_grpc(job_grpc, mock), [instance: instance_grpc, update_mask: mask]
+    mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_instances = mock
 
     job = instance.save
@@ -112,5 +100,14 @@ describe Google::Cloud::Bigtable::Instance, :save, :mock_bigtable do
     _(instance).must_be_kind_of Google::Cloud::Bigtable::Instance
 
     mock.verify
+  end
+
+  def operation_grpc longrunning_grpc, mock
+    Gapic::Operation.new(
+      longrunning_grpc,
+      mock,
+      result_type: Google::Cloud::Bigtable::Admin::V2::Instance,
+      metadata_type: Google::Cloud::Bigtable::Admin::V2::UpdateInstanceMetadata
+    )
   end
 end

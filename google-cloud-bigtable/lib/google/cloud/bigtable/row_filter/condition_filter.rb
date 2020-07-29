@@ -48,7 +48,7 @@ module Google
           # @param predicate [SimpleFilter, ChainFilter, InterleaveFilter, ConditionFilter]
           #
           def initialize predicate
-            @grpc = Google::Bigtable::V2::RowFilter::Condition.new
+            @grpc = Google::Cloud::Bigtable::V2::RowFilter::Condition.new
             @grpc.predicate_filter = predicate.to_grpc
           end
 
@@ -102,10 +102,10 @@ module Google
 
           # @private
           # Gets the row-filter gRPC instance.
-          # @return [Google::Bigtable::V2::RowFilter]
+          # @return [Google::Cloud::Bigtable::V2::RowFilter]
           #
           def to_grpc
-            Google::Bigtable::V2::RowFilter.new condition: @grpc
+            Google::Cloud::Bigtable::V2::RowFilter.new condition: @grpc
           end
         end
       end

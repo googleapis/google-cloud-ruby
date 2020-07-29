@@ -110,8 +110,8 @@ module Google
           end
 
           # @private
-          # New Table::ClusterState from a Google::Bigtable::Admin::V2::Table::ClusterState object.
-          # @param grpc [Google::Bigtable::Admin::V2::Table::ClusterState]
+          # New Table::ClusterState from a Google::Cloud::Bigtable::Admin::V2::Table::ClusterState object.
+          # @param grpc [Google::Cloud::Bigtable::Admin::V2::Table::ClusterState]
           # @param cluster_name [String]
           # @return [Google::Cloud::Bigtable::Table::ClusterState]
           #

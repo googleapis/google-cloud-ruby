@@ -21,7 +21,7 @@ describe Google::Cloud::Bigtable::Cluster, :mock_bigtable do
   let(:location_id) { "us-east-1b" }
   let(:nodes) { 3 }
   let(:cluster_grpc) do
-    Google::Bigtable::Admin::V2::Cluster.new(
+    Google::Cloud::Bigtable::Admin::V2::Cluster.new(
       name: cluster_path(instance_id, cluster_id),
       serve_nodes: nodes,
       location: location_path(location_id),
@@ -49,7 +49,7 @@ describe Google::Cloud::Bigtable::Cluster, :mock_bigtable do
 
   it "reloads its state" do
     mock = Minitest::Mock.new
-    mock.expect :get_cluster, cluster_grpc, [cluster_path(instance_id, cluster_id)]
+    mock.expect :get_cluster, cluster_grpc, [name: cluster_path(instance_id, cluster_id)]
     cluster.service.mocked_instances = mock
 
     cluster.reload!

@@ -21,7 +21,7 @@ describe Google::Cloud::Bigtable::Table, :delete, :mock_bigtable do
   let(:cluster_states) { clusters_state_grpc }
   let(:column_families) { column_families_grpc }
   let(:table_grpc){
-    Google::Bigtable::Admin::V2::Table.new(
+    Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(
         name: table_path(instance_id, table_id),
         cluster_states: cluster_states,
@@ -36,7 +36,7 @@ describe Google::Cloud::Bigtable::Table, :delete, :mock_bigtable do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_table, true, [table_path(instance_id, table_id)]
+    mock.expect :delete_table, true, [name: table_path(instance_id, table_id)]
     bigtable.service.mocked_tables = mock
 
     result = table.delete

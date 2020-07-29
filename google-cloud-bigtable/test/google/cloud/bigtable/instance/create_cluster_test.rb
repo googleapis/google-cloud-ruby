@@ -20,7 +20,7 @@ describe Google::Cloud::Bigtable::Instance, :create_cluster, :mock_bigtable do
   let(:cluster_id) { "new-cluster" }
   let(:location_id) { "us-east-1b" }
   let(:cluster_grpc){
-    Google::Bigtable::Admin::V2::Cluster.new(
+    Google::Cloud::Bigtable::Admin::V2::Cluster.new(
       cluster_hash(
         name: cluster_id,
         nodes: 3,
@@ -40,7 +40,7 @@ describe Google::Cloud::Bigtable::Instance, :create_cluster, :mock_bigtable do
     operation_done_grpc(
       ops_name,
       "type.googleapis.com/google.bigtable.admin.v2.CreateClusterMetadata",
-      Google::Bigtable::Admin::V2::CreateClusterMetadata.new,
+      Google::Cloud::Bigtable::Admin::V2::CreateClusterMetadata.new,
       "type.googleapis.com/google.bigtable.admin.v2.Cluster",
       cluster_grpc
     )
@@ -48,26 +48,19 @@ describe Google::Cloud::Bigtable::Instance, :create_cluster, :mock_bigtable do
 
   it "creates a cluster" do
     mock = Minitest::Mock.new
-    create_res = Google::Gax::Operation.new(
-      job_grpc,
-      mock,
-      Google::Bigtable::Admin::V2::Cluster,
-      Google::Bigtable::Admin::V2::CreateClusterMetadata
-    )
-
-    cluster = Google::Bigtable::Admin::V2::Cluster.new(
+    cluster = Google::Cloud::Bigtable::Admin::V2::Cluster.new(
       serve_nodes: 3, location: location_path(location_id), default_storage_type: :SSD
     )
 
-    mock.expect :create_cluster, create_res, [
-      instance_path(instance_id),
-      cluster_id,
-      cluster
+    mock.expect :create_cluster, operation_grpc(job_grpc, mock), [
+      parent: instance_path(instance_id),
+      cluster_id: cluster_id,
+      cluster: cluster
     ]
-    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
+    mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_instances = mock
 
-    instance_grpc = Google::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id))
+    instance_grpc = Google::Cloud::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id))
     instance = Google::Cloud::Bigtable::Instance.from_grpc(instance_grpc, bigtable.service)
     job = instance.create_cluster(cluster_id, location_id, nodes: 3, storage_type: :SSD)
 
@@ -84,5 +77,14 @@ describe Google::Cloud::Bigtable::Instance, :create_cluster, :mock_bigtable do
     _(cluster).must_be_kind_of Google::Cloud::Bigtable::Cluster
 
     mock.verify
+  end
+
+  def operation_grpc longrunning_grpc, mock
+    Gapic::Operation.new(
+      longrunning_grpc,
+      mock,
+      result_type: Google::Cloud::Bigtable::Admin::V2::Cluster,
+      metadata_type: Google::Cloud::Bigtable::Admin::V2::CreateClusterMetadata
+    )
   end
 end

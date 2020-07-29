@@ -309,7 +309,7 @@ module Google
         #
         # @param row_keys [Array<String>]
         # @param row_ranges [Google::Cloud::Bigtable::RowRange | Array<Google::Cloud::Bigtable::RowRange>]
-        # @return [Google::Bigtable::V2::RowSet]
+        # @return [Google::Cloud::Bigtable::V2::RowSet]
         #
         def build_row_set row_keys, row_ranges
           row_set = {}
@@ -320,7 +320,7 @@ module Google
             row_set[:row_ranges] = row_ranges.map(&:to_grpc)
           end
 
-          Google::Bigtable::V2::RowSet.new row_set
+          Google::Cloud::Bigtable::V2::RowSet.new row_set
         end
       end
     end

@@ -21,7 +21,7 @@ describe Google::Cloud::Bigtable::Table, :column_families, :mock_bigtable do
   let(:cluster_states) { clusters_state_grpc }
   let(:column_families) { column_families_grpc }
   let(:table_grpc) do
-    Google::Bigtable::Admin::V2::Table.new(
+    Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(
         name: table_path(instance_id, table_id),
         cluster_states: cluster_states,
@@ -36,26 +36,26 @@ describe Google::Cloud::Bigtable::Table, :column_families, :mock_bigtable do
 
   it "modifies column families in the table" do
     modifications = [
-      Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification.new(
+      Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification.new(
         id: "cf4",
-        create: Google::Bigtable::Admin::V2::ColumnFamily.new(
-          gc_rule: Google::Bigtable::Admin::V2::GcRule.new(max_age: 600)
+        create: Google::Cloud::Bigtable::Admin::V2::ColumnFamily.new(
+          gc_rule: Google::Cloud::Bigtable::Admin::V2::GcRule.new(max_age: 600)
         )
       ),
-      Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification.new(
+      Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification.new(
         id: "cf2",
-        update: Google::Bigtable::Admin::V2::ColumnFamily.new(
-          gc_rule: Google::Bigtable::Admin::V2::GcRule.new(max_num_versions: 5)
+        update: Google::Cloud::Bigtable::Admin::V2::ColumnFamily.new(
+          gc_rule: Google::Cloud::Bigtable::Admin::V2::GcRule.new(max_num_versions: 5)
         )
       )
     ]
-    gc_rule_1 = Google::Bigtable::Admin::V2::GcRule.new(gc_rule_hash(max_age: 600))
-    gc_rule_2 = Google::Bigtable::Admin::V2::GcRule.new(gc_rule_hash(max_versions: 5))
+    gc_rule_1 = Google::Cloud::Bigtable::Admin::V2::GcRule.new(gc_rule_hash(max_age: 600))
+    gc_rule_2 = Google::Cloud::Bigtable::Admin::V2::GcRule.new(gc_rule_hash(max_versions: 5))
     column_families_resp = column_families.dup
-    column_families_resp["cf4"] = Google::Bigtable::Admin::V2::ColumnFamily.new(gc_rule: gc_rule_1)
-    column_families_resp["cf2"] = Google::Bigtable::Admin::V2::ColumnFamily.new(gc_rule: gc_rule_2)
+    column_families_resp["cf4"] = Google::Cloud::Bigtable::Admin::V2::ColumnFamily.new(gc_rule: gc_rule_1)
+    column_families_resp["cf2"] = Google::Cloud::Bigtable::Admin::V2::ColumnFamily.new(gc_rule: gc_rule_2)
     cluster_states = clusters_state_grpc(num: 1)
-    table_resp = Google::Bigtable::Admin::V2::Table.new(
+    table_resp = Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(
         name: table_path(instance_id, table_id),
         cluster_states: cluster_states,
@@ -66,8 +66,8 @@ describe Google::Cloud::Bigtable::Table, :column_families, :mock_bigtable do
 
     mock = Minitest::Mock.new
     mock.expect :modify_column_families, table_resp, [
-      table_path(instance_id, table_id),
-      modifications
+      name: table_path(instance_id, table_id),
+      modifications: modifications
     ]
     bigtable.service.mocked_tables = mock
 

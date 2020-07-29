@@ -417,8 +417,8 @@ module Google
         # @private
         #
         # Creates a new Instance instance from a
-        # Google::Bigtable::Admin::V2::Table.
-        # @param grpc [Google::Bigtable::Admin::V2::Table]
+        # Google::Cloud::Bigtable::Admin::V2::Table.
+        # @param grpc [Google::Cloud::Bigtable::Admin::V2::Table]
         # @param service [Google::Cloud::Bigtable::Service]
         # @return [Google::Cloud::Bigtable::Table]
         def self.from_grpc grpc, service

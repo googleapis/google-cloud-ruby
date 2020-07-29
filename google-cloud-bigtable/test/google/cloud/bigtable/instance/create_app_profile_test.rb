@@ -21,7 +21,7 @@ describe Google::Cloud::Bigtable::Instance, :create_app_profile, :mock_bigtable 
   let(:path) { app_profile_path(instance_id, app_profile_id) }
   let(:description) { "Test instance app profile" }
   let(:app_profile_resp) {
-    Google::Bigtable::Admin::V2::AppProfile.new(
+    Google::Cloud::Bigtable::Admin::V2::AppProfile.new(
       name: path,
       description: description,
       multi_cluster_routing_use_any: multi_cluster_routing_grpc
@@ -34,10 +34,15 @@ describe Google::Cloud::Bigtable::Instance, :create_app_profile, :mock_bigtable 
     app_profile_req.name = ""
     mock.expect :create_app_profile,
                 app_profile_resp,
-                [instance_path(instance_id), app_profile_id, app_profile_req, { ignore_warnings: false }]
+                [
+                  parent: instance_path(instance_id),
+                  app_profile_id: app_profile_id,
+                  app_profile: app_profile_req,
+                  ignore_warnings: false
+                ]
     bigtable.service.mocked_instances = mock
 
-    instance_grpc = Google::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id))
+    instance_grpc = Google::Cloud::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id))
     instance = Google::Cloud::Bigtable::Instance.from_grpc(instance_grpc, bigtable.service)
 
     routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing

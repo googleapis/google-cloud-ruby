@@ -19,7 +19,7 @@ describe Google::Cloud::Bigtable::AppProfile, :save, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:app_profile_id) { "test-app-profile" }
   let(:app_profile_grpc) {
-    Google::Bigtable::Admin::V2::AppProfile.new(
+    Google::Cloud::Bigtable::Admin::V2::AppProfile.new(
       name: app_profile_path(instance_id, app_profile_id),
       description: "Test instance app profile",
       multi_cluster_routing_use_any: multi_cluster_routing_grpc
@@ -36,7 +36,7 @@ describe Google::Cloud::Bigtable::AppProfile, :save, :mock_bigtable do
     operation_done_grpc(
       ops_name,
       "type.googleapis.com/google.bigtable.admin.v2.UpdateAppProfileMetadata",
-      Google::Bigtable::Admin::V2::UpdateAppProfileMetadata.new,
+      Google::Cloud::Bigtable::Admin::V2::UpdateAppProfileMetadata.new,
       "type.googleapis.com/google.bigtable.admin.v2.AppProfile",
       app_profile_grpc
     )
@@ -50,21 +50,15 @@ describe Google::Cloud::Bigtable::AppProfile, :save, :mock_bigtable do
     )
 
     mock = Minitest::Mock.new
-    update_res = Google::Gax::Operation.new(
-                   job_grpc,
-                   mock,
-                   Google::Bigtable::Admin::V2::AppProfile,
-                   Google::Bigtable::Admin::V2::UpdateAppProfileMetadata
-                 )
     update_mask =   Google::Protobuf::FieldMask.new(
       paths: ["description", "single_cluster_routing"]
     )
-    mock.expect :update_app_profile, update_res, [
-      app_profile_grpc,
-      update_mask,
+    mock.expect :update_app_profile, operation_grpc(job_grpc, mock), [
+      app_profile: app_profile_grpc,
+      update_mask: update_mask,
       ignore_warnings: false
     ]
-    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
+    mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_instances = mock
 
     job = app_profile.save
@@ -89,21 +83,15 @@ describe Google::Cloud::Bigtable::AppProfile, :save, :mock_bigtable do
     app_profile.routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
 
     mock = Minitest::Mock.new
-    update_res = Google::Gax::Operation.new(
-                   job_grpc,
-                   mock,
-                   Google::Bigtable::Admin::V2::AppProfile,
-                   Google::Bigtable::Admin::V2::UpdateAppProfileMetadata
-                 )
     update_mask =   Google::Protobuf::FieldMask.new(
       paths: ["description", "multi_cluster_routing_use_any"]
     )
-    mock.expect :update_app_profile, update_res, [
-      app_profile_grpc,
-      update_mask,
+    mock.expect :update_app_profile, operation_grpc(job_grpc, mock), [
+      app_profile: app_profile_grpc,
+      update_mask: update_mask,
       ignore_warnings: true
     ]
-    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
+    mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_instances = mock
 
     job = app_profile.save(ignore_warnings: true)
@@ -121,5 +109,14 @@ describe Google::Cloud::Bigtable::AppProfile, :save, :mock_bigtable do
     _(app_profile).must_be_kind_of Google::Cloud::Bigtable::AppProfile
 
     mock.verify
+  end
+
+  def operation_grpc longrunning_grpc, mock
+    Gapic::Operation.new(
+      longrunning_grpc,
+      mock,
+      result_type: Google::Cloud::Bigtable::Admin::V2::AppProfile,
+      metadata_type: Google::Cloud::Bigtable::Admin::V2::UpdateAppProfileMetadata
+    )
   end
 end

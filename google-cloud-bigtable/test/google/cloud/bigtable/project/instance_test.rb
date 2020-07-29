@@ -21,7 +21,7 @@ describe Google::Cloud::Bigtable::Project, :instance, :mock_bigtable do
   it "gets an instance" do
     instance_id = "found-instance"
 
-    get_res = Google::Bigtable::Admin::V2::Instance.new(
+    get_res = Google::Cloud::Bigtable::Admin::V2::Instance.new(
       instance_hash(
         name: instance_id,
         display_name: "Test instance",
@@ -31,7 +31,7 @@ describe Google::Cloud::Bigtable::Project, :instance, :mock_bigtable do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :get_instance, get_res, [instance_path(instance_id)]
+    mock.expect :get_instance, get_res, [name: instance_path(instance_id)]
     bigtable.service.mocked_instances = mock
     instance = bigtable.instance(instance_id)
 
@@ -52,9 +52,7 @@ describe Google::Cloud::Bigtable::Project, :instance, :mock_bigtable do
 
     stub = Object.new
     def stub.get_instance *args
-      gax_error = Google::Gax::GaxError.new "not found"
-      gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-      raise gax_error
+      raise Google::Cloud::NotFoundError.new("not found")
     end
 
     bigtable.service.mocked_instances = stub

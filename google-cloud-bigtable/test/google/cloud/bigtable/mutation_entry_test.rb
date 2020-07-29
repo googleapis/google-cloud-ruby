@@ -32,7 +32,7 @@ describe Google::Cloud::Bigtable::MutationEntry, :mutation_entry, :mock_bigtable
     _(entry.row_key).must_equal row_key
 
     grpc = entry.to_grpc
-    _(grpc).must_be_kind_of Google::Bigtable::V2::MutateRowsRequest::Entry
+    _(grpc).must_be_kind_of Google::Cloud::Bigtable::V2::MutateRowsRequest::Entry
     _(grpc.row_key).must_equal row_key
   end
 

@@ -24,7 +24,7 @@ describe Google::Cloud::Bigtable::Project, :table, :mock_bigtable do
     table_id = "found-table"
     cluster_states = clusters_state_grpc
     column_families = column_families_grpc
-    get_res = Google::Bigtable::Admin::V2::Table.new(
+    get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(
         name: table_path(instance_id, table_id),
         cluster_states: cluster_states,
@@ -34,7 +34,7 @@ describe Google::Cloud::Bigtable::Project, :table, :mock_bigtable do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :get_table, get_res, [table_path(instance_id, table_id), view: :FULL]
+    mock.expect :get_table, get_res, [name: table_path(instance_id, table_id), view: :FULL]
     bigtable.service.mocked_tables = mock
     table = bigtable.table(instance_id, table_id, view: :FULL, perform_lookup: true)
 
@@ -63,9 +63,7 @@ describe Google::Cloud::Bigtable::Project, :table, :mock_bigtable do
 
     stub = Object.new
     def stub.get_table *args
-      gax_error = Google::Gax::GaxError.new "not found"
-      gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-      raise gax_error
+      raise Google::Cloud::NotFoundError.new("not found")
     end
 
     bigtable.service.mocked_tables = stub
@@ -76,7 +74,7 @@ describe Google::Cloud::Bigtable::Project, :table, :mock_bigtable do
 
   it "load schema view on access schema fields" do
     table_id = "test-table"
-    get_res = Google::Bigtable::Admin::V2::Table.new(
+    get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
       name: table_path(instance_id, table_id),
       cluster_states: clusters_state_grpc,
       column_families: column_families_grpc,
@@ -84,12 +82,12 @@ describe Google::Cloud::Bigtable::Project, :table, :mock_bigtable do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :get_table, get_res, [table_path(instance_id, table_id), view: :SCHEMA_VIEW]
-    mock.expect :get_table, get_res, [table_path(instance_id, table_id), view: :REPLICATION_VIEW]
+    mock.expect :get_table, get_res, [name: table_path(instance_id, table_id), view: :SCHEMA_VIEW]
+    mock.expect :get_table, get_res, [name: table_path(instance_id, table_id), view: :REPLICATION_VIEW]
     bigtable.service.mocked_tables = mock
 
     table = Google::Cloud::Bigtable::Table.from_grpc(
-      Google::Bigtable::Admin::V2::Table.new(name: table_path(instance_id, table_id)),
+      Google::Cloud::Bigtable::Admin::V2::Table.new(name: table_path(instance_id, table_id)),
       bigtable.service,
       view: :NAME_ONLY
     )

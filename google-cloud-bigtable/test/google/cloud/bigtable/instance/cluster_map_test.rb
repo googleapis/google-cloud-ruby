@@ -29,7 +29,7 @@ describe Google::Cloud::Bigtable::Instance::ClusterMap, :mock_bigtable do
     _(cluster_map.length).must_equal 1
 
     cluster_grpc = cluster_map[cluster_id]
-    _(cluster_grpc).must_be_kind_of Google::Bigtable::Admin::V2::Cluster
+    _(cluster_grpc).must_be_kind_of Google::Cloud::Bigtable::Admin::V2::Cluster
     _(cluster_grpc.location).must_equal location_path("us-east-1b")
     _(cluster_grpc.serve_nodes).must_equal 3
     _(cluster_grpc.default_storage_type).must_equal :SSD

@@ -31,8 +31,8 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     cfs = cfm.to_grpc
     _(cfs.length).must_equal 4
     cf = cfs[cf_name]
-    _(cf).must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
-    _(cf.gc_rule).must_be_kind_of Google::Bigtable::Admin::V2::GcRule
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::Admin::V2::ColumnFamily
+    _(cf.gc_rule).must_be_kind_of Google::Cloud::Bigtable::Admin::V2::GcRule
     _(cf.gc_rule).must_equal gc_rule.to_grpc
   end
 
@@ -44,7 +44,7 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     cfs = cfm.to_grpc
     _(cfs.length).must_equal 4
     cf = cfs[cf_name]
-    _(cf).must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::Admin::V2::ColumnFamily
     _(cf.gc_rule).must_be :nil?
   end
 
@@ -59,8 +59,8 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     cfs = cfm.to_grpc
     _(cfs.length).must_equal 4
     cf = cfs[cf_name]
-    _(cf).must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
-    _(cf.gc_rule).must_be_kind_of Google::Bigtable::Admin::V2::GcRule
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::Admin::V2::ColumnFamily
+    _(cf.gc_rule).must_be_kind_of Google::Cloud::Bigtable::Admin::V2::GcRule
     _(cf.gc_rule).must_equal gc_rule.to_grpc
   end
 
@@ -89,8 +89,8 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     cfs = cfm.to_grpc
     _(cfs.length).must_equal 3
     cf = cfs[cf_name]
-    _(cf).must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
-    _(cf.gc_rule).must_be_kind_of Google::Bigtable::Admin::V2::GcRule
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::Admin::V2::ColumnFamily
+    _(cf.gc_rule).must_be_kind_of Google::Cloud::Bigtable::Admin::V2::GcRule
     _(cf.gc_rule).must_equal gc_rule.to_grpc
   end
 
@@ -102,7 +102,7 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     cfs = cfm.to_grpc
     _(cfs.length).must_equal 3
     cf = cfs[cf_name]
-    _(cf).must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::Admin::V2::ColumnFamily
     _(cf.gc_rule).must_be :nil?
   end
 

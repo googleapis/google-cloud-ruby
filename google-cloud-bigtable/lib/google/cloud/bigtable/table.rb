@@ -431,7 +431,7 @@ module Google
 
           yield column_families if block_given?
 
-          table = Google::Bigtable::Admin::V2::Table.new({
+          table = Google::Cloud::Bigtable::Admin::V2::Table.new({
             column_families: column_families.to_grpc_hash,
             granularity:     granularity
           }.delete_if { |_, v| v.nil? })
@@ -587,6 +587,7 @@ module Google
         #
         # @param row_key_prefix [String] Row key prefix (for example, "user").
         # @param delete_all_data [Boolean]
+        # @param timeout [Integer] Call timeout in seconds.
         # @return [Boolean]
         #
         # @example
@@ -615,9 +616,9 @@ module Google
         end
 
         # @private
-        # Creates a new Table instance from a Google::Bigtable::Admin::V2::Table.
+        # Creates a new Table instance from a Google::Cloud::Bigtable::Admin::V2::Table.
         #
-        # @param grpc [Google::Bigtable::Admin::V2::Table]
+        # @param grpc [Google::Cloud::Bigtable::Admin::V2::Table]
         # @param service [Google::Cloud::Bigtable::Service]
         # @param view [Symbol] View type.
         # @return [Google::Cloud::Bigtable::Table]
@@ -636,7 +637,7 @@ module Google
         # @return [Google::Cloud::Bigtable::Table]
         #
         def self.from_path path, service
-          grpc = Google::Bigtable::Admin::V2::Table.new name: path
+          grpc = Google::Cloud::Bigtable::Admin::V2::Table.new name: path
           new grpc, service, view: :NAME_ONLY
         end
 

@@ -125,7 +125,7 @@ class MockBigtable < Minitest::Spec
   def column_families_grpc num: 3, start_id: 1, max_versions: 3
     column_families_hash(num: num, start_id: start_id, max_versions: max_versions)
       .each_with_object({}) do |(k,v), r|
-        r[k] = Google::Bigtable::Admin::V2::ColumnFamily.new(v)
+        r[k] = Google::Cloud::Bigtable::Admin::V2::ColumnFamily.new(v)
       end
   end
 
@@ -134,7 +134,7 @@ class MockBigtable < Minitest::Spec
   end
 
   def cluster_state_grpc state = nil
-     Google::Bigtable::Admin::V2::Table::ClusterState.new(
+     Google::Cloud::Bigtable::Admin::V2::Table::ClusterState.new(
        cluster_state_hash(state)
      )
   end
@@ -173,12 +173,12 @@ class MockBigtable < Minitest::Spec
 
   def tables_grpc instance_id, num: 3, start_id: 1
    tables_hash(instance_id, num: num, start_id: start_id)[:tables].map do |t|
-     Google::Bigtable::Admin::V2::Table.new(t)
+     Google::Cloud::Bigtable::Admin::V2::Table.new(t)
    end
   end
 
   def app_profile_grpc instance_id, app_profile_id
-    Google::Bigtable::Admin::V2::AppProfile.new(
+    Google::Cloud::Bigtable::Admin::V2::AppProfile.new(
       name: "projects/test/instances/#{instance_id}/appProfiles/#{app_profile_id}"
     )
   end
@@ -187,7 +187,7 @@ class MockBigtable < Minitest::Spec
     arr = Array.new(count) do |i|
       app_profile_grpc "my-instance", "my-app-profile-#{i}"
     end
-    Google::Bigtable::Admin::V2::ListAppProfilesResponse.new app_profiles: arr
+    Google::Cloud::Bigtable::Admin::V2::ListAppProfilesResponse.new app_profiles: arr
   end
 
   def backup_grpc instance_id,
@@ -203,7 +203,7 @@ class MockBigtable < Minitest::Spec
     start_time ||= now + 60
     end_time ||= now + 120
 
-    Google::Bigtable::Admin::V2::Backup.new(
+    Google::Cloud::Bigtable::Admin::V2::Backup.new(
       name: backup_path(instance_id, cluster_id, backup_id),
       source_table: table_path(instance_id, source_table_id),
       expire_time: expire_time,
@@ -219,49 +219,49 @@ class MockBigtable < Minitest::Spec
     arr = Array.new(count) do |i|
       backup_grpc "my-instance", "my-cluster", "my-backup-#{i}", "my-source-table", expire_time
     end
-    Google::Bigtable::Admin::V2::ListBackupsResponse.new backups: arr
+    Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse.new backups: arr
   end
 
   def project_path
-    Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.project_path(project_id)
+    Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Paths.project_path project: project_id
   end
 
   def instance_path instance_id
-    Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path(
-      project_id,
-      instance_id
+    Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Paths.instance_path(
+      project: project_id,
+      instance: instance_id
     )
   end
 
   def cluster_path instance_id, cluster_id
-    Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.cluster_path(
-      project_id,
-      instance_id,
-      cluster_id
+    Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Paths.cluster_path(
+      project: project_id,
+      instance: instance_id,
+      cluster: cluster_id
     )
   end
 
   def location_path location
-    Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.location_path(
-      project_id,
-      location
+    Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Paths.location_path(
+      project: project_id,
+      location: location
     )
   end
 
   def table_path instance_id, table_id
-    Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path(
-      project_id,
-      instance_id,
-      table_id
+    Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Paths.table_path(
+      project: project_id,
+      instance: instance_id,
+      table: table_id
     )
   end
 
   def snapshot_path instance_id, cluster_id, snapshot_id
-    Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.snapshot_path(
-      project_id,
-      instance_id,
-      cluster_id,
-      snapshot_id
+    Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Paths.snapshot_path(
+      project: project_id,
+      instance: instance_id,
+      cluster: cluster_id,
+      snapshot: snapshot_id
     )
   end
 
@@ -274,11 +274,11 @@ class MockBigtable < Minitest::Spec
   end
 
   def backup_path instance_id, cluster_id, backup_id
-    Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.backup_path(
-      project_id,
-      instance_id,
-      cluster_id,
-      backup_id
+    Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Paths.backup_path(
+      project: project_id,
+      instance: instance_id,
+      cluster: cluster_id,
+      backup: backup_id
     )
   end
 

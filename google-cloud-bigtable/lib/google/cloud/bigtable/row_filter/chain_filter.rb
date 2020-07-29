@@ -564,11 +564,11 @@ module Google
           #
           # Gets a gRPC object of RowFilter with a chain filter.
           #
-          # @return [Google::Bigtable::V2::RowFilter]
+          # @return [Google::Cloud::Bigtable::V2::RowFilter]
           #
           def to_grpc
-            Google::Bigtable::V2::RowFilter.new(
-              chain: Google::Bigtable::V2::RowFilter::Chain.new(filters: @filters.map(&:to_grpc))
+            Google::Cloud::Bigtable::V2::RowFilter.new(
+              chain: Google::Cloud::Bigtable::V2::RowFilter::Chain.new(filters: @filters.map(&:to_grpc))
             )
           end
 

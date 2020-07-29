@@ -23,7 +23,7 @@ describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
   let(:cluster_states) { clusters_state_grpc }
   let(:column_families) { column_families_grpc }
   let(:table_grpc) do
-    Google::Bigtable::Admin::V2::Table.new(
+    Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(
         name: table_path(instance_id, table_id),
         cluster_states: cluster_states,
@@ -39,11 +39,11 @@ describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
   let(:token) { "l947XelENinaxJQP0nnrZJjHnAF7YrwW8HCJLotwrF" }
 
   it "generate consistency token" do
-    get_res = Google::Bigtable::Admin::V2::GenerateConsistencyTokenResponse.new(
+    get_res = Google::Cloud::Bigtable::Admin::V2::GenerateConsistencyTokenResponse.new(
       consistency_token: token
     )
     mock = Minitest::Mock.new
-    mock.expect :generate_consistency_token, get_res, [table_path(instance_id, table_id)]
+    mock.expect :generate_consistency_token, get_res, [name: table_path(instance_id, table_id)]
     bigtable.service.mocked_tables = mock
 
     result = table.generate_consistency_token
@@ -52,11 +52,11 @@ describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
   end
 
   it "check replication consistency of table" do
-    get_res = Google::Bigtable::Admin::V2::CheckConsistencyResponse.new(
+    get_res = Google::Cloud::Bigtable::Admin::V2::CheckConsistencyResponse.new(
       consistent: true
     )
     mock = Minitest::Mock.new
-    mock.expect :check_consistency, get_res, [table_path(instance_id, table_id), token]
+    mock.expect :check_consistency, get_res, [name: table_path(instance_id, table_id), consistency_token: token]
     bigtable.service.mocked_tables = mock
 
     result = table.check_consistency(token)
@@ -65,16 +65,16 @@ describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
   end
 
   it "generate token and wait for replication" do
-    gen_token_res = Google::Bigtable::Admin::V2::GenerateConsistencyTokenResponse.new(
+    gen_token_res = Google::Cloud::Bigtable::Admin::V2::GenerateConsistencyTokenResponse.new(
       consistency_token: token
     )
-    check_consistency_res = Google::Bigtable::Admin::V2::CheckConsistencyResponse.new(
+    check_consistency_res = Google::Cloud::Bigtable::Admin::V2::CheckConsistencyResponse.new(
       consistent: true
     )
 
     mock = Minitest::Mock.new
-    mock.expect :generate_consistency_token, gen_token_res, [table_path(instance_id, table_id)]
-    mock.expect :check_consistency, check_consistency_res, [table_path(instance_id, table_id), token]
+    mock.expect :generate_consistency_token, gen_token_res, [name: table_path(instance_id, table_id)]
+    mock.expect :check_consistency, check_consistency_res, [name: table_path(instance_id, table_id), consistency_token: token]
 
     bigtable.service.mocked_tables = mock
 
@@ -84,17 +84,17 @@ describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
   end
 
   it "generate token and wait for replication timeout" do
-    gen_token_res = Google::Bigtable::Admin::V2::GenerateConsistencyTokenResponse.new(
+    gen_token_res = Google::Cloud::Bigtable::Admin::V2::GenerateConsistencyTokenResponse.new(
       consistency_token: token
     )
-    check_consistency_res = Google::Bigtable::Admin::V2::CheckConsistencyResponse.new(
+    check_consistency_res = Google::Cloud::Bigtable::Admin::V2::CheckConsistencyResponse.new(
       consistent: false
     )
 
     mock = Minitest::Mock.new
-    mock.expect :generate_consistency_token, gen_token_res, [table_path(instance_id, table_id)]
+    mock.expect :generate_consistency_token, gen_token_res, [name: table_path(instance_id, table_id)]
     3.times do
-      mock.expect :check_consistency, check_consistency_res, [table_path(instance_id, table_id), token]
+      mock.expect :check_consistency, check_consistency_res, [name: table_path(instance_id, table_id), consistency_token: token]
     end
 
     bigtable.service.mocked_tables = mock

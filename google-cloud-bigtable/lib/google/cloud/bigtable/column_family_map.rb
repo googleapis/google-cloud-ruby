@@ -211,7 +211,7 @@ module Google
             warn "The positional gc_rule argument is deprecated. Use the named gc_rule argument instead."
           end
 
-          column_family = Google::Bigtable::Admin::V2::ColumnFamily.new
+          column_family = Google::Cloud::Bigtable::Admin::V2::ColumnFamily.new
           column_family.gc_rule = gc_rule.to_grpc if gc_rule
           @column_families[name] = column_family
 
@@ -248,7 +248,7 @@ module Google
         def update name, gc_rule: nil
           raise ArgumentError, "column family #{name.inspect} does not exist" unless @column_families.has_key? name
 
-          column_family = Google::Bigtable::Admin::V2::ColumnFamily.new
+          column_family = Google::Cloud::Bigtable::Admin::V2::ColumnFamily.new
           column_family.gc_rule = gc_rule.to_grpc if gc_rule
           @column_families[name] = column_family
 
@@ -299,7 +299,7 @@ module Google
         #
         # @param comparison_map [Google::Protobuf::Map] The map to compare the
         #   current map against for building the modification entries.
-        # @return [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification>]
+        # @return [Array<Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification>]
         #
         def modifications comparison_map = nil
           comparison_map ||= empty_map
@@ -352,7 +352,7 @@ module Google
         ##
         # Create an empty Google::Protobuf::Map suitable for column_families.
         def empty_map
-          Google::Bigtable::Admin::V2::Table.new.column_families
+          Google::Cloud::Bigtable::Admin::V2::Table.new.column_families
         end
 
         ##
@@ -362,13 +362,13 @@ module Google
         #
         # @param comparison_map [Google::Protobuf::Map] The map to compare the
         #   current map against for building the modification entries.
-        # @return [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification>]
+        # @return [Array<Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification>]
         #
         def created_modifications comparison_map
           added_keys = @column_families.keys - comparison_map.keys
 
           added_keys.map do |name|
-            Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest:: \
+            Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest:: \
             Modification.new(
               id:     name,
               create: @column_families[name]
@@ -383,7 +383,7 @@ module Google
         #
         # @param comparison_map [Google::Protobuf::Map] The map to compare the
         #   current map against for building the modification entries.
-        # @return [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification>]
+        # @return [Array<Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification>]
         #
         def updated_modifications comparison_map
           possibly_updated_keys = @column_families.keys & comparison_map.keys
@@ -392,7 +392,7 @@ module Google
           end
 
           updated_keys.map do |name|
-            Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest:: \
+            Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest:: \
             Modification.new(
               id:     name,
               update: @column_families[name]
@@ -407,13 +407,13 @@ module Google
         #
         # @param comparison_map [Google::Protobuf::Map] The map to compare the
         #   current map against for building the modification entries.
-        # @return [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification>]
+        # @return [Array<Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification>]
         #
         def dropped_modifications comparison_map
           dropped_keys = comparison_map.keys - @column_families.keys
 
           dropped_keys.map do |name|
-            Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest:: \
+            Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest:: \
             Modification.new(
               id:   name,
               drop: true

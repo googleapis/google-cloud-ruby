@@ -49,7 +49,7 @@ module Google
         ##
         # Process chunk and build full row with cells
         #
-        # @param chunk [Google::Bigtable::V2::ReadRowsResponse::CellChunk]
+        # @param chunk [Google::Cloud::Bigtable::V2::ReadRowsResponse::CellChunk]
         #
         def process chunk
           self.chunk = chunk

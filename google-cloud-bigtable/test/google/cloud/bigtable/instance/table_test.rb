@@ -20,7 +20,7 @@ require "helper"
 describe Google::Cloud::Bigtable::Instance, :table, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:instance_grpc){
-    Google::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id))
+    Google::Cloud::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id))
   }
   let(:instance) {
     Google::Cloud::Bigtable::Instance.from_grpc(instance_grpc, bigtable.service)
@@ -30,7 +30,7 @@ describe Google::Cloud::Bigtable::Instance, :table, :mock_bigtable do
     table_id = "found-table"
     cluster_states = clusters_state_grpc
     column_families = column_families_grpc
-    get_res = Google::Bigtable::Admin::V2::Table.new(
+    get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(
         name: table_path(instance_id, table_id),
         cluster_states: cluster_states,
@@ -40,7 +40,7 @@ describe Google::Cloud::Bigtable::Instance, :table, :mock_bigtable do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :get_table, get_res, [table_path(instance_id, table_id), view: :FULL]
+    mock.expect :get_table, get_res, [name: table_path(instance_id, table_id), view: :FULL]
     bigtable.service.mocked_tables = mock
     table = instance.table(table_id, view: :FULL, perform_lookup: true)
 
@@ -69,9 +69,7 @@ describe Google::Cloud::Bigtable::Instance, :table, :mock_bigtable do
 
     stub = Object.new
     def stub.get_table *args
-      gax_error = Google::Gax::GaxError.new "not found"
-      gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-      raise gax_error
+      raise Google::Cloud::NotFoundError.new("not found")
     end
 
     bigtable.service.mocked_tables = stub

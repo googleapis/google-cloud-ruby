@@ -51,6 +51,8 @@ module Google
       #   metadata for requests, generally, to give OAuth credentials.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
+      # @param [String] endpoint_admin Override of the admin service endpoint host name. Optional.
+      #   If the param is nil, uses the default admin endpoint.
       # @param [String] emulator_host Bigtable emulator host. Optional.
       #   If the parameter is nil, uses the value of the `emulator_host` config.
       # @param scope [Array<String>]
@@ -68,12 +70,19 @@ module Google
       #
       #   client = Google::Cloud::Bigtable.new
       #
-      def self.new project_id: nil, credentials: nil, emulator_host: nil, scope: nil, endpoint: nil, timeout: nil
+      def self.new project_id: nil,
+                   credentials: nil,
+                   emulator_host: nil,
+                   scope: nil,
+                   endpoint: nil,
+                   endpoint_admin: nil,
+                   timeout: nil
         project_id    ||= default_project_id
         scope         ||= configure.scope
         timeout       ||= configure.timeout
         emulator_host ||= configure.emulator_host
         endpoint      ||= configure.endpoint
+        endpoint_admin ||= configure.endpoint_admin
 
         return new_with_emulator project_id, emulator_host, timeout if emulator_host
 
@@ -81,10 +90,8 @@ module Google
         project_id = resolve_project_id project_id, credentials
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        service = Bigtable::Service.new(
-          project_id, credentials,
-          host: endpoint, timeout: timeout
-        )
+        service = Bigtable::Service.new \
+          project_id, credentials, host: endpoint, host_admin: endpoint_admin, timeout: timeout
         Bigtable::Project.new service
       end
 
@@ -105,6 +112,8 @@ module Google
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
+      # * `endpoint_admin` - (String) Override of the admin service endpoint
+      #   host name, or `nil` to use the default admin endpoint.
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Bigtable library uses.
@@ -122,7 +131,8 @@ module Google
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        service = Bigtable::Service.new project_id, :this_channel_is_insecure, host: emulator_host, timeout: timeout
+        service = Bigtable::Service.new \
+          project_id, :this_channel_is_insecure, host: emulator_host, host_admin: emulator_host, timeout: timeout
         Bigtable::Project.new service
       end
 

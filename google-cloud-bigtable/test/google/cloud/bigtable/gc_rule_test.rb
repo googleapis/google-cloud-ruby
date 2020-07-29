@@ -22,7 +22,7 @@ describe Google::Cloud::Bigtable::GcRule, :mock_bigtable do
     _(gc_rule).must_be_kind_of Google::Cloud::Bigtable::GcRule
     _(gc_rule.max_age).must_equal 100
 
-    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(
+    expected_grpc = Google::Cloud::Bigtable::Admin::V2::GcRule.new(
       max_age: Google::Protobuf::Duration.new(seconds: 100)
     )
     _(gc_rule.to_grpc).must_equal expected_grpc
@@ -34,7 +34,7 @@ describe Google::Cloud::Bigtable::GcRule, :mock_bigtable do
     gc_rule.max_age = 200
 
     _(gc_rule.max_age).must_equal 200
-    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(
+    expected_grpc = Google::Cloud::Bigtable::Admin::V2::GcRule.new(
       max_age: Google::Protobuf::Duration.new(seconds: 200)
     )
     _(gc_rule.to_grpc).must_equal expected_grpc
@@ -47,7 +47,7 @@ describe Google::Cloud::Bigtable::GcRule, :mock_bigtable do
     gc_rule.max_age = 200.999999999
 
     _(gc_rule.max_age).must_equal 200.999999999
-    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(
+    expected_grpc = Google::Cloud::Bigtable::Admin::V2::GcRule.new(
       max_age: Google::Protobuf::Duration.new(seconds: 200, nanos: 999999999)
     )
     _(gc_rule.to_grpc).must_equal expected_grpc
@@ -59,7 +59,7 @@ describe Google::Cloud::Bigtable::GcRule, :mock_bigtable do
     _(gc_rule).must_be_kind_of Google::Cloud::Bigtable::GcRule
     _(gc_rule.max_versions).must_equal 3
 
-    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(
+    expected_grpc = Google::Cloud::Bigtable::Admin::V2::GcRule.new(
       max_num_versions: 3
     )
     _(gc_rule.to_grpc).must_equal expected_grpc
@@ -71,7 +71,7 @@ describe Google::Cloud::Bigtable::GcRule, :mock_bigtable do
     gc_rule.max_versions = 4
     _(gc_rule.max_versions).must_equal 4
 
-    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(
+    expected_grpc = Google::Cloud::Bigtable::Admin::V2::GcRule.new(
       max_num_versions: 4
     )
     _(gc_rule.to_grpc).must_equal expected_grpc
@@ -93,11 +93,11 @@ describe Google::Cloud::Bigtable::GcRule, :mock_bigtable do
     _(rules[1]).must_be_kind_of Google::Cloud::Bigtable::GcRule
     _(rules[1].max_age).must_equal 100
 
-    union_grpc = Google::Bigtable::Admin::V2::GcRule::Union.new(rules: [
-      Google::Bigtable::Admin::V2::GcRule.new(max_num_versions: 3),
-      Google::Bigtable::Admin::V2::GcRule.new(max_age: Google::Protobuf::Duration.new(seconds: 100))
+    union_grpc = Google::Cloud::Bigtable::Admin::V2::GcRule::Union.new(rules: [
+      Google::Cloud::Bigtable::Admin::V2::GcRule.new(max_num_versions: 3),
+      Google::Cloud::Bigtable::Admin::V2::GcRule.new(max_age: Google::Protobuf::Duration.new(seconds: 100))
     ])
-    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(union: union_grpc)
+    expected_grpc = Google::Cloud::Bigtable::Admin::V2::GcRule.new(union: union_grpc)
     _(gc_rule.to_grpc).must_equal expected_grpc
   end
 
@@ -117,11 +117,11 @@ describe Google::Cloud::Bigtable::GcRule, :mock_bigtable do
     _(rules[0].max_versions).must_equal 4
     _(rules[1].max_age).must_equal 200
 
-    union_grpc = Google::Bigtable::Admin::V2::GcRule::Union.new(rules: [
-      Google::Bigtable::Admin::V2::GcRule.new(max_num_versions: 4),
-      Google::Bigtable::Admin::V2::GcRule.new(max_age: Google::Protobuf::Duration.new(seconds: 200))
+    union_grpc = Google::Cloud::Bigtable::Admin::V2::GcRule::Union.new(rules: [
+      Google::Cloud::Bigtable::Admin::V2::GcRule.new(max_num_versions: 4),
+      Google::Cloud::Bigtable::Admin::V2::GcRule.new(max_age: Google::Protobuf::Duration.new(seconds: 200))
     ])
-    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(union: union_grpc)
+    expected_grpc = Google::Cloud::Bigtable::Admin::V2::GcRule.new(union: union_grpc)
     _(gc_rule.to_grpc).must_equal expected_grpc
   end
 
@@ -139,11 +139,11 @@ describe Google::Cloud::Bigtable::GcRule, :mock_bigtable do
     _(rules[1]).must_be_kind_of Google::Cloud::Bigtable::GcRule
     _(rules[1].max_age).must_equal 100
 
-    intersection_grpc = Google::Bigtable::Admin::V2::GcRule::Intersection.new(rules: [
-      Google::Bigtable::Admin::V2::GcRule.new(max_num_versions: 3),
-      Google::Bigtable::Admin::V2::GcRule.new(max_age: Google::Protobuf::Duration.new(seconds: 100))
+    intersection_grpc = Google::Cloud::Bigtable::Admin::V2::GcRule::Intersection.new(rules: [
+      Google::Cloud::Bigtable::Admin::V2::GcRule.new(max_num_versions: 3),
+      Google::Cloud::Bigtable::Admin::V2::GcRule.new(max_age: Google::Protobuf::Duration.new(seconds: 100))
     ])
-    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(intersection: intersection_grpc)
+    expected_grpc = Google::Cloud::Bigtable::Admin::V2::GcRule.new(intersection: intersection_grpc)
     _(gc_rule.to_grpc).must_equal expected_grpc
   end
 
@@ -163,11 +163,11 @@ describe Google::Cloud::Bigtable::GcRule, :mock_bigtable do
     _(rules[0].max_versions).must_equal 4
     _(rules[1].max_age).must_equal 200
 
-    intersection_grpc = Google::Bigtable::Admin::V2::GcRule::Intersection.new(rules: [
-      Google::Bigtable::Admin::V2::GcRule.new(max_num_versions: 4),
-      Google::Bigtable::Admin::V2::GcRule.new(max_age: Google::Protobuf::Duration.new(seconds: 200))
+    intersection_grpc = Google::Cloud::Bigtable::Admin::V2::GcRule::Intersection.new(rules: [
+      Google::Cloud::Bigtable::Admin::V2::GcRule.new(max_num_versions: 4),
+      Google::Cloud::Bigtable::Admin::V2::GcRule.new(max_age: Google::Protobuf::Duration.new(seconds: 200))
     ])
-    expected_grpc = Google::Bigtable::Admin::V2::GcRule.new(intersection: intersection_grpc)
+    expected_grpc = Google::Cloud::Bigtable::Admin::V2::GcRule.new(intersection: intersection_grpc)
     _(gc_rule.to_grpc).must_equal expected_grpc
   end
 end

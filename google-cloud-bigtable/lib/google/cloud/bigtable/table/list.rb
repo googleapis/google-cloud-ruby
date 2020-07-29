@@ -127,7 +127,7 @@ module Google
           end
 
           # @private
-          # New Table::List from a Google::Gax::PagedEnumerable<Google::Bigtable::Admin::V2::Table> object.
+          # New Table::List from a Gapic::PagedEnumerable<Google::Cloud::Bigtable::Admin::V2::Table> object.
           #
           def self.from_grpc grpc, service
             tables = List.new(Array(grpc.response.tables).map do |table|

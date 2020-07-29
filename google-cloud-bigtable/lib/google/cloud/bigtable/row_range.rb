@@ -57,7 +57,7 @@ module Google
         # @private
         # Creates a row range instance.
         def initialize
-          @grpc = Google::Bigtable::V2::RowRange.new
+          @grpc = Google::Cloud::Bigtable::V2::RowRange.new
         end
 
         ##
@@ -168,7 +168,7 @@ module Google
 
         # @private
         #
-        # @return [Google::Bigtable::V2::RowRange]
+        # @return [Google::Cloud::Bigtable::V2::RowRange]
         #
         def to_grpc
           @grpc

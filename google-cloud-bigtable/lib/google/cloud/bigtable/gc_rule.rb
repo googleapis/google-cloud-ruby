@@ -66,10 +66,10 @@ module Google
         # @private
         # Creates a new GC Rule instance.
         #
-        # @param grpc [Google::Bigtable::Admin::V2::GcRule | nil]
+        # @param grpc [Google::Cloud::Bigtable::Admin::V2::GcRule | nil]
         #
         def initialize grpc = nil
-          @grpc = grpc || Google::Bigtable::Admin::V2::GcRule.new
+          @grpc = grpc || Google::Cloud::Bigtable::Admin::V2::GcRule.new
         end
 
         ##
@@ -146,7 +146,7 @@ module Google
         #   List of GcRule with nested rules.
         #
         def intersection= rules
-          @grpc.intersection = Google::Bigtable::Admin::V2::GcRule::Intersection.new rules: rules.map(&:to_grpc)
+          @grpc.intersection = Google::Cloud::Bigtable::Admin::V2::GcRule::Intersection.new rules: rules.map(&:to_grpc)
         end
 
         ##
@@ -186,7 +186,7 @@ module Google
         #   List of GcRule with nested rules.
         #
         def union= rules
-          @grpc.union = Google::Bigtable::Admin::V2::GcRule::Union.new rules: rules.map(&:to_grpc)
+          @grpc.union = Google::Cloud::Bigtable::Admin::V2::GcRule::Union.new rules: rules.map(&:to_grpc)
         end
 
         ##
@@ -314,7 +314,7 @@ module Google
 
         # @private
         # Get gRPC instance of GC Rule
-        # @return [Google::Bigtable::Admin::V2::GcRule]
+        # @return [Google::Cloud::Bigtable::Admin::V2::GcRule]
         def to_grpc
           @grpc
         end
@@ -322,8 +322,8 @@ module Google
         # @private
         #
         # Creates a new GcRule instance from a
-        # Google::Bigtable::Admin::V2::GcRule.
-        # @param grpc [Google::Bigtable::Admin::V2::GcRule]
+        # Google::Cloud::Bigtable::Admin::V2::GcRule.
+        # @param grpc [Google::Cloud::Bigtable::Admin::V2::GcRule]
         # @return [Google::Cloud::Bigtable::GcRule]
         def self.from_grpc grpc
           new grpc

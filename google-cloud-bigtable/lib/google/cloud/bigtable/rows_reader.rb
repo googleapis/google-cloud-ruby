@@ -59,14 +59,14 @@ module Google
         ##
         # Read rows
         #
-        # @param rows [Google::Bigtable::V2::RowSet]
+        # @param rows [Google::Cloud::Bigtable::V2::RowSet]
         #   The row keys and/or ranges to read.
         #   If not specified, reads from all rows.
-        #   Alternatively, provide a hash in the form of `Google::Bigtable::V2::RowSet`.
-        # @param filter [Google::Bigtable::V2::RowFilter | Hash]
+        #   Alternatively, provide a hash in the form of `Google::Cloud::Bigtable::V2::RowSet`.
+        # @param filter [Google::Cloud::Bigtable::V2::RowFilter | Hash]
         #   The filter to apply to the contents of the specified row(s). If unset,
         #   reads the entirety of each row.
-        #   A hash in the form of `Google::Bigtable::V2::RowFilter`
+        #   A hash in the form of `Google::Cloud::Bigtable::V2::RowFilter`
         #   can also be provided.
         # @param rows_limit [Integer]
         #   The read will terminate after committing to N rows' worth of results.
@@ -111,12 +111,12 @@ module Google
         # @param rows_limit [Integer]
         #   The read will terminate after committing to N rows' worth of results.
         #   The default (zero) is to return all results.
-        # @param row_set [Google::Bigtable::V2::RowSet]
+        # @param row_set [Google::Cloud::Bigtable::V2::RowSet]
         #   The row keys and/or ranges to read.
         #   If not specified, reads from all rows.
-        #   A hash of the same form as `Google::Bigtable::V2::RowSet`
+        #   A hash of the same form as `Google::Cloud::Bigtable::V2::RowSet`
         #   can also be provided.
-        # @return [Integer, Google::Bigtable::V2::RowSet]
+        # @return [Integer, Google::Cloud::Bigtable::V2::RowSet]
         #
         def retry_options rows_limit, row_set
           return [rows_limit, row_set] unless last_key
@@ -142,7 +142,7 @@ module Google
 
           if row_set.row_ranges.empty?
             row_set.row_ranges <<
-              Google::Bigtable::V2::RowRange.new(start_key_open: last_key)
+              Google::Cloud::Bigtable::V2::RowRange.new(start_key_open: last_key)
           end
 
           # 3. Remove all individual keys before and up to the last read key
@@ -166,7 +166,7 @@ module Google
         ##
         # Checks if the start key was already read for the range.
         #
-        # @param range [Google::Bigtable::V2::RowRange]
+        # @param range [Google::Cloud::Bigtable::V2::RowRange]
         # @return [Boolean]
         #
         def start_key_read? range
@@ -182,7 +182,7 @@ module Google
         ##
         # Checks if the end key was already read for the range.
         #
-        # @param range [Google::Bigtable::V2::RowRange]
+        # @param range [Google::Cloud::Bigtable::V2::RowRange]
         # @return [Boolean]
         #
         def end_key_read? range

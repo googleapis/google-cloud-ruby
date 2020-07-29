@@ -59,7 +59,7 @@ module Google
 
         # @private
         # mutations gRPC list
-        # @return [Array<Google::Bigtable::V2::Mutation>]
+        # @return [Array<Google::Cloud::Bigtable::V2::Mutation>]
         attr_accessor :mutations
 
         ##
@@ -123,7 +123,7 @@ module Google
             options[:timestamp_micros] = timestamp
             @retryable = timestamp != -1
           end
-          @mutations << Google::Bigtable::V2::Mutation.new(set_cell: options)
+          @mutations << Google::Cloud::Bigtable::V2::Mutation.new(set_cell: options)
           self
         end
 
@@ -177,14 +177,15 @@ module Google
         #   )
         #
         def delete_cells family, qualifier, timestamp_from: nil, timestamp_to: nil
-          grpc = Google::Bigtable::V2::Mutation::DeleteFromColumn.new family_name: family, column_qualifier: qualifier
+          grpc = Google::Cloud::Bigtable::V2::Mutation::DeleteFromColumn.new \
+            family_name: family, column_qualifier: qualifier
           if timestamp_from || timestamp_to
-            time_range = Google::Bigtable::V2::TimestampRange.new
+            time_range = Google::Cloud::Bigtable::V2::TimestampRange.new
             time_range.start_timestamp_micros = timestamp_from if timestamp_from
             time_range.end_timestamp_micros = timestamp_to if timestamp_to
             grpc.time_range = time_range
           end
-          @mutations << Google::Bigtable::V2::Mutation.new(delete_from_column: grpc)
+          @mutations << Google::Cloud::Bigtable::V2::Mutation.new(delete_from_column: grpc)
           self
         end
 
@@ -203,7 +204,7 @@ module Google
         #   entry.delete_from_family("cf-1")
         #
         def delete_from_family family
-          @mutations << Google::Bigtable::V2::Mutation.new(delete_from_family: { family_name: family })
+          @mutations << Google::Cloud::Bigtable::V2::Mutation.new(delete_from_family: { family_name: family })
           self
         end
 
@@ -219,7 +220,7 @@ module Google
         #   entry.delete_from_row
         #
         def delete_from_row
-          @mutations << Google::Bigtable::V2::Mutation.new(delete_from_row: {})
+          @mutations << Google::Cloud::Bigtable::V2::Mutation.new(delete_from_row: {})
           self
         end
 
@@ -245,10 +246,10 @@ module Google
         #
         # Convert mutation entry to gRPC protobuf object.
         #
-        # @return [Google::Bigtable::V2::MutateRowsRequest::Entry]
+        # @return [Google::Cloud::Bigtable::V2::MutateRowsRequest::Entry]
         #
         def to_grpc
-          Google::Bigtable::V2::MutateRowsRequest::Entry.new row_key: @row_key, mutations: @mutations
+          Google::Cloud::Bigtable::V2::MutateRowsRequest::Entry.new row_key: @row_key, mutations: @mutations
         end
       end
     end

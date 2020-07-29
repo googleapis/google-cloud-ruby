@@ -124,7 +124,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
 
       _(filter).must_be_kind_of Google::Cloud::Bigtable::RowFilter::SimpleFilter
 
-      range_grpc = Google::Bigtable::V2::TimestampRange.new(
+      range_grpc = Google::Cloud::Bigtable::V2::TimestampRange.new(
         start_timestamp_micros: from, end_timestamp_micros: to
       )
       _(filter.to_grpc.timestamp_range_filter).must_equal range_grpc
@@ -136,7 +136,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
 
       _(filter).must_be_kind_of Google::Cloud::Bigtable::RowFilter::SimpleFilter
 
-      range_grpc = Google::Bigtable::V2::TimestampRange.new(
+      range_grpc = Google::Cloud::Bigtable::V2::TimestampRange.new(
         start_timestamp_micros: from
       )
       _(filter.to_grpc.timestamp_range_filter).must_equal range_grpc
@@ -148,7 +148,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
 
       _(filter).must_be_kind_of Google::Cloud::Bigtable::RowFilter::SimpleFilter
 
-      range_grpc = Google::Bigtable::V2::TimestampRange.new(
+      range_grpc = Google::Cloud::Bigtable::V2::TimestampRange.new(
         end_timestamp_micros: to
       )
       _(filter.to_grpc.timestamp_range_filter).must_equal range_grpc
@@ -165,7 +165,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
       _(filter).must_be_kind_of Google::Cloud::Bigtable::RowFilter::SimpleFilter
 
       grpc = filter.to_grpc.value_range_filter
-      _(grpc).must_be_kind_of Google::Bigtable::V2::ValueRange
+      _(grpc).must_be_kind_of Google::Cloud::Bigtable::V2::ValueRange
       _(grpc.start_value_closed).must_equal from_value
       _(grpc.end_value_open).must_equal to_value
     end
@@ -189,7 +189,7 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
       _(filter).must_be_kind_of Google::Cloud::Bigtable::RowFilter::SimpleFilter
 
       grpc = filter.to_grpc.column_range_filter
-      _(grpc).must_be_kind_of Google::Bigtable::V2::ColumnRange
+      _(grpc).must_be_kind_of Google::Cloud::Bigtable::V2::ColumnRange
       _(grpc.family_name).must_equal family
       _(grpc.start_qualifier_closed).must_equal from_value
       _(grpc.end_qualifier_open).must_equal to_value
@@ -284,13 +284,13 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
 
     condition.on_match(on_match_filter).otherwise(otherwise_filter)
 
-    _(condition.to_grpc.condition).must_be_kind_of Google::Bigtable::V2::RowFilter::Condition
+    _(condition.to_grpc.condition).must_be_kind_of Google::Cloud::Bigtable::V2::RowFilter::Condition
     grpc = condition.to_grpc.condition
-    _(grpc.predicate_filter).must_be_kind_of Google::Bigtable::V2::RowFilter
+    _(grpc.predicate_filter).must_be_kind_of Google::Cloud::Bigtable::V2::RowFilter
     _(grpc.predicate_filter.row_key_regex_filter).must_equal "user-*"
-    _(grpc.true_filter).must_be_kind_of Google::Bigtable::V2::RowFilter
+    _(grpc.true_filter).must_be_kind_of Google::Cloud::Bigtable::V2::RowFilter
     _(grpc.true_filter.apply_label_transformer).must_equal "label"
-    _(grpc.false_filter).must_be_kind_of Google::Bigtable::V2::RowFilter
+    _(grpc.false_filter).must_be_kind_of Google::Cloud::Bigtable::V2::RowFilter
     _(grpc.false_filter.strip_value_transformer).must_equal true
   end
 end

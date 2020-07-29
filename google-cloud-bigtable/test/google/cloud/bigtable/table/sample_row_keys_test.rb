@@ -29,10 +29,10 @@ describe Google::Cloud::Bigtable::Table, :sample_row_keys, :mock_bigtable do
     row_key = "user-1"
     offset = 1000
     res = [
-      Google::Bigtable::V2::SampleRowKeysResponse.new(row_key: row_key, offset_bytes: offset)
+      Google::Cloud::Bigtable::V2::SampleRowKeysResponse.new(row_key: row_key, offset_bytes: offset)
     ]
     mock.expect :sample_row_keys, res, [
-      table_path(instance_id, table_id),
+      table_name: table_path(instance_id, table_id),
       app_profile_id: nil
     ]
 
