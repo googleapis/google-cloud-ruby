@@ -718,9 +718,9 @@ module Google
         #   db.upsert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def upsert table, *rows, call_options: nil
+        def upsert table, *rows
           @pool.with_session do |session|
-            session.upsert table, rows, call_options: call_options
+            session.upsert table, rows
           end
         end
         alias save upsert
@@ -774,9 +774,9 @@ module Google
         #   db.insert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def insert table, *rows, call_options: nil
+        def insert table, *rows
           @pool.with_session do |session|
-            session.insert table, rows, call_options: call_options
+            session.insert table, rows
           end
         end
 
@@ -829,9 +829,9 @@ module Google
         #   db.update "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def update table, *rows, call_options: nil
+        def update table, *rows
           @pool.with_session do |session|
-            session.update table, rows, call_options: call_options
+            session.update table, rows
           end
         end
 
@@ -886,9 +886,9 @@ module Google
         #   db.replace "users", [{ id: 1, name: "Charlie", active: false },
         #                        { id: 2, name: "Harvey",  active: true }]
         #
-        def replace table, *rows, call_options: nil
+        def replace table, *rows
           @pool.with_session do |session|
-            session.replace table, rows, call_options: call_options
+            session.replace table, rows
           end
         end
 
