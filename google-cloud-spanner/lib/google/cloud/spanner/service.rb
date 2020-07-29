@@ -133,11 +133,11 @@ module Google
           }.delete_if { |_, v| v.nil? })
 
           request = {
-
+            parent:      project_path,
+            instance_id: instance_id,
+            instance:    create_obj
           }
-          instances.create_instance parent:      project_path,
-                                    instance_id: instance_id,
-                                    instance:    create_obj
+          instances.create_instance request, opts
         end
 
         def update_instance instance, timeout: nil, retry_policy: nil
@@ -217,11 +217,11 @@ module Google
         def create_database instance_id, database_id, statements: [],
                             timeout: nil, retry_policy: nil
           opts = default_options timeout: timeout, retry_policy: retry_policy
-          request = { 
+          request = {
             parent: instance_path(instance_id),
             create_statement: "CREATE DATABASE `#{database_id}`",
             extra_statements: Array(statements)
-           }
+          }
           databases.create_database request, opts
         end
 
@@ -256,7 +256,6 @@ module Google
           opts = default_options timeout: timeout, retry_policy: retry_policy
           request = { resource: database_path(instance_id, database_id) }
           databases.get_iam_policy request, opts
-            
         end
 
         def set_database_policy instance_id, database_id, new_policy,

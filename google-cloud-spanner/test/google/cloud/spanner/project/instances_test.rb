@@ -37,7 +37,7 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
   it "lists instances" do
     mock = Minitest::Mock.new
-    mock.expect :list_instances, first_page, [parent: project_path, page_size: nil, page_token: nil]
+    mock.expect :list_instances, first_page, [{ parent: project_path, page_size: nil, page_token: nil }, nil]
     spanner.service.mocked_instances = mock
 
     instances = spanner.instances
@@ -49,8 +49,8 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
   it "paginates instances" do
     mock = Minitest::Mock.new
-    mock.expect :list_instances, first_page, [parent: project_path, page_size: nil, page_token: nil]
-    mock.expect :list_instances, last_page, [parent: project_path, page_size: nil, page_token: next_page_options]
+    mock.expect :list_instances, first_page, [{ parent: project_path, page_size: nil, page_token: nil }, nil]
+    mock.expect :list_instances, last_page, [{ parent: project_path, page_size: nil, page_token: next_page_options }, nil]
     spanner.service.mocked_instances = mock
 
     first_instances = spanner.instances
@@ -69,7 +69,7 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
   it "paginates instances with max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_instances, first_page, [parent: project_path, page_size: 3, page_token: nil]
+    mock.expect :list_instances, first_page, [{ parent: project_path, page_size: 3, page_token: nil }, nil]
     spanner.service.mocked_instances = mock
 
     instances = spanner.instances max: 3
@@ -84,8 +84,8 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
   it "paginates instances with next? and next" do
     mock = Minitest::Mock.new
-    mock.expect :list_instances, first_page, [parent: project_path, page_size: nil, page_token: nil]
-    mock.expect :list_instances, last_page, [parent: project_path, page_size: nil, page_token: next_page_options]
+    mock.expect :list_instances, first_page, [{ parent: project_path, page_size: nil, page_token: nil }, nil]
+    mock.expect :list_instances, last_page, [{ parent: project_path, page_size: nil, page_token: next_page_options }, nil]
     spanner.service.mocked_instances = mock
 
     first_instances = spanner.instances
@@ -102,8 +102,8 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
   it "paginates instances with next? and next and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_instances, first_page, [parent: project_path, page_size: 3, page_token: nil]
-    mock.expect :list_instances, last_page, [parent: project_path, page_size: 3, page_token: next_page_options]
+    mock.expect :list_instances, first_page, [{ parent: project_path, page_size: 3, page_token: nil }, nil]
+    mock.expect :list_instances, last_page, [{ parent: project_path, page_size: 3, page_token: next_page_options }, nil]
     spanner.service.mocked_instances = mock
 
     first_instances = spanner.instances max: 3
@@ -120,8 +120,8 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
   it "paginates instances with all" do
     mock = Minitest::Mock.new
-    mock.expect :list_instances, first_page, [parent: project_path, page_size: nil, page_token: nil]
-    mock.expect :list_instances, last_page, [parent: project_path, page_size: nil, page_token: next_page_options]
+    mock.expect :list_instances, first_page, [{ parent: project_path, page_size: nil, page_token: nil }, nil]
+    mock.expect :list_instances, last_page, [{ parent: project_path, page_size: nil, page_token: next_page_options }, nil]
     spanner.service.mocked_instances = mock
 
     instances = spanner.instances.all.to_a
@@ -133,8 +133,8 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
   it "paginates instances with all and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_instances, first_page, [parent: project_path, page_size: 3, page_token: nil]
-    mock.expect :list_instances, last_page, [parent: project_path, page_size: 3, page_token: next_page_options]
+    mock.expect :list_instances, first_page, [{ parent: project_path, page_size: 3, page_token: nil }, nil]
+    mock.expect :list_instances, last_page, [{ parent: project_path, page_size: 3, page_token: next_page_options }, nil]
     spanner.service.mocked_instances = mock
 
     instances = spanner.instances(max: 3).all.to_a
@@ -146,8 +146,8 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
   it "iterates instances with all using Enumerator" do
     mock = Minitest::Mock.new
-    mock.expect :list_instances, first_page, [parent: project_path, page_size: nil, page_token: nil]
-    mock.expect :list_instances, second_page, [parent: project_path, page_size: nil, page_token: next_page_options]
+    mock.expect :list_instances, first_page, [{ parent: project_path, page_size: nil, page_token: nil }, nil]
+    mock.expect :list_instances, second_page, [{ parent: project_path, page_size: nil, page_token: next_page_options }, nil]
     spanner.service.mocked_instances = mock
 
     instances = spanner.instances.all.take(5)
@@ -159,8 +159,8 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
   it "iterates instances with all and request_limit set" do
     mock = Minitest::Mock.new
-    mock.expect :list_instances, first_page, [parent: project_path, page_size: nil, page_token: nil]
-    mock.expect :list_instances, second_page, [parent: project_path, page_size: nil, page_token: next_page_options]
+    mock.expect :list_instances, first_page, [{ parent: project_path, page_size: nil, page_token: nil }, nil]
+    mock.expect :list_instances, second_page, [{ parent: project_path, page_size: nil, page_token: next_page_options }, nil]
     spanner.service.mocked_instances = mock
 
     instances = spanner.instances.all(request_limit: 1).to_a

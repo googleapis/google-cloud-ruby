@@ -34,7 +34,7 @@ describe Google::Cloud::Spanner::Backup, :referencing_databases, :mock_spanner d
   it "get referencing databases" do
     get_res = Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: referencing_database_id)
     mock = Minitest::Mock.new
-    mock.expect :get_database, get_res, [name: database_path(instance_id, referencing_database_id)]
+    mock.expect :get_database, get_res, [{ name: database_path(instance_id, referencing_database_id) }, nil]
     spanner.service.mocked_databases = mock
 
     referencing_databases = backup.referencing_databases

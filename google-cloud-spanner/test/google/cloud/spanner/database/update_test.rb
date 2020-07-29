@@ -37,7 +37,7 @@ describe Google::Cloud::Spanner::Database, :update, :mock_spanner do
         metadata_type: Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest
       )
     mock = Minitest::Mock.new
-    mock.expect :update_database_ddl, update_res, [database: database_path(instance_id, database_id), statements: ["CREATE TABLE table4"], operation_id: nil]
+    mock.expect :update_database_ddl, update_res, [{ database: database_path(instance_id, database_id), statements: ["CREATE TABLE table4"], operation_id: nil }, nil]
     spanner.service.mocked_databases = mock
 
     job = database.update statements: "CREATE TABLE table4"
@@ -56,7 +56,7 @@ describe Google::Cloud::Spanner::Database, :update, :mock_spanner do
         metadata_type: Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest
       )
     mock = Minitest::Mock.new
-    mock.expect :update_database_ddl, update_res, [database: database_path(instance_id, database_id), statements: ["CREATE TABLE table4", "CREATE TABLE table5"], operation_id: nil]
+    mock.expect :update_database_ddl, update_res, [{ database: database_path(instance_id, database_id), statements: ["CREATE TABLE table4", "CREATE TABLE table5"], operation_id: nil }, nil]
     spanner.service.mocked_databases = mock
 
     job = database.update statements: ["CREATE TABLE table4", "CREATE TABLE table5"]
@@ -75,7 +75,7 @@ describe Google::Cloud::Spanner::Database, :update, :mock_spanner do
         metadata_type: Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest
       )
     mock = Minitest::Mock.new
-    mock.expect :update_database_ddl, update_res, [database: database_path(instance_id, database_id), statements: ["CREATE TABLE table4", "CREATE TABLE table5"], operation_id: "update123"]
+    mock.expect :update_database_ddl, update_res, [{ database: database_path(instance_id, database_id), statements: ["CREATE TABLE table4", "CREATE TABLE table5"], operation_id: "update123" }, nil]
     spanner.service.mocked_databases = mock
 
     job = database.update statements: ["CREATE TABLE table4", "CREATE TABLE table5"], operation_id: "update123"

@@ -495,8 +495,10 @@ module Google
         def upsert table, *rows, transaction_id: nil, timeout: nil,
                    retry_policy: nil
           opts = {
-            transaction_id: transaction_id, timeout: timeout,
-            retry_policy: retry_policy }
+            transaction_id: transaction_id,
+            timeout: timeout,
+            retry_policy: retry_policy
+          }
           commit opts do |c|
             c.upsert table, rows
           end

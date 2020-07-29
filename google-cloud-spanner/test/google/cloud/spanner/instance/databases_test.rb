@@ -40,7 +40,7 @@ describe Google::Cloud::Spanner::Instance, :databases, :mock_spanner do
 
   it "lists databases" do
     mock = Minitest::Mock.new
-    mock.expect :list_databases, first_page, [parent: instance_path(instance_id), page_size: nil, page_token: nil]
+    mock.expect :list_databases, first_page, [{ parent: instance_path(instance_id), page_size: nil, page_token: nil }, nil]
     instance.service.mocked_databases = mock
 
     databases = instance.databases
@@ -52,8 +52,8 @@ describe Google::Cloud::Spanner::Instance, :databases, :mock_spanner do
 
   it "paginates databases" do
     mock = Minitest::Mock.new
-    mock.expect :list_databases, first_page, [parent: instance_path(instance_id), page_size: nil, page_token: nil]
-    mock.expect :list_databases, last_page, [parent: instance_path(instance_id), page_size: nil, page_token: next_page_options]
+    mock.expect :list_databases, first_page, [{ parent: instance_path(instance_id), page_size: nil, page_token: nil }, nil]
+    mock.expect :list_databases, last_page, [{ parent: instance_path(instance_id), page_size: nil, page_token: next_page_options }, nil]
     instance.service.mocked_databases = mock
 
     first_databases = instance.databases
@@ -72,7 +72,7 @@ describe Google::Cloud::Spanner::Instance, :databases, :mock_spanner do
 
   it "paginates databases with max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_databases, first_page, [parent: instance_path(instance_id), page_size: 3, page_token: nil]
+    mock.expect :list_databases, first_page, [{ parent: instance_path(instance_id), page_size: 3, page_token: nil }, nil]
     instance.service.mocked_databases = mock
 
     databases = instance.databases max: 3
@@ -87,8 +87,8 @@ describe Google::Cloud::Spanner::Instance, :databases, :mock_spanner do
 
   it "paginates databases with next? and next" do
     mock = Minitest::Mock.new
-    mock.expect :list_databases, first_page, [parent: instance_path(instance_id), page_size: nil, page_token: nil]
-    mock.expect :list_databases, last_page, [parent: instance_path(instance_id), page_size: nil, page_token: next_page_options]
+    mock.expect :list_databases, first_page, [{ parent: instance_path(instance_id), page_size: nil, page_token: nil }, nil]
+    mock.expect :list_databases, last_page, [{ parent: instance_path(instance_id), page_size: nil, page_token: next_page_options }, nil]
     instance.service.mocked_databases = mock
 
     first_databases = instance.databases
@@ -105,8 +105,8 @@ describe Google::Cloud::Spanner::Instance, :databases, :mock_spanner do
 
   it "paginates databases with next? and next and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_databases, first_page, [parent: instance_path(instance_id), page_size: 3, page_token: nil]
-    mock.expect :list_databases, last_page, [parent: instance_path(instance_id), page_size: 3, page_token: next_page_options]
+    mock.expect :list_databases, first_page, [{ parent: instance_path(instance_id), page_size: 3, page_token: nil }, nil]
+    mock.expect :list_databases, last_page, [{ parent: instance_path(instance_id), page_size: 3, page_token: next_page_options }, nil]
     instance.service.mocked_databases = mock
 
     first_databases = instance.databases max: 3
@@ -123,8 +123,8 @@ describe Google::Cloud::Spanner::Instance, :databases, :mock_spanner do
 
   it "paginates databases with all" do
     mock = Minitest::Mock.new
-    mock.expect :list_databases, first_page, [parent: instance_path(instance_id), page_size: nil, page_token: nil]
-    mock.expect :list_databases, last_page, [parent: instance_path(instance_id), page_size: nil, page_token: next_page_options]
+    mock.expect :list_databases, first_page, [{ parent: instance_path(instance_id), page_size: nil, page_token: nil }, nil]
+    mock.expect :list_databases, last_page, [{ parent: instance_path(instance_id), page_size: nil, page_token: next_page_options }, nil]
     instance.service.mocked_databases = mock
 
     databases = instance.databases.all.to_a
@@ -136,8 +136,8 @@ describe Google::Cloud::Spanner::Instance, :databases, :mock_spanner do
 
   it "paginates databases with all and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_databases, first_page, [parent: instance_path(instance_id), page_size: 3, page_token: nil]
-    mock.expect :list_databases, last_page, [parent: instance_path(instance_id), page_size: 3, page_token: next_page_options]
+    mock.expect :list_databases, first_page, [{ parent: instance_path(instance_id), page_size: 3, page_token: nil }, nil]
+    mock.expect :list_databases, last_page, [{ parent: instance_path(instance_id), page_size: 3, page_token: next_page_options }, nil]
     instance.service.mocked_databases = mock
 
     databases = instance.databases(max: 3).all.to_a
@@ -149,8 +149,8 @@ describe Google::Cloud::Spanner::Instance, :databases, :mock_spanner do
 
   it "iterates databases with all using Enumerator" do
     mock = Minitest::Mock.new
-    mock.expect :list_databases, first_page, [parent: instance_path(instance_id), page_size: nil, page_token: nil]
-    mock.expect :list_databases, second_page, [parent: instance_path(instance_id), page_size: nil, page_token: next_page_options]
+    mock.expect :list_databases, first_page, [{ parent: instance_path(instance_id), page_size: nil, page_token: nil }, nil]
+    mock.expect :list_databases, second_page, [{ parent: instance_path(instance_id), page_size: nil, page_token: next_page_options }, nil]
     instance.service.mocked_databases = mock
 
     databases = instance.databases.all.take(5)
@@ -162,8 +162,8 @@ describe Google::Cloud::Spanner::Instance, :databases, :mock_spanner do
 
   it "iterates databases with all and request_limit set" do
     mock = Minitest::Mock.new
-    mock.expect :list_databases, first_page, [parent: instance_path(instance_id), page_size: nil, page_token: nil]
-    mock.expect :list_databases, second_page, [parent: instance_path(instance_id), page_size: nil, page_token: next_page_options]
+    mock.expect :list_databases, first_page, [{ parent: instance_path(instance_id), page_size: nil, page_token: nil }, nil]
+    mock.expect :list_databases, second_page, [{ parent: instance_path(instance_id), page_size: nil, page_token: next_page_options }, nil]
     instance.service.mocked_databases = mock
 
     databases = instance.databases.all(request_limit: 1).to_a

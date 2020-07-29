@@ -37,7 +37,7 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
   it "lists configs" do
     mock = Minitest::Mock.new
-    mock.expect :list_instance_configs, first_page, [parent: project_path, page_size: nil, page_token: nil]
+    mock.expect :list_instance_configs, first_page, [{ parent: project_path, page_size: nil, page_token: nil }, nil]
     spanner.service.mocked_instances = mock
 
     configs = spanner.instance_configs
@@ -49,8 +49,8 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
   it "paginates configs" do
     mock = Minitest::Mock.new
-    mock.expect :list_instance_configs, first_page, [parent: project_path, page_size: nil, page_token: nil]
-    mock.expect :list_instance_configs, last_page, [parent: project_path, page_size: nil, page_token: next_page_options]
+    mock.expect :list_instance_configs, first_page, [{ parent: project_path, page_size: nil, page_token: nil }, nil]
+    mock.expect :list_instance_configs, last_page, [{ parent: project_path, page_size: nil, page_token: next_page_options }, nil]
     spanner.service.mocked_instances = mock
 
     first_configs = spanner.instance_configs
@@ -69,7 +69,7 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
   it "paginates configs with max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_instance_configs, first_page, [parent: project_path, page_size: 3, page_token: nil]
+    mock.expect :list_instance_configs, first_page, [{ parent: project_path, page_size: 3, page_token: nil }, nil]
     spanner.service.mocked_instances = mock
 
     configs = spanner.instance_configs max: 3
@@ -84,8 +84,8 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
   it "paginates configs with next? and next" do
     mock = Minitest::Mock.new
-    mock.expect :list_instance_configs, first_page, [parent: project_path, page_size: nil, page_token: nil]
-    mock.expect :list_instance_configs, last_page, [parent: project_path, page_size: nil, page_token: next_page_options]
+    mock.expect :list_instance_configs, first_page, [{ parent: project_path, page_size: nil, page_token: nil }, nil]
+    mock.expect :list_instance_configs, last_page, [{ parent: project_path, page_size: nil, page_token: next_page_options }, nil]
     spanner.service.mocked_instances = mock
 
     first_configs = spanner.instance_configs
@@ -102,8 +102,8 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
   it "paginates configs with next? and next and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_instance_configs, first_page, [parent: project_path, page_size: 3, page_token: nil]
-    mock.expect :list_instance_configs, last_page, [parent: project_path, page_size: 3, page_token: next_page_options]
+    mock.expect :list_instance_configs, first_page, [{ parent: project_path, page_size: 3, page_token: nil }, nil]
+    mock.expect :list_instance_configs, last_page, [{ parent: project_path, page_size: 3, page_token: next_page_options }, nil]
     spanner.service.mocked_instances = mock
 
     first_configs = spanner.instance_configs max: 3
@@ -120,8 +120,8 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
   it "paginates configs with all" do
     mock = Minitest::Mock.new
-    mock.expect :list_instance_configs, first_page, [parent: project_path, page_size: nil, page_token: nil]
-    mock.expect :list_instance_configs, last_page, [parent: project_path, page_size: nil, page_token: next_page_options]
+    mock.expect :list_instance_configs, first_page, [{ parent: project_path, page_size: nil, page_token: nil }, nil]
+    mock.expect :list_instance_configs, last_page, [{ parent: project_path, page_size: nil, page_token: next_page_options }, nil]
     spanner.service.mocked_instances = mock
 
     configs = spanner.instance_configs.all.to_a
@@ -133,8 +133,8 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
   it "paginates configs with all and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_instance_configs, first_page, [parent: project_path, page_size: 3, page_token: nil]
-    mock.expect :list_instance_configs, last_page, [parent: project_path, page_size: 3, page_token: next_page_options]
+    mock.expect :list_instance_configs, first_page, [{ parent: project_path, page_size: 3, page_token: nil }, nil]
+    mock.expect :list_instance_configs, last_page, [{ parent: project_path, page_size: 3, page_token: next_page_options }, nil]
     spanner.service.mocked_instances = mock
 
     configs = spanner.instance_configs(max: 3).all.to_a
@@ -146,8 +146,8 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
   it "iterates configs with all using Enumerator" do
     mock = Minitest::Mock.new
-    mock.expect :list_instance_configs, first_page, [parent: project_path, page_size: nil, page_token: nil]
-    mock.expect :list_instance_configs, second_page, [parent: project_path, page_size: nil, page_token: next_page_options]
+    mock.expect :list_instance_configs, first_page, [{ parent: project_path, page_size: nil, page_token: nil }, nil]
+    mock.expect :list_instance_configs, second_page, [{ parent: project_path, page_size: nil, page_token: next_page_options }, nil]
     spanner.service.mocked_instances = mock
 
     configs = spanner.instance_configs.all.take(5)
@@ -159,8 +159,8 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
   it "iterates configs with all and request_limit set" do
     mock = Minitest::Mock.new
-    mock.expect :list_instance_configs, first_page, [parent: project_path, page_size: nil, page_token: nil]
-    mock.expect :list_instance_configs, second_page, [parent: project_path, page_size: nil, page_token: next_page_options]
+    mock.expect :list_instance_configs, first_page, [{ parent: project_path, page_size: nil, page_token: nil }, nil]
+    mock.expect :list_instance_configs, second_page, [{ parent: project_path, page_size: nil, page_token: next_page_options }, nil]
     spanner.service.mocked_instances = mock
 
     configs = spanner.instance_configs.all(request_limit: 1).to_a

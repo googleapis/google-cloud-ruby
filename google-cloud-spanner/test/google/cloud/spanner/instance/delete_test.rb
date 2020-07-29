@@ -21,7 +21,7 @@ describe Google::Cloud::Spanner::Instance, :delete, :mock_spanner do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_instance, nil, [name: instance_grpc.name]
+    mock.expect :delete_instance, nil, [{ name: instance_grpc.name }, nil]
     spanner.service.mocked_instances = mock
 
     instance.delete

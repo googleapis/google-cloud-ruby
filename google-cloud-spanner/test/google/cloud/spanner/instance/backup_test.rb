@@ -27,7 +27,7 @@ describe Google::Cloud::Spanner::Instance, :backup, :mock_spanner do
     get_res = Google::Cloud::Spanner::Admin::Database::V1::Backup.new \
       backup_hash(instance_id: instance_id, database_id: database_id, backup_id: backup_id)
     mock = Minitest::Mock.new
-    mock.expect :get_backup, get_res, [name: backup_path(instance_id, backup_id)]
+    mock.expect :get_backup, get_res, [{ name: backup_path(instance_id, backup_id) }, nil]
     instance.service.mocked_databases = mock
 
     backup = instance.backup backup_id

@@ -66,7 +66,7 @@ describe Google::Cloud::Spanner::Instance, :create_database, :mock_spanner do
         result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
         metadata_type: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata
       )
-    mock.expect :create_database, create_res, [parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: []]
+    mock.expect :create_database, create_res, [{ parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: [] }, nil]
     mock.expect :get_operation, operation_done, [{ name: "1234567890" }, Gapic::CallOptions]
     instance.service.mocked_databases = mock
 
@@ -98,7 +98,7 @@ describe Google::Cloud::Spanner::Instance, :create_database, :mock_spanner do
         metadata_type: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata
       )
     mock = Minitest::Mock.new
-    mock.expect :create_database, create_res, [parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: ["CREATE TABLE table1;", "CREATE TABLE table2;"]]
+    mock.expect :create_database, create_res, [{ parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: ["CREATE TABLE table1;", "CREATE TABLE table2;"] }, nil]
     instance.service.mocked_databases = mock
 
     job = instance.create_database database_id, statements: [
