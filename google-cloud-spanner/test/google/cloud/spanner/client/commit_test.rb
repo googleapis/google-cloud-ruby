@@ -363,6 +363,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       retry_codes:   ["UNAVAILABLE"]
     }
     expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
 
     mutations = [
       Google::Cloud::Spanner::V1::Mutation.new(
@@ -378,7 +379,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts }, expect_options]
     spanner.service.mocked_service = mock
 
-    timestamp = client.upsert "users", [{ id: 3, name: "Marley",  active: false }], timeout: timeout, retry_policy: retry_policy
+    timestamp = client.upsert "users", [{ id: 3, name: "Marley",  active: false }], call_options: call_options
     _(timestamp).must_equal commit_time
 
     shutdown_client! client
@@ -395,6 +396,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       retry_codes:   ["UNAVAILABLE"]
     }
     expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
 
     mutations = [
       Google::Cloud::Spanner::V1::Mutation.new(
@@ -410,7 +412,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts }, expect_options]
     spanner.service.mocked_service = mock
 
-    timestamp = client.insert "users", [{ id: 2, name: "Harvey",  active: true }], timeout: timeout, retry_policy: retry_policy
+    timestamp = client.insert "users", [{ id: 2, name: "Harvey",  active: true }], call_options: call_options
     _(timestamp).must_equal commit_time
 
     shutdown_client! client
@@ -427,6 +429,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       retry_codes:   ["UNAVAILABLE"]
     }
     expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
 
     mutations = [
       Google::Cloud::Spanner::V1::Mutation.new(
@@ -442,7 +445,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts }, expect_options]
     spanner.service.mocked_service = mock
 
-    timestamp = client.update "users", [{ id: 1, name: "Charlie", active: false }], timeout: timeout, retry_policy: retry_policy
+    timestamp = client.update "users", [{ id: 1, name: "Charlie", active: false }], call_options: call_options
     _(timestamp).must_equal commit_time
 
     shutdown_client! client
@@ -459,6 +462,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       retry_codes:   ["UNAVAILABLE"]
     }
     expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
 
     mutations = [
       Google::Cloud::Spanner::V1::Mutation.new(
@@ -474,7 +478,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts }, expect_options]
     spanner.service.mocked_service = mock
 
-    timestamp = client.replace "users", [{ id: 4, name: "Henry",  active: true }], timeout: timeout, retry_policy: retry_policy
+    timestamp = client.replace "users", [{ id: 4, name: "Henry",  active: true }], call_options: call_options
     _(timestamp).must_equal commit_time
 
     shutdown_client! client
@@ -491,6 +495,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       retry_codes:   ["UNAVAILABLE"]
     }
     expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
 
     mutations = [
       Google::Cloud::Spanner::V1::Mutation.new(
@@ -505,7 +510,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts }, expect_options]
     spanner.service.mocked_service = mock
 
-    timestamp = client.delete "users", timeout: timeout, retry_policy: retry_policy
+    timestamp = client.delete "users", call_options: call_options
     _(timestamp).must_equal commit_time
 
     shutdown_client! client
@@ -522,6 +527,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       retry_codes:   ["UNAVAILABLE"]
     }
     expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
 
     mutations = [
       Google::Cloud::Spanner::V1::Mutation.new(
@@ -564,7 +570,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts }, expect_options]
     spanner.service.mocked_service = mock
 
-    timestamp = client.commit timeout:timeout, retry_policy: retry_policy do |c|
+    timestamp = client.commit call_options: call_options do |c|
       c.update "users", [{ id: 1, name: "Charlie", active: false }]
       c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
       c.upsert "users", [{ id: 3, name: "Marley",  active: false }]

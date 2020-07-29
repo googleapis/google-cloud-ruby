@@ -198,6 +198,7 @@ describe Google::Cloud::Spanner::Snapshot, :read, :mock_spanner do
       retry_codes:   ["UNAVAILABLE"]
     }
     expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
 
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
@@ -210,7 +211,7 @@ describe Google::Cloud::Spanner::Snapshot, :read, :mock_spanner do
     }, expect_options]
     session.service.mocked_service = mock
 
-    results = snapshot.read "my-table", columns, timeout: timeout, retry_policy: retry_policy
+    results = snapshot.read "my-table", columns, call_options: call_options
 
     mock.verify
 

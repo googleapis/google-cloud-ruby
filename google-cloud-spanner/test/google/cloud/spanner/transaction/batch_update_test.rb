@@ -131,12 +131,13 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
       retry_codes:   ["UNAVAILABLE"]
     }
     expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
 
     mock = Minitest::Mock.new
     mock.expect :execute_batch_dml, batch_response_grpc, [{ session: session_grpc.name, transaction: tx_selector, statements: [statement_grpc("UPDATE users SET active = true")], seqno: 1 }, expect_options]
     session.service.mocked_service = mock
 
-    row_counts = transaction.batch_update timeout: timeout, retry_policy: retry_policy do |b|
+    row_counts = transaction.batch_update call_options: call_options do |b|
       b.batch_update "UPDATE users SET active = true"
     end
 

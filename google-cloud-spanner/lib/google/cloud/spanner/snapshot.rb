@@ -244,15 +244,14 @@ module Google
         #   end
         #
         def execute_query sql, params: nil, types: nil, query_options: nil,
-                          timeout: nil, retry_policy: nil
+                          call_options: nil
           ensure_session!
 
           params, types = Convert.to_input_params_and_types params, types
           session.execute_query sql, params: params, types: types,
                                      transaction: tx_selector,
                                      query_options: query_options,
-                                     timeout: timeout,
-                                     retry_policy: retry_policy
+                                     call_options: call_options
         end
         alias execute execute_query
         alias query execute_query
@@ -293,7 +292,7 @@ module Google
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil,
-                 timeout: nil, retry_policy: nil
+                 call_options: nil
           ensure_session!
 
           columns = Array(columns).map(&:to_s)
@@ -301,8 +300,7 @@ module Google
 
           session.read table, columns, keys: keys, index: index, limit: limit,
                                        transaction: tx_selector,
-                                       timeout: timeout,
-                                       retry_policy: retry_policy
+                                       call_options: call_options
         end
 
         ##

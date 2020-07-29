@@ -304,6 +304,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
       retry_codes:   ["UNAVAILABLE"]
     }
     expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
 
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
@@ -311,7 +312,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
     spanner.service.mocked_service = mock
     expect_execute_streaming_sql results_enum, session_grpc.name, "UPDATE users SET active = true", transaction: tx_selector, options: expect_options
 
-    row_count = client.execute_partition_update "UPDATE users SET active = true", timeout: timeout, retry_policy: retry_policy
+    row_count = client.execute_partition_update "UPDATE users SET active = true", call_options: call_options
 
     mock.verify
 

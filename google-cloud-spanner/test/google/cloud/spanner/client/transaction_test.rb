@@ -415,6 +415,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
       retry_codes:   ["UNAVAILABLE"]
     }
     expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
 
     mock = Minitest::Mock.new
     spanner.service.mocked_service = mock
@@ -426,7 +427,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts}, default_options]
 
     results = nil
-    timestamp = client.transaction timeout: timeout, retry_policy: retry_policy do |tx|
+    timestamp = client.transaction call_options: call_options do |tx|
       _(tx).must_be_kind_of Google::Cloud::Spanner::Transaction
       results = tx.execute_query "SELECT * FROM users"
     end

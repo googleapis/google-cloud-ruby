@@ -105,8 +105,8 @@ module Google
           credentials == :this_channel_is_insecure
         end
 
-        def list_instances token: nil, max: nil, timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def list_instances token: nil, max: nil, call_options: nil
+          opts = default_options call_options: call_options
           request = {
             parent:     project_path,
             page_size:  max,
@@ -116,15 +116,15 @@ module Google
           paged_enum.response
         end
 
-        def get_instance name, timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def get_instance name, call_options: nil
+          opts = default_options call_options: call_options
           request = { name: instance_path(name) }
           instances.get_instance request, opts
         end
 
         def create_instance instance_id, name: nil, config: nil, nodes: nil,
-                            labels: nil, timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+                            labels: nil, call_options: nil
+          opts = default_options call_options: call_options
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
 
           create_obj = Admin::Instance::V1::Instance.new({
@@ -140,8 +140,8 @@ module Google
           instances.create_instance request, opts
         end
 
-        def update_instance instance, timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def update_instance instance, call_options: nil
+          opts = default_options call_options: call_options
           mask = Google::Protobuf::FieldMask.new(
             paths: %w[display_name node_count labels]
           )
@@ -149,21 +149,20 @@ module Google
           instances.update_instance request, opts
         end
 
-        def delete_instance name, timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def delete_instance name, call_options: nil
+          opts = default_options call_options: call_options
           request = { name: instance_path(name) }
           instances.delete_instance request, opts
         end
 
-        def get_instance_policy name, timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def get_instance_policy name, call_options: nil
+          opts = default_options call_options: call_options
           request = { resource: instance_path(name) }
           instances.get_iam_policy request, opts
         end
 
-        def set_instance_policy name, new_policy,
-                                timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def set_instance_policy name, new_policy, call_options: nil
+          opts = default_options call_options: call_options
           request = {
             resource: instance_path(name),
             policy:  new_policy
@@ -171,9 +170,8 @@ module Google
           instances.set_iam_policy request, opts
         end
 
-        def test_instance_permissions name, permissions,
-                                      timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def test_instance_permissions name, permissions, call_options: nil
+          opts = default_options call_options: call_options
           request = {
             resource:    instance_path(name),
             permissions: permissions
@@ -181,23 +179,21 @@ module Google
           instances.test_iam_permissions request, opts
         end
 
-        def list_instance_configs token: nil, max: nil,
-                                  timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def list_instance_configs token: nil, max: nil, call_options: nil
+          opts = default_options call_options: call_options
           request = { parent: project_path, page_size: max, page_token: token }
           paged_enum = instances.list_instance_configs request, opts
           paged_enum.response
         end
 
-        def get_instance_config name, timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def get_instance_config name, call_options: nil
+          opts = default_options call_options: call_options
           request = { name: instance_config_path(name) }
           instances.get_instance_config request, opts
         end
 
-        def list_databases instance_id, token: nil, max: nil,
-                           timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def list_databases instance_id, token: nil, max: nil, call_options: nil
+          opts = default_options call_options: call_options
           request = {
             parent:     instance_path(instance_id),
             page_size:  max,
@@ -207,16 +203,15 @@ module Google
           paged_enum.response
         end
 
-        def get_database instance_id, database_id,
-                         timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def get_database instance_id, database_id, call_options: nil
+          opts = default_options call_options: call_options
           request = { name: database_path(instance_id, database_id) }
           databases.get_database request, opts
         end
 
         def create_database instance_id, database_id, statements: [],
-                            timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+                            call_options: nil
+          opts = default_options call_options: call_options
           request = {
             parent: instance_path(instance_id),
             create_statement: "CREATE DATABASE `#{database_id}`",
@@ -225,24 +220,21 @@ module Google
           databases.create_database request, opts
         end
 
-        def drop_database instance_id, database_id,
-                          timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def drop_database instance_id, database_id, call_options: nil
+          opts = default_options call_options: call_options
           request = { database: database_path(instance_id, database_id) }
           databases.drop_database request, opts
         end
 
-        def get_database_ddl instance_id, database_id,
-                             timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def get_database_ddl instance_id, database_id, call_options: nil
+          opts = default_options call_options: call_options
           request = { database: database_path(instance_id, database_id) }
           databases.get_database_ddl request, opts
         end
 
         def update_database_ddl instance_id, database_id, statements: [],
-                                operation_id: nil,
-                                timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+                                operation_id: nil, call_options: nil
+          opts = default_options call_options: call_options
           request = {
             database: database_path(instance_id, database_id),
             statements: Array(statements),
@@ -251,16 +243,15 @@ module Google
           databases.update_database_ddl request, opts
         end
 
-        def get_database_policy instance_id, database_id,
-                                timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def get_database_policy instance_id, database_id, call_options: nil
+          opts = default_options call_options: call_options
           request = { resource: database_path(instance_id, database_id) }
           databases.get_iam_policy request, opts
         end
 
         def set_database_policy instance_id, database_id, new_policy,
-                                timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+                                call_options: nil
+          opts = default_options call_options: call_options
           request = {
             resource: database_path(instance_id, database_id),
             policy:   new_policy
@@ -269,8 +260,8 @@ module Google
         end
 
         def test_database_permissions instance_id, database_id, permissions,
-                                      timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+                                      call_options: nil
+          opts = default_options call_options: call_options
           request = {
             resource:    database_path(instance_id, database_id),
             permissions: permissions
@@ -278,18 +269,16 @@ module Google
           databases.test_iam_permissions request, opts
         end
 
-        def get_session session_name, timeout: nil, retry_policy: nil
+        def get_session session_name, call_options: nil
           opts = default_options session_name: session_name,
-                                 timeout: timeout,
-                                 retry_policy: retry_policy
+                                 call_options: call_options
           service.get_session({ name: session_name }, opts)
         end
 
         def create_session database_name, labels: nil,
-                           timeout: nil, retry_policy: nil
+                           call_options: nil
           opts = default_options session_name: database_name,
-                                 timeout: timeout,
-                                 retry_policy: retry_policy
+                                 call_options: call_options
           session = V1::Session.new labels: labels if labels
           service.create_session(
             { database: database_name, session: session }, opts
@@ -297,10 +286,9 @@ module Google
         end
 
         def batch_create_sessions database_name, session_count, labels: nil,
-                                  timeout: nil, retry_policy: nil
+                                  call_options: nil
           opts = default_options session_name: database_name,
-                                 timeout: timeout,
-                                 retry_policy: retry_policy
+                                 call_options: call_options
           session = V1::Session.new labels: labels if labels
           # The response may have fewer sessions than requested in the RPC.
           request = {
@@ -311,21 +299,18 @@ module Google
           service.batch_create_sessions request, opts
         end
 
-        def delete_session session_name, timeout: nil, retry_policy: nil
+        def delete_session session_name, call_options: nil
           opts = default_options session_name: session_name,
-                                 timeout: timeout,
-                                 retry_policy: retry_policy
+                                 call_options: call_options
           service.delete_session({ name: session_name }, opts)
         end
 
         def execute_streaming_sql session_name, sql, transaction: nil,
                                   params: nil, types: nil, resume_token: nil,
                                   partition_token: nil, seqno: nil,
-                                  query_options: nil, timeout: nil,
-                                  retry_policy: nil
+                                  query_options: nil, call_options: nil
           opts = default_options session_name: session_name,
-                                 timeout: timeout,
-                                 retry_policy: retry_policy
+                                 call_options: call_options
           request =  {
             session: session_name,
             sql: sql,
@@ -341,10 +326,9 @@ module Google
         end
 
         def execute_batch_dml session_name, transaction, statements, seqno,
-                              timeout: nil, retry_policy: nil
+                              call_options: nil
           opts = default_options session_name: session_name,
-                                 timeout: timeout,
-                                 retry_policy: retry_policy
+                                 call_options: call_options
           statements = statements.map(&:to_grpc)
           request = {
             session: session_name,
@@ -368,10 +352,9 @@ module Google
         def streaming_read_table session_name, table_name, columns, keys: nil,
                                  index: nil, transaction: nil, limit: nil,
                                  resume_token: nil, partition_token: nil,
-                                 timeout: nil, retry_policy: nil
+                                 call_options: nil
           opts = default_options session_name: session_name,
-                                 timeout: timeout,
-                                 retry_policy: retry_policy
+                                 call_options: call_options
           request = {
             session: session_name, table: table_name, columns: columns,
             key_set: keys, transaction: transaction, index: index,
@@ -383,13 +366,12 @@ module Google
 
         def partition_read session_name, table_name, columns, transaction,
                            keys: nil, index: nil, partition_size_bytes: nil,
-                           max_partitions: nil, timeout: nil, retry_policy: nil
+                           max_partitions: nil, call_options: nil
           partition_opts = partition_options partition_size_bytes,
                                              max_partitions
 
           opts = default_options session_name: session_name,
-                                 timeout: timeout,
-                                 retry_policy: retry_policy
+                                 call_options: call_options
           request = {
             session: session_name, table: table_name, key_set: keys,
             transaction: transaction, index: index, columns: columns,
@@ -400,13 +382,12 @@ module Google
 
         def partition_query session_name, sql, transaction, params: nil,
                             types: nil, partition_size_bytes: nil,
-                            max_partitions: nil, timeout: nil, retry_policy: nil
+                            max_partitions: nil, call_options: nil
           partition_opts = partition_options partition_size_bytes,
                                              max_partitions
 
           opts = default_options session_name: session_name,
-                                 timeout: timeout,
-                                 retry_policy: retry_policy
+                                 call_options: call_options
           request = {
             session: session_name, sql: sql, transaction: transaction,
             params: params, param_types: types,
@@ -416,7 +397,7 @@ module Google
         end
 
         def commit session_name, mutations = [], transaction_id: nil,
-                   timeout: nil, retry_policy: nil
+                   call_options: nil
           tx_opts = nil
           if transaction_id.nil?
             tx_opts = V1::TransactionOptions.new(
@@ -424,8 +405,7 @@ module Google
             )
           end
           opts = default_options session_name: session_name,
-                                 timeout: timeout,
-                                 retry_policy: retry_policy
+                                 call_options: call_options
           request = {
             session: session_name, transaction_id: transaction_id,
             single_use_transaction: tx_opts, mutations: mutations
@@ -433,28 +413,25 @@ module Google
           service.commit request, opts
         end
 
-        def rollback session_name, transaction_id, timeout: nil,
-                     retry_policy: nil
+        def rollback session_name, transaction_id, call_options: nil
           opts = default_options session_name: session_name,
-                                 timeout: timeout,
-                                 retry_policy: retry_policy
+                                 call_options: call_options
           request = { session: session_name, transaction_id: transaction_id }
           service.rollback request, opts
         end
 
-        def begin_transaction session_name, timeout: nil, retry_policy: nil
+        def begin_transaction session_name, call_options: nil
           tx_opts = V1::TransactionOptions.new(
             read_write: V1::TransactionOptions::ReadWrite.new
           )
           opts = default_options session_name: session_name,
-                                 timeout: timeout,
-                                 retry_policy: retry_policy
+                                 call_options: call_options
           request = { session: session_name, options: tx_opts }
           service.begin_transaction request, opts
         end
 
         def create_snapshot session_name, strong: nil, timestamp: nil,
-                            staleness: nil, timeout: nil, retry_policy: nil
+                            staleness: nil, call_options: nil
           tx_opts = V1::TransactionOptions.new(
             read_only: V1::TransactionOptions::ReadOnly.new(
               {
@@ -466,26 +443,24 @@ module Google
             )
           )
           opts = default_options session_name: session_name,
-                                 timeout: timeout,
-                                 retry_policy: retry_policy
+                                 call_options: call_options
           request = { session: session_name, options: tx_opts }
           service.begin_transaction request, opts
         end
 
-        def create_pdml session_name, timeout: nil, retry_policy: nil
+        def create_pdml session_name, call_options: nil
           tx_opts = V1::TransactionOptions.new(
             partitioned_dml: V1::TransactionOptions::PartitionedDml.new
           )
           opts = default_options session_name: session_name,
-                                 timeout: timeout,
-                                 retry_policy: retry_policy
+                                 call_options: call_options
           request = { session: session_name, options: tx_opts }
           service.begin_transaction request, opts
         end
 
         def create_backup instance_id, database_id, backup_id, expire_time,
-                          timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+                          call_options: nil
+          opts = default_options call_options: call_options
           backup = {
             database: database_path(instance_id, database_id),
             expire_time: expire_time
@@ -498,29 +473,28 @@ module Google
           databases.create_backup request, opts
         end
 
-        def get_backup instance_id, backup_id, timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def get_backup instance_id, backup_id, call_options: nil
+          opts = default_options call_options: call_options
           request = { name: backup_path(instance_id, backup_id) }
           databases.get_backup request, opts
         end
 
-        def update_backup backup, update_mask, timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def update_backup backup, update_mask, call_options: nil
+          opts = default_options call_options: call_options
           request = { backup: backup, update_mask: update_mask }
           databases.update_backup request, opts
         end
 
-        def delete_backup instance_id, backup_id,
-                          timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+        def delete_backup instance_id, backup_id, call_options: nil
+          opts = default_options call_options: call_options
           request = { name: backup_path(instance_id, backup_id) }
           databases.delete_backup request, opts
         end
 
         def list_backups instance_id,
                          filter: nil, page_size: nil, page_token: nil,
-                         timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+                         call_options: nil
+          opts = default_options call_options: call_options
           request = {
             parent:    instance_path(instance_id),
             filter:    filter,
@@ -534,8 +508,8 @@ module Google
                                      filter: nil,
                                      page_size: nil,
                                      page_token: nil,
-                                     timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+                                     call_options: nil
+          opts = default_options call_options: call_options
           request = {
             parent:     instance_path(instance_id),
             filter:     filter,
@@ -548,8 +522,8 @@ module Google
         def list_backup_operations instance_id,
                                    filter: nil, page_size: nil,
                                    page_token: nil,
-                                   timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+                                   call_options: nil
+          opts = default_options call_options: call_options
           request = {
             parent:     instance_path(instance_id),
             filter:     filter,
@@ -561,8 +535,8 @@ module Google
 
         def restore_database backup_instance_id, backup_id,
                              database_instance_id, database_id,
-                             timeout: nil, retry_policy: nil
-          opts = default_options timeout: timeout, retry_policy: retry_policy
+                             call_options: nil
+          opts = default_options call_options: call_options
           request = {
             parent:      instance_path(database_instance_id),
             database_id: database_id,
@@ -585,14 +559,16 @@ module Google
           value << " gccl"
         end
 
-        def default_options session_name: nil, timeout: nil, retry_policy: nil
+        def default_options session_name: nil, call_options: nil
           opts = {}
           unless session_name.nil?
             default_prefix = session_name.split("/sessions/").first
             opts[:metadata] = { "google-cloud-resource-prefix" => default_prefix }
           end
-          opts[:timeout] = timeout unless timeout.nil?
-          opts[:retry_policy] = retry_policy unless retry_policy.nil?
+          unless call_options.nil?
+            opts[:timeout] = call_options[:timeout] unless call_options[:timeout].nil?
+            opts[:retry_policy] = call_options[:retry_policy] unless call_options[:retry_policy].nil?
+          end
           opts = nil if opts.empty?
           opts
         end

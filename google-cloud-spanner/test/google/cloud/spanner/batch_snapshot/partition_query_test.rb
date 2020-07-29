@@ -416,13 +416,14 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
       retry_codes:   ["UNAVAILABLE"]
     }
     expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
 
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users"
     mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: nil, param_types: nil, partition_options: nil }, expect_options]
     batch_snapshot.session.service.mocked_service = mock
 
-    partitions = batch_snapshot.partition_query sql, timeout: timeout, retry_policy: retry_policy
+    partitions = batch_snapshot.partition_query sql, call_options: call_options
 
     mock.verify
 

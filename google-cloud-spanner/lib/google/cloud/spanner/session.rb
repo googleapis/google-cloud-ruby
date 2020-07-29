@@ -277,7 +277,7 @@ module Google
         #
         def execute_query sql, params: nil, types: nil, transaction: nil,
                           partition_token: nil, seqno: nil, query_options: nil,
-                          timeout: nil, retry_policy: nil
+                          call_options: nil
           ensure_service!
           if query_options.nil?
             query_options = @query_options
@@ -291,8 +291,7 @@ module Google
                                           partition_token: partition_token,
                                           seqno: seqno,
                                           query_options: query_options,
-                                          timeout: timeout,
-                                          retry_policy: retry_policy
+                                          call_options: call_options
           @last_updated_at = Time.now
           results
         end
@@ -319,7 +318,7 @@ module Google
         # @return [Array<Integer>] A list with the exact number of rows that
         #   were modified for each DML statement.
         #
-        def batch_update transaction, seqno, timeout: nil, retry_policy: nil
+        def batch_update transaction, seqno, call_options: nil
           ensure_service!
 
           raise ArgumentError, "block is required" unless block_given?
@@ -329,8 +328,7 @@ module Google
 
           results = service.execute_batch_dml path, transaction,
                                               batch.statements, seqno,
-                                              timeout: timeout,
-                                              retry_policy: retry_policy
+                                              call_options: call_options
           @last_updated_at = Time.now
           results
         end
@@ -372,29 +370,28 @@ module Google
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil,
-                 transaction: nil, partition_token: nil, timeout: nil,
-                 retry_policy: nil
+                 transaction: nil, partition_token: nil, call_options: nil
           ensure_service!
 
           results = Results.read service, path, table, columns,
                                  keys: keys, index: index, limit: limit,
                                  transaction: transaction,
                                  partition_token: partition_token,
-                                 timeout: timeout, retry_policy: retry_policy
+                                 call_options: call_options
           @last_updated_at = Time.now
           results
         end
 
         def partition_query sql, transaction, params: nil, types: nil,
                             partition_size_bytes: nil, max_partitions: nil,
-                            timeout: nil, retry_policy: nil
+                            call_options: nil
           ensure_service!
 
           results = service.partition_query \
             path, sql, transaction, params: params, types: types,
                                     partition_size_bytes: partition_size_bytes,
                                     max_partitions: max_partitions,
-                                    timeout: timeout, retry_policy: retry_policy
+                                    call_options: call_options
 
           @last_updated_at = Time.now
 
@@ -403,7 +400,7 @@ module Google
 
         def partition_read table, columns, transaction, keys: nil,
                            index: nil, partition_size_bytes: nil,
-                           max_partitions: nil, timeout: nil, retry_policy: nil
+                           max_partitions: nil, call_options: nil
           ensure_service!
 
           results = service.partition_read \
@@ -411,7 +408,7 @@ module Google
             keys: keys, index: index,
             partition_size_bytes: partition_size_bytes,
             max_partitions: max_partitions,
-            timeout: timeout, retry_policy: retry_policy
+            call_options: call_options
 
           @last_updated_at = Time.now
 
@@ -441,14 +438,13 @@ module Google
         #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
         #   end
         #
-        def commit transaction_id: nil, timeout: nil, retry_policy: nil
+        def commit transaction_id: nil, call_options: nil
           ensure_service!
           commit = Commit.new
           yield commit
           commit_resp = service.commit path, commit.mutations,
                                        transaction_id: transaction_id,
-                                       timeout: timeout,
-                                       retry_policy: retry_policy
+                                       call_options: call_options
           @last_updated_at = Time.now
           Convert.timestamp_to_time commit_resp.commit_timestamp
         end
@@ -492,13 +488,8 @@ module Google
         #   db.upsert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def upsert table, *rows, transaction_id: nil, timeout: nil,
-                   retry_policy: nil
-          opts = {
-            transaction_id: transaction_id,
-            timeout: timeout,
-            retry_policy: retry_policy
-          }
+        def upsert table, *rows, transaction_id: nil, call_options: nil
+          opts = { transaction_id: transaction_id, call_options: call_options }
           commit opts do |c|
             c.upsert table, rows
           end
@@ -543,9 +534,8 @@ module Google
         #   db.insert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def insert table, *rows, transaction_id: nil, timeout: nil, retry_policy: nil
-          opts = { transaction_id: transaction_id, timeout: timeout,
-            retry_policy: retry_policy }
+        def insert table, *rows, transaction_id: nil, call_options: nil
+          opts = { transaction_id: transaction_id, call_options: call_options }
           commit opts do |c|
             c.insert table, rows
           end
@@ -589,10 +579,8 @@ module Google
         #   db.update "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def update table, *rows, transaction_id: nil, timeout: nil,
-                   retry_policy: nil
-          opts = { transaction_id: transaction_id, timeout: timeout,
-            retry_policy: retry_policy }
+        def update table, *rows, transaction_id: nil, call_options: nil
+          opts = { transaction_id: transaction_id, call_options: call_options }
           commit opts do |c|
             c.update table, rows
           end
@@ -638,10 +626,8 @@ module Google
         #   db.replace "users", [{ id: 1, name: "Charlie", active: false },
         #                        { id: 2, name: "Harvey",  active: true }]
         #
-        def replace table, *rows, transaction_id: nil, timeout: nil,
-                    retry_policy: nil
-          opts = { transaction_id: transaction_id, timeout: timeout,
-            retry_policy: retry_policy }
+        def replace table, *rows, transaction_id: nil, call_options: nil
+          opts = { transaction_id: transaction_id, call_options: call_options }
           commit opts do |c|
             c.replace table, rows
           end
@@ -668,10 +654,8 @@ module Google
         #
         #   db.delete "users", [1, 2, 3]
         #
-        def delete table, keys = [], transaction_id: nil, timeout: nil,
-                   retry_policy: nil
-          opts = { transaction_id: transaction_id, timeout: timeout,
-            retry_policy: retry_policy }
+        def delete table, keys = [], transaction_id: nil, call_options: nil
+          opts = { transaction_id: transaction_id, call_options: call_options }
           commit opts do |c|
             c.delete table, keys
           end

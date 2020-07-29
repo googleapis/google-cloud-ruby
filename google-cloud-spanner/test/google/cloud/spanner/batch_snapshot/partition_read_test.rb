@@ -178,6 +178,7 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_read, :mock_spanner d
       retry_codes:   ["UNAVAILABLE"]
     }
     expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
 
     mock = Minitest::Mock.new
     key_set = Google::Cloud::Spanner::V1::KeySet.new(all: true)
@@ -187,7 +188,7 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_read, :mock_spanner d
     }, expect_options]
     batch_snapshot.session.service.mocked_service = mock
 
-    partitions = batch_snapshot.partition_read "my-table", columns, timeout: timeout, retry_policy: retry_policy
+    partitions = batch_snapshot.partition_read "my-table", columns, call_options: call_options
 
     mock.verify
 

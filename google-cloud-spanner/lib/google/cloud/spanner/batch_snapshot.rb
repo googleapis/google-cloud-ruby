@@ -196,7 +196,7 @@ module Google
         #
         def partition_query sql, params: nil, types: nil,
                             partition_size_bytes: nil, max_partitions: nil,
-                            query_options: nil, timeout: nil, retry_policy: nil
+                            query_options: nil, call_options: nil
           ensure_session!
 
           params, types = Convert.to_input_params_and_types params, types
@@ -204,8 +204,8 @@ module Google
           results = session.partition_query \
             sql, tx_selector, params: params, types: types,
                               partition_size_bytes: partition_size_bytes,
-                              max_partitions: max_partitions, timeout: timeout,
-                              retry_policy: retry_policy
+                              max_partitions: max_partitions,
+                              call_options: call_options
           results.partitions.map do |grpc|
             # Convert partition protos to execute sql request protos
             execute_sql_grpc = V1::ExecuteSqlRequest.new(
@@ -270,7 +270,7 @@ module Google
         #
         def partition_read table, columns, keys: nil, index: nil,
                            partition_size_bytes: nil, max_partitions: nil,
-                           timeout: nil, retry_policy: nil
+                           call_options: nil
           ensure_session!
 
           columns = Array(columns).map(&:to_s)
@@ -281,7 +281,7 @@ module Google
             keys: keys, index: index,
             partition_size_bytes: partition_size_bytes,
             max_partitions: max_partitions,
-            timeout: timeout, retry_policy: retry_policy
+            call_options: call_options
 
           results.partitions.map do |grpc|
             # Convert partition protos to read request protos
@@ -323,7 +323,7 @@ module Google
         #
         #   batch_snapshot.close
         #
-        def execute_partition partition, timeout: nil, retry_policy: nil
+        def execute_partition partition, call_options: nil
           ensure_session!
 
           partition = Partition.load partition unless partition.is_a? Partition
@@ -332,7 +332,7 @@ module Google
           # TODO: raise if session.path != partition.session
           # TODO: raise if grpc.transaction != partition.transaction
 
-          opts = { timeout: timeout, retry_policy: retry_policy }
+          opts = { call_options: call_options }
           if partition.execute?
             execute_partition_query partition, opts
           elsif partition.read?
@@ -554,15 +554,15 @@ module Google
         #   end
         #
         def execute_query sql, params: nil, types: nil, query_options: nil,
-                          timeout: nil, retry_policy: nil
+                          call_options: nil
           ensure_session!
 
           params, types = Convert.to_input_params_and_types params, types
 
           session.execute_query sql, params: params, types: types,
                                 transaction: tx_selector,
-                                query_options: query_options, timeout: timeout,
-                                retry_policy: retry_policy
+                                query_options: query_options,
+                                call_options: call_options
         end
         alias execute execute_query
         alias query execute_query
@@ -602,7 +602,7 @@ module Google
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil,
-                 timeout: nil, retry_policy: nil
+                 call_options: nil
           ensure_session!
 
           columns = Array(columns).map(&:to_s)
@@ -610,8 +610,7 @@ module Google
 
           session.read table, columns, keys: keys, index: index, limit: limit,
                                        transaction: tx_selector,
-                                       timeout: timeout,
-                                       retry_policy: retry_policy
+                                       call_options: call_options
         end
 
         ##
@@ -699,7 +698,7 @@ module Google
           raise "Must have active connection to service" unless session
         end
 
-        def execute_partition_query partition, timeout: nil, retry_policy: nil
+        def execute_partition_query partition, call_options: nil
           query_options = partition.execute.query_options
           query_options = query_options.to_h unless query_options.nil?
           session.execute_query \
@@ -709,19 +708,17 @@ module Google
             transaction: partition.execute.transaction,
             partition_token: partition.execute.partition_token,
             query_options: query_options,
-            timeout: timeout,
-            retry_policy: retry_policy
+            call_options: call_options
         end
 
-        def execute_partition_read partition, timeout: nil, retry_policy: nil
+        def execute_partition_read partition, call_options: nil
           session.read partition.read.table,
                        partition.read.columns.to_a,
                        keys: partition.read.key_set,
                        index: partition.read.index,
                        transaction: partition.read.transaction,
                        partition_token: partition.read.partition_token,
-                       timeout: timeout,
-                       retry_policy: retry_policy
+                       call_options: call_options
         end
       end
     end

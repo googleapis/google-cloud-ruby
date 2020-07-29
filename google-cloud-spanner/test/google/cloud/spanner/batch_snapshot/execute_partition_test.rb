@@ -350,12 +350,13 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
       retry_codes:   ["UNAVAILABLE"]
     }
     expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
 
     mock = Minitest::Mock.new
     batch_snapshot.session.service.mocked_service = mock
     expect_execute_streaming_sql results_enum, session.path, sql, transaction: tx_selector, param_types: {}, partition_token: partition_token, options: expect_options
 
-    results = batch_snapshot.execute_partition partition(sql: sql), timeout: timeout, retry_policy: retry_policy
+    results = batch_snapshot.execute_partition partition(sql: sql), call_options: call_options
 
     mock.verify
 
@@ -371,6 +372,7 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
       retry_codes:   ["UNAVAILABLE"]
     }
     expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
 
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
@@ -383,7 +385,7 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
     }, expect_options]
     batch_snapshot.session.service.mocked_service = mock
 
-    results = batch_snapshot.execute_partition partition(table: "my-table", columns: columns), timeout: timeout, retry_policy: retry_policy
+    results = batch_snapshot.execute_partition partition(table: "my-table", columns: columns), call_options: call_options
 
     mock.verify
 

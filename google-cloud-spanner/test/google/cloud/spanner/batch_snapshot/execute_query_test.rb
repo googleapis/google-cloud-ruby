@@ -306,12 +306,13 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_query, :mock_spanner do
       retry_codes:   ["UNAVAILABLE"]
     }
     expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
 
     mock = Minitest::Mock.new
     batch_snapshot.session.service.mocked_service = mock
     expect_execute_streaming_sql results_enum, session.path, "SELECT * FROM users", transaction: tx_selector, options: expect_options
 
-    results = batch_snapshot.execute_query "SELECT * FROM users", timeout: timeout, retry_policy: retry_policy
+    results = batch_snapshot.execute_query "SELECT * FROM users", call_options: call_options
 
     mock.verify
 
