@@ -45,8 +45,8 @@ module Google
         #     must not start with `"goog"`.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
-        #     managing labels</a>.
+        #     See [Creating and managing labels]
+        #     (https://cloud.google.com/pubsub/docs/labels).
         # @!attribute [rw] message_storage_policy
         #   @return [::Google::Cloud::PubSub::V1::MessageStoragePolicy]
         #     Policy constraining the set of Google Cloud Platform regions where messages
@@ -75,11 +75,11 @@ module Google
         # A message that is published by publishers and consumed by subscribers. The
         # message must contain either a non-empty data field or at least one attribute.
         # Note that client libraries represent this object differently
-        # depending on the language. See the corresponding
-        # <a href="https://cloud.google.com/pubsub/docs/reference/libraries">client
-        # library documentation</a> for more information. See
-        # <a href="https://cloud.google.com/pubsub/quotas">Quotas and limits</a>
-        # for more information about message limits.
+        # depending on the language. See the corresponding [client library
+        # documentation](https://cloud.google.com/pubsub/docs/reference/libraries) for
+        # more information. See [quotas and limits]
+        # (https://cloud.google.com/pubsub/quotas) for more information about message
+        # limits.
         # @!attribute [rw] data
         #   @return [::String]
         #     The message data field. If this field is empty, the message must contain
@@ -108,9 +108,6 @@ module Google
         #     delivered to subscribers in the order in which they are received by the
         #     Pub/Sub system. All `PubsubMessage`s published in a given `PublishRequest`
         #     must specify the same `ordering_key` value.
-        #     <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
-        #     API might be changed in backward-incompatible ways and is not recommended
-        #     for production use. It is not subject to any SLA or deprecation policy.
         class PubsubMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -343,10 +340,8 @@ module Google
         #     Indicates whether to retain acknowledged messages. If true, then
         #     messages are not expunged from the subscription's backlog, even if they are
         #     acknowledged, until they fall out of the `message_retention_duration`
-        #     window. This must be true if you would like to
-        #     <a
-        #     href="https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time">
-        #     Seek to a timestamp</a>.
+        #     window. This must be true if you would like to [Seek to a timestamp]
+        #     (https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time).
         # @!attribute [rw] message_retention_duration
         #   @return [::Google::Protobuf::Duration]
         #     How long to retain unacknowledged messages in the subscription's backlog,
@@ -365,9 +360,6 @@ module Google
         #     will be delivered to the subscribers in the order in which they
         #     are received by the Pub/Sub system. Otherwise, they may be delivered in
         #     any order.
-        #     <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
-        #     API might be changed in backward-incompatible ways and is not recommended
-        #     for production use. It is not subject to any SLA or deprecation policy.
         # @!attribute [rw] expiration_policy
         #   @return [::Google::Cloud::PubSub::V1::ExpirationPolicy]
         #     A policy that specifies the conditions for this subscription's expiration.
@@ -893,11 +885,10 @@ module Google
         end
 
         # A snapshot resource. Snapshots are used in
-        # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
-        # operations, which allow
-        # you to manage message acknowledgments in bulk. That is, you can set the
-        # acknowledgment state of messages in an existing subscription to the state
-        # captured by a snapshot.
+        # [Seek](https://cloud.google.com/pubsub/docs/replay-overview)
+        # operations, which allow you to manage message acknowledgments in bulk. That
+        # is, you can set the acknowledgment state of messages in an existing
+        # subscription to the state captured by a snapshot.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the snapshot.
@@ -918,8 +909,8 @@ module Google
         #     snapshot that would expire in less than 1 hour after creation.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
-        #     managing labels</a>.
+        #     See [Creating and managing labels]
+        #     (https://cloud.google.com/pubsub/docs/labels).
         class Snapshot
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

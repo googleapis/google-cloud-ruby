@@ -218,9 +218,8 @@ module Google
             # Service calls
 
             ##
-            # Creates the given topic with the given name. See the
-            # <a href="https://cloud.google.com/pubsub/docs/admin#resource_names">
-            # resource name rules</a>.
+            # Creates the given topic with the given name. See the [resource name rules](
+            # https://cloud.google.com/pubsub/docs/admin#resource_names).
             #
             # @overload create_topic(request, options = nil)
             #   Pass arguments to `create_topic` via a request object, either of type
@@ -245,8 +244,8 @@ module Google
             #     signs (`%`). It must be between 3 and 255 characters in length, and it
             #     must not start with `"goog"`.
             #   @param labels [::Hash{::String => ::String}]
-            #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
-            #     managing labels</a>.
+            #     See [Creating and managing labels]
+            #     (https://cloud.google.com/pubsub/docs/labels).
             #   @param message_storage_policy [::Google::Cloud::PubSub::V1::MessageStoragePolicy, ::Hash]
             #     Policy constraining the set of Google Cloud Platform regions where messages
             #     published to the topic may be stored. If not present, then no constraints
@@ -661,11 +660,10 @@ module Google
 
             ##
             # Lists the names of the snapshots on this topic. Snapshots are used in
-            # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
-            # operations, which allow
-            # you to manage message acknowledgments in bulk. That is, you can set the
-            # acknowledgment state of messages in an existing subscription to the state
-            # captured by a snapshot.
+            # [Seek](https://cloud.google.com/pubsub/docs/replay-overview) operations,
+            # which allow you to manage message acknowledgments in bulk. That is, you can
+            # set the acknowledgment state of messages in an existing subscription to the
+            # state captured by a snapshot.
             #
             # @overload list_topic_snapshots(request, options = nil)
             #   Pass arguments to `list_topic_snapshots` via a request object, either of type
