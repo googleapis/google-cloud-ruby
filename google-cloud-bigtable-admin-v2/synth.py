@@ -27,8 +27,7 @@ library = gapic.ruby_library(
     "bigtable/admin", "v2",
     proto_path="google/bigtable/admin/v2",
     extra_proto_files=[
-        "google/cloud/common_resources.proto",
-        "google/iam/v1/iam_policy.proto"
+        "google/cloud/common_resources.proto"
     ],
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-bigtable-admin-v2",
@@ -36,7 +35,6 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Cloud Bigtable is a fully managed, scalable NoSQL database service for large analytical and operational workloads.",
         "ruby-cloud-env-prefix": "BIGTABLE",
         "ruby-cloud-grpc-service-config": "google/bigtable/admin/v2/bigtableadmin_grpc_service_config.json",
-        "ruby-cloud-common-services": "google.iam.v1.IAMPolicy=google.bigtable.admin.v2.BigtableInstanceAdmin",
         "ruby-cloud-product-url": "https://cloud.google.com/bigtable",
         "ruby-cloud-api-id": "bigtable.googleapis.com",
         "ruby-cloud-api-shortname": "bigtable",
