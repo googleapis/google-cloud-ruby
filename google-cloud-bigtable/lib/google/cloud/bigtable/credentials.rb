@@ -31,11 +31,11 @@ module Google
       #   creds = Google::Cloud::Bigtable::Credentials.new keyfile
       #
       #   bigtable = Google::Cloud::Bigtable.new(
-      #     project_id: "my-todo-project",
+      #     project_id: "my-project",
       #     credentials: creds
       #   )
       #
-      #   bigtable.project_id #=> "my-todo-project"
+      #   bigtable.project_id #=> "my-project"
       #
       class Credentials < Google::Cloud::Bigtable::V2::Bigtable::Credentials
         self.scope = [
