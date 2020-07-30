@@ -5,13 +5,6 @@ AllCops:
   Exclude:
     - "benchmark/**/*"
     - "google-cloud-firestore.gemspec"
-    - "lib/google/firestore/v1*/**/*"
-    - "lib/google/firestore/admin/v1*/**/*"
-    - "lib/google/cloud/firestore/v1*/**/*"
-    - "lib/google/cloud/firestore/admin/v1*/**/*"
-    - "lib/google/cloud/firestore/v1*.rb"
-    - "lib/google/cloud/firestore/admin.rb"
-    - "lib/google/cloud/firestore/admin/v1*.rb"
     - "support/**/*"
     - "Rakefile"
     - "acceptance/**/*"
