@@ -75,7 +75,7 @@ module Google
         #     Required. The Directed Acyclic Graph of Jobs to submit.
         # @!attribute [rw] parameters
         #   @return [::Array<::Google::Cloud::Dataproc::V1::TemplateParameter>]
-        #     Optional. emplate parameters whose values are substituted into the
+        #     Optional. Template parameters whose values are substituted into the
         #     template. Values for parameters must be provided when the template is
         #     instantiated.
         class WorkflowTemplate
@@ -189,22 +189,28 @@ module Google
         #     or hyphen. Must consist of between 3 and 50 characters.
         # @!attribute [rw] hadoop_job
         #   @return [::Google::Cloud::Dataproc::V1::HadoopJob]
+        #     Optional. Job is a Hadoop job.
         # @!attribute [rw] spark_job
         #   @return [::Google::Cloud::Dataproc::V1::SparkJob]
+        #     Optional. Job is a Spark job.
         # @!attribute [rw] pyspark_job
         #   @return [::Google::Cloud::Dataproc::V1::PySparkJob]
+        #     Optional. Job is a PySpark job.
         # @!attribute [rw] hive_job
         #   @return [::Google::Cloud::Dataproc::V1::HiveJob]
+        #     Optional. Job is a Hive job.
         # @!attribute [rw] pig_job
         #   @return [::Google::Cloud::Dataproc::V1::PigJob]
+        #     Optional. Job is a Pig job.
         # @!attribute [rw] spark_r_job
         #   @return [::Google::Cloud::Dataproc::V1::SparkRJob]
-        #     Spark R job
+        #     Optional. Job is a SparkR job.
         # @!attribute [rw] spark_sql_job
         #   @return [::Google::Cloud::Dataproc::V1::SparkSqlJob]
+        #     Optional. Job is a SparkSql job.
         # @!attribute [rw] presto_job
         #   @return [::Google::Cloud::Dataproc::V1::PrestoJob]
-        #     Presto job
+        #     Optional. Job is a Presto job.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels to associate with this job.
