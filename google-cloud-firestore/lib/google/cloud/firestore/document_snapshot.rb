@@ -62,7 +62,7 @@ module Google
       #
       class DocumentSnapshot
         ##
-        # @private The Google::Firestore::V1::Document object.
+        # @private The Google::Cloud::Firestore::V1::Document object.
         attr_accessor :grpc
 
         ##
@@ -345,7 +345,7 @@ module Google
 
         ##
         # @private New DocumentSnapshot from a
-        # Google::Firestore::V1::RunQueryResponse object.
+        # Google::Cloud::Firestore::V1::RunQueryResponse object.
         def self.from_query_result result, client
           ref = DocumentReference.from_path result.document.name, client
           read_at = Convert.timestamp_to_time result.read_time
@@ -359,7 +359,7 @@ module Google
 
         ##
         # @private New DocumentSnapshot from a
-        # Google::Firestore::V1::DocumentChange object.
+        # Google::Cloud::Firestore::V1::DocumentChange object.
         def self.from_document document, client, read_at: nil
           ref = DocumentReference.from_path document.name, client
 
@@ -372,7 +372,7 @@ module Google
 
         ##
         # @private New DocumentSnapshot from a
-        # Google::Firestore::V1::BatchGetDocumentsResponse object.
+        # Google::Cloud::Firestore::V1::BatchGetDocumentsResponse object.
         def self.from_batch_result result, client
           ref = nil
           grpc = nil

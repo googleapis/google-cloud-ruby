@@ -167,9 +167,9 @@ module Google
             raise ArgumentError, "Invalid collection_id: '#{collection_id}', " \
               "must not contain '/'."
           end
-          query = Google::Firestore::V1::StructuredQuery.new(
+          query = Google::Cloud::Firestore::V1::StructuredQuery.new(
             from: [
-              Google::Firestore::V1::StructuredQuery::CollectionSelector.new(
+              Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(
                 collection_id: collection_id, all_descendants: true
               )
             ]

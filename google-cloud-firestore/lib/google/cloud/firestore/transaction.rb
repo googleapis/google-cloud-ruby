@@ -700,14 +700,14 @@ module Google
         # @private
         def transaction_opt
           read_write = \
-            Google::Firestore::V1::TransactionOptions::ReadWrite.new
+            Google::Cloud::Firestore::V1::TransactionOptions::ReadWrite.new
 
           if @previous_transaction
             read_write.retry_transaction = @previous_transaction
             @previous_transaction = nil
           end
 
-          Google::Firestore::V1::TransactionOptions.new(
+          Google::Cloud::Firestore::V1::TransactionOptions.new(
             read_write: read_write
           )
         end

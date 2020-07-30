@@ -26,26 +26,15 @@ module Google
       # @private Represents the gRPC Firestore service, including all the API
       # methods.
       class Service
-        attr_accessor :project, :credentials, :timeout, :client_config, :host
+        attr_accessor :project, :credentials, :timeout, :host
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, timeout: nil,
-                       client_config: nil
+        def initialize project, credentials, host: nil, timeout: nil
           @project = project
           @credentials = credentials
-          @host = host || V1::FirestoreClient::SERVICE_ADDRESS
+          @host = host
           @timeout = timeout
-          @client_config = client_config || {}
-        end
-
-        def channel
-          require "grpc"
-          GRPC::Core::Channel.new host, chan_args, chan_creds
-        end
-
-        def chan_args
-          { "grpc.service_config_disable_resolution" => 1 }
         end
 
         def chan_creds
@@ -57,13 +46,14 @@ module Google
 
         def firestore
           @firestore ||= \
-            V1::FirestoreClient.new(
-              credentials:   channel,
-              timeout:       timeout,
-              client_config: client_config,
-              lib_name:      "gccl",
-              lib_version:   Google::Cloud::Firestore::VERSION
-            )
+            V1::Firestore::Client.new do |config|
+              config.credentials = credentials if credentials
+              config.timeout = timeout if timeout
+              config.endpoint = host if host
+              config.lib_name = "gccl"
+              config.lib_version = Google::Cloud::Firestore::VERSION
+              config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
+            end
         end
 
         def insecure?
@@ -97,7 +87,7 @@ module Google
         def list_documents parent, collection_id, token: nil, max: nil
           mask = { field_paths: [] }
           call_options = nil
-          call_options = Google::Gax::CallOptions.new page_token: token if token
+          call_options = Gapic::CallOptions.new page_token: token if token
           execute do
             paged_enum = firestore.list_documents \
               parent, collection_id, mask: mask, show_missing: true,
@@ -195,7 +185,7 @@ module Google
         end
 
         def call_options parent: nil, token: nil
-          Google::Gax::CallOptions.new(**{
+          Gapic::CallOptions.new(**{
             metadata:   default_headers(parent),
             page_token: token
           }.delete_if { |_, v| v.nil? })
@@ -207,16 +197,11 @@ module Google
           mask = Array(mask).map(&:to_s).reject(&:nil?).reject(&:empty?)
           return nil if mask.empty?
 
-          Google::Firestore::V1::DocumentMask.new field_paths: mask
+          Google::Cloud::Firestore::V1::DocumentMask.new field_paths: mask
         end
 
         def execute
           yield
-        rescue Google::Gax::GaxError => e
-          # GaxError wraps BadStatus, but exposes it as #cause
-          raise Google::Cloud::Error.from_error(e.cause)
-        rescue GRPC::BadStatus => e
-          raise Google::Cloud::Error.from_error(e)
         end
       end
     end
