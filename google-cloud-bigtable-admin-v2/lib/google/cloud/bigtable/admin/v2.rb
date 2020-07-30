@@ -18,7 +18,6 @@
 
 require "google/cloud/bigtable/admin/v2/bigtable_instance_admin"
 require "google/cloud/bigtable/admin/v2/bigtable_table_admin"
-require "google/cloud/bigtable/admin/v2/iam_policy"
 require "google/cloud/bigtable/admin/v2/version"
 
 module Google
