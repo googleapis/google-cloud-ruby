@@ -883,7 +883,7 @@ module Google
 
         ##
         # @private
-        StructuredQuery = Google::Firestore::V1::StructuredQuery
+        StructuredQuery = Google::Cloud::Firestore::V1::StructuredQuery
 
         ##
         # @private

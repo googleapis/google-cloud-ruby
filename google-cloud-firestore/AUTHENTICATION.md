@@ -76,7 +76,7 @@ The environment variables that google-cloud-firestore checks for project ID are:
 1. `FIRESTORE_PROJECT`
 2. `GOOGLE_CLOUD_PROJECT`
 
-The environment variables that google-cloud-firestore checks for credentials are configured on {Google::Cloud::Firestore::V1::Credentials}:
+The environment variables that google-cloud-firestore checks for credentials are configured on {Google::Cloud::Firestore::Credentials}:
 
 1. `FIRESTORE_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `FIRESTORE_KEYFILE` - Path to JSON file, or JSON contents
