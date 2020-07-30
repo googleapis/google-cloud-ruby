@@ -222,6 +222,14 @@ module Google
         #   * `:optimizer_version` (String) The version of optimizer to use.
         #     Empty to use database default. "latest" to use the latest
         #     available optimizer version.
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy.
         #
         # @return [Google::Cloud::Spanner::Results] The results of the query
         #   execution.
@@ -330,6 +338,29 @@ module Google
         #
         #   results = db.execute_query \
         #     "SELECT * FROM users", query_options: { optimizer_version: "1" }
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
+        # @example Query using custom timeout and retry policy:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   timeout = 30.0
+        #   retry_policy = {
+        #     initial_delay: 0.25,
+        #     max_delay:     32.0,
+        #     multiplier:    1.3,
+        #     retry_codes:   ["UNAVAILABLE"]
+        #   }
+        #   call_options = { timeout: timeout, retry_policy: retry_policy }
+        #
+        #   results = db.execute_query \
+        #     "SELECT * FROM users", call_options: call_options
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -481,6 +512,14 @@ module Google
         #   * `:optimizer_version` (String) The version of optimizer to use.
         #     Empty to use database default. "latest" to use the latest
         #     available optimizer version.
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy.
         #
         #
         #   The keys of the hash should be query string parameter placeholders,
@@ -529,6 +568,26 @@ module Google
         #   row_count = db.execute_partition_update \
         #    "UPDATE users SET friends = NULL WHERE active = false",
         #    query_options: { optimizer_version: "1" }
+        #
+        # @example Query using custom timeout and retry policy:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   timeout = 30.0
+        #   retry_policy = {
+        #     initial_delay: 0.25,
+        #     max_delay:     32.0,
+        #     multiplier:    1.3,
+        #     retry_codes:   ["UNAVAILABLE"]
+        #   }
+        #   call_options = { timeout: timeout, retry_policy: retry_policy }
+        #
+        #   row_count = db.execute_partition_update \
+        #    "UPDATE users SET friends = NULL WHERE active = false",
+        #    call_options: call_options
+        #
         def execute_partition_update sql, params: nil, types: nil,
                                      query_options: nil, call_options: nil
           ensure_service!
@@ -620,6 +679,14 @@ module Google
         #       Useful for reading the freshest data available at a nearby
         #       replica, while bounding the possible staleness if the local
         #       replica has fallen behind.
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy.
         #
         # @return [Google::Cloud::Spanner::Results] The results of the read.
         #
@@ -644,6 +711,28 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   results = db.read "users", [:id, :name], keys: 1..5
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
+        # @example Read using custom timeout and retry.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   timeout = 30.0
+        #   retry_policy = {
+        #     initial_delay: 0.25,
+        #     max_delay:     32.0,
+        #     multiplier:    1.3,
+        #     retry_codes:   ["UNAVAILABLE"]
+        #   }
+        #   call_options = { timeout: timeout, retry_policy: retry_policy }
+        #
+        #   results = db.read "users", [:id, :name], call_options: call_options
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -912,6 +1001,14 @@ module Google
         # @param [Object, Array<Object>] keys A single, or list of keys or key
         #   ranges to match returned data to. Values should have exactly as many
         #   elements as there are columns in the primary key.
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy.
         #
         # @return [Time] The timestamp at which the operation committed.
         #
@@ -944,6 +1041,15 @@ module Google
         # requires two RPCs (one of which may be performed in advance), and so
         # this method may be appropriate for latency sensitive and/or high
         # throughput blind changes.
+        #
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy.
         #
         # @yield [commit] The block for mutating the data.
         # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.
@@ -989,6 +1095,14 @@ module Google
         #
         # @param [Numeric] deadline The total amount of time in seconds the
         #   transaction has to succeed. The default is `120`.
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy.
         #
         # @yield [transaction] The block for reading and writing data.
         # @yieldparam [Google::Cloud::Spanner::Transaction] transaction The
@@ -1111,6 +1225,14 @@ module Google
         #   timestamp negotiation overhead of single-use `staleness`. (See
         #   [TransactionOptions](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#transactionoptions).)
         # @param [Numeric] exact_staleness Same as `staleness`.
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy.
         #
         # @yield [snapshot] The block for reading and writing data.
         # @yieldparam [Google::Cloud::Spanner::Snapshot] snapshot The Snapshot
@@ -1131,7 +1253,7 @@ module Google
         #   end
         #
         def snapshot strong: nil, timestamp: nil, read_timestamp: nil,
-                     staleness: nil, exact_staleness: nil
+                     staleness: nil, exact_staleness: nil, call_options: nil
           validate_snapshot_args! strong: strong, timestamp: timestamp,
                                   read_timestamp: read_timestamp,
                                   staleness: staleness,
@@ -1147,7 +1269,8 @@ module Google
               snp_grpc = @project.service.create_snapshot \
                 session.path, strong: strong,
                               timestamp: (timestamp || read_timestamp),
-                              staleness: (staleness || exact_staleness)
+                              staleness: (staleness || exact_staleness),
+                              call_options: call_options
               Thread.current[:transaction_id] = snp_grpc.id
               snp = Snapshot.from_grpc snp_grpc, session
               yield snp if block_given?
