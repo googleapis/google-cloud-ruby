@@ -248,7 +248,6 @@ describe "Document", :firestore_acceptance do
   end
 
   it "has collections method" do
-    skip "TODO: undefined method `each' for #<Google::Cloud::Firestore::V1::ListCollectionIdsResponse"
     collections_doc_ref = root_col.add
 
     collections = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]

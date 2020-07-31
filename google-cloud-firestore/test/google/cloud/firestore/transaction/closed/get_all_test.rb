@@ -22,15 +22,15 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :closed, :mock_firesto
   end
 
   let(:read_time) { Time.now }
-  let(:database_path) { "projects/#{project}/databases/(default)" }
-  let(:documents_path) { "#{database_path}/documents" }
+
+
   let :transaction_doc_enum do
     [
-      Google::Firestore::V1::BatchGetDocumentsResponse.new(
+      Google::Cloud::Firestore::V1::BatchGetDocumentsResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        found: Google::Firestore::V1::Document.new(
-          name: "projects/#{project}/databases/(default)/documents/users/mike",
-          fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike") },
+        found: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/#{project}/databases/(default)/documents/users/alice",
+          fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Alice") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         ))
@@ -39,15 +39,15 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :closed, :mock_firesto
 
   it "raises when calling get_all directly" do
     error = expect do
-      transaction.get_all "users/mike", "users/tad", "users/chris"
+      transaction.get_all "users/alice", "users/bob", "users/carol"
     end.must_raise RuntimeError
     _(error.message).must_equal "transaction is closed"
   end
 
   it "gets a single doc from a doc ref object" do
-    firestore_mock.expect :batch_get_documents, transaction_doc_enum, [database_path, documents: ["#{documents_path}/users/mike"], mask: nil, options: default_options]
+    firestore_mock.expect :batch_get_documents, transaction_doc_enum, batch_get_documents_args(documents: ["#{documents_path}/users/alice"])
 
-    doc_ref = firestore.doc("users/mike")
+    doc_ref = firestore.doc("users/alice")
     doc_snp = doc_ref.get
 
     _(doc_snp).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
@@ -58,7 +58,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :closed, :mock_firesto
     _(doc_snp.parent.path).must_equal "projects/projectID/databases/(default)/documents/users"
 
     _(doc_snp.data).must_be_kind_of Hash
-    _(doc_snp.data).must_equal({ name: "Mike" })
+    _(doc_snp.data).must_equal({ name: "Alice" })
     _(doc_snp.created_at).must_equal read_time
     _(doc_snp.updated_at).must_equal read_time
     _(doc_snp.read_at).must_equal read_time

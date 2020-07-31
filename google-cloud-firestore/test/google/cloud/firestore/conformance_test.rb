@@ -29,9 +29,9 @@ require_relative "../../../../conformance/v1/proto/google/cloud/conformance/fire
 class ConformanceTest < MockFirestore
   let(:commit_time) { Time.now }
   let :commit_resp do
-    Google::Firestore::V1::CommitResponse.new(
+    Google::Cloud::Firestore::V1::CommitResponse.new(
       commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-      write_results: [Google::Firestore::V1::WriteResult.new(
+      write_results: [Google::Cloud::Firestore::V1::WriteResult.new(
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
       )
   end
@@ -42,7 +42,7 @@ class ConformanceTest < MockFirestore
 
   def doc_snap_from_path_and_json_data doc_path, json_data
     Google::Cloud::Firestore::DocumentSnapshot.new.tap do |s|
-      s.grpc = Google::Firestore::V1::Document.new(
+      s.grpc = Google::Cloud::Firestore::V1::Document.new(
         name: doc_path,
         fields: Google::Cloud::Firestore::Convert.hash_to_fields(data_from_json(json_data))
       )
@@ -86,7 +86,7 @@ class ConformanceCreate < ConformanceTest
           run_conformance_proto test
         end.must_raise ArgumentError
       else
-        firestore_mock.expect :commit, commit_resp, [test.request.database, writes: test.request.writes, options: default_options]
+        firestore_mock.expect :commit, commit_resp, commit_args(database: test.request.database, writes: test.request.writes)
 
         run_conformance_proto test
       end
@@ -109,7 +109,7 @@ class ConformanceSet < ConformanceTest
           run_conformance_proto test
         end.must_raise ArgumentError
       else
-        firestore_mock.expect :commit, commit_resp, [test.request.database, writes: test.request.writes, options: default_options]
+        firestore_mock.expect :commit, commit_resp, commit_args(database: test.request.database, writes: test.request.writes)
 
         run_conformance_proto test
       end
@@ -143,7 +143,7 @@ class ConformanceUpdate < ConformanceTest
           run_conformance_proto test
         end.must_raise ArgumentError
       else
-        firestore_mock.expect :commit, commit_resp, [test.request.database, writes: test.request.writes, options: default_options]
+        firestore_mock.expect :commit, commit_resp, commit_args(database: test.request.database, writes: test.request.writes)
 
         run_conformance_proto test
       end
@@ -173,7 +173,7 @@ class ConformanceUpdatePaths < ConformanceTest
           run_conformance_proto test
         end.must_raise ArgumentError
       else
-        firestore_mock.expect :commit, commit_resp, [test.request.database, writes: test.request.writes, options: default_options]
+        firestore_mock.expect :commit, commit_resp, commit_args(database: test.request.database, writes: test.request.writes)
 
         run_conformance_proto test
       end
@@ -220,7 +220,7 @@ class ConformanceDelete < ConformanceTest
           doc_ref.delete opts
         end.must_raise ArgumentError
       else
-        firestore_mock.expect :commit, commit_resp, [test.request.database, writes: test.request.writes, options: default_options]
+        firestore_mock.expect :commit, commit_resp, commit_args(database: test.request.database, writes: test.request.writes)
 
         doc_ref.delete opts
       end
@@ -337,7 +337,7 @@ Dir.glob("#{__dir__}/../../../../conformance/v1/*.json").each do |file_path|
   test_file.tests.each do |wrapper|
     case wrapper.test
       when :get
-        next # Google::Firestore::V1::GetDocumentRequest is not used.                                                                  x
+        next # Google::Cloud::Firestore::V1::GetDocumentRequest is not used.                                                                  x
       when :create
         ConformanceCreate.build_test_for wrapper.description, wrapper.create, file_path
       when :set

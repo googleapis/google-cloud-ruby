@@ -16,7 +16,6 @@ require "firestore_helper"
 
 describe "Firestore", :firestore_acceptance do
   it "lists root collections" do
-    skip "TODO: undefined method `each' for #<Google::Cloud::Firestore::V1::ListCollectionIdsResponse"
     root_col.add # call to ensure that the collection exists
     cols = firestore.collections
     _(cols).must_be_kind_of Enumerator

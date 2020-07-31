@@ -22,9 +22,9 @@ describe Google::Cloud::Firestore::Convert, :write_for_delete do
   let(:document_path) { "projects/projectID/databases/(default)/documents/C/d" }
 
   it "delete with exists precondition" do
-    expected_write = Google::Firestore::V1::Write.new(
+    expected_write = Google::Cloud::Firestore::V1::Write.new(
       delete: document_path,
-      current_document: Google::Firestore::V1::Precondition.new(exists: true)
+      current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: true)
     )
 
     actual_write = Google::Cloud::Firestore::Convert.write_for_delete document_path, exists: true
@@ -33,7 +33,7 @@ describe Google::Cloud::Firestore::Convert, :write_for_delete do
   end
 
   it "delete without precondition" do
-    expected_write = Google::Firestore::V1::Write.new(
+    expected_write = Google::Cloud::Firestore::V1::Write.new(
       delete: document_path
     )
 
@@ -45,9 +45,9 @@ describe Google::Cloud::Firestore::Convert, :write_for_delete do
   it "delete with last-update-time precondition" do
     delete_time = Time.now - 42 #42 seconds ago
 
-    expected_write = Google::Firestore::V1::Write.new(
+    expected_write = Google::Cloud::Firestore::V1::Write.new(
       delete: document_path,
-      current_document: Google::Firestore::V1::Precondition.new(
+      current_document: Google::Cloud::Firestore::V1::Precondition.new(
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(delete_time))
     )
 

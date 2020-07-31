@@ -16,16 +16,16 @@ require "helper"
 
 describe Google::Cloud::Firestore::CollectionReference, :add, :mock_firestore do
   let(:collection_id) { "messages" }
-  let(:collection_path) { "users/mike/#{collection_id}" }
+  let(:collection_path) { "users/alice/#{collection_id}" }
   let(:collection) { Google::Cloud::Firestore::CollectionReference.from_path "#{documents_path}/#{collection_path}", firestore }
 
-  let(:database_path) { "projects/#{project}/databases/(default)" }
-  let(:documents_path) { "#{database_path}/documents" }
+
+
   let(:commit_time) { Time.now }
   let :commit_resp do
-    Google::Firestore::V1::CommitResponse.new(
+    Google::Cloud::Firestore::V1::CommitResponse.new(
       commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-      write_results: [Google::Firestore::V1::WriteResult.new(
+      write_results: [Google::Cloud::Firestore::V1::WriteResult.new(
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
       )
   end
@@ -33,15 +33,15 @@ describe Google::Cloud::Firestore::CollectionReference, :add, :mock_firestore do
   it "creates a Document reference with a random id" do
     random_document_id = "helloiamarandomdocid"
 
-    commit_writes = [Google::Firestore::V1::Write.new(
-      update: Google::Firestore::V1::Document.new(
+    commit_writes = [Google::Cloud::Firestore::V1::Write.new(
+      update: Google::Cloud::Firestore::V1::Document.new(
         name: "#{documents_path}/#{collection_path}/#{random_document_id}",
         fields: {}),
-      current_document: Google::Firestore::V1::Precondition.new(
+      current_document: Google::Cloud::Firestore::V1::Precondition.new(
         exists: false)
     )]
 
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: commit_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: commit_writes)
 
     Google::Cloud::Firestore::Generate.stub :unique_id, random_document_id do
       document = collection.add
@@ -61,15 +61,15 @@ describe Google::Cloud::Firestore::CollectionReference, :add, :mock_firestore do
   it "creates a Document reference with a random id and provided data" do
     random_document_id = "helloiamarandomdocid"
 
-    commit_writes = [Google::Firestore::V1::Write.new(
-      update: Google::Firestore::V1::Document.new(
+    commit_writes = [Google::Cloud::Firestore::V1::Write.new(
+      update: Google::Cloud::Firestore::V1::Document.new(
         name: "#{documents_path}/#{collection_path}/#{random_document_id}",
         fields: Google::Cloud::Firestore::Convert.hash_to_fields({ hello: "world" })),
-      current_document: Google::Firestore::V1::Precondition.new(
+      current_document: Google::Cloud::Firestore::V1::Precondition.new(
         exists: false)
     )]
 
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: commit_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: commit_writes)
 
     Google::Cloud::Firestore::Generate.stub :unique_id, random_document_id do
       document = collection.add hello: :world

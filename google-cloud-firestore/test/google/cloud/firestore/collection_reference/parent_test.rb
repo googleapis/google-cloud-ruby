@@ -16,19 +16,19 @@ require "helper"
 
 describe Google::Cloud::Firestore::CollectionReference, :parent, :mock_firestore do
   let(:collection_id) { "messages" }
-  let(:collection_path) { "users/mike/#{collection_id}" }
+  let(:collection_path) { "users/alice/#{collection_id}" }
   let(:collection) { Google::Cloud::Firestore::CollectionReference.from_path "projects/#{project}/databases/(default)/documents/#{collection_path}", firestore }
 
   it "represents a nested collection reference" do
     _(collection).must_be_kind_of Google::Cloud::Firestore::CollectionReference
     _(collection.collection_id).must_equal collection_id
     _(collection.collection_path).must_equal collection_path
-    _(collection.path).must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
+    _(collection.path).must_equal "projects/projectID/databases/(default)/documents/users/alice/messages"
 
     _(collection.parent).must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    _(collection.parent.document_id).must_equal "mike"
-    _(collection.parent.document_path).must_equal "users/mike"
-    _(collection.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/mike"
+    _(collection.parent.document_id).must_equal "alice"
+    _(collection.parent.document_path).must_equal "users/alice"
+    _(collection.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/alice"
   end
 
   it "represents a top-level collection reference" do

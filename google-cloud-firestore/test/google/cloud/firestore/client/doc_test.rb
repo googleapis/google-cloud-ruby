@@ -16,14 +16,14 @@ require "helper"
 
 describe Google::Cloud::Firestore::Client, :doc, :mock_firestore do
   it "produces a Document reference for a document_path" do
-    document_path = "users/mike"
+    document_path = "users/alice"
 
     document = firestore.doc document_path
 
     _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    _(document.document_id).must_equal "mike"
+    _(document.document_id).must_equal "alice"
     _(document.document_path).must_equal document_path
-    _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/mike"
+    _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/alice"
 
     _(document.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
     _(document.parent.collection_id).must_equal "users"
@@ -40,7 +40,7 @@ describe Google::Cloud::Firestore::Client, :doc, :mock_firestore do
 
   it "does not allow a collection_path" do
     error = expect do
-      firestore.doc "users/mike/messages"
+      firestore.doc "users/alice/messages"
     end.must_raise ArgumentError
     _(error.message).must_equal "document_path must refer to a document."
   end

@@ -477,14 +477,12 @@ end
 
 def list_documents_args
   [
-    {
-      parent:        "projects/my-project-id/databases/(default)/documents",
-      collection_id: "cities",
-      mask:          { field_paths: [] },
-      show_missing:  true,
-      page_size:     nil
-    },
-    nil
+    parent:        "projects/my-project-id/databases/(default)/documents",
+    collection_id: "cities",
+    page_size:     nil,
+    page_token:     nil,
+    mask:          { field_paths: [] },
+    show_missing:  true
   ]
 end
 

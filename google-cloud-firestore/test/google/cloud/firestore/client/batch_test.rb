@@ -15,56 +15,56 @@
 require "helper"
 
 describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
-  let(:document_path) { "users/mike" }
+  let(:document_path) { "users/alice" }
 
-  let(:database_path) { "projects/#{project}/databases/(default)" }
-  let(:documents_path) { "#{database_path}/documents" }
+
+
   let(:commit_time) { Time.now }
   let :create_writes do
-    [Google::Firestore::V1::Write.new(
-      update: Google::Firestore::V1::Document.new(
+    [Google::Cloud::Firestore::V1::Write.new(
+      update: Google::Cloud::Firestore::V1::Document.new(
         name: "#{documents_path}/#{document_path}",
-        fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" })),
-      current_document: Google::Firestore::V1::Precondition.new(
+        fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Alice" })),
+      current_document: Google::Cloud::Firestore::V1::Precondition.new(
         exists: false)
     )]
   end
   let :set_writes do
-    [Google::Firestore::V1::Write.new(
-      update: Google::Firestore::V1::Document.new(
+    [Google::Cloud::Firestore::V1::Write.new(
+      update: Google::Cloud::Firestore::V1::Document.new(
         name: "#{documents_path}/#{document_path}",
-        fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" }))
+        fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Alice" }))
     )]
   end
   let :update_writes do
-    [Google::Firestore::V1::Write.new(
-      update: Google::Firestore::V1::Document.new(
+    [Google::Cloud::Firestore::V1::Write.new(
+      update: Google::Cloud::Firestore::V1::Document.new(
         name: "#{documents_path}/#{document_path}",
-        fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" })),
-      update_mask: Google::Firestore::V1::DocumentMask.new(
+        fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Alice" })),
+      update_mask: Google::Cloud::Firestore::V1::DocumentMask.new(
         field_paths: ["name"]
       ),
-      current_document: Google::Firestore::V1::Precondition.new(
+      current_document: Google::Cloud::Firestore::V1::Precondition.new(
         exists: true)
     )]
   end
   let :delete_writes do
-    [Google::Firestore::V1::Write.new(
+    [Google::Cloud::Firestore::V1::Write.new(
       delete: "#{documents_path}/#{document_path}")]
   end
   let :commit_resp do
-    Google::Firestore::V1::CommitResponse.new(
+    Google::Cloud::Firestore::V1::CommitResponse.new(
       commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-      write_results: [Google::Firestore::V1::WriteResult.new(
+      write_results: [Google::Cloud::Firestore::V1::WriteResult.new(
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
       )
   end
 
   it "creates a new document using string path" do
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: create_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: create_writes)
 
     resp = firestore.batch do |b|
-      b.create(document_path, { name: "Mike" })
+      b.create(document_path, { name: "Alice" })
     end
 
     _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
@@ -72,11 +72,11 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "creates a new document using doc ref" do
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: create_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: create_writes)
 
     doc = firestore.doc document_path
     resp = firestore.batch do |b|
-      b.create(doc, { name: "Mike" })
+      b.create(doc, { name: "Alice" })
     end
 
     _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
@@ -93,10 +93,10 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "sets a new document using string path" do
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: set_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: set_writes)
 
     resp = firestore.batch do |b|
-      b.set(document_path, { name: "Mike" })
+      b.set(document_path, { name: "Alice" })
     end
 
     _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
@@ -104,11 +104,11 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "sets a new document using doc ref" do
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: set_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: set_writes)
 
     doc = firestore.doc document_path
     resp = firestore.batch do |b|
-      b.set(doc, { name: "Mike" })
+      b.set(doc, { name: "Alice" })
     end
 
     _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
@@ -125,10 +125,10 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "updates a new document using string path" do
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: update_writes)
 
     resp = firestore.batch do |b|
-      b.update(document_path, { name: "Mike" })
+      b.update(document_path, { name: "Alice" })
     end
 
     _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
@@ -136,11 +136,11 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "updates a new document using doc ref" do
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: update_writes)
 
     doc = firestore.doc document_path
     resp = firestore.batch do |b|
-      b.update(doc, { name: "Mike" })
+      b.update(doc, { name: "Alice" })
     end
 
     _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
@@ -157,7 +157,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "deletes a document using string path" do
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: delete_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: delete_writes)
 
     resp = firestore.batch do |b|
       b.delete document_path
@@ -168,7 +168,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "deletes a document using doc ref" do
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: delete_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: delete_writes)
 
     doc = firestore.doc document_path
     resp = firestore.batch do |b|
@@ -180,9 +180,9 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "deletes a document with exists precondition" do
-    delete_writes.first.current_document = Google::Firestore::V1::Precondition.new(exists: true)
+    delete_writes.first.current_document = Google::Cloud::Firestore::V1::Precondition.new(exists: true)
 
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: delete_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: delete_writes)
 
     doc = firestore.doc document_path
     resp = firestore.batch do |b|
@@ -194,10 +194,10 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "deletes a document with update_time precondition" do
-    delete_writes.first.current_document = Google::Firestore::V1::Precondition.new(
+    delete_writes.first.current_document = Google::Cloud::Firestore::V1::Precondition.new(
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))
 
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: delete_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: delete_writes)
 
     doc = firestore.doc document_path
     resp = firestore.batch do |b|
@@ -228,12 +228,12 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
 
   it "performs multiple writes in the same commit (string)" do
     all_writes = create_writes + set_writes + update_writes + delete_writes
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: all_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: all_writes)
 
     resp = firestore.batch do |b|
-      b.create(document_path, { name: "Mike" })
-      b.set(document_path, { name: "Mike" })
-      b.update(document_path, { name: "Mike" })
+      b.create(document_path, { name: "Alice" })
+      b.set(document_path, { name: "Alice" })
+      b.update(document_path, { name: "Alice" })
       b.delete document_path
     end
 
@@ -243,15 +243,15 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
 
   it "performs multiple writes in the same commit (doc ref)" do
     all_writes = create_writes + set_writes + update_writes + delete_writes
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: all_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: all_writes)
 
     doc_ref = firestore.doc document_path
     _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
     resp = firestore.batch do |b|
-      b.create(doc_ref, { name: "Mike" })
-      b.set(doc_ref, { name: "Mike" })
-      b.update(doc_ref, { name: "Mike" })
+      b.create(doc_ref, { name: "Alice" })
+      b.set(doc_ref, { name: "Alice" })
+      b.update(doc_ref, { name: "Alice" })
       b.delete doc_ref
     end
 
@@ -278,7 +278,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
 
     error = expect do
       firestore.batch do |b|
-        outside_batch_obj.create(doc_ref, { name: "Mike" })
+        outside_batch_obj.create(doc_ref, { name: "Alice" })
       end
     end.must_raise RuntimeError
     _(error.message).must_equal "batch is closed"

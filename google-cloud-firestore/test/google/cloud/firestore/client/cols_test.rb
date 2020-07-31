@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Firestore::Client, :cols, :mock_firestore do
   it "retrieves collections" do
-    firestore_mock.expect :list_collection_ids, ["users", "lists", "todos"].to_enum, ["projects/#{project}/databases/(default)/documents", options: default_options]
+    firestore_mock.expect :list_collection_ids, ["users", "lists", "todos"].to_enum, list_collection_ids_args
 
     col_enum = firestore.cols
     _(col_enum).must_be_kind_of Enumerator
@@ -33,7 +33,7 @@ describe Google::Cloud::Firestore::Client, :cols, :mock_firestore do
   end
 
   it "retrieves collections using collections alias" do
-    firestore_mock.expect :list_collection_ids, ["users", "lists", "todos"].to_enum, ["projects/#{project}/databases/(default)/documents", options: default_options]
+    firestore_mock.expect :list_collection_ids, ["users", "lists", "todos"].to_enum, list_collection_ids_args
 
     col_enum = firestore.collections
     _(col_enum).must_be_kind_of Enumerator

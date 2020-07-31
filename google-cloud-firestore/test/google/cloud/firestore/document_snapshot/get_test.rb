@@ -15,16 +15,16 @@
 require "helper"
 
 describe Google::Cloud::Firestore::DocumentSnapshot, :get, :mock_firestore do
-  let(:document_path) { "users/mike" }
+  let(:document_path) { "users/alice" }
   let(:document_ref) { Google::Cloud::Firestore::DocumentReference.from_path "projects/#{project}/databases/(default)/documents/#{document_path}", firestore }
   let(:document_time) { Time.now }
   let :document_grpc do
-    Google::Firestore::V1::Document.new(
+    Google::Cloud::Firestore::V1::Document.new(
       name: document_ref.path,
-      fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike"),
-                "foo" => Google::Firestore::V1::Value.new(map_value: Google::Firestore::V1::MapValue.new(fields: {
-                  "bar" => Google::Firestore::V1::Value.new(map_value: Google::Firestore::V1::MapValue.new(fields: {
-                    "baz" => Google::Firestore::V1::Value.new(string_value: "bif") })) })) },
+      fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Alice"),
+                "foo" => Google::Cloud::Firestore::V1::Value.new(map_value: Google::Cloud::Firestore::V1::MapValue.new(fields: {
+                  "bar" => Google::Cloud::Firestore::V1::Value.new(map_value: Google::Cloud::Firestore::V1::MapValue.new(fields: {
+                    "baz" => Google::Cloud::Firestore::V1::Value.new(string_value: "bif") })) })) },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
     )
@@ -38,19 +38,19 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :get, :mock_firestore do
   end
 
   it "retrieves top-level value from data given a fieldpath (string)" do
-    _(document.get("name")).must_equal "Mike"
+    _(document.get("name")).must_equal "Alice"
   end
 
   it "retrieves top-level value from data given a fieldpath (symbol)" do
-    _(document.get(:name)).must_equal "Mike"
+    _(document.get(:name)).must_equal "Alice"
   end
 
   it "retrieves top-level value from data given a fieldpath (array(string))" do
-    _(document.get(["name"])).must_equal "Mike"
+    _(document.get(["name"])).must_equal "Alice"
   end
 
   it "retrieves top-level value from data given a fieldpath (array(symbol))" do
-    _(document.get([:name])).must_equal "Mike"
+    _(document.get([:name])).must_equal "Alice"
   end
 
   it "retrieves nested value from data given a fieldpath (string)" do
@@ -96,11 +96,11 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :get, :mock_firestore do
   end
 
   it "retrieves full data given nil" do
-    _(document.get(nil)).must_equal({ foo: {bar: { baz: "bif" } }, name: "Mike" })
+    _(document.get(nil)).must_equal({ foo: {bar: { baz: "bif" } }, name: "Alice" })
   end
 
   it "retrieves full data given an empty string" do
-    _(document.get("")).must_equal({ foo: {bar: { baz: "bif" } }, name: "Mike" })
+    _(document.get("")).must_equal({ foo: {bar: { baz: "bif" } }, name: "Alice" })
   end
 
   it "retrieves path given __name__" do
@@ -121,12 +121,12 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :get, :mock_firestore do
 
   describe "strange data" do
     let :document_grpc do
-      Google::Firestore::V1::Document.new(
+      Google::Cloud::Firestore::V1::Document.new(
         name: document_ref.path,
-        fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike"),
-                  "foo" => Google::Firestore::V1::Value.new(map_value: Google::Firestore::V1::MapValue.new(fields: {
-                    "bar.baz" => Google::Firestore::V1::Value.new(map_value: Google::Firestore::V1::MapValue.new(fields: {
-                      "bif" => Google::Firestore::V1::Value.new(integer_value: 42) })) })) },
+        fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Alice"),
+                  "foo" => Google::Cloud::Firestore::V1::Value.new(map_value: Google::Cloud::Firestore::V1::MapValue.new(fields: {
+                    "bar.baz" => Google::Cloud::Firestore::V1::Value.new(map_value: Google::Cloud::Firestore::V1::MapValue.new(fields: {
+                      "bif" => Google::Cloud::Firestore::V1::Value.new(integer_value: 42) })) })) },
         create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
       )
@@ -140,19 +140,19 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :get, :mock_firestore do
 
   describe :[] do
     it "retrieves top-level value from data given a fieldpath (string)" do
-      _(document["name"]).must_equal "Mike"
+      _(document["name"]).must_equal "Alice"
     end
 
     it "retrieves top-level value from data given a fieldpath (symbol)" do
-      _(document[:name]).must_equal "Mike"
+      _(document[:name]).must_equal "Alice"
     end
 
     it "retrieves top-level value from data given a fieldpath (array(string))" do
-      _(document[["name"]]).must_equal "Mike"
+      _(document[["name"]]).must_equal "Alice"
     end
 
     it "retrieves top-level value from data given a fieldpath (array(symbol))" do
-      _(document[[:name]]).must_equal "Mike"
+      _(document[[:name]]).must_equal "Alice"
     end
 
     it "retrieves nested value from data given a fieldpath (string)" do
@@ -198,11 +198,11 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :get, :mock_firestore do
     end
 
     it "retrieves full data given nil" do
-      _(document[nil]).must_equal({ foo: {bar: { baz: "bif" } }, name: "Mike" })
+      _(document[nil]).must_equal({ foo: {bar: { baz: "bif" } }, name: "Alice" })
     end
 
     it "retrieves full data given an empty string" do
-      _(document[""]).must_equal({ foo: {bar: { baz: "bif" } }, name: "Mike" })
+      _(document[""]).must_equal({ foo: {bar: { baz: "bif" } }, name: "Alice" })
     end
 
     it "retrieves path given __name__" do
@@ -223,12 +223,12 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :get, :mock_firestore do
 
     describe "strange data" do
       let :document_grpc do
-        Google::Firestore::V1::Document.new(
+        Google::Cloud::Firestore::V1::Document.new(
           name: document_ref.path,
-          fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike"),
-                    "foo" => Google::Firestore::V1::Value.new(map_value: Google::Firestore::V1::MapValue.new(fields: {
-                      "bar.baz" => Google::Firestore::V1::Value.new(map_value: Google::Firestore::V1::MapValue.new(fields: {
-                        "bif" => Google::Firestore::V1::Value.new(integer_value: 42) })) })) },
+          fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Alice"),
+                    "foo" => Google::Cloud::Firestore::V1::Value.new(map_value: Google::Cloud::Firestore::V1::MapValue.new(fields: {
+                      "bar.baz" => Google::Cloud::Firestore::V1::Value.new(map_value: Google::Cloud::Firestore::V1::MapValue.new(fields: {
+                        "bif" => Google::Cloud::Firestore::V1::Value.new(integer_value: 42) })) })) },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
         )

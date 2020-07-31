@@ -30,7 +30,7 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
   end
 
   it "can represent an empty result" do
-    grpc_response = Google::Firestore::V1::CommitResponse.new
+    grpc_response = Google::Cloud::Firestore::V1::CommitResponse.new
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, []
 
@@ -39,7 +39,7 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
   end
 
   it "can represent results with transforms" do
-    grpc_response = Google::Firestore::V1::CommitResponse.new(
+    grpc_response = Google::Cloud::Firestore::V1::CommitResponse.new(
       write_results: [
         {
           update_time: update_timestamp,
@@ -63,7 +63,7 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
   end
 
   it "can represent results with and without update_time" do
-    grpc_response = Google::Firestore::V1::CommitResponse.new(
+    grpc_response = Google::Cloud::Firestore::V1::CommitResponse.new(
       write_results: [
         { update_time: update_timestamp },
         {}
@@ -79,7 +79,7 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
   end
 
   it "can represent results without and with update_time" do
-    grpc_response = Google::Firestore::V1::CommitResponse.new(
+    grpc_response = Google::Cloud::Firestore::V1::CommitResponse.new(
       write_results: [
         {},
         { update_time: update_timestamp }
@@ -95,7 +95,7 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
   end
 
   it "can represent results without update_time" do
-    grpc_response = Google::Firestore::V1::CommitResponse.new(
+    grpc_response = Google::Cloud::Firestore::V1::CommitResponse.new(
       write_results: [
         {},
         {}
@@ -111,7 +111,7 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
   end
 
   it "can represent results without mismatched writes" do
-    grpc_response = Google::Firestore::V1::CommitResponse.new(
+    grpc_response = Google::Cloud::Firestore::V1::CommitResponse.new(
       write_results: [
         {},
         {}

@@ -23,9 +23,9 @@ describe Google::Cloud::Firestore::Client, :col_group, :mock_firestore do
 
     _(query).must_be_kind_of Google::Cloud::Firestore::Query
     query_gapi = query.query
-    _(query_gapi).must_be_kind_of Google::Firestore::V1::StructuredQuery
+    _(query_gapi).must_be_kind_of Google::Cloud::Firestore::V1::StructuredQuery
     _(query_gapi.from.size).must_equal 1
-    _(query_gapi.from.first).must_be_kind_of Google::Firestore::V1::StructuredQuery::CollectionSelector
+    _(query_gapi.from.first).must_be_kind_of Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector
     _(query_gapi.from.first.all_descendants).must_equal true
     _(query_gapi.from.first.collection_id).must_equal collection_id
   end
@@ -35,9 +35,9 @@ describe Google::Cloud::Firestore::Client, :col_group, :mock_firestore do
 
     _(query).must_be_kind_of Google::Cloud::Firestore::Query
     query_gapi = query.query
-    _(query_gapi).must_be_kind_of Google::Firestore::V1::StructuredQuery
+    _(query_gapi).must_be_kind_of Google::Cloud::Firestore::V1::StructuredQuery
     _(query_gapi.from.size).must_equal 1
-    _(query_gapi.from.first).must_be_kind_of Google::Firestore::V1::StructuredQuery::CollectionSelector
+    _(query_gapi.from.first).must_be_kind_of Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector
     _(query_gapi.from.first.all_descendants).must_equal true
     _(query_gapi.from.first.collection_id).must_equal collection_id
   end

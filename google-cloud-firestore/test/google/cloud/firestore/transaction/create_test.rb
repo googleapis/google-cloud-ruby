@@ -15,38 +15,38 @@
 require "helper"
 
 describe Google::Cloud::Firestore::Transaction, :create, :mock_firestore do
-  let(:transaction_id) { "transaction123" }
+  
   let(:transaction) do
     Google::Cloud::Firestore::Transaction.from_client(firestore).tap do |b|
       b.instance_variable_set :@transaction_id, transaction_id
     end
   end
 
-  let(:document_path) { "users/mike" }
-  let(:database_path) { "projects/#{project}/databases/(default)" }
-  let(:documents_path) { "#{database_path}/documents" }
+  let(:document_path) { "users/alice" }
+
+
   let(:commit_time) { Time.now }
   let :create_writes do
-    [Google::Firestore::V1::Write.new(
-      update: Google::Firestore::V1::Document.new(
+    [Google::Cloud::Firestore::V1::Write.new(
+      update: Google::Cloud::Firestore::V1::Document.new(
         name: "#{documents_path}/#{document_path}",
-        fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" })),
-      current_document: Google::Firestore::V1::Precondition.new(
+        fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Alice" })),
+      current_document: Google::Cloud::Firestore::V1::Precondition.new(
         exists: false)
     )]
   end
   let :commit_resp do
-    Google::Firestore::V1::CommitResponse.new(
+    Google::Cloud::Firestore::V1::CommitResponse.new(
       commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-      write_results: [Google::Firestore::V1::WriteResult.new(
+      write_results: [Google::Cloud::Firestore::V1::WriteResult.new(
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
       )
   end
 
   it "creates a new document given a string path" do
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: create_writes, transaction: transaction_id, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: create_writes, transaction: transaction_id)
 
-    transaction.create(document_path, { name: "Mike" })
+    transaction.create(document_path, { name: "Alice" })
     resp = transaction.commit
 
     _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
@@ -54,12 +54,12 @@ describe Google::Cloud::Firestore::Transaction, :create, :mock_firestore do
   end
 
   it "creates a new document given a DocumentReference" do
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: create_writes, transaction: transaction_id, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: create_writes, transaction: transaction_id)
 
     doc = firestore.doc document_path
     _(doc).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
-    transaction.create(doc, { name: "Mike" })
+    transaction.create(doc, { name: "Alice" })
     resp = transaction.commit
 
     _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse

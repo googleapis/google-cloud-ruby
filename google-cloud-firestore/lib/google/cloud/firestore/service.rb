@@ -73,18 +73,12 @@ module Google
         # method.
         def list_documents parent, collection_id, token: nil, max: nil
           mask = { field_paths: [] }
-          call_options = nil
-          call_options = Gapic::CallOptions.new page_token: token if token
-          paged_enum = firestore.list_documents(
-            {
-              parent:        parent,
-              collection_id: collection_id,
-              mask:          mask,
-              show_missing:  true,
-              page_size:     max
-            },
-            call_options
-          )
+          paged_enum = firestore.list_documents parent:        parent,
+                                                collection_id: collection_id,
+                                                page_size:     max,
+                                                page_token:    token,
+                                                mask:          mask,
+                                                show_missing:  true
           paged_enum.response
         end
 

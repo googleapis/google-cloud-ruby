@@ -15,7 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Firestore::Transaction, :query, :mock_firestore do
-  let(:transaction_id) { "transaction123" }
+  
   let(:transaction) do
     Google::Cloud::Firestore::Transaction.from_client(firestore).tap do |b|
       b.instance_variable_set :@transaction_id, transaction_id
@@ -24,19 +24,19 @@ describe Google::Cloud::Firestore::Transaction, :query, :mock_firestore do
   let(:read_time) { Time.now }
   let :query_results_enum do
     [
-      Google::Firestore::V1::RunQueryResponse.new(
+      Google::Cloud::Firestore::V1::RunQueryResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        document: Google::Firestore::V1::Document.new(
-          name: "projects/#{project}/databases/(default)/documents/users/mike",
-          fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike") },
+        document: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/#{project}/databases/(default)/documents/users/alice",
+          fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Alice") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         )),
-      Google::Firestore::V1::RunQueryResponse.new(
+      Google::Cloud::Firestore::V1::RunQueryResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        document: Google::Firestore::V1::Document.new(
-          name: "projects/#{project}/databases/(default)/documents/users/chris",
-          fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Chris") },
+        document: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/#{project}/databases/(default)/documents/users/carol",
+          fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Bob") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         ))
@@ -44,12 +44,12 @@ describe Google::Cloud::Firestore::Transaction, :query, :mock_firestore do
   end
 
   it "runs a simple query" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      select: Google::Firestore::V1::StructuredQuery::Projection.new(
-        fields: [Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")]),
-      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)]
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      select: Google::Cloud::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")]),
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)]
     )
-    firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, transaction: transaction_id, options: default_options]
+    firestore_mock.expect :run_query, query_results_enum, run_query_args(expected_query, transaction: transaction_id)
 
     results_enum = transaction.get firestore.col(:users).select(:name)
 
@@ -57,23 +57,23 @@ describe Google::Cloud::Firestore::Transaction, :query, :mock_firestore do
   end
 
   it "runs a complex query" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      select: Google::Firestore::V1::StructuredQuery::Projection.new(
-        fields: [Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")]),
-      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)],
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      select: Google::Cloud::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")]),
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)],
       offset: 3,
       limit: Google::Protobuf::Int32Value.new(value: 42),
       order_by: [
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name"),
           direction: :ASCENDING),
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
           direction: :DESCENDING)],
-      start_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: false),
-      end_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true)
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: false),
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true)
     )
-    firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, transaction: transaction_id, options: default_options]
+    firestore_mock.expect :run_query, query_results_enum, run_query_args(expected_query, transaction: transaction_id)
 
     results_enum = transaction.get firestore.col(:users).select(:name).offset(3).limit(42).order(:name).order(firestore.document_id, :desc).start_after(:foo).end_before(:bar)
 
@@ -100,13 +100,13 @@ describe Google::Cloud::Firestore::Transaction, :query, :mock_firestore do
     end
 
     _(results.first.data).must_be_kind_of Hash
-    _(results.first.data).must_equal({ name: "Mike" })
+    _(results.first.data).must_equal({ name: "Alice" })
     _(results.first.created_at).must_equal read_time
     _(results.first.updated_at).must_equal read_time
     _(results.first.read_at).must_equal read_time
 
     _(results.last.data).must_be_kind_of Hash
-    _(results.last.data).must_equal({ name: "Chris" })
+    _(results.last.data).must_equal({ name: "Bob" })
     _(results.last.created_at).must_equal read_time
     _(results.last.updated_at).must_equal read_time
     _(results.last.read_at).must_equal read_time

@@ -16,25 +16,25 @@ require "helper"
 
 describe Google::Cloud::Firestore::CollectionReference, :get, :mock_firestore do
   let(:collection_id) { "messages" }
-  let(:collection_path) { "users/mike/#{collection_id}" }
+  let(:collection_path) { "users/alice/#{collection_id}" }
   let(:collection) { Google::Cloud::Firestore::CollectionReference.from_path "projects/#{project}/databases/(default)/documents/#{collection_path}", firestore }
 
   let(:read_time) { Time.now }
   let :query_docs_enum do
     [
-      Google::Firestore::V1::RunQueryResponse.new(
+      Google::Cloud::Firestore::V1::RunQueryResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        document: Google::Firestore::V1::Document.new(
-          name: "projects/#{project}/databases/(default)/documents/users/mike/messages/abc123",
-          fields: { "body" => Google::Firestore::V1::Value.new(string_value: "LGTM") },
+        document: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/#{project}/databases/(default)/documents/users/alice/messages/abc123",
+          fields: { "body" => Google::Cloud::Firestore::V1::Value.new(string_value: "LGTM") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         )),
-      Google::Firestore::V1::RunQueryResponse.new(
+      Google::Cloud::Firestore::V1::RunQueryResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        document: Google::Firestore::V1::Document.new(
-          name: "projects/#{project}/databases/(default)/documents/users/mike/messages/xyz789",
-          fields: { "body" => Google::Firestore::V1::Value.new(string_value: "PTAL") },
+        document: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/#{project}/databases/(default)/documents/users/alice/messages/xyz789",
+          fields: { "body" => Google::Cloud::Firestore::V1::Value.new(string_value: "PTAL") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         ))
@@ -42,10 +42,10 @@ describe Google::Cloud::Firestore::CollectionReference, :get, :mock_firestore do
   end
 
   it "gets docs" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "messages", all_descendants: false)]
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "messages", all_descendants: false)]
     )
-    firestore_mock.expect :run_query, query_docs_enum, ["projects/#{project}/databases/(default)/documents/users/mike", structured_query: expected_query, options: default_options]
+    firestore_mock.expect :run_query, query_docs_enum, run_query_args(expected_query, parent: "projects/#{project}/databases/(default)/documents/users/alice")
 
     docs_enum = collection.get
 
@@ -53,10 +53,10 @@ describe Google::Cloud::Firestore::CollectionReference, :get, :mock_firestore do
   end
 
   it "gets docs using run alias" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "messages", all_descendants: false)]
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "messages", all_descendants: false)]
     )
-    firestore_mock.expect :run_query, query_docs_enum, ["projects/#{project}/databases/(default)/documents/users/mike", structured_query: expected_query, options: default_options]
+    firestore_mock.expect :run_query, query_docs_enum, run_query_args(expected_query, parent: "projects/#{project}/databases/(default)/documents/users/alice")
 
     docs_enum = collection.run
 
@@ -77,8 +77,8 @@ describe Google::Cloud::Firestore::CollectionReference, :get, :mock_firestore do
 
       _(doc.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
       _(doc.parent.collection_id).must_equal "messages"
-      _(doc.parent.collection_path).must_equal "users/mike/messages"
-      _(doc.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
+      _(doc.parent.collection_path).must_equal "users/alice/messages"
+      _(doc.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/alice/messages"
       _(doc.parent.client).must_equal firestore
     end
 

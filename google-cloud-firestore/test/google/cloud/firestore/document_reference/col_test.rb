@@ -15,7 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
-  let(:document_path) { "users/mike" }
+  let(:document_path) { "users/alice" }
   let(:document) { Google::Cloud::Firestore::DocumentReference.from_path "projects/#{project}/databases/(default)/documents/#{document_path}", firestore }
 
   it "gets a collection by a collection_id" do
@@ -23,8 +23,8 @@ describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
 
     _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
     _(col.collection_id).must_equal "messages"
-    _(col.collection_path).must_equal "users/mike/messages"
-    _(col.path).must_equal "projects/#{project}/databases/(default)/documents/users/mike/messages"
+    _(col.collection_path).must_equal "users/alice/messages"
+    _(col.path).must_equal "projects/#{project}/databases/(default)/documents/users/alice/messages"
   end
 
   it "gets a collection by a nested collection path" do
@@ -32,8 +32,8 @@ describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
 
     _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
     _(col.collection_id).must_equal "likes"
-    _(col.collection_path).must_equal "users/mike/messages/abc123/likes"
-    _(col.path).must_equal "projects/#{project}/databases/(default)/documents/users/mike/messages/abc123/likes"
+    _(col.collection_path).must_equal "users/alice/messages/abc123/likes"
+    _(col.path).must_equal "projects/#{project}/databases/(default)/documents/users/alice/messages/abc123/likes"
   end
 
   it "does not allow a document path" do
@@ -49,8 +49,8 @@ describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
 
       _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
       _(col.collection_id).must_equal "messages"
-      _(col.collection_path).must_equal "users/mike/messages"
-      _(col.path).must_equal "projects/#{project}/databases/(default)/documents/users/mike/messages"
+      _(col.collection_path).must_equal "users/alice/messages"
+      _(col.path).must_equal "projects/#{project}/databases/(default)/documents/users/alice/messages"
     end
 
     it "gets a collection by a nested collection path" do
@@ -58,8 +58,8 @@ describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
 
       _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
       _(col.collection_id).must_equal "likes"
-      _(col.collection_path).must_equal "users/mike/messages/abc123/likes"
-      _(col.path).must_equal "projects/#{project}/databases/(default)/documents/users/mike/messages/abc123/likes"
+      _(col.collection_path).must_equal "users/alice/messages/abc123/likes"
+      _(col.path).must_equal "projects/#{project}/databases/(default)/documents/users/alice/messages/abc123/likes"
     end
 
     it "does not allow a document path" do
