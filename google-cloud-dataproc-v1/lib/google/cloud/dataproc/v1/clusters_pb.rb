@@ -25,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.dataproc.v1.ClusterConfig" do
       optional :config_bucket, :string, 1
+      optional :temp_bucket, :string, 2
       optional :gce_cluster_config, :message, 8, "google.cloud.dataproc.v1.GceClusterConfig"
       optional :master_config, :message, 9, "google.cloud.dataproc.v1.InstanceGroupConfig"
       optional :worker_config, :message, 10, "google.cloud.dataproc.v1.InstanceGroupConfig"
@@ -35,6 +36,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :autoscaling_config, :message, 18, "google.cloud.dataproc.v1.AutoscalingConfig"
       optional :security_config, :message, 16, "google.cloud.dataproc.v1.SecurityConfig"
       optional :lifecycle_config, :message, 17, "google.cloud.dataproc.v1.LifecycleConfig"
+      optional :endpoint_config, :message, 19, "google.cloud.dataproc.v1.EndpointConfig"
+    end
+    add_message "google.cloud.dataproc.v1.EndpointConfig" do
+      map :http_ports, :string, :string, 1
+      optional :enable_http_port_access, :bool, 2
     end
     add_message "google.cloud.dataproc.v1.AutoscalingConfig" do
       optional :policy_uri, :string, 1
@@ -60,9 +66,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :machine_type_uri, :string, 4
       optional :disk_config, :message, 5, "google.cloud.dataproc.v1.DiskConfig"
       optional :is_preemptible, :bool, 6
+      optional :preemptibility, :enum, 10, "google.cloud.dataproc.v1.InstanceGroupConfig.Preemptibility"
       optional :managed_group_config, :message, 7, "google.cloud.dataproc.v1.ManagedGroupConfig"
       repeated :accelerators, :message, 8, "google.cloud.dataproc.v1.AcceleratorConfig"
       optional :min_cpu_platform, :string, 9
+    end
+    add_enum "google.cloud.dataproc.v1.InstanceGroupConfig.Preemptibility" do
+      value :PREEMPTIBILITY_UNSPECIFIED, 0
+      value :NON_PREEMPTIBLE, 1
+      value :PREEMPTIBLE, 2
     end
     add_message "google.cloud.dataproc.v1.ManagedGroupConfig" do
       optional :instance_template_name, :string, 1
@@ -203,10 +215,12 @@ module Google
       module V1
         Cluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.Cluster").msgclass
         ClusterConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ClusterConfig").msgclass
+        EndpointConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.EndpointConfig").msgclass
         AutoscalingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.AutoscalingConfig").msgclass
         EncryptionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.EncryptionConfig").msgclass
         GceClusterConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.GceClusterConfig").msgclass
         InstanceGroupConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.InstanceGroupConfig").msgclass
+        InstanceGroupConfig::Preemptibility = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.InstanceGroupConfig.Preemptibility").enummodule
         ManagedGroupConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ManagedGroupConfig").msgclass
         AcceleratorConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.AcceleratorConfig").msgclass
         DiskConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.DiskConfig").msgclass

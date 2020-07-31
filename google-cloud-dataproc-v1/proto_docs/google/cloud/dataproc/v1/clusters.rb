@@ -85,6 +85,17 @@ module Google
         #     and manage this project-level, per-location bucket (see
         #     [Dataproc staging
         #     bucket](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
+        # @!attribute [rw] temp_bucket
+        #   @return [::String]
+        #     Optional. A Cloud Storage bucket used to store ephemeral cluster and jobs data,
+        #     such as Spark and MapReduce history files.
+        #     If you do not specify a temp bucket,
+        #     Dataproc will determine a Cloud Storage location (US,
+        #     ASIA, or EU) for your cluster's temp bucket according to the
+        #     Compute Engine zone where your cluster is deployed, and then create
+        #     and manage this project-level, per-location bucket. The default bucket has
+        #     a TTL of 90 days, but you can use any TTL (or none) if you specify a
+        #     bucket.
         # @!attribute [rw] gce_cluster_config
         #   @return [::Google::Cloud::Dataproc::V1::GceClusterConfig]
         #     Optional. The shared Compute Engine config settings for
@@ -132,9 +143,35 @@ module Google
         # @!attribute [rw] lifecycle_config
         #   @return [::Google::Cloud::Dataproc::V1::LifecycleConfig]
         #     Optional. Lifecycle setting for the cluster.
+        # @!attribute [rw] endpoint_config
+        #   @return [::Google::Cloud::Dataproc::V1::EndpointConfig]
+        #     Optional. Port/endpoint configuration for this cluster
         class ClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Endpoint config for this cluster
+        # @!attribute [r] http_ports
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Output only. The map of port descriptions to URLs. Will only be populated
+        #     if enable_http_port_access is true.
+        # @!attribute [rw] enable_http_port_access
+        #   @return [::Boolean]
+        #     Optional. If true, enable http access to specific ports on the cluster
+        #     from external sources. Defaults to false.
+        class EndpointConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class HttpPortsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Autoscaling Policy config associated with the cluster.
@@ -214,7 +251,7 @@ module Google
         # @!attribute [rw] service_account
         #   @return [::String]
         #     Optional. The [Dataproc service
-        #     account](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/service-accounts#service_accounts_in_cloud_dataproc)
+        #     account](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/service-accounts#service_accounts_in_dataproc)
         #     (also see [VM Data Plane
         #     identity](https://cloud.google.com/dataproc/docs/concepts/iam/dataproc-principals#vm_service_account_data_plane_identity))
         #     used by Dataproc cluster VM instances to access Google Cloud Platform
@@ -318,6 +355,15 @@ module Google
         #   @return [::Boolean]
         #     Output only. Specifies that this instance group contains preemptible
         #     instances.
+        # @!attribute [rw] preemptibility
+        #   @return [::Google::Cloud::Dataproc::V1::InstanceGroupConfig::Preemptibility]
+        #     Optional. Specifies the preemptibility of the instance group.
+        #
+        #     The default value for master and worker groups is
+        #     `NON_PREEMPTIBLE`. This default cannot be changed.
+        #
+        #     The default value for secondary instances is
+        #     `PREEMPTIBLE`.
         # @!attribute [r] managed_group_config
         #   @return [::Google::Cloud::Dataproc::V1::ManagedGroupConfig]
         #     Output only. The config for Compute Engine Instance Group
@@ -335,6 +381,27 @@ module Google
         class InstanceGroupConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Controls the use of
+          # [preemptible instances]
+          # (https://cloud.google.com/compute/docs/instances/preemptible)
+          # within the group.
+          module Preemptibility
+            # Preemptibility is unspecified, the system will choose the
+            # appropriate setting for each instance group.
+            PREEMPTIBILITY_UNSPECIFIED = 0
+
+            # Instances are non-preemptible.
+            #
+            # This option is allowed for all instance groups and is the only valid
+            # value for Master and Worker instance groups.
+            NON_PREEMPTIBLE = 1
+
+            # Instances are preemptible.
+            #
+            # This option is allowed only for secondary worker groups.
+            PREEMPTIBLE = 2
+          end
         end
 
         # Specifies the resources used to actively manage an instance group.
@@ -567,7 +634,7 @@ module Google
         #   @return [::String]
         #     Optional. The version of software inside the cluster. It must be one of the
         #     supported [Dataproc
-        #     Versions](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#supported_cloud_dataproc_versions),
+        #     Versions](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#supported_dataproc_versions),
         #     such as "1.2" (including a subminor version, such as "1.2.29"), or the
         #     ["preview"
         #     version](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#other_versions).

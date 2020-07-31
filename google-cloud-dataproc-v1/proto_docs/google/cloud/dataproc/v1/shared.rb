@@ -23,7 +23,7 @@ module Google
       module V1
         # Cluster components that can be activated.
         module Component
-          # Unspecified component.
+          # Unspecified component. Specifying this will cause Cluster creation to fail.
           COMPONENT_UNSPECIFIED = 0
 
           # The Anaconda python distribution.
