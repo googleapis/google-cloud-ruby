@@ -1,0 +1,11 @@
+{
+    "api_id": "gameservices.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-gaming-v1/latest",
+    "distribution_name": "google-cloud-gaming-v1",
+    "language": "ruby",
+    "name": "gameservices",
+    "name_pretty": "Cloud Gaming V1 API",
+    "product_documentation": "https://cloud.google.com/game-servers",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
