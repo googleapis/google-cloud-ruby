@@ -29,6 +29,7 @@ module Google
         #     recognizer should recognize with higher likelihood.
         #
         #     This list can be used to:
+        #
         #     * improve accuracy for words and phrases you expect the user to say,
         #       e.g. typical commands for your Dialogflow agent
         #     * add additional words to the speech recognizer vocabulary
