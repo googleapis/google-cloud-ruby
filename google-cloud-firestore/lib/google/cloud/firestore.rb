@@ -33,7 +33,6 @@ module Google
     #
     module Firestore
       # rubocop:disable Metrics/AbcSize
-      # rubocop:disable Metrics/MethodLength
 
       ##
       # Creates a new object for connecting to the Firestore service.
@@ -109,7 +108,6 @@ module Google
       end
 
       # rubocop:enable Metrics/AbcSize
-      # rubocop:enable Metrics/MethodLength
 
       ##
       # Configure the Google Cloud Firestore library.

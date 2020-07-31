@@ -37,13 +37,6 @@ module Google
           @timeout = timeout
         end
 
-        def chan_creds
-          return credentials if insecure?
-          require "grpc"
-          GRPC::Core::ChannelCredentials.new.compose \
-            GRPC::Core::CallCredentials.new credentials.client.updater_proc
-        end
-
         def firestore
           @firestore ||= \
             V1::Firestore::Client.new do |config|
@@ -56,25 +49,19 @@ module Google
             end
         end
 
-        def insecure?
-          credentials == :this_channel_is_insecure
-        end
-
         def get_documents document_paths, mask: nil, transaction: nil
-          batch_get_args = {
+          batch_get_req = {
+            database:  database_path,
             documents: document_paths,
             mask:      document_mask(mask)
           }
           if transaction.is_a? String
-            batch_get_args[:transaction] = transaction
+            batch_get_req[:transaction] = transaction
           elsif transaction
-            batch_get_args[:new_transaction] = transaction
+            batch_get_req[:new_transaction] = transaction
           end
-          batch_get_args[:options] = call_options parent: database_path
 
-          execute do
-            firestore.batch_get_documents database_path, **batch_get_args
-          end
+          firestore.batch_get_documents batch_get_req, call_options(parent: database_path)
         end
 
         ##
@@ -88,79 +75,74 @@ module Google
           mask = { field_paths: [] }
           call_options = nil
           call_options = Gapic::CallOptions.new page_token: token if token
-          execute do
-            paged_enum = firestore.list_documents \
-              parent, collection_id, mask: mask, show_missing: true,
-                                     page_size: max, options: call_options
-
-            paged_enum.page.response
-          end
+          paged_enum = firestore.list_documents parent: parent,
+                                                collection_id: collection_id,
+                                                mask: mask,
+                                                show_missing: true,
+                                                page_size: max,
+                                                options: call_options
+          paged_enum.response
         end
 
         def list_collections parent, transaction: nil
-          list_args = {}
+          list_req = {
+            parent: parent
+          }
           if transaction.is_a? String
-            list_args[:transaction] = transaction
+            list_req[:transaction] = transaction
           elsif transaction
-            list_args[:new_transaction] = transaction
+            list_req[:new_transaction] = transaction
           end
-          list_args[:options] = call_options parent: database_path
 
-          execute do
-            firestore.list_collection_ids parent, **list_args
-          end
+          firestore.list_collection_ids list_req, call_options(parent: database_path)
         end
 
         def run_query path, query_grpc, transaction: nil
-          run_query_args = { structured_query: query_grpc }
+          run_query_req = {
+            parent: path,
+            structured_query: query_grpc
+          }
           if transaction.is_a? String
-            run_query_args[:transaction] = transaction
+            run_query_req[:transaction] = transaction
           elsif transaction
-            run_query_args[:new_transaction] = transaction
+            run_query_req[:new_transaction] = transaction
           end
-          run_query_args[:options] = call_options parent: database_path
 
-          execute do
-            firestore.run_query path, **run_query_args
-          end
+          firestore.run_query run_query_req, call_options(parent: database_path)
         end
 
         def listen enum
-          options = call_options parent: database_path
-
-          execute do
-            firestore.listen enum, options: options
-          end
+          firestore.listen enum, call_options(parent: database_path)
         end
 
         def begin_transaction transaction_opt
-          options = call_options parent: database_path
-
-          execute do
-            firestore.begin_transaction database_path,
-                                        options_: transaction_opt,
-                                        options:  options
-          end
+          firestore.begin_transaction(
+            {
+              database: database_path,
+              options: transaction_opt
+            },
+            call_options(parent: database_path)
+          )
         end
 
         def commit writes, transaction: nil
-          commit_args = {
+          commit_req = {
+            database: database_path,
             writes: writes
           }
-          commit_args[:transaction] = transaction if transaction
-          commit_args[:options] = call_options parent: database_path
+          commit_req[:transaction] = transaction if transaction
 
-          execute do
-            firestore.commit database_path, **commit_args
-          end
+          firestore.commit commit_req, call_options(parent: database_path)
         end
 
         def rollback transaction
-          options = call_options parent: database_path
-
-          execute do
-            firestore.rollback database_path, transaction, options: options
-          end
+          firestore.rollback(
+            {
+              database: database_path,
+              transaction: transaction
+            },
+            call_options(parent: database_path)
+          )
         end
 
         def database_path project_id: project, database_id: "(default)"
@@ -198,10 +180,6 @@ module Google
           return nil if mask.empty?
 
           Google::Cloud::Firestore::V1::DocumentMask.new field_paths: mask
-        end
-
-        def execute
-          yield
         end
       end
     end
