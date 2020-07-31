@@ -159,8 +159,14 @@ class MockFirestore < Minitest::Spec
     [req, default_options]
   end
 
-  def list_collection_ids_args parent: "projects/#{project}/databases/(default)/documents"
-    [{ parent: parent }, default_options]
+  def list_collection_ids_args parent: "projects/#{project}/databases/(default)/documents",
+                               page_size: nil,
+                               page_token: nil
+    [{ parent: parent, page_size: page_size, page_token: page_token }, default_options]
+  end
+
+  def list_collection_ids_resp *ids, next_page_token: nil
+    Google::Cloud::Firestore::V1::ListCollectionIdsResponse.new collection_ids: ids, next_page_token: next_page_token
   end
 
   def run_query_args query,

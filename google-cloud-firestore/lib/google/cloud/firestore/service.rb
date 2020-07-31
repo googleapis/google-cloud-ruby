@@ -82,17 +82,15 @@ module Google
           paged_enum.response
         end
 
-        def list_collections parent, transaction: nil
-          list_req = {
-            parent: parent
-          }
-          if transaction.is_a? String
-            list_req[:transaction] = transaction
-          elsif transaction
-            list_req[:new_transaction] = transaction
-          end
-
-          firestore.list_collection_ids list_req, call_options(parent: database_path)
+        def list_collections parent, token: nil, max: nil
+          firestore.list_collection_ids(
+            {
+              parent:     parent,
+              page_size:  max,
+              page_token: token
+            },
+            call_options(parent: database_path)
+          )
         end
 
         def run_query path, query_grpc, transaction: nil

@@ -106,7 +106,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Firestore::Client#cols" do
     mock_firestore do |mock|
-      mock.expect :list_collection_ids, list_collection_resp, list_collection_args
+      mock.expect :list_collection_ids, list_collection_ids_resp, list_collection_ids_args
       mock.expect :commit, commit_resp, commit_args
     end
   end
@@ -309,9 +309,16 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Firestore::CollectionReferenceList" do
+    mock_firestore do |mock|
+      mock.expect :list_collection_ids, list_collection_ids_resp, list_collection_ids_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
   doctest.before "Google::Cloud::Firestore::DocumentReference#cols" do
     mock_firestore do |mock|
-      mock.expect :list_collection_ids, list_collection_resp, list_collection_args
+      mock.expect :list_collection_ids, list_collection_ids_resp, list_collection_ids_args
     end
   end
   # Skip aliased methods
@@ -404,11 +411,11 @@ def commit_resp
     )
 end
 
-def list_collection_resp
-  ["cities", "messages"].to_enum
+def list_collection_ids_resp
+  Google::Cloud::Firestore::V1::ListCollectionIdsResponse.new collection_ids: ["cities", "messages"]
 end
 
-def list_collection_args
+def list_collection_ids_args
   [Hash, Gapic::CallOptions]
 end
 

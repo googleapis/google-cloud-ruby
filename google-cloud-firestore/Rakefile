@@ -114,7 +114,7 @@ namespace :acceptance do
     puts "Cleaning up Firestore documents and collections."
 
     firestore = Google::Cloud::Firestore.new
-    firestore.cols do |col|
+    firestore.cols.all do |col|
       begin
         col.select(firestore.document_id).all_descendants.run.each_slice(500).with_index do |slice, index|
           firestore.batch do |b|

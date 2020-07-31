@@ -84,10 +84,11 @@ module Google
         ##
         # Retrieves a list of collections.
         #
-        # @yield [collections] The block for accessing the collections.
-        # @yieldparam [CollectionReference] collection A collection.
+        # @param [String] token A previously-returned page token representing
+        #   part of the larger set of results to view.
+        # @param [Integer] max Maximum number of results to return.
         #
-        # @return [Enumerator<CollectionReference>] collection list.
+        # @return [Array<CollectionReference>] An array of collection references.
         #
         # @example
         #   require "google/cloud/firestore"
@@ -99,13 +100,10 @@ module Google
         #     puts col.collection_id
         #   end
         #
-        def cols
+        def cols token: nil, max: nil
           ensure_service!
-
-          return enum_for :cols unless block_given?
-
-          collection_ids = service.list_collections "#{path}/documents"
-          collection_ids.each { |collection_id| yield col collection_id }
+          grpc = service.list_collections "#{path}/documents", token: token, max: max
+          CollectionReferenceList.from_grpc grpc, self, "#{path}/documents", max: max
         end
         alias collections cols
         alias list_collections cols
@@ -134,8 +132,7 @@ module Google
             raise ArgumentError, "collection_path must refer to a collection."
           end
 
-          CollectionReference.from_path \
-            "#{path}/documents/#{collection_path}", self
+          CollectionReference.from_path "#{path}/documents/#{collection_path}", self
         end
         alias collection col
 
@@ -670,8 +667,7 @@ module Google
         # @private
         def list_documents parent, collection_id, token: nil, max: nil
           ensure_service!
-          grpc = service.list_documents \
-            parent, collection_id, token: token, max: max
+          grpc = service.list_documents parent, collection_id, token: token, max: max
           DocumentReference::List.from_grpc grpc, self, parent, collection_id
         end
 
