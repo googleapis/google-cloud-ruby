@@ -75,12 +75,16 @@ module Google
           mask = { field_paths: [] }
           call_options = nil
           call_options = Gapic::CallOptions.new page_token: token if token
-          paged_enum = firestore.list_documents parent: parent,
-                                                collection_id: collection_id,
-                                                mask: mask,
-                                                show_missing: true,
-                                                page_size: max,
-                                                options: call_options
+          paged_enum = firestore.list_documents(
+            {
+              parent:        parent,
+              collection_id: collection_id,
+              mask:          mask,
+              show_missing:  true,
+              page_size:     max
+            },
+            call_options
+          )
           paged_enum.response
         end
 
@@ -99,7 +103,7 @@ module Google
 
         def run_query path, query_grpc, transaction: nil
           run_query_req = {
-            parent: path,
+            parent:           path,
             structured_query: query_grpc
           }
           if transaction.is_a? String
@@ -119,7 +123,7 @@ module Google
           firestore.begin_transaction(
             {
               database: database_path,
-              options: transaction_opt
+              options:  transaction_opt
             },
             call_options(parent: database_path)
           )
@@ -128,7 +132,7 @@ module Google
         def commit writes, transaction: nil
           commit_req = {
             database: database_path,
-            writes: writes
+            writes:   writes
           }
           commit_req[:transaction] = transaction if transaction
 
@@ -138,7 +142,7 @@ module Google
         def rollback transaction
           firestore.rollback(
             {
-              database: database_path,
+              database:    database_path,
               transaction: transaction
             },
             call_options(parent: database_path)

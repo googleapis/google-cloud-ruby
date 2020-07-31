@@ -169,7 +169,7 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
   end
 
   def paged_enum_struct response
-    OpenStruct.new page: OpenStruct.new(response: response)
+    OpenStruct.new response: response
   end
 
   def token_options token
