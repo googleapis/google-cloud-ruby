@@ -18,6 +18,11 @@ require "delegate"
 module Google
   module Cloud
     module Firestore
+      ##
+      # @private
+      #
+      # An Array delegate for pagination. Private class exposing only an Enumerator to clients.
+      #
       class CollectionReferenceList < DelegateClass(::Array)
         ##
         # If not empty, indicates that there are more records that match the request and this value should be passed
@@ -35,15 +40,6 @@ module Google
         #
         # @return [Boolean]
         #
-        # @example
-        #   require "google/cloud/firestore"
-        #
-        #   firestore = Google::Cloud::Firestore.new
-        #
-        #   cols = firestore.cols
-        #   if cols.next?
-        #     next_cols = cols.next
-        #   end
         def next?
           !token.nil?
         end
@@ -53,15 +49,6 @@ module Google
         #
         # @return [CollectionReference::List] The list of collection references.
         #
-        # @example
-        #   require "google/cloud/firestore"
-        #
-        #   firestore = Google::Cloud::Firestore.new
-        #
-        #   cols = firestore.cols
-        #   if cols.next?
-        #     next_cols = cols.next
-        #   end
         def next
           return nil unless next?
           ensure_service!
@@ -90,7 +77,7 @@ module Google
         #
         #   firestore = Google::Cloud::Firestore.new
         #
-        #   firestore.cols.all do |collection_reference|
+        #   firestore.cols do |collection_reference|
         #     puts collection_reference.collection_id
         #   end
         #
@@ -99,17 +86,8 @@ module Google
         #
         #   firestore = Google::Cloud::Firestore.new
         #
-        #   all_collection_ids = firestore.cols.all.map do |collection_reference|
+        #   all_collection_ids = firestore.cols.map do |collection_reference|
         #     collection_reference.collection_id
-        #   end
-        #
-        # @example Limit the number of API calls made:
-        #   require "google/cloud/firestore"
-        #
-        #   firestore = Google::Cloud::Firestore.new
-        #
-        #   firestore.cols.all(request_limit: 10) do |collection_reference|
-        #     puts collection_reference.collection_id
         #   end
         #
         def all request_limit: nil

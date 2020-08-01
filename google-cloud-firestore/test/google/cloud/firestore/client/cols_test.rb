@@ -19,71 +19,62 @@ describe Google::Cloud::Firestore::Client, :cols, :mock_firestore do
   let(:second_page) { list_collection_ids_resp "users2", "lists2", "todos2", next_page_token: "next_page_token" }
   let(:last_page) { list_collection_ids_resp "users3", "lists3" }
 
-  it "retrieves collections" do
-    firestore_mock.expect :list_collection_ids, first_page, list_collection_ids_args
-
-    col_enum = firestore.cols
-    _(col_enum).must_be_kind_of Google::Cloud::Firestore::CollectionReferenceList
-
-    col_ids = col_enum.map do |col|
-      _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
-
-      _(col.parent).must_be_kind_of Google::Cloud::Firestore::Client
-
-      col.collection_id
-    end
-    _(col_ids).wont_be :empty?
-    _(col_ids).must_equal ["users", "lists", "todos"]
-  end
-
-  it "retrieves collections using collections alias" do
-    firestore_mock.expect :list_collection_ids, first_page, list_collection_ids_args
-
-    col_enum = firestore.collections
-    _(col_enum).must_be_kind_of Google::Cloud::Firestore::CollectionReferenceList
-
-    col_ids = col_enum.map do |col|
-      _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
-
-      _(col.parent).must_be_kind_of Google::Cloud::Firestore::Client
-
-      col.collection_id
-    end
-    _(col_ids).wont_be :empty?
-    _(col_ids).must_equal ["users", "lists", "todos"]
-  end
-
-  it "paginates collections with max set" do
-    firestore_mock.expect :list_collection_ids, first_page, list_collection_ids_args(page_size: 3)
-
-    collections = firestore.collections max: 3
-
-    _(collections.size).must_equal 3
-    token = collections.token
-    _(token).wont_be :nil?
-    _(token).must_equal "next_page_token"
-  end
-
-  it "paginates collections with next? and next and max set" do
-    firestore_mock.expect :list_collection_ids, first_page, list_collection_ids_args(page_size: 3)
-    firestore_mock.expect :list_collection_ids, last_page, list_collection_ids_args(page_size: 3, page_token: "next_page_token")
-
-    first_collections = firestore.collections max: 3
-    second_collections = first_collections.next
-
-    _(first_collections.size).must_equal 3
-    _(first_collections.next?).must_equal true
-
-    _(second_collections.size).must_equal 2
-    _(second_collections.next?).must_equal false
-  end
-
-  it "iterates collections with all and request_limit set" do
+  it "iterates collections with pagination" do
     firestore_mock.expect :list_collection_ids, first_page, list_collection_ids_args
     firestore_mock.expect :list_collection_ids, second_page, list_collection_ids_args(page_token: "next_page_token")
+    firestore_mock.expect :list_collection_ids, last_page, list_collection_ids_args(page_token: "next_page_token")
 
-    collections = firestore.collections.all(request_limit: 1).to_a
+    collections = firestore.collections.to_a
 
-    _(collections.size).must_equal 6
+    _(collections.size).must_equal 8
+  end
+
+  it "iterates collections" do
+    firestore_mock.expect :list_collection_ids, last_page, list_collection_ids_args
+
+    col_enum = firestore.cols
+    _(col_enum).must_be_kind_of Enumerator
+
+    col_ids = col_enum.map do |col|
+      _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+
+      _(col.parent).must_be_kind_of Google::Cloud::Firestore::Client
+
+      col.collection_id
+    end
+    _(col_ids).wont_be :empty?
+    _(col_ids).must_equal ["users3", "lists3"]
+  end
+
+  it "iterates collections with a block" do
+    firestore_mock.expect :list_collection_ids, last_page, list_collection_ids_args
+
+    col_ids = []
+    firestore.cols do |col|
+      _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+
+      _(col.parent).must_be_kind_of Google::Cloud::Firestore::Client
+
+      col_ids << col.collection_id
+    end
+    _(col_ids).wont_be :empty?
+    _(col_ids).must_equal ["users3", "lists3"]
+  end
+
+  it "iterates collections using collections alias" do
+    firestore_mock.expect :list_collection_ids, last_page, list_collection_ids_args
+
+    col_enum = firestore.collections
+    _(col_enum).must_be_kind_of Enumerator
+
+    col_ids = col_enum.map do |col|
+      _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+
+      _(col.parent).must_be_kind_of Google::Cloud::Firestore::Client
+
+      col.collection_id
+    end
+    _(col_ids).wont_be :empty?
+    _(col_ids).must_equal ["users3", "lists3"]
   end
 end

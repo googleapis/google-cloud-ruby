@@ -70,13 +70,13 @@ module Google
         # @!group Access
 
         ##
-        # Retrieves a list of collections nested under the document snapshot.
+        # Retrieves an enumerator for the collections nested under the document snapshot.
         #
-        # @param [String] token A previously-returned page token representing
-        #   part of the larger set of results to view.
-        # @param [Integer] max Maximum number of results to return.
+        # @yield [collections] The block for accessing the collections.
+        # @yieldparam [CollectionReference] collection A collection reference object.
         #
-        # @return [Array<CollectionReference>] An array of collection references.
+        # @return [Enumerator<CollectionReference>] An enumerator of collection references. If a block is provided, this
+        #  is the same enumerator that is accessed through the block.
         #
         # @example
         #   require "google/cloud/firestore"
@@ -90,10 +90,12 @@ module Google
         #     puts col.collection_id
         #   end
         #
-        def cols token: nil, max: nil
+        def cols
           ensure_service!
-          grpc = service.list_collections path, token: token, max: max
-          CollectionReferenceList.from_grpc grpc, client, path, max: max
+          grpc = service.list_collections path
+          cols_enum = CollectionReferenceList.from_grpc(grpc, client, path).all
+          cols_enum.each { |c| yield c } if block_given?
+          cols_enum
         end
         alias collections cols
         alias list_collections cols

@@ -256,8 +256,19 @@ describe "Document", :firestore_acceptance do
     end
 
     sub_cols = collections_doc_ref.cols
+    _(sub_cols).must_be_kind_of Enumerator
     _(sub_cols.to_a.count).must_equal collections.count
     _(sub_cols.map(&:collection_id).sort).must_equal collections.sort
+
+    collection_ids = []
+    # cols/collections also accepts a block
+    collections_doc_ref.collections do |col|
+      _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      _(col.collection_id).wont_be :empty?
+      collection_ids << col.collection_id
+    end
+    _(collection_ids.count).must_equal collections.count
+    _(collection_ids.sort).must_equal collections.sort
   end
 
   it "can add and delete fields sequentially" do

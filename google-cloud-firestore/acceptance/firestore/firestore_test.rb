@@ -17,20 +17,17 @@ require "firestore_helper"
 describe "Firestore", :firestore_acceptance do
   it "paginates root collections" do
     root_col.add # call to ensure that the collection exists
-    cols = firestore.collections max: 3
-    _(cols).must_be_kind_of Google::Cloud::Firestore::CollectionReferenceList
-    _(cols.size).must_be :<=, 3
-    cols.each do |col|
+    cols = firestore.collections
+    _(cols).must_be_kind_of Enumerator
+    col = cols.peek
+    _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(col.collection_path).wont_be :empty?
+    paths = cols.take(3).map do |col|
       _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
       _(col.collection_path).wont_be :empty?
+      col.collection_path
     end
-    cols = cols.next
-    _(cols).must_be_kind_of Google::Cloud::Firestore::CollectionReferenceList
-    _(cols.size).must_be :<=, 3
-    cols.each do |col|
-      _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
-      _(col.collection_path).wont_be :empty?
-    end
+    _(paths.size).must_be :<=, 3
   end
 
   it "has collection method" do
