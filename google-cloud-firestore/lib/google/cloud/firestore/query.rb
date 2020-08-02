@@ -987,7 +987,7 @@ module Google
         end
 
         def order_direction direction
-          return :DESCENDING if direction.to_s.downcase.start_with? "d".freeze
+          return :DESCENDING if direction.to_s.downcase.start_with? "d"
           :ASCENDING
         end
 

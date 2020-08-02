@@ -116,7 +116,7 @@ module Google
             CollectionReference.from_path "#{parent}/#{collection_id}", client
           end)
           token = grpc.next_page_token
-          token = nil if token == "".freeze
+          token = nil if token == ""
           cols.instance_variable_set :@token, token
           cols.instance_variable_set :@client, client
           cols.instance_variable_set :@parent, parent

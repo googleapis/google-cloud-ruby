@@ -170,7 +170,7 @@ module Google
             documents.instance_variable_set :@parent, parent
             documents.instance_variable_set :@collection_id, collection_id
             token = grpc.next_page_token
-            token = nil if token == "".freeze
+            token = nil if token == ""
             documents.instance_variable_set :@token, token
             documents.instance_variable_set :@client, client
             documents.instance_variable_set :@max, max
