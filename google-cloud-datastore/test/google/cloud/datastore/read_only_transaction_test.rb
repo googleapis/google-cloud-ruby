@@ -18,20 +18,20 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
   let(:service) do
     s = dataset.service
     s.mocked_service = Minitest::Mock.new
-    s.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: Google::Datastore::V1::TransactionOptions.new(read_write: nil, read_only: Google::Datastore::V1::TransactionOptions::ReadOnly.new)]
+    s.mocked_service.expect :begin_transaction, begin_tx_res, [project_id: project, transaction_options: Google::Cloud::Datastore::V1::TransactionOptions.new(read_write: nil, read_only: Google::Cloud::Datastore::V1::TransactionOptions::ReadOnly.new)]
     s
   end
   let(:transaction) { Google::Cloud::Datastore::ReadOnlyTransaction.new service }
   let(:commit_res) do
-    Google::Datastore::V1::CommitResponse.new(
-      mutation_results: [Google::Datastore::V1::MutationResult.new]
+    Google::Cloud::Datastore::V1::CommitResponse.new(
+      mutation_results: [Google::Cloud::Datastore::V1::MutationResult.new]
     )
   end
   let(:lookup_res) do
-    Google::Datastore::V1::LookupResponse.new(
+    Google::Cloud::Datastore::V1::LookupResponse.new(
       found: 2.times.map do
-        Google::Datastore::V1::EntityResult.new(
-          entity: Google::Datastore::V1::Entity.new(
+        Google::Cloud::Datastore::V1::EntityResult.new(
+          entity: Google::Cloud::Datastore::V1::Entity.new(
             key: Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc,
             properties: { "name" => Google::Cloud::Datastore::Convert.to_value("thingamajig") }
           )
@@ -41,7 +41,7 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
   end
   let(:run_query_res) do
     run_query_res_entities = 2.times.map do |i|
-      Google::Datastore::V1::EntityResult.new(
+      Google::Cloud::Datastore::V1::EntityResult.new(
         entity: Google::Cloud::Datastore::Entity.new.tap do |e|
           e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
           e["name"] = "thingamajig"
@@ -49,8 +49,8 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
         cursor: "result-cursor-#{i}".force_encoding("ASCII-8BIT")
       )
     end
-    Google::Datastore::V1::RunQueryResponse.new(
-      batch: Google::Datastore::V1::QueryResultBatch.new(
+    Google::Cloud::Datastore::V1::RunQueryResponse.new(
+      batch: Google::Cloud::Datastore::V1::QueryResultBatch.new(
         entity_results: run_query_res_entities,
         end_cursor: Google::Cloud::Datastore::Convert.decode_bytes(query_cursor)
       )
@@ -58,11 +58,11 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
   end
   let(:query_cursor) { Google::Cloud::Datastore::Cursor.new "c3VwZXJhd2Vzb21lIQ==" }
   let(:begin_tx_res) do
-    Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
+    Google::Cloud::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
   end
   let(:tx_id) { "giterdone".encode("ASCII-8BIT") }
-  let(:read_options) { Google::Datastore::V1::ReadOptions.new(transaction: tx_id) }
-  let(:gql_query_grpc) { Google::Datastore::V1::GqlQuery.new(query_string: "SELECT * FROM Task") }
+  let(:read_options) { Google::Cloud::Datastore::V1::ReadOptions.new(transaction: tx_id) }
+  let(:gql_query_grpc) { Google::Cloud::Datastore::V1::GqlQuery.new(query_string: "SELECT * FROM Task") }
 
   after do
     transaction.service.mocked_service.verify
@@ -70,8 +70,8 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
 
   it "find can take a key" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc]
-    read_options = Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
-    transaction.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: read_options, options: default_options]
+    read_options = Google::Cloud::Datastore::V1::ReadOptions.new(transaction: tx_id)
+    transaction.service.mocked_service.expect :lookup, lookup_res, [project_id: project, keys: keys, read_options: read_options]
 
     key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
     entity = transaction.find key
@@ -81,8 +81,8 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
   it "find_all takes several keys" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
              Google::Cloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
-    read_options = Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
-    transaction.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: read_options, options: default_options]
+    read_options = Google::Cloud::Datastore::V1::ReadOptions.new(transaction: tx_id)
+    transaction.service.mocked_service.expect :lookup, lookup_res, [project_id: project, keys: keys, read_options: read_options]
 
     key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
     key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
@@ -97,7 +97,7 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
 
   it "run will fulfill a query" do
     query_grpc = Google::Cloud::Datastore::Query.new.kind("User").to_grpc
-    transaction.service.mocked_service.expect :run_query, run_query_res, [project, partition_id: nil, read_options: read_options, query: query_grpc, gql_query: nil, options: default_options]
+    transaction.service.mocked_service.expect :run_query, run_query_res, [project_id: project, partition_id: nil, read_options: read_options, query: query_grpc, gql_query: nil]
 
     query = Google::Cloud::Datastore::Query.new.kind("User")
     entities = transaction.run query
@@ -115,7 +115,7 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
   end
 
   it "run will fulfill a gql query" do
-    transaction.service.mocked_service.expect :run_query, run_query_res, [project, partition_id: nil, read_options: read_options, query: nil, gql_query: gql_query_grpc, options: default_options]
+    transaction.service.mocked_service.expect :run_query, run_query_res, [project_id: project, partition_id: nil, read_options: read_options, query: nil, gql_query: gql_query_grpc]
 
     gql = transaction.gql "SELECT * FROM Task"
     entities = transaction.run gql

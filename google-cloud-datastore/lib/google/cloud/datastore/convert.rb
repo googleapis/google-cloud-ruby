@@ -77,7 +77,7 @@ module Google
         end
 
         ##
-        # Gets an object from a Google::Datastore::V1::Value.
+        # Gets an object from a Google::Cloud::Datastore::V1::Value.
         def self.from_value grpc_value
           if grpc_value.value_type == :null_value
             return nil
@@ -110,9 +110,9 @@ module Google
         end
 
         ##
-        # Stores an object into a Google::Datastore::V1::Value.
+        # Stores an object into a Google::Cloud::Datastore::V1::Value.
         def self.to_value value
-          v = Google::Datastore::V1::Value.new
+          v = Google::Cloud::Datastore::V1::Value.new
           if NilClass === value
             v.null_value = :NULL_VALUE
           elsif TrueClass === value
@@ -133,7 +133,7 @@ module Google
           elsif String === value
             v.string_value = value
           elsif Array === value
-            v.array_value = Google::Datastore::V1::ArrayValue.new(
+            v.array_value = Google::Cloud::Datastore::V1::ArrayValue.new(
               values: value.map { |val| to_value val }
             )
           elsif value.respond_to? :to_time

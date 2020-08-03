@@ -14,7 +14,7 @@
 
 
 require "googleauth"
-require "google/cloud/datastore/v1/credentials"
+require "google/cloud/datastore/v1/datastore/credentials"
 
 module Google
   module Cloud
@@ -38,7 +38,7 @@ module Google
       #
       #   datastore.project_id #=> "my-todo-project"
       #
-      class Credentials < Google::Cloud::Datastore::V1::Credentials
+      class Credentials < Google::Cloud::Datastore::V1::Datastore::Credentials
       end
     end
   end

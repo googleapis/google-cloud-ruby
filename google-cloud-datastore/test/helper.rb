@@ -20,32 +20,8 @@ require "minitest/focus"
 require "minitest/rg"
 require "google/cloud/datastore"
 
-##
-# Monkey-Patch CallOptions to support Mocks
-class Google::Gax::CallOptions
-  ##
-  # Minitest Mock depends on === to match same-value objects.
-  # By default, CallOptions objects do not match with ===.
-  # Therefore, we must add this capability.
-  def === other
-    return false unless other.is_a? Google::Gax::CallOptions
-    timeout === other.timeout &&
-      retry_options === other.retry_options &&
-      page_token === other.page_token &&
-      kwargs === other.kwargs
-  end
-  def == other
-    return false unless other.is_a? Google::Gax::CallOptions
-    timeout == other.timeout &&
-      retry_options == other.retry_options &&
-      page_token == other.page_token &&
-      kwargs == other.kwargs
-  end
-end
-
 class MockDatastore < Minitest::Spec
   let(:project) { "my-todo-project" }
-  let(:default_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
   let(:credentials) { OpenStruct.new }
   let(:dataset) { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project, credentials)) }
 

@@ -73,7 +73,7 @@ module Google
         alias to_hash to_h
 
         def to_grpc
-          # Convert to Hash with Google::Datastore::V1::Value values.
+          # Convert to Hash with Google::Cloud::Datastore::V1::Value values.
           Hash[@hash.map { |k, v| [k.to_s, Convert.to_value(v)] }]
         end
 
