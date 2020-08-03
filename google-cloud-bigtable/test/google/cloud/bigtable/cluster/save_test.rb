@@ -21,7 +21,7 @@ describe Google::Cloud::Bigtable::Cluster, :save, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:cluster_id) { "test-cluster" }
   let(:cluster_grpc){
-    Google::Bigtable::Admin::V2::Cluster.new(
+    Google::Cloud::Bigtable::Admin::V2::Cluster.new(
       name: cluster_path(instance_id, cluster_id),
       serve_nodes: 3,
       location: location_path("us-east-1b"),
@@ -40,7 +40,7 @@ describe Google::Cloud::Bigtable::Cluster, :save, :mock_bigtable do
     operation_done_grpc(
       ops_name,
       "type.googleapis.com/google.bigtable.admin.v2.UpdateClusterMetadata",
-      Google::Bigtable::Admin::V2::UpdateClusterMetadata.new,
+      Google::Cloud::Bigtable::Admin::V2::UpdateClusterMetadata.new,
       "type.googleapis.com/google.bigtable.admin.v2.Cluster",
       cluster_grpc
     )
@@ -52,18 +52,12 @@ describe Google::Cloud::Bigtable::Cluster, :save, :mock_bigtable do
     cluster.nodes = serve_nodes
 
     mock = Minitest::Mock.new
-    update_res = Google::Gax::Operation.new(
-                   job_grpc,
-                   mock,
-                   Google::Bigtable::Admin::V2::Cluster,
-                   Google::Bigtable::Admin::V2::UpdateClusterMetadata
-                 )
-    mock.expect :update_cluster, update_res, [
-      cluster_path(instance_id, cluster_id),
-      location_path(location),
-      serve_nodes
+    mock.expect :update_cluster, operation_grpc(job_grpc, mock), [
+      name: cluster_path(instance_id, cluster_id),
+      location: location_path(location),
+      serve_nodes: serve_nodes
     ]
-    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
+    mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_instances = mock
 
     job = cluster.save
@@ -81,5 +75,14 @@ describe Google::Cloud::Bigtable::Cluster, :save, :mock_bigtable do
     _(cluster).must_be_kind_of Google::Cloud::Bigtable::Cluster
 
     mock.verify
+  end
+
+  def operation_grpc longrunning_grpc, mock
+    Gapic::Operation.new(
+      longrunning_grpc,
+      mock,
+      result_type: Google::Cloud::Bigtable::Admin::V2::Cluster,
+      metadata_type: Google::Cloud::Bigtable::Admin::V2::UpdateClusterMetadata
+    )
   end
 end

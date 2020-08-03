@@ -56,9 +56,9 @@ module Google
 
         # @private
         #
-        # Create a new ColumnFamily instance from a {Google::Bigtable::Admin::V2::ColumnFamily}.
+        # Create a new ColumnFamily instance from a {Google::Cloud::Bigtable::Admin::V2::ColumnFamily}.
         #
-        # @param grpc [Google::Bigtable::Admin::V2::ColumnFamily]
+        # @param grpc [Google::Cloud::Bigtable::Admin::V2::ColumnFamily]
         # @param name [String] Column family name
         # @return [Google::Cloud::Bigtable::ColumnFamily]
         #

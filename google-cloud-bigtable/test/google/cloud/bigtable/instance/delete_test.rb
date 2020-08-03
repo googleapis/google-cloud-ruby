@@ -18,7 +18,7 @@ require "helper"
 describe Google::Cloud::Bigtable::Instance, :delete, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:instance_grpc){
-    Google::Bigtable::Admin::V2::Instance.new(
+    Google::Cloud::Bigtable::Admin::V2::Instance.new(
       instance_hash(
         name: instance_id,
         display_name: "Test instance",
@@ -34,7 +34,7 @@ describe Google::Cloud::Bigtable::Instance, :delete, :mock_bigtable do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_instance, true, [instance_grpc.name]
+    mock.expect :delete_instance, true, [name: instance_grpc.name]
     bigtable.service.mocked_instances = mock
 
     result = instance.delete

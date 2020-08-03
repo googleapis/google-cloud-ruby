@@ -65,7 +65,7 @@ module Google
               default_storage_type: storage_type
             }.delete_if { |_, v| v.nil? }
 
-            self[name] = Google::Bigtable::Admin::V2::Cluster.new attrs
+            self[name] = Google::Cloud::Bigtable::Admin::V2::Cluster.new attrs
           end
         end
       end

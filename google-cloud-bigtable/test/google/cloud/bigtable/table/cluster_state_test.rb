@@ -18,7 +18,7 @@ require "helper"
 describe Google::Cloud::Bigtable::Table::ClusterState, :mock_bigtable do
   it "knows the identifiers" do
     cluster_name = "test-cluster"
-    grpc = Google::Bigtable::Admin::V2::Table::ClusterState.new(
+    grpc = Google::Cloud::Bigtable::Admin::V2::Table::ClusterState.new(
       replication_state: :READY
     )
     cluster_state = Google::Cloud::Bigtable::Table::ClusterState.from_grpc(

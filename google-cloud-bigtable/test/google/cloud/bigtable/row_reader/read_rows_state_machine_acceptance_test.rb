@@ -48,10 +48,10 @@ describe Google::Cloud::Bigtable::RowsReader, :read_state_machine_acceptance, :m
 
   def chunk_data_to_read_res data
     chunks = data.map do |chunk|
-      Google::Bigtable::V2::ReadRowsResponse::CellChunk.decode(Base64.decode64(chunk))
+      Google::Cloud::Bigtable::V2::ReadRowsResponse::CellChunk.decode(Base64.decode64(chunk))
     end
 
-    [Google::Bigtable::V2::ReadRowsResponse.new(chunks: chunks)]
+    [Google::Cloud::Bigtable::V2::ReadRowsResponse.new(chunks: chunks)]
   end
 
   def convert_rows_to_test_result(rows, error = false)
@@ -86,7 +86,7 @@ describe Google::Cloud::Bigtable::RowsReader, :read_state_machine_acceptance, :m
       table = bigtable.table(instance_id, table_id)
 
       get_res = chunk_data_to_read_res(test_data["chunks_base64"])
-      mock.expect :read_rows, get_res, [table_path(instance_id, table_id), Hash]
+      mock.expect :read_rows, get_res, [Hash]
       assert_raises Google::Cloud::Bigtable::InvalidRowStateError do
         table.read_rows.each{|v| v}
       end
@@ -102,7 +102,7 @@ describe Google::Cloud::Bigtable::RowsReader, :read_state_machine_acceptance, :m
       table = bigtable.table(instance_id, table_id)
 
       get_res = chunk_data_to_read_res(test_data["chunks_base64"])
-      mock.expect :read_rows, get_res, [table_path(instance_id, table_id), Hash]
+      mock.expect :read_rows, get_res, [Hash]
 
       expected_result = TestResult.build(test_data["results"])
       expected_families = expected_result.map(&:fm).uniq.sort

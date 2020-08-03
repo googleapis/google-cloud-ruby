@@ -56,7 +56,7 @@ module Google
         # @param family [String] Column family name.
         #
         def initialize family
-          @grpc = Google::Bigtable::V2::ColumnRange.new family_name: family
+          @grpc = Google::Cloud::Bigtable::V2::ColumnRange.new family_name: family
         end
 
         ##
@@ -183,7 +183,7 @@ module Google
 
         # @private
         #
-        # @return [Google::Bigtable::V2::ColumnRange]
+        # @return [Google::Cloud::Bigtable::V2::ColumnRange]
         #
         def to_grpc
           @grpc

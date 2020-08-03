@@ -128,7 +128,7 @@ describe Google::Cloud::Bigtable::RowFilter::InterleaveFilter, :mock_bigtable do
       _(interleave_filter.filters).must_be :empty?
       interleave_filter.timestamp_range(from: from, to: to)
       filter = assert_filter :timestamp_range_filter
-      range_grpc = Google::Bigtable::V2::TimestampRange.new(
+      range_grpc = Google::Cloud::Bigtable::V2::TimestampRange.new(
         start_timestamp_micros: from, end_timestamp_micros: to
       )
       _(filter.to_grpc.timestamp_range_filter).must_equal range_grpc
@@ -139,7 +139,7 @@ describe Google::Cloud::Bigtable::RowFilter::InterleaveFilter, :mock_bigtable do
       _(interleave_filter.filters).must_be :empty?
       interleave_filter.timestamp_range(from: from)
       filter = assert_filter :timestamp_range_filter
-      range_grpc = Google::Bigtable::V2::TimestampRange.new(
+      range_grpc = Google::Cloud::Bigtable::V2::TimestampRange.new(
         start_timestamp_micros: from
       )
       _(filter.to_grpc.timestamp_range_filter).must_equal range_grpc
@@ -150,7 +150,7 @@ describe Google::Cloud::Bigtable::RowFilter::InterleaveFilter, :mock_bigtable do
       _(interleave_filter.filters).must_be :empty?
       interleave_filter.timestamp_range(to: to)
       filter = assert_filter :timestamp_range_filter
-      range_grpc = Google::Bigtable::V2::TimestampRange.new(
+      range_grpc = Google::Cloud::Bigtable::V2::TimestampRange.new(
         end_timestamp_micros: to
       )
       _(filter.to_grpc.timestamp_range_filter).must_equal range_grpc
@@ -166,7 +166,7 @@ describe Google::Cloud::Bigtable::RowFilter::InterleaveFilter, :mock_bigtable do
       interleave_filter.value_range(range)
       filter = assert_filter :value_range_filter
       grpc = filter.to_grpc.value_range_filter
-      _(grpc).must_be_kind_of Google::Bigtable::V2::ValueRange
+      _(grpc).must_be_kind_of Google::Cloud::Bigtable::V2::ValueRange
       _(grpc.start_value_closed).must_equal from_value
       _(grpc.end_value_open).must_equal to_value
     end
@@ -189,7 +189,7 @@ describe Google::Cloud::Bigtable::RowFilter::InterleaveFilter, :mock_bigtable do
       interleave_filter.column_range(range)
       filter = assert_filter :column_range_filter
       grpc = filter.to_grpc.column_range_filter
-      _(grpc).must_be_kind_of Google::Bigtable::V2::ColumnRange
+      _(grpc).must_be_kind_of Google::Cloud::Bigtable::V2::ColumnRange
       _(grpc.family_name).must_equal family
       _(grpc.start_qualifier_closed).must_equal from_value
       _(grpc.end_qualifier_open).must_equal to_value

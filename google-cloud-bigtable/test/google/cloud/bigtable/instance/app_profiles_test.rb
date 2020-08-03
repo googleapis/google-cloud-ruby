@@ -18,7 +18,7 @@ require "helper"
 describe Google::Cloud::Bigtable::Instance, :app_profiles, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:instance_grpc){
-    Google::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id))
+    Google::Cloud::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id))
   }
   let(:instance) {
     Google::Cloud::Bigtable::Instance.from_grpc(instance_grpc, bigtable.service)
@@ -41,7 +41,7 @@ describe Google::Cloud::Bigtable::Instance, :app_profiles, :mock_bigtable do
   it "list app_profiles" do
     get_res =  MockPagedEnumerable.new([first_page])
     mock = Minitest::Mock.new
-    mock.expect :list_app_profiles, get_res, ["projects/test/instances/test-instance"]
+    mock.expect :list_app_profiles, get_res, [parent: "projects/test/instances/test-instance"]
     bigtable.service.mocked_instances = mock
 
     app_profiles = instance.app_profiles
@@ -54,7 +54,7 @@ describe Google::Cloud::Bigtable::Instance, :app_profiles, :mock_bigtable do
   it "paginates app_profiles with next? and next" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_app_profiles, get_res, ["projects/test/instances/test-instance"]
+    mock.expect :list_app_profiles, get_res, [parent: "projects/test/instances/test-instance"]
     bigtable.service.mocked_instances = mock
 
     list = instance.app_profiles
@@ -70,7 +70,7 @@ describe Google::Cloud::Bigtable::Instance, :app_profiles, :mock_bigtable do
   it "paginates app_profiles with all" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_app_profiles, get_res, ["projects/test/instances/test-instance"]
+    mock.expect :list_app_profiles, get_res, [parent: "projects/test/instances/test-instance"]
     bigtable.service.mocked_instances = mock
 
     app_profiles = instance.app_profiles.all.to_a
@@ -83,7 +83,7 @@ describe Google::Cloud::Bigtable::Instance, :app_profiles, :mock_bigtable do
   it "iterates app_profiles with all using Enumerator" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_app_profiles, get_res, ["projects/test/instances/test-instance"]
+    mock.expect :list_app_profiles, get_res, [parent: "projects/test/instances/test-instance"]
     bigtable.service.mocked_instances = mock
 
     app_profiles = instance.app_profiles.all.take(5)

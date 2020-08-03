@@ -27,25 +27,25 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
   let(:cell_value) { "xyz" }
   let(:timestamp) { timestamp_micros }
   let(:mutation_gprc) {
-    Google::Bigtable::V2::Mutation.new(set_cell: {
+    Google::Cloud::Bigtable::V2::Mutation.new(set_cell: {
       family_name: family, column_qualifier: qualifier, value: cell_value, timestamp_micros: timestamp
     })
   }
   let(:mutation_entry_grpc){
-    Google::Bigtable::V2::MutateRowsRequest::Entry.new(
+    Google::Cloud::Bigtable::V2::MutateRowsRequest::Entry.new(
       row_key: row_key,
       mutations: [mutation_gprc]
     )
   }
   let(:req_entries_grpc) do
     2.times.map do |i|
-      mutation = Google::Bigtable::V2::Mutation.new(set_cell: {
+      mutation = Google::Cloud::Bigtable::V2::Mutation.new(set_cell: {
         family_name: "cf#{i}",
         column_qualifier: "field01",
         timestamp_micros: timestamp_micros,
         value: "XYZ-#{i}"
       })
-      Google::Bigtable::V2::MutateRowsRequest::Entry.new(
+      Google::Cloud::Bigtable::V2::MutateRowsRequest::Entry.new(
         row_key:  "rk-#{i}",
         mutations: [mutation]
       )
@@ -58,7 +58,7 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
   it "mutate rows with success mutation response" do
     mock = Minitest::Mock.new
     bigtable.service.mocked_client = mock
-    res = Google::Bigtable::V2::MutateRowsResponse.new(
+    res = Google::Cloud::Bigtable::V2::MutateRowsResponse.new(
       entries: [{
         index: 0,
         status: { code: Google::Rpc::Code::OK, message: "success", details: [] }
@@ -66,8 +66,8 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
     )
 
     mock.expect :mutate_rows, [res], [
-      table_path(instance_id, table_id),
-      [mutation_entry_grpc],
+      table_name: table_path(instance_id, table_id),
+      entries: [mutation_entry_grpc],
       app_profile_id: app_profile_id
     ]
 
@@ -86,22 +86,22 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
   end
 
   it "do not retry for cell timestamp set to server time(-1)" do
-    mutation = Google::Bigtable::V2::Mutation.new(set_cell: {
+    mutation = Google::Cloud::Bigtable::V2::Mutation.new(set_cell: {
       family_name: family, column_qualifier: qualifier, value: cell_value, timestamp_micros: -1
     })
-    entry = Google::Bigtable::V2::MutateRowsRequest::Entry.new(
+    entry = Google::Cloud::Bigtable::V2::MutateRowsRequest::Entry.new(
       row_key: row_key,
       mutations: [ mutation ]
     )
 
-    res = Google::Bigtable::V2::MutateRowsResponse.new(
+    res = Google::Cloud::Bigtable::V2::MutateRowsResponse.new(
       entries: [{
         index: 0,
         status: { code: Google::Rpc::Code::DEADLINE_EXCEEDED, message: "failed", details: [] }
       }]
     )
     mock = Minitest::Mock.new
-    mock.expect :mutate_rows, [res], [table_path(instance_id, table_id), [entry], app_profile_id: app_profile_id]
+    mock.expect :mutate_rows, [res], [table_name: table_path(instance_id, table_id), entries: [entry], app_profile_id: app_profile_id]
 
     bigtable.service.mocked_client = mock
 
@@ -142,7 +142,7 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
     ]
 
     retry_responses = retry_responses.map do |res_entries|
-      [Google::Bigtable::V2::MutateRowsResponse.new(entries: res_entries)]
+      [Google::Cloud::Bigtable::V2::MutateRowsResponse.new(entries: res_entries)]
     end
 
     mock = OpenStruct.new(
@@ -153,9 +153,9 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
       req_retry_entries: retry_entries,
       req_retry_response: retry_responses
     )
-    def mock.mutate_rows(parent, mutation_entries, app_profile_id: nil)
-      t._(parent).must_equal expected_table_path
-      t._(mutation_entries).must_equal req_retry_entries[self.retry_count]
+    def mock.mutate_rows table_name: nil, app_profile_id: nil, entries: nil
+      t._(table_name).must_equal expected_table_path
+      t._(entries).must_equal req_retry_entries[self.retry_count]
       t._(app_profile_id).must_equal expected_req_app_profile_id
 
       res = req_retry_response[self.retry_count]
@@ -204,10 +204,10 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
     ]
 
     retry_responses = retry_responses.map do |res_entries|
-      [Google::Bigtable::V2::MutateRowsResponse.new(entries: res_entries)]
+      [Google::Cloud::Bigtable::V2::MutateRowsResponse.new(entries: res_entries)]
     end
 
-    expected_response = Google::Bigtable::V2::MutateRowsResponse.new(entries: [
+    expected_response = Google::Cloud::Bigtable::V2::MutateRowsResponse.new(entries: [
       { index: 0, status: { code: Google::Rpc::Code::OK, message: "success"}},
       { index: 1, status: { code: Google::Rpc::Code::OK, message: "success"}}
     ])
@@ -220,9 +220,9 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
       req_retry_entries: retry_entries,
       req_retry_response: retry_responses
     )
-    def mock.mutate_rows(parent, mutation_entries, app_profile_id: nil)
-      t._(parent).must_equal expected_table_path
-      t._(mutation_entries).must_equal req_retry_entries[self.retry_count]
+    def mock.mutate_rows table_name: nil, app_profile_id: nil, entries: nil
+      t._(table_name).must_equal expected_table_path
+      t._(entries).must_equal req_retry_entries[self.retry_count]
       t._(app_profile_id).must_equal expected_req_app_profile_id
 
       res = req_retry_response[self.retry_count]

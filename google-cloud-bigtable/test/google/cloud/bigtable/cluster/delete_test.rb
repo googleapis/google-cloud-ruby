@@ -19,7 +19,7 @@ describe Google::Cloud::Bigtable::Cluster, :delete, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:cluster_id) { "test-cluster" }
   let(:cluster_grpc){
-    Google::Bigtable::Admin::V2::Cluster.new(
+    Google::Cloud::Bigtable::Admin::V2::Cluster.new(
       name: cluster_path(instance_id, cluster_id),
       serve_nodes: 3,
       location: location_path("us-east-1b"),
@@ -33,7 +33,7 @@ describe Google::Cloud::Bigtable::Cluster, :delete, :mock_bigtable do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_cluster, true, [cluster_grpc.name]
+    mock.expect :delete_cluster, true, [name: cluster_grpc.name]
     bigtable.service.mocked_instances = mock
 
     result = cluster.delete

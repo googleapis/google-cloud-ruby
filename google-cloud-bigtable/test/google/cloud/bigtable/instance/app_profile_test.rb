@@ -19,7 +19,7 @@ describe Google::Cloud::Bigtable::Instance, :app_profile, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:location_id) { "us-east-1b" }
   let(:instance_grpc){
-    Google::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id))
+    Google::Cloud::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id))
   }
   let(:instance) {
     Google::Cloud::Bigtable::Instance.from_grpc(instance_grpc, bigtable.service)
@@ -31,7 +31,7 @@ describe Google::Cloud::Bigtable::Instance, :app_profile, :mock_bigtable do
     get_res = app_profile_grpc instance_id, app_profile_id
 
     mock = Minitest::Mock.new
-    mock.expect :get_app_profile, get_res, [app_profile_path(instance_id, app_profile_id)]
+    mock.expect :get_app_profile, get_res, [name: app_profile_path(instance_id, app_profile_id)]
     bigtable.service.mocked_instances = mock
     app_profile = instance.app_profile(app_profile_id)
 
@@ -48,9 +48,7 @@ describe Google::Cloud::Bigtable::Instance, :app_profile, :mock_bigtable do
 
     stub = Object.new
     def stub.get_app_profile *args
-      gax_error = Google::Gax::GaxError.new "not found"
-      gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-      raise gax_error
+      raise Google::Cloud::NotFoundError.new("not found")
     end
 
     bigtable.service.mocked_instances = stub

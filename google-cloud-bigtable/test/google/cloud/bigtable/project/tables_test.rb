@@ -22,23 +22,23 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
   let(:first_page) do
     h = tables_hash(instance_id)
     h[:next_page_token] = "next_page_token"
-    Google::Bigtable::Admin::V2::ListTablesResponse.new(h)
+    Google::Cloud::Bigtable::Admin::V2::ListTablesResponse.new(h)
   end
   let(:second_page) do
     h = tables_hash(instance_id, start_id: 10)
     h[:next_page_token] = "second_page_token"
-    Google::Bigtable::Admin::V2::ListTablesResponse.new(h)
+    Google::Cloud::Bigtable::Admin::V2::ListTablesResponse.new(h)
   end
   let(:last_page) do
     h = tables_hash(instance_id, start_id: 20)
     h[:tables].pop
-    Google::Bigtable::Admin::V2::ListTablesResponse.new(h)
+    Google::Cloud::Bigtable::Admin::V2::ListTablesResponse.new(h)
   end
 
   it "list tables" do
     get_res =  MockPagedEnumerable.new([first_page])
     mock = Minitest::Mock.new
-    mock.expect :list_tables, get_res, [instance_path(instance_id), view: nil]
+    mock.expect :list_tables, get_res, [parent: instance_path(instance_id), view: nil]
     bigtable.service.mocked_tables = mock
 
     tables = bigtable.tables(instance_id)
@@ -51,7 +51,7 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
   it "paginates tables with next? and next" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_tables, get_res, [instance_path(instance_id), view: nil]
+    mock.expect :list_tables, get_res, [parent: instance_path(instance_id), view: nil]
     bigtable.service.mocked_tables = mock
 
     list = bigtable.tables(instance_id)
@@ -67,7 +67,7 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
   it "paginates tables with all" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_tables, get_res, [instance_path(instance_id), view: nil]
+    mock.expect :list_tables, get_res, [parent: instance_path(instance_id), view: nil]
     bigtable.service.mocked_tables = mock
 
     tables = bigtable.tables(instance_id).all.to_a
@@ -80,7 +80,7 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
   it "iterates tables with all using Enumerator" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_tables, get_res, [instance_path(instance_id), view: nil]
+    mock.expect :list_tables, get_res, [parent: instance_path(instance_id), view: nil]
     bigtable.service.mocked_tables = mock
 
     tables = bigtable.tables(instance_id).all.take(5)

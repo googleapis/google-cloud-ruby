@@ -21,7 +21,7 @@ describe Google::Cloud::Bigtable::SampleRowKey, :simple_row_key, :mock_bigtable 
   it "create instance from grpc instance with row key and offset" do
     row_key = "test-row-key"
     offset = 1000
-    grpc = Google::Bigtable::V2::SampleRowKeysResponse.new(row_key: row_key, offset_bytes: offset)
+    grpc = Google::Cloud::Bigtable::V2::SampleRowKeysResponse.new(row_key: row_key, offset_bytes: offset)
 
     sample_row_key = Google::Cloud::Bigtable::SampleRowKey.from_grpc(grpc)
 

@@ -43,18 +43,17 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
       cells: [cell]
     }
     family = { name: family_name, columns: [column]}
-    res = Google::Bigtable::V2::ReadModifyWriteRowResponse.new(
+    res = Google::Cloud::Bigtable::V2::ReadModifyWriteRowResponse.new(
       row: { key: row_key, families: [family] }
     )
-    rule = Google::Bigtable::V2::ReadModifyWriteRule.new(
+    rule = Google::Cloud::Bigtable::V2::ReadModifyWriteRule.new(
       family_name: family_name, column_qualifier: qualifier, append_value: append_value
     )
 
     mock.expect :read_modify_write_row, res, [
-      table_path(instance_id, table_id),
-      row_key,
-      [rule],
-      app_profile_id: nil
+      table_name: table_path(instance_id, table_id),
+      row_key: row_key,
+      rules: [rule]
     ]
 
     row = table.read_modify_write_row(
@@ -91,22 +90,21 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
       cells: [cell1, cell2]
     }
     family = { name: family_name, columns: [column]}
-    res = Google::Bigtable::V2::ReadModifyWriteRowResponse.new(
+    res = Google::Cloud::Bigtable::V2::ReadModifyWriteRowResponse.new(
       row: { key: row_key, families: [family] }
     )
-    rule_1 = Google::Bigtable::V2::ReadModifyWriteRule.new(
+    rule_1 = Google::Cloud::Bigtable::V2::ReadModifyWriteRule.new(
       family_name: family_name, column_qualifier: qualifier, append_value: append_value
     )
 
-    rule_2 = Google::Bigtable::V2::ReadModifyWriteRule.new(
+    rule_2 = Google::Cloud::Bigtable::V2::ReadModifyWriteRule.new(
       family_name: family_name, column_qualifier: qualifier, increment_amount: increment_amount
     )
 
     mock.expect :read_modify_write_row, res, [
-      table_path(instance_id, table_id),
-      row_key,
-      [rule_1, rule_2],
-      app_profile_id: nil
+      table_name: table_path(instance_id, table_id),
+      row_key: row_key,
+      rules: [rule_1, rule_2]
     ]
 
     row = table.read_modify_write_row(
@@ -134,9 +132,7 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
   it "read modify and write row with single rule" do
     stub = Object.new
     def stub.read_modify_write_row *args
-      gax_error = Google::Gax::RetryError.new "Exception occurred"
-      gax_error.instance_variable_set :@cause, GRPC::InvalidArgument.new(3, "Invalid id for collection columnFamilies")
-      raise gax_error
+      raise Google::Cloud::InvalidArgumentError.new("Invalid id for collection columnFamilies")
     end
     bigtable.service.mocked_client = stub
 

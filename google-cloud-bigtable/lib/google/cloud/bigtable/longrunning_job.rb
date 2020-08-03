@@ -29,7 +29,7 @@ module Google
       #
       class LongrunningJob
         # @private
-        # The Google::Gax::Operation gRPC object.
+        # The Gapic::Operation gRPC object.
         attr_accessor :grpc
 
         # @private
@@ -109,7 +109,7 @@ module Google
         end
 
         # @private
-        # New BasicJob from a Google::Gax::Operation object.
+        # New BasicJob from a Gapic::Operation object.
         def self.from_grpc grpc, service
           new.tap do |job|
             job.grpc =  grpc

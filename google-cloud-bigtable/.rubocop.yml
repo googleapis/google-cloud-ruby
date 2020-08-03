@@ -5,11 +5,6 @@ AllCops:
   Exclude:
     - "acceptance/**/*"
     - "conformance/**/*"
-    - "lib/**/*_pb.rb"
-    - "lib/google/cloud/bigtable/admin.rb"
-    - "lib/google/cloud/bigtable/admin/**/*"
-    - "lib/google/cloud/bigtable/v2.rb"
-    - "lib/google/cloud/bigtable/v2/**/*"
     - "samples/**/*"
     - "support/**/*"
     - "test/**/*"

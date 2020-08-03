@@ -301,9 +301,9 @@ module Google
 
         # @private
         #
-        # Creates a new Backup instance from a Google::Bigtable::Admin::V2::Backup.
+        # Creates a new Backup instance from a Google::Cloud::Bigtable::Admin::V2::Backup.
         #
-        # @param grpc [Google::Bigtable::Admin::V2::Backup]
+        # @param grpc [Google::Cloud::Bigtable::Admin::V2::Backup]
         # @param service [Google::Cloud::Bigtable::Service]
         # @return [Google::Cloud::Bigtable::Backup]
         def self.from_grpc grpc, service

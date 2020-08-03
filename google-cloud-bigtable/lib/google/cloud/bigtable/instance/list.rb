@@ -138,7 +138,7 @@ module Google
           end
 
           # @private
-          # New Instance::List from a Google::Bigtable::Admin::V2::Instance object.
+          # New Instance::List from a Google::Cloud::Bigtable::Admin::V2::Instance object.
           def self.from_grpc grpc, service
             instances = List.new(Array(grpc.instances).map do |instance|
               Instance.from_grpc instance, service

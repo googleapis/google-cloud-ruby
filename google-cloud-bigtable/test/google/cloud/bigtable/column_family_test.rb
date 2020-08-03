@@ -18,8 +18,8 @@ require "helper"
 describe Google::Cloud::Bigtable::ColumnFamily, :mock_bigtable do
   it "knows the identifiers" do
     cf_name = "cf"
-    gc_rule_grpc = Google::Bigtable::Admin::V2::GcRule.new(max_num_versions: 3)
-    cf_grpc = Google::Bigtable::Admin::V2::ColumnFamily.new(
+    gc_rule_grpc = Google::Cloud::Bigtable::Admin::V2::GcRule.new(max_num_versions: 3)
+    cf_grpc = Google::Cloud::Bigtable::Admin::V2::ColumnFamily.new(
       gc_rule: gc_rule_grpc
     )
     column_family = Google::Cloud::Bigtable::ColumnFamily.from_grpc(
@@ -35,7 +35,7 @@ describe Google::Cloud::Bigtable::ColumnFamily, :mock_bigtable do
   end
 
   it "set column family gc rule" do
-    cf_grpc = Google::Bigtable::Admin::V2::ColumnFamily.new
+    cf_grpc = Google::Cloud::Bigtable::Admin::V2::ColumnFamily.new
     column_family = Google::Cloud::Bigtable::ColumnFamily.from_grpc(
       cf_grpc,
       "cf"

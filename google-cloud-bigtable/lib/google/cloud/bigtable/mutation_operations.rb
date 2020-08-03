@@ -89,7 +89,7 @@ module Google
         #   applied in arbitrary order (even between entries for the same row).
         #   At least one entry must be specified, and in total the entries can
         #   contain a maximum of 100,000 mutations.
-        # @return [Array<Google::Bigtable::V2::MutateRowsResponse::Entry>]
+        # @return [Array<Google::Cloud::Bigtable::V2::MutateRowsResponse::Entry>]
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -346,7 +346,7 @@ module Google
 
           ##
           # @private New MutationEntry::Response from a
-          # Google::Bigtable::V2::MutateRowsResponse::Entry object.
+          # Google::Cloud::Bigtable::V2::MutateRowsResponse::Entry object.
           def self.from_grpc grpc
             new grpc.index, Status.from_grpc(grpc.status)
           end

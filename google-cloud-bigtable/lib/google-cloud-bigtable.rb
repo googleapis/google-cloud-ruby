@@ -55,11 +55,6 @@ module Google
     #   should already be composed with a `GRPC::Core::CallCredentials` object.
     #   `Proc` will be used as an updater_proc for the gRPC channel. The proc transforms the
     #   metadata for requests, generally, to give OAuth credentials.
-    # @param client_config [Hash]
-    #   A hash for call options for each method.
-    #   See Google::Gax#construct_settings for the structure of
-    #   this data. Falls back to the default config if not specified
-    #   or the specified config is missing data points.
     # @return [Google::Cloud::Bigtable::Project]
     #
     # @example
@@ -69,13 +64,12 @@ module Google
     #
     #   bigtable = gcloud.bigtable
     #
-    def bigtable scope: nil, timeout: nil, credentials: nil, client_config: nil
+    def bigtable scope: nil, timeout: nil, credentials: nil
       Google::Cloud.bigtable(
-        project_id:    @project,
-        credentials:   (credentials || @keyfile),
-        scope:         scope,
-        timeout:       (timeout || @timeout),
-        client_config: client_config
+        project_id:  @project,
+        credentials: (credentials || @keyfile),
+        scope:       scope,
+        timeout:     (timeout || @timeout)
       )
     end
 
@@ -110,11 +104,6 @@ module Google
     #   updater_proc is supplied.
     # @param timeout [Integer]
     #   The default timeout, in seconds, for calls made through this client.
-    # @param client_config [Hash]
-    #   A hash for call options for each method.
-    #   See Google::Gax#construct_settings for the structure of
-    #   this data. Falls back to the default config if not specified
-    #   or the specified config is missing data points. Optional.
     # @return [Google::Cloud::Bigtable::Project]
     #
     # @example
@@ -122,14 +111,13 @@ module Google
     #
     #   bigtable = Google::Cloud.bigtable
     #
-    def self.bigtable project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil
+    def self.bigtable project_id: nil, credentials: nil, scope: nil, timeout: nil
       require "google/cloud/bigtable"
       Google::Cloud::Bigtable.new(
-        project_id:    project_id,
-        credentials:   credentials,
-        scope:         scope,
-        timeout:       timeout,
-        client_config: client_config
+        project_id:  project_id,
+        credentials: credentials,
+        scope:       scope,
+        timeout:     timeout
       )
     end
   end
@@ -149,6 +137,21 @@ Google::Cloud.configure.add_config! :bigtable do |config|
   default_emulator = Google::Cloud::Config.deferred do
     ENV["BIGTABLE_EMULATOR_HOST"]
   end
+  default_scopes = [
+    "https://www.googleapis.com/auth/bigtable.admin",
+    "https://www.googleapis.com/auth/bigtable.admin.cluster",
+    "https://www.googleapis.com/auth/bigtable.admin.instance",
+    "https://www.googleapis.com/auth/bigtable.admin.table",
+    "https://www.googleapis.com/auth/bigtable.data",
+    "https://www.googleapis.com/auth/bigtable.data.readonly",
+    "https://www.googleapis.com/auth/cloud-bigtable.admin",
+    "https://www.googleapis.com/auth/cloud-bigtable.admin.cluster",
+    "https://www.googleapis.com/auth/cloud-bigtable.admin.table",
+    "https://www.googleapis.com/auth/cloud-bigtable.data",
+    "https://www.googleapis.com/auth/cloud-bigtable.data.readonly",
+    "https://www.googleapis.com/auth/cloud-platform",
+    "https://www.googleapis.com/auth/cloud-platform.read-only"
+  ]
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
@@ -162,10 +165,9 @@ Google::Cloud.configure.add_config! :bigtable do |config|
                       Proc
                     ],
                     allow_nil: true
-  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :scope, default_scopes, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
-  config.add_field! :client_config, nil, match: Hash
-  config.add_field! :emulator_host, default_emulator,
-                    match: String, allow_nil: true
-  config.add_field! :endpoint, nil, match: String
+  config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
+  config.add_field! :endpoint, "bigtable.googleapis.com", match: String
+  config.add_field! :endpoint_admin, "bigtableadmin.googleapis.com", match: String
 end

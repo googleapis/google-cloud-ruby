@@ -366,9 +366,9 @@ module Google
         # @private
         #
         # Creates a new Cluster instance from a
-        # Google::Bigtable::Admin::V2::Cluster.
+        # Google::Cloud::Bigtable::Admin::V2::Cluster.
         #
-        # @param grpc [Google::Bigtable::Admin::V2::Cluster]
+        # @param grpc [Google::Cloud::Bigtable::Admin::V2::Cluster]
         # @param service [Google::Cloud::Bigtable::Service]
         # @return [Google::Cloud::Bigtable::Cluster]
         def self.from_grpc grpc, service

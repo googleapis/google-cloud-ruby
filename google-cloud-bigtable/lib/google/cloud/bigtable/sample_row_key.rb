@@ -72,8 +72,8 @@ module Google
         # @private
         #
         # Creates a new SampleRowKey instance from a
-        # Google::Bigtable::V2::SampleRowKey.
-        # @param grpc [Google::Bigtable::V2::SampleRowKeysResponse]
+        # Google::Cloud::Bigtable::V2::SampleRowKey.
+        # @param grpc [Google::Cloud::Bigtable::V2::SampleRowKeysResponse]
         # @return [Google::Cloud::Bigtable::SampleRowKey]
         #
         def self.from_grpc grpc

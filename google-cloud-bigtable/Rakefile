@@ -58,13 +58,7 @@ task :acceptance, :project, :keyfile do |_t, args|
 
   # clear any env var already set
   require "google/cloud/bigtable/credentials"
-  require "google/cloud/bigtable/admin/credentials"
-  (
-    Google::Cloud::Bigtable::Credentials::PATH_ENV_VARS +
-    Google::Cloud::Bigtable::Credentials::JSON_ENV_VARS +
-    Google::Cloud::Bigtable::Admin::Credentials::PATH_ENV_VARS +
-    Google::Cloud::Bigtable::Admin::Credentials::JSON_ENV_VARS
-  ).each do |path|
+  Google::Cloud::Bigtable::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
 
@@ -113,13 +107,7 @@ namespace :acceptance do
 
     # clear any env var already set
     require "google/cloud/bigtable/credentials"
-    require "google/cloud/bigtable/admin/credentials"
-    (
-      Google::Cloud::Bigtable::Credentials::PATH_ENV_VARS +
-      Google::Cloud::Bigtable::Credentials::JSON_ENV_VARS +
-      Google::Cloud::Bigtable::Admin::Credentials::PATH_ENV_VARS +
-      Google::Cloud::Bigtable::Admin::Credentials::JSON_ENV_VARS
-    ).each do |path|
+    Google::Cloud::Bigtable::Credentials.env_vars.each do |path|
       ENV[path] = nil
     end
 

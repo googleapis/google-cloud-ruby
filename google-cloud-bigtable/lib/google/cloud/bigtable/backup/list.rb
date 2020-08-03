@@ -137,8 +137,8 @@ module Google
           end
 
           # @private
-          # New Snapshot::List from a Google::Gax::PagedEnumerable<Google::Bigtable::Admin::V2::Backup> object.
-          # @param grpc [Google::Gax::PagedEnumerable<Google::Bigtable::Admin::V2::Backup> ]
+          # New Snapshot::List from a Gapic::PagedEnumerable<Google::Cloud::Bigtable::Admin::V2::Backup> object.
+          # @param grpc [Gapic::PagedEnumerable<Google::Cloud::Bigtable::Admin::V2::Backup> ]
           # @param service [Google::Cloud::Bigtable::Service]
           # @return [Array<Google::Cloud::Bigtable::Backup>]
           def self.from_grpc grpc, service

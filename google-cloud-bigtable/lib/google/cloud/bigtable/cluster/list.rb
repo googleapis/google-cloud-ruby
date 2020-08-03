@@ -142,7 +142,7 @@ module Google
 
           # @private
           #
-          # New Cluster::List from a Google::Bigtable::Admin::V2::ListClustersResponse object.
+          # New Cluster::List from a Google::Cloud::Bigtable::Admin::V2::ListClustersResponse object.
           def self.from_grpc grpc, service, instance_id: nil
             clusters = List.new(Array(grpc.clusters).map do |cluster|
               Cluster.from_grpc cluster, service

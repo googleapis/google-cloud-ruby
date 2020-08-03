@@ -28,7 +28,7 @@ module Google
           # Creates a simple filter instance.
           #
           def initialize
-            @grpc = Google::Bigtable::V2::RowFilter.new
+            @grpc = Google::Cloud::Bigtable::V2::RowFilter.new
           end
 
           ##
@@ -230,7 +230,7 @@ module Google
           # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
           #
           def timestamp_range from, to
-            range_grpc = Google::Bigtable::V2::TimestampRange.new
+            range_grpc = Google::Cloud::Bigtable::V2::TimestampRange.new
             range_grpc.start_timestamp_micros = from if from
             range_grpc.end_timestamp_micros = to if to
             @grpc.timestamp_range_filter = range_grpc
@@ -276,7 +276,7 @@ module Google
           #
           # Converts to a gRPC row filter instance.
           #
-          # @return [Google::Bigtable::V2::RowFilter]
+          # @return [Google::Cloud::Bigtable::V2::RowFilter]
           def to_grpc
             @grpc
           end

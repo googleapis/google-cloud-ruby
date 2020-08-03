@@ -23,12 +23,12 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
   let(:backup_id) { "test-backup" }
   let(:source_table_id) { "test-table-source" }
   let :source_table_grpc do
-    Google::Bigtable::Admin::V2::Table.new table_hash(name: table_path(instance_id, source_table_id))
+    Google::Cloud::Bigtable::Admin::V2::Table.new table_hash(name: table_path(instance_id, source_table_id))
   end
   let(:source_table) { Google::Cloud::Bigtable::Table.from_grpc source_table_grpc, bigtable.service }
   let(:target_table_id) { "test-table-target" }
   let :target_table_grpc do
-    Google::Bigtable::Admin::V2::Table.new table_hash(name: table_path(instance_id, target_table_id))
+    Google::Cloud::Bigtable::Admin::V2::Table.new table_hash(name: table_path(instance_id, target_table_id))
   end
   let(:now) { Time.now.round 0 }
   let(:expire_time) { now + 60 * 60 * 7 }
@@ -57,7 +57,7 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
     operation_done_grpc(
       ops_name,
       "type.googleapis.com/google.bigtable.admin.v2.RestoreTableMetadata",
-      Google::Bigtable::Admin::V2::RestoreTableMetadata.new,
+      Google::Cloud::Bigtable::Admin::V2::RestoreTableMetadata.new,
       "type.googleapis.com/google.bigtable.admin.v2.Table",
       target_table_grpc
     )
@@ -91,7 +91,7 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
   it "returns its source_table with perform_lookup and view options" do
     cluster_states = clusters_state_grpc
     column_families = column_families_grpc
-    get_res = Google::Bigtable::Admin::V2::Table.new(
+    get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(
         name: table_path(instance_id, source_table_id),
         cluster_states: cluster_states,
@@ -101,7 +101,7 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :get_table, get_res, [table_path(instance_id, source_table_id), view: :FULL]
+    mock.expect :get_table, get_res, [name: table_path(instance_id, source_table_id), view: :FULL]
     bigtable.service.mocked_tables = mock
     table = backup.source_table perform_lookup: true, view: :FULL
 
@@ -129,7 +129,7 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
     mock = Minitest::Mock.new
     update_grpc = backup_res.dup
     update_grpc.expire_time = expire_time_2
-    mock.expect :update_backup, update_grpc, [update_grpc, Google::Protobuf::FieldMask.new(paths: ["expire_time"])]
+    mock.expect :update_backup, update_grpc, [backup: update_grpc, update_mask: Google::Protobuf::FieldMask.new(paths: ["expire_time"])]
     bigtable.service.mocked_tables = mock
 
     backup.expire_time = expire_time_2
@@ -142,8 +142,14 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
     mock = Minitest::Mock.new
     update_grpc = backup_res.dup
     update_grpc.expire_time = expire_time_2
-    mock.expect :restore_table, operation_grpc(mock), [instance_path(instance_id), { table_id: target_table_id, backup: backup_path(instance_id, cluster_id, backup_id) }]
-    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
+    mock.expect :restore_table,
+                operation_grpc(job_grpc, mock),
+                [
+                  parent: instance_path(instance_id),
+                  table_id: target_table_id,
+                  backup: backup_path(instance_id, cluster_id, backup_id)
+                ]
+    mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_tables = mock
 
     job = backup.restore target_table_id
@@ -165,7 +171,7 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
 
   it "reloads its state" do
     mock = Minitest::Mock.new
-    mock.expect :get_backup, backup_res, [backup_path(instance_id, cluster_id, backup_id)]
+    mock.expect :get_backup, backup_res, [name: backup_path(instance_id, cluster_id, backup_id)]
     bigtable.service.mocked_tables = mock
 
     backup.reload!
@@ -175,7 +181,7 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
 
   it "deletes itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_backup, nil, [backup_path(instance_id, cluster_id, backup_id)]
+    mock.expect :delete_backup, nil, [name: backup_path(instance_id, cluster_id, backup_id)]
     bigtable.service.mocked_tables = mock
 
     backup.delete
@@ -183,12 +189,12 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
     mock.verify
   end
 
-  def operation_grpc mock
-    Google::Gax::Operation.new(
-      job_grpc,
+  def operation_grpc longrunning_grpc, mock
+    Gapic::Operation.new(
+      longrunning_grpc,
       mock,
-      Google::Bigtable::Admin::V2::Table,
-      Google::Bigtable::Admin::V2::RestoreTableMetadata
+      result_type: Google::Cloud::Bigtable::Admin::V2::Table,
+      metadata_type: Google::Cloud::Bigtable::Admin::V2::RestoreTableMetadata
     )
   end
 end

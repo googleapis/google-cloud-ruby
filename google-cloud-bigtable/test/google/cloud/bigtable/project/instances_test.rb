@@ -22,25 +22,25 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
     h = instances_hash
     h[:next_page_token] = "next_page_token"
     h[:failed_locations] = []
-    Google::Bigtable::Admin::V2::ListInstancesResponse.new(h)
+    Google::Cloud::Bigtable::Admin::V2::ListInstancesResponse.new(h)
   end
   let(:second_page) do
     h = instances_hash(start_id: 10)
     h[:next_page_token] = "second_page_token"
     h[:failed_locations] = []
-    Google::Bigtable::Admin::V2::ListInstancesResponse.new(h)
+    Google::Cloud::Bigtable::Admin::V2::ListInstancesResponse.new(h)
   end
 
   let(:last_page) do
     h = instances_hash(start_id: 20)
     h[:instances].pop
     h[:failed_locations] = []
-    Google::Bigtable::Admin::V2::ListInstancesResponse.new(h)
+    Google::Cloud::Bigtable::Admin::V2::ListInstancesResponse.new(h)
   end
 
   it "list instances" do
     mock = Minitest::Mock.new
-    mock.expect :list_instances, first_page, [ project_path, page_token: nil ]
+    mock.expect :list_instances, first_page, [parent: project_path, page_token: nil]
     bigtable.service.mocked_instances = mock
 
     instances = bigtable.instances
@@ -52,8 +52,8 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
 
   it "paginates instances" do
     mock = Minitest::Mock.new
-    mock.expect :list_instances, first_page, [project_path, page_token: nil]
-    mock.expect :list_instances, last_page, [project_path, page_token: "next_page_token"]
+    mock.expect :list_instances, first_page, [parent: project_path, page_token: nil]
+    mock.expect :list_instances, last_page, [parent: project_path, page_token: "next_page_token"]
     bigtable.service.mocked_instances = mock
 
     first_instances = bigtable.instances
@@ -72,8 +72,8 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
 
   it "paginates instances with next? and next" do
     mock = Minitest::Mock.new
-    mock.expect :list_instances, first_page, [project_path, page_token: nil]
-    mock.expect :list_instances, last_page, [project_path, page_token: "next_page_token"]
+    mock.expect :list_instances, first_page, [parent: project_path, page_token: nil]
+    mock.expect :list_instances, last_page, [parent: project_path, page_token: "next_page_token"]
     bigtable.service.mocked_instances = mock
 
     first_instances = bigtable.instances
@@ -90,8 +90,8 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
 
   it "paginates instances with all" do
     mock = Minitest::Mock.new
-    mock.expect :list_instances, first_page, [project_path, page_token: nil]
-    mock.expect :list_instances, last_page, [project_path, page_token: "next_page_token"]
+    mock.expect :list_instances, first_page, [parent: project_path, page_token: nil]
+    mock.expect :list_instances, last_page, [parent: project_path, page_token: "next_page_token"]
     bigtable.service.mocked_instances = mock
 
     instances = bigtable.instances.all.to_a
@@ -103,8 +103,8 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
 
   it "iterates instances with all using Enumerator" do
     mock = Minitest::Mock.new
-    mock.expect :list_instances, first_page, [project_path, page_token: nil]
-    mock.expect :list_instances, last_page, [project_path, page_token: "next_page_token"]
+    mock.expect :list_instances, first_page, [parent: project_path, page_token: nil]
+    mock.expect :list_instances, last_page, [parent: project_path, page_token: "next_page_token"]
     bigtable.service.mocked_instances = mock
 
     instances = bigtable.instances.all.take(5)

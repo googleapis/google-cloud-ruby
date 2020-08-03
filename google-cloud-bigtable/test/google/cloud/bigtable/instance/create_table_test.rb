@@ -18,7 +18,7 @@ require "helper"
 describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:instance_grpc){
-    Google::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id))
+    Google::Cloud::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id))
   }
   let(:instance) {
     Google::Cloud::Bigtable::Instance.from_grpc(instance_grpc, bigtable.service)
@@ -29,16 +29,15 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
   it "creates a table without column family" do
     mock = Minitest::Mock.new
 
-    req_table = Google::Bigtable::Admin::V2::Table.new
-    create_res = Google::Bigtable::Admin::V2::Table.new(
+    req_table = Google::Cloud::Bigtable::Admin::V2::Table.new
+    create_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
       name: table_path(instance_id, table_id)
     )
 
     mock.expect :create_table, create_res, [
-      instance_path(instance_id),
-      table_id,
-      req_table,
-      initial_splits: nil
+      parent: instance_path(instance_id),
+      table_id: table_id,
+      table: req_table
     ]
     bigtable.service.mocked_tables = mock
 
@@ -56,7 +55,7 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
     cluster_states = clusters_state_grpc(num: 1)
     column_families = column_families_grpc num: 1, max_versions: 1
 
-    create_res = Google::Bigtable::Admin::V2::Table.new(
+    create_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(
         name: table_path(instance_id, table_id),
         cluster_states: cluster_states,
@@ -65,19 +64,18 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
       )
     )
 
-    req_table = Google::Bigtable::Admin::V2::Table.new(
+    req_table = Google::Cloud::Bigtable::Admin::V2::Table.new(
       column_families: column_families,
       granularity: :MILLIS
     )
 
     mock.expect :create_table, create_res.dup, [
-      instance_path(instance_id),
-      table_id,
-      req_table,
-      initial_splits: nil
+      parent: instance_path(instance_id),
+      table_id: table_id,
+      table: req_table
     ]
     mock.expect :get_table, create_res.dup, [
-      table_path(instance_id, table_id),
+      name: table_path(instance_id, table_id),
       view: :REPLICATION_VIEW
     ]
     bigtable.service.mocked_tables = mock
@@ -108,7 +106,7 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
     cluster_states = clusters_state_grpc(num: 1)
     column_families = column_families_grpc num: 1, max_versions: 1
 
-    create_res = Google::Bigtable::Admin::V2::Table.new(
+    create_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(
         name: table_path(instance_id, table_id),
         cluster_states: cluster_states,
@@ -117,19 +115,18 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
       )
     )
 
-    req_table = Google::Bigtable::Admin::V2::Table.new(
+    req_table = Google::Cloud::Bigtable::Admin::V2::Table.new(
       column_families: column_families,
       granularity: :MILLIS
     )
 
     mock.expect :create_table, create_res.dup, [
-                               instance_path(instance_id),
-                               table_id,
-                               req_table,
-                               initial_splits: nil
-                             ]
+      parent: instance_path(instance_id),
+      table_id: table_id,
+      table: req_table
+    ]
     mock.expect :get_table, create_res.dup, [
-                            table_path(instance_id, table_id),
+                            name: table_path(instance_id, table_id),
                             view: :REPLICATION_VIEW
                           ]
     bigtable.service.mocked_tables = mock
@@ -158,7 +155,7 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
     mock = Minitest::Mock.new
     column_families = column_families_grpc num: 1, max_versions: 1
 
-    create_res = Google::Bigtable::Admin::V2::Table.new(
+    create_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(
         name: table_path(instance_id, table_id),
         column_families: column_families.to_h,
@@ -166,15 +163,15 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
       )
     )
 
-    req_table = Google::Bigtable::Admin::V2::Table.new(
+    req_table = Google::Cloud::Bigtable::Admin::V2::Table.new(
       column_families: column_families.to_h,
       granularity: :MILLIS
     )
 
     mock.expect :create_table, create_res.dup, [
-      instance_path(instance_id),
-      table_id,
-      req_table,
+      parent: instance_path(instance_id),
+      table_id: table_id,
+      table: req_table,
       initial_splits: initial_splits.map { |key| { key: key } }
     ]
     bigtable.service.mocked_tables = mock

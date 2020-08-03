@@ -20,7 +20,7 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
   let(:display_name) { "Test instance" }
   let(:labels) { { "env" => "test" } }
   let(:instance_grpc){
-    Google::Bigtable::Admin::V2::Instance.new(
+    Google::Cloud::Bigtable::Admin::V2::Instance.new(
       name: instance_path(instance_id),
       display_name: display_name,
       state: :READY,
@@ -38,14 +38,14 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
     operation_done_grpc(
       ops_name,
       "type.googleapis.com/google.bigtable.admin.v2.CreateInstanceMetadata",
-      Google::Bigtable::Admin::V2::CreateInstanceMetadata.new,
+      Google::Cloud::Bigtable::Admin::V2::CreateInstanceMetadata.new,
       "type.googleapis.com/google.bigtable.admin.v2.Instance",
       instance_grpc
     )
   end
 
   it "creates an empty instance" do
-    instance = Google::Bigtable::Admin::V2::Instance.new(
+    instance = Google::Cloud::Bigtable::Admin::V2::Instance.new(
       instance_hash(display_name: display_name)
     )
     clusters_map = Google::Cloud::Bigtable::Instance::ClusterMap.new.tap do |c|
@@ -53,17 +53,14 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
     end
 
     mock = Minitest::Mock.new
-    create_res = Google::Gax::Operation.new(
-      job_grpc,
-      mock,
-      Google::Bigtable::Admin::V2::Instance,
-      Google::Bigtable::Admin::V2::CreateInstanceMetadata
-    )
 
-    mock.expect :create_instance, create_res, [
-      project_path, instance_id, instance, clusters_map
+    mock.expect :create_instance, operation_grpc(job_grpc, mock), [
+      parent:      project_path,
+      instance_id: instance_id,
+      instance:    instance,
+      clusters:    clusters_map
     ]
-    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
+    mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_instances = mock
 
     job = bigtable.create_instance(
@@ -95,24 +92,21 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
       type: type,
       labels: labels
     )
-    instance = Google::Bigtable::Admin::V2::Instance.new(new_instance_fields)
+    instance = Google::Cloud::Bigtable::Admin::V2::Instance.new(new_instance_fields)
     clusters_map = Google::Cloud::Bigtable::Instance::ClusterMap.new.tap do |c|
       c.add("test-cluster-1", location_path("us-east1-b"), nodes: 3, storage_type: :SSD)
       c.add("test-cluster-2", location_path("us-east1-b"), nodes: 3, storage_type: :SSD)
     end
 
     mock = Minitest::Mock.new
-    create_res = Google::Gax::Operation.new(
-      job_grpc,
-      mock,
-      Google::Bigtable::Admin::V2::Instance,
-      Google::Bigtable::Admin::V2::CreateInstanceMetadata
-    )
 
-    mock.expect :create_instance, create_res, [
-      project_path, instance_id, instance, clusters_map
+    mock.expect :create_instance, operation_grpc(job_grpc, mock), [
+      parent:      project_path,
+      instance_id: instance_id,
+      instance:    instance,
+      clusters:    clusters_map
     ]
-    mock.expect :get_operation, job_done_grpc, [ops_name, Hash]
+    mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_instances = mock
 
     job = bigtable.create_instance(
@@ -138,5 +132,14 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
     _(instance).must_be_kind_of Google::Cloud::Bigtable::Instance
 
     mock.verify
+  end
+
+  def operation_grpc longrunning_grpc, mock
+    Gapic::Operation.new(
+      longrunning_grpc,
+      mock,
+      result_type: Google::Cloud::Bigtable::Admin::V2::Instance,
+      metadata_type: Google::Cloud::Bigtable::Admin::V2::CreateInstanceMetadata
+    )
   end
 end

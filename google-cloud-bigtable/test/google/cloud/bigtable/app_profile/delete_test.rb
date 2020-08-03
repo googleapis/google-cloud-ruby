@@ -19,7 +19,7 @@ describe Google::Cloud::Bigtable::AppProfile, :delete, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:app_profile_id) { "test-app-profile" }
   let(:app_profile_grpc) {
-    Google::Bigtable::Admin::V2::AppProfile.new(
+    Google::Cloud::Bigtable::Admin::V2::AppProfile.new(
       name: app_profile_path(instance_id, app_profile_id),
       description: "Test instance app profile",
       multi_cluster_routing_use_any: multi_cluster_routing_grpc
@@ -32,7 +32,7 @@ describe Google::Cloud::Bigtable::AppProfile, :delete, :mock_bigtable do
   it "can delete itself and do not ignore warnings" do
     ignore_warnings = false
     mock = Minitest::Mock.new
-    mock.expect :delete_app_profile, true, [app_profile_grpc.name, ignore_warnings]
+    mock.expect :delete_app_profile, true, [name: app_profile_grpc.name, ignore_warnings: ignore_warnings]
     bigtable.service.mocked_instances = mock
 
     result = app_profile.delete
@@ -44,7 +44,7 @@ describe Google::Cloud::Bigtable::AppProfile, :delete, :mock_bigtable do
     ignore_warnings = true
 
     mock = Minitest::Mock.new
-    mock.expect :delete_app_profile, true, [app_profile_grpc.name, ignore_warnings]
+    mock.expect :delete_app_profile, true, [name: app_profile_grpc.name, ignore_warnings: ignore_warnings]
     bigtable.service.mocked_instances = mock
 
     result = app_profile.delete(ignore_warnings: ignore_warnings)

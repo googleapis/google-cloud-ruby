@@ -53,7 +53,7 @@ module Google
         ##
         # Applies mutations.
         #
-        # @return [Array<Google::Bigtable::V2::MutateRowsResponse::Entry>]
+        # @return [Array<Google::Cloud::Bigtable::V2::MutateRowsResponse::Entry>]
         #
         def apply_mutations
           @req_entries = @entries.map(&:to_grpc)
@@ -80,7 +80,7 @@ module Google
         # Mutates rows.
         #
         # @param entries [Array<Google::Cloud::Bigtable::MutationEntry>]
-        # @return [Array<Google::Bigtable::V2::MutateRowsResponse::Entry>]
+        # @return [Array<Google::Cloud::Bigtable::V2::MutateRowsResponse::Entry>]
         #
         def mutate_rows entries
           response = @table.service.mutate_rows @table.path, entries, app_profile_id: @table.app_profile_id
@@ -92,7 +92,7 @@ module Google
         ##
         # Collects failed entries, retries mutation, and updates status.
         #
-        # @param statuses [Array<Google::Bigtable::V2::MutateRowsResponse::Entry>]
+        # @param statuses [Array<Google::Cloud::Bigtable::V2::MutateRowsResponse::Entry>]
         # @param indices [Array<Integer>]
         #   Retry entries position mapping list
         # @return [Array<Integer>]

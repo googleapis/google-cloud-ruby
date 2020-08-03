@@ -51,6 +51,8 @@ module Google
       #   metadata for requests, generally, to give OAuth credentials.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
+      # @param [String] endpoint_admin Override of the admin service endpoint host name. Optional.
+      #   If the param is nil, uses the default admin endpoint.
       # @param [String] emulator_host Bigtable emulator host. Optional.
       #   If the parameter is nil, uses the value of the `emulator_host` config.
       # @param scope [Array<String>]
@@ -59,11 +61,6 @@ module Google
       #   APIs](https://developers.google.com/identity/protocols/OAuth2).
       #   The OAuth scopes for this service. This parameter is ignored if an
       #   updater_proc is supplied.
-      # @param client_config [Hash]
-      #   A hash for call options for each method.
-      #   See Google::Gax#construct_settings for the structure of
-      #   this data. Falls back to the default config if not specified
-      #   or the specified config is missing data points.
       # @param timeout [Integer]
       #   The default timeout, in seconds, for calls made through this client. Optional.
       # @return [Google::Cloud::Bigtable::Project]
@@ -73,28 +70,28 @@ module Google
       #
       #   client = Google::Cloud::Bigtable.new
       #
-      def self.new project_id: nil, credentials: nil, emulator_host: nil, scope: nil, client_config: nil, endpoint: nil,
+      def self.new project_id: nil,
+                   credentials: nil,
+                   emulator_host: nil,
+                   scope: nil,
+                   endpoint: nil,
+                   endpoint_admin: nil,
                    timeout: nil
         project_id    ||= default_project_id
         scope         ||= configure.scope
         timeout       ||= configure.timeout
-        client_config ||= configure.client_config
         emulator_host ||= configure.emulator_host
         endpoint      ||= configure.endpoint
+        endpoint_admin ||= configure.endpoint_admin
 
-        if emulator_host
-          return new_with_emulator project_id, emulator_host, timeout,
-                                   client_config
-        end
+        return new_with_emulator project_id, emulator_host, timeout if emulator_host
 
         credentials = resolve_credentials credentials, scope
         project_id = resolve_project_id project_id, credentials
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        service = Bigtable::Service.new(
-          project_id, credentials,
-          host: endpoint, timeout: timeout, client_config: client_config
-        )
+        service = Bigtable::Service.new \
+          project_id, credentials, host: endpoint, host_admin: endpoint_admin, timeout: timeout
         Bigtable::Project.new service
       end
 
@@ -113,10 +110,10 @@ module Google
       # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       # * `timeout` - (Integer) Default timeout to use in requests.
-      # * `client_config` - (Hash) A hash of values to override the default
-      #   behavior of the API client.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
+      # * `endpoint_admin` - (String) Override of the admin service endpoint
+      #   host name, or `nil` to use the default admin endpoint.
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Bigtable library uses.
@@ -130,18 +127,13 @@ module Google
       # @private
       # New client given an emulator host.
       #
-      def self.new_with_emulator project_id, emulator_host, timeout,
-                                 client_config
+      def self.new_with_emulator project_id, emulator_host, timeout
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        Bigtable::Project.new(
-          Bigtable::Service.new(
-            project_id, :this_channel_is_insecure,
-            host: emulator_host, timeout: timeout,
-            client_config: client_config
-          )
-        )
+        service = Bigtable::Service.new \
+          project_id, :this_channel_is_insecure, host: emulator_host, host_admin: emulator_host, timeout: timeout
+        Bigtable::Project.new service
       end
 
       # @private

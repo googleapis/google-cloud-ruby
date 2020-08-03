@@ -26,7 +26,7 @@ describe Google::Cloud::Bigtable::ValueRange, :value_range, :mock_bigtable do
       _(range).must_be_kind_of Google::Cloud::Bigtable::ValueRange
 
       grpc = range.to_grpc
-      _(grpc).must_be_kind_of Google::Bigtable::V2::ValueRange
+      _(grpc).must_be_kind_of Google::Cloud::Bigtable::V2::ValueRange
       _(grpc.start_value_closed).must_equal from_value
     end
 
@@ -37,7 +37,7 @@ describe Google::Cloud::Bigtable::ValueRange, :value_range, :mock_bigtable do
       _(range).must_be_kind_of Google::Cloud::Bigtable::ValueRange
 
       grpc = range.to_grpc
-      _(grpc).must_be_kind_of Google::Bigtable::V2::ValueRange
+      _(grpc).must_be_kind_of Google::Cloud::Bigtable::V2::ValueRange
       _(grpc.start_value_open).must_equal from_value
     end
 
@@ -49,7 +49,7 @@ describe Google::Cloud::Bigtable::ValueRange, :value_range, :mock_bigtable do
       _(range).must_be_kind_of Google::Cloud::Bigtable::ValueRange
 
       grpc = range.to_grpc
-      _(grpc).must_be_kind_of Google::Bigtable::V2::ValueRange
+      _(grpc).must_be_kind_of Google::Cloud::Bigtable::V2::ValueRange
       _(grpc.start_value_closed).must_equal from_value
       _(grpc.end_value_open).must_equal to_value
     end
@@ -63,7 +63,7 @@ describe Google::Cloud::Bigtable::ValueRange, :value_range, :mock_bigtable do
       _(range).must_be_kind_of Google::Cloud::Bigtable::ValueRange
 
       grpc = range.to_grpc
-      _(grpc).must_be_kind_of Google::Bigtable::V2::ValueRange
+      _(grpc).must_be_kind_of Google::Cloud::Bigtable::V2::ValueRange
       _(grpc.end_value_open).must_equal to_value
     end
 
@@ -74,7 +74,7 @@ describe Google::Cloud::Bigtable::ValueRange, :value_range, :mock_bigtable do
       _(range).must_be_kind_of Google::Cloud::Bigtable::ValueRange
 
       grpc = range.to_grpc
-      _(grpc).must_be_kind_of Google::Bigtable::V2::ValueRange
+      _(grpc).must_be_kind_of Google::Cloud::Bigtable::V2::ValueRange
       _(grpc.end_value_closed).must_equal to_value
     end
 
@@ -86,7 +86,7 @@ describe Google::Cloud::Bigtable::ValueRange, :value_range, :mock_bigtable do
       _(range).must_be_kind_of Google::Cloud::Bigtable::ValueRange
 
       grpc = range.to_grpc
-      _(grpc).must_be_kind_of Google::Bigtable::V2::ValueRange
+      _(grpc).must_be_kind_of Google::Cloud::Bigtable::V2::ValueRange
       _(grpc.start_value_closed).must_equal from_value
       _(grpc.end_value_open).must_equal to_value
     end
@@ -100,7 +100,7 @@ describe Google::Cloud::Bigtable::ValueRange, :value_range, :mock_bigtable do
     _(range).must_be_kind_of Google::Cloud::Bigtable::ValueRange
 
     grpc = range.to_grpc
-    _(grpc).must_be_kind_of Google::Bigtable::V2::ValueRange
+    _(grpc).must_be_kind_of Google::Cloud::Bigtable::V2::ValueRange
     _(grpc.start_value_closed).must_equal from_value
     _(grpc.end_value_closed).must_equal to_value
   end
@@ -113,7 +113,7 @@ describe Google::Cloud::Bigtable::ValueRange, :value_range, :mock_bigtable do
     _(range).must_be_kind_of Google::Cloud::Bigtable::ValueRange
 
     grpc = range.to_grpc
-    _(grpc).must_be_kind_of Google::Bigtable::V2::ValueRange
+    _(grpc).must_be_kind_of Google::Cloud::Bigtable::V2::ValueRange
     _(grpc.start_value_closed).must_equal from_value
     _(grpc.end_value_open).must_equal to_value
   end

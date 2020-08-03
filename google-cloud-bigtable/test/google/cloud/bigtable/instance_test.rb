@@ -19,7 +19,7 @@ describe Google::Cloud::Bigtable::Instance, :mock_bigtable do
   let(:instance_id) { "test-instance-id" }
   let(:display_name) { "Test instance" }
   let(:instance_grpc) do
-    Google::Bigtable::Admin::V2::Instance.new(
+    Google::Cloud::Bigtable::Admin::V2::Instance.new(
       instance_hash(
         name: instance_id,
         display_name: display_name,
@@ -49,7 +49,7 @@ describe Google::Cloud::Bigtable::Instance, :mock_bigtable do
   describe "#labels=" do
     let(:instance) do
       Google::Cloud::Bigtable::Instance.from_grpc(
-        Google::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id)),
+        Google::Cloud::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id)),
         bigtable.service
       )
     end
@@ -76,7 +76,7 @@ describe Google::Cloud::Bigtable::Instance, :mock_bigtable do
   it "reloads its state" do
     mock = Minitest::Mock.new
     instance.service.mocked_instances = mock
-    mock.expect :get_instance, instance_grpc, [instance_path(instance_id)]
+    mock.expect :get_instance, instance_grpc, [name: instance_path(instance_id)]
 
     instance.reload!
 

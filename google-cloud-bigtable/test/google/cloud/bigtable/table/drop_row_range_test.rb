@@ -23,7 +23,7 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
   let(:cluster_states) { clusters_state_grpc }
   let(:column_families) { column_families_grpc }
   let(:table_grpc) do
-    Google::Bigtable::Admin::V2::Table.new(
+    Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(
         name: table_path(instance_id, table_id),
         cluster_states: cluster_states,
@@ -40,10 +40,10 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
     it "drop rows using row key prefix" do
       mock = Minitest::Mock.new
       mock.expect :drop_row_range, true, [
-        table_path(instance_id, table_id),
+        { name: table_path(instance_id, table_id),
         row_key_prefix: "user",
-        delete_all_data_from_table: nil,
-        options: nil
+        delete_all_data_from_table: nil },
+        nil
       ]
       bigtable.service.mocked_tables = mock
 
@@ -55,10 +55,10 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
     it "drop rows all data rows" do
       mock = Minitest::Mock.new
       mock.expect :drop_row_range, true, [
-        table_path(instance_id, table_id),
+        { name: table_path(instance_id, table_id),
         row_key_prefix: nil,
-        delete_all_data_from_table: true,
-        options: nil
+        delete_all_data_from_table: true },
+        nil
       ]
       bigtable.service.mocked_tables = mock
 
@@ -75,12 +75,12 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
         expected_timeout: timeout_secs * 1000
       )
 
-      def stub.drop_row_range parent, args
-        t._(parent).must_equal expected_table_path
-        t._(args[:row_key_prefix]).must_be :nil?
-        t._(args[:delete_all_data_from_table]).must_equal true
+      def stub.drop_row_range req, opts
+        t._(req[:name]).must_equal expected_table_path
+        t._(req[:row_key_prefix]).must_be :nil?
+        t._(req[:delete_all_data_from_table]).must_equal true
 
-        retry_timeout = args[:options].retry_options.backoff_settings.initial_rpc_timeout_millis
+        retry_timeout = opts.retry_policy.max_delay
         t._(retry_timeout).must_equal expected_timeout
         nil
       end
@@ -95,10 +95,10 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
     it "delete all rows" do
       mock = Minitest::Mock.new
       mock.expect :drop_row_range, true, [
-        table_path(instance_id, table_id),
+        { name: table_path(instance_id, table_id),
         row_key_prefix: nil,
-        delete_all_data_from_table: true,
-        options: nil
+        delete_all_data_from_table: true },
+        nil
       ]
       bigtable.service.mocked_tables = mock
 
@@ -115,12 +115,12 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
         expected_timeout: timeout_secs * 1000
       )
 
-      def stub.drop_row_range parent, args
-        t._(parent).must_equal expected_table_path
-        t._(args[:row_key_prefix]).must_be :nil?
-        t._(args[:delete_all_data_from_table]).must_equal true
+      def stub.drop_row_range req, opts
+        t._(req[:name]).must_equal expected_table_path
+        t._(req[:row_key_prefix]).must_be :nil?
+        t._(req[:delete_all_data_from_table]).must_equal true
 
-        retry_timeout = args[:options].retry_options.backoff_settings.initial_rpc_timeout_millis
+        retry_timeout = opts.retry_policy.max_delay
         t._(retry_timeout).must_equal expected_timeout
         nil
       end
@@ -135,10 +135,10 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
     it "delete rows by prefix" do
       mock = Minitest::Mock.new
       mock.expect :drop_row_range, true, [
-        table_path(instance_id, table_id),
+        { name: table_path(instance_id, table_id),
         row_key_prefix: "user",
-        delete_all_data_from_table: nil,
-        options: nil
+        delete_all_data_from_table: nil },
+        nil
       ]
       bigtable.service.mocked_tables = mock
 
@@ -155,12 +155,12 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
         expected_timeout: timeout_secs * 1000
       )
 
-      def stub.drop_row_range parent, args
-        t._(parent).must_equal expected_table_path
-        t._(args[:row_key_prefix]).must_equal "user"
-        t._(args[:delete_all_data_from_table]).must_be :nil?
+      def stub.drop_row_range req, opts
+        t._(req[:name]).must_equal expected_table_path
+        t._(req[:row_key_prefix]).must_equal "user"
+        t._(req[:delete_all_data_from_table]).must_be :nil?
 
-        retry_timeout = args[:options].retry_options.backoff_settings.initial_rpc_timeout_millis
+        retry_timeout = opts.retry_policy.max_delay
         t._(retry_timeout).must_equal expected_timeout
         nil
       end

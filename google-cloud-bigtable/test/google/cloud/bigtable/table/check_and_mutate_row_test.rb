@@ -27,24 +27,23 @@ describe Google::Cloud::Bigtable::Table, :check_and_mutate_row, :mock_bigtable d
     table = bigtable.table(instance_id, table_id)
 
     row_key = "user-1"
-    predicate_filter = Google::Bigtable::V2::RowFilter.new(row_key_regex_filter: "user-1*")
+    predicate_filter = Google::Cloud::Bigtable::V2::RowFilter.new(row_key_regex_filter: "user-1*")
     true_mutations = [
-      Google::Bigtable::V2::Mutation.new(
+      Google::Cloud::Bigtable::V2::Mutation.new(
         delete_from_column: { family_name: "cf", column_qualifier: "field1" }
       )
     ]
     false_mutations = [
-      Google::Bigtable::V2::Mutation.new(delete_from_row: {})
+      Google::Cloud::Bigtable::V2::Mutation.new(delete_from_row: {})
     ]
 
-    res = Google::Bigtable::V2::CheckAndMutateRowResponse.new(predicate_matched: true)
+    res = Google::Cloud::Bigtable::V2::CheckAndMutateRowResponse.new(predicate_matched: true)
     mock.expect :check_and_mutate_row, res, [
-      table_path(instance_id, table_id),
-      row_key,
+      table_name: table_path(instance_id, table_id),
+      row_key: row_key,
       predicate_filter: predicate_filter,
       true_mutations: true_mutations,
-      false_mutations: false_mutations,
-      app_profile_id: nil
+      false_mutations: false_mutations
     ]
 
     result = table.check_and_mutate_row(
@@ -60,9 +59,7 @@ describe Google::Cloud::Bigtable::Table, :check_and_mutate_row, :mock_bigtable d
   it "check and mutate row" do
     stub = Object.new
     def stub.check_and_mutate_row *args
-      gax_error = Google::Gax::RetryError.new "Exception occurred"
-      gax_error.instance_variable_set :@cause, GRPC::InvalidArgument.new(3, "Invalid id for collection columnFamilies")
-      raise gax_error
+      raise Google::Cloud::InvalidArgumentError.new("Invalid id for collection columnFamilies")
     end
     bigtable.service.mocked_client = stub
     table = bigtable.table(instance_id, table_id)

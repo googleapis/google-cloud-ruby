@@ -227,7 +227,7 @@ module Google
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
 
           instance_attrs = { display_name: display_name, type: type, labels: labels }.delete_if { |_, v| v.nil? }
-          instance = Google::Bigtable::Admin::V2::Instance.new instance_attrs
+          instance = Google::Cloud::Bigtable::Admin::V2::Instance.new instance_attrs
           clusters ||= Instance::ClusterMap.new
           yield clusters if block_given?
 

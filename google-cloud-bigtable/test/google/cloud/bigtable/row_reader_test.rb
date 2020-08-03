@@ -21,7 +21,7 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
   it "removed already read row keys from row set row_keys" do
     rows_reader = Google::Cloud::Bigtable::RowsReader.new("dummy-table-client")
 
-    row_set = Google::Bigtable::V2::RowSet.new(row_keys: %w[1 3 2 5])
+    row_set = Google::Cloud::Bigtable::V2::RowSet.new(row_keys: %w[1 3 2 5])
     chunk_processor = rows_reader.instance_variable_get("@chunk_processor")
     chunk_processor.last_key = "3"
     rows_reader.instance_variable_set("@rows_count", 10)
@@ -38,21 +38,21 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
     rows_reader = Google::Cloud::Bigtable::RowsReader.new("dummy-table-client")
     chunk_processor = rows_reader.instance_variable_get("@chunk_processor")
 
-    row_set = Google::Bigtable::V2::RowSet.new
+    row_set = Google::Cloud::Bigtable::V2::RowSet.new
     chunk_processor.last_key = "3"
 
     _, retry_row_set = rows_reader.retry_options(100, row_set)
     row_ranges = retry_row_set.row_ranges
 
     _(row_ranges.length).must_equal 1
-    _(row_ranges.first).must_equal Google::Bigtable::V2::RowRange.new(start_key_open: "3")
+    _(row_ranges.first).must_equal Google::Cloud::Bigtable::V2::RowRange.new(start_key_open: "3")
   end
 
   it "removed already read row ranges" do
     rows_reader = Google::Cloud::Bigtable::RowsReader.new("dummy-table-client")
     chunk_processor = rows_reader.instance_variable_get("@chunk_processor")
 
-    row_set = Google::Bigtable::V2::RowSet.new(
+    row_set = Google::Cloud::Bigtable::V2::RowSet.new(
       row_ranges: [{ end_key_closed: "3" }, { end_key_closed: "5" }]
     )
     chunk_processor.last_key = "3"
@@ -67,7 +67,7 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
     rows_reader = Google::Cloud::Bigtable::RowsReader.new("dummy-table-client")
     chunk_processor = rows_reader.instance_variable_get("@chunk_processor")
 
-    row_set = Google::Bigtable::V2::RowSet.new(
+    row_set = Google::Cloud::Bigtable::V2::RowSet.new(
       row_ranges: [{ end_key_closed: "5" }]
     )
     chunk_processor.last_key = "3"
@@ -75,7 +75,7 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
     row_ranges = retry_row_set.row_ranges
 
     _(row_ranges.length).must_equal 1
-    _(row_ranges.first).must_equal Google::Bigtable::V2::RowRange.new(start_key_open: "3", end_key_closed: "5")
+    _(row_ranges.first).must_equal Google::Cloud::Bigtable::V2::RowRange.new(start_key_open: "3", end_key_closed: "5")
   end
 
   it "increment and check read is retryable" do

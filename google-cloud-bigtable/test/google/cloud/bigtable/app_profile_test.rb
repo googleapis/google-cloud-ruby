@@ -21,7 +21,7 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
   let(:description) { "Test instance app profile" }
   let(:routing_policy_grpc) { multi_cluster_routing_grpc }
   let(:app_profile_grpc) do
-    Google::Bigtable::Admin::V2::AppProfile.new(
+    Google::Cloud::Bigtable::Admin::V2::AppProfile.new(
       name: app_profile_path(instance_id, app_profile_id),
       description: description,
       multi_cluster_routing_use_any: routing_policy_grpc
@@ -42,7 +42,7 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
   end
 
   it "set multi_cluster_routing policy" do
-    app_profile_grpc = Google::Bigtable::Admin::V2::AppProfile.new(
+    app_profile_grpc = Google::Cloud::Bigtable::Admin::V2::AppProfile.new(
       name: app_profile_path(instance_id, app_profile_id)
     )
     app_profile = Google::Cloud::Bigtable::AppProfile.from_grpc(app_profile_grpc, bigtable.service)
@@ -57,7 +57,7 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
   end
 
   it "set single_cluster_routing policy" do
-    app_profile_grpc = Google::Bigtable::Admin::V2::AppProfile.new(
+    app_profile_grpc = Google::Cloud::Bigtable::Admin::V2::AppProfile.new(
       name: app_profile_path(instance_id, app_profile_id)
     )
     app_profile = Google::Cloud::Bigtable::AppProfile.from_grpc(app_profile_grpc, bigtable.service)
@@ -76,7 +76,7 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
 
   it "reloads its state" do
     mock = Minitest::Mock.new
-    mock.expect :get_app_profile, app_profile_grpc, [app_profile_path(instance_id, app_profile_id)]
+    mock.expect :get_app_profile, app_profile_grpc, [name: app_profile_path(instance_id, app_profile_id)]
     app_profile.service.mocked_instances = mock
 
     app_profile.reload!

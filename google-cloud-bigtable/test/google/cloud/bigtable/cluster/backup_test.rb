@@ -21,7 +21,7 @@ describe Google::Cloud::Bigtable::Cluster, :backup, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:cluster_id) { "test-cluster" }
   let :cluster_grpc do
-    Google::Bigtable::Admin::V2::Cluster.new(
+    Google::Cloud::Bigtable::Admin::V2::Cluster.new(
       name: cluster_path(instance_id, cluster_id),
       serve_nodes: 3,
       location: location_path("us-east-1b"),
@@ -34,13 +34,13 @@ describe Google::Cloud::Bigtable::Cluster, :backup, :mock_bigtable do
   let(:source_table_id) { "test-table-source" }
   let(:expire_time) { Time.now.round(0) + 60 * 60 * 7 }
   let :backup_grpc do
-    Google::Bigtable::Admin::V2::Backup.new source_table: table_path(instance_id, source_table_id),
+    Google::Cloud::Bigtable::Admin::V2::Backup.new source_table: table_path(instance_id, source_table_id),
                                             expire_time:  expire_time
   end
 
   it "gets a backup" do
     mock = Minitest::Mock.new
-    mock.expect :get_backup, backup_grpc, [backup_path(instance_id, cluster_id, backup_id)]
+    mock.expect :get_backup, backup_grpc, [name: backup_path(instance_id, cluster_id, backup_id)]
     bigtable.service.mocked_tables = mock
 
     backup = cluster.backup backup_id
@@ -56,9 +56,7 @@ describe Google::Cloud::Bigtable::Cluster, :backup, :mock_bigtable do
 
     stub = Object.new
     def stub.get_backup *args
-      gax_error = Google::Gax::GaxError.new "not found"
-      gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-      raise gax_error
+      raise Google::Cloud::NotFoundError.new("not found")
     end
 
     bigtable.service.mocked_tables = stub

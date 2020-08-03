@@ -2,6 +2,8 @@ source "https://rubygems.org"
 
 gemspec
 
+gem "google-cloud-bigtable-admin-v2", path: "../google-cloud-bigtable-admin-v2"
+gem "google-cloud-bigtable-v2", path: "../google-cloud-bigtable-v2"
 gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-env", path: "../google-cloud-env"
 gem "google-cloud-errors", path: "../google-cloud-errors"

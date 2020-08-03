@@ -33,14 +33,14 @@ describe Google::Cloud::Bigtable::Table, :mutate_row, :mock_bigtable do
     entry = Google::Cloud::Bigtable::MutationEntry.new(row_key)
     entry.set_cell("cf1", "field1", "XYZ")
 
-    res = Google::Bigtable::V2::MutateRowResponse.new
-    mutations = Google::Bigtable::V2::Mutation.new(set_cell: {
+    res = Google::Cloud::Bigtable::V2::MutateRowResponse.new
+    mutations = Google::Cloud::Bigtable::V2::Mutation.new(set_cell: {
       family_name: "cf1", column_qualifier: "field1", value: "XYZ"
     })
     mock.expect :mutate_row, res, [
-      table_path(instance_id, table_id),
-      row_key,
-      [mutations],
+      table_name: table_path(instance_id, table_id),
+      row_key: row_key,
+      mutations: [mutations],
       app_profile_id: app_profile_id
     ]
 
@@ -51,9 +51,7 @@ describe Google::Cloud::Bigtable::Table, :mutate_row, :mock_bigtable do
   it "mutate row raises Google::Cloud::Error" do
     stub = Object.new
     def stub.mutate_row *args
-      gax_error = Google::Gax::RetryError.new "Exception occurred"
-      gax_error.instance_variable_set :@cause, GRPC::InvalidArgument.new(3, "Invalid id for collection columnFamilies")
-      raise gax_error
+      raise Google::Cloud::InvalidArgumentError.new("Invalid id for collection columnFamilies")
     end
     table.service.mocked_client = stub
 

@@ -13,12 +13,46 @@
 # limitations under the License.
 
 
-require "google/cloud/bigtable/v2/credentials"
+require "google/cloud/bigtable/v2/bigtable/credentials"
 
 module Google
   module Cloud
     module Bigtable
-      class Credentials < Google::Cloud::Bigtable::V2::Credentials
+      ##
+      # # Credentials
+      #
+      # Represents the authentication and authorization used to connect to the
+      # Bigtable API.
+      #
+      # @example
+      #   require "google/cloud/bigtable"
+      #
+      #   keyfile = "/path/to/keyfile.json"
+      #   creds = Google::Cloud::Bigtable::Credentials.new keyfile
+      #
+      #   bigtable = Google::Cloud::Bigtable.new(
+      #     project_id: "my-project",
+      #     credentials: creds
+      #   )
+      #
+      #   bigtable.project_id #=> "my-project"
+      #
+      class Credentials < Google::Cloud::Bigtable::V2::Bigtable::Credentials
+        self.scope = [
+          "https://www.googleapis.com/auth/bigtable.admin",
+          "https://www.googleapis.com/auth/bigtable.admin.cluster",
+          "https://www.googleapis.com/auth/bigtable.admin.instance",
+          "https://www.googleapis.com/auth/bigtable.admin.table",
+          "https://www.googleapis.com/auth/bigtable.data",
+          "https://www.googleapis.com/auth/bigtable.data.readonly",
+          "https://www.googleapis.com/auth/cloud-bigtable.admin",
+          "https://www.googleapis.com/auth/cloud-bigtable.admin.cluster",
+          "https://www.googleapis.com/auth/cloud-bigtable.admin.table",
+          "https://www.googleapis.com/auth/cloud-bigtable.data",
+          "https://www.googleapis.com/auth/cloud-bigtable.data.readonly",
+          "https://www.googleapis.com/auth/cloud-platform",
+          "https://www.googleapis.com/auth/cloud-platform.read-only"
+        ]
       end
     end
   end

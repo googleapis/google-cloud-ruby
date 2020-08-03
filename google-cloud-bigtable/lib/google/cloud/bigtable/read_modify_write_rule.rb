@@ -44,7 +44,7 @@ module Google
         #   The qualifier of the column to which the read/modify/write should be applied.
         #
         def initialize family, qualifier
-          @grpc = Google::Bigtable::V2::ReadModifyWriteRule.new
+          @grpc = Google::Cloud::Bigtable::V2::ReadModifyWriteRule.new
           @grpc.family_name = family
           @grpc.column_qualifier = qualifier
         end
@@ -123,7 +123,7 @@ module Google
         #
         # Get gRPC protobuf instance.
         #
-        # @return [Google::Bigtable::V2::ReadModifyWriteRule]
+        # @return [Google::Cloud::Bigtable::V2::ReadModifyWriteRule]
         #
         def to_grpc
           @grpc
