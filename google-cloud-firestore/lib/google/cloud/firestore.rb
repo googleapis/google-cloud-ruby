@@ -33,7 +33,6 @@ module Google
     #
     module Firestore
       # rubocop:disable Metrics/AbcSize
-      # rubocop:disable Metrics/MethodLength
 
       ##
       # Creates a new object for connecting to the Firestore service.
@@ -56,8 +55,6 @@ module Google
       #
       #   * `https://www.googleapis.com/auth/datastore`
       # @param [Integer] timeout Default timeout to use in requests. Optional.
-      # @param [Hash] client_config A hash of values to override the default
-      #   behavior of the API client. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
       # @param [String] emulator_host Firestore emulator host. Optional.
@@ -73,13 +70,17 @@ module Google
       #
       #   firestore = Google::Cloud::Firestore.new
       #
-      def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
-                   client_config: nil, endpoint: nil, emulator_host: nil,
-                   project: nil, keyfile: nil
+      def self.new project_id: nil,
+                   credentials: nil,
+                   scope: nil,
+                   timeout: nil,
+                   endpoint: nil,
+                   emulator_host: nil,
+                   project: nil,
+                   keyfile: nil
         project_id    ||= (project || default_project_id)
         scope         ||= configure.scope
         timeout       ||= configure.timeout
-        client_config ||= configure.client_config
         endpoint      ||= configure.endpoint
         emulator_host ||= configure.emulator_host
 
@@ -87,13 +88,8 @@ module Google
           project_id = project_id.to_s
           raise ArgumentError, "project_id is missing" if project_id.empty?
 
-          return Firestore::Client.new(
-            Firestore::Service.new(
-              project_id, :this_channel_is_insecure,
-              host: emulator_host, timeout: timeout,
-              client_config: client_config
-            )
-          )
+          service = Firestore::Service.new project_id, :this_channel_is_insecure, host: emulator_host, timeout: timeout
+          return Firestore::Client.new service
         end
 
         credentials ||= (keyfile || default_credentials(scope: scope))
@@ -107,16 +103,11 @@ module Google
         project_id = project_id.to_s
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        Firestore::Client.new(
-          Firestore::Service.new(
-            project_id, credentials,
-            host: endpoint, timeout: timeout, client_config: client_config
-          )
-        )
+        service = Firestore::Service.new project_id, credentials, host: endpoint, timeout: timeout
+        Firestore::Client.new service
       end
 
       # rubocop:enable Metrics/AbcSize
-      # rubocop:enable Metrics/MethodLength
 
       ##
       # Configure the Google Cloud Firestore library.
@@ -132,8 +123,6 @@ module Google
       # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       # * `timeout` - (Integer) Default timeout to use in requests.
-      # * `client_config` - (Hash) A hash of values to override the default
-      #   behavior of the API client.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
       # * `emulator_host` - (String) Host name of the emulator. Defaults to

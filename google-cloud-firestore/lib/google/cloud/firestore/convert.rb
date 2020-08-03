@@ -85,40 +85,40 @@ module Google
 
           def raw_to_value obj
             if NilClass === obj
-              Google::Firestore::V1::Value.new null_value: :NULL_VALUE
+              Google::Cloud::Firestore::V1::Value.new null_value: :NULL_VALUE
             elsif TrueClass === obj || FalseClass === obj
-              Google::Firestore::V1::Value.new boolean_value: obj
+              Google::Cloud::Firestore::V1::Value.new boolean_value: obj
             elsif Integer === obj
-              Google::Firestore::V1::Value.new integer_value: obj
+              Google::Cloud::Firestore::V1::Value.new integer_value: obj
             elsif Numeric === obj # Any number not an integer is a double
-              Google::Firestore::V1::Value.new double_value: obj.to_f
+              Google::Cloud::Firestore::V1::Value.new double_value: obj.to_f
             elsif Time === obj || DateTime === obj || Date === obj
-              Google::Firestore::V1::Value.new \
+              Google::Cloud::Firestore::V1::Value.new \
                 timestamp_value: time_to_timestamp(obj.to_time)
             elsif String === obj || Symbol === obj
-              Google::Firestore::V1::Value.new string_value: obj.to_s
+              Google::Cloud::Firestore::V1::Value.new string_value: obj.to_s
             elsif Google::Cloud::Firestore::DocumentReference === obj
-              Google::Firestore::V1::Value.new reference_value: obj.path
+              Google::Cloud::Firestore::V1::Value.new reference_value: obj.path
             elsif Array === obj
               values = obj.map { |o| raw_to_value(o) }
-              Google::Firestore::V1::Value.new(array_value:
-                Google::Firestore::V1::ArrayValue.new(values: values))
+              Google::Cloud::Firestore::V1::Value.new(array_value:
+                Google::Cloud::Firestore::V1::ArrayValue.new(values: values))
             elsif Hash === obj
               # keys have been changed to strings before the hash gets here
               geo_pairs = hash_is_geo_point? obj
               if geo_pairs
-                Google::Firestore::V1::Value.new(
+                Google::Cloud::Firestore::V1::Value.new(
                   geo_point_value: hash_to_geo_point(obj, geo_pairs)
                 )
               else
                 fields = hash_to_fields obj
-                Google::Firestore::V1::Value.new(map_value:
-                  Google::Firestore::V1::MapValue.new(fields: fields))
+                Google::Cloud::Firestore::V1::Value.new(map_value:
+                  Google::Cloud::Firestore::V1::MapValue.new(fields: fields))
               end
             elsif obj.respond_to?(:read) && obj.respond_to?(:rewind)
               obj.rewind
               content = obj.read.force_encoding "ASCII-8BIT"
-              Google::Firestore::V1::Value.new bytes_value: content
+              Google::Cloud::Firestore::V1::Value.new bytes_value: content
             else
               raise ArgumentError,
                     "A value of type #{obj.class} is not supported."
@@ -129,7 +129,7 @@ module Google
             return false unless hash.keys.count == 2
 
             pairs = hash.map { |k, v| [String(k), v] }.sort
-            if pairs.map(&:first) == ["latitude".freeze, "longitude".freeze]
+            if pairs.map(&:first) == ["latitude", "longitude"]
               pairs
             end
           end
@@ -156,11 +156,11 @@ module Google
             data, field_paths_and_values = remove_field_value_from data
 
             if data.any? || field_paths_and_values.empty?
-              write = Google::Firestore::V1::Write.new(
-                update: Google::Firestore::V1::Document.new(
+              write = Google::Cloud::Firestore::V1::Write.new(
+                update: Google::Cloud::Firestore::V1::Document.new(
                   name: doc_path,
                   fields: hash_to_fields(data)),
-                current_document: Google::Firestore::V1::Precondition.new(
+                current_document: Google::Cloud::Firestore::V1::Precondition.new(
                   exists: false)
               )
               writes << write
@@ -171,7 +171,7 @@ module Google
 
               if data.empty?
                 transform_write.current_document = \
-                  Google::Firestore::V1::Precondition.new(exists: false)
+                  Google::Cloud::Firestore::V1::Precondition.new(exists: false)
               end
 
               writes << transform_write
@@ -207,8 +207,8 @@ module Google
 
             data, field_paths_and_values = remove_field_value_from data
 
-            writes << Google::Firestore::V1::Write.new(
-              update: Google::Firestore::V1::Document.new(
+            writes << Google::Cloud::Firestore::V1::Write.new(
+              update: Google::Cloud::Firestore::V1::Document.new(
                 name: doc_path,
                 fields: hash_to_fields(data))
             )
@@ -278,11 +278,11 @@ module Google
             end
 
             if data.any? || field_paths.any? || (allow_empty && field_paths_and_values.empty?)
-              writes << Google::Firestore::V1::Write.new(
-                update: Google::Firestore::V1::Document.new(
+              writes << Google::Cloud::Firestore::V1::Write.new(
+                update: Google::Cloud::Firestore::V1::Document.new(
                   name: doc_path,
                   fields: hash_to_fields(data)),
-                update_mask: Google::Firestore::V1::DocumentMask.new(
+                update_mask: Google::Cloud::Firestore::V1::DocumentMask.new(
                   field_paths: field_paths.map(&:formatted_string).sort)
               )
             end
@@ -339,18 +339,18 @@ module Google
             end
 
             if data.any? || delete_paths.any?
-              write = Google::Firestore::V1::Write.new(
-                update: Google::Firestore::V1::Document.new(
+              write = Google::Cloud::Firestore::V1::Write.new(
+                update: Google::Cloud::Firestore::V1::Document.new(
                   name: doc_path,
                   fields: hash_to_fields(data)),
-                update_mask: Google::Firestore::V1::DocumentMask.new(
+                update_mask: Google::Cloud::Firestore::V1::DocumentMask.new(
                   field_paths: (field_paths).map(&:formatted_string).sort),
-                current_document: Google::Firestore::V1::Precondition.new(
+                current_document: Google::Cloud::Firestore::V1::Precondition.new(
                   exists: true)
               )
               if update_time
                 write.current_document = \
-                  Google::Firestore::V1::Precondition.new(
+                  Google::Cloud::Firestore::V1::Precondition.new(
                     update_time: time_to_timestamp(update_time))
               end
               writes << write
@@ -360,7 +360,7 @@ module Google
               transform_write = transform_write doc_path, field_paths_and_values
               if data.empty?
                 transform_write.current_document = \
-                  Google::Firestore::V1::Precondition.new(exists: true)
+                  Google::Cloud::Firestore::V1::Precondition.new(exists: true)
               end
               writes << transform_write
             end
@@ -373,13 +373,13 @@ module Google
               raise ArgumentError, "cannot specify both exists and update_time"
             end
 
-            write = Google::Firestore::V1::Write.new(
+            write = Google::Cloud::Firestore::V1::Write.new(
               delete: doc_path
             )
 
             unless exists.nil? && update_time.nil?
               write.current_document = \
-                Google::Firestore::V1::Precondition.new({
+                Google::Cloud::Firestore::V1::Precondition.new({
                   exists: exists, update_time: time_to_timestamp(update_time)
                 }.delete_if { |_, v| v.nil? })
             end
@@ -584,8 +584,8 @@ module Google
               to_field_transform field_path, field_value
             end
 
-            Google::Firestore::V1::Write.new(
-              transform: Google::Firestore::V1::DocumentTransform.new(
+            Google::Cloud::Firestore::V1::Write.new(
+              transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
                 document: doc_path,
                 field_transforms: field_transforms
               )
@@ -594,32 +594,32 @@ module Google
 
           def to_field_transform field_path, field_value
             if field_value.type == :server_time
-              Google::Firestore::V1::DocumentTransform::FieldTransform.new(
+              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
                 field_path: field_path.formatted_string,
                 set_to_server_value: :REQUEST_TIME
               )
             elsif field_value.type == :array_union
-              Google::Firestore::V1::DocumentTransform::FieldTransform.new(
+              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
                 field_path: field_path.formatted_string,
                 append_missing_elements: raw_to_value(Array(field_value.value)).array_value
               )
             elsif field_value.type == :array_delete
-              Google::Firestore::V1::DocumentTransform::FieldTransform.new(
+              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
                 field_path: field_path.formatted_string,
                 remove_all_from_array: raw_to_value(Array(field_value.value)).array_value
               )
             elsif field_value.type == :increment
-              Google::Firestore::V1::DocumentTransform::FieldTransform.new(
+              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
                 field_path: field_path.formatted_string,
                 increment: raw_to_value(field_value.value)
               )
             elsif field_value.type == :maximum
-              Google::Firestore::V1::DocumentTransform::FieldTransform.new(
+              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
                 field_path: field_path.formatted_string,
                 maximum: raw_to_value(field_value.value)
               )
             elsif field_value.type == :minimum
-              Google::Firestore::V1::DocumentTransform::FieldTransform.new(
+              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
                 field_path: field_path.formatted_string,
                 minimum: raw_to_value(field_value.value)
               )

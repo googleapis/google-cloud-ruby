@@ -82,12 +82,13 @@ module Google
         # @!group Access
 
         ##
-        # Retrieves a list of collections.
+        # Retrieves an enumerator for the root collections.
         #
         # @yield [collections] The block for accessing the collections.
-        # @yieldparam [CollectionReference] collection A collection.
+        # @yieldparam [CollectionReference] collection A collection reference object.
         #
-        # @return [Enumerator<CollectionReference>] collection list.
+        # @return [Enumerator<CollectionReference>] An enumerator of collection references. If a block is provided,
+        #  this is the same enumerator that is accessed through the block.
         #
         # @example
         #   require "google/cloud/firestore"
@@ -101,11 +102,10 @@ module Google
         #
         def cols
           ensure_service!
-
-          return enum_for :cols unless block_given?
-
-          collection_ids = service.list_collections "#{path}/documents"
-          collection_ids.each { |collection_id| yield col collection_id }
+          grpc = service.list_collections "#{path}/documents"
+          cols_enum = CollectionReferenceList.from_grpc(grpc, self, "#{path}/documents").all
+          cols_enum.each { |c| yield c } if block_given?
+          cols_enum
         end
         alias collections cols
         alias list_collections cols
@@ -134,8 +134,7 @@ module Google
             raise ArgumentError, "collection_path must refer to a collection."
           end
 
-          CollectionReference.from_path \
-            "#{path}/documents/#{collection_path}", self
+          CollectionReference.from_path "#{path}/documents/#{collection_path}", self
         end
         alias collection col
 
@@ -167,9 +166,9 @@ module Google
             raise ArgumentError, "Invalid collection_id: '#{collection_id}', " \
               "must not contain '/'."
           end
-          query = Google::Firestore::V1::StructuredQuery.new(
+          query = Google::Cloud::Firestore::V1::StructuredQuery.new(
             from: [
-              Google::Firestore::V1::StructuredQuery::CollectionSelector.new(
+              Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(
                 collection_id: collection_id, all_descendants: true
               )
             ]
@@ -670,8 +669,7 @@ module Google
         # @private
         def list_documents parent, collection_id, token: nil, max: nil
           ensure_service!
-          grpc = service.list_documents \
-            parent, collection_id, token: token, max: max
+          grpc = service.list_documents parent, collection_id, token: token, max: max
           DocumentReference::List.from_grpc grpc, self, parent, collection_id
         end
 

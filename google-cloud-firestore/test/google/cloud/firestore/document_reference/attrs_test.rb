@@ -15,14 +15,14 @@
 require "helper"
 
 describe Google::Cloud::Firestore::DocumentReference, :attrs, :mock_firestore do
-  let(:document_path) { "users/mike" }
+  let(:document_path) { "users/alice" }
   let(:document) { Google::Cloud::Firestore::DocumentReference.from_path "projects/#{project}/databases/(default)/documents/#{document_path}", firestore }
 
   it "represents a document reference" do
     _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    _(document.document_id).must_equal "mike"
+    _(document.document_id).must_equal "alice"
     _(document.document_path).must_equal document_path
-    _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/mike"
+    _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/alice"
 
     _(document.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
     _(document.parent.collection_id).must_equal "users"

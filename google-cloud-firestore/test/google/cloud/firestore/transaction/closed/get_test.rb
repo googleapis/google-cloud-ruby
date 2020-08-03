@@ -22,7 +22,7 @@ describe Google::Cloud::Firestore::Transaction, :get, :closed, :mock_firestore d
   end
 
   it "raises when getting a document (ref)" do
-    doc = firestore.doc "users/mike"
+    doc = firestore.doc "users/alice"
 
     error = expect do
       transaction.get doc
@@ -32,7 +32,7 @@ describe Google::Cloud::Firestore::Transaction, :get, :closed, :mock_firestore d
 
   it "raises when getting a document (string)" do
     error = expect do
-      transaction.get "users/mike"
+      transaction.get "users/alice"
     end.must_raise RuntimeError
     _(error.message).must_equal "transaction is closed"
   end

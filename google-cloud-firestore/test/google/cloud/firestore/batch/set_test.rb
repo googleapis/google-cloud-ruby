@@ -17,29 +17,29 @@ require "helper"
 describe Google::Cloud::Firestore::Batch, :set, :mock_firestore do
   let(:batch) { Google::Cloud::Firestore::Batch.from_client firestore }
 
-  let(:document_path) { "users/mike" }
-  let(:database_path) { "projects/#{project}/databases/(default)" }
-  let(:documents_path) { "#{database_path}/documents" }
+  let(:document_path) { "users/alice" }
+
+
   let(:commit_time) { Time.now }
   let :set_writes do
-    [Google::Firestore::V1::Write.new(
-      update: Google::Firestore::V1::Document.new(
+    [Google::Cloud::Firestore::V1::Write.new(
+      update: Google::Cloud::Firestore::V1::Document.new(
         name: "#{documents_path}/#{document_path}",
-        fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" }))
+        fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Alice" }))
     )]
   end
   let :commit_resp do
-    Google::Firestore::V1::CommitResponse.new(
+    Google::Cloud::Firestore::V1::CommitResponse.new(
       commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-      write_results: [Google::Firestore::V1::WriteResult.new(
+      write_results: [Google::Cloud::Firestore::V1::WriteResult.new(
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
       )
   end
 
   it "sets a new document given a string path" do
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: set_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: set_writes)
 
-    batch.set(document_path, { name: "Mike" })
+    batch.set(document_path, { name: "Alice" })
     resp = batch.commit
 
     _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
@@ -47,12 +47,12 @@ describe Google::Cloud::Firestore::Batch, :set, :mock_firestore do
   end
 
   it "sets a new document given a DocumentReference" do
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: set_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: set_writes)
 
     doc = firestore.doc document_path
     _(doc).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
-    batch.set(doc, { name: "Mike" })
+    batch.set(doc, { name: "Alice" })
     resp = batch.commit
 
     _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse

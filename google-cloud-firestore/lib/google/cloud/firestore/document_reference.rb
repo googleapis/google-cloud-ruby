@@ -70,12 +70,13 @@ module Google
         # @!group Access
 
         ##
-        # Retrieves a list of collections nested under the document snapshot.
+        # Retrieves an enumerator for the collections nested under the document snapshot.
         #
         # @yield [collections] The block for accessing the collections.
-        # @yieldparam [CollectionReference] collection A collection.
+        # @yieldparam [CollectionReference] collection A collection reference object.
         #
-        # @return [Enumerator<CollectionReference>] collection list.
+        # @return [Enumerator<CollectionReference>] An enumerator of collection references. If a block is provided, this
+        #  is the same enumerator that is accessed through the block.
         #
         # @example
         #   require "google/cloud/firestore"
@@ -91,11 +92,10 @@ module Google
         #
         def cols
           ensure_service!
-
-          return enum_for :cols unless block_given?
-
-          collection_ids = service.list_collections path
-          collection_ids.each { |collection_id| yield col collection_id }
+          grpc = service.list_collections path
+          cols_enum = CollectionReferenceList.from_grpc(grpc, client, path).all
+          cols_enum.each { |c| yield c } if block_given?
+          cols_enum
         end
         alias collections cols
         alias list_collections cols

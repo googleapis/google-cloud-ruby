@@ -63,7 +63,7 @@ module Google
         attr_accessor :parent_path
 
         ##
-        # @private The Google::Firestore::V1::StructuredQuery object.
+        # @private The Google::Cloud::Firestore::V1::StructuredQuery object.
         attr_accessor :query
 
         ##
@@ -883,7 +883,7 @@ module Google
 
         ##
         # @private
-        StructuredQuery = Google::Firestore::V1::StructuredQuery
+        StructuredQuery = Google::Cloud::Firestore::V1::StructuredQuery
 
         ##
         # @private
@@ -987,7 +987,7 @@ module Google
         end
 
         def order_direction direction
-          return :DESCENDING if direction.to_s.downcase.start_with? "d".freeze
+          return :DESCENDING if direction.to_s.downcase.start_with? "d"
           :ASCENDING
         end
 
@@ -1014,7 +1014,7 @@ module Google
             Convert.raw_to_value value
           end
 
-          Google::Firestore::V1::Cursor.new values: values
+          Google::Cloud::Firestore::V1::Cursor.new values: values
         end
 
         def snapshot_to_cursor snapshot, query

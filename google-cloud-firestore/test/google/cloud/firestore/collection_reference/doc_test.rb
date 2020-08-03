@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Firestore::CollectionReference, :doc, :mock_firestore do
   let(:collection_id) { "messages" }
-  let(:collection_path) { "users/mike/#{collection_id}" }
+  let(:collection_path) { "users/alice/#{collection_id}" }
   let(:collection) { Google::Cloud::Firestore::CollectionReference.from_path "projects/#{project}/databases/(default)/documents/#{collection_path}", firestore }
 
   it "produces a Document reference for a document_id" do
@@ -27,12 +27,12 @@ describe Google::Cloud::Firestore::CollectionReference, :doc, :mock_firestore do
     _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
     _(document.document_id).must_equal document_id
     _(document.document_path).must_equal "#{collection_path}/#{document_id}"
-    _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/mike/messages/abc123"
+    _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/alice/messages/abc123"
 
     _(document.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
     _(document.parent.collection_id).must_equal collection_id
     _(document.parent.collection_path).must_equal collection_path
-    _(document.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
+    _(document.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/alice/messages"
   end
 
   it "produces a Document reference for a document_path" do
@@ -42,13 +42,13 @@ describe Google::Cloud::Firestore::CollectionReference, :doc, :mock_firestore do
 
     _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
     _(document.document_id).must_equal "xyz789"
-    _(document.document_path).must_equal "users/mike/messages/abc123/likes/xyz789"
-    _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/mike/messages/abc123/likes/xyz789"
+    _(document.document_path).must_equal "users/alice/messages/abc123/likes/xyz789"
+    _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/alice/messages/abc123/likes/xyz789"
 
     _(document.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
     _(document.parent.collection_id).must_equal "likes"
-    _(document.parent.collection_path).must_equal "users/mike/messages/abc123/likes"
-    _(document.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/mike/messages/abc123/likes"
+    _(document.parent.collection_path).must_equal "users/alice/messages/abc123/likes"
+    _(document.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/alice/messages/abc123/likes"
   end
 
   it "creates a Document reference with a random id" do
@@ -59,12 +59,12 @@ describe Google::Cloud::Firestore::CollectionReference, :doc, :mock_firestore do
       _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
       _(document.document_id).must_equal random_document_id
       _(document.document_path).must_equal "#{collection_path}/#{random_document_id}"
-      _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/mike/messages/helloiamarandomdocid"
+      _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/alice/messages/helloiamarandomdocid"
 
       _(document.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
       _(document.parent.collection_id).must_equal collection_id
       _(document.parent.collection_path).must_equal collection_path
-      _(document.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
+      _(document.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/alice/messages"
     end
   end
 
@@ -84,12 +84,12 @@ describe Google::Cloud::Firestore::CollectionReference, :doc, :mock_firestore do
       _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
       _(document.document_id).must_equal document_id
       _(document.document_path).must_equal "#{collection_path}/#{document_id}"
-      _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/mike/messages/abc123"
+      _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/alice/messages/abc123"
 
       _(document.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
       _(document.parent.collection_id).must_equal collection_id
       _(document.parent.collection_path).must_equal collection_path
-      _(document.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
+      _(document.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/alice/messages"
     end
 
     it "produces a Document reference for a document_path" do
@@ -99,13 +99,13 @@ describe Google::Cloud::Firestore::CollectionReference, :doc, :mock_firestore do
 
       _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
       _(document.document_id).must_equal "xyz789"
-      _(document.document_path).must_equal "users/mike/messages/abc123/likes/xyz789"
-      _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/mike/messages/abc123/likes/xyz789"
+      _(document.document_path).must_equal "users/alice/messages/abc123/likes/xyz789"
+      _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/alice/messages/abc123/likes/xyz789"
 
       _(document.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
       _(document.parent.collection_id).must_equal "likes"
-      _(document.parent.collection_path).must_equal "users/mike/messages/abc123/likes"
-      _(document.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/mike/messages/abc123/likes"
+      _(document.parent.collection_path).must_equal "users/alice/messages/abc123/likes"
+      _(document.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/alice/messages/abc123/likes"
     end
 
     it "creates a Document reference with a random id" do
@@ -116,12 +116,12 @@ describe Google::Cloud::Firestore::CollectionReference, :doc, :mock_firestore do
         _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
         _(document.document_id).must_equal random_document_id
         _(document.document_path).must_equal "#{collection_path}/#{random_document_id}"
-        _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/mike/messages/helloiamarandomdocid"
+        _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/alice/messages/helloiamarandomdocid"
 
         _(document.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
         _(document.parent.collection_id).must_equal collection_id
         _(document.parent.collection_path).must_equal collection_path
-        _(document.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
+        _(document.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/alice/messages"
       end
     end
 

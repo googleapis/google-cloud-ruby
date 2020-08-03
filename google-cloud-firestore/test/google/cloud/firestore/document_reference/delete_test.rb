@@ -15,26 +15,26 @@
 require "helper"
 
 describe Google::Cloud::Firestore::DocumentReference, :delete, :mock_firestore do
-  let(:document_path) { "users/mike" }
+  let(:document_path) { "users/alice" }
   let(:document) { Google::Cloud::Firestore::DocumentReference.from_path "#{documents_path}/#{document_path}", firestore }
 
-  let(:database_path) { "projects/#{project}/databases/(default)" }
-  let(:documents_path) { "#{database_path}/documents" }
+
+
   let(:commit_time) { Time.now }
   let :delete_writes do
-    [Google::Firestore::V1::Write.new(
+    [Google::Cloud::Firestore::V1::Write.new(
       delete: "#{documents_path}/#{document_path}")]
   end
   let :commit_resp do
-    Google::Firestore::V1::CommitResponse.new(
+    Google::Cloud::Firestore::V1::CommitResponse.new(
       commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-      write_results: [Google::Firestore::V1::WriteResult.new(
+      write_results: [Google::Cloud::Firestore::V1::WriteResult.new(
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
       )
   end
 
   it "deletes a document" do
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: delete_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: delete_writes)
 
     _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 

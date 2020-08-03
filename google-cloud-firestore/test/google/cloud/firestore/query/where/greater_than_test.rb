@@ -18,12 +18,12 @@ describe Google::Cloud::Firestore::Query, :where, :greater_than, :mock_firestore
   let(:query) { Google::Cloud::Firestore::Query.start nil, "#{firestore.path}/documents", firestore }
 
   it "using >" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
           op: :GREATER_THAN,
-          value: Google::Firestore::V1::Value.new(integer_value: 42)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
         )
       )
     )
@@ -33,12 +33,12 @@ describe Google::Cloud::Firestore::Query, :where, :greater_than, :mock_firestore
   end
 
   it "using gt" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
           op: :GREATER_THAN,
-          value: Google::Firestore::V1::Value.new(integer_value: 42)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
         )
       )
     )
@@ -48,12 +48,12 @@ describe Google::Cloud::Firestore::Query, :where, :greater_than, :mock_firestore
   end
 
   it "using >=" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
           op: :GREATER_THAN_OR_EQUAL,
-          value: Google::Firestore::V1::Value.new(integer_value: 42)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
         )
       )
     )
@@ -63,12 +63,12 @@ describe Google::Cloud::Firestore::Query, :where, :greater_than, :mock_firestore
   end
 
   it "using gte" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
           op: :GREATER_THAN_OR_EQUAL,
-          value: Google::Firestore::V1::Value.new(integer_value: 42)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
         )
       )
     )

@@ -17,24 +17,24 @@ require "helper"
 describe Google::Cloud::Firestore::Batch, :delete, :mock_firestore do
   let(:batch) { Google::Cloud::Firestore::Batch.from_client firestore }
 
-  let(:document_path) { "users/mike" }
-  let(:database_path) { "projects/#{project}/databases/(default)" }
-  let(:documents_path) { "#{database_path}/documents" }
+  let(:document_path) { "users/alice" }
+
+
   let(:commit_time) { Time.now }
   let :delete_writes do
-    [Google::Firestore::V1::Write.new(
+    [Google::Cloud::Firestore::V1::Write.new(
       delete: "#{documents_path}/#{document_path}")]
   end
   let :commit_resp do
-    Google::Firestore::V1::CommitResponse.new(
+    Google::Cloud::Firestore::V1::CommitResponse.new(
       commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-      write_results: [Google::Firestore::V1::WriteResult.new(
+      write_results: [Google::Cloud::Firestore::V1::WriteResult.new(
         update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
       )
   end
 
   it "deletes a document given a string path" do
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: delete_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: delete_writes)
 
     batch.delete document_path
     resp = batch.commit
@@ -44,7 +44,7 @@ describe Google::Cloud::Firestore::Batch, :delete, :mock_firestore do
   end
 
   it "deletes a document given a doc ref" do
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: delete_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: delete_writes)
 
     doc = firestore.doc document_path
     _(doc).must_be_kind_of Google::Cloud::Firestore::DocumentReference
@@ -57,9 +57,9 @@ describe Google::Cloud::Firestore::Batch, :delete, :mock_firestore do
   end
 
   it "deletes a document with exists precondition" do
-    delete_writes.first.current_document = Google::Firestore::V1::Precondition.new(exists: true)
+    delete_writes.first.current_document = Google::Cloud::Firestore::V1::Precondition.new(exists: true)
 
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: delete_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: delete_writes)
 
     batch.delete document_path, exists: true
     resp = batch.commit
@@ -69,10 +69,10 @@ describe Google::Cloud::Firestore::Batch, :delete, :mock_firestore do
   end
 
   it "deletes a document with update_time precondition" do
-    delete_writes.first.current_document = Google::Firestore::V1::Precondition.new(
+    delete_writes.first.current_document = Google::Cloud::Firestore::V1::Precondition.new(
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))
 
-    firestore_mock.expect :commit, commit_resp, [database_path, writes: delete_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, commit_args(writes: delete_writes)
 
     batch.delete document_path, update_time: commit_time
     resp = batch.commit

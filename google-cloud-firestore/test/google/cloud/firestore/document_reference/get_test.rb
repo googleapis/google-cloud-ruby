@@ -16,15 +16,15 @@ require "helper"
 
 describe Google::Cloud::Firestore::DocumentReference, :get, :mock_firestore do
   let(:read_time) { Time.now }
-  let(:database_path) { "projects/#{project}/databases/(default)" }
-  let(:documents_path) { "#{database_path}/documents" }
+
+
   let :found_doc_enum do
     [
-      Google::Firestore::V1::BatchGetDocumentsResponse.new(
+      Google::Cloud::Firestore::V1::BatchGetDocumentsResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        found: Google::Firestore::V1::Document.new(
-          name: "projects/#{project}/databases/(default)/documents/users/mike",
-          fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike") },
+        found: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/#{project}/databases/(default)/documents/users/alice",
+          fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Alice") },
           create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
         ))
@@ -32,16 +32,16 @@ describe Google::Cloud::Firestore::DocumentReference, :get, :mock_firestore do
   end
   let :missing_doc_enum do
     [
-      Google::Firestore::V1::BatchGetDocumentsResponse.new(
+      Google::Cloud::Firestore::V1::BatchGetDocumentsResponse.new(
         read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        missing: "projects/#{project}/databases/(default)/documents/users/tad")
+        missing: "projects/#{project}/databases/(default)/documents/users/bob")
     ].to_enum
   end
 
   it "gets a found snapshot" do
-    firestore_mock.expect :batch_get_documents, found_doc_enum, [database_path, documents: ["#{documents_path}/users/mike"], mask: nil, options: default_options]
+    firestore_mock.expect :batch_get_documents, found_doc_enum, batch_get_documents_args(documents: ["#{documents_path}/users/alice"])
 
-    doc_ref = firestore.doc "users/mike"
+    doc_ref = firestore.doc "users/alice"
     _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
     doc = doc_ref.get
@@ -56,16 +56,16 @@ describe Google::Cloud::Firestore::DocumentReference, :get, :mock_firestore do
 
     _(doc).must_be :exists?
     _(doc.data).must_be_kind_of Hash
-    _(doc.data).must_equal({ name: "Mike" })
+    _(doc.data).must_equal({ name: "Alice" })
     _(doc.created_at).must_equal read_time
     _(doc.updated_at).must_equal read_time
     _(doc.read_at).must_equal read_time
   end
 
   it "gets a missing snapshot" do
-    firestore_mock.expect :batch_get_documents, missing_doc_enum, [database_path, documents: ["#{documents_path}/users/tad"], mask: nil, options: default_options]
+    firestore_mock.expect :batch_get_documents, missing_doc_enum, batch_get_documents_args(documents: ["#{documents_path}/users/bob"])
 
-    doc_ref = firestore.doc "users/tad"
+    doc_ref = firestore.doc "users/bob"
     _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
     doc = doc_ref.get

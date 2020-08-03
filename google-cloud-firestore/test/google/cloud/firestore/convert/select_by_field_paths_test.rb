@@ -62,7 +62,7 @@ describe Google::Cloud::Firestore::Convert, :select_by_field_paths do
   end
 
   it "finds partial from nested selected field paths" do
-    orig = { "foo" => { "bar" => "BAR", "baz" => "BAZ" }, "mike" => :hi }
+    orig = { "foo" => { "bar" => "BAR", "baz" => "BAZ" }, "alice" => :hi }
     paths = [
       Google::Cloud::Firestore::FieldPath.new("foo", "baz")
     ]

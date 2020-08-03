@@ -15,13 +15,13 @@
 require "helper"
 
 describe Google::Cloud::Firestore::DocumentSnapshot, :attrs, :mock_firestore do
-  let(:document_path) { "users/mike" }
+  let(:document_path) { "users/alice" }
   let(:document_ref) { Google::Cloud::Firestore::DocumentReference.from_path "projects/#{project}/databases/(default)/documents/#{document_path}", firestore }
   let(:document_time) { Time.now }
   let :document_grpc do
-    Google::Firestore::V1::Document.new(
+    Google::Cloud::Firestore::V1::Document.new(
       name: document_ref.path,
-      fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike") },
+      fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Alice") },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
     )
@@ -38,7 +38,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :attrs, :mock_firestore do
     _(document).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
     # document's metadata
-    _(document.document_id).must_equal "mike"
+    _(document.document_id).must_equal "alice"
     _(document.document_path).must_equal document_path
 
     _(document.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
@@ -48,7 +48,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :attrs, :mock_firestore do
     # a reference document does not have any data
     _(document.data).wont_be :nil?
     _(document.data).must_be_kind_of Hash
-    _(document.data).must_equal({ name: "Mike" })
+    _(document.data).must_equal({ name: "Alice" })
     _(document.created_at).wont_be :nil?
     _(document.created_at).must_equal document_time
     _(document.updated_at).wont_be :nil?
@@ -61,7 +61,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :attrs, :mock_firestore do
     # aliases for resource methods
     _(document.fields).wont_be :nil?
     _(document.fields).must_be_kind_of Hash
-    _(document.fields).must_equal({ name: "Mike" })
+    _(document.fields).must_equal({ name: "Alice" })
     _(document.create_time).wont_be :nil?
     _(document.create_time).must_equal document_time
     _(document.update_time).wont_be :nil?
@@ -76,7 +76,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :attrs, :mock_firestore do
     _(document).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
     # document's metadata
-    _(document.document_id).must_equal "mike"
+    _(document.document_id).must_equal "alice"
     _(document.document_path).must_equal document_path
 
     _(document.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference

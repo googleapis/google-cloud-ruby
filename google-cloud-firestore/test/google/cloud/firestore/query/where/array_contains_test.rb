@@ -18,12 +18,12 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firesto
   let(:query) { Google::Cloud::Firestore::Query.start nil, "#{firestore.path}/documents", firestore }
 
   it "using array-contains" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
           op: :ARRAY_CONTAINS,
-          value: Google::Firestore::V1::Value.new(integer_value: 42)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
         )
       )
     )
@@ -33,12 +33,12 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firesto
   end
 
   it "using array_contains" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
           op: :ARRAY_CONTAINS,
-          value: Google::Firestore::V1::Value.new(integer_value: 42)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
         )
       )
     )
@@ -48,12 +48,12 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firesto
   end
 
   it "using include" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
           op: :ARRAY_CONTAINS,
-          value: Google::Firestore::V1::Value.new(integer_value: 42)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
         )
       )
     )
@@ -63,12 +63,12 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firesto
   end
 
   it "using include?" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
           op: :ARRAY_CONTAINS,
-          value: Google::Firestore::V1::Value.new(integer_value: 42)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
         )
       )
     )
@@ -78,12 +78,12 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firesto
   end
 
   it "using has" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
           op: :ARRAY_CONTAINS,
-          value: Google::Firestore::V1::Value.new(integer_value: 42)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
         )
       )
     )
@@ -93,23 +93,23 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firesto
   end
 
   it "with multiple values" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        composite_filter: Google::Firestore::V1::StructuredQuery::CompositeFilter.new(
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        composite_filter: Google::Cloud::Firestore::V1::StructuredQuery::CompositeFilter.new(
           op: :AND,
           filters: [
-            Google::Firestore::V1::StructuredQuery::Filter.new(
-              field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-                field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+            Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+              field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+                field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
                 op: :ARRAY_CONTAINS,
-                value: Google::Firestore::V1::Value.new(integer_value: 42)
+                value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
               )
             ),
-            Google::Firestore::V1::StructuredQuery::Filter.new(
-              field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-                field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+            Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+              field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+                field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
                 op: :ARRAY_CONTAINS,
-                value: Google::Firestore::V1::Value.new(integer_value: 43)
+                value: Google::Cloud::Firestore::V1::Value.new(integer_value: 43)
               )
             )
           ]

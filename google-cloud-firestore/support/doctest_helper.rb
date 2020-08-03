@@ -16,29 +16,6 @@ require "minitest/focus"
 
 require "google/cloud/firestore"
 
-##
-# Monkey-Patch CallOptions to support Mocks
-class Google::Gax::CallOptions
-  ##
-  # Minitest Mock depends on === to match same-value objects.
-  # By default, CallOptions objects do not match with ===.
-  # Therefore, we must add this capability.
-  def === other
-    return false unless other.is_a? Google::Gax::CallOptions
-    timeout === other.timeout &&
-      retry_options === other.retry_options &&
-      page_token === other.page_token &&
-      kwargs === other.kwargs
-  end
-  def == other
-    return false unless other.is_a? Google::Gax::CallOptions
-    timeout == other.timeout &&
-      retry_options == other.retry_options &&
-      page_token == other.page_token &&
-      kwargs == other.kwargs
-  end
-end
-
 module Google
   module Cloud
     module Firestore
@@ -129,7 +106,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Firestore::Client#cols" do
     mock_firestore do |mock|
-      mock.expect :list_collection_ids, list_collection_resp, list_collection_args
+      mock.expect :list_collection_ids, list_collection_ids_resp, list_collection_ids_args
       mock.expect :commit, commit_resp, commit_args
     end
   end
@@ -189,7 +166,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Firestore::Client#transaction" do
     mock_firestore do |mock|
-      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [Hash, Gapic::CallOptions]
       mock.expect :run_query, run_query_resp, run_query_args
       mock.expect :commit, commit_resp, commit_args
     end
@@ -216,7 +193,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Firestore::Transaction" do
     mock_firestore do |mock|
-      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [Hash, Gapic::CallOptions]
       mock.expect :batch_get_documents, batch_get_resp, batch_get_args
       mock.expect :commit, commit_resp, commit_args
       mock.expect :commit, commit_resp, commit_args
@@ -225,21 +202,21 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Firestore::Transaction#get" do
     mock_firestore do |mock|
-      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [Hash, Gapic::CallOptions]
       mock.expect :run_query, run_query_resp, run_query_args
       mock.expect :commit, commit_resp, commit_args
     end
   end
   doctest.before "Google::Cloud::Firestore::Transaction#get@Get a document snapshot given a document path:" do
     mock_firestore do |mock|
-      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [Hash, Gapic::CallOptions]
       mock.expect :batch_get_documents, batch_get_resp, batch_get_args
       mock.expect :commit, commit_resp, commit_args
     end
   end
   doctest.before "Google::Cloud::Firestore::Transaction#get@Get a document snapshot given a document reference:" do
     mock_firestore do |mock|
-      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [Hash, Gapic::CallOptions]
       mock.expect :batch_get_documents, batch_get_resp, batch_get_args
       mock.expect :commit, commit_resp, commit_args
     end
@@ -249,7 +226,7 @@ YARD::Doctest.configure do |doctest|
   # The method #get_all must be listed after #get because of reasons...
   doctest.before "Google::Cloud::Firestore::Transaction#get_all" do
     mock_firestore do |mock|
-      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [String, Hash]
+      mock.expect :begin_transaction, OpenStruct.new(transaction: "tx123"), [Hash, Gapic::CallOptions]
       mock.expect :batch_get_documents, batch_get_resp, batch_get_args
       mock.expect :commit, commit_resp, commit_args
     end
@@ -332,9 +309,16 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Firestore::CollectionReferenceList" do
+    mock_firestore do |mock|
+      mock.expect :list_collection_ids, list_collection_ids_resp, list_collection_ids_args
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
   doctest.before "Google::Cloud::Firestore::DocumentReference#cols" do
     mock_firestore do |mock|
-      mock.expect :list_collection_ids, list_collection_resp, list_collection_args
+      mock.expect :list_collection_ids, list_collection_ids_resp, list_collection_ids_args
     end
   end
   # Skip aliased methods
@@ -412,27 +396,27 @@ end
 # Fixture helpers
 
 def paged_enum_struct response
-  OpenStruct.new page: OpenStruct.new(response: response)
+  OpenStruct.new response: response
 end
 
 def commit_args
-  [String, Hash]
+  [Hash, Gapic::CallOptions]
 end
 
 def commit_resp
-  Google::Firestore::V1::CommitResponse.new(
+  Google::Cloud::Firestore::V1::CommitResponse.new(
     commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
-    write_results: [Google::Firestore::V1::WriteResult.new(
+    write_results: [Google::Cloud::Firestore::V1::WriteResult.new(
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now))]
     )
 end
 
-def list_collection_resp
-  ["cities", "messages"].to_enum
+def list_collection_ids_resp
+  Google::Cloud::Firestore::V1::ListCollectionIdsResponse.new collection_ids: ["cities", "messages"]
 end
 
-def list_collection_args
-  [String, Hash]
+def list_collection_ids_args
+  [Hash, Gapic::CallOptions]
 end
 
 def run_query_resp
@@ -444,7 +428,7 @@ def run_query_resp
 end
 
 def run_query_resp_obj doc, data
-  Google::Firestore::V1::RunQueryResponse.new(
+  Google::Cloud::Firestore::V1::RunQueryResponse.new(
     transaction: "tx123",
     read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
     document: document_gapi(doc: doc, fields: Google::Cloud::Firestore::Convert.hash_to_fields(data))
@@ -452,7 +436,7 @@ def run_query_resp_obj doc, data
 end
 
 def run_query_args
-  [String, Hash]
+  [Hash, Gapic::CallOptions]
 end
 
 def batch_get_resp
@@ -480,7 +464,7 @@ end
 
 def missing_batch_get_resp
   [
-    Google::Firestore::V1::BatchGetDocumentsResponse.new(
+    Google::Cloud::Firestore::V1::BatchGetDocumentsResponse.new(
       read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
       missing: "projects/my-project-id/databases/(default)/documents/cities/Atlantis"
     )
@@ -488,26 +472,29 @@ def missing_batch_get_resp
 end
 
 def batch_get_resp_obj doc, data
-  Google::Firestore::V1::BatchGetDocumentsResponse.new(
+  Google::Cloud::Firestore::V1::BatchGetDocumentsResponse.new(
     read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
     found: document_gapi(doc: doc, fields: Google::Cloud::Firestore::Convert.hash_to_fields(data))
   )
 end
 
 def batch_get_args
-  [String, Hash]
+  [Hash, Gapic::CallOptions]
 end
 
 def list_documents_args
   [
-    "projects/my-project-id/databases/(default)/documents",
-    "cities",
-    { mask: {field_paths: []}, show_missing: true, page_size: nil, options: nil }
+    parent:        "projects/my-project-id/databases/(default)/documents",
+    collection_id: "cities",
+    page_size:     nil,
+    page_token:     nil,
+    mask:          { field_paths: [] },
+    show_missing:  true
   ]
 end
 
 def document_gapi doc: "my-document", fields: {}
-  Google::Firestore::V1::Document.new(
+  Google::Cloud::Firestore::V1::Document.new(
     name: "projects/my-project-id/databases/(default)/documents/#{doc}",
     fields: fields,
     create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
@@ -516,7 +503,7 @@ def document_gapi doc: "my-document", fields: {}
 end
 
 def documents_resp token: nil
-  response = Google::Firestore::V1::ListDocumentsResponse.new(
+  response = Google::Cloud::Firestore::V1::ListDocumentsResponse.new(
     documents: [document_gapi]
   )
   response.next_page_token = token if token

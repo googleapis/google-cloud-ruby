@@ -15,7 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
-  let(:document_path) { "users/mike" }
+  let(:document_path) { "users/alice" }
   let(:document_ref) { Google::Cloud::Firestore::DocumentReference.from_path "projects/#{project}/databases/(default)/documents/#{document_path}", firestore }
   let(:document_time) { Time.now }
   let(:document) do
@@ -27,9 +27,9 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
   end
 
   it "holds a nil value" do
-    document.grpc = Google::Firestore::V1::Document.new \
+    document.grpc = Google::Cloud::Firestore::V1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",
-      fields: { "expires_on" => Google::Firestore::V1::Value.new(null_value: :NULL_VALUE) },
+      fields: { "expires_on" => Google::Cloud::Firestore::V1::Value.new(null_value: :NULL_VALUE) },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
@@ -37,9 +37,9 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
   end
 
   it "holds a true value" do
-    document.grpc = Google::Firestore::V1::Document.new \
+    document.grpc = Google::Cloud::Firestore::V1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",
-      fields: { "active" => Google::Firestore::V1::Value.new(boolean_value: true) },
+      fields: { "active" => Google::Cloud::Firestore::V1::Value.new(boolean_value: true) },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
@@ -47,9 +47,9 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
   end
 
   it "holds a false value" do
-    document.grpc = Google::Firestore::V1::Document.new \
+    document.grpc = Google::Cloud::Firestore::V1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",
-      fields: { "expired" => Google::Firestore::V1::Value.new(boolean_value: false) },
+      fields: { "expired" => Google::Cloud::Firestore::V1::Value.new(boolean_value: false) },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
@@ -57,9 +57,9 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
   end
 
   it "holds an integer value" do
-    document.grpc = Google::Firestore::V1::Document.new \
+    document.grpc = Google::Cloud::Firestore::V1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",
-      fields: { "score" => Google::Firestore::V1::Value.new(integer_value: 29) },
+      fields: { "score" => Google::Cloud::Firestore::V1::Value.new(integer_value: 29) },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
@@ -67,9 +67,9 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
   end
 
   it "holds a nan value" do
-    document.grpc = Google::Firestore::V1::Document.new \
+    document.grpc = Google::Cloud::Firestore::V1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",
-      fields: { "ratio" => Google::Firestore::V1::Value.new(double_value: Float::NAN) },
+      fields: { "ratio" => Google::Cloud::Firestore::V1::Value.new(double_value: Float::NAN) },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
@@ -77,9 +77,9 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
   end
 
   it "holds an infinity value" do
-    document.grpc = Google::Firestore::V1::Document.new \
+    document.grpc = Google::Cloud::Firestore::V1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",
-      fields: { "ratio" => Google::Firestore::V1::Value.new(double_value: Float::INFINITY) },
+      fields: { "ratio" => Google::Cloud::Firestore::V1::Value.new(double_value: Float::INFINITY) },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
@@ -87,9 +87,9 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
   end
 
   it "holds a float value" do
-    document.grpc = Google::Firestore::V1::Document.new \
+    document.grpc = Google::Cloud::Firestore::V1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",
-      fields: { "ratio" => Google::Firestore::V1::Value.new(double_value: 0.9) },
+      fields: { "ratio" => Google::Cloud::Firestore::V1::Value.new(double_value: 0.9) },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
@@ -97,9 +97,9 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
   end
 
   it "holds a time value" do
-    document.grpc = Google::Firestore::V1::Document.new \
+    document.grpc = Google::Cloud::Firestore::V1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",
-      fields: { "published_at" => Google::Firestore::V1::Value.new(timestamp_value: Google::Protobuf::Timestamp.new(seconds: 1483326245, nanos: 60000000)) },
+      fields: { "published_at" => Google::Cloud::Firestore::V1::Value.new(timestamp_value: Google::Protobuf::Timestamp.new(seconds: 1483326245, nanos: 60000000)) },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
@@ -107,19 +107,19 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
   end
 
   it "holds a string value" do
-    document.grpc = Google::Firestore::V1::Document.new \
+    document.grpc = Google::Cloud::Firestore::V1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",
-      fields: { "name" => Google::Firestore::V1::Value.new(string_value: "Mike") },
+      fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Alice") },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
-    _(document.data).must_equal({ name: "Mike" })
+    _(document.data).must_equal({ name: "Alice" })
   end
 
   it "holds a bytes value" do
-    document.grpc = Google::Firestore::V1::Document.new \
+    document.grpc = Google::Cloud::Firestore::V1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",
-      fields: { "avatar" => Google::Firestore::V1::Value.new(bytes_value: "contents") },
+      fields: { "avatar" => Google::Cloud::Firestore::V1::Value.new(bytes_value: "contents") },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
@@ -128,23 +128,23 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
   end
 
   it "holds a reference value" do
-    document.grpc = Google::Firestore::V1::Document.new \
+    document.grpc = Google::Cloud::Firestore::V1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",
-      fields: { "friend" => Google::Firestore::V1::Value.new(reference_value: "projects/#{project}/databases/(default)/documents/users/chris") },
+      fields: { "friend" => Google::Cloud::Firestore::V1::Value.new(reference_value: "projects/#{project}/databases/(default)/documents/users/carol") },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
     _(document.data.keys).must_include :friend
     _(document.data[:friend]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    _(document.data[:friend].document_id).must_equal "chris"
-    _(document.data[:friend].document_path).must_equal "users/chris"
-    _(document.data[:friend].path).must_equal "projects/#{project}/databases/(default)/documents/users/chris"
+    _(document.data[:friend].document_id).must_equal "carol"
+    _(document.data[:friend].document_path).must_equal "users/carol"
+    _(document.data[:friend].path).must_equal "projects/#{project}/databases/(default)/documents/users/carol"
   end
 
   it "holds a geo_point value" do
-    document.grpc = Google::Firestore::V1::Document.new \
+    document.grpc = Google::Cloud::Firestore::V1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",
-      fields: { "location" => Google::Firestore::V1::Value.new(geo_point_value: Google::Type::LatLng.new(latitude: 43.878264, longitude: -103.45700740814209)) },
+      fields: { "location" => Google::Cloud::Firestore::V1::Value.new(geo_point_value: Google::Type::LatLng.new(latitude: 43.878264, longitude: -103.45700740814209)) },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
@@ -152,9 +152,9 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
   end
 
   it "holds an array value" do
-    document.grpc = Google::Firestore::V1::Document.new \
+    document.grpc = Google::Cloud::Firestore::V1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",
-      fields: { "projects" => Google::Firestore::V1::Value.new(array_value: Google::Firestore::V1::ArrayValue.new(values: [Google::Firestore::V1::Value.new(integer_value: 1), Google::Firestore::V1::Value.new(integer_value: 2), Google::Firestore::V1::Value.new(integer_value: 3)])) },
+      fields: { "projects" => Google::Cloud::Firestore::V1::Value.new(array_value: Google::Cloud::Firestore::V1::ArrayValue.new(values: [Google::Cloud::Firestore::V1::Value.new(integer_value: 1), Google::Cloud::Firestore::V1::Value.new(integer_value: 2), Google::Cloud::Firestore::V1::Value.new(integer_value: 3)])) },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
@@ -162,9 +162,9 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
   end
 
   it "holds a hash value" do
-    document.grpc = Google::Firestore::V1::Document.new \
+    document.grpc = Google::Cloud::Firestore::V1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",
-      fields: { "details" => Google::Firestore::V1::Value.new(map_value: Google::Firestore::V1::MapValue.new(fields: { "score"=>Google::Firestore::V1::Value.new(double_value: 0.9), "env"=>Google::Firestore::V1::Value.new(string_value: "production"), "project_ids"=>Google::Firestore::V1::Value.new(array_value: Google::Firestore::V1::ArrayValue.new(values: [Google::Firestore::V1::Value.new(integer_value: 1), Google::Firestore::V1::Value.new(integer_value: 2), Google::Firestore::V1::Value.new(integer_value: 3)] )) })) },
+      fields: { "details" => Google::Cloud::Firestore::V1::Value.new(map_value: Google::Cloud::Firestore::V1::MapValue.new(fields: { "score"=>Google::Cloud::Firestore::V1::Value.new(double_value: 0.9), "env"=>Google::Cloud::Firestore::V1::Value.new(string_value: "production"), "project_ids"=>Google::Cloud::Firestore::V1::Value.new(array_value: Google::Cloud::Firestore::V1::ArrayValue.new(values: [Google::Cloud::Firestore::V1::Value.new(integer_value: 1), Google::Cloud::Firestore::V1::Value.new(integer_value: 2), Google::Cloud::Firestore::V1::Value.new(integer_value: 3)] )) })) },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
@@ -172,19 +172,19 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
   end
 
   it "holds all the values" do
-    document.grpc = Google::Firestore::V1::Document.new \
+    document.grpc = Google::Cloud::Firestore::V1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",
-      fields: { "expires_on" => Google::Firestore::V1::Value.new(null_value: :NULL_VALUE),
-                "active" => Google::Firestore::V1::Value.new(boolean_value: true),
-                "expired" => Google::Firestore::V1::Value.new(boolean_value: false),
-                "score" => Google::Firestore::V1::Value.new(integer_value: 29),
-                "ratio" => Google::Firestore::V1::Value.new(double_value: 0.9),
-                "published_at" => Google::Firestore::V1::Value.new(timestamp_value: Google::Protobuf::Timestamp.new(seconds: 1483326245, nanos: 60000000)),
-                "name" => Google::Firestore::V1::Value.new(string_value: "Mike"),
-                "avatar" => Google::Firestore::V1::Value.new(bytes_value: "contents"),
-                "friend" => Google::Firestore::V1::Value.new(reference_value: "projects/#{project}/databases/(default)/documents/users/chris"),
-                "location" => Google::Firestore::V1::Value.new(geo_point_value: Google::Type::LatLng.new(latitude: 43.878264, longitude: -103.45700740814209)),
-                "details" => Google::Firestore::V1::Value.new(map_value: Google::Firestore::V1::MapValue.new(fields: { "score"=>Google::Firestore::V1::Value.new(double_value: 0.9), "env"=>Google::Firestore::V1::Value.new(string_value: "production"), "project_ids"=>Google::Firestore::V1::Value.new(array_value: Google::Firestore::V1::ArrayValue.new(values: [Google::Firestore::V1::Value.new(integer_value: 1), Google::Firestore::V1::Value.new(integer_value: 2), Google::Firestore::V1::Value.new(integer_value: 3)] )) })) },
+      fields: { "expires_on" => Google::Cloud::Firestore::V1::Value.new(null_value: :NULL_VALUE),
+                "active" => Google::Cloud::Firestore::V1::Value.new(boolean_value: true),
+                "expired" => Google::Cloud::Firestore::V1::Value.new(boolean_value: false),
+                "score" => Google::Cloud::Firestore::V1::Value.new(integer_value: 29),
+                "ratio" => Google::Cloud::Firestore::V1::Value.new(double_value: 0.9),
+                "published_at" => Google::Cloud::Firestore::V1::Value.new(timestamp_value: Google::Protobuf::Timestamp.new(seconds: 1483326245, nanos: 60000000)),
+                "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Alice"),
+                "avatar" => Google::Cloud::Firestore::V1::Value.new(bytes_value: "contents"),
+                "friend" => Google::Cloud::Firestore::V1::Value.new(reference_value: "projects/#{project}/databases/(default)/documents/users/carol"),
+                "location" => Google::Cloud::Firestore::V1::Value.new(geo_point_value: Google::Type::LatLng.new(latitude: 43.878264, longitude: -103.45700740814209)),
+                "details" => Google::Cloud::Firestore::V1::Value.new(map_value: Google::Cloud::Firestore::V1::MapValue.new(fields: { "score"=>Google::Cloud::Firestore::V1::Value.new(double_value: 0.9), "env"=>Google::Cloud::Firestore::V1::Value.new(string_value: "production"), "project_ids"=>Google::Cloud::Firestore::V1::Value.new(array_value: Google::Cloud::Firestore::V1::ArrayValue.new(values: [Google::Cloud::Firestore::V1::Value.new(integer_value: 1), Google::Cloud::Firestore::V1::Value.new(integer_value: 2), Google::Cloud::Firestore::V1::Value.new(integer_value: 3)] )) })) },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
@@ -194,14 +194,14 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
     _(document.data[:score]).must_equal 29
     _(document.data[:ratio]).must_equal 0.9
     _(document.data[:published_at]).must_equal Time.parse("2017-01-02 03:04:05.06 UTC")
-    _(document.data[:name]).must_equal "Mike"
+    _(document.data[:name]).must_equal "Alice"
     _(document.data.keys).must_include :avatar
     _(document.data[:avatar].read).must_equal "contents"
     _(document.data.keys).must_include :friend
     _(document.data[:friend]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    _(document.data[:friend].document_id).must_equal "chris"
-    _(document.data[:friend].document_path).must_equal "users/chris"
-    _(document.data[:friend].path).must_equal "projects/#{project}/databases/(default)/documents/users/chris"
+    _(document.data[:friend].document_id).must_equal "carol"
+    _(document.data[:friend].document_path).must_equal "users/carol"
+    _(document.data[:friend].path).must_equal "projects/#{project}/databases/(default)/documents/users/carol"
     _(document.data[:location]).must_equal({ longitude: -103.45700740814209, latitude: 43.878264 })
     _(document.data[:details]).must_equal({ env: "production", score: 0.9, project_ids: [1, 2, 3] })
   end

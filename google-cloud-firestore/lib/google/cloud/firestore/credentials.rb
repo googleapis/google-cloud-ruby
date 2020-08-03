@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/firestore/v1/credentials"
+require "google/cloud/firestore/v1/firestore/credentials"
 
 module Google
   module Cloud
@@ -37,7 +37,7 @@ module Google
       #
       #   firestore.project_id #=> "my-project"
       #
-      class Credentials < Google::Cloud::Firestore::V1::Credentials
+      class Credentials < Google::Cloud::Firestore::V1::Firestore::Credentials
       end
     end
   end

@@ -20,15 +20,15 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
   let(:read_time) { Time.now }
 
   it "with a document snapshot" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
       order_by: [
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
           direction: :ASCENDING
         )
       ],
-      start_at: Google::Firestore::V1::Cursor.new(
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(
         values: [
           Google::Cloud::Firestore::Convert.raw_to_value(
             Google::Cloud::Firestore::DocumentReference.from_path("projects/projectID/databases/(default)/documents/C/D", firestore)
@@ -45,24 +45,24 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
   end
 
   it "document snapshot and an equality where clause" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(
             field_path: "a"
           ),
           op: :EQUAL,
-          value: Google::Firestore::V1::Value.new(integer_value: 3)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
         )
       ),
       order_by: [
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
           direction: :ASCENDING
         )
       ],
-      end_at: Google::Firestore::V1::Cursor.new(
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(
         values: [
           Google::Cloud::Firestore::Convert.raw_to_value(
             Google::Cloud::Firestore::DocumentReference.from_path("projects/projectID/databases/(default)/documents/C/D", firestore)
@@ -79,28 +79,28 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
   end
 
   it "document snapshot and an inequality where clause" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(
             field_path: "a"
           ),
           op: :LESS_THAN_OR_EQUAL,
-          value: Google::Firestore::V1::Value.new(integer_value: 3)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
         )
       ),
       order_by: [
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
           direction: :ASCENDING
         ),
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
           direction: :ASCENDING
         )
       ],
-      end_at: Google::Firestore::V1::Cursor.new(
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(
         values: [
           Google::Cloud::Firestore::Convert.raw_to_value(7),
           Google::Cloud::Firestore::Convert.raw_to_value(
@@ -118,28 +118,28 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
   end
 
   it "doc snapshot, inequality where clause, and existing orderBy clause" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(
             field_path: "a"
           ),
           op: :LESS_THAN,
-          value: Google::Firestore::V1::Value.new(integer_value: 4)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 4)
         )
       ),
       order_by: [
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
           direction: :DESCENDING
         ),
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
           direction: :DESCENDING
         )
       ],
-      start_at: Google::Firestore::V1::Cursor.new(
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(
         values: [
           Google::Cloud::Firestore::Convert.raw_to_value(7),
           Google::Cloud::Firestore::Convert.raw_to_value(
@@ -157,32 +157,32 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
   end
 
   it "existing orderBy" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(
             field_path: "a"
           ),
           op: :LESS_THAN,
-          value: Google::Firestore::V1::Value.new(integer_value: 4)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 4)
         )
       ),
       order_by: [
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
           direction: :ASCENDING
         ),
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "b"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "b"),
           direction: :DESCENDING
         ),
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
           direction: :DESCENDING
         )
       ],
-      start_at: Google::Firestore::V1::Cursor.new(
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(
         values: [
           Google::Cloud::Firestore::Convert.raw_to_value(7),
           Google::Cloud::Firestore::Convert.raw_to_value(8),
@@ -201,19 +201,19 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
   end
 
   it "existing orderBy __name__" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
       order_by: [
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
           direction: :DESCENDING
         ),
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
           direction: :ASCENDING
         )
       ],
-      start_at: Google::Firestore::V1::Cursor.new(
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(
         values: [
           Google::Cloud::Firestore::Convert.raw_to_value(7),
           Google::Cloud::Firestore::Convert.raw_to_value(
@@ -225,7 +225,7 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
         ],
         before: true
       ),
-      end_at: Google::Firestore::V1::Cursor.new(
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(
         values: [
           Google::Cloud::Firestore::Convert.raw_to_value(7),
           Google::Cloud::Firestore::Convert.raw_to_value(
@@ -252,21 +252,21 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
   end
 
   it "StartAt/EndBefore with values" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
       order_by: [
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
           direction: :ASCENDING
         )
       ],
-      start_at: Google::Firestore::V1::Cursor.new(
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(
         values: [
           Google::Cloud::Firestore::Convert.raw_to_value(7)
         ],
         before: true
       ),
-      end_at: Google::Firestore::V1::Cursor.new(
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(
         values: [
           Google::Cloud::Firestore::Convert.raw_to_value(9)
         ],
@@ -279,21 +279,21 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
   end
 
   it "StartAfter/EndAt with values" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
       order_by: [
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
           direction: :ASCENDING
         )
       ],
-      start_at: Google::Firestore::V1::Cursor.new(
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(
         values: [
           Google::Cloud::Firestore::Convert.raw_to_value(7)
         ],
         before: false
       ),
-      end_at: Google::Firestore::V1::Cursor.new(
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(
         values: [
           Google::Cloud::Firestore::Convert.raw_to_value(9)
         ],
@@ -306,26 +306,26 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
   end
 
   it "Start/End with two values" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
       order_by: [
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
           direction: :ASCENDING
         ),
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "b"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "b"),
           direction: :DESCENDING
         )
       ],
-      start_at: Google::Firestore::V1::Cursor.new(
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(
         values: [
           Google::Cloud::Firestore::Convert.raw_to_value(7),
           Google::Cloud::Firestore::Convert.raw_to_value(8)
         ],
         before: false
       ),
-      end_at: Google::Firestore::V1::Cursor.new(
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(
         values: [
           Google::Cloud::Firestore::Convert.raw_to_value(9),
           Google::Cloud::Firestore::Convert.raw_to_value(10)
@@ -340,15 +340,15 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
 
   it "with __name__" do
     # TODO: Looks like we need to create the full path when paired with __name__
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
       order_by: [
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
           direction: :ASCENDING
         )
       ],
-      start_at: Google::Firestore::V1::Cursor.new(
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(
         values: [
           Google::Cloud::Firestore::Convert.raw_to_value(
             Google::Cloud::Firestore::DocumentReference.from_path(
@@ -359,7 +359,7 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
         ],
         before: false
       ),
-      end_at: Google::Firestore::V1::Cursor.new(
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(
         values: [
           Google::Cloud::Firestore::Convert.raw_to_value(
             Google::Cloud::Firestore::DocumentReference.from_path(
@@ -377,16 +377,16 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
   end
 
   it "last one wins" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      from: [Google::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
       order_by: [
-        Google::Firestore::V1::StructuredQuery::Order.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
           direction: :ASCENDING
         )
       ],
-      start_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value(2)], before: true),
-      end_at: Google::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value(4)], before: true)
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value(2)], before: true),
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value(4)], before: true)
     )
 
     generated_query = collection.order(:a).start_after(1).start_at(2).end_at(3).end_before(4).query
@@ -395,7 +395,7 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
 
   def document_snapshot path, data
     doc_ref = Google::Cloud::Firestore::DocumentReference.from_path path, firestore
-    doc_grpc = Google::Firestore::V1::Document.new(
+    doc_grpc = Google::Cloud::Firestore::V1::Document.new(
       name: path,
       fields: Google::Cloud::Firestore::Convert.hash_to_fields(data)
     )

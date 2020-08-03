@@ -162,7 +162,7 @@ module Google
 
           ##
           # @private New DocumentReference::List from a
-          # Google::Firestore::V1::ListDocumentsResponse object.
+          # Google::Cloud::Firestore::V1::ListDocumentsResponse object.
           def self.from_grpc grpc, client, parent, collection_id, max = nil
             documents = List.new(Array(grpc.documents).map do |document|
               DocumentReference.from_path document.name, client
@@ -170,7 +170,7 @@ module Google
             documents.instance_variable_set :@parent, parent
             documents.instance_variable_set :@collection_id, collection_id
             token = grpc.next_page_token
-            token = nil if token == "".freeze
+            token = nil if token == ""
             documents.instance_variable_set :@token, token
             documents.instance_variable_set :@client, client
             documents.instance_variable_set :@max, max

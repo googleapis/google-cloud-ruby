@@ -25,17 +25,17 @@ describe Google::Cloud::Firestore::Client, :collection, :mock_firestore do
   end
 
   it "gets a collection by a nested collection path" do
-    col = firestore.col "users/mike/messages"
+    col = firestore.col "users/alice/messages"
 
     _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
     _(col.collection_id).must_equal "messages"
-    _(col.collection_path).must_equal "users/mike/messages"
-    _(col.path).must_equal "projects/#{project}/databases/(default)/documents/users/mike/messages"
+    _(col.collection_path).must_equal "users/alice/messages"
+    _(col.path).must_equal "projects/#{project}/databases/(default)/documents/users/alice/messages"
   end
 
   it "does not allow a document path" do
     error = expect do
-      firestore.col "users/mike"
+      firestore.col "users/alice"
     end.must_raise ArgumentError
     _(error.message).must_equal "collection_path must refer to a collection."
   end
@@ -51,17 +51,17 @@ describe Google::Cloud::Firestore::Client, :collection, :mock_firestore do
     end
 
     it "gets a collection by a nested collection path" do
-      col = firestore.collection "users/mike/messages"
+      col = firestore.collection "users/alice/messages"
 
       _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
       _(col.collection_id).must_equal "messages"
-      _(col.collection_path).must_equal "users/mike/messages"
-      _(col.path).must_equal "projects/#{project}/databases/(default)/documents/users/mike/messages"
+      _(col.collection_path).must_equal "users/alice/messages"
+      _(col.path).must_equal "projects/#{project}/databases/(default)/documents/users/alice/messages"
     end
 
     it "does not allow a document path" do
       error = expect do
-        firestore.collection "users/mike"
+        firestore.collection "users/alice"
       end.must_raise ArgumentError
       _(error.message).must_equal "collection_path must refer to a collection."
     end

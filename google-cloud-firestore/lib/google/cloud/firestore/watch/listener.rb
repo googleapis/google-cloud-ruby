@@ -34,12 +34,12 @@ module Google
             raise ArgumentError if doc_ref.nil?
             raise ArgumentError if callback.nil?
 
-            documents = Google::Firestore::V1::Target::DocumentsTarget.new(
+            documents = Google::Cloud::Firestore::V1::Target::DocumentsTarget.new(
               documents: [doc_ref.path]
             )
-            init_listen_req = Google::Firestore::V1::ListenRequest.new(
+            init_listen_req = Google::Cloud::Firestore::V1::ListenRequest.new(
               database:   doc_ref.client.path,
-              add_target: Google::Firestore::V1::Target.new(
+              add_target: Google::Cloud::Firestore::V1::Target.new(
                 documents: documents
               )
             )
@@ -51,10 +51,10 @@ module Google
             raise ArgumentError if query.nil?
             raise ArgumentError if callback.nil?
 
-            init_listen_req = Google::Firestore::V1::ListenRequest.new(
+            init_listen_req = Google::Cloud::Firestore::V1::ListenRequest.new(
               database:   query.client.path,
-              add_target: Google::Firestore::V1::Target.new(
-                query: Google::Firestore::V1::Target::QueryTarget.new(
+              add_target: Google::Cloud::Firestore::V1::Target.new(
+                query: Google::Cloud::Firestore::V1::Target::QueryTarget.new(
                   parent:           query.parent_path,
                   structured_query: query.query
                 )
@@ -223,7 +223,7 @@ module Google
                     raise RestartStream # Raise to restart the stream
                   end
                 when :document_change
-                  # A {Google::Firestore::V1::Document Document} has changed.
+                  # A {Google::Cloud::Firestore::V1::Document Document} has changed.
 
                   if response.document_change.removed_target_ids.any?
                     @inventory.delete response.document_change.document.name
@@ -231,12 +231,12 @@ module Google
                     @inventory.add response.document_change.document
                   end
                 when :document_delete
-                  # A {Google::Firestore::V1::Document Document} has been
+                  # A {Google::Cloud::Firestore::V1::Document Document} has been
                   # deleted.
 
                   @inventory.delete response.document_delete.document
                 when :document_remove
-                  # A {Google::Firestore::V1::Document Document} has been
+                  # A {Google::Cloud::Firestore::V1::Document Document} has been
                   # removed from a target (because it is no longer relevant to
                   # that target).
 

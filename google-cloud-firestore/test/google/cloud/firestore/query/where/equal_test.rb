@@ -18,12 +18,12 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
   let(:query) { Google::Cloud::Firestore::Query.start nil, "#{firestore.path}/documents", firestore }
 
   it "using =" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
           op: :EQUAL,
-          value: Google::Firestore::V1::Value.new(integer_value: 42)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
         )
       )
     )
@@ -33,12 +33,12 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
   end
 
   it "using ==" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
           op: :EQUAL,
-          value: Google::Firestore::V1::Value.new(integer_value: 42)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
         )
       )
     )
@@ -48,12 +48,12 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
   end
 
   it "using eq" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
           op: :EQUAL,
-          value: Google::Firestore::V1::Value.new(integer_value: 42)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
         )
       )
     )
@@ -63,12 +63,12 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
   end
 
   it "using eql" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
           op: :EQUAL,
-          value: Google::Firestore::V1::Value.new(integer_value: 42)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
         )
       )
     )
@@ -78,12 +78,12 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
   end
 
   it "using is" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
           op: :EQUAL,
-          value: Google::Firestore::V1::Value.new(integer_value: 42)
+          value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
         )
       )
     )
@@ -93,23 +93,23 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
   end
 
   it "with multiple values" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        composite_filter: Google::Firestore::V1::StructuredQuery::CompositeFilter.new(
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        composite_filter: Google::Cloud::Firestore::V1::StructuredQuery::CompositeFilter.new(
           op: :AND,
           filters: [
-            Google::Firestore::V1::StructuredQuery::Filter.new(
-              field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-                field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
+            Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+              field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+                field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
                 op: :EQUAL,
-                value: Google::Firestore::V1::Value.new(integer_value: 42)
+                value: Google::Cloud::Firestore::V1::Value.new(integer_value: 42)
               )
             ),
-            Google::Firestore::V1::StructuredQuery::Filter.new(
-              field_filter: Google::Firestore::V1::StructuredQuery::FieldFilter.new(
-                field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "bar"),
+            Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+              field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+                field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "bar"),
                 op: :EQUAL,
-                value: Google::Firestore::V1::Value.new(string_value: "baz")
+                value: Google::Cloud::Firestore::V1::Value.new(string_value: "baz")
               )
             )
           ]
@@ -122,11 +122,11 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
   end
 
   it "with nil" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        unary_filter: Google::Firestore::V1::StructuredQuery::UnaryFilter.new(
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        unary_filter: Google::Cloud::Firestore::V1::StructuredQuery::UnaryFilter.new(
           op: :IS_NULL,
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo")
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo")
         )
       )
     )
@@ -136,11 +136,11 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
   end
 
   it "with :nil" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        unary_filter: Google::Firestore::V1::StructuredQuery::UnaryFilter.new(
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        unary_filter: Google::Cloud::Firestore::V1::StructuredQuery::UnaryFilter.new(
           op: :IS_NULL,
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo")
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo")
         )
       )
     )
@@ -150,11 +150,11 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
   end
 
   it "with :null" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        unary_filter: Google::Firestore::V1::StructuredQuery::UnaryFilter.new(
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        unary_filter: Google::Cloud::Firestore::V1::StructuredQuery::UnaryFilter.new(
           op: :IS_NULL,
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo")
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo")
         )
       )
     )
@@ -164,11 +164,11 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
   end
 
   it "with :nan" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        unary_filter: Google::Firestore::V1::StructuredQuery::UnaryFilter.new(
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        unary_filter: Google::Cloud::Firestore::V1::StructuredQuery::UnaryFilter.new(
           op: :IS_NAN,
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo")
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo")
         )
       )
     )
@@ -178,11 +178,11 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
   end
 
   it "with Float::NAN" do
-    expected_query = Google::Firestore::V1::StructuredQuery.new(
-      where: Google::Firestore::V1::StructuredQuery::Filter.new(
-        unary_filter: Google::Firestore::V1::StructuredQuery::UnaryFilter.new(
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+        unary_filter: Google::Cloud::Firestore::V1::StructuredQuery::UnaryFilter.new(
           op: :IS_NAN,
-          field: Google::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo")
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo")
         )
       )
     )

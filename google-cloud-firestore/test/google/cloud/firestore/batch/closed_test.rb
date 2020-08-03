@@ -20,11 +20,11 @@ describe Google::Cloud::Firestore::Batch, :closed, :mock_firestore do
       b.instance_variable_set :@closed, true
     end
   end
-  let(:document_path) { "users/mike" }
+  let(:document_path) { "users/alice" }
 
   it "create raises when closed" do
     error = expect do
-      batch.create(document_path, { name: "Mike" })
+      batch.create(document_path, { name: "Alice" })
       batch.commit
     end.must_raise RuntimeError
     _(error.message).must_equal "batch is closed"
@@ -32,7 +32,7 @@ describe Google::Cloud::Firestore::Batch, :closed, :mock_firestore do
 
   it "set raises when closed" do
     error = expect do
-      batch.set(document_path, { name: "Mike" })
+      batch.set(document_path, { name: "Alice" })
       batch.commit
     end.must_raise RuntimeError
     _(error.message).must_equal "batch is closed"
@@ -40,7 +40,7 @@ describe Google::Cloud::Firestore::Batch, :closed, :mock_firestore do
 
   it "update raises when closed" do
     error = expect do
-      batch.update(document_path, { name: "Mike" })
+      batch.update(document_path, { name: "Alice" })
       batch.commit
     end.must_raise RuntimeError
     _(error.message).must_equal "batch is closed"

@@ -15,18 +15,18 @@
 require "helper"
 
 describe Google::Cloud::Firestore::Transaction, :closed, :mock_firestore do
-  let(:transaction_id) { "transaction123" }
+  
   let(:transaction) do
     Google::Cloud::Firestore::Transaction.from_client(firestore).tap do |b|
       b.instance_variable_set :@transaction_id, transaction_id
       b.instance_variable_set :@closed, true
     end
   end
-  let(:document_path) { "users/mike" }
+  let(:document_path) { "users/alice" }
 
   it "create raises when closed" do
     error = expect do
-      transaction.create(document_path, { name: "Mike" })
+      transaction.create(document_path, { name: "Alice" })
       transaction.commit
     end.must_raise RuntimeError
     _(error.message).must_equal "transaction is closed"
@@ -34,7 +34,7 @@ describe Google::Cloud::Firestore::Transaction, :closed, :mock_firestore do
 
   it "set raises when closed" do
     error = expect do
-      transaction.set(document_path, { name: "Mike" })
+      transaction.set(document_path, { name: "Alice" })
       transaction.commit
     end.must_raise RuntimeError
     _(error.message).must_equal "transaction is closed"
@@ -42,7 +42,7 @@ describe Google::Cloud::Firestore::Transaction, :closed, :mock_firestore do
 
   it "update raises when closed" do
     error = expect do
-      transaction.update(document_path, { name: "Mike" })
+      transaction.update(document_path, { name: "Alice" })
       transaction.commit
     end.must_raise RuntimeError
     _(error.message).must_equal "transaction is closed"
