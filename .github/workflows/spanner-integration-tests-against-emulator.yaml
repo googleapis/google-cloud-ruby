@@ -11,6 +11,10 @@ name: Run Spanner integration tests against service emulator
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: google-cloud-spanner
 
     services:
       emulator:
