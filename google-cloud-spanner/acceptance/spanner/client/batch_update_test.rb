@@ -37,8 +37,6 @@ describe "Spanner Client", :batch_update, :spanner do
   end
 
   it "executes multiple DML statements in a batch" do
-    skip if emulator_enabled?
-
     prior_results = db.execute_sql "SELECT * FROM accounts"
     _(prior_results.rows.count).must_equal 3
 
@@ -110,8 +108,6 @@ describe "Spanner Client", :batch_update, :spanner do
   end
 
   it "runs execute_update and batch_update in the same transaction" do
-    skip if emulator_enabled?
-
     prior_results = db.execute_sql "SELECT * FROM accounts"
     _(prior_results.rows.count).must_equal 3
 
