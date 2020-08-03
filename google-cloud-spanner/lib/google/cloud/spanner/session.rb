@@ -169,13 +169,12 @@ module Google
         #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
-        #     setting of retry policy.
-        #     * `:initial_delay` (Numeric) A value of initial delay.
-        #     * `:max_delay` (Numeric) A value of maximum delay.
-        #     * `:multiplier` (Numeric) A value of delay multiplier.
-        #     * `:retry_codes` (Array) An array of retry codes. For example, an
-        #       array of integers are specified as
-        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Google::Cloud::Spanner::Results] The results of the query
         #   execution.
@@ -348,13 +347,12 @@ module Google
         #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
-        #     setting of retry policy.
-        #     * `:initial_delay` (Numeric) A value of initial delay.
-        #     * `:max_delay` (Numeric) A value of maximum delay.
-        #     * `:multiplier` (Numeric) A value of delay multiplier.
-        #     * `:retry_codes` (Array) An array of retry codes. For example, an
-        #       array of integers are specified as
-        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @yield [batch_update] a batch update object
         # @yieldparam [Google::Cloud::Spanner::BatchUpdate] batch_update a batch
@@ -411,13 +409,12 @@ module Google
         #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
-        #     setting of retry policy.
-        #     * `:initial_delay` (Numeric) A value of initial delay.
-        #     * `:max_delay` (Numeric) A value of maximum delay.
-        #     * `:multiplier` (Numeric) A value of delay multiplier.
-        #     * `:retry_codes` (Array) An array of retry codes. For example, an
-        #       array of integers are specified as
-        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Google::Cloud::Spanner::Results] The results of the read
         #   operation.
@@ -494,13 +491,12 @@ module Google
         #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
-        #     setting of retry policy.
-        #     * `:initial_delay` (Numeric) A value of initial delay.
-        #     * `:max_delay` (Numeric) A value of maximum delay.
-        #     * `:multiplier` (Numeric) A value of delay multiplier.
-        #     * `:retry_codes` (Array) An array of retry codes. For example, an
-        #       array of integers are specified as
-        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @yield [commit] The block for mutating the data.
         # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.
@@ -563,13 +559,12 @@ module Google
         #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
-        #     setting of retry policy.
-        #     * `:initial_delay` (Numeric) A value of initial delay.
-        #     * `:max_delay` (Numeric) A value of maximum delay.
-        #     * `:multiplier` (Numeric) A value of delay multiplier.
-        #     * `:retry_codes` (Array) An array of retry codes. For example, an
-        #       array of integers are specified as
-        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Time] The timestamp at which the operation committed.
         #
@@ -623,13 +618,12 @@ module Google
         #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
-        #     setting of retry policy.
-        #     * `:initial_delay` (Numeric) A value of initial delay.
-        #     * `:max_delay` (Numeric) A value of maximum delay.
-        #     * `:multiplier` (Numeric) A value of delay multiplier.
-        #     * `:retry_codes` (Array) An array of retry codes. For example, an
-        #       array of integers are specified as
-        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Time] The timestamp at which the operation committed.
         #
@@ -682,13 +676,12 @@ module Google
         #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
-        #     setting of retry policy.
-        #     * `:initial_delay` (Numeric) A value of initial delay.
-        #     * `:max_delay` (Numeric) A value of maximum delay.
-        #     * `:multiplier` (Numeric) A value of delay multiplier.
-        #     * `:retry_codes` (Array) An array of retry codes. For example, an
-        #       array of integers are specified as
-        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Time] The timestamp at which the operation committed.
         #
@@ -743,13 +736,12 @@ module Google
         #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
-        #     setting of retry policy.
-        #     * `:initial_delay` (Numeric) A value of initial delay.
-        #     * `:max_delay` (Numeric) A value of maximum delay.
-        #     * `:multiplier` (Numeric) A value of delay multiplier.
-        #     * `:retry_codes` (Array) An array of retry codes. For example, an
-        #       array of integers are specified as
-        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Time] The timestamp at which the operation committed.
         #
@@ -786,13 +778,12 @@ module Google
         #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
-        #     setting of retry policy.
-        #     * `:initial_delay` (Numeric) A value of initial delay.
-        #     * `:max_delay` (Numeric) A value of maximum delay.
-        #     * `:multiplier` (Numeric) A value of delay multiplier.
-        #     * `:retry_codes` (Array) An array of retry codes. For example, an
-        #       array of integers are specified as
-        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Time] The timestamp at which the operation committed.
         #
