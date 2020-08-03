@@ -181,6 +181,12 @@ module Google
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
         #     setting of retry policy.
+        #     * `:initial_delay` (Numeric) A value of initial delay.
+        #     * `:max_delay` (Numeric) A value of maximum delay.
+        #     * `:multiplier` (Numeric) A value of delay multiplier.
+        #     * `:retry_codes` (Array) An array of retry codes. For example, an
+        #       array of integers are specified as
+        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
         #
         # @return [Array<Google::Cloud::Spanner::Partition>] The partitions
         #   created by the query partition.
@@ -265,6 +271,12 @@ module Google
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
         #     setting of retry policy.
+        #     * `:initial_delay` (Numeric) A value of initial delay.
+        #     * `:max_delay` (Numeric) A value of maximum delay.
+        #     * `:multiplier` (Numeric) A value of delay multiplier.
+        #     * `:retry_codes` (Array) An array of retry codes. For example, an
+        #       array of integers are specified as
+        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
         #
         # @return [Array<Google::Cloud::Spanner::Partition>] The partitions
         #   created by the read partition.
@@ -331,6 +343,12 @@ module Google
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
         #     setting of retry policy.
+        #     * `:initial_delay` (Numeric) A value of initial delay.
+        #     * `:max_delay` (Numeric) A value of maximum delay.
+        #     * `:multiplier` (Numeric) A value of delay multiplier.
+        #     * `:retry_codes` (Array) An array of retry codes. For example, an
+        #       array of integers are specified as
+        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -466,6 +484,12 @@ module Google
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
         #     setting of retry policy.
+        #     * `:initial_delay` (Numeric) A value of initial delay.
+        #     * `:max_delay` (Numeric) A value of maximum delay.
+        #     * `:multiplier` (Numeric) A value of delay multiplier.
+        #     * `:retry_codes` (Array) An array of retry codes. For example, an
+        #       array of integers are specified as
+        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
         #
         # @return [Google::Cloud::Spanner::Results] The results of the query
         #   execution.
@@ -648,6 +672,12 @@ module Google
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
         #     setting of retry policy.
+        #     * `:initial_delay` (Numeric) A value of initial delay.
+        #     * `:max_delay` (Numeric) A value of maximum delay.
+        #     * `:multiplier` (Numeric) A value of delay multiplier.
+        #     * `:retry_codes` (Array) An array of retry codes. For example, an
+        #       array of integers are specified as
+        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
         #
         # @return [Google::Cloud::Spanner::Results] The results of the read
         #   operation.

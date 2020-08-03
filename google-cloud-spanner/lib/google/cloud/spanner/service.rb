@@ -561,16 +561,18 @@ module Google
 
         def default_options session_name: nil, call_options: nil
           opts = {}
-          unless session_name.nil?
+          
+          if session_name
             default_prefix = session_name.split("/sessions/").first
             opts[:metadata] = { "google-cloud-resource-prefix" => default_prefix }
           end
-          unless call_options.nil?
-            opts[:timeout] = call_options[:timeout] unless call_options[:timeout].nil?
-            opts[:retry_policy] = call_options[:retry_policy] unless call_options[:retry_policy].nil?
+
+          if call_options
+            opts[:timeout] = call_options[:timeout] if call_options[:timeout]
+            opts[:retry_policy] = call_options[:retry_policy] if call_options[:retry_policy]
           end
-          opts = nil if opts.empty?
-          opts
+
+          return opts unless opts.empty?
         end
 
         def partition_options partition_size_bytes, max_partitions

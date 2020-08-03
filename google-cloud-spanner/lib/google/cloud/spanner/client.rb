@@ -230,6 +230,12 @@ module Google
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
         #     setting of retry policy.
+        #     * `:initial_delay` (Numeric) A value of initial delay.
+        #     * `:max_delay` (Numeric) A value of maximum delay.
+        #     * `:multiplier` (Numeric) A value of delay multiplier.
+        #     * `:retry_codes` (Array) An array of retry codes. For example, an
+        #       array of integers are specified as
+        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
         #
         # @return [Google::Cloud::Spanner::Results] The results of the query
         #   execution.
@@ -520,6 +526,12 @@ module Google
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
         #     setting of retry policy.
+        #     * `:initial_delay` (Numeric) A value of initial delay.
+        #     * `:max_delay` (Numeric) A value of maximum delay.
+        #     * `:multiplier` (Numeric) A value of delay multiplier.
+        #     * `:retry_codes` (Array) An array of retry codes. For example, an
+        #       array of integers are specified as
+        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
         #
         #
         #   The keys of the hash should be query string parameter placeholders,
@@ -687,6 +699,12 @@ module Google
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
         #     setting of retry policy.
+        #     * `:initial_delay` (Numeric) A value of initial delay.
+        #     * `:max_delay` (Numeric) A value of maximum delay.
+        #     * `:multiplier` (Numeric) A value of delay multiplier.
+        #     * `:retry_codes` (Array) An array of retry codes. For example, an
+        #       array of integers are specified as
+        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
         #
         # @return [Google::Cloud::Spanner::Results] The results of the read.
         #
@@ -1009,6 +1027,12 @@ module Google
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
         #     setting of retry policy.
+        #     * `:initial_delay` (Numeric) A value of initial delay.
+        #     * `:max_delay` (Numeric) A value of maximum delay.
+        #     * `:multiplier` (Numeric) A value of delay multiplier.
+        #     * `:retry_codes` (Array) An array of retry codes. For example, an
+        #       array of integers are specified as
+        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
         #
         # @return [Time] The timestamp at which the operation committed.
         #
@@ -1050,6 +1074,12 @@ module Google
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
         #     setting of retry policy.
+        #     * `:initial_delay` (Numeric) A value of initial delay.
+        #     * `:max_delay` (Numeric) A value of maximum delay.
+        #     * `:multiplier` (Numeric) A value of delay multiplier.
+        #     * `:retry_codes` (Array) An array of retry codes. For example, an
+        #       array of integers are specified as
+        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
         #
         # @yield [commit] The block for mutating the data.
         # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.
@@ -1103,6 +1133,12 @@ module Google
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
         #     setting of retry policy.
+        #     * `:initial_delay` (Numeric) A value of initial delay.
+        #     * `:max_delay` (Numeric) A value of maximum delay.
+        #     * `:multiplier` (Numeric) A value of delay multiplier.
+        #     * `:retry_codes` (Array) An array of retry codes. For example, an
+        #       array of integers are specified as
+        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
         #
         # @yield [transaction] The block for reading and writing data.
         # @yieldparam [Google::Cloud::Spanner::Transaction] transaction The
@@ -1233,6 +1269,12 @@ module Google
         #     that overrides the default setting.
         #   * `:retry_policy` (Hash) A hash of values that overrides the default
         #     setting of retry policy.
+        #     * `:initial_delay` (Numeric) A value of initial delay.
+        #     * `:max_delay` (Numeric) A value of maximum delay.
+        #     * `:multiplier` (Numeric) A value of delay multiplier.
+        #     * `:retry_codes` (Array) An array of retry codes. For example, an
+        #       array of integers are specified as
+        #       `["UNAVAILABLE", "DEADLINE_EXCEEDED"]`.
         #
         # @yield [snapshot] The block for reading and writing data.
         # @yieldparam [Google::Cloud::Spanner::Snapshot] snapshot The Snapshot
