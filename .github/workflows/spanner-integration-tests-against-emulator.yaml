@@ -1,0 +1,32 @@
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'google-cloud-spanner*/**'
+  pull_request:
+    paths:
+      - 'google-cloud-spanner*/**'
+name: Run Spanner integration tests against service emulator
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      emulator:
+        image: gcr.io/cloud-spanner-emulator/emulator:1.0.0
+        ports:
+          - 9010:9010
+          - 9020:9020
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+      - run: ruby --version
+      - run: bundle install
+      - run: bundle exec rake acceptance
+        env:
+          SPANNER_EMULATOR_HOST: localhost:9010
+          SPANNER_TEST_PROJECT: emulator-test-project
