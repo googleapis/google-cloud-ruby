@@ -561,17 +561,14 @@ module Google
 
         def default_options session_name: nil, call_options: nil
           opts = {}
-          
           if session_name
             default_prefix = session_name.split("/sessions/").first
             opts[:metadata] = { "google-cloud-resource-prefix" => default_prefix }
           end
-
           if call_options
             opts[:timeout] = call_options[:timeout] if call_options[:timeout]
             opts[:retry_policy] = call_options[:retry_policy] if call_options[:retry_policy]
           end
-
           return opts unless opts.empty?
         end
 
