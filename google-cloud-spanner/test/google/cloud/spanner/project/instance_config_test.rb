@@ -20,7 +20,7 @@ describe Google::Cloud::Spanner::Project, :instance_config, :mock_spanner do
 
     get_res = Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig.new instance_config_hash
     mock = Minitest::Mock.new
-    mock.expect :get_instance_config, get_res, [name: instance_config_path(config_name)]
+    mock.expect :get_instance_config, get_res, [{ name: instance_config_path(config_name) }, nil]
     spanner.service.mocked_instances = mock
 
     config = spanner.instance_config config_name

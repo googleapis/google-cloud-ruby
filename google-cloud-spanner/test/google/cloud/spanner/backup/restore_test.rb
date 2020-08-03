@@ -61,11 +61,11 @@ describe Google::Cloud::Spanner::Backup, :restore_database, :mock_spanner do
       result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
       metadata_type: Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata,
     )
-    mock.expect :restore_database, restore_res, [
+    mock.expect :restore_database, restore_res, [{
       parent: instance_path(instance_id),
       database_id: "restored-database",
       backup: backup_path(instance_id, backup_id)
-    ]
+    }, nil]
     mock.expect :get_operation, operation_done, [{ name: "1234567890" }, Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
@@ -96,11 +96,11 @@ describe Google::Cloud::Spanner::Backup, :restore_database, :mock_spanner do
       result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
       metadata_type: Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata,
     )
-    mock.expect :restore_database, restore_res, [
+    mock.expect :restore_database, restore_res, [{
       parent: instance_path("other-instance"),
       database_id: "restored-database",
       backup: backup_path(instance_id, backup_id)
-    ]
+    }, nil]
     mock.expect :get_operation, operation_done, [{ name: "1234567890" } , Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 

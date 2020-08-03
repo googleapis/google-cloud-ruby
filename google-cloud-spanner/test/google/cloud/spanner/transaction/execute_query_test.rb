@@ -261,6 +261,28 @@ describe Google::Cloud::Spanner::Transaction, :execute_query, :mock_spanner do
     assert_results results
   end
 
+  it "can execute a simple query with custom timeout and retry policy" do
+    timeout = 30
+    retry_policy = {
+      initial_delay: 0.25,
+      max_delay:     32.0,
+      multiplier:    1.3,
+      retry_codes:   ["UNAVAILABLE"]
+    }
+    expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
+
+    mock = Minitest::Mock.new
+    session.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: expect_options
+
+    results = transaction.execute_query "SELECT * FROM users", call_options: call_options
+
+    mock.verify
+
+    assert_results results
+  end
+
   def assert_results results
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
 

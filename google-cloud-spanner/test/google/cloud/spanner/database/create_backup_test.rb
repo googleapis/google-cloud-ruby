@@ -90,11 +90,11 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
       result_type: Google::Cloud::Spanner::Admin::Database::V1::Backup,
       metadata_type:  Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata
     )
-    mock.expect :create_backup, create_res, [
+    mock.expect :create_backup, create_res, [{
       parent: instance_path(instance_id),
       backup_id: backup_id,
       backup: create_req
-    ]
+    }, nil]
     mock.expect :get_operation, operation_done, [{ name: "1234567890" }, Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
@@ -137,11 +137,11 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
       result_type: Google::Cloud::Spanner::Admin::Database::V1::Backup,
       metadata_type:  Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata
     )
-    mock.expect :create_backup, create_res, [
+    mock.expect :create_backup, create_res, [{
       parent: instance_path(instance_id),
       backup_id: backup_id,
       backup: create_req
-    ]
+    }, nil]
     mock.expect :cancel_operation, nil , [{ name: "1234567890" }, Gapic::CallOptions]
     mock.expect :get_operation, operation_cancel, [{ name: "1234567890" }, Gapic::CallOptions]
     spanner.service.mocked_databases = mock

@@ -42,7 +42,7 @@ describe Google::Cloud::Spanner::Client, :admin, :mock_spanner do
   it "retrieves the instance" do
     get_res = Google::Cloud::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id)
     mock = Minitest::Mock.new
-    mock.expect :get_instance, get_res, [name: instance_path(instance_id)]
+    mock.expect :get_instance, get_res, [{ name: instance_path(instance_id) }, nil]
     spanner.service.mocked_instances = mock
 
     instance = spanner.instance instance_id
@@ -61,7 +61,7 @@ describe Google::Cloud::Spanner::Client, :admin, :mock_spanner do
   it "retrieves the database" do
     get_res = Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id)
     mock = Minitest::Mock.new
-    mock.expect :get_database, get_res, [name: database_path(instance_id, database_id)]
+    mock.expect :get_database, get_res, [{ name: database_path(instance_id, database_id) }, nil]
     spanner.service.mocked_databases = mock
 
     database = client.database

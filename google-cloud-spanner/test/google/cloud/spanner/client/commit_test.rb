@@ -353,4 +353,102 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
 
     mock.verify
   end
+
+  it "deletes all rows directly with custom timeout and retry policy" do
+    timeout = 30
+    retry_policy = {
+      initial_delay: 0.25,
+      max_delay:     32.0,
+      multiplier:    1.3,
+      retry_codes:   ["UNAVAILABLE"]
+    }
+    expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
+
+    mutations = [
+      Google::Cloud::Spanner::V1::Mutation.new(
+        delete: Google::Cloud::Spanner::V1::Mutation::Delete.new(
+          table: "users", key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true)
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [{database: database_path(instance_id, database_id), session: nil}, default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts }, expect_options]
+    spanner.service.mocked_service = mock
+
+    timestamp = client.delete "users", call_options: call_options
+    _(timestamp).must_equal commit_time
+
+    shutdown_client! client
+
+    mock.verify
+  end
+
+  it "commits using a block with custom timeout and retry policy" do
+    timeout = 30
+    retry_policy = {
+      initial_delay: 0.25,
+      max_delay:     32.0,
+      multiplier:    1.3,
+      retry_codes:   ["UNAVAILABLE"]
+    }
+    expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
+
+    mutations = [
+      Google::Cloud::Spanner::V1::Mutation.new(
+        update: Google::Cloud::Spanner::V1::Mutation::Write.new(
+          table: "users", columns: %w(id name active),
+          values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1, "Charlie", false]).list_value]
+        )
+      ),
+      Google::Cloud::Spanner::V1::Mutation.new(
+        insert: Google::Cloud::Spanner::V1::Mutation::Write.new(
+          table: "users", columns: %w(id name active),
+          values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([2, "Harvey", true]).list_value]
+        )
+      ),
+      Google::Cloud::Spanner::V1::Mutation.new(
+        insert_or_update: Google::Cloud::Spanner::V1::Mutation::Write.new(
+          table: "users", columns: %w(id name active),
+          values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([3, "Marley", false]).list_value]
+        )
+      ),
+      Google::Cloud::Spanner::V1::Mutation.new(
+        replace: Google::Cloud::Spanner::V1::Mutation::Write.new(
+          table: "users", columns: %w(id name active),
+          values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([4, "Henry", true]).list_value]
+        )
+      ),
+      Google::Cloud::Spanner::V1::Mutation.new(
+        delete: Google::Cloud::Spanner::V1::Mutation::Delete.new(
+          table: "users", key_set: Google::Cloud::Spanner::V1::KeySet.new(
+            keys: [1, 2, 3, 4, 5].map do |i|
+              Google::Cloud::Spanner::Convert.object_to_grpc_value([i]).list_value
+            end
+          )
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [{database: database_path(instance_id, database_id), session: nil}, default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts }, expect_options]
+    spanner.service.mocked_service = mock
+
+    timestamp = client.commit call_options: call_options do |c|
+      c.update "users", [{ id: 1, name: "Charlie", active: false }]
+      c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+      c.upsert "users", [{ id: 3, name: "Marley",  active: false }]
+      c.replace "users", [{ id: 4, name: "Henry",  active: true }]
+      c.delete "users", [1, 2, 3, 4, 5]
+    end
+    _(timestamp).must_equal commit_time
+
+    shutdown_client! client
+
+    mock.verify
+  end
 end

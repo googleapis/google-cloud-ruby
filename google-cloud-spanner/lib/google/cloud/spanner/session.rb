@@ -162,6 +162,19 @@ module Google
         #   * `:optimizer_version` (String) The version of optimizer to use.
         #     Empty to use database default. "latest" to use the latest
         #     available optimizer version.
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Google::Cloud::Spanner::Results] The results of the query
         #   execution.
@@ -275,8 +288,32 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
+        # @example Query using custom timeout and retry policy:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   timeout = 30.0
+        #   retry_policy = {
+        #     initial_delay: 0.25,
+        #     max_delay:     32.0,
+        #     multiplier:    1.3,
+        #     retry_codes:   ["UNAVAILABLE"]
+        #   }
+        #   call_options = { timeout: timeout, retry_policy: retry_policy }
+        #
+        #   results = db.execute_query \
+        #     "SELECT * FROM users", call_options: call_options
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
         def execute_query sql, params: nil, types: nil, transaction: nil,
-                          partition_token: nil, seqno: nil, query_options: nil
+                          partition_token: nil, seqno: nil, query_options: nil,
+                          call_options: nil
           ensure_service!
           if query_options.nil?
             query_options = @query_options
@@ -289,7 +326,8 @@ module Google
                                           transaction: transaction,
                                           partition_token: partition_token,
                                           seqno: seqno,
-                                          query_options: query_options
+                                          query_options: query_options,
+                                          call_options: call_options
           @last_updated_at = Time.now
           results
         end
@@ -302,6 +340,20 @@ module Google
         #   transactions.
         # @param [Integer] seqno A per-transaction sequence number used to
         #   identify this request.
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
+        #
         # @yield [batch_update] a batch update object
         # @yieldparam [Google::Cloud::Spanner::BatchUpdate] batch_update a batch
         #   update object accepting DML statements and optional parameters and
@@ -316,7 +368,7 @@ module Google
         # @return [Array<Integer>] A list with the exact number of rows that
         #   were modified for each DML statement.
         #
-        def batch_update transaction, seqno
+        def batch_update transaction, seqno, call_options: nil
           ensure_service!
 
           raise ArgumentError, "block is required" unless block_given?
@@ -325,7 +377,8 @@ module Google
           yield batch
 
           results = service.execute_batch_dml path, transaction,
-                                              batch.statements, seqno
+                                              batch.statements, seqno,
+                                              call_options: call_options
           @last_updated_at = Time.now
           results
         end
@@ -349,6 +402,19 @@ module Google
         # @param [Google::Cloud::Spanner::V1::TransactionSelector] transaction The
         #   transaction selector value to send. Only used for single-use
         #   transactions.
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Google::Cloud::Spanner::Results] The results of the read
         #   operation.
@@ -367,25 +433,28 @@ module Google
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil,
-                 transaction: nil, partition_token: nil
+                 transaction: nil, partition_token: nil, call_options: nil
           ensure_service!
 
           results = Results.read service, path, table, columns,
                                  keys: keys, index: index, limit: limit,
                                  transaction: transaction,
-                                 partition_token: partition_token
+                                 partition_token: partition_token,
+                                 call_options: call_options
           @last_updated_at = Time.now
           results
         end
 
         def partition_query sql, transaction, params: nil, types: nil,
-                            partition_size_bytes: nil, max_partitions: nil
+                            partition_size_bytes: nil, max_partitions: nil,
+                            call_options: nil
           ensure_service!
 
           results = service.partition_query \
             path, sql, transaction, params: params, types: types,
                                     partition_size_bytes: partition_size_bytes,
-                                    max_partitions: max_partitions
+                                    max_partitions: max_partitions,
+                                    call_options: call_options
 
           @last_updated_at = Time.now
 
@@ -394,14 +463,15 @@ module Google
 
         def partition_read table, columns, transaction, keys: nil,
                            index: nil, partition_size_bytes: nil,
-                           max_partitions: nil
+                           max_partitions: nil, call_options: nil
           ensure_service!
 
           results = service.partition_read \
             path, table, columns, transaction,
             keys: keys, index: index,
             partition_size_bytes: partition_size_bytes,
-            max_partitions: max_partitions
+            max_partitions: max_partitions,
+            call_options: call_options
 
           @last_updated_at = Time.now
 
@@ -414,6 +484,20 @@ module Google
         # @param [String] transaction_id The identifier of previously-started
         #   transaction to be used instead of starting a new transaction.
         #   Optional.
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
+        #
         # @yield [commit] The block for mutating the data.
         # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.
         #
@@ -431,12 +515,13 @@ module Google
         #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
         #   end
         #
-        def commit transaction_id: nil
+        def commit transaction_id: nil, call_options: nil
           ensure_service!
           commit = Commit.new
           yield commit
           commit_resp = service.commit path, commit.mutations,
-                                       transaction_id: transaction_id
+                                       transaction_id: transaction_id,
+                                       call_options: call_options
           @last_updated_at = Time.now
           Convert.timestamp_to_time commit_resp.commit_timestamp
         end
@@ -467,6 +552,19 @@ module Google
         #
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Time] The timestamp at which the operation committed.
         #
@@ -480,8 +578,9 @@ module Google
         #   db.upsert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def upsert table, *rows, transaction_id: nil
-          commit transaction_id: transaction_id do |c|
+        def upsert table, *rows, transaction_id: nil, call_options: nil
+          opts = { transaction_id: transaction_id, call_options: call_options }
+          commit opts do |c|
             c.upsert table, rows
           end
         end
@@ -512,6 +611,19 @@ module Google
         #
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Time] The timestamp at which the operation committed.
         #
@@ -525,8 +637,9 @@ module Google
         #   db.insert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def insert table, *rows, transaction_id: nil
-          commit transaction_id: transaction_id do |c|
+        def insert table, *rows, transaction_id: nil, call_options: nil
+          opts = { transaction_id: transaction_id, call_options: call_options }
+          commit opts do |c|
             c.insert table, rows
           end
         end
@@ -556,6 +669,19 @@ module Google
         #
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Time] The timestamp at which the operation committed.
         #
@@ -569,8 +695,9 @@ module Google
         #   db.update "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def update table, *rows, transaction_id: nil
-          commit transaction_id: transaction_id do |c|
+        def update table, *rows, transaction_id: nil, call_options: nil
+          opts = { transaction_id: transaction_id, call_options: call_options }
+          commit opts do |c|
             c.update table, rows
           end
         end
@@ -602,6 +729,19 @@ module Google
         #
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Time] The timestamp at which the operation committed.
         #
@@ -615,8 +755,9 @@ module Google
         #   db.replace "users", [{ id: 1, name: "Charlie", active: false },
         #                        { id: 2, name: "Harvey",  active: true }]
         #
-        def replace table, *rows, transaction_id: nil
-          commit transaction_id: transaction_id do |c|
+        def replace table, *rows, transaction_id: nil, call_options: nil
+          opts = { transaction_id: transaction_id, call_options: call_options }
+          commit opts do |c|
             c.replace table, rows
           end
         end
@@ -630,6 +771,19 @@ module Google
         # @param [Object, Array<Object>] keys A single, or list of keys or key
         #   ranges to match returned data to. Values should have exactly as many
         #   elements as there are columns in the primary key.
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Time] The timestamp at which the operation committed.
         #
@@ -642,8 +796,9 @@ module Google
         #
         #   db.delete "users", [1, 2, 3]
         #
-        def delete table, keys = [], transaction_id: nil
-          commit transaction_id: transaction_id do |c|
+        def delete table, keys = [], transaction_id: nil, call_options: nil
+          opts = { transaction_id: transaction_id, call_options: call_options }
+          commit opts do |c|
             c.delete table, keys
           end
         end

@@ -41,7 +41,7 @@ describe Google::Cloud::Spanner::Instance, :save, :mock_spanner do
       )
     mask = Google::Protobuf::FieldMask.new paths: ["display_name", "node_count", "labels"]
     mock = Minitest::Mock.new
-    mock.expect :update_instance, update_res, [instance: instance_grpc, field_mask: mask]
+    mock.expect :update_instance, update_res, [{ instance: instance_grpc, field_mask: mask }, nil]
     spanner.service.mocked_instances = mock
 
     job = instance.save
@@ -65,7 +65,7 @@ describe Google::Cloud::Spanner::Instance, :save, :mock_spanner do
       )
     mask = Google::Protobuf::FieldMask.new paths: ["display_name", "node_count", "labels"]
     mock = Minitest::Mock.new
-    mock.expect :update_instance, update_res, [instance: instance_grpc, field_mask: mask]
+    mock.expect :update_instance, update_res, [{ instance: instance_grpc, field_mask: mask }, nil]
     spanner.service.mocked_instances = mock
 
     job = instance.save

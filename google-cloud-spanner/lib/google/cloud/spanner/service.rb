@@ -105,19 +105,26 @@ module Google
           credentials == :this_channel_is_insecure
         end
 
-        def list_instances token: nil, max: nil
-          paged_enum = instances.list_instances parent:     project_path,
-                                                page_size:  max,
-                                                page_token: token
+        def list_instances token: nil, max: nil, call_options: nil
+          opts = default_options call_options: call_options
+          request = {
+            parent:     project_path,
+            page_size:  max,
+            page_token: token
+          }
+          paged_enum = instances.list_instances request, opts
           paged_enum.response
         end
 
-        def get_instance name
-          instances.get_instance name: instance_path(name)
+        def get_instance name, call_options: nil
+          opts = default_options call_options: call_options
+          request = { name: instance_path(name) }
+          instances.get_instance request, opts
         end
 
         def create_instance instance_id, name: nil, config: nil, nodes: nil,
-                            labels: nil
+                            labels: nil, call_options: nil
+          opts = default_options call_options: call_options
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
 
           create_obj = Admin::Instance::V1::Instance.new({
@@ -125,116 +132,163 @@ module Google
             node_count: nodes, labels: labels
           }.delete_if { |_, v| v.nil? })
 
-          instances.create_instance parent:      project_path,
-                                    instance_id: instance_id,
-                                    instance:    create_obj
+          request = {
+            parent:      project_path,
+            instance_id: instance_id,
+            instance:    create_obj
+          }
+          instances.create_instance request, opts
         end
 
-        def update_instance instance
+        def update_instance instance, call_options: nil
+          opts = default_options call_options: call_options
           mask = Google::Protobuf::FieldMask.new(
             paths: %w[display_name node_count labels]
           )
-
-          instances.update_instance instance: instance, field_mask: mask
+          request = { instance: instance, field_mask: mask }
+          instances.update_instance request, opts
         end
 
-        def delete_instance name
-          instances.delete_instance name: instance_path(name)
+        def delete_instance name, call_options: nil
+          opts = default_options call_options: call_options
+          request = { name: instance_path(name) }
+          instances.delete_instance request, opts
         end
 
-        def get_instance_policy name
-          instances.get_iam_policy resource: instance_path(name)
+        def get_instance_policy name, call_options: nil
+          opts = default_options call_options: call_options
+          request = { resource: instance_path(name) }
+          instances.get_iam_policy request, opts
         end
 
-        def set_instance_policy name, new_policy
-          instances.set_iam_policy resource: instance_path(name),
-                                   policy:  new_policy
+        def set_instance_policy name, new_policy, call_options: nil
+          opts = default_options call_options: call_options
+          request = {
+            resource: instance_path(name),
+            policy:  new_policy
+          }
+          instances.set_iam_policy request, opts
         end
 
-        def test_instance_permissions name, permissions
-          instances.test_iam_permissions resource:    instance_path(name),
-                                         permissions: permissions
+        def test_instance_permissions name, permissions, call_options: nil
+          opts = default_options call_options: call_options
+          request = {
+            resource:    instance_path(name),
+            permissions: permissions
+          }
+          instances.test_iam_permissions request, opts
         end
 
-        def list_instance_configs token: nil, max: nil
-          paged_enum = instances.list_instance_configs \
-            parent: project_path, page_size: max, page_token: token
+        def list_instance_configs token: nil, max: nil, call_options: nil
+          opts = default_options call_options: call_options
+          request = { parent: project_path, page_size: max, page_token: token }
+          paged_enum = instances.list_instance_configs request, opts
           paged_enum.response
         end
 
-        def get_instance_config name
-          instances.get_instance_config name: instance_config_path(name)
+        def get_instance_config name, call_options: nil
+          opts = default_options call_options: call_options
+          request = { name: instance_config_path(name) }
+          instances.get_instance_config request, opts
         end
 
-        def list_databases instance_id, token: nil, max: nil
-          paged_enum = databases.list_databases \
+        def list_databases instance_id, token: nil, max: nil, call_options: nil
+          opts = default_options call_options: call_options
+          request = {
             parent:     instance_path(instance_id),
             page_size:  max,
             page_token: token
+          }
+          paged_enum = databases.list_databases request, opts
           paged_enum.response
         end
 
-        def get_database instance_id, database_id
-          databases.get_database name: database_path(instance_id, database_id)
+        def get_database instance_id, database_id, call_options: nil
+          opts = default_options call_options: call_options
+          request = { name: database_path(instance_id, database_id) }
+          databases.get_database request, opts
         end
 
-        def create_database instance_id, database_id, statements: []
-          databases.create_database \
+        def create_database instance_id, database_id, statements: [],
+                            call_options: nil
+          opts = default_options call_options: call_options
+          request = {
             parent: instance_path(instance_id),
             create_statement: "CREATE DATABASE `#{database_id}`",
             extra_statements: Array(statements)
+          }
+          databases.create_database request, opts
         end
 
-        def drop_database instance_id, database_id
-          databases.drop_database \
-            database: database_path(instance_id, database_id)
+        def drop_database instance_id, database_id, call_options: nil
+          opts = default_options call_options: call_options
+          request = { database: database_path(instance_id, database_id) }
+          databases.drop_database request, opts
         end
 
-        def get_database_ddl instance_id, database_id
-          databases.get_database_ddl \
-            database: database_path(instance_id, database_id)
+        def get_database_ddl instance_id, database_id, call_options: nil
+          opts = default_options call_options: call_options
+          request = { database: database_path(instance_id, database_id) }
+          databases.get_database_ddl request, opts
         end
 
         def update_database_ddl instance_id, database_id, statements: [],
-                                operation_id: nil
-          databases.update_database_ddl \
+                                operation_id: nil, call_options: nil
+          opts = default_options call_options: call_options
+          request = {
             database: database_path(instance_id, database_id),
             statements: Array(statements),
             operation_id: operation_id
+          }
+          databases.update_database_ddl request, opts
         end
 
-        def get_database_policy instance_id, database_id
-          databases.get_iam_policy \
-            resource: database_path(instance_id, database_id)
+        def get_database_policy instance_id, database_id, call_options: nil
+          opts = default_options call_options: call_options
+          request = { resource: database_path(instance_id, database_id) }
+          databases.get_iam_policy request, opts
         end
 
-        def set_database_policy instance_id, database_id, new_policy
-          databases.set_iam_policy \
+        def set_database_policy instance_id, database_id, new_policy,
+                                call_options: nil
+          opts = default_options call_options: call_options
+          request = {
             resource: database_path(instance_id, database_id),
             policy:   new_policy
+          }
+          databases.set_iam_policy request, opts
         end
 
-        def test_database_permissions instance_id, database_id, permissions
-          databases.test_iam_permissions \
+        def test_database_permissions instance_id, database_id, permissions,
+                                      call_options: nil
+          opts = default_options call_options: call_options
+          request = {
             resource:    database_path(instance_id, database_id),
             permissions: permissions
+          }
+          databases.test_iam_permissions request, opts
         end
 
-        def get_session session_name
-          opts = default_options_from_session session_name
+        def get_session session_name, call_options: nil
+          opts = default_options session_name: session_name,
+                                 call_options: call_options
           service.get_session({ name: session_name }, opts)
         end
 
-        def create_session database_name, labels: nil
-          opts = default_options_from_session database_name
+        def create_session database_name, labels: nil,
+                           call_options: nil
+          opts = default_options session_name: database_name,
+                                 call_options: call_options
           session = V1::Session.new labels: labels if labels
           service.create_session(
             { database: database_name, session: session }, opts
           )
         end
 
-        def batch_create_sessions database_name, session_count, labels: nil
-          opts = default_options_from_session database_name
+        def batch_create_sessions database_name, session_count, labels: nil,
+                                  call_options: nil
+          opts = default_options session_name: database_name,
+                                 call_options: call_options
           session = V1::Session.new labels: labels if labels
           # The response may have fewer sessions than requested in the RPC.
           request = {
@@ -245,16 +299,18 @@ module Google
           service.batch_create_sessions request, opts
         end
 
-        def delete_session session_name
-          opts = default_options_from_session session_name
+        def delete_session session_name, call_options: nil
+          opts = default_options session_name: session_name,
+                                 call_options: call_options
           service.delete_session({ name: session_name }, opts)
         end
 
         def execute_streaming_sql session_name, sql, transaction: nil,
                                   params: nil, types: nil, resume_token: nil,
                                   partition_token: nil, seqno: nil,
-                                  query_options: nil
-          opts = default_options_from_session session_name
+                                  query_options: nil, call_options: nil
+          opts = default_options session_name: session_name,
+                                 call_options: call_options
           request =  {
             session: session_name,
             sql: sql,
@@ -269,8 +325,10 @@ module Google
           service.execute_streaming_sql request, opts
         end
 
-        def execute_batch_dml session_name, transaction, statements, seqno
-          opts = default_options_from_session session_name
+        def execute_batch_dml session_name, transaction, statements, seqno,
+                              call_options: nil
+          opts = default_options session_name: session_name,
+                                 call_options: call_options
           statements = statements.map(&:to_grpc)
           request = {
             session: session_name,
@@ -293,8 +351,10 @@ module Google
 
         def streaming_read_table session_name, table_name, columns, keys: nil,
                                  index: nil, transaction: nil, limit: nil,
-                                 resume_token: nil, partition_token: nil
-          opts = default_options_from_session session_name
+                                 resume_token: nil, partition_token: nil,
+                                 call_options: nil
+          opts = default_options session_name: session_name,
+                                 call_options: call_options
           request = {
             session: session_name, table: table_name, columns: columns,
             key_set: keys, transaction: transaction, index: index,
@@ -306,11 +366,12 @@ module Google
 
         def partition_read session_name, table_name, columns, transaction,
                            keys: nil, index: nil, partition_size_bytes: nil,
-                           max_partitions: nil
+                           max_partitions: nil, call_options: nil
           partition_opts = partition_options partition_size_bytes,
                                              max_partitions
 
-          opts = default_options_from_session session_name
+          opts = default_options session_name: session_name,
+                                 call_options: call_options
           request = {
             session: session_name, table: table_name, key_set: keys,
             transaction: transaction, index: index, columns: columns,
@@ -321,11 +382,12 @@ module Google
 
         def partition_query session_name, sql, transaction, params: nil,
                             types: nil, partition_size_bytes: nil,
-                            max_partitions: nil
+                            max_partitions: nil, call_options: nil
           partition_opts = partition_options partition_size_bytes,
                                              max_partitions
 
-          opts = default_options_from_session session_name
+          opts = default_options session_name: session_name,
+                                 call_options: call_options
           request = {
             session: session_name, sql: sql, transaction: transaction,
             params: params, param_types: types,
@@ -334,14 +396,16 @@ module Google
           service.partition_query request, opts
         end
 
-        def commit session_name, mutations = [], transaction_id: nil
+        def commit session_name, mutations = [], transaction_id: nil,
+                   call_options: nil
           tx_opts = nil
           if transaction_id.nil?
             tx_opts = V1::TransactionOptions.new(
               read_write: V1::TransactionOptions::ReadWrite.new
             )
           end
-          opts = default_options_from_session session_name
+          opts = default_options session_name: session_name,
+                                 call_options: call_options
           request = {
             session: session_name, transaction_id: transaction_id,
             single_use_transaction: tx_opts, mutations: mutations
@@ -349,23 +413,25 @@ module Google
           service.commit request, opts
         end
 
-        def rollback session_name, transaction_id
-          opts = default_options_from_session session_name
+        def rollback session_name, transaction_id, call_options: nil
+          opts = default_options session_name: session_name,
+                                 call_options: call_options
           request = { session: session_name, transaction_id: transaction_id }
           service.rollback request, opts
         end
 
-        def begin_transaction session_name
+        def begin_transaction session_name, call_options: nil
           tx_opts = V1::TransactionOptions.new(
             read_write: V1::TransactionOptions::ReadWrite.new
           )
-          opts = default_options_from_session session_name
+          opts = default_options session_name: session_name,
+                                 call_options: call_options
           request = { session: session_name, options: tx_opts }
           service.begin_transaction request, opts
         end
 
         def create_snapshot session_name, strong: nil, timestamp: nil,
-                            staleness: nil
+                            staleness: nil, call_options: nil
           tx_opts = V1::TransactionOptions.new(
             read_only: V1::TransactionOptions::ReadOnly.new(
               {
@@ -376,80 +442,107 @@ module Google
               }.delete_if { |_, v| v.nil? }
             )
           )
-          opts = default_options_from_session session_name
+          opts = default_options session_name: session_name,
+                                 call_options: call_options
           request = { session: session_name, options: tx_opts }
           service.begin_transaction request, opts
         end
 
-        def create_pdml session_name
+        def create_pdml session_name, call_options: nil
           tx_opts = V1::TransactionOptions.new(
             partitioned_dml: V1::TransactionOptions::PartitionedDml.new
           )
-          opts = default_options_from_session session_name
+          opts = default_options session_name: session_name,
+                                 call_options: call_options
           request = { session: session_name, options: tx_opts }
           service.begin_transaction request, opts
         end
 
-        def create_backup instance_id, database_id, backup_id, expire_time
+        def create_backup instance_id, database_id, backup_id, expire_time,
+                          call_options: nil
+          opts = default_options call_options: call_options
           backup = {
             database: database_path(instance_id, database_id),
             expire_time: expire_time
           }
-          databases.create_backup parent:    instance_path(instance_id),
-                                  backup_id: backup_id,
-                                  backup:    backup
+          request = {
+            parent:    instance_path(instance_id),
+            backup_id: backup_id,
+            backup:    backup
+          }
+          databases.create_backup request, opts
         end
 
-        def get_backup instance_id, backup_id
-          databases.get_backup name: backup_path(instance_id, backup_id)
+        def get_backup instance_id, backup_id, call_options: nil
+          opts = default_options call_options: call_options
+          request = { name: backup_path(instance_id, backup_id) }
+          databases.get_backup request, opts
         end
 
-        def update_backup backup, update_mask
-          databases.update_backup backup: backup, update_mask: update_mask
+        def update_backup backup, update_mask, call_options: nil
+          opts = default_options call_options: call_options
+          request = { backup: backup, update_mask: update_mask }
+          databases.update_backup request, opts
         end
 
-        def delete_backup instance_id, backup_id
-          databases.delete_backup name: backup_path(instance_id, backup_id)
+        def delete_backup instance_id, backup_id, call_options: nil
+          opts = default_options call_options: call_options
+          request = { name: backup_path(instance_id, backup_id) }
+          databases.delete_backup request, opts
         end
 
         def list_backups instance_id,
-                         filter: nil, page_size: nil, page_token: nil
-          databases.list_backups parent:    instance_path(instance_id),
-                                 filter:    filter,
-                                 page_size: page_size,
-                                 page_token: page_token
+                         filter: nil, page_size: nil, page_token: nil,
+                         call_options: nil
+          opts = default_options call_options: call_options
+          request = {
+            parent:    instance_path(instance_id),
+            filter:    filter,
+            page_size: page_size,
+            page_token: page_token
+          }
+          databases.list_backups request, opts
         end
 
         def list_database_operations instance_id,
                                      filter: nil,
                                      page_size: nil,
-                                     page_token: nil
-          databases.list_database_operations(
+                                     page_token: nil,
+                                     call_options: nil
+          opts = default_options call_options: call_options
+          request = {
             parent:     instance_path(instance_id),
             filter:     filter,
             page_size:  page_size,
             page_token: page_token
-          )
+          }
+          databases.list_database_operations request, opts
         end
 
         def list_backup_operations instance_id,
                                    filter: nil, page_size: nil,
-                                   page_token: nil
-          databases.list_backup_operations(
+                                   page_token: nil,
+                                   call_options: nil
+          opts = default_options call_options: call_options
+          request = {
             parent:     instance_path(instance_id),
             filter:     filter,
             page_size:  page_size,
             page_token: page_token
-          )
+          }
+          databases.list_backup_operations request, opts
         end
 
         def restore_database backup_instance_id, backup_id,
-                             database_instance_id, database_id
-          databases.restore_database(
+                             database_instance_id, database_id,
+                             call_options: nil
+          opts = default_options call_options: call_options
+          request = {
             parent:      instance_path(database_instance_id),
             database_id: database_id,
             backup:      backup_path(backup_instance_id, backup_id)
-          )
+          }
+          databases.restore_database request, opts
         end
 
         def inspect
@@ -466,9 +559,17 @@ module Google
           value << " gccl"
         end
 
-        def default_options_from_session session_name
-          default_prefix = session_name.split("/sessions/").first
-          { metadata: { "google-cloud-resource-prefix" => default_prefix } }
+        def default_options session_name: nil, call_options: nil
+          opts = {}
+          if session_name
+            default_prefix = session_name.split("/sessions/").first
+            opts[:metadata] = { "google-cloud-resource-prefix" => default_prefix }
+          end
+          if call_options
+            opts[:timeout] = call_options[:timeout] if call_options[:timeout]
+            opts[:retry_policy] = call_options[:retry_policy] if call_options[:retry_policy]
+          end
+          return opts unless opts.empty?
         end
 
         def partition_options partition_size_bytes, max_partitions

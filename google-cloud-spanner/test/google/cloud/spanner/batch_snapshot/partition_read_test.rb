@@ -169,6 +169,38 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_read, :mock_spanner d
     assert_partitions deserialized_partitions
   end
 
+  it "can read all rows with custom timeout and retry policy" do
+    timeout = 30
+    retry_policy = {
+      initial_delay: 0.25,
+      max_delay:     32.0,
+      multiplier:    1.3,
+      retry_codes:   ["UNAVAILABLE"]
+    }
+    expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
+
+    mock = Minitest::Mock.new
+    key_set = Google::Cloud::Spanner::V1::KeySet.new(all: true)
+    mock.expect :partition_read, partitions_resp, [{
+      session: session.path, table: "my-table", key_set: key_set,
+      transaction: tx_selector, index: nil, columns: columns_arg, partition_options: nil
+    }, expect_options]
+    batch_snapshot.session.service.mocked_service = mock
+
+    partitions = batch_snapshot.partition_read "my-table", columns, call_options: call_options
+
+    mock.verify
+
+    assert_partitions partitions
+
+    serialized_partitions = partitions.map(&:dump)
+    deserialized_partitions = serialized_partitions.map do |sp|
+      Google::Cloud::Spanner::Partition.load sp
+    end
+    assert_partitions deserialized_partitions
+  end
+
   def assert_partitions partitions, keys: nil, index: nil
     _(partitions).must_be_kind_of Array
     _(partitions).wont_be :empty?

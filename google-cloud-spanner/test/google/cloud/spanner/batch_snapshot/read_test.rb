@@ -188,6 +188,35 @@ describe Google::Cloud::Spanner::BatchSnapshot, :read, :mock_spanner do
     assert_results results
   end
 
+  it "can read all rows" do
+    timeout = 30
+    retry_policy = {
+      initial_delay: 0.25,
+      max_delay:     32.0,
+      multiplier:    1.3,
+      retry_codes:   ["UNAVAILABLE"]
+    }
+    expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
+
+    columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
+
+    mock = Minitest::Mock.new
+    mock.expect :streaming_read, results_enum, [{
+      session: session.path, table: "my-table",
+      columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
+      key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true),
+      transaction: tx_selector, index: nil, limit: nil, resume_token: nil, partition_token: nil
+    }, expect_options]
+    batch_snapshot.session.service.mocked_service = mock
+
+    results = batch_snapshot.read "my-table", columns, call_options: call_options
+
+    mock.verify
+
+    assert_results results
+  end
+
   def assert_results results
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
 

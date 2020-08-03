@@ -173,6 +173,19 @@ module Google
         #   * `:optimizer_version` (String) The version of optimizer to use.
         #     Empty to use database default. "latest" to use the latest
         #     available optimizer version.
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Array<Google::Cloud::Spanner::Partition>] The partitions
         #   created by the query partition.
@@ -196,7 +209,7 @@ module Google
         #
         def partition_query sql, params: nil, types: nil,
                             partition_size_bytes: nil, max_partitions: nil,
-                            query_options: nil
+                            query_options: nil, call_options: nil
           ensure_session!
 
           params, types = Convert.to_input_params_and_types params, types
@@ -204,7 +217,8 @@ module Google
           results = session.partition_query \
             sql, tx_selector, params: params, types: types,
                               partition_size_bytes: partition_size_bytes,
-                              max_partitions: max_partitions
+                              max_partitions: max_partitions,
+                              call_options: call_options
           results.partitions.map do |grpc|
             # Convert partition protos to execute sql request protos
             execute_sql_grpc = V1::ExecuteSqlRequest.new(
@@ -248,6 +262,19 @@ module Google
         #   partitions to return. For example, this may be set to the number of
         #   workers available. This is only a hint and may provide different
         #   results based on the request.
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Array<Google::Cloud::Spanner::Partition>] The partitions
         #   created by the read partition.
@@ -268,7 +295,8 @@ module Google
         #   batch_snapshot.close
         #
         def partition_read table, columns, keys: nil, index: nil,
-                           partition_size_bytes: nil, max_partitions: nil
+                           partition_size_bytes: nil, max_partitions: nil,
+                           call_options: nil
           ensure_session!
 
           columns = Array(columns).map(&:to_s)
@@ -278,7 +306,8 @@ module Google
             table, columns, tx_selector,
             keys: keys, index: index,
             partition_size_bytes: partition_size_bytes,
-            max_partitions: max_partitions
+            max_partitions: max_partitions,
+            call_options: call_options
 
           results.partitions.map do |grpc|
             # Convert partition protos to read request protos
@@ -304,6 +333,19 @@ module Google
         #
         # @param [Google::Cloud::Spanner::Partition] partition The partition to
         #   be executed.
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -320,7 +362,7 @@ module Google
         #
         #   batch_snapshot.close
         #
-        def execute_partition partition
+        def execute_partition partition, call_options: nil
           ensure_session!
 
           partition = Partition.load partition unless partition.is_a? Partition
@@ -329,10 +371,11 @@ module Google
           # TODO: raise if session.path != partition.session
           # TODO: raise if grpc.transaction != partition.transaction
 
+          opts = { call_options: call_options }
           if partition.execute?
-            execute_partition_query partition
+            execute_partition_query partition, opts
           elsif partition.read?
-            execute_partition_read partition
+            execute_partition_read partition, opts
           end
         end
 
@@ -430,6 +473,19 @@ module Google
         #   * `:optimizer_version` (String) The version of optimizer to use.
         #     Empty to use database default. "latest" to use the latest
         #     available optimizer version.
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Google::Cloud::Spanner::Results] The results of the query
         #   execution.
@@ -549,14 +605,40 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
-        def execute_query sql, params: nil, types: nil, query_options: nil
+        # @example Query using custom timeout and retry policy:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #   batch_snapshot = batch_client.batch_snapshot
+        #
+        #   timeout = 30.0
+        #   retry_policy = {
+        #     initial_delay: 0.25,
+        #     max_delay:     32.0,
+        #     multiplier:    1.3,
+        #     retry_codes:   ["UNAVAILABLE"]
+        #   }
+        #   call_options = { timeout: timeout, retry_policy: retry_policy }
+        #
+        #   results = batch_snapshot.execute_query \
+        #      "SELECT * FROM users",
+        #      call_options: call_options
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
+        def execute_query sql, params: nil, types: nil, query_options: nil,
+                          call_options: nil
           ensure_session!
 
           params, types = Convert.to_input_params_and_types params, types
 
           session.execute_query sql, params: params, types: types,
                                 transaction: tx_selector,
-                                query_options: query_options
+                                query_options: query_options,
+                                call_options: call_options
         end
         alias execute execute_query
         alias query execute_query
@@ -578,6 +660,19 @@ module Google
         #   Optional.
         # @param [Integer] limit If greater than zero, no more than this number
         #   of rows will be returned. The default is no limit.
+        # @param [Hash] call_options A hash of values to specify the custom
+        #   call options, e.g., timeout, retries, etc. Call options are
+        #   optional. The following settings can be provided:
+        #
+        #   * `:timeout` (Numeric) A numeric value of custom timeout in seconds
+        #     that overrides the default setting.
+        #   * `:retry_policy` (Hash) A hash of values that overrides the default
+        #     setting of retry policy with the following keys:
+        #     * `:initial_delay` (`Numeric`) - The initial delay in seconds.
+        #     * `:max_delay` (`Numeric`) - The max delay in seconds.
+        #     * `:multiplier` (`Numeric`) - The incremental backoff multiplier.
+        #     * `:retry_codes` (`Array<String>`) - The error codes that should
+        #       trigger a retry.
         #
         # @return [Google::Cloud::Spanner::Results] The results of the read
         #   operation.
@@ -595,14 +690,16 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
-        def read table, columns, keys: nil, index: nil, limit: nil
+        def read table, columns, keys: nil, index: nil, limit: nil,
+                 call_options: nil
           ensure_session!
 
           columns = Array(columns).map(&:to_s)
           keys = Convert.to_key_set keys
 
           session.read table, columns, keys: keys, index: index, limit: limit,
-                                       transaction: tx_selector
+                                       transaction: tx_selector,
+                                       call_options: call_options
         end
 
         ##
@@ -690,7 +787,7 @@ module Google
           raise "Must have active connection to service" unless session
         end
 
-        def execute_partition_query partition
+        def execute_partition_query partition, call_options: nil
           query_options = partition.execute.query_options
           query_options = query_options.to_h unless query_options.nil?
           session.execute_query \
@@ -699,16 +796,18 @@ module Google
             types: partition.execute.param_types.to_h,
             transaction: partition.execute.transaction,
             partition_token: partition.execute.partition_token,
-            query_options: query_options
+            query_options: query_options,
+            call_options: call_options
         end
 
-        def execute_partition_read partition
+        def execute_partition_read partition, call_options: nil
           session.read partition.read.table,
                        partition.read.columns.to_a,
                        keys: partition.read.key_set,
                        index: partition.read.index,
                        transaction: partition.read.transaction,
-                       partition_token: partition.read.partition_token
+                       partition_token: partition.read.partition_token,
+                       call_options: call_options
         end
       end
     end

@@ -294,4 +294,28 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     _(row_count).must_equal 1
   end
+
+  it "can execute a PDML statement with custom timeout and retry policy" do
+    timeout = 30
+    retry_policy = {
+      initial_delay: 0.25,
+      max_delay:     32.0,
+      multiplier:    1.3,
+      retry_codes:   ["UNAVAILABLE"]
+    }
+    expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
+    call_options = { timeout: timeout, retry_policy: retry_policy }
+
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: pdml_tx_opts }, default_options]
+    spanner.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session_grpc.name, "UPDATE users SET active = true", transaction: tx_selector, options: expect_options
+
+    row_count = client.execute_partition_update "UPDATE users SET active = true", call_options: call_options
+
+    mock.verify
+
+    _(row_count).must_equal 1
+  end
 end
