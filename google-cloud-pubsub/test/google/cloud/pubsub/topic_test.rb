@@ -19,16 +19,13 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
   let(:labels) { { "foo" => "bar" } }
   let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name, labels: labels)), pubsub.service }
   let(:subscriptions_with_token) do
-    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(3, "next_page_token")
-    paged_enum_struct response
+    Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(3, "next_page_token")
   end
   let(:subscriptions_without_token) do
-    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(2)
-    paged_enum_struct response
+    Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(2)
   end
   let(:subscriptions_with_token_2) do
-    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(3, "next_page_token")
-    paged_enum_struct response
+    Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.new topic_subscriptions_hash(3, "next_page_token")
   end
   let(:filter) { "attributes.event_type = \"1\"" }
   let(:dead_letter_topic_name) { "topic-name-dead-letter" }
@@ -54,7 +51,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
   it "can delete itself" do
     get_res = nil
     mock = Minitest::Mock.new
-    mock.expect :delete_topic, get_res, [topic_path(topic_name), options: default_options]
+    mock.expect :delete_topic, get_res, [topic: topic_path(topic_name)]
     pubsub.service.mocked_publisher = mock
 
     topic.delete
@@ -236,9 +233,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     stub = Object.new
     def stub.create_subscription *args
-      gax_error = Google::Gax::GaxError.new "already exists"
-      gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(6, "already exists")
-      raise gax_error
+      raise Google::Cloud::AlreadyExistsError.new("already exists")
     end
     topic.service.mocked_subscriber = stub
 
@@ -252,9 +247,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     stub = Object.new
     def stub.create_subscription *args
-      gax_error = Google::Gax::GaxError.new "not found"
-      gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-      raise gax_error
+      raise Google::Cloud::NotFoundError.new("not found")
     end
     topic.service.mocked_subscriber = stub
 
@@ -269,7 +262,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name)
     mock = Minitest::Mock.new
-    mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
+    mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
     topic.service.mocked_subscriber = mock
 
     sub = topic.subscription sub_name
@@ -287,7 +280,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name)
     mock = Minitest::Mock.new
-    mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
+    mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
     topic.service.mocked_subscriber = mock
 
     sub = topic.get_subscription sub_name
@@ -305,7 +298,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name)
     mock = Minitest::Mock.new
-    mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
+    mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
     topic.service.mocked_subscriber = mock
 
     sub = topic.find_subscription sub_name
@@ -320,7 +313,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
   it "lists subscriptions" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: default_options]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic: topic_path(topic_name), page_size: nil, page_token: nil]
     topic.service.mocked_publisher = mock
 
     subs = topic.subscriptions
@@ -337,7 +330,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
   it "lists subscriptions with find_subscriptions alias" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: default_options]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic: topic_path(topic_name), page_size: nil, page_token: nil]
     topic.service.mocked_publisher = mock
 
     subs = topic.find_subscriptions
@@ -352,7 +345,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
   it "lists subscriptions with list_subscriptions alias" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: default_options]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic: topic_path(topic_name), page_size: nil, page_token: nil]
     topic.service.mocked_publisher = mock
 
     subs = topic.list_subscriptions
@@ -369,9 +362,8 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
   it "paginates subscriptions" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: default_options]
-    opts = {page_size: nil, options: token_options("next_page_token")}
-    mock.expect :list_topic_subscriptions, subscriptions_without_token, [topic_path(topic_name), opts]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic: topic_path(topic_name), page_size: nil, page_token: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_without_token, [topic: topic_path(topic_name), page_size: nil, page_token: "next_page_token"]
     topic.service.mocked_publisher = mock
 
     first_subs = topic.subscriptions
@@ -400,7 +392,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
   it "paginates subscriptions with max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: 3, options: default_options]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic: topic_path(topic_name), page_size: 3, page_token: nil]
     topic.service.mocked_publisher = mock
 
     subs = topic.subscriptions max: 3
@@ -420,9 +412,8 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
   it "paginates subscriptions with next? and next" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: default_options]
-    opts = {page_size: nil, options: token_options("next_page_token")}
-    mock.expect :list_topic_subscriptions, subscriptions_without_token, [topic_path(topic_name), opts]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic: topic_path(topic_name), page_size: nil, page_token: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_without_token, [topic: topic_path(topic_name), page_size: nil, page_token: "next_page_token"]
     topic.service.mocked_publisher = mock
 
     first_subs = topic.subscriptions
@@ -449,9 +440,8 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
   it "paginates subscriptions with with next? and next and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: 3, options: default_options]
-    opts = {page_size: 3, options: token_options("next_page_token")}
-    mock.expect :list_topic_subscriptions, subscriptions_without_token, [topic_path(topic_name), opts]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic: topic_path(topic_name), page_size: 3, page_token: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_without_token, [topic: topic_path(topic_name), page_size: 3, page_token: "next_page_token"]
     topic.service.mocked_publisher = mock
 
     first_subs = topic.subscriptions max: 3
@@ -478,9 +468,8 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
   it "paginates subscriptions with all" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: default_options]
-    opts = {page_size: nil, options: token_options("next_page_token")}
-    mock.expect :list_topic_subscriptions, subscriptions_without_token, [topic_path(topic_name), opts]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic: topic_path(topic_name), page_size: nil, page_token: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_without_token, [topic: topic_path(topic_name), page_size: nil, page_token: "next_page_token"]
     topic.service.mocked_publisher = mock
 
     subs = topic.subscriptions.all.to_a
@@ -497,9 +486,8 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
   it "paginates subscriptions with with all and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: 3, options: default_options]
-    opts = {page_size: 3, options: token_options("next_page_token")}
-    mock.expect :list_topic_subscriptions, subscriptions_without_token, [topic_path(topic_name), opts]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic: topic_path(topic_name), page_size: 3, page_token: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_without_token, [topic: topic_path(topic_name), page_size: 3, page_token: "next_page_token"]
     topic.service.mocked_publisher = mock
 
     subs = topic.subscriptions(max: 3).all.to_a
@@ -516,9 +504,8 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
   it "iterates subscriptions with all using Enumerator" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: default_options]
-    opts = {page_size: nil, options: token_options("next_page_token")}
-    mock.expect :list_topic_subscriptions, subscriptions_with_token_2, [topic_path(topic_name), opts]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic: topic_path(topic_name), page_size: nil, page_token: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token_2, [topic: topic_path(topic_name), page_size: nil, page_token: "next_page_token"]
     topic.service.mocked_publisher = mock
 
     subs = topic.subscriptions.all.take(5)
@@ -535,9 +522,8 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
   it "iterates subscriptions with all and request_limit set" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic_path(topic_name), page_size: nil, options: default_options]
-    opts = {page_size: nil, options: token_options("next_page_token")}
-    mock.expect :list_topic_subscriptions, subscriptions_with_token_2, [topic_path(topic_name), opts]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic: topic_path(topic_name), page_size: nil, page_token: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token_2, [topic: topic_path(topic_name), page_size: nil, page_token: "next_page_token"]
     topic.service.mocked_publisher = mock
 
     subs = topic.subscriptions.all(request_limit: 1).to_a
@@ -560,7 +546,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
+    mock.expect :publish, publish_res, [topic: topic_path(topic_name), messages: messages]
     topic.service.mocked_publisher = mock
 
     msg = topic.publish message
@@ -579,7 +565,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
+    mock.expect :publish, publish_res, [topic: topic_path(topic_name), messages: messages]
     topic.service.mocked_publisher = mock
 
     msg = topic.publish message, format: :text
@@ -602,7 +588,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1", "msg2"] })
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
+    mock.expect :publish, publish_res, [topic: topic_path(topic_name), messages: messages]
     topic.service.mocked_publisher = mock
 
     msgs = topic.publish do |batch|

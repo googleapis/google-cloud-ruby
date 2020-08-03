@@ -23,7 +23,7 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
   it "gets an existing subscription" do
     get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, found_sub_name)
     mock = Minitest::Mock.new
-    mock.expect :get_subscription, get_res, [subscription_path(found_sub_name), options: default_options]
+    mock.expect :get_subscription, get_res, [subscription: subscription_path(found_sub_name)]
     topic.service.mocked_subscriber = mock
 
     sub = topic.subscription found_sub_name
@@ -38,7 +38,7 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
   it "gets an existing subscription with get_subscription alias" do
     get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, found_sub_name)
     mock = Minitest::Mock.new
-    mock.expect :get_subscription, get_res, [subscription_path(found_sub_name), options: default_options]
+    mock.expect :get_subscription, get_res, [subscription: subscription_path(found_sub_name)]
     topic.service.mocked_subscriber = mock
 
     sub = topic.get_subscription found_sub_name
@@ -53,7 +53,7 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
   it "gets an existing subscription with find_subscription alias" do
     get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, found_sub_name)
     mock = Minitest::Mock.new
-    mock.expect :get_subscription, get_res, [subscription_path(found_sub_name), options: default_options]
+    mock.expect :get_subscription, get_res, [subscription: subscription_path(found_sub_name)]
     topic.service.mocked_subscriber = mock
 
     sub = topic.find_subscription found_sub_name
@@ -68,9 +68,7 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
   it "returns nil when getting an non-existant subscription" do
     stub = Object.new
     def stub.get_subscription *args
-      gax_error = Google::Gax::GaxError.new "not found"
-      gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-      raise gax_error
+      raise Google::Cloud::NotFoundError.new("not found")
     end
     topic.service.mocked_subscriber = stub
 
@@ -93,7 +91,7 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
     it "gets an existing subscription" do
       get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, found_sub_name)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription_path(found_sub_name), options: default_options]
+      mock.expect :get_subscription, get_res, [subscription: subscription_path(found_sub_name)]
       topic.service.mocked_subscriber = mock
 
       sub = topic.subscription found_sub_name
@@ -108,9 +106,7 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
     it "returns nil when getting an non-existant subscription" do
       stub = Object.new
       def stub.get_subscription *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       topic.service.mocked_subscriber = stub
 
@@ -125,9 +121,7 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
     it "returns nil when getting an non-existant subscription" do
       stub = Object.new
       def stub.get_subscription *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       topic.service.mocked_subscriber = stub
 

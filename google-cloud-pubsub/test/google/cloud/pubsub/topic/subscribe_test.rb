@@ -74,9 +74,7 @@ describe Google::Cloud::PubSub::Topic, :subscribe, :mock_pubsub do
     it "raises NotFoundError when calling subscribe" do
       stub = Object.new
       def stub.create_subscription *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       topic.service.mocked_subscriber = stub
 

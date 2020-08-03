@@ -24,29 +24,6 @@ require "base64"
 require "google/cloud/pubsub"
 require "grpc"
 
-##
-# Monkey-Patch CallOptions to support Mocks
-class Google::Gax::CallOptions
-  ##
-  # Minitest Mock depends on === to match same-value objects.
-  # By default, CallOptions objects do not match with ===.
-  # Therefore, we must add this capability.
-  def === other
-    return false unless other.is_a? Google::Gax::CallOptions
-    timeout === other.timeout &&
-      retry_options === other.retry_options &&
-      page_token === other.page_token &&
-      kwargs === other.kwargs
-  end
-  def == other
-    return false unless other.is_a? Google::Gax::CallOptions
-    timeout == other.timeout &&
-      retry_options == other.retry_options &&
-      page_token == other.page_token &&
-      kwargs == other.kwargs
-  end
-end
-
 class StreamingPullStub
   attr_reader :requests, :responses, :acknowledge_requests, :modify_ack_deadline_requests
 
@@ -63,19 +40,23 @@ class StreamingPullStub
     end
   end
 
-  def streaming_pull request_enum, options: nil
-    @requests << request_enum
+  ###
+  # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::PubSub::V1::StreamingPullRequest, ::Hash>]
+  #   An enumerable of {::Google::Cloud::PubSub::V1::StreamingPullRequest} instances.
+  # @param options [::Gapic::CallOptions, ::Hash]
+  #   Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+  #
+  def streaming_pull request, options = nil
+    @requests << request
     @responses.shift.each
   end
 
-  def acknowledge subscription_path, ack_ids, _hash = {}
-    # Don't save the options hash, makes it harder to check
-    @acknowledge_requests << [subscription_path, ack_ids.flatten.sort]
+  def acknowledge subscription:, ack_ids:
+    @acknowledge_requests << [subscription, ack_ids.flatten.sort]
   end
 
-  def modify_ack_deadline subscription_path, ids, deadline, _hash = {}
-    # Don't save the options hash, makes it harder to check
-    @modify_ack_deadline_requests << [subscription_path, ids.sort, deadline]
+  def modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
+    @modify_ack_deadline_requests << [subscription, ack_ids.sort, ack_deadline_seconds]
   end
 
   class RaisableEnumeratorQueue
@@ -109,7 +90,7 @@ class AsyncPublisherStub
     @messages = []
   end
 
-  def publish topic_path, messages, options: nil
+  def publish topic:, messages:
     @messages << messages
     message_ids = Array.new(messages.count) { |i| "msg#{i}" }
     Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: message_ids })
@@ -125,14 +106,8 @@ end
 
 class MockPubsub < Minitest::Spec
   let(:project) { "test" }
-  let(:default_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
   let(:pubsub) { Google::Cloud::PubSub::Project.new(Google::Cloud::PubSub::Service.new(project, credentials)) }
-
-  def token_options token
-    Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" },
-                                 page_token: token)
-  end
 
   def topics_hash num_topics, token = ""
     topics = num_topics.times.map do
@@ -220,8 +195,8 @@ class MockPubsub < Minitest::Spec
                                dead_letter_policy: nil,
                                retry_policy: nil
     [
-      subscription_path(sub_name),
-      topic_path(topic_name),
+      name: subscription_path(sub_name),
+      topic: topic_path(topic_name),
       push_config: push_config,
       ack_deadline_seconds: ack_deadline_seconds,
       retain_acked_messages: retain_acked_messages,
@@ -230,8 +205,7 @@ class MockPubsub < Minitest::Spec
       enable_message_ordering: enable_message_ordering,
       filter: filter,
       dead_letter_policy: dead_letter_policy,
-      retry_policy: retry_policy,
-      options: default_options
+      retry_policy: retry_policy
     ]
   end
 
@@ -292,7 +266,7 @@ class MockPubsub < Minitest::Spec
   end
 
   def paged_enum_struct response
-    OpenStruct.new page: OpenStruct.new(response: response)
+    OpenStruct.new response: response
   end
 
   # Register this spec type for when :storage is used.

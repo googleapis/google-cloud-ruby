@@ -57,8 +57,6 @@ module Google
       #
       #   * `https://www.googleapis.com/auth/pubsub`
       # @param [Integer] timeout Default timeout to use in requests. Optional.
-      # @param [Hash] client_config A hash of values to override the default
-      #   behavior of the API client. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
       # @param [String] emulator_host Pub/Sub emulator host. Optional.
@@ -77,12 +75,17 @@ module Google
       #   topic = pubsub.topic "my-topic"
       #   topic.publish "task completed"
       #
-      def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil, endpoint: nil,
-                   emulator_host: nil, project: nil, keyfile: nil
+      def self.new project_id: nil,
+                   credentials: nil,
+                   scope: nil,
+                   timeout: nil,
+                   endpoint: nil,
+                   emulator_host: nil,
+                   project: nil,
+                   keyfile: nil
         project_id    ||= (project || default_project_id)
         scope         ||= configure.scope
         timeout       ||= configure.timeout
-        client_config ||= configure.client_config
         endpoint      ||= configure.endpoint
         emulator_host ||= configure.emulator_host
 
@@ -90,11 +93,8 @@ module Google
           project_id = project_id.to_s # Always cast to a string
           raise ArgumentError, "project_id is missing" if project_id.empty?
 
-          return PubSub::Project.new(
-            PubSub::Service.new(
-              project_id, :this_channel_is_insecure, host: emulator_host, timeout: timeout, client_config: client_config
-            )
-          )
+          service = PubSub::Service.new project_id, :this_channel_is_insecure, host: emulator_host, timeout: timeout
+          return PubSub::Project.new service
         end
 
         credentials ||= (keyfile || default_credentials(scope: scope))
@@ -106,11 +106,8 @@ module Google
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        PubSub::Project.new(
-          PubSub::Service.new(
-            project_id, credentials, timeout: timeout, host: endpoint, client_config: client_config
-          )
-        )
+        service = PubSub::Service.new project_id, credentials, host: endpoint, timeout: timeout
+        PubSub::Project.new service
       end
 
       # rubocop:enable Metrics/AbcSize
@@ -131,8 +128,6 @@ module Google
       # * `retries` - (Integer) Number of times to retry requests on server
       #   error.
       # * `timeout` - (Integer) Default timeout to use in requests.
-      # * `client_config` - (Hash) A hash of values to override the default
-      #   behavior of the API client.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
       # * `emulator_host` - (String) Host name of the emulator. Defaults to
@@ -167,7 +162,9 @@ module Google
       end
     end
 
-    ## Legacy namespace
+    ## Legacy veneer namespace
     Pubsub = PubSub unless const_defined? :Pubsub
   end
+  ## Legacy generated client namespace
+  Pubsub = Cloud::PubSub unless const_defined? :Pubsub
 end

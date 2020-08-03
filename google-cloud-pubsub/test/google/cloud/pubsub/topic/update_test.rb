@@ -37,7 +37,7 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
     update_grpc.labels = new_labels_map
     update_mask = Google::Protobuf::FieldMask.new paths: ["labels"]
     mock = Minitest::Mock.new
-    mock.expect :update_topic, update_grpc, [update_grpc, update_mask, options: default_options]
+    mock.expect :update_topic, update_grpc, [topic: update_grpc, update_mask: update_mask]
     topic.service.mocked_publisher = mock
 
     topic.labels = new_labels
@@ -55,7 +55,7 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
 
     update_mask = Google::Protobuf::FieldMask.new paths: ["labels"]
     mock = Minitest::Mock.new
-    mock.expect :update_topic, update_grpc, [update_grpc, update_mask, options: default_options]
+    mock.expect :update_topic, update_grpc, [topic: update_grpc, update_mask: update_mask]
     topic.service.mocked_publisher = mock
 
     topic.labels = {}
@@ -83,7 +83,7 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
       kms_key_name: new_kms_key_name
     update_mask = Google::Protobuf::FieldMask.new paths: ["kms_key_name"]
     mock = Minitest::Mock.new
-    mock.expect :update_topic, update_grpc, [update_grpc, update_mask, options: default_options]
+    mock.expect :update_topic, update_grpc, [topic: update_grpc, update_mask: update_mask]
     topic.service.mocked_publisher = mock
 
     topic.kms_key = new_kms_key_name
@@ -102,7 +102,7 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
       kms_key_name: ""
     update_mask = Google::Protobuf::FieldMask.new paths: ["kms_key_name"]
     mock = Minitest::Mock.new
-    mock.expect :update_topic, update_grpc, [update_grpc, update_mask, options: default_options]
+    mock.expect :update_topic, update_grpc, [topic: update_grpc, update_mask: update_mask]
     topic.service.mocked_publisher = mock
 
     topic.kms_key = ""
@@ -121,7 +121,7 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
       kms_key_name: ""
     update_mask = Google::Protobuf::FieldMask.new paths: ["kms_key_name"]
     mock = Minitest::Mock.new
-    mock.expect :update_topic, update_grpc, [update_grpc, update_mask, options: default_options]
+    mock.expect :update_topic, update_grpc, [topic: update_grpc, update_mask: update_mask]
     topic.service.mocked_publisher = mock
 
     topic.kms_key = nil
@@ -143,7 +143,7 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
     )
     update_mask = Google::Protobuf::FieldMask.new paths: ["message_storage_policy"]
     mock = Minitest::Mock.new
-    mock.expect :update_topic, update_grpc, [update_grpc, update_mask, options: default_options]
+    mock.expect :update_topic, update_grpc, [topic: update_grpc, update_mask: update_mask]
     topic.service.mocked_publisher = mock
 
     topic.persistence_regions = new_persistence_regions
@@ -165,7 +165,7 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
     )
     update_mask = Google::Protobuf::FieldMask.new paths: ["message_storage_policy"]
     mock = Minitest::Mock.new
-    mock.expect :update_topic, update_grpc, [update_grpc, update_mask, options: default_options]
+    mock.expect :update_topic, update_grpc, [topic: update_grpc, update_mask: update_mask]
     topic.service.mocked_publisher = mock
 
     topic.persistence_regions = []
@@ -187,7 +187,7 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
     )
     update_mask = Google::Protobuf::FieldMask.new paths: ["message_storage_policy"]
     mock = Minitest::Mock.new
-    mock.expect :update_topic, update_grpc, [update_grpc, update_mask, options: default_options]
+    mock.expect :update_topic, update_grpc, [topic: update_grpc, update_mask: update_mask]
     topic.service.mocked_publisher = mock
 
     topic.persistence_regions = nil
@@ -210,7 +210,7 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
       topic_grpc.labels = new_labels_map
       update_mask = Google::Protobuf::FieldMask.new paths: ["labels"]
       mock = Minitest::Mock.new
-      mock.expect :update_topic, topic_grpc, [update_grpc, update_mask, options: default_options]
+      mock.expect :update_topic, topic_grpc, [topic: update_grpc, update_mask: update_mask]
       topic.service.mocked_publisher = mock
 
       topic.labels = new_labels
@@ -232,7 +232,7 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
       topic_grpc.kms_key_name = new_kms_key_name
       update_mask = Google::Protobuf::FieldMask.new paths: ["kms_key_name"]
       mock = Minitest::Mock.new
-      mock.expect :update_topic, topic_grpc, [update_grpc, update_mask, options: default_options]
+      mock.expect :update_topic, topic_grpc, [topic: update_grpc, update_mask: update_mask]
       topic.service.mocked_publisher = mock
 
       topic.kms_key = new_kms_key_name

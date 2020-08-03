@@ -24,7 +24,7 @@ describe Google::Cloud::PubSub::Subscription, :delete, :mock_pubsub do
   it "can delete itself" do
     del_res = nil
     mock = Minitest::Mock.new
-    mock.expect :delete_subscription, del_res, [subscription_path(sub_name), options: default_options]
+    mock.expect :delete_subscription, del_res, [subscription: subscription_path(sub_name)]
     pubsub.service.mocked_subscriber = mock
 
     subscription.delete
@@ -41,7 +41,7 @@ describe Google::Cloud::PubSub::Subscription, :delete, :mock_pubsub do
     it "can delete itself" do
       del_res = nil
       mock = Minitest::Mock.new
-      mock.expect :delete_subscription, del_res, [subscription_path(sub_name), options: default_options]
+      mock.expect :delete_subscription, del_res, [subscription: subscription_path(sub_name)]
       pubsub.service.mocked_subscriber = mock
 
       subscription.delete
@@ -59,9 +59,7 @@ describe Google::Cloud::PubSub::Subscription, :delete, :mock_pubsub do
     it "raises NotFoundError when deleting itself" do
       stub = Object.new
       def stub.delete_subscription *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       subscription.service.mocked_subscriber = stub
 

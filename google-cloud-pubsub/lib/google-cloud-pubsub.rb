@@ -42,8 +42,6 @@ module Google
     #
     #   * `https://www.googleapis.com/auth/pubsub`
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config A hash of values to override the default
-    #   behavior of the API client. Optional.
     #
     # @return [Google::Cloud::PubSub::Project]
     #
@@ -62,9 +60,9 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   pubsub = gcloud.pubsub scope: platform_scope
     #
-    def pubsub scope: nil, timeout: nil, client_config: nil
+    def pubsub scope: nil, timeout: nil
       timeout ||= @timeout
-      Google::Cloud.pubsub @project, @keyfile, scope: scope, timeout: timeout, client_config: client_config
+      Google::Cloud.pubsub @project, @keyfile, scope: scope, timeout: timeout
     end
 
     ##
@@ -90,8 +88,6 @@ module Google
     #
     #   * `https://www.googleapis.com/auth/pubsub`
     # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Hash] client_config A hash of values to override the default
-    #   behavior of the API client. Optional.
     #
     # @return [Google::Cloud::PubSub::Project]
     #
@@ -103,11 +99,12 @@ module Google
     #   topic = pubsub.topic "my-topic"
     #   topic.publish "task completed"
     #
-    def self.pubsub project_id = nil, credentials = nil, scope: nil,
-                    timeout: nil, client_config: nil
+    def self.pubsub project_id = nil,
+                    credentials = nil,
+                    scope: nil,
+                    timeout: nil
       require "google/cloud/pubsub"
-      Google::Cloud::PubSub.new project_id: project_id, credentials: credentials,
-                                scope: scope, timeout: timeout, client_config: client_config
+      Google::Cloud::PubSub.new project_id: project_id, credentials: credentials, scope: scope, timeout: timeout
     end
   end
 end
@@ -125,15 +122,18 @@ Google::Cloud.configure.add_config! :pubsub do |config|
   default_emulator = Google::Cloud::Config.deferred do
     ENV["PUBSUB_EMULATOR_HOST"]
   end
+  default_scopes = [
+    "https://www.googleapis.com/auth/cloud-platform",
+    "https://www.googleapis.com/auth/pubsub"
+  ]
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
   config.add_field! :credentials, default_creds, match: [String, Hash, Google::Auth::Credentials], allow_nil: true
   config.add_alias! :keyfile, :credentials
-  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :scope, default_scopes, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
-  config.add_field! :client_config, nil, match: Hash
   config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
   config.add_field! :on_error, nil, match: Proc
-  config.add_field! :endpoint, nil, match: String
+  config.add_field! :endpoint, "pubsub.googleapis.com", match: String
 end

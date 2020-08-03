@@ -38,7 +38,7 @@ describe Google::Cloud::PubSub::Topic, :reload, :mock_pubsub do
     _(topic_resource).must_be :resource?
 
     mock = Minitest::Mock.new
-    mock.expect :get_topic, topic_grpc_new, [topic_path(topic_name), options: default_options]
+    mock.expect :get_topic, topic_grpc_new, [topic: topic_path(topic_name)]
     pubsub.service.mocked_publisher = mock
 
     topic_resource.reload!
@@ -57,7 +57,7 @@ describe Google::Cloud::PubSub::Topic, :reload, :mock_pubsub do
     _(topic_reference).wont_be :resource?
 
     mock = Minitest::Mock.new
-    mock.expect :get_topic, topic_grpc_new, [topic_path(topic_name), options: default_options]
+    mock.expect :get_topic, topic_grpc_new, [topic: topic_path(topic_name)]
     pubsub.service.mocked_publisher = mock
 
     topic_reference.reload!

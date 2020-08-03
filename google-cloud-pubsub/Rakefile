@@ -46,8 +46,7 @@ task :acceptance, :project, :keyfile do |_t, args|
   end
   # clear any env var already set
   require "google/cloud/pubsub/credentials"
-  (Google::Cloud::PubSub::Credentials::PATH_ENV_VARS +
-   Google::Cloud::PubSub::Credentials::JSON_ENV_VARS).each do |path|
+  Google::Cloud::PubSub::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   # always overwrite when running tests
@@ -87,8 +86,7 @@ namespace :acceptance do
     end
     # clear any env var already set
     require "google/cloud/pubsub/credentials"
-    (Google::Cloud::PubSub::Credentials::PATH_ENV_VARS +
-     Google::Cloud::PubSub::Credentials::JSON_ENV_VARS).each do |path|
+    Google::Cloud::PubSub::Credentials.env_vars.each do |path|
       ENV[path] = nil
     end
     # always overwrite when running tests

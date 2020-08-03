@@ -31,8 +31,8 @@ describe Google::Cloud::PubSub::Topic, :policy, :mock_pubsub do
     }
     get_res = Google::Iam::V1::Policy.decode_json policy_hash.to_json
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [topic_path(topic_name), options: default_options]
-    topic.service.mocked_publisher = mock
+    mock.expect :get_iam_policy, get_res, [resource: topic_path(topic_name)]
+    topic.service.mocked_iam = mock
 
     policy = topic.policy
 
@@ -61,7 +61,7 @@ describe Google::Cloud::PubSub::Topic, :policy, :mock_pubsub do
     }
     get_res = Google::Iam::V1::Policy.decode_json policy_hash.to_json
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [topic_path(topic_name), options: default_options]
+    mock.expect :get_iam_policy, get_res, [resource: topic_path(topic_name)]
 
     updated_policy = {
       "etag"=>"CAE=",
@@ -86,8 +86,8 @@ describe Google::Cloud::PubSub::Topic, :policy, :mock_pubsub do
 
     set_req = Google::Iam::V1::Policy.decode_json JSON.dump(updated_policy)
     set_res = Google::Iam::V1::Policy.decode_json JSON.dump(new_policy)
-    mock.expect :set_iam_policy, set_res, [topic_path(topic_name), set_req, options: default_options]
-    topic.service.mocked_publisher = mock
+    mock.expect :set_iam_policy, set_res, [resource: topic_path(topic_name), policy: set_req]
+    topic.service.mocked_iam = mock
 
     policy = topic.policy
 
@@ -122,7 +122,7 @@ describe Google::Cloud::PubSub::Topic, :policy, :mock_pubsub do
     }
     get_res = Google::Iam::V1::Policy.decode_json policy_hash.to_json
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [topic_path(topic_name), options: default_options]
+    mock.expect :get_iam_policy, get_res, [resource: topic_path(topic_name)]
 
     updated_policy = {
       "etag"=>"CAE=",
@@ -147,8 +147,8 @@ describe Google::Cloud::PubSub::Topic, :policy, :mock_pubsub do
 
     set_req = Google::Iam::V1::Policy.decode_json JSON.dump(updated_policy)
     set_res = Google::Iam::V1::Policy.decode_json JSON.dump(new_policy)
-    mock.expect :set_iam_policy, set_res, [topic_path(topic_name), set_req, options: default_options]
-    topic.service.mocked_publisher = mock
+    mock.expect :set_iam_policy, set_res, [resource: topic_path(topic_name), policy: set_req]
+    topic.service.mocked_iam = mock
 
     policy = topic.policy do |p|
       p.add "roles/owner", "user:newowner@example.com"
@@ -174,8 +174,8 @@ describe Google::Cloud::PubSub::Topic, :policy, :mock_pubsub do
       permissions: ["pubsub.topics.get"]
     )
     mock = Minitest::Mock.new
-    mock.expect :test_iam_permissions, test_res, [topic_path(topic_name), permissions, options: default_options]
-    topic.service.mocked_publisher = mock
+    mock.expect :test_iam_permissions, test_res, [resource: topic_path(topic_name), permissions: permissions]
+    topic.service.mocked_iam = mock
 
     permissions = topic.test_permissions "pubsub.topics.get",
                                          "pubsub.topics.publish"

@@ -26,7 +26,7 @@ describe Google::Cloud::PubSub::Subscription, :detach, :mock_pubsub do
 
     it "can detach itself" do
       mock = Minitest::Mock.new
-      mock.expect :detach_subscription, nil, [sub_path, options: default_options]
+      mock.expect :detach_subscription, nil, [subscription: sub_path]
       pubsub.service.mocked_publisher = mock
 
       subscription.detach
@@ -40,7 +40,7 @@ describe Google::Cloud::PubSub::Subscription, :detach, :mock_pubsub do
 
     it "can detach itself if it exists" do
       mock = Minitest::Mock.new
-      mock.expect :detach_subscription, nil, [sub_path, options: default_options]
+      mock.expect :detach_subscription, nil, [subscription: sub_path]
       pubsub.service.mocked_publisher = mock
 
       subscription.detach
@@ -51,9 +51,7 @@ describe Google::Cloud::PubSub::Subscription, :detach, :mock_pubsub do
     it "raises NotFoundError when detach is called if it does not exist" do
       stub = Object.new
       def stub.detach_subscription *args
-        gax_error = Google::Gax::GaxError.new "not found"
-        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(5, "not found")
-        raise gax_error
+        raise Google::Cloud::NotFoundError.new("not found")
       end
       subscription.service.mocked_publisher = stub
 

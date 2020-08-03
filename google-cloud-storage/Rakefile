@@ -48,8 +48,7 @@ task :acceptance, :project, :keyfile do |t, args|
     ENV[path] = nil
   end
   require "google/cloud/pubsub/credentials"
-  (Google::Cloud::Pubsub::Credentials::PATH_ENV_VARS +
-   Google::Cloud::Pubsub::Credentials::JSON_ENV_VARS).each do |path|
+  Google::Cloud::Pubsub::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   # always overwrite when running tests

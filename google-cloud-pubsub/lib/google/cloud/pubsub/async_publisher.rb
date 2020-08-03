@@ -374,8 +374,7 @@ module Google
 
         PUBLISH_RETRY_ERRORS = [
           GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
-          GRPC::ResourceExhausted, GRPC::Unauthenticated, GRPC::Unavailable,
-          GRPC::Core::CallError
+          GRPC::ResourceExhausted, GRPC::Unauthenticated, GRPC::Unavailable
         ].freeze
 
         def publish_batch_error_retryable? error

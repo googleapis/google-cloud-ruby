@@ -25,7 +25,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :wait, :mock_pubsub do
     rec_message_msg = "pulled-message"
     pull_res = Google::Cloud::PubSub::V1::PullResponse.new rec_messages_hash(rec_message_msg)
     mock = Minitest::Mock.new
-    mock.expect :pull, pull_res, [subscription_path(sub_name), 100, return_immediately: false, options: default_options]
+    mock.expect :pull, pull_res, [subscription: subscription_path(sub_name), max_messages: 100, return_immediately: false]
     subscription.service.mocked_subscriber = mock
 
     rec_messages = subscription.pull immediate: false
@@ -40,7 +40,7 @@ describe Google::Cloud::PubSub::Subscription, :pull, :wait, :mock_pubsub do
     rec_message_msg = "pulled-message"
     pull_res = Google::Cloud::PubSub::V1::PullResponse.new rec_messages_hash(rec_message_msg)
     mock = Minitest::Mock.new
-    mock.expect :pull, pull_res, [subscription_path(sub_name), 100, return_immediately: false, options: default_options]
+    mock.expect :pull, pull_res, [subscription: subscription_path(sub_name), max_messages: 100, return_immediately: false]
     subscription.service.mocked_subscriber = mock
 
     rec_messages = subscription.wait_for_messages
