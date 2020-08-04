@@ -19,7 +19,7 @@ require "bigtable_helper"
 
 describe Google::Cloud::Bigtable::Service, :bigtable do
   let(:config_metadata) { { :"google-cloud-resource-prefix" => "projects/#{bigtable.project_id}" } }
-focus
+
   it "passes the correct configuration to its v2 instance admin client" do
     _(bigtable.project_id).wont_be :empty?
     config = bigtable.service.instances.configure
@@ -28,7 +28,7 @@ focus
     _(config.lib_version).must_equal Google::Cloud::Bigtable::VERSION
     _(config.metadata).must_equal config_metadata
   end
-focus
+
   it "passes the correct configuration to its v2 table admin client" do
     _(bigtable.project_id).wont_be :empty?
     config = bigtable.service.tables.configure
@@ -37,7 +37,7 @@ focus
     _(config.lib_version).must_equal Google::Cloud::Bigtable::VERSION
     _(config.metadata).must_equal config_metadata
   end
-focus
+
   it "passes the correct configuration to its v2 client" do
     _(bigtable.project_id).wont_be :empty?
     config = bigtable.service.client.configure
