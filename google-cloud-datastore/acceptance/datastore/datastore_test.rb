@@ -16,7 +16,7 @@ require "datastore_helper"
 
 # This test is a ruby version of gcloud-node's datastore test.
 
-describe "Datastore", :datastore do
+describe Google::Cloud::Datastore::Dataset, :datastore do
   let(:prefix) { "#{Time.now.utc.iso8601.gsub ":", "_"}_#{SecureRandom.hex(4)}" }
 
   it "should allocate IDs" do
