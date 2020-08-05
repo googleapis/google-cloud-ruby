@@ -75,7 +75,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.list_instances.timeout = 60.0
@@ -83,7 +83,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.update_instance.timeout = 60.0
@@ -91,7 +91,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.partial_update_instance.timeout = 60.0
@@ -99,7 +99,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.delete_instance.timeout = 60.0
@@ -111,7 +111,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.list_clusters.timeout = 60.0
@@ -119,7 +119,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.update_cluster.timeout = 60.0
@@ -127,7 +127,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.delete_cluster.timeout = 60.0
@@ -139,7 +139,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.list_app_profiles.timeout = 60.0
@@ -147,7 +147,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.update_app_profile.timeout = 60.0
@@ -155,7 +155,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.delete_app_profile.timeout = 60.0
@@ -165,7 +165,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.set_iam_policy.timeout = 60.0
@@ -175,7 +175,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config

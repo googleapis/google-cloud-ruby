@@ -79,7 +79,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.get_table.timeout = 60.0
@@ -87,7 +87,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.delete_table.timeout = 60.0
@@ -101,7 +101,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.check_consistency.timeout = 60.0
@@ -109,7 +109,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.snapshot_table.timeout = 60.0
@@ -119,7 +119,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.list_snapshots.timeout = 60.0
@@ -127,7 +127,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.delete_snapshot.timeout = 60.0
@@ -137,7 +137,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.set_iam_policy.timeout = 60.0
@@ -147,7 +147,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config
