@@ -73,7 +73,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.get_entry_group.timeout = 60.0
@@ -81,7 +81,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.list_entry_groups.timeout = 60.0
@@ -89,7 +89,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.get_entry.timeout = 60.0
@@ -97,7 +97,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.lookup_entry.timeout = 60.0
@@ -105,7 +105,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.list_entries.timeout = 60.0
@@ -113,7 +113,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.list_tags.timeout = 60.0
@@ -121,7 +121,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.get_iam_policy.timeout = 60.0
@@ -129,7 +129,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config
