@@ -34,39 +34,39 @@ module Google
             self.service_name = 'google.cloud.dialogflow.v2.EntityTypes'
 
             # Returns the list of all entity types in the specified agent.
-            rpc :ListEntityTypes, ListEntityTypesRequest, ListEntityTypesResponse
+            rpc :ListEntityTypes, Google::Cloud::Dialogflow::V2::ListEntityTypesRequest, Google::Cloud::Dialogflow::V2::ListEntityTypesResponse
             # Retrieves the specified entity type.
-            rpc :GetEntityType, GetEntityTypeRequest, EntityType
+            rpc :GetEntityType, Google::Cloud::Dialogflow::V2::GetEntityTypeRequest, Google::Cloud::Dialogflow::V2::EntityType
             # Creates an entity type in the specified agent.
-            rpc :CreateEntityType, CreateEntityTypeRequest, EntityType
+            rpc :CreateEntityType, Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest, Google::Cloud::Dialogflow::V2::EntityType
             # Updates the specified entity type.
-            rpc :UpdateEntityType, UpdateEntityTypeRequest, EntityType
+            rpc :UpdateEntityType, Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest, Google::Cloud::Dialogflow::V2::EntityType
             # Deletes the specified entity type.
-            rpc :DeleteEntityType, DeleteEntityTypeRequest, Google::Protobuf::Empty
+            rpc :DeleteEntityType, Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest, Google::Protobuf::Empty
             # Updates/Creates multiple entity types in the specified agent.
             #
             # Operation <response: [BatchUpdateEntityTypesResponse][google.cloud.dialogflow.v2.BatchUpdateEntityTypesResponse]>
-            rpc :BatchUpdateEntityTypes, BatchUpdateEntityTypesRequest, Google::Longrunning::Operation
+            rpc :BatchUpdateEntityTypes, Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest, Google::Longrunning::Operation
             # Deletes entity types in the specified agent.
             #
             # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
-            rpc :BatchDeleteEntityTypes, BatchDeleteEntityTypesRequest, Google::Longrunning::Operation
+            rpc :BatchDeleteEntityTypes, Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest, Google::Longrunning::Operation
             # Creates multiple new entities in the specified entity type.
             #
             # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
-            rpc :BatchCreateEntities, BatchCreateEntitiesRequest, Google::Longrunning::Operation
+            rpc :BatchCreateEntities, Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest, Google::Longrunning::Operation
             # Updates or creates multiple entities in the specified entity type. This
             # method does not affect entities in the entity type that aren't explicitly
             # specified in the request.
             #
             #
             # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
-            rpc :BatchUpdateEntities, BatchUpdateEntitiesRequest, Google::Longrunning::Operation
+            rpc :BatchUpdateEntities, Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest, Google::Longrunning::Operation
             # Deletes entities in the specified entity type.
             #
             #
             # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
-            rpc :BatchDeleteEntities, BatchDeleteEntitiesRequest, Google::Longrunning::Operation
+            rpc :BatchDeleteEntities, Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest, Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
