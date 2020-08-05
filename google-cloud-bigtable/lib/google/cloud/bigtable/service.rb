@@ -65,7 +65,7 @@ module Google
             config.endpoint = host_admin if host_admin
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::Bigtable::VERSION
-            config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
+            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project_id}" }
           end
         end
         attr_accessor :mocked_instances
@@ -78,7 +78,7 @@ module Google
             config.endpoint = host_admin if host_admin
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::Bigtable::VERSION
-            config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
+            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project_id}" }
           end
         end
         attr_accessor :mocked_tables
@@ -91,7 +91,7 @@ module Google
             config.endpoint = host if host
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::Bigtable::VERSION
-            config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
+            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project_id}" }
           end
         end
         attr_accessor :mocked_client
