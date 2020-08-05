@@ -87,7 +87,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                    retry_codes:   [4, 14]
                   }
 
                   default_config.rpcs.get_reservation.timeout = 60.0
@@ -95,7 +95,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                    retry_codes:   [4, 14]
                   }
 
                   default_config.rpcs.delete_reservation.timeout = 60.0
@@ -103,7 +103,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                    retry_codes:   [4, 14]
                   }
 
                   default_config.rpcs.update_reservation.timeout = 60.0
@@ -115,7 +115,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                    retry_codes:   [4, 14]
                   }
 
                   default_config.rpcs.get_capacity_commitment.timeout = 60.0
@@ -123,7 +123,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                    retry_codes:   [4, 14]
                   }
 
                   default_config.rpcs.delete_capacity_commitment.timeout = 60.0
@@ -131,7 +131,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                    retry_codes:   [4, 14]
                   }
 
                   default_config.rpcs.update_capacity_commitment.timeout = 60.0
@@ -147,7 +147,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                    retry_codes:   [4, 14]
                   }
 
                   default_config.rpcs.delete_assignment.timeout = 60.0
@@ -155,7 +155,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                    retry_codes:   [4, 14]
                   }
 
                   default_config.rpcs.search_assignments.timeout = 60.0
@@ -163,7 +163,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                    retry_codes:   [4, 14]
                   }
 
                   default_config.rpcs.move_assignment.timeout = 60.0
@@ -173,7 +173,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                    retry_codes:   [4, 14]
                   }
 
                   default_config.rpcs.update_bi_reservation.timeout = 60.0

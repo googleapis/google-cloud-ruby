@@ -49,27 +49,27 @@ module Google
               self.service_name = 'google.cloud.bigquery.reservation.v1.ReservationService'
 
               # Creates a new reservation resource.
-              rpc :CreateReservation, CreateReservationRequest, Reservation
+              rpc :CreateReservation, Google::Cloud::Bigquery::Reservation::V1::CreateReservationRequest, Google::Cloud::Bigquery::Reservation::V1::Reservation
               # Lists all the reservations for the project in the specified location.
-              rpc :ListReservations, ListReservationsRequest, ListReservationsResponse
+              rpc :ListReservations, Google::Cloud::Bigquery::Reservation::V1::ListReservationsRequest, Google::Cloud::Bigquery::Reservation::V1::ListReservationsResponse
               # Returns information about the reservation.
-              rpc :GetReservation, GetReservationRequest, Reservation
+              rpc :GetReservation, Google::Cloud::Bigquery::Reservation::V1::GetReservationRequest, Google::Cloud::Bigquery::Reservation::V1::Reservation
               # Deletes a reservation.
               # Returns `google.rpc.Code.FAILED_PRECONDITION` when reservation has
               # assignments.
-              rpc :DeleteReservation, DeleteReservationRequest, Google::Protobuf::Empty
+              rpc :DeleteReservation, Google::Cloud::Bigquery::Reservation::V1::DeleteReservationRequest, Google::Protobuf::Empty
               # Updates an existing reservation resource.
-              rpc :UpdateReservation, UpdateReservationRequest, Reservation
+              rpc :UpdateReservation, Google::Cloud::Bigquery::Reservation::V1::UpdateReservationRequest, Google::Cloud::Bigquery::Reservation::V1::Reservation
               # Creates a new capacity commitment resource.
-              rpc :CreateCapacityCommitment, CreateCapacityCommitmentRequest, CapacityCommitment
+              rpc :CreateCapacityCommitment, Google::Cloud::Bigquery::Reservation::V1::CreateCapacityCommitmentRequest, Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment
               # Lists all the capacity commitments for the admin project.
-              rpc :ListCapacityCommitments, ListCapacityCommitmentsRequest, ListCapacityCommitmentsResponse
+              rpc :ListCapacityCommitments, Google::Cloud::Bigquery::Reservation::V1::ListCapacityCommitmentsRequest, Google::Cloud::Bigquery::Reservation::V1::ListCapacityCommitmentsResponse
               # Returns information about the capacity commitment.
-              rpc :GetCapacityCommitment, GetCapacityCommitmentRequest, CapacityCommitment
+              rpc :GetCapacityCommitment, Google::Cloud::Bigquery::Reservation::V1::GetCapacityCommitmentRequest, Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment
               # Deletes a capacity commitment. Attempting to delete capacity commitment
               # before its commitment_end_time will fail with the error code
               # `google.rpc.Code.FAILED_PRECONDITION`.
-              rpc :DeleteCapacityCommitment, DeleteCapacityCommitmentRequest, Google::Protobuf::Empty
+              rpc :DeleteCapacityCommitment, Google::Cloud::Bigquery::Reservation::V1::DeleteCapacityCommitmentRequest, Google::Protobuf::Empty
               # Updates an existing capacity commitment.
               #
               # Only `plan` and `renewal_plan` fields can be updated.
@@ -77,7 +77,7 @@ module Google
               # Plan can only be changed to a plan of a longer commitment period.
               # Attempting to change to a plan with shorter commitment period will fail
               # with the error code `google.rpc.Code.FAILED_PRECONDITION`.
-              rpc :UpdateCapacityCommitment, UpdateCapacityCommitmentRequest, CapacityCommitment
+              rpc :UpdateCapacityCommitment, Google::Cloud::Bigquery::Reservation::V1::UpdateCapacityCommitmentRequest, Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment
               # Splits capacity commitment to two commitments of the same plan and
               # `commitment_end_time`.
               #
@@ -86,7 +86,7 @@ module Google
               # For example, in order to downgrade from 10000 slots to 8000, you might
               # split a 10000 capacity commitment into commitments of 2000 and 8000. Then,
               # you would change the plan of the first one to `FLEX` and then delete it.
-              rpc :SplitCapacityCommitment, SplitCapacityCommitmentRequest, SplitCapacityCommitmentResponse
+              rpc :SplitCapacityCommitment, Google::Cloud::Bigquery::Reservation::V1::SplitCapacityCommitmentRequest, Google::Cloud::Bigquery::Reservation::V1::SplitCapacityCommitmentResponse
               # Merges capacity commitments of the same plan into a single commitment.
               #
               # The resulting capacity commitment has the greater commitment_end_time
@@ -94,7 +94,7 @@ module Google
               #
               # Attempting to merge capacity commitments of different plan will fail
               # with the error code `google.rpc.Code.FAILED_PRECONDITION`.
-              rpc :MergeCapacityCommitments, MergeCapacityCommitmentsRequest, CapacityCommitment
+              rpc :MergeCapacityCommitments, Google::Cloud::Bigquery::Reservation::V1::MergeCapacityCommitmentsRequest, Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment
               # Creates an assignment object which allows the given project to submit jobs
               # of a certain type using slots from the specified reservation.
               #
@@ -125,7 +125,7 @@ module Google
               #
               # Returns `google.rpc.Code.INVALID_ARGUMENT` when location of the assignment
               # does not match location of the reservation.
-              rpc :CreateAssignment, CreateAssignmentRequest, Assignment
+              rpc :CreateAssignment, Google::Cloud::Bigquery::Reservation::V1::CreateAssignmentRequest, Google::Cloud::Bigquery::Reservation::V1::Assignment
               # Lists assignments.
               #
               # Only explicitly created assignments will be returned.
@@ -147,7 +147,7 @@ module Google
               # specified project and location will be listed.
               #
               # **Note** "-" cannot be used for projects nor locations.
-              rpc :ListAssignments, ListAssignmentsRequest, ListAssignmentsResponse
+              rpc :ListAssignments, Google::Cloud::Bigquery::Reservation::V1::ListAssignmentsRequest, Google::Cloud::Bigquery::Reservation::V1::ListAssignmentsResponse
               # Deletes a assignment. No expansion will happen.
               #
               # Example:
@@ -163,7 +163,7 @@ module Google
               # affect the other assignment `<project1, res1>`. After said deletion,
               # queries from `project1` will still use `res1` while queries from
               # `project2` will switch to use on-demand mode.
-              rpc :DeleteAssignment, DeleteAssignmentRequest, Google::Protobuf::Empty
+              rpc :DeleteAssignment, Google::Cloud::Bigquery::Reservation::V1::DeleteAssignmentRequest, Google::Protobuf::Empty
               # Looks up assignments for a specified resource for a particular region.
               # If the request is about a project:
               #
@@ -187,15 +187,15 @@ module Google
               #
               # **Note** "-" cannot be used for projects
               # nor locations.
-              rpc :SearchAssignments, SearchAssignmentsRequest, SearchAssignmentsResponse
+              rpc :SearchAssignments, Google::Cloud::Bigquery::Reservation::V1::SearchAssignmentsRequest, Google::Cloud::Bigquery::Reservation::V1::SearchAssignmentsResponse
               # Moves an assignment under a new reservation.
               #
               # This differs from removing an existing assignment and recreating a new one
               # by providing a transactional change that ensures an assignee always has an
               # associated reservation.
-              rpc :MoveAssignment, MoveAssignmentRequest, Assignment
+              rpc :MoveAssignment, Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest, Google::Cloud::Bigquery::Reservation::V1::Assignment
               # Retrieves a BI reservation.
-              rpc :GetBiReservation, GetBiReservationRequest, BiReservation
+              rpc :GetBiReservation, Google::Cloud::Bigquery::Reservation::V1::GetBiReservationRequest, Google::Cloud::Bigquery::Reservation::V1::BiReservation
               # Updates a BI reservation.
               #
               # Only fields specified in the `field_mask` are updated.
@@ -204,7 +204,7 @@ module Google
               # In order to reserve BI capacity it needs to be updated to an amount
               # greater than 0. In order to release BI capacity reservation size
               # must be set to 0.
-              rpc :UpdateBiReservation, UpdateBiReservationRequest, BiReservation
+              rpc :UpdateBiReservation, Google::Cloud::Bigquery::Reservation::V1::UpdateBiReservationRequest, Google::Cloud::Bigquery::Reservation::V1::BiReservation
             end
 
             Stub = Service.rpc_stub_class
