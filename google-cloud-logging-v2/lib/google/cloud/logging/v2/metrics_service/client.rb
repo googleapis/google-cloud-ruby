@@ -70,7 +70,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
+                  retry_codes:   [4, 13, 14]
                 }
 
                 default_config.rpcs.get_log_metric.timeout = 60.0
@@ -78,7 +78,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
+                  retry_codes:   [4, 13, 14]
                 }
 
                 default_config.rpcs.create_log_metric.timeout = 60.0
@@ -88,7 +88,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
+                  retry_codes:   [4, 13, 14]
                 }
 
                 default_config.rpcs.delete_log_metric.timeout = 60.0
@@ -96,7 +96,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
+                  retry_codes:   [4, 13, 14]
                 }
 
                 default_config
