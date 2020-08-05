@@ -68,7 +68,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.submit_job_as_operation.timeout = 900.0
@@ -76,7 +76,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.get_job.timeout = 900.0
@@ -84,7 +84,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
+                  retry_codes:   [4, 13, 14]
                 }
 
                 default_config.rpcs.list_jobs.timeout = 900.0
@@ -92,7 +92,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
+                  retry_codes:   [4, 13, 14]
                 }
 
                 default_config.rpcs.update_job.timeout = 900.0
@@ -100,7 +100,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.cancel_job.timeout = 900.0
@@ -108,7 +108,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
+                  retry_codes:   [4, 13, 14]
                 }
 
                 default_config.rpcs.delete_job.timeout = 900.0
@@ -116,7 +116,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config
