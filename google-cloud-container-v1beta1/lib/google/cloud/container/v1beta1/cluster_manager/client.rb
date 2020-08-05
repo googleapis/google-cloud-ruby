@@ -68,7 +68,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.get_cluster.timeout = 20.0
@@ -76,7 +76,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.create_cluster.timeout = 45.0
@@ -104,7 +104,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.list_operations.timeout = 20.0
@@ -112,7 +112,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.get_operation.timeout = 20.0
@@ -120,7 +120,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.cancel_operation.timeout = 45.0
@@ -130,7 +130,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.list_node_pools.timeout = 20.0
@@ -138,7 +138,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.get_node_pool.timeout = 20.0
@@ -146,7 +146,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.create_node_pool.timeout = 45.0
@@ -156,7 +156,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.rollback_node_pool_upgrade.timeout = 45.0
@@ -182,7 +182,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.list_locations.timeout = 20.0
@@ -190,7 +190,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config
