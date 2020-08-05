@@ -56,9 +56,9 @@ module Google
             #
             # If `location_id` is specified as `-` (wildcard), then all regions
             # available to the project are queried, and the results are aggregated.
-            rpc :ListInstances, ListInstancesRequest, ListInstancesResponse
+            rpc :ListInstances, Google::Cloud::Redis::V1beta1::ListInstancesRequest, Google::Cloud::Redis::V1beta1::ListInstancesResponse
             # Gets the details of a specific Redis instance.
-            rpc :GetInstance, GetInstanceRequest, Instance
+            rpc :GetInstance, Google::Cloud::Redis::V1beta1::GetInstanceRequest, Google::Cloud::Redis::V1beta1::Instance
             # Creates a Redis instance based on the specified tier and memory size.
             #
             # By default, the instance is accessible from the project's
@@ -71,16 +71,16 @@ module Google
             #
             # The returned operation is automatically deleted after a few hours, so there
             # is no need to call DeleteOperation.
-            rpc :CreateInstance, CreateInstanceRequest, Google::Longrunning::Operation
+            rpc :CreateInstance, Google::Cloud::Redis::V1beta1::CreateInstanceRequest, Google::Longrunning::Operation
             # Updates the metadata and configuration of a specific Redis instance.
             #
             # Completed longrunning.Operation will contain the new instance object
             # in the response field. The returned operation is automatically deleted
             # after a few hours, so there is no need to call DeleteOperation.
-            rpc :UpdateInstance, UpdateInstanceRequest, Google::Longrunning::Operation
+            rpc :UpdateInstance, Google::Cloud::Redis::V1beta1::UpdateInstanceRequest, Google::Longrunning::Operation
             # Upgrades Redis instance to the newer Redis version specified in the
             # request.
-            rpc :UpgradeInstance, UpgradeInstanceRequest, Google::Longrunning::Operation
+            rpc :UpgradeInstance, Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest, Google::Longrunning::Operation
             # Import a Redis RDB snapshot file from Cloud Storage into a Redis instance.
             #
             # Redis may stop serving during this operation. Instance state will be
@@ -89,20 +89,20 @@ module Google
             #
             # The returned operation is automatically deleted after a few hours, so
             # there is no need to call DeleteOperation.
-            rpc :ImportInstance, ImportInstanceRequest, Google::Longrunning::Operation
+            rpc :ImportInstance, Google::Cloud::Redis::V1beta1::ImportInstanceRequest, Google::Longrunning::Operation
             # Export Redis instance data into a Redis RDB format file in Cloud Storage.
             #
             # Redis will continue serving during this operation.
             #
             # The returned operation is automatically deleted after a few hours, so
             # there is no need to call DeleteOperation.
-            rpc :ExportInstance, ExportInstanceRequest, Google::Longrunning::Operation
+            rpc :ExportInstance, Google::Cloud::Redis::V1beta1::ExportInstanceRequest, Google::Longrunning::Operation
             # Initiates a failover of the master node to current replica node for a
             # specific STANDARD tier Cloud Memorystore for Redis instance.
-            rpc :FailoverInstance, FailoverInstanceRequest, Google::Longrunning::Operation
+            rpc :FailoverInstance, Google::Cloud::Redis::V1beta1::FailoverInstanceRequest, Google::Longrunning::Operation
             # Deletes a specific Redis instance.  Instance stops serving and data is
             # deleted.
-            rpc :DeleteInstance, DeleteInstanceRequest, Google::Longrunning::Operation
+            rpc :DeleteInstance, Google::Cloud::Redis::V1beta1::DeleteInstanceRequest, Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
