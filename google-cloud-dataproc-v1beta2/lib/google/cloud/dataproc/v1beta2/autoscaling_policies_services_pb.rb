@@ -35,19 +35,19 @@ module Google
             self.service_name = 'google.cloud.dataproc.v1beta2.AutoscalingPolicyService'
 
             # Creates new autoscaling policy.
-            rpc :CreateAutoscalingPolicy, CreateAutoscalingPolicyRequest, AutoscalingPolicy
+            rpc :CreateAutoscalingPolicy, Google::Cloud::Dataproc::V1beta2::CreateAutoscalingPolicyRequest, Google::Cloud::Dataproc::V1beta2::AutoscalingPolicy
             # Updates (replaces) autoscaling policy.
             #
             # Disabled check for update_mask, because all updates will be full
             # replacements.
-            rpc :UpdateAutoscalingPolicy, UpdateAutoscalingPolicyRequest, AutoscalingPolicy
+            rpc :UpdateAutoscalingPolicy, Google::Cloud::Dataproc::V1beta2::UpdateAutoscalingPolicyRequest, Google::Cloud::Dataproc::V1beta2::AutoscalingPolicy
             # Retrieves autoscaling policy.
-            rpc :GetAutoscalingPolicy, GetAutoscalingPolicyRequest, AutoscalingPolicy
+            rpc :GetAutoscalingPolicy, Google::Cloud::Dataproc::V1beta2::GetAutoscalingPolicyRequest, Google::Cloud::Dataproc::V1beta2::AutoscalingPolicy
             # Lists autoscaling policies in the project.
-            rpc :ListAutoscalingPolicies, ListAutoscalingPoliciesRequest, ListAutoscalingPoliciesResponse
+            rpc :ListAutoscalingPolicies, Google::Cloud::Dataproc::V1beta2::ListAutoscalingPoliciesRequest, Google::Cloud::Dataproc::V1beta2::ListAutoscalingPoliciesResponse
             # Deletes an autoscaling policy. It is an error to delete an autoscaling
             # policy that is in use by one or more clusters.
-            rpc :DeleteAutoscalingPolicy, DeleteAutoscalingPolicyRequest, Google::Protobuf::Empty
+            rpc :DeleteAutoscalingPolicy, Google::Cloud::Dataproc::V1beta2::DeleteAutoscalingPolicyRequest, Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class

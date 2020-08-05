@@ -71,7 +71,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.get_workflow_template.timeout = 600.0
@@ -79,7 +79,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
+                  retry_codes:   [4, 13, 14]
                 }
 
                 default_config.rpcs.instantiate_workflow_template.timeout = 600.0
@@ -87,7 +87,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.instantiate_inline_workflow_template.timeout = 600.0
@@ -95,7 +95,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.update_workflow_template.timeout = 600.0
@@ -103,7 +103,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.list_workflow_templates.timeout = 600.0
@@ -111,7 +111,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "INTERNAL", "UNAVAILABLE"]
+                  retry_codes:   [4, 13, 14]
                 }
 
                 default_config.rpcs.delete_workflow_template.timeout = 600.0
@@ -119,7 +119,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config
