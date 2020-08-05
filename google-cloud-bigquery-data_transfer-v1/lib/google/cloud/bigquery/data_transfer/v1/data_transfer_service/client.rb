@@ -74,7 +74,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.list_data_sources.timeout = 20.0
@@ -82,7 +82,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.create_transfer_config.timeout = 30.0
@@ -94,7 +94,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.get_transfer_config.timeout = 20.0
@@ -102,7 +102,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.list_transfer_configs.timeout = 20.0
@@ -110,7 +110,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.schedule_transfer_runs.timeout = 30.0
@@ -120,7 +120,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.delete_transfer_run.timeout = 20.0
@@ -128,7 +128,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.list_transfer_runs.timeout = 20.0
@@ -136,7 +136,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.list_transfer_logs.timeout = 20.0
@@ -144,7 +144,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.check_valid_creds.timeout = 20.0
@@ -152,7 +152,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 4]
                   }
 
                   default_config
