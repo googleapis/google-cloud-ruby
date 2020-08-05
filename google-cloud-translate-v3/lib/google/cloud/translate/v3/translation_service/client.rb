@@ -74,7 +74,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.batch_translate_text.timeout = 600.0
@@ -86,7 +86,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.get_glossary.timeout = 600.0
@@ -94,7 +94,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.delete_glossary.timeout = 600.0
@@ -102,7 +102,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config
