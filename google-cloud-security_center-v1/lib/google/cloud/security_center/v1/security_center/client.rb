@@ -78,7 +78,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.get_notification_config.timeout = 60.0
@@ -86,7 +86,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.get_organization_settings.timeout = 60.0
@@ -94,7 +94,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.get_source.timeout = 60.0
@@ -102,7 +102,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.group_assets.timeout = 480.0
@@ -110,7 +110,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.group_findings.timeout = 480.0
@@ -118,7 +118,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.list_assets.timeout = 480.0
@@ -126,7 +126,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.list_findings.timeout = 480.0
@@ -134,7 +134,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.list_notification_configs.timeout = 60.0
@@ -142,7 +142,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.list_sources.timeout = 60.0
@@ -150,7 +150,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.run_asset_discovery.timeout = 60.0
@@ -164,7 +164,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.update_finding.timeout = 60.0
