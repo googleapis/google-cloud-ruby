@@ -56,7 +56,7 @@ module Google
               #
               # Read sessions automatically expire 24 hours after they are created and do
               # not require manual clean-up by the caller.
-              rpc :CreateReadSession, CreateReadSessionRequest, ReadSession
+              rpc :CreateReadSession, Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest, Google::Cloud::Bigquery::Storage::V1::ReadSession
               # Reads rows from the stream in the format prescribed by the ReadSession.
               # Each response contains one or more table rows, up to a maximum of 100 MiB
               # per response; read requests which attempt to read individual rows larger
@@ -64,7 +64,7 @@ module Google
               #
               # Each request also returns a set of stream statistics reflecting the current
               # state of the stream.
-              rpc :ReadRows, ReadRowsRequest, stream(ReadRowsResponse)
+              rpc :ReadRows, Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest, stream(Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse)
               # Splits a given `ReadStream` into two `ReadStream` objects. These
               # `ReadStream` objects are referred to as the primary and the residual
               # streams of the split. The original `ReadStream` can still be read from in
@@ -77,7 +77,7 @@ module Google
               # original, primary, and residual, that original[0-j] = primary[0-j] and
               # original[j-n] = residual[0-m] once the streams have been read to
               # completion.
-              rpc :SplitReadStream, SplitReadStreamRequest, SplitReadStreamResponse
+              rpc :SplitReadStream, Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest, Google::Cloud::Bigquery::Storage::V1::SplitReadStreamResponse
             end
 
             Stub = Service.rpc_stub_class

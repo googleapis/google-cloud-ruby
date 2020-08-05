@@ -73,7 +73,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                    retry_codes:   [4, 14]
                   }
 
                   default_config.rpcs.read_rows.timeout = 86_400.0
@@ -81,7 +81,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["UNAVAILABLE"]
+                    retry_codes:   [14]
                   }
 
                   default_config.rpcs.split_read_stream.timeout = 600.0
@@ -89,7 +89,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                    retry_codes:   [4, 14]
                   }
 
                   default_config
