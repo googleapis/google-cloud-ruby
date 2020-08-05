@@ -29,7 +29,7 @@ library = gapic.ruby_library(
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-gaming-v1",
         "ruby-cloud-title": "Cloud Gaming V1",
-        "ruby-cloud-description": "Deploys and manages infrastructure for global multiplayer gaming experiences.",
+        "ruby-cloud-description": "With Game Servers, studios and publishers can deploy and manage their game server infrastructure hosted on multiple Agones clusters around the world through a single interface.",
         "ruby-cloud-env-prefix": "GAMING",
         "ruby-cloud-grpc-service-config": "google/cloud/gaming/v1/gaming_grpc_service_config.json",
         "ruby-cloud-product-url": "https://cloud.google.com/game-servers",

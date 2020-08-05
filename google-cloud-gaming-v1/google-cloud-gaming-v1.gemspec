@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Deploys and manages infrastructure for global multiplayer gaming experiences."
+  gem.description   = "With Game Servers, studios and publishers can deploy and manage their game server infrastructure hosted on multiple Agones clusters around the world through a single interface."
   gem.summary       = "API Client library for the Cloud Gaming V1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"

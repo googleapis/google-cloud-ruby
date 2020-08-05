@@ -71,7 +71,7 @@ module Google
                   initial_delay: 1.0,
                   max_delay:     10.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.get_game_server_cluster.timeout = 60.0
@@ -79,7 +79,7 @@ module Google
                   initial_delay: 1.0,
                   max_delay:     10.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.create_game_server_cluster.timeout = 120.0
@@ -89,7 +89,7 @@ module Google
                   initial_delay: 1.0,
                   max_delay:     10.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.delete_game_server_cluster.timeout = 60.0
@@ -99,7 +99,7 @@ module Google
                   initial_delay: 1.0,
                   max_delay:     10.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.update_game_server_cluster.timeout = 60.0
@@ -109,7 +109,7 @@ module Google
                   initial_delay: 1.0,
                   max_delay:     10.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config

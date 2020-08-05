@@ -35,31 +35,31 @@ module Google
             self.service_name = 'google.cloud.gaming.v1.GameServerDeploymentsService'
 
             # Lists game server deployments in a given project and location.
-            rpc :ListGameServerDeployments, ListGameServerDeploymentsRequest, ListGameServerDeploymentsResponse
+            rpc :ListGameServerDeployments, Google::Cloud::Gaming::V1::ListGameServerDeploymentsRequest, Google::Cloud::Gaming::V1::ListGameServerDeploymentsResponse
             # Gets details of a single game server deployment.
-            rpc :GetGameServerDeployment, GetGameServerDeploymentRequest, GameServerDeployment
+            rpc :GetGameServerDeployment, Google::Cloud::Gaming::V1::GetGameServerDeploymentRequest, Google::Cloud::Gaming::V1::GameServerDeployment
             # Creates a new game server deployment in a given project and location.
-            rpc :CreateGameServerDeployment, CreateGameServerDeploymentRequest, Google::Longrunning::Operation
+            rpc :CreateGameServerDeployment, Google::Cloud::Gaming::V1::CreateGameServerDeploymentRequest, Google::Longrunning::Operation
             # Deletes a single game server deployment.
-            rpc :DeleteGameServerDeployment, DeleteGameServerDeploymentRequest, Google::Longrunning::Operation
+            rpc :DeleteGameServerDeployment, Google::Cloud::Gaming::V1::DeleteGameServerDeploymentRequest, Google::Longrunning::Operation
             # Patches a game server deployment.
-            rpc :UpdateGameServerDeployment, UpdateGameServerDeploymentRequest, Google::Longrunning::Operation
+            rpc :UpdateGameServerDeployment, Google::Cloud::Gaming::V1::UpdateGameServerDeploymentRequest, Google::Longrunning::Operation
             # Gets details a single game server deployment rollout.
-            rpc :GetGameServerDeploymentRollout, GetGameServerDeploymentRolloutRequest, GameServerDeploymentRollout
+            rpc :GetGameServerDeploymentRollout, Google::Cloud::Gaming::V1::GetGameServerDeploymentRolloutRequest, Google::Cloud::Gaming::V1::GameServerDeploymentRollout
             # Patches a single game server deployment rollout.
             # The method will not return an error if the update does not affect any
             # existing realms. For example - if the default_game_server_config is changed
             # but all existing realms use the override, that is valid. Similarly, if a
             # non existing realm is explicitly called out in game_server_config_overrides
             # field, that will also not result in an error.
-            rpc :UpdateGameServerDeploymentRollout, UpdateGameServerDeploymentRolloutRequest, Google::Longrunning::Operation
+            rpc :UpdateGameServerDeploymentRollout, Google::Cloud::Gaming::V1::UpdateGameServerDeploymentRolloutRequest, Google::Longrunning::Operation
             # Previews the game server deployment rollout. This API does not mutate the
             # rollout resource.
-            rpc :PreviewGameServerDeploymentRollout, PreviewGameServerDeploymentRolloutRequest, PreviewGameServerDeploymentRolloutResponse
+            rpc :PreviewGameServerDeploymentRollout, Google::Cloud::Gaming::V1::PreviewGameServerDeploymentRolloutRequest, Google::Cloud::Gaming::V1::PreviewGameServerDeploymentRolloutResponse
             # Retrieves information about the current state of the game server
             # deployment. Gathers all the Agones fleets and Agones autoscalers,
             # including fleets running an older version of the game server deployment.
-            rpc :FetchDeploymentState, FetchDeploymentStateRequest, FetchDeploymentStateResponse
+            rpc :FetchDeploymentState, Google::Cloud::Gaming::V1::FetchDeploymentStateRequest, Google::Cloud::Gaming::V1::FetchDeploymentStateResponse
           end
 
           Stub = Service.rpc_stub_class
