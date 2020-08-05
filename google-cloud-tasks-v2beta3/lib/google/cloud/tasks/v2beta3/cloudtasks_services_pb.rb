@@ -37,9 +37,9 @@ module Google
             # Lists queues.
             #
             # Queues are returned in lexicographical order.
-            rpc :ListQueues, ListQueuesRequest, ListQueuesResponse
+            rpc :ListQueues, Google::Cloud::Tasks::V2beta3::ListQueuesRequest, Google::Cloud::Tasks::V2beta3::ListQueuesResponse
             # Gets a queue.
-            rpc :GetQueue, GetQueueRequest, Queue
+            rpc :GetQueue, Google::Cloud::Tasks::V2beta3::GetQueueRequest, Google::Cloud::Tasks::V2beta3::Queue
             # Creates a queue.
             #
             # Queues created with this method allow tasks to live for a maximum of 31
@@ -52,7 +52,7 @@ module Google
             # [Overview of Queue Management and
             # queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using
             # this method.
-            rpc :CreateQueue, CreateQueueRequest, Queue
+            rpc :CreateQueue, Google::Cloud::Tasks::V2beta3::CreateQueueRequest, Google::Cloud::Tasks::V2beta3::Queue
             # Updates a queue.
             #
             # This method creates the queue if it does not exist and updates
@@ -68,7 +68,7 @@ module Google
             # [Overview of Queue Management and
             # queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using
             # this method.
-            rpc :UpdateQueue, UpdateQueueRequest, Queue
+            rpc :UpdateQueue, Google::Cloud::Tasks::V2beta3::UpdateQueueRequest, Google::Cloud::Tasks::V2beta3::Queue
             # Deletes a queue.
             #
             # This command will delete the queue even if it has tasks in it.
@@ -82,14 +82,14 @@ module Google
             # [Overview of Queue Management and
             # queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using
             # this method.
-            rpc :DeleteQueue, DeleteQueueRequest, Google::Protobuf::Empty
+            rpc :DeleteQueue, Google::Cloud::Tasks::V2beta3::DeleteQueueRequest, Google::Protobuf::Empty
             # Purges a queue by deleting all of its tasks.
             #
             # All tasks created before this method is called are permanently deleted.
             #
             # Purge operations can take up to one minute to take effect. Tasks
             # might be dispatched before the purge takes effect. A purge is irreversible.
-            rpc :PurgeQueue, PurgeQueueRequest, Queue
+            rpc :PurgeQueue, Google::Cloud::Tasks::V2beta3::PurgeQueueRequest, Google::Cloud::Tasks::V2beta3::Queue
             # Pauses the queue.
             #
             # If a queue is paused then the system will stop dispatching tasks
@@ -97,7 +97,7 @@ module Google
             # [ResumeQueue][google.cloud.tasks.v2beta3.CloudTasks.ResumeQueue]. Tasks can still be added
             # when the queue is paused. A queue is paused if its
             # [state][google.cloud.tasks.v2beta3.Queue.state] is [PAUSED][google.cloud.tasks.v2beta3.Queue.State.PAUSED].
-            rpc :PauseQueue, PauseQueueRequest, Queue
+            rpc :PauseQueue, Google::Cloud::Tasks::V2beta3::PauseQueueRequest, Google::Cloud::Tasks::V2beta3::Queue
             # Resume a queue.
             #
             # This method resumes a queue after it has been
@@ -111,7 +111,7 @@ module Google
             # queues, follow the 500/50/5 pattern described in
             # [Managing Cloud Tasks Scaling
             # Risks](https://cloud.google.com/tasks/docs/manage-cloud-task-scaling).
-            rpc :ResumeQueue, ResumeQueueRequest, Queue
+            rpc :ResumeQueue, Google::Cloud::Tasks::V2beta3::ResumeQueueRequest, Google::Cloud::Tasks::V2beta3::Queue
             # Gets the access control policy for a [Queue][google.cloud.tasks.v2beta3.Queue].
             # Returns an empty policy if the resource exists and does not have a policy
             # set.
@@ -151,21 +151,21 @@ module Google
             #
             # The tasks may be returned in any order. The ordering may change at any
             # time.
-            rpc :ListTasks, ListTasksRequest, ListTasksResponse
+            rpc :ListTasks, Google::Cloud::Tasks::V2beta3::ListTasksRequest, Google::Cloud::Tasks::V2beta3::ListTasksResponse
             # Gets a task.
-            rpc :GetTask, GetTaskRequest, Task
+            rpc :GetTask, Google::Cloud::Tasks::V2beta3::GetTaskRequest, Google::Cloud::Tasks::V2beta3::Task
             # Creates a task and adds it to a queue.
             #
             # Tasks cannot be updated after creation; there is no UpdateTask command.
             #
             # * The maximum task size is 100KB.
-            rpc :CreateTask, CreateTaskRequest, Task
+            rpc :CreateTask, Google::Cloud::Tasks::V2beta3::CreateTaskRequest, Google::Cloud::Tasks::V2beta3::Task
             # Deletes a task.
             #
             # A task can be deleted if it is scheduled or dispatched. A task
             # cannot be deleted if it has executed successfully or permanently
             # failed.
-            rpc :DeleteTask, DeleteTaskRequest, Google::Protobuf::Empty
+            rpc :DeleteTask, Google::Cloud::Tasks::V2beta3::DeleteTaskRequest, Google::Protobuf::Empty
             # Forces a task to run now.
             #
             # When this method is called, Cloud Tasks will dispatch the task, even if
@@ -190,7 +190,7 @@ module Google
             # [RunTask][google.cloud.tasks.v2beta3.CloudTasks.RunTask] returns
             # [NOT_FOUND][google.rpc.Code.NOT_FOUND] when it is called on a
             # task that has already succeeded or permanently failed.
-            rpc :RunTask, RunTaskRequest, Task
+            rpc :RunTask, Google::Cloud::Tasks::V2beta3::RunTaskRequest, Google::Cloud::Tasks::V2beta3::Task
           end
 
           Stub = Service.rpc_stub_class

@@ -71,7 +71,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     10.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.get_queue.timeout = 10.0
@@ -79,7 +79,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     10.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.create_queue.timeout = 10.0
@@ -91,7 +91,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     10.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.purge_queue.timeout = 10.0
@@ -105,7 +105,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     10.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.set_iam_policy.timeout = 10.0
@@ -115,7 +115,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     10.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.list_tasks.timeout = 10.0
@@ -123,7 +123,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     10.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.get_task.timeout = 10.0
@@ -131,7 +131,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     10.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.create_task.timeout = 10.0
@@ -141,7 +141,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     10.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.run_task.timeout = 10.0
