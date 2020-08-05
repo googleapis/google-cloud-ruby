@@ -1,5 +1,15 @@
 # Release History
 
+### 2.0.0 / 2020-08-05
+
+#### ⚠ BREAKING CHANGES
+
+* **datastore:** Use new generated client classes
+
+#### Features
+
+* Use new generated client classes
+
 ### 1.8.2 / 2020-05-28
 
 #### Documentation
