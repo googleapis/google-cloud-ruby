@@ -68,7 +68,7 @@ module Google
                   initial_delay: 1.0,
                   max_delay:     120.0,
                   multiplier:    2.5,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config
