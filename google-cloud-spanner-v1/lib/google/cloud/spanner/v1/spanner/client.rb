@@ -73,7 +73,7 @@ module Google
                   initial_delay: 0.25,
                   max_delay:     32.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.batch_create_sessions.timeout = 60.0
@@ -81,7 +81,7 @@ module Google
                   initial_delay: 0.25,
                   max_delay:     32.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.get_session.timeout = 30.0
@@ -89,7 +89,7 @@ module Google
                   initial_delay: 0.25,
                   max_delay:     32.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.list_sessions.timeout = 3600.0
@@ -97,7 +97,7 @@ module Google
                   initial_delay: 0.25,
                   max_delay:     32.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.delete_session.timeout = 30.0
@@ -105,7 +105,7 @@ module Google
                   initial_delay: 0.25,
                   max_delay:     32.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.execute_sql.timeout = 30.0
@@ -113,7 +113,7 @@ module Google
                   initial_delay: 0.25,
                   max_delay:     32.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.execute_streaming_sql.timeout = 3600.0
@@ -123,7 +123,7 @@ module Google
                   initial_delay: 0.25,
                   max_delay:     32.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.read.timeout = 30.0
@@ -131,7 +131,7 @@ module Google
                   initial_delay: 0.25,
                   max_delay:     32.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.streaming_read.timeout = 3600.0
@@ -141,7 +141,7 @@ module Google
                   initial_delay: 0.25,
                   max_delay:     32.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.commit.timeout = 3600.0
@@ -149,7 +149,7 @@ module Google
                   initial_delay: 0.25,
                   max_delay:     32.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.rollback.timeout = 30.0
@@ -157,7 +157,7 @@ module Google
                   initial_delay: 0.25,
                   max_delay:     32.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.partition_query.timeout = 30.0
@@ -165,7 +165,7 @@ module Google
                   initial_delay: 0.25,
                   max_delay:     32.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.partition_read.timeout = 30.0
@@ -173,7 +173,7 @@ module Google
                   initial_delay: 0.25,
                   max_delay:     32.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config
