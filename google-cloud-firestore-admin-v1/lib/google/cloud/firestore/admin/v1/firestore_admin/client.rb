@@ -74,7 +74,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["UNAVAILABLE", "INTERNAL", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 13, 4]
                   }
 
                   default_config.rpcs.get_index.timeout = 60.0
@@ -82,7 +82,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["UNAVAILABLE", "INTERNAL", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 13, 4]
                   }
 
                   default_config.rpcs.delete_index.timeout = 60.0
@@ -90,7 +90,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["UNAVAILABLE", "INTERNAL", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 13, 4]
                   }
 
                   default_config.rpcs.get_field.timeout = 60.0
@@ -98,7 +98,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["UNAVAILABLE", "INTERNAL", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 13, 4]
                   }
 
                   default_config.rpcs.update_field.timeout = 60.0
@@ -108,7 +108,7 @@ module Google
                     initial_delay: 0.1,
                     max_delay:     60.0,
                     multiplier:    1.3,
-                    retry_codes:   ["UNAVAILABLE", "INTERNAL", "DEADLINE_EXCEEDED"]
+                    retry_codes:   [14, 13, 4]
                   }
 
                   default_config.rpcs.export_documents.timeout = 60.0
