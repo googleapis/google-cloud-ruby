@@ -1,5 +1,19 @@
 # Release History
 
+### 2.0.0 / 2020-08-05
+
+#### ⚠ BREAKING CHANGES
+
+* **bigtable:** Use new generated client classes
+
+#### Features
+
+* Use new generated client classes
+
+#### Bug Fixes
+
+* Include correct project in resource prefix headers
+
 ### 1.3.0 / 2020-07-21
 
 #### Features
