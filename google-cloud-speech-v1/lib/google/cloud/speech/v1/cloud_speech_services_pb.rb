@@ -36,17 +36,17 @@ module Google
 
             # Performs synchronous speech recognition: receive results after all audio
             # has been sent and processed.
-            rpc :Recognize, RecognizeRequest, RecognizeResponse
+            rpc :Recognize, Google::Cloud::Speech::V1::RecognizeRequest, Google::Cloud::Speech::V1::RecognizeResponse
             # Performs asynchronous speech recognition: receive results via the
             # google.longrunning.Operations interface. Returns either an
             # `Operation.error` or an `Operation.response` which contains
             # a `LongRunningRecognizeResponse` message.
             # For more information on asynchronous speech recognition, see the
             # [how-to](https://cloud.google.com/speech-to-text/docs/async-recognize).
-            rpc :LongRunningRecognize, LongRunningRecognizeRequest, Google::Longrunning::Operation
+            rpc :LongRunningRecognize, Google::Cloud::Speech::V1::LongRunningRecognizeRequest, Google::Longrunning::Operation
             # Performs bidirectional streaming speech recognition: receive results while
             # sending audio. This method is only available via the gRPC API (not REST).
-            rpc :StreamingRecognize, stream(StreamingRecognizeRequest), stream(StreamingRecognizeResponse)
+            rpc :StreamingRecognize, stream(Google::Cloud::Speech::V1::StreamingRecognizeRequest), stream(Google::Cloud::Speech::V1::StreamingRecognizeResponse)
           end
 
           Stub = Service.rpc_stub_class
