@@ -71,7 +71,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     30.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.get_notification_channel_descriptor.timeout = 30.0
@@ -79,7 +79,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     30.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.list_notification_channels.timeout = 30.0
@@ -87,7 +87,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     30.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.get_notification_channel.timeout = 30.0
@@ -95,7 +95,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     30.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.create_notification_channel.timeout = 30.0
@@ -107,7 +107,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     30.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.send_notification_channel_verification_code.timeout = 30.0
@@ -117,7 +117,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     30.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.verify_notification_channel.timeout = 30.0
@@ -125,7 +125,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     30.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config

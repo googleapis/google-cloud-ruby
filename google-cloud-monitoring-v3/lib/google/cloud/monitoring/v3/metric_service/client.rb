@@ -71,7 +71,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     30.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.get_monitored_resource_descriptor.timeout = 30.0
@@ -79,7 +79,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     30.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.list_metric_descriptors.timeout = 30.0
@@ -87,7 +87,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     30.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.get_metric_descriptor.timeout = 30.0
@@ -95,7 +95,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     30.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.create_metric_descriptor.timeout = 12.0
@@ -105,7 +105,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     30.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.list_time_series.timeout = 30.0
@@ -113,7 +113,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     30.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.create_time_series.timeout = 12.0
