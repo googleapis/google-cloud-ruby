@@ -77,7 +77,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.list_builds.timeout = 600.0
@@ -85,7 +85,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.cancel_build.timeout = 600.0
@@ -99,7 +99,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.list_build_triggers.timeout = 600.0
@@ -107,7 +107,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.delete_build_trigger.timeout = 600.0
@@ -115,7 +115,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.update_build_trigger.timeout = 600.0
@@ -129,7 +129,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.delete_worker_pool.timeout = 600.0
@@ -141,7 +141,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config
