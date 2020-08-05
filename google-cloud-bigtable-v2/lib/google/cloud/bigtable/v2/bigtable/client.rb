@@ -74,7 +74,7 @@ module Google
                   initial_delay: 0.01,
                   max_delay:     60.0,
                   multiplier:    2,
-                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.mutate_rows.timeout = 600.0
