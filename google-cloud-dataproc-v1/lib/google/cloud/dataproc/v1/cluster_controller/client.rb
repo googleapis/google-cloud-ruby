@@ -69,7 +69,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.update_cluster.timeout = 300.0
@@ -77,7 +77,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.delete_cluster.timeout = 300.0
@@ -85,7 +85,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.get_cluster.timeout = 300.0
@@ -93,7 +93,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["INTERNAL", "DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [13, 4, 14]
                 }
 
                 default_config.rpcs.list_clusters.timeout = 300.0
@@ -101,7 +101,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["INTERNAL", "DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [13, 4, 14]
                 }
 
                 default_config.rpcs.diagnose_cluster.timeout = 300.0
@@ -109,7 +109,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config

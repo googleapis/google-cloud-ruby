@@ -34,24 +34,24 @@ module Google
             self.service_name = 'google.cloud.dataproc.v1.JobController'
 
             # Submits a job to a cluster.
-            rpc :SubmitJob, SubmitJobRequest, Job
+            rpc :SubmitJob, Google::Cloud::Dataproc::V1::SubmitJobRequest, Google::Cloud::Dataproc::V1::Job
             # Submits job to a cluster.
-            rpc :SubmitJobAsOperation, SubmitJobRequest, Google::Longrunning::Operation
+            rpc :SubmitJobAsOperation, Google::Cloud::Dataproc::V1::SubmitJobRequest, Google::Longrunning::Operation
             # Gets the resource representation for a job in a project.
-            rpc :GetJob, GetJobRequest, Job
+            rpc :GetJob, Google::Cloud::Dataproc::V1::GetJobRequest, Google::Cloud::Dataproc::V1::Job
             # Lists regions/{region}/jobs in a project.
-            rpc :ListJobs, ListJobsRequest, ListJobsResponse
+            rpc :ListJobs, Google::Cloud::Dataproc::V1::ListJobsRequest, Google::Cloud::Dataproc::V1::ListJobsResponse
             # Updates a job in a project.
-            rpc :UpdateJob, UpdateJobRequest, Job
+            rpc :UpdateJob, Google::Cloud::Dataproc::V1::UpdateJobRequest, Google::Cloud::Dataproc::V1::Job
             # Starts a job cancellation request. To access the job resource
             # after cancellation, call
             # [regions/{region}/jobs.list](https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/list)
             # or
             # [regions/{region}/jobs.get](https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/get).
-            rpc :CancelJob, CancelJobRequest, Job
+            rpc :CancelJob, Google::Cloud::Dataproc::V1::CancelJobRequest, Google::Cloud::Dataproc::V1::Job
             # Deletes the job from the project. If the job is active, the delete fails,
             # and the response returns `FAILED_PRECONDITION`.
-            rpc :DeleteJob, DeleteJobRequest, Google::Protobuf::Empty
+            rpc :DeleteJob, Google::Cloud::Dataproc::V1::DeleteJobRequest, Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class

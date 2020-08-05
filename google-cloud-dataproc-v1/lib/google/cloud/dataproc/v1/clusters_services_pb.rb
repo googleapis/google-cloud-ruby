@@ -37,19 +37,19 @@ module Google
             # Creates a cluster in a project. The returned
             # [Operation.metadata][google.longrunning.Operation.metadata] will be
             # [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
-            rpc :CreateCluster, CreateClusterRequest, Google::Longrunning::Operation
+            rpc :CreateCluster, Google::Cloud::Dataproc::V1::CreateClusterRequest, Google::Longrunning::Operation
             # Updates a cluster in a project. The returned
             # [Operation.metadata][google.longrunning.Operation.metadata] will be
             # [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
-            rpc :UpdateCluster, UpdateClusterRequest, Google::Longrunning::Operation
+            rpc :UpdateCluster, Google::Cloud::Dataproc::V1::UpdateClusterRequest, Google::Longrunning::Operation
             # Deletes a cluster in a project. The returned
             # [Operation.metadata][google.longrunning.Operation.metadata] will be
             # [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
-            rpc :DeleteCluster, DeleteClusterRequest, Google::Longrunning::Operation
+            rpc :DeleteCluster, Google::Cloud::Dataproc::V1::DeleteClusterRequest, Google::Longrunning::Operation
             # Gets the resource representation for a cluster in a project.
-            rpc :GetCluster, GetClusterRequest, Cluster
+            rpc :GetCluster, Google::Cloud::Dataproc::V1::GetClusterRequest, Google::Cloud::Dataproc::V1::Cluster
             # Lists all regions/{region}/clusters in a project alphabetically.
-            rpc :ListClusters, ListClustersRequest, ListClustersResponse
+            rpc :ListClusters, Google::Cloud::Dataproc::V1::ListClustersRequest, Google::Cloud::Dataproc::V1::ListClustersResponse
             # Gets cluster diagnostic information. The returned
             # [Operation.metadata][google.longrunning.Operation.metadata] will be
             # [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
@@ -57,7 +57,7 @@ module Google
             # [Operation.response][google.longrunning.Operation.response]
             # contains
             # [DiagnoseClusterResults](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#diagnoseclusterresults).
-            rpc :DiagnoseCluster, DiagnoseClusterRequest, Google::Longrunning::Operation
+            rpc :DiagnoseCluster, Google::Cloud::Dataproc::V1::DiagnoseClusterRequest, Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
