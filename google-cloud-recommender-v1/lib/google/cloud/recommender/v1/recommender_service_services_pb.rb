@@ -38,23 +38,23 @@ module Google
 
             # Lists insights for a Cloud project. Requires the recommender.*.list IAM
             # permission for the specified insight type.
-            rpc :ListInsights, ListInsightsRequest, ListInsightsResponse
+            rpc :ListInsights, Google::Cloud::Recommender::V1::ListInsightsRequest, Google::Cloud::Recommender::V1::ListInsightsResponse
             # Gets the requested insight. Requires the recommender.*.get IAM permission
             # for the specified insight type.
-            rpc :GetInsight, GetInsightRequest, Insight
+            rpc :GetInsight, Google::Cloud::Recommender::V1::GetInsightRequest, Google::Cloud::Recommender::V1::Insight
             # Marks the Insight State as Accepted. Users can use this method to
             # indicate to the Recommender API that they have applied some action based
             # on the insight. This stops the insight content from being updated.
             #
             # MarkInsightAccepted can be applied to insights in ACTIVE state. Requires
             # the recommender.*.update IAM permission for the specified insight.
-            rpc :MarkInsightAccepted, MarkInsightAcceptedRequest, Insight
+            rpc :MarkInsightAccepted, Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest, Google::Cloud::Recommender::V1::Insight
             # Lists recommendations for a Cloud project. Requires the recommender.*.list
             # IAM permission for the specified recommender.
-            rpc :ListRecommendations, ListRecommendationsRequest, ListRecommendationsResponse
+            rpc :ListRecommendations, Google::Cloud::Recommender::V1::ListRecommendationsRequest, Google::Cloud::Recommender::V1::ListRecommendationsResponse
             # Gets the requested recommendation. Requires the recommender.*.get
             # IAM permission for the specified recommender.
-            rpc :GetRecommendation, GetRecommendationRequest, Recommendation
+            rpc :GetRecommendation, Google::Cloud::Recommender::V1::GetRecommendationRequest, Google::Cloud::Recommender::V1::Recommendation
             # Marks the Recommendation State as Claimed. Users can use this method to
             # indicate to the Recommender API that they are starting to apply the
             # recommendation themselves. This stops the recommendation content from being
@@ -65,7 +65,7 @@ module Google
             #
             # Requires the recommender.*.update IAM permission for the specified
             # recommender.
-            rpc :MarkRecommendationClaimed, MarkRecommendationClaimedRequest, Recommendation
+            rpc :MarkRecommendationClaimed, Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest, Google::Cloud::Recommender::V1::Recommendation
             # Marks the Recommendation State as Succeeded. Users can use this method to
             # indicate to the Recommender API that they have applied the recommendation
             # themselves, and the operation was successful. This stops the recommendation
@@ -77,7 +77,7 @@ module Google
             #
             # Requires the recommender.*.update IAM permission for the specified
             # recommender.
-            rpc :MarkRecommendationSucceeded, MarkRecommendationSucceededRequest, Recommendation
+            rpc :MarkRecommendationSucceeded, Google::Cloud::Recommender::V1::MarkRecommendationSucceededRequest, Google::Cloud::Recommender::V1::Recommendation
             # Marks the Recommendation State as Failed. Users can use this method to
             # indicate to the Recommender API that they have applied the recommendation
             # themselves, and the operation failed. This stops the recommendation content
@@ -89,7 +89,7 @@ module Google
             #
             # Requires the recommender.*.update IAM permission for the specified
             # recommender.
-            rpc :MarkRecommendationFailed, MarkRecommendationFailedRequest, Recommendation
+            rpc :MarkRecommendationFailed, Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest, Google::Cloud::Recommender::V1::Recommendation
           end
 
           Stub = Service.rpc_stub_class
