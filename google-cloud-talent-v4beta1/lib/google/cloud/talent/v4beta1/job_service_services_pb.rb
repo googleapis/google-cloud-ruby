@@ -37,34 +37,34 @@ module Google
             #
             # Typically, the job becomes searchable within 10 seconds, but it may take
             # up to 5 minutes.
-            rpc :CreateJob, CreateJobRequest, Job
+            rpc :CreateJob, Google::Cloud::Talent::V4beta1::CreateJobRequest, Google::Cloud::Talent::V4beta1::Job
             # Begins executing a batch create jobs operation.
-            rpc :BatchCreateJobs, BatchCreateJobsRequest, Google::Longrunning::Operation
+            rpc :BatchCreateJobs, Google::Cloud::Talent::V4beta1::BatchCreateJobsRequest, Google::Longrunning::Operation
             # Retrieves the specified job, whose status is OPEN or recently EXPIRED
             # within the last 90 days.
-            rpc :GetJob, GetJobRequest, Job
+            rpc :GetJob, Google::Cloud::Talent::V4beta1::GetJobRequest, Google::Cloud::Talent::V4beta1::Job
             # Updates specified job.
             #
             # Typically, updated contents become visible in search results within 10
             # seconds, but it may take up to 5 minutes.
-            rpc :UpdateJob, UpdateJobRequest, Job
+            rpc :UpdateJob, Google::Cloud::Talent::V4beta1::UpdateJobRequest, Google::Cloud::Talent::V4beta1::Job
             # Begins executing a batch update jobs operation.
-            rpc :BatchUpdateJobs, BatchUpdateJobsRequest, Google::Longrunning::Operation
+            rpc :BatchUpdateJobs, Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest, Google::Longrunning::Operation
             # Deletes the specified job.
             #
             # Typically, the job becomes unsearchable within 10 seconds, but it may take
             # up to 5 minutes.
-            rpc :DeleteJob, DeleteJobRequest, Google::Protobuf::Empty
+            rpc :DeleteJob, Google::Cloud::Talent::V4beta1::DeleteJobRequest, Google::Protobuf::Empty
             # Deletes a list of [Job][google.cloud.talent.v4beta1.Job]s by filter.
-            rpc :BatchDeleteJobs, BatchDeleteJobsRequest, Google::Protobuf::Empty
+            rpc :BatchDeleteJobs, Google::Cloud::Talent::V4beta1::BatchDeleteJobsRequest, Google::Protobuf::Empty
             # Lists jobs by filter.
-            rpc :ListJobs, ListJobsRequest, ListJobsResponse
+            rpc :ListJobs, Google::Cloud::Talent::V4beta1::ListJobsRequest, Google::Cloud::Talent::V4beta1::ListJobsResponse
             # Searches for jobs using the provided [SearchJobsRequest][google.cloud.talent.v4beta1.SearchJobsRequest].
             #
             # This call constrains the [visibility][google.cloud.talent.v4beta1.Job.visibility] of jobs
             # present in the database, and only returns jobs that the caller has
             # permission to search against.
-            rpc :SearchJobs, SearchJobsRequest, SearchJobsResponse
+            rpc :SearchJobs, Google::Cloud::Talent::V4beta1::SearchJobsRequest, Google::Cloud::Talent::V4beta1::SearchJobsResponse
             # Searches for jobs using the provided [SearchJobsRequest][google.cloud.talent.v4beta1.SearchJobsRequest].
             #
             # This API call is intended for the use case of targeting passive job
@@ -75,7 +75,7 @@ module Google
             # This call constrains the [visibility][google.cloud.talent.v4beta1.Job.visibility] of jobs
             # present in the database, and only returns jobs the caller has
             # permission to search against.
-            rpc :SearchJobsForAlert, SearchJobsRequest, SearchJobsResponse
+            rpc :SearchJobsForAlert, Google::Cloud::Talent::V4beta1::SearchJobsRequest, Google::Cloud::Talent::V4beta1::SearchJobsResponse
           end
 
           Stub = Service.rpc_stub_class

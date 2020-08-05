@@ -72,7 +72,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.update_tenant.timeout = 30.0
@@ -82,7 +82,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config.rpcs.list_tenants.timeout = 30.0
@@ -90,7 +90,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                  retry_codes:   [4, 14]
                 }
 
                 default_config
