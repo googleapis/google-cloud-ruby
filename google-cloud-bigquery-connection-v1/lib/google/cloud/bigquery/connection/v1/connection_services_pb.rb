@@ -35,16 +35,16 @@ module Google
               self.service_name = 'google.cloud.bigquery.connection.v1.ConnectionService'
 
               # Creates a new connection.
-              rpc :CreateConnection, CreateConnectionRequest, Connection
+              rpc :CreateConnection, Google::Cloud::Bigquery::Connection::V1::CreateConnectionRequest, Google::Cloud::Bigquery::Connection::V1::Connection
               # Returns specified connection.
-              rpc :GetConnection, GetConnectionRequest, Connection
+              rpc :GetConnection, Google::Cloud::Bigquery::Connection::V1::GetConnectionRequest, Google::Cloud::Bigquery::Connection::V1::Connection
               # Returns a list of connections in the given project.
-              rpc :ListConnections, ListConnectionsRequest, ListConnectionsResponse
+              rpc :ListConnections, Google::Cloud::Bigquery::Connection::V1::ListConnectionsRequest, Google::Cloud::Bigquery::Connection::V1::ListConnectionsResponse
               # Updates the specified connection. For security reasons, also resets
               # credential if connection properties are in the update field mask.
-              rpc :UpdateConnection, UpdateConnectionRequest, Connection
+              rpc :UpdateConnection, Google::Cloud::Bigquery::Connection::V1::UpdateConnectionRequest, Google::Cloud::Bigquery::Connection::V1::Connection
               # Deletes connection and associated credential.
-              rpc :DeleteConnection, DeleteConnectionRequest, Google::Protobuf::Empty
+              rpc :DeleteConnection, Google::Cloud::Bigquery::Connection::V1::DeleteConnectionRequest, Google::Protobuf::Empty
               # Gets the access control policy for a resource.
               # Returns an empty policy if the resource exists and does not have a policy
               # set.
