@@ -77,7 +77,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.create_database.timeout = 3600.0
@@ -87,7 +87,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.update_database_ddl.timeout = 3600.0
@@ -95,7 +95,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.drop_database.timeout = 3600.0
@@ -103,7 +103,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.get_database_ddl.timeout = 3600.0
@@ -111,7 +111,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.set_iam_policy.timeout = 30.0
@@ -121,7 +121,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.test_iam_permissions.timeout = 30.0
@@ -133,7 +133,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.update_backup.timeout = 3600.0
@@ -141,7 +141,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.delete_backup.timeout = 3600.0
@@ -149,7 +149,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.list_backups.timeout = 3600.0
@@ -157,7 +157,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.restore_database.timeout = 3600.0
@@ -167,7 +167,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.list_backup_operations.timeout = 3600.0
@@ -175,7 +175,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config
