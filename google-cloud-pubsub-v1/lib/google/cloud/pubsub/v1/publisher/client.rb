@@ -71,7 +71,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.update_topic.timeout = 60.0
@@ -79,7 +79,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.publish.timeout = 60.0
@@ -87,7 +87,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["ABORTED", "CANCELLED", "INTERNAL", "RESOURCE_EXHAUSTED", "UNKNOWN", "UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                  retry_codes:   [10, 1, 13, 8, 2, 14, 4]
                 }
 
                 default_config.rpcs.get_topic.timeout = 60.0
@@ -95,7 +95,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNKNOWN", "ABORTED", "UNAVAILABLE"]
+                  retry_codes:   [2, 10, 14]
                 }
 
                 default_config.rpcs.list_topics.timeout = 60.0
@@ -103,7 +103,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNKNOWN", "ABORTED", "UNAVAILABLE"]
+                  retry_codes:   [2, 10, 14]
                 }
 
                 default_config.rpcs.list_topic_subscriptions.timeout = 60.0
@@ -111,7 +111,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNKNOWN", "ABORTED", "UNAVAILABLE"]
+                  retry_codes:   [2, 10, 14]
                 }
 
                 default_config.rpcs.list_topic_snapshots.timeout = 60.0
@@ -119,7 +119,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNKNOWN", "ABORTED", "UNAVAILABLE"]
+                  retry_codes:   [2, 10, 14]
                 }
 
                 default_config.rpcs.delete_topic.timeout = 60.0
@@ -127,7 +127,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.detach_subscription.timeout = 60.0
@@ -135,7 +135,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   ["UNAVAILABLE"]
+                  retry_codes:   [14]
                 }
 
                 default_config
