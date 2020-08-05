@@ -29,16 +29,15 @@ module Google
         #     limited situations Google systems may refer refer to a region code instead
         #     of a country code.
         #     Possible Region Codes:
-        #     <ol>
-        #       <li>ASI: Asia</li>
-        #       <li>EUR: Europe</li>
-        #       <li>OCE: Oceania</li>
-        #       <li>AFR: Africa</li>
-        #       <li>NAM: North America</li>
-        #       <li>SAM: South America</li>
-        #       <li>ANT: Antarctica</li>
-        #       <li>ANY: Any location</li>
-        #     </ol>
+        #
+        #     - ASI: Asia
+        #     - EUR: Europe
+        #     - OCE: Oceania
+        #     - AFR: Africa
+        #     - NAM: North America
+        #     - SAM: South America
+        #     - ANT: Antarctica
+        #     - ANY: Any location
         # @!attribute [rw] principal_physical_location_country
         #   @return [::String]
         #     Physical location of the principal at the time of the access. A
@@ -46,16 +45,15 @@ module Google
         #     a region code. In some limited situations Google systems may refer refer to
         #     a region code instead of a country code.
         #     Possible Region Codes:
-        #     <ol>
-        #       <li>ASI: Asia</li>
-        #       <li>EUR: Europe</li>
-        #       <li>OCE: Oceania</li>
-        #       <li>AFR: Africa</li>
-        #       <li>NAM: North America</li>
-        #       <li>SAM: South America</li>
-        #       <li>ANT: Antarctica</li>
-        #       <li>ANY: Any location</li>
-        #     </ol>
+        #
+        #     - ASI: Asia
+        #     - EUR: Europe
+        #     - OCE: Oceania
+        #     - AFR: Africa
+        #     - NAM: North America
+        #     - SAM: South America
+        #     - ANT: Antarctica
+        #     - ANY: Any location
         class AccessLocations
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -78,14 +76,13 @@ module Google
 
             # Customer made a request or raised an issue that required the principal to
             # access customer data. `detail` is of the form ("#####" is the issue ID):
-            # <ol>
-            #   <li>"Feedback Report: #####"</li>
-            #   <li>"Case Number: #####"</li>
-            #   <li>"Case ID: #####"</li>
-            #   <li>"E-PIN Reference: #####"</li>
-            #   <li>"Google-#####"</li>
-            #   <li>"T-#####"</li>
-            # </ol>
+            #
+            # - "Feedback Report: #####"
+            # - "Case Number: #####"
+            # - "Case ID: #####"
+            # - "E-PIN Reference: #####"
+            # - "Google-#####"
+            # - "T-#####"
             CUSTOMER_INITIATED_SUPPORT = 1
 
             # The principal accessed customer data in order to diagnose or resolve a
@@ -177,18 +174,17 @@ module Google
         #   @return [::String]
         #     The product for which Access Approval will be enrolled. Allowed values are
         #     listed below (case-sensitive):
-        #     <ol>
-        #       <li>all</li>
-        #       <li>appengine.googleapis.com</li>
-        #       <li>bigquery.googleapis.com</li>
-        #       <li>bigtable.googleapis.com</li>
-        #       <li>cloudkms.googleapis.com</li>
-        #       <li>compute.googleapis.com</li>
-        #       <li>dataflow.googleapis.com</li>
-        #       <li>iam.googleapis.com</li>
-        #       <li>pubsub.googleapis.com</li>
-        #       <li>storage.googleapis.com</li>
-        #     <ol>
+        #
+        #     - all
+        #     - appengine.googleapis.com
+        #     - bigquery.googleapis.com
+        #     - bigtable.googleapis.com
+        #     - cloudkms.googleapis.com
+        #     - compute.googleapis.com
+        #     - dataflow.googleapis.com
+        #     - iam.googleapis.com
+        #     - pubsub.googleapis.com
+        #     - storage.googleapis.com
         # @!attribute [rw] enrollment_level
         #   @return [::Google::Cloud::AccessApproval::V1::EnrollmentLevel]
         #     The enrollment level of the service.
@@ -201,11 +197,10 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The resource name of the settings. Format is one of:
-        #     <ol>
-        #       <li>"projects/\\{project_id}/accessApprovalSettings"</li>
-        #       <li>"folders/\\{folder_id}/accessApprovalSettings"</li>
-        #       <li>"organizations/\\{organization_id}/accessApprovalSettings"</li>
-        #     <ol>
+        #
+        #     - "projects/\\{project_id}/accessApprovalSettings"
+        #     - "folders/\\{folder_id}/accessApprovalSettings"
+        #     - "organizations/\\{organization_id}/accessApprovalSettings"
         # @!attribute [rw] notification_emails
         #   @return [::Array<::String>]
         #     A list of email addresses to which notifications relating to approval
@@ -246,13 +241,12 @@ module Google
         #   @return [::String]
         #     A filter on the type of approval requests to retrieve. Must be one of the
         #     following values:
-        #     <ol>
-        #       <li>[not set]: Requests that are pending or have active approvals.</li>
-        #       <li>ALL: All requests.</li>
-        #       <li>PENDING: Only pending requests.</li>
-        #       <li>ACTIVE: Only active (i.e. currently approved) requests.</li>
-        #       <li>DISMISSED: Only dismissed (including expired) requests.</li>
-        #     </ol>
+        #
+        #     - [not set]: Requests that are pending or have active approvals.
+        #     - ALL: All requests.
+        #     - PENDING: Only pending requests.
+        #     - ACTIVE: Only active (i.e. currently approved) requests.
+        #     - DISMISSED: Only dismissed (including expired) requests.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Requested page size.
