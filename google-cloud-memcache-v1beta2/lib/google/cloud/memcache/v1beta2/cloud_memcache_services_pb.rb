@@ -49,22 +49,22 @@ module Google
             self.service_name = 'google.cloud.memcache.v1beta2.CloudMemcache'
 
             # Lists Instances in a given project and location.
-            rpc :ListInstances, ListInstancesRequest, ListInstancesResponse
+            rpc :ListInstances, Google::Cloud::Memcache::V1beta2::ListInstancesRequest, Google::Cloud::Memcache::V1beta2::ListInstancesResponse
             # Gets details of a single Instance.
-            rpc :GetInstance, GetInstanceRequest, Instance
+            rpc :GetInstance, Google::Cloud::Memcache::V1beta2::GetInstanceRequest, Google::Cloud::Memcache::V1beta2::Instance
             # Creates a new Instance in a given project and location.
-            rpc :CreateInstance, CreateInstanceRequest, Google::Longrunning::Operation
+            rpc :CreateInstance, Google::Cloud::Memcache::V1beta2::CreateInstanceRequest, Google::Longrunning::Operation
             # Updates an existing Instance in a given project and location.
-            rpc :UpdateInstance, UpdateInstanceRequest, Google::Longrunning::Operation
+            rpc :UpdateInstance, Google::Cloud::Memcache::V1beta2::UpdateInstanceRequest, Google::Longrunning::Operation
             # Updates the defined Memcached Parameters for an existing Instance.
             # This method only stages the parameters, it must be followed by
             # ApplyParameters to apply the parameters to nodes of the Memcached Instance.
-            rpc :UpdateParameters, UpdateParametersRequest, Google::Longrunning::Operation
+            rpc :UpdateParameters, Google::Cloud::Memcache::V1beta2::UpdateParametersRequest, Google::Longrunning::Operation
             # Deletes a single Instance.
-            rpc :DeleteInstance, DeleteInstanceRequest, Google::Longrunning::Operation
+            rpc :DeleteInstance, Google::Cloud::Memcache::V1beta2::DeleteInstanceRequest, Google::Longrunning::Operation
             # ApplyParameters will update current set of Parameters to the set of
             # specified nodes of the Memcached Instance.
-            rpc :ApplyParameters, ApplyParametersRequest, Google::Longrunning::Operation
+            rpc :ApplyParameters, Google::Cloud::Memcache::V1beta2::ApplyParametersRequest, Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
