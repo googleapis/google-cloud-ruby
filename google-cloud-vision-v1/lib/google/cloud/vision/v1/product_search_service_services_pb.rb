@@ -53,20 +53,20 @@ module Google
             #
             # * Returns INVALID_ARGUMENT if display_name is missing, or is longer than
             #   4096 characters.
-            rpc :CreateProductSet, CreateProductSetRequest, ProductSet
+            rpc :CreateProductSet, Google::Cloud::Vision::V1::CreateProductSetRequest, Google::Cloud::Vision::V1::ProductSet
             # Lists ProductSets in an unspecified order.
             #
             # Possible errors:
             #
             # * Returns INVALID_ARGUMENT if page_size is greater than 100, or less
             #   than 1.
-            rpc :ListProductSets, ListProductSetsRequest, ListProductSetsResponse
+            rpc :ListProductSets, Google::Cloud::Vision::V1::ListProductSetsRequest, Google::Cloud::Vision::V1::ListProductSetsResponse
             # Gets information associated with a ProductSet.
             #
             # Possible errors:
             #
             # * Returns NOT_FOUND if the ProductSet does not exist.
-            rpc :GetProductSet, GetProductSetRequest, ProductSet
+            rpc :GetProductSet, Google::Cloud::Vision::V1::GetProductSetRequest, Google::Cloud::Vision::V1::ProductSet
             # Makes changes to a ProductSet resource.
             # Only display_name can be updated currently.
             #
@@ -75,12 +75,12 @@ module Google
             # * Returns NOT_FOUND if the ProductSet does not exist.
             # * Returns INVALID_ARGUMENT if display_name is present in update_mask but
             #   missing from the request or longer than 4096 characters.
-            rpc :UpdateProductSet, UpdateProductSetRequest, ProductSet
+            rpc :UpdateProductSet, Google::Cloud::Vision::V1::UpdateProductSetRequest, Google::Cloud::Vision::V1::ProductSet
             # Permanently deletes a ProductSet. Products and ReferenceImages in the
             # ProductSet are not deleted.
             #
             # The actual image files are not deleted from Google Cloud Storage.
-            rpc :DeleteProductSet, DeleteProductSetRequest, Google::Protobuf::Empty
+            rpc :DeleteProductSet, Google::Cloud::Vision::V1::DeleteProductSetRequest, Google::Protobuf::Empty
             # Creates and returns a new product resource.
             #
             # Possible errors:
@@ -89,19 +89,19 @@ module Google
             #   characters.
             # * Returns INVALID_ARGUMENT if description is longer than 4096 characters.
             # * Returns INVALID_ARGUMENT if product_category is missing or invalid.
-            rpc :CreateProduct, CreateProductRequest, Product
+            rpc :CreateProduct, Google::Cloud::Vision::V1::CreateProductRequest, Google::Cloud::Vision::V1::Product
             # Lists products in an unspecified order.
             #
             # Possible errors:
             #
             # * Returns INVALID_ARGUMENT if page_size is greater than 100 or less than 1.
-            rpc :ListProducts, ListProductsRequest, ListProductsResponse
+            rpc :ListProducts, Google::Cloud::Vision::V1::ListProductsRequest, Google::Cloud::Vision::V1::ListProductsResponse
             # Gets information associated with a Product.
             #
             # Possible errors:
             #
             # * Returns NOT_FOUND if the Product does not exist.
-            rpc :GetProduct, GetProductRequest, Product
+            rpc :GetProduct, Google::Cloud::Vision::V1::GetProductRequest, Google::Cloud::Vision::V1::Product
             # Makes changes to a Product resource.
             # Only the `display_name`, `description`, and `labels` fields can be updated
             # right now.
@@ -117,13 +117,13 @@ module Google
             # * Returns INVALID_ARGUMENT if description is present in update_mask but is
             #   longer than 4096 characters.
             # * Returns INVALID_ARGUMENT if product_category is present in update_mask.
-            rpc :UpdateProduct, UpdateProductRequest, Product
+            rpc :UpdateProduct, Google::Cloud::Vision::V1::UpdateProductRequest, Google::Cloud::Vision::V1::Product
             # Permanently deletes a product and its reference images.
             #
             # Metadata of the product and all its images will be deleted right away, but
             # search queries against ProductSets containing the product may still work
             # until all related caches are refreshed.
-            rpc :DeleteProduct, DeleteProductRequest, Google::Protobuf::Empty
+            rpc :DeleteProduct, Google::Cloud::Vision::V1::DeleteProductRequest, Google::Protobuf::Empty
             # Creates and returns a new ReferenceImage resource.
             #
             # The `bounding_poly` field is optional. If `bounding_poly` is not specified,
@@ -143,7 +143,7 @@ module Google
             # * Returns INVALID_ARGUMENT if bounding_poly is not provided, and nothing
             #   compatible with the parent product's product_category is detected.
             # * Returns INVALID_ARGUMENT if bounding_poly contains more than 10 polygons.
-            rpc :CreateReferenceImage, CreateReferenceImageRequest, ReferenceImage
+            rpc :CreateReferenceImage, Google::Cloud::Vision::V1::CreateReferenceImageRequest, Google::Cloud::Vision::V1::ReferenceImage
             # Permanently deletes a reference image.
             #
             # The image metadata will be deleted right away, but search queries
@@ -151,7 +151,7 @@ module Google
             # caches are refreshed.
             #
             # The actual image files are not deleted from Google Cloud Storage.
-            rpc :DeleteReferenceImage, DeleteReferenceImageRequest, Google::Protobuf::Empty
+            rpc :DeleteReferenceImage, Google::Cloud::Vision::V1::DeleteReferenceImageRequest, Google::Protobuf::Empty
             # Lists reference images.
             #
             # Possible errors:
@@ -159,13 +159,13 @@ module Google
             # * Returns NOT_FOUND if the parent product does not exist.
             # * Returns INVALID_ARGUMENT if the page_size is greater than 100, or less
             #   than 1.
-            rpc :ListReferenceImages, ListReferenceImagesRequest, ListReferenceImagesResponse
+            rpc :ListReferenceImages, Google::Cloud::Vision::V1::ListReferenceImagesRequest, Google::Cloud::Vision::V1::ListReferenceImagesResponse
             # Gets information associated with a ReferenceImage.
             #
             # Possible errors:
             #
             # * Returns NOT_FOUND if the specified image does not exist.
-            rpc :GetReferenceImage, GetReferenceImageRequest, ReferenceImage
+            rpc :GetReferenceImage, Google::Cloud::Vision::V1::GetReferenceImageRequest, Google::Cloud::Vision::V1::ReferenceImage
             # Adds a Product to the specified ProductSet. If the Product is already
             # present, no change is made.
             #
@@ -174,9 +174,9 @@ module Google
             # Possible errors:
             #
             # * Returns NOT_FOUND if the Product or the ProductSet doesn't exist.
-            rpc :AddProductToProductSet, AddProductToProductSetRequest, Google::Protobuf::Empty
+            rpc :AddProductToProductSet, Google::Cloud::Vision::V1::AddProductToProductSetRequest, Google::Protobuf::Empty
             # Removes a Product from the specified ProductSet.
-            rpc :RemoveProductFromProductSet, RemoveProductFromProductSetRequest, Google::Protobuf::Empty
+            rpc :RemoveProductFromProductSet, Google::Cloud::Vision::V1::RemoveProductFromProductSetRequest, Google::Protobuf::Empty
             # Lists the Products in a ProductSet, in an unspecified order. If the
             # ProductSet does not exist, the products field of the response will be
             # empty.
@@ -184,7 +184,7 @@ module Google
             # Possible errors:
             #
             # * Returns INVALID_ARGUMENT if page_size is greater than 100 or less than 1.
-            rpc :ListProductsInProductSet, ListProductsInProductSetRequest, ListProductsInProductSetResponse
+            rpc :ListProductsInProductSet, Google::Cloud::Vision::V1::ListProductsInProductSetRequest, Google::Cloud::Vision::V1::ListProductsInProductSetResponse
             # Asynchronous API that imports a list of reference images to specified
             # product sets based on a list of image information.
             #
@@ -196,7 +196,7 @@ module Google
             # The input source of this method is a csv file on Google Cloud Storage.
             # For the format of the csv file please see
             # [ImportProductSetsGcsSource.csv_file_uri][google.cloud.vision.v1.ImportProductSetsGcsSource.csv_file_uri].
-            rpc :ImportProductSets, ImportProductSetsRequest, Google::Longrunning::Operation
+            rpc :ImportProductSets, Google::Cloud::Vision::V1::ImportProductSetsRequest, Google::Longrunning::Operation
             # Asynchronous API to delete all Products in a ProductSet or all Products
             # that are in no ProductSet.
             #
@@ -221,7 +221,7 @@ module Google
             # The [google.longrunning.Operation][google.longrunning.Operation] API can be used to keep track of the
             # progress and results of the request.
             # `Operation.metadata` contains `BatchOperationMetadata`. (progress)
-            rpc :PurgeProducts, PurgeProductsRequest, Google::Longrunning::Operation
+            rpc :PurgeProducts, Google::Cloud::Vision::V1::PurgeProductsRequest, Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
