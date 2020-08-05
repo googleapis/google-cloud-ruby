@@ -36,11 +36,11 @@ module Google
             self.service_name = 'google.cloud.scheduler.v1.CloudScheduler'
 
             # Lists jobs.
-            rpc :ListJobs, ListJobsRequest, ListJobsResponse
+            rpc :ListJobs, Google::Cloud::Scheduler::V1::ListJobsRequest, Google::Cloud::Scheduler::V1::ListJobsResponse
             # Gets a job.
-            rpc :GetJob, GetJobRequest, Job
+            rpc :GetJob, Google::Cloud::Scheduler::V1::GetJobRequest, Google::Cloud::Scheduler::V1::Job
             # Creates a job.
-            rpc :CreateJob, CreateJobRequest, Job
+            rpc :CreateJob, Google::Cloud::Scheduler::V1::CreateJobRequest, Google::Cloud::Scheduler::V1::Job
             # Updates a job.
             #
             # If successful, the updated [Job][google.cloud.scheduler.v1.Job] is returned. If the job does
@@ -50,9 +50,9 @@ module Google
             # job to be in an [Job.State.UPDATE_FAILED][google.cloud.scheduler.v1.Job.State.UPDATE_FAILED] state. A job in this state may
             # not be executed. If this happens, retry the UpdateJob request
             # until a successful response is received.
-            rpc :UpdateJob, UpdateJobRequest, Job
+            rpc :UpdateJob, Google::Cloud::Scheduler::V1::UpdateJobRequest, Google::Cloud::Scheduler::V1::Job
             # Deletes a job.
-            rpc :DeleteJob, DeleteJobRequest, Google::Protobuf::Empty
+            rpc :DeleteJob, Google::Cloud::Scheduler::V1::DeleteJobRequest, Google::Protobuf::Empty
             # Pauses a job.
             #
             # If a job is paused then the system will stop executing the job
@@ -60,19 +60,19 @@ module Google
             # state of the job is stored in [state][google.cloud.scheduler.v1.Job.state]; if paused it
             # will be set to [Job.State.PAUSED][google.cloud.scheduler.v1.Job.State.PAUSED]. A job must be in [Job.State.ENABLED][google.cloud.scheduler.v1.Job.State.ENABLED]
             # to be paused.
-            rpc :PauseJob, PauseJobRequest, Job
+            rpc :PauseJob, Google::Cloud::Scheduler::V1::PauseJobRequest, Google::Cloud::Scheduler::V1::Job
             # Resume a job.
             #
             # This method reenables a job after it has been [Job.State.PAUSED][google.cloud.scheduler.v1.Job.State.PAUSED]. The
             # state of a job is stored in [Job.state][google.cloud.scheduler.v1.Job.state]; after calling this method it
             # will be set to [Job.State.ENABLED][google.cloud.scheduler.v1.Job.State.ENABLED]. A job must be in
             # [Job.State.PAUSED][google.cloud.scheduler.v1.Job.State.PAUSED] to be resumed.
-            rpc :ResumeJob, ResumeJobRequest, Job
+            rpc :ResumeJob, Google::Cloud::Scheduler::V1::ResumeJobRequest, Google::Cloud::Scheduler::V1::Job
             # Forces a job to run now.
             #
             # When this method is called, Cloud Scheduler will dispatch the job, even
             # if the job is already running.
-            rpc :RunJob, RunJobRequest, Job
+            rpc :RunJob, Google::Cloud::Scheduler::V1::RunJobRequest, Google::Cloud::Scheduler::V1::Job
           end
 
           Stub = Service.rpc_stub_class
