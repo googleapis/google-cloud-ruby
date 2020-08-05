@@ -23,7 +23,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICMicrogenerator()
 library = gapic.ruby_library(
-    "analygics/admin", "v1alpha",
+    "analytics/admin", "v1alpha",
     proto_path="google/analytics/admin/v1alpha",
     generator_args={
         "ruby-cloud-gem-name": "google-analytics-admin-v1alpha",
@@ -32,6 +32,7 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "ANALYTICS_ADMIN",
         "ruby-cloud-grpc-service-config": "google/analytics/admin/v1alpha/admin_grpc_service_config.json",
         "ruby-cloud-api-id": "analyticsadmin.googleapis.com",
+        "ruby-cloud-api-shortname": "analyticsadmin",
     }
 )
 
