@@ -37,9 +37,9 @@ module Google
             self.service_name = 'google.cloud.billing.v1.CloudCatalog'
 
             # Lists all public cloud services.
-            rpc :ListServices, ListServicesRequest, ListServicesResponse
+            rpc :ListServices, Google::Cloud::Billing::V1::ListServicesRequest, Google::Cloud::Billing::V1::ListServicesResponse
             # Lists all publicly available SKUs for a given cloud service.
-            rpc :ListSkus, ListSkusRequest, ListSkusResponse
+            rpc :ListSkus, Google::Cloud::Billing::V1::ListSkusRequest, Google::Cloud::Billing::V1::ListSkusResponse
           end
 
           Stub = Service.rpc_stub_class
