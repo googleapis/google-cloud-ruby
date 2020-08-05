@@ -37,14 +37,14 @@ module Google
             self.service_name = 'google.cloud.vision.v1p3beta1.ImageAnnotator'
 
             # Run image detection and annotation for a batch of images.
-            rpc :BatchAnnotateImages, BatchAnnotateImagesRequest, BatchAnnotateImagesResponse
+            rpc :BatchAnnotateImages, Google::Cloud::Vision::V1p3beta1::BatchAnnotateImagesRequest, Google::Cloud::Vision::V1p3beta1::BatchAnnotateImagesResponse
             # Run asynchronous image detection and annotation for a list of generic
             # files, such as PDF files, which may contain multiple pages and multiple
             # images per page. Progress and results can be retrieved through the
             # `google.longrunning.Operations` interface.
             # `Operation.metadata` contains `OperationMetadata` (metadata).
             # `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).
-            rpc :AsyncBatchAnnotateFiles, AsyncBatchAnnotateFilesRequest, Google::Longrunning::Operation
+            rpc :AsyncBatchAnnotateFiles, Google::Cloud::Vision::V1p3beta1::AsyncBatchAnnotateFilesRequest, Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
