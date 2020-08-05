@@ -45,53 +45,53 @@ module Google
             self.service_name = 'google.cloud.kms.v1.KeyManagementService'
 
             # Lists [KeyRings][google.cloud.kms.v1.KeyRing].
-            rpc :ListKeyRings, ListKeyRingsRequest, ListKeyRingsResponse
+            rpc :ListKeyRings, Google::Cloud::Kms::V1::ListKeyRingsRequest, Google::Cloud::Kms::V1::ListKeyRingsResponse
             # Lists [CryptoKeys][google.cloud.kms.v1.CryptoKey].
-            rpc :ListCryptoKeys, ListCryptoKeysRequest, ListCryptoKeysResponse
+            rpc :ListCryptoKeys, Google::Cloud::Kms::V1::ListCryptoKeysRequest, Google::Cloud::Kms::V1::ListCryptoKeysResponse
             # Lists [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion].
-            rpc :ListCryptoKeyVersions, ListCryptoKeyVersionsRequest, ListCryptoKeyVersionsResponse
+            rpc :ListCryptoKeyVersions, Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest, Google::Cloud::Kms::V1::ListCryptoKeyVersionsResponse
             # Lists [ImportJobs][google.cloud.kms.v1.ImportJob].
-            rpc :ListImportJobs, ListImportJobsRequest, ListImportJobsResponse
+            rpc :ListImportJobs, Google::Cloud::Kms::V1::ListImportJobsRequest, Google::Cloud::Kms::V1::ListImportJobsResponse
             # Returns metadata for a given [KeyRing][google.cloud.kms.v1.KeyRing].
-            rpc :GetKeyRing, GetKeyRingRequest, KeyRing
+            rpc :GetKeyRing, Google::Cloud::Kms::V1::GetKeyRingRequest, Google::Cloud::Kms::V1::KeyRing
             # Returns metadata for a given [CryptoKey][google.cloud.kms.v1.CryptoKey], as well as its
             # [primary][google.cloud.kms.v1.CryptoKey.primary] [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].
-            rpc :GetCryptoKey, GetCryptoKeyRequest, CryptoKey
+            rpc :GetCryptoKey, Google::Cloud::Kms::V1::GetCryptoKeyRequest, Google::Cloud::Kms::V1::CryptoKey
             # Returns metadata for a given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].
-            rpc :GetCryptoKeyVersion, GetCryptoKeyVersionRequest, CryptoKeyVersion
+            rpc :GetCryptoKeyVersion, Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest, Google::Cloud::Kms::V1::CryptoKeyVersion
             # Returns the public key for the given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. The
             # [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
             # [ASYMMETRIC_SIGN][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN] or
             # [ASYMMETRIC_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_DECRYPT].
-            rpc :GetPublicKey, GetPublicKeyRequest, PublicKey
+            rpc :GetPublicKey, Google::Cloud::Kms::V1::GetPublicKeyRequest, Google::Cloud::Kms::V1::PublicKey
             # Returns metadata for a given [ImportJob][google.cloud.kms.v1.ImportJob].
-            rpc :GetImportJob, GetImportJobRequest, ImportJob
+            rpc :GetImportJob, Google::Cloud::Kms::V1::GetImportJobRequest, Google::Cloud::Kms::V1::ImportJob
             # Create a new [KeyRing][google.cloud.kms.v1.KeyRing] in a given Project and Location.
-            rpc :CreateKeyRing, CreateKeyRingRequest, KeyRing
+            rpc :CreateKeyRing, Google::Cloud::Kms::V1::CreateKeyRingRequest, Google::Cloud::Kms::V1::KeyRing
             # Create a new [CryptoKey][google.cloud.kms.v1.CryptoKey] within a [KeyRing][google.cloud.kms.v1.KeyRing].
             #
             # [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] and
             # [CryptoKey.version_template.algorithm][google.cloud.kms.v1.CryptoKeyVersionTemplate.algorithm]
             # are required.
-            rpc :CreateCryptoKey, CreateCryptoKeyRequest, CryptoKey
+            rpc :CreateCryptoKey, Google::Cloud::Kms::V1::CreateCryptoKeyRequest, Google::Cloud::Kms::V1::CryptoKey
             # Create a new [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] in a [CryptoKey][google.cloud.kms.v1.CryptoKey].
             #
             # The server will assign the next sequential id. If unset,
             # [state][google.cloud.kms.v1.CryptoKeyVersion.state] will be set to
             # [ENABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED].
-            rpc :CreateCryptoKeyVersion, CreateCryptoKeyVersionRequest, CryptoKeyVersion
+            rpc :CreateCryptoKeyVersion, Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest, Google::Cloud::Kms::V1::CryptoKeyVersion
             # Imports a new [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] into an existing [CryptoKey][google.cloud.kms.v1.CryptoKey] using the
             # wrapped key material provided in the request.
             #
             # The version ID will be assigned the next sequential id within the
             # [CryptoKey][google.cloud.kms.v1.CryptoKey].
-            rpc :ImportCryptoKeyVersion, ImportCryptoKeyVersionRequest, CryptoKeyVersion
+            rpc :ImportCryptoKeyVersion, Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest, Google::Cloud::Kms::V1::CryptoKeyVersion
             # Create a new [ImportJob][google.cloud.kms.v1.ImportJob] within a [KeyRing][google.cloud.kms.v1.KeyRing].
             #
             # [ImportJob.import_method][google.cloud.kms.v1.ImportJob.import_method] is required.
-            rpc :CreateImportJob, CreateImportJobRequest, ImportJob
+            rpc :CreateImportJob, Google::Cloud::Kms::V1::CreateImportJobRequest, Google::Cloud::Kms::V1::ImportJob
             # Update a [CryptoKey][google.cloud.kms.v1.CryptoKey].
-            rpc :UpdateCryptoKey, UpdateCryptoKeyRequest, CryptoKey
+            rpc :UpdateCryptoKey, Google::Cloud::Kms::V1::UpdateCryptoKeyRequest, Google::Cloud::Kms::V1::CryptoKey
             # Update a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]'s metadata.
             #
             # [state][google.cloud.kms.v1.CryptoKeyVersion.state] may be changed between
@@ -99,26 +99,26 @@ module Google
             # [DISABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED] using this
             # method. See [DestroyCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersion] and [RestoreCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion] to
             # move between other states.
-            rpc :UpdateCryptoKeyVersion, UpdateCryptoKeyVersionRequest, CryptoKeyVersion
+            rpc :UpdateCryptoKeyVersion, Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest, Google::Cloud::Kms::V1::CryptoKeyVersion
             # Encrypts data, so that it can only be recovered by a call to [Decrypt][google.cloud.kms.v1.KeyManagementService.Decrypt].
             # The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
             # [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].
-            rpc :Encrypt, EncryptRequest, EncryptResponse
+            rpc :Encrypt, Google::Cloud::Kms::V1::EncryptRequest, Google::Cloud::Kms::V1::EncryptResponse
             # Decrypts data that was protected by [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt]. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
             # must be [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].
-            rpc :Decrypt, DecryptRequest, DecryptResponse
+            rpc :Decrypt, Google::Cloud::Kms::V1::DecryptRequest, Google::Cloud::Kms::V1::DecryptResponse
             # Signs data using a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
             # ASYMMETRIC_SIGN, producing a signature that can be verified with the public
             # key retrieved from [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey].
-            rpc :AsymmetricSign, AsymmetricSignRequest, AsymmetricSignResponse
+            rpc :AsymmetricSign, Google::Cloud::Kms::V1::AsymmetricSignRequest, Google::Cloud::Kms::V1::AsymmetricSignResponse
             # Decrypts data that was encrypted with a public key retrieved from
             # [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey] corresponding to a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with
             # [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] ASYMMETRIC_DECRYPT.
-            rpc :AsymmetricDecrypt, AsymmetricDecryptRequest, AsymmetricDecryptResponse
+            rpc :AsymmetricDecrypt, Google::Cloud::Kms::V1::AsymmetricDecryptRequest, Google::Cloud::Kms::V1::AsymmetricDecryptResponse
             # Update the version of a [CryptoKey][google.cloud.kms.v1.CryptoKey] that will be used in [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt].
             #
             # Returns an error if called on an asymmetric key.
-            rpc :UpdateCryptoKeyPrimaryVersion, UpdateCryptoKeyPrimaryVersionRequest, CryptoKey
+            rpc :UpdateCryptoKeyPrimaryVersion, Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest, Google::Cloud::Kms::V1::CryptoKey
             # Schedule a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] for destruction.
             #
             # Upon calling this method, [CryptoKeyVersion.state][google.cloud.kms.v1.CryptoKeyVersion.state] will be set to
@@ -131,7 +131,7 @@ module Google
             #
             # Before the [destroy_time][google.cloud.kms.v1.CryptoKeyVersion.destroy_time] is reached,
             # [RestoreCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion] may be called to reverse the process.
-            rpc :DestroyCryptoKeyVersion, DestroyCryptoKeyVersionRequest, CryptoKeyVersion
+            rpc :DestroyCryptoKeyVersion, Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest, Google::Cloud::Kms::V1::CryptoKeyVersion
             # Restore a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] in the
             # [DESTROY_SCHEDULED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED]
             # state.
@@ -139,7 +139,7 @@ module Google
             # Upon restoration of the CryptoKeyVersion, [state][google.cloud.kms.v1.CryptoKeyVersion.state]
             # will be set to [DISABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED],
             # and [destroy_time][google.cloud.kms.v1.CryptoKeyVersion.destroy_time] will be cleared.
-            rpc :RestoreCryptoKeyVersion, RestoreCryptoKeyVersionRequest, CryptoKeyVersion
+            rpc :RestoreCryptoKeyVersion, Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest, Google::Cloud::Kms::V1::CryptoKeyVersion
           end
 
           Stub = Service.rpc_stub_class
