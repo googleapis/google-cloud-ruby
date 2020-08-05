@@ -44,7 +44,7 @@ module Google
             # 2 seconds with exponential retry to poll the export operation result. For
             # regular-size resource parent, the export operation usually finishes within
             # 5 minutes.
-            rpc :ExportAssets, ExportAssetsRequest, Google::Longrunning::Operation
+            rpc :ExportAssets, Google::Cloud::Asset::V1::ExportAssetsRequest, Google::Longrunning::Operation
             # Batch gets the update history of assets that overlap a time window.
             # For IAM_POLICY content, this API outputs history when the asset and its
             # attached IAM POLICY both exist. This can create gaps in the output history.
@@ -52,28 +52,28 @@ module Google
             # deleted status.
             # If a specified asset does not exist, this API returns an INVALID_ARGUMENT
             # error.
-            rpc :BatchGetAssetsHistory, BatchGetAssetsHistoryRequest, BatchGetAssetsHistoryResponse
+            rpc :BatchGetAssetsHistory, Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest, Google::Cloud::Asset::V1::BatchGetAssetsHistoryResponse
             # Creates a feed in a parent project/folder/organization to listen to its
             # asset updates.
-            rpc :CreateFeed, CreateFeedRequest, Feed
+            rpc :CreateFeed, Google::Cloud::Asset::V1::CreateFeedRequest, Google::Cloud::Asset::V1::Feed
             # Gets details about an asset feed.
-            rpc :GetFeed, GetFeedRequest, Feed
+            rpc :GetFeed, Google::Cloud::Asset::V1::GetFeedRequest, Google::Cloud::Asset::V1::Feed
             # Lists all asset feeds in a parent project/folder/organization.
-            rpc :ListFeeds, ListFeedsRequest, ListFeedsResponse
+            rpc :ListFeeds, Google::Cloud::Asset::V1::ListFeedsRequest, Google::Cloud::Asset::V1::ListFeedsResponse
             # Updates an asset feed configuration.
-            rpc :UpdateFeed, UpdateFeedRequest, Feed
+            rpc :UpdateFeed, Google::Cloud::Asset::V1::UpdateFeedRequest, Google::Cloud::Asset::V1::Feed
             # Deletes an asset feed.
-            rpc :DeleteFeed, DeleteFeedRequest, Google::Protobuf::Empty
+            rpc :DeleteFeed, Google::Cloud::Asset::V1::DeleteFeedRequest, Google::Protobuf::Empty
             # Searches all the resources within the given accessible scope (e.g., a
             # project, a folder or an organization). Callers should have
             # cloud.assets.SearchAllResources permission upon the requested scope,
             # otherwise the request will be rejected.
-            rpc :SearchAllResources, SearchAllResourcesRequest, SearchAllResourcesResponse
+            rpc :SearchAllResources, Google::Cloud::Asset::V1::SearchAllResourcesRequest, Google::Cloud::Asset::V1::SearchAllResourcesResponse
             # Searches all the IAM policies within the given accessible scope (e.g., a
             # project, a folder or an organization). Callers should have
             # cloud.assets.SearchAllIamPolicies permission upon the requested scope,
             # otherwise the request will be rejected.
-            rpc :SearchAllIamPolicies, SearchAllIamPoliciesRequest, SearchAllIamPoliciesResponse
+            rpc :SearchAllIamPolicies, Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest, Google::Cloud::Asset::V1::SearchAllIamPoliciesResponse
           end
 
           Stub = Service.rpc_stub_class
