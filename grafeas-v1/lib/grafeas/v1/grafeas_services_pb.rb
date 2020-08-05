@@ -45,38 +45,38 @@ module Grafeas
         self.service_name = 'grafeas.v1.Grafeas'
 
         # Gets the specified occurrence.
-        rpc :GetOccurrence, GetOccurrenceRequest, Occurrence
+        rpc :GetOccurrence, Grafeas::V1::GetOccurrenceRequest, Grafeas::V1::Occurrence
         # Lists occurrences for the specified project.
-        rpc :ListOccurrences, ListOccurrencesRequest, ListOccurrencesResponse
+        rpc :ListOccurrences, Grafeas::V1::ListOccurrencesRequest, Grafeas::V1::ListOccurrencesResponse
         # Deletes the specified occurrence. For example, use this method to delete an
         # occurrence when the occurrence is no longer applicable for the given
         # resource.
-        rpc :DeleteOccurrence, DeleteOccurrenceRequest, Google::Protobuf::Empty
+        rpc :DeleteOccurrence, Grafeas::V1::DeleteOccurrenceRequest, Google::Protobuf::Empty
         # Creates a new occurrence.
-        rpc :CreateOccurrence, CreateOccurrenceRequest, Occurrence
+        rpc :CreateOccurrence, Grafeas::V1::CreateOccurrenceRequest, Grafeas::V1::Occurrence
         # Creates new occurrences in batch.
-        rpc :BatchCreateOccurrences, BatchCreateOccurrencesRequest, BatchCreateOccurrencesResponse
+        rpc :BatchCreateOccurrences, Grafeas::V1::BatchCreateOccurrencesRequest, Grafeas::V1::BatchCreateOccurrencesResponse
         # Updates the specified occurrence.
-        rpc :UpdateOccurrence, UpdateOccurrenceRequest, Occurrence
+        rpc :UpdateOccurrence, Grafeas::V1::UpdateOccurrenceRequest, Grafeas::V1::Occurrence
         # Gets the note attached to the specified occurrence. Consumer projects can
         # use this method to get a note that belongs to a provider project.
-        rpc :GetOccurrenceNote, GetOccurrenceNoteRequest, Note
+        rpc :GetOccurrenceNote, Grafeas::V1::GetOccurrenceNoteRequest, Grafeas::V1::Note
         # Gets the specified note.
-        rpc :GetNote, GetNoteRequest, Note
+        rpc :GetNote, Grafeas::V1::GetNoteRequest, Grafeas::V1::Note
         # Lists notes for the specified project.
-        rpc :ListNotes, ListNotesRequest, ListNotesResponse
+        rpc :ListNotes, Grafeas::V1::ListNotesRequest, Grafeas::V1::ListNotesResponse
         # Deletes the specified note.
-        rpc :DeleteNote, DeleteNoteRequest, Google::Protobuf::Empty
+        rpc :DeleteNote, Grafeas::V1::DeleteNoteRequest, Google::Protobuf::Empty
         # Creates a new note.
-        rpc :CreateNote, CreateNoteRequest, Note
+        rpc :CreateNote, Grafeas::V1::CreateNoteRequest, Grafeas::V1::Note
         # Creates new notes in batch.
-        rpc :BatchCreateNotes, BatchCreateNotesRequest, BatchCreateNotesResponse
+        rpc :BatchCreateNotes, Grafeas::V1::BatchCreateNotesRequest, Grafeas::V1::BatchCreateNotesResponse
         # Updates the specified note.
-        rpc :UpdateNote, UpdateNoteRequest, Note
+        rpc :UpdateNote, Grafeas::V1::UpdateNoteRequest, Grafeas::V1::Note
         # Lists occurrences referencing the specified note. Provider projects can use
         # this method to get all occurrences across consumer projects referencing the
         # specified note.
-        rpc :ListNoteOccurrences, ListNoteOccurrencesRequest, ListNoteOccurrencesResponse
+        rpc :ListNoteOccurrences, Grafeas::V1::ListNoteOccurrencesRequest, Grafeas::V1::ListNoteOccurrencesResponse
       end
 
       Stub = Service.rpc_stub_class

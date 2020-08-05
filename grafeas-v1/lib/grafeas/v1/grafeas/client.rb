@@ -81,7 +81,7 @@ module Grafeas
               initial_delay: 0.1,
               max_delay:     60.0,
               multiplier:    1.3,
-              retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+              retry_codes:   [14, 4]
             }
 
             default_config.rpcs.list_occurrences.timeout = 30.0
@@ -89,7 +89,7 @@ module Grafeas
               initial_delay: 0.1,
               max_delay:     60.0,
               multiplier:    1.3,
-              retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+              retry_codes:   [14, 4]
             }
 
             default_config.rpcs.delete_occurrence.timeout = 30.0
@@ -97,7 +97,7 @@ module Grafeas
               initial_delay: 0.1,
               max_delay:     60.0,
               multiplier:    1.3,
-              retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+              retry_codes:   [14, 4]
             }
 
             default_config.rpcs.create_occurrence.timeout = 30.0
@@ -111,7 +111,7 @@ module Grafeas
               initial_delay: 0.1,
               max_delay:     60.0,
               multiplier:    1.3,
-              retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+              retry_codes:   [14, 4]
             }
 
             default_config.rpcs.get_note.timeout = 30.0
@@ -119,7 +119,7 @@ module Grafeas
               initial_delay: 0.1,
               max_delay:     60.0,
               multiplier:    1.3,
-              retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+              retry_codes:   [14, 4]
             }
 
             default_config.rpcs.list_notes.timeout = 30.0
@@ -127,7 +127,7 @@ module Grafeas
               initial_delay: 0.1,
               max_delay:     60.0,
               multiplier:    1.3,
-              retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+              retry_codes:   [14, 4]
             }
 
             default_config.rpcs.delete_note.timeout = 30.0
@@ -135,7 +135,7 @@ module Grafeas
               initial_delay: 0.1,
               max_delay:     60.0,
               multiplier:    1.3,
-              retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+              retry_codes:   [14, 4]
             }
 
             default_config.rpcs.create_note.timeout = 30.0
@@ -149,7 +149,7 @@ module Grafeas
               initial_delay: 0.1,
               max_delay:     60.0,
               multiplier:    1.3,
-              retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+              retry_codes:   [14, 4]
             }
 
             default_config
