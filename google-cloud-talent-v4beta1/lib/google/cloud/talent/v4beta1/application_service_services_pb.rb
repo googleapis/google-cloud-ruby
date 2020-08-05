@@ -35,15 +35,15 @@ module Google
             self.service_name = 'google.cloud.talent.v4beta1.ApplicationService'
 
             # Creates a new application entity.
-            rpc :CreateApplication, CreateApplicationRequest, Application
+            rpc :CreateApplication, Google::Cloud::Talent::V4beta1::CreateApplicationRequest, Google::Cloud::Talent::V4beta1::Application
             # Retrieves specified application.
-            rpc :GetApplication, GetApplicationRequest, Application
+            rpc :GetApplication, Google::Cloud::Talent::V4beta1::GetApplicationRequest, Google::Cloud::Talent::V4beta1::Application
             # Updates specified application.
-            rpc :UpdateApplication, UpdateApplicationRequest, Application
+            rpc :UpdateApplication, Google::Cloud::Talent::V4beta1::UpdateApplicationRequest, Google::Cloud::Talent::V4beta1::Application
             # Deletes specified application.
-            rpc :DeleteApplication, DeleteApplicationRequest, Google::Protobuf::Empty
+            rpc :DeleteApplication, Google::Cloud::Talent::V4beta1::DeleteApplicationRequest, Google::Protobuf::Empty
             # Lists all applications associated with the profile.
-            rpc :ListApplications, ListApplicationsRequest, ListApplicationsResponse
+            rpc :ListApplications, Google::Cloud::Talent::V4beta1::ListApplicationsRequest, Google::Cloud::Talent::V4beta1::ListApplicationsResponse
           end
 
           Stub = Service.rpc_stub_class
