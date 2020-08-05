@@ -92,7 +92,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.get_instance_config.timeout = 3600.0
@@ -100,7 +100,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.list_instances.timeout = 3600.0
@@ -108,7 +108,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.get_instance.timeout = 3600.0
@@ -116,7 +116,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.create_instance.timeout = 3600.0
@@ -128,7 +128,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.set_iam_policy.timeout = 30.0
@@ -138,7 +138,7 @@ module Google
                       initial_delay: 1.0,
                       max_delay:     32.0,
                       multiplier:    1.3,
-                      retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                      retry_codes:   [14, 4]
                     }
 
                     default_config.rpcs.test_iam_permissions.timeout = 30.0
