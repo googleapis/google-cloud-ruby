@@ -40,11 +40,11 @@ module Google
             # as a result. This method is not idempotent, because it may cause contexts
             # and session entity types to be updated, which in turn might affect
             # results of future queries.
-            rpc :DetectIntent, DetectIntentRequest, DetectIntentResponse
+            rpc :DetectIntent, Google::Cloud::Dialogflow::V2::DetectIntentRequest, Google::Cloud::Dialogflow::V2::DetectIntentResponse
             # Processes a natural language query in audio format in a streaming fashion
             # and returns structured, actionable data as a result. This method is only
             # available via the gRPC API (not REST).
-            rpc :StreamingDetectIntent, stream(StreamingDetectIntentRequest), stream(StreamingDetectIntentResponse)
+            rpc :StreamingDetectIntent, stream(Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest), stream(Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse)
           end
 
           Stub = Service.rpc_stub_class
