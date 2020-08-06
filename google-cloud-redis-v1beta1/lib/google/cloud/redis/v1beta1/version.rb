@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Redis
       module V1beta1
-        VERSION = "0.2.3"
+        VERSION = "0.2.4"
       end
     end
   end
