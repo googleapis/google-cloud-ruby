@@ -4,10 +4,7 @@
 
 #### Features
 
-* support custom setting of timeout and retry ([#7100](https://www.github.com/googleapis/google-cloud-ruby/issues/7100))
-  * feat(spanner): support custom setting of timeout and retry
-  * Change to use call_options
-  * Remove call_options from upsert, insert, update in client.rb
+* Support custom setting of timeout and retry
 
 ### 2.0.0 / 2020-07-23
 
