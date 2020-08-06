@@ -1,5 +1,15 @@
 # Release History
 
+### 0.3.0 / 2020-08-06
+
+#### Features
+
+* Support for timepoints, 64 kbps MP3, and MULAW
+
+#### Bug Fixes
+
+* Fix retry logic by checking the correct numeric error codes
+
 ### 0.2.3 / 2020-06-18
 
 #### Documentation
