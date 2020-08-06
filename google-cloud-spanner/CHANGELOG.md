@@ -1,5 +1,11 @@
 # Release History
 
+### 2.1.0 / 2020-08-05
+
+#### Features
+
+* Support custom setting of timeout and retry
+
 ### 2.0.0 / 2020-07-23
 
 This is a major update that removes the "low-level" client interface code, and
