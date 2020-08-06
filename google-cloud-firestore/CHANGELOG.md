@@ -1,5 +1,19 @@
 # Release History
 
+### 2.0.0 / 2020-08-06
+
+#### ⚠ BREAKING CHANGES
+
+* **firestore:** Use new generated client classes
+
+#### Features
+
+* Use new generated client classes
+
+#### Bug Fixes
+
+* Change client config metadata hash keys to symbols
+
 ### 1.4.4 / 2020-05-28
 
 #### Documentation
