@@ -1,5 +1,28 @@
 # Release History
 
+### 2.0.0 / 2020-08-06
+
+This is a major update that removes the "low-level" client interface code, and
+instead adds the new `google-cloud-firestore-v1` gem as a dependency.
+The new dependency is a rewritten low-level client, produced by a next-
+generation client code generator, with improved performance and stability.
+
+This change should have no effect on the high-level interface that most users
+will use. The one exception is that the (mostly undocumented) `client_config`
+argument, for adjusting low-level parameters such as RPC retry settings on
+client objects, has been removed. If you need to adjust these parameters, use
+the configuration interface in `google-cloud-firestore-v1`.
+
+Substantial changes have been made in the low-level interfaces, however. If you
+are using the low-level classes under the `Google::Cloud::Firestore::V1` module,
+please review the docs for the new `google-cloud-firestore-v1` gem. In
+particular:
+
+* Some classes have been renamed, notably the client class itself.
+* The client constructor takes a configuration block instead of configuration
+  keyword arguments.
+* All RPC method arguments are now keyword arguments.
+
 ### 1.4.4 / 2020-05-28
 
 #### Documentation
