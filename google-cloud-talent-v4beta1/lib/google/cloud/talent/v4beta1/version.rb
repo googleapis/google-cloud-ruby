@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Talent
       module V4beta1
-        VERSION = "0.2.3"
+        VERSION = "0.2.4"
       end
     end
   end
