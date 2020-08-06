@@ -37,3 +37,10 @@ library = gapic.ruby_library(
 )
 
 s.copy(library, merge=ruby.global_merge)
+
+# Workaround for https://github.com/grpc/grpc/issues/23746
+s.replace(
+    "lib/grafeas/v1/grafeas_services_pb.rb",
+    "rpc :(\w+), (Grafeas::[\w:]+), (G[a-z]+::[\w:]+)",
+    "rpc :\\1, ::\\2, ::\\3"
+)
