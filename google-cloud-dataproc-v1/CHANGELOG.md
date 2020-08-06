@@ -1,5 +1,19 @@
 # Release History
 
+### 0.3.0 / 2020-08-06
+
+#### Features
+
+* Support cluster endpoint configs and instance group preemptibility
+
+#### Bug Fixes
+
+* Fix retry logic by checking the correct numeric error codes
+
+#### Documentation
+
+* Fix broken links in the AutoscalingPolicies documentation.
+
 ### 0.2.3 / 2020-06-18
 
 #### Documentation
