@@ -53,7 +53,7 @@ module Google
               config.endpoint = host if host
               config.lib_name = "gccl"
               config.lib_version = Google::Cloud::PubSub::VERSION
-              config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
+              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
             end
           end
         end
@@ -68,7 +68,7 @@ module Google
               config.endpoint = host if host
               config.lib_name = "gccl"
               config.lib_version = Google::Cloud::PubSub::VERSION
-              config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
+              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
             end
           end
         end
