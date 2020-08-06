@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.2 / 2020-08-06
+
+#### Bug Fixes
+
+* Fix retry logic by checking the correct numeric error codes
+
 ### 0.2.1 / 2020-06-18
 
 #### Bug Fixes
