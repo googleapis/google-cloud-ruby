@@ -42,10 +42,3 @@ library = gapic.ruby_library(
 )
 
 s.copy(library, merge=ruby.global_merge)
-
-# Workaround for https://github.com/grpc/grpc/issues/23490
-s.replace(
-    "lib/**/*_pb.rb",
-    'Google::Cloud::OsLogin::Common::Google::Cloud::Oslogin::Common::',
-    'Google::Cloud::OsLogin::Common::'
-)
