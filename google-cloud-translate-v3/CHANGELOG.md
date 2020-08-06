@@ -1,5 +1,15 @@
 # Release History
 
+### 0.1.3 / 2020-08-06
+
+#### Bug Fixes
+
+* Fix retry logic by checking the correct numeric error codes
+
+#### Documentation
+
+* Fix some field documentation formatting.
+
 ### 0.1.2 / 2020-06-18
 
 #### Documentation
