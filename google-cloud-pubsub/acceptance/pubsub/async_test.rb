@@ -14,7 +14,7 @@
 
 require "pubsub_helper"
 
-describe Google::Cloud::PubSub, :async, :pubsub do  
+describe Google::Cloud::PubSub, :async, :pubsub do
   def retrieve_topic topic_name
     pubsub.get_topic(topic_name) || pubsub.create_topic(topic_name)
   end
