@@ -1296,7 +1296,7 @@ module Grafeas
 
           config_attr :endpoint,      nil, ::String
           config_attr :credentials,   nil do |value|
-            allowed = [::String, ::Hash, ::Proc, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+            allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
             allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
             allowed.any? { |klass| klass === value }
           end
