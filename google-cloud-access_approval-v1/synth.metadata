@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "4ab08357a7f3fafc8d8ec5c79b709b59e21693c5"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "89560ed803d9dec006c77ed1206441b9c51f6909"
       }
     },
     {
