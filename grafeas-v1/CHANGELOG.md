@@ -1,5 +1,11 @@
 # Release History
 
+### 0.1.2 / 2020-08-10
+
+#### Bug Fixes
+
+* Allow special symbolic credential values
+
 ### 0.1.1 / 2020-08-06
 
 #### Bug Fixes
