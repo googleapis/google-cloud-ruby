@@ -21,7 +21,7 @@ module Google
   module Cloud
     module OsLogin
       module V1beta
-        VERSION = "0.2.4"
+        VERSION = "0.2.5"
       end
     end
   end
