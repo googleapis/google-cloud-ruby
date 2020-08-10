@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.5 / 2020-08-10
+
+#### Bug Fixes
+
+* Allow special symbolic credentials in client configs
+
 ### 0.6.4 / 2020-08-06
 
 #### Bug Fixes
