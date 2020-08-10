@@ -70,6 +70,7 @@ gem "google-cloud-error_reporting-v1beta1", path: "google-cloud-error_reporting-
 gem "google-cloud-firestore", path: "google-cloud-firestore"
 gem "google-cloud-firestore-admin-v1", path: "google-cloud-firestore-admin-v1"
 gem "google-cloud-firestore-v1", path: "google-cloud-firestore-v1"
+gem "google-cloud-gaming", path: "google-cloud-gaming"
 gem "google-cloud-gaming-v1", path: "google-cloud-gaming-v1"
 gem "google-cloud-iot", path: "google-cloud-iot"
 gem "google-cloud-iot-v1", path: "google-cloud-iot-v1"
