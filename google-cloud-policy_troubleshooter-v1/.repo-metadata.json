@@ -1,0 +1,11 @@
+{
+    "api_id": "policytroubleshooter.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-policy_troubleshooter-v1/latest",
+    "distribution_name": "google-cloud-policy_troubleshooter-v1",
+    "language": "ruby",
+    "name": "policytroubleshooter",
+    "name_pretty": "IAM Policy Troubleshooter V1 API",
+    "product_documentation": "https://cloud.google.com/iam/docs/troubleshooting-access",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
