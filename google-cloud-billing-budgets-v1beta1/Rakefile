@@ -69,29 +69,29 @@ desc "Run the google-cloud-billing-budgets-v1beta1 acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
   project ||=
-    ENV["BUDGETS_TEST_PROJECT"] ||
+    ENV["BILLING_BUDGETS_TEST_PROJECT"] ||
     ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
   keyfile ||=
-    ENV["BUDGETS_TEST_KEYFILE"] ||
+    ENV["BILLING_BUDGETS_TEST_KEYFILE"] ||
     ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
     keyfile ||=
-      ENV["BUDGETS_TEST_KEYFILE_JSON"] ||
+      ENV["BILLING_BUDGETS_TEST_KEYFILE_JSON"] ||
       ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or BUDGETS_TEST_PROJECT=test123 BUDGETS_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or BILLING_BUDGETS_TEST_PROJECT=test123 BILLING_BUDGETS_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/billing/budgets/v1beta1/budget_service/credentials"
   ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
-  ENV["BUDGETS_PROJECT"] = project
-  ENV["BUDGETS_TEST_PROJECT"] = project
-  ENV["BUDGETS_KEYFILE_JSON"] = keyfile
+  ENV["BILLING_BUDGETS_PROJECT"] = project
+  ENV["BILLING_BUDGETS_TEST_PROJECT"] = project
+  ENV["BILLING_BUDGETS_KEYFILE_JSON"] = keyfile
 
   Rake::Task["acceptance:run"].invoke
 end

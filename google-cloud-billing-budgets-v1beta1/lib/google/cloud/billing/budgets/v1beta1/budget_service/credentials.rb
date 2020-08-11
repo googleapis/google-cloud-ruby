@@ -30,13 +30,13 @@ module Google
                 "https://www.googleapis.com/auth/cloud-platform"
               ]
               self.env_vars = [
-                "BUDGETS_CREDENTIALS",
-                "BUDGETS_KEYFILE",
+                "BILLING_BUDGETS_CREDENTIALS",
+                "BILLING_BUDGETS_KEYFILE",
                 "GOOGLE_CLOUD_CREDENTIALS",
                 "GOOGLE_CLOUD_KEYFILE",
                 "GCLOUD_KEYFILE",
-                "BUDGETS_CREDENTIALS_JSON",
-                "BUDGETS_KEYFILE_JSON",
+                "BILLING_BUDGETS_CREDENTIALS_JSON",
+                "BILLING_BUDGETS_KEYFILE_JSON",
                 "GOOGLE_CLOUD_CREDENTIALS_JSON",
                 "GOOGLE_CLOUD_KEYFILE_JSON",
                 "GCLOUD_KEYFILE_JSON"
