@@ -41,9 +41,9 @@ describe Google::Cloud::Bigquery, :bigquery do
   end
 
   it "can create, list, read, update, and delete a model" do
-    job = dataset.query_job model_sql
-    job.wait_until_done!
-    _(job).wont_be :failed?
+    query_job = dataset.query_job model_sql
+    query_job.wait_until_done!
+    _(query_job).wont_be :failed?
 
     # can find the model in the list of models
     _(dataset.models.all.map(&:model_id)).must_include model_id
@@ -63,5 +63,77 @@ describe Google::Cloud::Bigquery, :bigquery do
     _(model.delete).must_equal true
 
     _(dataset.model(model_id)).must_be_nil
+  end
+
+  it "extracts itself to a GCS url with extract" do
+    model = nil
+    begin
+      query_job = dataset.query_job model_sql
+      query_job.wait_until_done!
+      _(query_job).wont_be :failed?
+
+      model = dataset.model model_id
+      _(model).must_be_kind_of Google::Cloud::Bigquery::Model
+
+      Tempfile.open "temp_extract_model" do |tmp|
+        extract_url = "gs://#{bucket.name}/#{model_id}"
+
+        # sut
+        result = model.extract extract_url
+        _(result).must_equal true
+
+        extract_files = bucket.files prefix: model_id
+        _(extract_files).wont_be :nil?
+        _(extract_files).wont_be :empty?
+        extract_file = extract_files.find { |f| f.name == "#{model_id}/saved_model.pb" }
+        _(extract_file).wont_be :nil?
+        downloaded_file = extract_file.download tmp.path
+        _(downloaded_file.size).must_be :>, 0
+      end
+    ensure
+      # cleanup
+      model.delete if model
+    end
+  end
+
+  it "extracts itself to a GCS url with extract_job" do
+    model = nil
+    begin
+      query_job = dataset.query_job model_sql
+      query_job.wait_until_done!
+      _(query_job).wont_be :failed?
+
+      model = dataset.model model_id
+      _(model).must_be_kind_of Google::Cloud::Bigquery::Model
+
+      Tempfile.open "temp_extract_model" do |tmp|
+        extract_url = "gs://#{bucket.name}/#{model_id}"
+
+        # sut
+        extract_job = model.extract_job extract_url
+
+        extract_job.wait_until_done!
+        _(extract_job).wont_be :failed?
+        _(extract_job.ml_tf_saved_model?).must_equal true
+        _(extract_job.ml_xgboost_booster?).must_equal false
+        _(extract_job.model?).must_equal true
+        _(extract_job.table?).must_equal false
+
+        source = extract_job.source
+        _(source).must_be_kind_of Google::Cloud::Bigquery::Model
+        _(source.model_id).must_equal model_id
+
+        extract_files = bucket.files prefix: model_id
+        _(extract_files).wont_be :nil?
+        _(extract_files).wont_be :empty?
+        extract_file = extract_files.find { |f| f.name == "#{model_id}/saved_model.pb" }
+        _(extract_file).wont_be :nil?
+        downloaded_file = extract_file.download tmp.path
+        _(downloaded_file.size).must_be :>, 0
+      end
+    ensure
+      # cleanup
+      model.delete if model
+    end
   end
 end

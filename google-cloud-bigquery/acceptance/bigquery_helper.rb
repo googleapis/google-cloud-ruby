@@ -125,10 +125,6 @@ module Acceptance
       "kitten-test-data-#{SecureRandom.hex}.json"
     end
 
-    def random_file_destination_name_model
-      "my-test-extract-model-#{SecureRandom.hex}"
-    end
-
     def assert_data data
       assert_equal Google::Cloud::Bigquery::Data, data.class
       refute_nil data.kind

@@ -246,27 +246,45 @@ describe Google::Cloud::Bigquery, :bigquery do
       _(downloaded_file.size).must_be :>, 0
     end
   end
-focus
-  it "extracts a model to a GCS url with extract" do
-    job = dataset.query_job model_sql
-    job.wait_until_done!
-    _(job).wont_be :failed?
 
-    # can get the model
-    model = dataset.model model_id
-    _(model).must_be_kind_of Google::Cloud::Bigquery::Model
+  it "extracts a model to a GCS url with extract_job" do
+    model = nil
+    begin
+      query_job = dataset.query_job model_sql
+      query_job.wait_until_done!
+      _(query_job).wont_be :failed?
 
-    Tempfile.open "temp_extract_model" do |tmp|
-      dest_file_name = random_file_destination_name_model
-      extract_url = "gs://#{bucket.name}/#{dest_file_name}"
-      result = bigquery.extract model, extract_url do |j|
-        j.location = "US"
+      model = dataset.model model_id
+      _(model).must_be_kind_of Google::Cloud::Bigquery::Model
+
+      Tempfile.open "temp_extract_model" do |tmp|
+        extract_url = "gs://#{bucket.name}/#{model_id}"
+
+        # sut
+        extract_job = bigquery.extract_job model, extract_url
+
+        extract_job.wait_until_done!
+        _(extract_job).wont_be :failed?
+        _(extract_job.ml_tf_saved_model?).must_equal true
+        _(extract_job.ml_xgboost_booster?).must_equal false
+        _(extract_job.model?).must_equal true
+        _(extract_job.table?).must_equal false
+
+        source = extract_job.source
+        _(source).must_be_kind_of Google::Cloud::Bigquery::Model
+        _(source.model_id).must_equal model_id
+
+        extract_files = bucket.files prefix: model_id
+        _(extract_files).wont_be :nil?
+        _(extract_files).wont_be :empty?
+        extract_file = extract_files.find { |f| f.name == "#{model_id}/saved_model.pb" }
+        _(extract_file).wont_be :nil?
+        downloaded_file = extract_file.download tmp.path
+        _(downloaded_file.size).must_be :>, 0
       end
-      _(result).must_equal true
-
-      extract_file = bucket.file dest_file_name
-      downloaded_file = extract_file.download tmp.path
-      _(downloaded_file.size).must_be :>, 0
+    ensure
+      # cleanup
+      model.delete if model
     end
   end
 

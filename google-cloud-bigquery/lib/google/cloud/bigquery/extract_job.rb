@@ -20,8 +20,8 @@ module Google
       # # ExtractJob
       #
       # A {Job} subclass representing an export operation that may be performed
-      # on a {Table}. A ExtractJob instance is created when you call
-      # {Table#extract_job}.
+      # on a {Table} or {Model}. A ExtractJob instance is returned when you call
+      # {Project#extract_job}, {Table#extract_job} or {Model#extract_job}.
       #
       # @see https://cloud.google.com/bigquery/docs/exporting-data
       #   Exporting Data From BigQuery
@@ -49,15 +49,36 @@ module Google
         end
 
         ##
-        # The table from which the data is exported. This is the table upon
-        # which {Table#extract_job} was called.
+        # The table or model which is exported.
         #
-        # @return [Table] A table instance.
+        # @return [Table, Model, nil] A table or model instance, or `nil`.
         #
         def source
-          table = @gapi.configuration.extract.source_table
-          return nil unless table
-          retrieve_table table.project_id, table.dataset_id, table.table_id
+          if (table = @gapi.configuration.extract.source_table)
+            retrieve_table table.project_id, table.dataset_id, table.table_id
+          elsif (model = @gapi.configuration.extract.source_model)
+            retrieve_model model.project_id, model.dataset_id, model.model_id
+          end
+        end
+
+        ##
+        # Whether the source of the export job is a table. See {#source}.
+        #
+        # @return [Boolean] `true` when the source is a table, `false`
+        #   otherwise.
+        #
+        def table?
+          !@gapi.configuration.extract.source_table.nil?
+        end
+
+        ##
+        # Whether the source of the export job is a model. See {#source}.
+        #
+        # @return [Boolean] `true` when the source is a model, `false`
+        #   otherwise.
+        #
+        def model?
+          !@gapi.configuration.extract.source_model.nil?
         end
 
         ##
@@ -72,7 +93,7 @@ module Google
         end
 
         ##
-        # Checks if the destination format for the data is [newline-delimited
+        # Checks if the destination format for the table data is [newline-delimited
         # JSON](http://jsonlines.org/). The default is `false`.
         #
         # @return [Boolean] `true` when `NEWLINE_DELIMITED_JSON`, `false`
@@ -84,20 +105,20 @@ module Google
         end
 
         ##
-        # Checks if the destination format for the data is CSV. Tables with
+        # Checks if the destination format for the table data is CSV. Tables with
         # nested or repeated fields cannot be exported as CSV. The default is
-        # `true`.
+        # `true` for tables.
         #
         # @return [Boolean] `true` when `CSV`, `false` otherwise.
         #
         def csv?
           val = @gapi.configuration.extract.destination_format
-          return true if val.nil?
+          return true if table? && val.nil?
           val == "CSV"
         end
 
         ##
-        # Checks if the destination format for the data is
+        # Checks if the destination format for the table data is
         # [Avro](http://avro.apache.org/). The default is `false`.
         #
         # @return [Boolean] `true` when `AVRO`, `false` otherwise.
@@ -105,6 +126,29 @@ module Google
         def avro?
           val = @gapi.configuration.extract.destination_format
           val == "AVRO"
+        end
+
+        ##
+        # Checks if the destination format for the model is TensorFlow SavedModel.
+        # The default is `true` for models.
+        #
+        # @return [Boolean] `true` when `ML_TF_SAVED_MODEL`, `false` otherwise.
+        #
+        def ml_tf_saved_model?
+          val = @gapi.configuration.extract.destination_format
+          return true if model? && val.nil?
+          val == "ML_TF_SAVED_MODEL"
+        end
+
+        ##
+        # Checks if the destination format for the model is XGBoost. The default
+        # is `false`.
+        #
+        # @return [Boolean] `true` when `ML_XGBOOST_BOOSTER`, `false` otherwise.
+        #
+        def ml_xgboost_booster?
+          val = @gapi.configuration.extract.destination_format
+          val == "ML_XGBOOST_BOOSTER"
         end
 
         ##
@@ -182,19 +226,24 @@ module Google
           #
           # @return [Google::Cloud::Bigquery::ExtractJob::Updater] A job
           #   configuration object for setting query options.
-          def self.from_options service, table, storage_files, options
+          def self.from_options service, source, storage_files, options
             job_ref = service.job_ref_from options[:job_id], options[:prefix]
             storage_urls = Array(storage_files).map do |url|
               url.respond_to?(:to_gs_url) ? url.to_gs_url : url
             end
             options[:format] ||= Convert.derive_source_format storage_urls.first
+            extract_config = Google::Apis::BigqueryV2::JobConfigurationExtract.new(
+              destination_uris: Array(storage_urls)
+            )
+            if source.is_a? Google::Apis::BigqueryV2::TableReference
+              extract_config.source_table = source
+            elsif source.is_a? Google::Apis::BigqueryV2::ModelReference
+              extract_config.source_model = source
+            end
             job = Google::Apis::BigqueryV2::Job.new(
               job_reference: job_ref,
               configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
-                extract: Google::Apis::BigqueryV2::JobConfigurationExtract.new(
-                  destination_uris: Array(storage_urls),
-                  source_table:     table
-                ),
+                extract: extract_config,
                 dry_run: options[:dryrun]
               )
             )
@@ -361,6 +410,16 @@ module Google
           def to_gapi
             @gapi
           end
+        end
+
+        protected
+
+        def retrieve_model project_id, dataset_id, model_id
+          ensure_service!
+          gapi = service.get_project_model project_id, dataset_id, model_id
+          Model.from_gapi_json gapi, service
+        rescue Google::Cloud::NotFoundError
+          nil
         end
       end
     end

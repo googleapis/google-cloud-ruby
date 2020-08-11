@@ -318,7 +318,9 @@ module Google
             "parquet"                => "PARQUET",
             "datastore"              => "DATASTORE_BACKUP",
             "backup"                 => "DATASTORE_BACKUP",
-            "datastore_backup"       => "DATASTORE_BACKUP"
+            "datastore_backup"       => "DATASTORE_BACKUP",
+            "ml_tf_saved_model"      => "ML_TF_SAVED_MODEL",
+            "ml_xgboost_booster"     => "ML_XGBOOST_BOOSTER"
           }[format.to_s.downcase]
           return val unless val.nil?
           format
