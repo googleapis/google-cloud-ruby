@@ -1,0 +1,11 @@
+{
+    "api_id": "billingbudgets.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-billing-budgets-v1beta1/latest",
+    "distribution_name": "google-cloud-billing-budgets-v1beta1",
+    "language": "ruby",
+    "name": "billingbudgets",
+    "name_pretty": "Billing Budgets V1beta1 API",
+    "product_documentation": "https://cloud.google.com/billing/docs/how-to/budget-api-overview",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
