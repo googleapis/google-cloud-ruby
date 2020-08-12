@@ -83,7 +83,7 @@ module Google
 
         ##
         # Checks if the export operation compresses the data using gzip. The
-        # default is `false`.
+        # default is `false`. Not applicable when extracting models.
         #
         # @return [Boolean] `true` when `GZIP`, `false` otherwise.
         #
@@ -94,7 +94,8 @@ module Google
 
         ##
         # Checks if the destination format for the table data is [newline-delimited
-        # JSON](http://jsonlines.org/). The default is `false`.
+        # JSON](http://jsonlines.org/). The default is `false`. Not applicable when
+        # extracting models.
         #
         # @return [Boolean] `true` when `NEWLINE_DELIMITED_JSON`, `false`
         #   otherwise.
@@ -107,7 +108,7 @@ module Google
         ##
         # Checks if the destination format for the table data is CSV. Tables with
         # nested or repeated fields cannot be exported as CSV. The default is
-        # `true` for tables.
+        # `true` for tables.  Not applicable when extracting models.
         #
         # @return [Boolean] `true` when `CSV`, `false` otherwise.
         #
@@ -119,7 +120,8 @@ module Google
 
         ##
         # Checks if the destination format for the table data is
-        # [Avro](http://avro.apache.org/). The default is `false`.
+        # [Avro](http://avro.apache.org/). The default is `false`. Not applicable
+        # when extracting models.
         #
         # @return [Boolean] `true` when `AVRO`, `false` otherwise.
         #
@@ -130,7 +132,7 @@ module Google
 
         ##
         # Checks if the destination format for the model is TensorFlow SavedModel.
-        # The default is `true` for models.
+        # The default is `true` for models. Not applicable when extracting tables.
         #
         # @return [Boolean] `true` when `ML_TF_SAVED_MODEL`, `false` otherwise.
         #
@@ -142,7 +144,7 @@ module Google
 
         ##
         # Checks if the destination format for the model is XGBoost. The default
-        # is `false`.
+        # is `false`. Not applicable when extracting tables.
         #
         # @return [Boolean] `true` when `ML_XGBOOST_BOOSTER`, `false` otherwise.
         #
@@ -153,26 +155,27 @@ module Google
 
         ##
         # The character or symbol the operation uses to delimit fields in the
-        # exported data. The default is a comma (,).
+        # exported data. The default is a comma (,) for tables. Not applicable
+        # when extracting models.
         #
         # @return [String] A string containing the character, such as `","`.
         #
         def delimiter
           val = @gapi.configuration.extract.field_delimiter
-          val = "," if val.nil?
+          val = "," if table? && val.nil?
           val
         end
 
         ##
         # Checks if the exported data contains a header row. The default is
-        # `true`.
+        # `true` for tables. Not applicable when extracting models.
         #
         # @return [Boolean] `true` when the print header configuration is
         #   present or `nil`, `false` otherwise.
         #
         def print_header?
           val = @gapi.configuration.extract.print_header
-          val = true if val.nil?
+          val = true if table? && val.nil?
           val
         end
 
@@ -203,7 +206,7 @@ module Google
         # whether to enable extracting applicable column types (such as
         # `TIMESTAMP`) to their corresponding AVRO logical types
         # (`timestamp-micros`), instead of only using their raw types
-        # (`avro-long`).
+        # (`avro-long`). Not applicable when extracting models.
         #
         # @return [Boolean] `true` when applicable column types will use their
         #   corresponding AVRO logical types, `false` otherwise.
@@ -302,7 +305,7 @@ module Google
           end
 
           ##
-          # Sets the compression type.
+          # Sets the compression type. Not applicable when extracting models.
           #
           # @param [String] value The compression type to use for exported
           #   files. Possible values include `GZIP` and `NONE`. The default
@@ -314,7 +317,7 @@ module Google
           end
 
           ##
-          # Sets the field delimiter.
+          # Sets the field delimiter. Not applicable when extracting models.
           #
           # @param [String] value Delimiter to use between fields in the
           #   exported data. Default is <code>,</code>.
@@ -325,13 +328,20 @@ module Google
           end
 
           ##
-          # Sets the destination file format. The default value is `csv`.
+          # Sets the destination file format. The default value for
+          # tables is `csv`. Tables with nested or repeated fields cannot be
+          # exported as CSV. The default value for models is `ml_tf_saved_model`.
           #
-          # The following values are supported:
+          # Supported values for tables:
           #
           # * `csv` - CSV
           # * `json` - [Newline-delimited JSON](http://jsonlines.org/)
           # * `avro` - [Avro](http://avro.apache.org/)
+          #
+          # Supported values for models:
+          #
+          # * `ml_tf_saved_model` - TensorFlow SavedModel
+          # * `ml_xgboost_booster` - XGBoost Booster
           #
           # @param [String] new_format The new source format.
           #
@@ -342,7 +352,8 @@ module Google
           end
 
           ##
-          # Print a header row in the exported file.
+          # Print a header row in the exported file. Not applicable when
+          # extracting models.
           #
           # @param [Boolean] value Whether to print out a header row in the
           #   results. Default is `true`.

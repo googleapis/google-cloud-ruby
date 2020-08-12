@@ -1474,8 +1474,8 @@ module Google
         #   string ending in an object name prefix, since multiple objects will
         #   be exported.
         # @param [String] format The exported file format. The default value for
-        #    tables is `csv`. Tables with nested or repeated fields cannot be
-        #    exported as CSV. The default value for models is `ml_tf_saved_model`.
+        #   tables is `csv`. Tables with nested or repeated fields cannot be
+        #   exported as CSV. The default value for models is `ml_tf_saved_model`.
         #
         #   Supported values for tables:
         #
@@ -1593,8 +1593,8 @@ module Google
         #   string ending in an object name prefix, since multiple objects will
         #   be exported.
         # @param [String] format The exported file format. The default value for
-        #    tables is `csv`. Tables with nested or repeated fields cannot be
-        #    exported as CSV. The default value for models is `ml_tf_saved_model`.
+        #   tables is `csv`. Tables with nested or repeated fields cannot be
+        #   exported as CSV. The default value for models is `ml_tf_saved_model`.
         #
         #   Supported values for tables:
         #

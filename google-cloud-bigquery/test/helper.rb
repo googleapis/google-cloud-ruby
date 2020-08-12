@@ -392,6 +392,16 @@ class MockBigquery < Minitest::Spec
     }
   end
 
+  def source_model_json
+    hash = random_model_full_hash "getting_replaced_dataset_id", "source_model_id"
+    hash["tableReference"] = {
+      "projectId" => "source_project_id",
+      "datasetId" => "source_dataset_id",
+      "modelId"   => "source_model_id"
+    }
+    hash.to_json
+  end
+
   def random_model_full_hash dataset, id, name: nil, description: nil, kms_key: nil
     hash = random_model_partial_hash dataset, id
 
