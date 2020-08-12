@@ -37,8 +37,8 @@ module Google
         # A {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} represents a logical key that can be used for cryptographic
         # operations.
         #
-        # A {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} is made up of one or more {::Google::Cloud::Kms::V1::CryptoKeyVersion versions}, which
-        # represent the actual key material used in cryptographic operations.
+        # A {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} is made up of zero or more {::Google::Cloud::Kms::V1::CryptoKeyVersion versions},
+        # which represent the actual key material used in cryptographic operations.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name for this {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} in the format
@@ -410,6 +410,27 @@ module Google
         #   @return [::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm]
         #     The {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm Algorithm} associated
         #     with this key.
+        # @!attribute [rw] pem_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Integrity verification field. A CRC32C checksum of the returned
+        #     {::Google::Cloud::Kms::V1::PublicKey#pem PublicKey.pem}. An integrity check of {::Google::Cloud::Kms::V1::PublicKey#pem PublicKey.pem} can be performed
+        #     by computing the CRC32C checksum of {::Google::Cloud::Kms::V1::PublicKey#pem PublicKey.pem} and
+        #     comparing your results to this field. Discard the response in case of
+        #     non-matching checksum values, and perform a limited number of retries. A
+        #     persistent mismatch may indicate an issue in your computation of the CRC32C
+        #     checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        #
+        #     NOTE: This field is in Beta.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key.
+        #     Provided here for verification.
+        #
+        #     NOTE: This field is in Beta.
         class PublicKey
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1069,6 +1069,8 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     name = "hello world"
     plaintext = "hello world"
     additional_authenticated_data = "hello world"
+    plaintext_crc32c = {}
+    additional_authenticated_data_crc32c = {}
 
     encrypt_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :encrypt, name
@@ -1076,6 +1078,8 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       assert_equal "hello world", request.name
       assert_equal "hello world", request.plaintext
       assert_equal "hello world", request.additional_authenticated_data
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request.plaintext_crc32c
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request.additional_authenticated_data_crc32c
       refute_nil options
     end
 
@@ -1086,31 +1090,31 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data }) do |response, operation|
+      client.encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.encrypt name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data do |response, operation|
+      client.encrypt name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.encrypt ::Google::Cloud::Kms::V1::EncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data) do |response, operation|
+      client.encrypt ::Google::Cloud::Kms::V1::EncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data }, grpc_options) do |response, operation|
+      client.encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.encrypt ::Google::Cloud::Kms::V1::EncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data), grpc_options do |response, operation|
+      client.encrypt ::Google::Cloud::Kms::V1::EncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1131,6 +1135,8 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     name = "hello world"
     ciphertext = "hello world"
     additional_authenticated_data = "hello world"
+    ciphertext_crc32c = {}
+    additional_authenticated_data_crc32c = {}
 
     decrypt_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :decrypt, name
@@ -1138,6 +1144,8 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       assert_equal "hello world", request.name
       assert_equal "hello world", request.ciphertext
       assert_equal "hello world", request.additional_authenticated_data
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request.ciphertext_crc32c
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request.additional_authenticated_data_crc32c
       refute_nil options
     end
 
@@ -1148,31 +1156,31 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data }) do |response, operation|
+      client.decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.decrypt name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data do |response, operation|
+      client.decrypt name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.decrypt ::Google::Cloud::Kms::V1::DecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data) do |response, operation|
+      client.decrypt ::Google::Cloud::Kms::V1::DecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data }, grpc_options) do |response, operation|
+      client.decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.decrypt ::Google::Cloud::Kms::V1::DecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data), grpc_options do |response, operation|
+      client.decrypt ::Google::Cloud::Kms::V1::DecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1192,12 +1200,14 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     # Create request parameters for a unary method.
     name = "hello world"
     digest = {}
+    digest_crc32c = {}
 
     asymmetric_sign_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :asymmetric_sign, name
       assert_kind_of ::Google::Cloud::Kms::V1::AsymmetricSignRequest, request
       assert_equal "hello world", request.name
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::Digest), request.digest
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request.digest_crc32c
       refute_nil options
     end
 
@@ -1208,31 +1218,31 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.asymmetric_sign({ name: name, digest: digest }) do |response, operation|
+      client.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.asymmetric_sign name: name, digest: digest do |response, operation|
+      client.asymmetric_sign name: name, digest: digest, digest_crc32c: digest_crc32c do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.asymmetric_sign ::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest) do |response, operation|
+      client.asymmetric_sign ::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.asymmetric_sign({ name: name, digest: digest }, grpc_options) do |response, operation|
+      client.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.asymmetric_sign ::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest), grpc_options do |response, operation|
+      client.asymmetric_sign ::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1252,12 +1262,14 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     # Create request parameters for a unary method.
     name = "hello world"
     ciphertext = "hello world"
+    ciphertext_crc32c = {}
 
     asymmetric_decrypt_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :asymmetric_decrypt, name
       assert_kind_of ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest, request
       assert_equal "hello world", request.name
       assert_equal "hello world", request.ciphertext
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request.ciphertext_crc32c
       refute_nil options
     end
 
@@ -1268,31 +1280,31 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.asymmetric_decrypt({ name: name, ciphertext: ciphertext }) do |response, operation|
+      client.asymmetric_decrypt({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.asymmetric_decrypt name: name, ciphertext: ciphertext do |response, operation|
+      client.asymmetric_decrypt name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.asymmetric_decrypt ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest.new(name: name, ciphertext: ciphertext) do |response, operation|
+      client.asymmetric_decrypt ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.asymmetric_decrypt({ name: name, ciphertext: ciphertext }, grpc_options) do |response, operation|
+      client.asymmetric_decrypt({ name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.asymmetric_decrypt ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest.new(name: name, ciphertext: ciphertext), grpc_options do |response, operation|
+      client.asymmetric_decrypt ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

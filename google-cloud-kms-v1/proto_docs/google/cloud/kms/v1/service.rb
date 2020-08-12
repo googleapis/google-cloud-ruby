@@ -437,6 +437,41 @@ module Google
         #     64KiB. For {::Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of the
         #     plaintext and additional_authenticated_data fields must be no larger than
         #     8KiB.
+        # @!attribute [rw] plaintext_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::EncryptRequest#plaintext EncryptRequest.plaintext}. If
+        #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+        #     received {::Google::Cloud::Kms::V1::EncryptRequest#plaintext EncryptRequest.plaintext} using this checksum.
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+        #     fails. If you receive a checksum error, your client should verify that
+        #     CRC32C({::Google::Cloud::Kms::V1::EncryptRequest#plaintext EncryptRequest.plaintext}) is equal to
+        #     {::Google::Cloud::Kms::V1::EncryptRequest#plaintext_crc32c EncryptRequest.plaintext_crc32c}, and if so, perform a limited number of
+        #     retries. A persistent mismatch may indicate an issue in your computation of
+        #     the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        #
+        #     NOTE: This field is in Beta.
+        # @!attribute [rw] additional_authenticated_data_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Optional. An optional CRC32C checksum of the
+        #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data}. If specified,
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the received
+        #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data} using this checksum.
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+        #     fails. If you receive a checksum error, your client should verify that
+        #     CRC32C({::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data}) is equal to
+        #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data_crc32c EncryptRequest.additional_authenticated_data_crc32c}, and if so, perform
+        #     a limited number of retries. A persistent mismatch may indicate an issue in
+        #     your computation of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        #
+        #     NOTE: This field is in Beta.
         class EncryptRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -455,6 +490,41 @@ module Google
         #   @return [::String]
         #     Optional. Optional data that must match the data originally supplied in
         #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data}.
+        # @!attribute [rw] ciphertext_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::DecryptRequest#ciphertext DecryptRequest.ciphertext}. If
+        #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+        #     received {::Google::Cloud::Kms::V1::DecryptRequest#ciphertext DecryptRequest.ciphertext} using this checksum.
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+        #     fails. If you receive a checksum error, your client should verify that
+        #     CRC32C({::Google::Cloud::Kms::V1::DecryptRequest#ciphertext DecryptRequest.ciphertext}) is equal to
+        #     {::Google::Cloud::Kms::V1::DecryptRequest#ciphertext_crc32c DecryptRequest.ciphertext_crc32c}, and if so, perform a limited number
+        #     of retries. A persistent mismatch may indicate an issue in your computation
+        #     of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        #
+        #     NOTE: This field is in Beta.
+        # @!attribute [rw] additional_authenticated_data_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Optional. An optional CRC32C checksum of the
+        #     {::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest.additional_authenticated_data}. If specified,
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the received
+        #     {::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest.additional_authenticated_data} using this checksum.
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+        #     fails. If you receive a checksum error, your client should verify that
+        #     CRC32C({::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest.additional_authenticated_data}) is equal to
+        #     {::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data_crc32c DecryptRequest.additional_authenticated_data_crc32c}, and if so, perform
+        #     a limited number of retries. A persistent mismatch may indicate an issue in
+        #     your computation of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        #
+        #     NOTE: This field is in Beta.
         class DecryptRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -469,6 +539,23 @@ module Google
         #     Required. The digest of the data to sign. The digest must be produced with
         #     the same digest algorithm as specified by the key version's
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion#algorithm algorithm}.
+        # @!attribute [rw] digest_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest AsymmetricSignRequest.digest}. If
+        #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+        #     received {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest AsymmetricSignRequest.digest} using this checksum.
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+        #     fails. If you receive a checksum error, your client should verify that
+        #     CRC32C({::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest AsymmetricSignRequest.digest}) is equal to
+        #     {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest_crc32c AsymmetricSignRequest.digest_crc32c}, and if so, perform a limited
+        #     number of retries. A persistent mismatch may indicate an issue in your
+        #     computation of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        #
+        #     NOTE: This field is in Beta.
         class AsymmetricSignRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -483,6 +570,23 @@ module Google
         #   @return [::String]
         #     Required. The data encrypted with the named {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s public
         #     key using OAEP.
+        # @!attribute [rw] ciphertext_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext AsymmetricDecryptRequest.ciphertext}.
+        #     If specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+        #     received {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext AsymmetricDecryptRequest.ciphertext} using this checksum.
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+        #     fails. If you receive a checksum error, your client should verify that
+        #     CRC32C({::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext AsymmetricDecryptRequest.ciphertext}) is equal to
+        #     {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext_crc32c AsymmetricDecryptRequest.ciphertext_crc32c}, and if so, perform a
+        #     limited number of retries. A persistent mismatch may indicate an issue in
+        #     your computation of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        #
+        #     NOTE: This field is in Beta.
         class AsymmetricDecryptRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -492,6 +596,23 @@ module Google
         # @!attribute [rw] plaintext
         #   @return [::String]
         #     The decrypted data originally supplied in {::Google::Cloud::Kms::V1::EncryptRequest#plaintext EncryptRequest.plaintext}.
+        # @!attribute [rw] plaintext_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Integrity verification field. A CRC32C checksum of the returned
+        #     {::Google::Cloud::Kms::V1::DecryptResponse#plaintext DecryptResponse.plaintext}. An integrity check of
+        #     {::Google::Cloud::Kms::V1::DecryptResponse#plaintext DecryptResponse.plaintext} can be performed by computing the CRC32C
+        #     checksum of {::Google::Cloud::Kms::V1::DecryptResponse#plaintext DecryptResponse.plaintext} and comparing your results to
+        #     this field. Discard the response in case of non-matching checksum values,
+        #     and perform a limited number of retries. A persistent mismatch may indicate
+        #     an issue in your computation of the CRC32C checksum. Note: receiving this
+        #     response message indicates that {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} is able to
+        #     successfully decrypt the {::Google::Cloud::Kms::V1::DecryptRequest#ciphertext ciphertext}.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        #
+        #     NOTE: This field is in Beta.
         class DecryptResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -505,6 +626,46 @@ module Google
         # @!attribute [rw] ciphertext
         #   @return [::String]
         #     The encrypted data.
+        # @!attribute [rw] ciphertext_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Integrity verification field. A CRC32C checksum of the returned
+        #     {::Google::Cloud::Kms::V1::EncryptResponse#ciphertext EncryptResponse.ciphertext}. An integrity check of
+        #     {::Google::Cloud::Kms::V1::EncryptResponse#ciphertext EncryptResponse.ciphertext} can be performed by computing the CRC32C
+        #     checksum of {::Google::Cloud::Kms::V1::EncryptResponse#ciphertext EncryptResponse.ciphertext} and comparing your results to
+        #     this field. Discard the response in case of non-matching checksum values,
+        #     and perform a limited number of retries. A persistent mismatch may indicate
+        #     an issue in your computation of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        #
+        #     NOTE: This field is in Beta.
+        # @!attribute [rw] verified_plaintext_crc32c
+        #   @return [::Boolean]
+        #     Integrity verification field. A flag indicating whether
+        #     {::Google::Cloud::Kms::V1::EncryptRequest#plaintext_crc32c EncryptRequest.plaintext_crc32c} was received by
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} and used for the integrity verification of the
+        #     {::Google::Cloud::Kms::V1::EncryptRequest#plaintext plaintext}. A false value of this field
+        #     indicates either that {::Google::Cloud::Kms::V1::EncryptRequest#plaintext_crc32c EncryptRequest.plaintext_crc32c} was left unset or
+        #     that it was not delivered to {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If you've set
+        #     {::Google::Cloud::Kms::V1::EncryptRequest#plaintext_crc32c EncryptRequest.plaintext_crc32c} but this field is still false, discard
+        #     the response and perform a limited number of retries.
+        #
+        #     NOTE: This field is in Beta.
+        # @!attribute [rw] verified_additional_authenticated_data_crc32c
+        #   @return [::Boolean]
+        #     Integrity verification field. A flag indicating whether
+        #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data_crc32c EncryptRequest.additional_authenticated_data_crc32c} was received by
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} and used for the integrity verification of the
+        #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data AAD}. A false value of this
+        #     field indicates either that
+        #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data_crc32c EncryptRequest.additional_authenticated_data_crc32c} was left unset or
+        #     that it was not delivered to {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If you've set
+        #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data_crc32c EncryptRequest.additional_authenticated_data_crc32c} but this field is
+        #     still false, discard the response and perform a limited number of retries.
+        #
+        #     NOTE: This field is in Beta.
         class EncryptResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -514,6 +675,39 @@ module Google
         # @!attribute [rw] signature
         #   @return [::String]
         #     The created signature.
+        # @!attribute [rw] signature_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Integrity verification field. A CRC32C checksum of the returned
+        #     {::Google::Cloud::Kms::V1::AsymmetricSignResponse#signature AsymmetricSignResponse.signature}. An integrity check of
+        #     {::Google::Cloud::Kms::V1::AsymmetricSignResponse#signature AsymmetricSignResponse.signature} can be performed by computing the
+        #     CRC32C checksum of {::Google::Cloud::Kms::V1::AsymmetricSignResponse#signature AsymmetricSignResponse.signature} and comparing your
+        #     results to this field. Discard the response in case of non-matching
+        #     checksum values, and perform a limited number of retries. A persistent
+        #     mismatch may indicate an issue in your computation of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        #
+        #     NOTE: This field is in Beta.
+        # @!attribute [rw] verified_digest_crc32c
+        #   @return [::Boolean]
+        #     Integrity verification field. A flag indicating whether
+        #     {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest_crc32c AsymmetricSignRequest.digest_crc32c} was received by
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} and used for the integrity verification of the
+        #     {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest digest}. A false value of this field
+        #     indicates either that {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest_crc32c AsymmetricSignRequest.digest_crc32c} was left
+        #     unset or that it was not delivered to {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If you've
+        #     set {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest_crc32c AsymmetricSignRequest.digest_crc32c} but this field is still false,
+        #     discard the response and perform a limited number of retries.
+        #
+        #     NOTE: This field is in Beta.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used for signing. Check
+        #     this field to verify that the intended resource was used for signing.
+        #
+        #     NOTE: This field is in Beta.
         class AsymmetricSignResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -523,6 +717,33 @@ module Google
         # @!attribute [rw] plaintext
         #   @return [::String]
         #     The decrypted data originally encrypted with the matching public key.
+        # @!attribute [rw] plaintext_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Integrity verification field. A CRC32C checksum of the returned
+        #     {::Google::Cloud::Kms::V1::AsymmetricDecryptResponse#plaintext AsymmetricDecryptResponse.plaintext}. An integrity check of
+        #     {::Google::Cloud::Kms::V1::AsymmetricDecryptResponse#plaintext AsymmetricDecryptResponse.plaintext} can be performed by computing the
+        #     CRC32C checksum of {::Google::Cloud::Kms::V1::AsymmetricDecryptResponse#plaintext AsymmetricDecryptResponse.plaintext} and comparing
+        #     your results to this field. Discard the response in case of non-matching
+        #     checksum values, and perform a limited number of retries. A persistent
+        #     mismatch may indicate an issue in your computation of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        #
+        #     NOTE: This field is in Beta.
+        # @!attribute [rw] verified_ciphertext_crc32c
+        #   @return [::Boolean]
+        #     Integrity verification field. A flag indicating whether
+        #     {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext_crc32c AsymmetricDecryptRequest.ciphertext_crc32c} was received by
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} and used for the integrity verification of the
+        #     {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext ciphertext}. A false value of this
+        #     field indicates either that {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext_crc32c AsymmetricDecryptRequest.ciphertext_crc32c}
+        #     was left unset or that it was not delivered to {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If
+        #     you've set {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext_crc32c AsymmetricDecryptRequest.ciphertext_crc32c} but this field is
+        #     still false, discard the response and perform a limited number of retries.
+        #
+        #     NOTE: This field is in Beta.
         class AsymmetricDecryptResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

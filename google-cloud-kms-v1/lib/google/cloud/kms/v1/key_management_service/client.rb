@@ -1572,7 +1572,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload encrypt(name: nil, plaintext: nil, additional_authenticated_data: nil)
+            # @overload encrypt(name: nil, plaintext: nil, additional_authenticated_data: nil, plaintext_crc32c: nil, additional_authenticated_data_crc32c: nil)
             #   Pass arguments to `encrypt` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1602,6 +1602,39 @@ module Google
             #     64KiB. For {::Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of the
             #     plaintext and additional_authenticated_data fields must be no larger than
             #     8KiB.
+            #   @param plaintext_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::EncryptRequest#plaintext EncryptRequest.plaintext}. If
+            #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+            #     received {::Google::Cloud::Kms::V1::EncryptRequest#plaintext EncryptRequest.plaintext} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::EncryptRequest#plaintext EncryptRequest.plaintext}) is equal to
+            #     {::Google::Cloud::Kms::V1::EncryptRequest#plaintext_crc32c EncryptRequest.plaintext_crc32c}, and if so, perform a limited number of
+            #     retries. A persistent mismatch may indicate an issue in your computation of
+            #     the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #
+            #     NOTE: This field is in Beta.
+            #   @param additional_authenticated_data_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the
+            #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data}. If specified,
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the received
+            #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data}) is equal to
+            #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data_crc32c EncryptRequest.additional_authenticated_data_crc32c}, and if so, perform
+            #     a limited number of retries. A persistent mismatch may indicate an issue in
+            #     your computation of the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #
+            #     NOTE: This field is in Beta.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Kms::V1::EncryptResponse]
@@ -1662,7 +1695,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload decrypt(name: nil, ciphertext: nil, additional_authenticated_data: nil)
+            # @overload decrypt(name: nil, ciphertext: nil, additional_authenticated_data: nil, ciphertext_crc32c: nil, additional_authenticated_data_crc32c: nil)
             #   Pass arguments to `decrypt` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1676,6 +1709,39 @@ module Google
             #   @param additional_authenticated_data [::String]
             #     Optional. Optional data that must match the data originally supplied in
             #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data}.
+            #   @param ciphertext_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::DecryptRequest#ciphertext DecryptRequest.ciphertext}. If
+            #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+            #     received {::Google::Cloud::Kms::V1::DecryptRequest#ciphertext DecryptRequest.ciphertext} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::DecryptRequest#ciphertext DecryptRequest.ciphertext}) is equal to
+            #     {::Google::Cloud::Kms::V1::DecryptRequest#ciphertext_crc32c DecryptRequest.ciphertext_crc32c}, and if so, perform a limited number
+            #     of retries. A persistent mismatch may indicate an issue in your computation
+            #     of the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #
+            #     NOTE: This field is in Beta.
+            #   @param additional_authenticated_data_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the
+            #     {::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest.additional_authenticated_data}. If specified,
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the received
+            #     {::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest.additional_authenticated_data} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest.additional_authenticated_data}) is equal to
+            #     {::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data_crc32c DecryptRequest.additional_authenticated_data_crc32c}, and if so, perform
+            #     a limited number of retries. A persistent mismatch may indicate an issue in
+            #     your computation of the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #
+            #     NOTE: This field is in Beta.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Kms::V1::DecryptResponse]
@@ -1737,7 +1803,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload asymmetric_sign(name: nil, digest: nil)
+            # @overload asymmetric_sign(name: nil, digest: nil, digest_crc32c: nil)
             #   Pass arguments to `asymmetric_sign` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1748,6 +1814,22 @@ module Google
             #     Required. The digest of the data to sign. The digest must be produced with
             #     the same digest algorithm as specified by the key version's
             #     {::Google::Cloud::Kms::V1::CryptoKeyVersion#algorithm algorithm}.
+            #   @param digest_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest AsymmetricSignRequest.digest}. If
+            #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+            #     received {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest AsymmetricSignRequest.digest} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest AsymmetricSignRequest.digest}) is equal to
+            #     {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest_crc32c AsymmetricSignRequest.digest_crc32c}, and if so, perform a limited
+            #     number of retries. A persistent mismatch may indicate an issue in your
+            #     computation of the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #
+            #     NOTE: This field is in Beta.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Kms::V1::AsymmetricSignResponse]
@@ -1809,7 +1891,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload asymmetric_decrypt(name: nil, ciphertext: nil)
+            # @overload asymmetric_decrypt(name: nil, ciphertext: nil, ciphertext_crc32c: nil)
             #   Pass arguments to `asymmetric_decrypt` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1820,6 +1902,22 @@ module Google
             #   @param ciphertext [::String]
             #     Required. The data encrypted with the named {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s public
             #     key using OAEP.
+            #   @param ciphertext_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext AsymmetricDecryptRequest.ciphertext}.
+            #     If specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+            #     received {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext AsymmetricDecryptRequest.ciphertext} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext AsymmetricDecryptRequest.ciphertext}) is equal to
+            #     {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext_crc32c AsymmetricDecryptRequest.ciphertext_crc32c}, and if so, perform a
+            #     limited number of retries. A persistent mismatch may indicate an issue in
+            #     your computation of the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #
+            #     NOTE: This field is in Beta.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Kms::V1::AsymmetricDecryptResponse]
