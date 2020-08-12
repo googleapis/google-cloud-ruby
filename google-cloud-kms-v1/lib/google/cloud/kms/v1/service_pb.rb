@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/kms/v1/resources_pb'
 require 'google/protobuf/field_mask_pb'
+require 'google/protobuf/wrappers_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/kms/v1/service.proto", :syntax => :proto3) do
     add_message "google.cloud.kms.v1.ListKeyRingsRequest" do
@@ -116,32 +117,47 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :plaintext, :bytes, 2
       optional :additional_authenticated_data, :bytes, 3
+      optional :plaintext_crc32c, :message, 7, "google.protobuf.Int64Value"
+      optional :additional_authenticated_data_crc32c, :message, 8, "google.protobuf.Int64Value"
     end
     add_message "google.cloud.kms.v1.DecryptRequest" do
       optional :name, :string, 1
       optional :ciphertext, :bytes, 2
       optional :additional_authenticated_data, :bytes, 3
+      optional :ciphertext_crc32c, :message, 5, "google.protobuf.Int64Value"
+      optional :additional_authenticated_data_crc32c, :message, 6, "google.protobuf.Int64Value"
     end
     add_message "google.cloud.kms.v1.AsymmetricSignRequest" do
       optional :name, :string, 1
       optional :digest, :message, 3, "google.cloud.kms.v1.Digest"
+      optional :digest_crc32c, :message, 4, "google.protobuf.Int64Value"
     end
     add_message "google.cloud.kms.v1.AsymmetricDecryptRequest" do
       optional :name, :string, 1
       optional :ciphertext, :bytes, 3
+      optional :ciphertext_crc32c, :message, 4, "google.protobuf.Int64Value"
     end
     add_message "google.cloud.kms.v1.DecryptResponse" do
       optional :plaintext, :bytes, 1
+      optional :plaintext_crc32c, :message, 2, "google.protobuf.Int64Value"
     end
     add_message "google.cloud.kms.v1.EncryptResponse" do
       optional :name, :string, 1
       optional :ciphertext, :bytes, 2
+      optional :ciphertext_crc32c, :message, 4, "google.protobuf.Int64Value"
+      optional :verified_plaintext_crc32c, :bool, 5
+      optional :verified_additional_authenticated_data_crc32c, :bool, 6
     end
     add_message "google.cloud.kms.v1.AsymmetricSignResponse" do
       optional :signature, :bytes, 1
+      optional :signature_crc32c, :message, 2, "google.protobuf.Int64Value"
+      optional :verified_digest_crc32c, :bool, 3
+      optional :name, :string, 4
     end
     add_message "google.cloud.kms.v1.AsymmetricDecryptResponse" do
       optional :plaintext, :bytes, 1
+      optional :plaintext_crc32c, :message, 2, "google.protobuf.Int64Value"
+      optional :verified_ciphertext_crc32c, :bool, 3
     end
     add_message "google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest" do
       optional :name, :string, 1

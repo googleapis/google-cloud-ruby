@@ -7,6 +7,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/protobuf/wrappers_pb'
 require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/kms/v1/resources.proto", :syntax => :proto3) do
@@ -96,6 +97,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.kms.v1.PublicKey" do
       optional :pem, :string, 1
       optional :algorithm, :enum, 2, "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm"
+      optional :pem_crc32c, :message, 3, "google.protobuf.Int64Value"
+      optional :name, :string, 4
     end
     add_message "google.cloud.kms.v1.ImportJob" do
       optional :name, :string, 1
