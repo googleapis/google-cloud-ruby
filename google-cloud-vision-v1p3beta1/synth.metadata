@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "89560ed803d9dec006c77ed1206441b9c51f6909"
+        "sha": "983f38a4557c6907b241e0ab99e477ff97cede8e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "3f5f8a2258c6a41f9fbf7b80acbca631dda0a952",
-        "internalRef": "308922843"
+        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
+        "internalRef": "326288259"
       }
     }
   ],
@@ -26,5 +26,64 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-vision-v1p3beta1.gemspec",
+    "lib/google-cloud-vision-v1p3beta1.rb",
+    "lib/google/cloud/vision/v1p3beta1.rb",
+    "lib/google/cloud/vision/v1p3beta1/geometry_pb.rb",
+    "lib/google/cloud/vision/v1p3beta1/image_annotator.rb",
+    "lib/google/cloud/vision/v1p3beta1/image_annotator/client.rb",
+    "lib/google/cloud/vision/v1p3beta1/image_annotator/credentials.rb",
+    "lib/google/cloud/vision/v1p3beta1/image_annotator/operations.rb",
+    "lib/google/cloud/vision/v1p3beta1/image_annotator/paths.rb",
+    "lib/google/cloud/vision/v1p3beta1/image_annotator_pb.rb",
+    "lib/google/cloud/vision/v1p3beta1/image_annotator_services_pb.rb",
+    "lib/google/cloud/vision/v1p3beta1/product_search.rb",
+    "lib/google/cloud/vision/v1p3beta1/product_search/client.rb",
+    "lib/google/cloud/vision/v1p3beta1/product_search/credentials.rb",
+    "lib/google/cloud/vision/v1p3beta1/product_search/operations.rb",
+    "lib/google/cloud/vision/v1p3beta1/product_search/paths.rb",
+    "lib/google/cloud/vision/v1p3beta1/product_search_pb.rb",
+    "lib/google/cloud/vision/v1p3beta1/product_search_service_pb.rb",
+    "lib/google/cloud/vision/v1p3beta1/product_search_service_services_pb.rb",
+    "lib/google/cloud/vision/v1p3beta1/text_annotation_pb.rb",
+    "lib/google/cloud/vision/v1p3beta1/version.rb",
+    "lib/google/cloud/vision/v1p3beta1/web_detection_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/vision/v1p3beta1/geometry.rb",
+    "proto_docs/google/cloud/vision/v1p3beta1/image_annotator.rb",
+    "proto_docs/google/cloud/vision/v1p3beta1/product_search.rb",
+    "proto_docs/google/cloud/vision/v1p3beta1/product_search_service.rb",
+    "proto_docs/google/cloud/vision/v1p3beta1/text_annotation.rb",
+    "proto_docs/google/cloud/vision/v1p3beta1/web_detection.rb",
+    "proto_docs/google/longrunning/operations.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/protobuf/wrappers.rb",
+    "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/color.rb",
+    "proto_docs/google/type/latlng.rb",
+    "test/google/cloud/vision/v1p3beta1/image_annotator_operations_test.rb",
+    "test/google/cloud/vision/v1p3beta1/image_annotator_paths_test.rb",
+    "test/google/cloud/vision/v1p3beta1/image_annotator_test.rb",
+    "test/google/cloud/vision/v1p3beta1/product_search_operations_test.rb",
+    "test/google/cloud/vision/v1p3beta1/product_search_paths_test.rb",
+    "test/google/cloud/vision/v1p3beta1/product_search_test.rb",
+    "test/helper.rb"
   ]
 }
