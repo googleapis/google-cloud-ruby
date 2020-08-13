@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "89560ed803d9dec006c77ed1206441b9c51f6909"
+        "sha": "983f38a4557c6907b241e0ab99e477ff97cede8e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d810c1d73c25b2a0051c26bc960e0044ebf939b1",
-        "internalRef": "317109460"
+        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
+        "internalRef": "326288259"
       }
     }
   ],
@@ -26,5 +26,46 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-debugger-v2.gemspec",
+    "lib/google-cloud-debugger-v2.rb",
+    "lib/google/cloud/debugger/v2.rb",
+    "lib/google/cloud/debugger/v2/controller.rb",
+    "lib/google/cloud/debugger/v2/controller/client.rb",
+    "lib/google/cloud/debugger/v2/controller/credentials.rb",
+    "lib/google/cloud/debugger/v2/debugger.rb",
+    "lib/google/cloud/debugger/v2/debugger/client.rb",
+    "lib/google/cloud/debugger/v2/debugger/credentials.rb",
+    "lib/google/cloud/debugger/v2/version.rb",
+    "lib/google/devtools/clouddebugger/v2/controller_pb.rb",
+    "lib/google/devtools/clouddebugger/v2/controller_services_pb.rb",
+    "lib/google/devtools/clouddebugger/v2/data_pb.rb",
+    "lib/google/devtools/clouddebugger/v2/debugger_pb.rb",
+    "lib/google/devtools/clouddebugger/v2/debugger_services_pb.rb",
+    "lib/google/devtools/source/v1/source_context_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/devtools/clouddebugger/v2/controller.rb",
+    "proto_docs/google/devtools/clouddebugger/v2/data.rb",
+    "proto_docs/google/devtools/clouddebugger/v2/debugger.rb",
+    "proto_docs/google/devtools/source/v1/source_context.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/protobuf/wrappers.rb",
+    "test/google/cloud/debugger/v2/controller_test.rb",
+    "test/google/cloud/debugger/v2/debugger_test.rb",
+    "test/helper.rb"
   ]
 }
