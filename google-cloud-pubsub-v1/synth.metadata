@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "89560ed803d9dec006c77ed1206441b9c51f6909"
+        "sha": "983f38a4557c6907b241e0ab99e477ff97cede8e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "706053bbfb3f16ef752e513c2898a1f26cdd8e41",
-        "internalRef": "323803770"
+        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
+        "internalRef": "326288259"
       }
     }
   ],
@@ -26,5 +26,53 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-pubsub-v1.gemspec",
+    "lib/google-cloud-pubsub-v1.rb",
+    "lib/google/cloud/pubsub/v1.rb",
+    "lib/google/cloud/pubsub/v1/iam_policy.rb",
+    "lib/google/cloud/pubsub/v1/iam_policy/client.rb",
+    "lib/google/cloud/pubsub/v1/iam_policy/credentials.rb",
+    "lib/google/cloud/pubsub/v1/publisher.rb",
+    "lib/google/cloud/pubsub/v1/publisher/client.rb",
+    "lib/google/cloud/pubsub/v1/publisher/credentials.rb",
+    "lib/google/cloud/pubsub/v1/publisher/paths.rb",
+    "lib/google/cloud/pubsub/v1/subscriber.rb",
+    "lib/google/cloud/pubsub/v1/subscriber/client.rb",
+    "lib/google/cloud/pubsub/v1/subscriber/credentials.rb",
+    "lib/google/cloud/pubsub/v1/subscriber/paths.rb",
+    "lib/google/cloud/pubsub/v1/version.rb",
+    "lib/google/iam/v1/iam_policy_services_pb.rb",
+    "lib/google/pubsub/v1/pubsub_pb.rb",
+    "lib/google/pubsub/v1/pubsub_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/iam/v1/iam_policy.rb",
+    "proto_docs/google/iam/v1/options.rb",
+    "proto_docs/google/iam/v1/policy.rb",
+    "proto_docs/google/protobuf/duration.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/pubsub/v1/pubsub.rb",
+    "proto_docs/google/type/expr.rb",
+    "test/google/cloud/pubsub/v1/iam_policy_test.rb",
+    "test/google/cloud/pubsub/v1/publisher_paths_test.rb",
+    "test/google/cloud/pubsub/v1/publisher_test.rb",
+    "test/google/cloud/pubsub/v1/subscriber_paths_test.rb",
+    "test/google/cloud/pubsub/v1/subscriber_test.rb",
+    "test/helper.rb"
   ]
 }
