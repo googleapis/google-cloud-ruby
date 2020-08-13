@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "89560ed803d9dec006c77ed1206441b9c51f6909"
+        "sha": "983f38a4557c6907b241e0ab99e477ff97cede8e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "5202cfe3e5c2907a1a21a4c6d4bd0812029b6aa3",
-        "internalRef": "319247865"
+        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
+        "internalRef": "326288259"
       }
     }
   ],
@@ -26,5 +26,42 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-recommender-v1.gemspec",
+    "lib/google-cloud-recommender-v1.rb",
+    "lib/google/cloud/recommender/v1.rb",
+    "lib/google/cloud/recommender/v1/insight_pb.rb",
+    "lib/google/cloud/recommender/v1/recommendation_pb.rb",
+    "lib/google/cloud/recommender/v1/recommender.rb",
+    "lib/google/cloud/recommender/v1/recommender/client.rb",
+    "lib/google/cloud/recommender/v1/recommender/credentials.rb",
+    "lib/google/cloud/recommender/v1/recommender/paths.rb",
+    "lib/google/cloud/recommender/v1/recommender_service_pb.rb",
+    "lib/google/cloud/recommender/v1/recommender_service_services_pb.rb",
+    "lib/google/cloud/recommender/v1/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/recommender/v1/insight.rb",
+    "proto_docs/google/cloud/recommender/v1/recommendation.rb",
+    "proto_docs/google/cloud/recommender/v1/recommender_service.rb",
+    "proto_docs/google/protobuf/duration.rb",
+    "proto_docs/google/protobuf/struct.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/type/money.rb",
+    "test/google/cloud/recommender/v1/recommender_paths_test.rb",
+    "test/google/cloud/recommender/v1/recommender_test.rb",
+    "test/helper.rb"
   ]
 }
