@@ -496,8 +496,8 @@ module Google
         # the location of the job will be automatically set to the location of
         # the model.
         #
-        # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
-        #   Exporting Data From BigQuery
+        # @see https://cloud.google.com/bigquery-ml/docs/exporting-models
+        #   Exporting models
         #
         # @param [String] extract_url The Google Storage URI to which BigQuery
         #   should extract the model. This value should be end in an object name
@@ -581,8 +581,8 @@ module Google
         # the location of the job will be automatically set to the location of
         # the model.
         #
-        # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
-        #   Exporting Data From BigQuery
+        # @see https://cloud.google.com/bigquery-ml/docs/exporting-models
+        #   Exporting models
         #
         # @param [String] extract_url The Google Storage URI to which BigQuery
         #   should extract the model. This value should be end in an object name

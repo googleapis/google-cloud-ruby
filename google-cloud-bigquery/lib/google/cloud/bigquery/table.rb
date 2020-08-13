@@ -1514,8 +1514,8 @@ module Google
         # the location of the job will be automatically set to the location of
         # the table.
         #
-        # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
-        #   Exporting Data From BigQuery
+        # @see https://cloud.google.com/bigquery/docs/exporting-data
+        #   Exporting table data
         #
         # @param [Google::Cloud::Storage::File, String, Array<String>]
         #   extract_url The Google Storage file or file URI pattern(s) to which
@@ -1609,8 +1609,8 @@ module Google
         # the location of the job will be automatically set to the location of
         # the table.
         #
-        # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
-        #   Exporting Data From BigQuery
+        # @see https://cloud.google.com/bigquery/docs/exporting-data
+        #   Exporting table data
         #
         # @param [Google::Cloud::Storage::File, String, Array<String>]
         #   extract_url The Google Storage file or file URI pattern(s) to which

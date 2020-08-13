@@ -24,7 +24,9 @@ module Google
       # {Project#extract_job}, {Table#extract_job} or {Model#extract_job}.
       #
       # @see https://cloud.google.com/bigquery/docs/exporting-data
-      #   Exporting Data From BigQuery
+      #   Exporting table data
+      # @see https://cloud.google.com/bigquery-ml/docs/exporting-models
+      #   Exporting models
       # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
       #   reference
       #

@@ -1458,8 +1458,10 @@ module Google
         # The geographic location for the job ("US", "EU", etc.) can be set via
         # {ExtractJob::Updater#location=} in a block passed to this method.
         #
-        # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
-        #   Exporting Data From BigQuery
+        # @see https://cloud.google.com/bigquery/docs/exporting-data
+        #   Exporting table data
+        # @see https://cloud.google.com/bigquery-ml/docs/exporting-models
+        #   Exporting models
         #
         # @param [Table, Model, String] source The source table or model from
         #   which to extract data. This can be a table or model object; or a
@@ -1577,8 +1579,10 @@ module Google
         # The geographic location for the job ("US", "EU", etc.) can be set via
         # {ExtractJob::Updater#location=} in a block passed to this method.
         #
-        # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
-        #   Exporting Data From BigQuery
+        # @see https://cloud.google.com/bigquery/docs/exporting-data
+        #   Exporting table data
+        # @see https://cloud.google.com/bigquery-ml/docs/exporting-models
+        #   Exporting models
         #
         # @param [Table, Model, String] source The source table or model from
         #   which to extract data. This can be a table or model object; or a
