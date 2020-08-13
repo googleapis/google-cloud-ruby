@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "89560ed803d9dec006c77ed1206441b9c51f6909"
+        "sha": "983f38a4557c6907b241e0ab99e477ff97cede8e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "973c671823c076165b2371cda0174586d4078b0d",
-        "internalRef": "313004561"
+        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
+        "internalRef": "326288259"
       }
     }
   ],
@@ -26,5 +26,34 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-phishing_protection-v1beta1.gemspec",
+    "lib/google-cloud-phishing_protection-v1beta1.rb",
+    "lib/google/cloud/phishing_protection/v1beta1.rb",
+    "lib/google/cloud/phishing_protection/v1beta1/phishing_protection_service.rb",
+    "lib/google/cloud/phishing_protection/v1beta1/phishing_protection_service/client.rb",
+    "lib/google/cloud/phishing_protection/v1beta1/phishing_protection_service/credentials.rb",
+    "lib/google/cloud/phishing_protection/v1beta1/phishing_protection_service/paths.rb",
+    "lib/google/cloud/phishing_protection/v1beta1/version.rb",
+    "lib/google/cloud/phishingprotection/v1beta1/phishingprotection_pb.rb",
+    "lib/google/cloud/phishingprotection/v1beta1/phishingprotection_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/phishingprotection/v1beta1/phishingprotection.rb",
+    "test/google/cloud/phishing_protection/v1beta1/phishing_protection_service_paths_test.rb",
+    "test/google/cloud/phishing_protection/v1beta1/phishing_protection_service_test.rb",
+    "test/helper.rb"
   ]
 }
