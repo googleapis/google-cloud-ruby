@@ -483,7 +483,7 @@ module Google
         end
 
         ##
-        # Extracts the data from the model to a Google Cloud Storage file using
+        # Exports the model to a Google Cloud Storage file using
         # an asynchronous method. In this method, an {ExtractJob} is immediately
         # returned. The caller may poll the service by repeatedly calling
         # {Job#reload!} and {Job#done?} to detect when the job is done, or
@@ -570,7 +570,7 @@ module Google
         end
 
         ##
-        # Extracts the data from the model to a Google Cloud Storage file using
+        # Exports the model to a Google Cloud Storage file using
         # a synchronous method that blocks for a response. Timeouts and
         # transient errors are generally handled as needed to complete the job.
         # See also {#extract_job}.

@@ -30,7 +30,7 @@ module Google
       # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
       #   reference
       #
-      # @example
+      # @example Export table data
       #   require "google/cloud/bigquery"
       #
       #   bigquery = Google::Cloud::Bigquery.new
@@ -39,6 +39,18 @@ module Google
       #
       #   extract_job = table.extract_job "gs://my-bucket/file-name.json",
       #                                   format: "json"
+      #   extract_job.wait_until_done!
+      #   extract_job.done? #=> true
+      #
+      # @example Export a model
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #   dataset = bigquery.dataset "my_dataset"
+      #   model = dataset.model "my_model"
+      #
+      #   extract_job = model.extract_job "gs://my-bucket/#{model.model_id}"
+      #
       #   extract_job.wait_until_done!
       #   extract_job.done? #=> true
       #

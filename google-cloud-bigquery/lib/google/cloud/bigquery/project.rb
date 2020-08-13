@@ -1445,7 +1445,7 @@ module Google
         end
 
         ##
-        # Extracts the data from a table or model to a Google Cloud Storage
+        # Extracts the data from a table or exports a model to a Google Cloud Storage
         # file using an asynchronous method. In this method, an {ExtractJob} is
         # immediately returned. The caller may poll the service by repeatedly
         # calling {Job#reload!} and {Job#done?} to detect when the job is done,
@@ -1463,8 +1463,8 @@ module Google
         # @see https://cloud.google.com/bigquery-ml/docs/exporting-models
         #   Exporting models
         #
-        # @param [Table, Model, String] source The source table or model from
-        #   which to extract data. This can be a table or model object; or a
+        # @param [Table, Model, String] source The source table or model for
+        #   the extract operation. This can be a table or model object; or a
         #   table ID string as specified by the [Standard SQL Query
         #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
         #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
@@ -1526,7 +1526,7 @@ module Google
         #
         # @return [Google::Cloud::Bigquery::ExtractJob]
         #
-        # @example Export a table
+        # @example Export table data
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -1568,7 +1568,7 @@ module Google
         end
 
         ##
-        # Extracts the data from a table or model to a Google Cloud Storage
+        # Extracts the data from a table or exports a model to a Google Cloud Storage
         # object using a synchronous method that blocks for a response. Timeouts
         # and transient errors are generally handled as needed to complete the
         # job. See {#extract_job} for the asynchronous version.
@@ -1584,8 +1584,8 @@ module Google
         # @see https://cloud.google.com/bigquery-ml/docs/exporting-models
         #   Exporting models
         #
-        # @param [Table, Model, String] source The source table or model from
-        #   which to extract data. This can be a table or model object; or a
+        # @param [Table, Model, String] source The source table or model for
+        #   the extract operation. This can be a table or model object; or a
         #   table ID string as specified by the [Standard SQL Query
         #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
         #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
@@ -1624,7 +1624,7 @@ module Google
         #
         # @return [Boolean] Returns `true` if the extract operation succeeded.
         #
-        # @example Export a table
+        # @example Export table data
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
