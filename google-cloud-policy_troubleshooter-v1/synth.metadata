@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "353e7e2aafd1183c9522108b31802c609ac5e969"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "983f38a4557c6907b241e0ab99e477ff97cede8e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "5dedfae4a499e90f6da806eb3536811e7c319a41",
-        "internalRef": "325860295"
+        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
+        "internalRef": "326288259"
       }
     }
   ],
@@ -26,5 +26,36 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-policy_troubleshooter-v1.gemspec",
+    "lib/google-cloud-policy_troubleshooter-v1.rb",
+    "lib/google/cloud/policy_troubleshooter/v1.rb",
+    "lib/google/cloud/policy_troubleshooter/v1/iam_checker.rb",
+    "lib/google/cloud/policy_troubleshooter/v1/iam_checker/client.rb",
+    "lib/google/cloud/policy_troubleshooter/v1/iam_checker/credentials.rb",
+    "lib/google/cloud/policy_troubleshooter/v1/version.rb",
+    "lib/google/cloud/policytroubleshooter/v1/checker_pb.rb",
+    "lib/google/cloud/policytroubleshooter/v1/checker_services_pb.rb",
+    "lib/google/cloud/policytroubleshooter/v1/explanations_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/policytroubleshooter/v1/checker.rb",
+    "proto_docs/google/cloud/policytroubleshooter/v1/explanations.rb",
+    "proto_docs/google/iam/v1/policy.rb",
+    "proto_docs/google/type/expr.rb",
+    "test/google/cloud/policy_troubleshooter/v1/iam_checker_test.rb",
+    "test/helper.rb"
   ]
 }
