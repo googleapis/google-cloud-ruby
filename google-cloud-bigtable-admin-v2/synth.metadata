@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "89560ed803d9dec006c77ed1206441b9c51f6909"
+        "sha": "983f38a4557c6907b241e0ab99e477ff97cede8e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d399c754bdea83297877ab49e5f66b257a957a78",
-        "internalRef": "323860336"
+        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
+        "internalRef": "326288259"
       }
     }
   ],
@@ -26,5 +26,64 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-bigtable-admin-v2.gemspec",
+    "lib/google-cloud-bigtable-admin-v2.rb",
+    "lib/google/bigtable/admin/v2/bigtable_instance_admin_pb.rb",
+    "lib/google/bigtable/admin/v2/bigtable_instance_admin_services_pb.rb",
+    "lib/google/bigtable/admin/v2/bigtable_table_admin_pb.rb",
+    "lib/google/bigtable/admin/v2/bigtable_table_admin_services_pb.rb",
+    "lib/google/bigtable/admin/v2/common_pb.rb",
+    "lib/google/bigtable/admin/v2/instance_pb.rb",
+    "lib/google/bigtable/admin/v2/table_pb.rb",
+    "lib/google/cloud/bigtable/admin/v2.rb",
+    "lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin.rb",
+    "lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin/client.rb",
+    "lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin/credentials.rb",
+    "lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin/operations.rb",
+    "lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin/paths.rb",
+    "lib/google/cloud/bigtable/admin/v2/bigtable_table_admin.rb",
+    "lib/google/cloud/bigtable/admin/v2/bigtable_table_admin/client.rb",
+    "lib/google/cloud/bigtable/admin/v2/bigtable_table_admin/credentials.rb",
+    "lib/google/cloud/bigtable/admin/v2/bigtable_table_admin/operations.rb",
+    "lib/google/cloud/bigtable/admin/v2/bigtable_table_admin/paths.rb",
+    "lib/google/cloud/bigtable/admin/v2/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/bigtable/admin/v2/bigtable_instance_admin.rb",
+    "proto_docs/google/bigtable/admin/v2/bigtable_table_admin.rb",
+    "proto_docs/google/bigtable/admin/v2/common.rb",
+    "proto_docs/google/bigtable/admin/v2/instance.rb",
+    "proto_docs/google/bigtable/admin/v2/table.rb",
+    "proto_docs/google/iam/v1/iam_policy.rb",
+    "proto_docs/google/iam/v1/options.rb",
+    "proto_docs/google/iam/v1/policy.rb",
+    "proto_docs/google/longrunning/operations.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/duration.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/expr.rb",
+    "test/google/cloud/bigtable/admin/v2/bigtable_instance_admin_operations_test.rb",
+    "test/google/cloud/bigtable/admin/v2/bigtable_instance_admin_paths_test.rb",
+    "test/google/cloud/bigtable/admin/v2/bigtable_instance_admin_test.rb",
+    "test/google/cloud/bigtable/admin/v2/bigtable_table_admin_operations_test.rb",
+    "test/google/cloud/bigtable/admin/v2/bigtable_table_admin_paths_test.rb",
+    "test/google/cloud/bigtable/admin/v2/bigtable_table_admin_test.rb",
+    "test/helper.rb"
   ]
 }
