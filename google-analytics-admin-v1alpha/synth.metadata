@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "89560ed803d9dec006c77ed1206441b9c51f6909"
+        "sha": "983f38a4557c6907b241e0ab99e477ff97cede8e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "96ef637adf148d54236ad83fefa30c7f75f29737",
-        "internalRef": "325052820"
+        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
+        "internalRef": "326288259"
       }
     }
   ],
@@ -26,5 +26,40 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-analytics-admin-v1alpha.gemspec",
+    "lib/google-analytics-admin-v1alpha.rb",
+    "lib/google/analytics/admin/v1alpha.rb",
+    "lib/google/analytics/admin/v1alpha/analytics_admin_pb.rb",
+    "lib/google/analytics/admin/v1alpha/analytics_admin_service.rb",
+    "lib/google/analytics/admin/v1alpha/analytics_admin_service/client.rb",
+    "lib/google/analytics/admin/v1alpha/analytics_admin_service/credentials.rb",
+    "lib/google/analytics/admin/v1alpha/analytics_admin_service/paths.rb",
+    "lib/google/analytics/admin/v1alpha/analytics_admin_services_pb.rb",
+    "lib/google/analytics/admin/v1alpha/resources_pb.rb",
+    "lib/google/analytics/admin/v1alpha/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/analytics/admin/v1alpha/analytics_admin.rb",
+    "proto_docs/google/analytics/admin/v1alpha/resources.rb",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/protobuf/wrappers.rb",
+    "test/google/analytics/admin/v1alpha/analytics_admin_service_paths_test.rb",
+    "test/google/analytics/admin/v1alpha/analytics_admin_service_test.rb",
+    "test/helper.rb"
   ]
 }
