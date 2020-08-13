@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "89560ed803d9dec006c77ed1206441b9c51f6909"
+        "sha": "983f38a4557c6907b241e0ab99e477ff97cede8e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "240e65bd142ae3914cb250491bf0589331736731",
-        "internalRef": "320995419"
+        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
+        "internalRef": "326288259"
       }
     }
   ],
@@ -26,5 +26,66 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-security_center-v1.gemspec",
+    "lib/google-cloud-security_center-v1.rb",
+    "lib/google/cloud/security_center/v1.rb",
+    "lib/google/cloud/security_center/v1/security_center.rb",
+    "lib/google/cloud/security_center/v1/security_center/client.rb",
+    "lib/google/cloud/security_center/v1/security_center/credentials.rb",
+    "lib/google/cloud/security_center/v1/security_center/operations.rb",
+    "lib/google/cloud/security_center/v1/security_center/paths.rb",
+    "lib/google/cloud/security_center/v1/version.rb",
+    "lib/google/cloud/securitycenter/v1/asset_pb.rb",
+    "lib/google/cloud/securitycenter/v1/finding_pb.rb",
+    "lib/google/cloud/securitycenter/v1/notification_config_pb.rb",
+    "lib/google/cloud/securitycenter/v1/notification_message_pb.rb",
+    "lib/google/cloud/securitycenter/v1/organization_settings_pb.rb",
+    "lib/google/cloud/securitycenter/v1/resource_pb.rb",
+    "lib/google/cloud/securitycenter/v1/run_asset_discovery_response_pb.rb",
+    "lib/google/cloud/securitycenter/v1/security_marks_pb.rb",
+    "lib/google/cloud/securitycenter/v1/securitycenter_service_pb.rb",
+    "lib/google/cloud/securitycenter/v1/securitycenter_service_services_pb.rb",
+    "lib/google/cloud/securitycenter/v1/source_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/securitycenter/v1/asset.rb",
+    "proto_docs/google/cloud/securitycenter/v1/finding.rb",
+    "proto_docs/google/cloud/securitycenter/v1/notification_config.rb",
+    "proto_docs/google/cloud/securitycenter/v1/notification_message.rb",
+    "proto_docs/google/cloud/securitycenter/v1/organization_settings.rb",
+    "proto_docs/google/cloud/securitycenter/v1/resource.rb",
+    "proto_docs/google/cloud/securitycenter/v1/run_asset_discovery_response.rb",
+    "proto_docs/google/cloud/securitycenter/v1/security_marks.rb",
+    "proto_docs/google/cloud/securitycenter/v1/securitycenter_service.rb",
+    "proto_docs/google/cloud/securitycenter/v1/source.rb",
+    "proto_docs/google/iam/v1/iam_policy.rb",
+    "proto_docs/google/iam/v1/options.rb",
+    "proto_docs/google/iam/v1/policy.rb",
+    "proto_docs/google/longrunning/operations.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/duration.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/struct.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/expr.rb",
+    "test/google/cloud/security_center/v1/security_center_operations_test.rb",
+    "test/google/cloud/security_center/v1/security_center_paths_test.rb",
+    "test/google/cloud/security_center/v1/security_center_test.rb",
+    "test/helper.rb"
   ]
 }
