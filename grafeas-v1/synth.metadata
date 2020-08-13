@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "89560ed803d9dec006c77ed1206441b9c51f6909"
+        "sha": "983f38a4557c6907b241e0ab99e477ff97cede8e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "96ef637adf148d54236ad83fefa30c7f75f29737",
-        "internalRef": "325052820"
+        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
+        "internalRef": "326288259"
       }
     }
   ],
@@ -26,5 +26,59 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "grafeas-v1.gemspec",
+    "lib/grafeas-v1.rb",
+    "lib/grafeas/v1.rb",
+    "lib/grafeas/v1/attestation_pb.rb",
+    "lib/grafeas/v1/build_pb.rb",
+    "lib/grafeas/v1/common_pb.rb",
+    "lib/grafeas/v1/cvss_pb.rb",
+    "lib/grafeas/v1/deployment_pb.rb",
+    "lib/grafeas/v1/discovery_pb.rb",
+    "lib/grafeas/v1/grafeas.rb",
+    "lib/grafeas/v1/grafeas/client.rb",
+    "lib/grafeas/v1/grafeas/paths.rb",
+    "lib/grafeas/v1/grafeas_pb.rb",
+    "lib/grafeas/v1/grafeas_services_pb.rb",
+    "lib/grafeas/v1/image_pb.rb",
+    "lib/grafeas/v1/package_pb.rb",
+    "lib/grafeas/v1/provenance_pb.rb",
+    "lib/grafeas/v1/upgrade_pb.rb",
+    "lib/grafeas/v1/version.rb",
+    "lib/grafeas/v1/vulnerability_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/rpc/status.rb",
+    "proto_docs/grafeas/v1/attestation.rb",
+    "proto_docs/grafeas/v1/build.rb",
+    "proto_docs/grafeas/v1/common.rb",
+    "proto_docs/grafeas/v1/cvss.rb",
+    "proto_docs/grafeas/v1/deployment.rb",
+    "proto_docs/grafeas/v1/discovery.rb",
+    "proto_docs/grafeas/v1/grafeas.rb",
+    "proto_docs/grafeas/v1/image.rb",
+    "proto_docs/grafeas/v1/package.rb",
+    "proto_docs/grafeas/v1/provenance.rb",
+    "proto_docs/grafeas/v1/upgrade.rb",
+    "proto_docs/grafeas/v1/vulnerability.rb",
+    "test/grafeas/v1/grafeas_paths_test.rb",
+    "test/grafeas/v1/grafeas_test.rb",
+    "test/helper.rb"
   ]
 }
