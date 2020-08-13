@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "353e7e2aafd1183c9522108b31802c609ac5e969"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "983f38a4557c6907b241e0ab99e477ff97cede8e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "5dedfae4a499e90f6da806eb3536811e7c319a41",
-        "internalRef": "325860295"
+        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
+        "internalRef": "326288259"
       }
     }
   ],
@@ -26,5 +26,49 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-functions-v1.gemspec",
+    "lib/google-cloud-functions-v1.rb",
+    "lib/google/cloud/functions/v1.rb",
+    "lib/google/cloud/functions/v1/cloud_functions_service.rb",
+    "lib/google/cloud/functions/v1/cloud_functions_service/client.rb",
+    "lib/google/cloud/functions/v1/cloud_functions_service/credentials.rb",
+    "lib/google/cloud/functions/v1/cloud_functions_service/operations.rb",
+    "lib/google/cloud/functions/v1/cloud_functions_service/paths.rb",
+    "lib/google/cloud/functions/v1/functions_pb.rb",
+    "lib/google/cloud/functions/v1/functions_services_pb.rb",
+    "lib/google/cloud/functions/v1/operations_pb.rb",
+    "lib/google/cloud/functions/v1/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/functions/v1/functions.rb",
+    "proto_docs/google/cloud/functions/v1/operations.rb",
+    "proto_docs/google/iam/v1/iam_policy.rb",
+    "proto_docs/google/iam/v1/options.rb",
+    "proto_docs/google/iam/v1/policy.rb",
+    "proto_docs/google/longrunning/operations.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/duration.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/expr.rb",
+    "test/google/cloud/functions/v1/cloud_functions_service_operations_test.rb",
+    "test/google/cloud/functions/v1/cloud_functions_service_paths_test.rb",
+    "test/google/cloud/functions/v1/cloud_functions_service_test.rb",
+    "test/helper.rb"
   ]
 }
