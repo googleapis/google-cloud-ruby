@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "89560ed803d9dec006c77ed1206441b9c51f6909"
+        "sha": "983f38a4557c6907b241e0ab99e477ff97cede8e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "5920d376e8771e7dd245a0d1d0341952ca15e41d",
-        "internalRef": "318328852"
+        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
+        "internalRef": "326288259"
       }
     }
   ],
@@ -26,5 +26,50 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-billing-v1.gemspec",
+    "lib/google-cloud-billing-v1.rb",
+    "lib/google/cloud/billing/v1.rb",
+    "lib/google/cloud/billing/v1/cloud_billing.rb",
+    "lib/google/cloud/billing/v1/cloud_billing/client.rb",
+    "lib/google/cloud/billing/v1/cloud_billing/credentials.rb",
+    "lib/google/cloud/billing/v1/cloud_billing/paths.rb",
+    "lib/google/cloud/billing/v1/cloud_billing_pb.rb",
+    "lib/google/cloud/billing/v1/cloud_billing_services_pb.rb",
+    "lib/google/cloud/billing/v1/cloud_catalog.rb",
+    "lib/google/cloud/billing/v1/cloud_catalog/client.rb",
+    "lib/google/cloud/billing/v1/cloud_catalog/credentials.rb",
+    "lib/google/cloud/billing/v1/cloud_catalog/paths.rb",
+    "lib/google/cloud/billing/v1/cloud_catalog_pb.rb",
+    "lib/google/cloud/billing/v1/cloud_catalog_services_pb.rb",
+    "lib/google/cloud/billing/v1/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/billing/v1/cloud_billing.rb",
+    "proto_docs/google/cloud/billing/v1/cloud_catalog.rb",
+    "proto_docs/google/iam/v1/iam_policy.rb",
+    "proto_docs/google/iam/v1/options.rb",
+    "proto_docs/google/iam/v1/policy.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/type/expr.rb",
+    "proto_docs/google/type/money.rb",
+    "test/google/cloud/billing/v1/cloud_billing_paths_test.rb",
+    "test/google/cloud/billing/v1/cloud_billing_test.rb",
+    "test/google/cloud/billing/v1/cloud_catalog_paths_test.rb",
+    "test/google/cloud/billing/v1/cloud_catalog_test.rb",
+    "test/helper.rb"
   ]
 }
