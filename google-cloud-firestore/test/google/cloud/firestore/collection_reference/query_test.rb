@@ -21,25 +21,33 @@ describe Google::Cloud::Firestore::CollectionReference, :query, :mock_firestore 
 
   let(:read_time) { Time.now }
 
+  let :query_result_1 do
+    Google::Cloud::Firestore::V1::RunQueryResponse.new(
+      read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
+      document: Google::Cloud::Firestore::V1::Document.new(
+        name: "projects/#{project}/databases/(default)/documents/users/alice",
+        fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Alice") },
+        create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
+        update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
+      )
+    )
+  end
+  let :query_result_2 do
+    Google::Cloud::Firestore::V1::RunQueryResponse.new(
+      read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
+      document: Google::Cloud::Firestore::V1::Document.new(
+        name: "projects/#{project}/databases/(default)/documents/users/carol",
+        fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Bob") },
+        create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
+        update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
+      )
+    )
+  end
   let :query_results_enum do
-    [
-      Google::Cloud::Firestore::V1::RunQueryResponse.new(
-        read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        document: Google::Cloud::Firestore::V1::Document.new(
-          name: "projects/#{project}/databases/(default)/documents/users/alice",
-          fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Alice") },
-          create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-          update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
-        )),
-      Google::Cloud::Firestore::V1::RunQueryResponse.new(
-        read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        document: Google::Cloud::Firestore::V1::Document.new(
-          name: "projects/#{project}/databases/(default)/documents/users/carol",
-          fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Bob") },
-          create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-          update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
-        ))
-    ].to_enum
+    [query_result_1, query_result_2].to_enum
+  end
+  let :query_results_descending_enum do
+    [query_result_2, query_result_1].to_enum
   end
 
   it "runs a query with a single select" do
@@ -123,6 +131,76 @@ describe Google::Cloud::Firestore::CollectionReference, :query, :mock_firestore 
     results_enum = collection.offset(3).limit(42).get
 
     assert_results_enum results_enum
+  end
+
+  it "runs a query with multiple order calls, start_at, end_at and limit_to_last" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: false),
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: true),
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "messages")],
+      order_by: [
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name"),
+          direction: :DESCENDING),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
+          direction: :ASCENDING)],
+      limit: Google::Protobuf::Int32Value.new(value: 2)
+    )
+    firestore_mock.expect :run_query, query_results_descending_enum, run_query_args(expected_query, parent: collection.parent_path)
+
+    results_enum = collection.order(:name).order(firestore.document_id, :desc).start_at(:foo).end_at(:bar).limit_to_last(2).get
+
+    assert_results_enum results_enum
+  end
+
+  it "raises when calling limit_to_last without order" do
+    error = expect do
+      collection.limit_to_last(12)
+    end.must_raise RuntimeError
+    _(error.message).must_equal "specify at least one order clause before calling limit_to_last"
+  end
+
+  it "raises when calling limit_to_last more than once" do
+    error = expect do
+      collection.order(:name).limit_to_last(12).limit_to_last(23)
+    end.must_raise RuntimeError
+    _(error.message).must_equal "limit_to_last may only be called once"
+  end
+
+  it "raises when calling order after limit_to_last" do
+    error = expect do
+      collection.order(:name).limit_to_last(12).order(:status)
+    end.must_raise RuntimeError
+    _(error.message).must_equal "cannot call order after calling limit_to_last, start_at, start_after, end_before, or end_at"
+  end
+
+  it "raises when calling order after start_at" do
+    error = expect do
+      collection.order(:name).start_at("foo").order(:status)
+    end.must_raise RuntimeError
+    _(error.message).must_equal "cannot call order after calling limit_to_last, start_at, start_after, end_before, or end_at"
+  end
+
+  it "raises when calling order after start_after" do
+    error = expect do
+      collection.order(:name).start_after("foo").order(:status)
+    end.must_raise RuntimeError
+    _(error.message).must_equal "cannot call order after calling limit_to_last, start_at, start_after, end_before, or end_at"
+  end
+
+  it "raises when calling order after end_before" do
+    error = expect do
+      collection.order(:name).end_before("foo").order(:status)
+    end.must_raise RuntimeError
+    _(error.message).must_equal "cannot call order after calling limit_to_last, start_at, start_after, end_before, or end_at"
+  end
+
+  it "raises when calling order after end_at" do
+    error = expect do
+      collection.order(:name).end_at("foo").order(:status)
+    end.must_raise RuntimeError
+    _(error.message).must_equal "cannot call order after calling limit_to_last, start_at, start_after, end_before, or end_at"
   end
 
   it "runs a query with a single order" do
