@@ -143,28 +143,25 @@ module Google
                 # Flush the buffered responses now that they are all handled
                 buffered_responses = []
               end
-            rescue GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
-                   GRPC::ResourceExhausted, GRPC::Unauthenticated,
-                   GRPC::Unavailable, GRPC::Core::CallError => err
-              if resume_token.nil? || resume_token.empty?
-                # Re-raise if the resume_token is not a valid value.
-                # This can happen if the buffer was flushed.
+            rescue GRPC::Cancelled,
+              GRPC::DeadlineExceeded,
+              GRPC::Internal,
+              GRPC::ResourceExhausted,
+              GRPC::Unauthenticated,
+              GRPC::Unavailable,
+              GRPC::Aborted,
+              GRPC::Core::CallError => err
+
+              if resumable?(resume_token)
+                @enum = resume_request!(resume_token)
+                buffered_responses = []
+              elsif retryable?(err)
+                @enum = retry_request!()
+                buffered_responses = []
+              else
                 raise Google::Cloud::Error.from_error(err)
               end
 
-              # Resume the stream from the last known resume_token
-              if @execute_query_options
-                @enum = @service.execute_streaming_sql \
-                  @session_path, @sql,
-                  @execute_query_options.merge(resume_token: resume_token)
-              else
-                @enum = @service.streaming_read_table \
-                  @session_path, @table, @columns,
-                  @read_options.merge(resume_token: resume_token)
-              end
-
-              # Flush the buffered responses to reset to the resume_token
-              buffered_responses = []
             rescue GRPC::BadStatus => err
               raise Google::Cloud::Error.from_error(err)
             rescue StopIteration
@@ -194,6 +191,33 @@ module Google
           # If we get this far then we can release the session
           @closed = true
           nil
+        end
+
+        def resumable? resume_token
+          !resume_token.nil? && !resume_token.empty?
+        end
+
+        def retryable? err
+          err.instance_of?(GRPC::Unavailable) ||
+          err.instance_of?(GRPC::Aborted) ||
+          (err.instance_of?(GRPC::Internal) && err.details.include?("Received unexpected EOS on DATA frame from server")) ||
+          (err.instance_of?(GRPC::Internal) && err.details.include?("Received RST_STREAM"))
+        end
+
+        def resume_request! resume_token
+          if @execute_query_options
+            @service.execute_streaming_sql @session_path, @sql, @execute_query_options.merge(resume_token: resume_token)
+          else
+            @service.streaming_read_table @session_path, @table, @columns, @read_options.merge(resume_token: resume_token)
+          end
+        end
+
+        def retry_request!
+          if @execute_query_options
+            @service.execute_streaming_sql @session_path, @sql, @execute_query_options
+          else
+            @service.streaming_read_table @session_path, @table, @columns, @read_options
+          end
         end
 
         # rubocop:enable all

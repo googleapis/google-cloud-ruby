@@ -20,7 +20,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner 
   let(:session_id) { "session123" }
   let(:session_grpc) { Google::Cloud::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
   let(:default_options) { { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } } }
-  let :results_hash1 do
+  let :metadata_result do
     {
       metadata: {
         row_type: {
@@ -40,7 +40,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner 
       }
     }
   end
-  let :results_hash2 do
+  let :partial_row_1 do
     {
       values: [
         { string_value: "1" },
@@ -49,7 +49,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner 
       resume_token: "xyz890"
     }
   end
-  let :results_hash3 do
+  let :partial_row_2 do
     {
       values: [
         { bool_value: true},
@@ -57,7 +57,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner 
       ]
     }
   end
-  let :results_hash4 do
+  let :partial_row_3 do
     {
       values: [
         { number_value: 0.9 },
@@ -66,7 +66,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner 
       resume_token: "abc123"
     }
   end
-  let :results_hash5 do
+  let :partial_row_4 do
     {
       values: [
         { string_value: "1950-01-01" },
@@ -74,7 +74,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner 
       ]
     }
   end
-  let :results_hash6 do
+  let :partial_row_5 do
     {
       values: [
         { list_value: { values: [ { string_value: "1"},
@@ -83,40 +83,148 @@ describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner 
       ]
     }
   end
-  let(:results_enum1) do
-    [
-      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash1),
-      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash2),
-      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash3),
-      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash4),
-      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash5),
-      GRPC::Unavailable,
-      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash6)
-    ].to_enum
+  let :full_row do
+    {
+      values: [
+        { string_value: "1" },
+        { string_value: "Charlie" },
+        { bool_value: true},
+        { string_value: "29" },
+        { number_value: 0.9 },
+        { string_value: "2017-01-02T03:04:05.060000000Z" },
+        { string_value: "1950-01-01" },
+        { string_value: "aW1hZ2U=" },
+        { list_value: { values: [ { string_value: "1"},
+                                 { string_value: "2"},
+                                 { string_value: "3"} ]}}
+      ],
+    }
   end
-  let(:results_enum2) do
-    [
-      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash1),
-      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash5),
-      Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash6)
-    ].to_enum
-  end
+
+  let(:service_mock) { Minitest::Mock.new }
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
 
-  it "resumes broken response streams" do
-    mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
-    spanner.service.mocked_service = mock
-    expect_execute_streaming_sql RaiseableEnumerator.new(results_enum1), session_grpc.name, "SELECT * FROM users", options: default_options
-    expect_execute_streaming_sql RaiseableEnumerator.new(results_enum2), session_grpc.name, "SELECT * FROM users", resume_token: "abc123", options: default_options
+  before do
+    spanner.service.mocked_service = service_mock
+  end
 
-    results = client.execute_query "SELECT * FROM users"
-
-    assert_results results
-
+  after do
     shutdown_client! client
+  end
 
-    mock.verify
+  describe "when a resume token is available" do
+    it "resumes broken response streams" do
+      resulting_stream_1 = [
+        Google::Cloud::Spanner::V1::PartialResultSet.new(metadata_result),
+        Google::Cloud::Spanner::V1::PartialResultSet.new(partial_row_1),
+        Google::Cloud::Spanner::V1::PartialResultSet.new(partial_row_2),
+        Google::Cloud::Spanner::V1::PartialResultSet.new(partial_row_3),
+        Google::Cloud::Spanner::V1::PartialResultSet.new(partial_row_4),
+        GRPC::Unavailable,
+        Google::Cloud::Spanner::V1::PartialResultSet.new(partial_row_5)
+      ].to_enum
+      resulting_stream_2 = [
+        Google::Cloud::Spanner::V1::PartialResultSet.new(metadata_result),
+        Google::Cloud::Spanner::V1::PartialResultSet.new(partial_row_4),
+        Google::Cloud::Spanner::V1::PartialResultSet.new(partial_row_5)
+      ].to_enum
+      service_mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_1), session_grpc.name, "SELECT * FROM users", options: default_options
+      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_2), session_grpc.name, "SELECT * FROM users", resume_token: "abc123", options: default_options
+
+      results = client.execute_query "SELECT * FROM users"
+
+      assert_results results
+      service_mock.verify
+    end
+  end
+
+  describe "when a resume token is NOT available" do
+    it "restarts the request when an unavailable error is returned" do
+      resulting_stream_1 = [
+        Google::Cloud::Spanner::V1::PartialResultSet.new(metadata_result),
+        GRPC::Unavailable,
+      ].to_enum
+      resulting_stream_2 = [
+        Google::Cloud::Spanner::V1::PartialResultSet.new(full_row)
+      ].to_enum
+      service_mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_1), session_grpc.name, "SELECT * FROM users", options: default_options
+      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_2), session_grpc.name, "SELECT * FROM users", options: default_options
+
+      results = client.execute_query "SELECT * FROM users"
+
+      assert_results results
+      service_mock.verify
+    end
+
+    it "restarts the request when an aborted error is returned" do
+      resulting_stream_1 = [
+        Google::Cloud::Spanner::V1::PartialResultSet.new(metadata_result),
+        GRPC::Aborted,
+      ].to_enum
+      resulting_stream_2 = [
+        Google::Cloud::Spanner::V1::PartialResultSet.new(full_row)
+      ].to_enum
+      service_mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_1), session_grpc.name, "SELECT * FROM users", options: default_options
+      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_2), session_grpc.name, "SELECT * FROM users", options: default_options
+
+      results = client.execute_query "SELECT * FROM users"
+
+      assert_results results
+      service_mock.verify
+    end
+
+    it "restarts the request when a EOS internal error is returned" do
+      resulting_stream_1 = [
+        Google::Cloud::Spanner::V1::PartialResultSet.new(metadata_result),
+        GRPC::Internal.new("INTERNAL: Received unexpected EOS on DATA frame from server"),
+      ].to_enum
+      resulting_stream_2 = [
+        Google::Cloud::Spanner::V1::PartialResultSet.new(full_row)
+      ].to_enum
+      service_mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_1), session_grpc.name, "SELECT * FROM users", options: default_options
+      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_2), session_grpc.name, "SELECT * FROM users", options: default_options
+
+      results = client.execute_query "SELECT * FROM users"
+
+      assert_results results
+      service_mock.verify
+    end
+
+    it "restarts the request when a RST_STREAM internal error is returned" do
+      resulting_stream_1 = [
+        Google::Cloud::Spanner::V1::PartialResultSet.new(metadata_result),
+        GRPC::Internal.new("INTERNAL: Received RST_STREAM with code 2 (Internal server error)"),
+      ].to_enum
+      resulting_stream_2 = [
+        Google::Cloud::Spanner::V1::PartialResultSet.new(full_row)
+      ].to_enum
+      service_mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_1), session_grpc.name, "SELECT * FROM users", options: default_options
+      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_2), session_grpc.name, "SELECT * FROM users", options: default_options
+
+      results = client.execute_query "SELECT * FROM users"
+
+      assert_results results
+      service_mock.verify
+    end
+
+    it "bubbles up the error when a generic internal error is returned" do
+      resulting_stream_1 = [
+        Google::Cloud::Spanner::V1::PartialResultSet.new(metadata_result),
+        GRPC::Internal.new("INTERNAL: Generic (Internal server error)"),
+      ].to_enum
+      service_mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_1), session_grpc.name, "SELECT * FROM users", options: default_options
+
+      assert_raises Google::Cloud::Error do
+        results = client.execute_query "SELECT * FROM users"
+        results.rows.to_a # gets results from the enumerator
+      end
+    end
   end
 
   def assert_results results
