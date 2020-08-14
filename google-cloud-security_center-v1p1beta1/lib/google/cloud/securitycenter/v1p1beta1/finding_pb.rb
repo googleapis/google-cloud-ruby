@@ -22,11 +22,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :security_marks, :message, 8, "google.cloud.securitycenter.v1p1beta1.SecurityMarks"
       optional :event_time, :message, 9, "google.protobuf.Timestamp"
       optional :create_time, :message, 10, "google.protobuf.Timestamp"
+      optional :severity, :enum, 13, "google.cloud.securitycenter.v1p1beta1.Finding.Severity"
     end
     add_enum "google.cloud.securitycenter.v1p1beta1.Finding.State" do
       value :STATE_UNSPECIFIED, 0
       value :ACTIVE, 1
       value :INACTIVE, 2
+    end
+    add_enum "google.cloud.securitycenter.v1p1beta1.Finding.Severity" do
+      value :SEVERITY_UNSPECIFIED, 0
+      value :CRITICAL, 1
+      value :HIGH, 2
+      value :MEDIUM, 3
+      value :LOW, 4
     end
   end
 end
@@ -37,6 +45,7 @@ module Google
       module V1p1beta1
         Finding = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1p1beta1.Finding").msgclass
         Finding::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1p1beta1.Finding.State").enummodule
+        Finding::Severity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1p1beta1.Finding.Severity").enummodule
       end
     end
   end

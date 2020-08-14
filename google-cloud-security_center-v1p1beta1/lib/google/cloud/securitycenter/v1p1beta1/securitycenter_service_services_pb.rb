@@ -35,7 +35,6 @@ module Google
 
             # Creates a source.
             rpc :CreateSource, Google::Cloud::SecurityCenter::V1p1beta1::CreateSourceRequest, Google::Cloud::SecurityCenter::V1p1beta1::Source
-            #
             # Creates a finding. The corresponding source must exist for finding
             # creation to succeed.
             rpc :CreateFinding, Google::Cloud::SecurityCenter::V1p1beta1::CreateFindingRequest, Google::Cloud::SecurityCenter::V1p1beta1::Finding
@@ -78,7 +77,6 @@ module Google
             # it is called too frequently the caller will receive a TOO_MANY_REQUESTS
             # error.
             rpc :RunAssetDiscovery, Google::Cloud::SecurityCenter::V1p1beta1::RunAssetDiscoveryRequest, Google::Longrunning::Operation
-            #
             # Updates the state of a finding.
             rpc :SetFindingState, Google::Cloud::SecurityCenter::V1p1beta1::SetFindingStateRequest, Google::Cloud::SecurityCenter::V1p1beta1::Finding
             # Sets the access control policy on the specified Source.
