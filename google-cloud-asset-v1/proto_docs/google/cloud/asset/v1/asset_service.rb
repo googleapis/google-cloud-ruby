@@ -37,9 +37,22 @@ module Google
         #     running the same query may get different results.
         # @!attribute [rw] asset_types
         #   @return [::Array<::String>]
-        #     A list of asset types of which to take a snapshot for. Example:
-        #     "compute.googleapis.com/Disk". If specified, only matching assets will be
-        #     returned. See [Introduction to Cloud Asset
+        #     A list of asset types to take a snapshot for. For example:
+        #     "compute.googleapis.com/Disk".
+        #
+        #     Regular expressions are also supported. For example:
+        #
+        #     * "compute.googleapis.com.*" snapshots resources whose asset type starts
+        #     with "compute.googleapis.com".
+        #     * ".*Instance" snapshots resources whose asset type ends with "Instance".
+        #     * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+        #
+        #     See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+        #     regular expression syntax. If the regular expression does not match any
+        #     supported asset type, an INVALID_ARGUMENT error will be returned.
+        #
+        #     If specified, only matching assets will be returned, otherwise, it will
+        #     snapshot all asset types. See [Introduction to Cloud Asset
         #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
         #     for all supported asset types.
         # @!attribute [rw] content_type
@@ -48,24 +61,28 @@ module Google
         #     returned.
         # @!attribute [rw] output_config
         #   @return [::Google::Cloud::Asset::V1::OutputConfig]
-        #     Required. Output configuration indicating where the results will be output
-        #     to.
+        #     Required. Output configuration indicating where the results will be output to.
         class ExportAssetsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The export asset response. This message is returned by the
-        # google.longrunning.Operations.GetOperation
-        # method in the returned
-        # {::Google::Longrunning::Operation#response google.longrunning.Operation.response}
-        # field.
+        # google.longrunning.Operations.GetOperation method in the returned
+        # {::Google::Longrunning::Operation#response google.longrunning.Operation.response} field.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Time the snapshot was taken.
         # @!attribute [rw] output_config
         #   @return [::Google::Cloud::Asset::V1::OutputConfig]
         #     Output configuration indicating where the results were output to.
+        # @!attribute [rw] output_result
+        #   @return [::Google::Cloud::Asset::V1::OutputResult]
+        #     Output result indicating where the assets were exported to. For example, a
+        #     set of actual Google Cloud Storage object uris where the assets are
+        #     exported to. The uris can be different from what [output_config] has
+        #     specified, as the service will split the output object into multiple ones
+        #     once it exceeds a single Google Cloud Storage object limit.
         class ExportAssetsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -126,8 +143,9 @@ module Google
         #     be unique under a specific parent project/folder/organization.
         # @!attribute [rw] feed
         #   @return [::Google::Cloud::Asset::V1::Feed]
-        #     Required. The feed details. The field `name` must be empty and it will be
-        #     generated in the format of: projects/project_number/feeds/feed_id
+        #     Required. The feed details. The field `name` must be empty and it will be generated
+        #     in the format of:
+        #     projects/project_number/feeds/feed_id
         #     folders/folder_number/feeds/feed_id
         #     organizations/organization_number/feeds/feed_id
         class CreateFeedRequest
@@ -169,8 +187,8 @@ module Google
         # Update asset feed request.
         # @!attribute [rw] feed
         #   @return [::Google::Cloud::Asset::V1::Feed]
-        #     Required. The new values of feed details. It must match an existing feed
-        #     and the field `name` must be in the format of:
+        #     Required. The new values of feed details. It must match an existing feed and the
+        #     field `name` must be in the format of:
         #     projects/project_number/feeds/feed_id or
         #     folders/folder_number/feeds/feed_id or
         #     organizations/organization_number/feeds/feed_id.
@@ -204,6 +222,25 @@ module Google
         #     Destination on BigQuery. The output table stores the fields in asset
         #     proto as columns in BigQuery.
         class OutputConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Output result of export assets.
+        # @!attribute [rw] gcs_result
+        #   @return [::Google::Cloud::Asset::V1::GcsOutputResult]
+        #     Export result on Cloud Storage.
+        class OutputResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Cloud Storage output result.
+        # @!attribute [rw] uris
+        #   @return [::Array<::String>]
+        #     List of uris of the Cloud Storage objects. Example:
+        #     "gs://bucket_name/object_name".
+        class GcsOutputResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -324,8 +361,12 @@ module Google
         #     When set, `expression` field in the `Expr` must be a valid [CEL expression]
         #     (https://github.com/google/cel-spec) on a TemporalAsset with name
         #     `temporal_asset`. Example: a Feed with expression ("temporal_asset.deleted
-        #     == true") will only publish Asset deletions. Other fields in `Expr` are
+        #     == true") will only publish Asset deletions. Other fields of `Expr` are
         #     optional.
+        #
+        #     See our [user
+        #     guide](https://cloud.google.com/asset-inventory/docs/monitoring-asset-changes#feed_with_condition)
+        #     for detailed instructions.
         class Feed
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -334,75 +375,81 @@ module Google
         # Search all resources request.
         # @!attribute [rw] scope
         #   @return [::String]
-        #     Required. A scope can be a project, a folder or an organization. The search
-        #     is limited to the resources within the `scope`.
+        #     Required. A scope can be a project, a folder, or an organization. The search is
+        #     limited to the resources within the `scope`. The caller must be granted the
+        #     [`cloudasset.assets.searchAllResources`](http://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+        #     permission on the desired scope.
         #
         #     The allowed values are:
         #
-        #     * projects/\\{PROJECT_ID}
-        #     * projects/\\{PROJECT_NUMBER}
-        #     * folders/\\{FOLDER_NUMBER}
-        #     * organizations/\\{ORGANIZATION_NUMBER}
+        #     * projects/\\{PROJECT_ID} (e.g., "projects/foo-bar")
+        #     * projects/\\{PROJECT_NUMBER} (e.g., "projects/12345678")
+        #     * folders/\\{FOLDER_NUMBER} (e.g., "folders/1234567")
+        #     * organizations/\\{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
         # @!attribute [rw] query
         #   @return [::String]
-        #     Optional. The query statement. An empty query can be specified to search
-        #     all the resources of certain `asset_types` within the given `scope`.
+        #     Optional. The query statement. See [how to construct a
+        #     query](http://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
+        #     for more information. If not specified or empty, it will search all the
+        #     resources within the specified `scope`. Note that the query string is
+        #     compared against each Cloud IAM policy binding, including its members,
+        #     roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
+        #     contain the bindings that match your query. To learn more about the IAM
+        #     policy structure, see [IAM policy
+        #     doc](https://cloud.google.com/iam/docs/policies#structure).
         #
         #     Examples:
         #
-        #     * `name : "Important"` to find Cloud resources whose name contains
+        #     * `name:Important` to find Cloud resources whose name contains
         #       "Important" as a word.
-        #     * `displayName : "Impor*"` to find Cloud resources whose display name
-        #       contains "Impor" as a word prefix.
-        #     * `description : "*por*"` to find Cloud resources whose description
+        #     * `displayName:Impor*` to find Cloud resources whose display name
+        #       contains "Impor" as a prefix.
+        #     * `description:*por*` to find Cloud resources whose description
         #       contains "por" as a substring.
-        #     * `location : "us-west*"` to find Cloud resources whose location is
+        #     * `location:us-west*` to find Cloud resources whose location is
         #       prefixed with "us-west".
-        #     * `labels : "prod"` to find Cloud resources whose labels contain "prod" as
+        #     * `labels:prod` to find Cloud resources whose labels contain "prod" as
         #       a key or value.
-        #     * `labels.env : "prod"` to find Cloud resources which have a label "env"
+        #     * `labels.env:prod` to find Cloud resources that have a label "env"
         #       and its value is "prod".
-        #     * `labels.env : *` to find Cloud resources which have a label "env".
-        #     * `"Important"` to find Cloud resources which contain "Important" as a word
+        #     * `labels.env:*` to find Cloud resources that have a label "env".
+        #     * `Important` to find Cloud resources that contain "Important" as a word
         #       in any of the searchable fields.
-        #     * `"Impor*"` to find Cloud resources which contain "Impor" as a word prefix
+        #     * `Impor*` to find Cloud resources that contain "Impor" as a prefix
         #       in any of the searchable fields.
-        #     * `"*por*"` to find Cloud resources which contain "por" as a substring in
+        #     * `*por*` to find Cloud resources that contain "por" as a substring in
         #       any of the searchable fields.
-        #     * `("Important" AND location : ("us-west1" OR "global"))` to find Cloud
-        #       resources which contain "Important" as a word in any of the searchable
+        #     * `Important location:(us-west1 OR global)` to find Cloud
+        #       resources that contain "Important" as a word in any of the searchable
         #       fields and are also located in the "us-west1" region or the "global"
         #       location.
-        #
-        #     See [how to construct a
-        #     query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
-        #     for more details.
         # @!attribute [rw] asset_types
         #   @return [::Array<::String>]
-        #     Optional. A list of asset types that this request searches for. If empty,
-        #     it will search all the [searchable asset
+        #     Optional. A list of asset types that this request searches for. If empty, it will
+        #     search all the [searchable asset
         #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The page size for search result pagination. Page size is capped
-        #     at 500 even if a larger value is given. If set to zero, server will pick an
-        #     appropriate default. Returned results may be fewer than requested. When
-        #     this happens, there could be more results as long as `next_page_token` is
-        #     returned.
+        #     Optional. The page size for search result pagination. Page size is capped at 500 even
+        #     if a larger value is given. If set to zero, server will pick an appropriate
+        #     default. Returned results may be fewer than requested. When this happens,
+        #     there could be more results as long as `next_page_token` is returned.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. If present, then retrieve the next batch of results from the
-        #     preceding call to this method. `page_token` must be the value of
-        #     `next_page_token` from the previous response. The values of all other
-        #     method parameters, must be identical to those in the previous call.
+        #     Optional. If present, then retrieve the next batch of results from the preceding call
+        #     to this method. `page_token` must be the value of `next_page_token` from
+        #     the previous response. The values of all other method parameters, must be
+        #     identical to those in the previous call.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Optional. A comma separated list of fields specifying the sorting order of
-        #     the results. The default order is ascending. Add " DESC" after the field
-        #     name to indicate descending order. Redundant space characters are ignored.
-        #     Example: "location DESC, name". See [supported resource metadata
-        #     fields](https://cloud.google.com/asset-inventory/docs/searching-resources#query_on_resource_metadata_fields)
-        #     for more details.
+        #     Optional. A comma separated list of fields specifying the sorting order of the
+        #     results. The default order is ascending. Add " DESC" after the field name
+        #     to indicate descending order. Redundant space characters are ignored.
+        #     Example: "location DESC, name". Only string fields in the response are
+        #     sortable, including `name`, `displayName`, `description`, `location`. All
+        #     the other fields such as repeated fields (e.g., `networkTags`), map
+        #     fields (e.g., `labels`) and struct fields (e.g., `additionalAttributes`)
+        #     are not supported.
         class SearchAllResourcesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -426,51 +473,58 @@ module Google
         # Search all IAM policies request.
         # @!attribute [rw] scope
         #   @return [::String]
-        #     Required. A scope can be a project, a folder or an organization. The search
-        #     is limited to the IAM policies within the `scope`.
+        #     Required. A scope can be a project, a folder, or an organization. The search is
+        #     limited to the IAM policies within the `scope`. The caller must be granted
+        #     the
+        #     [`cloudasset.assets.searchAllIamPolicies`](http://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+        #     permission on the desired scope.
         #
         #     The allowed values are:
         #
-        #     * projects/\\{PROJECT_ID}
-        #     * projects/\\{PROJECT_NUMBER}
-        #     * folders/\\{FOLDER_NUMBER}
-        #     * organizations/\\{ORGANIZATION_NUMBER}
+        #     * projects/\\{PROJECT_ID} (e.g., "projects/foo-bar")
+        #     * projects/\\{PROJECT_NUMBER} (e.g., "projects/12345678")
+        #     * folders/\\{FOLDER_NUMBER} (e.g., "folders/1234567")
+        #     * organizations/\\{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
         # @!attribute [rw] query
         #   @return [::String]
-        #     Optional. The query statement. An empty query can be specified to search
-        #     all the IAM policies within the given `scope`.
+        #     Optional. The query statement. See [how to construct a
+        #     query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
+        #     for more information. If not specified or empty, it will search all the
+        #     IAM policies within the specified `scope`.
         #
         #     Examples:
         #
-        #     * `policy : "amy@gmail.com"` to find Cloud IAM policy bindings that
-        #       specify user "amy@gmail.com".
-        #     * `policy : "roles/compute.admin"` to find Cloud IAM policy bindings that
-        #       specify the Compute Admin role.
-        #     * `policy.role.permissions : "storage.buckets.update"` to find Cloud IAM
-        #       policy bindings that specify a role containing "storage.buckets.update"
-        #       permission.
-        #     * `resource : "organizations/123"` to find Cloud IAM policy bindings that
-        #       are set on "organizations/123".
-        #     * `(resource : ("organizations/123" OR "folders/1234") AND policy : "amy")`
-        #       to find Cloud IAM policy bindings that are set on "organizations/123" or
-        #       "folders/1234", and also specify user "amy".
-        #
-        #     See [how to construct a
-        #     query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
-        #     for more details.
+        #     * `policy:amy@gmail.com` to find IAM policy bindings that specify user
+        #       "amy@gmail.com".
+        #     * `policy:roles/compute.admin` to find IAM policy bindings that specify
+        #       the Compute Admin role.
+        #     * `policy.role.permissions:storage.buckets.update` to find IAM policy
+        #       bindings that specify a role containing "storage.buckets.update"
+        #       permission. Note that if callers don't have `iam.roles.get` access to a
+        #       role's included permissions, policy bindings that specify this role will
+        #       be dropped from the search results.
+        #     * `resource:organizations/123456` to find IAM policy bindings
+        #       that are set on "organizations/123456".
+        #     * `Important` to find IAM policy bindings that contain "Important" as a
+        #       word in any of the searchable fields (except for the included
+        #       permissions).
+        #     * `*por*` to find IAM policy bindings that contain "por" as a substring
+        #       in any of the searchable fields (except for the included permissions).
+        #     * `resource:(instance1 OR instance2) policy:amy` to find
+        #       IAM policy bindings that are set on resources "instance1" or
+        #       "instance2" and also specify user "amy".
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The page size for search result pagination. Page size is capped
-        #     at 500 even if a larger value is given. If set to zero, server will pick an
-        #     appropriate default. Returned results may be fewer than requested. When
-        #     this happens, there could be more results as long as `next_page_token` is
-        #     returned.
+        #     Optional. The page size for search result pagination. Page size is capped at 500 even
+        #     if a larger value is given. If set to zero, server will pick an appropriate
+        #     default. Returned results may be fewer than requested. When this happens,
+        #     there could be more results as long as `next_page_token` is returned.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. If present, retrieve the next batch of results from the preceding
-        #     call to this method. `page_token` must be the value of `next_page_token`
-        #     from the previous response. The values of all other method parameters must
-        #     be identical to those in the previous call.
+        #     Optional. If present, retrieve the next batch of results from the preceding call to
+        #     this method. `page_token` must be the value of `next_page_token` from the
+        #     previous response. The values of all other method parameters must be
+        #     identical to those in the previous call.
         class SearchAllIamPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -505,7 +559,7 @@ module Google
           # The Cloud Organization Policy set on an asset.
           ORG_POLICY = 4
 
-          # The Cloud Access context mananger Policy set on an asset.
+          # The Cloud Access context manager Policy set on an asset.
           ACCESS_POLICY = 5
         end
       end
