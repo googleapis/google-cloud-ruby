@@ -135,8 +135,8 @@ describe Google::Cloud::Firestore::CollectionReference, :query, :mock_firestore 
 
   it "runs a query with multiple order calls, start_at, end_at and limit_to_last" do
     expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
-      start_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: false),
-      end_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: true),
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true),
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: false),
       from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "messages")],
       order_by: [
         Google::Cloud::Firestore::V1::StructuredQuery::Order.new(

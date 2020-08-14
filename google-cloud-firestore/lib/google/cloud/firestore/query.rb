@@ -433,10 +433,16 @@ module Google
           end
 
           # Swap the cursors to match the flipped query ordering.
-          new_start_at = new_query.end_at.dup
           new_end_at = new_query.start_at.dup
-          new_query.start_at = new_start_at
-          new_query.end_at = new_end_at
+          new_start_at = new_query.end_at.dup
+          if new_end_at
+            new_end_at.before = !new_end_at.before
+            new_query.end_at = new_end_at
+          end
+          if new_start_at
+            new_start_at.before = !new_start_at.before
+            new_query.start_at = new_start_at
+          end
 
           new_query.limit = Google::Protobuf::Int32Value.new value: num
 
