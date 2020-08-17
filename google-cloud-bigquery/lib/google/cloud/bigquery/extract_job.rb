@@ -99,9 +99,10 @@ module Google
         # Checks if the export operation compresses the data using gzip. The
         # default is `false`. Not applicable when extracting models.
         #
-        # @return [Boolean] `true` when `GZIP`, `false` otherwise.
-        #
+        # @return [Boolean] `true` when `GZIP`, `false` if not `GZIP` or not a
+        #   table extraction.
         def compression?
+          return false unless table?
           val = @gapi.configuration.extract.compression
           val == "GZIP"
         end
@@ -111,10 +112,11 @@ module Google
         # JSON](http://jsonlines.org/). The default is `false`. Not applicable when
         # extracting models.
         #
-        # @return [Boolean] `true` when `NEWLINE_DELIMITED_JSON`, `false`
-        #   otherwise.
+        # @return [Boolean] `true` when `NEWLINE_DELIMITED_JSON`, `false` if not
+        #   `NEWLINE_DELIMITED_JSON` or not a table extraction.
         #
         def json?
+          return false unless table?
           val = @gapi.configuration.extract.destination_format
           val == "NEWLINE_DELIMITED_JSON"
         end
@@ -122,13 +124,15 @@ module Google
         ##
         # Checks if the destination format for the table data is CSV. Tables with
         # nested or repeated fields cannot be exported as CSV. The default is
-        # `true` for tables.  Not applicable when extracting models.
+        # `true` for tables. Not applicable when extracting models.
         #
-        # @return [Boolean] `true` when `CSV`, `false` otherwise.
+        # @return [Boolean] `true` when `CSV`, or `false` if not `CSV` or not a
+        #   table extraction.
         #
         def csv?
+          return false unless table?
           val = @gapi.configuration.extract.destination_format
-          return true if table? && val.nil?
+          return true if val.nil?
           val == "CSV"
         end
 
@@ -137,9 +141,11 @@ module Google
         # [Avro](http://avro.apache.org/). The default is `false`. Not applicable
         # when extracting models.
         #
-        # @return [Boolean] `true` when `AVRO`, `false` otherwise.
+        # @return [Boolean] `true` when `AVRO`, `false` if not `AVRO` or not a
+        #   table extraction.
         #
         def avro?
+          return false unless table?
           val = @gapi.configuration.extract.destination_format
           val == "AVRO"
         end
@@ -148,11 +154,13 @@ module Google
         # Checks if the destination format for the model is TensorFlow SavedModel.
         # The default is `true` for models. Not applicable when extracting tables.
         #
-        # @return [Boolean] `true` when `ML_TF_SAVED_MODEL`, `false` otherwise.
+        # @return [Boolean] `true` when `ML_TF_SAVED_MODEL`, `false` if not
+        #   `ML_TF_SAVED_MODEL` or not a model extraction.
         #
         def ml_tf_saved_model?
+          return false unless model?
           val = @gapi.configuration.extract.destination_format
-          return true if model? && val.nil?
+          return true if val.nil?
           val == "ML_TF_SAVED_MODEL"
         end
 
@@ -160,9 +168,11 @@ module Google
         # Checks if the destination format for the model is XGBoost. The default
         # is `false`. Not applicable when extracting tables.
         #
-        # @return [Boolean] `true` when `ML_XGBOOST_BOOSTER`, `false` otherwise.
+        # @return [Boolean] `true` when `ML_XGBOOST_BOOSTER`, `false` if not
+        #   `ML_XGBOOST_BOOSTER` or not a model extraction.
         #
         def ml_xgboost_booster?
+          return false unless model?
           val = @gapi.configuration.extract.destination_format
           val == "ML_XGBOOST_BOOSTER"
         end
@@ -172,11 +182,13 @@ module Google
         # exported data. The default is a comma (,) for tables. Not applicable
         # when extracting models.
         #
-        # @return [String] A string containing the character, such as `","`.
+        # @return [String, nil] A string containing the character, such as `","`,
+        #   `nil` if not a table extraction.
         #
         def delimiter
+          return unless table?
           val = @gapi.configuration.extract.field_delimiter
-          val = "," if table? && val.nil?
+          val = "," if val.nil?
           val
         end
 
@@ -185,11 +197,12 @@ module Google
         # `true` for tables. Not applicable when extracting models.
         #
         # @return [Boolean] `true` when the print header configuration is
-        #   present or `nil`, `false` otherwise.
+        #   present or `nil`, `false` if disabled or not a table extraction.
         #
         def print_header?
+          return false unless table?
           val = @gapi.configuration.extract.print_header
-          val = true if table? && val.nil?
+          val = true if val.nil?
           val
         end
 
@@ -223,9 +236,11 @@ module Google
         # (`avro-long`). Not applicable when extracting models.
         #
         # @return [Boolean] `true` when applicable column types will use their
-        #   corresponding AVRO logical types, `false` otherwise.
+        #   corresponding AVRO logical types, `false` if not enabled or not a
+        #   table extraction.
         #
         def use_avro_logical_types?
+          return false unless table?
           @gapi.configuration.extract.use_avro_logical_types
         end
 
