@@ -1371,7 +1371,7 @@ module Google
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with
         #   the job. You can use these to organize and group your jobs. Label
-        #   keys and values can be no longer than 63 characters, can only
+        #   keys and values can be no longer than 63 characters, and can only
         #   contain lowercase letters, numeric characters, underscores and
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
@@ -1511,7 +1511,7 @@ module Google
         # The geographic location for the job ("US", "EU", etc.) can be set via
         # {ExtractJob::Updater#location=} in a block passed to this method. If
         # the table is a full resource representation (see {#resource_full?}),
-        # the location of the job will be automatically set to the location of
+        # the location of the job will automatically be set to the location of
         # the table.
         #
         # @see https://cloud.google.com/bigquery/docs/exporting-data
@@ -1552,7 +1552,7 @@ module Google
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with
         #   the job. You can use these to organize and group your jobs. Label
-        #   keys and values can be no longer than 63 characters, can only
+        #   keys and values can be no longer than 63 characters, and can only
         #   contain lowercase letters, numeric characters, underscores and
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
@@ -1792,7 +1792,7 @@ module Google
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with
         #   the job. You can use these to organize and group your jobs. Label
-        #   keys and values can be no longer than 63 characters, can only
+        #   keys and values can be no longer than 63 characters, and can only
         #   contain lowercase letters, numeric characters, underscores and
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the

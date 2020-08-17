@@ -483,9 +483,9 @@ module Google
         end
 
         ##
-        # Exports the model to a Google Cloud Storage file using
-        # an asynchronous method. In this method, an {ExtractJob} is immediately
-        # returned. The caller may poll the service by repeatedly calling
+        # Exports the model to Google Cloud Storage asynchronously, immediately
+        # returning an {ExtractJob} that can be used to track the progress of the
+        # export job. The caller may poll the service by repeatedly calling
         # {Job#reload!} and {Job#done?} to detect when the job is done, or
         # simply block until the job is done by calling #{Job#wait_until_done!}.
         # See also {#extract}.
@@ -493,7 +493,7 @@ module Google
         # The geographic location for the job ("US", "EU", etc.) can be set via
         # {ExtractJob::Updater#location=} in a block passed to this method. If
         # the model is a full resource representation (see {#resource_full?}),
-        # the location of the job will be automatically set to the location of
+        # the location of the job will automatically be set to the location of
         # the model.
         #
         # @see https://cloud.google.com/bigquery-ml/docs/exporting-models
@@ -526,15 +526,12 @@ module Google
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with
         #   the job. You can use these to organize and group your jobs. Label
-        #   keys and values can be no longer than 63 characters, can only
+        #   keys and values can be no longer than 63 characters, and can only
         #   contain lowercase letters, numeric characters, underscores and
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
         #   list must have a different key. See [Requirements for
         #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
-        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
-        #   is undefined however for non-query jobs and may result in an error.
-        #   Deprecated.
         #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
@@ -556,9 +553,9 @@ module Google
         #
         # @!group Data
         #
-        def extract_job extract_url, format: nil, job_id: nil, prefix: nil, labels: nil, dryrun: nil
+        def extract_job extract_url, format: nil, job_id: nil, prefix: nil, labels: nil
           ensure_service!
-          options = { format: format, dryrun: dryrun, job_id: job_id, prefix: prefix, labels: labels }
+          options = { format: format, job_id: job_id, prefix: prefix, labels: labels }
           updater = ExtractJob::Updater.from_options service, model_ref, extract_url, options
           updater.location = location if location # may be model reference
 
@@ -570,15 +567,14 @@ module Google
         end
 
         ##
-        # Exports the model to a Google Cloud Storage file using
-        # a synchronous method that blocks for a response. Timeouts and
-        # transient errors are generally handled as needed to complete the job.
-        # See also {#extract_job}.
+        # Exports the model to Google Cloud Storage using a synchronous method
+        # that blocks for a response. Timeouts and transient errors are generally
+        # handled as needed to complete the job. See also {#extract_job}.
         #
         # The geographic location for the job ("US", "EU", etc.) can be set via
         # {ExtractJob::Updater#location=} in a block passed to this method. If
         # the model is a full resource representation (see {#resource_full?}),
-        # the location of the job will be automatically set to the location of
+        # the location of the job will automatically be set to the location of
         # the model.
         #
         # @see https://cloud.google.com/bigquery-ml/docs/exporting-models

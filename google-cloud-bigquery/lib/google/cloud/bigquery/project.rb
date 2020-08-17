@@ -154,7 +154,7 @@ module Google
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with
         #   the job. You can use these to organize and group your jobs. Label
-        #   keys and values can be no longer than 63 characters, can only
+        #   keys and values can be no longer than 63 characters, and can only
         #   contain lowercase letters, numeric characters, underscores and
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
@@ -412,7 +412,7 @@ module Google
         #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
         # @param [Hash] labels A hash of user-provided labels associated with
         #   the job. You can use these to organize and group your jobs. Label
-        #   keys and values can be no longer than 63 characters, can only
+        #   keys and values can be no longer than 63 characters, and can only
         #   contain lowercase letters, numeric characters, underscores and
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
@@ -1445,11 +1445,11 @@ module Google
         end
 
         ##
-        # Extracts the data from a table or exports a model to a Google Cloud Storage
-        # file using an asynchronous method. In this method, an {ExtractJob} is
-        # immediately returned. The caller may poll the service by repeatedly
-        # calling {Job#reload!} and {Job#done?} to detect when the job is done,
-        # or simply block until the job is done by calling
+        # Extracts the data from a table or exports a model to Google Cloud Storage
+        # asynchronously, immediately returning an {ExtractJob} that can be used to
+        # track the progress of the export job.  The caller may poll the service by
+        # repeatedly calling {Job#reload!} and {Job#done?} to detect when the job
+        # is done, or simply block until the job is done by calling
         # #{Job#wait_until_done!}. See {#extract} for the synchronous version.
         #
         # Use this method instead of {Table#extract_job} or {Model#extract_job} to
@@ -1514,7 +1514,7 @@ module Google
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with
         #   the job. You can use these to organize and group your jobs. Label
-        #   keys and values can be no longer than 63 characters, can only
+        #   keys and values can be no longer than 63 characters, and can only
         #   contain lowercase letters, numeric characters, underscores and
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
@@ -1568,8 +1568,8 @@ module Google
         end
 
         ##
-        # Extracts the data from a table or exports a model to a Google Cloud Storage
-        # object using a synchronous method that blocks for a response. Timeouts
+        # Extracts the data from a table or exports a model to Google Cloud Storage
+        # using a synchronous method that blocks for a response. Timeouts
         # and transient errors are generally handled as needed to complete the
         # job. See {#extract_job} for the asynchronous version.
         #
