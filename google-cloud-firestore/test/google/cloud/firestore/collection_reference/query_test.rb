@@ -154,6 +154,26 @@ describe Google::Cloud::Firestore::CollectionReference, :query, :mock_firestore 
     assert_results_enum results_enum
   end
 
+  it "updates limit but does not reflip cursors when calling limit_to_last more than once" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true),
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: false),
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "messages")],
+      order_by: [
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name"),
+          direction: :DESCENDING
+        )
+      ],
+      limit: Google::Protobuf::Int32Value.new(value: 3)
+    )
+    firestore_mock.expect :run_query, query_results_descending_enum, run_query_args(expected_query, parent: collection.parent_path)
+
+    results_enum = collection.order(:name).start_at(:foo).end_at(:bar).limit_to_last(2).limit_to_last(3).get
+
+    assert_results_enum results_enum
+  end
+
   it "raises when calling limit_to_last without order" do
     error = expect do
       collection.limit_to_last(12)
@@ -161,11 +181,39 @@ describe Google::Cloud::Firestore::CollectionReference, :query, :mock_firestore 
     _(error.message).must_equal "specify at least one order clause before calling limit_to_last"
   end
 
-  it "raises when calling limit_to_last more than once" do
+  it "raises when calling limit after limit_to_last" do
     error = expect do
-      collection.order(:name).limit_to_last(12).limit_to_last(23)
+      collection.order(:name).limit_to_last(12).limit(99)
     end.must_raise RuntimeError
-    _(error.message).must_equal "limit_to_last may only be called once"
+    _(error.message).must_equal "cannot call limit after calling limit_to_last"
+  end
+
+  it "raises when calling start_at after limit_to_last" do
+    error = expect do
+      collection.order(:name).limit_to_last(12).start_at("foo")
+    end.must_raise RuntimeError
+    _(error.message).must_equal "cannot call start_at after calling limit_to_last"
+  end
+
+  it "raises when calling start_after after limit_to_last" do
+    error = expect do
+      collection.order(:name).limit_to_last(12).start_after("foo")
+    end.must_raise RuntimeError
+    _(error.message).must_equal "cannot call start_after after calling limit_to_last"
+  end
+
+  it "raises when calling end_before after limit_to_last" do
+    error = expect do
+      collection.order(:name).limit_to_last(12).end_before("foo")
+    end.must_raise RuntimeError
+    _(error.message).must_equal "cannot call end_before after calling limit_to_last"
+  end
+
+  it "raises when calling end_at after limit_to_last" do
+    error = expect do
+      collection.order(:name).limit_to_last(12).end_at("foo")
+    end.must_raise RuntimeError
+    _(error.message).must_equal "cannot call end_at after calling limit_to_last"
   end
 
   it "raises when calling order after limit_to_last" do

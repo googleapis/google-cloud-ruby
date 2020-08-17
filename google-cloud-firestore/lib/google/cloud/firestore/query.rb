@@ -379,6 +379,10 @@ module Google
         #   end
         #
         def limit num
+          if limit_type == :last
+            raise "cannot call limit after calling limit_to_last"
+          end
+
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
@@ -423,25 +427,23 @@ module Google
             raise "specify at least one order clause before calling limit_to_last"
           end
 
-          if limit_type == :last # don't reverse order_by more than once
-            raise "limit_to_last may only be called once"
-          end
+          if limit_type != :last # don't reverse order_by more than once
+            # Flip the orderBy directions since we want the last results
+            new_query.order_by.each do |order|
+              order.direction = order.direction.to_sym == :DESCENDING ? :ASCENDING : :DESCENDING
+            end
 
-          # Flip the orderBy directions since we want the last results
-          new_query.order_by.each do |order|
-            order.direction = order.direction.to_sym == :DESCENDING ? :ASCENDING : :DESCENDING
-          end
-
-          # Swap the cursors to match the flipped query ordering.
-          new_end_at = new_query.start_at.dup
-          new_start_at = new_query.end_at.dup
-          if new_end_at
-            new_end_at.before = !new_end_at.before
-            new_query.end_at = new_end_at
-          end
-          if new_start_at
-            new_start_at.before = !new_start_at.before
-            new_query.start_at = new_start_at
+            # Swap the cursors to match the flipped query ordering.
+            new_end_at = new_query.start_at.dup
+            new_start_at = new_query.end_at.dup
+            if new_end_at
+              new_end_at.before = !new_end_at.before
+              new_query.end_at = new_end_at
+            end
+            if new_start_at
+              new_start_at.before = !new_start_at.before
+              new_query.start_at = new_start_at
+            end
           end
 
           new_query.limit = Google::Protobuf::Int32Value.new value: num
@@ -542,6 +544,10 @@ module Google
         #
         def start_at *values
           raise ArgumentError, "must provide values" if values.empty?
+
+          if limit_type == :last
+            raise "cannot call start_at after calling limit_to_last"
+          end
 
           new_query = @query.dup
           new_query ||= StructuredQuery.new
@@ -647,6 +653,11 @@ module Google
         def start_after *values
           raise ArgumentError, "must provide values" if values.empty?
 
+          if limit_type == :last
+            raise "cannot call start_after after calling limit_to_last"
+          end
+
+
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
@@ -750,6 +761,11 @@ module Google
         #
         def end_before *values
           raise ArgumentError, "must provide values" if values.empty?
+
+          if limit_type == :last
+            raise "cannot call end_before after calling limit_to_last"
+          end
+
 
           new_query = @query.dup
           new_query ||= StructuredQuery.new
@@ -855,6 +871,11 @@ module Google
         def end_at *values
           raise ArgumentError, "must provide values" if values.empty?
 
+          if limit_type == :last
+            raise "cannot call end_at after calling limit_to_last"
+          end
+
+
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
@@ -932,10 +953,6 @@ module Google
         #
         def listen &callback
           raise ArgumentError, "callback required" if callback.nil?
-
-          if limit_type == :last
-            raise "Queries that include limit_to_last constraints cannot be streamed. Use Query#get instead."
-          end
 
           ensure_service!
 
