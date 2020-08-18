@@ -105,10 +105,9 @@ module Google
           #   only the date part (for instance, "2013-01-15"). This condition is
           #   satisfied when a file is created before midnight of the specified
           #   date in UTC.
-          # @param [String,DateTime] custom_time_before A timestamp string in
-          #   RFC3339 format (for example: `1980-01-31T21:47:33+06:00`) or
-          #   equivalent `DateTime` object. The condition is satisfied when the
-          #   custom time on an object is before this timestamp.
+          # @param [String,Date] custom_time_before A date in RFC 3339 format with
+          #   only the date part (for instance, "2013-01-15"). This condition is
+          #   satisfied when the custom time on an object is before this date in UTC.
           # @param [Integer] days_since_custom_time Represents the number of
           #   days elapsed since the user-specified timestamp set on an object.
           #   The condition is satisfied if the days elapsed is at least this
@@ -130,10 +129,10 @@ module Google
           #   `DURABLE_REDUCED_AVAILABILITY` are supported as legacy storage
           #   classes. Arguments will be converted from symbols and lower-case
           #   to upper-case strings.
-          # @param [String,DateTime] noncurrent_time_before A timestamp string in
-          #   RFC3339 format (for example: `1980-01-31T21:47:33+06:00`) or
-          #   equivalent `DateTime` object. The condition is satisfied when the
-          #   noncurrent time on an object is before this timestamp.
+          # @param [String,Date] noncurrent_time_before A date in RFC 3339 format
+          #   with only the date part (for instance, "2013-01-15"). This condition
+          #   is satisfied when the noncurrent time on an object is before this
+          #   date in UTC. This condition is relevant only for versioned objects.
           # @param [Integer] num_newer_versions Relevant only for versioned
           #   files. If the value is N, this condition is satisfied when there
           #   are at least N versions (including the live version) newer than
@@ -188,10 +187,9 @@ module Google
           #   only the date part (for instance, "2013-01-15"). This condition is
           #   satisfied when a file is created before midnight of the specified
           #   date in UTC.
-          # @param [String,DateTime] custom_time_before A timestamp string in
-          #   RFC3339 format (for example: `1980-01-31T21:47:33+06:00`) or
-          #   equivalent `DateTime` object. The condition is satisfied when the
-          #   custom time on an object is before this timestamp.
+          # @param [String,Date] custom_time_before A date in RFC 3339 format with
+          #   only the date part (for instance, "2013-01-15"). This condition is
+          #   satisfied when the custom time on an object is before this date in UTC.
           # @param [Integer] days_since_custom_time Represents the number of
           #   days elapsed since the user-specified timestamp set on an object.
           #   The condition is satisfied if the days elapsed is at least this
@@ -213,10 +211,10 @@ module Google
           #   `DURABLE_REDUCED_AVAILABILITY` are supported as legacy storage
           #   classes. Arguments will be converted from symbols and lower-case
           #   to upper-case strings.
-          # @param [String,DateTime] noncurrent_time_before A timestamp string in
-          #   RFC3339 format (for example: `1980-01-31T21:47:33+06:00`) or
-          #   equivalent DateTime object. The condition is satisfied when the
-          #   noncurrent time on an object is before this timestamp.
+          # @param [String,Date] noncurrent_time_before A date in RFC 3339 format
+          #   with only the date part (for instance, "2013-01-15"). This condition
+          #   is satisfied when the noncurrent time on an object is before this
+          #   date in UTC. This condition is relevant only for versioned objects.
           # @param [Integer] num_newer_versions Relevant only for versioned
           #   files. If the value is N, this condition is satisfied when there
           #   are at least N versions (including the live version) newer than
@@ -300,10 +298,9 @@ module Google
           #   satisfied when a file is created before midnight of the specified
           #   date in UTC. When returned by the service, a non-empty value will
           #   always be a Date object.
-          # @attr [String,DateTime,nil] custom_time_before A timestamp string in
-          #   RFC3339 format (for example: `1980-01-31T21:47:33+06:00`) or
-          #   equivalent `DateTime` object. The condition is satisfied when the
-          #   custom time on an object is before this timestamp.
+          # @attr [String,Date,nil] custom_time_before A date in RFC 3339 format with
+          #   only the date part (for instance, "2013-01-15"). This condition is
+          #   satisfied when the custom time on an object is before this date in UTC.
           # @attr [Integer,nil] days_since_custom_time Represents the number of
           #   days elapsed since the user-specified timestamp set on an object.
           #   The condition is satisfied if the days elapsed is at least this
@@ -323,12 +320,12 @@ module Google
           #   Values include `STANDARD`, `NEARLINE`, `COLDLINE`, and `ARCHIVE`.
           #   `REGIONAL`, `MULTI_REGIONAL`, and `DURABLE_REDUCED_AVAILABILITY`
           #   are supported as legacy storage classes.
-          # @attr [String,DateTime,nil] noncurrent_time_before A timestamp string
-          #   in RFC3339 format (for example: `1980-01-31T21:47:33+06:00`) or
-          #   equivalent DateTime object. The condition is satisfied when the
-          #   noncurrent time on an object is before this timestamp. When
-          #   returned by the service, a non-empty value will always be a
-          #   DateTime object.
+          # @attr [String,Date,nil] noncurrent_time_before A date in RFC 3339 format
+          #   with only the date part (for instance, "2013-01-15"). This condition
+          #   is satisfied when the noncurrent time on an object is before this
+          #   date in UTC. This condition is relevant only for versioned objects.
+          #   When returned by the service, a non-empty value will always be a
+          #   Date object.
           # @attr [Integer] num_newer_versions Relevant only for versioned
           #   files. If the value is N, this condition is satisfied when there
           #   are at least N versions (including the live version) newer than

@@ -20,12 +20,12 @@ describe Google::Cloud::Storage::Bucket, :storage do
     storage.bucket(bucket_name) ||
     safe_gcs_execute { storage.create_bucket(bucket_name) }
   end
-  let(:created_before) { Date.parse "2013-01-15" }
-  let(:created_before_2) { Date.parse "2013-01-16" }
-  let(:custom_time_before) { DateTime.parse "2019-01-31T21:47:33+06:00" }
-  let(:custom_time_before_2) { DateTime.parse "2019-01-31T22:47:33+06:00" }
-  let(:noncurrent_time_before) { DateTime.parse "2020-01-31T21:47:33+06:00" }
-  let(:noncurrent_time_before_2) { DateTime.parse "2020-01-31T22:47:33+06:00" }
+  let(:created_before) { Date.parse "2019-01-15" }
+  let(:created_before_2) { Date.parse "2019-01-16" }
+  let(:custom_time_before) { Date.parse "2019-02-15" }
+  let(:custom_time_before_2) { Date.parse "2019-02-16" }
+  let(:noncurrent_time_before) { Date.parse "2019-03-15" }
+  let(:noncurrent_time_before_2) { Date.parse "2019-03-16" }
 
   before do
     # always reset the bucket permissions
@@ -149,13 +149,13 @@ describe Google::Cloud::Storage::Bucket, :storage do
     bucket.lifecycle do |l|
       l.add_set_storage_class_rule "NEARLINE",
                                    age: 10,
-                                   created_before: created_before, # string in RFC 3339 format also ok
-                                   custom_time_before: custom_time_before, # string in RFC 3339 format also ok
+                                   created_before: created_before, # string in RFC 3339 format with only the date part also ok
+                                   custom_time_before: "2019-02-15", # string in RFC 3339 format with only the date part also ok
                                    days_since_custom_time: 5,
                                    days_since_noncurrent_time: 14,
                                    is_live: true,
                                    matches_storage_class: ["STANDARD"],
-                                   noncurrent_time_before: noncurrent_time_before, # string in RFC 3339 format also ok
+                                   noncurrent_time_before: noncurrent_time_before, # string in RFC 3339 format with only the date part also ok
                                    num_newer_versions: 3
 
     end
@@ -179,13 +179,13 @@ describe Google::Cloud::Storage::Bucket, :storage do
     bucket.lifecycle do |l|
       l.last.storage_class = "COLDLINE"
       l.last.age = 20
-      l.last.created_before = "2013-01-16"
-      l.last.custom_time_before = "2019-01-31T22:47:33+06:00"
+      l.last.created_before = "2019-01-16"
+      l.last.custom_time_before = "2019-02-16"
       l.last.days_since_custom_time = 6
       l.last.days_since_noncurrent_time = 15
       l.last.is_live = false
       l.last.matches_storage_class = ["NEARLINE"]
-      l.last.noncurrent_time_before = "2020-01-31T22:47:33+06:00"
+      l.last.noncurrent_time_before = "2019-03-16"
       l.last.num_newer_versions = 4
 
 

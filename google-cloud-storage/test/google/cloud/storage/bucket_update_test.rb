@@ -31,9 +31,9 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
     http_method: ["*"],
     response_header: ["X-My-Custom-Header"]) }
   let(:bucket_cors_hash) { JSON.parse bucket_cors_gapi.to_json }
-  let(:bucket_lifecycle_created_before) { Date.parse("2013-01-15") }
-  let(:bucket_lifecycle_custom_time_before) { DateTime.parse("2019-01-15T11:22:33") }
-  let(:bucket_lifecycle_noncurrent_time_before) { DateTime.parse("2020-01-15T11:22:33") }
+  let(:bucket_lifecycle_created_before) { Date.parse "2013-01-15" }
+  let(:bucket_lifecycle_custom_time_before) { Date.parse "2019-01-15" }
+  let(:bucket_lifecycle_noncurrent_time_before) { Date.parse "2020-01-15" }
   let(:bucket_lifecycle_gapi) do
     lifecycle_gapi lifecycle_rule_gapi("SetStorageClass",
                                        storage_class: "NEARLINE",
