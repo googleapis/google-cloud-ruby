@@ -341,14 +341,19 @@ module Google
         # the update to comply with ETag-based optimistic concurrency control.
         #
         # @param [Hash<String, String>] new_labels A hash containing key/value
-        #   pairs.
+        #   pairs. The labels applied to a resource must meet the following requirements:
         #
-        #   * Label keys and values can be no longer than 63 characters.
-        #   * Label keys and values can contain only lowercase letters, numbers,
-        #     underscores, hyphens, and international characters.
-        #   * Label keys and values cannot exceed 128 bytes in size.
-        #   * Label keys must begin with a letter.
-        #   * Label keys must be unique within a model.
+        #   * Each resource can have multiple labels, up to a maximum of 64.
+        #   * Each label must be a key-value pair.
+        #   * Keys have a minimum length of 1 character and a maximum length of
+        #     63 characters, and cannot be empty. Values can be empty, and have
+        #     a maximum length of 63 characters.
+        #   * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes. All characters must use UTF-8 encoding, and
+        #     international characters are allowed.
+        #   * The key portion of a label must be unique. However, you can use the
+        #     same key with multiple resources.
+        #   * Keys must start with a lowercase letter or international character.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -525,13 +530,21 @@ module Google
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with
-        #   the job. You can use these to organize and group your jobs. Label
-        #   keys and values can be no longer than 63 characters, and can only
-        #   contain lowercase letters, numeric characters, underscores and
-        #   dashes. International characters are allowed. Label values are
-        #   optional. Label keys must start with a letter and each label in the
-        #   list must have a different key. See [Requirements for
-        #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
+        #   the job. You can use these to organize and group your jobs.
+        #
+        #   The labels applied to a resource must meet the following requirements:
+        #
+        #   * Each resource can have multiple labels, up to a maximum of 64.
+        #   * Each label must be a key-value pair.
+        #   * Keys have a minimum length of 1 character and a maximum length of
+        #     63 characters, and cannot be empty. Values can be empty, and have
+        #     a maximum length of 63 characters.
+        #   * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes. All characters must use UTF-8 encoding, and
+        #     international characters are allowed.
+        #   * The key portion of a label must be unique. However, you can use the
+        #     same key with multiple resources.
+        #   * Keys must start with a lowercase letter or international character.
         #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
