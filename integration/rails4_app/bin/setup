@@ -9,7 +9,7 @@ Dir.chdir APP_ROOT do
   # Add necessary setup steps to this file:
 
   puts "== Installing dependencies =="
-  system "gem install bundler --conservative"
+  system "gem install --no-document bundler --conservative"
   system "bundle check || bundle install"
 
   # puts "\n== Copying sample files =="

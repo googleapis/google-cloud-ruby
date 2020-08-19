@@ -35,6 +35,6 @@ RUN [Net.ServicePointManager]::SecurityProtocol = 'tls12, tls11, tls'; \
 
 RUN C:\Ruby25-x64\bin\ridk install 1 2 3
 
-RUN gem install bundler:1.17.3
+RUN gem install --no-document bundler:1.17.3
 
 RUN gem update --system
