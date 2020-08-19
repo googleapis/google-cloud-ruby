@@ -3,12 +3,12 @@ FROM ubuntu:bionic
 ENTRYPOINT /bin/bash
 
 # Set the locale
-RUN apt-get update && apt-get install -y --no-install-recommends locales && rm -rf /var/lib/apt/lists/* \
+RUN apt-get update && apt-get --no-install-recommends install -y locales && rm -rf /var/lib/apt/lists/* \
     && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
 
 # Install dependencies
-RUN apt-get update && apt-get install -y git curl autoconf bison build-essential libssl1.0-dev \
+RUN apt-get update && apt-get --no-install-recommends install -y git curl autoconf bison build-essential libssl1.0-dev \
     libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev \
     freetds-dev freetds-bin imagemagick pkg-config libmagickwand-dev
 RUN apt-get -y autoclean

@@ -17,7 +17,7 @@ ARG REQUESTED_RUBY_VERSION=""
 RUN if test -n "$REQUESTED_RUBY_VERSION" -a \
         ! -x /rbenv/versions/$REQUESTED_RUBY_VERSION/bin/ruby; then \
       (apt-get update -y \
-        && apt-get install -y -q gcp-ruby-$REQUESTED_RUBY_VERSION) \
+        && apt-get --no-install-recommends install -y -q gcp-ruby-$REQUESTED_RUBY_VERSION) \
       || (cd /rbenv/plugins/ruby-build \
         && git pull \
         && rbenv install -s $REQUESTED_RUBY_VERSION) \
