@@ -80,6 +80,9 @@ module Google
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the finding was created in Security Command Center.
+        # @!attribute [rw] severity
+        #   @return [::Google::Cloud::SecurityCenter::V1p1beta1::Finding::Severity]
+        #     The severity of the finding.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -104,6 +107,24 @@ module Google
             # The finding has been fixed, triaged as a non-issue or otherwise addressed
             # and is no longer active.
             INACTIVE = 2
+          end
+
+          # The severity of the finding.
+          module Severity
+            # No severity specified. The default value.
+            SEVERITY_UNSPECIFIED = 0
+
+            # Critical severity.
+            CRITICAL = 1
+
+            # High severity.
+            HIGH = 2
+
+            # Medium severity.
+            MEDIUM = 3
+
+            # Low severity.
+            LOW = 4
           end
         end
       end

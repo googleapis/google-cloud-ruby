@@ -290,8 +290,8 @@ module Google
             #     Required. Resource name of the new source's parent. Its format should be
             #     "organizations/[organization_id]".
             #   @param source [::Google::Cloud::SecurityCenter::V1p1beta1::Source, ::Hash]
-            #     Required. The Source being created, only the display_name and description
-            #     will be used. All other fields will be ignored.
+            #     Required. The Source being created, only the display_name and description will be
+            #     used. All other fields will be ignored.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::Source]
@@ -362,11 +362,9 @@ module Google
             #     "organizations/[organization_id]/sources/[source_id]".
             #   @param finding_id [::String]
             #     Required. Unique identifier provided by the client within the parent scope.
-            #     It must be alphanumeric and less than or equal to 32 characters and
-            #     greater than 0 characters in length.
             #   @param finding [::Google::Cloud::SecurityCenter::V1p1beta1::Finding, ::Hash]
-            #     Required. The Finding being created. The name and security_marks will be
-            #     ignored as they are both output only fields on this resource.
+            #     Required. The Finding being created. The name and security_marks will be ignored as
+            #     they are both output only fields on this resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::Finding]
@@ -432,17 +430,16 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the new notification config's parent. Its format
-            #     is "organizations/[organization_id]".
+            #     Required. Resource name of the new notification config's parent. Its format is
+            #     "organizations/[organization_id]".
             #   @param config_id [::String]
             #     Required.
             #     Unique identifier provided by the client within the parent scope.
             #     It must be between 1 and 128 characters, and contains alphanumeric
             #     characters, underscores or hyphens only.
             #   @param notification_config [::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig, ::Hash]
-            #     Required. The notification config being created. The name and the service
-            #     account will be ignored as they are both output only fields on this
-            #     resource.
+            #     Required. The notification config being created. The name and the service account
+            #     will be ignored as they are both output only fields on this resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig]
@@ -712,8 +709,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Name of the organization to get organization settings for. Its
-            #     format is "organizations/[organization_id]/organizationSettings".
+            #     Required. Name of the organization to get organization settings for. Its format is
+            #     "organizations/[organization_id]/organizationSettings".
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings]
@@ -913,9 +910,9 @@ module Google
             #     Use a negated partial match on the empty string to filter based on a
             #     property not existing: `-resource_properties.my_property : ""`
             #   @param group_by [::String]
-            #     Required. Expression that defines what assets fields to use for grouping.
-            #     The string value should follow SQL syntax: comma separated list of fields.
-            #     For example:
+            #     Required. Expression that defines what assets fields to use for grouping. The string
+            #     value should follow SQL syntax: comma separated list of fields. For
+            #     example:
             #     "security_center_properties.resource_project,security_center_properties.project".
             #
             #     The following fields are supported when compare_duration is not set:
@@ -1096,9 +1093,9 @@ module Google
             #     Use a negated partial match on the empty string to filter based on a
             #     property not existing: `-source_properties.my_property : ""`
             #   @param group_by [::String]
-            #     Required. Expression that defines what assets fields to use for grouping
-            #     (including `state_change`). The string value should follow SQL syntax:
-            #     comma separated list of fields. For example: "parent,resource_name".
+            #     Required. Expression that defines what assets fields to use for grouping (including
+            #     `state_change`). The string value should follow SQL syntax: comma separated
+            #     list of fields. For example: "parent,resource_name".
             #
             #     The following fields are supported:
             #
@@ -1339,7 +1336,6 @@ module Google
             #     is "UNUSED",  which will be the state_change set for all assets present at
             #     read_time.
             #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Optional.
             #     A field mask to specify the ListAssetsResult fields to be listed in the
             #     response.
             #     An empty field mask will list all fields.
@@ -1529,7 +1525,6 @@ module Google
             #     is "UNUSED", which will be the state_change set for all findings present at
             #     read_time.
             #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Optional.
             #     A field mask to specify the Finding fields to be listed in the response.
             #     An empty field mask will list all fields.
             #   @param page_token [::String]
@@ -1680,8 +1675,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the parent of sources to list. Its format should
-            #     be "organizations/[organization_id]".
+            #     Required. Resource name of the parent of sources to list. Its format should be
+            #     "organizations/[organization_id]".
             #   @param page_token [::String]
             #     The value returned by the last `ListSourcesResponse`; indicates
             #     that this is a continuation of a prior `ListSources` call, and
@@ -1760,8 +1755,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Name of the organization to run asset discovery for. Its format
-            #     is "organizations/[organization_id]".
+            #     Required. Name of the organization to run asset discovery for. Its format is
+            #     "organizations/[organization_id]".
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -2046,8 +2041,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param finding [::Google::Cloud::SecurityCenter::V1p1beta1::Finding, ::Hash]
-            #     Required. The finding resource to update or create if it does not already
-            #     exist. parent, security_marks, and update_time will be ignored.
+            #     Required. The finding resource to update or create if it does not already exist.
+            #     parent, security_marks, and update_time will be ignored.
             #
             #     In the case of creation, the finding id portion of the name must be
             #     alphanumeric and less than or equal to 32 characters and greater than 0
