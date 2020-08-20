@@ -31,7 +31,8 @@ describe "Google Cloud Firestore API samples - Transactions and Batched Writes" 
       run_simple_transaction project_id: @firestore_project
     end
     assert_includes out, "New population is 860001."
-    assert_includes out, "Ran a simple transaction to update the population field in the SF document in the cities collection."
+    assert_includes out, "Ran a simple transaction to update the population field in the SF document in the cities " \
+                         "collection."
   end
 
   it "return_info_transaction" do
