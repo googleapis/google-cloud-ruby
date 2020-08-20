@@ -18,8 +18,8 @@ describe "Watch", :firestore_acceptance do
   it "watches a limit query" do
     watch_col = root_col.doc("watch-limit").col("watch-query")
 
-    watch_col.doc("int 1").create(val: 1)
-    watch_col.doc("int 2").create(val: 2)
+    watch_col.doc("int 5").create(val: 5)
+    watch_col.doc("int 4").create(val: 4)
     watch_col.doc("int 3").create(val: 3)
 
     snps = []
@@ -27,7 +27,10 @@ describe "Watch", :firestore_acceptance do
 
     wait_until { snps.count == 1 }
 
-    watch_col.doc("int 0").create(val: 0)
+    firestore.batch do |b|
+      b.create(watch_col.doc("int 2"), { val: 1 })
+      b.create(watch_col.doc("int 1"), { val: 0 })
+    end
 
     wait_until { snps.count == 2 }
 
@@ -35,24 +38,31 @@ describe "Watch", :firestore_acceptance do
 
     _(snps.count).must_equal 2
     _(snps[0].count).must_equal 2
-    _(snps[0].docs.map(&:document_id)).must_equal ["int 1", "int 2"]
+    _(snps[0].docs.map(&:document_id)).must_equal ["int 3", "int 4"]
+    _(snps[0].changes.map(&:type)).must_equal [:added, :added]
+    _(snps[0].changes.map(&:doc).map(&:document_id)).must_equal ["int 3", "int 4"]
     _(snps[1].count).must_equal 2
-    _(snps[1].docs.map(&:document_id)).must_equal ["int 0", "int 1"]
+    _(snps[1].docs.map(&:document_id)).must_equal ["int 1", "int 2"]
+    _(snps[1].changes.map(&:type)).must_equal [:removed, :removed, :added, :added]
+    _(snps[1].changes.map(&:doc).map(&:document_id)).must_equal ["int 3", "int 4", "int 1", "int 2"]
   end
 
   it "watches a limit_to_last query" do
     watch_col = root_col.doc("watch-limit_to_last").col("watch-query")
 
-    watch_col.doc("int 1").create(val: 1)
-    watch_col.doc("int 2").create(val: 2)
     watch_col.doc("int 3").create(val: 3)
+    watch_col.doc("int 2").create(val: 2)
+    watch_col.doc("int 1").create(val: 1)
 
     snps = []
     listener = watch_col.order(:val).limit_to_last(2).listen { |snp| snps << snp }
 
     wait_until { snps.count == 1 }
 
-    watch_col.doc("int 4").create(val: 4)
+    firestore.batch do |b|
+      b.create(watch_col.doc("int 5"), { val: 5 })
+      b.create(watch_col.doc("int 4"), { val: 4 })
+    end
 
     wait_until { snps.count == 2 }
 
@@ -60,9 +70,13 @@ describe "Watch", :firestore_acceptance do
 
     _(snps.count).must_equal 2
     _(snps[0].count).must_equal 2
-    _(snps[0].docs.map(&:document_id)).must_equal ["int 3", "int 2"]
+    _(snps[0].docs.map(&:document_id)).must_equal ["int 2", "int 3"]
+    _(snps[0].changes.map(&:type)).must_equal [:added, :added]
+    _(snps[0].changes.map(&:doc).map(&:document_id)).must_equal ["int 2", "int 3"]
     _(snps[1].count).must_equal 2
-    _(snps[1].docs.map(&:document_id)).must_equal ["int 4", "int 3"]
+    _(snps[1].docs.map(&:document_id)).must_equal ["int 4", "int 5"]
+    _(snps[1].changes.map(&:type)).must_equal [:removed, :removed, :added, :added]
+    _(snps[1].changes.map(&:doc).map(&:document_id)).must_equal ["int 2", "int 3", "int 4", "int 5"]
   end
 
   it "watches a query" do

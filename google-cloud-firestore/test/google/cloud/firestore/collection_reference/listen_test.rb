@@ -23,6 +23,7 @@ describe Google::Cloud::Firestore::CollectionReference, :listen, :watch_firestor
       add_resp,
       doc_change_resp("int 1", 0, val: 1),
       doc_change_resp("int 2", 0, val: 2),
+      # doc_change_resp("int 3", 0, val: 3), # excluded by the limit clause
       current_resp("DOCUMENTSHAVEBEENADDED", 0.1),
 
       no_change_resp("THISTOKENWILLNEVERBESEEN", 1),
@@ -46,13 +47,16 @@ describe Google::Cloud::Firestore::CollectionReference, :listen, :watch_firestor
     _(query_snapshots[0].count).must_equal 2
     _(query_snapshots[0].changes.count).must_equal 2
     _(query_snapshots[0].docs.map(&:document_id)).must_equal ["int 1", "int 2"]
+    _(query_snapshots[0].changes.map(&:type)).must_equal [:added, :added]
+    _(query_snapshots[0].changes.map(&:doc).map(&:document_id)).must_equal ["int 1", "int 2"]
   end
 
   it "listens to a limit_to_last query" do
     listen_responses = [
       add_resp,
-      doc_change_resp("int 1", 0, val: 1),
+      # doc_change_resp("int 1", 0, val: 1), # excluded by the limit clause
       doc_change_resp("int 2", 0, val: 2),
+      doc_change_resp("int 3", 0, val: 3),
       current_resp("DOCUMENTSHAVEBEENADDED", 0.1),
 
       no_change_resp("THISTOKENWILLNEVERBESEEN", 1),
@@ -75,7 +79,9 @@ describe Google::Cloud::Firestore::CollectionReference, :listen, :watch_firestor
     _(query_snapshots.count).must_equal 1
     _(query_snapshots[0].count).must_equal 2
     _(query_snapshots[0].changes.count).must_equal 2
-    _(query_snapshots[0].docs.map(&:document_id)).must_equal ["int 2", "int 1"]
+    _(query_snapshots[0].docs.map(&:document_id)).must_equal ["int 2", "int 3"]
+    _(query_snapshots[0].changes.map(&:type)).must_equal [:added, :added]
+    _(query_snapshots[0].changes.map(&:doc).map(&:document_id)).must_equal ["int 2", "int 3"]
   end
 
   it "listens to a query and yields query snapshots" do
