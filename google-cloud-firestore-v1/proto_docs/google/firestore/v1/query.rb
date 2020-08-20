@@ -175,6 +175,14 @@ module Google
               # The given `field` is equal to the given `value`.
               EQUAL = 5
 
+              # The given `field` is not equal to the given `value`.
+              #
+              # Requires:
+              #
+              # * No other `NOT_EQUAL`, `NOT_IN`, `IS_NOT_NULL`, or `IS_NOT_NAN`.
+              # * That `field` comes first in the `order_by`.
+              NOT_EQUAL = 6
+
               # The given `field` is an array that contains the given `value`.
               ARRAY_CONTAINS = 7
 
@@ -183,7 +191,7 @@ module Google
               # Requires:
               #
               # * That `value` is a non-empty `ArrayValue` with at most 10 values.
-              # * No other `IN`, `ARRAY_CONTAINS_ANY`, or `NOT_IN`.
+              # * No other `IN` or `ARRAY_CONTAINS_ANY` or `NOT_IN`.
               IN = 8
 
               # The given `field` is an array that contains any of the values in the
@@ -192,8 +200,18 @@ module Google
               # Requires:
               #
               # * That `value` is a non-empty `ArrayValue` with at most 10 values.
-              # * No other `IN`, `ARRAY_CONTAINS_ANY`, or `NOT_IN`.
+              # * No other `IN` or `ARRAY_CONTAINS_ANY` or `NOT_IN`.
               ARRAY_CONTAINS_ANY = 9
+
+              # The value of the `field` is not in the given array.
+              #
+              # Requires:
+              #
+              # * That `value` is a non-empty `ArrayValue` with at most 10 values.
+              # * No other `IN`, `ARRAY_CONTAINS_ANY`, `NOT_IN`, `NOT_EQUAL`,
+              #   `IS_NOT_NULL`, or `IS_NOT_NAN`.
+              # * That `field` comes first in the `order_by`.
+              NOT_IN = 10
             end
           end
 
@@ -218,7 +236,35 @@ module Google
 
               # The given `field` is equal to `NULL`.
               IS_NULL = 3
+
+              # The given `field` is not equal to `NaN`.
+              #
+              # Requires:
+              #
+              # * No other `NOT_EQUAL`, `NOT_IN`, `IS_NOT_NULL`, or `IS_NOT_NAN`.
+              # * That `field` comes first in the `order_by`.
+              IS_NOT_NAN = 4
+
+              # The given `field` is not equal to `NULL`.
+              #
+              # Requires:
+              #
+              # * A single `NOT_EQUAL`, `NOT_IN`, `IS_NOT_NULL`, or `IS_NOT_NAN`.
+              # * That `field` comes first in the `order_by`.
+              IS_NOT_NULL = 5
             end
+          end
+
+          # An order on a field.
+          # @!attribute [rw] field
+          #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::FieldReference]
+          #     The field to order by.
+          # @!attribute [rw] direction
+          #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::Direction]
+          #     The direction to order by. Defaults to `ASCENDING`.
+          class Order
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A reference to a field, such as `max(messages.time) as max_time`.
@@ -237,18 +283,6 @@ module Google
           #     If empty, all fields are returned. To only return the name
           #     of the document, use `['__name__']`.
           class Projection
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # An order on a field.
-          # @!attribute [rw] field
-          #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::FieldReference]
-          #     The field to order by.
-          # @!attribute [rw] direction
-          #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::Direction]
-          #     The direction to order by. Defaults to `ASCENDING`.
-          class Order
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
