@@ -14,7 +14,10 @@
 
 source "https://rubygems.org"
 
-gem "google-cloud-firestore"
+master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
+
+gem "google-cloud-firestore", path: master ? "../../google-cloud-firestore" : nil
+gem "google-cloud-firestore-v1", path: master ? "../../google-cloud-firestore-v1" : nil
 
 group :test do
   gem "minitest", "~> 5.13"
