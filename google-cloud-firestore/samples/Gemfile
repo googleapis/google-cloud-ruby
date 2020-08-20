@@ -20,8 +20,8 @@ gem "google-cloud-firestore", path: master ? "../../google-cloud-firestore" : ni
 gem "google-cloud-firestore-v1", path: master ? "../../google-cloud-firestore-v1" : nil
 
 group :test do
-  gem "minitest", "~> 5.13"
-  gem "minitest-focus", "~> 1.1"
-  gem "minitest-junit"
-  gem "rake"
+  gem "google-style", "~> 1.24.0"
+  gem "minitest", "~> 5.14"
+  gem "minitest-focus", "~> 1.2"
+  gem "rake", ">= 12.0"
 end
