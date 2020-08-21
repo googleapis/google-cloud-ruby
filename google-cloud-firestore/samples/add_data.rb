@@ -201,7 +201,7 @@ def update_document_increment project_id:
 end
 
 if $PROGRAM_NAME == __FILE__
-  project = ENV["FIRESTORE_PROJECT_ID"]
+  project = ENV["FIRESTORE_PROJECT"]
   case ARGV.shift
   when "set_document"
     set_document project_id: project

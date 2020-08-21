@@ -73,7 +73,7 @@ def get_count project_id:
 end
 
 if $PROGRAM_NAME == __FILE__
-  project = ENV["FIRESTORE_PROJECT_ID"]
+  project = ENV["FIRESTORE_PROJECT"]
 
   case ARGV.shift
   when "create_counter"
@@ -92,7 +92,7 @@ if $PROGRAM_NAME == __FILE__
         get_count                         Get value of distributed counter.
 
       Environment variables:
-        FIRESTORE_PROJECT_ID must be set to your Google Cloud project ID
+        FIRESTORE_PROJECT must be set to your Google Cloud project ID
     USAGE
   end
 end

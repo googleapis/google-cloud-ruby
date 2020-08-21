@@ -17,7 +17,7 @@ require_relative "../data_model.rb"
 
 describe "Google Cloud Firestore API samples - Data Model" do
   before do
-    @firestore_project = ENV["FIRESTORE_PROJECT_ID"]
+    @firestore_project = ENV["FIRESTORE_PROJECT"]
   end
 
   it "document_ref" do

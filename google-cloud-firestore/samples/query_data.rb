@@ -284,7 +284,7 @@ def collection_group_query project_id:
 end
 
 if $PROGRAM_NAME == __FILE__
-  project = ENV["FIRESTORE_PROJECT_ID"]
+  project = ENV["FIRESTORE_PROJECT"]
   case ARGV.shift
   when "query_create_examples"
     query_create_examples project_id: project

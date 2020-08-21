@@ -19,17 +19,17 @@ Firestore database into developer applications.
    here](https://console.cloud.google.com/flows/enableapi?apiid=firestore.googleapis.com&showconfirmation=true) to visit
    Cloud Platform Console and enable the Google Cloud Firestore API.
 
-1. On command line, set the `FIRESTORE_PROJECT_ID` environment variable equal to your Google Cloud / Firebase project ID.
+1. On command line, set the `FIRESTORE_PROJECT` environment variable equal to your Google Cloud / Firebase project ID.
 
-    `export FIRESTORE_PROJECT_ID=your-firestore-project-id`
+    `export FIRESTORE_PROJECT=your-firestore-project-id`
 
 ### Authentication
 
 Create a [Service Account key file](https://cloud.google.com/docs/authentication#service_accounts). This file can be
 used to authenticate to Google Cloud Platform services from any environment. To use the file, set the
-`FIRESTORE_TEST_KEYFILE` environment variable to the path to the key file, for example:
+`FIRESTORE_CREDENTIALS` environment variable to the path to the key file, for example:
 
-    `export FIRESTORE_TEST_KEYFILE=/path/to/service_account.json`
+    `export FIRESTORE_CREDENTIALS=/path/to/service_account.json`
 
 ### Install Dependencies
 

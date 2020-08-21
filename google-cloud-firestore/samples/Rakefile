@@ -15,6 +15,25 @@
 require "rake/testtask"
 
 Rake::TestTask.new "test" do |t|
+  project = ENV["FIRESTORE_TEST_PROJECT"]
+  keyfile = ENV["FIRESTORE_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["FIRESTORE_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. FIRESTORE_TEST_PROJECT=test123 FIRESTORE_TEST_KEYFILE=/path/to/keyfile.json rake test"
+  end
+  # clear any env var already set
+  require "google/cloud/firestore/credentials"
+  Google::Cloud::Firestore::Credentials.env_vars.each do |path|
+    ENV[path] = nil
+  end
+  # always overwrite when running tests
+  ENV["FIRESTORE_PROJECT"] = project
+  ENV["FIRESTORE_KEYFILE_JSON"] = keyfile
+
   t.test_files = FileList["**/*_test.rb"]
   t.warning = false
 end

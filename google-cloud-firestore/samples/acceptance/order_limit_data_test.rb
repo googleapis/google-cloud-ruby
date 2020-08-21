@@ -18,12 +18,12 @@ require_relative "../order_limit_data.rb"
 
 describe "Google Cloud Firestore API samples - Order Limit Data" do
   before do
-    @firestore_project = ENV["FIRESTORE_PROJECT_ID"]
+    @firestore_project = ENV["FIRESTORE_PROJECT"]
     retrieve_create_examples project_id: @firestore_project
   end
 
   after do
-    delete_collection_test collection_name: "cities", project_id: ENV["FIRESTORE_PROJECT_ID"]
+    delete_collection_test collection_name: "cities", project_id: ENV["FIRESTORE_PROJECT"]
   end
 
   it "order_by_name_limit_query" do

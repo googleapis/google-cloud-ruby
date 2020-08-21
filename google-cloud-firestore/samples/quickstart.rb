@@ -73,7 +73,7 @@ end
 
 
 if $PROGRAM_NAME == __FILE__
-  project = ENV["FIRESTORE_PROJECT_ID"]
+  project = ENV["FIRESTORE_PROJECT"]
   case ARGV.shift
   when "initialize"
     initialize_firestore_client project_id: project

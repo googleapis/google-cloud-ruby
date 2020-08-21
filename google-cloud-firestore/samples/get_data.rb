@@ -130,7 +130,7 @@ end
 
 
 if $PROGRAM_NAME == __FILE__
-  project = ENV["FIRESTORE_PROJECT_ID"]
+  project = ENV["FIRESTORE_PROJECT"]
   case ARGV.shift
   when "retrieve_create_examples"
     retrieve_create_examples project_id: project

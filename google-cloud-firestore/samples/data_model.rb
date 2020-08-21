@@ -51,7 +51,7 @@ def subcollection_ref project_id:
 end
 
 if $PROGRAM_NAME == __FILE__
-  project = ENV["FIRESTORE_PROJECT_ID"]
+  project = ENV["FIRESTORE_PROJECT"]
   case ARGV.shift
   when "document_ref"
     document_ref project_id: project
