@@ -43,7 +43,7 @@ def increment_counter project_id:, num_shards:
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
   # Select a shard of the counter at random
-  shard_id = rand 0..num_shards
+  shard_id = rand 0...num_shards
   shard_ref = firestore.doc "shards/#{shard_id}"
 
   # increment counter
