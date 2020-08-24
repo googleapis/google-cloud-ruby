@@ -226,6 +226,8 @@ module Google
         #   * `:optimizer_version` (String) The version of optimizer to use.
         #     Empty to use database default. "latest" to use the latest
         #     available optimizer version.
+        #   * `:optimizer_statistics_package` (String) Statistics package to
+        #     use. Empty to use the database default.
         # @param [Hash] request_options Common request options.
         #
         #   * `:priority` (Symbol) The relative priority for requests.
@@ -354,7 +356,10 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   results = db.execute_query \
-        #     "SELECT * FROM users", query_options: { optimizer_version: "1" }
+        #     "SELECT * FROM users", query_options: {
+        #       optimizer_version: "1", 
+        #       optimizer_statistics_package: "auto_20191128_14_47_22UTC"
+        #     }
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -565,6 +570,8 @@ module Google
         #   * `:optimizer_version` (String) The version of optimizer to use.
         #     Empty to use database default. "latest" to use the latest
         #     available optimizer version.
+        #   * `:optimizer_statistics_package` (String) Statistics package to
+        #     use. Empty to use the database default.
         # @param [Hash] request_options Common request options.
         #
         #   * `:priority` (String) The relative priority for requests.
@@ -615,7 +622,10 @@ module Google
         #
         #   row_count = db.execute_partition_update \
         #    "UPDATE users SET friends = NULL WHERE active = false",
-        #    query_options: { optimizer_version: "1" }
+        #    query_options: {
+        #      optimizer_version: "1", 
+        #      optimizer_statistics_package: "auto_20191128_14_47_22UTC"
+        #    }
         #
         # @example Query using custom timeout and retry policy:
         #   require "google/cloud/spanner"

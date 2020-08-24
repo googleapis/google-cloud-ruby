@@ -173,6 +173,8 @@ module Google
         #   * `:optimizer_version` (String) The version of optimizer to use.
         #     Empty to use database default. "latest" to use the latest
         #     available optimizer version.
+        #   * `:optimizer_statistics_package` (String) Statistics package to
+        #     use. Empty to use the database default.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -473,6 +475,8 @@ module Google
         #   * `:optimizer_version` (String) The version of optimizer to use.
         #     Empty to use database default. "latest" to use the latest
         #     available optimizer version.
+        #   * `:optimizer_statistics_package` (String) Statistics package to
+        #     use. Empty to use the database default.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -598,8 +602,11 @@ module Google
         #   batch_snapshot = batch_client.batch_snapshot
         #
         #   results = batch_snapshot.execute_query \
-        #      "SELECT * FROM users",
-        #      query_options: { optimizer_version: "1" }
+        #     "SELECT * FROM users",
+        #     query_options: { 
+        #       optimizer_version: "1", 
+        #       optimizer_statistics_package: "auto_20191128_14_47_22UTC"
+        #     }
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"

@@ -285,7 +285,7 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_query, :mock_spanner do
   end
 
   it "can execute a simple query with query options (query-level)" do
-    expect_query_options = { optimizer_version: "1" }
+    expect_query_options = { optimizer_version: "1", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     mock = Minitest::Mock.new
     batch_snapshot.session.service.mocked_service = mock
     expect_execute_streaming_sql results_enum, session.path, "SELECT * FROM users", transaction: tx_selector, options: default_options, query_options: expect_query_options

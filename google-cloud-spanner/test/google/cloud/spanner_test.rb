@@ -337,7 +337,7 @@ describe Google::Cloud do
     end
 
     it "can create a new client with query options (client-level)" do
-      expect_query_options = { optimizer_version: "2", another_field: "test" }
+      expect_query_options = { optimizer_version: "2", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
       Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
         Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
           credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
@@ -349,7 +349,7 @@ describe Google::Cloud do
     end
 
     it "can create a new client with query options that environment variables should merge over client-level configs" do
-      expect_query_options = { optimizer_version: "2", another_field: "test" }
+      expect_query_options = { optimizer_version: "2", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
       optimizer_version_check = ->(name) { (name == "SPANNER_OPTIMIZER_VERSION") ? "2" : nil }
       # Clear all environment variables, except SPANNER_OPTIMIZER_VERSION
       ENV.stub :[], optimizer_version_check do
@@ -357,7 +357,7 @@ describe Google::Cloud do
           Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
             credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
             new_spanner = Google::Cloud::Spanner.new
-            new_client = new_spanner.client "instance-id", "database-id", pool: { min: 0 }, query_options: { optimizer_version: "1", another_field: "test" }
+            new_client = new_spanner.client "instance-id", "database-id", pool: { min: 0 }, query_options: { optimizer_version: "1", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
             _(new_client.query_options).must_equal expect_query_options
           end
         end
@@ -421,6 +421,22 @@ describe Google::Cloud do
           Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
             spanner = Google::Cloud::Spanner.new
             query_options = {optimizer_version: optimizer_version}
+            _(spanner.query_options).must_equal query_options
+          end
+        end
+      end
+    end
+
+    it "uses SPANNER_OPTIMIZER_STATISTICS_PACKAGE environment variable" do
+      optimizer_statistics_package = "auto_20191128_14_47_22UTC"
+      check = ->(name) { (name == "SPANNER_OPTIMIZER_STATISTICS_PACKAGE") ? optimizer_statistics_package : nil }
+      # Clear all environment variables, except SPANNER_OPTIMIZER_STATISTICS_PACKAGE
+      ENV.stub :[], check do
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
+            spanner = Google::Cloud::Spanner.new
+            query_options = {optimizer_statistics_package: optimizer_statistics_package}
             _(spanner.query_options).must_equal query_options
           end
         end
@@ -709,7 +725,7 @@ describe Google::Cloud do
     end
 
     it "uses spanner config for query_options" do
-      query_options = {optimizer_version: "4"}
+      query_options = {optimizer_version: "4", optimizer_statistics_package: "auto_20191128_14_47_22UTC"}
       # Clear all environment variables
       ENV.stub :[], nil do
         # Set new configuration
