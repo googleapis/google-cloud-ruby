@@ -365,9 +365,13 @@ module Google
         end
 
         ##
-        # Updates the custom time specified by the user for the file.
+        # Updates the custom time specified by the user for the file. Once set,
+        # custom_time can't be unset, and it can only be changed to a time in the
+        # future. If custom_time must be unset, you must either perform a rewrite
+        # operation, or upload the data again and create a new file.
         #
-        # @param [DateTime, nil] custom_time A custom time specified by the user for the file, or `nil`.
+        # @param [DateTime, nil] custom_time A custom time specified by the user
+        #   for the file, or `nil`.
         #
         def custom_time= custom_time
           @gapi.custom_time = custom_time

@@ -1129,7 +1129,10 @@ module Google
         #   [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17)
         #   response header to be returned when the file is downloaded.
         # @param [DateTime] custom_time A custom time specified by the user for
-        #   the file.
+        #   the file. Once set, custom_time can't be unset, and it can only be
+        #   changed to a time in the future. If custom_time must be unset, you
+        #   must either perform a rewrite operation, or upload the data again
+        #   and create a new file.
         # @param [String] crc32c The CRC32c checksum of the file data, as
         #   described in [RFC 4960, Appendix
         #   B](http://tools.ietf.org/html/rfc4960#appendix-B).

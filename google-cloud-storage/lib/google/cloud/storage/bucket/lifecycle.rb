@@ -118,7 +118,8 @@ module Google
           #   condition is satisfied if the days elapsed is at least this number.
           #   The value of the field must be a nonnegative integer. If it's zero,
           #   the object version will become eligible for Lifecycle action as
-          #   soon as it becomes noncurrent.
+          #   soon as it becomes noncurrent. Relevant only for versioning-enabled
+          #   buckets. (See {Bucket#versioning?})
           # @param [Boolean] is_live Relevant only for versioned files. If the
           #   value is `true`, this condition matches live files; if the value
           #   is `false`, it matches archived files.
@@ -200,7 +201,8 @@ module Google
           #   condition is satisfied if the days elapsed is at least this number.
           #   The value of the field must be a nonnegative integer. If it's zero,
           #   the object version will become eligible for Lifecycle action as
-          #   soon as it becomes noncurrent.
+          #   soon as it becomes noncurrent. Relevant only for versioning-enabled
+          #   buckets. (See {Bucket#versioning?})
           # @param [Boolean] is_live Relevant only for versioned files. If the
           #   value is `true`, this condition matches live files; if the value
           #   is `false`, it matches archived files.
@@ -311,7 +313,8 @@ module Google
           #   condition is satisfied if the days elapsed is at least this number.
           #   The value of the field must be a nonnegative integer. If it's zero,
           #   the object version will become eligible for Lifecycle action as
-          #   soon as it becomes noncurrent.
+          #   soon as it becomes noncurrent. Relevant only for versioning-enabled
+          #   buckets. (See {Bucket#versioning?})
           # @attr [Boolean] is_live Relevant only for versioned files. If the
           #   value is `true`, this condition matches live files; if the value
           #   is `false`, it matches archived files.
