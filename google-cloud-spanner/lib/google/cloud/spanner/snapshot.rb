@@ -254,7 +254,7 @@ module Google
         #   db.snapshot do |snp|
         #     results = snp.execute_query \
         #       "SELECT * FROM users", query_options: {
-        #         optimizer_version: "1", 
+        #         optimizer_version: "1",
         #         optimizer_statistics_package: "auto_20191128_14_47_22UTC"
         #       }
         #

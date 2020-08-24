@@ -603,8 +603,8 @@ module Google
         #
         #   results = batch_snapshot.execute_query \
         #     "SELECT * FROM users",
-        #     query_options: { 
-        #       optimizer_version: "1", 
+        #     query_options: {
+        #       optimizer_version: "1",
         #       optimizer_statistics_package: "auto_20191128_14_47_22UTC"
         #     }
         #

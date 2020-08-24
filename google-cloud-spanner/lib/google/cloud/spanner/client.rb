@@ -357,7 +357,7 @@ module Google
         #
         #   results = db.execute_query \
         #     "SELECT * FROM users", query_options: {
-        #       optimizer_version: "1", 
+        #       optimizer_version: "1",
         #       optimizer_statistics_package: "auto_20191128_14_47_22UTC"
         #     }
         #
@@ -623,7 +623,7 @@ module Google
         #   row_count = db.execute_partition_update \
         #    "UPDATE users SET friends = NULL WHERE active = false",
         #    query_options: {
-        #      optimizer_version: "1", 
+        #      optimizer_version: "1",
         #      optimizer_statistics_package: "auto_20191128_14_47_22UTC"
         #    }
         #
