@@ -14,7 +14,9 @@
 
 require "minitest/autorun"
 require "minitest/focus"
+require "minitest/hooks/default"
 require "google/cloud/firestore"
+require "securerandom"
 
 def delete_collection_test collection_name:, project_id:
   firestore = Google::Cloud::Firestore.new project_id: project_id
@@ -24,4 +26,8 @@ def delete_collection_test collection_name:, project_id:
     document_ref = document_snapshot.ref
     document_ref.delete
   end
+end
+
+def random_name prefix
+  "#{prefix}_#{SecureRandom.hex 4}"
 end

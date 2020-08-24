@@ -15,12 +15,13 @@
 require "google/cloud/firestore"
 
 # [START fs_run_simple_transaction]
-def run_simple_transaction project_id:
+def run_simple_transaction project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
-  city_ref = firestore.doc "cities/SF"
+  city_ref = firestore.doc "#{collection_path}/SF"
 
   firestore.transaction do |tx|
     new_population = tx.get(city_ref).data[:population] + 1
@@ -32,12 +33,13 @@ end
 # [END fs_run_simple_transaction]
 
 # [START fs_return_info_transaction]
-def return_info_transaction project_id:
+def return_info_transaction project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
-  city_ref = firestore.doc "cities/SF"
+  city_ref = firestore.doc "#{collection_path}/SF"
 
   updated = firestore.transaction do |tx|
     new_population = tx.get(city_ref).data[:population] + 1
@@ -57,20 +59,21 @@ def return_info_transaction project_id:
 end
 # [END fs_return_info_transaction]
 
-def batch_write project_id:
+def batch_write project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_batch_write]
   firestore.batch do |b|
     # Set the data for NYC
-    b.set "cities/NYC", name: "New York City"
+    b.set "#{collection_path}/NYC", name: "New York City"
 
     # Update the population for SF
-    b.update "cities/SF", population: 1_000_000
+    b.update "#{collection_path}/SF", population: 1_000_000
 
     # Delete LA
-    b.delete "cities/LA"
+    b.delete "#{collection_path}/LA"
   end
   # [END fs_batch_write]
   puts "Batch write successfully completed."

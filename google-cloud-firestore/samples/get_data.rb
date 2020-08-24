@@ -14,12 +14,13 @@
 
 require "google/cloud/firestore"
 
-def retrieve_create_examples project_id:
+def retrieve_create_examples project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_retrieve_create_examples]
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   cities_ref.doc("SF").set(
     name:       "San Francisco",
     state:      "CA",
@@ -59,13 +60,14 @@ def retrieve_create_examples project_id:
   puts "Added example cities data to the cities collection."
 end
 
-def get_document project_id:
+def get_document project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
   # [START fs_get_document]
-  doc_ref  = firestore.doc "cities/SF"
+  doc_ref  = firestore.doc "#{collection_path}/SF"
   snapshot = doc_ref.get
   if snapshot.exists?
     puts "#{snapshot.document_id} data: #{snapshot.data}."
@@ -75,12 +77,13 @@ def get_document project_id:
   # [END fs_get_document]
 end
 
-def get_multiple_docs project_id:
+def get_multiple_docs project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_get_multiple_docs]
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
 
   query = cities_ref.where "capital", "=", true
 
@@ -90,24 +93,26 @@ def get_multiple_docs project_id:
   # [END fs_get_multiple_docs]
 end
 
-def get_all_docs project_id:
+def get_all_docs project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_get_all_docs]
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   cities_ref.get do |city|
     puts "#{city.document_id} data: #{city.data}."
   end
   # [END fs_get_all_docs]
 end
 
-def add_subcollection project_id:
+def add_subcollection project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_add_subcollection]
-  city_ref = firestore.doc "cities/SF"
+  city_ref = firestore.doc "#{collection_path}/SF"
 
   subcollection_ref = city_ref.col "neighborhoods"
 
@@ -116,12 +121,13 @@ def add_subcollection project_id:
   # [END fs_add_subcollection]
 end
 
-def list_subcollections project_id:
+def list_subcollections project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_list_subcollections]
-  city_ref = firestore.doc "cities/SF"
+  city_ref = firestore.doc "#{collection_path}/SF"
   city_ref.cols do |col|
     puts col.collection_id
   end

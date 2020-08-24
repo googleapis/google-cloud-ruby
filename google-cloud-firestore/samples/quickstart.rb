@@ -24,12 +24,13 @@ def initialize_firestore_client project_id:
   # [END fs_initialize]
 end
 
-def add_data_1 project_id:
+def add_data_1 project_id:, collection_path: "users"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "users"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_add_data_1]
-  doc_ref = firestore.doc "users/alovelace"
+  doc_ref = firestore.doc "#{collection_path}/alovelace"
 
   doc_ref.set(
     first: "Ada",
@@ -41,12 +42,13 @@ def add_data_1 project_id:
   # [END fs_add_data_1]
 end
 
-def add_data_2 project_id:
+def add_data_2 project_id:, collection_path: "users"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "users"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_add_data_2]
-  doc_ref = firestore.doc "users/aturing"
+  doc_ref = firestore.doc "#{collection_path}/aturing"
 
   doc_ref.set(
     first:  "Alan",
@@ -59,12 +61,13 @@ def add_data_2 project_id:
   # [END fs_add_data_2]
 end
 
-def get_all project_id:
+def get_all project_id:, collection_path: "users"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "users"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_get_all]
-  users_ref = firestore.col "users"
+  users_ref = firestore.col collection_path
   users_ref.get do |user|
     puts "#{user.document_id} data: #{user.data}."
   end

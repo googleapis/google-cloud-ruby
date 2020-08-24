@@ -19,30 +19,23 @@ require_relative "../get_data.rb"
 describe "Google Cloud Firestore API samples - Delete Data" do
   before do
     @firestore_project = ENV["FIRESTORE_PROJECT"]
-    retrieve_create_examples project_id: @firestore_project
+    @collection_path = random_name "cities"
+    retrieve_create_examples project_id: @firestore_project, collection_path: @collection_path
   end
 
-  after do
-    delete_collection_test collection_name: "cities", project_id: ENV["FIRESTORE_PROJECT"]
-  end
-
-  it "delete_doc" do
+  it "delete_field, delete_doc, delete_collection" do
     out, _err = capture_io do
-      delete_doc project_id: @firestore_project
-    end
-    assert_includes out, "Deleted the DC document in the cities collection."
-  end
-
-  it "delete_field" do
-    out, _err = capture_io do
-      delete_field project_id: @firestore_project
+      delete_field project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Deleted the capital field from the BJ document in the cities collection."
-  end
 
-  it "delete_collection" do
     out, _err = capture_io do
-      delete_collection project_id: @firestore_project
+      delete_doc project_id: @firestore_project, collection_path: @collection_path
+    end
+    assert_includes out, "Deleted the DC document in the cities collection."
+
+    out, _err = capture_io do
+      delete_collection project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Deleting document SF"
     assert_includes out, "Deleting document LA"

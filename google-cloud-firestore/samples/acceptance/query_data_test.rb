@@ -16,25 +16,26 @@ require_relative "helper.rb"
 require_relative "../query_data.rb"
 
 describe "Google Cloud Firestore API samples - Query Data" do
-  before do
+  before :all do
     @firestore_project = ENV["FIRESTORE_PROJECT"]
-    query_create_examples project_id: @firestore_project
+    @collection_path = random_name "cities"
+    query_create_examples project_id: @firestore_project, collection_path: @collection_path
   end
 
-  after do
-    delete_collection_test collection_name: "cities", project_id: ENV["FIRESTORE_PROJECT"]
+  after :all do
+    delete_collection_test collection_name: @collection_path, project_id: ENV["FIRESTORE_PROJECT"]
   end
 
   it "query_create_examples" do
     out, _err = capture_io do
-      query_create_examples project_id: @firestore_project
+      query_create_examples project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Added example cities data to the cities collection."
   end
 
   it "create_query_state" do
     out, _err = capture_io do
-      create_query_state project_id: @firestore_project
+      create_query_state project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Document LA returned by query state=CA."
     assert_includes out, "Document SF returned by query state=CA."
@@ -45,7 +46,7 @@ describe "Google Cloud Firestore API samples - Query Data" do
 
   it "create_query_capital" do
     out, _err = capture_io do
-      create_query_capital project_id: @firestore_project
+      create_query_capital project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Document BJ returned by query capital=true."
     assert_includes out, "Document TOK returned by query capital=true."
@@ -56,7 +57,7 @@ describe "Google Cloud Firestore API samples - Query Data" do
 
   it "simple_queries" do
     out, _err = capture_io do
-      simple_queries project_id: @firestore_project
+      simple_queries project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Document LA returned by query state=CA."
     assert_includes out, "Document SF returned by query state=CA."
@@ -77,7 +78,7 @@ describe "Google Cloud Firestore API samples - Query Data" do
 
   it "chained_query" do
     out, _err = capture_io do
-      chained_query project_id: @firestore_project
+      chained_query project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Document SF returned by query state=CA and name=San Francisco."
     refute_includes out, "Document LA returned by query state=CA and name=San Francisco."
@@ -89,7 +90,7 @@ describe "Google Cloud Firestore API samples - Query Data" do
   it "composite_index_chained_query" do
     skip "The query requires an index."
     out, _err = capture_io do
-      composite_index_chained_query project_id: @firestore_project
+      composite_index_chained_query project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Document SF returned by query state=CA and population<1000000."
     refute_includes out, "Document LA returned by query state=CA and population<1000000."
@@ -100,7 +101,7 @@ describe "Google Cloud Firestore API samples - Query Data" do
 
   it "range_query" do
     out, _err = capture_io do
-      range_query project_id: @firestore_project
+      range_query project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Document SF returned by query CA<=state<=IN."
     assert_includes out, "Document LA returned by query CA<=state<=IN."
@@ -110,12 +111,12 @@ describe "Google Cloud Firestore API samples - Query Data" do
   end
 
   it "invalid_range_query" do
-    invalid_range_query project_id: @firestore_project
+    invalid_range_query project_id: @firestore_project, collection_path: @collection_path
   end
 
   it "in_query_without_array" do
     out, _err = capture_io do
-      in_query_without_array project_id: @firestore_project
+      in_query_without_array project_id: @firestore_project, collection_path: @collection_path
     end
 
     assert_includes out, "Document SF returned by query in ['USA','Japan']."
@@ -127,7 +128,7 @@ describe "Google Cloud Firestore API samples - Query Data" do
 
   it "in_query_with_array" do
     out, _err = capture_io do
-      in_query_with_array project_id: @firestore_project
+      in_query_with_array project_id: @firestore_project, collection_path: @collection_path
     end
 
     assert_includes out, "Document DC returned by query in [['west_coast'], ['east_coast']]."
@@ -139,7 +140,7 @@ describe "Google Cloud Firestore API samples - Query Data" do
 
   it "array_contains_any_queries" do
     out, _err = capture_io do
-      array_contains_any_queries project_id: @firestore_project
+      array_contains_any_queries project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Document SF returned by query array-contains-any ['west_coast', 'east_coast']."
     assert_includes out, "Document LA returned by query array-contains-any ['west_coast', 'east_coast']."
@@ -150,7 +151,7 @@ describe "Google Cloud Firestore API samples - Query Data" do
 
   it "array_contains_filter" do
     out, _err = capture_io do
-      array_contains_filter project_id: @firestore_project
+      array_contains_filter project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Document SF returned by query array-contains 'west_coast'."
     assert_includes out, "Document LA returned by query array-contains 'west_coast'."
@@ -162,7 +163,7 @@ describe "Google Cloud Firestore API samples - Query Data" do
   it "collection_group_query" do
     skip "The query requires an index."
     out, _err = capture_io do
-      collection_group_query project_id: @firestore_project
+      collection_group_query project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "museum name is The Getty."
     assert_includes out, "museum name is Legion of Honor."

@@ -14,12 +14,13 @@
 
 require "google/cloud/firestore"
 
-def query_create_examples project_id:
+def query_create_examples project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_query_create_examples]
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   cities_ref.doc("SF").set(
     name:       "San Francisco",
     state:      "CA",
@@ -64,12 +65,13 @@ def query_create_examples project_id:
   puts "Added example cities data to the cities collection."
 end
 
-def create_query_state project_id:
+def create_query_state project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_create_query_state]
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
 
   query = cities_ref.where "state", "=", "CA"
 
@@ -79,12 +81,13 @@ def create_query_state project_id:
   # [END fs_create_query_state]
 end
 
-def create_query_capital project_id:
+def create_query_capital project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_create_query_capital]
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
 
   query = cities_ref.where "capital", "=", true
 
@@ -94,11 +97,12 @@ def create_query_capital project_id:
   # [END fs_create_query_capital]
 end
 
-def simple_queries project_id:
+def simple_queries project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore  = Google::Cloud::Firestore.new project_id: project_id
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
 
   # [START fs_simple_queries]
   state_query      = cities_ref.where "state", "=", "CA"
@@ -116,11 +120,12 @@ def simple_queries project_id:
   end
 end
 
-def chained_query project_id:
+def chained_query project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore  = Google::Cloud::Firestore.new project_id: project_id
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   # [START fs_chained_query]
   chained_query = cities_ref.where("state", "=", "CA").where("name", "=", "San Francisco")
   # [END fs_chained_query]
@@ -129,11 +134,12 @@ def chained_query project_id:
   end
 end
 
-def composite_index_chained_query project_id:
+def composite_index_chained_query project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore  = Google::Cloud::Firestore.new project_id: project_id
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   # [START fs_composite_index_chained_query]
   chained_query = cities_ref.where("state", "=", "CA").where("population", "<", 1_000_000)
   # [END fs_composite_index_chained_query]
@@ -142,11 +148,12 @@ def composite_index_chained_query project_id:
   end
 end
 
-def range_query project_id:
+def range_query project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore  = Google::Cloud::Firestore.new project_id: project_id
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   # [START fs_range_query]
   range_query = cities_ref.where("state", ">=", "CA").where("state", "<=", "IN")
   # [END fs_range_query]
@@ -155,22 +162,24 @@ def range_query project_id:
   end
 end
 
-def invalid_range_query project_id:
+def invalid_range_query project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore  = Google::Cloud::Firestore.new project_id: project_id
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   # [START fs_invalid_range_query]
   invalid_range_query = cities_ref.where("state", ">=", "CA").where("population", ">", 1_000_000)
   # [END fs_invalid_range_query]
 end
 
-def in_query_without_array project_id:
+def in_query_without_array project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_query_filter_in]
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   usr_or_japan = cities_ref.where "country", "in", ["USA", "Japan"]
   # [END fs_query_filter_in]
   usr_or_japan.get do |city|
@@ -178,12 +187,13 @@ def in_query_without_array project_id:
   end
 end
 
-def in_query_with_array project_id:
+def in_query_with_array project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_in_filter_with_array]
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   exactly_one_cost = cities_ref.where "regions", "in", [["west_coast"], ["east_coast"]]
   # [END fs_in_filter_with_array]
   exactly_one_cost.get do |city|
@@ -191,12 +201,13 @@ def in_query_with_array project_id:
   end
 end
 
-def array_contains_any_queries project_id:
+def array_contains_any_queries project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_query_filter_array_contains_any]
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   costal_cities = cities_ref.where "regions", "array-contains-any", ["west_coast", "east_coast"]
   # [END fs_query_filter_array_contains_any]
   costal_cities.get do |city|
@@ -204,12 +215,13 @@ def array_contains_any_queries project_id:
   end
 end
 
-def array_contains_filter project_id:
+def array_contains_filter project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_array_contains_filter]
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   cities = cities_ref.where "regions", "array-contains", "west_coast"
   # [END fs_array_contains_filter]
   cities.get do |city|
@@ -217,12 +229,13 @@ def array_contains_filter project_id:
   end
 end
 
-def collection_group_query project_id:
+def collection_group_query project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_collection_group_query_data_setup]
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
 
   sf_landmarks = cities_ref.document("SF").collection("landmarks")
   sf_landmarks.document.set(

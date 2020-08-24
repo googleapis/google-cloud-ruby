@@ -13,16 +13,17 @@
 # limitations under the License.
 
 
-def create_counter project_id:, num_shards:
+def create_counter project_id:, num_shards:, collection_path: "shards"
   # [START fs_create_counter]
   # project_id = "Your Google Cloud Project ID"
   # num_shards = "Number of shards for distributed counter"
+  # collection_path = "shards"
 
   require "google/cloud/firestore"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
-  shards_ref = firestore.col "shards"
+  shards_ref = firestore.col collection_path
 
   # Initialize each shard with count=0
   num_shards.times do |i|
@@ -33,10 +34,11 @@ def create_counter project_id:, num_shards:
   # [END fs_create_counter]
 end
 
-def increment_counter project_id:, num_shards:
+def increment_counter project_id:, num_shards:, collection_path: "shards"
   # [START fs_increment_counter]
   # project_id = "Your Google Cloud Project ID"
   # num_shards = "Number of shards for distributed counter"
+  # collection_path = "shards"
 
   require "google/cloud/firestore"
 
@@ -44,7 +46,7 @@ def increment_counter project_id:, num_shards:
 
   # Select a shard of the counter at random
   shard_id = rand 0...num_shards
-  shard_ref = firestore.doc "shards/#{shard_id}"
+  shard_ref = firestore.doc "#{collection_path}/#{shard_id}"
 
   # increment counter
   shard_ref.update count: firestore.field_increment(1)
@@ -53,15 +55,16 @@ def increment_counter project_id:, num_shards:
   # [END fs_increment_counter]
 end
 
-def get_count project_id:
+def get_count project_id:, collection_path: "shards"
   # [START fs_get_count]
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "shards"
 
   require "google/cloud/firestore"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
-  shards_ref = firestore.col_group "shards"
+  shards_ref = firestore.col_group collection_path
 
   count = 0
   shards_ref.get do |doc_ref|

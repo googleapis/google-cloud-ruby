@@ -14,12 +14,13 @@
 
 require "google/cloud/firestore"
 
-def start_at_field_query_cursor project_id:
+def start_at_field_query_cursor project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   # [START fs_start_at_field_query_cursor]
   query = cities_ref.order("population").start_at(1_000_000)
   # [END fs_start_at_field_query_cursor]
@@ -28,12 +29,13 @@ def start_at_field_query_cursor project_id:
   end
 end
 
-def end_at_field_query_cursor project_id:
+def end_at_field_query_cursor project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   # [START fs_end_at_field_query_cursor]
   query = cities_ref.order("population").end_at(1_000_000)
   # [END fs_end_at_field_query_cursor]
@@ -42,13 +44,14 @@ def end_at_field_query_cursor project_id:
   end
 end
 
-def paginated_query_cursor project_id:
+def paginated_query_cursor project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
   # [START fs_paginated_query_cursor]
-  cities_ref  = firestore.col "cities"
+  cities_ref  = firestore.col collection_path
   first_query = cities_ref.order("population").limit(3)
 
   # Get the last document from the results.
@@ -66,18 +69,19 @@ def paginated_query_cursor project_id:
   # [END fs_paginated_query_cursor]
 end
 
-def multiple_cursor_conditions project_id:
+def multiple_cursor_conditions project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   # [START fs_multiple_cursor_conditions]
   # Will return all Springfields
-  query1 = firestore.col("cities").order("name").order("state").start_at("Springfield")
+  query1 = firestore.col(collection_path).order("name").order("state").start_at("Springfield")
 
   # Will return "Springfield, Missouri" and "Springfield, Wisconsin"
-  query2 = firestore.col("cities").order("name").order("state").start_at(["Springfield", "Missouri"])
+  query2 = firestore.col(collection_path).order("name").order("state").start_at(["Springfield", "Missouri"])
   # [END fs_multiple_cursor_conditions]
   query1.get do |city|
     puts "Document #{city.document_id} returned by start at Springfield query."

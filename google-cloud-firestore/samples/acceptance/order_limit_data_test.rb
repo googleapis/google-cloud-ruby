@@ -17,18 +17,19 @@ require_relative "../get_data.rb"
 require_relative "../order_limit_data.rb"
 
 describe "Google Cloud Firestore API samples - Order Limit Data" do
-  before do
+  before :all do
     @firestore_project = ENV["FIRESTORE_PROJECT"]
-    retrieve_create_examples project_id: @firestore_project
+    @collection_path = random_name "cities"
+    retrieve_create_examples project_id: @firestore_project, collection_path: @collection_path
   end
 
-  after do
-    delete_collection_test collection_name: "cities", project_id: ENV["FIRESTORE_PROJECT"]
+  after :all do
+    delete_collection_test collection_name: @collection_path, project_id: ENV["FIRESTORE_PROJECT"]
   end
 
   it "order_by_name_limit_query" do
     out, _err = capture_io do
-      order_by_name_limit_query project_id: @firestore_project
+      order_by_name_limit_query project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Document BJ returned by order by name with limit query."
     assert_includes out, "Document LA returned by order by name with limit query."
@@ -39,7 +40,7 @@ describe "Google Cloud Firestore API samples - Order Limit Data" do
 
   it "order_by_name_desc_limit_query" do
     out, _err = capture_io do
-      order_by_name_desc_limit_query project_id: @firestore_project
+      order_by_name_desc_limit_query project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Document DC returned by order by name descending with limit query."
     assert_includes out, "Document TOK returned by order by name descending with limit query."
@@ -51,7 +52,7 @@ describe "Google Cloud Firestore API samples - Order Limit Data" do
   it "order_by_state_and_population_query" do
     skip "The query requires an index."
     out, _err = capture_io do
-      order_by_state_and_population_query project_id: @firestore_project
+      order_by_state_and_population_query project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Document LA returned by order by state and descending population query."
     assert_includes out, "Document SF returned by order by state and descending population query."
@@ -62,7 +63,7 @@ describe "Google Cloud Firestore API samples - Order Limit Data" do
 
   it "where_order_by_limit_query" do
     out, _err = capture_io do
-      where_order_by_limit_query project_id: @firestore_project
+      where_order_by_limit_query project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Document LA returned by where order by limit query."
     assert_includes out, "Document TOK returned by where order by limit query."
@@ -73,7 +74,7 @@ describe "Google Cloud Firestore API samples - Order Limit Data" do
 
   it "range_order_by_query" do
     out, _err = capture_io do
-      range_order_by_query project_id: @firestore_project
+      range_order_by_query project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Document LA returned by range with order by query."
     assert_includes out, "Document TOK returned by range with order by query."
@@ -83,6 +84,6 @@ describe "Google Cloud Firestore API samples - Order Limit Data" do
   end
 
   it "invalid_range_order_by_query" do
-    invalid_range_order_by_query project_id: @firestore_project
+    invalid_range_order_by_query project_id: @firestore_project, collection_path: @collection_path
   end
 end

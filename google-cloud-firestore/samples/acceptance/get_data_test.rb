@@ -16,26 +16,27 @@ require_relative "helper.rb"
 require_relative "../get_data.rb"
 
 describe "Google Cloud Firestore API samples - Get Data" do
-  before do
+  before :all do
     @firestore_project = ENV["FIRESTORE_PROJECT"]
-    retrieve_create_examples project_id: @firestore_project
+    @collection_path = random_name "cities"
+    retrieve_create_examples project_id: @firestore_project, collection_path: @collection_path
   end
 
-  after do
+  after :all do
     delete_collection_test collection_name: "cities/SF/neighborhoods", project_id: ENV["FIRESTORE_PROJECT"]
     delete_collection_test collection_name: "cities", project_id: ENV["FIRESTORE_PROJECT"]
   end
 
   it "retrieve_create_examples" do
     out, _err = capture_io do
-      retrieve_create_examples project_id: @firestore_project
+      retrieve_create_examples project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Added example cities data to the cities collection."
   end
 
   it "get_document" do
     out, _err = capture_io do
-      get_document project_id: @firestore_project
+      get_document project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "SF data:"
     assert_includes out, ':name=>"San Francisco"'
@@ -47,7 +48,7 @@ describe "Google Cloud Firestore API samples - Get Data" do
 
   it "get_multiple_docs" do
     out, _err = capture_io do
-      get_multiple_docs project_id: @firestore_project
+      get_multiple_docs project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "DC data:"
     assert_includes out, "TOK data:"
@@ -63,7 +64,7 @@ describe "Google Cloud Firestore API samples - Get Data" do
 
   it "get_all_docs" do
     out, _err = capture_io do
-      get_all_docs project_id: @firestore_project
+      get_all_docs project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "DC data:"
     assert_includes out, "TOK data:"
@@ -79,15 +80,15 @@ describe "Google Cloud Firestore API samples - Get Data" do
 
   it "add_subcollection" do
     out, _err = capture_io do
-      add_subcollection project_id: @firestore_project
+      add_subcollection project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Added document with ID:"
   end
 
   it "list_subcollections" do
-    add_subcollection project_id: @firestore_project
+    add_subcollection project_id: @firestore_project, collection_path: @collection_path
     out, _err = capture_io do
-      list_subcollections project_id: @firestore_project
+      list_subcollections project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "neighborhoods"
   end

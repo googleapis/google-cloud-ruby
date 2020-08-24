@@ -15,12 +15,13 @@
 require "google/cloud/firestore"
 require "date"
 
-def set_document project_id:
+def set_document project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_set_document]
-  city_ref = firestore.doc "cities/LA"
+  city_ref = firestore.doc "#{collection_path}/LA"
 
   data = {
     name:    "Los Angeles",
@@ -33,23 +34,25 @@ def set_document project_id:
   puts "Set data for the LA document in the cities collection."
 end
 
-def update_create_if_missing project_id:
+def update_create_if_missing project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_update_create_if_missing]
-  city_ref = firestore.doc "cities/LA"
+  city_ref = firestore.doc "#{collection_path}/LA"
   city_ref.set({ capital: false }, merge: true)
   # [END fs_update_create_if_missing]
   puts "Merged data into the LA document in the cities collection."
 end
 
-def set_document_data_types project_id:
+def set_document_data_types project_id:, collection_path: "data"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "data"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_set_document_data_types]
-  doc_ref = firestore.doc "data/one"
+  doc_ref = firestore.doc "#{collection_path}/one"
 
   data = {
     stringExample:  "Hello, World!",
@@ -69,8 +72,9 @@ def set_document_data_types project_id:
   puts "Set multiple data-type data for the one document in the data collection."
 end
 
-def set_requires_id project_id:
+def set_requires_id project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
@@ -79,14 +83,15 @@ def set_requires_id project_id:
     country: "Thailand"
   }
   # [START fs_set_requires_id]
-  city_ref = firestore.doc "cities/new-city-id"
+  city_ref = firestore.doc "#{collection_path}/new-city-id"
   city_ref.set data
   # [END fs_set_requires_id]
   puts "Added document with ID: new-city-id."
 end
 
-def add_doc_data_with_auto_id project_id:
+def add_doc_data_with_auto_id project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_add_doc_data_with_auto_id]
@@ -95,15 +100,16 @@ def add_doc_data_with_auto_id project_id:
     country: "Japan"
   }
 
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
 
   added_doc_ref = cities_ref.add data
   puts "Added document with ID: #{added_doc_ref.document_id}."
   # [END fs_add_doc_data_with_auto_id]
 end
 
-def add_doc_data_after_auto_id project_id:
+def add_doc_data_after_auto_id project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
@@ -112,7 +118,7 @@ def add_doc_data_after_auto_id project_id:
     country: "Russia"
   }
   # [START fs_add_doc_data_after_auto_id]
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
 
   added_doc_ref = cities_ref.doc
   puts "Added document with ID: #{added_doc_ref.document_id}."
@@ -122,12 +128,13 @@ def add_doc_data_after_auto_id project_id:
   puts "Added data to the #{added_doc_ref.document_id} document in the cities collection."
 end
 
-def update_doc project_id:
+def update_doc project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
-  doc_ref = firestore.doc "cities/DC"
+  doc_ref = firestore.doc "#{collection_path}/DC"
 
   data = {
     name:    "Washington D.C.",
@@ -135,19 +142,20 @@ def update_doc project_id:
   }
   doc_ref.set data
   # [START fs_update_doc]
-  city_ref = firestore.doc "cities/DC"
+  city_ref = firestore.doc "#{collection_path}/DC"
   city_ref.update capital: true
   # [END fs_update_doc]
   puts "Updated the capital field of the DC document in the cities collection."
 end
 
-def update_nested_fields project_id:
+def update_nested_fields project_id:, collection_path: "users"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "users"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_update_nested_fields]
   # Create an initial document to update
-  frank_ref = firestore.doc "users/frank"
+  frank_ref = firestore.doc "#{collection_path}/frank"
   frank_ref.set(
     name:      "Frank",
     favorites: {
@@ -164,11 +172,12 @@ def update_nested_fields project_id:
   puts "Updated the age and favorite color fields of the frank document in the users collection."
 end
 
-def update_server_timestamp project_id:
+def update_server_timestamp project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
-  firestore.doc("cities/new-city-id").set(
+  firestore.doc("#{collection_path}/new-city-id").set(
     name:       "new city",
     state:      nil,
     country:    "country",
@@ -176,17 +185,18 @@ def update_server_timestamp project_id:
     population: 85
   )
   # [START fs_update_server_timestamp]
-  city_ref = firestore.doc "cities/new-city-id"
+  city_ref = firestore.doc "#{collection_path}/new-city-id"
   city_ref.update timestamp: firestore.field_server_time
   # [END fs_update_server_timestamp]
   puts "Updated the timestamp field of the new-city-id document in the cities collection."
 end
 
-def update_document_increment project_id:
+def update_document_increment project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
-  firestore.doc("cities/DC").set(
+  firestore.doc("#{collection_path}/DC").set(
     name:       "Washington D.C.",
     state:      nil,
     country:    "USA",
@@ -194,7 +204,7 @@ def update_document_increment project_id:
     population: 680_000
   )
   # [START fs_update_document_increment]
-  city_ref = firestore.doc "cities/DC"
+  city_ref = firestore.doc "#{collection_path}/DC"
   city_ref.update population: firestore.field_increment(50)
   # [END fs_update_document_increment]
   puts "Updated the population of the DC document in the cities collection."

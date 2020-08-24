@@ -16,7 +16,7 @@ require_relative "helper"
 require_relative "../data_model.rb"
 
 describe "Google Cloud Firestore API samples - Data Model" do
-  before do
+  before :all do
     @firestore_project = ENV["FIRESTORE_PROJECT"]
   end
 

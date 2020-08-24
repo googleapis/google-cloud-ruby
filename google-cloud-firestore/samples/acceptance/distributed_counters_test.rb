@@ -18,35 +18,31 @@ require_relative "../distributed_counters.rb"
 describe "Google Cloud Firestore API samples - Distributed Counter" do
   before do
     @firestore_project = ENV["FIRESTORE_PROJECT"]
-    create_counter project_id: @firestore_project, num_shards: 5
+    @collection_path = random_name "shards"
   end
 
   after do
-    delete_collection_test collection_name: "shards", project_id: ENV["FIRESTORE_PROJECT"]
+    delete_collection_test collection_name: @collection_path, project_id: ENV["FIRESTORE_PROJECT"]
   end
 
-  it "create_counter" do
+  it "create_counter, get_document, get_count" do
     out, _err = capture_io do
-      create_counter project_id: @firestore_project, num_shards: 5
+      create_counter project_id: @firestore_project, num_shards: 5, collection_path: @collection_path
     end
     assert_includes out, "Distributed counter shards collection created."
-  end
 
-  it "get_document" do
-    create_counter project_id: @firestore_project, num_shards: 5
     out, _err = capture_io do
-      increment_counter project_id: @firestore_project, num_shards: 5
+      increment_counter project_id: @firestore_project, num_shards: 5, collection_path: @collection_path
     end
     assert_includes out, "Counter incremented."
-  end
-
-  it "get_count" do
-    create_counter project_id: @firestore_project, num_shards: 5
-    increment_counter project_id: @firestore_project, num_shards: 5
-    increment_counter project_id: @firestore_project, num_shards: 5
 
     out, _err = capture_io do
-      get_count project_id: @firestore_project
+      increment_counter project_id: @firestore_project, num_shards: 5, collection_path: @collection_path
+    end
+    assert_includes out, "Counter incremented."
+
+    out, _err = capture_io do
+      get_count project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Count value is 2."
   end

@@ -15,34 +15,37 @@
 require "google/cloud/firestore"
 require "date"
 
-def delete_doc project_id:
+def delete_doc project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_delete_doc]
-  city_ref = firestore.doc "cities/DC"
+  city_ref = firestore.doc "#{collection_path}/DC"
   city_ref.delete
   # [END fs_delete_doc]
   puts "Deleted the DC document in the cities collection."
 end
 
-def delete_field project_id:
+def delete_field project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_delete_field]
-  city_ref = firestore.doc "cities/BJ"
+  city_ref = firestore.doc "#{collection_path}/BJ"
   city_ref.update capital: firestore.field_delete
   # [END fs_delete_field]
   puts "Deleted the capital field from the BJ document in the cities collection."
 end
 
-def delete_collection project_id:
+def delete_collection project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_delete_collection]
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   query      = cities_ref
 
   query.get do |document_snapshot|

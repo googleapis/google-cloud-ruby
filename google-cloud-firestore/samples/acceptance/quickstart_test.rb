@@ -16,12 +16,13 @@ require_relative "helper.rb"
 require_relative "../quickstart.rb"
 
 describe "Google Cloud Firestore API samples - Quickstart" do
-  before do
+  before :all do
     @firestore_project = ENV["FIRESTORE_PROJECT"]
+    @collection_path = random_name "users"
   end
 
-  after do
-    delete_collection_test collection_name: "users", project_id: ENV["FIRESTORE_PROJECT"]
+  after :all do
+    delete_collection_test collection_name: @collection_path, project_id: ENV["FIRESTORE_PROJECT"]
   end
 
   it "initialize_firestore_client" do
@@ -31,25 +32,19 @@ describe "Google Cloud Firestore API samples - Quickstart" do
     assert_includes out, "Created Cloud Firestore client with given project ID."
   end
 
-  it "add_data_1" do
+  it "add_data_1, add_data_2, get_all" do
     out, _err = capture_io do
-      add_data_1 project_id: @firestore_project
+      add_data_1 project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Added data to the alovelace document in the users collection."
-  end
 
-  it "add_data_2" do
     out, _err = capture_io do
-      add_data_2 project_id: @firestore_project
+      add_data_2 project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Added data to the aturing document in the users collection."
-  end
 
-  it "get_all" do
-    add_data_1 project_id: @firestore_project
-    add_data_2 project_id: @firestore_project
     out, _err = capture_io do
-      get_all project_id: @firestore_project
+      get_all project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "alovelace data:"
     assert_includes out, ':first=>"Ada"'

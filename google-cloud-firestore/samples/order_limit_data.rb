@@ -14,12 +14,13 @@
 
 require "google/cloud/firestore"
 
-def order_by_name_limit_query project_id:
+def order_by_name_limit_query project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   # [START fs_order_by_name_limit_query]
   query = cities_ref.order("name").limit(3)
   # [END fs_order_by_name_limit_query]
@@ -28,12 +29,13 @@ def order_by_name_limit_query project_id:
   end
 end
 
-def order_by_name_desc_limit_query project_id:
+def order_by_name_desc_limit_query project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   # [START fs_order_by_name_desc_limit_query]
   query = cities_ref.order("name", "desc").limit(3)
   # [END fs_order_by_name_desc_limit_query]
@@ -42,12 +44,13 @@ def order_by_name_desc_limit_query project_id:
   end
 end
 
-def order_by_state_and_population_query project_id:
+def order_by_state_and_population_query project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   # [START fs_order_by_state_and_population_query]
   query = cities_ref.order("state").order("population", "desc")
   # [END fs_order_by_state_and_population_query]
@@ -56,12 +59,13 @@ def order_by_state_and_population_query project_id:
   end
 end
 
-def where_order_by_limit_query project_id:
+def where_order_by_limit_query project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   # [START fs_where_order_by_limit_query]
   query = cities_ref.where("population", ">", 2_500_000).order("population").limit(2)
   # [END fs_where_order_by_limit_query]
@@ -70,12 +74,13 @@ def where_order_by_limit_query project_id:
   end
 end
 
-def range_order_by_query project_id:
+def range_order_by_query project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   # [START fs_range_order_by_query]
   query = cities_ref.where("population", ">", 2_500_000).order("population")
   # [END fs_range_order_by_query]
@@ -84,12 +89,13 @@ def range_order_by_query project_id:
   end
 end
 
-def invalid_range_order_by_query project_id:
+def invalid_range_order_by_query project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
-  cities_ref = firestore.col "cities"
+  cities_ref = firestore.col collection_path
   # [START fs_invalid_range_order_by_query]
   query = cities_ref.where("population", ">", 2_500_000).order("country")
   # [END fs_invalid_range_order_by_query]

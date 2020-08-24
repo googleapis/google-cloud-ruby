@@ -19,16 +19,18 @@ require_relative "../transactions_and_batched_writes.rb"
 describe "Google Cloud Firestore API samples - Transactions and Batched Writes" do
   before do
     @firestore_project = ENV["FIRESTORE_PROJECT"]
-    query_create_examples project_id: @firestore_project
+    @collection_path = random_name "cities"
+     # setup for each test
+    query_create_examples project_id: @firestore_project, collection_path: @collection_path
   end
 
-  after do
-    delete_collection_test collection_name: "cities", project_id: ENV["FIRESTORE_PROJECT"]
+  after do # teardown after each test
+    delete_collection_test collection_name: @collection_path, project_id: ENV["FIRESTORE_PROJECT"]
   end
 
   it "run_simple_transaction" do
     out, _err = capture_io do
-      run_simple_transaction project_id: @firestore_project
+      run_simple_transaction project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "New population is 860001."
     assert_includes out, "Ran a simple transaction to update the population field in the SF document in the cities " \
@@ -37,14 +39,14 @@ describe "Google Cloud Firestore API samples - Transactions and Batched Writes" 
 
   it "return_info_transaction" do
     out, _err = capture_io do
-      return_info_transaction project_id: @firestore_project
+      return_info_transaction project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Population updated!"
   end
 
   it "batch_write" do
     out, _err = capture_io do
-      batch_write project_id: @firestore_project
+      batch_write project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "Batch write successfully completed."
   end
