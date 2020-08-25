@@ -23,7 +23,8 @@ Rake::TestTask.new "test" do |t|
     keyfile ||= ENV["FIRESTORE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. FIRESTORE_TEST_PROJECT=test123 FIRESTORE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    raise "You must provide a project and keyfile. " \
+          "e.g. FIRESTORE_TEST_PROJECT=test123 FIRESTORE_TEST_KEYFILE=/path/to/keyfile.json rake test"
   end
   # clear any env var already set
   require "google/cloud/firestore/credentials"
