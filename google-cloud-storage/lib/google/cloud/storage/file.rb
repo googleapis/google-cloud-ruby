@@ -370,8 +370,8 @@ module Google
         # future. If custom_time must be unset, you must either perform a rewrite
         # operation, or upload the data again and create a new file.
         #
-        # @param [DateTime, nil] custom_time A custom time specified by the user
-        #   for the file, or `nil`.
+        # @param [DateTime] custom_time A custom time specified by the user
+        #   for the file.
         #
         def custom_time= custom_time
           @gapi.custom_time = custom_time
@@ -790,7 +790,7 @@ module Google
         #     f.content_encoding = "deflate"
         #     f.content_language = "de"
         #     f.content_type = "application/json"
-        #     f.custom_time = DateTime.now
+        #     f.custom_time = DateTime.new 2025, 12, 31
         #     f.metadata["player"] = "Bob"
         #     f.metadata["score"] = "10"
         #   end
