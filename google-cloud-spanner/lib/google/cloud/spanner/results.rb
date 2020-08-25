@@ -107,12 +107,24 @@ module Google
           buffer_upper_bound = 10
           chunked_value = nil
           resume_token = nil
+          should_resume_request = false
+          should_retry_request = false
 
           # Cannot call Enumerator#each because it won't return the first
           # value that was already identified when calling Enumerator#peek.
           # Iterate only using Enumerator#next and break on StopIteration.
           loop do
             begin
+              if should_resume_request
+                @enum = resume_request!(resume_token)
+                buffered_responses = []
+                should_resume_request = false
+              elsif should_retry_request
+                @enum = retry_request!()
+                buffered_responses = []
+                should_retry_request = false
+              end
+
               grpc = @enum.next
               # metadata should be set before the first iteration...
               @metadata ||= grpc.metadata
@@ -153,11 +165,9 @@ module Google
               GRPC::Core::CallError => err
 
               if resumable?(resume_token)
-                @enum = resume_request!(resume_token)
-                buffered_responses = []
+                should_resume_request = true
               elsif retryable?(err)
-                @enum = retry_request!()
-                buffered_responses = []
+                should_retry_request = true
               else
                 raise Google::Cloud::Error.from_error(err)
               end
