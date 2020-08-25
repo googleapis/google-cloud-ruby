@@ -41,6 +41,8 @@ module Google
       #   end
       #
       class Results
+        RST_STREAM_INTERNAL_ERROR = "Received RST_STREAM".freeze
+        EOS_INTERNAL_ERROR = "Received unexpected EOS on DATA frame from server".freeze
         ##
         # The read timestamp chosen for single-use snapshots (read-only
         # transactions).
@@ -222,9 +224,9 @@ module Google
         #   - Internal RST_STREAM error
         def retryable? err
           err.instance_of?(GRPC::Unavailable) ||
-          err.instance_of?(GRPC::Aborted) ||
-          (err.instance_of?(GRPC::Internal) && err.details.include?("Received unexpected EOS on DATA frame from server")) ||
-          (err.instance_of?(GRPC::Internal) && err.details.include?("Received RST_STREAM"))
+            err.instance_of?(GRPC::Aborted) ||
+            (err.instance_of?(GRPC::Internal) && err.details.include?(EOS_INTERNAL_ERROR)) ||
+            (err.instance_of?(GRPC::Internal) && err.details.include?(RST_STREAM_INTERNAL_ERROR))
         end
 
         ##
@@ -232,9 +234,18 @@ module Google
         # Resumes a request, by re-executing it with a resume token.
         def resume_request! resume_token
           if @execute_query_options
-            @service.execute_streaming_sql @session_path, @sql, @execute_query_options.merge(resume_token: resume_token)
+            @service.execute_streaming_sql(
+              @session_path,
+              @sql,
+              @execute_query_options.merge(resume_token: resume_token)
+            )
           else
-            @service.streaming_read_table @session_path, @table, @columns, @read_options.merge(resume_token: resume_token)
+            @service.streaming_read_table(
+              @session_path,
+              @table,
+              @columns,
+              @read_options.merge(resume_token: resume_token)
+            )
           end
         end
 
