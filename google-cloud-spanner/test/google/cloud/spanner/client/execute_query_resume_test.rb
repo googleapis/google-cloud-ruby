@@ -158,24 +158,6 @@ describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner 
       service_mock.verify
     end
 
-    it "restarts the request when an aborted error is returned" do
-      resulting_stream_1 = [
-        Google::Cloud::Spanner::V1::PartialResultSet.new(metadata_result),
-        GRPC::Aborted,
-      ].to_enum
-      resulting_stream_2 = [
-        Google::Cloud::Spanner::V1::PartialResultSet.new(full_row)
-      ].to_enum
-      service_mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
-      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_1), session_grpc.name, "SELECT * FROM users", options: default_options
-      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_2), session_grpc.name, "SELECT * FROM users", options: default_options
-
-      results = client.execute_query "SELECT * FROM users"
-
-      assert_results results
-      service_mock.verify
-    end
-
     it "restarts the request when a EOS internal error is returned" do
       resulting_stream_1 = [
         Google::Cloud::Spanner::V1::PartialResultSet.new(metadata_result),

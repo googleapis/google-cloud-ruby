@@ -219,12 +219,10 @@ module Google
         # Checks if a request can be retried. This is based on the error returned.
         # Retryable errors are:
         #   - Unavailable error
-        #   - Aborted error
         #   - Internal EOS error
         #   - Internal RST_STREAM error
         def retryable? err
           err.instance_of?(GRPC::Unavailable) ||
-            err.instance_of?(GRPC::Aborted) ||
             (err.instance_of?(GRPC::Internal) && err.details.include?(EOS_INTERNAL_ERROR)) ||
             (err.instance_of?(GRPC::Internal) && err.details.include?(RST_STREAM_INTERNAL_ERROR))
         end
