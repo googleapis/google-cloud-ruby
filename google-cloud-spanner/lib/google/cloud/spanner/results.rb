@@ -203,10 +203,23 @@ module Google
           nil
         end
 
+        # rubocop:enable all
+
+        ##
+        # @private
+        # Checks if a request can be resumed by inspecting the resume token
         def resumable? resume_token
           !resume_token.nil? && !resume_token.empty?
         end
 
+        ##
+        # @private
+        # Checks if a request can be retried. This is based on the error returned.
+        # Retryable errors are:
+        #   - Unavailable error
+        #   - Aborted error
+        #   - Internal EOS error
+        #   - Internal RST_STREAM error
         def retryable? err
           err.instance_of?(GRPC::Unavailable) ||
           err.instance_of?(GRPC::Aborted) ||
@@ -214,6 +227,9 @@ module Google
           (err.instance_of?(GRPC::Internal) && err.details.include?("Received RST_STREAM"))
         end
 
+        ##
+        # @private
+        # Resumes a request, by re-executing it with a resume token.
         def resume_request! resume_token
           if @execute_query_options
             @service.execute_streaming_sql @session_path, @sql, @execute_query_options.merge(resume_token: resume_token)
@@ -222,6 +238,9 @@ module Google
           end
         end
 
+        ##
+        # @private
+        # Retries a request, by re-executing it from scratch.
         def retry_request!
           if @execute_query_options
             @service.execute_streaming_sql @session_path, @sql, @execute_query_options
@@ -229,8 +248,6 @@ module Google
             @service.streaming_read_table @session_path, @table, @columns, @read_options
           end
         end
-
-        # rubocop:enable all
 
         ##
         # @private
