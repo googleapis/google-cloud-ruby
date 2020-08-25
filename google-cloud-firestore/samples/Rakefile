@@ -1,0 +1,40 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+require "rake/testtask"
+
+Rake::TestTask.new "test" do |t|
+  project ||= ENV["FIRESTORE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+  keyfile ||= ENV["FIRESTORE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["FIRESTORE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    raise "You must provide a project and keyfile. " \
+          "e.g. FIRESTORE_TEST_PROJECT=test123 FIRESTORE_TEST_KEYFILE=/path/to/keyfile.json rake test"
+  end
+  # clear any env var already set
+  require "google/cloud/firestore/credentials"
+  Google::Cloud::Firestore::Credentials.env_vars.each do |path|
+    ENV[path] = nil
+  end
+  # always overwrite when running tests
+  ENV["FIRESTORE_PROJECT"] = project
+  ENV["FIRESTORE_KEYFILE_JSON"] = keyfile
+
+  t.test_files = FileList["**/*_test.rb"]
+  t.warning = false
+end

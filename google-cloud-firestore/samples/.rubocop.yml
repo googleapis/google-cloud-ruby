@@ -1,0 +1,24 @@
+inherit_gem:
+  google-style: google-style.yml
+
+Metrics/AbcSize:
+  Exclude:
+    - "query_data.rb"
+Metrics/BlockLength:
+  Exclude:
+    - "acceptance/*.rb"
+    - "Rakefile"
+Metrics/MethodLength:
+  Exclude:
+    - "get_data.rb"
+    - "query_data.rb"
+Naming/AccessorMethodName:
+  Exclude:
+    - "add_data.rb"
+Lint/UselessAssignment:
+  Exclude:
+    - "data_model.rb"
+    - "order_limit_data.rb"
+    - "paginate_data.rb"
+    - "query_data.rb"
+    - "quickstart.rb"
