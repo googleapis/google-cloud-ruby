@@ -118,11 +118,11 @@ module Google
           loop do
             begin
               if should_resume_request
-                @enum = resume_request!(resume_token)
+                @enum = resume_request(resume_token)
                 buffered_responses = []
                 should_resume_request = false
               elsif should_retry_request
-                @enum = retry_request!()
+                @enum = retry_request()
                 buffered_responses = []
                 should_retry_request = false
               end
@@ -230,7 +230,7 @@ module Google
         ##
         # @private
         # Resumes a request, by re-executing it with a resume token.
-        def resume_request! resume_token
+        def resume_request resume_token
           if @execute_query_options
             @service.execute_streaming_sql(
               @session_path,
@@ -250,7 +250,7 @@ module Google
         ##
         # @private
         # Retries a request, by re-executing it from scratch.
-        def retry_request!
+        def retry_request
           if @execute_query_options
             @service.execute_streaming_sql @session_path, @sql, @execute_query_options
           else
