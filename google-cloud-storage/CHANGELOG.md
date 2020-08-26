@@ -1,5 +1,21 @@
 # Release History
 
+### 2.0.0 / 2020-08-26
+
+#### ⚠ BREAKING CHANGES
+
+* **pubsub:** Use new generated client classes
+
+#### Features
+
+* Use new generated client classes
+* Add Object Lifecycle Management fields
+  * Add custom_time_before to Lifecycle::Rule
+  * Add days_since_custom_time to Lifecycle::Rule
+  * Add days_since_noncurrent_time to Lifecycle::Rule
+  * Add noncurrent_time_before to Lifecycle::Rule
+  * Add File#custom_time and #custom_time=
+
 ### 1.27.0 / 2020-07-29
 
 #### Features
