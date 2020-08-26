@@ -1,5 +1,14 @@
 # Release History
 
+### 1.28.0 / 2020-08-26
+
+* Add Object Lifecycle Management fields
+  * Add custom_time_before to Lifecycle::Rule
+  * Add days_since_custom_time to Lifecycle::Rule
+  * Add days_since_noncurrent_time to Lifecycle::Rule
+  * Add noncurrent_time_before to Lifecycle::Rule
+  * Add File#custom_time and #custom_time=
+
 ### 1.27.0 / 2020-07-29
 
 #### Features
