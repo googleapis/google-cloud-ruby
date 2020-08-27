@@ -153,16 +153,17 @@ class MockPubsub < Minitest::Spec
                         max_delivery_attempts: nil,
                         retry_minimum_backoff: nil,
                         retry_maximum_backoff: nil,
-                        detached: false
+                        detached: false,
+                        oidc_token: nil
     raise "dead_letter_topic is required" if max_delivery_attempts && !dead_letter_topic
     hsh = { name: subscription_path(sub_name),
       topic: topic_path(topic_name),
       push_config: {
         push_endpoint: endpoint,
-        oidc_token: {
-          service_account_email: "user@example.com",
-          audience: "client-12345"
-        }
+        oidc_token: oidc_token || {
+            service_account_email: "user@example.com",
+            audience: "client-12345"
+          }
       },
       ack_deadline_seconds: deadline,
       retain_acked_messages: true,

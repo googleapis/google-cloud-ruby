@@ -154,6 +154,34 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
   end
 
+  it "creates a subscription with an authenticated push endpoint via push config" do
+    new_sub_name = "new-sub-#{Time.now.to_i}"
+    endpoint = "http://foo.bar/baz"
+
+    push_config = Google::Cloud::PubSub::Subscription::PushConfig.new
+    push_config.endpoint = endpoint
+    push_config.set_oidc_token(
+        "service-account@example.net", "audience-header-value"
+    )
+    
+    expected_oidc_token = {
+        service_account_email: "service-account@example.net",
+        audience: "audience-header-value"
+    }
+    create_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, new_sub_name, oidc_token: expected_oidc_token)
+
+    mock = Minitest::Mock.new
+    mock.expect :create_subscription, create_res, create_subscription_args(new_sub_name, topic_name, push_config: push_config.to_grpc)
+    topic.service.mocked_subscriber = mock
+
+    sub = topic.subscribe new_sub_name, push_config: push_config
+
+    mock.verify
+
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+  end
+
   it "creates a subscription with labels" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
     create_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, new_sub_name, labels: labels)

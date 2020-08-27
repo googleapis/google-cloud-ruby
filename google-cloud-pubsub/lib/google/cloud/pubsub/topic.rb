@@ -363,16 +363,20 @@ module Google
         #
         def subscribe subscription_name, deadline: nil, retain_acked: false, retention: nil, endpoint: nil, labels: nil,
                       message_ordering: nil, filter: nil, dead_letter_topic: nil,
-                      dead_letter_max_delivery_attempts: nil, retry_policy: nil
+                      dead_letter_max_delivery_attempts: nil, retry_policy: nil, push_config: nil
           ensure_service!
           options = { deadline: deadline, retain_acked: retain_acked, retention: retention, endpoint: endpoint,
                       labels: labels, message_ordering: message_ordering, filter: filter,
-                      dead_letter_max_delivery_attempts: dead_letter_max_delivery_attempts }
+                      dead_letter_max_delivery_attempts: dead_letter_max_delivery_attempts,
+                      push_config: push_config }
 
           options[:dead_letter_topic_name] = dead_letter_topic.name if dead_letter_topic
           if options[:dead_letter_max_delivery_attempts] && !options[:dead_letter_topic_name]
             # Service error message "3:Invalid resource name given (name=)." does not identify param.
             raise ArgumentError, "dead_letter_topic is required with dead_letter_max_delivery_attempts"
+          end
+          if options[:push_config] && options[:endpoint]
+            raise ArgumentError, "Push endpoint and push config were both provided. Please provide only one"
           end
           options[:retry_policy] = retry_policy.to_grpc if retry_policy
           grpc = service.create_subscription name, subscription_name, options

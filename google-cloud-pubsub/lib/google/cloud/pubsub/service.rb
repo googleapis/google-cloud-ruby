@@ -175,11 +175,21 @@ module Google
         ##
         # Creates a subscription on a given topic for a given subscriber.
         def create_subscription topic, subscription_name, options = {}
-          push_config = if options[:endpoint]
+          push_config = if options[:push_config]
+                          # Handle if push config is provided at create subscription time
+                          if options[:push_config].is_a? Google::Cloud::PubSub::Subscription::PushConfig
+                            options[:push_config].to_grpc
+                          elsif !options[:push_config].is_a? Google::Cloud::PubSub::V1::PushConfig
+                            raise ArgumentError "push_config is not a valid pubsub push config object"
+                          else
+                            options[:push_config]
+                          end
+                        elsif options[:endpoint]
                           Google::Cloud::PubSub::V1::PushConfig.new \
                             push_endpoint: options[:endpoint],
                             attributes:    (options[:attributes] || {}).to_h
                         end
+
           subscriber.create_subscription \
             name:                       subscription_path(subscription_name, options),
             topic:                      topic_path(topic),
