@@ -211,7 +211,7 @@ module Google
         # @private
         # Checks if a request can be resumed by inspecting the resume token
         def resumable? resume_token
-          !resume_token.nil? && !resume_token.empty?
+          resume_token && !resume_token.empty?
         end
 
         ##
