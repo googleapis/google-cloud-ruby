@@ -101,6 +101,20 @@ def invalid_range_order_by_query project_id:, collection_path: "cities"
   # [END fs_invalid_range_order_by_query]
 end
 
+def order_by_name_limit_to_last_query project_id:, collection_path: "cities"
+  # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
+
+  firestore = Google::Cloud::Firestore.new project_id: project_id
+
+  cities_ref = firestore.col collection_path
+  # [START fs_order_by_name_limit_to_last_query]
+  query = cities_ref.order("name").limit_to_last(3)
+  # [END fs_order_by_name_limit_to_last_query]
+  query.get do |city|
+    puts "Document #{city.document_id} returned by order by name with limit_to_last query."
+  end
+end
 
 if $PROGRAM_NAME == __FILE__
   project = ENV["FIRESTORE_PROJECT"]
@@ -117,6 +131,8 @@ if $PROGRAM_NAME == __FILE__
     range_order_by_query project_id: project
   when "invalid_range_order_by_query"
     invalid_range_order_by_query project_id: project
+  when "order_by_name_limit_to_last_query"
+    order_by_name_limit_to_last_query project_id: project
   else
     puts <<~USAGE
       Usage: bundle exec ruby order_limit_data.rb [command]
@@ -128,6 +144,7 @@ if $PROGRAM_NAME == __FILE__
         where_order_by_limit_query           Combine where with order by and limit in a query.
         range_order_by_query                 Create a range with order by query.
         invalid_range_order_by_query         An example of an invalid range with order by query.
+        order_by_name_limit_to_last_query    Create an order by name with limit_to_last query.
     USAGE
   end
 end

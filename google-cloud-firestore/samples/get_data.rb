@@ -134,7 +134,6 @@ def list_subcollections project_id:, collection_path: "cities"
   # [END fs_list_subcollections]
 end
 
-
 if $PROGRAM_NAME == __FILE__
   project = ENV["FIRESTORE_PROJECT"]
   case ARGV.shift

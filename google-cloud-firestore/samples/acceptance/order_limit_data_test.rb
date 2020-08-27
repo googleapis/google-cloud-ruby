@@ -86,4 +86,15 @@ describe "Google Cloud Firestore API samples - Order Limit Data" do
   it "invalid_range_order_by_query" do
     invalid_range_order_by_query project_id: @firestore_project, collection_path: @collection_path
   end
+
+  it "order_by_name_limit_to_last_query" do
+    out, _err = capture_io do
+      order_by_name_limit_to_last_query project_id: @firestore_project, collection_path: @collection_path
+    end
+    assert_includes out, "Document SF returned by order by name with limit_to_last query."
+    assert_includes out, "Document TOK returned by order by name with limit_to_last query."
+    assert_includes out, "Document DC returned by order by name with limit_to_last query."
+    refute_includes out, "Document BJ returned by order by name with limit_to_last query."
+    refute_includes out, "Document LA returned by order by name with limit_to_last query."
+  end
 end

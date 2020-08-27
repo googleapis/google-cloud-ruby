@@ -74,7 +74,6 @@ def get_all project_id:, collection_path: "users"
   # [END fs_get_all]
 end
 
-
 if $PROGRAM_NAME == __FILE__
   project = ENV["FIRESTORE_PROJECT"]
   case ARGV.shift
