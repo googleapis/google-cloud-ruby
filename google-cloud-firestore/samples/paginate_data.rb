@@ -91,6 +91,23 @@ def multiple_cursor_conditions project_id:, collection_path: "cities"
   end
 end
 
+def start_at_snapshot_query_cursor project_id:, collection_path: "cities"
+  # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
+
+  firestore = Google::Cloud::Firestore.new project_id: project_id
+
+  cities_ref = firestore.col collection_path
+  # [START fs_start_at_snapshot_query_cursor]
+  doc_ref = firestore.doc "#{collection_path}/SF"
+  snapshot = doc_ref.get
+  query = cities_ref.order("population").start_at(snapshot)
+  # [END fs_start_at_snapshot_query_cursor]
+  query.get do |city|
+    puts "Document #{city.document_id} returned by start at document snapshot query cursor."
+  end
+end
+
 if $PROGRAM_NAME == __FILE__
   project = ENV["FIRESTORE_PROJECT"]
   case ARGV.shift
@@ -102,6 +119,8 @@ if $PROGRAM_NAME == __FILE__
     paginated_query_cursor project_id: project
   when "multiple_cursor_conditions"
     multiple_cursor_conditions project_id: project
+  when "start_at_snapshot_query_cursor"
+    start_at_snapshot_query_cursor project_id: project
   else
     puts <<~USAGE
       Usage: bundle exec ruby paginate_data.rb [command]
@@ -111,6 +130,7 @@ if $PROGRAM_NAME == __FILE__
         end_at_field_query_cursor    Define field end point for a query.
         paginated_query_cursor       Paginate using query cursors.
         multiple_cursor_conditions   Set multiple cursor conditions.
+        start_at_snapshot_query_cursor  Define document snapshot start point for a query.
     USAGE
   end
 end
