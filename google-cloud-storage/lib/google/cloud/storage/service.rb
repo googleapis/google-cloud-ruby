@@ -292,12 +292,12 @@ module Google
         def insert_file bucket_name, source, path = nil, acl: nil,
                         cache_control: nil, content_disposition: nil,
                         content_encoding: nil, content_language: nil,
-                        content_type: nil, crc32c: nil, md5: nil, metadata: nil,
+                        content_type: nil, custom_time: nil, crc32c: nil, md5: nil, metadata: nil,
                         storage_class: nil, key: nil, kms_key: nil,
                         temporary_hold: nil, event_based_hold: nil,
                         user_project: nil
           params =
-            { cache_control: cache_control, content_type: content_type,
+            { cache_control: cache_control, content_type: content_type, custom_time: custom_time,
               content_disposition: content_disposition, md5_hash: md5,
               content_encoding: content_encoding, crc32c: crc32c,
               content_language: content_language, metadata: metadata,

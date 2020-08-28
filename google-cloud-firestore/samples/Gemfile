@@ -1,10 +1,10 @@
-# Copyright 2016 Google LLC
+# Copyright 2020 Google, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     https://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,11 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+source "https://rubygems.org"
 
-module Google
-  module Cloud
-    module Storage
-      VERSION = "1.28.0".freeze
-    end
-  end
+master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
+
+gem "google-cloud-firestore", path: master ? "../../google-cloud-firestore" : nil
+gem "google-cloud-firestore-v1", path: master ? "../../google-cloud-firestore-v1" : nil
+
+group :test do
+  gem "google-style", "~> 1.24.0"
+  gem "minitest", "~> 5.14"
+  gem "minitest-focus", "~> 1.2"
+  gem "minitest-hooks", "~> 1.5"
+  gem "rake", ">= 12.0"
 end

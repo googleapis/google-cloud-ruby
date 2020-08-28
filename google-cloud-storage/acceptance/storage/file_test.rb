@@ -33,6 +33,7 @@ describe Google::Cloud::Storage::File, :storage do
     ENV["GCLOUD_TEST_STORAGE_BUCKET"] || "storage-library-test-bucket"
   }
   let(:file_public_test_gzip_name) { "gzipped-text.txt" }  # content is "hello world"
+  let(:custom_time) { DateTime.new 2020, 2, 3, 4, 5, 6 }
 
   before do
     # always create the bucket
@@ -50,6 +51,7 @@ describe Google::Cloud::Storage::File, :storage do
       content_disposition: "attachment; filename=filename.ext",
       content_language: "en",
       content_type: "text/plain",
+      custom_time: custom_time,
       metadata: { player: "Alice", score: 101 }
 
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
@@ -78,6 +80,8 @@ describe Google::Cloud::Storage::File, :storage do
     _(uploaded.content_encoding).must_be :nil?
     _(uploaded.content_language).must_equal "en"
     _(uploaded.content_type).must_equal "text/plain"
+    _(uploaded.custom_time).must_be_kind_of DateTime
+    _(uploaded.custom_time).must_equal custom_time
 
     _(uploaded.metadata).must_be_kind_of Hash
     _(uploaded.metadata.size).must_equal 2
@@ -175,6 +179,7 @@ describe Google::Cloud::Storage::File, :storage do
     _(uploaded.content_encoding).must_be :nil?
     _(uploaded.content_language).must_be :nil?
     _(uploaded.content_type).must_equal "image/png"
+    _(uploaded.custom_time).must_be :nil?
 
     _(uploaded.metadata).must_be_kind_of Hash
     _(uploaded.metadata).must_be :empty?
@@ -185,6 +190,7 @@ describe Google::Cloud::Storage::File, :storage do
       f.content_disposition = "attachment; filename=filename.ext"
       f.content_language = "en"
       f.content_type = "text/plain"
+      f.custom_time = custom_time
       f.metadata = { player: "Alice" }
       f.metadata[:score] = 101
     end
@@ -204,6 +210,7 @@ describe Google::Cloud::Storage::File, :storage do
     _(uploaded.content_encoding).must_be :nil?
     _(uploaded.content_language).must_equal "en"
     _(uploaded.content_type).must_equal "text/plain"
+    _(uploaded.custom_time).must_equal custom_time
 
     _(uploaded.metadata).must_be_kind_of Hash
     _(uploaded.metadata.size).must_equal 2
@@ -231,6 +238,7 @@ describe Google::Cloud::Storage::File, :storage do
     _(uploaded.content_encoding).must_be :nil?
     _(uploaded.content_language).must_equal "en"
     _(uploaded.content_type).must_equal "text/plain"
+    _(uploaded.custom_time).must_equal custom_time
 
     _(uploaded.metadata).must_be_kind_of Hash
     _(uploaded.metadata.size).must_equal 2

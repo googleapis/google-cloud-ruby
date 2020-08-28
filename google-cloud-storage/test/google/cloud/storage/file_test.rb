@@ -19,7 +19,8 @@ describe Google::Cloud::Storage::File, :mock_storage do
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
   let(:bucket_user_project) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service, user_project: true }
 
-  let(:file_hash) { random_file_hash bucket.name, "file.ext" }
+  let(:custom_time) { DateTime.new 2020, 2, 3, 4, 5, 6 }
+  let(:file_hash) { random_file_hash bucket.name, "file.ext", custom_time: custom_time }
   let(:file_gapi) { Google::Apis::StorageV1::Object.from_json file_hash.to_json }
   let(:file) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service }
   let(:file_user_project) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service, user_project: true }
@@ -73,6 +74,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
     _(file.content_encoding).must_equal "gzip"
     _(file.content_language).must_equal "en"
     _(file.content_type).must_equal "text/plain"
+    _(file.custom_time).must_equal custom_time
 
     _(file.metadata).must_be_kind_of Hash
     _(file.metadata.size).must_equal 2
