@@ -4,6 +4,7 @@ inherit_gem:
 Metrics/AbcSize:
   Exclude:
     - "query_data.rb"
+    - "query_watch.rb"
 Metrics/BlockLength:
   Exclude:
     - "acceptance/*.rb"
@@ -12,6 +13,7 @@ Metrics/MethodLength:
   Exclude:
     - "get_data.rb"
     - "query_data.rb"
+    - "query_watch.rb"
 Naming/AccessorMethodName:
   Exclude:
     - "add_data.rb"
