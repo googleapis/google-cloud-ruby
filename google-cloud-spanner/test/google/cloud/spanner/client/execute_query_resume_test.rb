@@ -140,17 +140,21 @@ describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner 
   end
 
   describe "when a resume token is NOT available" do
-    it "restarts the request when an unavailable error is returned" do
+    it "restarts the request when a unavailable error is returned" do
       resulting_stream_1 = [
         Google::Cloud::Spanner::V1::PartialResultSet.new(metadata_result),
         GRPC::Unavailable,
       ].to_enum
       resulting_stream_2 = [
+        Google::Cloud::UnavailableError,
+      ].to_enum
+      resulting_stream_3 = [
         Google::Cloud::Spanner::V1::PartialResultSet.new(full_row)
       ].to_enum
       service_mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
       expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_1), session_grpc.name, "SELECT * FROM users", options: default_options
       expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_2), session_grpc.name, "SELECT * FROM users", options: default_options
+      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_3), session_grpc.name, "SELECT * FROM users", options: default_options
 
       results = client.execute_query "SELECT * FROM users"
 
@@ -164,11 +168,15 @@ describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner 
         GRPC::Internal.new("INTERNAL: Received unexpected EOS on DATA frame from server"),
       ].to_enum
       resulting_stream_2 = [
+        Google::Cloud::InternalError.new("INTERNAL: Received unexpected EOS on DATA frame from server"),
+      ].to_enum
+      resulting_stream_3 = [
         Google::Cloud::Spanner::V1::PartialResultSet.new(full_row)
       ].to_enum
       service_mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
       expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_1), session_grpc.name, "SELECT * FROM users", options: default_options
       expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_2), session_grpc.name, "SELECT * FROM users", options: default_options
+      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_3), session_grpc.name, "SELECT * FROM users", options: default_options
 
       results = client.execute_query "SELECT * FROM users"
 
@@ -182,11 +190,16 @@ describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner 
         GRPC::Internal.new("INTERNAL: Received RST_STREAM with code 2 (Internal server error)"),
       ].to_enum
       resulting_stream_2 = [
+        Google::Cloud::Spanner::V1::PartialResultSet.new(metadata_result),
+        GRPC::Internal.new("INTERNAL: Received RST_STREAM with code 2 (Internal server error)"),
+      ].to_enum
+      resulting_stream_3 = [
         Google::Cloud::Spanner::V1::PartialResultSet.new(full_row)
       ].to_enum
       service_mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
       expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_1), session_grpc.name, "SELECT * FROM users", options: default_options
       expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_2), session_grpc.name, "SELECT * FROM users", options: default_options
+      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_3), session_grpc.name, "SELECT * FROM users", options: default_options
 
       results = client.execute_query "SELECT * FROM users"
 
@@ -194,10 +207,24 @@ describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner 
       service_mock.verify
     end
 
-    it "bubbles up the error when a generic internal error is returned" do
+    it "bubbles up the error when a generic GRPC internal error is returned" do
       resulting_stream_1 = [
         Google::Cloud::Spanner::V1::PartialResultSet.new(metadata_result),
         GRPC::Internal.new("INTERNAL: Generic (Internal server error)"),
+      ].to_enum
+      service_mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+      expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_1), session_grpc.name, "SELECT * FROM users", options: default_options
+
+      assert_raises Google::Cloud::Error do
+        results = client.execute_query "SELECT * FROM users"
+        results.rows.to_a # gets results from the enumerator
+      end
+    end
+
+    it "bubbles up the error when a generic Google Cloud internal error is returned" do
+      resulting_stream_1 = [
+        Google::Cloud::Spanner::V1::PartialResultSet.new(metadata_result),
+        Google::Cloud::InternalError.new("INTERNAL: Generic (Internal server error)"),
       ].to_enum
       service_mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
       expect_execute_streaming_sql RaiseableEnumerator.new(resulting_stream_1), session_grpc.name, "SELECT * FROM users", options: default_options

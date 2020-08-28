@@ -157,19 +157,28 @@ module Google
                 # Flush the buffered responses now that they are all handled
                 buffered_responses = []
               end
-            rescue GRPC::Cancelled,
+            rescue GRPC::Aborted,
+              GRPC::Cancelled,
               GRPC::DeadlineExceeded,
               GRPC::Internal,
               GRPC::ResourceExhausted,
               GRPC::Unauthenticated,
               GRPC::Unavailable,
-              GRPC::Aborted,
-              GRPC::Core::CallError => err
+              GRPC::Core::CallError,
+              Google::Cloud::AbortedError,
+              Google::Cloud::CanceledError,
+              Google::Cloud::DeadlineExceededError,
+              Google::Cloud::InternalError,
+              Google::Cloud::ResourceExhaustedError,
+              Google::Cloud::UnauthenticatedError,
+              Google::Cloud::UnavailableError => err
 
               if resumable?(resume_token)
                 should_resume_request = true
               elsif retryable?(err)
                 should_retry_request = true
+              elsif err.is_a?(Google::Cloud::Error)
+                raise err
               else
                 raise Google::Cloud::Error.from_error(err)
               end
@@ -222,8 +231,11 @@ module Google
         #   - Internal EOS error
         #   - Internal RST_STREAM error
         def retryable? err
-          err.instance_of?(GRPC::Unavailable) ||
+          err.instance_of?(Google::Cloud::UnavailableError) ||
+            err.instance_of?(GRPC::Unavailable) ||
+            (err.instance_of?(Google::Cloud::InternalError) && err.message.include?(EOS_INTERNAL_ERROR)) ||
             (err.instance_of?(GRPC::Internal) && err.details.include?(EOS_INTERNAL_ERROR)) ||
+            (err.instance_of?(Google::Cloud::InternalError) && err.message.include?(RST_STREAM_INTERNAL_ERROR)) ||
             (err.instance_of?(GRPC::Internal) && err.details.include?(RST_STREAM_INTERNAL_ERROR))
         end
 
