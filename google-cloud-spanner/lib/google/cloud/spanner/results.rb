@@ -157,6 +157,8 @@ module Google
                 # Flush the buffered responses now that they are all handled
                 buffered_responses = []
               end
+            # TODO: once the generated client throws only Google Cloud errors, remove
+            # the GRPC errors from the rescue block
             rescue GRPC::Aborted,
               GRPC::Cancelled,
               GRPC::DeadlineExceeded,
@@ -183,6 +185,8 @@ module Google
                 raise Google::Cloud::Error.from_error(err)
               end
 
+            # TODO: once the generated client throws only Google Cloud errors, remove
+            # this rescue block (for GRPC::BadStatus)
             rescue GRPC::BadStatus => err
               raise Google::Cloud::Error.from_error(err)
             rescue StopIteration
