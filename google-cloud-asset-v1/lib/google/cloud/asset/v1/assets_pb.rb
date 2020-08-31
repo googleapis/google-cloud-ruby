@@ -3,7 +3,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/orgpolicy/v1/orgpolicy_pb'
 require 'google/iam/v1/policy_pb'
@@ -14,6 +13,7 @@ require 'google/protobuf/any_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/code_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/asset/v1/assets.proto", :syntax => :proto3) do
     add_message "google.cloud.asset.v1.TemporalAsset" do

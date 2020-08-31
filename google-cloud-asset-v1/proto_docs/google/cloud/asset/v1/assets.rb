@@ -202,7 +202,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A result of Resource Search, containing information of a cloud resoure.
+        # A result of Resource Search, containing information of a cloud resource.
         # @!attribute [rw] name
         #   @return [::String]
         #     The full resource name of this resource. Example:
@@ -213,8 +213,8 @@ module Google
         #
         #     To search against the `name`:
         #
-        #     * use a field query. Example: `name : "instance1"`
-        #     * use a free text query. Example: `"instance1"`
+        #     * use a field query. Example: `name:instance1`
+        #     * use a free text query. Example: `instance1`
         # @!attribute [rw] asset_type
         #   @return [::String]
         #     The type of this resource. Example: `compute.googleapis.com/Disk`.
@@ -236,7 +236,7 @@ module Google
         #
         #     To search against the `display_name`:
         #
-        #     * use a field query. Example: `displayName : "My Instance"`
+        #     * use a field query. Example: `displayName:"My Instance"`
         #     * use a free text query. Example: `"My Instance"`
         # @!attribute [rw] description
         #   @return [::String]
@@ -245,7 +245,7 @@ module Google
         #
         #     To search against the `description`:
         #
-        #     * use a field query. Example: `description : "*important instance*"`
+        #     * use a field query. Example: `description:"*important instance*"`
         #     * use a free text query. Example: `"*important instance*"`
         # @!attribute [rw] location
         #   @return [::String]
@@ -254,8 +254,8 @@ module Google
         #
         #     To search against the `location`:
         #
-        #     * use a field query. Example: `location : "us-west*"`
-        #     * use a free text query. Example: `"us-west*"`
+        #     * use a field query. Example: `location:us-west*`
+        #     * use a free text query. Example: `us-west*`
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels associated with this resource. See [Labelling and grouping GCP
@@ -264,11 +264,11 @@ module Google
         #
         #     To search against the `labels`:
         #
-        #     * use a field query, as following:
-        #         - query on any label's key or value. Example: `labels : "prod"`
-        #         - query by a given label. Example: `labels.env : "prod"`
-        #         - query by a given label'sexistence. Example: `labels.env : *`
-        #     * use a free text query. Example: `"prod"`
+        #     * use a field query:
+        #         - query on any label's key or value. Example: `labels:prod`
+        #         - query by a given label. Example: `labels.env:prod`
+        #         - query by a given label's existence. Example: `labels.env:*`
+        #     * use a free text query. Example: `prod`
         # @!attribute [rw] network_tags
         #   @return [::Array<::String>]
         #     Network tags associated with this resource. Like labels, network tags are a
@@ -278,19 +278,29 @@ module Google
         #
         #     To search against the `network_tags`:
         #
-        #     * use a field query. Example: `networkTags : "internal"`
-        #     * use a free text query. Example: `"internal"`
+        #     * use a field query. Example: `networkTags:internal`
+        #     * use a free text query. Example: `internal`
         # @!attribute [rw] additional_attributes
         #   @return [::Google::Protobuf::Struct]
-        #     The additional attributes of this resource. The attributes may vary from
-        #     one resource type to another. Examples: `projectId` for Project,
-        #     `dnsName` for DNS ManagedZone.
+        #     The additional searchable attributes of this resource. The attributes may
+        #     vary from one resource type to another. Examples: `projectId` for Project,
+        #     `dnsName` for DNS ManagedZone. This field contains a subset of the resource
+        #     metadata fields that are returned by the List or Get APIs provided by the
+        #     corresponding GCP service (e.g., Compute Engine). see [API references and
+        #     supported searchable
+        #     attributes](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types)
+        #     for more information.
+        #
+        #     You can search values of these fields through free text search. However,
+        #     you should not consume the field programically as the field names and
+        #     values may change as the GCP service updates to a new incompatible API
+        #     version.
         #
         #     To search against the `additional_attributes`:
         #
         #     * use a free text query to match the attributes values. Example: to search
         #       `additional_attributes = { dnsName: "foobar" }`, you can issue a query
-        #       `"foobar"`.
+        #       `foobar`.
         class ResourceSearchResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -317,7 +327,7 @@ module Google
         #
         #     To search against the `resource`:
         #
-        #     * use a field query. Example: `resource : "organizations/123"`
+        #     * use a field query. Example: `resource:organizations/123`
         # @!attribute [rw] project
         #   @return [::String]
         #     The project that the associated GCP resource belongs to, in the form of
@@ -338,13 +348,13 @@ module Google
         #
         #     To search against the `policy` bindings:
         #
-        #     * use a field query, as following:
+        #     * use a field query:
         #         - query by the policy contained members. Example:
-        #           `policy : "amy@gmail.com"`
+        #           `policy:amy@gmail.com`
         #         - query by the policy contained roles. Example:
-        #           `policy : "roles/compute.admin"`
-        #         - query by the policy contained roles' implied permissions. Example:
-        #           `policy.role.permissions : "compute.instances.create"`
+        #           `policy:roles/compute.admin`
+        #         - query by the policy contained roles' included permissions. Example:
+        #           `policy.role.permissions:compute.instances.create`
         # @!attribute [rw] explanation
         #   @return [::Google::Cloud::Asset::V1::IamPolicySearchResult::Explanation]
         #     Explanation about the IAM policy search result. It contains additional
@@ -358,7 +368,7 @@ module Google
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Asset::V1::IamPolicySearchResult::Explanation::Permissions}]
           #     The map from roles to their included permissions that match the
           #     permission query (i.e., a query containing `policy.role.permissions:`).
-          #     Example: if query `policy.role.permissions : "compute.disk.get"`
+          #     Example: if query `policy.role.permissions:compute.disk.get`
           #     matches a policy binding that contains owner role, the
           #     matched_permissions will be `{"roles/owner": ["compute.disk.get"]}`. The
           #     roles can also be found in the returned `policy` bindings. Note that the

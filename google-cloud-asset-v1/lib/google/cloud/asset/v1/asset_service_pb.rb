@@ -26,6 +26,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.asset.v1.ExportAssetsResponse" do
       optional :read_time, :message, 1, "google.protobuf.Timestamp"
       optional :output_config, :message, 2, "google.cloud.asset.v1.OutputConfig"
+      optional :output_result, :message, 3, "google.cloud.asset.v1.OutputResult"
     end
     add_message "google.cloud.asset.v1.BatchGetAssetsHistoryRequest" do
       optional :parent, :string, 1
@@ -62,6 +63,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :gcs_destination, :message, 1, "google.cloud.asset.v1.GcsDestination"
         optional :bigquery_destination, :message, 2, "google.cloud.asset.v1.BigQueryDestination"
       end
+    end
+    add_message "google.cloud.asset.v1.OutputResult" do
+      oneof :result do
+        optional :gcs_result, :message, 1, "google.cloud.asset.v1.GcsOutputResult"
+      end
+    end
+    add_message "google.cloud.asset.v1.GcsOutputResult" do
+      repeated :uris, :string, 1
     end
     add_message "google.cloud.asset.v1.GcsDestination" do
       oneof :object_uri do
@@ -137,6 +146,8 @@ module Google
         UpdateFeedRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.UpdateFeedRequest").msgclass
         DeleteFeedRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.DeleteFeedRequest").msgclass
         OutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.OutputConfig").msgclass
+        OutputResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.OutputResult").msgclass
+        GcsOutputResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.GcsOutputResult").msgclass
         GcsDestination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.GcsDestination").msgclass
         BigQueryDestination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.BigQueryDestination").msgclass
         PubsubDestination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.PubsubDestination").msgclass
