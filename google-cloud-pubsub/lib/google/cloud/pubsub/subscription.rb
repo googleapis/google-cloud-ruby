@@ -43,12 +43,19 @@ module Google
       #     received_message.acknowledge!
       #   end
       #
+      #   # Handle exceptions from listener
+      #   subscriber.on_error do |exception|
+      #      puts "Exception: #{exception.class} #{exception.message}"
+      #   end
+      #
+      #   # Gracefully shut down the subscriber
+      #   at_exit do
+      #     subscriber.stop.wait!
+      #   end
+      #
       #   # Start background threads that will call the block passed to listen.
       #   subscriber.start
-      #
-      #   # Shut down the subscriber when ready to stop receiving messages.
-      #   subscriber.stop.wait!
-      #
+      #   sleep
       class Subscription
         ##
         # @private The Service object.
@@ -856,6 +863,7 @@ module Google
         #
         #   subscriber = sub.listen do |received_message|
         #     # process message
+        #     puts "Data: #{received_message.message.data}, published at #{received_message.message.published_at}"
         #     received_message.acknowledge!
         #   end
         #
