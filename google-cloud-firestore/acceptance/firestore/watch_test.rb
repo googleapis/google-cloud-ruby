@@ -15,6 +15,70 @@
 require "firestore_helper"
 
 describe "Watch", :firestore_acceptance do
+  it "watches a limit query" do
+    watch_col = root_col.doc("watch-limit").col("watch-query")
+
+    watch_col.doc("int 5").create(val: 5)
+    watch_col.doc("int 4").create(val: 4)
+    watch_col.doc("int 3").create(val: 3)
+
+    snps = []
+    listener = watch_col.order(:val).limit(2).listen { |snp| snps << snp }
+
+    wait_until { snps.count == 1 }
+
+    firestore.batch do |b|
+      b.create(watch_col.doc("int 2"), { val: 1 })
+      b.create(watch_col.doc("int 1"), { val: 0 })
+    end
+
+    wait_until { snps.count == 2 }
+
+    listener.stop
+
+    _(snps.count).must_equal 2
+    _(snps[0].count).must_equal 2
+    _(snps[0].docs.map(&:document_id)).must_equal ["int 3", "int 4"]
+    _(snps[0].changes.map(&:type)).must_equal [:added, :added]
+    _(snps[0].changes.map(&:doc).map(&:document_id)).must_equal ["int 3", "int 4"]
+    _(snps[1].count).must_equal 2
+    _(snps[1].docs.map(&:document_id)).must_equal ["int 1", "int 2"]
+    _(snps[1].changes.map(&:type)).must_equal [:removed, :removed, :added, :added]
+    _(snps[1].changes.map(&:doc).map(&:document_id)).must_equal ["int 3", "int 4", "int 1", "int 2"]
+  end
+
+  it "watches a limit_to_last query" do
+    watch_col = root_col.doc("watch-limit_to_last").col("watch-query")
+
+    watch_col.doc("int 3").create(val: 3)
+    watch_col.doc("int 2").create(val: 2)
+    watch_col.doc("int 1").create(val: 1)
+
+    snps = []
+    listener = watch_col.order(:val).limit_to_last(2).listen { |snp| snps << snp }
+
+    wait_until { snps.count == 1 }
+
+    firestore.batch do |b|
+      b.create(watch_col.doc("int 5"), { val: 5 })
+      b.create(watch_col.doc("int 4"), { val: 4 })
+    end
+
+    wait_until { snps.count == 2 }
+
+    listener.stop
+
+    _(snps.count).must_equal 2
+    _(snps[0].count).must_equal 2
+    _(snps[0].docs.map(&:document_id)).must_equal ["int 2", "int 3"]
+    _(snps[0].changes.map(&:type)).must_equal [:added, :added]
+    _(snps[0].changes.map(&:doc).map(&:document_id)).must_equal ["int 2", "int 3"]
+    _(snps[1].count).must_equal 2
+    _(snps[1].docs.map(&:document_id)).must_equal ["int 4", "int 5"]
+    _(snps[1].changes.map(&:type)).must_equal [:removed, :removed, :added, :added]
+    _(snps[1].changes.map(&:doc).map(&:document_id)).must_equal ["int 2", "int 3", "int 4", "int 5"]
+  end
+
   it "watches a query" do
     watch_col = root_col.doc("watch").col("watch-query")
 
@@ -31,53 +95,51 @@ describe "Watch", :firestore_acceptance do
     watch_col.doc("geo").create(val: { longitude: 45, latitude: 45 })
     watch_col.doc("io").create(val: StringIO.new)
 
-    query_snapshots = []
-    listener = watch_col.order(:val, :desc).listen do |query_snp|
-      query_snapshots << query_snp
-    end
+    snps = []
+    listener = watch_col.order(:val, :desc).listen { |snp| snps << snp }
 
-    wait_until { query_snapshots.count == 1 }
+    wait_until { snps.count == 1 }
 
     watch_col.doc("added").create(val: false)
 
-    wait_until { query_snapshots.count == 2 }
+    wait_until { snps.count == 2 }
 
     watch_col.doc("array").delete
 
-    wait_until { query_snapshots.count == 3 }
+    wait_until { snps.count == 3 }
 
     watch_col.doc("added").update(val: true)
 
-    wait_until { query_snapshots.count == 4 }
+    wait_until { snps.count == 4 }
 
     listener.stop
 
-    _(query_snapshots.count).must_equal 4
-    query_snapshots.each { |qs| _(qs).must_be_kind_of Google::Cloud::Firestore::QuerySnapshot }
+    _(snps.count).must_equal 4
+    snps.each { |qs| _(qs).must_be_kind_of Google::Cloud::Firestore::QuerySnapshot }
 
-    _(query_snapshots[0].count).must_equal 12
-    _(query_snapshots[0].changes.count).must_equal 12
-    _(query_snapshots[0].docs.map(&:document_id)).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "nil"]
-    query_snapshots[0].changes.each { |change| _(change).must_be :added? }
-    _(query_snapshots[0].changes.map(&:doc).map(&:document_id)).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "nil"]
+    _(snps[0].count).must_equal 12
+    _(snps[0].changes.count).must_equal 12
+    _(snps[0].docs.map(&:document_id)).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "nil"]
+    snps[0].changes.each { |change| _(change).must_be :added? }
+    _(snps[0].changes.map(&:doc).map(&:document_id)).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "nil"]
 
-    _(query_snapshots[1].count).must_equal 13
-    _(query_snapshots[1].changes.count).must_equal 1
-    _(query_snapshots[1].docs.map(&:document_id)).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "added", "nil"]
-    query_snapshots[1].changes.each { |change| _(change).must_be :added? }
-    _(query_snapshots[1].changes.map(&:doc).map(&:document_id)).must_equal ["added"]
+    _(snps[1].count).must_equal 13
+    _(snps[1].changes.count).must_equal 1
+    _(snps[1].docs.map(&:document_id)).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "added", "nil"]
+    snps[1].changes.each { |change| _(change).must_be :added? }
+    _(snps[1].changes.map(&:doc).map(&:document_id)).must_equal ["added"]
 
-    _(query_snapshots[2].count).must_equal 12
-    _(query_snapshots[2].changes.count).must_equal 1
-    _(query_snapshots[2].docs.map(&:document_id)).must_equal ["hash", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "added", "nil"]
-    query_snapshots[2].changes.each { |change| _(change).must_be :removed? }
-    _(query_snapshots[2].changes.map(&:doc).map(&:document_id)).must_equal ["array"]
+    _(snps[2].count).must_equal 12
+    _(snps[2].changes.count).must_equal 1
+    _(snps[2].docs.map(&:document_id)).must_equal ["hash", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "added", "nil"]
+    snps[2].changes.each { |change| _(change).must_be :removed? }
+    _(snps[2].changes.map(&:doc).map(&:document_id)).must_equal ["array"]
 
-    _(query_snapshots[3].count).must_equal 12
-    _(query_snapshots[3].changes.count).must_equal 1
-    _(query_snapshots[3].docs.map(&:document_id)).must_equal ["hash", "geo", "ref", "io", "str", "time", "num", "int", "true", "added", "false", "nil"]
-    query_snapshots[3].changes.each { |change| _(change).must_be :modified? }
-    _(query_snapshots[3].changes.map(&:doc).map(&:document_id)).must_equal ["added"]
+    _(snps[3].count).must_equal 12
+    _(snps[3].changes.count).must_equal 1
+    _(snps[3].docs.map(&:document_id)).must_equal ["hash", "geo", "ref", "io", "str", "time", "num", "int", "true", "added", "false", "nil"]
+    snps[3].changes.each { |change| _(change).must_be :modified? }
+    _(snps[3].changes.map(&:doc).map(&:document_id)).must_equal ["added"]
   end
 
   it "watches a document" do
@@ -85,44 +147,42 @@ describe "Watch", :firestore_acceptance do
 
     watch_col.doc("watch-doc").create(val: true)
 
-    doc_snapshots = []
-    listener = watch_col.doc("watch-doc").listen do |doc_snp|
-      doc_snapshots << doc_snp
-    end
+    snps = []
+    listener = watch_col.doc("watch-doc").listen { |snp| snps << snp }
 
-    wait_until { doc_snapshots.count == 1 }
+    wait_until { snps.count == 1 }
 
     watch_col.doc("watch-doc").update(val: false)
 
-    wait_until { doc_snapshots.count == 2 }
+    wait_until { snps.count == 2 }
 
     watch_col.doc("watch-doc").delete
 
-    wait_until { doc_snapshots.count == 3 }
+    wait_until { snps.count == 3 }
 
     watch_col.doc("watch-doc").set(val: 1)
 
-    wait_until { doc_snapshots.count == 4 }
+    wait_until { snps.count == 4 }
 
     listener.stop
 
-    _(doc_snapshots.count).must_equal 4
-    doc_snapshots.each { |qs| _(qs).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot }
+    _(snps.count).must_equal 4
+    snps.each { |qs| _(qs).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot }
 
-    _(doc_snapshots[0].document_path).must_equal watch_col.doc("watch-doc").document_path
-    _(doc_snapshots[0]).must_be :exists?
-    _(doc_snapshots[0][:val]).must_equal true
+    _(snps[0].document_path).must_equal watch_col.doc("watch-doc").document_path
+    _(snps[0]).must_be :exists?
+    _(snps[0][:val]).must_equal true
 
-    _(doc_snapshots[1].document_path).must_equal watch_col.doc("watch-doc").document_path
-    _(doc_snapshots[1]).must_be :exists?
-    _(doc_snapshots[1][:val]).must_equal false
+    _(snps[1].document_path).must_equal watch_col.doc("watch-doc").document_path
+    _(snps[1]).must_be :exists?
+    _(snps[1][:val]).must_equal false
 
-    _(doc_snapshots[2].document_path).must_equal watch_col.doc("watch-doc").document_path
-    _(doc_snapshots[2]).must_be :missing?
+    _(snps[2].document_path).must_equal watch_col.doc("watch-doc").document_path
+    _(snps[2]).must_be :missing?
 
-    _(doc_snapshots[3].document_path).must_equal watch_col.doc("watch-doc").document_path
-    _(doc_snapshots[3]).must_be :exists?
-    _(doc_snapshots[3][:val]).must_equal 1
+    _(snps[3].document_path).must_equal watch_col.doc("watch-doc").document_path
+    _(snps[3]).must_be :exists?
+    _(snps[3][:val]).must_equal 1
   end
 
   def wait_until &block

@@ -127,6 +127,8 @@ module Google
           end
 
           def current_docs
+            # Reverse the results for Query#limit_to_last queries since that method reversed the order_by directions.
+            return @tree.keys.reverse if @query&.limit_type == :last
             @tree.keys
           end
 
