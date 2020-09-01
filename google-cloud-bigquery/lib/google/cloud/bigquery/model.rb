@@ -341,14 +341,19 @@ module Google
         # the update to comply with ETag-based optimistic concurrency control.
         #
         # @param [Hash<String, String>] new_labels A hash containing key/value
-        #   pairs.
+        #   pairs. The labels applied to a resource must meet the following requirements:
         #
-        #   * Label keys and values can be no longer than 63 characters.
-        #   * Label keys and values can contain only lowercase letters, numbers,
-        #     underscores, hyphens, and international characters.
-        #   * Label keys and values cannot exceed 128 bytes in size.
-        #   * Label keys must begin with a letter.
-        #   * Label keys must be unique within a model.
+        #   * Each resource can have multiple labels, up to a maximum of 64.
+        #   * Each label must be a key-value pair.
+        #   * Keys have a minimum length of 1 character and a maximum length of
+        #     63 characters, and cannot be empty. Values can be empty, and have
+        #     a maximum length of 63 characters.
+        #   * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes. All characters must use UTF-8 encoding, and
+        #     international characters are allowed.
+        #   * The key portion of a label must be unique. However, you can use the
+        #     same key with multiple resources.
+        #   * Keys must start with a lowercase letter or international character.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -480,6 +485,146 @@ module Google
         def training_runs
           ensure_full_data!
           Array @gapi_json[:trainingRuns]
+        end
+
+        ##
+        # Exports the model to Google Cloud Storage asynchronously, immediately
+        # returning an {ExtractJob} that can be used to track the progress of the
+        # export job. The caller may poll the service by repeatedly calling
+        # {Job#reload!} and {Job#done?} to detect when the job is done, or
+        # simply block until the job is done by calling #{Job#wait_until_done!}.
+        # See also {#extract}.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {ExtractJob::Updater#location=} in a block passed to this method. If
+        # the model is a full resource representation (see {#resource_full?}),
+        # the location of the job will automatically be set to the location of
+        # the model.
+        #
+        # @see https://cloud.google.com/bigquery-ml/docs/exporting-models
+        #   Exporting models
+        #
+        # @param [String] extract_url The Google Storage URI to which BigQuery
+        #   should extract the model. This value should be end in an object name
+        #   prefix, since multiple objects will be exported.
+        # @param [String] format The exported file format. The default value is
+        #   `ml_tf_saved_model`.
+        #
+        #   The following values are supported:
+        #
+        #   * `ml_tf_saved_model` - TensorFlow SavedModel
+        #   * `ml_xgboost_booster` - XGBoost Booster
+        # @param [String] job_id A user-defined ID for the extract job. The ID
+        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   `job_id` is provided, then `prefix` will not be used.
+        #
+        #   See [Generating a job
+        #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
+        # @param [String] prefix A string, usually human-readable, that will be
+        #   prepended to a generated value to produce a unique job ID. For
+        #   example, the prefix `daily_import_job_` can be given to generate a
+        #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
+        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
+        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
+        #   be used.
+        # @param [Hash] labels A hash of user-provided labels associated with
+        #   the job. You can use these to organize and group your jobs.
+        #
+        #   The labels applied to a resource must meet the following requirements:
+        #
+        #   * Each resource can have multiple labels, up to a maximum of 64.
+        #   * Each label must be a key-value pair.
+        #   * Keys have a minimum length of 1 character and a maximum length of
+        #     63 characters, and cannot be empty. Values can be empty, and have
+        #     a maximum length of 63 characters.
+        #   * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes. All characters must use UTF-8 encoding, and
+        #     international characters are allowed.
+        #   * The key portion of a label must be unique. However, you can use the
+        #     same key with multiple resources.
+        #   * Keys must start with a lowercase letter or international character.
+        #
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
+        #   configuration object for setting additional options.
+        #
+        # @return [Google::Cloud::Bigquery::ExtractJob]
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   model = dataset.model "my_model"
+        #
+        #   extract_job = model.extract_job "gs://my-bucket/#{model.model_id}"
+        #
+        #   extract_job.wait_until_done!
+        #   extract_job.done? #=> true
+        #
+        # @!group Data
+        #
+        def extract_job extract_url, format: nil, job_id: nil, prefix: nil, labels: nil
+          ensure_service!
+          options = { format: format, job_id: job_id, prefix: prefix, labels: labels }
+          updater = ExtractJob::Updater.from_options service, model_ref, extract_url, options
+          updater.location = location if location # may be model reference
+
+          yield updater if block_given?
+
+          job_gapi = updater.to_gapi
+          gapi = service.extract_table job_gapi
+          Job.from_gapi gapi, service
+        end
+
+        ##
+        # Exports the model to Google Cloud Storage using a synchronous method
+        # that blocks for a response. Timeouts and transient errors are generally
+        # handled as needed to complete the job. See also {#extract_job}.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {ExtractJob::Updater#location=} in a block passed to this method. If
+        # the model is a full resource representation (see {#resource_full?}),
+        # the location of the job will automatically be set to the location of
+        # the model.
+        #
+        # @see https://cloud.google.com/bigquery-ml/docs/exporting-models
+        #   Exporting models
+        #
+        # @param [String] extract_url The Google Storage URI to which BigQuery
+        #   should extract the model. This value should be end in an object name
+        #   prefix, since multiple objects will be exported.
+        # @param [String] format The exported file format. The default value is
+        #   `ml_tf_saved_model`.
+        #
+        #   The following values are supported:
+        #
+        #   * `ml_tf_saved_model` - TensorFlow SavedModel
+        #   * `ml_xgboost_booster` - XGBoost Booster
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
+        #   configuration object for setting additional options.
+        #
+        # @return [Boolean] Returns `true` if the extract operation succeeded.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   model = dataset.model "my_model"
+        #
+        #   model.extract "gs://my-bucket/#{model.model_id}"
+        #
+        # @!group Data
+        #
+        def extract extract_url, format: nil, &block
+          job = extract_job extract_url, format: format, &block
+          job.wait_until_done!
+          ensure_job_succeeded! job
+          true
         end
 
         ##
@@ -733,6 +878,17 @@ module Google
         # only partially loaded by a request to the API list method.
         def ensure_full_data!
           reload! unless resource_full?
+        end
+
+        def ensure_job_succeeded! job
+          return unless job.failed?
+          begin
+            # raise to activate ruby exception cause handling
+            raise job.gapi_error
+          rescue StandardError => e
+            # wrap Google::Apis::Error with Google::Cloud::Error
+            raise Google::Cloud::Error.from_error(e)
+          end
         end
       end
     end

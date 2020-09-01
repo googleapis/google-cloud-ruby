@@ -153,13 +153,21 @@ module Google
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with
-        #   the job. You can use these to organize and group your jobs. Label
-        #   keys and values can be no longer than 63 characters, can only
-        #   contain lowercase letters, numeric characters, underscores and
-        #   dashes. International characters are allowed. Label values are
-        #   optional. Label keys must start with a letter and each label in the
-        #   list must have a different key. See [Requirements for
-        #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
+        #   the job. You can use these to organize and group your jobs.
+        #
+        #   The labels applied to a resource must meet the following requirements:
+        #
+        #   * Each resource can have multiple labels, up to a maximum of 64.
+        #   * Each label must be a key-value pair.
+        #   * Keys have a minimum length of 1 character and a maximum length of
+        #     63 characters, and cannot be empty. Values can be empty, and have
+        #     a maximum length of 63 characters.
+        #   * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes. All characters must use UTF-8 encoding, and
+        #     international characters are allowed.
+        #   * The key portion of a label must be unique. However, you can use the
+        #     same key with multiple resources.
+        #   * Keys must start with a lowercase letter or international character.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -411,13 +419,21 @@ module Google
         #   See [Generating a job
         #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
         # @param [Hash] labels A hash of user-provided labels associated with
-        #   the job. You can use these to organize and group your jobs. Label
-        #   keys and values can be no longer than 63 characters, can only
-        #   contain lowercase letters, numeric characters, underscores and
-        #   dashes. International characters are allowed. Label values are
-        #   optional. Label keys must start with a letter and each label in the
-        #   list must have a different key. See [Requirements for
-        #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
+        #   the job. You can use these to organize and group your jobs.
+        #
+        #   The labels applied to a resource must meet the following requirements:
+        #
+        #   * Each resource can have multiple labels, up to a maximum of 64.
+        #   * Each label must be a key-value pair.
+        #   * Keys have a minimum length of 1 character and a maximum length of
+        #     63 characters, and cannot be empty. Values can be empty, and have
+        #     a maximum length of 63 characters.
+        #   * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes. All characters must use UTF-8 encoding, and
+        #     international characters are allowed.
+        #   * The key portion of a label must be unique. However, you can use the
+        #     same key with multiple resources.
+        #   * Keys must start with a lowercase letter or international character.
         # @param [Array<String>, String] udfs User-defined function resources
         #   used in a legacy SQL query. May be either a code resource to load from
         #   a Google Cloud Storage URI (`gs://bucket/path`), or an inline resource
@@ -1445,46 +1461,58 @@ module Google
         end
 
         ##
-        # Extracts the data from the provided table to a Google Cloud Storage
-        # file using an asynchronous method. In this method, an {ExtractJob} is
-        # immediately returned. The caller may poll the service by repeatedly
-        # calling {Job#reload!} and {Job#done?} to detect when the job is done,
-        # or simply block until the job is done by calling
+        # Extracts the data from a table or exports a model to Google Cloud Storage
+        # asynchronously, immediately returning an {ExtractJob} that can be used to
+        # track the progress of the export job.  The caller may poll the service by
+        # repeatedly calling {Job#reload!} and {Job#done?} to detect when the job
+        # is done, or simply block until the job is done by calling
         # #{Job#wait_until_done!}. See {#extract} for the synchronous version.
-        # Use this method instead of {Table#extract_job} to extract data from
-        # source tables in other projects.
+        #
+        # Use this method instead of {Table#extract_job} or {Model#extract_job} to
+        # extract data from source tables or models in other projects.
         #
         # The geographic location for the job ("US", "EU", etc.) can be set via
         # {ExtractJob::Updater#location=} in a block passed to this method.
         #
-        # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
-        #   Exporting Data From BigQuery
+        # @see https://cloud.google.com/bigquery/docs/exporting-data
+        #   Exporting table data
+        # @see https://cloud.google.com/bigquery-ml/docs/exporting-models
+        #   Exporting models
         #
-        # @param [String, Table] table The source table from which to extract
-        #   data. This can be a table object; or a string ID as specified by the
-        #   [Standard SQL Query
+        # @param [Table, Model, String] source The source table or model for
+        #   the extract operation. This can be a table or model object; or a
+        #   table ID string as specified by the [Standard SQL Query
         #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
         #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
         #   Reference](https://cloud.google.com/bigquery/query-reference#from)
         #   (`project-name:dataset_id.table_id`).
         # @param [Google::Cloud::Storage::File, String, Array<String>]
         #   extract_url The Google Storage file or file URI pattern(s) to which
-        #   BigQuery should extract the table data.
-        # @param [String] format The exported file format. The default value is
-        #   `csv`.
+        #   BigQuery should extract. For a model export this value should be a
+        #   string ending in an object name prefix, since multiple objects will
+        #   be exported.
+        # @param [String] format The exported file format. The default value for
+        #   tables is `csv`. Tables with nested or repeated fields cannot be
+        #   exported as CSV. The default value for models is `ml_tf_saved_model`.
         #
-        #   The following values are supported:
+        #   Supported values for tables:
         #
         #   * `csv` - CSV
         #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
+        #
+        #   Supported values for models:
+        #
+        #   * `ml_tf_saved_model` - TensorFlow SavedModel
+        #   * `ml_xgboost_booster` - XGBoost Booster
         # @param [String] compression The compression type to use for exported
         #   files. Possible values include `GZIP` and `NONE`. The default value
-        #   is `NONE`.
+        #   is `NONE`. Not applicable when extracting models.
         # @param [String] delimiter Delimiter to use between fields in the
-        #   exported data. Default is <code>,</code>.
-        # @param [Boolean] header Whether to print out a header row in the
-        #   results. Default is `true`.
+        #   exported table data. Default is `,`. Not applicable when extracting
+        #   models.
+        # @param [Boolean] header Whether to print out a header row in table
+        #   exports. Default is `true`. Not applicable when extracting models.
         # @param [String] job_id A user-defined ID for the extract job. The ID
         #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #   (_), or dashes (-). The maximum length is 1,024 characters. If
@@ -1501,40 +1529,60 @@ module Google
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with
-        #   the job. You can use these to organize and group your jobs. Label
-        #   keys and values can be no longer than 63 characters, can only
-        #   contain lowercase letters, numeric characters, underscores and
-        #   dashes. International characters are allowed. Label values are
-        #   optional. Label keys must start with a letter and each label in the
-        #   list must have a different key. See [Requirements for
-        #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
+        #   the job. You can use these to organize and group your jobs.
+        #
+        #   The labels applied to a resource must meet the following requirements:
+        #
+        #   * Each resource can have multiple labels, up to a maximum of 64.
+        #   * Each label must be a key-value pair.
+        #   * Keys have a minimum length of 1 character and a maximum length of
+        #     63 characters, and cannot be empty. Values can be empty, and have
+        #     a maximum length of 63 characters.
+        #   * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes. All characters must use UTF-8 encoding, and
+        #     international characters are allowed.
+        #   * The key portion of a label must be unique. However, you can use the
+        #     same key with multiple resources.
+        #   * Keys must start with a lowercase letter or international character.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
         #   configuration object for setting additional options.
         #
         # @return [Google::Cloud::Bigquery::ExtractJob]
         #
-        # @example
+        # @example Export table data
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   table_id = "bigquery-public-data.samples.shakespeare"
-        #   extract_job = bigquery.extract_job table_id,
-        #                                      "gs://my-bucket/shakespeare.csv"
+        #   extract_job = bigquery.extract_job table_id, "gs://my-bucket/shakespeare.csv"
         #   extract_job.wait_until_done!
         #   extract_job.done? #=> true
         #
+        # @example Export a model
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   model = dataset.model "my_model"
+        #
+        #   extract_job = bigquery.extract model, "gs://my-bucket/#{model.model_id}"
+        #
         # @!group Data
         #
-        def extract_job table, extract_url, format: nil, compression: nil, delimiter: nil, header: nil, job_id: nil,
+        def extract_job source, extract_url, format: nil, compression: nil, delimiter: nil, header: nil, job_id: nil,
                         prefix: nil, labels: nil
           ensure_service!
           options = { format: format, compression: compression, delimiter: delimiter, header: header, job_id: job_id,
                       prefix: prefix, labels: labels }
+          source_ref = if source.respond_to? :model_ref
+                         source.model_ref
+                       else
+                         Service.get_table_ref source, default_ref: project_ref
+                       end
 
-          table_ref = Service.get_table_ref table, default_ref: project_ref
-          updater = ExtractJob::Updater.from_options service, table_ref, extract_url, options
+          updater = ExtractJob::Updater.from_options service, source_ref, extract_url, options
 
           yield updater if block_given?
 
@@ -1544,51 +1592,63 @@ module Google
         end
 
         ##
-        # Extracts the data from the provided table to a Google Cloud Storage
-        # file using a synchronous method that blocks for a response. Timeouts
+        # Extracts the data from a table or exports a model to Google Cloud Storage
+        # using a synchronous method that blocks for a response. Timeouts
         # and transient errors are generally handled as needed to complete the
-        # job. See {#extract_job} for the asynchronous version. Use this method
-        # instead of {Table#extract} to extract data from source tables in other
-        # projects.
+        # job. See {#extract_job} for the asynchronous version.
+        #
+        # Use this method instead of {Table#extract} or {Model#extract} to
+        # extract data from source tables or models in other projects.
         #
         # The geographic location for the job ("US", "EU", etc.) can be set via
         # {ExtractJob::Updater#location=} in a block passed to this method.
         #
-        # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
-        #   Exporting Data From BigQuery
+        # @see https://cloud.google.com/bigquery/docs/exporting-data
+        #   Exporting table data
+        # @see https://cloud.google.com/bigquery-ml/docs/exporting-models
+        #   Exporting models
         #
-        # @param [String, Table] table The source table from which to extract
-        #   data. This can be a table object; or a string ID as specified by the
-        #   [Standard SQL Query
+        # @param [Table, Model, String] source The source table or model for
+        #   the extract operation. This can be a table or model object; or a
+        #   table ID string as specified by the [Standard SQL Query
         #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
         #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
         #   Reference](https://cloud.google.com/bigquery/query-reference#from)
         #   (`project-name:dataset_id.table_id`).
         # @param [Google::Cloud::Storage::File, String, Array<String>]
         #   extract_url The Google Storage file or file URI pattern(s) to which
-        #   BigQuery should extract the table data.
-        # @param [String] format The exported file format. The default value is
-        #   `csv`.
+        #   BigQuery should extract. For a model export this value should be a
+        #   string ending in an object name prefix, since multiple objects will
+        #   be exported.
+        # @param [String] format The exported file format. The default value for
+        #   tables is `csv`. Tables with nested or repeated fields cannot be
+        #   exported as CSV. The default value for models is `ml_tf_saved_model`.
         #
-        #   The following values are supported:
+        #   Supported values for tables:
         #
         #   * `csv` - CSV
         #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
+        #
+        #   Supported values for models:
+        #
+        #   * `ml_tf_saved_model` - TensorFlow SavedModel
+        #   * `ml_xgboost_booster` - XGBoost Booster
         # @param [String] compression The compression type to use for exported
         #   files. Possible values include `GZIP` and `NONE`. The default value
-        #   is `NONE`.
+        #   is `NONE`. Not applicable when extracting models.
         # @param [String] delimiter Delimiter to use between fields in the
-        #   exported data. Default is <code>,</code>.
-        # @param [Boolean] header Whether to print out a header row in the
-        #   results. Default is `true`.
+        #   exported table data. Default is `,`. Not applicable when extracting
+        #   models.
+        # @param [Boolean] header Whether to print out a header row in table
+        #   exports. Default is `true`. Not applicable when extracting models.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
         #   configuration object for setting additional options.
         #
         # @return [Boolean] Returns `true` if the extract operation succeeded.
         #
-        # @example
+        # @example Export table data
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -1596,10 +1656,19 @@ module Google
         #   bigquery.extract "bigquery-public-data.samples.shakespeare",
         #                    "gs://my-bucket/shakespeare.csv"
         #
+        # @example Export a model
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   model = dataset.model "my_model"
+        #
+        #   bigquery.extract model, "gs://my-bucket/#{model.model_id}"
+        #
         # @!group Data
         #
-        def extract table, extract_url, format: nil, compression: nil, delimiter: nil, header: nil, &block
-          job = extract_job table, extract_url,
+        def extract source, extract_url, format: nil, compression: nil, delimiter: nil, header: nil, &block
+          job = extract_job source, extract_url,
                             format:      format,
                             compression: compression,
                             delimiter:   delimiter,

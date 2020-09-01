@@ -392,6 +392,16 @@ class MockBigquery < Minitest::Spec
     }
   end
 
+  def source_model_json
+    hash = random_model_full_hash "getting_replaced_dataset_id", "source_model_id"
+    hash["tableReference"] = {
+      "projectId" => "source_project_id",
+      "datasetId" => "source_dataset_id",
+      "modelId"   => "source_model_id"
+    }
+    hash.to_json
+  end
+
   def random_model_full_hash dataset, id, name: nil, description: nil, kms_key: nil
     hash = random_model_partial_hash dataset, id
 
@@ -789,11 +799,12 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-  def extract_job_gapi table, extract_file, job_id: "job_9876543210", location: "US"
-    Google::Apis::BigqueryV2::Job.from_json extract_job_json(table, extract_file, job_id, location: location)
+  def extract_job_gapi source, extract_file, job_id: "job_9876543210", location: "US"
+    Google::Apis::BigqueryV2::Job.from_json extract_job_json(source, extract_file, job_id, location: location)
   end
 
-  def extract_job_json table, extract_file, job_id, location: "US"
+  def extract_job_json source, extract_file, job_id, location: "US"
+    extract_file = extract_file.respond_to?(:to_gs_url) ? extract_file.to_gs_url : extract_file
     hash = {
       "jobReference" => {
         "projectId" => project,
@@ -801,12 +812,7 @@ class MockBigquery < Minitest::Spec
       },
       "configuration" => {
         "extract" => {
-          "destinationUris" => [extract_file.to_gs_url],
-          "sourceTable" => {
-            "projectId" => table.project_id,
-            "datasetId" => table.dataset_id,
-            "tableId" => table.table_id
-          },
+          "destinationUris" => [extract_file],
           "printHeader" => nil,
           "compression" => nil,
           "fieldDelimiter" => nil,
@@ -816,6 +822,21 @@ class MockBigquery < Minitest::Spec
       }
     }
     hash["jobReference"]["location"] = location if location
+    if source.is_a? Google::Cloud::Bigquery::Table
+      hash["configuration"]["extract"]["sourceTable"] = {
+        "projectId" => source.project_id,
+        "datasetId" => source.dataset_id,
+        "tableId" => source.table_id
+      }
+    elsif source.is_a? Google::Cloud::Bigquery::Model
+      hash["configuration"]["extract"]["sourceModel"] = {
+        "projectId" => source.project_id,
+        "datasetId" => source.dataset_id,
+        "modelId" => source.model_id
+      }
+    else
+      raise ArgumentError, "unsupported type for source: #{source}"
+    end
     hash.to_json
   end
 

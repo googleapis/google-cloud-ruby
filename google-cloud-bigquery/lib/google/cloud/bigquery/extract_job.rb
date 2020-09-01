@@ -20,15 +20,17 @@ module Google
       # # ExtractJob
       #
       # A {Job} subclass representing an export operation that may be performed
-      # on a {Table}. A ExtractJob instance is created when you call
-      # {Table#extract_job}.
+      # on a {Table} or {Model}. A ExtractJob instance is returned when you call
+      # {Project#extract_job}, {Table#extract_job} or {Model#extract_job}.
       #
       # @see https://cloud.google.com/bigquery/docs/exporting-data
-      #   Exporting Data From BigQuery
+      #   Exporting table data
+      # @see https://cloud.google.com/bigquery-ml/docs/exporting-models
+      #   Exporting models
       # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
       #   reference
       #
-      # @example
+      # @example Export table data
       #   require "google/cloud/bigquery"
       #
       #   bigquery = Google::Cloud::Bigquery.new
@@ -37,6 +39,18 @@ module Google
       #
       #   extract_job = table.extract_job "gs://my-bucket/file-name.json",
       #                                   format: "json"
+      #   extract_job.wait_until_done!
+      #   extract_job.done? #=> true
+      #
+      # @example Export a model
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #   dataset = bigquery.dataset "my_dataset"
+      #   model = dataset.model "my_model"
+      #
+      #   extract_job = model.extract_job "gs://my-bucket/#{model.model_id}"
+      #
       #   extract_job.wait_until_done!
       #   extract_job.done? #=> true
       #
@@ -49,71 +63,130 @@ module Google
         end
 
         ##
-        # The table from which the data is exported. This is the table upon
-        # which {Table#extract_job} was called.
+        # The table or model which is exported.
         #
-        # @return [Table] A table instance.
+        # @return [Table, Model, nil] A table or model instance, or `nil`.
         #
         def source
-          table = @gapi.configuration.extract.source_table
-          return nil unless table
-          retrieve_table table.project_id, table.dataset_id, table.table_id
+          if (table = @gapi.configuration.extract.source_table)
+            retrieve_table table.project_id, table.dataset_id, table.table_id
+          elsif (model = @gapi.configuration.extract.source_model)
+            retrieve_model model.project_id, model.dataset_id, model.model_id
+          end
+        end
+
+        ##
+        # Whether the source of the export job is a table. See {#source}.
+        #
+        # @return [Boolean] `true` when the source is a table, `false`
+        #   otherwise.
+        #
+        def table?
+          !@gapi.configuration.extract.source_table.nil?
+        end
+
+        ##
+        # Whether the source of the export job is a model. See {#source}.
+        #
+        # @return [Boolean] `true` when the source is a model, `false`
+        #   otherwise.
+        #
+        def model?
+          !@gapi.configuration.extract.source_model.nil?
         end
 
         ##
         # Checks if the export operation compresses the data using gzip. The
-        # default is `false`.
+        # default is `false`. Not applicable when extracting models.
         #
-        # @return [Boolean] `true` when `GZIP`, `false` otherwise.
-        #
+        # @return [Boolean] `true` when `GZIP`, `false` if not `GZIP` or not a
+        #   table extraction.
         def compression?
+          return false unless table?
           val = @gapi.configuration.extract.compression
           val == "GZIP"
         end
 
         ##
-        # Checks if the destination format for the data is [newline-delimited
-        # JSON](http://jsonlines.org/). The default is `false`.
+        # Checks if the destination format for the table data is [newline-delimited
+        # JSON](http://jsonlines.org/). The default is `false`. Not applicable when
+        # extracting models.
         #
-        # @return [Boolean] `true` when `NEWLINE_DELIMITED_JSON`, `false`
-        #   otherwise.
+        # @return [Boolean] `true` when `NEWLINE_DELIMITED_JSON`, `false` if not
+        #   `NEWLINE_DELIMITED_JSON` or not a table extraction.
         #
         def json?
+          return false unless table?
           val = @gapi.configuration.extract.destination_format
           val == "NEWLINE_DELIMITED_JSON"
         end
 
         ##
-        # Checks if the destination format for the data is CSV. Tables with
+        # Checks if the destination format for the table data is CSV. Tables with
         # nested or repeated fields cannot be exported as CSV. The default is
-        # `true`.
+        # `true` for tables. Not applicable when extracting models.
         #
-        # @return [Boolean] `true` when `CSV`, `false` otherwise.
+        # @return [Boolean] `true` when `CSV`, or `false` if not `CSV` or not a
+        #   table extraction.
         #
         def csv?
+          return false unless table?
           val = @gapi.configuration.extract.destination_format
           return true if val.nil?
           val == "CSV"
         end
 
         ##
-        # Checks if the destination format for the data is
-        # [Avro](http://avro.apache.org/). The default is `false`.
+        # Checks if the destination format for the table data is
+        # [Avro](http://avro.apache.org/). The default is `false`. Not applicable
+        # when extracting models.
         #
-        # @return [Boolean] `true` when `AVRO`, `false` otherwise.
+        # @return [Boolean] `true` when `AVRO`, `false` if not `AVRO` or not a
+        #   table extraction.
         #
         def avro?
+          return false unless table?
           val = @gapi.configuration.extract.destination_format
           val == "AVRO"
         end
 
         ##
-        # The character or symbol the operation uses to delimit fields in the
-        # exported data. The default is a comma (,).
+        # Checks if the destination format for the model is TensorFlow SavedModel.
+        # The default is `true` for models. Not applicable when extracting tables.
         #
-        # @return [String] A string containing the character, such as `","`.
+        # @return [Boolean] `true` when `ML_TF_SAVED_MODEL`, `false` if not
+        #   `ML_TF_SAVED_MODEL` or not a model extraction.
+        #
+        def ml_tf_saved_model?
+          return false unless model?
+          val = @gapi.configuration.extract.destination_format
+          return true if val.nil?
+          val == "ML_TF_SAVED_MODEL"
+        end
+
+        ##
+        # Checks if the destination format for the model is XGBoost. The default
+        # is `false`. Not applicable when extracting tables.
+        #
+        # @return [Boolean] `true` when `ML_XGBOOST_BOOSTER`, `false` if not
+        #   `ML_XGBOOST_BOOSTER` or not a model extraction.
+        #
+        def ml_xgboost_booster?
+          return false unless model?
+          val = @gapi.configuration.extract.destination_format
+          val == "ML_XGBOOST_BOOSTER"
+        end
+
+        ##
+        # The character or symbol the operation uses to delimit fields in the
+        # exported data. The default is a comma (,) for tables. Not applicable
+        # when extracting models.
+        #
+        # @return [String, nil] A string containing the character, such as `","`,
+        #   `nil` if not a table extraction.
         #
         def delimiter
+          return unless table?
           val = @gapi.configuration.extract.field_delimiter
           val = "," if val.nil?
           val
@@ -121,12 +194,13 @@ module Google
 
         ##
         # Checks if the exported data contains a header row. The default is
-        # `true`.
+        # `true` for tables. Not applicable when extracting models.
         #
         # @return [Boolean] `true` when the print header configuration is
-        #   present or `nil`, `false` otherwise.
+        #   present or `nil`, `false` if disabled or not a table extraction.
         #
         def print_header?
+          return false unless table?
           val = @gapi.configuration.extract.print_header
           val = true if val.nil?
           val
@@ -159,12 +233,14 @@ module Google
         # whether to enable extracting applicable column types (such as
         # `TIMESTAMP`) to their corresponding AVRO logical types
         # (`timestamp-micros`), instead of only using their raw types
-        # (`avro-long`).
+        # (`avro-long`). Not applicable when extracting models.
         #
         # @return [Boolean] `true` when applicable column types will use their
-        #   corresponding AVRO logical types, `false` otherwise.
+        #   corresponding AVRO logical types, `false` if not enabled or not a
+        #   table extraction.
         #
         def use_avro_logical_types?
+          return false unless table?
           @gapi.configuration.extract.use_avro_logical_types
         end
 
@@ -182,19 +258,24 @@ module Google
           #
           # @return [Google::Cloud::Bigquery::ExtractJob::Updater] A job
           #   configuration object for setting query options.
-          def self.from_options service, table, storage_files, options
+          def self.from_options service, source, storage_files, options
             job_ref = service.job_ref_from options[:job_id], options[:prefix]
             storage_urls = Array(storage_files).map do |url|
               url.respond_to?(:to_gs_url) ? url.to_gs_url : url
             end
             options[:format] ||= Convert.derive_source_format storage_urls.first
+            extract_config = Google::Apis::BigqueryV2::JobConfigurationExtract.new(
+              destination_uris: Array(storage_urls)
+            )
+            if source.is_a? Google::Apis::BigqueryV2::TableReference
+              extract_config.source_table = source
+            elsif source.is_a? Google::Apis::BigqueryV2::ModelReference
+              extract_config.source_model = source
+            end
             job = Google::Apis::BigqueryV2::Job.new(
               job_reference: job_ref,
               configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
-                extract: Google::Apis::BigqueryV2::JobConfigurationExtract.new(
-                  destination_uris: Array(storage_urls),
-                  source_table:     table
-                ),
+                extract: extract_config,
                 dry_run: options[:dryrun]
               )
             )
@@ -253,7 +334,7 @@ module Google
           end
 
           ##
-          # Sets the compression type.
+          # Sets the compression type. Not applicable when extracting models.
           #
           # @param [String] value The compression type to use for exported
           #   files. Possible values include `GZIP` and `NONE`. The default
@@ -265,7 +346,7 @@ module Google
           end
 
           ##
-          # Sets the field delimiter.
+          # Sets the field delimiter. Not applicable when extracting models.
           #
           # @param [String] value Delimiter to use between fields in the
           #   exported data. Default is <code>,</code>.
@@ -276,13 +357,20 @@ module Google
           end
 
           ##
-          # Sets the destination file format. The default value is `csv`.
+          # Sets the destination file format. The default value for
+          # tables is `csv`. Tables with nested or repeated fields cannot be
+          # exported as CSV. The default value for models is `ml_tf_saved_model`.
           #
-          # The following values are supported:
+          # Supported values for tables:
           #
           # * `csv` - CSV
           # * `json` - [Newline-delimited JSON](http://jsonlines.org/)
           # * `avro` - [Avro](http://avro.apache.org/)
+          #
+          # Supported values for models:
+          #
+          # * `ml_tf_saved_model` - TensorFlow SavedModel
+          # * `ml_xgboost_booster` - XGBoost Booster
           #
           # @param [String] new_format The new source format.
           #
@@ -293,7 +381,8 @@ module Google
           end
 
           ##
-          # Print a header row in the exported file.
+          # Print a header row in the exported file. Not applicable when
+          # extracting models.
           #
           # @param [Boolean] value Whether to print out a header row in the
           #   results. Default is `true`.
@@ -307,12 +396,21 @@ module Google
           # Sets the labels to use for the job.
           #
           # @param [Hash] value A hash of user-provided labels associated with
-          #   the job. You can use these to organize and group your jobs. Label
-          #   keys and values can be no longer than 63 characters, can only
-          #   contain lowercase letters, numeric characters, underscores and
-          #   dashes. International characters are allowed. Label values are
-          #   optional. Label keys must start with a letter and each label in
-          #   the list must have a different key.
+          #   the job. You can use these to organize and group your jobs.
+          #
+          #   The labels applied to a resource must meet the following requirements:
+          #
+          #   * Each resource can have multiple labels, up to a maximum of 64.
+          #   * Each label must be a key-value pair.
+          #   * Keys have a minimum length of 1 character and a maximum length of
+          #     63 characters, and cannot be empty. Values can be empty, and have
+          #     a maximum length of 63 characters.
+          #   * Keys and values can contain only lowercase letters, numeric characters,
+          #     underscores, and dashes. All characters must use UTF-8 encoding, and
+          #     international characters are allowed.
+          #   * The key portion of a label must be unique. However, you can use the
+          #     same key with multiple resources.
+          #   * Keys must start with a lowercase letter or international character.
           #
           # @!group Attributes
           #
@@ -361,6 +459,16 @@ module Google
           def to_gapi
             @gapi
           end
+        end
+
+        protected
+
+        def retrieve_model project_id, dataset_id, model_id
+          ensure_service!
+          gapi = service.get_project_model project_id, dataset_id, model_id
+          Model.from_gapi_json gapi, service
+        rescue Google::Cloud::NotFoundError
+          nil
         end
       end
     end
