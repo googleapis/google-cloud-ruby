@@ -203,6 +203,7 @@ class RaiseableEnumerator
   def next
     v = @enum.next
     raise v if v.is_a? Class
+    raise v if v.is_a? StandardError
     v
   end
 

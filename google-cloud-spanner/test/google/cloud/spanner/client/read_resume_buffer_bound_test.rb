@@ -184,7 +184,7 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
       Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash1),
       Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash2),
       Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash3),
-      GRPC::Unavailable,
+      GRPC::Aborted,
       Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash4),
       Google::Cloud::Spanner::V1::PartialResultSet.new(results_hash5)
     ].to_enum
@@ -208,7 +208,7 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
     # gets the second row
     assert_row row_enum.next
     # raises error getting third row, since the buffer bound has been reached
-    assert_raises Google::Cloud::UnavailableError do
+    assert_raises Google::Cloud::AbortedError do
       results.rows.next
     end
 
