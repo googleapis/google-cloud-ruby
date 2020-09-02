@@ -43,9 +43,24 @@ module Google
         #     pc.set_oidc_token "user@example.net", "client-67890"
         #   end
         #
+        # @example Create a push subscription by passing a push config:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #   topic = pubsub.topic "my-topic"
+        #
+        #   push_config = Google::Cloud::PubSub::Subscription::PushConfig.new
+        #   push_config.endpoint = "http://example.net/callback"
+        #   push_config.set_oidc_token(
+        #     "service-account@example.net", "audience-header-value"
+        #   )
+        #   sub = topic.subscribe "my-subscription", push_config: push_config
+        #
         class PushConfig
           ##
-          # @private
+          # Creates an empty configuration for a push subscription.
+          #
+          # @return [PushConfig]
           def initialize
             @grpc = Google::Cloud::PubSub::V1::PushConfig.new
           end
