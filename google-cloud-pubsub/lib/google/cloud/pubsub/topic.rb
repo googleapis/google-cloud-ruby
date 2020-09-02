@@ -78,7 +78,7 @@ module Google
         #     end
         #   end
         #
-        #   topic.async_publisher.stop.wait!
+        #   topic.async_publisher.stop!
         #
         def async_publisher
           @async_publisher
@@ -590,7 +590,7 @@ module Google
         #   end
         #
         #   # Shut down the publisher when ready to stop publishing messages.
-        #   topic.async_publisher.stop.wait!
+        #   topic.async_publisher.stop!
         #
         # @example A message can be published using a File object:
         #   require "google/cloud/pubsub"
@@ -602,7 +602,7 @@ module Google
         #   topic.publish_async file
         #
         #   # Shut down the publisher when ready to stop publishing messages.
-        #   topic.async_publisher.stop.wait!
+        #   topic.async_publisher.stop!
         #
         # @example Additionally, a message can be published with attributes:
         #   require "google/cloud/pubsub"
@@ -614,7 +614,7 @@ module Google
         #                       foo: :bar, this: :that
         #
         #   # Shut down the publisher when ready to stop publishing messages.
-        #   topic.async_publisher.stop.wait!
+        #   topic.async_publisher.stop!
         #
         # @example Ordered messages are supported using ordering_key:
         #   require "google/cloud/pubsub"
@@ -631,7 +631,7 @@ module Google
         #                       ordering_key: "task-key"
         #
         #   # Shut down the publisher when ready to stop publishing messages.
-        #   topic.async_publisher.stop.wait!
+        #   topic.async_publisher.stop!
         #
         def publish_async data = nil, attributes = nil, ordering_key: nil, **extra_attrs, &callback
           ensure_service!

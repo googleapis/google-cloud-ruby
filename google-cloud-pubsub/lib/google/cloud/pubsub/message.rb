@@ -50,7 +50,7 @@ module Google
       #   subscriber.start
       #
       #   # Shut down the subscriber when ready to stop receiving messages.
-      #   subscriber.stop.wait!
+      #   subscriber.stop!
       #
       class Message
         ##

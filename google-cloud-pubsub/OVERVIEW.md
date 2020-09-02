@@ -142,7 +142,7 @@ topic.publish_async "task completed" do |result|
   end
 end
 
-topic.async_publisher.stop.wait!
+topic.async_publisher.stop!
 ```
 
 Or multiple messages can be published in batches at the same time by passing a
@@ -251,7 +251,7 @@ end
 subscriber.start
 
 # Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop.wait!
+subscriber.stop!
 ```
 
 Or, multiple messages can be acknowledged in a single API call: (See
@@ -293,7 +293,7 @@ end
 subscriber.start
 
 # Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop.wait!
+subscriber.stop!
 ```
 
 The message can also be made available for immediate redelivery:
@@ -315,7 +315,7 @@ end
 subscriber.start
 
 # Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop.wait!
+subscriber.stop!
 ```
 
 Multiple messages can be delayed or made available for immediate redelivery:
@@ -369,7 +369,7 @@ topic.publish_async "task completed",
                     ordering_key: "task-key"
 
 # Shut down the publisher when ready to stop publishing messages.
-topic.async_publisher.stop.wait!
+topic.async_publisher.stop!
 ```
 
 ### Handling errors with Ordered Keys
@@ -411,7 +411,7 @@ end
 subscriber.start
 
 # Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop.wait!
+subscriber.stop!
 ```
 
 ## Minimizing API calls before receiving and acknowledging messages
@@ -441,7 +441,7 @@ end
 subscriber.start
 
 # Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop.wait!
+subscriber.stop!
 ```
 
 Skipping API calls may be used to avoid `Google::Cloud::PermissionDeniedError`

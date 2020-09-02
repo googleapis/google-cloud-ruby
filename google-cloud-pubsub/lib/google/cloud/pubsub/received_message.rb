@@ -39,7 +39,7 @@ module Google
       #   subscriber.start
       #
       #   # Shut down the subscriber when ready to stop receiving messages.
-      #   subscriber.stop.wait!
+      #   subscriber.stop!
       #
       class ReceivedMessage
         ##
@@ -177,7 +177,7 @@ module Google
         #   subscriber.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop.wait!
+        #   subscriber.stop!
         #
         def acknowledge!
           ensure_subscription!
@@ -214,7 +214,7 @@ module Google
         #   subscriber.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop.wait!
+        #   subscriber.stop!
         #
         def modify_ack_deadline! new_deadline
           ensure_subscription!
@@ -244,7 +244,7 @@ module Google
         #   subscriber.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop.wait!
+        #   subscriber.stop!
         #
         def reject!
           modify_ack_deadline! 0

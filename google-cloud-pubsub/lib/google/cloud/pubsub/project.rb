@@ -141,7 +141,7 @@ module Google
         #     end
         #   end
         #
-        #   topic.async_publisher.stop.wait!
+        #   topic.async_publisher.stop!
         #
         def topic topic_name, project: nil, skip_lookup: nil, async: nil
           ensure_service!
