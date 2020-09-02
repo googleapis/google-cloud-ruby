@@ -62,7 +62,10 @@ elif [ "$JOB_TYPE" = "release" ]; then
     git fetch --depth=10000
     python3 -m pip install git+https://github.com/googleapis/releasetool
     python3 -m pip install gcp-docuploader
-    python3 -m releasetool publish-reporter-script > /tmp/publisher-script; source /tmp/publisher-script
+    # TEMPORARY: Disable updating the github PR because credentials are broken.
+    # This should be resolved by ditching the magic proxy credentials and
+    # adopting the GitHub app that Ben Coe put together.
+    # python3 -m releasetool publish-reporter-script > /tmp/publisher-script; source /tmp/publisher-script
     if [ "$PACKAGE" = "republish" ]; then
         (bundle update && bundle exec rake kokoro:republish) || set_failed_status
     else
