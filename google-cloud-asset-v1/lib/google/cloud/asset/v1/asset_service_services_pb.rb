@@ -73,6 +73,19 @@ module Google
             # `cloudasset.assets.searchAllIamPolicies` permission on the desired scope,
             # otherwise the request will be rejected.
             rpc :SearchAllIamPolicies, Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest, Google::Cloud::Asset::V1::SearchAllIamPoliciesResponse
+            # Analyzes IAM policies to answer which identities have what accesses on
+            # which resources.
+            rpc :AnalyzeIamPolicy, Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest, Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse
+            # Exports the answers of which identities have what accesses on which
+            # resources to a Google Cloud Storage or a BigQuery destination. For Cloud
+            # Storage destination, the output format is the JSON format that represents a
+            # [google.cloud.asset.v1.AnalyzeIamPolicyResponse][google.cloud.asset.v1.AnalyzeIamPolicyResponse].
+            # This method implements the
+            # [google.longrunning.Operation][google.longrunning.Operation], which allows
+            # you to track the export status. We recommend intervals of at least 2
+            # seconds with exponential retry to poll the export operation result. The
+            # metadata contains the request to help callers to map responses to requests.
+            rpc :ExportIamPolicyAnalysis, Google::Cloud::Asset::V1::ExportIamPolicyAnalysisRequest, Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
