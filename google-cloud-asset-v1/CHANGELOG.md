@@ -7,6 +7,13 @@
 * Added ExportAssetsResponse#output_result
 * Added support for analyze_iam_policy and export_iam_policy_analysis
 
+### 0.6.0 / 2020-09-03
+
+#### Features
+
+* Added ExportAssetsResponse#output_result
+* Added support for analyze_iam_policy and export_iam_policy_analysis
+
 ### 0.5.3 / 2020-08-10
 
 #### Bug Fixes
