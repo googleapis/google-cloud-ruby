@@ -1,5 +1,9 @@
 # Release History
 
+### 1.1.2 / 2020-09-03
+
+Version bump; no significant changes.
+
 ### 1.1.1 / 2020-05-26
 
 #### Documentation
