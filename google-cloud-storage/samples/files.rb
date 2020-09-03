@@ -238,6 +238,7 @@ def list_file_details bucket_name:, file_name:
   puts "Event-based hold enabled?: #{file.event_based_hold?}"
   puts "Temporary hold enaled?: #{file.temporary_hold?}"
   puts "Retention Expiration: #{file.retention_expires_at}"
+  puts "Custom Time: #{file.custom_time}"
   puts "Metadata:"
   file.metadata.each do |key, value|
     puts " - #{key} = #{value}"
