@@ -1,5 +1,13 @@
 # Release History
 
+### 1.1.2 / 2020-09-03
+
+#### Documentation
+
+* Update Security Command Center UpdateNotificationConfig sample,… ([#7102](https://www.github.com/googleapis/google-cloud-ruby/issues/7102))
+  * docs: Update Security Command Center UpdateNotificationConfig sample, adding filter to mutable field
+  * remove trailing whitespace
+
 ### 1.1.1 / 2020-05-26
 
 #### Documentation
