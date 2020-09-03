@@ -1,5 +1,11 @@
 # Release History
 
+### 1.28.1 / 2020-09-03
+
+#### Documentation
+
+* Add custom time to file metadata sample
+
 ### 1.28.0 / 2020-08-26
 
 * Add Object Lifecycle Management fields
