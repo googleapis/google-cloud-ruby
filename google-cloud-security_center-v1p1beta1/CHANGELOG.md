@@ -1,11 +1,5 @@
 # Release History
 
-### 0.4.0 / 2020-08-31
-
-#### Features
-
-* Support Finding#severity field
-
 #### Documentation
 
 * Clarify Finding#event_time description

@@ -1,11 +1,5 @@
 # Release History
 
-### 0.3.0 / 2020-08-31
-
-#### Features
-
-* Support for client integrity verification fields
-
 ### 0.2.4 / 2020-08-10
 
 #### Bug Fixes
