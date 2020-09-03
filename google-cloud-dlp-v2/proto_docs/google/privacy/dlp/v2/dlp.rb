@@ -561,9 +561,21 @@ module Google
         # by covering it with a colored rectangle.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The parent resource name.
-        #     - Format:projects/[PROJECT-ID]
-        #     - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+        #     Parent resource name.
+        #
+        #     The format of this value varies depending on whether you have [specified a
+        #     processing location](/dlp/docs/specifying-location):
+        #
+        #     + Projects scope, location specified:<br/>
+        #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Projects scope, no location specified (defaults to global):<br/>
+        #       `projects/`<var>PROJECT_ID</var>
+        #
+        #     The following example `parent` string specifies a parent project with the
+        #     identifier `example-project`, and specifies the `europe-west3` location
+        #     for processing data:
+        #
+        #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] location_id
         #   @return [::String]
         #     Deprecated. This field has no effect.
@@ -641,8 +653,20 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Parent resource name.
-        #     - Format:projects/[PROJECT-ID]
-        #     - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+        #
+        #     The format of this value varies depending on whether you have [specified a
+        #     processing location](/dlp/docs/specifying-location):
+        #
+        #     + Projects scope, location specified:<br/>
+        #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Projects scope, no location specified (defaults to global):<br/>
+        #       `projects/`<var>PROJECT_ID</var>
+        #
+        #     The following example `parent` string specifies a parent project with the
+        #     identifier `example-project`, and specifies the `europe-west3` location
+        #     for processing data:
+        #
+        #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] deidentify_config
         #   @return [::Google::Cloud::Dlp::V2::DeidentifyConfig]
         #     Configuration for the de-identification of the content item.
@@ -693,9 +717,21 @@ module Google
         # Request to re-identify an item.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name.
-        #     - Format:projects/[PROJECT-ID]
-        #     - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+        #     Required. Parent resource name.
+        #
+        #     The format of this value varies depending on whether you have [specified a
+        #     processing location](/dlp/docs/specifying-location):
+        #
+        #     + Projects scope, location specified:<br/>
+        #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Projects scope, no location specified (defaults to global):<br/>
+        #       `projects/`<var>PROJECT_ID</var>
+        #
+        #     The following example `parent` string specifies a parent project with the
+        #     identifier `example-project`, and specifies the `europe-west3` location
+        #     for processing data:
+        #
+        #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] reidentify_config
         #   @return [::Google::Cloud::Dlp::V2::DeidentifyConfig]
         #     Configuration for the re-identification of the content item.
@@ -725,10 +761,11 @@ module Google
         #   @return [::String]
         #     Template to use. References an instance of `DeidentifyTemplate`.
         #     Any configuration directly specified in `reidentify_config` or
-        #     `inspect_config` will override those set in the template. Singular fields
-        #     that are set in this request will replace their corresponding fields in the
-        #     template. Repeated fields are appended. Singular sub-messages and groups
-        #     are recursively merged.
+        #     `inspect_config` will override those set in the template. The
+        #     `DeidentifyTemplate` used must include only reversible transformations.
+        #     Singular fields that are set in this request will replace their
+        #     corresponding fields in the template. Repeated fields are appended.
+        #     Singular sub-messages and groups are recursively merged.
         # @!attribute [rw] location_id
         #   @return [::String]
         #     Deprecated. This field has no effect.
@@ -753,8 +790,20 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Parent resource name.
-        #     - Format:projects/[PROJECT-ID]
-        #     - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+        #
+        #     The format of this value varies depending on whether you have [specified a
+        #     processing location](/dlp/docs/specifying-location):
+        #
+        #     + Projects scope, location specified:<br/>
+        #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Projects scope, no location specified (defaults to global):<br/>
+        #       `projects/`<var>PROJECT_ID</var>
+        #
+        #     The following example `parent` string specifies a parent project with the
+        #     identifier `example-project`, and specifies the `europe-west3` location
+        #     for processing data:
+        #
+        #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] inspect_config
         #   @return [::Google::Cloud::Dlp::V2::InspectConfig]
         #     Configuration for the inspector. What specified here will override
@@ -945,7 +994,10 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     The parent resource name.
-        #     - Format:locations/[LOCATION-ID]
+        #
+        #     The format of this value is as follows:
+        #
+        #         locations/<var>LOCATION_ID</var>
         # @!attribute [rw] language_code
         #   @return [::String]
         #     BCP-47 language code for localized infoType friendly
@@ -2049,6 +2101,9 @@ module Google
         #     Number of characters must be in the range [2, 95].
         #     This must be encoded as ASCII.
         #     The order of characters does not matter.
+        #     The full list of allowed characters is:
+        #     <code>0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        #     ~`!@#$%^&*()_-+={[}]|\:;"'<,>.?/</code>
         # @!attribute [rw] radix
         #   @return [::Integer]
         #     The native way to select the alphabet. Must be in the range [2, 95].
@@ -2695,10 +2750,25 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent resource name.
-        #     - Format:projects/[PROJECT-ID]
-        #     - Format:organizations/[ORGANIZATION-ID]
-        #     - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-        #     - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+        #
+        #     The format of this value varies depending on the scope of the request
+        #     (project or organization) and whether you have [specified a processing
+        #     location](/dlp/docs/specifying-location):
+        #
+        #     + Projects scope, location specified:<br/>
+        #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Projects scope, no location specified (defaults to global):<br/>
+        #       `projects/`<var>PROJECT_ID</var>
+        #     + Organizations scope, location specified:<br/>
+        #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Organizations scope, no location specified (defaults to global):<br/>
+        #       `organizations/`<var>ORG_ID</var>
+        #
+        #     The following example `parent` string specifies a parent project with the
+        #     identifier `example-project`, and specifies the `europe-west3` location
+        #     for processing data:
+        #
+        #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] inspect_template
         #   @return [::Google::Cloud::Dlp::V2::InspectTemplate]
         #     Required. The InspectTemplate to create.
@@ -2748,10 +2818,25 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent resource name.
-        #     - Format:projects/[PROJECT-ID]
-        #     - Format:organizations/[ORGANIZATION-ID]
-        #     - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-        #     - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+        #
+        #     The format of this value varies depending on the scope of the request
+        #     (project or organization) and whether you have [specified a processing
+        #     location](/dlp/docs/specifying-location):
+        #
+        #     + Projects scope, location specified:<br/>
+        #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Projects scope, no location specified (defaults to global):<br/>
+        #       `projects/`<var>PROJECT_ID</var>
+        #     + Organizations scope, location specified:<br/>
+        #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Organizations scope, no location specified (defaults to global):<br/>
+        #       `organizations/`<var>ORG_ID</var>
+        #
+        #     The following example `parent` string specifies a parent project with the
+        #     identifier `example-project`, and specifies the `europe-west3` location
+        #     for processing data:
+        #
+        #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Page token to continue retrieval. Comes from previous call
@@ -2811,8 +2896,20 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent resource name.
-        #     - Format:projects/[PROJECT-ID]
-        #     - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+        #
+        #     The format of this value varies depending on whether you have [specified a
+        #     processing location](/dlp/docs/specifying-location):
+        #
+        #     + Projects scope, location specified:<br/>
+        #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Projects scope, no location specified (defaults to global):<br/>
+        #       `projects/`<var>PROJECT_ID</var>
+        #
+        #     The following example `parent` string specifies a parent project with the
+        #     identifier `example-project`, and specifies the `europe-west3` location
+        #     for processing data:
+        #
+        #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] job_trigger
         #   @return [::Google::Cloud::Dlp::V2::JobTrigger]
         #     Required. The JobTrigger to create.
@@ -2872,8 +2969,20 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent resource name.
-        #     - Format:projects/[PROJECT-ID]
-        #     - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+        #
+        #     The format of this value varies depending on whether you have [specified a
+        #     processing location](/dlp/docs/specifying-location):
+        #
+        #     + Projects scope, location specified:<br/>
+        #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Projects scope, no location specified (defaults to global):<br/>
+        #       `projects/`<var>PROJECT_ID</var>
+        #
+        #     The following example `parent` string specifies a parent project with the
+        #     identifier `example-project`, and specifies the `europe-west3` location
+        #     for processing data:
+        #
+        #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] inspect_job
         #   @return [::Google::Cloud::Dlp::V2::InspectJobConfig]
         #     Set to control what and how to inspect.
@@ -2898,8 +3007,20 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent resource name.
-        #     - Format:projects/[PROJECT-ID]
-        #     - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+        #
+        #     The format of this value varies depending on whether you have [specified a
+        #     processing location](/dlp/docs/specifying-location):
+        #
+        #     + Projects scope, location specified:<br/>
+        #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Projects scope, no location specified (defaults to global):<br/>
+        #       `projects/`<var>PROJECT_ID</var>
+        #
+        #     The following example `parent` string specifies a parent project with the
+        #     identifier `example-project`, and specifies the `europe-west3` location
+        #     for processing data:
+        #
+        #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Page token to continue retrieval. Comes from previous call
@@ -3080,8 +3201,20 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent resource name.
-        #     - Format:projects/[PROJECT-ID]
-        #     - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
+        #
+        #     The format of this value varies depending on whether you have [specified a
+        #     processing location](/dlp/docs/specifying-location):
+        #
+        #     + Projects scope, location specified:<br/>
+        #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Projects scope, no location specified (defaults to global):<br/>
+        #       `projects/`<var>PROJECT_ID</var>
+        #
+        #     The following example `parent` string specifies a parent project with the
+        #     identifier `example-project`, and specifies the `europe-west3` location
+        #     for processing data:
+        #
+        #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] filter
         #   @return [::String]
         #     Allows filtering.
@@ -3187,10 +3320,25 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent resource name.
-        #     - Format:projects/[PROJECT-ID]
-        #     - Format:organizations/[ORGANIZATION-ID]
-        #     - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-        #     - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+        #
+        #     The format of this value varies depending on the scope of the request
+        #     (project or organization) and whether you have [specified a processing
+        #     location](/dlp/docs/specifying-location):
+        #
+        #     + Projects scope, location specified:<br/>
+        #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Projects scope, no location specified (defaults to global):<br/>
+        #       `projects/`<var>PROJECT_ID</var>
+        #     + Organizations scope, location specified:<br/>
+        #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Organizations scope, no location specified (defaults to global):<br/>
+        #       `organizations/`<var>ORG_ID</var>
+        #
+        #     The following example `parent` string specifies a parent project with the
+        #     identifier `example-project`, and specifies the `europe-west3` location
+        #     for processing data:
+        #
+        #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] deidentify_template
         #   @return [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
         #     Required. The DeidentifyTemplate to create.
@@ -3240,10 +3388,25 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent resource name.
-        #     - Format:projects/[PROJECT-ID]
-        #     - Format:organizations/[ORGANIZATION-ID]
-        #     - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-        #     - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+        #
+        #     The format of this value varies depending on the scope of the request
+        #     (project or organization) and whether you have [specified a processing
+        #     location](/dlp/docs/specifying-location):
+        #
+        #     + Projects scope, location specified:<br/>
+        #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Projects scope, no location specified (defaults to global):<br/>
+        #       `projects/`<var>PROJECT_ID</var>
+        #     + Organizations scope, location specified:<br/>
+        #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Organizations scope, no location specified (defaults to global):<br/>
+        #       `organizations/`<var>ORG_ID</var>
+        #
+        #     The following example `parent` string specifies a parent project with the
+        #     identifier `example-project`, and specifies the `europe-west3` location
+        #     for processing data:
+        #
+        #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Page token to continue retrieval. Comes from previous call
@@ -3421,10 +3584,25 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent resource name.
-        #     - Format:projects/[PROJECT-ID]
-        #     - Format:organizations/[ORGANIZATION-ID]
-        #     - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-        #     - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+        #
+        #     The format of this value varies depending on the scope of the request
+        #     (project or organization) and whether you have [specified a processing
+        #     location](/dlp/docs/specifying-location):
+        #
+        #     + Projects scope, location specified:<br/>
+        #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Projects scope, no location specified (defaults to global):<br/>
+        #       `projects/`<var>PROJECT_ID</var>
+        #     + Organizations scope, location specified:<br/>
+        #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Organizations scope, no location specified (defaults to global):<br/>
+        #       `organizations/`<var>ORG_ID</var>
+        #
+        #     The following example `parent` string specifies a parent project with the
+        #     identifier `example-project`, and specifies the `europe-west3` location
+        #     for processing data:
+        #
+        #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] config
         #   @return [::Google::Cloud::Dlp::V2::StoredInfoTypeConfig]
         #     Required. Configuration of the storedInfoType to create.
@@ -3476,10 +3654,25 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent resource name.
-        #     - Format:projects/[PROJECT-ID]
-        #     - Format:organizations/[ORGANIZATION-ID]
-        #     - Format:projects/[PROJECT-ID]/locations/[LOCATION-ID]
-        #     - Format:organizations/[ORGANIZATION-ID]/locations/[LOCATION-ID]
+        #
+        #     The format of this value varies depending on the scope of the request
+        #     (project or organization) and whether you have [specified a processing
+        #     location](/dlp/docs/specifying-location):
+        #
+        #     + Projects scope, location specified:<br/>
+        #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Projects scope, no location specified (defaults to global):<br/>
+        #       `projects/`<var>PROJECT_ID</var>
+        #     + Organizations scope, location specified:<br/>
+        #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+        #     + Organizations scope, no location specified (defaults to global):<br/>
+        #       `organizations/`<var>ORG_ID</var>
+        #
+        #     The following example `parent` string specifies a parent project with the
+        #     identifier `example-project`, and specifies the `europe-west3` location
+        #     for processing data:
+        #
+        #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Page token to continue retrieval. Comes from previous call
