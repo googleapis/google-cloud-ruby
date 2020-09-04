@@ -1,5 +1,11 @@
 # Release History
 
+### 2.1.1 / 2020-09-04
+
+#### Bug Fixes
+
+* retry or resume eos and rst_stream errors ([#7592](https://www.github.com/googleapis/google-cloud-ruby/issues/7592))
+
 ### 2.1.0 / 2020-08-05
 
 #### Features
