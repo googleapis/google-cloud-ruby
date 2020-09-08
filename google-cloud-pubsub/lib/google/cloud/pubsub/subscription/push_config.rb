@@ -69,7 +69,12 @@ module Google
             @grpc = Google::Cloud::PubSub::V1::PushConfig.new
 
             self.endpoint = endpoint unless endpoint.nil?
-            set_oidc_token auth_email, auth_audience if auth_email && auth_audience
+
+            if auth_audience && !auth_email
+              raise ArgumentError, "auth_audience provided without auth_email. Authentication is invalid"
+            end
+
+            set_oidc_token auth_email, auth_audience if auth_email
           end
 
           ##
