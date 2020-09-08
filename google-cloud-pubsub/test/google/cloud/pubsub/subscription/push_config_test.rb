@@ -16,15 +16,21 @@ require "helper"
 
 describe Google::Cloud::PubSub::Subscription::PushConfig do
   let(:endpoint)      { "https://pub-sub.test.com/pubsub" }
-  let(:auth_emai)     { "service-account@example.net" }
+  let(:auth_email)     { "service-account@example.net" }
   let(:auth_audience) { "audience-header-value" }
 
   it "constructor arguments appropriately constructs PushConfig" do
 
-    push_config = Google::Cloud::PubSub::Subscription::PushConfig.new endpoint: endpoint, auth_email: auth_emai, auth_audience: auth_audience
+    push_config = Google::Cloud::PubSub::Subscription::PushConfig.new endpoint: endpoint, auth_email: auth_email, auth_audience: auth_audience
 
     _(push_config.endpoint).must_equal endpoint
     _(push_config.authentication).must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig::OidcToken
+  end
+
+  it "does not accept audeince without an auth_email" do
+    assert_raises ArgumentError do
+      Google::Cloud::PubSub::Subscription::PushConfig.new endpoint: endpoint, auth_email: nil, auth_audience: auth_audience
+    end
   end
 
 end
