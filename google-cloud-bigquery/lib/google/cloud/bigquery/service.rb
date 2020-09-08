@@ -43,12 +43,13 @@ module Google
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, retries: nil, timeout: nil, host: nil
+        def initialize project, credentials, retries: nil, timeout: nil, host: nil, quota_project: nil
           @project = project
           @credentials = credentials
           @retries = retries
           @timeout = timeout
           @host = host
+          @quota_project = quota_project
         end
 
         def service
@@ -64,6 +65,7 @@ module Google
             service.request_options.header ||= {}
             service.request_options.header["x-goog-api-client"] = \
               "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Bigquery::VERSION}"
+            service.request_options.quota_project = @quota_project if @quota_project
             service.authorization = @credentials.client
             service.root_url = host if host
             service
