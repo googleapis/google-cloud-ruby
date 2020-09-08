@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "helper"
+require "bigdecimal"
 
 describe Google::Cloud::Spanner::Convert, :grpc_value_to_object, :mock_spanner do
   # This tests is a sanity check on the implementation of the conversion method.
@@ -124,5 +125,13 @@ describe Google::Cloud::Spanner::Convert, :grpc_value_to_object, :mock_spanner d
     type = Google::Cloud::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Cloud::Spanner::V1::StructType.new(fields: []))
     raw = Google::Cloud::Spanner::Convert.grpc_value_to_object value, type
     _(raw).must_equal(Google::Cloud::Spanner::Fields.new([]).struct([]))
+  end
+
+  it "converts a NUMERIC value" do
+    number = "99999999999999999999999999999.999999999"
+    value = Google::Protobuf::Value.new(string_value: number)
+    type = Google::Spanner::V1::Type.new(code: :NUMERIC)
+    raw = Google::Cloud::Spanner::Convert.grpc_value_to_object value, type
+    _(raw).must_equal BigDecimal(number)
   end
 end
