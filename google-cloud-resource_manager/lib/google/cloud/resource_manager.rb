@@ -80,7 +80,7 @@ module Google
 
         ResourceManager::Manager.new(
           ResourceManager::Service.new(
-            credentials, retries: retries, timeout: timeout, host: endpoint
+            credentials, retries: retries, timeout: timeout, host: endpoint, quota_project: configure.quota_project
           )
         )
       end
