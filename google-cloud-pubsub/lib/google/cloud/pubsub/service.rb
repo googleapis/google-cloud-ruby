@@ -179,8 +179,6 @@ module Google
                           # Handle if push config is provided when creating the subscription
                           if options[:push_config].is_a? Google::Cloud::PubSub::Subscription::PushConfig
                             options[:push_config].to_grpc
-                          elsif options[:push_config].is_a? Google::Cloud::PubSub::V1::PushConfig
-                            options[:push_config]
                           else
                             raise ArgumentError, "push_config is not a valid pubsub PushConfig object"
                           end
