@@ -174,6 +174,7 @@ Google::Cloud.configure.add_config! :spanner do |config|
                     allow_nil: true
   config.add_alias! :keyfile, :credentials
   config.add_field! :scope, default_scopes, match: [String, Array]
+  config.add_field! :quota_project, nil, match: String
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :endpoint, "spanner.googleapis.com", match: String
   config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
