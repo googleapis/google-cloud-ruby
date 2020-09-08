@@ -305,6 +305,9 @@ module Google
         #   this subscription. If not set, the default retry policy is applied. This generally implies that messages
         #   will be retried as soon as possible for healthy subscribers. Retry Policy will be triggered on NACKs or
         #   acknowledgement deadline exceeded events for a given message.
+        # @param [Google::Cloud::PubSub::Subscription::PushConfig] push_config The configuration for a Push subscription
+        #   that should contain the endpoint, and can contain authentication data (OIDC token authenticatio).
+        #   The parameters push_config and endpoint should not be both provided at the same time.
         #
         #   **EXPERIMENTAL:** This API might be changed in backward-incompatible ways and is not recommended for
         #   production use. It is not subject to any SLA or deprecation policy.
