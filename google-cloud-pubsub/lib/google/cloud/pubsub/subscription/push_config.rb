@@ -59,10 +59,17 @@ module Google
         class PushConfig
           ##
           # Creates an empty configuration for a push subscription.
-          #
+          # @param [String] endpoint URL to where the subscription will push data to.
+          # @param [String] auth_email The GCP service account email associated with the push subscription.
+          #  Push requests carry the identity of this service account.
+          # @param [String] auth_audience A single, case-insensitive string that can be used by
+          #  the webhook to validate the intended audience of this particular token.
           # @return [PushConfig]
-          def initialize
+          def initialize endpoint: nil, auth_email: nil, auth_audience: nil
             @grpc = Google::Cloud::PubSub::V1::PushConfig.new
+
+            self.endpoint = endpoint unless endpoint.nil?
+            set_oidc_token auth_email, auth_audience if auth_email && auth_audience
           end
 
           ##
