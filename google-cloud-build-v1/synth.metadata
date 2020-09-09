@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "983f38a4557c6907b241e0ab99e477ff97cede8e"
+        "sha": "5b05f647f6f0d2f6b452a3f6bcd96f97187ff314"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
-        "internalRef": "326288259"
+        "sha": "48ce8878cd4c54cf247de826ac53c1414b0345bd",
+        "internalRef": "330504082"
       }
     }
   ],
@@ -45,6 +45,7 @@
     "lib/google/cloud/build/v1/cloud_build/client.rb",
     "lib/google/cloud/build/v1/cloud_build/credentials.rb",
     "lib/google/cloud/build/v1/cloud_build/operations.rb",
+    "lib/google/cloud/build/v1/cloud_build/paths.rb",
     "lib/google/cloud/build/v1/version.rb",
     "lib/google/devtools/cloudbuild/v1/cloudbuild_pb.rb",
     "lib/google/devtools/cloudbuild/v1/cloudbuild_services_pb.rb",
@@ -56,9 +57,11 @@
     "proto_docs/google/protobuf/any.rb",
     "proto_docs/google/protobuf/duration.rb",
     "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
     "test/google/cloud/build/v1/cloud_build_operations_test.rb",
+    "test/google/cloud/build/v1/cloud_build_paths_test.rb",
     "test/google/cloud/build/v1/cloud_build_test.rb",
     "test/helper.rb"
   ]

@@ -23,6 +23,7 @@ require "gapic/config/method"
 require "google/cloud/build/v1/version"
 
 require "google/cloud/build/v1/cloud_build/credentials"
+require "google/cloud/build/v1/cloud_build/paths"
 require "google/cloud/build/v1/cloud_build/operations"
 require "google/cloud/build/v1/cloud_build/client"
 
