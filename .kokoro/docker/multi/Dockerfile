@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y git curl autoconf bison build-essential
 RUN apt-get -y autoclean
 
 # Install rbenv
-RUN git clone https://github.com/rbenv/rbenv.git /root/.rbenv
+RUN git clone --depth 1 https://github.com/rbenv/rbenv.git /root/.rbenv
 RUN cd /root/.rbenv && src/configure && make -C src
 
 ENV PATH /root/.rbenv/bin:$PATH
@@ -25,7 +25,7 @@ RUN echo 'eval "$(rbenv init -)"' >> .bashrc
 
 # Install ruby-build
 RUN mkdir -p "$(rbenv root)"/plugins
-RUN git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+RUN git clone --depth 1 https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
 
 
 # Install ruby

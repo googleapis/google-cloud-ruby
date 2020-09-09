@@ -16,7 +16,7 @@ RUN apt-get -y autoclean
 
 # Install Ruby
 RUN mkdir $HOME/.ruby
-RUN git clone https://github.com/rbenv/ruby-build.git $HOME/.ruby-build
+RUN git clone --depth 1 https://github.com/rbenv/ruby-build.git $HOME/.ruby-build
 RUN $HOME/.ruby-build/bin/ruby-build <%= ruby_versions[-1] %> $HOME/.ruby
 ENV PATH /root/.ruby/bin:$PATH
 ENV RUBY_CONFIGURE_OPTS --disable-install-doc
@@ -24,7 +24,7 @@ RUN echo 'gem: --no-document' >> /.gemrc
 RUN gem install bundler:1.17.3 bundler:2.1.4 && gem update --system
 
 # Install Python
-RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+RUN git clone --depth 1 https://github.com/pyenv/pyenv.git ~/.pyenv
 ENV PYENV_ROOT /root/.pyenv
 ENV PATH /root/.pyenv/bin:$PATH
 ENV PATH /root/.pyenv/shims:$PATH
