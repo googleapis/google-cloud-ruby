@@ -5,11 +5,11 @@ $grpc = <<SCRIPT
 # Install grps
 echo "deb http://http.debian.net/debian jessie-backports main" | sudo tee -a /etc/apt/sources.list
 sudo apt-get update -y
-sudo apt-get install libgrpc-dev -y --force-yes
+sudo apt-get --no-install-recommends install libgrpc-dev -y --force-yes
 SCRIPT
 
 $gcloud = <<SCRIPT
-sudo apt-get install curl -y
+sudo apt-get --no-install-recommends install curl -y
 curl https://sdk.cloud.google.com | bash
 SCRIPT
 
@@ -22,7 +22,7 @@ rvm install ruby-2.3
 rvm --default use 2.3
 
 # Install git and bundler and grpc gem
-sudo apt-get install git -y
+sudo apt-get --no-install-recommends install git -y
 gem install --no-document bundler grpc
 SCRIPT
 
