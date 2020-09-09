@@ -820,12 +820,19 @@ module Google
         # @param [Hash<String, String>] labels A hash containing key/value
         #   pairs.
         #
-        #   * Label keys and values can be no longer than 63 characters.
-        #   * Label keys and values can contain only lowercase letters, numbers,
-        #     underscores, hyphens, and international characters.
-        #   * Label keys and values cannot exceed 128 bytes in size.
-        #   * Label keys must begin with a letter.
-        #   * Label keys must be unique within a table.
+        #   The labels applied to a resource must meet the following requirements:
+        #
+        #   * Each resource can have multiple labels, up to a maximum of 64.
+        #   * Each label must be a key-value pair.
+        #   * Keys have a minimum length of 1 character and a maximum length of
+        #     63 characters, and cannot be empty. Values can be empty, and have
+        #     a maximum length of 63 characters.
+        #   * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes. All characters must use UTF-8 encoding, and
+        #     international characters are allowed.
+        #   * The key portion of a label must be unique. However, you can use the
+        #     same key with multiple resources.
+        #   * Keys must start with a lowercase letter or international character.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -1370,13 +1377,21 @@ module Google
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with
-        #   the job. You can use these to organize and group your jobs. Label
-        #   keys and values can be no longer than 63 characters, can only
-        #   contain lowercase letters, numeric characters, underscores and
-        #   dashes. International characters are allowed. Label values are
-        #   optional. Label keys must start with a letter and each label in the
-        #   list must have a different key. See [Requirements for
-        #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
+        #   the job. You can use these to organize and group your jobs.
+        #
+        #   The labels applied to a resource must meet the following requirements:
+        #
+        #   * Each resource can have multiple labels, up to a maximum of 64.
+        #   * Each label must be a key-value pair.
+        #   * Keys have a minimum length of 1 character and a maximum length of
+        #     63 characters, and cannot be empty. Values can be empty, and have
+        #     a maximum length of 63 characters.
+        #   * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes. All characters must use UTF-8 encoding, and
+        #     international characters are allowed.
+        #   * The key portion of a label must be unique. However, you can use the
+        #     same key with multiple resources.
+        #   * Keys must start with a lowercase letter or international character.
         # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
         #   is undefined however for non-query jobs and may result in an error.
         #   Deprecated.
@@ -1511,11 +1526,11 @@ module Google
         # The geographic location for the job ("US", "EU", etc.) can be set via
         # {ExtractJob::Updater#location=} in a block passed to this method. If
         # the table is a full resource representation (see {#resource_full?}),
-        # the location of the job will be automatically set to the location of
+        # the location of the job will automatically be set to the location of
         # the table.
         #
-        # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
-        #   Exporting Data From BigQuery
+        # @see https://cloud.google.com/bigquery/docs/exporting-data
+        #   Exporting table data
         #
         # @param [Google::Cloud::Storage::File, String, Array<String>]
         #   extract_url The Google Storage file or file URI pattern(s) to which
@@ -1551,13 +1566,21 @@ module Google
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with
-        #   the job. You can use these to organize and group your jobs. Label
-        #   keys and values can be no longer than 63 characters, can only
-        #   contain lowercase letters, numeric characters, underscores and
-        #   dashes. International characters are allowed. Label values are
-        #   optional. Label keys must start with a letter and each label in the
-        #   list must have a different key. See [Requirements for
-        #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
+        #   the job. You can use these to organize and group your jobs.
+        #
+        #   The labels applied to a resource must meet the following requirements:
+        #
+        #   * Each resource can have multiple labels, up to a maximum of 64.
+        #   * Each label must be a key-value pair.
+        #   * Keys have a minimum length of 1 character and a maximum length of
+        #     63 characters, and cannot be empty. Values can be empty, and have
+        #     a maximum length of 63 characters.
+        #   * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes. All characters must use UTF-8 encoding, and
+        #     international characters are allowed.
+        #   * The key portion of a label must be unique. However, you can use the
+        #     same key with multiple resources.
+        #   * Keys must start with a lowercase letter or international character.
         # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
         #   is undefined however for non-query jobs and may result in an error.
         #   Deprecated.
@@ -1609,8 +1632,8 @@ module Google
         # the location of the job will be automatically set to the location of
         # the table.
         #
-        # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
-        #   Exporting Data From BigQuery
+        # @see https://cloud.google.com/bigquery/docs/exporting-data
+        #   Exporting table data
         #
         # @param [Google::Cloud::Storage::File, String, Array<String>]
         #   extract_url The Google Storage file or file URI pattern(s) to which
@@ -1791,13 +1814,21 @@ module Google
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with
-        #   the job. You can use these to organize and group your jobs. Label
-        #   keys and values can be no longer than 63 characters, can only
-        #   contain lowercase letters, numeric characters, underscores and
-        #   dashes. International characters are allowed. Label values are
-        #   optional. Label keys must start with a letter and each label in the
-        #   list must have a different key. See [Requirements for
-        #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
+        #   the job. You can use these to organize and group your jobs.
+        #
+        #   The labels applied to a resource must meet the following requirements:
+        #
+        #   * Each resource can have multiple labels, up to a maximum of 64.
+        #   * Each label must be a key-value pair.
+        #   * Keys have a minimum length of 1 character and a maximum length of
+        #     63 characters, and cannot be empty. Values can be empty, and have
+        #     a maximum length of 63 characters.
+        #   * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes. All characters must use UTF-8 encoding, and
+        #     international characters are allowed.
+        #   * The key portion of a label must be unique. However, you can use the
+        #     same key with multiple resources.
+        #   * Keys must start with a lowercase letter or international character.
         # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
         #   is undefined however for non-query jobs and may result in an error.
         #   Deprecated.

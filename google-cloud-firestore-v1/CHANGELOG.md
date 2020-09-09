@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.0 / 2020-09-03
+
+#### Features
+
+* Support inequality operators in structured queries
+
 ### 0.1.2 / 2020-08-10
 
 #### Bug Fixes

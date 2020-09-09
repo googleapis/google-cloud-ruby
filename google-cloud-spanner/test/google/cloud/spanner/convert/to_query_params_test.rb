@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "helper"
+require "bigdecimal"
 
 describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
   # This tests is a sanity check on the implementation of the conversion method.
@@ -244,6 +245,13 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
     combined_params = Google::Cloud::Spanner::Convert.to_query_params list: [{ env: "production", score: 0.9, project_ids: [1,2,3] }]
     _(combined_params).must_equal({ "list" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "production"), Google::Protobuf::Value.new(number_value: 0.9), Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")]))]))])),
                                             Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Cloud::Spanner::V1::StructType.new(fields: [Google::Cloud::Spanner::V1::StructType::Field.new(name: "env", type: Google::Cloud::Spanner::V1::Type.new(code: :STRING)), Google::Cloud::Spanner::V1::StructType::Field.new(name: "score", type: Google::Cloud::Spanner::V1::Type.new(code: :FLOAT64)), Google::Cloud::Spanner::V1::StructType::Field.new(name: "project_ids", type: Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)))]))) ]})
+  end
+
+  it "converts a numeric (BigDecimal) value" do
+    number = "99999999999999999999999999999.999999999"
+    combined_params = Google::Cloud::Spanner::Convert.to_query_params score: BigDecimal(number)
+    _(combined_params).must_equal({ "score" => [Google::Protobuf::Value.new(string_value: number),
+                                             Google::Spanner::V1::Type.new(code: :NUMERIC)] })
   end
 
   describe "Struct Parameters Query Examples" do

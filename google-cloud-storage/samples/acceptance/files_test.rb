@@ -224,6 +224,7 @@ describe "Files Snippets" do
       Event-based hold enabled?: #{file.event_based_hold?}
       Temporary hold enaled?: #{file.temporary_hold?}
       Retention Expiration: #{file.retention_expires_at}
+      Custom Time: #{file.custom_time}
       Metadata:
     OUTPUT
 

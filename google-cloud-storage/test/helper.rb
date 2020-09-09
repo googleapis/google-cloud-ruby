@@ -90,7 +90,7 @@ class MockStorage < Minitest::Spec
     { "requesterPays" => requester_pays} unless requester_pays.nil?
   end
 
-  def random_file_hash bucket=random_bucket_name, name=random_file_path, generation="1234567890", kms_key_name="path/to/encryption_key_name"
+  def random_file_hash bucket=random_bucket_name, name=random_file_path, generation="1234567890", kms_key_name="path/to/encryption_key_name", custom_time: nil
     { "kind" => "storage#object",
       "id" => "#{bucket}/#{name}/1234567890",
       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket}/o/#{name}",
@@ -104,6 +104,7 @@ class MockStorage < Minitest::Spec
       "contentEncoding" => "gzip",
       "contentLanguage" => "en",
       "contentType" => "text/plain",
+      "customTime" => custom_time,
       "updated" => Time.now,
       "storageClass" => "STANDARD",
       "size" => rand(10_000),
@@ -164,9 +165,17 @@ class MockStorage < Minitest::Spec
     Google::Apis::StorageV1::Bucket::Lifecycle.new rule: Array(rules)
   end
 
-  def lifecycle_rule_gapi action, storage_class: nil, age: nil,
-                     created_before: nil, is_live: nil,
-                     matches_storage_class: nil, num_newer_versions: nil
+  def lifecycle_rule_gapi action,
+                          storage_class: nil,
+                          age: nil,
+                          created_before: nil,
+                          custom_time_before: nil,
+                          days_since_custom_time: nil,
+                          days_since_noncurrent_time: nil,
+                          is_live: nil,
+                          matches_storage_class: nil,
+                          noncurrent_time_before: nil,
+                          num_newer_versions: nil
     Google::Apis::StorageV1::Bucket::Lifecycle::Rule.new(
       action: Google::Apis::StorageV1::Bucket::Lifecycle::Rule::Action.new(
         storage_class: storage_class,
@@ -175,8 +184,12 @@ class MockStorage < Minitest::Spec
       condition: Google::Apis::StorageV1::Bucket::Lifecycle::Rule::Condition.new(
         age: age,
         created_before: created_before,
+        custom_time_before: custom_time_before,
+        days_since_custom_time: days_since_custom_time,
+        days_since_noncurrent_time: days_since_noncurrent_time,
         is_live: is_live,
         matches_storage_class: Array(matches_storage_class),
+        noncurrent_time_before: noncurrent_time_before,
         num_newer_versions: num_newer_versions
       )
     )

@@ -89,25 +89,49 @@ module Acceptance
 
     module Fixtures
       def stuffs_ddl_statement
-        <<-STUFFS
-          CREATE TABLE stuffs (
-            id INT64 NOT NULL,
-            int INT64,
-            float FLOAT64,
-            bool BOOL,
-            string STRING(MAX),
-            byte BYTES(MAX),
-            date DATE,
-            timestamp TIMESTAMP OPTIONS (allow_commit_timestamp=true),
-            ints ARRAY<INT64>,
-            floats ARRAY<FLOAT64>,
-            bools ARRAY<BOOL>,
-            strings ARRAY<STRING(MAX)>,
-            bytes ARRAY<BYTES(MAX)>,
-            dates ARRAY<DATE>,
-            timestamps ARRAY<TIMESTAMP>
-          ) PRIMARY KEY (id)
-        STUFFS
+        if emulator_enabled?
+          <<-STUFFS
+            CREATE TABLE stuffs (
+              id INT64 NOT NULL,
+              int INT64,
+              float FLOAT64,
+              bool BOOL,
+              string STRING(MAX),
+              byte BYTES(MAX),
+              date DATE,
+              timestamp TIMESTAMP OPTIONS (allow_commit_timestamp=true),
+              ints ARRAY<INT64>,
+              floats ARRAY<FLOAT64>,
+              bools ARRAY<BOOL>,
+              strings ARRAY<STRING(MAX)>,
+              bytes ARRAY<BYTES(MAX)>,
+              dates ARRAY<DATE>,
+              timestamps ARRAY<TIMESTAMP>
+            ) PRIMARY KEY (id)
+          STUFFS
+        else
+          <<-STUFFS
+            CREATE TABLE stuffs (
+              id INT64 NOT NULL,
+              int INT64,
+              float FLOAT64,
+              bool BOOL,
+              string STRING(MAX),
+              byte BYTES(MAX),
+              date DATE,
+              timestamp TIMESTAMP OPTIONS (allow_commit_timestamp=true),
+              numeric NUMERIC,
+              ints ARRAY<INT64>,
+              floats ARRAY<FLOAT64>,
+              bools ARRAY<BOOL>,
+              strings ARRAY<STRING(MAX)>,
+              bytes ARRAY<BYTES(MAX)>,
+              dates ARRAY<DATE>,
+              timestamps ARRAY<TIMESTAMP>,
+              numerics ARRAY<NUMERIC>
+            ) PRIMARY KEY (id)
+          STUFFS
+        end
       end
 
       def stuffs_index_statement

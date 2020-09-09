@@ -29,7 +29,7 @@ RUN apt-get update && apt-get --no-install-recommends install -y git curl autoco
 RUN apt-get -y autoclean
 
 # Install rbenv
-RUN git clone https://github.com/rbenv/rbenv.git /root/.rbenv
+RUN git clone --depth 1 https://github.com/rbenv/rbenv.git /root/.rbenv
 RUN cd /root/.rbenv && src/configure && make -C src
 
 ENV PATH /root/.rbenv/bin:$PATH
@@ -40,16 +40,16 @@ RUN echo 'eval "$(rbenv init -)"' >> .bashrc
 
 # Install ruby-build
 RUN mkdir -p "$(rbenv root)"/plugins
-RUN git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+RUN git clone --depth 1 https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
 
 # Install ruby
 ENV RUBY_CONFIGURE_OPTS --disable-install-doc
-RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc
+RUN echo 'gem: --no-document' >> /.gemrc
 RUN rbenv install <%= ruby_versions[-1] %> && rbenv global <%= ruby_versions[-1] %> \
     && gem install bundler:1.17.3 bundler:2.1.4 rake
 
 # Install pyenv
-RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+RUN git clone --depth 1 https://github.com/pyenv/pyenv.git ~/.pyenv
 RUN cd /root/.rbenv && src/configure && make -C src
 
 ENV PATH /root/.pyenv/bin:$PATH
@@ -64,7 +64,7 @@ RUN pyenv install 3.6.9
 RUN pyenv global 3.6.9
 
 # Install nodenv
-RUN git clone https://github.com/nodenv/nodenv.git ~/.nodenv
+RUN git clone --depth 1 https://github.com/nodenv/nodenv.git ~/.nodenv
 RUN cd /root/.nodenv && src/configure && make -C src
 
 ENV PATH /root/.nodenv/bin:$PATH
@@ -73,7 +73,7 @@ ENV PATH /root/.nodenv/shims:$PATH
 RUN echo 'export PATH="$HOME/.nodenv/bin:$PATH"' >> ~/.bashrc
 RUN echo 'eval "$(nodenv init -)"' >> ~/.bashrc
 RUN mkdir -p "$(nodenv root)"/plugins
-RUN git clone https://github.com/nodenv/node-build.git "$(nodenv root)"/plugins/node-build
+RUN git clone --depth 1 https://github.com/nodenv/node-build.git "$(nodenv root)"/plugins/node-build
 
 # Install nodejs
 RUN nodenv install 10.16.3

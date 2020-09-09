@@ -74,12 +74,17 @@ module Google
         #     to the finding.
         # @!attribute [rw] event_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time at which the event took place. For example, if the finding
-        #     represents an open firewall it would capture the time the detector believes
-        #     the firewall became open. The accuracy is determined by the detector.
+        #     The time at which the event took place, or when an update to the finding
+        #     occurred. For example, if the finding represents an open firewall it would
+        #     capture the time the detector believes the firewall became open. The
+        #     accuracy is determined by the detector. If the finding were to be resolved
+        #     afterward, this time would reflect when the finding was resolved.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the finding was created in Security Command Center.
+        # @!attribute [rw] severity
+        #   @return [::Google::Cloud::SecurityCenter::V1p1beta1::Finding::Severity]
+        #     The severity of the finding.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -104,6 +109,24 @@ module Google
             # The finding has been fixed, triaged as a non-issue or otherwise addressed
             # and is no longer active.
             INACTIVE = 2
+          end
+
+          # The severity of the finding.
+          module Severity
+            # No severity specified. The default value.
+            SEVERITY_UNSPECIFIED = 0
+
+            # Critical severity.
+            CRITICAL = 1
+
+            # High severity.
+            HIGH = 2
+
+            # Medium severity.
+            MEDIUM = 3
+
+            # Low severity.
+            LOW = 4
           end
         end
       end

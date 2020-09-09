@@ -18,6 +18,72 @@ describe Google::Cloud::Firestore::CollectionReference, :listen, :watch_firestor
   let(:collection_id) { "watch" }
   let(:collection) { Google::Cloud::Firestore::CollectionReference.from_path "projects/#{project}/databases/(default)/documents/#{collection_id}", firestore }
 
+  it "listens to a limit query" do
+    listen_responses = [
+      add_resp,
+      doc_change_resp("int 1", 0, val: 1),
+      doc_change_resp("int 2", 0, val: 2),
+      # doc_change_resp("int 3", 0, val: 3), # excluded by the limit clause
+      current_resp("DOCUMENTSHAVEBEENADDED", 0.1),
+
+      no_change_resp("THISTOKENWILLNEVERBESEEN", 1),
+      no_change_resp("NEITHERWILLTHISTOKEN", 1.1),
+    ]
+    # set stub because we can't mock a streaming request/response
+    listen_stub = StreamingListenStub.new [listen_responses]
+    firestore.service.instance_variable_set :@firestore, listen_stub
+
+    query_snapshots = []
+    listener = collection.order(:val).limit(2).listen do |query_snp|
+      query_snapshots << query_snp
+    end
+
+    wait_until { query_snapshots.count == 1 }
+
+    listener.stop
+
+    # assert snapshots
+    _(query_snapshots.count).must_equal 1
+    _(query_snapshots[0].count).must_equal 2
+    _(query_snapshots[0].changes.count).must_equal 2
+    _(query_snapshots[0].docs.map(&:document_id)).must_equal ["int 1", "int 2"]
+    _(query_snapshots[0].changes.map(&:type)).must_equal [:added, :added]
+    _(query_snapshots[0].changes.map(&:doc).map(&:document_id)).must_equal ["int 1", "int 2"]
+  end
+
+  it "listens to a limit_to_last query" do
+    listen_responses = [
+      add_resp,
+      # doc_change_resp("int 1", 0, val: 1), # excluded by the limit clause
+      doc_change_resp("int 2", 0, val: 2),
+      doc_change_resp("int 3", 0, val: 3),
+      current_resp("DOCUMENTSHAVEBEENADDED", 0.1),
+
+      no_change_resp("THISTOKENWILLNEVERBESEEN", 1),
+      no_change_resp("NEITHERWILLTHISTOKEN", 1.1),
+    ]
+    # set stub because we can't mock a streaming request/response
+    listen_stub = StreamingListenStub.new [listen_responses]
+    firestore.service.instance_variable_set :@firestore, listen_stub
+
+    query_snapshots = []
+    listener = collection.order(:val).limit_to_last(2).listen do |query_snp|
+      query_snapshots << query_snp
+    end
+
+    wait_until { query_snapshots.count == 1 }
+
+    listener.stop
+
+    # assert snapshots
+    _(query_snapshots.count).must_equal 1
+    _(query_snapshots[0].count).must_equal 2
+    _(query_snapshots[0].changes.count).must_equal 2
+    _(query_snapshots[0].docs.map(&:document_id)).must_equal ["int 2", "int 3"]
+    _(query_snapshots[0].changes.map(&:type)).must_equal [:added, :added]
+    _(query_snapshots[0].changes.map(&:doc).map(&:document_id)).must_equal ["int 2", "int 3"]
+  end
+
   it "listens to a query and yields query snapshots" do
     listen_responses = [
       add_resp,

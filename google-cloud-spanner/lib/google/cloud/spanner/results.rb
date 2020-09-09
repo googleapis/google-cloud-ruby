@@ -41,6 +41,8 @@ module Google
       #   end
       #
       class Results
+        RST_STREAM_INTERNAL_ERROR = "Received RST_STREAM".freeze
+        EOS_INTERNAL_ERROR = "Received unexpected EOS on DATA frame from server".freeze
         ##
         # The read timestamp chosen for single-use snapshots (read-only
         # transactions).
@@ -107,12 +109,24 @@ module Google
           buffer_upper_bound = 10
           chunked_value = nil
           resume_token = nil
+          should_resume_request = false
+          should_retry_request = false
 
           # Cannot call Enumerator#each because it won't return the first
           # value that was already identified when calling Enumerator#peek.
           # Iterate only using Enumerator#next and break on StopIteration.
           loop do
             begin
+              if should_resume_request
+                @enum = resume_request(resume_token)
+                buffered_responses = []
+                should_resume_request = false
+              elsif should_retry_request
+                @enum = retry_request()
+                buffered_responses = []
+                should_retry_request = false
+              end
+
               grpc = @enum.next
               # metadata should be set before the first iteration...
               @metadata ||= grpc.metadata
@@ -143,28 +157,36 @@ module Google
                 # Flush the buffered responses now that they are all handled
                 buffered_responses = []
               end
-            rescue GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
-                   GRPC::ResourceExhausted, GRPC::Unauthenticated,
-                   GRPC::Unavailable, GRPC::Core::CallError => err
-              if resume_token.nil? || resume_token.empty?
-                # Re-raise if the resume_token is not a valid value.
-                # This can happen if the buffer was flushed.
+            # TODO: once the generated client throws only Google Cloud errors, remove
+            # the GRPC errors from the rescue block
+            rescue GRPC::Aborted,
+              GRPC::Cancelled,
+              GRPC::DeadlineExceeded,
+              GRPC::Internal,
+              GRPC::ResourceExhausted,
+              GRPC::Unauthenticated,
+              GRPC::Unavailable,
+              GRPC::Core::CallError,
+              Google::Cloud::AbortedError,
+              Google::Cloud::CanceledError,
+              Google::Cloud::DeadlineExceededError,
+              Google::Cloud::InternalError,
+              Google::Cloud::ResourceExhaustedError,
+              Google::Cloud::UnauthenticatedError,
+              Google::Cloud::UnavailableError => err
+
+              if resumable?(resume_token)
+                should_resume_request = true
+              elsif retryable?(err)
+                should_retry_request = true
+              elsif err.is_a?(Google::Cloud::Error)
+                raise err
+              else
                 raise Google::Cloud::Error.from_error(err)
               end
 
-              # Resume the stream from the last known resume_token
-              if @execute_query_options
-                @enum = @service.execute_streaming_sql \
-                  @session_path, @sql,
-                  @execute_query_options.merge(resume_token: resume_token)
-              else
-                @enum = @service.streaming_read_table \
-                  @session_path, @table, @columns,
-                  @read_options.merge(resume_token: resume_token)
-              end
-
-              # Flush the buffered responses to reset to the resume_token
-              buffered_responses = []
+            # TODO: once the generated client throws only Google Cloud errors, remove
+            # this rescue block (for GRPC::BadStatus)
             rescue GRPC::BadStatus => err
               raise Google::Cloud::Error.from_error(err)
             rescue StopIteration
@@ -197,6 +219,60 @@ module Google
         end
 
         # rubocop:enable all
+
+        ##
+        # @private
+        # Checks if a request can be resumed by inspecting the resume token
+        def resumable? resume_token
+          resume_token && !resume_token.empty?
+        end
+
+        ##
+        # @private
+        # Checks if a request can be retried. This is based on the error returned.
+        # Retryable errors are:
+        #   - Unavailable error
+        #   - Internal EOS error
+        #   - Internal RST_STREAM error
+        def retryable? err
+          err.instance_of?(Google::Cloud::UnavailableError) ||
+            err.instance_of?(GRPC::Unavailable) ||
+            (err.instance_of?(Google::Cloud::InternalError) && err.message.include?(EOS_INTERNAL_ERROR)) ||
+            (err.instance_of?(GRPC::Internal) && err.details.include?(EOS_INTERNAL_ERROR)) ||
+            (err.instance_of?(Google::Cloud::InternalError) && err.message.include?(RST_STREAM_INTERNAL_ERROR)) ||
+            (err.instance_of?(GRPC::Internal) && err.details.include?(RST_STREAM_INTERNAL_ERROR))
+        end
+
+        ##
+        # @private
+        # Resumes a request, by re-executing it with a resume token.
+        def resume_request resume_token
+          if @execute_query_options
+            @service.execute_streaming_sql(
+              @session_path,
+              @sql,
+              @execute_query_options.merge(resume_token: resume_token)
+            )
+          else
+            @service.streaming_read_table(
+              @session_path,
+              @table,
+              @columns,
+              @read_options.merge(resume_token: resume_token)
+            )
+          end
+        end
+
+        ##
+        # @private
+        # Retries a request, by re-executing it from scratch.
+        def retry_request
+          if @execute_query_options
+            @service.execute_streaming_sql @session_path, @sql, @execute_query_options
+          else
+            @service.streaming_read_table @session_path, @table, @columns, @read_options
+          end
+        end
 
         ##
         # @private

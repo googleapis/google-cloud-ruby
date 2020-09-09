@@ -54,6 +54,22 @@ describe Google::Cloud::Bigquery, :bigquery do
     t
   end
   let(:dataset_with_access_id) { "#{prefix}_dataset_with_access" }
+  let(:model_id) { "model_#{SecureRandom.hex(4)}" }
+  let :model_sql do
+    model_sql = <<~MODEL_SQL
+    CREATE MODEL #{dataset.dataset_id}.#{model_id}
+    OPTIONS (
+        model_type='linear_reg',
+        max_iteration=1,
+        learn_rate=0.4,
+        learn_rate_strategy='constant'
+    ) AS (
+        SELECT 'a' AS f1, 2.0 AS label
+        UNION ALL
+        SELECT 'b' AS f1, 3.8 AS label
+    )
+    MODEL_SQL
+  end
 
   before do
     dataset_2
@@ -228,6 +244,47 @@ describe Google::Cloud::Bigquery, :bigquery do
       extract_file = bucket.file dest_file_name
       downloaded_file = extract_file.download tmp.path
       _(downloaded_file.size).must_be :>, 0
+    end
+  end
+
+  it "extracts a model to a GCS url with extract_job" do
+    model = nil
+    begin
+      query_job = dataset.query_job model_sql
+      query_job.wait_until_done!
+      _(query_job).wont_be :failed?
+
+      model = dataset.model model_id
+      _(model).must_be_kind_of Google::Cloud::Bigquery::Model
+
+      Tempfile.open "temp_extract_model" do |tmp|
+        extract_url = "gs://#{bucket.name}/#{model_id}"
+
+        # sut
+        extract_job = bigquery.extract_job model, extract_url
+
+        extract_job.wait_until_done!
+        _(extract_job).wont_be :failed?
+        _(extract_job.ml_tf_saved_model?).must_equal true
+        _(extract_job.ml_xgboost_booster?).must_equal false
+        _(extract_job.model?).must_equal true
+        _(extract_job.table?).must_equal false
+
+        source = extract_job.source
+        _(source).must_be_kind_of Google::Cloud::Bigquery::Model
+        _(source.model_id).must_equal model_id
+
+        extract_files = bucket.files prefix: model_id
+        _(extract_files).wont_be :nil?
+        _(extract_files).wont_be :empty?
+        extract_file = extract_files.find { |f| f.name == "#{model_id}/saved_model.pb" }
+        _(extract_file).wont_be :nil?
+        downloaded_file = extract_file.download tmp.path
+        _(downloaded_file.size).must_be :>, 0
+      end
+    ensure
+      # cleanup
+      model.delete if model
     end
   end
 

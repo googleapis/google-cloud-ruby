@@ -202,7 +202,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A result of Resource Search, containing information of a cloud resoure.
+        # A result of Resource Search, containing information of a cloud resource.
         # @!attribute [rw] name
         #   @return [::String]
         #     The full resource name of this resource. Example:
@@ -213,8 +213,8 @@ module Google
         #
         #     To search against the `name`:
         #
-        #     * use a field query. Example: `name : "instance1"`
-        #     * use a free text query. Example: `"instance1"`
+        #     * use a field query. Example: `name:instance1`
+        #     * use a free text query. Example: `instance1`
         # @!attribute [rw] asset_type
         #   @return [::String]
         #     The type of this resource. Example: `compute.googleapis.com/Disk`.
@@ -236,7 +236,7 @@ module Google
         #
         #     To search against the `display_name`:
         #
-        #     * use a field query. Example: `displayName : "My Instance"`
+        #     * use a field query. Example: `displayName:"My Instance"`
         #     * use a free text query. Example: `"My Instance"`
         # @!attribute [rw] description
         #   @return [::String]
@@ -245,7 +245,7 @@ module Google
         #
         #     To search against the `description`:
         #
-        #     * use a field query. Example: `description : "*important instance*"`
+        #     * use a field query. Example: `description:"*important instance*"`
         #     * use a free text query. Example: `"*important instance*"`
         # @!attribute [rw] location
         #   @return [::String]
@@ -254,8 +254,8 @@ module Google
         #
         #     To search against the `location`:
         #
-        #     * use a field query. Example: `location : "us-west*"`
-        #     * use a free text query. Example: `"us-west*"`
+        #     * use a field query. Example: `location:us-west*`
+        #     * use a free text query. Example: `us-west*`
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels associated with this resource. See [Labelling and grouping GCP
@@ -264,11 +264,11 @@ module Google
         #
         #     To search against the `labels`:
         #
-        #     * use a field query, as following:
-        #         - query on any label's key or value. Example: `labels : "prod"`
-        #         - query by a given label. Example: `labels.env : "prod"`
-        #         - query by a given label'sexistence. Example: `labels.env : *`
-        #     * use a free text query. Example: `"prod"`
+        #     * use a field query:
+        #         - query on any label's key or value. Example: `labels:prod`
+        #         - query by a given label. Example: `labels.env:prod`
+        #         - query by a given label's existence. Example: `labels.env:*`
+        #     * use a free text query. Example: `prod`
         # @!attribute [rw] network_tags
         #   @return [::Array<::String>]
         #     Network tags associated with this resource. Like labels, network tags are a
@@ -278,19 +278,29 @@ module Google
         #
         #     To search against the `network_tags`:
         #
-        #     * use a field query. Example: `networkTags : "internal"`
-        #     * use a free text query. Example: `"internal"`
+        #     * use a field query. Example: `networkTags:internal`
+        #     * use a free text query. Example: `internal`
         # @!attribute [rw] additional_attributes
         #   @return [::Google::Protobuf::Struct]
-        #     The additional attributes of this resource. The attributes may vary from
-        #     one resource type to another. Examples: `projectId` for Project,
-        #     `dnsName` for DNS ManagedZone.
+        #     The additional searchable attributes of this resource. The attributes may
+        #     vary from one resource type to another. Examples: `projectId` for Project,
+        #     `dnsName` for DNS ManagedZone. This field contains a subset of the resource
+        #     metadata fields that are returned by the List or Get APIs provided by the
+        #     corresponding GCP service (e.g., Compute Engine). see [API references and
+        #     supported searchable
+        #     attributes](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types)
+        #     for more information.
+        #
+        #     You can search values of these fields through free text search. However,
+        #     you should not consume the field programically as the field names and
+        #     values may change as the GCP service updates to a new incompatible API
+        #     version.
         #
         #     To search against the `additional_attributes`:
         #
         #     * use a free text query to match the attributes values. Example: to search
         #       `additional_attributes = { dnsName: "foobar" }`, you can issue a query
-        #       `"foobar"`.
+        #       `foobar`.
         class ResourceSearchResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -317,7 +327,7 @@ module Google
         #
         #     To search against the `resource`:
         #
-        #     * use a field query. Example: `resource : "organizations/123"`
+        #     * use a field query. Example: `resource:organizations/123`
         # @!attribute [rw] project
         #   @return [::String]
         #     The project that the associated GCP resource belongs to, in the form of
@@ -338,13 +348,13 @@ module Google
         #
         #     To search against the `policy` bindings:
         #
-        #     * use a field query, as following:
+        #     * use a field query:
         #         - query by the policy contained members. Example:
-        #           `policy : "amy@gmail.com"`
+        #           `policy:amy@gmail.com`
         #         - query by the policy contained roles. Example:
-        #           `policy : "roles/compute.admin"`
-        #         - query by the policy contained roles' implied permissions. Example:
-        #           `policy.role.permissions : "compute.instances.create"`
+        #           `policy:roles/compute.admin`
+        #         - query by the policy contained roles' included permissions. Example:
+        #           `policy.role.permissions:compute.instances.create`
         # @!attribute [rw] explanation
         #   @return [::Google::Cloud::Asset::V1::IamPolicySearchResult::Explanation]
         #     Explanation about the IAM policy search result. It contains additional
@@ -358,7 +368,7 @@ module Google
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Asset::V1::IamPolicySearchResult::Explanation::Permissions}]
           #     The map from roles to their included permissions that match the
           #     permission query (i.e., a query containing `policy.role.permissions:`).
-          #     Example: if query `policy.role.permissions : "compute.disk.get"`
+          #     Example: if query `policy.role.permissions:compute.disk.get`
           #     matches a policy binding that contains owner role, the
           #     matched_permissions will be `{"roles/owner": ["compute.disk.get"]}`. The
           #     roles can also be found in the returned `policy` bindings. Note that the
@@ -384,6 +394,182 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+        end
+
+        # Represents the detailed state of an entity under analysis, such as a
+        # resource, an identity or an access.
+        # @!attribute [rw] code
+        #   @return [::Google::Rpc::Code]
+        #     The Google standard error code that best describes the state.
+        #     For example:
+        #     - OK means the analysis on this entity has been successfully finished;
+        #     - PERMISSION_DENIED means an access denied error is encountered;
+        #     - DEADLINE_EXCEEDED means the analysis on this entity hasn't been started
+        #     in time;
+        # @!attribute [rw] cause
+        #   @return [::String]
+        #     The human-readable description of the cause of failure.
+        class IamPolicyAnalysisState
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # IAM Policy analysis result, consisting of one IAM policy binding and derived
+        # access control lists.
+        # @!attribute [rw] attached_resource_full_name
+        #   @return [::String]
+        #     The [full resource
+        #     name](https://cloud.google.com/asset-inventory/docs/resource-name-format)
+        #     of the resource to which the [iam_binding][iam_binding] policy attaches.
+        #     (-- api-linter: core::0122::name-suffix=disabled
+        #         aip.dev/not-precedent: full_resource_name is a public notion in GCP.
+        #         --)
+        # @!attribute [rw] iam_binding
+        #   @return [::Google::Iam::V1::Binding]
+        #     The Cloud IAM policy binding under analysis.
+        # @!attribute [rw] access_control_lists
+        #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::AccessControlList>]
+        #     The access control lists derived from the [iam_binding][iam_binding] that
+        #     match or potentially match resource and access selectors specified in the
+        #     request.
+        # @!attribute [rw] identity_list
+        #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::IdentityList]
+        #     The identity list derived from members of the [iam_binding][iam_binding]
+        #     that match or potentially match identity selector specified in the request.
+        # @!attribute [rw] fully_explored
+        #   @return [::Boolean]
+        #     Represents whether all analyses on the [iam_binding][iam_binding] have
+        #     successfully finished.
+        class IamPolicyAnalysisResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A Google Cloud resource under analysis.
+          # @!attribute [rw] full_resource_name
+          #   @return [::String]
+          #     The [full resource
+          #     name](https://cloud.google.com/asset-inventory/docs/resource-name-format)
+          #     (-- api-linter: core::0122::name-suffix=disabled
+          #         aip.dev/not-precedent: full_resource_name is a public notion in GCP.
+          #         --)
+          # @!attribute [rw] analysis_state
+          #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisState]
+          #     The analysis state of this resource.
+          class Resource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An IAM role or permission under analysis.
+          # @!attribute [rw] role
+          #   @return [::String]
+          #     The role.
+          # @!attribute [rw] permission
+          #   @return [::String]
+          #     The permission.
+          # @!attribute [rw] analysis_state
+          #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisState]
+          #     The analysis state of this access.
+          class Access
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An identity under analysis.
+          # (-- api-linter: core::0123::resource-annotation=disabled
+          #     aip.dev/not-precedent: Identity name is not a resource. --)
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The identity name in any form of members appear in
+          #     [IAM policy
+          #     binding](https://cloud.google.com/iam/reference/rest/v1/Binding), such
+          #     as:
+          #     - user:foo@google.com
+          #     - group:group1@google.com
+          #     - serviceAccount:s1@prj1.iam.gserviceaccount.com
+          #     - projectOwner:some_project_id
+          #     - domain:google.com
+          #     - allUsers
+          #     - etc.
+          # @!attribute [rw] analysis_state
+          #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisState]
+          #     The analysis state of this identity.
+          class Identity
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A directional edge.
+          # @!attribute [rw] source_node
+          #   @return [::String]
+          #     The source node of the edge. For example, it could be a full resource
+          #     name for a resource node or an email of an identity.
+          # @!attribute [rw] target_node
+          #   @return [::String]
+          #     The target node of the edge. For example, it could be a full resource
+          #     name for a resource node or an email of an identity.
+          class Edge
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An access control list, derived from the above IAM policy binding, which
+          # contains a set of resources and accesses. May include one
+          # item from each set to compose an access control entry.
+          #
+          # NOTICE that there could be multiple access control lists for one IAM policy
+          # binding. The access control lists are created based on resource and access
+          # combinations.
+          #
+          # For example, assume we have the following cases in one IAM policy binding:
+          # - Permission P1 and P2 apply to resource R1 and R2;
+          # - Permission P3 applies to resource R2 and R3;
+          #
+          # This will result in the following access control lists:
+          # - AccessControlList 1: [R1, R2], [P1, P2]
+          # - AccessControlList 2: [R2, R3], [P3]
+          # @!attribute [rw] resources
+          #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Resource>]
+          #     The resources that match one of the following conditions:
+          #     - The resource_selector, if it is specified in request;
+          #     - Otherwise, resources reachable from the policy attached resource.
+          # @!attribute [rw] accesses
+          #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Access>]
+          #     The accesses that match one of the following conditions:
+          #     - The access_selector, if it is specified in request;
+          #     - Otherwise, access specifiers reachable from the policy binding's role.
+          # @!attribute [rw] resource_edges
+          #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge>]
+          #     Resource edges of the graph starting from the policy attached
+          #     resource to any descendant resources. The [Edge.source_node][] contains
+          #     the full resource name of a parent resource and [Edge.target_node][]
+          #     contains the full resource name of a child resource. This field is
+          #     present only if the output_resource_edges option is enabled in request.
+          class AccessControlList
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The identities and group edges.
+          # @!attribute [rw] identities
+          #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Identity>]
+          #     Only the identities that match one of the following conditions will be
+          #     presented:
+          #     - The identity_selector, if it is specified in request;
+          #     - Otherwise, identities reachable from the policy binding's members.
+          # @!attribute [rw] group_edges
+          #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge>]
+          #     Group identity edges of the graph starting from the binding's
+          #     group members to any node of the [identities][]. The [Edge.source_node][]
+          #     contains a group, such as `group:parent@google.com`. The
+          #     [Edge.target_node][] contains a member of the group,
+          #     such as `group:child@google.com` or `user:foo@google.com`.
+          #     This field is present only if the output_group_edges option is enabled in
+          #     request.
+          class IdentityList
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

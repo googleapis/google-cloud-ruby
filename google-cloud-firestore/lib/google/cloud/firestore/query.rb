@@ -63,6 +63,10 @@ module Google
         attr_accessor :parent_path
 
         ##
+        # @private The type for limit queries.
+        attr_reader :limit_type
+
+        ##
         # @private The Google::Cloud::Firestore::V1::StructuredQuery object.
         attr_accessor :query
 
@@ -118,7 +122,7 @@ module Google
             new_query.select.fields << field_ref
           end
 
-          Query.start new_query, parent_path, client
+          Query.start new_query, parent_path, client, limit_type: limit_type
         end
 
         ##
@@ -154,7 +158,7 @@ module Google
 
           new_query.from.last.all_descendants = true
 
-          Query.start new_query, parent_path, client
+          Query.start new_query, parent_path, client, limit_type: limit_type
         end
 
         ##
@@ -190,7 +194,7 @@ module Google
 
           new_query.from.last.all_descendants = false
 
-          Query.start new_query, parent_path, client
+          Query.start new_query, parent_path, client, limit_type: limit_type
         end
 
         ##
@@ -246,7 +250,7 @@ module Google
           new_filter = filter field.formatted_string, operator, value
           add_filters_to_query new_query, new_filter
 
-          Query.start new_query, parent_path, client
+          Query.start new_query, parent_path, client, limit_type: limit_type
         end
 
         ##
@@ -298,9 +302,8 @@ module Google
         #   end
         #
         def order field, direction = :asc
-          if query_has_cursors?
-            raise "cannot call order after calling " \
-                  "start_at, start_after, end_before, or end_at"
+          if query_has_cursors? || limit_type == :last
+            raise "cannot call order after calling limit_to_last, start_at, start_after, end_before, or end_at"
           end
 
           new_query = @query.dup
@@ -315,7 +318,7 @@ module Google
             direction: order_direction(direction)
           )
 
-          Query.start new_query, parent_path, client
+          Query.start new_query, parent_path, client, limit_type: limit_type
         end
         alias order_by order
 
@@ -348,12 +351,13 @@ module Google
 
           new_query.offset = num
 
-          Query.start new_query, parent_path, client
+          Query.start new_query, parent_path, client, limit_type: limit_type
         end
 
         ##
-        # Limits a query to return a fixed number of results. If the current
-        # query already has a limit set, this will overwrite it.
+        # Limits a query to return only the first matching documents.
+        #
+        # If the current query already has a limit set, this will overwrite it.
         #
         # @param [Integer] num The maximum number of results to return.
         #
@@ -368,19 +372,83 @@ module Google
         #   cities_col = firestore.col "cities"
         #
         #   # Create a query
-        #   query = cities_col.offset(10).limit(5)
+        #   query = cities_col.order(:name, :desc).offset(10).limit(5)
         #
         #   query.get do |city|
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
         def limit num
+          if limit_type == :last
+            raise "cannot call limit after calling limit_to_last"
+          end
+
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
           new_query.limit = Google::Protobuf::Int32Value.new value: num
 
-          Query.start new_query, parent_path, client
+          Query.start new_query, parent_path, client, limit_type: :first
+        end
+
+        ##
+        # Limits a query to return only the last matching documents.
+        #
+        # You must specify at least one "order by" clause for limitToLast queries.
+        # (See {#order}.)
+        #
+        # Results for `limit_to_last` queries are only available once all documents
+        # are received. Hence, `limit_to_last` queries cannot be streamed using
+        # {#listen}.
+        #
+        # @param [Integer] num The maximum number of results to return.
+        #
+        # @return [Query] New query with `limit_to_last` called on it.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #
+        #   # Create a query
+        #   query = cities_col.order(:name, :desc).limit_to_last(5)
+        #
+        #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        def limit_to_last num
+          new_query = @query.dup
+
+          if new_query.nil? || new_query.order_by.nil? || new_query.order_by.empty?
+            raise "specify at least one order clause before calling limit_to_last"
+          end
+
+          if limit_type != :last # Don't reverse order_by more than once.
+            # Reverse the order_by directions since we want the last results.
+            new_query.order_by.each do |order|
+              order.direction = order.direction.to_sym == :DESCENDING ? :ASCENDING : :DESCENDING
+            end
+
+            # Swap the cursors to match the reversed query ordering.
+            new_end_at = new_query.start_at.dup
+            new_start_at = new_query.end_at.dup
+            if new_end_at
+              new_end_at.before = !new_end_at.before
+              new_query.end_at = new_end_at
+            end
+            if new_start_at
+              new_start_at.before = !new_start_at.before
+              new_query.start_at = new_start_at
+            end
+          end
+
+          new_query.limit = Google::Protobuf::Int32Value.new value: num
+
+          Query.start new_query, parent_path, client, limit_type: :last
         end
 
         ##
@@ -477,6 +545,10 @@ module Google
         def start_at *values
           raise ArgumentError, "must provide values" if values.empty?
 
+          if limit_type == :last
+            raise "cannot call start_at after calling limit_to_last"
+          end
+
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
@@ -484,7 +556,7 @@ module Google
           cursor.before = true
           new_query.start_at = cursor
 
-          Query.start new_query, parent_path, client
+          Query.start new_query, parent_path, client, limit_type: limit_type
         end
 
         ##
@@ -581,6 +653,11 @@ module Google
         def start_after *values
           raise ArgumentError, "must provide values" if values.empty?
 
+          if limit_type == :last
+            raise "cannot call start_after after calling limit_to_last"
+          end
+
+
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
@@ -588,7 +665,7 @@ module Google
           cursor.before = false
           new_query.start_at = cursor
 
-          Query.start new_query, parent_path, client
+          Query.start new_query, parent_path, client, limit_type: limit_type
         end
 
         ##
@@ -685,6 +762,11 @@ module Google
         def end_before *values
           raise ArgumentError, "must provide values" if values.empty?
 
+          if limit_type == :last
+            raise "cannot call end_before after calling limit_to_last"
+          end
+
+
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
@@ -692,7 +774,7 @@ module Google
           cursor.before = true
           new_query.end_at = cursor
 
-          Query.start new_query, parent_path, client
+          Query.start new_query, parent_path, client, limit_type: limit_type
         end
 
         ##
@@ -789,6 +871,11 @@ module Google
         def end_at *values
           raise ArgumentError, "must provide values" if values.empty?
 
+          if limit_type == :last
+            raise "cannot call end_at after calling limit_to_last"
+          end
+
+
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
@@ -796,7 +883,7 @@ module Google
           cursor.before = false
           new_query.end_at = cursor
 
-          Query.start new_query, parent_path, client
+          Query.start new_query, parent_path, client, limit_type: limit_type
         end
 
         ##
@@ -828,6 +915,10 @@ module Google
           return enum_for :get unless block_given?
 
           results = service.run_query parent_path, @query
+
+          # Reverse the results for Query#limit_to_last queries since that method reversed the order_by directions.
+          results = results.to_a.reverse if limit_type == :last
+
           results.each do |result|
             next if result.document.nil?
             yield DocumentSnapshot.from_query_result result, client
@@ -870,11 +961,12 @@ module Google
 
         ##
         # @private Start a new Query.
-        def self.start query, parent_path, client
+        def self.start query, parent_path, client, limit_type: nil
           query ||= StructuredQuery.new
           Query.new.tap do |q|
             q.instance_variable_set :@query, query
             q.instance_variable_set :@parent_path, parent_path
+            q.instance_variable_set :@limit_type, limit_type
             q.instance_variable_set :@client, client
           end
         end

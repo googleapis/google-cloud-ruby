@@ -138,6 +138,8 @@ module Google
           end
         end
 
+        ##
+        # Gets the specified table resource by full table reference.
         def get_project_table project_id, dataset_id, table_id
           # The get operation is considered idempotent
           execute backoff: true do
@@ -151,10 +153,7 @@ module Google
         # it only returns the table resource,
         # which describes the structure of this table.
         def get_table dataset_id, table_id
-          # The get operation is considered idempotent
-          execute backoff: true do
-            get_project_table @project, dataset_id, table_id
-          end
+          get_project_table @project, dataset_id, table_id
         end
 
         ##
@@ -250,16 +249,19 @@ module Google
           end
         end
 
-        # Gets the specified model resource by model ID.
-        # This method does not return the data in the model,
-        # it only returns the model resource,
-        # which describes the structure of this model.
-        def get_model dataset_id, model_id
+        # Gets the specified model resource by full model reference.
+        def get_project_model project_id, dataset_id, model_id
           # The get operation is considered idempotent
           execute backoff: true do
-            json_txt = service.get_model @project, dataset_id, model_id, options: { skip_deserialization: true }
+            json_txt = service.get_model project_id, dataset_id, model_id, options: { skip_deserialization: true }
             JSON.parse json_txt, symbolize_names: true
           end
+        end
+
+        # Gets the specified model resource by model ID. This method does not return the data in the model, it only
+        # returns the model resource, which describes the structure of this model.
+        def get_model dataset_id, model_id
+          get_project_model @project, dataset_id, model_id
         end
 
         ##

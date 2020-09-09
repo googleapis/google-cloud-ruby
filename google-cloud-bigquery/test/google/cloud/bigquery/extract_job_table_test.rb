@@ -16,7 +16,7 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::ExtractJob, :mock_bigquery do
+describe Google::Cloud::Bigquery::ExtractJob, :table, :mock_bigquery do
   let(:job) { Google::Cloud::Bigquery::Job.from_gapi extract_job_gapi,
                                               bigquery.service }
   let(:job_id) { job.job_id }
@@ -46,6 +46,8 @@ describe Google::Cloud::Bigquery::ExtractJob, :mock_bigquery do
   end
 
   it "knows its attributes" do
+    _(job).must_be :table?
+    _(job).wont_be :model?
     _(job).must_be :compression?
     _(job).must_be :json?
     _(job).wont_be :csv?

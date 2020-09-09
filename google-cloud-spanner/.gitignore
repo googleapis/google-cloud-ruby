@@ -4,6 +4,7 @@ doc/*
 pkg/*
 html/*
 jsondoc/*
+.ruby-version
 
 # Ignore YARD stuffs
 .yardoc

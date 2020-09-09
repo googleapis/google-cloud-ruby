@@ -37,6 +37,9 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
                                                   bigquery.service }
   let(:table_id_standard_sql) { "#{table.project_id}.#{table.dataset_id}.#{table.table_id}" }
   let(:table_id_legacy_sql) { "#{table.project_id}:#{table.dataset_id}.#{table.table_id}" }
+  let(:model_id) { "my_model" }
+  let(:model_hash) { random_model_full_hash dataset, model_id }
+  let(:model) { Google::Cloud::Bigquery::Model.from_gapi_json model_hash, bigquery.service }
 
   it "can extract a table to a storage file using a Standard SQL table id" do
     mock = Minitest::Mock.new
@@ -251,6 +254,21 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
       j.format = :avro
       j.use_avro_logical_types = true
     end
+    mock.verify
+
+    _(result).must_equal true
+  end
+
+  it "can extract a model to a storage url" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi model, extract_file, location: nil
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
+
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+
+    result = bigquery.extract model, extract_url
     mock.verify
 
     _(result).must_equal true

@@ -23,7 +23,7 @@ rvm --default use 2.3
 
 # Install git and bundler and grpc gem
 sudo apt-get --no-install-recommends install git -y
-gem install bundler grpc
+gem install --no-document bundler grpc
 SCRIPT
 
 Vagrant.configure("2") do |config|

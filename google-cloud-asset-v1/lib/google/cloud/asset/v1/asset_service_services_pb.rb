@@ -36,14 +36,13 @@ module Google
             # Exports assets with time and resource types to a given Cloud Storage
             # location/BigQuery table. For Cloud Storage location destinations, the
             # output format is newline-delimited JSON. Each line represents a
-            # [google.cloud.asset.v1.Asset][google.cloud.asset.v1.Asset] in the JSON
-            # format; for BigQuery table destinations, the output table stores the fields
-            # in asset proto as columns. This API implements the
-            # [google.longrunning.Operation][google.longrunning.Operation] API , which
-            # allows you to keep track of the export. We recommend intervals of at least
-            # 2 seconds with exponential retry to poll the export operation result. For
-            # regular-size resource parent, the export operation usually finishes within
-            # 5 minutes.
+            # [google.cloud.asset.v1.Asset][google.cloud.asset.v1.Asset] in the JSON format; for BigQuery table
+            # destinations, the output table stores the fields in asset proto as columns.
+            # This API implements the [google.longrunning.Operation][google.longrunning.Operation] API
+            # , which allows you to keep track of the export. We recommend intervals of
+            # at least 2 seconds with exponential retry to poll the export operation
+            # result. For regular-size resource parent, the export operation usually
+            # finishes within 5 minutes.
             rpc :ExportAssets, Google::Cloud::Asset::V1::ExportAssetsRequest, Google::Longrunning::Operation
             # Batch gets the update history of assets that overlap a time window.
             # For IAM_POLICY content, this API outputs history when the asset and its
@@ -64,16 +63,29 @@ module Google
             rpc :UpdateFeed, Google::Cloud::Asset::V1::UpdateFeedRequest, Google::Cloud::Asset::V1::Feed
             # Deletes an asset feed.
             rpc :DeleteFeed, Google::Cloud::Asset::V1::DeleteFeedRequest, Google::Protobuf::Empty
-            # Searches all the resources within the given accessible scope (e.g., a
-            # project, a folder or an organization). Callers should have
-            # cloud.assets.SearchAllResources permission upon the requested scope,
+            # Searches all Cloud resources within the specified scope, such as a project,
+            # folder, or organization. The caller must be granted the
+            # `cloudasset.assets.searchAllResources` permission on the desired scope,
             # otherwise the request will be rejected.
             rpc :SearchAllResources, Google::Cloud::Asset::V1::SearchAllResourcesRequest, Google::Cloud::Asset::V1::SearchAllResourcesResponse
-            # Searches all the IAM policies within the given accessible scope (e.g., a
-            # project, a folder or an organization). Callers should have
-            # cloud.assets.SearchAllIamPolicies permission upon the requested scope,
+            # Searches all IAM policies within the specified scope, such as a project,
+            # folder, or organization. The caller must be granted the
+            # `cloudasset.assets.searchAllIamPolicies` permission on the desired scope,
             # otherwise the request will be rejected.
             rpc :SearchAllIamPolicies, Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest, Google::Cloud::Asset::V1::SearchAllIamPoliciesResponse
+            # Analyzes IAM policies to answer which identities have what accesses on
+            # which resources.
+            rpc :AnalyzeIamPolicy, Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest, Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse
+            # Exports the answers of which identities have what accesses on which
+            # resources to a Google Cloud Storage or a BigQuery destination. For Cloud
+            # Storage destination, the output format is the JSON format that represents a
+            # [google.cloud.asset.v1.AnalyzeIamPolicyResponse][google.cloud.asset.v1.AnalyzeIamPolicyResponse].
+            # This method implements the
+            # [google.longrunning.Operation][google.longrunning.Operation], which allows
+            # you to track the export status. We recommend intervals of at least 2
+            # seconds with exponential retry to poll the export operation result. The
+            # metadata contains the request to help callers to map responses to requests.
+            rpc :ExportIamPolicyAnalysis, Google::Cloud::Asset::V1::ExportIamPolicyAnalysisRequest, Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

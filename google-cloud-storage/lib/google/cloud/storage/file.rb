@@ -356,6 +356,29 @@ module Google
         end
 
         ##
+        # A custom time specified by the user for the file, or `nil`.
+        #
+        # @return [DateTime, nil]
+        #
+        def custom_time
+          @gapi.custom_time
+        end
+
+        ##
+        # Updates the custom time specified by the user for the file. Once set,
+        # custom_time can't be unset, and it can only be changed to a time in the
+        # future. If custom_time must be unset, you must either perform a rewrite
+        # operation, or upload the data again and create a new file.
+        #
+        # @param [DateTime] custom_time A custom time specified by the user
+        #   for the file.
+        #
+        def custom_time= custom_time
+          @gapi.custom_time = custom_time
+          update_gapi! :custom_time
+        end
+
+        ##
         # A hash of custom, user-provided web-safe keys and arbitrary string
         # values that will returned with requests for the file as "x-goog-meta-"
         # response headers.
@@ -746,8 +769,9 @@ module Google
         # Updates the file with changes made in the given block in a single
         # PATCH request. The following attributes may be set: {#cache_control=},
         # {#content_disposition=}, {#content_encoding=}, {#content_language=},
-        # {#content_type=}, and {#metadata=}. The {#metadata} hash accessible in
-        # the block is completely mutable and will be included in the request.
+        # {#content_type=}, {#custom_time=} and {#metadata=}. The {#metadata} hash
+        # accessible in the block is completely mutable and will be included in the
+        # request.
         #
         # @yield [file] a block yielding a delegate object for updating the file
         #
@@ -766,6 +790,7 @@ module Google
         #     f.content_encoding = "deflate"
         #     f.content_language = "de"
         #     f.content_type = "application/json"
+        #     f.custom_time = DateTime.new 2025, 12, 31
         #     f.metadata["player"] = "Bob"
         #     f.metadata["score"] = "10"
         #   end
