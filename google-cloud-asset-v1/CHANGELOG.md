@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.1 / 2020-09-10
+
+#### Bug Fixes
+
+* Remove analyze_iam_policy and export_iam_policy_analysis methods. These are not yet working, and were exposed in the client by mistake.
+
 ### 0.6.0 / 2020-09-03
 
 #### Features
