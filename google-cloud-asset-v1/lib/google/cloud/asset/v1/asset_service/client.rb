@@ -119,16 +119,6 @@ module Google
                   retry_codes:   [4, 14]
                 }
 
-                default_config.rpcs.analyze_iam_policy.timeout = 300.0
-                default_config.rpcs.analyze_iam_policy.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
-                }
-
-                default_config.rpcs.export_iam_policy_analysis.timeout = 60.0
-
                 default_config
               end
               yield @configure if block_given?
@@ -1039,176 +1029,6 @@ module Google
             end
 
             ##
-            # Analyzes IAM policies to answer which identities have what accesses on
-            # which resources.
-            #
-            # @overload analyze_iam_policy(request, options = nil)
-            #   Pass arguments to `analyze_iam_policy` via a request object, either of type
-            #   {::Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload analyze_iam_policy(analysis_query: nil, execution_timeout: nil)
-            #   Pass arguments to `analyze_iam_policy` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param analysis_query [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery, ::Hash]
-            #     The request query.
-            #   @param execution_timeout [::Google::Protobuf::Duration, ::Hash]
-            #     Amount of time executable has to complete.  See JSON representation of
-            #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json).
-            #
-            #     If this field is set with a value less than the RPC deadline, and the
-            #     execution of your query hasn't finished in the specified
-            #     execution timeout,  you will get a response with partial result.
-            #     Otherwise, your query's execution will continue until the RPC deadline.
-            #     If it's not finished until then, you will get a  DEADLINE_EXCEEDED error.
-            #
-            #     Default is empty.
-            #
-            #     (-- We had discussion of whether we should have this field in the    --)
-            #     (-- request or use the RPC deadline instead. We finally choose this  --)
-            #     (-- approach for the following reasons (detailed in                  --)
-            #     (-- go/analyze-iam-policy-deadlines):                                --)
-            #     (-- * HTTP clients have very limited support of the RPC deadline.    --)
-            #     (--   There is an X-Server-Timeout header introduced in 2019/09, but --)
-            #     (--   only implemented in the C++ HTTP server library.               --)
-            #     (-- * The purpose of the RPC deadline is for RPC clients to          --)
-            #     (--   communicate its max waiting time to the server. This deadline  --)
-            #     (--   could be further propagated to the downstream servers. It is   --)
-            #     (--   mainly used for servers to cancel the request processing       --)
-            #     (--   to avoid resource wasting. Overloading the RPC deadline for    --)
-            #     (--   other purposes could make our backend system harder to reason  --)
-            #     (--   about.                                                         --)
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            def analyze_iam_policy request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.analyze_iam_policy.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::Asset::V1::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {
-                "analysis_query.scope" => request.analysis_query.scope
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.analyze_iam_policy.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.analyze_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @asset_service_stub.call_rpc :analyze_iam_policy, request, options: options do |response, operation|
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
-            # Exports the answers of which identities have what accesses on which
-            # resources to a Google Cloud Storage or a BigQuery destination. For Cloud
-            # Storage destination, the output format is the JSON format that represents a
-            # {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse google.cloud.asset.v1.AnalyzeIamPolicyResponse}.
-            # This method implements the
-            # {::Google::Longrunning::Operation google.longrunning.Operation}, which allows
-            # you to track the export status. We recommend intervals of at least 2
-            # seconds with exponential retry to poll the export operation result. The
-            # metadata contains the request to help callers to map responses to requests.
-            #
-            # @overload export_iam_policy_analysis(request, options = nil)
-            #   Pass arguments to `export_iam_policy_analysis` via a request object, either of type
-            #   {::Google::Cloud::Asset::V1::ExportIamPolicyAnalysisRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Cloud::Asset::V1::ExportIamPolicyAnalysisRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload export_iam_policy_analysis(analysis_query: nil, output_config: nil)
-            #   Pass arguments to `export_iam_policy_analysis` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param analysis_query [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery, ::Hash]
-            #     The request query.
-            #   @param output_config [::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig, ::Hash]
-            #     Output configuration indicating where the results will be output to.
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Gapic::Operation]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Gapic::Operation]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            def export_iam_policy_analysis request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::ExportIamPolicyAnalysisRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.export_iam_policy_analysis.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::Asset::V1::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {
-                "analysis_query.scope" => request.analysis_query.scope
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.export_iam_policy_analysis.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.export_iam_policy_analysis.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @asset_service_stub.call_rpc :export_iam_policy_analysis, request, options: options do |response, operation|
-                response = ::Gapic::Operation.new response, @operations_client, options: options
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
             # Configuration class for the AssetService API.
             #
             # This class represents the configuration for AssetService,
@@ -1389,16 +1209,6 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :search_all_iam_policies
-                ##
-                # RPC-specific configuration for `analyze_iam_policy`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :analyze_iam_policy
-                ##
-                # RPC-specific configuration for `export_iam_policy_analysis`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :export_iam_policy_analysis
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1420,10 +1230,6 @@ module Google
                   @search_all_resources = ::Gapic::Config::Method.new search_all_resources_config
                   search_all_iam_policies_config = parent_rpcs&.search_all_iam_policies if parent_rpcs&.respond_to? :search_all_iam_policies
                   @search_all_iam_policies = ::Gapic::Config::Method.new search_all_iam_policies_config
-                  analyze_iam_policy_config = parent_rpcs&.analyze_iam_policy if parent_rpcs&.respond_to? :analyze_iam_policy
-                  @analyze_iam_policy = ::Gapic::Config::Method.new analyze_iam_policy_config
-                  export_iam_policy_analysis_config = parent_rpcs&.export_iam_policy_analysis if parent_rpcs&.respond_to? :export_iam_policy_analysis
-                  @export_iam_policy_analysis = ::Gapic::Config::Method.new export_iam_policy_analysis_config
 
                   yield self if block_given?
                 end
