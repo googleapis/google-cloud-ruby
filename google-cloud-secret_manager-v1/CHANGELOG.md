@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2020-09-10
+
+#### Features
+
+* Support for replication status and customer-managed encryption
+
 ### 0.4.5 / 2020-08-10
 
 #### Bug Fixes
