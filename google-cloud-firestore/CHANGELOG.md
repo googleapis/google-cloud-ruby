@@ -1,5 +1,11 @@
 # Release History
 
+### 2.1.0 / 2020-09-10
+
+#### Features
+
+* Add Query#limit_to_last
+
 ### 2.0.0 / 2020-08-06
 
 This is a major update that removes the "low-level" client interface code, and
