@@ -83,6 +83,9 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::SecretManager::V1::SecretVersion::State]
         #     Output only. The current state of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+        # @!attribute [rw] replication_status
+        #   @return [::Google::Cloud::SecretManager::V1::ReplicationStatus]
+        #     The replication status of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
         class SecretVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -106,7 +109,7 @@ module Google
           end
         end
 
-        # A policy that defines the replication configuration of data.
+        # A policy that defines the replication and encryption configuration of data.
         # @!attribute [rw] automatic
         #   @return [::Google::Cloud::SecretManager::V1::Replication::Automatic]
         #     The {::Google::Cloud::SecretManager::V1::Secret Secret} will automatically be replicated without any restrictions.
@@ -119,6 +122,14 @@ module Google
 
           # A replication policy that replicates the {::Google::Cloud::SecretManager::V1::Secret Secret} payload without any
           # restrictions.
+          # @!attribute [rw] customer_managed_encryption
+          #   @return [::Google::Cloud::SecretManager::V1::CustomerManagedEncryption]
+          #     Optional. The customer-managed encryption configuration of the {::Google::Cloud::SecretManager::V1::Secret Secret}. If no
+          #     configuration is provided, Google-managed default encryption is used.
+          #
+          #     Updates to the {::Google::Cloud::SecretManager::V1::Secret Secret} encryption configuration only apply to
+          #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions} added afterwards. They do not apply
+          #     retroactively to existing {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions}.
           class Automatic
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -140,11 +151,111 @@ module Google
             #   @return [::String]
             #     The canonical IDs of the location to replicate data.
             #     For example: `"us-east1"`.
+            # @!attribute [rw] customer_managed_encryption
+            #   @return [::Google::Cloud::SecretManager::V1::CustomerManagedEncryption]
+            #     Optional. The customer-managed encryption configuration of the [User-Managed
+            #     Replica][Replication.UserManaged.Replica]. If no configuration is
+            #     provided, Google-managed default encryption is used.
+            #
+            #     Updates to the {::Google::Cloud::SecretManager::V1::Secret Secret} encryption configuration only apply to
+            #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions} added afterwards. They do not apply
+            #     retroactively to existing {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions}.
             class Replica
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
+        end
+
+        # Configuration for encrypting secret payloads using customer-managed
+        # encryption keys (CMEK).
+        # @!attribute [rw] kms_key_name
+        #   @return [::String]
+        #     Required. The resource name of the Cloud KMS CryptoKey used to encrypt secret
+        #     payloads.
+        #
+        #     For secrets using the {::Google::Cloud::SecretManager::V1::Replication::UserManaged UserManaged} replication
+        #     policy type, Cloud KMS CryptoKeys must reside in the same location as the
+        #     [replica location][Secret.UserManaged.Replica.location].
+        #
+        #     For secrets using the {::Google::Cloud::SecretManager::V1::Replication::Automatic Automatic} replication policy
+        #     type, Cloud KMS CryptoKeys must reside in `global`.
+        #
+        #     The expected format is `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+        class CustomerManagedEncryption
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The replication status of a {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+        # @!attribute [rw] automatic
+        #   @return [::Google::Cloud::SecretManager::V1::ReplicationStatus::AutomaticStatus]
+        #     Describes the replication status of a {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} with
+        #     automatic replication.
+        #
+        #     Only populated if the parent {::Google::Cloud::SecretManager::V1::Secret Secret} has an automatic replication
+        #     policy.
+        # @!attribute [rw] user_managed
+        #   @return [::Google::Cloud::SecretManager::V1::ReplicationStatus::UserManagedStatus]
+        #     Describes the replication status of a {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} with
+        #     user-managed replication.
+        #
+        #     Only populated if the parent {::Google::Cloud::SecretManager::V1::Secret Secret} has a user-managed replication
+        #     policy.
+        class ReplicationStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The replication status of a {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} using automatic replication.
+          #
+          # Only populated if the parent {::Google::Cloud::SecretManager::V1::Secret Secret} has an automatic replication
+          # policy.
+          # @!attribute [r] customer_managed_encryption
+          #   @return [::Google::Cloud::SecretManager::V1::CustomerManagedEncryptionStatus]
+          #     Output only. The customer-managed encryption status of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}. Only
+          #     populated if customer-managed encryption is used.
+          class AutomaticStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The replication status of a {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} using user-managed
+          # replication.
+          #
+          # Only populated if the parent {::Google::Cloud::SecretManager::V1::Secret Secret} has a user-managed replication
+          # policy.
+          # @!attribute [r] replicas
+          #   @return [::Array<::Google::Cloud::SecretManager::V1::ReplicationStatus::UserManagedStatus::ReplicaStatus>]
+          #     Output only. The list of replica statuses for the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+          class UserManagedStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Describes the status of a user-managed replica for the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+            # @!attribute [r] location
+            #   @return [::String]
+            #     Output only. The canonical ID of the replica location.
+            #     For example: `"us-east1"`.
+            # @!attribute [r] customer_managed_encryption
+            #   @return [::Google::Cloud::SecretManager::V1::CustomerManagedEncryptionStatus]
+            #     Output only. The customer-managed encryption status of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}. Only
+            #     populated if customer-managed encryption is used.
+            class ReplicaStatus
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+        end
+
+        # Describes the status of customer-managed encryption.
+        # @!attribute [rw] kms_key_version_name
+        #   @return [::String]
+        #     Required. The resource name of the Cloud KMS CryptoKeyVersion used to encrypt the
+        #     secret payload, in the following format:
+        #     `projects/*/locations/*/keyRings/*/cryptoKeys/*/versions/*`.
+        class CustomerManagedEncryptionStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A secret payload resource in the Secret Manager API. This contains the
