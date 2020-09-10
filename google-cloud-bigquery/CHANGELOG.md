@@ -1,5 +1,16 @@
 # Release History
 
+### 1.22.0 / 2020-09-10
+
+#### Features
+
+* Add support for ML model export
+  * Add model support to Project#extract and #extract_job
+  * Add ExtractJob#model?
+  * Add ExtractJob#ml_tf_saved_model?
+  * Add ExtractJob#ml_xgboost_booster?
+  * Add Model#extract and #extract_job
+
 ### 1.21.2 / 2020-07-21
 
 #### Documentation
