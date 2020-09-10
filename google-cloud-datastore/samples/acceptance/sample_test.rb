@@ -219,7 +219,11 @@ describe "Datastore sample" do
     tasks = datastore.run query
 
     refute tasks.empty?
-    tasks.each { |t| assert_basic_task t }
+    tasks.each do |t|
+      assert_equal "Task", t.key.kind
+      assert_equal false, t["done"]
+      assert_equal 4, t["priority"]
+    end
   end
 
   it "supports key_filter" do
@@ -227,7 +231,9 @@ describe "Datastore sample" do
     tasks = datastore.run query
 
     refute tasks.empty?
-    tasks.each { |t| assert_basic_task t }
+    tasks.each do |t|
+      assert_equal "Task", t.key.kind
+    end
   end
 
   it "supports ascending_sort" do
