@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.3 / 2020-09-10
+
+#### Documentation
+
+* Expand descriptions of a number of fields, particulary parent resources
+
 ### 0.4.2 / 2020-08-10
 
 #### Bug Fixes
