@@ -108,26 +108,6 @@ module Google
             rpc :UpdateBuildTrigger, Google::Cloud::Build::V1::UpdateBuildTriggerRequest, Google::Cloud::Build::V1::BuildTrigger
             # Runs a `BuildTrigger` at a particular source revision.
             rpc :RunBuildTrigger, Google::Cloud::Build::V1::RunBuildTriggerRequest, Google::Longrunning::Operation
-            # Creates a `WorkerPool` to run the builds, and returns the new worker pool.
-            #
-            # This API is experimental.
-            rpc :CreateWorkerPool, Google::Cloud::Build::V1::CreateWorkerPoolRequest, Google::Cloud::Build::V1::WorkerPool
-            # Returns information about a `WorkerPool`.
-            #
-            # This API is experimental.
-            rpc :GetWorkerPool, Google::Cloud::Build::V1::GetWorkerPoolRequest, Google::Cloud::Build::V1::WorkerPool
-            # Deletes a `WorkerPool` by its project ID and WorkerPool name.
-            #
-            # This API is experimental.
-            rpc :DeleteWorkerPool, Google::Cloud::Build::V1::DeleteWorkerPoolRequest, Google::Protobuf::Empty
-            # Update a `WorkerPool`.
-            #
-            # This API is experimental.
-            rpc :UpdateWorkerPool, Google::Cloud::Build::V1::UpdateWorkerPoolRequest, Google::Cloud::Build::V1::WorkerPool
-            # List project's `WorkerPools`.
-            #
-            # This API is experimental.
-            rpc :ListWorkerPools, Google::Cloud::Build::V1::ListWorkerPoolsRequest, Google::Cloud::Build::V1::ListWorkerPoolsResponse
           end
 
           Stub = Service.rpc_stub_class
