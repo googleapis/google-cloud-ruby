@@ -31,26 +31,7 @@ end
 # Acceptance tests
 desc "Run the datastore acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
-  project = args[:project]
-  project ||= ENV["DATASTORE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
-  keyfile = args[:keyfile]
-  keyfile ||= ENV["DATASTORE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
-  if keyfile
-    keyfile = File.read keyfile
-  else
-    keyfile ||= ENV["DATASTORE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
-  end
-  if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or DATASTORE_TEST_PROJECT=test123 DATASTORE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
-  end
-  # clear any env var already set
-  require "google/cloud/datastore/credentials"
-  Google::Cloud::Datastore::Credentials.env_vars.each do |path|
-    ENV[path] = nil
-  end
-  # always overwrite when running tests
-  ENV["DATASTORE_PROJECT"] = project
-  ENV["DATASTORE_KEYFILE_JSON"] = keyfile
+  set_env_vars project: args[:project], keyfile: args[:keyfile]
 
   Rake::Task["acceptance:run"].invoke
 end
@@ -69,7 +50,26 @@ namespace :acceptance do
   end
 
   desc "Run acceptance cleanup."
-  task :cleanup do
+  task :cleanup, :project, :keyfile do |t, args|
+    set_env_vars project: args[:project], keyfile: args[:keyfile]
+
+    $LOAD_PATH.unshift "lib"
+    require "google/cloud/datastore"
+
+    kinds = %w(Character Company NeverUsedBeforeTask Person Post)
+    puts "cleanup: start"
+    datastore = Google::Cloud::Datastore.new
+
+    kinds.each do |kind|
+      query = Google::Cloud::Datastore::Query.new.kind(kind).select("__key__")
+      loop do
+        keys = datastore.run(query).map(&:key)
+        puts "deleting #{kind} entities: #{keys.count}"
+        break if keys.empty?
+        datastore.delete keys
+      end
+    end
+    puts "cleanup: done"
   end
 
   Rake::TestTask.new :run do |t|
@@ -168,4 +168,25 @@ def header str, token = "#"
   puts "#{token * 3} #{str} #{token * 3}"
   puts token * line_length
   puts ""
+end
+
+def set_env_vars project: nil, keyfile: nil
+  project ||= ENV["DATASTORE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+  keyfile ||= ENV["DATASTORE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["DATASTORE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or DATASTORE_TEST_PROJECT=test123 DATASTORE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # clear any env var already set
+  require "google/cloud/datastore/credentials"
+  Google::Cloud::Datastore::Credentials.env_vars.each do |path|
+    ENV[path] = nil
+  end
+  # always overwrite when running tests
+  ENV["DATASTORE_PROJECT"] = project
+  ENV["DATASTORE_KEYFILE_JSON"] = keyfile
 end
