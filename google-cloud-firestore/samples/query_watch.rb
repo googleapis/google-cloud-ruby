@@ -20,17 +20,14 @@ def listen_document project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_listen_document]
-
-  # Create an Event for notifying main thread.
-  require "concurrent"
-  event = Concurrent::Event.new
-
   doc_ref = firestore.col(collection_path).doc "SF"
+  snapshots = []
 
   # Watch the document.
   listener = doc_ref.listen do |snapshot|
+    # Process the snapshot.
     puts "Received document snapshot: #{snapshot.document_id}"
-    event.set
+    snapshots << snapshot
   end
   # [END fs_listen_document]
 
@@ -43,7 +40,7 @@ def listen_document project_id:, collection_path: "cities"
     population: 860_000
   )
   # Wait for the callback.
-  event.wait 60
+  wait_until { snapshots.count == 1 }
 
   # [START fs_detach_listener]
   listener.stop
@@ -56,25 +53,22 @@ def listen_changes project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_listen_changes]
-
-  # Create an Event for notifying main thread.
-  require "concurrent"
-  event = Concurrent::Event.new
-
   query = firestore.col(collection_path).where :state, :==, "CA"
+  snapshots = []
 
   # Watch the collection query.
   listener = query.listen do |snapshot|
     puts "Callback received query snapshot."
     puts "Current cities in California:"
     snapshot.changes.each do |change|
+      # Process the snapshot.
       if change.added?
         puts "New city: #{change.doc.document_id}"
       elsif change.modified?
         puts "Modified city: #{change.doc.document_id}"
       elsif change.removed?
         puts "Removed city: #{change.doc.document_id}"
-        event.set
+        snapshots << snapshot
       end
     end
   end
@@ -108,7 +102,7 @@ def listen_changes project_id:, collection_path: "cities"
   mtv_doc.delete exists: true
 
   # Wait for the callback that captures the deletion.
-  event.wait 60
+  wait_until { snapshots.count == 1 }
   listener.stop
 end
 
@@ -118,20 +112,17 @@ def listen_multiple project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_listen_multiple]
-
-  # Create an Event for notifying main thread.
-  require "concurrent"
-  event = Concurrent::Event.new
-
   query = firestore.col(collection_path).where :state, :==, "CA"
+  snapshots = []
 
   # Watch the collection query.
   listener = query.listen do |snapshot|
     puts "Callback received query snapshot."
     puts "Current cities in California:"
     snapshot.docs.each do |doc|
+      # Process the snapshot.
       puts doc.document_id
-      event.set
+      snapshots << snapshot
     end
   end
   # [END fs_listen_multiple]
@@ -145,8 +136,17 @@ def listen_multiple project_id:, collection_path: "cities"
     population: 860_000
   )
   # Wait for the callback.
-  event.wait 60
+  wait_until { snapshots.count == 1 }
   listener.stop
+end
+
+def wait_until &block
+  wait_count = 0
+  until block.call
+    raise "wait_until criterial was not met" if wait_count > 200
+    wait_count += 1
+    sleep 0.1
+  end
 end
 
 if $PROGRAM_NAME == __FILE__
