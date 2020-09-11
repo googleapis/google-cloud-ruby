@@ -14,6 +14,7 @@
 
 require "minitest/autorun"
 require "minitest/focus"
+require "securerandom"
 
 require "google/cloud/datastore/admin/v1"
 
@@ -21,11 +22,11 @@ def storage_bucket_name
   ENV["GOOGLE_CLOUD_STORAGE_BUCKET"] || "ruby-samples-test"
 end
 
-def storage_file_prefix
-  "datastore-admin-v1"
+def random_storage_file_prefix
+  "datastore-admin-v1-#{SecureRandom.hex 4}"
 end
 
 # Returns URL to sample image in the fixtures storage bucket
-def storage_url
-  "gs://#{storage_bucket_name}/#{storage_file_prefix}"
+def storage_url prefix: "datastore-admin-v1"
+  "gs://#{storage_bucket_name}/#{prefix}"
 end

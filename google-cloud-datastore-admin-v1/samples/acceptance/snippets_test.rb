@@ -17,6 +17,8 @@ require_relative "../snippets"
 
 describe "Firestore in Datastore mode Admin V1 samples" do
   let(:project_id) { ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT") }
+  let(:storage_file_prefix) { random_storage_file_prefix }
+  let(:output_url_prefix) { storage_url prefix: storage_file_prefix }
 
   it "client_create" do
     client = client_create
@@ -46,12 +48,12 @@ describe "Firestore in Datastore mode Admin V1 samples" do
     begin
       op = nil
       out, _err = capture_io do
-        op = entities_export project_id: project_id, output_url_prefix: storage_url
+        op = entities_export project_id: project_id, output_url_prefix: output_url_prefix
       end
       assert_includes out, "Entities were exported"
       assert op
       assert op.response
-      assert_equal "#{storage_url}/#{storage_file_prefix}.overall_export_metadata", op.response.output_url
+      assert_equal "#{output_url_prefix}/#{storage_file_prefix}.overall_export_metadata", op.response.output_url
 
       out, _err = capture_io do
         entities_import project_id: project_id, input_url: op.response.output_url
