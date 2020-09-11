@@ -11,8 +11,8 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "3257ba52160dd8a9c7f83c34d13793de843bdb4a",
-        "internalRef": "330974505"
+        "sha": "bc18612d35891d88bcac57c85d79db93f4f29028",
+        "internalRef": "331027363"
       }
     }
   ],
@@ -45,6 +45,7 @@
     "lib/google/cloud/build/v1/cloud_build/client.rb",
     "lib/google/cloud/build/v1/cloud_build/credentials.rb",
     "lib/google/cloud/build/v1/cloud_build/operations.rb",
+    "lib/google/cloud/build/v1/cloud_build/paths.rb",
     "lib/google/cloud/build/v1/version.rb",
     "lib/google/devtools/cloudbuild/v1/cloudbuild_pb.rb",
     "lib/google/devtools/cloudbuild/v1/cloudbuild_services_pb.rb",
@@ -56,9 +57,11 @@
     "proto_docs/google/protobuf/any.rb",
     "proto_docs/google/protobuf/duration.rb",
     "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
     "test/google/cloud/build/v1/cloud_build_operations_test.rb",
+    "test/google/cloud/build/v1/cloud_build_paths_test.rb",
     "test/google/cloud/build/v1/cloud_build_test.rb",
     "test/helper.rb"
   ]

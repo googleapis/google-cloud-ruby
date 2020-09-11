@@ -6,13 +6,16 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
+require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/devtools/cloudbuild/v1/cloudbuild.proto", :syntax => :proto3) do
     add_message "google.devtools.cloudbuild.v1.RetryBuildRequest" do
+      optional :name, :string, 3
       optional :project_id, :string, 1
       optional :id, :string, 2
     end
@@ -81,6 +84,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :file_hash, :message, 2, "google.devtools.cloudbuild.v1.FileHashes"
     end
     add_message "google.devtools.cloudbuild.v1.Build" do
+      optional :name, :string, 45
       optional :id, :string, 1
       optional :project_id, :string, 16
       optional :status, :enum, 2, "google.devtools.cloudbuild.v1.Build.Status"
@@ -104,6 +108,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :tags, :string, 31
       repeated :secrets, :message, 32, "google.devtools.cloudbuild.v1.Secret"
       map :timing, :string, :message, 33, "google.devtools.cloudbuild.v1.TimeSpan"
+      optional :service_account, :string, 42
     end
     add_enum "google.devtools.cloudbuild.v1.Build.Status" do
       value :STATUS_UNKNOWN, 0
@@ -154,14 +159,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :secret_env, :string, :bytes, 3
     end
     add_message "google.devtools.cloudbuild.v1.CreateBuildRequest" do
+      optional :parent, :string, 4
       optional :project_id, :string, 1
       optional :build, :message, 2, "google.devtools.cloudbuild.v1.Build"
     end
     add_message "google.devtools.cloudbuild.v1.GetBuildRequest" do
+      optional :name, :string, 4
       optional :project_id, :string, 1
       optional :id, :string, 2
     end
     add_message "google.devtools.cloudbuild.v1.ListBuildsRequest" do
+      optional :parent, :string, 9
       optional :project_id, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
@@ -172,6 +180,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :next_page_token, :string, 2
     end
     add_message "google.devtools.cloudbuild.v1.CancelBuildRequest" do
+      optional :name, :string, 4
       optional :project_id, :string, 1
       optional :id, :string, 2
     end
@@ -251,6 +260,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :machine_type, :enum, 3, "google.devtools.cloudbuild.v1.BuildOptions.MachineType"
       optional :disk_size_gb, :int64, 6
       optional :substitution_option, :enum, 4, "google.devtools.cloudbuild.v1.BuildOptions.SubstitutionOption"
+      optional :dynamic_substitutions, :bool, 17
       optional :log_streaming_option, :enum, 5, "google.devtools.cloudbuild.v1.BuildOptions.LogStreamingOption"
       optional :worker_pool, :string, 7
       optional :logging, :enum, 11, "google.devtools.cloudbuild.v1.BuildOptions.LoggingMode"
@@ -280,6 +290,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :LOGGING_UNSPECIFIED, 0
       value :LEGACY, 1
       value :GCS_ONLY, 2
+      value :STACKDRIVER_ONLY, 3
+      value :CLOUD_LOGGING_ONLY, 5
+      value :NONE, 4
     end
     add_message "google.devtools.cloudbuild.v1.WorkerPool" do
       optional :name, :string, 14
