@@ -43,11 +43,38 @@ module Google
         #     pc.set_oidc_token "user@example.net", "client-67890"
         #   end
         #
+        # @example Create a push subscription by passing a push config:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #   topic = pubsub.topic "my-topic"
+        #
+        #   push_config = Google::Cloud::PubSub::Subscription::PushConfig.new
+        #   push_config.endpoint = "http://example.net/callback"
+        #   push_config.set_oidc_token(
+        #     "service-account@example.net", "audience-header-value"
+        #   )
+        #   sub = topic.subscribe "my-subscription", push_config: push_config
+        #
         class PushConfig
           ##
-          # @private
-          def initialize
+          # Creates an empty configuration for a push subscription.
+          # @param [String] endpoint URL to where the subscription will push data to.
+          # @param [String] auth_email The GCP service account email associated with the push subscription.
+          #  Push requests carry the identity of this service account.
+          # @param [String] auth_audience A single, case-insensitive string that can be used by
+          #  the webhook to validate the intended audience of this particular token.
+          # @return [PushConfig]
+          def initialize endpoint: nil, auth_email: nil, auth_audience: nil
             @grpc = Google::Cloud::PubSub::V1::PushConfig.new
+
+            self.endpoint = endpoint unless endpoint.nil?
+
+            if auth_audience && !auth_email
+              raise ArgumentError, "auth_audience provided without auth_email. Authentication is invalid"
+            end
+
+            set_oidc_token auth_email, auth_audience if auth_email
           end
 
           ##

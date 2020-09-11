@@ -482,6 +482,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Subscription::PushConfig" do
     mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_subscriber.expect :create_subscription, subscription_resp, [Hash]
       mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
     end
   end
@@ -491,6 +493,8 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :update_subscription, subscription_resp, [Hash]
     end
   end
+
+
 
   ##
   # Subscription::List
