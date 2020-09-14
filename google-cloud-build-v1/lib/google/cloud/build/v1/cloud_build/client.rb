@@ -37,6 +37,8 @@ module Google
           # determine the status of the build.
           #
           class Client
+            include Paths
+
             # @private
             attr_reader :cloud_build_stub
 
@@ -252,11 +254,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_build(project_id: nil, build: nil)
+            # @overload create_build(parent: nil, project_id: nil, build: nil)
             #   Pass arguments to `create_build` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param parent [::String]
+            #     The parent resource where this build will be created.
+            #     Format: `projects/{project}/locations/{location}`
             #   @param project_id [::String]
             #     Required. ID of the project.
             #   @param build [::Google::Cloud::Build::V1::Build, ::Hash]
@@ -324,11 +329,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload get_build(project_id: nil, id: nil)
+            # @overload get_build(name: nil, project_id: nil, id: nil)
             #   Pass arguments to `get_build` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param name [::String]
+            #     The name of the `Build` to retrieve.
+            #     Format: `projects/{project}/locations/{location}/builds/{build}`
             #   @param project_id [::String]
             #     Required. ID of the project.
             #   @param id [::String]
@@ -396,11 +404,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_builds(project_id: nil, page_size: nil, page_token: nil, filter: nil)
+            # @overload list_builds(parent: nil, project_id: nil, page_size: nil, page_token: nil, filter: nil)
             #   Pass arguments to `list_builds` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param parent [::String]
+            #     The parent of the collection of `Builds`.
+            #     Format: `projects/{project}/locations/location`
             #   @param project_id [::String]
             #     Required. ID of the project.
             #   @param page_size [::Integer]
@@ -469,11 +480,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload cancel_build(project_id: nil, id: nil)
+            # @overload cancel_build(name: nil, project_id: nil, id: nil)
             #   Pass arguments to `cancel_build` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param name [::String]
+            #     The name of the `Build` to retrieve.
+            #     Format: `projects/{project}/locations/{location}/builds/{build}`
             #   @param project_id [::String]
             #     Required. ID of the project.
             #   @param id [::String]
@@ -564,11 +578,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload retry_build(project_id: nil, id: nil)
+            # @overload retry_build(name: nil, project_id: nil, id: nil)
             #   Pass arguments to `retry_build` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param name [::String]
+            #     The name of the `Build` to retry.
+            #     Format: `projects/{project}/locations/{location}/builds/{build}`
             #   @param project_id [::String]
             #     Required. ID of the project.
             #   @param id [::String]

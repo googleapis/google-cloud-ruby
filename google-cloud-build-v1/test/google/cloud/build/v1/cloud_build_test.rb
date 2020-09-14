@@ -55,12 +55,14 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    parent = "hello world"
     project_id = "hello world"
     build = {}
 
     create_build_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_build, name
       assert_kind_of ::Google::Cloud::Build::V1::CreateBuildRequest, request
+      assert_equal "hello world", request.parent
       assert_equal "hello world", request.project_id
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::Build), request.build
       refute_nil options
@@ -73,35 +75,35 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.create_build({ project_id: project_id, build: build }) do |response, operation|
+      client.create_build({ parent: parent, project_id: project_id, build: build }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_build project_id: project_id, build: build do |response, operation|
+      client.create_build parent: parent, project_id: project_id, build: build do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_build ::Google::Cloud::Build::V1::CreateBuildRequest.new(project_id: project_id, build: build) do |response, operation|
+      client.create_build ::Google::Cloud::Build::V1::CreateBuildRequest.new(parent: parent, project_id: project_id, build: build) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_build({ project_id: project_id, build: build }, grpc_options) do |response, operation|
+      client.create_build({ parent: parent, project_id: project_id, build: build }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_build ::Google::Cloud::Build::V1::CreateBuildRequest.new(project_id: project_id, build: build), grpc_options do |response, operation|
+      client.create_build ::Google::Cloud::Build::V1::CreateBuildRequest.new(parent: parent, project_id: project_id, build: build), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -120,12 +122,14 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    name = "hello world"
     project_id = "hello world"
     id = "hello world"
 
     get_build_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_build, name
       assert_kind_of ::Google::Cloud::Build::V1::GetBuildRequest, request
+      assert_equal "hello world", request.name
       assert_equal "hello world", request.project_id
       assert_equal "hello world", request.id
       refute_nil options
@@ -138,31 +142,31 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get_build({ project_id: project_id, id: id }) do |response, operation|
+      client.get_build({ name: name, project_id: project_id, id: id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_build project_id: project_id, id: id do |response, operation|
+      client.get_build name: name, project_id: project_id, id: id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_build ::Google::Cloud::Build::V1::GetBuildRequest.new(project_id: project_id, id: id) do |response, operation|
+      client.get_build ::Google::Cloud::Build::V1::GetBuildRequest.new(name: name, project_id: project_id, id: id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_build({ project_id: project_id, id: id }, grpc_options) do |response, operation|
+      client.get_build({ name: name, project_id: project_id, id: id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_build ::Google::Cloud::Build::V1::GetBuildRequest.new(project_id: project_id, id: id), grpc_options do |response, operation|
+      client.get_build ::Google::Cloud::Build::V1::GetBuildRequest.new(name: name, project_id: project_id, id: id), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -180,6 +184,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    parent = "hello world"
     project_id = "hello world"
     page_size = 42
     page_token = "hello world"
@@ -188,6 +193,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     list_builds_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_builds, name
       assert_kind_of ::Google::Cloud::Build::V1::ListBuildsRequest, request
+      assert_equal "hello world", request.parent
       assert_equal "hello world", request.project_id
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
@@ -202,35 +208,35 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_builds({ project_id: project_id, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      client.list_builds({ parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_builds project_id: project_id, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      client.list_builds parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_builds ::Google::Cloud::Build::V1::ListBuildsRequest.new(project_id: project_id, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      client.list_builds ::Google::Cloud::Build::V1::ListBuildsRequest.new(parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_builds({ project_id: project_id, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      client.list_builds({ parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_builds ::Google::Cloud::Build::V1::ListBuildsRequest.new(project_id: project_id, page_size: page_size, page_token: page_token, filter: filter), grpc_options do |response, operation|
+      client.list_builds ::Google::Cloud::Build::V1::ListBuildsRequest.new(parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -249,12 +255,14 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    name = "hello world"
     project_id = "hello world"
     id = "hello world"
 
     cancel_build_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :cancel_build, name
       assert_kind_of ::Google::Cloud::Build::V1::CancelBuildRequest, request
+      assert_equal "hello world", request.name
       assert_equal "hello world", request.project_id
       assert_equal "hello world", request.id
       refute_nil options
@@ -267,31 +275,31 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.cancel_build({ project_id: project_id, id: id }) do |response, operation|
+      client.cancel_build({ name: name, project_id: project_id, id: id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_build project_id: project_id, id: id do |response, operation|
+      client.cancel_build name: name, project_id: project_id, id: id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_build ::Google::Cloud::Build::V1::CancelBuildRequest.new(project_id: project_id, id: id) do |response, operation|
+      client.cancel_build ::Google::Cloud::Build::V1::CancelBuildRequest.new(name: name, project_id: project_id, id: id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_build({ project_id: project_id, id: id }, grpc_options) do |response, operation|
+      client.cancel_build({ name: name, project_id: project_id, id: id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_build ::Google::Cloud::Build::V1::CancelBuildRequest.new(project_id: project_id, id: id), grpc_options do |response, operation|
+      client.cancel_build ::Google::Cloud::Build::V1::CancelBuildRequest.new(name: name, project_id: project_id, id: id), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -309,12 +317,14 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    name = "hello world"
     project_id = "hello world"
     id = "hello world"
 
     retry_build_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :retry_build, name
       assert_kind_of ::Google::Cloud::Build::V1::RetryBuildRequest, request
+      assert_equal "hello world", request.name
       assert_equal "hello world", request.project_id
       assert_equal "hello world", request.id
       refute_nil options
@@ -327,35 +337,35 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.retry_build({ project_id: project_id, id: id }) do |response, operation|
+      client.retry_build({ name: name, project_id: project_id, id: id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.retry_build project_id: project_id, id: id do |response, operation|
+      client.retry_build name: name, project_id: project_id, id: id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.retry_build ::Google::Cloud::Build::V1::RetryBuildRequest.new(project_id: project_id, id: id) do |response, operation|
+      client.retry_build ::Google::Cloud::Build::V1::RetryBuildRequest.new(name: name, project_id: project_id, id: id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.retry_build({ project_id: project_id, id: id }, grpc_options) do |response, operation|
+      client.retry_build({ name: name, project_id: project_id, id: id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.retry_build ::Google::Cloud::Build::V1::RetryBuildRequest.new(project_id: project_id, id: id), grpc_options do |response, operation|
+      client.retry_build ::Google::Cloud::Build::V1::RetryBuildRequest.new(name: name, project_id: project_id, id: id), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
