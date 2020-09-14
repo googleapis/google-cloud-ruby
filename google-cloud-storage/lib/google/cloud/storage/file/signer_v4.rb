@@ -273,7 +273,7 @@ module Google
           # Only the characters in the regex set [A-Za-z0-9.~_-] must be left un-escaped; all others must be
           # percent-encoded using %XX UTF-8 style.
           def escape_query_param str
-            CGI.escape(str.to_s).gsub("%7E", "~")
+            CGI.escape(str.to_s).gsub("%7E", "~").gsub("+", "%20")
           end
 
           def host_name virtual_hosted_style, bucket_bound_hostname

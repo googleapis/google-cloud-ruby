@@ -202,7 +202,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
       signing_key_mock = Minitest::Mock.new
       signing_key_mock.expect :is_a?, false, [Proc]
-      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\n0a72e261a6f1877de0d1708ca26aba6f3116a12e569f564346b96dd96d2c9bd6"]
+      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\n3411dfa972b175ec287a97876a29c2652f633698eba7e4e6930b197812131ba3"]
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
 
