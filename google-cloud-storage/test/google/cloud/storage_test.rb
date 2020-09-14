@@ -100,7 +100,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         "storage-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_be :nil?
@@ -130,7 +130,7 @@ describe Google::Cloud do
 
   describe "Storage.anonymous" do
     it "uses provided options" do
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
         _(project).must_be :nil?
         _(credentials).must_be :nil?
         _(retries).must_equal 5
@@ -176,7 +176,7 @@ describe Google::Cloud do
     end
 
     it "uses provided endpoint" do
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal default_credentials
         _(retries).must_be :nil?
@@ -204,7 +204,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         "storage-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_be :nil?
@@ -237,7 +237,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         "storage-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_be :nil?
@@ -270,7 +270,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         OpenStruct.new project_id: "project-id"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_be_kind_of OpenStruct
         _(credentials.project_id).must_equal "project-id"
@@ -315,7 +315,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         "storage-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_be :nil?
@@ -354,7 +354,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         "storage-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_be :nil?
@@ -393,7 +393,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         "storage-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_equal 3
@@ -434,7 +434,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         "storage-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_equal 3
@@ -473,7 +473,7 @@ describe Google::Cloud do
         _(scope).must_be :nil?
         "storage-credentials"
       }
-      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_equal 3
@@ -491,6 +491,47 @@ describe Google::Cloud do
           config.retries = 3
           config.timeout = 42
           config.endpoint = "storage-endpoint2.example.com"
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Storage::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Storage::Service.stub :new, stubbed_service do
+                storage = Google::Cloud::Storage.new
+                _(storage).must_be_kind_of Google::Cloud::Storage::Project
+                _(storage.project).must_equal "project-id"
+                _(storage.service).must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses storage config for quota project" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        _(keyfile).must_equal "path/to/keyfile.json"
+        _(scope).must_be :nil?
+        "storage-credentials"
+      }
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "storage-credentials"
+        _(retries).must_equal 3
+        _(timeout).must_equal 42
+        _(quota_project).must_equal "project-id-2"
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Set new configuration
+        Google::Cloud::Storage.configure do |config|
+          config.project = "project-id"
+          config.keyfile = "path/to/keyfile.json"
+          config.retries = 3
+          config.timeout = 42
+          config.quota_project = "project-id-2"
         end
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
