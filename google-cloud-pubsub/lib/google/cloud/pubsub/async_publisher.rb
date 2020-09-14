@@ -42,7 +42,7 @@ module Google
       #     end
       #   end
       #
-      #   topic.async_publisher.stop.wait!
+      #   topic.async_publisher.stop!
       #
       # @attr_reader [String] topic_name The name of the topic the messages are published to. In the form of
       #   "/projects/project-identifier/topics/topic-name".

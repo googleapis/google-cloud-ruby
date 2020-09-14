@@ -35,7 +35,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
     _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
-    publisher.stop.wait!
+    publisher.stop!
 
     _(publisher).wont_be :started?
     _(publisher).must_be :stopped?
@@ -65,7 +65,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
     _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
-    publisher.stop.wait!
+    publisher.stop!
 
     _(publisher).wont_be :started?
     _(publisher).must_be :stopped?
@@ -97,7 +97,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
     _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
-    publisher.stop.wait!
+    publisher.stop!
 
     _(publisher).wont_be :started?
     _(publisher).must_be :stopped?
@@ -125,7 +125,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
     _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
-    publisher.stop.wait!
+    publisher.stop!
 
     _(publisher).wont_be :started?
     _(publisher).must_be :stopped?
@@ -153,7 +153,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
     _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
-    publisher.stop.wait!
+    publisher.stop!
 
     _(publisher).wont_be :started?
     _(publisher).must_be :stopped?

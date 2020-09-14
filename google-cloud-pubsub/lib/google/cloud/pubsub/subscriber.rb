@@ -41,7 +41,7 @@ module Google
       #   subscriber.start
       #
       #   # Shut down the subscriber when ready to stop receiving messages.
-      #   subscriber.stop.wait!
+      #   subscriber.stop!
       #
       # @attr_reader [String] subscription_name The name of the subscription the
       #   messages are pulled from.
@@ -240,7 +240,7 @@ module Google
         #   subscriber.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop.wait!
+        #   subscriber.stop!
         #
         def on_error &block
           synchronize do
@@ -276,7 +276,7 @@ module Google
         #   subscriber.last_error #=> nil
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop.wait!
+        #   subscriber.stop!
         #
         def last_error
           synchronize { @last_error }

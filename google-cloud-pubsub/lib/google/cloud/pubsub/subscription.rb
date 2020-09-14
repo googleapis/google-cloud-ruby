@@ -43,12 +43,19 @@ module Google
       #     received_message.acknowledge!
       #   end
       #
+      #   # Handle exceptions from listener
+      #   subscriber.on_error do |exception|
+      #      puts "Exception: #{exception.class} #{exception.message}"
+      #   end
+      #
+      #   # Gracefully shut down the subscriber
+      #   at_exit do
+      #     subscriber.stop!
+      #   end
+      #
       #   # Start background threads that will call the block passed to listen.
       #   subscriber.start
-      #
-      #   # Shut down the subscriber when ready to stop receiving messages.
-      #   subscriber.stop.wait!
-      #
+      #   sleep
       class Subscription
         ##
         # @private The Service object.
@@ -856,6 +863,7 @@ module Google
         #
         #   subscriber = sub.listen do |received_message|
         #     # process message
+        #     puts "Data: #{received_message.message.data}, published at #{received_message.message.published_at}"
         #     received_message.acknowledge!
         #   end
         #
@@ -863,7 +871,7 @@ module Google
         #   subscriber.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop.wait!
+        #   subscriber.stop!
         #
         # @example Configuring to increase concurrent callbacks:
         #   require "google/cloud/pubsub"
@@ -882,7 +890,7 @@ module Google
         #   subscriber.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop.wait!
+        #   subscriber.stop!
         #
         # @example Ordered messages are supported using ordering_key:
         #   require "google/cloud/pubsub"
@@ -902,7 +910,7 @@ module Google
         #   subscriber.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop.wait!
+        #   subscriber.stop!
         #
         # @example Set the maximum amount of time before redelivery if the subscriber fails to extend the deadline:
         #   require "google/cloud/pubsub"
@@ -921,7 +929,7 @@ module Google
         #   subscriber.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop.wait!
+        #   subscriber.stop!
         #
         def listen deadline: nil, message_ordering: nil, streams: nil, inventory: nil, threads: {}, &block
           ensure_service!

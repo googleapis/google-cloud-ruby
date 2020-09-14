@@ -22,6 +22,10 @@ class File
   end
 end
 
+def sleep
+  "sleeping"
+end
+
 module Google
   module Cloud
     module PubSub

@@ -2,9 +2,9 @@
 
 [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) ([docs](https://cloud.google.com/pubsub/docs/reference/rest/)) is designed to provide reliable, many-to-many, asynchronous messaging between applications. Publisher applications can send messages to a “topic” and other applications can subscribe to that topic to receive the messages. By decoupling senders and receivers, Google Cloud Pub/Sub allows developers to communicate between independently written applications.
 
-- [google-cloud-pubsub API documentation](https://googleapis.dev/ruby/google-cloud-pubsub/latest)
+- Full set of examples and detailed docs in the [google-cloud-pubsub API documentation](https://googleapis.dev/ruby/google-cloud-pubsub/latest)
 - [google-cloud-pubsub on RubyGems](https://rubygems.org/gems/google-cloud-pubsub)
-- [Google Cloud Pub/Sub documentation](https://cloud.google.com/pubsub/docs)
+- [General Google Cloud Pub/Sub documentation](https://cloud.google.com/pubsub/docs)
 
 ## Quick Start
 
@@ -38,17 +38,32 @@ msg = topic.publish "new-message"
 sub = pubsub.subscription "my-topic-sub"
 
 # Create a subscriber to listen for available messages
+# By default, this block will be called on 8 concurrent threads.
+# This can be changed with the :threads option
 subscriber = sub.listen do |received_message|
   # process message
+  puts "Data: #{received_message.message.data}, published at #{received_message.message.published_at}"
   received_message.acknowledge!
+end
+
+# Handle exceptions from listener
+subscriber.on_error do |exception|
+  puts "Exception: #{exception.class} #{exception.message}"
+end
+
+# Gracefully shut down the subscriber on program exit, blocking until
+# all received messages have been processed or 10 seconds have passed
+at_exit do
+	subscriber.stop!(10)
 end
 
 # Start background threads that will call the block passed to listen.
 subscriber.start
 
-# Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop.wait!
+# Block, letting processing threads continue in the background
+sleep
 ```
+
 
 ## Enabling Logging
 

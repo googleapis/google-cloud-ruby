@@ -142,7 +142,7 @@ topic.publish_async "task completed" do |result|
   end
 end
 
-topic.async_publisher.stop.wait!
+topic.async_publisher.stop!
 ```
 
 Or multiple messages can be published in batches at the same time by passing a
@@ -174,16 +174,32 @@ pubsub = Google::Cloud::PubSub.new
 
 sub = pubsub.subscription "my-topic-sub"
 
-subscriber = sub.listen do |received_message|
+# Create a subscriber to listen for available messages.
+# By default, this block will be called on 8 concurrent threads
+# but this can be tuned with the `threads` option.
+# The `streams` and `inventory` parameters allow further tuning.
+subscriber = sub.listen threads: { callback: 16 } do |received_message|
   # process message
+  puts "Data: #{received_message.message.data}, published at #{received_message.message.published_at}"
   received_message.acknowledge!
+end
+
+# Handle exceptions from listener
+subscriber.on_error do |exception|
+  puts "Exception: #{exception.class} #{exception.message}"
+end
+
+# Gracefully shut down the subscriber on program exit, blocking until
+# all received messages have been processed or 10 seconds have passed
+at_exit do
+  subscriber.stop!(10)
 end
 
 # Start background threads that will call the block passed to listen.
 subscriber.start
 
-# Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop.wait!
+# Block, letting processing threads continue in the background
+sleep
 ```
 
 Messages also can be pulled directly in a one-time operation. (See
@@ -235,7 +251,7 @@ end
 subscriber.start
 
 # Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop.wait!
+subscriber.stop!
 ```
 
 Or, multiple messages can be acknowledged in a single API call: (See
@@ -277,7 +293,7 @@ end
 subscriber.start
 
 # Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop.wait!
+subscriber.stop!
 ```
 
 The message can also be made available for immediate redelivery:
@@ -299,7 +315,7 @@ end
 subscriber.start
 
 # Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop.wait!
+subscriber.stop!
 ```
 
 Multiple messages can be delayed or made available for immediate redelivery:
@@ -353,7 +369,7 @@ topic.publish_async "task completed",
                     ordering_key: "task-key"
 
 # Shut down the publisher when ready to stop publishing messages.
-topic.async_publisher.stop.wait!
+topic.async_publisher.stop!
 ```
 
 ### Handling errors with Ordered Keys
@@ -395,7 +411,7 @@ end
 subscriber.start
 
 # Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop.wait!
+subscriber.stop!
 ```
 
 ## Minimizing API calls before receiving and acknowledging messages
@@ -425,7 +441,7 @@ end
 subscriber.start
 
 # Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop.wait!
+subscriber.stop!
 ```
 
 Skipping API calls may be used to avoid `Google::Cloud::PermissionDeniedError`
@@ -462,54 +478,6 @@ received_messages = sub.pull
 sub.acknowledge received_messages
 
 sub.seek snapshot
-```
-
-## Listening for Messages
-
-A subscriber object can be created using `listen`, which streams messages from
-the backend and processes them as they are received. (See
-{Google::Cloud::PubSub::Subscription#listen Subscription#listen} and
-{Google::Cloud::PubSub::Subscriber Subscriber})
-
-```ruby
-require "google/cloud/pubsub"
-
-pubsub = Google::Cloud::PubSub.new
-
-sub = pubsub.subscription "my-topic-sub"
-
-subscriber = sub.listen do |received_message|
-  # process message
-  received_message.acknowledge!
-end
-
-# Start background threads that will call the block passed to listen.
-subscriber.start
-
-# Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop.wait!
-```
-
-The subscriber object can be configured to control the number of concurrent
-streams to open, the number of received messages to be collected, and the number
-of threads each stream opens for concurrent calls made to handle the received
-messages.
-
-```ruby
-require "google/cloud/pubsub"
-
-pubsub = Google::Cloud::PubSub.new
-
-sub = pubsub.subscription "my-topic-sub"
-
-subscriber = sub.listen threads: { callback: 16 } do |received_message|
-  # store the message somewhere before acknowledging
-  store_in_backend received_message.data # takes a few seconds
-  received_message.acknowledge!
-end
-
-# Start background threads that will call the block passed to listen.
-subscriber.start
 ```
 
 ## Working Across Projects
