@@ -10,7 +10,7 @@
 *                               @googleapis/yoshi-ruby
 
 /google-cloud-storage/          @googleapis/storage-dpe @googleapis/yoshi-ruby
-/google-cloud-bigtable/         @googleapis/bigtable-dpe @googleapis/yoshi-ruby
+/google-cloud-bigtable/         @googleapis/api-bigtable @googleapis/yoshi-ruby
 /google-cloud-firestore/        @googleapis/firestore-dpe @googleapis/yoshi-ruby
 /google-cloud-datastore/        @googleapis/firestore-dpe @googleapis/yoshi-ruby
 /google-cloud-bigquery*/.       @googleapis/api-bigquery @googleapis/yoshi-ruby
