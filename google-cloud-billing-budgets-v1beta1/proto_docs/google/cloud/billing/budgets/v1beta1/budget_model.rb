@@ -124,8 +124,8 @@ module Google
           # and thresholds.
           # @!attribute [rw] pubsub_topic
           #   @return [::String]
-          #     Required. The name of the Cloud Pub/Sub topic where budget related messages
-          #     will be published, in the form `projects/{project_id}/topics/{topic_id}`.
+          #     Optional. The name of the Pub/Sub topic where budget related messages will
+          #     be published, in the form `projects/{project_id}/topics/{topic_id}`.
           #     Updates are sent at regular intervals to the topic. The topic needs to be
           #     created before the budget is created; see
           #     https://cloud.google.com/billing/docs/how-to/budgets#manage-notifications
@@ -133,21 +133,28 @@ module Google
           #     Caller is expected to have
           #     `pubsub.topics.setIamPolicy` permission on the topic when it's set for a
           #     budget, otherwise, the API call will fail with PERMISSION_DENIED. See
-          #     https://cloud.google.com/pubsub/docs/access-control for more details on
-          #     Pub/Sub roles and permissions.
+          #     https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications
+          #     for more details on Pub/Sub roles and permissions.
           # @!attribute [rw] schema_version
           #   @return [::String]
-          #     Required. The schema version of the notification sent to `pubsub_topic`.
+          #     Optional. The schema version of the notification sent to `pubsub_topic`.
           #     Only "1.0" is accepted. It represents the JSON schema as defined in
-          #     https://cloud.google.com/billing/docs/how-to/budgets#notification_format
+          #     https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications#notification_format
           # @!attribute [rw] monitoring_notification_channels
           #   @return [::Array<::String>]
           #     Optional. Targets to send notifications to when a threshold is exceeded.
-          #     This is in addition to default recipients who have billing account roles.
-          #     The value is the full REST resource name of a monitoring notification
-          #     channel with the form
+          #     This is in addition to default recipients who have billing account IAM
+          #     roles. The value is the full REST resource name of a monitoring
+          #     notification channel with the form
           #     `projects/{project_id}/notificationChannels/{channel_id}`. A maximum of 5
-          #     channels are allowed.
+          #     channels are allowed. See
+          #     https://cloud.google.com/billing/docs/how-to/budgets-notification-recipients
+          #     for more details.
+          # @!attribute [rw] disable_default_iam_recipients
+          #   @return [::Boolean]
+          #     Optional. When set to true, disables default notifications sent when a
+          #     threshold is exceeded. Recipients are those with Billing Account
+          #     Administrators and Billing Account Users IAM roles for the target account.
           class AllUpdatesRule
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -176,10 +183,10 @@ module Google
           #   @return [::Array<::String>]
           #     Optional. A set of subaccounts of the form `billingAccounts/{account_id}`,
           #     specifying that usage from only this set of subaccounts should be included
-          #     in the budget. If a subaccount is set to the name of the reseller account,
-          #     usage from the reseller account will be included. If omitted, the report
-          #     will include usage from the reseller account and all subaccounts, if they
-          #     exist.
+          #     in the budget. If a subaccount is set to the name of the parent account,
+          #     usage from the parent account will be included. If omitted, the
+          #     report will include usage from the parent account and all
+          #     subaccounts, if they exist.
           # @!attribute [rw] labels
           #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::ListValue}]
           #     Optional. A single label and value pair specifying that usage from only
