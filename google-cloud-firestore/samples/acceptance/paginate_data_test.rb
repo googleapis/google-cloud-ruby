@@ -71,4 +71,15 @@ describe "Google Cloud Firestore API samples - Paginate Data" do
     assert_includes out, "Document TOK returned by start at Springfield query."
     assert_includes out, "Document DC returned by start at Springfield query."
   end
+
+  it "start_at_snapshot_query_cursor" do
+    out, _err = capture_io do
+      start_at_snapshot_query_cursor project_id: @firestore_project, collection_path: @collection_path
+    end
+    refute_includes out, "Document DC returned by start at document snapshot query cursor."
+    assert_includes out, "Document SF returned by start at document snapshot query cursor."
+    assert_includes out, "Document LA returned by start at document snapshot query cursor."
+    assert_includes out, "Document TOK returned by start at document snapshot query cursor."
+    assert_includes out, "Document BJ returned by start at document snapshot query cursor."
+  end
 end
