@@ -118,7 +118,9 @@ module Google
                 "Content-Type"                 => "application/json",
                 "x-goog-api-client"            => "gl-ruby/#{RUBY_VERSION} gccl/#{lib_version}"
               }
-              headers["x-goog-user-project"] = credentials.quota_project_id if credentials.respond_to? :quota_project_id
+              quota_project = V2.translation_config&.quota_project
+              quota_project ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
+              headers["x-goog-user-project"] = quota_project if quota_project
               headers
             end
           end
