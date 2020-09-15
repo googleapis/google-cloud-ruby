@@ -8,24 +8,11 @@ class KokoroBuilder < Command
   def initialize ruby_versions, gems
     @ruby_versions         = ruby_versions
     @gems                  = gems
-    @dockerfiles           = ["autosynth", "multi", "release"]
-    @dependent_dockerfiles = ["multi-node"]
   end
 
   def build
     remove_old_ruby_versions
     build_kokoro_configs
-    generate_dockerfiles
-  end
-
-  def publish
-    (@dockerfiles + @dependent_dockerfiles).each do |docker_image|
-      Dir.chdir "./.kokoro/docker/#{docker_image}" do
-        image_tag = "gcr.io/cloud-devrel-kokoro-resources/yoshi-ruby/#{docker_image}"
-        run "docker build -t #{image_tag} ."
-        run "docker push #{image_tag}"
-      end
-    end
   end
 
   def from_template template, output, gem: nil, base: nil, ruby_version: nil
@@ -59,7 +46,7 @@ class KokoroBuilder < Command
                     "./.kokoro/release/#{name}.cfg",
                     gem: gem
     end
-    KOKORO_RUBY_VERSIONS.each do |ruby_version|
+    ruby_versions.each do |ruby_version|
       from_template "./.kokoro/templates/linux.cfg.erb",
                     "./.kokoro/samples_presubmit/linux/ruby_#{ruby_version}.cfg",
                     ruby_version: ruby_version
@@ -74,12 +61,5 @@ class KokoroBuilder < Command
                   "./.kokoro/osx.sh"
     from_template "./.kokoro/templates/trampoline.sh.erb",
                   "./.kokoro/trampoline.sh"
-  end
-
-  def generate_dockerfiles
-    @dockerfiles.each do |docker_image|
-      from_template "./.kokoro/templates/#{docker_image}.Dockerfile.erb",
-                    "./.kokoro/docker/#{docker_image}/Dockerfile"
-    end
   end
 end

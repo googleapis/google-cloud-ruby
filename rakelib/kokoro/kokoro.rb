@@ -14,7 +14,6 @@ class Kokoro < Command
   attr_reader :tag
 
   def initialize ruby_versions, gems, updated_gems, gem: nil
-    @ruby_versions = ruby_versions
     @gems          = gems
     @updated_gems  = updated_gems
     @gem           = gem
@@ -25,7 +24,7 @@ class Kokoro < Command
     @updated        = @updated_gems.include? @gem
     @should_release = RELEASE_PLEASE_ENABLED &&
                       ENV.fetch("OS", "") == "linux" &&
-                      RUBY_VERSION == @ruby_versions.sort.last
+                      RUBY_VERSION == ruby_versions.sort.last
     @pr_number      = ENV["KOKORO_GITHUB_PULL_REQUEST_NUMBER"]
   end
 
