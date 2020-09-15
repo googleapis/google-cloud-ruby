@@ -92,7 +92,7 @@ module Google
         Dns::Project.new(
           Dns::Service.new(
             project_id, credentials,
-            retries: retries, timeout: timeout, host: endpoint
+            retries: retries, timeout: timeout, host: endpoint, quota_project: configure.quota_project
           )
         )
       end
