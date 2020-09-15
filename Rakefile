@@ -1,8 +1,6 @@
 require "bundler/setup"
 require "fileutils"
 
-KOKORO_RUBY_VERSIONS = ["2.4.10", "2.5.8", "2.6.6", "2.7.1"].freeze
-
 task :bundleupdate do
   valid_gems.each do |gem|
     Dir.chdir gem do
@@ -541,11 +539,12 @@ end
 
 namespace :kokoro do
   require_relative "rakelib/kokoro/kokoro.rb"
+  require "net/http"
+  require "uri"
 
   desc "Generate configs for kokoro"
-  task :build, :publish do |t, args|
+  task :build do
     kokoro.build
-    kokoro.publish if ["p", "publish"].include?(args[:publish])
   end
 
   task :presubmit do
@@ -614,7 +613,10 @@ namespace :kokoro do
   end
 
   def kokoro
-    @kokoro ||= Kokoro.new KOKORO_RUBY_VERSIONS,
+    dockerfile_url = "https://raw.githubusercontent.com/googleapis/testing-infra-docker/master/ruby/multi/Dockerfile"
+    matches = /ENV RUBY_VERSIONS="([\d\.\s]*)"/.match Net::HTTP.get(URI(dockerfile_url))
+    raise "Could not find ruby versions from testing-infra-docker dockerfile" unless matches
+    @kokoro ||= Kokoro.new matches[1].split,
                            gems,
                            updated_gems,
                            gem: ENV["PACKAGE"]
@@ -630,22 +632,6 @@ task :synthtool do
         sh "python -m synthtool"
       end
     end
-  end
-end
-
-def update_supported_ruby_versions
-  readme_text = ""
-  File.open "./README.md", "r+" do |f|
-    readme_text = f.read
-  end
-
-  earliest_ruby = KOKORO_RUBY_VERSIONS.first.split(".")[0...-1].join(".")
-  ruby_version_text = "These libraries are currently supported on Ruby "
-  new_content = readme_text.gsub /#{ruby_version_text}(.*)\+/,
-                                 "#{ruby_version_text}#{earliest_ruby}+"
-
-  File.open "./README.md", "w" do |f|
-    f.write new_content
   end
 end
 
