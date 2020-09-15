@@ -258,6 +258,7 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
     end
   end
+
   doctest.before "Google::Cloud::PubSub::ReceivedMessage#nack!" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
@@ -268,6 +269,7 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :modify_ack_deadline, nil, [Hash]
     end
   end
+
   doctest.before "Google::Cloud::PubSub::ReceivedMessage#ignore!" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
@@ -347,6 +349,7 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :modify_ack_deadline, nil, [Hash]
     end
   end
+
   doctest.before "Google::Cloud::PubSub::Subscription#pull" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), [Hash]
@@ -354,6 +357,7 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :acknowledge, nil, [Hash]
     end
   end
+
   doctest.before "Google::Cloud::PubSub::Subscription#wait_for_messages" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), [Hash]
@@ -461,6 +465,7 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
     end
   end
+
   doctest.before "Google::Cloud::PubSub::Subscription#push_config@Update the push configuration by passing a block:" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
@@ -491,7 +496,8 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
     end
   end
-  doctest.before "Google::Cloud::PubSub::Subscription::PushConfig@Update the push configuration by passing a block:" do
+
+  doctest.before "Google::Cloud::PubSub::Subscription::PushConfig@Update a push config:" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
       mock_subscriber.expect :update_subscription, subscription_resp, [Hash]

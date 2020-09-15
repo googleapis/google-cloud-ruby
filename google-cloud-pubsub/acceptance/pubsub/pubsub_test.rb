@@ -292,13 +292,13 @@ describe Google::Cloud::PubSub, :pubsub do
 
     it "creates a push subscription with endpoint parameter" do
       subscription = topic.subscribe "simple-push-subscription", endpoint: "https://pub-sub.test.com/pubsub"
+
       _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
       _(subscription.push_config.endpoint).must_equal "https://pub-sub.test.com/pubsub"
     end
 
-    it "creates a push subscription with push config" do
-      push_config = Google::Cloud::PubSub::Subscription::PushConfig.new
-      push_config.endpoint = "https://pub-sub.test.com/pubsub"
+    it "creates a push subscription with push_config" do
+      push_config = Google::Cloud::PubSub::Subscription::PushConfig.new endpoint: "https://pub-sub.test.com/pubsub"
       subscription = topic.subscribe "simple-push-config-subscription", push_config: push_config
 
       _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
