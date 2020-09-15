@@ -13,3 +13,5 @@
 /google-cloud-bigtable/         @googleapis/bigtable-dpe @googleapis/yoshi-ruby
 /google-cloud-firestore/        @googleapis/firestore-dpe @googleapis/yoshi-ruby
 /google-cloud-datastore/        @googleapis/firestore-dpe @googleapis/yoshi-ruby
+/google-cloud-bigquery*/.       @googleapis/api-bigquery @googleapis/yoshi-ruby
+/google-cloud-pubsub*/.         @googleapis/api-pubsub @googleapis/yoshi-ruby
