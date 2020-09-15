@@ -39,6 +39,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :pubsub_topic, :string, 1
       optional :schema_version, :string, 2
       repeated :monitoring_notification_channels, :string, 3
+      optional :disable_default_iam_recipients, :bool, 4
     end
     add_message "google.cloud.billing.budgets.v1beta1.Filter" do
       repeated :projects, :string, 1
