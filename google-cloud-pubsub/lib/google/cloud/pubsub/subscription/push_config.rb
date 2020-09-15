@@ -28,8 +28,7 @@ module Google
         #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.topic "my-topic"
         #
-        #   push_config = Google::Cloud::PubSub::Subscription::PushConfig.new
-        #   push_config.endpoint = "http://example.net/callback"
+        #   push_config = Google::Cloud::PubSub::Subscription::PushConfig.new endpoint: "http://example.net/callback"
         #   push_config.set_oidc_token "service-account@example.net", "audience-header-value"
         #
         #   sub = topic.subscribe "my-subscription", push_config: push_config
