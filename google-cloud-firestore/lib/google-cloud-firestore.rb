@@ -125,6 +125,7 @@ Google::Cloud.configure.add_config! :firestore do |config|
   config.add_field! :credentials, default_creds, match: [String, Hash, Google::Auth::Credentials], allow_nil: true
   config.add_alias! :keyfile, :credentials
   config.add_field! :scope, default_scopes, match: [String, Array]
+  config.add_field! :quota_project, nil, match: String
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
   config.add_field! :endpoint, "firestore.googleapis.com", match: String

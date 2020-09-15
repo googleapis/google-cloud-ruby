@@ -173,6 +173,7 @@ Google::Cloud.configure.add_config! :debugger do |config|
   config.add_field! :app_root, nil, match: String
   config.add_field! :root, nil, match: String
   config.add_field! :scope, default_scopes, match: [String, Array]
+  config.add_field! :quota_project, nil, match: String
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :endpoint, "clouddebugger.googleapis.com", match: String
   config.add_field! :allow_mutating_methods, false
