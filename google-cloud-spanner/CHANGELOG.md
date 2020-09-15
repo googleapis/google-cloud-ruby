@@ -1,5 +1,16 @@
 # Release History
 
+### 2.2.0 / 2020-09-15
+
+#### Features
+
+* quota_project can be set via library configuration
+* Support numeric type.
+
+#### Bug Fixes
+
+* retry or resume eos and rst_stream errors
+
 ### 2.1.0 / 2020-08-05
 
 #### Features
