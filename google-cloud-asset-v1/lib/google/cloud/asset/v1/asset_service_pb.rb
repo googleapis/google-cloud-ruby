@@ -82,6 +82,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :dataset, :string, 1
       optional :table, :string, 2
       optional :force, :bool, 3
+      optional :partition_spec, :message, 4, "google.cloud.asset.v1.PartitionSpec"
+      optional :separate_tables_per_asset_type, :bool, 5
+    end
+    add_message "google.cloud.asset.v1.PartitionSpec" do
+      optional :partition_key, :enum, 1, "google.cloud.asset.v1.PartitionSpec.PartitionKey"
+    end
+    add_enum "google.cloud.asset.v1.PartitionSpec.PartitionKey" do
+      value :PARTITION_KEY_UNSPECIFIED, 0
+      value :READ_TIME, 1
+      value :REQUEST_TIME, 2
     end
     add_message "google.cloud.asset.v1.PubsubDestination" do
       optional :topic, :string, 1
@@ -150,6 +160,8 @@ module Google
         GcsOutputResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.GcsOutputResult").msgclass
         GcsDestination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.GcsDestination").msgclass
         BigQueryDestination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.BigQueryDestination").msgclass
+        PartitionSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.PartitionSpec").msgclass
+        PartitionSpec::PartitionKey = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.PartitionSpec.PartitionKey").enummodule
         PubsubDestination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.PubsubDestination").msgclass
         FeedOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.FeedOutputConfig").msgclass
         Feed = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.Feed").msgclass
