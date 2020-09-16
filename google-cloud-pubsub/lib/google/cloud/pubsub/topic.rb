@@ -275,7 +275,10 @@ module Google
         #   604,800 seconds (7 days) or less than 600 seconds (10 minutes).
         #   Default is 604,800 seconds (7 days).
         # @param [String] endpoint A URL locating the endpoint to which messages
-        #   should be pushed.
+        #   should be pushed. The parameters `push_config` and `endpoint` should not both be provided.
+        # @param [Google::Cloud::PubSub::Subscription::PushConfig] push_config The configuration for a push delivery
+        #   endpoint that should contain the endpoint, and can contain authentication data (OIDC token authentication).
+        #   The parameters `push_config` and `endpoint` should not both be provided.
         # @param [Hash] labels A hash of user-provided labels associated with
         #   the subscription. You can use these to organize and group your
         #   subscriptions. Label keys and values can be no longer than 63
@@ -305,9 +308,6 @@ module Google
         #   this subscription. If not set, the default retry policy is applied. This generally implies that messages
         #   will be retried as soon as possible for healthy subscribers. Retry Policy will be triggered on NACKs or
         #   acknowledgement deadline exceeded events for a given message.
-        # @param [Google::Cloud::PubSub::Subscription::PushConfig] push_config The configuration for a Push subscription
-        #   that should contain the endpoint, and can contain authentication data (OIDC token authentication).
-        #   The parameters push_config and endpoint should not be both provided at the same time.
         #
         #   **EXPERIMENTAL:** This API might be changed in backward-incompatible ways and is not recommended for
         #   production use. It is not subject to any SLA or deprecation policy.
@@ -323,15 +323,25 @@ module Google
         #   sub = topic.subscribe "my-topic-sub"
         #   sub.name # => "my-topic-sub"
         #
-        # @example Wait 2 minutes for acknowledgement and push all to endpoint:
+        # @example Wait 2 minutes for acknowledgement:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   sub = topic.subscribe "my-topic-sub",
-        #                         deadline: 120,
-        #                         endpoint: "https://example.com/push"
+        #                         deadline: 120
+        #
+        # @example Configure a push endpoint:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #   topic = pubsub.topic "my-topic"
+        #
+        #   push_config = Google::Cloud::PubSub::Subscription::PushConfig.new endpoint: "http://example.net/callback"
+        #   push_config.set_oidc_token "service-account@example.net", "audience-header-value"
+        #
+        #   sub = topic.subscribe "my-subscription", push_config: push_config
         #
         # @example Configure a Dead Letter Queues policy:
         #   require "google/cloud/pubsub"
@@ -364,23 +374,40 @@ module Google
         #   retry_policy = Google::Cloud::PubSub::RetryPolicy.new minimum_backoff: 5, maximum_backoff: 300
         #   sub = topic.subscribe "my-topic-sub", retry_policy: retry_policy
         #
-        def subscribe subscription_name, deadline: nil, retain_acked: false, retention: nil, endpoint: nil, labels: nil,
-                      message_ordering: nil, filter: nil, dead_letter_topic: nil,
-                      dead_letter_max_delivery_attempts: nil, retry_policy: nil, push_config: nil
+        def subscribe subscription_name,
+                      deadline: nil,
+                      retain_acked: false,
+                      retention: nil,
+                      endpoint: nil,
+                      push_config: nil,
+                      labels: nil,
+                      message_ordering: nil,
+                      filter: nil,
+                      dead_letter_topic: nil,
+                      dead_letter_max_delivery_attempts: nil,
+                      retry_policy: nil
           ensure_service!
-          options = { deadline: deadline, retain_acked: retain_acked, retention: retention, endpoint: endpoint,
-                      labels: labels, message_ordering: message_ordering, filter: filter,
-                      dead_letter_max_delivery_attempts: dead_letter_max_delivery_attempts,
-                      push_config: push_config }
+          if push_config && endpoint
+            raise ArgumentError, "endpoint and push_config were both provided. Please provide only one."
+          end
+          push_config = Google::Cloud::PubSub::Subscription::PushConfig.new endpoint: endpoint if endpoint
+
+          options = {
+            deadline:                          deadline,
+            retain_acked:                      retain_acked,
+            retention:                         retention,
+            labels:                            labels,
+            message_ordering:                  message_ordering,
+            filter:                            filter,
+            dead_letter_max_delivery_attempts: dead_letter_max_delivery_attempts
+          }
 
           options[:dead_letter_topic_name] = dead_letter_topic.name if dead_letter_topic
           if options[:dead_letter_max_delivery_attempts] && !options[:dead_letter_topic_name]
             # Service error message "3:Invalid resource name given (name=)." does not identify param.
             raise ArgumentError, "dead_letter_topic is required with dead_letter_max_delivery_attempts"
           end
-          if options[:push_config] && options[:endpoint]
-            raise ArgumentError, "Push endpoint and push config were both provided. Please provide only one"
-          end
+          options[:push_config] = push_config.to_grpc if push_config
           options[:retry_policy] = retry_policy.to_grpc if retry_policy
           grpc = service.create_subscription name, subscription_name, options
           Subscription.from_grpc grpc, service

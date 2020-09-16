@@ -182,20 +182,7 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
   end
 
-  it "does not accept invalid push configs when creating a subscription" do
-    new_sub_name = "new-sub-#{Time.now.to_i}"
-
-    # Push config should be an object, not a hash.
-    push_config = {
-        service_account_email: "service-account@example.net",
-        audience: "audience-header-value"
-    }
-    assert_raises ArgumentError do
-        topic.subscribe new_sub_name, push_config: push_config
-    end
-  end
-
-  it "rejects subscription that provides both config and endpoint" do
+  it "raises if both push_config and endpoint are provided" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
     endpoint = "http://foo.bar/baz" 
     push_config = Google::Cloud::PubSub::Subscription::PushConfig.new

@@ -22,7 +22,18 @@ module Google
         ##
         # Configuration for a push delivery endpoint.
         #
-        # @example
+        # @example Create a push config:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #   topic = pubsub.topic "my-topic"
+        #
+        #   push_config = Google::Cloud::PubSub::Subscription::PushConfig.new endpoint: "http://example.net/callback"
+        #   push_config.set_oidc_token "service-account@example.net", "audience-header-value"
+        #
+        #   sub = topic.subscribe "my-subscription", push_config: push_config
+        #
+        # @example Read a push config:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
@@ -32,7 +43,7 @@ module Google
         #   sub.push_config.authentication.email #=> "user@example.com"
         #   sub.push_config.authentication.audience #=> "client-12345"
         #
-        # @example Update the push configuration by passing a block:
+        # @example Update a push config:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
@@ -43,43 +54,33 @@ module Google
         #     pc.set_oidc_token "user@example.net", "client-67890"
         #   end
         #
-        # @example Create a push subscription by passing a push config:
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::PubSub.new
-        #   topic = pubsub.topic "my-topic"
-        #
-        #   push_config = Google::Cloud::PubSub::Subscription::PushConfig.new
-        #   push_config.endpoint = "http://example.net/callback"
-        #   push_config.set_oidc_token(
-        #     "service-account@example.net", "audience-header-value"
-        #   )
-        #   sub = topic.subscribe "my-subscription", push_config: push_config
-        #
         class PushConfig
           ##
-          # Creates an empty configuration for a push subscription.
-          # @param [String] endpoint URL to where the subscription will push data to.
-          # @param [String] auth_email The GCP service account email associated with the push subscription.
-          #  Push requests carry the identity of this service account.
-          # @param [String] auth_audience A single, case-insensitive string that can be used by
-          #  the webhook to validate the intended audience of this particular token.
-          # @return [PushConfig]
-          def initialize endpoint: nil, auth_email: nil, auth_audience: nil
+          # Creates a new push configuration.
+          #
+          # @param [String] endpoint A URL locating the endpoint to which messages should be pushed. For
+          #   example, a Webhook endpoint might use `https://example.com/push`.
+          # @param [String] email The service account email to be used for generating the OIDC token.
+          #   The caller must have the `iam.serviceAccounts.actAs` permission for the service account.
+          # @param [String] audience The audience to be used when generating OIDC token. The audience claim identifies
+          #   the recipients that the JWT is intended for. The audience value is a single case-sensitive string. Having
+          #   multiple values (array) for the audience field is not supported. More info about the OIDC JWT token
+          #   audience here: https://tools.ietf.org/html/rfc7519#section-4.1.3 Note: if not specified, the `endpoint`
+          #   URL will be used.
+          #
+          def initialize endpoint: nil, email: nil, audience: nil
             @grpc = Google::Cloud::PubSub::V1::PushConfig.new
 
             self.endpoint = endpoint unless endpoint.nil?
 
-            if auth_audience && !auth_email
-              raise ArgumentError, "auth_audience provided without auth_email. Authentication is invalid"
-            end
+            raise ArgumentError, "audience provided without email. Authentication is invalid" if audience && !email
 
-            set_oidc_token auth_email, auth_audience if auth_email
+            set_oidc_token email, audience if email
           end
 
           ##
-          # A URL locating the endpoint to which messages should be pushed. For
-          # example, a Webhook endpoint might use `https://example.com/push`.
+          # A URL locating the endpoint to which messages should be pushed. For example, a Webhook endpoint might use
+          # `https://example.com/push`.
           #
           # @return [String]
           def endpoint
@@ -87,9 +88,8 @@ module Google
           end
 
           ##
-          # Sets the URL locating the endpoint to which messages should be
-          # pushed. For example, a Webhook endpoint might use
-          # `https://example.com/push`.
+          # Sets the URL locating the endpoint to which messages should be pushed. For example, a Webhook endpoint might
+          # use `https://example.com/push`.
           #
           # @param [String, nil] new_endpoint New URL value
           def endpoint= new_endpoint
@@ -97,8 +97,7 @@ module Google
           end
 
           ##
-          # The authentication method used by push endpoints to verify the
-          # source of push requests.
+          # The authentication method used by push endpoints to verify the source of push requests.
           #
           # @return [OidcToken, nil] An OIDC JWT token if specified, `nil`
           #   otherwise.
@@ -109,8 +108,7 @@ module Google
           end
 
           ##
-          # Sets the authentication method used by push endpoints to verify the
-          # source of push requests.
+          # Sets the authentication method used by push endpoints to verify the source of push requests.
           #
           # @param [OidcToken, nil] new_auth An authentication value.
           def authentication= new_auth
@@ -145,13 +143,12 @@ module Google
           end
 
           ##
-          # The format of the pushed message. This attribute indicates the
-          # version of the data expected by the endpoint. This controls the
-          # shape of the pushed message (i.e., its fields and metadata). The
-          # endpoint version is based on the version of the Pub/Sub API.
+          # The format of the pushed message. This attribute indicates the version of the data expected by the endpoint.
+          # This controls the shape of the pushed message (i.e., its fields and metadata). The endpoint version is based
+          # on the version of the Pub/Sub API.
           #
-          # If not present during the Subscription creation, it will default to
-          # the version of the API used to make such call.
+          # If not present during the Subscription creation, it will default to the version of the API used to make such
+          # call.
           #
           # The possible values for this attribute are:
           #
@@ -209,7 +206,8 @@ module Google
             end
 
             ##
-            # Service account email to be used for generating the OIDC token.
+            # The service account email to be used for generating the OIDC token. The caller must have the
+            # `iam.serviceAccounts.actAs` permission for the service account.
             #
             # @return [String]
             def email
@@ -217,7 +215,8 @@ module Google
             end
 
             ##
-            # Service account email to be used for generating the OIDC token.
+            # Sets the service account email to be used for generating the OIDC token. The caller must have the
+            # `iam.serviceAccounts.actAs` permission for the service account.
             #
             # @param [String] new_email New service account email value.
             def email= new_email
@@ -225,15 +224,10 @@ module Google
             end
 
             ##
-            # Audience to be used when generating OIDC token. The audience claim
-            # identifies the recipients that the JWT is intended for. The
-            # audience value is a single case-sensitive string.
-            #
-            # Having multiple values (array) for the audience field is not
-            # supported.
-            #
-            # More info about the OIDC JWT token audience here:
-            # https://tools.ietf.org/html/rfc7519#section-4.1.3
+            # The audience to be used when generating OIDC token. The audience claim identifies the recipients that
+            # the JWT is intended for. The audience value is a single case-sensitive string. Having multiple values
+            # (array) for the audience field is not supported. More info about the OIDC JWT token audience here:
+            # https://tools.ietf.org/html/rfc7519#section-4.1.3 Note: if not specified, the `endpoint` URL will be used.
             #
             # @return [String]
             def audience
@@ -241,7 +235,10 @@ module Google
             end
 
             ##
-            # Sets the audience to be used when generating OIDC token.
+            # Sets the audience to be used when generating OIDC token. The audience claim identifies the recipients that
+            # the JWT is intended for. The audience value is a single case-sensitive string. Having multiple values
+            # (array) for the audience field is not supported. More info about the OIDC JWT token audience here:
+            # https://tools.ietf.org/html/rfc7519#section-4.1.3 Note: if not specified, the `endpoint` URL will be used.
             #
             # @param [String] new_audience New audience value.
             def audience= new_audience
