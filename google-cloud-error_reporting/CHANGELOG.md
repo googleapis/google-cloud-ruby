@@ -1,5 +1,11 @@
 # Release History
 
+### 0.41.0 / 2020-09-16
+
+#### Features
+
+* quota_project can be set via library configuration
+
 ### 0.40.0 / 2020-07-21
 
 This is a major update that removes the "low-level" client interface code, and
