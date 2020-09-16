@@ -1,0 +1,11 @@
+{
+    "api_id": "jobs.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-talent-v4/latest",
+    "distribution_name": "google-cloud-talent-v4",
+    "language": "ruby",
+    "name": "jobs",
+    "name_pretty": "Cloud Talent Solution V4 API",
+    "product_documentation": "https://cloud.google.com/solutions/talent-solution",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
