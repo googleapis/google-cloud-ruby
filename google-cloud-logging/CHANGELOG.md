@@ -1,5 +1,11 @@
 # Release History
 
+### 2.1.0 / 2020-09-16
+
+#### Features
+
+* quota_project can be set via library configuration ([#7630](https://www.github.com/googleapis/google-cloud-ruby/issues/7630))
+
 ### 2.0.0 / 2020-07-21
 
 This is a major update that removes the "low-level" client interface code, and
