@@ -4,7 +4,7 @@
 
 #### Features
 
-* quota_project can be set via library configuration ([#7629](https://www.github.com/googleapis/google-cloud-ruby/issues/7629))
+* quota_project can be set via library configuration
 
 ### 0.33.3 / 2020-05-28
 
