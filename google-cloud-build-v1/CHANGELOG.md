@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.0 / 2020-09-16
+
+#### Features
+
+* Support for standard "name" and "parent" resource path arguments.
+
 ### 0.1.3 / 2020-08-10
 
 #### Bug Fixes
