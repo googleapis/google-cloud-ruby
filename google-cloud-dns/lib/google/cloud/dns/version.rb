@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Dns
-      VERSION = "0.32.1".freeze
+      VERSION = "0.33.0".freeze
     end
   end
 end
