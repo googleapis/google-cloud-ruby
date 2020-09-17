@@ -55,7 +55,7 @@ module Google
             # [prediction_type][google.cloud.automl.v1beta1.TablesModelMetadata.prediction_type].
             # * Text Sentiment - TextSnippet, content up 500 characters, UTF-8
             #                     encoded.
-            rpc :Predict, Google::Cloud::AutoML::V1beta1::PredictRequest, Google::Cloud::AutoML::V1beta1::PredictResponse
+            rpc :Predict, ::Google::Cloud::AutoML::V1beta1::PredictRequest, ::Google::Cloud::AutoML::V1beta1::PredictResponse
             # Perform a batch prediction. Unlike the online [Predict][google.cloud.automl.v1beta1.PredictionService.Predict], batch
             # prediction result won't be immediately available in the response. Instead,
             # a long running operation object is returned. User can poll the operation
@@ -68,7 +68,7 @@ module Google
             # * Video Classification
             # * Video Object Tracking * Text Extraction
             # * Tables
-            rpc :BatchPredict, Google::Cloud::AutoML::V1beta1::BatchPredictRequest, Google::Longrunning::Operation
+            rpc :BatchPredict, ::Google::Cloud::AutoML::V1beta1::BatchPredictRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
