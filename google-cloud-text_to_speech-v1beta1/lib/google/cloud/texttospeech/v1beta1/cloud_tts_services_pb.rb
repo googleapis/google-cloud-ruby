@@ -34,10 +34,10 @@ module Google
             self.service_name = 'google.cloud.texttospeech.v1beta1.TextToSpeech'
 
             # Returns a list of Voice supported for synthesis.
-            rpc :ListVoices, Google::Cloud::TextToSpeech::V1beta1::ListVoicesRequest, Google::Cloud::TextToSpeech::V1beta1::ListVoicesResponse
+            rpc :ListVoices, ::Google::Cloud::TextToSpeech::V1beta1::ListVoicesRequest, ::Google::Cloud::TextToSpeech::V1beta1::ListVoicesResponse
             # Synthesizes speech synchronously: receive results after all text input
             # has been processed.
-            rpc :SynthesizeSpeech, Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest, Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechResponse
+            rpc :SynthesizeSpeech, ::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest, ::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechResponse
           end
 
           Stub = Service.rpc_stub_class
