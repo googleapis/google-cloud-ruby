@@ -36,7 +36,7 @@ module Google
             # Returns a [service][google.cloud.servicedirectory.v1beta1.Service] and its
             # associated endpoints.
             # Resolving a service is not considered an active developer method.
-            rpc :ResolveService, Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest, Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceResponse
+            rpc :ResolveService, ::Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest, ::Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceResponse
           end
 
           Stub = Service.rpc_stub_class
