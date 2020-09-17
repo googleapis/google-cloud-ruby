@@ -55,22 +55,22 @@ module Google
             #
             # Idle sessions can be kept alive by sending a trivial SQL query
             # periodically, e.g., `"SELECT 1"`.
-            rpc :CreateSession, Google::Cloud::Spanner::V1::CreateSessionRequest, Google::Cloud::Spanner::V1::Session
+            rpc :CreateSession, ::Google::Cloud::Spanner::V1::CreateSessionRequest, ::Google::Cloud::Spanner::V1::Session
             # Creates multiple new sessions.
             #
             # This API can be used to initialize a session cache on the clients.
             # See https://goo.gl/TgSFN2 for best practices on session cache management.
-            rpc :BatchCreateSessions, Google::Cloud::Spanner::V1::BatchCreateSessionsRequest, Google::Cloud::Spanner::V1::BatchCreateSessionsResponse
+            rpc :BatchCreateSessions, ::Google::Cloud::Spanner::V1::BatchCreateSessionsRequest, ::Google::Cloud::Spanner::V1::BatchCreateSessionsResponse
             # Gets a session. Returns `NOT_FOUND` if the session does not exist.
             # This is mainly useful for determining whether a session is still
             # alive.
-            rpc :GetSession, Google::Cloud::Spanner::V1::GetSessionRequest, Google::Cloud::Spanner::V1::Session
+            rpc :GetSession, ::Google::Cloud::Spanner::V1::GetSessionRequest, ::Google::Cloud::Spanner::V1::Session
             # Lists all sessions in a given database.
-            rpc :ListSessions, Google::Cloud::Spanner::V1::ListSessionsRequest, Google::Cloud::Spanner::V1::ListSessionsResponse
+            rpc :ListSessions, ::Google::Cloud::Spanner::V1::ListSessionsRequest, ::Google::Cloud::Spanner::V1::ListSessionsResponse
             # Ends a session, releasing server resources associated with it. This will
             # asynchronously trigger cancellation of any operations that are running with
             # this session.
-            rpc :DeleteSession, Google::Cloud::Spanner::V1::DeleteSessionRequest, Google::Protobuf::Empty
+            rpc :DeleteSession, ::Google::Cloud::Spanner::V1::DeleteSessionRequest, ::Google::Protobuf::Empty
             # Executes an SQL statement, returning all results in a single reply. This
             # method cannot be used to return a result set larger than 10 MiB;
             # if the query yields more data than that, the query fails with
@@ -82,13 +82,13 @@ module Google
             #
             # Larger result sets can be fetched in streaming fashion by calling
             # [ExecuteStreamingSql][google.spanner.v1.Spanner.ExecuteStreamingSql] instead.
-            rpc :ExecuteSql, Google::Cloud::Spanner::V1::ExecuteSqlRequest, Google::Cloud::Spanner::V1::ResultSet
+            rpc :ExecuteSql, ::Google::Cloud::Spanner::V1::ExecuteSqlRequest, ::Google::Cloud::Spanner::V1::ResultSet
             # Like [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql], except returns the result
             # set as a stream. Unlike [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql], there
             # is no limit on the size of the returned result set. However, no
             # individual row in the result set can exceed 100 MiB, and no
             # column value can exceed 10 MiB.
-            rpc :ExecuteStreamingSql, Google::Cloud::Spanner::V1::ExecuteSqlRequest, stream(Google::Cloud::Spanner::V1::PartialResultSet)
+            rpc :ExecuteStreamingSql, ::Google::Cloud::Spanner::V1::ExecuteSqlRequest, stream(::Google::Cloud::Spanner::V1::PartialResultSet)
             # Executes a batch of SQL DML statements. This method allows many statements
             # to be run with lower latency than submitting them sequentially with
             # [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql].
@@ -100,7 +100,7 @@ module Google
             #
             # Execution stops after the first failed statement; the remaining statements
             # are not executed.
-            rpc :ExecuteBatchDml, Google::Cloud::Spanner::V1::ExecuteBatchDmlRequest, Google::Cloud::Spanner::V1::ExecuteBatchDmlResponse
+            rpc :ExecuteBatchDml, ::Google::Cloud::Spanner::V1::ExecuteBatchDmlRequest, ::Google::Cloud::Spanner::V1::ExecuteBatchDmlResponse
             # Reads rows from the database using key lookups and scans, as a
             # simple key/value style alternative to
             # [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql].  This method cannot be used to
@@ -114,18 +114,18 @@ module Google
             #
             # Larger result sets can be yielded in streaming fashion by calling
             # [StreamingRead][google.spanner.v1.Spanner.StreamingRead] instead.
-            rpc :Read, Google::Cloud::Spanner::V1::ReadRequest, Google::Cloud::Spanner::V1::ResultSet
+            rpc :Read, ::Google::Cloud::Spanner::V1::ReadRequest, ::Google::Cloud::Spanner::V1::ResultSet
             # Like [Read][google.spanner.v1.Spanner.Read], except returns the result set as a
             # stream. Unlike [Read][google.spanner.v1.Spanner.Read], there is no limit on the
             # size of the returned result set. However, no individual row in
             # the result set can exceed 100 MiB, and no column value can exceed
             # 10 MiB.
-            rpc :StreamingRead, Google::Cloud::Spanner::V1::ReadRequest, stream(Google::Cloud::Spanner::V1::PartialResultSet)
+            rpc :StreamingRead, ::Google::Cloud::Spanner::V1::ReadRequest, stream(::Google::Cloud::Spanner::V1::PartialResultSet)
             # Begins a new transaction. This step can often be skipped:
             # [Read][google.spanner.v1.Spanner.Read], [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql] and
             # [Commit][google.spanner.v1.Spanner.Commit] can begin a new transaction as a
             # side-effect.
-            rpc :BeginTransaction, Google::Cloud::Spanner::V1::BeginTransactionRequest, Google::Cloud::Spanner::V1::Transaction
+            rpc :BeginTransaction, ::Google::Cloud::Spanner::V1::BeginTransactionRequest, ::Google::Cloud::Spanner::V1::Transaction
             # Commits a transaction. The request includes the mutations to be
             # applied to rows in the database.
             #
@@ -134,7 +134,7 @@ module Google
             # transactions. However, it can also happen for a variety of other
             # reasons. If `Commit` returns `ABORTED`, the caller should re-attempt
             # the transaction from the beginning, re-using the same session.
-            rpc :Commit, Google::Cloud::Spanner::V1::CommitRequest, Google::Cloud::Spanner::V1::CommitResponse
+            rpc :Commit, ::Google::Cloud::Spanner::V1::CommitRequest, ::Google::Cloud::Spanner::V1::CommitResponse
             # Rolls back a transaction, releasing any locks it holds. It is a good
             # idea to call this for any transaction that includes one or more
             # [Read][google.spanner.v1.Spanner.Read] or [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql] requests and
@@ -143,7 +143,7 @@ module Google
             # `Rollback` returns `OK` if it successfully aborts the transaction, the
             # transaction was already aborted, or the transaction is not
             # found. `Rollback` never returns `ABORTED`.
-            rpc :Rollback, Google::Cloud::Spanner::V1::RollbackRequest, Google::Protobuf::Empty
+            rpc :Rollback, ::Google::Cloud::Spanner::V1::RollbackRequest, ::Google::Protobuf::Empty
             # Creates a set of partition tokens that can be used to execute a query
             # operation in parallel.  Each of the returned partition tokens can be used
             # by [ExecuteStreamingSql][google.spanner.v1.Spanner.ExecuteStreamingSql] to specify a subset
@@ -155,7 +155,7 @@ module Google
             # is deleted, is idle for too long, begins a new transaction, or becomes too
             # old.  When any of these happen, it is not possible to resume the query, and
             # the whole operation must be restarted from the beginning.
-            rpc :PartitionQuery, Google::Cloud::Spanner::V1::PartitionQueryRequest, Google::Cloud::Spanner::V1::PartitionResponse
+            rpc :PartitionQuery, ::Google::Cloud::Spanner::V1::PartitionQueryRequest, ::Google::Cloud::Spanner::V1::PartitionResponse
             # Creates a set of partition tokens that can be used to execute a read
             # operation in parallel.  Each of the returned partition tokens can be used
             # by [StreamingRead][google.spanner.v1.Spanner.StreamingRead] to specify a subset of the read
@@ -169,7 +169,7 @@ module Google
             # is deleted, is idle for too long, begins a new transaction, or becomes too
             # old.  When any of these happen, it is not possible to resume the read, and
             # the whole operation must be restarted from the beginning.
-            rpc :PartitionRead, Google::Cloud::Spanner::V1::PartitionReadRequest, Google::Cloud::Spanner::V1::PartitionResponse
+            rpc :PartitionRead, ::Google::Cloud::Spanner::V1::PartitionReadRequest, ::Google::Cloud::Spanner::V1::PartitionResponse
           end
 
           Stub = Service.rpc_stub_class
