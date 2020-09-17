@@ -20,3 +20,6 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-dlp.rb"
+
+Style/AsciiComments:
+  Enabled: false
