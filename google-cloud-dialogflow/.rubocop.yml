@@ -20,3 +20,6 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-dialogflow.rb"
+
+Style/AsciiComments:
+  Enabled: false
