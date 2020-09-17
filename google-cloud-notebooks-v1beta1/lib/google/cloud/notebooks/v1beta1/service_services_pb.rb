@@ -34,50 +34,50 @@ module Google
             self.service_name = 'google.cloud.notebooks.v1beta1.NotebookService'
 
             # Lists instances in a given project and location.
-            rpc :ListInstances, Google::Cloud::Notebooks::V1beta1::ListInstancesRequest, Google::Cloud::Notebooks::V1beta1::ListInstancesResponse
+            rpc :ListInstances, ::Google::Cloud::Notebooks::V1beta1::ListInstancesRequest, ::Google::Cloud::Notebooks::V1beta1::ListInstancesResponse
             # Gets details of a single Instance.
-            rpc :GetInstance, Google::Cloud::Notebooks::V1beta1::GetInstanceRequest, Google::Cloud::Notebooks::V1beta1::Instance
+            rpc :GetInstance, ::Google::Cloud::Notebooks::V1beta1::GetInstanceRequest, ::Google::Cloud::Notebooks::V1beta1::Instance
             # Creates a new Instance in a given project and location.
-            rpc :CreateInstance, Google::Cloud::Notebooks::V1beta1::CreateInstanceRequest, Google::Longrunning::Operation
+            rpc :CreateInstance, ::Google::Cloud::Notebooks::V1beta1::CreateInstanceRequest, ::Google::Longrunning::Operation
             # Registers an existing legacy notebook instance to the Notebooks API server.
             # Legacy instances are instances created with the legacy Compute Engine
             # calls. They are not manageable by the Notebooks API out of the box. This
             # call makes these instances manageable by the Notebooks API.
-            rpc :RegisterInstance, Google::Cloud::Notebooks::V1beta1::RegisterInstanceRequest, Google::Longrunning::Operation
+            rpc :RegisterInstance, ::Google::Cloud::Notebooks::V1beta1::RegisterInstanceRequest, ::Google::Longrunning::Operation
             # Updates the guest accelerators of a single Instance.
-            rpc :SetInstanceAccelerator, Google::Cloud::Notebooks::V1beta1::SetInstanceAcceleratorRequest, Google::Longrunning::Operation
+            rpc :SetInstanceAccelerator, ::Google::Cloud::Notebooks::V1beta1::SetInstanceAcceleratorRequest, ::Google::Longrunning::Operation
             # Updates the machine type of a single Instance.
-            rpc :SetInstanceMachineType, Google::Cloud::Notebooks::V1beta1::SetInstanceMachineTypeRequest, Google::Longrunning::Operation
+            rpc :SetInstanceMachineType, ::Google::Cloud::Notebooks::V1beta1::SetInstanceMachineTypeRequest, ::Google::Longrunning::Operation
             # Updates the labels of an Instance.
-            rpc :SetInstanceLabels, Google::Cloud::Notebooks::V1beta1::SetInstanceLabelsRequest, Google::Longrunning::Operation
+            rpc :SetInstanceLabels, ::Google::Cloud::Notebooks::V1beta1::SetInstanceLabelsRequest, ::Google::Longrunning::Operation
             # Deletes a single Instance.
-            rpc :DeleteInstance, Google::Cloud::Notebooks::V1beta1::DeleteInstanceRequest, Google::Longrunning::Operation
+            rpc :DeleteInstance, ::Google::Cloud::Notebooks::V1beta1::DeleteInstanceRequest, ::Google::Longrunning::Operation
             # Starts a notebook instance.
-            rpc :StartInstance, Google::Cloud::Notebooks::V1beta1::StartInstanceRequest, Google::Longrunning::Operation
+            rpc :StartInstance, ::Google::Cloud::Notebooks::V1beta1::StartInstanceRequest, ::Google::Longrunning::Operation
             # Stops a notebook instance.
-            rpc :StopInstance, Google::Cloud::Notebooks::V1beta1::StopInstanceRequest, Google::Longrunning::Operation
+            rpc :StopInstance, ::Google::Cloud::Notebooks::V1beta1::StopInstanceRequest, ::Google::Longrunning::Operation
             # Resets a notebook instance.
-            rpc :ResetInstance, Google::Cloud::Notebooks::V1beta1::ResetInstanceRequest, Google::Longrunning::Operation
+            rpc :ResetInstance, ::Google::Cloud::Notebooks::V1beta1::ResetInstanceRequest, ::Google::Longrunning::Operation
             # Allows notebook instances to
             # report their latest instance information to the Notebooks
             # API server. The server will merge the reported information to
             # the instance metadata store. Do not use this method directly.
-            rpc :ReportInstanceInfo, Google::Cloud::Notebooks::V1beta1::ReportInstanceInfoRequest, Google::Longrunning::Operation
+            rpc :ReportInstanceInfo, ::Google::Cloud::Notebooks::V1beta1::ReportInstanceInfoRequest, ::Google::Longrunning::Operation
             # Check if a notebook instance is upgradable.
-            rpc :IsInstanceUpgradeable, Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableRequest, Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableResponse
+            rpc :IsInstanceUpgradeable, ::Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableRequest, ::Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableResponse
             # Upgrades a notebook instance to the latest version.
-            rpc :UpgradeInstance, Google::Cloud::Notebooks::V1beta1::UpgradeInstanceRequest, Google::Longrunning::Operation
+            rpc :UpgradeInstance, ::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceRequest, ::Google::Longrunning::Operation
             # Allows notebook instances to
             # call this endpoint to upgrade themselves. Do not use this method directly.
-            rpc :UpgradeInstanceInternal, Google::Cloud::Notebooks::V1beta1::UpgradeInstanceInternalRequest, Google::Longrunning::Operation
+            rpc :UpgradeInstanceInternal, ::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceInternalRequest, ::Google::Longrunning::Operation
             # Lists environments in a project.
-            rpc :ListEnvironments, Google::Cloud::Notebooks::V1beta1::ListEnvironmentsRequest, Google::Cloud::Notebooks::V1beta1::ListEnvironmentsResponse
+            rpc :ListEnvironments, ::Google::Cloud::Notebooks::V1beta1::ListEnvironmentsRequest, ::Google::Cloud::Notebooks::V1beta1::ListEnvironmentsResponse
             # Gets details of a single Environment.
-            rpc :GetEnvironment, Google::Cloud::Notebooks::V1beta1::GetEnvironmentRequest, Google::Cloud::Notebooks::V1beta1::Environment
+            rpc :GetEnvironment, ::Google::Cloud::Notebooks::V1beta1::GetEnvironmentRequest, ::Google::Cloud::Notebooks::V1beta1::Environment
             # Creates a new Environment.
-            rpc :CreateEnvironment, Google::Cloud::Notebooks::V1beta1::CreateEnvironmentRequest, Google::Longrunning::Operation
+            rpc :CreateEnvironment, ::Google::Cloud::Notebooks::V1beta1::CreateEnvironmentRequest, ::Google::Longrunning::Operation
             # Deletes a single Environment.
-            rpc :DeleteEnvironment, Google::Cloud::Notebooks::V1beta1::DeleteEnvironmentRequest, Google::Longrunning::Operation
+            rpc :DeleteEnvironment, ::Google::Cloud::Notebooks::V1beta1::DeleteEnvironmentRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
