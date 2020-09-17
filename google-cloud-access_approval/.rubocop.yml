@@ -20,3 +20,6 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-access_approval.rb"
+
+Style/AsciiComments:
+  Enabled: false
