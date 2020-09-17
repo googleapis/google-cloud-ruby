@@ -20,3 +20,6 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-kms.rb"
+
+Style/AsciiComments:
+  Enabled: false
