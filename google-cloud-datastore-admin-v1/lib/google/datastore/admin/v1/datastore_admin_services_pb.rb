@@ -102,19 +102,19 @@ module Google
               # used once the associated operation is done. If an export operation is
               # cancelled before completion it may leave partial data behind in Google
               # Cloud Storage.
-              rpc :ExportEntities, Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest, Google::Longrunning::Operation
+              rpc :ExportEntities, ::Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest, ::Google::Longrunning::Operation
               # Imports entities into Google Cloud Datastore. Existing entities with the
               # same key are overwritten. The import occurs in the background and its
               # progress can be monitored and managed via the Operation resource that is
               # created. If an ImportEntities operation is cancelled, it is possible
               # that a subset of the data has already been imported to Cloud Datastore.
-              rpc :ImportEntities, Google::Cloud::Datastore::Admin::V1::ImportEntitiesRequest, Google::Longrunning::Operation
+              rpc :ImportEntities, ::Google::Cloud::Datastore::Admin::V1::ImportEntitiesRequest, ::Google::Longrunning::Operation
               # Gets an index.
-              rpc :GetIndex, Google::Cloud::Datastore::Admin::V1::GetIndexRequest, Google::Cloud::Datastore::Admin::V1::Index
+              rpc :GetIndex, ::Google::Cloud::Datastore::Admin::V1::GetIndexRequest, ::Google::Cloud::Datastore::Admin::V1::Index
               # Lists the indexes that match the specified filters.  Datastore uses an
               # eventually consistent query to fetch the list of indexes and may
               # occasionally return stale results.
-              rpc :ListIndexes, Google::Cloud::Datastore::Admin::V1::ListIndexesRequest, Google::Cloud::Datastore::Admin::V1::ListIndexesResponse
+              rpc :ListIndexes, ::Google::Cloud::Datastore::Admin::V1::ListIndexesRequest, ::Google::Cloud::Datastore::Admin::V1::ListIndexesResponse
             end
 
             Stub = Service.rpc_stub_class
