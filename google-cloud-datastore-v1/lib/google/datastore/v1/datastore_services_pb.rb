@@ -40,22 +40,22 @@ module Google
             self.service_name = 'google.datastore.v1.Datastore'
 
             # Looks up entities by key.
-            rpc :Lookup, Google::Cloud::Datastore::V1::LookupRequest, Google::Cloud::Datastore::V1::LookupResponse
+            rpc :Lookup, ::Google::Cloud::Datastore::V1::LookupRequest, ::Google::Cloud::Datastore::V1::LookupResponse
             # Queries for entities.
-            rpc :RunQuery, Google::Cloud::Datastore::V1::RunQueryRequest, Google::Cloud::Datastore::V1::RunQueryResponse
+            rpc :RunQuery, ::Google::Cloud::Datastore::V1::RunQueryRequest, ::Google::Cloud::Datastore::V1::RunQueryResponse
             # Begins a new transaction.
-            rpc :BeginTransaction, Google::Cloud::Datastore::V1::BeginTransactionRequest, Google::Cloud::Datastore::V1::BeginTransactionResponse
+            rpc :BeginTransaction, ::Google::Cloud::Datastore::V1::BeginTransactionRequest, ::Google::Cloud::Datastore::V1::BeginTransactionResponse
             # Commits a transaction, optionally creating, deleting or modifying some
             # entities.
-            rpc :Commit, Google::Cloud::Datastore::V1::CommitRequest, Google::Cloud::Datastore::V1::CommitResponse
+            rpc :Commit, ::Google::Cloud::Datastore::V1::CommitRequest, ::Google::Cloud::Datastore::V1::CommitResponse
             # Rolls back a transaction.
-            rpc :Rollback, Google::Cloud::Datastore::V1::RollbackRequest, Google::Cloud::Datastore::V1::RollbackResponse
+            rpc :Rollback, ::Google::Cloud::Datastore::V1::RollbackRequest, ::Google::Cloud::Datastore::V1::RollbackResponse
             # Allocates IDs for the given keys, which is useful for referencing an entity
             # before it is inserted.
-            rpc :AllocateIds, Google::Cloud::Datastore::V1::AllocateIdsRequest, Google::Cloud::Datastore::V1::AllocateIdsResponse
+            rpc :AllocateIds, ::Google::Cloud::Datastore::V1::AllocateIdsRequest, ::Google::Cloud::Datastore::V1::AllocateIdsResponse
             # Prevents the supplied keys' IDs from being auto-allocated by Cloud
             # Datastore.
-            rpc :ReserveIds, Google::Cloud::Datastore::V1::ReserveIdsRequest, Google::Cloud::Datastore::V1::ReserveIdsResponse
+            rpc :ReserveIds, ::Google::Cloud::Datastore::V1::ReserveIdsRequest, ::Google::Cloud::Datastore::V1::ReserveIdsResponse
           end
 
           Stub = Service.rpc_stub_class
