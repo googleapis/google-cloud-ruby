@@ -35,12 +35,12 @@ module Google
             self.service_name = 'google.cloud.dataproc.v1.WorkflowTemplateService'
 
             # Creates new workflow template.
-            rpc :CreateWorkflowTemplate, Google::Cloud::Dataproc::V1::CreateWorkflowTemplateRequest, Google::Cloud::Dataproc::V1::WorkflowTemplate
+            rpc :CreateWorkflowTemplate, ::Google::Cloud::Dataproc::V1::CreateWorkflowTemplateRequest, ::Google::Cloud::Dataproc::V1::WorkflowTemplate
             # Retrieves the latest workflow template.
             #
             # Can retrieve previously instantiated template by specifying optional
             # version parameter.
-            rpc :GetWorkflowTemplate, Google::Cloud::Dataproc::V1::GetWorkflowTemplateRequest, Google::Cloud::Dataproc::V1::WorkflowTemplate
+            rpc :GetWorkflowTemplate, ::Google::Cloud::Dataproc::V1::GetWorkflowTemplateRequest, ::Google::Cloud::Dataproc::V1::WorkflowTemplate
             # Instantiates a template and begins execution.
             #
             # The returned Operation can be used to track execution of
@@ -61,7 +61,7 @@ module Google
             # On successful completion,
             # [Operation.response][google.longrunning.Operation.response] will be
             # [Empty][google.protobuf.Empty].
-            rpc :InstantiateWorkflowTemplate, Google::Cloud::Dataproc::V1::InstantiateWorkflowTemplateRequest, Google::Longrunning::Operation
+            rpc :InstantiateWorkflowTemplate, ::Google::Cloud::Dataproc::V1::InstantiateWorkflowTemplateRequest, ::Google::Longrunning::Operation
             # Instantiates a template and begins execution.
             #
             # This method is equivalent to executing the sequence
@@ -86,14 +86,14 @@ module Google
             # On successful completion,
             # [Operation.response][google.longrunning.Operation.response] will be
             # [Empty][google.protobuf.Empty].
-            rpc :InstantiateInlineWorkflowTemplate, Google::Cloud::Dataproc::V1::InstantiateInlineWorkflowTemplateRequest, Google::Longrunning::Operation
+            rpc :InstantiateInlineWorkflowTemplate, ::Google::Cloud::Dataproc::V1::InstantiateInlineWorkflowTemplateRequest, ::Google::Longrunning::Operation
             # Updates (replaces) workflow template. The updated template
             # must contain version that matches the current server version.
-            rpc :UpdateWorkflowTemplate, Google::Cloud::Dataproc::V1::UpdateWorkflowTemplateRequest, Google::Cloud::Dataproc::V1::WorkflowTemplate
+            rpc :UpdateWorkflowTemplate, ::Google::Cloud::Dataproc::V1::UpdateWorkflowTemplateRequest, ::Google::Cloud::Dataproc::V1::WorkflowTemplate
             # Lists workflows that match the specified filter in the request.
-            rpc :ListWorkflowTemplates, Google::Cloud::Dataproc::V1::ListWorkflowTemplatesRequest, Google::Cloud::Dataproc::V1::ListWorkflowTemplatesResponse
+            rpc :ListWorkflowTemplates, ::Google::Cloud::Dataproc::V1::ListWorkflowTemplatesRequest, ::Google::Cloud::Dataproc::V1::ListWorkflowTemplatesResponse
             # Deletes a workflow template. It does not cancel in-progress workflows.
-            rpc :DeleteWorkflowTemplate, Google::Cloud::Dataproc::V1::DeleteWorkflowTemplateRequest, Google::Protobuf::Empty
+            rpc :DeleteWorkflowTemplate, ::Google::Cloud::Dataproc::V1::DeleteWorkflowTemplateRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class
