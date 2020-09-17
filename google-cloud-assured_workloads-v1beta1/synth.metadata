@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "fa700fbae80c0ee805770abb8932ff0fde79c9b4"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "e1d661afe7586d44a29821d44fe8a4cc6d0a34a9"
       }
     },
     {
@@ -26,5 +26,43 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-assured_workloads-v1beta1.gemspec",
+    "lib/google-cloud-assured_workloads-v1beta1.rb",
+    "lib/google/cloud/assured_workloads/v1beta1.rb",
+    "lib/google/cloud/assured_workloads/v1beta1/assured_workloads_service.rb",
+    "lib/google/cloud/assured_workloads/v1beta1/assured_workloads_service/client.rb",
+    "lib/google/cloud/assured_workloads/v1beta1/assured_workloads_service/credentials.rb",
+    "lib/google/cloud/assured_workloads/v1beta1/assured_workloads_service/operations.rb",
+    "lib/google/cloud/assured_workloads/v1beta1/assured_workloads_service/paths.rb",
+    "lib/google/cloud/assured_workloads/v1beta1/version.rb",
+    "lib/google/cloud/assuredworkloads/v1beta1/assuredworkloads_v1beta1_pb.rb",
+    "lib/google/cloud/assuredworkloads/v1beta1/assuredworkloads_v1beta1_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/assuredworkloads/v1beta1/assuredworkloads_v1beta1.rb",
+    "proto_docs/google/longrunning/operations.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/duration.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/rpc/status.rb",
+    "test/google/cloud/assured_workloads/v1beta1/assured_workloads_service_operations_test.rb",
+    "test/google/cloud/assured_workloads/v1beta1/assured_workloads_service_paths_test.rb",
+    "test/google/cloud/assured_workloads/v1beta1/assured_workloads_service_test.rb",
+    "test/helper.rb"
   ]
 }

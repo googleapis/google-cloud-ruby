@@ -114,6 +114,40 @@ namespace :acceptance do
   end
 end
 
+task :samples do
+  Rake::Task["samples:latest"].invoke
+end
+
+namespace :samples do
+  task :latest do
+    if File.directory? "samples"
+      Dir.chdir "samples" do
+        Bundler.with_clean_env do
+          ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
+          sh "bundle update"
+          sh "bundle exec rake test"
+        end
+      end
+    else
+      puts "The google-cloud-assured_workloads-v1beta1 gem has no samples to test."
+    end
+  end
+
+  task :master do
+    if File.directory? "samples"
+      Dir.chdir "samples" do
+        Bundler.with_clean_env do
+          ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
+          sh "bundle update"
+          sh "bundle exec rake test"
+        end
+      end
+    else
+      puts "The google-cloud-assured_workloads-v1beta1 gem has no samples to test."
+    end
+  end
+end
+
 require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new do |y|
