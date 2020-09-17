@@ -34,11 +34,11 @@ module Google
             self.service_name = 'google.cloud.dialogflow.v2.Agents'
 
             # Retrieves the specified agent.
-            rpc :GetAgent, Google::Cloud::Dialogflow::V2::GetAgentRequest, Google::Cloud::Dialogflow::V2::Agent
+            rpc :GetAgent, ::Google::Cloud::Dialogflow::V2::GetAgentRequest, ::Google::Cloud::Dialogflow::V2::Agent
             # Creates/updates the specified agent.
-            rpc :SetAgent, Google::Cloud::Dialogflow::V2::SetAgentRequest, Google::Cloud::Dialogflow::V2::Agent
+            rpc :SetAgent, ::Google::Cloud::Dialogflow::V2::SetAgentRequest, ::Google::Cloud::Dialogflow::V2::Agent
             # Deletes the specified agent.
-            rpc :DeleteAgent, Google::Cloud::Dialogflow::V2::DeleteAgentRequest, Google::Protobuf::Empty
+            rpc :DeleteAgent, ::Google::Cloud::Dialogflow::V2::DeleteAgentRequest, ::Google::Protobuf::Empty
             # Returns the list of agents.
             #
             # Since there is at most one conversational agent per project, this method is
@@ -46,15 +46,15 @@ module Google
             # access to. One can achieve that with a wildcard project collection id "-".
             # Refer to [List
             # Sub-Collections](https://cloud.google.com/apis/design/design_patterns#list_sub-collections).
-            rpc :SearchAgents, Google::Cloud::Dialogflow::V2::SearchAgentsRequest, Google::Cloud::Dialogflow::V2::SearchAgentsResponse
+            rpc :SearchAgents, ::Google::Cloud::Dialogflow::V2::SearchAgentsRequest, ::Google::Cloud::Dialogflow::V2::SearchAgentsResponse
             # Trains the specified agent.
             #
             # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
-            rpc :TrainAgent, Google::Cloud::Dialogflow::V2::TrainAgentRequest, Google::Longrunning::Operation
+            rpc :TrainAgent, ::Google::Cloud::Dialogflow::V2::TrainAgentRequest, ::Google::Longrunning::Operation
             # Exports the specified agent to a ZIP file.
             #
             # Operation <response: [ExportAgentResponse][google.cloud.dialogflow.v2.ExportAgentResponse]>
-            rpc :ExportAgent, Google::Cloud::Dialogflow::V2::ExportAgentRequest, Google::Longrunning::Operation
+            rpc :ExportAgent, ::Google::Cloud::Dialogflow::V2::ExportAgentRequest, ::Google::Longrunning::Operation
             # Imports the specified agent from a ZIP file.
             #
             # Uploads new intents and entity types without deleting the existing ones.
@@ -68,7 +68,7 @@ module Google
             # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
             # An operation which tracks when importing is complete. It only tracks
             # when the draft agent is updated not when it is done training.
-            rpc :ImportAgent, Google::Cloud::Dialogflow::V2::ImportAgentRequest, Google::Longrunning::Operation
+            rpc :ImportAgent, ::Google::Cloud::Dialogflow::V2::ImportAgentRequest, ::Google::Longrunning::Operation
             # Restores the specified agent from a ZIP file.
             #
             # Replaces the current agent version with a new one. All the intents and
@@ -81,10 +81,10 @@ module Google
             # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
             # An operation which tracks when restoring is complete. It only tracks
             # when the draft agent is updated not when it is done training.
-            rpc :RestoreAgent, Google::Cloud::Dialogflow::V2::RestoreAgentRequest, Google::Longrunning::Operation
+            rpc :RestoreAgent, ::Google::Cloud::Dialogflow::V2::RestoreAgentRequest, ::Google::Longrunning::Operation
             # Gets agent validation result. Agent validation is performed during
             # training time and is updated automatically when training is completed.
-            rpc :GetValidationResult, Google::Cloud::Dialogflow::V2::GetValidationResultRequest, Google::Cloud::Dialogflow::V2::ValidationResult
+            rpc :GetValidationResult, ::Google::Cloud::Dialogflow::V2::GetValidationResultRequest, ::Google::Cloud::Dialogflow::V2::ValidationResult
           end
 
           Stub = Service.rpc_stub_class

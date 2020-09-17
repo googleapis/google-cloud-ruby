@@ -34,7 +34,7 @@ module Google
             self.service_name = 'google.cloud.dialogflow.v2.Environments'
 
             # Returns the list of all non-draft environments of the specified agent.
-            rpc :ListEnvironments, Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest, Google::Cloud::Dialogflow::V2::ListEnvironmentsResponse
+            rpc :ListEnvironments, ::Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest, ::Google::Cloud::Dialogflow::V2::ListEnvironmentsResponse
           end
 
           Stub = Service.rpc_stub_class
