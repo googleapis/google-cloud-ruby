@@ -45,19 +45,19 @@ module Google
             # This method returns a long-running `Operation`, which includes the build
             # ID. Pass the build ID to `GetBuild` to determine the build status (such as
             # `SUCCESS` or `FAILURE`).
-            rpc :CreateBuild, Google::Cloud::Build::V1::CreateBuildRequest, Google::Longrunning::Operation
+            rpc :CreateBuild, ::Google::Cloud::Build::V1::CreateBuildRequest, ::Google::Longrunning::Operation
             # Returns information about a previously requested build.
             #
             # The `Build` that is returned includes its status (such as `SUCCESS`,
             # `FAILURE`, or `WORKING`), and timing information.
-            rpc :GetBuild, Google::Cloud::Build::V1::GetBuildRequest, Google::Cloud::Build::V1::Build
+            rpc :GetBuild, ::Google::Cloud::Build::V1::GetBuildRequest, ::Google::Cloud::Build::V1::Build
             # Lists previously requested builds.
             #
             # Previously requested builds may still be in-progress, or may have finished
             # successfully or unsuccessfully.
-            rpc :ListBuilds, Google::Cloud::Build::V1::ListBuildsRequest, Google::Cloud::Build::V1::ListBuildsResponse
+            rpc :ListBuilds, ::Google::Cloud::Build::V1::ListBuildsRequest, ::Google::Cloud::Build::V1::ListBuildsResponse
             # Cancels a build in progress.
-            rpc :CancelBuild, Google::Cloud::Build::V1::CancelBuildRequest, Google::Cloud::Build::V1::Build
+            rpc :CancelBuild, ::Google::Cloud::Build::V1::CancelBuildRequest, ::Google::Cloud::Build::V1::Build
             # Creates a new build based on the specified build.
             #
             # This method creates a new build using the original build request, which may
@@ -85,49 +85,49 @@ module Google
             # generation of the object, the new build will attempt to use the same
             # object, which may or may not be available depending on the bucket's
             # lifecycle management settings.
-            rpc :RetryBuild, Google::Cloud::Build::V1::RetryBuildRequest, Google::Longrunning::Operation
+            rpc :RetryBuild, ::Google::Cloud::Build::V1::RetryBuildRequest, ::Google::Longrunning::Operation
             # Creates a new `BuildTrigger`.
             #
             # This API is experimental.
-            rpc :CreateBuildTrigger, Google::Cloud::Build::V1::CreateBuildTriggerRequest, Google::Cloud::Build::V1::BuildTrigger
+            rpc :CreateBuildTrigger, ::Google::Cloud::Build::V1::CreateBuildTriggerRequest, ::Google::Cloud::Build::V1::BuildTrigger
             # Returns information about a `BuildTrigger`.
             #
             # This API is experimental.
-            rpc :GetBuildTrigger, Google::Cloud::Build::V1::GetBuildTriggerRequest, Google::Cloud::Build::V1::BuildTrigger
+            rpc :GetBuildTrigger, ::Google::Cloud::Build::V1::GetBuildTriggerRequest, ::Google::Cloud::Build::V1::BuildTrigger
             # Lists existing `BuildTrigger`s.
             #
             # This API is experimental.
-            rpc :ListBuildTriggers, Google::Cloud::Build::V1::ListBuildTriggersRequest, Google::Cloud::Build::V1::ListBuildTriggersResponse
+            rpc :ListBuildTriggers, ::Google::Cloud::Build::V1::ListBuildTriggersRequest, ::Google::Cloud::Build::V1::ListBuildTriggersResponse
             # Deletes a `BuildTrigger` by its project ID and trigger ID.
             #
             # This API is experimental.
-            rpc :DeleteBuildTrigger, Google::Cloud::Build::V1::DeleteBuildTriggerRequest, Google::Protobuf::Empty
+            rpc :DeleteBuildTrigger, ::Google::Cloud::Build::V1::DeleteBuildTriggerRequest, ::Google::Protobuf::Empty
             # Updates a `BuildTrigger` by its project ID and trigger ID.
             #
             # This API is experimental.
-            rpc :UpdateBuildTrigger, Google::Cloud::Build::V1::UpdateBuildTriggerRequest, Google::Cloud::Build::V1::BuildTrigger
+            rpc :UpdateBuildTrigger, ::Google::Cloud::Build::V1::UpdateBuildTriggerRequest, ::Google::Cloud::Build::V1::BuildTrigger
             # Runs a `BuildTrigger` at a particular source revision.
-            rpc :RunBuildTrigger, Google::Cloud::Build::V1::RunBuildTriggerRequest, Google::Longrunning::Operation
+            rpc :RunBuildTrigger, ::Google::Cloud::Build::V1::RunBuildTriggerRequest, ::Google::Longrunning::Operation
             # Creates a `WorkerPool` to run the builds, and returns the new worker pool.
             #
             # This API is experimental.
-            rpc :CreateWorkerPool, Google::Cloud::Build::V1::CreateWorkerPoolRequest, Google::Cloud::Build::V1::WorkerPool
+            rpc :CreateWorkerPool, ::Google::Cloud::Build::V1::CreateWorkerPoolRequest, ::Google::Cloud::Build::V1::WorkerPool
             # Returns information about a `WorkerPool`.
             #
             # This API is experimental.
-            rpc :GetWorkerPool, Google::Cloud::Build::V1::GetWorkerPoolRequest, Google::Cloud::Build::V1::WorkerPool
+            rpc :GetWorkerPool, ::Google::Cloud::Build::V1::GetWorkerPoolRequest, ::Google::Cloud::Build::V1::WorkerPool
             # Deletes a `WorkerPool` by its project ID and WorkerPool name.
             #
             # This API is experimental.
-            rpc :DeleteWorkerPool, Google::Cloud::Build::V1::DeleteWorkerPoolRequest, Google::Protobuf::Empty
+            rpc :DeleteWorkerPool, ::Google::Cloud::Build::V1::DeleteWorkerPoolRequest, ::Google::Protobuf::Empty
             # Update a `WorkerPool`.
             #
             # This API is experimental.
-            rpc :UpdateWorkerPool, Google::Cloud::Build::V1::UpdateWorkerPoolRequest, Google::Cloud::Build::V1::WorkerPool
+            rpc :UpdateWorkerPool, ::Google::Cloud::Build::V1::UpdateWorkerPoolRequest, ::Google::Cloud::Build::V1::WorkerPool
             # List project's `WorkerPools`.
             #
             # This API is experimental.
-            rpc :ListWorkerPools, Google::Cloud::Build::V1::ListWorkerPoolsRequest, Google::Cloud::Build::V1::ListWorkerPoolsResponse
+            rpc :ListWorkerPools, ::Google::Cloud::Build::V1::ListWorkerPoolsRequest, ::Google::Cloud::Build::V1::ListWorkerPoolsResponse
           end
 
           Stub = Service.rpc_stub_class
