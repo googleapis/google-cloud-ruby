@@ -54,7 +54,7 @@ module Google
             # The resource takes the format `projects/[PROJECT_ID]/notes/[NOTE_ID]` for
             # notes and `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]` for
             # occurrences.
-            rpc :SetIamPolicy, Google::Iam::V1::SetIamPolicyRequest, Google::Iam::V1::Policy
+            rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Gets the access control policy for a note or an occurrence resource.
             # Requires `containeranalysis.notes.setIamPolicy` or
             # `containeranalysis.occurrences.setIamPolicy` permission if the resource is
@@ -63,7 +63,7 @@ module Google
             # The resource takes the format `projects/[PROJECT_ID]/notes/[NOTE_ID]` for
             # notes and `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]` for
             # occurrences.
-            rpc :GetIamPolicy, Google::Iam::V1::GetIamPolicyRequest, Google::Iam::V1::Policy
+            rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Returns the permissions that a caller has on the specified note or
             # occurrence. Requires list permission on the project (for example,
             # `containeranalysis.notes.list`).
@@ -71,7 +71,7 @@ module Google
             # The resource takes the format `projects/[PROJECT_ID]/notes/[NOTE_ID]` for
             # notes and `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]` for
             # occurrences.
-            rpc :TestIamPermissions, Google::Iam::V1::TestIamPermissionsRequest, Google::Iam::V1::TestIamPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
