@@ -38,27 +38,27 @@ module Google
             # rows and cells may be broken up across multiple responses, but
             # atomicity of each row will still be preserved. See the
             # ReadRowsResponse documentation for details.
-            rpc :ReadRows, Google::Cloud::Bigtable::V2::ReadRowsRequest, stream(Google::Cloud::Bigtable::V2::ReadRowsResponse)
+            rpc :ReadRows, ::Google::Cloud::Bigtable::V2::ReadRowsRequest, stream(::Google::Cloud::Bigtable::V2::ReadRowsResponse)
             # Returns a sample of row keys in the table. The returned row keys will
             # delimit contiguous sections of the table of approximately equal size,
             # which can be used to break up the data for distributed tasks like
             # mapreduces.
-            rpc :SampleRowKeys, Google::Cloud::Bigtable::V2::SampleRowKeysRequest, stream(Google::Cloud::Bigtable::V2::SampleRowKeysResponse)
+            rpc :SampleRowKeys, ::Google::Cloud::Bigtable::V2::SampleRowKeysRequest, stream(::Google::Cloud::Bigtable::V2::SampleRowKeysResponse)
             # Mutates a row atomically. Cells already present in the row are left
             # unchanged unless explicitly changed by `mutation`.
-            rpc :MutateRow, Google::Cloud::Bigtable::V2::MutateRowRequest, Google::Cloud::Bigtable::V2::MutateRowResponse
+            rpc :MutateRow, ::Google::Cloud::Bigtable::V2::MutateRowRequest, ::Google::Cloud::Bigtable::V2::MutateRowResponse
             # Mutates multiple rows in a batch. Each individual row is mutated
             # atomically as in MutateRow, but the entire batch is not executed
             # atomically.
-            rpc :MutateRows, Google::Cloud::Bigtable::V2::MutateRowsRequest, stream(Google::Cloud::Bigtable::V2::MutateRowsResponse)
+            rpc :MutateRows, ::Google::Cloud::Bigtable::V2::MutateRowsRequest, stream(::Google::Cloud::Bigtable::V2::MutateRowsResponse)
             # Mutates a row atomically based on the output of a predicate Reader filter.
-            rpc :CheckAndMutateRow, Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest, Google::Cloud::Bigtable::V2::CheckAndMutateRowResponse
+            rpc :CheckAndMutateRow, ::Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest, ::Google::Cloud::Bigtable::V2::CheckAndMutateRowResponse
             # Modifies a row atomically on the server. The method reads the latest
             # existing timestamp and value from the specified columns and writes a new
             # entry based on pre-defined read/modify/write rules. The new value for the
             # timestamp is the greater of the existing timestamp or the current server
             # time. The method returns the new contents of all modified cells.
-            rpc :ReadModifyWriteRow, Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest, Google::Cloud::Bigtable::V2::ReadModifyWriteRowResponse
+            rpc :ReadModifyWriteRow, ::Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest, ::Google::Cloud::Bigtable::V2::ReadModifyWriteRowResponse
           end
 
           Stub = Service.rpc_stub_class
