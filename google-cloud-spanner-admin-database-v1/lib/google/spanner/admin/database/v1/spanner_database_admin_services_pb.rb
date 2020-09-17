@@ -41,7 +41,7 @@ module Google
                 self.service_name = 'google.spanner.admin.database.v1.DatabaseAdmin'
 
                 # Lists Cloud Spanner databases.
-                rpc :ListDatabases, Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesRequest, Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesResponse
+                rpc :ListDatabases, ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesRequest, ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesResponse
                 # Creates a new Cloud Spanner database and starts to prepare it for serving.
                 # The returned [long-running operation][google.longrunning.Operation] will
                 # have a name of the format `<database_name>/operations/<operation_id>` and
@@ -50,9 +50,9 @@ module Google
                 # [CreateDatabaseMetadata][google.spanner.admin.database.v1.CreateDatabaseMetadata]. The
                 # [response][google.longrunning.Operation.response] field type is
                 # [Database][google.spanner.admin.database.v1.Database], if successful.
-                rpc :CreateDatabase, Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest, Google::Longrunning::Operation
+                rpc :CreateDatabase, ::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest, ::Google::Longrunning::Operation
                 # Gets the state of a Cloud Spanner database.
-                rpc :GetDatabase, Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseRequest, Google::Cloud::Spanner::Admin::Database::V1::Database
+                rpc :GetDatabase, ::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseRequest, ::Google::Cloud::Spanner::Admin::Database::V1::Database
                 # Updates the schema of a Cloud Spanner database by
                 # creating/altering/dropping tables, columns, indexes, etc. The returned
                 # [long-running operation][google.longrunning.Operation] will have a name of
@@ -60,15 +60,15 @@ module Google
                 # track execution of the schema change(s). The
                 # [metadata][google.longrunning.Operation.metadata] field type is
                 # [UpdateDatabaseDdlMetadata][google.spanner.admin.database.v1.UpdateDatabaseDdlMetadata].  The operation has no response.
-                rpc :UpdateDatabaseDdl, Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest, Google::Longrunning::Operation
+                rpc :UpdateDatabaseDdl, ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest, ::Google::Longrunning::Operation
                 # Drops (aka deletes) a Cloud Spanner database.
                 # Completed backups for the database will be retained according to their
                 # `expire_time`.
-                rpc :DropDatabase, Google::Cloud::Spanner::Admin::Database::V1::DropDatabaseRequest, Google::Protobuf::Empty
+                rpc :DropDatabase, ::Google::Cloud::Spanner::Admin::Database::V1::DropDatabaseRequest, ::Google::Protobuf::Empty
                 # Returns the schema of a Cloud Spanner database as a list of formatted
                 # DDL statements. This method does not show pending schema updates, those may
                 # be queried using the [Operations][google.longrunning.Operations] API.
-                rpc :GetDatabaseDdl, Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlRequest, Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlResponse
+                rpc :GetDatabaseDdl, ::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlRequest, ::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlResponse
                 # Sets the access control policy on a database or backup resource.
                 # Replaces any existing policy.
                 #
@@ -76,7 +76,7 @@ module Google
                 # permission on [resource][google.iam.v1.SetIamPolicyRequest.resource].
                 # For backups, authorization requires `spanner.backups.setIamPolicy`
                 # permission on [resource][google.iam.v1.SetIamPolicyRequest.resource].
-                rpc :SetIamPolicy, Google::Iam::V1::SetIamPolicyRequest, Google::Iam::V1::Policy
+                rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
                 # Gets the access control policy for a database or backup resource.
                 # Returns an empty policy if a database or backup exists but does not have a
                 # policy set.
@@ -85,7 +85,7 @@ module Google
                 # [resource][google.iam.v1.GetIamPolicyRequest.resource].
                 # For backups, authorization requires `spanner.backups.getIamPolicy`
                 # permission on [resource][google.iam.v1.GetIamPolicyRequest.resource].
-                rpc :GetIamPolicy, Google::Iam::V1::GetIamPolicyRequest, Google::Iam::V1::Policy
+                rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
                 # Returns permissions that the caller has on the specified database or backup
                 # resource.
                 #
@@ -96,7 +96,7 @@ module Google
                 # Calling this method on a backup that does not exist will
                 # result in a NOT_FOUND error if the user has
                 # `spanner.backups.list` permission on the containing instance.
-                rpc :TestIamPermissions, Google::Iam::V1::TestIamPermissionsRequest, Google::Iam::V1::TestIamPermissionsResponse
+                rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
                 # Starts creating a new Cloud Spanner Backup.
                 # The returned backup [long-running operation][google.longrunning.Operation]
                 # will have a name of the format
@@ -109,17 +109,17 @@ module Google
                 # creation and delete the backup.
                 # There can be only one pending backup creation per database. Backup creation
                 # of different databases can run concurrently.
-                rpc :CreateBackup, Google::Cloud::Spanner::Admin::Database::V1::CreateBackupRequest, Google::Longrunning::Operation
+                rpc :CreateBackup, ::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupRequest, ::Google::Longrunning::Operation
                 # Gets metadata on a pending or completed [Backup][google.spanner.admin.database.v1.Backup].
-                rpc :GetBackup, Google::Cloud::Spanner::Admin::Database::V1::GetBackupRequest, Google::Cloud::Spanner::Admin::Database::V1::Backup
+                rpc :GetBackup, ::Google::Cloud::Spanner::Admin::Database::V1::GetBackupRequest, ::Google::Cloud::Spanner::Admin::Database::V1::Backup
                 # Updates a pending or completed [Backup][google.spanner.admin.database.v1.Backup].
-                rpc :UpdateBackup, Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupRequest, Google::Cloud::Spanner::Admin::Database::V1::Backup
+                rpc :UpdateBackup, ::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupRequest, ::Google::Cloud::Spanner::Admin::Database::V1::Backup
                 # Deletes a pending or completed [Backup][google.spanner.admin.database.v1.Backup].
-                rpc :DeleteBackup, Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupRequest, Google::Protobuf::Empty
+                rpc :DeleteBackup, ::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupRequest, ::Google::Protobuf::Empty
                 # Lists completed and pending backups.
                 # Backups returned are ordered by `create_time` in descending order,
                 # starting from the most recent `create_time`.
-                rpc :ListBackups, Google::Cloud::Spanner::Admin::Database::V1::ListBackupsRequest, Google::Cloud::Spanner::Admin::Database::V1::ListBackupsResponse
+                rpc :ListBackups, ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsRequest, ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsResponse
                 # Create a new database by restoring from a completed backup. The new
                 # database must be in the same project and in an instance with the same
                 # instance configuration as the instance containing
@@ -137,7 +137,7 @@ module Google
                 # Once the restore operation completes, a new restore operation can be
                 # initiated, without waiting for the optimize operation associated with the
                 # first restore to complete.
-                rpc :RestoreDatabase, Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseRequest, Google::Longrunning::Operation
+                rpc :RestoreDatabase, ::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseRequest, ::Google::Longrunning::Operation
                 # Lists database [longrunning-operations][google.longrunning.Operation].
                 # A database operation has a name of the form
                 # `projects/<project>/instances/<instance>/databases/<database>/operations/<operation>`.
@@ -146,7 +146,7 @@ module Google
                 # `metadata.type_url` describes the type of the metadata. Operations returned
                 # include those that have completed/failed/canceled within the last 7 days,
                 # and pending operations.
-                rpc :ListDatabaseOperations, Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsRequest, Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse
+                rpc :ListDatabaseOperations, ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsRequest, ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse
                 # Lists the backup [long-running operations][google.longrunning.Operation] in
                 # the given instance. A backup operation has a name of the form
                 # `projects/<project>/instances/<instance>/backups/<backup>/operations/<operation>`.
@@ -157,7 +157,7 @@ module Google
                 # and pending operations. Operations returned are ordered by
                 # `operation.metadata.value.progress.start_time` in descending order starting
                 # from the most recently started operation.
-                rpc :ListBackupOperations, Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsRequest, Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsResponse
+                rpc :ListBackupOperations, ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsRequest, ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsResponse
               end
 
               Stub = Service.rpc_stub_class
