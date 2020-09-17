@@ -1,5 +1,15 @@
 # Release History
 
+### 2.2.0 / 2020-09-17
+
+#### Features
+
+* quota_project can be set via library configuration ([#7630](https://www.github.com/googleapis/google-cloud-ruby/issues/7630))
+
+#### Documentation
+
+* Add snapshot query cursor sample ([#7601](https://www.github.com/googleapis/google-cloud-ruby/issues/7601))
+
 ### 2.1.0 / 2020-09-10
 
 #### Features
