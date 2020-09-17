@@ -50,7 +50,7 @@ module Google
             # See [Data Catalog Search
             # Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference)
             # for more information.
-            rpc :SearchCatalog, Google::Cloud::DataCatalog::V1::SearchCatalogRequest, Google::Cloud::DataCatalog::V1::SearchCatalogResponse
+            rpc :SearchCatalog, ::Google::Cloud::DataCatalog::V1::SearchCatalogRequest, ::Google::Cloud::DataCatalog::V1::SearchCatalogResponse
             # Creates an EntryGroup.
             #
             # An entry group contains logically related entries together with Cloud
@@ -70,23 +70,23 @@ module Google
             # the `parent` parameter (see [Data Catalog Resource Project]
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
-            rpc :CreateEntryGroup, Google::Cloud::DataCatalog::V1::CreateEntryGroupRequest, Google::Cloud::DataCatalog::V1::EntryGroup
+            rpc :CreateEntryGroup, ::Google::Cloud::DataCatalog::V1::CreateEntryGroupRequest, ::Google::Cloud::DataCatalog::V1::EntryGroup
             # Gets an EntryGroup.
-            rpc :GetEntryGroup, Google::Cloud::DataCatalog::V1::GetEntryGroupRequest, Google::Cloud::DataCatalog::V1::EntryGroup
+            rpc :GetEntryGroup, ::Google::Cloud::DataCatalog::V1::GetEntryGroupRequest, ::Google::Cloud::DataCatalog::V1::EntryGroup
             # Updates an EntryGroup. The user should enable the Data Catalog API in the
             # project identified by the `entry_group.name` parameter (see [Data Catalog
             # Resource Project]
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
-            rpc :UpdateEntryGroup, Google::Cloud::DataCatalog::V1::UpdateEntryGroupRequest, Google::Cloud::DataCatalog::V1::EntryGroup
+            rpc :UpdateEntryGroup, ::Google::Cloud::DataCatalog::V1::UpdateEntryGroupRequest, ::Google::Cloud::DataCatalog::V1::EntryGroup
             # Deletes an EntryGroup. Only entry groups that do not contain entries can be
             # deleted. Users should enable the Data Catalog API in the project
             # identified by the `name` parameter (see [Data Catalog Resource Project]
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
-            rpc :DeleteEntryGroup, Google::Cloud::DataCatalog::V1::DeleteEntryGroupRequest, Google::Protobuf::Empty
+            rpc :DeleteEntryGroup, ::Google::Cloud::DataCatalog::V1::DeleteEntryGroupRequest, ::Google::Protobuf::Empty
             # Lists entry groups.
-            rpc :ListEntryGroups, Google::Cloud::DataCatalog::V1::ListEntryGroupsRequest, Google::Cloud::DataCatalog::V1::ListEntryGroupsResponse
+            rpc :ListEntryGroups, ::Google::Cloud::DataCatalog::V1::ListEntryGroupsRequest, ::Google::Cloud::DataCatalog::V1::ListEntryGroupsResponse
             # Creates an entry. Only entries of 'FILESET' type or user-specified type can
             # be created.
             #
@@ -96,13 +96,13 @@ module Google
             # more information).
             #
             # A maximum of 100,000 entries may be created per entry group.
-            rpc :CreateEntry, Google::Cloud::DataCatalog::V1::CreateEntryRequest, Google::Cloud::DataCatalog::V1::Entry
+            rpc :CreateEntry, ::Google::Cloud::DataCatalog::V1::CreateEntryRequest, ::Google::Cloud::DataCatalog::V1::Entry
             # Updates an existing entry.
             # Users should enable the Data Catalog API in the project identified by
             # the `entry.name` parameter (see [Data Catalog Resource Project]
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
-            rpc :UpdateEntry, Google::Cloud::DataCatalog::V1::UpdateEntryRequest, Google::Cloud::DataCatalog::V1::Entry
+            rpc :UpdateEntry, ::Google::Cloud::DataCatalog::V1::UpdateEntryRequest, ::Google::Cloud::DataCatalog::V1::Entry
             # Deletes an existing entry. Only entries created through
             # [CreateEntry][google.cloud.datacatalog.v1.DataCatalog.CreateEntry]
             # method can be deleted.
@@ -110,23 +110,23 @@ module Google
             # the `name` parameter (see [Data Catalog Resource Project]
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
-            rpc :DeleteEntry, Google::Cloud::DataCatalog::V1::DeleteEntryRequest, Google::Protobuf::Empty
+            rpc :DeleteEntry, ::Google::Cloud::DataCatalog::V1::DeleteEntryRequest, ::Google::Protobuf::Empty
             # Gets an entry.
-            rpc :GetEntry, Google::Cloud::DataCatalog::V1::GetEntryRequest, Google::Cloud::DataCatalog::V1::Entry
+            rpc :GetEntry, ::Google::Cloud::DataCatalog::V1::GetEntryRequest, ::Google::Cloud::DataCatalog::V1::Entry
             # Get an entry by target resource name. This method allows clients to use
             # the resource name from the source Google Cloud Platform service to get the
             # Data Catalog Entry.
-            rpc :LookupEntry, Google::Cloud::DataCatalog::V1::LookupEntryRequest, Google::Cloud::DataCatalog::V1::Entry
+            rpc :LookupEntry, ::Google::Cloud::DataCatalog::V1::LookupEntryRequest, ::Google::Cloud::DataCatalog::V1::Entry
             # Lists entries.
-            rpc :ListEntries, Google::Cloud::DataCatalog::V1::ListEntriesRequest, Google::Cloud::DataCatalog::V1::ListEntriesResponse
+            rpc :ListEntries, ::Google::Cloud::DataCatalog::V1::ListEntriesRequest, ::Google::Cloud::DataCatalog::V1::ListEntriesResponse
             # Creates a tag template. The user should enable the Data Catalog API in
             # the project identified by the `parent` parameter (see [Data Catalog
             # Resource
             # Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)
             # for more information).
-            rpc :CreateTagTemplate, Google::Cloud::DataCatalog::V1::CreateTagTemplateRequest, Google::Cloud::DataCatalog::V1::TagTemplate
+            rpc :CreateTagTemplate, ::Google::Cloud::DataCatalog::V1::CreateTagTemplateRequest, ::Google::Cloud::DataCatalog::V1::TagTemplate
             # Gets a tag template.
-            rpc :GetTagTemplate, Google::Cloud::DataCatalog::V1::GetTagTemplateRequest, Google::Cloud::DataCatalog::V1::TagTemplate
+            rpc :GetTagTemplate, ::Google::Cloud::DataCatalog::V1::GetTagTemplateRequest, ::Google::Cloud::DataCatalog::V1::TagTemplate
             # Updates a tag template. This method cannot be used to update the fields of
             # a template. The tag template fields are represented as separate resources
             # and should be updated using their own create/update/delete methods.
@@ -134,37 +134,37 @@ module Google
             # the `tag_template.name` parameter (see [Data Catalog Resource Project]
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
-            rpc :UpdateTagTemplate, Google::Cloud::DataCatalog::V1::UpdateTagTemplateRequest, Google::Cloud::DataCatalog::V1::TagTemplate
+            rpc :UpdateTagTemplate, ::Google::Cloud::DataCatalog::V1::UpdateTagTemplateRequest, ::Google::Cloud::DataCatalog::V1::TagTemplate
             # Deletes a tag template and all tags using the template.
             # Users should enable the Data Catalog API in the project identified by
             # the `name` parameter (see [Data Catalog Resource Project]
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
-            rpc :DeleteTagTemplate, Google::Cloud::DataCatalog::V1::DeleteTagTemplateRequest, Google::Protobuf::Empty
+            rpc :DeleteTagTemplate, ::Google::Cloud::DataCatalog::V1::DeleteTagTemplateRequest, ::Google::Protobuf::Empty
             # Creates a field in a tag template. The user should enable the Data Catalog
             # API in the project identified by the `parent` parameter (see
             # [Data Catalog Resource
             # Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)
             # for more information).
-            rpc :CreateTagTemplateField, Google::Cloud::DataCatalog::V1::CreateTagTemplateFieldRequest, Google::Cloud::DataCatalog::V1::TagTemplateField
+            rpc :CreateTagTemplateField, ::Google::Cloud::DataCatalog::V1::CreateTagTemplateFieldRequest, ::Google::Cloud::DataCatalog::V1::TagTemplateField
             # Updates a field in a tag template. This method cannot be used to update the
             # field type. Users should enable the Data Catalog API in the project
             # identified by the `name` parameter (see [Data Catalog Resource Project]
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
-            rpc :UpdateTagTemplateField, Google::Cloud::DataCatalog::V1::UpdateTagTemplateFieldRequest, Google::Cloud::DataCatalog::V1::TagTemplateField
+            rpc :UpdateTagTemplateField, ::Google::Cloud::DataCatalog::V1::UpdateTagTemplateFieldRequest, ::Google::Cloud::DataCatalog::V1::TagTemplateField
             # Renames a field in a tag template. The user should enable the Data Catalog
             # API in the project identified by the `name` parameter (see [Data Catalog
             # Resource
             # Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)
             # for more information).
-            rpc :RenameTagTemplateField, Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldRequest, Google::Cloud::DataCatalog::V1::TagTemplateField
+            rpc :RenameTagTemplateField, ::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldRequest, ::Google::Cloud::DataCatalog::V1::TagTemplateField
             # Deletes a field in a tag template and all uses of that field.
             # Users should enable the Data Catalog API in the project identified by
             # the `name` parameter (see [Data Catalog Resource Project]
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
-            rpc :DeleteTagTemplateField, Google::Cloud::DataCatalog::V1::DeleteTagTemplateFieldRequest, Google::Protobuf::Empty
+            rpc :DeleteTagTemplateField, ::Google::Cloud::DataCatalog::V1::DeleteTagTemplateFieldRequest, ::Google::Protobuf::Empty
             # Creates a tag on an [Entry][google.cloud.datacatalog.v1.Entry].
             # Note: The project identified by the `parent` parameter for the
             # [tag](https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.entryGroups.entries.tags/create#path-parameters)
@@ -172,13 +172,13 @@ module Google
             # [tag
             # template](https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.tagTemplates/create#path-parameters)
             # used to create the tag must be from the same organization.
-            rpc :CreateTag, Google::Cloud::DataCatalog::V1::CreateTagRequest, Google::Cloud::DataCatalog::V1::Tag
+            rpc :CreateTag, ::Google::Cloud::DataCatalog::V1::CreateTagRequest, ::Google::Cloud::DataCatalog::V1::Tag
             # Updates an existing tag.
-            rpc :UpdateTag, Google::Cloud::DataCatalog::V1::UpdateTagRequest, Google::Cloud::DataCatalog::V1::Tag
+            rpc :UpdateTag, ::Google::Cloud::DataCatalog::V1::UpdateTagRequest, ::Google::Cloud::DataCatalog::V1::Tag
             # Deletes a tag.
-            rpc :DeleteTag, Google::Cloud::DataCatalog::V1::DeleteTagRequest, Google::Protobuf::Empty
+            rpc :DeleteTag, ::Google::Cloud::DataCatalog::V1::DeleteTagRequest, ::Google::Protobuf::Empty
             # Lists the tags on an [Entry][google.cloud.datacatalog.v1.Entry].
-            rpc :ListTags, Google::Cloud::DataCatalog::V1::ListTagsRequest, Google::Cloud::DataCatalog::V1::ListTagsResponse
+            rpc :ListTags, ::Google::Cloud::DataCatalog::V1::ListTagsRequest, ::Google::Cloud::DataCatalog::V1::ListTagsResponse
             # Sets the access control policy for a resource. Replaces any existing
             # policy.
             # Supported resources are:
@@ -193,7 +193,7 @@ module Google
             #     templates.
             #   - `datacatalog.entries.setIamPolicy` to set policies on entries.
             #   - `datacatalog.entryGroups.setIamPolicy` to set policies on entry groups.
-            rpc :SetIamPolicy, Google::Iam::V1::SetIamPolicyRequest, Google::Iam::V1::Policy
+            rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Gets the access control policy for a resource. A `NOT_FOUND` error
             # is returned if the resource does not exist. An empty policy is returned
             # if the resource exists but does not have a policy set on it.
@@ -210,7 +210,7 @@ module Google
             #     templates.
             #   - `datacatalog.entries.getIamPolicy` to get policies on entries.
             #   - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
-            rpc :GetIamPolicy, Google::Iam::V1::GetIamPolicyRequest, Google::Iam::V1::Policy
+            rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Returns the caller's permissions on a resource.
             # If the resource does not exist, an empty set of permissions is returned
             # (We don't return a `NOT_FOUND` error).
@@ -224,7 +224,7 @@ module Google
             #
             # A caller is not required to have Google IAM permission to make this
             # request.
-            rpc :TestIamPermissions, Google::Iam::V1::TestIamPermissionsRequest, Google::Iam::V1::TestIamPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
