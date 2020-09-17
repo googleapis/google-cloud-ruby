@@ -38,13 +38,13 @@ module Google
             # This method doesn't work with Google Assistant integration.
             # Contact Dialogflow support if you need to use session entities
             # with Google Assistant integration.
-            rpc :ListSessionEntityTypes, Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest, Google::Cloud::Dialogflow::V2::ListSessionEntityTypesResponse
+            rpc :ListSessionEntityTypes, ::Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest, ::Google::Cloud::Dialogflow::V2::ListSessionEntityTypesResponse
             # Retrieves the specified session entity type.
             #
             # This method doesn't work with Google Assistant integration.
             # Contact Dialogflow support if you need to use session entities
             # with Google Assistant integration.
-            rpc :GetSessionEntityType, Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest, Google::Cloud::Dialogflow::V2::SessionEntityType
+            rpc :GetSessionEntityType, ::Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest, ::Google::Cloud::Dialogflow::V2::SessionEntityType
             # Creates a session entity type.
             #
             # If the specified session entity type already exists, overrides the session
@@ -53,19 +53,19 @@ module Google
             # This method doesn't work with Google Assistant integration.
             # Contact Dialogflow support if you need to use session entities
             # with Google Assistant integration.
-            rpc :CreateSessionEntityType, Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest, Google::Cloud::Dialogflow::V2::SessionEntityType
+            rpc :CreateSessionEntityType, ::Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest, ::Google::Cloud::Dialogflow::V2::SessionEntityType
             # Updates the specified session entity type.
             #
             # This method doesn't work with Google Assistant integration.
             # Contact Dialogflow support if you need to use session entities
             # with Google Assistant integration.
-            rpc :UpdateSessionEntityType, Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest, Google::Cloud::Dialogflow::V2::SessionEntityType
+            rpc :UpdateSessionEntityType, ::Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest, ::Google::Cloud::Dialogflow::V2::SessionEntityType
             # Deletes the specified session entity type.
             #
             # This method doesn't work with Google Assistant integration.
             # Contact Dialogflow support if you need to use session entities
             # with Google Assistant integration.
-            rpc :DeleteSessionEntityType, Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest, Google::Protobuf::Empty
+            rpc :DeleteSessionEntityType, ::Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class

@@ -34,23 +34,23 @@ module Google
             self.service_name = 'google.cloud.dialogflow.v2.Intents'
 
             # Returns the list of all intents in the specified agent.
-            rpc :ListIntents, Google::Cloud::Dialogflow::V2::ListIntentsRequest, Google::Cloud::Dialogflow::V2::ListIntentsResponse
+            rpc :ListIntents, ::Google::Cloud::Dialogflow::V2::ListIntentsRequest, ::Google::Cloud::Dialogflow::V2::ListIntentsResponse
             # Retrieves the specified intent.
-            rpc :GetIntent, Google::Cloud::Dialogflow::V2::GetIntentRequest, Google::Cloud::Dialogflow::V2::Intent
+            rpc :GetIntent, ::Google::Cloud::Dialogflow::V2::GetIntentRequest, ::Google::Cloud::Dialogflow::V2::Intent
             # Creates an intent in the specified agent.
-            rpc :CreateIntent, Google::Cloud::Dialogflow::V2::CreateIntentRequest, Google::Cloud::Dialogflow::V2::Intent
+            rpc :CreateIntent, ::Google::Cloud::Dialogflow::V2::CreateIntentRequest, ::Google::Cloud::Dialogflow::V2::Intent
             # Updates the specified intent.
-            rpc :UpdateIntent, Google::Cloud::Dialogflow::V2::UpdateIntentRequest, Google::Cloud::Dialogflow::V2::Intent
+            rpc :UpdateIntent, ::Google::Cloud::Dialogflow::V2::UpdateIntentRequest, ::Google::Cloud::Dialogflow::V2::Intent
             # Deletes the specified intent and its direct or indirect followup intents.
-            rpc :DeleteIntent, Google::Cloud::Dialogflow::V2::DeleteIntentRequest, Google::Protobuf::Empty
+            rpc :DeleteIntent, ::Google::Cloud::Dialogflow::V2::DeleteIntentRequest, ::Google::Protobuf::Empty
             # Updates/Creates multiple intents in the specified agent.
             #
             # Operation <response: [BatchUpdateIntentsResponse][google.cloud.dialogflow.v2.BatchUpdateIntentsResponse]>
-            rpc :BatchUpdateIntents, Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest, Google::Longrunning::Operation
+            rpc :BatchUpdateIntents, ::Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest, ::Google::Longrunning::Operation
             # Deletes intents in the specified agent.
             #
             # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
-            rpc :BatchDeleteIntents, Google::Cloud::Dialogflow::V2::BatchDeleteIntentsRequest, Google::Longrunning::Operation
+            rpc :BatchDeleteIntents, ::Google::Cloud::Dialogflow::V2::BatchDeleteIntentsRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

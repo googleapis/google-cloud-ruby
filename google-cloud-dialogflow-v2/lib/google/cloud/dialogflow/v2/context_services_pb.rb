@@ -34,19 +34,19 @@ module Google
             self.service_name = 'google.cloud.dialogflow.v2.Contexts'
 
             # Returns the list of all contexts in the specified session.
-            rpc :ListContexts, Google::Cloud::Dialogflow::V2::ListContextsRequest, Google::Cloud::Dialogflow::V2::ListContextsResponse
+            rpc :ListContexts, ::Google::Cloud::Dialogflow::V2::ListContextsRequest, ::Google::Cloud::Dialogflow::V2::ListContextsResponse
             # Retrieves the specified context.
-            rpc :GetContext, Google::Cloud::Dialogflow::V2::GetContextRequest, Google::Cloud::Dialogflow::V2::Context
+            rpc :GetContext, ::Google::Cloud::Dialogflow::V2::GetContextRequest, ::Google::Cloud::Dialogflow::V2::Context
             # Creates a context.
             #
             # If the specified context already exists, overrides the context.
-            rpc :CreateContext, Google::Cloud::Dialogflow::V2::CreateContextRequest, Google::Cloud::Dialogflow::V2::Context
+            rpc :CreateContext, ::Google::Cloud::Dialogflow::V2::CreateContextRequest, ::Google::Cloud::Dialogflow::V2::Context
             # Updates the specified context.
-            rpc :UpdateContext, Google::Cloud::Dialogflow::V2::UpdateContextRequest, Google::Cloud::Dialogflow::V2::Context
+            rpc :UpdateContext, ::Google::Cloud::Dialogflow::V2::UpdateContextRequest, ::Google::Cloud::Dialogflow::V2::Context
             # Deletes the specified context.
-            rpc :DeleteContext, Google::Cloud::Dialogflow::V2::DeleteContextRequest, Google::Protobuf::Empty
+            rpc :DeleteContext, ::Google::Cloud::Dialogflow::V2::DeleteContextRequest, ::Google::Protobuf::Empty
             # Deletes all active contexts in the specified session.
-            rpc :DeleteAllContexts, Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest, Google::Protobuf::Empty
+            rpc :DeleteAllContexts, ::Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class
