@@ -20,3 +20,6 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/grafeas.rb"
+
+Style/AsciiComments:
+  Enabled: false
