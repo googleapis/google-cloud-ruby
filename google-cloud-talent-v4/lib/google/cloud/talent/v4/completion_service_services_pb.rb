@@ -35,7 +35,7 @@ module Google
 
             # Completes the specified prefix with keyword suggestions.
             # Intended for use by a job search auto-complete search box.
-            rpc :CompleteQuery, Google::Cloud::Talent::V4::CompleteQueryRequest, Google::Cloud::Talent::V4::CompleteQueryResponse
+            rpc :CompleteQuery, ::Google::Cloud::Talent::V4::CompleteQueryRequest, ::Google::Cloud::Talent::V4::CompleteQueryResponse
           end
 
           Stub = Service.rpc_stub_class
