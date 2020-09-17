@@ -37,25 +37,25 @@ module Google
             self.service_name = 'google.monitoring.v3.ServiceMonitoringService'
 
             # Create a `Service`.
-            rpc :CreateService, Google::Cloud::Monitoring::V3::CreateServiceRequest, Google::Cloud::Monitoring::V3::Service
+            rpc :CreateService, ::Google::Cloud::Monitoring::V3::CreateServiceRequest, ::Google::Cloud::Monitoring::V3::Service
             # Get the named `Service`.
-            rpc :GetService, Google::Cloud::Monitoring::V3::GetServiceRequest, Google::Cloud::Monitoring::V3::Service
+            rpc :GetService, ::Google::Cloud::Monitoring::V3::GetServiceRequest, ::Google::Cloud::Monitoring::V3::Service
             # List `Service`s for this workspace.
-            rpc :ListServices, Google::Cloud::Monitoring::V3::ListServicesRequest, Google::Cloud::Monitoring::V3::ListServicesResponse
+            rpc :ListServices, ::Google::Cloud::Monitoring::V3::ListServicesRequest, ::Google::Cloud::Monitoring::V3::ListServicesResponse
             # Update this `Service`.
-            rpc :UpdateService, Google::Cloud::Monitoring::V3::UpdateServiceRequest, Google::Cloud::Monitoring::V3::Service
+            rpc :UpdateService, ::Google::Cloud::Monitoring::V3::UpdateServiceRequest, ::Google::Cloud::Monitoring::V3::Service
             # Soft delete this `Service`.
-            rpc :DeleteService, Google::Cloud::Monitoring::V3::DeleteServiceRequest, Google::Protobuf::Empty
+            rpc :DeleteService, ::Google::Cloud::Monitoring::V3::DeleteServiceRequest, ::Google::Protobuf::Empty
             # Create a `ServiceLevelObjective` for the given `Service`.
-            rpc :CreateServiceLevelObjective, Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest, Google::Cloud::Monitoring::V3::ServiceLevelObjective
+            rpc :CreateServiceLevelObjective, ::Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest, ::Google::Cloud::Monitoring::V3::ServiceLevelObjective
             # Get a `ServiceLevelObjective` by name.
-            rpc :GetServiceLevelObjective, Google::Cloud::Monitoring::V3::GetServiceLevelObjectiveRequest, Google::Cloud::Monitoring::V3::ServiceLevelObjective
+            rpc :GetServiceLevelObjective, ::Google::Cloud::Monitoring::V3::GetServiceLevelObjectiveRequest, ::Google::Cloud::Monitoring::V3::ServiceLevelObjective
             # List the `ServiceLevelObjective`s for the given `Service`.
-            rpc :ListServiceLevelObjectives, Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest, Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesResponse
+            rpc :ListServiceLevelObjectives, ::Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest, ::Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesResponse
             # Update the given `ServiceLevelObjective`.
-            rpc :UpdateServiceLevelObjective, Google::Cloud::Monitoring::V3::UpdateServiceLevelObjectiveRequest, Google::Cloud::Monitoring::V3::ServiceLevelObjective
+            rpc :UpdateServiceLevelObjective, ::Google::Cloud::Monitoring::V3::UpdateServiceLevelObjectiveRequest, ::Google::Cloud::Monitoring::V3::ServiceLevelObjective
             # Delete the given `ServiceLevelObjective`.
-            rpc :DeleteServiceLevelObjective, Google::Cloud::Monitoring::V3::DeleteServiceLevelObjectiveRequest, Google::Protobuf::Empty
+            rpc :DeleteServiceLevelObjective, ::Google::Cloud::Monitoring::V3::DeleteServiceLevelObjectiveRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class

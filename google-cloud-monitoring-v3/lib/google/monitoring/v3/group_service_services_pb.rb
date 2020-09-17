@@ -45,18 +45,18 @@ module Google
             self.service_name = 'google.monitoring.v3.GroupService'
 
             # Lists the existing groups.
-            rpc :ListGroups, Google::Cloud::Monitoring::V3::ListGroupsRequest, Google::Cloud::Monitoring::V3::ListGroupsResponse
+            rpc :ListGroups, ::Google::Cloud::Monitoring::V3::ListGroupsRequest, ::Google::Cloud::Monitoring::V3::ListGroupsResponse
             # Gets a single group.
-            rpc :GetGroup, Google::Cloud::Monitoring::V3::GetGroupRequest, Google::Cloud::Monitoring::V3::Group
+            rpc :GetGroup, ::Google::Cloud::Monitoring::V3::GetGroupRequest, ::Google::Cloud::Monitoring::V3::Group
             # Creates a new group.
-            rpc :CreateGroup, Google::Cloud::Monitoring::V3::CreateGroupRequest, Google::Cloud::Monitoring::V3::Group
+            rpc :CreateGroup, ::Google::Cloud::Monitoring::V3::CreateGroupRequest, ::Google::Cloud::Monitoring::V3::Group
             # Updates an existing group.
             # You can change any group attributes except `name`.
-            rpc :UpdateGroup, Google::Cloud::Monitoring::V3::UpdateGroupRequest, Google::Cloud::Monitoring::V3::Group
+            rpc :UpdateGroup, ::Google::Cloud::Monitoring::V3::UpdateGroupRequest, ::Google::Cloud::Monitoring::V3::Group
             # Deletes an existing group.
-            rpc :DeleteGroup, Google::Cloud::Monitoring::V3::DeleteGroupRequest, Google::Protobuf::Empty
+            rpc :DeleteGroup, ::Google::Cloud::Monitoring::V3::DeleteGroupRequest, ::Google::Protobuf::Empty
             # Lists the monitored resources that are members of a group.
-            rpc :ListGroupMembers, Google::Cloud::Monitoring::V3::ListGroupMembersRequest, Google::Cloud::Monitoring::V3::ListGroupMembersResponse
+            rpc :ListGroupMembers, ::Google::Cloud::Monitoring::V3::ListGroupMembersRequest, ::Google::Cloud::Monitoring::V3::ListGroupMembersResponse
           end
 
           Stub = Service.rpc_stub_class
