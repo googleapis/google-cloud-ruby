@@ -34,15 +34,15 @@ module Google
             self.service_name = 'google.cloud.talent.v4.TenantService'
 
             # Creates a new tenant entity.
-            rpc :CreateTenant, Google::Cloud::Talent::V4::CreateTenantRequest, Google::Cloud::Talent::V4::Tenant
+            rpc :CreateTenant, ::Google::Cloud::Talent::V4::CreateTenantRequest, ::Google::Cloud::Talent::V4::Tenant
             # Retrieves specified tenant.
-            rpc :GetTenant, Google::Cloud::Talent::V4::GetTenantRequest, Google::Cloud::Talent::V4::Tenant
+            rpc :GetTenant, ::Google::Cloud::Talent::V4::GetTenantRequest, ::Google::Cloud::Talent::V4::Tenant
             # Updates specified tenant.
-            rpc :UpdateTenant, Google::Cloud::Talent::V4::UpdateTenantRequest, Google::Cloud::Talent::V4::Tenant
+            rpc :UpdateTenant, ::Google::Cloud::Talent::V4::UpdateTenantRequest, ::Google::Cloud::Talent::V4::Tenant
             # Deletes specified tenant.
-            rpc :DeleteTenant, Google::Cloud::Talent::V4::DeleteTenantRequest, Google::Protobuf::Empty
+            rpc :DeleteTenant, ::Google::Cloud::Talent::V4::DeleteTenantRequest, ::Google::Protobuf::Empty
             # Lists all tenants associated with the project.
-            rpc :ListTenants, Google::Cloud::Talent::V4::ListTenantsRequest, Google::Cloud::Talent::V4::ListTenantsResponse
+            rpc :ListTenants, ::Google::Cloud::Talent::V4::ListTenantsRequest, ::Google::Cloud::Talent::V4::ListTenantsResponse
           end
 
           Stub = Service.rpc_stub_class

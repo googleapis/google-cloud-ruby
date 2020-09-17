@@ -40,7 +40,7 @@ module Google
             # [Learn
             # more](https://cloud.google.com/talent-solution/docs/management-tools)
             # about self service tools.
-            rpc :CreateClientEvent, Google::Cloud::Talent::V4::CreateClientEventRequest, Google::Cloud::Talent::V4::ClientEvent
+            rpc :CreateClientEvent, ::Google::Cloud::Talent::V4::CreateClientEventRequest, ::Google::Cloud::Talent::V4::ClientEvent
           end
 
           Stub = Service.rpc_stub_class
