@@ -36,23 +36,23 @@ module Google
             self.service_name = 'google.cloud.language.v1.LanguageService'
 
             # Analyzes the sentiment of the provided text.
-            rpc :AnalyzeSentiment, Google::Cloud::Language::V1::AnalyzeSentimentRequest, Google::Cloud::Language::V1::AnalyzeSentimentResponse
+            rpc :AnalyzeSentiment, ::Google::Cloud::Language::V1::AnalyzeSentimentRequest, ::Google::Cloud::Language::V1::AnalyzeSentimentResponse
             # Finds named entities (currently proper names and common nouns) in the text
             # along with entity types, salience, mentions for each entity, and
             # other properties.
-            rpc :AnalyzeEntities, Google::Cloud::Language::V1::AnalyzeEntitiesRequest, Google::Cloud::Language::V1::AnalyzeEntitiesResponse
+            rpc :AnalyzeEntities, ::Google::Cloud::Language::V1::AnalyzeEntitiesRequest, ::Google::Cloud::Language::V1::AnalyzeEntitiesResponse
             # Finds entities, similar to [AnalyzeEntities][google.cloud.language.v1.LanguageService.AnalyzeEntities] in the text and analyzes
             # sentiment associated with each entity and its mentions.
-            rpc :AnalyzeEntitySentiment, Google::Cloud::Language::V1::AnalyzeEntitySentimentRequest, Google::Cloud::Language::V1::AnalyzeEntitySentimentResponse
+            rpc :AnalyzeEntitySentiment, ::Google::Cloud::Language::V1::AnalyzeEntitySentimentRequest, ::Google::Cloud::Language::V1::AnalyzeEntitySentimentResponse
             # Analyzes the syntax of the text and provides sentence boundaries and
             # tokenization along with part of speech tags, dependency trees, and other
             # properties.
-            rpc :AnalyzeSyntax, Google::Cloud::Language::V1::AnalyzeSyntaxRequest, Google::Cloud::Language::V1::AnalyzeSyntaxResponse
+            rpc :AnalyzeSyntax, ::Google::Cloud::Language::V1::AnalyzeSyntaxRequest, ::Google::Cloud::Language::V1::AnalyzeSyntaxResponse
             # Classifies a document into categories.
-            rpc :ClassifyText, Google::Cloud::Language::V1::ClassifyTextRequest, Google::Cloud::Language::V1::ClassifyTextResponse
+            rpc :ClassifyText, ::Google::Cloud::Language::V1::ClassifyTextRequest, ::Google::Cloud::Language::V1::ClassifyTextResponse
             # A convenience method that provides all the features that analyzeSentiment,
             # analyzeEntities, and analyzeSyntax provide in one call.
-            rpc :AnnotateText, Google::Cloud::Language::V1::AnnotateTextRequest, Google::Cloud::Language::V1::AnnotateTextResponse
+            rpc :AnnotateText, ::Google::Cloud::Language::V1::AnnotateTextRequest, ::Google::Cloud::Language::V1::AnnotateTextResponse
           end
 
           Stub = Service.rpc_stub_class
