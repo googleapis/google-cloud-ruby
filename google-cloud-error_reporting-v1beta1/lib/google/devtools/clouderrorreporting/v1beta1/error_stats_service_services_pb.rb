@@ -36,11 +36,11 @@ module Google
             self.service_name = 'google.devtools.clouderrorreporting.v1beta1.ErrorStatsService'
 
             # Lists the specified groups.
-            rpc :ListGroupStats, Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsRequest, Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsResponse
+            rpc :ListGroupStats, ::Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsRequest, ::Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsResponse
             # Lists the specified events.
-            rpc :ListEvents, Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest, Google::Cloud::ErrorReporting::V1beta1::ListEventsResponse
+            rpc :ListEvents, ::Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest, ::Google::Cloud::ErrorReporting::V1beta1::ListEventsResponse
             # Deletes all error events of a given project.
-            rpc :DeleteEvents, Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest, Google::Cloud::ErrorReporting::V1beta1::DeleteEventsResponse
+            rpc :DeleteEvents, ::Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest, ::Google::Cloud::ErrorReporting::V1beta1::DeleteEventsResponse
           end
 
           Stub = Service.rpc_stub_class

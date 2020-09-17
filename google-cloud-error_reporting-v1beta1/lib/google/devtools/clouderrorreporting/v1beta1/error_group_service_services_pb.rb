@@ -35,10 +35,10 @@ module Google
             self.service_name = 'google.devtools.clouderrorreporting.v1beta1.ErrorGroupService'
 
             # Get the specified group.
-            rpc :GetGroup, Google::Cloud::ErrorReporting::V1beta1::GetGroupRequest, Google::Cloud::ErrorReporting::V1beta1::ErrorGroup
+            rpc :GetGroup, ::Google::Cloud::ErrorReporting::V1beta1::GetGroupRequest, ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroup
             # Replace the data for the specified group.
             # Fails if the group does not exist.
-            rpc :UpdateGroup, Google::Cloud::ErrorReporting::V1beta1::UpdateGroupRequest, Google::Cloud::ErrorReporting::V1beta1::ErrorGroup
+            rpc :UpdateGroup, ::Google::Cloud::ErrorReporting::V1beta1::UpdateGroupRequest, ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroup
           end
 
           Stub = Service.rpc_stub_class
