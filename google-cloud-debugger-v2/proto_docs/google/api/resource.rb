@@ -43,12 +43,12 @@ module Google
     #
     # The ResourceDescriptor Yaml config will look like:
     #
-    #    resources:
-    #    - type: "pubsub.googleapis.com/Topic"
-    #      name_descriptor:
-    #        - pattern: "projects/\\{project}/topics/\\{topic}"
-    #          parent_type: "cloudresourcemanager.googleapis.com/Project"
-    #          parent_name_extractor: "projects/\\{project}"
+    #     resources:
+    #     - type: "pubsub.googleapis.com/Topic"
+    #       name_descriptor:
+    #         - pattern: "projects/{project}/topics/{topic}"
+    #           parent_type: "cloudresourcemanager.googleapis.com/Project"
+    #           parent_name_extractor: "projects/{project}"
     #
     # Sometimes, resources have multiple patterns, typically because they can
     # live under multiple parents.
@@ -183,15 +183,24 @@ module Google
     #         }
     # @!attribute [rw] plural
     #   @return [::String]
-    #     The plural name used in the resource name, such as 'projects' for
-    #     the name of 'projects/\\{project}'. It is the same concept of the `plural`
-    #     field in k8s CRD spec
+    #     The plural name used in the resource name and permission names, such as
+    #     'projects' for the resource name of 'projects/\\{project}' and the permission
+    #     name of 'cloudresourcemanager.googleapis.com/projects.get'. It is the same
+    #     concept of the `plural` field in k8s CRD spec
     #     https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
+    #
+    #     Note: The plural form is required even for singleton resources. See
+    #     https://aip.dev/156
     # @!attribute [rw] singular
     #   @return [::String]
     #     The same concept of the `singular` field in k8s CRD spec
     #     https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
     #     Such as "project" for the `resourcemanager.googleapis.com/Project` type.
+    # @!attribute [rw] style
+    #   @return [::Array<::Google::Api::ResourceDescriptor::Style>]
+    #     Style flag(s) for this resource.
+    #     These indicate that a resource is expected to conform to a given
+    #     style. See the specific style flags for additional information.
     class ResourceDescriptor
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -211,6 +220,22 @@ module Google
         # that from being necessary once there are multiple patterns.)
         FUTURE_MULTI_PATTERN = 2
       end
+
+      # A flag representing a specific style that a resource claims to conform to.
+      module Style
+        # The unspecified value. Do not use.
+        STYLE_UNSPECIFIED = 0
+
+        # This resource is intended to be "declarative-friendly".
+        #
+        # Declarative-friendly resources must be more strictly consistent, and
+        # setting this to true communicates to tools that this resource should
+        # adhere to declarative-friendly expectations.
+        #
+        # Note: This is used by the API linter (linter.aip.dev) to enable
+        # additional checks.
+        DECLARATIVE_FRIENDLY = 1
+      end
     end
 
     # Defines a proto annotation that describes a string field that refers to
@@ -226,6 +251,17 @@ module Google
     #             type: "pubsub.googleapis.com/Topic"
     #           }];
     #         }
+    #
+    #     Occasionally, a field may reference an arbitrary resource. In this case,
+    #     APIs use the special value * in their resource reference.
+    #
+    #     Example:
+    #
+    #         message GetIamPolicyRequest {
+    #           string resource = 2 [(google.api.resource_reference) = {
+    #             type: "*"
+    #           }];
+    #         }
     # @!attribute [rw] child_type
     #   @return [::String]
     #     The resource type of a child collection that the annotated field
@@ -234,11 +270,11 @@ module Google
     #
     #     Example:
     #
-    #       message ListLogEntriesRequest {
-    #         string parent = 1 [(google.api.resource_reference) = {
-    #           child_type: "logging.googleapis.com/LogEntry"
-    #         };
-    #       }
+    #         message ListLogEntriesRequest {
+    #           string parent = 1 [(google.api.resource_reference) = {
+    #             child_type: "logging.googleapis.com/LogEntry"
+    #           };
+    #         }
     class ResourceReference
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
