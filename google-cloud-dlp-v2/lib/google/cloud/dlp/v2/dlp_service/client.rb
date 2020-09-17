@@ -370,7 +370,8 @@ module Google
             #     Parent resource name.
             #
             #     The format of this value varies depending on whether you have [specified a
-            #     processing location](/dlp/docs/specifying-location):
+            #     processing
+            #     location](https://cloud.google.com/dlp/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -470,7 +471,8 @@ module Google
             #     Parent resource name.
             #
             #     The format of this value varies depending on whether you have [specified a
-            #     processing location](/dlp/docs/specifying-location):
+            #     processing
+            #     location](https://cloud.google.com/dlp/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -568,7 +570,8 @@ module Google
             #     Parent resource name.
             #
             #     The format of this value varies depending on whether you have [specified a
-            #     processing location](/dlp/docs/specifying-location):
+            #     processing
+            #     location](https://cloud.google.com/dlp/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -675,7 +678,8 @@ module Google
             #     Required. Parent resource name.
             #
             #     The format of this value varies depending on whether you have [specified a
-            #     processing location](/dlp/docs/specifying-location):
+            #     processing
+            #     location](https://cloud.google.com/dlp/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -864,7 +868,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/dlp/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -885,7 +889,7 @@ module Google
             #   @param template_id [::String]
             #     The template id can contain uppercase and lowercase letters,
             #     numbers, and hyphens; that is, it must match the regular
-            #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
+            #     expression: `[a-zA-Z\d-_]+`. The maximum length is 100
             #     characters. Can be empty to allow the system to generate one.
             #   @param location_id [::String]
             #     Deprecated. This field has no effect.
@@ -1101,7 +1105,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/dlp/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -1281,7 +1285,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/dlp/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -1302,7 +1306,7 @@ module Google
             #   @param template_id [::String]
             #     The template id can contain uppercase and lowercase letters,
             #     numbers, and hyphens; that is, it must match the regular
-            #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
+            #     expression: `[a-zA-Z\d-_]+`. The maximum length is 100
             #     characters. Can be empty to allow the system to generate one.
             #   @param location_id [::String]
             #     Deprecated. This field has no effect.
@@ -1521,7 +1525,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/dlp/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -1700,7 +1704,8 @@ module Google
             #     Required. Parent resource name.
             #
             #     The format of this value varies depending on whether you have [specified a
-            #     processing location](/dlp/docs/specifying-location):
+            #     processing
+            #     location](https://cloud.google.com/dlp/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -1717,7 +1722,7 @@ module Google
             #   @param trigger_id [::String]
             #     The trigger id can contain uppercase and lowercase letters,
             #     numbers, and hyphens; that is, it must match the regular
-            #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
+            #     expression: `[a-zA-Z\d-_]+`. The maximum length is 100
             #     characters. Can be empty to allow the system to generate one.
             #   @param location_id [::String]
             #     Deprecated. This field has no effect.
@@ -2004,7 +2009,8 @@ module Google
             #     Required. Parent resource name.
             #
             #     The format of this value varies depending on whether you have [specified a
-            #     processing location](/dlp/docs/specifying-location):
+            #     processing
+            #     location](https://cloud.google.com/dlp/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -2276,7 +2282,8 @@ module Google
             #     Required. Parent resource name.
             #
             #     The format of this value varies depending on whether you have [specified a
-            #     processing location](/dlp/docs/specifying-location):
+            #     processing
+            #     location](https://cloud.google.com/dlp/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -2295,7 +2302,7 @@ module Google
             #   @param job_id [::String]
             #     The job id can contain uppercase and lowercase letters,
             #     numbers, and hyphens; that is, it must match the regular
-            #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
+            #     expression: `[a-zA-Z\d-_]+`. The maximum length is 100
             #     characters. Can be empty to allow the system to generate one.
             #   @param location_id [::String]
             #     Deprecated. This field has no effect.
@@ -2369,7 +2376,8 @@ module Google
             #     Required. Parent resource name.
             #
             #     The format of this value varies depending on whether you have [specified a
-            #     processing location](/dlp/docs/specifying-location):
+            #     processing
+            #     location](https://cloud.google.com/dlp/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -2712,7 +2720,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/dlp/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -2733,7 +2741,7 @@ module Google
             #   @param stored_info_type_id [::String]
             #     The storedInfoType ID can contain uppercase and lowercase letters,
             #     numbers, and hyphens; that is, it must match the regular
-            #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
+            #     expression: `[a-zA-Z\d-_]+`. The maximum length is 100
             #     characters. Can be empty to allow the system to generate one.
             #   @param location_id [::String]
             #     Deprecated. This field has no effect.
@@ -2955,7 +2963,7 @@ module Google
             #
             #     The format of this value varies depending on the scope of the request
             #     (project or organization) and whether you have [specified a processing
-            #     location](/dlp/docs/specifying-location):
+            #     location](https://cloud.google.com/dlp/docs/specifying-location):
             #
             #     + Projects scope, location specified:<br/>
             #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
