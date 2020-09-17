@@ -37,11 +37,11 @@ module Google
             self.service_name = 'google.cloud.translation.v3.TranslationService'
 
             # Translates input text and returns translated text.
-            rpc :TranslateText, Google::Cloud::Translate::V3::TranslateTextRequest, Google::Cloud::Translate::V3::TranslateTextResponse
+            rpc :TranslateText, ::Google::Cloud::Translate::V3::TranslateTextRequest, ::Google::Cloud::Translate::V3::TranslateTextResponse
             # Detects the language of text within a request.
-            rpc :DetectLanguage, Google::Cloud::Translate::V3::DetectLanguageRequest, Google::Cloud::Translate::V3::DetectLanguageResponse
+            rpc :DetectLanguage, ::Google::Cloud::Translate::V3::DetectLanguageRequest, ::Google::Cloud::Translate::V3::DetectLanguageResponse
             # Returns a list of supported languages for translation.
-            rpc :GetSupportedLanguages, Google::Cloud::Translate::V3::GetSupportedLanguagesRequest, Google::Cloud::Translate::V3::SupportedLanguages
+            rpc :GetSupportedLanguages, ::Google::Cloud::Translate::V3::GetSupportedLanguagesRequest, ::Google::Cloud::Translate::V3::SupportedLanguages
             # Translates a large volume of text in asynchronous batch mode.
             # This function provides real-time output as the inputs are being processed.
             # If caller cancels a request, the partial results (for an input file, it's
@@ -49,20 +49,20 @@ module Google
             #
             # This call returns immediately and you can
             # use google.longrunning.Operation.name to poll the status of the call.
-            rpc :BatchTranslateText, Google::Cloud::Translate::V3::BatchTranslateTextRequest, Google::Longrunning::Operation
+            rpc :BatchTranslateText, ::Google::Cloud::Translate::V3::BatchTranslateTextRequest, ::Google::Longrunning::Operation
             # Creates a glossary and returns the long-running operation. Returns
             # NOT_FOUND, if the project doesn't exist.
-            rpc :CreateGlossary, Google::Cloud::Translate::V3::CreateGlossaryRequest, Google::Longrunning::Operation
+            rpc :CreateGlossary, ::Google::Cloud::Translate::V3::CreateGlossaryRequest, ::Google::Longrunning::Operation
             # Lists glossaries in a project. Returns NOT_FOUND, if the project doesn't
             # exist.
-            rpc :ListGlossaries, Google::Cloud::Translate::V3::ListGlossariesRequest, Google::Cloud::Translate::V3::ListGlossariesResponse
+            rpc :ListGlossaries, ::Google::Cloud::Translate::V3::ListGlossariesRequest, ::Google::Cloud::Translate::V3::ListGlossariesResponse
             # Gets a glossary. Returns NOT_FOUND, if the glossary doesn't
             # exist.
-            rpc :GetGlossary, Google::Cloud::Translate::V3::GetGlossaryRequest, Google::Cloud::Translate::V3::Glossary
+            rpc :GetGlossary, ::Google::Cloud::Translate::V3::GetGlossaryRequest, ::Google::Cloud::Translate::V3::Glossary
             # Deletes a glossary, or cancels glossary construction
             # if the glossary isn't created yet.
             # Returns NOT_FOUND, if the glossary doesn't exist.
-            rpc :DeleteGlossary, Google::Cloud::Translate::V3::DeleteGlossaryRequest, Google::Longrunning::Operation
+            rpc :DeleteGlossary, ::Google::Cloud::Translate::V3::DeleteGlossaryRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
