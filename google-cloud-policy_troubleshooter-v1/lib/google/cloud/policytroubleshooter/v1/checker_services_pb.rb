@@ -38,7 +38,7 @@ module Google
 
             # Checks whether a member has a specific permission for a specific resource,
             # and explains why the member does or does not have that permission.
-            rpc :TroubleshootIamPolicy, Google::Cloud::PolicyTroubleshooter::V1::TroubleshootIamPolicyRequest, Google::Cloud::PolicyTroubleshooter::V1::TroubleshootIamPolicyResponse
+            rpc :TroubleshootIamPolicy, ::Google::Cloud::PolicyTroubleshooter::V1::TroubleshootIamPolicyRequest, ::Google::Cloud::PolicyTroubleshooter::V1::TroubleshootIamPolicyResponse
           end
 
           Stub = Service.rpc_stub_class
