@@ -38,15 +38,15 @@ module Google
             self.service_name = 'google.devtools.cloudtrace.v1.TraceService'
 
             # Returns of a list of traces that match the specified filter conditions.
-            rpc :ListTraces, Google::Cloud::Trace::V1::ListTracesRequest, Google::Cloud::Trace::V1::ListTracesResponse
+            rpc :ListTraces, ::Google::Cloud::Trace::V1::ListTracesRequest, ::Google::Cloud::Trace::V1::ListTracesResponse
             # Gets a single trace by its ID.
-            rpc :GetTrace, Google::Cloud::Trace::V1::GetTraceRequest, Google::Cloud::Trace::V1::Trace
+            rpc :GetTrace, ::Google::Cloud::Trace::V1::GetTraceRequest, ::Google::Cloud::Trace::V1::Trace
             # Sends new traces to Stackdriver Trace or updates existing traces. If the ID
             # of a trace that you send matches that of an existing trace, any fields
             # in the existing trace and its spans are overwritten by the provided values,
             # and any new fields provided are merged with the existing trace data. If the
             # ID does not match, a new trace is created.
-            rpc :PatchTraces, Google::Cloud::Trace::V1::PatchTracesRequest, Google::Protobuf::Empty
+            rpc :PatchTraces, ::Google::Cloud::Trace::V1::PatchTracesRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class
