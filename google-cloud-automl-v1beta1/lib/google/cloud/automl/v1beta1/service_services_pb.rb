@@ -47,19 +47,19 @@ module Google
             self.service_name = 'google.cloud.automl.v1beta1.AutoMl'
 
             # Creates a dataset.
-            rpc :CreateDataset, Google::Cloud::AutoML::V1beta1::CreateDatasetRequest, Google::Cloud::AutoML::V1beta1::Dataset
+            rpc :CreateDataset, ::Google::Cloud::AutoML::V1beta1::CreateDatasetRequest, ::Google::Cloud::AutoML::V1beta1::Dataset
             # Gets a dataset.
-            rpc :GetDataset, Google::Cloud::AutoML::V1beta1::GetDatasetRequest, Google::Cloud::AutoML::V1beta1::Dataset
+            rpc :GetDataset, ::Google::Cloud::AutoML::V1beta1::GetDatasetRequest, ::Google::Cloud::AutoML::V1beta1::Dataset
             # Lists datasets in a project.
-            rpc :ListDatasets, Google::Cloud::AutoML::V1beta1::ListDatasetsRequest, Google::Cloud::AutoML::V1beta1::ListDatasetsResponse
+            rpc :ListDatasets, ::Google::Cloud::AutoML::V1beta1::ListDatasetsRequest, ::Google::Cloud::AutoML::V1beta1::ListDatasetsResponse
             # Updates a dataset.
-            rpc :UpdateDataset, Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest, Google::Cloud::AutoML::V1beta1::Dataset
+            rpc :UpdateDataset, ::Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest, ::Google::Cloud::AutoML::V1beta1::Dataset
             # Deletes a dataset and all of its contents.
             # Returns empty response in the
             # [response][google.longrunning.Operation.response] field when it completes,
             # and `delete_details` in the
             # [metadata][google.longrunning.Operation.metadata] field.
-            rpc :DeleteDataset, Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest, Google::Longrunning::Operation
+            rpc :DeleteDataset, ::Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest, ::Google::Longrunning::Operation
             # Imports data into a dataset.
             # For Tables this method can only be called on an empty Dataset.
             #
@@ -69,41 +69,41 @@ module Google
             #     parameter must be explicitly set.
             # Returns an empty response in the
             # [response][google.longrunning.Operation.response] field when it completes.
-            rpc :ImportData, Google::Cloud::AutoML::V1beta1::ImportDataRequest, Google::Longrunning::Operation
+            rpc :ImportData, ::Google::Cloud::AutoML::V1beta1::ImportDataRequest, ::Google::Longrunning::Operation
             # Exports dataset's data to the provided output location.
             # Returns an empty response in the
             # [response][google.longrunning.Operation.response] field when it completes.
-            rpc :ExportData, Google::Cloud::AutoML::V1beta1::ExportDataRequest, Google::Longrunning::Operation
+            rpc :ExportData, ::Google::Cloud::AutoML::V1beta1::ExportDataRequest, ::Google::Longrunning::Operation
             # Gets an annotation spec.
-            rpc :GetAnnotationSpec, Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest, Google::Cloud::AutoML::V1beta1::AnnotationSpec
+            rpc :GetAnnotationSpec, ::Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest, ::Google::Cloud::AutoML::V1beta1::AnnotationSpec
             # Gets a table spec.
-            rpc :GetTableSpec, Google::Cloud::AutoML::V1beta1::GetTableSpecRequest, Google::Cloud::AutoML::V1beta1::TableSpec
+            rpc :GetTableSpec, ::Google::Cloud::AutoML::V1beta1::GetTableSpecRequest, ::Google::Cloud::AutoML::V1beta1::TableSpec
             # Lists table specs in a dataset.
-            rpc :ListTableSpecs, Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest, Google::Cloud::AutoML::V1beta1::ListTableSpecsResponse
+            rpc :ListTableSpecs, ::Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest, ::Google::Cloud::AutoML::V1beta1::ListTableSpecsResponse
             # Updates a table spec.
-            rpc :UpdateTableSpec, Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest, Google::Cloud::AutoML::V1beta1::TableSpec
+            rpc :UpdateTableSpec, ::Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest, ::Google::Cloud::AutoML::V1beta1::TableSpec
             # Gets a column spec.
-            rpc :GetColumnSpec, Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest, Google::Cloud::AutoML::V1beta1::ColumnSpec
+            rpc :GetColumnSpec, ::Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest, ::Google::Cloud::AutoML::V1beta1::ColumnSpec
             # Lists column specs in a table spec.
-            rpc :ListColumnSpecs, Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest, Google::Cloud::AutoML::V1beta1::ListColumnSpecsResponse
+            rpc :ListColumnSpecs, ::Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest, ::Google::Cloud::AutoML::V1beta1::ListColumnSpecsResponse
             # Updates a column spec.
-            rpc :UpdateColumnSpec, Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest, Google::Cloud::AutoML::V1beta1::ColumnSpec
+            rpc :UpdateColumnSpec, ::Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest, ::Google::Cloud::AutoML::V1beta1::ColumnSpec
             # Creates a model.
             # Returns a Model in the [response][google.longrunning.Operation.response]
             # field when it completes.
             # When you create a model, several model evaluations are created for it:
             # a global evaluation, and one evaluation for each annotation spec.
-            rpc :CreateModel, Google::Cloud::AutoML::V1beta1::CreateModelRequest, Google::Longrunning::Operation
+            rpc :CreateModel, ::Google::Cloud::AutoML::V1beta1::CreateModelRequest, ::Google::Longrunning::Operation
             # Gets a model.
-            rpc :GetModel, Google::Cloud::AutoML::V1beta1::GetModelRequest, Google::Cloud::AutoML::V1beta1::Model
+            rpc :GetModel, ::Google::Cloud::AutoML::V1beta1::GetModelRequest, ::Google::Cloud::AutoML::V1beta1::Model
             # Lists models.
-            rpc :ListModels, Google::Cloud::AutoML::V1beta1::ListModelsRequest, Google::Cloud::AutoML::V1beta1::ListModelsResponse
+            rpc :ListModels, ::Google::Cloud::AutoML::V1beta1::ListModelsRequest, ::Google::Cloud::AutoML::V1beta1::ListModelsResponse
             # Deletes a model.
             # Returns `google.protobuf.Empty` in the
             # [response][google.longrunning.Operation.response] field when it completes,
             # and `delete_details` in the
             # [metadata][google.longrunning.Operation.metadata] field.
-            rpc :DeleteModel, Google::Cloud::AutoML::V1beta1::DeleteModelRequest, Google::Longrunning::Operation
+            rpc :DeleteModel, ::Google::Cloud::AutoML::V1beta1::DeleteModelRequest, ::Google::Longrunning::Operation
             # Deploys a model. If a model is already deployed, deploying it with the
             # same parameters has no effect. Deploying with different parametrs
             # (as e.g. changing
@@ -116,7 +116,7 @@ module Google
             #
             # Returns an empty response in the
             # [response][google.longrunning.Operation.response] field when it completes.
-            rpc :DeployModel, Google::Cloud::AutoML::V1beta1::DeployModelRequest, Google::Longrunning::Operation
+            rpc :DeployModel, ::Google::Cloud::AutoML::V1beta1::DeployModelRequest, ::Google::Longrunning::Operation
             # Undeploys a model. If the model is not deployed this method has no effect.
             #
             # Only applicable for Text Classification, Image Object Detection and Tables;
@@ -124,7 +124,7 @@ module Google
             #
             # Returns an empty response in the
             # [response][google.longrunning.Operation.response] field when it completes.
-            rpc :UndeployModel, Google::Cloud::AutoML::V1beta1::UndeployModelRequest, Google::Longrunning::Operation
+            rpc :UndeployModel, ::Google::Cloud::AutoML::V1beta1::UndeployModelRequest, ::Google::Longrunning::Operation
             # Exports a trained, "export-able", model to a user specified Google Cloud
             # Storage location. A model is considered export-able if and only if it has
             # an export format defined for it in
@@ -133,7 +133,7 @@ module Google
             #
             # Returns an empty response in the
             # [response][google.longrunning.Operation.response] field when it completes.
-            rpc :ExportModel, Google::Cloud::AutoML::V1beta1::ExportModelRequest, Google::Longrunning::Operation
+            rpc :ExportModel, ::Google::Cloud::AutoML::V1beta1::ExportModelRequest, ::Google::Longrunning::Operation
             # Exports examples on which the model was evaluated (i.e. which were in the
             # TEST set of the dataset the model was created from), together with their
             # ground truth annotations and the annotations created (predicted) by the
@@ -148,11 +148,11 @@ module Google
             #
             # Returns an empty response in the
             # [response][google.longrunning.Operation.response] field when it completes.
-            rpc :ExportEvaluatedExamples, Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest, Google::Longrunning::Operation
+            rpc :ExportEvaluatedExamples, ::Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest, ::Google::Longrunning::Operation
             # Gets a model evaluation.
-            rpc :GetModelEvaluation, Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest, Google::Cloud::AutoML::V1beta1::ModelEvaluation
+            rpc :GetModelEvaluation, ::Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest, ::Google::Cloud::AutoML::V1beta1::ModelEvaluation
             # Lists model evaluations.
-            rpc :ListModelEvaluations, Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest, Google::Cloud::AutoML::V1beta1::ListModelEvaluationsResponse
+            rpc :ListModelEvaluations, ::Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest, ::Google::Cloud::AutoML::V1beta1::ListModelEvaluationsResponse
           end
 
           Stub = Service.rpc_stub_class
