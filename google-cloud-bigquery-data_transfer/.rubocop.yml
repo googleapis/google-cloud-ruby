@@ -20,3 +20,6 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-bigquery-data_transfer.rb"
+
+Style/AsciiComments:
+  Enabled: false
