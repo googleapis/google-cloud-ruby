@@ -36,9 +36,9 @@ module Google
 
             # Lists all clusters owned by a project in either the specified zone or all
             # zones.
-            rpc :ListClusters, Google::Cloud::Container::V1::ListClustersRequest, Google::Cloud::Container::V1::ListClustersResponse
+            rpc :ListClusters, ::Google::Cloud::Container::V1::ListClustersRequest, ::Google::Cloud::Container::V1::ListClustersResponse
             # Gets the details of a specific cluster.
-            rpc :GetCluster, Google::Cloud::Container::V1::GetClusterRequest, Google::Cloud::Container::V1::Cluster
+            rpc :GetCluster, ::Google::Cloud::Container::V1::GetClusterRequest, ::Google::Cloud::Container::V1::Cluster
             # Creates a cluster, consisting of the specified number and type of Google
             # Compute Engine instances.
             #
@@ -52,27 +52,27 @@ module Google
             #
             # Finally, an entry is added to the project's global metadata indicating
             # which CIDR range the cluster is using.
-            rpc :CreateCluster, Google::Cloud::Container::V1::CreateClusterRequest, Google::Cloud::Container::V1::Operation
+            rpc :CreateCluster, ::Google::Cloud::Container::V1::CreateClusterRequest, ::Google::Cloud::Container::V1::Operation
             # Updates the settings of a specific cluster.
-            rpc :UpdateCluster, Google::Cloud::Container::V1::UpdateClusterRequest, Google::Cloud::Container::V1::Operation
+            rpc :UpdateCluster, ::Google::Cloud::Container::V1::UpdateClusterRequest, ::Google::Cloud::Container::V1::Operation
             # Updates the version and/or image type for the specified node pool.
-            rpc :UpdateNodePool, Google::Cloud::Container::V1::UpdateNodePoolRequest, Google::Cloud::Container::V1::Operation
+            rpc :UpdateNodePool, ::Google::Cloud::Container::V1::UpdateNodePoolRequest, ::Google::Cloud::Container::V1::Operation
             # Sets the autoscaling settings for the specified node pool.
-            rpc :SetNodePoolAutoscaling, Google::Cloud::Container::V1::SetNodePoolAutoscalingRequest, Google::Cloud::Container::V1::Operation
+            rpc :SetNodePoolAutoscaling, ::Google::Cloud::Container::V1::SetNodePoolAutoscalingRequest, ::Google::Cloud::Container::V1::Operation
             # Sets the logging service for a specific cluster.
-            rpc :SetLoggingService, Google::Cloud::Container::V1::SetLoggingServiceRequest, Google::Cloud::Container::V1::Operation
+            rpc :SetLoggingService, ::Google::Cloud::Container::V1::SetLoggingServiceRequest, ::Google::Cloud::Container::V1::Operation
             # Sets the monitoring service for a specific cluster.
-            rpc :SetMonitoringService, Google::Cloud::Container::V1::SetMonitoringServiceRequest, Google::Cloud::Container::V1::Operation
+            rpc :SetMonitoringService, ::Google::Cloud::Container::V1::SetMonitoringServiceRequest, ::Google::Cloud::Container::V1::Operation
             # Sets the addons for a specific cluster.
-            rpc :SetAddonsConfig, Google::Cloud::Container::V1::SetAddonsConfigRequest, Google::Cloud::Container::V1::Operation
+            rpc :SetAddonsConfig, ::Google::Cloud::Container::V1::SetAddonsConfigRequest, ::Google::Cloud::Container::V1::Operation
             # Sets the locations for a specific cluster.
-            rpc :SetLocations, Google::Cloud::Container::V1::SetLocationsRequest, Google::Cloud::Container::V1::Operation
+            rpc :SetLocations, ::Google::Cloud::Container::V1::SetLocationsRequest, ::Google::Cloud::Container::V1::Operation
             # Updates the master for a specific cluster.
-            rpc :UpdateMaster, Google::Cloud::Container::V1::UpdateMasterRequest, Google::Cloud::Container::V1::Operation
+            rpc :UpdateMaster, ::Google::Cloud::Container::V1::UpdateMasterRequest, ::Google::Cloud::Container::V1::Operation
             # Sets master auth materials. Currently supports changing the admin password
             # or a specific cluster, either via password generation or explicitly setting
             # the password.
-            rpc :SetMasterAuth, Google::Cloud::Container::V1::SetMasterAuthRequest, Google::Cloud::Container::V1::Operation
+            rpc :SetMasterAuth, ::Google::Cloud::Container::V1::SetMasterAuthRequest, ::Google::Cloud::Container::V1::Operation
             # Deletes the cluster, including the Kubernetes endpoint and all worker
             # nodes.
             #
@@ -82,44 +82,44 @@ module Google
             # Other Google Compute Engine resources that might be in use by the cluster,
             # such as load balancer resources, are not deleted if they weren't present
             # when the cluster was initially created.
-            rpc :DeleteCluster, Google::Cloud::Container::V1::DeleteClusterRequest, Google::Cloud::Container::V1::Operation
+            rpc :DeleteCluster, ::Google::Cloud::Container::V1::DeleteClusterRequest, ::Google::Cloud::Container::V1::Operation
             # Lists all operations in a project in a specific zone or all zones.
-            rpc :ListOperations, Google::Cloud::Container::V1::ListOperationsRequest, Google::Cloud::Container::V1::ListOperationsResponse
+            rpc :ListOperations, ::Google::Cloud::Container::V1::ListOperationsRequest, ::Google::Cloud::Container::V1::ListOperationsResponse
             # Gets the specified operation.
-            rpc :GetOperation, Google::Cloud::Container::V1::GetOperationRequest, Google::Cloud::Container::V1::Operation
+            rpc :GetOperation, ::Google::Cloud::Container::V1::GetOperationRequest, ::Google::Cloud::Container::V1::Operation
             # Cancels the specified operation.
-            rpc :CancelOperation, Google::Cloud::Container::V1::CancelOperationRequest, Google::Protobuf::Empty
+            rpc :CancelOperation, ::Google::Cloud::Container::V1::CancelOperationRequest, ::Google::Protobuf::Empty
             # Returns configuration info about the Google Kubernetes Engine service.
-            rpc :GetServerConfig, Google::Cloud::Container::V1::GetServerConfigRequest, Google::Cloud::Container::V1::ServerConfig
+            rpc :GetServerConfig, ::Google::Cloud::Container::V1::GetServerConfigRequest, ::Google::Cloud::Container::V1::ServerConfig
             # Lists the node pools for a cluster.
-            rpc :ListNodePools, Google::Cloud::Container::V1::ListNodePoolsRequest, Google::Cloud::Container::V1::ListNodePoolsResponse
+            rpc :ListNodePools, ::Google::Cloud::Container::V1::ListNodePoolsRequest, ::Google::Cloud::Container::V1::ListNodePoolsResponse
             # Retrieves the requested node pool.
-            rpc :GetNodePool, Google::Cloud::Container::V1::GetNodePoolRequest, Google::Cloud::Container::V1::NodePool
+            rpc :GetNodePool, ::Google::Cloud::Container::V1::GetNodePoolRequest, ::Google::Cloud::Container::V1::NodePool
             # Creates a node pool for a cluster.
-            rpc :CreateNodePool, Google::Cloud::Container::V1::CreateNodePoolRequest, Google::Cloud::Container::V1::Operation
+            rpc :CreateNodePool, ::Google::Cloud::Container::V1::CreateNodePoolRequest, ::Google::Cloud::Container::V1::Operation
             # Deletes a node pool from a cluster.
-            rpc :DeleteNodePool, Google::Cloud::Container::V1::DeleteNodePoolRequest, Google::Cloud::Container::V1::Operation
+            rpc :DeleteNodePool, ::Google::Cloud::Container::V1::DeleteNodePoolRequest, ::Google::Cloud::Container::V1::Operation
             # Rolls back a previously Aborted or Failed NodePool upgrade.
             # This makes no changes if the last upgrade successfully completed.
-            rpc :RollbackNodePoolUpgrade, Google::Cloud::Container::V1::RollbackNodePoolUpgradeRequest, Google::Cloud::Container::V1::Operation
+            rpc :RollbackNodePoolUpgrade, ::Google::Cloud::Container::V1::RollbackNodePoolUpgradeRequest, ::Google::Cloud::Container::V1::Operation
             # Sets the NodeManagement options for a node pool.
-            rpc :SetNodePoolManagement, Google::Cloud::Container::V1::SetNodePoolManagementRequest, Google::Cloud::Container::V1::Operation
+            rpc :SetNodePoolManagement, ::Google::Cloud::Container::V1::SetNodePoolManagementRequest, ::Google::Cloud::Container::V1::Operation
             # Sets labels on a cluster.
-            rpc :SetLabels, Google::Cloud::Container::V1::SetLabelsRequest, Google::Cloud::Container::V1::Operation
+            rpc :SetLabels, ::Google::Cloud::Container::V1::SetLabelsRequest, ::Google::Cloud::Container::V1::Operation
             # Enables or disables the ABAC authorization mechanism on a cluster.
-            rpc :SetLegacyAbac, Google::Cloud::Container::V1::SetLegacyAbacRequest, Google::Cloud::Container::V1::Operation
+            rpc :SetLegacyAbac, ::Google::Cloud::Container::V1::SetLegacyAbacRequest, ::Google::Cloud::Container::V1::Operation
             # Starts master IP rotation.
-            rpc :StartIPRotation, Google::Cloud::Container::V1::StartIPRotationRequest, Google::Cloud::Container::V1::Operation
+            rpc :StartIPRotation, ::Google::Cloud::Container::V1::StartIPRotationRequest, ::Google::Cloud::Container::V1::Operation
             # Completes master IP rotation.
-            rpc :CompleteIPRotation, Google::Cloud::Container::V1::CompleteIPRotationRequest, Google::Cloud::Container::V1::Operation
+            rpc :CompleteIPRotation, ::Google::Cloud::Container::V1::CompleteIPRotationRequest, ::Google::Cloud::Container::V1::Operation
             # Sets the size for a specific node pool.
-            rpc :SetNodePoolSize, Google::Cloud::Container::V1::SetNodePoolSizeRequest, Google::Cloud::Container::V1::Operation
+            rpc :SetNodePoolSize, ::Google::Cloud::Container::V1::SetNodePoolSizeRequest, ::Google::Cloud::Container::V1::Operation
             # Enables or disables Network Policy for a cluster.
-            rpc :SetNetworkPolicy, Google::Cloud::Container::V1::SetNetworkPolicyRequest, Google::Cloud::Container::V1::Operation
+            rpc :SetNetworkPolicy, ::Google::Cloud::Container::V1::SetNetworkPolicyRequest, ::Google::Cloud::Container::V1::Operation
             # Sets the maintenance policy for a cluster.
-            rpc :SetMaintenancePolicy, Google::Cloud::Container::V1::SetMaintenancePolicyRequest, Google::Cloud::Container::V1::Operation
+            rpc :SetMaintenancePolicy, ::Google::Cloud::Container::V1::SetMaintenancePolicyRequest, ::Google::Cloud::Container::V1::Operation
             # Lists subnetworks that are usable for creating clusters in a project.
-            rpc :ListUsableSubnetworks, Google::Cloud::Container::V1::ListUsableSubnetworksRequest, Google::Cloud::Container::V1::ListUsableSubnetworksResponse
+            rpc :ListUsableSubnetworks, ::Google::Cloud::Container::V1::ListUsableSubnetworksRequest, ::Google::Cloud::Container::V1::ListUsableSubnetworksResponse
           end
 
           Stub = Service.rpc_stub_class
