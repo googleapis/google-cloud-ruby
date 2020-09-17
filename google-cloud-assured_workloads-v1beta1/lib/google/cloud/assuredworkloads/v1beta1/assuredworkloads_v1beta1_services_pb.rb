@@ -34,20 +34,20 @@ module Google
             self.service_name = 'google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService'
 
             # Creates Assured Workload.
-            rpc :CreateWorkload, Google::Cloud::AssuredWorkloads::V1beta1::CreateWorkloadRequest, Google::Longrunning::Operation
+            rpc :CreateWorkload, ::Google::Cloud::AssuredWorkloads::V1beta1::CreateWorkloadRequest, ::Google::Longrunning::Operation
             # Updates an existing workload.
             # Currently allows updating of workload display_name and labels.
             # For force updates don't set etag field in the Workload.
             # Only one update operation per workload can be in progress.
-            rpc :UpdateWorkload, Google::Cloud::AssuredWorkloads::V1beta1::UpdateWorkloadRequest, Google::Cloud::AssuredWorkloads::V1beta1::Workload
+            rpc :UpdateWorkload, ::Google::Cloud::AssuredWorkloads::V1beta1::UpdateWorkloadRequest, ::Google::Cloud::AssuredWorkloads::V1beta1::Workload
             # Deletes the workload. Make sure that workload's direct children are already
             # in a deleted state, otherwise the request will fail with a
             # FAILED_PRECONDITION error.
-            rpc :DeleteWorkload, Google::Cloud::AssuredWorkloads::V1beta1::DeleteWorkloadRequest, Google::Protobuf::Empty
+            rpc :DeleteWorkload, ::Google::Cloud::AssuredWorkloads::V1beta1::DeleteWorkloadRequest, ::Google::Protobuf::Empty
             # Gets Assured Workload associated with a CRM Node
-            rpc :GetWorkload, Google::Cloud::AssuredWorkloads::V1beta1::GetWorkloadRequest, Google::Cloud::AssuredWorkloads::V1beta1::Workload
+            rpc :GetWorkload, ::Google::Cloud::AssuredWorkloads::V1beta1::GetWorkloadRequest, ::Google::Cloud::AssuredWorkloads::V1beta1::Workload
             # Lists Assured Workloads under a CRM Node.
-            rpc :ListWorkloads, Google::Cloud::AssuredWorkloads::V1beta1::ListWorkloadsRequest, Google::Cloud::AssuredWorkloads::V1beta1::ListWorkloadsResponse
+            rpc :ListWorkloads, ::Google::Cloud::AssuredWorkloads::V1beta1::ListWorkloadsRequest, ::Google::Cloud::AssuredWorkloads::V1beta1::ListWorkloadsResponse
           end
 
           Stub = Service.rpc_stub_class
