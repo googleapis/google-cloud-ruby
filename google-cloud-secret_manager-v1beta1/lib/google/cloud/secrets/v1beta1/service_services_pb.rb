@@ -40,56 +40,56 @@ module Google
             self.service_name = 'google.cloud.secrets.v1beta1.SecretManagerService'
 
             # Lists [Secrets][google.cloud.secrets.v1beta1.Secret].
-            rpc :ListSecrets, Google::Cloud::SecretManager::V1beta1::ListSecretsRequest, Google::Cloud::SecretManager::V1beta1::ListSecretsResponse
+            rpc :ListSecrets, ::Google::Cloud::SecretManager::V1beta1::ListSecretsRequest, ::Google::Cloud::SecretManager::V1beta1::ListSecretsResponse
             # Creates a new [Secret][google.cloud.secrets.v1beta1.Secret] containing no [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion].
-            rpc :CreateSecret, Google::Cloud::SecretManager::V1beta1::CreateSecretRequest, Google::Cloud::SecretManager::V1beta1::Secret
+            rpc :CreateSecret, ::Google::Cloud::SecretManager::V1beta1::CreateSecretRequest, ::Google::Cloud::SecretManager::V1beta1::Secret
             # Creates a new [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] containing secret data and attaches
             # it to an existing [Secret][google.cloud.secrets.v1beta1.Secret].
-            rpc :AddSecretVersion, Google::Cloud::SecretManager::V1beta1::AddSecretVersionRequest, Google::Cloud::SecretManager::V1beta1::SecretVersion
+            rpc :AddSecretVersion, ::Google::Cloud::SecretManager::V1beta1::AddSecretVersionRequest, ::Google::Cloud::SecretManager::V1beta1::SecretVersion
             # Gets metadata for a given [Secret][google.cloud.secrets.v1beta1.Secret].
-            rpc :GetSecret, Google::Cloud::SecretManager::V1beta1::GetSecretRequest, Google::Cloud::SecretManager::V1beta1::Secret
+            rpc :GetSecret, ::Google::Cloud::SecretManager::V1beta1::GetSecretRequest, ::Google::Cloud::SecretManager::V1beta1::Secret
             # Updates metadata of an existing [Secret][google.cloud.secrets.v1beta1.Secret].
-            rpc :UpdateSecret, Google::Cloud::SecretManager::V1beta1::UpdateSecretRequest, Google::Cloud::SecretManager::V1beta1::Secret
+            rpc :UpdateSecret, ::Google::Cloud::SecretManager::V1beta1::UpdateSecretRequest, ::Google::Cloud::SecretManager::V1beta1::Secret
             # Deletes a [Secret][google.cloud.secrets.v1beta1.Secret].
-            rpc :DeleteSecret, Google::Cloud::SecretManager::V1beta1::DeleteSecretRequest, Google::Protobuf::Empty
+            rpc :DeleteSecret, ::Google::Cloud::SecretManager::V1beta1::DeleteSecretRequest, ::Google::Protobuf::Empty
             # Lists [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion]. This call does not return secret
             # data.
-            rpc :ListSecretVersions, Google::Cloud::SecretManager::V1beta1::ListSecretVersionsRequest, Google::Cloud::SecretManager::V1beta1::ListSecretVersionsResponse
+            rpc :ListSecretVersions, ::Google::Cloud::SecretManager::V1beta1::ListSecretVersionsRequest, ::Google::Cloud::SecretManager::V1beta1::ListSecretVersionsResponse
             # Gets metadata for a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
             #
             # `projects/*/secrets/*/versions/latest` is an alias to the `latest`
             # [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
-            rpc :GetSecretVersion, Google::Cloud::SecretManager::V1beta1::GetSecretVersionRequest, Google::Cloud::SecretManager::V1beta1::SecretVersion
+            rpc :GetSecretVersion, ::Google::Cloud::SecretManager::V1beta1::GetSecretVersionRequest, ::Google::Cloud::SecretManager::V1beta1::SecretVersion
             # Accesses a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion]. This call returns the secret data.
             #
             # `projects/*/secrets/*/versions/latest` is an alias to the `latest`
             # [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
-            rpc :AccessSecretVersion, Google::Cloud::SecretManager::V1beta1::AccessSecretVersionRequest, Google::Cloud::SecretManager::V1beta1::AccessSecretVersionResponse
+            rpc :AccessSecretVersion, ::Google::Cloud::SecretManager::V1beta1::AccessSecretVersionRequest, ::Google::Cloud::SecretManager::V1beta1::AccessSecretVersionResponse
             # Disables a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
             #
             # Sets the [state][google.cloud.secrets.v1beta1.SecretVersion.state] of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to
             # [DISABLED][google.cloud.secrets.v1beta1.SecretVersion.State.DISABLED].
-            rpc :DisableSecretVersion, Google::Cloud::SecretManager::V1beta1::DisableSecretVersionRequest, Google::Cloud::SecretManager::V1beta1::SecretVersion
+            rpc :DisableSecretVersion, ::Google::Cloud::SecretManager::V1beta1::DisableSecretVersionRequest, ::Google::Cloud::SecretManager::V1beta1::SecretVersion
             # Enables a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
             #
             # Sets the [state][google.cloud.secrets.v1beta1.SecretVersion.state] of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to
             # [ENABLED][google.cloud.secrets.v1beta1.SecretVersion.State.ENABLED].
-            rpc :EnableSecretVersion, Google::Cloud::SecretManager::V1beta1::EnableSecretVersionRequest, Google::Cloud::SecretManager::V1beta1::SecretVersion
+            rpc :EnableSecretVersion, ::Google::Cloud::SecretManager::V1beta1::EnableSecretVersionRequest, ::Google::Cloud::SecretManager::V1beta1::SecretVersion
             # Destroys a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
             #
             # Sets the [state][google.cloud.secrets.v1beta1.SecretVersion.state] of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to
             # [DESTROYED][google.cloud.secrets.v1beta1.SecretVersion.State.DESTROYED] and irrevocably destroys the
             # secret data.
-            rpc :DestroySecretVersion, Google::Cloud::SecretManager::V1beta1::DestroySecretVersionRequest, Google::Cloud::SecretManager::V1beta1::SecretVersion
+            rpc :DestroySecretVersion, ::Google::Cloud::SecretManager::V1beta1::DestroySecretVersionRequest, ::Google::Cloud::SecretManager::V1beta1::SecretVersion
             # Sets the access control policy on the specified secret. Replaces any
             # existing policy.
             #
             # Permissions on [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion] are enforced according
             # to the policy set on the associated [Secret][google.cloud.secrets.v1beta1.Secret].
-            rpc :SetIamPolicy, Google::Iam::V1::SetIamPolicyRequest, Google::Iam::V1::Policy
+            rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Gets the access control policy for a secret.
             # Returns empty policy if the secret exists and does not have a policy set.
-            rpc :GetIamPolicy, Google::Iam::V1::GetIamPolicyRequest, Google::Iam::V1::Policy
+            rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Returns permissions that a caller has for the specified secret.
             # If the secret does not exist, this call returns an empty set of
             # permissions, not a NOT_FOUND error.
@@ -97,7 +97,7 @@ module Google
             # Note: This operation is designed to be used for building permission-aware
             # UIs and command-line tools, not for authorization checking. This operation
             # may "fail open" without warning.
-            rpc :TestIamPermissions, Google::Iam::V1::TestIamPermissionsRequest, Google::Iam::V1::TestIamPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
