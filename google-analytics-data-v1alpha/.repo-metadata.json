@@ -1,0 +1,10 @@
+{
+    "api_id": "analyticsdata.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-analytics-data-v1alpha/latest",
+    "distribution_name": "google-analytics-data-v1alpha",
+    "language": "ruby",
+    "name": "analyticsdata",
+    "name_pretty": "Google Analytics Data V1alpha API",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
