@@ -43,7 +43,7 @@ module Google
             #
             # `POST
             # https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456`
-            rpc :ReportErrorEvent, Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventRequest, Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventResponse
+            rpc :ReportErrorEvent, ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventRequest, ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventResponse
           end
 
           Stub = Service.rpc_stub_class
