@@ -40,31 +40,31 @@ module Google
               # This method requires the `monitoring.dashboards.create` permission
               # on the specified project. For more information, see
               # [Google Cloud IAM](https://cloud.google.com/iam).
-              rpc :CreateDashboard, Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest, Google::Cloud::Monitoring::Dashboard::V1::Dashboard
+              rpc :CreateDashboard, ::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest, ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard
               # Lists the existing dashboards.
               #
               # This method requires the `monitoring.dashboards.list` permission
               # on the specified project. For more information, see
               # [Google Cloud IAM](https://cloud.google.com/iam).
-              rpc :ListDashboards, Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest, Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsResponse
+              rpc :ListDashboards, ::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest, ::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsResponse
               # Fetches a specific dashboard.
               #
               # This method requires the `monitoring.dashboards.get` permission
               # on the specified dashboard. For more information, see
               # [Google Cloud IAM](https://cloud.google.com/iam).
-              rpc :GetDashboard, Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest, Google::Cloud::Monitoring::Dashboard::V1::Dashboard
+              rpc :GetDashboard, ::Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest, ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard
               # Deletes an existing custom dashboard.
               #
               # This method requires the `monitoring.dashboards.delete` permission
               # on the specified dashboard. For more information, see
               # [Google Cloud IAM](https://cloud.google.com/iam).
-              rpc :DeleteDashboard, Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest, Google::Protobuf::Empty
+              rpc :DeleteDashboard, ::Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest, ::Google::Protobuf::Empty
               # Replaces an existing custom dashboard with a new definition.
               #
               # This method requires the `monitoring.dashboards.update` permission
               # on the specified dashboard. For more information, see
               # [Google Cloud IAM](https://cloud.google.com/iam).
-              rpc :UpdateDashboard, Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest, Google::Cloud::Monitoring::Dashboard::V1::Dashboard
+              rpc :UpdateDashboard, ::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest, ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard
             end
 
             Stub = Service.rpc_stub_class
