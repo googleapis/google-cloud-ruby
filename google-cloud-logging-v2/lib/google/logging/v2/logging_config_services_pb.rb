@@ -34,9 +34,9 @@ module Google
             self.service_name = 'google.logging.v2.ConfigServiceV2'
 
             # Lists buckets (Beta).
-            rpc :ListBuckets, Google::Cloud::Logging::V2::ListBucketsRequest, Google::Cloud::Logging::V2::ListBucketsResponse
+            rpc :ListBuckets, ::Google::Cloud::Logging::V2::ListBucketsRequest, ::Google::Cloud::Logging::V2::ListBucketsResponse
             # Gets a bucket (Beta).
-            rpc :GetBucket, Google::Cloud::Logging::V2::GetBucketRequest, Google::Cloud::Logging::V2::LogBucket
+            rpc :GetBucket, ::Google::Cloud::Logging::V2::GetBucketRequest, ::Google::Cloud::Logging::V2::LogBucket
             # Updates a bucket. This method replaces the following fields in the
             # existing bucket with values from the new bucket: `retention_period`
             #
@@ -48,37 +48,37 @@ module Google
             #
             # A buckets region may not be modified after it is created.
             # This method is in Beta.
-            rpc :UpdateBucket, Google::Cloud::Logging::V2::UpdateBucketRequest, Google::Cloud::Logging::V2::LogBucket
+            rpc :UpdateBucket, ::Google::Cloud::Logging::V2::UpdateBucketRequest, ::Google::Cloud::Logging::V2::LogBucket
             # Lists sinks.
-            rpc :ListSinks, Google::Cloud::Logging::V2::ListSinksRequest, Google::Cloud::Logging::V2::ListSinksResponse
+            rpc :ListSinks, ::Google::Cloud::Logging::V2::ListSinksRequest, ::Google::Cloud::Logging::V2::ListSinksResponse
             # Gets a sink.
-            rpc :GetSink, Google::Cloud::Logging::V2::GetSinkRequest, Google::Cloud::Logging::V2::LogSink
+            rpc :GetSink, ::Google::Cloud::Logging::V2::GetSinkRequest, ::Google::Cloud::Logging::V2::LogSink
             # Creates a sink that exports specified log entries to a destination. The
             # export of newly-ingested log entries begins immediately, unless the sink's
             # `writer_identity` is not permitted to write to the destination. A sink can
             # export log entries only from the resource owning the sink.
-            rpc :CreateSink, Google::Cloud::Logging::V2::CreateSinkRequest, Google::Cloud::Logging::V2::LogSink
+            rpc :CreateSink, ::Google::Cloud::Logging::V2::CreateSinkRequest, ::Google::Cloud::Logging::V2::LogSink
             # Updates a sink. This method replaces the following fields in the existing
             # sink with values from the new sink: `destination`, and `filter`.
             #
             # The updated sink might also have a new `writer_identity`; see the
             # `unique_writer_identity` field.
-            rpc :UpdateSink, Google::Cloud::Logging::V2::UpdateSinkRequest, Google::Cloud::Logging::V2::LogSink
+            rpc :UpdateSink, ::Google::Cloud::Logging::V2::UpdateSinkRequest, ::Google::Cloud::Logging::V2::LogSink
             # Deletes a sink. If the sink has a unique `writer_identity`, then that
             # service account is also deleted.
-            rpc :DeleteSink, Google::Cloud::Logging::V2::DeleteSinkRequest, Google::Protobuf::Empty
+            rpc :DeleteSink, ::Google::Cloud::Logging::V2::DeleteSinkRequest, ::Google::Protobuf::Empty
             # Lists all the exclusions in a parent resource.
-            rpc :ListExclusions, Google::Cloud::Logging::V2::ListExclusionsRequest, Google::Cloud::Logging::V2::ListExclusionsResponse
+            rpc :ListExclusions, ::Google::Cloud::Logging::V2::ListExclusionsRequest, ::Google::Cloud::Logging::V2::ListExclusionsResponse
             # Gets the description of an exclusion.
-            rpc :GetExclusion, Google::Cloud::Logging::V2::GetExclusionRequest, Google::Cloud::Logging::V2::LogExclusion
+            rpc :GetExclusion, ::Google::Cloud::Logging::V2::GetExclusionRequest, ::Google::Cloud::Logging::V2::LogExclusion
             # Creates a new exclusion in a specified parent resource.
             # Only log entries belonging to that resource can be excluded.
             # You can have up to 10 exclusions in a resource.
-            rpc :CreateExclusion, Google::Cloud::Logging::V2::CreateExclusionRequest, Google::Cloud::Logging::V2::LogExclusion
+            rpc :CreateExclusion, ::Google::Cloud::Logging::V2::CreateExclusionRequest, ::Google::Cloud::Logging::V2::LogExclusion
             # Changes one or more properties of an existing exclusion.
-            rpc :UpdateExclusion, Google::Cloud::Logging::V2::UpdateExclusionRequest, Google::Cloud::Logging::V2::LogExclusion
+            rpc :UpdateExclusion, ::Google::Cloud::Logging::V2::UpdateExclusionRequest, ::Google::Cloud::Logging::V2::LogExclusion
             # Deletes an exclusion.
-            rpc :DeleteExclusion, Google::Cloud::Logging::V2::DeleteExclusionRequest, Google::Protobuf::Empty
+            rpc :DeleteExclusion, ::Google::Cloud::Logging::V2::DeleteExclusionRequest, ::Google::Protobuf::Empty
             # Gets the Logs Router CMEK settings for the given resource.
             #
             # Note: CMEK for the Logs Router can currently only be configured for GCP
@@ -88,7 +88,7 @@ module Google
             # See [Enabling CMEK for Logs
             # Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
             # for more information.
-            rpc :GetCmekSettings, Google::Cloud::Logging::V2::GetCmekSettingsRequest, Google::Cloud::Logging::V2::CmekSettings
+            rpc :GetCmekSettings, ::Google::Cloud::Logging::V2::GetCmekSettingsRequest, ::Google::Cloud::Logging::V2::CmekSettings
             # Updates the Logs Router CMEK settings for the given resource.
             #
             # Note: CMEK for the Logs Router can currently only be configured for GCP
@@ -104,7 +104,7 @@ module Google
             # See [Enabling CMEK for Logs
             # Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
             # for more information.
-            rpc :UpdateCmekSettings, Google::Cloud::Logging::V2::UpdateCmekSettingsRequest, Google::Cloud::Logging::V2::CmekSettings
+            rpc :UpdateCmekSettings, ::Google::Cloud::Logging::V2::UpdateCmekSettingsRequest, ::Google::Cloud::Logging::V2::CmekSettings
           end
 
           Stub = Service.rpc_stub_class

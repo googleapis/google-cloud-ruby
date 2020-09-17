@@ -37,7 +37,7 @@ module Google
             # entries. Log entries written shortly before the delete operation might not
             # be deleted. Entries received after the delete operation with a timestamp
             # before the operation will be deleted.
-            rpc :DeleteLog, Google::Cloud::Logging::V2::DeleteLogRequest, Google::Protobuf::Empty
+            rpc :DeleteLog, ::Google::Cloud::Logging::V2::DeleteLogRequest, ::Google::Protobuf::Empty
             # Writes log entries to Logging. This API method is the
             # only way to send log entries to Logging. This method
             # is used, directly or indirectly, by the Logging agent
@@ -45,17 +45,17 @@ module Google
             # A single request may contain log entries for a maximum of 1000
             # different resources (projects, organizations, billing accounts or
             # folders)
-            rpc :WriteLogEntries, Google::Cloud::Logging::V2::WriteLogEntriesRequest, Google::Cloud::Logging::V2::WriteLogEntriesResponse
+            rpc :WriteLogEntries, ::Google::Cloud::Logging::V2::WriteLogEntriesRequest, ::Google::Cloud::Logging::V2::WriteLogEntriesResponse
             # Lists log entries.  Use this method to retrieve log entries that originated
             # from a project/folder/organization/billing account.  For ways to export log
             # entries, see [Exporting
             # Logs](https://cloud.google.com/logging/docs/export).
-            rpc :ListLogEntries, Google::Cloud::Logging::V2::ListLogEntriesRequest, Google::Cloud::Logging::V2::ListLogEntriesResponse
+            rpc :ListLogEntries, ::Google::Cloud::Logging::V2::ListLogEntriesRequest, ::Google::Cloud::Logging::V2::ListLogEntriesResponse
             # Lists the descriptors for monitored resource types used by Logging.
-            rpc :ListMonitoredResourceDescriptors, Google::Cloud::Logging::V2::ListMonitoredResourceDescriptorsRequest, Google::Cloud::Logging::V2::ListMonitoredResourceDescriptorsResponse
+            rpc :ListMonitoredResourceDescriptors, ::Google::Cloud::Logging::V2::ListMonitoredResourceDescriptorsRequest, ::Google::Cloud::Logging::V2::ListMonitoredResourceDescriptorsResponse
             # Lists the logs in projects, organizations, folders, or billing accounts.
             # Only logs that have entries are listed.
-            rpc :ListLogs, Google::Cloud::Logging::V2::ListLogsRequest, Google::Cloud::Logging::V2::ListLogsResponse
+            rpc :ListLogs, ::Google::Cloud::Logging::V2::ListLogsRequest, ::Google::Cloud::Logging::V2::ListLogsResponse
           end
 
           Stub = Service.rpc_stub_class

@@ -34,15 +34,15 @@ module Google
             self.service_name = 'google.logging.v2.MetricsServiceV2'
 
             # Lists logs-based metrics.
-            rpc :ListLogMetrics, Google::Cloud::Logging::V2::ListLogMetricsRequest, Google::Cloud::Logging::V2::ListLogMetricsResponse
+            rpc :ListLogMetrics, ::Google::Cloud::Logging::V2::ListLogMetricsRequest, ::Google::Cloud::Logging::V2::ListLogMetricsResponse
             # Gets a logs-based metric.
-            rpc :GetLogMetric, Google::Cloud::Logging::V2::GetLogMetricRequest, Google::Cloud::Logging::V2::LogMetric
+            rpc :GetLogMetric, ::Google::Cloud::Logging::V2::GetLogMetricRequest, ::Google::Cloud::Logging::V2::LogMetric
             # Creates a logs-based metric.
-            rpc :CreateLogMetric, Google::Cloud::Logging::V2::CreateLogMetricRequest, Google::Cloud::Logging::V2::LogMetric
+            rpc :CreateLogMetric, ::Google::Cloud::Logging::V2::CreateLogMetricRequest, ::Google::Cloud::Logging::V2::LogMetric
             # Creates or updates a logs-based metric.
-            rpc :UpdateLogMetric, Google::Cloud::Logging::V2::UpdateLogMetricRequest, Google::Cloud::Logging::V2::LogMetric
+            rpc :UpdateLogMetric, ::Google::Cloud::Logging::V2::UpdateLogMetricRequest, ::Google::Cloud::Logging::V2::LogMetric
             # Deletes a logs-based metric.
-            rpc :DeleteLogMetric, Google::Cloud::Logging::V2::DeleteLogMetricRequest, Google::Protobuf::Empty
+            rpc :DeleteLogMetric, ::Google::Cloud::Logging::V2::DeleteLogMetricRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class
