@@ -34,20 +34,20 @@ module Google
             self.service_name = 'google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService'
 
             # Creates an Assessment of the likelihood an event is legitimate.
-            rpc :CreateAssessment, Google::Cloud::RecaptchaEnterprise::V1::CreateAssessmentRequest, Google::Cloud::RecaptchaEnterprise::V1::Assessment
+            rpc :CreateAssessment, ::Google::Cloud::RecaptchaEnterprise::V1::CreateAssessmentRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Assessment
             # Annotates a previously created Assessment to provide additional information
             # on whether the event turned out to be authentic or fradulent.
-            rpc :AnnotateAssessment, Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest, Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentResponse
+            rpc :AnnotateAssessment, ::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest, ::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentResponse
             # Creates a new reCAPTCHA Enterprise key.
-            rpc :CreateKey, Google::Cloud::RecaptchaEnterprise::V1::CreateKeyRequest, Google::Cloud::RecaptchaEnterprise::V1::Key
+            rpc :CreateKey, ::Google::Cloud::RecaptchaEnterprise::V1::CreateKeyRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Key
             # Returns the list of all keys that belong to a project.
-            rpc :ListKeys, Google::Cloud::RecaptchaEnterprise::V1::ListKeysRequest, Google::Cloud::RecaptchaEnterprise::V1::ListKeysResponse
+            rpc :ListKeys, ::Google::Cloud::RecaptchaEnterprise::V1::ListKeysRequest, ::Google::Cloud::RecaptchaEnterprise::V1::ListKeysResponse
             # Returns the specified key.
-            rpc :GetKey, Google::Cloud::RecaptchaEnterprise::V1::GetKeyRequest, Google::Cloud::RecaptchaEnterprise::V1::Key
+            rpc :GetKey, ::Google::Cloud::RecaptchaEnterprise::V1::GetKeyRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Key
             # Updates the specified key.
-            rpc :UpdateKey, Google::Cloud::RecaptchaEnterprise::V1::UpdateKeyRequest, Google::Cloud::RecaptchaEnterprise::V1::Key
+            rpc :UpdateKey, ::Google::Cloud::RecaptchaEnterprise::V1::UpdateKeyRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Key
             # Deletes the specified key.
-            rpc :DeleteKey, Google::Cloud::RecaptchaEnterprise::V1::DeleteKeyRequest, Google::Protobuf::Empty
+            rpc :DeleteKey, ::Google::Cloud::RecaptchaEnterprise::V1::DeleteKeyRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class
