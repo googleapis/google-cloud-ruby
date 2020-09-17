@@ -37,25 +37,25 @@ module Google
             self.service_name = 'google.cloud.osconfig.v1.OsConfigService'
 
             # Patch VM instances by creating and running a patch job.
-            rpc :ExecutePatchJob, Google::Cloud::OsConfig::V1::ExecutePatchJobRequest, Google::Cloud::OsConfig::V1::PatchJob
+            rpc :ExecutePatchJob, ::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest, ::Google::Cloud::OsConfig::V1::PatchJob
             # Get the patch job. This can be used to track the progress of an
             # ongoing patch job or review the details of completed jobs.
-            rpc :GetPatchJob, Google::Cloud::OsConfig::V1::GetPatchJobRequest, Google::Cloud::OsConfig::V1::PatchJob
+            rpc :GetPatchJob, ::Google::Cloud::OsConfig::V1::GetPatchJobRequest, ::Google::Cloud::OsConfig::V1::PatchJob
             # Cancel a patch job. The patch job must be active. Canceled patch jobs
             # cannot be restarted.
-            rpc :CancelPatchJob, Google::Cloud::OsConfig::V1::CancelPatchJobRequest, Google::Cloud::OsConfig::V1::PatchJob
+            rpc :CancelPatchJob, ::Google::Cloud::OsConfig::V1::CancelPatchJobRequest, ::Google::Cloud::OsConfig::V1::PatchJob
             # Get a list of patch jobs.
-            rpc :ListPatchJobs, Google::Cloud::OsConfig::V1::ListPatchJobsRequest, Google::Cloud::OsConfig::V1::ListPatchJobsResponse
+            rpc :ListPatchJobs, ::Google::Cloud::OsConfig::V1::ListPatchJobsRequest, ::Google::Cloud::OsConfig::V1::ListPatchJobsResponse
             # Get a list of instance details for a given patch job.
-            rpc :ListPatchJobInstanceDetails, Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest, Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsResponse
+            rpc :ListPatchJobInstanceDetails, ::Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest, ::Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsResponse
             # Create an OS Config patch deployment.
-            rpc :CreatePatchDeployment, Google::Cloud::OsConfig::V1::CreatePatchDeploymentRequest, Google::Cloud::OsConfig::V1::PatchDeployment
+            rpc :CreatePatchDeployment, ::Google::Cloud::OsConfig::V1::CreatePatchDeploymentRequest, ::Google::Cloud::OsConfig::V1::PatchDeployment
             # Get an OS Config patch deployment.
-            rpc :GetPatchDeployment, Google::Cloud::OsConfig::V1::GetPatchDeploymentRequest, Google::Cloud::OsConfig::V1::PatchDeployment
+            rpc :GetPatchDeployment, ::Google::Cloud::OsConfig::V1::GetPatchDeploymentRequest, ::Google::Cloud::OsConfig::V1::PatchDeployment
             # Get a page of OS Config patch deployments.
-            rpc :ListPatchDeployments, Google::Cloud::OsConfig::V1::ListPatchDeploymentsRequest, Google::Cloud::OsConfig::V1::ListPatchDeploymentsResponse
+            rpc :ListPatchDeployments, ::Google::Cloud::OsConfig::V1::ListPatchDeploymentsRequest, ::Google::Cloud::OsConfig::V1::ListPatchDeploymentsResponse
             # Delete an OS Config patch deployment.
-            rpc :DeletePatchDeployment, Google::Cloud::OsConfig::V1::DeletePatchDeploymentRequest, Google::Protobuf::Empty
+            rpc :DeletePatchDeployment, ::Google::Cloud::OsConfig::V1::DeletePatchDeploymentRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class
