@@ -37,18 +37,18 @@ module Google
             # Gets information about a billing account. The current authenticated user
             # must be a [viewer of the billing
             # account](https://cloud.google.com/billing/docs/how-to/billing-access).
-            rpc :GetBillingAccount, Google::Cloud::Billing::V1::GetBillingAccountRequest, Google::Cloud::Billing::V1::BillingAccount
+            rpc :GetBillingAccount, ::Google::Cloud::Billing::V1::GetBillingAccountRequest, ::Google::Cloud::Billing::V1::BillingAccount
             # Lists the billing accounts that the current authenticated user has
             # permission to
             # [view](https://cloud.google.com/billing/docs/how-to/billing-access).
-            rpc :ListBillingAccounts, Google::Cloud::Billing::V1::ListBillingAccountsRequest, Google::Cloud::Billing::V1::ListBillingAccountsResponse
+            rpc :ListBillingAccounts, ::Google::Cloud::Billing::V1::ListBillingAccountsRequest, ::Google::Cloud::Billing::V1::ListBillingAccountsResponse
             # Updates a billing account's fields.
             # Currently the only field that can be edited is `display_name`.
             # The current authenticated user must have the `billing.accounts.update`
             # IAM permission, which is typically given to the
             # [administrator](https://cloud.google.com/billing/docs/how-to/billing-access)
             # of the billing account.
-            rpc :UpdateBillingAccount, Google::Cloud::Billing::V1::UpdateBillingAccountRequest, Google::Cloud::Billing::V1::BillingAccount
+            rpc :UpdateBillingAccount, ::Google::Cloud::Billing::V1::UpdateBillingAccountRequest, ::Google::Cloud::Billing::V1::BillingAccount
             # Creates a billing account.
             # This method can only be used to create
             # [billing subaccounts](https://cloud.google.com/billing/docs/concepts)
@@ -59,17 +59,17 @@ module Google
             # [administrators](https://cloud.google.com/billing/docs/how-to/billing-access).
             # This method will return an error if the master account has not been
             # provisioned as a reseller account.
-            rpc :CreateBillingAccount, Google::Cloud::Billing::V1::CreateBillingAccountRequest, Google::Cloud::Billing::V1::BillingAccount
+            rpc :CreateBillingAccount, ::Google::Cloud::Billing::V1::CreateBillingAccountRequest, ::Google::Cloud::Billing::V1::BillingAccount
             # Lists the projects associated with a billing account. The current
             # authenticated user must have the `billing.resourceAssociations.list` IAM
             # permission, which is often given to billing account
             # [viewers](https://cloud.google.com/billing/docs/how-to/billing-access).
-            rpc :ListProjectBillingInfo, Google::Cloud::Billing::V1::ListProjectBillingInfoRequest, Google::Cloud::Billing::V1::ListProjectBillingInfoResponse
+            rpc :ListProjectBillingInfo, ::Google::Cloud::Billing::V1::ListProjectBillingInfoRequest, ::Google::Cloud::Billing::V1::ListProjectBillingInfoResponse
             # Gets the billing information for a project. The current authenticated user
             # must have [permission to view the
             # project](https://cloud.google.com/docs/permissions-overview#h.bgs0oxofvnoo
             # ).
-            rpc :GetProjectBillingInfo, Google::Cloud::Billing::V1::GetProjectBillingInfoRequest, Google::Cloud::Billing::V1::ProjectBillingInfo
+            rpc :GetProjectBillingInfo, ::Google::Cloud::Billing::V1::GetProjectBillingInfoRequest, ::Google::Cloud::Billing::V1::ProjectBillingInfo
             # Sets or updates the billing account associated with a project. You specify
             # the new billing account by setting the `billing_account_name` in the
             # `ProjectBillingInfo` resource to the resource name of a billing account.
@@ -101,22 +101,22 @@ module Google
             # resources used by the project will be shut down. Thus, unless you wish to
             # disable billing, you should always call this method with the name of an
             # *open* billing account.
-            rpc :UpdateProjectBillingInfo, Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest, Google::Cloud::Billing::V1::ProjectBillingInfo
+            rpc :UpdateProjectBillingInfo, ::Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest, ::Google::Cloud::Billing::V1::ProjectBillingInfo
             # Gets the access control policy for a billing account.
             # The caller must have the `billing.accounts.getIamPolicy` permission on the
             # account, which is often given to billing account
             # [viewers](https://cloud.google.com/billing/docs/how-to/billing-access).
-            rpc :GetIamPolicy, Google::Iam::V1::GetIamPolicyRequest, Google::Iam::V1::Policy
+            rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Sets the access control policy for a billing account. Replaces any existing
             # policy.
             # The caller must have the `billing.accounts.setIamPolicy` permission on the
             # account, which is often given to billing account
             # [administrators](https://cloud.google.com/billing/docs/how-to/billing-access).
-            rpc :SetIamPolicy, Google::Iam::V1::SetIamPolicyRequest, Google::Iam::V1::Policy
+            rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Tests the access control policy for a billing account. This method takes
             # the resource and a set of permissions as input and returns the subset of
             # the input permissions that the caller is allowed for that resource.
-            rpc :TestIamPermissions, Google::Iam::V1::TestIamPermissionsRequest, Google::Iam::V1::TestIamPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
