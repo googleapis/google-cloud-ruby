@@ -36,36 +36,36 @@ module Google
 
             # Creates the given topic with the given name. See the [resource name rules](
             # https://cloud.google.com/pubsub/docs/admin#resource_names).
-            rpc :CreateTopic, Google::Cloud::PubSub::V1::Topic, Google::Cloud::PubSub::V1::Topic
+            rpc :CreateTopic, ::Google::Cloud::PubSub::V1::Topic, ::Google::Cloud::PubSub::V1::Topic
             # Updates an existing topic. Note that certain properties of a
             # topic are not modifiable.
-            rpc :UpdateTopic, Google::Cloud::PubSub::V1::UpdateTopicRequest, Google::Cloud::PubSub::V1::Topic
+            rpc :UpdateTopic, ::Google::Cloud::PubSub::V1::UpdateTopicRequest, ::Google::Cloud::PubSub::V1::Topic
             # Adds one or more messages to the topic. Returns `NOT_FOUND` if the topic
             # does not exist.
-            rpc :Publish, Google::Cloud::PubSub::V1::PublishRequest, Google::Cloud::PubSub::V1::PublishResponse
+            rpc :Publish, ::Google::Cloud::PubSub::V1::PublishRequest, ::Google::Cloud::PubSub::V1::PublishResponse
             # Gets the configuration of a topic.
-            rpc :GetTopic, Google::Cloud::PubSub::V1::GetTopicRequest, Google::Cloud::PubSub::V1::Topic
+            rpc :GetTopic, ::Google::Cloud::PubSub::V1::GetTopicRequest, ::Google::Cloud::PubSub::V1::Topic
             # Lists matching topics.
-            rpc :ListTopics, Google::Cloud::PubSub::V1::ListTopicsRequest, Google::Cloud::PubSub::V1::ListTopicsResponse
+            rpc :ListTopics, ::Google::Cloud::PubSub::V1::ListTopicsRequest, ::Google::Cloud::PubSub::V1::ListTopicsResponse
             # Lists the names of the attached subscriptions on this topic.
-            rpc :ListTopicSubscriptions, Google::Cloud::PubSub::V1::ListTopicSubscriptionsRequest, Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse
+            rpc :ListTopicSubscriptions, ::Google::Cloud::PubSub::V1::ListTopicSubscriptionsRequest, ::Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse
             # Lists the names of the snapshots on this topic. Snapshots are used in
             # [Seek](https://cloud.google.com/pubsub/docs/replay-overview) operations,
             # which allow you to manage message acknowledgments in bulk. That is, you can
             # set the acknowledgment state of messages in an existing subscription to the
             # state captured by a snapshot.
-            rpc :ListTopicSnapshots, Google::Cloud::PubSub::V1::ListTopicSnapshotsRequest, Google::Cloud::PubSub::V1::ListTopicSnapshotsResponse
+            rpc :ListTopicSnapshots, ::Google::Cloud::PubSub::V1::ListTopicSnapshotsRequest, ::Google::Cloud::PubSub::V1::ListTopicSnapshotsResponse
             # Deletes the topic with the given name. Returns `NOT_FOUND` if the topic
             # does not exist. After a topic is deleted, a new topic may be created with
             # the same name; this is an entirely new topic with none of the old
             # configuration or subscriptions. Existing subscriptions to this topic are
             # not deleted, but their `topic` field is set to `_deleted-topic_`.
-            rpc :DeleteTopic, Google::Cloud::PubSub::V1::DeleteTopicRequest, Google::Protobuf::Empty
+            rpc :DeleteTopic, ::Google::Cloud::PubSub::V1::DeleteTopicRequest, ::Google::Protobuf::Empty
             # Detaches a subscription from this topic. All messages retained in the
             # subscription are dropped. Subsequent `Pull` and `StreamingPull` requests
             # will return FAILED_PRECONDITION. If the subscription is a push
             # subscription, pushes to the endpoint will stop.
-            rpc :DetachSubscription, Google::Cloud::PubSub::V1::DetachSubscriptionRequest, Google::Cloud::PubSub::V1::DetachSubscriptionResponse
+            rpc :DetachSubscription, ::Google::Cloud::PubSub::V1::DetachSubscriptionRequest, ::Google::Cloud::PubSub::V1::DetachSubscriptionResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -93,26 +93,26 @@ module Google
             # (https://cloud.google.com/pubsub/docs/admin#resource_names). The generated
             # name is populated in the returned Subscription object. Note that for REST
             # API requests, you must specify a name in the request.
-            rpc :CreateSubscription, Google::Cloud::PubSub::V1::Subscription, Google::Cloud::PubSub::V1::Subscription
+            rpc :CreateSubscription, ::Google::Cloud::PubSub::V1::Subscription, ::Google::Cloud::PubSub::V1::Subscription
             # Gets the configuration details of a subscription.
-            rpc :GetSubscription, Google::Cloud::PubSub::V1::GetSubscriptionRequest, Google::Cloud::PubSub::V1::Subscription
+            rpc :GetSubscription, ::Google::Cloud::PubSub::V1::GetSubscriptionRequest, ::Google::Cloud::PubSub::V1::Subscription
             # Updates an existing subscription. Note that certain properties of a
             # subscription, such as its topic, are not modifiable.
-            rpc :UpdateSubscription, Google::Cloud::PubSub::V1::UpdateSubscriptionRequest, Google::Cloud::PubSub::V1::Subscription
+            rpc :UpdateSubscription, ::Google::Cloud::PubSub::V1::UpdateSubscriptionRequest, ::Google::Cloud::PubSub::V1::Subscription
             # Lists matching subscriptions.
-            rpc :ListSubscriptions, Google::Cloud::PubSub::V1::ListSubscriptionsRequest, Google::Cloud::PubSub::V1::ListSubscriptionsResponse
+            rpc :ListSubscriptions, ::Google::Cloud::PubSub::V1::ListSubscriptionsRequest, ::Google::Cloud::PubSub::V1::ListSubscriptionsResponse
             # Deletes an existing subscription. All messages retained in the subscription
             # are immediately dropped. Calls to `Pull` after deletion will return
             # `NOT_FOUND`. After a subscription is deleted, a new one may be created with
             # the same name, but the new one has no association with the old
             # subscription or its topic unless the same topic is specified.
-            rpc :DeleteSubscription, Google::Cloud::PubSub::V1::DeleteSubscriptionRequest, Google::Protobuf::Empty
+            rpc :DeleteSubscription, ::Google::Cloud::PubSub::V1::DeleteSubscriptionRequest, ::Google::Protobuf::Empty
             # Modifies the ack deadline for a specific message. This method is useful
             # to indicate that more time is needed to process a message by the
             # subscriber, or to make the message available for redelivery if the
             # processing was interrupted. Note that this does not modify the
             # subscription-level `ackDeadlineSeconds` used for subsequent messages.
-            rpc :ModifyAckDeadline, Google::Cloud::PubSub::V1::ModifyAckDeadlineRequest, Google::Protobuf::Empty
+            rpc :ModifyAckDeadline, ::Google::Cloud::PubSub::V1::ModifyAckDeadlineRequest, ::Google::Protobuf::Empty
             # Acknowledges the messages associated with the `ack_ids` in the
             # `AcknowledgeRequest`. The Pub/Sub system can remove the relevant messages
             # from the subscription.
@@ -120,11 +120,11 @@ module Google
             # Acknowledging a message whose ack deadline has expired may succeed,
             # but such a message may be redelivered later. Acknowledging a message more
             # than once will not result in an error.
-            rpc :Acknowledge, Google::Cloud::PubSub::V1::AcknowledgeRequest, Google::Protobuf::Empty
+            rpc :Acknowledge, ::Google::Cloud::PubSub::V1::AcknowledgeRequest, ::Google::Protobuf::Empty
             # Pulls messages from the server. The server may return `UNAVAILABLE` if
             # there are too many concurrent pull requests pending for the given
             # subscription.
-            rpc :Pull, Google::Cloud::PubSub::V1::PullRequest, Google::Cloud::PubSub::V1::PullResponse
+            rpc :Pull, ::Google::Cloud::PubSub::V1::PullRequest, ::Google::Cloud::PubSub::V1::PullResponse
             # Establishes a stream with the server, which sends messages down to the
             # client. The client streams acknowledgements and ack deadline modifications
             # back to the server. The server will close the stream and return the status
@@ -132,26 +132,26 @@ module Google
             # reassign server-side resources, in which case, the client should
             # re-establish the stream. Flow control can be achieved by configuring the
             # underlying RPC channel.
-            rpc :StreamingPull, stream(Google::Cloud::PubSub::V1::StreamingPullRequest), stream(Google::Cloud::PubSub::V1::StreamingPullResponse)
+            rpc :StreamingPull, stream(::Google::Cloud::PubSub::V1::StreamingPullRequest), stream(::Google::Cloud::PubSub::V1::StreamingPullResponse)
             # Modifies the `PushConfig` for a specified subscription.
             #
             # This may be used to change a push subscription to a pull one (signified by
             # an empty `PushConfig`) or vice versa, or change the endpoint URL and other
             # attributes of a push subscription. Messages will accumulate for delivery
             # continuously through the call regardless of changes to the `PushConfig`.
-            rpc :ModifyPushConfig, Google::Cloud::PubSub::V1::ModifyPushConfigRequest, Google::Protobuf::Empty
+            rpc :ModifyPushConfig, ::Google::Cloud::PubSub::V1::ModifyPushConfigRequest, ::Google::Protobuf::Empty
             # Gets the configuration details of a snapshot. Snapshots are used in
             # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
             # operations, which allow you to manage message acknowledgments in bulk. That
             # is, you can set the acknowledgment state of messages in an existing
             # subscription to the state captured by a snapshot.
-            rpc :GetSnapshot, Google::Cloud::PubSub::V1::GetSnapshotRequest, Google::Cloud::PubSub::V1::Snapshot
+            rpc :GetSnapshot, ::Google::Cloud::PubSub::V1::GetSnapshotRequest, ::Google::Cloud::PubSub::V1::Snapshot
             # Lists the existing snapshots. Snapshots are used in [Seek](
             # https://cloud.google.com/pubsub/docs/replay-overview) operations, which
             # allow you to manage message acknowledgments in bulk. That is, you can set
             # the acknowledgment state of messages in an existing subscription to the
             # state captured by a snapshot.
-            rpc :ListSnapshots, Google::Cloud::PubSub::V1::ListSnapshotsRequest, Google::Cloud::PubSub::V1::ListSnapshotsResponse
+            rpc :ListSnapshots, ::Google::Cloud::PubSub::V1::ListSnapshotsRequest, ::Google::Cloud::PubSub::V1::ListSnapshotsResponse
             # Creates a snapshot from the requested subscription. Snapshots are used in
             # [Seek](https://cloud.google.com/pubsub/docs/replay-overview) operations,
             # which allow you to manage message acknowledgments in bulk. That is, you can
@@ -168,14 +168,14 @@ module Google
             # (https://cloud.google.com/pubsub/docs/admin#resource_names). The
             # generated name is populated in the returned Snapshot object. Note that for
             # REST API requests, you must specify a name in the request.
-            rpc :CreateSnapshot, Google::Cloud::PubSub::V1::CreateSnapshotRequest, Google::Cloud::PubSub::V1::Snapshot
+            rpc :CreateSnapshot, ::Google::Cloud::PubSub::V1::CreateSnapshotRequest, ::Google::Cloud::PubSub::V1::Snapshot
             # Updates an existing snapshot. Snapshots are used in
             # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
             # operations, which allow
             # you to manage message acknowledgments in bulk. That is, you can set the
             # acknowledgment state of messages in an existing subscription to the state
             # captured by a snapshot.
-            rpc :UpdateSnapshot, Google::Cloud::PubSub::V1::UpdateSnapshotRequest, Google::Cloud::PubSub::V1::Snapshot
+            rpc :UpdateSnapshot, ::Google::Cloud::PubSub::V1::UpdateSnapshotRequest, ::Google::Cloud::PubSub::V1::Snapshot
             # Removes an existing snapshot. Snapshots are used in [Seek]
             # (https://cloud.google.com/pubsub/docs/replay-overview) operations, which
             # allow you to manage message acknowledgments in bulk. That is, you can set
@@ -185,7 +185,7 @@ module Google
             # are immediately dropped. After a snapshot is deleted, a new one may be
             # created with the same name, but the new one has no association with the old
             # snapshot or its subscription, unless the same subscription is specified.
-            rpc :DeleteSnapshot, Google::Cloud::PubSub::V1::DeleteSnapshotRequest, Google::Protobuf::Empty
+            rpc :DeleteSnapshot, ::Google::Cloud::PubSub::V1::DeleteSnapshotRequest, ::Google::Protobuf::Empty
             # Seeks an existing subscription to a point in time or to a given snapshot,
             # whichever is provided in the request. Snapshots are used in [Seek](
             # https://cloud.google.com/pubsub/docs/replay-overview) operations, which
@@ -193,7 +193,7 @@ module Google
             # the acknowledgment state of messages in an existing subscription to the
             # state captured by a snapshot. Note that both the subscription and the
             # snapshot must be on the same topic.
-            rpc :Seek, Google::Cloud::PubSub::V1::SeekRequest, Google::Cloud::PubSub::V1::SeekResponse
+            rpc :Seek, ::Google::Cloud::PubSub::V1::SeekRequest, ::Google::Cloud::PubSub::V1::SeekResponse
           end
 
           Stub = Service.rpc_stub_class
