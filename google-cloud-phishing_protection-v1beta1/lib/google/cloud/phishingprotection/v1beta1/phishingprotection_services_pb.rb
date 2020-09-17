@@ -41,7 +41,7 @@ module Google
             # be added the to [Google's Social Engineering
             # lists](https://support.google.com/webmasters/answer/6350487/) in order to
             # protect users that could get exposed to this threat in the future.
-            rpc :ReportPhishing, Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest, Google::Cloud::PhishingProtection::V1beta1::ReportPhishingResponse
+            rpc :ReportPhishing, ::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest, ::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingResponse
           end
 
           Stub = Service.rpc_stub_class
