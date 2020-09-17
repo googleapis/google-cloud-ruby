@@ -38,29 +38,29 @@ module Google
               # Creates a new budget. See
               # <a href="https://cloud.google.com/billing/quotas">Quotas and limits</a>
               # for more information on the limits of the number of budgets you can create.
-              rpc :CreateBudget, Google::Cloud::Billing::Budgets::V1beta1::CreateBudgetRequest, Google::Cloud::Billing::Budgets::V1beta1::Budget
+              rpc :CreateBudget, ::Google::Cloud::Billing::Budgets::V1beta1::CreateBudgetRequest, ::Google::Cloud::Billing::Budgets::V1beta1::Budget
               # Updates a budget and returns the updated budget.
               #
               # WARNING: There are some fields exposed on the Google Cloud Console that
               # aren't available on this API. Budget fields that are not exposed in
               # this API will not be changed by this method.
-              rpc :UpdateBudget, Google::Cloud::Billing::Budgets::V1beta1::UpdateBudgetRequest, Google::Cloud::Billing::Budgets::V1beta1::Budget
+              rpc :UpdateBudget, ::Google::Cloud::Billing::Budgets::V1beta1::UpdateBudgetRequest, ::Google::Cloud::Billing::Budgets::V1beta1::Budget
               # Returns a budget.
               #
               # WARNING: There are some fields exposed on the Google Cloud Console that
               # aren't available on this API. When reading from the API, you will not
               # see these fields in the return value, though they may have been set
               # in the Cloud Console.
-              rpc :GetBudget, Google::Cloud::Billing::Budgets::V1beta1::GetBudgetRequest, Google::Cloud::Billing::Budgets::V1beta1::Budget
+              rpc :GetBudget, ::Google::Cloud::Billing::Budgets::V1beta1::GetBudgetRequest, ::Google::Cloud::Billing::Budgets::V1beta1::Budget
               # Returns a list of budgets for a billing account.
               #
               # WARNING: There are some fields exposed on the Google Cloud Console that
               # aren't available on this API. When reading from the API, you will not
               # see these fields in the return value, though they may have been set
               # in the Cloud Console.
-              rpc :ListBudgets, Google::Cloud::Billing::Budgets::V1beta1::ListBudgetsRequest, Google::Cloud::Billing::Budgets::V1beta1::ListBudgetsResponse
+              rpc :ListBudgets, ::Google::Cloud::Billing::Budgets::V1beta1::ListBudgetsRequest, ::Google::Cloud::Billing::Budgets::V1beta1::ListBudgetsResponse
               # Deletes a budget. Returns successfully if already deleted.
-              rpc :DeleteBudget, Google::Cloud::Billing::Budgets::V1beta1::DeleteBudgetRequest, Google::Protobuf::Empty
+              rpc :DeleteBudget, ::Google::Cloud::Billing::Budgets::V1beta1::DeleteBudgetRequest, ::Google::Protobuf::Empty
             end
 
             Stub = Service.rpc_stub_class
