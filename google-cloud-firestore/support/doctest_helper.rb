@@ -57,6 +57,12 @@ module Google
         def stopped?
           @stopped
         end
+
+        def on_error &block
+        end
+
+        def last_error
+        end
       end
       DocumentListener = StubbedListener
       QueryListener = StubbedListener

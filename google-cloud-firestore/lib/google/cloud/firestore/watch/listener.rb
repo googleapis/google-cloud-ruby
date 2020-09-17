@@ -30,7 +30,7 @@ module Google
         class Listener
           include MonitorMixin
 
-          def self.for_doc_ref doc_ref, &callback
+          def self.for_doc_ref parent, doc_ref, &callback
             raise ArgumentError if doc_ref.nil?
             raise ArgumentError if callback.nil?
 
@@ -44,10 +44,10 @@ module Google
               )
             )
 
-            new nil, doc_ref, doc_ref.client, init_listen_req, &callback
+            new parent, nil, doc_ref, doc_ref.client, init_listen_req, &callback
           end
 
-          def self.for_query query, &callback
+          def self.for_query parent, query, &callback
             raise ArgumentError if query.nil?
             raise ArgumentError if callback.nil?
 
@@ -61,12 +61,13 @@ module Google
               )
             )
 
-            new query, nil, query.client, init_listen_req, &callback
+            new parent, query, nil, query.client, init_listen_req, &callback
           end
 
-          def initialize query, doc_ref, client, init_listen_req, &callback
+          def initialize parent, query, doc_ref, client, init_listen_req, &callback
             super() # to init MonitorMixin
 
+            @parent = parent
             @query = query
             @doc_ref = doc_ref
             @client = client
@@ -119,6 +120,8 @@ module Google
 
           def send_callback query_snp
             @callback.call query_snp
+          rescue StandardError => e
+            @parent.error! e
           end
 
           def start_listening!
@@ -288,7 +291,8 @@ module Google
           rescue RestartStream
             retry
           rescue StandardError => e
-            raise Google::Cloud::Error.from_error(e)
+            @parent.error! e
+            retry
           end
         end
       end

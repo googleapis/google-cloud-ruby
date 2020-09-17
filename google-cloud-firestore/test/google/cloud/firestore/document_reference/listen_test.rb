@@ -234,5 +234,59 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :watch_firestore 
     _(doc_snapshots[5]).must_be :exists?
     _(doc_snapshots[5][:val]).must_equal "hi"
   end
+
+  it "invokes on_error callbacks when the listener receives errors" do
+    listen_responses = [
+      [
+        doc_change_resp("doc", 0, val: 1),
+        current_resp("DOCUMENTSHAVEBEENCHANGED", 0.1),
+        no_change_resp("THISTOKENWILLNEVERBESEEN", 1),
+        ArgumentError.new("listen error")
+      ],
+      [
+        doc_change_resp("doc", 0, val: 1),
+        current_resp("DOCUMENTSHAVEBEENCHANGED", 0.1),
+        no_change_resp("THISTOKENWILLNEVERBESEEN", 1)
+      ]
+    ]
+    # set stub because we can't mock a streaming request/response
+    listen_stub = StreamingListenStub.new listen_responses
+    firestore.service.instance_variable_set :@firestore, listen_stub
+
+    doc_snapshots = []
+    errors_1 = []
+    errors_2 = []
+
+    listener = document.listen do |doc_snp|
+      doc_snapshots << doc_snp
+    end
+
+    listener.on_error do |error|
+      errors_1 << error
+    end
+
+    listener.on_error do |error|
+      errors_2 << error
+    end
+
+    wait_until { doc_snapshots.count == 1 }
+
+    listener.stop
+
+    _(errors_1.count).must_equal 1
+    _(errors_1[0]).must_be_kind_of ArgumentError
+    _(errors_1[0].message).must_equal "listen error"
+
+    _(errors_2.count).must_equal 1
+    _(errors_2[0]).must_be_kind_of ArgumentError
+    _(errors_2[0].message).must_equal "listen error"
+
+    # assert snapshots
+    _(doc_snapshots.count).must_equal 1
+    doc_snapshots.each { |qs| _(qs).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot }
+
+    _(doc_snapshots[0].document_path).must_equal document.document_path
+    _(doc_snapshots[0]).must_be :exists?
+    _(doc_snapshots[0][:val]).must_equal 1
+  end
 end
-181

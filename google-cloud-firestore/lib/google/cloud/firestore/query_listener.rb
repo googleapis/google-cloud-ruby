@@ -50,8 +50,9 @@ module Google
 
           @callback = callback
           raise ArgumentError if @callback.nil?
+          @error_callbacks = []
 
-          @listener = Watch::Listener.for_query query, &callback
+          @listener = Watch::Listener.for_query self, query, &callback
         end
 
         ##
@@ -111,6 +112,80 @@ module Google
         #
         def stopped?
           @listener.stopped?
+        end
+
+        ##
+        # Register to be notified of errors when raised.
+        #
+        # If an unhandled error has occurred the listener will attempt to
+        # recover from the error and resume listening.
+        #
+        # Multiple error handlers can be added.
+        #
+        # @yield [callback] The block to be called when an error is raised.
+        # @yieldparam [Exception] error The error raised.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Create a query
+        #   query = firestore.col(:cities).order(:population, :desc)
+        #
+        #   listener = query.listen do |snapshot|
+        #     puts "The query snapshot has #{snapshot.docs.count} documents "
+        #     puts "and has #{snapshot.changes.count} changes."
+        #   end
+        #
+        #   # Register to be notified when unhandled errors occur.
+        #   listener.on_error do |error|
+        #     # log error
+        #     puts error
+        #   end
+        #
+        #   # When ready, stop the listen operation and close the stream.
+        #   listener.stop
+        #
+        def on_error &block
+          @error_callbacks << block
+        end
+
+        ##
+        # The most recent unhandled error to occur while listening for changes.
+        #
+        # If an unhandled error has occurred the listener will attempt to
+        # recover from the error and resume listening.
+        #
+        # @return [Exception, nil] error The most recent error raised.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Create a query
+        #   query = firestore.col(:cities).order(:population, :desc)
+        #
+        #   listener = query.listen do |snapshot|
+        #     puts "The query snapshot has #{snapshot.docs.count} documents "
+        #     puts "and has #{snapshot.changes.count} changes."
+        #   end
+        #
+        #   # If an error was raised, it can be retrieved here:
+        #   listener.last_error #=> nil
+        #
+        #   # When ready, stop the listen operation and close the stream.
+        #   listener.stop
+        #
+        def last_error
+          @last_error
+        end
+
+        # @private returns error object from the stream thread.
+        def error! error
+          @last_error = error
+          @error_callbacks.each { |error_callback| error_callback.call error }
         end
       end
     end
