@@ -46,15 +46,15 @@ module Google
             self.service_name = 'google.devtools.clouddebugger.v2.Debugger2'
 
             # Sets the breakpoint to the debuggee.
-            rpc :SetBreakpoint, Google::Cloud::Debugger::V2::SetBreakpointRequest, Google::Cloud::Debugger::V2::SetBreakpointResponse
+            rpc :SetBreakpoint, ::Google::Cloud::Debugger::V2::SetBreakpointRequest, ::Google::Cloud::Debugger::V2::SetBreakpointResponse
             # Gets breakpoint information.
-            rpc :GetBreakpoint, Google::Cloud::Debugger::V2::GetBreakpointRequest, Google::Cloud::Debugger::V2::GetBreakpointResponse
+            rpc :GetBreakpoint, ::Google::Cloud::Debugger::V2::GetBreakpointRequest, ::Google::Cloud::Debugger::V2::GetBreakpointResponse
             # Deletes the breakpoint from the debuggee.
-            rpc :DeleteBreakpoint, Google::Cloud::Debugger::V2::DeleteBreakpointRequest, Google::Protobuf::Empty
+            rpc :DeleteBreakpoint, ::Google::Cloud::Debugger::V2::DeleteBreakpointRequest, ::Google::Protobuf::Empty
             # Lists all breakpoints for the debuggee.
-            rpc :ListBreakpoints, Google::Cloud::Debugger::V2::ListBreakpointsRequest, Google::Cloud::Debugger::V2::ListBreakpointsResponse
+            rpc :ListBreakpoints, ::Google::Cloud::Debugger::V2::ListBreakpointsRequest, ::Google::Cloud::Debugger::V2::ListBreakpointsResponse
             # Lists all the debuggees that the user has access to.
-            rpc :ListDebuggees, Google::Cloud::Debugger::V2::ListDebuggeesRequest, Google::Cloud::Debugger::V2::ListDebuggeesResponse
+            rpc :ListDebuggees, ::Google::Cloud::Debugger::V2::ListDebuggeesRequest, ::Google::Cloud::Debugger::V2::ListDebuggeesResponse
           end
 
           Stub = Service.rpc_stub_class

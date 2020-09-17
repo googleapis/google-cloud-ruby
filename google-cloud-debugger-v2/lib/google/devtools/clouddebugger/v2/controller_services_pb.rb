@@ -63,7 +63,7 @@ module Google
             # This protocol allows the controller service to disable debuggees, recover
             # from data loss, or change the `debuggee_id` format. Agents must handle
             # `debuggee_id` value changing upon re-registration.
-            rpc :RegisterDebuggee, Google::Cloud::Debugger::V2::RegisterDebuggeeRequest, Google::Cloud::Debugger::V2::RegisterDebuggeeResponse
+            rpc :RegisterDebuggee, ::Google::Cloud::Debugger::V2::RegisterDebuggeeRequest, ::Google::Cloud::Debugger::V2::RegisterDebuggeeResponse
             # Returns the list of all active breakpoints for the debuggee.
             #
             # The breakpoint specification (`location`, `condition`, and `expressions`
@@ -77,7 +77,7 @@ module Google
             # Moreover, an agent should remember the breakpoints that are completed
             # until the controller removes them from the active list to avoid
             # setting those breakpoints again.
-            rpc :ListActiveBreakpoints, Google::Cloud::Debugger::V2::ListActiveBreakpointsRequest, Google::Cloud::Debugger::V2::ListActiveBreakpointsResponse
+            rpc :ListActiveBreakpoints, ::Google::Cloud::Debugger::V2::ListActiveBreakpointsRequest, ::Google::Cloud::Debugger::V2::ListActiveBreakpointsResponse
             # Updates the breakpoint state or mutable fields.
             # The entire Breakpoint message must be sent back to the controller service.
             #
@@ -86,7 +86,7 @@ module Google
             # `condition` and `expressions` fields should not alter the breakpoint
             # semantics. These may only make changes such as canonicalizing a value
             # or snapping the location to the correct line of code.
-            rpc :UpdateActiveBreakpoint, Google::Cloud::Debugger::V2::UpdateActiveBreakpointRequest, Google::Cloud::Debugger::V2::UpdateActiveBreakpointResponse
+            rpc :UpdateActiveBreakpoint, ::Google::Cloud::Debugger::V2::UpdateActiveBreakpointRequest, ::Google::Cloud::Debugger::V2::UpdateActiveBreakpointResponse
           end
 
           Stub = Service.rpc_stub_class
