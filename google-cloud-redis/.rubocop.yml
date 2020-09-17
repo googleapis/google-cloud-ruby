@@ -20,3 +20,6 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-redis.rb"
+
+Style/AsciiComments:
+  Enabled: false
