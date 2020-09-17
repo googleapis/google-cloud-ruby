@@ -27,6 +27,8 @@ Metrics/PerceivedComplexity:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-asset-v1beta1.rb"
+Style/AsciiComments:
+  Enabled: false
 Style/CaseEquality:
   Enabled: false
 Style/IfUnlessModifier:
