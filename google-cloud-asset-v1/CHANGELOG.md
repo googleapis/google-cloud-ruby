@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2020-09-17
+
+#### Features
+
+* Support per type and partition export
+
 ### 0.6.1 / 2020-09-10
 
 #### Bug Fixes
