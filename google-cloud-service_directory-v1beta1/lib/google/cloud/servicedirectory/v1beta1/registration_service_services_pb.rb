@@ -48,43 +48,43 @@ module Google
             self.service_name = 'google.cloud.servicedirectory.v1beta1.RegistrationService'
 
             # Creates a namespace, and returns the new Namespace.
-            rpc :CreateNamespace, Google::Cloud::ServiceDirectory::V1beta1::CreateNamespaceRequest, Google::Cloud::ServiceDirectory::V1beta1::Namespace
+            rpc :CreateNamespace, ::Google::Cloud::ServiceDirectory::V1beta1::CreateNamespaceRequest, ::Google::Cloud::ServiceDirectory::V1beta1::Namespace
             # Lists all namespaces.
-            rpc :ListNamespaces, Google::Cloud::ServiceDirectory::V1beta1::ListNamespacesRequest, Google::Cloud::ServiceDirectory::V1beta1::ListNamespacesResponse
+            rpc :ListNamespaces, ::Google::Cloud::ServiceDirectory::V1beta1::ListNamespacesRequest, ::Google::Cloud::ServiceDirectory::V1beta1::ListNamespacesResponse
             # Gets a namespace.
-            rpc :GetNamespace, Google::Cloud::ServiceDirectory::V1beta1::GetNamespaceRequest, Google::Cloud::ServiceDirectory::V1beta1::Namespace
+            rpc :GetNamespace, ::Google::Cloud::ServiceDirectory::V1beta1::GetNamespaceRequest, ::Google::Cloud::ServiceDirectory::V1beta1::Namespace
             # Updates a namespace.
-            rpc :UpdateNamespace, Google::Cloud::ServiceDirectory::V1beta1::UpdateNamespaceRequest, Google::Cloud::ServiceDirectory::V1beta1::Namespace
+            rpc :UpdateNamespace, ::Google::Cloud::ServiceDirectory::V1beta1::UpdateNamespaceRequest, ::Google::Cloud::ServiceDirectory::V1beta1::Namespace
             # Deletes a namespace. This also deletes all services and endpoints in
             # the namespace.
-            rpc :DeleteNamespace, Google::Cloud::ServiceDirectory::V1beta1::DeleteNamespaceRequest, Google::Protobuf::Empty
+            rpc :DeleteNamespace, ::Google::Cloud::ServiceDirectory::V1beta1::DeleteNamespaceRequest, ::Google::Protobuf::Empty
             # Creates a service, and returns the new Service.
-            rpc :CreateService, Google::Cloud::ServiceDirectory::V1beta1::CreateServiceRequest, Google::Cloud::ServiceDirectory::V1beta1::Service
+            rpc :CreateService, ::Google::Cloud::ServiceDirectory::V1beta1::CreateServiceRequest, ::Google::Cloud::ServiceDirectory::V1beta1::Service
             # Lists all services belonging to a namespace.
-            rpc :ListServices, Google::Cloud::ServiceDirectory::V1beta1::ListServicesRequest, Google::Cloud::ServiceDirectory::V1beta1::ListServicesResponse
+            rpc :ListServices, ::Google::Cloud::ServiceDirectory::V1beta1::ListServicesRequest, ::Google::Cloud::ServiceDirectory::V1beta1::ListServicesResponse
             # Gets a service.
-            rpc :GetService, Google::Cloud::ServiceDirectory::V1beta1::GetServiceRequest, Google::Cloud::ServiceDirectory::V1beta1::Service
+            rpc :GetService, ::Google::Cloud::ServiceDirectory::V1beta1::GetServiceRequest, ::Google::Cloud::ServiceDirectory::V1beta1::Service
             # Updates a service.
-            rpc :UpdateService, Google::Cloud::ServiceDirectory::V1beta1::UpdateServiceRequest, Google::Cloud::ServiceDirectory::V1beta1::Service
+            rpc :UpdateService, ::Google::Cloud::ServiceDirectory::V1beta1::UpdateServiceRequest, ::Google::Cloud::ServiceDirectory::V1beta1::Service
             # Deletes a service. This also deletes all endpoints associated with
             # the service.
-            rpc :DeleteService, Google::Cloud::ServiceDirectory::V1beta1::DeleteServiceRequest, Google::Protobuf::Empty
+            rpc :DeleteService, ::Google::Cloud::ServiceDirectory::V1beta1::DeleteServiceRequest, ::Google::Protobuf::Empty
             # Creates a endpoint, and returns the new Endpoint.
-            rpc :CreateEndpoint, Google::Cloud::ServiceDirectory::V1beta1::CreateEndpointRequest, Google::Cloud::ServiceDirectory::V1beta1::Endpoint
+            rpc :CreateEndpoint, ::Google::Cloud::ServiceDirectory::V1beta1::CreateEndpointRequest, ::Google::Cloud::ServiceDirectory::V1beta1::Endpoint
             # Lists all endpoints.
-            rpc :ListEndpoints, Google::Cloud::ServiceDirectory::V1beta1::ListEndpointsRequest, Google::Cloud::ServiceDirectory::V1beta1::ListEndpointsResponse
+            rpc :ListEndpoints, ::Google::Cloud::ServiceDirectory::V1beta1::ListEndpointsRequest, ::Google::Cloud::ServiceDirectory::V1beta1::ListEndpointsResponse
             # Gets a endpoint.
-            rpc :GetEndpoint, Google::Cloud::ServiceDirectory::V1beta1::GetEndpointRequest, Google::Cloud::ServiceDirectory::V1beta1::Endpoint
+            rpc :GetEndpoint, ::Google::Cloud::ServiceDirectory::V1beta1::GetEndpointRequest, ::Google::Cloud::ServiceDirectory::V1beta1::Endpoint
             # Updates a endpoint.
-            rpc :UpdateEndpoint, Google::Cloud::ServiceDirectory::V1beta1::UpdateEndpointRequest, Google::Cloud::ServiceDirectory::V1beta1::Endpoint
+            rpc :UpdateEndpoint, ::Google::Cloud::ServiceDirectory::V1beta1::UpdateEndpointRequest, ::Google::Cloud::ServiceDirectory::V1beta1::Endpoint
             # Deletes a endpoint.
-            rpc :DeleteEndpoint, Google::Cloud::ServiceDirectory::V1beta1::DeleteEndpointRequest, Google::Protobuf::Empty
+            rpc :DeleteEndpoint, ::Google::Cloud::ServiceDirectory::V1beta1::DeleteEndpointRequest, ::Google::Protobuf::Empty
             # Gets the IAM Policy for a resource (namespace or service only).
-            rpc :GetIamPolicy, Google::Iam::V1::GetIamPolicyRequest, Google::Iam::V1::Policy
+            rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Sets the IAM Policy for a resource (namespace or service only).
-            rpc :SetIamPolicy, Google::Iam::V1::SetIamPolicyRequest, Google::Iam::V1::Policy
+            rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Tests IAM permissions for a resource (namespace or service only).
-            rpc :TestIamPermissions, Google::Iam::V1::TestIamPermissionsRequest, Google::Iam::V1::TestIamPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
