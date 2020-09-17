@@ -35,46 +35,46 @@ module Google
             self.service_name = 'google.cloud.iot.v1.DeviceManager'
 
             # Creates a device registry that contains devices.
-            rpc :CreateDeviceRegistry, Google::Cloud::Iot::V1::CreateDeviceRegistryRequest, Google::Cloud::Iot::V1::DeviceRegistry
+            rpc :CreateDeviceRegistry, ::Google::Cloud::Iot::V1::CreateDeviceRegistryRequest, ::Google::Cloud::Iot::V1::DeviceRegistry
             # Gets a device registry configuration.
-            rpc :GetDeviceRegistry, Google::Cloud::Iot::V1::GetDeviceRegistryRequest, Google::Cloud::Iot::V1::DeviceRegistry
+            rpc :GetDeviceRegistry, ::Google::Cloud::Iot::V1::GetDeviceRegistryRequest, ::Google::Cloud::Iot::V1::DeviceRegistry
             # Updates a device registry configuration.
-            rpc :UpdateDeviceRegistry, Google::Cloud::Iot::V1::UpdateDeviceRegistryRequest, Google::Cloud::Iot::V1::DeviceRegistry
+            rpc :UpdateDeviceRegistry, ::Google::Cloud::Iot::V1::UpdateDeviceRegistryRequest, ::Google::Cloud::Iot::V1::DeviceRegistry
             # Deletes a device registry configuration.
-            rpc :DeleteDeviceRegistry, Google::Cloud::Iot::V1::DeleteDeviceRegistryRequest, Google::Protobuf::Empty
+            rpc :DeleteDeviceRegistry, ::Google::Cloud::Iot::V1::DeleteDeviceRegistryRequest, ::Google::Protobuf::Empty
             # Lists device registries.
-            rpc :ListDeviceRegistries, Google::Cloud::Iot::V1::ListDeviceRegistriesRequest, Google::Cloud::Iot::V1::ListDeviceRegistriesResponse
+            rpc :ListDeviceRegistries, ::Google::Cloud::Iot::V1::ListDeviceRegistriesRequest, ::Google::Cloud::Iot::V1::ListDeviceRegistriesResponse
             # Creates a device in a device registry.
-            rpc :CreateDevice, Google::Cloud::Iot::V1::CreateDeviceRequest, Google::Cloud::Iot::V1::Device
+            rpc :CreateDevice, ::Google::Cloud::Iot::V1::CreateDeviceRequest, ::Google::Cloud::Iot::V1::Device
             # Gets details about a device.
-            rpc :GetDevice, Google::Cloud::Iot::V1::GetDeviceRequest, Google::Cloud::Iot::V1::Device
+            rpc :GetDevice, ::Google::Cloud::Iot::V1::GetDeviceRequest, ::Google::Cloud::Iot::V1::Device
             # Updates a device.
-            rpc :UpdateDevice, Google::Cloud::Iot::V1::UpdateDeviceRequest, Google::Cloud::Iot::V1::Device
+            rpc :UpdateDevice, ::Google::Cloud::Iot::V1::UpdateDeviceRequest, ::Google::Cloud::Iot::V1::Device
             # Deletes a device.
-            rpc :DeleteDevice, Google::Cloud::Iot::V1::DeleteDeviceRequest, Google::Protobuf::Empty
+            rpc :DeleteDevice, ::Google::Cloud::Iot::V1::DeleteDeviceRequest, ::Google::Protobuf::Empty
             # List devices in a device registry.
-            rpc :ListDevices, Google::Cloud::Iot::V1::ListDevicesRequest, Google::Cloud::Iot::V1::ListDevicesResponse
+            rpc :ListDevices, ::Google::Cloud::Iot::V1::ListDevicesRequest, ::Google::Cloud::Iot::V1::ListDevicesResponse
             # Modifies the configuration for the device, which is eventually sent from
             # the Cloud IoT Core servers. Returns the modified configuration version and
             # its metadata.
-            rpc :ModifyCloudToDeviceConfig, Google::Cloud::Iot::V1::ModifyCloudToDeviceConfigRequest, Google::Cloud::Iot::V1::DeviceConfig
+            rpc :ModifyCloudToDeviceConfig, ::Google::Cloud::Iot::V1::ModifyCloudToDeviceConfigRequest, ::Google::Cloud::Iot::V1::DeviceConfig
             # Lists the last few versions of the device configuration in descending
             # order (i.e.: newest first).
-            rpc :ListDeviceConfigVersions, Google::Cloud::Iot::V1::ListDeviceConfigVersionsRequest, Google::Cloud::Iot::V1::ListDeviceConfigVersionsResponse
+            rpc :ListDeviceConfigVersions, ::Google::Cloud::Iot::V1::ListDeviceConfigVersionsRequest, ::Google::Cloud::Iot::V1::ListDeviceConfigVersionsResponse
             # Lists the last few versions of the device state in descending order (i.e.:
             # newest first).
-            rpc :ListDeviceStates, Google::Cloud::Iot::V1::ListDeviceStatesRequest, Google::Cloud::Iot::V1::ListDeviceStatesResponse
+            rpc :ListDeviceStates, ::Google::Cloud::Iot::V1::ListDeviceStatesRequest, ::Google::Cloud::Iot::V1::ListDeviceStatesResponse
             # Sets the access control policy on the specified resource. Replaces any
             # existing policy.
-            rpc :SetIamPolicy, Google::Iam::V1::SetIamPolicyRequest, Google::Iam::V1::Policy
+            rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Gets the access control policy for a resource.
             # Returns an empty policy if the resource exists and does not have a policy
             # set.
-            rpc :GetIamPolicy, Google::Iam::V1::GetIamPolicyRequest, Google::Iam::V1::Policy
+            rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Returns permissions that a caller has on the specified resource.
             # If the resource does not exist, this will return an empty set of
             # permissions, not a NOT_FOUND error.
-            rpc :TestIamPermissions, Google::Iam::V1::TestIamPermissionsRequest, Google::Iam::V1::TestIamPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
             # Sends a command to the specified device. In order for a device to be able
             # to receive commands, it must:
             # 1) be connected to Cloud IoT Core using the MQTT protocol, and
@@ -88,11 +88,11 @@ module Google
             # method will return FAILED_PRECONDITION. Otherwise, this method will
             # return OK. If the subscription is QoS 1, at least once delivery will be
             # guaranteed; for QoS 0, no acknowledgment will be expected from the device.
-            rpc :SendCommandToDevice, Google::Cloud::Iot::V1::SendCommandToDeviceRequest, Google::Cloud::Iot::V1::SendCommandToDeviceResponse
+            rpc :SendCommandToDevice, ::Google::Cloud::Iot::V1::SendCommandToDeviceRequest, ::Google::Cloud::Iot::V1::SendCommandToDeviceResponse
             # Associates the device with the gateway.
-            rpc :BindDeviceToGateway, Google::Cloud::Iot::V1::BindDeviceToGatewayRequest, Google::Cloud::Iot::V1::BindDeviceToGatewayResponse
+            rpc :BindDeviceToGateway, ::Google::Cloud::Iot::V1::BindDeviceToGatewayRequest, ::Google::Cloud::Iot::V1::BindDeviceToGatewayResponse
             # Deletes the association between the device and the gateway.
-            rpc :UnbindDeviceFromGateway, Google::Cloud::Iot::V1::UnbindDeviceFromGatewayRequest, Google::Cloud::Iot::V1::UnbindDeviceFromGatewayResponse
+            rpc :UnbindDeviceFromGateway, ::Google::Cloud::Iot::V1::UnbindDeviceFromGatewayRequest, ::Google::Cloud::Iot::V1::UnbindDeviceFromGatewayResponse
           end
 
           Stub = Service.rpc_stub_class
