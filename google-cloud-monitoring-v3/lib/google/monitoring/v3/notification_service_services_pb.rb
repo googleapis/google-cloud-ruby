@@ -36,29 +36,29 @@ module Google
 
             # Lists the descriptors for supported channel types. The use of descriptors
             # makes it possible for new channel types to be dynamically added.
-            rpc :ListNotificationChannelDescriptors, Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest, Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsResponse
+            rpc :ListNotificationChannelDescriptors, ::Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest, ::Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsResponse
             # Gets a single channel descriptor. The descriptor indicates which fields
             # are expected / permitted for a notification channel of the given type.
-            rpc :GetNotificationChannelDescriptor, Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest, Google::Cloud::Monitoring::V3::NotificationChannelDescriptor
+            rpc :GetNotificationChannelDescriptor, ::Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest, ::Google::Cloud::Monitoring::V3::NotificationChannelDescriptor
             # Lists the notification channels that have been created for the project.
-            rpc :ListNotificationChannels, Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest, Google::Cloud::Monitoring::V3::ListNotificationChannelsResponse
+            rpc :ListNotificationChannels, ::Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest, ::Google::Cloud::Monitoring::V3::ListNotificationChannelsResponse
             # Gets a single notification channel. The channel includes the relevant
             # configuration details with which the channel was created. However, the
             # response may truncate or omit passwords, API keys, or other private key
             # matter and thus the response may not be 100% identical to the information
             # that was supplied in the call to the create method.
-            rpc :GetNotificationChannel, Google::Cloud::Monitoring::V3::GetNotificationChannelRequest, Google::Cloud::Monitoring::V3::NotificationChannel
+            rpc :GetNotificationChannel, ::Google::Cloud::Monitoring::V3::GetNotificationChannelRequest, ::Google::Cloud::Monitoring::V3::NotificationChannel
             # Creates a new notification channel, representing a single notification
             # endpoint such as an email address, SMS number, or PagerDuty service.
-            rpc :CreateNotificationChannel, Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest, Google::Cloud::Monitoring::V3::NotificationChannel
+            rpc :CreateNotificationChannel, ::Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest, ::Google::Cloud::Monitoring::V3::NotificationChannel
             # Updates a notification channel. Fields not specified in the field mask
             # remain unchanged.
-            rpc :UpdateNotificationChannel, Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest, Google::Cloud::Monitoring::V3::NotificationChannel
+            rpc :UpdateNotificationChannel, ::Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest, ::Google::Cloud::Monitoring::V3::NotificationChannel
             # Deletes a notification channel.
-            rpc :DeleteNotificationChannel, Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest, Google::Protobuf::Empty
+            rpc :DeleteNotificationChannel, ::Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest, ::Google::Protobuf::Empty
             # Causes a verification code to be delivered to the channel. The code
             # can then be supplied in `VerifyNotificationChannel` to verify the channel.
-            rpc :SendNotificationChannelVerificationCode, Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest, Google::Protobuf::Empty
+            rpc :SendNotificationChannelVerificationCode, ::Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest, ::Google::Protobuf::Empty
             # Requests a verification code for an already verified channel that can then
             # be used in a call to VerifyNotificationChannel() on a different channel
             # with an equivalent identity in the same or in a different project. This
@@ -80,11 +80,11 @@ module Google
             # have a shorter expiration (e.g. codes such as "G-123456") whereas
             # GetVerificationCode() will typically return a much longer, websafe base
             # 64 encoded string that has a longer expiration time.
-            rpc :GetNotificationChannelVerificationCode, Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest, Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeResponse
+            rpc :GetNotificationChannelVerificationCode, ::Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest, ::Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeResponse
             # Verifies a `NotificationChannel` by proving receipt of the code
             # delivered to the channel as a result of calling
             # `SendNotificationChannelVerificationCode`.
-            rpc :VerifyNotificationChannel, Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest, Google::Cloud::Monitoring::V3::NotificationChannel
+            rpc :VerifyNotificationChannel, ::Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest, ::Google::Cloud::Monitoring::V3::NotificationChannel
           end
 
           Stub = Service.rpc_stub_class
