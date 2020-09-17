@@ -39,15 +39,15 @@ module Google
               # Creates a composite index. This returns a [google.longrunning.Operation][google.longrunning.Operation]
               # which may be used to track the status of the creation. The metadata for
               # the operation will be the type [IndexOperationMetadata][google.firestore.admin.v1.IndexOperationMetadata].
-              rpc :CreateIndex, Google::Cloud::Firestore::Admin::V1::CreateIndexRequest, Google::Longrunning::Operation
+              rpc :CreateIndex, ::Google::Cloud::Firestore::Admin::V1::CreateIndexRequest, ::Google::Longrunning::Operation
               # Lists composite indexes.
-              rpc :ListIndexes, Google::Cloud::Firestore::Admin::V1::ListIndexesRequest, Google::Cloud::Firestore::Admin::V1::ListIndexesResponse
+              rpc :ListIndexes, ::Google::Cloud::Firestore::Admin::V1::ListIndexesRequest, ::Google::Cloud::Firestore::Admin::V1::ListIndexesResponse
               # Gets a composite index.
-              rpc :GetIndex, Google::Cloud::Firestore::Admin::V1::GetIndexRequest, Google::Cloud::Firestore::Admin::V1::Index
+              rpc :GetIndex, ::Google::Cloud::Firestore::Admin::V1::GetIndexRequest, ::Google::Cloud::Firestore::Admin::V1::Index
               # Deletes a composite index.
-              rpc :DeleteIndex, Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest, Google::Protobuf::Empty
+              rpc :DeleteIndex, ::Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest, ::Google::Protobuf::Empty
               # Gets the metadata and configuration for a Field.
-              rpc :GetField, Google::Cloud::Firestore::Admin::V1::GetFieldRequest, Google::Cloud::Firestore::Admin::V1::Field
+              rpc :GetField, ::Google::Cloud::Firestore::Admin::V1::GetFieldRequest, ::Google::Cloud::Firestore::Admin::V1::Field
               # Updates a field configuration. Currently, field updates apply only to
               # single field index configuration. However, calls to
               # [FirestoreAdmin.UpdateField][google.firestore.admin.v1.FirestoreAdmin.UpdateField] should provide a field mask to avoid
@@ -61,14 +61,14 @@ module Google
               # To configure the default field settings for the database, use
               # the special `Field` with resource name:
               # `projects/{project_id}/databases/{database_id}/collectionGroups/__default__/fields/*`.
-              rpc :UpdateField, Google::Cloud::Firestore::Admin::V1::UpdateFieldRequest, Google::Longrunning::Operation
+              rpc :UpdateField, ::Google::Cloud::Firestore::Admin::V1::UpdateFieldRequest, ::Google::Longrunning::Operation
               # Lists the field configuration and metadata for this database.
               #
               # Currently, [FirestoreAdmin.ListFields][google.firestore.admin.v1.FirestoreAdmin.ListFields] only supports listing fields
               # that have been explicitly overridden. To issue this query, call
               # [FirestoreAdmin.ListFields][google.firestore.admin.v1.FirestoreAdmin.ListFields] with the filter set to
               # `indexConfig.usesAncestorConfig:false`.
-              rpc :ListFields, Google::Cloud::Firestore::Admin::V1::ListFieldsRequest, Google::Cloud::Firestore::Admin::V1::ListFieldsResponse
+              rpc :ListFields, ::Google::Cloud::Firestore::Admin::V1::ListFieldsRequest, ::Google::Cloud::Firestore::Admin::V1::ListFieldsResponse
               # Exports a copy of all or a subset of documents from Google Cloud Firestore
               # to another storage system, such as Google Cloud Storage. Recent updates to
               # documents may not be reflected in the export. The export occurs in the
@@ -77,13 +77,13 @@ module Google
               # used once the associated operation is done. If an export operation is
               # cancelled before completion it may leave partial data behind in Google
               # Cloud Storage.
-              rpc :ExportDocuments, Google::Cloud::Firestore::Admin::V1::ExportDocumentsRequest, Google::Longrunning::Operation
+              rpc :ExportDocuments, ::Google::Cloud::Firestore::Admin::V1::ExportDocumentsRequest, ::Google::Longrunning::Operation
               # Imports documents into Google Cloud Firestore. Existing documents with the
               # same name are overwritten. The import occurs in the background and its
               # progress can be monitored and managed via the Operation resource that is
               # created. If an ImportDocuments operation is cancelled, it is possible
               # that a subset of the data has already been imported to Cloud Firestore.
-              rpc :ImportDocuments, Google::Cloud::Firestore::Admin::V1::ImportDocumentsRequest, Google::Longrunning::Operation
+              rpc :ImportDocuments, ::Google::Cloud::Firestore::Admin::V1::ImportDocumentsRequest, ::Google::Longrunning::Operation
             end
 
             Stub = Service.rpc_stub_class
