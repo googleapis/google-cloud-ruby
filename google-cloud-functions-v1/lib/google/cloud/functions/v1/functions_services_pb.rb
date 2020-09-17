@@ -34,24 +34,24 @@ module Google
             self.service_name = 'google.cloud.functions.v1.CloudFunctionsService'
 
             # Returns a list of functions that belong to the requested project.
-            rpc :ListFunctions, Google::Cloud::Functions::V1::ListFunctionsRequest, Google::Cloud::Functions::V1::ListFunctionsResponse
+            rpc :ListFunctions, ::Google::Cloud::Functions::V1::ListFunctionsRequest, ::Google::Cloud::Functions::V1::ListFunctionsResponse
             # Returns a function with the given name from the requested project.
-            rpc :GetFunction, Google::Cloud::Functions::V1::GetFunctionRequest, Google::Cloud::Functions::V1::CloudFunction
+            rpc :GetFunction, ::Google::Cloud::Functions::V1::GetFunctionRequest, ::Google::Cloud::Functions::V1::CloudFunction
             # Creates a new function. If a function with the given name already exists in
             # the specified project, the long running operation will return
             # `ALREADY_EXISTS` error.
-            rpc :CreateFunction, Google::Cloud::Functions::V1::CreateFunctionRequest, Google::Longrunning::Operation
+            rpc :CreateFunction, ::Google::Cloud::Functions::V1::CreateFunctionRequest, ::Google::Longrunning::Operation
             # Updates existing function.
-            rpc :UpdateFunction, Google::Cloud::Functions::V1::UpdateFunctionRequest, Google::Longrunning::Operation
+            rpc :UpdateFunction, ::Google::Cloud::Functions::V1::UpdateFunctionRequest, ::Google::Longrunning::Operation
             # Deletes a function with the given name from the specified project. If the
             # given function is used by some trigger, the trigger will be updated to
             # remove this function.
-            rpc :DeleteFunction, Google::Cloud::Functions::V1::DeleteFunctionRequest, Google::Longrunning::Operation
+            rpc :DeleteFunction, ::Google::Cloud::Functions::V1::DeleteFunctionRequest, ::Google::Longrunning::Operation
             # Synchronously invokes a deployed Cloud Function. To be used for testing
             # purposes as very limited traffic is allowed. For more information on
             # the actual limits, refer to
             # [Rate Limits](https://cloud.google.com/functions/quotas#rate_limits).
-            rpc :CallFunction, Google::Cloud::Functions::V1::CallFunctionRequest, Google::Cloud::Functions::V1::CallFunctionResponse
+            rpc :CallFunction, ::Google::Cloud::Functions::V1::CallFunctionRequest, ::Google::Cloud::Functions::V1::CallFunctionResponse
             # Returns a signed URL for uploading a function source code.
             # For more information about the signed URL usage see:
             # https://cloud.google.com/storage/docs/access-control/signed-urls.
@@ -77,25 +77,25 @@ module Google
             # And this header SHOULD NOT be specified:
             #
             # * `Authorization: Bearer YOUR_TOKEN`
-            rpc :GenerateUploadUrl, Google::Cloud::Functions::V1::GenerateUploadUrlRequest, Google::Cloud::Functions::V1::GenerateUploadUrlResponse
+            rpc :GenerateUploadUrl, ::Google::Cloud::Functions::V1::GenerateUploadUrlRequest, ::Google::Cloud::Functions::V1::GenerateUploadUrlResponse
             # Returns a signed URL for downloading deployed function source code.
             # The URL is only valid for a limited period and should be used within
             # minutes after generation.
             # For more information about the signed URL usage see:
             # https://cloud.google.com/storage/docs/access-control/signed-urls
-            rpc :GenerateDownloadUrl, Google::Cloud::Functions::V1::GenerateDownloadUrlRequest, Google::Cloud::Functions::V1::GenerateDownloadUrlResponse
+            rpc :GenerateDownloadUrl, ::Google::Cloud::Functions::V1::GenerateDownloadUrlRequest, ::Google::Cloud::Functions::V1::GenerateDownloadUrlResponse
             # Sets the IAM access control policy on the specified function.
             # Replaces any existing policy.
-            rpc :SetIamPolicy, Google::Iam::V1::SetIamPolicyRequest, Google::Iam::V1::Policy
+            rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Gets the IAM access control policy for a function.
             # Returns an empty policy if the function exists and does not have a policy
             # set.
-            rpc :GetIamPolicy, Google::Iam::V1::GetIamPolicyRequest, Google::Iam::V1::Policy
+            rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Tests the specified permissions against the IAM access control policy
             # for a function.
             # If the function does not exist, this will return an empty set of
             # permissions, not a NOT_FOUND error.
-            rpc :TestIamPermissions, Google::Iam::V1::TestIamPermissionsRequest, Google::Iam::V1::TestIamPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
