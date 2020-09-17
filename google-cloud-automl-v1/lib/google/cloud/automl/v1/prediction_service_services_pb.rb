@@ -72,7 +72,7 @@ module Google
             # * A row with column values matching
             #   the columns of the model, up to 5MB. Not available for FORECASTING
             #   `prediction_type`.
-            rpc :Predict, Google::Cloud::AutoML::V1::PredictRequest, Google::Cloud::AutoML::V1::PredictResponse
+            rpc :Predict, ::Google::Cloud::AutoML::V1::PredictRequest, ::Google::Cloud::AutoML::V1::PredictResponse
             # Perform a batch prediction. Unlike the online [Predict][google.cloud.automl.v1.PredictionService.Predict], batch
             # prediction result won't be immediately available in the response. Instead,
             # a long running operation object is returned. User can poll the operation
@@ -88,7 +88,7 @@ module Google
             # * AutoML Natural Language Entity Extraction
             # * AutoML Natural Language Sentiment Analysis
             # * AutoML Tables
-            rpc :BatchPredict, Google::Cloud::AutoML::V1::BatchPredictRequest, Google::Longrunning::Operation
+            rpc :BatchPredict, ::Google::Cloud::AutoML::V1::BatchPredictRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
