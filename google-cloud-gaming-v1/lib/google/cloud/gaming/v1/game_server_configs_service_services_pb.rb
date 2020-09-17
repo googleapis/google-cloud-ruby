@@ -35,16 +35,16 @@ module Google
 
             # Lists game server configs in a given project, location, and game server
             # deployment.
-            rpc :ListGameServerConfigs, Google::Cloud::Gaming::V1::ListGameServerConfigsRequest, Google::Cloud::Gaming::V1::ListGameServerConfigsResponse
+            rpc :ListGameServerConfigs, ::Google::Cloud::Gaming::V1::ListGameServerConfigsRequest, ::Google::Cloud::Gaming::V1::ListGameServerConfigsResponse
             # Gets details of a single game server config.
-            rpc :GetGameServerConfig, Google::Cloud::Gaming::V1::GetGameServerConfigRequest, Google::Cloud::Gaming::V1::GameServerConfig
+            rpc :GetGameServerConfig, ::Google::Cloud::Gaming::V1::GetGameServerConfigRequest, ::Google::Cloud::Gaming::V1::GameServerConfig
             # Creates a new game server config in a given project, location, and game
             # server deployment. Game server configs are immutable, and are not applied
             # until referenced in the game server deployment rollout resource.
-            rpc :CreateGameServerConfig, Google::Cloud::Gaming::V1::CreateGameServerConfigRequest, Google::Longrunning::Operation
+            rpc :CreateGameServerConfig, ::Google::Cloud::Gaming::V1::CreateGameServerConfigRequest, ::Google::Longrunning::Operation
             # Deletes a single game server config. The deletion will fail if the game
             # server config is referenced in a game server deployment rollout.
-            rpc :DeleteGameServerConfig, Google::Cloud::Gaming::V1::DeleteGameServerConfigRequest, Google::Longrunning::Operation
+            rpc :DeleteGameServerConfig, ::Google::Cloud::Gaming::V1::DeleteGameServerConfigRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

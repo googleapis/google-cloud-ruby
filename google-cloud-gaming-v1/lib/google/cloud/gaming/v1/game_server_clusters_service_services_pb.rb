@@ -35,22 +35,22 @@ module Google
             self.service_name = 'google.cloud.gaming.v1.GameServerClustersService'
 
             # Lists game server clusters in a given project and location.
-            rpc :ListGameServerClusters, Google::Cloud::Gaming::V1::ListGameServerClustersRequest, Google::Cloud::Gaming::V1::ListGameServerClustersResponse
+            rpc :ListGameServerClusters, ::Google::Cloud::Gaming::V1::ListGameServerClustersRequest, ::Google::Cloud::Gaming::V1::ListGameServerClustersResponse
             # Gets details of a single game server cluster.
-            rpc :GetGameServerCluster, Google::Cloud::Gaming::V1::GetGameServerClusterRequest, Google::Cloud::Gaming::V1::GameServerCluster
+            rpc :GetGameServerCluster, ::Google::Cloud::Gaming::V1::GetGameServerClusterRequest, ::Google::Cloud::Gaming::V1::GameServerCluster
             # Creates a new game server cluster in a given project and location.
-            rpc :CreateGameServerCluster, Google::Cloud::Gaming::V1::CreateGameServerClusterRequest, Google::Longrunning::Operation
+            rpc :CreateGameServerCluster, ::Google::Cloud::Gaming::V1::CreateGameServerClusterRequest, ::Google::Longrunning::Operation
             # Previews creation of a new game server cluster in a given project and
             # location.
-            rpc :PreviewCreateGameServerCluster, Google::Cloud::Gaming::V1::PreviewCreateGameServerClusterRequest, Google::Cloud::Gaming::V1::PreviewCreateGameServerClusterResponse
+            rpc :PreviewCreateGameServerCluster, ::Google::Cloud::Gaming::V1::PreviewCreateGameServerClusterRequest, ::Google::Cloud::Gaming::V1::PreviewCreateGameServerClusterResponse
             # Deletes a single game server cluster.
-            rpc :DeleteGameServerCluster, Google::Cloud::Gaming::V1::DeleteGameServerClusterRequest, Google::Longrunning::Operation
+            rpc :DeleteGameServerCluster, ::Google::Cloud::Gaming::V1::DeleteGameServerClusterRequest, ::Google::Longrunning::Operation
             # Previews deletion of a single game server cluster.
-            rpc :PreviewDeleteGameServerCluster, Google::Cloud::Gaming::V1::PreviewDeleteGameServerClusterRequest, Google::Cloud::Gaming::V1::PreviewDeleteGameServerClusterResponse
+            rpc :PreviewDeleteGameServerCluster, ::Google::Cloud::Gaming::V1::PreviewDeleteGameServerClusterRequest, ::Google::Cloud::Gaming::V1::PreviewDeleteGameServerClusterResponse
             # Patches a single game server cluster.
-            rpc :UpdateGameServerCluster, Google::Cloud::Gaming::V1::UpdateGameServerClusterRequest, Google::Longrunning::Operation
+            rpc :UpdateGameServerCluster, ::Google::Cloud::Gaming::V1::UpdateGameServerClusterRequest, ::Google::Longrunning::Operation
             # Previews updating a GameServerCluster.
-            rpc :PreviewUpdateGameServerCluster, Google::Cloud::Gaming::V1::PreviewUpdateGameServerClusterRequest, Google::Cloud::Gaming::V1::PreviewUpdateGameServerClusterResponse
+            rpc :PreviewUpdateGameServerCluster, ::Google::Cloud::Gaming::V1::PreviewUpdateGameServerClusterRequest, ::Google::Cloud::Gaming::V1::PreviewUpdateGameServerClusterResponse
           end
 
           Stub = Service.rpc_stub_class

@@ -35,17 +35,17 @@ module Google
             self.service_name = 'google.cloud.gaming.v1.RealmsService'
 
             # Lists realms in a given project and location.
-            rpc :ListRealms, Google::Cloud::Gaming::V1::ListRealmsRequest, Google::Cloud::Gaming::V1::ListRealmsResponse
+            rpc :ListRealms, ::Google::Cloud::Gaming::V1::ListRealmsRequest, ::Google::Cloud::Gaming::V1::ListRealmsResponse
             # Gets details of a single realm.
-            rpc :GetRealm, Google::Cloud::Gaming::V1::GetRealmRequest, Google::Cloud::Gaming::V1::Realm
+            rpc :GetRealm, ::Google::Cloud::Gaming::V1::GetRealmRequest, ::Google::Cloud::Gaming::V1::Realm
             # Creates a new realm in a given project and location.
-            rpc :CreateRealm, Google::Cloud::Gaming::V1::CreateRealmRequest, Google::Longrunning::Operation
+            rpc :CreateRealm, ::Google::Cloud::Gaming::V1::CreateRealmRequest, ::Google::Longrunning::Operation
             # Deletes a single realm.
-            rpc :DeleteRealm, Google::Cloud::Gaming::V1::DeleteRealmRequest, Google::Longrunning::Operation
+            rpc :DeleteRealm, ::Google::Cloud::Gaming::V1::DeleteRealmRequest, ::Google::Longrunning::Operation
             # Patches a single realm.
-            rpc :UpdateRealm, Google::Cloud::Gaming::V1::UpdateRealmRequest, Google::Longrunning::Operation
+            rpc :UpdateRealm, ::Google::Cloud::Gaming::V1::UpdateRealmRequest, ::Google::Longrunning::Operation
             # Previews patches to a single realm.
-            rpc :PreviewRealmUpdate, Google::Cloud::Gaming::V1::PreviewRealmUpdateRequest, Google::Cloud::Gaming::V1::PreviewRealmUpdateResponse
+            rpc :PreviewRealmUpdate, ::Google::Cloud::Gaming::V1::PreviewRealmUpdateRequest, ::Google::Cloud::Gaming::V1::PreviewRealmUpdateResponse
           end
 
           Stub = Service.rpc_stub_class
