@@ -27,6 +27,8 @@ Metrics/PerceivedComplexity:
 Naming/FileName:
   Exclude:
     - "lib/google-analytics-admin-v1alpha.rb"
+Style/AsciiComments:
+  Enabled: false
 Style/CaseEquality:
   Enabled: false
 Style/IfUnlessModifier:
