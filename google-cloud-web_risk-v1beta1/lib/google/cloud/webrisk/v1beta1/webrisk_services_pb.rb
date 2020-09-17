@@ -36,15 +36,15 @@ module Google
             self.service_name = 'google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1'
 
             # Gets the most recent threat list diffs.
-            rpc :ComputeThreatListDiff, Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest, Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffResponse
+            rpc :ComputeThreatListDiff, ::Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest, ::Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffResponse
             # This method is used to check whether a URI is on a given threatList.
-            rpc :SearchUris, Google::Cloud::WebRisk::V1beta1::SearchUrisRequest, Google::Cloud::WebRisk::V1beta1::SearchUrisResponse
+            rpc :SearchUris, ::Google::Cloud::WebRisk::V1beta1::SearchUrisRequest, ::Google::Cloud::WebRisk::V1beta1::SearchUrisResponse
             # Gets the full hashes that match the requested hash prefix.
             # This is used after a hash prefix is looked up in a threatList
             # and there is a match. The client side threatList only holds partial hashes
             # so the client must query this method to determine if there is a full
             # hash match of a threat.
-            rpc :SearchHashes, Google::Cloud::WebRisk::V1beta1::SearchHashesRequest, Google::Cloud::WebRisk::V1beta1::SearchHashesResponse
+            rpc :SearchHashes, ::Google::Cloud::WebRisk::V1beta1::SearchHashesRequest, ::Google::Cloud::WebRisk::V1beta1::SearchHashesResponse
           end
 
           Stub = Service.rpc_stub_class
