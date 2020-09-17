@@ -20,3 +20,6 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-automl.rb"
+
+Style/AsciiComments:
+  Enabled: false
