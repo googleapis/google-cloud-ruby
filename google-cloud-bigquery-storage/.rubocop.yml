@@ -20,3 +20,6 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-bigquery-storage.rb"
+
+Style/AsciiComments:
+  Enabled: false
