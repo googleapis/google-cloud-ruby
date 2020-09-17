@@ -35,24 +35,24 @@ module Google
             self.service_name = 'google.cloud.talent.v4beta1.ProfileService'
 
             # Lists profiles by filter. The order is unspecified.
-            rpc :ListProfiles, Google::Cloud::Talent::V4beta1::ListProfilesRequest, Google::Cloud::Talent::V4beta1::ListProfilesResponse
+            rpc :ListProfiles, ::Google::Cloud::Talent::V4beta1::ListProfilesRequest, ::Google::Cloud::Talent::V4beta1::ListProfilesResponse
             # Creates and returns a new profile.
-            rpc :CreateProfile, Google::Cloud::Talent::V4beta1::CreateProfileRequest, Google::Cloud::Talent::V4beta1::Profile
+            rpc :CreateProfile, ::Google::Cloud::Talent::V4beta1::CreateProfileRequest, ::Google::Cloud::Talent::V4beta1::Profile
             # Gets the specified profile.
-            rpc :GetProfile, Google::Cloud::Talent::V4beta1::GetProfileRequest, Google::Cloud::Talent::V4beta1::Profile
+            rpc :GetProfile, ::Google::Cloud::Talent::V4beta1::GetProfileRequest, ::Google::Cloud::Talent::V4beta1::Profile
             # Updates the specified profile and returns the updated result.
-            rpc :UpdateProfile, Google::Cloud::Talent::V4beta1::UpdateProfileRequest, Google::Cloud::Talent::V4beta1::Profile
+            rpc :UpdateProfile, ::Google::Cloud::Talent::V4beta1::UpdateProfileRequest, ::Google::Cloud::Talent::V4beta1::Profile
             # Deletes the specified profile.
             # Prerequisite: The profile has no associated applications or assignments
             # associated.
-            rpc :DeleteProfile, Google::Cloud::Talent::V4beta1::DeleteProfileRequest, Google::Protobuf::Empty
+            rpc :DeleteProfile, ::Google::Cloud::Talent::V4beta1::DeleteProfileRequest, ::Google::Protobuf::Empty
             # Searches for profiles within a tenant.
             #
             # For example, search by raw queries "software engineer in Mountain View" or
             # search by structured filters (location filter, education filter, etc.).
             #
             # See [SearchProfilesRequest][google.cloud.talent.v4beta1.SearchProfilesRequest] for more information.
-            rpc :SearchProfiles, Google::Cloud::Talent::V4beta1::SearchProfilesRequest, Google::Cloud::Talent::V4beta1::SearchProfilesResponse
+            rpc :SearchProfiles, ::Google::Cloud::Talent::V4beta1::SearchProfilesRequest, ::Google::Cloud::Talent::V4beta1::SearchProfilesResponse
           end
 
           Stub = Service.rpc_stub_class

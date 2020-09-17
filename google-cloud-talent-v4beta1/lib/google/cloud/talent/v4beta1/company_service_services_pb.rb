@@ -34,16 +34,16 @@ module Google
             self.service_name = 'google.cloud.talent.v4beta1.CompanyService'
 
             # Creates a new company entity.
-            rpc :CreateCompany, Google::Cloud::Talent::V4beta1::CreateCompanyRequest, Google::Cloud::Talent::V4beta1::Company
+            rpc :CreateCompany, ::Google::Cloud::Talent::V4beta1::CreateCompanyRequest, ::Google::Cloud::Talent::V4beta1::Company
             # Retrieves specified company.
-            rpc :GetCompany, Google::Cloud::Talent::V4beta1::GetCompanyRequest, Google::Cloud::Talent::V4beta1::Company
+            rpc :GetCompany, ::Google::Cloud::Talent::V4beta1::GetCompanyRequest, ::Google::Cloud::Talent::V4beta1::Company
             # Updates specified company.
-            rpc :UpdateCompany, Google::Cloud::Talent::V4beta1::UpdateCompanyRequest, Google::Cloud::Talent::V4beta1::Company
+            rpc :UpdateCompany, ::Google::Cloud::Talent::V4beta1::UpdateCompanyRequest, ::Google::Cloud::Talent::V4beta1::Company
             # Deletes specified company.
             # Prerequisite: The company has no jobs associated with it.
-            rpc :DeleteCompany, Google::Cloud::Talent::V4beta1::DeleteCompanyRequest, Google::Protobuf::Empty
+            rpc :DeleteCompany, ::Google::Cloud::Talent::V4beta1::DeleteCompanyRequest, ::Google::Protobuf::Empty
             # Lists all companies associated with the project.
-            rpc :ListCompanies, Google::Cloud::Talent::V4beta1::ListCompaniesRequest, Google::Cloud::Talent::V4beta1::ListCompaniesResponse
+            rpc :ListCompanies, ::Google::Cloud::Talent::V4beta1::ListCompaniesRequest, ::Google::Cloud::Talent::V4beta1::ListCompaniesResponse
           end
 
           Stub = Service.rpc_stub_class
