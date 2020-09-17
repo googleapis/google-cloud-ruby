@@ -68,14 +68,14 @@ module Google
             # Lists approval requests associated with a project, folder, or organization.
             # Approval requests can be filtered by state (pending, active, dismissed).
             # The order is reverse chronological.
-            rpc :ListApprovalRequests, Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage, Google::Cloud::AccessApproval::V1::ListApprovalRequestsResponse
+            rpc :ListApprovalRequests, ::Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage, ::Google::Cloud::AccessApproval::V1::ListApprovalRequestsResponse
             # Gets an approval request. Returns NOT_FOUND if the request does not exist.
-            rpc :GetApprovalRequest, Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage, Google::Cloud::AccessApproval::V1::ApprovalRequest
+            rpc :GetApprovalRequest, ::Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage, ::Google::Cloud::AccessApproval::V1::ApprovalRequest
             # Approves a request and returns the updated ApprovalRequest.
             #
             # Returns NOT_FOUND if the request does not exist. Returns
             # FAILED_PRECONDITION if the request exists but is not in a pending state.
-            rpc :ApproveApprovalRequest, Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage, Google::Cloud::AccessApproval::V1::ApprovalRequest
+            rpc :ApproveApprovalRequest, ::Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage, ::Google::Cloud::AccessApproval::V1::ApprovalRequest
             # Dismisses a request. Returns the updated ApprovalRequest.
             #
             # NOTE: This does not deny access to the resource if another request has been
@@ -86,19 +86,19 @@ module Google
             #
             # Returns FAILED_PRECONDITION if the request exists but is not in a pending
             # state.
-            rpc :DismissApprovalRequest, Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage, Google::Cloud::AccessApproval::V1::ApprovalRequest
+            rpc :DismissApprovalRequest, ::Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage, ::Google::Cloud::AccessApproval::V1::ApprovalRequest
             # Gets the settings associated with a project, folder, or organization.
-            rpc :GetAccessApprovalSettings, Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage, Google::Cloud::AccessApproval::V1::AccessApprovalSettings
+            rpc :GetAccessApprovalSettings, ::Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage, ::Google::Cloud::AccessApproval::V1::AccessApprovalSettings
             # Updates the settings associated with a project, folder, or organization.
             # Settings to update are determined by the value of field_mask.
-            rpc :UpdateAccessApprovalSettings, Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage, Google::Cloud::AccessApproval::V1::AccessApprovalSettings
+            rpc :UpdateAccessApprovalSettings, ::Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage, ::Google::Cloud::AccessApproval::V1::AccessApprovalSettings
             # Deletes the settings associated with a project, folder, or organization.
             # This will have the effect of disabling Access Approval for the project,
             # folder, or organization, but only if all ancestors also have Access
             # Approval disabled. If Access Approval is enabled at a higher level of the
             # hierarchy, then Access Approval will still be enabled at this level as
             # the settings are inherited.
-            rpc :DeleteAccessApprovalSettings, Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage, Google::Protobuf::Empty
+            rpc :DeleteAccessApprovalSettings, ::Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class
