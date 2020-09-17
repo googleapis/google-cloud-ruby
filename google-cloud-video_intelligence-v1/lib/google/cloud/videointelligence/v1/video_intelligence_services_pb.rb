@@ -37,7 +37,7 @@ module Google
             # retrieved through the `google.longrunning.Operations` interface.
             # `Operation.metadata` contains `AnnotateVideoProgress` (progress).
             # `Operation.response` contains `AnnotateVideoResponse` (results).
-            rpc :AnnotateVideo, Google::Cloud::VideoIntelligence::V1::AnnotateVideoRequest, Google::Longrunning::Operation
+            rpc :AnnotateVideo, ::Google::Cloud::VideoIntelligence::V1::AnnotateVideoRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
