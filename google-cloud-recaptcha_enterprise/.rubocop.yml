@@ -20,3 +20,6 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-recaptcha_enterprise.rb"
+
+Style/AsciiComments:
+  Enabled: false
