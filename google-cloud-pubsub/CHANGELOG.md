@@ -1,5 +1,17 @@
 # Release History
 
+### 2.1.0 / 2020-09-17
+
+#### Features
+
+* quota_project can be set via library configuration ([#7630](https://www.github.com/googleapis/google-cloud-ruby/issues/7630))
+* Add push_config (PushConfig) param to Topic#subscribe
+  * Make PushConfig constructor public.
+
+#### Documentation
+
+* Update sample code for on_error, at_exit, and concurrency tuning
+
 ### 2.0.0 / 2020-08-06
 
 This is a major update that removes the "low-level" client interface code, and
