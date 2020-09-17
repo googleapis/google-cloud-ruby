@@ -40,26 +40,26 @@ module Google
             # be returned. This Method only updates a single ThreatList at a time. To
             # update multiple ThreatList databases, this method needs to be called once
             # for each list.
-            rpc :ComputeThreatListDiff, Google::Cloud::WebRisk::V1::ComputeThreatListDiffRequest, Google::Cloud::WebRisk::V1::ComputeThreatListDiffResponse
+            rpc :ComputeThreatListDiff, ::Google::Cloud::WebRisk::V1::ComputeThreatListDiffRequest, ::Google::Cloud::WebRisk::V1::ComputeThreatListDiffResponse
             # This method is used to check whether a URI is on a given threatList.
             # Multiple threatLists may be searched in a single query.
             # The response will list all requested threatLists the URI was found to
             # match. If the URI is not found on any of the requested ThreatList an
             # empty response will be returned.
-            rpc :SearchUris, Google::Cloud::WebRisk::V1::SearchUrisRequest, Google::Cloud::WebRisk::V1::SearchUrisResponse
+            rpc :SearchUris, ::Google::Cloud::WebRisk::V1::SearchUrisRequest, ::Google::Cloud::WebRisk::V1::SearchUrisResponse
             # Gets the full hashes that match the requested hash prefix.
             # This is used after a hash prefix is looked up in a threatList
             # and there is a match. The client side threatList only holds partial hashes
             # so the client must query this method to determine if there is a full
             # hash match of a threat.
-            rpc :SearchHashes, Google::Cloud::WebRisk::V1::SearchHashesRequest, Google::Cloud::WebRisk::V1::SearchHashesResponse
+            rpc :SearchHashes, ::Google::Cloud::WebRisk::V1::SearchHashesRequest, ::Google::Cloud::WebRisk::V1::SearchHashesResponse
             # Creates a Submission of a URI suspected of containing phishing content to
             # be reviewed. If the result verifies the existence of malicious phishing
             # content, the site will be added to the [Google's Social Engineering
             # lists](https://support.google.com/webmasters/answer/6350487/) in order to
             # protect users that could get exposed to this threat in the future. Only
             # projects with CREATE_SUBMISSION_USERS visibility can use this method.
-            rpc :CreateSubmission, Google::Cloud::WebRisk::V1::CreateSubmissionRequest, Google::Cloud::WebRisk::V1::Submission
+            rpc :CreateSubmission, ::Google::Cloud::WebRisk::V1::CreateSubmissionRequest, ::Google::Cloud::WebRisk::V1::Submission
           end
 
           Stub = Service.rpc_stub_class
