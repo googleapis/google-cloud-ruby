@@ -39,9 +39,9 @@ module Google
 
             # Sends new spans to new or existing traces. You cannot update
             # existing spans.
-            rpc :BatchWriteSpans, Google::Cloud::Trace::V2::BatchWriteSpansRequest, Google::Protobuf::Empty
+            rpc :BatchWriteSpans, ::Google::Cloud::Trace::V2::BatchWriteSpansRequest, ::Google::Protobuf::Empty
             # Creates a new span.
-            rpc :CreateSpan, Google::Cloud::Trace::V2::Span, Google::Cloud::Trace::V2::Span
+            rpc :CreateSpan, ::Google::Cloud::Trace::V2::Span, ::Google::Cloud::Trace::V2::Span
           end
 
           Stub = Service.rpc_stub_class
