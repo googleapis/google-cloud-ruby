@@ -39,7 +39,7 @@ module Google
             # This API implements the
             # [google.longrunning.Operation][google.longrunning.Operation] API allowing
             # you to keep track of the export.
-            rpc :ExportAssets, Google::Cloud::Asset::V1beta1::ExportAssetsRequest, Google::Longrunning::Operation
+            rpc :ExportAssets, ::Google::Cloud::Asset::V1beta1::ExportAssetsRequest, ::Google::Longrunning::Operation
             # Batch gets the update history of assets that overlap a time window.
             # For RESOURCE content, this API outputs history with asset in both
             # non-delete or deleted status.
@@ -47,7 +47,7 @@ module Google
             # attached IAM POLICY both exist. This can create gaps in the output history.
             # If a specified asset does not exist, this API returns an INVALID_ARGUMENT
             # error.
-            rpc :BatchGetAssetsHistory, Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryRequest, Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryResponse
+            rpc :BatchGetAssetsHistory, ::Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryRequest, ::Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryResponse
           end
 
           Stub = Service.rpc_stub_class
