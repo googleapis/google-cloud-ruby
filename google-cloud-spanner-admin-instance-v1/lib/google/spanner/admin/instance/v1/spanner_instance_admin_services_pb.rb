@@ -56,13 +56,13 @@ module Google
                 self.service_name = 'google.spanner.admin.instance.v1.InstanceAdmin'
 
                 # Lists the supported instance configurations for a given project.
-                rpc :ListInstanceConfigs, Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest, Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse
+                rpc :ListInstanceConfigs, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse
                 # Gets information about a particular instance configuration.
-                rpc :GetInstanceConfig, Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest, Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig
+                rpc :GetInstanceConfig, ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig
                 # Lists all instances in the given project.
-                rpc :ListInstances, Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest, Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesResponse
+                rpc :ListInstances, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesResponse
                 # Gets information about a particular instance.
-                rpc :GetInstance, Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest, Google::Cloud::Spanner::Admin::Instance::V1::Instance
+                rpc :GetInstance, ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::Instance
                 # Creates an instance and begins preparing it to begin serving. The
                 # returned [long-running operation][google.longrunning.Operation]
                 # can be used to track the progress of preparing the new
@@ -97,7 +97,7 @@ module Google
                 # [CreateInstanceMetadata][google.spanner.admin.instance.v1.CreateInstanceMetadata].
                 # The [response][google.longrunning.Operation.response] field type is
                 # [Instance][google.spanner.admin.instance.v1.Instance], if successful.
-                rpc :CreateInstance, Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest, Google::Longrunning::Operation
+                rpc :CreateInstance, ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest, ::Google::Longrunning::Operation
                 # Updates an instance, and begins allocating or releasing resources
                 # as requested. The returned [long-running
                 # operation][google.longrunning.Operation] can be used to track the
@@ -138,7 +138,7 @@ module Google
                 #
                 # Authorization requires `spanner.instances.update` permission on
                 # resource [name][google.spanner.admin.instance.v1.Instance.name].
-                rpc :UpdateInstance, Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest, Google::Longrunning::Operation
+                rpc :UpdateInstance, ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest, ::Google::Longrunning::Operation
                 # Deletes an instance.
                 #
                 # Immediately upon completion of the request:
@@ -150,26 +150,26 @@ module Google
                 #   * The instance and *all of its databases* immediately and
                 #     irrevocably disappear from the API. All data in the databases
                 #     is permanently deleted.
-                rpc :DeleteInstance, Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceRequest, Google::Protobuf::Empty
+                rpc :DeleteInstance, ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceRequest, ::Google::Protobuf::Empty
                 # Sets the access control policy on an instance resource. Replaces any
                 # existing policy.
                 #
                 # Authorization requires `spanner.instances.setIamPolicy` on
                 # [resource][google.iam.v1.SetIamPolicyRequest.resource].
-                rpc :SetIamPolicy, Google::Iam::V1::SetIamPolicyRequest, Google::Iam::V1::Policy
+                rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
                 # Gets the access control policy for an instance resource. Returns an empty
                 # policy if an instance exists but does not have a policy set.
                 #
                 # Authorization requires `spanner.instances.getIamPolicy` on
                 # [resource][google.iam.v1.GetIamPolicyRequest.resource].
-                rpc :GetIamPolicy, Google::Iam::V1::GetIamPolicyRequest, Google::Iam::V1::Policy
+                rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
                 # Returns permissions that the caller has on the specified instance resource.
                 #
                 # Attempting this RPC on a non-existent Cloud Spanner instance resource will
                 # result in a NOT_FOUND error if the user has `spanner.instances.list`
                 # permission on the containing Google Cloud Project. Otherwise returns an
                 # empty set of permissions.
-                rpc :TestIamPermissions, Google::Iam::V1::TestIamPermissionsRequest, Google::Iam::V1::TestIamPermissionsResponse
+                rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
               end
 
               Stub = Service.rpc_stub_class
