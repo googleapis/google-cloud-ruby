@@ -40,23 +40,23 @@ module Google
             # measurements of user activity on your property, such as active users or
             # event count. Dimensions break down metrics across some common criteria,
             # such as country or event name.
-            rpc :RunReport, Google::Analytics::Data::V1alpha::RunReportRequest, Google::Analytics::Data::V1alpha::RunReportResponse
+            rpc :RunReport, ::Google::Analytics::Data::V1alpha::RunReportRequest, ::Google::Analytics::Data::V1alpha::RunReportResponse
             # Returns a customized pivot report of your Google Analytics event data.
             # Pivot reports are more advanced and expressive formats than regular
             # reports. In a pivot report, dimensions are only visible if they are
             # included in a pivot. Multiple pivots can be specified to further dissect
             # your data.
-            rpc :RunPivotReport, Google::Analytics::Data::V1alpha::RunPivotReportRequest, Google::Analytics::Data::V1alpha::RunPivotReportResponse
+            rpc :RunPivotReport, ::Google::Analytics::Data::V1alpha::RunPivotReportRequest, ::Google::Analytics::Data::V1alpha::RunPivotReportResponse
             # Returns multiple reports in a batch. All reports must be for the same
             # Entity.
-            rpc :BatchRunReports, Google::Analytics::Data::V1alpha::BatchRunReportsRequest, Google::Analytics::Data::V1alpha::BatchRunReportsResponse
+            rpc :BatchRunReports, ::Google::Analytics::Data::V1alpha::BatchRunReportsRequest, ::Google::Analytics::Data::V1alpha::BatchRunReportsResponse
             # Returns multiple pivot reports in a batch. All reports must be for the same
             # Entity.
-            rpc :BatchRunPivotReports, Google::Analytics::Data::V1alpha::BatchRunPivotReportsRequest, Google::Analytics::Data::V1alpha::BatchRunPivotReportsResponse
+            rpc :BatchRunPivotReports, ::Google::Analytics::Data::V1alpha::BatchRunPivotReportsRequest, ::Google::Analytics::Data::V1alpha::BatchRunPivotReportsResponse
             # Returns metadata for dimensions and metrics available in reporting methods.
             # Used to explore the dimensions and metrics. Dimensions and metrics will be
             # mostly added over time, but renames and deletions may occur.
-            rpc :GetMetadata, Google::Analytics::Data::V1alpha::GetMetadataRequest, Google::Analytics::Data::V1alpha::Metadata
+            rpc :GetMetadata, ::Google::Analytics::Data::V1alpha::GetMetadataRequest, ::Google::Analytics::Data::V1alpha::Metadata
           end
 
           Stub = Service.rpc_stub_class
