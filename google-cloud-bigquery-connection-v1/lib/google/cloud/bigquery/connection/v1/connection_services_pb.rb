@@ -35,25 +35,25 @@ module Google
               self.service_name = 'google.cloud.bigquery.connection.v1.ConnectionService'
 
               # Creates a new connection.
-              rpc :CreateConnection, Google::Cloud::Bigquery::Connection::V1::CreateConnectionRequest, Google::Cloud::Bigquery::Connection::V1::Connection
+              rpc :CreateConnection, ::Google::Cloud::Bigquery::Connection::V1::CreateConnectionRequest, ::Google::Cloud::Bigquery::Connection::V1::Connection
               # Returns specified connection.
-              rpc :GetConnection, Google::Cloud::Bigquery::Connection::V1::GetConnectionRequest, Google::Cloud::Bigquery::Connection::V1::Connection
+              rpc :GetConnection, ::Google::Cloud::Bigquery::Connection::V1::GetConnectionRequest, ::Google::Cloud::Bigquery::Connection::V1::Connection
               # Returns a list of connections in the given project.
-              rpc :ListConnections, Google::Cloud::Bigquery::Connection::V1::ListConnectionsRequest, Google::Cloud::Bigquery::Connection::V1::ListConnectionsResponse
+              rpc :ListConnections, ::Google::Cloud::Bigquery::Connection::V1::ListConnectionsRequest, ::Google::Cloud::Bigquery::Connection::V1::ListConnectionsResponse
               # Updates the specified connection. For security reasons, also resets
               # credential if connection properties are in the update field mask.
-              rpc :UpdateConnection, Google::Cloud::Bigquery::Connection::V1::UpdateConnectionRequest, Google::Cloud::Bigquery::Connection::V1::Connection
+              rpc :UpdateConnection, ::Google::Cloud::Bigquery::Connection::V1::UpdateConnectionRequest, ::Google::Cloud::Bigquery::Connection::V1::Connection
               # Deletes connection and associated credential.
-              rpc :DeleteConnection, Google::Cloud::Bigquery::Connection::V1::DeleteConnectionRequest, Google::Protobuf::Empty
+              rpc :DeleteConnection, ::Google::Cloud::Bigquery::Connection::V1::DeleteConnectionRequest, ::Google::Protobuf::Empty
               # Gets the access control policy for a resource.
               # Returns an empty policy if the resource exists and does not have a policy
               # set.
-              rpc :GetIamPolicy, Google::Iam::V1::GetIamPolicyRequest, Google::Iam::V1::Policy
+              rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
               # Sets the access control policy on the specified resource. Replaces any
               # existing policy.
               #
               # Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
-              rpc :SetIamPolicy, Google::Iam::V1::SetIamPolicyRequest, Google::Iam::V1::Policy
+              rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
               # Returns permissions that a caller has on the specified resource.
               # If the resource does not exist, this will return an empty set of
               # permissions, not a `NOT_FOUND` error.
@@ -61,7 +61,7 @@ module Google
               # Note: This operation is designed to be used for building permission-aware
               # UIs and command-line tools, not for authorization checking. This operation
               # may "fail open" without warning.
-              rpc :TestIamPermissions, Google::Iam::V1::TestIamPermissionsRequest, Google::Iam::V1::TestIamPermissionsResponse
+              rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
             end
 
             Stub = Service.rpc_stub_class
