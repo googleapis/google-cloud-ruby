@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.4 / 2020-09-18
+
+#### Documentation
+
+* Fixed a number of broken links and a few malformed regular expressions
+
 ### 0.4.3 / 2020-09-10
 
 #### Documentation
