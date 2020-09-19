@@ -45,8 +45,7 @@ module Google
         #     "organizations/[organization_id]".
         # @!attribute [rw] config_id
         #   @return [::String]
-        #     Required.
-        #     Unique identifier provided by the client within the parent scope.
+        #     Required. Unique identifier provided by the client within the parent scope.
         #     It must be between 1 and 128 characters, and contains alphanumeric
         #     characters, underscores or hyphens only.
         # @!attribute [rw] notification_config
@@ -313,6 +312,7 @@ module Google
         #     * category: `=`, `:`
         #     * external_uri: `=`, `:`
         #     * event_time: `=`, `>`, `<`, `>=`, `<=`
+        #     * severity: `=`, `:`
         #
         #       Usage: This should be milliseconds since epoch or an RFC3339 string.
         #       Examples:
@@ -341,6 +341,7 @@ module Google
         #     * category
         #     * state
         #     * parent
+        #     * severity
         #
         #     The following fields are supported when compare_duration is set:
         #
@@ -734,13 +735,14 @@ module Google
         #
         #     The following field and operator combinations are supported:
         #
-        #     name: `=`
-        #     parent: `=`, `:`
-        #     resource_name: `=`, `:`
-        #     state: `=`, `:`
-        #     category: `=`, `:`
-        #     external_uri: `=`, `:`
-        #     event_time: `=`, `>`, `<`, `>=`, `<=`
+        #     * name: `=`
+        #     * parent: `=`, `:`
+        #     * resource_name: `=`, `:`
+        #     * state: `=`, `:`
+        #     * category: `=`, `:`
+        #     * external_uri: `=`, `:`
+        #     * event_time: `=`, `>`, `<`, `>=`, `<=`
+        #     * severity: `=`, `:`
         #
         #       Usage: This should be milliseconds since epoch or an RFC3339 string.
         #       Examples:

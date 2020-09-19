@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/cloud/securitycenter/v1p1beta1/notification_message_pb'
 require 'google/cloud/securitycenter/v1p1beta1/run_asset_discovery_response_pb'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
