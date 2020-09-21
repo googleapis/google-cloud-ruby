@@ -150,6 +150,7 @@ module Google
         #   listener.stop
         #
         def on_error &block
+          raise ArgumentError, "on_error must be called with a block" unless block_given?
           synchronize { @error_callbacks << block }
         end
 

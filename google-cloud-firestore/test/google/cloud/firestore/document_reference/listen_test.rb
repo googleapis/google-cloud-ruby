@@ -289,4 +289,16 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :watch_firestore 
     _(doc_snapshots[0]).must_be :exists?
     _(doc_snapshots[0][:val]).must_equal 1
   end
+
+  it "raises when on_error is called without a block" do
+    listener = document.listen do |doc_snp|
+    end
+
+    error = expect do
+      listener.on_error
+    end.must_raise ArgumentError
+    _(error.message).must_equal "on_error must be called with a block"
+
+    listener.stop
+  end
 end

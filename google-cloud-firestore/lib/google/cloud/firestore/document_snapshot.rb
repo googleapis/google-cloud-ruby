@@ -53,7 +53,7 @@ module Google
       #   nyc_ref = firestore.doc "cities/NYC"
       #
       #   listener = nyc_ref.listen do |snapshot|
-        #     puts "The population of #{snapshot[:name]} is #{snapshot[:population]}."
+      #     puts "The population of #{snapshot[:name]} is #{snapshot[:population]}."
       #   end
       #
       #   # When ready, stop the listen operation and close the stream.

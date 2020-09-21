@@ -418,4 +418,16 @@ describe Google::Cloud::Firestore::CollectionReference, :listen, :watch_firestor
     _(query_snapshots[0].changes.map(&:type)).must_equal [:added, :added]
     _(query_snapshots[0].changes.map(&:doc).map(&:document_id)).must_equal ["int 1", "int 2"]
   end
+
+  it "raises when on_error is called without a block" do
+    listener = collection.order(:val).listen do |query_snp|
+    end
+
+    error = expect do
+      listener.on_error
+    end.must_raise ArgumentError
+    _(error.message).must_equal "on_error must be called with a block"
+
+    listener.stop
+  end
 end
