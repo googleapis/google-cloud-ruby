@@ -71,7 +71,7 @@ module Google
         ##
         # @private
         def start
-          synchronize { @listener.start }
+          @listener.start
           self
         end
 
@@ -95,7 +95,7 @@ module Google
         #   listener.stop
         #
         def stop
-          synchronize { @listener.stop }
+          @listener.stop
         end
 
         ##
@@ -124,7 +124,7 @@ module Google
         #   listener.stopped? #=> true
         #
         def stopped?
-          synchronize { @listener.stopped? }
+          @listener.stopped?
         end
 
         ##
