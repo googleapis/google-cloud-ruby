@@ -14,11 +14,14 @@
 
 
 require "google/cloud/firestore/watch/listener"
+require "monitor"
 
 module Google
   module Cloud
     module Firestore
       ##
+      # # DocumentListener
+      #
       # An ongoing listen operation on a document reference. This is returned by
       # calling {DocumentReference#listen}.
       #
@@ -39,10 +42,13 @@ module Google
       #   listener.stop
       #
       class DocumentListener
+        include MonitorMixin
         ##
         # @private
         # Creates the watch stream and listener object.
         def initialize doc_ref, &callback
+          super() # to init MonitorMixin
+
           @doc_ref = doc_ref
           raise ArgumentError if @doc_ref.nil?
 
@@ -65,7 +71,7 @@ module Google
         ##
         # @private
         def start
-          @listener.start
+          synchronize { @listener.start }
           self
         end
 
@@ -89,7 +95,7 @@ module Google
         #   listener.stop
         #
         def stop
-          @listener.stop
+          synchronize { @listener.stop }
         end
 
         ##
@@ -118,7 +124,7 @@ module Google
         #   listener.stopped? #=> true
         #
         def stopped?
-          @listener.stopped?
+          synchronize { @listener.stopped? }
         end
 
         ##
@@ -155,7 +161,7 @@ module Google
         #   listener.stop
         #
         def on_error &block
-          @error_callbacks << block
+          synchronize { @error_callbacks << block }
         end
 
         ##
@@ -186,13 +192,16 @@ module Google
         #   listener.stop
         #
         def last_error
-          @last_error
+          synchronize { @last_error }
         end
 
         # @private returns error object from the stream thread.
         def error! error
-          @last_error = error
-          @error_callbacks.each { |error_callback| error_callback.call error }
+          error_callbacks = synchronize do
+            @last_error = error
+            @error_callbacks.dup
+          end
+          error_callbacks.each { |error_callback| error_callback.call error }
         end
       end
     end
