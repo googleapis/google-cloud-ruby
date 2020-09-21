@@ -143,7 +143,6 @@ module Google
         #
         #   # Register to be notified when unhandled errors occur.
         #   listener.on_error do |error|
-        #     # log error
         #     puts error
         #   end
         #
@@ -185,7 +184,7 @@ module Google
           synchronize { @last_error }
         end
 
-        # @private returns error object from the stream thread.
+        # @private Pass the error to user-provided error callbacks.
         def error! error
           error_callbacks = synchronize do
             @last_error = error

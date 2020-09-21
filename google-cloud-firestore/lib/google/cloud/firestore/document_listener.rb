@@ -34,8 +34,7 @@ module Google
       #   nyc_ref = firestore.doc "cities/NYC"
       #
       #   listener = nyc_ref.listen do |snapshot|
-      #     puts "The population of #{snapshot[:name]} "
-      #     puts "is #{snapshot[:population]}."
+      #     puts "The population of #{snapshot[:name]} is #{snapshot[:population]}."
       #   end
       #
       #   # When ready, stop the listen operation and close the stream.
@@ -87,8 +86,7 @@ module Google
         #   nyc_ref = firestore.doc "cities/NYC"
         #
         #   listener = nyc_ref.listen do |snapshot|
-        #     puts "The population of #{snapshot[:name]} "
-        #     puts "is #{snapshot[:population]}."
+        #     puts "The population of #{snapshot[:name]} is #{snapshot[:population]}."
         #   end
         #
         #   # When ready, stop the listen operation and close the stream.
@@ -110,8 +108,7 @@ module Google
         #   nyc_ref = firestore.doc "cities/NYC"
         #
         #   listener = nyc_ref.listen do |snapshot|
-        #     puts "The population of #{snapshot[:name]} "
-        #     puts "is #{snapshot[:population]}."
+        #     puts "The population of #{snapshot[:name]} is #{snapshot[:population]}."
         #   end
         #
         #   # Checks if the listener is stopped.
@@ -147,13 +144,11 @@ module Google
         #   nyc_ref = firestore.doc "cities/NYC"
         #
         #   listener = nyc_ref.listen do |snapshot|
-        #     puts "The population of #{snapshot[:name]} "
-        #     puts "is #{snapshot[:population]}."
+        #     puts "The population of #{snapshot[:name]} is #{snapshot[:population]}."
         #   end
         #
         #   # Register to be notified when unhandled errors occur.
         #   listener.on_error do |error|
-        #     # log error
         #     puts error
         #   end
         #
@@ -181,8 +176,7 @@ module Google
         #   nyc_ref = firestore.doc "cities/NYC"
         #
         #   listener = nyc_ref.listen do |snapshot|
-        #     puts "The population of #{snapshot[:name]} "
-        #     puts "is #{snapshot[:population]}."
+        #     puts "The population of #{snapshot[:name]} is #{snapshot[:population]}."
         #   end
         #
         #   # If an error was raised, it can be retrieved here:
@@ -195,7 +189,7 @@ module Google
           synchronize { @last_error }
         end
 
-        # @private returns error object from the stream thread.
+        # @private Pass the error to user-provided error callbacks.
         def error! error
           error_callbacks = synchronize do
             @last_error = error
