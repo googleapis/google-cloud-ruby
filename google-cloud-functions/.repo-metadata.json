@@ -1,0 +1,11 @@
+{
+    "api_id": "cloudfunctions.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-functions/latest",
+    "distribution_name": "google-cloud-functions",
+    "language": "ruby",
+    "name": "cloudfunctions",
+    "name_pretty": "Cloud Functions API",
+    "product_documentation": "https://cloud.google.com/functions",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
