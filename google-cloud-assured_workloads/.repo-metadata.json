@@ -1,0 +1,11 @@
+{
+    "api_id": "assuredworkloads.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-assured_workloads/latest",
+    "distribution_name": "google-cloud-assured_workloads",
+    "language": "ruby",
+    "name": "assuredworkloads",
+    "name_pretty": "Assured Workloads for Government API",
+    "product_documentation": "https://cloud.google.com/assured-workloads/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
