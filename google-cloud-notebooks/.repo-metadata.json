@@ -1,0 +1,11 @@
+{
+    "api_id": "notebooks.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-notebooks/latest",
+    "distribution_name": "google-cloud-notebooks",
+    "language": "ruby",
+    "name": "notebooks",
+    "name_pretty": "AI Platform Notebooks API",
+    "product_documentation": "https://cloud.google.com/ai-platform-notebooks",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
