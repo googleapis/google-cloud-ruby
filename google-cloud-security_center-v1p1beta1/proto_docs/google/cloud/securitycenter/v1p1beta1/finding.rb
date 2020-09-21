@@ -84,7 +84,8 @@ module Google
         #     The time at which the finding was created in Security Command Center.
         # @!attribute [rw] severity
         #   @return [::Google::Cloud::SecurityCenter::V1p1beta1::Finding::Severity]
-        #     The severity of the finding.
+        #     The severity of the finding. This field is managed by the source that
+        #     writes the finding.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -111,7 +112,8 @@ module Google
             INACTIVE = 2
           end
 
-          # The severity of the finding.
+          # The severity of the finding. This field is managed by the source that
+          # writes the finding.
           module Severity
             # No severity specified. The default value.
             SEVERITY_UNSPECIFIED = 0

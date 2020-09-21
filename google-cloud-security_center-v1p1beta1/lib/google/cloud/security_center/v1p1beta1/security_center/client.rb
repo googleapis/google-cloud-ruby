@@ -433,8 +433,7 @@ module Google
             #     Required. Resource name of the new notification config's parent. Its format is
             #     "organizations/[organization_id]".
             #   @param config_id [::String]
-            #     Required.
-            #     Unique identifier provided by the client within the parent scope.
+            #     Required. Unique identifier provided by the client within the parent scope.
             #     It must be between 1 and 128 characters, and contains alphanumeric
             #     characters, underscores or hyphens only.
             #   @param notification_config [::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig, ::Hash]
@@ -1076,6 +1075,7 @@ module Google
             #     * category: `=`, `:`
             #     * external_uri: `=`, `:`
             #     * event_time: `=`, `>`, `<`, `>=`, `<=`
+            #     * severity: `=`, `:`
             #
             #       Usage: This should be milliseconds since epoch or an RFC3339 string.
             #       Examples:
@@ -1103,6 +1103,7 @@ module Google
             #     * category
             #     * state
             #     * parent
+            #     * severity
             #
             #     The following fields are supported when compare_duration is set:
             #
@@ -1446,13 +1447,14 @@ module Google
             #
             #     The following field and operator combinations are supported:
             #
-            #     name: `=`
-            #     parent: `=`, `:`
-            #     resource_name: `=`, `:`
-            #     state: `=`, `:`
-            #     category: `=`, `:`
-            #     external_uri: `=`, `:`
-            #     event_time: `=`, `>`, `<`, `>=`, `<=`
+            #     * name: `=`
+            #     * parent: `=`, `:`
+            #     * resource_name: `=`, `:`
+            #     * state: `=`, `:`
+            #     * category: `=`, `:`
+            #     * external_uri: `=`, `:`
+            #     * event_time: `=`, `>`, `<`, `>=`, `<=`
+            #     * severity: `=`, `:`
             #
             #       Usage: This should be milliseconds since epoch or an RFC3339 string.
             #       Examples:
