@@ -258,21 +258,24 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :watch_firestore 
     errors_1 = []
     errors_2 = []
 
-    listener = document.listen do |doc_snp|
-      doc_snapshots << doc_snp
+    out, err = capture_io do # Capture the error raised from listener thread.
+      listener = document.listen do |doc_snp|
+        doc_snapshots << doc_snp
+      end
+
+      listener.on_error do |error|
+        errors_1 << error
+      end
+
+      listener.on_error do |error|
+        errors_2 << error
+      end
+
+      wait_until { doc_snapshots.count == 1 }
+
+      listener.stop
     end
-
-    listener.on_error do |error|
-      errors_1 << error
-    end
-
-    listener.on_error do |error|
-      errors_2 << error
-    end
-
-    wait_until { doc_snapshots.count == 1 }
-
-    listener.stop
+    _(err).must_include err_msg
 
     _(errors_1.count).must_equal 1
     _(errors_1[0]).must_be_kind_of ArgumentError

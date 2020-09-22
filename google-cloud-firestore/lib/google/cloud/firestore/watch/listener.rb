@@ -280,6 +280,7 @@ module Google
             # Raise if retried more than the max
             if @backoff[:current] > @backoff[:max]
               @parent.error! e
+              raise e
             else
               # Sleep with incremental backoff before restarting
               sleep @backoff[:delay]
@@ -294,6 +295,7 @@ module Google
             retry
           rescue StandardError => e
             @parent.error! e
+            raise e
           end
         end
       end

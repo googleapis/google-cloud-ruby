@@ -387,21 +387,24 @@ describe Google::Cloud::Firestore::CollectionReference, :listen, :watch_firestor
     errors_1 = []
     errors_2 = []
 
-    listener = collection.order(:val).listen do |query_snp|
-      query_snapshots << query_snp
+    out, err = capture_io do # Capture the error raised from listener thread.
+      listener = collection.order(:val).listen do |query_snp|
+        query_snapshots << query_snp
+      end
+
+      listener.on_error do |error|
+        errors_1 << error
+      end
+
+      listener.on_error do |error|
+        errors_2 << error
+      end
+
+      wait_until { query_snapshots.count == 1 }
+
+      listener.stop
     end
-
-    listener.on_error do |error|
-      errors_1 << error
-    end
-
-    listener.on_error do |error|
-      errors_2 << error
-    end
-
-    wait_until { query_snapshots.count == 1 }
-
-    listener.stop
+    _(err).must_include err_msg
 
     _(errors_1.count).must_equal 1
     _(errors_1[0]).must_be_kind_of ArgumentError
