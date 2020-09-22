@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "0f9863004185c0a722f6d9ef19ddfa5b3680eba2"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "33b3c14d1cd3b5f9538786e2aff4913f204c4be4"
       }
     },
     {
@@ -26,5 +26,24 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-billing-budgets.gemspec",
+    "lib/google-cloud-billing-budgets.rb",
+    "lib/google/cloud/billing/budgets.rb",
+    "lib/google/cloud/billing/budgets/version.rb",
+    "test/google/cloud/billing/budgets/client_test.rb",
+    "test/google/cloud/billing/budgets/version_test.rb",
+    "test/helper.rb"
   ]
 }
