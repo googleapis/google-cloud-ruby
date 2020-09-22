@@ -1,5 +1,20 @@
 # Release History
 
+### 1.29.0 / 2020-09-22
+
+#### Features
+
+* quota_project can be set via library configuration ([#7656](https://www.github.com/googleapis/google-cloud-ruby/issues/7656))
+
+#### Bug Fixes
+
+* Fix encoding of space characters in #signed_url version: :v4
+  * Fix encoding of space characters to use percent encoding (%20) instead of plus sign (+).
+
+#### Documentation
+
+* Add custom time to file metadata sample
+
 ### 1.28.0 / 2020-08-26
 
 * Add Object Lifecycle Management fields
