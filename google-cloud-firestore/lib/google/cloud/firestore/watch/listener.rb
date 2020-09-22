@@ -273,26 +273,27 @@ module Google
             @request_queue.push self
           rescue GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
                  GRPC::ResourceExhausted, GRPC::Unauthenticated,
-                 GRPC::Unavailable, GRPC::Core::CallError
+                 GRPC::Unavailable, GRPC::Core::CallError => e
             # Restart the stream with an incremental back for a retriable error.
             # Also when GRPC raises the internal CallError.
 
-            # Re-raise if retried more than the max
-            raise err if @backoff[:current] > @backoff[:max]
+            # Raise if retried more than the max
+            if @backoff[:current] > @backoff[:max]
+              @parent.error! e
+            else
+              # Sleep with incremental backoff before restarting
+              sleep @backoff[:delay]
 
-            # Sleep with incremental backoff before restarting
-            sleep @backoff[:delay]
+              # Update increment backoff delay and retry counter
+              @backoff[:delay] *= @backoff[:mod]
+              @backoff[:current] += 1
 
-            # Update increment backoff delay and retry counter
-            @backoff[:delay] *= @backoff[:mod]
-            @backoff[:current] += 1
-
-            retry
+              retry
+            end
           rescue RestartStream
             retry
           rescue StandardError => e
             @parent.error! e
-            retry
           end
         end
       end

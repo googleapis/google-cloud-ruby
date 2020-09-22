@@ -236,12 +236,13 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :watch_firestore 
   end
 
   it "invokes on_error callbacks when the listener receives errors" do
+    err_msg = "test listener error"
     listen_responses = [
       [
         doc_change_resp("doc", 0, val: 1),
         current_resp("DOCUMENTSHAVEBEENCHANGED", 0.1),
         no_change_resp("THISTOKENWILLNEVERBESEEN", 1),
-        ArgumentError.new("listen error")
+        ArgumentError.new(err_msg)
       ],
       [
         doc_change_resp("doc", 0, val: 1),
@@ -275,11 +276,11 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :watch_firestore 
 
     _(errors_1.count).must_equal 1
     _(errors_1[0]).must_be_kind_of ArgumentError
-    _(errors_1[0].message).must_equal "listen error"
+    _(errors_1[0].message).must_equal err_msg
 
     _(errors_2.count).must_equal 1
     _(errors_2[0]).must_be_kind_of ArgumentError
-    _(errors_2[0].message).must_equal "listen error"
+    _(errors_2[0].message).must_equal err_msg
 
     # assert snapshots
     _(doc_snapshots.count).must_equal 1
@@ -292,6 +293,7 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :watch_firestore 
 
   it "raises when on_error is called without a block" do
     listener = document.listen do |doc_snp|
+      raise "should not be called"
     end
 
     error = expect do

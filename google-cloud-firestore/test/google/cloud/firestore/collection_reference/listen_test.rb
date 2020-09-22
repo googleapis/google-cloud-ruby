@@ -364,13 +364,14 @@ describe Google::Cloud::Firestore::CollectionReference, :listen, :watch_firestor
   end
 
   it "invokes on_error callbacks when the listener receives errors" do
+    err_msg = "test listener error"
     listen_responses = [
       [
         doc_change_resp("int 1", 0, val: 1),
         doc_change_resp("int 2", 0, val: 2),
         current_resp("DOCUMENTSHAVEBEENCHANGED", 0.1),
         no_change_resp("THISTOKENWILLNEVERBESEEN", 1),
-        ArgumentError.new("listen error")
+        ArgumentError.new(err_msg)
       ],[
         doc_change_resp("int 1", 0, val: 1),
         doc_change_resp("int 2", 0, val: 2),
@@ -404,11 +405,11 @@ describe Google::Cloud::Firestore::CollectionReference, :listen, :watch_firestor
 
     _(errors_1.count).must_equal 1
     _(errors_1[0]).must_be_kind_of ArgumentError
-    _(errors_1[0].message).must_equal "listen error"
+    _(errors_1[0].message).must_equal err_msg
 
     _(errors_2.count).must_equal 1
     _(errors_2[0]).must_be_kind_of ArgumentError
-    _(errors_2[0].message).must_equal "listen error"
+    _(errors_2[0].message).must_equal err_msg
 
     # assert snapshots
     _(query_snapshots.count).must_equal 1
@@ -421,6 +422,7 @@ describe Google::Cloud::Firestore::CollectionReference, :listen, :watch_firestor
 
   it "raises when on_error is called without a block" do
     listener = collection.order(:val).listen do |query_snp|
+      raise "should not be called"
     end
 
     error = expect do

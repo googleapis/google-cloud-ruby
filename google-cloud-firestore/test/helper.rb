@@ -88,7 +88,7 @@ class StreamingListenStub
 
       loop do
         obj = @queue.pop
-        # This is the only way to raise and have it be handled by the steam thread
+        # This is the only way to raise and have it be handled by the listener thread
         raise obj if obj.is_a? StandardError
         break if obj.equal? @sentinel
         yield obj
