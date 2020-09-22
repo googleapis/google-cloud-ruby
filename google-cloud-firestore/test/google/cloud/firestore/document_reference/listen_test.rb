@@ -275,7 +275,6 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :watch_firestore 
 
       listener.stop
     end
-    _(err).must_include err_msg
 
     _(errors_1.count).must_equal 1
     _(errors_1[0]).must_be_kind_of ArgumentError
