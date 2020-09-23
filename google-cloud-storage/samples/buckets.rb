@@ -13,7 +13,7 @@
 # limitations under the License.
 
 def list_buckets
-  # [START list_buckets]
+  # [START storage_list_buckets]
 
   require "google/cloud/storage"
 
@@ -22,7 +22,7 @@ def list_buckets
   storage.buckets.each do |bucket|
     puts bucket.name
   end
-  # [END list_buckets]
+  # [END storage_list_buckets]
 end
 
 def list_bucket_details bucket_name:
@@ -62,7 +62,7 @@ def list_bucket_details bucket_name:
 end
 
 def disable_requester_pays bucket_name:
-  # [START disable_requester_pays]
+  # [START storage_disable_requester_pays]
   # bucket_name = "Name of your Google Cloud Storage bucket"
 
   require "google/cloud/storage"
@@ -73,11 +73,11 @@ def disable_requester_pays bucket_name:
   bucket.requester_pays = false
 
   puts "Requester pays has been disabled for #{bucket_name}"
-  # [END disable_requester_pays]
+  # [END storage_disable_requester_pays]
 end
 
 def enable_requester_pays bucket_name:
-  # [START enable_requester_pays]
+  # [START storage_enable_requester_pays]
   # bucket_name = "Name of your Google Cloud Storage bucket"
 
   require "google/cloud/storage"
@@ -88,7 +88,7 @@ def enable_requester_pays bucket_name:
   bucket.requester_pays = true
 
   puts "Requester pays has been enabled for #{bucket_name}"
-  # [END enable_requester_pays]
+  # [END storage_enable_requester_pays]
 end
 
 def get_requester_pays_status bucket_name:
@@ -173,7 +173,7 @@ def enable_default_kms_key bucket_name:, default_kms_key:
 end
 
 def create_bucket bucket_name:
-  # [START create_bucket]
+  # [START storage_create_bucket]
   # bucket_name = "Name of Google Cloud Storage bucket to create"
 
   require "google/cloud/storage"
@@ -182,11 +182,11 @@ def create_bucket bucket_name:
   bucket  = storage.create_bucket bucket_name
 
   puts "Created bucket: #{bucket.name}"
-  # [END create_bucket]
+  # [END storage_create_bucket]
 end
 
 def create_bucket_class_location bucket_name:, location:, storage_class:
-  # [START create_bucket_class_location]
+  # [START storage_create_bucket_class_location]
   # bucket_name   = "Name of Google Cloud Storage bucket to create"
   # location      = "Location of where to create Cloud Storage bucket"
   # storage_class = "Storage class of Cloud Storage bucket"
@@ -200,7 +200,7 @@ def create_bucket_class_location bucket_name:, location:, storage_class:
 
   puts "Created bucket #{bucket.name} in #{location}" \
        " with #{storage_class} class"
-  # [END create_bucket_class_location]
+  # [END storage_create_bucket_class_location]
 end
 
 def list_bucket_labels bucket_name:
@@ -220,7 +220,7 @@ def list_bucket_labels bucket_name:
 end
 
 def add_bucket_label bucket_name:, label_key:, label_value:
-  # [START add_bucket_label]
+  # [START storage_add_bucket_label]
   # bucket_name = "Name of your Google Cloud Storage bucket"
   # label_key   = "Cloud Storage bucket Label Key"
   # label_value = "Cloud Storage bucket Label Value"
@@ -235,11 +235,11 @@ def add_bucket_label bucket_name:, label_key:, label_value:
   end
 
   puts "Added label #{label_key} with value #{label_value} to #{bucket_name}"
-  # [END add_bucket_label]
+  # [END storage_add_bucket_label]
 end
 
 def delete_bucket_label bucket_name:, label_key:
-  # [START remove_bucket_label]
+  # [START storage_remove_bucket_label]
   # bucket_name = "Name of your Google Cloud Storage bucket"
   # label_key   = "Cloud Storage bucket Label Key"
 
@@ -253,11 +253,11 @@ def delete_bucket_label bucket_name:, label_key:
   end
 
   puts "Deleted label #{label_key} from #{bucket_name}"
-  # [END remove_bucket_label]
+  # [END storage_remove_bucket_label]
 end
 
 def delete_bucket bucket_name:
-  # [START delete_bucket]
+  # [START storage_delete_bucket]
   # bucket_name = "Name of your Google Cloud Storage bucket to delete"
 
   require "google/cloud/storage"
@@ -268,7 +268,7 @@ def delete_bucket bucket_name:
   bucket.delete
 
   puts "Deleted bucket: #{bucket.name}"
-  # [END delete_bucket]
+  # [END storage_delete_bucket]
 end
 
 def set_retention_policy bucket_name:, retention_period:

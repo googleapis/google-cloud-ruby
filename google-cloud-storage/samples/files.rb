@@ -57,7 +57,7 @@ def generate_encryption_key_base64
 end
 
 def upload_file bucket_name:, local_file_path:, storage_file_path: nil
-  # [START upload_file]
+  # [START storage_upload_file]
   # bucket_name       = "Your Google Cloud Storage bucket name"
   # local_file_path   = "Path to local file to upload"
   # storage_file_path = "Path to store the file in Google Cloud Storage"
@@ -70,11 +70,11 @@ def upload_file bucket_name:, local_file_path:, storage_file_path: nil
   file = bucket.create_file local_file_path, storage_file_path
 
   puts "Uploaded #{file.name}"
-  # [END upload_file]
+  # [END storage_upload_file]
 end
 
 def upload_encrypted_file bucket_name:, local_file_path:, storage_file_path: nil, encryption_key:
-  # [START upload_encrypted_file]
+  # [START storage_upload_encrypted_file]
   # bucket_name       = "Your Google Cloud Storage bucket name"
   # local_file_path   = "Path to local file to upload"
   # storage_file_path = "Path to store the file in Google Cloud Storage"
@@ -90,7 +90,7 @@ def upload_encrypted_file bucket_name:, local_file_path:, storage_file_path: nil
                             encryption_key: encryption_key
 
   puts "Uploaded #{file.name} with encryption key"
-  # [END upload_encrypted_file]
+  # [END storage_upload_encrypted_file]
 end
 
 def upload_with_kms_key bucket_name:, local_file_path:, storage_file_path: nil, kms_key:
@@ -114,7 +114,7 @@ def upload_with_kms_key bucket_name:, local_file_path:, storage_file_path: nil, 
 end
 
 def download_file bucket_name:, file_name:, local_path:
-  # [START download_file]
+  # [START storage_download_file]
   # bucket_name = "Your Google Cloud Storage bucket name"
   # file_name   = "Name of file in Google Cloud Storage to download locally"
   # local_path  = "Destination path for downloaded file"
@@ -128,11 +128,11 @@ def download_file bucket_name:, file_name:, local_path:
   file.download local_path
 
   puts "Downloaded #{file.name}"
-  # [END download_file]
+  # [END storage_download_file]
 end
 
 def download_public_file bucket_name:, file_name:, local_path:
-  # [START download_public_file]
+  # [START storage_download_public_file]
   # bucket_name = "A public Google Cloud Storage bucket name"
   # file_name   = "Name of a file in the Cloud Storage bucket"
   # local_path  = "Destination path for downloaded file"
@@ -146,11 +146,11 @@ def download_public_file bucket_name:, file_name:, local_path:
   file.download local_path
 
   puts "Downloaded #{file.name}"
-  # [END download_public_file]
+  # [END storage_download_public_file]
 end
 
 def download_file_requester_pays bucket_name:, file_name:, local_path:
-  # [START download_file_requester_pays]
+  # [START storage_download_file_requester_pays]
   # bucket_name = "A Google Cloud Storage bucket name"
   # file_name   = "Name of file in Google Cloud Storage to download locally"
   # local_path  = "Destination path for downloaded file"
@@ -164,12 +164,12 @@ def download_file_requester_pays bucket_name:, file_name:, local_path:
   file.download local_path
 
   puts "Downloaded #{file.name} using billing project #{storage.project}"
-  # [END download_file_requester_pays]
+  # [END storage_download_file_requester_pays]
 end
 
 def download_encrypted_file bucket_name:, storage_file_path:,
                             local_file_path:, encryption_key:
-  # [START download_encrypted_file]
+  # [START storage_download_encrypted_file]
   # bucket_name    = "Your Google Cloud Storage bucket name"
   # file_name      = "Name of file in Google Cloud Storage to download locally"
   # local_path     = "Destination path for downloaded file"
@@ -185,11 +185,11 @@ def download_encrypted_file bucket_name:, storage_file_path:,
   file.download local_file_path, encryption_key: encryption_key
 
   puts "Downloaded encrypted #{file.name}"
-  # [END download_encrypted_file]
+  # [END storage_download_encrypted_file]
 end
 
 def delete_file bucket_name:, file_name:
-  # [START delete_file]
+  # [START storage_delete_file]
   # bucket_name = "Your Google Cloud Storage bucket name"
   # file_name   = "Name of file in Google Cloud Storage to delete"
 
@@ -202,7 +202,7 @@ def delete_file bucket_name:, file_name:
   file.delete
 
   puts "Deleted #{file.name}"
-  # [END delete_file]
+  # [END storage_delete_file]
 end
 
 def list_file_details bucket_name:, file_name:
@@ -247,7 +247,7 @@ def list_file_details bucket_name:, file_name:
 end
 
 def set_metadata bucket_name:, file_name:, content_type:, metadata_key:, metadata_value:
-  # [START set_metadata]
+  # [START storage_set_metadata]
   # bucket_name    = "Your Google Cloud Storage bucket name"
   # file_name      = "Name of file in Google Cloud Storage"
   # content_type   = "file Content-Type"
@@ -268,7 +268,7 @@ def set_metadata bucket_name:, file_name:, content_type:, metadata_key:, metadat
   end
 
   puts "Metadata for #{file_name} has been updated."
-  # [END set_metadata]
+  # [END storage_set_metadata]
 end
 
 def make_file_public bucket_name:, file_name:
@@ -309,7 +309,7 @@ def rename_file bucket_name:, file_name:, new_name:
 end
 
 def copy_file source_bucket_name:, source_file_name:, dest_bucket_name:, dest_file_name:
-  # [START copy_file]
+  # [START storage_copy_file]
   # source_bucket_name = "Source bucket to copy file from"
   # source_file_name   = "Source file name"
   # dest_bucket_name   = "Destination bucket to copy file to"
@@ -326,11 +326,11 @@ def copy_file source_bucket_name:, source_file_name:, dest_bucket_name:, dest_fi
 
   puts "#{file.name} in #{bucket.name} copied to " \
        "#{destination_file.name} in #{destination_bucket.name}"
-  # [END copy_file]
+  # [END storage_copy_file]
 end
 
 def rotate_encryption_key bucket_name:, file_name:, current_encryption_key:, new_encryption_key:
-  # [START rotate_encryption_key]
+  # [START storage_rotate_encryption_key]
   # bucket_name            = "Your Google Cloud Storage bucket name"
   # file_name              = "Name of a file in the Cloud Storage bucket"
   # current_encryption_key = "Encryption key currently being used"
@@ -346,7 +346,7 @@ def rotate_encryption_key bucket_name:, file_name:, current_encryption_key:, new
               new_encryption_key: new_encryption_key
 
   puts "The encryption key for #{file.name} in #{bucket.name} was rotated."
-  # [END rotate_encryption_key]
+  # [END storage_rotate_encryption_key]
 end
 
 def generate_signed_url bucket_name:, file_name:
