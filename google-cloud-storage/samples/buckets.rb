@@ -25,7 +25,7 @@ def list_buckets
   # [END storage_list_buckets]
 end
 
-def list_bucket_details bucket_name:
+def get_bucket_metadata bucket_name:
   # [START storage_get_bucket_metadata]
   # bucket_name = "Your Google Cloud Storage bucket name"
 
@@ -396,7 +396,7 @@ if $PROGRAM_NAME == __FILE__
   when "list"
     list_buckets
   when "metadata"
-    list_bucket_details bucket_name: ARGV.shift
+    get_bucket_metadata bucket_name: ARGV.shift
   when "create"
     if ARGV.size == 1
       create_bucket bucket_name: ARGV.shift

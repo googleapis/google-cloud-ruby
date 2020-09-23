@@ -31,7 +31,7 @@ describe "Buckets Snippets" do
   end
 
   describe "bucket lifecycle" do
-    it "create_bucket, create_bucket_class_location, list_buckets, list_bucket_details, delete_bucket" do
+    it "create_bucket, create_bucket_class_location, list_buckets, get_bucket_metadata, delete_bucket" do
       # create_bucket
       bucket_name = "ruby_storage_sample_#{SecureRandom.hex}"
       refute storage_client.bucket bucket_name
@@ -68,12 +68,11 @@ describe "Buckets Snippets" do
         list_buckets
       end
 
-      assert_includes out, bucket_name
-      assert_includes out, secondary_bucket_name
+      assert_includes out, "ruby_storage_sample_"
 
-      # list_bucket_details
+      # get_bucket_metadata
       out, _err = capture_io do
-        list_bucket_details bucket_name: bucket_name
+        get_bucket_metadata bucket_name: bucket_name
       end
 
       assert_includes out, bucket_name
@@ -87,6 +86,7 @@ describe "Buckets Snippets" do
 
 
       delete_bucket_helper bucket_name
+      delete_bucket_helper secondary_bucket_name
     end
   end
 
