@@ -91,23 +91,6 @@ def enable_requester_pays bucket_name:
   # [END storage_enable_requester_pays]
 end
 
-def get_requester_pays_status bucket_name:
-  # [START get_requester_pays_status]
-  # bucket_name = "Name of your Google Cloud Storage bucket"
-
-  require "google/cloud/storage"
-
-  storage = Google::Cloud::Storage.new
-  bucket  = storage.bucket bucket_name
-
-  if bucket.requester_pays
-    puts "Requester Pays is enabled for #{bucket_name}"
-  else
-    puts "Requester Pays is disabled for #{bucket_name}"
-  end
-  # [END get_requester_pays_status]
-end
-
 def disable_uniform_bucket_level_access bucket_name:
   # [START storage_disable_uniform_bucket_level_access]
   # bucket_name = "Name of your Google Cloud Storage bucket"

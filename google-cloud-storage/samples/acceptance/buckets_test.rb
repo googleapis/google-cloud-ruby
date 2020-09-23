@@ -91,7 +91,7 @@ describe "Buckets Snippets" do
   end
 
   describe "requester_pays" do
-    it "enable_requester_pays, get_requester_pays_status, disable_requester_pays" do
+    it "enable_requester_pays, disable_requester_pays" do
       # enable_requester_pays
       bucket.requester_pays = false
 
@@ -101,22 +101,12 @@ describe "Buckets Snippets" do
       bucket.refresh!
       assert bucket.requester_pays?
 
-      # get_requester_pays_status
-      assert_output "Requester Pays is enabled for #{bucket.name}\n" do
-        get_requester_pays_status bucket_name: bucket.name
-      end
-
       # disable_requester_pays
       assert_output "Requester pays has been disabled for #{bucket.name}\n" do
         disable_requester_pays bucket_name: bucket.name
       end
       bucket.refresh!
       refute bucket.requester_pays?
-
-      # get_requester_pays_status
-      assert_output "Requester Pays is disabled for #{bucket.name}\n" do
-        get_requester_pays_status bucket_name: bucket.name
-      end
     end
   end
 
