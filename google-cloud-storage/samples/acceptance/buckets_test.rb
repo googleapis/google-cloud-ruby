@@ -172,7 +172,7 @@ describe "Buckets Snippets" do
   end
 
   describe "bucket labels" do
-    it "add_bucket_label, list_bucket_labels, delete_bucket_label" do
+    it "add_bucket_label, delete_bucket_label" do
       # add_bucket_label
       label_key = "label_key"
       label_value = "label_value"
@@ -185,14 +185,6 @@ describe "Buckets Snippets" do
 
       bucket.refresh!
       assert_equal bucket.labels[label_key], label_value
-
-
-      # list_bucket_labels
-      out, _err = capture_io do
-        list_bucket_labels bucket_name: bucket.name
-      end
-
-      assert_includes out, "#{label_key} = #{label_value}"
 
       # delete_bucket_label
       assert_output "Deleted label #{label_key} from #{bucket.name}\n" do

@@ -203,22 +203,6 @@ def create_bucket_class_location bucket_name:, location:, storage_class:
   # [END storage_create_bucket_class_location]
 end
 
-def list_bucket_labels bucket_name:
-  # [START get_bucket_labels]
-  # bucket_name = "Name of your Google Cloud Storage bucket"
-
-  require "google/cloud/storage"
-
-  storage = Google::Cloud::Storage.new
-  bucket  = storage.bucket bucket_name
-
-  puts "Labels for #{bucket_name}"
-  bucket.labels.each do |key, value|
-    puts "#{key} = #{value}"
-  end
-  # [END get_bucket_labels]
-end
-
 def add_bucket_label bucket_name:, label_key:, label_value:
   # [START storage_add_bucket_label]
   # bucket_name = "Name of your Google Cloud Storage bucket"
@@ -416,8 +400,6 @@ if $PROGRAM_NAME == __FILE__
                            default_kms_key: ARGV.shift
   when "check_requester_pays"
     check_requester_pays bucket_name: ARGV.shift
-  when "list_bucket_labels"
-    list_bucket_labels
   when "add_bucket_label"
     add_bucket_label bucket_name: ARGV.shift,
                      label_key:   ARGV.shift,
@@ -456,7 +438,6 @@ if $PROGRAM_NAME == __FILE__
         enable_default_kms_key              <bucket> <kms_key>                  Enable default KMS encryption for bucket
         create                              <bucket>                            Create a new bucket with default storage class and location
         create                              <bucket> <location> <storage_class> Create a new bucket with specific storage class and location
-        list_bucket_labels                  <bucket>                            List bucket labels
         add_bucket_label                    <bucket> <label_key> <label_value>  Add bucket label
         delete_bucket_label                 <bucket> <label_key>                Delete bucket label
         delete                              <bucket>                            Delete bucket with the provided name
