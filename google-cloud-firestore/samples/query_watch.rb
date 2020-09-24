@@ -106,6 +106,27 @@ def listen_changes project_id:, collection_path: "cities"
   listener.stop
 end
 
+def listen_errors project_id:, collection_path: "cities"
+  # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
+
+  firestore = Google::Cloud::Firestore.new project_id: project_id
+  # [START fs_listen_errors]
+  listener = firestore.col(collection_path).listen do |snapshot|
+    snapshot.changes.each do |change|
+      # Process the snapshot.
+      puts "New city: #{change.doc.document_id}" if change.added?
+    end
+  end
+
+  # Register to be notified when unhandled errors occur.
+  listener.on_error do |error|
+    puts "Listen failed: #{error.message}"
+  end
+  # [END fs_listen_errors]
+  listener.stop
+end
+
 def listen_multiple project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
   # collection_path = "cities"

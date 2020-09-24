@@ -43,6 +43,14 @@ describe "Google Cloud Firestore API samples - Query Data" do
     assert_includes out, "Removed city: MTV"
   end
 
+  it "listen_errors" do
+    out, err = capture_io do
+      listen_errors project_id: @firestore_project, collection_path: @collection_path
+    end
+    assert_empty out
+    assert_empty err
+  end
+
   it "listen_multiple" do
     out, _err = capture_io do
       listen_multiple project_id: @firestore_project, collection_path: @collection_path
