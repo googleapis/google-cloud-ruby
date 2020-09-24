@@ -14,14 +14,13 @@
 
 require "google/cloud/firestore"
 
-def listen_document project_id:, collection_path: "cities", document_path: "SF"
+def listen_document project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
   # collection_path = "cities"
-  # document_path = "SF"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_listen_document]
-  doc_ref = firestore.col(collection_path).doc document_path
+  doc_ref = firestore.col(collection_path).doc "SF"
   snapshots = []
 
   # Watch the document.
@@ -31,6 +30,8 @@ def listen_document project_id:, collection_path: "cities", document_path: "SF"
     snapshots << snapshot
   end
   # [END fs_listen_document]
+
+  sleep 1
 
   # Create the document.
   doc_ref.set(
@@ -76,6 +77,8 @@ def listen_changes project_id:, collection_path: "cities"
   # [END fs_listen_changes]
 
   mtv_doc = firestore.col(collection_path).doc("MTV")
+
+  sleep 1
 
   # Create the document.
   mtv_doc.set(
