@@ -14,13 +14,14 @@
 
 require "google/cloud/firestore"
 
-def listen_document project_id:, collection_path: "cities"
+def listen_document project_id:, collection_path: "cities", document_path: "SF"
   # project_id = "Your Google Cloud Project ID"
   # collection_path = "cities"
+  # document_path = "SF"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_listen_document]
-  doc_ref = firestore.col(collection_path).doc "SF"
+  doc_ref = firestore.col(collection_path).doc document_path
   snapshots = []
 
   # Watch the document.

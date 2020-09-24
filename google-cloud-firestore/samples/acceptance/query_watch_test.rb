@@ -19,6 +19,7 @@ describe "Google Cloud Firestore API samples - Query Data" do
   before :all do
     @firestore_project = ENV["FIRESTORE_PROJECT"]
     @collection_path = random_name "cities"
+    @document_path = random_name "SF"
   end
 
   after :all do
@@ -27,7 +28,7 @@ describe "Google Cloud Firestore API samples - Query Data" do
 
   it "listen_document" do
     out, _err = capture_io do
-      listen_document project_id: @firestore_project, collection_path: @collection_path
+      listen_document project_id: @firestore_project, collection_path: @collection_path, document_path: @document_path
     end
     assert_includes out, "Received document snapshot: SF"
   end
