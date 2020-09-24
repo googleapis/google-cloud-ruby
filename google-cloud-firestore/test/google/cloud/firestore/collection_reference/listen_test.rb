@@ -362,4 +362,76 @@ describe Google::Cloud::Firestore::CollectionReference, :listen, :watch_firestor
     query_snapshots[3].changes.each { |change| _(change).must_be :removed? }
     _(query_snapshots[3].changes.map(&:doc).map(&:document_id)).must_equal ["array", "hash"]
   end
+
+  it "invokes on_error callbacks when the listener receives errors" do
+    err_msg = "test listener error"
+    listen_responses = [
+      [
+        doc_change_resp("int 1", 0, val: 1),
+        doc_change_resp("int 2", 0, val: 2),
+        current_resp("DOCUMENTSHAVEBEENCHANGED", 0.1),
+        no_change_resp("THISTOKENWILLNEVERBESEEN", 1),
+        ArgumentError.new(err_msg)
+      ],[
+        doc_change_resp("int 1", 0, val: 1),
+        doc_change_resp("int 2", 0, val: 2),
+        current_resp("DOCUMENTSHAVEBEENCHANGED", 0.1),
+        no_change_resp("THISTOKENWILLNEVERBESEEN", 1)
+      ]
+    ]
+    # set stub because we can't mock a streaming request/response
+    listen_stub = StreamingListenStub.new listen_responses
+    firestore.service.instance_variable_set :@firestore, listen_stub
+
+    query_snapshots = []
+    errors_1 = []
+    errors_2 = []
+
+    out, err = capture_io do # Capture the error raised from listener thread.
+      listener = collection.order(:val).listen do |query_snp|
+        query_snapshots << query_snp
+      end
+
+      listener.on_error do |error|
+        errors_1 << error
+      end
+
+      listener.on_error do |error|
+        errors_2 << error
+      end
+
+      wait_until { query_snapshots.count == 1 }
+
+      listener.stop
+    end
+
+    _(errors_1.count).must_equal 1
+    _(errors_1[0]).must_be_kind_of ArgumentError
+    _(errors_1[0].message).must_equal err_msg
+
+    _(errors_2.count).must_equal 1
+    _(errors_2[0]).must_be_kind_of ArgumentError
+    _(errors_2[0].message).must_equal err_msg
+
+    # assert snapshots
+    _(query_snapshots.count).must_equal 1
+    _(query_snapshots[0].count).must_equal 2
+    _(query_snapshots[0].changes.count).must_equal 2
+    _(query_snapshots[0].docs.map(&:document_id)).must_equal ["int 1", "int 2"]
+    _(query_snapshots[0].changes.map(&:type)).must_equal [:added, :added]
+    _(query_snapshots[0].changes.map(&:doc).map(&:document_id)).must_equal ["int 1", "int 2"]
+  end
+
+  it "raises when on_error is called without a block" do
+    listener = collection.order(:val).listen do |query_snp|
+      raise "should not be called"
+    end
+
+    error = expect do
+      listener.on_error
+    end.must_raise ArgumentError
+    _(error.message).must_equal "on_error must be called with a block"
+
+    listener.stop
+  end
 end
