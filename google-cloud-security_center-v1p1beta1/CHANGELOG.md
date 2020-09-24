@@ -4,6 +4,12 @@
 
 * Clarify Finding#event_time description
 
+### 0.4.1 / 2020-09-24
+
+#### Documentation
+
+* Updated description of Finding#severity field
+
 ### 0.4.0 / 2020-09-03
 
 #### Features
