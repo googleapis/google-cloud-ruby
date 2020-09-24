@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def list_bucket_contents bucket_name:
-  # [START list_bucket_contents]
+def list_files bucket_name:
+  # [START storage_list_files]
   # bucket_name = "Your Google Cloud Storage bucket name"
 
   require "google/cloud/storage"
@@ -24,11 +24,11 @@ def list_bucket_contents bucket_name:
   bucket.files.each do |file|
     puts file.name
   end
-  # [END list_bucket_contents]
+  # [END storage_list_files]
 end
 
-def list_bucket_contents_with_prefix bucket_name:, prefix:
-  # [START list_bucket_contents_with_prefix]
+def list_files_with_prefix bucket_name:, prefix:
+  # [START storage_list_files_with_prefix]
   # bucket_name = "Your Google Cloud Storage bucket name"
   # prefix      = "Filter results to files whose names begin with this prefix"
 
@@ -41,11 +41,11 @@ def list_bucket_contents_with_prefix bucket_name:, prefix:
   files.each do |file|
     puts file.name
   end
-  # [END list_bucket_contents_with_prefix]
+  # [END storage_list_files_with_prefix]
 end
 
-def generate_encryption_key_base64
-  # [START generate_encryption_key_base64]
+def generate_encryption_key
+  # [START storage_generate_encryption_key]
   require "base64"
   require "openssl"
 
@@ -53,7 +53,7 @@ def generate_encryption_key_base64
   encoded_enc_key = Base64.encode64 encryption_key
 
   puts "Sample encryption key: #{encoded_enc_key}"
-  # [END generate_encryption_key_base64]
+  # [END storage_generate_encryption_key]
 end
 
 def upload_file bucket_name:, local_file_path:, storage_file_path: nil
@@ -205,8 +205,8 @@ def delete_file bucket_name:, file_name:
   # [END storage_delete_file]
 end
 
-def list_file_details bucket_name:, file_name:
-  # [START list_file_details]
+def get_metadata bucket_name:, file_name:
+  # [START storage_get_metadata]
   # bucket_name = "Your Google Cloud Storage bucket name"
   # file_name   = "Name of file in Google Cloud Storage"
 
@@ -243,7 +243,7 @@ def list_file_details bucket_name:, file_name:
   file.metadata.each do |key, value|
     puts " - #{key} = #{value}"
   end
-  # [END list_file_details]
+  # [END storage_get_metadata]
 end
 
 def set_metadata bucket_name:, file_name:, content_type:, metadata_key:, metadata_value:
@@ -271,8 +271,8 @@ def set_metadata bucket_name:, file_name:, content_type:, metadata_key:, metadat
   # [END storage_set_metadata]
 end
 
-def make_file_public bucket_name:, file_name:
-  # [START make_file_public]
+def make_public bucket_name:, file_name:
+  # [START storage_make_public]
   # bucket_name = "Your Google Cloud Storage bucket name"
   # file_name   = "Name of file in Google Cloud Storage to make public"
 
@@ -285,11 +285,11 @@ def make_file_public bucket_name:, file_name:
   file.acl.public!
 
   puts "#{file.name} is publicly accessible at #{file.public_url}"
-  # [END make_file_public]
+  # [END storage_make_public]
 end
 
-def rename_file bucket_name:, file_name:, new_name:
-  # [START rename_file]
+def move_file bucket_name:, file_name:, new_name:
+  # [START storage_move_file]
   # bucket_name = "Your Google Cloud Storage bucket name"
   # file_name   = "Name of file in Google Cloud Storage to rename"
   # new_name    = "File will be renamed to this new name"
@@ -305,7 +305,7 @@ def rename_file bucket_name:, file_name:, new_name:
   file.delete
 
   puts "#{file_name} has been renamed to #{renamed_file.name}"
-  # [END rename_file]
+  # [END storage_move_file]
 end
 
 def copy_file source_bucket_name:, source_file_name:, dest_bucket_name:, dest_file_name:
@@ -502,7 +502,7 @@ def run_sample arguments
 
   case command
   when "list"
-    list_bucket_contents bucket_name: arguments.shift
+    list_files bucket_name: arguments.shift
   when "upload"
     upload_file bucket_name:       arguments.shift,
                 local_file_path:   arguments.shift,
@@ -540,20 +540,20 @@ def run_sample arguments
                           current_encryption_key: arguments.shift,
                           new_encryption_key:     arguments.shift
   when "generate_encryption_key"
-    generate_encryption_key_base64
+    generate_encryption_key
   when "delete"
     delete_file bucket_name: arguments.shift,
                 file_name:   arguments.shift
   when "metadata"
-    list_file_details bucket_name: arguments.shift,
-                      file_name:   arguments.shift
+    get_metadata bucket_name: arguments.shift,
+                 file_name:   arguments.shift
   when "make_public"
-    make_file_public bucket_name: arguments.shift,
-                     file_name:   arguments.shift
+    make_public bucket_name: arguments.shift,
+                file_name:   arguments.shift
   when "rename"
-    rename_file bucket_name: arguments.shift,
-                file_name:   arguments.shift,
-                new_name:    arguments.shift
+    move_file bucket_name: arguments.shift,
+              file_name:   arguments.shift,
+              new_name:    arguments.shift
   when "copy"
     copy_file source_bucket_name: arguments.shift,
               source_file_name:   arguments.shift,

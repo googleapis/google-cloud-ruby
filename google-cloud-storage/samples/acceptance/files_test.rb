@@ -40,25 +40,25 @@ describe "Files Snippets" do
     bucket.files.each(&:delete)
   end
 
-  it "list_bucket_contents" do
+  it "list_files" do
     bucket.create_file local_file, "foo.txt"
     bucket.create_file local_file, "bar.txt"
 
     out, _err = capture_io do
-      list_bucket_contents bucket_name: bucket.name
+      list_files bucket_name: bucket.name
     end
 
     assert_match "foo.txt", out
     assert_match "bar.txt", out
   end
 
-  it "list_bucket_contents_with_prefix" do
+  it "list_files_with_prefix" do
     ["foo/file.txt", "foo/data.txt", "bar/file.txt", "bar/data.txt"].each do |file|
       bucket.create_file local_file, file
     end
 
     out, _err = capture_io do
-      list_bucket_contents_with_prefix bucket_name: bucket.name, prefix: "foo/"
+      list_files_with_prefix bucket_name: bucket.name, prefix: "foo/"
     end
 
     assert_match "foo/file.txt", out
@@ -67,7 +67,7 @@ describe "Files Snippets" do
     refute_match "bar/data.txt", out
   end
 
-  it "generate_encryption_key_base64" do
+  it "generate_encryption_key" do
     mock_cipher = Minitest::Mock.new
 
     def mock_cipher.encrypt
@@ -82,7 +82,7 @@ describe "Files Snippets" do
 
     OpenSSL::Cipher.stub :new, mock_cipher do
       assert_output "Sample encryption key: #{encryption_key_base64}" do
-        generate_encryption_key_base64
+        generate_encryption_key
       end
     end
   end
@@ -197,7 +197,7 @@ describe "Files Snippets" do
     assert_nil bucket.file remote_file_name
   end
 
-  it "list_file_details" do
+  it "get_metadata" do
     bucket.create_file local_file, remote_file_name
 
     file = bucket.file remote_file_name
@@ -229,8 +229,8 @@ describe "Files Snippets" do
     OUTPUT
 
     assert_output expected_output do
-      list_file_details bucket_name: bucket.name,
-                        file_name:   remote_file_name
+      get_metadata bucket_name: bucket.name,
+                   file_name:   remote_file_name
     end
   end
 
@@ -252,30 +252,30 @@ describe "Files Snippets" do
     assert_equal bucket.file(remote_file_name).metadata[metadata_key], metadata_value
   end
 
-  it "make_file_public" do
+  it "make_public" do
     bucket.create_file local_file, remote_file_name
     response = Net::HTTP.get URI(bucket.file(remote_file_name).public_url)
     refute_equal File.read(local_file), response
 
     assert_output "#{remote_file_name} is publicly accessible at #{bucket.file(remote_file_name).public_url}\n" do
-      make_file_public bucket_name: bucket.name,
-                       file_name:   remote_file_name
+      make_public bucket_name: bucket.name,
+                  file_name:   remote_file_name
     end
 
     response = Net::HTTP.get URI(bucket.file(remote_file_name).public_url)
     assert_equal File.read(local_file), response
   end
 
-  it "rename_file" do
+  it "move_file" do
     bucket.create_file local_file, remote_file_name
 
     new_name = "path/new_name.txt"
     assert_nil bucket.file new_name
 
     assert_output "#{remote_file_name} has been renamed to #{new_name}\n" do
-      rename_file bucket_name: bucket.name,
-                  file_name:   remote_file_name,
-                  new_name:    new_name
+      move_file bucket_name: bucket.name,
+                file_name:   remote_file_name,
+                new_name:    new_name
     end
 
     assert_nil bucket.file remote_file_name
