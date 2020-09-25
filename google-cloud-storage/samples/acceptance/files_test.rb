@@ -14,6 +14,7 @@
 
 require_relative "helper"
 require_relative "../files.rb"
+require_relative "../storage_compose_file.rb"
 
 describe "Files Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -22,6 +23,8 @@ describe "Files Snippets" do
   let(:kms_key)          { get_kms_key storage_client.project }
   let(:remote_file_name) { "path/file_name.txt" }
   let(:downloaded_file)  { "test_download_#{SecureRandom.hex}" }
+  let(:file_1_name) { "path/file_1_name.txt" }
+  let(:file_2_name) { "path/file_2_name.txt" }
   let(:bucket) { @bucket }
   let(:secondary_bucket) { @secondary_bucket }
 
@@ -280,6 +283,19 @@ describe "Files Snippets" do
 
     assert_nil bucket.file remote_file_name
     refute_nil bucket.file new_name
+  end
+
+  it "compose_file" do
+    file_1 = bucket.create_file local_file, file_1_name
+    file_2 = bucket.create_file local_file, file_2_name
+
+    assert_output "Composed new file #{remote_file_name} in the bucket #{bucket.name}\n" do
+      compose_file bucket_name:           bucket.name,
+                   sources:               [file_1, file_2],
+                   destination_file_name: remote_file_name
+    end
+
+    refute_nil bucket.file remote_file_name
   end
 
   it "copy_file" do
