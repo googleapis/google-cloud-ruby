@@ -28,7 +28,7 @@ def sample_batch_update_jobs project_id, tenant_id, job_name_one,
   job_service = Google::Cloud::Talent.job_service
 
   # project_id = "Your Google Cloud Project ID"
-  # tenant_id = "Your Tenant ID (using tenancy is optional)"
+  # tenant_id = "Your Tenant ID (using tenancy is required)"
   formatted_parent = job_service.tenant_path project: project_id, tenant: tenant_id
 
   # job_application_url_one = "https://www.example.org/job-posting/123"
@@ -99,7 +99,7 @@ require "optparse"
 if $PROGRAM_NAME == __FILE__
 
   project_id = "Your Google Cloud Project ID"
-  tenant_id = "Your Tenant ID (using tenancy is optional)"
+  tenant_id = "Your Tenant ID (using tenancy is required)"
   job_name_one = "job name, e.g. projects/your-project/tenants/tenant-id/jobs/job-id"
   company_name_one = "Company name, e.g. projects/your-project/companies/company-id"
   requisition_id_one = "Job requisition ID, aka Posting ID. Unique per job."
