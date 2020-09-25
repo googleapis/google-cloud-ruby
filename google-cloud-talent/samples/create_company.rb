@@ -20,7 +20,7 @@ def sample_create_company project_id, tenant_id, display_name, external_id
   company_service = Google::Cloud::Talent.company_service
 
   # project_id = "Your Google Cloud Project ID"
-  # tenant_id = "Your Tenant ID (using tenancy is optional)"
+  # tenant_id = "Your Tenant ID (using tenancy is required)"
   parent = company_service.tenant_path project: project_id, tenant: tenant_id
 
   # display_name = "My Company Name"
@@ -40,7 +40,7 @@ require "optparse"
 if $PROGRAM_NAME == __FILE__
 
   project_id = "Your Google Cloud Project ID"
-  tenant_id = "Your Tenant ID (using tenancy is optional)"
+  tenant_id = "Your Tenant ID (using tenancy is required)"
   display_name = "My Company Name"
   external_id = "Identifier of this company in my system"
 

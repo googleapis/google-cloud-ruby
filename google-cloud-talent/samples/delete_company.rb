@@ -20,7 +20,7 @@ def sample_delete_company project_id, tenant_id, company_id
   company_service = Google::Cloud::Talent.company_service
 
   # project_id = "Your Google Cloud Project ID"
-  # tenant_id = "Your Tenant ID (using tenancy is optional)"
+  # tenant_id = "Your Tenant ID (using tenancy is required)"
   # company_id = "ID of the company to delete"
   formatted_name = company_service.company_path project: project_id,
                                                 tenant:  tenant_id,
@@ -37,7 +37,7 @@ require "optparse"
 if $PROGRAM_NAME == __FILE__
 
   project_id = "Your Google Cloud Project ID"
-  tenant_id = "Your Tenant ID (using tenancy is optional)"
+  tenant_id = "Your Tenant ID (using tenancy is required)"
   company_id = "ID of the company to delete"
 
   ARGV.options do |opts|

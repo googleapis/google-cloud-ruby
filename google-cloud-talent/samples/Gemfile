@@ -16,6 +16,7 @@ source "https://rubygems.org"
 
 if ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
   gem "google-cloud-talent", path: "../../google-cloud-talent"
+  gem "google-cloud-talent-v4", path: "../../google-cloud-talent-v4"
   gem "google-cloud-talent-v4beta1", path: "../../google-cloud-talent-v4beta1"
 else
   # rubocop:disable Bundler/DuplicatedGem

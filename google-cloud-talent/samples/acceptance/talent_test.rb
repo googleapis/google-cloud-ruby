@@ -6,8 +6,10 @@ describe "Job Search Samples" do
   let(:prefix) { "talent_samples_" }
   let(:rando) { SecureRandom.hex }
   let(:rando_two) { SecureRandom.hex }
+  let(:rando_batch_delete_1) { SecureRandom.hex }
+  let(:rando_batch_delete_2) { SecureRandom.hex }
 
-  let(:tenant) { create_tenant_helper "#{prefix}tenant_#{rando}", rando }
+  let(:tenant) { create_tenant_helper "#{prefix}tenant_#{rando}" }
   let(:tenant_id) { tenant.name.split("/").last }
 
   let(:company_name) { "#{prefix}company_#{rando}" }
@@ -36,7 +38,7 @@ describe "Job Search Samples" do
       # autocomplete suggestions, so just check for a response.
       out, _err = capture_io do
         complete_query project_id,
-                       nil,
+                       tenant_id,
                        "Talent",
                        100,
                        language_code
@@ -87,12 +89,22 @@ describe "Job Search Samples" do
   describe "batch_delete_job" do
     after { delete_tenant_helper tenant }
 
-    it "deletes jobs matching a filter" do
-      filter = "companyName = \"#{company.name}\" AND requisitionId = \"#{job.requisition_id}\""
-      assert_output "Batch deleted jobs from filter\n" do
-        sample_batch_delete_jobs project_id, tenant_id, filter
+    it "deletes jobs" do
+      job_1 = create_job_helper(tenant_id, company_id,
+                                "#{prefix}job_#{rando_batch_delete_1}",
+                                rando_batch_delete_1)
+      job_2 = create_job_helper(tenant_id, company_id,
+                                "#{prefix}job_#{rando_batch_delete_2}",
+                                rando_batch_delete_2)
+
+      out, _err = capture_io do
+        sample_batch_delete_jobs project_id, tenant_id, job_1.name, job_2.name
       end
-      assert_raises(Google::Cloud::NotFoundError) { get_job_helper job.name }
+      assert_includes out, "Batch response:"
+      assert_includes out, "Job: name: \"#{job_1.name}\""
+      assert_includes out, "Job: name: \"#{job_2.name}\""
+      assert_raises(Google::Cloud::NotFoundError) { get_job_helper job_1.name }
+      assert_raises(Google::Cloud::NotFoundError) { get_job_helper job_2.name }
     end
   end
 

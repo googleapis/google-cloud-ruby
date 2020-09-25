@@ -20,7 +20,7 @@ def sample_get_job project_id, tenant_id, job_id
   job_service = Google::Cloud::Talent.job_service
 
   # project_id = "Your Google Cloud Project ID"
-  # tenant_id = "Your Tenant ID (using tenancy is optional)"
+  # tenant_id = "Your Tenant ID (using tenancy is required)"
   # job_id = "Job ID"
   formatted_name = job_service.job_path project: project_id,
                                         tenant:  tenant_id,
@@ -49,7 +49,7 @@ require "optparse"
 if $PROGRAM_NAME == __FILE__
 
   project_id = "Your Google Cloud Project ID"
-  tenant_id = "Your Tenant ID (using tenancy is optional)"
+  tenant_id = "Your Tenant ID (using tenancy is required)"
   job_id = "Job ID"
 
   ARGV.options do |opts|

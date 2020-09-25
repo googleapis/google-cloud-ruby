@@ -18,7 +18,7 @@ require "securerandom"
 
 require_relative "../autocomplete_job_title"
 require_relative "../batch_create_jobs"
-require_relative "../batch_delete_job"
+require_relative "../batch_delete_jobs"
 require_relative "../batch_update_jobs"
 require_relative "../commute_search"
 require_relative "../create_client_event"
@@ -50,10 +50,8 @@ def company_service
   Google::Cloud::Talent.company_service
 end
 
-def create_tenant_helper tenant_name, external_id
-  tenant_path = tenant_service.tenant_path project: project_id, tenant: tenant_name
+def create_tenant_helper external_id
   tenant = {
-    name:        tenant_path,
     external_id: external_id
   }
 
@@ -155,4 +153,41 @@ end
 
 def project_path
   tenant_service.project_path project: project_id
+end
+
+if ENV["USE_CTS_STAGING_ENV"]
+  require "google/cloud/talent/v4"
+
+  ::Google::Cloud::Talent::V4::CompanyService::Client.configure do |config|
+    config.endpoint = "staging-jobs.googleapis.com"
+  end
+  ::Google::Cloud::Talent::V4::Completion::Client.configure do |config|
+    config.endpoint = "staging-jobs.googleapis.com"
+  end
+  ::Google::Cloud::Talent::V4::EventService::Client.configure do |config|
+    config.endpoint = "staging-jobs.googleapis.com"
+  end
+  ::Google::Cloud::Talent::V4::JobService::Client.configure do |config|
+    config.endpoint = "staging-jobs.googleapis.com"
+  end
+  ::Google::Cloud::Talent::V4::TenantService::Client.configure do |config|
+    config.endpoint = "staging-jobs.googleapis.com"
+  end
+
+  require "google/cloud/talent/v4beta1"
+  ::Google::Cloud::Talent::V4beta1::CompanyService::Client.configure do |config|
+    config.endpoint = "staging-jobs.googleapis.com"
+  end
+  ::Google::Cloud::Talent::V4beta1::Completion::Client.configure do |config|
+    config.endpoint = "staging-jobs.googleapis.com"
+  end
+  ::Google::Cloud::Talent::V4beta1::EventService::Client.configure do |config|
+    config.endpoint = "staging-jobs.googleapis.com"
+  end
+  ::Google::Cloud::Talent::V4beta1::JobService::Client.configure do |config|
+    config.endpoint = "staging-jobs.googleapis.com"
+  end
+  ::Google::Cloud::Talent::V4beta1::TenantService::Client.configure do |config|
+    config.endpoint = "staging-jobs.googleapis.com"
+  end
 end

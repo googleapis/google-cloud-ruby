@@ -25,7 +25,7 @@ def sample_create_client_event project_id,
   event_client = Google::Cloud::Talent.event_service
 
   # project_id = "Your Google Cloud Project ID"
-  # tenant_id = "Your Tenant ID (using tenancy is optional)"
+  # tenant_id = "Your Tenant ID (using tenancy is required)"
   parent = event_client.tenant_path project: project_id, tenant: tenant_id
 
   # The timestamp of the event as seconds of UTC time since Unix epoch
@@ -62,7 +62,7 @@ require "optparse"
 if $PROGRAM_NAME == __FILE__
 
   project_id = "Your Google Cloud Project ID"
-  tenant_id = "Your Tenant ID (using tenancy is optional)"
+  tenant_id = "Your Tenant ID (using tenancy is required)"
   request_id = "[request_id from ResponseMetadata]"
   event_id = "[Set this to a unique identifier]"
   job_one = "The name of a job"
