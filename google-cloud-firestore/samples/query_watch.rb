@@ -14,13 +14,14 @@
 
 require "google/cloud/firestore"
 
-def listen_document project_id:, collection_path: "cities"
+def listen_document project_id:, collection_path: "cities", document_path: "SF"
   # project_id = "Your Google Cloud Project ID"
   # collection_path = "cities"
+  # document_path = "SF"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_listen_document]
-  doc_ref = firestore.col(collection_path).doc "SF"
+  doc_ref = firestore.col(collection_path).doc document_path
   snapshots = []
 
   # Watch the document.
@@ -31,8 +32,6 @@ def listen_document project_id:, collection_path: "cities"
   end
   # [END fs_listen_document]
 
-  sleep 1
-
   # Create the document.
   doc_ref.set(
     name:       "San Francisco",
@@ -41,8 +40,9 @@ def listen_document project_id:, collection_path: "cities"
     capital:    false,
     population: 860_000
   )
+
   # Wait for the callback.
-  wait_until { snapshots.count == 1 }
+  wait_until { !snapshots.empty? }
 
   # [START fs_detach_listener]
   listener.stop
@@ -56,7 +56,9 @@ def listen_changes project_id:, collection_path: "cities"
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_listen_changes]
   query = firestore.col(collection_path).where :state, :==, "CA"
-  snapshots = []
+  added = []
+  modified = []
+  removed = []
 
   # Watch the collection query.
   listener = query.listen do |snapshot|
@@ -66,19 +68,19 @@ def listen_changes project_id:, collection_path: "cities"
       # Process the snapshot.
       if change.added?
         puts "New city: #{change.doc.document_id}"
+        added << snapshot
       elsif change.modified?
         puts "Modified city: #{change.doc.document_id}"
+        modified << snapshot
       elsif change.removed?
         puts "Removed city: #{change.doc.document_id}"
-        snapshots << snapshot
+        removed << snapshot
       end
     end
   end
   # [END fs_listen_changes]
 
   mtv_doc = firestore.col(collection_path).doc("MTV")
-
-  sleep 1
 
   # Create the document.
   mtv_doc.set(
@@ -89,7 +91,7 @@ def listen_changes project_id:, collection_path: "cities"
     population: 80_000
   )
 
-  sleep 1
+  wait_until { !added.empty? }
 
   # Update the document.
   mtv_doc.update(
@@ -100,13 +102,13 @@ def listen_changes project_id:, collection_path: "cities"
     population: 90_000
   )
 
-  sleep 1
+  wait_until { !modified.empty? }
 
   # Delete the document.
   mtv_doc.delete exists: true
 
-  # Wait for the callback that captures the deletion.
-  wait_until { snapshots.count == 1 }
+  wait_until { !removed.empty? }
+
   listener.stop
 end
 
@@ -128,6 +130,7 @@ def listen_errors project_id:, collection_path: "cities"
     puts "Listen failed: #{error.message}"
   end
   # [END fs_listen_errors]
+
   listener.stop
 end
 
@@ -160,15 +163,17 @@ def listen_multiple project_id:, collection_path: "cities"
     capital:    false,
     population: 860_000
   )
+
   # Wait for the callback.
-  wait_until { snapshots.count == 1 }
+  wait_until { !snapshots.empty? }
+
   listener.stop
 end
 
 def wait_until &block
   wait_count = 0
   until block.call
-    raise "wait_until criterial was not met" if wait_count > 200
+    raise "wait_until criteria was not met." if wait_count > 200
     wait_count += 1
     sleep 0.1
   end

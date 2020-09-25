@@ -18,19 +18,24 @@ require_relative "../query_watch.rb"
 describe "Google Cloud Firestore API samples - Query Data" do
   before :all do
     @firestore_project = ENV["FIRESTORE_PROJECT"]
+  end
+
+  before do
     @collection_path = random_name "cities"
   end
 
-  after :all do
+  after do
     delete_collection_test collection_name: @collection_path, project_id: ENV["FIRESTORE_PROJECT"]
   end
 
   it "listen_document" do
+    document_path = random_name "SF"
+
     out, _err = capture_io do
-      listen_document project_id: @firestore_project, collection_path: @collection_path
+      listen_document project_id: @firestore_project, collection_path: @collection_path, document_path: document_path
     end
 
-    assert_includes out, "Received document snapshot: SF"
+    assert_includes out, "Received document snapshot: #{document_path}"
   end
 
   it "listen_changes" do
