@@ -15,6 +15,7 @@
 require_relative "helper"
 require_relative "../files.rb"
 require_relative "../storage_compose_file.rb"
+require_relative "../storage_change_file_storage_class.rb"
 
 describe "Files Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -457,5 +458,16 @@ describe "Files Snippets" do
     end
 
     refute bucket.file(remote_file_name).temporary_hold?
+  end
+
+  it "change_file_storage_class" do
+    bucket.create_file local_file, remote_file_name
+    assert_equal "STANDARD", bucket.file(remote_file_name).storage_class
+
+    assert_output "File #{remote_file_name} in bucket #{bucket.name} had its storage class set to NEARLINE\n" do
+      change_file_storage_class bucket_name: bucket.name, file_name: remote_file_name
+    end
+
+    assert_equal "NEARLINE", bucket.file(remote_file_name).storage_class
   end
 end
