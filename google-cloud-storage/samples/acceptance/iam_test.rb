@@ -14,10 +14,13 @@
 
 require_relative "helper"
 require_relative "../iam.rb"
+require_relative "../storage_set_bucket_public_iam.rb"
 
 describe "IAM Snippets" do
   let(:role)                  { "roles/storage.admin" }
   let(:member)                { "user:test@test.com" }
+  let(:role_public)           { "roles/storage.objectViewer" }
+  let(:member_public)         { "allUsers" }
   let(:bucket) { @bucket }
 
   before :all do
@@ -57,6 +60,24 @@ describe "IAM Snippets" do
 
     refute bucket.policy.roles.none? do |p_role, p_members|
       p_role == role && p_members.includes?(member)
+    end
+  end
+
+  it "set_bucket_public_iam" do
+    # set_bucket_public_iam
+    assert_output "Bucket #{bucket.name} is now publicly readable\n" do
+      set_bucket_public_iam bucket_name: bucket.name,
+                            role:        role_public,
+                            member:      member_public
+    end
+
+    assert bucket.policy.roles.any? do |p_role, p_members|
+      p_role == role_public && p_members.includes?(member_public)
+    end
+
+    # teardown
+    capture_io do
+      remove_bucket_iam_member bucket_name: bucket.name, role: role_public, member: member_public
     end
   end
 
