@@ -17,14 +17,6 @@ require "google/cloud/storage"
 require "minitest/autorun"
 require "securerandom"
 
-def create_bucket_helper bucket_name
-  storage_client = Google::Cloud::Storage.new
-
-  retry_resource_exhaustion do
-    return storage_client.create_bucket bucket_name
-  end
-end
-
 def delete_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new
 
@@ -37,14 +29,9 @@ def delete_bucket_helper bucket_name
   end
 end
 
-def create_file_and_upload bucket_name, file_name, text_content
-  storage_client = Google::Cloud::Storage.new
-  bucket         = storage_client.bucket bucket_name
-  return unless bucket
-
+def create_file_and_upload bucket, file_name, text_content
   local_file = Tempfile.new "language-sample-test-file"
   File.write local_file.path, text_content
-
   bucket.create_file local_file.path, file_name
 ensure
   local_file.close
@@ -54,15 +41,57 @@ end
 def retry_resource_exhaustion
   5.times do
     begin
-      yield
-      return
+      return yield
     rescue Google::Cloud::ResourceExhaustedError => e
       puts "\n#{e} Gonna try again"
       sleep rand(1..3)
     rescue StandardError => e
       puts "\n#{e}"
-      return
+      raise e
     end
   end
   raise Google::Cloud::ResourceExhaustedError, "Maybe take a break from creating and deleting buckets for a bit"
+end
+
+def positive_text
+  "Happy love it. I am glad, pleased, and delighted."
+end
+
+def negative_text
+  "I hate it. I am mad, annoyed, and irritated."
+end
+
+def entities_text
+  "Alice wrote a book. Bob likes the book."
+end
+
+def syntax_text
+  "I am Fox Tall. The porcupine stole my pickup truck."
+end
+
+def entities_sentiment_text
+  "Plums are great. Prunes are bad."
+end
+
+def classification_text
+  "Google, headquartered in Mountain View, unveiled the new Android phone " \
+  "at the Consumer Electronic Show Sundar Pichai said in his keynote that" \
+  "users love their new Android phones."
+end
+
+def bucket_name
+  "ruby_language_sample_fixtures"
+end
+
+def create_fixtures_bucket
+  storage_client = Google::Cloud::Storage.new
+  bucket = retry_resource_exhaustion do
+    storage_client.create_bucket bucket_name
+  end
+  create_file_and_upload bucket, "positive.txt", positive_text
+  create_file_and_upload bucket, "negative.txt", negative_text
+  create_file_and_upload bucket, "entities.txt", entities_text
+  create_file_and_upload bucket, "syntax.txt", syntax_text
+  create_file_and_upload bucket, "classify.txt", classification_text
+  create_file_and_upload bucket, "entity_sentiment.txt", entities_sentiment_text
 end
