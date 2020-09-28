@@ -15,6 +15,7 @@
 require_relative "helper"
 require_relative "../buckets.rb"
 require_relative "../storage_bucket_delete_default_kms_key.rb"
+require_relative "../storage_change_default_storage_class.rb"
 require_relative "../storage_cors_configuration.rb"
 require_relative "../storage_define_bucket_website_configuration.rb"
 require_relative "../storage_disable_bucket_lifecycle_management.rb"
@@ -304,6 +305,21 @@ describe "Buckets Snippets" do
       assert_output "Default event-based hold is not enabled for #{bucket.name}.\n" do
         get_default_event_based_hold bucket_name: bucket.name
       end
+    end
+  end
+
+  describe "storage_class" do
+    it "change_default_storage_class" do
+      assert_equal "STANDARD", bucket.storage_class
+
+      assert_output "Default storage class for bucket #{bucket.name} has been set to COLDLINE\n" do
+        change_default_storage_class bucket_name: bucket.name
+      end
+
+      bucket.refresh!
+      assert_equal "COLDLINE", bucket.storage_class
+      # teardown
+      bucket.storage_class = "STANDARD"
     end
   end
 
