@@ -14,11 +14,13 @@
 
 require_relative "helper"
 require_relative "../buckets.rb"
+require_relative "../storage_cors_configuration.rb"
 require_relative "../storage_define_bucket_website_configuration.rb"
-require_relative "../storage_enable_bucket_lifecycle_management.rb"
-require_relative "../storage_enable_versioning.rb"
 require_relative "../storage_disable_bucket_lifecycle_management.rb"
 require_relative "../storage_disable_versioning.rb"
+require_relative "../storage_enable_bucket_lifecycle_management.rb"
+require_relative "../storage_enable_versioning.rb"
+require_relative "../storage_remove_cors_configuration.rb"
 
 describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -90,6 +92,33 @@ describe "Buckets Snippets" do
 
       delete_bucket_helper bucket_name
       delete_bucket_helper secondary_bucket_name
+    end
+  end
+
+  describe "cors" do
+    it "cors_configuration, remove_cors_configuration" do
+      bucket.cors { |c| c.clear }
+      assert bucket.cors.empty?
+
+      # cors_configuration
+      assert_output "Set CORS policies for bucket #{bucket.name}\n" do
+        cors_configuration bucket_name: bucket.name
+      end
+
+      bucket.refresh!
+      assert_equal 1, bucket.cors.count
+      rule = bucket.cors.first
+      assert_equal ["*"], rule.origin
+      assert_equal ["PUT", "POST"], rule.methods
+      assert_equal ["Content-Type", "x-goog-resumable"], rule.headers
+      assert_equal 3600, rule.max_age
+
+      # remove_cors_configuration
+      assert_output "Remove CORS policies for bucket #{bucket.name}\n" do
+        remove_cors_configuration bucket_name: bucket.name
+      end
+      bucket.refresh!
+      assert bucket.cors.empty?
     end
   end
 
