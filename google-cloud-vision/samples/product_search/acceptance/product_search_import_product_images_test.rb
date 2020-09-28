@@ -30,7 +30,7 @@ describe "Import product sets and retrieve reference images", :product_search do
     product_set = nil
     error = nil
     5.times do
-      next if product_set
+      break if product_set
       begin
         output = `ruby #{snippet_filepath} #{@project_id} #{@location}`
 
