@@ -27,9 +27,5 @@ describe "Detect Labels" do
     assert_output(/traffic sign/i) do
       detect_labels_gcs image_path: gs_url("otter_crossing.jpg")
     end
-
-    assert_output(/suit/i) do
-      detect_labels_gcs_migration
-    end
   end
 end

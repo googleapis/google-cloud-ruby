@@ -18,5 +18,6 @@ gem "google-cloud-vision"
 
 group :test do
   gem "minitest", "~> 5.13"
+  gem "minitest-focus", "~> 1.1"
   gem "rake"
 end
