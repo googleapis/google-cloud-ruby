@@ -20,7 +20,6 @@ describe "Import product sets and retrieve reference images", :product_search do
     @temp_product_sets << @product_set_id
   end
 
-  focus
   it "imports product sets and retrieve reference images" do
     snippet_filepath = get_snippet_filepath __FILE__
     product_images = {
@@ -45,7 +44,6 @@ describe "Import product sets and retrieve reference images", :product_search do
         product_set = @client.get_product_set name: product_set_path
       rescue Google::Cloud::NotFoundError => e
         error = e
-        puts "failure"
         sleep rand(10..60)
       end
     end
