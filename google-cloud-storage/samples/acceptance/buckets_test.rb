@@ -14,9 +14,10 @@
 
 require_relative "helper"
 require_relative "../buckets.rb"
+require_relative "../storage_define_bucket_website_configuration.rb"
 require_relative "../storage_enable_bucket_lifecycle_management.rb"
-require_relative "../storage_disable_bucket_lifecycle_management.rb"
 require_relative "../storage_enable_versioning.rb"
+require_relative "../storage_disable_bucket_lifecycle_management.rb"
 require_relative "../storage_disable_versioning.rb"
 
 describe "Buckets Snippets" do
@@ -284,6 +285,26 @@ describe "Buckets Snippets" do
       end
       bucket.refresh!
       refute bucket.versioning?
+    end
+  end
+
+  describe "website_configuration" do
+    let(:main_page_suffix) { "index.html" }
+    let(:not_found_page) { "404.html" }
+
+    it "define_bucket_website_configuration" do
+      expected_out = "Static website bucket #{bucket.name} is set up to use #{main_page_suffix} as the index page " \
+                     "and #{not_found_page} as the 404 page\n"
+
+      assert_output expected_out do
+        define_bucket_website_configuration bucket_name:      bucket.name,
+                                            main_page_suffix: main_page_suffix,
+                                            not_found_page:   not_found_page
+      end
+
+      bucket.refresh!
+      assert_equal main_page_suffix, bucket.website_main
+      assert_equal not_found_page, bucket.website_404
     end
   end
 end
