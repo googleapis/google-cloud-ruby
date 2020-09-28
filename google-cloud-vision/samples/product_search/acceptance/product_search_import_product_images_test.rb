@@ -20,6 +20,7 @@ describe "Import product sets and retrieve reference images", :product_search do
     @temp_product_sets << @product_set_id
   end
 
+  focus
   it "imports product sets and retrieve reference images" do
     snippet_filepath = get_snippet_filepath __FILE__
     product_images = {
@@ -27,16 +28,32 @@ describe "Import product sets and retrieve reference images", :product_search do
       "fake_product_id_for_testing_2" => "shoes_2.jpg"
     }
 
-    output = `ruby #{snippet_filepath} #{@project_id} #{@location}`
+    product_set = nil
+    error = nil
+    5.times do
+      next if product_set
+      begin
+        output = `ruby #{snippet_filepath} #{@project_id} #{@location}`
 
-    # Verify console output
-    product_images.values.each do |image_uri|
-      _(output).must_include image_uri
+        # Verify console output
+        product_images.values.each do |image_uri|
+          _(output).must_include image_uri
+        end
+
+        # Verify project set existence
+        product_set_path = @client.product_set_path project: @project_id, location: @location, product_set: @product_set_id
+        product_set = @client.get_product_set name: product_set_path
+      rescue Google::Cloud::NotFoundError => e
+        error = e
+        puts "failure"
+        sleep rand(10..60)
+      end
     end
 
-    # Verify project set existence
-    product_set_path = @client.product_set_path project: @project_id, location: @location, product_set: @product_set_id
-    product_set = @client.get_product_set name: product_set_path
+    if error && !product_set
+      raise error
+    end
+
     assert product_set
 
     # Verify product reference image URIs
