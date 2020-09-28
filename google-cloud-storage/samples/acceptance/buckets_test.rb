@@ -16,6 +16,8 @@ require_relative "helper"
 require_relative "../buckets.rb"
 require_relative "../storage_enable_bucket_lifecycle_management.rb"
 require_relative "../storage_disable_bucket_lifecycle_management.rb"
+require_relative "../storage_enable_versioning.rb"
+require_relative "../storage_disable_versioning.rb"
 
 describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -262,6 +264,26 @@ describe "Buckets Snippets" do
       assert_output "Default event-based hold is not enabled for #{bucket.name}.\n" do
         get_default_event_based_hold bucket_name: bucket.name
       end
+    end
+  end
+
+  describe "versioning" do
+    it "enable_versioning, disable_versioning" do
+      # enable_versioning
+      bucket.versioning = false
+
+      assert_output "Versioning was enabled for bucket #{bucket.name}\n" do
+        enable_versioning bucket_name: bucket.name
+      end
+      bucket.refresh!
+      assert bucket.versioning?
+
+      # disable_versioning
+      assert_output "Versioning was disabled for bucket #{bucket.name}\n" do
+        disable_versioning bucket_name: bucket.name
+      end
+      bucket.refresh!
+      refute bucket.versioning?
     end
   end
 end
