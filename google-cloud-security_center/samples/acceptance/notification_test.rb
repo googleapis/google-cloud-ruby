@@ -52,7 +52,7 @@ describe "Google Cloud Security Center Notifications Sample" do
         # concurrently, I suspect it happens when multiple fixtures are being
         # created simultaneously. Retry with a random delay if this happens.
         puts "Got precondition error when creating fixture #{@config_id}"
-        sleep(rand * 5 + 3)
+        sleep rand(2.0..7.0)
         last_error = e
       end
     end
