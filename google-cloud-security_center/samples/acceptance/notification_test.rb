@@ -38,6 +38,27 @@ describe "Google Cloud Security Center Notifications Sample" do
     puts "Config #{@config_path} already deleted"
   end
 
+  def create_fixture!
+    last_error = nil
+    3.times do
+      begin
+        create_notification_config org_id:       @org_id,
+                                   config_id:    @config_id,
+                                   pubsub_topic: @pubsub_topic
+        return
+      rescue Google::Cloud::FailedPreconditionError => e
+        # Creating this fixture occasionally raises a precondition error.
+        # I'm not certain why, but because we can have tests running
+        # concurrently, I suspect it happens when multiple fixtures are being
+        # created simultaneously. Retry with a random delay if this happens.
+        puts "Got precondition error when creating fixture #{@config_id}"
+        sleep rand(2.0..7.0)
+        last_error = e
+      end
+    end
+    raise last_error
+  end
+
   it "creates notification config" do
     assert_output(/Created notification config #{@config_id}/) do
       create_notification_config org_id:       @org_id,
@@ -50,9 +71,7 @@ describe "Google Cloud Security Center Notifications Sample" do
   end
 
   it "updates notification config" do
-    create_notification_config org_id:       @org_id,
-                               config_id:    @config_id,
-                               pubsub_topic: @pubsub_topic
+    create_fixture!
 
     assert_output(/Updated description/) do
       update_notification_config org_id:      @org_id,
@@ -62,9 +81,7 @@ describe "Google Cloud Security Center Notifications Sample" do
   end
 
   it "deletes notification config" do
-    create_notification_config org_id:       @org_id,
-                               config_id:    @config_id,
-                               pubsub_topic: @pubsub_topic
+    create_fixture!
 
     assert_output(/Deleted notification config #{@config_id}/) do
       delete_notification_config org_id:    @org_id,
@@ -73,9 +90,7 @@ describe "Google Cloud Security Center Notifications Sample" do
   end
 
   it "gets notification config" do
-    create_notification_config org_id:       @org_id,
-                               config_id:    @config_id,
-                               pubsub_topic: @pubsub_topic
+    create_fixture!
 
     assert_output(/#{@config_path}/) do
       get_notification_config org_id:    @org_id,
@@ -84,9 +99,7 @@ describe "Google Cloud Security Center Notifications Sample" do
   end
 
   it "lists notification configs" do
-    create_notification_config org_id:       @org_id,
-                               config_id:    @config_id,
-                               pubsub_topic: @pubsub_topic
+    create_fixture!
 
     assert_output(/#{@config_path}/) do
       list_notification_configs org_id: @org_id
