@@ -27,7 +27,7 @@ module Google
           ##
           # Client for the VideoIntelligenceService service.
           #
-          # Service that implements Google Cloud Video Intelligence API.
+          # Service that implements the Video Intelligence API.
           #
           class Client
             # @private
@@ -185,34 +185,37 @@ module Google
             #
             #   @param input_uri [::String]
             #     Input video location. Currently, only
-            #     [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
-            #     supported, which must be specified in the following format:
+            #     [Cloud Storage](https://cloud.google.com/storage/) URIs are
+            #     supported. URIs must be specified in the following format:
             #     `gs://bucket-id/object-id` (other URI formats return
-            #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For more information, see
-            #     [Request URIs](https://cloud.google.com/storage/docs/request-endpoints).
-            #     A video URI may include wildcards in `object-id`, and thus identify
-            #     multiple videos. Supported wildcards: '*' to match 0 or more characters;
+            #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For
+            #     more information, see [Request
+            #     URIs](https://cloud.google.com/storage/docs/request-endpoints). To identify
+            #     multiple videos, a video URI may include wildcards in the `object-id`.
+            #     Supported wildcards: '*' to match 0 or more characters;
             #     '?' to match 1 character. If unset, the input video should be embedded
-            #     in the request as `input_content`. If set, `input_content` should be unset.
+            #     in the request as `input_content`. If set, `input_content` must be unset.
             #   @param input_content [::String]
             #     The video data bytes.
-            #     If unset, the input video(s) should be specified via `input_uri`.
-            #     If set, `input_uri` should be unset.
+            #     If unset, the input video(s) should be specified via the `input_uri`.
+            #     If set, `input_uri` must be unset.
             #   @param features [::Array<::Google::Cloud::VideoIntelligence::V1::Feature>]
             #     Required. Requested video annotation features.
             #   @param video_context [::Google::Cloud::VideoIntelligence::V1::VideoContext, ::Hash]
             #     Additional video context and/or feature-specific parameters.
             #   @param output_uri [::String]
             #     Optional. Location where the output (in JSON format) should be stored.
-            #     Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
-            #     URIs are supported, which must be specified in the following format:
+            #     Currently, only [Cloud Storage](https://cloud.google.com/storage/)
+            #     URIs are supported. These must be specified in the following format:
             #     `gs://bucket-id/object-id` (other URI formats return
-            #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For more information, see
-            #     [Request URIs](https://cloud.google.com/storage/docs/request-endpoints).
+            #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For
+            #     more information, see [Request
+            #     URIs](https://cloud.google.com/storage/docs/request-endpoints).
             #   @param location_id [::String]
             #     Optional. Cloud region where annotation should take place. Supported cloud
-            #     regions: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region
-            #     is specified, a region will be determined based on video file location.
+            #     regions are: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no
+            #     region is specified, the region will be determined based on video file
+            #     location.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

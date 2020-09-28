@@ -25,20 +25,21 @@ module Google
         # @!attribute [rw] input_uri
         #   @return [::String]
         #     Input video location. Currently, only
-        #     [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
-        #     supported, which must be specified in the following format:
+        #     [Cloud Storage](https://cloud.google.com/storage/) URIs are
+        #     supported. URIs must be specified in the following format:
         #     `gs://bucket-id/object-id` (other URI formats return
-        #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For more information, see
-        #     [Request URIs](https://cloud.google.com/storage/docs/request-endpoints).
-        #     A video URI may include wildcards in `object-id`, and thus identify
-        #     multiple videos. Supported wildcards: '*' to match 0 or more characters;
+        #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For
+        #     more information, see [Request
+        #     URIs](https://cloud.google.com/storage/docs/request-endpoints). To identify
+        #     multiple videos, a video URI may include wildcards in the `object-id`.
+        #     Supported wildcards: '*' to match 0 or more characters;
         #     '?' to match 1 character. If unset, the input video should be embedded
-        #     in the request as `input_content`. If set, `input_content` should be unset.
+        #     in the request as `input_content`. If set, `input_content` must be unset.
         # @!attribute [rw] input_content
         #   @return [::String]
         #     The video data bytes.
-        #     If unset, the input video(s) should be specified via `input_uri`.
-        #     If set, `input_uri` should be unset.
+        #     If unset, the input video(s) should be specified via the `input_uri`.
+        #     If set, `input_uri` must be unset.
         # @!attribute [rw] features
         #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::Feature>]
         #     Required. Requested video annotation features.
@@ -48,16 +49,18 @@ module Google
         # @!attribute [rw] output_uri
         #   @return [::String]
         #     Optional. Location where the output (in JSON format) should be stored.
-        #     Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
-        #     URIs are supported, which must be specified in the following format:
+        #     Currently, only [Cloud Storage](https://cloud.google.com/storage/)
+        #     URIs are supported. These must be specified in the following format:
         #     `gs://bucket-id/object-id` (other URI formats return
-        #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For more information, see
-        #     [Request URIs](https://cloud.google.com/storage/docs/request-endpoints).
+        #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For
+        #     more information, see [Request
+        #     URIs](https://cloud.google.com/storage/docs/request-endpoints).
         # @!attribute [rw] location_id
         #   @return [::String]
         #     Optional. Cloud region where annotation should take place. Supported cloud
-        #     regions: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region
-        #     is specified, a region will be determined based on video file location.
+        #     regions are: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no
+        #     region is specified, the region will be determined based on video file
+        #     location.
         class AnnotateVideoRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -87,6 +90,9 @@ module Google
         # @!attribute [rw] text_detection_config
         #   @return [::Google::Cloud::VideoIntelligence::V1::TextDetectionConfig]
         #     Config for TEXT_DETECTION.
+        # @!attribute [rw] person_detection_config
+        #   @return [::Google::Cloud::VideoIntelligence::V1::PersonDetectionConfig]
+        #     Config for PERSON_DETECTION.
         # @!attribute [rw] object_tracking_config
         #   @return [::Google::Cloud::VideoIntelligence::V1::ObjectTrackingConfig]
         #     Config for OBJECT_TRACKING.
@@ -103,9 +109,9 @@ module Google
         #     If unspecified, defaults to `SHOT_MODE`.
         # @!attribute [rw] stationary_camera
         #   @return [::Boolean]
-        #     Whether the video has been shot from a stationary (i.e. non-moving) camera.
-        #     When set to true, might improve detection accuracy for moving objects.
-        #     Should be used with `SHOT_AND_FRAME_MODE` enabled.
+        #     Whether the video has been shot from a stationary (i.e., non-moving)
+        #     camera. When set to true, might improve detection accuracy for moving
+        #     objects. Should be used with `SHOT_AND_FRAME_MODE` enabled.
         # @!attribute [rw] model
         #   @return [::String]
         #     Model to use for label detection.
@@ -117,15 +123,15 @@ module Google
         #     frame-level detection. If not set, it is set to 0.4 by default. The valid
         #     range for this threshold is [0.1, 0.9]. Any value set outside of this
         #     range will be clipped.
-        #     Note: for best results please follow the default threshold. We will update
+        #     Note: For best results, follow the default threshold. We will update
         #     the default threshold everytime when we release a new model.
         # @!attribute [rw] video_confidence_threshold
         #   @return [::Float]
         #     The confidence threshold we perform filtering on the labels from
-        #     video-level and shot-level detections. If not set, it is set to 0.3 by
+        #     video-level and shot-level detections. If not set, it's set to 0.3 by
         #     default. The valid range for this threshold is [0.1, 0.9]. Any value set
         #     outside of this range will be clipped.
-        #     Note: for best results please follow the default threshold. We will update
+        #     Note: For best results, follow the default threshold. We will update
         #     the default threshold everytime when we release a new model.
         class LabelDetectionConfig
           include ::Google::Protobuf::MessageExts
@@ -162,8 +168,32 @@ module Google
         #     "builtin/latest".
         # @!attribute [rw] include_bounding_boxes
         #   @return [::Boolean]
-        #     Whether bounding boxes be included in the face annotation output.
+        #     Whether bounding boxes are included in the face annotation output.
+        # @!attribute [rw] include_attributes
+        #   @return [::Boolean]
+        #     Whether to enable face attributes detection, such as glasses, dark_glasses,
+        #     mouth_open etc. Ignored if 'include_bounding_boxes' is set to false.
         class FaceDetectionConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Config for PERSON_DETECTION.
+        # @!attribute [rw] include_bounding_boxes
+        #   @return [::Boolean]
+        #     Whether bounding boxes are included in the person detection annotation
+        #     output.
+        # @!attribute [rw] include_pose_landmarks
+        #   @return [::Boolean]
+        #     Whether to enable pose landmarks detection. Ignored if
+        #     'include_bounding_boxes' is set to false.
+        # @!attribute [rw] include_attributes
+        #   @return [::Boolean]
+        #     Whether to enable person attributes detection, such as cloth color (black,
+        #     blue, etc), type (coat, dress, etc), pattern (plain, floral, etc), hair,
+        #     etc.
+        #     Ignored if 'include_bounding_boxes' is set to false.
+        class PersonDetectionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -244,7 +274,7 @@ module Google
         #     API](https://developers.google.com/knowledge-graph/).
         # @!attribute [rw] description
         #   @return [::String]
-        #     Textual description, e.g. `Fixed-gear bicycle`.
+        #     Textual description, e.g., `Fixed-gear bicycle`.
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Language code for `description` in BCP-47 format.
@@ -260,15 +290,18 @@ module Google
         # @!attribute [rw] category_entities
         #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::Entity>]
         #     Common categories for the detected entity.
-        #     E.g. when the label is `Terrier` the category is likely `dog`. And in some
-        #     cases there might be more than one categories e.g. `Terrier` could also be
-        #     a `pet`.
+        #     For example, when the label is `Terrier`, the category is likely `dog`. And
+        #     in some cases there might be more than one categories e.g., `Terrier` could
+        #     also be a `pet`.
         # @!attribute [rw] segments
         #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::LabelSegment>]
         #     All video segments where a label was detected.
         # @!attribute [rw] frames
         #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::LabelFrame>]
         #     All video frames where a label was detected.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Feature version.
         class LabelAnnotation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -293,6 +326,9 @@ module Google
         # @!attribute [rw] frames
         #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::ExplicitContentFrame>]
         #     All video frames where explicit content was detected.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Feature version.
         class ExplicitContentAnnotation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -318,6 +354,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Face detection annotation.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Feature version.
+        class FaceDetectionAnnotation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Person detection annotation per video.
+        # @!attribute [rw] tracks
+        #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::Track>]
+        #     The detected tracks of a person.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Feature version.
+        class PersonDetectionAnnotation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Video segment level annotation results for face detection.
         # @!attribute [rw] segment
         #   @return [::Google::Cloud::VideoIntelligence::V1::VideoSegment]
@@ -327,7 +384,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Video frame level annotation results for face detection.
+        # Deprecated. No effect.
         # @!attribute [rw] normalized_bounding_boxes
         #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::NormalizedBoundingBox>]
         #     Normalized Bounding boxes in a frame.
@@ -342,7 +399,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Face annotation.
+        # Deprecated. No effect.
         # @!attribute [rw] thumbnail
         #   @return [::String]
         #     Thumbnail of a representative face view (in JPEG format).
@@ -399,7 +456,7 @@ module Google
         # A generic detected attribute represented by name in string format.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of the attribute, i.e. glasses, dark_glasses, mouth_open etc.
+        #     The name of the attribute, for example, glasses, dark_glasses, mouth_open.
         #     A full list of supported type names will be provided in the document.
         # @!attribute [rw] confidence
         #   @return [::Float]
@@ -417,7 +474,7 @@ module Google
         # location.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of this landmark, i.e. left_hand, right_shoulder.
+        #     The name of this landmark, for example, left_hand, right_shoulder.
         # @!attribute [rw] point
         #   @return [::Google::Cloud::VideoIntelligence::V1::NormalizedVertex]
         #     The 2D point of the detected landmark using the normalized image
@@ -434,17 +491,17 @@ module Google
         # @!attribute [rw] input_uri
         #   @return [::String]
         #     Video file location in
-        #     [Google Cloud Storage](https://cloud.google.com/storage/).
+        #     [Cloud Storage](https://cloud.google.com/storage/).
         # @!attribute [rw] segment
         #   @return [::Google::Cloud::VideoIntelligence::V1::VideoSegment]
         #     Video segment on which the annotation is run.
         # @!attribute [rw] segment_label_annotations
         #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::LabelAnnotation>]
-        #     Topical label annotations on video level or user specified segment level.
+        #     Topical label annotations on video level or user-specified segment level.
         #     There is exactly one element for each unique label.
         # @!attribute [rw] segment_presence_label_annotations
         #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::LabelAnnotation>]
-        #     Presence label annotations on video level or user specified segment level.
+        #     Presence label annotations on video level or user-specified segment level.
         #     There is exactly one element for each unique label. Compared to the
         #     existing topical `segment_label_annotations`, this field presents more
         #     fine-grained, segment-level labels detected in video content and is made
@@ -467,7 +524,10 @@ module Google
         #     There is exactly one element for each unique label.
         # @!attribute [rw] face_annotations
         #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::FaceAnnotation>]
-        #     Face annotations. There is exactly one element for each unique face.
+        #     Deprecated. Please use `face_detection_annotations` instead.
+        # @!attribute [rw] face_detection_annotations
+        #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::FaceDetectionAnnotation>]
+        #     Face detection annotations.
         # @!attribute [rw] shot_annotations
         #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::VideoSegment>]
         #     Shot annotations. Each shot is represented as a video segment.
@@ -488,6 +548,9 @@ module Google
         # @!attribute [rw] logo_recognition_annotations
         #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::LogoRecognitionAnnotation>]
         #     Annotations for list of logos detected, tracked and recognized in video.
+        # @!attribute [rw] person_detection_annotations
+        #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::PersonDetectionAnnotation>]
+        #     Person detection annotations.
         # @!attribute [rw] error
         #   @return [::Google::Rpc::Status]
         #     If set, indicates an error. Note that for a single `AnnotateVideoRequest`
@@ -512,7 +575,7 @@ module Google
         # @!attribute [rw] input_uri
         #   @return [::String]
         #     Video file location in
-        #     [Google Cloud Storage](https://cloud.google.com/storage/).
+        #     [Cloud Storage](https://cloud.google.com/storage/).
         # @!attribute [rw] progress_percent
         #   @return [::Integer]
         #     Approximate percentage processed thus far. Guaranteed to be
@@ -526,11 +589,11 @@ module Google
         # @!attribute [rw] feature
         #   @return [::Google::Cloud::VideoIntelligence::V1::Feature]
         #     Specifies which feature is being tracked if the request contains more than
-        #     one features.
+        #     one feature.
         # @!attribute [rw] segment
         #   @return [::Google::Cloud::VideoIntelligence::V1::VideoSegment]
         #     Specifies which segment is being tracked if the request contains more than
-        #     one segments.
+        #     one segment.
         class VideoAnnotationProgress
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -589,14 +652,14 @@ module Google
         #     the top alternative of the recognition result using a speaker_tag provided
         #     in the WordInfo.
         #     Note: When this is true, we send all the words from the beginning of the
-        #     audio for the top alternative in every consecutive responses.
+        #     audio for the top alternative in every consecutive response.
         #     This is done in order to improve our speaker tags as our models learn to
         #     identify the speakers in the conversation over time.
         # @!attribute [rw] diarization_speaker_count
         #   @return [::Integer]
-        #     Optional. If set, specifies the estimated number of speakers in the conversation.
-        #     If not set, defaults to '2'.
-        #     Ignored unless enable_speaker_diarization is set to true.
+        #     Optional. If set, specifies the estimated number of speakers in the
+        #     conversation. If not set, defaults to '2'. Ignored unless
+        #     enable_speaker_diarization is set to true.
         # @!attribute [rw] enable_word_confidence
         #   @return [::Boolean]
         #     Optional. If `true`, the top result includes a list of words and the
@@ -631,9 +694,9 @@ module Google
         #     ranked by the recognizer.
         # @!attribute [r] language_code
         #   @return [::String]
-        #     Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of
-        #     the language in this result. This language code was detected to have the
-        #     most likelihood of being spoken in the audio.
+        #     Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+        #     language tag of the language in this result. This language code was
+        #     detected to have the most likelihood of being spoken in the audio.
         class SpeechTranscription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -654,8 +717,8 @@ module Google
         # @!attribute [r] words
         #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::WordInfo>]
         #     Output only. A list of word-specific information for each recognized word.
-        #     Note: When `enable_speaker_diarization` is true, you will see all the words
-        #     from the beginning of the audio.
+        #     Note: When `enable_speaker_diarization` is set to true, you will see all
+        #     the words from the beginning of the audio.
         class SpeechRecognitionAlternative
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -776,6 +839,9 @@ module Google
         # @!attribute [rw] segments
         #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::TextSegment>]
         #     All video segments where OCR detected text appears.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Feature version.
         class TextAnnotation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -819,6 +885,9 @@ module Google
         #     Non-streaming batch mode: it may be one or multiple ObjectTrackingFrame
         #     messages in frames.
         #     Streaming mode: it can only be one ObjectTrackingFrame message in frames.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Feature version.
         class ObjectTrackingAnnotation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -856,7 +925,7 @@ module Google
           # Explicit content detection.
           EXPLICIT_CONTENT_DETECTION = 3
 
-          # Human face detection and tracking.
+          # Human face detection.
           FACE_DETECTION = 4
 
           # Speech transcription.
@@ -870,6 +939,9 @@ module Google
 
           # Logo detection, tracking, and recognition.
           LOGO_RECOGNITION = 12
+
+          # Person detection.
+          PERSON_DETECTION = 14
         end
 
         # Label detection mode.
