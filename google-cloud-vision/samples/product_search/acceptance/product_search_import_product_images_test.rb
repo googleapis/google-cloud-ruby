@@ -40,7 +40,9 @@ describe "Import product sets and retrieve reference images", :product_search do
         end
 
         # Verify project set existence
-        product_set_path = @client.product_set_path project: @project_id, location: @location, product_set: @product_set_id
+        product_set_path = @client.product_set_path project:     @project_id,
+                                                    location:    @location,
+                                                    product_set: @product_set_id
         product_set = @client.get_product_set name: product_set_path
       rescue Google::Cloud::NotFoundError => e
         error = e
@@ -48,9 +50,7 @@ describe "Import product sets and retrieve reference images", :product_search do
       end
     end
 
-    if error && !product_set
-      raise error
-    end
+    raise error if error && !product_set
 
     assert product_set
 
