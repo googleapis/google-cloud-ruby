@@ -18,22 +18,6 @@ require_relative "../language_samples.rb"
 describe "Language Snippets" do
   parallelize_me!
 
-  let(:positive_text) { "Happy love it. I am glad, pleased, and delighted." }
-  let(:negative_text) { "I hate it. I am mad, annoyed, and irritated." }
-  let(:entities_text) { "Alice wrote a book. Bob likes the book." }
-  let(:syntax_text)   { "I am Fox Tall. The porcupine stole my pickup truck." }
-  let(:entities_sentiment_text) { "Plums are great. Prunes are bad." }
-  let :classification_text do
-    "Google, headquartered in Mountain View, unveiled the new Android phone "  \
-    "at the Consumer Electronic Show Sundar Pichai said in his keynote that"  \
-    "users love their new Android phones."
-  end
-  let :bucket do
-    create_bucket_helper "ruby_language_sample_#{SecureRandom.hex}"
-  end
-
-
-
   describe "sentiment_from_text" do
     it "puts the overall document sentiment" do
       assert_output(/Overall document sentiment: \(\d\.\d+\)$/) do
@@ -57,33 +41,23 @@ describe "Language Snippets" do
   end
 
   describe "sentiment_from_cloud_storage_file" do
-    after do
-      delete_bucket_helper bucket.name
-    end
-
     it "puts the overall document sentiment" do
-      create_file_and_upload bucket.name, "positive.txt", positive_text
-      create_file_and_upload bucket.name, "negative.txt", negative_text
-
       assert_output(/Overall document sentiment: \(\d\.\d+\)$/) do
-        sentiment_from_cloud_storage_file storage_path: "gs://#{bucket.name}/positive.txt"
+        sentiment_from_cloud_storage_file storage_path: "gs://#{bucket_name}/positive.txt"
       end
 
       assert_output(/Overall document sentiment: \(-\d\.\d+\)$/) do
-        sentiment_from_cloud_storage_file storage_path: "gs://#{bucket.name}/negative.txt"
+        sentiment_from_cloud_storage_file storage_path: "gs://#{bucket_name}/negative.txt"
       end
     end
 
     it "puts the sentence level document sentiment" do
-      create_file_and_upload bucket.name, "positive.txt", positive_text
-      create_file_and_upload bucket.name, "negative.txt", negative_text
-
       assert_output(/Happy love it.: \(\d\.\d+\)$/) do
-        sentiment_from_cloud_storage_file storage_path: "gs://#{bucket.name}/positive.txt"
+        sentiment_from_cloud_storage_file storage_path: "gs://#{bucket_name}/positive.txt"
       end
 
       assert_output(/I hate it.: \(-\d\.\d+\)$/) do
-        sentiment_from_cloud_storage_file storage_path: "gs://#{bucket.name}/negative.txt"
+        sentiment_from_cloud_storage_file storage_path: "gs://#{bucket_name}/negative.txt"
       end
     end
   end
@@ -107,15 +81,9 @@ describe "Language Snippets" do
   end
 
   describe "entities_from_cloud_storage_file" do
-    after do
-      delete_bucket_helper bucket.name
-    end
-
     it "correctly labels people within a cloud storage file" do
-      create_file_and_upload bucket.name, "entities.txt", entities_text
-
       out, _err = capture_io do
-        entities_from_cloud_storage_file storage_path: "gs://#{bucket.name}/entities.txt"
+        entities_from_cloud_storage_file storage_path: "gs://#{bucket_name}/entities.txt"
       end
       assert_includes out, "Alice PERSON"
       assert_includes out, "Bob PERSON"
@@ -137,15 +105,9 @@ describe "Language Snippets" do
   end
 
   describe "syntax_from_cloud_storage_file" do
-    after do
-      delete_bucket_helper bucket.name
-    end
-
     it "identifies the syntax of a cloud storage file" do
-      create_file_and_upload bucket.name, "syntax.txt", syntax_text
-
       out, _err = capture_io do
-        syntax_from_cloud_storage_file storage_path: "gs://#{bucket.name}/syntax.txt"
+        syntax_from_cloud_storage_file storage_path: "gs://#{bucket_name}/syntax.txt"
       end
 
       assert_includes out, "Sentences: 2"
@@ -167,15 +129,9 @@ describe "Language Snippets" do
   end
 
   describe "classify_text_from_cloud_storage_file" do
-    after do
-      delete_bucket_helper bucket.name
-    end
-
     it "classifies the content of a cloud storage file" do
-      create_file_and_upload bucket.name, "classify.txt", classification_text
-
       out, _err = capture_io do
-        classify_text_from_cloud_storage_file storage_path: "gs://#{bucket.name}/classify.txt"
+        classify_text_from_cloud_storage_file storage_path: "gs://#{bucket_name}/classify.txt"
       end
 
       assert_includes out, "Computers & Electronics"
@@ -193,15 +149,9 @@ describe "Language Snippets" do
   end
 
   describe "analyze_entity_sentiment_from_storage_file" do
-    after do
-      delete_bucket_helper bucket.name
-    end
-
     it "analyzes the sentiment for each entity in a storage file" do
-      create_file_and_upload bucket.name, "entity_sentiment.txt", entities_sentiment_text
-
       out, _err = capture_io do
-        analyze_entity_sentiment_from_storage_file storage_path: "gs://#{bucket.name}/entity_sentiment.txt"
+        analyze_entity_sentiment_from_storage_file storage_path: "gs://#{bucket_name}/entity_sentiment.txt"
       end
       assert_match(/Entity: Plums Sentiment: \d\.\d+/, out)
       assert_match(/Entity: Prunes Sentiment: -\d\.\d+/, out)
