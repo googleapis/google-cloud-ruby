@@ -14,6 +14,7 @@
 
 require_relative "helper"
 require_relative "../buckets.rb"
+require_relative "../storage_bucket_delete_default_kms_key.rb"
 require_relative "../storage_cors_configuration.rb"
 require_relative "../storage_define_bucket_website_configuration.rb"
 require_relative "../storage_disable_bucket_lifecycle_management.rb"
@@ -179,10 +180,11 @@ describe "Buckets Snippets" do
     end
   end
 
-  describe "enable_default_kms_key" do
-    it "sets a default kms key for a storage bucket" do
+  describe "default Cloud KMS encryption key" do
+    it "enable_default_kms_key, bucket_delete_default_kms_key" do
       refute bucket.default_kms_key
 
+      # enable_default_kms_key
       assert_output "Default KMS key for #{bucket.name} was set to #{kms_key}\n" do
         enable_default_kms_key bucket_name:     bucket.name,
                                default_kms_key: kms_key
@@ -190,6 +192,14 @@ describe "Buckets Snippets" do
 
       bucket.refresh!
       assert_equal bucket.default_kms_key, kms_key
+
+      # bucket_delete_default_kms_key
+      assert_output "Default KMS key was removed from #{bucket.name}\n" do
+        bucket_delete_default_kms_key bucket_name: bucket.name
+      end
+
+      bucket.refresh!
+      refute bucket.default_kms_key
     end
   end
 
