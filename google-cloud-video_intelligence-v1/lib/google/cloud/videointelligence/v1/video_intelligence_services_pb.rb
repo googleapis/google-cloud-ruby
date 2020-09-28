@@ -24,7 +24,7 @@ module Google
     module VideoIntelligence
       module V1
         module VideoIntelligenceService
-          # Service that implements Google Cloud Video Intelligence API.
+          # Service that implements the Video Intelligence API.
           class Service
 
             include GRPC::GenericService

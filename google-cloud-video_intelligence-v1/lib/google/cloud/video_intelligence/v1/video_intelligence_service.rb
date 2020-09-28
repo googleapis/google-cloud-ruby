@@ -31,7 +31,7 @@ module Google
     module VideoIntelligence
       module V1
         ##
-        # Service that implements Google Cloud Video Intelligence API.
+        # Service that implements the Video Intelligence API.
         #
         # To load this service and instantiate a client:
         #
