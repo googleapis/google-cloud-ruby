@@ -57,7 +57,7 @@ module Google
       #
       # ## About VideoIntelligenceService
       #
-      # Service that implements Google Cloud Video Intelligence API.
+      # Service that implements the Video Intelligence API.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
