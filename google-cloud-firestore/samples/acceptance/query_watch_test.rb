@@ -16,16 +16,13 @@ require_relative "helper.rb"
 require_relative "../query_watch.rb"
 
 describe "Google Cloud Firestore API samples - Query Data" do
-  before :all do
-    @firestore_project = ENV["FIRESTORE_PROJECT"]
-  end
-
   before do
+    @firestore_project = ENV["FIRESTORE_PROJECT"]
     @collection_path = random_name "cities"
   end
 
   after do
-    delete_collection_test collection_name: @collection_path, project_id: ENV["FIRESTORE_PROJECT"]
+    delete_collection_test collection_name: @collection_path, project_id: @firestore_project
   end
 
   it "listen_document" do

@@ -26,7 +26,6 @@ def listen_document project_id:, collection_path: "cities", document_path: "SF"
 
   # Watch the document.
   listener = doc_ref.listen do |snapshot|
-    # Process the snapshot.
     puts "Received document snapshot: #{snapshot.document_id}"
     snapshots << snapshot
   end
@@ -65,7 +64,6 @@ def listen_changes project_id:, collection_path: "cities"
     puts "Callback received query snapshot."
     puts "Current cities in California:"
     snapshot.changes.each do |change|
-      # Process the snapshot.
       if change.added?
         puts "New city: #{change.doc.document_id}"
         added << snapshot
@@ -120,7 +118,6 @@ def listen_errors project_id:, collection_path: "cities"
   # [START fs_listen_errors]
   listener = firestore.col(collection_path).listen do |snapshot|
     snapshot.changes.each do |change|
-      # Process the snapshot.
       puts "New city: #{change.doc.document_id}" if change.added?
     end
   end
@@ -148,7 +145,6 @@ def listen_multiple project_id:, collection_path: "cities"
     puts "Callback received query snapshot."
     puts "Current cities in California:"
     snapshot.docs.each do |doc|
-      # Process the snapshot.
       puts doc.document_id
       snapshots << snapshot
     end
