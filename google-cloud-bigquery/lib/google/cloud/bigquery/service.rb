@@ -536,7 +536,7 @@ module Google
             attr_accessor :backoff
           end
           self.retries = 5
-          self.reasons = ["rateLimitExceeded", "backendError"]
+          self.reasons = ["rateLimitExceeded", "backendError", "internalError"]
           self.backoff = lambda do |retries|
             # Max delay is 32 seconds
             # See "Back-off Requirements" here:
