@@ -23,7 +23,7 @@ Run the sample:
 
 ### Buckets
 
-**Usage:** `bundle exec ruby buckets.rb [command] [arguments]`
+**Usage:** `bundle exec ruby get_bucket_metadata.rb [arguments]`
 
 ```
 Usage: bundle exec ruby buckets.rb [command] [arguments]
@@ -33,11 +33,11 @@ Commands:
   enable_requester_pays               <bucket>                            Enable requester pays for a bucket
   disable_requester_pays              <bucket>                            Disable requester pays for a bucket
   check_requester_pays                <bucket>                            Check status of requester pays for a bucket
-  enable_default_kms_key              <bucket> <kms_key>                  Enable default KMS encryption for bucket
+  set_bucket_default_kms_key              <bucket> <kms_key>                  Enable default KMS encryption for bucket
   create                              <bucket>                            Create a new bucket with default storage class and location
   create                              <bucket> <location> <storage_class> Create a new bucket with specific storage class and location
   add_bucket_label                    <bucket> <label_key> <label_value>  Add bucket label
-  delete_bucket_label                 <bucket> <label_key>                Delete bucket label
+  remove_bucket_label                 <bucket> <label_key>                Delete bucket label
   delete                              <bucket>                            Delete bucket with the provided name
   set_retention_policy                <bucket> <retention_period>         Set a retention policy on bucket with a retention period determined in seconds
   remove_retention_policy             <bucket>                            Remove a retention policy from a bucket if policy is not locked

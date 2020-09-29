@@ -15,7 +15,10 @@
 require_relative "helper"
 require_relative "../files.rb"
 require_relative "../storage_compose_file.rb"
+require_relative "../storage_copy_file_archived_generation.rb"
 require_relative "../storage_change_file_storage_class.rb"
+require_relative "../storage_delete_file_archived_generation.rb"
+require_relative "../storage_list_file_archived_generations.rb"
 require_relative "../storage_object_csek_to_cmek.rb"
 
 describe "Files Snippets" do
@@ -46,15 +49,15 @@ describe "Files Snippets" do
   end
 
   it "list_files" do
-    bucket.create_file local_file, "foo.txt"
-    bucket.create_file local_file, "bar.txt"
+    bucket.create_file local_file, file_1_name
+    bucket.create_file local_file, file_2_name
 
     out, _err = capture_io do
       list_files bucket_name: bucket.name
     end
 
-    assert_match "foo.txt", out
-    assert_match "bar.txt", out
+    assert_match file_1_name, out
+    assert_match file_2_name, out
   end
 
   it "list_files_with_prefix" do
@@ -70,6 +73,18 @@ describe "Files Snippets" do
     assert_match "foo/data.txt", out
     refute_match "bar/file.txt", out
     refute_match "bar/data.txt", out
+  end
+
+  it "list_file_archived_generations" do
+    file_1 = bucket.create_file local_file, file_1_name
+    file_2 = bucket.create_file local_file, file_2_name
+
+    out, _err = capture_io do
+      list_file_archived_generations bucket_name: bucket.name
+    end
+
+    assert_match "#{file_1_name},#{file_1.generation}", out
+    assert_match "#{file_2_name},#{file_2.generation}", out
   end
 
   it "generate_encryption_key" do
@@ -195,8 +210,17 @@ describe "Files Snippets" do
     bucket.create_file local_file, remote_file_name
 
     assert_output "Deleted #{remote_file_name}\n" do
-      delete_file bucket_name: bucket.name,
-                  file_name:   remote_file_name
+      delete_file bucket_name: bucket.name, file_name: remote_file_name
+    end
+
+    assert_nil bucket.file remote_file_name
+  end
+
+  it "delete_file_archived_generation" do
+    file = bucket.create_file local_file, remote_file_name
+
+    assert_output "Generation #{file.generation} of file #{remote_file_name} was deleted from #{bucket.name}\n" do
+      delete_file_archived_generation bucket_name: bucket.name, file_name: remote_file_name, generation: file.generation
     end
 
     assert_nil bucket.file remote_file_name
@@ -309,6 +333,24 @@ describe "Files Snippets" do
                 source_file_name:   remote_file_name,
                 dest_bucket_name:   secondary_bucket.name,
                 dest_file_name:     remote_file_name
+    end
+
+    refute_nil bucket.file remote_file_name
+    refute_nil secondary_bucket.file remote_file_name
+  end
+
+  it "copy_file_archived_generation" do
+    file = bucket.create_file local_file, remote_file_name
+    assert_nil secondary_bucket.file remote_file_name
+
+    expected_out = "Generation #{file.generation} of the file #{remote_file_name} in bucket #{bucket.name} copied " \
+                   "to file #{remote_file_name} in bucket #{secondary_bucket.name}\n"
+    assert_output expected_out do
+      copy_file_archived_generation bucket_name:             bucket.name,
+                                    file_name:               remote_file_name,
+                                    destination_bucket_name: secondary_bucket.name,
+                                    destination_file_name:   remote_file_name,
+                                    generation:              file.generation
     end
 
     refute_nil bucket.file remote_file_name

@@ -13,16 +13,35 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../buckets.rb"
+require_relative "../storage_add_bucket_label.rb"
 require_relative "../storage_bucket_delete_default_kms_key.rb"
 require_relative "../storage_change_default_storage_class.rb"
 require_relative "../storage_cors_configuration.rb"
+require_relative "../storage_create_bucket.rb"
+require_relative "../storage_create_bucket_class_location.rb"
 require_relative "../storage_define_bucket_website_configuration.rb"
+require_relative "../storage_delete_bucket.rb"
 require_relative "../storage_disable_bucket_lifecycle_management.rb"
+require_relative "../storage_disable_default_event_based_hold.rb"
+require_relative "../storage_disable_requester_pays.rb"
+require_relative "../storage_disable_uniform_bucket_level_access.rb"
 require_relative "../storage_disable_versioning.rb"
 require_relative "../storage_enable_bucket_lifecycle_management.rb"
+require_relative "../storage_enable_default_event_based_hold.rb"
+require_relative "../storage_enable_requester_pays.rb"
+require_relative "../storage_enable_uniform_bucket_level_access.rb"
 require_relative "../storage_enable_versioning.rb"
+require_relative "../storage_get_bucket_metadata.rb"
+require_relative "../storage_get_default_event_based_hold.rb"
+require_relative "../storage_get_retention_policy.rb"
+require_relative "../storage_get_uniform_bucket_level_access.rb"
+require_relative "../storage_list_buckets.rb"
+require_relative "../storage_lock_retention_policy.rb"
+require_relative "../storage_remove_bucket_label.rb"
 require_relative "../storage_remove_cors_configuration.rb"
+require_relative "../storage_remove_retention_policy.rb"
+require_relative "../storage_set_bucket_default_kms_key.rb"
+require_relative "../storage_set_retention_policy.rb"
 
 describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -182,13 +201,13 @@ describe "Buckets Snippets" do
   end
 
   describe "default Cloud KMS encryption key" do
-    it "enable_default_kms_key, bucket_delete_default_kms_key" do
+    it "set_bucket_default_kms_key, bucket_delete_default_kms_key" do
       refute bucket.default_kms_key
 
-      # enable_default_kms_key
+      # set_bucket_default_kms_key
       assert_output "Default KMS key for #{bucket.name} was set to #{kms_key}\n" do
-        enable_default_kms_key bucket_name:     bucket.name,
-                               default_kms_key: kms_key
+        set_bucket_default_kms_key bucket_name:     bucket.name,
+                                   default_kms_key: kms_key
       end
 
       bucket.refresh!
@@ -205,7 +224,7 @@ describe "Buckets Snippets" do
   end
 
   describe "bucket labels" do
-    it "add_bucket_label, delete_bucket_label" do
+    it "add_bucket_label, remove_bucket_label" do
       # add_bucket_label
       label_key = "label_key"
       label_value = "label_value"
@@ -219,9 +238,9 @@ describe "Buckets Snippets" do
       bucket.refresh!
       assert_equal bucket.labels[label_key], label_value
 
-      # delete_bucket_label
+      # remove_bucket_label
       assert_output "Deleted label #{label_key} from #{bucket.name}\n" do
-        delete_bucket_label bucket_name: bucket.name,
+        remove_bucket_label bucket_name: bucket.name,
                             label_key:   label_key
       end
 
