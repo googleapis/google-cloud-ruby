@@ -557,7 +557,8 @@ module Google
         # Set the Cloud KMS encryption key that will be used to protect files.
         # For example: `projects/a/locations/b/keyRings/c/cryptoKeys/d`
         #
-        # @param [String] new_default_kms_key New Cloud KMS key name.
+        # @param [String, nil] new_default_kms_key New Cloud KMS key name, or
+        #   `nil` to delete the Cloud KMS encryption key.
         #
         # @example
         #   require "google/cloud/storage"
@@ -570,6 +571,15 @@ module Google
         #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
         #
         #   bucket.default_kms_key = kms_key_name
+        #
+        # @example Delete the default Cloud KMS encryption key:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.default_kms_key = nil
         #
         def default_kms_key= new_default_kms_key
           @gapi.encryption = API::Bucket::Encryption.new \
