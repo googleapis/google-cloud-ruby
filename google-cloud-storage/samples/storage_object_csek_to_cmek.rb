@@ -12,25 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def change_file_storage_class bucket_name:, file_name:
-  # [START storage_change_file_storage_class]
+def object_csek_to_cmek bucket_name:, file_name:, encryption_key:, kms_key_name:
+  # [START storage_object_csek_to_cmek]
   # bucket_name = "your-bucket-name"
   # file_name = "your-file-name"
+  # encryption_key = "TIbv/fjexq+VmtXzAlc63J4z5kFmWJ6NdAPQulQBT7g="
+  # kms_key_name = "projects/PROJ/locations/LOC/keyRings/RING/cryptoKey/KEY"
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
 
-  file = bucket.file file_name
+  file = bucket.file file_name, encryption_key: encryption_key
 
-  file.storage_class = "NEARLINE"
+  file.rotate encryption_key: encryption_key, new_kms_key: kms_key_name
 
-  puts "File #{file_name} in bucket #{bucket_name} had its storage class set to #{file.storage_class}"
-  # [END storage_change_file_storage_class]
+  puts "File #{file_name} in bucket #{bucket_name} is now managed by the KMS key #{kms_key_name} instead of a " \
+       "customer-supplied encryption key"
+  # [END storage_object_csek_to_cmek]
   file
 end
 
 if $PROGRAM_NAME == __FILE__
-  change_file_storage_class bucket_name: ARGV.shift, sources: ARGV.shift, destination_file_name: ARGV.shift
+  object_csek_to_cmek bucket_name:    ARGV.shift,
+                      file_name:      ARGV.shift,
+                      encryption_key: ARGV.shift,
+                      kms_key_name:   ARGV.shift
 end

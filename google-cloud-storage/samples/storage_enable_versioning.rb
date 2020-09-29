@@ -28,6 +28,4 @@ def enable_versioning bucket_name:
   bucket
 end
 
-if $PROGRAM_NAME == __FILE__
-  enable_versioning bucket_name: ARGV.shift
-end
+enable_versioning bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

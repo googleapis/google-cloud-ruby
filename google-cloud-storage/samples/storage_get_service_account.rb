@@ -26,6 +26,4 @@ def get_service_account
   email
 end
 
-if $PROGRAM_NAME == __FILE__
-  get_service_account
-end
+get_service_account if $PROGRAM_NAME == __FILE__

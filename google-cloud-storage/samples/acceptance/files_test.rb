@@ -16,16 +16,17 @@ require_relative "helper"
 require_relative "../files.rb"
 require_relative "../storage_compose_file.rb"
 require_relative "../storage_change_file_storage_class.rb"
+require_relative "../storage_object_csek_to_cmek.rb"
 
 describe "Files Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
   let(:local_file)       { File.expand_path "data/file.txt", __dir__ }
   let(:encryption_key)   { OpenSSL::Cipher.new("aes-256-cfb").encrypt.random_key }
   let(:kms_key)          { get_kms_key storage_client.project }
-  let(:remote_file_name) { "path/file_name.txt" }
+  let(:remote_file_name) { "path/file_name_#{SecureRandom.hex}.txt" }
   let(:downloaded_file)  { "test_download_#{SecureRandom.hex}" }
-  let(:file_1_name) { "path/file_1_name.txt" }
-  let(:file_2_name) { "path/file_2_name.txt" }
+  let(:file_1_name) { "path/file_1_name_#{SecureRandom.hex}.txt" }
+  let(:file_2_name) { "path/file_2_name_#{SecureRandom.hex}.txt" }
   let(:bucket) { @bucket }
   let(:secondary_bucket) { @secondary_bucket }
 
@@ -334,6 +335,25 @@ describe "Files Snippets" do
       downloaded_contents = File.read tmpfile
       assert_equal file_contents, downloaded_contents
     end
+  end
+
+  it "object_csek_to_cmek" do
+    file = bucket.create_file local_file, remote_file_name, encryption_key: encryption_key
+    assert file.encryption_key_sha256
+    expected_out = "File #{file.name} in bucket #{bucket.name} is now managed by the KMS key #{kms_key} instead of " \
+                   "a customer-supplied encryption key\n"
+    assert_output expected_out do
+      object_csek_to_cmek bucket_name:    bucket.name,
+                          file_name:      file.name,
+                          encryption_key: encryption_key,
+                          kms_key_name:   kms_key
+    end
+
+    file = bucket.file file.name
+
+    assert file.exists?
+    assert_match kms_key, file.kms_key
+    assert_nil file.encryption_key_sha256
   end
 
   it "generate_signed_url" do
