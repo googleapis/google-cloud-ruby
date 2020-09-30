@@ -1,5 +1,11 @@
 # Release History
 
+### 3.0.1 / 2020-09-30
+
+#### Documentation
+
+* Minor documentation updates.
+
 ### 3.0.0 / 2020-06-29
 
 This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
