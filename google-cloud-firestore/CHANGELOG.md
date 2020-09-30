@@ -1,5 +1,15 @@
 # Release History
 
+### 2.3.0 / 2020-09-30
+
+#### Features
+
+* Add error callbacks for listener threads
+  * Add DocumentListener#last_error
+  * Add DocumentListener#on_error
+  * Add QueryListener#last_error
+  * Add QueryListener#on_error
+
 ### 2.2.0 / 2020-09-17
 
 #### Features
