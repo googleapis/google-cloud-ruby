@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2020-09-30
+
+#### Features
+
+* Support for person detection and face detection
+
 ### 0.2.5 / 2020-08-10
 
 #### Bug Fixes
