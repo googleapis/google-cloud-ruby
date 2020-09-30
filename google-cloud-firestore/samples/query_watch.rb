@@ -138,7 +138,7 @@ def listen_multiple project_id:, collection_path: "cities"
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_listen_multiple]
   query = firestore.col(collection_path).where :state, :==, "CA"
-  snapshots = []
+  docs = []
 
   # Watch the collection query.
   listener = query.listen do |snapshot|
@@ -146,7 +146,7 @@ def listen_multiple project_id:, collection_path: "cities"
     puts "Current cities in California:"
     snapshot.docs.each do |doc|
       puts doc.document_id
-      snapshots << snapshot
+      docs << doc
     end
   end
   # [END fs_listen_multiple]
@@ -161,7 +161,7 @@ def listen_multiple project_id:, collection_path: "cities"
   )
 
   # Wait for the callback.
-  wait_until { !snapshots.empty? }
+  wait_until { !docs.empty? }
 
   listener.stop
 end
