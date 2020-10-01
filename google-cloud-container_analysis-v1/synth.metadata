@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "e1d661afe7586d44a29821d44fe8a4cc6d0a34a9"
+        "sha": "77a6d134242ba04a00d7e2774b2637257c66f6db"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
-        "internalRef": "326288259"
+        "sha": "cb7fc620590382a4a2ea6ffdf6f51ae0e77bbbb5",
+        "internalRef": "334682521"
       }
     }
   ],
@@ -28,34 +28,6 @@
     }
   ],
   "generatedFiles": [
-    ".gitignore",
-    ".repo-metadata.json",
-    ".rubocop.yml",
-    ".yardopts",
-    "AUTHENTICATION.md",
-    "CHANGELOG.md",
-    "Gemfile",
-    "LICENSE.md",
-    "README.md",
-    "Rakefile",
-    "google-cloud-container_analysis-v1.gemspec",
-    "lib/google-cloud-container_analysis-v1.rb",
-    "lib/google/cloud/container_analysis/v1.rb",
-    "lib/google/cloud/container_analysis/v1/container_analysis.rb",
-    "lib/google/cloud/container_analysis/v1/container_analysis/client.rb",
-    "lib/google/cloud/container_analysis/v1/container_analysis/credentials.rb",
-    "lib/google/cloud/container_analysis/v1/version.rb",
-    "lib/google/devtools/containeranalysis/v1/containeranalysis_pb.rb",
-    "lib/google/devtools/containeranalysis/v1/containeranalysis_services_pb.rb",
-    "proto_docs/README.md",
-    "proto_docs/google/api/field_behavior.rb",
-    "proto_docs/google/api/resource.rb",
-    "proto_docs/google/iam/v1/iam_policy.rb",
-    "proto_docs/google/iam/v1/options.rb",
-    "proto_docs/google/iam/v1/policy.rb",
-    "proto_docs/google/protobuf/timestamp.rb",
-    "proto_docs/google/type/expr.rb",
-    "test/google/cloud/container_analysis/v1/container_analysis_test.rb",
-    "test/helper.rb"
+    "Gemfile"
   ]
 }
