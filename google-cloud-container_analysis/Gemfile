@@ -4,3 +4,4 @@ gemspec
 
 gem "google-cloud-container_analysis-v1", path: "../google-cloud-container_analysis-v1"
 gem "grafeas-v1", path: "../grafeas-v1"
+gem "grafeas-v1", path: "../grafeas-v1"
