@@ -78,8 +78,8 @@ Commands:
   rename       <bucket> <file> <new>                                Rename a file in a bucket
   copy <srcBucket> <srcFile> <destBucket> <destFile>                Copy file to other bucket
   generate_signed_url <bucket> <file>                               Generate a V2 signed url for a file
-  generate_signed_get_url_v4 <bucket> <file>                        Generate a V4 signed get url for a file
-  generate_signed_put_url_v4 <bucket> <file>                        Generate a V4 signed put url for a file
+  generate_signed_url_v4 <bucket> <file>                        Generate a V4 signed get url for a file
+  generate_upload_signed_url_v4 <bucket> <file>                        Generate a V4 signed put url for a file
   generate_signed_post_policy_v4 <bucket> <file>                    Generate a V4 signed post policy for a file and print HTML form
   set_event_based_hold       <bucket> <file>                        Set an event-based hold on a file
   release_event_based_hold   <bucket> <file>                        Relase an event-based hold on a file

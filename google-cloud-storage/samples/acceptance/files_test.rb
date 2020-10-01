@@ -13,13 +13,37 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../files.rb"
-require_relative "../storage_compose_file.rb"
-require_relative "../storage_copy_file_archived_generation.rb"
+require_relative "../generate_signed_url.rb"
 require_relative "../storage_change_file_storage_class.rb"
+require_relative "../storage_compose_file.rb"
+require_relative "../storage_copy_file.rb"
+require_relative "../storage_copy_file_archived_generation.rb"
+require_relative "../storage_delete_file.rb"
 require_relative "../storage_delete_file_archived_generation.rb"
+require_relative "../storage_download_encrypted_file.rb"
+require_relative "../storage_download_file.rb"
+require_relative "../storage_download_file_requester_pays.rb"
+require_relative "../storage_download_public_file.rb"
+require_relative "../storage_generate_encryption_key.rb"
+require_relative "../storage_generate_signed_post_policy_v4.rb"
+require_relative "../storage_generate_signed_url_v4.rb"
+require_relative "../storage_generate_upload_signed_url_v4.rb"
+require_relative "../storage_get_metadata.rb"
+require_relative "../storage_list_files.rb"
+require_relative "../storage_list_files_with_prefix.rb"
 require_relative "../storage_list_file_archived_generations.rb"
+require_relative "../storage_make_public.rb"
+require_relative "../storage_move_file.rb"
 require_relative "../storage_object_csek_to_cmek.rb"
+require_relative "../storage_release_event_based_hold.rb"
+require_relative "../storage_release_temporary_hold.rb"
+require_relative "../storage_rotate_encryption_key.rb"
+require_relative "../storage_set_event_based_hold.rb"
+require_relative "../storage_set_metadata.rb"
+require_relative "../storage_set_temporary_hold.rb"
+require_relative "../storage_upload_encrypted_file.rb"
+require_relative "../storage_upload_file.rb"
+require_relative "../storage_upload_with_kms_key.rb"
 
 describe "Files Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -195,10 +219,10 @@ describe "Files Snippets" do
       tmpfile.binmode
 
       assert_output "Downloaded encrypted #{remote_file_name}\n" do
-        download_encrypted_file bucket_name:       bucket.name,
-                                storage_file_path: remote_file_name,
-                                local_file_path:   tmpfile,
-                                encryption_key:    encryption_key
+        download_encrypted_file bucket_name:     bucket.name,
+                                file_name:       remote_file_name,
+                                local_file_path: tmpfile,
+                                encryption_key:  encryption_key
       end
 
       assert File.file? tmpfile
@@ -414,12 +438,12 @@ describe "Files Snippets" do
     assert_equal file_contents, File.read(local_file)
   end
 
-  it "generate_signed_get_url_v4" do
+  it "generate_signed_url_v4" do
     bucket.create_file local_file, remote_file_name
 
     out, _err = capture_io do
-      generate_signed_get_url_v4 bucket_name: bucket.name,
-                                 file_name:   remote_file_name
+      generate_signed_url_v4 bucket_name: bucket.name,
+                             file_name:   remote_file_name
     end
 
     signed_url = out.scan(/http.*$/).first
@@ -429,12 +453,12 @@ describe "Files Snippets" do
     assert_equal file_contents, File.read(local_file)
   end
 
-  it "generate_signed_put_url_v4" do
+  it "generate_upload_signed_url_v4" do
     refute bucket.file remote_file_name
 
     out, _err = capture_io do
-      generate_signed_put_url_v4 bucket_name: bucket.name,
-                                 file_name:   remote_file_name
+      generate_upload_signed_url_v4 bucket_name: bucket.name,
+                                    file_name:   remote_file_name
     end
 
     signed_url = out.scan(/http.*$/).first
