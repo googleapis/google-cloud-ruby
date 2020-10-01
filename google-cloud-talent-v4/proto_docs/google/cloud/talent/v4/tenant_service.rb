@@ -51,16 +51,13 @@ module Google
         # Request for updating a specified tenant.
         # @!attribute [rw] tenant
         #   @return [::Google::Cloud::Talent::V4::Tenant]
-        #     Required. The tenant resource to replace the current resource in the
-        #     system.
+        #     Required. The tenant resource to replace the current resource in the system.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Strongly recommended for the best service experience.
         #
-        #     If {::Google::Cloud::Talent::V4::UpdateTenantRequest#update_mask update_mask} is
-        #     provided, only the specified fields in
-        #     {::Google::Cloud::Talent::V4::UpdateTenantRequest#tenant tenant} are updated.
-        #     Otherwise all the fields are updated.
+        #     If {::Google::Cloud::Talent::V4::UpdateTenantRequest#update_mask update_mask} is provided, only the specified fields in
+        #     {::Google::Cloud::Talent::V4::UpdateTenantRequest#tenant tenant} are updated. Otherwise all the fields are updated.
         #
         #     A field mask to specify the tenant fields to be updated. Only
         #     top level fields of {::Google::Cloud::Talent::V4::Tenant Tenant} are supported.

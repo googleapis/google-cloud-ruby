@@ -27,17 +27,13 @@ module Google
         #     An expression specifies a histogram request against matching jobs for
         #     searches.
         #
-        #     See
-        #     {::Google::Cloud::Talent::V4::SearchJobsRequest#histogram_queries SearchJobsRequest.histogram_queries}
-        #     for details about syntax.
+        #     See {::Google::Cloud::Talent::V4::SearchJobsRequest#histogram_queries SearchJobsRequest.histogram_queries} for details about syntax.
         class HistogramQuery
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Histogram result that matches
-        # {::Google::Cloud::Talent::V4::HistogramQuery HistogramQuery} specified in
-        # searches.
+        # Histogram result that matches {::Google::Cloud::Talent::V4::HistogramQuery HistogramQuery} specified in searches.
         # @!attribute [rw] histogram_query
         #   @return [::String]
         #     Requested histogram expression.

@@ -52,20 +52,16 @@ module Google
         # Request for updating a specified company.
         # @!attribute [rw] company
         #   @return [::Google::Cloud::Talent::V4::Company]
-        #     Required. The company resource to replace the current resource in the
-        #     system.
+        #     Required. The company resource to replace the current resource in the system.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Strongly recommended for the best service experience.
         #
-        #     If {::Google::Cloud::Talent::V4::UpdateCompanyRequest#update_mask update_mask}
-        #     is provided, only the specified fields in
-        #     {::Google::Cloud::Talent::V4::UpdateCompanyRequest#company company} are updated.
-        #     Otherwise all the fields are updated.
+        #     If {::Google::Cloud::Talent::V4::UpdateCompanyRequest#update_mask update_mask} is provided, only the specified fields in
+        #     {::Google::Cloud::Talent::V4::UpdateCompanyRequest#company company} are updated. Otherwise all the fields are updated.
         #
         #     A field mask to specify the company fields to be updated. Only
-        #     top level fields of {::Google::Cloud::Talent::V4::Company Company} are
-        #     supported.
+        #     top level fields of {::Google::Cloud::Talent::V4::Company Company} are supported.
         class UpdateCompanyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -104,9 +100,8 @@ module Google
         #
         #     Defaults to false.
         #
-        #     If true, at most
-        #     {::Google::Cloud::Talent::V4::ListCompaniesRequest#page_size page_size} of
-        #     companies are fetched, among which only those with open jobs are returned.
+        #     If true, at most {::Google::Cloud::Talent::V4::ListCompaniesRequest#page_size page_size} of companies are fetched, among which
+        #     only those with open jobs are returned.
         class ListCompaniesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
