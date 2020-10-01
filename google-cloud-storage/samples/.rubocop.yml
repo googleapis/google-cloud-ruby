@@ -1,6 +1,9 @@
 inherit_gem:
     google-style: google-style.yml
 
+Lint/UselessAssignment:
+    Exclude:
+        - "storage_remove_bucket_conditional_iam_binding.rb"
 Lint/ShadowingOuterLocalVariable:
     Enabled: false
 Metrics/AbcSize:

@@ -13,8 +13,11 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../iam.rb"
+require_relative "../storage_add_bucket_conditional_iam_binding.rb"
+require_relative "../storage_add_bucket_iam_member.rb"
+require_relative "../storage_remove_bucket_conditional_iam_binding.rb"
 require_relative "../storage_set_bucket_public_iam.rb"
+require_relative "../storage_view_bucket_iam_members.rb"
 
 describe "IAM Snippets" do
   let(:role)                  { "roles/storage.admin" }
