@@ -192,10 +192,10 @@ def in_query_with_array project_id:, collection_path: "cities"
   # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
-  # [START fs_in_filter_with_array]
+  # [START fs_query_filter_in_with_array]
   cities_ref = firestore.col collection_path
   exactly_one_cost = cities_ref.where "regions", "in", [["west_coast"], ["east_coast"]]
-  # [END fs_in_filter_with_array]
+  # [END fs_query_filter_in_with_array]
   exactly_one_cost.get do |city|
     puts "Document #{city.document_id} returned by query in [['west_coast'], ['east_coast']]."
   end
