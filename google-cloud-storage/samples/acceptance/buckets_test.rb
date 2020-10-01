@@ -223,7 +223,7 @@ describe "Buckets Snippets" do
     end
   end
 
-  describe "bucket labels" do
+  describe "labels" do
     it "add_bucket_label, remove_bucket_label" do
       # add_bucket_label
       label_key = "label_key"
@@ -246,6 +246,29 @@ describe "Buckets Snippets" do
 
       bucket.refresh!
       assert bucket.labels.empty?
+    end
+  end
+
+  describe "lifecycle management" do
+    let(:bucket) { create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}" }
+    after { delete_bucket_helper bucket.name }
+
+    it "enable_bucket_lifecycle_management, disable_bucket_lifecycle_management" do
+      # enable_bucket_lifecycle_management
+      out, _err = capture_io do
+        updated_bucket = enable_bucket_lifecycle_management bucket_name: bucket.name
+        refute_empty updated_bucket.lifecycle
+      end
+
+      assert_includes out, "Lifecycle management is enabled"
+
+      # disable_bucket_lifecycle_management
+      out, _err = capture_io do
+        updated_bucket = disable_bucket_lifecycle_management bucket_name: bucket.name
+        assert_empty updated_bucket.lifecycle
+      end
+
+      assert_includes out, "Lifecycle management is disabled"
     end
   end
 
