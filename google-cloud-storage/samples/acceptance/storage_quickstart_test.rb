@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../quickstart.rb"
+require_relative "../storage_quickstart.rb"
 
 describe "Storage Quickstart" do
   let(:storage_client) { Google::Cloud::Storage.new }
