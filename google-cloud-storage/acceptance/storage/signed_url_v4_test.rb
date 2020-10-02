@@ -227,6 +227,7 @@ describe Google::Cloud::Storage, :signed_url, :v4, :storage do
       file = bucket.file "CloudLogoFileSignedUrlPost.png", skip_lookup: true
       url = file.signed_url method: "POST",
                             expires: five_min_from_now,
+                            headers: { "x-goog-resumable" => "start"},
                             version: :v4
 
       uri = URI url
