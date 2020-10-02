@@ -22,9 +22,8 @@ module Google
     module Talent
       module V4
         # A Job resource represents a job posting (also referred to as a "job listing"
-        # or "job requisition"). A job belongs to a
-        # {::Google::Cloud::Talent::V4::Company Company}, which is the hiring entity
-        # responsible for the job.
+        # or "job requisition"). A job belongs to a {::Google::Cloud::Talent::V4::Company Company}, which is the hiring
+        # entity responsible for the job.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required during job update.
@@ -37,8 +36,7 @@ module Google
         #     example, "projects/foo/tenants/bar/jobs/baz".
         #
         #     Use of this field in job queries and API calls is preferred over the use of
-        #     {::Google::Cloud::Talent::V4::Job#requisition_id requisition_id} since this
-        #     value is unique.
+        #     {::Google::Cloud::Talent::V4::Job#requisition_id requisition_id} since this value is unique.
         # @!attribute [rw] company
         #   @return [::String]
         #     Required. The resource name of the company listing the job.
@@ -48,13 +46,11 @@ module Google
         #     example, "projects/foo/tenants/bar/companies/baz".
         # @!attribute [rw] requisition_id
         #   @return [::String]
-        #     Required. The requisition ID, also referred to as the posting ID, is
-        #     assigned by the client to identify a job. This field is intended to be used
-        #     by clients for client identification and tracking of postings. A job isn't
-        #     allowed to be created if there is another job with the same
-        #     {::Google::Cloud::Talent::V4::Job#name company},
-        #     {::Google::Cloud::Talent::V4::Job#language_code language_code} and
-        #     {::Google::Cloud::Talent::V4::Job#requisition_id requisition_id}.
+        #     Required. The requisition ID, also referred to as the posting ID, is assigned by the
+        #     client to identify a job. This field is intended to be used by clients
+        #     for client identification and tracking of postings. A job isn't allowed
+        #     to be created if there is another job with the same {::Google::Cloud::Talent::V4::Job#name company},
+        #     {::Google::Cloud::Talent::V4::Job#language_code language_code} and {::Google::Cloud::Talent::V4::Job#requisition_id requisition_id}.
         #
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] title
@@ -64,12 +60,11 @@ module Google
         #     The maximum number of allowed characters is 500.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Required. The description of the job, which typically includes a
-        #     multi-paragraph description of the company and related information.
-        #     Separate fields are provided on the job object for
-        #     {::Google::Cloud::Talent::V4::Job#responsibilities responsibilities},
-        #     {::Google::Cloud::Talent::V4::Job#qualifications qualifications}, and other job
-        #     characteristics. Use of these separate job fields is recommended.
+        #     Required. The description of the job, which typically includes a multi-paragraph
+        #     description of the company and related information. Separate fields are
+        #     provided on the job object for {::Google::Cloud::Talent::V4::Job#responsibilities responsibilities},
+        #     {::Google::Cloud::Talent::V4::Job#qualifications qualifications}, and other job characteristics. Use of
+        #     these separate job fields is recommended.
         #
         #     This field accepts and sanitizes HTML input, and also accepts
         #     bold, italic, ordered list, and unordered list markup tags.
@@ -86,16 +81,12 @@ module Google
         #
         #     At most 50 locations are allowed for best search performance. If a job has
         #     more locations, it is suggested to split it into multiple jobs with unique
-        #     {::Google::Cloud::Talent::V4::Job#requisition_id requisition_id}s (e.g. 'ReqA'
-        #     becomes 'ReqA-1', 'ReqA-2', and so on.) as multiple jobs with the same
-        #     {::Google::Cloud::Talent::V4::Job#company company},
-        #     {::Google::Cloud::Talent::V4::Job#language_code language_code} and
-        #     {::Google::Cloud::Talent::V4::Job#requisition_id requisition_id} are not
-        #     allowed. If the original
-        #     {::Google::Cloud::Talent::V4::Job#requisition_id requisition_id} must be
-        #     preserved, a custom field should be used for storage. It is also suggested
-        #     to group the locations that close to each other in the same job for better
-        #     search experience.
+        #     {::Google::Cloud::Talent::V4::Job#requisition_id requisition_id}s (e.g. 'ReqA' becomes 'ReqA-1', 'ReqA-2', and so on.) as
+        #     multiple jobs with the same {::Google::Cloud::Talent::V4::Job#company company}, {::Google::Cloud::Talent::V4::Job#language_code language_code} and
+        #     {::Google::Cloud::Talent::V4::Job#requisition_id requisition_id} are not allowed. If the original {::Google::Cloud::Talent::V4::Job#requisition_id requisition_id} must
+        #     be preserved, a custom field should be used for storage. It is also
+        #     suggested to group the locations that close to each other in the same job
+        #     for better search experience.
         #
         #     The maximum number of allowed characters is 500.
         # @!attribute [rw] application_info
@@ -152,11 +143,9 @@ module Google
         #     [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47){:
         #     class="external" target="_blank" }.
         #
-        #     If this field is unspecified and
-        #     {::Google::Cloud::Talent::V4::Job#description Job.description} is present,
-        #     detected language code based on
-        #     {::Google::Cloud::Talent::V4::Job#description Job.description} is assigned,
-        #     otherwise defaults to 'en_US'.
+        #     If this field is unspecified and {::Google::Cloud::Talent::V4::Job#description Job.description} is present, detected
+        #     language code based on {::Google::Cloud::Talent::V4::Job#description Job.description} is assigned, otherwise
+        #     defaults to 'en_US'.
         # @!attribute [rw] job_level
         #   @return [::Google::Cloud::Talent::V4::JobLevel]
         #     The experience level associated with the job, such as "Entry Level".
@@ -173,8 +162,7 @@ module Google
         #   @return [::String]
         #     A description of the qualifications required to perform the
         #     job. The use of this field is recommended
-        #     as an alternative to using the more general
-        #     {::Google::Cloud::Talent::V4::Job#description description} field.
+        #     as an alternative to using the more general {::Google::Cloud::Talent::V4::Job#description description} field.
         #
         #     This field accepts and sanitizes HTML input, and also accepts
         #     bold, italic, ordered list, and unordered list markup tags.
@@ -183,8 +171,8 @@ module Google
         # @!attribute [rw] responsibilities
         #   @return [::String]
         #     A description of job responsibilities. The use of this field is
-        #     recommended as an alternative to using the more general
-        #     {::Google::Cloud::Talent::V4::Job#description description} field.
+        #     recommended as an alternative to using the more general {::Google::Cloud::Talent::V4::Job#description description}
+        #     field.
         #
         #     This field accepts and sanitizes HTML input, and also accepts
         #     bold, italic, ordered list, and unordered list markup tags.
@@ -192,24 +180,20 @@ module Google
         #     The maximum number of allowed characters is 10,000.
         # @!attribute [rw] posting_region
         #   @return [::Google::Cloud::Talent::V4::PostingRegion]
-        #     The job {::Google::Cloud::Talent::V4::PostingRegion PostingRegion} (for example,
-        #     state, country) throughout which the job is available. If this field is
-        #     set, a {::Google::Cloud::Talent::V4::LocationFilter LocationFilter} in a search
-        #     query within the job region finds this job posting if an exact location
-        #     match isn't specified. If this field is set to
-        #     {::Google::Cloud::Talent::V4::PostingRegion::NATION PostingRegion.NATION} or
-        #     {::Google::Cloud::Talent::V4::PostingRegion::ADMINISTRATIVE_AREA PostingRegion.ADMINISTRATIVE_AREA},
-        #     setting job {::Google::Cloud::Talent::V4::Job#addresses Job.addresses} to the
-        #     same location level as this field is strongly recommended.
+        #     The job {::Google::Cloud::Talent::V4::PostingRegion PostingRegion} (for example, state, country) throughout
+        #     which the job is available. If this field is set, a {::Google::Cloud::Talent::V4::LocationFilter LocationFilter}
+        #     in a search query within the job region finds this job posting if an
+        #     exact location match isn't specified. If this field is set to
+        #     {::Google::Cloud::Talent::V4::PostingRegion::NATION PostingRegion.NATION} or {::Google::Cloud::Talent::V4::PostingRegion::ADMINISTRATIVE_AREA PostingRegion.ADMINISTRATIVE_AREA},
+        #     setting job {::Google::Cloud::Talent::V4::Job#addresses Job.addresses} to the same location level as this field
+        #     is strongly recommended.
         # @!attribute [rw] visibility
         #   @return [::Google::Cloud::Talent::V4::Visibility]
         #     Deprecated. The job is only visible to the owner.
         #
         #     The visibility of the job.
         #
-        #     Defaults to
-        #     {::Google::Cloud::Talent::V4::Visibility::ACCOUNT_ONLY Visibility.ACCOUNT_ONLY}
-        #     if not specified.
+        #     Defaults to {::Google::Cloud::Talent::V4::Visibility::ACCOUNT_ONLY Visibility.ACCOUNT_ONLY} if not specified.
         # @!attribute [rw] job_start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The start timestamp of the job in UTC time zone. Typically this field
@@ -229,17 +213,13 @@ module Google
         #
         #     The expiration timestamp of the job. After this timestamp, the
         #     job is marked as expired, and it no longer appears in search results. The
-        #     expired job can't be listed by the
-        #     {::Google::Cloud::Talent::V4::JobService::Client#list_jobs ListJobs} API, but it can be
-        #     retrieved with the {::Google::Cloud::Talent::V4::JobService::Client#get_job GetJob} API
-        #     or updated with the
-        #     {::Google::Cloud::Talent::V4::JobService::Client#update_job UpdateJob} API or deleted
-        #     with the {::Google::Cloud::Talent::V4::JobService::Client#delete_job DeleteJob} API. An
-        #     expired job can be updated and opened again by using a future expiration
-        #     timestamp. Updating an expired job fails if there is another existing open
-        #     job with same {::Google::Cloud::Talent::V4::Job#company company},
-        #     {::Google::Cloud::Talent::V4::Job#language_code language_code} and
-        #     {::Google::Cloud::Talent::V4::Job#requisition_id requisition_id}.
+        #     expired job can't be listed by the {::Google::Cloud::Talent::V4::JobService::Client#list_jobs ListJobs} API,
+        #     but it can be retrieved with the {::Google::Cloud::Talent::V4::JobService::Client#get_job GetJob} API or
+        #     updated with the {::Google::Cloud::Talent::V4::JobService::Client#update_job UpdateJob} API or deleted with
+        #     the {::Google::Cloud::Talent::V4::JobService::Client#delete_job DeleteJob} API. An expired job can
+        #     be updated and opened again by using a future expiration timestamp.
+        #     Updating an expired job fails if there is another existing open job with
+        #     same {::Google::Cloud::Talent::V4::Job#company company}, {::Google::Cloud::Talent::V4::Job#language_code language_code} and {::Google::Cloud::Talent::V4::Job#requisition_id requisition_id}.
         #
         #     The expired jobs are retained in our system for 90 days. However, the
         #     overall expired job count cannot exceed 3 times the maximum number of
@@ -253,13 +233,12 @@ module Google
         #     If the timestamp is before the instant request is made, the job
         #     is treated as expired immediately on creation. This kind of job can
         #     not be updated. And when creating a job with past timestamp, the
-        #     {::Google::Cloud::Talent::V4::Job#posting_publish_time posting_publish_time}
-        #     must be set before
-        #     {::Google::Cloud::Talent::V4::Job#posting_expire_time posting_expire_time}. The
-        #     purpose of this feature is to allow other objects, such as [Application][],
-        #     to refer a job that didn't exist in the system prior to becoming expired.
-        #     If you want to modify a job that was expired on creation, delete it and
-        #     create a new one.
+        #     {::Google::Cloud::Talent::V4::Job#posting_publish_time posting_publish_time} must be set before
+        #     {::Google::Cloud::Talent::V4::Job#posting_expire_time posting_expire_time}. The purpose of this feature is
+        #     to allow other objects, such as [Application][], to refer a job
+        #     that didn't exist in the system prior to becoming expired. If you
+        #     want to modify a job that was expired on creation,
+        #     delete it and create a new one.
         #
         #     If this value isn't provided at the time of job creation or is invalid,
         #     the job posting expires after 30 days from the job's creation time. For
@@ -267,13 +246,10 @@ module Google
         #     unspecified expiration date, the job expires after 2017/01/31 13:00AM UTC.
         #
         #     If this value isn't provided on job update, it depends on the field masks
-        #     set by
-        #     {::Google::Cloud::Talent::V4::UpdateJobRequest#update_mask UpdateJobRequest.update_mask}.
-        #     If the field masks include
-        #     {::Google::Cloud::Talent::V4::Job#job_end_time job_end_time}, or the masks are
-        #     empty meaning that every field is updated, the job posting expires after 30
-        #     days from the job's last update time. Otherwise the expiration date isn't
-        #     updated.
+        #     set by {::Google::Cloud::Talent::V4::UpdateJobRequest#update_mask UpdateJobRequest.update_mask}. If the field masks include
+        #     {::Google::Cloud::Talent::V4::Job#job_end_time job_end_time}, or the masks are empty meaning that every field is
+        #     updated, the job posting expires after 30 days from the job's last
+        #     update time. Otherwise the expiration date isn't updated.
         # @!attribute [r] posting_create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp when this job posting was created.
@@ -323,16 +299,13 @@ module Google
           # Derived details about the job posting.
           # @!attribute [rw] locations
           #   @return [::Array<::Google::Cloud::Talent::V4::Location>]
-          #     Structured locations of the job, resolved from
-          #     {::Google::Cloud::Talent::V4::Job#addresses Job.addresses}.
+          #     Structured locations of the job, resolved from {::Google::Cloud::Talent::V4::Job#addresses Job.addresses}.
           #
-          #     {::Google::Cloud::Talent::V4::Job::DerivedInfo#locations locations} are exactly
-          #     matched to {::Google::Cloud::Talent::V4::Job#addresses Job.addresses} in the
-          #     same order.
+          #     {::Google::Cloud::Talent::V4::Job::DerivedInfo#locations locations} are exactly matched to {::Google::Cloud::Talent::V4::Job#addresses Job.addresses} in the same
+          #     order.
           # @!attribute [rw] job_categories
           #   @return [::Array<::Google::Cloud::Talent::V4::JobCategory>]
-          #     Job categories derived from {::Google::Cloud::Talent::V4::Job#title Job.title}
-          #     and {::Google::Cloud::Talent::V4::Job#description Job.description}.
+          #     Job categories derived from {::Google::Cloud::Talent::V4::Job#title Job.title} and {::Google::Cloud::Talent::V4::Job#description Job.description}.
           class DerivedInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -356,8 +329,7 @@ module Google
           #     HTML tags in these fields may be stripped if sanitiazation isn't
           #     disabled.
           #
-          #     Defaults to
-          #     {::Google::Cloud::Talent::V4::HtmlSanitization::SIMPLE_FORMATTING_ONLY HtmlSanitization.SIMPLE_FORMATTING_ONLY}.
+          #     Defaults to {::Google::Cloud::Talent::V4::HtmlSanitization::SIMPLE_FORMATTING_ONLY HtmlSanitization.SIMPLE_FORMATTING_ONLY}.
           class ProcessingOptions
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

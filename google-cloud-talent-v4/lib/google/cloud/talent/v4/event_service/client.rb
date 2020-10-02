@@ -176,8 +176,8 @@ module Google
             #     The format is "projects/\\{project_id}/tenants/\\{tenant_id}", for example,
             #     "projects/foo/tenants/bar".
             #   @param client_event [::Google::Cloud::Talent::V4::ClientEvent, ::Hash]
-            #     Required. Events issued when end user interacts with customer's application
-            #     that uses Cloud Talent Solution.
+            #     Required. Events issued when end user interacts with customer's application that
+            #     uses Cloud Talent Solution.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4::ClientEvent]

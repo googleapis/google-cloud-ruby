@@ -30,8 +30,8 @@ module Google
         #     "projects/foo/tenants/bar".
         # @!attribute [rw] client_event
         #   @return [::Google::Cloud::Talent::V4::ClientEvent]
-        #     Required. Events issued when end user interacts with customer's application
-        #     that uses Cloud Talent Solution.
+        #     Required. Events issued when end user interacts with customer's application that
+        #     uses Cloud Talent Solution.
         class CreateClientEventRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

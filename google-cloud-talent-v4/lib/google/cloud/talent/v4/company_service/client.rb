@@ -332,19 +332,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param company [::Google::Cloud::Talent::V4::Company, ::Hash]
-            #     Required. The company resource to replace the current resource in the
-            #     system.
+            #     Required. The company resource to replace the current resource in the system.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Strongly recommended for the best service experience.
             #
-            #     If {::Google::Cloud::Talent::V4::UpdateCompanyRequest#update_mask update_mask}
-            #     is provided, only the specified fields in
-            #     {::Google::Cloud::Talent::V4::UpdateCompanyRequest#company company} are updated.
-            #     Otherwise all the fields are updated.
+            #     If {::Google::Cloud::Talent::V4::UpdateCompanyRequest#update_mask update_mask} is provided, only the specified fields in
+            #     {::Google::Cloud::Talent::V4::UpdateCompanyRequest#company company} are updated. Otherwise all the fields are updated.
             #
             #     A field mask to specify the company fields to be updated. Only
-            #     top level fields of {::Google::Cloud::Talent::V4::Company Company} are
-            #     supported.
+            #     top level fields of {::Google::Cloud::Talent::V4::Company Company} are supported.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4::Company]
@@ -495,9 +491,8 @@ module Google
             #
             #     Defaults to false.
             #
-            #     If true, at most
-            #     {::Google::Cloud::Talent::V4::ListCompaniesRequest#page_size page_size} of
-            #     companies are fetched, among which only those with open jobs are returned.
+            #     If true, at most {::Google::Cloud::Talent::V4::ListCompaniesRequest#page_size page_size} of companies are fetched, among which
+            #     only those with open jobs are returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Talent::V4::Company>]

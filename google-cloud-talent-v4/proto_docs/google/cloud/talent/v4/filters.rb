@@ -30,8 +30,8 @@ module Google
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] query_language_code
         #   @return [::String]
-        #     The language code of {::Google::Cloud::Talent::V4::JobQuery#query query}. For
-        #     example, "en-US". This field helps to better interpret the query.
+        #     The language code of {::Google::Cloud::Talent::V4::JobQuery#query query}. For example, "en-US". This field helps to
+        #     better interpret the query.
         #
         #     If a value isn't specified, the query language code is automatically
         #     detected, which may not be accurate.
@@ -57,16 +57,15 @@ module Google
         # @!attribute [rw] location_filters
         #   @return [::Array<::Google::Cloud::Talent::V4::LocationFilter>]
         #     The location filter specifies geo-regions containing the jobs to
-        #     search against. See {::Google::Cloud::Talent::V4::LocationFilter LocationFilter}
-        #     for more information.
+        #     search against. See {::Google::Cloud::Talent::V4::LocationFilter LocationFilter} for more information.
         #
         #     If a location value isn't specified, jobs fitting the other search
         #     criteria are retrieved regardless of where they're located.
         #
         #     If multiple values are specified, jobs are retrieved from any of the
         #     specified locations. If different values are specified for the
-        #     {::Google::Cloud::Talent::V4::LocationFilter#distance_in_miles LocationFilter.distance_in_miles}
-        #     parameter, the maximum provided distance is used for all locations.
+        #     {::Google::Cloud::Talent::V4::LocationFilter#distance_in_miles LocationFilter.distance_in_miles} parameter, the maximum provided
+        #     distance is used for all locations.
         #
         #     At most 5 location filters are allowed.
         # @!attribute [rw] job_categories
@@ -83,17 +82,14 @@ module Google
         #     Allows filtering jobs by commute time with different travel methods (for
         #      example, driving or public transit).
         #
-        #     Note: This only works when you specify a
-        #     {::Google::Cloud::Talent::V4::CommuteMethod CommuteMethod}. In this case,
-        #     {::Google::Cloud::Talent::V4::JobQuery#location_filters location_filters} is
-        #     ignored.
+        #     Note: This only works when you specify a {::Google::Cloud::Talent::V4::CommuteMethod CommuteMethod}. In this case,
+        #     {::Google::Cloud::Talent::V4::JobQuery#location_filters location_filters} is ignored.
         #
         #      Currently we don't support sorting by commute time.
         # @!attribute [rw] company_display_names
         #   @return [::Array<::String>]
-        #     This filter specifies the exact company
-        #     {::Google::Cloud::Talent::V4::Company#display_name Company.display_name} of the
-        #     jobs to search against.
+        #     This filter specifies the exact company {::Google::Cloud::Talent::V4::Company#display_name Company.display_name}
+        #     of the jobs to search against.
         #
         #     If a value isn't specified, jobs within the search results are
         #     associated with any company.
@@ -105,15 +101,14 @@ module Google
         # @!attribute [rw] compensation_filter
         #   @return [::Google::Cloud::Talent::V4::CompensationFilter]
         #     This search filter is applied only to
-        #     {::Google::Cloud::Talent::V4::Job#compensation_info Job.compensation_info}. For
-        #     example, if the filter is specified as "Hourly job with per-hour
-        #     compensation > $15", only jobs meeting these criteria are searched. If a
-        #     filter isn't defined, all open jobs are searched.
+        #     {::Google::Cloud::Talent::V4::Job#compensation_info Job.compensation_info}. For example, if the filter is specified
+        #     as "Hourly job with per-hour compensation > $15", only jobs meeting
+        #     these criteria are searched. If a filter isn't defined, all open jobs
+        #     are searched.
         # @!attribute [rw] custom_attribute_filter
         #   @return [::String]
         #     This filter specifies a structured syntax to match against the
-        #     {::Google::Cloud::Talent::V4::Job#custom_attributes Job.custom_attributes}
-        #     marked as `filterable`.
+        #     {::Google::Cloud::Talent::V4::Job#custom_attributes Job.custom_attributes} marked as `filterable`.
         #
         #     The syntax for this expression is a subset of SQL syntax.
         #
@@ -144,8 +139,7 @@ module Google
         # @!attribute [rw] employment_types
         #   @return [::Array<::Google::Cloud::Talent::V4::EmploymentType>]
         #     The employment type filter specifies the employment type of jobs to
-        #     search against, such as
-        #     {::Google::Cloud::Talent::V4::EmploymentType::FULL_TIME EmploymentType.FULL_TIME}.
+        #     search against, such as {::Google::Cloud::Talent::V4::EmploymentType::FULL_TIME EmploymentType.FULL_TIME}.
         #
         #     If a value isn't specified, jobs in the search results includes any
         #     employment type.
@@ -211,15 +205,12 @@ module Google
         #     Allows the client to return jobs without a
         #     set location, specifically, telecommuting jobs (telecommuting is considered
         #     by the service as a special location.
-        #     {::Google::Cloud::Talent::V4::Job#posting_region Job.posting_region} indicates
-        #     if a job permits telecommuting. If this field is set to
-        #     {::Google::Cloud::Talent::V4::LocationFilter::TelecommutePreference::TELECOMMUTE_ALLOWED TelecommutePreference.TELECOMMUTE_ALLOWED},
-        #     telecommuting jobs are searched, and
-        #     {::Google::Cloud::Talent::V4::LocationFilter#address address} and
-        #     {::Google::Cloud::Talent::V4::LocationFilter#lat_lng lat_lng} are ignored. If
-        #     not set or set to
-        #     {::Google::Cloud::Talent::V4::LocationFilter::TelecommutePreference::TELECOMMUTE_EXCLUDED TelecommutePreference.TELECOMMUTE_EXCLUDED},
-        #     telecommute job are not searched.
+        #     {::Google::Cloud::Talent::V4::Job#posting_region Job.posting_region} indicates if a job permits telecommuting.
+        #     If this field is set to {::Google::Cloud::Talent::V4::LocationFilter::TelecommutePreference::TELECOMMUTE_ALLOWED TelecommutePreference.TELECOMMUTE_ALLOWED},
+        #     telecommuting jobs are searched, and {::Google::Cloud::Talent::V4::LocationFilter#address address} and {::Google::Cloud::Talent::V4::LocationFilter#lat_lng lat_lng} are
+        #     ignored. If not set or set to
+        #     {::Google::Cloud::Talent::V4::LocationFilter::TelecommutePreference::TELECOMMUTE_EXCLUDED TelecommutePreference.TELECOMMUTE_EXCLUDED}, telecommute job are not
+        #     searched.
         #
         #     This filter can be used by itself to search exclusively for telecommuting
         #     jobs, or it can be combined with another location
@@ -272,40 +263,32 @@ module Google
 
             # Filter by `base compensation entry's` unit. A job is a match if and
             # only if the job contains a base CompensationEntry and the base
-            # CompensationEntry's unit matches provided
-            # {::Google::Cloud::Talent::V4::CompensationFilter#units units}. Populate one or
-            # more {::Google::Cloud::Talent::V4::CompensationFilter#units units}.
+            # CompensationEntry's unit matches provided {::Google::Cloud::Talent::V4::CompensationFilter#units units}.
+            # Populate one or more {::Google::Cloud::Talent::V4::CompensationFilter#units units}.
             #
-            # See
-            # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry CompensationInfo.CompensationEntry}
-            # for definition of base compensation entry.
+            # See {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry CompensationInfo.CompensationEntry} for definition of
+            # base compensation entry.
             UNIT_ONLY = 1
 
             # Filter by `base compensation entry's` unit and amount / range. A job
             # is a match if and only if the job contains a base CompensationEntry, and
             # the base entry's unit matches provided
-            # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationUnit CompensationUnit}
-            # and amount or range overlaps with provided
+            # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationUnit CompensationUnit} and
+            # amount or range overlaps with provided
             # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationRange CompensationRange}.
             #
-            # See
-            # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry CompensationInfo.CompensationEntry}
-            # for definition of base compensation entry.
+            # See {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry CompensationInfo.CompensationEntry} for definition of
+            # base compensation entry.
             #
-            # Set exactly one {::Google::Cloud::Talent::V4::CompensationFilter#units units}
-            # and populate {::Google::Cloud::Talent::V4::CompensationFilter#range range}.
+            # Set exactly one {::Google::Cloud::Talent::V4::CompensationFilter#units units} and populate {::Google::Cloud::Talent::V4::CompensationFilter#range range}.
             UNIT_AND_AMOUNT = 2
 
             # Filter by annualized base compensation amount and `base compensation
-            # entry's` unit. Populate
-            # {::Google::Cloud::Talent::V4::CompensationFilter#range range} and zero or more
-            # {::Google::Cloud::Talent::V4::CompensationFilter#units units}.
+            # entry's` unit. Populate [range][google.cloud.talent.v4.CompensationFilter.range] and zero or more [units][google.cloud.talent.v4.CompensationFilter.units].
             ANNUALIZED_BASE_AMOUNT = 3
 
             # Filter by annualized total compensation amount and `base compensation
-            # entry's` unit . Populate
-            # {::Google::Cloud::Talent::V4::CompensationFilter#range range} and zero or more
-            # {::Google::Cloud::Talent::V4::CompensationFilter#units units}.
+            # entry's` unit . Populate [range][google.cloud.talent.v4.CompensationFilter.range] and zero or more [units][google.cloud.talent.v4.CompensationFilter.units].
             ANNUALIZED_TOTAL_AMOUNT = 4
           end
         end
@@ -320,8 +303,8 @@ module Google
         #     commute time from.
         # @!attribute [rw] travel_duration
         #   @return [::Google::Protobuf::Duration]
-        #     Required. The maximum travel time in seconds. The maximum allowed value is
-        #     `3600s` (one hour). Format is `123s`.
+        #     Required. The maximum travel time in seconds. The maximum allowed value is `3600s`
+        #     (one hour). Format is `123s`.
         # @!attribute [rw] allow_imprecise_addresses
         #   @return [::Boolean]
         #     If `true`, jobs without street level addresses may also be returned.

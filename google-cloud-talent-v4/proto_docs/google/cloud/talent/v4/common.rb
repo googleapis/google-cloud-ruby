@@ -37,11 +37,9 @@ module Google
         # @!attribute [rw] location_type
         #   @return [::Google::Cloud::Talent::V4::Location::LocationType]
         #     The type of a location, which corresponds to the address lines field of
-        #     {::Google::Type::PostalAddress google.type.PostalAddress}. For example,
-        #     "Downtown, Atlanta, GA, USA" has a type of
-        #     {::Google::Cloud::Talent::V4::Location::LocationType::NEIGHBORHOOD LocationType.NEIGHBORHOOD},
-        #     and "Kansas City, KS, USA" has a type of
-        #     {::Google::Cloud::Talent::V4::Location::LocationType::LOCALITY LocationType.LOCALITY}.
+        #     {::Google::Type::PostalAddress google.type.PostalAddress}. For example, "Downtown, Atlanta, GA, USA"
+        #     has a type of {::Google::Cloud::Talent::V4::Location::LocationType::NEIGHBORHOOD LocationType.NEIGHBORHOOD}, and "Kansas City, KS, USA"
+        #     has a type of {::Google::Cloud::Talent::V4::Location::LocationType::LOCALITY LocationType.LOCALITY}.
         # @!attribute [rw] postal_address
         #   @return [::Google::Type::PostalAddress]
         #     Postal address of the location that includes human readable information,
@@ -55,9 +53,10 @@ module Google
         #   @return [::Float]
         #     Radius in miles of the job location. This value is derived from the
         #     location bounding box in which a circle with the specified radius
-        #     centered from {::Google::Type::LatLng google.type.LatLng} covers the area
-        #     associated with the job location. For example, currently, "Mountain View,
-        #     CA, USA" has a radius of 6.17 miles.
+        #     centered from {::Google::Type::LatLng google.type.LatLng} covers the area associated with the
+        #     job location.
+        #     For example, currently, "Mountain View, CA, USA" has a radius of
+        #     6.17 miles.
         class Location
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -108,9 +107,7 @@ module Google
         # performance of the service.
         # @!attribute [rw] domain
         #   @return [::String]
-        #     Required if
-        #     {::Google::Cloud::Talent::V4::RequestMetadata#allow_missing_ids allow_missing_ids}
-        #     is unset or `false`.
+        #     Required if {::Google::Cloud::Talent::V4::RequestMetadata#allow_missing_ids allow_missing_ids} is unset or `false`.
         #
         #     The client-defined scope or source of the service call, which typically
         #     is the domain on
@@ -127,9 +124,7 @@ module Google
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] session_id
         #   @return [::String]
-        #     Required if
-        #     {::Google::Cloud::Talent::V4::RequestMetadata#allow_missing_ids allow_missing_ids}
-        #     is unset or `false`.
+        #     Required if {::Google::Cloud::Talent::V4::RequestMetadata#allow_missing_ids allow_missing_ids} is unset or `false`.
         #
         #     A unique session identification string. A session is defined as the
         #     duration of an end user's interaction with the service over a certain
@@ -143,9 +138,7 @@ module Google
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] user_id
         #   @return [::String]
-        #     Required if
-        #     {::Google::Cloud::Talent::V4::RequestMetadata#allow_missing_ids allow_missing_ids}
-        #     is unset or `false`.
+        #     Required if {::Google::Cloud::Talent::V4::RequestMetadata#allow_missing_ids allow_missing_ids} is unset or `false`.
         #
         #     A unique user identification string, as determined by the client.
         #     To have the strongest positive impact on search quality
@@ -159,15 +152,10 @@ module Google
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] allow_missing_ids
         #   @return [::Boolean]
-        #     Only set when any of
-        #     {::Google::Cloud::Talent::V4::RequestMetadata#domain domain},
-        #     {::Google::Cloud::Talent::V4::RequestMetadata#session_id session_id} and
-        #     {::Google::Cloud::Talent::V4::RequestMetadata#user_id user_id} isn't available
-        #     for some reason. It is highly recommended not to set this field and provide
-        #     accurate {::Google::Cloud::Talent::V4::RequestMetadata#domain domain},
-        #     {::Google::Cloud::Talent::V4::RequestMetadata#session_id session_id} and
-        #     {::Google::Cloud::Talent::V4::RequestMetadata#user_id user_id} for the best
-        #     service experience.
+        #     Only set when any of {::Google::Cloud::Talent::V4::RequestMetadata#domain domain}, {::Google::Cloud::Talent::V4::RequestMetadata#session_id session_id} and {::Google::Cloud::Talent::V4::RequestMetadata#user_id user_id} isn't
+        #     available for some reason. It is highly recommended not to set this field
+        #     and provide accurate {::Google::Cloud::Talent::V4::RequestMetadata#domain domain}, {::Google::Cloud::Talent::V4::RequestMetadata#session_id session_id} and {::Google::Cloud::Talent::V4::RequestMetadata#user_id user_id} for the
+        #     best service experience.
         # @!attribute [rw] device_info
         #   @return [::Google::Cloud::Talent::V4::DeviceInfo]
         #     The type of device used by the job seeker at the time of the call to the
@@ -232,10 +220,7 @@ module Google
         # Custom attribute values that are either filterable or non-filterable.
         # @!attribute [rw] string_values
         #   @return [::Array<::String>]
-        #     Exactly one of
-        #     {::Google::Cloud::Talent::V4::CustomAttribute#string_values string_values} or
-        #     {::Google::Cloud::Talent::V4::CustomAttribute#long_values long_values} must be
-        #     specified.
+        #     Exactly one of {::Google::Cloud::Talent::V4::CustomAttribute#string_values string_values} or {::Google::Cloud::Talent::V4::CustomAttribute#long_values long_values} must be specified.
         #
         #     This field is used to perform a string match (`CASE_SENSITIVE_MATCH` or
         #     `CASE_INSENSITIVE_MATCH`) search.
@@ -247,22 +232,16 @@ module Google
         #     Empty string isn't allowed.
         # @!attribute [rw] long_values
         #   @return [::Array<::Integer>]
-        #     Exactly one of
-        #     {::Google::Cloud::Talent::V4::CustomAttribute#string_values string_values} or
-        #     {::Google::Cloud::Talent::V4::CustomAttribute#long_values long_values} must be
-        #     specified.
+        #     Exactly one of {::Google::Cloud::Talent::V4::CustomAttribute#string_values string_values} or {::Google::Cloud::Talent::V4::CustomAttribute#long_values long_values} must be specified.
         #
         #     This field is used to perform number range search.
         #     (`EQ`, `GT`, `GE`, `LE`, `LT`) over filterable `long_value`.
         #
-        #     Currently at most 1
-        #     {::Google::Cloud::Talent::V4::CustomAttribute#long_values long_values} is
-        #     supported.
+        #     Currently at most 1 {::Google::Cloud::Talent::V4::CustomAttribute#long_values long_values} is supported.
         # @!attribute [rw] filterable
         #   @return [::Boolean]
         #     If the `filterable` flag is true, the custom field values may be used for
-        #     custom attribute filters
-        #     {::Google::Cloud::Talent::V4::JobQuery#custom_attribute_filter JobQuery.custom_attribute_filter}.
+        #     custom attribute filters {::Google::Cloud::Talent::V4::JobQuery#custom_attribute_filter JobQuery.custom_attribute_filter}.
         #     If false, these values may not be used for custom attribute filters.
         #
         #     Default is false.
@@ -305,30 +284,22 @@ module Google
         #     Job compensation information.
         #
         #     At most one entry can be of type
-        #     {::Google::Cloud::Talent::V4::CompensationInfo::CompensationType::BASE CompensationInfo.CompensationType.BASE},
-        #     which is referred as **base compensation entry** for the job.
+        #     {::Google::Cloud::Talent::V4::CompensationInfo::CompensationType::BASE CompensationInfo.CompensationType.BASE}, which is
+        #     referred as **base compensation entry** for the job.
         # @!attribute [r] annualized_base_compensation_range
         #   @return [::Google::Cloud::Talent::V4::CompensationInfo::CompensationRange]
-        #     Output only. Annualized base compensation range. Computed as base
-        #     compensation entry's
-        #     {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#amount CompensationEntry.amount}
-        #     times
+        #     Output only. Annualized base compensation range. Computed as base compensation entry's
+        #     {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#amount CompensationEntry.amount} times
         #     {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#expected_units_per_year CompensationEntry.expected_units_per_year}.
         #
-        #     See
-        #     {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry CompensationEntry}
-        #     for explanation on compensation annualization.
+        #     See {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry CompensationEntry} for explanation on compensation annualization.
         # @!attribute [r] annualized_total_compensation_range
         #   @return [::Google::Cloud::Talent::V4::CompensationInfo::CompensationRange]
-        #     Output only. Annualized total compensation range. Computed as all
-        #     compensation entries'
-        #     {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#amount CompensationEntry.amount}
-        #     times
+        #     Output only. Annualized total compensation range. Computed as all compensation entries'
+        #     {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#amount CompensationEntry.amount} times
         #     {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#expected_units_per_year CompensationEntry.expected_units_per_year}.
         #
-        #     See
-        #     {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry CompensationEntry}
-        #     for explanation on compensation annualization.
+        #     See {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry CompensationEntry} for explanation on compensation annualization.
         class CompensationInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -337,30 +308,20 @@ module Google
           # as base pay, bonus, or other compensation type.
           #
           # Annualization: One compensation entry can be annualized if
-          # - it contains valid
-          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#amount amount}
-          # or
-          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#range range}.
-          # - and its
-          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year}
-          # is set or can be derived. Its annualized range is determined as
-          # ({::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#amount amount}
-          # or
-          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#range range})
-          # times
+          # - it contains valid {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#amount amount} or {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#range range}.
+          # - and its {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year} is set or can be derived.
+          # Its annualized range is determined as ({::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#amount amount} or {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#range range}) times
           # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year}.
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Talent::V4::CompensationInfo::CompensationType]
           #     Compensation type.
           #
-          #     Default is
-          #     {::Google::Cloud::Talent::V4::CompensationInfo::CompensationType::COMPENSATION_TYPE_UNSPECIFIED CompensationType.COMPENSATION_TYPE_UNSPECIFIED}.
+          #     Default is {::Google::Cloud::Talent::V4::CompensationInfo::CompensationType::COMPENSATION_TYPE_UNSPECIFIED CompensationType.COMPENSATION_TYPE_UNSPECIFIED}.
           # @!attribute [rw] unit
           #   @return [::Google::Cloud::Talent::V4::CompensationInfo::CompensationUnit]
           #     Frequency of the specified amount.
           #
-          #     Default is
-          #     {::Google::Cloud::Talent::V4::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED}.
+          #     Default is {::Google::Cloud::Talent::V4::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED}.
           # @!attribute [rw] amount
           #   @return [::Google::Type::Money]
           #     Compensation amount.
@@ -375,10 +336,8 @@ module Google
           # @!attribute [rw] expected_units_per_year
           #   @return [::Google::Protobuf::DoubleValue]
           #     Expected number of units paid each year. If not specified, when
-          #     {::Google::Cloud::Talent::V4::Job#employment_types Job.employment_types} is
-          #     FULLTIME, a default value is inferred based on
-          #     {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#unit unit}.
-          #     Default values:
+          #     {::Google::Cloud::Talent::V4::Job#employment_types Job.employment_types} is FULLTIME, a default value is inferred
+          #     based on {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#unit unit}. Default values:
           #     - HOURLY: 2080
           #     - DAILY: 260
           #     - WEEKLY: 52
@@ -409,30 +368,19 @@ module Google
           # The type of compensation.
           #
           # For compensation amounts specified in non-monetary amounts,
-          # describe the compensation scheme in the
-          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#description CompensationEntry.description}.
+          # describe the compensation scheme in the {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#description CompensationEntry.description}.
           #
           # For example, tipping format is described in
-          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#description CompensationEntry.description}
-          # (for example, "expect 15-20% tips based on customer bill.") and an estimate
-          # of the tips provided in
-          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#amount CompensationEntry.amount}
-          # or
-          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#range CompensationEntry.range}
-          # ($10 per hour).
+          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#description CompensationEntry.description} (for example, "expect 15-20% tips based
+          # on customer bill.") and an estimate of the tips provided in
+          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#amount CompensationEntry.amount} or {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#range CompensationEntry.range} ($10 per hour).
           #
-          # For example, equity is described in
-          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#description CompensationEntry.description}
+          # For example, equity is described in {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#description CompensationEntry.description}
           # (for example, "1% - 2% equity vesting over 4 years, 1 year cliff") and
-          # value estimated in
-          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#amount CompensationEntry.amount}
-          # or
-          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#range CompensationEntry.range}.
-          # If no value estimate is possible, units are
-          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED}
-          # and then further clarified in
-          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#description CompensationEntry.description}
-          # field.
+          # value estimated in {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#amount CompensationEntry.amount} or
+          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#range CompensationEntry.range}. If no value estimate is possible, units are
+          # {::Google::Cloud::Talent::V4::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED} and then further
+          # clarified in {::Google::Cloud::Talent::V4::CompensationInfo::CompensationEntry#description CompensationEntry.description} field.
           module CompensationType
             # Default value.
             COMPENSATION_TYPE_UNSPECIFIED = 0
@@ -494,8 +442,7 @@ module Google
         end
 
         # Metadata used for long running operations returned by CTS batch APIs.
-        # It's used to replace
-        # {::Google::Longrunning::Operation#metadata google.longrunning.Operation.metadata}.
+        # It's used to replace {::Google::Longrunning::Operation#metadata google.longrunning.Operation.metadata}.
         # @!attribute [rw] state
         #   @return [::Google::Cloud::Talent::V4::BatchOperationMetadata::State]
         #     The state of a long running operation.
@@ -517,13 +464,12 @@ module Google
         # @!attribute [rw] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time when the batch operation status is updated. The metadata and the
-        #     {::Google::Cloud::Talent::V4::BatchOperationMetadata#update_time update_time} is
-        #     refreshed every minute otherwise cached data is returned.
+        #     {::Google::Cloud::Talent::V4::BatchOperationMetadata#update_time update_time} is refreshed every minute otherwise cached data is
+        #     returned.
         # @!attribute [rw] end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time when the batch operation is finished and
-        #     {::Google::Longrunning::Operation#done google.longrunning.Operation.done} is
-        #     set to `true`.
+        #     {::Google::Longrunning::Operation#done google.longrunning.Operation.done} is set to `true`.
         class BatchOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -546,14 +492,12 @@ module Google
             FAILED = 4
 
             # The batch operation is in the process of cancelling after
-            # google.longrunning.Operations.CancelOperation
-            # is called.
+            # google.longrunning.Operations.CancelOperation is called.
             CANCELLING = 5
 
             # The batch operation is done after
-            # google.longrunning.Operations.CancelOperation
-            # is called. Any items processed before cancelling are returned in the
-            # response.
+            # google.longrunning.Operations.CancelOperation is called. Any items
+            # processed before cancelling are returned in the response.
             CANCELLED = 6
           end
         end
@@ -705,8 +649,7 @@ module Google
           # The job is offered as a contracted position with the understanding
           # that it's converted into a full-time position at the end of the
           # contract. Jobs of this type are also returned by a search for
-          # {::Google::Cloud::Talent::V4::EmploymentType::CONTRACTOR EmploymentType.CONTRACTOR}
-          # jobs.
+          # {::Google::Cloud::Talent::V4::EmploymentType::CONTRACTOR EmploymentType.CONTRACTOR} jobs.
           CONTRACT_TO_HIRE = 4
 
           # The job is offered as a temporary employment opportunity, usually
@@ -866,10 +809,9 @@ module Google
           POSTING_REGION_UNSPECIFIED = 0
 
           # In addition to exact location matching, job posting is returned when the
-          # {::Google::Cloud::Talent::V4::LocationFilter LocationFilter} in the search query
-          # is in the same administrative area as the returned job posting. For
-          # example, if a `ADMINISTRATIVE_AREA` job is posted in "CA, USA", it's
-          # returned if {::Google::Cloud::Talent::V4::LocationFilter LocationFilter} has
+          # {::Google::Cloud::Talent::V4::LocationFilter LocationFilter} in the search query is in the same administrative area
+          # as the returned job posting. For example, if a `ADMINISTRATIVE_AREA` job
+          # is posted in "CA, USA", it's returned if {::Google::Cloud::Talent::V4::LocationFilter LocationFilter} has
           # "Mountain View".
           #
           # Administrative area refers to top-level administrative subdivision of this
@@ -878,11 +820,9 @@ module Google
           ADMINISTRATIVE_AREA = 1
 
           # In addition to exact location matching, job is returned when
-          # {::Google::Cloud::Talent::V4::LocationFilter LocationFilter} in search query is
-          # in the same country as this job. For example, if a `NATION_WIDE` job is
-          # posted in "USA", it's returned if
-          # {::Google::Cloud::Talent::V4::LocationFilter LocationFilter} has 'Mountain
-          # View'.
+          # {::Google::Cloud::Talent::V4::LocationFilter LocationFilter} in search query is in the same country as this job.
+          # For example, if a `NATION_WIDE` job is posted in "USA", it's
+          # returned if {::Google::Cloud::Talent::V4::LocationFilter LocationFilter} has 'Mountain View'.
           NATION = 2
 
           # Job allows employees to work remotely (telecommute).
@@ -936,12 +876,6 @@ module Google
           # Commute time is calculated based on public transit including bus, metro,
           # subway, and so on.
           TRANSIT = 2
-
-          # Commute time is calculated based on walking time.
-          WALKING = 3
-
-          # Commute time is calculated based on biking time.
-          CYCLING = 4
         end
       end
     end

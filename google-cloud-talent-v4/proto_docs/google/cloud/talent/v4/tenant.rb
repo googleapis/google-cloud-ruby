@@ -36,8 +36,7 @@ module Google
         #     "projects/foo/tenants/bar".
         # @!attribute [rw] external_id
         #   @return [::String]
-        #     Required. Client side tenant identifier, used to uniquely identify the
-        #     tenant.
+        #     Required. Client side tenant identifier, used to uniquely identify the tenant.
         #
         #     The maximum number of allowed characters is 255.
         class Tenant

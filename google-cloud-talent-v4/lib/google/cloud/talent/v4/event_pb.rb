@@ -3,9 +3,9 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/field_behavior_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/talent/v4/event.proto", :syntax => :proto3) do
     add_message "google.cloud.talent.v4.ClientEvent" do
