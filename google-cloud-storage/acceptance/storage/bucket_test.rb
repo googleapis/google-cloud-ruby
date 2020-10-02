@@ -195,9 +195,9 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
     _(bucket.lifecycle.last.created_before).must_be_kind_of Date
     _(bucket.lifecycle.last.created_before).must_equal created_before_2
-    _(bucket.lifecycle.last.custom_time_before).must_be_kind_of DateTime
+    _(bucket.lifecycle.last.custom_time_before).must_be_kind_of Date
     _(bucket.lifecycle.last.custom_time_before).must_equal custom_time_before_2
-    _(bucket.lifecycle.last.noncurrent_time_before).must_be_kind_of DateTime
+    _(bucket.lifecycle.last.noncurrent_time_before).must_be_kind_of Date
     _(bucket.lifecycle.last.noncurrent_time_before).must_equal noncurrent_time_before_2
 
 
@@ -210,13 +210,13 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(bucket.lifecycle.last.age).must_equal 20
     _(bucket.lifecycle.last.created_before).must_be_kind_of Date
     _(bucket.lifecycle.last.created_before).must_equal created_before_2
-    _(bucket.lifecycle.last.custom_time_before).must_be_kind_of DateTime
+    _(bucket.lifecycle.last.custom_time_before).must_be_kind_of Date
     _(bucket.lifecycle.last.custom_time_before).must_equal custom_time_before_2
     _(bucket.lifecycle.last.days_since_custom_time).must_equal 6
     _(bucket.lifecycle.last.days_since_noncurrent_time).must_equal 15
     _(bucket.lifecycle.last.is_live).must_equal false
     _(bucket.lifecycle.last.matches_storage_class).must_equal ["NEARLINE"]
-    _(bucket.lifecycle.last.noncurrent_time_before).must_be_kind_of DateTime
+    _(bucket.lifecycle.last.noncurrent_time_before).must_be_kind_of Date
     _(bucket.lifecycle.last.noncurrent_time_before).must_equal noncurrent_time_before_2
     _(bucket.lifecycle.last.num_newer_versions).must_equal 4
 
