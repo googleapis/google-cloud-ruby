@@ -117,6 +117,9 @@ module Google
           # @!attribute [rw] cloud_sql
           #   @return [::Google::Cloud::Bigquery::Connection::V1::CloudSqlProperties]
           #     Cloud SQL properties.
+          # @!attribute [rw] aws
+          #   @return [::Google::Cloud::Bigquery::Connection::V1::AwsProperties]
+          #     Amazon Web Services (AWS) properties.
           # @!attribute [r] creation_time
           #   @return [::Integer]
           #     Output only. The creation timestamp of the connection.
@@ -169,6 +172,35 @@ module Google
           #   @return [::String]
           #     The password for the credential.
           class CloudSqlCredential
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Connection properties specific to Amazon Web Services (AWS).
+          # @!attribute [rw] cross_account_role
+          #   @return [::Google::Cloud::Bigquery::Connection::V1::AwsCrossAccountRole]
+          #     Authentication using Google owned AWS IAM user's access key to assume
+          #     into customer's AWS IAM Role.
+          class AwsProperties
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Authentication method for Amazon Web Services (AWS) that uses Google owned
+          # AWS IAM user's access key to assume into customer's AWS IAM Role.
+          # @!attribute [rw] iam_role_id
+          #   @return [::String]
+          #     The user’s AWS IAM Role that trusts the Google-owned AWS IAM user
+          #     Connection.
+          # @!attribute [r] iam_user_id
+          #   @return [::String]
+          #     Output only. Google-owned AWS IAM User for a Connection.
+          # @!attribute [r] external_id
+          #   @return [::String]
+          #     Output only. A Google-generated id for representing Connection’s identity in AWS.
+          #     External Id is also used for preventing the Confused Deputy Problem. See
+          #     https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
+          class AwsCrossAccountRole
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
