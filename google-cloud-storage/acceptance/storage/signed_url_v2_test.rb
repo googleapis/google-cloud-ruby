@@ -44,9 +44,9 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
   end
 
   describe Google::Cloud::Storage::Project, :signed_url do
-    it "should create a signed read url" do
+    it "should create a signed read url with space in file name" do
       local_file = File.new files[:logo][:path]
-      file = bucket.create_file local_file, "CloudLogoSignedUrlGetBucket.png"
+      file = bucket.create_file local_file, "CloudLogoSignedUrl GetBucket.png"
 
       five_min_from_now = 5 * 60
       url = storage.signed_url bucket.name, file.name, method: "GET",
@@ -69,9 +69,9 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
       end
     end
 
-    it "should create a signed POST url version v2" do
+    it "should create a signed POST url version v2 with space in file name" do
       url = storage.signed_url bucket.name,
-                               "CloudLogoProjectSignedUrlPost.png",
+                               "CloudLogoProjectSignedUrl Post.png",
                                method: "POST",
                                content_type: "image/png", # Required for V2
                                headers: { "x-goog-resumable" => "start" },
@@ -90,9 +90,9 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
   end
 
   describe Google::Cloud::Storage::Bucket, :signed_url do
-    it "should create a signed read url" do
+    it "should create a signed read url with space in file name" do
       local_file = File.new files[:logo][:path]
-      file = bucket.create_file local_file, "CloudLogoSignedUrlGetBucket.png"
+      file = bucket.create_file local_file, "CloudLogoSignedUrl GetBucket.png"
 
       five_min_from_now = 5 * 60
       url = bucket.signed_url file.name, method: "GET",
@@ -197,9 +197,9 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
   end
 
   describe Google::Cloud::Storage::File, :signed_url do
-    it "should create a signed read url" do
+    it "should create a signed read url with space in file name" do
       local_file = File.new files[:logo][:path]
-      file = bucket.create_file local_file, "CloudLogoSignedUrlGetFile.png"
+      file = bucket.create_file local_file, "CloudLogoSignedUrl GetFile.png"
 
       five_min_from_now = 5 * 60
       url = file.signed_url method: "GET",

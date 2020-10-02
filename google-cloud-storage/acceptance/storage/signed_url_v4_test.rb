@@ -44,9 +44,9 @@ describe Google::Cloud::Storage, :signed_url, :v4, :storage do
   end
 
   describe Google::Cloud::Storage::Project, :signed_url do
-    it "should create a signed read url version v4" do
+    it "should create a signed read url version v4 with space in file name" do
       local_file = File.new files[:logo][:path]
-      file = bucket.create_file local_file, "CloudLogoSignedUrlGetBucket.png"
+      file = bucket.create_file local_file, "CloudLogoSignedUrl GetBucket.png"
 
       five_min_from_now = 5 * 60
       url = storage.signed_url bucket.name, file.name, method: "GET",
@@ -69,10 +69,10 @@ describe Google::Cloud::Storage, :signed_url, :v4, :storage do
       end
     end
 
-    it "should create a signed POST url version v4" do
+    it "should create a signed POST url version v4 with space in file name" do
       five_min_from_now = 60 * 60
       url = storage.signed_url bucket.name,
-                               "CloudLogoProjectSignedUrlPost.png",
+                               "CloudLogoProjectSignedUrl Post.png",
                                method: "POST",
                                expires: five_min_from_now,
                                headers: { "x-goog-resumable" => "start" },
@@ -90,9 +90,9 @@ describe Google::Cloud::Storage, :signed_url, :v4, :storage do
   end
 
   describe Google::Cloud::Storage::Bucket, :signed_url do
-    it "should create a signed read url version v4" do
+    it "should create a signed read url version v4 with space in file name" do
       local_file = File.new files[:logo][:path]
-      file = bucket.create_file local_file, "CloudLogoSignedUrlGetBucket.png"
+      file = bucket.create_file local_file, "CloudLogoSignedUrl GetBucket.png"
 
       five_min_from_now = 5 * 60
       url = bucket.signed_url file.name, method: "GET",
@@ -197,9 +197,9 @@ describe Google::Cloud::Storage, :signed_url, :v4, :storage do
   end
 
   describe Google::Cloud::Storage::File, :signed_url do
-    it "should create a signed read url version v4" do
+    it "should create a signed read url version v4 with space in file name" do
       local_file = File.new files[:logo][:path]
-      file = bucket.create_file local_file, "CloudLogoSignedUrlGetFile.png"
+      file = bucket.create_file local_file, "CloudLogoSignedUrl GetFile.png"
 
       five_min_from_now = 5 * 60
       url = file.signed_url method: "GET",
@@ -222,9 +222,9 @@ describe Google::Cloud::Storage, :signed_url, :v4, :storage do
       end
     end
 
-    it "should create a signed POST url version v4" do
+    it "should create a signed POST url version v4 with space in file name" do
       five_min_from_now = 60 * 60
-      file = bucket.file "CloudLogoFileSignedUrlPost.png", skip_lookup: true
+      file = bucket.file "CloudLogoFileSignedUrl Post.png", skip_lookup: true
       url = file.signed_url method: "POST",
                             expires: five_min_from_now,
                             headers: { "x-goog-resumable" => "start"},
