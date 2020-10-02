@@ -412,7 +412,8 @@ module Google
         # You can use this SHA256 hash to uniquely identify the AES-256
         # encryption key required to decrypt this file.
         #
-        # @return [String]
+        # @return [String, nil] The encoded SHA256 hash, or `nil` if there is
+        #   no customer-supplied encryption key for this file.
         #
         def encryption_key_sha256
           return nil unless @gapi.customer_encryption
@@ -1229,7 +1230,7 @@ module Google
         #   cipher.encrypt
         #   new_key = cipher.random_key
         #
-        #   file = bucket.file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext", encryption_key: old_key
         #   file.rewrite "new-destination-bucket",
         #                "path/to/destination/file.ext",
         #                encryption_key: old_key,
@@ -1250,7 +1251,7 @@ module Google
         #   # Old customer-supplied key was stored securely for later use.
         #   old_key = "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI..."
         #
-        #   file = bucket.file "path/to/my-file.ext"
+        #   file = bucket.file "path/to/my-file.ext", encryption_key: old_key
         #   file.rewrite "new-destination-bucket",
         #                "path/to/destination/file.ext",
         #                encryption_key: old_key,
