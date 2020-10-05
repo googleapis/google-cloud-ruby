@@ -11,7 +11,7 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
     - name: Fetch history
-      run: "git fetch --deepen=2"
+      run: "git fetch --deepen=2 $GITHUB_SHA"
     - name: Install Ruby 2.7
       uses: ruby/setup-ruby@v1
       with:
