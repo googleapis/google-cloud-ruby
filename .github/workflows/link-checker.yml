@@ -20,8 +20,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: "12.x"
-    - name: Install Linknator
+    - name: Install dependencies
       run: |
-        npm install linkinator
+        bundle install && npm install linkinator
     - name: Check Links
-      run: "rake kokoro:updated_local_docs_tests"
+      run: "bundle exec rake kokoro:updated_local_docs_tests"
