@@ -331,4 +331,16 @@ describe Google::Cloud::Env do
                                    connection: conn
     env.compute_engine?.must_equal true
   end
+
+  it "recognizes GCE_METADATA_HOST" do
+    env_vars = { "GCE_METADATA_HOST" => "mymetadata.example.com" }
+    callable = proc do |url:, **opts|
+      assert_equal "http://mymetadata.example.com", url
+      :callable
+    end
+    Faraday.stub :new, callable do
+      env = ::Google::Cloud::Env.new env: env_vars
+      assert_equal :callable, env.instance_variable_get(:@connection)
+    end
+  end
 end
