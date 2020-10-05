@@ -1,0 +1,27 @@
+name: Docs Link Check
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  docs-link-check:
+    if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Fetch history
+      run: "git fetch --deepen=2 origin $GITHUB_SHA"
+    - name: Install Ruby 2.7
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "2.7"
+    - name: Install NodeJS 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: "12.x"
+    - name: Install dependencies
+      run: |
+        bundle install && npm install linkinator
+    - name: Check Links
+      run: "bundle exec rake kokoro:updated_local_docs_tests"

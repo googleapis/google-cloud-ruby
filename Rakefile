@@ -606,6 +606,11 @@ namespace :kokoro do
     exit kokoro.exit_status
   end
 
+  task :updated_local_docs_tests do
+    kokoro.all_local_docs_tests only_updated: true
+    exit kokoro.exit_status
+  end
+
   task :one_local_docs_test, [:gem] do |t, args|
     gem = args[:gem]
     kokoro.one_local_docs_test gem

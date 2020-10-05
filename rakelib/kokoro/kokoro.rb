@@ -40,12 +40,6 @@ class Kokoro < Command
     @updated_gems.each do |gem|
       run_ci gem do
         run "bundle exec rake ci", 1800
-        # TODO: Remove date requirement
-        require "date"
-        next unless Date.today > Date.new(2020, 6, 15)
-        local_docs_test gem if should_link_check? gem || (
-          autorelease_pending? && @should_release
-        )
       end
     end
   end
@@ -124,14 +118,16 @@ class Kokoro < Command
     @tag = "#{@gem}/v#{version}"
   end
 
-  def all_local_docs_tests
+  def all_local_docs_tests only_updated: false
     all_broken_links = {}
-    @gems.each do |gem|
+    gems = only_updated ? @updated_gems : @gems
+    gems.each do |gem|
       run_ci gem, true do
         broken_links = local_docs_test gem
         all_broken_links[gem] = broken_links unless broken_links.empty?
       end
     end
+    puts "**** No updated gems to check" if gems.empty?
     all_broken_links.each do |gem, links|
       puts
       puts "**** BROKEN: #{gem} ****"
