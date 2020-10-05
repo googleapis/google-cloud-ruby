@@ -69,3 +69,4 @@ in security maintenance, and not end of life. Currently, this means Ruby 2.4
 and later. Older versions of Ruby _may_ still work, but are unsupported and not
 recommended. See https://www.ruby-lang.org/en/downloads/branches/ for details
 about the Ruby support schedule.
+
