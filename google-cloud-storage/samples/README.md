@@ -2,150 +2,128 @@
 
 # Google Cloud Storage Ruby Samples
 
-[Cloud Storage][storage_docs] allows world-wide storage and retrieval of any
-amount of data at any time.
+This directory contains samples for google-cloud-storage. [Google Cloud Storage][storage_docs] allows world-wide storage
+and retrieval of any amount of data at any time.
 
 [storage_docs]: https://cloud.google.com/storage/docs/
 
-## Run sample
+## Setup
 
-To run the sample, first install dependencies:
+### Authentication
 
-    bundle install
+Authentication is typically done through [Application Default Credentials](https://cloud.google.com/docs/authentication#getting_credentials_for_server-centric_flow)
+, which means you do not have to change the code to authenticate as long as your
+environment has credentials. You have a few options for setting up
+authentication:
 
-Run the sample:
+1. When running locally, use the [Google Cloud SDK](https://cloud.google.com/sdk/)
 
-    bundle exec ruby buckets.rb
-    bundle exec ruby files.rb
-    bundle exec ruby acls.rb
+    `gcloud auth application-default login`
 
-## Samples
+1. When running on App Engine or Compute Engine, credentials are already set-up.
+However, you may need to configure your Compute Engine instance with
+[additional scopes](https://cloud.google.com/compute/docs/authentication#using).
+
+1. You can create a [Service Account key file](https://cloud.google.com/docs/authentication#service_accounts)
+. This file can be used to authenticate to Google Cloud Platform services from
+any environment. To use the file, set the `GOOGLE_APPLICATION_CREDENTIALS`
+environment variable to the path to the key file, for example:
+
+    `export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service_account.json`
+
+### Set Project ID
+
+Next, set the *GOOGLE_CLOUD_PROJECT* environment variable to the project name
+set in the
+[Google Cloud Platform Developer Console](https://console.cloud.google.com):
+
+    `export GOOGLE_CLOUD_PROJECT="YOUR-PROJECT-ID"`
+
+### Install Dependencies
+
+1. Install the [Bundler](http://bundler.io/) gem.
+
+1. Install dependencies using:
+
+    `bundle install`
+
+## Run samples
+
+**Usage:** `ruby sample.rb [arguments]`
 
 ### Buckets
 
-**Usage:** `bundle exec ruby get_bucket_metadata.rb [arguments]`
-
 ```
-Usage: bundle exec ruby buckets.rb [command] [arguments]
-
-Commands:
-  list                                                                 List all buckets in the authenticated project
-  enable_requester_pays               <bucket>                            Enable requester pays for a bucket
-  disable_requester_pays              <bucket>                            Disable requester pays for a bucket
-  check_requester_pays                <bucket>                            Check status of requester pays for a bucket
-  set_bucket_default_kms_key              <bucket> <kms_key>                  Enable default KMS encryption for bucket
-  create                              <bucket>                            Create a new bucket with default storage class and location
-  create                              <bucket> <location> <storage_class> Create a new bucket with specific storage class and location
-  add_bucket_label                    <bucket> <label_key> <label_value>  Add bucket label
-  remove_bucket_label                 <bucket> <label_key>                Delete bucket label
-  delete                              <bucket>                            Delete bucket with the provided name
-  set_retention_policy                <bucket> <retention_period>         Set a retention policy on bucket with a retention period determined in seconds
-  remove_retention_policy             <bucket>                            Remove a retention policy from a bucket if policy is not locked
-  lock_retention_policy               <bucket>                            Lock retention policy
-  get_retention_policy                <bucket>                            Get retention policy for a bucket
-  enable_default_event_based_hold     <bucket>                            Enable event-based hold for a bucket
-  disable_default_event_based_hold    <bucket>                            Disable event-based hold for a bucket
-  get_default_event_based_hold        <bucket>                            Get state of event-based hold for a bucket
-  enable_uniform_bucket_level_access  <bucket>                            Enable uniform bucket-level access for a bucket
-  disable_uniform_bucket_level_access <bucket>                            Disable uniform bucket-level access for a bucket
-  get_uniform_bucket_level_access     <bucket>                            Get uniform bucket-level access for a bucket
-
-Environment variables:
-  GOOGLE_CLOUD_PROJECT must be set to your Google Cloud project ID
+storage_list_buckets.rb                                                            List all buckets in the authenticated project
+storage_enable_requester_pays.rb               <bucket>                            Enable requester pays for a bucket
+storage_disable_requester_pays.rb              <bucket>                            Disable requester pays for a bucket
+storage_set_bucket_default_kms_key.rb          <bucket> <kms_key>                  Enable default KMS encryption for bucket
+storage_create_bucket.rb                       <bucket>                            Create a new bucket with default storage class and location
+storage_create_bucket_class_location.rb        <bucket> <location> <storage_class> Create a new bucket with specific storage class and location
+storage_add_bucket_label.rb                    <bucket> <label_key> <label_value>  Add bucket label
+storage_remove_bucket_label.rb                 <bucket> <label_key>                Delete bucket label
+storage_delete_bucket.rb                       <bucket>                            Delete bucket with the provided name
+storage_set_retention_policy.rb                <bucket> <retention_period>         Set a retention policy on bucket with a retention period determined in seconds
+storage_remove_retention_policy.rb             <bucket>                            Remove a retention policy from a bucket if policy is not locked
+storage_lock_retention_policy.rb               <bucket>                            Lock retention policy
+storage_get_retention_policy.rb                <bucket>                            Get retention policy for a bucket
+storage_enable_default_event_based_hold.rb     <bucket>                            Enable event-based hold for a bucket
+storage_disable_default_event_based_hold.rb    <bucket>                            Disable event-based hold for a bucket
+storage_get_default_event_based_hold.rb        <bucket>                            Get state of event-based hold for a bucket
+storage_enable_uniform_bucket_level_access.rb  <bucket>                            Enable uniform bucket-level access for a bucket
+storage_disable_uniform_bucket_level_access.rb <bucket>                            Disable uniform bucket-level access for a bucket
+storage_get_uniform_bucket_level_access.rb     <bucket>                            Get uniform bucket-level access for a bucket
 ```
 
 ### Files
 
-**Usage:** `bundle exec ruby files.rb [command] [arguments]`
-
 ```
-Usage: bundle exec ruby files.rb [command] [arguments]
-
-Commands:
-  list                 <bucket>                                     List all files in the bucket
-  upload               <bucket> <file> <dest_path>                  Upload local file to a bucket
-  encrypted_upload     <bucket> <file> <dest_path> <encryption_key> Upload local file as an encrypted file to a bucket
-  kms_upload           <bucket> <file> <dest_path> <kms_key>        Upload local file and encrypt service side using a KMS key
-  download             <bucket> <file> <path>                       Download a file from a bucket
-  download_public_file <bucket> <file> <path>                       Download a publically accessible file from a bucket
-  encrypted_download <bucket> <file> <path> <encryption_key>        Download an encrypted file from a bucket
-  download_with_requester_pays <project> <bucket> <file> <path>     Download a file from a requester pays enabled bucket
-  rotate_encryption_key <bucket> <file> <base64_current_encryption_key> <base64_new_encryption_key> Update encryption key of an encrypted file.
-  generate_encryption_key                                           Generate a sample encryption key
-  delete       <bucket> <file>                                      Delete a file from a bucket
-  metadata     <bucket> <file>                                      Display metadata for a file in a bucket
-  make_public  <bucket> <file>                                      Make a file in a bucket public
-  rename       <bucket> <file> <new>                                Rename a file in a bucket
-  copy <srcBucket> <srcFile> <destBucket> <destFile>                Copy file to other bucket
-  generate_signed_url <bucket> <file>                               Generate a V2 signed url for a file
-  generate_signed_url_v4 <bucket> <file>                        Generate a V4 signed get url for a file
-  generate_upload_signed_url_v4 <bucket> <file>                        Generate a V4 signed put url for a file
-  generate_signed_post_policy_v4 <bucket> <file>                    Generate a V4 signed post policy for a file and print HTML form
-  set_event_based_hold       <bucket> <file>                        Set an event-based hold on a file
-  release_event_based_hold   <bucket> <file>                        Relase an event-based hold on a file
-  set_temporary_hold         <bucket> <file>                        Set a temporary hold on a file
-  release_temporary_hold     <bucket> <file>                        Release a temporary hold on a file
-
-Environment variables:
-  GOOGLE_CLOUD_PROJECT must be set to your Google Cloud project ID
-```
-
-### Access Control List
-
-**Usage:** `bundle exec ruby acls.rb [command] [arguments]`
-
-```
-Usage: bundle exec ruby acls.rb [command] [arguments]
-
-Commands:
-  print_bucket_acl <bucket>                  Print bucket Access Control List
-  print_bucket_acl_for_user <bucket> <email> Print bucket ACL for an email
-  add_bucket_owner <bucket> <email>          Add a new OWNER to a bucket
-  remove_bucket_acl <bucket> <email>         Remove an entity from a bucket ACL
-  add_bucket_default_owner <bucket> <email>  Add a default OWNER for a bucket
-  remove_bucket_default_acl <bucket> <email> Remove an entity from default bucket ACL
-  print_file_acl <bucket> <file>             Print file ACL
-  print_file_acl_for_user <bucket> <file> <email> Print file ACL for an email
-  add_file_owner <bucket> <file> <email>          Add an OWNER to a file
-  remove_file_acl <bucket> <file> <email>         Remove an entity from a file ACL
-
-Environment variables:
-  GOOGLE_CLOUD_PROJECT must be set to your Google Cloud project ID
+storage_list_files.rb                     <bucket>                                                                    List all files in the bucket
+storage_upload_file.rb                    <bucket> <file> <dest_path>                                                 Upload local file to a bucket
+storage_upload_encrypted_file.rb          <bucket> <file> <dest_path> <encryption_key>                                Upload local file as an encrypted file to a bucket
+storage_upload_with_kms_key.rb            <bucket> <file> <dest_path> <kms_key>                                       Upload local file and encrypt service side using a KMS key
+storage_download_file.rb                  <bucket> <file> <path>                                                      Download a file from a bucket
+storage_download_public_file.rb           <bucket> <file> <path>                                                      Download a publically accessible file from a bucket
+storage_download_encrypted_file.rb        <bucket> <file> <path> <encryption_key>                                     Download an encrypted file from a bucket
+storage_download_file_requester_pays.rb   <project> <bucket> <file> <path>                                            Download a file from a requester pays enabled bucket
+storage_rotate_encryption_key.rb          <bucket> <file> <base64_current_encryption_key> <base64_new_encryption_key> Update encryption key of an encrypted file.
+storage_generate_encryption_key.rb                                                                                    Generate a sample encryption key
+storage_delete_file.rb                    <bucket> <file>                                                             Delete a file from a bucket
+storage_get_metadata.rb                   <bucket> <file>                                                             Display metadata for a file in a bucket
+storage_make_public.rb                    <bucket> <file>                                                             Make a file in a bucket public
+storage_move_file.rb                      <bucket> <file> <new>                                                       Rename a file in a bucket
+storage_copy_file.rb                      <srcBucket> <srcFile> <destBucket> <destFile>                               Copy file to other bucket
+storage_generate_signed_url.rb            <bucket> <file>                                                             Generate a V2 signed url for a file
+storage_generate_signed_url_v4.rb         <bucket> <file>                                                             Generate a V4 signed get url for a file
+storage_generate_upload_signed_url_v4.rb  <bucket> <file>                                                             Generate a V4 signed put url for a file
+storage_generate_signed_post_policy_v4.rb <bucket> <file>                                                             Generate a V4 signed post policy for a file and print HTML form
+storage_set_event_based_hold.rb           <bucket> <file>                                                             Set an event-based hold on a file
+storage_release_event_based_hold.rb       <bucket> <file>                                                             Relase an event-based hold on a file
+storage_set_temporary_hold.rb             <bucket> <file>                                                             Set a temporary hold on a file
+storage_release_temporary_hold.rb         <bucket> <file>                                                             Release a temporary hold on a file
 ```
 
 ### Cloud Storage Bucket-level Identity & Access Management
 
-**Usage:** `bundle exec ruby iam.rb [command] [arguments]`
-
 ```
-Usage: bundle exec ruby iam.rb [command] [arguments]
-
-Commands:
-  view_bucket_iam_members  <bucket>                                                                                View bucket-level IAM members
-  add_bucket_iam_member    <bucket> <iam_role> <iam_member>                                                        Add a bucket-level IAM member
-  add_bucket_conditional_iam_binding <bucket> <iam_role> <iam_member> <cond_title> <cond_description> <cond_expr>  Add a conditional bucket-level binding
-  remove_bucket_iam_member <bucket> <iam_role> <iam_member>                                                        Remove a bucket-level IAM member
-  remove_bucket_conditional_iam_binding <bucket> <iam_member> <cond_title> <cond_description> <cond_expr>          Remove a conditional bucket-level binding
-
-Environment variables:
-  GOOGLE_CLOUD_PROJECT must be set to your Google Cloud project ID
+storage_view_bucket_iam_members.rb  <bucket>                                                                                View bucket-level IAM members
+storage_add_bucket_iam_member.rb    <bucket> <iam_role> <iam_member>                                                        Add a bucket-level IAM member
+storage_add_bucket_conditional_iam_binding.rb <bucket> <iam_role> <iam_member> <cond_title> <cond_description> <cond_expr>  Add a conditional bucket-level binding
+storage_remove_bucket_iam_member.rb <bucket> <iam_role> <iam_member>                                                        Remove a bucket-level IAM member
+storage_remove_bucket_conditional_iam_binding.rb <bucket> <iam_member> <cond_title> <cond_description> <cond_expr>          Remove a conditional bucket-level binding
 ```
 
 ### Cloud Storage Service Account HMAC Key Management
 
-**Usage:** `bundle exec ruby hmac.rb [commmand] [arguments]`
-
 ```
-Usage: bundle exec ruby hmac.rb [command] [arguments]
-
-Commands:
-  list_hmac_keys                               List all HMAC keys for a project
-  create_hmac_key     <serviceAccountEmail>    Create HMAC Key
-  get_hmac_key        <accessId>               Get HMAC Key metadata
-  activate_hmac_key   <accessId>               Activate an HMAC Key
-  deactivate_hmac_key <accessId>               Deactivate an HMAC Key
-  delete_hmac_key     <accessId>               Delete a deactivated HMAC key
-
-Environment variables:
-  GOOGLE_CLOUD_PROJECT must be set to your Google Cloud project ID
+storage_list_hmac_keys.rb                               List all HMAC keys for a project
+storage_create_hmac_key.rb     <serviceAccountEmail>    Create HMAC Key
+storage_get_hmac_key           <accessId>               Get HMAC Key metadata
+storage_activate_hmac_key.rb   <accessId>               Activate an HMAC Key
+storage_deactivate_hmac_key.rb <accessId>               Deactivate an HMAC Key
+storage_delete_hmac_key.rb     <accessId>               Delete a deactivated HMAC key
 ```
+
+## Run tests
+
+Run the tests for these samples by running `bundle exec rake test`.
