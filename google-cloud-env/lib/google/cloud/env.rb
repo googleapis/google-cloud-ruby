@@ -82,6 +82,9 @@ module Google
       # well as mocking for testing.
       #
       # @param [Hash] env Mock environment variables.
+      # @param [String] host The hostname or IP address of the metadata server.
+      #     Optional. If not specified, uses the `GCE_METADATA_HOST`,
+      #     environment variable or falls back to `169.254.167.254`.
       # @param [Hash,false] metadata_cache The metadata cache. You may pass
       #     a prepopuated cache, an empty cache (the default) or `false` to
       #     disable the cache completely.
@@ -102,7 +105,7 @@ module Google
       #     If specified, overrides the `request_timeout` and `open_timeout`
       #     settings.
       #
-      def initialize env: nil, connection: nil, metadata_cache: nil,
+      def initialize env: nil, host: nil, connection: nil, metadata_cache: nil,
                      open_timeout: 0.1, request_timeout: 1.0,
                      retry_count: 2, retry_interval: 0.1,
                      retry_backoff_factor: 1.5, retry_max_interval: 0.5
@@ -114,7 +117,9 @@ module Google
         @retry_backoff_factor = retry_backoff_factor
         @retry_max_interval = retry_max_interval
         request_opts = { timeout: request_timeout, open_timeout: open_timeout }
-        @connection = connection || ::Faraday.new(url: METADATA_HOST, request: request_opts)
+        host ||= @env["GCE_METADATA_HOST"] || METADATA_HOST
+        host = "http://#{host}" unless host.start_with? "http://"
+        @connection = connection || ::Faraday.new(url: host, request: request_opts)
       end
 
       ##
