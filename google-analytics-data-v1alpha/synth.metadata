@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "e1d661afe7586d44a29821d44fe8a4cc6d0a34a9"
+        "sha": "175c6f8872f121888c1d749f9c2e2c97876e885c"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "f0d92d22e675c93125f8a7abd10dc01b891c3bcf",
-        "internalRef": "332061108"
+        "sha": "c3c12961380f5612d41bbda0944454a5e88b63b0",
+        "internalRef": "335470104"
       }
     }
   ],
@@ -44,7 +44,6 @@
     "lib/google/analytics/data/v1alpha/analytics_data.rb",
     "lib/google/analytics/data/v1alpha/analytics_data/client.rb",
     "lib/google/analytics/data/v1alpha/analytics_data/credentials.rb",
-    "lib/google/analytics/data/v1alpha/analytics_data/paths.rb",
     "lib/google/analytics/data/v1alpha/analytics_data_api_pb.rb",
     "lib/google/analytics/data/v1alpha/analytics_data_api_services_pb.rb",
     "lib/google/analytics/data/v1alpha/data_pb.rb",
@@ -53,8 +52,6 @@
     "proto_docs/google/analytics/data/v1alpha/analytics_data_api.rb",
     "proto_docs/google/analytics/data/v1alpha/data.rb",
     "proto_docs/google/api/field_behavior.rb",
-    "proto_docs/google/api/resource.rb",
-    "test/google/analytics/data/v1alpha/analytics_data_paths_test.rb",
     "test/google/analytics/data/v1alpha/analytics_data_test.rb",
     "test/helper.rb"
   ]

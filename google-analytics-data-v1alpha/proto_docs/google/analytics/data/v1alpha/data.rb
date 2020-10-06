@@ -556,7 +556,9 @@ module Google
         #     combinations.
         # @!attribute [rw] row_count
         #   @return [::Integer]
-        #     The cardinality of the pivot as if offset = 0 and limit = -1.
+        #     The cardinality of the pivot as if offset = 0 and limit = -1. The total
+        #     number of rows for this pivot's fields regardless of how the parameters
+        #     offset and limit are specified in the request.
         class PivotHeader
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

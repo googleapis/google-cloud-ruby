@@ -23,7 +23,6 @@ require "gapic/config/method"
 require "google/analytics/data/v1alpha/version"
 
 require "google/analytics/data/v1alpha/analytics_data/credentials"
-require "google/analytics/data/v1alpha/analytics_data/paths"
 require "google/analytics/data/v1alpha/analytics_data/client"
 
 module Google
