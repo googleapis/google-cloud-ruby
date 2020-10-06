@@ -58,7 +58,7 @@ describe "Files Snippets" do
   let(:secondary_bucket) { @secondary_bucket }
 
   before :all do
-    @bucket = create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}"
+    @bucket = create_bucket_helper random_bucket_name
     @secondary_bucket = create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}_secondary"
   end
 

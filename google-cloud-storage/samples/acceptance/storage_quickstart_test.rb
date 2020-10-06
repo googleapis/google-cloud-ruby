@@ -17,7 +17,7 @@ require_relative "../storage_quickstart.rb"
 
 describe "Storage Quickstart" do
   let(:storage_client) { Google::Cloud::Storage.new }
-  let(:bucket_name)    { "ruby_storage_sample_#{SecureRandom.hex}" }
+  let(:bucket_name)    { random_bucket_name }
 
   after do
     delete_bucket_helper bucket_name

@@ -52,7 +52,7 @@ describe "Buckets Snippets" do
   describe "bucket lifecycle" do
     it "create_bucket, create_bucket_class_location, list_buckets, get_bucket_metadata, delete_bucket" do
       # create_bucket
-      bucket_name = "ruby_storage_sample_#{SecureRandom.hex}"
+      bucket_name = random_bucket_name
       refute storage_client.bucket bucket_name
 
       retry_resource_exhaustion do
@@ -65,7 +65,7 @@ describe "Buckets Snippets" do
 
       # create_bucket_class_location
 
-      secondary_bucket_name = "ruby_storage_sample_#{SecureRandom.hex}"
+      secondary_bucket_name = random_bucket_name
       location = "US"
       storage_class = "STANDARD"
       refute storage_client.bucket secondary_bucket_name
@@ -243,7 +243,7 @@ describe "Buckets Snippets" do
   end
 
   describe "lifecycle management" do
-    let(:bucket) { create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}" }
+    let(:bucket) { create_bucket_helper random_bucket_name }
     after { delete_bucket_helper bucket.name }
 
     it "enable_bucket_lifecycle_management, disable_bucket_lifecycle_management" do
@@ -266,6 +266,9 @@ describe "Buckets Snippets" do
   end
 
   describe "retention policy" do
+    let(:bucket) { create_bucket_helper random_bucket_name }
+    after { delete_bucket_helper bucket.name }
+
     it "set_retention_policy, get_retention_policy, remove_retention_policy" do
       # set_retention_policy
       assert_output "Retention period for #{bucket.name} is now #{retention_period} seconds.\n" do

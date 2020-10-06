@@ -19,6 +19,7 @@ require "minitest/autorun"
 require "minitest/focus"
 require "minitest/hooks/default"
 require "net/http"
+require "time"
 require "securerandom"
 require "uri"
 
@@ -97,11 +98,13 @@ def delete_hmac_key_helper hmac_key
   hmac_key.delete!
 end
 
+def random_bucket_name
+  t = Time.now.utc.iso8601.gsub ":", "-"
+  "ruby-storage-samples-test-#{t}-#{SecureRandom.hex 4}".downcase
+end
+
 # Create fixture bucket to be shared with all the tests
-require "time"
-require "securerandom"
-t = Time.now.utc.iso8601.gsub ":", "-"
-$fixture_bucket_name = "ruby-storage-samples-acceptance-#{t}-#{SecureRandom.hex 4}".downcase
+$fixture_bucket_name = random_bucket_name
 
 def clean_up_fixture_bucket
   storage_client = Google::Cloud::Storage.new
