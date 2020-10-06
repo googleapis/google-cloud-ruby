@@ -24,15 +24,7 @@ describe "IAM Snippets" do
   let(:member)                { "user:test@test.com" }
   let(:role_public)           { "roles/storage.objectViewer" }
   let(:member_public)         { "allUsers" }
-  let(:bucket) { @bucket }
-
-  before :all do
-    @bucket = create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}"
-  end
-
-  after :all do
-    delete_bucket_helper @bucket.name
-  end
+  let(:bucket) { fixture_bucket }
 
   it "add_bucket_iam_member, view_bucket_iam_members, remove_bucket_iam_member" do
     # add_bucket_iam_member

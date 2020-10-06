@@ -19,6 +19,9 @@ Metrics/MethodLength:
     Enabled: false
 Naming/AccessorMethodName:
     Enabled: false
+Style/GlobalVars:
+    Exclude:
+        - "acceptance/helper.rb"
 Style/IfUnlessModifier:
     Enabled: false
 Style/Next:

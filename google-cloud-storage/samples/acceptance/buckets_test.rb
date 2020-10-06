@@ -47,14 +47,7 @@ describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
   let(:kms_key)          { get_kms_key storage_client.project }
   let(:retention_period) { rand 1..99 }
-
-  let :bucket do
-    create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}"
-  end
-
-  after do
-    delete_bucket_helper bucket.name
-  end
+  let(:bucket) { fixture_bucket }
 
   describe "bucket lifecycle" do
     it "create_bucket, create_bucket_class_location, list_buckets, get_bucket_metadata, delete_bucket" do
@@ -196,7 +189,7 @@ describe "Buckets Snippets" do
       end
       refute bucket.uniform_bucket_level_access?
 
-      bucket.uniform_bucket_level_access = true
+      bucket.uniform_bucket_level_access = false
     end
   end
 
