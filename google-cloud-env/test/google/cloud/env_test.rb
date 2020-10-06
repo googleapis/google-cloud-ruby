@@ -343,4 +343,15 @@ describe Google::Cloud::Env do
       assert_equal :callable, env.instance_variable_get(:@connection)
     end
   end
+
+  it "recognizes host override param" do
+    callable = proc do |url:, **opts|
+      assert_equal "http://mymetadata.example.com", url
+      :callable
+    end
+    Faraday.stub :new, callable do
+      env = ::Google::Cloud::Env.new host: "mymetadata.example.com"
+      assert_equal :callable, env.instance_variable_get(:@connection)
+    end
+  end
 end
