@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../generate_signed_url.rb"
+require_relative "../storage_generate_signed_url_v2.rb"
 require_relative "../storage_change_file_storage_class.rb"
 require_relative "../storage_compose_file.rb"
 require_relative "../storage_copy_file.rb"
@@ -422,12 +422,12 @@ describe "Files Snippets" do
     assert_nil file.encryption_key_sha256
   end
 
-  it "generate_signed_url" do
+  it "generate_signed_url_v2" do
     bucket.create_file local_file, remote_file_name
 
     out, _err = capture_io do
-      generate_signed_url bucket_name: bucket.name,
-                          file_name:   remote_file_name
+      generate_signed_url_v2 bucket_name: bucket.name,
+                             file_name:   remote_file_name
     end
 
     assert_match "The signed url for #{remote_file_name} is", out

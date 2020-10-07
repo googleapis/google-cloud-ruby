@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def generate_signed_url bucket_name:, file_name:
-  # [START generate_signed_url]
+def generate_signed_url_v2 bucket_name:, file_name:
+  # [START storage_generate_signed_url_v2]
   # bucket_name = "Your Google Cloud Storage bucket name"
   # file_name   = "Name of a file in the Cloud Storage bucket"
 
@@ -26,7 +26,7 @@ def generate_signed_url bucket_name:, file_name:
   url = file.signed_url
 
   puts "The signed url for #{file_name} is #{url}"
-  # [END generate_signed_url]
+  # [END storage_generate_signed_url_v2]
 end
 
-generate_signed_url bucket_name: ARGV.shift, file_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+generate_signed_url_v2 bucket_name: ARGV.shift, file_name: ARGV.shift if $PROGRAM_NAME == __FILE__

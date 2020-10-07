@@ -55,7 +55,6 @@ set in the
 
 | File | Args | Description |
 | --- | --- | --- |
-| generate_signed_url.rb | `bucket` `file` | Generate a V2 signed url for a file |
 | storage_activate_hmac_key.rb | `access_id` | Activate an HMAC Key |
 | storage_add_bucket_conditional_iam_binding.rb | `bucket` `iam_role` `iam_member` `cond_title` `cond_description` `cond_expr` | Add a conditional bucket-level binding |
 | storage_add_bucket_iam_member.rb | `bucket` `iam_role` `iam_member` | Add a bucket-level IAM member |
@@ -80,6 +79,7 @@ set in the
 | storage_enable_uniform_bucket_level_access.rb | `bucket` | Enable uniform bucket-level access for a bucket |
 | storage_generate_encryption_key.rb | | Generate a sample encryption key |
 | storage_generate_signed_post_policy_v4.rb | `bucket` `file` | Generate a V4 signed post policy for a file and print HTML form |
+| storage_generate_signed_url_v2.rb | `bucket` `file` | Generate a V2 signed url for a file |
 | storage_generate_signed_url_v4.rb | `bucket` `file` | Generate a V4 signed get url for a file |
 | storage_generate_upload_signed_url_v4.rb | `bucket` `file` | Generate a V4 signed put url for a file |
 | storage_get_default_event_based_hold.rb | `bucket` | Get state of event-based hold for a bucket |
