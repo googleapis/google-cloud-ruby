@@ -22,23 +22,13 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Talent::ClientConstructionMinitest < Minitest::Test
-  def test_application_service
-    Gapic::ServiceStub.stub :new, :stub do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Talent.application_service do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::Talent::V4beta1::ApplicationService::Client, client
-    end
-  end
-
   def test_company_service
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Talent.company_service do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Talent::V4beta1::CompanyService::Client, client
+      assert_kind_of Google::Cloud::Talent::V4::CompanyService::Client, client
     end
   end
 
@@ -48,7 +38,7 @@ class Google::Cloud::Talent::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::Talent.completion do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Talent::V4beta1::Completion::Client, client
+      assert_kind_of Google::Cloud::Talent::V4::Completion::Client, client
     end
   end
 
@@ -58,7 +48,7 @@ class Google::Cloud::Talent::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::Talent.event_service do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Talent::V4beta1::EventService::Client, client
+      assert_kind_of Google::Cloud::Talent::V4::EventService::Client, client
     end
   end
 
@@ -68,17 +58,7 @@ class Google::Cloud::Talent::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::Talent.job_service do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Talent::V4beta1::JobService::Client, client
-    end
-  end
-
-  def test_profile_service
-    Gapic::ServiceStub.stub :new, :stub do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Talent.profile_service do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::Talent::V4beta1::ProfileService::Client, client
+      assert_kind_of Google::Cloud::Talent::V4::JobService::Client, client
     end
   end
 
@@ -88,7 +68,7 @@ class Google::Cloud::Talent::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::Talent.tenant_service do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Talent::V4beta1::TenantService::Client, client
+      assert_kind_of Google::Cloud::Talent::V4::TenantService::Client, client
     end
   end
 end

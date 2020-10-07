@@ -45,42 +45,11 @@ module Google
   module Cloud
     module Talent
       ##
-      # Create a new client object for ApplicationService.
-      #
-      # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4beta1::ApplicationService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4beta1/latest/Google/Cloud/Talent/V4beta1/ApplicationService/Client.html)
-      # for version V4beta1 of the API.
-      # However, you can specify specify a different API version by passing it in the
-      # `version` parameter. If the ApplicationService service is
-      # supported by that API version, and the corresponding gem is available, the
-      # appropriate versioned client will be returned.
-      #
-      # ## About ApplicationService
-      #
-      # A service that handles application management, including CRUD and
-      # enumeration.
-      #
-      # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v4beta1`.
-      # @return [ApplicationService::Client] A client object for the specified version.
-      #
-      def self.application_service version: :v4beta1, &block
-        require "google/cloud/talent/#{version.to_s.downcase}"
-
-        package_name = Google::Cloud::Talent
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
-        package_module = Google::Cloud::Talent.const_get package_name
-        package_module.const_get(:ApplicationService).const_get(:Client).new(&block)
-      end
-
-      ##
       # Create a new client object for CompanyService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4beta1::CompanyService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4beta1/latest/Google/Cloud/Talent/V4beta1/CompanyService/Client.html)
-      # for version V4beta1 of the API.
+      # [Google::Cloud::Talent::V4::CompanyService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4/latest/Google/Cloud/Talent/V4/CompanyService/Client.html)
+      # for version V4 of the API.
       # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the CompanyService service is
       # supported by that API version, and the corresponding gem is available, the
@@ -91,10 +60,10 @@ module Google
       # A service that handles company management, including CRUD and enumeration.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v4beta1`.
+      #   Defaults to `:v4`.
       # @return [CompanyService::Client] A client object for the specified version.
       #
-      def self.company_service version: :v4beta1, &block
+      def self.company_service version: :v4, &block
         require "google/cloud/talent/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Talent
@@ -109,8 +78,8 @@ module Google
       # Create a new client object for Completion.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4beta1::Completion::Client](https://googleapis.dev/ruby/google-cloud-talent-v4beta1/latest/Google/Cloud/Talent/V4beta1/Completion/Client.html)
-      # for version V4beta1 of the API.
+      # [Google::Cloud::Talent::V4::Completion::Client](https://googleapis.dev/ruby/google-cloud-talent-v4/latest/Google/Cloud/Talent/V4/Completion/Client.html)
+      # for version V4 of the API.
       # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the Completion service is
       # supported by that API version, and the corresponding gem is available, the
@@ -121,10 +90,10 @@ module Google
       # A service handles auto completion.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v4beta1`.
+      #   Defaults to `:v4`.
       # @return [Completion::Client] A client object for the specified version.
       #
-      def self.completion version: :v4beta1, &block
+      def self.completion version: :v4, &block
         require "google/cloud/talent/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Talent
@@ -139,8 +108,8 @@ module Google
       # Create a new client object for EventService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4beta1::EventService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4beta1/latest/Google/Cloud/Talent/V4beta1/EventService/Client.html)
-      # for version V4beta1 of the API.
+      # [Google::Cloud::Talent::V4::EventService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4/latest/Google/Cloud/Talent/V4/EventService/Client.html)
+      # for version V4 of the API.
       # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the EventService service is
       # supported by that API version, and the corresponding gem is available, the
@@ -151,10 +120,10 @@ module Google
       # A service handles client event report.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v4beta1`.
+      #   Defaults to `:v4`.
       # @return [EventService::Client] A client object for the specified version.
       #
-      def self.event_service version: :v4beta1, &block
+      def self.event_service version: :v4, &block
         require "google/cloud/talent/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Talent
@@ -169,8 +138,8 @@ module Google
       # Create a new client object for JobService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4beta1::JobService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4beta1/latest/Google/Cloud/Talent/V4beta1/JobService/Client.html)
-      # for version V4beta1 of the API.
+      # [Google::Cloud::Talent::V4::JobService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4/latest/Google/Cloud/Talent/V4/JobService/Client.html)
+      # for version V4 of the API.
       # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the JobService service is
       # supported by that API version, and the corresponding gem is available, the
@@ -181,10 +150,10 @@ module Google
       # A service handles job management, including job CRUD, enumeration and search.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v4beta1`.
+      #   Defaults to `:v4`.
       # @return [JobService::Client] A client object for the specified version.
       #
-      def self.job_service version: :v4beta1, &block
+      def self.job_service version: :v4, &block
         require "google/cloud/talent/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Talent
@@ -196,42 +165,11 @@ module Google
       end
 
       ##
-      # Create a new client object for ProfileService.
-      #
-      # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4beta1::ProfileService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4beta1/latest/Google/Cloud/Talent/V4beta1/ProfileService/Client.html)
-      # for version V4beta1 of the API.
-      # However, you can specify specify a different API version by passing it in the
-      # `version` parameter. If the ProfileService service is
-      # supported by that API version, and the corresponding gem is available, the
-      # appropriate versioned client will be returned.
-      #
-      # ## About ProfileService
-      #
-      # A service that handles profile management, including profile CRUD,
-      # enumeration and search.
-      #
-      # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v4beta1`.
-      # @return [ProfileService::Client] A client object for the specified version.
-      #
-      def self.profile_service version: :v4beta1, &block
-        require "google/cloud/talent/#{version.to_s.downcase}"
-
-        package_name = Google::Cloud::Talent
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
-        package_module = Google::Cloud::Talent.const_get package_name
-        package_module.const_get(:ProfileService).const_get(:Client).new(&block)
-      end
-
-      ##
       # Create a new client object for TenantService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4beta1::TenantService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4beta1/latest/Google/Cloud/Talent/V4beta1/TenantService/Client.html)
-      # for version V4beta1 of the API.
+      # [Google::Cloud::Talent::V4::TenantService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4/latest/Google/Cloud/Talent/V4/TenantService/Client.html)
+      # for version V4 of the API.
       # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the TenantService service is
       # supported by that API version, and the corresponding gem is available, the
@@ -242,10 +180,10 @@ module Google
       # A service that handles tenant management, including CRUD and enumeration.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v4beta1`.
+      #   Defaults to `:v4`.
       # @return [TenantService::Client] A client object for the specified version.
       #
-      def self.tenant_service version: :v4beta1, &block
+      def self.tenant_service version: :v4, &block
         require "google/cloud/talent/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Talent
