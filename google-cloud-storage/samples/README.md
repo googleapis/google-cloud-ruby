@@ -47,6 +47,10 @@ set in the
 
     `bundle install`
 
+## Run tests
+
+Run the tests for these samples by running `bundle exec rake test`.
+
 ## Run samples
 
 **Usage:** `ruby sample.rb [arguments]`
@@ -129,7 +133,3 @@ set in the
 | storage_upload_file.rb | `bucket` `file` `dest_path` | Upload local file to a bucket |
 | storage_upload_with_kms_key.rb | `bucket` `file` `dest_path` `kms_key` | Upload local file and encrypt service side using a KMS key |
 | storage_view_bucket_iam_members.rb | `bucket` | View bucket-level IAM members |
-
-## Run tests
-
-Run the tests for these samples by running `bundle exec rake test`.
