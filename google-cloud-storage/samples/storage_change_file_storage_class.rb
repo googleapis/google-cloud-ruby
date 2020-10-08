@@ -32,5 +32,5 @@ def change_file_storage_class bucket_name:, file_name:
 end
 
 if $PROGRAM_NAME == __FILE__
-  change_file_storage_class bucket_name: ARGV.shift, sources: ARGV.shift, destination_file_name: ARGV.shift
+  change_file_storage_class bucket_name: ARGV.shift, file_name: ARGV.shift
 end
