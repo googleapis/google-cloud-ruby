@@ -1,5 +1,21 @@
 # Release History
 
+### 0.8.0 / 2020-10-09
+
+#### Features
+
+* Support for Asset org policy and access context.
+* add project path helper
+* initial microsynth of asset v1
+
+#### Bug Fixes
+
+* set correct endpoint for long-running operations client
+
+#### Documentation
+
+* Update docs for IAM Policy data types.
+
 ### 0.7.0 / 2020-09-17
 
 #### Features
