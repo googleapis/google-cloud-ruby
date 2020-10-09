@@ -4,6 +4,12 @@
 
 * Clarify Finding#event_time description
 
+### 0.5.0 / 2020-10-09
+
+#### Features
+
+* Initial microsynth of SecurityCenter V1p1beta1
+
 ### 0.4.1 / 2020-09-24
 
 #### Documentation
