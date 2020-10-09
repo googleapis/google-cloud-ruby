@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2020-10-09
+
+#### Features
+
+* Initial microsynth of SecurityCenter V1
+
 ### 0.3.5 / 2020-09-03
 
 #### Documentation
