@@ -1,5 +1,30 @@
 # Release History
 
+### 0.11.0 / 2020-10-09
+
+#### Features
+
+* Move data type classes from Phishingprotection to PhishingProtection.
+  * Note: Phishingprotection was left as an alias, so older code should still work.
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Add service_address and service_port to client constructor
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Remove broken troubleshooting link from auth guide.
+* edit synths to fix broken links ([#5190](https://www.github.com/googleapis/google-cloud-ruby/issues/5190))
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Minor updates to documentation
+* Update copyright year
+* Update product home page link
+* fix bad links ([#3783](https://www.github.com/googleapis/google-cloud-ruby/issues/3783))
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 0.10.0 / 2020-06-01
 
 This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
