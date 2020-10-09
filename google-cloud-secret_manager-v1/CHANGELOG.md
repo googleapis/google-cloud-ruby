@@ -1,5 +1,21 @@
 # Release History
 
+### 0.6.0 / 2020-10-09
+
+#### Features
+
+* Path helpers can be called as module functions
+* initial microsynth of secret_manager v1
+
+#### Bug Fixes
+
+* Eliminate some Ruby 2.7 keyword argument warnings
+
+#### Documentation
+
+* Expansion and cleanup of service description text
+* Update docs for core protobuf types.
+
 ### 0.5.0 / 2020-09-10
 
 #### Features
