@@ -1,5 +1,19 @@
 # Release History
 
+### 0.4.0 / 2020-10-09
+
+#### Features
+
+* initial microsynth of speech v1p1beta1
+
+#### Bug Fixes
+
+* set correct endpoint for long-running operations client.
+
+#### Documentation
+
+* Update documentation for core proto types.
+
 ### 0.3.5 / 2020-08-10
 
 #### Bug Fixes
