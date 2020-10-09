@@ -1,5 +1,51 @@
 # Release History
 
+### 2.0.0 / 2020-10-09
+
+#### ⚠ BREAKING CHANGES
+
+* **container_analysis:** Update network configuration for IAM methods
+
+#### Features
+
+* Support separate project setting for quota/billing
+* Rename grafeas gem
+  * Rename grafeas gem from grafeas-client
+  * Create new grafeas-client gem that depends on grafeas
+  * Update google-cloud-container_analysis to use grafeas
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Add IAM GetPolicyOptions
+* Add occurrence_path helper
+* Add service_address and service_port to client constructor
+* Make container_analysis depend on grafeas
+* Obtain grafeas client from the container_analysis client
+* Add google-cloud-container_analysis library
+
+#### Bug Fixes
+
+* Restore note_path and occurrence_path resource path helpers
+  * Update network configuration
+* Update minimum runtime dependencies
+
+#### Performance Improvements
+
+* Update network configuration for IAM methods
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* fix links to grafeas.io in documentation
+* Fix role string in IAM Policy JSON example
+* Remove a broken troubleshooting link in the auth guide.
+* Update copyright year
+* Update IAM documentation
+  * Update GetPolicyOption#requested_policy_version docs
+  * Un-deprecate Policy#version
+* Update IAM Policy class description and sample code
+* Update IAM Policy documentation
+* Update IAM Policy documentation
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 1.0.1 / 2020-06-18
 
 #### Documentation
