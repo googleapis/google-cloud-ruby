@@ -1,5 +1,34 @@
 # Release History
 
+### 1.2.0 / 2020-10-09
+
+#### Features
+
+* Add Action#publish_findings_to_cloud_data_catalog (PublishFindingsToCloudDataCatalog)
+* add AVRO constant to FileType and BytesType
+* Add location_id to many operations
+* Add service_address and service_port to client constructor
+* add StoredInfoTypeVersion#stats and StoredInfoTypeStats
+* Support for hybrid DLP jobs
+  * Add StorageConfig#hybrid_options field
+  * Add DlpServiceClient#finish_dlp_job call
+  * Add DlpServiceClient#hybrid_inspect_dlp_job call
+  * Add DlpServiceClient#hybrid_inspect_job_trigger call
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Update copyright year
+* Update documentation
+* Update Status documentation
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 1.1.1 / 2020-05-26
 
 #### Documentation
