@@ -1,5 +1,60 @@
 # Release History
 
+### 1.1.0 / 2020-10-09
+
+#### Features
+
+* Add DocumentDimensions, Layout and PredictResponse#preprocessed_input
+  * Update Document
+    * Add Document#document_text (TextSnippet)
+    * Add Document#layout (Document::Layout)
+    * Add Document#document_dimensions (DocumentDimensions)
+    * Add Document#page_count
+  * Update PredictionServiceClient#predict response
+    * Add PredictResponse#preprocessed_input (ExamplePayload)
+  * Added classes:
+    * Add Document::Layout
+    * Add DocumentDimensions
+  * Update Documentation
+* Add Long Running Operation methods
+  * Add AutoMLClient#get_operation
+  * Add AutoMLClient#list_operations
+* Add new metadata fields
+  * Add ImageClassificationModelMetadata#node_qps
+  * Add ImageClassificationModelMetadata#node_count
+  * Add TablesModelMetadata#optimization_objective_recall_value
+  * Add TablesModelMetadata#optimization_objective_precision_value
+  * Add TextClassificationModelMetadata#classification_type
+  * Update documentation
+  * Update the list of GCP environments for automatic authentication
+* Add service_address and service_port to client constructor
+* Add TablesAnnotation#baseline_score
+* Add TablesModelMetadata#additional_optimization_objective_config
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Deprecate ColumnSpec#top_correlated_columns
+  * Deprecate ColumnSpec#top_correlated_columns
+  * Add BatchPredictResult#metadata.
+  * Add ConfusionMatrix#display_name
+  * Add TableSpec#valid_row_count
+  * Update documentation
+* Support model deployment metadata for image classification
+  * Add image_classification_model_deployment_metadata argument to AutoMLClient#deploy_model
+  * Add ImageClassificationModelDeploymentMetadata class
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Remove broken troubleshooting link from auth guide.
+* Update copyright year
+* Update links to googleapis.dev
+* Update product documentation
+* Update TablesModelColumnInfo documentation
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 1.0.0 / 2020-06-30
 
 This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
