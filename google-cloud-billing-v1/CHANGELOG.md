@@ -1,5 +1,26 @@
 # Release History
 
+### 0.6.0 / 2020-10-09
+
+#### Features
+
+* Generate initial client google-cloud-billing-v1
+  * Generate initial client using the gapic-generator-ruby microgenerator via included synth.py.
+* Path helpers can be called as module functions
+
+#### Bug Fixes
+
+* Eliminate some Ruby 2.7 keyword argument warnings
+
+#### Documentation
+
+* Add Configuration docs and update enum return types
+* Expansion and cleanup of service description text
+* Fix type declarations for repeated fields
+* remove some spurious backslash escaping from code samples in inline documentation
+* Update documentation for core proto types.
+* Update homepage in README and gemspec
+
 ### 0.5.5 / 2020-08-10
 
 #### Bug Fixes
