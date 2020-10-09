@@ -1,5 +1,50 @@
 # Release History
 
+### 2.0.0 / 2020-10-09
+
+#### ⚠ BREAKING CHANGES
+
+* **asset:** use clients created by the new generator
+
+#### Features
+
+* Add GcsDestination#uri_prefix
+* Add OutputConfig#bigquery_destination
+  * Add OutputConfig#bigquery_destination (BigQueryDestination)
+  * Add ContentType constants
+    * Add ContentType::ORG_POLICY
+    * Add ContentType::ACCESS_POLICY
+  * Update documentation.
+    * Document some fields as required.
+    * Update some documented URLs.
+* Add service_address and service_port to client constructor
+* Support real-time feeds in asset V1
+* Support separate project setting for quota/billing
+* use clients created by the new generator
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* remove some spurious backslash escaping from inline documentation
+* several corrections to brace escaping in documentation
+* Update copyright year
+* Update documentation
+* Update enum return type to full module namespace
+* Update IAM documentation
+    * Un-deprecate Policy#version
+* Update IAM Policy documentation
+* Update IAM Policy documentation
+* Update links to googleapis.dev
+* Update product home page links
+* Update Status documentation
+* fix bad links ([#3783](https://www.github.com/googleapis/google-cloud-ruby/issues/3783))
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 1.1.2 / 2020-06-18
 
 #### Documentation
