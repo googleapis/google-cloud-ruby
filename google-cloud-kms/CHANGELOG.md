@@ -1,5 +1,55 @@
 # Release History
 
+### 2.1.0 / 2020-10-09
+
+#### Features
+
+* Add IAM GetPolicyOptions
+* add ImportJob methods
+  * KeyManagementServiceClient  changes:
+    * Added methods
+      * create_import_job
+      * get_import_job
+      * list_import_jobs
+      * import_crypto_key_version
+    * Argument changes
+      * Add filter and order_by arguments to:
+        * list_key_rings
+        * list_crypto_keys
+        * list_crypto_key_versions
+      * Add skip_initial_version_creation argument to create_crypto_key
+  * CryptoKeyVersion changes:
+    * Add CryptoKeyVersionAlgorithm constants:
+      * RSA_SIGN_PSS_4096_SHA512
+      * RSA_SIGN_PKCS1_4096_SHA512
+      * RSA_DECRYPT_OAEP_4096_SHA512
+    * Add CryptoKeyVersionState constants:
+      * PENDING_IMPORT
+      * IMPORT_FAILED
+  * Add import_job_path helper method
+  * Update documentation.
+* Add ProtectionLevel::EXTERNAL
+  * Update documentation
+* Add service_address and service_port to client constructor
+* Support additional options for external protection level.
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Performance Improvements
+
+* Update network configuration for many RPCs to retryable
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Remove broken troubleshooting link from auth guide.
+* Update copyright year
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 2.0.0 / 2020-06-01
 
 This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
