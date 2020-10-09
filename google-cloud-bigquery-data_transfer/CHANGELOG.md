@@ -1,5 +1,53 @@
 # Release History
 
+### 1.2.0 / 2020-10-09
+
+#### Features
+
+* Add location path helpers
+* Add service_address and service_port to client constructor
+* Add StartManualTransferRuns
+  * DataTransferServiceClient changes:
+    * Add DataTransferServiceClient#start_manual_transfer_runs
+    * Deprecate DataTransferServiceClient#schedule_transfer_runs
+    * Add version_info argument to DataTransferServiceClient#create_transfer_config
+    * Add version_info argument to DataTransferServiceClient#update_transfer_config
+  * DataSourceParameter changes:
+    * Add DataSourceParameter#deprecated attribute
+    * Deprecate DataSourceParameter#repeated attribute
+    * Deprecate DataSourceParameter#fields attribute
+    * Deprecate DataSourceParameter::Type::RECORD value
+  * TransferConfig changes:
+    * Deprecate TransferConfig#schedule_options
+    * Deprecate TransferConfig#user_id
+  * TransferRun changes:
+    * Deprecate TransferRun#user_id
+* Deprecate multi-pattern resource path helpers
+  * Update network configuration
+* Support FIRST_PARTY_OAUTH for data sources.
+* Support separate project setting for quota/billing
+* Update TransferConfig attributes
+  * Add TransferConfig#notification_pubsub_topic
+  * Add TransferConfig#email_preferences (EmailPreferences)
+  * Add TransferRun#notification_pubsub_topic
+  * Add TransferRun#email_preferences (EmailPreferences)
+  * Add CreateTransferConfigRequest#service_account_name
+  * Add UpdateTransferConfigRequest#service_account_name
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Update copyright year
+* Update library description and mark several fields as required
+* Update links to googleapis.dev
+* Update Status documentation
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 1.1.0 / 2020-05-20
 
 #### Features
