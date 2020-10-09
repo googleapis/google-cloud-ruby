@@ -1,5 +1,16 @@
 # Release History
 
+### 1.0.1 / 2020-10-09
+
+#### Bug Fixes
+
+* create the correct type of object
+
+#### Documentation
+
+* provide more detailed docs for service-wide config
+* several fixes to docs of umbrella veneers for microgenerated clients
+
 ### 1.0.0 / 2020-06-24
 
 Promote to version 1.0.0
