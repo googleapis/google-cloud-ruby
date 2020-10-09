@@ -1,5 +1,59 @@
 # Release History
 
+### 1.1.0 / 2020-10-09
+
+#### Features
+
+* Add NotificationChannel verification
+  * Add NotificationChannelServiceClient#send_notification_channel_verification_code
+  * Add NotificationChannelServiceClient#get_notification_channel_verification_code
+  * Add NotificationChannelServiceClient#verify_notification_channel
+* Add NotificationChannelDescriptor#launch_stage
+  * Update documentation formatting
+* Add service_address and service_port to client constructor
+* Add support for monitoring dashboards API
+* Add TimeSeriesQueryLanguageCondition and MeshIstio
+  * Add Condition#condition_time_series_query_language (TimeSeriesQueryLanguageCondition)
+  * Add Service::MeshIstio
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Additions to the content matcher for uptime check
+  * Add recursive argument to GroupServiceClient#delete_group method.
+  * Add AlertPolicy#validity
+  * Remove UptimeCheckConfig#is_internal (BREAKING CHANGE)
+  * Add UptimeCheckConfig::HttpCheck#validate_ssl
+  * Add InternalChecker::State module and constants:
+      * Add InternalChecker::State::CREATING
+      * Add InternalChecker::State::RUNNING
+  * Add ContentMatcher::ContentMatcherOption module and constants:
+      * Add ContentMatcher::ContentMatcherOption::CONTAINS_STRING
+      * Add ContentMatcher::ContentMatcherOption::NOT_CONTAINS_STRING
+      * Add ContentMatcher::ContentMatcherOption::MATCHES_REGEX
+      * Add ContentMatcher::ContentMatcherOption::NOT_MATCHES_REGEX
+  * Add UptimeCheckConfig::ContentMatcher:: ContentMatcherOption module and constants:
+      * Add UptimeCheckConfig::ContentMatcher:: ContentMatcherOption::CONTAINS_STRING
+      * Add UptimeCheckConfig::ContentMatcher:: ContentMatcherOption::NOT_CONTAINS_STRING
+      * Add UptimeCheckConfig::ContentMatcher:: ContentMatcherOption::MATCHES_REGEX
+      * Add UptimeCheckConfig::ContentMatcher:: ContentMatcherOption::NOT_MATCHES_REGEX
+  * Update documentation
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Document ServiceTier as obsolete and unused.
+* Fix some broken links to the monitoring docs on cloud.google.com
+* Minor formatting and wording updates to documentation
+* Remove broken troubleshooting link from auth guide.
+* Update copyright year
+* Update description of MetricDescriptor#unit in lower-level API
+* Update product links and reformat docs
+* Update Status documentation
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 1.0.0 / 2020-06-01
 
 This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
