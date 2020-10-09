@@ -1,5 +1,43 @@
 # Release History
 
+### 2.2.0 / 2020-10-09
+
+#### Features
+
+* Add IAM GetPolicyOptions
+* Add Queue#stackdriver_logging_config (StackdriverLoggingConfig)
+* Add service_address and service_port to client constructor
+* Add Task#http_request (HttpRequest)
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Restore previous network configuration timeouts
+* Update minimum runtime dependencies
+
+#### Performance Improvements
+
+* Update network configuration
+  * Update documentation, samples, and links.
+* Update retry configuration for IAM calls
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Fix roles string in IAM Policy JSON example
+* Remove broken troubleshooting link from auth guide.
+* Update copyright year
+* Update documentation
+* Update IAM documentation
+  * Update GetPolicyOption#requested_policy_version docs
+  * Un-deprecate Policy#version
+* Update IAM Policy class description and sample code
+* Update IAM Policy documentation
+* Update IAM Policy documentation
+* Update Status documentation
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 2.1.1 / 2020-05-25
 
 #### Documentation
