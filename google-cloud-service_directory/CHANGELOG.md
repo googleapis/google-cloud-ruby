@@ -1,4 +1,14 @@
 # Release History
+### 0.4.0 / 2020-10-09
+
+#### Features
+
+* create wrapper library for service_directory
+
+#### Documentation
+
+* provide more detailed docs for service-wide config
+
 ### 0.3.0 / 2020-05-21
 
 #### Features
