@@ -1,5 +1,26 @@
 # Release History
 
+### 0.7.0 / 2020-10-09
+
+#### Features
+
+* Provide resource path helpers
+* Path helpers can be called as module functions
+
+#### Bug Fixes
+
+* Eliminate some Ruby 2.7 keyword argument warnings
+
+#### Documentation
+
+* Update homepage in README and gemspec
+* Add Configuration docs and update enum return types
+* Expansion and cleanup of service description text
+* Fix type declarations for repeated fields
+* remove some spurious backslash escaping from code samples in inline documentation
+* Update docs for common FieldMask and Timestamp types
+* Update documentation for core proto types.
+
 ### 0.6.5 / 2020-08-10
 
 #### Bug Fixes
