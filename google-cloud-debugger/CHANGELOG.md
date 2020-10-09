@@ -1,5 +1,30 @@
 # Release History
 
+### 0.42.0 / 2020-10-09
+
+#### Features
+
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Add service_address and service_port in the low-level interface
+* Support overriding of service endpoint
+* Google::Cloud::Env provides additional configuration options including retries and cache control ([#3399](https://www.github.com/googleapis/google-cloud-ruby/issues/3399))
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+* Fix max threads setting in thread pools
+
+#### Performance Improvements
+
+* Update lower-level client network configuration
+
+#### Documentation
+
+* Update copyright year
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+* Update the list of GCP environments for automatic authentication
+
 ### 0.41.0 / 2020-09-16
 
 #### Features
