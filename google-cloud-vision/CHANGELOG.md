@@ -1,5 +1,61 @@
 # Release History
 
+### 2.0.0 / 2020-10-09
+
+#### ⚠ BREAKING CHANGES
+
+* **vision:** use clients created by the new generator
+
+#### Features
+
+* Add confidence attributes to SafeSearchAnnotation
+  * Add SafeSearchAnnotation#adult_confidence
+  * Add SafeSearchAnnotation#spoof_confidence
+  * Add SafeSearchAnnotation#medical_confidence
+  * Add SafeSearchAnnotation#violence_confidence
+  * Add SafeSearchAnnotation#racy_confidence
+  * Add SafeSearchAnnotation#nsfw_confidence
+  * Update documentation
+* Add parent to BatchAnnotate and add PurgeProducts
+  * ImageAnnotatorClient changes:
+    * Add parent argument to the following:
+      * ImageAnnotatorClient#batch_annotate_images
+      * ImageAnnotatorClient#batch_annotate_files
+      * ImageAnnotatorClient#async_batch_annotate_images
+      * ImageAnnotatorClient#async_batch_annotate_files
+    * Request/Response object changes:
+      * Add BatchAnnotateImagesRequest#parent
+      * Add BatchAnnotateFilesRequest#parent
+      * Add AsyncBatchAnnotateImagesRequest#parent
+      * Add AsyncBatchAnnotateFilesRequest#parent
+      * Add AnnotateFileResponse#error
+  * ProductSearchClient changes:
+    * Add ProductSearchClient#purge_products
+    * Add PurgeProductsRequest
+    * Add ProductSetPurgeConfig
+    * Add GroupedResult#object_annotations (ObjectAnnotation)
+  * Update documentation
+* Add service_address and service_port to client constructor
+* support separate project setting for quota/billing
+* use clients created by the new generator
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* add "v2" product categories
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Mark required fields
+* Update copyright year
+* Update GCS URL used in code examples
+* Update list of supported product categories
+* Update product category documentation
+* Update Status documentation
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 1.0.0 / 2020-06-01
 
 This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
