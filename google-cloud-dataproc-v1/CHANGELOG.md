@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2020-10-09
+
+#### Features
+
+* Initial microsynth of Dataproc V1
+
 ### 0.3.1 / 2020-08-10
 
 #### Bug Fixes
