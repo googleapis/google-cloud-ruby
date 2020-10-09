@@ -1,5 +1,23 @@
 # Release History
 
+### 1.4.0 / 2020-10-09
+
+#### Features
+
+* Recognize App Engine Standard and Knative
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Google::Cloud::Env provides additional configuration options including retries and cache control ([#3399](https://www.github.com/googleapis/google-cloud-ruby/issues/3399))
+* Support separate timeout for connecting to the metadata server vs the entire request ([#3508](https://www.github.com/googleapis/google-cloud-ruby/issues/3508))
+
+#### Bug Fixes
+
+* Send Metadata-Flavor header when testing the metadata server root
+* support faraday 1.x
+
+#### Documentation
+
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 1.3.3 / 2020-07-10
 
 #### Bug Fixes
