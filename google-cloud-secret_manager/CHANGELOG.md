@@ -1,5 +1,19 @@
 # Release History
 
+### 1.1.0 / 2020-10-09
+
+#### Features
+
+* Use update to secret_manager-v1beta1 that provides resource path helpers
+* use v1 of the service by default
+
+#### Documentation
+
+* provide more detailed docs for service-wide config
+* several fixes to docs of umbrella veneers for microgenerated clients
+* change a few readme references from language to secret-manager
+* Clarify library status and provide some additional links to the generated library docs
+
 ### 1.0.0 / 2020-06-24
 
 Promote to version 1.0.0
