@@ -1,5 +1,31 @@
 # Release History
 
+### 2.2.0 / 2020-10-09
+
+#### Features
+
+* Add service_address and service_port to client constructor
+* Deprecate CloudSchedulerClient.project_path helper method
+  * Update documentation
+    * Mark several fields as required
+  * Update network configuration
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Remove broken troubleshooting link from auth guide.
+* Update copyright year
+* Update documentation with slight formatting and wording changes
+* Update product home page links
+* Update Status documentation
+* fix bad links ([#3783](https://www.github.com/googleapis/google-cloud-ruby/issues/3783))
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 2.1.1 / 2020-05-26
 
 #### Documentation
