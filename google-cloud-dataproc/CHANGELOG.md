@@ -1,5 +1,57 @@
 # Release History
 
+### 2.0.0 / 2020-10-09
+
+#### ⚠ BREAKING CHANGES
+
+* **dataproc:** Convert google-cloud-dataproc to a wrapper
+
+#### Features
+
+* Add AutoscalingPolicyServiceClient
+* Add AutoscalingPolicyServiceClient
+  * Add AutoscalingPolicyServiceClient
+    * AutoscalingPolicyServiceClient#create_autoscaling_policy
+    * AutoscalingPolicyServiceClient#update_autoscaling_policy
+    * AutoscalingPolicyServiceClient#get_autoscaling_policy
+    * AutoscalingPolicyServiceClient#list_autoscaling_policies
+    * AutoscalingPolicyServiceClient#delete_autoscaling_policy
+  * Add ClusterConfig attributes:
+    * Add ClusterConfig#autoscaling_config (AutoscalingConfig)
+    * Add ClusterConfig#endpoint_config (EndpointConfig)
+    * Add ClusterConfig#security_config (SecurityConfig)
+  * Add GceClusterConfig#reservation_affinity (ReservationAffinity)
+  * Add SoftwareConfig#optional_components (Component)
+  * Add Job#spark_r_job (SparkRJob)
+* Add service_address and service_port to client constructor
+* Add SparkRJob, PrestoJob, LifecycleConfig and ReservationAffinity
+  * Add ClusterConfig#lifecycle_config (LifecycleConfig)
+  * Add GceClusterConfig#reservation_affinity (ReservationAffinity)
+  * Add SparkRJob
+  * Add PrestoJob
+* Additional configuration options for clusters
+  * Add ClusterConfig#autoscaling_config
+  * Add ClusterConfig#security_config
+  * Add InstanceGroupConfig#min_cpu_platform
+  * Add AutoscalingConfig, SecurityConfig, and KerberosConfig classes
+* Convert google-cloud-dataproc to a wrapper
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Update copyright year
+* Update formatting
+* Update product branding
+* Update product name to Dataproc
+* Update Status documentation
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 1.1.1 / 2020-05-26
 
 #### Documentation
