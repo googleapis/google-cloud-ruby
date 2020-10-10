@@ -565,9 +565,9 @@ module Google
         # The result of sentiment analysis. Sentiment analysis inspects user input
         # and identifies the prevailing subjective opinion, especially to determine a
         # user's attitude as positive, negative, or neutral.
-        # For [Participants.AnalyzeContent][google.cloud.dialogflow.v2.Participants.AnalyzeContent], it needs to be configured in
+        # For [Participants.DetectIntent][], it needs to be configured in
         # {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#query_params DetectIntentRequest.query_params}. For
-        # [Participants.StreamingAnalyzeContent][google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent], it needs to be configured in
+        # [Participants.StreamingDetectIntent][], it needs to be configured in
         # {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_params StreamingDetectIntentRequest.query_params}.
         # And for [Participants.AnalyzeContent][google.cloud.dialogflow.v2.Participants.AnalyzeContent] and
         # [Participants.StreamingAnalyzeContent][google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent], it needs to be configured in
