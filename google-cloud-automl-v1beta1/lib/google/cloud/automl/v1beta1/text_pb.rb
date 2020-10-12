@@ -16,6 +16,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.automl.v1beta1.TextExtractionDatasetMetadata" do
     end
     add_message "google.cloud.automl.v1beta1.TextExtractionModelMetadata" do
+      optional :model_hint, :string, 3
     end
     add_message "google.cloud.automl.v1beta1.TextSentimentDatasetMetadata" do
       optional :sentiment_max, :int32, 1
