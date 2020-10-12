@@ -7,14 +7,8 @@ require 'google/analytics/data/v1alpha/data_pb'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
-require 'google/api/resource_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/analytics/data/v1alpha/analytics_data_api.proto", :syntax => :proto3) do
-    add_message "google.analytics.data.v1alpha.Metadata" do
-      optional :name, :string, 3
-      repeated :dimensions, :message, 1, "google.analytics.data.v1alpha.DimensionMetadata"
-      repeated :metrics, :message, 2, "google.analytics.data.v1alpha.MetricMetadata"
-    end
     add_message "google.analytics.data.v1alpha.RunReportRequest" do
       optional :entity, :message, 1, "google.analytics.data.v1alpha.Entity"
       repeated :dimensions, :message, 2, "google.analytics.data.v1alpha.Dimension"
@@ -38,6 +32,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :totals, :message, 8, "google.analytics.data.v1alpha.Row"
       repeated :maximums, :message, 9, "google.analytics.data.v1alpha.Row"
       repeated :minimums, :message, 10, "google.analytics.data.v1alpha.Row"
+      optional :row_count, :int32, 12
       optional :metadata, :message, 6, "google.analytics.data.v1alpha.ResponseMetaData"
       optional :property_quota, :message, 7, "google.analytics.data.v1alpha.PropertyQuota"
     end
@@ -77,8 +72,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.analytics.data.v1alpha.BatchRunPivotReportsResponse" do
       repeated :pivot_reports, :message, 1, "google.analytics.data.v1alpha.RunPivotReportResponse"
     end
-    add_message "google.analytics.data.v1alpha.GetMetadataRequest" do
-      optional :name, :string, 1
+    add_message "google.analytics.data.v1alpha.GetUniversalMetadataRequest" do
+    end
+    add_message "google.analytics.data.v1alpha.UniversalMetadata" do
+      repeated :dimensions, :message, 1, "google.analytics.data.v1alpha.DimensionMetadata"
+      repeated :metrics, :message, 2, "google.analytics.data.v1alpha.MetricMetadata"
     end
   end
 end
@@ -87,7 +85,6 @@ module Google
   module Analytics
     module Data
       module V1alpha
-        Metadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.Metadata").msgclass
         RunReportRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.RunReportRequest").msgclass
         RunReportResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.RunReportResponse").msgclass
         RunPivotReportRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.RunPivotReportRequest").msgclass
@@ -96,7 +93,8 @@ module Google
         BatchRunReportsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.BatchRunReportsResponse").msgclass
         BatchRunPivotReportsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.BatchRunPivotReportsRequest").msgclass
         BatchRunPivotReportsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.BatchRunPivotReportsResponse").msgclass
-        GetMetadataRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.GetMetadataRequest").msgclass
+        GetUniversalMetadataRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.GetUniversalMetadataRequest").msgclass
+        UniversalMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.UniversalMetadata").msgclass
       end
     end
   end

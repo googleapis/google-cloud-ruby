@@ -56,7 +56,10 @@ module Google
             # Returns metadata for dimensions and metrics available in reporting methods.
             # Used to explore the dimensions and metrics. Dimensions and metrics will be
             # mostly added over time, but renames and deletions may occur.
-            rpc :GetMetadata, ::Google::Analytics::Data::V1alpha::GetMetadataRequest, ::Google::Analytics::Data::V1alpha::Metadata
+            #
+            # This method returns Universal Metadata. Universal Metadata are dimensions
+            # and metrics applicable to any property such as `country` and `totalUsers`.
+            rpc :GetUniversalMetadata, ::Google::Analytics::Data::V1alpha::GetUniversalMetadataRequest, ::Google::Analytics::Data::V1alpha::UniversalMetadata
           end
 
           Stub = Service.rpc_stub_class
