@@ -142,6 +142,14 @@ module Google
                   retry_codes:   [14, 13, 4]
                 }
 
+                default_config.rpcs.partition_query.timeout = 60.0
+                default_config.rpcs.partition_query.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   [14]
+                }
+
                 default_config.rpcs.write.timeout = 86_400.0
 
                 default_config.rpcs.listen.timeout = 86_400.0
