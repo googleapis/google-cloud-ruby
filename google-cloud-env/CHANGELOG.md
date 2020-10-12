@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.0 / 2020-10-12
+
+#### Features
+
+* Honor GCE_METADATA_HOST environment variable
+
 ### 1.3.3 / 2020-07-10
 
 #### Bug Fixes
