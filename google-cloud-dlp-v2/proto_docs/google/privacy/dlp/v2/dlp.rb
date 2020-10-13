@@ -1327,6 +1327,9 @@ module Google
         # @!attribute [rw] delta_presence_estimation_result
         #   @return [::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult]
         #     Delta-presence result
+        # @!attribute [rw] requested_options
+        #   @return [::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::RequestedRiskAnalysisOptions]
+        #     The configuration used for this job.
         class AnalyzeDataSourceRiskDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1598,6 +1601,15 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # Risk analysis options.
+          # @!attribute [rw] job_config
+          #   @return [::Google::Cloud::Dlp::V2::RiskAnalysisJobConfig]
+          #     The job config for the risk job.
+          class RequestedRiskAnalysisOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
