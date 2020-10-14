@@ -59,6 +59,8 @@ module Google
             rpc :UpdateAccount, ::Google::Analytics::Admin::V1alpha::UpdateAccountRequest, ::Google::Analytics::Admin::V1alpha::Account
             # Requests a ticket for creating an account.
             rpc :ProvisionAccountTicket, ::Google::Analytics::Admin::V1alpha::ProvisionAccountTicketRequest, ::Google::Analytics::Admin::V1alpha::ProvisionAccountTicketResponse
+            # Returns summaries of all accounts accessible by the caller.
+            rpc :ListAccountSummaries, ::Google::Analytics::Admin::V1alpha::ListAccountSummariesRequest, ::Google::Analytics::Admin::V1alpha::ListAccountSummariesResponse
             # Lookup for a single "App+Web" Property.
             #
             # Throws "Target not found" if no such property found, if property is not

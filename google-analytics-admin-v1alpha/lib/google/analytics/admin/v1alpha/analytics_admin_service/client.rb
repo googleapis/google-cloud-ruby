@@ -600,6 +600,75 @@ module Google
             end
 
             ##
+            # Returns summaries of all accounts accessible by the caller.
+            #
+            # @overload list_account_summaries(request, options = nil)
+            #   Pass arguments to `list_account_summaries` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::ListAccountSummariesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::ListAccountSummariesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_account_summaries(page_size: nil, page_token: nil)
+            #   Pass arguments to `list_account_summaries` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param page_size [::Integer]
+            #     The maximum number of AccountSummary resources to return. The service may
+            #     return fewer than this value, even if there are additional pages.
+            #     If unspecified, at most 50 resources will be returned.
+            #     The maximum value is 200; (higher values will be coerced to the maximum)
+            #   @param page_token [::String]
+            #     A page token, received from a previous `ListAccountSummaries` call.
+            #     Provide this to retrieve the subsequent page.
+            #     When paginating, all other parameters provided to `ListAccountSummaries`
+            #     must match the call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::AccountSummary>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::AccountSummary>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def list_account_summaries request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListAccountSummariesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_account_summaries.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.list_account_summaries.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_account_summaries.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :list_account_summaries, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_account_summaries, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Lookup for a single "App+Web" Property.
             #
             # Throws "Target not found" if no such property found, if property is not
@@ -3771,6 +3840,11 @@ module Google
                 #
                 attr_reader :provision_account_ticket
                 ##
+                # RPC-specific configuration for `list_account_summaries`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_account_summaries
+                ##
                 # RPC-specific configuration for `get_property`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3993,6 +4067,8 @@ module Google
                   @update_account = ::Gapic::Config::Method.new update_account_config
                   provision_account_ticket_config = parent_rpcs&.provision_account_ticket if parent_rpcs&.respond_to? :provision_account_ticket
                   @provision_account_ticket = ::Gapic::Config::Method.new provision_account_ticket_config
+                  list_account_summaries_config = parent_rpcs&.list_account_summaries if parent_rpcs&.respond_to? :list_account_summaries
+                  @list_account_summaries = ::Gapic::Config::Method.new list_account_summaries_config
                   get_property_config = parent_rpcs&.get_property if parent_rpcs&.respond_to? :get_property
                   @get_property = ::Gapic::Config::Method.new get_property_config
                   list_properties_config = parent_rpcs&.list_properties if parent_rpcs&.respond_to? :list_properties

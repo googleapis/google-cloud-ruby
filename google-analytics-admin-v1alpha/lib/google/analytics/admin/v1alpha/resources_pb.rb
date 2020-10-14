@@ -111,6 +111,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :sharing_with_google_products_enabled, :bool, 5
       optional :sharing_with_others_enabled, :bool, 6
     end
+    add_message "google.analytics.admin.v1alpha.AccountSummary" do
+      optional :name, :string, 1
+      optional :account, :string, 2
+      optional :display_name, :string, 3
+      repeated :property_summaries, :message, 4, "google.analytics.admin.v1alpha.PropertySummary"
+    end
+    add_message "google.analytics.admin.v1alpha.PropertySummary" do
+      optional :property, :string, 1
+      optional :display_name, :string, 2
+    end
     add_enum "google.analytics.admin.v1alpha.IndustryCategory" do
       value :INDUSTRY_CATEGORY_UNSPECIFIED, 0
       value :AUTOMOTIVE, 1
@@ -166,6 +176,8 @@ module Google
         GlobalSiteTag = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GlobalSiteTag").msgclass
         GoogleAdsLink = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GoogleAdsLink").msgclass
         DataSharingSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DataSharingSettings").msgclass
+        AccountSummary = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AccountSummary").msgclass
+        PropertySummary = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.PropertySummary").msgclass
         IndustryCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.IndustryCategory").enummodule
         MaximumUserAccess = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.MaximumUserAccess").enummodule
       end

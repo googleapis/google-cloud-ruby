@@ -238,6 +238,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.analytics.admin.v1alpha.GetDataSharingSettingsRequest" do
       optional :name, :string, 1
     end
+    add_message "google.analytics.admin.v1alpha.ListAccountSummariesRequest" do
+      optional :page_size, :int32, 1
+      optional :page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.ListAccountSummariesResponse" do
+      repeated :account_summaries, :message, 1, "google.analytics.admin.v1alpha.AccountSummary"
+      optional :next_page_token, :string, 2
+    end
   end
 end
 
@@ -305,6 +313,8 @@ module Google
         ListGoogleAdsLinksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListGoogleAdsLinksRequest").msgclass
         ListGoogleAdsLinksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListGoogleAdsLinksResponse").msgclass
         GetDataSharingSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetDataSharingSettingsRequest").msgclass
+        ListAccountSummariesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAccountSummariesRequest").msgclass
+        ListAccountSummariesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAccountSummariesResponse").msgclass
       end
     end
   end
