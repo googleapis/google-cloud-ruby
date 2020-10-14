@@ -356,6 +356,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails" do
       optional :requested_privacy_metric, :message, 1, "google.privacy.dlp.v2.PrivacyMetric"
       optional :requested_source_table, :message, 2, "google.privacy.dlp.v2.BigQueryTable"
+      optional :requested_options, :message, 10, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions"
       oneof :result do
         optional :numerical_stats_result, :message, 3, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.NumericalStatsResult"
         optional :categorical_stats_result, :message, 4, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.CategoricalStatsResult"
@@ -437,6 +438,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :bucket_size, :int64, 5
       repeated :bucket_values, :message, 6, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.DeltaPresenceEstimationQuasiIdValues"
       optional :bucket_value_count, :int64, 7
+    end
+    add_message "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions" do
+      optional :job_config, :message, 1, "google.privacy.dlp.v2.RiskAnalysisJobConfig"
     end
     add_message "google.privacy.dlp.v2.ValueFrequency" do
       optional :value, :message, 1, "google.privacy.dlp.v2.Value"
@@ -1105,6 +1109,7 @@ module Google
         AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult").msgclass
         AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult::DeltaPresenceEstimationQuasiIdValues = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.DeltaPresenceEstimationQuasiIdValues").msgclass
         AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult::DeltaPresenceEstimationHistogramBucket = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.DeltaPresenceEstimationHistogramBucket").msgclass
+        AnalyzeDataSourceRiskDetails::RequestedRiskAnalysisOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions").msgclass
         ValueFrequency = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ValueFrequency").msgclass
         Value = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Value").msgclass
         QuoteInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.QuoteInfo").msgclass
