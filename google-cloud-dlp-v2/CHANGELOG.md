@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2020-10-14
+
+#### Features
+
+* Retrieve the job config for risk analysis jobs
+
 ### 0.4.4 / 2020-09-18
 
 #### Documentation
