@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2020-10-14
+
+#### Features
+
+* Added text extraction health care option in create model
+
 ### 0.2.6 / 2020-08-10
 
 #### Bug Fixes
