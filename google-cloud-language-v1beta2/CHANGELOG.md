@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.6 / 2020-10-14
+
+#### Documentation
+
+* Minor formatting fixes
+
 ### 0.2.5 / 2020-08-10
 
 #### Bug Fixes
