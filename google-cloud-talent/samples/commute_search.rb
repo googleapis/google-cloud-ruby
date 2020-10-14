@@ -20,7 +20,7 @@ def sample_commute_search_jobs project_id, tenant_id
   job_service = Google::Cloud::Talent.job_service
 
   # project_id = "Your Google Cloud Project ID"
-  # tenant_id = "Your Tenant ID (using tenancy is optional)"
+  # tenant_id = "Your Tenant ID (using tenancy is required)"
   formatted_parent = job_service.tenant_path project: project_id, tenant: tenant_id
   domain = "www.example.com"
   session_id = "Hashed session identifier"
@@ -62,7 +62,7 @@ require "optparse"
 if $PROGRAM_NAME == __FILE__
 
   project_id = "Your Google Cloud Project ID"
-  tenant_id = "Your Tenant ID (using tenancy is optional)"
+  tenant_id = "Your Tenant ID (using tenancy is required)"
 
   ARGV.options do |opts|
     opts.on("--project_id=val") { |val| project_id = val }
@@ -71,5 +71,5 @@ if $PROGRAM_NAME == __FILE__
   end
 
 
-  sample_search_jobs project_id, tenant_id
+  sample_commute_search_jobs project_id, tenant_id
 end

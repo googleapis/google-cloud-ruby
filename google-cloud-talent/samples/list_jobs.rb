@@ -20,7 +20,7 @@ def sample_list_jobs project_id, tenant_id, filter
   job_service = Google::Cloud::Talent.job_service
 
   # project_id = "Your Google Cloud Project ID"
-  # tenant_id = "Your Tenant ID (using tenancy is optional)"
+  # tenant_id = "Your Tenant ID (using tenancy is required)"
   formatted_parent = job_service.tenant_path project: project_id, tenant: tenant_id
 
   # Iterate over all results.
@@ -39,7 +39,7 @@ require "optparse"
 if $PROGRAM_NAME == __FILE__
 
   project_id = "Your Google Cloud Project ID"
-  tenant_id = "Your Tenant ID (using tenancy is optional)"
+  tenant_id = "Your Tenant ID (using tenancy is required)"
   filter = "companyName=projects/my-project/companies/company-id"
 
   ARGV.options do |opts|

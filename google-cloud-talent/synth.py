@@ -23,13 +23,13 @@ logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICMicrogenerator()
 library = gapic.ruby_library(
-    "talent", "v4beta1",
+    "talent", "v4",
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-talent",
         "ruby-cloud-title": "Cloud Talent Solution",
         "ruby-cloud-description": "Transform your job search and candidate matching capabilities with Cloud Talent Solution, designed to support enterprise talent acquisition technology and evolve with your growing needs. This AI solution includes features such as Job Search and Profile Search (Beta) to provide candidates and employers with an enhanced talent acquisition experience.",
         "ruby-cloud-env-prefix": "TALENT",
-        "ruby-cloud-wrapper-of": "v4beta1:0.0",
+        "ruby-cloud-wrapper-of": "v4:0.2;v4beta1:0.2",
         "ruby-cloud-product-url": "https://cloud.google.com/solutions/talent-solution",
         "ruby-cloud-api-id": "jobs.googleapis.com",
         "ruby-cloud-api-shortname": "jobs",

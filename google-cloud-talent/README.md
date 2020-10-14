@@ -15,6 +15,7 @@ for this library, google-cloud-talent, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
+[google-cloud-talent-v4](https://googleapis.dev/ruby/google-cloud-talent-v4/latest),
 [google-cloud-talent-v4beta1](https://googleapis.dev/ruby/google-cloud-talent-v4beta1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/solutions/talent-solution)

@@ -27,7 +27,7 @@ export TALENT_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/talent"
 
-client = Google::Cloud::Talent.application_service
+client = Google::Cloud::Talent.company_service
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-talent
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::Talent::V4beta1::ApplicationService::Credentials`):
+`::Google::Cloud::Talent::V4::CompanyService::Credentials`):
 
 1. `TALENT_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `TALENT_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/talent"
 
 ENV["TALENT_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Talent.application_service
+client = Google::Cloud::Talent.company_service
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ environment variables. Either on an individual client initialization:
 ```ruby
 require "google/cloud/talent"
 
-client = Google::Cloud::Talent.application_service do |config|
+client = Google::Cloud::Talent.company_service do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -102,7 +102,7 @@ Google::Cloud::Talent.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Talent.application_service
+client = Google::Cloud::Talent.company_service
 ```
 
 ### Cloud SDK

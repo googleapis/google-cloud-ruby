@@ -20,7 +20,7 @@ def sample_search_jobs project_id, tenant_id, query
   job_service = Google::Cloud::Talent.job_service
 
   # project_id = "Your Google Cloud Project ID"
-  # tenant_id = "Your Tenant ID (using tenancy is optional)"
+  # tenant_id = "Your Tenant ID (using tenancy is required)"
   formatted_parent = job_service.tenant_path project: project_id, tenant: tenant_id
   domain = "www.example.com"
   session_id = "Hashed session identifier"
@@ -54,7 +54,7 @@ require "optparse"
 if $PROGRAM_NAME == __FILE__
 
   project_id = "Your Google Cloud Project ID"
-  tenant_id = "Your Tenant ID (using tenancy is optional)"
+  tenant_id = "Your Tenant ID (using tenancy is required)"
   query = "count(base_compensation, [bucket(12, 20)])"
 
   ARGV.options do |opts|

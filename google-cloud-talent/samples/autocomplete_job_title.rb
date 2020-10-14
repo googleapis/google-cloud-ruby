@@ -20,7 +20,7 @@ def complete_query project_id, tenant_id, query, page_size, language_code
   completion_service = Google::Cloud::Talent.completion
 
   # project_id = "Your Google Cloud Project ID"
-  # tenant_id = "Your Tenant ID (using tenancy is optional)"
+  # tenant_id = "Your Tenant ID (using tenancy is required)"
   formatted_parent = completion_service.tenant_path project: project_id, tenant: tenant_id
 
   # language_code = "en-US"
@@ -28,13 +28,14 @@ def complete_query project_id, tenant_id, query, page_size, language_code
 
   # query = "[partially typed job title]"
   # page_size: page_size = 5
-  response = completion_service.complete_query parent:         formatted_parent,
+  response = completion_service.complete_query tenant:         formatted_parent,
                                                query:          query,
                                                page_size:      page_size,
                                                language_codes: language_codes
+
   response.completion_results.each do |result|
     puts "Suggested title: #{result.suggestion}"
-    # Suggestion type is JOB_TITLE or COMPANY_TITLE
+    # Suggestion type is JOB_TITLE or COMPANY_NAME
     puts "Suggestion type: #{result.type}"
   end
   # [END job_search_autocomplete_job_title]
@@ -45,7 +46,7 @@ require "optparse"
 if $PROGRAM_NAME == __FILE__
 
   project_id = "Your Google Cloud Project ID"
-  tenant_id = "Your Tenant ID (using tenancy is optional)"
+  tenant_id = "Your Tenant ID (using tenancy is required)"
   query = "[partially typed job title]"
   page_size = 5
   language_code = "en-US"

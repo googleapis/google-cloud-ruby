@@ -28,7 +28,7 @@ def sample_create_job project_id,
   job_service = Google::Cloud::Talent.job_service
 
   # project_id = "Your Google Cloud Project ID"
-  # tenant_id = "Your Tenant ID (using tenancy is optional)"
+  # tenant_id = "Your Tenant ID (using tenancy is required)"
   parent = job_service.tenant_path project: project_id, tenant: tenant_id
 
   # job_application_url = "https://www.example.org/job-posting/123"
@@ -63,7 +63,7 @@ require "optparse"
 if $PROGRAM_NAME == __FILE__
 
   project_id = "Your Google Cloud Project ID"
-  tenant_id = "Your Tenant ID (using tenancy is optional)"
+  tenant_id = "Your Tenant ID (using tenancy is required)"
   company_name = "Company name, e.g. projects/your-project/companies/company-id"
   requisition_id = "Job requisition ID, aka Posting ID. Unique per job."
   title = "Software Engineer"
@@ -88,5 +88,5 @@ if $PROGRAM_NAME == __FILE__
 
   sample_create_job project_id, tenant_id, company_name, requisition_id,
                     title, description, job_application_url, address,
-                    address_two, language_code
+                    language_code
 end
