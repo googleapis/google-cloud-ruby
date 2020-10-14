@@ -18,6 +18,7 @@ import synthtool as s
 import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
+import shutil
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -25,7 +26,13 @@ gapic = gcp.GAPICMicrogenerator()
 library = gapic.ruby_library(
     "containeranalysis", "v1",
     proto_path="google/devtools/containeranalysis/v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
+    extra_proto_files=[
+        "google/cloud/common_resources.proto",
+        "grafeas/v1/common.proto",
+        "grafeas/v1/cvss.proto",
+        "grafeas/v1/package.proto",
+        "grafeas/v1/vulnerability.proto",
+    ],
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-container_analysis-v1",
         "ruby-cloud-title": "Container Analysis V1",
@@ -38,6 +45,9 @@ library = gapic.ruby_library(
         "ruby-cloud-extra-dependencies": "grafeas-v1=~> 0.0",
     }
 )
+
+# Remove grafeas protos since they will be brought in via the grafeas-v1 gem
+shutil.rmtree(library / "lib/grafeas")
 
 s.copy(library, merge=ruby.global_merge)
 

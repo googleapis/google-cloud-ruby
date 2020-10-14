@@ -25,6 +25,12 @@ gapic = gcp.GAPICMicrogenerator()
 library = gapic.ruby_library(
     "containeranalysis", "v1",
     proto_path="google/devtools/containeranalysis/v1",
+    extra_proto_files=[
+        "grafeas/v1/common.proto",
+        "grafeas/v1/cvss.proto",
+        "grafeas/v1/package.proto",
+        "grafeas/v1/vulnerability.proto",
+    ],
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-container_analysis",
         "ruby-cloud-title": "Container Analysis",
