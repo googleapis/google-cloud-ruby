@@ -53,8 +53,8 @@ describe "Job Search Samples" do
     after { delete_tenant_helper tenant }
 
     it "creates two jobs" do
-      company_path_one = company_service.company_path project: project_id, company: company_id
-      company_path_two = company_service.company_path project: project_id, company: company_id_two
+      company_path_one = company_service.company_path project: project_id, tenant: tenant_id, company: company_id
+      company_path_two = company_service.company_path project: project_id, tenant: tenant_id, company: company_id_two
       requisition_id = rando
       requisition_id_two = rando_two
       title_one = "ruby_sample_title_#{rando}"
@@ -180,7 +180,7 @@ describe "Job Search Samples" do
       match = out.match %r{Name: ([\w/-]*)}
       assert match[1]
       matched_company = get_company_helper match[1]
-      assert_instance_of Google::Cloud::Talent::V4beta1::Company, matched_company
+      assert_instance_of Google::Cloud::Talent::V4::Company, matched_company
     end
   end
 
@@ -202,7 +202,7 @@ describe "Job Search Samples" do
       match = out.match %r{Created job: ([\w/-]*)}
       assert match[1]
       matched_job = get_job_helper match[1]
-      assert_instance_of Google::Cloud::Talent::V4beta1::Job, matched_job
+      assert_instance_of Google::Cloud::Talent::V4::Job, matched_job
     end
   end
 
@@ -222,7 +222,7 @@ describe "Job Search Samples" do
       match = out.match %r{Created job: ([\w/-]*)}
       assert match[1]
       matched_job = get_job_helper match[1]
-      assert_instance_of Google::Cloud::Talent::V4beta1::Job, matched_job
+      assert_instance_of Google::Cloud::Talent::V4::Job, matched_job
     end
   end
 
@@ -234,7 +234,7 @@ describe "Job Search Samples" do
       match = out.match %r{Name: ([\w/-]*)}
       assert match[1]
       matched_tenant = get_tenant_helper match[1]
-      assert_instance_of Google::Cloud::Talent::V4beta1::Tenant, matched_tenant
+      assert_instance_of Google::Cloud::Talent::V4::Tenant, matched_tenant
       delete_tenant_helper matched_tenant
     end
   end
