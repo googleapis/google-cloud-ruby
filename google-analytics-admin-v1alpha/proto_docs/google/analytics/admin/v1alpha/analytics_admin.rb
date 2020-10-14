@@ -843,6 +843,37 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for ListAccountSummaries RPC.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of AccountSummary resources to return. The service may
+        #     return fewer than this value, even if there are additional pages.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200; (higher values will be coerced to the maximum)
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListAccountSummaries` call.
+        #     Provide this to retrieve the subsequent page.
+        #     When paginating, all other parameters provided to `ListAccountSummaries`
+        #     must match the call that provided the page token.
+        class ListAccountSummariesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListAccountSummaries RPC.
+        # @!attribute [rw] account_summaries
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccountSummary>]
+        #     Account summaries of all accounts the caller has access to.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListAccountSummariesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

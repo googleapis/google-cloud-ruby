@@ -437,6 +437,43 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A virtual resource representing an overview of an account and
+        # all its child App+Web properties.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Resource name for this account summary.
+        #     Format: accountSummaries/\\{account_id}
+        #     Example: "accountSummaries/1000"
+        # @!attribute [rw] account
+        #   @return [::String]
+        #     Resource name of account referred to by this account summary
+        #     Format: accounts/\\{account_id}
+        #     Example: "accounts/1000"
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Display name for the account referred to in this account summary.
+        # @!attribute [rw] property_summaries
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::PropertySummary>]
+        #     List of summaries for child accounts of this account.
+        class AccountSummary
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A virtual resource representing metadata for an App+Web property.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     Resource name of property referred to by this property summary
+        #     Format: properties/\\{property_id}
+        #     Example: "properties/1000"
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Display name for the property referred to in this account summary.
+        class PropertySummary
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The category selected for this property, used for industry benchmarking.
         module IndustryCategory
           # Industry category unspecified
