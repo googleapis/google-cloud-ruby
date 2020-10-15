@@ -23,8 +23,8 @@ authentication:
 However, you may need to configure your Compute Engine instance with
 [additional scopes](https://cloud.google.com/compute/docs/authentication#using).
 
-1. You can create a [Service Account key file](https://cloud.google.com/docs/authentication#service_accounts)
-. This file can be used to authenticate to Google Cloud Platform services from
+1. You can create a [Service Account key file](https://cloud.google.com/docs/authentication#service_accounts).
+This file can be used to authenticate to Google Cloud Platform services from
 any environment. To use the file, set the `GOOGLE_APPLICATION_CREDENTIALS`
 environment variable to the path to the key file, for example:
 
