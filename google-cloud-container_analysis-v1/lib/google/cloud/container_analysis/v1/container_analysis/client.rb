@@ -42,6 +42,8 @@ module Google
           # image with the vulnerability referring to that note.
           #
           class Client
+            include Paths
+
             # @private
             attr_reader :container_analysis_stub
 
@@ -395,6 +397,75 @@ module Google
             end
 
             ##
+            # Gets a summary of the number and severity of occurrences.
+            #
+            # @overload get_vulnerability_occurrences_summary(request, options = nil)
+            #   Pass arguments to `get_vulnerability_occurrences_summary` via a request object, either of type
+            #   {::Google::Cloud::ContainerAnalysis::V1::GetVulnerabilityOccurrencesSummaryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ContainerAnalysis::V1::GetVulnerabilityOccurrencesSummaryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_vulnerability_occurrences_summary(parent: nil, filter: nil)
+            #   Pass arguments to `get_vulnerability_occurrences_summary` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     The name of the project to get a vulnerability summary for in the form of
+            #     `projects/[PROJECT_ID]`.
+            #   @param filter [::String]
+            #     The filter expression.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ContainerAnalysis::V1::VulnerabilityOccurrencesSummary]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ContainerAnalysis::V1::VulnerabilityOccurrencesSummary]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def get_vulnerability_occurrences_summary request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContainerAnalysis::V1::GetVulnerabilityOccurrencesSummaryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_vulnerability_occurrences_summary.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ContainerAnalysis::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_vulnerability_occurrences_summary.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_vulnerability_occurrences_summary.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @container_analysis_stub.call_rpc :get_vulnerability_occurrences_summary, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the ContainerAnalysis API.
             #
             # This class represents the configuration for ContainerAnalysis,
@@ -545,6 +616,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :test_iam_permissions
+                ##
+                # RPC-specific configuration for `get_vulnerability_occurrences_summary`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_vulnerability_occurrences_summary
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -554,6 +630,8 @@ module Google
                   @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                   test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
                   @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+                  get_vulnerability_occurrences_summary_config = parent_rpcs&.get_vulnerability_occurrences_summary if parent_rpcs&.respond_to? :get_vulnerability_occurrences_summary
+                  @get_vulnerability_occurrences_summary = ::Gapic::Config::Method.new get_vulnerability_occurrences_summary_config
 
                   yield self if block_given?
                 end
