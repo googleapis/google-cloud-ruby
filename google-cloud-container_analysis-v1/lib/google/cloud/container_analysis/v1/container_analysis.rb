@@ -23,6 +23,7 @@ require "gapic/config/method"
 require "google/cloud/container_analysis/v1/version"
 
 require "google/cloud/container_analysis/v1/container_analysis/credentials"
+require "google/cloud/container_analysis/v1/container_analysis/paths"
 require "google/cloud/container_analysis/v1/container_analysis/client"
 
 module Google
