@@ -17,24 +17,24 @@ Authentication is typically done through [Application Default Credentials](https
 environment has credentials. You have a few options for setting up
 authentication:
 
-1.  When running locally, use the [Google Cloud SDK](https://cloud.google.com/sdk/)
+1. When running locally, use the [Google Cloud SDK](https://cloud.google.com/sdk/)
 
-        gcloud auth application-default login
+       gcloud auth application-default login
 
-1.  When running on App Engine or Compute Engine, credentials are already set-up.
-    However, you may need to configure your Compute Engine instance with
-    [additional scopes](https://cloud.google.com/compute/docs/authentication#using).
+1. When running on App Engine or Compute Engine, credentials are already set-up.
+However, you may need to configure your Compute Engine instance with
+[additional scopes](https://cloud.google.com/compute/docs/authentication#using).
 
-1.  You can create a [Service Account key file](https://cloud.google.com/docs/authentication#service_accounts).
-    This file can be used to authenticate to Google Cloud Platform services from
-    any environment. To use the file, set the `GOOGLE_APPLICATION_CREDENTIALS`
-    environment variable to the path to the key file, for example:
+1. You can create a [Service Account key file](https://cloud.google.com/docs/authentication#service_accounts)
+. This file can be used to authenticate to Google Cloud Platform services from
+any environment. To use the file, set the `GOOGLE_APPLICATION_CREDENTIALS`
+environment variable to the path to the key file, for example:
 
-        export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service_account.json
+       export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service_account.json
 
 ### Set Project ID
 
-Next, set the *GOOGLE_CLOUD_PROJECT* environment variable to the project name
+Next, set the `GOOGLE_CLOUD_PROJECT` environment variable to the project name
 set in the
 [Google Cloud Platform Developer Console](https://console.cloud.google.com):
 
@@ -42,18 +42,11 @@ set in the
 
 ### Install Dependencies
 
-1.  Install the [Bundler](http://bundler.io/) gem.
+1. Install the [Bundler](http://bundler.io/) gem.
 
-2.  Decide whether to run against the current code in git, or the latest gem
-    release. To run against the current git code:
+1. Install dependencies using:
 
-        export GOOGLE_CLOUD_SAMPLES_TEST=master
-
-    To run against the latest gem release, unset that variable.
-
-3.  Install dependencies using:
-
-        bundle install
+       bundle install
 
 ### Install fixtures
 
@@ -65,6 +58,8 @@ To install this fixture:
 
 This is a task that needs to be run only once per project.
 
-## Testing samples
+## Run tests
+
+Run the acceptance tests for these samples:
 
     bundle exec rake test
