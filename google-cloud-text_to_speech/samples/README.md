@@ -17,7 +17,7 @@ Authentication is typically done through [Application Default Credentials](https
 environment has credentials. You have a few options for setting up
 authentication:
 
-1. When running locally, use the [Google Cloud SDK](https://cloud.google.com/sdk/)
+1. When running locally, use the [Google Cloud SDK](https://cloud.google.com/sdk/):
 
        gcloud auth application-default login
 
