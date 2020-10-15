@@ -153,7 +153,7 @@ module Google
                 # Set x-goog-api-client and x-goog-user-project headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Security::PrivateCa::V1beta1::VERSION
+                  gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {
@@ -223,7 +223,7 @@ module Google
                 # Set x-goog-api-client and x-goog-user-project headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Security::PrivateCa::V1beta1::VERSION
+                  gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {
@@ -293,7 +293,7 @@ module Google
                 # Set x-goog-api-client and x-goog-user-project headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Security::PrivateCa::V1beta1::VERSION
+                  gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {
@@ -368,7 +368,7 @@ module Google
                 # Set x-goog-api-client and x-goog-user-project headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Security::PrivateCa::V1beta1::VERSION
+                  gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {

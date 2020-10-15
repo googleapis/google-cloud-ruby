@@ -5,7 +5,7 @@ require File.expand_path("lib/google/cloud/security/private_ca/v1beta1/version",
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-security-private_ca-v1beta1"
-  gem.version       = Google::Cloud::Security::PrivateCa::V1beta1::VERSION
+  gem.version       = Google::Cloud::Security::PrivateCA::V1beta1::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

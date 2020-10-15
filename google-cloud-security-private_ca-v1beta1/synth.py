@@ -28,6 +28,7 @@ library = gapic.ruby_library(
     extra_proto_files=["google/cloud/common_resources.proto"],
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-security-private_ca-v1beta1",
+        "ruby-cloud-gem-namespace": "Google::Cloud::Security::PrivateCA::V1beta1",
         "ruby-cloud-title": "Certificate Authority Service V1beta1",
         "ruby-cloud-description": "Certificate Authority Service is a highly available, scalable Google Cloud service that enables you to simplify, automate, and customize the deployment, management, and security of private certificate authorities (CA).",
         "ruby-cloud-env-prefix": "PRIVATE_CA",
