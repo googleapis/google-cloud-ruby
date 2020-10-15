@@ -13,20 +13,28 @@ Authentication is typically done through [Application Default Credentials](https
 environment has credentials. You have a few options for setting up
 authentication:
 
-1. When running locally, use the [Google Cloud SDK](https://cloud.google.com/sdk/)
+1. When running locally, use the [Google Cloud SDK](https://cloud.google.com/sdk/):
 
-    `gcloud auth application-default login`
+       gcloud auth application-default login
 
 1. When running on App Engine or Compute Engine, credentials are already set-up.
 However, you may need to configure your Compute Engine instance with
 [additional scopes](https://cloud.google.com/compute/docs/authentication#using).
 
-1. You can create a [Service Account key file](https://cloud.google.com/docs/authentication#service_accounts)
-. This file can be used to authenticate to Google Cloud Platform services from
+1. You can create a [Service Account key file](https://cloud.google.com/docs/authentication#service_accounts).
+This file can be used to authenticate to Google Cloud Platform services from
 any environment. To use the file, set the `GOOGLE_APPLICATION_CREDENTIALS`
 environment variable to the path to the key file, for example:
 
-    `export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service_account.json`
+       export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service_account.json
+
+### Set Project ID
+
+Next, set the `GOOGLE_CLOUD_PROJECT` environment variable to the project name
+set in the
+[Google Cloud Platform Developer Console](https://console.cloud.google.com):
+
+    export GOOGLE_CLOUD_PROJECT="YOUR-PROJECT-ID"
 
 ### Install Dependencies
 
@@ -34,7 +42,7 @@ environment variable to the path to the key file, for example:
 
 1. Install dependencies using:
 
-    `bundle install`
+       bundle install
 
 ## Run samples
 
@@ -131,19 +139,6 @@ Usage: ruby session_entity_type_management.rb [commang] [arguments]
 
 ## Run tests
 
-You will need a project with Dialogflow enabled, and a service account key with
-permissions to call Dialogflow.
+Run the acceptance tests for these samples:
 
-To run against the latest library releases:
-
-    bundle install && \
-      GOOGLE_CLOUD_PROJECT=your-project-id \
-      GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/keyfile.json \
-      bundle exec rake test
-
-To run against the current git master:
-
-    GOOGLE_CLOUD_SAMPLES_TEST=master bundle install && \
-      GOOGLE_CLOUD_SAMPLES_TEST=master GOOGLE_CLOUD_PROJECT=your-project-id \
-      GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/keyfile.json \
-      bundle exec rake test
+    bundle exec rake test

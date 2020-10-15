@@ -39,7 +39,9 @@ used to authenticate to Google Cloud Platform services from any environment. To 
 
     `bundle install`
 
-## Run Quickstart
+## Run samples
+
+### Run Quickstart
 
     Usage: bundle exec ruby quickstart.rb [command]
 
@@ -49,7 +51,7 @@ used to authenticate to Google Cloud Platform services from any environment. To 
       add_data_2  Add a sample document.
       get_all     Retrieve all documents from a collection.
 
-## Run Add Data
+### Run Add Data
 
     Usage: bundle exec ruby add_data.rb [command]
 
@@ -65,7 +67,7 @@ used to authenticate to Google Cloud Platform services from any environment. To 
       update_server_timestamp     Update field with server timestamp.
       update_document_increment   Update a document number field using Increment.
 
-## Run Query Data
+### Run Query Data
 
     Usage: bundle exec ruby query_data.rb [command]
 
@@ -79,7 +81,7 @@ used to authenticate to Google Cloud Platform services from any environment. To 
       range_query                    Create a query with range clauses.
       invalid_range_query            An example of an invalid range query.
 
-## Run Data Model
+### Run Data Model
 
     Usage: bundle exec ruby data_model.rb [command]
 
@@ -89,7 +91,7 @@ used to authenticate to Google Cloud Platform services from any environment. To 
       document_path_ref  Create a document path reference.
       subcollection_ref  Create a subcollection reference.
 
-## Run Delete Data
+### Run Delete Data
 
     Usage: bundle exec ruby delete_data.rb [command]
 
@@ -98,7 +100,7 @@ used to authenticate to Google Cloud Platform services from any environment. To 
       delete_field       Delete a field.
       delete_collection  Delete an entire collection.
 
-## Run Get Data
+### Run Get Data
 
     Usage: bundle exec ruby get_data.rb [command]
 
@@ -110,7 +112,7 @@ used to authenticate to Google Cloud Platform services from any environment. To 
       add_subcollection         Add a document to a subcollection.
       list_subcollections       List subcollections of a document.
 
-## Run Order Limit Data
+### Run Order Limit Data
 
     Usage: bundle exec ruby order_limit_data.rb [command]
 
@@ -122,7 +124,7 @@ used to authenticate to Google Cloud Platform services from any environment. To 
       range_order_by_query                 Create a range with order by query.
       invalid_range_order_by_query         An example of an invalid range with order by query.
 
-## Run Paginate Data
+### Run Paginate Data
 
     Usage: bundle exec ruby paginate_data.rb [command]
 
@@ -132,7 +134,7 @@ used to authenticate to Google Cloud Platform services from any environment. To 
       paginated_query_cursor       Paginate using query cursors.
       multiple_cursor_conditions   Set multiple cursor conditions.
 
-## Run Transactions And Batched Writes
+### Run Transactions And Batched Writes
 
     Usage: bundle exec ruby transactions_and_batched_writes.rb [command]
 
@@ -140,3 +142,9 @@ used to authenticate to Google Cloud Platform services from any environment. To 
       run_simple_transaction   Run a simple transaction.
       return_info_transaction  Run a transaction and get information returned.
       batch_write              Perform a batch write.
+
+## Run tests
+
+Run the acceptance tests for these samples:
+
+    bundle exec rake test
