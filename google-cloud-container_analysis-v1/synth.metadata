@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "e1d661afe7586d44a29821d44fe8a4cc6d0a34a9"
+        "sha": "57eb9ef15edc7c892e5214718fbcf300062c1cf5"
       }
     },
     {
@@ -55,6 +55,10 @@
     "proto_docs/google/iam/v1/policy.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/type/expr.rb",
+    "proto_docs/grafeas/v1/common.rb",
+    "proto_docs/grafeas/v1/cvss.rb",
+    "proto_docs/grafeas/v1/package.rb",
+    "proto_docs/grafeas/v1/vulnerability.rb",
     "test/google/cloud/container_analysis/v1/container_analysis_test.rb",
     "test/helper.rb"
   ]
