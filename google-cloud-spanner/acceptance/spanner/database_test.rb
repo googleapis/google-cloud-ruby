@@ -60,4 +60,65 @@ describe "Spanner Databases", :spanner do
     first_database = spanner.database all_databases.first.instance_id, all_databases.first.database_id
     _(first_database).must_be_kind_of Google::Cloud::Spanner::Database
   end
+
+  it "creates database with pitr retention period" do
+    skip if emulator_enabled?
+
+    _(spanner.database(instance_id, database_id)).must_be :nil?
+
+    # Invalid
+    retention_period = "0d"
+    assert_raises Google::Cloud::InvalidArgumentError do
+      spanner.create_database instance_id, database_id, statements: ["ALTER DATABASE `#{database_id}` SET OPTIONS (version_retention_period = '#{retention_period}')"]
+    end
+
+    # Success
+    retention_period = "7d"
+    job = spanner.create_database instance_id, database_id, statements: ["ALTER DATABASE `#{database_id}` SET OPTIONS (version_retention_period = '#{retention_period}')"]
+    _(job).must_be_kind_of Google::Cloud::Spanner::Database::Job
+    _(job).wont_be :done? unless emulator_enabled?
+    job.wait_until_done!
+
+    _(job).must_be :done?
+    raise Google::Cloud::Error.from_error(job.error) if job.error?
+    database = job.database
+    database.drop
+    _(spanner.database(instance_id, database_id)).must_be :nil?
+  end
+
+  it "update database ddl with pitr retention period" do
+    skip if emulator_enabled?
+
+    _(spanner.database(instance_id, database_id)).must_be :nil?
+
+    job = spanner.create_database instance_id, database_id
+    _(job).must_be_kind_of Google::Cloud::Spanner::Database::Job
+    _(job).wont_be :done? unless emulator_enabled?
+    job.wait_until_done!
+
+    _(job).must_be :done?
+    raise Google::Cloud::Error.from_error(job.error) if job.error?
+
+    database = job.database
+    _(spanner.database(instance_id, database_id)).wont_be :nil?
+
+    # Invalid
+    retention_period = "0d"
+    assert_raises Google::Cloud::InvalidArgumentError do
+      database.update statements: "ALTER DATABASE `#{database_id}` SET OPTIONS (version_retention_period = '#{retention_period}')"
+    end
+
+    # Success
+    retention_period = "7d"
+    job2 = database.update statements: "ALTER DATABASE `#{database_id}` SET OPTIONS (version_retention_period = '#{retention_period}')"
+    _(job2).must_be_kind_of Google::Cloud::Spanner::Database::Job
+    _(job2).wont_be :done? unless emulator_enabled?
+    job2.wait_until_done!
+
+    _(job2).must_be :done?
+    _(job2.database).must_be :nil?
+
+    database.drop
+    _(spanner.database(instance_id, database_id)).must_be :nil?
+  end
 end
