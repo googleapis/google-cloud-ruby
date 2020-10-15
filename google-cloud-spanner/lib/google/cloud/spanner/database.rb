@@ -85,6 +85,18 @@ module Google
           @grpc.name.split("/")[5]
         end
 
+        # The version retention period for a database.
+        # @return [String]
+        def version_retention_period
+          @grpc.version_retention_period
+        end
+
+        # The earliest available version time for a database.
+        # @return [Time]
+        def earliest_version_time
+          Convert.timestamp_to_time @grpc.earliest_version_time
+        end
+
         ##
         # The full path for the database resource. Values are of the form
         # `projects/<project_id>/instances/<instance_id>/databases/<database_id>`.
