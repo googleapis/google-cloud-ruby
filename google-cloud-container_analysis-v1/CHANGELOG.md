@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.0 / 2020-10-15
+
+#### Features
+
+* Add support for get_vulnerability_occurrences_summary
+
 ### 0.1.2 / 2020-08-10
 
 #### Bug Fixes
