@@ -1,5 +1,38 @@
 # Release History
 
+### 1.1.0 / 2020-10-16
+
+#### Features
+
+* Add Upgrade types and attributes
+  * Add UpgradeNote
+  * Add UpgradeDistribution
+  * Add WindowsUpdate
+  * Add UpgradeOccurrence
+  * Add NoteKind::UPGRADE
+  * Add DiscoveryOccurrence#cpe
+  * Add DiscoveryOccurrence#last_scan_time
+  * Add Note#upgrade
+  * Add Occurrence#upgrade
+  * Add VulnerabilityNote#source_update_time
+  * Add VulnerabilityNote::Detail#source_update_time
+* support separate project setting for quota/billing
+* Rename grafeas gem
+  * Rename grafeas gem from grafeas-client
+  * Create new grafeas-client gem that depends on grafeas
+  * Update google-cloud-container_analysis to use grafeas
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Remove broken troubleshooting link from auth guide.
+* Update copyright year
+* Update Status documentation
+
 ### 1.0.0 / 2020-06-17
 
 This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
