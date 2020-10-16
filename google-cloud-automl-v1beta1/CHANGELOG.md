@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2020-10-16
+
+#### Features
+
+* Initial microsynth of AutoML V1beta1
+
 ### 0.3.0 / 2020-10-14
 
 #### Features
