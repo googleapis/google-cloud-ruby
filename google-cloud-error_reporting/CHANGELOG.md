@@ -1,5 +1,31 @@
 # Release History
 
+### 0.42.0 / 2020-10-16
+
+#### Features
+
+* Add service_address and service_port in the low-level interface
+* Prefix error message with the error name instead of the first line of the backtrace
+* Support overriding of service endpoint
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Synchronize low-level interface to match the backend API
+  * Rename ErrorGroupServiceClient.group_path helper to error_group_path.
+  * Make time_range an optional argument to ErrorGroupServiceClient#list_group_stats
+* The ErrorReporting middleware reuses the existing default reporter instead of creating new ones every time
+* Update minimum runtime dependencies
+* Fix max threads setting in thread pools
+
+#### Documentation
+
+* Update copyright year
+* fix bad links ([#3783](https://www.github.com/googleapis/google-cloud-ruby/issues/3783))
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+* Update the list of GCP environments for automatic authentication
+
 ### 0.41.0 / 2020-09-16
 
 #### Features
