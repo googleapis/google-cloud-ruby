@@ -1,5 +1,47 @@
 # Release History
 
+### 4.0.0 / 2020-10-16
+
+#### ⚠ BREAKING CHANGES
+
+* **videointelligence:** Change features argument for the  annotate_video
+* The API has been retired.
+
+#### Features
+
+* support for logo recognition and project setting for quota/billing
+  * Add logo recognition annotations
+  * Add separate project setting for quota/billing
+* Remove v1beta1
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Add segment and feature
+  * Add VideoAnnotationResults#segment
+  * Add VideoAnnotationProgress#feature
+  * Add VideoAnnotationProgress#segment
+  * Update documentation
+* Add service_address and service_port to client constructor
+* Add VideoAnnotationResults fields
+  * Add VideoAnnotationResults#segment_presence_label_annotations
+  * Add VideoAnnotationResults#shot_presence_label_annotations
+* Use VideoIntelligence namespace
+  * Use canonical module capitalization for VideoIntelligence type namespace
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+* Update annotate_video method signature
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Remove broken troubleshooting link from auth guide.
+* Update copyright year
+* Update formatting and grammar
+* Update formatting and grammar for v1p1beta1
+* Update Request URIs link
+* Update Status documentation
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 3.0.1 / 2020-09-30
 
 #### Documentation
