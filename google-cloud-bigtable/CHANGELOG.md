@@ -1,5 +1,64 @@
 # Release History
 
+### 3.0.0 / 2020-10-16
+
+#### ⚠ BREAKING CHANGES
+
+* **bigtable:** Raise Google::Cloud::Error from Table#mutate_row and similar methods
+
+#### Features
+
+* Accept nil gc_rule arguments for column_family create/update
+* Add service_address and service_port to client constructor
+* Add Table-level IAM Policy support
+* Raise Google::Cloud::Error from Table#mutate_row and similar methods
+  * Refactor Table#client usages to Table#service.
+  * Add the following methods to Service: read_rows, sample_row_keys, mutate_row,
+    mutate_rows, check_and_mutate_row, and read_modify_write_row.
+  * Remove duplicate module method definition MutationOperations#sample_row_keys.
+  * Update acceptance and unit tests to expect Google::Cloud::Error.
+* Support overriding of the service endpoint
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Update GcRule#max_age to microsecond precision
+* Update minimum runtime dependencies
+* Update #to_hash to #to_h to fix for protobuf 3.9.0
+
+#### Performance Improvements
+
+* Update retry config in lower-level client
+
+#### Documentation
+
+* add doctest coverage and update sample code
+* Add OVERVIEW guide with samples
+* Add sample to README.md
+* Correct error in lower-level API Table IAM documentation
+* Fix role string in low-level IAM Policy JSON example
+* Fix samples and copy edit all in-line documentation
+  * Fix samples for Project#create_instance type development
+  * Add acceptance test for Project#create_instance type development
+* Fix timestamp param documentation
+* Update copyright year
+* Update documentation (no visible changes)
+* Update documentation to indicate attributes as required
+* Update generated IAM Policy documentation
+* Update links to googleapis.dev
+* Update low-level IAM documentation
+  * Update GetPolicyOption#requested_policy_version docs
+  * Un-deprecate Policy#version
+* Update low-level IAM Policy class description and sample code
+* Update low-level IAM Policy documentation
+* Update lower-level API documentation
+* Update release level to GA
+* Update Status documentation
+* fix bad links ([#3783](https://www.github.com/googleapis/google-cloud-ruby/issues/3783))
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+* Update the list of GCP environments for automatic authentication
+
 ### 2.1.0 / 2020-09-17
 
 #### Features
