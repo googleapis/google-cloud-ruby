@@ -1,5 +1,49 @@
 # Release History
 
+### 1.30.0 / 2020-10-16
+
+#### Features
+
+* Add Bucket#location_type
+  * Remove :multi_regional and :regional from storage_class docs
+* Add force_copy_metadata to File#copy and #rewrite
+* Add HmacKey
+  * Add Project#create_hmac_key, Project#hmac_key, and Project#hmac_keys.
+* Add IAM Conditions support to Policy
+* Add scheme, virtual_hosted_style and bucket_bound_hostname to #signed_url
+  * Update SignerV4 query param encoding and ordering
+  * Update SignerV4 to convert tabs to single whitespace character
+  * Update SignerV4 to set payload to X-Goog-Content-SHA256 if present
+  * Fix method param default value GET for #signed_url
+* Add support for Bucket#uniform_bucket_level_access
+  * Deprecate Bucket#policy_only=, #policy_only?, and #policy_only_locked_at, which are now
+    aliases for the uniform_bucket_level_access methods.
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Support overriding of service endpoint
+
+#### Bug Fixes
+
+* address keyword argument warnings in Ruby 2.7 and later
+* Fix Bucket Policy Only service bug temporarily
+  * Set UniformBucketLevelAccess to same value as BucketPolicyOnly
+* Specify current file generation within File#download
+* Update #post_object to support special variable ${filename}
+
+#### Performance Improvements
+
+* Update default endpoint
+* Use MiniMime to detect content types
+
+#### Documentation
+
+* Add ARCHIVE storage class
+* fix YARD warning in CHANGELOG.md
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+* Update the list of GCP environments for automatic authentication
+* Mark old storage classes as legacy
+* update storage class examples in docs and tests
+  * Replace MULTI_REGIONAL and REGIONAL with STANDARD and NEARLINE.
+
 ### 1.29.1 / 2020-10-05
 
 #### Bug Fixes
