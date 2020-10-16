@@ -1,5 +1,22 @@
 # Release History
 
+### 0.3.0 / 2020-10-16
+
+#### Features
+
+* initial microsynth of language v1 and v1beta2
+
+#### Bug Fixes
+
+* Eliminate some Ruby 2.7 keyword argument warnings
+
+#### Documentation
+
+* Expansion and cleanup of service description text
+* Fix a few broken links to product documentation pages.
+* remove some spurious backslash escaping from code samples in inline documentation
+* Update documentation for core proto types.
+
 ### 0.2.6 / 2020-10-14
 
 #### Documentation
