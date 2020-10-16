@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 / 2020-10-16
+
+#### Features
+
+* Initial wrapper synth of DataCatalog
+
 ### 1.0.0 / 2020-06-24
 
 Promote to version 1.0.0
