@@ -1,5 +1,12 @@
 # Release History
 
+### 0.3.0 / 2020-10-16
+
+#### Features
+
+* Support submitting jobs as long-running operations.
+* Initial microsynth of Dataproc V1beta2
+
 ### 0.2.5 / 2020-08-10
 
 #### Bug Fixes
