@@ -1,5 +1,39 @@
 # Release History
 
+### 2.0.0 / 2020-10-16
+
+#### ⚠ BREAKING CHANGES
+
+* **redis:** Convert google-cloud-redis to a wrapper
+
+#### Features
+
+* add #import_instance and #export_instance
+* add CloudRedisClient#upgrade_instance and Instance#connect_mode (ConnectMode)
+* Add service_address and service_port to client constructor
+* Convert google-cloud-redis to a wrapper
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Performance Improvements
+
+* Update network configuration
+
+#### Documentation
+
+* Remove broken troubleshooting link from auth guide.
+* edit synths to fix broken links ([#5190](https://www.github.com/googleapis/google-cloud-ruby/issues/5190))
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Document Redis 5.0 options
+* Update code samples
+* Update copyright year
+* Update Status documentation
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 1.1.1 / 2020-05-26
 
 #### Documentation
