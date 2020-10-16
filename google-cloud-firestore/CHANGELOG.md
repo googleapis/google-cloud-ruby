@@ -1,5 +1,40 @@
 # Release History
 
+### 2.4.0 / 2020-10-16
+
+#### Features
+
+* add Collection Group queries
+* add CollectionReference#list_documents
+* add commit_response to Client#transaction
+* Add IN and ARRAY_CONTAINS_ANY query operators
+* Add low-level client for the admin API
+* Add service_address and service_port in the low-level interface
+* Add update_transforms attribute to the Write data type
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Support overriding of service endpoint
+
+#### Bug Fixes
+
+* Revert the update_transforms addition
+* Use client instead of service in DocumentReference::List
+* Fix MonitorMixin usage on Ruby 2.7
+  * Ruby 2.7 will error if new_cond is called before super().
+  * Make the call to super() be the first call in initialize
+    when possible.
+* Update minimum runtime dependencies
+* Update #to_hash to #to_h to fix for protobuf 3.9.0
+
+#### Documentation
+
+* Update copyright year
+* Update lower-level API documentation
+* Update lower-level API documentation
+* Update Status documentation
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+* Update the list of GCP environments for automatic authentication
+
 ### 2.3.0 / 2020-09-30
 
 #### Features
