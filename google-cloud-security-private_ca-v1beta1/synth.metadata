@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "1ffc120701b14f0fee076ace4d87ae173f469940"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "ce3e088c859a56eeca9485b6c3866420acc2e5b9"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "215c12ade72d9d9616457d9b8b2f8a37f38e79f3",
-        "internalRef": "337113354"
+        "sha": "062f46f246c78fde2160524db593fa0fa7bdbe64",
+        "internalRef": "337404700"
       }
     }
   ],
@@ -26,5 +26,46 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-security-private_ca-v1beta1.gemspec",
+    "lib/google-cloud-security-private_ca-v1beta1.rb",
+    "lib/google/cloud/security/private_ca/v1beta1.rb",
+    "lib/google/cloud/security/private_ca/v1beta1/certificate_authority_service.rb",
+    "lib/google/cloud/security/private_ca/v1beta1/certificate_authority_service/client.rb",
+    "lib/google/cloud/security/private_ca/v1beta1/certificate_authority_service/credentials.rb",
+    "lib/google/cloud/security/private_ca/v1beta1/certificate_authority_service/operations.rb",
+    "lib/google/cloud/security/private_ca/v1beta1/certificate_authority_service/paths.rb",
+    "lib/google/cloud/security/private_ca/v1beta1/version.rb",
+    "lib/google/cloud/security/privateca/v1beta1/resources_pb.rb",
+    "lib/google/cloud/security/privateca/v1beta1/service_pb.rb",
+    "lib/google/cloud/security/privateca/v1beta1/service_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/security/privateca/v1beta1/resources.rb",
+    "proto_docs/google/cloud/security/privateca/v1beta1/service.rb",
+    "proto_docs/google/longrunning/operations.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/duration.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/protobuf/wrappers.rb",
+    "proto_docs/google/rpc/status.rb",
+    "test/google/cloud/security/private_ca/v1beta1/certificate_authority_service_operations_test.rb",
+    "test/google/cloud/security/private_ca/v1beta1/certificate_authority_service_paths_test.rb",
+    "test/google/cloud/security/private_ca/v1beta1/certificate_authority_service_test.rb",
+    "test/helper.rb"
   ]
 }
