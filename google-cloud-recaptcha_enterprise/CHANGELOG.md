@@ -1,5 +1,30 @@
 # Release History
 
+### 1.2.0 / 2020-10-16
+
+#### Features
+
+* Add Key CRUD calls and new Event fields
+* Add service_address and service_port to client constructor
+* Move data type classes from Recaptchaenterprise to RecaptchaEnterprise.
+  * Note: Recaptchaenterprise was left as an alias, so older code should still work.
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Remove broken troubleshooting link from auth guide.
+* edit synths to fix broken links ([#5190](https://www.github.com/googleapis/google-cloud-ruby/issues/5190))
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Update copyright year
+* Update product home page link
+* fix bad links ([#3783](https://www.github.com/googleapis/google-cloud-ruby/issues/3783))
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 1.1.1 / 2020-05-26
 
 #### Documentation
