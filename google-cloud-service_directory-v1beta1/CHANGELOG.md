@@ -1,5 +1,22 @@
 # Release History
 
+### 0.5.0 / 2020-10-16
+
+#### Features
+
+* Path helpers can be called as module functions
+* initial microsynth of service_directory v1beta1
+
+#### Bug Fixes
+
+* Eliminate some Ruby 2.7 keyword argument warnings
+
+#### Documentation
+
+* Expansion and cleanup of service description text
+* several corrections to brace escaping in documentation
+* Update documentation for core proto types.
+
 ### 0.4.5 / 2020-08-10
 
 #### Bug Fixes
