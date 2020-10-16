@@ -1,5 +1,131 @@
 # Release History
 
+### 2.2.0 / 2020-10-16
+
+#### Features
+
+*  Rename Subscriber inventory methods and params
+  * Rename Subscriber#inventory_limit to #max_outstanding_messages
+  * Rename Subscriber#bytesize to #max_outstanding_bytes
+  * Rename Subscriber#extension to #max_total_lease_duration
+  * Add deprecated aliases for the original methods
+* Add Dead Letter Policy to low-level API
+  * Add Google::Cloud::PubSub::V1::Subscription#dead_letter_policy
+  * Add Google::Cloud::PubSub::V1::DeadLetterPolicy class
+* Add endpoint to constructor
+* Add list_topic_snapshots and get_snapshot
+  * Add PublisherClient#list_topic_snapshots
+  * Add SubscriberClient#get_snapshot
+* Add max_duration_per_lease_extension to Subscription#listen and Subscriber
+* Add ReceivedMessage#delivery_attempt
+  * Experimental, part of Dead Letter Policy
+* Add service_address and service_port in the low-level interface
+* Add stop! convenience method
+  * Convenience method calls both stop and wait.
+  * Add Subscriber#stop! method.
+  * Add AsyncPublisher#stop! method.
+* Add Subscriber inventory settings
+  * Add the following settings to Subscriber:
+    * Subscriber#inventory_limit
+    * Subscriber#inventory_bytesize
+    * Subscriber#extension
+  * Allow Subscription#listen inventory argument to be a hash.
+* Add support for Dead Letter Topics
+  * Add `dead_letter_topic` and `dead_letter_max_delivery_attempts` to `Topic#subscribe`
+  * Add `Subscription#dead_letter_topic` and `Subscription#dead_letter_topic=`
+  * Add `Subscription#dead_letter_max_delivery_attempts` and `Subscription#dead_letter_max_delivery_attempts=`
+  * Add `ReceivedMessage#delivery_attempt`
+* Add support for Ordering Keys
+  * Google Cloud Pub/Sub ordering keys provide the ability to ensure related
+    messages are sent to subscribers in the order in which they were published.
+    The service guarantees that, for a given ordering key and publisher, messages
+    are sent to subscribers in the order in which they were published.
+  * Note: At the time of this release, ordering keys are not yet publicly enabled
+    and requires special project enablements.
+  * Add Google::Cloud::PubSub::Topic#enable_message_ordering! method.
+  * Add Google::Cloud::PubSub::Topic#message_ordering? method.
+  * Add ordering_key argument to Google::Cloud::PubSub::Topic#publish_async method.
+  * Add Google::Cloud::PubSub::Topic#resume_publish method.
+  * Add message_ordering argument to Google::Cloud::PubSub::Topic#subscribe method.
+  * Add Google::Cloud::PubSub::Subscription#message_ordering? method.
+* Allow persistence_regions to be set
+* Allow wait to block for specified time
+  * Add timeout argument to Subscriber#wait! method.
+  * Document timeout argument on AsyncPublisher#wait! method.
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Add Topic#persistence_regions
+* Remove messages from inventory after callback
+* Service endpoint can be overridden from config
+* Use concurrent-ruby Promises framework
+  * Update concurrent-ruby dependency to 1.1
+  * Use Promises Future implementation
+  * Used CachedThreadPool to lower resource usage
+
+#### Bug Fixes
+
+* Do not interrupt Subscriber callbacks when stopping
+  * Allow in-process callbacks to complete when a Subscriber is stopped.
+* Fix Subscriber lease issue
+  * Fix logic for renewing Subscriber lease for messages.
+    * Subscriptions with very low volume would only be renewed once.
+    * Now messages will be renewed as many times as it takes until 
+      the messages has been fully processed by the Subscriber.
+* Move Thread.new to end of AsyncPublisher#initialize
+* Update AsyncPublisher configuration defaults
+  * Update AsyncPublisher defaults to the following:
+    * max_bytes to 1MB, was 10MB.
+    * max_messages to 100, was 1,000.
+    * interval to 10 milliseconds, was 250 milliseconds.
+    * publish thread count to 2, was 4
+    * callback thread count to 4, was 8.
+* Fix max threads setting in thread pools
+* Fix MonitorMixin usage on Ruby 2.7
+  * Ruby 2.7 will error if new_cond is called before super().
+  * Make the call to super() be the first call in initialize
+    when possible.
+* Fix Subscriber Inventory bug
+* Fix Subscriber lease timing
+  * Start the clock for the next lease renewal immediately.
+  * This help Subscriptions with a very short deadline not
+    extend past the deadline due to network or locking issues.
+* Fix Subscriber state after releasing messages
+  * Correctly reset the Subscriber state when releasing messages
+    after the callback either raises an error, or the callback
+    fails to call acknowledge or modify_ack_deadline on the
+    message. If a Subscriber fills it's inventory, and stops
+    pulling additional messages before all the callbacks are
+    completed (moves to a paused state) then the Subscriber
+    could become stuck in a paused state.
+  * A paused Subscriber will now check whether to unpause after
+    the callback is completed, instead of when acknowledge or
+    modify_ack_deadline is called on the message.
+* Fix Subscriber#wait! behavior
+  * Fix an issue where the Subscriber#wait! would block
+    for only 60 seconds, and not indefinitely.
+    * This was introduced in the previous release, 0.39.2.
+* Fixed race in TimedUnaryBuffer
+* Update minimum runtime dependencies
+
+#### Performance Improvements
+
+* Add StreamingPullRequest#client_id to the lower-level API
+* Honor max_threads in thread pools
+* Update network configuration
+* update timeout settings in subscriber_client_config.json
+
+#### Documentation
+
+* Remove a spurious link in the low-level interface documentation.
+* Update copyright year
+* Update documentation in the lower-level client
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+* Update the list of GCP environments for automatic authentication
+* Update Subscriber stop and wait documentation
+  * Update Subscriber#stop and Subscriber#wait! method
+    descriptions to reflect the behavior as of release 0.37.0.
+* Update x-goog-version and message_storage_policy docs
+
 ### 2.1.0 / 2020-09-17
 
 #### Features
