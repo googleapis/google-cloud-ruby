@@ -1,5 +1,47 @@
 # Release History
 
+### 2.0.0 / 2020-10-16
+
+#### ⚠ BREAKING CHANGES
+
+* **oslogin:** Remove LoginProfile#suspended attribute added in version 0.4.0
+* **os_login:** Rename OsLoginServiceClient.fingerprint_path to OsLoginServiceClient.posix_account_path
+* **os_login:** Rename OsLoginServiceClient.project_path to OsLoginServiceClient.ssh_public_key_path
+* **os_login:** The "name" argument to OsLoginServiceClient#get_ssh_public_key changed from positional to an optional keyword argument
+* **os_login:** The "ssh_public_key" argument to OsLoginServiceClient#import_ssh_public_key changed from positional to an optional keyword argument
+
+#### Features
+
+* Move data type classes from Oslogin to OsLogin.
+  * Note: Oslogin was left as an alias, so older code should still work.
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Add arguments to OsLoginServiceClient#get_login_profile
+  * Add arguments to OsLoginServiceClient#get_login_profile:
+    * Add project_id named argument
+    * Add system_id named argument
+  * Add Common::PosixAccount#operating_system_type (Common::OperatingSystemType)
+  * Add Common::PosixAccount#name
+  * Update access scopes list
+  * Update documentation
+  * Update product name to include Cloud
+* Add service_address and service_port to client constructor
+
+#### Bug Fixes
+
+* Rename resource path methods to match their intended use
+* Remove LoginProfile#suspended attribute added in version 0.4.0
+  * Also reverted breaking change in the last commit: The "name" argument to OsLoginServiceClient#get_ssh_public_key
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Remove broken troubleshooting link from auth guide.
+* Update copyright year
+* Update product documentation
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 1.1.1 / 2020-05-27
 
 #### Documentation
