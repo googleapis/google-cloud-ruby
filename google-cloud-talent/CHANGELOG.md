@@ -1,5 +1,98 @@
 # Release History
 
+### 2.0.0 / 2020-10-16
+
+#### ⚠ BREAKING CHANGES
+
+* Remove JobEventType::NOT_INTERESTED
+
+#### Features
+
+* Add candidate_availability_filter and result_set_id
+  * Add ProfileQuery#candidate_availability_filter (CandidateAvailabilityFilter)
+  * Add result_set_id argument to ProfileServiceClient#search_profiles
+    * Add SearchProfilesRequest#result_set_id
+    * Add SearchProfilesResponse#result_set_id
+  * Update documentation
+* Add job_path and job_without_tenant_path helpers
+  * Add ApplicationServiceClient.job_path
+  * Add ApplicationServiceClient.job_without_tenant_path
+* Add JobQuery#query_language_code
+* Add path helpers
+  * Add company_without_tenant_path, job_without_tenant_path, and project_path.
+* Add Profile#derived_addresses
+* Add service_address and service_port to client constructor
+* Add support for availability filters
+  * Add filter argument to ProfileServiceClient#list_profiles
+  * Add Profile#candidate_update_time field
+  * Add Profile#resume_update_time field
+  * Add Profile#availability_signals field
+  * Add ProfileQuery#availability_filters field
+  * Add AvailabilitySignal type
+  * Add AvailabilityFilter type
+  * Update documentation
+* Support separate project setting for quota/billing
+* update path helpers
+  * Add ApplicationServiceClient.company_without_tenant_path
+  * Add ApplicationServiceClient.company_path
+  * Add CompletionClient.project_path
+  * Add EventServiceClient.project_path
+  * Add JobServiceClient.project_path
+  * Deprecate CompletionClient.tenant_path
+  * Deprecate EventServiceClient.tenant_path
+  * Deprecate JobServiceClient.tenant_path
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Remove dead classes related to resume service ([#3642](https://www.github.com/googleapis/google-cloud-ruby/issues/3642))
+* Update minimum runtime dependencies
+
+#### Performance Improvements
+
+* Update network configuration
+* Update timeout_millis in client configs
+
+* Release google-cloud-talent 0.4.0 (#3645)
+  * Remove dead files related to resume service
+  * Add candidate_availability_filter and result_set_id
+      * Add ProfileQuery#candidate_availability_filter (CandidateAvailabilityFilter)
+      * Add result_set_id argument to ProfileServiceClient#search_profiles
+      * Add SearchProfilesRequest#result_set_id
+      * Add SearchProfilesResponse#result_set_id
+      * Update documentation
+  * Support overriding service host and port.
+  * Update github link in the PostalAddress docs
+  * Add Batch Jobs
+
+#### Documentation
+
+* Fix PersonNameFilter docs by removing a link that was crashing YARD
+* edit synths to fix broken links ([#5190](https://www.github.com/googleapis/google-cloud-ruby/issues/5190))
+* Add param docs for service_address and service_port
+* Add param docs for service_address and service_port
+* Add param docs for service_address and service_port
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Deprecate Job#visibility and Visibility
+  * Deprecate Job#visibility and Visibility
+    * The job is only visible to the owner.
+  * Update documentation.
+    * Update ProfileServiceClient#search_profiles order_by options.
+    * Update ProfileQuery#location_filters documentation
+    * Update wording.
+* Minor corrections to descriptions of several constants
+* Reformat documentation for longer line length
+* Update copyright year
+* Update description of update field mask
+* Update docs for DiversificationLevel::SIMPLE
+* Update documentation
+* Update documentation (no visible changes)
+* Update github link in the PostalAddress docs
+* Update PostalAddress#revision documentation
+* Update Status documentation
+* Update update_mask documentation
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 1.0.0 / 2020-10-16
 
 #### ⚠ BREAKING CHANGES
