@@ -1,5 +1,69 @@
 # Release History
 
+### 1.24.0 / 2020-10-16
+
+#### Features
+
+* Add Job#parent_job_id and Job#script_statistics
+  * Add parent_job to Project#jobs
+  * Add Job#num_child_jobs
+  * Add Job#parent_job_id
+  * Add Job#script_statistics
+* Add Range Partitioning ()
+  * Add range partitioning methods to Table and Table::Updater
+  * Add range partitioning methods to LoadJob
+  * Add range partitioning methods to QueryJob
+* Add Routine
+  * Add Dataset#create_routine
+  * Add Argument
+  * Update StandardSql classes to expose public initializer
+  * Add Data#ddl_target_routine and QueryJob#ddl_target_routine
+* Add support for all_users special role in Dataset access 
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Add Dataset default_encryption
+  * Add Dataset#default_encryption
+  * Add Dataset#default_encryption=
+* Add Model encryption
+  * Add Model#encryption
+  * Add Model#encryption=
+* Add range support for Google Sheets
+  * Add External::SheetsSource#range
+  * Add External::SheetsSource#range=
+* Add Table#require_partition_filter
+* Support overriding of service endpoint
+* Support use_avro_logical_types on extract jobs
+  * Add ExtractJob#use_avro_logical_types?
+  * Add ExtractJob::Updater#use_avro_logical_types=
+* Add BigQuery Model API
+  * Add Model
+  * Add StandardSql Field, DataType, StructType
+  * Add Dataset#model and Dataset#models
+* List jobs using min and max created_at
+
+#### Bug Fixes
+
+* Fix MonitorMixin usage on Ruby 2.7
+  * Ruby 2.7 will error if new_cond is called before super().
+  * Make the call to super() be the first call in initialize
+    when possible.
+* Correct Float value conversion
+
+#### Performance Improvements
+
+* Reduce thread allocations
+* Use MiniMime to detect content types
+
+#### Documentation
+
+* Update the list of GCP environments for automatic authentication
+* Add note about streaming insert issues
+  * Acknowledge tradeoffs when inserting rows soon after
+    table metadata has been changed.
+  * Add link to BigQuery Troubleshooting guide.
+* fix bad links ([#3783](https://www.github.com/googleapis/google-cloud-ruby/issues/3783))
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+* Update "Loading data" link
+
 ### 1.23.0 / 2020-09-17
 
 #### Features
