@@ -1,5 +1,26 @@
 # Release History
 
+### 0.7.0 / 2020-10-16
+
+#### Features
+
+* support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Add service_address and service_port to client constructor
+* search_hashes now requires the thread_types argument
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Remove broken troubleshooting link from auth guide.
+* Update copyright year
+* Update documentation.
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 0.6.0 / 2020-05-08
 
 This library is now deprecated, and will no longer receive updates.
