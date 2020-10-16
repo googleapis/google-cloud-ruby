@@ -1,5 +1,50 @@
 # Release History
 
+### 4.0.0 / 2020-10-16
+
+#### ⚠ BREAKING CHANGES
+
+* **translate:** Add Translate V3 client
+
+#### Features
+
+* send quota project header in the V2 client
+* Support separate project setting for quota/billing
+* Update minimum runtime dependencies
+  * Fixes an issue where required dependencies may not be used.
+* Add Translate V3 client
+  * Update google-cloud-translate to contain a generated v3 client
+    as well as the legacy hand-written v2 client.
+  * The v3 client includes several new features and updates:
+    * Glossaries - Create a custom dictionary to correctly and 
+      consistently translate terms that are customer-specific.
+    * Batch requests - Make an asynchronous request to translate
+      large amounts of text.
+    * AutoML models - Cloud Translation adds support for translating
+      text with custom models that you create using AutoML Translation.
+    * Labels - The Cloud Translation API supports adding user-defined
+      labels (key-value pairs) to requests.
+  * The following methods now return an instance of
+    Google::Cloud::Translate::V3::TranslationServiceClient:
+    * Google::Cloud#translate
+    * Google::Cloud.translate
+    * Google::Cloud::Translate.new
+  * To use the legacy v2 client specify the version when creating:
+    * Google::Cloud::Translate.new version: :v2
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Support overriding of service endpoint
+
+#### Bug Fixes
+
+* support faraday 1.x
+
+#### Documentation
+
+* Update copyright year
+* Update Status documentation
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+* Update the list of GCP environments for automatic authentication
+
 ### 3.0.1 / 2020-06-22
 
 #### Bug Fixes
