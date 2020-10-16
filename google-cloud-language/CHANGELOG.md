@@ -1,5 +1,37 @@
 # Release History
 
+### 2.0.0 / 2020-10-16
+
+#### ⚠ BREAKING CHANGES
+
+* **language:** use clients created by the new generator
+
+#### Features
+
+* Add service_address and service_port to client constructor
+* Add support for more entity types
+  * Add Entity::Type::PHONE_NUMBER
+  * Add Entity::Type::ADDRESS
+  * Add Entity::Type::DATE
+  * Add Entity::Type::NUMBER
+  * Add Entity::Type::PRICE
+  * Update documentation
+* Support separate project setting for quota/billing
+* use clients created by the new generator
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* fix a few errors in the language migration guide
+* Update copyright year
+* Update spelling of "part-of-speech"
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 1.2.1 / 2020-05-25
 
 #### Documentation
