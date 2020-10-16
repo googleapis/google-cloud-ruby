@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.0 / 2020-10-16
+
+#### ⚠ BREAKING CHANGES
+
+* Now connects to version v4 of the service by default. See https://cloud.google.com/talent-solution/job-search/docs/migrate for more information. Version v4beta1 is now deprecated but can still be selected manually when constructing a client object.
+
 ### 0.20.0 / 2020-06-01
 
 This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
