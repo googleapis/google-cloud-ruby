@@ -1,5 +1,56 @@
 # Release History
 
+### 2.0.0 / 2020-10-16
+
+#### ⚠ BREAKING CHANGES
+
+* **security_center:** Convert google-cloud-security_center to a wrapper
+* **security_center:** Remove unused resource path helpers
+
+#### Features
+
+* Add attributes to SecurityCenterProperties and ListFindingsResult
+  * Add SecurityCenterProperties#resource_display_name
+  * Add SecurityCenterProperties#resource_parent_display_name
+  * Add SecurityCenterProperties#resource_project_display_name
+  * Add ListFindingsResult#resource (Resource)
+  * Update network configuration
+* Add IAM GetPolicyOptions
+* Add NotificationConfig
+  * Add SecurityCenter#create_notification_config
+  * Add SecurityCenter#delete_notification_config
+  * Add SecurityCenter#get_notification_config
+  * Add SecurityCenter#list_notification_configs
+  * Add SecurityCenter#update_notification_config
+* Add service_address and service_port to client constructor
+* add support for v1p1beta1
+* Convert google-cloud-security_center to a wrapper
+* Provide a path helper for the security_marks resource.
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Add missing require
+* Remove unused resource path helpers
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Fix role string in IAM Policy JSON example
+* Update copyright year
+* Update filter param docs with time formats
+* Update IAM documentation
+  * Update GetPolicyOption#requested_policy_version docs
+  * Un-deprecate Policy#version
+* Update IAM Policy class description and sample code
+* Update IAM Policy documentation
+* Update IAM Policy documentation
+* Update in-code samples
+* Update Status documentation
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 1.1.2 / 2020-09-03
 
 Version bump; no significant changes.
