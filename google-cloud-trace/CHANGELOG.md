@@ -1,5 +1,38 @@
 # Release History
 
+### 0.41.0 / 2020-10-16
+
+#### Features
+
+* Add service_address and service_port to client constructor
+* Introduce enable_cross_project_tracing option to the faraday middleware
+* Support overriding of service endpoint
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Fix MonitorMixin usage on Ruby 2.7
+  * Ruby 2.7 will error if new_cond is called before super().
+  * Make the call to super() be the first call in initialize
+    when possible.
+* Update minimum runtime dependencies
+* Fix max threads setting in thread pools
+
+#### Performance Improvements
+
+* Remove TraceServiceClient.span_path from lower-level API
+  * Update network configuration
+* Update network configuration
+  * Update documentation
+
+#### Documentation
+
+* Update Status documentation
+* fix bad links ([#3783](https://www.github.com/googleapis/google-cloud-ruby/issues/3783))
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+* Update the list of GCP environments for automatic authentication
+
 ### 0.40.0 / 2020-07-23
 
 This is a major update that removes the "low-level" client interface code, and
