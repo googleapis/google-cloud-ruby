@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2020-10-16
+
+#### Features
+
+* Initial microsynth of DataCatalog V1
+
 ### 0.4.5 / 2020-08-10
 
 #### Bug Fixes
