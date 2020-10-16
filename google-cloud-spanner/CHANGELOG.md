@@ -1,5 +1,75 @@
 # Release History
 
+### 3.0.0 / 2020-10-16
+
+#### ⚠ BREAKING CHANGES
+
+* **spanner:** Make the session_count argument required in the low-level batch_create_sessions call
+
+#### Features
+
+* Add Batch Create Sessions to low-level API
+  * Add SpannerClient#batch_create_sessions
+  * Add BatchCreateSessionsRequest
+  * Add BatchCreateSessionsResponse
+* Add InstanceConfig#replicas (ReplicaInfo)
+  * Update documentation.
+* Add service_address and service_port in the low-level interface
+* Add the support for SPANNER_EMULATOR_HOST. ([#4546](https://www.github.com/googleapis/google-cloud-ruby/issues/4546))
+  * Add the support for SPANNER_EMULATOR_HOST.
+* allow custom lib name and version for telemetry purpose ([#4762](https://www.github.com/googleapis/google-cloud-ruby/issues/4762))
+  * allow custom lib name and version for telemetry purpose
+  * format docs
+  * added custom lib name and version prefix
+  * update test cases for lib name and version
+* database backup and restore  ([#5053](https://www.github.com/googleapis/google-cloud-ruby/issues/5053))
+  * backup and restore apis, tests and docs
+* Support overriding of service endpoint
+* support query options ([#4907](https://www.github.com/googleapis/google-cloud-ruby/issues/4907))
+  * Add the support for query optimizer versioning.
+  * Implement partial overwriting for query options.
+  * Add query_options to client.execute_partition_update.
+  * Add query_options to batch_snapshot.execute_query.
+  * Add query_options to execute_partition_query and partition_query.
+  * Add the support of query options to transaction.execute_update.
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Low-level admin clients now honor service_address and service_port
+* Make the session_count argument required in the low-level batch_create_sessions call
+* Rename endpoint_urls to endpoint_uris
+* revert #commit mutations to positional in lower-level API
+* Revert breaking change to lower-level API test_iam_permissions
+* update network configuration
+* Update minimum runtime dependencies
+* Update #to_hash to #to_h to fix for protobuf 3.9.0
+
+#### Performance Improvements
+
+* Update lower-level API
+  * Add Instance#endpoint_urls and GetInstanceRequest#field_mask.
+* Update Pool#init to use BatchCreateSessions
+  * Update pool checkout to pop sessions for LIFO
+* Reduce thread allocations
+
+#### Documentation
+
+* fix incorrect doc links in CONTRIBUTING.md
+* Update copyright year
+* Update generated IAM Policy documentation
+* Update low-level IAM documentation
+  * Update GetPolicyOption#requested_policy_version docs
+  * Un-deprecate Policy#version
+* Update lower-level API docs
+* Update Status documentation
+* Update the list of GCP environments for automatic authentication
+* Update Policy example code
+* Update IAM Policy class description and sample code
+* fix bad links ([#3783](https://www.github.com/googleapis/google-cloud-ruby/issues/3783))
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 2.2.0 / 2020-09-15
 
 #### Features
