@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2020-10-16
+
+#### Features
+
+* Initial microsynth of Redis V1
+
 ### 0.3.2 / 2020-08-10
 
 #### Bug Fixes
