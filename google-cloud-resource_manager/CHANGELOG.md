@@ -1,5 +1,22 @@
 # Release History
 
+### 0.35.0 / 2020-10-16
+
+#### Features
+
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Support overriding of service endpoint
+
+#### Bug Fixes
+
+* List all projects example
+
+#### Documentation
+
+* fix some incorrect markdown causing spurious links
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+* Update the list of GCP environments for automatic authentication
+
 ### 0.34.0 / 2020-09-16
 
 #### Features
