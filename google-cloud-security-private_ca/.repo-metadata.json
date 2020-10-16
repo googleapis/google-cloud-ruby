@@ -1,0 +1,11 @@
+{
+    "api_id": "privateca.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-security-private_ca/latest",
+    "distribution_name": "google-cloud-security-private_ca",
+    "language": "ruby",
+    "name": "privateca",
+    "name_pretty": "Certificate Authority Service API",
+    "product_documentation": "https://cloud.google.com/certificate-authority-service/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
