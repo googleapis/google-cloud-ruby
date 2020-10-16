@@ -1,5 +1,41 @@
 # Release History
 
+### 2.2.0 / 2020-10-16
+
+#### Features
+
+* support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Add service_address and service_port in the low-level interface
+* Support additional fields of LogSink
+  * Add LogSink#create_time field
+  * Add LogSink#update_time field
+  * Add LogSink#bigquery_options field
+  * Add BigQueryOptions type
+  * Update documentation
+* Support overriding of service endpoint
+
+#### Bug Fixes
+
+* Restore billing, folder, and organization path helpers in low-level interface
+* Restore some path helpers in the low-level interface.
+* Fix max threads setting in thread pools
+* Fix MonitorMixin usage on Ruby 2.7
+  * Ruby 2.7 will error if new_cond is called before super().
+  * Make the call to super() be the first call in initialize
+    when possible.
+* Update minimum runtime dependencies
+
+#### Documentation
+
+* Fix doc links to Cmek methods in lower-level client
+* Fix some broken links in the low-level interface documentation.
+* Update copyright year
+* Update description of MetricDescriptor#unit in lower-level API
+* Update docs for lower-level API call MetricDescriptorMetadata#unit
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+* Update the list of GCP environments for automatic authentication
+
 ### 2.1.0 / 2020-09-16
 
 #### Features
