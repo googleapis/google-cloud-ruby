@@ -1,5 +1,23 @@
 # Release History
 
+### 0.6.0 / 2020-10-16
+
+#### Features
+
+* Path helpers can be called as module functions
+
+#### Bug Fixes
+
+* Eliminate some Ruby 2.7 keyword argument warnings
+
+#### Documentation
+
+* Update homepage in README and gemspec
+* Add Configuration docs and update enum return types
+* Expansion and cleanup of service description text
+* remove some spurious backslash escaping from code samples in inline documentation
+* Update documentation for core proto types.
+
 ### 0.5.2 / 2020-08-10
 
 #### Bug Fixes
