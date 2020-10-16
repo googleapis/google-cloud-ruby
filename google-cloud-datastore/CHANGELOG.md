@@ -1,5 +1,28 @@
 # Release History
 
+### 2.2.0 / 2020-10-16
+
+#### Features
+
+* Support separate project setting for quota/billing
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+* Add service_address and service_port to client constructor
+* Support overriding of service endpoint
+
+#### Bug Fixes
+
+* Adjust required/optional argument settings for the low-level run_query and commit calls to match the backend
+* Update Service calls to run_query and commit
+  * Change positional params to keyword args
+* Update minimum runtime dependencies
+* Update #to_hash to #to_h to fix for protobuf 3.9.0
+
+#### Documentation
+
+* Update copyright year
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+* Update the list of GCP environments for automatic authentication
+
 ### 2.1.0 / 2020-09-17
 
 #### Features
