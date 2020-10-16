@@ -1,5 +1,43 @@
 # Release History
 
+### 2.0.0 / 2020-10-16
+
+#### ⚠ BREAKING CHANGES
+
+* **container:** Change deprecated but required parameters to keyword arguments in most public methods
+
+#### Features
+
+* Add service_address and service_port to client constructor
+* Change deprecated but required parameters to keyword arguments in most public methods
+* New RPC, classes, and attributes
+  * New RPC methods
+    * Add ClusterManagerClient#list_usable_subnetworks
+  * New attributes
+    * Add NodeConfig#taints
+    * Add NodeConfig#shielded_instance_config
+    * Add AddonsConfig#cloud_run_config
+* Support separate project setting for quota/billing
+* Add various new types and attributes
+  * Add NodeConfig#shielded_instance_config (ShieldedInstanceConfig)
+  * Add Cluster#authenticator_groups_config (AuthenticatorGroupsConfig)
+  * Add Cluster#database_encryption(DatabaseEncryption)
+  * Add ClusterUpdate#desired_intra_node_visibility_config (IntraNodeVisibilityConfig)
+  * Add UpdateNodePoolRequest#workload_metadata_config (WorkloadMetadataConfig)
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Update minimum runtime dependencies
+* Update #to_hash to #to_h to fix for protobuf 3.9.0
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Remove broken troubleshooting link from auth guide.
+* Update copyright year
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+
 ### 1.1.1 / 2020-05-26
 
 #### Documentation
