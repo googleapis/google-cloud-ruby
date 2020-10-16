@@ -1,5 +1,52 @@
 # Release History
 
+### 2.0.0 / 2020-10-16
+
+#### ⚠ BREAKING CHANGES
+
+* **speech:** use clients created by the new generator
+
+#### Features
+
+* Add RecognitionConfig#diarization_config
+  * Add RecognitionConfig#diarization_config
+  * Add SpeakerDiarizationConfig
+  * Update documentation
+* Add service_address and service_port to client constructor
+  * Update documentation
+* Add Speaker Diarization
+  * Add RecognitionConfig#diarization_config
+  * Add SpeakerDiarizationConfig
+* Add WordInfo#speaker_tag
+  * Update documentation
+    * Update bucket name in code examples
+* Support separate project setting for quota/billing
+* use clients created by the new generator
+* Update Ruby dependency to minimum of 2.4 ([#4206](https://www.github.com/googleapis/google-cloud-ruby/issues/4206))
+
+#### Bug Fixes
+
+* Fix MonitorMixin usage on Ruby 2.7
+  * Ruby 2.7 will error if new_cond is called before super().
+  * Make the call to super() be the first call in initialize
+    when possible.
+* Update minimum runtime dependencies
+
+#### Performance Improvements
+
+* Update network configuration
+* Update network configuration
+* Update network configuration
+
+#### Documentation
+
+* Clarify which Google Cloud Platform products support auto-discovered credentials
+* Update copyright year
+* Update service name to "Speech-to-Text" and make minor formatting changes
+* Update Status documentation
+* update links to point to new docsite ([#3684](https://www.github.com/googleapis/google-cloud-ruby/issues/3684))
+* Update SpeechContext phrases description
+
 ### 1.1.1 / 2020-05-26
 
 #### Documentation
