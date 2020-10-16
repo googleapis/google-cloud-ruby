@@ -1,5 +1,29 @@
 # Release History
 
+### 0.3.0 / 2020-10-16
+
+#### Features
+
+* [AccessApproval][MicroSynth] Add AccessApproval client ([#4832](https://www.github.com/googleapis/google-cloud-ruby/issues/4832))
+  * [AccessApproval][MicroSynth] Add AccessApproval client
+  * [AccessApproval] Add the library code
+  * [Access-Approval] Updated to reflect the PR comments and resynthed
+  * fix a typo
+  * Generated from the local protos with changed ruby_package and changed the gemname
+  * fix the path for the gem
+  * resynth with the new synthtool and the new generator
+  * resynth witht the doc fixes
+
+#### Bug Fixes
+
+* Eliminate some Ruby 2.7 keyword argument warnings
+
+#### Documentation
+
+* Expansion and cleanup of service description text
+* Remove an internal directive from the class docs
+* Update documentation for core proto types.
+
 ### 0.2.5 / 2020-08-10
 
 #### Bug Fixes
