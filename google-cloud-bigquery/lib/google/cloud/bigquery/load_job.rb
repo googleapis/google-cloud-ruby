@@ -428,8 +428,9 @@ module Google
         # The period for which the destination table will be time partitioned, if
         # any. See [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
-        # @return [String, nil] The time partition type. Currently the only supported
-        #   value is "DAY", or `nil` if not present.
+        # @return [String, nil] The time partition type. The supported types are `DAY`,
+        #   `HOUR`, `MONTH`, and `YEAR`, which will generate one partition per day,
+        #   hour, month, and year, respectively; or `nil` if not present.
         #
         # @!group Attributes
         #
@@ -1499,8 +1500,9 @@ module Google
           # BigQuery does not allow you to change partitioning on an existing
           # table.
           #
-          # @param [String] type The time partition type. Currently the only
-          #   supported value is "DAY".
+          # @param [String] type The time partition type. The supported types are `DAY`,
+          #   `HOUR`, `MONTH`, and `YEAR`, which will generate one partition per day,
+          #   hour, month, and year, respectively.
           #
           # @example
           #   require "google/cloud/bigquery"
