@@ -60,7 +60,10 @@ end
 def create_occurrence resource_url:, note_id:, occurrence_project:, note_project:
   # [START containeranalysis_create_occurrence]
   # resource_url       = "The URL of the resource associated with the occurrence."
-  #                      # e.g. https://gcr.io/project/image@sha256:123
+  #                      # If you are using Google Container Registry
+  #                      # e.g. https://gcr.io/project/repo/image@sha256:123
+  #                      # If you are using Google Artifact Registry
+  #                      # e.g. https://LOCATION-docker.pkg.dev/project/repo/image@sha256:123
   # note_id            = "The identifier of the note associated with the occurrence"
   # occurrence_project = "The Google Cloud project ID for the new occurrence"
   # note_project       = "The Google Cloud project ID of the associated note"
@@ -320,8 +323,11 @@ end
 
 def find_high_severity_vulnerabilities_for_image resource_url:, project_id:
   # [START containeranalysis_filter_vulnerability_occurrences]
-  # resource_url = "The URL of the resource associated with the occurrence,
-  #                 e.g. https://gcr.io/project/image@sha256:123"
+  # resource_url       = "The URL of the resource associated with the occurrence."
+  #                      # If you are using Google Container Registry
+  #                      # e.g. https://gcr.io/project/repo/image@sha256:123
+  #                      # If you are using Google Artifact Registry
+  #                      # e.g. https://LOCATION-docker.pkg.dev/project/repo/image@sha256:123
   # project_id   = "The Google Cloud project ID of the vulnerabilities to find"
 
   require "google/cloud/container_analysis"
