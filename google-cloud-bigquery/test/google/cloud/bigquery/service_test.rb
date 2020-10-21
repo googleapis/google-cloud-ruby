@@ -17,6 +17,11 @@ require "helper"
 describe Google::Cloud::Bigquery::Service do
   Service = Google::Cloud::Bigquery::Service
   let(:project_id) { "my-project" }
+  let(:client) { "authorization client" }
+  let(:retries) { 3 }
+  let(:timeout) { 30000 }
+  let(:host) { "example.com" }
+  let(:quota_project) { "my-quota-project" }
   let(:dataset_id) { "my_dataset" }
   let(:table_id) { "my_table" }
   let(:project_id_default) { "my-project-default" }
@@ -25,6 +30,34 @@ describe Google::Cloud::Bigquery::Service do
   let(:project_default_ref) { Google::Apis::BigqueryV2::ProjectReference.new project_id: project_id_default }
   let(:dataset_default_ref) { Google::Apis::BigqueryV2::DatasetReference.new project_id: project_id_default, dataset_id: dataset_id_default }
   let(:table_default_ref) { Google::Apis::BigqueryV2::TableReference.new project_id: project_id_default, dataset_id: dataset_id_default, table_id: table_id_default }
+
+  it "creates a Google::Apis::BigqueryV2::BigqueryService" do
+    mock_credentials = Minitest::Mock.new
+    mock_credentials.expect :client, client, []
+    service = Service.new project_id,
+                          mock_credentials,
+                          retries: retries,
+                          timeout: timeout,
+                          host: host,
+                          quota_project: quota_project
+
+    v2_service = service.service
+    _(v2_service).must_be_kind_of Google::Apis::BigqueryV2::BigqueryService
+
+    _(v2_service.client_options.application_name).must_equal "gcloud-ruby"
+    _(v2_service.client_options.application_version).must_equal Google::Cloud::Bigquery::VERSION
+    _(v2_service.client_options.open_timeout_sec).must_equal timeout
+    _(v2_service.client_options.read_timeout_sec).must_equal timeout
+    _(v2_service.client_options.send_timeout_sec).must_equal timeout
+    _(v2_service.request_options.retries).must_equal 0 # retries argument is used in #execute
+    _(v2_service.request_options.header).must_be_kind_of Hash
+    _(v2_service.request_options.header["x-goog-api-client"]).must_equal "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Bigquery::VERSION}"
+    _(v2_service.request_options.query).must_be_kind_of Hash
+    _(v2_service.request_options.query["prettyPrint"]).must_equal false
+    _(v2_service.request_options.quota_project).must_equal quota_project
+    _(v2_service.authorization).must_equal client
+    _(v2_service.root_url).must_equal host
+  end
 
   it "returns table ref from standard sql format with project, dataset, table and no default ref" do
     table_ref = Service.table_ref_from_s "#{project_id}.#{dataset_id}.#{table_id}"
