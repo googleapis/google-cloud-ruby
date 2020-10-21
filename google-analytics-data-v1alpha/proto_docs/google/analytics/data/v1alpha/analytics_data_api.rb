@@ -21,6 +21,21 @@ module Google
   module Analytics
     module Data
       module V1alpha
+        # The dimensions and metrics currently accepted in reporting methods.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Resource name of this metadata.
+        # @!attribute [rw] dimensions
+        #   @return [::Array<::Google::Analytics::Data::V1alpha::DimensionMetadata>]
+        #     The dimensions descriptions.
+        # @!attribute [rw] metrics
+        #   @return [::Array<::Google::Analytics::Data::V1alpha::MetricMetadata>]
+        #     The metric descriptions.
+        class Metadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The request to generate a report.
         # @!attribute [rw] entity
         #   @return [::Google::Analytics::Data::V1alpha::Entity]
@@ -309,6 +324,19 @@ module Google
         #   @return [::Array<::Google::Analytics::Data::V1alpha::MetricMetadata>]
         #     The metric descriptions.
         class UniversalMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for a property's dimension and metric metadata.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the metadata to retrieve. This name field is
+        #     specified in the URL path and not URL parameters. Property is a numeric
+        #     Google Analytics App + Web Property identifier.
+        #
+        #     Example: properties/1234/metadata
+        class GetMetadataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

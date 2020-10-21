@@ -30,6 +30,8 @@ module Google
           # Google Analytics reporting data service.
           #
           class Client
+            include Paths
+
             # @private
             attr_reader :analytics_data_stub
 
@@ -558,6 +560,85 @@ module Google
             end
 
             ##
+            # Returns metadata for dimensions and metrics available in reporting methods.
+            # Used to explore the dimensions and metrics. In this method, a Google
+            # Analytics App + Web Property Identifier is specified in the request, and
+            # the metadata response includes Custom dimensions and metrics as well as
+            # Universal metadata.
+            #
+            # For example if a custom metric with parameter name `levels_unlocked` is
+            # registered to a property, the Metadata response will contain
+            # `customEvent:levels_unlocked`. Universal metadata are dimensions and
+            # metrics applicable to any property such as `country` and `totalUsers`.
+            #
+            # @overload get_metadata(request, options = nil)
+            #   Pass arguments to `get_metadata` via a request object, either of type
+            #   {::Google::Analytics::Data::V1alpha::GetMetadataRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Data::V1alpha::GetMetadataRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_metadata(name: nil)
+            #   Pass arguments to `get_metadata` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the metadata to retrieve. This name field is
+            #     specified in the URL path and not URL parameters. Property is a numeric
+            #     Google Analytics App + Web Property identifier.
+            #
+            #     Example: properties/1234/metadata
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Data::V1alpha::Metadata]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Data::V1alpha::Metadata]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def get_metadata request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Data::V1alpha::GetMetadataRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_metadata.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Data::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_metadata.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_metadata.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_data_stub.call_rpc :get_metadata, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the AnalyticsData API.
             #
             # This class represents the configuration for AnalyticsData,
@@ -718,6 +799,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_universal_metadata
+                ##
+                # RPC-specific configuration for `get_metadata`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_metadata
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -731,6 +817,8 @@ module Google
                   @batch_run_pivot_reports = ::Gapic::Config::Method.new batch_run_pivot_reports_config
                   get_universal_metadata_config = parent_rpcs&.get_universal_metadata if parent_rpcs&.respond_to? :get_universal_metadata
                   @get_universal_metadata = ::Gapic::Config::Method.new get_universal_metadata_config
+                  get_metadata_config = parent_rpcs&.get_metadata if parent_rpcs&.respond_to? :get_metadata
+                  @get_metadata = ::Gapic::Config::Method.new get_metadata_config
 
                   yield self if block_given?
                 end

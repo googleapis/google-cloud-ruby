@@ -60,6 +60,17 @@ module Google
             # This method returns Universal Metadata. Universal Metadata are dimensions
             # and metrics applicable to any property such as `country` and `totalUsers`.
             rpc :GetUniversalMetadata, ::Google::Analytics::Data::V1alpha::GetUniversalMetadataRequest, ::Google::Analytics::Data::V1alpha::UniversalMetadata
+            # Returns metadata for dimensions and metrics available in reporting methods.
+            # Used to explore the dimensions and metrics. In this method, a Google
+            # Analytics App + Web Property Identifier is specified in the request, and
+            # the metadata response includes Custom dimensions and metrics as well as
+            # Universal metadata.
+            #
+            # For example if a custom metric with parameter name `levels_unlocked` is
+            # registered to a property, the Metadata response will contain
+            # `customEvent:levels_unlocked`. Universal metadata are dimensions and
+            # metrics applicable to any property such as `country` and `totalUsers`.
+            rpc :GetMetadata, ::Google::Analytics::Data::V1alpha::GetMetadataRequest, ::Google::Analytics::Data::V1alpha::Metadata
           end
 
           Stub = Service.rpc_stub_class
