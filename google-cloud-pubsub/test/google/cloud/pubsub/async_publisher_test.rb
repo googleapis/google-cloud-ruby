@@ -26,6 +26,52 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
   let(:msg_encoded2) { message2.encode(Encoding::ASCII_8BIT) }
   let(:msg_encoded3) { message3.encode(Encoding::ASCII_8BIT) }
 
+  it "knows its defaults" do
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service
+    _(publisher.max_bytes).must_equal 1_000_000
+    _(publisher.max_messages).must_equal 100
+    _(publisher.interval).must_equal 0.01
+    _(publisher.publish_threads).must_equal 2
+    _(publisher.callback_threads).must_equal 4
+  end
+
+  it "knows its given attributes" do
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new(
+      topic_name,
+      pubsub.service,
+      max_bytes: 2_000_000,
+      max_messages: 200,
+      interval: 0.02,
+      threads: {
+        publish: 3,
+        callback: 5
+      }
+    )
+
+    _(publisher.max_bytes).must_equal 2_000_000
+    _(publisher.max_messages).must_equal 200
+    _(publisher.interval).must_equal 0.02
+    _(publisher.publish_threads).must_equal 3
+    _(publisher.callback_threads).must_equal 5
+  end
+
+  it "knows given attributes and retains its defaults" do
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new(
+      topic_name,
+      pubsub.service,
+      max_bytes: 2_000_000,
+      threads: {
+        publish: 3
+      }
+    )
+
+    _(publisher.max_bytes).must_equal 2_000_000
+    _(publisher.max_messages).must_equal 100
+    _(publisher.interval).must_equal 0.01
+    _(publisher.publish_threads).must_equal 3
+    _(publisher.callback_threads).must_equal 4
+  end
+
   it "publishes a message" do
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, interval: 10
     messages = [
