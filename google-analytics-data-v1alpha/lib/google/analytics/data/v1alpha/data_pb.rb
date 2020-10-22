@@ -224,7 +224,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :TYPE_INTEGER, 1
       value :TYPE_FLOAT, 2
       value :TYPE_SECONDS, 4
+      value :TYPE_MILLISECONDS, 5
+      value :TYPE_MINUTES, 6
+      value :TYPE_HOURS, 7
+      value :TYPE_STANDARD, 8
       value :TYPE_CURRENCY, 9
+      value :TYPE_FEET, 10
+      value :TYPE_MILES, 11
+      value :TYPE_METERS, 12
+      value :TYPE_KILOMETERS, 13
     end
   end
 end
