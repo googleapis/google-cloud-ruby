@@ -31,7 +31,7 @@ module Google
         ##
         # The timestamp at which the transaction committed.
         # @return [Time]
-        def commit_timestamp
+        def timestamp
           Convert.timestamp_to_time @grpc.commit_timestamp
         end
 
