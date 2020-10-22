@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2020-10-22
+
+#### Features
+
+* Support for get_metadata
+
 ### 0.2.0 / 2020-10-14
 
 #### ⚠ BREAKING CHANGES
