@@ -20,10 +20,11 @@ describe "Spanner Client", :single_use, :spanner do
   let(:fields_hash) { { account_id: :INT64, username: :STRING, friends: [:INT64], active: :BOOL, reputation: :FLOAT64, avatar: :BYTES } }
 
   before do
-    @setup_timestamp = db.commit do |c|
+    commit_resp = db.commit do |c|
       c.delete "accounts"
       c.insert "accounts", default_account_rows
     end
+    @setup_timestamp = commit_resp.timestamp
   end
 
   after do

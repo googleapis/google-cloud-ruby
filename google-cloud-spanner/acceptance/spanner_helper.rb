@@ -36,7 +36,7 @@ def emulator_enabled?
 end
 
 # Create shared spanner object so we don't create new for each test
-$spanner = Google::Cloud::Spanner.new
+$spanner = Google::Cloud::Spanner.new endpoint: ENV['SPANNER_SERVICE_ENDPOINT']
 
 module Acceptance
   ##
@@ -268,13 +268,23 @@ module Acceptance
     end
 
     include Fixtures
+
+    def assert_commit_resp resp, stats: nil
+       _(resp.timestamp).must_be_kind_of Time
+
+      return _(resp.stats).must_be :nil? unless stats
+
+      _(resp.stats).must_be_kind_of Google::Cloud::Spanner::CommitResponse::CommitStats
+      _(resp.stats.mutation_count).must_be :>, 0
+      _(resp.stats.overload_delay).must_be :>, 0
+    end
   end
 end
 
 # Create buckets to be shared with all the tests
 require "date"
 require "securerandom"
-$spanner_instance_id = "google-cloud-ruby-tests"
+$spanner_instance_id = ENV["SPANNER_INSTANCE_ID"] || "google-cloud-ruby-tests"
 # $spanner_database_id is already 22 characters, can only add 7 additional characters
 $spanner_database_id = "gcruby-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(4)}"
 

@@ -40,7 +40,7 @@ describe "Spanner Client", :batch_update, :spanner do
     prior_results = db.execute_sql "SELECT * FROM accounts"
     _(prior_results.rows.count).must_equal 3
 
-    timestamp = db.transaction do |tx|
+    commit_resp = db.transaction do |tx|
       _(tx.transaction_id).wont_be :nil?
 
       row_counts = tx.batch_update do |b|
@@ -60,14 +60,43 @@ describe "Spanner Client", :batch_update, :spanner do
         params: { account_id: 4 }
       _(update_results.rows.count).must_equal 0
     end
-    _(timestamp).must_be_kind_of Time
+
+    assert_commit_resp commit_resp
+  end
+
+  it "executes multiple DML statements in a batch with commit stats" do
+    prior_results = db.execute_sql "SELECT * FROM accounts"
+    _(prior_results.rows.count).must_equal 3
+
+    commit_resp = db.transaction commit_stats: true do |tx|
+      _(tx.transaction_id).wont_be :nil?
+
+      row_counts = tx.batch_update do |b|
+        b.batch_update insert_dml, params: insert_params
+        b.batch_update update_dml, params: update_params
+        b.batch_update delete_dml, params: delete_params
+      end
+
+      _(row_counts).must_be_kind_of Array
+      _(row_counts.count).must_equal 3
+      _(row_counts[0]).must_equal 1
+      _(row_counts[1]).must_equal 1
+      _(row_counts[2]).must_equal 1
+
+      update_results = tx.execute_sql \
+        "SELECT username FROM accounts WHERE account_id = @account_id",
+        params: { account_id: 4 }
+      _(update_results.rows.count).must_equal 0
+    end
+
+    assert_commit_resp commit_resp, stats: true
   end
 
   it "raises InvalidArgumentError when no DML statements are executed in a batch" do
     prior_results = db.execute_sql "SELECT * FROM accounts"
     _(prior_results.rows.count).must_equal 3
 
-    timestamp = db.transaction do |tx|
+    commit_resp = db.transaction do |tx|
       _(tx.transaction_id).wont_be :nil?
 
       err = expect do
@@ -75,14 +104,14 @@ describe "Spanner Client", :batch_update, :spanner do
       end.must_raise Google::Cloud::InvalidArgumentError
         _(err.message).must_match /3:(No statements in batch DML request|Request must contain at least one DML statement)/
     end
-    _(timestamp).must_be_kind_of Time
+    assert_commit_resp commit_resp
   end
 
   it "executes multiple DML statements in a batch with syntax error" do
     prior_results = db.execute_sql "SELECT * FROM accounts"
     _(prior_results.rows.count).must_equal 3
 
-    timestamp = db.transaction do |tx|
+    commit_resp = db.transaction do |tx|
       _(tx.transaction_id).wont_be :nil?
       begin
         tx.batch_update do |b|
@@ -104,14 +133,14 @@ describe "Spanner Client", :batch_update, :spanner do
         params: { account_id: 4 }
       _(update_results.rows.count).must_equal 1 # DELETE statement did not execute.
     end
-    _(timestamp).must_be_kind_of Time
+    assert_commit_resp commit_resp
   end
 
   it "runs execute_update and batch_update in the same transaction" do
     prior_results = db.execute_sql "SELECT * FROM accounts"
     _(prior_results.rows.count).must_equal 3
 
-    timestamp = db.transaction do |tx|
+    commit_resp = db.transaction do |tx|
       _(tx.transaction_id).wont_be :nil?
 
       row_counts = tx.batch_update do |b|
@@ -133,6 +162,6 @@ describe "Spanner Client", :batch_update, :spanner do
         params: { account_id: 4 }
       _(update_results.rows.count).must_equal 0
     end
-    _(timestamp).must_be_kind_of Time
+    assert_commit_resp commit_resp
   end
 end
