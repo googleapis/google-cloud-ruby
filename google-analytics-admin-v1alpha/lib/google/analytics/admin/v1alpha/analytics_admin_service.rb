@@ -31,7 +31,7 @@ module Google
     module Admin
       module V1alpha
         ##
-        # Service Interface for the Analytics Admin API (App+Web).
+        # Service Interface for the Analytics Admin API (GA4).
         #
         # To load this service and instantiate a client:
         #
