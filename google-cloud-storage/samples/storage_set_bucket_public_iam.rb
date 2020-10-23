@@ -14,7 +14,8 @@
 
 def set_bucket_public_iam bucket_name:
   # [START storage_set_bucket_public_iam]
-  # bucket_name = "your-bucket-name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 
@@ -30,5 +31,5 @@ def set_bucket_public_iam bucket_name:
 end
 
 if $PROGRAM_NAME == __FILE__
-  set_bucket_public_iam bucket_name: ARGV.shift, role: ARGV.shift, member: ARGV.shift
+  set_bucket_public_iam bucket_name: ARGV.shift
 end

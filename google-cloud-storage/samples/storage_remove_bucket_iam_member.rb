@@ -12,16 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def remove_bucket_iam_member bucket_name:, role:, member:
+def remove_bucket_iam_member bucket_name:
   # [START storage_remove_bucket_iam_member]
-  # bucket_name = "Your Google Cloud Storage bucket name"
-  # role        = "Bucket-level IAM role"
-  # member      = "Bucket-level IAM member"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # For more information please read: https://cloud.google.com/storage/docs/access-control/iam
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
+
+  role   = "roles/storage.objectViewer"
+  member = "group:example@google.com"
 
   bucket.policy requested_policy_version: 3 do |policy|
     policy.bindings.each do |binding|
@@ -35,6 +39,4 @@ def remove_bucket_iam_member bucket_name:, role:, member:
   # [END storage_remove_bucket_iam_member]
 end
 
-if $PROGRAM_NAME == __FILE__
-  remove_bucket_iam_member bucket_name: ARGV.shift, role: ARGV.shift, member: ARGV.shift
-end
+remove_bucket_iam_member bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

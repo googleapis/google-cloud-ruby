@@ -14,7 +14,8 @@
 
 def enable_versioning bucket_name:
   # [START storage_enable_versioning]
-  # bucket_name = "your-bucket-name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 

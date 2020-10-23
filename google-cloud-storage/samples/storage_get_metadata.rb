@@ -14,8 +14,11 @@
 
 def get_metadata bucket_name:, file_name:
   # [START storage_get_metadata]
-  # bucket_name = "Your Google Cloud Storage bucket name"
-  # file_name   = "Name of file in Google Cloud Storage"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
 
   require "google/cloud/storage"
 

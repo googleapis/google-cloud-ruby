@@ -12,16 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def add_bucket_iam_member bucket_name:, role:, member:
+def add_bucket_iam_member bucket_name:
   # [START storage_add_bucket_iam_member]
-  # bucket_name = "Your Google Cloud Storage bucket name"
-  # role        = "Bucket-level IAM role"
-  # member      = "Bucket-level IAM member"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
+
+  role   = "roles/storage.objectViewer"
+  member = "group:example@google.com"
 
   bucket.policy requested_policy_version: 3 do |policy|
     policy.bindings.insert role: role, members: [member]
@@ -32,5 +34,5 @@ def add_bucket_iam_member bucket_name:, role:, member:
 end
 
 if $PROGRAM_NAME == __FILE__
-  add_bucket_iam_member bucket_name: ARGV.shift, role: ARGV.shift, member: ARGV.shift
+  add_bucket_iam_member bucket_name: ARGV.shift
 end

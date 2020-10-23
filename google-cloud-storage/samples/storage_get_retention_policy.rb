@@ -14,7 +14,8 @@
 
 def get_retention_policy bucket_name:
   # [START storage_get_retention_policy]
-  # bucket_name = "Name of your Google Cloud Storage bucket"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 

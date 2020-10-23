@@ -14,7 +14,6 @@
 
 def list_buckets
   # [START storage_list_buckets]
-
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new

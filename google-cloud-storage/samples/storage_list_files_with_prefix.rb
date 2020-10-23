@@ -17,6 +17,7 @@ def list_files_with_prefix bucket_name:, prefix:, delimiter: nil
   # Lists all the files in the bucket that begin with the prefix.
   #
   # This can be used to list all files in a "folder", e.g. "public/".
+  #
   # The delimiter argument can be used to restrict the results to only the
   # "files" in the given "folder". Without the delimiter, the entire tree under
   # the prefix is returned. For example, given these files:
@@ -33,9 +34,14 @@ def list_files_with_prefix bucket_name:, prefix:, delimiter: nil
   #
   #     a/1.txt
 
-  # bucket_name = "Your Google Cloud Storage bucket name"
-  # prefix      = "Filter results to files whose names begin with this prefix"
-  # delimiter   = "Restrict the results to only files whose names, aside from the prefix, do not contain the delimiter."
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The directory prefix to search for
+  # prefix = "a"
+
+  # The delimiter to be used to restrict the results
+  # delimiter = "/"
 
   require "google/cloud/storage"
 
@@ -49,4 +55,4 @@ def list_files_with_prefix bucket_name:, prefix:, delimiter: nil
   # [END storage_list_files_with_prefix]
 end
 
-list_files_with_prefix bucket_name: ARGV.shift, prefix: ARGV.shift if $PROGRAM_NAME == __FILE__
+list_files_with_prefix bucket_name: ARGV.shift, prefix: ARGV.shift, delimiter: ARGV.shift if $PROGRAM_NAME == __FILE__

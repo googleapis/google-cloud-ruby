@@ -14,10 +14,17 @@
 
 def object_csek_to_cmek bucket_name:, file_name:, encryption_key:, kms_key_name:
   # [START storage_object_csek_to_cmek]
-  # bucket_name = "your-bucket-name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
   # file_name = "your-file-name"
+
+  # The Base64 encoded encryption key, which should be the same key originally used to encrypt the object
   # encryption_key = "TIbv/fjexq+VmtXzAlc63J4z5kFmWJ6NdAPQulQBT7g="
-  # kms_key_name = "projects/PROJ/locations/LOC/keyRings/RING/cryptoKey/KEY"
+
+  # The name of the KMS key to manage this object with
+  # kms_key_name = "projects/your-project-id/locations/global/keyRings/your-key-ring/cryptoKeys/your-key"
 
   require "google/cloud/storage"
 

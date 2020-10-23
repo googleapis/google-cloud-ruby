@@ -21,18 +21,15 @@ require_relative "../storage_set_bucket_public_iam.rb"
 require_relative "../storage_view_bucket_iam_members.rb"
 
 describe "IAM Snippets" do
-  let(:role)                  { "roles/storage.admin" }
-  let(:member)                { "user:test@test.com" }
-  let(:role_public)           { "roles/storage.objectViewer" }
-  let(:member_public)         { "allUsers" }
+  let(:member) { "group:example@google.com" }
+  let(:member_public) { "allUsers" }
+  let(:role) { "roles/storage.objectViewer" }
   let(:bucket) { fixture_bucket }
 
   it "add_bucket_iam_member, view_bucket_iam_members, remove_bucket_iam_member" do
     # add_bucket_iam_member
     assert_output "Added #{member} with role #{role} to #{bucket.name}\n" do
-      add_bucket_iam_member bucket_name: bucket.name,
-                            role:        role,
-                            member:      member
+      add_bucket_iam_member bucket_name: bucket.name
     end
 
     assert bucket.policy.roles.any? do |p_role, p_members|
@@ -49,9 +46,7 @@ describe "IAM Snippets" do
 
     # remove_bucket_iam_member
     assert_output "Removed #{member} with role #{role} from #{bucket.name}\n" do
-      remove_bucket_iam_member bucket_name: bucket.name,
-                               role:        role,
-                               member:      member
+      remove_bucket_iam_member bucket_name: bucket.name
     end
 
     refute bucket.policy.roles.none? do |p_role, p_members|
@@ -66,29 +61,30 @@ describe "IAM Snippets" do
     end
 
     assert bucket.policy.roles.any? do |p_role, p_members|
-      p_role == role_public && p_members.includes?(member_public)
+      p_role == role && p_members.includes?(member_public)
     end
 
     # teardown
     capture_io do
-      remove_bucket_iam_member bucket_name: bucket.name, role: role_public, member: member_public
+      bucket.policy requested_policy_version: 3 do |policy|
+        policy.bindings.each do |binding|
+          if binding.role == role && binding.condition.nil?
+            binding.members.delete member_public
+          end
+        end
+      end
     end
   end
 
   it "add_bucket_conditional_iam_binding, remove_bucket_conditional_iam_binding" do
-    title = "title"
-    description = "description"
+    title = "Title"
+    description = "Description"
     expression = "resource.name.startsWith(\"projects/_/buckets/bucket-name/objects/prefix-a-\")"
     bucket.uniform_bucket_level_access = true
 
     # add_bucket_conditional_iam_binding
     assert_output "Added #{member} with role #{role} to #{bucket.name} with condition #{title} #{description} #{expression}\n" do
-      add_bucket_conditional_iam_binding bucket_name: bucket.name,
-                                         role:        role,
-                                         member:      member,
-                                         title:       title,
-                                         description: description,
-                                         expression:  expression
+      add_bucket_conditional_iam_binding bucket_name: bucket.name
     end
 
     policy = bucket.policy(requested_policy_version: 3).bindings.select(&:condition).first
@@ -100,11 +96,7 @@ describe "IAM Snippets" do
 
     # remove_bucket_conditional_iam_binding
     assert_output "Conditional Binding was removed.\n" do
-      remove_bucket_conditional_iam_binding bucket_name: bucket.name,
-                                            role:        role,
-                                            title:       title,
-                                            description: description,
-                                            expression:  expression
+      remove_bucket_conditional_iam_binding bucket_name: bucket.name
     end
     bindings = bucket.policy(requested_policy_version: 3).bindings.select(&:condition)
     assert_equal bindings.size, 0

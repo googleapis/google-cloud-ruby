@@ -12,12 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def upload_with_kms_key bucket_name:, local_file_path:, storage_file_path: nil, kms_key:
+def upload_with_kms_key bucket_name:, local_file_path:, file_name: nil, kms_key:
   # [START storage_upload_with_kms_key]
-  # bucket_name       = "Your Google Cloud Storage bucket name"
-  # local_file_path   = "Path to local file to upload"
-  # storage_file_path = "Path to store the file in Google Cloud Storage"
-  # kms_key           = "KMS key resource id"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The path to your file to upload
+  # local_file_path = "/local/path/to/file.txt"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
+
+  # The name of the KMS key to manage this object with
+  # kms_key = "projects/your-project-id/locations/global/keyRings/your-key-ring/cryptoKeys/your-key"
 
   require "google/cloud/storage"
 
@@ -25,16 +32,15 @@ def upload_with_kms_key bucket_name:, local_file_path:, storage_file_path: nil, 
 
   bucket = storage.bucket bucket_name
 
-  file = bucket.create_file local_file_path, storage_file_path,
-                            kms_key: kms_key
+  file = bucket.create_file local_file_path, file_name, kms_key: kms_key
 
   puts "Uploaded #{file.name} and encrypted service side using #{file.kms_key}"
   # [END storage_upload_with_kms_key]
 end
 
 if $PROGRAM_NAME == __FILE__
-  upload_with_kms_key bucket_name:       ARGV.shift,
-                      local_file_path:   ARGV.shift,
-                      storage_file_path: ARGV.shift,
-                      kms_key:           ARGV.shift
+  upload_with_kms_key bucket_name:     ARGV.shift,
+                      local_file_path: ARGV.shift,
+                      file_name:       ARGV.shift,
+                      kms_key:         ARGV.shift
 end

@@ -12,24 +12,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def copy_file_archived_generation bucket_name:,
-                                  file_name:,
+def copy_file_archived_generation source_bucket_name:,
+                                  source_file_name:,
+                                  generation:,
                                   destination_bucket_name:,
-                                  destination_file_name:,
-                                  generation:
+                                  destination_file_name:
   # [START storage_copy_file_archived_generation]
-  # bucket_name = "your-bucket-name"
-  # file_name = "your-file-name"
-  # destination_bucket_name = "destination-bucket-name"
-  # destination_file_name = "destination-object-name"
+  # The ID of the bucket the original object is in
+  # source_bucket_name = "source-bucket-name"
+
+  # The ID of the GCS object to copy
+  # source_file_name = "source-file-name"
+
+  # The generation of your GCS object to copy
   # generation = 1579287380533984
+
+  # The ID of the bucket to copy the object to
+  # destination_bucket_name = "destination-bucket-name"
+
+  # The ID of the new GCS object
+  # destination_file_name = "destination-file-name"
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
 
-  source_bucket = storage.bucket bucket_name
-  source_file = source_bucket.file file_name
+  source_bucket = storage.bucket source_bucket_name
+  source_file = source_bucket.file source_file_name
   destination_bucket = storage.bucket destination_bucket_name
 
   destination_file = source_file.copy destination_bucket, destination_file_name, generation: generation
@@ -40,9 +49,9 @@ def copy_file_archived_generation bucket_name:,
 end
 
 if $PROGRAM_NAME == __FILE__
-  copy_file_archived_generation bucket_name:             ARGV.shift,
-                                file_name:               ARGV.shift,
+  copy_file_archived_generation source_bucket_name:      ARGV.shift,
+                                source_file_name:        ARGV.shift,
+                                generation:              ARGV.shift,
                                 destination_bucket_name: ARGV.shift,
-                                destination_file_name:   ARGV.shift,
-                                generation:              ARGV.shift
+                                destination_file_name:   ARGV.shift
 end

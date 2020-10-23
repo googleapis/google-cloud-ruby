@@ -14,9 +14,14 @@
 
 def download_public_file bucket_name:, file_name:, local_file_path:
   # [START storage_download_public_file]
-  # bucket_name = "A public Google Cloud Storage bucket name"
-  # file_name   = "Name of a file in the Cloud Storage bucket"
-  # local_file_path  = "Destination path for downloaded file"
+  # The name of the bucket to access
+  # bucket_name = "my-bucket"
+
+  # The name of the remote public file to download
+  # file_name = "publicfile.txt"
+
+  # The path to which the file should be downloaded
+  # local_file_path = "/local/path/to/file.txt"
 
   require "google/cloud/storage"
 
@@ -26,7 +31,7 @@ def download_public_file bucket_name:, file_name:, local_file_path:
 
   file.download local_file_path
 
-  puts "Downloaded public object #{file.name} from bucket #{bucket} to #{local_path}"
+  puts "Downloaded public object #{file.name} from bucket #{bucket} to #{local_file_path}"
   # [END storage_download_public_file]
 end
 

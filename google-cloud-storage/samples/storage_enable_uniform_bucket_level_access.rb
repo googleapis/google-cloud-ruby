@@ -14,7 +14,8 @@
 
 def enable_uniform_bucket_level_access bucket_name:
   # [START storage_enable_uniform_bucket_level_access]
-  # bucket_name = "Name of your Google Cloud Storage bucket"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 

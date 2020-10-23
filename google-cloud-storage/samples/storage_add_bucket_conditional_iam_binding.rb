@@ -12,19 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def add_bucket_conditional_iam_binding bucket_name:, role:, member:, title:, description:, expression:
+def add_bucket_conditional_iam_binding bucket_name:
   # [START storage_add_bucket_conditional_iam_binding]
-  # bucket_name = "Your Google Cloud Storage bucket name"
-  # role        = "Bucket-level IAM role"
-  # member      = "Bucket-level IAM member"
-  # title       = "Condition Title"
-  # description = "Condition Description"
-  # expression  = "Condition Expression"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
+
+  role        = "roles/storage.objectViewer"
+  member      = "group:example@google.com"
+  title       = "Title"
+  description = "Description"
+  expression  = "resource.name.startsWith(\"projects/_/buckets/bucket-name/objects/prefix-a-\")"
 
   bucket.policy requested_policy_version: 3 do |policy|
     policy.version = 3
@@ -44,10 +46,5 @@ def add_bucket_conditional_iam_binding bucket_name:, role:, member:, title:, des
 end
 
 if $PROGRAM_NAME == __FILE__
-  add_bucket_conditional_iam_binding bucket_name: ARGV.shift,
-                                     role:        ARGV.shift,
-                                     member:      ARGV.shift,
-                                     title:       ARGV.shift,
-                                     description: ARGV.shift,
-                                     expression:  ARGV.shift
+  add_bucket_conditional_iam_binding bucket_name: ARGV.shift
 end

@@ -14,8 +14,12 @@
 
 def generate_upload_signed_url_v4 bucket_name:, file_name:
   # [START storage_generate_upload_signed_url_v4]
-  # bucket_name = "Your Google Cloud Storage bucket name"
-  # file_name   = "Name of a file in the Cloud Storage bucket"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
+
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new

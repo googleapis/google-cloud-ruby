@@ -15,7 +15,8 @@
 def disable_bucket_lifecycle_management bucket_name:
   # [START storage_disable_bucket_lifecycle_management]
   # Disable lifecycle management for a bucket
-  # bucket_name = "Your Google Cloud Storage bucket name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 

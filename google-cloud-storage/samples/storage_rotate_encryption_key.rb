@@ -14,10 +14,19 @@
 
 def rotate_encryption_key bucket_name:, file_name:, current_encryption_key:, new_encryption_key:
   # [START storage_rotate_encryption_key]
-  # bucket_name            = "Your Google Cloud Storage bucket name"
-  # file_name              = "Name of a file in the Cloud Storage bucket"
-  # current_encryption_key = "Encryption key currently being used"
-  # new_encryption_key     = "New encryption key to use"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
+
+  # The Base64 encoded AES-256 encryption key originally used to encrypt the object.
+  # See the documentation on Customer-Supplied Encryption keys for more info:
+  # https://cloud.google.com/storage/docs/encryption/using-customer-supplied-keys
+  # current_encryption_key = "TIbv/fjexq+VmtXzAlc63J4z5kFmWJ6NdAPQulQBT7g="
+
+  # The new encryption key to use
+  # new_encryption_key = "0mMWhFvQOdS4AmxRpo8SJxXn5MjFhbz7DkKBUdUIef8="
 
   require "google/cloud/storage"
 

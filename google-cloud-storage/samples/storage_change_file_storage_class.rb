@@ -14,7 +14,10 @@
 
 def change_file_storage_class bucket_name:, file_name:
   # [START storage_change_file_storage_class]
-  # bucket_name = "your-bucket-name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
   # file_name = "your-file-name"
 
   require "google/cloud/storage"

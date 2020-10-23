@@ -12,23 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def create_bucket_class_location bucket_name:, location:, storage_class:
+def create_bucket_class_location bucket_name:
   # [START storage_create_bucket_class_location]
-  # bucket_name   = "Name of Google Cloud Storage bucket to create"
-  # location      = "Location of where to create Cloud Storage bucket"
-  # storage_class = "Storage class of Cloud Storage bucket"
+  # The ID to give your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
   bucket  = storage.create_bucket bucket_name,
-                                  location:      location,
-                                  storage_class: storage_class
+                                  location:      "ASIA",
+                                  storage_class: "COLDLINE"
 
-  puts "Created bucket #{bucket.name} in #{location} with #{storage_class} class"
+  puts "Created bucket #{bucket.name} in #{bucket.location} with #{bucket.storage_class} class"
   # [END storage_create_bucket_class_location]
 end
 
 if $PROGRAM_NAME == __FILE__
-  create_bucket_class_location bucket_name: ARGV.shift, location: ARGV.shift, storage_class: ARGV.shift
+  create_bucket_class_location bucket_name: ARGV.shift
 end

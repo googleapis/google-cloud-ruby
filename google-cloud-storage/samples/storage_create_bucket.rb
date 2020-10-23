@@ -14,7 +14,8 @@
 
 def create_bucket bucket_name:
   # [START storage_create_bucket]
-  # bucket_name = "Name of Google Cloud Storage bucket to create"
+  # The ID to give your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 

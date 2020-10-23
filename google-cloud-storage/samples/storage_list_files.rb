@@ -14,7 +14,8 @@
 
 def list_files bucket_name:
   # [START storage_list_files]
-  # bucket_name = "Your Google Cloud Storage bucket name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 

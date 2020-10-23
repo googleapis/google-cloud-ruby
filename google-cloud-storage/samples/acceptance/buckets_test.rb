@@ -66,21 +66,20 @@ describe "Buckets Snippets" do
       # create_bucket_class_location
 
       secondary_bucket_name = random_bucket_name
-      location = "US"
-      storage_class = "STANDARD"
+      location = "ASIA"
+      storage_class = "COLDLINE"
       refute storage_client.bucket secondary_bucket_name
 
       retry_resource_exhaustion do
         assert_output "Created bucket #{secondary_bucket_name} in #{location} with #{storage_class} class\n" do
-          create_bucket_class_location bucket_name:   secondary_bucket_name,
-                                       location:      location,
-                                       storage_class: storage_class
+          create_bucket_class_location bucket_name: secondary_bucket_name
         end
       end
 
-      refute_nil storage_client.bucket secondary_bucket_name
-      assert_equal storage_client.bucket(bucket_name).location, location
-      assert_equal storage_client.bucket(bucket_name).storage_class, storage_class
+      secondary_bucket = storage_client.bucket secondary_bucket_name
+      refute_nil secondary_bucket
+      assert_equal location, secondary_bucket.location
+      assert_equal storage_class, secondary_bucket.storage_class
 
       # list_buckets
       out, _err = capture_io do

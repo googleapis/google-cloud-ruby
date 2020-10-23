@@ -14,7 +14,6 @@
 
 def list_hmac_keys
   # [START storage_list_hmac_keys]
-
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new

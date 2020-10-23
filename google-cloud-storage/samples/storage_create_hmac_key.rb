@@ -14,7 +14,8 @@
 
 def create_hmac_key service_account_email:
   # [START storage_create_hmac_key]
-  # service_account_email = "Service account used to associate generate HMAC key"
+  # The service account email used to generate an HMAC key
+  # service_account_email = "service-my-project-number@gs-project-accounts.iam.gserviceaccount.com"
 
   require "google/cloud/storage"
 

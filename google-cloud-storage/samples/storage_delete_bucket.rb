@@ -14,7 +14,8 @@
 
 def delete_bucket bucket_name:
   # [START storage_delete_bucket]
-  # bucket_name = "Name of your Google Cloud Storage bucket to delete"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 

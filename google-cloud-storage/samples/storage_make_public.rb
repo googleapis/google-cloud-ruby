@@ -14,8 +14,11 @@
 
 def make_public bucket_name:, file_name:
   # [START storage_make_public]
-  # bucket_name = "Your Google Cloud Storage bucket name"
-  # file_name   = "Name of file in Google Cloud Storage to make public"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object to make public
+  # file_name = "your-file-name"
 
   require "google/cloud/storage"
 

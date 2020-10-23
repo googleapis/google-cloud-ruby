@@ -14,9 +14,14 @@
 
 def add_bucket_label bucket_name:, label_key:, label_value:
   # [START storage_add_bucket_label]
-  # bucket_name = "Name of your Google Cloud Storage bucket"
-  # label_key   = "Cloud Storage bucket Label Key"
-  # label_value = "Cloud Storage bucket Label Value"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The key of the label to add
+  # label_key = "label-key-to-add"
+
+  # The value of the label to add
+  # label_value = "label-value-to-add"
 
   require "google/cloud/storage"
 

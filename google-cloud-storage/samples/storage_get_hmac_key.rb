@@ -14,7 +14,8 @@
 
 def get_hmac_key access_id:
   # [START storage_get_hmac_key]
-  # access_id = "ID of an HMAC key"
+  # The access ID of the HMAC key
+  # access_id = "GOOG0234230X00"
 
   require "google/cloud/storage"
 

@@ -14,9 +14,14 @@
 
 def download_file bucket_name:, file_name:, local_file_path:
   # [START storage_download_file]
-  # bucket_name     = "Your Google Cloud Storage bucket name"
-  # file_name       = "Name of file in Google Cloud Storage to download locally"
-  # local_file_path = "Destination path for downloaded file"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
+
+  # The path to which the file should be downloaded
+  # local_file_path = "/local/path/to/file.txt"
 
   require "google/cloud/storage"
 

@@ -14,9 +14,14 @@
 
 def move_file bucket_name:, file_name:, new_name:
   # [START storage_move_file]
-  # bucket_name = "Your Google Cloud Storage bucket name"
-  # file_name   = "Name of file in Google Cloud Storage to rename"
-  # new_name    = "File will be renamed to this new name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
+
+  # The ID of your new GCS object
+  # new_name = "your-new-file-name"
 
   require "google/cloud/storage"
 

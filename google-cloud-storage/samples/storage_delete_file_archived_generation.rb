@@ -14,8 +14,13 @@
 
 def delete_file_archived_generation bucket_name:, file_name:, generation:
   # [START storage_delete_file_archived_generation]
-  # bucket_name = "your-bucket-name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
   # file_name = "your-file-name"
+
+  # The generation of the file to delete
   # generation = 1579287380533984
 
   require "google/cloud/storage"

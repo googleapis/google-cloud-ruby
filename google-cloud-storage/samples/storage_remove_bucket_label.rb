@@ -14,8 +14,11 @@
 
 def remove_bucket_label bucket_name:, label_key:
   # [START storage_remove_bucket_label]
-  # bucket_name = "Name of your Google Cloud Storage bucket"
-  # label_key   = "Cloud Storage bucket Label Key"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The key of the label to remove from the bucket
+  # label_key = "label-key-to-remove"
 
   require "google/cloud/storage"
 

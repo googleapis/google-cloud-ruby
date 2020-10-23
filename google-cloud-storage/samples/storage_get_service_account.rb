@@ -14,8 +14,6 @@
 
 def get_service_account
   # [START storage_get_service_account]
-  # bucket_name = "your-bucket-name"
-
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new

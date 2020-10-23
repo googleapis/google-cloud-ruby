@@ -12,12 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def copy_file source_bucket_name:, source_file_name:, dest_bucket_name:, dest_file_name:
+def copy_file source_bucket_name:, source_file_name:, destination_bucket_name:, destination_file_name:
   # [START storage_copy_file]
-  # source_bucket_name = "Source bucket to copy file from"
-  # source_file_name   = "Source file name"
-  # dest_bucket_name   = "Destination bucket to copy file to"
-  # dest_file_name     = "Destination file name"
+  # The ID of the bucket the original object is in
+  # source_bucket_name = "source-bucket-name"
+
+  # The ID of the GCS object to copy
+  # source_file_name = "source-file-name"
+
+  # The ID of the bucket to copy the object to
+  # destination_bucket_name = "destination-bucket-name"
+
+  # The ID of the new GCS object
+  # destination_file_name = "destination-file-name"
 
   require "google/cloud/storage"
 
@@ -25,8 +32,8 @@ def copy_file source_bucket_name:, source_file_name:, dest_bucket_name:, dest_fi
   bucket  = storage.bucket source_bucket_name
   file    = bucket.file source_file_name
 
-  destination_bucket = storage.bucket dest_bucket_name
-  destination_file   = file.copy destination_bucket.name, dest_file_name
+  destination_bucket = storage.bucket destination_bucket_name
+  destination_file   = file.copy destination_bucket.name, destination_file_name
 
   puts "#{file.name} in #{bucket.name} copied to " \
        "#{destination_file.name} in #{destination_bucket.name}"
@@ -34,8 +41,8 @@ def copy_file source_bucket_name:, source_file_name:, dest_bucket_name:, dest_fi
 end
 
 if $PROGRAM_NAME == __FILE__
-  copy_file source_bucket_name: ARGV.shift,
-            source_file_name:   ARGV.shift,
-            dest_bucket_name:   ARGV.shift,
-            dest_file_name:     ARGV.shift
+  copy_file source_bucket_name:      ARGV.shift,
+            source_file_name:        ARGV.shift,
+            destination_bucket_name: ARGV.shift,
+            destination_file_name:   ARGV.shift
 end

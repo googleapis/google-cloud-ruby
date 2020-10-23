@@ -133,7 +133,7 @@ describe "Files Snippets" do
 
   it "upload_file" do
     assert_output "Uploaded #{local_file} as #{remote_file_name} in bucket #{bucket.name}\n" do
-      upload_file bucket_name: bucket.name, local_file_path: local_file, storage_file_path: remote_file_name
+      upload_file bucket_name: bucket.name, local_file_path: local_file, file_name: remote_file_name
     end
 
     assert_equal bucket.files.first.name, remote_file_name
@@ -141,10 +141,10 @@ describe "Files Snippets" do
 
   it "upload_encrypted_file" do
     assert_output "Uploaded #{remote_file_name} with encryption key\n" do
-      upload_encrypted_file bucket_name:       bucket.name,
-                            local_file_path:   local_file,
-                            storage_file_path: remote_file_name,
-                            encryption_key:    encryption_key
+      upload_encrypted_file bucket_name:     bucket.name,
+                            local_file_path: local_file,
+                            file_name:       remote_file_name,
+                            encryption_key:  encryption_key
     end
 
     assert_equal bucket.files.first.name, remote_file_name
@@ -153,10 +153,10 @@ describe "Files Snippets" do
 
   it "upload_with_kms_key" do
     assert_output(/Uploaded #{remote_file_name} and encrypted service side using #{kms_key}/) do
-      upload_with_kms_key bucket_name:       bucket.name,
-                          local_file_path:   local_file,
-                          storage_file_path: remote_file_name,
-                          kms_key:           kms_key
+      upload_with_kms_key bucket_name:     bucket.name,
+                          local_file_path: local_file,
+                          file_name:       remote_file_name,
+                          kms_key:         kms_key
     end
 
     assert_equal bucket.files.first.name, remote_file_name
@@ -290,16 +290,11 @@ describe "Files Snippets" do
   it "set_metadata" do
     bucket.create_file local_file, remote_file_name
 
-    metadata_key   = "test-metadata-key"
-    metadata_value = "test-metadata-value"
-    content_type   = "text/plain"
+    metadata_key   = "your-metadata-key"
+    metadata_value = "your-metadata-value"
 
     assert_output "Metadata for #{remote_file_name} has been updated.\n" do
-      set_metadata bucket_name:    bucket.name,
-                   file_name:      remote_file_name,
-                   content_type:   content_type,
-                   metadata_key:   metadata_key,
-                   metadata_value: metadata_value
+      set_metadata bucket_name: bucket.name, file_name: remote_file_name
     end
 
     assert_equal bucket.file(remote_file_name).metadata[metadata_key], metadata_value
@@ -341,7 +336,8 @@ describe "Files Snippets" do
 
     assert_output "Composed new file #{remote_file_name} in the bucket #{bucket.name}\n" do
       compose_file bucket_name:           bucket.name,
-                   sources:               [file_1, file_2],
+                   first_file_name:       file_1.name,
+                   second_file_name:      file_2.name,
                    destination_file_name: remote_file_name
     end
 
@@ -353,10 +349,10 @@ describe "Files Snippets" do
     assert_nil secondary_bucket.file remote_file_name
 
     assert_output "#{remote_file_name} in #{bucket.name} copied to #{remote_file_name} in #{secondary_bucket.name}\n" do
-      copy_file source_bucket_name: bucket.name,
-                source_file_name:   remote_file_name,
-                dest_bucket_name:   secondary_bucket.name,
-                dest_file_name:     remote_file_name
+      copy_file source_bucket_name:      bucket.name,
+                source_file_name:        remote_file_name,
+                destination_bucket_name: secondary_bucket.name,
+                destination_file_name:   remote_file_name
     end
 
     refute_nil bucket.file remote_file_name
@@ -370,11 +366,11 @@ describe "Files Snippets" do
     expected_out = "Generation #{file.generation} of the file #{remote_file_name} in bucket #{bucket.name} copied " \
                    "to file #{remote_file_name} in bucket #{secondary_bucket.name}\n"
     assert_output expected_out do
-      copy_file_archived_generation bucket_name:             bucket.name,
-                                    file_name:               remote_file_name,
+      copy_file_archived_generation source_bucket_name:      bucket.name,
+                                    source_file_name:        remote_file_name,
+                                    generation:              file.generation,
                                     destination_bucket_name: secondary_bucket.name,
-                                    destination_file_name:   remote_file_name,
-                                    generation:              file.generation
+                                    destination_file_name:   remote_file_name
     end
 
     refute_nil bucket.file remote_file_name

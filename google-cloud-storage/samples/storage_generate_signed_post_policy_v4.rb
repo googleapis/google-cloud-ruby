@@ -14,8 +14,12 @@
 
 def generate_signed_post_policy_v4 bucket_name:, file_name:
   # [START storage_generate_signed_post_policy_v4]
-  # bucket_name = "Your Google Cloud Storage bucket name"
-  # file_name   = "Name of a file to create in the Cloud Storage bucket"
+  # The ID of the GCS bucket to upload to
+  # bucket_name = "your-unique-bucket-name"
+
+  # The name to give the object uploaded to GCS
+  # file_name = "your-file-name"
+
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new

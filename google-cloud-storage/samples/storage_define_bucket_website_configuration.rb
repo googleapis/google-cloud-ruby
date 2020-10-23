@@ -14,8 +14,13 @@
 
 def define_bucket_website_configuration bucket_name:, main_page_suffix:, not_found_page:
   # [START storage_define_bucket_website_configuration]
-  # bucket_name = "your-bucket-name"
+  # The ID of your static website bucket
+  # bucket_name = "www.example.com"
+
+  # The index page for a static website bucket
   # main_page_suffix = "index.html"
+
+  # The 404 page for a static website bucket
   # not_found_page = "404.html"
 
   require "google/cloud/storage"

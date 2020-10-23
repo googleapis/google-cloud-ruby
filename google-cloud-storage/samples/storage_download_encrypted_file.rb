@@ -14,10 +14,17 @@
 
 def download_encrypted_file bucket_name:, file_name:, local_file_path:, encryption_key:
   # [START storage_download_encrypted_file]
-  # bucket_name     = "Your Google Cloud Storage bucket name"
-  # file_name       = "Name of file in Google Cloud Storage to download locally"
-  # local_file_path = "Destination path for downloaded file"
-  # encryption_key  = "AES-256 encryption key"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
+
+  # The path to which the file should be downloaded
+  # local_file_path = "/local/path/to/file.txt"
+
+  # The Base64 encoded decryption key, which should be the same key originally used to encrypt the object
+  # encryption_key = "TIbv/fjexq+VmtXzAlc63J4z5kFmWJ6NdAPQulQBT7g="
 
   require "google/cloud/storage"
 

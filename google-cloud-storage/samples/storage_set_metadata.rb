@@ -12,13 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def set_metadata bucket_name:, file_name:, content_type:, metadata_key:, metadata_value:
+def set_metadata bucket_name:, file_name:
   # [START storage_set_metadata]
-  # bucket_name    = "Your Google Cloud Storage bucket name"
-  # file_name      = "Name of file in Google Cloud Storage"
-  # content_type   = "file Content-Type"
-  # metadata_key   = "Custom metadata key"
-  # metadata_value = "Custom metadata value"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
+
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
@@ -27,20 +28,14 @@ def set_metadata bucket_name:, file_name:, content_type:, metadata_key:, metadat
 
   file.update do |file|
     # Fixed key file metadata
-    file.content_type = content_type
+    file.content_type = "text/plain"
 
     # Custom file metadata
-    file.metadata[metadata_key] = metadata_value
+    file.metadata["your-metadata-key"] = "your-metadata-value"
   end
 
   puts "Metadata for #{file_name} has been updated."
   # [END storage_set_metadata]
 end
 
-if $PROGRAM_NAME == __FILE__
-  set_metadata bucket_name:    ARGV.shift,
-               file_name:      ARGV.shift,
-               content_type:   ARGV.shift,
-               metadata_key:   ARGV.shift,
-               metadata_value: ARGV.shift
-end
+set_metadata bucket_name: ARGV.shift, file_name: ARGV.shift if $PROGRAM_NAME == __FILE__

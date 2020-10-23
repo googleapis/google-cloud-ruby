@@ -14,8 +14,11 @@
 
 def delete_file bucket_name:, file_name:
   # [START storage_delete_file]
-  # bucket_name = "Your Google Cloud Storage bucket name"
-  # file_name   = "Name of file in Google Cloud Storage to delete"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
 
   require "google/cloud/storage"
 

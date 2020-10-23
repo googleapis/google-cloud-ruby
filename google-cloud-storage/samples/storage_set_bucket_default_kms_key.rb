@@ -14,8 +14,11 @@
 
 def set_bucket_default_kms_key bucket_name:, default_kms_key:
   # [START storage_set_bucket_default_kms_key]
-  # bucket_name     = "Name of your Google Cloud Storage bucket"
-  # default_kms_key = "KMS key resource id"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The name of the KMS key to manage this object with
+  # default_kms_key = "projects/your-project-id/locations/global/keyRings/your-key-ring/cryptoKeys/your-key"
 
   require "google/cloud/storage"
 

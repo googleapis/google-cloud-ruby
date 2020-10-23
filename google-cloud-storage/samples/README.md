@@ -60,18 +60,18 @@ Run the tests for these samples by running `bundle exec rake test`.
 | File | Args | Description |
 | --- | --- | --- |
 | storage_activate_hmac_key.rb | `access_id` | Activate an HMAC Key |
-| storage_add_bucket_conditional_iam_binding.rb | `bucket` `iam_role` `iam_member` `cond_title` `cond_description` `cond_expr` | Add a conditional bucket-level binding |
-| storage_add_bucket_iam_member.rb | `bucket` `iam_role` `iam_member` | Add a bucket-level IAM member |
+| storage_add_bucket_conditional_iam_binding.rb | `bucket` | Add a conditional bucket-level binding |
+| storage_add_bucket_iam_member.rb | `bucket` | Add a bucket-level IAM member |
 | storage_add_bucket_label.rb | `bucket` `label_key` `label_value` | Add bucket label |
 | storage_bucket_delete_default_kms_key.rb | `bucket` | Delete the default KMS encryption key from a bucket |
 | storage_change_default_storage_class.rb | `bucket` | Set the default storage class for a bucket |
 | storage_change_file_storage_class.rb | `bucket` `file` | Set the storage class for a file |
-| storage_compose_file.rb | `bucket` `sources` `dest_file` | Compose a new file from sources |
+| storage_compose_file.rb | `bucket` `first_file_name` `second_file_name` `dest_file` | Compose a new file from sources |
 | storage_copy_file.rb | `src_bucket` `src_file` `dest_bucket` `dest_file` | Copy a file to another bucket |
-| storage_copy_file_archived_generation.rb | `src_bucket` `src_file` `dest_bucket` `dest_file` `generation` | Copy a file generation to another bucket |
+| storage_copy_file_archived_generation.rb | `src_bucket` `src_file` `generation` `dest_bucket` `dest_file` | Copy a file generation to another bucket |
 | storage_cors_configuration.rb | `bucket` | Set a CORS rule for a bucket 
 | storage_create_bucket.rb | `bucket` | Create a new bucket with default storage class and location |
-| storage_create_bucket_class_location.rb | `bucket` `location` `storage_class` | Create a new bucket with specific storage class and location |
+| storage_create_bucket_class_location.rb | `bucket` | Create a new bucket with specific storage class and location |
 | storage_create_hmac_key.rb | `service_account_email` | Create HMAC Key |
 | storage_deactivate_hmac_key.rb | `access_id` | Deactivate an HMAC Key |
 | storage_define_bucket_website_configuration.rb | `bucket` `main_page_suffix` `not_found_page` | Configure index and 404 pages for static website bucket |
@@ -84,10 +84,10 @@ Run the tests for these samples by running `bundle exec rake test`.
 | storage_disable_requester_pays.rb | `bucket` | Disable requester pays for a bucket |
 | storage_disable_uniform_bucket_level_access.rb | `bucket` | Disable uniform bucket-level access for a bucket |
 | storage_disable_versioning.rb | `bucket` | Disable versioning for a bucket |
-| storage_download_encrypted_file.rb | `bucket` `file` `path` `encryption_key` | Download an encrypted file from a bucket |
-| storage_download_file.rb | `bucket` `file` `path` | Download a file from a bucket |
-| storage_download_file_requester_pays.rb | `project` `bucket` `file` `path` | Download a file from a requester pays enabled bucket |
-| storage_download_public_file.rb | `bucket` `file` `path` | Download a publically accessible file from a bucket |
+| storage_download_encrypted_file.rb | `bucket` `file` `local_file_path` `encryption_key` | Download an encrypted file from a bucket |
+| storage_download_file.rb | `bucket` `file` `local_file_path` | Download a file from a bucket |
+| storage_download_file_requester_pays.rb | `project` `bucket` `file` `local_file_path` | Download a file from a requester pays enabled bucket |
+| storage_download_public_file.rb | `bucket` `file` `local_file_path` | Download a publically accessible file from a bucket |
 | storage_enable_bucket_lifecycle_management.rb | `bucket` | Enable lifecycle management for a bucket |
 | storage_enable_default_event_based_hold.rb | `bucket` | Enable event-based hold for a bucket |
 | storage_enable_requester_pays.rb | `bucket` | Enable requester pays for a bucket |
@@ -108,28 +108,28 @@ Run the tests for these samples by running `bundle exec rake test`.
 | storage_list_buckets.rb | | List all buckets in the authenticated project |
 | storage_list_file_archived_generations.rb | `bucket` | List all files with generation in the bucket |
 | storage_list_files.rb | `bucket` | List all files in the bucket |
-| storage_list_files_with_prefix.rb | `bucket` `prefix` | List all files with given prefix in the bucket |
+| storage_list_files_with_prefix.rb | `bucket` `prefix` `delimiter` | List all files with given prefix and optional delimiter in the bucket |
 | storage_list_hmac_keys.rb | | List all HMAC keys for a project |
 | storage_lock_retention_policy.rb | `bucket` | Lock retention policy |
 | storage_make_public.rb | `bucket` `file` | Make a file in a bucket public |
-| storage_move_file.rb | `bucket` `file` `new` | Rename a file in a bucket |
+| storage_move_file.rb | `bucket` `file` `new_name` | Rename a file in a bucket |
 | storage_object_csek_to_cmek.rb | `bucket` `file` `encryption_key` `kms_key_name` | Change a file from a customer-supplied encryption key to a customer-managed encryption key |
 | storage_quickstart.rb | `bucket` | Create a new bucket |
 | storage_release_event_based_hold.rb | `bucket` `file` | Relase an event-based hold on a file |
 | storage_release_temporary_hold.rb | `bucket` `file` | Release a temporary hold on a file |
-| storage_remove_bucket_conditional_iam_binding.rb | `bucket` `iam_member` `cond_title` `cond_description` `cond_expr` | Remove a conditional bucket-level binding |
-| storage_remove_bucket_iam_member.rb | `bucket` `iam_role` `iam_member` | Remove a bucket-level IAM member |
+| storage_remove_bucket_conditional_iam_binding.rb | `bucket` | Remove a conditional bucket-level binding |
+| storage_remove_bucket_iam_member.rb | `bucket` | Remove a bucket-level IAM member |
 | storage_remove_bucket_label.rb | `bucket` `label_key` | Delete bucket label |
 | storage_remove_cors_configuration.rb | `bucket` | Remove CORS policies for a bucket |
 | storage_remove_retention_policy.rb | `bucket` | Remove a retention policy from a bucket if policy is not locked |
 | storage_rotate_encryption_key.rb | `bucket` `file` `base64_current_encryption_key` `base64_new_encryption_key` | Update encryption key of an encrypted file. |
 | storage_set_bucket_default_kms_key.rb | `bucket` `kms_key` | Enable default KMS encryption for bucket |
-| storage_set_bucket_public_iam.rb | `bucket` `role` `member` | Configure a bucket to be publicly readable |
+| storage_set_bucket_public_iam.rb | `bucket` | Configure a bucket to be publicly readable |
 | storage_set_event_based_hold.rb | `bucket` `file` | Set an event-based hold on a file |
-| storage_set_metadata.rb | `bucket` `file` `content_type` `metadata_key` `metadata_value` | Set metadata for a file in a bucket |
+| storage_set_metadata.rb | `bucket` `file` | Set metadata for a file in a bucket |
 | storage_set_retention_policy.rb | `bucket` `retention_period` | Set a retention policy on bucket with a retention period determined in seconds |
 | storage_set_temporary_hold.rb | `bucket` `file` | Set a temporary hold on a file |
-| storage_upload_encrypted_file.rb | `bucket` `file` `dest_path` `encryption_key` | Upload local file as an encrypted file to a bucket |
-| storage_upload_file.rb | `bucket` `file` `dest_path` | Upload local file to a bucket |
-| storage_upload_with_kms_key.rb | `bucket` `file` `dest_path` `kms_key` | Upload local file and encrypt service side using a KMS key |
+| storage_upload_encrypted_file.rb | `bucket` `local_file_path` `file_name` `encryption_key` | Upload local file as an encrypted file to a bucket |
+| storage_upload_file.rb | `bucket` `local_file_path` `file_name` | Upload local file to a bucket |
+| storage_upload_with_kms_key.rb | `bucket` `local_file_path` `file_name` `kms_key` | Upload local file and encrypt service side using a KMS key |
 | storage_view_bucket_iam_members.rb | `bucket` | View bucket-level IAM members |

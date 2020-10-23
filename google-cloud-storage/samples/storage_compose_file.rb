@@ -12,18 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def compose_file bucket_name:, sources:, destination_file_name:
+def compose_file bucket_name:, first_file_name:, second_file_name:, destination_file_name:
   # [START storage_compose_file]
-  # bucket_name = "your-bucket-name"
-  # sources = [file_1, file_2]
-  # destination_file_name = "destination-file-name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of the first GCS object to compose
+  # first_file_name = "your-first-file-name"
+
+  # The ID of the second GCS object to compose
+  # second_file_name = "your-second-file-name"
+
+  # The ID to give the new composite object
+  # destination_file_name = "new-composite-file-name"
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
 
-  destination = bucket.compose sources, destination_file_name do |f|
+  destination = bucket.compose [first_file_name, second_file_name], destination_file_name do |f|
     f.content_type = "text/plain"
   end
 
@@ -32,5 +40,8 @@ def compose_file bucket_name:, sources:, destination_file_name:
 end
 
 if $PROGRAM_NAME == __FILE__
-  compose_file bucket_name: ARGV.shift, sources: ARGV.shift, destination_file_name: ARGV.shift
+  compose_file bucket_name:           ARGV.shift,
+               first_file_name:       ARGV.shift,
+               second_file_name:      ARGV.shift,
+               destination_file_name: ARGV.shift
 end

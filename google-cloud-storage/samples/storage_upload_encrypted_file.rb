@@ -12,12 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def upload_encrypted_file bucket_name:, local_file_path:, storage_file_path: nil, encryption_key:
+def upload_encrypted_file bucket_name:, local_file_path:, file_name: nil, encryption_key:
   # [START storage_upload_encrypted_file]
-  # bucket_name       = "Your Google Cloud Storage bucket name"
-  # local_file_path   = "Path to local file to upload"
-  # storage_file_path = "Path to store the file in Google Cloud Storage"
-  # encryption_key    = "AES-256 encryption key"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The path to your file to upload
+  # local_file_path = "/local/path/to/file.txt"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
+
+  # The key to encrypt the object with
+  # encryption_key = "TIbv/fjexq+VmtXzAlc63J4z5kFmWJ6NdAPQulQBT7g="
 
   require "google/cloud/storage"
 
@@ -25,16 +32,15 @@ def upload_encrypted_file bucket_name:, local_file_path:, storage_file_path: nil
 
   bucket = storage.bucket bucket_name
 
-  file = bucket.create_file local_file_path, storage_file_path,
-                            encryption_key: encryption_key
+  file = bucket.create_file local_file_path, file_name, encryption_key: encryption_key
 
   puts "Uploaded #{file.name} with encryption key"
   # [END storage_upload_encrypted_file]
 end
 
 if $PROGRAM_NAME == __FILE__
-  upload_encrypted_file bucket_name:       ARGV.shift,
-                        local_file_path:   ARGV.shift,
-                        storage_file_path: ARGV.shift,
-                        encryption_key:    ARGV.shift
+  upload_encrypted_file bucket_name:     ARGV.shift,
+                        local_file_path: ARGV.shift,
+                        file_name:       ARGV.shift,
+                        encryption_key:  ARGV.shift
 end

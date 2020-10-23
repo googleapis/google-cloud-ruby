@@ -14,8 +14,11 @@
 
 def set_temporary_hold bucket_name:, file_name:
   # [START storage_set_temporary_hold]
-  # bucket_name = "Your Google Cloud Storage bucket name"
-  # file_name   = "Name of a file in the Cloud Storage bucket"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
 
   require "google/cloud/storage"
 

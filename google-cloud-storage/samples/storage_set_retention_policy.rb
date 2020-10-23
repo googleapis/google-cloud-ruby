@@ -14,8 +14,11 @@
 
 def set_retention_policy bucket_name:, retention_period:
   # [START storage_set_retention_policy]
-  # bucket_name      = "Name of your Google Cloud Storage bucket"
-  # retention_period = "Object retention period defined in seconds"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The retention period for objects in bucket
+  # retention_period = 3600 # 1 hour in seconds
 
   require "google/cloud/storage"
 

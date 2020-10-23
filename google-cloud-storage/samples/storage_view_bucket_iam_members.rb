@@ -14,7 +14,8 @@
 
 def view_bucket_iam_members bucket_name:
   # [START storage_view_bucket_iam_members]
-  # bucket_name = "Your Google Cloud Storage bucket name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 

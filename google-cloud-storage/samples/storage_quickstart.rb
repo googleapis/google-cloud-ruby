@@ -20,7 +20,8 @@ def quickstart bucket_name:
   # Instantiates a client
   storage = Google::Cloud::Storage.new
 
-  # bucket_name = "The name of the bucket to be created, i.e. 'new-bucket'"
+  # The ID to give your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
 
   # Creates the new bucket
   bucket = storage.create_bucket bucket_name
