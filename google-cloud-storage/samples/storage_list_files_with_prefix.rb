@@ -12,16 +12,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def list_files_with_prefix bucket_name:, prefix:
+def list_files_with_prefix bucket_name:, prefix:, delimiter: nil
   # [START storage_list_files_with_prefix]
+  # Lists all the files in the bucket that begin with the prefix.
+  #
+  # This can be used to list all files in a "folder", e.g. "public/".
+  # The delimiter argument can be used to restrict the results to only the
+  # "files" in the given "folder". Without the delimiter, the entire tree under
+  # the prefix is returned. For example, given these files:
+  #
+  #     a/1.txt
+  #     a/b/2.txt
+  #
+  # If you just specify `prefix: "a"`, you will get back:
+  #
+  #     a/1.txt
+  #     a/b/2.txt
+  #
+  # However, if you specify `prefix: "a"` and `delimiter: "/"`, you will get back:
+  #
+  #     a/1.txt
+
   # bucket_name = "Your Google Cloud Storage bucket name"
   # prefix      = "Filter results to files whose names begin with this prefix"
+  # delimiter   = "Restrict the results to only files whose names, aside from the prefix, do not contain the delimiter."
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
   bucket  = storage.bucket bucket_name
-  files   = bucket.files prefix: prefix
+  files   = bucket.files prefix: prefix, delimiter: delimiter
 
   files.each do |file|
     puts file.name

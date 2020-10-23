@@ -62,9 +62,7 @@ describe "IAM Snippets" do
   it "set_bucket_public_iam" do
     # set_bucket_public_iam
     assert_output "Bucket #{bucket.name} is now publicly readable\n" do
-      set_bucket_public_iam bucket_name: bucket.name,
-                            role:        role_public,
-                            member:      member_public
+      set_bucket_public_iam bucket_name: bucket.name
     end
 
     assert bucket.policy.roles.any? do |p_role, p_members|

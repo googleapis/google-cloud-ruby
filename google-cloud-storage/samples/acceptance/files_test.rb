@@ -132,7 +132,7 @@ describe "Files Snippets" do
   end
 
   it "upload_file" do
-    assert_output "Uploaded #{remote_file_name}\n" do
+    assert_output "Uploaded #{local_file} as #{remote_file_name} in bucket #{bucket.name}\n" do
       upload_file bucket_name: bucket.name, local_file_path: local_file, storage_file_path: remote_file_name
     end
 
@@ -169,10 +169,10 @@ describe "Files Snippets" do
     Tempfile.open [downloaded_file] do |tmpfile|
       tmpfile.binmode
 
-      assert_output "Downloaded #{remote_file_name}\n" do
-        download_file bucket_name: bucket.name,
-                      file_name:   remote_file_name,
-                      local_path:  tmpfile
+      assert_output "Downloaded #{remote_file_name} to #{tmpfile}\n" do
+        download_file bucket_name:     bucket.name,
+                      file_name:       remote_file_name,
+                      local_file_path: tmpfile
       end
 
       assert File.file? tmpfile
@@ -185,10 +185,10 @@ describe "Files Snippets" do
     Tempfile.open [downloaded_file] do |tmpfile|
       tmpfile.binmode
 
-      assert_output "Downloaded #{remote_file_name}\n" do
-        download_file bucket_name: bucket.name,
-                      file_name:   remote_file_name,
-                      local_path:  tmpfile
+      assert_output "Downloaded #{remote_file_name} to #{tmpfile}\n" do
+        download_file bucket_name:     bucket.name,
+                      file_name:       remote_file_name,
+                      local_file_path: tmpfile
       end
 
       assert File.file? tmpfile
@@ -203,9 +203,9 @@ describe "Files Snippets" do
       tmpfile.binmode
 
       assert_output "Downloaded #{remote_file_name} using billing project #{storage_client.project}\n" do
-        download_file_requester_pays bucket_name: bucket.name,
-                                     file_name:   remote_file_name,
-                                     local_path:  tmpfile
+        download_file_requester_pays bucket_name:     bucket.name,
+                                     file_name:       remote_file_name,
+                                     local_file_path: tmpfile
       end
 
       assert File.file? tmpfile
@@ -218,7 +218,7 @@ describe "Files Snippets" do
     Tempfile.open [downloaded_file] do |tmpfile|
       tmpfile.binmode
 
-      assert_output "Downloaded encrypted #{remote_file_name}\n" do
+      assert_output "Downloaded encrypted #{remote_file_name} to #{tmpfile}\n" do
         download_encrypted_file bucket_name:     bucket.name,
                                 file_name:       remote_file_name,
                                 local_file_path: tmpfile,

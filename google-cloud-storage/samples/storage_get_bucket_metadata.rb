@@ -45,6 +45,10 @@ def get_bucket_metadata bucket_name:
   bucket.labels.each do |key, value|
     puts " - #{key} = #{value}"
   end
+  puts "Lifecycle Rules:"
+  bucket.lifecycle.each do |rule|
+    puts "#{rule.action} - #{rule.storage_class} - #{rule.age} - #{rule.matches_storage_class}"
+  end
   # [END storage_get_bucket_metadata]
 end
 

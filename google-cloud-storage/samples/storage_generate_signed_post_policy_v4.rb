@@ -33,6 +33,7 @@ def generate_signed_post_policy_v4 bucket_name:, file_name:
   html_form += "  <input type='submit' value='Upload File' name='submit'/><br />\n"
   html_form += "</form>\n"
 
+  puts "You can use the following form to upload an object to bucket #{bucket_name} for the next 10 minutes:\n"
   puts html_form
   # [END storage_generate_signed_post_policy_v4]
 end

@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def download_file_requester_pays bucket_name:, file_name:, local_path:
+def download_file_requester_pays bucket_name:, file_name:, local_file_path:
   # [START storage_download_file_requester_pays]
   # bucket_name = "A Google Cloud Storage bucket name"
   # file_name   = "Name of file in Google Cloud Storage to download locally"
-  # local_path  = "Destination path for downloaded file"
+  # local_file_path  = "Destination path for downloaded file"
 
   require "google/cloud/storage"
 
@@ -24,12 +24,12 @@ def download_file_requester_pays bucket_name:, file_name:, local_path:
   bucket  = storage.bucket bucket_name, skip_lookup: true, user_project: true
   file    = bucket.file file_name
 
-  file.download local_path
+  file.download local_file_path
 
   puts "Downloaded #{file.name} using billing project #{storage.project}"
   # [END storage_download_file_requester_pays]
 end
 
 if $PROGRAM_NAME == __FILE__
-  download_file_requester_pays bucket_name: ARGV.shift, file_name: ARGV.shift, local_path: ARGV.shift
+  download_file_requester_pays bucket_name: ARGV.shift, file_name: ARGV.shift, local_file_path: ARGV.shift
 end

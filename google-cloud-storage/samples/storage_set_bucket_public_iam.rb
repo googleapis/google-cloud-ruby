@@ -12,11 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def set_bucket_public_iam bucket_name:, role:, member:
+def set_bucket_public_iam bucket_name:
   # [START storage_set_bucket_public_iam]
   # bucket_name = "your-bucket-name"
-  # role = "IAM role, e.g. roles/storage.objectViewer"
-  # member = "IAM identity, e.g. allUsers"
 
   require "google/cloud/storage"
 
@@ -24,7 +22,7 @@ def set_bucket_public_iam bucket_name:, role:, member:
   bucket = storage.bucket bucket_name
 
   bucket.policy do |p|
-    p.add role, member
+    p.add "roles/storage.objectViewer", "allUsers"
   end
 
   puts "Bucket #{bucket_name} is now publicly readable"
