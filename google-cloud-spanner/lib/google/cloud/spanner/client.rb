@@ -827,7 +827,7 @@ module Google
         #   db.upsert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def upsert table, *rows, commit_stats: nil
+        def upsert table, rows, commit_stats: nil
           @pool.with_session do |session|
             session.upsert table, rows, commit_stats: commit_stats
           end
@@ -888,7 +888,7 @@ module Google
         #   db.insert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def insert table, *rows, commit_stats: nil
+        def insert table, rows, commit_stats: nil
           @pool.with_session do |session|
             session.insert table, rows, commit_stats: commit_stats
           end
@@ -948,7 +948,7 @@ module Google
         #   db.update "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        def update table, *rows, commit_stats: nil
+        def update table, rows, commit_stats: nil
           @pool.with_session do |session|
             session.update table, rows, commit_stats: commit_stats
           end
@@ -1010,7 +1010,7 @@ module Google
         #   db.replace "users", [{ id: 1, name: "Charlie", active: false },
         #                        { id: 2, name: "Harvey",  active: true }]
         #
-        def replace table, *rows, commit_stats: nil
+        def replace table, rows, commit_stats: nil
           @pool.with_session do |session|
             session.replace table, rows, commit_stats: commit_stats
           end

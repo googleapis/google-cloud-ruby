@@ -21,12 +21,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
   let(:session_grpc) { Google::Cloud::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
   let(:commit_time) { Time.now }
   let(:commit_timestamp) { Google::Cloud::Spanner::Convert.time_to_timestamp commit_time }
-  let(:commit_resp) {
-    Google::Cloud::Spanner::V1::CommitResponse.new(
-      commit_timestamp: commit_timestamp,
-      commit_stats: Google::Cloud::Spanner::V1::CommitResponse::CommitStats.new
-    )
-  }
+  let(:commit_resp) { Google::Cloud::Spanner::V1::CommitResponse.new commit_timestamp: commit_timestamp }
   let(:commit_stats) {
     Google::Cloud::Spanner::V1::CommitResponse::CommitStats.new(
       mutation_count: 5, overload_delay: Google::Protobuf::Duration.new(seconds: 1, nanos: 100000000)
@@ -91,9 +86,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       c.replace "users", [{ id: 4, name: "Henry",  active: true }]
       c.delete "users", [1, 2, 3, 4, 5]
     end
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     shutdown_client! client
 
@@ -114,9 +107,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       c.delete "users", [1, 2, 3, 4, 5]
     end
 
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 5
-    _(resp.stats.overload_delay).must_equal 1.1
+    assert_commit_resp resp, stats: true
 
     shutdown_client! client
 
@@ -136,12 +127,14 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{database: database_path(instance_id, database_id), session: nil}, default_options]
     mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts, return_commit_stats: nil }, default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts, return_commit_stats: nil }, default_options]
     spanner.service.mocked_service = mock
 
     resp = client.update "users", [{ id: 1, name: "Charlie", active: false }]
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
+
+    resp = client.update "users", { id: 1, name: "Charlie", active: false }
+    assert_commit_resp resp
 
     shutdown_client! client
 
@@ -161,12 +154,14 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{database: database_path(instance_id, database_id), session: nil}, default_options]
     mock.expect :commit, commit_resp_with_stats, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts, return_commit_stats: true }, default_options]
+    mock.expect :commit, commit_resp_with_stats, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts, return_commit_stats: true }, default_options]
     spanner.service.mocked_service = mock
 
     resp = client.update "users", [{ id: 1, name: "Charlie", active: false }], commit_stats: true
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 5
-    _(resp.stats.overload_delay).must_equal 1.1
+    assert_commit_resp resp, stats: true
+
+    resp = client.update "users", { id: 1, name: "Charlie", active: false }, commit_stats: true
+    assert_commit_resp resp, stats: true
 
     shutdown_client! client
 
@@ -186,12 +181,14 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{database: database_path(instance_id, database_id), session: nil}, default_options]
     mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts, return_commit_stats: nil }, default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts, return_commit_stats: nil }, default_options]
     spanner.service.mocked_service = mock
 
     resp = client.insert "users", [{ id: 2, name: "Harvey",  active: true }]
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
+
+    resp = client.insert "users", { id: 2, name: "Harvey",  active: true }
+    assert_commit_resp resp
 
     shutdown_client! client
 
@@ -211,12 +208,14 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{database: database_path(instance_id, database_id), session: nil}, default_options]
     mock.expect :commit, commit_resp_with_stats, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts, return_commit_stats: true }, default_options]
+    mock.expect :commit, commit_resp_with_stats, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts, return_commit_stats: true }, default_options]
     spanner.service.mocked_service = mock
 
     resp = client.insert "users", [{ id: 2, name: "Harvey",  active: true }], commit_stats: true
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 5
-    _(resp.stats.overload_delay).must_equal 1.1
+    assert_commit_resp resp, stats: true
+
+    resp = client.insert "users", { id: 2, name: "Harvey",  active: true }, commit_stats: true
+    assert_commit_resp resp, stats: true
 
     shutdown_client! client
 
@@ -236,12 +235,14 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{database: database_path(instance_id, database_id), session: nil}, default_options]
     mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts, return_commit_stats: nil }, default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts, return_commit_stats: nil }, default_options]
     spanner.service.mocked_service = mock
 
     resp = client.upsert "users", [{ id: 3, name: "Marley",  active: false }]
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
+
+    resp = client.upsert "users", { id: 3, name: "Marley",  active: false }
+    assert_commit_resp resp
 
     shutdown_client! client
 
@@ -261,12 +262,14 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{database: database_path(instance_id, database_id), session: nil}, default_options]
     mock.expect :commit, commit_resp_with_stats, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts, return_commit_stats: true }, default_options]
+    mock.expect :commit, commit_resp_with_stats, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts, return_commit_stats: true }, default_options]
     spanner.service.mocked_service = mock
 
     resp = client.upsert "users", [{ id: 3, name: "Marley",  active: false }], commit_stats: true
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 5
-    _(resp.stats.overload_delay).must_equal 1.1
+    assert_commit_resp resp, stats: true
+
+    resp = client.upsert "users", { id: 3, name: "Marley",  active: false }, commit_stats: true
+    assert_commit_resp resp, stats: true
 
     shutdown_client! client
 
@@ -289,9 +292,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     resp = client.save "users", [{ id: 3, name: "Marley",  active: false }]
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     shutdown_client! client
 
@@ -311,12 +312,14 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{database: database_path(instance_id, database_id), session: nil}, default_options]
     mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts, return_commit_stats: nil }, default_options]
+    mock.expect :commit, commit_resp, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts, return_commit_stats: nil }, default_options]
     spanner.service.mocked_service = mock
 
     resp = client.replace "users", [{ id: 4, name: "Henry",  active: true }]
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
+
+    resp = client.replace "users", { id: 4, name: "Henry",  active: true }
+    assert_commit_resp resp
 
     shutdown_client! client
 
@@ -336,12 +339,14 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{database: database_path(instance_id, database_id), session: nil}, default_options]
     mock.expect :commit, commit_resp_with_stats, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts, return_commit_stats: true }, default_options]
+    mock.expect :commit, commit_resp_with_stats, [{ session: session_grpc.name, mutations: mutations, transaction_id: nil, single_use_transaction: tx_opts, return_commit_stats: true }, default_options]
     spanner.service.mocked_service = mock
 
     resp = client.replace "users", [{ id: 4, name: "Henry",  active: true }], commit_stats: true
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 5
-    _(resp.stats.overload_delay).must_equal 1.1
+    assert_commit_resp resp, stats: true
+
+    resp = client.replace "users", { id: 4, name: "Henry",  active: true }, commit_stats: true
+    assert_commit_resp resp, stats: true
 
     shutdown_client! client
 
@@ -367,9 +372,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     resp = client.delete "users", [1, 2, 3, 4, 5]
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     shutdown_client! client
 
@@ -395,9 +398,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     resp = client.delete "users", [1, 2, 3, 4, 5], commit_stats: true
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 5
-    _(resp.stats.overload_delay).must_equal 1.1
+    assert_commit_resp resp, stats: true
 
     shutdown_client! client
 
@@ -428,9 +429,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     resp = client.delete "users", [time1, time2, time3, time4]
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     shutdown_client! client
 
@@ -454,9 +453,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     resp = client.delete "users", 1..100
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     shutdown_client! client
 
@@ -482,9 +479,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     resp = client.delete "users", 5
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     shutdown_client! client
 
@@ -512,9 +507,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     resp = client.delete "users", time5
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     shutdown_client! client
 
@@ -536,9 +529,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     resp = client.delete "users"
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     shutdown_client! client
 
@@ -570,9 +561,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     resp = client.delete "users", call_options: call_options
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     shutdown_client! client
 
@@ -638,12 +627,19 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       c.replace "users", [{ id: 4, name: "Henry",  active: true }]
       c.delete "users", [1, 2, 3, 4, 5]
     end
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     shutdown_client! client
 
     mock.verify
+  end
+
+  def assert_commit_resp resp, stats: nil
+    _(resp.timestamp).must_equal commit_time
+
+    return _(resp.stats).must_be :nil? unless stats
+
+    _(resp.stats.mutation_count).must_equal commit_stats.mutation_count
+    _(resp.stats.overload_delay).must_equal commit_stats.overload_delay.to_f
   end
 end

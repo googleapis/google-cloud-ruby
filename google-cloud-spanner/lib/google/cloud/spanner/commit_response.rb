@@ -39,7 +39,7 @@ module Google
         # Additional statistics about a commit.
         # @return [CommitStats]
         def stats
-          CommitStats.from_grpc @grpc.commit_stats
+          CommitStats.from_grpc @grpc.commit_stats if @grpc.commit_stats
         end
 
         ##

@@ -22,12 +22,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
   let(:commit_time) { Time.now }
   let(:commit_timestamp) { Google::Cloud::Spanner::Convert.time_to_timestamp commit_time }
-  let(:commit_resp) {
-    Google::Cloud::Spanner::V1::CommitResponse.new(
-      commit_timestamp: commit_timestamp,
-      commit_stats: Google::Cloud::Spanner::V1::CommitResponse::CommitStats.new
-    )
-  }
+  let(:commit_resp) { Google::Cloud::Spanner::V1::CommitResponse.new commit_timestamp: commit_timestamp }
   let(:commit_stats) {
     Google::Cloud::Spanner::V1::CommitResponse::CommitStats.new(
       mutation_count: 5, overload_delay: Google::Protobuf::Duration.new(seconds: 1, nanos: 100000000)
@@ -91,9 +86,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
       c.replace "users", [{ id: 4, name: "Henry",  active: true }]
       c.delete "users", [1, 2, 3, 4, 5]
     end
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     mock.verify
   end
@@ -111,9 +104,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
       c.replace "users", [{ id: 4, name: "Henry",  active: true }]
       c.delete "users", [1, 2, 3, 4, 5]
     end
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 5
-    _(resp.stats.overload_delay).must_equal 1.1
+    assert_commit_resp resp, stats: true
 
     mock.verify
   end
@@ -133,9 +124,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     resp = session.update "users", [{ id: 1, name: "Charlie", active: false }]
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     mock.verify
   end
@@ -155,9 +144,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     resp = session.update "users", [{ id: 1, name: "Charlie", active: false }], commit_stats: true
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 5
-    _(resp.stats.overload_delay).must_equal 1.1
+    assert_commit_resp resp, stats: true
 
     mock.verify
   end
@@ -177,9 +164,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     resp = session.insert "users", [{ id: 2, name: "Harvey",  active: true }]
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     mock.verify
   end
@@ -199,9 +184,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     resp = session.insert "users", [{ id: 2, name: "Harvey",  active: true }], commit_stats: true
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 5
-    _(resp.stats.overload_delay).must_equal 1.1
+    assert_commit_resp resp, stats: true
 
     mock.verify
   end
@@ -221,9 +204,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     resp = session.upsert "users", [{ id: 3, name: "Marley",  active: false }]
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     mock.verify
   end
@@ -243,9 +224,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     resp = session.upsert "users", [{ id: 3, name: "Marley",  active: false }], commit_stats: true
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 5
-    _(resp.stats.overload_delay).must_equal 1.1
+    assert_commit_resp resp, stats: true
 
     mock.verify
   end
@@ -265,9 +244,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     resp = session.save "users", [{ id: 3, name: "Marley",  active: false }]
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     mock.verify
   end
@@ -287,9 +264,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     resp = session.replace "users", [{ id: 4, name: "Henry",  active: true }]
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     mock.verify
   end
@@ -309,9 +284,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     resp = session.replace "users", [{ id: 4, name: "Henry",  active: true }], commit_stats: true
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 5
-    _(resp.stats.overload_delay).must_equal 1.1
+    assert_commit_resp resp, stats: true
 
     mock.verify
   end
@@ -334,9 +307,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     resp = session.delete "users", [1, 2, 3, 4, 5]
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     mock.verify
   end
@@ -359,9 +330,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     resp = session.delete "users", [1, 2, 3, 4, 5], commit_stats: true
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 5
-    _(resp.stats.overload_delay).must_equal 1.1
+    assert_commit_resp resp, stats: true
 
     mock.verify
   end
@@ -382,9 +351,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     resp = session.delete "users", 1..100
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     mock.verify
   end
@@ -407,9 +374,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     resp = session.delete "users", 5
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     mock.verify
   end
@@ -428,10 +393,17 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     resp = session.delete "users"
-    _(resp.timestamp).must_equal commit_time
-    _(resp.stats.mutation_count).must_equal 0
-    _(resp.stats.overload_delay).must_be :nil?
+    assert_commit_resp resp
 
     mock.verify
+  end
+
+  def assert_commit_resp resp, stats: nil
+    _(resp.timestamp).must_equal commit_time
+
+    return _(resp.stats).must_be :nil? unless stats
+
+    _(resp.stats.mutation_count).must_equal commit_stats.mutation_count
+    _(resp.stats.overload_delay).must_equal commit_stats.overload_delay.to_f
   end
 end
