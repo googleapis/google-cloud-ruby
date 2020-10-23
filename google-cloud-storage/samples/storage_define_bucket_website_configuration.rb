@@ -31,7 +31,6 @@ def define_bucket_website_configuration bucket_name:, main_page_suffix:, not_fou
   puts "Static website bucket #{bucket_name} is set up to use #{main_page_suffix} as the index page and " \
        "#{not_found_page} as the 404 page"
   # [END storage_define_bucket_website_configuration]
-  bucket
 end
 
 if $PROGRAM_NAME == __FILE__

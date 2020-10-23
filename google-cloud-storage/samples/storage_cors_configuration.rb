@@ -33,7 +33,6 @@ def cors_configuration bucket_name:
 
   puts "Set CORS policies for bucket #{bucket_name}"
   # [END storage_cors_configuration]
-  bucket
 end
 
 if $PROGRAM_NAME == __FILE__

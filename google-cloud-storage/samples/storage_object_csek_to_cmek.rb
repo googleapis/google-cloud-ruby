@@ -31,7 +31,6 @@ def object_csek_to_cmek bucket_name:, file_name:, encryption_key:, kms_key_name:
   puts "File #{file_name} in bucket #{bucket_name} is now managed by the KMS key #{kms_key_name} instead of a " \
        "customer-supplied encryption key"
   # [END storage_object_csek_to_cmek]
-  file
 end
 
 if $PROGRAM_NAME == __FILE__

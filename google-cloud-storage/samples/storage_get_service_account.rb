@@ -23,7 +23,6 @@ def get_service_account
 
   puts "The GCS service account for project #{storage.project_id} is: #{email}"
   # [END storage_get_service_account]
-  email
 end
 
 get_service_account if $PROGRAM_NAME == __FILE__

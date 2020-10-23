@@ -29,7 +29,6 @@ def delete_file_archived_generation bucket_name:, file_name:, generation:
 
   puts "Generation #{generation} of file #{file_name} was deleted from #{bucket_name}"
   # [END storage_delete_file_archived_generation]
-  file
 end
 
 if $PROGRAM_NAME == __FILE__

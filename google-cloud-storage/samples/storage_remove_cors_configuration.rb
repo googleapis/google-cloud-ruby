@@ -27,7 +27,6 @@ def remove_cors_configuration bucket_name:
 
   puts "Remove CORS policies for bucket #{bucket_name}"
   # [END storage_remove_cors_configuration]
-  bucket
 end
 
 if $PROGRAM_NAME == __FILE__

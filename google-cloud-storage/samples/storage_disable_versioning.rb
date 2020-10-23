@@ -25,7 +25,6 @@ def disable_versioning bucket_name:
 
   puts "Versioning was disabled for bucket #{bucket_name}"
   # [END storage_disable_versioning]
-  bucket
 end
 
 disable_versioning bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

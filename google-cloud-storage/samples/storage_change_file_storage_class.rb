@@ -28,7 +28,6 @@ def change_file_storage_class bucket_name:, file_name:
 
   puts "File #{file_name} in bucket #{bucket_name} had its storage class set to #{file.storage_class}"
   # [END storage_change_file_storage_class]
-  file
 end
 
 if $PROGRAM_NAME == __FILE__

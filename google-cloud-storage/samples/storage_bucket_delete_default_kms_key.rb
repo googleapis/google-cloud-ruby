@@ -25,7 +25,6 @@ def bucket_delete_default_kms_key bucket_name:
 
   puts "Default KMS key was removed from #{bucket_name}"
   # [END storage_bucket_delete_default_kms_key]
-  bucket
 end
 
 if $PROGRAM_NAME == __FILE__

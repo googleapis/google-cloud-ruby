@@ -25,7 +25,6 @@ def change_default_storage_class bucket_name:
 
   puts "Default storage class for bucket #{bucket_name} has been set to #{bucket.storage_class}"
   # [END storage_change_default_storage_class]
-  bucket
 end
 
 if $PROGRAM_NAME == __FILE__

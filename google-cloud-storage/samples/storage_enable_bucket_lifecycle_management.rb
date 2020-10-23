@@ -28,7 +28,6 @@ def enable_bucket_lifecycle_management bucket_name:
 
   puts "Lifecycle management is enabled for bucket #{bucket_name} and the rules are #{rules}"
   # [END storage_enable_bucket_lifecycle_management]
-  bucket
 end
 
 enable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

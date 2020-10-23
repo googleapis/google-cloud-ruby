@@ -27,9 +27,8 @@ def compose_file bucket_name:, sources:, destination_file_name:
     f.content_type = "text/plain"
   end
 
-  puts "Composed new file #{destination_file_name} in the bucket #{bucket_name}"
+  puts "Composed new file #{destination.name} in the bucket #{bucket_name}"
   # [END storage_compose_file]
-  destination
 end
 
 if $PROGRAM_NAME == __FILE__

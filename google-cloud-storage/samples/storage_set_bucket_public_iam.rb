@@ -29,7 +29,6 @@ def set_bucket_public_iam bucket_name:, role:, member:
 
   puts "Bucket #{bucket_name} is now publicly readable"
   # [END storage_set_bucket_public_iam]
-  bucket
 end
 
 if $PROGRAM_NAME == __FILE__
