@@ -827,6 +827,21 @@ module Google
         #   db.upsert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
+        # @example With commit stats
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   records = [{ id: 1, name: "Charlie", active: false },
+        #              { id: 2, name: "Harvey",  active: true }]
+        #   commit_resp = db.upsert "users", records, commit_stats: true
+        #
+        #   puts commit_resp.timestamp
+        #   puts commit_resp.stats.mutation_count
+        #   puts commit_resp.stats.overload_delay
+        #
         def upsert table, rows, commit_stats: nil
           @pool.with_session do |session|
             session.upsert table, rows, commit_stats: commit_stats
@@ -888,6 +903,21 @@ module Google
         #   db.insert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
+        # @example With commit stats
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   records = [{ id: 1, name: "Charlie", active: false },
+        #              { id: 2, name: "Harvey",  active: true }]
+        #   commit_resp = db.insert "users", records, commit_stats: true
+        #
+        #   puts commit_resp.timestamp
+        #   puts commit_resp.stats.mutation_count
+        #   puts commit_resp.stats.overload_delay
+        #
         def insert table, rows, commit_stats: nil
           @pool.with_session do |session|
             session.insert table, rows, commit_stats: commit_stats
@@ -947,6 +977,21 @@ module Google
         #
         #   db.update "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
+        #
+        # @example With commit stats
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   records = [{ id: 1, name: "Charlie", active: false },
+        #              { id: 2, name: "Harvey",  active: true }]
+        #   commit_resp = db.update "users", records, commit_stats: true
+        #
+        #   puts commit_resp.timestamp
+        #   puts commit_resp.stats.mutation_count
+        #   puts commit_resp.stats.overload_delay
         #
         def update table, rows, commit_stats: nil
           @pool.with_session do |session|
@@ -1010,6 +1055,21 @@ module Google
         #   db.replace "users", [{ id: 1, name: "Charlie", active: false },
         #                        { id: 2, name: "Harvey",  active: true }]
         #
+        # @example With commit stats
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   records = [{ id: 1, name: "Charlie", active: false },
+        #              { id: 2, name: "Harvey",  active: true }]
+        #   commit_resp = db.replace "users", records, commit_stats: true
+        #
+        #   puts commit_resp.timestamp
+        #   puts commit_resp.stats.mutation_count
+        #   puts commit_resp.stats.overload_delay
+        #
         def replace table, rows, commit_stats: nil
           @pool.with_session do |session|
             session.replace table, rows, commit_stats: commit_stats
@@ -1064,6 +1124,19 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   db.delete "users", [1, 2, 3]
+        #
+        # @example With commit stats
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   commit_resp = db.delete "users", [1, 2, 3], commit_stats: true
+        #
+        #   puts commit_resp.timestamp
+        #   puts commit_resp.stats.mutation_count
+        #   puts commit_resp.stats.overload_delay
         #
         def delete table, keys = [], commit_stats: nil, call_options: nil
           @pool.with_session do |session|
@@ -1121,6 +1194,22 @@ module Google
         #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
         #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
         #   end
+        #
+        # @example With commit stats
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   commit_resp = db.commit commit_stats: true do |c|
+        #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
+        #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+        #   end
+        #
+        #   puts commit_resp.timestamp
+        #   puts commit_resp.stats.mutation_count
+        #   puts commit_resp.stats.overload_delay
         #
         def commit commit_stats: nil, call_options: nil, &block
           raise ArgumentError, "Must provide a block" unless block_given?
@@ -1208,6 +1297,27 @@ module Google
         #       raise Google::Cloud::Spanner::Rollback
         #     end
         #   end
+        #
+        # @example With commit stats
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   commit_resp = db.transaction commit_stats: true do |tx|
+        #     results = tx.execute_query "SELECT * FROM users"
+        #
+        #     results.rows.each do |row|
+        #       puts "User #{row[:id]} is #{row[:name]}"
+        #     end
+        #
+        #     tx.update "users", [{ id: 1, name: "Charlie", active: false }]
+        #     tx.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+        #   end
+        #
+        #   puts commit_resp.timestamp
+        #   puts commit_resp.stats.mutation_count
+        #   puts commit_resp.stats.overload_delay
         #
         def transaction deadline: 120, commit_stats: nil, call_options: nil
           ensure_service!

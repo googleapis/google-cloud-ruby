@@ -1564,7 +1564,13 @@ def commit_timestamp
 end
 
 def commit_resp
-  Google::Cloud::Spanner::V1::CommitResponse.new commit_timestamp: commit_timestamp
+  Google::Cloud::Spanner::V1::CommitResponse.new(
+    commit_timestamp: commit_timestamp,
+    commit_stats: Google::Cloud::Spanner::V1::CommitResponse::CommitStats.new(
+      mutation_count: 5,
+      overload_delay: Google::Protobuf::Duration.new(seconds: 1, nanos: 100000000)
+    )
+  )
 end
 
 def backup_hash \
