@@ -170,6 +170,12 @@ task :ci do
   Rake::Task[:test].invoke
 end
 
+task :rad do
+  YARD::Rake::YardocTask.new do |y|
+    y.options << "--fail-on-warning"
+  end
+end
+
 namespace :ci do
   desc "Run the CI build, with smoke tests."
   task :smoke_test do
