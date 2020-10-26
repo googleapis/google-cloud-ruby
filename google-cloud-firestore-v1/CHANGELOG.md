@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.2 / 2020-10-26
+
+#### Bug Fixes
+
+* Retry partition_query calls on INTERNAL and DEADLINE_EXCEEDED errors
+
 ### 0.2.1 / 2020-10-14
 
 #### Bug Fixes
