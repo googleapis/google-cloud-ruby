@@ -1,5 +1,11 @@
 # Release History
 
+### 2.1.1 / 2020-10-26
+
+#### Documentation
+
+* Update deprecated attribute name limit to max_outstanding_messages
+
 ### 2.1.0 / 2020-09-17
 
 #### Features
