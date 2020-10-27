@@ -60,6 +60,8 @@ describe "Spanner Client", :crud, :spanner do
   end
 
   it "inserts, updates, upserts, reads, and deletes records with commit stats" do
+    skip if emulator_enabled?
+
     results = db.read "accounts", ["account_id"], single_use: { timestamp: @setup_timestamp }
     _(results.rows.count).must_equal 0
     _(results.timestamp).wont_be :nil?
@@ -142,6 +144,8 @@ describe "Spanner Client", :crud, :spanner do
   end
 
   it "inserts, updates, upserts, reads, and deletes records using commit with commit stats" do
+    skip if emulator_enabled?
+
     results = db.read "accounts", ["account_id"], single_use: { timestamp: @setup_timestamp }
     _(results.rows.count).must_equal 0
     _(results.timestamp).wont_be :nil?
@@ -221,6 +225,8 @@ describe "Spanner Client", :crud, :spanner do
   end
 
   it "inserts, updates, upserts, reads, and deletes records in a transaction with commit stats" do
+    skip if emulator_enabled?
+
     timestamp = @setup_timestamp
     active_count_sql = "SELECT COUNT(*) AS count FROM accounts WHERE active = true"
 

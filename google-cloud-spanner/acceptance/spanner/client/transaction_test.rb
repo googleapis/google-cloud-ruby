@@ -198,6 +198,8 @@ describe "Spanner Client", :transaction, :spanner do
   end
 
   it "execute transaction and return commit stats" do
+    skip if emulator_enabled?
+
     commit_resp =  db.transaction commit_stats: true do |tx|
       tx_results = tx.read "accounts", [:reputation], keys: 1, limit: 1
       tx_val = tx_results.rows.first[:reputation]

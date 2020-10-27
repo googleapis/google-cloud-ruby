@@ -122,6 +122,8 @@ describe "Spanner Client", :dml, :spanner do
   end
 
   it "executes a DML statement and return commit stats" do
+    skip if emulator_enabled?
+
     prior_results = db.execute_sql "SELECT * FROM accounts"
     _(prior_results.rows.count).must_equal 3
 
