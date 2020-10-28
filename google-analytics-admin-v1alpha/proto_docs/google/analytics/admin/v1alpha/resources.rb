@@ -49,7 +49,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A resource message representing a Google Analytics App+Web property.
+        # A resource message representing a Google Analytics GA4 property.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Resource name of this property.
@@ -334,7 +334,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A link between an App+Web property and a Firebase project.
+        # A link between an GA4 property and a Firebase project.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Example format: properties/1234/firebaseLinks/5678
@@ -352,7 +352,7 @@ module Google
         #     Output only. Time when this FirebaseLink was originally created.
         # @!attribute [rw] maximum_user_access
         #   @return [::Google::Analytics::Admin::V1alpha::MaximumUserAccess]
-        #     Maximum user access to the App + Web property allowed to admins of
+        #     Maximum user access to the GA4 property allowed to admins of
         #     the linked Firebase project.
         class FirebaseLink
           include ::Google::Protobuf::MessageExts
@@ -370,7 +370,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A link between an App+Web property and a Google Ads account.
+        # A link between an GA4 property and a Google Ads account.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Format: properties/\\{propertyId}/googleAdsLinks/\\{googleAdsLinkId}
@@ -438,7 +438,7 @@ module Google
         end
 
         # A virtual resource representing an overview of an account and
-        # all its child App+Web properties.
+        # all its child GA4 properties.
         # @!attribute [rw] name
         #   @return [::String]
         #     Resource name for this account summary.
@@ -460,7 +460,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A virtual resource representing metadata for an App+Web property.
+        # A virtual resource representing metadata for an GA4 property.
         # @!attribute [rw] property
         #   @return [::String]
         #     Resource name of property referred to by this property summary
