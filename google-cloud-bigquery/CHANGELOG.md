@@ -1,5 +1,17 @@
 # Release History
 
+### 1.23.1 / 2020-10-28
+
+#### Bug Fixes
+
+* Ensure dense encoding of JSON responses
+  * Set query param prettyPrint=false for all requests.
+  * Upgrade google-api-client to ~> 0.47
+
+#### Documentation
+
+* Update supported types for time partition type
+
 ### 1.23.0 / 2020-09-17
 
 #### Features
