@@ -1,0 +1,11 @@
+{
+    "api_id": "workflows.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-workflows/latest",
+    "distribution_name": "google-cloud-workflows",
+    "language": "ruby",
+    "name": "workflows",
+    "name_pretty": "Workflows API",
+    "product_documentation": "https://cloud.google.com/workflows",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
