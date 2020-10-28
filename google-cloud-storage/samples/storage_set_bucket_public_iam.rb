@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_set_bucket_public_iam]
 def set_bucket_public_iam bucket_name:
-  # [START storage_set_bucket_public_iam]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -27,8 +27,8 @@ def set_bucket_public_iam bucket_name:
   end
 
   puts "Bucket #{bucket_name} is now publicly readable"
-  # [END storage_set_bucket_public_iam]
 end
+# [END storage_set_bucket_public_iam]
 
 if $PROGRAM_NAME == __FILE__
   set_bucket_public_iam bucket_name: ARGV.shift

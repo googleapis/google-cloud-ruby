@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_view_bucket_iam_members]
 def view_bucket_iam_members bucket_name:
-  # [START storage_view_bucket_iam_members]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -34,7 +34,7 @@ def view_bucket_iam_members bucket_name:
       puts "Condition Expression: #{binding.condition.expression}"
     end
   end
-  # [END storage_view_bucket_iam_members]
 end
+# [END storage_view_bucket_iam_members]
 
 view_bucket_iam_members bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

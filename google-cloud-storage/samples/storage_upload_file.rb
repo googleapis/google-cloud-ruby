@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_upload_file]
 def upload_file bucket_name:, local_file_path:, file_name: nil
-  # [START storage_upload_file]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -31,7 +31,7 @@ def upload_file bucket_name:, local_file_path:, file_name: nil
   file = bucket.create_file local_file_path, file_name
 
   puts "Uploaded #{local_file_path} as #{file.name} in bucket #{bucket_name}"
-  # [END storage_upload_file]
 end
+# [END storage_upload_file]
 
 upload_file bucket_name: ARGV.shift, local_file_path: ARGV.shift, file_name: ARGV.shift if $PROGRAM_NAME == __FILE__

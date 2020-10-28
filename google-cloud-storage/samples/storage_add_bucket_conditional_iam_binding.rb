@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_add_bucket_conditional_iam_binding]
 def add_bucket_conditional_iam_binding bucket_name:
-  # [START storage_add_bucket_conditional_iam_binding]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -42,8 +42,8 @@ def add_bucket_conditional_iam_binding bucket_name:
   end
 
   puts "Added #{member} with role #{role} to #{bucket_name} with condition #{title} #{description} #{expression}"
-  # [END storage_add_bucket_conditional_iam_binding]
 end
+# [END storage_add_bucket_conditional_iam_binding]
 
 if $PROGRAM_NAME == __FILE__
   add_bucket_conditional_iam_binding bucket_name: ARGV.shift

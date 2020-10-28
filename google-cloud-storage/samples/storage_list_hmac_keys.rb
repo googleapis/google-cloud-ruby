@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_list_hmac_keys]
 def list_hmac_keys
-  # [START storage_list_hmac_keys]
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
@@ -26,7 +26,7 @@ def list_hmac_keys
     puts "Service Account Email: #{hmac_key.service_account_email}"
     puts "Access ID: #{hmac_key.access_id}"
   end
-  # [END storage_list_hmac_keys]
 end
+# [END storage_list_hmac_keys]
 
 list_hmac_keys if $PROGRAM_NAME == __FILE__

@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_set_metadata]
 def set_metadata bucket_name:, file_name:
-  # [START storage_set_metadata]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -35,7 +35,7 @@ def set_metadata bucket_name:, file_name:
   end
 
   puts "Metadata for #{file_name} has been updated."
-  # [END storage_set_metadata]
 end
+# [END storage_set_metadata]
 
 set_metadata bucket_name: ARGV.shift, file_name: ARGV.shift if $PROGRAM_NAME == __FILE__

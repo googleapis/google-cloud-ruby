@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_get_uniform_bucket_level_access]
 def get_uniform_bucket_level_access bucket_name:
-  # [START storage_get_uniform_bucket_level_access]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -28,7 +28,7 @@ def get_uniform_bucket_level_access bucket_name:
   else
     puts "Uniform bucket-level access is disabled for #{bucket_name}."
   end
-  # [END storage_get_uniform_bucket_level_access]
 end
+# [END storage_get_uniform_bucket_level_access]
 
 get_uniform_bucket_level_access bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

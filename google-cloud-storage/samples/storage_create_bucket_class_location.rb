@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_create_bucket_class_location]
 def create_bucket_class_location bucket_name:
-  # [START storage_create_bucket_class_location]
   # The ID to give your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -25,8 +25,8 @@ def create_bucket_class_location bucket_name:
                                   storage_class: "COLDLINE"
 
   puts "Created bucket #{bucket.name} in #{bucket.location} with #{bucket.storage_class} class"
-  # [END storage_create_bucket_class_location]
 end
+# [END storage_create_bucket_class_location]
 
 if $PROGRAM_NAME == __FILE__
   create_bucket_class_location bucket_name: ARGV.shift

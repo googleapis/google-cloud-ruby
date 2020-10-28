@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_bucket_delete_default_kms_key]
 def bucket_delete_default_kms_key bucket_name:
-  # [START storage_bucket_delete_default_kms_key]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -25,8 +25,8 @@ def bucket_delete_default_kms_key bucket_name:
   bucket.default_kms_key = nil
 
   puts "Default KMS key was removed from #{bucket_name}"
-  # [END storage_bucket_delete_default_kms_key]
 end
+# [END storage_bucket_delete_default_kms_key]
 
 if $PROGRAM_NAME == __FILE__
   bucket_delete_default_kms_key bucket_name: ARGV.shift

@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_object_csek_to_cmek]
 def object_csek_to_cmek bucket_name:, file_name:, encryption_key:, kms_key_name:
-  # [START storage_object_csek_to_cmek]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -37,8 +37,8 @@ def object_csek_to_cmek bucket_name:, file_name:, encryption_key:, kms_key_name:
 
   puts "File #{file_name} in bucket #{bucket_name} is now managed by the KMS key #{kms_key_name} instead of a " \
        "customer-supplied encryption key"
-  # [END storage_object_csek_to_cmek]
 end
+# [END storage_object_csek_to_cmek]
 
 if $PROGRAM_NAME == __FILE__
   object_csek_to_cmek bucket_name:    ARGV.shift,

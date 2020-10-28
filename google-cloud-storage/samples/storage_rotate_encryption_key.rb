@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_rotate_encryption_key]
 def rotate_encryption_key bucket_name:, file_name:, current_encryption_key:, new_encryption_key:
-  # [START storage_rotate_encryption_key]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -38,8 +38,8 @@ def rotate_encryption_key bucket_name:, file_name:, current_encryption_key:, new
               new_encryption_key: new_encryption_key
 
   puts "The encryption key for #{file.name} in #{bucket.name} was rotated."
-  # [END storage_rotate_encryption_key]
 end
+# [END storage_rotate_encryption_key]
 
 if $PROGRAM_NAME == __FILE__
   rotate_encryption_key bucket_name:            ARGV.shift,

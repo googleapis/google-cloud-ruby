@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_remove_bucket_conditional_iam_binding]
 def remove_bucket_conditional_iam_binding bucket_name:
-  # [START storage_remove_bucket_conditional_iam_binding]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -51,7 +51,7 @@ def remove_bucket_conditional_iam_binding bucket_name:
       puts "No matching conditional binding found."
     end
   end
-  # [END storage_remove_bucket_conditional_iam_binding]
 end
+# [END storage_remove_bucket_conditional_iam_binding]
 
 remove_bucket_conditional_iam_binding bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

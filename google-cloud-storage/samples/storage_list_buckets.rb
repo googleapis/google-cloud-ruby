@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_list_buckets]
 def list_buckets
-  # [START storage_list_buckets]
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
@@ -21,7 +21,7 @@ def list_buckets
   storage.buckets.each do |bucket|
     puts bucket.name
   end
-  # [END storage_list_buckets]
 end
+# [END storage_list_buckets]
 
 list_buckets if $PROGRAM_NAME == __FILE__

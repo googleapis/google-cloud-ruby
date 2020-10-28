@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_make_public]
 def make_public bucket_name:, file_name:
-  # [START storage_make_public]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -29,7 +29,7 @@ def make_public bucket_name:, file_name:
   file.acl.public!
 
   puts "#{file.name} is publicly accessible at #{file.public_url}"
-  # [END storage_make_public]
 end
+# [END storage_make_public]
 
 make_public bucket_name: ARGV.shift, file_name: ARGV.shift if $PROGRAM_NAME == __FILE__

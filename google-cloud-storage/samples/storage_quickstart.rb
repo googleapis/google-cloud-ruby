@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_quickstart]
 def quickstart bucket_name:
-  # [START storage_quickstart]
   # Imports the Google Cloud client library
   require "google/cloud/storage"
 
@@ -27,8 +27,8 @@ def quickstart bucket_name:
   bucket = storage.create_bucket bucket_name
 
   puts "Bucket #{bucket.name} was created."
-  # [END storage_quickstart]
 end
+# [END storage_quickstart]
 
 if $PROGRAM_NAME == __FILE__
   quickstart "quickstart_bucket"

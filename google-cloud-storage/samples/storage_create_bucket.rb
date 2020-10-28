@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_create_bucket]
 def create_bucket bucket_name:
-  # [START storage_create_bucket]
   # The ID to give your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -23,7 +23,7 @@ def create_bucket bucket_name:
   bucket  = storage.create_bucket bucket_name
 
   puts "Created bucket: #{bucket.name}"
-  # [END storage_create_bucket]
 end
+# [END storage_create_bucket]
 
 create_bucket bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

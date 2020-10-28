@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_delete_file]
 def delete_file bucket_name:, file_name:
-  # [START storage_delete_file]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -29,7 +29,7 @@ def delete_file bucket_name:, file_name:
   file.delete
 
   puts "Deleted #{file.name}"
-  # [END storage_delete_file]
 end
+# [END storage_delete_file]
 
 delete_file bucket_name: ARGV.shift, file_name: ARGV.shift if $PROGRAM_NAME == __FILE__

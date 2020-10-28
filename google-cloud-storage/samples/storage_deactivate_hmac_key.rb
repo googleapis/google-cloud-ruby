@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_deactivate_hmac_key]
 def deactivate_hmac_key access_id:
-  # [START storage_deactivate_hmac_key]
   # The access ID of the HMAC key
   # access_id = "GOOG0234230X00"
 
@@ -36,7 +36,7 @@ def deactivate_hmac_key access_id:
   puts "Created At:            #{hmac_key.created_at}"
   puts "Updated At:            #{hmac_key.updated_at}"
   puts "Etag:                  #{hmac_key.etag}"
-  # [END storage_deactivate_hmac_key]
 end
+# [END storage_deactivate_hmac_key]
 
 deactivate_hmac_key access_id: ARGV.shift if $PROGRAM_NAME == __FILE__

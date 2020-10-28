@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_set_retention_policy]
 def set_retention_policy bucket_name:, retention_period:
-  # [START storage_set_retention_policy]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -28,7 +28,7 @@ def set_retention_policy bucket_name:, retention_period:
   bucket.retention_period = retention_period
 
   puts "Retention period for #{bucket_name} is now #{bucket.retention_period} seconds."
-  # [END storage_set_retention_policy]
 end
+# [END storage_set_retention_policy]
 
 set_retention_policy bucket_name: ARGV.shift, retention_period: ARGV.shift if $PROGRAM_NAME == __FILE__

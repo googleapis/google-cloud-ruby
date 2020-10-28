@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_list_files_with_prefix]
 def list_files_with_prefix bucket_name:, prefix:, delimiter: nil
-  # [START storage_list_files_with_prefix]
   # Lists all the files in the bucket that begin with the prefix.
   #
   # This can be used to list all files in a "folder", e.g. "public/".
@@ -52,7 +52,7 @@ def list_files_with_prefix bucket_name:, prefix:, delimiter: nil
   files.each do |file|
     puts file.name
   end
-  # [END storage_list_files_with_prefix]
 end
+# [END storage_list_files_with_prefix]
 
 list_files_with_prefix bucket_name: ARGV.shift, prefix: ARGV.shift, delimiter: ARGV.shift if $PROGRAM_NAME == __FILE__

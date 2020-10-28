@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_change_default_storage_class]
 def change_default_storage_class bucket_name:
-  # [START storage_change_default_storage_class]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -25,8 +25,8 @@ def change_default_storage_class bucket_name:
   bucket.storage_class = "COLDLINE"
 
   puts "Default storage class for bucket #{bucket_name} has been set to #{bucket.storage_class}"
-  # [END storage_change_default_storage_class]
 end
+# [END storage_change_default_storage_class]
 
 if $PROGRAM_NAME == __FILE__
   change_default_storage_class bucket_name: ARGV.shift

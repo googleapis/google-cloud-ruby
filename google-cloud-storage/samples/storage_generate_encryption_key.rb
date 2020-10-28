@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_generate_encryption_key]
 def generate_encryption_key
-  # [START storage_generate_encryption_key]
   # Generates a 256 bit (32 byte) AES encryption key and prints the base64 representation.
   #
   # This is included for demonstration purposes. You should generate your own key.
@@ -25,7 +25,7 @@ def generate_encryption_key
   encoded_enc_key = Base64.encode64 encryption_key
 
   puts "Sample encryption key: #{encoded_enc_key}"
-  # [END storage_generate_encryption_key]
 end
+# [END storage_generate_encryption_key]
 
 generate_encryption_key if $PROGRAM_NAME == __FILE__

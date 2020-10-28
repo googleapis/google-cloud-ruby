@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_download_encrypted_file]
 def download_encrypted_file bucket_name:, file_name:, local_file_path:, encryption_key:
-  # [START storage_download_encrypted_file]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -36,8 +36,8 @@ def download_encrypted_file bucket_name:, file_name:, local_file_path:, encrypti
   file.download local_file_path, encryption_key: encryption_key
 
   puts "Downloaded encrypted #{file.name} to #{local_file_path}"
-  # [END storage_download_encrypted_file]
 end
+# [END storage_download_encrypted_file]
 
 if $PROGRAM_NAME == __FILE__
   download_encrypted_file bucket_name:     ARGV.shift,

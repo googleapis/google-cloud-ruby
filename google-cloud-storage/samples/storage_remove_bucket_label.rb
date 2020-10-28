@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_remove_bucket_label]
 def remove_bucket_label bucket_name:, label_key:
-  # [START storage_remove_bucket_label]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -30,7 +30,7 @@ def remove_bucket_label bucket_name:, label_key:
   end
 
   puts "Deleted label #{label_key} from #{bucket_name}"
-  # [END storage_remove_bucket_label]
 end
+# [END storage_remove_bucket_label]
 
 remove_bucket_label bucket_name: ARGV.shift, label_key: ARGV.shift if $PROGRAM_NAME == __FILE__

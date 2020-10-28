@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_add_bucket_label]
 def add_bucket_label bucket_name:, label_key:, label_value:
-  # [START storage_add_bucket_label]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -33,8 +33,8 @@ def add_bucket_label bucket_name:, label_key:, label_value:
   end
 
   puts "Added label #{label_key} with value #{label_value} to #{bucket_name}"
-  # [END storage_add_bucket_label]
 end
+# [END storage_add_bucket_label]
 
 if $PROGRAM_NAME == __FILE__
   add_bucket_label bucket_name: ARGV.shift, label_key: ARGV.shift, label_value: ARGV.shift

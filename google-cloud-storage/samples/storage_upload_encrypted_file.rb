@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_upload_encrypted_file]
 def upload_encrypted_file bucket_name:, local_file_path:, file_name: nil, encryption_key:
-  # [START storage_upload_encrypted_file]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -35,8 +35,8 @@ def upload_encrypted_file bucket_name:, local_file_path:, file_name: nil, encryp
   file = bucket.create_file local_file_path, file_name, encryption_key: encryption_key
 
   puts "Uploaded #{file.name} with encryption key"
-  # [END storage_upload_encrypted_file]
 end
+# [END storage_upload_encrypted_file]
 
 if $PROGRAM_NAME == __FILE__
   upload_encrypted_file bucket_name:     ARGV.shift,

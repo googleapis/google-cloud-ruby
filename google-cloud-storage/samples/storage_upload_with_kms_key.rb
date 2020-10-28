@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_upload_with_kms_key]
 def upload_with_kms_key bucket_name:, local_file_path:, file_name: nil, kms_key:
-  # [START storage_upload_with_kms_key]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -35,8 +35,8 @@ def upload_with_kms_key bucket_name:, local_file_path:, file_name: nil, kms_key:
   file = bucket.create_file local_file_path, file_name, kms_key: kms_key
 
   puts "Uploaded #{file.name} and encrypted service side using #{file.kms_key}"
-  # [END storage_upload_with_kms_key]
 end
+# [END storage_upload_with_kms_key]
 
 if $PROGRAM_NAME == __FILE__
   upload_with_kms_key bucket_name:     ARGV.shift,

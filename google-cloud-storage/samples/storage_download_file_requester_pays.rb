@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_download_file_requester_pays]
 def download_file_requester_pays bucket_name:, file_name:, local_file_path:
-  # [START storage_download_file_requester_pays]
   # The ID of a GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -32,8 +32,8 @@ def download_file_requester_pays bucket_name:, file_name:, local_file_path:
   file.download local_file_path
 
   puts "Downloaded #{file.name} using billing project #{storage.project}"
-  # [END storage_download_file_requester_pays]
 end
+# [END storage_download_file_requester_pays]
 
 if $PROGRAM_NAME == __FILE__
   download_file_requester_pays bucket_name: ARGV.shift, file_name: ARGV.shift, local_file_path: ARGV.shift

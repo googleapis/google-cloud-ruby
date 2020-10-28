@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_generate_upload_signed_url_v4]
 def generate_upload_signed_url_v4 bucket_name:, file_name:
-  # [START storage_generate_upload_signed_url_v4]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -32,7 +32,7 @@ def generate_upload_signed_url_v4 bucket_name:, file_name:
   puts url
   puts "You can use this URL with any user agent, for example:"
   puts "curl -X PUT -H 'Content-Type: text/plain' --upload-file my-file '#{url}'"
-  # [END storage_generate_upload_signed_url_v4]
 end
+# [END storage_generate_upload_signed_url_v4]
 
 generate_upload_signed_url_v4 bucket_name: ARGV.shift, file_name: ARGV.shift if $PROGRAM_NAME == __FILE__

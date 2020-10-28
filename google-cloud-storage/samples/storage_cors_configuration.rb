@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_cors_configuration]
 def cors_configuration bucket_name:
-  # [START storage_cors_configuration]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -33,8 +33,8 @@ def cors_configuration bucket_name:
   end
 
   puts "Set CORS policies for bucket #{bucket_name}"
-  # [END storage_cors_configuration]
 end
+# [END storage_cors_configuration]
 
 if $PROGRAM_NAME == __FILE__
   cors_configuration bucket_name: ARGV.shift

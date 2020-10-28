@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_generate_signed_post_policy_v4]
 def generate_signed_post_policy_v4 bucket_name:, file_name:
-  # [START storage_generate_signed_post_policy_v4]
   # The ID of the GCS bucket to upload to
   # bucket_name = "your-unique-bucket-name"
 
@@ -39,7 +39,7 @@ def generate_signed_post_policy_v4 bucket_name:, file_name:
 
   puts "You can use the following form to upload an object to bucket #{bucket_name} for the next 10 minutes:\n"
   puts html_form
-  # [END storage_generate_signed_post_policy_v4]
 end
+# [END storage_generate_signed_post_policy_v4]
 
 generate_signed_post_policy_v4 bucket_name: ARGV.shift, file_name: ARGV.shift if $PROGRAM_NAME == __FILE__

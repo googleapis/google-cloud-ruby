@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_lock_retention_policy]
 def lock_retention_policy bucket_name:
-  # [START storage_lock_retention_policy]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -29,7 +29,7 @@ def lock_retention_policy bucket_name:
 
   puts "Retention policy for #{bucket_name} is now locked."
   puts "Retention policy effective as of #{bucket.retention_effective_at}."
-  # [END storage_lock_retention_policy]
 end
+# [END storage_lock_retention_policy]
 
 lock_retention_policy bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

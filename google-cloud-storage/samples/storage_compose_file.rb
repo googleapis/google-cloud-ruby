@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_compose_file]
 def compose_file bucket_name:, first_file_name:, second_file_name:, destination_file_name:
-  # [START storage_compose_file]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -36,8 +36,8 @@ def compose_file bucket_name:, first_file_name:, second_file_name:, destination_
   end
 
   puts "Composed new file #{destination.name} in the bucket #{bucket_name}"
-  # [END storage_compose_file]
 end
+# [END storage_compose_file]
 
 if $PROGRAM_NAME == __FILE__
   compose_file bucket_name:           ARGV.shift,

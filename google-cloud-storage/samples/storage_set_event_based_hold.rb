@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_set_event_based_hold]
 def set_event_based_hold bucket_name:, file_name:
-  # [START storage_set_event_based_hold]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -29,7 +29,7 @@ def set_event_based_hold bucket_name:, file_name:
   file.set_event_based_hold!
 
   puts "Event-based hold was set for #{file_name}."
-  # [END storage_set_event_based_hold]
 end
+# [END storage_set_event_based_hold]
 
 set_event_based_hold bucket_name: ARGV.shift, file_name: ARGV.shift if $PROGRAM_NAME == __FILE__

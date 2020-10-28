@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_change_file_storage_class]
 def change_file_storage_class bucket_name:, file_name:
-  # [START storage_change_file_storage_class]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -30,8 +30,8 @@ def change_file_storage_class bucket_name:, file_name:
   file.storage_class = "NEARLINE"
 
   puts "File #{file_name} in bucket #{bucket_name} had its storage class set to #{file.storage_class}"
-  # [END storage_change_file_storage_class]
 end
+# [END storage_change_file_storage_class]
 
 if $PROGRAM_NAME == __FILE__
   change_file_storage_class bucket_name: ARGV.shift, file_name: ARGV.shift

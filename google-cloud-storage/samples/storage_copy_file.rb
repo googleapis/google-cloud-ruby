@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_copy_file]
 def copy_file source_bucket_name:, source_file_name:, destination_bucket_name:, destination_file_name:
-  # [START storage_copy_file]
   # The ID of the bucket the original object is in
   # source_bucket_name = "source-bucket-name"
 
@@ -37,8 +37,8 @@ def copy_file source_bucket_name:, source_file_name:, destination_bucket_name:, 
 
   puts "#{file.name} in #{bucket.name} copied to " \
        "#{destination_file.name} in #{destination_bucket.name}"
-  # [END storage_copy_file]
 end
+# [END storage_copy_file]
 
 if $PROGRAM_NAME == __FILE__
   copy_file source_bucket_name:      ARGV.shift,

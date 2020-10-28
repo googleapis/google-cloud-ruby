@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_create_hmac_key]
 def create_hmac_key service_account_email:
-  # [START storage_create_hmac_key]
   # The service account email used to generate an HMAC key
   # service_account_email = "service-my-project-number@gs-project-accounts.iam.gserviceaccount.com"
 
@@ -35,7 +35,7 @@ def create_hmac_key service_account_email:
   puts "Created At:            #{hmac_key.created_at}"
   puts "Updated At:            #{hmac_key.updated_at}"
   puts "Etag:                  #{hmac_key.etag}"
-  # [END storage_create_hmac_key]
 end
+# [END storage_create_hmac_key]
 
 create_hmac_key service_account_email: ARGV.shift if $PROGRAM_NAME == __FILE__

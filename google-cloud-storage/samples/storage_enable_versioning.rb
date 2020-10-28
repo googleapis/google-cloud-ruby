@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_enable_versioning]
 def enable_versioning bucket_name:
-  # [START storage_enable_versioning]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -25,7 +25,7 @@ def enable_versioning bucket_name:
   bucket.versioning = true
 
   puts "Versioning was enabled for bucket #{bucket_name}"
-  # [END storage_enable_versioning]
 end
+# [END storage_enable_versioning]
 
 enable_versioning bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_enable_requester_pays]
 def enable_requester_pays bucket_name:
-  # [START storage_enable_requester_pays]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -25,7 +25,7 @@ def enable_requester_pays bucket_name:
   bucket.requester_pays = true
 
   puts "Requester pays has been enabled for #{bucket_name}"
-  # [END storage_enable_requester_pays]
 end
+# [END storage_enable_requester_pays]
 
 enable_requester_pays bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

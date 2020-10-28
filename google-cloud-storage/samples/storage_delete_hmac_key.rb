@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_delete_hmac_key]
 def delete_hmac_key access_id:
-  # [START storage_delete_hmac_key]
   # The access ID of the HMAC key
   # access_id = "GOOG0234230X00"
 
@@ -27,7 +27,7 @@ def delete_hmac_key access_id:
   hmac_key.delete!
 
   puts "The key is deleted, though it may still appear in Client#hmac_keys results."
-  # [END storage_delete_hmac_key]
 end
+# [END storage_delete_hmac_key]
 
 delete_hmac_key access_id: ARGV.shift if $PROGRAM_NAME == __FILE__

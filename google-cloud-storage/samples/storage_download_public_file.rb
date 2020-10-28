@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_download_public_file]
 def download_public_file bucket_name:, file_name:, local_file_path:
-  # [START storage_download_public_file]
   # The name of the bucket to access
   # bucket_name = "my-bucket"
 
@@ -32,8 +32,8 @@ def download_public_file bucket_name:, file_name:, local_file_path:
   file.download local_file_path
 
   puts "Downloaded public object #{file.name} from bucket #{bucket} to #{local_file_path}"
-  # [END storage_download_public_file]
 end
+# [END storage_download_public_file]
 
 if $PROGRAM_NAME == __FILE__
   download_public_file bucket_name: ARGV.shift, file_name: ARGV.shift, local_file_path: ARGV.shift

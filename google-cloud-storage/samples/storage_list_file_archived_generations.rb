@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_list_file_archived_generations]
 def list_file_archived_generations bucket_name:
-  # [START storage_list_file_archived_generations]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -25,7 +25,7 @@ def list_file_archived_generations bucket_name:
   bucket.files.each do |file|
     puts "#{file.name},#{file.generation}"
   end
-  # [END storage_list_file_archived_generations]
 end
+# [END storage_list_file_archived_generations]
 
 list_file_archived_generations bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

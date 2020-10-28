@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_remove_retention_policy]
 def remove_retention_policy bucket_name:
-  # [START storage_remove_retention_policy]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -28,7 +28,7 @@ def remove_retention_policy bucket_name:
   else
     puts "Policy is locked and retention policy can't be removed."
   end
-  # [END storage_remove_retention_policy]
 end
+# [END storage_remove_retention_policy]
 
 remove_retention_policy bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

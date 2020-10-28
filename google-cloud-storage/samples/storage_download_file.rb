@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_download_file]
 def download_file bucket_name:, file_name:, local_file_path:
-  # [START storage_download_file]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -32,7 +32,7 @@ def download_file bucket_name:, file_name:, local_file_path:
   file.download local_file_path
 
   puts "Downloaded #{file.name} to #{local_file_path}"
-  # [END storage_download_file]
 end
+# [END storage_download_file]
 
 download_file bucket_name: ARGV.shift, file_name: ARGV.shift, local_file_path: ARGV.shift if $PROGRAM_NAME == __FILE__

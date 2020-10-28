@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_move_file]
 def move_file bucket_name:, file_name:, new_name:
-  # [START storage_move_file]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -34,8 +34,8 @@ def move_file bucket_name:, file_name:, new_name:
   file.delete
 
   puts "#{file_name} has been renamed to #{renamed_file.name}"
-  # [END storage_move_file]
 end
+# [END storage_move_file]
 
 if $PROGRAM_NAME == __FILE__
   move_file bucket_name: ARGV.shift, file_name: ARGV.shift, new_name: ARGV.shift

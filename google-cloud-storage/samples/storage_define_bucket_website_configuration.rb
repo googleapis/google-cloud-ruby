@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_define_bucket_website_configuration]
 def define_bucket_website_configuration bucket_name:, main_page_suffix:, not_found_page:
-  # [START storage_define_bucket_website_configuration]
   # The ID of your static website bucket
   # bucket_name = "www.example.com"
 
@@ -35,8 +35,8 @@ def define_bucket_website_configuration bucket_name:, main_page_suffix:, not_fou
 
   puts "Static website bucket #{bucket_name} is set up to use #{main_page_suffix} as the index page and " \
        "#{not_found_page} as the 404 page"
-  # [END storage_define_bucket_website_configuration]
 end
+# [END storage_define_bucket_website_configuration]
 
 if $PROGRAM_NAME == __FILE__
   define_bucket_website_configuration bucket_name: ARGV.shift, main_page_suffix: ARGV.shift, not_found_page: ARGV.shift

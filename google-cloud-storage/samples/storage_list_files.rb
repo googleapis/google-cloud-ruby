@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_list_files]
 def list_files bucket_name:
-  # [START storage_list_files]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -25,7 +25,7 @@ def list_files bucket_name:
   bucket.files.each do |file|
     puts file.name
   end
-  # [END storage_list_files]
 end
+# [END storage_list_files]
 
 list_files bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

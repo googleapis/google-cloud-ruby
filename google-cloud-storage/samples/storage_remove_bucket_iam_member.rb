@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_remove_bucket_iam_member]
 def remove_bucket_iam_member bucket_name:
-  # [START storage_remove_bucket_iam_member]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -36,7 +36,7 @@ def remove_bucket_iam_member bucket_name:
   end
 
   puts "Removed #{member} with role #{role} from #{bucket_name}"
-  # [END storage_remove_bucket_iam_member]
 end
+# [END storage_remove_bucket_iam_member]
 
 remove_bucket_iam_member bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

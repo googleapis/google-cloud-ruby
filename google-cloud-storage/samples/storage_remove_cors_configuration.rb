@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_remove_cors_configuration]
 def remove_cors_configuration bucket_name:
-  # [START storage_remove_cors_configuration]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -27,8 +27,8 @@ def remove_cors_configuration bucket_name:
   end
 
   puts "Remove CORS policies for bucket #{bucket_name}"
-  # [END storage_remove_cors_configuration]
 end
+# [END storage_remove_cors_configuration]
 
 if $PROGRAM_NAME == __FILE__
   remove_cors_configuration bucket_name: ARGV.shift

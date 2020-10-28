@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_enable_bucket_lifecycle_management]
 def enable_bucket_lifecycle_management bucket_name:
-  # [START storage_enable_bucket_lifecycle_management]
   # Enable lifecycle management for a bucket
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
@@ -28,7 +28,7 @@ def enable_bucket_lifecycle_management bucket_name:
   end
 
   puts "Lifecycle management is enabled for bucket #{bucket_name} and the rules are #{rules}"
-  # [END storage_enable_bucket_lifecycle_management]
 end
+# [END storage_enable_bucket_lifecycle_management]
 
 enable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

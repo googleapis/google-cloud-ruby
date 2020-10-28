@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_get_metadata]
 def get_metadata bucket_name:, file_name:
-  # [START storage_get_metadata]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -53,7 +53,7 @@ def get_metadata bucket_name:, file_name:
   file.metadata.each do |key, value|
     puts " - #{key} = #{value}"
   end
-  # [END storage_get_metadata]
 end
+# [END storage_get_metadata]
 
 get_metadata bucket_name: ARGV.shift, file_name: ARGV.shift if $PROGRAM_NAME == __FILE__

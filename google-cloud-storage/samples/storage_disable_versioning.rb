@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_disable_versioning]
 def disable_versioning bucket_name:
-  # [START storage_disable_versioning]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -25,7 +25,7 @@ def disable_versioning bucket_name:
   bucket.versioning = false
 
   puts "Versioning was disabled for bucket #{bucket_name}"
-  # [END storage_disable_versioning]
 end
+# [END storage_disable_versioning]
 
 disable_versioning bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

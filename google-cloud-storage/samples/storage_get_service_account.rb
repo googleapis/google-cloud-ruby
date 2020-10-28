@@ -12,15 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_get_service_account]
 def get_service_account
-  # [START storage_get_service_account]
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
   email = storage.service_account_email
 
   puts "The GCS service account for project #{storage.project_id} is: #{email}"
-  # [END storage_get_service_account]
 end
+# [END storage_get_service_account]
 
 get_service_account if $PROGRAM_NAME == __FILE__

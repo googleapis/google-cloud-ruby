@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_set_bucket_default_kms_key]
 def set_bucket_default_kms_key bucket_name:, default_kms_key:
-  # [START storage_set_bucket_default_kms_key]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -28,7 +28,7 @@ def set_bucket_default_kms_key bucket_name:, default_kms_key:
   bucket.default_kms_key = default_kms_key
 
   puts "Default KMS key for #{bucket.name} was set to #{bucket.default_kms_key}"
-  # [END storage_set_bucket_default_kms_key]
 end
+# [END storage_set_bucket_default_kms_key]
 
 set_bucket_default_kms_key bucket_name: ARGV.shift, default_kms_key: ARGV.shift if $PROGRAM_NAME == __FILE__

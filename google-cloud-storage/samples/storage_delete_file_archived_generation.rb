@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_delete_file_archived_generation]
 def delete_file_archived_generation bucket_name:, file_name:, generation:
-  # [START storage_delete_file_archived_generation]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -33,8 +33,8 @@ def delete_file_archived_generation bucket_name:, file_name:, generation:
   file.delete generation: generation
 
   puts "Generation #{generation} of file #{file_name} was deleted from #{bucket_name}"
-  # [END storage_delete_file_archived_generation]
 end
+# [END storage_delete_file_archived_generation]
 
 if $PROGRAM_NAME == __FILE__
   delete_file_archived_generation bucket_name: ARGV.shift, file_name: ARGV.shift, generation: ARGV.shift

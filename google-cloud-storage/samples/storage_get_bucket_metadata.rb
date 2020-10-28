@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_get_bucket_metadata]
 def get_bucket_metadata bucket_name:
-  # [START storage_get_bucket_metadata]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -50,7 +50,7 @@ def get_bucket_metadata bucket_name:
   bucket.lifecycle.each do |rule|
     puts "#{rule.action} - #{rule.storage_class} - #{rule.age} - #{rule.matches_storage_class}"
   end
-  # [END storage_get_bucket_metadata]
 end
+# [END storage_get_bucket_metadata]
 
 get_bucket_metadata bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

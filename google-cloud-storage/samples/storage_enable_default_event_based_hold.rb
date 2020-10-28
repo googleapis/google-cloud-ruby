@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_enable_default_event_based_hold]
 def enable_default_event_based_hold bucket_name:
-  # [START storage_enable_default_event_based_hold]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -27,7 +27,7 @@ def enable_default_event_based_hold bucket_name:
   end
 
   puts "Default event-based hold was enabled for #{bucket_name}."
-  # [END storage_enable_default_event_based_hold]
 end
+# [END storage_enable_default_event_based_hold]
 
 enable_default_event_based_hold bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
