@@ -43,9 +43,27 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
       _(acl).must_be_kind_of Google::Cloud::Bigquery::Dataset::Access
       _(acl).wont_be :frozen?
 
+      # reader
+      refute acl.reader_user? "reader@example.com"
+      acl.add_reader_user "reader@example.com"
+      assert acl.reader_user? "reader@example.com"
+      acl.remove_reader_user "reader@example.com"
+      refute acl.reader_user? "reader@example.com"
+
+      # writer
       refute acl.writer_user? "writer@example.com"
       acl.add_writer_user "writer@example.com"
       assert acl.writer_user? "writer@example.com"
+      acl.remove_writer_user "writer@example.com"
+      refute acl.writer_user? "writer@example.com"
+      acl.add_writer_user "writer@example.com" # this entry goes into the request
+
+      # owner
+      refute acl.owner_user? "owner@example.com"
+      acl.add_owner_user "owner@example.com"
+      assert acl.owner_user? "owner@example.com"
+      acl.remove_owner_user "owner@example.com"
+      refute acl.owner_user? "owner@example.com"
     end
 
     _(dataset.access).must_be_kind_of Google::Cloud::Bigquery::Dataset::Access
@@ -66,9 +84,62 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
     mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
     dataset.access do |acl|
+      # reader
+      refute acl.reader_group? "readers@example.com"
+      acl.add_reader_group "readers@example.com"
+      assert acl.reader_group? "readers@example.com"
+      acl.remove_reader_group "readers@example.com"
+      refute acl.reader_group? "readers@example.com"
+
+      # writer
       refute acl.writer_group? "writers@example.com"
       acl.add_writer_group "writers@example.com"
       assert acl.writer_group? "writers@example.com"
+      acl.remove_writer_group "writers@example.com"
+      refute acl.writer_group? "writers@example.com"
+      acl.add_writer_group "writers@example.com" # this entry goes into the request
+
+      # owner
+      refute acl.owner_group? "owners@example.com"
+      acl.add_owner_group "owners@example.com"
+      assert acl.owner_group? "owners@example.com"
+      acl.remove_owner_group "owners@example.com"
+      refute acl.owner_group? "owners@example.com"
+    end
+    mock.verify
+  end
+
+  it "adds an access entry with specifying iam_member scope" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    updated_gapi = dataset_gapi.dup
+    new_access = Google::Apis::BigqueryV2::Dataset::Access.new role: "WRITER", iam_member: "writers@example.com"
+    updated_gapi.access = new_access
+    patch_gapi = Google::Apis::BigqueryV2::Dataset.new access: [new_access], etag: dataset_gapi.etag
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+
+    dataset.access do |acl|
+      # reader
+      refute acl.reader_iam_member? "readers@example.com"
+      acl.add_reader_iam_member "readers@example.com"
+      assert acl.reader_iam_member? "readers@example.com"
+      acl.remove_reader_iam_member "readers@example.com"
+      refute acl.reader_iam_member? "readers@example.com"
+
+      # writer
+      refute acl.writer_iam_member? "writers@example.com"
+      acl.add_writer_iam_member "writers@example.com"
+      assert acl.writer_iam_member? "writers@example.com"
+      acl.remove_writer_iam_member "writers@example.com"
+      refute acl.writer_iam_member? "writers@example.com"
+      acl.add_writer_iam_member "writers@example.com" # this entry goes into the request
+
+      # owner
+      refute acl.owner_iam_member? "owners@example.com"
+      acl.add_owner_iam_member "owners@example.com"
+      assert acl.owner_iam_member? "owners@example.com"
+      acl.remove_owner_iam_member "owners@example.com"
+      refute acl.owner_iam_member? "owners@example.com"
     end
     mock.verify
   end
@@ -83,9 +154,27 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
     mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
     dataset.access do |acl|
+      # reader
+      refute acl.reader_domain? "example.com"
+      acl.add_reader_domain "example.com"
+      assert acl.reader_domain? "example.com"
+      acl.remove_reader_domain "example.com"
+      refute acl.reader_domain? "example.com"
+
+      # writer
+      refute acl.writer_domain? "example.com"
+      acl.add_writer_domain "example.com"
+      assert acl.writer_domain? "example.com"
+      acl.remove_writer_domain "example.com"
+      refute acl.writer_domain? "example.com"
+
+      # owner
       refute acl.owner_domain? "example.com"
       acl.add_owner_domain "example.com"
       assert acl.owner_domain? "example.com"
+      acl.remove_owner_domain "example.com"
+      refute acl.owner_domain? "example.com"
+      acl.add_owner_domain "example.com" # this entry goes into the request
     end
     mock.verify
   end
@@ -100,9 +189,27 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
     mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
     dataset.access do |acl|
+      # writer
+      refute acl.writer_special? :all
+      acl.add_writer_special :all
+      assert acl.writer_special? :all
+      acl.remove_writer_special :all
+      refute acl.writer_special? :all
+
+      # owner
+      refute acl.owner_special? :all
+      acl.add_owner_special :all
+      assert acl.owner_special? :all
+      acl.remove_owner_special :all
+      refute acl.owner_special? :all
+
+      # reader
       refute acl.reader_special? :all
       acl.add_reader_special :all
       assert acl.reader_special? :all
+      acl.remove_reader_special :all
+      refute acl.reader_special? :all
+      acl.add_reader_special :all # this entry goes into the request
     end
     mock.verify
   end

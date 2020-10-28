@@ -48,16 +48,18 @@ module Google
 
           # @private
           SCOPES = {
-            "user"           => :user_by_email,
-            "user_by_email"  => :user_by_email,
-            "userByEmail"    => :user_by_email,
+            "domain"         => :domain,
             "group"          => :group_by_email,
             "group_by_email" => :group_by_email,
             "groupByEmail"   => :group_by_email,
-            "domain"         => :domain,
+            "iam_member"     => :iam_member,
+            "iamMember"      => :iam_member,
             "special"        => :special_group,
             "special_group"  => :special_group,
             "specialGroup"   => :special_group,
+            "user"           => :user_by_email,
+            "user_by_email"  => :user_by_email,
+            "userByEmail"    => :user_by_email,
             "view"           => :view
           }.freeze
 
@@ -148,6 +150,26 @@ module Google
           #
           def add_reader_group email
             add_access_role_scope_value :reader, :group, email
+          end
+
+          ##
+          # Add reader access to some other type of member that appears in the IAM
+          # Policy but isn't a user, group, domain, or special group.
+          #
+          # @param [String] identity The identity reference.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.add_reader_iam_member "entity@example.com"
+          #   end
+          #
+          def add_reader_iam_member identity
+            add_access_role_scope_value :reader, :iam_member, identity
           end
 
           ##
@@ -256,6 +278,26 @@ module Google
           end
 
           ##
+          # Add writer access to some other type of member that appears in the IAM
+          # Policy but isn't a user, group, domain, or special group.
+          #
+          # @param [String] identity The identity reference.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.add_writer_iam_member "entity@example.com"
+          #   end
+          #
+          def add_writer_iam_member identity
+            add_access_role_scope_value :writer, :iam_member, identity
+          end
+
+          ##
           # Add writer access to a domain.
           #
           # @param [String] domain A [Cloud Identity
@@ -334,6 +376,26 @@ module Google
           end
 
           ##
+          # Add owner access to some other type of member that appears in the IAM
+          # Policy but isn't a user, group, domain, or special group.
+          #
+          # @param [String] identity The identity reference.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.add_owner_iam_member "entity@example.com"
+          #   end
+          #
+          def add_owner_iam_member identity
+            add_access_role_scope_value :owner, :iam_member, identity
+          end
+
+          ##
           # Add owner access to a domain.
           #
           # @param [String] domain A [Cloud Identity
@@ -409,6 +471,26 @@ module Google
           #
           def remove_reader_group email
             remove_access_role_scope_value :reader, :group, email
+          end
+
+          ##
+          # Remove reader access from some other type of member that appears in the IAM
+          # Policy but isn't a user, group, domain, or special group.
+          #
+          # @param [String] identity The identity reference.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.remove_reader_iam_member "entity@example.com"
+          #   end
+          #
+          def remove_reader_iam_member identity
+            remove_access_role_scope_value :reader, :iam_member, identity
           end
 
           ##
@@ -517,6 +599,26 @@ module Google
           end
 
           ##
+          # Remove writer access from some other type of member that appears in the IAM
+          # Policy but isn't a user, group, domain, or special group.
+          #
+          # @param [String] identity The identity reference.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.remove_writer_iam_member "entity@example.com"
+          #   end
+          #
+          def remove_writer_iam_member identity
+            remove_access_role_scope_value :writer, :iam_member, identity
+          end
+
+          ##
           # Remove writer access from a domain.
           #
           # @param [String] domain A [Cloud Identity
@@ -595,6 +697,26 @@ module Google
           end
 
           ##
+          # Remove owner access from some other type of member that appears in the IAM
+          # Policy but isn't a user, group, domain, or special group.
+          #
+          # @param [String] identity The identity reference.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   dataset.access do |access|
+          #     access.remove_owner_iam_member "entity@example.com"
+          #   end
+          #
+          def remove_owner_iam_member identity
+            remove_access_role_scope_value :owner, :iam_member, identity
+          end
+
+          ##
           # Remove owner access from a domain.
           #
           # @param [String] domain A [Cloud Identity
@@ -668,6 +790,25 @@ module Google
           #
           def reader_group? email
             lookup_access_role_scope_value :reader, :group, email
+          end
+
+          ##
+          # Checks reader access for some other type of member that appears in the IAM
+          # Policy but isn't a user, group, domain, or special group.
+          #
+          # @param [String] identity The identity reference.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   access = dataset.access
+          #   access.reader_iam_member? "entity@example.com" #=> false
+          #
+          def reader_iam_member? identity
+            lookup_access_role_scope_value :reader, :iam_member, identity
           end
 
           ##
@@ -771,6 +912,25 @@ module Google
           end
 
           ##
+          # Checks writer access for some other type of member that appears in the IAM
+          # Policy but isn't a user, group, domain, or special group.
+          #
+          # @param [String] identity The identity reference.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   access = dataset.access
+          #   access.writer_iam_member? "entity@example.com" #=> false
+          #
+          def writer_iam_member? identity
+            lookup_access_role_scope_value :writer, :iam_member, identity
+          end
+
+          ##
           # Checks writer access for a domain.
           #
           # @param [String] domain A [Cloud Identity
@@ -842,6 +1002,25 @@ module Google
           #
           def owner_group? email
             lookup_access_role_scope_value :owner, :group, email
+          end
+
+          ##
+          # Checks owner access for some other type of member that appears in the IAM
+          # Policy but isn't a user, group, domain, or special group.
+          #
+          # @param [String] identity The identity reference.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   access = dataset.access
+          #   access.owner_iam_member? "entity@example.com" #=> false
+          #
+          def owner_iam_member? identity
+            lookup_access_role_scope_value :owner, :iam_member, identity
           end
 
           ##
