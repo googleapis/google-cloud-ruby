@@ -43,6 +43,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.billing.budgets.v1beta1.Filter" do
       repeated :projects, :string, 1
+      repeated :credit_types, :string, 7
       optional :credit_types_treatment, :enum, 4, "google.cloud.billing.budgets.v1beta1.Filter.CreditTypesTreatment"
       repeated :services, :string, 3
       repeated :subaccounts, :string, 5
@@ -52,6 +53,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CREDIT_TYPES_TREATMENT_UNSPECIFIED, 0
       value :INCLUDE_ALL_CREDITS, 1
       value :EXCLUDE_ALL_CREDITS, 2
+      value :INCLUDE_SPECIFIED_CREDITS, 3
     end
   end
 end
