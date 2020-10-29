@@ -153,8 +153,9 @@ module Google
           # @!attribute [rw] disable_default_iam_recipients
           #   @return [::Boolean]
           #     Optional. When set to true, disables default notifications sent when a
-          #     threshold is exceeded. Recipients are those with Billing Account
-          #     Administrators and Billing Account Users IAM roles for the target account.
+          #     threshold is exceeded. Default notifications are sent to those with Billing
+          #     Account Administrator and Billing Account User IAM roles for the target
+          #     account.
           class AllUpdatesRule
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -168,6 +169,15 @@ module Google
           #     included in the budget. If omitted, the report will include all usage for
           #     the billing account, regardless of which project the usage occurred on.
           #     Only zero or one project can be specified currently.
+          # @!attribute [rw] credit_types
+          #   @return [::Array<::String>]
+          #     Optional. A list of credit types to be subtracted from gross cost to
+          #     determine the spend for threshold calculations if and only if
+          #     credit_types_treatment is INCLUDE_SPECIFIED_CREDITS. If
+          #     credit_types_treatment is not INCLUDE_SPECIFIED_CREDITS, this field must be
+          #     empty. See credits.type at
+          #     https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#data-schema
+          #     for a list of acceptable credit type values in this field.
           # @!attribute [rw] credit_types_treatment
           #   @return [::Google::Cloud::Billing::Budgets::V1beta1::Filter::CreditTypesTreatment]
           #     Optional. If not set, default behavior is `INCLUDE_ALL_CREDITS`.
@@ -218,6 +228,10 @@ module Google
               # All types of credit are added to the net cost to determine the spend for
               # threshold calculations.
               EXCLUDE_ALL_CREDITS = 2
+
+              # Credit types specified in the credit_types field are subtracted from the
+              # gross cost to determine the spend for threshold calculations.
+              INCLUDE_SPECIFIED_CREDITS = 3
             end
           end
         end
