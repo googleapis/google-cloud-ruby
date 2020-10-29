@@ -18,6 +18,26 @@ require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/bigtable/admin/v2/bigtable_table_admin.proto", :syntax => :proto3) do
+    add_message "google.bigtable.admin.v2.RestoreTableRequest" do
+      optional :parent, :string, 1
+      optional :table_id, :string, 2
+      oneof :source do
+        optional :backup, :string, 3
+      end
+    end
+    add_message "google.bigtable.admin.v2.RestoreTableMetadata" do
+      optional :name, :string, 1
+      optional :source_type, :enum, 2, "google.bigtable.admin.v2.RestoreSourceType"
+      optional :optimize_table_operation_name, :string, 4
+      optional :progress, :message, 5, "google.bigtable.admin.v2.OperationProgress"
+      oneof :source_info do
+        optional :backup_info, :message, 3, "google.bigtable.admin.v2.BackupInfo"
+      end
+    end
+    add_message "google.bigtable.admin.v2.OptimizeRestoredTableMetadata" do
+      optional :name, :string, 1
+      optional :progress, :message, 2, "google.bigtable.admin.v2.OperationProgress"
+    end
     add_message "google.bigtable.admin.v2.CreateTableRequest" do
       optional :parent, :string, 1
       optional :table_id, :string, 2
@@ -124,12 +144,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :start_time, :message, 3, "google.protobuf.Timestamp"
       optional :end_time, :message, 4, "google.protobuf.Timestamp"
     end
-    add_message "google.bigtable.admin.v2.GetBackupRequest" do
-      optional :name, :string, 1
-    end
     add_message "google.bigtable.admin.v2.UpdateBackupRequest" do
       optional :backup, :message, 1, "google.bigtable.admin.v2.Backup"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.bigtable.admin.v2.GetBackupRequest" do
+      optional :name, :string, 1
     end
     add_message "google.bigtable.admin.v2.DeleteBackupRequest" do
       optional :name, :string, 1
@@ -145,26 +165,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :backups, :message, 1, "google.bigtable.admin.v2.Backup"
       optional :next_page_token, :string, 2
     end
-    add_message "google.bigtable.admin.v2.RestoreTableRequest" do
-      optional :parent, :string, 1
-      optional :table_id, :string, 2
-      oneof :source do
-        optional :backup, :string, 3
-      end
-    end
-    add_message "google.bigtable.admin.v2.RestoreTableMetadata" do
-      optional :name, :string, 1
-      optional :source_type, :enum, 2, "google.bigtable.admin.v2.RestoreSourceType"
-      optional :optimize_table_operation_name, :string, 4
-      optional :progress, :message, 5, "google.bigtable.admin.v2.OperationProgress"
-      oneof :source_info do
-        optional :backup_info, :message, 3, "google.bigtable.admin.v2.BackupInfo"
-      end
-    end
-    add_message "google.bigtable.admin.v2.OptimizeRestoredTableMetadata" do
-      optional :name, :string, 1
-      optional :progress, :message, 2, "google.bigtable.admin.v2.OperationProgress"
-    end
   end
 end
 
@@ -173,6 +173,9 @@ module Google
     module Bigtable
       module Admin
         module V2
+          RestoreTableRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.RestoreTableRequest").msgclass
+          RestoreTableMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.RestoreTableMetadata").msgclass
+          OptimizeRestoredTableMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.OptimizeRestoredTableMetadata").msgclass
           CreateTableRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateTableRequest").msgclass
           CreateTableRequest::Split = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateTableRequest.Split").msgclass
           CreateTableFromSnapshotRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateTableFromSnapshotRequest").msgclass
@@ -196,14 +199,11 @@ module Google
           CreateTableFromSnapshotMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateTableFromSnapshotMetadata").msgclass
           CreateBackupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateBackupRequest").msgclass
           CreateBackupMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateBackupMetadata").msgclass
-          GetBackupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetBackupRequest").msgclass
           UpdateBackupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateBackupRequest").msgclass
+          GetBackupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetBackupRequest").msgclass
           DeleteBackupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteBackupRequest").msgclass
           ListBackupsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListBackupsRequest").msgclass
           ListBackupsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListBackupsResponse").msgclass
-          RestoreTableRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.RestoreTableRequest").msgclass
-          RestoreTableMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.RestoreTableMetadata").msgclass
-          OptimizeRestoredTableMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.OptimizeRestoredTableMetadata").msgclass
         end
       end
     end

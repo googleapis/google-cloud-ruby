@@ -265,8 +265,8 @@ module Google
               #     Required. The unique name of the instance in which to create the table.
               #     Values are of the form `projects/{project}/instances/{instance}`.
               #   @param table_id [::String]
-              #     Required. The name by which the new table should be referred to within the
-              #     parent instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
+              #     Required. The name by which the new table should be referred to within the parent
+              #     instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
               #     Maximum 50 characters.
               #   @param table [::Google::Cloud::Bigtable::Admin::V2::Table, ::Hash]
               #     Required. The Table to create.
@@ -362,12 +362,12 @@ module Google
               #     Required. The unique name of the instance in which to create the table.
               #     Values are of the form `projects/{project}/instances/{instance}`.
               #   @param table_id [::String]
-              #     Required. The name by which the new table should be referred to within the
-              #     parent instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
+              #     Required. The name by which the new table should be referred to within the parent
+              #     instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
               #   @param source_snapshot [::String]
-              #     Required. The unique name of the snapshot from which to restore the table.
-              #     The snapshot and the table must be in the same instance. Values are of the
-              #     form
+              #     Required. The unique name of the snapshot from which to restore the table. The
+              #     snapshot and the table must be in the same instance.
+              #     Values are of the form
               #     `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/{snapshot}`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -435,8 +435,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The unique name of the instance for which tables should be
-              #     listed. Values are of the form `projects/{project}/instances/{instance}`.
+              #     Required. The unique name of the instance for which tables should be listed.
+              #     Values are of the form `projects/{project}/instances/{instance}`.
               #   @param view [::Google::Cloud::Bigtable::Admin::V2::Table::View]
               #     The view to be applied to the returned tables' fields.
               #     Only NAME_ONLY view (default) and REPLICATION_VIEW are supported.
@@ -664,10 +664,10 @@ module Google
               #     Values are of the form
               #     `projects/{project}/instances/{instance}/tables/{table}`.
               #   @param modifications [::Array<::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification, ::Hash>]
-              #     Required. Modifications to be atomically applied to the specified table's
-              #     families. Entries are applied in order, meaning that earlier modifications
-              #     can be masked by later ones (in the case of repeated updates to the same
-              #     family, for example).
+              #     Required. Modifications to be atomically applied to the specified table's families.
+              #     Entries are applied in order, meaning that earlier modifications can be
+              #     masked by later ones (in the case of repeated updates to the same family,
+              #     for example).
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigtable::Admin::V2::Table]
@@ -811,8 +811,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The unique name of the Table for which to create a consistency
-              #     token. Values are of the form
+              #     Required. The unique name of the Table for which to create a consistency token.
+              #     Values are of the form
               #     `projects/{project}/instances/{instance}/tables/{table}`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -881,8 +881,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The unique name of the Table for which to check replication
-              #     consistency. Values are of the form
+              #     Required. The unique name of the Table for which to check replication consistency.
+              #     Values are of the form
               #     `projects/{project}/instances/{instance}/tables/{table}`.
               #   @param consistency_token [::String]
               #     Required. The token created using GenerateConsistencyToken for the Table.
@@ -966,9 +966,9 @@ module Google
               #     Values are of the form
               #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
               #   @param snapshot_id [::String]
-              #     Required. The ID by which the new snapshot should be referred to within the
-              #     parent cluster, e.g., `mysnapshot` of the form:
-              #     `[_a-zA-Z0-9][-_.a-zA-Z0-9]*` rather than
+              #     Required. The ID by which the new snapshot should be referred to within the parent
+              #     cluster, e.g., `mysnapshot` of the form: `[_a-zA-Z0-9][-_.a-zA-Z0-9]*`
+              #     rather than
               #     `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/mysnapshot`.
               #   @param ttl [::Google::Protobuf::Duration, ::Hash]
               #     The amount of time that the new snapshot can stay active after it is
@@ -1123,8 +1123,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The unique name of the cluster for which snapshots should be
-              #     listed. Values are of the form
+              #     Required. The unique name of the cluster for which snapshots should be listed.
+              #     Values are of the form
               #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
               #     Use `{cluster} = '-'` to list snapshots for all clusters in an instance,
               #     e.g., `projects/{project}/instances/{instance}/clusters/-`.
@@ -1255,14 +1255,14 @@ module Google
               end
 
               ##
-              # Starts creating a new Cloud Bigtable Backup. The returned backup
+              # Starts creating a new Cloud Bigtable Backup.  The returned backup
               # {::Google::Longrunning::Operation long-running operation} can be used to
               # track creation of the backup. The
               # {::Google::Longrunning::Operation#metadata metadata} field type is
               # {::Google::Cloud::Bigtable::Admin::V2::CreateBackupMetadata CreateBackupMetadata}. The
               # {::Google::Longrunning::Operation#response response} field type is
-              # {::Google::Cloud::Bigtable::Admin::V2::Backup Backup}, if successful. Cancelling the
-              # returned operation will stop the creation and delete the backup.
+              # {::Google::Cloud::Bigtable::Admin::V2::Backup Backup}, if successful. Cancelling the returned operation will stop the
+              # creation and delete the backup.
               #
               # @overload create_backup(request, options = nil)
               #   Pass arguments to `create_backup` via a request object, either of type
@@ -1570,7 +1570,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The cluster to list backups from. Values are of the
+              #     Required. The cluster to list backups from.  Values are of the
               #     form `projects/{project}/instances/{instance}/clusters/{cluster}`.
               #     Use `{cluster} = '-'` to list backups for all clusters in an instance,
               #     e.g., `projects/{project}/instances/{instance}/clusters/-`.
@@ -1579,7 +1579,7 @@ module Google
               #     The expression must specify the field name, a comparison operator,
               #     and the value that you want to use for filtering. The value must be a
               #     string, a number, or a boolean. The comparison operator must be
-              #     <, >, <=, >=, !=, =, or :. Colon ‘:’ represents a HAS operator which is
+              #     <, >, <=, >=, !=, =, or :. Colon ':' represents a HAS operator which is
               #     roughly synonymous with equality. Filter rules are case insensitive.
               #
               #     The fields eligible for filtering are:
@@ -1609,9 +1609,8 @@ module Google
               #       * `size_bytes > 10000000000` --> The backup's size is greater than 10GB
               #   @param order_by [::String]
               #     An expression for specifying the sort order of the results of the request.
-              #     The string value should specify one or more fields in
-              #     {::Google::Cloud::Bigtable::Admin::V2::Backup Backup}. The full syntax is described at
-              #     https://aip.dev/132#ordering.
+              #     The string value should specify one or more fields in {::Google::Cloud::Bigtable::Admin::V2::Backup Backup}. The full
+              #     syntax is described at https://aip.dev/132#ordering.
               #
               #     Fields supported are:
               #        * name
@@ -1634,10 +1633,9 @@ module Google
               #     less, defaults to the server's maximum allowed page size.
               #   @param page_token [::String]
               #     If non-empty, `page_token` should contain a
-              #     {::Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse#next_page_token next_page_token}
-              #     from a previous
-              #     {::Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse ListBackupsResponse} to the
-              #     same `parent` and with the same `filter`.
+              #     {::Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse#next_page_token next_page_token} from a
+              #     previous {::Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse ListBackupsResponse} to the same `parent` and with the same
+              #     `filter`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigtable::Admin::V2::Backup>]
@@ -1687,11 +1685,11 @@ module Google
 
               ##
               # Create a new table by restoring from a completed backup. The new table
-              # must be in the same instance as the instance containing the backup. The
+              # must be in the same instance as the instance containing the backup.  The
               # returned table {::Google::Longrunning::Operation long-running operation} can
-              # be used to track the progress of the operation, and to cancel it. The
+              # be used to track the progress of the operation, and to cancel it.  The
               # {::Google::Longrunning::Operation#metadata metadata} field type is
-              # [RestoreTableMetadata][google.bigtable.admin.RestoreTableMetadata]. The
+              # [RestoreTableMetadata][google.bigtable.admin.RestoreTableMetadata].  The
               # {::Google::Longrunning::Operation#response response} type is
               # {::Google::Cloud::Bigtable::Admin::V2::Table Table}, if successful.
               #
@@ -1720,7 +1718,7 @@ module Google
               #     `parent` forms the full table name of the form
               #     `projects/<project>/instances/<instance>/tables/<table_id>`.
               #   @param backup [::String]
-              #     Name of the backup from which to restore. Values are of the form
+              #     Name of the backup from which to restore.  Values are of the form
               #     `projects/<project>/instances/<instance>/clusters/<cluster>/backups/<backup>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -1770,7 +1768,7 @@ module Google
               end
 
               ##
-              # Gets the access control policy for a resource.
+              # Gets the access control policy for a Table or Backup resource.
               # Returns an empty policy if the resource exists but does not have a policy
               # set.
               #
@@ -1915,7 +1913,7 @@ module Google
               end
 
               ##
-              # Returns permissions that the caller has on the specified table resource.
+              # Returns permissions that the caller has on the specified Table or Backup resource.
               #
               # @overload test_iam_permissions(request, options = nil)
               #   Pass arguments to `test_iam_permissions` via a request object, either of type

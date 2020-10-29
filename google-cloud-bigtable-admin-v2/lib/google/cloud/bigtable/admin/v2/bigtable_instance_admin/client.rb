@@ -1391,7 +1391,7 @@ module Google
               #     Required. The unique name of the app profile to be deleted. Values are of the form
               #     `projects/{project}/instances/{instance}/appProfiles/{app_profile}`.
               #   @param ignore_warnings [::Boolean]
-              #     If true, ignore safety checks when deleting the app profile.
+              #     Required. If true, ignore safety checks when deleting the app profile.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]
