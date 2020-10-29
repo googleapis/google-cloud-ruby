@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.3 / 2020-10-29
+
+#### Bug Fixes
+
+* Configure retry and timeout for insight-related calls
+
 ### 0.5.2 / 2020-08-10
 
 #### Bug Fixes
