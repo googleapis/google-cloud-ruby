@@ -1,5 +1,21 @@
 # Release History
 
+### 1.24.0 / 2020-10-29
+
+#### Features
+
+* Add iamMember to Dataset::Access
+
+#### Bug Fixes
+
+* Ensure dense encoding of JSON responses
+  * Set query param prettyPrint=false for all requests.
+  * Upgrade google-api-client to ~> 0.47
+
+#### Documentation
+
+* Update supported types for time partition type
+
 ### 1.23.0 / 2020-09-17
 
 #### Features
