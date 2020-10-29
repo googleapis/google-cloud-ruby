@@ -360,7 +360,7 @@ module Google
           #     `projects/{project}/instances/{instance}/appProfiles/{app_profile}`.
           # @!attribute [rw] ignore_warnings
           #   @return [::Boolean]
-          #     If true, ignore safety checks when deleting the app profile.
+          #     Required. If true, ignore safety checks when deleting the app profile.
           class DeleteAppProfileRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
