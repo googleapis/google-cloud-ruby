@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "87474d201fc89ebc5e7f54efbcbcf29e03ee9c58"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "8fd12a741a3c99a2b42e19d966fbeb2587c35c9c"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "a9f96addccbc3fb0c5f334f6c6af68e7dadd9606",
-        "internalRef": "339327033"
+        "sha": "ab0498dc4bd2bcfcb70ab257e8edfa00f86083a6",
+        "internalRef": "339531446"
       }
     }
   ],
@@ -26,5 +26,42 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-workflows-v1beta.gemspec",
+    "lib/google-cloud-workflows-v1beta.rb",
+    "lib/google/cloud/workflows/v1beta.rb",
+    "lib/google/cloud/workflows/v1beta/version.rb",
+    "lib/google/cloud/workflows/v1beta/workflows.rb",
+    "lib/google/cloud/workflows/v1beta/workflows/client.rb",
+    "lib/google/cloud/workflows/v1beta/workflows/credentials.rb",
+    "lib/google/cloud/workflows/v1beta/workflows/operations.rb",
+    "lib/google/cloud/workflows/v1beta/workflows/paths.rb",
+    "lib/google/cloud/workflows/v1beta/workflows_pb.rb",
+    "lib/google/cloud/workflows/v1beta/workflows_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/workflows/v1beta/workflows.rb",
+    "proto_docs/google/longrunning/operations.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/rpc/status.rb",
+    "test/google/cloud/workflows/v1beta/workflows_operations_test.rb",
+    "test/google/cloud/workflows/v1beta/workflows_paths_test.rb",
+    "test/google/cloud/workflows/v1beta/workflows_test.rb",
+    "test/helper.rb"
   ]
 }
