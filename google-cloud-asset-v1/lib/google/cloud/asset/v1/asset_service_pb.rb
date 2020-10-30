@@ -131,6 +131,71 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :results, :message, 1, "google.cloud.asset.v1.IamPolicySearchResult"
       optional :next_page_token, :string, 2
     end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisQuery" do
+      optional :scope, :string, 1
+      optional :resource_selector, :message, 2, "google.cloud.asset.v1.IamPolicyAnalysisQuery.ResourceSelector"
+      optional :identity_selector, :message, 3, "google.cloud.asset.v1.IamPolicyAnalysisQuery.IdentitySelector"
+      optional :access_selector, :message, 4, "google.cloud.asset.v1.IamPolicyAnalysisQuery.AccessSelector"
+      optional :options, :message, 5, "google.cloud.asset.v1.IamPolicyAnalysisQuery.Options"
+    end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisQuery.ResourceSelector" do
+      optional :full_resource_name, :string, 1
+    end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisQuery.IdentitySelector" do
+      optional :identity, :string, 1
+    end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisQuery.AccessSelector" do
+      repeated :roles, :string, 1
+      repeated :permissions, :string, 2
+    end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisQuery.Options" do
+      optional :expand_groups, :bool, 1
+      optional :expand_roles, :bool, 2
+      optional :expand_resources, :bool, 3
+      optional :output_resource_edges, :bool, 4
+      optional :output_group_edges, :bool, 5
+      optional :analyze_service_account_impersonation, :bool, 6
+    end
+    add_message "google.cloud.asset.v1.AnalyzeIamPolicyRequest" do
+      optional :analysis_query, :message, 1, "google.cloud.asset.v1.IamPolicyAnalysisQuery"
+      optional :execution_timeout, :message, 2, "google.protobuf.Duration"
+    end
+    add_message "google.cloud.asset.v1.AnalyzeIamPolicyResponse" do
+      optional :main_analysis, :message, 1, "google.cloud.asset.v1.AnalyzeIamPolicyResponse.IamPolicyAnalysis"
+      repeated :service_account_impersonation_analysis, :message, 2, "google.cloud.asset.v1.AnalyzeIamPolicyResponse.IamPolicyAnalysis"
+      optional :fully_explored, :bool, 3
+    end
+    add_message "google.cloud.asset.v1.AnalyzeIamPolicyResponse.IamPolicyAnalysis" do
+      optional :analysis_query, :message, 1, "google.cloud.asset.v1.IamPolicyAnalysisQuery"
+      repeated :analysis_results, :message, 2, "google.cloud.asset.v1.IamPolicyAnalysisResult"
+      optional :fully_explored, :bool, 3
+      repeated :non_critical_errors, :message, 5, "google.cloud.asset.v1.IamPolicyAnalysisState"
+    end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisOutputConfig" do
+      oneof :destination do
+        optional :gcs_destination, :message, 1, "google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.GcsDestination"
+        optional :bigquery_destination, :message, 2, "google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.BigQueryDestination"
+      end
+    end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.GcsDestination" do
+      optional :uri, :string, 1
+    end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.BigQueryDestination" do
+      optional :dataset, :string, 1
+      optional :table_prefix, :string, 2
+      optional :partition_key, :enum, 3, "google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.BigQueryDestination.PartitionKey"
+      optional :write_disposition, :string, 4
+    end
+    add_enum "google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.BigQueryDestination.PartitionKey" do
+      value :PARTITION_KEY_UNSPECIFIED, 0
+      value :REQUEST_TIME, 1
+    end
+    add_message "google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest" do
+      optional :analysis_query, :message, 1, "google.cloud.asset.v1.IamPolicyAnalysisQuery"
+      optional :output_config, :message, 2, "google.cloud.asset.v1.IamPolicyAnalysisOutputConfig"
+    end
+    add_message "google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse" do
+    end
     add_enum "google.cloud.asset.v1.ContentType" do
       value :CONTENT_TYPE_UNSPECIFIED, 0
       value :RESOURCE, 1
@@ -169,6 +234,20 @@ module Google
         SearchAllResourcesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.SearchAllResourcesResponse").msgclass
         SearchAllIamPoliciesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.SearchAllIamPoliciesRequest").msgclass
         SearchAllIamPoliciesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.SearchAllIamPoliciesResponse").msgclass
+        IamPolicyAnalysisQuery = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisQuery").msgclass
+        IamPolicyAnalysisQuery::ResourceSelector = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisQuery.ResourceSelector").msgclass
+        IamPolicyAnalysisQuery::IdentitySelector = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisQuery.IdentitySelector").msgclass
+        IamPolicyAnalysisQuery::AccessSelector = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisQuery.AccessSelector").msgclass
+        IamPolicyAnalysisQuery::Options = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisQuery.Options").msgclass
+        AnalyzeIamPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeIamPolicyRequest").msgclass
+        AnalyzeIamPolicyResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeIamPolicyResponse").msgclass
+        AnalyzeIamPolicyResponse::IamPolicyAnalysis = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeIamPolicyResponse.IamPolicyAnalysis").msgclass
+        IamPolicyAnalysisOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisOutputConfig").msgclass
+        IamPolicyAnalysisOutputConfig::GcsDestination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.GcsDestination").msgclass
+        IamPolicyAnalysisOutputConfig::BigQueryDestination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.BigQueryDestination").msgclass
+        IamPolicyAnalysisOutputConfig::BigQueryDestination::PartitionKey = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.BigQueryDestination.PartitionKey").enummodule
+        AnalyzeIamPolicyLongrunningRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest").msgclass
+        AnalyzeIamPolicyLongrunningResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse").msgclass
         ContentType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ContentType").enummodule
       end
     end

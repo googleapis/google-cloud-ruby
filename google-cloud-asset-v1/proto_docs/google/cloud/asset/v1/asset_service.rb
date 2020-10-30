@@ -625,6 +625,329 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # IAM policy analysis query message.
+        # @!attribute [rw] scope
+        #   @return [::String]
+        #     Required. The relative name of the root asset. Only resources and IAM policies within
+        #     the scope will be analyzed.
+        #
+        #     This can only be an organization number (such as "organizations/123"), a
+        #     folder number (such as "folders/123"), a project ID (such as
+        #     "projects/my-project-id"), or a project number (such as "projects/12345").
+        #
+        #     To know how to get organization id, visit [here
+        #     ](https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
+        #
+        #     To know how to get folder or project id, visit [here
+        #     ](https://cloud.google.com/resource-manager/docs/creating-managing-folders#viewing_or_listing_folders_and_projects).
+        # @!attribute [rw] resource_selector
+        #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery::ResourceSelector]
+        #     Optional. Specifies a resource for analysis.
+        # @!attribute [rw] identity_selector
+        #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery::IdentitySelector]
+        #     Optional. Specifies an identity for analysis.
+        # @!attribute [rw] access_selector
+        #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery::AccessSelector]
+        #     Optional. Specifies roles or permissions for analysis. This is optional.
+        # @!attribute [rw] options
+        #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery::Options]
+        #     Optional. The query options.
+        class IamPolicyAnalysisQuery
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the resource to analyze for access policies, which may be set
+          # directly on the resource, or on ancestors such as organizations, folders or
+          # projects.
+          # @!attribute [rw] full_resource_name
+          #   @return [::String]
+          #     Required. The [full resource name]
+          #     (https://cloud.google.com/asset-inventory/docs/resource-name-format)
+          #     of a resource of [supported resource
+          #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#analyzable_asset_types).
+          class ResourceSelector
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Specifies an identity for which to determine resource access, based on
+          # roles assigned either directly to them or to the groups they belong to,
+          # directly or indirectly.
+          # @!attribute [rw] identity
+          #   @return [::String]
+          #     Required. The identity appear in the form of members in
+          #     [IAM policy
+          #     binding](https://cloud.google.com/iam/reference/rest/v1/Binding).
+          #
+          #     The examples of supported forms are:
+          #     "user:mike@example.com",
+          #     "group:admins@example.com",
+          #     "domain:google.com",
+          #     "serviceAccount:my-project-id@appspot.gserviceaccount.com".
+          #
+          #     Notice that wildcard characters (such as * and ?) are not supported.
+          #     You must give a specific identity.
+          class IdentitySelector
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Specifies roles and/or permissions to analyze, to determine both the
+          # identities possessing them and the resources they control. If multiple
+          # values are specified, results will include roles or permissions matching
+          # any of them. The total number of roles and permissions should be equal or
+          # less than 10.
+          # @!attribute [rw] roles
+          #   @return [::Array<::String>]
+          #     Optional. The roles to appear in result.
+          # @!attribute [rw] permissions
+          #   @return [::Array<::String>]
+          #     Optional. The permissions to appear in result.
+          class AccessSelector
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Contains query options.
+          # @!attribute [rw] expand_groups
+          #   @return [::Boolean]
+          #     Optional. If true, the identities section of the result will expand any
+          #     Google groups appearing in an IAM policy binding.
+          #
+          #     If {::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery#identity_selector IamPolicyAnalysisQuery.identity_selector} is specified, the
+          #     identity in the result will be determined by the selector, and this flag
+          #     is not allowed to set.
+          #
+          #     Default is false.
+          # @!attribute [rw] expand_roles
+          #   @return [::Boolean]
+          #     Optional. If true, the access section of result will expand any roles
+          #     appearing in IAM policy bindings to include their permissions.
+          #
+          #     If {::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery#access_selector IamPolicyAnalysisQuery.access_selector} is specified, the access
+          #     section of the result will be determined by the selector, and this flag
+          #     is not allowed to set.
+          #
+          #     Default is false.
+          # @!attribute [rw] expand_resources
+          #   @return [::Boolean]
+          #     Optional. If true and {::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery#resource_selector IamPolicyAnalysisQuery.resource_selector} is not
+          #     specified, the resource section of the result will expand any resource
+          #     attached to an IAM policy to include resources lower in the resource
+          #     hierarchy.
+          #
+          #     For example, if the request analyzes for which resources user A has
+          #     permission P, and the results include an IAM policy with P on a GCP
+          #     folder, the results will also include resources in that folder with
+          #     permission P.
+          #
+          #     If true and {::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery#resource_selector IamPolicyAnalysisQuery.resource_selector} is specified,
+          #     the resource section of the result will expand the specified resource to
+          #     include resources lower in the resource hierarchy. Only project or
+          #     lower resources are supported. Folder and organization resource cannot be
+          #     used together with this option.
+          #
+          #     For example, if the request analyzes for which users have permission P on
+          #     a GCP project with this option enabled, the results will include all
+          #     users who have permission P on that project or any lower resource.
+          #
+          #     Default is false.
+          # @!attribute [rw] output_resource_edges
+          #   @return [::Boolean]
+          #     Optional. If true, the result will output resource edges, starting
+          #     from the policy attached resource, to any expanded resources.
+          #     Default is false.
+          # @!attribute [rw] output_group_edges
+          #   @return [::Boolean]
+          #     Optional. If true, the result will output group identity edges, starting
+          #     from the binding's group members, to any expanded identities.
+          #     Default is false.
+          # @!attribute [rw] analyze_service_account_impersonation
+          #   @return [::Boolean]
+          #     Optional. If true, the response will include access analysis from identities to
+          #     resources via service account impersonation. This is a very expensive
+          #     operation, because many derived queries will be executed. We highly
+          #     recommend you use {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy_longrunning AssetService.AnalyzeIamPolicyLongrunning} rpc
+          #     instead.
+          #
+          #     For example, if the request analyzes for which resources user A has
+          #     permission P, and there's an IAM policy states user A has
+          #     iam.serviceAccounts.getAccessToken permission to a service account SA,
+          #     and there's another IAM policy states service account SA has permission P
+          #     to a GCP folder F, then user A potentially has access to the GCP folder
+          #     F. And those advanced analysis results will be included in
+          #     {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse#service_account_impersonation_analysis AnalyzeIamPolicyResponse.service_account_impersonation_analysis}.
+          #
+          #     Another example, if the request analyzes for who has
+          #     permission P to a GCP folder F, and there's an IAM policy states user A
+          #     has iam.serviceAccounts.actAs permission to a service account SA, and
+          #     there's another IAM policy states service account SA has permission P to
+          #     the GCP folder F, then user A potentially has access to the GCP folder
+          #     F. And those advanced analysis results will be included in
+          #     {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse#service_account_impersonation_analysis AnalyzeIamPolicyResponse.service_account_impersonation_analysis}.
+          #
+          #     Default is false.
+          class Options
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A request message for {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy AssetService.AnalyzeIamPolicy}.
+        # @!attribute [rw] analysis_query
+        #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery]
+        #     Required. The request query.
+        # @!attribute [rw] execution_timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. Amount of time executable has to complete.  See JSON representation of
+        #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json).
+        #
+        #     If this field is set with a value less than the RPC deadline, and the
+        #     execution of your query hasn't finished in the specified
+        #     execution timeout,  you will get a response with partial result.
+        #     Otherwise, your query's execution will continue until the RPC deadline.
+        #     If it's not finished until then, you will get a  DEADLINE_EXCEEDED error.
+        #
+        #     Default is empty.
+        class AnalyzeIamPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A response message for {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy AssetService.AnalyzeIamPolicy}.
+        # @!attribute [rw] main_analysis
+        #   @return [::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse::IamPolicyAnalysis]
+        #     The main analysis that matches the original request.
+        # @!attribute [rw] service_account_impersonation_analysis
+        #   @return [::Array<::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse::IamPolicyAnalysis>]
+        #     The service account impersonation analysis if
+        #     [AnalyzeIamPolicyRequest.analyze_service_account_impersonation][] is
+        #     enabled.
+        # @!attribute [rw] fully_explored
+        #   @return [::Boolean]
+        #     Represents whether all entries in the {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse#main_analysis main_analysis} and
+        #     {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse#service_account_impersonation_analysis service_account_impersonation_analysis} have been fully explored to
+        #     answer the query in the request.
+        class AnalyzeIamPolicyResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # An analysis message to group the query and results.
+          # @!attribute [rw] analysis_query
+          #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery]
+          #     The analysis query.
+          # @!attribute [rw] analysis_results
+          #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult>]
+          #     A list of {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult IamPolicyAnalysisResult} that matches the analysis query, or
+          #     empty if no result is found.
+          # @!attribute [rw] fully_explored
+          #   @return [::Boolean]
+          #     Represents whether all entries in the {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse::IamPolicyAnalysis#analysis_results analysis_results} have been
+          #     fully explored to answer the query.
+          # @!attribute [rw] non_critical_errors
+          #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisState>]
+          #     A list of non-critical errors happened during the query handling.
+          class IamPolicyAnalysis
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Output configuration for export IAM policy analysis destination.
+        # @!attribute [rw] gcs_destination
+        #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig::GcsDestination]
+        #     Destination on Cloud Storage.
+        # @!attribute [rw] bigquery_destination
+        #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig::BigQueryDestination]
+        #     Destination on BigQuery.
+        class IamPolicyAnalysisOutputConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A Cloud Storage location.
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     Required. The uri of the Cloud Storage object. It's the same uri that is used by
+          #     gsutil. For example: "gs://bucket_name/object_name". See
+          #     [Quickstart: Using the gsutil tool]
+          #     (https://cloud.google.com/storage/docs/quickstart-gsutil) for examples.
+          class GcsDestination
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A BigQuery destination.
+          # @!attribute [rw] dataset
+          #   @return [::String]
+          #     Required. The BigQuery dataset in format "projects/projectId/datasets/datasetId",
+          #     to which the analysis results should be exported. If this dataset does
+          #     not exist, the export call will return an INVALID_ARGUMENT error.
+          # @!attribute [rw] table_prefix
+          #   @return [::String]
+          #     Required. The prefix of the BigQuery tables to which the analysis results will be
+          #     written. Tables will be created based on this table_prefix if not exist:
+          #     * <table_prefix>_analysis table will contain export operation's metadata.
+          #     * <table_prefix>_analysis_result will contain all the
+          #       {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult IamPolicyAnalysisResult}.
+          #     When [partition_key] is specified, both tables will be partitioned based
+          #     on the [partition_key].
+          # @!attribute [rw] partition_key
+          #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig::BigQueryDestination::PartitionKey]
+          #     The partition key for BigQuery partitioned table.
+          # @!attribute [rw] write_disposition
+          #   @return [::String]
+          #     Optional. Specifies the action that occurs if the destination table or partition
+          #     already exists. The following values are supported:
+          #
+          #     * WRITE_TRUNCATE: If the table or partition already exists, BigQuery
+          #     overwrites the entire table or all the partitions data.
+          #     * WRITE_APPEND: If the table or partition already exists, BigQuery
+          #     appends the data to the table or the latest partition.
+          #     * WRITE_EMPTY: If the table already exists and contains data, an error is
+          #     returned.
+          #
+          #     The default value is WRITE_APPEND. Each action is atomic and only occurs
+          #     if BigQuery is able to complete the job successfully. Details are at
+          #     https://cloud.google.com/bigquery/docs/loading-data-local#appending_to_or_overwriting_a_table_using_a_local_file.
+          class BigQueryDestination
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # This enum determines the partition key column for the bigquery tables.
+            # Partitioning can improve query performance and reduce query cost by
+            # filtering partitions. Refer to
+            # https://cloud.google.com/bigquery/docs/partitioned-tables for details.
+            module PartitionKey
+              # Unspecified partition key. Tables won't be partitioned using this
+              # option.
+              PARTITION_KEY_UNSPECIFIED = 0
+
+              # The time when the request is received. If specified as partition key,
+              # the result table(s) is partitoned by the RequestTime column, an
+              # additional timestamp column representing when the request was received.
+              REQUEST_TIME = 1
+            end
+          end
+        end
+
+        # A request message for {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy_longrunning AssetService.AnalyzeIamPolicyLongrunning}.
+        # @!attribute [rw] analysis_query
+        #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery]
+        #     Required. The request query.
+        # @!attribute [rw] output_config
+        #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig]
+        #     Required. Output configuration indicating where the results will be output to.
+        class AnalyzeIamPolicyLongrunningRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A response message for {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy_longrunning AssetService.AnalyzeIamPolicyLongrunning}.
+        class AnalyzeIamPolicyLongrunningResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Asset content type.
         module ContentType
           # Unspecified content type.
