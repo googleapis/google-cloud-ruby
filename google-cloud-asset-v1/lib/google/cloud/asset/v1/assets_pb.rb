@@ -80,6 +80,45 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions" do
       repeated :permissions, :string, 1
     end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisState" do
+      optional :code, :enum, 1, "google.rpc.Code"
+      optional :cause, :string, 2
+    end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisResult" do
+      optional :attached_resource_full_name, :string, 1
+      optional :iam_binding, :message, 2, "google.iam.v1.Binding"
+      repeated :access_control_lists, :message, 3, "google.cloud.asset.v1.IamPolicyAnalysisResult.AccessControlList"
+      optional :identity_list, :message, 4, "google.cloud.asset.v1.IamPolicyAnalysisResult.IdentityList"
+      optional :fully_explored, :bool, 5
+    end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisResult.Resource" do
+      optional :full_resource_name, :string, 1
+      optional :analysis_state, :message, 2, "google.cloud.asset.v1.IamPolicyAnalysisState"
+    end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisResult.Access" do
+      optional :analysis_state, :message, 3, "google.cloud.asset.v1.IamPolicyAnalysisState"
+      oneof :oneof_access do
+        optional :role, :string, 1
+        optional :permission, :string, 2
+      end
+    end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisResult.Identity" do
+      optional :name, :string, 1
+      optional :analysis_state, :message, 2, "google.cloud.asset.v1.IamPolicyAnalysisState"
+    end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisResult.Edge" do
+      optional :source_node, :string, 1
+      optional :target_node, :string, 2
+    end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisResult.AccessControlList" do
+      repeated :resources, :message, 1, "google.cloud.asset.v1.IamPolicyAnalysisResult.Resource"
+      repeated :accesses, :message, 2, "google.cloud.asset.v1.IamPolicyAnalysisResult.Access"
+      repeated :resource_edges, :message, 3, "google.cloud.asset.v1.IamPolicyAnalysisResult.Edge"
+    end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisResult.IdentityList" do
+      repeated :identities, :message, 1, "google.cloud.asset.v1.IamPolicyAnalysisResult.Identity"
+      repeated :group_edges, :message, 2, "google.cloud.asset.v1.IamPolicyAnalysisResult.Edge"
+    end
   end
 end
 
@@ -96,6 +135,14 @@ module Google
         IamPolicySearchResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicySearchResult").msgclass
         IamPolicySearchResult::Explanation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicySearchResult.Explanation").msgclass
         IamPolicySearchResult::Explanation::Permissions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions").msgclass
+        IamPolicyAnalysisState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisState").msgclass
+        IamPolicyAnalysisResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisResult").msgclass
+        IamPolicyAnalysisResult::Resource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisResult.Resource").msgclass
+        IamPolicyAnalysisResult::Access = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisResult.Access").msgclass
+        IamPolicyAnalysisResult::Identity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisResult.Identity").msgclass
+        IamPolicyAnalysisResult::Edge = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisResult.Edge").msgclass
+        IamPolicyAnalysisResult::AccessControlList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisResult.AccessControlList").msgclass
+        IamPolicyAnalysisResult::IdentityList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisResult.IdentityList").msgclass
       end
     end
   end
