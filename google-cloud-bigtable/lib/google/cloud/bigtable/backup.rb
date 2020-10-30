@@ -18,6 +18,7 @@
 require "google/cloud/bigtable/backup/job"
 require "google/cloud/bigtable/backup/list"
 require "google/cloud/bigtable/convert"
+require "google/cloud/bigtable/policy"
 require "google/cloud/bigtable/table/restore_job"
 
 
@@ -204,6 +205,126 @@ module Google
         #
         def ready?
           state == :READY
+        end
+
+        ##
+        # Gets the [Cloud IAM](https://cloud.google.com/iam/) access control
+        # policy for the backup.
+        #
+        # @see https://cloud.google.com/bigtable/docs/access-control
+        #
+        # @yield [policy] A block for updating the policy. The latest policy
+        #   will be read from the Bigtable service and passed to the block. After
+        #   the block completes, the modified policy will be written to the
+        #   service.
+        # @yieldparam [Policy] policy the current Cloud IAM Policy for this
+        #   backup.
+        #
+        # @return [Policy] The current Cloud IAM Policy for the backup.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   instance = bigtable.instance("my-instance")
+        #   cluster = instance.cluster("my-cluster")
+        #
+        #   backup = cluster.backup("my-backup")
+        #
+        #   policy = backup.policy
+        #
+        # @example Update the policy by passing a block.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   instance = bigtable.instance("my-instance")
+        #   cluster = instance.cluster("my-cluster")
+        #
+        #   backup = cluster.backup("my-backup")
+        #
+        #   backup.policy do |p|
+        #     p.add("roles/owner", "user:owner@example.com")
+        #   end # 2 API calls
+        #
+        def policy
+          ensure_service!
+          grpc = service.get_backup_policy instance_id, cluster_id, backup_id
+          policy = Policy.from_grpc grpc
+          return policy unless block_given?
+          yield policy
+          update_policy policy
+        end
+
+        ##
+        # Updates the [Cloud IAM](https://cloud.google.com/iam/) access control
+        # policy for the backup. The policy should be read from {#policy}.
+        # See {Google::Cloud::Bigtable::Policy} for an explanation of the policy
+        # `etag` property and how to modify policies.
+        #
+        # You can also update the policy by passing a block to {#policy}, which
+        # will call this method internally after the block completes.
+        #
+        # @param new_policy [Policy] a new or modified Cloud IAM Policy for this
+        #   backup
+        #
+        # @return [Policy] The policy returned by the API update operation.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   instance = bigtable.instance("my-instance")
+        #   cluster = instance.cluster("my-cluster")
+        #
+        #   backup = cluster.backup("my-backup")
+        #
+        #   policy = backup.policy
+        #   policy.add("roles/owner", "user:owner@example.com")
+        #   updated_policy = backup.update_policy(policy)
+        #
+        #   puts updated_policy.roles
+        #
+        def update_policy new_policy
+          ensure_service!
+          grpc = service.set_backup_policy instance_id, cluster_id, backup_id, new_policy.to_grpc
+          Policy.from_grpc grpc
+        end
+        alias policy= update_policy
+
+        ##
+        # Tests the specified permissions against the [Cloud
+        # IAM](https://cloud.google.com/iam/) access control policy.
+        #
+        # @see https://cloud.google.com/iam/docs/managing-policies Managing Policies
+        # @see https://cloud.google.com/bigtable/docs/access-control Access Control
+        #
+        # @param permissions [String, Array<String>] permissions The set of permissions to
+        #   check access for. Permissions with wildcards (such as `*` or `bigtable.*`) are
+        #   not allowed.
+        #   See [Access Control](https://cloud.google.com/bigtable/docs/access-control).
+        #
+        # @return [Array<String>] The permissions that are configured for the policy.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   instance = bigtable.instance("my-instance")
+        #   cluster = instance.cluster("my-cluster")
+        #
+        #   backup = cluster.backup("my-backup")
+        #
+        #   permissions = backup.test_iam_permissions(
+        #     "bigtable.backups.delete",
+        #     "bigtable.backups.get"
+        #   )
+        #   permissions.include? "bigtable.backups.delete" #=> false
+        #   permissions.include? "bigtable.backups.get" #=> true
+        #
+        def test_iam_permissions *permissions
+          ensure_service!
+          grpc = service.test_backup_permissions instance_id, cluster_id, backup_id, permissions.flatten
+          grpc.permissions.to_a
         end
 
         ##

@@ -516,6 +516,47 @@ module Google
         end
 
         ##
+        # Gets the access control policy for an backup resource. Returns an empty
+        # policy if an backup exists but does not have a policy set.
+        #
+        # @return [Google::Iam::V1::Policy]
+        #
+        def get_backup_policy instance_id, cluster_id, backup_id
+          tables.get_iam_policy resource: backup_path(instance_id, cluster_id, backup_id)
+        end
+
+        ##
+        # Sets the access control policy on an backup resource. Replaces any
+        # existing policy.
+        #
+        # @param policy [Google::Iam::V1::Policy | Hash]
+        #   REQUIRED: The complete policy to be applied to the +resource+. The size of
+        #   the policy is limited to a few 10s of KB. An empty policy is valid
+        #   for Cloud Bigtable, but certain Cloud Platform services (such as Projects)
+        #   might reject an empty policy.
+        #   Alternatively, provide a hash similar to `Google::Iam::V1::Policy`.
+        # @return [Google::Iam::V1::Policy]
+        #
+        def set_backup_policy instance_id, cluster_id, backup_id, policy
+          tables.set_iam_policy resource: backup_path(instance_id, cluster_id, backup_id), policy: policy
+        end
+
+        ##
+        # Returns permissions that the caller has for the specified backup resource.
+        #
+        # @param permissions [Array<String>]
+        #   The set of permissions to check for the +resource+. Permissions with
+        #   wildcards (such as '*' or 'storage.*') are not allowed. For more
+        #   information see
+        #   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+        # @return [Google::Iam::V1::TestIamPermissionsResponse]
+        #
+        def test_backup_permissions instance_id, cluster_id, backup_id, permissions
+          tables.test_iam_permissions resource:    backup_path(instance_id, cluster_id, backup_id),
+                                      permissions: permissions
+        end
+
+        ##
         # Gets the access control policy for an instance resource. Returns an empty
         # policy if an instance exists but does not have a policy set.
         #
