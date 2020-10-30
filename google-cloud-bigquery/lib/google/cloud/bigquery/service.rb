@@ -183,6 +183,34 @@ module Google
         end
 
         ##
+        # Returns Google::Apis::BigqueryV2::Policy
+        def get_table_policy dataset_id, table_id
+          policy_options = API::GetPolicyOptions.new requested_policy_version: 1
+          execute do
+            service.get_table_iam_policy table_path(dataset_id, table_id),
+                                         API::GetIamPolicyRequest.new(options: policy_options)
+          end
+        end
+
+        ##
+        # @param [Google::Apis::BigqueryV2::Policy] new_policy
+        def set_table_policy dataset_id, table_id, new_policy
+          execute do
+            service.set_table_iam_policy table_path(dataset_id, table_id),
+                                         API::SetIamPolicyRequest.new(policy: new_policy)
+          end
+        end
+
+        ##
+        # Returns Google::Apis::BigqueryV2::TestIamPermissionsResponse
+        def test_table_permissions dataset_id, table_id, permissions
+          execute do
+            service.test_table_iam_permissions table_path(dataset_id, table_id),
+                                               API::TestIamPermissionsRequest.new(permissions: permissions)
+          end
+        end
+
+        ##
         # Deletes the table specified by tableId from the dataset.
         # If the table contains data, all the data will be deleted.
         def delete_table dataset_id, table_id
@@ -507,6 +535,11 @@ module Google
         end
 
         protected
+
+        # Creates a formatted table path.
+        def table_path dataset_id, table_id
+          "projects/#{@project}/datasets/#{dataset_id}/tables/#{table_id}"
+        end
 
         # Generate a random string similar to the BigQuery service job IDs.
         def generate_id
