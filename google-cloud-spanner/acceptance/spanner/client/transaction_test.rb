@@ -34,7 +34,7 @@ describe "Spanner Client", :transaction, :spanner do
   end
 
   it "modifies accounts and verifies data with reads" do
-    commit_resp = db.transaction do |tx|
+    timestamp = db.transaction do |tx|
       _(tx.transaction_id).wont_be :nil?
 
       tx_results = tx.read "accounts", columns
@@ -50,7 +50,7 @@ describe "Spanner Client", :transaction, :spanner do
       tx.update "accounts", reversed_update_rows
       tx.insert "accounts", additional_account
     end
-    assert_commit_resp commit_resp
+    _(timestamp).must_be_kind_of Time
 
     # outside of transaction, verify the new account was added
     results = db.read "accounts", columns
@@ -67,7 +67,7 @@ describe "Spanner Client", :transaction, :spanner do
   end
 
   it "can rollback a transaction without passing on using Rollback" do
-    commit_resp = db.transaction do |tx|
+    timestamp = db.transaction do |tx|
       _(tx.transaction_id).wont_be :nil?
 
       tx_results = tx.read "accounts", columns
@@ -85,7 +85,7 @@ describe "Spanner Client", :transaction, :spanner do
 
       raise Google::Cloud::Spanner::Rollback
     end
-    _(commit_resp).must_be :nil?
+    _(timestamp).must_be :nil?
 
     # outside of transaction, the new account was NOT added
     results = db.read "accounts", columns
@@ -197,18 +197,25 @@ describe "Spanner Client", :transaction, :spanner do
     end
   end
 
+  it "can execute sql with query options" do
+    query_options = { optimizer_version: "latest" }
+    db.transaction do |tx|
+      tx_results = tx.execute_sql query_reputation, query_options: query_options
+      _(tx_results.rows.first[:reputation]).must_equal 63.5
+    end
+  end
+
   it "execute transaction and return commit stats" do
     skip if emulator_enabled?
 
-    commit_resp =  db.transaction commit_stats: true do |tx|
-      tx_results = tx.read "accounts", [:reputation], keys: 1, limit: 1
-      tx_val = tx_results.rows.first[:reputation]
-      sleep 1 # ensure that both threads would have read same value if not read locked
-      new_val = tx_val + 1
-      tx.update "accounts", [{ account_id: 1, reputation: new_val }]
+    commit_options = { return_commit_stats: true }
+    commit_resp = db.transaction commit_options: commit_options do |tx|
+      _(tx.transaction_id).wont_be :nil?
+
+      tx.insert "accounts", additional_account
     end
 
-    assert_commit_resp commit_resp, stats: true
+    assert_commit_response commit_resp, commit_options
   end
 
   def read_and_update db

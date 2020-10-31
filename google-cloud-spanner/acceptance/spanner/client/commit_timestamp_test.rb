@@ -20,11 +20,11 @@ describe "Spanner Client", :commit_timestamp, :spanner do
   let(:table_types) { [:committs] }
 
   it "writes and reads commit_timestamp timestamp to test table" do
-    commit_resp = db.upsert table_name, { committs: db.commit_timestamp }
-    results = db.read table_name, table_types, keys: commit_resp.timestamp
+    commit_timestamp = db.upsert table_name, { committs: db.commit_timestamp }
+    results = db.read table_name, table_types, keys: commit_timestamp
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal({ committs: :TIMESTAMP })
-    _(results.rows.first.to_h).must_equal({ committs: commit_resp.timestamp })
+    _(results.rows.first.to_h).must_equal({ committs: commit_timestamp })
   end
 end

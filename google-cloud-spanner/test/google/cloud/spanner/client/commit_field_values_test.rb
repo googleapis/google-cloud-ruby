@@ -40,7 +40,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
   }
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
 
-  describe "commit_response" do
+  describe "commit_timestamp" do
     it "commits using a block" do
       mutations = [
         Google::Cloud::Spanner::V1::Mutation.new(

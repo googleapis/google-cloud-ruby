@@ -31,12 +31,12 @@ describe "Spanner Client", :types, :timestamp, :spanner do
 
   it "writes and reads commit_timestamp timestamp" do
     id = SecureRandom.int64
-    commit_resp = db.upsert table_name, { id: id, timestamp: db.commit_timestamp }
+    commit_timestamp = db.upsert table_name, { id: id, timestamp: db.commit_timestamp }
     results = db.read table_name, [:id, :timestamp], keys: id
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal({ id: :INT64, timestamp: :TIMESTAMP })
-    _(results.rows.first.to_h).must_equal({ id: id, timestamp: commit_resp.timestamp })
+    _(results.rows.first.to_h).must_equal({ id: id, timestamp: commit_timestamp })
   end
 
   it "writes and queries timestamp" do
@@ -51,12 +51,12 @@ describe "Spanner Client", :types, :timestamp, :spanner do
 
   it "writes and queries commit_timestamp timestamp" do
     id = SecureRandom.int64
-    commit_resp = db.upsert table_name, { id: id, timestamp: db.commit_timestamp }
+    commit_timestamp = db.upsert table_name, { id: id, timestamp: db.commit_timestamp }
     results = db.execute_query "SELECT id, timestamp FROM #{table_name} WHERE id = @id", params: { id: id }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal({ id: :INT64, timestamp: :TIMESTAMP })
-    _(results.rows.first.to_h).must_equal({ id: id, timestamp: commit_resp.timestamp })
+    _(results.rows.first.to_h).must_equal({ id: id, timestamp: commit_timestamp })
   end
 
   it "writes and reads NULL timestamp" do
