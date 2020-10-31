@@ -810,12 +810,16 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
-        # @param [Boolean] commit_stats Include statistics related to the
-        # transaction. Default it is `false`.
+        # @param [Hash] commit_options A hash of commit options.
+        #   e.g., return_commit_stats. Commit options are optional.
+        #   The following options can be provided:
         #
-        # @return [CommitResponse] It include the timestamp at which the
-        #   operation committed. It also include transaction commit stats,
-        #   if passed `commit_stats` value is `true`.
+        #   * `:return_commit_stats` (Boolean) A boolean value. If `true`,
+        #     then statistics related to the transaction will be included in
+        #     {CommitResponse}. Default value is `false`
+        #
+        # @return [Time, CommitResponse] The timestamp at which the operation
+        #   committed. If commit options are set it returns {CommitResponse}.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -827,7 +831,7 @@ module Google
         #   db.upsert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        # @example With commit stats
+        # @example Get commit stats
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
@@ -836,15 +840,16 @@ module Google
         #
         #   records = [{ id: 1, name: "Charlie", active: false },
         #              { id: 2, name: "Harvey",  active: true }]
-        #   commit_resp = db.upsert "users", records, commit_stats: true
+        #   commit_options = { return_commit_stats: true }
+        #   commit_resp = db.upsert "users", records, commit_options: commit_options
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
         #   puts commit_resp.stats.overload_delay
         #
-        def upsert table, rows, commit_stats: nil
+        def upsert table, rows, commit_options: nil
           @pool.with_session do |session|
-            session.upsert table, rows, commit_stats: commit_stats
+            session.upsert table, rows, commit_options: commit_options
           end
         end
         alias save upsert
@@ -886,12 +891,16 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
-        # @param [Boolean] commit_stats Include statistics related to the
-        # transaction. Default it is `false`.
+        # @param [Hash] commit_options A hash of commit options.
+        #   e.g., return_commit_stats. Commit options are optional.
+        #   The following options can be provided:
         #
-        # @return [CommitResponse] It include the timestamp at which the
-        #   operation committed. It also include transaction commit stats,
-        #   if passed `commit_stats` value is `true`.
+        #   * `:return_commit_stats` (Boolean) A boolean value. If `true`,
+        #     then statistics related to the transaction will be included in
+        #     {CommitResponse}. Default value is `false`
+        #
+        # @return [Time, CommitResponse] The timestamp at which the operation
+        #   committed. If commit options are set it returns {CommitResponse}.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -903,7 +912,7 @@ module Google
         #   db.insert "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        # @example With commit stats
+        # @example Get commit stats
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
@@ -912,15 +921,16 @@ module Google
         #
         #   records = [{ id: 1, name: "Charlie", active: false },
         #              { id: 2, name: "Harvey",  active: true }]
-        #   commit_resp = db.insert "users", records, commit_stats: true
+        #   commit_options = { return_commit_stats: true }
+        #   commit_resp = db.insert "users", records, commit_options: commit_options
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
         #   puts commit_resp.stats.overload_delay
         #
-        def insert table, rows, commit_stats: nil
+        def insert table, rows, commit_options: nil
           @pool.with_session do |session|
-            session.insert table, rows, commit_stats: commit_stats
+            session.insert table, rows, commit_options: commit_options
           end
         end
 
@@ -961,12 +971,16 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
-        # @param [Boolean] commit_stats Include statistics related to the
-        # transaction. Default it is `false`.
+        # @param [Hash] commit_options A hash of commit options.
+        #   e.g., return_commit_stats. Commit options are optional.
+        #   The following options can be provided:
         #
-        # @return [CommitResponse] It include the timestamp at which the
-        #   operation committed. It also include transaction commit stats,
-        #   if passed `commit_stats` value is `true`.
+        #   * `:return_commit_stats` (Boolean) A boolean value. If `true`,
+        #     then statistics related to the transaction will be included in
+        #     {CommitResponse}. Default value is `false`
+        #
+        # @return [Time, CommitResponse] The timestamp at which the operation
+        #   committed. If commit options are set it returns {CommitResponse}.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -978,7 +992,7 @@ module Google
         #   db.update "users", [{ id: 1, name: "Charlie", active: false },
         #                       { id: 2, name: "Harvey",  active: true }]
         #
-        # @example With commit stats
+        # @example Get commit stats
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
@@ -987,15 +1001,16 @@ module Google
         #
         #   records = [{ id: 1, name: "Charlie", active: false },
         #              { id: 2, name: "Harvey",  active: true }]
-        #   commit_resp = db.update "users", records, commit_stats: true
+        #   commit_options = { return_commit_stats: true }
+        #   commit_resp = db.update "users", records, commit_options: commit_options
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
         #   puts commit_resp.stats.overload_delay
         #
-        def update table, rows, commit_stats: nil
+        def update table, rows, commit_options: nil
           @pool.with_session do |session|
-            session.update table, rows, commit_stats: commit_stats
+            session.update table, rows, commit_options: commit_options
           end
         end
 
@@ -1038,12 +1053,16 @@ module Google
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
         #
-        # @param [Boolean] commit_stats Include statistics related to the
-        # transaction. Default it is `false`.
+        # @param [Hash] commit_options A hash of commit options.
+        #   e.g., return_commit_stats. Commit options are optional.
+        #   The following options can be provided:
         #
-        # @return [CommitResponse] It include the timestamp at which the
-        #   operation committed. It also include transaction commit stats,
-        #   if passed `commit_stats` value is `true`.
+        #   * `:return_commit_stats` (Boolean) A boolean value. If `true`,
+        #     then statistics related to the transaction will be included in
+        #     {CommitResponse}. Default value is `false`
+        #
+        # @return [Time, CommitResponse] The timestamp at which the operation
+        #   committed. If commit options are set it returns {CommitResponse}.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -1055,7 +1074,7 @@ module Google
         #   db.replace "users", [{ id: 1, name: "Charlie", active: false },
         #                        { id: 2, name: "Harvey",  active: true }]
         #
-        # @example With commit stats
+        # @example Get commit stats
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
@@ -1064,15 +1083,16 @@ module Google
         #
         #   records = [{ id: 1, name: "Charlie", active: false },
         #              { id: 2, name: "Harvey",  active: true }]
-        #   commit_resp = db.replace "users", records, commit_stats: true
+        #   commit_options = { return_commit_stats: true }
+        #   commit_resp = db.replace "users", records, commit_options: commit_options
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
         #   puts commit_resp.stats.overload_delay
         #
-        def replace table, rows, commit_stats: nil
+        def replace table, rows, commit_options: nil
           @pool.with_session do |session|
-            session.replace table, rows, commit_stats: commit_stats
+            session.replace table, rows, commit_options: commit_options
           end
         end
 
@@ -1096,8 +1116,14 @@ module Google
         # @param [Object, Array<Object>] keys A single, or list of keys or key
         #   ranges to match returned data to. Values should have exactly as many
         #   elements as there are columns in the primary key.
-        # @param [Boolean] commit_stats Include statistics related to the
-        # transaction. Default it is `false`.
+        # @param [Hash] commit_options A hash of commit options.
+        #   e.g., return_commit_stats. Commit options are optional.
+        #   The following options can be provided:
+        #
+        #   * `:return_commit_stats` (Boolean) A boolean value. If `true`,
+        #     then statistics related to the transaction will be included in
+        #     {CommitResponse}. Default value is `false`
+        #
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -1112,9 +1138,8 @@ module Google
         #     * `:retry_codes` (`Array<String>`) - The error codes that should
         #       trigger a retry.
         #
-        # @return [CommitResponse] It include the timestamp at which the
-        #   operation committed. It also include transaction commit stats,
-        #   if passed `commit_stats` value is `true`.
+        # @return [Time, CommitResponse] The timestamp at which the operation
+        #   committed. If commit options are set it returns {CommitResponse}.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -1125,22 +1150,23 @@ module Google
         #
         #   db.delete "users", [1, 2, 3]
         #
-        # @example With commit stats
+        # @example Get commit stats
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
         #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   commit_resp = db.delete "users", [1, 2, 3], commit_stats: true
+        #   commit_options = { return_commit_stats: true }
+        #   commit_resp = db.delete "users", [1, 2, 3], commit_options: commit_options
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
         #   puts commit_resp.stats.overload_delay
         #
-        def delete table, keys = [], commit_stats: nil, call_options: nil
+        def delete table, keys = [], commit_options: nil, call_options: nil
           @pool.with_session do |session|
-            session.delete table, keys, commit_stats: commit_stats,
+            session.delete table, keys, commit_options: commit_options,
                            call_options: call_options
           end
         end
@@ -1160,8 +1186,14 @@ module Google
         # this method may be appropriate for latency sensitive and/or high
         # throughput blind changes.
         #
-        # @param [Boolean] commit_stats Include statistics related to the
-        # transaction. Default it is `false`.
+        # @param [Hash] commit_options A hash of commit options.
+        #   e.g., return_commit_stats. Commit options are optional.
+        #   The following options can be provided:
+        #
+        #   * `:return_commit_stats` (Boolean) A boolean value. If `true`,
+        #     then statistics related to the transaction will be included in
+        #     {CommitResponse}. Default value is `false`
+        #
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -1179,9 +1211,8 @@ module Google
         # @yield [commit] The block for mutating the data.
         # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.
         #
-        # @return [CommitResponse] It include the timestamp at which the
-        #   operation committed. It also include transaction commit stats,
-        #   if passed `commit_stats` value is `true`.
+        # @return [Time, CommitResponse] The timestamp at which the operation
+        #   committed. If commit options are set it returns {CommitResponse}.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -1195,14 +1226,15 @@ module Google
         #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
         #   end
         #
-        # @example With commit stats
+        # @example Get commit stats
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
         #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   commit_resp = db.commit commit_stats: true do |c|
+        #   commit_options = { return_commit_stats: true }
+        #   commit_resp = db.commit commit_options: commit_options do |c|
         #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
         #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
         #   end
@@ -1211,17 +1243,18 @@ module Google
         #   puts commit_resp.stats.mutation_count
         #   puts commit_resp.stats.overload_delay
         #
-        def commit commit_stats: nil, call_options: nil, &block
+        def commit commit_options: nil, call_options: nil, &block
           raise ArgumentError, "Must provide a block" unless block_given?
 
           @pool.with_session do |session|
             session.commit(
-              commit_stats: commit_stats, call_options: call_options, &block
+              commit_options: commit_options, call_options: call_options, &block
             )
           end
         end
 
         # rubocop:disable Metrics/AbcSize
+        # rubocop:disable Metrics/BlockLength
         # rubocop:disable Metrics/MethodLength
 
         ##
@@ -1240,8 +1273,14 @@ module Google
         #
         # @param [Numeric] deadline The total amount of time in seconds the
         #   transaction has to succeed. The default is `120`.
-        # @param [Boolean] commit_stats Include statistics related to the
-        # transaction. Default it is `false`.
+        # @param [Hash] commit_options A hash of commit options.
+        #   e.g., return_commit_stats. Commit options are optional.
+        #   The following options can be provided:
+        #
+        #   * `:return_commit_stats` (Boolean) A boolean value. If `true`,
+        #     then statistics related to the transaction will be included in
+        #     {CommitResponse}. Default value is `false`
+        #
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -1260,9 +1299,8 @@ module Google
         # @yieldparam [Google::Cloud::Spanner::Transaction] transaction The
         #   Transaction object.
         #
-        # @return [CommitResponse] It include the timestamp at which the
-        #   operation committed. It also include transaction commit stats,
-        #   if passed `commit_stats` value is `true`.
+        # @return [Time, CommitResponse] The timestamp at which the operation
+        #   committed. If commit options are set it returns {CommitResponse}.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -1298,13 +1336,14 @@ module Google
         #     end
         #   end
         #
-        # @example With commit stats
+        # @example Get commit stats
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   commit_resp = db.transaction commit_stats: true do |tx|
+        #   commit_options = { return_commit_stats: true }
+        #   commit_resp = db.transaction commit_options: commit_options do |tx|
         #     results = tx.execute_query "SELECT * FROM users"
         #
         #     results.rows.each do |row|
@@ -1319,7 +1358,7 @@ module Google
         #   puts commit_resp.stats.mutation_count
         #   puts commit_resp.stats.overload_delay
         #
-        def transaction deadline: 120, commit_stats: nil, call_options: nil
+        def transaction deadline: 120, commit_options: nil, call_options: nil
           ensure_service!
           unless Thread.current[:transaction_id].nil?
             raise "Nested transactions are not allowed"
@@ -1335,9 +1374,11 @@ module Google
               yield tx
               commit_resp = @project.service.commit \
                 tx.session.path, tx.mutations,
-                transaction_id: tx.transaction_id, commit_stats: commit_stats,
+                transaction_id: tx.transaction_id,
+                commit_options: commit_options,
                 call_options: call_options
-              CommitResponse.from_grpc commit_resp
+              resp = CommitResponse.from_grpc commit_resp
+              commit_options ? resp : resp.timestamp
             rescue GRPC::Aborted, Google::Cloud::AbortedError => err
               # Re-raise if deadline has passed
               if current_time - start_time > deadline
@@ -1365,6 +1406,7 @@ module Google
         end
 
         # rubocop:enable Metrics/AbcSize
+        # rubocop:enable Metrics/BlockLength
         # rubocop:enable Metrics/MethodLength
 
         ##

@@ -397,7 +397,7 @@ module Google
         end
 
         def commit session_name, mutations = [], transaction_id: nil,
-                   commit_stats: nil, call_options: nil
+                   commit_options: nil, call_options: nil
           tx_opts = nil
           if transaction_id.nil?
             tx_opts = V1::TransactionOptions.new(
@@ -408,9 +408,13 @@ module Google
                                  call_options: call_options
           request = {
             session: session_name, transaction_id: transaction_id,
-            single_use_transaction: tx_opts, mutations: mutations,
-            return_commit_stats: commit_stats
+            single_use_transaction: tx_opts, mutations: mutations
           }
+
+          if commit_options
+            request[:return_commit_stats] = commit_options[:return_commit_stats]
+          end
+
           service.commit request, opts
         end
 

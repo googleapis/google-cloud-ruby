@@ -26,7 +26,7 @@ module Google
         #
         class CommitStats
           ##
-          # @private Creates a new CommitS  tats instance.
+          # @private Creates a new CommitStats instance.
           def initialize grpc
             @grpc = grpc
           end
@@ -37,7 +37,8 @@ module Google
             @grpc.mutation_count
           end
 
-          # Length of time the commit was delayed due to overloaded servers.
+          # Length of time in seconds the commit was delayed due to
+          # overloaded servers.
           # @return [Integer]
           def overload_delay
             Convert.duration_to_number @grpc.overload_delay

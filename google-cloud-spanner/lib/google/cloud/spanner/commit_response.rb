@@ -19,11 +19,43 @@ module Google
   module Cloud
     module Spanner
       ##
-      # # CommitResponse
+      # CommitResponse is a timestamp at which the transaction committed
+      # with additional attributes of commit stats.
+      #
+      # @example
+      #   require "google/cloud/spanner"
+      #
+      #   spanner = Google::Cloud::Spanner.new
+      #
+      #   db = spanner.client "my-instance", "my-database"
+      #
+      #   timestamp = db.commit do |c|
+      #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
+      #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+      #   end
+      #
+      #   puts timestamp
+      #
+      # @example With commit stats.
+      #   require "google/cloud/spanner"
+      #
+      #   spanner = Google::Cloud::Spanner.new
+      #
+      #   db = spanner.client "my-instance", "my-database"
+      #
+      #   commit_options = { return_commit_stats: true }
+      #   commit_resp = db.commit commit_options: commit_options do |c|
+      #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
+      #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+      #   end
+      #
+      #   puts commit_resp.timestamp
+      #   puts commit_resp.stats.mutation_count
+      #   puts commit_resp.stats.overload_delay
       #
       class CommitResponse
         ##
-        # @private Creates a new Commit response instance.
+        # @private Creates a new CommitResponse instance.
         def initialize grpc
           @grpc = grpc
         end
@@ -37,7 +69,8 @@ module Google
 
         ##
         # Additional statistics about a commit.
-        # @return [CommitStats]
+        # @return [CommitStats, nil] Commit stats or nil if not stats not
+        #   present.
         def stats
           CommitStats.from_grpc @grpc.commit_stats if @grpc.commit_stats
         end

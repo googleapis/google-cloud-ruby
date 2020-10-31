@@ -192,6 +192,21 @@ class MockSpanner < Minitest::Spec
       request[:session].instance_of?(String) && request[:options] == tx_opts && gapic_options == options
     end
   end
+
+  def assert_commit_response expected, actual
+    timestamp = Google::Cloud::Spanner::Convert.timestamp_to_time actual.commit_timestamp
+    _(expected.timestamp).must_equal timestamp
+
+    unless actual.commit_stats
+      _(expected.stats).must_be :nil?
+      return
+    end
+
+    _(expected.stats.mutation_count).must_equal actual.commit_stats.mutation_count
+
+    overload_delay = Google::Cloud::Spanner::Convert.duration_to_number actual.commit_stats.overload_delay
+    _(expected.stats.overload_delay).must_equal overload_delay
+  end
 end
 
 # This is used to raise errors in an enumerator
