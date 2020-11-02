@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 / 2020-11-02
+
+#### Features
+
+* Support analyze_iam_policy call
+
 ### 0.7.0 / 2020-09-17
 
 #### Features
