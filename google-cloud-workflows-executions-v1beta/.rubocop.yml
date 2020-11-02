@@ -1,0 +1,37 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "google-cloud-workflows-executions-v1beta.gemspec"
+    - "lib/**/*_pb.rb"
+    - "proto_docs/**/*"
+    - "test/**/*"
+    - "acceptance/**/*"
+    - "Rakefile"
+
+Metrics/AbcSize:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/LineLength:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-workflows-executions-v1beta.rb"
+Style/AsciiComments:
+  Enabled: false
+Style/CaseEquality:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
+Style/ModuleFunction:
+  Enabled: false
