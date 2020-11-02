@@ -38,10 +38,16 @@ describe Google::Cloud::Bigquery::Table, :policy, :bigquery do
     roles = ["bigquery.tables.delete", "bigquery.tables.get"]
     permissions = table.test_iam_permissions roles
     _(permissions).must_equal roles
+    _(permissions).must_be :frozen?
 
     policy = table.policy # get
     _(policy).must_be_kind_of Google::Cloud::Bigquery::Policy
+    _(policy).must_be :frozen?
+    etag_1 = policy.etag
+    _(etag_1).wont_be :empty?
+    _(etag_1).must_be :frozen?
     _(policy.roles).must_be :empty?
+    _(policy.roles).must_be :frozen?
 
     # We need a valid service account in order to update the policy
     service_account = bigquery.service.credentials.client.issuer
@@ -50,13 +56,21 @@ describe Google::Cloud::Bigquery::Table, :policy, :bigquery do
     member = "serviceAccount:#{service_account}"
 
     # update
-    table.policy do |p|
+    policy = table.policy do |p|
+      _(p.roles).must_be :empty?
+      _(p.roles).wont_be :frozen?
+      _(p).wont_be :frozen?
+
       p.add role, member
       p.add role, member # duplicate member will not be added to request
     end
 
-    policy = table.policy # get
-
+    _(policy).must_be :frozen?
+    etag_2 = policy.etag
+    _(etag_2).wont_be :empty?
+    _(etag_2).must_be :frozen?
+    _(etag_2).wont_equal etag_1
+    _(policy.roles).must_be :frozen?
     _(policy.roles.count).must_equal 1
     members = policy.role(role)
     _(members).must_be_kind_of Array

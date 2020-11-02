@@ -1286,10 +1286,9 @@ module Google
         #   will be read from the Bigquery service and passed to the block. After
         #   the block completes, the modified policy will be written to the
         #   service.
-        # @yieldparam [Policy] policy the current Cloud IAM Policy for this
-        #   table.
+        # @yieldparam [Policy] policy The mutable Policy for the table.
         #
-        # @return [Policy] The current Cloud IAM Policy for the table.
+        # @return [Policy] The frozen Policy for the table.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -1299,6 +1298,8 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   policy = table.policy
+        #   policy.role "roles/owner" #=> ["user:owner@example.com"]
+        #   policy.frozen? #=> true
         #
         # @example Update the policy by passing a block.
         #   require "google/cloud/bigquery"
@@ -1308,51 +1309,23 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   table.policy do |p|
-        #     p.add("roles/owner", "user:owner@example.com")
+        #     p.remove "roles/owner", "user:owner@example.com"
+        #     p.add "roles/owner", "user:newowner@example.com"
+        #     p.roles["roles/viewer"] = ["allUsers"]
         #   end # 2 API calls
         #
         def policy
           ensure_service!
           gapi = service.get_table_policy dataset_id, table_id
           policy = Policy.from_gapi gapi
-          return policy unless block_given?
-          yield policy
-          update_policy policy
+          if block_given?
+            yield policy
+            # TODO: Check for changes
+            gapi = service.set_table_policy dataset_id, table_id, policy.to_gapi
+            policy = Policy.from_gapi gapi
+          end
+          policy.freeze
         end
-
-        ##
-        # Updates the [Cloud IAM](https://cloud.google.com/iam/) access control
-        # policy for the table. The policy should be read from {#policy}.
-        # See {Google::Cloud::Bigquery::Policy} for an explanation of the policy
-        # `etag` property and how to modify policies.
-        #
-        # You can also update the policy by passing a block to {#policy}, which
-        # will call this method internally after the block completes.
-        #
-        # @param new_policy [Policy] a new or modified Cloud IAM Policy for this
-        #   table
-        #
-        # @return [Policy] The policy returned by the API update operation.
-        #
-        # @example
-        #   require "google/cloud/bigquery"
-        #
-        #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
-        #
-        #   policy = table.policy
-        #   policy.add("roles/owner", "user:owner@example.com")
-        #   updated_policy = table.update_policy policy
-        #
-        #   puts updated_policy.roles
-        #
-        def update_policy new_policy
-          ensure_service!
-          gapi = service.set_table_policy dataset_id, table_id, new_policy.to_gapi
-          Policy.from_gapi gapi
-        end
-        alias policy= update_policy
 
         ##
         # Tests the specified permissions against the [Cloud
@@ -1365,7 +1338,7 @@ module Google
         #   `bigquery.resource.capability`.
         #   See https://cloud.google.com/bigquery/docs/access-control#bigquery.
         #
-        # @return [Array<String>] The permissions held by the caller.
+        # @return [Array<String>] The frozen array of permissions held by the caller.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -1383,7 +1356,7 @@ module Google
           permissions = Array(permissions).flatten
           ensure_service!
           gapi = service.test_table_permissions dataset_id, table_id, permissions
-          gapi.permissions
+          gapi.permissions.freeze
         end
 
         ##

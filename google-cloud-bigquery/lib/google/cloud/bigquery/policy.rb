@@ -52,16 +52,28 @@ module Google
       #   table = dataset.table "my_table"
       #
       #   policy = table.policy
-      #   policy.remove("roles/owner", "user:owner@example.com")
-      #   policy.add("roles/owner", "user:newowner@example.com")
-      #   policy.roles["roles/viewer"] = ["allUsers"]
+      #   policy.role "roles/owner" #=> ["user:owner@example.com"]
+      #   policy.frozen? #=> true
+      #
+      # @example Update the policy by passing a block.
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #
+      #   table.policy do |p|
+      #     p.remove "roles/owner", "user:owner@example.com"
+      #     p.add "roles/owner", "user:newowner@example.com"
+      #     p.roles["roles/viewer"] = ["allUsers"]
+      #   end # 2 API calls
       #
       class Policy
         attr_reader :etag, :roles
 
         # @private
         def initialize etag, roles = nil
-          @etag = etag
+          @etag = etag.freeze
           @roles = roles
         end
 
@@ -78,15 +90,18 @@ module Google
         # @param [String] member A Cloud IAM identity, such as
         #   `"user:owner@example.com"`.
         #
-        # @example
+        # @example Update the policy by passing a block.
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
-        #   policy = table.policy
-        #   policy.add("roles/owner", "user:newowner@example.com")
+        #   table.policy do |p|
+        #     p.remove "roles/owner", "user:owner@example.com"
+        #     p.add "roles/owner", "user:newowner@example.com"
+        #     p.roles["roles/viewer"] = ["allUsers"]
+        #   end # 2 API calls
         #
         def add role_name, member
           role(role_name) << member
@@ -105,15 +120,18 @@ module Google
         # @param [String] member A Cloud IAM identity, such as
         #   `"user:owner@example.com"`.
         #
-        # @example
+        # @example Update the policy by passing a block.
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
-        #   policy = table.policy
-        #   policy.remove("roles/owner", "user:newowner@example.com")
+        #   table.policy do |p|
+        #     p.remove "roles/owner", "user:owner@example.com"
+        #     p.add "roles/owner", "user:newowner@example.com"
+        #     p.roles["roles/viewer"] = ["allUsers"]
+        #   end # 2 API calls
         #
         def remove role_name, member
           role(role_name).delete member
@@ -138,7 +156,8 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   policy = table.policy
-        #   policy.role("roles/viewer") << "user:viewer@example.com"
+        #   policy.role "roles/owner" #=> ["user:owner@example.com"]
+        #   policy.frozen? #=> true
         #
         def role role_name
           roles[role_name] ||= []
@@ -151,6 +170,14 @@ module Google
             etag:     etag,
             bindings: roles_to_gapi
           )
+        end
+
+        ##
+        # @private Freeze the policy including its roles hash.
+        def freeze
+          super
+          roles.freeze
+          self
         end
 
         ##
