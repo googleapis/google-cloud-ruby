@@ -562,7 +562,7 @@ module Google
             ##
             # Returns metadata for dimensions and metrics available in reporting methods.
             # Used to explore the dimensions and metrics. In this method, a Google
-            # Analytics App + Web Property Identifier is specified in the request, and
+            # Analytics 4 (GA4) Property Identifier is specified in the request, and
             # the metadata response includes Custom dimensions and metrics as well as
             # Universal metadata.
             #
@@ -589,7 +589,7 @@ module Google
             #   @param name [::String]
             #     Required. The resource name of the metadata to retrieve. This name field is
             #     specified in the URL path and not URL parameters. Property is a numeric
-            #     Google Analytics App + Web Property identifier.
+            #     Google Analytics 4 (GA4) Property identifier.
             #
             #     Example: properties/1234/metadata
             #
