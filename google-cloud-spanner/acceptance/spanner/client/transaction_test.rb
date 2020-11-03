@@ -197,14 +197,6 @@ describe "Spanner Client", :transaction, :spanner do
     end
   end
 
-  it "can execute sql with query options" do
-    query_options = { optimizer_version: "latest" }
-    db.transaction do |tx|
-      tx_results = tx.execute_sql query_reputation, query_options: query_options
-      _(tx_results.rows.first[:reputation]).must_equal 63.5
-    end
-  end
-
   it "execute transaction and return commit stats" do
     skip if emulator_enabled?
 
