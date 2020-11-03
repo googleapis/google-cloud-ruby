@@ -54,6 +54,7 @@ module Google
             "groupByEmail"   => :group_by_email,
             "iam_member"     => :iam_member,
             "iamMember"      => :iam_member,
+            "routine"        => :routine,
             "special"        => :special_group,
             "special_group"  => :special_group,
             "specialGroup"   => :special_group,
@@ -213,6 +214,33 @@ module Google
           end
 
           ##
+          # Add access to a routine from a different dataset. Queries executed
+          # against that routine will have read access to views/tables/routines
+          # in this dataset. Only UDF is supported for now. The role field is
+          # not required when this field is set. If that routine is updated by
+          # any user, access to the routine needs to be granted again via an
+          # update operation.
+          #
+          # @param [Google::Cloud::Bigquery::Routine] routine A routine object.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   other_dataset = bigquery.dataset "my_other_dataset", skip_lookup: true
+          #
+          #   routine = other_dataset.routine "my_routine"
+          #
+          #   dataset.access do |access|
+          #     access.add_reader_routine routine
+          #   end
+          #
+          def add_reader_routine routine
+            add_access_routine routine
+          end
+
+          ##
           # Add reader access to a view.
           #
           # @param [Google::Cloud::Bigquery::Table, String] view A table object,
@@ -227,9 +255,9 @@ module Google
           #
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
-          #   other_dataset = bigquery.dataset "my_other_dataset"
+          #   other_dataset = bigquery.dataset "my_other_dataset", skip_lookup: true
           #
-          #   view = other_dataset.table "my_view"
+          #   view = other_dataset.table "my_view", skip_lookup: true
           #
           #   dataset.access do |access|
           #     access.add_reader_view view
@@ -534,6 +562,28 @@ module Google
           end
 
           ##
+          # Remove reader access from a routine from a different dataset.
+          #
+          # @param [Google::Cloud::Bigquery::Routine] routine A routine object.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   other_dataset = bigquery.dataset "my_other_dataset", skip_lookup: true
+          #
+          #   routine = other_dataset.routine "my_routine", skip_lookup: true
+          #
+          #   dataset.access do |access|
+          #     access.remove_reader_routine routine
+          #   end
+          #
+          def remove_reader_routine routine
+            remove_access_routine routine
+          end
+
+          ##
           # Remove reader access from a view.
           #
           # @param [Google::Cloud::Bigquery::Table, String] view A table object,
@@ -548,9 +598,9 @@ module Google
           #
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
-          #   other_dataset = bigquery.dataset "my_other_dataset"
+          #   other_dataset = bigquery.dataset "my_other_dataset", skip_lookup: true
           #
-          #   view = other_dataset.table "my_view"
+          #   view = other_dataset.table "my_view", skip_lookup: true
           #
           #   dataset.access do |access|
           #     access.remove_reader_view view
@@ -850,6 +900,32 @@ module Google
           end
 
           ##
+          # Checks access for a routine from a different dataset. Queries executed
+          # against that routine will have read access to views/tables/routines
+          # in this dataset. Only UDF is supported for now. The role field is
+          # not required when this field is set. If that routine is updated by
+          # any user, access to the routine needs to be granted again via an
+          # update operation.
+          #
+          # @param [Google::Cloud::Bigquery::Routine] routine A routine object.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   other_dataset = bigquery.dataset "my_other_dataset", skip_lookup: true
+          #
+          #   routine = other_dataset.routine "my_routine", skip_lookup: true
+          #
+          #   access = dataset.access
+          #   access.reader_routine? routine #=> false
+          #
+          def reader_routine? routine
+            lookup_access_routine routine
+          end
+
+          ##
           # Checks reader access for a view.
           #
           # @param [Google::Cloud::Bigquery::Table, String] view A table object,
@@ -864,9 +940,9 @@ module Google
           #
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
-          #   other_dataset = bigquery.dataset "my_other_dataset"
+          #   other_dataset = bigquery.dataset "my_other_dataset", skip_lookup: true
           #
-          #   view = other_dataset.table "my_view"
+          #   view = other_dataset.table "my_view", skip_lookup: true
           #
           #   access = dataset.access
           #   access.reader_view? view #=> false
@@ -1122,11 +1198,21 @@ module Google
           end
 
           # @private
+          def add_access_routine routine
+            value = routine.routine_ref
+            # Remove existing routine rule, if any
+            @rules.reject!(&find_by_scope_and_resource_ref(:routine, value))
+            # Add new rule for this role, scope, and value
+            opts = { routine: value }
+            @rules << Google::Apis::BigqueryV2::Dataset::Access.new(opts)
+          end
+
+          # @private
           def add_access_view value
             # scope is view, make sure value is in the right format
             value = validate_view value
             # Remove existing view rule, if any
-            @rules.reject!(&find_view(value))
+            @rules.reject!(&find_by_scope_and_resource_ref(:view, value))
             # Add new rule for this role, scope, and value
             opts = { view: value }
             @rules << Google::Apis::BigqueryV2::Dataset::Access.new(opts)
@@ -1145,11 +1231,17 @@ module Google
           end
 
           # @private
+          def remove_access_routine routine
+            # Remove existing routine rule, if any
+            @rules.reject!(&find_by_scope_and_resource_ref(:routine, routine.routine_ref))
+          end
+
+          # @private
           def remove_access_view value
             # scope is view, make sure value is in the right format
             value = validate_view value
             # Remove existing view rule, if any
-            @rules.reject!(&find_view(value))
+            @rules.reject!(&find_by_scope_and_resource_ref(:view, value))
           end
 
           # @private
@@ -1163,11 +1255,17 @@ module Google
           end
 
           # @private
+          def lookup_access_routine routine
+            # Detect routine rule, if any
+            !(!@rules.detect(&find_by_scope_and_resource_ref(:routine, routine.routine_ref)))
+          end
+
+          # @private
           def lookup_access_view value
             # scope is view, make sure value is in the right format
             value = validate_view value
             # Detect view rule, if any
-            !(!@rules.detect(&find_view(value)))
+            !(!@rules.detect(&find_by_scope_and_resource_ref(:view, value)))
           end
 
           # @private
@@ -1186,11 +1284,11 @@ module Google
             end
           end
 
-          # @private
-          def find_view value
+          # @private Compare hash representations to find table_ref, routine_ref.
+          def find_by_scope_and_resource_ref scope, value
             lambda do |a|
               h = a.to_h
-              h[:view].to_h == value.to_h
+              h[scope].to_h == value.to_h
             end
           end
         end

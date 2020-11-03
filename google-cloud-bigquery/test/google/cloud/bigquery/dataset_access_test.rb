@@ -214,11 +214,36 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
     mock.verify
   end
 
+  describe :routine do
+    let(:routine_id) { "new-routine" }
+    let(:routine_gapi) { random_routine_gapi dataset_id, routine_id }
+    let(:routine) { Google::Cloud::Bigquery::Routine.from_gapi routine_gapi, bigquery.service }
+
+    it "adds an access entry with specifying a routine object" do
+      mock = Minitest::Mock.new
+      bigquery.service.mocked_service = mock
+      updated_gapi = dataset_gapi.dup
+      new_access = Google::Apis::BigqueryV2::Dataset::Access.new routine: routine_gapi.routine_reference
+      updated_gapi.access = new_access
+      patch_gapi = Google::Apis::BigqueryV2::Dataset.new access: [new_access], etag: dataset_gapi.etag
+      mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+
+      dataset.access do |acl|
+        refute acl.reader_routine? routine
+        acl.add_reader_routine routine
+        assert acl.reader_routine? routine
+        acl.remove_reader_routine routine
+        refute acl.reader_routine? routine
+        acl.add_reader_routine routine # this entry goes into the request
+      end
+      mock.verify
+    end
+  end
+
   describe :view do
     let(:view_id) { "new-view" }
     let(:view_gapi) { random_view_gapi dataset_id, view_id }
-    let(:view) { Google::Cloud::Bigquery::Table.from_gapi view_gapi,
-                                                  bigquery.service }
+    let(:view) { Google::Cloud::Bigquery::Table.from_gapi view_gapi, bigquery.service }
 
     it "adds an access entry with specifying a view object" do
       mock = Minitest::Mock.new
@@ -230,7 +255,12 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
       mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
       dataset.access do |acl|
+        refute acl.reader_view? view
         acl.add_reader_view view
+        assert acl.reader_view? view
+        acl.remove_reader_view view
+        refute acl.reader_view? view
+        acl.add_reader_view view # this entry goes into the request
       end
       mock.verify
     end

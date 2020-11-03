@@ -24,20 +24,20 @@ describe Google::Cloud::Bigquery::Dataset, :access, :bigquery do
     end
     d
   end
-  let(:dataset_view_id) { "#{prefix}_dataset_view" }
-  let(:dataset_view) do
-    d = bigquery.dataset dataset_view_id
+  let(:dataset_2_id) { "#{prefix}_dataset_2" }
+  let(:dataset_2) do
+    d = bigquery.dataset dataset_2_id
     if d.nil?
-      d = bigquery.create_dataset dataset_view_id
+      d = bigquery.create_dataset dataset_2_id
     end
     d
   end
   let(:user_val) { "blowmage@gmail.com" }
   let(:view_id) { "dataset_access_view" }
   let(:view) do
-    t = dataset_view.table view_id
+    t = dataset_2.table view_id
     if t.nil?
-      t = dataset_view.create_view view_id, publicdata_query
+      t = dataset_2.create_view view_id, publicdata_query
     end
     t
   end
@@ -85,5 +85,40 @@ describe Google::Cloud::Bigquery::Dataset, :access, :bigquery do
     end
     dataset = bigquery.dataset dataset_id
     refute dataset.access.reader_view? view
+  end
+
+  describe :routine do
+    let(:routine_id) { "routine_#{SecureRandom.hex(4)}" }
+    let :routine_sql do
+      routine_sql = <<~SQL
+      CREATE FUNCTION `#{routine_id}`(
+          arr ARRAY<STRUCT<name STRING, val INT64>>
+      ) AS (
+          (SELECT SUM(IF(elem.name = "foo",elem.val,null)) FROM UNNEST(arr) AS elem)
+      )
+      SQL
+    end
+
+    it "adds an access entry with specifying routine scope" do
+      job = dataset_2.query_job routine_sql
+      job.wait_until_done!
+      _(job).wont_be :failed?
+      routine = job.ddl_target_routine
+
+      refute dataset.access.reader_routine? routine
+      dataset.access do |acl|
+        acl.add_reader_routine routine
+      end
+      dataset = bigquery.dataset dataset_id
+      routine = dataset_2.routine routine.routine_id
+      assert dataset.access.reader_routine? routine
+
+      dataset.access do |acl|
+        acl.remove_reader_routine routine
+      end
+      dataset = bigquery.dataset dataset_2_id, skip_lookup: true
+      routine = dataset_2.routine routine.routine_id, skip_lookup: true
+      refute dataset.access.reader_routine? routine
+    end
   end
 end
