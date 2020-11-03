@@ -69,29 +69,29 @@ desc "Run the google-cloud-media_translation-v1beta1 acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
   project ||=
-    ENV["MEMCACHE_TEST_PROJECT"] ||
+    ENV["MEDIA_TRANSLATION_TEST_PROJECT"] ||
     ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
   keyfile ||=
-    ENV["MEMCACHE_TEST_KEYFILE"] ||
+    ENV["MEDIA_TRANSLATION_TEST_KEYFILE"] ||
     ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
     keyfile ||=
-      ENV["MEMCACHE_TEST_KEYFILE_JSON"] ||
+      ENV["MEDIA_TRANSLATION_TEST_KEYFILE_JSON"] ||
       ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or MEMCACHE_TEST_PROJECT=test123 MEMCACHE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or MEDIA_TRANSLATION_TEST_PROJECT=test123 MEDIA_TRANSLATION_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/media_translation/v1beta1/speech_translation_service/credentials"
   ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
-  ENV["MEMCACHE_PROJECT"] = project
-  ENV["MEMCACHE_TEST_PROJECT"] = project
-  ENV["MEMCACHE_KEYFILE_JSON"] = keyfile
+  ENV["MEDIA_TRANSLATION_PROJECT"] = project
+  ENV["MEDIA_TRANSLATION_TEST_PROJECT"] = project
+  ENV["MEDIA_TRANSLATION_KEYFILE_JSON"] = keyfile
 
   Rake::Task["acceptance:run"].invoke
 end

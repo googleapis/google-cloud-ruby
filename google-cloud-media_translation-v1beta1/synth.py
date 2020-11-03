@@ -30,7 +30,7 @@ library = gapic.ruby_library(
         "ruby-cloud-gem-name": "google-cloud-media_translation-v1beta1",
         "ruby-cloud-title": "Media Translation V1beta1",
         "ruby-cloud-description": "Media Translation API delivers real-time speech translation to your content and applications directly from your audio data. Leveraging Google’s machine learning technologies, the API offers enhanced accuracy and simplified integration while equipping you with a comprehensive set of features to further refine your translation results. Improve user experience with low-latency streaming translation and scale quickly with straightforward internationalization.",
-        "ruby-cloud-env-prefix": "MEMCACHE",
+        "ruby-cloud-env-prefix": "MEDIA_TRANSLATION",
         "ruby-cloud-grpc-service-config": "google/cloud/mediatranslation/v1beta1/mediatranslation_grpc_service_config.json",
         "ruby-cloud-product-url": "https://cloud.google.com/media-translation/",
         "ruby-cloud-api-id": "mediatranslation.googleapis.com",

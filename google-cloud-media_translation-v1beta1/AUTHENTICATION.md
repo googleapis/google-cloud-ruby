@@ -19,7 +19,7 @@ during development.
 2. Set the [environment variable](#environment-variables).
 
 ```sh
-export MEMCACHE_CREDENTIALS=path/to/keyfile.json
+export MEDIA_TRANSLATION_CREDENTIALS=path/to/keyfile.json
 ```
 
 3. Initialize the client.
@@ -66,8 +66,8 @@ The environment variables that google-cloud-media_translation-v1beta1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Credentials}):
 
-1. `MEMCACHE_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `MEMCACHE_KEYFILE` - Path to JSON file, or JSON contents
+1. `MEDIA_TRANSLATION_CREDENTIALS` - Path to JSON file, or JSON contents
+2. `MEDIA_TRANSLATION_KEYFILE` - Path to JSON file, or JSON contents
 3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
 4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
 5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
@@ -75,7 +75,7 @@ checks for credentials are configured on the service Credentials class (such as
 ```ruby
 require "google/cloud/media_translation/v1beta1"
 
-ENV["MEMCACHE_CREDENTIALS"] = "path/to/keyfile.json"
+ENV["MEDIA_TRANSLATION_CREDENTIALS"] = "path/to/keyfile.json"
 
 client = ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.new
 ```
