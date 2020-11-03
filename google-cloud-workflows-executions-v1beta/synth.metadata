@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "98f0d86510fd6807e8d82f1c1f44237a0cf7980f"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "40964bfc694a9b16756d75950703472ddc76f2d8"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "7f31f40209008ad24058579e7112e45fc9d5715e",
-        "internalRef": "339939234"
+        "sha": "2d93f744228b622c12c5b927db053f4beea056da",
+        "internalRef": "340410325"
       }
     }
   ],
@@ -26,5 +26,35 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-workflows-executions-v1beta.gemspec",
+    "lib/google-cloud-workflows-executions-v1beta.rb",
+    "lib/google/cloud/workflows/executions/v1beta.rb",
+    "lib/google/cloud/workflows/executions/v1beta/executions.rb",
+    "lib/google/cloud/workflows/executions/v1beta/executions/client.rb",
+    "lib/google/cloud/workflows/executions/v1beta/executions/credentials.rb",
+    "lib/google/cloud/workflows/executions/v1beta/executions/paths.rb",
+    "lib/google/cloud/workflows/executions/v1beta/executions_pb.rb",
+    "lib/google/cloud/workflows/executions/v1beta/executions_services_pb.rb",
+    "lib/google/cloud/workflows/executions/v1beta/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/workflows/executions/v1beta/executions.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "test/google/cloud/workflows/executions/v1beta/executions_paths_test.rb",
+    "test/google/cloud/workflows/executions/v1beta/executions_test.rb",
+    "test/helper.rb"
   ]
 }
