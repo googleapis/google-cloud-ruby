@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.1 / 2020-11-04
+
+#### Documentation
+
+* Use the "GA4" product name in service descriptions
+
 ### 0.3.0 / 2020-10-22
 
 #### Features
