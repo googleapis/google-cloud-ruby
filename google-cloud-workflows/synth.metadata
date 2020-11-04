@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "2696b64603231d4140914d8f848f2ddb2fde3fcf"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "fb8c9589eac3870162f1a0d4d3207a6c5b6fbdf7"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "7f31f40209008ad24058579e7112e45fc9d5715e",
-        "internalRef": "339939234"
+        "sha": "705962b5a317e083fdbb2311d4baa72df5816686",
+        "internalRef": "340463146"
       }
     }
   ],
@@ -35,5 +35,26 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-workflows.gemspec",
+    "lib/google-cloud-workflows.rb",
+    "lib/google/cloud/workflows.rb",
+    "lib/google/cloud/workflows/executions.rb",
+    "lib/google/cloud/workflows/version.rb",
+    "test/google/cloud/workflows/client_test.rb",
+    "test/google/cloud/workflows/executions/client_test.rb",
+    "test/google/cloud/workflows/version_test.rb",
+    "test/helper.rb"
   ]
 }
