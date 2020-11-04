@@ -444,6 +444,7 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_other_dataset"] # for view methods
       mock.expect :get_table, view_full_gapi, ["my-project", "my_dataset", "my_view"] # for view methods
+      mock.expect :get_routine, random_routine_gapi("my_other_dataset", "my_routine"), ["my-project", "my_other_dataset", "my_routine"] # for routine methods
       mock.expect :patch_dataset, dataset_full_gapi, ["my-project", "my_dataset", Google::Apis::BigqueryV2::Dataset, Hash]
     end
   end
