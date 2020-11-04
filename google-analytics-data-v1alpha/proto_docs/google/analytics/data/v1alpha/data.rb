@@ -50,7 +50,7 @@ module Google
         # The unique identifier of the property whose events are tracked.
         # @!attribute [rw] property_id
         #   @return [::String]
-        #     A Google Analytics App + Web property id.
+        #     A Google Analytics 4 (GA4) property id.
         class Entity
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
