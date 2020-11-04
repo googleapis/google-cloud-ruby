@@ -19,12 +19,13 @@ require_relative "helper"
 describe "List datasets" do
   it "lists datasets in a project" do
     bigquery = Google::Cloud::Bigquery.new
+    # Ensure at least two datasets
     dataset1 = bigquery.create_dataset "test_dataset1_#{time_plus_random}"
     dataset2 = bigquery.create_dataset "test_dataset2_#{time_plus_random}"
     register_temp_datasets dataset1, dataset2
 
-    output = capture_io { list_datasets bigquery.name }
-    assert_match dataset1.dataset_id, output.first
-    assert_match dataset2.dataset_id, output.first
+    out, _err = capture_io { list_datasets bigquery.name }
+    assert_includes out, "Datasets in project"
+    assert_includes out, "_dataset" # common name fragment for test datasets
   end
 end
