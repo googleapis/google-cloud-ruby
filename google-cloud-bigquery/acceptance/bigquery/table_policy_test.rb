@@ -56,7 +56,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :bigquery do
     member = "serviceAccount:#{service_account}"
 
     # update
-    policy = table.policy do |p|
+    policy = table.update_policy do |p|
       _(p.roles).must_be :empty?
       _(p.roles).wont_be :frozen?
       _(p).wont_be :frozen?

@@ -995,7 +995,6 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
       mock.expect :get_table_iam_policy, policy_gapi, ["projects/my-project/datasets/my_dataset/tables/my_table", Google::Apis::BigqueryV2::GetIamPolicyRequest]
-      mock.expect :set_table_iam_policy, policy_gapi, ["projects/my-project/datasets/my_dataset/tables/my_table", Google::Apis::BigqueryV2::SetIamPolicyRequest]
     end
   end
 
@@ -1081,6 +1080,15 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
       mock.expect :test_table_iam_permissions, test_iam_permissions_gapi, ["projects/my-project/datasets/my_dataset/tables/my_table", Google::Apis::BigqueryV2::TestIamPermissionsRequest]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Table#update_policy" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
+      mock.expect :get_table_iam_policy, policy_gapi, ["projects/my-project/datasets/my_dataset/tables/my_table", Google::Apis::BigqueryV2::GetIamPolicyRequest]
+      mock.expect :set_table_iam_policy, policy_gapi, ["projects/my-project/datasets/my_dataset/tables/my_table", Google::Apis::BigqueryV2::SetIamPolicyRequest]
     end
   end
 

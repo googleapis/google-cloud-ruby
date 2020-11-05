@@ -1010,4 +1010,12 @@ class MockBigquery < Minitest::Spec
   def encryption_gapi key_name
     Google::Apis::BigqueryV2::EncryptionConfiguration.new kms_key_name: key_name
   end
+
+  def policy_gapi etag: "CAE=", version: 1, bindings: []
+    Google::Apis::BigqueryV2::Policy.new etag: etag, version: version, bindings: bindings
+  end
+
+  def formatted_table_path dataset_id, table_id
+    "projects/#{project}/datasets/#{dataset_id}/tables/#{table_id}"
+  end
 end

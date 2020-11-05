@@ -62,7 +62,7 @@ module Google
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.table "my_table"
       #
-      #   table.policy do |p|
+      #   table.update_policy do |p|
       #     p.remove "roles/owner", "user:owner@example.com"
       #     p.add "roles/owner", "user:newowner@example.com"
       #     p.roles["roles/viewer"] = ["allUsers"]
@@ -97,7 +97,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
-        #   table.policy do |p|
+        #   table.update_policy do |p|
         #     p.remove "roles/owner", "user:owner@example.com"
         #     p.add "roles/owner", "user:newowner@example.com"
         #     p.roles["roles/viewer"] = ["allUsers"]
@@ -127,7 +127,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
-        #   table.policy do |p|
+        #   table.update_policy do |p|
         #     p.remove "roles/owner", "user:owner@example.com"
         #     p.add "roles/owner", "user:newowner@example.com"
         #     p.roles["roles/viewer"] = ["allUsers"]
@@ -167,8 +167,9 @@ module Google
         # @private Convert the Policy to a Google::Apis::BigqueryV2::Policy.
         def to_gapi
           Google::Apis::BigqueryV2::Policy.new(
+            bindings: roles_to_gapi,
             etag:     etag,
-            bindings: roles_to_gapi
+            version:  1
           )
         end
 

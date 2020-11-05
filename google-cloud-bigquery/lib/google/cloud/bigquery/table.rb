@@ -1277,16 +1277,11 @@ module Google
 
         ##
         # Gets the [Cloud IAM](https://cloud.google.com/iam/) access control
-        # policy for the table.
+        # policy for the table. The latest policy will be read from the service.
+        # See also {#update_policy}.
         #
         # @see https://cloud.google.com/iam/docs/managing-policies Managing Policies
         # @see https://cloud.google.com/bigquery/docs/table-access-controls-intro Controlling access to tables
-        #
-        # @yield [policy] A block for updating the policy. The latest policy
-        #   will be read from the Bigquery service and passed to the block. After
-        #   the block completes, the modified policy will be written to the
-        #   service.
-        # @yieldparam [Policy] policy The mutable Policy for the table.
         #
         # @return [Policy] The frozen Policy for the table.
         #
@@ -1297,9 +1292,31 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
-        #   policy = table.policy
+        #   policy = table.policy # RPC
         #   policy.role "roles/owner" #=> ["user:owner@example.com"]
         #   policy.frozen? #=> true
+        #
+        def policy
+          raise ArgumentError, "Block argument not supported: Use #update_policy instead." if block_given?
+          ensure_service!
+          gapi = service.get_table_policy dataset_id, table_id
+          Policy.from_gapi(gapi).freeze
+        end
+
+        ##
+        # Updates the [Cloud IAM](https://cloud.google.com/iam/) access control
+        # policy for the table. The latest policy will be read from the service.
+        # See also {#policy}.
+        #
+        # @see https://cloud.google.com/iam/docs/managing-policies Managing Policies
+        # @see https://cloud.google.com/bigquery/docs/table-access-controls-intro Controlling access to tables
+        #
+        # @yield [policy] A block for updating the policy. The latest policy
+        #   will be read from the service and passed to the block. After the
+        #   block completes, the modified policy will be written to the service.
+        # @yieldparam [Policy] policy The mutable Policy for the table.
+        #
+        # @return [Policy] The updated and frozen Policy for the table.
         #
         # @example Update the policy by passing a block.
         #   require "google/cloud/bigquery"
@@ -1308,23 +1325,21 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
-        #   table.policy do |p|
+        #   table.update_policy do |p|
         #     p.remove "roles/owner", "user:owner@example.com"
         #     p.add "roles/owner", "user:newowner@example.com"
         #     p.roles["roles/viewer"] = ["allUsers"]
         #   end # 2 API calls
         #
-        def policy
+        def update_policy
+          raise ArgumentError, "A block updating the policy must be provided" unless block_given?
           ensure_service!
           gapi = service.get_table_policy dataset_id, table_id
           policy = Policy.from_gapi gapi
-          if block_given?
-            yield policy
-            # TODO: Check for changes
-            gapi = service.set_table_policy dataset_id, table_id, policy.to_gapi
-            policy = Policy.from_gapi gapi
-          end
-          policy.freeze
+          yield policy
+          # TODO: Check for changes before calling RPC
+          gapi = service.set_table_policy dataset_id, table_id, policy.to_gapi
+          Policy.from_gapi(gapi).freeze
         end
 
         ##
