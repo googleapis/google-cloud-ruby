@@ -639,6 +639,101 @@ module Google
             end
 
             ##
+            # The Google Analytics Realtime API returns a customized report of realtime
+            # event data for your property. These reports show events and usage from the
+            # last 30 minutes.
+            #
+            # @overload run_realtime_report(request, options = nil)
+            #   Pass arguments to `run_realtime_report` via a request object, either of type
+            #   {::Google::Analytics::Data::V1alpha::RunRealtimeReportRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Data::V1alpha::RunRealtimeReportRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload run_realtime_report(property: nil, dimensions: nil, metrics: nil, limit: nil, dimension_filter: nil, metric_filter: nil, metric_aggregations: nil, order_bys: nil, return_property_quota: nil)
+            #   Pass arguments to `run_realtime_report` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param property [::String]
+            #     A Google Analytics GA4 property identifier whose events are tracked.
+            #     Specified in the URL path and not the body. To learn more, see [where to
+            #     find your Property
+            #     ID](https://developers.google.com/analytics/trusted-testing/analytics-data/property-id).
+            #
+            #     Example: properties/1234
+            #   @param dimensions [::Array<::Google::Analytics::Data::V1alpha::Dimension, ::Hash>]
+            #     The dimensions requested and displayed.
+            #   @param metrics [::Array<::Google::Analytics::Data::V1alpha::Metric, ::Hash>]
+            #     The metrics requested and displayed.
+            #   @param limit [::Integer]
+            #     The number of rows to return. If unspecified, 10 rows are returned. If
+            #     -1, all rows are returned.
+            #   @param dimension_filter [::Google::Analytics::Data::V1alpha::FilterExpression, ::Hash]
+            #     The filter clause of dimensions. Dimensions must be requested to be used in
+            #     this filter. Metrics cannot be used in this filter.
+            #   @param metric_filter [::Google::Analytics::Data::V1alpha::FilterExpression, ::Hash]
+            #     The filter clause of metrics. Applied at post aggregation phase, similar to
+            #     SQL having-clause. Metrics must be requested to be used in this filter.
+            #     Dimensions cannot be used in this filter.
+            #   @param metric_aggregations [::Array<::Google::Analytics::Data::V1alpha::MetricAggregation>]
+            #     Aggregation of metrics. Aggregated metric values will be shown in rows
+            #     where the dimension_values are set to "RESERVED_(MetricAggregation)".
+            #   @param order_bys [::Array<::Google::Analytics::Data::V1alpha::OrderBy, ::Hash>]
+            #     Specifies how rows are ordered in the response.
+            #   @param return_property_quota [::Boolean]
+            #     Toggles whether to return the current state of this Analytics Property's
+            #     Realtime quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Data::V1alpha::RunRealtimeReportResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Data::V1alpha::RunRealtimeReportResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def run_realtime_report request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Data::V1alpha::RunRealtimeReportRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.run_realtime_report.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Data::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "property" => request.property
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.run_realtime_report.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.run_realtime_report.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_data_stub.call_rpc :run_realtime_report, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the AnalyticsData API.
             #
             # This class represents the configuration for AnalyticsData,
@@ -804,6 +899,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_metadata
+                ##
+                # RPC-specific configuration for `run_realtime_report`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :run_realtime_report
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -819,6 +919,8 @@ module Google
                   @get_universal_metadata = ::Gapic::Config::Method.new get_universal_metadata_config
                   get_metadata_config = parent_rpcs&.get_metadata if parent_rpcs&.respond_to? :get_metadata
                   @get_metadata = ::Gapic::Config::Method.new get_metadata_config
+                  run_realtime_report_config = parent_rpcs&.run_realtime_report if parent_rpcs&.respond_to? :run_realtime_report
+                  @run_realtime_report = ::Gapic::Config::Method.new run_realtime_report_config
 
                   yield self if block_given?
                 end
