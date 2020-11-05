@@ -87,6 +87,27 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.analytics.data.v1alpha.GetMetadataRequest" do
       optional :name, :string, 1
     end
+    add_message "google.analytics.data.v1alpha.RunRealtimeReportRequest" do
+      optional :property, :string, 1
+      repeated :dimensions, :message, 2, "google.analytics.data.v1alpha.Dimension"
+      repeated :metrics, :message, 3, "google.analytics.data.v1alpha.Metric"
+      optional :limit, :int64, 4
+      optional :dimension_filter, :message, 5, "google.analytics.data.v1alpha.FilterExpression"
+      optional :metric_filter, :message, 6, "google.analytics.data.v1alpha.FilterExpression"
+      repeated :metric_aggregations, :enum, 7, "google.analytics.data.v1alpha.MetricAggregation"
+      repeated :order_bys, :message, 8, "google.analytics.data.v1alpha.OrderBy"
+      optional :return_property_quota, :bool, 9
+    end
+    add_message "google.analytics.data.v1alpha.RunRealtimeReportResponse" do
+      repeated :dimension_headers, :message, 1, "google.analytics.data.v1alpha.DimensionHeader"
+      repeated :metric_headers, :message, 2, "google.analytics.data.v1alpha.MetricHeader"
+      repeated :rows, :message, 3, "google.analytics.data.v1alpha.Row"
+      repeated :totals, :message, 4, "google.analytics.data.v1alpha.Row"
+      repeated :maximums, :message, 5, "google.analytics.data.v1alpha.Row"
+      repeated :minimums, :message, 6, "google.analytics.data.v1alpha.Row"
+      optional :row_count, :int32, 7
+      optional :property_quota, :message, 8, "google.analytics.data.v1alpha.PropertyQuota"
+    end
   end
 end
 
@@ -106,6 +127,8 @@ module Google
         GetUniversalMetadataRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.GetUniversalMetadataRequest").msgclass
         UniversalMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.UniversalMetadata").msgclass
         GetMetadataRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.GetMetadataRequest").msgclass
+        RunRealtimeReportRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.RunRealtimeReportRequest").msgclass
+        RunRealtimeReportResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.RunRealtimeReportResponse").msgclass
       end
     end
   end
