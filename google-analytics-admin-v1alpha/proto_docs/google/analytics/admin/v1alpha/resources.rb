@@ -39,7 +39,10 @@ module Google
         # @!attribute [rw] country_code
         #   @return [::String]
         #     Country of business. Must be a non-deprecated code for a UN M.49 region.
-        #     https://unicode.org/cldr/charts/latest/supplemental/territory_containment_un_m_49.html
+        #
+        #     https:
+        #     //unicode.org/cldr/charts/latest/supplem
+        #     // ental/territory_containment_un_m_49.html
         # @!attribute [r] deleted
         #   @return [::Boolean]
         #     Output only. Indicates whether this Account is soft-deleted or not. Deleted
@@ -258,6 +261,7 @@ module Google
         #   @return [::String]
         #     Output only. Resource name of this Data Stream.
         #     Format:
+        #
         #     properties/\\{property_id}/webDataStreams/\\{stream_id}/enhancedMeasurementSettings
         #     Example: "properties/1000/webDataStreams/2000/enhancedMeasurementSettings"
         # @!attribute [rw] stream_enabled
@@ -474,6 +478,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Maximum access settings that Firebase user receive on the linked Analytics
+        # property.
+        module MaximumUserAccess
+          # Unspecified maximum user access.
+          MAXIMUM_USER_ACCESS_UNSPECIFIED = 0
+
+          # Firebase users have no access to the Analytics property.
+          NO_ACCESS = 1
+
+          # Firebase users have Read & Analyze access to the Analytics property.
+          READ_AND_ANALYZE = 2
+
+          # Firebase users have edit access to the Analytics property, but may not
+          # manage the Firebase link.
+          EDITOR_WITHOUT_LINK_MANAGEMENT = 3
+
+          # Firebase users have edit access to the Analytics property and may manage
+          # the Firebase link.
+          EDITOR_INCLUDING_LINK_MANAGEMENT = 4
+        end
+
         # The category selected for this property, used for industry benchmarking.
         module IndustryCategory
           # Industry category unspecified
@@ -556,27 +581,6 @@ module Google
 
           # Shopping
           SHOPPING = 26
-        end
-
-        # Maximum access settings that Firebase user receive on the linked Analytics
-        # property.
-        module MaximumUserAccess
-          # Unspecified maximum user access.
-          MAXIMUM_USER_ACCESS_UNSPECIFIED = 0
-
-          # Firebase users have no access to the Analytics property.
-          NO_ACCESS = 1
-
-          # Firebase users have Read & Analyze access to the Analytics property.
-          READ_AND_ANALYZE = 2
-
-          # Firebase users have edit access to the Analytics property, but may not
-          # manage the Firebase link.
-          EDITOR_WITHOUT_LINK_MANAGEMENT = 3
-
-          # Firebase users have edit access to the Analytics property and may manage
-          # the Firebase link.
-          EDITOR_INCLUDING_LINK_MANAGEMENT = 4
         end
       end
     end

@@ -1364,8 +1364,8 @@ module Google
             #   @param parent [::String]
             #     Required. Example format: accounts/1234
             #   @param notify_new_user [::Boolean]
-            #     Optional. If notify_new_user is set, then email new user that they've been given
-            #     permissions on the resource.
+            #     Optional. If set, then email the new user notifying them that they've been granted
+            #     permissions to the resource.
             #   @param user_link [::Google::Analytics::Admin::V1alpha::UserLink, ::Hash]
             #     Required. The user link to create.
             #
@@ -1441,10 +1441,11 @@ module Google
             #     messages must either be empty or match this field.
             #     Example format: accounts/1234
             #   @param notify_new_users [::Boolean]
-            #     Optional. If notify_new_users is set, then email new users that they've been given
-            #     permissions on the resource.
+            #     Optional. If set, then email the new users notifying them that they've been granted
+            #     permissions to the resource. Regardless of whether this is set or not,
+            #     notify_new_user field inside each individual request is ignored.
             #   @param requests [::Array<::Google::Analytics::Admin::V1alpha::CreateUserLinkRequest, ::Hash>]
-            #     The requests specifying the user links to create.
+            #     Required. The requests specifying the user links to create.
             #     A maximum of 1000 user links can be created in a batch.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1582,7 +1583,7 @@ module Google
             #     empty or match this field.
             #     Example format: accounts/1234
             #   @param requests [::Array<::Google::Analytics::Admin::V1alpha::UpdateUserLinkRequest, ::Hash>]
-            #     The requests specifying the user links to update.
+            #     Required. The requests specifying the user links to update.
             #     A maximum of 1000 user links can be updated in a batch.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1720,7 +1721,7 @@ module Google
             #     field.
             #     Example format: accounts/1234
             #   @param requests [::Array<::Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest, ::Hash>]
-            #     The requests specifying the user links to update.
+            #     Required. The requests specifying the user links to update.
             #     A maximum of 1000 user links can be updated in a batch.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -2867,6 +2868,7 @@ module Google
             #   @param name [::String]
             #     Required. The name of the settings to lookup.
             #     Format:
+            #
             #     properties/\\{property_id}/webDataStreams/\\{stream_id}/enhancedMeasurementSettings
             #     Example: "properties/1000/webDataStreams/2000/enhancedMeasurementSettings"
             #
