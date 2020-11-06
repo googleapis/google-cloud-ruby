@@ -1328,7 +1328,7 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   table.update_policy do |p|
-        #     p.set_binding "roles/viewer", "user:viewer@example.com"
+        #     p.grant members: "user:viewer@example.com", role: "roles/viewer"
         #     binding = p.bindings.find { |b| b.role == "roles/editor" }
         #     binding.members << "user:new-editor@example.com"
         #     binding.members.delete "user:old-editor@example.com"

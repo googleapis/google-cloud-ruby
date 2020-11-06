@@ -63,7 +63,7 @@ module Google
       #   table = dataset.table "my_table"
       #
       #   table.update_policy do |p|
-      #     p.set_binding "roles/viewer", "user:viewer@example.com"
+      #     p.grant members: "user:viewer@example.com", role: "roles/viewer"
       #     binding = p.bindings.find { |b| b.role == "roles/editor" }
       #     binding.members << "user:new-editor@example.com"
       #     binding.members.delete "user:old-editor@example.com"
@@ -154,10 +154,10 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   table.update_policy do |p|
-        #     p.set_binding "roles/viewer", "user:viewer@example.com"
+        #     p.grant members: "user:viewer@example.com", role: "roles/viewer"
         #   end # 2 API calls
         #
-        def set_binding role, members
+        def grant members:, role:
           new_binding = Binding.new role, members
           if (i = @bindings.find_index { |b| b.role == role })
             @bindings[i] = new_binding
@@ -235,7 +235,7 @@ module Google
         # @see https://cloud.google.com/bigquery/docs/table-access-controls-intro Controlling access to tables
         #
         # @attr [String] role The role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or
-        #   `roles/owner`.
+        #   `roles/owner`. Required.
         # @attr [Array<String>] members Specifies the identities requesting access for a Cloud Platform resource.
         #   `members` can have the following values. Required.
         #
@@ -294,8 +294,7 @@ module Google
         #   end # 2 API calls
         #
         class Binding
-          attr_reader :role
-          attr_accessor :members
+          attr_accessor :role, :members
 
           # @private
           def initialize role, members

@@ -118,7 +118,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
       _(members.size).must_equal 1
       _(members).wont_be :frozen?
       members << "serviceAccount:1234567890@developer.gserviceaccount.com"
-      p.set_binding "roles/bigquery.dataOwner", "user:unwanted@example.com"
+      p.grant members: "user:unwanted@example.com", role: "roles/bigquery.dataOwner"
       binding_owner = p.bindings.find { |b| b.role == "roles/bigquery.dataOwner" }
       _(binding_owner).wont_be :nil?
       _(binding_owner.members).must_equal ["user:unwanted@example.com"]
