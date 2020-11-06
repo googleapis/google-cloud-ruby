@@ -31,6 +31,7 @@ library = gapic.ruby_library(
         "ruby-cloud-description": "Pre-release client for the WorkloadIdentityPools service.",
         "ruby-cloud-env-prefix": "IAM",
         "ruby-cloud-grpc-service-config": "google/iam/v1beta/iam_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers",
         "ruby-cloud-api-id": "iam.googleapis.com",
         "ruby-cloud-api-shortname": "iam",
     }

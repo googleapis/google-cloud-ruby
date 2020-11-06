@@ -5,6 +5,7 @@
     "language": "ruby",
     "name": "iam",
     "name_pretty": "Google IAM V1beta API",
+    "product_documentation": "https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true
 }
