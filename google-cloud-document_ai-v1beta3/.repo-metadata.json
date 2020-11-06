@@ -1,0 +1,11 @@
+{
+    "api_id": "us-documentai.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-document_ai-v1beta3/latest",
+    "distribution_name": "google-cloud-document_ai-v1beta3",
+    "language": "ruby",
+    "name": "documentai",
+    "name_pretty": "Document AI V1beta3 API",
+    "product_documentation": "https://cloud.google.com/document-ai/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
