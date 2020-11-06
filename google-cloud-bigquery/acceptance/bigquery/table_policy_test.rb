@@ -51,7 +51,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :bigquery do
     _(etag_1).must_be :frozen?
     _(policy.bindings).must_be :empty?
     _(policy.bindings).must_be :frozen?
-    _(policy.binding_for(role)).must_be :nil?
+    _(policy.bindings.find { |b| b.role == role }).must_be :nil?
 
     # update
     policy = table.update_policy do |p|
@@ -59,7 +59,8 @@ describe Google::Cloud::Bigquery::Table, :policy, :bigquery do
       _(p.bindings).wont_be :frozen?
       _(p).wont_be :frozen?
       p.set_binding role, member
-      p.binding_for(role).members << member # duplicate member will not be added to request
+      binding = p.bindings.find { |b| b.role == role }
+      binding.members << member # duplicate member will not be added to request
     end
 
     _(policy).must_be :frozen?
@@ -70,7 +71,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :bigquery do
     _(policy.bindings).must_be :frozen?
     _(policy.bindings.count).must_equal 1
     _(policy.bindings[0]).must_be :frozen?
-    binding = policy.binding_for role
+    binding = policy.bindings.find { |b| b.role == role }
     _(binding).must_equal policy.bindings[0]
     _(binding).must_be_kind_of Google::Cloud::Bigquery::Policy::Binding
     _(binding).must_be :frozen?
@@ -88,6 +89,6 @@ describe Google::Cloud::Bigquery::Table, :policy, :bigquery do
 
     policy = table.policy # get
     _(policy.bindings).must_be :empty?
-    _(policy.binding_for(role)).must_be :nil?
+    _(policy.bindings.find { |b| b.role == role }).must_be :nil?
   end
 end

@@ -91,7 +91,8 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
   it "raises if a block is provided to #policy" do
     expect do
       table.policy do |p|
-        p.binding_for("roles/bigquery.dataViewer").members << "serviceAccount:1234567890@developer.gserviceaccount.com"
+        binding = p.bindings.find { |b| b.role == "roles/bigquery.dataViewer" }
+        binding.members << "serviceAccount:1234567890@developer.gserviceaccount.com"
       end
     end.must_raise ArgumentError
   end
@@ -110,7 +111,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
       _(p.bindings[0].role).wont_be :frozen?
       _(p.bindings[0].members).must_be_kind_of Array
       _(p.bindings[0].members).wont_be :frozen?
-      binding = p.binding_for "roles/bigquery.dataViewer"
+      binding = p.bindings.find { |b| b.role == "roles/bigquery.dataViewer" }
       _(binding).wont_be :frozen?
       members = binding.members
       _(members).must_be_kind_of Array
@@ -118,12 +119,12 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
       _(members).wont_be :frozen?
       members << "serviceAccount:1234567890@developer.gserviceaccount.com"
       p.set_binding "roles/bigquery.dataOwner", "user:unwanted@example.com"
-      binding_owner = p.binding_for "roles/bigquery.dataOwner"
+      binding_owner = p.bindings.find { |b| b.role == "roles/bigquery.dataOwner" }
       _(binding_owner).wont_be :nil?
       _(binding_owner.members).must_equal ["user:unwanted@example.com"]
       binding_removed = p.remove_binding "roles/bigquery.dataOwner"
       _(binding_removed).must_equal binding_owner
-      _(p.binding_for("roles/bigquery.dataOwner")).must_be :nil?
+      _(p.bindings.find { |b| b.role == "roles/bigquery.dataOwner"}).must_be :nil?
     end
     mock.verify
 
@@ -136,7 +137,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
     _(policy.bindings[0].role).must_be :frozen?
     _(policy.bindings[0].members).must_be_kind_of Array
     _(policy.bindings[0].members).must_be :frozen?
-    binding = policy.binding_for "roles/bigquery.dataViewer"
+    binding = policy.bindings.find { |b| b.role == "roles/bigquery.dataViewer" }
     _(binding).must_equal policy.bindings[0]
     _(binding).must_be :frozen?
     members = binding.members

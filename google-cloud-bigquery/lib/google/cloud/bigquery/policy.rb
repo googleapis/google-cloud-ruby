@@ -48,7 +48,7 @@ module Google
       #   policy = table.policy
       #
       #   policy.frozen? #=> true
-      #   binding = policy.binding_for "roles/owner"
+      #   binding = policy.bindings.find { |b| b.role == "roles/owner" }
       #
       #   binding.role #=> "roles/owner"
       #   binding.members #=> ["user:owner@example.com"]
@@ -64,8 +64,9 @@ module Google
       #
       #   table.update_policy do |p|
       #     p.set_binding "roles/viewer", "user:viewer@example.com"
-      #     p.binding_for("roles/editor").members << "user:new-editor@example.com"
-      #     p.binding_for("roles/editor").members.delete "user:old-editor@example.com"
+      #     binding = p.bindings.find { |b| b.role == "roles/editor" }
+      #     binding.members << "user:new-editor@example.com"
+      #     binding.members.delete "user:old-editor@example.com"
       #     p.remove_binding "roles/owner"
       #   end # 2 API calls
       #
@@ -103,52 +104,6 @@ module Google
         def initialize etag, bindings
           @etag = etag.freeze
           @bindings = bindings
-        end
-
-        ##
-        # Convenience method returning a binding value object that contains the array of members bound to a role
-        # in the policy. Returns `nil` if no binding is present for the role in the policy. See
-        # [Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) for a list of primitive and
-        # curated roles. See [BigQuery Table ACL
-        # permissions](https://cloud.google.com/bigquery/docs/table-access-controls-intro#permissions) for a list of
-        # values and patterns for members.
-        #
-        # @param [String] role A role that is bound to members in the policy. For example, `roles/viewer`,
-        #   `roles/editor`, or `roles/owner`. Required.
-        #
-        # @return [Binding, nil] The binding object, which may be mutable or frozen depending on the context; or `nil`
-        #   if no binding exists for the given role.
-        #
-        # @example
-        #   require "google/cloud/bigquery"
-        #
-        #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
-        #   policy = table.policy
-        #
-        #   policy.frozen? #=> true
-        #   binding = policy.binding_for "roles/owner"
-        #
-        #   binding.role #=> "roles/owner"
-        #   binding.members #=> ["user:owner@example.com"]
-        #   binding.frozen? #=> true
-        #   binding.members.frozen? #=> true
-        #
-        # @example Update mutable bindings in the policy with {Table#update_policy}.
-        #   require "google/cloud/bigquery"
-        #
-        #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
-        #
-        #   table.update_policy do |p|
-        #     p.binding_for("roles/editor").members << "user:new-editor@example.com"
-        #     p.binding_for("roles/editor").members.delete "user:old-editor@example.com"
-        #   end # 2 API calls
-        #
-        def binding_for role
-          @bindings.find { |b| b.role == role }
         end
 
         ##
@@ -317,7 +272,7 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   policy = table.policy
-        #   binding = policy.binding_for "roles/owner"
+        #   binding = policy.bindings.find { |b| b.role == "roles/owner" }
         #
         #   binding.role #=> "roles/owner"
         #   binding.members #=> ["user:owner@example.com"]
@@ -333,8 +288,9 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   table.update_policy do |p|
-        #     p.binding_for("roles/editor").members << "user:new-editor@example.com"
-        #     p.binding_for("roles/editor").members.delete "user:old-editor@example.com"
+        #     binding = p.bindings.find { |b| b.role == "roles/editor" }
+        #     binding.members << "user:new-editor@example.com"
+        #     binding.members.delete "user:old-editor@example.com"
         #   end # 2 API calls
         #
         class Binding
