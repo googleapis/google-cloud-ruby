@@ -33,12 +33,12 @@ describe Google::Cloud::Bigquery::Table, :policy, :bigquery do
     end
     t
   end
+  let(:roles) { ["bigquery.tables.delete", "bigquery.tables.get"] }
   let(:role) { "roles/bigquery.dataOwner" }
   let(:service_account) { bigquery.service.credentials.client.issuer }
   let(:member) { "serviceAccount:#{service_account}" }
 
   it "allows permissions to be tested and policy to be updated" do
-    roles = ["bigquery.tables.delete", "bigquery.tables.get"]
     permissions = table.test_iam_permissions roles
     _(permissions).must_equal roles
     _(permissions).must_be :frozen?
@@ -49,14 +49,14 @@ describe Google::Cloud::Bigquery::Table, :policy, :bigquery do
     etag_1 = policy.etag
     _(etag_1).wont_be :empty?
     _(etag_1).must_be :frozen?
-    # _(policy.roles).must_be :empty?
-    # _(policy.roles).must_be :frozen?
+    _(policy.bindings).must_be :empty?
+    _(policy.bindings).must_be :frozen?
     _(policy.binding(role)).must_be :nil?
 
     # update
     policy = table.update_policy do |p|
-      # _(p.roles).must_be :empty?
-      # _(p.roles).wont_be :frozen?
+      _(p.bindings).must_be :empty?
+      _(p.bindings).wont_be :frozen?
       _(p).wont_be :frozen?
       p.set_binding role, member
       p.binding(role).members << member # duplicate member will not be added to request
@@ -67,14 +67,19 @@ describe Google::Cloud::Bigquery::Table, :policy, :bigquery do
     _(etag_2).wont_be :empty?
     _(etag_2).must_be :frozen?
     _(etag_2).wont_equal etag_1
-    # _(policy.roles).must_be :frozen?
-    # _(policy.roles.count).must_equal 1
+    _(policy.bindings).must_be :frozen?
+    _(policy.bindings.count).must_equal 1
+    _(policy.bindings[0]).must_be :frozen?
     binding = policy.binding role
+    _(binding).must_equal policy.bindings[0]
     _(binding).must_be_kind_of Google::Cloud::Bigquery::Policy::Binding
+    _(binding).must_be :frozen?
     members = binding.members
     _(members).must_be_kind_of Array
+    _(members).must_be :frozen?
     _(members.count).must_equal 1
     _(members[0]).must_equal member
+    _(members[0]).must_be :frozen?
 
     # update
     policy = table.update_policy do |p|
@@ -82,7 +87,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :bigquery do
     end
 
     policy = table.policy # get
-    # _(policy.roles).must_be :empty?
+    _(policy.bindings).must_be :empty?
     _(policy.binding(role)).must_be :nil?
   end
 end

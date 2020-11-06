@@ -120,6 +120,47 @@ module Google
         end
 
         ##
+        # The bindings in the policy, which may be mutable or frozen depending on the context. See
+        # [Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) for a list of primitive and
+        # curated roles. See [BigQuery Table ACL
+        # permissions](https://cloud.google.com/bigquery/docs/table-access-controls-intro#permissions) for a list of
+        # values and patterns for members.
+        #
+        # @return [Array<Binding>] The array of binding objects, which may be mutable or frozen depending on the
+        #   context.
+        #
+        # @example Iterate over frozen bindings.
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #   policy = table.policy
+        #
+        #   policy.frozen? #=> true
+        #   policy.bindings.each do |binding|
+        #     puts binding.role
+        #     puts binding.members
+        #   end
+        #
+        # @example Update mutable bindings with {Table#update_policy}.
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.update_policy do |p|
+        #     p.bindings.each do |binding|
+        #       binding.members.clear
+        #     end
+        #   end # 2 API calls
+        #
+        def bindings
+          frozen? ? @bindings.values.freeze : @bindings.values
+        end
+
+        ##
         # Convenience method adding or replacing a binding in the policy. See [Understanding
         # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a list of primitive and curated roles. See
         # [BigQuery Table ACL
@@ -308,7 +349,7 @@ module Google
           def initialize role, members
             members = Array members
             raise ArgumentError, "members cannot be empty" if members.empty?
-            @role = role.freeze
+            @role = role
             @members = members
           end
 
@@ -322,6 +363,8 @@ module Google
           # @private Deep freeze the policy including its members.
           def freeze
             super
+            role.freeze
+            members.map(&:freeze)
             members.freeze
             self
           end
@@ -336,12 +379,9 @@ module Google
         protected
 
         def bindings_to_gapi
-          @bindings.keys.map do |role_name|
-            next if @bindings[role_name].nil? || @bindings[role_name].members.empty?
-            Google::Apis::BigqueryV2::Binding.new(
-              role:    role_name,
-              members: @bindings[role_name].members.uniq
-            )
+          @bindings.values.compact.uniq.map do |b|
+            next if b.members.empty?
+            b.to_gapi
           end
         end
       end

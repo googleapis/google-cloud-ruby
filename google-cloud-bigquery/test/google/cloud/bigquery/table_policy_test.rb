@@ -77,9 +77,14 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
     _(policy).must_be :frozen?
     _(policy.etag).must_equal "CAE="
     _(policy.etag).must_be :frozen?
-    # _(policy.roles).must_be_kind_of Hash
-    # _(policy.roles.size).must_equal 1
+    _(policy.bindings).must_be_kind_of Array
+    _(policy.bindings.size).must_equal 1
+    _(policy.bindings[0]).must_be :frozen?
+    _(policy.bindings[0].role).must_be :frozen?
+    _(policy.bindings[0].members).must_be_kind_of Array
+    _(policy.bindings[0].members).must_be :frozen?
     binding = policy.binding "roles/bigquery.dataViewer"
+    _(binding).must_equal policy.bindings[0]
     _(binding).must_be :frozen?
     _(binding.role).must_be :frozen?
     members = binding.members
@@ -104,10 +109,17 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
 
     bigquery.service.mocked_service = mock
     policy = table.update_policy do |p|
+      _(p.bindings).must_be_kind_of Array
+      _(p.bindings.size).must_equal 1
+      _(p.bindings[0]).wont_be :frozen?
+      _(p.bindings[0].role).wont_be :frozen?
+      _(p.bindings[0].members).must_be_kind_of Array
+      _(p.bindings[0].members).wont_be :frozen?
       binding = p.binding "roles/bigquery.dataViewer"
       _(binding).wont_be :frozen?
       members = binding.members
       _(members).must_be_kind_of Array
+      _(members.size).must_equal 1
       _(members).wont_be :frozen?
       members << "serviceAccount:1234567890@developer.gserviceaccount.com"
     end
@@ -115,9 +127,15 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
 
     _(policy).must_be_kind_of Google::Cloud::Bigquery::Policy
     _(policy.etag).must_equal "CAF="
-    # _(policy.roles).must_be_kind_of Hash
-    # _(policy.roles.size).must_equal 1
+    _(policy.bindings).must_be_kind_of Array
+    _(policy.bindings).must_be :frozen?
+    _(policy.bindings.size).must_equal 1
+    _(policy.bindings[0]).must_be :frozen?
+    _(policy.bindings[0].role).must_be :frozen?
+    _(policy.bindings[0].members).must_be_kind_of Array
+    _(policy.bindings[0].members).must_be :frozen?
     binding = policy.binding "roles/bigquery.dataViewer"
+    _(binding).must_equal policy.bindings[0]
     _(binding).must_be :frozen?
     members = binding.members
     _(members).must_be_kind_of Array
