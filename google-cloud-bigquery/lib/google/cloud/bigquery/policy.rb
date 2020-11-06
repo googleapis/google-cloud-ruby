@@ -33,6 +33,11 @@ module Google
       # @attr [String] etag Used to check if the policy has changed since the last request. When you make a request with
       #   an `etag` value, Cloud IAM compares the `etag` value in the request with the existing `etag` value associated
       #   with the policy. It writes the policy only if the `etag` values match.
+      # @attr [Array<Binding>] bindings The bindings in the policy, which may be mutable or frozen depending on the
+      #   context. See [Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) for a list of
+      #   primitive and curated roles. See [BigQuery Table ACL
+      #   permissions](https://cloud.google.com/bigquery/docs/table-access-controls-intro#permissions) for a list of
+      #   values and patterns for members.
       #
       # @example
       #   require "google/cloud/bigquery"
@@ -64,8 +69,35 @@ module Google
       #     p.remove_binding "roles/owner"
       #   end # 2 API calls
       #
+      # @example Iterate over frozen bindings.
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #   policy = table.policy
+      #
+      #   policy.frozen? #=> true
+      #   policy.bindings.each do |binding|
+      #     puts binding.role
+      #     puts binding.members
+      #   end
+      #
+      # @example Update mutable bindings with {Table#update_policy}.
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #   dataset = bigquery.dataset "my_dataset"
+      #   table = dataset.table "my_table"
+      #
+      #   table.update_policy do |p|
+      #     p.bindings.each do |binding|
+      #       binding.members.clear
+      #     end
+      #   end # 2 API calls
+      #
       class Policy
-        attr_reader :etag
+        attr_reader :etag, :bindings
 
         # @private
         def initialize etag, bindings
@@ -117,47 +149,6 @@ module Google
         #
         def binding_for role
           @bindings.find { |b| b.role == role }
-        end
-
-        ##
-        # The bindings in the policy, which may be mutable or frozen depending on the context. See
-        # [Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) for a list of primitive and
-        # curated roles. See [BigQuery Table ACL
-        # permissions](https://cloud.google.com/bigquery/docs/table-access-controls-intro#permissions) for a list of
-        # values and patterns for members.
-        #
-        # @return [Array<Binding>] The array of binding objects, which may be mutable or frozen depending on the
-        #   context.
-        #
-        # @example Iterate over frozen bindings.
-        #   require "google/cloud/bigquery"
-        #
-        #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
-        #   policy = table.policy
-        #
-        #   policy.frozen? #=> true
-        #   policy.bindings.each do |binding|
-        #     puts binding.role
-        #     puts binding.members
-        #   end
-        #
-        # @example Update mutable bindings with {Table#update_policy}.
-        #   require "google/cloud/bigquery"
-        #
-        #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
-        #
-        #   table.update_policy do |p|
-        #     p.bindings.each do |binding|
-        #       binding.members.clear
-        #     end
-        #   end # 2 API calls
-        #
-        def bindings
-          frozen? ? @bindings.freeze : @bindings
         end
 
         ##

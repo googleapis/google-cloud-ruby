@@ -78,20 +78,14 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
     _(policy.etag).must_equal "CAE="
     _(policy.etag).must_be :frozen?
     _(policy.bindings).must_be_kind_of Array
+    _(policy.bindings).must_be :frozen?
     _(policy.bindings.size).must_equal 1
     _(policy.bindings[0]).must_be :frozen?
     _(policy.bindings[0].role).must_be :frozen?
     _(policy.bindings[0].members).must_be_kind_of Array
     _(policy.bindings[0].members).must_be :frozen?
-    binding = policy.binding_for "roles/bigquery.dataViewer"
-    _(binding).must_equal policy.bindings[0]
-    _(binding).must_be :frozen?
-    _(binding.role).must_be :frozen?
-    members = binding.members
-    _(members).must_be_kind_of Array
-    _(members).must_be :frozen?
-    _(members.count).must_equal 1
-    _(members.first).must_equal "user:viewer@example.com"
+    _(policy.bindings[0].members.size).must_equal 1
+    _(policy.bindings[0].members[0]).must_equal "user:viewer@example.com"
   end
 
   it "raises if a block is provided to #policy" do
@@ -110,6 +104,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
     bigquery.service.mocked_service = mock
     policy = table.update_policy do |p|
       _(p.bindings).must_be_kind_of Array
+      _(p.bindings).wont_be :frozen?
       _(p.bindings.size).must_equal 1
       _(p.bindings[0]).wont_be :frozen?
       _(p.bindings[0].role).wont_be :frozen?
@@ -147,7 +142,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
     members = binding.members
     _(members).must_be_kind_of Array
     _(members).must_be :frozen?
-    _(members.count).must_equal 2
+    _(members.size).must_equal 2
     _(members.first).must_equal "user:viewer@example.com"
     _(members.last).must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
   end
