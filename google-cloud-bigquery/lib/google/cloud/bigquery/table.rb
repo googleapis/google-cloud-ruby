@@ -1276,14 +1276,13 @@ module Google
         end
 
         ##
-        # Gets the [Cloud IAM](https://cloud.google.com/iam/) access control
-        # policy for the table. The latest policy will be read from the service.
-        # See also {#update_policy}.
+        # Gets the Cloud IAM access control policy for the table. The latest policy will be read from the service. See
+        # also {#update_policy}.
         #
         # @see https://cloud.google.com/iam/docs/managing-policies Managing Policies
         # @see https://cloud.google.com/bigquery/docs/table-access-controls-intro Controlling access to tables
         #
-        # @return [Policy] The frozen Policy for the table.
+        # @return [Policy] The frozen policy for the table.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -1292,9 +1291,14 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
-        #   policy = table.policy # RPC
-        #   policy.role "roles/owner" #=> ["user:owner@example.com"]
+        #   policy = table.policy
+        #
         #   policy.frozen? #=> true
+        #   binding = policy.binding "roles/owner"
+        #   binding.role #=> "roles/owner"
+        #   binding.members #=> ["user:owner@example.com"]
+        #   binding.frozen? #=> true
+        #   binding.members.frozen? #=> true
         #
         def policy
           raise ArgumentError, "Block argument not supported: Use #update_policy instead." if block_given?
@@ -1304,19 +1308,17 @@ module Google
         end
 
         ##
-        # Updates the [Cloud IAM](https://cloud.google.com/iam/) access control
-        # policy for the table. The latest policy will be read from the service.
+        # Updates the Cloud IAM access control policy for the table. The latest policy will be read from the service.
         # See also {#policy}.
         #
         # @see https://cloud.google.com/iam/docs/managing-policies Managing Policies
         # @see https://cloud.google.com/bigquery/docs/table-access-controls-intro Controlling access to tables
         #
-        # @yield [policy] A block for updating the policy. The latest policy
-        #   will be read from the service and passed to the block. After the
-        #   block completes, the modified policy will be written to the service.
+        # @yield [policy] A block for updating the policy. The latest policy will be read from the service and passed to
+        #   the block. After the block completes, the modified policy will be written to the service.
         # @yieldparam [Policy] policy The mutable Policy for the table.
         #
-        # @return [Policy] The updated and frozen Policy for the table.
+        # @return [Policy] The updated and frozen policy for the table.
         #
         # @example Update the policy by passing a block.
         #   require "google/cloud/bigquery"
@@ -1326,9 +1328,10 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   table.update_policy do |p|
-        #     p.remove "roles/owner", "user:owner@example.com"
-        #     p.add "roles/owner", "user:newowner@example.com"
-        #     p.roles["roles/viewer"] = ["allUsers"]
+        #     p.set_binding "roles/viewer", "user:viewer@example.com"
+        #     p.binding("roles/editor").members << "user:new-editor@example.com"
+        #     p.binding("roles/editor").members.delete "user:old-editor@example.com"
+        #     p.remove_binding "roles/owner"
         #   end # 2 API calls
         #
         def update_policy

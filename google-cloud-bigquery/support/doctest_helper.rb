@@ -1666,6 +1666,12 @@ def policy_gapi etag: "CAE="
     version: 1,
     bindings: [
       Google::Apis::StorageV1::Policy::Binding.new(
+        role: "roles/editor",
+        members: [
+          "user:old-editor@example.com"
+        ]
+      ),
+      Google::Apis::StorageV1::Policy::Binding.new(
         role: "roles/owner",
         members: [
           "user:owner@example.com"

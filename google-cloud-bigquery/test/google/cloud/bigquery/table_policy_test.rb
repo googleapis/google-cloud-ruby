@@ -74,18 +74,25 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
     mock.verify
 
     _(policy).must_be_kind_of Google::Cloud::Bigquery::Policy
+    _(policy).must_be :frozen?
     _(policy.etag).must_equal "CAE="
-    _(policy.roles).must_be_kind_of Hash
-    _(policy.roles.size).must_equal 1
-    _(policy.roles["roles/bigquery.dataViewer"]).must_be_kind_of Array
-    _(policy.roles["roles/bigquery.dataViewer"].count).must_equal 1
-    _(policy.roles["roles/bigquery.dataViewer"].first).must_equal "user:viewer@example.com"
+    _(policy.etag).must_be :frozen?
+    # _(policy.roles).must_be_kind_of Hash
+    # _(policy.roles.size).must_equal 1
+    binding = policy.binding "roles/bigquery.dataViewer"
+    _(binding).must_be :frozen?
+    _(binding.role).must_be :frozen?
+    members = binding.members
+    _(members).must_be_kind_of Array
+    _(members).must_be :frozen?
+    _(members.count).must_equal 1
+    _(members.first).must_equal "user:viewer@example.com"
   end
 
   it "raises if a block is provided to #policy" do
     expect do
       table.policy do |p|
-        p.add "roles/bigquery.dataViewer", "serviceAccount:1234567890@developer.gserviceaccount.com"
+        p.binding("roles/bigquery.dataViewer").members << "serviceAccount:1234567890@developer.gserviceaccount.com"
       end
     end.must_raise ArgumentError
   end
@@ -97,18 +104,27 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
 
     bigquery.service.mocked_service = mock
     policy = table.update_policy do |p|
-      p.add "roles/bigquery.dataViewer", "serviceAccount:1234567890@developer.gserviceaccount.com"
+      binding = p.binding "roles/bigquery.dataViewer"
+      _(binding).wont_be :frozen?
+      members = binding.members
+      _(members).must_be_kind_of Array
+      _(members).wont_be :frozen?
+      members << "serviceAccount:1234567890@developer.gserviceaccount.com"
     end
     mock.verify
 
     _(policy).must_be_kind_of Google::Cloud::Bigquery::Policy
     _(policy.etag).must_equal "CAF="
-    _(policy.roles).must_be_kind_of Hash
-    _(policy.roles.size).must_equal 1
-    _(policy.roles["roles/bigquery.dataViewer"]).must_be_kind_of Array
-    _(policy.roles["roles/bigquery.dataViewer"].count).must_equal 2
-    _(policy.roles["roles/bigquery.dataViewer"].first).must_equal "user:viewer@example.com"
-    _(policy.roles["roles/bigquery.dataViewer"].last).must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
+    # _(policy.roles).must_be_kind_of Hash
+    # _(policy.roles.size).must_equal 1
+    binding = policy.binding "roles/bigquery.dataViewer"
+    _(binding).must_be :frozen?
+    members = binding.members
+    _(members).must_be_kind_of Array
+    _(members).must_be :frozen?
+    _(members.count).must_equal 2
+    _(members.first).must_equal "user:viewer@example.com"
+    _(members.last).must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
   end
 
   it "raises if no block is provided to #update_policy" do
