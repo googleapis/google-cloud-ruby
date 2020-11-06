@@ -84,7 +84,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :bigquery do
 
     # update
     policy = table.update_policy do |p|
-      p.remove_binding role
+      p.revoke role: role
     end
 
     policy = table.policy # get

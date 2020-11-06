@@ -122,7 +122,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
       binding_owner = p.bindings.find { |b| b.role == "roles/bigquery.dataOwner" }
       _(binding_owner).wont_be :nil?
       _(binding_owner.members).must_equal ["user:unwanted@example.com"]
-      binding_removed = p.remove_binding "roles/bigquery.dataOwner"
+      binding_removed = p.revoke role: "roles/bigquery.dataOwner"
       _(binding_removed).must_equal binding_owner
       _(p.bindings.find { |b| b.role == "roles/bigquery.dataOwner"}).must_be :nil?
     end

@@ -67,7 +67,7 @@ module Google
       #     binding = p.bindings.find { |b| b.role == "roles/editor" }
       #     binding.members << "user:new-editor@example.com"
       #     binding.members.delete "user:old-editor@example.com"
-      #     p.remove_binding "roles/owner"
+      #     p.revoke role: "roles/owner"
       #   end # 2 API calls
       #
       # @example Iterate over frozen bindings.
@@ -187,10 +187,10 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   table.update_policy do |p|
-        #     p.remove_binding "roles/owner"
+        #     p.revoke role: "roles/owner"
         #   end # 2 API calls
         #
-        def remove_binding role
+        def revoke role:
           i = @bindings.find_index { |b| b.role == role }
           @bindings.delete_at(i).freeze if i
         end

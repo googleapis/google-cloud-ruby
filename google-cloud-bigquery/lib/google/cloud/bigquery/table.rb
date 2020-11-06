@@ -1332,7 +1332,7 @@ module Google
         #     binding = p.bindings.find { |b| b.role == "roles/editor" }
         #     binding.members << "user:new-editor@example.com"
         #     binding.members.delete "user:old-editor@example.com"
-        #     p.remove_binding "roles/owner"
+        #     p.revoke role: "roles/owner"
         #   end # 2 API calls
         #
         def update_policy
