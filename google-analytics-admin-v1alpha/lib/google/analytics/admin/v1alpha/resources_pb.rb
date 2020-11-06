@@ -121,6 +121,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :property, :string, 1
       optional :display_name, :string, 2
     end
+    add_enum "google.analytics.admin.v1alpha.MaximumUserAccess" do
+      value :MAXIMUM_USER_ACCESS_UNSPECIFIED, 0
+      value :NO_ACCESS, 1
+      value :READ_AND_ANALYZE, 2
+      value :EDITOR_WITHOUT_LINK_MANAGEMENT, 3
+      value :EDITOR_INCLUDING_LINK_MANAGEMENT, 4
+    end
     add_enum "google.analytics.admin.v1alpha.IndustryCategory" do
       value :INDUSTRY_CATEGORY_UNSPECIFIED, 0
       value :AUTOMOTIVE, 1
@@ -150,13 +157,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :JOBS_AND_EDUCATION, 25
       value :SHOPPING, 26
     end
-    add_enum "google.analytics.admin.v1alpha.MaximumUserAccess" do
-      value :MAXIMUM_USER_ACCESS_UNSPECIFIED, 0
-      value :NO_ACCESS, 1
-      value :READ_AND_ANALYZE, 2
-      value :EDITOR_WITHOUT_LINK_MANAGEMENT, 3
-      value :EDITOR_INCLUDING_LINK_MANAGEMENT, 4
-    end
   end
 end
 
@@ -178,8 +178,8 @@ module Google
         DataSharingSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DataSharingSettings").msgclass
         AccountSummary = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AccountSummary").msgclass
         PropertySummary = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.PropertySummary").msgclass
-        IndustryCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.IndustryCategory").enummodule
         MaximumUserAccess = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.MaximumUserAccess").enummodule
+        IndustryCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.IndustryCategory").enummodule
       end
     end
   end

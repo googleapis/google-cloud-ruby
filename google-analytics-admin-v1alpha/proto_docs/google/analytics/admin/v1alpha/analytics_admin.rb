@@ -326,8 +326,8 @@ module Google
         #     Required. Example format: accounts/1234
         # @!attribute [rw] notify_new_user
         #   @return [::Boolean]
-        #     Optional. If notify_new_user is set, then email new user that they've been given
-        #     permissions on the resource.
+        #     Optional. If set, then email the new user notifying them that they've been granted
+        #     permissions to the resource.
         # @!attribute [rw] user_link
         #   @return [::Google::Analytics::Admin::V1alpha::UserLink]
         #     Required. The user link to create.
@@ -345,11 +345,12 @@ module Google
         #     Example format: accounts/1234
         # @!attribute [rw] notify_new_users
         #   @return [::Boolean]
-        #     Optional. If notify_new_users is set, then email new users that they've been given
-        #     permissions on the resource.
+        #     Optional. If set, then email the new users notifying them that they've been granted
+        #     permissions to the resource. Regardless of whether this is set or not,
+        #     notify_new_user field inside each individual request is ignored.
         # @!attribute [rw] requests
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::CreateUserLinkRequest>]
-        #     The requests specifying the user links to create.
+        #     Required. The requests specifying the user links to create.
         #     A maximum of 1000 user links can be created in a batch.
         class BatchCreateUserLinksRequest
           include ::Google::Protobuf::MessageExts
@@ -383,7 +384,7 @@ module Google
         #     Example format: accounts/1234
         # @!attribute [rw] requests
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::UpdateUserLinkRequest>]
-        #     The requests specifying the user links to update.
+        #     Required. The requests specifying the user links to update.
         #     A maximum of 1000 user links can be updated in a batch.
         class BatchUpdateUserLinksRequest
           include ::Google::Protobuf::MessageExts
@@ -417,7 +418,7 @@ module Google
         #     Example format: accounts/1234
         # @!attribute [rw] requests
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest>]
-        #     The requests specifying the user links to update.
+        #     Required. The requests specifying the user links to update.
         #     A maximum of 1000 user links can be updated in a batch.
         class BatchDeleteUserLinksRequest
           include ::Google::Protobuf::MessageExts
@@ -680,6 +681,7 @@ module Google
         #   @return [::String]
         #     Required. The name of the settings to lookup.
         #     Format:
+        #
         #     properties/\\{property_id}/webDataStreams/\\{stream_id}/enhancedMeasurementSettings
         #     Example: "properties/1000/webDataStreams/2000/enhancedMeasurementSettings"
         class GetEnhancedMeasurementSettingsRequest
