@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "e923003ac168f21f0ecda59e929f8a676c6bc58b"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "b27fe70a9ae111a57eb0ff5affb7133a70bc18a4"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "1f22d1e9654a2588aa32f3802156d965d8d1f10f",
-        "internalRef": "340738401"
+        "sha": "b365fff50d84fbe03ea16d02cc73d72fa1fc864d",
+        "internalRef": "340922897"
       }
     }
   ],
@@ -26,5 +26,59 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-artifact_registry-v1beta2.gemspec",
+    "lib/google-cloud-artifact_registry-v1beta2.rb",
+    "lib/google/cloud/artifact_registry/v1beta2.rb",
+    "lib/google/cloud/artifact_registry/v1beta2/artifact_registry.rb",
+    "lib/google/cloud/artifact_registry/v1beta2/artifact_registry/client.rb",
+    "lib/google/cloud/artifact_registry/v1beta2/artifact_registry/credentials.rb",
+    "lib/google/cloud/artifact_registry/v1beta2/artifact_registry/operations.rb",
+    "lib/google/cloud/artifact_registry/v1beta2/artifact_registry/paths.rb",
+    "lib/google/cloud/artifact_registry/v1beta2/version.rb",
+    "lib/google/devtools/artifactregistry/v1beta2/artifact_pb.rb",
+    "lib/google/devtools/artifactregistry/v1beta2/file_pb.rb",
+    "lib/google/devtools/artifactregistry/v1beta2/package_pb.rb",
+    "lib/google/devtools/artifactregistry/v1beta2/repository_pb.rb",
+    "lib/google/devtools/artifactregistry/v1beta2/service_pb.rb",
+    "lib/google/devtools/artifactregistry/v1beta2/service_services_pb.rb",
+    "lib/google/devtools/artifactregistry/v1beta2/settings_pb.rb",
+    "lib/google/devtools/artifactregistry/v1beta2/tag_pb.rb",
+    "lib/google/devtools/artifactregistry/v1beta2/version_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/devtools/artifactregistry/v1beta2/artifact.rb",
+    "proto_docs/google/devtools/artifactregistry/v1beta2/file.rb",
+    "proto_docs/google/devtools/artifactregistry/v1beta2/package.rb",
+    "proto_docs/google/devtools/artifactregistry/v1beta2/repository.rb",
+    "proto_docs/google/devtools/artifactregistry/v1beta2/service.rb",
+    "proto_docs/google/devtools/artifactregistry/v1beta2/tag.rb",
+    "proto_docs/google/devtools/artifactregistry/v1beta2/version.rb",
+    "proto_docs/google/iam/v1/iam_policy.rb",
+    "proto_docs/google/iam/v1/options.rb",
+    "proto_docs/google/iam/v1/policy.rb",
+    "proto_docs/google/longrunning/operations.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/expr.rb",
+    "test/google/cloud/artifact_registry/v1beta2/artifact_registry_operations_test.rb",
+    "test/google/cloud/artifact_registry/v1beta2/artifact_registry_paths_test.rb",
+    "test/google/cloud/artifact_registry/v1beta2/artifact_registry_test.rb",
+    "test/helper.rb"
   ]
 }
