@@ -71,6 +71,10 @@ module Google
             # `customEvent:levels_unlocked`. Universal metadata are dimensions and
             # metrics applicable to any property such as `country` and `totalUsers`.
             rpc :GetMetadata, ::Google::Analytics::Data::V1alpha::GetMetadataRequest, ::Google::Analytics::Data::V1alpha::Metadata
+            # The Google Analytics Realtime API returns a customized report of realtime
+            # event data for your property. These reports show events and usage from the
+            # last 30 minutes.
+            rpc :RunRealtimeReport, ::Google::Analytics::Data::V1alpha::RunRealtimeReportRequest, ::Google::Analytics::Data::V1alpha::RunRealtimeReportResponse
           end
 
           Stub = Service.rpc_stub_class

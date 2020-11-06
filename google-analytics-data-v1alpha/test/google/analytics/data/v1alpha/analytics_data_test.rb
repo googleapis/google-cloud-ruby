@@ -437,6 +437,80 @@ class ::Google::Analytics::Data::V1alpha::AnalyticsData::ClientTest < Minitest::
     end
   end
 
+  def test_run_realtime_report
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Data::V1alpha::RunRealtimeReportResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    property = "hello world"
+    dimensions = [{}]
+    metrics = [{}]
+    limit = 42
+    dimension_filter = {}
+    metric_filter = {}
+    metric_aggregations = [:METRIC_AGGREGATION_UNSPECIFIED]
+    order_bys = [{}]
+    return_property_quota = true
+
+    run_realtime_report_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :run_realtime_report, name
+      assert_kind_of ::Google::Analytics::Data::V1alpha::RunRealtimeReportRequest, request
+      assert_equal "hello world", request.property
+      assert_kind_of ::Google::Analytics::Data::V1alpha::Dimension, request.dimensions.first
+      assert_kind_of ::Google::Analytics::Data::V1alpha::Metric, request.metrics.first
+      assert_equal 42, request.limit
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::FilterExpression), request.dimension_filter
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::FilterExpression), request.metric_filter
+      assert_equal [:METRIC_AGGREGATION_UNSPECIFIED], request.metric_aggregations
+      assert_kind_of ::Google::Analytics::Data::V1alpha::OrderBy, request.order_bys.first
+      assert_equal true, request.return_property_quota
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, run_realtime_report_client_stub do
+      # Create client
+      client = ::Google::Analytics::Data::V1alpha::AnalyticsData::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.run_realtime_report({ property: property, dimensions: dimensions, metrics: metrics, limit: limit, dimension_filter: dimension_filter, metric_filter: metric_filter, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.run_realtime_report property: property, dimensions: dimensions, metrics: metrics, limit: limit, dimension_filter: dimension_filter, metric_filter: metric_filter, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.run_realtime_report ::Google::Analytics::Data::V1alpha::RunRealtimeReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, limit: limit, dimension_filter: dimension_filter, metric_filter: metric_filter, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.run_realtime_report({ property: property, dimensions: dimensions, metrics: metrics, limit: limit, dimension_filter: dimension_filter, metric_filter: metric_filter, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.run_realtime_report ::Google::Analytics::Data::V1alpha::RunRealtimeReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, limit: limit, dimension_filter: dimension_filter, metric_filter: metric_filter, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota), grpc_options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, run_realtime_report_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

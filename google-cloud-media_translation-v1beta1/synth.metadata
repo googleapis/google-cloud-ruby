@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "a260e2f767beed9e3dd8458cd278d0e91b507f01"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "e923003ac168f21f0ecda59e929f8a676c6bc58b"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "705962b5a317e083fdbb2311d4baa72df5816686",
-        "internalRef": "340463146"
+        "sha": "1f22d1e9654a2588aa32f3802156d965d8d1f10f",
+        "internalRef": "340738401"
       }
     }
   ],
@@ -26,5 +26,34 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-media_translation-v1beta1.gemspec",
+    "lib/google-cloud-media_translation-v1beta1.rb",
+    "lib/google/cloud/media_translation/v1beta1.rb",
+    "lib/google/cloud/media_translation/v1beta1/speech_translation_service.rb",
+    "lib/google/cloud/media_translation/v1beta1/speech_translation_service/client.rb",
+    "lib/google/cloud/media_translation/v1beta1/speech_translation_service/credentials.rb",
+    "lib/google/cloud/media_translation/v1beta1/version.rb",
+    "lib/google/cloud/mediatranslation/v1beta1/media_translation_pb.rb",
+    "lib/google/cloud/mediatranslation/v1beta1/media_translation_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/mediatranslation/v1beta1/media_translation.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/rpc/status.rb",
+    "test/google/cloud/media_translation/v1beta1/speech_translation_service_test.rb",
+    "test/helper.rb"
   ]
 }

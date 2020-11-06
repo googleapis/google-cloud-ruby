@@ -27,7 +27,7 @@ module Google
         #     Resource name of this metadata.
         # @!attribute [rw] dimensions
         #   @return [::Array<::Google::Analytics::Data::V1alpha::DimensionMetadata>]
-        #     The dimensions descriptions.
+        #     The dimension descriptions.
         # @!attribute [rw] metrics
         #   @return [::Array<::Google::Analytics::Data::V1alpha::MetricMetadata>]
         #     The metric descriptions.
@@ -337,6 +337,85 @@ module Google
         #
         #     Example: properties/1234/metadata
         class GetMetadataRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to generate a realtime report.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     A Google Analytics GA4 property identifier whose events are tracked.
+        #     Specified in the URL path and not the body. To learn more, see [where to
+        #     find your Property
+        #     ID](https://developers.google.com/analytics/trusted-testing/analytics-data/property-id).
+        #
+        #     Example: properties/1234
+        # @!attribute [rw] dimensions
+        #   @return [::Array<::Google::Analytics::Data::V1alpha::Dimension>]
+        #     The dimensions requested and displayed.
+        # @!attribute [rw] metrics
+        #   @return [::Array<::Google::Analytics::Data::V1alpha::Metric>]
+        #     The metrics requested and displayed.
+        # @!attribute [rw] limit
+        #   @return [::Integer]
+        #     The number of rows to return. If unspecified, 10 rows are returned. If
+        #     -1, all rows are returned.
+        # @!attribute [rw] dimension_filter
+        #   @return [::Google::Analytics::Data::V1alpha::FilterExpression]
+        #     The filter clause of dimensions. Dimensions must be requested to be used in
+        #     this filter. Metrics cannot be used in this filter.
+        # @!attribute [rw] metric_filter
+        #   @return [::Google::Analytics::Data::V1alpha::FilterExpression]
+        #     The filter clause of metrics. Applied at post aggregation phase, similar to
+        #     SQL having-clause. Metrics must be requested to be used in this filter.
+        #     Dimensions cannot be used in this filter.
+        # @!attribute [rw] metric_aggregations
+        #   @return [::Array<::Google::Analytics::Data::V1alpha::MetricAggregation>]
+        #     Aggregation of metrics. Aggregated metric values will be shown in rows
+        #     where the dimension_values are set to "RESERVED_(MetricAggregation)".
+        # @!attribute [rw] order_bys
+        #   @return [::Array<::Google::Analytics::Data::V1alpha::OrderBy>]
+        #     Specifies how rows are ordered in the response.
+        # @!attribute [rw] return_property_quota
+        #   @return [::Boolean]
+        #     Toggles whether to return the current state of this Analytics Property's
+        #     Realtime quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+        class RunRealtimeReportRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response realtime report table corresponding to a request.
+        # @!attribute [rw] dimension_headers
+        #   @return [::Array<::Google::Analytics::Data::V1alpha::DimensionHeader>]
+        #     Describes dimension columns. The number of DimensionHeaders and ordering of
+        #     DimensionHeaders matches the dimensions present in rows.
+        # @!attribute [rw] metric_headers
+        #   @return [::Array<::Google::Analytics::Data::V1alpha::MetricHeader>]
+        #     Describes metric columns. The number of MetricHeaders and ordering of
+        #     MetricHeaders matches the metrics present in rows.
+        # @!attribute [rw] rows
+        #   @return [::Array<::Google::Analytics::Data::V1alpha::Row>]
+        #     Rows of dimension value combinations and metric values in the report.
+        # @!attribute [rw] totals
+        #   @return [::Array<::Google::Analytics::Data::V1alpha::Row>]
+        #     If requested, the totaled values of metrics.
+        # @!attribute [rw] maximums
+        #   @return [::Array<::Google::Analytics::Data::V1alpha::Row>]
+        #     If requested, the maximum values of metrics.
+        # @!attribute [rw] minimums
+        #   @return [::Array<::Google::Analytics::Data::V1alpha::Row>]
+        #     If requested, the minimum values of metrics.
+        # @!attribute [rw] row_count
+        #   @return [::Integer]
+        #     The total number of rows in the query result, regardless of the number of
+        #     rows returned in the response. For example if a query returns 175 rows and
+        #     includes limit = 50 in the API request, the response will contain row_count
+        #     = 175 but only 50 rows.
+        # @!attribute [rw] property_quota
+        #   @return [::Google::Analytics::Data::V1alpha::PropertyQuota]
+        #     This Analytics Property's Realtime quota state including this request.
+        class RunRealtimeReportResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

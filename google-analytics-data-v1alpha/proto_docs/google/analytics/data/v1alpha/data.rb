@@ -50,18 +50,30 @@ module Google
         # The unique identifier of the property whose events are tracked.
         # @!attribute [rw] property_id
         #   @return [::String]
-        #     A Google Analytics 4 (GA4) property id.
+        #     A Google Analytics GA4 property id. To learn more, see [where to find your
+        #     Property
+        #     ID](https://developers.google.com/analytics/trusted-testing/analytics-data/property-id).
         class Entity
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Dimensions are attributes of your data. For example, the dimension City
-        # indicates the city, for example, "Paris" or "New York", from which an event
-        # originates. Requests are allowed up to 8 dimensions.
+        # Dimensions are attributes of your data. For example, the dimension city
+        # indicates the city from which an event originates. Dimension values in report
+        # responses are strings; for example, city could be "Paris" or "New York".
+        # Requests are allowed up to 8 dimensions.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of the dimension.
+        #     The name of the dimension. See the [API
+        #     Dimensions](https://developers.google.com/analytics/trusted-testing/analytics-data/api-schema#dimensions)
+        #     for the list of dimension names.
+        #
+        #     If `dimensionExpression` is specified, `name` can be any string that you
+        #     would like. For example if a `dimensionExpression` concatenates `country`
+        #     and `city`, you could call that dimension `countryAndCity`.
+        #
+        #     Dimensions are referenced by `name` in `dimensionFilter`, `orderBys`,
+        #     `dimensionExpression`, and `pivots`.
         # @!attribute [rw] dimension_expression
         #   @return [::Google::Analytics::Data::V1alpha::DimensionExpression]
         #     One dimension can be the result of an expression of multiple dimensions.
@@ -119,20 +131,30 @@ module Google
           end
         end
 
-        # The quantitative measurements of a report. For example, the metric eventCount
-        # is the total number of events. Requests are allowed up to 10 metrics.
+        # The quantitative measurements of a report. For example, the metric
+        # `eventCount` is the total number of events. Requests are allowed up to 10
+        # metrics.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of the metric.
+        #     The name of the metric. See the [API
+        #     Metrics](https://developers.google.com/analytics/trusted-testing/analytics-data/api-schema#metrics)
+        #     for the list of metric names.
+        #
+        #     If `expression` is specified, `name` can be any string that you would like.
+        #     For example if `expression` is `screenPageViews/sessions`, you could call
+        #     that metric's name = `viewsPerSession`.
+        #
+        #     Metrics are referenced by `name` in `metricFilter`, `orderBys`, and metric
+        #     `expression`.
         # @!attribute [rw] expression
         #   @return [::String]
         #     A mathematical expression for derived metrics. For example, the metric
-        #     Event count per user is eventCount/totalUsers.
+        #     Event count per user is `eventCount/totalUsers`.
         # @!attribute [rw] invisible
         #   @return [::Boolean]
-        #     Indicates if a metric is invisible.
-        #     If a metric is invisible, the metric is not in the response, but can be
-        #     used in filters, order_bys or being referred to in a metric expression.
+        #     Indicates if a metric is invisible in the report response. If a metric is
+        #     invisible, the metric will not produce a column in the response, but can be
+        #     used in `metricFilter`, `orderBys`, or a metric `expression`.
         class Metric
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -176,7 +198,10 @@ module Google
         #     or metrics.
         # @!attribute [rw] null_filter
         #   @return [::Boolean]
-        #     A filter for null values.
+        #     A filter for null values. If True, a null dimension value is matched by
+        #     this filter. Null filter is commonly used inside a NOT filter
+        #     expression. For example, a NOT expression of a null filter removes rows
+        #     when a dimension is null.
         # @!attribute [rw] string_filter
         #   @return [::Google::Analytics::Data::V1alpha::Filter::StringFilter]
         #     Strings related filter.
@@ -577,28 +602,38 @@ module Google
         # For example if RunReportRequest contains:
         #
         # ```none
-        # dimensions {
-        #   name: "eventName"
-        # }
-        # dimensions {
-        #   name: "countryId"
-        # }
-        # metrics {
-        #   name: "eventCount"
-        # }
+        # "dimensions": [
+        #   {
+        #     "name": "eventName"
+        #   },
+        #   {
+        #     "name": "countryId"
+        #   }
+        # ],
+        # "metrics": [
+        #   {
+        #     "name": "eventCount"
+        #   }
+        # ]
         # ```
         #
-        # One row with 'in_app_purchase' as the eventName, 'us' as the countryId, and
+        # One row with 'in_app_purchase' as the eventName, 'JP' as the countryId, and
         # 15 as the eventCount, would be:
         #
         # ```none
-        # dimension_values {
-        #   name: 'in_app_purchase'
-        #   name: 'us'
-        # }
-        # metric_values {
-        #   int64_value: 15
-        # }
+        # "dimensionValues": [
+        #   {
+        #     "value": "in_app_purchase"
+        #   },
+        #   {
+        #     "value": "JP"
+        #   }
+        # ],
+        # "metricValues": [
+        #   {
+        #     "value": "15"
+        #   }
+        # ]
         # ```
         # @!attribute [rw] dimension_values
         #   @return [::Array<::Google::Analytics::Data::V1alpha::DimensionValue>]
@@ -647,20 +682,24 @@ module Google
         # Exhausted errors.
         # @!attribute [rw] tokens_per_day
         #   @return [::Google::Analytics::Data::V1alpha::QuotaStatus]
-        #     Analytics Properties can use up to 25,000 tokens per day. Most requests
+        #     Standard Analytics Properties can use up to 25,000 tokens per day;
+        #     Analytics 360 Properties can use 250,000 tokens per day. Most requests
         #     consume fewer than 10 tokens.
         # @!attribute [rw] tokens_per_hour
         #   @return [::Google::Analytics::Data::V1alpha::QuotaStatus]
-        #     Analytics Properties can use up to 5,000 tokens per day. An API request
-        #     consumes a single number of tokens, and that number is deducted from both
-        #     the hourly and daily quotas.
+        #     Standard Analytics Properties can use up to 5,000 tokens per day; Analytics
+        #     360 Properties can use 50,000 tokens per day. An API request consumes a
+        #     single number of tokens, and that number is deducted from both the hourly
+        #     and daily quotas.
         # @!attribute [rw] concurrent_requests
         #   @return [::Google::Analytics::Data::V1alpha::QuotaStatus]
-        #     Analytics Properties can send up to 10 concurrent requests.
+        #     Standard Analytics Properties can send up to 10 concurrent requests;
+        #     Analytics 360 Properties can use up to 50 concurrent requests.
         # @!attribute [rw] server_errors_per_project_per_hour
         #   @return [::Google::Analytics::Data::V1alpha::QuotaStatus]
-        #     Analytics Properties and cloud project pairs can have up to 10
-        #     server errors per hour.
+        #     Standard Analytics Properties and cloud project pairs can have up to 10
+        #     server errors per hour; Analytics 360 Properties and cloud project pairs
+        #     can have up to 50 server errors per hour.
         class PropertyQuota
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
