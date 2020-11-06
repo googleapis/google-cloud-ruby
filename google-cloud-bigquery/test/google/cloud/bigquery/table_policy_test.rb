@@ -83,7 +83,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
     _(policy.bindings[0].role).must_be :frozen?
     _(policy.bindings[0].members).must_be_kind_of Array
     _(policy.bindings[0].members).must_be :frozen?
-    binding = policy.binding "roles/bigquery.dataViewer"
+    binding = policy.binding_for "roles/bigquery.dataViewer"
     _(binding).must_equal policy.bindings[0]
     _(binding).must_be :frozen?
     _(binding.role).must_be :frozen?
@@ -97,7 +97,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
   it "raises if a block is provided to #policy" do
     expect do
       table.policy do |p|
-        p.binding("roles/bigquery.dataViewer").members << "serviceAccount:1234567890@developer.gserviceaccount.com"
+        p.binding_for("roles/bigquery.dataViewer").members << "serviceAccount:1234567890@developer.gserviceaccount.com"
       end
     end.must_raise ArgumentError
   end
@@ -115,7 +115,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
       _(p.bindings[0].role).wont_be :frozen?
       _(p.bindings[0].members).must_be_kind_of Array
       _(p.bindings[0].members).wont_be :frozen?
-      binding = p.binding "roles/bigquery.dataViewer"
+      binding = p.binding_for "roles/bigquery.dataViewer"
       _(binding).wont_be :frozen?
       members = binding.members
       _(members).must_be_kind_of Array
@@ -134,7 +134,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
     _(policy.bindings[0].role).must_be :frozen?
     _(policy.bindings[0].members).must_be_kind_of Array
     _(policy.bindings[0].members).must_be :frozen?
-    binding = policy.binding "roles/bigquery.dataViewer"
+    binding = policy.binding_for "roles/bigquery.dataViewer"
     _(binding).must_equal policy.bindings[0]
     _(binding).must_be :frozen?
     members = binding.members

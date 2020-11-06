@@ -1294,7 +1294,7 @@ module Google
         #   policy = table.policy
         #
         #   policy.frozen? #=> true
-        #   binding = policy.binding "roles/owner"
+        #   binding = policy.binding_for "roles/owner"
         #   binding.role #=> "roles/owner"
         #   binding.members #=> ["user:owner@example.com"]
         #   binding.frozen? #=> true
@@ -1329,8 +1329,8 @@ module Google
         #
         #   table.update_policy do |p|
         #     p.set_binding "roles/viewer", "user:viewer@example.com"
-        #     p.binding("roles/editor").members << "user:new-editor@example.com"
-        #     p.binding("roles/editor").members.delete "user:old-editor@example.com"
+        #     p.binding_for("roles/editor").members << "user:new-editor@example.com"
+        #     p.binding_for("roles/editor").members.delete "user:old-editor@example.com"
         #     p.remove_binding "roles/owner"
         #   end # 2 API calls
         #
