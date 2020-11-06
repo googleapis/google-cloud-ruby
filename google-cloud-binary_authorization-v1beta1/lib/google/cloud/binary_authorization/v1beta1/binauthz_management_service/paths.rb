@@ -21,8 +21,8 @@ module Google
   module Cloud
     module BinaryAuthorization
       module V1beta1
-        module BinauthzManagementServiceV1Beta1
-          # Path helper methods for the BinauthzManagementServiceV1Beta1 API.
+        module BinauthzManagementService
+          # Path helper methods for the BinauthzManagementService API.
           module Paths
             ##
             # Create a fully-qualified Attestor resource string.

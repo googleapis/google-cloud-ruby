@@ -22,9 +22,9 @@ require "gapic/config/method"
 
 require "google/cloud/binary_authorization/v1beta1/version"
 
-require "google/cloud/binary_authorization/v1beta1/binauthz_management_service_v1_beta1/credentials"
-require "google/cloud/binary_authorization/v1beta1/binauthz_management_service_v1_beta1/paths"
-require "google/cloud/binary_authorization/v1beta1/binauthz_management_service_v1_beta1/client"
+require "google/cloud/binary_authorization/v1beta1/binauthz_management_service/credentials"
+require "google/cloud/binary_authorization/v1beta1/binauthz_management_service/paths"
+require "google/cloud/binary_authorization/v1beta1/binauthz_management_service/client"
 
 module Google
   module Cloud
@@ -41,15 +41,15 @@ module Google
         #
         # To load this service and instantiate a client:
         #
-        #     require "google/cloud/binary_authorization/v1beta1/binauthz_management_service_v1_beta1"
-        #     client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.new
+        #     require "google/cloud/binary_authorization/v1beta1/binauthz_management_service"
+        #     client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
         #
-        module BinauthzManagementServiceV1Beta1
+        module BinauthzManagementService
         end
       end
     end
   end
 end
 
-helper_path = ::File.join __dir__, "binauthz_management_service_v1_beta1", "helpers.rb"
-require "google/cloud/binary_authorization/v1beta1/binauthz_management_service_v1_beta1/helpers" if ::File.file? helper_path
+helper_path = ::File.join __dir__, "binauthz_management_service", "helpers.rb"
+require "google/cloud/binary_authorization/v1beta1/binauthz_management_service/helpers" if ::File.file? helper_path

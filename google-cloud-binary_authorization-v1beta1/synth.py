@@ -35,6 +35,7 @@ library = gapic.ruby_library(
         "ruby-cloud-product-url": "https://cloud.google.com/binary-authorization/",
         "ruby-cloud-api-id": "binaryauthorization.googleapis.com",
         "ruby-cloud-api-shortname": "binaryauthorization",
+        "ruby-cloud-service-override": "BinauthzManagementServiceV1Beta1=BinauthzManagementService",
     }
 )
 

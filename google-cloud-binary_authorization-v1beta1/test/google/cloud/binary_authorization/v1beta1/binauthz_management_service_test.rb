@@ -22,9 +22,9 @@ require "gapic/grpc/service_stub"
 
 require "google/cloud/binaryauthorization/v1beta1/service_pb"
 require "google/cloud/binaryauthorization/v1beta1/service_services_pb"
-require "google/cloud/binary_authorization/v1beta1/binauthz_management_service_v1_beta1"
+require "google/cloud/binary_authorization/v1beta1/binauthz_management_service"
 
-class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::ClientTest < Minitest::Test
+class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -66,7 +66,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1
 
     Gapic::ServiceStub.stub :new, get_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.new do |config|
+      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -124,7 +124,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1
 
     Gapic::ServiceStub.stub :new, update_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.new do |config|
+      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -186,7 +186,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1
 
     Gapic::ServiceStub.stub :new, create_attestor_client_stub do
       # Create client
-      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.new do |config|
+      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -244,7 +244,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1
 
     Gapic::ServiceStub.stub :new, get_attestor_client_stub do
       # Create client
-      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.new do |config|
+      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -302,7 +302,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1
 
     Gapic::ServiceStub.stub :new, update_attestor_client_stub do
       # Create client
-      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.new do |config|
+      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -364,7 +364,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1
 
     Gapic::ServiceStub.stub :new, list_attestors_client_stub do
       # Create client
-      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.new do |config|
+      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -427,7 +427,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1
 
     Gapic::ServiceStub.stub :new, delete_attestor_client_stub do
       # Create client
-      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.new do |config|
+      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -471,7 +471,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.new do |config|
+      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -481,6 +481,6 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1
     end
 
     assert_same block_config, config
-    assert_kind_of ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client::Configuration, config
   end
 end

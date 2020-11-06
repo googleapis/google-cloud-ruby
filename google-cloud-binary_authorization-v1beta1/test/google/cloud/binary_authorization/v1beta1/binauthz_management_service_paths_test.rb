@@ -20,13 +20,13 @@ require "helper"
 
 require "gapic/grpc/service_stub"
 
-require "google/cloud/binary_authorization/v1beta1/binauthz_management_service_v1_beta1"
+require "google/cloud/binary_authorization/v1beta1/binauthz_management_service"
 
-class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::ClientPathsTest < Minitest::Test
+class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::ClientPathsTest < Minitest::Test
   def test_attestor_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.new do |config|
+      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -38,7 +38,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1
   def test_policy_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.new do |config|
+      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -50,7 +50,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.new do |config|
+      client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new do |config|
         config.credentials = grpc_channel
       end
 

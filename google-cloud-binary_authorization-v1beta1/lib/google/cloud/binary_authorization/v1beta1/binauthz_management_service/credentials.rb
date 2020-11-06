@@ -22,8 +22,8 @@ module Google
   module Cloud
     module BinaryAuthorization
       module V1beta1
-        module BinauthzManagementServiceV1Beta1
-          # Credentials for the BinauthzManagementServiceV1Beta1 API.
+        module BinauthzManagementService
+          # Credentials for the BinauthzManagementService API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform"

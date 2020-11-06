@@ -27,7 +27,7 @@ export BINARY_AUTHORIZATION_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/binary_authorization/v1beta1"
 
-client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.new
+client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-binary_authorization-v1beta1
 checks for credentials are configured on the service Credentials class (such as
-{::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Credentials}):
+{::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Credentials}):
 
 1. `BINARY_AUTHORIZATION_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `BINARY_AUTHORIZATION_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/binary_authorization/v1beta1"
 
 ENV["BINARY_AUTHORIZATION_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.new
+client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ environment variables. Either on an individual client initialization:
 ```ruby
 require "google/cloud/binary_authorization/v1beta1"
 
-client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.new do |config|
+client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -98,11 +98,11 @@ Or configured globally for all clients:
 ```ruby
 require "google/cloud/binary_authorization/v1beta1"
 
-::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.configure do |config|
+::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementServiceV1Beta1::Client.new
+client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
 ```
 
 ### Cloud SDK
