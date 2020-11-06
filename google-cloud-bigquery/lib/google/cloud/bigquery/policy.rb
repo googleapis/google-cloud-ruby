@@ -258,7 +258,7 @@ module Google
         # @private Deep freeze the policy including its bindings.
         def freeze
           super
-          @bindings.values.map(&:freeze)
+          @bindings.values.each(&:freeze)
           @bindings.freeze
           self
         end
@@ -364,7 +364,7 @@ module Google
           def freeze
             super
             role.freeze
-            members.map(&:freeze)
+            members.each(&:freeze)
             members.freeze
             self
           end
