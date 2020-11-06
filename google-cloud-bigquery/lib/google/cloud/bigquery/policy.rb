@@ -116,7 +116,7 @@ module Google
         #   end # 2 API calls
         #
         def binding_for role
-          @bindings[role]
+          @bindings.find { |b| b.role == role }
         end
 
         ##
@@ -157,7 +157,7 @@ module Google
         #   end # 2 API calls
         #
         def bindings
-          frozen? ? @bindings.values.freeze : @bindings.values
+          frozen? ? @bindings.freeze : @bindings
         end
 
         ##
@@ -213,7 +213,11 @@ module Google
         #
         def set_binding role, members
           new_binding = Binding.new role, members
-          @bindings[role] = new_binding
+          if (i = @bindings.find_index { |b| b.role == role })
+            @bindings[i] = new_binding
+          else
+            @bindings << new_binding
+          end
           new_binding
         end
 
@@ -241,7 +245,8 @@ module Google
         #   end # 2 API calls
         #
         def remove_binding role
-          @bindings.delete(role).freeze
+          i = @bindings.find_index { |b| b.role == role }
+          @bindings.delete_at(i).freeze if i
         end
 
         ##
@@ -258,7 +263,7 @@ module Google
         # @private Deep freeze the policy including its bindings.
         def freeze
           super
-          @bindings.values.each(&:freeze)
+          @bindings.each(&:freeze)
           @bindings.freeze
           self
         end
@@ -266,10 +271,10 @@ module Google
         ##
         # @private New Policy from a Google::Apis::BigqueryV2::Policy object.
         def self.from_gapi gapi
-          bindings_hash = Array(gapi.bindings).each_with_object({}) do |binding, memo|
-            memo[binding.role] = Binding.new binding.role, binding.members.to_a
+          bindings = Array(gapi.bindings).map do |binding|
+            Binding.new binding.role, binding.members.to_a
           end
-          new gapi.etag, bindings_hash
+          new gapi.etag, bindings
         end
 
         ##
@@ -379,7 +384,7 @@ module Google
         protected
 
         def bindings_to_gapi
-          @bindings.values.compact.uniq.map do |b|
+          @bindings.compact.uniq.map do |b|
             next if b.members.empty?
             b.to_gapi
           end

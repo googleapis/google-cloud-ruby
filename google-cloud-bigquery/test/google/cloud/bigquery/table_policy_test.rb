@@ -122,6 +122,13 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
       _(members.size).must_equal 1
       _(members).wont_be :frozen?
       members << "serviceAccount:1234567890@developer.gserviceaccount.com"
+      p.set_binding "roles/bigquery.dataOwner", "user:unwanted@example.com"
+      binding_owner = p.binding_for "roles/bigquery.dataOwner"
+      _(binding_owner).wont_be :nil?
+      _(binding_owner.members).must_equal ["user:unwanted@example.com"]
+      binding_removed = p.remove_binding "roles/bigquery.dataOwner"
+      _(binding_removed).must_equal binding_owner
+      _(p.binding_for("roles/bigquery.dataOwner")).must_be :nil?
     end
     mock.verify
 
