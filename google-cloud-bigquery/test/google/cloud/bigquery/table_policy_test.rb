@@ -61,9 +61,6 @@ describe Google::Cloud::Bigquery::Table, :policy, :mock_bigquery do
       ]
     )
   }
-  let(:old_policy) { Google::Cloud::BigqueryV2::Policy.from_gapi old_policy_gapi }
-  let(:updated_policy) { Google::Cloud::BigqueryV2::Policy.from_gapi updated_policy_gapi }
-  let(:new_policy) { Google::Cloud::BigqueryV2::Policy.from_gapi new_policy_gapi }
 
   it "gets the policy" do
     mock = Minitest::Mock.new
