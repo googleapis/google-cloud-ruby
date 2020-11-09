@@ -158,6 +158,7 @@ module Google
           existing_binding = bindings.find { |b| b.role == role }
           if existing_binding
             existing_binding.members.concat Array(members)
+            existing_binding.members.uniq!
           else
             bindings << Binding.new(role, members)
           end
@@ -351,7 +352,7 @@ module Google
 
           # @private
           def initialize role, members
-            members = Array members
+            members = Array(members).uniq
             raise ArgumentError, "members cannot be empty" if members.empty?
             @role = role
             @members = members
