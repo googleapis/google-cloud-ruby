@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.2 / 2020-11-09
+
+#### Documentation
+
+* Updated several field descriptions, including noting required fields
+
 ### 0.2.1 / 2020-11-02
 
 #### Documentation
