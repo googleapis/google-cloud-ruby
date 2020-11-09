@@ -155,9 +155,9 @@ module Google
         #   end
         #
         def grant role:, members:
-          binding_existing = bindings.find { |b| b.role == role }
-          if binding_existing
-            binding_existing.members.concat Array(members)
+          existing_binding = bindings.find { |b| b.role == role }
+          if existing_binding
+            existing_binding.members.concat Array(members)
           else
             bindings << Binding.new(role, members)
           end
@@ -240,7 +240,7 @@ module Google
           bindings_for_role = role ? bindings.select { |b| b.role == role } : bindings
           bindings_for_role.each do |b|
             if members
-              b.members.delete_if { |m| members.include? m }
+              b.members -= Array(members)
               bindings.delete b if b.members.empty?
             else
               bindings.delete b
