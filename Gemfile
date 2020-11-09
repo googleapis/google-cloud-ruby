@@ -137,6 +137,7 @@ gem "google-cloud-security_center-v1p1beta1", path: "google-cloud-security_cente
 gem "google-cloud-service_control-v1", path: "google-cloud-service_control-v1"
 gem "google-cloud-service_directory", path: "google-cloud-service_directory"
 gem "google-cloud-service_directory-v1beta1", path: "google-cloud-service_directory-v1beta1"
+gem "google-cloud-service_management-v1", path: "google-cloud-service_management-v1"
 gem "google-cloud-spanner", path: "google-cloud-spanner"
 gem "google-cloud-spanner-admin-database-v1", path: "google-cloud-spanner-admin-database-v1"
 gem "google-cloud-spanner-admin-instance-v1", path: "google-cloud-spanner-admin-instance-v1"

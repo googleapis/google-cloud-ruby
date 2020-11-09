@@ -1,0 +1,11 @@
+{
+    "api_id": "servicemanagement.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-service_management-v1/latest",
+    "distribution_name": "google-cloud-service_management-v1",
+    "language": "ruby",
+    "name": "servicemanagement",
+    "name_pretty": "Service Management API V1 API",
+    "product_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
