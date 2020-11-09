@@ -227,7 +227,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       name: sub_path, dead_letter_policy: dead_letter_policy_gapi
     update_mask = Google::Protobuf::FieldMask.new paths: ["dead_letter_policy"]
     mock = Minitest::Mock.new
-    mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
     subscription.service.mocked_subscriber = mock
 
     subscription.dead_letter_policy = Google::Cloud::PubSub::DeadLetterPolicy.new(
@@ -252,7 +252,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       name: sub_path, dead_letter_policy: dead_letter_policy_gapi
     update_mask = Google::Protobuf::FieldMask.new paths: ["dead_letter_policy"]
     mock = Minitest::Mock.new
-    mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
     subscription.service.mocked_subscriber = mock
 
     subscription.dead_letter_policy = Google::Cloud::PubSub::DeadLetterPolicy.new(
@@ -276,7 +276,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     update_sub = Google::Cloud::PubSub::V1::Subscription.new name: sub_path, dead_letter_policy: nil
     update_mask = Google::Protobuf::FieldMask.new paths: ["dead_letter_policy"]
     mock = Minitest::Mock.new
-    mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
     subscription.service.mocked_subscriber = mock
 
     subscription.dead_letter_policy = nil
