@@ -120,6 +120,15 @@ describe Google::Cloud::Bigquery::Policy, :mock_bigquery do
       _(binding_viewer.members).must_include member_owner
     end
 
+    it "does not allow duplicate members to be set in a binding" do
+      binding_viewer = policy.bindings.find { |b| b.role == role_viewer }
+
+      binding_viewer.members = [member_viewer, member_editor, member_editor, member_owner]
+      _(binding_viewer.members.size).must_equal 3
+      _(binding_viewer.members).must_include member_viewer
+      _(binding_viewer.members).must_include member_editor
+      _(binding_viewer.members).must_include member_owner
+    end
 
     it "revokes an existing role with one member for all members" do
       policy.revoke role: role_viewer

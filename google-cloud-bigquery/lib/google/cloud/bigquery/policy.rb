@@ -348,7 +348,8 @@ module Google
         #   end
         #
         class Binding
-          attr_accessor :role, :members
+          attr_accessor :role
+          attr_reader :members
 
           # @private
           def initialize role, members
@@ -356,6 +357,41 @@ module Google
             raise ArgumentError, "members cannot be empty" if members.empty?
             @role = role
             @members = members
+          end
+
+          ##
+          # Sets the binding members.
+          #
+          # @param [Array<String>] new_members Specifies the identities requesting access for a Cloud Platform resource.
+          #   `new_members` can have the following values. Required.
+          #
+          #   * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google
+          #     account.
+          #   * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google
+          #     account or a service account.
+          #   * `user:<emailid>`: An email address that represents a specific Google account. For example,
+          #     `alice@example.com`.
+          #   * `serviceAccount:<emailid>`: An email address that represents a service account. For example,
+          #     `my-other-app@appspot.gserviceaccount.com`.
+          #   * `group:<emailid>`: An email address that represents a Google group. For example, `admins@example.com`.
+          #   * `deleted:user:<emailid>?uid=<uniqueid>`: An email address (plus unique identifier) representing a user
+          #     that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user
+          #     is recovered, this value reverts to `user:<emailid>` and the recovered user retains the role in the
+          #     binding.
+          #   * `deleted: serviceAccount:<emailid>?uid=<uniqueid>`: An email address (plus unique identifier)
+          #     representing a service account that has been recently deleted. For example,
+          #     `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is
+          #     undeleted, this value reverts to `serviceAccount:<emailid>` and the undeleted service account retains
+          #     the role in the binding.
+          #   * `deleted:group:<emailid>?uid=<uniqueid>`: An email address (plus unique identifier) representing a
+          #     Google group that has been recently deleted. For example,
+          #     `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to
+          #     `group:<emailid>` and the recovered group retains the role in the binding.
+          #   * `domain:<domain>`: The G Suite domain (primary) that represents all the users of that domain. For
+          #     example, `google.com` or `example.com`.
+          #
+          def members= new_members
+            @members = Array(new_members).uniq
           end
 
           ##
