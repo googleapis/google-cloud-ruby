@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "64d0465d6ae32119bd4f566664e0ef1b4255d0f0"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "e77ac9ba1c8798fb3412bae601260c6687d693b4"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b759c563bacf9cd15749be4d2bdd276d3f48ee29",
-        "internalRef": "341102751"
+        "sha": "3ad55bd69fcfcd011d81c05fb6dc7346275bcda4",
+        "internalRef": "341320404"
       }
     }
   ],
@@ -26,5 +26,38 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-binary_authorization-v1beta1.gemspec",
+    "lib/google-cloud-binary_authorization-v1beta1.rb",
+    "lib/google/cloud/binary_authorization/v1beta1.rb",
+    "lib/google/cloud/binary_authorization/v1beta1/binauthz_management_service.rb",
+    "lib/google/cloud/binary_authorization/v1beta1/binauthz_management_service/client.rb",
+    "lib/google/cloud/binary_authorization/v1beta1/binauthz_management_service/credentials.rb",
+    "lib/google/cloud/binary_authorization/v1beta1/binauthz_management_service/paths.rb",
+    "lib/google/cloud/binary_authorization/v1beta1/version.rb",
+    "lib/google/cloud/binaryauthorization/v1beta1/resources_pb.rb",
+    "lib/google/cloud/binaryauthorization/v1beta1/service_pb.rb",
+    "lib/google/cloud/binaryauthorization/v1beta1/service_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/binaryauthorization/v1beta1/resources.rb",
+    "proto_docs/google/cloud/binaryauthorization/v1beta1/service.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "test/google/cloud/binary_authorization/v1beta1/binauthz_management_service_paths_test.rb",
+    "test/google/cloud/binary_authorization/v1beta1/binauthz_management_service_test.rb",
+    "test/helper.rb"
   ]
 }
