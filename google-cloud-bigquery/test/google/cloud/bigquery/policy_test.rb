@@ -170,13 +170,13 @@ describe Google::Cloud::Bigquery::Policy, :mock_bigquery do
     it "raises when grant would change the bindings" do
       expect do
         policy.grant role: role_editor, members: member_editor
-      end.must_raise FrozenError
+      end.must_raise RuntimeError # TODO replace with FrozenError when Ruby > 2.4
     end
 
     it "raises when revoke would change the bindings" do
       expect do
         policy.revoke role: role_viewer
-      end.must_raise FrozenError
+      end.must_raise RuntimeError # TODO replace with FrozenError when Ruby > 2.4
     end
   end
 end
