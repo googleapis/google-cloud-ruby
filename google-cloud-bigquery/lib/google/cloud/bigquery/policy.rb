@@ -48,14 +48,14 @@ module Google
       #   policy = table.policy
       #
       #   policy.frozen? #=> true
-      #   binding = policy.bindings.find { |b| b.role == "roles/owner" }
+      #   binding_owner = policy.bindings.find { |b| b.role == "roles/owner" }
       #
-      #   binding.role #=> "roles/owner"
-      #   binding.members #=> ["user:owner@example.com"]
-      #   binding.frozen? #=> true
-      #   binding.members.frozen? #=> true
+      #   binding_owner.role #=> "roles/owner"
+      #   binding_owner.members #=> ["user:owner@example.com"]
+      #   binding_owner.frozen? #=> true
+      #   binding_owner.members.frozen? #=> true
       #
-      # @example Update mutable bindings in the policy with {Table#update_policy}.
+      # @example Update mutable bindings in the policy.
       #   require "google/cloud/bigquery"
       #
       #   bigquery = Google::Cloud::Bigquery.new
@@ -63,12 +63,10 @@ module Google
       #   table = dataset.table "my_table"
       #
       #   table.update_policy do |p|
-      #     p.grant members: "user:viewer@example.com", role: "roles/viewer"
-      #     binding = p.bindings.find { |b| b.role == "roles/editor" }
-      #     binding.members << "user:new-editor@example.com"
-      #     binding.members.delete "user:old-editor@example.com"
+      #     p.grant role: "roles/viewer", members: "user:viewer@example.com"
+      #     p.revoke role: "roles/editor", members: "user:editor@example.com"
       #     p.revoke role: "roles/owner"
-      #   end # 2 API calls
+      #   end
       #
       # @example Iterate over frozen bindings.
       #   require "google/cloud/bigquery"
@@ -79,12 +77,12 @@ module Google
       #   policy = table.policy
       #
       #   policy.frozen? #=> true
-      #   policy.bindings.each do |binding|
-      #     puts binding.role
-      #     puts binding.members
+      #   policy.bindings.each do |b|
+      #     puts b.role
+      #     puts b.members
       #   end
       #
-      # @example Update mutable bindings with {Table#update_policy}.
+      # @example Update mutable bindings.
       #   require "google/cloud/bigquery"
       #
       #   bigquery = Google::Cloud::Bigquery.new
@@ -92,10 +90,10 @@ module Google
       #   table = dataset.table "my_table"
       #
       #   table.update_policy do |p|
-      #     p.bindings.each do |binding|
-      #       binding.members.clear
+      #     p.bindings.each do |b|
+      #       b.members.delete_if { |m| m.include? "@example.com" }
       #     end
-      #   end # 2 API calls
+      #   end
       #
       class Policy
         attr_reader :etag, :bindings
@@ -107,7 +105,7 @@ module Google
         end
 
         ##
-        # Convenience method adding or replacing a binding in the policy. See [Understanding
+        # Convenience method adding or updating a binding in the policy. See [Understanding
         # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a list of primitive and curated roles. See
         # [BigQuery Table ACL
         # permissions](https://cloud.google.com/bigquery/docs/table-access-controls-intro#permissions) for a list of
@@ -143,10 +141,9 @@ module Google
         #   * `domain:<domain>`: The G Suite domain (primary) that represents all the users of that domain. For example,
         #     `google.com` or `example.com`.
         #
-        # @return [Binding, nil] The binding object that was added to the policy. This object is mutable and may be used
-        #   to add or remove members within the context of a block passed to {Table.update_policy}.
+        # @return [nil]
         #
-        # @example Update a mutable policy with {Table#update_policy}.
+        # @example Grant a role to a member.
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -154,32 +151,59 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   table.update_policy do |p|
-        #     p.grant members: "user:viewer@example.com", role: "roles/viewer"
-        #   end # 2 API calls
+        #     p.grant role: "roles/viewer", members: "user:viewer@example.com"
+        #   end
         #
-        def grant members:, role:
-          new_binding = Binding.new role, members
-          if (i = @bindings.find_index { |b| b.role == role })
-            @bindings[i] = new_binding
+        def grant role:, members:
+          binding_existing = bindings.find { |b| b.role == role }
+          if binding_existing
+            binding_existing.members.concat Array(members)
           else
-            @bindings << new_binding
+            bindings << Binding.new(role, members)
           end
-          new_binding
+          nil
         end
 
         ##
-        # Convenience method deleting a binding in the policy. Returns `nil` if no binding is present for the role. See
+        # Convenience method for removing a binding or bindings from the policy. See
         # [Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) for a list of primitive and
         # curated roles. See [BigQuery Table ACL
         # permissions](https://cloud.google.com/bigquery/docs/table-access-controls-intro#permissions) for a list of
         # values and patterns for members.
         #
         # @param [String] role A role that is bound to members in the policy. For example, `roles/viewer`,
-        #   `roles/editor`, or `roles/owner`. Required.
+        #   `roles/editor`, or `roles/owner`. Optional.
+        # @param [String, Array<String>] members Specifies the identities receiving access for a Cloud Platform
+        #   resource. `members` can have the following values. Optional.
         #
-        # @return [Binding, nil] The frozen binding object, or `nil` if no binding exists for the given role.
+        #   * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google
+        #     account.
+        #   * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google
+        #     account or a service account.
+        #   * `user:<emailid>`: An email address that represents a specific Google account. For example,
+        #     `alice@example.com`.
+        #   * `serviceAccount:<emailid>`: An email address that represents a service account. For example,
+        #     `my-other-app@appspot.gserviceaccount.com`.
+        #   * `group:<emailid>`: An email address that represents a Google group. For example, `admins@example.com`.
+        #   * `deleted:user:<emailid>?uid=<uniqueid>`: An email address (plus unique identifier) representing a user
+        #     that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user
+        #     is recovered, this value reverts to `user:<emailid>` and the recovered user retains the role in the
+        #     binding.
+        #   * `deleted: serviceAccount:<emailid>?uid=<uniqueid>`: An email address (plus unique identifier) representing
+        #     a service account that has been recently deleted. For example,
+        #     `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted,
+        #     this value reverts to `serviceAccount:<emailid>` and the undeleted service account retains the role in
+        #     the binding.
+        #   * `deleted:group:<emailid>?uid=<uniqueid>`: An email address (plus unique identifier) representing a Google
+        #     group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the
+        #     group is recovered, this value reverts to `group:<emailid>` and the recovered group retains the role in
+        #     the binding.
+        #   * `domain:<domain>`: The G Suite domain (primary) that represents all the users of that domain. For example,
+        #     `google.com` or `example.com`.
         #
-        # @example Update a mutable policy with {Table#update_policy}.
+        # @return [nil]
+        #
+        # @example Revoke a role for a member or members.
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -187,12 +211,42 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   table.update_policy do |p|
-        #     p.revoke role: "roles/owner"
-        #   end # 2 API calls
+        #     p.revoke role: "roles/viewer", members: "user:viewer@example.com"
+        #   end
         #
-        def revoke role:
-          i = @bindings.find_index { |b| b.role == role }
-          @bindings.delete_at(i).freeze if i
+        # @example Revoke a role for all members.
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.update_policy do |p|
+        #     p.revoke role: "roles/viewer"
+        #   end
+        #
+        # @example Revoke all roles for a member or members.
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.update_policy do |p|
+        #     p.revoke members: ["user:viewer@example.com", "user:editor@example.com"]
+        #   end
+        #
+        def revoke role: nil, members: nil
+          bindings_for_role = role ? bindings.select { |b| b.role == role } : bindings
+          bindings_for_role.each do |b|
+            if members
+              b.members.delete_if { |m| members.include? m }
+              bindings.delete b if b.members.empty?
+            else
+              bindings.delete b
+            end
+          end
+          nil
         end
 
         ##
@@ -272,15 +326,15 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   policy = table.policy
-        #   binding = policy.bindings.find { |b| b.role == "roles/owner" }
+        #   binding_owner = policy.bindings.find { |b| b.role == "roles/owner" }
         #
-        #   binding.role #=> "roles/owner"
-        #   binding.members #=> ["user:owner@example.com"]
+        #   binding_owner.role #=> "roles/owner"
+        #   binding_owner.members #=> ["user:owner@example.com"]
         #
-        #   binding.frozen? #=> true
-        #   binding.members.frozen? #=> true
+        #   binding_owner.frozen? #=> true
+        #   binding_owner.members.frozen? #=> true
         #
-        # @example Update mutable bindings with {Table#update_policy}.
+        # @example Update mutable bindings.
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -288,10 +342,9 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   table.update_policy do |p|
-        #     binding = p.bindings.find { |b| b.role == "roles/editor" }
-        #     binding.members << "user:new-editor@example.com"
-        #     binding.members.delete "user:old-editor@example.com"
-        #   end # 2 API calls
+        #     binding_owner = p.bindings.find { |b| b.role == "roles/owner" }
+        #     binding_owner.members.delete_if { |m| m.include? "@example.com" }
+        #   end
         #
         class Binding
           attr_accessor :role, :members

@@ -58,7 +58,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :bigquery do
       _(p.bindings).must_be :empty?
       _(p.bindings).wont_be :frozen?
       _(p).wont_be :frozen?
-      p.grant members: member, role: role
+      p.grant role: role, members: member
       binding = p.bindings.find { |b| b.role == role }
       binding.members << member # duplicate member will not be added to request
     end
@@ -84,7 +84,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :bigquery do
 
     # update
     policy = table.update_policy do |p|
-      p.revoke role: role
+      p.revoke role: role, members: member
     end
 
     policy = table.policy # get

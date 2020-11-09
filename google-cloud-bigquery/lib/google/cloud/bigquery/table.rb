@@ -1294,11 +1294,11 @@ module Google
         #   policy = table.policy
         #
         #   policy.frozen? #=> true
-        #   binding = policy.bindings.find { |b| b.role == "roles/owner" }
-        #   binding.role #=> "roles/owner"
-        #   binding.members #=> ["user:owner@example.com"]
-        #   binding.frozen? #=> true
-        #   binding.members.frozen? #=> true
+        #   binding_owner = policy.bindings.find { |b| b.role == "roles/owner" }
+        #   binding_owner.role #=> "roles/owner"
+        #   binding_owner.members #=> ["user:owner@example.com"]
+        #   binding_owner.frozen? #=> true
+        #   binding_owner.members.frozen? #=> true
         #
         def policy
           raise ArgumentError, "Block argument not supported: Use #update_policy instead." if block_given?
@@ -1328,10 +1328,8 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   table.update_policy do |p|
-        #     p.grant members: "user:viewer@example.com", role: "roles/viewer"
-        #     binding = p.bindings.find { |b| b.role == "roles/editor" }
-        #     binding.members << "user:new-editor@example.com"
-        #     binding.members.delete "user:old-editor@example.com"
+        #     p.grant role: "roles/viewer", members: "user:viewer@example.com"
+        #     p.revoke role: "roles/editor", members: "user:editor@example.com"
         #     p.revoke role: "roles/owner"
         #   end # 2 API calls
         #
