@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "b27fe70a9ae111a57eb0ff5affb7133a70bc18a4"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "e77ac9ba1c8798fb3412bae601260c6687d693b4"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b365fff50d84fbe03ea16d02cc73d72fa1fc864d",
-        "internalRef": "340922897"
+        "sha": "3ad55bd69fcfcd011d81c05fb6dc7346275bcda4",
+        "internalRef": "341320404"
       }
     }
   ],
@@ -26,5 +26,56 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-service_control-v1.gemspec",
+    "lib/google-cloud-service_control-v1.rb",
+    "lib/google/api/servicecontrol/v1/check_error_pb.rb",
+    "lib/google/api/servicecontrol/v1/distribution_pb.rb",
+    "lib/google/api/servicecontrol/v1/http_request_pb.rb",
+    "lib/google/api/servicecontrol/v1/log_entry_pb.rb",
+    "lib/google/api/servicecontrol/v1/metric_value_pb.rb",
+    "lib/google/api/servicecontrol/v1/operation_pb.rb",
+    "lib/google/api/servicecontrol/v1/quota_controller_pb.rb",
+    "lib/google/api/servicecontrol/v1/quota_controller_services_pb.rb",
+    "lib/google/api/servicecontrol/v1/service_controller_pb.rb",
+    "lib/google/api/servicecontrol/v1/service_controller_services_pb.rb",
+    "lib/google/cloud/service_control/v1.rb",
+    "lib/google/cloud/service_control/v1/quota_controller.rb",
+    "lib/google/cloud/service_control/v1/quota_controller/client.rb",
+    "lib/google/cloud/service_control/v1/quota_controller/credentials.rb",
+    "lib/google/cloud/service_control/v1/service_controller.rb",
+    "lib/google/cloud/service_control/v1/service_controller/client.rb",
+    "lib/google/cloud/service_control/v1/service_controller/credentials.rb",
+    "lib/google/cloud/service_control/v1/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/api/servicecontrol/v1/check_error.rb",
+    "proto_docs/google/api/servicecontrol/v1/distribution.rb",
+    "proto_docs/google/api/servicecontrol/v1/http_request.rb",
+    "proto_docs/google/api/servicecontrol/v1/log_entry.rb",
+    "proto_docs/google/api/servicecontrol/v1/metric_value.rb",
+    "proto_docs/google/api/servicecontrol/v1/operation.rb",
+    "proto_docs/google/api/servicecontrol/v1/quota_controller.rb",
+    "proto_docs/google/api/servicecontrol/v1/service_controller.rb",
+    "proto_docs/google/logging/type/log_severity.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/duration.rb",
+    "proto_docs/google/protobuf/struct.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/rpc/status.rb",
+    "test/google/cloud/service_control/v1/quota_controller_test.rb",
+    "test/google/cloud/service_control/v1/service_controller_test.rb",
+    "test/helper.rb"
   ]
 }
