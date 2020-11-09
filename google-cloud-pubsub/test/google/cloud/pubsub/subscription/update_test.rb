@@ -230,10 +230,10 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
     subscription.service.mocked_subscriber = mock
 
-    subscription.dead_letter_policy = Google::Cloud::PubSub::DeadLetterPolicy.new(
-      dead_letter_topic:     new_dead_letter_topic,
-      max_delivery_attempts: 6
-    )
+    subscription.update_dead_letter_policy do |dlp|
+      dlp.dead_letter_topic = new_dead_letter_topic
+      dlp.max_delivery_attempts = 6
+    end
     mock.verify
 
     # read using DeadLetterPolicy value object
@@ -255,10 +255,10 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
     subscription.service.mocked_subscriber = mock
 
-    subscription.dead_letter_policy = Google::Cloud::PubSub::DeadLetterPolicy.new(
-      dead_letter_topic:     dead_letter_topic,
-      max_delivery_attempts: 7
-    )
+    subscription.update_dead_letter_policy do |dlp|
+      dlp.dead_letter_topic = dead_letter_topic
+      dlp.max_delivery_attempts = 7
+    end
 
     mock.verify
 

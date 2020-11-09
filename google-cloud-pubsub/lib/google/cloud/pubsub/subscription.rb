@@ -521,14 +521,10 @@ module Google
         #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic", skip_lookup: true
-        #   sub.dead_letter_policy = Google::Cloud::PubSub::DeadLetterPolicy.new(
-        #     dead_letter_topic:     dead_letter_topic,
-        #     max_delivery_attempts: 20
-        #   )
+        #   dead_letter_policy = sub.dead_letter_policy
         #
-        #   sub.dead_letter_policy.dead_letter_topic.name #=> "projects/my-project/topics/my-dead-letter-topic"
-        #   sub.dead_letter_policy.max_delivery_attempts #=> 10
+        #   dead_letter_policy.dead_letter_topic.name #=> "projects/my-project/topics/my-dead-letter-topic"
+        #   dead_letter_policy.max_delivery_attempts #=> 10
         #
         def dead_letter_policy
           ensure_grpc!
@@ -547,21 +543,6 @@ module Google
         # @param [DeadLetterPolicy, nil] new_dead_letter_policy A new dead_letter policy for the subscription, or `nil`
         #   for no policy, indicating that dead lettering is disabled.
         #
-        # @example
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::PubSub.new
-        #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic", skip_lookup: true
-        #   sub.dead_letter_policy = Google::Cloud::PubSub::DeadLetterPolicy.new(
-        #     dead_letter_topic:     dead_letter_topic,
-        #     max_delivery_attempts: 20
-        #   )
-        #
-        #   sub.dead_letter_policy.dead_letter_topic.name #=> "projects/my-project/topics/my-dead-letter-topic"
-        #   sub.dead_letter_policy.max_delivery_attempts #=> 10
-        #
         # @example Remove an existing policy to disable dead lettering:
         #   require "google/cloud/pubsub"
         #
@@ -579,6 +560,50 @@ module Google
             dead_letter_policy: new_dead_letter_policy
           )
           @grpc = service.update_subscription update_grpc, :dead_letter_policy
+        end
+
+        ##
+        # Sets a policy that specifies the conditions for dead lettering messages in a subscription.
+        #
+        # Dead lettering is done on a best effort basis. The same message might be dead lettered multiple times.
+        #
+        # If validation on any of the fields fails at subscription creation/updation, the create/update subscription
+        # request will fail.
+        #
+        # @yield [policy] A block for updating the policy. After the block completes, the modified subscription will be
+        #   written to the service.
+        # @yieldparam [DeadLetterPolicy] policy The mutable policy for the subscription.
+        #
+        # @return [DeadLetterPolicy] The updated and frozen policy for the subscription.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic", skip_lookup: true
+        #   sub.update_dead_letter_policy do |dlp|
+        #     dlp.dead_letter_topic = dead_letter_topic
+        #     dlp.max_delivery_attempts = 20
+        #   end
+        #
+        #   sub.dead_letter_policy.dead_letter_topic.name #=> "projects/my-project/topics/my-dead-letter-topic"
+        #   sub.dead_letter_policy.max_delivery_attempts #=> 20
+        #
+        def update_dead_letter_policy
+          raise ArgumentError, "A block updating the DeadLetterPolicy must be provided" unless block_given?
+          ensure_service!
+          ensure_grpc!
+          policy = DeadLetterPolicy.from_grpc @grpc.dead_letter_policy, service
+          yield policy
+          # TODO: Check for changes before calling RPC
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new(
+            name:               name,
+            dead_letter_policy: policy.to_grpc
+          )
+          @grpc = service.update_subscription update_grpc, :dead_letter_policy
+          DeadLetterPolicy.from_grpc(@grpc.dead_letter_policy, service).freeze
         end
 
         ##

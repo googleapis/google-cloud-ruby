@@ -327,16 +327,16 @@ describe Google::Cloud::PubSub, :pubsub do
           msg = topic.publish "dead-letter-#{rand(1000)}"
           _(msg).wont_be :nil?
 
-          # update using DeadLetterPolicy value object
+          # update using block
           dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2
           dead_letter_subscription_2 = dead_letter_topic_2.subscribe "#{$topic_prefix}-dead-letter-sub2"
-          updated_dead_letter_policy = Google::Cloud::PubSub::DeadLetterPolicy.new(
-            dead_letter_topic:     dead_letter_topic_2,
-            max_delivery_attempts: nil
-          )
-          subscription.dead_letter_policy = updated_dead_letter_policy
+          updated_dead_letter_policy = subscription.update_dead_letter_policy do |dlp|
+            dlp.dead_letter_topic = dead_letter_topic_2
+            dlp.max_delivery_attempts = nil
+          end
+          _(updated_dead_letter_policy.dead_letter_topic.name).must_equal dead_letter_topic_2.name
+          _(updated_dead_letter_policy.max_delivery_attempts).must_equal 5
           _(subscription.dead_letter_policy.dead_letter_topic.name).must_equal dead_letter_topic_2.name
-          _(updated_dead_letter_policy.max_delivery_attempts).must_be :nil?
           _(subscription.dead_letter_policy.max_delivery_attempts).must_equal 5
           subscription.reload!
           _(subscription.dead_letter_policy.dead_letter_topic.name).must_equal dead_letter_topic_2.name

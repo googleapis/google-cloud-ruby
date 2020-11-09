@@ -142,9 +142,15 @@ YARD::Doctest.configure do |doctest|
   # DeadLetterPolicy
 
   doctest.before "Google::Cloud::PubSub::DeadLetterPolicy" do
-    mock_pubsub do |mock_publisher, mock_subscriber|
-      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 10), [Hash]
-      mock_subscriber.expect :update_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 10), [Hash]
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam|
+      mock_publisher.expect :get_topic, topic_resp("my-dead-letter-topic"), [Hash]
+      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-dead-letter-sub"), [Hash]
+      mock_iam.expect :get_iam_policy, policy_resp, [Hash]
+      mock_iam.expect :get_iam_policy, policy_resp, [Hash]
+      mock_iam.expect :set_iam_policy, policy_resp, [Hash]
+      mock_iam.expect :set_iam_policy, policy_resp, [Hash]
+      mock_publisher.expect :get_topic, topic_resp, [Hash]
+      mock_subscriber.expect :create_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 10), [Hash]
     end
   end
 
@@ -347,7 +353,14 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::PubSub::Subscription#dead_letter" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 10), [Hash]
-      mock_subscriber.expect :update_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 10), [Hash]
+      mock_subscriber.expect :update_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 20), [Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Subscription#update_dead_letter_policy" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 10), [Hash]
+      mock_subscriber.expect :update_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 20), [Hash]
     end
   end
 
