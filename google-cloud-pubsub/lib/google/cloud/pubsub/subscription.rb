@@ -378,7 +378,7 @@ module Google
         # multiple times.
         #
         # See also {#dead_letter_topic=}, {#dead_letter_max_delivery_attempts=}, {#dead_letter_max_delivery_attempts}
-        # and {#remove_dead_letter_policy!}.
+        # and {#remove_dead_letter_policy}.
         #
         # Makes an API call to retrieve the topic name when called on a reference object. See {#reference?}.
         #
@@ -410,7 +410,7 @@ module Google
         # to this topic since messages published to a topic with no subscriptions are lost.
         #
         # See also {#dead_letter_topic}, {#dead_letter_max_delivery_attempts=}, {#dead_letter_max_delivery_attempts}
-        # and {#remove_dead_letter_policy!}.
+        # and {#remove_dead_letter_policy}.
         #
         # @param [Topic] new_dead_letter_topic The topic to which dead letter messages for the subscription should be
         #   published.
@@ -446,7 +446,7 @@ module Google
         # is used.
         #
         # See also {#dead_letter_max_delivery_attempts=}, {#dead_letter_topic=}, {#dead_letter_topic}
-        # and {#remove_dead_letter_policy!}.
+        # and {#remove_dead_letter_policy}.
         #
         # Makes an API call to retrieve the value when called on a reference object. See {#reference?}.
         #
@@ -478,7 +478,7 @@ module Google
         # This field will be honored on a best effort basis. If this parameter is 0, a default value of 5 is used.
         #
         # The dead letter topic must be set first. See {#dead_letter_topic=}, {#dead_letter_topic} and
-        # {#remove_dead_letter_policy!}.
+        # {#remove_dead_letter_policy}.
         #
         # @param [Integer, nil] new_dead_letter_max_delivery_attempts A value between 5 and 100. If this parameter is
         #   `nil` or `0`, a default value of 5 is used.
@@ -528,12 +528,12 @@ module Google
         #   sub.dead_letter_topic.name #=> "projects/my-project/topics/my-dead-letter-topic"
         #   sub.dead_letter_max_delivery_attempts #=> 10
         #
-        #   sub.remove_dead_letter_policy!
+        #   sub.remove_dead_letter_policy
         #
         #   sub.dead_letter_topic #=> nil
         #   sub.dead_letter_max_delivery_attempts #=> nil
         #
-        def remove_dead_letter_policy!
+        def remove_dead_letter_policy
           ensure_grpc!
           return false if @grpc.dead_letter_policy.nil?
           update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, dead_letter_policy: nil

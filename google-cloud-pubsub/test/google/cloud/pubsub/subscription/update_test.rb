@@ -262,11 +262,11 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     subscription.service.mocked_subscriber = mock
 
     _(subscription.dead_letter_topic).wont_be :nil?
-    removed = subscription.remove_dead_letter_policy!
+    removed = subscription.remove_dead_letter_policy
     _(removed).must_equal true
     _(subscription.dead_letter_topic).must_be :nil?
     _(subscription.dead_letter_max_delivery_attempts).must_be :nil?
-    removed = subscription.remove_dead_letter_policy!
+    removed = subscription.remove_dead_letter_policy
     _(removed).must_equal false
 
     mock.verify

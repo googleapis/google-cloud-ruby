@@ -359,7 +359,8 @@ describe Google::Cloud::PubSub, :pubsub do
           _(subscription.dead_letter_max_delivery_attempts).must_equal 5
 
           # delete
-          subscription.remove_dead_letter_policy!
+          removed = subscription.remove_dead_letter_policy
+          _(removed).must_equal true
           _(subscription.dead_letter_topic).must_be :nil?
           _(subscription.dead_letter_max_delivery_attempts).must_be :nil?
 
