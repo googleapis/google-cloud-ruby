@@ -321,7 +321,6 @@ describe Google::Cloud::PubSub, :pubsub do
 
           # create
           subscription = topic.subscribe "#{$topic_prefix}-sub6", dead_letter_topic: dead_letter_topic, dead_letter_max_delivery_attempts: 6
-          _(subscription.dead_letter_policy?).must_equal true
           _(subscription.dead_letter_topic.name).must_equal dead_letter_topic.name
           _(subscription.dead_letter_max_delivery_attempts).must_equal 6
 
@@ -352,18 +351,15 @@ describe Google::Cloud::PubSub, :pubsub do
           dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2
           dead_letter_subscription_2 = dead_letter_topic_2.subscribe "#{$topic_prefix}-dead-letter-sub2"
           subscription.dead_letter_topic = dead_letter_topic_2
-          _(subscription.dead_letter_policy?).must_equal true
           _(subscription.dead_letter_topic.name).must_equal dead_letter_topic_2.name
           _(subscription.dead_letter_max_delivery_attempts).must_equal 6
 
           subscription.dead_letter_max_delivery_attempts = 5
-          _(subscription.dead_letter_policy?).must_equal true
           _(subscription.dead_letter_topic.name).must_equal dead_letter_topic_2.name
           _(subscription.dead_letter_max_delivery_attempts).must_equal 5
 
           # delete
           subscription.remove_dead_letter_policy!
-          _(subscription.dead_letter_policy?).must_equal false
           _(subscription.dead_letter_topic).must_be :nil?
           _(subscription.dead_letter_max_delivery_attempts).must_be :nil?
 
