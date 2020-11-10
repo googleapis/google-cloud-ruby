@@ -505,7 +505,8 @@ module Google
         end
 
         ##
-        # A policy that specifies the conditions for dead lettering messages in a subscription.
+        # A policy that specifies the conditions for dead lettering messages in a subscription. See also
+        # {#update_dead_letter_policy} and {#remove_dead_letter_policy}.
         #
         # Dead lettering is done on a best effort basis. The same message might be dead lettered multiple times.
         #
@@ -534,36 +535,7 @@ module Google
 
         ##
         # Sets a policy that specifies the conditions for dead lettering messages in a subscription.
-        #
-        # Dead lettering is done on a best effort basis. The same message might be dead lettered multiple times.
-        #
-        # If validation on any of the fields fails at subscription creation/updation, the create/update subscription
-        # request will fail.
-        #
-        # @param [DeadLetterPolicy, nil] new_dead_letter_policy A new dead_letter policy for the subscription, or `nil`
-        #   for no policy, indicating that dead lettering is disabled.
-        #
-        # @example Remove an existing policy to disable dead lettering:
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::PubSub.new
-        #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic", skip_lookup: true
-        #   sub.dead_letter_policy = nil
-        #
-        def dead_letter_policy= new_dead_letter_policy
-          ensure_grpc!
-          new_dead_letter_policy = new_dead_letter_policy.to_grpc if new_dead_letter_policy
-          update_grpc = Google::Cloud::PubSub::V1::Subscription.new(
-            name:               name,
-            dead_letter_policy: new_dead_letter_policy
-          )
-          @grpc = service.update_subscription update_grpc, :dead_letter_policy
-        end
-
-        ##
-        # Sets a policy that specifies the conditions for dead lettering messages in a subscription.
+        # See also {#dead_letter_policy} and {#remove_dead_letter_policy}.
         #
         # Dead lettering is done on a best effort basis. The same message might be dead lettered multiple times.
         #
@@ -604,6 +576,27 @@ module Google
           )
           @grpc = service.update_subscription update_grpc, :dead_letter_policy
           DeadLetterPolicy.from_grpc(@grpc.dead_letter_policy, service).freeze
+        end
+
+        ##
+        # Deletes the policy that specifies the conditions for dead lettering messages in the subscription, if one
+        # exists. See also {#dead_letter_policy} and {#update_dead_letter_policy}.
+        #
+        # @example Remove an existing policy to disable dead lettering:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   sub.remove_dead_letter_policy
+        #
+        def remove_dead_letter_policy
+          ensure_service!
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new(
+            name:               name,
+            dead_letter_policy: nil
+          )
+          @grpc = service.update_subscription update_grpc, :dead_letter_policy
         end
 
         ##

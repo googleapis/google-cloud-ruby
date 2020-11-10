@@ -308,6 +308,9 @@ describe Google::Cloud::PubSub, :pubsub do
     if $project_number
       it "should be able to direct messages to a dead letter topic" do
         begin
+          subscription = nil
+          dead_letter_subscription = nil
+          dead_letter_subscription_2 = nil
           dead_letter_topic = retrieve_topic dead_letter_topic_name
           dead_letter_subscription = dead_letter_topic.subscribe "#{$topic_prefix}-dead-letter-sub1"
 
@@ -342,7 +345,7 @@ describe Google::Cloud::PubSub, :pubsub do
           _(subscription.dead_letter_policy.dead_letter_topic.name).must_equal dead_letter_topic_2.name
           _(subscription.dead_letter_policy.max_delivery_attempts).must_equal 5
 
-          # update using subscription helpers
+          # update using Subscription helpers
           subscription.dead_letter_topic = dead_letter_topic
           subscription.dead_letter_max_delivery_attempts = 6
           _(subscription.dead_letter_topic.name).must_equal dead_letter_topic.name
@@ -350,9 +353,6 @@ describe Google::Cloud::PubSub, :pubsub do
           subscription.reload!
           _(subscription.dead_letter_topic.name).must_equal dead_letter_topic.name
           _(subscription.dead_letter_max_delivery_attempts).must_equal 6
-
-          # fixture cleanup
-          dead_letter_subscription_2.delete
 
           # Check the dead letter subscription pulls the message
           received_messages = pull_with_retry dead_letter_subscription
@@ -364,14 +364,14 @@ describe Google::Cloud::PubSub, :pubsub do
           _(received_message.delivery_attempt).must_be :nil?
 
           # delete the DeadLetterPolicy
-          subscription.dead_letter_policy = nil
+          subscription.remove_dead_letter_policy
           _(subscription.dead_letter_policy).must_be :nil?
           subscription.reload!
           _(subscription.dead_letter_policy).must_be :nil?
         ensure
-          # Remove the subscription
-          subscription.delete
-          dead_letter_subscription.delete
+          subscription.delete if subscription
+          dead_letter_subscription.delete if dead_letter_subscription
+          dead_letter_subscription_2.delete if dead_letter_subscription_2
         end
       end
     end

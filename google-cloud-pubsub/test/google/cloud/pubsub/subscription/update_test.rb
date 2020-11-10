@@ -279,7 +279,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
     subscription.service.mocked_subscriber = mock
 
-    subscription.dead_letter_policy = nil
+    subscription.remove_dead_letter_policy
 
     mock.verify
 
