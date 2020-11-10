@@ -253,6 +253,25 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     _(subscription.dead_letter_max_delivery_attempts).must_equal 7
   end
 
+  it "removes the dead letter policy if present" do
+    dead_letter_policy = Google::Cloud::PubSub::V1::DeadLetterPolicy.new(dead_letter_topic: new_dead_letter_topic.name, max_delivery_attempts: 6)
+    update_sub = Google::Cloud::PubSub::V1::Subscription.new name: sub_path, dead_letter_policy: nil
+    update_mask = Google::Protobuf::FieldMask.new paths: ["dead_letter_policy"]
+    mock = Minitest::Mock.new
+    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+    subscription.service.mocked_subscriber = mock
+
+    _(subscription.dead_letter_topic).wont_be :nil?
+    removed = subscription.remove_dead_letter_policy
+    _(removed).must_equal true
+    _(subscription.dead_letter_topic).must_be :nil?
+    _(subscription.dead_letter_max_delivery_attempts).must_be :nil?
+    removed = subscription.remove_dead_letter_policy
+    _(removed).must_equal false
+
+    mock.verify
+  end
+
   it "raises when updating dead_letter_max_delivery_attempts if dead_letter_topic is not set" do
     grpc = Google::Cloud::PubSub::V1::Subscription.new(subscription_hash(topic_name, sub_name))
     subscription_without_dead_letter = Google::Cloud::PubSub::Subscription.from_grpc grpc, pubsub.service

@@ -377,8 +377,8 @@ module Google
         # otherwise `nil`. Dead lettering is done on a best effort basis. The same message might be dead lettered
         # multiple times.
         #
-        # See also {#dead_letter_topic=}, {#dead_letter_max_delivery_attempts=} and
-        # {#dead_letter_max_delivery_attempts}.
+        # See also {#dead_letter_topic=}, {#dead_letter_max_delivery_attempts=}, {#dead_letter_max_delivery_attempts}
+        # and {#remove_dead_letter_policy}.
         #
         # Makes an API call to retrieve the topic name when called on a reference object. See {#reference?}.
         #
@@ -409,7 +409,8 @@ module Google
         # The operation will fail if the topic does not exist. Users should ensure that there is a subscription attached
         # to this topic since messages published to a topic with no subscriptions are lost.
         #
-        # See also {#dead_letter_topic}, {#dead_letter_max_delivery_attempts=} and {#dead_letter_max_delivery_attempts}.
+        # See also {#dead_letter_topic}, {#dead_letter_max_delivery_attempts=}, {#dead_letter_max_delivery_attempts}
+        # and {#remove_dead_letter_policy}.
         #
         # @param [Topic] new_dead_letter_topic The topic to which dead letter messages for the subscription should be
         #   published.
@@ -441,14 +442,15 @@ module Google
         # acknowledgement deadline has been exceeded for the message). A NACK is any call to ModifyAckDeadline with a 0
         # deadline. Note that client libraries may automatically extend ack_deadlines.
         #
-        # This field will be honored on a best effort basis. If this parameter is 0, a default value of 5 is used.
+        # This field will be honored on a best effort basis. If this parameter is `nil` or `0`, a default value of `5`
+        # is used.
         #
-        # See also {#dead_letter_max_delivery_attempts=}, {#dead_letter_topic=} and {#dead_letter_topic}.
+        # See also {#dead_letter_max_delivery_attempts=}, {#dead_letter_topic=}, {#dead_letter_topic}
+        # and {#remove_dead_letter_policy}.
         #
         # Makes an API call to retrieve the value when called on a reference object. See {#reference?}.
         #
-        # @return [Integer, nil] A value between 5 and 100, or `nil` if no dead letter policy is configured. If this
-        #   value is 0, a default value of 5 is used.
+        # @return [Integer, nil] A value between `5` and `100`, or `nil` if no dead letter policy is configured.
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -475,10 +477,13 @@ module Google
         #
         # This field will be honored on a best effort basis. If this parameter is 0, a default value of 5 is used.
         #
-        # The dead letter topic must also be set. See {#dead_letter_topic=} and {#dead_letter_topic}.
+        # The dead letter topic must be set first. See {#dead_letter_topic=}, {#dead_letter_topic} and
+        # {#remove_dead_letter_policy}.
         #
-        # @param [Integer] new_dead_letter_max_delivery_attempts A value between 5 and 100. If this parameter is 0, a
-        #   default value of 5 is used.
+        # @param [Integer, nil] new_dead_letter_max_delivery_attempts A value between 5 and 100. If this parameter is
+        #   `nil` or `0`, a default value of 5 is used.
+        #
+        # @raise [ArgumentError] if the dead letter topic has not been set. See {#dead_letter_topic=}.
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -501,6 +506,39 @@ module Google
           update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, dead_letter_policy: dead_letter_policy
           @grpc = service.update_subscription update_grpc, :dead_letter_policy
           @resource_name = nil
+        end
+
+        ##
+        # Removes an existing dead letter policy. A dead letter policy specifies the conditions for dead lettering
+        # messages in the subscription. If a dead letter policy is not set, dead lettering is disabled.
+        #
+        # See {#dead_letter_topic}, {#dead_letter_topic=}, {#dead_letter_max_delivery_attempts} and
+        # {#dead_letter_max_delivery_attempts=}.
+        #
+        # @return [Boolean] `true` if an existing dead letter policy was removed, `false` if no existing dead letter
+        #   policy was present.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #
+        #   sub.dead_letter_topic.name #=> "projects/my-project/topics/my-dead-letter-topic"
+        #   sub.dead_letter_max_delivery_attempts #=> 10
+        #
+        #   sub.remove_dead_letter_policy
+        #
+        #   sub.dead_letter_topic #=> nil
+        #   sub.dead_letter_max_delivery_attempts #=> nil
+        #
+        def remove_dead_letter_policy
+          ensure_grpc!
+          return false if @grpc.dead_letter_policy.nil?
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, dead_letter_policy: nil
+          @grpc = service.update_subscription update_grpc, :dead_letter_policy
+          true
         end
 
         ##
