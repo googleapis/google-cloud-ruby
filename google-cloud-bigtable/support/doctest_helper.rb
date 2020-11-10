@@ -198,6 +198,35 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::Backup#policy" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, [name: "projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_tables.expect :get_backup, backup_resp, [name: "projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup"]
+      mocked_tables.expect :get_iam_policy, policy_resp, [resource: "projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup"]
+      mocked_tables.expect :set_iam_policy, policy_resp, [Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Backup#test_iam_permissions" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, [name: "projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_tables.expect :get_backup, backup_resp, [name: "projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup"]
+      mocked_tables.expect :test_iam_permissions, backup_iam_permissions_resp, [Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Backup#update_policy" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, [name: "projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_tables.expect :get_backup, backup_resp, [name: "projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup"]
+      mocked_tables.expect :get_iam_policy, policy_resp, [resource: "projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup"]
+      mocked_tables.expect :set_iam_policy, policy_resp, [Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigtable::Backup#restore" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
@@ -984,6 +1013,12 @@ def column_families_grpc num: 3
     .each_with_object({}) do |(k,v), r|
     r[k] = Google::Cloud::Bigtable::Admin::V2::ColumnFamily.new(v)
   end
+end
+
+def backup_iam_permissions_resp
+  OpenStruct.new(
+    permissions: ["bigtable.backups.get"]
+  )
 end
 
 def instance_iam_permissions_resp

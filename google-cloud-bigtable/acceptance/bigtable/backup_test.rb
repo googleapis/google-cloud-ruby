@@ -26,6 +26,10 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
   let(:expire_time) { now + 60 * 60 * 7 }
   let(:expire_time_2) { now + 60 * 60 * 8 }
   let(:restore_table_id) { "test-table-#{random_str}" }
+  let(:service_account) { bigtable.service.credentials.client.issuer }
+  let(:roles) { ["bigtable.backups.delete", "bigtable.backups.get"] }
+  let(:role) { "roles/bigtable.user" }
+  let(:member) { "serviceAccount:#{service_account}" }
 
   it "creates a backup" do
     backup = nil
@@ -72,6 +76,24 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
       _(backup.expire_time).must_equal expire_time # not yet persisted with #save
       backup.reload!
       _(backup.expire_time).must_equal expire_time_2
+
+      # test permissions
+      permissions = backup.test_iam_permissions roles
+      _(permissions).must_be_kind_of Array
+      _(permissions).must_equal roles
+
+      # get policy
+      policy = backup.policy
+      _(policy).must_be_kind_of Google::Cloud::Bigtable::Policy
+      _(policy.roles).must_be :empty?
+
+      # update policy
+      policy.add(role, member)
+      updated_policy = backup.update_policy policy
+      _(updated_policy.roles.size).must_equal 1
+      _(updated_policy.role(role)).wont_be :nil?
+      role_member = backup.policy.role(role).select { |m| m == member }
+      _(role_member.size).must_equal 1
 
       # list
       backups = cluster.backups
