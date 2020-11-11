@@ -23,6 +23,7 @@ require "google/cloud/bigquery/external"
 require "google/cloud/bigquery/insert_response"
 require "google/cloud/bigquery/table/async_inserter"
 require "google/cloud/bigquery/convert"
+require "google/cloud/bigquery/policy"
 require "google/apis/bigquery_v2"
 
 module Google
@@ -1272,6 +1273,107 @@ module Google
           udfs_gapi = @gapi.view.user_defined_function_resources
           return [] if udfs_gapi.nil?
           Array(udfs_gapi).map { |udf| udf.inline_code || udf.resource_uri }
+        end
+
+        ##
+        # Gets the Cloud IAM access control policy for the table. The latest policy will be read from the service. See
+        # also {#update_policy}.
+        #
+        # @see https://cloud.google.com/iam/docs/managing-policies Managing Policies
+        # @see https://cloud.google.com/bigquery/docs/table-access-controls-intro Controlling access to tables
+        #
+        # @return [Policy] The frozen policy for the table.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   policy = table.policy
+        #
+        #   policy.frozen? #=> true
+        #   binding_owner = policy.bindings.find { |b| b.role == "roles/owner" }
+        #   binding_owner.role #=> "roles/owner"
+        #   binding_owner.members #=> ["user:owner@example.com"]
+        #   binding_owner.frozen? #=> true
+        #   binding_owner.members.frozen? #=> true
+        #
+        def policy
+          raise ArgumentError, "Block argument not supported: Use #update_policy instead." if block_given?
+          ensure_service!
+          gapi = service.get_table_policy dataset_id, table_id
+          Policy.from_gapi(gapi).freeze
+        end
+
+        ##
+        # Updates the Cloud IAM access control policy for the table. The latest policy will be read from the service.
+        # See also {#policy}.
+        #
+        # @see https://cloud.google.com/iam/docs/managing-policies Managing Policies
+        # @see https://cloud.google.com/bigquery/docs/table-access-controls-intro Controlling access to tables
+        #
+        # @yield [policy] A block for updating the policy. The latest policy will be read from the service and passed to
+        #   the block. After the block completes, the modified policy will be written to the service.
+        # @yieldparam [Policy] policy The mutable Policy for the table.
+        #
+        # @return [Policy] The updated and frozen policy for the table.
+        #
+        # @example Update the policy by passing a block.
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.update_policy do |p|
+        #     p.grant role: "roles/viewer", members: "user:viewer@example.com"
+        #     p.revoke role: "roles/editor", members: "user:editor@example.com"
+        #     p.revoke role: "roles/owner"
+        #   end # 2 API calls
+        #
+        def update_policy
+          raise ArgumentError, "A block updating the policy must be provided" unless block_given?
+          ensure_service!
+          gapi = service.get_table_policy dataset_id, table_id
+          policy = Policy.from_gapi gapi
+          yield policy
+          # TODO: Check for changes before calling RPC
+          gapi = service.set_table_policy dataset_id, table_id, policy.to_gapi
+          Policy.from_gapi(gapi).freeze
+        end
+
+        ##
+        # Tests the specified permissions against the [Cloud
+        # IAM](https://cloud.google.com/iam/) access control policy.
+        #
+        # @see https://cloud.google.com/iam/docs/managing-policies Managing Policies
+        #
+        # @param [String, Array<String>] permissions The set of permissions
+        #   against which to check access. Permissions must be of the format
+        #   `bigquery.resource.capability`.
+        #   See https://cloud.google.com/bigquery/docs/access-control#bigquery.
+        #
+        # @return [Array<String>] The frozen array of permissions held by the caller.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   permissions = table.test_iam_permissions "bigquery.tables.get",
+        #                                            "bigquery.tables.delete"
+        #   permissions.include? "bigquery.tables.get"    #=> true
+        #   permissions.include? "bigquery.tables.delete" #=> false
+        #
+        def test_iam_permissions *permissions
+          permissions = Array(permissions).flatten
+          ensure_service!
+          gapi = service.test_table_permissions dataset_id, table_id, permissions
+          gapi.permissions.freeze
         end
 
         ##
