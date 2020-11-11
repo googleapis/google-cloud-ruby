@@ -155,4 +155,50 @@ describe Google::Cloud::PubSub::Subscriber, :acknowledge, :mock_pubsub do
     end
     _(mod_ack_hash[60].sort).must_equal ["ack-id-1111", "ack-id-1112", "ack-id-1113"]
   end
+
+  it "does not send flow control settings to server when use_legacy_flow_control is true" do
+    rec_message_msg = "pulled-message"
+    rec_message_ack_id = 123456789
+    pull_res = Google::Cloud::PubSub::V1::StreamingPullResponse.new rec_messages_hash(rec_message_msg, rec_message_ack_id)
+    response_groups = [[pull_res]]
+
+    stub = StreamingPullStub.new response_groups
+    called = false
+
+    subscription.service.mocked_subscriber = stub
+    subscription.service.client_id = client_id
+
+    subscriber = subscription.listen streams: 1, inventory: { max_outstanding_messages: 999, max_outstanding_bytes: 777, use_legacy_flow_control: true } do |result|
+      # flush the initial buffer before any callbacks are processed
+      subscriber.buffer.flush! unless called
+
+      assert_kind_of Google::Cloud::PubSub::ReceivedMessage, result
+      assert_equal rec_message_msg, result.data
+      assert_equal "ack-id-#{rec_message_ack_id}", result.ack_id
+
+      result.ack!
+      called = true
+    end
+    subscriber.start
+
+    subscriber_retries = 0
+    while !called
+      fail "total number of calls were never made" if subscriber_retries > 100
+      subscriber_retries += 1
+      sleep 0.01
+    end
+
+    subscriber.stop
+    subscriber.wait!
+
+    _(stub.requests.map(&:to_a)).must_equal [
+      [Google::Cloud::PubSub::V1::StreamingPullRequest.new(
+        client_id: client_id,
+        subscription: sub_path,
+        stream_ack_deadline_seconds: 60,
+        max_outstanding_messages: 0,
+        max_outstanding_bytes: 0
+      )]
+    ]
+  end
 end

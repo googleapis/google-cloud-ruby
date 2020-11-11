@@ -389,6 +389,7 @@ module Google
           @inventory[:max_outstanding_bytes] = Integer(@inventory[:max_outstanding_bytes] || 100_000_000)
           @inventory[:max_total_lease_duration] = Integer(@inventory[:max_total_lease_duration] || 3600)
           @inventory[:max_duration_per_lease_extension] = Integer(@inventory[:max_duration_per_lease_extension] || 0)
+          @inventory[:use_legacy_flow_control] = @inventory[:use_legacy_flow_control] || false
         end
 
         def default_error_callbacks
