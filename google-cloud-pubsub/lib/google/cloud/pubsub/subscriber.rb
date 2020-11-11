@@ -307,6 +307,17 @@ module Google
         alias inventory_bytesize max_outstanding_bytes
 
         ##
+        # Whether to enforce flow control at the client side only or to enforce it at both the client and
+        # the server.
+        #
+        # @return [Boolean] `true` when only client side flow control is enforced, `false` when both client and
+        # server side flow control are enforced.
+        #
+        def use_legacy_flow_control
+          @inventory[:use_legacy_flow_control]
+        end
+
+        ##
         # The number of seconds that received messages can be held awaiting processing. Default is 3,600 (1 hour).
         #
         # @return [Integer] The maximum number of seconds.
@@ -334,7 +345,8 @@ module Google
             limit:                            @inventory[:max_outstanding_messages].fdiv(@streams).ceil,
             bytesize:                         @inventory[:max_outstanding_bytes].fdiv(@streams).ceil,
             extension:                        @inventory[:max_total_lease_duration],
-            max_duration_per_lease_extension: @inventory[:max_duration_per_lease_extension]
+            max_duration_per_lease_extension: @inventory[:max_duration_per_lease_extension],
+            use_legacy_flow_control:          @inventory[:use_legacy_flow_control]
           }
         end
 
