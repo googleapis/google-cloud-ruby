@@ -32,6 +32,8 @@ module Google
     module DataLabeling
       module V1beta1
         ##
+        # Service for the AI Platform Data Labeling API.
+        #
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/data_labeling/v1beta1/data_labeling_service"

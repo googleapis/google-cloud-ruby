@@ -25,6 +25,7 @@ module Google
     module DataLabeling
       module V1beta1
         module DataLabelingService
+          # Service for the AI Platform Data Labeling API.
           class Service
 
             include GRPC::GenericService

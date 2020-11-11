@@ -27,6 +27,8 @@ module Google
           ##
           # Client for the DataLabelingService service.
           #
+          # Service for the AI Platform Data Labeling API.
+          #
           class Client
             include Paths
 
