@@ -1,5 +1,14 @@
 # Release History
 
+### 2.2.0 / 2020-11-11
+
+#### Features
+
+* Add Backup-level IAM Policy support
+  * Add Backup#policy
+  * Add Backup#update_policy
+  * Add Backup#test_iam_permissions
+
 ### 2.1.0 / 2020-09-17
 
 #### Features
