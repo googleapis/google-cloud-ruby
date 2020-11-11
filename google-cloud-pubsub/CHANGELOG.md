@@ -1,5 +1,11 @@
 # Release History
 
+### 2.2.0 / 2020-11-11
+
+#### Features
+
+* Add Subscription#remove_dead_letter_policy
+
 ### 2.1.1 / 2020-10-26
 
 #### Documentation
