@@ -5,6 +5,7 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/osconfig/v1/osconfig_common_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -17,6 +18,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :duration, :message, 5, "google.protobuf.Duration"
       optional :dry_run, :bool, 6
       optional :display_name, :string, 8
+      optional :rollout, :message, 9, "google.cloud.osconfig.v1.PatchRollout"
     end
     add_message "google.cloud.osconfig.v1.GetPatchJobRequest" do
       optional :name, :string, 1
@@ -63,6 +65,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :error_message, :string, 11
       optional :percent_complete, :double, 12
       optional :patch_deployment, :string, 15
+      optional :rollout, :message, 16, "google.cloud.osconfig.v1.PatchRollout"
     end
     add_message "google.cloud.osconfig.v1.PatchJob.InstanceDetailsSummary" do
       optional :pending_instance_count, :int64, 1
@@ -205,6 +208,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.osconfig.v1.PatchInstanceFilter.GroupLabel" do
       map :labels, :string, :string, 1
     end
+    add_message "google.cloud.osconfig.v1.PatchRollout" do
+      optional :mode, :enum, 1, "google.cloud.osconfig.v1.PatchRollout.Mode"
+      optional :disruption_budget, :message, 2, "google.cloud.osconfig.v1.FixedOrPercent"
+    end
+    add_enum "google.cloud.osconfig.v1.PatchRollout.Mode" do
+      value :MODE_UNSPECIFIED, 0
+      value :ZONE_BY_ZONE, 1
+      value :CONCURRENT_ZONES, 2
+    end
   end
 end
 
@@ -240,6 +252,8 @@ module Google
         GcsObject = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1.GcsObject").msgclass
         PatchInstanceFilter = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1.PatchInstanceFilter").msgclass
         PatchInstanceFilter::GroupLabel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1.PatchInstanceFilter.GroupLabel").msgclass
+        PatchRollout = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1.PatchRollout").msgclass
+        PatchRollout::Mode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1.PatchRollout.Mode").enummodule
       end
     end
   end

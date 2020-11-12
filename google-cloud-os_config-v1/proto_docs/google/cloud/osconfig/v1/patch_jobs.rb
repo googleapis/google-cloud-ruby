@@ -32,8 +32,8 @@ module Google
         #     to 1024 characters.
         # @!attribute [rw] instance_filter
         #   @return [::Google::Cloud::OsConfig::V1::PatchInstanceFilter]
-        #     Required. Instances to patch, either explicitly or filtered by some criteria such
-        #     as zone or labels.
+        #     Required. Instances to patch, either explicitly or filtered by some
+        #     criteria such as zone or labels.
         # @!attribute [rw] patch_config
         #   @return [::Google::Cloud::OsConfig::V1::PatchConfig]
         #     Patch configuration being applied. If omitted, instances are
@@ -49,6 +49,9 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Display name for this patch job. This does not have to be unique.
+        # @!attribute [rw] rollout
+        #   @return [::Google::Cloud::OsConfig::V1::PatchRollout]
+        #     Rollout strategy of the patch job.
         class ExecutePatchJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -66,7 +69,8 @@ module Google
         # Request to list details for all instances that are part of a patch job.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent for the instances are in the form of `projects/*/patchJobs/*`.
+        #     Required. The parent for the instances are in the form of
+        #     `projects/*/patchJobs/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of instance details records to return.  Default is 100.
@@ -157,7 +161,7 @@ module Google
         # A high level representation of a patch job that is either in progress
         # or has completed.
         #
-        # Instances details are not included in the job. To paginate through instance
+        # Instance details are not included in the job. To paginate through instance
         # details, use ListPatchJobInstanceDetails.
         #
         # For more information about patch jobs, see
@@ -182,7 +186,7 @@ module Google
         #     Last time this patch job was updated.
         # @!attribute [rw] state
         #   @return [::Google::Cloud::OsConfig::V1::PatchJob::State]
-        #     The current state of the PatchJob .
+        #     The current state of the PatchJob.
         # @!attribute [rw] instance_filter
         #   @return [::Google::Cloud::OsConfig::V1::PatchInstanceFilter]
         #     Instances to patch.
@@ -211,6 +215,9 @@ module Google
         # @!attribute [r] patch_deployment
         #   @return [::String]
         #     Output only. Name of the patch deployment that created this patch job.
+        # @!attribute [rw] rollout
+        #   @return [::Google::Cloud::OsConfig::V1::PatchRollout]
+        #     Rollout strategy being applied.
         class PatchJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -705,6 +712,58 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+        end
+
+        # Patch rollout configuration specifications. Contains details on the
+        # concurrency control when applying patch(es) to all targeted VMs.
+        # @!attribute [rw] mode
+        #   @return [::Google::Cloud::OsConfig::V1::PatchRollout::Mode]
+        #     Mode of the patch rollout.
+        # @!attribute [rw] disruption_budget
+        #   @return [::Google::Cloud::OsConfig::V1::FixedOrPercent]
+        #     The maximum number (or percentage) of VMs per zone to disrupt at any given
+        #     moment. The number of VMs calculated from multiplying the percentage by the
+        #     total number of VMs in a zone is rounded up.
+        #
+        #     During patching, a VM is considered disrupted from the time the agent is
+        #     notified to begin until patching has completed. This disruption time
+        #     includes the time to complete reboot and any post-patch steps.
+        #
+        #     A VM contributes to the disruption budget if its patching operation fails
+        #     either when applying the patches, running pre or post patch steps, or if it
+        #     fails to respond with a success notification before timing out. VMs that
+        #     are not running or do not have an active agent do not count toward this
+        #     disruption budget.
+        #
+        #     For zone-by-zone rollouts, if the disruption budget in a zone is exceeded,
+        #     the patch job stops, because continuing to the next zone requires
+        #     completion of the patch process in the previous zone.
+        #
+        #     For example, if the disruption budget has a fixed value of `10`, and 8 VMs
+        #     fail to patch in the current zone, the patch job continues to patch 2 VMs
+        #     at a time until the zone is completed. When that zone is completed
+        #     successfully, patching begins with 10 VMs at a time in the next zone. If 10
+        #     VMs in the next zone fail to patch, the patch job stops.
+        class PatchRollout
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Type of the rollout.
+          module Mode
+            # Mode must be specified.
+            MODE_UNSPECIFIED = 0
+
+            # Patches are applied one zone at a time. The patch job begins in the
+            # region with the lowest number of targeted VMs. Within the region,
+            # patching begins in the zone with the lowest number of targeted VMs. If
+            # multiple regions (or zones within a region) have the same number of
+            # targeted VMs, a tie-breaker is achieved by sorting the regions or zones
+            # in alphabetical order.
+            ZONE_BY_ZONE = 1
+
+            # Patches are applied to VMs in all zones at the same time.
+            CONCURRENT_ZONES = 2
           end
         end
       end

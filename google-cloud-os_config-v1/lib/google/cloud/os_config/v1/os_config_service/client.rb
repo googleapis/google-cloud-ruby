@@ -168,7 +168,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_patch_job(parent: nil, description: nil, instance_filter: nil, patch_config: nil, duration: nil, dry_run: nil, display_name: nil)
+            # @overload execute_patch_job(parent: nil, description: nil, instance_filter: nil, patch_config: nil, duration: nil, dry_run: nil, display_name: nil, rollout: nil)
             #   Pass arguments to `execute_patch_job` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -179,8 +179,8 @@ module Google
             #     Description of the patch job. Length of the description is limited
             #     to 1024 characters.
             #   @param instance_filter [::Google::Cloud::OsConfig::V1::PatchInstanceFilter, ::Hash]
-            #     Required. Instances to patch, either explicitly or filtered by some criteria such
-            #     as zone or labels.
+            #     Required. Instances to patch, either explicitly or filtered by some
+            #     criteria such as zone or labels.
             #   @param patch_config [::Google::Cloud::OsConfig::V1::PatchConfig, ::Hash]
             #     Patch configuration being applied. If omitted, instances are
             #     patched using the default configurations.
@@ -192,6 +192,8 @@ module Google
             #     will do nothing.
             #   @param display_name [::String]
             #     Display name for this patch job. This does not have to be unique.
+            #   @param rollout [::Google::Cloud::OsConfig::V1::PatchRollout, ::Hash]
+            #     Rollout strategy of the patch job.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::OsConfig::V1::PatchJob]
@@ -467,7 +469,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent for the instances are in the form of `projects/*/patchJobs/*`.
+            #     Required. The parent for the instances are in the form of
+            #     `projects/*/patchJobs/*`.
             #   @param page_size [::Integer]
             #     The maximum number of instance details records to return.  Default is 100.
             #   @param page_token [::String]
@@ -543,10 +546,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project to apply this patch deployment to in the form `projects/*`.
+            #     Required. The project to apply this patch deployment to in the form
+            #     `projects/*`.
             #   @param patch_deployment_id [::String]
-            #     Required. A name for the patch deployment in the project. When creating a name
-            #     the following rules apply:
+            #     Required. A name for the patch deployment in the project. When creating a
+            #     name the following rules apply:
             #     * Must contain only lowercase letters, numbers, and hyphens.
             #     * Must start with a letter.
             #     * Must be between 1-63 characters.
@@ -688,10 +692,12 @@ module Google
             #   @param parent [::String]
             #     Required. The resource name of the parent in the form `projects/*`.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of patch deployments to return. Default is 100.
+            #     Optional. The maximum number of patch deployments to return. Default is
+            #     100.
             #   @param page_token [::String]
-            #     Optional. A pagination token returned from a previous call to ListPatchDeployments
-            #     that indicates where this listing should continue from.
+            #     Optional. A pagination token returned from a previous call to
+            #     ListPatchDeployments that indicates where this listing should continue
+            #     from.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::OsConfig::V1::PatchDeployment>]
