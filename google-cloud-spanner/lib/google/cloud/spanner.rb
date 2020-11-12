@@ -91,19 +91,19 @@ module Google
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    endpoint: nil, project: nil, keyfile: nil,
                    emulator_host: nil, lib_name: nil, lib_version: nil
-        project_id    ||= (project || default_project_id)
+        project_id    ||= project || default_project_id
         scope         ||= configure.scope
         timeout       ||= configure.timeout
-        endpoint      ||= configure.endpoint
-        credentials   ||= (keyfile || default_credentials(scope: scope))
         emulator_host ||= configure.emulator_host
+        endpoint      ||= emulator_host || configure.endpoint
+        credentials   ||= keyfile
         lib_name      ||= configure.lib_name
         lib_version   ||= configure.lib_version
 
         if emulator_host
           credentials = :this_channel_is_insecure
-          endpoint = emulator_host
         else
+          credentials ||= default_credentials(scope: scope)
           unless credentials.is_a? Google::Auth::Credentials
             credentials = Spanner::Credentials.new credentials, scope: scope
           end
