@@ -18,3 +18,8 @@ _site/*
 
 # Ignore stuff left by synth
 __pycache__
+
+# Ignore bundler directory
+*/.bundle/
+*/vendor/bundle
+*/lib/bundler/man/
