@@ -78,12 +78,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.analytics.data.v1alpha.BatchRunPivotReportsResponse" do
       repeated :pivot_reports, :message, 1, "google.analytics.data.v1alpha.RunPivotReportResponse"
     end
-    add_message "google.analytics.data.v1alpha.GetUniversalMetadataRequest" do
-    end
-    add_message "google.analytics.data.v1alpha.UniversalMetadata" do
-      repeated :dimensions, :message, 1, "google.analytics.data.v1alpha.DimensionMetadata"
-      repeated :metrics, :message, 2, "google.analytics.data.v1alpha.MetricMetadata"
-    end
     add_message "google.analytics.data.v1alpha.GetMetadataRequest" do
       optional :name, :string, 1
     end
@@ -124,8 +118,6 @@ module Google
         BatchRunReportsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.BatchRunReportsResponse").msgclass
         BatchRunPivotReportsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.BatchRunPivotReportsRequest").msgclass
         BatchRunPivotReportsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.BatchRunPivotReportsResponse").msgclass
-        GetUniversalMetadataRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.GetUniversalMetadataRequest").msgclass
-        UniversalMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.UniversalMetadata").msgclass
         GetMetadataRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.GetMetadataRequest").msgclass
         RunRealtimeReportRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.RunRealtimeReportRequest").msgclass
         RunRealtimeReportResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.RunRealtimeReportResponse").msgclass

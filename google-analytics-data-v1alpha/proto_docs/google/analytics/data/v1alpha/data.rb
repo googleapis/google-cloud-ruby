@@ -22,8 +22,7 @@ module Google
     module Data
       module V1alpha
         # A contiguous set of days: startDate, startDate + 1, ..., endDate. Requests
-        # are allowed up to 4 date ranges, and the union of the ranges can cover up to
-        # 1 year.
+        # are allowed up to 4 date ranges.
         # @!attribute [rw] start_date
         #   @return [::String]
         #     The inclusive start date for the query in the format `YYYY-MM-DD`. Cannot
