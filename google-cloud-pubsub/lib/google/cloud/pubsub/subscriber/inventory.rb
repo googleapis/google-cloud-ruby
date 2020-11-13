@@ -30,9 +30,11 @@ module Google
 
           include MonitorMixin
 
-          attr_reader :stream, :limit, :bytesize, :extension, :max_duration_per_lease_extension, :use_legacy_flow_control
+          attr_reader :stream, :limit, :bytesize, :extension, :max_duration_per_lease_extension,
+                      :use_legacy_flow_control
 
-          def initialize stream, limit:, bytesize:, extension:, max_duration_per_lease_extension:, use_legacy_flow_control:
+          def initialize stream, limit:, bytesize:, extension:, max_duration_per_lease_extension:,
+                                 use_legacy_flow_control:
             super()
             @stream = stream
             @limit = limit
