@@ -54,7 +54,7 @@ describe Google::Cloud::PubSub::Subscriber, :mock_pubsub do
     _(subscriber.inventory_extension).must_equal 3600 # deprecated Use #max_total_lease_duration.
     _(subscriber.max_total_lease_duration).must_equal 3600
     _(subscriber.max_duration_per_lease_extension).must_equal 0
-    _(subscriber.stream_inventory).must_equal({limit: 500, bytesize: 50000000, max_duration_per_lease_extension: 0, extension: 3600})
+    _(subscriber.stream_inventory).must_equal({limit: 500, bytesize: 50000000, max_duration_per_lease_extension: 0, extension: 3600, use_legacy_flow_control: false})
     _(subscriber.callback_threads).must_equal 8
     _(subscriber.push_threads).must_equal 4
   end
@@ -73,11 +73,25 @@ describe Google::Cloud::PubSub::Subscriber, :mock_pubsub do
     _(subscriber.inventory_extension).must_equal 3600 # deprecated Use #max_total_lease_duration.
     _(subscriber.max_total_lease_duration).must_equal 3600
     _(subscriber.max_duration_per_lease_extension).must_equal 0
-    _(subscriber.stream_inventory).must_equal({limit: 250, bytesize: 12500000, max_duration_per_lease_extension: 0, extension: 3600})
+    _(subscriber.stream_inventory).must_equal({limit: 250, bytesize: 12500000, max_duration_per_lease_extension: 0, extension: 3600, use_legacy_flow_control: false})
     _(subscriber.callback_threads).must_equal callback_threads
     _(subscriber.push_threads).must_equal push_threads
 
     _(subscriber.to_s).must_equal "(subscription: subscription-name-goes-here, streams: [(inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started)])"
     _(subscriber.stream_pool.first.to_s).must_equal "(inventory: 0, status: running, thread: not started)"
+  end
+
+  it "propagates use_legacy_flow_control" do
+    subscriber = Google::Cloud::PubSub::Subscriber.new(
+      subscription_name,
+      callback,
+      inventory: {
+        max_outstanding_messages: 999,
+        use_legacy_flow_control: true
+      }
+    )
+    _(subscriber.max_outstanding_messages).must_equal 999
+    _(subscriber.use_legacy_flow_control?).must_equal true
+    _(subscriber.stream_inventory).must_equal({limit: 500, bytesize: 50000000, max_duration_per_lease_extension: 0, extension: 3600, use_legacy_flow_control: true})
   end
 end

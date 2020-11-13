@@ -870,6 +870,9 @@ module Google
         #       Default is 1,000. (Note: replaces `:limit`, which is deprecated.)
         #     * `:max_outstanding_bytes` [Integer] The total byte size of received messages to be collected by
         #       subscriber. Default is 100,000,000 (100MB). (Note: replaces `:bytesize`, which is deprecated.)
+        #     * `:use_legacy_flow_control` [Boolean] Disables enforcing flow control settings at the Cloud PubSub
+        #       server and the less accurate method of only enforcing flow control at the client side is used instead.
+        #       Default is false.
         #     * `:max_total_lease_duration` [Integer] The number of seconds that received messages can be held awaiting
         #       processing. Default is 3,600 (1 hour). (Note: replaces `:extension`, which is deprecated.)
         #     * `:max_duration_per_lease_extension` [Integer] The maximum amount of time in seconds for a single lease
