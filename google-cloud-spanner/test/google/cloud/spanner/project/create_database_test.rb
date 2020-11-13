@@ -78,7 +78,7 @@ describe Google::Cloud::Spanner::Project, :create_database, :mock_spanner do
     instance_id = "my-instance-id"
     database_id = "new-database"
 
-    kms_key_name = "projects/<your_project>/locations/<your_location>/keyRings/<your_key_ring>/cryptoKeys/<your_key_name>"
+    kms_key_name = "projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>"
 
     create_res = \
       Gapic::Operation.new(

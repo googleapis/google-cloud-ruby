@@ -311,7 +311,8 @@ module Google
         #   following settings can be provided:
         #
         #   * `:kms_key_name` (String) The name of KMS key to use which should
-        #     be the full path, e.g., projects/<your_project>/locations/<your_location>/keyRings/<your_key_ring>/cryptoKeys/<your_key_name>.
+        #     be the full path, e.g., `projects/<project>/locations/<location>\
+        #     /keyRings/<key_ring>/cryptoKeys/<kms_key_name>`
         #
         # @return [Database::Job] The job representing the long-running,
         #   asynchronous processing of a database create operation.
