@@ -101,6 +101,14 @@ module Google
           @grpc.state
         end
 
+        # An encryption configuration describing the encryption type and key
+        # resources in Cloud KMS.
+        #
+        # @return [Google::Cloud::Spanner::Admin::Database::V1::EncryptionConfig, nil]
+        def encryption_config
+          @grpc.encryption_config
+        end
+
         ##
         # The database is still being created. Operations on the database may
         # raise with `FAILED_PRECONDITION` in this state.
