@@ -210,12 +210,13 @@ module Google
         end
 
         def create_database instance_id, database_id, statements: [],
-                            call_options: nil
+                            call_options: nil, encryption_config: nil
           opts = default_options call_options: call_options
           request = {
             parent: instance_path(instance_id),
             create_statement: "CREATE DATABASE `#{database_id}`",
-            extra_statements: Array(statements)
+            extra_statements: Array(statements),
+            encryption_config: encryption_config
           }
           databases.create_database request, opts
         end

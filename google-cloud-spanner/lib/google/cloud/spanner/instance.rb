@@ -306,6 +306,12 @@ module Google
         #   These statements execute atomically with the creation of the
         #   database: if there is an error in any statement, the database is not
         #   created. Optional.
+        # @param [Hash] encryption_config An encryption configuration describing
+        #   the encryption type and key resources in Cloud KMS. Optional. The
+        #   following settings can be provided:
+        #
+        #   * `:kms_key_name` (String) The name of KMS key to use which should
+        #     be the full path, e.g., projects/<your_project>/locations/<your_location>/keyRings/<your_key_ring>/cryptoKeys/<your_key_name>.
         #
         # @return [Database::Job] The job representing the long-running,
         #   asynchronous processing of a database create operation.
@@ -328,9 +334,10 @@ module Google
         #     database = job.database
         #   end
         #
-        def create_database database_id, statements: []
+        def create_database database_id, statements: [], encryption_config: nil
           grpc = service.create_database instance_id, database_id,
-                                         statements: statements
+                                         statements: statements,
+                                         encryption_config: encryption_config
           Database::Job.from_grpc grpc, service
         end
 
