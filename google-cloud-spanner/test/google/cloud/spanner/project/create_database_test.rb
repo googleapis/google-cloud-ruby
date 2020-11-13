@@ -38,7 +38,7 @@ describe Google::Cloud::Spanner::Project, :create_database, :mock_spanner do
         metadata_type: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata
       )
     mock = Minitest::Mock.new
-    mock.expect :create_database, create_res, [{ parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: [] }, nil]
+    mock.expect :create_database, create_res, [{ parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: [], encryption_config: nil }, nil]
     spanner.service.mocked_databases = mock
 
     job = spanner.create_database instance_id, database_id
@@ -60,13 +60,37 @@ describe Google::Cloud::Spanner::Project, :create_database, :mock_spanner do
         metadata_type: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata
     )
     mock = Minitest::Mock.new
-    mock.expect :create_database, create_res, [{ parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: ["CREATE TABLE table1;", "CREATE TABLE table2;"] }, nil]
+    mock.expect :create_database, create_res, [{ parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: ["CREATE TABLE table1;", "CREATE TABLE table2;"], encryption_config: nil }, nil]
     spanner.service.mocked_databases = mock
 
     job = spanner.create_database instance_id, database_id, statements: [
       "CREATE TABLE table1;",
       "CREATE TABLE table2;"
     ]
+
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Spanner::Database::Job
+    _(job).wont_be :done?
+  end
+
+  it "creates a database with cmek config" do
+    instance_id = "my-instance-id"
+    database_id = "new-database"
+
+    kms_key_name = "projects/<your_project>/locations/<your_location>/keyRings/<your_key_ring>/cryptoKeys/<your_key_name>"
+
+    create_res = \
+      Gapic::Operation.new(
+        job_grpc, Object.new,
+        result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
+        metadata_type: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata
+    )
+    mock = Minitest::Mock.new
+    mock.expect :create_database, create_res, [{ parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: [], encryption_config: { kms_key_name: kms_key_name } }, nil]
+    spanner.service.mocked_databases = mock
+
+    job = spanner.create_database instance_id, database_id, encryption_config: { kms_key_name: kms_key_name }
 
     mock.verify
 
