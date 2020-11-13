@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "b27fe70a9ae111a57eb0ff5affb7133a70bc18a4"
+        "sha": "77a53b96027a391177a22e8cf3f3a7d722f85494"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b365fff50d84fbe03ea16d02cc73d72fa1fc864d",
-        "internalRef": "340922897"
+        "sha": "96ca8bc1f621b7e972b958b35ad15af4c5476e16",
+        "internalRef": "342075900"
       }
     }
   ],
@@ -47,7 +47,6 @@
     "lib/google/cloud/artifact_registry/v1beta2/artifact_registry/operations.rb",
     "lib/google/cloud/artifact_registry/v1beta2/artifact_registry/paths.rb",
     "lib/google/cloud/artifact_registry/v1beta2/version.rb",
-    "lib/google/devtools/artifactregistry/v1beta2/artifact_pb.rb",
     "lib/google/devtools/artifactregistry/v1beta2/file_pb.rb",
     "lib/google/devtools/artifactregistry/v1beta2/package_pb.rb",
     "lib/google/devtools/artifactregistry/v1beta2/repository_pb.rb",
@@ -59,7 +58,6 @@
     "proto_docs/README.md",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
-    "proto_docs/google/devtools/artifactregistry/v1beta2/artifact.rb",
     "proto_docs/google/devtools/artifactregistry/v1beta2/file.rb",
     "proto_docs/google/devtools/artifactregistry/v1beta2/package.rb",
     "proto_docs/google/devtools/artifactregistry/v1beta2/repository.rb",

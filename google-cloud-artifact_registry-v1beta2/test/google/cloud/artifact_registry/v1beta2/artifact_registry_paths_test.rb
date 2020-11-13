@@ -23,18 +23,6 @@ require "gapic/grpc/service_stub"
 require "google/cloud/artifact_registry/v1beta2/artifact_registry"
 
 class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientPathsTest < Minitest::Test
-  def test_docker_image_path
-    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      path = client.docker_image_path project: "value0", location: "value1", repository: "value2", docker_image: "value3"
-      assert_equal "projects/value0/locations/value1/repositories/value2/dockerImages/value3", path
-    end
-  end
-
   def test_repository_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
