@@ -91,7 +91,7 @@ describe Google::Cloud::PubSub::Subscriber, :mock_pubsub do
       }
     )
     _(subscriber.max_outstanding_messages).must_equal 999
-    _(subscriber.use_legacy_flow_control).must_equal true
+    _(subscriber.use_legacy_flow_control?).must_equal true
     _(subscriber.stream_inventory).must_equal({limit: 500, bytesize: 50000000, max_duration_per_lease_extension: 0, extension: 3600, use_legacy_flow_control: true})
   end
 end

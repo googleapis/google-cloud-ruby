@@ -308,12 +308,12 @@ module Google
 
         ##
         # Whether to enforce flow control at the client side only or to enforce it at both the client and
-        # the server.
+        # the server. For more details about flow control see https://cloud.google.com/pubsub/docs/pull#config.
         #
         # @return [Boolean] `true` when only client side flow control is enforced, `false` when both client and
         # server side flow control are enforced.
         #
-        def use_legacy_flow_control
+        def use_legacy_flow_control?
           @inventory[:use_legacy_flow_control]
         end
 

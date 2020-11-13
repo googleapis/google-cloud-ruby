@@ -37,7 +37,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     _(subscriber.inventory_extension).must_equal 3600
     _(subscriber.max_total_lease_duration).must_equal 3600
     _(subscriber.max_duration_per_lease_extension).must_equal 0
-    _(subscriber.use_legacy_flow_control).must_equal false
+    _(subscriber.use_legacy_flow_control?).must_equal false
   end
 
   it "will set deadline while creating a Subscriber" do
@@ -56,7 +56,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     _(subscriber.inventory_extension).must_equal 3600
     _(subscriber.max_total_lease_duration).must_equal 3600
     _(subscriber.max_duration_per_lease_extension).must_equal 0
-    _(subscriber.use_legacy_flow_control).must_equal false
+    _(subscriber.use_legacy_flow_control?).must_equal false
   end
 
   it "will set deadline while creating a Subscriber" do
@@ -75,7 +75,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     _(subscriber.inventory_extension).must_equal 3600
     _(subscriber.max_total_lease_duration).must_equal 3600
     _(subscriber.max_duration_per_lease_extension).must_equal 0
-    _(subscriber.use_legacy_flow_control).must_equal false
+    _(subscriber.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory (deprecated) while creating a Subscriber" do
@@ -94,7 +94,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     _(subscriber.inventory_extension).must_equal 3600
     _(subscriber.max_total_lease_duration).must_equal 3600
     _(subscriber.max_duration_per_lease_extension).must_equal 0
-    _(subscriber.use_legacy_flow_control).must_equal false
+    _(subscriber.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory max_outstanding_messages while creating a Subscriber" do
@@ -113,7 +113,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     _(subscriber.inventory_extension).must_equal 3600
     _(subscriber.max_total_lease_duration).must_equal 3600
     _(subscriber.max_duration_per_lease_extension).must_equal 0
-    _(subscriber.use_legacy_flow_control).must_equal false
+    _(subscriber.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory limit alias while creating a Subscriber" do
@@ -132,7 +132,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     _(subscriber.inventory_extension).must_equal 3600
     _(subscriber.max_total_lease_duration).must_equal 3600
     _(subscriber.max_duration_per_lease_extension).must_equal 0
-    _(subscriber.use_legacy_flow_control).must_equal false
+    _(subscriber.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory max_outstanding_bytes while creating a Subscriber" do
@@ -151,7 +151,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     _(subscriber.inventory_extension).must_equal 3600
     _(subscriber.max_total_lease_duration).must_equal 3600
     _(subscriber.max_duration_per_lease_extension).must_equal 0
-    _(subscriber.use_legacy_flow_control).must_equal false
+    _(subscriber.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory bytesize alias while creating a Subscriber" do
@@ -170,7 +170,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     _(subscriber.inventory_extension).must_equal 3600
     _(subscriber.max_total_lease_duration).must_equal 3600
     _(subscriber.max_duration_per_lease_extension).must_equal 0
-    _(subscriber.use_legacy_flow_control).must_equal false
+    _(subscriber.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory max_total_lease_duration while creating a Subscriber" do
@@ -189,7 +189,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     _(subscriber.inventory_extension).must_equal 7200
     _(subscriber.max_total_lease_duration).must_equal 7200
     _(subscriber.max_duration_per_lease_extension).must_equal 0
-    _(subscriber.use_legacy_flow_control).must_equal false
+    _(subscriber.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory extension alias while creating a Subscriber" do
@@ -208,7 +208,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     _(subscriber.inventory_extension).must_equal 7200
     _(subscriber.max_total_lease_duration).must_equal 7200
     _(subscriber.max_duration_per_lease_extension).must_equal 0
-    _(subscriber.use_legacy_flow_control).must_equal false
+    _(subscriber.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory max_duration_per_lease_extension while creating a Subscriber" do
@@ -227,10 +227,10 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     _(subscriber.inventory_extension).must_equal 3600
     _(subscriber.max_total_lease_duration).must_equal 3600
     _(subscriber.max_duration_per_lease_extension).must_equal 10
-    _(subscriber.use_legacy_flow_control).must_equal false
+    _(subscriber.use_legacy_flow_control?).must_equal false
   end
 
-  it "will set inventory use_legacy_flow_control while creating a Subscriber" do
+  it "will use inventory use_legacy_flow_control while creating a Subscriber" do
     subscriber = subscription.listen inventory: { use_legacy_flow_control: true } do |msg|
       puts msg.msg_id
     end
@@ -246,6 +246,6 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     _(subscriber.inventory_extension).must_equal 3600
     _(subscriber.max_total_lease_duration).must_equal 3600
     _(subscriber.max_duration_per_lease_extension).must_equal 0
-    _(subscriber.use_legacy_flow_control).must_equal true
+    _(subscriber.use_legacy_flow_control?).must_equal true
   end
 end
