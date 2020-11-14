@@ -207,7 +207,7 @@ module Google
             # Service calls
 
             ##
-            # Lists buckets (Beta).
+            # Lists buckets.
             #
             # @overload list_buckets(request, options = nil)
             #   Pass arguments to `list_buckets` via a request object, either of type
@@ -292,7 +292,7 @@ module Google
             end
 
             ##
-            # Gets a bucket (Beta).
+            # Gets a bucket.
             #
             # @overload get_bucket(request, options = nil)
             #   Pass arguments to `get_bucket` via a request object, either of type
@@ -366,6 +366,85 @@ module Google
             end
 
             ##
+            # Creates a bucket that can be used to store log entries. Once a bucket has
+            # been created, the region cannot be changed.
+            #
+            # @overload create_bucket(request, options = nil)
+            #   Pass arguments to `create_bucket` via a request object, either of type
+            #   {::Google::Cloud::Logging::V2::CreateBucketRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Logging::V2::CreateBucketRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_bucket(parent: nil, bucket_id: nil, bucket: nil)
+            #   Pass arguments to `create_bucket` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource in which to create the bucket:
+            #
+            #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]"
+            #
+            #     Example: `"projects/my-logging-project/locations/global"`
+            #   @param bucket_id [::String]
+            #     Required. A client-assigned identifier such as `"my-bucket"`. Identifiers are
+            #     limited to 100 characters and can include only letters, digits,
+            #     underscores, hyphens, and periods.
+            #   @param bucket [::Google::Cloud::Logging::V2::LogBucket, ::Hash]
+            #     Required. The new bucket. The region specified in the new bucket must be compliant
+            #     with any Location Restriction Org Policy. The name field in the bucket is
+            #     ignored.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Logging::V2::LogBucket]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Logging::V2::LogBucket]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def create_bucket request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Logging::V2::CreateBucketRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_bucket.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Logging::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_bucket.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_bucket.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_service_stub.call_rpc :create_bucket, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Updates a bucket. This method replaces the following fields in the
             # existing bucket with values from the new bucket: `retention_period`
             #
@@ -376,7 +455,6 @@ module Google
             # will be returned.
             #
             # A buckets region may not be modified after it is created.
-            # This method is in Beta.
             #
             # @overload update_bucket(request, options = nil)
             #   Pass arguments to `update_bucket` via a request object, either of type
@@ -455,6 +533,537 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :update_bucket, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a bucket.
+            # Moves the bucket to the DELETE_REQUESTED state. After 7 days, the
+            # bucket will be purged and all logs in the bucket will be permanently
+            # deleted.
+            #
+            # @overload delete_bucket(request, options = nil)
+            #   Pass arguments to `delete_bucket` via a request object, either of type
+            #   {::Google::Cloud::Logging::V2::DeleteBucketRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Logging::V2::DeleteBucketRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_bucket(name: nil)
+            #   Pass arguments to `delete_bucket` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The full resource name of the bucket to delete.
+            #
+            #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+            #         "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+            #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+            #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+            #
+            #     Example:
+            #     `"projects/my-project-id/locations/my-location/buckets/my-bucket-id"`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def delete_bucket request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Logging::V2::DeleteBucketRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_bucket.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Logging::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_bucket.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_bucket.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_service_stub.call_rpc :delete_bucket, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Undeletes a bucket. A bucket that has been deleted may be undeleted within
+            # the grace period of 7 days.
+            #
+            # @overload undelete_bucket(request, options = nil)
+            #   Pass arguments to `undelete_bucket` via a request object, either of type
+            #   {::Google::Cloud::Logging::V2::UndeleteBucketRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Logging::V2::UndeleteBucketRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload undelete_bucket(name: nil)
+            #   Pass arguments to `undelete_bucket` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The full resource name of the bucket to undelete.
+            #
+            #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+            #         "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+            #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+            #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+            #
+            #     Example:
+            #     `"projects/my-project-id/locations/my-location/buckets/my-bucket-id"`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def undelete_bucket request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Logging::V2::UndeleteBucketRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.undelete_bucket.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Logging::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.undelete_bucket.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.undelete_bucket.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_service_stub.call_rpc :undelete_bucket, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists views on a bucket.
+            #
+            # @overload list_views(request, options = nil)
+            #   Pass arguments to `list_views` via a request object, either of type
+            #   {::Google::Cloud::Logging::V2::ListViewsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Logging::V2::ListViewsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_views(parent: nil, page_token: nil, page_size: nil)
+            #   Pass arguments to `list_views` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The bucket whose views are to be listed:
+            #
+            #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+            #   @param page_token [::String]
+            #     Optional. If present, then retrieve the next batch of results from the
+            #     preceding call to this method. `pageToken` must be the value of
+            #     `nextPageToken` from the previous response. The values of other method
+            #     parameters should be identical to those in the previous call.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of results to return from this request.
+            #     Non-positive values are ignored. The presence of `nextPageToken` in the
+            #     response indicates that more results might be available.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Logging::V2::LogView>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Logging::V2::LogView>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def list_views request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Logging::V2::ListViewsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_views.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Logging::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_views.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_views.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_service_stub.call_rpc :list_views, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @config_service_stub, :list_views, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets a view.
+            #
+            # @overload get_view(request, options = nil)
+            #   Pass arguments to `get_view` via a request object, either of type
+            #   {::Google::Cloud::Logging::V2::GetViewRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Logging::V2::GetViewRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_view(name: nil)
+            #   Pass arguments to `get_view` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the policy:
+            #
+            #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+            #
+            #     Example:
+            #     `"projects/my-project-id/locations/my-location/buckets/my-bucket-id/views/my-view-id"`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Logging::V2::LogView]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Logging::V2::LogView]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def get_view request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Logging::V2::GetViewRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_view.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Logging::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_view.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_view.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_service_stub.call_rpc :get_view, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a view over logs in a bucket. A bucket may contain a maximum of
+            # 50 views.
+            #
+            # @overload create_view(request, options = nil)
+            #   Pass arguments to `create_view` via a request object, either of type
+            #   {::Google::Cloud::Logging::V2::CreateViewRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Logging::V2::CreateViewRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_view(parent: nil, view_id: nil, view: nil)
+            #   Pass arguments to `create_view` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The bucket in which to create the view
+            #
+            #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+            #
+            #     Example:
+            #     `"projects/my-logging-project/locations/my-location/buckets/my-bucket"`
+            #   @param view_id [::String]
+            #     Required. The id to use for this view.
+            #   @param view [::Google::Cloud::Logging::V2::LogView, ::Hash]
+            #     Required. The new view.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Logging::V2::LogView]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Logging::V2::LogView]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def create_view request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Logging::V2::CreateViewRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_view.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Logging::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_view.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_view.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_service_stub.call_rpc :create_view, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a view. This method replaces the following fields in the existing
+            # view with values from the new view: `filter`.
+            #
+            # @overload update_view(request, options = nil)
+            #   Pass arguments to `update_view` via a request object, either of type
+            #   {::Google::Cloud::Logging::V2::UpdateViewRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Logging::V2::UpdateViewRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_view(name: nil, view: nil, update_mask: nil)
+            #   Pass arguments to `update_view` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The full resource name of the view to update
+            #
+            #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+            #
+            #     Example:
+            #       `"projects/my-project-id/locations/my-location/buckets/my-bucket-id/views/my-view-id"`.
+            #   @param view [::Google::Cloud::Logging::V2::LogView, ::Hash]
+            #     Required. The updated view.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Field mask that specifies the fields in `view` that need
+            #     an update. A field will be overwritten if, and only if, it is
+            #     in the update mask. `name` and output only fields cannot be updated.
+            #
+            #     For a detailed `FieldMask` definition, see
+            #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+            #
+            #     Example: `updateMask=filter`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Logging::V2::LogView]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Logging::V2::LogView]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def update_view request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Logging::V2::UpdateViewRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_view.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Logging::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_view.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_view.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_service_stub.call_rpc :update_view, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a view from a bucket.
+            #
+            # @overload delete_view(request, options = nil)
+            #   Pass arguments to `delete_view` via a request object, either of type
+            #   {::Google::Cloud::Logging::V2::DeleteViewRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Logging::V2::DeleteViewRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_view(name: nil)
+            #   Pass arguments to `delete_view` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The full resource name of the view to delete:
+            #
+            #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+            #
+            #     Example:
+            #        `"projects/my-project-id/locations/my-location/buckets/my-bucket-id/views/my-view-id"`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def delete_view request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Logging::V2::DeleteViewRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_view.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Logging::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_view.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_view.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @config_service_stub.call_rpc :delete_view, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -1616,10 +2225,50 @@ module Google
                 #
                 attr_reader :get_bucket
                 ##
+                # RPC-specific configuration for `create_bucket`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_bucket
+                ##
                 # RPC-specific configuration for `update_bucket`
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_bucket
+                ##
+                # RPC-specific configuration for `delete_bucket`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_bucket
+                ##
+                # RPC-specific configuration for `undelete_bucket`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :undelete_bucket
+                ##
+                # RPC-specific configuration for `list_views`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_views
+                ##
+                # RPC-specific configuration for `get_view`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_view
+                ##
+                # RPC-specific configuration for `create_view`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_view
+                ##
+                # RPC-specific configuration for `update_view`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_view
+                ##
+                # RPC-specific configuration for `delete_view`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_view
                 ##
                 # RPC-specific configuration for `list_sinks`
                 # @return [::Gapic::Config::Method]
@@ -1687,8 +2336,24 @@ module Google
                   @list_buckets = ::Gapic::Config::Method.new list_buckets_config
                   get_bucket_config = parent_rpcs&.get_bucket if parent_rpcs&.respond_to? :get_bucket
                   @get_bucket = ::Gapic::Config::Method.new get_bucket_config
+                  create_bucket_config = parent_rpcs&.create_bucket if parent_rpcs&.respond_to? :create_bucket
+                  @create_bucket = ::Gapic::Config::Method.new create_bucket_config
                   update_bucket_config = parent_rpcs&.update_bucket if parent_rpcs&.respond_to? :update_bucket
                   @update_bucket = ::Gapic::Config::Method.new update_bucket_config
+                  delete_bucket_config = parent_rpcs&.delete_bucket if parent_rpcs&.respond_to? :delete_bucket
+                  @delete_bucket = ::Gapic::Config::Method.new delete_bucket_config
+                  undelete_bucket_config = parent_rpcs&.undelete_bucket if parent_rpcs&.respond_to? :undelete_bucket
+                  @undelete_bucket = ::Gapic::Config::Method.new undelete_bucket_config
+                  list_views_config = parent_rpcs&.list_views if parent_rpcs&.respond_to? :list_views
+                  @list_views = ::Gapic::Config::Method.new list_views_config
+                  get_view_config = parent_rpcs&.get_view if parent_rpcs&.respond_to? :get_view
+                  @get_view = ::Gapic::Config::Method.new get_view_config
+                  create_view_config = parent_rpcs&.create_view if parent_rpcs&.respond_to? :create_view
+                  @create_view = ::Gapic::Config::Method.new create_view_config
+                  update_view_config = parent_rpcs&.update_view if parent_rpcs&.respond_to? :update_view
+                  @update_view = ::Gapic::Config::Method.new update_view_config
+                  delete_view_config = parent_rpcs&.delete_view if parent_rpcs&.respond_to? :delete_view
+                  @delete_view = ::Gapic::Config::Method.new delete_view_config
                   list_sinks_config = parent_rpcs&.list_sinks if parent_rpcs&.respond_to? :list_sinks
                   @list_sinks = ::Gapic::Config::Method.new list_sinks_config
                   get_sink_config = parent_rpcs&.get_sink if parent_rpcs&.respond_to? :get_sink

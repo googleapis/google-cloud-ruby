@@ -19,7 +19,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 4, "google.protobuf.Timestamp"
       optional :update_time, :message, 5, "google.protobuf.Timestamp"
       optional :retention_days, :int32, 11
+      optional :locked, :bool, 9
       optional :lifecycle_state, :enum, 12, "google.logging.v2.LifecycleState"
+    end
+    add_message "google.logging.v2.LogView" do
+      optional :name, :string, 1
+      optional :description, :string, 3
+      optional :create_time, :message, 4, "google.protobuf.Timestamp"
+      optional :update_time, :message, 5, "google.protobuf.Timestamp"
+      optional :filter, :string, 7
     end
     add_message "google.logging.v2.LogSink" do
       optional :name, :string, 1
@@ -27,6 +35,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :filter, :string, 5
       optional :description, :string, 18
       optional :disabled, :bool, 19
+      repeated :exclusions, :message, 16, "google.logging.v2.LogExclusion"
       optional :output_version_format, :enum, 6, "google.logging.v2.LogSink.VersionFormat"
       optional :writer_identity, :string, 8
       optional :include_children, :bool, 9
@@ -54,12 +63,48 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :buckets, :message, 1, "google.logging.v2.LogBucket"
       optional :next_page_token, :string, 2
     end
+    add_message "google.logging.v2.CreateBucketRequest" do
+      optional :parent, :string, 1
+      optional :bucket_id, :string, 2
+      optional :bucket, :message, 3, "google.logging.v2.LogBucket"
+    end
     add_message "google.logging.v2.UpdateBucketRequest" do
       optional :name, :string, 1
       optional :bucket, :message, 2, "google.logging.v2.LogBucket"
       optional :update_mask, :message, 4, "google.protobuf.FieldMask"
     end
     add_message "google.logging.v2.GetBucketRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.logging.v2.DeleteBucketRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.logging.v2.UndeleteBucketRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.logging.v2.ListViewsRequest" do
+      optional :parent, :string, 1
+      optional :page_token, :string, 2
+      optional :page_size, :int32, 3
+    end
+    add_message "google.logging.v2.ListViewsResponse" do
+      repeated :views, :message, 1, "google.logging.v2.LogView"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.logging.v2.CreateViewRequest" do
+      optional :parent, :string, 1
+      optional :view_id, :string, 2
+      optional :view, :message, 3, "google.logging.v2.LogView"
+    end
+    add_message "google.logging.v2.UpdateViewRequest" do
+      optional :name, :string, 1
+      optional :view, :message, 2, "google.logging.v2.LogView"
+      optional :update_mask, :message, 4, "google.protobuf.FieldMask"
+    end
+    add_message "google.logging.v2.GetViewRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.logging.v2.DeleteViewRequest" do
       optional :name, :string, 1
     end
     add_message "google.logging.v2.ListSinksRequest" do
@@ -146,13 +191,23 @@ module Google
     module Logging
       module V2
         LogBucket = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogBucket").msgclass
+        LogView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogView").msgclass
         LogSink = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogSink").msgclass
         LogSink::VersionFormat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogSink.VersionFormat").enummodule
         BigQueryOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.BigQueryOptions").msgclass
         ListBucketsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListBucketsRequest").msgclass
         ListBucketsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListBucketsResponse").msgclass
+        CreateBucketRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CreateBucketRequest").msgclass
         UpdateBucketRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateBucketRequest").msgclass
         GetBucketRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetBucketRequest").msgclass
+        DeleteBucketRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.DeleteBucketRequest").msgclass
+        UndeleteBucketRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UndeleteBucketRequest").msgclass
+        ListViewsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListViewsRequest").msgclass
+        ListViewsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListViewsResponse").msgclass
+        CreateViewRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CreateViewRequest").msgclass
+        UpdateViewRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateViewRequest").msgclass
+        GetViewRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetViewRequest").msgclass
+        DeleteViewRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.DeleteViewRequest").msgclass
         ListSinksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListSinksRequest").msgclass
         ListSinksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListSinksResponse").msgclass
         GetSinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetSinkRequest").msgclass
