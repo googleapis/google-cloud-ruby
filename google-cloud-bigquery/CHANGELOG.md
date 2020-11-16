@@ -1,5 +1,17 @@
 # Release History
 
+### 1.25.0 / 2020-11-16
+
+#### Features
+
+* Add routine (UDF) to Dataset::Access
+* Add support for Table ACLS (IAM Policy)
+  * feat(bigquery): Add support for Table ACLS
+  * Add Bigquery::Policy
+  * Add Table#policy
+  * Add Table#test_iam_permissions
+  * Add Table#update_policy
+
 ### 1.24.0 / 2020-10-29
 
 #### Features
