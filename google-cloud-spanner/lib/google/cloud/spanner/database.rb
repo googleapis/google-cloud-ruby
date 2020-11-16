@@ -400,6 +400,14 @@ module Google
         #   366 days from the time the request is received. Required.
         #   Once the `expire_time` has passed, Cloud Spanner will delete the
         #   backup and free the resources used by the backup. Required.
+        # @param [Hash] encryption_config An encryption configuration describing
+        #   the encryption type and key resources in Cloud KMS. Optional. The
+        #   following settings can be provided:
+        #
+        #   * `:kms_key_name` (String) The name of KMS key to use which should
+        #     be the full path, e.g., `projects/<project>/locations/<location>\
+        #     /keyRings/<key_ring>/cryptoKeys/<kms_key_name>`
+        #
         # @return [Google::Cloud::Spanner::Backup::Job] The job representing
         #   the long-running, asynchronous processing of a backup create
         #   operation.
@@ -422,13 +430,14 @@ module Google
         #     backup = job.backup
         #   end
         #
-        def create_backup backup_id, expire_time
+        def create_backup backup_id, expire_time, encryption_config: nil
           ensure_service!
           grpc = service.create_backup \
             instance_id,
             database_id,
             backup_id,
-            expire_time
+            expire_time,
+            encryption_config: encryption_config
           Backup::Job.from_grpc grpc, service
         end
 

@@ -117,7 +117,8 @@ class MockSpanner < Minitest::Spec
 
   def backup_hash instance_id: "my-instance-id", database_id: "database-#{rand(9999)}",
                   backup_id: "backup-#{rand(9999)}", state: "READY", expire_time: Time.now + 36000,
-                  create_time: Time.now, size_bytes: 1024, referencing_databases: ["db1"]
+                  create_time: Time.now, size_bytes: 1024, referencing_databases: ["db1"],
+                  encryption_info: nil
     {
       name: "projects/#{project}/instances/#{instance_id}/backups/#{backup_id}",
       database: "projects/#{project}/instances/#{instance_id}/databases/#{database_id}",
@@ -127,7 +128,8 @@ class MockSpanner < Minitest::Spec
       size_bytes: size_bytes,
       referencing_databases: referencing_databases.map do |database|
         "projects/#{project}/instances/#{instance_id}/databases/#{database}"
-      end
+      end,
+      encryption_info: encryption_info
     }
   end
 

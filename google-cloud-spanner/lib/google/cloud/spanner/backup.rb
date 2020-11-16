@@ -88,6 +88,12 @@ module Google
           @grpc.database.split("/")[5]
         end
 
+        # Encryption information for a given resource.
+        # @return [Google::Cloud::Spanner::Admin::Database::V1::EncryptionInfo, nil]
+        def encryption_info
+          @grpc.encryption_info
+        end
+
         ##
         # The full path for the backup. Values are of the form
         # `projects/<project>/instances/<instance>/backups/<backup_id>`.
