@@ -26,7 +26,6 @@ describe Google::Cloud::Spanner::Instance, :database, :mock_spanner do
     encryption_config = Google::Cloud::Spanner::Admin::Database::V1::EncryptionConfig.new kms_key_name: kms_key_name
 
     get_res = Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id, encryption_config: encryption_config)
-    puts get_res
     mock = Minitest::Mock.new
     mock.expect :get_database, get_res, [{ name: database_path(instance_id, database_id) }, nil]
     instance.service.mocked_databases = mock

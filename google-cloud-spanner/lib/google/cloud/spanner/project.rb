@@ -410,7 +410,7 @@ module Google
         #   end
         #
         def create_database instance_id, database_id, statements: [],
-                                                      encryption_config: nil
+                            encryption_config: nil
           grpc = service.create_database instance_id, database_id,
                                          statements: statements,
                                          encryption_config: encryption_config
