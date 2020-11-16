@@ -131,7 +131,7 @@ module Google
         #     Required. The user-assigned display name of the Workload.
         #     When present it must be between 4 to 30 characters.
         #     Allowed characters are: lowercase and uppercase letters, numbers,
-        #     hyphen, single-quote, double-quote, space, and exclamation point.
+        #     hyphen, and spaces.
         #
         #     Example: My Workload
         # @!attribute [r] resources
@@ -175,6 +175,20 @@ module Google
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Labels applied to the workload.
+        # @!attribute [rw] provisioned_resources_parent
+        #   @return [::String]
+        #     Input only. The parent resource for the resources managed by this Assured Workload. May
+        #     be either an organization or a folder. Must be the same or a child of the
+        #     Workload parent. If not specified all resources are created under the
+        #     Workload parent.
+        #     Formats:
+        #     folders/\\{folder_id}
+        #     organizations/\\{organization_id}
+        # @!attribute [rw] kms_settings
+        #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::KMSSettings]
+        #     Input only. Settings used to create a CMEK crypto key. When set a project with a KMS
+        #     CMEK key is provisioned. This field is mandatory for a subset of Compliance
+        #     Regimes.
         class Workload
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

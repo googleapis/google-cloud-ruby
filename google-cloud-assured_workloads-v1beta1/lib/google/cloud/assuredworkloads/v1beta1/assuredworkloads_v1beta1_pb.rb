@@ -49,6 +49,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :billing_account, :string, 6
       optional :etag, :string, 9
       map :labels, :string, :string, 10
+      optional :provisioned_resources_parent, :string, 13
+      optional :kms_settings, :message, 14, "google.cloud.assuredworkloads.v1beta1.Workload.KMSSettings"
       oneof :compliance_regime_settings do
         optional :il4_settings, :message, 7, "google.cloud.assuredworkloads.v1beta1.Workload.IL4Settings"
         optional :cjis_settings, :message, 8, "google.cloud.assuredworkloads.v1beta1.Workload.CJISSettings"
