@@ -469,7 +469,8 @@ module Google
         end
 
         def create_backup instance_id, database_id, backup_id, expire_time,
-                          version_time, call_options: nil
+                          version_time, call_options: nil,
+                          encryption_config: nil
           opts = default_options call_options: call_options
           backup = {
             database: database_path(instance_id, database_id),
@@ -479,7 +480,8 @@ module Google
           request = {
             parent:    instance_path(instance_id),
             backup_id: backup_id,
-            backup:    backup
+            backup:    backup,
+            encryption_config: encryption_config
           }
           databases.create_backup request, opts
         end

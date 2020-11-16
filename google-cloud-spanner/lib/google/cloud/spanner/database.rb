@@ -442,6 +442,14 @@ module Google
         #   it will be automatically set to the backup create time. The version
         #   time can be as far in the past as specified by the database earliest
         #   version time. Optional.
+        # @param [Hash] encryption_config An encryption configuration describing
+        #   the encryption type and key resources in Cloud KMS. Optional. The
+        #   following settings can be provided:
+        #
+        #   * `:kms_key_name` (String) The name of KMS key to use which should
+        #     be the full path, e.g., `projects/<project>/locations/<location>\
+        #     /keyRings/<key_ring>/cryptoKeys/<kms_key_name>`
+        #
         # @return [Google::Cloud::Spanner::Backup::Job] The job representing
         #   the long-running, asynchronous processing of a backup create
         #   operation.
@@ -468,14 +476,16 @@ module Google
         #     backup = job.backup
         #   end
         #
-        def create_backup backup_id, expire_time, version_time: nil
+        def create_backup backup_id, expire_time,
+                          version_time: nil, encryption_config: nil
           ensure_service!
           grpc = service.create_backup \
             instance_id,
             database_id,
             backup_id,
             expire_time,
-            version_time
+            version_time,
+            encryption_config: encryption_config
           Backup::Job.from_grpc grpc, service
         end
 
