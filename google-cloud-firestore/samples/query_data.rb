@@ -201,6 +201,34 @@ def in_query_with_array project_id:, collection_path: "cities"
   end
 end
 
+def query_not_equals project_id:, collection_path: "cities"
+  # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
+
+  firestore = Google::Cloud::Firestore.new project_id: project_id
+  # [START fs_query_not_equals]
+  cities_ref = firestore.col collection_path
+  query = cities_ref.where "capital", "!=", false
+  # [END fs_query_not_equals]
+  query.get do |city|
+    puts "Document #{city.document_id} returned by query capital!=false."
+  end
+end
+
+def filter_not_in project_id:, collection_path: "cities"
+  # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
+
+  firestore = Google::Cloud::Firestore.new project_id: project_id
+  # [START fs_filter_not_in]
+  cities_ref = firestore.col collection_path
+  usr_or_japan = cities_ref.where "country", "not_in", ["USA", "Japan"]
+  # [END fs_filter_not_in]
+  usr_or_japan.get do |city|
+    puts "Document #{city.document_id} returned by query not_in ['USA','Japan']."
+  end
+end
+
 def array_contains_any_queries project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
   # collection_path = "cities"
@@ -319,6 +347,10 @@ if $PROGRAM_NAME == __FILE__
     in_query_without_array project_id: project
   when "in_query_with_array"
     in_query_with_array project_id: project
+  when "query_not_equals"
+    query_not_equals project_id: project
+  when "filter_not_in"
+    filter_not_in project_id: project
   when "array_contains_any_queries"
     array_contains_any_queries project_id: project
   when "array_contains_filter"
@@ -340,6 +372,8 @@ if $PROGRAM_NAME == __FILE__
         invalid_range_query            An example of an invalid range query.
         in_query_without_array         In queries without array.
         in_query_with_array            In queries with array.
+        query_not_equals               Create a query with a NOT_EQUAL where clause.
+        filter_not_in                  Create a query with a NOT_IN where clause.
         array_contains_any_queries     Array contains any in query.
         array_contains_filter          Array contains filter.
         collection_group_query         Add sub collection and filter.

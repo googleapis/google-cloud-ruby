@@ -138,6 +138,29 @@ describe "Google Cloud Firestore API samples - Query Data" do
     refute_includes out, "Document BJ returned by query in [['west_coast'], ['east_coast']]."
   end
 
+  it "query_not_equals" do
+    out, _err = capture_io do
+      query_not_equals project_id: @firestore_project, collection_path: @collection_path
+    end
+    assert_includes out, "Document BJ returned by query capital!=false."
+    assert_includes out, "Document TOK returned by query capital!=false."
+    assert_includes out, "Document DC returned by query capital!=false."
+    refute_includes out, "Document LA returned by query capital!=false."
+    refute_includes out, "Document SF returned by query capital!=false."
+  end
+
+  it "filter_not_in" do
+    out, _err = capture_io do
+      filter_not_in project_id: @firestore_project, collection_path: @collection_path
+    end
+
+    assert_includes out, "Document BJ returned by query not_in ['USA','Japan']."
+    refute_includes out, "Document SF returned by query not_in ['USA','Japan']."
+    refute_includes out, "Document LA returned by query not_in ['USA','Japan']."
+    refute_includes out, "Document DC returned by query not_in ['USA','Japan']."
+    refute_includes out, "Document TOK returned by query not_in ['USA','Japan']."
+  end
+
   it "array_contains_any_queries" do
     out, _err = capture_io do
       array_contains_any_queries project_id: @firestore_project, collection_path: @collection_path

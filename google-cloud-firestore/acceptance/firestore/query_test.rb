@@ -39,6 +39,14 @@ describe "Query", :firestore_acceptance do
     _(result_snp[:foo]).must_equal "bar"
   end
 
+  it "has where method with !=" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    rand_query_col.add({foo: "bar", bar: "foo"})
+
+    result_snp = rand_query_col.where(:foo, :!=, :baz).get.first
+    _(result_snp[:foo]).must_equal "bar"
+  end
+
   it "has where method with array_contains" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: ["bar", "baz", "bif"]})
@@ -55,6 +63,14 @@ describe "Query", :firestore_acceptance do
     _(result_snp[:foo]).must_equal "bar"
   end
 
+  it "has where method with not_in" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    rand_query_col.add({foo: "bar"})
+
+    result_snp = rand_query_col.where(:foo, :not_in, ["baz", "bif"]).get.first
+    _(result_snp[:foo]).must_equal "bar"
+  end
+
   it "has where method with array_contains_any" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: ["bar", "baz", "bif"]})
@@ -63,7 +79,7 @@ describe "Query", :firestore_acceptance do
     _(result_snp[:foo]).must_equal ["bar", "baz", "bif"]
   end
 
-  it "supports NaN" do
+  it "supports NaN with equal" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     doc_ref = rand_query_col.add({foo: Float::NAN})
 
@@ -72,7 +88,7 @@ describe "Query", :firestore_acceptance do
     _(result_snp[:foo]).must_be :nan?
   end
 
-  it "supports NaN (symbol)" do
+  it "supports NaN (symbol) with equal" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     doc_ref = rand_query_col.add({foo: Float::NAN})
 
@@ -81,7 +97,7 @@ describe "Query", :firestore_acceptance do
     _(result_snp[:foo]).must_be :nan?
   end
 
-  it "supports NULL" do
+  it "supports NULL with equal" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     doc_ref = rand_query_col.add({foo: nil})
 
@@ -90,13 +106,31 @@ describe "Query", :firestore_acceptance do
     _(result_snp[:foo]).must_be :nil?
   end
 
-  it "supports NULL (symbol)" do
+  it "supports NULL (symbol) with equal" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     doc_ref = rand_query_col.add({foo: nil})
 
     result_snp = rand_query_col.where(:foo, :==, :null).get.first
     _(result_snp).wont_be :nil?
     _(result_snp[:foo]).must_be :nil?
+  end
+
+  it "supports NaN with not equal" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    doc_ref = rand_query_col.add({foo: "bar"})
+
+    result_snp = rand_query_col.where(:foo, :!=, Float::NAN).get.first
+    _(result_snp).wont_be :nil?
+    _(result_snp[:foo]).must_equal "bar"
+  end
+
+  it "supports NULL with not equal" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    doc_ref = rand_query_col.add({foo: "bar"})
+
+    result_snp = rand_query_col.where(:foo, :!=, nil).get.first
+    _(result_snp).wont_be :nil?
+    _(result_snp[:foo]).must_equal "bar"
   end
 
   it "has order method" do
