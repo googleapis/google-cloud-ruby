@@ -896,6 +896,53 @@ module Google
         end
 
         ##
+        # Whether the bucket's file IAM configuration enforces Public Access Prevention. The default is `false`. This
+        # value can be modified by calling {Bucket#public_access_prevention=}.
+        #
+        # @return [Boolean] Returns `false` if the bucket has no IAM configuration or if Public Access Prevention is
+        #   not `enforced` in the IAM configuration. Returns `true` if Public Access Prevention is `enforced` in the IAM
+        #   configuration.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.public_access_prevention = "enforced"
+        #   bucket.public_access_prevention_enforced? # true
+        #
+        def public_access_prevention_enforced?
+          return false unless @gapi.iam_configuration && @gapi.iam_configuration.public_access_prevention
+          @gapi.iam_configuration.public_access_prevention == "enforced"
+        end
+
+        ##
+        # Sets whether Public Access Prevention is enforced for this bucket. This value can be queried by calling
+        # {Bucket#public_access_prevention_enforced?}.
+        #
+        # @param [String, nil] new_public_access_prevention The bucket's new Public Access Prevention configuration.
+        #   Currently, `nil`, `unspecified` and `enforced` are supported. When set to `enforced`, Public Access
+        #   Prevention is enforced in the bucket's IAM configuration.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.public_access_prevention = "enforced"
+        #   bucket.public_access_prevention_enforced? # true
+        #
+        def public_access_prevention= new_public_access_prevention
+          @gapi.iam_configuration ||= API::Bucket::IamConfiguration.new
+          @gapi.iam_configuration.public_access_prevention = new_public_access_prevention
+          patch_gapi! :iam_configuration
+        end
+
+        ##
         # Updates the bucket with changes made in the given block in a single
         # PATCH request. The following attributes may be set: {#cors},
         # {#logging_bucket=}, {#logging_prefix=}, {#versioning=},
