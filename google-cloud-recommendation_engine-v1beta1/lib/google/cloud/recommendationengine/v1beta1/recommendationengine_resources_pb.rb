@@ -11,7 +11,7 @@ end
 
 module Google
   module Cloud
-    module Recommendationengine
+    module RecommendationEngine
       module V1beta1
       end
     end
