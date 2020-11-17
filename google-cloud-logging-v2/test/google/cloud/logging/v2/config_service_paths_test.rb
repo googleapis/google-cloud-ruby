@@ -167,6 +167,27 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::T
     end
   end
 
+  def test_log_view_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.log_view_path project: "value0", location: "value1", bucket: "value2", view: "value3"
+      assert_equal "projects/value0/locations/value1/buckets/value2/views/value3", path
+
+      path = client.log_view_path organization: "value0", location: "value1", bucket: "value2", view: "value3"
+      assert_equal "organizations/value0/locations/value1/buckets/value2/views/value3", path
+
+      path = client.log_view_path folder: "value0", location: "value1", bucket: "value2", view: "value3"
+      assert_equal "folders/value0/locations/value1/buckets/value2/views/value3", path
+
+      path = client.log_view_path billing_account: "value0", location: "value1", bucket: "value2", view: "value3"
+      assert_equal "billingAccounts/value0/locations/value1/buckets/value2/views/value3", path
+    end
+  end
+
   def test_organization_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

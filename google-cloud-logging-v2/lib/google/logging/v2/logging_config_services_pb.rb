@@ -33,10 +33,13 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.logging.v2.ConfigServiceV2'
 
-            # Lists buckets (Beta).
+            # Lists buckets.
             rpc :ListBuckets, ::Google::Cloud::Logging::V2::ListBucketsRequest, ::Google::Cloud::Logging::V2::ListBucketsResponse
-            # Gets a bucket (Beta).
+            # Gets a bucket.
             rpc :GetBucket, ::Google::Cloud::Logging::V2::GetBucketRequest, ::Google::Cloud::Logging::V2::LogBucket
+            # Creates a bucket that can be used to store log entries. Once a bucket has
+            # been created, the region cannot be changed.
+            rpc :CreateBucket, ::Google::Cloud::Logging::V2::CreateBucketRequest, ::Google::Cloud::Logging::V2::LogBucket
             # Updates a bucket. This method replaces the following fields in the
             # existing bucket with values from the new bucket: `retention_period`
             #
@@ -47,8 +50,27 @@ module Google
             # will be returned.
             #
             # A buckets region may not be modified after it is created.
-            # This method is in Beta.
             rpc :UpdateBucket, ::Google::Cloud::Logging::V2::UpdateBucketRequest, ::Google::Cloud::Logging::V2::LogBucket
+            # Deletes a bucket.
+            # Moves the bucket to the DELETE_REQUESTED state. After 7 days, the
+            # bucket will be purged and all logs in the bucket will be permanently
+            # deleted.
+            rpc :DeleteBucket, ::Google::Cloud::Logging::V2::DeleteBucketRequest, ::Google::Protobuf::Empty
+            # Undeletes a bucket. A bucket that has been deleted may be undeleted within
+            # the grace period of 7 days.
+            rpc :UndeleteBucket, ::Google::Cloud::Logging::V2::UndeleteBucketRequest, ::Google::Protobuf::Empty
+            # Lists views on a bucket.
+            rpc :ListViews, ::Google::Cloud::Logging::V2::ListViewsRequest, ::Google::Cloud::Logging::V2::ListViewsResponse
+            # Gets a view.
+            rpc :GetView, ::Google::Cloud::Logging::V2::GetViewRequest, ::Google::Cloud::Logging::V2::LogView
+            # Creates a view over logs in a bucket. A bucket may contain a maximum of
+            # 50 views.
+            rpc :CreateView, ::Google::Cloud::Logging::V2::CreateViewRequest, ::Google::Cloud::Logging::V2::LogView
+            # Updates a view. This method replaces the following fields in the existing
+            # view with values from the new view: `filter`.
+            rpc :UpdateView, ::Google::Cloud::Logging::V2::UpdateViewRequest, ::Google::Cloud::Logging::V2::LogView
+            # Deletes a view from a bucket.
+            rpc :DeleteView, ::Google::Cloud::Logging::V2::DeleteViewRequest, ::Google::Protobuf::Empty
             # Lists sinks.
             rpc :ListSinks, ::Google::Cloud::Logging::V2::ListSinksRequest, ::Google::Cloud::Logging::V2::ListSinksResponse
             # Gets a sink.

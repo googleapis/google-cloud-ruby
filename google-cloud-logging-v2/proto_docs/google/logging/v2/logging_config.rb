@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Logging
       module V2
-        # Describes a repository of logs (Beta).
+        # Describes a repository of logs.
         # @!attribute [rw] name
         #   @return [::String]
         #     The resource name of the bucket.
@@ -29,7 +29,6 @@ module Google
         #     "projects/my-project-id/locations/my-location/buckets/my-bucket-id The
         #     supported locations are:
         #       "global"
-        #       "us-central1"
         #
         #     For the location of `global` it is unspecified where logs are actually
         #     stored.
@@ -50,10 +49,45 @@ module Google
         #     will automatically be deleted. The minimum retention period is 1 day.
         #     If this value is set to zero at bucket creation time, the default time of
         #     30 days will be used.
+        # @!attribute [rw] locked
+        #   @return [::Boolean]
+        #     Whether the bucket has been locked.
+        #     The retention period on a locked bucket may not be changed.
+        #     Locked buckets may only be deleted if they are empty.
         # @!attribute [r] lifecycle_state
         #   @return [::Google::Cloud::Logging::V2::LifecycleState]
         #     Output only. The bucket lifecycle state.
         class LogBucket
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Describes a view over logs in a bucket.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The resource name of the view.
+        #     For example
+        #     "projects/my-project-id/locations/my-location/buckets/my-bucket-id/views/my-view
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Describes this view.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The creation timestamp of the view.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The last update timestamp of the view.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Filter that restricts which log entries in a bucket are visible in this
+        #     view. Filters are restricted to be a logical AND of ==/!= of any of the
+        #     following:
+        #       originating project/folder/organization/billing account.
+        #       resource type
+        #       log id
+        #     Example: SOURCE("projects/myproject") AND resource.type = "gce_instance"
+        #                 AND LOG_ID("stdout")
+        class LogView
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -99,12 +133,17 @@ module Google
         #   @return [::Boolean]
         #     Optional. If set to True, then this sink is disabled and it does not
         #     export any log entries.
+        # @!attribute [rw] exclusions
+        #   @return [::Array<::Google::Cloud::Logging::V2::LogExclusion>]
+        #     Optional. Log entries that match any of the exclusion filters will not be exported.
+        #     If a log entry is matched by both `filter` and one of `exclusion_filters`
+        #     it will not be exported.
         # @!attribute [rw] output_version_format
         #   @return [::Google::Cloud::Logging::V2::LogSink::VersionFormat]
         #     Deprecated. This field is unused.
         # @!attribute [r] writer_identity
         #   @return [::String]
-        #     Output only. An IAM identity–a service account or group&mdash;under which Logging
+        #     Output only. An IAM identity&mdash;a service account or group&mdash;under which Logging
         #     writes the exported log entries to the sink's destination. This field is
         #     set by {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#create_sink sinks.create} and
         #     {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#update_sink sinks.update} based on the
@@ -185,7 +224,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The parameters to `ListBuckets` (Beta).
+        # The parameters to `ListBuckets`.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource whose buckets are to be listed:
@@ -214,7 +253,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response from ListBuckets (Beta).
+        # The response from ListBuckets.
         # @!attribute [rw] buckets
         #   @return [::Array<::Google::Cloud::Logging::V2::LogBucket>]
         #     A list of buckets.
@@ -228,7 +267,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The parameters to `UpdateBucket` (Beta).
+        # The parameters to `CreateBucket`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource in which to create the bucket:
+        #
+        #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]"
+        #
+        #     Example: `"projects/my-logging-project/locations/global"`
+        # @!attribute [rw] bucket_id
+        #   @return [::String]
+        #     Required. A client-assigned identifier such as `"my-bucket"`. Identifiers are
+        #     limited to 100 characters and can include only letters, digits,
+        #     underscores, hyphens, and periods.
+        # @!attribute [rw] bucket
+        #   @return [::Google::Cloud::Logging::V2::LogBucket]
+        #     Required. The new bucket. The region specified in the new bucket must be compliant
+        #     with any Location Restriction Org Policy. The name field in the bucket is
+        #     ignored.
+        class CreateBucketRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to `UpdateBucket`.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The full resource name of the bucket to update.
@@ -260,7 +322,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The parameters to `GetBucket` (Beta).
+        # The parameters to `GetBucket`.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the bucket:
@@ -273,6 +335,151 @@ module Google
         #     Example:
         #     `"projects/my-project-id/locations/my-location/buckets/my-bucket-id"`.
         class GetBucketRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to `DeleteBucket`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The full resource name of the bucket to delete.
+        #
+        #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        #         "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        #
+        #     Example:
+        #     `"projects/my-project-id/locations/my-location/buckets/my-bucket-id"`.
+        class DeleteBucketRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to `UndeleteBucket`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The full resource name of the bucket to undelete.
+        #
+        #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        #         "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        #
+        #     Example:
+        #     `"projects/my-project-id/locations/my-location/buckets/my-bucket-id"`.
+        class UndeleteBucketRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to `ListViews`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The bucket whose views are to be listed:
+        #
+        #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. If present, then retrieve the next batch of results from the
+        #     preceding call to this method. `pageToken` must be the value of
+        #     `nextPageToken` from the previous response. The values of other method
+        #     parameters should be identical to those in the previous call.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of results to return from this request.
+        #     Non-positive values are ignored. The presence of `nextPageToken` in the
+        #     response indicates that more results might be available.
+        class ListViewsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response from ListViews.
+        # @!attribute [rw] views
+        #   @return [::Array<::Google::Cloud::Logging::V2::LogView>]
+        #     A list of views.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     If there might be more results than appear in this response, then
+        #     `nextPageToken` is included. To get the next set of results, call the same
+        #     method again using the value of `nextPageToken` as `pageToken`.
+        class ListViewsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to `CreateView`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The bucket in which to create the view
+        #
+        #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        #
+        #     Example:
+        #     `"projects/my-logging-project/locations/my-location/buckets/my-bucket"`
+        # @!attribute [rw] view_id
+        #   @return [::String]
+        #     Required. The id to use for this view.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::Logging::V2::LogView]
+        #     Required. The new view.
+        class CreateViewRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to `UpdateView`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The full resource name of the view to update
+        #
+        #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+        #
+        #     Example:
+        #       `"projects/my-project-id/locations/my-location/buckets/my-bucket-id/views/my-view-id"`.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::Logging::V2::LogView]
+        #     Required. The updated view.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask that specifies the fields in `view` that need
+        #     an update. A field will be overwritten if, and only if, it is
+        #     in the update mask. `name` and output only fields cannot be updated.
+        #
+        #     For a detailed `FieldMask` definition, see
+        #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+        #
+        #     Example: `updateMask=filter`.
+        class UpdateViewRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to `GetView`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the policy:
+        #
+        #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+        #
+        #     Example:
+        #     `"projects/my-project-id/locations/my-location/buckets/my-bucket-id/views/my-view-id"`.
+        class GetViewRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to `DeleteView`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The full resource name of the view to delete:
+        #
+        #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+        #
+        #     Example:
+        #        `"projects/my-project-id/locations/my-location/buckets/my-bucket-id/views/my-view-id"`.
+        class DeleteViewRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -724,7 +931,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # LogBucket lifecycle states (Beta).
+        # LogBucket lifecycle states.
         module LifecycleState
           # Unspecified state.  This is only used/useful for distinguishing
           # unset values.

@@ -360,6 +360,87 @@ module Google
             end
 
             ##
+            # Create a fully-qualified LogView resource string.
+            #
+            # @overload log_view_path(project:, location:, bucket:, view:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/buckets/{bucket}/views/{view}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param bucket [String]
+            #   @param view [String]
+            #
+            # @overload log_view_path(organization:, location:, bucket:, view:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/locations/{location}/buckets/{bucket}/views/{view}`
+            #
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param bucket [String]
+            #   @param view [String]
+            #
+            # @overload log_view_path(folder:, location:, bucket:, view:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/locations/{location}/buckets/{bucket}/views/{view}`
+            #
+            #   @param folder [String]
+            #   @param location [String]
+            #   @param bucket [String]
+            #   @param view [String]
+            #
+            # @overload log_view_path(billing_account:, location:, bucket:, view:)
+            #   The resource will be in the following format:
+            #
+            #   `billingAccounts/{billing_account}/locations/{location}/buckets/{bucket}/views/{view}`
+            #
+            #   @param billing_account [String]
+            #   @param location [String]
+            #   @param bucket [String]
+            #   @param view [String]
+            #
+            # @return [::String]
+            def log_view_path **args
+              resources = {
+                "bucket:location:project:view"         => (proc do |project:, location:, bucket:, view:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/buckets/#{bucket}/views/#{view}"
+                end),
+                "bucket:location:organization:view"    => (proc do |organization:, location:, bucket:, view:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
+
+                  "organizations/#{organization}/locations/#{location}/buckets/#{bucket}/views/#{view}"
+                end),
+                "bucket:folder:location:view"          => (proc do |folder:, location:, bucket:, view:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
+
+                  "folders/#{folder}/locations/#{location}/buckets/#{bucket}/views/#{view}"
+                end),
+                "billing_account:bucket:location:view" => (proc do |billing_account:, location:, bucket:, view:|
+                  raise ::ArgumentError, "billing_account cannot contain /" if billing_account.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
+
+                  "billingAccounts/#{billing_account}/locations/#{location}/buckets/#{bucket}/views/#{view}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified Organization resource string.
             #
             # The resource will be in the following format:

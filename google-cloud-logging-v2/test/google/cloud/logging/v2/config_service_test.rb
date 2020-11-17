@@ -172,6 +172,68 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     end
   end
 
+  def test_create_bucket
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Logging::V2::LogBucket.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    bucket_id = "hello world"
+    bucket = {}
+
+    create_bucket_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_bucket, name
+      assert_kind_of ::Google::Cloud::Logging::V2::CreateBucketRequest, request
+      assert_equal "hello world", request.parent
+      assert_equal "hello world", request.bucket_id
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogBucket), request.bucket
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_bucket_client_stub do
+      # Create client
+      client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_bucket({ parent: parent, bucket_id: bucket_id, bucket: bucket }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_bucket parent: parent, bucket_id: bucket_id, bucket: bucket do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_bucket ::Google::Cloud::Logging::V2::CreateBucketRequest.new(parent: parent, bucket_id: bucket_id, bucket: bucket) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_bucket({ parent: parent, bucket_id: bucket_id, bucket: bucket }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_bucket ::Google::Cloud::Logging::V2::CreateBucketRequest.new(parent: parent, bucket_id: bucket_id, bucket: bucket), grpc_options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_bucket_client_stub.call_rpc_count
+    end
+  end
+
   def test_update_bucket
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Logging::V2::LogBucket.new
@@ -231,6 +293,429 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, update_bucket_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_bucket
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_bucket_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_bucket, name
+      assert_kind_of ::Google::Cloud::Logging::V2::DeleteBucketRequest, request
+      assert_equal "hello world", request.name
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_bucket_client_stub do
+      # Create client
+      client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_bucket({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_bucket name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_bucket ::Google::Cloud::Logging::V2::DeleteBucketRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_bucket({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_bucket ::Google::Cloud::Logging::V2::DeleteBucketRequest.new(name: name), grpc_options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_bucket_client_stub.call_rpc_count
+    end
+  end
+
+  def test_undelete_bucket
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    undelete_bucket_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :undelete_bucket, name
+      assert_kind_of ::Google::Cloud::Logging::V2::UndeleteBucketRequest, request
+      assert_equal "hello world", request.name
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, undelete_bucket_client_stub do
+      # Create client
+      client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.undelete_bucket({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.undelete_bucket name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.undelete_bucket ::Google::Cloud::Logging::V2::UndeleteBucketRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.undelete_bucket({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.undelete_bucket ::Google::Cloud::Logging::V2::UndeleteBucketRequest.new(name: name), grpc_options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, undelete_bucket_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_views
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Logging::V2::ListViewsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_token = "hello world"
+    page_size = 42
+
+    list_views_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_views, name
+      assert_kind_of ::Google::Cloud::Logging::V2::ListViewsRequest, request
+      assert_equal "hello world", request.parent
+      assert_equal "hello world", request.page_token
+      assert_equal 42, request.page_size
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_views_client_stub do
+      # Create client
+      client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_views({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_views parent: parent, page_token: page_token, page_size: page_size do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_views ::Google::Cloud::Logging::V2::ListViewsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_views({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_views ::Google::Cloud::Logging::V2::ListViewsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_views_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_view
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Logging::V2::LogView.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_view_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_view, name
+      assert_kind_of ::Google::Cloud::Logging::V2::GetViewRequest, request
+      assert_equal "hello world", request.name
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_view_client_stub do
+      # Create client
+      client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_view({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_view name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_view ::Google::Cloud::Logging::V2::GetViewRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_view({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_view ::Google::Cloud::Logging::V2::GetViewRequest.new(name: name), grpc_options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_view_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_view
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Logging::V2::LogView.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    view_id = "hello world"
+    view = {}
+
+    create_view_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_view, name
+      assert_kind_of ::Google::Cloud::Logging::V2::CreateViewRequest, request
+      assert_equal "hello world", request.parent
+      assert_equal "hello world", request.view_id
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogView), request.view
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_view_client_stub do
+      # Create client
+      client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_view({ parent: parent, view_id: view_id, view: view }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_view parent: parent, view_id: view_id, view: view do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_view ::Google::Cloud::Logging::V2::CreateViewRequest.new(parent: parent, view_id: view_id, view: view) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_view({ parent: parent, view_id: view_id, view: view }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_view ::Google::Cloud::Logging::V2::CreateViewRequest.new(parent: parent, view_id: view_id, view: view), grpc_options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_view_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_view
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Logging::V2::LogView.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    view = {}
+    update_mask = {}
+
+    update_view_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_view, name
+      assert_kind_of ::Google::Cloud::Logging::V2::UpdateViewRequest, request
+      assert_equal "hello world", request.name
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogView), request.view
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_view_client_stub do
+      # Create client
+      client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_view({ name: name, view: view, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_view name: name, view: view, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_view ::Google::Cloud::Logging::V2::UpdateViewRequest.new(name: name, view: view, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_view({ name: name, view: view, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_view ::Google::Cloud::Logging::V2::UpdateViewRequest.new(name: name, view: view, update_mask: update_mask), grpc_options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_view_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_view
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_view_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_view, name
+      assert_kind_of ::Google::Cloud::Logging::V2::DeleteViewRequest, request
+      assert_equal "hello world", request.name
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_view_client_stub do
+      # Create client
+      client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_view({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_view name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_view ::Google::Cloud::Logging::V2::DeleteViewRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_view({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_view ::Google::Cloud::Logging::V2::DeleteViewRequest.new(name: name), grpc_options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_view_client_stub.call_rpc_count
     end
   end
 
