@@ -1010,12 +1010,6 @@ module Google
         }.freeze
         ##
         # @private
-        EQUALITY_FILTERS = %i[
-          EQUAL
-          ARRAY_CONTAINS
-        ].freeze
-        ##
-        # @private
         INEQUALITY_FILTERS = %i[
           LESS_THAN
           LESS_THAN_OR_EQUAL
@@ -1043,14 +1037,12 @@ module Google
           raise ArgumentError, "unknown operator #{op}" if operator.nil?
 
           if value_unary? value
-            unless [:EQUAL, :NOT_EQUAL].include? operator
-              raise ArgumentError, "can only perform '==' and '!=' comparisons on #{value} values"
-            end
-
             operator = if operator == :EQUAL
                          value_nan?(value) ? :IS_NAN : :IS_NULL
-                       else # :NOT_EQUAL
+                       elsif operator == :NOT_EQUAL
                          value_nan?(value) ? :IS_NOT_NAN : :IS_NOT_NULL
+                       else
+                         raise ArgumentError, "can only perform '==' and '!=' comparisons on #{value} values"
                        end
 
             return StructuredQuery::Filter.new(
