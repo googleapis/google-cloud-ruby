@@ -216,6 +216,9 @@ module Google
         #   * greater than: `>`, `gt`
         #   * greater than or equal: `>=`, `gte`
         #   * equal: `=`, `==`, `eq`, `eql`, `is`
+        #   * not equal: `!=`
+        #   * in: `in`
+        #   * not in: `not-in`, `not_in`
         #   * array contains: `array-contains`, `array_contains`
         # @param [Object] value A value the field is compared to.
         #
@@ -993,21 +996,18 @@ module Google
           "eq"                 => :EQUAL,
           "eql"                => :EQUAL,
           "is"                 => :EQUAL,
+          "!="                 => :NOT_EQUAL,
           "array_contains"     => :ARRAY_CONTAINS,
           "array-contains"     => :ARRAY_CONTAINS,
           "include"            => :ARRAY_CONTAINS,
           "include?"           => :ARRAY_CONTAINS,
           "has"                => :ARRAY_CONTAINS,
           "in"                 => :IN,
+          "not_in"             => :NOT_IN,
+          "not-in"             => :NOT_IN,
           "array_contains_any" => :ARRAY_CONTAINS_ANY,
           "array-contains-any" => :ARRAY_CONTAINS_ANY
         }.freeze
-        ##
-        # @private
-        EQUALITY_FILTERS = %i[
-          EQUAL
-          ARRAY_CONTAINS
-        ].freeze
         ##
         # @private
         INEQUALITY_FILTERS = %i[
@@ -1037,12 +1037,13 @@ module Google
           raise ArgumentError, "unknown operator #{op}" if operator.nil?
 
           if value_unary? value
-            if operator != :EQUAL
-              raise ArgumentError,
-                    "can only check equality for #{value} values"
-            end
-
-            operator = value_nan?(value) ? :IS_NAN : :IS_NULL
+            operator = if operator == :EQUAL
+                         value_nan?(value) ? :IS_NAN : :IS_NULL
+                       elsif operator == :NOT_EQUAL
+                         value_nan?(value) ? :IS_NOT_NAN : :IS_NOT_NULL
+                       else
+                         raise ArgumentError, "can only perform '==' and '!=' comparisons on #{value} values"
+                       end
 
             return StructuredQuery::Filter.new(
               unary_filter: StructuredQuery::UnaryFilter.new(

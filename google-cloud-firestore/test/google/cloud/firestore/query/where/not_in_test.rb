@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Firestore::Query, :where, :in, :mock_firestore do
+describe Google::Cloud::Firestore::Query, :where, :not_in, :mock_firestore do
   let(:query) { Google::Cloud::Firestore::Query.start nil, "#{firestore.path}/documents", firestore }
 
   it "using in" do
@@ -22,7 +22,7 @@ describe Google::Cloud::Firestore::Query, :where, :in, :mock_firestore do
       where: Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
         field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
           field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
-          op: :IN,
+          op: :NOT_IN,
           value: Google::Cloud::Firestore::V1::Value.new(
             array_value: Google::Cloud::Firestore::V1::ArrayValue.new(
               values: [
@@ -35,7 +35,7 @@ describe Google::Cloud::Firestore::Query, :where, :in, :mock_firestore do
       )
     )
 
-    generated_query = query.where(:foo, :in, [42, 43]).query
+    generated_query = query.where(:foo, :not_in, [42, 43]).query
     _(generated_query).must_equal expected_query
   end
 
@@ -48,7 +48,7 @@ describe Google::Cloud::Firestore::Query, :where, :in, :mock_firestore do
             Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
               field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
                 field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
-                op: :IN,
+                op: :NOT_IN,
                 value: Google::Cloud::Firestore::V1::Value.new(
                   array_value: Google::Cloud::Firestore::V1::ArrayValue.new(
                     values: [
@@ -62,7 +62,7 @@ describe Google::Cloud::Firestore::Query, :where, :in, :mock_firestore do
             Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
               field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
                 field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "foo"),
-                op: :IN,
+                op: :NOT_IN,
                 value: Google::Cloud::Firestore::V1::Value.new(
                   array_value: Google::Cloud::Firestore::V1::ArrayValue.new(
                     values: [
@@ -78,7 +78,7 @@ describe Google::Cloud::Firestore::Query, :where, :in, :mock_firestore do
       )
     )
 
-    generated_query = query.where(:foo, :in, [42, 43]).where(:foo, :in, [43, 44]).query
+    generated_query = query.where(:foo, :not_in, [42, 43]).where(:foo, :not_in, [43, 44]).query
     _(generated_query).must_equal expected_query
   end
 end
