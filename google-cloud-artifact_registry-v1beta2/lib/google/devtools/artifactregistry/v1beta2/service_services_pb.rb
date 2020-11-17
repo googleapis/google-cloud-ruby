@@ -92,8 +92,6 @@ module Google
             rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Tests if the caller has a list of permissions on a resource.
             rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
-            # Lists docker images.
-            rpc :ListDockerImages, ::Google::Cloud::ArtifactRegistry::V1beta2::ListDockerImagesRequest, ::Google::Cloud::ArtifactRegistry::V1beta2::ListDockerImagesResponse
           end
 
           Stub = Service.rpc_stub_class

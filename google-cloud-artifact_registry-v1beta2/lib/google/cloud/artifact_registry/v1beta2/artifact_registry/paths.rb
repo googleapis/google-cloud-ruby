@@ -25,27 +25,6 @@ module Google
           # Path helper methods for the ArtifactRegistry API.
           module Paths
             ##
-            # Create a fully-qualified DockerImage resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/locations/{location}/repositories/{repository}/dockerImages/{docker_image}`
-            #
-            # @param project [String]
-            # @param location [String]
-            # @param repository [String]
-            # @param docker_image [String]
-            #
-            # @return [::String]
-            def docker_image_path project:, location:, repository:, docker_image:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}/repositories/#{repository}/dockerImages/#{docker_image}"
-            end
-
-            ##
             # Create a fully-qualified Repository resource string.
             #
             # The resource will be in the following format:

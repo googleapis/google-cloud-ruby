@@ -5,7 +5,6 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
-require 'google/devtools/artifactregistry/v1beta2/artifact_pb'
 require 'google/devtools/artifactregistry/v1beta2/file_pb'
 require 'google/devtools/artifactregistry/v1beta2/package_pb'
 require 'google/devtools/artifactregistry/v1beta2/repository_pb'

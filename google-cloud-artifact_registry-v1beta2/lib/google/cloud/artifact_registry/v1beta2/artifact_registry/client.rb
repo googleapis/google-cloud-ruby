@@ -207,14 +207,6 @@ module Google
 
                 default_config.rpcs.test_iam_permissions.timeout = 30.0
 
-                default_config.rpcs.list_docker_images.timeout = 30.0
-                default_config.rpcs.list_docker_images.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
-                }
-
                 default_config
               end
               yield @configure if block_given?
@@ -1793,77 +1785,6 @@ module Google
             end
 
             ##
-            # Lists docker images.
-            #
-            # @overload list_docker_images(request, options = nil)
-            #   Pass arguments to `list_docker_images` via a request object, either of type
-            #   {::Google::Cloud::ArtifactRegistry::V1beta2::ListDockerImagesRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Cloud::ArtifactRegistry::V1beta2::ListDockerImagesRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload list_docker_images(parent: nil, page_size: nil, page_token: nil)
-            #   Pass arguments to `list_docker_images` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param parent [::String]
-            #     Required. The name of the parent resource whose docker images will be listed.
-            #   @param page_size [::Integer]
-            #     The maximum number of artifacts to return.
-            #   @param page_token [::String]
-            #     The next_page_token value returned from a previous list request, if any.
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ArtifactRegistry::V1beta2::DockerImage>]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Gapic::PagedEnumerable<::Google::Cloud::ArtifactRegistry::V1beta2::DockerImage>]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            def list_docker_images request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1beta2::ListDockerImagesRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.list_docker_images.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::ArtifactRegistry::V1beta2::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {
-                "parent" => request.parent
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.list_docker_images.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.list_docker_images.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @artifact_registry_stub.call_rpc :list_docker_images, request, options: options do |response, operation|
-                response = ::Gapic::PagedEnumerable.new @artifact_registry_stub, :list_docker_images, request, response, operation, options
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
             # Configuration class for the ArtifactRegistry API.
             #
             # This class represents the configuration for ArtifactRegistry,
@@ -2104,11 +2025,6 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :test_iam_permissions
-                ##
-                # RPC-specific configuration for `list_docker_images`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :list_docker_images
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -2154,8 +2070,6 @@ module Google
                   @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                   test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
                   @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
-                  list_docker_images_config = parent_rpcs&.list_docker_images if parent_rpcs&.respond_to? :list_docker_images
-                  @list_docker_images = ::Gapic::Config::Method.new list_docker_images_config
 
                   yield self if block_given?
                 end
