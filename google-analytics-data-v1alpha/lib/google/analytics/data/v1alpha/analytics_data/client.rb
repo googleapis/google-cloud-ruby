@@ -199,9 +199,15 @@ module Google
             #     must be unspecified.
             #   @param offset [::Integer]
             #     The row count of the start row. The first row is counted as row 0.
+            #
+            #     To learn more about this pagination parameter, see
+            #     [Pagination](basics#pagination).
             #   @param limit [::Integer]
             #     The number of rows to return. If unspecified, 10 rows are returned. If
             #     -1, all rows are returned.
+            #
+            #     To learn more about this pagination parameter, see
+            #     [Pagination](basics#pagination).
             #   @param metric_aggregations [::Array<::Google::Analytics::Data::V1alpha::MetricAggregation>]
             #     Aggregation of metrics. Aggregated metric values will be shown in rows
             #     where the dimension_values are set to "RESERVED_(MetricAggregation)".
@@ -504,65 +510,8 @@ module Google
 
             ##
             # Returns metadata for dimensions and metrics available in reporting methods.
-            # Used to explore the dimensions and metrics. Dimensions and metrics will be
-            # mostly added over time, but renames and deletions may occur.
-            #
-            # This method returns Universal Metadata. Universal Metadata are dimensions
-            # and metrics applicable to any property such as `country` and `totalUsers`.
-            #
-            # @overload get_universal_metadata(request, options = nil)
-            #   Pass arguments to `get_universal_metadata` via a request object, either of type
-            #   {::Google::Analytics::Data::V1alpha::GetUniversalMetadataRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Analytics::Data::V1alpha::GetUniversalMetadataRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Analytics::Data::V1alpha::UniversalMetadata]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Google::Analytics::Data::V1alpha::UniversalMetadata]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            def get_universal_metadata request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Data::V1alpha::GetUniversalMetadataRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.get_universal_metadata.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Analytics::Data::V1alpha::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              options.apply_defaults timeout:      @config.rpcs.get_universal_metadata.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.get_universal_metadata.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @analytics_data_stub.call_rpc :get_universal_metadata, request, options: options do |response, operation|
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
-            # Returns metadata for dimensions and metrics available in reporting methods.
             # Used to explore the dimensions and metrics. In this method, a Google
-            # Analytics 4 (GA4) Property Identifier is specified in the request, and
+            # Analytics GA4 Property Identifier is specified in the request, and
             # the metadata response includes Custom dimensions and metrics as well as
             # Universal metadata.
             #
@@ -589,9 +538,15 @@ module Google
             #   @param name [::String]
             #     Required. The resource name of the metadata to retrieve. This name field is
             #     specified in the URL path and not URL parameters. Property is a numeric
-            #     Google Analytics 4 (GA4) Property identifier.
+            #     Google Analytics GA4 Property identifier. To learn more, see [where to find
+            #     your Property
+            #     ID](https://developers.google.com/analytics/trusted-testing/analytics-data/property-id).
             #
             #     Example: properties/1234/metadata
+            #
+            #     Set the Property ID to 0 for dimensions and metrics common to all
+            #     properties. In this special mode, this method will not return custom
+            #     dimensions and metrics.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Data::V1alpha::Metadata]
@@ -890,11 +845,6 @@ module Google
                 #
                 attr_reader :batch_run_pivot_reports
                 ##
-                # RPC-specific configuration for `get_universal_metadata`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :get_universal_metadata
-                ##
                 # RPC-specific configuration for `get_metadata`
                 # @return [::Gapic::Config::Method]
                 #
@@ -915,8 +865,6 @@ module Google
                   @batch_run_reports = ::Gapic::Config::Method.new batch_run_reports_config
                   batch_run_pivot_reports_config = parent_rpcs&.batch_run_pivot_reports if parent_rpcs&.respond_to? :batch_run_pivot_reports
                   @batch_run_pivot_reports = ::Gapic::Config::Method.new batch_run_pivot_reports_config
-                  get_universal_metadata_config = parent_rpcs&.get_universal_metadata if parent_rpcs&.respond_to? :get_universal_metadata
-                  @get_universal_metadata = ::Gapic::Config::Method.new get_universal_metadata_config
                   get_metadata_config = parent_rpcs&.get_metadata if parent_rpcs&.respond_to? :get_metadata
                   @get_metadata = ::Gapic::Config::Method.new get_metadata_config
                   run_realtime_report_config = parent_rpcs&.run_realtime_report if parent_rpcs&.respond_to? :run_realtime_report

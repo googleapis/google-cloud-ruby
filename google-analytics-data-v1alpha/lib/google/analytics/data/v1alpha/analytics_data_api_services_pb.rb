@@ -54,15 +54,8 @@ module Google
             # Entity.
             rpc :BatchRunPivotReports, ::Google::Analytics::Data::V1alpha::BatchRunPivotReportsRequest, ::Google::Analytics::Data::V1alpha::BatchRunPivotReportsResponse
             # Returns metadata for dimensions and metrics available in reporting methods.
-            # Used to explore the dimensions and metrics. Dimensions and metrics will be
-            # mostly added over time, but renames and deletions may occur.
-            #
-            # This method returns Universal Metadata. Universal Metadata are dimensions
-            # and metrics applicable to any property such as `country` and `totalUsers`.
-            rpc :GetUniversalMetadata, ::Google::Analytics::Data::V1alpha::GetUniversalMetadataRequest, ::Google::Analytics::Data::V1alpha::UniversalMetadata
-            # Returns metadata for dimensions and metrics available in reporting methods.
             # Used to explore the dimensions and metrics. In this method, a Google
-            # Analytics 4 (GA4) Property Identifier is specified in the request, and
+            # Analytics GA4 Property Identifier is specified in the request, and
             # the metadata response includes Custom dimensions and metrics as well as
             # Universal metadata.
             #

@@ -57,10 +57,16 @@ module Google
         # @!attribute [rw] offset
         #   @return [::Integer]
         #     The row count of the start row. The first row is counted as row 0.
+        #
+        #     To learn more about this pagination parameter, see
+        #     [Pagination](basics#pagination).
         # @!attribute [rw] limit
         #   @return [::Integer]
         #     The number of rows to return. If unspecified, 10 rows are returned. If
         #     -1, all rows are returned.
+        #
+        #     To learn more about this pagination parameter, see
+        #     [Pagination](basics#pagination).
         # @!attribute [rw] metric_aggregations
         #   @return [::Array<::Google::Analytics::Data::V1alpha::MetricAggregation>]
         #     Aggregation of metrics. Aggregated metric values will be shown in rows
@@ -126,6 +132,9 @@ module Google
         #     rows returned in the response. For example if a query returns 175 rows and
         #     includes limit = 50 in the API request, the response will contain row_count
         #     = 175 but only 50 rows.
+        #
+        #     To learn more about this pagination parameter, see
+        #     [Pagination](basics#pagination).
         # @!attribute [rw] metadata
         #   @return [::Google::Analytics::Data::V1alpha::ResponseMetaData]
         #     Metadata for the report.
@@ -310,32 +319,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for the universal dimension and metric metadata.
-        class GetUniversalMetadataRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The dimensions and metrics currently accepted in reporting methods.
-        # @!attribute [rw] dimensions
-        #   @return [::Array<::Google::Analytics::Data::V1alpha::DimensionMetadata>]
-        #     The dimensions descriptions.
-        # @!attribute [rw] metrics
-        #   @return [::Array<::Google::Analytics::Data::V1alpha::MetricMetadata>]
-        #     The metric descriptions.
-        class UniversalMetadata
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Request for a property's dimension and metric metadata.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the metadata to retrieve. This name field is
         #     specified in the URL path and not URL parameters. Property is a numeric
-        #     Google Analytics 4 (GA4) Property identifier.
+        #     Google Analytics GA4 Property identifier. To learn more, see [where to find
+        #     your Property
+        #     ID](https://developers.google.com/analytics/trusted-testing/analytics-data/property-id).
         #
         #     Example: properties/1234/metadata
+        #
+        #     Set the Property ID to 0 for dimensions and metrics common to all
+        #     properties. In this special mode, this method will not return custom
+        #     dimensions and metrics.
         class GetMetadataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
