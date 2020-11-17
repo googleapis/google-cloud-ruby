@@ -1,0 +1,11 @@
+{
+    "api_id": "artifactregistry.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-artifact_registry/latest",
+    "distribution_name": "google-cloud-artifact_registry",
+    "language": "ruby",
+    "name": "artifactregistry",
+    "name_pretty": "Artifact Registry API",
+    "product_documentation": "https://cloud.google.com/artifact-registry/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
