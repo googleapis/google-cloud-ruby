@@ -62,6 +62,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
     duration = {}
     dry_run = true
     display_name = "hello world"
+    rollout = {}
 
     execute_patch_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :execute_patch_job, name
@@ -73,6 +74,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.duration
       assert_equal true, request.dry_run
       assert_equal "hello world", request.display_name
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OsConfig::V1::PatchRollout), request.rollout
       refute_nil options
     end
 
@@ -83,31 +85,31 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.execute_patch_job({ parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name }) do |response, operation|
+      client.execute_patch_job({ parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.execute_patch_job parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name do |response, operation|
+      client.execute_patch_job parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.execute_patch_job ::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new(parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name) do |response, operation|
+      client.execute_patch_job ::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new(parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.execute_patch_job({ parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name }, grpc_options) do |response, operation|
+      client.execute_patch_job({ parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.execute_patch_job ::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new(parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name), grpc_options do |response, operation|
+      client.execute_patch_job ::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new(parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

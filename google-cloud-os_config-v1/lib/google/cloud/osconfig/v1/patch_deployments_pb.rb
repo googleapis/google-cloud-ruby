@@ -22,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 8, "google.protobuf.Timestamp"
       optional :update_time, :message, 9, "google.protobuf.Timestamp"
       optional :last_execute_time, :message, 10, "google.protobuf.Timestamp"
+      optional :rollout, :message, 11, "google.cloud.osconfig.v1.PatchRollout"
       oneof :schedule do
         optional :one_time_schedule, :message, 6, "google.cloud.osconfig.v1.OneTimeSchedule"
         optional :recurring_schedule, :message, 7, "google.cloud.osconfig.v1.RecurringSchedule"

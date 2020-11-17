@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "e1d661afe7586d44a29821d44fe8a4cc6d0a34a9"
+        "sha": "eb964adab50262114d4cddead3d3f58ddd7b9408"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
-        "internalRef": "326288259"
+        "sha": "4b0ad15b0ff483486ae90d73092e7be00f8c1848",
+        "internalRef": "341842584"
       }
     }
   ],
@@ -46,6 +46,8 @@
     "lib/google/cloud/os_config/v1/os_config_service/credentials.rb",
     "lib/google/cloud/os_config/v1/os_config_service/paths.rb",
     "lib/google/cloud/os_config/v1/version.rb",
+    "lib/google/cloud/osconfig/v1/inventory_pb.rb",
+    "lib/google/cloud/osconfig/v1/osconfig_common_pb.rb",
     "lib/google/cloud/osconfig/v1/osconfig_service_pb.rb",
     "lib/google/cloud/osconfig/v1/osconfig_service_services_pb.rb",
     "lib/google/cloud/osconfig/v1/patch_deployments_pb.rb",
@@ -53,6 +55,8 @@
     "proto_docs/README.md",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/osconfig/v1/inventory.rb",
+    "proto_docs/google/cloud/osconfig/v1/osconfig_common.rb",
     "proto_docs/google/cloud/osconfig/v1/patch_deployments.rb",
     "proto_docs/google/cloud/osconfig/v1/patch_jobs.rb",
     "proto_docs/google/protobuf/duration.rb",

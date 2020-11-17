@@ -34,8 +34,8 @@ module Google
         #     This field is ignored when you create a new patch deployment.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Optional. Description of the patch deployment. Length of the description is limited
-        #     to 1024 characters.
+        #     Optional. Description of the patch deployment. Length of the description is
+        #     limited to 1024 characters.
         # @!attribute [rw] instance_filter
         #   @return [::Google::Cloud::OsConfig::V1::PatchInstanceFilter]
         #     Required. VM instances to patch.
@@ -44,7 +44,8 @@ module Google
         #     Optional. Patch configuration that is applied.
         # @!attribute [rw] duration
         #   @return [::Google::Protobuf::Duration]
-        #     Optional. Duration of the patch. After the duration ends, the patch times out.
+        #     Optional. Duration of the patch. After the duration ends, the patch times
+        #     out.
         # @!attribute [rw] one_time_schedule
         #   @return [::Google::Cloud::OsConfig::V1::OneTimeSchedule]
         #     Required. Schedule a one-time execution.
@@ -64,6 +65,9 @@ module Google
         #     Output only. The last time a patch job was started by this deployment.
         #     Timestamp is in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text
         #     format.
+        # @!attribute [rw] rollout
+        #   @return [::Google::Cloud::OsConfig::V1::PatchRollout]
+        #     Optional. Rollout strategy of the patch job.
         class PatchDeployment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -90,8 +94,8 @@ module Google
         #     Defaults to `create_time` of the patch deployment.
         # @!attribute [rw] end_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Optional. The end time at which a recurring patch deployment schedule is no longer
-        #     active.
+        #     Optional. The end time at which a recurring patch deployment schedule is no
+        #     longer active.
         # @!attribute [rw] time_of_day
         #   @return [::Google::Type::TimeOfDay]
         #     Required. Time of the day to run a recurring deployment.
@@ -145,10 +149,10 @@ module Google
         #     Required. Week day in a month.
         # @!attribute [rw] month_day
         #   @return [::Integer]
-        #     Required. One day of the month. 1-31 indicates the 1st to the 31st day. -1
-        #     indicates the last day of the month.
-        #     Months without the target day will be skipped. For example, a schedule to
-        #     run "every month on the 31st" will not run in February, April, June, etc.
+        #     Required. One day of the month. 1-31 indicates the 1st to the 31st day.
+        #     -1 indicates the last day of the month. Months without the target day
+        #     will be skipped. For example, a schedule to run "every month on the 31st"
+        #     will not run in February, April, June, etc.
         class MonthlySchedule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -157,8 +161,8 @@ module Google
         # Represents one week day in a month. An example is "the 4th Sunday".
         # @!attribute [rw] week_ordinal
         #   @return [::Integer]
-        #     Required. Week number in a month. 1-4 indicates the 1st to 4th week of the month. -1
-        #     indicates the last week of the month.
+        #     Required. Week number in a month. 1-4 indicates the 1st to 4th week of the
+        #     month. -1 indicates the last week of the month.
         # @!attribute [rw] day_of_week
         #   @return [::Google::Type::DayOfWeek]
         #     Required. A day of the week.
@@ -170,11 +174,12 @@ module Google
         # A request message for creating a patch deployment.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The project to apply this patch deployment to in the form `projects/*`.
+        #     Required. The project to apply this patch deployment to in the form
+        #     `projects/*`.
         # @!attribute [rw] patch_deployment_id
         #   @return [::String]
-        #     Required. A name for the patch deployment in the project. When creating a name
-        #     the following rules apply:
+        #     Required. A name for the patch deployment in the project. When creating a
+        #     name the following rules apply:
         #     * Must contain only lowercase letters, numbers, and hyphens.
         #     * Must start with a letter.
         #     * Must be between 1-63 characters.
@@ -204,11 +209,13 @@ module Google
         #     Required. The resource name of the parent in the form `projects/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of patch deployments to return. Default is 100.
+        #     Optional. The maximum number of patch deployments to return. Default is
+        #     100.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A pagination token returned from a previous call to ListPatchDeployments
-        #     that indicates where this listing should continue from.
+        #     Optional. A pagination token returned from a previous call to
+        #     ListPatchDeployments that indicates where this listing should continue
+        #     from.
         class ListPatchDeploymentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
