@@ -547,9 +547,6 @@ module Google
         # for healthy subscribers. Retry Policy will be triggered on NACKs or acknowledgement deadline exceeded events
         # for a given message.
         #
-        # **EXPERIMENTAL:** This API might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # @return [RetryPolicy, nil] The retry policy for the subscription, or `nil`.
         #
         # @example
@@ -575,9 +572,6 @@ module Google
         # default retry policy is applied. This generally implies that messages will be retried as soon as possible
         # for healthy subscribers. Retry Policy will be triggered on NACKs or acknowledgement deadline exceeded events
         # for a given message.
-        #
-        # **EXPERIMENTAL:** This API might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
         #
         # @param [RetryPolicy, nil] new_retry_policy A new retry policy for the subscription, or `nil`.
         #

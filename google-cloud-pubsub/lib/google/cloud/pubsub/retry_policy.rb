@@ -31,9 +31,6 @@ module Google
       # Retry Policy is implemented on a best effort basis. At times, the delay between consecutive deliveries may not
       # match the configuration. That is, delay can be more or less than configured backoff.
       #
-      # **EXPERIMENTAL:** This API might be changed in backward-incompatible ways and is not recommended for production
-      # use. It is not subject to any SLA or deprecation policy.
-      #
       # @attr [Numeric] minimum_backoff The minimum delay between consecutive deliveries of a given message. Value
       #   should be between 0 and 600 seconds. The default value is 10 seconds.
       # @attr [Numeric] maximum_backoff The maximum delay between consecutive deliveries of a given message. Value
