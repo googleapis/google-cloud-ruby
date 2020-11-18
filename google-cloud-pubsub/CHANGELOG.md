@@ -1,5 +1,17 @@
 # Release History
 
+### 2.3.0 / 2020-11-18
+
+#### Features
+
+* Add inventory.use_legacy_flow_control to listen options
+  * Add inventory.use_legacy_flow_control to Subscription#listen options
+  * Add Subscriber#use_legacy_flow_control?
+
+#### Documentation
+
+* Remove EXPERIMENTAL label from RetryPolicy docs
+
 ### 2.2.0 / 2020-11-11
 
 #### Features
