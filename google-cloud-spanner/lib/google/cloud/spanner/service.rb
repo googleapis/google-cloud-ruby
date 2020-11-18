@@ -536,12 +536,13 @@ module Google
 
         def restore_database backup_instance_id, backup_id,
                              database_instance_id, database_id,
-                             call_options: nil
+                             call_options: nil, encryption_config: nil
           opts = default_options call_options: call_options
           request = {
             parent:      instance_path(database_instance_id),
             database_id: database_id,
-            backup:      backup_path(backup_instance_id, backup_id)
+            backup:      backup_path(backup_instance_id, backup_id),
+            encryption_config: encryption_config
           }
           databases.restore_database request, opts
         end

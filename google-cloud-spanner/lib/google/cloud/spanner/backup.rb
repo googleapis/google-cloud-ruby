@@ -286,7 +286,7 @@ module Google
         #     database = job.database
         #   end
         #
-        def restore database_id, instance_id: nil
+        def restore database_id, instance_id: nil, encryption_config: nil
           ensure_service!
 
           instance_id ||= self.instance_id
@@ -295,7 +295,8 @@ module Google
             self.instance_id,
             backup_id,
             instance_id,
-            database_id
+            database_id,
+            encryption_config: encryption_config
           Restore::Job.from_grpc grpc, service
         end
 
