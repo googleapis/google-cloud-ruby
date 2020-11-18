@@ -61,15 +61,19 @@ describe Google::Cloud::Spanner::Backup, :restore_database, :mock_spanner do
       result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
       metadata_type: Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata,
     )
+
+    kms_key_name = "projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>"
+
     mock.expect :restore_database, restore_res, [{
       parent: instance_path(instance_id),
       database_id: "restored-database",
-      backup: backup_path(instance_id, backup_id)
+      backup: backup_path(instance_id, backup_id),
+      encryption_config: { kms_key_name: kms_key_name }
     }, nil]
     mock.expect :get_operation, operation_done, [{ name: "1234567890" }, Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
-    job = backup.restore "restored-database"
+    job = backup.restore "restored-database", encryption_config: { kms_key_name: kms_key_name }
 
     _(job).must_be_kind_of Google::Cloud::Spanner::Backup::Restore::Job
     _(job).wont_be :done?
@@ -99,7 +103,8 @@ describe Google::Cloud::Spanner::Backup, :restore_database, :mock_spanner do
     mock.expect :restore_database, restore_res, [{
       parent: instance_path("other-instance"),
       database_id: "restored-database",
-      backup: backup_path(instance_id, backup_id)
+      backup: backup_path(instance_id, backup_id),
+      encryption_config: nil
     }, nil]
     mock.expect :get_operation, operation_done, [{ name: "1234567890" } , Gapic::CallOptions]
     spanner.service.mocked_databases = mock
