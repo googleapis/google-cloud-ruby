@@ -1,5 +1,11 @@
 # Release History
 
+### 2.4.0 / 2020-11-19
+
+#### Features
+
+* add support for != and NOT_IN queries
+
 ### 2.3.0 / 2020-09-30
 
 #### Features
