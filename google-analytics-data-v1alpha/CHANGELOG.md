@@ -1,5 +1,15 @@
 # Release History
 
+### 0.5.0 / 2020-11-19
+
+#### ⚠ BREAKING CHANGES
+
+* **analytics-data-v1alpha:** Removed get_universal_metadata in favor of get_metadata
+
+#### Bug Fixes
+
+* Removed get_universal_metadata in favor of get_metadata
+
 ### 0.4.0 / 2020-11-05
 
 #### Features
