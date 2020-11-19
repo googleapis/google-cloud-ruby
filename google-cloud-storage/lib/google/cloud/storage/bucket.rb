@@ -922,8 +922,8 @@ module Google
         # Sets whether Public Access Prevention is enforced for this bucket. This value can be queried by calling
         # {Bucket#public_access_prevention_enforced?}.
         #
-        # @param [String, nil] new_public_access_prevention The bucket's new Public Access Prevention configuration.
-        #   Currently, `nil`, `unspecified` and `enforced` are supported. When set to `enforced`, Public Access
+        # @param [String] new_public_access_prevention The bucket's new Public Access Prevention configuration.
+        #   Currently, `unspecified` and `enforced` are supported. When set to `enforced`, Public Access
         #   Prevention is enforced in the bucket's IAM configuration.
         #
         # @example
@@ -937,6 +937,7 @@ module Google
         #   bucket.public_access_prevention_enforced? # true
         #
         def public_access_prevention= new_public_access_prevention
+          raise ArgumentError, "new_public_access_prevention cannot be nil" unless new_public_access_prevention
           @gapi.iam_configuration ||= API::Bucket::IamConfiguration.new
           @gapi.iam_configuration.public_access_prevention = new_public_access_prevention
           patch_gapi! :iam_configuration
