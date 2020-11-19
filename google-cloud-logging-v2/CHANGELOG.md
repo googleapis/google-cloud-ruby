@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.0 / 2020-11-19
+
+#### Features
+
+* Support for managing buckets and views
+
 ### 0.1.3 / 2020-08-10
 
 #### Bug Fixes
