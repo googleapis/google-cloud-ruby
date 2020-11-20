@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Firestore::Convert, :writes_for_update do
+describe Google::Cloud::Firestore::Convert, :write_for_update do
   # These tests are a sanity check on the implementation of the conversion methods.
   # These tests are testing private methods and this is generally not a great idea.
   # But these conversions are so important that it was decided to do it anyway.
@@ -39,7 +39,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       )
     ]
 
-    actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+    actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
     _(actual_writes).must_equal expected_writes
   end
@@ -64,7 +64,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       )
     ]
 
-    actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+    actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
     _(actual_writes).must_equal expected_writes
   end
@@ -96,7 +96,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       )
     ]
 
-    actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+    actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
     _(actual_writes).must_equal expected_writes
   end
@@ -105,7 +105,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
     data = { "a~b" => 1 }
 
     error = expect do
-      Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      Google::Cloud::Firestore::Convert.write_for_update document_path, data
     end.must_raise ArgumentError
     _(error.message).must_equal "invalid character, use FieldPath instead"
   end
@@ -114,7 +114,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
     data = { "a..b" => 1 }
 
     error = expect do
-      Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      Google::Cloud::Firestore::Convert.write_for_update document_path, data
     end.must_raise ArgumentError
     _(error.message).must_equal "empty paths not allowed"
   end
@@ -123,7 +123,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
     data = {}
 
     error = expect do
-      Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      Google::Cloud::Firestore::Convert.write_for_update document_path, data
     end.must_raise ArgumentError
     _(error.message).must_equal "data is required"
   end
@@ -132,7 +132,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
     data = { "a.b" => 1, a: 2 }
 
     error = expect do
-      Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      Google::Cloud::Firestore::Convert.write_for_update document_path, data
     end.must_raise ArgumentError
     _(error.message).must_equal "one field cannot be a prefix of another"
   end
@@ -141,7 +141,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
     data = { "a" => 1, "a.b" => 2 }
 
     error = expect do
-      Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      Google::Cloud::Firestore::Convert.write_for_update document_path, data
     end.must_raise ArgumentError
     _(error.message).must_equal "one field cannot be a prefix of another"
   end
@@ -150,7 +150,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
     data = { a: { b: 1 }, "a.d".to_sym => 2 }
 
     error = expect do
-      Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      Google::Cloud::Firestore::Convert.write_for_update document_path, data
     end.must_raise ArgumentError
     _(error.message).must_equal "one field cannot be a prefix of another"
   end
@@ -175,7 +175,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       )
     ]
 
-    actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+    actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
     _(actual_writes).must_equal expected_writes
   end
@@ -200,7 +200,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       )
     ]
 
-    actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+    actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
     _(actual_writes).must_equal expected_writes
   end
@@ -225,7 +225,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       )
     ]
 
-    actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+    actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
     _(actual_writes).must_equal expected_writes
   end
@@ -249,7 +249,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       )
     ]
 
-    actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data, update_time: last_updated_at
+    actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data, update_time: last_updated_at
 
     _(actual_writes).must_equal expected_writes
   end
@@ -259,7 +259,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { ["a", "", "b"] => 1 }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "empty paths not allowed"
     end
@@ -268,7 +268,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { [:a, :b] => 1, [:a] => 2 }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "one field cannot be a prefix of another"
     end
@@ -277,7 +277,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { ["a"] => 1, ["a", "b"] => 2 }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "one field cannot be a prefix of another"
     end
@@ -286,7 +286,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { a: { b: 1 }, ["a", "d"] => 2 }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "one field cannot be a prefix of another"
     end
@@ -311,7 +311,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -336,7 +336,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -361,7 +361,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -384,7 +384,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -402,7 +402,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -426,7 +426,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -435,7 +435,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { a: { b: field_delete } }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "DELETE cannot be nested"
     end
@@ -444,7 +444,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { a: [1, { b: field_delete }] }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "cannot nest delete under arrays"
     end
@@ -453,7 +453,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { a: [1, 2, field_delete] }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "cannot nest delete under arrays"
     end
@@ -478,7 +478,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -510,7 +510,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -533,7 +533,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -569,7 +569,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -601,7 +601,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -610,7 +610,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { a: [1, { b: field_server_time }] }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "cannot nest server_time under arrays"
     end
@@ -619,7 +619,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { a: [1, 2, field_server_time] }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "cannot nest server_time under arrays"
     end
@@ -652,7 +652,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -690,7 +690,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -719,7 +719,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -767,7 +767,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -805,7 +805,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -814,7 +814,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { a: [1, { b: field_array_union }] }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "cannot nest array_union under arrays"
     end
@@ -823,7 +823,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { a: [1, 2, field_array_union] }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "cannot nest array_union under arrays"
     end
@@ -856,7 +856,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -894,7 +894,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -923,7 +923,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -971,7 +971,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1009,7 +1009,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1018,7 +1018,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { a: [1, { b: field_array_delete }] }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "cannot nest array_delete under arrays"
     end
@@ -1027,7 +1027,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { a: [1, 2, field_array_delete] }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "cannot nest array_delete under arrays"
     end
@@ -1054,7 +1054,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1086,7 +1086,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1109,7 +1109,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1145,7 +1145,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1177,7 +1177,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1186,7 +1186,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { a: [1, { b: field_increment }] }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "cannot nest increment under arrays"
     end
@@ -1195,7 +1195,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { a: [1, 2, field_increment] }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "cannot nest increment under arrays"
     end
@@ -1222,7 +1222,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1254,7 +1254,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1277,7 +1277,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1313,7 +1313,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1345,7 +1345,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1354,7 +1354,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { a: [1, { b: field_maximum }] }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "cannot nest maximum under arrays"
     end
@@ -1363,7 +1363,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { a: [1, 2, field_maximum] }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "cannot nest maximum under arrays"
     end
@@ -1390,7 +1390,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1422,7 +1422,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1445,7 +1445,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1481,7 +1481,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1513,7 +1513,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
 
       _(actual_writes).must_equal expected_writes
     end
@@ -1522,7 +1522,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { a: [1, { b: field_minimum }] }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "cannot nest minimum under arrays"
     end
@@ -1531,7 +1531,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       data = { a: [1, 2, field_minimum] }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+        Google::Cloud::Firestore::Convert.write_for_update document_path, data
       end.must_raise ArgumentError
       _(error.message).must_equal "cannot nest minimum under arrays"
     end

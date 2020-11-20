@@ -321,7 +321,7 @@ module Google
 
           doc_path = coalesce_doc_path_argument doc
 
-          @writes << Convert.writes_for_create(doc_path, data)
+          @writes << Convert.write_for_create(doc_path, data)
 
           nil
         end
@@ -422,7 +422,7 @@ module Google
 
           doc_path = coalesce_doc_path_argument doc
 
-          @writes << Convert.writes_for_set(doc_path, data, merge: merge)
+          @writes << Convert.write_for_set(doc_path, data, merge: merge)
 
           nil
         end
@@ -526,8 +526,8 @@ module Google
 
           doc_path = coalesce_doc_path_argument doc
 
-          @writes << Convert.writes_for_update(doc_path, data,
-                                               update_time: update_time)
+          @writes << Convert.write_for_update(doc_path, data,
+                                              update_time: update_time)
 
           nil
         end

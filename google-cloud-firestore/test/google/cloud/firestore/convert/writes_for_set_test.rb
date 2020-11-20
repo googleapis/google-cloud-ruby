@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Firestore::Convert, :writes_for_set do
+describe Google::Cloud::Firestore::Convert, :write_for_set do
   # These tests are a sanity check on the implementation of the conversion methods.
   # These tests are testing private methods and this is generally not a great idea.
   # But these conversions are so important that it was decided to do it anyway.
@@ -37,7 +37,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
       )
     ]
 
-    actual_writes = Google::Cloud::Firestore::Convert.writes_for_set document_path, data
+    actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data
 
     _(actual_writes).must_equal expected_writes
   end
@@ -67,7 +67,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
       )
     ]
 
-    actual_writes = Google::Cloud::Firestore::Convert.writes_for_set document_path, data
+    actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data
 
     _(actual_writes).must_equal expected_writes
   end
@@ -81,7 +81,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
       )
     ]
 
-    actual_writes = Google::Cloud::Firestore::Convert.writes_for_set document_path, data
+    actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data
 
     _(actual_writes).must_equal expected_writes
   end
@@ -103,7 +103,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
       )
     ]
 
-    actual_writes = Google::Cloud::Firestore::Convert.writes_for_set document_path, data
+    actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data
 
     _(actual_writes).must_equal expected_writes
   end
@@ -112,7 +112,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
     data = { a: [1, { b: field_delete }] }
 
     error = expect do
-      Google::Cloud::Firestore::Convert.writes_for_set document_path, data
+      Google::Cloud::Firestore::Convert.write_for_set document_path, data
     end.must_raise ArgumentError
     _(error.message).must_equal "cannot nest delete under arrays"
   end
@@ -121,7 +121,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
     data = { a: [1, 2, field_delete] }
 
     error = expect do
-      Google::Cloud::Firestore::Convert.writes_for_set document_path, data
+      Google::Cloud::Firestore::Convert.write_for_set document_path, data
     end.must_raise ArgumentError
     _(error.message).must_equal "cannot nest delete under arrays"
   end
@@ -130,7 +130,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
     data = { a: 1, b: field_delete }
 
     error = expect do
-      Google::Cloud::Firestore::Convert.writes_for_set document_path, data
+      Google::Cloud::Firestore::Convert.write_for_set document_path, data
     end.must_raise ArgumentError
     _(error.message).must_equal "DELETE not allowed on set"
   end
@@ -153,7 +153,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_set document_path, data, merge: "a"
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: "a"
 
       _(actual_writes).must_equal expected_writes
     end
@@ -177,7 +177,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_set document_path, data, merge: [["*", "~"]]
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: [["*", "~"]]
 
       _(actual_writes).must_equal expected_writes
     end
@@ -202,7 +202,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
       ]
 
       merge_field_path = Google::Cloud::Firestore::FieldPath.new "*", "~"
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_set document_path, data, merge: merge_field_path
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: merge_field_path
 
       _(actual_writes).must_equal expected_writes
     end
@@ -226,7 +226,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_set document_path, data, merge: [["h", "g"]]
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: [["h", "g"]]
 
       _(actual_writes).must_equal expected_writes
     end
@@ -250,7 +250,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_set document_path, data, merge: ["h.g"]
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: ["h.g"]
 
       _(actual_writes).must_equal expected_writes
     end
@@ -275,7 +275,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_set document_path, data, merge: [:h]
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: [:h]
 
       _(actual_writes).must_equal expected_writes
     end
@@ -297,7 +297,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_set document_path, data, merge: :b
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: :b
 
       _(actual_writes).must_equal expected_writes
     end
@@ -306,7 +306,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
       data = { a: 1 }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_set document_path, data, merge: ["b", "a"]
+        Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: ["b", "a"]
       end.must_raise ArgumentError
       _(error.message).must_equal "all fields must be in data"
     end
@@ -315,7 +315,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
       data = { a: 1, b: field_delete }
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_set document_path, data, merge: [:a]
+        Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: [:a]
       end.must_raise ArgumentError
       _(error.message).must_equal "deleted field not included in merge"
     end
@@ -340,7 +340,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_set document_path, data, merge: true
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: true
 
       _(actual_writes).must_equal expected_writes
     end
@@ -365,7 +365,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
         )
       ]
 
-      actual_writes = Google::Cloud::Firestore::Convert.writes_for_set document_path, data, merge: true
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: true
 
       _(actual_writes).must_equal expected_writes
     end
@@ -374,7 +374,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
       data = {}
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_set document_path, data, merge: []
+        Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: []
       end.must_raise ArgumentError
       _(error.message).must_equal "data required for set with merge"
     end

@@ -24,7 +24,13 @@ module Google
       ##
       # @private Helper module for converting Protobuf values.
       module Convert
-        # rubocop:disable all
+        # rubocop:disable Metrics/AbcSize
+        # rubocop:disable Metrics/BlockLength
+        # rubocop:disable Metrics/CyclomaticComplexity
+        # rubocop:disable Metrics/MethodLength
+        # rubocop:disable Metrics/ModuleLength
+        # rubocop:disable Metrics/PerceivedComplexity
+        # rubocop:disable Style/CaseEquality
         module ClassMethods
           def time_to_timestamp time
             return nil if time.nil?
@@ -34,7 +40,7 @@ module Google
 
             Google::Protobuf::Timestamp.new \
               seconds: time.to_i,
-              nanos: time.nsec
+              nanos:   time.nsec
           end
 
           def timestamp_to_time timestamp
@@ -100,9 +106,10 @@ module Google
             elsif Google::Cloud::Firestore::DocumentReference === obj
               Google::Cloud::Firestore::V1::Value.new reference_value: obj.path
             elsif Array === obj
-              values = obj.map { |o| raw_to_value(o) }
-              Google::Cloud::Firestore::V1::Value.new(array_value:
-                Google::Cloud::Firestore::V1::ArrayValue.new(values: values))
+              values = obj.map { |o| raw_to_value o }
+              Google::Cloud::Firestore::V1::Value.new(
+                array_value: Google::Cloud::Firestore::V1::ArrayValue.new(values: values)
+              )
             elsif Hash === obj
               # keys have been changed to strings before the hash gets here
               geo_pairs = hash_is_geo_point? obj
@@ -112,8 +119,9 @@ module Google
                 )
               else
                 fields = hash_to_fields obj
-                Google::Cloud::Firestore::V1::Value.new(map_value:
-                  Google::Cloud::Firestore::V1::MapValue.new(fields: fields))
+                Google::Cloud::Firestore::V1::Value.new(
+                  map_value: Google::Cloud::Firestore::V1::MapValue.new(fields: fields)
+                )
               end
             elsif obj.respond_to?(:read) && obj.respond_to?(:rewind)
               obj.rewind
@@ -129,9 +137,7 @@ module Google
             return false unless hash.keys.count == 2
 
             pairs = hash.map { |k, v| [String(k), v] }.sort
-            if pairs.map(&:first) == ["latitude", "longitude"]
-              pairs
-            end
+            pairs if pairs.map(&:first) == ["latitude", "longitude"]
           end
 
           def hash_to_geo_point hash, pairs = nil
@@ -140,28 +146,27 @@ module Google
             raise ArgumentError, "value is not a geo point" unless pairs
 
             Google::Type::LatLng.new(
-              latitude: pairs.first.last,
-              longitude: pairs.last.last,
+              latitude:  pairs.first.last,
+              longitude: pairs.last.last
             )
           end
 
-          def writes_for_create doc_path, data
-            if is_field_value_nested data, :delete
+          def write_for_create doc_path, data
+            if field_value_nested? data, :delete
               raise ArgumentError, "DELETE not allowed on create"
             end
             raise ArgumentError, "data is required" unless data.is_a? Hash
 
             data, field_paths_and_values = remove_field_value_from data
 
-            write = Google::Cloud::Firestore::V1::Write.new(
-              update: Google::Cloud::Firestore::V1::Document.new(
-                name: doc_path,
+            Google::Cloud::Firestore::V1::Write.new(
+              update:            Google::Cloud::Firestore::V1::Document.new(
+                name:   doc_path,
                 fields: hash_to_fields(data)
               ),
-              current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false),
+              current_document:  Google::Cloud::Firestore::V1::Precondition.new(exists: false),
               update_transforms: field_transforms(field_paths_and_values)
             )
-            [write]
           end
 
           def field_transforms paths
@@ -171,7 +176,7 @@ module Google
             end.to_a
           end
 
-          def writes_for_set doc_path, data, merge: nil
+          def write_for_set doc_path, data, merge: nil
             raise ArgumentError, "data is required" unless data.is_a? Hash
 
             if merge
@@ -186,7 +191,7 @@ module Google
                 end
                 allow_empty = false
               end
-              return writes_for_set_merge doc_path, data, field_paths, allow_empty
+              return write_for_set_merge doc_path, data, field_paths, allow_empty
             end
 
             data, delete_paths = remove_field_value_from data, :delete
@@ -196,17 +201,16 @@ module Google
 
             data, field_paths_and_values = remove_field_value_from data
 
-            write = Google::Cloud::Firestore::V1::Write.new(
-              update: Google::Cloud::Firestore::V1::Document.new(
-                name: doc_path,
+            Google::Cloud::Firestore::V1::Write.new(
+              update:            Google::Cloud::Firestore::V1::Document.new(
+                name:   doc_path,
                 fields: hash_to_fields(data)
               ),
               update_transforms: field_transforms(field_paths_and_values)
             )
-            [write]
           end
 
-          def writes_for_set_merge doc_path, data, field_paths, allow_empty
+          def write_for_set_merge doc_path, data, field_paths, allow_empty
             raise ArgumentError, "data is required" unless data.is_a? Hash
 
             validate_field_paths! field_paths
@@ -214,7 +218,7 @@ module Google
             # Ensure provided field paths are valid.
             all_valid = identify_leaf_nodes data
             all_valid_check = field_paths.map do |verify_path|
-              if all_valid.include?(verify_path)
+              if all_valid.include? verify_path
                 true
               else
                 found_in_all_valid = all_valid.select do |fp|
@@ -261,20 +265,19 @@ module Google
               end
             end
 
-            write = Google::Cloud::Firestore::V1::Write.new(
-              update: Google::Cloud::Firestore::V1::Document.new(
-                name: doc_path,
+            Google::Cloud::Firestore::V1::Write.new(
+              update:            Google::Cloud::Firestore::V1::Document.new(
+                name:   doc_path,
                 fields: hash_to_fields(data)
               ),
-              update_mask: Google::Cloud::Firestore::V1::DocumentMask.new(
+              update_mask:       Google::Cloud::Firestore::V1::DocumentMask.new(
                 field_paths: field_paths.map(&:formatted_string).sort
               ),
               update_transforms: field_transforms(field_paths_and_values)
             )
-            [write]
           end
 
-          def writes_for_update doc_path, data, update_time: nil
+          def write_for_update doc_path, data, update_time: nil
             raise ArgumentError, "data is required" unless data.is_a? Hash
 
             # Convert data to use FieldPath
@@ -286,11 +289,11 @@ module Google
             # Duplicate field paths check
             validate_field_paths! new_data_pairs.map(&:first)
 
-            delete_paths, new_data_pairs = new_data_pairs.partition do |field_path, value|
+            delete_paths, new_data_pairs = new_data_pairs.partition do |_field_path, value|
               value.is_a?(FieldValue) && value.type == :delete
             end
 
-            root_field_paths_and_values, new_data_pairs = new_data_pairs.partition do |field_path, value|
+            root_field_paths_and_values, new_data_pairs = new_data_pairs.partition do |_field_path, value|
               value.is_a? FieldValue
             end
 
@@ -303,7 +306,7 @@ module Google
             data, nested_deletes = remove_field_value_from data, :delete
             raise ArgumentError, "DELETE cannot be nested" if nested_deletes.any?
 
-            data, nested_field_paths_and_values  = remove_field_value_from data
+            data, nested_field_paths_and_values = remove_field_value_from data
 
             field_paths_and_values = root_field_paths_and_values.merge nested_field_paths_and_values
 
@@ -317,24 +320,27 @@ module Google
             end
 
             write = Google::Cloud::Firestore::V1::Write.new(
-              update: Google::Cloud::Firestore::V1::Document.new(
-                name: doc_path,
+              update:            Google::Cloud::Firestore::V1::Document.new(
+                name:   doc_path,
                 fields: hash_to_fields(data)
               ),
-              update_mask: Google::Cloud::Firestore::V1::DocumentMask.new(
-                field_paths: (field_paths).map(&:formatted_string).sort
+              update_mask:       Google::Cloud::Firestore::V1::DocumentMask.new(
+                field_paths: field_paths.map(&:formatted_string).sort
               ),
-              current_document: Google::Cloud::Firestore::V1::Precondition.new(
+              current_document:  Google::Cloud::Firestore::V1::Precondition.new(
                 exists: true
               ),
               update_transforms: field_transforms(field_paths_and_values)
             )
+
             if update_time
               write.current_document = \
                 Google::Cloud::Firestore::V1::Precondition.new(
-                  update_time: time_to_timestamp(update_time))
+                  update_time: time_to_timestamp(update_time)
+                )
             end
-            [write]
+
+            write
           end
 
           def write_for_delete doc_path, exists: nil, update_time: nil
@@ -356,13 +362,19 @@ module Google
             write
           end
 
-          def is_field_value_nested obj, field_value_type = nil
+          def field_value_nested? obj, field_value_type = nil
             return obj if obj.is_a?(FieldValue) && (field_value_type.nil? || obj.type == field_value_type)
 
             if obj.is_a? Array
-              obj.each { |o| val = is_field_value_nested o, field_value_type; return val if val }
+              obj.each do |o|
+                val = field_value_nested? o, field_value_type
+                return val if val
+              end
             elsif obj.is_a? Hash
-              obj.each { |_k, v| val = is_field_value_nested v, field_value_type; return val if val }
+              obj.each do |_k, v|
+                val = field_value_nested? v, field_value_type
+                return val if val
+              end
             end
             nil
           end
@@ -375,35 +387,33 @@ module Google
               if value.is_a?(FieldValue) && (field_value_type.nil? || value.type == field_value_type)
                 paths << [FieldPath.new(*key), value]
                 nil # will be removed by calling compact
-              else
-                if value.is_a? Hash
-                  unless value.empty?
-                    nested_hash, nested_paths = remove_field_value_from value, field_value_type
-                    if nested_paths.any?
-                      nested_paths.each do |nested_field_path, nested_field_value|
-                        updated_field_paths = ([key] + nested_field_path.fields).flatten
-                        updated_field_path = FieldPath.new *updated_field_paths
-                        paths << [updated_field_path, nested_field_value]
-                      end
-                    end
-                    if nested_hash.empty?
-                      nil # will be removed by calling compact
-                    else
-                      [String(key), nested_hash]
-                    end
-                  else
-                    [String(key), value]
-                  end
-                else
-                  if value.is_a? Array
-                    nested_field_value = is_field_value_nested value, field_value_type
-                    if nested_field_value
-                      raise ArgumentError, "cannot nest #{nested_field_value.type} under arrays"
-                    end
-                  end
-
+              elsif value.is_a? Hash
+                if value.empty?
                   [String(key), value]
+                else
+                  nested_hash, nested_paths = remove_field_value_from value, field_value_type
+                  if nested_paths.any?
+                    nested_paths.each do |nested_field_path, nested_field_value|
+                      updated_field_paths = ([key] + nested_field_path.fields).flatten
+                      updated_field_path = FieldPath.new(*updated_field_paths)
+                      paths << [updated_field_path, nested_field_value]
+                    end
+                  end
+                  if nested_hash.empty?
+                    nil # will be removed by calling compact
+                  else
+                    [String(key), nested_hash]
+                  end
                 end
+              else
+                if value.is_a? Array
+                  nested_field_value = field_value_nested? value, field_value_type
+                  if nested_field_value
+                    raise ArgumentError, "cannot nest #{nested_field_value.type} under arrays"
+                  end
+                end
+
+                [String(key), value]
               end
             end
 
@@ -418,14 +428,14 @@ module Google
               if value.is_a? Hash
                 nested_paths = identify_leaf_nodes value
                 nested_paths.each do |nested_path|
-                  paths << (([key] + nested_path.fields).flatten)
+                  paths << ([key] + nested_path.fields).flatten
                 end
               else
                 paths << [key]
               end
             end
 
-            paths.map { |path| FieldPath.new *path }
+            paths.map { |path| FieldPath.new(*path) }
           end
 
           def identify_all_file_paths hash
@@ -434,15 +444,14 @@ module Google
             hash.map do |key, value|
               paths << [key]
 
-              if value.is_a? Hash
-                nested_paths = identify_all_file_paths value
-                nested_paths.each do |nested_path|
-                  paths << (([key] + nested_path.fields).flatten)
-                end
+              next unless value.is_a? Hash
+              nested_paths = identify_all_file_paths value
+              nested_paths.each do |nested_path|
+                paths << ([key] + nested_path.fields).flatten
               end
             end
 
-            paths.map { |path| FieldPath.new *path }
+            paths.map { |path| FieldPath.new(*path) }
           end
 
           def select_by_field_paths hash, field_paths
@@ -502,19 +511,19 @@ module Google
             right_hash.each_pair do |key, right_value|
               left_value = left_hash[key]
 
-              if left_value.is_a?(Hash) && right_value.is_a?(Hash)
-                left_hash[key] = deep_merge_hashes left_value, right_value
-              else
-                left_hash[key] = right_value
-              end
+              left_hash[key] = if left_value.is_a?(Hash) && right_value.is_a?(Hash)
+                                 deep_merge_hashes left_value, right_value
+                               else
+                                 right_value
+                               end
             end
 
             left_hash
           end
 
-          START_FIELD_PATH_CHARS = /\A[a-zA-Z_]/
-          INVALID_FIELD_PATH_CHARS = /[\~\*\/\[\]]/
-          ESCAPED_FIELD_PATH = /\A\`(.*)\`\z/
+          START_FIELD_PATH_CHARS = /\A[a-zA-Z_]/.freeze
+          INVALID_FIELD_PATH_CHARS = %r{[\~\*/\[\]]}.freeze
+          ESCAPED_FIELD_PATH = /\A\`(.*)\`\z/.freeze
 
           def build_hash_from_field_paths_and_values pairs
             pairs.each do |field_path, _value|
@@ -555,7 +564,7 @@ module Google
 
             Google::Cloud::Firestore::V1::Write.new(
               transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-                document: doc_path,
+                document:         doc_path,
                 field_transforms: field_transforms
               )
             )
@@ -564,43 +573,49 @@ module Google
           def to_field_transform field_path, field_value
             if field_value.type == :server_time
               Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: field_path.formatted_string,
+                field_path:          field_path.formatted_string,
                 set_to_server_value: :REQUEST_TIME
               )
             elsif field_value.type == :array_union
               Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: field_path.formatted_string,
+                field_path:              field_path.formatted_string,
                 append_missing_elements: raw_to_value(Array(field_value.value)).array_value
               )
             elsif field_value.type == :array_delete
               Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: field_path.formatted_string,
+                field_path:            field_path.formatted_string,
                 remove_all_from_array: raw_to_value(Array(field_value.value)).array_value
               )
             elsif field_value.type == :increment
               Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
                 field_path: field_path.formatted_string,
-                increment: raw_to_value(field_value.value)
+                increment:  raw_to_value(field_value.value)
               )
             elsif field_value.type == :maximum
               Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
                 field_path: field_path.formatted_string,
-                maximum: raw_to_value(field_value.value)
+                maximum:    raw_to_value(field_value.value)
               )
             elsif field_value.type == :minimum
               Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
                 field_path: field_path.formatted_string,
-                minimum: raw_to_value(field_value.value)
+                minimum:    raw_to_value(field_value.value)
               )
             else
               raise ArgumentError, "unknown field transform #{field_value.type}"
             end
           end
         end
-        # rubocop:enable all
 
         extend ClassMethods
       end
+      # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Metrics/BlockLength
+      # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/ModuleLength
+      # rubocop:enable Metrics/PerceivedComplexity
+      # rubocop:enable Style/CaseEquality
     end
   end
 end
