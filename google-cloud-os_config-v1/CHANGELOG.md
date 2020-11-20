@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.0 / 2020-11-19
+
+#### Features
+
+* Support for patch rollout strategy
+
 ### 0.1.4 / 2020-08-10
 
 #### Bug Fixes
