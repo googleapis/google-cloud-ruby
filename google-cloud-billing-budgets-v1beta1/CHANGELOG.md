@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.1 / 2020-11-19
+
+#### Documentation
+
+* Reworded description of credit types filter
+
 ### 0.3.0 / 2020-11-02
 
 #### Features
