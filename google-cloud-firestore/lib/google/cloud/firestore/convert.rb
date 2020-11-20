@@ -146,8 +146,6 @@ module Google
           end
 
           def writes_for_create doc_path, data
-            writes = []
-
             if is_field_value_nested data, :delete
               raise ArgumentError, "DELETE not allowed on create"
             end
@@ -155,29 +153,22 @@ module Google
 
             data, field_paths_and_values = remove_field_value_from data
 
-            if data.any? || field_paths_and_values.empty?
-              write = Google::Cloud::Firestore::V1::Write.new(
-                update: Google::Cloud::Firestore::V1::Document.new(
-                  name: doc_path,
-                  fields: hash_to_fields(data)),
-                current_document: Google::Cloud::Firestore::V1::Precondition.new(
-                  exists: false)
-              )
-              writes << write
-            end
+            write = Google::Cloud::Firestore::V1::Write.new(
+              update: Google::Cloud::Firestore::V1::Document.new(
+                name: doc_path,
+                fields: hash_to_fields(data)
+              ),
+              current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false),
+              update_transforms: field_transforms(field_paths_and_values)
+            )
+            [write]
+          end
 
-            if field_paths_and_values.any?
-              transform_write = transform_write doc_path, field_paths_and_values
-
-              if data.empty?
-                transform_write.current_document = \
-                  Google::Cloud::Firestore::V1::Precondition.new(exists: false)
-              end
-
-              writes << transform_write
-            end
-
-            writes
+          def field_transforms paths
+            return nil if paths.empty?
+            paths.map do |field_path, field_value|
+              to_field_transform field_path, field_value
+            end.to_a
           end
 
           def writes_for_set doc_path, data, merge: nil
@@ -198,8 +189,6 @@ module Google
               return writes_for_set_merge doc_path, data, field_paths, allow_empty
             end
 
-            writes = []
-
             data, delete_paths = remove_field_value_from data, :delete
             if delete_paths.any?
               raise ArgumentError, "DELETE not allowed on set"
@@ -207,25 +196,20 @@ module Google
 
             data, field_paths_and_values = remove_field_value_from data
 
-            writes << Google::Cloud::Firestore::V1::Write.new(
+            write = Google::Cloud::Firestore::V1::Write.new(
               update: Google::Cloud::Firestore::V1::Document.new(
                 name: doc_path,
-                fields: hash_to_fields(data))
+                fields: hash_to_fields(data)
+              ),
+              update_transforms: field_transforms(field_paths_and_values)
             )
-
-            if field_paths_and_values.any?
-              writes << transform_write(doc_path, field_paths_and_values)
-            end
-
-            writes
+            [write]
           end
 
           def writes_for_set_merge doc_path, data, field_paths, allow_empty
             raise ArgumentError, "data is required" unless data.is_a? Hash
 
             validate_field_paths! field_paths
-
-            writes = []
 
             # Ensure provided field paths are valid.
             all_valid = identify_leaf_nodes data
@@ -277,26 +261,20 @@ module Google
               end
             end
 
-            if data.any? || field_paths.any? || (allow_empty && field_paths_and_values.empty?)
-              writes << Google::Cloud::Firestore::V1::Write.new(
-                update: Google::Cloud::Firestore::V1::Document.new(
-                  name: doc_path,
-                  fields: hash_to_fields(data)),
-                update_mask: Google::Cloud::Firestore::V1::DocumentMask.new(
-                  field_paths: field_paths.map(&:formatted_string).sort)
-              )
-            end
-
-            if field_paths_and_values.any?
-              writes << transform_write(doc_path, field_paths_and_values)
-            end
-
-            writes
+            write = Google::Cloud::Firestore::V1::Write.new(
+              update: Google::Cloud::Firestore::V1::Document.new(
+                name: doc_path,
+                fields: hash_to_fields(data)
+              ),
+              update_mask: Google::Cloud::Firestore::V1::DocumentMask.new(
+                field_paths: field_paths.map(&:formatted_string).sort
+              ),
+              update_transforms: field_transforms(field_paths_and_values)
+            )
+            [write]
           end
 
           def writes_for_update doc_path, data, update_time: nil
-            writes = []
-
             raise ArgumentError, "data is required" unless data.is_a? Hash
 
             # Convert data to use FieldPath
@@ -338,34 +316,25 @@ module Google
               raise ArgumentError, "data is required"
             end
 
-            if data.any? || delete_paths.any?
-              write = Google::Cloud::Firestore::V1::Write.new(
-                update: Google::Cloud::Firestore::V1::Document.new(
-                  name: doc_path,
-                  fields: hash_to_fields(data)),
-                update_mask: Google::Cloud::Firestore::V1::DocumentMask.new(
-                  field_paths: (field_paths).map(&:formatted_string).sort),
-                current_document: Google::Cloud::Firestore::V1::Precondition.new(
-                  exists: true)
-              )
-              if update_time
-                write.current_document = \
-                  Google::Cloud::Firestore::V1::Precondition.new(
-                    update_time: time_to_timestamp(update_time))
-              end
-              writes << write
+            write = Google::Cloud::Firestore::V1::Write.new(
+              update: Google::Cloud::Firestore::V1::Document.new(
+                name: doc_path,
+                fields: hash_to_fields(data)
+              ),
+              update_mask: Google::Cloud::Firestore::V1::DocumentMask.new(
+                field_paths: (field_paths).map(&:formatted_string).sort
+              ),
+              current_document: Google::Cloud::Firestore::V1::Precondition.new(
+                exists: true
+              ),
+              update_transforms: field_transforms(field_paths_and_values)
+            )
+            if update_time
+              write.current_document = \
+                Google::Cloud::Firestore::V1::Precondition.new(
+                  update_time: time_to_timestamp(update_time))
             end
-
-            if field_paths_and_values.any?
-              transform_write = transform_write doc_path, field_paths_and_values
-              if data.empty?
-                transform_write.current_document = \
-                  Google::Cloud::Firestore::V1::Precondition.new(exists: true)
-              end
-              writes << transform_write
-            end
-
-            writes
+            [write]
           end
 
           def write_for_delete doc_path, exists: nil, update_time: nil
