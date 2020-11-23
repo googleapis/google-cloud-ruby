@@ -43,27 +43,25 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
   it "complex set" do
     data = { a: [1, 2.5], b: { c: ["three", { d: true }] } }
 
-    expected_writes = [
-      Google::Cloud::Firestore::V1::Write.new(
-        update: Google::Cloud::Firestore::V1::Document.new(
-          name: document_path,
-          fields: {
-            "a" => Google::Cloud::Firestore::V1::Value.new(array_value: Google::Cloud::Firestore::V1::ArrayValue.new(values: [
-              Google::Cloud::Firestore::V1::Value.new(integer_value: 1),
-              Google::Cloud::Firestore::V1::Value.new(double_value: 2.5)
-            ])),
-            "b" => Google::Cloud::Firestore::V1::Value.new(map_value: Google::Cloud::Firestore::V1::MapValue.new(fields: {
-              "c" => Google::Cloud::Firestore::V1::Value.new(array_value: Google::Cloud::Firestore::V1::ArrayValue.new(values: [
-                Google::Cloud::Firestore::V1::Value.new(string_value: "three"),
-                Google::Cloud::Firestore::V1::Value.new(map_value: Google::Cloud::Firestore::V1::MapValue.new(fields: {
-                  "d" => Google::Cloud::Firestore::V1::Value.new(boolean_value: true)
-                }))
-              ]))
-            }))
-          }
-        )
+    expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      update: Google::Cloud::Firestore::V1::Document.new(
+        name: document_path,
+        fields: {
+          "a" => Google::Cloud::Firestore::V1::Value.new(array_value: Google::Cloud::Firestore::V1::ArrayValue.new(values: [
+            Google::Cloud::Firestore::V1::Value.new(integer_value: 1),
+            Google::Cloud::Firestore::V1::Value.new(double_value: 2.5)
+          ])),
+          "b" => Google::Cloud::Firestore::V1::Value.new(map_value: Google::Cloud::Firestore::V1::MapValue.new(fields: {
+            "c" => Google::Cloud::Firestore::V1::Value.new(array_value: Google::Cloud::Firestore::V1::ArrayValue.new(values: [
+              Google::Cloud::Firestore::V1::Value.new(string_value: "three"),
+              Google::Cloud::Firestore::V1::Value.new(map_value: Google::Cloud::Firestore::V1::MapValue.new(fields: {
+                "d" => Google::Cloud::Firestore::V1::Value.new(boolean_value: true)
+              }))
+            ]))
+          }))
+        }
       )
-    ]
+    )
 
     actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data
 
@@ -261,20 +259,21 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
 
       _(actual_writes).must_equal expected_writes
     end
-focus
+
     it "does not write data when field is not provided" do
       data = { a: 1, b: field_server_time }
 
       expected_writes = Google::Cloud::Firestore::V1::Write.new(
-        transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-          document: "projects/projectID/databases/(default)/documents/C/d",
-          field_transforms: [
-            Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-              field_path: "b",
-              set_to_server_value: :REQUEST_TIME
-            )
-          ]
-        )
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/projectID/databases/(default)/documents/C/d"
+        ),
+        update_mask: Google::Cloud::Firestore::V1::DocumentMask.new,
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b",
+            set_to_server_value: :REQUEST_TIME
+          )
+        ]
       )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: :b
@@ -305,20 +304,18 @@ focus
     it "merges all" do
       data = { a: 1, b: 2 }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: "projects/projectID/databases/(default)/documents/C/d",
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1),
-              "b" => Google::Cloud::Firestore::V1::Value.new(integer_value: 2)
-            }
-          ),
-          update_mask: Google::Cloud::Firestore::V1::DocumentMask.new(
-            field_paths: ["a", "b"]
-          )
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/projectID/databases/(default)/documents/C/d",
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1),
+            "b" => Google::Cloud::Firestore::V1::Value.new(integer_value: 2)
+          }
+        ),
+        update_mask: Google::Cloud::Firestore::V1::DocumentMask.new(
+          field_paths: ["a", "b"]
         )
-      ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: true
 
@@ -328,22 +325,20 @@ focus
     it "merges with nested fields" do
       data = { h: { g: 3, f: 4 } }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: "projects/projectID/databases/(default)/documents/C/d",
-            fields: {
-              "h" => Google::Cloud::Firestore::V1::Value.new(map_value: Google::Cloud::Firestore::V1::MapValue.new(fields: {
-                "g" => Google::Cloud::Firestore::V1::Value.new(integer_value: 3),
-                "f" => Google::Cloud::Firestore::V1::Value.new(integer_value: 4)
-              }))
-            }
-          ),
-          update_mask: Google::Cloud::Firestore::V1::DocumentMask.new(
-            field_paths: ["h.f", "h.g"]
-          )
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/projectID/databases/(default)/documents/C/d",
+          fields: {
+            "h" => Google::Cloud::Firestore::V1::Value.new(map_value: Google::Cloud::Firestore::V1::MapValue.new(fields: {
+              "g" => Google::Cloud::Firestore::V1::Value.new(integer_value: 3),
+              "f" => Google::Cloud::Firestore::V1::Value.new(integer_value: 4)
+            }))
+          }
+        ),
+        update_mask: Google::Cloud::Firestore::V1::DocumentMask.new(
+          field_paths: ["h.f", "h.g"]
         )
-      ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: true
 

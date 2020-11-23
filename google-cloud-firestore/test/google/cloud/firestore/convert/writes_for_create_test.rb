@@ -140,20 +140,18 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "SERVER_TIME alone" do
       data = { a: field_server_time }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "a",
-                set_to_server_value: :REQUEST_TIME
-              )
-            ]
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
-        )
-      ]
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/projectID/databases/(default)/documents/C/d"
+        ),
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "a",
+            set_to_server_value: :REQUEST_TIME
+          )
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -163,29 +161,23 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "SERVER_TIME with data" do
       data = { a: 1, b: field_server_time }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: document_path,
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-            }
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(
-            exists: false)
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: document_path,
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          }
         ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b",
-                set_to_server_value: :REQUEST_TIME
-              )
-            ]
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(
+          exists: false
+        ),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b",
+            set_to_server_value: :REQUEST_TIME
           )
-        )
-      ]
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -195,32 +187,25 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "multiple SERVER_TIME fields" do
       data = { a: 1, b: field_server_time, c: { d: field_server_time } }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
           update: Google::Cloud::Firestore::V1::Document.new(
             name: document_path,
             fields: {
               "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
             }
           ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
-        ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b",
-                set_to_server_value: :REQUEST_TIME
-              ),
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "c.d",
-                set_to_server_value: :REQUEST_TIME
-              )
-            ]
-          )
+          current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false),
+          update_transforms: [
+            Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+              field_path: "b",
+              set_to_server_value: :REQUEST_TIME
+            ),
+            Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+              field_path: "c.d",
+              set_to_server_value: :REQUEST_TIME
+            )
+          ]
         )
-      ]
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -230,29 +215,23 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "nested SERVER_TIME field" do
       data = { a: 1, b: { c: field_server_time } }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: document_path,
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-            }
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(
-            exists: false)
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: document_path,
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          }
         ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b.c",
-                set_to_server_value: :REQUEST_TIME
-              )
-            ]
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(
+          exists: false
+        ),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b.c",
+            set_to_server_value: :REQUEST_TIME
           )
-        )
-      ]
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -284,26 +263,24 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "ARRAY_UNION alone" do
       data = { a: field_array_union }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "a",
-                append_missing_elements: Google::Cloud::Firestore::V1::ArrayValue.new(
-                  values: [
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 1),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 2),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
-                  ]
-                )
-              )
-            ]
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
-        )
-      ]
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/projectID/databases/(default)/documents/C/d"
+        ),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "a",
+            append_missing_elements: Google::Cloud::Firestore::V1::ArrayValue.new(
+              values: [
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 1),
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 2),
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
+              ]
+            )
+          )
+        ],
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -313,35 +290,29 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "ARRAY_UNION with data" do
       data = { a: 1, b: field_array_union }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: document_path,
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-            }
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(
-            exists: false)
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: document_path,
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          }
         ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b",
-                append_missing_elements: Google::Cloud::Firestore::V1::ArrayValue.new(
-                  values: [
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 1),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 2),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
-                  ]
-                )
-              )
-            ]
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(
+          exists: false
+        ),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b",
+            append_missing_elements: Google::Cloud::Firestore::V1::ArrayValue.new(
+              values: [
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 1),
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 2),
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
+              ]
+            )
           )
-        )
-      ]
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -351,44 +322,37 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "multiple ARRAY_UNION fields" do
       data = { a: 1, b: field_array_union, c: { d: field_array_union } }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
           update: Google::Cloud::Firestore::V1::Document.new(
             name: document_path,
             fields: {
               "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
             }
           ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
-        ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b",
-                append_missing_elements: Google::Cloud::Firestore::V1::ArrayValue.new(
-                  values: [
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 1),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 2),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
-                  ]
-                )
-              ),
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "c.d",
-                append_missing_elements: Google::Cloud::Firestore::V1::ArrayValue.new(
-                  values: [
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 1),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 2),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
-                  ]
-                )
+          current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false),
+          update_transforms: [
+            Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+              field_path: "b",
+              append_missing_elements: Google::Cloud::Firestore::V1::ArrayValue.new(
+                values: [
+                  Google::Cloud::Firestore::V1::Value.new(integer_value: 1),
+                  Google::Cloud::Firestore::V1::Value.new(integer_value: 2),
+                  Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
+                ]
               )
-            ]
-          )
+            ),
+            Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+              field_path: "c.d",
+              append_missing_elements: Google::Cloud::Firestore::V1::ArrayValue.new(
+                values: [
+                  Google::Cloud::Firestore::V1::Value.new(integer_value: 1),
+                  Google::Cloud::Firestore::V1::Value.new(integer_value: 2),
+                  Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
+                ]
+              )
+            )
+          ]
         )
-      ]
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -398,35 +362,29 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "nested ARRAY_UNION field" do
       data = { a: 1, b: { c: field_array_union } }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: document_path,
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-            }
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(
-            exists: false)
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: document_path,
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          }
         ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b.c",
-                append_missing_elements: Google::Cloud::Firestore::V1::ArrayValue.new(
-                  values: [
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 1),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 2),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
-                  ]
-                )
-              )
-            ]
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(
+          exists: false
+        ),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b.c",
+            append_missing_elements: Google::Cloud::Firestore::V1::ArrayValue.new(
+              values: [
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 1),
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 2),
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
+              ]
+            )
           )
-        )
-      ]
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -458,26 +416,24 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "ARRAY_DELETE alone" do
       data = { a: field_array_delete }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "a",
-                remove_all_from_array: Google::Cloud::Firestore::V1::ArrayValue.new(
-                  values: [
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 7),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 8),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 9)
-                  ]
-                )
-              )
-            ]
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
-        )
-      ]
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/projectID/databases/(default)/documents/C/d"
+        ),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "a",
+            remove_all_from_array: Google::Cloud::Firestore::V1::ArrayValue.new(
+              values: [
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 7),
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 8),
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 9)
+              ]
+            )
+          )
+        ],
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -487,35 +443,29 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "ARRAY_DELETE with data" do
       data = { a: 1, b: field_array_delete }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: document_path,
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-            }
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(
-            exists: false)
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: document_path,
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          }
         ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b",
-                remove_all_from_array: Google::Cloud::Firestore::V1::ArrayValue.new(
-                  values: [
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 7),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 8),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 9)
-                  ]
-                )
-              )
-            ]
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(
+          exists: false
+        ),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b",
+            remove_all_from_array: Google::Cloud::Firestore::V1::ArrayValue.new(
+              values: [
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 7),
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 8),
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 9)
+              ]
+            )
           )
-        )
-      ]
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -525,44 +475,37 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "multiple ARRAY_DELETE fields" do
       data = { a: 1, b: field_array_delete, c: { d: field_array_delete } }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: document_path,
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-            }
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: document_path,
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          }
         ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b",
-                remove_all_from_array: Google::Cloud::Firestore::V1::ArrayValue.new(
-                  values: [
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 7),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 8),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 9)
-                  ]
-                )
-              ),
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "c.d",
-                remove_all_from_array: Google::Cloud::Firestore::V1::ArrayValue.new(
-                  values: [
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 7),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 8),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 9)
-                  ]
-                )
-              )
-            ]
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b",
+            remove_all_from_array: Google::Cloud::Firestore::V1::ArrayValue.new(
+              values: [
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 7),
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 8),
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 9)
+              ]
+            )
+          ),
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "c.d",
+            remove_all_from_array: Google::Cloud::Firestore::V1::ArrayValue.new(
+              values: [
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 7),
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 8),
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 9)
+              ]
+            )
           )
-        )
-      ]
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -572,35 +515,29 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "nested ARRAY_DELETE field" do
       data = { a: 1, b: { c: field_array_delete } }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: document_path,
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-            }
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(
-            exists: false)
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: document_path,
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          }
         ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b.c",
-                remove_all_from_array: Google::Cloud::Firestore::V1::ArrayValue.new(
-                  values: [
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 7),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 8),
-                    Google::Cloud::Firestore::V1::Value.new(integer_value: 9)
-                  ]
-                )
-              )
-            ]
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(
+          exists: false
+        ),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b.c",
+            remove_all_from_array: Google::Cloud::Firestore::V1::ArrayValue.new(
+              values: [
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 7),
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 8),
+                Google::Cloud::Firestore::V1::Value.new(integer_value: 9)
+              ]
+            )
           )
-        )
-      ]
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -632,20 +569,18 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "INCREMENT alone" do
       data = { a: field_increment }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "a",
-                increment: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-              )
-            ]
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
-        )
-      ]
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/projectID/databases/(default)/documents/C/d"
+        ),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "a",
+            increment: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          )
+        ],
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -655,29 +590,23 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "INCREMENT with data" do
       data = { a: 1, b: field_increment }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: document_path,
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-            }
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(
-            exists: false)
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: document_path,
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          }
         ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b",
-                increment: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-              )
-            ]
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(
+          exists: false
+        ),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b",
+            increment: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
           )
-        )
-      ]
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -687,32 +616,25 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "multiple INCREMENT fields" do
       data = { a: 1, b: field_increment, c: { d: field_increment } }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: document_path,
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-            }
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: document_path,
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          }
         ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b",
-                increment: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-              ),
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "c.d",
-                increment: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-              )
-            ]
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b",
+            increment: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          ),
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "c.d",
+            increment: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
           )
-        )
-      ]
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -722,29 +644,23 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "nested INCREMENT field" do
       data = { a: 1, b: { c: field_increment } }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: document_path,
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-            }
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(
-            exists: false)
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: document_path,
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          }
         ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b.c",
-                increment: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-              )
-            ]
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(
+          exists: false
+        ),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b.c",
+            increment: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
           )
-        )
-      ]
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -776,20 +692,18 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "MAXIMUM alone" do
       data = { a: field_maximum }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "a",
-                maximum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-              )
-            ]
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
-        )
-      ]
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/projectID/databases/(default)/documents/C/d"
+        ),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "a",
+            maximum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          )
+        ],
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -799,29 +713,23 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "MAXIMUM with data" do
       data = { a: 1, b: field_maximum }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: document_path,
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-            }
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(
-            exists: false)
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: document_path,
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          }
         ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b",
-                maximum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-              )
-            ]
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(
+          exists: false
+        ),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b",
+            maximum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
           )
-        )
-      ]
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -831,32 +739,25 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "multiple MAXIMUM fields" do
       data = { a: 1, b: field_maximum, c: { d: field_maximum } }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: document_path,
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-            }
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: document_path,
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          }
         ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b",
-                maximum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-              ),
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "c.d",
-                maximum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-              )
-            ]
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false), 
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b",
+            maximum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          ),
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "c.d",
+            maximum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
           )
-        )
-      ]
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -866,29 +767,21 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "nested MAXIMUM field" do
       data = { a: 1, b: { c: field_maximum } }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: document_path,
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-            }
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(
-            exists: false)
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: document_path,
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          }
         ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b.c",
-                maximum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-              )
-            ]
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b.c",
+            maximum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
           )
-        )
-      ]
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -920,20 +813,18 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "MINIMUM alone" do
       data = { a: field_minimum }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "a",
-                minimum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-              )
-            ]
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
-        )
-      ]
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/projectID/databases/(default)/documents/C/d"
+        ),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "a",
+            minimum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          )
+        ],
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -943,29 +834,21 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "MINIMUM with data" do
       data = { a: 1, b: field_minimum }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: document_path,
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-            }
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(
-            exists: false)
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: document_path,
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          }
         ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b",
-                minimum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-              )
-            ]
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b",
+            minimum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
           )
-        )
-      ]
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -975,32 +858,25 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "multiple MINIMUM fields" do
       data = { a: 1, b: field_minimum, c: { d: field_minimum } }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: document_path,
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-            }
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: document_path,
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          }
         ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b",
-                minimum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-              ),
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "c.d",
-                minimum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-              )
-            ]
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b",
+            minimum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          ),
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "c.d",
+            minimum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
           )
-        )
-      ]
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
@@ -1010,29 +886,21 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "nested MINIMUM field" do
       data = { a: 1, b: { c: field_minimum } }
 
-      expected_writes = [
-        Google::Cloud::Firestore::V1::Write.new(
-          update: Google::Cloud::Firestore::V1::Document.new(
-            name: document_path,
-            fields: {
-              "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-            }
-          ),
-          current_document: Google::Cloud::Firestore::V1::Precondition.new(
-            exists: false)
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: document_path,
+          fields: {
+            "a" => Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
+          }
         ),
-        Google::Cloud::Firestore::V1::Write.new(
-          transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-            document: "projects/projectID/databases/(default)/documents/C/d",
-            field_transforms: [
-              Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
-                field_path: "b.c",
-                minimum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
-              )
-            ]
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false),
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b.c",
+            minimum: Google::Cloud::Firestore::V1::Value.new(integer_value: 1)
           )
-        )
-      ]
+        ]
+      )
 
       actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
