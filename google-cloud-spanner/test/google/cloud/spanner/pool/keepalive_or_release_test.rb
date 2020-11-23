@@ -77,7 +77,9 @@ describe Google::Cloud::Spanner::Pool, :keepalive_or_release, :mock_spanner do
     pool.transaction_queue = [transaction]
 
     mock = Minitest::Mock.new
-    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: tx_opts }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{
+      session: session_grpc.name, options: tx_opts, request_options: nil
+    }, default_options]
     session.service.mocked_service = mock
 
     pool.keepalive_or_release!

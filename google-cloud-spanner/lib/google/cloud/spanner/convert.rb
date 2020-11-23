@@ -324,6 +324,25 @@ module Google
 
             [input_params, input_param_types]
           end
+
+          ##
+          # Build request options by replacing tag to respecitve statistics
+          # collection tag type.
+          #
+          # @param [Hash] options Common request options.
+          #   * `:tag` (String) A tag used for statistics collection.
+          #
+          # @param [Symbol] tag_type Request tag type.
+          #   Possible values are `request_tag`, `transaction_tag`
+          # @return [Hash, nil]
+          #
+          def to_request_options options, tag_type: nil
+            return unless options
+
+            return options unless options.key? :tag
+
+            options.transform_keys { |k| k == :tag ? tag_type : k }
+          end
         end
 
         # rubocop:enable all

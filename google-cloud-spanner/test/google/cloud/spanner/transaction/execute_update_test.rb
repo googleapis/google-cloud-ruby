@@ -271,4 +271,23 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
       _(row_count).must_equal 1
     end
   end
+
+  it "execute a DML query with transaction and request tag" do
+    transaction = Google::Cloud::Spanner::Transaction.from_grpc transaction_grpc, session
+    transaction.transaction_tag = "Tag-2"
+
+    mock = Minitest::Mock.new
+    session.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session_grpc.name, "UPDATE users SET active = true",
+                                 transaction: tx_selector, seqno: 1,
+                                 request_options: { transaction_tag: "Tag-2", request_tag: "Tag-2-1" },
+                                 options: default_options
+
+    row_count = transaction.execute_update "UPDATE users SET active = true",
+                                            request_options: { tag: "Tag-2-1" }
+
+    mock.verify
+
+    _(row_count).must_equal 1
+  end
 end

@@ -441,13 +441,18 @@ module Google
           service.rollback request, opts
         end
 
-        def begin_transaction session_name, call_options: nil
+        def begin_transaction session_name, request_options: nil,
+                              call_options: nil
           tx_opts = V1::TransactionOptions.new(
             read_write: V1::TransactionOptions::ReadWrite.new
           )
           opts = default_options session_name: session_name,
                                  call_options: call_options
-          request = { session: session_name, options: tx_opts }
+          request = {
+            session: session_name,
+            options: tx_opts,
+            request_options: request_options
+          }
           service.begin_transaction request, opts
         end
 
