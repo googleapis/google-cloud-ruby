@@ -335,6 +335,26 @@ module Google
         #     database = job.database
         #   end
         #
+        # @example Create with encryption config
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   instance = spanner.instance "my-instance"
+        #
+        #   kms_key_name = "projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>"
+        #   job = instance.create_database "my-new-database", encryption_config: { kms_key_name: kms_key_name }
+        #
+        #   job.done? #=> false
+        #   job.reload! # API call
+        #   job.done? #=> true
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     database = job.database
+        #   end
+        #
         def create_database database_id, statements: [], encryption_config: nil
           grpc = service.create_database instance_id, database_id,
                                          statements: statements,
