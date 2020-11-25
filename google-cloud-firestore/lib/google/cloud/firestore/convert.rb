@@ -320,24 +320,27 @@ module Google
             end
 
             write = Google::Cloud::Firestore::V1::Write.new(
-              update:            Google::Cloud::Firestore::V1::Document.new(
-                name:   doc_path,
-                fields: hash_to_fields(data)
-              ),
-              update_mask:       Google::Cloud::Firestore::V1::DocumentMask.new(
-                field_paths: field_paths.map(&:formatted_string).sort
-              ),
-              current_document:  Google::Cloud::Firestore::V1::Precondition.new(
-                exists: true
-              ),
-              update_transforms: field_transforms(field_paths_and_values)
+              update:           Google::Cloud::Firestore::V1::Document.new(name: doc_path),
+              update_mask:      Google::Cloud::Firestore::V1::DocumentMask.new,
+              current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: true)
             )
 
-            if update_time
-              write.current_document = \
-                Google::Cloud::Firestore::V1::Precondition.new(
+            if data.any? || delete_paths.any?
+              htf = hash_to_fields data
+              htf.each_pair do |k, v|
+                write.update.fields[k] = v
+              end
+              write.update_mask.field_paths += field_paths.map(&:formatted_string).sort
+
+              if update_time
+                write.current_document = Google::Cloud::Firestore::V1::Precondition.new(
                   update_time: time_to_timestamp(update_time)
                 )
+              end
+            end
+
+            if field_paths_and_values.any?
+              write.update_transforms += field_transforms field_paths_and_values
             end
 
             write
