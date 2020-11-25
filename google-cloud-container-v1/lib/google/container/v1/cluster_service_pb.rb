@@ -24,12 +24,35 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :accelerators, :message, 11, "google.container.v1.AcceleratorConfig"
       optional :disk_type, :string, 12
       optional :min_cpu_platform, :string, 13
+      optional :workload_metadata_config, :message, 14, "google.container.v1.WorkloadMetadataConfig"
       repeated :taints, :message, 15, "google.container.v1.NodeTaint"
+      optional :sandbox_config, :message, 17, "google.container.v1.SandboxConfig"
+      optional :node_group, :string, 18
+      optional :reservation_affinity, :message, 19, "google.container.v1.ReservationAffinity"
       optional :shielded_instance_config, :message, 20, "google.container.v1.ShieldedInstanceConfig"
+      optional :boot_disk_kms_key, :string, 23
     end
     add_message "google.container.v1.ShieldedInstanceConfig" do
       optional :enable_secure_boot, :bool, 1
       optional :enable_integrity_monitoring, :bool, 2
+    end
+    add_message "google.container.v1.SandboxConfig" do
+      optional :type, :enum, 2, "google.container.v1.SandboxConfig.Type"
+    end
+    add_enum "google.container.v1.SandboxConfig.Type" do
+      value :UNSPECIFIED, 0
+      value :GVISOR, 1
+    end
+    add_message "google.container.v1.ReservationAffinity" do
+      optional :consume_reservation_type, :enum, 1, "google.container.v1.ReservationAffinity.Type"
+      optional :key, :string, 2
+      repeated :values, :string, 3
+    end
+    add_enum "google.container.v1.ReservationAffinity.Type" do
+      value :UNSPECIFIED, 0
+      value :NO_RESERVATION, 1
+      value :ANY_RESERVATION, 2
+      value :SPECIFIC_RESERVATION, 3
     end
     add_message "google.container.v1.NodeTaint" do
       optional :key, :string, 1
@@ -59,6 +82,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :kubernetes_dashboard, :message, 3, "google.container.v1.KubernetesDashboard"
       optional :network_policy_config, :message, 4, "google.container.v1.NetworkPolicyConfig"
       optional :cloud_run_config, :message, 7, "google.container.v1.CloudRunConfig"
+      optional :dns_cache_config, :message, 8, "google.container.v1.DnsCacheConfig"
+      optional :config_connector_config, :message, 10, "google.container.v1.ConfigConnectorConfig"
     end
     add_message "google.container.v1.HttpLoadBalancing" do
       optional :disabled, :bool, 1
@@ -72,12 +97,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.container.v1.NetworkPolicyConfig" do
       optional :disabled, :bool, 1
     end
+    add_message "google.container.v1.DnsCacheConfig" do
+      optional :enabled, :bool, 1
+    end
+    add_message "google.container.v1.PrivateClusterMasterGlobalAccessConfig" do
+      optional :enabled, :bool, 1
+    end
     add_message "google.container.v1.PrivateClusterConfig" do
       optional :enable_private_nodes, :bool, 1
       optional :enable_private_endpoint, :bool, 2
       optional :master_ipv4_cidr_block, :string, 3
       optional :private_endpoint, :string, 4
       optional :public_endpoint, :string, 5
+      optional :peering_name, :string, 7
+      optional :master_global_access_config, :message, 8, "google.container.v1.PrivateClusterMasterGlobalAccessConfig"
     end
     add_message "google.container.v1.AuthenticatorGroupsConfig" do
       optional :enabled, :bool, 1
@@ -85,6 +118,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.container.v1.CloudRunConfig" do
       optional :disabled, :bool, 1
+      optional :load_balancer_type, :enum, 3, "google.container.v1.CloudRunConfig.LoadBalancerType"
+    end
+    add_enum "google.container.v1.CloudRunConfig.LoadBalancerType" do
+      value :LOAD_BALANCER_TYPE_UNSPECIFIED, 0
+      value :LOAD_BALANCER_TYPE_EXTERNAL, 1
+      value :LOAD_BALANCER_TYPE_INTERNAL, 2
+    end
+    add_message "google.container.v1.ConfigConnectorConfig" do
+      optional :enabled, :bool, 1
     end
     add_message "google.container.v1.MasterAuthorizedNetworksConfig" do
       optional :enabled, :bool, 1
@@ -121,6 +163,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :node_ipv4_cidr_block, :string, 10
       optional :services_ipv4_cidr_block, :string, 11
       optional :tpu_ipv4_cidr_block, :string, 13
+      optional :use_routes, :bool, 15
     end
     add_message "google.container.v1.Cluster" do
       optional :name, :string, 1
@@ -153,6 +196,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :private_cluster_config, :message, 37, "google.container.v1.PrivateClusterConfig"
       optional :database_encryption, :message, 38, "google.container.v1.DatabaseEncryption"
       optional :vertical_pod_autoscaling, :message, 39, "google.container.v1.VerticalPodAutoscaling"
+      optional :shielded_nodes, :message, 40, "google.container.v1.ShieldedNodes"
+      optional :release_channel, :message, 41, "google.container.v1.ReleaseChannel"
+      optional :workload_identity_config, :message, 43, "google.container.v1.WorkloadIdentityConfig"
       optional :self_link, :string, 100
       optional :zone, :string, 101
       optional :endpoint, :string, 102
@@ -188,6 +234,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :desired_node_pool_id, :string, 7
       optional :desired_image_type, :string, 8
       optional :desired_database_encryption, :message, 46, "google.container.v1.DatabaseEncryption"
+      optional :desired_workload_identity_config, :message, 47, "google.container.v1.WorkloadIdentityConfig"
+      optional :desired_shielded_nodes, :message, 48, "google.container.v1.ShieldedNodes"
       optional :desired_node_pool_autoscaling, :message, 9, "google.container.v1.NodePoolAutoscaling"
       repeated :desired_locations, :string, 10
       optional :desired_master_authorized_networks_config, :message, 12, "google.container.v1.MasterAuthorizedNetworksConfig"
@@ -196,7 +244,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :desired_logging_service, :string, 19
       optional :desired_resource_usage_export_config, :message, 21, "google.container.v1.ResourceUsageExportConfig"
       optional :desired_vertical_pod_autoscaling, :message, 22, "google.container.v1.VerticalPodAutoscaling"
+      optional :desired_private_cluster_config, :message, 25, "google.container.v1.PrivateClusterConfig"
       optional :desired_intra_node_visibility_config, :message, 26, "google.container.v1.IntraNodeVisibilityConfig"
+      optional :desired_default_snat_status, :message, 28, "google.container.v1.DefaultSnatStatus"
+      optional :desired_release_channel, :message, 31, "google.container.v1.ReleaseChannel"
       optional :desired_master_version, :string, 100
     end
     add_message "google.container.v1.Operation" do
@@ -211,6 +262,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :location, :string, 9
       optional :start_time, :string, 10
       optional :end_time, :string, 11
+      optional :progress, :message, 12, "google.container.v1.OperationProgress"
       repeated :cluster_conditions, :message, 13, "google.container.v1.StatusCondition"
       repeated :nodepool_conditions, :message, 14, "google.container.v1.StatusCondition"
     end
@@ -240,6 +292,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SET_NETWORK_POLICY, 15
       value :SET_MAINTENANCE_POLICY, 16
     end
+    add_message "google.container.v1.OperationProgress" do
+      optional :name, :string, 1
+      optional :status, :enum, 2, "google.container.v1.Operation.Status"
+      repeated :metrics, :message, 3, "google.container.v1.OperationProgress.Metric"
+      repeated :stages, :message, 4, "google.container.v1.OperationProgress"
+    end
+    add_message "google.container.v1.OperationProgress.Metric" do
+      optional :name, :string, 1
+      oneof :value do
+        optional :int_value, :int64, 2
+        optional :double_value, :double, 3
+        optional :string_value, :string, 4
+      end
+    end
     add_message "google.container.v1.CreateClusterRequest" do
       optional :project_id, :string, 1
       optional :zone, :string, 2
@@ -267,6 +333,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :node_version, :string, 5
       optional :image_type, :string, 6
       optional :name, :string, 8
+      repeated :locations, :string, 13
+      optional :workload_metadata_config, :message, 14, "google.container.v1.WorkloadMetadataConfig"
+      optional :upgrade_settings, :message, 15, "google.container.v1.NodePool.UpgradeSettings"
     end
     add_message "google.container.v1.SetNodePoolAutoscalingRequest" do
       optional :project_id, :string, 1
@@ -372,6 +441,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :default_image_type, :string, 4
       repeated :valid_image_types, :string, 5
       repeated :valid_master_versions, :string, 6
+      repeated :channels, :message, 9, "google.container.v1.ServerConfig.ReleaseChannelConfig"
+    end
+    add_message "google.container.v1.ServerConfig.ReleaseChannelConfig" do
+      optional :channel, :enum, 1, "google.container.v1.ReleaseChannel.Channel"
+      optional :default_version, :string, 2
+      repeated :valid_versions, :string, 4
     end
     add_message "google.container.v1.CreateNodePoolRequest" do
       optional :project_id, :string, 1
@@ -404,6 +479,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :config, :message, 2, "google.container.v1.NodeConfig"
       optional :initial_node_count, :int32, 3
+      repeated :locations, :string, 13
       optional :self_link, :string, 100
       optional :version, :string, 101
       repeated :instance_group_urls, :string, 102
@@ -414,6 +490,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :max_pods_constraint, :message, 6, "google.container.v1.MaxPodsConstraint"
       repeated :conditions, :message, 105, "google.container.v1.StatusCondition"
       optional :pod_ipv4_cidr_size, :int32, 7
+      optional :upgrade_settings, :message, 107, "google.container.v1.NodePool.UpgradeSettings"
+    end
+    add_message "google.container.v1.NodePool.UpgradeSettings" do
+      optional :max_surge, :int32, 1
+      optional :max_unavailable, :int32, 2
     end
     add_enum "google.container.v1.NodePool.Status" do
       value :STATUS_UNSPECIFIED, 0
@@ -491,6 +572,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.container.v1.AutoprovisioningNodePoolDefaults" do
       repeated :oauth_scopes, :string, 1
       optional :service_account, :string, 2
+      optional :upgrade_settings, :message, 3, "google.container.v1.NodePool.UpgradeSettings"
+      optional :management, :message, 4, "google.container.v1.NodeManagement"
+      optional :min_cpu_platform, :string, 5
+      optional :disk_size_gb, :int32, 6
+      optional :disk_type, :string, 7
+      optional :shielded_instance_config, :message, 8, "google.container.v1.ShieldedInstanceConfig"
+      optional :boot_disk_kms_key, :string, 9
     end
     add_message "google.container.v1.ResourceLimit" do
       optional :resource_type, :string, 1
@@ -535,6 +623,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :accelerator_count, :int64, 1
       optional :accelerator_type, :string, 2
     end
+    add_message "google.container.v1.WorkloadMetadataConfig" do
+      optional :mode, :enum, 2, "google.container.v1.WorkloadMetadataConfig.Mode"
+    end
+    add_enum "google.container.v1.WorkloadMetadataConfig.Mode" do
+      value :MODE_UNSPECIFIED, 0
+      value :GCE_METADATA, 1
+      value :GKE_METADATA, 2
+    end
     add_message "google.container.v1.SetNetworkPolicyRequest" do
       optional :project_id, :string, 1
       optional :zone, :string, 2
@@ -565,12 +661,54 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :network, :string, 1
       optional :subnetwork, :string, 2
       optional :enable_intra_node_visibility, :bool, 5
+      optional :default_snat_status, :message, 7, "google.container.v1.DefaultSnatStatus"
+    end
+    add_message "google.container.v1.GetOpenIDConfigRequest" do
+      optional :parent, :string, 1
+    end
+    add_message "google.container.v1.GetOpenIDConfigResponse" do
+      optional :issuer, :string, 1
+      optional :jwks_uri, :string, 2
+      repeated :response_types_supported, :string, 3
+      repeated :subject_types_supported, :string, 4
+      repeated :id_token_signing_alg_values_supported, :string, 5
+      repeated :claims_supported, :string, 6
+      repeated :grant_types, :string, 7
+    end
+    add_message "google.container.v1.GetJSONWebKeysRequest" do
+      optional :parent, :string, 1
+    end
+    add_message "google.container.v1.Jwk" do
+      optional :kty, :string, 1
+      optional :alg, :string, 2
+      optional :use, :string, 3
+      optional :kid, :string, 4
+      optional :n, :string, 5
+      optional :e, :string, 6
+      optional :x, :string, 7
+      optional :y, :string, 8
+      optional :crv, :string, 9
+    end
+    add_message "google.container.v1.GetJSONWebKeysResponse" do
+      repeated :keys, :message, 1, "google.container.v1.Jwk"
+    end
+    add_message "google.container.v1.ReleaseChannel" do
+      optional :channel, :enum, 1, "google.container.v1.ReleaseChannel.Channel"
+    end
+    add_enum "google.container.v1.ReleaseChannel.Channel" do
+      value :UNSPECIFIED, 0
+      value :RAPID, 1
+      value :REGULAR, 2
+      value :STABLE, 3
     end
     add_message "google.container.v1.IntraNodeVisibilityConfig" do
       optional :enabled, :bool, 1
     end
     add_message "google.container.v1.MaxPodsConstraint" do
       optional :max_pods_per_node, :int64, 1
+    end
+    add_message "google.container.v1.WorkloadIdentityConfig" do
+      optional :workload_pool, :string, 2
     end
     add_message "google.container.v1.DatabaseEncryption" do
       optional :state, :enum, 2, "google.container.v1.DatabaseEncryption.State"
@@ -624,6 +762,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.container.v1.VerticalPodAutoscaling" do
       optional :enabled, :bool, 1
     end
+    add_message "google.container.v1.DefaultSnatStatus" do
+      optional :disabled, :bool, 1
+    end
+    add_message "google.container.v1.ShieldedNodes" do
+      optional :enabled, :bool, 1
+    end
   end
 end
 
@@ -633,6 +777,10 @@ module Google
       module V1
         NodeConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodeConfig").msgclass
         ShieldedInstanceConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ShieldedInstanceConfig").msgclass
+        SandboxConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.SandboxConfig").msgclass
+        SandboxConfig::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.SandboxConfig.Type").enummodule
+        ReservationAffinity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ReservationAffinity").msgclass
+        ReservationAffinity::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ReservationAffinity.Type").enummodule
         NodeTaint = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodeTaint").msgclass
         NodeTaint::Effect = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodeTaint.Effect").enummodule
         MasterAuth = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.MasterAuth").msgclass
@@ -642,9 +790,13 @@ module Google
         HorizontalPodAutoscaling = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.HorizontalPodAutoscaling").msgclass
         KubernetesDashboard = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.KubernetesDashboard").msgclass
         NetworkPolicyConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NetworkPolicyConfig").msgclass
+        DnsCacheConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.DnsCacheConfig").msgclass
+        PrivateClusterMasterGlobalAccessConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.PrivateClusterMasterGlobalAccessConfig").msgclass
         PrivateClusterConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.PrivateClusterConfig").msgclass
         AuthenticatorGroupsConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.AuthenticatorGroupsConfig").msgclass
         CloudRunConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.CloudRunConfig").msgclass
+        CloudRunConfig::LoadBalancerType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.CloudRunConfig.LoadBalancerType").enummodule
+        ConfigConnectorConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ConfigConnectorConfig").msgclass
         MasterAuthorizedNetworksConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.MasterAuthorizedNetworksConfig").msgclass
         MasterAuthorizedNetworksConfig::CidrBlock = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.MasterAuthorizedNetworksConfig.CidrBlock").msgclass
         LegacyAbac = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.LegacyAbac").msgclass
@@ -658,6 +810,8 @@ module Google
         Operation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.Operation").msgclass
         Operation::Status = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.Operation.Status").enummodule
         Operation::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.Operation.Type").enummodule
+        OperationProgress = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.OperationProgress").msgclass
+        OperationProgress::Metric = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.OperationProgress.Metric").msgclass
         CreateClusterRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.CreateClusterRequest").msgclass
         GetClusterRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.GetClusterRequest").msgclass
         UpdateClusterRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.UpdateClusterRequest").msgclass
@@ -679,11 +833,13 @@ module Google
         ListOperationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ListOperationsResponse").msgclass
         GetServerConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.GetServerConfigRequest").msgclass
         ServerConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ServerConfig").msgclass
+        ServerConfig::ReleaseChannelConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ServerConfig.ReleaseChannelConfig").msgclass
         CreateNodePoolRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.CreateNodePoolRequest").msgclass
         DeleteNodePoolRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.DeleteNodePoolRequest").msgclass
         ListNodePoolsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ListNodePoolsRequest").msgclass
         GetNodePoolRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.GetNodePoolRequest").msgclass
         NodePool = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodePool").msgclass
+        NodePool::UpgradeSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodePool.UpgradeSettings").msgclass
         NodePool::Status = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodePool.Status").enummodule
         NodeManagement = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodeManagement").msgclass
         AutoUpgradeOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.AutoUpgradeOptions").msgclass
@@ -705,13 +861,23 @@ module Google
         StartIPRotationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.StartIPRotationRequest").msgclass
         CompleteIPRotationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.CompleteIPRotationRequest").msgclass
         AcceleratorConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.AcceleratorConfig").msgclass
+        WorkloadMetadataConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.WorkloadMetadataConfig").msgclass
+        WorkloadMetadataConfig::Mode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.WorkloadMetadataConfig.Mode").enummodule
         SetNetworkPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.SetNetworkPolicyRequest").msgclass
         SetMaintenancePolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.SetMaintenancePolicyRequest").msgclass
         StatusCondition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.StatusCondition").msgclass
         StatusCondition::Code = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.StatusCondition.Code").enummodule
         NetworkConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NetworkConfig").msgclass
+        GetOpenIDConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.GetOpenIDConfigRequest").msgclass
+        GetOpenIDConfigResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.GetOpenIDConfigResponse").msgclass
+        GetJSONWebKeysRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.GetJSONWebKeysRequest").msgclass
+        Jwk = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.Jwk").msgclass
+        GetJSONWebKeysResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.GetJSONWebKeysResponse").msgclass
+        ReleaseChannel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ReleaseChannel").msgclass
+        ReleaseChannel::Channel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ReleaseChannel.Channel").enummodule
         IntraNodeVisibilityConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.IntraNodeVisibilityConfig").msgclass
         MaxPodsConstraint = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.MaxPodsConstraint").msgclass
+        WorkloadIdentityConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.WorkloadIdentityConfig").msgclass
         DatabaseEncryption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.DatabaseEncryption").msgclass
         DatabaseEncryption::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.DatabaseEncryption.State").enummodule
         ListUsableSubnetworksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ListUsableSubnetworksRequest").msgclass
@@ -723,6 +889,8 @@ module Google
         ResourceUsageExportConfig::BigQueryDestination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ResourceUsageExportConfig.BigQueryDestination").msgclass
         ResourceUsageExportConfig::ConsumptionMeteringConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ResourceUsageExportConfig.ConsumptionMeteringConfig").msgclass
         VerticalPodAutoscaling = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.VerticalPodAutoscaling").msgclass
+        DefaultSnatStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.DefaultSnatStatus").msgclass
+        ShieldedNodes = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ShieldedNodes").msgclass
       end
     end
   end

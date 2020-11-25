@@ -281,9 +281,9 @@ module Google
             #     This field has been deprecated and replaced by the parent field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides, or "-" for all zones.
-            #     This field has been deprecated and replaced by the parent field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides, or "-" for all zones. This field has been deprecated and
+            #     replaced by the parent field.
             #   @param parent [::String]
             #     The parent (project and location) where the clusters will be listed.
             #     Specified in the format `projects/*/locations/*`.
@@ -358,9 +358,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster to retrieve.
             #     This field has been deprecated and replaced by the name field.
@@ -418,7 +418,8 @@ module Google
             # Compute Engine instances.
             #
             # By default, the cluster is created in the project's
-            # [default network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks).
+            # [default
+            # network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks).
             #
             # One firewall is added for the cluster. After cluster creation,
             # the Kubelet creates routes for each node to allow the containers
@@ -449,12 +450,12 @@ module Google
             #     This field has been deprecated and replaced by the parent field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the parent field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the parent
+            #     field.
             #   @param cluster [::Google::Cloud::Container::V1::Cluster, ::Hash]
             #     Required. A [cluster
-            #     resource](https://cloud.google.com/container-engine/reference/rest/v1/projects.zones.clusters)
+            #     resource](https://cloud.google.com/container-engine/reference/rest/v1/projects.locations.clusters)
             #   @param parent [::String]
             #     The parent (project and location) where the cluster will be created.
             #     Specified in the format `projects/*/locations/*`.
@@ -528,9 +529,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
@@ -598,7 +599,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, name: nil)
+            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, name: nil, locations: nil, workload_metadata_config: nil, upgrade_settings: nil)
             #   Pass arguments to `update_node_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -609,9 +610,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
@@ -636,6 +637,16 @@ module Google
             #     The name (project, location, cluster, node pool) of the node pool to
             #     update. Specified in the format
             #     `projects/*/locations/*/clusters/*/nodePools/*`.
+            #   @param locations [::Array<::String>]
+            #     The desired list of Google Compute Engine
+            #     [zones](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     node pool's nodes should be located. Changing the locations for a node pool
+            #     will result in nodes being either created or removed from the node pool,
+            #     depending on whether locations are being added or removed.
+            #   @param workload_metadata_config [::Google::Cloud::Container::V1::WorkloadMetadataConfig, ::Hash]
+            #     The desired workload metadata config for the node pool.
+            #   @param upgrade_settings [::Google::Cloud::Container::V1::NodePool::UpgradeSettings, ::Hash]
+            #     Upgrade settings control disruption and speed of the upgrade.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Container::V1::Operation]
@@ -706,9 +717,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
@@ -791,18 +802,24 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
             #   @param logging_service [::String]
-            #     Required. The logging service the cluster should use to write metrics.
+            #     Required. The logging service the cluster should use to write logs.
             #     Currently available options:
             #
-            #     * "logging.googleapis.com" - the Google Cloud Logging service
-            #     * "none" - no metrics will be exported from the cluster
+            #     * `logging.googleapis.com/kubernetes` - The Cloud Logging
+            #     service with a Kubernetes-native resource model
+            #     * `logging.googleapis.com` - The legacy Cloud Logging service (no longer
+            #       available as of GKE 1.15).
+            #     * `none` - no logs will be exported from the cluster.
+            #
+            #     If left as an empty string,`logging.googleapis.com/kubernetes` will be
+            #     used for GKE 1.14+ or `logging.googleapis.com` for earlier versions.
             #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to set logging.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
@@ -876,9 +893,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
@@ -886,10 +903,14 @@ module Google
             #     Required. The monitoring service the cluster should use to write metrics.
             #     Currently available options:
             #
-            #     * "monitoring.googleapis.com/kubernetes" - the Google Cloud Monitoring
-            #     service with Kubernetes-native resource model
-            #     * "monitoring.googleapis.com" - the Google Cloud Monitoring service
-            #     * "none" - no metrics will be exported from the cluster
+            #     * "monitoring.googleapis.com/kubernetes" - The Cloud Monitoring
+            #     service with a Kubernetes-native resource model
+            #     * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no
+            #       longer available as of GKE 1.15).
+            #     * `none` - No metrics will be exported from the cluster.
+            #
+            #     If left as an empty string,`monitoring.googleapis.com/kubernetes` will be
+            #     used for GKE 1.14+ or `monitoring.googleapis.com` for earlier versions.
             #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to set monitoring.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
@@ -963,9 +984,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
@@ -1023,6 +1044,9 @@ module Google
 
             ##
             # Sets the locations for a specific cluster.
+            # Deprecated. Use
+            # [projects.locations.clusters.update](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters/update)
+            # instead.
             #
             # @overload set_locations(request, options = nil)
             #   Pass arguments to `set_locations` via a request object, either of type
@@ -1045,18 +1069,18 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
             #   @param locations [::Array<::String>]
             #     Required. The desired list of Google Compute Engine
-            #     [zones](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
-            #     should be located. Changing the locations a cluster is in will result
-            #     in nodes being either created or removed from the cluster, depending on
-            #     whether locations are being added or removed.
+            #     [zones](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster's nodes should be located. Changing the locations a cluster is in
+            #     will result in nodes being either created or removed from the cluster,
+            #     depending on whether locations are being added or removed.
             #
             #     This list must always include the cluster's primary zone.
             #   @param name [::String]
@@ -1132,9 +1156,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
@@ -1224,9 +1248,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
@@ -1315,9 +1339,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster to delete.
             #     This field has been deprecated and replaced by the name field.
@@ -1394,8 +1418,9 @@ module Google
             #     This field has been deprecated and replaced by the parent field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for, or `-` for
-            #     all zones. This field has been deprecated and replaced by the parent field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) to return
+            #     operations for, or `-` for all zones. This field has been deprecated and
+            #     replaced by the parent field.
             #   @param parent [::String]
             #     The parent (project and location) where the operations will be listed.
             #     Specified in the format `projects/*/locations/*`.
@@ -1470,9 +1495,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param operation_id [::String]
             #     Deprecated. The server-assigned `name` of the operation.
             #     This field has been deprecated and replaced by the name field.
@@ -1549,8 +1574,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     operation resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param operation_id [::String]
             #     Deprecated. The server-assigned `name` of the operation.
             #     This field has been deprecated and replaced by the name field.
@@ -1627,8 +1653,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) to return
+            #     operations for. This field has been deprecated and replaced by the name
+            #     field.
             #   @param name [::String]
             #     The name (project and location) of the server config to get,
             #     specified in the format `projects/*/locations/*`.
@@ -1679,6 +1706,76 @@ module Google
             end
 
             ##
+            # Gets the public component of the cluster signing keys in
+            # JSON Web Key format.
+            # This API is not yet intended for general use, and is not available for all
+            # clusters.
+            #
+            # @overload get_json_web_keys(request, options = nil)
+            #   Pass arguments to `get_json_web_keys` via a request object, either of type
+            #   {::Google::Cloud::Container::V1::GetJSONWebKeysRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Container::V1::GetJSONWebKeysRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_json_web_keys(parent: nil)
+            #   Pass arguments to `get_json_web_keys` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     The cluster (project, location, cluster id) to get keys for. Specified in
+            #     the format `projects/*/locations/*/clusters/*`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Container::V1::GetJSONWebKeysResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Container::V1::GetJSONWebKeysResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def get_json_web_keys request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1::GetJSONWebKeysRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_json_web_keys.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Container::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_json_web_keys.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_json_web_keys.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cluster_manager_stub.call_rpc :get_json_web_keys, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Lists the node pools for a cluster.
             #
             # @overload list_node_pools(request, options = nil)
@@ -1702,9 +1799,9 @@ module Google
             #     This field has been deprecated and replaced by the parent field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the parent field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the parent
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the parent field.
@@ -1781,9 +1878,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the name field.
@@ -1864,9 +1961,9 @@ module Google
             #     This field has been deprecated and replaced by the parent field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the parent field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the parent
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the parent field.
@@ -1946,9 +2043,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the name field.
@@ -2030,9 +2127,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster to rollback.
             #     This field has been deprecated and replaced by the name field.
@@ -2113,9 +2210,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster to update.
             #     This field has been deprecated and replaced by the name field.
@@ -2198,9 +2295,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the name field.
@@ -2211,7 +2308,7 @@ module Google
             #     used to detect conflicts. The fingerprint is initially generated by
             #     Kubernetes Engine and changes after every request to modify or update
             #     labels. You must always provide an up-to-date fingerprint hash when
-            #     updating or changing labels. Make a <code>get()</code> request to the
+            #     updating or changing labels. Make a `get()` request to the
             #     resource to get the latest fingerprint.
             #   @param name [::String]
             #     The name (project, location, cluster id) of the cluster to set labels.
@@ -2286,9 +2383,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster to update.
             #     This field has been deprecated and replaced by the name field.
@@ -2367,9 +2464,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the name field.
@@ -2448,9 +2545,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the name field.
@@ -2527,9 +2624,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster to update.
             #     This field has been deprecated and replaced by the name field.
@@ -2612,9 +2709,9 @@ module Google
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
-            #     This field has been deprecated and replaced by the name field.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides. This field has been deprecated and replaced by the name
+            #     field.
             #   @param cluster_id [::String]
             #     Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the name field.
@@ -2692,8 +2789,8 @@ module Google
             #     number](https://support.google.com/cloud/answer/6158840).
             #   @param zone [::String]
             #     Required. The name of the Google Compute Engine
-            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-            #     resides.
+            #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+            #     cluster resides.
             #   @param cluster_id [::String]
             #     Required. The name of the cluster to update.
             #   @param maintenance_policy [::Google::Cloud::Container::V1::MaintenancePolicy, ::Hash]
@@ -3052,6 +3149,11 @@ module Google
                 #
                 attr_reader :get_server_config
                 ##
+                # RPC-specific configuration for `get_json_web_keys`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_json_web_keys
+                ##
                 # RPC-specific configuration for `list_node_pools`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3158,6 +3260,8 @@ module Google
                   @cancel_operation = ::Gapic::Config::Method.new cancel_operation_config
                   get_server_config_config = parent_rpcs&.get_server_config if parent_rpcs&.respond_to? :get_server_config
                   @get_server_config = ::Gapic::Config::Method.new get_server_config_config
+                  get_json_web_keys_config = parent_rpcs&.get_json_web_keys if parent_rpcs&.respond_to? :get_json_web_keys
+                  @get_json_web_keys = ::Gapic::Config::Method.new get_json_web_keys_config
                   list_node_pools_config = parent_rpcs&.list_node_pools if parent_rpcs&.respond_to? :list_node_pools
                   @list_node_pools = ::Gapic::Config::Method.new list_node_pools_config
                   get_node_pool_config = parent_rpcs&.get_node_pool if parent_rpcs&.respond_to? :get_node_pool
