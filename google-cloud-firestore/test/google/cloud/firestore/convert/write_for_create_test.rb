@@ -26,7 +26,7 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
   it "basic create" do
     data = { a: 1 }
 
-    expected_writes = Google::Cloud::Firestore::V1::Write.new(
+    expected_write = Google::Cloud::Firestore::V1::Write.new(
       update: Google::Cloud::Firestore::V1::Document.new(
         name: document_path,
         fields: {
@@ -36,15 +36,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
       current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
     )
 
-    actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+    actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-    _(actual_writes).must_equal expected_writes
+    _(actual_write).must_equal expected_write
   end
 
   it "complex create" do
     data = { a: [1, 2.5], b: { c: ["three", { d: true }] } }
 
-    expected_writes = Google::Cloud::Firestore::V1::Write.new(
+    expected_write = Google::Cloud::Firestore::V1::Write.new(
       update: Google::Cloud::Firestore::V1::Document.new(
         name: document_path,
         fields: {
@@ -65,28 +65,28 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
       current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
     )
 
-    actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+    actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-    _(actual_writes).must_equal expected_writes
+    _(actual_write).must_equal expected_write
   end
 
   it "creating empty data" do
     data = {}
 
-    expected_writes = Google::Cloud::Firestore::V1::Write.new(
+    expected_write = Google::Cloud::Firestore::V1::Write.new(
       update: Google::Cloud::Firestore::V1::Document.new(name: document_path),
       current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
     )
 
-    actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+    actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-    _(actual_writes).must_equal expected_writes
+    _(actual_write).must_equal expected_write
   end
 
   it "don't split on dots" do
     data = { "a.b" => { "c.d" => 1 }, "e" => 2 }
 
-    expected_writes = Google::Cloud::Firestore::V1::Write.new(
+    expected_write = Google::Cloud::Firestore::V1::Write.new(
       update: Google::Cloud::Firestore::V1::Document.new(
         name: document_path,
         fields: {
@@ -99,15 +99,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
       current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
     )
 
-    actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+    actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-    _(actual_writes).must_equal expected_writes
+    _(actual_write).must_equal expected_write
   end
 
   it "non-alpha characters in map keys" do
     data = { "*" => { "." => 1 }, "~" => 2 }
 
-    expected_writes = Google::Cloud::Firestore::V1::Write.new(
+    expected_write = Google::Cloud::Firestore::V1::Write.new(
       update: Google::Cloud::Firestore::V1::Document.new(
         name: document_path,
         fields: {
@@ -120,9 +120,9 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
       current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
     )
 
-    actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+    actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-    _(actual_writes).must_equal expected_writes
+    _(actual_write).must_equal expected_write
   end
 
   describe :field_delete do
@@ -140,7 +140,7 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "SERVER_TIME alone" do
       data = { a: field_server_time }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: "projects/projectID/databases/(default)/documents/C/d"
         ),
@@ -153,15 +153,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "SERVER_TIME with data" do
       data = { a: 1, b: field_server_time }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: document_path,
           fields: {
@@ -179,15 +179,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "multiple SERVER_TIME fields" do
       data = { a: 1, b: field_server_time, c: { d: field_server_time } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
           update: Google::Cloud::Firestore::V1::Document.new(
             name: document_path,
             fields: {
@@ -207,15 +207,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
           ]
         )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "nested SERVER_TIME field" do
       data = { a: 1, b: { c: field_server_time } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: document_path,
           fields: {
@@ -233,9 +233,9 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "SERVER_TIME cannot be anywhere inside an array value" do
@@ -263,7 +263,7 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "ARRAY_UNION alone" do
       data = { a: field_array_union }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: "projects/projectID/databases/(default)/documents/C/d"
         ),
@@ -282,15 +282,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "ARRAY_UNION with data" do
       data = { a: 1, b: field_array_union }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: document_path,
           fields: {
@@ -314,15 +314,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "multiple ARRAY_UNION fields" do
       data = { a: 1, b: field_array_union, c: { d: field_array_union } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
           update: Google::Cloud::Firestore::V1::Document.new(
             name: document_path,
             fields: {
@@ -354,15 +354,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
           ]
         )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "nested ARRAY_UNION field" do
       data = { a: 1, b: { c: field_array_union } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: document_path,
           fields: {
@@ -386,9 +386,9 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "ARRAY_UNION cannot be anywhere inside an array value" do
@@ -416,7 +416,7 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "ARRAY_DELETE alone" do
       data = { a: field_array_delete }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: "projects/projectID/databases/(default)/documents/C/d"
         ),
@@ -435,15 +435,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "ARRAY_DELETE with data" do
       data = { a: 1, b: field_array_delete }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: document_path,
           fields: {
@@ -467,15 +467,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "multiple ARRAY_DELETE fields" do
       data = { a: 1, b: field_array_delete, c: { d: field_array_delete } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: document_path,
           fields: {
@@ -507,15 +507,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "nested ARRAY_DELETE field" do
       data = { a: 1, b: { c: field_array_delete } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: document_path,
           fields: {
@@ -539,9 +539,9 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "ARRAY_DELETE cannot be anywhere inside an array value" do
@@ -569,7 +569,7 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "INCREMENT alone" do
       data = { a: field_increment }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: "projects/projectID/databases/(default)/documents/C/d"
         ),
@@ -582,15 +582,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "INCREMENT with data" do
       data = { a: 1, b: field_increment }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: document_path,
           fields: {
@@ -608,15 +608,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "multiple INCREMENT fields" do
       data = { a: 1, b: field_increment, c: { d: field_increment } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: document_path,
           fields: {
@@ -636,15 +636,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "nested INCREMENT field" do
       data = { a: 1, b: { c: field_increment } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: document_path,
           fields: {
@@ -662,9 +662,9 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "INCREMENT cannot be anywhere inside an array value" do
@@ -692,7 +692,7 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "MAXIMUM alone" do
       data = { a: field_maximum }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: "projects/projectID/databases/(default)/documents/C/d"
         ),
@@ -705,15 +705,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "MAXIMUM with data" do
       data = { a: 1, b: field_maximum }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: document_path,
           fields: {
@@ -731,15 +731,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "multiple MAXIMUM fields" do
       data = { a: 1, b: field_maximum, c: { d: field_maximum } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: document_path,
           fields: {
@@ -759,15 +759,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "nested MAXIMUM field" do
       data = { a: 1, b: { c: field_maximum } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: document_path,
           fields: {
@@ -783,9 +783,9 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "MAXIMUM cannot be anywhere inside an array value" do
@@ -813,7 +813,7 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
     it "MINIMUM alone" do
       data = { a: field_minimum }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: "projects/projectID/databases/(default)/documents/C/d"
         ),
@@ -826,15 +826,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: false)
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "MINIMUM with data" do
       data = { a: 1, b: field_minimum }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: document_path,
           fields: {
@@ -850,15 +850,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "multiple MINIMUM fields" do
       data = { a: 1, b: field_minimum, c: { d: field_minimum } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: document_path,
           fields: {
@@ -878,15 +878,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "nested MINIMUM field" do
       data = { a: 1, b: { c: field_minimum } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: document_path,
           fields: {
@@ -902,9 +902,9 @@ describe Google::Cloud::Firestore::Convert, :write_for_create do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_create document_path, data
+      actual_write = Google::Cloud::Firestore::Convert.write_for_create document_path, data
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "MINIMUM cannot be anywhere inside an array value" do

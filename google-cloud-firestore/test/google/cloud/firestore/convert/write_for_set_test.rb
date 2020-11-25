@@ -26,7 +26,7 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
   it "basic set" do
     data = { a: 1 }
 
-    expected_writes = Google::Cloud::Firestore::V1::Write.new(
+    expected_write = Google::Cloud::Firestore::V1::Write.new(
       update: Google::Cloud::Firestore::V1::Document.new(
         name: document_path,
         fields: {
@@ -35,15 +35,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
       )
     )
 
-    actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data
+    actual_write = Google::Cloud::Firestore::Convert.write_for_set document_path, data
 
-    _(actual_writes).must_equal expected_writes
+    _(actual_write).must_equal expected_write
   end
 
   it "complex set" do
     data = { a: [1, 2.5], b: { c: ["three", { d: true }] } }
 
-    expected_writes = Google::Cloud::Firestore::V1::Write.new(
+    expected_write = Google::Cloud::Firestore::V1::Write.new(
       update: Google::Cloud::Firestore::V1::Document.new(
         name: document_path,
         fields: {
@@ -63,27 +63,27 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
       )
     )
 
-    actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data
+    actual_write = Google::Cloud::Firestore::Convert.write_for_set document_path, data
 
-    _(actual_writes).must_equal expected_writes
+    _(actual_write).must_equal expected_write
   end
 
   it "setting empty data" do
     data = {}
 
-    expected_writes = Google::Cloud::Firestore::V1::Write.new(
+    expected_write = Google::Cloud::Firestore::V1::Write.new(
       update: Google::Cloud::Firestore::V1::Document.new(name: document_path)
     )
 
-    actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data
+    actual_write = Google::Cloud::Firestore::Convert.write_for_set document_path, data
 
-    _(actual_writes).must_equal expected_writes
+    _(actual_write).must_equal expected_write
   end
 
   it "don't split on dots" do
     data = { "a.b" => { "c.d" => 1 }, "e" => 2 }
 
-    expected_writes = Google::Cloud::Firestore::V1::Write.new(
+    expected_write = Google::Cloud::Firestore::V1::Write.new(
       update: Google::Cloud::Firestore::V1::Document.new(
         name: "projects/projectID/databases/(default)/documents/C/d",
         fields: {
@@ -95,9 +95,9 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
       )
     )
 
-    actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data
+    actual_write = Google::Cloud::Firestore::Convert.write_for_set document_path, data
 
-    _(actual_writes).must_equal expected_writes
+    _(actual_write).must_equal expected_write
   end
 
   it "DELETE cannot be anywhere inside an array value" do
@@ -131,7 +131,7 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
     it "merges with a field" do
       data = { a: 1, b: 2 }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: "projects/projectID/databases/(default)/documents/C/d",
           fields: {
@@ -143,15 +143,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
         )
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: "a"
+      actual_write = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: "a"
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "merges with FieldPaths (array)" do
       data = { "*" => { "~" => true } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: "projects/projectID/databases/(default)/documents/C/d",
           fields: {
@@ -165,15 +165,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
         )
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: [["*", "~"]]
+      actual_write = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: [["*", "~"]]
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "merges with FieldPaths (FieldPath)" do
       data = { "*" => { "~" => true } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: "projects/projectID/databases/(default)/documents/C/d",
           fields: {
@@ -188,15 +188,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
       )
 
       merge_field_path = Google::Cloud::Firestore::FieldPath.new "*", "~"
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: merge_field_path
+      actual_write = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: merge_field_path
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "merges a nested field (array)" do
       data = { h: { g: 4, f: 5 } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: "projects/projectID/databases/(default)/documents/C/d",
           fields: {
@@ -210,15 +210,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
         )
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: [["h", "g"]]
+      actual_write = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: [["h", "g"]]
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "merges a nested field (string)" do
       data = { h: { g: 4, f: 5 } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: "projects/projectID/databases/(default)/documents/C/d",
           fields: {
@@ -232,15 +232,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
         )
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: ["h.g"]
+      actual_write = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: ["h.g"]
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "merges field when not a leaf" do
       data = { h: { g: 5, f: 6 }, e: 7 }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: "projects/projectID/databases/(default)/documents/C/d",
           fields: {
@@ -255,15 +255,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
         )
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: [:h]
+      actual_write = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: [:h]
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "does not write data when field is not provided" do
       data = { a: 1, b: field_server_time }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: "projects/projectID/databases/(default)/documents/C/d"
         ),
@@ -276,9 +276,9 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
         ]
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: :b
+      actual_write = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: :b
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "fields must all be present in data" do
@@ -304,7 +304,7 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
     it "merges all" do
       data = { a: 1, b: 2 }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: "projects/projectID/databases/(default)/documents/C/d",
           fields: {
@@ -317,15 +317,15 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
         )
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: true
+      actual_write = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: true
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "merges with nested fields" do
       data = { h: { g: 3, f: 4 } }
 
-      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+      expected_write = Google::Cloud::Firestore::V1::Write.new(
         update: Google::Cloud::Firestore::V1::Document.new(
           name: "projects/projectID/databases/(default)/documents/C/d",
           fields: {
@@ -340,9 +340,9 @@ describe Google::Cloud::Firestore::Convert, :write_for_set do
         )
       )
 
-      actual_writes = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: true
+      actual_write = Google::Cloud::Firestore::Convert.write_for_set document_path, data, merge: true
 
-      _(actual_writes).must_equal expected_writes
+      _(actual_write).must_equal expected_write
     end
 
     it "cannot be specified with empty data" do
