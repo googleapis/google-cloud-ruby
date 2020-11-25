@@ -560,19 +560,6 @@ module Google
             "`#{str}`"
           end
 
-          def transform_write doc_path, paths
-            field_transforms = paths.map do |field_path, field_value|
-              to_field_transform field_path, field_value
-            end
-
-            Google::Cloud::Firestore::V1::Write.new(
-              transform: Google::Cloud::Firestore::V1::DocumentTransform.new(
-                document:         doc_path,
-                field_transforms: field_transforms
-              )
-            )
-          end
-
           def to_field_transform field_path, field_value
             if field_value.type == :server_time
               Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
