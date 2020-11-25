@@ -503,7 +503,41 @@ describe Google::Cloud::Firestore::Convert, :write_for_update do
       _(actual_writes).must_equal expected_writes
     end
 
-    it "multiple SERVER_TIME fields" do
+    it "multiple SERVER_TIME nested without data" do
+      data = {
+        a: field_server_time,
+        b: { c: field_server_time },
+        "e.f" => field_server_time
+      }
+
+      expected_writes = Google::Cloud::Firestore::V1::Write.new(
+        update: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/projectID/databases/(default)/documents/C/d"
+        ),
+        update_mask: Google::Cloud::Firestore::V1::DocumentMask.new,
+        update_transforms: [
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "a",
+            set_to_server_value: :REQUEST_TIME
+          ),
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "e.f",
+            set_to_server_value: :REQUEST_TIME
+          ),
+          Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
+            field_path: "b.c",
+            set_to_server_value: :REQUEST_TIME
+          )
+        ],
+        current_document: Google::Cloud::Firestore::V1::Precondition.new(exists: true)
+      )
+
+      actual_writes = Google::Cloud::Firestore::Convert.write_for_update document_path, data
+
+      _(actual_writes).must_equal expected_writes
+    end
+
+    it "multiple SERVER_TIME with data" do
       data = { a: 1, b: field_server_time, c: { d: field_server_time } }
 
       expected_writes = Google::Cloud::Firestore::V1::Write.new(
@@ -532,7 +566,7 @@ describe Google::Cloud::Firestore::Convert, :write_for_update do
       _(actual_writes).must_equal expected_writes
     end
 
-    it "nested SERVER_TIME field" do
+    it "nested SERVER_TIME with data" do
       data = { a: 1, b: { c: field_server_time } }
 
       expected_writes = Google::Cloud::Firestore::V1::Write.new(
