@@ -476,6 +476,28 @@ module Google
         #     backup = job.backup
         #   end
         #
+        # @example Create backup with encryption config
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   database = spanner.database "my-instance", "my-database"
+        #
+        #   kms_key_name = "projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>"
+        #   encryption_config = { kms_key_name: kms_key_name }
+        #   job = database.create_backup "my-backup",
+        #                                Time.now + 36000,
+        #                                encryption_config: encryption_config
+        #
+        #   job.done? #=> false
+        #   job.reload! # API call
+        #   job.done? #=> true
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     backup = job.backup
+        #   end
+        #
         def create_backup backup_id, expire_time,
                           version_time: nil, encryption_config: nil
           ensure_service!
