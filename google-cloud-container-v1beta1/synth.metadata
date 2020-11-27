@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "e1d661afe7586d44a29821d44fe8a4cc6d0a34a9"
+        "sha": "943f7616a097ad82f7816636630d4f92bd4adfd1"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
-        "internalRef": "326288259"
+        "sha": "df4fd38d040c5c8a0869936205bca13fb64b2cff",
+        "internalRef": "344443035"
       }
     }
   ],
@@ -44,6 +44,7 @@
     "lib/google/cloud/container/v1beta1/cluster_manager.rb",
     "lib/google/cloud/container/v1beta1/cluster_manager/client.rb",
     "lib/google/cloud/container/v1beta1/cluster_manager/credentials.rb",
+    "lib/google/cloud/container/v1beta1/cluster_manager/paths.rb",
     "lib/google/cloud/container/v1beta1/version.rb",
     "lib/google/container/v1beta1/cluster_service_pb.rb",
     "lib/google/container/v1beta1/cluster_service_services_pb.rb",
@@ -51,8 +52,13 @@
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/container/v1beta1/cluster_service.rb",
+    "proto_docs/google/protobuf/any.rb",
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/protobuf/wrappers.rb",
+    "proto_docs/google/rpc/code.rb",
+    "proto_docs/google/rpc/status.rb",
+    "test/google/cloud/container/v1beta1/cluster_manager_paths_test.rb",
     "test/google/cloud/container/v1beta1/cluster_manager_test.rb",
     "test/helper.rb"
   ]
