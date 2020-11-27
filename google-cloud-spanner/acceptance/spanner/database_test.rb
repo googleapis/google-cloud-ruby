@@ -113,10 +113,12 @@ describe "Spanner Databases", :spanner do
     job2 = database.update statements: "ALTER DATABASE `#{database_id}` SET OPTIONS (version_retention_period = '#{retention_period}')"
     _(job2).must_be_kind_of Google::Cloud::Spanner::Database::Job
     _(job2).wont_be :done? unless emulator_enabled?
-    job2.wait_until_done!
+    job2_result = job2.wait_until_done!
 
     _(job2).must_be :done?
     _(job2.database).must_be :nil?
+    _(job2_result.metadata).wont_be :nil?
+    _(job2_result.metadata.throttled).must_equal false
 
     database.drop
     _(spanner.database(instance_id, database_id)).must_be :nil?
