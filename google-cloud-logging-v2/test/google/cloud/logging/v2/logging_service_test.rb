@@ -320,6 +320,7 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    resource_names = ["hello world"]
 
     list_logs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_logs, name
@@ -327,6 +328,7 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
       assert_equal "hello world", request.parent
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
+      assert_equal ["hello world"], request.resource_names
       refute_nil options
     end
 
@@ -337,37 +339,129 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_logs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_logs({ parent: parent, page_size: page_size, page_token: page_token, resource_names: resource_names }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_logs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_logs parent: parent, page_size: page_size, page_token: page_token, resource_names: resource_names do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_logs ::Google::Cloud::Logging::V2::ListLogsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_logs ::Google::Cloud::Logging::V2::ListLogsRequest.new(parent: parent, page_size: page_size, page_token: page_token, resource_names: resource_names) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_logs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_logs({ parent: parent, page_size: page_size, page_token: page_token, resource_names: resource_names }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_logs ::Google::Cloud::Logging::V2::ListLogsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_logs ::Google::Cloud::Logging::V2::ListLogsRequest.new(parent: parent, page_size: page_size, page_token: page_token, resource_names: resource_names), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
       assert_equal 5, list_logs_client_stub.call_rpc_count
+    end
+  end
+
+  def test_tail_log_entries
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Logging::V2::TailLogEntriesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a bidi streaming method.
+    resource_names = ["hello world"]
+    filter = "hello world"
+    buffer_window = {}
+
+    tail_log_entries_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :tail_log_entries, name
+      assert_kind_of Enumerable, request
+      refute_nil options
+      request
+    end
+
+    Gapic::ServiceStub.stub :new, tail_log_entries_client_stub do
+      # Create client
+      client = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use enumerable object with hash and protobuf object.
+      request_hash = { resource_names: resource_names, filter: filter, buffer_window: buffer_window }
+      request_proto = ::Google::Cloud::Logging::V2::TailLogEntriesRequest.new resource_names: resource_names, filter: filter, buffer_window: buffer_window
+      enum_input = [request_hash, request_proto].to_enum
+      client.tail_log_entries enum_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Logging::V2::TailLogEntriesResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common).
+      request_hash = { resource_names: resource_names, filter: filter, buffer_window: buffer_window }
+      request_proto = ::Google::Cloud::Logging::V2::TailLogEntriesRequest.new resource_names: resource_names, filter: filter, buffer_window: buffer_window
+      stream_input = Gapic::StreamInput.new
+      client.tail_log_entries stream_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Logging::V2::TailLogEntriesResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Use enumerable object with hash and protobuf object with options.
+      request_hash = { resource_names: resource_names, filter: filter, buffer_window: buffer_window }
+      request_proto = ::Google::Cloud::Logging::V2::TailLogEntriesRequest.new resource_names: resource_names, filter: filter, buffer_window: buffer_window
+      enum_input = [request_hash, request_proto].to_enum
+      client.tail_log_entries enum_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Logging::V2::TailLogEntriesResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common) with options.
+      request_hash = { resource_names: resource_names, filter: filter, buffer_window: buffer_window }
+      request_proto = ::Google::Cloud::Logging::V2::TailLogEntriesRequest.new resource_names: resource_names, filter: filter, buffer_window: buffer_window
+      stream_input = Gapic::StreamInput.new
+      client.tail_log_entries stream_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Logging::V2::TailLogEntriesResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Verify method calls
+      assert_equal 4, tail_log_entries_client_stub.call_rpc_count
+      tail_log_entries_client_stub.requests.each do |request|
+        request.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Logging::V2::TailLogEntriesRequest, r
+          assert_equal ["hello world"], r.resource_names
+          assert_equal "hello world", r.filter
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), r.buffer_window
+        end
+      end
     end
   end
 

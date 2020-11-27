@@ -105,6 +105,14 @@ module Google
                   retry_codes:   [4, 13, 14]
                 }
 
+                default_config.rpcs.tail_log_entries.timeout = 3600.0
+                default_config.rpcs.tail_log_entries.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   [4, 13, 14]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -425,6 +433,11 @@ module Google
             #         "billingAccounts/[BILLING_ACCOUNT_ID]"
             #         "folders/[FOLDER_ID]"
             #
+            #     May alternatively be one or more views
+            #       projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+            #       organization/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+            #       billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+            #       folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
             #
             #     Projects listed in the `project_ids` field are added to this list.
             #   @param filter [::String]
@@ -575,7 +588,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_logs(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_logs(parent: nil, page_size: nil, page_token: nil, resource_names: nil)
             #   Pass arguments to `list_logs` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -596,6 +609,18 @@ module Google
             #     preceding call to this method.  `pageToken` must be the value of
             #     `nextPageToken` from the previous response.  The values of other method
             #     parameters should be identical to those in the previous call.
+            #   @param resource_names [::Array<::String>]
+            #     Optional. The resource name that owns the logs:
+            #       projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+            #       organization/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+            #       billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+            #       folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+            #
+            #     To support legacy queries, it could also be:
+            #         "projects/[PROJECT_ID]"
+            #         "organizations/[ORGANIZATION_ID]"
+            #         "billingAccounts/[BILLING_ACCOUNT_ID]"
+            #         "folders/[FOLDER_ID]"
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Logging::V2::ListLogsResponse]
@@ -635,6 +660,59 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @logging_service_stub.call_rpc :list_logs, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Streaming read of log entries as they are ingested. Until the stream is
+            # terminated, it will continue reading logs.
+            #
+            # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::Logging::V2::TailLogEntriesRequest, ::Hash>]
+            #   An enumerable of {::Google::Cloud::Logging::V2::TailLogEntriesRequest} instances.
+            # @param options [::Gapic::CallOptions, ::Hash]
+            #   Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::Logging::V2::TailLogEntriesResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::Logging::V2::TailLogEntriesResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def tail_log_entries request, options = nil
+              unless request.is_a? ::Enumerable
+                raise ::ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
+                request = request.to_enum
+              end
+
+              request = request.lazy.map do |req|
+                ::Gapic::Protobuf.coerce req, to: ::Google::Cloud::Logging::V2::TailLogEntriesRequest
+              end
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.tail_log_entries.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Logging::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.tail_log_entries.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.tail_log_entries.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @logging_service_stub.call_rpc :tail_log_entries, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -803,6 +881,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_logs
+                ##
+                # RPC-specific configuration for `tail_log_entries`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :tail_log_entries
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -816,6 +899,8 @@ module Google
                   @list_monitored_resource_descriptors = ::Gapic::Config::Method.new list_monitored_resource_descriptors_config
                   list_logs_config = parent_rpcs&.list_logs if parent_rpcs&.respond_to? :list_logs
                   @list_logs = ::Gapic::Config::Method.new list_logs_config
+                  tail_log_entries_config = parent_rpcs&.tail_log_entries if parent_rpcs&.respond_to? :tail_log_entries
+                  @tail_log_entries = ::Gapic::Config::Method.new tail_log_entries_config
 
                   yield self if block_given?
                 end
