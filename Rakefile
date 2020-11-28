@@ -641,7 +641,7 @@ task :synthtool do
 end
 
 def gems
-  `git ls-files -- */*.gemspec`.split("\n").map { |gem| gem.split("/").first }.sort
+  Dir.glob("*/*.gemspec").map { |gem| gem.split("/").first }.sort
 end
 
 def updated_gems
