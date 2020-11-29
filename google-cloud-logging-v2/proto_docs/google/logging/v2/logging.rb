@@ -169,6 +169,11 @@ module Google
         #         "billingAccounts/[BILLING_ACCOUNT_ID]"
         #         "folders/[FOLDER_ID]"
         #
+        #     May alternatively be one or more views
+        #       projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+        #       organization/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+        #       billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+        #       folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
         #
         #     Projects listed in the `project_ids` field are added to this list.
         # @!attribute [rw] filter
@@ -279,6 +284,19 @@ module Google
         #     preceding call to this method.  `pageToken` must be the value of
         #     `nextPageToken` from the previous response.  The values of other method
         #     parameters should be identical to those in the previous call.
+        # @!attribute [rw] resource_names
+        #   @return [::Array<::String>]
+        #     Optional. The resource name that owns the logs:
+        #       projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+        #       organization/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+        #       billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+        #       folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+        #
+        #     To support legacy queries, it could also be:
+        #         "projects/[PROJECT_ID]"
+        #         "organizations/[ORGANIZATION_ID]"
+        #         "billingAccounts/[BILLING_ACCOUNT_ID]"
+        #         "folders/[FOLDER_ID]"
         class ListLogsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -298,6 +316,87 @@ module Google
         class ListLogsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to `TailLogEntries`.
+        # @!attribute [rw] resource_names
+        #   @return [::Array<::String>]
+        #     Required. Name of a parent resource from which to retrieve log entries:
+        #
+        #         "projects/[PROJECT_ID]"
+        #         "organizations/[ORGANIZATION_ID]"
+        #         "billingAccounts/[BILLING_ACCOUNT_ID]"
+        #         "folders/[FOLDER_ID]"
+        #
+        #     May alternatively be one or more views:
+        #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+        #         "organization/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+        #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+        #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. A filter that chooses which log entries to return.  See [Advanced
+        #     Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
+        #     Only log entries that match the filter are returned.  An empty filter
+        #     matches all log entries in the resources listed in `resource_names`.
+        #     Referencing a parent resource that is not in `resource_names` will cause
+        #     the filter to return no results. The maximum length of the filter is 20000
+        #     characters.
+        # @!attribute [rw] buffer_window
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The amount of time to buffer log entries at the server before
+        #     being returned to prevent out of order results due to late arriving log
+        #     entries. Valid values are between 0-60000 milliseconds. Defaults to 2000
+        #     milliseconds.
+        class TailLogEntriesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Result returned from `TailLogEntries`.
+        # @!attribute [rw] entries
+        #   @return [::Array<::Google::Cloud::Logging::V2::LogEntry>]
+        #     A list of log entries. Each response in the stream will order entries with
+        #     increasing values of `LogEntry.timestamp`. Ordering is not guaranteed
+        #     between separate responses.
+        # @!attribute [rw] suppression_info
+        #   @return [::Array<::Google::Cloud::Logging::V2::TailLogEntriesResponse::SuppressionInfo>]
+        #     If entries that otherwise would have been included in the session were not
+        #     sent back to the client, counts of relevant entries omitted from the
+        #     session with the reason that they were not included. There will be at most
+        #     one of each reason per response. The counts represent the number of
+        #     suppressed entries since the last streamed response.
+        class TailLogEntriesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Information about entries that were omitted from the session.
+          # @!attribute [rw] reason
+          #   @return [::Google::Cloud::Logging::V2::TailLogEntriesResponse::SuppressionInfo::Reason]
+          #     The reason that entries were omitted from the session.
+          # @!attribute [rw] suppressed_count
+          #   @return [::Integer]
+          #     A lower bound on the count of entries omitted due to `reason`.
+          class SuppressionInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # An indicator of why entries were omitted.
+            module Reason
+              # Unexpected default.
+              REASON_UNSPECIFIED = 0
+
+              # Indicates suppression occurred due to relevant entries being
+              # received in excess of rate limits. For quotas and limits, see
+              # [Logging API quotas and
+              # limits](https://cloud.google.com/logging/quotas#api-limits).
+              RATE_LIMIT = 1
+
+              # Indicates suppression occurred due to the client not consuming
+              # responses quickly enough.
+              NOT_CONSUMED = 2
+            end
+          end
         end
       end
     end

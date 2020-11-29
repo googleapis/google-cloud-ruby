@@ -56,10 +56,29 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
+      repeated :resource_names, :string, 8
     end
     add_message "google.logging.v2.ListLogsResponse" do
       repeated :log_names, :string, 3
       optional :next_page_token, :string, 2
+    end
+    add_message "google.logging.v2.TailLogEntriesRequest" do
+      repeated :resource_names, :string, 1
+      optional :filter, :string, 2
+      optional :buffer_window, :message, 3, "google.protobuf.Duration"
+    end
+    add_message "google.logging.v2.TailLogEntriesResponse" do
+      repeated :entries, :message, 1, "google.logging.v2.LogEntry"
+      repeated :suppression_info, :message, 2, "google.logging.v2.TailLogEntriesResponse.SuppressionInfo"
+    end
+    add_message "google.logging.v2.TailLogEntriesResponse.SuppressionInfo" do
+      optional :reason, :enum, 1, "google.logging.v2.TailLogEntriesResponse.SuppressionInfo.Reason"
+      optional :suppressed_count, :int32, 2
+    end
+    add_enum "google.logging.v2.TailLogEntriesResponse.SuppressionInfo.Reason" do
+      value :REASON_UNSPECIFIED, 0
+      value :RATE_LIMIT, 1
+      value :NOT_CONSUMED, 2
     end
   end
 end
@@ -78,6 +97,10 @@ module Google
         ListMonitoredResourceDescriptorsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListMonitoredResourceDescriptorsResponse").msgclass
         ListLogsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogsRequest").msgclass
         ListLogsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLogsResponse").msgclass
+        TailLogEntriesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.TailLogEntriesRequest").msgclass
+        TailLogEntriesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.TailLogEntriesResponse").msgclass
+        TailLogEntriesResponse::SuppressionInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.TailLogEntriesResponse.SuppressionInfo").msgclass
+        TailLogEntriesResponse::SuppressionInfo::Reason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.TailLogEntriesResponse.SuppressionInfo.Reason").enummodule
       end
     end
   end

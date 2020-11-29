@@ -56,6 +56,9 @@ module Google
             # Lists the logs in projects, organizations, folders, or billing accounts.
             # Only logs that have entries are listed.
             rpc :ListLogs, ::Google::Cloud::Logging::V2::ListLogsRequest, ::Google::Cloud::Logging::V2::ListLogsResponse
+            # Streaming read of log entries as they are ingested. Until the stream is
+            # terminated, it will continue reading logs.
+            rpc :TailLogEntries, stream(::Google::Cloud::Logging::V2::TailLogEntriesRequest), stream(::Google::Cloud::Logging::V2::TailLogEntriesResponse)
           end
 
           Stub = Service.rpc_stub_class
