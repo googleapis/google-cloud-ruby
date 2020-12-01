@@ -165,12 +165,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.vision.v1p3beta1.WebDetectionParams" do
       optional :include_geo_results, :bool, 2
     end
+    add_message "google.cloud.vision.v1p3beta1.TextDetectionParams" do
+      optional :enable_text_detection_confidence_score, :bool, 9
+    end
     add_message "google.cloud.vision.v1p3beta1.ImageContext" do
       optional :lat_long_rect, :message, 1, "google.cloud.vision.v1p3beta1.LatLongRect"
       repeated :language_hints, :string, 2
       optional :crop_hints_params, :message, 4, "google.cloud.vision.v1p3beta1.CropHintsParams"
       optional :product_search_params, :message, 5, "google.cloud.vision.v1p3beta1.ProductSearchParams"
       optional :web_detection_params, :message, 6, "google.cloud.vision.v1p3beta1.WebDetectionParams"
+      optional :text_detection_params, :message, 12, "google.cloud.vision.v1p3beta1.TextDetectionParams"
     end
     add_message "google.cloud.vision.v1p3beta1.AnnotateImageRequest" do
       optional :image, :message, 1, "google.cloud.vision.v1p3beta1.Image"
@@ -283,6 +287,7 @@ module Google
         CropHintsAnnotation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.CropHintsAnnotation").msgclass
         CropHintsParams = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.CropHintsParams").msgclass
         WebDetectionParams = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.WebDetectionParams").msgclass
+        TextDetectionParams = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.TextDetectionParams").msgclass
         ImageContext = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.ImageContext").msgclass
         AnnotateImageRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.AnnotateImageRequest").msgclass
         ImageAnnotationContext = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.ImageAnnotationContext").msgclass
