@@ -35,7 +35,8 @@ def compose_file bucket_name:, first_file_name:, second_file_name:, destination_
     f.content_type = "text/plain"
   end
 
-  puts "Composed new file #{destination.name} in the bucket #{bucket_name}"
+  puts "Composed new file #{destination.name} in the bucket #{bucket_name} " \
+       "by combining #{first_file_name} and #{second_file_name}"
 end
 # [END storage_compose_file]
 

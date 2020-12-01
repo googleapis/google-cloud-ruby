@@ -334,7 +334,9 @@ describe "Files Snippets" do
     file_1 = bucket.create_file local_file, file_1_name
     file_2 = bucket.create_file local_file, file_2_name
 
-    assert_output "Composed new file #{remote_file_name} in the bucket #{bucket.name}\n" do
+    expected_out = "Composed new file #{remote_file_name} in the bucket #{bucket.name} " \
+                   "by combining #{file_1.name} and #{file_2.name}\n"
+    assert_output expected_out do
       compose_file bucket_name:           bucket.name,
                    first_file_name:       file_1.name,
                    second_file_name:      file_2.name,
