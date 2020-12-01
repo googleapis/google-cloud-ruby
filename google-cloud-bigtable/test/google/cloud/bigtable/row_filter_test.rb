@@ -23,6 +23,9 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
       Object.new, "dummy-table-path"
     )
   }
+  let(:integer_encoded_1) { "\x00\x00\x00\x00\x00\x00\x00\x01".encode "ASCII-8BIT" }
+  let(:integer_encoded_2) { "\x00\x00\x00\x00\x00\x00\x00\x02".encode "ASCII-8BIT" }
+
   it "creates a sink filter" do
     filter = Google::Cloud::Bigtable::RowFilter.sink
 
@@ -81,6 +84,13 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
 
     _(filter).must_be_kind_of Google::Cloud::Bigtable::RowFilter::SimpleFilter
     _(filter.to_grpc.value_regex_filter).must_equal regex
+  end
+
+  it "creates a value filter with integer" do
+    filter = Google::Cloud::Bigtable::RowFilter.value 1
+
+    _(filter).must_be_kind_of Google::Cloud::Bigtable::RowFilter::SimpleFilter
+    _(filter.to_grpc.value_regex_filter).must_equal integer_encoded_1
   end
 
   it "creates a label filter" do
@@ -168,6 +178,18 @@ describe Google::Cloud::Bigtable::RowFilter, :row_filter, :mock_bigtable do
       _(grpc).must_be_kind_of Google::Cloud::Bigtable::V2::ValueRange
       _(grpc.start_value_closed).must_equal from_value
       _(grpc.end_value_open).must_equal to_value
+    end
+
+    it "creates a value_range filter with integers" do
+      range = Google::Cloud::Bigtable::ValueRange.new.from(1).to(2)
+      filter = Google::Cloud::Bigtable::RowFilter.value_range(range)
+
+      _(filter).must_be_kind_of Google::Cloud::Bigtable::RowFilter::SimpleFilter
+
+      grpc = filter.to_grpc.value_range_filter
+      _(grpc).must_be_kind_of Google::Cloud::Bigtable::V2::ValueRange
+      _(grpc.start_value_closed).must_equal integer_encoded_1
+      _(grpc.end_value_open).must_equal integer_encoded_2
     end
 
     it "range instance must be type of ValueRange" do

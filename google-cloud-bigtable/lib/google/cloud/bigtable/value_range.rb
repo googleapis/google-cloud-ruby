@@ -15,6 +15,8 @@
 # limitations under the License.
 
 
+require "google/cloud/bigtable/convert"
+
 module Google
   module Cloud
     module Bigtable
@@ -65,7 +67,9 @@ module Google
         ##
         # Sets the row range with the lower bound.
         #
-        # @param value [String] The value. Required.
+        # @param value [String, Integer] The value. Required. If the argument
+        #   is an Integer, it will be encoded as a 64-bit signed big-endian
+        #   integer.
         # @param inclusive [Boolean] Whether the value is an inclusive or
         #   exclusive lower bound. Default is `true`, an inclusive lower bound.
         # @return [Google::Cloud::Bigtable::ValueRange]
@@ -87,6 +91,8 @@ module Google
         #   range = table.new_value_range.from("value-001", inclusive: false)
         #
         def from value, inclusive: true
+          # If value is integer, covert it to a 64-bit signed big-endian integer.
+          value = Convert.integer_to_signed_be_64 value
           if inclusive
             @grpc.start_value_closed = value
           else
@@ -98,7 +104,9 @@ module Google
         ##
         # Sets the value range with upper bound.
         #
-        # @param value [String] value. Required
+        # @param value [String, Integer] value. Required. If the argument
+        #   is an Integer, it will be encoded as a 64-bit signed big-endian
+        #   integer.
         # @param inclusive [Boolean] Whether the value is an inclusive or
         #   exclusive lower bound. Default is `false`, an exclusive lower bound.
         # @return [Google::Cloud::Bigtable::ValueRange]
@@ -120,6 +128,8 @@ module Google
         #   range = table.new_value_range.to("value-010")
         #
         def to value, inclusive: false
+          # If value is integer, covert it to a 64-bit signed big-endian integer.
+          value = Convert.integer_to_signed_be_64 value
           if inclusive
             @grpc.end_value_closed = value
           else
@@ -131,8 +141,12 @@ module Google
         ##
         # Sets the value range with inclusive lower and upper bounds.
         #
-        # @param from_value [String] Inclusive from value. Required
-        # @param to_value [String] Inclusive to value. Required
+        # @param from_value [String, Integer] Inclusive from value. Required.
+        #   If the argument is an Integer, it will be encoded as a 64-bit
+        #   signed big-endian integer.
+        # @param to_value [String, Integer] Inclusive to value. Required.
+        #   If the argument is an Integer, it will be encoded as a 64-bit
+        #   signed big-endian integer.
         # @return [Google::Cloud::Bigtable::ValueRange]
         #   Range with inclusive from and to values.
         #
@@ -151,8 +165,12 @@ module Google
         ##
         # Set value range with an inclusive lower bound and an exclusive upper bound.
         #
-        # @param from_value [String] Inclusive from value
-        # @param to_value [String] Exclusive to value
+        # @param from_value [String, Integer] Inclusive from value. Required.
+        #   If the argument is an Integer, it will be encoded as a 64-bit
+        #   signed big-endian integer.
+        # @param to_value [String, Integer] Exclusive to value. Required.
+        #   If the argument is an Integer, it will be encoded as a 64-bit
+        #   signed big-endian integer.
         # @return [Google::Cloud::Bigtable::ValueRange]
         #   Range with an inclusive from value and an exclusive to value.
         #

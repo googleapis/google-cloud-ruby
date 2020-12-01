@@ -15,6 +15,8 @@
 # limitations under the License.
 
 
+require "google/cloud/bigtable/convert"
+
 module Google
   module Cloud
     module Bigtable
@@ -147,10 +149,13 @@ module Google
           # will not match the new line character `\n`, which may be present in a
           # binary value.
           #
-          # @param regex [String] Regex to match cell value.
+          # @param regex [String, Integer] Regex to match cell value, or an Integer
+          #   value to be encoded as a 64-bit signed big-endian integer.
           # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
           #
           def value regex
+            # If regex is integer, covert it to a 64-bit signed big-endian integer.
+            regex = Convert.integer_to_signed_be_64 regex
             @grpc.value_regex_filter = regex
             self
           end
