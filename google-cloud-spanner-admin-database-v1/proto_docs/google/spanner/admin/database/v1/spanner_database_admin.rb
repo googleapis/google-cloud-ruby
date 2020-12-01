@@ -220,6 +220,11 @@ module Google
             #     Reports the commit timestamps of all statements that have
             #     succeeded so far, where `commit_timestamps[i]` is the commit
             #     timestamp for the statement `statements[i]`.
+            # @!attribute [r] throttled
+            #   @return [::Boolean]
+            #     Output only. When true, indicates that the operation is throttled e.g
+            #     due to resource constraints. When resources become available the operation
+            #     will resume and this field will be false again.
             class UpdateDatabaseDdlMetadata
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
