@@ -1,0 +1,11 @@
+{
+    "api_id": "binaryauthorization.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-binary_authorization/latest",
+    "distribution_name": "google-cloud-binary_authorization",
+    "language": "ruby",
+    "name": "binaryauthorization",
+    "name_pretty": "Binary Authorization API",
+    "product_documentation": "https://cloud.google.com/binary-authorization/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
