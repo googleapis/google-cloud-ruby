@@ -574,6 +574,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Parameters for text detections. This is used to control TEXT_DETECTION and
+        # DOCUMENT_TEXT_DETECTION features.
+        # @!attribute [rw] enable_text_detection_confidence_score
+        #   @return [::Boolean]
+        #     By default, Cloud Vision API only includes confidence score for
+        #     DOCUMENT_TEXT_DETECTION result. Set the flag to true to include confidence
+        #     score for TEXT_DETECTION as well.
+        class TextDetectionParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Image context and/or feature-specific parameters.
         # @!attribute [rw] lat_long_rect
         #   @return [::Google::Cloud::Vision::V1::LatLongRect]
@@ -597,6 +609,9 @@ module Google
         # @!attribute [rw] web_detection_params
         #   @return [::Google::Cloud::Vision::V1::WebDetectionParams]
         #     Parameters for web detection.
+        # @!attribute [rw] text_detection_params
+        #   @return [::Google::Cloud::Vision::V1::TextDetectionParams]
+        #     Parameters for text detection and document text detection.
         class ImageContext
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
