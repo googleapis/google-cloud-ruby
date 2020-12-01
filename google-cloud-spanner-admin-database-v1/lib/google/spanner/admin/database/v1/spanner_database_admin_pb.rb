@@ -63,6 +63,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :database, :string, 1
       repeated :statements, :string, 2
       repeated :commit_timestamps, :message, 3, "google.protobuf.Timestamp"
+      optional :throttled, :bool, 4
     end
     add_message "google.spanner.admin.database.v1.DropDatabaseRequest" do
       optional :database, :string, 1
