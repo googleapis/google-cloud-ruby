@@ -12,23 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_enable_bucket_lifecycle_management]
-def enable_bucket_lifecycle_management bucket_name:
-  # Enable lifecycle management for a bucket
+# [START storage_move_file]
+def move_file bucket_name:, file_name:, new_name:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
+
+  # The ID of your new GCS object
+  # new_name = "your-new-file-name"
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket = storage.bucket bucket_name
+  bucket  = storage.bucket bucket_name
+  file    = bucket.file file_name
 
-  rules = bucket.lifecycle do |l|
-    l.add_delete_rule age: 2
-  end
+  renamed_file = file.copy new_name
 
-  puts "Lifecycle management is enabled for bucket #{bucket_name} and the rules are #{rules}"
+  file.delete
+
+  puts "#{file_name} has been renamed to #{renamed_file.name}"
 end
-# [END storage_enable_bucket_lifecycle_management]
+# [END storage_move_file]
 
-enable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
+  move_file bucket_name: ARGV.shift, file_name: ARGV.shift, new_name: ARGV.shift
+end

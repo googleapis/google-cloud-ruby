@@ -13,27 +13,46 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../buckets.rb"
-require_relative "../storage_enable_bucket_lifecycle_management.rb"
+require_relative "../storage_add_bucket_label.rb"
+require_relative "../storage_bucket_delete_default_kms_key.rb"
+require_relative "../storage_change_default_storage_class.rb"
+require_relative "../storage_cors_configuration.rb"
+require_relative "../storage_create_bucket.rb"
+require_relative "../storage_create_bucket_class_location.rb"
+require_relative "../storage_define_bucket_website_configuration.rb"
+require_relative "../storage_delete_bucket.rb"
 require_relative "../storage_disable_bucket_lifecycle_management.rb"
+require_relative "../storage_disable_default_event_based_hold.rb"
+require_relative "../storage_disable_requester_pays.rb"
+require_relative "../storage_disable_uniform_bucket_level_access.rb"
+require_relative "../storage_disable_versioning.rb"
+require_relative "../storage_enable_bucket_lifecycle_management.rb"
+require_relative "../storage_enable_default_event_based_hold.rb"
+require_relative "../storage_enable_requester_pays.rb"
+require_relative "../storage_enable_uniform_bucket_level_access.rb"
+require_relative "../storage_enable_versioning.rb"
+require_relative "../storage_get_bucket_metadata.rb"
+require_relative "../storage_get_default_event_based_hold.rb"
+require_relative "../storage_get_retention_policy.rb"
+require_relative "../storage_get_uniform_bucket_level_access.rb"
+require_relative "../storage_list_buckets.rb"
+require_relative "../storage_lock_retention_policy.rb"
+require_relative "../storage_remove_bucket_label.rb"
+require_relative "../storage_remove_cors_configuration.rb"
+require_relative "../storage_remove_retention_policy.rb"
+require_relative "../storage_set_bucket_default_kms_key.rb"
+require_relative "../storage_set_retention_policy.rb"
 
 describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
   let(:kms_key)          { get_kms_key storage_client.project }
   let(:retention_period) { rand 1..99 }
-
-  let :bucket do
-    create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}"
-  end
-
-  after do
-    delete_bucket_helper bucket.name
-  end
+  let(:bucket) { fixture_bucket }
 
   describe "bucket lifecycle" do
-    it "create_bucket, create_bucket_class_location, list_buckets, list_bucket_details, delete_bucket" do
+    it "create_bucket, create_bucket_class_location, list_buckets, get_bucket_metadata, delete_bucket" do
       # create_bucket
-      bucket_name = "ruby_storage_sample_#{SecureRandom.hex}"
+      bucket_name = random_bucket_name
       refute storage_client.bucket bucket_name
 
       retry_resource_exhaustion do
@@ -46,34 +65,32 @@ describe "Buckets Snippets" do
 
       # create_bucket_class_location
 
-      secondary_bucket_name = "ruby_storage_sample_#{SecureRandom.hex}"
-      location = "US"
-      storage_class = "STANDARD"
+      secondary_bucket_name = random_bucket_name
+      location = "ASIA"
+      storage_class = "COLDLINE"
       refute storage_client.bucket secondary_bucket_name
 
       retry_resource_exhaustion do
         assert_output "Created bucket #{secondary_bucket_name} in #{location} with #{storage_class} class\n" do
-          create_bucket_class_location bucket_name:   secondary_bucket_name,
-                                       location:      location,
-                                       storage_class: storage_class
+          create_bucket_class_location bucket_name: secondary_bucket_name
         end
       end
 
-      refute_nil storage_client.bucket secondary_bucket_name
-      assert_equal storage_client.bucket(bucket_name).location, location
-      assert_equal storage_client.bucket(bucket_name).storage_class, storage_class
+      secondary_bucket = storage_client.bucket secondary_bucket_name
+      refute_nil secondary_bucket
+      assert_equal location, secondary_bucket.location
+      assert_equal storage_class, secondary_bucket.storage_class
 
       # list_buckets
       out, _err = capture_io do
         list_buckets
       end
 
-      assert_includes out, bucket_name
-      assert_includes out, secondary_bucket_name
+      assert_includes out, "ruby_storage_sample_"
 
-      # list_bucket_details
+      # get_bucket_metadata
       out, _err = capture_io do
-        list_bucket_details bucket_name: bucket_name
+        get_bucket_metadata bucket_name: bucket_name
       end
 
       assert_includes out, bucket_name
@@ -87,11 +104,39 @@ describe "Buckets Snippets" do
 
 
       delete_bucket_helper bucket_name
+      delete_bucket_helper secondary_bucket_name
+    end
+  end
+
+  describe "cors" do
+    it "cors_configuration, remove_cors_configuration" do
+      bucket.cors { |c| c.clear }
+      assert bucket.cors.empty?
+
+      # cors_configuration
+      assert_output "Set CORS policies for bucket #{bucket.name}\n" do
+        cors_configuration bucket_name: bucket.name
+      end
+
+      bucket.refresh!
+      assert_equal 1, bucket.cors.count
+      rule = bucket.cors.first
+      assert_equal ["*"], rule.origin
+      assert_equal ["PUT", "POST"], rule.methods
+      assert_equal ["Content-Type", "x-goog-resumable"], rule.headers
+      assert_equal 3600, rule.max_age
+
+      # remove_cors_configuration
+      assert_output "Remove CORS policies for bucket #{bucket.name}\n" do
+        remove_cors_configuration bucket_name: bucket.name
+      end
+      bucket.refresh!
+      assert bucket.cors.empty?
     end
   end
 
   describe "requester_pays" do
-    it "enable_requester_pays, get_requester_pays_status, disable_requester_pays" do
+    it "enable_requester_pays, disable_requester_pays" do
       # enable_requester_pays
       bucket.requester_pays = false
 
@@ -101,22 +146,12 @@ describe "Buckets Snippets" do
       bucket.refresh!
       assert bucket.requester_pays?
 
-      # get_requester_pays_status
-      assert_output "Requester Pays is enabled for #{bucket.name}\n" do
-        get_requester_pays_status bucket_name: bucket.name
-      end
-
       # disable_requester_pays
       assert_output "Requester pays has been disabled for #{bucket.name}\n" do
         disable_requester_pays bucket_name: bucket.name
       end
       bucket.refresh!
       refute bucket.requester_pays?
-
-      # get_requester_pays_status
-      assert_output "Requester Pays is disabled for #{bucket.name}\n" do
-        get_requester_pays_status bucket_name: bucket.name
-      end
     end
   end
 
@@ -153,26 +188,35 @@ describe "Buckets Snippets" do
       end
       refute bucket.uniform_bucket_level_access?
 
-      bucket.uniform_bucket_level_access = true
+      bucket.uniform_bucket_level_access = false
     end
   end
 
-  describe "enable_default_kms_key" do
-    it "sets a default kms key for a storage bucket" do
+  describe "default Cloud KMS encryption key" do
+    it "set_bucket_default_kms_key, bucket_delete_default_kms_key" do
       refute bucket.default_kms_key
 
+      # set_bucket_default_kms_key
       assert_output "Default KMS key for #{bucket.name} was set to #{kms_key}\n" do
-        enable_default_kms_key bucket_name:     bucket.name,
-                               default_kms_key: kms_key
+        set_bucket_default_kms_key bucket_name:     bucket.name,
+                                   default_kms_key: kms_key
       end
 
       bucket.refresh!
       assert_equal bucket.default_kms_key, kms_key
+
+      # bucket_delete_default_kms_key
+      assert_output "Default KMS key was removed from #{bucket.name}\n" do
+        bucket_delete_default_kms_key bucket_name: bucket.name
+      end
+
+      bucket.refresh!
+      refute bucket.default_kms_key
     end
   end
 
-  describe "bucket labels" do
-    it "add_bucket_label, list_bucket_labels, delete_bucket_label" do
+  describe "labels" do
+    it "add_bucket_label, remove_bucket_label" do
       # add_bucket_label
       label_key = "label_key"
       label_value = "label_value"
@@ -186,17 +230,9 @@ describe "Buckets Snippets" do
       bucket.refresh!
       assert_equal bucket.labels[label_key], label_value
 
-
-      # list_bucket_labels
-      out, _err = capture_io do
-        list_bucket_labels bucket_name: bucket.name
-      end
-
-      assert_includes out, "#{label_key} = #{label_value}"
-
-      # delete_bucket_label
+      # remove_bucket_label
       assert_output "Deleted label #{label_key} from #{bucket.name}\n" do
-        delete_bucket_label bucket_name: bucket.name,
+        remove_bucket_label bucket_name: bucket.name,
                             label_key:   label_key
       end
 
@@ -205,7 +241,31 @@ describe "Buckets Snippets" do
     end
   end
 
+  describe "lifecycle management" do
+    let(:bucket) { create_bucket_helper random_bucket_name }
+    after { delete_bucket_helper bucket.name }
+
+    it "enable_bucket_lifecycle_management, disable_bucket_lifecycle_management" do
+      # enable_bucket_lifecycle_management
+      out, _err = capture_io do
+        enable_bucket_lifecycle_management bucket_name: bucket.name
+      end
+
+      assert_includes out, "Lifecycle management is enabled"
+
+      # disable_bucket_lifecycle_management
+      out, _err = capture_io do
+        disable_bucket_lifecycle_management bucket_name: bucket.name
+      end
+
+      assert_includes out, "Lifecycle management is disabled"
+    end
+  end
+
   describe "retention policy" do
+    let(:bucket) { create_bucket_helper random_bucket_name }
+    after { delete_bucket_helper bucket.name }
+
     it "set_retention_policy, get_retention_policy, remove_retention_policy" do
       # set_retention_policy
       assert_output "Retention period for #{bucket.name} is now #{retention_period} seconds.\n" do
@@ -280,6 +340,61 @@ describe "Buckets Snippets" do
       assert_output "Default event-based hold is not enabled for #{bucket.name}.\n" do
         get_default_event_based_hold bucket_name: bucket.name
       end
+    end
+  end
+
+  describe "storage_class" do
+    it "change_default_storage_class" do
+      assert_equal "STANDARD", bucket.storage_class
+
+      assert_output "Default storage class for bucket #{bucket.name} has been set to COLDLINE\n" do
+        change_default_storage_class bucket_name: bucket.name
+      end
+
+      bucket.refresh!
+      assert_equal "COLDLINE", bucket.storage_class
+      # teardown
+      bucket.storage_class = "STANDARD"
+    end
+  end
+
+  describe "versioning" do
+    it "enable_versioning, disable_versioning" do
+      # enable_versioning
+      bucket.versioning = false
+
+      assert_output "Versioning was enabled for bucket #{bucket.name}\n" do
+        enable_versioning bucket_name: bucket.name
+      end
+      bucket.refresh!
+      assert bucket.versioning?
+
+      # disable_versioning
+      assert_output "Versioning was disabled for bucket #{bucket.name}\n" do
+        disable_versioning bucket_name: bucket.name
+      end
+      bucket.refresh!
+      refute bucket.versioning?
+    end
+  end
+
+  describe "website_configuration" do
+    let(:main_page_suffix) { "index.html" }
+    let(:not_found_page) { "404.html" }
+
+    it "define_bucket_website_configuration" do
+      expected_out = "Static website bucket #{bucket.name} is set up to use #{main_page_suffix} as the index page " \
+                     "and #{not_found_page} as the 404 page\n"
+
+      assert_output expected_out do
+        define_bucket_website_configuration bucket_name:      bucket.name,
+                                            main_page_suffix: main_page_suffix,
+                                            not_found_page:   not_found_page
+      end
+
+      bucket.refresh!
+      assert_equal main_page_suffix, bucket.website_main
+      assert_equal not_found_page, bucket.website_404
     end
   end
 end

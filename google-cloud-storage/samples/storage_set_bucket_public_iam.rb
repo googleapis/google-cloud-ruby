@@ -12,9 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_enable_bucket_lifecycle_management]
-def enable_bucket_lifecycle_management bucket_name:
-  # Enable lifecycle management for a bucket
+# [START storage_set_bucket_public_iam]
+def set_bucket_public_iam bucket_name:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -23,12 +22,14 @@ def enable_bucket_lifecycle_management bucket_name:
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
 
-  rules = bucket.lifecycle do |l|
-    l.add_delete_rule age: 2
+  bucket.policy do |p|
+    p.add "roles/storage.objectViewer", "allUsers"
   end
 
-  puts "Lifecycle management is enabled for bucket #{bucket_name} and the rules are #{rules}"
+  puts "Bucket #{bucket_name} is now publicly readable"
 end
-# [END storage_enable_bucket_lifecycle_management]
+# [END storage_set_bucket_public_iam]
 
-enable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
+  set_bucket_public_iam bucket_name: ARGV.shift
+end

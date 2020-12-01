@@ -12,24 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative "helper"
-require_relative "../quickstart.rb"
+# [START storage_list_hmac_keys]
+def list_hmac_keys
+  require "google/cloud/storage"
 
-describe "Storage Quickstart" do
-  let(:storage_client) { Google::Cloud::Storage.new }
-  let(:bucket_name)    { "ruby_storage_sample_#{SecureRandom.hex}" }
+  storage = Google::Cloud::Storage.new
 
-  after do
-    delete_bucket_helper bucket_name
-  end
+  # By default Storage#hmac_keys uses the Storage client project_id
+  hmac_keys = storage.hmac_keys
 
-  it "creates a new bucket" do
-    assert_output "Bucket #{bucket_name} was created.\n" do
-      retry_resource_exhaustion do
-        quickstart bucket_name: bucket_name
-      end
-    end
-
-    assert storage_client.bucket bucket_name
+  puts "HMAC Keys:"
+  hmac_keys.all do |hmac_key|
+    puts "Service Account Email: #{hmac_key.service_account_email}"
+    puts "Access ID: #{hmac_key.access_id}"
   end
 end
+# [END storage_list_hmac_keys]
+
+list_hmac_keys if $PROGRAM_NAME == __FILE__

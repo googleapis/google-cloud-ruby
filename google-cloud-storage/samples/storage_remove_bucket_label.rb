@@ -12,23 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_enable_bucket_lifecycle_management]
-def enable_bucket_lifecycle_management bucket_name:
-  # Enable lifecycle management for a bucket
+# [START storage_remove_bucket_label]
+def remove_bucket_label bucket_name:, label_key:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
+
+  # The key of the label to remove from the bucket
+  # label_key = "label-key-to-remove"
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket = storage.bucket bucket_name
+  bucket  = storage.bucket bucket_name
 
-  rules = bucket.lifecycle do |l|
-    l.add_delete_rule age: 2
+  bucket.update do |bucket|
+    bucket.labels[label_key] = nil
   end
 
-  puts "Lifecycle management is enabled for bucket #{bucket_name} and the rules are #{rules}"
+  puts "Deleted label #{label_key} from #{bucket_name}"
 end
-# [END storage_enable_bucket_lifecycle_management]
+# [END storage_remove_bucket_label]
 
-enable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+remove_bucket_label bucket_name: ARGV.shift, label_key: ARGV.shift if $PROGRAM_NAME == __FILE__

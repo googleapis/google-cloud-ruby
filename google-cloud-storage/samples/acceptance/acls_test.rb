@@ -23,7 +23,7 @@ describe "ACL Snippets" do
   let(:bucket) { @bucket }
 
   before :all do
-    @bucket = create_bucket_helper "ruby_storage_sample_#{SecureRandom.hex}"
+    @bucket = create_bucket_helper random_bucket_name
   end
 
   after :all do

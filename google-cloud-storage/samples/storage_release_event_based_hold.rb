@@ -1,4 +1,4 @@
-# Copyright 2016 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,23 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def quickstart bucket_name:
-  # [START storage_quickstart]
-  # Imports the Google Cloud client library
+# [START storage_release_event_based_hold]
+def release_event_based_hold bucket_name:, file_name:
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
+
   require "google/cloud/storage"
 
-  # Instantiates a client
   storage = Google::Cloud::Storage.new
+  bucket  = storage.bucket bucket_name
+  file    = bucket.file file_name
 
-  # bucket_name = "The name of the bucket to be created, i.e. 'new-bucket'"
+  file.release_event_based_hold!
 
-  # Creates the new bucket
-  bucket = storage.create_bucket bucket_name
-
-  puts "Bucket #{bucket.name} was created."
-  # [END storage_quickstart]
+  puts "Event-based hold was released for #{file_name}."
 end
+# [END storage_release_event_based_hold]
 
-if $PROGRAM_NAME == __FILE__
-  quickstart "quickstart_bucket"
-end
+release_event_based_hold bucket_name: ARGV.shift, file_name: ARGV.shift if $PROGRAM_NAME == __FILE__

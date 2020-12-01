@@ -12,23 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_enable_bucket_lifecycle_management]
-def enable_bucket_lifecycle_management bucket_name:
-  # Enable lifecycle management for a bucket
-  # The ID of your GCS bucket
-  # bucket_name = "your-unique-bucket-name"
-
+# [START storage_get_service_account]
+def get_service_account
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket = storage.bucket bucket_name
+  email = storage.service_account_email
 
-  rules = bucket.lifecycle do |l|
-    l.add_delete_rule age: 2
-  end
-
-  puts "Lifecycle management is enabled for bucket #{bucket_name} and the rules are #{rules}"
+  puts "The GCS service account for project #{storage.project_id} is: #{email}"
 end
-# [END storage_enable_bucket_lifecycle_management]
+# [END storage_get_service_account]
 
-enable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+get_service_account if $PROGRAM_NAME == __FILE__

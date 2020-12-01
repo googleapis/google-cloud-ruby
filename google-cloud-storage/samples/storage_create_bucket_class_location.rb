@@ -12,23 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_enable_bucket_lifecycle_management]
-def enable_bucket_lifecycle_management bucket_name:
-  # Enable lifecycle management for a bucket
-  # The ID of your GCS bucket
+# [START storage_create_bucket_class_location]
+def create_bucket_class_location bucket_name:
+  # The ID to give your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket = storage.bucket bucket_name
+  bucket  = storage.create_bucket bucket_name,
+                                  location:      "ASIA",
+                                  storage_class: "COLDLINE"
 
-  rules = bucket.lifecycle do |l|
-    l.add_delete_rule age: 2
-  end
-
-  puts "Lifecycle management is enabled for bucket #{bucket_name} and the rules are #{rules}"
+  puts "Created bucket #{bucket.name} in #{bucket.location} with #{bucket.storage_class} class"
 end
-# [END storage_enable_bucket_lifecycle_management]
+# [END storage_create_bucket_class_location]
 
-enable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
+  create_bucket_class_location bucket_name: ARGV.shift
+end

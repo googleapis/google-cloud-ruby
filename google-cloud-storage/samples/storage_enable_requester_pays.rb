@@ -12,23 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_enable_bucket_lifecycle_management]
-def enable_bucket_lifecycle_management bucket_name:
-  # Enable lifecycle management for a bucket
+# [START storage_enable_requester_pays]
+def enable_requester_pays bucket_name:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket = storage.bucket bucket_name
+  bucket  = storage.bucket bucket_name
 
-  rules = bucket.lifecycle do |l|
-    l.add_delete_rule age: 2
-  end
+  bucket.requester_pays = true
 
-  puts "Lifecycle management is enabled for bucket #{bucket_name} and the rules are #{rules}"
+  puts "Requester pays has been enabled for #{bucket_name}"
 end
-# [END storage_enable_bucket_lifecycle_management]
+# [END storage_enable_requester_pays]
 
-enable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+enable_requester_pays bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

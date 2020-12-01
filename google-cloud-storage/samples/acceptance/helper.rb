@@ -19,20 +19,26 @@ require "minitest/autorun"
 require "minitest/focus"
 require "minitest/hooks/default"
 require "net/http"
+require "time"
 require "securerandom"
 require "uri"
 
+
+def fixture_bucket
+  storage_client = Google::Cloud::Storage.new
+  storage_client.bucket($fixture_bucket_name) ||
+    retry_resource_exhaustion { storage_client.create_bucket $fixture_bucket_name }
+end
+
 def create_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new
-
   retry_resource_exhaustion do
-    return storage_client.create_bucket bucket_name
+    storage_client.create_bucket bucket_name
   end
 end
 
 def delete_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new
-
   retry_resource_exhaustion do
     bucket = storage_client.bucket bucket_name
     return unless bucket
@@ -45,11 +51,13 @@ end
 def retry_resource_exhaustion
   5.times do
     begin
-      yield
-      return
+      return yield
     rescue Google::Cloud::ResourceExhaustedError => e
       puts "\n#{e} Gonna try again"
       sleep rand(10..16)
+    rescue StandardError => e
+      puts "\n#{e}"
+      raise e
     end
   end
   raise Google::Cloud::ResourceExhaustedError, "Maybe take a break from creating and deleting buckets for a bit"
@@ -88,4 +96,32 @@ def delete_hmac_key_helper hmac_key
 
   hmac_key.inactive! if hmac_key.active?
   hmac_key.delete!
+end
+
+def random_bucket_name
+  t = Time.now.utc.iso8601.gsub ":", "-"
+  "ruby-storage-samples-test-#{t}-#{SecureRandom.hex 4}".downcase
+end
+
+# Create fixture bucket to be shared with all the tests
+$fixture_bucket_name = random_bucket_name
+
+def clean_up_fixture_bucket
+  storage_client = Google::Cloud::Storage.new
+  if (b = storage_client.bucket $fixture_bucket_name)
+    puts "Deleting fixture bucket #{$fixture_bucket_name} for #{storage_client.project_id}"
+    b.files(versions: true).all do |file|
+      file.delete generation: true
+    end
+    # Add one second delay between bucket deletes to avoid rate limiting errors
+    sleep 1
+    retry_resource_exhaustion { b.delete }
+  end
+rescue StandardError => e
+  puts "Error while deleting bucket #{$fixture_bucket_name}\n\n#{e}"
+  raise e
+end
+
+Minitest.after_run do
+  clean_up_fixture_bucket
 end

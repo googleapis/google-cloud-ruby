@@ -12,23 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_enable_bucket_lifecycle_management]
-def enable_bucket_lifecycle_management bucket_name:
-  # Enable lifecycle management for a bucket
+# [START storage_generate_signed_url_v4]
+def generate_signed_url_v4 bucket_name:, file_name:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket = storage.bucket bucket_name
+  storage_expiry_time = 5 * 60 # 5 minutes
 
-  rules = bucket.lifecycle do |l|
-    l.add_delete_rule age: 2
-  end
+  url = storage.signed_url bucket_name, file_name, method: "GET",
+                           expires: storage_expiry_time, version: :v4
 
-  puts "Lifecycle management is enabled for bucket #{bucket_name} and the rules are #{rules}"
+  puts "Generated GET signed url:"
+  puts url
+  puts "You can use this URL with any user agent, for example:"
+  puts "curl #{url}"
 end
-# [END storage_enable_bucket_lifecycle_management]
+# [END storage_generate_signed_url_v4]
 
-enable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+generate_signed_url_v4 bucket_name: ARGV.shift, file_name: ARGV.shift if $PROGRAM_NAME == __FILE__

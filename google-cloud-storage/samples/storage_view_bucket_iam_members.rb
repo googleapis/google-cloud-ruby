@@ -12,9 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_enable_bucket_lifecycle_management]
-def enable_bucket_lifecycle_management bucket_name:
-  # Enable lifecycle management for a bucket
+# [START storage_view_bucket_iam_members]
+def view_bucket_iam_members bucket_name:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -23,12 +22,19 @@ def enable_bucket_lifecycle_management bucket_name:
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
 
-  rules = bucket.lifecycle do |l|
-    l.add_delete_rule age: 2
+  policy = bucket.policy requested_policy_version: 3
+  policy.bindings.each do |binding|
+    puts "Role: #{binding.role}"
+    puts "Members: #{binding.members}"
+
+    # if a conditional binding exists print the condition.
+    if binding.condition
+      puts "Condition Title: #{binding.condition.title}"
+      puts "Condition Description: #{binding.condition.description}"
+      puts "Condition Expression: #{binding.condition.expression}"
+    end
   end
-
-  puts "Lifecycle management is enabled for bucket #{bucket_name} and the rules are #{rules}"
 end
-# [END storage_enable_bucket_lifecycle_management]
+# [END storage_view_bucket_iam_members]
 
-enable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+view_bucket_iam_members bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

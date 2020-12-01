@@ -12,23 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_enable_bucket_lifecycle_management]
-def enable_bucket_lifecycle_management bucket_name:
-  # Enable lifecycle management for a bucket
+# [START storage_set_metadata]
+def set_metadata bucket_name:, file_name:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket = storage.bucket bucket_name
+  bucket  = storage.bucket bucket_name
+  file    = bucket.file file_name
 
-  rules = bucket.lifecycle do |l|
-    l.add_delete_rule age: 2
+  file.update do |file|
+    # Fixed key file metadata
+    file.content_type = "text/plain"
+
+    # Custom file metadata
+    file.metadata["your-metadata-key"] = "your-metadata-value"
   end
 
-  puts "Lifecycle management is enabled for bucket #{bucket_name} and the rules are #{rules}"
+  puts "Metadata for #{file_name} has been updated."
 end
-# [END storage_enable_bucket_lifecycle_management]
+# [END storage_set_metadata]
 
-enable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+set_metadata bucket_name: ARGV.shift, file_name: ARGV.shift if $PROGRAM_NAME == __FILE__

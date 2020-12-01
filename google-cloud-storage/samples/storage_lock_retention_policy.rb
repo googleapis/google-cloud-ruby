@@ -12,23 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_enable_bucket_lifecycle_management]
-def enable_bucket_lifecycle_management bucket_name:
-  # Enable lifecycle management for a bucket
+# [START storage_lock_retention_policy]
+def lock_retention_policy bucket_name:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket = storage.bucket bucket_name
+  bucket  = storage.bucket bucket_name
 
-  rules = bucket.lifecycle do |l|
-    l.add_delete_rule age: 2
-  end
+  # Warning: Once a retention policy is locked it cannot be unlocked
+  # and retention period can only be increased.
+  # Uses Bucket#metageneration as a precondition.
+  bucket.lock_retention_policy!
 
-  puts "Lifecycle management is enabled for bucket #{bucket_name} and the rules are #{rules}"
+  puts "Retention policy for #{bucket_name} is now locked."
+  puts "Retention policy effective as of #{bucket.retention_effective_at}."
 end
-# [END storage_enable_bucket_lifecycle_management]
+# [END storage_lock_retention_policy]
 
-enable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+lock_retention_policy bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

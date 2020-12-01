@@ -12,23 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_enable_bucket_lifecycle_management]
-def enable_bucket_lifecycle_management bucket_name:
-  # Enable lifecycle management for a bucket
+# [START storage_set_bucket_default_kms_key]
+def set_bucket_default_kms_key bucket_name:, default_kms_key:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
+
+  # The name of the KMS key to manage this object with
+  # default_kms_key = "projects/your-project-id/locations/global/keyRings/your-key-ring/cryptoKeys/your-key"
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket = storage.bucket bucket_name
+  bucket  = storage.bucket bucket_name
 
-  rules = bucket.lifecycle do |l|
-    l.add_delete_rule age: 2
-  end
+  bucket.default_kms_key = default_kms_key
 
-  puts "Lifecycle management is enabled for bucket #{bucket_name} and the rules are #{rules}"
+  puts "Default KMS key for #{bucket.name} was set to #{bucket.default_kms_key}"
 end
-# [END storage_enable_bucket_lifecycle_management]
+# [END storage_set_bucket_default_kms_key]
 
-enable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+set_bucket_default_kms_key bucket_name: ARGV.shift, default_kms_key: ARGV.shift if $PROGRAM_NAME == __FILE__

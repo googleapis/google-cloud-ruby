@@ -12,23 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_enable_bucket_lifecycle_management]
-def enable_bucket_lifecycle_management bucket_name:
-  # Enable lifecycle management for a bucket
+# [START storage_delete_file_archived_generation]
+def delete_file_archived_generation bucket_name:, file_name:, generation:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
+
+  # The generation of the file to delete
+  # generation = 1579287380533984
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
 
-  rules = bucket.lifecycle do |l|
-    l.add_delete_rule age: 2
-  end
+  file = bucket.file file_name
 
-  puts "Lifecycle management is enabled for bucket #{bucket_name} and the rules are #{rules}"
+  file.delete generation: generation
+
+  puts "Generation #{generation} of file #{file_name} was deleted from #{bucket_name}"
 end
-# [END storage_enable_bucket_lifecycle_management]
+# [END storage_delete_file_archived_generation]
 
-enable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
+  delete_file_archived_generation bucket_name: ARGV.shift, file_name: ARGV.shift, generation: ARGV.shift
+end

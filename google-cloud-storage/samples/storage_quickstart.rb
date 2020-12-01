@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,23 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_enable_bucket_lifecycle_management]
-def enable_bucket_lifecycle_management bucket_name:
-  # Enable lifecycle management for a bucket
-  # The ID of your GCS bucket
-  # bucket_name = "your-unique-bucket-name"
-
+# [START storage_quickstart]
+def quickstart bucket_name:
+  # Imports the Google Cloud client library
   require "google/cloud/storage"
 
+  # Instantiates a client
   storage = Google::Cloud::Storage.new
-  bucket = storage.bucket bucket_name
 
-  rules = bucket.lifecycle do |l|
-    l.add_delete_rule age: 2
-  end
+  # The ID to give your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
 
-  puts "Lifecycle management is enabled for bucket #{bucket_name} and the rules are #{rules}"
+  # Creates the new bucket
+  bucket = storage.create_bucket bucket_name
+
+  puts "Bucket #{bucket.name} was created."
 end
-# [END storage_enable_bucket_lifecycle_management]
+# [END storage_quickstart]
 
-enable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
+  quickstart "quickstart_bucket"
+end

@@ -14,7 +14,8 @@
 
 def print_bucket_acl bucket_name:
   # [START print_bucket_acl]
-  # bucket_name = "Your Google Cloud Storage bucket name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 
@@ -39,7 +40,8 @@ end
 
 def print_bucket_acl_for_user bucket_name:, email:
   # [START print_bucket_acl_for_user]
-  # bucket_name = "Your Google Cloud Storage bucket name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
   # email       = "Google Cloud Storage ACL Entity email"
 
   require "google/cloud/storage"
@@ -56,7 +58,8 @@ end
 
 def add_bucket_owner bucket_name:, email:
   # [START add_bucket_owner]
-  # bucket_name = "Your Google Cloud Storage bucket name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
   # email       = "Google Cloud Storage ACL Entity email"
 
   require "google/cloud/storage"
@@ -73,7 +76,8 @@ end
 def remove_bucket_acl bucket_name:, email:
   # [START remove_bucket_acl]
   # project_id  = "Your Google Cloud project ID"
-  # bucket_name = "Your Google Cloud Storage bucket name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
   # email       = "Google Cloud Storage ACL Entity email"
 
   require "google/cloud/storage"
@@ -89,7 +93,8 @@ end
 
 def add_bucket_default_owner bucket_name:, email:
   # [START add_bucket_default_owner]
-  # bucket_name = "Your Google Cloud Storage bucket name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
   # email       = "Google Cloud Storage ACL Entity email"
 
   require "google/cloud/storage"
@@ -105,7 +110,8 @@ end
 
 def remove_bucket_default_acl bucket_name:, email:
   # [START remove_bucket_default_acl]
-  # bucket_name = "Your Google Cloud Storage bucket name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
   # email       = "Google Cloud Storage ACL Entity email"
 
   require "google/cloud/storage"
@@ -121,7 +127,8 @@ end
 
 def print_file_acl bucket_name:, file_name:
   # [START print_file_acl]
-  # bucket_name = "Your Google Cloud Storage bucket name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
   # file_name   = "Name of a file in the Storage bucket"
   # email       = "Google Cloud Storage ACL Entity email"
 
@@ -145,7 +152,8 @@ end
 
 def print_file_acl_for_user bucket_name:, file_name:, email:
   # [START print_file_acl_for_user]
-  # bucket_name = "Your Google Cloud Storage bucket name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
   # file_name   = "Name of a file in the Storage bucket"
   # email       = "Google Cloud Storage ACL Entity email"
 
@@ -163,7 +171,8 @@ end
 
 def add_file_owner bucket_name:, file_name:, email:
   # [START add_file_owner]
-  # bucket_name = "Your Google Cloud Storage bucket name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
   # file_name   = "Name of a file in the Storage bucket"
   # email       = "Google Cloud Storage ACL Entity email"
 
@@ -181,7 +190,8 @@ end
 
 def remove_file_acl bucket_name:, file_name:, email:
   # [START remove_file_acl]
-  # bucket_name = "Your Google Cloud Storage bucket name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
   # file_name   = "Name of a file in the Storage bucket"
   # email       = "Google Cloud Storage ACL Entity email"
 

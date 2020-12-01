@@ -12,10 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START storage_disable_bucket_lifecycle_management]
 def disable_bucket_lifecycle_management bucket_name:
-  # [START storage_disable_bucket_lifecycle_management]
   # Disable lifecycle management for a bucket
-  # bucket_name = "Your Google Cloud Storage bucket name"
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
 
   require "google/cloud/storage"
 
@@ -27,8 +28,7 @@ def disable_bucket_lifecycle_management bucket_name:
   end
 
   puts "Lifecycle management is disabled for bucket #{bucket_name}"
-  # [END storage_disable_bucket_lifecycle_management]
-  bucket
 end
+# [END storage_disable_bucket_lifecycle_management]
 
 disable_bucket_lifecycle_management bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
