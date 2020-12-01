@@ -109,4 +109,17 @@ describe Google::Cloud::Bigtable::Convert, :mock_bigtable do
       _(timestamp.nanos).must_equal nanos
     end
   end
+
+  describe "integer_to_signed_be_64" do
+    it "returns the arg when arg is not an Integer" do
+      value = "1"
+      data = Google::Cloud::Bigtable::Convert.integer_to_signed_be_64 value
+      _(data).must_equal value
+    end
+
+    it "converts an Integer to 64-bit signed big-endian integer data" do
+      data = Google::Cloud::Bigtable::Convert.integer_to_signed_be_64 1
+      _(data).must_equal "\x00\x00\x00\x00\x00\x00\x00\x01".encode "ASCII-8BIT"
+    end
+  end
 end
