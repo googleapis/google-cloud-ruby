@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2020-12-02
+
+#### Features
+
+* Support get_json_web_keys and additional node pool options
+
 ### 0.2.5 / 2020-08-10
 
 #### Bug Fixes
