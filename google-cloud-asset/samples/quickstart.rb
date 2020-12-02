@@ -149,3 +149,115 @@ def search_all_iam_policies scope: "", query: "", page_size: 0, page_token: ""
   end
   # [END asset_quickstart_search_all_iam_policies]
 end
+
+def analyze_iam_policy scope: "", full_resource_name: ""
+  # [START asset_quickstart_analyze_iam_policy]
+  require "google/cloud/asset"
+
+  # scope = 'SCOPE_OF_THE_QUERY'
+  # full_resource_name = 'QUERY_RESOURCE'
+  asset_service = Google::Cloud::Asset.asset_service
+  resource_selector = {
+    full_resource_name: full_resource_name
+  }
+  options = {
+    expand_groups:      true,
+    output_group_edges: true
+  }
+  query = {
+    scope:             scope,
+    resource_selector: resource_selector,
+    options:           options
+  }
+
+  response = asset_service.analyze_iam_policy(
+    analysis_query: query
+  )
+  # Do things with the response
+  puts response
+  # [END asset_quickstart_sanalyze_iam_policy]
+end
+
+def analyze_iam_policy_longrunning_gcs scope: "", full_resource_name: "", uri: ""
+  # [START asset_quickstart_analyze_iam_policy_lognrunning_gcs]
+  require "google/cloud/asset"
+
+  # scope = 'SCOPE_OF_THE_QUERY'
+  # full_resource_name = 'QUERY_RESOURCE'
+  # uri = 'OUTPUT_GCS_URI'
+  asset_service = Google::Cloud::Asset.asset_service
+  resource_selector = {
+    full_resource_name: full_resource_name
+  }
+  options = {
+    expand_groups:      true,
+    output_group_edges: true
+  }
+  query = {
+    scope:             scope,
+    resource_selector: resource_selector,
+    options:           options
+  }
+  output_config = {
+    gcs_destination: {
+      uri: uri
+    }
+  }
+
+  operation = asset_service.analyze_iam_policy_longrunning(
+    analysis_query: query,
+    output_config:  output_config
+  ) do |op|
+    # Handle the error.
+    raise op.results.message if op.error?
+  end
+
+  operation.wait_until_done!
+  metadata = operation.metadata
+  puts "Wrote analysis results to: #{metadata.output_config.gcs_destination.uri}"
+  # Do things with the result
+  # [END asset_quickstart_analyze_iam_policy_lognrunning_gcs]
+end
+
+def analyze_iam_policy_longrunning_bigquery scope: "", full_resource_name: "", dataset: "", table_prefix: ""
+  # [START analyze_iam_policy_longrunning_bigquery]
+  require "google/cloud/asset"
+
+  # scope = 'SCOPE_OF_THE_QUERY'
+  # full_resource_name = 'QUERY_RESOURCE'
+  # dataset = 'BIGQUERY_DATASET'
+  # table_prefix = 'BIGQUERY_TABLE_PREFIX'
+  asset_service = Google::Cloud::Asset.asset_service
+  resource_selector = {
+    full_resource_name: full_resource_name
+  }
+  options = {
+    expand_groups:      true,
+    output_group_edges: true
+  }
+  query = {
+    scope:             scope,
+    resource_selector: resource_selector,
+    options:           options
+  }
+  output_config = {
+    bigquery_destination: {
+      dataset:      dataset,
+      table_prefix: table_prefix
+    }
+  }
+
+  operation = asset_service.analyze_iam_policy_longrunning(
+    analysis_query: query,
+    output_config:  output_config
+  ) do |op|
+    # Handle the error.
+    raise op.results.message if op.error?
+  end
+
+  operation.wait_until_done!
+  metadata = operation.metadata
+  puts "Wrote analysis results to: #{metadata.output_config.bigquery_destination.dataset}"
+  # Do things with the result
+  # [END analyze_iam_policy_longrunning_bigquery]
+end
