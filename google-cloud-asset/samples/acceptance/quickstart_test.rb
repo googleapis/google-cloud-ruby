@@ -58,7 +58,6 @@ describe "Asset Quickstart" do
 
   after do
     delete_bucket_helper bucket.name
-    delete_dataset_helper dataset.dataset_id
   end
 
   describe "export_assets" do
@@ -105,6 +104,9 @@ describe "Asset Quickstart" do
   end
 
   describe "search_all_resources" do
+    after do
+      delete_dataset_helper dataset.dataset_id
+    end
     it "searches all datasets with the given name" do
       project = ENV["GOOGLE_CLOUD_PROJECT"]
       out, _err = capture_io do
@@ -165,6 +167,9 @@ describe "Asset Quickstart" do
   end
 
   describe "analyze_iam_policy_longrunning_bigquery" do
+    after do
+      delete_dataset_helper dataset.dataset_id
+    end
     it "analyzes who has what acccess to the resource and writes results to bigquery" do
       project = ENV["GOOGLE_CLOUD_PROJECT"]
       full_resource_name = "//cloudresourcemanager.googleapis.com/projects/#{project}"
