@@ -1,5 +1,11 @@
 # Release History
 
+### 0.20.1 / 2020-12-02
+
+#### Bug Fixes
+
+* Remove debugger references completely
+
 ### 0.20.0 / 2020-12-02
 
 * BREAKING CHANGE: Removed google-cloud-debugger from the standard suite of stackdriver agents. If you are using the debugger, include the google-cloud-debugger gem explicitly.
