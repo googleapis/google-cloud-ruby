@@ -4,18 +4,16 @@
 
 #### ⚠ BREAKING CHANGES
 
-* **dataproc-v1beta2:** Support preemptibility config and dag_timeout, and made some changes to the cluster components list
+* The `DOCKER` and `FLINK` values have been removed from the `Component` enum, and an `HBASE` value was added.
 
 #### Features
 
-* Support preemptibility config and dag_timeout, and made some changes to the cluster components list
-  * The `DOCKER` and `FLINK` values have been removed from the `Component` enum, and an `HBASE` value was added.
-  * There is a new `temp_bucket` field in `ClusterConfig`.
-  * There is a new `preemptibility` field in `InstanceGroupConfig`.
-  * The `project_id` field of `JobReference` is now optional instead of required.
-  * There is a new `dag_timeout` field in `WorkflowTemplate`.
-  * There are new `dag_timeout`, `dag_start_time`, and `dag_end_time` fields in `WorkflowMetadata`.
-  * There are various updates to the doc comments.
+* There is a new `temp_bucket` field in `ClusterConfig`.
+* There is a new `preemptibility` field in `InstanceGroupConfig`.
+* The `project_id` field of `JobReference` is now optional instead of required.
+* There is a new `dag_timeout` field in `WorkflowTemplate`.
+* There are new `dag_timeout`, `dag_start_time`, and `dag_end_time` fields in `WorkflowMetadata`.
+* There are various updates to the doc comments.
 
 ### 0.2.5 / 2020-08-10
 
