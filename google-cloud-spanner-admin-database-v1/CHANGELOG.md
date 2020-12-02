@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.0 / 2020-12-02
+
+#### Features
+
+* Add throttled field to database DDL metadata
+
 ### 0.1.3 / 2020-08-10
 
 #### Bug Fixes
