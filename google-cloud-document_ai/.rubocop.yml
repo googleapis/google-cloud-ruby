@@ -1,0 +1,25 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "google-cloud-document_ai.gemspec"
+    - "Rakefile"
+    - "acceptance/**/*"
+    - "test/**/*"
+
+Bundler/OrderedGems:
+  Enabled: false
+Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "samples/**/acceptance/*.rb"
+
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-document_ai.rb"
+
+Style/AsciiComments:
+  Enabled: false
