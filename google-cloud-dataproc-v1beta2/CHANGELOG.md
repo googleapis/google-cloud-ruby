@@ -1,5 +1,20 @@
 # Release History
 
+### 0.3.0 / 2020-12-02
+
+#### ⚠ BREAKING CHANGES
+
+* The `DOCKER` and `FLINK` values have been removed from the `Component` enum, and an `HBASE` value was added.
+
+#### Features
+
+* There is a new `temp_bucket` field in `ClusterConfig`.
+* There is a new `preemptibility` field in `InstanceGroupConfig`.
+* The `project_id` field of `JobReference` is now optional instead of required.
+* There is a new `dag_timeout` field in `WorkflowTemplate`.
+* There are new `dag_timeout`, `dag_start_time`, and `dag_end_time` fields in `WorkflowMetadata`.
+* There are various updates to the doc comments.
+
 ### 0.2.5 / 2020-08-10
 
 #### Bug Fixes
