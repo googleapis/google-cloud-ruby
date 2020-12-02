@@ -50,11 +50,11 @@ flag :git_remote, "--remote NAME" do
   desc "The name of the git remote to use as the pull request head. If omitted, does not open a pull request."
 end
 
+static :replace_me_text, "(REPLACE ME)"
+
 include :exec, e: true
 include :fileutils
 include :terminal
-
-REPLACE_ME_TEXT = "(REPLACE ME)"
 
 def run
   require "erb"
@@ -67,7 +67,7 @@ end
 
 def generate
   clean_output_directory
-  puts "\Gathering info...", :bold
+  puts "\nGathering info...", :bold
   ensure_gh_binary
   ensure_git_binary
   ensure_synthtool
@@ -168,8 +168,8 @@ def determine_defaults
   @service_display_name = gem_shortname.split("_").map(&:capitalize).join " "
   @env_prefix = gem_shortname.gsub("-", "_").upcase
   @service_config_name = "#{@api_name}_grpc_service_config.json"
-  @description = REPLACE_ME_TEXT
-  @product_url = REPLACE_ME_TEXT
+  @description = replace_me_text
+  @product_url = replace_me_text
   @proto_path_base = nil
   @service_override = nil
   @extra_proto_files = ['"google/cloud/common_resources.proto"']
