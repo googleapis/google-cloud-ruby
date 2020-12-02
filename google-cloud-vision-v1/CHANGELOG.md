@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2020-12-02
+
+#### Features
+
+* Support text detection parameters
+
 ### 0.2.5 / 2020-08-10
 
 #### Bug Fixes
