@@ -1,0 +1,11 @@
+{
+    "api_id": "datalabeling.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-data_labeling/latest",
+    "distribution_name": "google-cloud-data_labeling",
+    "language": "ruby",
+    "name": "datalabeling",
+    "name_pretty": "AI Platform Data Labeling Service API",
+    "product_documentation": "https://cloud.google.com/ai-platform/data-labeling/docs",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
