@@ -180,7 +180,7 @@ def analyze_iam_policy scope: "", full_resource_name: ""
   )
   # Do things with the response
   puts response
-  # [END asset_quickstart_sanalyze_iam_policy]
+  # [END asset_quickstart_analyze_iam_policy]
 end
 
 def analyze_iam_policy_longrunning_gcs scope: "", full_resource_name: "", uri: ""
@@ -213,7 +213,7 @@ def analyze_iam_policy_longrunning_gcs scope: "", full_resource_name: "", uri: "
 end
 
 def analyze_iam_policy_longrunning_bigquery scope: "", full_resource_name: "", dataset: "", table_prefix: ""
-  # [START analyze_iam_policy_longrunning_bigquery]
+  # [START asset_quickstart_analyze_iam_policy_longrunning_bigquery]
   require "google/cloud/asset"
 
   # scope = 'SCOPE_OF_THE_QUERY'
@@ -240,5 +240,5 @@ def analyze_iam_policy_longrunning_bigquery scope: "", full_resource_name: "", d
   metadata = operation.metadata
   puts "Wrote analysis results to: #{metadata.output_config.bigquery_destination.dataset}"
   # Do things with the result
-  # [END analyze_iam_policy_longrunning_bigquery]
+  # [END asset_quickstart_analyze_iam_policy_longrunning_bigquery]
 end
