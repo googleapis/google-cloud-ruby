@@ -1,5 +1,12 @@
 # Release History
 
+### 0.20.0 / 2020-12-02
+
+* BREAKING CHANGE: Removed google-cloud-debugger from the standard suite of stackdriver agents. If you are using the debugger, include the google-cloud-debugger gem explicitly.
+* Update to version 2.x of google-cloud-logging
+* Update to version 0.41 of google-cloud-error_reporting
+* Update to version 0.40 of google-cloud-trace
+
 ### 0.16.1 / 2019-12-18
 
 #### Documentation
