@@ -1,0 +1,11 @@
+{
+    "api_id": "mediatranslation.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-media_translation/latest",
+    "distribution_name": "google-cloud-media_translation",
+    "language": "ruby",
+    "name": "mediatranslation",
+    "name_pretty": "Media Translation API",
+    "product_documentation": "https://cloud.google.com/media-translation/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
