@@ -85,6 +85,17 @@ module Google
         #     Optional. Template parameters whose values are substituted into the
         #     template. Values for parameters must be provided when the template is
         #     instantiated.
+        # @!attribute [rw] dag_timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. Timeout duration for the DAG of jobs. You can use "s", "m", "h",
+        #     and "d" suffixes for second, minute, hour, and day duration values,
+        #     respectively. The timeout duration must be from 10 minutes ("10m") to 24
+        #     hours ("24h" or "1d"). The timer begins when the first job is submitted. If
+        #     the workflow is running at the end of the timeout period, any remaining
+        #     jobs are cancelled, the workflow is terminated, and if the workflow was
+        #     running on a [managed
+        #     cluster](https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#configuring_or_selecting_a_cluster),
+        #     the cluster is deleted.
         class WorkflowTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -188,30 +199,36 @@ module Google
         #
         #     The step id is used as prefix for job id, as job
         #     `goog-dataproc-workflow-step-id` label, and in
-        #     {::Google::Cloud::Dataproc::V1beta2::OrderedJob#prerequisite_step_ids prerequisiteStepIds} field from other
-        #     steps.
+        #     {::Google::Cloud::Dataproc::V1beta2::OrderedJob#prerequisite_step_ids prerequisiteStepIds}
+        #     field from other steps.
         #
         #     The id must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), and hyphens (-). Cannot begin or end with underscore
         #     or hyphen. Must consist of between 3 and 50 characters.
         # @!attribute [rw] hadoop_job
         #   @return [::Google::Cloud::Dataproc::V1beta2::HadoopJob]
+        #     Optional. Job is a Hadoop job.
         # @!attribute [rw] spark_job
         #   @return [::Google::Cloud::Dataproc::V1beta2::SparkJob]
+        #     Optional. Job is a Spark job.
         # @!attribute [rw] pyspark_job
         #   @return [::Google::Cloud::Dataproc::V1beta2::PySparkJob]
+        #     Optional. Job is a PySpark job.
         # @!attribute [rw] hive_job
         #   @return [::Google::Cloud::Dataproc::V1beta2::HiveJob]
+        #     Optional. Job is a Hive job.
         # @!attribute [rw] pig_job
         #   @return [::Google::Cloud::Dataproc::V1beta2::PigJob]
+        #     Optional. Job is a Pig job.
         # @!attribute [rw] spark_r_job
         #   @return [::Google::Cloud::Dataproc::V1beta2::SparkRJob]
-        #     Spark R job
+        #     Optional. Job is a SparkR job.
         # @!attribute [rw] spark_sql_job
         #   @return [::Google::Cloud::Dataproc::V1beta2::SparkSqlJob]
+        #     Optional. Job is a SparkSql job.
         # @!attribute [rw] presto_job
         #   @return [::Google::Cloud::Dataproc::V1beta2::PrestoJob]
-        #     Presto job
+        #     Optional. Job is a Presto job.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels to associate with this job.
@@ -269,10 +286,10 @@ module Google
         #     A field is allowed to appear in at most one parameter's list of field
         #     paths.
         #
-        #     A field path is similar in syntax to a {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
-        #     For example, a field path that references the zone field of a workflow
-        #     template's cluster selector would be specified as
-        #     `placement.clusterSelector.zone`.
+        #     A field path is similar in syntax to a
+        #     {::Google::Protobuf::FieldMask google.protobuf.FieldMask}. For example, a
+        #     field path that references the zone field of a workflow template's cluster
+        #     selector would be specified as `placement.clusterSelector.zone`.
         #
         #     Also, field paths can reference fields using the following syntax:
         #
@@ -397,6 +414,23 @@ module Google
         # @!attribute [r] cluster_uuid
         #   @return [::String]
         #     Output only. The UUID of target cluster.
+        # @!attribute [r] dag_timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     Output only. The timeout duration for the DAG of jobs.
+        #     Minimum timeout duration is 10 minutes and maximum is 24 hours, expressed
+        #     as a
+        #     [google.protobuf.Duration][https://developers.google.com/protocol-buffers/docs/proto3#json_mapping].
+        #     For example, "1800" = 1800 seconds/30 minutes duration.
+        # @!attribute [r] dag_start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. DAG start time, which is only set for workflows with
+        #     {::Google::Cloud::Dataproc::V1beta2::WorkflowMetadata#dag_timeout dag_timeout}
+        #     when the DAG begins.
+        # @!attribute [r] dag_end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. DAG end time, which is only set for workflows with
+        #     {::Google::Cloud::Dataproc::V1beta2::WorkflowMetadata#dag_timeout dag_timeout}
+        #     when the DAG ends.
         class WorkflowMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

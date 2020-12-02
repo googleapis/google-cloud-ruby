@@ -10,6 +10,7 @@ require 'google/api/resource_pb'
 require 'google/cloud/dataproc/v1beta2/clusters_pb'
 require 'google/cloud/dataproc/v1beta2/jobs_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -24,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :placement, :message, 7, "google.cloud.dataproc.v1beta2.WorkflowTemplatePlacement"
       repeated :jobs, :message, 8, "google.cloud.dataproc.v1beta2.OrderedJob"
       repeated :parameters, :message, 9, "google.cloud.dataproc.v1beta2.TemplateParameter"
+      optional :dag_timeout, :message, 10, "google.protobuf.Duration"
     end
     add_message "google.cloud.dataproc.v1beta2.WorkflowTemplatePlacement" do
       oneof :placement do
@@ -86,6 +88,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :start_time, :message, 9, "google.protobuf.Timestamp"
       optional :end_time, :message, 10, "google.protobuf.Timestamp"
       optional :cluster_uuid, :string, 11
+      optional :dag_timeout, :message, 12, "google.protobuf.Duration"
+      optional :dag_start_time, :message, 13, "google.protobuf.Timestamp"
+      optional :dag_end_time, :message, 14, "google.protobuf.Timestamp"
     end
     add_enum "google.cloud.dataproc.v1beta2.WorkflowMetadata.State" do
       value :UNKNOWN, 0

@@ -158,12 +158,12 @@ module Google
         #     Spark driver and tasks.
         # @!attribute [rw] file_uris
         #   @return [::Array<::String>]
-        #     Optional. HCFS URIs of files to be copied to the working directory of
-        #     Spark drivers and distributed tasks. Useful for naively parallel tasks.
+        #     Optional. HCFS URIs of files to be placed in the working directory of
+        #     each executor. Useful for naively parallel tasks.
         # @!attribute [rw] archive_uris
         #   @return [::Array<::String>]
-        #     Optional. HCFS URIs of archives to be extracted in the working directory
-        #     of Spark drivers and tasks. Supported file types:
+        #     Optional. HCFS URIs of archives to be extracted into the working directory
+        #     of each executor. Supported file types:
         #     .jar, .tar, .tar.gz, .tgz, and .zip.
         # @!attribute [rw] properties
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -211,11 +211,12 @@ module Google
         #     Python driver and tasks.
         # @!attribute [rw] file_uris
         #   @return [::Array<::String>]
-        #     Optional. HCFS URIs of files to be copied to the working directory of
-        #     Python drivers and distributed tasks. Useful for naively parallel tasks.
+        #     Optional. HCFS URIs of files to be placed in the working directory of
+        #     each executor. Useful for naively parallel tasks.
         # @!attribute [rw] archive_uris
         #   @return [::Array<::String>]
-        #     Optional. HCFS URIs of archives to be extracted in the working directory of
+        #     Optional. HCFS URIs of archives to be extracted into the working directory
+        #     of each executor. Supported file types:
         #     .jar, .tar, .tar.gz, .tgz, and .zip.
         # @!attribute [rw] properties
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -426,12 +427,12 @@ module Google
         #     occur that causes an incorrect job submission.
         # @!attribute [rw] file_uris
         #   @return [::Array<::String>]
-        #     Optional. HCFS URIs of files to be copied to the working directory of
-        #     R drivers and distributed tasks. Useful for naively parallel tasks.
+        #     Optional. HCFS URIs of files to be placed in the working directory of
+        #     each executor. Useful for naively parallel tasks.
         # @!attribute [rw] archive_uris
         #   @return [::Array<::String>]
-        #     Optional. HCFS URIs of archives to be extracted in the working directory of
-        #     Spark drivers and tasks. Supported file types:
+        #     Optional. HCFS URIs of archives to be extracted into the working directory
+        #     of each executor. Supported file types:
         #     .jar, .tar, .tar.gz, .tgz, and .zip.
         # @!attribute [rw] properties
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -600,8 +601,8 @@ module Google
         # Encapsulates the full scoping used to reference a job.
         # @!attribute [rw] project_id
         #   @return [::String]
-        #     Required. The ID of the Google Cloud Platform project that the job
-        #     belongs to.
+        #     Optional. The ID of the Google Cloud Platform project that the job belongs to. If
+        #     specified, must match the request project ID.
         # @!attribute [rw] job_id
         #   @return [::String]
         #     Optional. The job ID, which must be unique within the project.
