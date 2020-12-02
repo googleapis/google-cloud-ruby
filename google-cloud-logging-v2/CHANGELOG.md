@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2020-12-02
+
+#### Features
+
+* Support for tail_log_entries
+
 ### 0.2.0 / 2020-11-19
 
 #### Features
