@@ -13,18 +13,15 @@
 # limitations under the License.
 
 
-gem "google-cloud-debugger"
 gem "google-cloud-error_reporting"
 gem "google-cloud-logging"
 gem "google-cloud-trace"
 
-require "google/cloud/debugger"
 require "google/cloud/error_reporting"
 require "google/cloud/logging"
 require "google/cloud/trace"
 
 if defined? ::Rails::Railtie
-  require "google/cloud/debugger/rails"
   require "google/cloud/error_reporting/rails"
   require "google/cloud/logging/rails"
   require "google/cloud/trace/rails"
