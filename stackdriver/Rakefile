@@ -87,8 +87,6 @@ end
 
 desc "Run the CI build"
 task :ci do
-  header "BUILDING stackdriver"
-  Rake::Task[:debugger_c].invoke
   header "stackdriver rubocop", "*"
   Rake::Task[:rubocop].invoke
   header "stackdriver yard", "*"
@@ -112,18 +110,6 @@ namespace :ci do
 end
 
 task default: :test
-
-desc "Compiles c extension for google-cloud-debugger"
-task :debugger_c do
-  header "compiling google-cloud-debugger", "*"
-  debugger_directory = File.join File.dirname(Dir.getwd), "google-cloud-debugger"
-  Dir.chdir debugger_directory do
-    Bundler.with_clean_env do
-      sh "bundle update"
-      sh "bundle exec rake compile"
-    end
-  end
-end
 
 def header str, token = "#"
   line_length = str.length + 8
