@@ -1,5 +1,15 @@
 # Release History
 
+### 0.17.0 / 2020-12-02
+
+#### ⚠ BREAKING CHANGES
+
+* **stackdriver:** Remove debugger and update other dependencies to post-microgenerator versions
+
+#### Features
+
+* Remove debugger and update other dependencies to post-microgenerator versions
+
 ### 0.16.1 / 2019-12-18
 
 #### Documentation
