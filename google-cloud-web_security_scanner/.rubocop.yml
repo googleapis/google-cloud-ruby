@@ -1,0 +1,25 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "google-cloud-web_security_scanner.gemspec"
+    - "Rakefile"
+    - "acceptance/**/*"
+    - "test/**/*"
+
+Bundler/OrderedGems:
+  Enabled: false
+Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "samples/**/acceptance/*.rb"
+
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-web_security_scanner.rb"
+
+Style/AsciiComments:
+  Enabled: false
