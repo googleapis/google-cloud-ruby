@@ -49,6 +49,7 @@ end
 flag :git_remote, "--remote NAME" do
   desc "The name of the git remote to use as the pull request head. If omitted, does not open a pull request."
 end
+flag :yes, "--yes", "-y", desc: "Auto-confirm prompts"
 
 static :replace_me_text, "(REPLACE ME)"
 
@@ -313,7 +314,7 @@ def update_configs
 end
 
 def finish_branch
-  unless confirm "Push PR for new #{@gen_type} client #{@gem_name.inspect}? ", :bold, default: true
+  unless yes || confirm("Push PR for new #{@gen_type} client #{@gem_name.inspect}? ", :bold, default: true)
     error "Aborted"
   end
   exec ["git", "add", ".kokoro", @gem_name]
@@ -324,6 +325,7 @@ def finish_branch
         "--body", "Auto-created at #{Time.now} using `toys gen-client`.",
         "--repo", "googleapis/google-cloud-ruby"]
   exec ["git", "checkout", @orig_branch_name]
+  exec ["git", "clean", "-df"]
 end
 
 def error *messages
