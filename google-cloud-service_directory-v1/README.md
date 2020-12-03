@@ -2,7 +2,7 @@
 
 API Client library for the Service Directory V1 API
 
-Service directory is the single place to register, browse, and resolve application services.
+Service Directory is the single place to register, browse, and resolve application services.
 
 https://github.com/googleapis/google-cloud-ruby
 
