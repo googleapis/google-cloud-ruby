@@ -1,0 +1,11 @@
+{
+    "api_id": "servicecontrol.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-service_control/latest",
+    "distribution_name": "google-cloud-service_control",
+    "language": "ruby",
+    "name": "servicecontrol",
+    "name_pretty": "Service Control API API",
+    "product_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
