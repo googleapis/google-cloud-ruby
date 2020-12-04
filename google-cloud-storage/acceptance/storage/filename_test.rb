@@ -15,12 +15,7 @@
 require "storage_helper"
 
 describe Google::Cloud::Storage::File, :storage do
-  let(:bucket_name) {
-    ENV["GCLOUD_TEST_STORAGE_BUCKET"] || "storage-library-test-bucket"
-  }
-  let :bucket do
-    storage.bucket(bucket_name)
-  end
+  let(:bucket) { bucket_public }
 
   # Normalization Form C: a single character for e-acute U+00e9.
   # URL should end with Cafe%CC%81
