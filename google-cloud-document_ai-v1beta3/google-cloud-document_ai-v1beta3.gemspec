@@ -5,7 +5,7 @@ require File.expand_path("lib/google/cloud/document_ai/v1beta3/version", __dir__
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-document_ai-v1beta3"
-  gem.version       = Google::Cloud::DocumentAi::V1beta3::VERSION
+  gem.version       = Google::Cloud::DocumentAI::V1beta3::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

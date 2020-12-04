@@ -35,6 +35,7 @@ library = gapic.ruby_library(
         "ruby-cloud-product-url": "https://cloud.google.com/document-ai/",
         "ruby-cloud-api-id": "us-documentai.googleapis.com",
         "ruby-cloud-api-shortname": "documentai",
+        "ruby-cloud-namespace-override": "DocumentAi=DocumentAI",
     }
 )
 
