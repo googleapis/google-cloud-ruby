@@ -126,7 +126,56 @@ t = Time.now.utc.iso8601.gsub ":", "-"
 $bucket_names = 4.times.map { "gcloud-ruby-acceptance-#{t}-#{SecureRandom.hex(4)}".downcase }
 $prefix = "gcloud_ruby_acceptance_#{t}_#{SecureRandom.hex(4)}".downcase.gsub "-", "_"
 # bucket names for second project
-$bucket_names_2 = 4.times.map { "gcloud-ruby-acceptance-2-#{t}-#{SecureRandom.hex(4)}".downcase }
+$bucket_names_2 = 3.times.map { "gcloud-ruby-acceptance-2-#{t}-#{SecureRandom.hex(4)}".downcase }
+
+def bucket_public
+  begin
+    b = storage.bucket $bucket_names[3]
+    return b if b
+    create_bucket_public $bucket_names[3]
+  rescue Google::Cloud::PermissionDeniedError
+    create_bucket_public $bucket_names[3]
+  end
+end
+
+def create_bucket_public name
+  b = storage.create_bucket name
+  b.acl.public!
+  b.default_acl.public!
+  b.create_file StringIO.new("hello world"), bucket_public_file_text
+  b.create_file gzipped_string_io, bucket_public_file_gzip, content_type: "text/plain", content_encoding: "gzip"
+  b.create_file StringIO.new("Normalization Form C"), bucket_public_file_normalization_form_c
+  b.create_file StringIO.new("Normalization Form D"), bucket_public_file_normalization_form_d
+  b
+end
+
+# The content of the file is plaintext "hello world"
+def bucket_public_file_text
+  "hello-world.txt"
+end
+
+# The content of the file is gzipped "hello world"
+def bucket_public_file_gzip
+  "hello-world-gzip.txt"
+end
+
+# The content of the file is gzipped "Normalization Form C"
+def bucket_public_file_normalization_form_c
+  "Caf\u00e9"
+end
+
+# The content of the file is gzipped "Normalization Form D"
+def bucket_public_file_normalization_form_d
+  "Cafe\u0301"
+end
+
+def gzipped_string_io data = "hello world"
+  gz = StringIO.new ""
+  z = Zlib::GzipWriter.new gz
+  z.write data
+  z.close # write the gzip footer
+  StringIO.new gz.string
+end
 
 def clean_up_storage_buckets proj = $storage, names = $bucket_names, user_project: nil
   puts "Cleaning up storage buckets after tests for #{proj.project}."

@@ -23,16 +23,10 @@ describe Google::Cloud::Storage::File, :storage do
     safe_gcs_execute { storage.create_bucket(bucket_name) }
   end
   let(:bucket_name) { $bucket_names.first }
-
   let(:files) do
     { logo: { path: "acceptance/data/CloudPlatform_128px_Retina.png" },
       big:  { path: "acceptance/data/three-mb-file.tif" } }
   end
-
-  let(:bucket_public_test_name) {
-    ENV["GCLOUD_TEST_STORAGE_BUCKET"] || "storage-library-test-bucket"
-  }
-  let(:file_public_test_gzip_name) { "gzipped-text.txt" }  # content is "hello world"
   let(:custom_time) { DateTime.new 2020, 2, 3, 4, 5, 6 }
 
   before do
@@ -313,11 +307,7 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   it "should upload, download, and verify gzip content_type" do
-    gz = StringIO.new ""
-    z = Zlib::GzipWriter.new gz
-    z.write "Hello world!"
-    z.close # write the gzip footer
-    gzipped = StringIO.new gz.string
+    gzipped = gzipped_string_io
 
     uploaded = bucket.create_file gzipped, "uploaded/with/gzip-type.txt", content_type: "application/gzip"
     _(uploaded.name).must_equal "uploaded/with/gzip-type.txt"
@@ -335,18 +325,14 @@ describe Google::Cloud::Storage::File, :storage do
     data = downloaded.read
     _(data).must_equal gzipped.read
     gzr = Zlib::GzipReader.new StringIO.new(data)
-    _(gzr.read).must_equal "Hello world!"
+    _(gzr.read).must_equal "hello world"
 
     uploaded.delete
   end
 
   it "should upload, download, verify, and decompress when Content-Encoding gzip response header" do
-    gz = StringIO.new ""
-    z = Zlib::GzipWriter.new gz
-    data = "Hello world!"
-    z.write data
-    z.close # write the gzip footer
-    gzipped = StringIO.new gz.string
+    data = "hello world"
+    gzipped = gzipped_string_io data
 
     uploaded = bucket.create_file gzipped, "uploaded/with/gzip-encoding.txt", content_type: "text/plain", content_encoding: "gzip"
     _(uploaded.name).must_equal "uploaded/with/gzip-encoding.txt"
@@ -366,8 +352,8 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   it "should download and verify when Content-Encoding gzip response header with skip_decompress" do
-    bucket = storage.bucket bucket_public_test_name
-    file = bucket.file file_public_test_gzip_name
+    bucket = bucket_public
+    file = bucket.file bucket_public_file_gzip
     _(file.content_encoding).must_equal "gzip"
     Tempfile.open ["hello_world", ".txt"] do |tmpfile|
       tmpfile.binmode
@@ -380,8 +366,8 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   it "should download, verify, and decompress when Content-Encoding gzip response header with skip_lookup" do
-    bucket = storage.bucket bucket_public_test_name, skip_lookup: true
-    file = bucket.file file_public_test_gzip_name, skip_lookup: true
+    bucket = storage.bucket bucket_public.name, skip_lookup: true
+    file = bucket.file bucket_public_file_gzip, skip_lookup: true
     _(file.content_encoding).must_be_nil # metadata not loaded
     _(file.content_type).must_be_nil # metadata not loaded
     Tempfile.open ["hello_world", ".txt"] do |tmpfile|
@@ -393,12 +379,12 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   it "should download, verify, and decompress when Content-Encoding gzip response header with crc32c verification" do
-    lazy_bucket = storage.bucket bucket_public_test_name
-    lazy_file = lazy_bucket.file file_public_test_gzip_name
+    bucket = bucket_public
+    file = bucket.file bucket_public_file_gzip
 
     Tempfile.open ["hello_world", ".txt"] do |tmpfile|
       tmpfile.binmode
-      downloaded = lazy_file.download tmpfile,  verify: :crc32c
+      downloaded = file.download tmpfile,  verify: :crc32c
 
       _(File.read(downloaded.path, mode: "rb")).must_equal "hello world" # decompressed file data
     end
@@ -433,15 +419,15 @@ describe Google::Cloud::Storage::File, :storage do
     original = File.new files[:logo][:path]
     uploaded = bucket.create_file original, "CloudLogo.png"
 
-    lazy_bucket = storage.bucket bucket_name, skip_lookup: true
-    lazy_file = lazy_bucket.file "CloudLogo.png", skip_lookup: true
+    bucket = storage.bucket bucket_name, skip_lookup: true
+    file = bucket.file "CloudLogo.png", skip_lookup: true
 
-    _(lazy_bucket).must_be :lazy?
-    _(lazy_file).must_be :lazy?
+    _(bucket).must_be :lazy?
+    _(file).must_be :lazy?
 
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       tmpfile.binmode
-      downloaded = lazy_file.download tmpfile
+      downloaded = file.download tmpfile
 
       _(downloaded.size).must_equal original.size
       _(downloaded.size).must_equal uploaded.size
@@ -691,16 +677,17 @@ describe Google::Cloud::Storage::File, :storage do
 
   describe "anonymous project" do
     let(:anonymous_storage) { Google::Cloud::Storage.anonymous }
+
     it "should list public files without authentication" do
-      public_bucket = anonymous_storage.bucket bucket_public_test_name, skip_lookup: true
+      public_bucket = anonymous_storage.bucket bucket_public.name, skip_lookup: true
       files = public_bucket.files
 
       _(files).wont_be :empty?
     end
 
     it "should download a public file without authentication" do
-      public_bucket = anonymous_storage.bucket bucket_public_test_name, skip_lookup: true
-      file = public_bucket.file file_public_test_gzip_name, skip_lookup: true
+      public_bucket = anonymous_storage.bucket bucket_public.name, skip_lookup: true
+      file = public_bucket.file bucket_public_file_gzip, skip_lookup: true
 
       Tempfile.open ["hello_world", ".txt"] do |tmpfile|
         tmpfile.binmode

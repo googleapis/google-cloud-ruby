@@ -23,16 +23,10 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
     safe_gcs_execute { storage.create_bucket(bucket_name) }
   end
   let(:bucket_name) { $bucket_names.first }
-
   let(:files) do
     { logo: { path: "acceptance/data/CloudPlatform_128px_Retina.png" },
       big:  { path: "acceptance/data/three-mb-file.tif" } }
   end
-
-  let(:bucket_public_test_name) {
-    ENV["GCLOUD_TEST_STORAGE_BUCKET"] || "storage-library-test-bucket"
-  }
-  let(:file_public_test_gzip_name) { "gzipped-text.txt" }  # content is "hello world"
 
   before do
     # always create the bucket
