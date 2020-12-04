@@ -123,18 +123,19 @@ end
 require "time"
 require "securerandom"
 t = Time.now.utc.iso8601.gsub ":", "-"
-$bucket_names = 4.times.map { "gcloud-ruby-acceptance-#{t}-#{SecureRandom.hex(4)}".downcase }
+$bucket_names = 3.times.map { "gcloud-ruby-acceptance-#{t}-#{SecureRandom.hex(4)}".downcase }
 $prefix = "gcloud_ruby_acceptance_#{t}_#{SecureRandom.hex(4)}".downcase.gsub "-", "_"
 # bucket names for second project
 $bucket_names_2 = 3.times.map { "gcloud-ruby-acceptance-2-#{t}-#{SecureRandom.hex(4)}".downcase }
+$bucket_name_public = "gcloud-ruby-acceptance-public-read".freeze
 
 def bucket_public
   begin
-    b = storage.bucket $bucket_names[3]
+    b = storage.bucket $bucket_name_public
     return b if b
-    create_bucket_public $bucket_names[3]
+    create_bucket_public $bucket_name_public
   rescue Google::Cloud::PermissionDeniedError
-    create_bucket_public $bucket_names[3]
+    create_bucket_public $bucket_name_public
   end
 end
 
