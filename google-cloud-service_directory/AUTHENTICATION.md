@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-service_directory
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Credentials`):
+`::Google::Cloud::ServiceDirectory::V1::LookupService::Credentials`):
 
 1. `SERVICE_DIRECTORY_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `SERVICE_DIRECTORY_KEYFILE` - Path to JSON file, or JSON contents

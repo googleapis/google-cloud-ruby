@@ -48,8 +48,8 @@ module Google
       # Create a new client object for LookupService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client](https://googleapis.dev/ruby/google-cloud-service_directory-v1beta1/latest/Google/Cloud/ServiceDirectory/V1beta1/LookupService/Client.html)
-      # for version V1beta1 of the API.
+      # [Google::Cloud::ServiceDirectory::V1::LookupService::Client](https://googleapis.dev/ruby/google-cloud-service_directory-v1/latest/Google/Cloud/ServiceDirectory/V1/LookupService/Client.html)
+      # for version V1 of the API.
       # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the LookupService service is
       # supported by that API version, and the corresponding gem is available, the
@@ -60,10 +60,10 @@ module Google
       # Service Directory API for looking up service data at runtime.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1beta1`.
+      #   Defaults to `:v1`.
       # @return [LookupService::Client] A client object for the specified version.
       #
-      def self.lookup_service version: :v1beta1, &block
+      def self.lookup_service version: :v1, &block
         require "google/cloud/service_directory/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ServiceDirectory
@@ -78,8 +78,8 @@ module Google
       # Create a new client object for RegistrationService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client](https://googleapis.dev/ruby/google-cloud-service_directory-v1beta1/latest/Google/Cloud/ServiceDirectory/V1beta1/RegistrationService/Client.html)
-      # for version V1beta1 of the API.
+      # [Google::Cloud::ServiceDirectory::V1::RegistrationService::Client](https://googleapis.dev/ruby/google-cloud-service_directory-v1/latest/Google/Cloud/ServiceDirectory/V1/RegistrationService/Client.html)
+      # for version V1 of the API.
       # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the RegistrationService service is
       # supported by that API version, and the corresponding gem is available, the
@@ -104,10 +104,10 @@ module Google
       # `projects/*/locations/*/namespaces/*/services/*/endpoints/*`.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1beta1`.
+      #   Defaults to `:v1`.
       # @return [RegistrationService::Client] A client object for the specified version.
       #
-      def self.registration_service version: :v1beta1, &block
+      def self.registration_service version: :v1, &block
         require "google/cloud/service_directory/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ServiceDirectory

@@ -23,13 +23,13 @@ logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICMicrogenerator()
 library = gapic.ruby_library(
-    "servicedirectory", "v1beta1",
+    "servicedirectory", "v1",
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-service_directory",
         "ruby-cloud-title": "Service Directory",
         "ruby-cloud-description": "Service Directory is the single place to register, browse, and resolve application services.",
         "ruby-cloud-env-prefix": "SERVICE_DIRECTORY",
-        "ruby-cloud-wrapper-of": "v1beta1:0.1",
+        "ruby-cloud-wrapper-of": "v1:0.1;v1beta1:0.1",
         "ruby-cloud-product-url": "https://cloud.google.com/service-directory",
         "ruby-cloud-api-id": "servicedirectory.googleapis.com",
         "ruby-cloud-api-shortname": "servicedirectory",
