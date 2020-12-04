@@ -137,9 +137,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :dimension, :string, 2
       optional :date_range, :message, 3, "google.analytics.data.v1alpha.DateRange"
     end
-    add_message "google.analytics.data.v1alpha.CohortReportSettings" do
-      optional :accumulate, :bool, 1
-    end
     add_message "google.analytics.data.v1alpha.CohortsRange" do
       optional :granularity, :enum, 1, "google.analytics.data.v1alpha.CohortsRange.Granularity"
       optional :start_offset, :int32, 2
@@ -150,6 +147,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DAILY, 1
       value :WEEKLY, 2
       value :MONTHLY, 3
+    end
+    add_message "google.analytics.data.v1alpha.CohortReportSettings" do
+      optional :accumulate, :bool, 1
     end
     add_message "google.analytics.data.v1alpha.ResponseMetaData" do
       optional :data_loss_from_other_row, :bool, 3
@@ -203,6 +203,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :ui_name, :string, 2
       optional :description, :string, 3
       repeated :deprecated_api_names, :string, 4
+      optional :custom_definition, :bool, 5
     end
     add_message "google.analytics.data.v1alpha.MetricMetadata" do
       optional :api_name, :string, 1
@@ -211,6 +212,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :deprecated_api_names, :string, 4
       optional :type, :enum, 5, "google.analytics.data.v1alpha.MetricType"
       optional :expression, :string, 6
+      optional :custom_definition, :bool, 7
     end
     add_enum "google.analytics.data.v1alpha.MetricAggregation" do
       value :METRIC_AGGREGATION_UNSPECIFIED, 0
@@ -266,9 +268,9 @@ module Google
         Pivot = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.Pivot").msgclass
         CohortSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.CohortSpec").msgclass
         Cohort = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.Cohort").msgclass
-        CohortReportSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.CohortReportSettings").msgclass
         CohortsRange = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.CohortsRange").msgclass
         CohortsRange::Granularity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.CohortsRange.Granularity").enummodule
+        CohortReportSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.CohortReportSettings").msgclass
         ResponseMetaData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.ResponseMetaData").msgclass
         DimensionHeader = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.DimensionHeader").msgclass
         MetricHeader = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1alpha.MetricHeader").msgclass
