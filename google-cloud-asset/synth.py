@@ -29,6 +29,7 @@ library = gapic.ruby_library(
     extra_proto_files=[
         "google/cloud/common_resources.proto",
         "google/cloud/orgpolicy/v1/orgpolicy.proto",
+        "google/cloud/osconfig/v1/inventory.proto",
         "google/identity/accesscontextmanager/type/device_resources.proto",
         "google/identity/accesscontextmanager/v1/access_level.proto",
         "google/identity/accesscontextmanager/v1/access_policy.proto",
