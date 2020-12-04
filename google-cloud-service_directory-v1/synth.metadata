@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "6e4d1104ddf9a7f10c01923187c7167708d6887f"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "d09131238ccf2ea3f235200085584c84c8d7fbe3"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "07027f95bf0a5b2451984c01a87ea86ee715c15d",
-        "internalRef": "345498172"
+        "sha": "2d22118d88946059ab0c3a05588f577a6e82a0c4",
+        "internalRef": "345621354"
       }
     }
   ],
@@ -26,5 +26,55 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-service_directory-v1.gemspec",
+    "lib/google-cloud-service_directory-v1.rb",
+    "lib/google/cloud/service_directory/v1.rb",
+    "lib/google/cloud/service_directory/v1/lookup_service.rb",
+    "lib/google/cloud/service_directory/v1/lookup_service/client.rb",
+    "lib/google/cloud/service_directory/v1/lookup_service/credentials.rb",
+    "lib/google/cloud/service_directory/v1/lookup_service/paths.rb",
+    "lib/google/cloud/service_directory/v1/registration_service.rb",
+    "lib/google/cloud/service_directory/v1/registration_service/client.rb",
+    "lib/google/cloud/service_directory/v1/registration_service/credentials.rb",
+    "lib/google/cloud/service_directory/v1/registration_service/paths.rb",
+    "lib/google/cloud/service_directory/v1/version.rb",
+    "lib/google/cloud/servicedirectory/v1/endpoint_pb.rb",
+    "lib/google/cloud/servicedirectory/v1/lookup_service_pb.rb",
+    "lib/google/cloud/servicedirectory/v1/lookup_service_services_pb.rb",
+    "lib/google/cloud/servicedirectory/v1/namespace_pb.rb",
+    "lib/google/cloud/servicedirectory/v1/registration_service_pb.rb",
+    "lib/google/cloud/servicedirectory/v1/registration_service_services_pb.rb",
+    "lib/google/cloud/servicedirectory/v1/service_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/servicedirectory/v1/endpoint.rb",
+    "proto_docs/google/cloud/servicedirectory/v1/lookup_service.rb",
+    "proto_docs/google/cloud/servicedirectory/v1/namespace.rb",
+    "proto_docs/google/cloud/servicedirectory/v1/registration_service.rb",
+    "proto_docs/google/cloud/servicedirectory/v1/service.rb",
+    "proto_docs/google/iam/v1/iam_policy.rb",
+    "proto_docs/google/iam/v1/options.rb",
+    "proto_docs/google/iam/v1/policy.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/type/expr.rb",
+    "test/google/cloud/service_directory/v1/lookup_service_paths_test.rb",
+    "test/google/cloud/service_directory/v1/lookup_service_test.rb",
+    "test/google/cloud/service_directory/v1/registration_service_paths_test.rb",
+    "test/google/cloud/service_directory/v1/registration_service_test.rb",
+    "test/helper.rb"
   ]
 }
