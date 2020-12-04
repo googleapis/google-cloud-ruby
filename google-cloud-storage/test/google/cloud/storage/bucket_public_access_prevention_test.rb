@@ -33,7 +33,7 @@ describe Google::Cloud::Storage::Bucket, :public_access_prevention, :mock_storag
 
     _(bucket.public_access_prevention_enforced?).must_equal false
 
-    bucket.public_access_prevention = "enforced"
+    bucket.public_access_prevention = :enforced
 
     _(bucket.public_access_prevention_enforced?).must_equal true
 
@@ -49,7 +49,7 @@ describe Google::Cloud::Storage::Bucket, :public_access_prevention, :mock_storag
 
     _(bucket_user_project.public_access_prevention_enforced?).must_equal false
 
-    bucket_user_project.public_access_prevention = "enforced"
+    bucket_user_project.public_access_prevention = :enforced
 
     _(bucket_user_project.public_access_prevention_enforced?).must_equal true
 

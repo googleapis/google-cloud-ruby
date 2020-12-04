@@ -41,6 +41,8 @@ require_relative "../storage_remove_bucket_label"
 require_relative "../storage_remove_cors_configuration"
 require_relative "../storage_remove_retention_policy"
 require_relative "../storage_set_bucket_default_kms_key"
+require_relative "../storage_set_public_access_prevention_enforced.rb"
+require_relative "../storage_set_public_access_prevention_unspecified.rb"
 require_relative "../storage_set_retention_policy"
 
 describe "Buckets Snippets" do
@@ -395,6 +397,38 @@ describe "Buckets Snippets" do
       bucket.refresh!
       assert_equal main_page_suffix, bucket.website_main
       assert_equal not_found_page, bucket.website_404
+    end
+  end
+
+  describe "public_access_prevention" do
+    it "set_public_access_prevention_enforced, get_public_access_prevention," \
+       " set_public_access_prevention_unspecified" do
+      bucket.public_access_prevention = :unspecified
+      bucket.refresh!
+      refute bucket.public_access_prevention_enforced?
+
+      # set_public_access_prevention_enforced
+      assert_output "Public access prevention is set to enforced for #{bucket.name}.\n" do
+        set_public_access_prevention_enforced bucket_name: bucket.name
+      end
+
+      bucket.refresh!
+      assert bucket.public_access_prevention_enforced?
+
+      # get_public_access_prevention
+      assert_output "Public access prevention is true for #{bucket.name}.\n" do
+        get_public_access_prevention bucket_name: bucket.name
+      end
+      assert bucket.public_access_prevention_enforced?
+
+      # set_public_access_prevention_unspecified
+      assert_output "Public access prevention is 'unspecified' for #{bucket.name}.\n" do
+        set_public_access_prevention_unspecified bucket_name: bucket.name
+      end
+
+      bucket.refresh!
+      refute bucket.public_access_prevention_enforced?
+      bucket.public_access_prevention = :unspecified
     end
   end
 end
