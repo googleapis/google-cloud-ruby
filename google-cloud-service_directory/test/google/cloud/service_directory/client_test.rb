@@ -28,7 +28,7 @@ class Google::Cloud::ServiceDirectory::ClientConstructionMinitest < Minitest::Te
       client = Google::Cloud::ServiceDirectory.lookup_service do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client, client
+      assert_kind_of Google::Cloud::ServiceDirectory::V1::LookupService::Client, client
     end
   end
 
@@ -38,7 +38,7 @@ class Google::Cloud::ServiceDirectory::ClientConstructionMinitest < Minitest::Te
       client = Google::Cloud::ServiceDirectory.registration_service do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client, client
+      assert_kind_of Google::Cloud::ServiceDirectory::V1::RegistrationService::Client, client
     end
   end
 end
