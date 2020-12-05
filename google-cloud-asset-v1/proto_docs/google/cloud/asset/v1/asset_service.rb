@@ -964,6 +964,9 @@ module Google
 
           # The Cloud Access context manager Policy set on an asset.
           ACCESS_POLICY = 5
+
+          # The runtime OS Inventory information.
+          OS_INVENTORY = 6
         end
       end
     end
