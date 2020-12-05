@@ -41,6 +41,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :session_entity_types, :message, 5, "google.cloud.dialogflow.v2.SessionEntityType"
       optional :payload, :message, 6, "google.protobuf.Struct"
       optional :sentiment_analysis_request_config, :message, 10, "google.cloud.dialogflow.v2.SentimentAnalysisRequestConfig"
+      map :webhook_headers, :string, :string, 14
     end
     add_message "google.cloud.dialogflow.v2.QueryInput" do
       oneof :input do

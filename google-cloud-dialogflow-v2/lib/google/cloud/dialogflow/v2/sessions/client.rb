@@ -171,6 +171,10 @@ module Google
             # and session entity types to be updated, which in turn might affect
             # results of future queries.
             #
+            # Note: Always use agent versions for production traffic.
+            # See [Versions and
+            # environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
+            #
             # @overload detect_intent(request, options = nil)
             #   Pass arguments to `detect_intent` via a request object, either of type
             #   {::Google::Cloud::Dialogflow::V2::DetectIntentRequest} or an equivalent Hash.
@@ -199,6 +203,10 @@ module Google
             #
             #     For more information, see the [API interactions
             #     guide](https://cloud.google.com/dialogflow/docs/api-overview).
+            #
+            #     Note: Always use agent versions for production traffic.
+            #     See [Versions and
+            #     environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
             #   @param query_params [::Google::Cloud::Dialogflow::V2::QueryParameters, ::Hash]
             #     The parameters of this query.
             #   @param query_input [::Google::Cloud::Dialogflow::V2::QueryInput, ::Hash]
@@ -215,12 +223,14 @@ module Google
             #     audio. If this field is not set and agent-level speech synthesizer is not
             #     configured, no output audio is generated.
             #   @param output_audio_config_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Mask for {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
-            #     request-level config should override speech synthesizer settings defined at
-            #     agent-level.
+            #     Mask for
+            #     {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config}
+            #     indicating which settings in this request-level config should override
+            #     speech synthesizer settings defined at agent-level.
             #
-            #     If unspecified or empty, {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
-            #     config in its entirety.
+            #     If unspecified or empty,
+            #     {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config}
+            #     replaces the agent-level config in its entirety.
             #   @param input_audio [::String]
             #     The natural language speech audio to be processed. This field
             #     should be populated iff `query_input` is set to an input audio config.
@@ -275,6 +285,10 @@ module Google
             # Processes a natural language query in audio format in a streaming fashion
             # and returns structured, actionable data as a result. This method is only
             # available via the gRPC API (not REST).
+            #
+            # Note: Always use agent versions for production traffic.
+            # See [Versions and
+            # environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
             #
             # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest, ::Hash>]
             #   An enumerable of {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest} instances.
