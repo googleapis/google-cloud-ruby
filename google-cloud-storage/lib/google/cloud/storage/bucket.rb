@@ -1296,6 +1296,46 @@ module Google
         alias upload_file create_file
         alias new_file create_file
 
+        def upload_io io, signed_url, content_type: nil, chunk_size: 1024 * 1024, http: Faraday.new
+          ensure_io! io
+
+          result = http.post signed_url do |req|
+            req.headers["x-goog-resumable"] = "start"
+            req.headers["Content-Type"] = content_type
+          end
+
+          # TODO: Custom exception?
+          raise result.body unless result.status == 201
+          upload_url = result.headers["Location"]
+          uploaded_size = 0
+
+          loop do
+            chunk = io.read chunk_size
+            uploaded_size += chunk.bytesize
+            start_pos = io.pos - chunk.bytesize
+            end_pos = io.pos - 1
+
+            res = http.put upload_url do |req|
+              req.headers["Content-Length"] = chunk.bytesize.to_s
+              req.headers["Content-Range"] = "bytes #{start_pos}-#{end_pos}/#{io.eof? ? uploaded_size : '*'}"
+              req.body = chunk
+            end
+
+            case res.status
+            when 200, 201 # last chunk successfully uploaded, stop
+              break
+            when 308 # chunk successfully uploaded, continue in loop
+              true
+            else # unexpected result, raise
+              # TODO: on 5xx, should we try to resume?
+              # TODO: Custom exception?
+              raise res.body
+            end
+          end
+
+          true
+        end
+
         ##
         # Concatenates a list of existing files in the bucket into a new file in
         # the bucket. There is a limit (currently 32) to the number of files
@@ -2545,6 +2585,11 @@ module Google
                                        user_project: user_project
           @lazy = nil
           self
+        end
+
+        def ensure_io! io
+          return if io.respond_to?(:pos) && io.respond_to?(:eof?) && io.respond_to?(:read)
+          raise ArgumentError, "invalid IO-like object provided, pos, eof? and read methods are required"
         end
 
         ##
