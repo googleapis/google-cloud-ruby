@@ -62,9 +62,9 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
     create_connection_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_connection, name
       assert_kind_of ::Google::Cloud::Bigquery::Connection::V1::CreateConnectionRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.connection_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Connection::V1::Connection), request.connection
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["connection_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Connection::V1::Connection), request["connection"]
       refute_nil options
     end
 
@@ -122,7 +122,7 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
     get_connection_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_connection, name
       assert_kind_of ::Google::Cloud::Bigquery::Connection::V1::GetConnectionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -182,9 +182,9 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
     list_connections_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_connections, name
       assert_kind_of ::Google::Cloud::Bigquery::Connection::V1::ListConnectionsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -249,9 +249,9 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
     update_connection_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_connection, name
       assert_kind_of ::Google::Cloud::Bigquery::Connection::V1::UpdateConnectionRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Connection::V1::Connection), request.connection
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Connection::V1::Connection), request["connection"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -309,7 +309,7 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
     delete_connection_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_connection, name
       assert_kind_of ::Google::Cloud::Bigquery::Connection::V1::DeleteConnectionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -368,8 +368,8 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
       assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request.options
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
       refute_nil options
     end
 
@@ -428,8 +428,8 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
       assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request.policy
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
       refute_nil options
     end
 
@@ -488,8 +488,8 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
     test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :test_iam_permissions, name
       assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal ["hello world"], request.permissions
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
       refute_nil options
     end
 
