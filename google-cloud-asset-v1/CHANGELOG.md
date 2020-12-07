@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 / 2020-12-07
+
+#### Features
+
+* Support for runtime OS inventory information
+
 ### 0.8.0 / 2020-11-02
 
 #### Features
