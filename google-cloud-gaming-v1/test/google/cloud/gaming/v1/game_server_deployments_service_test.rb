@@ -64,11 +64,11 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
     list_game_server_deployments_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_game_server_deployments, name
       assert_kind_of ::Google::Cloud::Gaming::V1::ListGameServerDeploymentsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -131,7 +131,7 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
     get_game_server_deployment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_game_server_deployment, name
       assert_kind_of ::Google::Cloud::Gaming::V1::GetGameServerDeploymentRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -191,9 +191,9 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
     create_game_server_deployment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_game_server_deployment, name
       assert_kind_of ::Google::Cloud::Gaming::V1::CreateGameServerDeploymentRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.deployment_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerDeployment), request.game_server_deployment
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["deployment_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerDeployment), request["game_server_deployment"]
       refute_nil options
     end
 
@@ -256,7 +256,7 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
     delete_game_server_deployment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_game_server_deployment, name
       assert_kind_of ::Google::Cloud::Gaming::V1::DeleteGameServerDeploymentRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -320,8 +320,8 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
     update_game_server_deployment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_game_server_deployment, name
       assert_kind_of ::Google::Cloud::Gaming::V1::UpdateGameServerDeploymentRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerDeployment), request.game_server_deployment
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerDeployment), request["game_server_deployment"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -384,7 +384,7 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
     get_game_server_deployment_rollout_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_game_server_deployment_rollout, name
       assert_kind_of ::Google::Cloud::Gaming::V1::GetGameServerDeploymentRolloutRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -443,8 +443,8 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
     update_game_server_deployment_rollout_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_game_server_deployment_rollout, name
       assert_kind_of ::Google::Cloud::Gaming::V1::UpdateGameServerDeploymentRolloutRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerDeploymentRollout), request.rollout
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerDeploymentRollout), request["rollout"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -509,9 +509,9 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
     preview_game_server_deployment_rollout_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :preview_game_server_deployment_rollout, name
       assert_kind_of ::Google::Cloud::Gaming::V1::PreviewGameServerDeploymentRolloutRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerDeploymentRollout), request.rollout
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.preview_time
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerDeploymentRollout), request["rollout"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["preview_time"]
       refute_nil options
     end
 
@@ -569,7 +569,7 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
     fetch_deployment_state_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :fetch_deployment_state, name
       assert_kind_of ::Google::Cloud::Gaming::V1::FetchDeploymentStateRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 

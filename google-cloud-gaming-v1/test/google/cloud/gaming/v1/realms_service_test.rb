@@ -64,11 +64,11 @@ class ::Google::Cloud::Gaming::V1::RealmsService::ClientTest < Minitest::Test
     list_realms_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_realms, name
       assert_kind_of ::Google::Cloud::Gaming::V1::ListRealmsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -131,7 +131,7 @@ class ::Google::Cloud::Gaming::V1::RealmsService::ClientTest < Minitest::Test
     get_realm_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_realm, name
       assert_kind_of ::Google::Cloud::Gaming::V1::GetRealmRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -191,9 +191,9 @@ class ::Google::Cloud::Gaming::V1::RealmsService::ClientTest < Minitest::Test
     create_realm_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_realm, name
       assert_kind_of ::Google::Cloud::Gaming::V1::CreateRealmRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.realm_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::Realm), request.realm
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["realm_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::Realm), request["realm"]
       refute_nil options
     end
 
@@ -256,7 +256,7 @@ class ::Google::Cloud::Gaming::V1::RealmsService::ClientTest < Minitest::Test
     delete_realm_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_realm, name
       assert_kind_of ::Google::Cloud::Gaming::V1::DeleteRealmRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -320,8 +320,8 @@ class ::Google::Cloud::Gaming::V1::RealmsService::ClientTest < Minitest::Test
     update_realm_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_realm, name
       assert_kind_of ::Google::Cloud::Gaming::V1::UpdateRealmRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::Realm), request.realm
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::Realm), request["realm"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -386,9 +386,9 @@ class ::Google::Cloud::Gaming::V1::RealmsService::ClientTest < Minitest::Test
     preview_realm_update_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :preview_realm_update, name
       assert_kind_of ::Google::Cloud::Gaming::V1::PreviewRealmUpdateRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::Realm), request.realm
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.preview_time
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::Realm), request["realm"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["preview_time"]
       refute_nil options
     end
 

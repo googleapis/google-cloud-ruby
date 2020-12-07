@@ -64,11 +64,11 @@ class ::Google::Cloud::Gaming::V1::GameServerConfigsService::ClientTest < Minite
     list_game_server_configs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_game_server_configs, name
       assert_kind_of ::Google::Cloud::Gaming::V1::ListGameServerConfigsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -131,7 +131,7 @@ class ::Google::Cloud::Gaming::V1::GameServerConfigsService::ClientTest < Minite
     get_game_server_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_game_server_config, name
       assert_kind_of ::Google::Cloud::Gaming::V1::GetGameServerConfigRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -191,9 +191,9 @@ class ::Google::Cloud::Gaming::V1::GameServerConfigsService::ClientTest < Minite
     create_game_server_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_game_server_config, name
       assert_kind_of ::Google::Cloud::Gaming::V1::CreateGameServerConfigRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.config_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerConfig), request.game_server_config
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["config_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerConfig), request["game_server_config"]
       refute_nil options
     end
 
@@ -256,7 +256,7 @@ class ::Google::Cloud::Gaming::V1::GameServerConfigsService::ClientTest < Minite
     delete_game_server_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_game_server_config, name
       assert_kind_of ::Google::Cloud::Gaming::V1::DeleteGameServerConfigRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
