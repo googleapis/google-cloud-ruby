@@ -62,9 +62,9 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
     lookup_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :lookup, name
       assert_kind_of ::Google::Cloud::Datastore::V1::LookupRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::ReadOptions), request.read_options
-      assert_kind_of ::Google::Cloud::Datastore::V1::Key, request.keys.first
+      assert_equal "hello world", request["project_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::ReadOptions), request["read_options"]
+      assert_kind_of ::Google::Cloud::Datastore::V1::Key, request["keys"].first
       refute_nil options
     end
 
@@ -125,10 +125,10 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
     run_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_query, name
       assert_kind_of ::Google::Cloud::Datastore::V1::RunQueryRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::PartitionId), request.partition_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::ReadOptions), request.read_options
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::Query), request.query
+      assert_equal "hello world", request["project_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::PartitionId), request["partition_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::ReadOptions), request["read_options"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::Query), request["query"]
       assert_equal :query, request.query_type
       refute_nil options
     end
@@ -188,8 +188,8 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
     begin_transaction_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :begin_transaction, name
       assert_kind_of ::Google::Cloud::Datastore::V1::BeginTransactionRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::TransactionOptions), request.transaction_options
+      assert_equal "hello world", request["project_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::TransactionOptions), request["transaction_options"]
       refute_nil options
     end
 
@@ -250,11 +250,11 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
     commit_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :commit, name
       assert_kind_of ::Google::Cloud::Datastore::V1::CommitRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal :MODE_UNSPECIFIED, request.mode
-      assert_equal "hello world", request.transaction
+      assert_equal "hello world", request["project_id"]
+      assert_equal :MODE_UNSPECIFIED, request["mode"]
+      assert_equal "hello world", request["transaction"]
       assert_equal :transaction, request.transaction_selector
-      assert_kind_of ::Google::Cloud::Datastore::V1::Mutation, request.mutations.first
+      assert_kind_of ::Google::Cloud::Datastore::V1::Mutation, request["mutations"].first
       refute_nil options
     end
 
@@ -313,8 +313,8 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
     rollback_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :rollback, name
       assert_kind_of ::Google::Cloud::Datastore::V1::RollbackRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.transaction
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["transaction"]
       refute_nil options
     end
 
@@ -373,8 +373,8 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
     allocate_ids_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :allocate_ids, name
       assert_kind_of ::Google::Cloud::Datastore::V1::AllocateIdsRequest, request
-      assert_equal "hello world", request.project_id
-      assert_kind_of ::Google::Cloud::Datastore::V1::Key, request.keys.first
+      assert_equal "hello world", request["project_id"]
+      assert_kind_of ::Google::Cloud::Datastore::V1::Key, request["keys"].first
       refute_nil options
     end
 
@@ -434,9 +434,9 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
     reserve_ids_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :reserve_ids, name
       assert_kind_of ::Google::Cloud::Datastore::V1::ReserveIdsRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.database_id
-      assert_kind_of ::Google::Cloud::Datastore::V1::Key, request.keys.first
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["database_id"]
+      assert_kind_of ::Google::Cloud::Datastore::V1::Key, request["keys"].first
       refute_nil options
     end
 
