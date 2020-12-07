@@ -61,8 +61,8 @@ class ::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::ClientTest < Mi
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
       assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request.policy
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
       refute_nil options
     end
 
@@ -121,8 +121,8 @@ class ::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::ClientTest < Mi
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
       assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request.options
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
       refute_nil options
     end
 
@@ -181,8 +181,8 @@ class ::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::ClientTest < Mi
     test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :test_iam_permissions, name
       assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal ["hello world"], request.permissions
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
       refute_nil options
     end
 
@@ -241,8 +241,8 @@ class ::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::ClientTest < Mi
     get_vulnerability_occurrences_summary_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_vulnerability_occurrences_summary, name
       assert_kind_of ::Google::Cloud::ContainerAnalysis::V1::GetVulnerabilityOccurrencesSummaryRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
