@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 / 2020-12-07
+
+#### Features
+
+* Add custom definition flag to dimension and metric metdata
+
 ### 0.5.0 / 2020-11-19
 
 #### ⚠ BREAKING CHANGES
