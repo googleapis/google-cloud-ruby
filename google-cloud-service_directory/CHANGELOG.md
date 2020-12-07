@@ -1,4 +1,14 @@
 # Release History
+### 0.4.0 / 2020-12-07
+
+#### ⚠ BREAKING CHANGES
+
+* **service_directory:** Switch default API version to v1
+
+#### Features
+
+* Switch default API version to v1
+
 ### 0.3.0 / 2020-05-21
 
 #### Features
