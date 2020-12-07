@@ -1,4 +1,10 @@
 # Release History
+### 1.0.0 / 2020-12-07
+
+#### ⚠ BREAKING CHANGES
+
+* Switch default API version to v1
+
 ### 0.3.0 / 2020-05-21
 
 #### Features
