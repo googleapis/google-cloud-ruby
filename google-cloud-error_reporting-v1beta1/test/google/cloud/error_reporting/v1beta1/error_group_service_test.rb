@@ -60,7 +60,7 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::ClientTest < 
     get_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_group, name
       assert_kind_of ::Google::Cloud::ErrorReporting::V1beta1::GetGroupRequest, request
-      assert_equal "hello world", request.group_name
+      assert_equal "hello world", request["group_name"]
       refute_nil options
     end
 
@@ -118,7 +118,7 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::ClientTest < 
     update_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_group, name
       assert_kind_of ::Google::Cloud::ErrorReporting::V1beta1::UpdateGroupRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroup), request.group
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroup), request["group"]
       refute_nil options
     end
 

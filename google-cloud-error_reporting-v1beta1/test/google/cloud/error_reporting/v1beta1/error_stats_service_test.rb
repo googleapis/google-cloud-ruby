@@ -69,16 +69,16 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::ClientTest < 
     list_group_stats_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_group_stats, name
       assert_kind_of ::Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsRequest, request
-      assert_equal "hello world", request.project_name
-      assert_equal ["hello world"], request.group_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ErrorReporting::V1beta1::ServiceContextFilter), request.service_filter
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ErrorReporting::V1beta1::QueryTimeRange), request.time_range
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.timed_count_duration
-      assert_equal :ERROR_COUNT_ALIGNMENT_UNSPECIFIED, request.alignment
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.alignment_time
-      assert_equal :GROUP_ORDER_UNSPECIFIED, request.order
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["project_name"]
+      assert_equal ["hello world"], request["group_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ErrorReporting::V1beta1::ServiceContextFilter), request["service_filter"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ErrorReporting::V1beta1::QueryTimeRange), request["time_range"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["timed_count_duration"]
+      assert_equal :ERROR_COUNT_ALIGNMENT_UNSPECIFIED, request["alignment"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["alignment_time"]
+      assert_equal :GROUP_ORDER_UNSPECIFIED, request["order"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -146,12 +146,12 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::ClientTest < 
     list_events_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_events, name
       assert_kind_of ::Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest, request
-      assert_equal "hello world", request.project_name
-      assert_equal "hello world", request.group_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ErrorReporting::V1beta1::ServiceContextFilter), request.service_filter
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ErrorReporting::V1beta1::QueryTimeRange), request.time_range
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["project_name"]
+      assert_equal "hello world", request["group_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ErrorReporting::V1beta1::ServiceContextFilter), request["service_filter"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ErrorReporting::V1beta1::QueryTimeRange), request["time_range"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -214,7 +214,7 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::ClientTest < 
     delete_events_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_events, name
       assert_kind_of ::Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest, request
-      assert_equal "hello world", request.project_name
+      assert_equal "hello world", request["project_name"]
       refute_nil options
     end
 
