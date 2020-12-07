@@ -62,9 +62,9 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     create_reservation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_reservation, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::CreateReservationRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.reservation_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Reservation::V1::Reservation), request.reservation
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["reservation_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Reservation::V1::Reservation), request["reservation"]
       refute_nil options
     end
 
@@ -124,9 +124,9 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     list_reservations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_reservations, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::ListReservationsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -189,7 +189,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     get_reservation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_reservation, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::GetReservationRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -247,7 +247,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     delete_reservation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_reservation, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::DeleteReservationRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -306,8 +306,8 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     update_reservation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_reservation, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::UpdateReservationRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Reservation::V1::Reservation), request.reservation
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Reservation::V1::Reservation), request["reservation"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -367,9 +367,9 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     create_capacity_commitment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_capacity_commitment, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::CreateCapacityCommitmentRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment), request.capacity_commitment
-      assert_equal true, request.enforce_single_admin_project_per_org
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment), request["capacity_commitment"]
+      assert_equal true, request["enforce_single_admin_project_per_org"]
       refute_nil options
     end
 
@@ -429,9 +429,9 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     list_capacity_commitments_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_capacity_commitments, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::ListCapacityCommitmentsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -494,7 +494,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     get_capacity_commitment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_capacity_commitment, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::GetCapacityCommitmentRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -552,7 +552,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     delete_capacity_commitment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_capacity_commitment, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::DeleteCapacityCommitmentRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -611,8 +611,8 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     update_capacity_commitment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_capacity_commitment, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::UpdateCapacityCommitmentRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment), request.capacity_commitment
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment), request["capacity_commitment"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -671,8 +671,8 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     split_capacity_commitment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :split_capacity_commitment, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::SplitCapacityCommitmentRequest, request
-      assert_equal "hello world", request.name
-      assert_equal 42, request.slot_count
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["slot_count"]
       refute_nil options
     end
 
@@ -731,8 +731,8 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     merge_capacity_commitments_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :merge_capacity_commitments, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::MergeCapacityCommitmentsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal ["hello world"], request.capacity_commitment_ids
+      assert_equal "hello world", request["parent"]
+      assert_equal ["hello world"], request["capacity_commitment_ids"]
       refute_nil options
     end
 
@@ -791,8 +791,8 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     create_assignment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_assignment, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::CreateAssignmentRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Reservation::V1::Assignment), request.assignment
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Reservation::V1::Assignment), request["assignment"]
       refute_nil options
     end
 
@@ -852,9 +852,9 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     list_assignments_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_assignments, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::ListAssignmentsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -917,7 +917,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     delete_assignment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_assignment, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::DeleteAssignmentRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -978,10 +978,10 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     search_assignments_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_assignments, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::SearchAssignmentsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.query
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["query"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -1045,8 +1045,8 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     move_assignment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :move_assignment, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.destination_id
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["destination_id"]
       refute_nil options
     end
 
@@ -1104,7 +1104,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     get_bi_reservation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_bi_reservation, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::GetBiReservationRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1163,8 +1163,8 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     update_bi_reservation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_bi_reservation, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::UpdateBiReservationRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Reservation::V1::BiReservation), request.bi_reservation
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Reservation::V1::BiReservation), request["bi_reservation"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
