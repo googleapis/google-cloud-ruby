@@ -62,9 +62,9 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Clien
     create_workload_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_workload, name
       assert_kind_of ::Google::Cloud::AssuredWorkloads::V1beta1::CreateWorkloadRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AssuredWorkloads::V1beta1::Workload), request.workload
-      assert_equal "hello world", request.external_id
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AssuredWorkloads::V1beta1::Workload), request["workload"]
+      assert_equal "hello world", request["external_id"]
       refute_nil options
     end
 
@@ -128,8 +128,8 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Clien
     update_workload_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_workload, name
       assert_kind_of ::Google::Cloud::AssuredWorkloads::V1beta1::UpdateWorkloadRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AssuredWorkloads::V1beta1::Workload), request.workload
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AssuredWorkloads::V1beta1::Workload), request["workload"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -188,8 +188,8 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Clien
     delete_workload_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_workload, name
       assert_kind_of ::Google::Cloud::AssuredWorkloads::V1beta1::DeleteWorkloadRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.etag
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
       refute_nil options
     end
 
@@ -247,7 +247,7 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Clien
     get_workload_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_workload, name
       assert_kind_of ::Google::Cloud::AssuredWorkloads::V1beta1::GetWorkloadRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -308,10 +308,10 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Clien
     list_workloads_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_workloads, name
       assert_kind_of ::Google::Cloud::AssuredWorkloads::V1beta1::ListWorkloadsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
