@@ -63,10 +63,10 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::ClientTest < Minitest::T
     create_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_cluster, name
       assert_kind_of ::Google::Cloud::Dataproc::V1::CreateClusterRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.region
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1::Cluster), request.cluster
-      assert_equal "hello world", request.request_id
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["region"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1::Cluster), request["cluster"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -135,13 +135,13 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::ClientTest < Minitest::T
     update_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_cluster, name
       assert_kind_of ::Google::Cloud::Dataproc::V1::UpdateClusterRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.region
-      assert_equal "hello world", request.cluster_name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1::Cluster), request.cluster
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.graceful_decommission_timeout
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
-      assert_equal "hello world", request.request_id
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["region"]
+      assert_equal "hello world", request["cluster_name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1::Cluster), request["cluster"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["graceful_decommission_timeout"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -208,11 +208,11 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::ClientTest < Minitest::T
     delete_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_cluster, name
       assert_kind_of ::Google::Cloud::Dataproc::V1::DeleteClusterRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.region
-      assert_equal "hello world", request.cluster_name
-      assert_equal "hello world", request.cluster_uuid
-      assert_equal "hello world", request.request_id
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["region"]
+      assert_equal "hello world", request["cluster_name"]
+      assert_equal "hello world", request["cluster_uuid"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -277,9 +277,9 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::ClientTest < Minitest::T
     get_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_cluster, name
       assert_kind_of ::Google::Cloud::Dataproc::V1::GetClusterRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.region
-      assert_equal "hello world", request.cluster_name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["region"]
+      assert_equal "hello world", request["cluster_name"]
       refute_nil options
     end
 
@@ -341,11 +341,11 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::ClientTest < Minitest::T
     list_clusters_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_clusters, name
       assert_kind_of ::Google::Cloud::Dataproc::V1::ListClustersRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.region
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["region"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -410,9 +410,9 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::ClientTest < Minitest::T
     diagnose_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :diagnose_cluster, name
       assert_kind_of ::Google::Cloud::Dataproc::V1::DiagnoseClusterRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.region
-      assert_equal "hello world", request.cluster_name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["region"]
+      assert_equal "hello world", request["cluster_name"]
       refute_nil options
     end
 
