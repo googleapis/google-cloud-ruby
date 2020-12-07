@@ -64,11 +64,11 @@ class ::Google::Cloud::Asset::V1beta1::AssetService::ClientTest < Minitest::Test
     export_assets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_assets, name
       assert_kind_of ::Google::Cloud::Asset::V1beta1::ExportAssetsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.read_time
-      assert_equal ["hello world"], request.asset_types
-      assert_equal :CONTENT_TYPE_UNSPECIFIED, request.content_type
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1beta1::OutputConfig), request.output_config
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["read_time"]
+      assert_equal ["hello world"], request["asset_types"]
+      assert_equal :CONTENT_TYPE_UNSPECIFIED, request["content_type"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1beta1::OutputConfig), request["output_config"]
       refute_nil options
     end
 
@@ -134,10 +134,10 @@ class ::Google::Cloud::Asset::V1beta1::AssetService::ClientTest < Minitest::Test
     batch_get_assets_history_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_get_assets_history, name
       assert_kind_of ::Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal ["hello world"], request.asset_names
-      assert_equal :CONTENT_TYPE_UNSPECIFIED, request.content_type
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1beta1::TimeWindow), request.read_time_window
+      assert_equal "hello world", request["parent"]
+      assert_equal ["hello world"], request["asset_names"]
+      assert_equal :CONTENT_TYPE_UNSPECIFIED, request["content_type"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1beta1::TimeWindow), request["read_time_window"]
       refute_nil options
     end
 
