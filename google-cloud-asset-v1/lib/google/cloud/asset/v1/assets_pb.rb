@@ -8,6 +8,7 @@ require 'google/cloud/orgpolicy/v1/orgpolicy_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/identity/accesscontextmanager/v1/access_level_pb'
 require 'google/identity/accesscontextmanager/v1/access_policy_pb'
+require 'google/cloud/osconfig/v1/inventory_pb'
 require 'google/identity/accesscontextmanager/v1/service_perimeter_pb'
 require 'google/protobuf/any_pb'
 require 'google/protobuf/struct_pb'
@@ -41,6 +42,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :resource, :message, 3, "google.cloud.asset.v1.Resource"
       optional :iam_policy, :message, 4, "google.iam.v1.Policy"
       repeated :org_policy, :message, 6, "google.cloud.orgpolicy.v1.Policy"
+      optional :os_inventory, :message, 12, "google.cloud.osconfig.v1.Inventory"
       repeated :ancestors, :string, 10
       oneof :access_context_policy do
         optional :access_policy, :message, 7, "google.identity.accesscontextmanager.v1.AccessPolicy"

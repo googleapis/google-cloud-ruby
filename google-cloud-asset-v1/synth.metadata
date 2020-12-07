@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "5c30be82942491cd6129fa6debe1df365f19710a"
+        "sha": "78284fe543454e582bee7deaed9b9688dee6c50c"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "00bbad4dfd6633cf4b5f9596c1f93b756bb5c776",
-        "internalRef": "339708980"
+        "sha": "50831e68c56081dc5908f99158450de5c1c13d1c",
+        "internalRef": "345062127"
       }
     }
   ],
@@ -51,6 +51,7 @@
     "lib/google/cloud/asset/v1/assets_pb.rb",
     "lib/google/cloud/asset/v1/version.rb",
     "lib/google/cloud/orgpolicy/v1/orgpolicy_pb.rb",
+    "lib/google/cloud/osconfig/v1/inventory_pb.rb",
     "lib/google/identity/accesscontextmanager/type/device_resources_pb.rb",
     "lib/google/identity/accesscontextmanager/v1/access_level_pb.rb",
     "lib/google/identity/accesscontextmanager/v1/access_policy_pb.rb",
@@ -61,6 +62,7 @@
     "proto_docs/google/cloud/asset/v1/asset_service.rb",
     "proto_docs/google/cloud/asset/v1/assets.rb",
     "proto_docs/google/cloud/orgpolicy/v1/orgpolicy.rb",
+    "proto_docs/google/cloud/osconfig/v1/inventory.rb",
     "proto_docs/google/iam/v1/policy.rb",
     "proto_docs/google/identity/accesscontextmanager/type/device_resources.rb",
     "proto_docs/google/identity/accesscontextmanager/v1/access_level.rb",

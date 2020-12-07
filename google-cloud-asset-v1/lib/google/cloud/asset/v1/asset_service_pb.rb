@@ -202,6 +202,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :IAM_POLICY, 2
       value :ORG_POLICY, 4
       value :ACCESS_POLICY, 5
+      value :OS_INVENTORY, 6
     end
   end
 end

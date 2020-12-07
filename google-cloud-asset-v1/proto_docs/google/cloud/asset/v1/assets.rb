@@ -134,6 +134,11 @@ module Google
         #   @return [::Google::Identity::AccessContextManager::V1::ServicePerimeter]
         #     Please also refer to the [service perimeter user
         #     guide](https://cloud.google.com/vpc-service-controls/docs/overview).
+        # @!attribute [rw] os_inventory
+        #   @return [::Google::Cloud::OsConfig::V1::Inventory]
+        #     A representation of runtime OS Inventory information. See [this
+        #     topic](https://cloud.google.com/compute/docs/instances/os-inventory-management)
+        #     for more information.
         # @!attribute [rw] ancestors
         #   @return [::Array<::String>]
         #     The ancestry path of an asset in Google Cloud [resource

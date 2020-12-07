@@ -292,7 +292,7 @@ module Google
         #     [partition_spec] determines whether to export to partitioned table(s) and
         #     how to partition the data.
         #
-        #     If [partition_spec] is unset or [partition_spec.partion_key] is unset or
+        #     If [partition_spec] is unset or [partition_spec.partition_key] is unset or
         #     `PARTITION_KEY_UNSPECIFIED`, the snapshot results will be exported to
         #     non-partitioned table(s). [force] will decide whether to overwrite existing
         #     table(s).
@@ -964,6 +964,9 @@ module Google
 
           # The Cloud Access context manager Policy set on an asset.
           ACCESS_POLICY = 5
+
+          # The runtime OS Inventory information.
+          OS_INVENTORY = 6
         end
       end
     end
