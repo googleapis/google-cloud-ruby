@@ -62,9 +62,9 @@ class ::Google::Cloud::Dialogflow::V2::Environments::ClientTest < Minitest::Test
     list_environments_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_environments, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 

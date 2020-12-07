@@ -64,11 +64,11 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
     list_intents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_intents, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::ListIntentsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.language_code
-      assert_equal :INTENT_VIEW_UNSPECIFIED, request.intent_view
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["language_code"]
+      assert_equal :INTENT_VIEW_UNSPECIFIED, request["intent_view"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -133,9 +133,9 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
     get_intent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_intent, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::GetIntentRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.language_code
-      assert_equal :INTENT_VIEW_UNSPECIFIED, request.intent_view
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["language_code"]
+      assert_equal :INTENT_VIEW_UNSPECIFIED, request["intent_view"]
       refute_nil options
     end
 
@@ -196,10 +196,10 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
     create_intent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_intent, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::CreateIntentRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::Intent), request.intent
-      assert_equal "hello world", request.language_code
-      assert_equal :INTENT_VIEW_UNSPECIFIED, request.intent_view
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::Intent), request["intent"]
+      assert_equal "hello world", request["language_code"]
+      assert_equal :INTENT_VIEW_UNSPECIFIED, request["intent_view"]
       refute_nil options
     end
 
@@ -260,10 +260,10 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
     update_intent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_intent, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::UpdateIntentRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::Intent), request.intent
-      assert_equal "hello world", request.language_code
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
-      assert_equal :INTENT_VIEW_UNSPECIFIED, request.intent_view
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::Intent), request["intent"]
+      assert_equal "hello world", request["language_code"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal :INTENT_VIEW_UNSPECIFIED, request["intent_view"]
       refute_nil options
     end
 
@@ -321,7 +321,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
     delete_intent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_intent, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::DeleteIntentRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -383,12 +383,12 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
     batch_update_intents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_update_intents, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.intent_batch_uri
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["intent_batch_uri"]
       assert_equal :intent_batch_uri, request.intent_batch
-      assert_equal "hello world", request.language_code
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
-      assert_equal :INTENT_VIEW_UNSPECIFIED, request.intent_view
+      assert_equal "hello world", request["language_code"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal :INTENT_VIEW_UNSPECIFIED, request["intent_view"]
       refute_nil options
     end
 
@@ -452,8 +452,8 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
     batch_delete_intents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_delete_intents, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::BatchDeleteIntentsRequest, request
-      assert_equal "hello world", request.parent
-      assert_kind_of ::Google::Cloud::Dialogflow::V2::Intent, request.intents.first
+      assert_equal "hello world", request["parent"]
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::Intent, request["intents"].first
       refute_nil options
     end
 

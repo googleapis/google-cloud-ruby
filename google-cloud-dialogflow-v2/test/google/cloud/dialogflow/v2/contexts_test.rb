@@ -62,9 +62,9 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
     list_contexts_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_contexts, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::ListContextsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -127,7 +127,7 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
     get_context_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_context, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::GetContextRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -186,8 +186,8 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
     create_context_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_context, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::CreateContextRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::Context), request.context
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::Context), request["context"]
       refute_nil options
     end
 
@@ -246,8 +246,8 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
     update_context_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_context, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::UpdateContextRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::Context), request.context
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::Context), request["context"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -305,7 +305,7 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
     delete_context_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_context, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::DeleteContextRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -363,7 +363,7 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
     delete_all_contexts_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_all_contexts, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest, request
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
