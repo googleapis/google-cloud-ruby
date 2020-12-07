@@ -62,9 +62,9 @@ class ::Google::Cloud::Debugger::V2::Debugger::ClientTest < Minitest::Test
     set_breakpoint_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_breakpoint, name
       assert_kind_of ::Google::Cloud::Debugger::V2::SetBreakpointRequest, request
-      assert_equal "hello world", request.debuggee_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Debugger::V2::Breakpoint), request.breakpoint
-      assert_equal "hello world", request.client_version
+      assert_equal "hello world", request["debuggee_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Debugger::V2::Breakpoint), request["breakpoint"]
+      assert_equal "hello world", request["client_version"]
       refute_nil options
     end
 
@@ -124,9 +124,9 @@ class ::Google::Cloud::Debugger::V2::Debugger::ClientTest < Minitest::Test
     get_breakpoint_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_breakpoint, name
       assert_kind_of ::Google::Cloud::Debugger::V2::GetBreakpointRequest, request
-      assert_equal "hello world", request.debuggee_id
-      assert_equal "hello world", request.breakpoint_id
-      assert_equal "hello world", request.client_version
+      assert_equal "hello world", request["debuggee_id"]
+      assert_equal "hello world", request["breakpoint_id"]
+      assert_equal "hello world", request["client_version"]
       refute_nil options
     end
 
@@ -186,9 +186,9 @@ class ::Google::Cloud::Debugger::V2::Debugger::ClientTest < Minitest::Test
     delete_breakpoint_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_breakpoint, name
       assert_kind_of ::Google::Cloud::Debugger::V2::DeleteBreakpointRequest, request
-      assert_equal "hello world", request.debuggee_id
-      assert_equal "hello world", request.breakpoint_id
-      assert_equal "hello world", request.client_version
+      assert_equal "hello world", request["debuggee_id"]
+      assert_equal "hello world", request["breakpoint_id"]
+      assert_equal "hello world", request["client_version"]
       refute_nil options
     end
 
@@ -252,13 +252,13 @@ class ::Google::Cloud::Debugger::V2::Debugger::ClientTest < Minitest::Test
     list_breakpoints_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_breakpoints, name
       assert_kind_of ::Google::Cloud::Debugger::V2::ListBreakpointsRequest, request
-      assert_equal "hello world", request.debuggee_id
-      assert_equal true, request.include_all_users
-      assert_equal true, request.include_inactive
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Debugger::V2::ListBreakpointsRequest::BreakpointActionValue), request.action
-      assert_equal true, request.strip_results
-      assert_equal "hello world", request.wait_token
-      assert_equal "hello world", request.client_version
+      assert_equal "hello world", request["debuggee_id"]
+      assert_equal true, request["include_all_users"]
+      assert_equal true, request["include_inactive"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Debugger::V2::ListBreakpointsRequest::BreakpointActionValue), request["action"]
+      assert_equal true, request["strip_results"]
+      assert_equal "hello world", request["wait_token"]
+      assert_equal "hello world", request["client_version"]
       refute_nil options
     end
 
@@ -318,9 +318,9 @@ class ::Google::Cloud::Debugger::V2::Debugger::ClientTest < Minitest::Test
     list_debuggees_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_debuggees, name
       assert_kind_of ::Google::Cloud::Debugger::V2::ListDebuggeesRequest, request
-      assert_equal "hello world", request.project
-      assert_equal true, request.include_inactive
-      assert_equal "hello world", request.client_version
+      assert_equal "hello world", request["project"]
+      assert_equal true, request["include_inactive"]
+      assert_equal "hello world", request["client_version"]
       refute_nil options
     end
 
