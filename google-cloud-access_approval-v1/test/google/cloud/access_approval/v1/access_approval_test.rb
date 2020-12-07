@@ -63,10 +63,10 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest
     list_approval_requests_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_approval_requests, name
       assert_kind_of ::Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -129,7 +129,7 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest
     get_approval_request_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_approval_request, name
       assert_kind_of ::Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -188,8 +188,8 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest
     approve_approval_request_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :approve_approval_request, name
       assert_kind_of ::Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.expire_time
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["expire_time"]
       refute_nil options
     end
 
@@ -247,7 +247,7 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest
     dismiss_approval_request_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :dismiss_approval_request, name
       assert_kind_of ::Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -305,7 +305,7 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest
     get_access_approval_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_access_approval_settings, name
       assert_kind_of ::Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -364,8 +364,8 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest
     update_access_approval_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_access_approval_settings, name
       assert_kind_of ::Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AccessApproval::V1::AccessApprovalSettings), request.settings
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AccessApproval::V1::AccessApprovalSettings), request["settings"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -423,7 +423,7 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest
     delete_access_approval_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_access_approval_settings, name
       assert_kind_of ::Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
