@@ -100,8 +100,9 @@ module Google
         #     Examples: "USD", "EUR", "JPY"
         # @!attribute [r] deleted
         #   @return [::Boolean]
-        #     Output only. Indicates whether this Property is soft-deleted or not. Deleted properties
-        #     are excluded from List results unless specifically requested.
+        #     Output only. Indicates whether this Property is soft-deleted or not.
+        #     Deleted properties are excluded from List results unless specifically
+        #     requested.
         class Property
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -273,8 +274,8 @@ module Google
         #     whether they are respected.
         # @!attribute [r] page_views_enabled
         #   @return [::Boolean]
-        #     Output only. If enabled, capture a page view event each time a page loads or the
-        #     website changes the browser history state.
+        #     Output only. If enabled, capture a page view event each time a page loads
+        #     or the website changes the browser history state.
         # @!attribute [rw] scrolls_enabled
         #   @return [::Boolean]
         #     If enabled, capture scroll events each time a visitor gets to the bottom of
@@ -344,9 +345,9 @@ module Google
         #     Output only. Example format: properties/1234/firebaseLinks/5678
         # @!attribute [rw] project
         #   @return [::String]
-        #     Immutable. Firebase project resource name. When creating a FirebaseLink, you may
-        #     provide this resource name using either a project number or project ID.
-        #     Once this resource has been created, returned FirebaseLinks will always
+        #     Immutable. Firebase project resource name. When creating a FirebaseLink,
+        #     you may provide this resource name using either a project number or project
+        #     ID. Once this resource has been created, returned FirebaseLinks will always
         #     have a project_name that contains a project number.
         #
         #     Format: 'projects/\\{project number}'
@@ -367,8 +368,11 @@ module Google
         # WebDataStream.
         # @!attribute [rw] snippet
         #   @return [::String]
-        #     Immutable. JavaScript code snippet to be pasted as the first item into the head tag of
-        #     every webpage to measure.
+        #     Immutable. JavaScript code snippet to be pasted as the first item into the
+        #     head tag of every webpage to measure.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The resource name of this tag.
         class GlobalSiteTag
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -377,7 +381,8 @@ module Google
         # A link between an GA4 property and a Google Ads account.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. Format: properties/\\{propertyId}/googleAdsLinks/\\{googleAdsLinkId}
+        #     Output only. Format:
+        #     properties/\\{propertyId}/googleAdsLinks/\\{googleAdsLinkId}
         #
         #     Note: googleAdsLinkId is not the Google Ads customer ID.
         # @!attribute [rw] parent
