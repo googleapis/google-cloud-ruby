@@ -62,9 +62,9 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     get_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_document, name
       assert_kind_of ::Google::Cloud::Firestore::V1::GetDocumentRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request.mask
-      assert_equal "hello world", request.transaction
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request["mask"]
+      assert_equal "hello world", request["transaction"]
       assert_equal :transaction, request.consistency_selector
       refute_nil options
     end
@@ -130,15 +130,15 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     list_documents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_documents, name
       assert_kind_of ::Google::Cloud::Firestore::V1::ListDocumentsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.collection_id
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.order_by
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request.mask
-      assert_equal "hello world", request.transaction
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["collection_id"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request["mask"]
+      assert_equal "hello world", request["transaction"]
       assert_equal :transaction, request.consistency_selector
-      assert_equal true, request.show_missing
+      assert_equal true, request["show_missing"]
       refute_nil options
     end
 
@@ -204,10 +204,10 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     update_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_document, name
       assert_kind_of ::Google::Cloud::Firestore::V1::UpdateDocumentRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::Document), request.document
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request.update_mask
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request.mask
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::Precondition), request.current_document
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::Document), request["document"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request["mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::Precondition), request["current_document"]
       refute_nil options
     end
 
@@ -266,8 +266,8 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     delete_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_document, name
       assert_kind_of ::Google::Cloud::Firestore::V1::DeleteDocumentRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::Precondition), request.current_document
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::Precondition), request["current_document"]
       refute_nil options
     end
 
@@ -328,10 +328,10 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     batch_get_documents_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :batch_get_documents, name
       assert_kind_of ::Google::Cloud::Firestore::V1::BatchGetDocumentsRequest, request
-      assert_equal "hello world", request.database
-      assert_equal ["hello world"], request.documents
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request.mask
-      assert_equal "hello world", request.transaction
+      assert_equal "hello world", request["database"]
+      assert_equal ["hello world"], request["documents"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request["mask"]
+      assert_equal "hello world", request["transaction"]
       assert_equal :transaction, request.consistency_selector
       refute_nil options
     end
@@ -406,8 +406,8 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     begin_transaction_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :begin_transaction, name
       assert_kind_of ::Google::Cloud::Firestore::V1::BeginTransactionRequest, request
-      assert_equal "hello world", request.database
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::TransactionOptions), request.options
+      assert_equal "hello world", request["database"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::TransactionOptions), request["options"]
       refute_nil options
     end
 
@@ -467,9 +467,9 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     commit_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :commit, name
       assert_kind_of ::Google::Cloud::Firestore::V1::CommitRequest, request
-      assert_equal "hello world", request.database
-      assert_kind_of ::Google::Cloud::Firestore::V1::Write, request.writes.first
-      assert_equal "hello world", request.transaction
+      assert_equal "hello world", request["database"]
+      assert_kind_of ::Google::Cloud::Firestore::V1::Write, request["writes"].first
+      assert_equal "hello world", request["transaction"]
       refute_nil options
     end
 
@@ -528,8 +528,8 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     rollback_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :rollback, name
       assert_kind_of ::Google::Cloud::Firestore::V1::RollbackRequest, request
-      assert_equal "hello world", request.database
-      assert_equal "hello world", request.transaction
+      assert_equal "hello world", request["database"]
+      assert_equal "hello world", request["transaction"]
       refute_nil options
     end
 
@@ -589,10 +589,10 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     run_query_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :run_query, name
       assert_kind_of ::Google::Cloud::Firestore::V1::RunQueryRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::StructuredQuery), request.structured_query
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::StructuredQuery), request["structured_query"]
       assert_equal :structured_query, request.query_type
-      assert_equal "hello world", request.transaction
+      assert_equal "hello world", request["transaction"]
       assert_equal :transaction, request.consistency_selector
       refute_nil options
     end
@@ -670,12 +670,12 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     partition_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :partition_query, name
       assert_kind_of ::Google::Cloud::Firestore::V1::PartitionQueryRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::StructuredQuery), request.structured_query
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::StructuredQuery), request["structured_query"]
       assert_equal :structured_query, request.query_type
-      assert_equal 42, request.partition_count
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal 42, request["partition_count"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -811,11 +811,11 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       write_client_stub.requests.each do |request|
         request.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::WriteRequest, r
-          assert_equal "hello world", r.database
-          assert_equal "hello world", r.stream_id
-          assert_kind_of ::Google::Cloud::Firestore::V1::Write, r.writes.first
-          assert_equal "hello world", r.stream_token
-          assert_equal({}, r.labels.to_h)
+          assert_equal "hello world", r["database"]
+          assert_equal "hello world", r["stream_id"]
+          assert_kind_of ::Google::Cloud::Firestore::V1::Write, r["writes"].first
+          assert_equal "hello world", r["stream_token"]
+          assert_equal({}, r["labels"].to_h)
         end
       end
     end
@@ -905,10 +905,10 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       listen_client_stub.requests.each do |request|
         request.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::ListenRequest, r
-          assert_equal "hello world", r.database
-          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::Target), r.add_target
+          assert_equal "hello world", r["database"]
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::Target), r["add_target"]
           assert_equal :add_target, r.target_change
-          assert_equal({}, r.labels.to_h)
+          assert_equal({}, r["labels"].to_h)
         end
       end
     end
@@ -929,9 +929,9 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     list_collection_ids_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_collection_ids, name
       assert_kind_of ::Google::Cloud::Firestore::V1::ListCollectionIdsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -991,9 +991,9 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     batch_write_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_write, name
       assert_kind_of ::Google::Cloud::Firestore::V1::BatchWriteRequest, request
-      assert_equal "hello world", request.database
-      assert_kind_of ::Google::Cloud::Firestore::V1::Write, request.writes.first
-      assert_equal({}, request.labels.to_h)
+      assert_equal "hello world", request["database"]
+      assert_kind_of ::Google::Cloud::Firestore::V1::Write, request["writes"].first
+      assert_equal({}, request["labels"].to_h)
       refute_nil options
     end
 
@@ -1055,11 +1055,11 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     create_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_document, name
       assert_kind_of ::Google::Cloud::Firestore::V1::CreateDocumentRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.collection_id
-      assert_equal "hello world", request.document_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::Document), request.document
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request.mask
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["collection_id"]
+      assert_equal "hello world", request["document_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::Document), request["document"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request["mask"]
       refute_nil options
     end
 
