@@ -62,9 +62,9 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
     process_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :process_document, name
       assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::ProcessRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::Document), request.document
-      assert_equal true, request.skip_human_review
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::Document), request["document"]
+      assert_equal true, request["skip_human_review"]
       refute_nil options
     end
 
@@ -124,9 +124,9 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
     batch_process_documents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_process_documents, name
       assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest, request
-      assert_equal "hello world", request.name
-      assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest::BatchInputConfig, request.input_configs.first
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest::BatchOutputConfig), request.output_config
+      assert_equal "hello world", request["name"]
+      assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest::BatchInputConfig, request["input_configs"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest::BatchOutputConfig), request["output_config"]
       refute_nil options
     end
 
@@ -190,8 +190,8 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
     review_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :review_document, name
       assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::ReviewDocumentRequest, request
-      assert_equal "hello world", request.human_review_config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::Document), request.document
+      assert_equal "hello world", request["human_review_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::Document), request["document"]
       refute_nil options
     end
 
