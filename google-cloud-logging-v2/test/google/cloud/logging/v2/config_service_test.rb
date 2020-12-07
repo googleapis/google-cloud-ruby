@@ -62,9 +62,9 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     list_buckets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_buckets, name
       assert_kind_of ::Google::Cloud::Logging::V2::ListBucketsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -127,7 +127,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     get_bucket_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_bucket, name
       assert_kind_of ::Google::Cloud::Logging::V2::GetBucketRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -187,9 +187,9 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     create_bucket_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_bucket, name
       assert_kind_of ::Google::Cloud::Logging::V2::CreateBucketRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.bucket_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogBucket), request.bucket
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["bucket_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogBucket), request["bucket"]
       refute_nil options
     end
 
@@ -249,9 +249,9 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     update_bucket_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_bucket, name
       assert_kind_of ::Google::Cloud::Logging::V2::UpdateBucketRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogBucket), request.bucket
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogBucket), request["bucket"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -309,7 +309,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     delete_bucket_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_bucket, name
       assert_kind_of ::Google::Cloud::Logging::V2::DeleteBucketRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -367,7 +367,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     undelete_bucket_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :undelete_bucket, name
       assert_kind_of ::Google::Cloud::Logging::V2::UndeleteBucketRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -427,9 +427,9 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     list_views_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_views, name
       assert_kind_of ::Google::Cloud::Logging::V2::ListViewsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -492,7 +492,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     get_view_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_view, name
       assert_kind_of ::Google::Cloud::Logging::V2::GetViewRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -552,9 +552,9 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     create_view_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_view, name
       assert_kind_of ::Google::Cloud::Logging::V2::CreateViewRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.view_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogView), request.view
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["view_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogView), request["view"]
       refute_nil options
     end
 
@@ -614,9 +614,9 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     update_view_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_view, name
       assert_kind_of ::Google::Cloud::Logging::V2::UpdateViewRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogView), request.view
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogView), request["view"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -674,7 +674,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     delete_view_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_view, name
       assert_kind_of ::Google::Cloud::Logging::V2::DeleteViewRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -734,9 +734,9 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     list_sinks_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_sinks, name
       assert_kind_of ::Google::Cloud::Logging::V2::ListSinksRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -799,7 +799,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     get_sink_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_sink, name
       assert_kind_of ::Google::Cloud::Logging::V2::GetSinkRequest, request
-      assert_equal "hello world", request.sink_name
+      assert_equal "hello world", request["sink_name"]
       refute_nil options
     end
 
@@ -859,9 +859,9 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     create_sink_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_sink, name
       assert_kind_of ::Google::Cloud::Logging::V2::CreateSinkRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogSink), request.sink
-      assert_equal true, request.unique_writer_identity
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogSink), request["sink"]
+      assert_equal true, request["unique_writer_identity"]
       refute_nil options
     end
 
@@ -922,10 +922,10 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     update_sink_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_sink, name
       assert_kind_of ::Google::Cloud::Logging::V2::UpdateSinkRequest, request
-      assert_equal "hello world", request.sink_name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogSink), request.sink
-      assert_equal true, request.unique_writer_identity
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["sink_name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogSink), request["sink"]
+      assert_equal true, request["unique_writer_identity"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -983,7 +983,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     delete_sink_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_sink, name
       assert_kind_of ::Google::Cloud::Logging::V2::DeleteSinkRequest, request
-      assert_equal "hello world", request.sink_name
+      assert_equal "hello world", request["sink_name"]
       refute_nil options
     end
 
@@ -1043,9 +1043,9 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     list_exclusions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_exclusions, name
       assert_kind_of ::Google::Cloud::Logging::V2::ListExclusionsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -1108,7 +1108,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     get_exclusion_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_exclusion, name
       assert_kind_of ::Google::Cloud::Logging::V2::GetExclusionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1167,8 +1167,8 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     create_exclusion_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_exclusion, name
       assert_kind_of ::Google::Cloud::Logging::V2::CreateExclusionRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogExclusion), request.exclusion
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogExclusion), request["exclusion"]
       refute_nil options
     end
 
@@ -1228,9 +1228,9 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     update_exclusion_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_exclusion, name
       assert_kind_of ::Google::Cloud::Logging::V2::UpdateExclusionRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogExclusion), request.exclusion
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogExclusion), request["exclusion"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1288,7 +1288,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     delete_exclusion_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_exclusion, name
       assert_kind_of ::Google::Cloud::Logging::V2::DeleteExclusionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1346,7 +1346,7 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     get_cmek_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_cmek_settings, name
       assert_kind_of ::Google::Cloud::Logging::V2::GetCmekSettingsRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1406,9 +1406,9 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     update_cmek_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_cmek_settings, name
       assert_kind_of ::Google::Cloud::Logging::V2::UpdateCmekSettingsRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::CmekSettings), request.cmek_settings
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::CmekSettings), request["cmek_settings"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
