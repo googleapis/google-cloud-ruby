@@ -61,8 +61,8 @@ class ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < 
     create_workflow_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_workflow_template, name
       assert_kind_of ::Google::Cloud::Dataproc::V1beta2::CreateWorkflowTemplateRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplate), request.template
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplate), request["template"]
       refute_nil options
     end
 
@@ -121,8 +121,8 @@ class ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < 
     get_workflow_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_workflow_template, name
       assert_kind_of ::Google::Cloud::Dataproc::V1beta2::GetWorkflowTemplateRequest, request
-      assert_equal "hello world", request.name
-      assert_equal 42, request.version
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["version"]
       refute_nil options
     end
 
@@ -184,11 +184,11 @@ class ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < 
     instantiate_workflow_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :instantiate_workflow_template, name
       assert_kind_of ::Google::Cloud::Dataproc::V1beta2::InstantiateWorkflowTemplateRequest, request
-      assert_equal "hello world", request.name
-      assert_equal 42, request.version
-      assert_equal "hello world", request.instance_id
-      assert_equal "hello world", request.request_id
-      assert_equal({}, request.parameters.to_h)
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["version"]
+      assert_equal "hello world", request["instance_id"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal({}, request["parameters"].to_h)
       refute_nil options
     end
 
@@ -254,10 +254,10 @@ class ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < 
     instantiate_inline_workflow_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :instantiate_inline_workflow_template, name
       assert_kind_of ::Google::Cloud::Dataproc::V1beta2::InstantiateInlineWorkflowTemplateRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplate), request.template
-      assert_equal "hello world", request.instance_id
-      assert_equal "hello world", request.request_id
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplate), request["template"]
+      assert_equal "hello world", request["instance_id"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -320,7 +320,7 @@ class ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < 
     update_workflow_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_workflow_template, name
       assert_kind_of ::Google::Cloud::Dataproc::V1beta2::UpdateWorkflowTemplateRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplate), request.template
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplate), request["template"]
       refute_nil options
     end
 
@@ -380,9 +380,9 @@ class ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < 
     list_workflow_templates_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_workflow_templates, name
       assert_kind_of ::Google::Cloud::Dataproc::V1beta2::ListWorkflowTemplatesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -446,8 +446,8 @@ class ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < 
     delete_workflow_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_workflow_template, name
       assert_kind_of ::Google::Cloud::Dataproc::V1beta2::DeleteWorkflowTemplateRequest, request
-      assert_equal "hello world", request.name
-      assert_equal 42, request.version
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["version"]
       refute_nil options
     end
 
