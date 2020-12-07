@@ -62,9 +62,9 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     list_clusters_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_clusters, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::ListClustersRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -125,10 +125,10 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     get_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_cluster, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::GetClusterRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -189,10 +189,10 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     create_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_cluster, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::CreateClusterRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::Cluster), request.cluster
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::Cluster), request["cluster"]
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -254,11 +254,11 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     update_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_cluster, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::UpdateClusterRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::ClusterUpdate), request.update
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::ClusterUpdate), request["update"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -327,18 +327,18 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     update_node_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_node_pool, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::UpdateNodePoolRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal "hello world", request.node_pool_id
-      assert_equal "hello world", request.node_version
-      assert_equal "hello world", request.image_type
-      assert_equal ["hello world"], request.locations
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::WorkloadMetadataConfig), request.workload_metadata_config
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NodePool::UpgradeSettings), request.upgrade_settings
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::LinuxNodeConfig), request.linux_node_config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NodeKubeletConfig), request.kubelet_config
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal "hello world", request["node_pool_id"]
+      assert_equal "hello world", request["node_version"]
+      assert_equal "hello world", request["image_type"]
+      assert_equal ["hello world"], request["locations"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::WorkloadMetadataConfig), request["workload_metadata_config"]
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NodePool::UpgradeSettings), request["upgrade_settings"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::LinuxNodeConfig), request["linux_node_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NodeKubeletConfig), request["kubelet_config"]
       refute_nil options
     end
 
@@ -401,12 +401,12 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     set_node_pool_autoscaling_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_node_pool_autoscaling, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::SetNodePoolAutoscalingRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal "hello world", request.node_pool_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NodePoolAutoscaling), request.autoscaling
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal "hello world", request["node_pool_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NodePoolAutoscaling), request["autoscaling"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -468,11 +468,11 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     set_logging_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_logging_service, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::SetLoggingServiceRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal "hello world", request.logging_service
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal "hello world", request["logging_service"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -534,11 +534,11 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     set_monitoring_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_monitoring_service, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::SetMonitoringServiceRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal "hello world", request.monitoring_service
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal "hello world", request["monitoring_service"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -600,11 +600,11 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     set_addons_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_addons_config, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::SetAddonsConfigRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::AddonsConfig), request.addons_config
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::AddonsConfig), request["addons_config"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -666,11 +666,11 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     set_locations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_locations, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::SetLocationsRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal ["hello world"], request.locations
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal ["hello world"], request["locations"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -732,11 +732,11 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     update_master_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_master, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::UpdateMasterRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal "hello world", request.master_version
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal "hello world", request["master_version"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -799,12 +799,12 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     set_master_auth_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_master_auth, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::SetMasterAuthRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal :UNKNOWN, request.action
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::MasterAuth), request.update
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal :UNKNOWN, request["action"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::MasterAuth), request["update"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -865,10 +865,10 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     delete_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_cluster, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::DeleteClusterRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -928,9 +928,9 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     list_operations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_operations, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::ListOperationsRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -991,10 +991,10 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     get_operation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_operation, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::GetOperationRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.operation_id
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["operation_id"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1055,10 +1055,10 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     cancel_operation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :cancel_operation, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::CancelOperationRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.operation_id
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["operation_id"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1118,9 +1118,9 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     get_server_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_server_config, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::GetServerConfigRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1181,10 +1181,10 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     list_node_pools_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_node_pools, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::ListNodePoolsRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -1242,7 +1242,7 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     get_json_web_keys_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_json_web_keys, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest, request
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -1304,11 +1304,11 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     get_node_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_node_pool, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::GetNodePoolRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal "hello world", request.node_pool_id
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal "hello world", request["node_pool_id"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1370,11 +1370,11 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     create_node_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_node_pool, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::CreateNodePoolRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NodePool), request.node_pool
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NodePool), request["node_pool"]
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -1436,11 +1436,11 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     delete_node_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_node_pool, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::DeleteNodePoolRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal "hello world", request.node_pool_id
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal "hello world", request["node_pool_id"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1502,11 +1502,11 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     rollback_node_pool_upgrade_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :rollback_node_pool_upgrade, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::RollbackNodePoolUpgradeRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal "hello world", request.node_pool_id
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal "hello world", request["node_pool_id"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1569,12 +1569,12 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     set_node_pool_management_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_node_pool_management, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::SetNodePoolManagementRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal "hello world", request.node_pool_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NodeManagement), request.management
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal "hello world", request["node_pool_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NodeManagement), request["management"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1637,12 +1637,12 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     set_labels_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_labels, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::SetLabelsRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal({}, request.resource_labels.to_h)
-      assert_equal "hello world", request.label_fingerprint
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal({}, request["resource_labels"].to_h)
+      assert_equal "hello world", request["label_fingerprint"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1704,11 +1704,11 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     set_legacy_abac_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_legacy_abac, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::SetLegacyAbacRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal true, request.enabled
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal true, request["enabled"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1770,11 +1770,11 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     start_ip_rotation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :start_ip_rotation, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::StartIPRotationRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal "hello world", request.name
-      assert_equal true, request.rotate_credentials
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal "hello world", request["name"]
+      assert_equal true, request["rotate_credentials"]
       refute_nil options
     end
 
@@ -1835,10 +1835,10 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     complete_ip_rotation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :complete_ip_rotation, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::CompleteIPRotationRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1901,12 +1901,12 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     set_node_pool_size_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_node_pool_size, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::SetNodePoolSizeRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal "hello world", request.node_pool_id
-      assert_equal 42, request.node_count
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal "hello world", request["node_pool_id"]
+      assert_equal 42, request["node_count"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1968,11 +1968,11 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     set_network_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_network_policy, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::SetNetworkPolicyRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NetworkPolicy), request.network_policy
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NetworkPolicy), request["network_policy"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -2034,11 +2034,11 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     set_maintenance_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_maintenance_policy, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::SetMaintenancePolicyRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.zone
-      assert_equal "hello world", request.cluster_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::MaintenancePolicy), request.maintenance_policy
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["zone"]
+      assert_equal "hello world", request["cluster_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::MaintenancePolicy), request["maintenance_policy"]
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -2099,10 +2099,10 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     list_usable_subnetworks_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_usable_subnetworks, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::ListUsableSubnetworksRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -2165,7 +2165,7 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     list_locations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_locations, name
       assert_kind_of ::Google::Cloud::Container::V1beta1::ListLocationsRequest, request
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
