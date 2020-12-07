@@ -64,11 +64,11 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
     read_rows_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :read_rows, name
       assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsRequest, request
-      assert_equal "hello world", request.table_name
-      assert_equal "hello world", request.app_profile_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::RowSet), request.rows
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::RowFilter), request.filter
-      assert_equal 42, request.rows_limit
+      assert_equal "hello world", request["table_name"]
+      assert_equal "hello world", request["app_profile_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::RowSet), request["rows"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::RowFilter), request["filter"]
+      assert_equal 42, request["rows_limit"]
       refute_nil options
     end
 
@@ -142,8 +142,8 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
     sample_row_keys_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :sample_row_keys, name
       assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysRequest, request
-      assert_equal "hello world", request.table_name
-      assert_equal "hello world", request.app_profile_id
+      assert_equal "hello world", request["table_name"]
+      assert_equal "hello world", request["app_profile_id"]
       refute_nil options
     end
 
@@ -219,10 +219,10 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
     mutate_row_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :mutate_row, name
       assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowRequest, request
-      assert_equal "hello world", request.table_name
-      assert_equal "hello world", request.app_profile_id
-      assert_equal "hello world", request.row_key
-      assert_kind_of ::Google::Cloud::Bigtable::V2::Mutation, request.mutations.first
+      assert_equal "hello world", request["table_name"]
+      assert_equal "hello world", request["app_profile_id"]
+      assert_equal "hello world", request["row_key"]
+      assert_kind_of ::Google::Cloud::Bigtable::V2::Mutation, request["mutations"].first
       refute_nil options
     end
 
@@ -282,9 +282,9 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
     mutate_rows_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :mutate_rows, name
       assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowsRequest, request
-      assert_equal "hello world", request.table_name
-      assert_equal "hello world", request.app_profile_id
-      assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowsRequest::Entry, request.entries.first
+      assert_equal "hello world", request["table_name"]
+      assert_equal "hello world", request["app_profile_id"]
+      assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowsRequest::Entry, request["entries"].first
       refute_nil options
     end
 
@@ -362,12 +362,12 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
     check_and_mutate_row_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :check_and_mutate_row, name
       assert_kind_of ::Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest, request
-      assert_equal "hello world", request.table_name
-      assert_equal "hello world", request.app_profile_id
-      assert_equal "hello world", request.row_key
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::RowFilter), request.predicate_filter
-      assert_kind_of ::Google::Cloud::Bigtable::V2::Mutation, request.true_mutations.first
-      assert_kind_of ::Google::Cloud::Bigtable::V2::Mutation, request.false_mutations.first
+      assert_equal "hello world", request["table_name"]
+      assert_equal "hello world", request["app_profile_id"]
+      assert_equal "hello world", request["row_key"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::RowFilter), request["predicate_filter"]
+      assert_kind_of ::Google::Cloud::Bigtable::V2::Mutation, request["true_mutations"].first
+      assert_kind_of ::Google::Cloud::Bigtable::V2::Mutation, request["false_mutations"].first
       refute_nil options
     end
 
@@ -428,10 +428,10 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
     read_modify_write_row_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :read_modify_write_row, name
       assert_kind_of ::Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest, request
-      assert_equal "hello world", request.table_name
-      assert_equal "hello world", request.app_profile_id
-      assert_equal "hello world", request.row_key
-      assert_kind_of ::Google::Cloud::Bigtable::V2::ReadModifyWriteRule, request.rules.first
+      assert_equal "hello world", request["table_name"]
+      assert_equal "hello world", request["app_profile_id"]
+      assert_equal "hello world", request["row_key"]
+      assert_kind_of ::Google::Cloud::Bigtable::V2::ReadModifyWriteRule, request["rules"].first
       refute_nil options
     end
 
