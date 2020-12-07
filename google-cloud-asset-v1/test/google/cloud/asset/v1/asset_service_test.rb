@@ -64,11 +64,11 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     export_assets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_assets, name
       assert_kind_of ::Google::Cloud::Asset::V1::ExportAssetsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.read_time
-      assert_equal ["hello world"], request.asset_types
-      assert_equal :CONTENT_TYPE_UNSPECIFIED, request.content_type
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::OutputConfig), request.output_config
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["read_time"]
+      assert_equal ["hello world"], request["asset_types"]
+      assert_equal :CONTENT_TYPE_UNSPECIFIED, request["content_type"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::OutputConfig), request["output_config"]
       refute_nil options
     end
 
@@ -134,10 +134,10 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     batch_get_assets_history_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_get_assets_history, name
       assert_kind_of ::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal ["hello world"], request.asset_names
-      assert_equal :CONTENT_TYPE_UNSPECIFIED, request.content_type
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::TimeWindow), request.read_time_window
+      assert_equal "hello world", request["parent"]
+      assert_equal ["hello world"], request["asset_names"]
+      assert_equal :CONTENT_TYPE_UNSPECIFIED, request["content_type"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::TimeWindow), request["read_time_window"]
       refute_nil options
     end
 
@@ -197,9 +197,9 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     create_feed_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_feed, name
       assert_kind_of ::Google::Cloud::Asset::V1::CreateFeedRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.feed_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::Feed), request.feed
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["feed_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::Feed), request["feed"]
       refute_nil options
     end
 
@@ -257,7 +257,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     get_feed_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_feed, name
       assert_kind_of ::Google::Cloud::Asset::V1::GetFeedRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -315,7 +315,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     list_feeds_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_feeds, name
       assert_kind_of ::Google::Cloud::Asset::V1::ListFeedsRequest, request
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -374,8 +374,8 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     update_feed_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_feed, name
       assert_kind_of ::Google::Cloud::Asset::V1::UpdateFeedRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::Feed), request.feed
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::Feed), request["feed"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -433,7 +433,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     delete_feed_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_feed, name
       assert_kind_of ::Google::Cloud::Asset::V1::DeleteFeedRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -496,12 +496,12 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     search_all_resources_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_all_resources, name
       assert_kind_of ::Google::Cloud::Asset::V1::SearchAllResourcesRequest, request
-      assert_equal "hello world", request.scope
-      assert_equal "hello world", request.query
-      assert_equal ["hello world"], request.asset_types
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["scope"]
+      assert_equal "hello world", request["query"]
+      assert_equal ["hello world"], request["asset_types"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -567,10 +567,10 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     search_all_iam_policies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_all_iam_policies, name
       assert_kind_of ::Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest, request
-      assert_equal "hello world", request.scope
-      assert_equal "hello world", request.query
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["scope"]
+      assert_equal "hello world", request["query"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -634,8 +634,8 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     analyze_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :analyze_iam_policy, name
       assert_kind_of ::Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery), request.analysis_query
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.execution_timeout
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery), request["analysis_query"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["execution_timeout"]
       refute_nil options
     end
 
@@ -694,8 +694,8 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     analyze_iam_policy_longrunning_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :analyze_iam_policy_longrunning, name
       assert_kind_of ::Google::Cloud::Asset::V1::AnalyzeIamPolicyLongrunningRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery), request.analysis_query
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig), request.output_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery), request["analysis_query"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig), request["output_config"]
       refute_nil options
     end
 
