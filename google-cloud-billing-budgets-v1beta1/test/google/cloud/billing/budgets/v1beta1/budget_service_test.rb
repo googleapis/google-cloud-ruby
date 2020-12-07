@@ -61,8 +61,8 @@ class ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::ClientTest < Mi
     create_budget_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_budget, name
       assert_kind_of ::Google::Cloud::Billing::Budgets::V1beta1::CreateBudgetRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Billing::Budgets::V1beta1::Budget), request.budget
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Billing::Budgets::V1beta1::Budget), request["budget"]
       refute_nil options
     end
 
@@ -121,8 +121,8 @@ class ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::ClientTest < Mi
     update_budget_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_budget, name
       assert_kind_of ::Google::Cloud::Billing::Budgets::V1beta1::UpdateBudgetRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Billing::Budgets::V1beta1::Budget), request.budget
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Billing::Budgets::V1beta1::Budget), request["budget"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -180,7 +180,7 @@ class ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::ClientTest < Mi
     get_budget_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_budget, name
       assert_kind_of ::Google::Cloud::Billing::Budgets::V1beta1::GetBudgetRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -240,9 +240,9 @@ class ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::ClientTest < Mi
     list_budgets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_budgets, name
       assert_kind_of ::Google::Cloud::Billing::Budgets::V1beta1::ListBudgetsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -305,7 +305,7 @@ class ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::ClientTest < Mi
     delete_budget_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_budget, name
       assert_kind_of ::Google::Cloud::Billing::Budgets::V1beta1::DeleteBudgetRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
