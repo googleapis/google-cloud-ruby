@@ -100,6 +100,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :bottom, :float, 4
     end
     add_message "google.cloud.videointelligence.v1.FaceDetectionAnnotation" do
+      repeated :tracks, :message, 3, "google.cloud.videointelligence.v1.Track"
+      optional :thumbnail, :bytes, 4
       optional :version, :string, 5
     end
     add_message "google.cloud.videointelligence.v1.PersonDetectionAnnotation" do

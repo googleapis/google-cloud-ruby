@@ -355,6 +355,12 @@ module Google
         end
 
         # Face detection annotation.
+        # @!attribute [rw] tracks
+        #   @return [::Array<::Google::Cloud::VideoIntelligence::V1::Track>]
+        #     The face tracks with attributes.
+        # @!attribute [rw] thumbnail
+        #   @return [::String]
+        #     The thumbnail of a person's face.
         # @!attribute [rw] version
         #   @return [::String]
         #     Feature version.
