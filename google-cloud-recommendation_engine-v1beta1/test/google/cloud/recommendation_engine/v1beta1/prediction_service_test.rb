@@ -67,14 +67,14 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionService::ClientT
     predict_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :predict, name
       assert_kind_of ::Google::Cloud::RecommendationEngine::V1beta1::PredictRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::UserEvent), request.user_event
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
-      assert_equal true, request.dry_run
-      assert_equal({}, request.params.to_h)
-      assert_equal({}, request.labels.to_h)
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::UserEvent), request["user_event"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal true, request["dry_run"]
+      assert_equal({}, request["params"].to_h)
+      assert_equal({}, request["labels"].to_h)
       refute_nil options
     end
 

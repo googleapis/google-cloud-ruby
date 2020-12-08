@@ -61,8 +61,8 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::
     create_prediction_api_key_registration_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_prediction_api_key_registration, name
       assert_kind_of ::Google::Cloud::RecommendationEngine::V1beta1::CreatePredictionApiKeyRegistrationRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistration), request.prediction_api_key_registration
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistration), request["prediction_api_key_registration"]
       refute_nil options
     end
 
@@ -122,9 +122,9 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::
     list_prediction_api_key_registrations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_prediction_api_key_registrations, name
       assert_kind_of ::Google::Cloud::RecommendationEngine::V1beta1::ListPredictionApiKeyRegistrationsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -187,7 +187,7 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::
     delete_prediction_api_key_registration_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_prediction_api_key_registration, name
       assert_kind_of ::Google::Cloud::RecommendationEngine::V1beta1::DeletePredictionApiKeyRegistrationRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 

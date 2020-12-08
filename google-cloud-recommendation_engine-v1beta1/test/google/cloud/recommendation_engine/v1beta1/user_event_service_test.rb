@@ -61,8 +61,8 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::ClientTe
     write_user_event_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :write_user_event, name
       assert_kind_of ::Google::Cloud::RecommendationEngine::V1beta1::WriteUserEventRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::UserEvent), request.user_event
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::UserEvent), request["user_event"]
       refute_nil options
     end
 
@@ -123,10 +123,10 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::ClientTe
     collect_user_event_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :collect_user_event, name
       assert_kind_of ::Google::Cloud::RecommendationEngine::V1beta1::CollectUserEventRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.user_event
-      assert_equal "hello world", request.uri
-      assert_equal 42, request.ets
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["user_event"]
+      assert_equal "hello world", request["uri"]
+      assert_equal 42, request["ets"]
       refute_nil options
     end
 
@@ -187,10 +187,10 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::ClientTe
     list_user_events_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_user_events, name
       assert_kind_of ::Google::Cloud::RecommendationEngine::V1beta1::ListUserEventsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -255,9 +255,9 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::ClientTe
     purge_user_events_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :purge_user_events, name
       assert_kind_of ::Google::Cloud::RecommendationEngine::V1beta1::PurgeUserEventsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal true, request.force
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal true, request["force"]
       refute_nil options
     end
 
@@ -323,10 +323,10 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::ClientTe
     import_user_events_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_user_events, name
       assert_kind_of ::Google::Cloud::RecommendationEngine::V1beta1::ImportUserEventsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.request_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::InputConfig), request.input_config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::ImportErrorsConfig), request.errors_config
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::InputConfig), request["input_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::ImportErrorsConfig), request["errors_config"]
       refute_nil options
     end
 
