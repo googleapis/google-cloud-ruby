@@ -61,8 +61,8 @@ class ::Google::Cloud::Talent::V4::EventService::ClientTest < Minitest::Test
     create_client_event_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_client_event, name
       assert_kind_of ::Google::Cloud::Talent::V4::CreateClientEventRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4::ClientEvent), request.client_event
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4::ClientEvent), request["client_event"]
       refute_nil options
     end
 
