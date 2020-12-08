@@ -64,11 +64,11 @@ class ::Google::Cloud::Workflows::V1beta::Workflows::ClientTest < Minitest::Test
     list_workflows_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_workflows, name
       assert_kind_of ::Google::Cloud::Workflows::V1beta::ListWorkflowsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -131,7 +131,7 @@ class ::Google::Cloud::Workflows::V1beta::Workflows::ClientTest < Minitest::Test
     get_workflow_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_workflow, name
       assert_kind_of ::Google::Cloud::Workflows::V1beta::GetWorkflowRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -191,9 +191,9 @@ class ::Google::Cloud::Workflows::V1beta::Workflows::ClientTest < Minitest::Test
     create_workflow_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_workflow, name
       assert_kind_of ::Google::Cloud::Workflows::V1beta::CreateWorkflowRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Workflows::V1beta::Workflow), request.workflow
-      assert_equal "hello world", request.workflow_id
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Workflows::V1beta::Workflow), request["workflow"]
+      assert_equal "hello world", request["workflow_id"]
       refute_nil options
     end
 
@@ -256,7 +256,7 @@ class ::Google::Cloud::Workflows::V1beta::Workflows::ClientTest < Minitest::Test
     delete_workflow_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_workflow, name
       assert_kind_of ::Google::Cloud::Workflows::V1beta::DeleteWorkflowRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -320,8 +320,8 @@ class ::Google::Cloud::Workflows::V1beta::Workflows::ClientTest < Minitest::Test
     update_workflow_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_workflow, name
       assert_kind_of ::Google::Cloud::Workflows::V1beta::UpdateWorkflowRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Workflows::V1beta::Workflow), request.workflow
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Workflows::V1beta::Workflow), request["workflow"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
