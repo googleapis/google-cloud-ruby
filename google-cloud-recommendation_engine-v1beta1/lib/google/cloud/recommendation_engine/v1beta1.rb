@@ -36,3 +36,6 @@ module Google
     end
   end
 end
+
+helper_path = ::File.join __dir__, "v1beta1", "_helpers.rb"
+require "google/cloud/recommendation_engine/v1beta1/_helpers" if ::File.file? helper_path

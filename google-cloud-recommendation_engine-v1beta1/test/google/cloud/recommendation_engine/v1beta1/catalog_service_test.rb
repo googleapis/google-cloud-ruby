@@ -61,8 +61,8 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::ClientTest
     create_catalog_item_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_catalog_item, name
       assert_kind_of ::Google::Cloud::RecommendationEngine::V1beta1::CreateCatalogItemRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::CatalogItem), request.catalog_item
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::CatalogItem), request["catalog_item"]
       refute_nil options
     end
 
@@ -120,7 +120,7 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::ClientTest
     get_catalog_item_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_catalog_item, name
       assert_kind_of ::Google::Cloud::RecommendationEngine::V1beta1::GetCatalogItemRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -181,10 +181,10 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::ClientTest
     list_catalog_items_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_catalog_items, name
       assert_kind_of ::Google::Cloud::RecommendationEngine::V1beta1::ListCatalogItemsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -249,9 +249,9 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::ClientTest
     update_catalog_item_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_catalog_item, name
       assert_kind_of ::Google::Cloud::RecommendationEngine::V1beta1::UpdateCatalogItemRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::CatalogItem), request.catalog_item
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::CatalogItem), request["catalog_item"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -309,7 +309,7 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::ClientTest
     delete_catalog_item_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_catalog_item, name
       assert_kind_of ::Google::Cloud::RecommendationEngine::V1beta1::DeleteCatalogItemRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -370,10 +370,10 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::ClientTest
     import_catalog_items_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_catalog_items, name
       assert_kind_of ::Google::Cloud::RecommendationEngine::V1beta1::ImportCatalogItemsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.request_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::InputConfig), request.input_config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::ImportErrorsConfig), request.errors_config
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::InputConfig), request["input_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecommendationEngine::V1beta1::ImportErrorsConfig), request["errors_config"]
       refute_nil options
     end
 
