@@ -64,11 +64,11 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     inspect_content_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :inspect_content, name
       assert_kind_of ::Google::Cloud::Dlp::V2::InspectContentRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::InspectConfig), request.inspect_config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::ContentItem), request.item
-      assert_equal "hello world", request.inspect_template_name
-      assert_equal "hello world", request.location_id
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::InspectConfig), request["inspect_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::ContentItem), request["item"]
+      assert_equal "hello world", request["inspect_template_name"]
+      assert_equal "hello world", request["location_id"]
       refute_nil options
     end
 
@@ -131,12 +131,12 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     redact_image_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :redact_image, name
       assert_kind_of ::Google::Cloud::Dlp::V2::RedactImageRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.location_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::InspectConfig), request.inspect_config
-      assert_kind_of ::Google::Cloud::Dlp::V2::RedactImageRequest::ImageRedactionConfig, request.image_redaction_configs.first
-      assert_equal true, request.include_findings
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::ByteContentItem), request.byte_item
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["location_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::InspectConfig), request["inspect_config"]
+      assert_kind_of ::Google::Cloud::Dlp::V2::RedactImageRequest::ImageRedactionConfig, request["image_redaction_configs"].first
+      assert_equal true, request["include_findings"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::ByteContentItem), request["byte_item"]
       refute_nil options
     end
 
@@ -200,13 +200,13 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     deidentify_content_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :deidentify_content, name
       assert_kind_of ::Google::Cloud::Dlp::V2::DeidentifyContentRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::DeidentifyConfig), request.deidentify_config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::InspectConfig), request.inspect_config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::ContentItem), request.item
-      assert_equal "hello world", request.inspect_template_name
-      assert_equal "hello world", request.deidentify_template_name
-      assert_equal "hello world", request.location_id
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::DeidentifyConfig), request["deidentify_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::InspectConfig), request["inspect_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::ContentItem), request["item"]
+      assert_equal "hello world", request["inspect_template_name"]
+      assert_equal "hello world", request["deidentify_template_name"]
+      assert_equal "hello world", request["location_id"]
       refute_nil options
     end
 
@@ -270,13 +270,13 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     reidentify_content_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :reidentify_content, name
       assert_kind_of ::Google::Cloud::Dlp::V2::ReidentifyContentRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::DeidentifyConfig), request.reidentify_config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::InspectConfig), request.inspect_config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::ContentItem), request.item
-      assert_equal "hello world", request.inspect_template_name
-      assert_equal "hello world", request.reidentify_template_name
-      assert_equal "hello world", request.location_id
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::DeidentifyConfig), request["reidentify_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::InspectConfig), request["inspect_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::ContentItem), request["item"]
+      assert_equal "hello world", request["inspect_template_name"]
+      assert_equal "hello world", request["reidentify_template_name"]
+      assert_equal "hello world", request["location_id"]
       refute_nil options
     end
 
@@ -337,10 +337,10 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     list_info_types_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_info_types, name
       assert_kind_of ::Google::Cloud::Dlp::V2::ListInfoTypesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.language_code
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.location_id
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["language_code"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["location_id"]
       refute_nil options
     end
 
@@ -401,10 +401,10 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     create_inspect_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_inspect_template, name
       assert_kind_of ::Google::Cloud::Dlp::V2::CreateInspectTemplateRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::InspectTemplate), request.inspect_template
-      assert_equal "hello world", request.template_id
-      assert_equal "hello world", request.location_id
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::InspectTemplate), request["inspect_template"]
+      assert_equal "hello world", request["template_id"]
+      assert_equal "hello world", request["location_id"]
       refute_nil options
     end
 
@@ -464,9 +464,9 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     update_inspect_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_inspect_template, name
       assert_kind_of ::Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::InspectTemplate), request.inspect_template
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::InspectTemplate), request["inspect_template"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -524,7 +524,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     get_inspect_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_inspect_template, name
       assert_kind_of ::Google::Cloud::Dlp::V2::GetInspectTemplateRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -586,11 +586,11 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     list_inspect_templates_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_inspect_templates, name
       assert_kind_of ::Google::Cloud::Dlp::V2::ListInspectTemplatesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.order_by
-      assert_equal "hello world", request.location_id
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["location_id"]
       refute_nil options
     end
 
@@ -653,7 +653,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     delete_inspect_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_inspect_template, name
       assert_kind_of ::Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -714,10 +714,10 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     create_deidentify_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_deidentify_template, name
       assert_kind_of ::Google::Cloud::Dlp::V2::CreateDeidentifyTemplateRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::DeidentifyTemplate), request.deidentify_template
-      assert_equal "hello world", request.template_id
-      assert_equal "hello world", request.location_id
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::DeidentifyTemplate), request["deidentify_template"]
+      assert_equal "hello world", request["template_id"]
+      assert_equal "hello world", request["location_id"]
       refute_nil options
     end
 
@@ -777,9 +777,9 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     update_deidentify_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_deidentify_template, name
       assert_kind_of ::Google::Cloud::Dlp::V2::UpdateDeidentifyTemplateRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::DeidentifyTemplate), request.deidentify_template
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::DeidentifyTemplate), request["deidentify_template"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -837,7 +837,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     get_deidentify_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_deidentify_template, name
       assert_kind_of ::Google::Cloud::Dlp::V2::GetDeidentifyTemplateRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -899,11 +899,11 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     list_deidentify_templates_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_deidentify_templates, name
       assert_kind_of ::Google::Cloud::Dlp::V2::ListDeidentifyTemplatesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.order_by
-      assert_equal "hello world", request.location_id
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["location_id"]
       refute_nil options
     end
 
@@ -966,7 +966,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     delete_deidentify_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_deidentify_template, name
       assert_kind_of ::Google::Cloud::Dlp::V2::DeleteDeidentifyTemplateRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1027,10 +1027,10 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     create_job_trigger_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_job_trigger, name
       assert_kind_of ::Google::Cloud::Dlp::V2::CreateJobTriggerRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::JobTrigger), request.job_trigger
-      assert_equal "hello world", request.trigger_id
-      assert_equal "hello world", request.location_id
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::JobTrigger), request["job_trigger"]
+      assert_equal "hello world", request["trigger_id"]
+      assert_equal "hello world", request["location_id"]
       refute_nil options
     end
 
@@ -1090,9 +1090,9 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     update_job_trigger_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_job_trigger, name
       assert_kind_of ::Google::Cloud::Dlp::V2::UpdateJobTriggerRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::JobTrigger), request.job_trigger
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::JobTrigger), request["job_trigger"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1151,8 +1151,8 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     hybrid_inspect_job_trigger_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :hybrid_inspect_job_trigger, name
       assert_kind_of ::Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::HybridContentItem), request.hybrid_item
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::HybridContentItem), request["hybrid_item"]
       refute_nil options
     end
 
@@ -1210,7 +1210,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     get_job_trigger_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_job_trigger, name
       assert_kind_of ::Google::Cloud::Dlp::V2::GetJobTriggerRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1273,12 +1273,12 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     list_job_triggers_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_job_triggers, name
       assert_kind_of ::Google::Cloud::Dlp::V2::ListJobTriggersRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.order_by
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.location_id
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["location_id"]
       refute_nil options
     end
 
@@ -1341,7 +1341,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     delete_job_trigger_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_job_trigger, name
       assert_kind_of ::Google::Cloud::Dlp::V2::DeleteJobTriggerRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1399,7 +1399,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     activate_job_trigger_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :activate_job_trigger, name
       assert_kind_of ::Google::Cloud::Dlp::V2::ActivateJobTriggerRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1460,11 +1460,11 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     create_dlp_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_dlp_job, name
       assert_kind_of ::Google::Cloud::Dlp::V2::CreateDlpJobRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::InspectJobConfig), request.inspect_job
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::InspectJobConfig), request["inspect_job"]
       assert_equal :inspect_job, request.job
-      assert_equal "hello world", request.job_id
-      assert_equal "hello world", request.location_id
+      assert_equal "hello world", request["job_id"]
+      assert_equal "hello world", request["location_id"]
       refute_nil options
     end
 
@@ -1528,13 +1528,13 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     list_dlp_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_dlp_jobs, name
       assert_kind_of ::Google::Cloud::Dlp::V2::ListDlpJobsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal :DLP_JOB_TYPE_UNSPECIFIED, request.type
-      assert_equal "hello world", request.order_by
-      assert_equal "hello world", request.location_id
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal :DLP_JOB_TYPE_UNSPECIFIED, request["type"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["location_id"]
       refute_nil options
     end
 
@@ -1597,7 +1597,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     get_dlp_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_dlp_job, name
       assert_kind_of ::Google::Cloud::Dlp::V2::GetDlpJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1655,7 +1655,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     delete_dlp_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_dlp_job, name
       assert_kind_of ::Google::Cloud::Dlp::V2::DeleteDlpJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1713,7 +1713,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     cancel_dlp_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :cancel_dlp_job, name
       assert_kind_of ::Google::Cloud::Dlp::V2::CancelDlpJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1774,10 +1774,10 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     create_stored_info_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_stored_info_type, name
       assert_kind_of ::Google::Cloud::Dlp::V2::CreateStoredInfoTypeRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::StoredInfoTypeConfig), request.config
-      assert_equal "hello world", request.stored_info_type_id
-      assert_equal "hello world", request.location_id
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::StoredInfoTypeConfig), request["config"]
+      assert_equal "hello world", request["stored_info_type_id"]
+      assert_equal "hello world", request["location_id"]
       refute_nil options
     end
 
@@ -1837,9 +1837,9 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     update_stored_info_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_stored_info_type, name
       assert_kind_of ::Google::Cloud::Dlp::V2::UpdateStoredInfoTypeRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::StoredInfoTypeConfig), request.config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::StoredInfoTypeConfig), request["config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1897,7 +1897,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     get_stored_info_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_stored_info_type, name
       assert_kind_of ::Google::Cloud::Dlp::V2::GetStoredInfoTypeRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1959,11 +1959,11 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     list_stored_info_types_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_stored_info_types, name
       assert_kind_of ::Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.order_by
-      assert_equal "hello world", request.location_id
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["location_id"]
       refute_nil options
     end
 
@@ -2026,7 +2026,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     delete_stored_info_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_stored_info_type, name
       assert_kind_of ::Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -2085,8 +2085,8 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     hybrid_inspect_dlp_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :hybrid_inspect_dlp_job, name
       assert_kind_of ::Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::HybridContentItem), request.hybrid_item
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dlp::V2::HybridContentItem), request["hybrid_item"]
       refute_nil options
     end
 
@@ -2144,7 +2144,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
     finish_dlp_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :finish_dlp_job, name
       assert_kind_of ::Google::Cloud::Dlp::V2::FinishDlpJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
