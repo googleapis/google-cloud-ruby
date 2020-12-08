@@ -62,9 +62,9 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     list_databases_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_databases, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -129,9 +129,9 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     create_database_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_database, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.create_statement
-      assert_equal ["hello world"], request.extra_statements
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["create_statement"]
+      assert_equal ["hello world"], request["extra_statements"]
       refute_nil options
     end
 
@@ -194,7 +194,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     get_database_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_database, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -254,9 +254,9 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     update_database_ddl_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_database_ddl, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest, request
-      assert_equal "hello world", request.database
-      assert_equal ["hello world"], request.statements
-      assert_equal "hello world", request.operation_id
+      assert_equal "hello world", request["database"]
+      assert_equal ["hello world"], request["statements"]
+      assert_equal "hello world", request["operation_id"]
       refute_nil options
     end
 
@@ -319,7 +319,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     drop_database_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :drop_database, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::DropDatabaseRequest, request
-      assert_equal "hello world", request.database
+      assert_equal "hello world", request["database"]
       refute_nil options
     end
 
@@ -377,7 +377,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     get_database_ddl_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_database_ddl, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlRequest, request
-      assert_equal "hello world", request.database
+      assert_equal "hello world", request["database"]
       refute_nil options
     end
 
@@ -436,8 +436,8 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
       assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request.policy
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
       refute_nil options
     end
 
@@ -496,8 +496,8 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
       assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request.options
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
       refute_nil options
     end
 
@@ -556,8 +556,8 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :test_iam_permissions, name
       assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal ["hello world"], request.permissions
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
       refute_nil options
     end
 
@@ -617,9 +617,9 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     create_backup_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_backup, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.backup_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::Admin::Database::V1::Backup), request.backup
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["backup_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::Admin::Database::V1::Backup), request["backup"]
       refute_nil options
     end
 
@@ -682,7 +682,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     get_backup_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_backup, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::GetBackupRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -741,8 +741,8 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     update_backup_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_backup, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::Admin::Database::V1::Backup), request.backup
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::Admin::Database::V1::Backup), request["backup"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -800,7 +800,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     delete_backup_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_backup, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -861,10 +861,10 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     list_backups_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_backups, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -929,9 +929,9 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     restore_database_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :restore_database, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.database_id
-      assert_equal "hello world", request.backup
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["database_id"]
+      assert_equal "hello world", request["backup"]
       assert_equal :backup, request.source
       refute_nil options
     end
@@ -998,10 +998,10 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     list_database_operations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_database_operations, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -1067,10 +1067,10 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     list_backup_operations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_backup_operations, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
