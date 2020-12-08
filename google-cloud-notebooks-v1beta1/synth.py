@@ -41,10 +41,3 @@ library = gapic.ruby_library(
 )
 
 s.copy(library, merge=ruby.global_merge)
-
-# Workaround for https://github.com/googleapis/gapic-generator-ruby/issues/507
-s.replace(
-    ".rubocop.yml",
-    'Naming/FileName:\n  Exclude:\n    - "lib/google-cloud-notebooks-v1beta1\\.rb"\nStyle/AsciiComments:',
-    'Naming/FileName:\n  Exclude:\n    - "lib/google-cloud-notebooks-v1beta1.rb"\nNaming/PredicateName:\n  Enabled: false\nStyle/AsciiComments:'
-)
