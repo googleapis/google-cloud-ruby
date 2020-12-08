@@ -61,8 +61,8 @@ class ::Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Te
     create_tenant_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_tenant, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::CreateTenantRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Tenant), request.tenant
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Tenant), request["tenant"]
       refute_nil options
     end
 
@@ -120,7 +120,7 @@ class ::Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Te
     get_tenant_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_tenant, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::GetTenantRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -179,8 +179,8 @@ class ::Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Te
     update_tenant_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_tenant, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::UpdateTenantRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Tenant), request.tenant
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Tenant), request["tenant"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -238,7 +238,7 @@ class ::Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Te
     delete_tenant_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_tenant, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::DeleteTenantRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -298,9 +298,9 @@ class ::Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Te
     list_tenants_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_tenants, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::ListTenantsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 

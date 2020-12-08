@@ -27,6 +27,8 @@ Metrics/PerceivedComplexity:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-talent-v4beta1.rb"
+Naming/PredicateName:
+  Enabled: false
 Style/AsciiComments:
   Enabled: false
 Style/CaseEquality:
