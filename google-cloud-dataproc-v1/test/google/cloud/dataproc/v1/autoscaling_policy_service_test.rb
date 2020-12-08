@@ -61,8 +61,8 @@ class ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::ClientTest < Mini
     create_autoscaling_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_autoscaling_policy, name
       assert_kind_of ::Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1::AutoscalingPolicy), request.policy
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1::AutoscalingPolicy), request["policy"]
       refute_nil options
     end
 
@@ -120,7 +120,7 @@ class ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::ClientTest < Mini
     update_autoscaling_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_autoscaling_policy, name
       assert_kind_of ::Google::Cloud::Dataproc::V1::UpdateAutoscalingPolicyRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1::AutoscalingPolicy), request.policy
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1::AutoscalingPolicy), request["policy"]
       refute_nil options
     end
 
@@ -178,7 +178,7 @@ class ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::ClientTest < Mini
     get_autoscaling_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_autoscaling_policy, name
       assert_kind_of ::Google::Cloud::Dataproc::V1::GetAutoscalingPolicyRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -238,9 +238,9 @@ class ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::ClientTest < Mini
     list_autoscaling_policies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_autoscaling_policies, name
       assert_kind_of ::Google::Cloud::Dataproc::V1::ListAutoscalingPoliciesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -303,7 +303,7 @@ class ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::ClientTest < Mini
     delete_autoscaling_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_autoscaling_policy, name
       assert_kind_of ::Google::Cloud::Dataproc::V1::DeleteAutoscalingPolicyRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
