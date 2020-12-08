@@ -67,14 +67,14 @@ class ::Google::Cloud::Trace::V1::TraceService::ClientTest < Minitest::Test
     list_traces_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_traces, name
       assert_kind_of ::Google::Cloud::Trace::V1::ListTracesRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal :VIEW_TYPE_UNSPECIFIED, request.view
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.start_time
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.end_time
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["project_id"]
+      assert_equal :VIEW_TYPE_UNSPECIFIED, request["view"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["start_time"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["end_time"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -138,8 +138,8 @@ class ::Google::Cloud::Trace::V1::TraceService::ClientTest < Minitest::Test
     get_trace_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_trace, name
       assert_kind_of ::Google::Cloud::Trace::V1::GetTraceRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.trace_id
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["trace_id"]
       refute_nil options
     end
 
@@ -198,8 +198,8 @@ class ::Google::Cloud::Trace::V1::TraceService::ClientTest < Minitest::Test
     patch_traces_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :patch_traces, name
       assert_kind_of ::Google::Cloud::Trace::V1::PatchTracesRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Trace::V1::Traces), request.traces
+      assert_equal "hello world", request["project_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Trace::V1::Traces), request["traces"]
       refute_nil options
     end
 
