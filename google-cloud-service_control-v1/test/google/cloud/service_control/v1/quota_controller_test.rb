@@ -62,9 +62,9 @@ class ::Google::Cloud::ServiceControl::V1::QuotaController::ClientTest < Minites
     allocate_quota_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :allocate_quota, name
       assert_kind_of ::Google::Cloud::ServiceControl::V1::AllocateQuotaRequest, request
-      assert_equal "hello world", request.service_name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceControl::V1::QuotaOperation), request.allocate_operation
-      assert_equal "hello world", request.service_config_id
+      assert_equal "hello world", request["service_name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceControl::V1::QuotaOperation), request["allocate_operation"]
+      assert_equal "hello world", request["service_config_id"]
       refute_nil options
     end
 
