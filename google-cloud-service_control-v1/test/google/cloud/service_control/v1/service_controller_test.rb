@@ -62,9 +62,9 @@ class ::Google::Cloud::ServiceControl::V1::ServiceController::ClientTest < Minit
     check_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :check, name
       assert_kind_of ::Google::Cloud::ServiceControl::V1::CheckRequest, request
-      assert_equal "hello world", request.service_name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceControl::V1::Operation), request.operation
-      assert_equal "hello world", request.service_config_id
+      assert_equal "hello world", request["service_name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceControl::V1::Operation), request["operation"]
+      assert_equal "hello world", request["service_config_id"]
       refute_nil options
     end
 
@@ -124,9 +124,9 @@ class ::Google::Cloud::ServiceControl::V1::ServiceController::ClientTest < Minit
     report_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :report, name
       assert_kind_of ::Google::Cloud::ServiceControl::V1::ReportRequest, request
-      assert_equal "hello world", request.service_name
-      assert_kind_of ::Google::Cloud::ServiceControl::V1::Operation, request.operations.first
-      assert_equal "hello world", request.service_config_id
+      assert_equal "hello world", request["service_name"]
+      assert_kind_of ::Google::Cloud::ServiceControl::V1::Operation, request["operations"].first
+      assert_equal "hello world", request["service_config_id"]
       refute_nil options
     end
 
