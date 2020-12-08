@@ -63,10 +63,10 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
     list_workload_identity_pools_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_workload_identity_pools, name
       assert_kind_of ::Google::Iam::V1beta::ListWorkloadIdentityPoolsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal true, request.show_deleted
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal true, request["show_deleted"]
       refute_nil options
     end
 
@@ -129,7 +129,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
     get_workload_identity_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_workload_identity_pool, name
       assert_kind_of ::Google::Iam::V1beta::GetWorkloadIdentityPoolRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -189,9 +189,9 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
     create_workload_identity_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_workload_identity_pool, name
       assert_kind_of ::Google::Iam::V1beta::CreateWorkloadIdentityPoolRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1beta::WorkloadIdentityPool), request.workload_identity_pool
-      assert_equal "hello world", request.workload_identity_pool_id
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1beta::WorkloadIdentityPool), request["workload_identity_pool"]
+      assert_equal "hello world", request["workload_identity_pool_id"]
       refute_nil options
     end
 
@@ -255,8 +255,8 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
     update_workload_identity_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_workload_identity_pool, name
       assert_kind_of ::Google::Iam::V1beta::UpdateWorkloadIdentityPoolRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1beta::WorkloadIdentityPool), request.workload_identity_pool
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1beta::WorkloadIdentityPool), request["workload_identity_pool"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -319,7 +319,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
     delete_workload_identity_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_workload_identity_pool, name
       assert_kind_of ::Google::Iam::V1beta::DeleteWorkloadIdentityPoolRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -382,7 +382,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
     undelete_workload_identity_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :undelete_workload_identity_pool, name
       assert_kind_of ::Google::Iam::V1beta::UndeleteWorkloadIdentityPoolRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -448,10 +448,10 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
     list_workload_identity_pool_providers_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_workload_identity_pool_providers, name
       assert_kind_of ::Google::Iam::V1beta::ListWorkloadIdentityPoolProvidersRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal true, request.show_deleted
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal true, request["show_deleted"]
       refute_nil options
     end
 
@@ -514,7 +514,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
     get_workload_identity_pool_provider_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_workload_identity_pool_provider, name
       assert_kind_of ::Google::Iam::V1beta::GetWorkloadIdentityPoolProviderRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -574,9 +574,9 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
     create_workload_identity_pool_provider_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_workload_identity_pool_provider, name
       assert_kind_of ::Google::Iam::V1beta::CreateWorkloadIdentityPoolProviderRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1beta::WorkloadIdentityPoolProvider), request.workload_identity_pool_provider
-      assert_equal "hello world", request.workload_identity_pool_provider_id
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1beta::WorkloadIdentityPoolProvider), request["workload_identity_pool_provider"]
+      assert_equal "hello world", request["workload_identity_pool_provider_id"]
       refute_nil options
     end
 
@@ -640,8 +640,8 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
     update_workload_identity_pool_provider_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_workload_identity_pool_provider, name
       assert_kind_of ::Google::Iam::V1beta::UpdateWorkloadIdentityPoolProviderRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1beta::WorkloadIdentityPoolProvider), request.workload_identity_pool_provider
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1beta::WorkloadIdentityPoolProvider), request["workload_identity_pool_provider"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -704,7 +704,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
     delete_workload_identity_pool_provider_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_workload_identity_pool_provider, name
       assert_kind_of ::Google::Iam::V1beta::DeleteWorkloadIdentityPoolProviderRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -767,7 +767,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
     undelete_workload_identity_pool_provider_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :undelete_workload_identity_pool_provider, name
       assert_kind_of ::Google::Iam::V1beta::UndeleteWorkloadIdentityPoolProviderRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
