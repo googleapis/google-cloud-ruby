@@ -62,9 +62,9 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
     list_secrets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_secrets, name
       assert_kind_of ::Google::Cloud::SecretManager::V1beta1::ListSecretsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -129,9 +129,9 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
     create_secret_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_secret, name
       assert_kind_of ::Google::Cloud::SecretManager::V1beta1::CreateSecretRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.secret_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecretManager::V1beta1::Secret), request.secret
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["secret_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecretManager::V1beta1::Secret), request["secret"]
       refute_nil options
     end
 
@@ -190,8 +190,8 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
     add_secret_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :add_secret_version, name
       assert_kind_of ::Google::Cloud::SecretManager::V1beta1::AddSecretVersionRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecretManager::V1beta1::SecretPayload), request.payload
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecretManager::V1beta1::SecretPayload), request["payload"]
       refute_nil options
     end
 
@@ -249,7 +249,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
     get_secret_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_secret, name
       assert_kind_of ::Google::Cloud::SecretManager::V1beta1::GetSecretRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -308,8 +308,8 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
     update_secret_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_secret, name
       assert_kind_of ::Google::Cloud::SecretManager::V1beta1::UpdateSecretRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecretManager::V1beta1::Secret), request.secret
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecretManager::V1beta1::Secret), request["secret"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -367,7 +367,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
     delete_secret_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_secret, name
       assert_kind_of ::Google::Cloud::SecretManager::V1beta1::DeleteSecretRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -427,9 +427,9 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
     list_secret_versions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_secret_versions, name
       assert_kind_of ::Google::Cloud::SecretManager::V1beta1::ListSecretVersionsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -492,7 +492,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
     get_secret_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_secret_version, name
       assert_kind_of ::Google::Cloud::SecretManager::V1beta1::GetSecretVersionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -550,7 +550,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
     access_secret_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :access_secret_version, name
       assert_kind_of ::Google::Cloud::SecretManager::V1beta1::AccessSecretVersionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -608,7 +608,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
     disable_secret_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :disable_secret_version, name
       assert_kind_of ::Google::Cloud::SecretManager::V1beta1::DisableSecretVersionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -666,7 +666,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
     enable_secret_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :enable_secret_version, name
       assert_kind_of ::Google::Cloud::SecretManager::V1beta1::EnableSecretVersionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -724,7 +724,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
     destroy_secret_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :destroy_secret_version, name
       assert_kind_of ::Google::Cloud::SecretManager::V1beta1::DestroySecretVersionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -783,8 +783,8 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
       assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request.policy
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
       refute_nil options
     end
 
@@ -843,8 +843,8 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
       assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request.options
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
       refute_nil options
     end
 
@@ -903,8 +903,8 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
     test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :test_iam_permissions, name
       assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal ["hello world"], request.permissions
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
       refute_nil options
     end
 
