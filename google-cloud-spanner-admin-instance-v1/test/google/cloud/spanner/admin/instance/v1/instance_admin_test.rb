@@ -62,9 +62,9 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
     list_instance_configs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_instance_configs, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -127,7 +127,7 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
     get_instance_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_instance_config, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -188,10 +188,10 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
     list_instances_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_instances, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -255,8 +255,8 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
     get_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_instance, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["field_mask"]
       refute_nil options
     end
 
@@ -316,9 +316,9 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
     create_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_instance, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.instance_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::Admin::Instance::V1::Instance), request.instance
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["instance_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::Admin::Instance::V1::Instance), request["instance"]
       refute_nil options
     end
 
@@ -382,8 +382,8 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
     update_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_instance, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::Admin::Instance::V1::Instance), request.instance
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::Admin::Instance::V1::Instance), request["instance"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["field_mask"]
       refute_nil options
     end
 
@@ -446,7 +446,7 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
     delete_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_instance, name
       assert_kind_of ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -505,8 +505,8 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
       assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request.policy
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
       refute_nil options
     end
 
@@ -565,8 +565,8 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
       assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request.options
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
       refute_nil options
     end
 
@@ -625,8 +625,8 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
     test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :test_iam_permissions, name
       assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal ["hello world"], request.permissions
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
       refute_nil options
     end
 
