@@ -61,8 +61,8 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
     create_index_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_index, name
       assert_kind_of ::Google::Cloud::Firestore::Admin::V1::CreateIndexRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::Admin::V1::Index), request.index
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::Admin::V1::Index), request["index"]
       refute_nil options
     end
 
@@ -128,10 +128,10 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
     list_indexes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_indexes, name
       assert_kind_of ::Google::Cloud::Firestore::Admin::V1::ListIndexesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -194,7 +194,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
     get_index_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_index, name
       assert_kind_of ::Google::Cloud::Firestore::Admin::V1::GetIndexRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -252,7 +252,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
     delete_index_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_index, name
       assert_kind_of ::Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -310,7 +310,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
     get_field_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_field, name
       assert_kind_of ::Google::Cloud::Firestore::Admin::V1::GetFieldRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -369,8 +369,8 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
     update_field_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_field, name
       assert_kind_of ::Google::Cloud::Firestore::Admin::V1::UpdateFieldRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::Admin::V1::Field), request.field
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::Admin::V1::Field), request["field"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -436,10 +436,10 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
     list_fields_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_fields, name
       assert_kind_of ::Google::Cloud::Firestore::Admin::V1::ListFieldsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -504,9 +504,9 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
     export_documents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_documents, name
       assert_kind_of ::Google::Cloud::Firestore::Admin::V1::ExportDocumentsRequest, request
-      assert_equal "hello world", request.name
-      assert_equal ["hello world"], request.collection_ids
-      assert_equal "hello world", request.output_uri_prefix
+      assert_equal "hello world", request["name"]
+      assert_equal ["hello world"], request["collection_ids"]
+      assert_equal "hello world", request["output_uri_prefix"]
       refute_nil options
     end
 
@@ -571,9 +571,9 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
     import_documents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_documents, name
       assert_kind_of ::Google::Cloud::Firestore::Admin::V1::ImportDocumentsRequest, request
-      assert_equal "hello world", request.name
-      assert_equal ["hello world"], request.collection_ids
-      assert_equal "hello world", request.input_uri_prefix
+      assert_equal "hello world", request["name"]
+      assert_equal ["hello world"], request["collection_ids"]
+      assert_equal "hello world", request["input_uri_prefix"]
       refute_nil options
     end
 
