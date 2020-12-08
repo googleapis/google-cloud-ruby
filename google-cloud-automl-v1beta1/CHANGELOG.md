@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.1 / 2020-12-08
+
+#### Bug Fixes
+
+* Set version constants in the correct modules
+
 ### 0.3.0 / 2020-10-14
 
 #### Features
