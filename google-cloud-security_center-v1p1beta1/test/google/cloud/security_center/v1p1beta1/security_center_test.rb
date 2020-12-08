@@ -61,8 +61,8 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     create_source_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_source, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::CreateSourceRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1p1beta1::Source), request.source
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1p1beta1::Source), request["source"]
       refute_nil options
     end
 
@@ -122,9 +122,9 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     create_finding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_finding, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::CreateFindingRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.finding_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1p1beta1::Finding), request.finding
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["finding_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1p1beta1::Finding), request["finding"]
       refute_nil options
     end
 
@@ -184,9 +184,9 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     create_notification_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_notification_config, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::CreateNotificationConfigRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.config_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig), request.notification_config
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["config_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig), request["notification_config"]
       refute_nil options
     end
 
@@ -244,7 +244,7 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     delete_notification_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_notification_config, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::DeleteNotificationConfigRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -303,8 +303,8 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
       assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request.options
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
       refute_nil options
     end
 
@@ -362,7 +362,7 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     get_notification_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_notification_config, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::GetNotificationConfigRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -420,7 +420,7 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     get_organization_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_organization_settings, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::GetOrganizationSettingsRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -478,7 +478,7 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     get_source_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_source, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::GetSourceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -542,13 +542,13 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     group_assets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :group_assets, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.group_by
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.compare_duration
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.read_time
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["group_by"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["compare_duration"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["read_time"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -617,13 +617,13 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     group_findings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :group_findings, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.group_by
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.read_time
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.compare_duration
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["group_by"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["read_time"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["compare_duration"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -693,14 +693,14 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     list_assets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_assets, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.read_time
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.compare_duration
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["read_time"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["compare_duration"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["field_mask"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -770,14 +770,14 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     list_findings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_findings, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.read_time
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.compare_duration
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["read_time"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["compare_duration"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["field_mask"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -842,9 +842,9 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     list_notification_configs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_notification_configs, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::ListNotificationConfigsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -909,9 +909,9 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     list_sources_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_sources, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::ListSourcesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -974,7 +974,7 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     run_asset_discovery_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_asset_discovery, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::RunAssetDiscoveryRequest, request
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -1039,9 +1039,9 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     set_finding_state_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_finding_state, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::SetFindingStateRequest, request
-      assert_equal "hello world", request.name
-      assert_equal :STATE_UNSPECIFIED, request.state
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.start_time
+      assert_equal "hello world", request["name"]
+      assert_equal :STATE_UNSPECIFIED, request["state"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["start_time"]
       refute_nil options
     end
 
@@ -1100,8 +1100,8 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
       assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request.policy
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
       refute_nil options
     end
 
@@ -1160,8 +1160,8 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :test_iam_permissions, name
       assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal ["hello world"], request.permissions
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
       refute_nil options
     end
 
@@ -1220,8 +1220,8 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     update_finding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_finding, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateFindingRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1p1beta1::Finding), request.finding
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1p1beta1::Finding), request["finding"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1280,8 +1280,8 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     update_notification_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_notification_config, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateNotificationConfigRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig), request.notification_config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig), request["notification_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1340,8 +1340,8 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     update_organization_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_organization_settings, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateOrganizationSettingsRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings), request.organization_settings
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings), request["organization_settings"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1400,8 +1400,8 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     update_source_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_source, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSourceRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1p1beta1::Source), request.source
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1p1beta1::Source), request["source"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1461,9 +1461,9 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientTest < M
     update_security_marks_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_security_marks, name
       assert_kind_of ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSecurityMarksRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityMarks), request.security_marks
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.start_time
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityMarks), request["security_marks"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["start_time"]
       refute_nil options
     end
 
