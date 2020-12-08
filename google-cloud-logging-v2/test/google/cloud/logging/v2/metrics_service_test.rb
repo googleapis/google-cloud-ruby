@@ -62,9 +62,9 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientTest < Minitest::Test
     list_log_metrics_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_log_metrics, name
       assert_kind_of ::Google::Cloud::Logging::V2::ListLogMetricsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -127,7 +127,7 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientTest < Minitest::Test
     get_log_metric_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_log_metric, name
       assert_kind_of ::Google::Cloud::Logging::V2::GetLogMetricRequest, request
-      assert_equal "hello world", request.metric_name
+      assert_equal "hello world", request["metric_name"]
       refute_nil options
     end
 
@@ -186,8 +186,8 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientTest < Minitest::Test
     create_log_metric_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_log_metric, name
       assert_kind_of ::Google::Cloud::Logging::V2::CreateLogMetricRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogMetric), request.metric
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogMetric), request["metric"]
       refute_nil options
     end
 
@@ -246,8 +246,8 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientTest < Minitest::Test
     update_log_metric_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_log_metric, name
       assert_kind_of ::Google::Cloud::Logging::V2::UpdateLogMetricRequest, request
-      assert_equal "hello world", request.metric_name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogMetric), request.metric
+      assert_equal "hello world", request["metric_name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::LogMetric), request["metric"]
       refute_nil options
     end
 
@@ -305,7 +305,7 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientTest < Minitest::Test
     delete_log_metric_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_log_metric, name
       assert_kind_of ::Google::Cloud::Logging::V2::DeleteLogMetricRequest, request
-      assert_equal "hello world", request.metric_name
+      assert_equal "hello world", request["metric_name"]
       refute_nil options
     end
 

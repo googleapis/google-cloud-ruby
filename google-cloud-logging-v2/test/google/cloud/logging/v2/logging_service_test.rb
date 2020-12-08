@@ -60,7 +60,7 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
     delete_log_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_log, name
       assert_kind_of ::Google::Cloud::Logging::V2::DeleteLogRequest, request
-      assert_equal "hello world", request.log_name
+      assert_equal "hello world", request["log_name"]
       refute_nil options
     end
 
@@ -123,12 +123,12 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
     write_log_entries_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :write_log_entries, name
       assert_kind_of ::Google::Cloud::Logging::V2::WriteLogEntriesRequest, request
-      assert_equal "hello world", request.log_name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Api::MonitoredResource), request.resource
-      assert_equal({}, request.labels.to_h)
-      assert_kind_of ::Google::Cloud::Logging::V2::LogEntry, request.entries.first
-      assert_equal true, request.partial_success
-      assert_equal true, request.dry_run
+      assert_equal "hello world", request["log_name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Api::MonitoredResource), request["resource"]
+      assert_equal({}, request["labels"].to_h)
+      assert_kind_of ::Google::Cloud::Logging::V2::LogEntry, request["entries"].first
+      assert_equal true, request["partial_success"]
+      assert_equal true, request["dry_run"]
       refute_nil options
     end
 
@@ -190,11 +190,11 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
     list_log_entries_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_log_entries, name
       assert_kind_of ::Google::Cloud::Logging::V2::ListLogEntriesRequest, request
-      assert_equal ["hello world"], request.resource_names
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal ["hello world"], request["resource_names"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -258,8 +258,8 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
     list_monitored_resource_descriptors_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_monitored_resource_descriptors, name
       assert_kind_of ::Google::Cloud::Logging::V2::ListMonitoredResourceDescriptorsRequest, request
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -325,10 +325,10 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
     list_logs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_logs, name
       assert_kind_of ::Google::Cloud::Logging::V2::ListLogsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal ["hello world"], request.resource_names
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal ["hello world"], request["resource_names"]
       refute_nil options
     end
 
@@ -457,9 +457,9 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
       tail_log_entries_client_stub.requests.each do |request|
         request.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Logging::V2::TailLogEntriesRequest, r
-          assert_equal ["hello world"], r.resource_names
-          assert_equal "hello world", r.filter
-          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), r.buffer_window
+          assert_equal ["hello world"], r["resource_names"]
+          assert_equal "hello world", r["filter"]
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), r["buffer_window"]
         end
       end
     end
