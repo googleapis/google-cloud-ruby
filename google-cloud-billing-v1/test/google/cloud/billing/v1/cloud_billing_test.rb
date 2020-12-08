@@ -60,7 +60,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
     get_billing_account_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_billing_account, name
       assert_kind_of ::Google::Cloud::Billing::V1::GetBillingAccountRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -120,9 +120,9 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
     list_billing_accounts_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_billing_accounts, name
       assert_kind_of ::Google::Cloud::Billing::V1::ListBillingAccountsRequest, request
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -187,9 +187,9 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
     update_billing_account_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_billing_account, name
       assert_kind_of ::Google::Cloud::Billing::V1::UpdateBillingAccountRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Billing::V1::BillingAccount), request.account
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Billing::V1::BillingAccount), request["account"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -247,7 +247,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
     create_billing_account_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_billing_account, name
       assert_kind_of ::Google::Cloud::Billing::V1::CreateBillingAccountRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Billing::V1::BillingAccount), request.billing_account
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Billing::V1::BillingAccount), request["billing_account"]
       refute_nil options
     end
 
@@ -307,9 +307,9 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
     list_project_billing_info_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_project_billing_info, name
       assert_kind_of ::Google::Cloud::Billing::V1::ListProjectBillingInfoRequest, request
-      assert_equal "hello world", request.name
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -372,7 +372,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
     get_project_billing_info_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_project_billing_info, name
       assert_kind_of ::Google::Cloud::Billing::V1::GetProjectBillingInfoRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -431,8 +431,8 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
     update_project_billing_info_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_project_billing_info, name
       assert_kind_of ::Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Billing::V1::ProjectBillingInfo), request.project_billing_info
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Billing::V1::ProjectBillingInfo), request["project_billing_info"]
       refute_nil options
     end
 
@@ -491,8 +491,8 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
       assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request.options
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
       refute_nil options
     end
 
@@ -551,8 +551,8 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
       assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request.policy
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
       refute_nil options
     end
 
@@ -611,8 +611,8 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
     test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :test_iam_permissions, name
       assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal ["hello world"], request.permissions
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
       refute_nil options
     end
 

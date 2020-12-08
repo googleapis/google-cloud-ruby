@@ -61,8 +61,8 @@ class ::Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
     list_services_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_services, name
       assert_kind_of ::Google::Cloud::Billing::V1::ListServicesRequest, request
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -130,12 +130,12 @@ class ::Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
     list_skus_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_skus, name
       assert_kind_of ::Google::Cloud::Billing::V1::ListSkusRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.start_time
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.end_time
-      assert_equal "hello world", request.currency_code
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["start_time"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["end_time"]
+      assert_equal "hello world", request["currency_code"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
