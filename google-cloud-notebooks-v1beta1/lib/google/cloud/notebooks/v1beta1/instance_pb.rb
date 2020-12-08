@@ -66,15 +66,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :STOPPING, 4
       value :STOPPED, 5
       value :DELETED, 6
-      value :UPGRADING, 7
-      value :INITIALIZING, 8
-      value :REGISTERING, 9
     end
     add_enum "google.cloud.notebooks.v1beta1.Instance.DiskType" do
       value :DISK_TYPE_UNSPECIFIED, 0
       value :PD_STANDARD, 1
       value :PD_SSD, 2
-      value :PD_BALANCED, 3
     end
     add_enum "google.cloud.notebooks.v1beta1.Instance.DiskEncryption" do
       value :DISK_ENCRYPTION_UNSPECIFIED, 0
