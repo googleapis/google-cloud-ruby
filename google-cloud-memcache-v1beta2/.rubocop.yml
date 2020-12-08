@@ -27,6 +27,8 @@ Metrics/PerceivedComplexity:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-memcache-v1beta2.rb"
+Naming/PredicateName:
+  Enabled: false
 Style/AsciiComments:
   Enabled: false
 Style/CaseEquality:
