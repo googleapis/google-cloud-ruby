@@ -61,8 +61,8 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::ClientTest 
     report_error_event_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :report_error_event, name
       assert_kind_of ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventRequest, request
-      assert_equal "hello world", request.project_name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent), request.event
+      assert_equal "hello world", request["project_name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent), request["event"]
       refute_nil options
     end
 
