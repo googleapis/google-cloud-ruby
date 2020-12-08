@@ -61,8 +61,8 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
     create_scan_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_scan_config, name
       assert_kind_of ::Google::Cloud::WebSecurityScanner::V1::CreateScanConfigRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::WebSecurityScanner::V1::ScanConfig), request.scan_config
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::WebSecurityScanner::V1::ScanConfig), request["scan_config"]
       refute_nil options
     end
 
@@ -120,7 +120,7 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
     delete_scan_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_scan_config, name
       assert_kind_of ::Google::Cloud::WebSecurityScanner::V1::DeleteScanConfigRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -178,7 +178,7 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
     get_scan_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_scan_config, name
       assert_kind_of ::Google::Cloud::WebSecurityScanner::V1::GetScanConfigRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -238,9 +238,9 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
     list_scan_configs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_scan_configs, name
       assert_kind_of ::Google::Cloud::WebSecurityScanner::V1::ListScanConfigsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -304,8 +304,8 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
     update_scan_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_scan_config, name
       assert_kind_of ::Google::Cloud::WebSecurityScanner::V1::UpdateScanConfigRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::WebSecurityScanner::V1::ScanConfig), request.scan_config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::WebSecurityScanner::V1::ScanConfig), request["scan_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -363,7 +363,7 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
     start_scan_run_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :start_scan_run, name
       assert_kind_of ::Google::Cloud::WebSecurityScanner::V1::StartScanRunRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -421,7 +421,7 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
     get_scan_run_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_scan_run, name
       assert_kind_of ::Google::Cloud::WebSecurityScanner::V1::GetScanRunRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -481,9 +481,9 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
     list_scan_runs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_scan_runs, name
       assert_kind_of ::Google::Cloud::WebSecurityScanner::V1::ListScanRunsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -546,7 +546,7 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
     stop_scan_run_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :stop_scan_run, name
       assert_kind_of ::Google::Cloud::WebSecurityScanner::V1::StopScanRunRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -606,9 +606,9 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
     list_crawled_urls_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_crawled_urls, name
       assert_kind_of ::Google::Cloud::WebSecurityScanner::V1::ListCrawledUrlsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -671,7 +671,7 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
     get_finding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_finding, name
       assert_kind_of ::Google::Cloud::WebSecurityScanner::V1::GetFindingRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -732,10 +732,10 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
     list_findings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_findings, name
       assert_kind_of ::Google::Cloud::WebSecurityScanner::V1::ListFindingsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -798,7 +798,7 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
     list_finding_type_stats_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_finding_type_stats, name
       assert_kind_of ::Google::Cloud::WebSecurityScanner::V1::ListFindingTypeStatsRequest, request
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
