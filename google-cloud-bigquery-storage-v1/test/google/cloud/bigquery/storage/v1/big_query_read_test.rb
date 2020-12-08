@@ -62,9 +62,9 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
     create_read_session_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_read_session, name
       assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Storage::V1::ReadSession), request.read_session
-      assert_equal 42, request.max_stream_count
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Storage::V1::ReadSession), request["read_session"]
+      assert_equal 42, request["max_stream_count"]
       refute_nil options
     end
 
@@ -123,8 +123,8 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
     read_rows_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :read_rows, name
       assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest, request
-      assert_equal "hello world", request.read_stream
-      assert_equal 42, request.offset
+      assert_equal "hello world", request["read_stream"]
+      assert_equal 42, request["offset"]
       refute_nil options
     end
 
@@ -198,8 +198,8 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
     split_read_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :split_read_stream, name
       assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest, request
-      assert_equal "hello world", request.name
-      assert_equal 3.5, request.fraction
+      assert_equal "hello world", request["name"]
+      assert_equal 3.5, request["fraction"]
       refute_nil options
     end
 
