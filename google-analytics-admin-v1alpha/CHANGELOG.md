@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2020-12-08
+
+#### Features
+
+* Support name for GlobalSiteTag
+
 ### 0.2.2 / 2020-11-09
 
 #### Documentation
