@@ -61,8 +61,8 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
     batch_annotate_images_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_annotate_images, name
       assert_kind_of ::Google::Cloud::Vision::V1::BatchAnnotateImagesRequest, request
-      assert_kind_of ::Google::Cloud::Vision::V1::AnnotateImageRequest, request.requests.first
-      assert_equal "hello world", request.parent
+      assert_kind_of ::Google::Cloud::Vision::V1::AnnotateImageRequest, request["requests"].first
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -121,8 +121,8 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
     batch_annotate_files_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_annotate_files, name
       assert_kind_of ::Google::Cloud::Vision::V1::BatchAnnotateFilesRequest, request
-      assert_kind_of ::Google::Cloud::Vision::V1::AnnotateFileRequest, request.requests.first
-      assert_equal "hello world", request.parent
+      assert_kind_of ::Google::Cloud::Vision::V1::AnnotateFileRequest, request["requests"].first
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -182,9 +182,9 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
     async_batch_annotate_images_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :async_batch_annotate_images, name
       assert_kind_of ::Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest, request
-      assert_kind_of ::Google::Cloud::Vision::V1::AnnotateImageRequest, request.requests.first
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::OutputConfig), request.output_config
-      assert_equal "hello world", request.parent
+      assert_kind_of ::Google::Cloud::Vision::V1::AnnotateImageRequest, request["requests"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::OutputConfig), request["output_config"]
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -248,8 +248,8 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
     async_batch_annotate_files_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :async_batch_annotate_files, name
       assert_kind_of ::Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest, request
-      assert_kind_of ::Google::Cloud::Vision::V1::AsyncAnnotateFileRequest, request.requests.first
-      assert_equal "hello world", request.parent
+      assert_kind_of ::Google::Cloud::Vision::V1::AsyncAnnotateFileRequest, request["requests"].first
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
