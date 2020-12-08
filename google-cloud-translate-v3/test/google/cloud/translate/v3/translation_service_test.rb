@@ -67,14 +67,14 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
     translate_text_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :translate_text, name
       assert_kind_of ::Google::Cloud::Translate::V3::TranslateTextRequest, request
-      assert_equal ["hello world"], request.contents
-      assert_equal "hello world", request.mime_type
-      assert_equal "hello world", request.source_language_code
-      assert_equal "hello world", request.target_language_code
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.model
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig), request.glossary_config
-      assert_equal({}, request.labels.to_h)
+      assert_equal ["hello world"], request["contents"]
+      assert_equal "hello world", request["mime_type"]
+      assert_equal "hello world", request["source_language_code"]
+      assert_equal "hello world", request["target_language_code"]
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["model"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig), request["glossary_config"]
+      assert_equal({}, request["labels"].to_h)
       refute_nil options
     end
 
@@ -136,12 +136,12 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
     detect_language_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :detect_language, name
       assert_kind_of ::Google::Cloud::Translate::V3::DetectLanguageRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.model
-      assert_equal "hello world", request.content
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["model"]
+      assert_equal "hello world", request["content"]
       assert_equal :content, request.source
-      assert_equal "hello world", request.mime_type
-      assert_equal({}, request.labels.to_h)
+      assert_equal "hello world", request["mime_type"]
+      assert_equal({}, request["labels"].to_h)
       refute_nil options
     end
 
@@ -201,9 +201,9 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
     get_supported_languages_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_supported_languages, name
       assert_kind_of ::Google::Cloud::Translate::V3::GetSupportedLanguagesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.display_language_code
-      assert_equal "hello world", request.model
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["display_language_code"]
+      assert_equal "hello world", request["model"]
       refute_nil options
     end
 
@@ -268,14 +268,14 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
     batch_translate_text_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_translate_text, name
       assert_kind_of ::Google::Cloud::Translate::V3::BatchTranslateTextRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.source_language_code
-      assert_equal ["hello world"], request.target_language_codes
-      assert_equal({}, request.models.to_h)
-      assert_kind_of ::Google::Cloud::Translate::V3::InputConfig, request.input_configs.first
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Translate::V3::OutputConfig), request.output_config
-      assert_equal({}, request.glossaries.to_h)
-      assert_equal({}, request.labels.to_h)
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["source_language_code"]
+      assert_equal ["hello world"], request["target_language_codes"]
+      assert_equal({}, request["models"].to_h)
+      assert_kind_of ::Google::Cloud::Translate::V3::InputConfig, request["input_configs"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Translate::V3::OutputConfig), request["output_config"]
+      assert_equal({}, request["glossaries"].to_h)
+      assert_equal({}, request["labels"].to_h)
       refute_nil options
     end
 
@@ -339,8 +339,8 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
     create_glossary_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_glossary, name
       assert_kind_of ::Google::Cloud::Translate::V3::CreateGlossaryRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Translate::V3::Glossary), request.glossary
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Translate::V3::Glossary), request["glossary"]
       refute_nil options
     end
 
@@ -406,10 +406,10 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
     list_glossaries_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_glossaries, name
       assert_kind_of ::Google::Cloud::Translate::V3::ListGlossariesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -472,7 +472,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
     get_glossary_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_glossary, name
       assert_kind_of ::Google::Cloud::Translate::V3::GetGlossaryRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -530,7 +530,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
     delete_glossary_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_glossary, name
       assert_kind_of ::Google::Cloud::Translate::V3::DeleteGlossaryRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
