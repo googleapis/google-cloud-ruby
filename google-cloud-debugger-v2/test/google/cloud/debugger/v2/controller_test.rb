@@ -60,7 +60,7 @@ class ::Google::Cloud::Debugger::V2::Controller::ClientTest < Minitest::Test
     register_debuggee_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :register_debuggee, name
       assert_kind_of ::Google::Cloud::Debugger::V2::RegisterDebuggeeRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Debugger::V2::Debuggee), request.debuggee
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Debugger::V2::Debuggee), request["debuggee"]
       refute_nil options
     end
 
@@ -120,9 +120,9 @@ class ::Google::Cloud::Debugger::V2::Controller::ClientTest < Minitest::Test
     list_active_breakpoints_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_active_breakpoints, name
       assert_kind_of ::Google::Cloud::Debugger::V2::ListActiveBreakpointsRequest, request
-      assert_equal "hello world", request.debuggee_id
-      assert_equal "hello world", request.wait_token
-      assert_equal true, request.success_on_timeout
+      assert_equal "hello world", request["debuggee_id"]
+      assert_equal "hello world", request["wait_token"]
+      assert_equal true, request["success_on_timeout"]
       refute_nil options
     end
 
@@ -181,8 +181,8 @@ class ::Google::Cloud::Debugger::V2::Controller::ClientTest < Minitest::Test
     update_active_breakpoint_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_active_breakpoint, name
       assert_kind_of ::Google::Cloud::Debugger::V2::UpdateActiveBreakpointRequest, request
-      assert_equal "hello world", request.debuggee_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Debugger::V2::Breakpoint), request.breakpoint
+      assert_equal "hello world", request["debuggee_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Debugger::V2::Breakpoint), request["breakpoint"]
       refute_nil options
     end
 
