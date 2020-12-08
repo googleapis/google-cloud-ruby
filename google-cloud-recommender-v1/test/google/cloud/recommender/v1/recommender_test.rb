@@ -63,10 +63,10 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
     list_insights_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_insights, name
       assert_kind_of ::Google::Cloud::Recommender::V1::ListInsightsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -129,7 +129,7 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
     get_insight_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_insight, name
       assert_kind_of ::Google::Cloud::Recommender::V1::GetInsightRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -189,9 +189,9 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
     mark_insight_accepted_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :mark_insight_accepted, name
       assert_kind_of ::Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest, request
-      assert_equal "hello world", request.name
-      assert_equal({}, request.state_metadata.to_h)
-      assert_equal "hello world", request.etag
+      assert_equal "hello world", request["name"]
+      assert_equal({}, request["state_metadata"].to_h)
+      assert_equal "hello world", request["etag"]
       refute_nil options
     end
 
@@ -252,10 +252,10 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
     list_recommendations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_recommendations, name
       assert_kind_of ::Google::Cloud::Recommender::V1::ListRecommendationsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -318,7 +318,7 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
     get_recommendation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_recommendation, name
       assert_kind_of ::Google::Cloud::Recommender::V1::GetRecommendationRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -378,9 +378,9 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
     mark_recommendation_claimed_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :mark_recommendation_claimed, name
       assert_kind_of ::Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest, request
-      assert_equal "hello world", request.name
-      assert_equal({}, request.state_metadata.to_h)
-      assert_equal "hello world", request.etag
+      assert_equal "hello world", request["name"]
+      assert_equal({}, request["state_metadata"].to_h)
+      assert_equal "hello world", request["etag"]
       refute_nil options
     end
 
@@ -440,9 +440,9 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
     mark_recommendation_succeeded_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :mark_recommendation_succeeded, name
       assert_kind_of ::Google::Cloud::Recommender::V1::MarkRecommendationSucceededRequest, request
-      assert_equal "hello world", request.name
-      assert_equal({}, request.state_metadata.to_h)
-      assert_equal "hello world", request.etag
+      assert_equal "hello world", request["name"]
+      assert_equal({}, request["state_metadata"].to_h)
+      assert_equal "hello world", request["etag"]
       refute_nil options
     end
 
@@ -502,9 +502,9 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
     mark_recommendation_failed_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :mark_recommendation_failed, name
       assert_kind_of ::Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest, request
-      assert_equal "hello world", request.name
-      assert_equal({}, request.state_metadata.to_h)
-      assert_equal "hello world", request.etag
+      assert_equal "hello world", request["name"]
+      assert_equal({}, request["state_metadata"].to_h)
+      assert_equal "hello world", request["etag"]
       refute_nil options
     end
 
