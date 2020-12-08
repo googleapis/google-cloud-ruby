@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2020-12-08
+
+#### Features
+
+* Support face detection tracks and thumbnails
+
 ### 0.3.0 / 2020-09-30
 
 #### Features
