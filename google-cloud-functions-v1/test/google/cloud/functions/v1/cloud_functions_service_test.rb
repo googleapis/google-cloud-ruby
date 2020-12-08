@@ -62,9 +62,9 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
     list_functions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_functions, name
       assert_kind_of ::Google::Cloud::Functions::V1::ListFunctionsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -127,7 +127,7 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
     get_function_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_function, name
       assert_kind_of ::Google::Cloud::Functions::V1::GetFunctionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -186,8 +186,8 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
     create_function_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_function, name
       assert_kind_of ::Google::Cloud::Functions::V1::CreateFunctionRequest, request
-      assert_equal "hello world", request.location
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Functions::V1::CloudFunction), request.function
+      assert_equal "hello world", request["location"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Functions::V1::CloudFunction), request["function"]
       refute_nil options
     end
 
@@ -251,8 +251,8 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
     update_function_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_function, name
       assert_kind_of ::Google::Cloud::Functions::V1::UpdateFunctionRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Functions::V1::CloudFunction), request.function
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Functions::V1::CloudFunction), request["function"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -315,7 +315,7 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
     delete_function_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_function, name
       assert_kind_of ::Google::Cloud::Functions::V1::DeleteFunctionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -379,8 +379,8 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
     call_function_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :call_function, name
       assert_kind_of ::Google::Cloud::Functions::V1::CallFunctionRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.data
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["data"]
       refute_nil options
     end
 
@@ -438,7 +438,7 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
     generate_upload_url_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :generate_upload_url, name
       assert_kind_of ::Google::Cloud::Functions::V1::GenerateUploadUrlRequest, request
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -497,8 +497,8 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
     generate_download_url_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :generate_download_url, name
       assert_kind_of ::Google::Cloud::Functions::V1::GenerateDownloadUrlRequest, request
-      assert_equal "hello world", request.name
-      assert_equal 42, request.version_id
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["version_id"]
       refute_nil options
     end
 
@@ -557,8 +557,8 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
       assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request.policy
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
       refute_nil options
     end
 
@@ -617,8 +617,8 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
       assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request.options
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
       refute_nil options
     end
 
@@ -677,8 +677,8 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
     test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :test_iam_permissions, name
       assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal ["hello world"], request.permissions
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
       refute_nil options
     end
 
