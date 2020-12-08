@@ -61,8 +61,8 @@ class ::Google::Cloud::Speech::V1::Speech::ClientTest < Minitest::Test
     recognize_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :recognize, name
       assert_kind_of ::Google::Cloud::Speech::V1::RecognizeRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Speech::V1::RecognitionConfig), request.config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Speech::V1::RecognitionAudio), request.audio
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Speech::V1::RecognitionConfig), request["config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Speech::V1::RecognitionAudio), request["audio"]
       refute_nil options
     end
 
@@ -121,8 +121,8 @@ class ::Google::Cloud::Speech::V1::Speech::ClientTest < Minitest::Test
     long_running_recognize_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :long_running_recognize, name
       assert_kind_of ::Google::Cloud::Speech::V1::LongRunningRecognizeRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Speech::V1::RecognitionConfig), request.config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Speech::V1::RecognitionAudio), request.audio
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Speech::V1::RecognitionConfig), request["config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Speech::V1::RecognitionAudio), request["audio"]
       refute_nil options
     end
 
@@ -254,7 +254,7 @@ class ::Google::Cloud::Speech::V1::Speech::ClientTest < Minitest::Test
       streaming_recognize_client_stub.requests.each do |request|
         request.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Speech::V1::StreamingRecognizeRequest, r
-          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Speech::V1::StreamingRecognitionConfig), r.streaming_config
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Speech::V1::StreamingRecognitionConfig), r["streaming_config"]
           assert_equal :streaming_config, r.streaming_request
         end
       end
