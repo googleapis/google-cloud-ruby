@@ -60,7 +60,7 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::ClientTest < Minitest::Test
     delete_posix_account_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_posix_account, name
       assert_kind_of ::Google::Cloud::OsLogin::V1::DeletePosixAccountRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -118,7 +118,7 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::ClientTest < Minitest::Test
     delete_ssh_public_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_ssh_public_key, name
       assert_kind_of ::Google::Cloud::OsLogin::V1::DeleteSshPublicKeyRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -178,9 +178,9 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::ClientTest < Minitest::Test
     get_login_profile_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_login_profile, name
       assert_kind_of ::Google::Cloud::OsLogin::V1::GetLoginProfileRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.system_id
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["system_id"]
       refute_nil options
     end
 
@@ -238,7 +238,7 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::ClientTest < Minitest::Test
     get_ssh_public_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_ssh_public_key, name
       assert_kind_of ::Google::Cloud::OsLogin::V1::GetSshPublicKeyRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -298,9 +298,9 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::ClientTest < Minitest::Test
     import_ssh_public_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_ssh_public_key, name
       assert_kind_of ::Google::Cloud::OsLogin::V1::ImportSshPublicKeyRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OsLogin::Common::SshPublicKey), request.ssh_public_key
-      assert_equal "hello world", request.project_id
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OsLogin::Common::SshPublicKey), request["ssh_public_key"]
+      assert_equal "hello world", request["project_id"]
       refute_nil options
     end
 
@@ -360,9 +360,9 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::ClientTest < Minitest::Test
     update_ssh_public_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_ssh_public_key, name
       assert_kind_of ::Google::Cloud::OsLogin::V1::UpdateSshPublicKeyRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OsLogin::Common::SshPublicKey), request.ssh_public_key
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OsLogin::Common::SshPublicKey), request["ssh_public_key"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
