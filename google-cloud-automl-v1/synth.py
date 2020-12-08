@@ -33,7 +33,7 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "AUTOML",
         "ruby-cloud-grpc-service-config": "google/cloud/automl/v1/automl_grpc_service_config.json",
         "ruby-cloud-path-override": "auto_ml=automl",
-        "ruby-cloud-namespace-override": "AutoMl=AutoML",
+        "ruby-cloud-namespace-override": "AutoMl=AutoML;Automl=AutoML",
         "ruby-cloud-yard-strict": "false",
         "ruby-cloud-product-url": "https://cloud.google.com/automl",
         "ruby-cloud-api-id": "automl.googleapis.com",

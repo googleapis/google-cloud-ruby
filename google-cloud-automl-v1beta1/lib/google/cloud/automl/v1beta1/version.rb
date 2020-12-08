@@ -19,7 +19,7 @@
 
 module Google
   module Cloud
-    module Automl
+    module AutoML
       module V1beta1
         VERSION = "0.3.0"
       end
