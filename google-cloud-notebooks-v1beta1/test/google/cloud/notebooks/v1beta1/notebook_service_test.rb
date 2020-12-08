@@ -62,9 +62,9 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     list_instances_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_instances, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::ListInstancesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -127,7 +127,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     get_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_instance, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::GetInstanceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -187,9 +187,9 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     create_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_instance, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::CreateInstanceRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.instance_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Notebooks::V1beta1::Instance), request.instance
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["instance_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Notebooks::V1beta1::Instance), request["instance"]
       refute_nil options
     end
 
@@ -253,8 +253,8 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     register_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :register_instance, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::RegisterInstanceRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.instance_id
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["instance_id"]
       refute_nil options
     end
 
@@ -319,9 +319,9 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     set_instance_accelerator_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_instance_accelerator, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::SetInstanceAcceleratorRequest, request
-      assert_equal "hello world", request.name
-      assert_equal :ACCELERATOR_TYPE_UNSPECIFIED, request.type
-      assert_equal 42, request.core_count
+      assert_equal "hello world", request["name"]
+      assert_equal :ACCELERATOR_TYPE_UNSPECIFIED, request["type"]
+      assert_equal 42, request["core_count"]
       refute_nil options
     end
 
@@ -385,8 +385,8 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     set_instance_machine_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_instance_machine_type, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::SetInstanceMachineTypeRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.machine_type
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["machine_type"]
       refute_nil options
     end
 
@@ -450,8 +450,8 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     set_instance_labels_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_instance_labels, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::SetInstanceLabelsRequest, request
-      assert_equal "hello world", request.name
-      assert_equal({}, request.labels.to_h)
+      assert_equal "hello world", request["name"]
+      assert_equal({}, request["labels"].to_h)
       refute_nil options
     end
 
@@ -514,7 +514,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     delete_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_instance, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::DeleteInstanceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -577,7 +577,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     start_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :start_instance, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::StartInstanceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -640,7 +640,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     stop_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :stop_instance, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::StopInstanceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -703,7 +703,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     reset_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :reset_instance, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::ResetInstanceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -768,9 +768,9 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     report_instance_info_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :report_instance_info, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::ReportInstanceInfoRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.vm_id
-      assert_equal({}, request.metadata.to_h)
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["vm_id"]
+      assert_equal({}, request["metadata"].to_h)
       refute_nil options
     end
 
@@ -833,7 +833,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     is_instance_upgradeable_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :is_instance_upgradeable, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableRequest, request
-      assert_equal "hello world", request.notebook_instance
+      assert_equal "hello world", request["notebook_instance"]
       refute_nil options
     end
 
@@ -891,7 +891,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     upgrade_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :upgrade_instance, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -955,8 +955,8 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     upgrade_instance_internal_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :upgrade_instance_internal, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceInternalRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.vm_id
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["vm_id"]
       refute_nil options
     end
 
@@ -1021,9 +1021,9 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     list_environments_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_environments, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::ListEnvironmentsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -1086,7 +1086,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     get_environment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_environment, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::GetEnvironmentRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1146,9 +1146,9 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     create_environment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_environment, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::CreateEnvironmentRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.environment_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Notebooks::V1beta1::Environment), request.environment
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["environment_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Notebooks::V1beta1::Environment), request["environment"]
       refute_nil options
     end
 
@@ -1211,7 +1211,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
     delete_environment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_environment, name
       assert_kind_of ::Google::Cloud::Notebooks::V1beta1::DeleteEnvironmentRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
