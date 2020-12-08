@@ -60,7 +60,7 @@ class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::ClientTest < Minites
     list_voices_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_voices, name
       assert_kind_of ::Google::Cloud::TextToSpeech::V1beta1::ListVoicesRequest, request
-      assert_equal "hello world", request.language_code
+      assert_equal "hello world", request["language_code"]
       refute_nil options
     end
 
@@ -121,10 +121,10 @@ class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::ClientTest < Minites
     synthesize_speech_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :synthesize_speech, name
       assert_kind_of ::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1beta1::SynthesisInput), request.input
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1beta1::VoiceSelectionParams), request.voice
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1beta1::AudioConfig), request.audio_config
-      assert_equal [:TIMEPOINT_TYPE_UNSPECIFIED], request.enable_time_pointing
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1beta1::SynthesisInput), request["input"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1beta1::VoiceSelectionParams), request["voice"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1beta1::AudioConfig), request["audio_config"]
+      assert_equal [:TIMEPOINT_TYPE_UNSPECIFIED], request["enable_time_pointing"]
       refute_nil options
     end
 
