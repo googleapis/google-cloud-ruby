@@ -61,8 +61,8 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     create_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_dataset, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::CreateDatasetRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::Dataset), request.dataset
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::Dataset), request["dataset"]
       refute_nil options
     end
 
@@ -120,7 +120,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     get_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_dataset, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::GetDatasetRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -181,10 +181,10 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     list_datasets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_datasets, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::ListDatasetsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -248,8 +248,8 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     update_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_dataset, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::Dataset), request.dataset
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::Dataset), request["dataset"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -307,7 +307,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     delete_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_dataset, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -371,8 +371,8 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     import_data_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_data, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::ImportDataRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::InputConfig), request.input_config
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::InputConfig), request["input_config"]
       refute_nil options
     end
 
@@ -436,8 +436,8 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     export_data_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_data, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::ExportDataRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::OutputConfig), request.output_config
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::OutputConfig), request["output_config"]
       refute_nil options
     end
 
@@ -500,7 +500,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     get_annotation_spec_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_annotation_spec, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -559,8 +559,8 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     get_table_spec_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_table_spec, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::GetTableSpecRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["field_mask"]
       refute_nil options
     end
 
@@ -622,11 +622,11 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     list_table_specs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_table_specs, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["field_mask"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -690,8 +690,8 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     update_table_spec_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_table_spec, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::TableSpec), request.table_spec
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::TableSpec), request["table_spec"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -750,8 +750,8 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     get_column_spec_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_column_spec, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["field_mask"]
       refute_nil options
     end
 
@@ -813,11 +813,11 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     list_column_specs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_column_specs, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["field_mask"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -881,8 +881,8 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     update_column_spec_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_column_spec, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::ColumnSpec), request.column_spec
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::ColumnSpec), request["column_spec"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -941,8 +941,8 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     create_model_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_model, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::CreateModelRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::Model), request.model
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::Model), request["model"]
       refute_nil options
     end
 
@@ -1005,7 +1005,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     get_model_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_model, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::GetModelRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1066,10 +1066,10 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     list_models_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_models, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::ListModelsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -1132,7 +1132,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     delete_model_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_model, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::DeleteModelRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1196,9 +1196,9 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     deploy_model_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :deploy_model, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::DeployModelRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata), request.image_object_detection_model_deployment_metadata
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata), request["image_object_detection_model_deployment_metadata"]
       assert_equal :image_object_detection_model_deployment_metadata, request.model_deployment_metadata
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1261,7 +1261,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     undeploy_model_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :undeploy_model, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::UndeployModelRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1325,8 +1325,8 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     export_model_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_model, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::ExportModelRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::ModelExportOutputConfig), request.output_config
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::ModelExportOutputConfig), request["output_config"]
       refute_nil options
     end
 
@@ -1390,8 +1390,8 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     export_evaluated_examples_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_evaluated_examples, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesOutputConfig), request.output_config
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesOutputConfig), request["output_config"]
       refute_nil options
     end
 
@@ -1454,7 +1454,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     get_model_evaluation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_model_evaluation, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1515,10 +1515,10 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     list_model_evaluations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_model_evaluations, name
       assert_kind_of ::Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
