@@ -63,10 +63,10 @@ class ::Google::Cloud::Workflows::Executions::V1beta::Executions::ClientTest < M
     list_executions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_executions, name
       assert_kind_of ::Google::Cloud::Workflows::Executions::V1beta::ListExecutionsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal :EXECUTION_VIEW_UNSPECIFIED, request.view
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal :EXECUTION_VIEW_UNSPECIFIED, request["view"]
       refute_nil options
     end
 
@@ -130,8 +130,8 @@ class ::Google::Cloud::Workflows::Executions::V1beta::Executions::ClientTest < M
     create_execution_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_execution, name
       assert_kind_of ::Google::Cloud::Workflows::Executions::V1beta::CreateExecutionRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Workflows::Executions::V1beta::Execution), request.execution
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Workflows::Executions::V1beta::Execution), request["execution"]
       refute_nil options
     end
 
@@ -190,8 +190,8 @@ class ::Google::Cloud::Workflows::Executions::V1beta::Executions::ClientTest < M
     get_execution_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_execution, name
       assert_kind_of ::Google::Cloud::Workflows::Executions::V1beta::GetExecutionRequest, request
-      assert_equal "hello world", request.name
-      assert_equal :EXECUTION_VIEW_UNSPECIFIED, request.view
+      assert_equal "hello world", request["name"]
+      assert_equal :EXECUTION_VIEW_UNSPECIFIED, request["view"]
       refute_nil options
     end
 
@@ -249,7 +249,7 @@ class ::Google::Cloud::Workflows::Executions::V1beta::Executions::ClientTest < M
     cancel_execution_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :cancel_execution, name
       assert_kind_of ::Google::Cloud::Workflows::Executions::V1beta::CancelExecutionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
