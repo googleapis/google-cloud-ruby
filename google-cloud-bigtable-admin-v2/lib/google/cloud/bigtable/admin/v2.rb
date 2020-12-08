@@ -36,3 +36,6 @@ module Google
     end
   end
 end
+
+helper_path = ::File.join __dir__, "v2", "_helpers.rb"
+require "google/cloud/bigtable/admin/v2/_helpers" if ::File.file? helper_path

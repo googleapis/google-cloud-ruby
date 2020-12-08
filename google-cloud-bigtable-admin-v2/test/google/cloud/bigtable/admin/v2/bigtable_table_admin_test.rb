@@ -63,10 +63,10 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     create_table_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_table, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::CreateTableRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.table_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::Admin::V2::Table), request.table
-      assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::CreateTableRequest::Split, request.initial_splits.first
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["table_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::Admin::V2::Table), request["table"]
+      assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::CreateTableRequest::Split, request["initial_splits"].first
       refute_nil options
     end
 
@@ -126,9 +126,9 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     create_table_from_snapshot_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_table_from_snapshot, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::CreateTableFromSnapshotRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.table_id
-      assert_equal "hello world", request.source_snapshot
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["table_id"]
+      assert_equal "hello world", request["source_snapshot"]
       refute_nil options
     end
 
@@ -194,10 +194,10 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     list_tables_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_tables, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::ListTablesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal :VIEW_UNSPECIFIED, request.view
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal :VIEW_UNSPECIFIED, request["view"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -261,8 +261,8 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     get_table_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_table, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::GetTableRequest, request
-      assert_equal "hello world", request.name
-      assert_equal :VIEW_UNSPECIFIED, request.view
+      assert_equal "hello world", request["name"]
+      assert_equal :VIEW_UNSPECIFIED, request["view"]
       refute_nil options
     end
 
@@ -320,7 +320,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     delete_table_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_table, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::DeleteTableRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -379,8 +379,8 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     modify_column_families_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :modify_column_families, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest, request
-      assert_equal "hello world", request.name
-      assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification, request.modifications.first
+      assert_equal "hello world", request["name"]
+      assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification, request["modifications"].first
       refute_nil options
     end
 
@@ -439,8 +439,8 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     drop_row_range_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :drop_row_range, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::DropRowRangeRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.row_key_prefix
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["row_key_prefix"]
       assert_equal :row_key_prefix, request.target
       refute_nil options
     end
@@ -499,7 +499,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     generate_consistency_token_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :generate_consistency_token, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::GenerateConsistencyTokenRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -558,8 +558,8 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     check_consistency_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :check_consistency, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::CheckConsistencyRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.consistency_token
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["consistency_token"]
       refute_nil options
     end
 
@@ -621,11 +621,11 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     snapshot_table_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :snapshot_table, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::SnapshotTableRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.cluster
-      assert_equal "hello world", request.snapshot_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.ttl
-      assert_equal "hello world", request.description
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["cluster"]
+      assert_equal "hello world", request["snapshot_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["ttl"]
+      assert_equal "hello world", request["description"]
       refute_nil options
     end
 
@@ -688,7 +688,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     get_snapshot_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_snapshot, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::GetSnapshotRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -748,9 +748,9 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     list_snapshots_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_snapshots, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::ListSnapshotsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -813,7 +813,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     delete_snapshot_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_snapshot, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::DeleteSnapshotRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -873,9 +873,9 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     create_backup_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_backup, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::CreateBackupRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.backup_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::Admin::V2::Backup), request.backup
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["backup_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::Admin::V2::Backup), request["backup"]
       refute_nil options
     end
 
@@ -938,7 +938,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     get_backup_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_backup, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::GetBackupRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -997,8 +997,8 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     update_backup_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_backup, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::UpdateBackupRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::Admin::V2::Backup), request.backup
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::Admin::V2::Backup), request["backup"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1056,7 +1056,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     delete_backup_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_backup, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::DeleteBackupRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1118,11 +1118,11 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     list_backups_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_backups, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::ListBackupsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -1187,9 +1187,9 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     restore_table_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :restore_table, name
       assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::RestoreTableRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.table_id
-      assert_equal "hello world", request.backup
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["table_id"]
+      assert_equal "hello world", request["backup"]
       assert_equal :backup, request.source
       refute_nil options
     end
@@ -1254,8 +1254,8 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
       assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request.options
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
       refute_nil options
     end
 
@@ -1314,8 +1314,8 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
       assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request.policy
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
       refute_nil options
     end
 
@@ -1374,8 +1374,8 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :test_iam_permissions, name
       assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal ["hello world"], request.permissions
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
       refute_nil options
     end
 
