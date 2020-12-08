@@ -63,11 +63,11 @@ class ::Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
     list_groups_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_groups, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::ListGroupsRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.children_of_group
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["children_of_group"]
       assert_equal :children_of_group, request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -130,7 +130,7 @@ class ::Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
     get_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_group, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::GetGroupRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -190,9 +190,9 @@ class ::Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
     create_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_group, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::CreateGroupRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::Group), request.group
-      assert_equal true, request.validate_only
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::Group), request["group"]
+      assert_equal true, request["validate_only"]
       refute_nil options
     end
 
@@ -251,8 +251,8 @@ class ::Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
     update_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_group, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::UpdateGroupRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::Group), request.group
-      assert_equal true, request.validate_only
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::Group), request["group"]
+      assert_equal true, request["validate_only"]
       refute_nil options
     end
 
@@ -311,8 +311,8 @@ class ::Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
     delete_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_group, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::DeleteGroupRequest, request
-      assert_equal "hello world", request.name
-      assert_equal true, request.recursive
+      assert_equal "hello world", request["name"]
+      assert_equal true, request["recursive"]
       refute_nil options
     end
 
@@ -374,11 +374,11 @@ class ::Google::Cloud::Monitoring::V3::GroupService::ClientTest < Minitest::Test
     list_group_members_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_group_members, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::ListGroupMembersRequest, request
-      assert_equal "hello world", request.name
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::TimeInterval), request.interval
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::TimeInterval), request["interval"]
       refute_nil options
     end
 

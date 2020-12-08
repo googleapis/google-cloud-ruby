@@ -64,11 +64,11 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest
     list_alert_policies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_alert_policies, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -131,7 +131,7 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest
     get_alert_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_alert_policy, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::GetAlertPolicyRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -190,8 +190,8 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest
     create_alert_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_alert_policy, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::AlertPolicy), request.alert_policy
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::AlertPolicy), request["alert_policy"]
       refute_nil options
     end
 
@@ -249,7 +249,7 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest
     delete_alert_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_alert_policy, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::DeleteAlertPolicyRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -308,8 +308,8 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest
     update_alert_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_alert_policy, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::AlertPolicy), request.alert_policy
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::AlertPolicy), request["alert_policy"]
       refute_nil options
     end
 
