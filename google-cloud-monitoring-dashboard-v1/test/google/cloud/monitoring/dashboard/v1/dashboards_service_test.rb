@@ -61,8 +61,8 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest 
     create_dashboard_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_dashboard, name
       assert_kind_of ::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard), request.dashboard
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard), request["dashboard"]
       refute_nil options
     end
 
@@ -122,9 +122,9 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest 
     list_dashboards_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_dashboards, name
       assert_kind_of ::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -187,7 +187,7 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest 
     get_dashboard_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_dashboard, name
       assert_kind_of ::Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -245,7 +245,7 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest 
     delete_dashboard_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_dashboard, name
       assert_kind_of ::Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -303,7 +303,7 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest 
     update_dashboard_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_dashboard, name
       assert_kind_of ::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard), request.dashboard
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard), request["dashboard"]
       refute_nil options
     end
 
