@@ -62,9 +62,9 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::ClientTest < Minitest
     list_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_jobs, name
       assert_kind_of ::Google::Cloud::Scheduler::V1beta1::ListJobsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -127,7 +127,7 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::ClientTest < Minitest
     get_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_job, name
       assert_kind_of ::Google::Cloud::Scheduler::V1beta1::GetJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -186,8 +186,8 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::ClientTest < Minitest
     create_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_job, name
       assert_kind_of ::Google::Cloud::Scheduler::V1beta1::CreateJobRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Scheduler::V1beta1::Job), request.job
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Scheduler::V1beta1::Job), request["job"]
       refute_nil options
     end
 
@@ -246,8 +246,8 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::ClientTest < Minitest
     update_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_job, name
       assert_kind_of ::Google::Cloud::Scheduler::V1beta1::UpdateJobRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Scheduler::V1beta1::Job), request.job
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Scheduler::V1beta1::Job), request["job"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -305,7 +305,7 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::ClientTest < Minitest
     delete_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_job, name
       assert_kind_of ::Google::Cloud::Scheduler::V1beta1::DeleteJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -363,7 +363,7 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::ClientTest < Minitest
     pause_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :pause_job, name
       assert_kind_of ::Google::Cloud::Scheduler::V1beta1::PauseJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -421,7 +421,7 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::ClientTest < Minitest
     resume_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :resume_job, name
       assert_kind_of ::Google::Cloud::Scheduler::V1beta1::ResumeJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -479,7 +479,7 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::ClientTest < Minitest
     run_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_job, name
       assert_kind_of ::Google::Cloud::Scheduler::V1beta1::RunJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
