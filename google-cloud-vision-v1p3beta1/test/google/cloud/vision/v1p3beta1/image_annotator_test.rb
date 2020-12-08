@@ -60,7 +60,7 @@ class ::Google::Cloud::Vision::V1p3beta1::ImageAnnotator::ClientTest < Minitest:
     batch_annotate_images_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_annotate_images, name
       assert_kind_of ::Google::Cloud::Vision::V1p3beta1::BatchAnnotateImagesRequest, request
-      assert_kind_of ::Google::Cloud::Vision::V1p3beta1::AnnotateImageRequest, request.requests.first
+      assert_kind_of ::Google::Cloud::Vision::V1p3beta1::AnnotateImageRequest, request["requests"].first
       refute_nil options
     end
 
@@ -118,7 +118,7 @@ class ::Google::Cloud::Vision::V1p3beta1::ImageAnnotator::ClientTest < Minitest:
     async_batch_annotate_files_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :async_batch_annotate_files, name
       assert_kind_of ::Google::Cloud::Vision::V1p3beta1::AsyncBatchAnnotateFilesRequest, request
-      assert_kind_of ::Google::Cloud::Vision::V1p3beta1::AsyncAnnotateFileRequest, request.requests.first
+      assert_kind_of ::Google::Cloud::Vision::V1p3beta1::AsyncAnnotateFileRequest, request["requests"].first
       refute_nil options
     end
 
