@@ -64,11 +64,11 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     list_key_rings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_key_rings, name
       assert_kind_of ::Google::Cloud::Kms::V1::ListKeyRingsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -136,12 +136,12 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     list_crypto_keys_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_crypto_keys, name
       assert_kind_of ::Google::Cloud::Kms::V1::ListCryptoKeysRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal :CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED, request.version_view
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal :CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED, request["version_view"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -209,12 +209,12 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     list_crypto_key_versions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_crypto_key_versions, name
       assert_kind_of ::Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal :CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED, request.view
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal :CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED, request["view"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -281,11 +281,11 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     list_import_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_import_jobs, name
       assert_kind_of ::Google::Cloud::Kms::V1::ListImportJobsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -348,7 +348,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     get_key_ring_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_key_ring, name
       assert_kind_of ::Google::Cloud::Kms::V1::GetKeyRingRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -406,7 +406,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     get_crypto_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_crypto_key, name
       assert_kind_of ::Google::Cloud::Kms::V1::GetCryptoKeyRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -464,7 +464,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     get_crypto_key_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_crypto_key_version, name
       assert_kind_of ::Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -522,7 +522,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     get_public_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_public_key, name
       assert_kind_of ::Google::Cloud::Kms::V1::GetPublicKeyRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -580,7 +580,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     get_import_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_import_job, name
       assert_kind_of ::Google::Cloud::Kms::V1::GetImportJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -640,9 +640,9 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     create_key_ring_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_key_ring, name
       assert_kind_of ::Google::Cloud::Kms::V1::CreateKeyRingRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.key_ring_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::KeyRing), request.key_ring
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["key_ring_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::KeyRing), request["key_ring"]
       refute_nil options
     end
 
@@ -703,10 +703,10 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     create_crypto_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_crypto_key, name
       assert_kind_of ::Google::Cloud::Kms::V1::CreateCryptoKeyRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.crypto_key_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::CryptoKey), request.crypto_key
-      assert_equal true, request.skip_initial_version_creation
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["crypto_key_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::CryptoKey), request["crypto_key"]
+      assert_equal true, request["skip_initial_version_creation"]
       refute_nil options
     end
 
@@ -765,8 +765,8 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     create_crypto_key_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_crypto_key_version, name
       assert_kind_of ::Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::CryptoKeyVersion), request.crypto_key_version
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::CryptoKeyVersion), request["crypto_key_version"]
       refute_nil options
     end
 
@@ -827,10 +827,10 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     import_crypto_key_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_crypto_key_version, name
       assert_kind_of ::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED, request.algorithm
-      assert_equal "hello world", request.import_job
-      assert_equal "hello world", request.rsa_aes_wrapped_key
+      assert_equal "hello world", request["parent"]
+      assert_equal :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED, request["algorithm"]
+      assert_equal "hello world", request["import_job"]
+      assert_equal "hello world", request["rsa_aes_wrapped_key"]
       assert_equal :rsa_aes_wrapped_key, request.wrapped_key_material
       refute_nil options
     end
@@ -891,9 +891,9 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     create_import_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_import_job, name
       assert_kind_of ::Google::Cloud::Kms::V1::CreateImportJobRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.import_job_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::ImportJob), request.import_job
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["import_job_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::ImportJob), request["import_job"]
       refute_nil options
     end
 
@@ -952,8 +952,8 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     update_crypto_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_crypto_key, name
       assert_kind_of ::Google::Cloud::Kms::V1::UpdateCryptoKeyRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::CryptoKey), request.crypto_key
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::CryptoKey), request["crypto_key"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1012,8 +1012,8 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     update_crypto_key_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_crypto_key_version, name
       assert_kind_of ::Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::CryptoKeyVersion), request.crypto_key_version
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::CryptoKeyVersion), request["crypto_key_version"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1075,11 +1075,11 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     encrypt_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :encrypt, name
       assert_kind_of ::Google::Cloud::Kms::V1::EncryptRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.plaintext
-      assert_equal "hello world", request.additional_authenticated_data
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request.plaintext_crc32c
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request.additional_authenticated_data_crc32c
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["plaintext"]
+      assert_equal "hello world", request["additional_authenticated_data"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request["plaintext_crc32c"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request["additional_authenticated_data_crc32c"]
       refute_nil options
     end
 
@@ -1141,11 +1141,11 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     decrypt_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :decrypt, name
       assert_kind_of ::Google::Cloud::Kms::V1::DecryptRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.ciphertext
-      assert_equal "hello world", request.additional_authenticated_data
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request.ciphertext_crc32c
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request.additional_authenticated_data_crc32c
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["ciphertext"]
+      assert_equal "hello world", request["additional_authenticated_data"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request["ciphertext_crc32c"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request["additional_authenticated_data_crc32c"]
       refute_nil options
     end
 
@@ -1205,9 +1205,9 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     asymmetric_sign_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :asymmetric_sign, name
       assert_kind_of ::Google::Cloud::Kms::V1::AsymmetricSignRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::Digest), request.digest
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request.digest_crc32c
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::Digest), request["digest"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request["digest_crc32c"]
       refute_nil options
     end
 
@@ -1267,9 +1267,9 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     asymmetric_decrypt_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :asymmetric_decrypt, name
       assert_kind_of ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.ciphertext
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request.ciphertext_crc32c
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["ciphertext"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request["ciphertext_crc32c"]
       refute_nil options
     end
 
@@ -1328,8 +1328,8 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     update_crypto_key_primary_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_crypto_key_primary_version, name
       assert_kind_of ::Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.crypto_key_version_id
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["crypto_key_version_id"]
       refute_nil options
     end
 
@@ -1387,7 +1387,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     destroy_crypto_key_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :destroy_crypto_key_version, name
       assert_kind_of ::Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1445,7 +1445,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     restore_crypto_key_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :restore_crypto_key_version, name
       assert_kind_of ::Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
