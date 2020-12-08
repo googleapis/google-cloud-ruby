@@ -63,10 +63,10 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::ClientTest < Minite
     export_entities_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_entities, name
       assert_kind_of ::Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal({}, request.labels.to_h)
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::Admin::V1::EntityFilter), request.entity_filter
-      assert_equal "hello world", request.output_url_prefix
+      assert_equal "hello world", request["project_id"]
+      assert_equal({}, request["labels"].to_h)
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::Admin::V1::EntityFilter), request["entity_filter"]
+      assert_equal "hello world", request["output_url_prefix"]
       refute_nil options
     end
 
@@ -132,10 +132,10 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::ClientTest < Minite
     import_entities_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_entities, name
       assert_kind_of ::Google::Cloud::Datastore::Admin::V1::ImportEntitiesRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal({}, request.labels.to_h)
-      assert_equal "hello world", request.input_url
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::Admin::V1::EntityFilter), request.entity_filter
+      assert_equal "hello world", request["project_id"]
+      assert_equal({}, request["labels"].to_h)
+      assert_equal "hello world", request["input_url"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::Admin::V1::EntityFilter), request["entity_filter"]
       refute_nil options
     end
 
@@ -199,8 +199,8 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::ClientTest < Minite
     get_index_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_index, name
       assert_kind_of ::Google::Cloud::Datastore::Admin::V1::GetIndexRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.index_id
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["index_id"]
       refute_nil options
     end
 
@@ -261,10 +261,10 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::ClientTest < Minite
     list_indexes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_indexes, name
       assert_kind_of ::Google::Cloud::Datastore::Admin::V1::ListIndexesRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
