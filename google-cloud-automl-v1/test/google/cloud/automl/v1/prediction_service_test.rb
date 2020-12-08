@@ -62,9 +62,9 @@ class ::Google::Cloud::AutoML::V1::PredictionService::ClientTest < Minitest::Tes
     predict_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :predict, name
       assert_kind_of ::Google::Cloud::AutoML::V1::PredictRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1::ExamplePayload), request.payload
-      assert_equal({}, request.params.to_h)
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1::ExamplePayload), request["payload"]
+      assert_equal({}, request["params"].to_h)
       refute_nil options
     end
 
@@ -125,10 +125,10 @@ class ::Google::Cloud::AutoML::V1::PredictionService::ClientTest < Minitest::Tes
     batch_predict_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_predict, name
       assert_kind_of ::Google::Cloud::AutoML::V1::BatchPredictRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1::BatchPredictInputConfig), request.input_config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1::BatchPredictOutputConfig), request.output_config
-      assert_equal({}, request.params.to_h)
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1::BatchPredictInputConfig), request["input_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1::BatchPredictOutputConfig), request["output_config"]
+      assert_equal({}, request["params"].to_h)
       refute_nil options
     end
 
