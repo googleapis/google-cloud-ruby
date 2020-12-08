@@ -66,13 +66,13 @@ class ::Google::Cloud::Talent::V4::Completion::ClientTest < Minitest::Test
     complete_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :complete_query, name
       assert_kind_of ::Google::Cloud::Talent::V4::CompleteQueryRequest, request
-      assert_equal "hello world", request.tenant
-      assert_equal "hello world", request.query
-      assert_equal ["hello world"], request.language_codes
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.company
-      assert_equal :COMPLETION_SCOPE_UNSPECIFIED, request.scope
-      assert_equal :COMPLETION_TYPE_UNSPECIFIED, request.type
+      assert_equal "hello world", request["tenant"]
+      assert_equal "hello world", request["query"]
+      assert_equal ["hello world"], request["language_codes"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["company"]
+      assert_equal :COMPLETION_SCOPE_UNSPECIFIED, request["scope"]
+      assert_equal :COMPLETION_TYPE_UNSPECIFIED, request["type"]
       refute_nil options
     end
 

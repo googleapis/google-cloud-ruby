@@ -61,8 +61,8 @@ class ::Google::Cloud::Talent::V4::CompanyService::ClientTest < Minitest::Test
     create_company_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_company, name
       assert_kind_of ::Google::Cloud::Talent::V4::CreateCompanyRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4::Company), request.company
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4::Company), request["company"]
       refute_nil options
     end
 
@@ -120,7 +120,7 @@ class ::Google::Cloud::Talent::V4::CompanyService::ClientTest < Minitest::Test
     get_company_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_company, name
       assert_kind_of ::Google::Cloud::Talent::V4::GetCompanyRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -179,8 +179,8 @@ class ::Google::Cloud::Talent::V4::CompanyService::ClientTest < Minitest::Test
     update_company_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_company, name
       assert_kind_of ::Google::Cloud::Talent::V4::UpdateCompanyRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4::Company), request.company
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4::Company), request["company"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -238,7 +238,7 @@ class ::Google::Cloud::Talent::V4::CompanyService::ClientTest < Minitest::Test
     delete_company_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_company, name
       assert_kind_of ::Google::Cloud::Talent::V4::DeleteCompanyRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -299,10 +299,10 @@ class ::Google::Cloud::Talent::V4::CompanyService::ClientTest < Minitest::Test
     list_companies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_companies, name
       assert_kind_of ::Google::Cloud::Talent::V4::ListCompaniesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
-      assert_equal true, request.require_open_jobs
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
+      assert_equal true, request["require_open_jobs"]
       refute_nil options
     end
 
