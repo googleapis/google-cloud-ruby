@@ -65,12 +65,12 @@ class ::Google::Cloud::VideoIntelligence::V1p1beta1::VideoIntelligenceService::C
     annotate_video_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :annotate_video, name
       assert_kind_of ::Google::Cloud::VideoIntelligence::V1p1beta1::AnnotateVideoRequest, request
-      assert_equal "hello world", request.input_uri
-      assert_equal "hello world", request.input_content
-      assert_equal [:FEATURE_UNSPECIFIED], request.features
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VideoIntelligence::V1p1beta1::VideoContext), request.video_context
-      assert_equal "hello world", request.output_uri
-      assert_equal "hello world", request.location_id
+      assert_equal "hello world", request["input_uri"]
+      assert_equal "hello world", request["input_content"]
+      assert_equal [:FEATURE_UNSPECIFIED], request["features"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VideoIntelligence::V1p1beta1::VideoContext), request["video_context"]
+      assert_equal "hello world", request["output_uri"]
+      assert_equal "hello world", request["location_id"]
       refute_nil options
     end
 
