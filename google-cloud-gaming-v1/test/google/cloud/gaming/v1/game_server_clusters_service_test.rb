@@ -64,11 +64,11 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
     list_game_server_clusters_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_game_server_clusters, name
       assert_kind_of ::Google::Cloud::Gaming::V1::ListGameServerClustersRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -131,7 +131,7 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
     get_game_server_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_game_server_cluster, name
       assert_kind_of ::Google::Cloud::Gaming::V1::GetGameServerClusterRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -191,9 +191,9 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
     create_game_server_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_game_server_cluster, name
       assert_kind_of ::Google::Cloud::Gaming::V1::CreateGameServerClusterRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.game_server_cluster_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerCluster), request.game_server_cluster
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["game_server_cluster_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerCluster), request["game_server_cluster"]
       refute_nil options
     end
 
@@ -259,10 +259,10 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
     preview_create_game_server_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :preview_create_game_server_cluster, name
       assert_kind_of ::Google::Cloud::Gaming::V1::PreviewCreateGameServerClusterRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.game_server_cluster_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerCluster), request.game_server_cluster
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.preview_time
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["game_server_cluster_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerCluster), request["game_server_cluster"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["preview_time"]
       refute_nil options
     end
 
@@ -320,7 +320,7 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
     delete_game_server_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_game_server_cluster, name
       assert_kind_of ::Google::Cloud::Gaming::V1::DeleteGameServerClusterRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -384,8 +384,8 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
     preview_delete_game_server_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :preview_delete_game_server_cluster, name
       assert_kind_of ::Google::Cloud::Gaming::V1::PreviewDeleteGameServerClusterRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.preview_time
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["preview_time"]
       refute_nil options
     end
 
@@ -444,8 +444,8 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
     update_game_server_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_game_server_cluster, name
       assert_kind_of ::Google::Cloud::Gaming::V1::UpdateGameServerClusterRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerCluster), request.game_server_cluster
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerCluster), request["game_server_cluster"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -510,9 +510,9 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
     preview_update_game_server_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :preview_update_game_server_cluster, name
       assert_kind_of ::Google::Cloud::Gaming::V1::PreviewUpdateGameServerClusterRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerCluster), request.game_server_cluster
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.preview_time
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Gaming::V1::GameServerCluster), request["game_server_cluster"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["preview_time"]
       refute_nil options
     end
 
