@@ -61,8 +61,8 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     create_device_registry_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_device_registry, name
       assert_kind_of ::Google::Cloud::Iot::V1::CreateDeviceRegistryRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Iot::V1::DeviceRegistry), request.device_registry
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Iot::V1::DeviceRegistry), request["device_registry"]
       refute_nil options
     end
 
@@ -120,7 +120,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     get_device_registry_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_device_registry, name
       assert_kind_of ::Google::Cloud::Iot::V1::GetDeviceRegistryRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -179,8 +179,8 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     update_device_registry_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_device_registry, name
       assert_kind_of ::Google::Cloud::Iot::V1::UpdateDeviceRegistryRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Iot::V1::DeviceRegistry), request.device_registry
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Iot::V1::DeviceRegistry), request["device_registry"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -238,7 +238,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     delete_device_registry_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_device_registry, name
       assert_kind_of ::Google::Cloud::Iot::V1::DeleteDeviceRegistryRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -298,9 +298,9 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     list_device_registries_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_device_registries, name
       assert_kind_of ::Google::Cloud::Iot::V1::ListDeviceRegistriesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -364,8 +364,8 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     create_device_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_device, name
       assert_kind_of ::Google::Cloud::Iot::V1::CreateDeviceRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Iot::V1::Device), request.device
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Iot::V1::Device), request["device"]
       refute_nil options
     end
 
@@ -424,8 +424,8 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     get_device_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_device, name
       assert_kind_of ::Google::Cloud::Iot::V1::GetDeviceRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["field_mask"]
       refute_nil options
     end
 
@@ -484,8 +484,8 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     update_device_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_device, name
       assert_kind_of ::Google::Cloud::Iot::V1::UpdateDeviceRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Iot::V1::Device), request.device
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Iot::V1::Device), request["device"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -543,7 +543,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     delete_device_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_device, name
       assert_kind_of ::Google::Cloud::Iot::V1::DeleteDeviceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -607,13 +607,13 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     list_devices_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_devices, name
       assert_kind_of ::Google::Cloud::Iot::V1::ListDevicesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal [42], request.device_num_ids
-      assert_equal ["hello world"], request.device_ids
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Iot::V1::GatewayListOptions), request.gateway_list_options
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal [42], request["device_num_ids"]
+      assert_equal ["hello world"], request["device_ids"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["field_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Iot::V1::GatewayListOptions), request["gateway_list_options"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -678,9 +678,9 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     modify_cloud_to_device_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :modify_cloud_to_device_config, name
       assert_kind_of ::Google::Cloud::Iot::V1::ModifyCloudToDeviceConfigRequest, request
-      assert_equal "hello world", request.name
-      assert_equal 42, request.version_to_update
-      assert_equal "hello world", request.binary_data
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["version_to_update"]
+      assert_equal "hello world", request["binary_data"]
       refute_nil options
     end
 
@@ -739,8 +739,8 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     list_device_config_versions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_device_config_versions, name
       assert_kind_of ::Google::Cloud::Iot::V1::ListDeviceConfigVersionsRequest, request
-      assert_equal "hello world", request.name
-      assert_equal 42, request.num_versions
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["num_versions"]
       refute_nil options
     end
 
@@ -799,8 +799,8 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     list_device_states_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_device_states, name
       assert_kind_of ::Google::Cloud::Iot::V1::ListDeviceStatesRequest, request
-      assert_equal "hello world", request.name
-      assert_equal 42, request.num_states
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["num_states"]
       refute_nil options
     end
 
@@ -859,8 +859,8 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
       assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request.policy
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
       refute_nil options
     end
 
@@ -919,8 +919,8 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
       assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request.options
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
       refute_nil options
     end
 
@@ -979,8 +979,8 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :test_iam_permissions, name
       assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal ["hello world"], request.permissions
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
       refute_nil options
     end
 
@@ -1040,9 +1040,9 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     send_command_to_device_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :send_command_to_device, name
       assert_kind_of ::Google::Cloud::Iot::V1::SendCommandToDeviceRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.binary_data
-      assert_equal "hello world", request.subfolder
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["binary_data"]
+      assert_equal "hello world", request["subfolder"]
       refute_nil options
     end
 
@@ -1102,9 +1102,9 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     bind_device_to_gateway_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :bind_device_to_gateway, name
       assert_kind_of ::Google::Cloud::Iot::V1::BindDeviceToGatewayRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.gateway_id
-      assert_equal "hello world", request.device_id
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["gateway_id"]
+      assert_equal "hello world", request["device_id"]
       refute_nil options
     end
 
@@ -1164,9 +1164,9 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
     unbind_device_from_gateway_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :unbind_device_from_gateway, name
       assert_kind_of ::Google::Cloud::Iot::V1::UnbindDeviceFromGatewayRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.gateway_id
-      assert_equal "hello world", request.device_id
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["gateway_id"]
+      assert_equal "hello world", request["device_id"]
       refute_nil options
     end
 
