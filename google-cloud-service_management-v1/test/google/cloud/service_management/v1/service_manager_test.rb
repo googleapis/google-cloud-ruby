@@ -63,10 +63,10 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
     list_services_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_services, name
       assert_kind_of ::Google::Cloud::ServiceManagement::V1::ListServicesRequest, request
-      assert_equal "hello world", request.producer_project_id
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.consumer_id
+      assert_equal "hello world", request["producer_project_id"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["consumer_id"]
       refute_nil options
     end
 
@@ -129,7 +129,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
     get_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_service, name
       assert_kind_of ::Google::Cloud::ServiceManagement::V1::GetServiceRequest, request
-      assert_equal "hello world", request.service_name
+      assert_equal "hello world", request["service_name"]
       refute_nil options
     end
 
@@ -187,7 +187,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
     create_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_service, name
       assert_kind_of ::Google::Cloud::ServiceManagement::V1::CreateServiceRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceManagement::V1::ManagedService), request.service
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceManagement::V1::ManagedService), request["service"]
       refute_nil options
     end
 
@@ -250,7 +250,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
     delete_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_service, name
       assert_kind_of ::Google::Cloud::ServiceManagement::V1::DeleteServiceRequest, request
-      assert_equal "hello world", request.service_name
+      assert_equal "hello world", request["service_name"]
       refute_nil options
     end
 
@@ -313,7 +313,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
     undelete_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :undelete_service, name
       assert_kind_of ::Google::Cloud::ServiceManagement::V1::UndeleteServiceRequest, request
-      assert_equal "hello world", request.service_name
+      assert_equal "hello world", request["service_name"]
       refute_nil options
     end
 
@@ -378,9 +378,9 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
     list_service_configs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_service_configs, name
       assert_kind_of ::Google::Cloud::ServiceManagement::V1::ListServiceConfigsRequest, request
-      assert_equal "hello world", request.service_name
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["service_name"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -445,9 +445,9 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
     get_service_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_service_config, name
       assert_kind_of ::Google::Cloud::ServiceManagement::V1::GetServiceConfigRequest, request
-      assert_equal "hello world", request.service_name
-      assert_equal "hello world", request.config_id
-      assert_equal :BASIC, request.view
+      assert_equal "hello world", request["service_name"]
+      assert_equal "hello world", request["config_id"]
+      assert_equal :BASIC, request["view"]
       refute_nil options
     end
 
@@ -506,8 +506,8 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
     create_service_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_service_config, name
       assert_kind_of ::Google::Cloud::ServiceManagement::V1::CreateServiceConfigRequest, request
-      assert_equal "hello world", request.service_name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Api::Service), request.service_config
+      assert_equal "hello world", request["service_name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Api::Service), request["service_config"]
       refute_nil options
     end
 
@@ -567,9 +567,9 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
     submit_config_source_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :submit_config_source, name
       assert_kind_of ::Google::Cloud::ServiceManagement::V1::SubmitConfigSourceRequest, request
-      assert_equal "hello world", request.service_name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceManagement::V1::ConfigSource), request.config_source
-      assert_equal true, request.validate_only
+      assert_equal "hello world", request["service_name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceManagement::V1::ConfigSource), request["config_source"]
+      assert_equal true, request["validate_only"]
       refute_nil options
     end
 
@@ -635,10 +635,10 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
     list_service_rollouts_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_service_rollouts, name
       assert_kind_of ::Google::Cloud::ServiceManagement::V1::ListServiceRolloutsRequest, request
-      assert_equal "hello world", request.service_name
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.filter
+      assert_equal "hello world", request["service_name"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -702,8 +702,8 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
     get_service_rollout_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_service_rollout, name
       assert_kind_of ::Google::Cloud::ServiceManagement::V1::GetServiceRolloutRequest, request
-      assert_equal "hello world", request.service_name
-      assert_equal "hello world", request.rollout_id
+      assert_equal "hello world", request["service_name"]
+      assert_equal "hello world", request["rollout_id"]
       refute_nil options
     end
 
@@ -762,8 +762,8 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
     create_service_rollout_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_service_rollout, name
       assert_kind_of ::Google::Cloud::ServiceManagement::V1::CreateServiceRolloutRequest, request
-      assert_equal "hello world", request.service_name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceManagement::V1::Rollout), request.rollout
+      assert_equal "hello world", request["service_name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceManagement::V1::Rollout), request["rollout"]
       refute_nil options
     end
 
@@ -827,8 +827,8 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
     generate_config_report_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :generate_config_report, name
       assert_kind_of ::Google::Cloud::ServiceManagement::V1::GenerateConfigReportRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Any), request.new_config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Any), request.old_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Any), request["new_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Any), request["old_config"]
       refute_nil options
     end
 
@@ -887,8 +887,8 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
     enable_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :enable_service, name
       assert_kind_of ::Google::Cloud::ServiceManagement::V1::EnableServiceRequest, request
-      assert_equal "hello world", request.service_name
-      assert_equal "hello world", request.consumer_id
+      assert_equal "hello world", request["service_name"]
+      assert_equal "hello world", request["consumer_id"]
       refute_nil options
     end
 
@@ -952,8 +952,8 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
     disable_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :disable_service, name
       assert_kind_of ::Google::Cloud::ServiceManagement::V1::DisableServiceRequest, request
-      assert_equal "hello world", request.service_name
-      assert_equal "hello world", request.consumer_id
+      assert_equal "hello world", request["service_name"]
+      assert_equal "hello world", request["consumer_id"]
       refute_nil options
     end
 
