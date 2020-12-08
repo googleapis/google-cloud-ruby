@@ -61,8 +61,8 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
     create_assessment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_assessment, name
       assert_kind_of ::Google::Cloud::RecaptchaEnterprise::V1::CreateAssessmentRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecaptchaEnterprise::V1::Assessment), request.assessment
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecaptchaEnterprise::V1::Assessment), request["assessment"]
       refute_nil options
     end
 
@@ -121,8 +121,8 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
     annotate_assessment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :annotate_assessment, name
       assert_kind_of ::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest, request
-      assert_equal "hello world", request.name
-      assert_equal :ANNOTATION_UNSPECIFIED, request.annotation
+      assert_equal "hello world", request["name"]
+      assert_equal :ANNOTATION_UNSPECIFIED, request["annotation"]
       refute_nil options
     end
 
@@ -181,8 +181,8 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
     create_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_key, name
       assert_kind_of ::Google::Cloud::RecaptchaEnterprise::V1::CreateKeyRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecaptchaEnterprise::V1::Key), request.key
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecaptchaEnterprise::V1::Key), request["key"]
       refute_nil options
     end
 
@@ -242,9 +242,9 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
     list_keys_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_keys, name
       assert_kind_of ::Google::Cloud::RecaptchaEnterprise::V1::ListKeysRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -307,7 +307,7 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
     get_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_key, name
       assert_kind_of ::Google::Cloud::RecaptchaEnterprise::V1::GetKeyRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -366,8 +366,8 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
     update_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_key, name
       assert_kind_of ::Google::Cloud::RecaptchaEnterprise::V1::UpdateKeyRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecaptchaEnterprise::V1::Key), request.key
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecaptchaEnterprise::V1::Key), request["key"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -425,7 +425,7 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
     delete_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_key, name
       assert_kind_of ::Google::Cloud::RecaptchaEnterprise::V1::DeleteKeyRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
