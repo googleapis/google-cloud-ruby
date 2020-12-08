@@ -62,9 +62,9 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     create_build_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_build, name
       assert_kind_of ::Google::Cloud::Build::V1::CreateBuildRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.project_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::Build), request.build
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["project_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::Build), request["build"]
       refute_nil options
     end
 
@@ -129,9 +129,9 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     get_build_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_build, name
       assert_kind_of ::Google::Cloud::Build::V1::GetBuildRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.id
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["id"]
       refute_nil options
     end
 
@@ -193,11 +193,11 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     list_builds_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_builds, name
       assert_kind_of ::Google::Cloud::Build::V1::ListBuildsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.project_id
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["project_id"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -262,9 +262,9 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     cancel_build_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :cancel_build, name
       assert_kind_of ::Google::Cloud::Build::V1::CancelBuildRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.id
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["id"]
       refute_nil options
     end
 
@@ -324,9 +324,9 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     retry_build_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :retry_build, name
       assert_kind_of ::Google::Cloud::Build::V1::RetryBuildRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.id
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["id"]
       refute_nil options
     end
 
@@ -390,8 +390,8 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     create_build_trigger_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_build_trigger, name
       assert_kind_of ::Google::Cloud::Build::V1::CreateBuildTriggerRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::BuildTrigger), request.trigger
+      assert_equal "hello world", request["project_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::BuildTrigger), request["trigger"]
       refute_nil options
     end
 
@@ -450,8 +450,8 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     get_build_trigger_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_build_trigger, name
       assert_kind_of ::Google::Cloud::Build::V1::GetBuildTriggerRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.trigger_id
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["trigger_id"]
       refute_nil options
     end
 
@@ -511,9 +511,9 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     list_build_triggers_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_build_triggers, name
       assert_kind_of ::Google::Cloud::Build::V1::ListBuildTriggersRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["project_id"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -577,8 +577,8 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     delete_build_trigger_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_build_trigger, name
       assert_kind_of ::Google::Cloud::Build::V1::DeleteBuildTriggerRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.trigger_id
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["trigger_id"]
       refute_nil options
     end
 
@@ -638,9 +638,9 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     update_build_trigger_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_build_trigger, name
       assert_kind_of ::Google::Cloud::Build::V1::UpdateBuildTriggerRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.trigger_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::BuildTrigger), request.trigger
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["trigger_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::BuildTrigger), request["trigger"]
       refute_nil options
     end
 
@@ -700,9 +700,9 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     run_build_trigger_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_build_trigger, name
       assert_kind_of ::Google::Cloud::Build::V1::RunBuildTriggerRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.trigger_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::RepoSource), request.source
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["trigger_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::RepoSource), request["source"]
       refute_nil options
     end
 
@@ -766,8 +766,8 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     create_worker_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_worker_pool, name
       assert_kind_of ::Google::Cloud::Build::V1::CreateWorkerPoolRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::WorkerPool), request.worker_pool
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::WorkerPool), request["worker_pool"]
       refute_nil options
     end
 
@@ -825,7 +825,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     get_worker_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_worker_pool, name
       assert_kind_of ::Google::Cloud::Build::V1::GetWorkerPoolRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -883,7 +883,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     delete_worker_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_worker_pool, name
       assert_kind_of ::Google::Cloud::Build::V1::DeleteWorkerPoolRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -942,8 +942,8 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     update_worker_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_worker_pool, name
       assert_kind_of ::Google::Cloud::Build::V1::UpdateWorkerPoolRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::WorkerPool), request.worker_pool
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::WorkerPool), request["worker_pool"]
       refute_nil options
     end
 
@@ -1001,7 +1001,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     list_worker_pools_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_worker_pools, name
       assert_kind_of ::Google::Cloud::Build::V1::ListWorkerPoolsRequest, request
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
