@@ -62,9 +62,9 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     create_product_set_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_product_set, name
       assert_kind_of ::Google::Cloud::Vision::V1::CreateProductSetRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::ProductSet), request.product_set
-      assert_equal "hello world", request.product_set_id
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::ProductSet), request["product_set"]
+      assert_equal "hello world", request["product_set_id"]
       refute_nil options
     end
 
@@ -124,9 +124,9 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     list_product_sets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_product_sets, name
       assert_kind_of ::Google::Cloud::Vision::V1::ListProductSetsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -189,7 +189,7 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     get_product_set_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_product_set, name
       assert_kind_of ::Google::Cloud::Vision::V1::GetProductSetRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -248,8 +248,8 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     update_product_set_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_product_set, name
       assert_kind_of ::Google::Cloud::Vision::V1::UpdateProductSetRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::ProductSet), request.product_set
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::ProductSet), request["product_set"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -307,7 +307,7 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     delete_product_set_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_product_set, name
       assert_kind_of ::Google::Cloud::Vision::V1::DeleteProductSetRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -367,9 +367,9 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     create_product_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_product, name
       assert_kind_of ::Google::Cloud::Vision::V1::CreateProductRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::Product), request.product
-      assert_equal "hello world", request.product_id
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::Product), request["product"]
+      assert_equal "hello world", request["product_id"]
       refute_nil options
     end
 
@@ -429,9 +429,9 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     list_products_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_products, name
       assert_kind_of ::Google::Cloud::Vision::V1::ListProductsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -494,7 +494,7 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     get_product_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_product, name
       assert_kind_of ::Google::Cloud::Vision::V1::GetProductRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -553,8 +553,8 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     update_product_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_product, name
       assert_kind_of ::Google::Cloud::Vision::V1::UpdateProductRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::Product), request.product
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::Product), request["product"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -612,7 +612,7 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     delete_product_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_product, name
       assert_kind_of ::Google::Cloud::Vision::V1::DeleteProductRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -672,9 +672,9 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     create_reference_image_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_reference_image, name
       assert_kind_of ::Google::Cloud::Vision::V1::CreateReferenceImageRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::ReferenceImage), request.reference_image
-      assert_equal "hello world", request.reference_image_id
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::ReferenceImage), request["reference_image"]
+      assert_equal "hello world", request["reference_image_id"]
       refute_nil options
     end
 
@@ -732,7 +732,7 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     delete_reference_image_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_reference_image, name
       assert_kind_of ::Google::Cloud::Vision::V1::DeleteReferenceImageRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -792,9 +792,9 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     list_reference_images_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_reference_images, name
       assert_kind_of ::Google::Cloud::Vision::V1::ListReferenceImagesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -857,7 +857,7 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     get_reference_image_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_reference_image, name
       assert_kind_of ::Google::Cloud::Vision::V1::GetReferenceImageRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -916,8 +916,8 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     add_product_to_product_set_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :add_product_to_product_set, name
       assert_kind_of ::Google::Cloud::Vision::V1::AddProductToProductSetRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.product
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["product"]
       refute_nil options
     end
 
@@ -976,8 +976,8 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     remove_product_from_product_set_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :remove_product_from_product_set, name
       assert_kind_of ::Google::Cloud::Vision::V1::RemoveProductFromProductSetRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.product
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["product"]
       refute_nil options
     end
 
@@ -1037,9 +1037,9 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     list_products_in_product_set_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_products_in_product_set, name
       assert_kind_of ::Google::Cloud::Vision::V1::ListProductsInProductSetRequest, request
-      assert_equal "hello world", request.name
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -1103,8 +1103,8 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     import_product_sets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_product_sets, name
       assert_kind_of ::Google::Cloud::Vision::V1::ImportProductSetsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::ImportProductSetsInputConfig), request.input_config
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::ImportProductSetsInputConfig), request["input_config"]
       refute_nil options
     end
 
@@ -1169,10 +1169,10 @@ class ::Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
     purge_products_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :purge_products, name
       assert_kind_of ::Google::Cloud::Vision::V1::PurgeProductsRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::ProductSetPurgeConfig), request.product_set_purge_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::ProductSetPurgeConfig), request["product_set_purge_config"]
       assert_equal :product_set_purge_config, request.target
-      assert_equal "hello world", request.parent
-      assert_equal true, request.force
+      assert_equal "hello world", request["parent"]
+      assert_equal true, request["force"]
       refute_nil options
     end
 
