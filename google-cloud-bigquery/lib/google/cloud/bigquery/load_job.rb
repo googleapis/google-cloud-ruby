@@ -348,6 +348,70 @@ module Google
         end
 
         ###
+        # Checks if hive partitioning options are set.
+        #
+        # @see https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs Loading externally partitioned data
+        #
+        # @return [Boolean] `true` when hive partitioning options are set, or `false` otherwise.
+        #
+        # @!group Attributes
+        #
+        def hive_partitioning?
+          !@gapi.configuration.load.hive_partitioning_options.nil?
+        end
+
+        ###
+        # The mode of hive partitioning to use when reading data. The following modes are supported:
+        #
+        #   1. `AUTO`: automatically infer partition key name(s) and type(s).
+        #   2. `STRINGS`: automatically infer partition key name(s). All types are interpreted as strings.
+        #   3. `CUSTOM`: partition key schema is encoded in the source URI prefix.
+        #
+        # @see https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs Loading externally partitioned data
+        #
+        # @return [String, nil] The mode of hive partitioning, or `nil` if not set.
+        #
+        # @!group Attributes
+        #
+        def hive_partitioning_mode
+          @gapi.configuration.load.hive_partitioning_options.mode if hive_partitioning?
+        end
+
+        ###
+        # Whether queries over this table require a partition filter that can be used for partition elimination to be
+        # specified. Note that this field should only be true when creating a permanent external table or querying a
+        # temporary external table.
+        #
+        # @see https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs Loading externally partitioned data
+        #
+        # @return [Boolean] `true` when queries over this table require a partition filter, or `false` otherwise.
+        #
+        # @!group Attributes
+        #
+        def hive_partitioning_require_partition_filter?
+          return false unless hive_partitioning?
+          !@gapi.configuration.load.hive_partitioning_options.require_partition_filter.nil?
+        end
+
+        ###
+        # The common prefix for all source uris when hive partition detection is requested. The prefix must end
+        # immediately before the partition key encoding begins. For example, consider files following this data layout.
+        # `gs://bucket/path_to_table/dt=2019-01-01/country=BR/id=7/file.avro`
+        # `gs://bucket/path_to_table/dt=2018-12-31/country=CA/id=3/file.avro` When hive partitioning is requested with
+        # either `AUTO` or `STRINGS` mode, the common prefix can be either of `gs://bucket/path_to_table` or
+        # `gs://bucket/path_to_table/` (trailing slash does not matter).
+        #
+        # @see https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs Loading externally partitioned data
+        #
+        # @return [String, nil] The common prefix for all source uris, or `nil` if not set.
+        #
+        # @!group Attributes
+        #
+        def hive_partitioning_source_uri_prefix
+          @gapi.configuration.load.hive_partitioning_options.source_uri_prefix if hive_partitioning?
+        end
+
+        ###
         # Checks if the destination table will be range partitioned. See [Creating and using integer range partitioned
         # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
         #
@@ -1324,6 +1388,85 @@ module Google
           #
           def labels= val
             @gapi.configuration.update! labels: val
+          end
+
+          ##
+          # Sets the mode of hive partitioning to use when reading data. The following modes are supported:
+          #
+          #   1. `AUTO`: automatically infer partition key name(s) and type(s).
+          #   2. `STRINGS`: automatically infer partition key name(s). All types are interpreted as strings.
+          #   3. `CUSTOM`: partition key schema is encoded in the source URI prefix.
+          #
+          # Not all storage formats support hive partitioning. Requesting hive partitioning on an unsupported format
+          # will lead to an error. Currently supported types include: `avro`, `csv`, `json`, `orc` and `parquet`.
+          #
+          # See {#format=} and {#hive_partitioning_source_uri_prefix=}.
+          #
+          # @see https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs Loading externally partitioned data
+          #
+          # @param [String, Symbol] mode The mode of hive partitioning to use when reading data.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   gs_url = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+          #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #     job.format = "parquet"
+          #     job.hive_partitioning_mode = "AUTO"
+          #     job.hive_partitioning_source_uri_prefix = source_uri_prefix
+          #   end
+          #
+          #   load_job.wait_until_done!
+          #   load_job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def hive_partitioning_mode= mode
+            mode = mode.to_s.upcase if mode
+            @gapi.configuration.load.hive_partitioning_options ||= Google::Apis::BigqueryV2::HivePartitioningOptions.new
+            @gapi.configuration.load.hive_partitioning_options.mode = mode.upcase
+          end
+
+          ##
+          # Sets the common prefix for all source uris when hive partition detection is requested. The prefix must end
+          # immediately before the partition key encoding begins. For example, consider files following this data
+          # layout. `gs://bucket/path_to_table/dt=2019-01-01/country=BR/id=7/file.avro`
+          # `gs://bucket/path_to_table/dt=2018-12-31/country=CA/id=3/file.avro` When hive partitioning is requested with
+          # either `AUTO` or `STRINGS` mode, the common prefix can be either of `gs://bucket/path_to_table` or
+          # `gs://bucket/path_to_table/` (trailing slash does not matter).
+          #
+          # See {#hive_partitioning_mode=}.
+          #
+          # @see https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs Loading externally partitioned data
+          #
+          # @param [String] source_uri_prefix The common prefix for all source uris.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   gs_url = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+          #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #     job.format = "parquet"
+          #     job.hive_partitioning_mode = "AUTO"
+          #     job.hive_partitioning_source_uri_prefix = source_uri_prefix
+          #   end
+          #
+          #   load_job.wait_until_done!
+          #   load_job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def hive_partitioning_source_uri_prefix= source_uri_prefix
+            @gapi.configuration.load.hive_partitioning_options ||= Google::Apis::BigqueryV2::HivePartitioningOptions.new
+            @gapi.configuration.load.hive_partitioning_options.source_uri_prefix = source_uri_prefix
           end
 
           ##
