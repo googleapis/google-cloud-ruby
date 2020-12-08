@@ -29,3 +29,6 @@ module Grafeas
   module V1
   end
 end
+
+helper_path = ::File.join __dir__, "v1", "_helpers.rb"
+require "grafeas/v1/_helpers" if ::File.file? helper_path

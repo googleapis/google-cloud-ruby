@@ -60,7 +60,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     get_occurrence_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_occurrence, name
       assert_kind_of ::Grafeas::V1::GetOccurrenceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -121,10 +121,10 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     list_occurrences_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_occurrences, name
       assert_kind_of ::Grafeas::V1::ListOccurrencesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -187,7 +187,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     delete_occurrence_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_occurrence, name
       assert_kind_of ::Grafeas::V1::DeleteOccurrenceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -246,8 +246,8 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     create_occurrence_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_occurrence, name
       assert_kind_of ::Grafeas::V1::CreateOccurrenceRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Grafeas::V1::Occurrence), request.occurrence
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Grafeas::V1::Occurrence), request["occurrence"]
       refute_nil options
     end
 
@@ -306,8 +306,8 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     batch_create_occurrences_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_create_occurrences, name
       assert_kind_of ::Grafeas::V1::BatchCreateOccurrencesRequest, request
-      assert_equal "hello world", request.parent
-      assert_kind_of ::Grafeas::V1::Occurrence, request.occurrences.first
+      assert_equal "hello world", request["parent"]
+      assert_kind_of ::Grafeas::V1::Occurrence, request["occurrences"].first
       refute_nil options
     end
 
@@ -367,9 +367,9 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     update_occurrence_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_occurrence, name
       assert_kind_of ::Grafeas::V1::UpdateOccurrenceRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Grafeas::V1::Occurrence), request.occurrence
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Grafeas::V1::Occurrence), request["occurrence"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -427,7 +427,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     get_occurrence_note_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_occurrence_note, name
       assert_kind_of ::Grafeas::V1::GetOccurrenceNoteRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -485,7 +485,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     get_note_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_note, name
       assert_kind_of ::Grafeas::V1::GetNoteRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -546,10 +546,10 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     list_notes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_notes, name
       assert_kind_of ::Grafeas::V1::ListNotesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -612,7 +612,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     delete_note_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_note, name
       assert_kind_of ::Grafeas::V1::DeleteNoteRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -672,9 +672,9 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     create_note_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_note, name
       assert_kind_of ::Grafeas::V1::CreateNoteRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.note_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Grafeas::V1::Note), request.note
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["note_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Grafeas::V1::Note), request["note"]
       refute_nil options
     end
 
@@ -733,8 +733,8 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     batch_create_notes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_create_notes, name
       assert_kind_of ::Grafeas::V1::BatchCreateNotesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal({}, request.notes.to_h)
+      assert_equal "hello world", request["parent"]
+      assert_equal({}, request["notes"].to_h)
       refute_nil options
     end
 
@@ -794,9 +794,9 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     update_note_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_note, name
       assert_kind_of ::Grafeas::V1::UpdateNoteRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Grafeas::V1::Note), request.note
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Grafeas::V1::Note), request["note"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -857,10 +857,10 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
     list_note_occurrences_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_note_occurrences, name
       assert_kind_of ::Grafeas::V1::ListNoteOccurrencesRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
