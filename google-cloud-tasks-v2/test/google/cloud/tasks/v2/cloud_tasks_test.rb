@@ -63,10 +63,10 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     list_queues_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_queues, name
       assert_kind_of ::Google::Cloud::Tasks::V2::ListQueuesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -129,7 +129,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     get_queue_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_queue, name
       assert_kind_of ::Google::Cloud::Tasks::V2::GetQueueRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -188,8 +188,8 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     create_queue_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_queue, name
       assert_kind_of ::Google::Cloud::Tasks::V2::CreateQueueRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Tasks::V2::Queue), request.queue
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Tasks::V2::Queue), request["queue"]
       refute_nil options
     end
 
@@ -248,8 +248,8 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     update_queue_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_queue, name
       assert_kind_of ::Google::Cloud::Tasks::V2::UpdateQueueRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Tasks::V2::Queue), request.queue
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Tasks::V2::Queue), request["queue"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -307,7 +307,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     delete_queue_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_queue, name
       assert_kind_of ::Google::Cloud::Tasks::V2::DeleteQueueRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -365,7 +365,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     purge_queue_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :purge_queue, name
       assert_kind_of ::Google::Cloud::Tasks::V2::PurgeQueueRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -423,7 +423,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     pause_queue_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :pause_queue, name
       assert_kind_of ::Google::Cloud::Tasks::V2::PauseQueueRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -481,7 +481,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     resume_queue_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :resume_queue, name
       assert_kind_of ::Google::Cloud::Tasks::V2::ResumeQueueRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -540,8 +540,8 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
       assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request.options
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
       refute_nil options
     end
 
@@ -600,8 +600,8 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
       assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request.policy
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
       refute_nil options
     end
 
@@ -660,8 +660,8 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :test_iam_permissions, name
       assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal ["hello world"], request.permissions
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
       refute_nil options
     end
 
@@ -722,10 +722,10 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     list_tasks_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_tasks, name
       assert_kind_of ::Google::Cloud::Tasks::V2::ListTasksRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal :VIEW_UNSPECIFIED, request.response_view
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal :VIEW_UNSPECIFIED, request["response_view"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -789,8 +789,8 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     get_task_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_task, name
       assert_kind_of ::Google::Cloud::Tasks::V2::GetTaskRequest, request
-      assert_equal "hello world", request.name
-      assert_equal :VIEW_UNSPECIFIED, request.response_view
+      assert_equal "hello world", request["name"]
+      assert_equal :VIEW_UNSPECIFIED, request["response_view"]
       refute_nil options
     end
 
@@ -850,9 +850,9 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     create_task_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_task, name
       assert_kind_of ::Google::Cloud::Tasks::V2::CreateTaskRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Tasks::V2::Task), request.task
-      assert_equal :VIEW_UNSPECIFIED, request.response_view
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Tasks::V2::Task), request["task"]
+      assert_equal :VIEW_UNSPECIFIED, request["response_view"]
       refute_nil options
     end
 
@@ -910,7 +910,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     delete_task_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_task, name
       assert_kind_of ::Google::Cloud::Tasks::V2::DeleteTaskRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -969,8 +969,8 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     run_task_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_task, name
       assert_kind_of ::Google::Cloud::Tasks::V2::RunTaskRequest, request
-      assert_equal "hello world", request.name
-      assert_equal :VIEW_UNSPECIFIED, request.response_view
+      assert_equal "hello world", request["name"]
+      assert_equal :VIEW_UNSPECIFIED, request["response_view"]
       refute_nil options
     end
 
