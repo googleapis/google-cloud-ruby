@@ -61,8 +61,8 @@ class ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::C
     report_phishing_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :report_phishing, name
       assert_kind_of ::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.uri
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["uri"]
       refute_nil options
     end
 
