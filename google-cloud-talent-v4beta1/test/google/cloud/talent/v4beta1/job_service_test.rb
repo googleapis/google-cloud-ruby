@@ -61,8 +61,8 @@ class ::Google::Cloud::Talent::V4beta1::JobService::ClientTest < Minitest::Test
     create_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_job, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::CreateJobRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Job), request.job
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Job), request["job"]
       refute_nil options
     end
 
@@ -121,8 +121,8 @@ class ::Google::Cloud::Talent::V4beta1::JobService::ClientTest < Minitest::Test
     batch_create_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_create_jobs, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::BatchCreateJobsRequest, request
-      assert_equal "hello world", request.parent
-      assert_kind_of ::Google::Cloud::Talent::V4beta1::Job, request.jobs.first
+      assert_equal "hello world", request["parent"]
+      assert_kind_of ::Google::Cloud::Talent::V4beta1::Job, request["jobs"].first
       refute_nil options
     end
 
@@ -185,7 +185,7 @@ class ::Google::Cloud::Talent::V4beta1::JobService::ClientTest < Minitest::Test
     get_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_job, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::GetJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -244,8 +244,8 @@ class ::Google::Cloud::Talent::V4beta1::JobService::ClientTest < Minitest::Test
     update_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_job, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::UpdateJobRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Job), request.job
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Job), request["job"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -305,9 +305,9 @@ class ::Google::Cloud::Talent::V4beta1::JobService::ClientTest < Minitest::Test
     batch_update_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_update_jobs, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest, request
-      assert_equal "hello world", request.parent
-      assert_kind_of ::Google::Cloud::Talent::V4beta1::Job, request.jobs.first
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["parent"]
+      assert_kind_of ::Google::Cloud::Talent::V4beta1::Job, request["jobs"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -370,7 +370,7 @@ class ::Google::Cloud::Talent::V4beta1::JobService::ClientTest < Minitest::Test
     delete_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_job, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::DeleteJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -429,8 +429,8 @@ class ::Google::Cloud::Talent::V4beta1::JobService::ClientTest < Minitest::Test
     batch_delete_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_delete_jobs, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::BatchDeleteJobsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -492,11 +492,11 @@ class ::Google::Cloud::Talent::V4beta1::JobService::ClientTest < Minitest::Test
     list_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_jobs, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::ListJobsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
-      assert_equal :JOB_VIEW_UNSPECIFIED, request.job_view
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
+      assert_equal :JOB_VIEW_UNSPECIFIED, request["job_view"]
       refute_nil options
     end
 
@@ -573,21 +573,21 @@ class ::Google::Cloud::Talent::V4beta1::JobService::ClientTest < Minitest::Test
     search_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_jobs, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::SearchJobsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal :SEARCH_MODE_UNSPECIFIED, request.search_mode
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::RequestMetadata), request.request_metadata
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::JobQuery), request.job_query
-      assert_equal true, request.enable_broadening
-      assert_equal true, request.require_precise_result_size
-      assert_kind_of ::Google::Cloud::Talent::V4beta1::HistogramQuery, request.histogram_queries.first
-      assert_equal :JOB_VIEW_UNSPECIFIED, request.job_view
-      assert_equal 42, request.offset
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.order_by
-      assert_equal :DIVERSIFICATION_LEVEL_UNSPECIFIED, request.diversification_level
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo), request.custom_ranking_info
-      assert_equal true, request.disable_keyword_match
+      assert_equal "hello world", request["parent"]
+      assert_equal :SEARCH_MODE_UNSPECIFIED, request["search_mode"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::RequestMetadata), request["request_metadata"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::JobQuery), request["job_query"]
+      assert_equal true, request["enable_broadening"]
+      assert_equal true, request["require_precise_result_size"]
+      assert_kind_of ::Google::Cloud::Talent::V4beta1::HistogramQuery, request["histogram_queries"].first
+      assert_equal :JOB_VIEW_UNSPECIFIED, request["job_view"]
+      assert_equal 42, request["offset"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal :DIVERSIFICATION_LEVEL_UNSPECIFIED, request["diversification_level"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo), request["custom_ranking_info"]
+      assert_equal true, request["disable_keyword_match"]
       refute_nil options
     end
 
@@ -659,21 +659,21 @@ class ::Google::Cloud::Talent::V4beta1::JobService::ClientTest < Minitest::Test
     search_jobs_for_alert_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_jobs_for_alert, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::SearchJobsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal :SEARCH_MODE_UNSPECIFIED, request.search_mode
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::RequestMetadata), request.request_metadata
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::JobQuery), request.job_query
-      assert_equal true, request.enable_broadening
-      assert_equal true, request.require_precise_result_size
-      assert_kind_of ::Google::Cloud::Talent::V4beta1::HistogramQuery, request.histogram_queries.first
-      assert_equal :JOB_VIEW_UNSPECIFIED, request.job_view
-      assert_equal 42, request.offset
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.order_by
-      assert_equal :DIVERSIFICATION_LEVEL_UNSPECIFIED, request.diversification_level
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo), request.custom_ranking_info
-      assert_equal true, request.disable_keyword_match
+      assert_equal "hello world", request["parent"]
+      assert_equal :SEARCH_MODE_UNSPECIFIED, request["search_mode"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::RequestMetadata), request["request_metadata"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::JobQuery), request["job_query"]
+      assert_equal true, request["enable_broadening"]
+      assert_equal true, request["require_precise_result_size"]
+      assert_kind_of ::Google::Cloud::Talent::V4beta1::HistogramQuery, request["histogram_queries"].first
+      assert_equal :JOB_VIEW_UNSPECIFIED, request["job_view"]
+      assert_equal 42, request["offset"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal :DIVERSIFICATION_LEVEL_UNSPECIFIED, request["diversification_level"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::SearchJobsRequest::CustomRankingInfo), request["custom_ranking_info"]
+      assert_equal true, request["disable_keyword_match"]
       refute_nil options
     end
 

@@ -64,11 +64,11 @@ class ::Google::Cloud::Talent::V4beta1::ProfileService::ClientTest < Minitest::T
     list_profiles_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_profiles, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::ListProfilesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.read_mask
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["read_mask"]
       refute_nil options
     end
 
@@ -132,8 +132,8 @@ class ::Google::Cloud::Talent::V4beta1::ProfileService::ClientTest < Minitest::T
     create_profile_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_profile, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::CreateProfileRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Profile), request.profile
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Profile), request["profile"]
       refute_nil options
     end
 
@@ -191,7 +191,7 @@ class ::Google::Cloud::Talent::V4beta1::ProfileService::ClientTest < Minitest::T
     get_profile_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_profile, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::GetProfileRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -250,8 +250,8 @@ class ::Google::Cloud::Talent::V4beta1::ProfileService::ClientTest < Minitest::T
     update_profile_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_profile, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::UpdateProfileRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Profile), request.profile
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Profile), request["profile"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -309,7 +309,7 @@ class ::Google::Cloud::Talent::V4beta1::ProfileService::ClientTest < Minitest::T
     delete_profile_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_profile, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::DeleteProfileRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -378,18 +378,18 @@ class ::Google::Cloud::Talent::V4beta1::ProfileService::ClientTest < Minitest::T
     search_profiles_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_profiles, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::SearchProfilesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::RequestMetadata), request.request_metadata
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::ProfileQuery), request.profile_query
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.offset
-      assert_equal true, request.disable_spell_check
-      assert_equal "hello world", request.order_by
-      assert_equal true, request.case_sensitive_sort
-      assert_kind_of ::Google::Cloud::Talent::V4beta1::HistogramQuery, request.histogram_queries.first
-      assert_equal "hello world", request.result_set_id
-      assert_equal true, request.strict_keywords_search
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::RequestMetadata), request["request_metadata"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::ProfileQuery), request["profile_query"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["offset"]
+      assert_equal true, request["disable_spell_check"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal true, request["case_sensitive_sort"]
+      assert_kind_of ::Google::Cloud::Talent::V4beta1::HistogramQuery, request["histogram_queries"].first
+      assert_equal "hello world", request["result_set_id"]
+      assert_equal true, request["strict_keywords_search"]
       refute_nil options
     end
 

@@ -61,8 +61,8 @@ class ::Google::Cloud::Talent::V4beta1::ApplicationService::ClientTest < Minites
     create_application_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_application, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::CreateApplicationRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Application), request.application
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Application), request["application"]
       refute_nil options
     end
 
@@ -120,7 +120,7 @@ class ::Google::Cloud::Talent::V4beta1::ApplicationService::ClientTest < Minites
     get_application_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_application, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::GetApplicationRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -179,8 +179,8 @@ class ::Google::Cloud::Talent::V4beta1::ApplicationService::ClientTest < Minites
     update_application_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_application, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::UpdateApplicationRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Application), request.application
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Application), request["application"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -238,7 +238,7 @@ class ::Google::Cloud::Talent::V4beta1::ApplicationService::ClientTest < Minites
     delete_application_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_application, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::DeleteApplicationRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -298,9 +298,9 @@ class ::Google::Cloud::Talent::V4beta1::ApplicationService::ClientTest < Minites
     list_applications_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_applications, name
       assert_kind_of ::Google::Cloud::Talent::V4beta1::ListApplicationsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
