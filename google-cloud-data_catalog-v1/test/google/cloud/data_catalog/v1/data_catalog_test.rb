@@ -64,11 +64,11 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     search_catalog_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_catalog, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::SearchCatalogRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::SearchCatalogRequest::Scope), request.scope
-      assert_equal "hello world", request.query
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.order_by
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::SearchCatalogRequest::Scope), request["scope"]
+      assert_equal "hello world", request["query"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -133,9 +133,9 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     create_entry_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_entry_group, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::CreateEntryGroupRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.entry_group_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::EntryGroup), request.entry_group
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["entry_group_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::EntryGroup), request["entry_group"]
       refute_nil options
     end
 
@@ -194,8 +194,8 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     get_entry_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_entry_group, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::GetEntryGroupRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.read_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["read_mask"]
       refute_nil options
     end
 
@@ -254,8 +254,8 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     update_entry_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_entry_group, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::UpdateEntryGroupRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::EntryGroup), request.entry_group
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::EntryGroup), request["entry_group"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -314,8 +314,8 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     delete_entry_group_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_entry_group, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::DeleteEntryGroupRequest, request
-      assert_equal "hello world", request.name
-      assert_equal true, request.force
+      assert_equal "hello world", request["name"]
+      assert_equal true, request["force"]
       refute_nil options
     end
 
@@ -375,9 +375,9 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     list_entry_groups_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_entry_groups, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::ListEntryGroupsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -442,9 +442,9 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     create_entry_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_entry, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::CreateEntryRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.entry_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::Entry), request.entry
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["entry_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::Entry), request["entry"]
       refute_nil options
     end
 
@@ -503,8 +503,8 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     update_entry_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_entry, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::UpdateEntryRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::Entry), request.entry
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::Entry), request["entry"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -562,7 +562,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     delete_entry_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_entry, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::DeleteEntryRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -620,7 +620,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     get_entry_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_entry, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::GetEntryRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -678,7 +678,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     lookup_entry_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :lookup_entry, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::LookupEntryRequest, request
-      assert_equal "hello world", request.linked_resource
+      assert_equal "hello world", request["linked_resource"]
       assert_equal :linked_resource, request.target_name
       refute_nil options
     end
@@ -740,10 +740,10 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     list_entries_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_entries, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::ListEntriesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.read_mask
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["read_mask"]
       refute_nil options
     end
 
@@ -808,9 +808,9 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     create_tag_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_tag_template, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::CreateTagTemplateRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.tag_template_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::TagTemplate), request.tag_template
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["tag_template_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::TagTemplate), request["tag_template"]
       refute_nil options
     end
 
@@ -868,7 +868,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     get_tag_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_tag_template, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::GetTagTemplateRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -927,8 +927,8 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     update_tag_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_tag_template, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::UpdateTagTemplateRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::TagTemplate), request.tag_template
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::TagTemplate), request["tag_template"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -987,8 +987,8 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     delete_tag_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_tag_template, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::DeleteTagTemplateRequest, request
-      assert_equal "hello world", request.name
-      assert_equal true, request.force
+      assert_equal "hello world", request["name"]
+      assert_equal true, request["force"]
       refute_nil options
     end
 
@@ -1048,9 +1048,9 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     create_tag_template_field_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_tag_template_field, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::CreateTagTemplateFieldRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.tag_template_field_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::TagTemplateField), request.tag_template_field
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["tag_template_field_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::TagTemplateField), request["tag_template_field"]
       refute_nil options
     end
 
@@ -1110,9 +1110,9 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     update_tag_template_field_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_tag_template_field, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::UpdateTagTemplateFieldRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::TagTemplateField), request.tag_template_field
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::TagTemplateField), request["tag_template_field"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1171,8 +1171,8 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     rename_tag_template_field_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :rename_tag_template_field, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.new_tag_template_field_id
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["new_tag_template_field_id"]
       refute_nil options
     end
 
@@ -1231,8 +1231,8 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     delete_tag_template_field_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_tag_template_field, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::DeleteTagTemplateFieldRequest, request
-      assert_equal "hello world", request.name
-      assert_equal true, request.force
+      assert_equal "hello world", request["name"]
+      assert_equal true, request["force"]
       refute_nil options
     end
 
@@ -1291,8 +1291,8 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     create_tag_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_tag, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::CreateTagRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::Tag), request.tag
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::Tag), request["tag"]
       refute_nil options
     end
 
@@ -1351,8 +1351,8 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     update_tag_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_tag, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::UpdateTagRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::Tag), request.tag
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataCatalog::V1::Tag), request["tag"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1410,7 +1410,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     delete_tag_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_tag, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::DeleteTagRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1470,9 +1470,9 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     list_tags_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_tags, name
       assert_kind_of ::Google::Cloud::DataCatalog::V1::ListTagsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -1536,8 +1536,8 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
       assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request.policy
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
       refute_nil options
     end
 
@@ -1596,8 +1596,8 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
       assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request.options
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
       refute_nil options
     end
 
@@ -1656,8 +1656,8 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :test_iam_permissions, name
       assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal ["hello world"], request.permissions
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
       refute_nil options
     end
 
