@@ -63,10 +63,10 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
     list_monitored_resource_descriptors_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_monitored_resource_descriptors, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -129,7 +129,7 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
     get_monitored_resource_descriptor_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_monitored_resource_descriptor, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::GetMonitoredResourceDescriptorRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -190,10 +190,10 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
     list_metric_descriptors_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_metric_descriptors, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::ListMetricDescriptorsRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -256,7 +256,7 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
     get_metric_descriptor_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_metric_descriptor, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -315,8 +315,8 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
     create_metric_descriptor_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_metric_descriptor, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Api::MetricDescriptor), request.metric_descriptor
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Api::MetricDescriptor), request["metric_descriptor"]
       refute_nil options
     end
 
@@ -374,7 +374,7 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
     delete_metric_descriptor_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_metric_descriptor, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::DeleteMetricDescriptorRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -439,14 +439,14 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
     list_time_series_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_time_series, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.filter
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::TimeInterval), request.interval
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::Aggregation), request.aggregation
-      assert_equal "hello world", request.order_by
-      assert_equal :FULL, request.view
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["filter"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::TimeInterval), request["interval"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::Aggregation), request["aggregation"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal :FULL, request["view"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -510,8 +510,8 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
     create_time_series_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_time_series, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest, request
-      assert_equal "hello world", request.name
-      assert_kind_of ::Google::Cloud::Monitoring::V3::TimeSeries, request.time_series.first
+      assert_equal "hello world", request["name"]
+      assert_kind_of ::Google::Cloud::Monitoring::V3::TimeSeries, request["time_series"].first
       refute_nil options
     end
 

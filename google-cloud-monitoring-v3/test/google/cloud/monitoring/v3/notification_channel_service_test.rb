@@ -62,9 +62,9 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
     list_notification_channel_descriptors_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_notification_channel_descriptors, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest, request
-      assert_equal "hello world", request.name
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -127,7 +127,7 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
     get_notification_channel_descriptor_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_notification_channel_descriptor, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -189,11 +189,11 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
     list_notification_channels_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_notification_channels, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -256,7 +256,7 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
     get_notification_channel_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_notification_channel, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::GetNotificationChannelRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -315,8 +315,8 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
     create_notification_channel_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_notification_channel, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::NotificationChannel), request.notification_channel
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::NotificationChannel), request["notification_channel"]
       refute_nil options
     end
 
@@ -375,8 +375,8 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
     update_notification_channel_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_notification_channel, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::NotificationChannel), request.notification_channel
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::NotificationChannel), request["notification_channel"]
       refute_nil options
     end
 
@@ -435,8 +435,8 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
     delete_notification_channel_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_notification_channel, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest, request
-      assert_equal "hello world", request.name
-      assert_equal true, request.force
+      assert_equal "hello world", request["name"]
+      assert_equal true, request["force"]
       refute_nil options
     end
 
@@ -494,7 +494,7 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
     send_notification_channel_verification_code_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :send_notification_channel_verification_code, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -553,8 +553,8 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
     get_notification_channel_verification_code_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_notification_channel_verification_code, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.expire_time
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["expire_time"]
       refute_nil options
     end
 
@@ -613,8 +613,8 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
     verify_notification_channel_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :verify_notification_channel, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.code
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["code"]
       refute_nil options
     end
 

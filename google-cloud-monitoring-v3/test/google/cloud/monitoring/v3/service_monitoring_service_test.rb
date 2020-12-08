@@ -62,9 +62,9 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
     create_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_service, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::CreateServiceRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.service_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::Service), request.service
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["service_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::Service), request["service"]
       refute_nil options
     end
 
@@ -122,7 +122,7 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
     get_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_service, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::GetServiceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -183,10 +183,10 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
     list_services_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_services, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::ListServicesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -250,8 +250,8 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
     update_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_service, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::UpdateServiceRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::Service), request.service
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::Service), request["service"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -309,7 +309,7 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
     delete_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_service, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::DeleteServiceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -369,9 +369,9 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
     create_service_level_objective_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_service_level_objective, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.service_level_objective_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::ServiceLevelObjective), request.service_level_objective
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["service_level_objective_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::ServiceLevelObjective), request["service_level_objective"]
       refute_nil options
     end
 
@@ -430,8 +430,8 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
     get_service_level_objective_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_service_level_objective, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::GetServiceLevelObjectiveRequest, request
-      assert_equal "hello world", request.name
-      assert_equal :VIEW_UNSPECIFIED, request.view
+      assert_equal "hello world", request["name"]
+      assert_equal :VIEW_UNSPECIFIED, request["view"]
       refute_nil options
     end
 
@@ -493,11 +493,11 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
     list_service_level_objectives_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_service_level_objectives, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal :VIEW_UNSPECIFIED, request.view
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal :VIEW_UNSPECIFIED, request["view"]
       refute_nil options
     end
 
@@ -561,8 +561,8 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
     update_service_level_objective_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_service_level_objective, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::UpdateServiceLevelObjectiveRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::ServiceLevelObjective), request.service_level_objective
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::ServiceLevelObjective), request["service_level_objective"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -620,7 +620,7 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
     delete_service_level_objective_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_service_level_objective, name
       assert_kind_of ::Google::Cloud::Monitoring::V3::DeleteServiceLevelObjectiveRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
