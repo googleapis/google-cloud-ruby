@@ -60,7 +60,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
     get_data_source_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_data_source, name
       assert_kind_of ::Google::Cloud::Bigquery::DataTransfer::V1::GetDataSourceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -120,9 +120,9 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
     list_data_sources_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_data_sources, name
       assert_kind_of ::Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -189,11 +189,11 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
     create_transfer_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_transfer_config, name
       assert_kind_of ::Google::Cloud::Bigquery::DataTransfer::V1::CreateTransferConfigRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig), request.transfer_config
-      assert_equal "hello world", request.authorization_code
-      assert_equal "hello world", request.version_info
-      assert_equal "hello world", request.service_account_name
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig), request["transfer_config"]
+      assert_equal "hello world", request["authorization_code"]
+      assert_equal "hello world", request["version_info"]
+      assert_equal "hello world", request["service_account_name"]
       refute_nil options
     end
 
@@ -255,11 +255,11 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
     update_transfer_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_transfer_config, name
       assert_kind_of ::Google::Cloud::Bigquery::DataTransfer::V1::UpdateTransferConfigRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig), request.transfer_config
-      assert_equal "hello world", request.authorization_code
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
-      assert_equal "hello world", request.version_info
-      assert_equal "hello world", request.service_account_name
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig), request["transfer_config"]
+      assert_equal "hello world", request["authorization_code"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["version_info"]
+      assert_equal "hello world", request["service_account_name"]
       refute_nil options
     end
 
@@ -317,7 +317,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
     delete_transfer_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_transfer_config, name
       assert_kind_of ::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferConfigRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -375,7 +375,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
     get_transfer_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_transfer_config, name
       assert_kind_of ::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferConfigRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -436,10 +436,10 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
     list_transfer_configs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_transfer_configs, name
       assert_kind_of ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal ["hello world"], request.data_source_ids
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
+      assert_equal "hello world", request["parent"]
+      assert_equal ["hello world"], request["data_source_ids"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
       refute_nil options
     end
 
@@ -504,9 +504,9 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
     schedule_transfer_runs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :schedule_transfer_runs, name
       assert_kind_of ::Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.start_time
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.end_time
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["start_time"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["end_time"]
       refute_nil options
     end
 
@@ -565,8 +565,8 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
     start_manual_transfer_runs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :start_manual_transfer_runs, name
       assert_kind_of ::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest::TimeRange), request.requested_time_range
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest::TimeRange), request["requested_time_range"]
       assert_equal :requested_time_range, request.time
       refute_nil options
     end
@@ -625,7 +625,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
     get_transfer_run_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_transfer_run, name
       assert_kind_of ::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferRunRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -683,7 +683,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
     delete_transfer_run_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_transfer_run, name
       assert_kind_of ::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferRunRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -745,11 +745,11 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
     list_transfer_runs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_transfer_runs, name
       assert_kind_of ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal [:TRANSFER_STATE_UNSPECIFIED], request.states
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
-      assert_equal :RUN_ATTEMPT_UNSPECIFIED, request.run_attempt
+      assert_equal "hello world", request["parent"]
+      assert_equal [:TRANSFER_STATE_UNSPECIFIED], request["states"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
+      assert_equal :RUN_ATTEMPT_UNSPECIFIED, request["run_attempt"]
       refute_nil options
     end
 
@@ -815,10 +815,10 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
     list_transfer_logs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_transfer_logs, name
       assert_kind_of ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.page_token
-      assert_equal 42, request.page_size
-      assert_equal [:MESSAGE_SEVERITY_UNSPECIFIED], request.message_types
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal 42, request["page_size"]
+      assert_equal [:MESSAGE_SEVERITY_UNSPECIFIED], request["message_types"]
       refute_nil options
     end
 
@@ -881,7 +881,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
     check_valid_creds_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :check_valid_creds, name
       assert_kind_of ::Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
