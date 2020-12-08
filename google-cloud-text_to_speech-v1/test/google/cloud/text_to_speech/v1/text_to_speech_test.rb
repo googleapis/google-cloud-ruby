@@ -60,7 +60,7 @@ class ::Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Te
     list_voices_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_voices, name
       assert_kind_of ::Google::Cloud::TextToSpeech::V1::ListVoicesRequest, request
-      assert_equal "hello world", request.language_code
+      assert_equal "hello world", request["language_code"]
       refute_nil options
     end
 
@@ -120,9 +120,9 @@ class ::Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Te
     synthesize_speech_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :synthesize_speech, name
       assert_kind_of ::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1::SynthesisInput), request.input
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1::VoiceSelectionParams), request.voice
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1::AudioConfig), request.audio_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1::SynthesisInput), request["input"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1::VoiceSelectionParams), request["voice"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1::AudioConfig), request["audio_config"]
       refute_nil options
     end
 
