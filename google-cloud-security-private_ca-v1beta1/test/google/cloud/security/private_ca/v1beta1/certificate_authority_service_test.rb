@@ -63,10 +63,10 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     create_certificate_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_certificate, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::CreateCertificateRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.certificate_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Security::PrivateCA::V1beta1::Certificate), request.certificate
-      assert_equal "hello world", request.request_id
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["certificate_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Security::PrivateCA::V1beta1::Certificate), request["certificate"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -124,7 +124,7 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     get_certificate_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_certificate, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -186,11 +186,11 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     list_certificates_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_certificates, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::ListCertificatesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -255,9 +255,9 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     revoke_certificate_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :revoke_certificate, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::RevokeCertificateRequest, request
-      assert_equal "hello world", request.name
-      assert_equal :REVOCATION_REASON_UNSPECIFIED, request.reason
-      assert_equal "hello world", request.request_id
+      assert_equal "hello world", request["name"]
+      assert_equal :REVOCATION_REASON_UNSPECIFIED, request["reason"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -317,9 +317,9 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     update_certificate_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_certificate, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Security::PrivateCA::V1beta1::Certificate), request.certificate
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
-      assert_equal "hello world", request.request_id
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Security::PrivateCA::V1beta1::Certificate), request["certificate"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -380,10 +380,10 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     activate_certificate_authority_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :activate_certificate_authority, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::ActivateCertificateAuthorityRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.pem_ca_certificate
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Security::PrivateCA::V1beta1::SubordinateConfig), request.subordinate_config
-      assert_equal "hello world", request.request_id
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["pem_ca_certificate"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Security::PrivateCA::V1beta1::SubordinateConfig), request["subordinate_config"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -449,10 +449,10 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     create_certificate_authority_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_certificate_authority, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::CreateCertificateAuthorityRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.certificate_authority_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority), request.certificate_authority
-      assert_equal "hello world", request.request_id
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["certificate_authority_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority), request["certificate_authority"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -516,8 +516,8 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     disable_certificate_authority_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :disable_certificate_authority, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::DisableCertificateAuthorityRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.request_id
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -581,8 +581,8 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     enable_certificate_authority_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :enable_certificate_authority, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::EnableCertificateAuthorityRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.request_id
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -645,7 +645,7 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     fetch_certificate_authority_csr_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :fetch_certificate_authority_csr, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::FetchCertificateAuthorityCsrRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -703,7 +703,7 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     get_certificate_authority_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_certificate_authority, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateAuthorityRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -765,11 +765,11 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     list_certificate_authorities_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_certificate_authorities, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::ListCertificateAuthoritiesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -833,8 +833,8 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     restore_certificate_authority_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :restore_certificate_authority, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::RestoreCertificateAuthorityRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.request_id
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -898,8 +898,8 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     schedule_delete_certificate_authority_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :schedule_delete_certificate_authority, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::ScheduleDeleteCertificateAuthorityRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.request_id
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -964,9 +964,9 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     update_certificate_authority_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_certificate_authority, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateAuthorityRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority), request.certificate_authority
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
-      assert_equal "hello world", request.request_id
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority), request["certificate_authority"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -1029,7 +1029,7 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     get_certificate_revocation_list_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_certificate_revocation_list, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateRevocationListRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1091,11 +1091,11 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     list_certificate_revocation_lists_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_certificate_revocation_lists, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::ListCertificateRevocationListsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -1160,9 +1160,9 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     update_certificate_revocation_list_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_certificate_revocation_list, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateRevocationListRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateRevocationList), request.certificate_revocation_list
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
-      assert_equal "hello world", request.request_id
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateRevocationList), request["certificate_revocation_list"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -1225,7 +1225,7 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     get_reusable_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_reusable_config, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::GetReusableConfigRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1287,11 +1287,11 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     list_reusable_configs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_reusable_configs, name
       assert_kind_of ::Google::Cloud::Security::PrivateCA::V1beta1::ListReusableConfigsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
