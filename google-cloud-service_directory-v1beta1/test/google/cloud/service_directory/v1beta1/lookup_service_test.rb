@@ -62,9 +62,9 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::ClientTest < Mi
     resolve_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :resolve_service, name
       assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest, request
-      assert_equal "hello world", request.name
-      assert_equal 42, request.max_endpoints
-      assert_equal "hello world", request.endpoint_filter
+      assert_equal "hello world", request["name"]
+      assert_equal 42, request["max_endpoints"]
+      assert_equal "hello world", request["endpoint_filter"]
       refute_nil options
     end
 

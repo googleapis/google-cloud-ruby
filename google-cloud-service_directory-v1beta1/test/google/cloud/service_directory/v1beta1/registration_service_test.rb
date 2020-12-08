@@ -62,9 +62,9 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     create_namespace_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_namespace, name
       assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::CreateNamespaceRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.namespace_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceDirectory::V1beta1::Namespace), request.namespace
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["namespace_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceDirectory::V1beta1::Namespace), request["namespace"]
       refute_nil options
     end
 
@@ -126,11 +126,11 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     list_namespaces_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_namespaces, name
       assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::ListNamespacesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -193,7 +193,7 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     get_namespace_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_namespace, name
       assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::GetNamespaceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -252,8 +252,8 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     update_namespace_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_namespace, name
       assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::UpdateNamespaceRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceDirectory::V1beta1::Namespace), request.namespace
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceDirectory::V1beta1::Namespace), request["namespace"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -311,7 +311,7 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     delete_namespace_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_namespace, name
       assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::DeleteNamespaceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -371,9 +371,9 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     create_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_service, name
       assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::CreateServiceRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.service_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceDirectory::V1beta1::Service), request.service
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["service_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceDirectory::V1beta1::Service), request["service"]
       refute_nil options
     end
 
@@ -435,11 +435,11 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     list_services_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_services, name
       assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::ListServicesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -502,7 +502,7 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     get_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_service, name
       assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::GetServiceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -561,8 +561,8 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     update_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_service, name
       assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::UpdateServiceRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceDirectory::V1beta1::Service), request.service
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceDirectory::V1beta1::Service), request["service"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -620,7 +620,7 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     delete_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_service, name
       assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::DeleteServiceRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -680,9 +680,9 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     create_endpoint_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_endpoint, name
       assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::CreateEndpointRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.endpoint_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceDirectory::V1beta1::Endpoint), request.endpoint
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["endpoint_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceDirectory::V1beta1::Endpoint), request["endpoint"]
       refute_nil options
     end
 
@@ -744,11 +744,11 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     list_endpoints_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_endpoints, name
       assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::ListEndpointsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
-      assert_equal "hello world", request.order_by
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -811,7 +811,7 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     get_endpoint_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_endpoint, name
       assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::GetEndpointRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -870,8 +870,8 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     update_endpoint_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_endpoint, name
       assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::UpdateEndpointRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceDirectory::V1beta1::Endpoint), request.endpoint
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ServiceDirectory::V1beta1::Endpoint), request["endpoint"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -929,7 +929,7 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     delete_endpoint_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_endpoint, name
       assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::DeleteEndpointRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -988,8 +988,8 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
       assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request.options
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
       refute_nil options
     end
 
@@ -1048,8 +1048,8 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
       assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request.policy
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
       refute_nil options
     end
 
@@ -1108,8 +1108,8 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :test_iam_permissions, name
       assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal ["hello world"], request.permissions
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
       refute_nil options
     end
 
