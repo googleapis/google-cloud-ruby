@@ -61,8 +61,8 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     create_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_dataset, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::CreateDatasetRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::Dataset), request.dataset
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::Dataset), request["dataset"]
       refute_nil options
     end
 
@@ -120,7 +120,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     get_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_dataset, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::GetDatasetRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -181,10 +181,10 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     list_datasets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_datasets, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::ListDatasetsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -247,7 +247,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     delete_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_dataset, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::DeleteDatasetRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -307,9 +307,9 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     import_data_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_data, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::ImportDataRequest, request
-      assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::InputConfig), request.input_config
-      assert_equal "hello world", request.user_email_address
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::InputConfig), request["input_config"]
+      assert_equal "hello world", request["user_email_address"]
       refute_nil options
     end
 
@@ -376,11 +376,11 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     export_data_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_data, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::ExportDataRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.annotated_dataset
-      assert_equal "hello world", request.filter
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::OutputConfig), request.output_config
-      assert_equal "hello world", request.user_email_address
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["annotated_dataset"]
+      assert_equal "hello world", request["filter"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::OutputConfig), request["output_config"]
+      assert_equal "hello world", request["user_email_address"]
       refute_nil options
     end
 
@@ -443,7 +443,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     get_data_item_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_data_item, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::GetDataItemRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -504,10 +504,10 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     list_data_items_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_data_items, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::ListDataItemsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -570,7 +570,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     get_annotated_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_annotated_dataset, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::GetAnnotatedDatasetRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -631,10 +631,10 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     list_annotated_datasets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_annotated_datasets, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::ListAnnotatedDatasetsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -697,7 +697,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     delete_annotated_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_annotated_dataset, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::DeleteAnnotatedDatasetRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -758,11 +758,11 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     label_image_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :label_image, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::LabelImageRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::ImageClassificationConfig), request.image_classification_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::ImageClassificationConfig), request["image_classification_config"]
       assert_equal :image_classification_config, request.request_config
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::HumanAnnotationConfig), request.basic_config
-      assert_equal :FEATURE_UNSPECIFIED, request.feature
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::HumanAnnotationConfig), request["basic_config"]
+      assert_equal :FEATURE_UNSPECIFIED, request["feature"]
       refute_nil options
     end
 
@@ -828,11 +828,11 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     label_video_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :label_video, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::LabelVideoRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::VideoClassificationConfig), request.video_classification_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::VideoClassificationConfig), request["video_classification_config"]
       assert_equal :video_classification_config, request.request_config
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::HumanAnnotationConfig), request.basic_config
-      assert_equal :FEATURE_UNSPECIFIED, request.feature
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::HumanAnnotationConfig), request["basic_config"]
+      assert_equal :FEATURE_UNSPECIFIED, request["feature"]
       refute_nil options
     end
 
@@ -898,11 +898,11 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     label_text_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :label_text, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::LabelTextRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::TextClassificationConfig), request.text_classification_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::TextClassificationConfig), request["text_classification_config"]
       assert_equal :text_classification_config, request.request_config
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::HumanAnnotationConfig), request.basic_config
-      assert_equal :FEATURE_UNSPECIFIED, request.feature
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::HumanAnnotationConfig), request["basic_config"]
+      assert_equal :FEATURE_UNSPECIFIED, request["feature"]
       refute_nil options
     end
 
@@ -966,8 +966,8 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     get_example_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_example, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::GetExampleRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.filter
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -1028,10 +1028,10 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     list_examples_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_examples, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::ListExamplesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -1095,8 +1095,8 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     create_annotation_spec_set_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_annotation_spec_set, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::CreateAnnotationSpecSetRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::AnnotationSpecSet), request.annotation_spec_set
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::AnnotationSpecSet), request["annotation_spec_set"]
       refute_nil options
     end
 
@@ -1154,7 +1154,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     get_annotation_spec_set_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_annotation_spec_set, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::GetAnnotationSpecSetRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1215,10 +1215,10 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     list_annotation_spec_sets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_annotation_spec_sets, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::ListAnnotationSpecSetsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -1281,7 +1281,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     delete_annotation_spec_set_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_annotation_spec_set, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::DeleteAnnotationSpecSetRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1340,8 +1340,8 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     create_instruction_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_instruction, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::CreateInstructionRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::Instruction), request.instruction
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::Instruction), request["instruction"]
       refute_nil options
     end
 
@@ -1404,7 +1404,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     get_instruction_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_instruction, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::GetInstructionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1465,10 +1465,10 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     list_instructions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_instructions, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::ListInstructionsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -1531,7 +1531,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     delete_instruction_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_instruction, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::DeleteInstructionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1589,7 +1589,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     get_evaluation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_evaluation, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::GetEvaluationRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1650,10 +1650,10 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     search_evaluations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_evaluations, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::SearchEvaluationsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -1718,9 +1718,9 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     search_example_comparisons_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_example_comparisons, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::SearchExampleComparisonsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -1784,8 +1784,8 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     create_evaluation_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_evaluation_job, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::CreateEvaluationJobRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::EvaluationJob), request.job
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::EvaluationJob), request["job"]
       refute_nil options
     end
 
@@ -1844,8 +1844,8 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     update_evaluation_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_evaluation_job, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::UpdateEvaluationJobRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::EvaluationJob), request.evaluation_job
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DataLabeling::V1beta1::EvaluationJob), request["evaluation_job"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1903,7 +1903,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     get_evaluation_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_evaluation_job, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::GetEvaluationJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1961,7 +1961,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     pause_evaluation_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :pause_evaluation_job, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::PauseEvaluationJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -2019,7 +2019,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     resume_evaluation_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :resume_evaluation_job, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::ResumeEvaluationJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -2077,7 +2077,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     delete_evaluation_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_evaluation_job, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::DeleteEvaluationJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -2138,10 +2138,10 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     list_evaluation_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_evaluation_jobs, name
       assert_kind_of ::Google::Cloud::DataLabeling::V1beta1::ListEvaluationJobsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
