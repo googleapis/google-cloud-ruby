@@ -61,8 +61,8 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     create_session_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_session, name
       assert_kind_of ::Google::Cloud::Spanner::V1::CreateSessionRequest, request
-      assert_equal "hello world", request.database
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::Session), request.session
+      assert_equal "hello world", request["database"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::Session), request["session"]
       refute_nil options
     end
 
@@ -122,9 +122,9 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     batch_create_sessions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_create_sessions, name
       assert_kind_of ::Google::Cloud::Spanner::V1::BatchCreateSessionsRequest, request
-      assert_equal "hello world", request.database
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::Session), request.session_template
-      assert_equal 42, request.session_count
+      assert_equal "hello world", request["database"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::Session), request["session_template"]
+      assert_equal 42, request["session_count"]
       refute_nil options
     end
 
@@ -182,7 +182,7 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     get_session_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_session, name
       assert_kind_of ::Google::Cloud::Spanner::V1::GetSessionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -243,10 +243,10 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     list_sessions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_sessions, name
       assert_kind_of ::Google::Cloud::Spanner::V1::ListSessionsRequest, request
-      assert_equal "hello world", request.database
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
+      assert_equal "hello world", request["database"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -309,7 +309,7 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     delete_session_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_session, name
       assert_kind_of ::Google::Cloud::Spanner::V1::DeleteSessionRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -376,16 +376,16 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     execute_sql_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :execute_sql, name
       assert_kind_of ::Google::Cloud::Spanner::V1::ExecuteSqlRequest, request
-      assert_equal "hello world", request.session
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionSelector), request.transaction
-      assert_equal "hello world", request.sql
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Struct), request.params
-      assert_equal({}, request.param_types.to_h)
-      assert_equal "hello world", request.resume_token
-      assert_equal :NORMAL, request.query_mode
-      assert_equal "hello world", request.partition_token
-      assert_equal 42, request.seqno
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryOptions), request.query_options
+      assert_equal "hello world", request["session"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionSelector), request["transaction"]
+      assert_equal "hello world", request["sql"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Struct), request["params"]
+      assert_equal({}, request["param_types"].to_h)
+      assert_equal "hello world", request["resume_token"]
+      assert_equal :NORMAL, request["query_mode"]
+      assert_equal "hello world", request["partition_token"]
+      assert_equal 42, request["seqno"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryOptions), request["query_options"]
       refute_nil options
     end
 
@@ -452,16 +452,16 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     execute_streaming_sql_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :execute_streaming_sql, name
       assert_kind_of ::Google::Cloud::Spanner::V1::ExecuteSqlRequest, request
-      assert_equal "hello world", request.session
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionSelector), request.transaction
-      assert_equal "hello world", request.sql
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Struct), request.params
-      assert_equal({}, request.param_types.to_h)
-      assert_equal "hello world", request.resume_token
-      assert_equal :NORMAL, request.query_mode
-      assert_equal "hello world", request.partition_token
-      assert_equal 42, request.seqno
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryOptions), request.query_options
+      assert_equal "hello world", request["session"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionSelector), request["transaction"]
+      assert_equal "hello world", request["sql"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Struct), request["params"]
+      assert_equal({}, request["param_types"].to_h)
+      assert_equal "hello world", request["resume_token"]
+      assert_equal :NORMAL, request["query_mode"]
+      assert_equal "hello world", request["partition_token"]
+      assert_equal 42, request["seqno"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryOptions), request["query_options"]
       refute_nil options
     end
 
@@ -537,10 +537,10 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     execute_batch_dml_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :execute_batch_dml, name
       assert_kind_of ::Google::Cloud::Spanner::V1::ExecuteBatchDmlRequest, request
-      assert_equal "hello world", request.session
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionSelector), request.transaction
-      assert_kind_of ::Google::Cloud::Spanner::V1::ExecuteBatchDmlRequest::Statement, request.statements.first
-      assert_equal 42, request.seqno
+      assert_equal "hello world", request["session"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionSelector), request["transaction"]
+      assert_kind_of ::Google::Cloud::Spanner::V1::ExecuteBatchDmlRequest::Statement, request["statements"].first
+      assert_equal 42, request["seqno"]
       refute_nil options
     end
 
@@ -606,15 +606,15 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     read_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :read, name
       assert_kind_of ::Google::Cloud::Spanner::V1::ReadRequest, request
-      assert_equal "hello world", request.session
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionSelector), request.transaction
-      assert_equal "hello world", request.table
-      assert_equal "hello world", request.index
-      assert_equal ["hello world"], request.columns
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::KeySet), request.key_set
-      assert_equal 42, request.limit
-      assert_equal "hello world", request.resume_token
-      assert_equal "hello world", request.partition_token
+      assert_equal "hello world", request["session"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionSelector), request["transaction"]
+      assert_equal "hello world", request["table"]
+      assert_equal "hello world", request["index"]
+      assert_equal ["hello world"], request["columns"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::KeySet), request["key_set"]
+      assert_equal 42, request["limit"]
+      assert_equal "hello world", request["resume_token"]
+      assert_equal "hello world", request["partition_token"]
       refute_nil options
     end
 
@@ -680,15 +680,15 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     streaming_read_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :streaming_read, name
       assert_kind_of ::Google::Cloud::Spanner::V1::ReadRequest, request
-      assert_equal "hello world", request.session
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionSelector), request.transaction
-      assert_equal "hello world", request.table
-      assert_equal "hello world", request.index
-      assert_equal ["hello world"], request.columns
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::KeySet), request.key_set
-      assert_equal 42, request.limit
-      assert_equal "hello world", request.resume_token
-      assert_equal "hello world", request.partition_token
+      assert_equal "hello world", request["session"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionSelector), request["transaction"]
+      assert_equal "hello world", request["table"]
+      assert_equal "hello world", request["index"]
+      assert_equal ["hello world"], request["columns"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::KeySet), request["key_set"]
+      assert_equal 42, request["limit"]
+      assert_equal "hello world", request["resume_token"]
+      assert_equal "hello world", request["partition_token"]
       refute_nil options
     end
 
@@ -762,8 +762,8 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     begin_transaction_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :begin_transaction, name
       assert_kind_of ::Google::Cloud::Spanner::V1::BeginTransactionRequest, request
-      assert_equal "hello world", request.session
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionOptions), request.options
+      assert_equal "hello world", request["session"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionOptions), request["options"]
       refute_nil options
     end
 
@@ -823,10 +823,10 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     commit_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :commit, name
       assert_kind_of ::Google::Cloud::Spanner::V1::CommitRequest, request
-      assert_equal "hello world", request.session
-      assert_equal "hello world", request.transaction_id
+      assert_equal "hello world", request["session"]
+      assert_equal "hello world", request["transaction_id"]
       assert_equal :transaction_id, request.transaction
-      assert_kind_of ::Google::Cloud::Spanner::V1::Mutation, request.mutations.first
+      assert_kind_of ::Google::Cloud::Spanner::V1::Mutation, request["mutations"].first
       refute_nil options
     end
 
@@ -885,8 +885,8 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     rollback_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :rollback, name
       assert_kind_of ::Google::Cloud::Spanner::V1::RollbackRequest, request
-      assert_equal "hello world", request.session
-      assert_equal "hello world", request.transaction_id
+      assert_equal "hello world", request["session"]
+      assert_equal "hello world", request["transaction_id"]
       refute_nil options
     end
 
@@ -949,12 +949,12 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     partition_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :partition_query, name
       assert_kind_of ::Google::Cloud::Spanner::V1::PartitionQueryRequest, request
-      assert_equal "hello world", request.session
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionSelector), request.transaction
-      assert_equal "hello world", request.sql
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Struct), request.params
-      assert_equal({}, request.param_types.to_h)
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::PartitionOptions), request.partition_options
+      assert_equal "hello world", request["session"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionSelector), request["transaction"]
+      assert_equal "hello world", request["sql"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Struct), request["params"]
+      assert_equal({}, request["param_types"].to_h)
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::PartitionOptions), request["partition_options"]
       refute_nil options
     end
 
@@ -1018,13 +1018,13 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     partition_read_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :partition_read, name
       assert_kind_of ::Google::Cloud::Spanner::V1::PartitionReadRequest, request
-      assert_equal "hello world", request.session
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionSelector), request.transaction
-      assert_equal "hello world", request.table
-      assert_equal "hello world", request.index
-      assert_equal ["hello world"], request.columns
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::KeySet), request.key_set
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::PartitionOptions), request.partition_options
+      assert_equal "hello world", request["session"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::TransactionSelector), request["transaction"]
+      assert_equal "hello world", request["table"]
+      assert_equal "hello world", request["index"]
+      assert_equal ["hello world"], request["columns"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::KeySet), request["key_set"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::V1::PartitionOptions), request["partition_options"]
       refute_nil options
     end
 
