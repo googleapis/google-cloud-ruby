@@ -60,7 +60,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     get_account_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_account, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::GetAccountRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -120,9 +120,9 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     list_accounts_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_accounts, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::ListAccountsRequest, request
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal true, request.show_deleted
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal true, request["show_deleted"]
       refute_nil options
     end
 
@@ -185,7 +185,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     delete_account_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_account, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteAccountRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -244,8 +244,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     update_account_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_account, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateAccountRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::Account), request.account
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::Account), request["account"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -304,8 +304,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     provision_account_ticket_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :provision_account_ticket, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::ProvisionAccountTicketRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::Account), request.account
-      assert_equal "hello world", request.redirect_uri
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::Account), request["account"]
+      assert_equal "hello world", request["redirect_uri"]
       refute_nil options
     end
 
@@ -364,8 +364,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     list_account_summaries_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_account_summaries, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::ListAccountSummariesRequest, request
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -428,7 +428,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     get_property_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_property, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::GetPropertyRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -489,10 +489,10 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     list_properties_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_properties, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::ListPropertiesRequest, request
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal true, request.show_deleted
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal true, request["show_deleted"]
       refute_nil options
     end
 
@@ -555,7 +555,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     create_property_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_property, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::CreatePropertyRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::Property), request.property
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::Property), request["property"]
       refute_nil options
     end
 
@@ -613,7 +613,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     delete_property_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_property, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::DeletePropertyRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -672,8 +672,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     update_property_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_property, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdatePropertyRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::Property), request.property
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::Property), request["property"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -731,7 +731,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     get_user_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_user_link, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::GetUserLinkRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -790,8 +790,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     batch_get_user_links_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_get_user_links, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::BatchGetUserLinksRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal ["hello world"], request.names
+      assert_equal "hello world", request["parent"]
+      assert_equal ["hello world"], request["names"]
       refute_nil options
     end
 
@@ -851,9 +851,9 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     list_user_links_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_user_links, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::ListUserLinksRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -918,9 +918,9 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     audit_user_links_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :audit_user_links, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::AuditUserLinksRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -985,9 +985,9 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     create_user_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_user_link, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateUserLinkRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal true, request.notify_new_user
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::UserLink), request.user_link
+      assert_equal "hello world", request["parent"]
+      assert_equal true, request["notify_new_user"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::UserLink), request["user_link"]
       refute_nil options
     end
 
@@ -1047,9 +1047,9 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     batch_create_user_links_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_create_user_links, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::BatchCreateUserLinksRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal true, request.notify_new_users
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateUserLinkRequest, request.requests.first
+      assert_equal "hello world", request["parent"]
+      assert_equal true, request["notify_new_users"]
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateUserLinkRequest, request["requests"].first
       refute_nil options
     end
 
@@ -1107,7 +1107,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     update_user_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_user_link, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateUserLinkRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::UserLink), request.user_link
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::UserLink), request["user_link"]
       refute_nil options
     end
 
@@ -1166,8 +1166,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     batch_update_user_links_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_update_user_links, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksRequest, request
-      assert_equal "hello world", request.parent
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateUserLinkRequest, request.requests.first
+      assert_equal "hello world", request["parent"]
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateUserLinkRequest, request["requests"].first
       refute_nil options
     end
 
@@ -1225,7 +1225,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     delete_user_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_user_link, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1284,8 +1284,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     batch_delete_user_links_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_delete_user_links, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::BatchDeleteUserLinksRequest, request
-      assert_equal "hello world", request.parent
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest, request.requests.first
+      assert_equal "hello world", request["parent"]
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest, request["requests"].first
       refute_nil options
     end
 
@@ -1343,7 +1343,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     get_web_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_web_data_stream, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::GetWebDataStreamRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1401,7 +1401,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     delete_web_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_web_data_stream, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteWebDataStreamRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1460,8 +1460,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     update_web_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_web_data_stream, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateWebDataStreamRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::WebDataStream), request.web_data_stream
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::WebDataStream), request["web_data_stream"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1520,8 +1520,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     create_web_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_web_data_stream, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateWebDataStreamRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::WebDataStream), request.web_data_stream
-      assert_equal "hello world", request.parent
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::WebDataStream), request["web_data_stream"]
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -1581,9 +1581,9 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     list_web_data_streams_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_web_data_streams, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::ListWebDataStreamsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -1646,7 +1646,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     get_ios_app_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_ios_app_data_stream, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::GetIosAppDataStreamRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1704,7 +1704,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     delete_ios_app_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_ios_app_data_stream, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteIosAppDataStreamRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1763,8 +1763,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     update_ios_app_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_ios_app_data_stream, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateIosAppDataStreamRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::IosAppDataStream), request.ios_app_data_stream
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::IosAppDataStream), request["ios_app_data_stream"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1823,8 +1823,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     create_ios_app_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_ios_app_data_stream, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateIosAppDataStreamRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::IosAppDataStream), request.ios_app_data_stream
-      assert_equal "hello world", request.parent
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::IosAppDataStream), request["ios_app_data_stream"]
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -1884,9 +1884,9 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     list_ios_app_data_streams_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_ios_app_data_streams, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::ListIosAppDataStreamsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -1949,7 +1949,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     get_android_app_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_android_app_data_stream, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::GetAndroidAppDataStreamRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -2007,7 +2007,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     delete_android_app_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_android_app_data_stream, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteAndroidAppDataStreamRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -2066,8 +2066,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     update_android_app_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_android_app_data_stream, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateAndroidAppDataStreamRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream), request.android_app_data_stream
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream), request["android_app_data_stream"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -2126,8 +2126,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     create_android_app_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_android_app_data_stream, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateAndroidAppDataStreamRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream), request.android_app_data_stream
-      assert_equal "hello world", request.parent
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream), request["android_app_data_stream"]
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -2187,9 +2187,9 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     list_android_app_data_streams_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_android_app_data_streams, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::ListAndroidAppDataStreamsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -2252,7 +2252,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     get_enhanced_measurement_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_enhanced_measurement_settings, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -2311,8 +2311,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     update_enhanced_measurement_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_enhanced_measurement_settings, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings), request.enhanced_measurement_settings
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings), request["enhanced_measurement_settings"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -2371,8 +2371,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     create_firebase_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_firebase_link, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateFirebaseLinkRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::FirebaseLink), request.firebase_link
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::FirebaseLink), request["firebase_link"]
       refute_nil options
     end
 
@@ -2431,8 +2431,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     update_firebase_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_firebase_link, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateFirebaseLinkRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::FirebaseLink), request.firebase_link
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::FirebaseLink), request["firebase_link"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -2490,7 +2490,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     delete_firebase_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_firebase_link, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteFirebaseLinkRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -2548,7 +2548,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     list_firebase_links_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_firebase_links, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::ListFirebaseLinksRequest, request
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -2606,7 +2606,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     get_global_site_tag_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_global_site_tag, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::GetGlobalSiteTagRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -2665,8 +2665,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     create_google_ads_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_google_ads_link, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateGoogleAdsLinkRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::GoogleAdsLink), request.google_ads_link
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::GoogleAdsLink), request["google_ads_link"]
       refute_nil options
     end
 
@@ -2725,8 +2725,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     update_google_ads_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_google_ads_link, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateGoogleAdsLinkRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::GoogleAdsLink), request.google_ads_link
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::GoogleAdsLink), request["google_ads_link"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -2784,7 +2784,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     delete_google_ads_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_google_ads_link, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteGoogleAdsLinkRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -2844,9 +2844,9 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     list_google_ads_links_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_google_ads_links, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::ListGoogleAdsLinksRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -2909,7 +2909,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     get_data_sharing_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_data_sharing_settings, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::GetDataSharingSettingsRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 

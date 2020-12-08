@@ -92,6 +92,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.analytics.admin.v1alpha.GlobalSiteTag" do
       optional :snippet, :string, 1
+      optional :name, :string, 2
     end
     add_message "google.analytics.admin.v1alpha.GoogleAdsLink" do
       optional :name, :string, 1
