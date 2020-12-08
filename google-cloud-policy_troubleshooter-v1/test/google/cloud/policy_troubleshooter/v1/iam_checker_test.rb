@@ -60,7 +60,7 @@ class ::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::ClientTest < Minite
     troubleshoot_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :troubleshoot_iam_policy, name
       assert_kind_of ::Google::Cloud::PolicyTroubleshooter::V1::TroubleshootIamPolicyRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::PolicyTroubleshooter::V1::AccessTuple), request.access_tuple
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::PolicyTroubleshooter::V1::AccessTuple), request["access_tuple"]
       refute_nil options
     end
 
