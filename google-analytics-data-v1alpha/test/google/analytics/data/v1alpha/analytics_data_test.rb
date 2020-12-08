@@ -73,20 +73,20 @@ class ::Google::Analytics::Data::V1alpha::AnalyticsData::ClientTest < Minitest::
     run_report_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_report, name
       assert_kind_of ::Google::Analytics::Data::V1alpha::RunReportRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::Entity), request.entity
-      assert_kind_of ::Google::Analytics::Data::V1alpha::Dimension, request.dimensions.first
-      assert_kind_of ::Google::Analytics::Data::V1alpha::Metric, request.metrics.first
-      assert_kind_of ::Google::Analytics::Data::V1alpha::DateRange, request.date_ranges.first
-      assert_equal 42, request.offset
-      assert_equal 42, request.limit
-      assert_equal [:METRIC_AGGREGATION_UNSPECIFIED], request.metric_aggregations
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::FilterExpression), request.dimension_filter
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::FilterExpression), request.metric_filter
-      assert_kind_of ::Google::Analytics::Data::V1alpha::OrderBy, request.order_bys.first
-      assert_equal "hello world", request.currency_code
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::CohortSpec), request.cohort_spec
-      assert_equal true, request.keep_empty_rows
-      assert_equal true, request.return_property_quota
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::Entity), request["entity"]
+      assert_kind_of ::Google::Analytics::Data::V1alpha::Dimension, request["dimensions"].first
+      assert_kind_of ::Google::Analytics::Data::V1alpha::Metric, request["metrics"].first
+      assert_kind_of ::Google::Analytics::Data::V1alpha::DateRange, request["date_ranges"].first
+      assert_equal 42, request["offset"]
+      assert_equal 42, request["limit"]
+      assert_equal [:METRIC_AGGREGATION_UNSPECIFIED], request["metric_aggregations"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::FilterExpression), request["dimension_filter"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::FilterExpression), request["metric_filter"]
+      assert_kind_of ::Google::Analytics::Data::V1alpha::OrderBy, request["order_bys"].first
+      assert_equal "hello world", request["currency_code"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::CohortSpec), request["cohort_spec"]
+      assert_equal true, request["keep_empty_rows"]
+      assert_equal true, request["return_property_quota"]
       refute_nil options
     end
 
@@ -154,17 +154,17 @@ class ::Google::Analytics::Data::V1alpha::AnalyticsData::ClientTest < Minitest::
     run_pivot_report_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_pivot_report, name
       assert_kind_of ::Google::Analytics::Data::V1alpha::RunPivotReportRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::Entity), request.entity
-      assert_kind_of ::Google::Analytics::Data::V1alpha::Dimension, request.dimensions.first
-      assert_kind_of ::Google::Analytics::Data::V1alpha::Metric, request.metrics.first
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::FilterExpression), request.dimension_filter
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::FilterExpression), request.metric_filter
-      assert_kind_of ::Google::Analytics::Data::V1alpha::Pivot, request.pivots.first
-      assert_kind_of ::Google::Analytics::Data::V1alpha::DateRange, request.date_ranges.first
-      assert_equal "hello world", request.currency_code
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::CohortSpec), request.cohort_spec
-      assert_equal true, request.keep_empty_rows
-      assert_equal true, request.return_property_quota
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::Entity), request["entity"]
+      assert_kind_of ::Google::Analytics::Data::V1alpha::Dimension, request["dimensions"].first
+      assert_kind_of ::Google::Analytics::Data::V1alpha::Metric, request["metrics"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::FilterExpression), request["dimension_filter"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::FilterExpression), request["metric_filter"]
+      assert_kind_of ::Google::Analytics::Data::V1alpha::Pivot, request["pivots"].first
+      assert_kind_of ::Google::Analytics::Data::V1alpha::DateRange, request["date_ranges"].first
+      assert_equal "hello world", request["currency_code"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::CohortSpec), request["cohort_spec"]
+      assert_equal true, request["keep_empty_rows"]
+      assert_equal true, request["return_property_quota"]
       refute_nil options
     end
 
@@ -223,8 +223,8 @@ class ::Google::Analytics::Data::V1alpha::AnalyticsData::ClientTest < Minitest::
     batch_run_reports_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_run_reports, name
       assert_kind_of ::Google::Analytics::Data::V1alpha::BatchRunReportsRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::Entity), request.entity
-      assert_kind_of ::Google::Analytics::Data::V1alpha::RunReportRequest, request.requests.first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::Entity), request["entity"]
+      assert_kind_of ::Google::Analytics::Data::V1alpha::RunReportRequest, request["requests"].first
       refute_nil options
     end
 
@@ -283,8 +283,8 @@ class ::Google::Analytics::Data::V1alpha::AnalyticsData::ClientTest < Minitest::
     batch_run_pivot_reports_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_run_pivot_reports, name
       assert_kind_of ::Google::Analytics::Data::V1alpha::BatchRunPivotReportsRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::Entity), request.entity
-      assert_kind_of ::Google::Analytics::Data::V1alpha::RunPivotReportRequest, request.requests.first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::Entity), request["entity"]
+      assert_kind_of ::Google::Analytics::Data::V1alpha::RunPivotReportRequest, request["requests"].first
       refute_nil options
     end
 
@@ -342,7 +342,7 @@ class ::Google::Analytics::Data::V1alpha::AnalyticsData::ClientTest < Minitest::
     get_metadata_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_metadata, name
       assert_kind_of ::Google::Analytics::Data::V1alpha::GetMetadataRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -408,15 +408,15 @@ class ::Google::Analytics::Data::V1alpha::AnalyticsData::ClientTest < Minitest::
     run_realtime_report_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_realtime_report, name
       assert_kind_of ::Google::Analytics::Data::V1alpha::RunRealtimeReportRequest, request
-      assert_equal "hello world", request.property
-      assert_kind_of ::Google::Analytics::Data::V1alpha::Dimension, request.dimensions.first
-      assert_kind_of ::Google::Analytics::Data::V1alpha::Metric, request.metrics.first
-      assert_equal 42, request.limit
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::FilterExpression), request.dimension_filter
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::FilterExpression), request.metric_filter
-      assert_equal [:METRIC_AGGREGATION_UNSPECIFIED], request.metric_aggregations
-      assert_kind_of ::Google::Analytics::Data::V1alpha::OrderBy, request.order_bys.first
-      assert_equal true, request.return_property_quota
+      assert_equal "hello world", request["property"]
+      assert_kind_of ::Google::Analytics::Data::V1alpha::Dimension, request["dimensions"].first
+      assert_kind_of ::Google::Analytics::Data::V1alpha::Metric, request["metrics"].first
+      assert_equal 42, request["limit"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::FilterExpression), request["dimension_filter"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1alpha::FilterExpression), request["metric_filter"]
+      assert_equal [:METRIC_AGGREGATION_UNSPECIFIED], request["metric_aggregations"]
+      assert_kind_of ::Google::Analytics::Data::V1alpha::OrderBy, request["order_bys"].first
+      assert_equal true, request["return_property_quota"]
       refute_nil options
     end
 
