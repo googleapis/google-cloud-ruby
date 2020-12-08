@@ -5,7 +5,7 @@ require File.expand_path("lib/google/cloud/automl/v1beta1/version", __dir__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-automl-v1beta1"
-  gem.version       = Google::Cloud::Automl::V1beta1::VERSION
+  gem.version       = Google::Cloud::AutoML::V1beta1::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
