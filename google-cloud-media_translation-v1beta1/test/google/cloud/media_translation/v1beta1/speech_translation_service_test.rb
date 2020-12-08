@@ -129,7 +129,7 @@ class ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Clie
       streaming_translate_speech_client_stub.requests.each do |request|
         request.to_a.each do |r|
           assert_kind_of ::Google::Cloud::MediaTranslation::V1beta1::StreamingTranslateSpeechRequest, r
-          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::MediaTranslation::V1beta1::StreamingTranslateSpeechConfig), r.streaming_config
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::MediaTranslation::V1beta1::StreamingTranslateSpeechConfig), r["streaming_config"]
           assert_equal :streaming_config, r.streaming_request
         end
       end
