@@ -61,8 +61,8 @@ class ::Google::Cloud::Trace::V2::TraceService::ClientTest < Minitest::Test
     batch_write_spans_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_write_spans, name
       assert_kind_of ::Google::Cloud::Trace::V2::BatchWriteSpansRequest, request
-      assert_equal "hello world", request.name
-      assert_kind_of ::Google::Cloud::Trace::V2::Span, request.spans.first
+      assert_equal "hello world", request["name"]
+      assert_kind_of ::Google::Cloud::Trace::V2::Span, request["spans"].first
       refute_nil options
     end
 
@@ -133,20 +133,20 @@ class ::Google::Cloud::Trace::V2::TraceService::ClientTest < Minitest::Test
     create_span_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_span, name
       assert_kind_of ::Google::Cloud::Trace::V2::Span, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.span_id
-      assert_equal "hello world", request.parent_span_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Trace::V2::TruncatableString), request.display_name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.start_time
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.end_time
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Trace::V2::Span::Attributes), request.attributes
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Trace::V2::StackTrace), request.stack_trace
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Trace::V2::Span::TimeEvents), request.time_events
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Trace::V2::Span::Links), request.links
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Rpc::Status), request.status
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::BoolValue), request.same_process_as_parent_span
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int32Value), request.child_span_count
-      assert_equal :SPAN_KIND_UNSPECIFIED, request.span_kind
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["span_id"]
+      assert_equal "hello world", request["parent_span_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Trace::V2::TruncatableString), request["display_name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["start_time"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["end_time"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Trace::V2::Span::Attributes), request["attributes"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Trace::V2::StackTrace), request["stack_trace"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Trace::V2::Span::TimeEvents), request["time_events"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Trace::V2::Span::Links), request["links"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Rpc::Status), request["status"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::BoolValue), request["same_process_as_parent_span"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int32Value), request["child_span_count"]
+      assert_equal :SPAN_KIND_UNSPECIFIED, request["span_kind"]
       refute_nil options
     end
 
