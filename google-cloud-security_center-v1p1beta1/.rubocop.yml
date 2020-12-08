@@ -27,6 +27,8 @@ Metrics/PerceivedComplexity:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-security_center-v1p1beta1.rb"
+Naming/PredicateName:
+  Enabled: false
 Style/AsciiComments:
   Enabled: false
 Style/CaseEquality:
