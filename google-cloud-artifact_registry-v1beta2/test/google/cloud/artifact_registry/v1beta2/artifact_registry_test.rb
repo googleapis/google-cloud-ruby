@@ -62,9 +62,9 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     list_repositories_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_repositories, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::ListRepositoriesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -127,7 +127,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     get_repository_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_repository, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::GetRepositoryRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -187,9 +187,9 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     create_repository_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_repository, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::CreateRepositoryRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.repository_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ArtifactRegistry::V1beta2::Repository), request.repository
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["repository_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ArtifactRegistry::V1beta2::Repository), request["repository"]
       refute_nil options
     end
 
@@ -253,8 +253,8 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     update_repository_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_repository, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::UpdateRepositoryRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ArtifactRegistry::V1beta2::Repository), request.repository
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ArtifactRegistry::V1beta2::Repository), request["repository"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -312,7 +312,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     delete_repository_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_repository, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::DeleteRepositoryRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -377,9 +377,9 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     list_packages_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_packages, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::ListPackagesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -442,7 +442,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     get_package_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_package, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::GetPackageRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -500,7 +500,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     delete_package_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_package, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::DeletePackageRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -566,10 +566,10 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     list_versions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_versions, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::ListVersionsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal :VERSION_VIEW_UNSPECIFIED, request.view
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal :VERSION_VIEW_UNSPECIFIED, request["view"]
       refute_nil options
     end
 
@@ -633,8 +633,8 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     get_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_version, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::GetVersionRequest, request
-      assert_equal "hello world", request.name
-      assert_equal :VERSION_VIEW_UNSPECIFIED, request.view
+      assert_equal "hello world", request["name"]
+      assert_equal :VERSION_VIEW_UNSPECIFIED, request["view"]
       refute_nil options
     end
 
@@ -693,8 +693,8 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     delete_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_version, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::DeleteVersionRequest, request
-      assert_equal "hello world", request.name
-      assert_equal true, request.force
+      assert_equal "hello world", request["name"]
+      assert_equal true, request["force"]
       refute_nil options
     end
 
@@ -760,10 +760,10 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     list_files_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_files, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::ListFilesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -826,7 +826,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     get_file_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_file, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::GetFileRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -887,10 +887,10 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     list_tags_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_tags, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::ListTagsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.filter
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -953,7 +953,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     get_tag_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_tag, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::GetTagRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1013,9 +1013,9 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     create_tag_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_tag, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::CreateTagRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.tag_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ArtifactRegistry::V1beta2::Tag), request.tag
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["tag_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ArtifactRegistry::V1beta2::Tag), request["tag"]
       refute_nil options
     end
 
@@ -1074,8 +1074,8 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     update_tag_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_tag, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::UpdateTagRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ArtifactRegistry::V1beta2::Tag), request.tag
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ArtifactRegistry::V1beta2::Tag), request["tag"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -1133,7 +1133,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     delete_tag_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_tag, name
       assert_kind_of ::Google::Cloud::ArtifactRegistry::V1beta2::DeleteTagRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -1192,8 +1192,8 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
       assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request.policy
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
       refute_nil options
     end
 
@@ -1252,8 +1252,8 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
       assert_kind_of ::Google::Iam::V1::GetIamPolicyRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request.options
+      assert_equal "hello world", request["resource"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::GetPolicyOptions), request["options"]
       refute_nil options
     end
 
@@ -1312,8 +1312,8 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
     test_iam_permissions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :test_iam_permissions, name
       assert_kind_of ::Google::Iam::V1::TestIamPermissionsRequest, request
-      assert_equal "hello world", request.resource
-      assert_equal ["hello world"], request.permissions
+      assert_equal "hello world", request["resource"]
+      assert_equal ["hello world"], request["permissions"]
       refute_nil options
     end
 
