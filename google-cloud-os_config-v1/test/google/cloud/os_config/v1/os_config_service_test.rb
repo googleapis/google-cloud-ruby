@@ -67,14 +67,14 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
     execute_patch_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :execute_patch_job, name
       assert_kind_of ::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.description
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OsConfig::V1::PatchInstanceFilter), request.instance_filter
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OsConfig::V1::PatchConfig), request.patch_config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request.duration
-      assert_equal true, request.dry_run
-      assert_equal "hello world", request.display_name
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OsConfig::V1::PatchRollout), request.rollout
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["description"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OsConfig::V1::PatchInstanceFilter), request["instance_filter"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OsConfig::V1::PatchConfig), request["patch_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["duration"]
+      assert_equal true, request["dry_run"]
+      assert_equal "hello world", request["display_name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OsConfig::V1::PatchRollout), request["rollout"]
       refute_nil options
     end
 
@@ -132,7 +132,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
     get_patch_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_patch_job, name
       assert_kind_of ::Google::Cloud::OsConfig::V1::GetPatchJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -190,7 +190,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
     cancel_patch_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :cancel_patch_job, name
       assert_kind_of ::Google::Cloud::OsConfig::V1::CancelPatchJobRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -251,10 +251,10 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
     list_patch_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_patch_jobs, name
       assert_kind_of ::Google::Cloud::OsConfig::V1::ListPatchJobsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -320,10 +320,10 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
     list_patch_job_instance_details_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_patch_job_instance_details, name
       assert_kind_of ::Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.filter
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -388,9 +388,9 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
     create_patch_deployment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_patch_deployment, name
       assert_kind_of ::Google::Cloud::OsConfig::V1::CreatePatchDeploymentRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.patch_deployment_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OsConfig::V1::PatchDeployment), request.patch_deployment
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["patch_deployment_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OsConfig::V1::PatchDeployment), request["patch_deployment"]
       refute_nil options
     end
 
@@ -448,7 +448,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
     get_patch_deployment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_patch_deployment, name
       assert_kind_of ::Google::Cloud::OsConfig::V1::GetPatchDeploymentRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -508,9 +508,9 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
     list_patch_deployments_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_patch_deployments, name
       assert_kind_of ::Google::Cloud::OsConfig::V1::ListPatchDeploymentsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -573,7 +573,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
     delete_patch_deployment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_patch_deployment, name
       assert_kind_of ::Google::Cloud::OsConfig::V1::DeletePatchDeploymentRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
