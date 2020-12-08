@@ -63,10 +63,10 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
     create_topic_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_topic, name
       assert_kind_of ::Google::Cloud::PubSub::V1::Topic, request
-      assert_equal "hello world", request.name
-      assert_equal({}, request.labels.to_h)
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::PubSub::V1::MessageStoragePolicy), request.message_storage_policy
-      assert_equal "hello world", request.kms_key_name
+      assert_equal "hello world", request["name"]
+      assert_equal({}, request["labels"].to_h)
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::PubSub::V1::MessageStoragePolicy), request["message_storage_policy"]
+      assert_equal "hello world", request["kms_key_name"]
       refute_nil options
     end
 
@@ -125,8 +125,8 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
     update_topic_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_topic, name
       assert_kind_of ::Google::Cloud::PubSub::V1::UpdateTopicRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::PubSub::V1::Topic), request.topic
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::PubSub::V1::Topic), request["topic"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -185,8 +185,8 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
     publish_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :publish, name
       assert_kind_of ::Google::Cloud::PubSub::V1::PublishRequest, request
-      assert_equal "hello world", request.topic
-      assert_kind_of ::Google::Cloud::PubSub::V1::PubsubMessage, request.messages.first
+      assert_equal "hello world", request["topic"]
+      assert_kind_of ::Google::Cloud::PubSub::V1::PubsubMessage, request["messages"].first
       refute_nil options
     end
 
@@ -244,7 +244,7 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
     get_topic_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_topic, name
       assert_kind_of ::Google::Cloud::PubSub::V1::GetTopicRequest, request
-      assert_equal "hello world", request.topic
+      assert_equal "hello world", request["topic"]
       refute_nil options
     end
 
@@ -304,9 +304,9 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
     list_topics_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_topics, name
       assert_kind_of ::Google::Cloud::PubSub::V1::ListTopicsRequest, request
-      assert_equal "hello world", request.project
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["project"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -371,9 +371,9 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
     list_topic_subscriptions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_topic_subscriptions, name
       assert_kind_of ::Google::Cloud::PubSub::V1::ListTopicSubscriptionsRequest, request
-      assert_equal "hello world", request.topic
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["topic"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -433,9 +433,9 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
     list_topic_snapshots_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_topic_snapshots, name
       assert_kind_of ::Google::Cloud::PubSub::V1::ListTopicSnapshotsRequest, request
-      assert_equal "hello world", request.topic
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["topic"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -493,7 +493,7 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
     delete_topic_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_topic, name
       assert_kind_of ::Google::Cloud::PubSub::V1::DeleteTopicRequest, request
-      assert_equal "hello world", request.topic
+      assert_equal "hello world", request["topic"]
       refute_nil options
     end
 
@@ -551,7 +551,7 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
     detach_subscription_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :detach_subscription, name
       assert_kind_of ::Google::Cloud::PubSub::V1::DetachSubscriptionRequest, request
-      assert_equal "hello world", request.subscription
+      assert_equal "hello world", request["subscription"]
       refute_nil options
     end
 
