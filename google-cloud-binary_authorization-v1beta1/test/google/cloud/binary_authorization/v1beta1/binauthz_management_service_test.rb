@@ -60,7 +60,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
     get_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_policy, name
       assert_kind_of ::Google::Cloud::BinaryAuthorization::V1beta1::GetPolicyRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -118,7 +118,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
     update_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_policy, name
       assert_kind_of ::Google::Cloud::BinaryAuthorization::V1beta1::UpdatePolicyRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BinaryAuthorization::V1beta1::Policy), request.policy
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BinaryAuthorization::V1beta1::Policy), request["policy"]
       refute_nil options
     end
 
@@ -178,9 +178,9 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
     create_attestor_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_attestor, name
       assert_kind_of ::Google::Cloud::BinaryAuthorization::V1beta1::CreateAttestorRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.attestor_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BinaryAuthorization::V1beta1::Attestor), request.attestor
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["attestor_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BinaryAuthorization::V1beta1::Attestor), request["attestor"]
       refute_nil options
     end
 
@@ -238,7 +238,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
     get_attestor_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_attestor, name
       assert_kind_of ::Google::Cloud::BinaryAuthorization::V1beta1::GetAttestorRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -296,7 +296,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
     update_attestor_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_attestor, name
       assert_kind_of ::Google::Cloud::BinaryAuthorization::V1beta1::UpdateAttestorRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BinaryAuthorization::V1beta1::Attestor), request.attestor
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BinaryAuthorization::V1beta1::Attestor), request["attestor"]
       refute_nil options
     end
 
@@ -356,9 +356,9 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
     list_attestors_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_attestors, name
       assert_kind_of ::Google::Cloud::BinaryAuthorization::V1beta1::ListAttestorsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -421,7 +421,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
     delete_attestor_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_attestor, name
       assert_kind_of ::Google::Cloud::BinaryAuthorization::V1beta1::DeleteAttestorRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
