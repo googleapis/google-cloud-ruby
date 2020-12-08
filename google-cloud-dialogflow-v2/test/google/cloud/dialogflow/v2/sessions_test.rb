@@ -65,12 +65,12 @@ class ::Google::Cloud::Dialogflow::V2::Sessions::ClientTest < Minitest::Test
     detect_intent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :detect_intent, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::DetectIntentRequest, request
-      assert_equal "hello world", request.session
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::QueryParameters), request.query_params
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::QueryInput), request.query_input
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::OutputAudioConfig), request.output_audio_config
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.output_audio_config_mask
-      assert_equal "hello world", request.input_audio
+      assert_equal "hello world", request["session"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::QueryParameters), request["query_params"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::QueryInput), request["query_input"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::OutputAudioConfig), request["output_audio_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["output_audio_config_mask"]
+      assert_equal "hello world", request["input_audio"]
       refute_nil options
     end
 
@@ -203,13 +203,13 @@ class ::Google::Cloud::Dialogflow::V2::Sessions::ClientTest < Minitest::Test
       streaming_detect_intent_client_stub.requests.each do |request|
         request.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest, r
-          assert_equal "hello world", r.session
-          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::QueryParameters), r.query_params
-          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::QueryInput), r.query_input
-          assert_equal true, r.single_utterance
-          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::OutputAudioConfig), r.output_audio_config
-          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), r.output_audio_config_mask
-          assert_equal "hello world", r.input_audio
+          assert_equal "hello world", r["session"]
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::QueryParameters), r["query_params"]
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::QueryInput), r["query_input"]
+          assert_equal true, r["single_utterance"]
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::OutputAudioConfig), r["output_audio_config"]
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), r["output_audio_config_mask"]
+          assert_equal "hello world", r["input_audio"]
         end
       end
     end

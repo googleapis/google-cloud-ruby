@@ -60,7 +60,7 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
     get_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_agent, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::GetAgentRequest, request
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -119,8 +119,8 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
     set_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_agent, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::SetAgentRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::Agent), request.agent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::Agent), request["agent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -178,7 +178,7 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
     delete_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_agent, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::DeleteAgentRequest, request
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -238,9 +238,9 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
     search_agents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_agents, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::SearchAgentsRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -303,7 +303,7 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
     train_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :train_agent, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::TrainAgentRequest, request
-      assert_equal "hello world", request.parent
+      assert_equal "hello world", request["parent"]
       refute_nil options
     end
 
@@ -367,8 +367,8 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
     export_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_agent, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::ExportAgentRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.agent_uri
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["agent_uri"]
       refute_nil options
     end
 
@@ -432,8 +432,8 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
     import_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_agent, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::ImportAgentRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.agent_uri
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["agent_uri"]
       assert_equal :agent_uri, request.agent
       refute_nil options
     end
@@ -498,8 +498,8 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
     restore_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :restore_agent, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::RestoreAgentRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.agent_uri
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["agent_uri"]
       assert_equal :agent_uri, request.agent
       refute_nil options
     end
@@ -564,8 +564,8 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
     get_validation_result_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_validation_result, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::GetValidationResultRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.language_code
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["language_code"]
       refute_nil options
     end
 

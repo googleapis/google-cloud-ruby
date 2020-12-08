@@ -62,9 +62,9 @@ class ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest
     list_session_entity_types_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_session_entity_types, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -127,7 +127,7 @@ class ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest
     get_session_entity_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_session_entity_type, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -186,8 +186,8 @@ class ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest
     create_session_entity_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_session_entity_type, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::SessionEntityType), request.session_entity_type
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::SessionEntityType), request["session_entity_type"]
       refute_nil options
     end
 
@@ -246,8 +246,8 @@ class ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest
     update_session_entity_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_session_entity_type, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::SessionEntityType), request.session_entity_type
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::SessionEntityType), request["session_entity_type"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -305,7 +305,7 @@ class ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest
     delete_session_entity_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_session_entity_type, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 

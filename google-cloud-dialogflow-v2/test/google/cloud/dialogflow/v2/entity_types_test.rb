@@ -63,10 +63,10 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
     list_entity_types_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_entity_types, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::ListEntityTypesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.language_code
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["language_code"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -130,8 +130,8 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
     get_entity_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_entity_type, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::GetEntityTypeRequest, request
-      assert_equal "hello world", request.name
-      assert_equal "hello world", request.language_code
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["language_code"]
       refute_nil options
     end
 
@@ -191,9 +191,9 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
     create_entity_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_entity_type, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::EntityType), request.entity_type
-      assert_equal "hello world", request.language_code
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::EntityType), request["entity_type"]
+      assert_equal "hello world", request["language_code"]
       refute_nil options
     end
 
@@ -253,9 +253,9 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
     update_entity_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_entity_type, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::EntityType), request.entity_type
-      assert_equal "hello world", request.language_code
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::EntityType), request["entity_type"]
+      assert_equal "hello world", request["language_code"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -313,7 +313,7 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
     delete_entity_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_entity_type, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest, request
-      assert_equal "hello world", request.name
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -374,11 +374,11 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
     batch_update_entity_types_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_update_entity_types, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal "hello world", request.entity_type_batch_uri
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["entity_type_batch_uri"]
       assert_equal :entity_type_batch_uri, request.entity_type_batch
-      assert_equal "hello world", request.language_code
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["language_code"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -442,8 +442,8 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
     batch_delete_entity_types_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_delete_entity_types, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal ["hello world"], request.entity_type_names
+      assert_equal "hello world", request["parent"]
+      assert_equal ["hello world"], request["entity_type_names"]
       refute_nil options
     end
 
@@ -508,9 +508,9 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
     batch_create_entities_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_create_entities, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest, request
-      assert_equal "hello world", request.parent
-      assert_kind_of ::Google::Cloud::Dialogflow::V2::EntityType::Entity, request.entities.first
-      assert_equal "hello world", request.language_code
+      assert_equal "hello world", request["parent"]
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::EntityType::Entity, request["entities"].first
+      assert_equal "hello world", request["language_code"]
       refute_nil options
     end
 
@@ -576,10 +576,10 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
     batch_update_entities_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_update_entities, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest, request
-      assert_equal "hello world", request.parent
-      assert_kind_of ::Google::Cloud::Dialogflow::V2::EntityType::Entity, request.entities.first
-      assert_equal "hello world", request.language_code
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["parent"]
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::EntityType::Entity, request["entities"].first
+      assert_equal "hello world", request["language_code"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -644,9 +644,9 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
     batch_delete_entities_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_delete_entities, name
       assert_kind_of ::Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal ["hello world"], request.entity_values
-      assert_equal "hello world", request.language_code
+      assert_equal "hello world", request["parent"]
+      assert_equal ["hello world"], request["entity_values"]
+      assert_equal "hello world", request["language_code"]
       refute_nil options
     end
 
