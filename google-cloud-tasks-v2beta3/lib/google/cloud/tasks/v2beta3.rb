@@ -33,3 +33,6 @@ module Google
     end
   end
 end
+
+helper_path = ::File.join __dir__, "v2beta3", "_helpers.rb"
+require "google/cloud/tasks/v2beta3/_helpers" if ::File.file? helper_path
