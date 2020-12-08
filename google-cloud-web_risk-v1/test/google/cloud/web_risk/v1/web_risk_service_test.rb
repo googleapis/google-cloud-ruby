@@ -62,9 +62,9 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::ClientTest < Minitest::Test
     compute_threat_list_diff_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :compute_threat_list_diff, name
       assert_kind_of ::Google::Cloud::WebRisk::V1::ComputeThreatListDiffRequest, request
-      assert_equal :THREAT_TYPE_UNSPECIFIED, request.threat_type
-      assert_equal "hello world", request.version_token
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::WebRisk::V1::ComputeThreatListDiffRequest::Constraints), request.constraints
+      assert_equal :THREAT_TYPE_UNSPECIFIED, request["threat_type"]
+      assert_equal "hello world", request["version_token"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::WebRisk::V1::ComputeThreatListDiffRequest::Constraints), request["constraints"]
       refute_nil options
     end
 
@@ -123,8 +123,8 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::ClientTest < Minitest::Test
     search_uris_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_uris, name
       assert_kind_of ::Google::Cloud::WebRisk::V1::SearchUrisRequest, request
-      assert_equal "hello world", request.uri
-      assert_equal [:THREAT_TYPE_UNSPECIFIED], request.threat_types
+      assert_equal "hello world", request["uri"]
+      assert_equal [:THREAT_TYPE_UNSPECIFIED], request["threat_types"]
       refute_nil options
     end
 
@@ -183,8 +183,8 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::ClientTest < Minitest::Test
     search_hashes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_hashes, name
       assert_kind_of ::Google::Cloud::WebRisk::V1::SearchHashesRequest, request
-      assert_equal "hello world", request.hash_prefix
-      assert_equal [:THREAT_TYPE_UNSPECIFIED], request.threat_types
+      assert_equal "hello world", request["hash_prefix"]
+      assert_equal [:THREAT_TYPE_UNSPECIFIED], request["threat_types"]
       refute_nil options
     end
 
@@ -243,8 +243,8 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::ClientTest < Minitest::Test
     create_submission_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_submission, name
       assert_kind_of ::Google::Cloud::WebRisk::V1::CreateSubmissionRequest, request
-      assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::WebRisk::V1::Submission), request.submission
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::WebRisk::V1::Submission), request["submission"]
       refute_nil options
     end
 
