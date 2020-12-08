@@ -108,9 +108,9 @@ class PostObjectConformanceTest < MockStorage
   def conditions_array conditions
     return nil unless conditions
     if !conditions.startsWith&.empty?
-      ["starts-with"] + conditions.startsWith
+      [["starts-with"] + conditions.startsWith]
     elsif !conditions&.contentLengthRange&.empty?
-      ["content-length-range"] + conditions.contentLengthRange
+      [["content-length-range"] + conditions.contentLengthRange]
     end
   end
 
