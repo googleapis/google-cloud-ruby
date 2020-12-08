@@ -63,10 +63,10 @@ class ::Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::
     submit_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :submit_job, name
       assert_kind_of ::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.region
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::Job), request.job
-      assert_equal "hello world", request.request_id
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["region"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::Job), request["job"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -127,10 +127,10 @@ class ::Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::
     submit_job_as_operation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :submit_job_as_operation, name
       assert_kind_of ::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.region
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::Job), request.job
-      assert_equal "hello world", request.request_id
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["region"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::Job), request["job"]
+      assert_equal "hello world", request["request_id"]
       refute_nil options
     end
 
@@ -195,9 +195,9 @@ class ::Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::
     get_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_job, name
       assert_kind_of ::Google::Cloud::Dataproc::V1beta2::GetJobRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.region
-      assert_equal "hello world", request.job_id
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["region"]
+      assert_equal "hello world", request["job_id"]
       refute_nil options
     end
 
@@ -261,13 +261,13 @@ class ::Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::
     list_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_jobs, name
       assert_kind_of ::Google::Cloud::Dataproc::V1beta2::ListJobsRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.region
-      assert_equal 42, request.page_size
-      assert_equal "hello world", request.page_token
-      assert_equal "hello world", request.cluster_name
-      assert_equal :ALL, request.job_state_matcher
-      assert_equal "hello world", request.filter
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["region"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["cluster_name"]
+      assert_equal :ALL, request["job_state_matcher"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -334,11 +334,11 @@ class ::Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::
     update_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_job, name
       assert_kind_of ::Google::Cloud::Dataproc::V1beta2::UpdateJobRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.region
-      assert_equal "hello world", request.job_id
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::Job), request.job
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["region"]
+      assert_equal "hello world", request["job_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::Job), request["job"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -398,9 +398,9 @@ class ::Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::
     cancel_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :cancel_job, name
       assert_kind_of ::Google::Cloud::Dataproc::V1beta2::CancelJobRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.region
-      assert_equal "hello world", request.job_id
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["region"]
+      assert_equal "hello world", request["job_id"]
       refute_nil options
     end
 
@@ -460,9 +460,9 @@ class ::Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::
     delete_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_job, name
       assert_kind_of ::Google::Cloud::Dataproc::V1beta2::DeleteJobRequest, request
-      assert_equal "hello world", request.project_id
-      assert_equal "hello world", request.region
-      assert_equal "hello world", request.job_id
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["region"]
+      assert_equal "hello world", request["job_id"]
       refute_nil options
     end
 
