@@ -1,0 +1,11 @@
+{
+    "api_id": "iamcredentials.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-iam-credentials/latest",
+    "distribution_name": "google-iam-credentials",
+    "language": "ruby",
+    "name": "iamcredentials",
+    "name_pretty": "IAM Service Account Credentials API",
+    "product_documentation": "https://cloud.google.com/iam",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
