@@ -1,0 +1,11 @@
+{
+    "api_id": "managedidentities.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-managed_identities-v1/latest",
+    "distribution_name": "google-cloud-managed_identities-v1",
+    "language": "ruby",
+    "name": "managedidentities",
+    "name_pretty": "Managed Service for Microsoft Active Directory API V1 API",
+    "product_documentation": "https://cloud.google.com/managed-microsoft-ad/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
