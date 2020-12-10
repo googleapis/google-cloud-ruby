@@ -45,7 +45,7 @@ there is a small amount of setup:
 
    ```sh
    $ cd stackdriver-core/
-   $ bundle exec rake bundleupdate
+   $ bundle install
    ```
 
 ## Stackdriver Tests

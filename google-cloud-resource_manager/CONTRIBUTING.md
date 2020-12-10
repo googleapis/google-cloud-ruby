@@ -45,7 +45,7 @@ tests, there is a small amount of setup:
 
    ```sh
    $ cd google-cloud-resource_manager/
-   $ bundle exec rake bundleupdate
+   $ bundle install
    ```
 
 ## Console
