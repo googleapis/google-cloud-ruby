@@ -51,7 +51,6 @@ module Google
       #
       #   puts commit_resp.timestamp
       #   puts commit_resp.stats.mutation_count
-      #   puts commit_resp.stats.overload_delay
       #
       class CommitResponse
         ##

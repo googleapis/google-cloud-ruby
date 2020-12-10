@@ -203,9 +203,6 @@ class MockSpanner < Minitest::Spec
     end
 
     _(expected.stats.mutation_count).must_equal actual.commit_stats.mutation_count
-
-    overload_delay = Google::Cloud::Spanner::Convert.duration_to_number actual.commit_stats.overload_delay
-    _(expected.stats.overload_delay).must_equal overload_delay
   end
 end
 

@@ -18,7 +18,7 @@ require "helper"
 describe Google::Cloud::Spanner::CommitResponse, :mock_spanner do
   let(:commit_stats_grpc) {
     Google::Cloud::Spanner::V1::CommitResponse::CommitStats.new(
-      mutation_count: 5, overload_delay: Google::Protobuf::Duration.new(seconds: 1, nanos: 0)
+      mutation_count: 5
     )
   }
   let(:commit_response_grpc) {
@@ -37,6 +37,5 @@ describe Google::Cloud::Spanner::CommitResponse, :mock_spanner do
 
     _(commit_response.stats).must_be_kind_of Google::Cloud::Spanner::CommitResponse::CommitStats
     _(commit_response.stats.mutation_count).must_equal 5
-    _(commit_response.stats.overload_delay).must_equal 1
   end
 end

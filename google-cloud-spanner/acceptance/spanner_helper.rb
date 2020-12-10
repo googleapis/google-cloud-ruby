@@ -275,7 +275,6 @@ module Acceptance
       if commit_options[:return_commit_stats]
         _(resp.stats).must_be_kind_of Google::Cloud::Spanner::CommitResponse::CommitStats
         _(resp.stats.mutation_count).must_be :>, 0
-        _(resp.stats.overload_delay).must_be :>, 0
       else
         _(resp.stats).must_be :nil?
       end

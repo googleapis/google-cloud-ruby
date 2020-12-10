@@ -37,13 +37,6 @@ module Google
             @grpc.mutation_count
           end
 
-          # Length of time in seconds the commit was delayed due to
-          # overloaded servers.
-          # @return [Integer]
-          def overload_delay
-            Convert.duration_to_number @grpc.overload_delay
-          end
-
           ##
           # @private
           # Creates a new Commit stats instance from a

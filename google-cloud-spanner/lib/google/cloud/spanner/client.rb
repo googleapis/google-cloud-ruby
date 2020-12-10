@@ -845,7 +845,6 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
-        #   puts commit_resp.stats.overload_delay
         #
         def upsert table, rows, commit_options: nil
           @pool.with_session do |session|
@@ -926,7 +925,6 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
-        #   puts commit_resp.stats.overload_delay
         #
         def insert table, rows, commit_options: nil
           @pool.with_session do |session|
@@ -1006,7 +1004,6 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
-        #   puts commit_resp.stats.overload_delay
         #
         def update table, rows, commit_options: nil
           @pool.with_session do |session|
@@ -1088,7 +1085,6 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
-        #   puts commit_resp.stats.overload_delay
         #
         def replace table, rows, commit_options: nil
           @pool.with_session do |session|
@@ -1162,7 +1158,6 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
-        #   puts commit_resp.stats.overload_delay
         #
         def delete table, keys = [], commit_options: nil, call_options: nil
           @pool.with_session do |session|
@@ -1241,7 +1236,6 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
-        #   puts commit_resp.stats.overload_delay
         #
         def commit commit_options: nil, call_options: nil, &block
           raise ArgumentError, "Must provide a block" unless block_given?
@@ -1356,7 +1350,6 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
-        #   puts commit_resp.stats.overload_delay
         #
         def transaction deadline: 120, commit_options: nil, call_options: nil
           ensure_service!

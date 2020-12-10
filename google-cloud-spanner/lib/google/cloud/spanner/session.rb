@@ -541,7 +541,6 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
-        #   puts commit_resp.stats.overload_delay
         #
         def commit transaction_id: nil, commit_options: nil, call_options: nil
           ensure_service!
@@ -632,7 +631,6 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
-        #   puts commit_resp.stats.overload_delay
         #
         def upsert table, *rows, transaction_id: nil, commit_options: nil,
                    call_options: nil
@@ -722,7 +720,6 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
-        #   puts commit_resp.stats.overload_delay
         #
         def insert table, *rows, transaction_id: nil, commit_options: nil,
                    call_options: nil
@@ -811,7 +808,6 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
-        #   puts commit_resp.stats.overload_delay
         #
         def update table, *rows, transaction_id: nil, commit_options: nil,
                    call_options: nil
@@ -902,7 +898,6 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
-        #   puts commit_resp.stats.overload_delay
         #
         def replace table, *rows, transaction_id: nil, commit_options: nil,
                     call_options: nil
@@ -971,7 +966,6 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
-        #   puts commit_resp.stats.overload_delay
         #
         def delete table, keys = [], transaction_id: nil, commit_options: nil,
                    call_options: nil

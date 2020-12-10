@@ -67,7 +67,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
   let(:commit_resp) { Google::Cloud::Spanner::V1::CommitResponse.new commit_timestamp: commit_timestamp }
    let(:commit_stats_grpc) {
     Google::Cloud::Spanner::V1::CommitResponse::CommitStats.new(
-      mutation_count: 5, overload_delay: Google::Protobuf::Duration.new(seconds: 1, nanos: 100000000)
+      mutation_count: 5
     )
   }
   let(:commit_stats_resp_grpc) {
