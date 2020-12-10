@@ -39,7 +39,7 @@ module Google
 
           ##
           # @private
-          # Creates a new Commit stats instance from a
+          # Creates a new CommitStats instance from a
           # `Google::Cloud::Spanner::V1::CommitResponse::CommitStats`.
           def self.from_grpc grpc
             new grpc
