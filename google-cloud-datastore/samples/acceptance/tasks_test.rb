@@ -44,6 +44,8 @@ describe "Datastore task list" do
     end
     datastore.save task
     id = task.key.id
+    wait_until { datastore.find "Task", id }
+
     mark_done id
     task = datastore.find "Task", id
     assert_equal true, task["done"]
@@ -55,9 +57,7 @@ describe "Datastore task list" do
     datastore.save task1, task2
 
     query = datastore.query("Task").order "created"
-    wait_until do
-      datastore.run(query).any?
-    end
+    wait_until { datastore.run(query).any? }
 
     assert_output(/ID:/) do
       list_tasks
@@ -73,6 +73,8 @@ describe "Datastore task list" do
     end
     datastore.save task
     id = task.key.id
+    wait_until { datastore.find "Task", id }
+
     delete_task id
     task = datastore.find "Task", id
     refute task
