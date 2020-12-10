@@ -51,14 +51,10 @@ def wait_until timeout: 30
   t_begin = Time.now
   delay = 1
   loop do
-    if yield
-      break
-    elsif (Time.now - t_begin) > timeout
-      fail "Timeout after trying for #{timeout} seconds"
-    else
-      puts "sleep for #{delay}"
-      sleep delay
-    end
+    break if yield
+    raise "Timeout after trying for #{timeout} seconds" if (Time.now - t_begin) > timeout
+    puts "sleeping #{delay}"
+    sleep delay
     delay += 1
   end
 end

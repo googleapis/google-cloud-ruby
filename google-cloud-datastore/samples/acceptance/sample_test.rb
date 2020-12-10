@@ -85,7 +85,9 @@ describe "Datastore sample" do
   end
 
   it "supports key_with_multilevel_parent" do
-    task_key = key_with_multilevel_parent user_name: user_name, task_list_name: list_task.key.parent.name, task_name: sample_task.key.name
+    task_key = key_with_multilevel_parent user_name:      user_name,
+                                          task_list_name: list_task.key.parent.name,
+                                          task_name:      sample_task.key.name
 
     assert_equal "Task", task_key.kind
     assert_equal task_name, task_key.name
