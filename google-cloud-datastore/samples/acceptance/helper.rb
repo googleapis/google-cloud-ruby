@@ -32,3 +32,33 @@ def task_entity key
     t["tag"] = ["fun", "programming"]
   end
 end
+
+def find_or_save_task task_key
+  t = datastore.find task_key
+  if t.nil?
+    t = task_entity task_key
+    datastore.save t
+    wait_until do
+      t = datastore.find task_key
+    end
+  end
+  t
+end
+
+# Keep trying a block of code until the code of block yield a true statement or
+# raise error after timeout
+def wait_until timeout: 30
+  t_begin = Time.now
+  delay = 1
+  loop do
+    if yield
+      break
+    elsif (Time.now - t_begin) > timeout
+      fail "Timeout after trying for #{timeout} seconds"
+    else
+      puts "sleep for #{delay}"
+      sleep delay
+    end
+    delay += 1
+  end
+end

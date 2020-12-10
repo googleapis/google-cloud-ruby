@@ -22,13 +22,6 @@ describe "Datastore task list" do
     delete_tasks
   end
 
-  def wait_until times: 5, duration: 1
-    times.times do
-      sleep duration
-      return if yield
-    end
-  end
-
   def delete_tasks
     tasks = datastore.run datastore.query("Task")
     datastore.delete(*tasks.map(&:key)) unless tasks.empty?
@@ -36,7 +29,10 @@ describe "Datastore task list" do
 
   it "creates a task" do
     desc = "Test description."
-    id = add_task desc
+    id = nil
+    capture_io do
+      id = add_task desc
+    end
     task = datastore.find "Task", id
     assert task
     assert_equal desc, task["description"]
@@ -59,7 +55,9 @@ describe "Datastore task list" do
     datastore.save task1, task2
 
     query = datastore.query("Task").order "created"
-    wait_until { datastore.run(query).any? }
+    wait_until do
+      datastore.run(query).any?
+    end
 
     assert_output(/ID:/) do
       list_tasks
