@@ -45,7 +45,7 @@ there is a small amount of setup:
 
    ```sh
    $ cd google-cloud-storage/
-   $ bundle exec rake bundleupdate
+   $ bundle install
    ```
 
 ## Console

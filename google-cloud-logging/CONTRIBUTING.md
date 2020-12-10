@@ -45,7 +45,7 @@ there is a small amount of setup:
 
    ```sh
    $ cd google-cloud-logging/
-   $ bundle update
+   $ bundle install
    ```
 
 ## Console

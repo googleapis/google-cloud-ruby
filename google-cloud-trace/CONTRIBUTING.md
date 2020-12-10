@@ -45,7 +45,7 @@ there is a small amount of setup:
 
    ```sh
    $ cd google-cloud-trace/
-   $ bundle exec rake bundleupdate
+   $ bundle install
    ```
 
 ## Console

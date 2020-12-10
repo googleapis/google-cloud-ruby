@@ -45,7 +45,7 @@ there is a small amount of setup:
 
    ```sh
    $ cd gcloud/
-   $ bundle exec rake bundleupdate
+   $ bundle install
    ```
 
 ## Console

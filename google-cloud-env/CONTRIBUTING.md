@@ -45,7 +45,7 @@ there is a small amount of setup:
 
    ```sh
    $ cd google-cloud-env/
-   $ bundle exec rake bundleupdate
+   $ bundle install
    ```
 
 ## hosting environment Tests
