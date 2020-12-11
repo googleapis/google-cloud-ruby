@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "d02274f5774872b50a83b5a5d4633702b35d5acf"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "175856f7df4b4d2236a68bbd527666c6cac58c82"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "a53dc0292aad8a7739e44c2165476874ddc487bf",
-        "internalRef": "346583784"
+        "sha": "c38c7708c09271e3dd4799541583f9fd0e95fc6a",
+        "internalRef": "346910607"
       }
     }
   ],
@@ -26,5 +26,24 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-managed_identities.gemspec",
+    "lib/google-cloud-managed_identities.rb",
+    "lib/google/cloud/managed_identities.rb",
+    "lib/google/cloud/managed_identities/version.rb",
+    "test/google/cloud/managed_identities/client_test.rb",
+    "test/google/cloud/managed_identities/version_test.rb",
+    "test/helper.rb"
   ]
 }
