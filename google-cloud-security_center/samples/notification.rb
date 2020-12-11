@@ -135,7 +135,7 @@ def get_notification_config org_id:, config_id:
   response = client.get_notification_config name: config_path
   puts "Notification config fetched: #{response}"
 # [END scc_get_notification_config]
-# [END securitycenter_notification_config]
+# [END securitycenter_get_notification_config]
 end
 
 def list_notification_configs org_id:
