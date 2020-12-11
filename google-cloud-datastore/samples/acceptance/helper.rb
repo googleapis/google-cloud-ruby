@@ -33,6 +33,18 @@ def task_entity key
   end
 end
 
+def find_or_save_task_list task_list_key
+  tl = datastore.find task_list_key
+  if tl.nil?
+    tl = datastore.entity task_list_key
+    datastore.save tl
+    wait_until do
+      tl = datastore.find task_list_key
+    end
+  end
+  tl
+end
+
 def find_or_save_task task_key
   t = datastore.find task_key
   if t.nil?
@@ -51,10 +63,9 @@ def wait_until timeout: 30
   t_begin = Time.now
   delay = 1
   loop do
+    sleep delay
     break if yield
     raise "Timeout after trying for #{timeout} seconds" if (Time.now - t_begin) > timeout
-    puts "sleeping #{delay}"
-    sleep delay
     delay += 1
   end
 end

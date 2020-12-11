@@ -20,14 +20,7 @@ describe "Datastore sample" do
   let(:user_name) { "test_user_#{time_plus_random}" }
   let(:task_list_name) { "test_task_list_#{time_plus_random}" }
   let(:task_list_key) { datastore.key "TaskList", task_list_name }
-  let :task_list do
-    tl = datastore.find task_list_key
-    if tl.nil?
-      tl = datastore.entity task_list_key
-      datastore.save tl
-    end
-    tl
-  end
+  let(:task_list) { find_or_save_task_list task_list_key }
   let(:task_name) { "test_task_#{time_plus_random}" }
   let(:task_name_1) { "#{task_name}_1" }
   let(:task_name_2) { "#{task_name}_2" }
