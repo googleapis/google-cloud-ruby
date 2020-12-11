@@ -104,8 +104,6 @@ module Google
 
                   default_config.rpcs.delete_instance.timeout = 60.0
 
-                  default_config.rpcs.create_cluster.timeout = 60.0
-
                   default_config.rpcs.get_cluster.timeout = 60.0
                   default_config.rpcs.get_cluster.retry_policy = {
                     initial_delay: 1.0,
