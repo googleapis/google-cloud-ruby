@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/cloud/monitoring"
+require "google/cloud/monitoring/v3"
 
 def create_metric_descriptor project_id:, metric_type:
   # [START monitoring_create_metric]
@@ -22,7 +22,7 @@ def create_metric_descriptor project_id:, metric_type:
   # Example metric type
   # metric_type = "custom.googleapis.com/my_metric"
 
-  client = Google::Cloud::Monitoring.metric_service
+  client = Google::Cloud::Monitoring::V3::MetricService::Client.new
   project_name = client.project_path project: project_id
 
   descriptor = Google::Api::MetricDescriptor.new(
@@ -47,7 +47,7 @@ def delete_metric_descriptor project_id:, metric_type:
   # Example metric type
   # metric_type = "custom.googleapis.com/my_metric"
 
-  client = Google::Cloud::Monitoring.metric_service
+  client = Google::Cloud::Monitoring::V3::MetricService::Client.new
   metric_name = client.metric_descriptor_path project:           project_id,
                                               metric_descriptor: metric_type
 
@@ -64,7 +64,7 @@ def write_time_series project_id:, metric_type:
   # Example metric type
   # metric_type = "custom.googleapis.com/my_metric"
 
-  client = Google::Cloud::Monitoring.metric_service
+  client = Google::Cloud::Monitoring::V3::MetricService::Client.new
   project_name = client.project_path project: project_id
 
   series = Google::Cloud::Monitoring::V3::TimeSeries.new
@@ -91,7 +91,7 @@ def list_time_series project_id:
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
-  client = Google::Cloud::Monitoring.metric_service
+  client = Google::Cloud::Monitoring::V3::MetricService::Client.new
   project_name = client.project_path project: project_id
 
   interval = Google::Cloud::Monitoring::V3::TimeInterval.new
@@ -118,7 +118,7 @@ def list_time_series_header project_id:
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
-  client = Google::Cloud::Monitoring.metric_service
+  client = Google::Cloud::Monitoring::V3::MetricService::Client.new
   project_name = client.project_path project: project_id
 
   interval = Google::Cloud::Monitoring::V3::TimeInterval.new
@@ -145,7 +145,7 @@ def list_time_series_aggregate project_id:
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
-  client = Google::Cloud::Monitoring.metric_service
+  client = Google::Cloud::Monitoring::V3::MetricService::Client.new
   project_name = client.project_path project: project_id
 
   interval = Google::Cloud::Monitoring::V3::TimeInterval.new
@@ -178,7 +178,7 @@ def list_time_series_reduce project_id:
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
-  client = Google::Cloud::Monitoring.metric_service
+  client = Google::Cloud::Monitoring::V3::MetricService::Client.new
   project_name = client.project_path project: project_id
 
   interval = Google::Cloud::Monitoring::V3::TimeInterval.new
@@ -213,7 +213,7 @@ def list_metric_descriptors project_id:
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
-  client = Google::Cloud::Monitoring.metric_service
+  client = Google::Cloud::Monitoring::V3::MetricService::Client.new
   project_name = client.project_path project: project_id
 
   results = client.list_metric_descriptors name: project_name
@@ -228,7 +228,7 @@ def list_monitored_resources project_id:
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
-  client = Google::Cloud::Monitoring.metric_service
+  client = Google::Cloud::Monitoring::V3::MetricService::Client.new
   project_name = client.project_path project: project_id
 
   results = client.list_monitored_resource_descriptors name: project_name
@@ -246,7 +246,7 @@ def get_monitored_resource_descriptor project_id:, resource_type:
   # The resource type
   # resource_type = "gce_instance"
 
-  client = Google::Cloud::Monitoring.metric_service
+  client = Google::Cloud::Monitoring::V3::MetricService::Client.new
   resource_path = client.monitored_resource_descriptor_path(
     project:                       project_id,
     monitored_resource_descriptor: resource_type
@@ -265,7 +265,7 @@ def get_metric_descriptor project_id:, metric_type:
   # Example metric type
   # metric_type = "custom.googleapis.com/my_metric"
 
-  client = Google::Cloud::Monitoring.metric_service
+  client = Google::Cloud::Monitoring::V3::MetricService::Client.new
   metric_name = client.metric_descriptor_path project:           project_id,
                                               metric_descriptor: metric_type
 
