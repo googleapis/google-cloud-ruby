@@ -87,15 +87,13 @@ module Google
         #     bucket](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
         # @!attribute [rw] temp_bucket
         #   @return [::String]
-        #     Optional. A Cloud Storage bucket used to store ephemeral cluster and jobs data,
-        #     such as Spark and MapReduce history files.
-        #     If you do not specify a temp bucket,
-        #     Dataproc will determine a Cloud Storage location (US,
-        #     ASIA, or EU) for your cluster's temp bucket according to the
-        #     Compute Engine zone where your cluster is deployed, and then create
-        #     and manage this project-level, per-location bucket. The default bucket has
-        #     a TTL of 90 days, but you can use any TTL (or none) if you specify a
-        #     bucket.
+        #     Optional. A Cloud Storage bucket used to store ephemeral cluster and jobs
+        #     data, such as Spark and MapReduce history files. If you do not specify a
+        #     temp bucket, Dataproc will determine a Cloud Storage location (US, ASIA, or
+        #     EU) for your cluster's temp bucket according to the Compute Engine zone
+        #     where your cluster is deployed, and then create and manage this
+        #     project-level, per-location bucket. The default bucket has a TTL of 90
+        #     days, but you can use any TTL (or none) if you specify a bucket.
         # @!attribute [rw] gce_cluster_config
         #   @return [::Google::Cloud::Dataproc::V1beta2::GceClusterConfig]
         #     Optional. The shared Compute Engine config settings for
@@ -148,10 +146,10 @@ module Google
         #     Optional. Security related configuration.
         # @!attribute [rw] gke_cluster_config
         #   @return [::Google::Cloud::Dataproc::V1beta2::GkeClusterConfig]
-        #     Optional. The Kubernetes Engine config for Dataproc clusters deployed to Kubernetes.
-        #     Setting this is considered mutually exclusive with Compute Engine-based
-        #     options such as `gce_cluster_config`, `master_config`, `worker_config`,
-        #     `secondary_worker_config`, and `autoscaling_config`.
+        #     Optional. The Kubernetes Engine config for Dataproc clusters deployed to
+        #     Kubernetes. Setting this is considered mutually exclusive with Compute
+        #     Engine-based options such as `gce_cluster_config`, `master_config`,
+        #     `worker_config`, `secondary_worker_config`, and `autoscaling_config`.
         class ClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -505,7 +503,8 @@ module Google
         #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json).
         # @!attribute [rw] auto_delete_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Optional. The time when cluster will be auto-deleted. (see JSON representation of
+        #     Optional. The time when cluster will be auto-deleted. (see JSON
+        #     representation of
         #     [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         # @!attribute [rw] auto_delete_ttl
         #   @return [::Google::Protobuf::Duration]
@@ -536,8 +535,8 @@ module Google
         # Specifies Kerberos related configuration.
         # @!attribute [rw] enable_kerberos
         #   @return [::Boolean]
-        #     Optional. Flag to indicate whether to Kerberize the cluster (default: false). Set
-        #     this field to true to enable Kerberos on a cluster.
+        #     Optional. Flag to indicate whether to Kerberize the cluster (default:
+        #     false). Set this field to true to enable Kerberos on a cluster.
         # @!attribute [rw] root_principal_password_uri
         #   @return [::String]
         #     Required. The Cloud Storage URI of a KMS encrypted file containing the root
@@ -788,10 +787,11 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two {::Google::Cloud::Dataproc::V1beta2::CreateClusterRequest CreateClusterRequest} requests  with the same
-        #     id, then the second request will be ignored and the
-        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the backend
-        #     is returned.
+        #     receives two
+        #     {::Google::Cloud::Dataproc::V1beta2::CreateClusterRequest CreateClusterRequest}
+        #     requests  with the same id, then the second request will be ignored and the
+        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created
+        #     and stored in the backend is returned.
         #
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -893,10 +893,11 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two {::Google::Cloud::Dataproc::V1beta2::UpdateClusterRequest UpdateClusterRequest} requests  with the same
-        #     id, then the second request will be ignored and the
-        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
-        #     backend is returned.
+        #     receives two
+        #     {::Google::Cloud::Dataproc::V1beta2::UpdateClusterRequest UpdateClusterRequest}
+        #     requests  with the same id, then the second request will be ignored and the
+        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created
+        #     and stored in the backend is returned.
         #
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -926,10 +927,11 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. A unique id used to identify the request. If the server
-        #     receives two {::Google::Cloud::Dataproc::V1beta2::DeleteClusterRequest DeleteClusterRequest} requests  with the same
-        #     id, then the second request will be ignored and the
-        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
-        #     backend is returned.
+        #     receives two
+        #     {::Google::Cloud::Dataproc::V1beta2::DeleteClusterRequest DeleteClusterRequest}
+        #     requests  with the same id, then the second request will be ignored and the
+        #     first {::Google::Longrunning::Operation google.longrunning.Operation} created
+        #     and stored in the backend is returned.
         #
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
