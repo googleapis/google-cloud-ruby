@@ -1,5 +1,11 @@
 # Release History
 
+### 1.29.2 / 2020-12-14
+
+#### Bug Fixes
+
+* Fix support for #generate_signed_post_policy_v4 conditions
+
 ### 1.29.1 / 2020-10-05
 
 #### Bug Fixes
