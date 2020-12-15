@@ -31,6 +31,8 @@ module Google
           # of Compute Engine instances.
           #
           class Client
+            include Paths
+
             # @private
             attr_reader :cluster_controller_stub
 
@@ -232,10 +234,11 @@ module Google
             #     Required. The cluster to create.
             #   @param request_id [::String]
             #     Optional. A unique id used to identify the request. If the server
-            #     receives two {::Google::Cloud::Dataproc::V1beta2::CreateClusterRequest CreateClusterRequest} requests  with the same
-            #     id, then the second request will be ignored and the
-            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the backend
-            #     is returned.
+            #     receives two
+            #     {::Google::Cloud::Dataproc::V1beta2::CreateClusterRequest CreateClusterRequest}
+            #     requests  with the same id, then the second request will be ignored and the
+            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created
+            #     and stored in the backend is returned.
             #
             #     It is recommended to always set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -392,10 +395,11 @@ module Google
             #     </table>
             #   @param request_id [::String]
             #     Optional. A unique id used to identify the request. If the server
-            #     receives two {::Google::Cloud::Dataproc::V1beta2::UpdateClusterRequest UpdateClusterRequest} requests  with the same
-            #     id, then the second request will be ignored and the
-            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
-            #     backend is returned.
+            #     receives two
+            #     {::Google::Cloud::Dataproc::V1beta2::UpdateClusterRequest UpdateClusterRequest}
+            #     requests  with the same id, then the second request will be ignored and the
+            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created
+            #     and stored in the backend is returned.
             #
             #     It is recommended to always set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -483,10 +487,11 @@ module Google
             #     (with error NOT_FOUND) if cluster with specified UUID does not exist.
             #   @param request_id [::String]
             #     Optional. A unique id used to identify the request. If the server
-            #     receives two {::Google::Cloud::Dataproc::V1beta2::DeleteClusterRequest DeleteClusterRequest} requests  with the same
-            #     id, then the second request will be ignored and the
-            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
-            #     backend is returned.
+            #     receives two
+            #     {::Google::Cloud::Dataproc::V1beta2::DeleteClusterRequest DeleteClusterRequest}
+            #     requests  with the same id, then the second request will be ignored and the
+            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created
+            #     and stored in the backend is returned.
             #
             #     It is recommended to always set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
