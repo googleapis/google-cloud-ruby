@@ -88,7 +88,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     job_gapi.configuration.load.schema_update_options = schema_update_options
     job_gapi.configuration.load.range_partitioning = range_partitioning
 
-    job_resp_gapi = load_job_resp_gapi(load_url)
+    job_resp_gapi = load_job_resp_gapi(table_reference, load_url)
     job_resp_gapi.configuration.load.schema_update_options = schema_update_options
     job_resp_gapi.configuration.load.range_partitioning = range_partitioning
 
@@ -135,7 +135,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     job_gapi.configuration.load.time_partitioning = time_partitioning
     job_gapi.configuration.load.clustering = clustering
 
-    job_resp_gapi = load_job_resp_gapi(load_url)
+    job_resp_gapi = load_job_resp_gapi(table_reference, load_url)
     job_resp_gapi.configuration.load.schema_update_options = schema_update_options
     job_resp_gapi.configuration.load.time_partitioning = time_partitioning
     job_resp_gapi.configuration.load.clustering = clustering
@@ -182,7 +182,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     job_gapi = load_job_url_gapi table_reference, load_url
     job_gapi.configuration.load.schema = table_schema_gapi
     job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, load_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -222,7 +222,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
     job_gapi.configuration.load.schema_update_options = schema_update_options
 
-    job_resp_gapi = load_job_resp_gapi(load_url)
+    job_resp_gapi = load_job_resp_gapi(table_reference, load_url)
     job_resp_gapi.configuration.load.schema_update_options = schema_update_options
     mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
     dataset.service.mocked_service = mock

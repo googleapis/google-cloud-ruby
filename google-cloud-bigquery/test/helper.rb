@@ -920,7 +920,10 @@ class MockBigquery < Minitest::Spec
     h.to_json
   end
 
-  def load_job_gapi table_reference, source_format = "NEWLINE_DELIMITED_JSON", job_id: "job_9876543210", location: "US"
+  def load_job_gapi table_reference,
+                    source_format = "NEWLINE_DELIMITED_JSON",
+                    job_id: "job_9876543210",
+                    location: "US"
     Google::Apis::BigqueryV2::Job.new(
       job_reference: job_reference_gapi(project, job_id, location: location),
       configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
@@ -956,31 +959,35 @@ class MockBigquery < Minitest::Spec
     )
   end
 
-  def load_job_url_gapi table_reference, urls, job_id: "job_9876543210", location: "US"
+  def load_job_url_gapi table_reference, urls, job_id: "job_9876543210", location: "US", hive_partitioning_options: nil
+    load = Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+      destination_table: table_reference,
+      source_uris: [urls].flatten
+    )
+    load.hive_partitioning_options = hive_partitioning_options if hive_partitioning_options
     Google::Apis::BigqueryV2::Job.new(
       job_reference: job_reference_gapi(project, job_id, location: location),
       configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
-        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
-          destination_table: table_reference,
-          source_uris: [urls].flatten,
-        ),
+        load: load,
         dry_run: nil
       )
     )
   end
 
-  def load_job_resp_gapi load_url, job_id: "job_9876543210", location: "US"
+  def load_job_resp_gapi table, load_url, job_id: "job_9876543210", location: "US", labels: nil, hive_partitioning_options: nil
     hash = random_job_hash job_id, location: location
     hash["configuration"]["load"] = {
       "sourceUris" => [load_url],
       "destinationTable" => {
-        "projectId" => project,
-        "datasetId" => dataset_id,
-        "tableId" => table_id
+        "projectId" => table.project_id,
+        "datasetId" => table.dataset_id,
+        "tableId" => table.table_id
       }
     }
     resp = Google::Apis::BigqueryV2::Job.from_json hash.to_json
     resp.status = status "done"
+    resp.configuration.labels = labels if labels
+    resp.configuration.load.hive_partitioning_options = hive_partitioning_options if hive_partitioning_options
     resp
   end
 

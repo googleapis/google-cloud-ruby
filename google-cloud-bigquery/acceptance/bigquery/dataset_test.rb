@@ -181,7 +181,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     end
   end
 
-  it "imports parquet data from GCS uri using Hive partitioning with auto layout with load_job" do
+  it "imports parquet data from GCS uri using hive partitioning with auto layout with load_job" do
     gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
     source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
@@ -202,7 +202,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     _(job.hive_partitioning_source_uri_prefix).must_equal source_uri_prefix
   end
 
-  it "imports parquet data from GCS uri using Hive partitioning with custom layout with load_job" do
+  it "imports parquet data from GCS uri using hive partitioning with custom layout with load_job" do
     gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/customlayout/*"
     source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/customlayout/"
     source_uri_prefix_with_schema = "#{source_uri_prefix}{pkey:STRING}/"
