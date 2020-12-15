@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2020-12-15
+
+#### Features
+
+* Add field indicating severity of a finding
+
 ### 0.3.5 / 2020-09-03
 
 #### Documentation
