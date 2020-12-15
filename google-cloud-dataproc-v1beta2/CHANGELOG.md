@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2020-12-15
+
+#### Features
+
+* Add path helpers for cluster resources
+
 ### 0.3.0 / 2020-12-02
 
 #### ⚠ BREAKING CHANGES
