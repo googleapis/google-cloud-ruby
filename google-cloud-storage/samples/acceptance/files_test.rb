@@ -492,6 +492,7 @@ describe "Files Snippets" do
     assert_includes out, "<input name='policy'"
     assert_includes out, "<input name='x-goog-meta-test' value='data'"
     assert_includes out, "<input type='file' name='file'/>"
+    assert_includes out, "<input type='submit' value='Upload File'/>"
   end
 
   it "set_event_based_hold" do
