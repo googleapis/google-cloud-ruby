@@ -38,9 +38,10 @@ module Google
             # Force the object to be a Time object.
             time = time.to_time
 
-            Google::Protobuf::Timestamp.new \
+            Google::Protobuf::Timestamp.new(
               seconds: time.to_i,
               nanos:   time.nsec
+            )
           end
 
           def timestamp_to_time timestamp
@@ -159,12 +160,14 @@ module Google
 
             data, field_paths_and_values = remove_field_value_from data
 
+            doc = Google::Cloud::Firestore::V1::Document.new(
+              name:   doc_path,
+              fields: hash_to_fields(data)
+            )
+            precondition = Google::Cloud::Firestore::V1::Precondition.new exists: false
             Google::Cloud::Firestore::V1::Write.new(
-              update:            Google::Cloud::Firestore::V1::Document.new(
-                name:   doc_path,
-                fields: hash_to_fields(data)
-              ),
-              current_document:  Google::Cloud::Firestore::V1::Precondition.new(exists: false),
+              update:            doc,
+              current_document:  precondition,
               update_transforms: field_transforms(field_paths_and_values)
             )
           end
@@ -201,11 +204,12 @@ module Google
 
             data, field_paths_and_values = remove_field_value_from data
 
+            doc = Google::Cloud::Firestore::V1::Document.new(
+              name:   doc_path,
+              fields: hash_to_fields(data)
+            )
             Google::Cloud::Firestore::V1::Write.new(
-              update:            Google::Cloud::Firestore::V1::Document.new(
-                name:   doc_path,
-                fields: hash_to_fields(data)
-              ),
+              update:            doc,
               update_transforms: field_transforms(field_paths_and_values)
             )
           end
@@ -265,14 +269,16 @@ module Google
               end
             end
 
+            doc = Google::Cloud::Firestore::V1::Document.new(
+              name:   doc_path,
+              fields: hash_to_fields(data)
+            )
+            doc_mask = Google::Cloud::Firestore::V1::DocumentMask.new(
+              field_paths: field_paths.map(&:formatted_string).sort
+            )
             Google::Cloud::Firestore::V1::Write.new(
-              update:            Google::Cloud::Firestore::V1::Document.new(
-                name:   doc_path,
-                fields: hash_to_fields(data)
-              ),
-              update_mask:       Google::Cloud::Firestore::V1::DocumentMask.new(
-                field_paths: field_paths.map(&:formatted_string).sort
-              ),
+              update:            doc,
+              update_mask:       doc_mask,
               update_transforms: field_transforms(field_paths_and_values)
             )
           end
