@@ -27,7 +27,7 @@ def generate_signed_post_policy_v4 bucket_name:, file_name:
   bucket = storage.bucket bucket_name
   post_object = bucket.generate_signed_post_policy_v4 file_name,
                                                       expires: 600,
-                                                      fields:  { "x-goog-meta-test": "data" }
+                                                      fields:  { "x-goog-meta-test" => "data" }
 
   html_form = "<form action='#{post_object.url}' method='POST' enctype='multipart/form-data'>\n"
   post_object.fields.each do |name, value|
@@ -39,6 +39,8 @@ def generate_signed_post_policy_v4 bucket_name:, file_name:
 
   puts "You can use the following form to upload an object to bucket #{bucket_name} for the next 10 minutes:\n"
   puts html_form
+
+  post_object
 end
 # [END storage_generate_signed_post_policy_v4]
 
