@@ -104,8 +104,8 @@ module Google
         # @example With timestamp.
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
         #   entry.set_cell(
-        #     "cf-1",
-        #     "field-1",
+        #     "cf1",
+        #     "field1",
         #     "XYZ",
         #     timestamp: (Time.now.to_f * 1000000).round(-3) # microseconds
         #   )
@@ -156,14 +156,14 @@ module Google
         #
         # @example Without timestamp range.
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
-        #   entry.delete_cells("cf-1", "field-1")
+        #   entry.delete_cells("cf1", "field1")
         #
         # @example With timestamp range.
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
         #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
         #   entry.delete_cells(
         #     "cf1",
-        #     "field-1",
+        #     "field1",
         #     timestamp_from: timestamp_micros - 5000000,
         #     timestamp_to: timestamp_micros
         #   )
@@ -172,7 +172,7 @@ module Google
         #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
         #   entry.delete_cells(
         #     "cf1",
-        #     "field-1",
+        #     "field1",
         #     timestamp_from: timestamp_micros - 5000000
         #   )
         #
@@ -201,7 +201,7 @@ module Google
         #
         # @example
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
-        #   entry.delete_from_family("cf-1")
+        #   entry.delete_from_family("cf1")
         #
         def delete_from_family family
           @mutations << Google::Cloud::Bigtable::V2::Mutation.new(delete_from_family: { family_name: family })
