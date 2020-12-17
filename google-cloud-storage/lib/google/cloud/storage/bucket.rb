@@ -1647,8 +1647,8 @@ module Google
         end
 
         ##
-        # Generate a PostObject that includes the fields and url to
-        # upload objects via html forms.
+        # Generate a PostObject that includes the fields and URL to
+        # upload objects via HTML forms.
         #
         # Generating a PostObject requires service account credentials,
         # either by connecting with a service account when calling
@@ -1694,7 +1694,7 @@ module Google
         #   Proc should return a signature created using a RPC call to the
         #   [Service Account Credentials signBlob](https://cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signBlob)
         #   method as shown in the example below.
-        # @return [PostObject] An object containing the URL, fields, and values needed to upload files via html forms.
+        # @return [PostObject] An object containing the URL, fields, and values needed to upload files via HTML forms.
         #
         # @raise [SignedUrlUnavailable] If the service account credentials
         #   are missing. Service account credentials are acquired by following the
@@ -1817,10 +1817,14 @@ module Google
         end
 
         ##
-        # Generate a PostObject that includes the fields and url to
-        # upload objects via html forms.
+        # Generate a `PostObject` that includes the fields and URL to
+        # upload objects via HTML forms. The resulting `PostObject` is
+        # based on a policy document created from the method arguments.
+        # This policy provides authorization to ensure that the HTML
+        # form can upload files into the bucket. See [Signatures -
+        # Policy document](https://cloud.google.com/storage/docs/authentication/signatures#policy-document).
         #
-        # Generating a PostObject requires service account credentials,
+        # Generating a `PostObject` requires service account credentials,
         # either by connecting with a service account when calling
         # {Google::Cloud.storage}, or by passing in the service account
         # `issuer` and `signing_key` values. Although the private key can
@@ -1833,6 +1837,8 @@ module Google
         # steps in [Service Account Authentication](
         # https://cloud.google.com/iam/docs/service-accounts).
         #
+        # @see https://cloud.google.com/storage/docs/authentication/signatures#policy-document Signatures -
+        #   Policy document
         # @see https://cloud.google.com/storage/docs/xml-api/post-object
         #
         # @param [String] path Path to the file in Google Cloud Storage.
@@ -1856,9 +1862,14 @@ module Google
         #   method as shown in the example below.
         # @param [Integer] expires The number of seconds until the URL expires.
         #   The default is 604800 (7 days).
-        # @param [Hash] fields User-supplied form fields such as `acl`,
+        # @param [Hash{String => String}] fields User-supplied form fields such as `acl`,
         #   `cache-control`, `success_action_status`, and `success_action_redirect`.
-        # @param [Array<Hash|Array>] conditions User-supplied policy conditions.
+        #   Optional. See [Upload an object with HTML forms - Form
+        #   fields](https://cloud.google.com/storage/docs/xml-api/post-object-forms#form_fields).
+        # @param [Array<Hash{String => String}|Array<String>>] conditions An array of
+        #   policy conditions that every upload must satisfy. For example:
+        #   `[["eq", "$Content-Type", "image/jpeg"]]`. Optional. See [Signatures - Policy
+        #   document](https://cloud.google.com/storage/docs/authentication/signatures#policy-document).
         # @param [String] scheme The URL scheme. The default value is `HTTPS`.
         # @param [Boolean] virtual_hosted_style Whether to use a virtual hosted-style
         #   hostname, which adds the bucket into the host portion of the URI rather
@@ -1871,12 +1882,12 @@ module Google
         #   Cloud Load Balancer which routes to a bucket you own, e.g.
         #   `my-load-balancer-domain.tld`.
         #
-        # @return [PostObject] An object containing the URL, fields, and values needed to upload files via html forms.
+        # @return [PostObject] An object containing the URL, fields, and values needed to
+        #   upload files via HTML forms.
         #
-        # @raise [SignedUrlUnavailable] If the service account credentials
-        #   are missing. Service account credentials are acquired by following the
-        #   steps in [Service Account Authentication](
-        #   https://cloud.google.com/iam/docs/service-accounts).
+        # @raise [SignedUrlUnavailable] If the service account credentials are missing.
+        #   Service account credentials are acquired by following the steps in [Service
+        #   Account Authentication](https://cloud.google.com/iam/docs/service-accounts).
         #
         # @example
         #   require "google/cloud/storage"
@@ -1886,8 +1897,9 @@ module Google
         #   bucket = storage.bucket "my-todo-app"
         #
         #   conditions = [["starts-with", "$acl","public"]]
-        #   post = bucket.generate_signed_post_policy_v4 "avatars/heidi/400x400.png", expires: 10,
-        #                                                                             conditions: conditions
+        #   post = bucket.generate_signed_post_policy_v4 "avatars/heidi/400x400.png",
+        #                                                expires:    10,
+        #                                                conditions: conditions
         #
         #   post.url #=> "https://storage.googleapis.com/my-todo-app/"
         #   post.fields["key"] #=> "my-todo-app/avatars/heidi/400x400.png"
@@ -1928,10 +1940,11 @@ module Google
         #
         #   bucket = storage.bucket "my-todo-app"
         #   conditions = [["starts-with", "$acl","public"]]
-        #   post = bucket.generate_signed_post_policy_v4(
-        #     "avatars/heidi/400x400.png", expires: 10,
-        #     conditions: conditions, issuer: issuer, signer: signer
-        #   )
+        #   post = bucket.generate_signed_post_policy_v4 "avatars/heidi/400x400.png",
+        #                                                expires:    10,
+        #                                                conditions: conditions,
+        #                                                issuer:     issuer,
+        #                                                signer:     signer
         #
         #   post.url #=> "https://storage.googleapis.com/my-todo-app/"
         #   post.fields["key"] #=> "my-todo-app/avatars/heidi/400x400.png"
