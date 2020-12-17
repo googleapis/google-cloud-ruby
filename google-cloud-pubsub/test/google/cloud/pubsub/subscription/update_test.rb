@@ -403,6 +403,47 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       _(subscription.labels).must_equal new_labels
     end
 
+    it "updates retry_minimum_backoff" do
+      _(subscription).must_be :reference?
+      _(subscription).wont_be :resource?
+      _(subscription.name).must_equal sub_path
+      retry_policy = Google::Cloud::PubSub::V1::RetryPolicy.new minimum_backoff: new_retry_minimum_backoff, maximum_backoff: retry_maximum_backoff
+      update_sub = Google::Cloud::PubSub::V1::Subscription.new name: sub_path, retry_policy: retry_policy
+      update_mask = Google::Protobuf::FieldMask.new paths: ["retry_policy"]
+      mock = Minitest::Mock.new
+      mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+      subscription.service.mocked_subscriber = mock
+
+      subscription.retry_policy = Google::Cloud::PubSub::RetryPolicy.new minimum_backoff: new_retry_minimum_backoff, maximum_backoff: retry_maximum_backoff
+
+      mock.verify
+
+      _(subscription).wont_be :reference?
+      _(subscription).must_be :resource?
+      _(subscription.retry_policy.minimum_backoff).must_equal new_retry_minimum_backoff
+      _(subscription.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
+    end
+
+    it "updates retry_maximum_backoff" do
+      _(subscription).must_be :reference?
+      _(subscription).wont_be :resource?
+      retry_policy = Google::Cloud::PubSub::V1::RetryPolicy.new minimum_backoff: retry_minimum_backoff, maximum_backoff: new_retry_maximum_backoff
+      update_sub = Google::Cloud::PubSub::V1::Subscription.new name: sub_path, retry_policy: retry_policy
+      update_mask = Google::Protobuf::FieldMask.new paths: ["retry_policy"]
+      mock = Minitest::Mock.new
+      mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+      subscription.service.mocked_subscriber = mock
+
+      subscription.retry_policy = Google::Cloud::PubSub::RetryPolicy.new minimum_backoff: retry_minimum_backoff, maximum_backoff: new_retry_maximum_backoff
+
+      mock.verify
+
+      _(subscription).wont_be :reference?
+      _(subscription).must_be :resource?
+      _(subscription.retry_policy.minimum_backoff).must_equal retry_minimum_backoff
+      _(subscription.retry_policy.maximum_backoff).must_equal new_retry_maximum_backoff
+    end
+
     it "makes an HTTP API call to update endpoint" do
       new_push_endpoint = "https://foo.bar/baz"
 
