@@ -474,24 +474,65 @@ describe "Files Snippets" do
 
     assert bucket.file remote_file_name
   end
+  describe "post object" do
+    require "net/http"
+    require "uri"
+    let(:uri) { URI.parse Google::Cloud::Storage::GOOGLEAPIS_URL }
+    let(:data) { File.expand_path "../../acceptance/data/logo.jpg", __dir__ }
 
-  it "generate_signed_post_policy_v4" do
-    refute bucket.file remote_file_name
+    it "generate_signed_post_policy_v4" do
+      refute bucket.file remote_file_name
+      post_object = nil
+      out, _err = capture_io do
+        post_object = generate_signed_post_policy_v4 bucket_name: bucket.name,
+                                                     file_name:   remote_file_name
+      end
 
-    out, _err = capture_io do
-      generate_signed_post_policy_v4 bucket_name: bucket.name,
-                                     file_name:   remote_file_name
+      assert_includes out, "<form action='https://storage.googleapis.com/#{bucket.name}/'"
+      assert_includes out, "<input name='key' value='#{remote_file_name}'"
+      assert_includes out, "<input name='x-goog-signature'"
+      assert_includes out, "<input name='x-goog-date'"
+      assert_includes out, "<input name='x-goog-credential'"
+      assert_includes out, "<input name='x-goog-algorithm' value='GOOG4-RSA-SHA256'"
+      assert_includes out, "<input name='policy'"
+      assert_includes out, "<input name='x-goog-meta-test' value='data'"
+      assert_includes out, "<input type='file' name='file'/>"
+      assert_includes out, "<input type='submit' value='Upload File'/>"
+
+      assert post_object
+      expected_keys = [
+        "key",
+        "policy",
+        "x-goog-algorithm",
+        "x-goog-credential",
+        "x-goog-date",
+        "x-goog-meta-test",
+        "x-goog-signature"
+      ]
+      assert_equal expected_keys, post_object.fields.keys.sort
+
+      form_data = [["file", File.open(data)]]
+
+      post_object.fields.each do |key, value|
+        form_data.push [key, value]
+      end
+
+      http = Net::HTTP.new uri.host, uri.port
+      http.use_ssl = true
+      request = Net::HTTP::Post.new post_object.url
+      request.set_form form_data, "multipart/form-data"
+
+      response = http.request request
+
+      _(response.code).must_equal "204"
+      file = bucket.file post_object.fields["key"]
+      _(file).wont_be :nil?
+      Tempfile.open ["google-cloud-logo", ".jpg"] do |tmpfile|
+        tmpfile.binmode
+        downloaded = file.download tmpfile
+        _(File.read(downloaded.path, mode: "rb")).must_equal File.read(data, mode: "rb")
+      end
     end
-
-    assert_includes out, "<form action='https://storage.googleapis.com/#{bucket.name}/'"
-    assert_includes out, "<input name='key' value='#{remote_file_name}'"
-    assert_includes out, "<input name='x-goog-signature'"
-    assert_includes out, "<input name='x-goog-date'"
-    assert_includes out, "<input name='x-goog-credential'"
-    assert_includes out, "<input name='x-goog-algorithm' value='GOOG4-RSA-SHA256'"
-    assert_includes out, "<input name='policy'"
-    assert_includes out, "<input name='x-goog-meta-test' value='data'"
-    assert_includes out, "<input type='file' name='file'/>"
   end
 
   it "set_event_based_hold" do
