@@ -34,6 +34,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Settings for validating messages published against a schema.
+        # @!attribute [rw] schema
+        #   @return [::String]
+        #     Required. The name of the schema that messages published should be
+        #     validated against. Format is `projects/{project}/schemas/{schema}`. The
+        #     value of this field will be `_deleted-schema_` if the schema has been
+        #     deleted.
+        # @!attribute [rw] encoding
+        #   @return [::Google::Cloud::PubSub::V1::Encoding]
+        #     The encoding of messages validated against `schema`.
+        class SchemaSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A topic resource.
         # @!attribute [rw] name
         #   @return [::String]
@@ -58,6 +73,15 @@ module Google
         #     to messages published on this topic.
         #
         #     The expected format is `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+        # @!attribute [rw] schema_settings
+        #   @return [::Google::Cloud::PubSub::V1::SchemaSettings]
+        #     Settings for validating messages published against a schema.
+        #
+        #     EXPERIMENTAL: Schema support is in development and may not work yet.
+        # @!attribute [rw] satisfies_pzs
+        #   @return [::Boolean]
+        #     Reserved for future use. This field is set only in responses from the
+        #     server; it is ignored if it is set in any requests.
         class Topic
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

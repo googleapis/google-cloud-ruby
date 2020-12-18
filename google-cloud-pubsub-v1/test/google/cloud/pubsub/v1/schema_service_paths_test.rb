@@ -20,13 +20,13 @@ require "helper"
 
 require "gapic/grpc/service_stub"
 
-require "google/cloud/pubsub/v1/publisher"
+require "google/cloud/pubsub/v1/schema_service"
 
-class ::Google::Cloud::PubSub::V1::Publisher::ClientPathsTest < Minitest::Test
+class ::Google::Cloud::PubSub::V1::SchemaService::ClientPathsTest < Minitest::Test
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::PubSub::V1::Publisher::Client.new do |config|
+      client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -38,39 +38,12 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientPathsTest < Minitest::Test
   def test_schema_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::PubSub::V1::Publisher::Client.new do |config|
+      client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       path = client.schema_path project: "value0", schema: "value1"
       assert_equal "projects/value0/schemas/value1", path
-    end
-  end
-
-  def test_subscription_path
-    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::PubSub::V1::Publisher::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      path = client.subscription_path project: "value0", subscription: "value1"
-      assert_equal "projects/value0/subscriptions/value1", path
-    end
-  end
-
-  def test_topic_path
-    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::PubSub::V1::Publisher::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      path = client.topic_path project: "value0", topic: "value1"
-      assert_equal "projects/value0/topics/value1", path
-
-      path = client.topic_path
-      assert_equal "_deleted-topic_", path
     end
   end
 end
