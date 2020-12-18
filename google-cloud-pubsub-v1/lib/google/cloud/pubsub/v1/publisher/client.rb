@@ -218,8 +218,8 @@ module Google
             # Service calls
 
             ##
-            # Creates the given topic with the given name. See the [resource name rules](
-            # https://cloud.google.com/pubsub/docs/admin#resource_names).
+            # Creates the given topic with the given name. See the [resource name rules]
+            # (https://cloud.google.com/pubsub/docs/admin#resource_names).
             #
             # @overload create_topic(request, options = nil)
             #   Pass arguments to `create_topic` via a request object, either of type
@@ -231,7 +231,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_topic(name: nil, labels: nil, message_storage_policy: nil, kms_key_name: nil)
+            # @overload create_topic(name: nil, labels: nil, message_storage_policy: nil, kms_key_name: nil, schema_settings: nil, satisfies_pzs: nil)
             #   Pass arguments to `create_topic` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -255,6 +255,13 @@ module Google
             #     to messages published on this topic.
             #
             #     The expected format is `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+            #   @param schema_settings [::Google::Cloud::PubSub::V1::SchemaSettings, ::Hash]
+            #     Settings for validating messages published against a schema.
+            #
+            #     EXPERIMENTAL: Schema support is in development and may not work yet.
+            #   @param satisfies_pzs [::Boolean]
+            #     Reserved for future use. This field is set only in responses from the
+            #     server; it is ignored if it is set in any requests.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Topic]

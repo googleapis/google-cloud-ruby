@@ -27,7 +27,7 @@ export PUBSUB_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/pubsub/v1"
 
-client = ::Google::Cloud::PubSub::V1::Publisher::Client.new
+client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-pubsub-v1
 checks for credentials are configured on the service Credentials class (such as
-{::Google::Cloud::PubSub::V1::Publisher::Credentials}):
+{::Google::Cloud::PubSub::V1::SchemaService::Credentials}):
 
 1. `PUBSUB_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `PUBSUB_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/pubsub/v1"
 
 ENV["PUBSUB_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = ::Google::Cloud::PubSub::V1::Publisher::Client.new
+client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ environment variables. Either on an individual client initialization:
 ```ruby
 require "google/cloud/pubsub/v1"
 
-client = ::Google::Cloud::PubSub::V1::Publisher::Client.new do |config|
+client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -98,11 +98,11 @@ Or configured globally for all clients:
 ```ruby
 require "google/cloud/pubsub/v1"
 
-::Google::Cloud::PubSub::V1::Publisher::Client.configure do |config|
+::Google::Cloud::PubSub::V1::SchemaService::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = ::Google::Cloud::PubSub::V1::Publisher::Client.new
+client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new
 ```
 
 ### Cloud SDK

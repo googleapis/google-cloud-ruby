@@ -39,6 +39,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Schema resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/schemas/{schema}`
+            #
+            # @param project [String]
+            # @param schema [String]
+            #
+            # @return [::String]
+            def schema_path project:, schema:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/schemas/#{schema}"
+            end
+
+            ##
             # Create a fully-qualified Subscription resource string.
             #
             # The resource will be in the following format:

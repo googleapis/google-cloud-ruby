@@ -26,9 +26,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/pubsub/v1"
 
-client = ::Google::Cloud::PubSub::V1::Publisher::Client.new
+client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new
 request = my_create_request
-response = client.create_topic request
+response = client.create_schema request
 ```
 
 View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-pubsub-v1/latest)

@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "244b7ae3fec68b2d1a46c2693bc2849dd945f4ec"
+        "sha": "070dbb84eff752fd4a1dd1f3a94d1acfb851e392"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
-        "internalRef": "326288259"
+        "sha": "41d8fbfec9d4bc4a8859f78185713950913b4bf3",
+        "internalRef": "348038736"
       }
     }
   ],
@@ -48,6 +48,10 @@
     "lib/google/cloud/pubsub/v1/publisher/client.rb",
     "lib/google/cloud/pubsub/v1/publisher/credentials.rb",
     "lib/google/cloud/pubsub/v1/publisher/paths.rb",
+    "lib/google/cloud/pubsub/v1/schema_service.rb",
+    "lib/google/cloud/pubsub/v1/schema_service/client.rb",
+    "lib/google/cloud/pubsub/v1/schema_service/credentials.rb",
+    "lib/google/cloud/pubsub/v1/schema_service/paths.rb",
     "lib/google/cloud/pubsub/v1/subscriber.rb",
     "lib/google/cloud/pubsub/v1/subscriber/client.rb",
     "lib/google/cloud/pubsub/v1/subscriber/credentials.rb",
@@ -56,6 +60,8 @@
     "lib/google/iam/v1/iam_policy_services_pb.rb",
     "lib/google/pubsub/v1/pubsub_pb.rb",
     "lib/google/pubsub/v1/pubsub_services_pb.rb",
+    "lib/google/pubsub/v1/schema_pb.rb",
+    "lib/google/pubsub/v1/schema_services_pb.rb",
     "proto_docs/README.md",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
@@ -67,10 +73,13 @@
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/pubsub/v1/pubsub.rb",
+    "proto_docs/google/pubsub/v1/schema.rb",
     "proto_docs/google/type/expr.rb",
     "test/google/cloud/pubsub/v1/iam_policy_test.rb",
     "test/google/cloud/pubsub/v1/publisher_paths_test.rb",
     "test/google/cloud/pubsub/v1/publisher_test.rb",
+    "test/google/cloud/pubsub/v1/schema_service_paths_test.rb",
+    "test/google/cloud/pubsub/v1/schema_service_test.rb",
     "test/google/cloud/pubsub/v1/subscriber_paths_test.rb",
     "test/google/cloud/pubsub/v1/subscriber_test.rb",
     "test/helper.rb"
