@@ -370,13 +370,11 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
-          Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
-            spanner = Google::Cloud::Spanner.new emulator_host: emulator_host
-            _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
-            _(spanner.project).must_equal "project-id"
-            _(spanner.service.credentials).must_equal :this_channel_is_insecure
-            _(spanner.service.host).must_equal emulator_host
-          end
+          spanner = Google::Cloud::Spanner.new emulator_host: emulator_host
+          _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+          _(spanner.project).must_equal "project-id"
+          _(spanner.service.credentials).must_equal :this_channel_is_insecure
+          _(spanner.service.host).must_equal emulator_host
         end
       end
     end
