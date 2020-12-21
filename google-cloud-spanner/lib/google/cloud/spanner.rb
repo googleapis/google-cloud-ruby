@@ -49,6 +49,8 @@ module Google
       # @param [String, Hash, Google::Auth::Credentials] credentials The path to
       #   the keyfile as a String, the contents of the keyfile as a Hash, or a
       #   Google::Auth::Credentials object. (See {Spanner::Credentials})
+      #   If `emulator_host` is present, this becomes optional and the value is
+      #   internally overriden with `:this_channel_is_insecure`.
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
@@ -60,7 +62,7 @@ module Google
       #   * `https://www.googleapis.com/auth/spanner.data`
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
-      #   If the param is nil, uses the default endpoint.
+      #   If the param is nil, uses `emulator_host` or the default endpoint.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
