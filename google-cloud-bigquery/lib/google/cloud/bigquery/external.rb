@@ -107,6 +107,7 @@ module Google
             "backup"                 => "DATASTORE_BACKUP",
             "datastore_backup"       => "DATASTORE_BACKUP",
             "bigtable"               => "BIGTABLE",
+            "orc"                    => "ORC",
             "parquet"                => "PARQUET"
           }[format.to_s.downcase]
           return val unless val.nil?
@@ -338,6 +339,29 @@ module Google
           #
           def bigtable?
             @gapi.source_format == "BIGTABLE"
+          end
+
+          ##
+          # Whether the data format is "ORC".
+          #
+          # @return [Boolean]
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+          #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+          #   external_data = bigquery.external gcs_uri, format: :orc do |ext|
+          #     ext.hive_partitioning_mode = :auto
+          #     ext.hive_partitioning_source_uri_prefix = source_uri_prefix
+          #   end
+          #   external_data.format #=> "ORC"
+          #   external_data.orc? #=> true
+          #
+          def orc?
+            @gapi.source_format == "ORC"
           end
 
           ##

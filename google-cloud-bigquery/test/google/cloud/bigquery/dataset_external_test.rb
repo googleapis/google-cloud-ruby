@@ -459,4 +459,72 @@ describe Google::Cloud::Bigquery::Dataset, :external, :mock_bigquery do
       _(external.format).must_equal "BIGTABLE"
     end
   end
+
+  describe "ORC" do
+    it "determines ORC from the format (:orc)" do
+      external = bigquery.external "some url", format: :orc
+      _(external).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+      _(external.urls).must_equal ["some url"]
+      _(external).must_be :orc?
+      _(external.format).must_equal "ORC"
+    end
+
+    it "determines ORC from the format (orc)" do
+      external = bigquery.external "some url", format: "orc"
+      _(external).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+      _(external.urls).must_equal ["some url"]
+      _(external).must_be :orc?
+      _(external.format).must_equal "ORC"
+    end
+
+    it "determines ORC from the format (:ORC)" do
+      external = bigquery.external "some url", format: :ORC
+      _(external).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+      _(external.urls).must_equal ["some url"]
+      _(external).must_be :orc?
+      _(external.format).must_equal "ORC"
+    end
+
+    it "determines ORC from the format (ORC)" do
+      external = bigquery.external "some url", format: "ORC"
+      _(external).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+      _(external.urls).must_equal ["some url"]
+      _(external).must_be :orc?
+      _(external.format).must_equal "ORC"
+    end
+  end
+
+  describe "PARQUET" do
+    it "determines PARQUET from the format (:parquet)" do
+      external = bigquery.external "some url", format: :parquet
+      _(external).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+      _(external.urls).must_equal ["some url"]
+      _(external).must_be :parquet?
+      _(external.format).must_equal "PARQUET"
+    end
+
+    it "determines PARQUET from the format (parquet)" do
+      external = bigquery.external "some url", format: "parquet"
+      _(external).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+      _(external.urls).must_equal ["some url"]
+      _(external).must_be :parquet?
+      _(external.format).must_equal "PARQUET"
+    end
+
+    it "determines PARQUET from the format (:PARQUET)" do
+      external = bigquery.external "some url", format: :PARQUET
+      _(external).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+      _(external.urls).must_equal ["some url"]
+      _(external).must_be :parquet?
+      _(external.format).must_equal "PARQUET"
+    end
+
+    it "determines PARQUET from the format (PARQUET)" do
+      external = bigquery.external "some url", format: "PARQUET"
+      _(external).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+      _(external.urls).must_equal ["some url"]
+      _(external).must_be :parquet?
+      _(external.format).must_equal "PARQUET"
+    end
+  end
 end
