@@ -91,4 +91,34 @@ describe Google::Cloud::Bigquery::Table, :external, :mock_bigquery do
     _(table.external.schema).must_be :frozen?
     _(table.external).must_be :frozen?
   end
+
+  describe "hive partioning options" do
+    let(:source_uri_prefix) { "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/" }
+    let(:table_gapi) do
+      gapi = Google::Apis::BigqueryV2::Table.from_json table_hash.to_json
+      gapi.external_data_configuration = Google::Apis::BigqueryV2::ExternalDataConfiguration.new(
+        source_uris: ["gs://my-bucket/path/*"],
+        source_format: "PARQUET",
+        hive_partitioning_options: Google::Apis::BigqueryV2::HivePartitioningOptions.new(
+          mode: "AUTO",
+          require_partition_filter: true,
+          source_uri_prefix: source_uri_prefix
+        )
+      )
+      gapi
+    end
+    let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+
+    it "can have a permanent external data source" do
+      _(table.external).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+      _(table.external).must_be :frozen?
+      _(table.external.urls).must_equal ["gs://my-bucket/path/*"]
+      _(table.external.format).must_equal "PARQUET"
+      _(table.external.parquet?).must_equal true
+      _(table.external.hive_partitioning?).must_equal true
+      _(table.external.hive_partitioning_mode).must_equal "AUTO"
+      _(table.external.hive_partitioning_require_partition_filter?).must_equal true
+      _(table.external.hive_partitioning_source_uri_prefix).must_equal source_uri_prefix
+    end
+  end
 end

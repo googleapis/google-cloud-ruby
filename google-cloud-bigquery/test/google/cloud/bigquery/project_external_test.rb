@@ -15,6 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Bigquery::Project, :external, :mock_bigquery do
+  let(:source_uri_prefix) { "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/" }
   it "raises if not given valid arguments" do
     expect { bigquery.external nil }.must_raise ArgumentError
   end
@@ -25,6 +26,21 @@ describe Google::Cloud::Bigquery::Project, :external, :mock_bigquery do
     _(external.urls).must_equal ["gs://my-bucket/path/to/file.csv"]
     _(external).must_be :csv?
     _(external.format).must_equal "CSV"
+  end
+
+  it "creates an external data source with hive partitioning options" do
+    external_data = bigquery.external "gs://my-bucket/path/*", format: :parquet do |ext|
+      ext.hive_partitioning_mode = :auto
+      ext.hive_partitioning_require_partition_filter = true
+      ext.hive_partitioning_source_uri_prefix = source_uri_prefix
+    end
+
+    _(external_data).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+    _(external_data.format).must_equal "PARQUET"
+    _(external_data.parquet?).must_equal true
+    _(external_data.hive_partitioning_mode).must_equal "AUTO"
+    _(external_data.hive_partitioning_require_partition_filter?).must_equal true
+    _(external_data.hive_partitioning_source_uri_prefix).must_equal source_uri_prefix
   end
 
   describe "CSV" do

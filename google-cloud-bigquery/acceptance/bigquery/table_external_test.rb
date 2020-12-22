@@ -92,7 +92,7 @@ describe Google::Cloud::Bigquery::Table, :external, :bigquery do
       { id: 6, name: "stephen", breed: "idkanycatbreeds" }
     ]
   end
-focus
+
   it "creates a table pointing to external hive partitioning parquet (with AUTO)" do
     gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
     source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
@@ -106,6 +106,7 @@ focus
     _(external_data).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
     _(external_data.format).must_equal "PARQUET"
     _(external_data.parquet?).must_equal true
+    _(external_data.hive_partitioning?).must_equal true
     _(external_data.hive_partitioning_mode).must_equal "AUTO"
     _(external_data.hive_partitioning_require_partition_filter?).must_equal true
     _(external_data.hive_partitioning_source_uri_prefix).must_equal source_uri_prefix
@@ -121,6 +122,7 @@ focus
     _(table.external).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
     _(table.external.format).must_equal "PARQUET"
     _(table.external.parquet?).must_equal true
+    _(table.external.hive_partitioning?).must_equal true
     _(table.external.hive_partitioning_mode).must_equal "AUTO"
     _(table.external.hive_partitioning_require_partition_filter?).must_equal true
     _(table.external.hive_partitioning_source_uri_prefix).must_equal source_uri_prefix
