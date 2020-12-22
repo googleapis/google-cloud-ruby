@@ -52,6 +52,24 @@ module Google
       #   # Retrieve the next page of results
       #   data = data.next if data.next?
       #
+      # @example Hive partitioning options:
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #
+      #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+      #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+      #   external_data = bigquery.external gcs_uri, format: :parquet do |ext|
+      #     ext.hive_partitioning_mode = "AUTO"
+      #     ext.hive_partitioning_require_partition_filter = true
+      #     ext.hive_partitioning_source_uri_prefix = source_uri_prefix
+      #   end
+      #
+      #   external_data.hive_partitioning? #=> true
+      #   external_data.hive_partitioning_mode #=> "AUTO"
+      #   external_data.hive_partitioning_require_partition_filter? #=> true
+      #   external_data.hive_partitioning_source_uri_prefix #=> source_uri_prefix
+      #
       module External
         ##
         # @private New External from URLs and format
@@ -79,7 +97,8 @@ module Google
         # @private Determine source_format from inputs
         def self.source_format_for urls, format
           val = {
-            "csv" => "CSV",          "avro" => "AVRO",
+            "csv"                    => "CSV",
+            "avro"                   => "AVRO",
             "json"                   => "NEWLINE_DELIMITED_JSON",
             "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
             "sheets"                 => "GOOGLE_SHEETS",
@@ -87,7 +106,8 @@ module Google
             "datastore"              => "DATASTORE_BACKUP",
             "backup"                 => "DATASTORE_BACKUP",
             "datastore_backup"       => "DATASTORE_BACKUP",
-            "bigtable"               => "BIGTABLE"
+            "bigtable"               => "BIGTABLE",
+            "parquet"                => "PARQUET"
           }[format.to_s.downcase]
           return val unless val.nil?
           Array(urls).each do |url|
@@ -110,7 +130,7 @@ module Google
           when "GOOGLE_SHEETS"          then External::SheetsSource
           when "BIGTABLE"               then External::BigtableSource
           else
-            # AVRO and DATASTORE_BACKUP
+            # AVRO, DATASTORE_BACKUP, PARQUET
             External::DataSource
           end
         end
@@ -147,6 +167,24 @@ module Google
         #   end
         #   # Retrieve the next page of results
         #   data = data.next if data.next?
+        #
+        # @example Hive partitioning options:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+        #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+        #   external_data = bigquery.external gcs_uri, format: :parquet do |ext|
+        #     ext.hive_partitioning_mode = "AUTO"
+        #     ext.hive_partitioning_require_partition_filter = true
+        #     ext.hive_partitioning_source_uri_prefix = source_uri_prefix
+        #   end
+        #
+        #   external_data.hive_partitioning? #=> true
+        #   external_data.hive_partitioning_mode #=> "AUTO"
+        #   external_data.hive_partitioning_require_partition_filter? #=> true
+        #   external_data.hive_partitioning_source_uri_prefix #=> source_uri_prefix
         #
         class DataSource
           ##
@@ -300,6 +338,29 @@ module Google
           #
           def bigtable?
             @gapi.source_format == "BIGTABLE"
+          end
+
+          ##
+          # Whether the data format is "PARQUET".
+          #
+          # @return [Boolean]
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+          #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+          #   external_data = bigquery.external gcs_uri, format: :parquet do |ext|
+          #     ext.hive_partitioning_mode = "AUTO"
+          #     ext.hive_partitioning_source_uri_prefix = source_uri_prefix
+          #   end
+          #   external_data.format #=> "PARQUET"
+          #   external_data.parquet? #=> true
+          #
+          def parquet?
+            @gapi.source_format == "PARQUET"
           end
 
           ##
@@ -534,6 +595,237 @@ module Google
           def max_bad_records= new_max_bad_records
             frozen_check!
             @gapi.max_bad_records = new_max_bad_records
+          end
+
+          ###
+          # Checks if hive partitioning options are set.
+          #
+          # Not all storage formats support hive partitioning. Requesting hive partitioning on an unsupported format
+          # will lead to an error. Currently supported types include: `avro`, `csv`, `json`, `orc` and `parquet`.
+          # If your data is stored in ORC or Parquet on Cloud Storage, see [Querying columnar formats on Cloud
+          # Storage](https://cloud.google.com/bigquery/pricing#columnar_formats_pricing).
+          #
+          # @return [Boolean] `true` when hive partitioning options are set, or `false` otherwise.
+          #
+          # @example Hive partitioning options:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+          #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+          #   external_data = bigquery.external gcs_uri, format: :parquet do |ext|
+          #     ext.hive_partitioning_mode = "AUTO"
+          #     ext.hive_partitioning_require_partition_filter = true
+          #     ext.hive_partitioning_source_uri_prefix = source_uri_prefix
+          #   end
+          #
+          #   external_data.hive_partitioning? #=> true
+          #   external_data.hive_partitioning_mode #=> "AUTO"
+          #   external_data.hive_partitioning_require_partition_filter? #=> true
+          #   external_data.hive_partitioning_source_uri_prefix #=> source_uri_prefix
+          #
+          def hive_partitioning?
+            !@gapi.hive_partitioning_options.nil?
+          end
+
+          ###
+          # The mode of hive partitioning to use when reading data. The following modes are supported:
+          #
+          #   1. `AUTO`: automatically infer partition key name(s) and type(s).
+          #   2. `STRINGS`: automatically infer partition key name(s). All types are interpreted as strings.
+          #   3. `CUSTOM`: partition key schema is encoded in the source URI prefix.
+          #
+          # @return [String, nil] The mode of hive partitioning, or `nil` if not set.
+          #
+          # @example Hive partitioning options:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+          #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+          #   external_data = bigquery.external gcs_uri, format: :parquet do |ext|
+          #     ext.hive_partitioning_mode = "AUTO"
+          #     ext.hive_partitioning_require_partition_filter = true
+          #     ext.hive_partitioning_source_uri_prefix = source_uri_prefix
+          #   end
+          #
+          #   external_data.hive_partitioning? #=> true
+          #   external_data.hive_partitioning_mode #=> "AUTO"
+          #   external_data.hive_partitioning_require_partition_filter? #=> true
+          #   external_data.hive_partitioning_source_uri_prefix #=> source_uri_prefix
+          #
+          def hive_partitioning_mode
+            @gapi.hive_partitioning_options.mode if hive_partitioning?
+          end
+
+          ##
+          # Sets the mode of hive partitioning to use when reading data. The following modes are supported:
+          #
+          #   1. `AUTO`: automatically infer partition key name(s) and type(s).
+          #   2. `STRINGS`: automatically infer partition key name(s). All types are interpreted as strings.
+          #   3. `CUSTOM`: partition key schema is encoded in the source URI prefix.
+          #
+          # Not all storage formats support hive partitioning. Requesting hive partitioning on an unsupported format
+          # will lead to an error. Currently supported types include: `avro`, `csv`, `json`, `orc` and `parquet`.
+          # If your data is stored in ORC or Parquet on Cloud Storage, see [Querying columnar formats on Cloud
+          # Storage](https://cloud.google.com/bigquery/pricing#columnar_formats_pricing).
+          #
+          # See {#format}, {#hive_partitioning_require_partition_filter=} and {#hive_partitioning_source_uri_prefix=}.
+          #
+          # @param [String, Symbol] mode The mode of hive partitioning to use when reading data.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+          #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+          #   external_data = bigquery.external gcs_uri, format: :parquet do |ext|
+          #     ext.hive_partitioning_mode = "AUTO"
+          #     ext.hive_partitioning_require_partition_filter = true
+          #     ext.hive_partitioning_source_uri_prefix = source_uri_prefix
+          #   end
+          #
+          #   external_data.hive_partitioning? #=> true
+          #   external_data.hive_partitioning_mode #=> "AUTO"
+          #   external_data.hive_partitioning_require_partition_filter? #=> true
+          #   external_data.hive_partitioning_source_uri_prefix #=> source_uri_prefix
+          #
+          def hive_partitioning_mode= mode
+            mode = mode.to_s.upcase if mode
+            @gapi.hive_partitioning_options ||= Google::Apis::BigqueryV2::HivePartitioningOptions.new
+            @gapi.hive_partitioning_options.mode = mode.upcase
+          end
+
+          ###
+          # Whether queries over this table require a partition filter that can be used for partition elimination to be
+          # specified. Note that this field should only be true when creating a permanent external table or querying a
+          # temporary external table.
+          #
+          # @return [Boolean] `true` when queries over this table require a partition filter, or `false` otherwise.
+          #
+          # @example Hive partitioning options:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+          #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+          #   external_data = bigquery.external gcs_uri, format: :parquet do |ext|
+          #     ext.hive_partitioning_mode = "AUTO"
+          #     ext.hive_partitioning_require_partition_filter = true
+          #     ext.hive_partitioning_source_uri_prefix = source_uri_prefix
+          #   end
+          #
+          #   external_data.hive_partitioning? #=> true
+          #   external_data.hive_partitioning_mode #=> "AUTO"
+          #   external_data.hive_partitioning_require_partition_filter? #=> true
+          #   external_data.hive_partitioning_source_uri_prefix #=> source_uri_prefix
+          #
+          def hive_partitioning_require_partition_filter?
+            return false unless hive_partitioning?
+            !@gapi.hive_partitioning_options.require_partition_filter.nil?
+          end
+
+          ##
+          # Sets whether queries over the table using this external data source require a partition filter
+          # that can be used for partition elimination to be specified.
+          #
+          # See {#format}, {#hive_partitioning_mode=} and {#hive_partitioning_source_uri_prefix=}.
+          #
+          # @param [Boolean] require_partition_filter `true` if a partition filter must be specified, `false` otherwise.
+          #
+          # @example Hive partitioning options:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+          #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+          #   external_data = bigquery.external gcs_uri, format: :parquet do |ext|
+          #     ext.hive_partitioning_mode = "AUTO"
+          #     ext.hive_partitioning_require_partition_filter = true
+          #     ext.hive_partitioning_source_uri_prefix = source_uri_prefix
+          #   end
+          #
+          #   external_data.hive_partitioning? #=> true
+          #   external_data.hive_partitioning_mode #=> "AUTO"
+          #   external_data.hive_partitioning_require_partition_filter? #=> true
+          #   external_data.hive_partitioning_source_uri_prefix #=> source_uri_prefix
+          #
+          def hive_partitioning_require_partition_filter= require_partition_filter
+            @gapi.hive_partitioning_options ||= Google::Apis::BigqueryV2::HivePartitioningOptions.new
+            @gapi.hive_partitioning_options.require_partition_filter = require_partition_filter
+          end
+
+          ###
+          # The common prefix for all source uris when hive partition detection is requested. The prefix must end
+          # immediately before the partition key encoding begins. For example, consider files following this data
+          # layout. `gs://bucket/path_to_table/dt=2019-01-01/country=BR/id=7/file.avro`
+          # `gs://bucket/path_to_table/dt=2018-12-31/country=CA/id=3/file.avro` When hive partitioning is requested with
+          # either `AUTO` or `STRINGS` mode, the common prefix can be either of `gs://bucket/path_to_table` or
+          # `gs://bucket/path_to_table/` (trailing slash does not matter).
+          #
+          # @return [String, nil] The common prefix for all source uris, or `nil` if not set.
+          #
+          # @example Hive partitioning options:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+          #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+          #   external_data = bigquery.external gcs_uri, format: :parquet do |ext|
+          #     ext.hive_partitioning_mode = "AUTO"
+          #     ext.hive_partitioning_require_partition_filter = true
+          #     ext.hive_partitioning_source_uri_prefix = source_uri_prefix
+          #   end
+          #
+          #   external_data.hive_partitioning? #=> true
+          #   external_data.hive_partitioning_mode #=> "AUTO"
+          #   external_data.hive_partitioning_require_partition_filter? #=> true
+          #   external_data.hive_partitioning_source_uri_prefix #=> source_uri_prefix
+          #
+          def hive_partitioning_source_uri_prefix
+            @gapi.hive_partitioning_options.source_uri_prefix if hive_partitioning?
+          end
+
+          ##
+          # Sets the common prefix for all source uris when hive partition detection is requested. The prefix must end
+          # immediately before the partition key encoding begins. For example, consider files following this data
+          # layout. `gs://bucket/path_to_table/dt=2019-01-01/country=BR/id=7/file.avro`
+          # `gs://bucket/path_to_table/dt=2018-12-31/country=CA/id=3/file.avro` When hive partitioning is requested with
+          # either `AUTO` or `STRINGS` mode, the common prefix can be either of `gs://bucket/path_to_table` or
+          # `gs://bucket/path_to_table/` (trailing slash does not matter).
+          #
+          # See {#format}, {#hive_partitioning_mode=} and {#hive_partitioning_require_partition_filter=}.
+          #
+          # @param [String] source_uri_prefix The common prefix for all source uris.
+          #
+          # @example Hive partitioning options:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+          #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+          #   external_data = bigquery.external gcs_uri, format: :parquet do |ext|
+          #     ext.hive_partitioning_mode = "AUTO"
+          #     ext.hive_partitioning_require_partition_filter = true
+          #     ext.hive_partitioning_source_uri_prefix = source_uri_prefix
+          #   end
+          #
+          #   external_data.hive_partitioning? #=> true
+          #   external_data.hive_partitioning_mode #=> "AUTO"
+          #   external_data.hive_partitioning_require_partition_filter? #=> true
+          #   external_data.hive_partitioning_source_uri_prefix #=> source_uri_prefix
+          #
+          def hive_partitioning_source_uri_prefix= source_uri_prefix
+            @gapi.hive_partitioning_options ||= Google::Apis::BigqueryV2::HivePartitioningOptions.new
+            @gapi.hive_partitioning_options.source_uri_prefix = source_uri_prefix
           end
 
           ##

@@ -37,15 +37,16 @@ describe Google::Cloud::Bigquery::Table, :external, :bigquery do
   let(:storage) { Google::Cloud.storage }
   let(:file) { bucket.file("pets.csv") || bucket.create_file(data_io, "pets.csv") }
 
-  it "creates a table pointing to external data (with autodetect)" do
-    csv_table = dataset.external file.to_gs_url do |csv|
-      csv.skip_leading_rows = 1
-      csv.autodetect = true
+  it "creates a table pointing to external CSV (with autodetect)" do
+    external_data = dataset.external file.to_gs_url do |ext|
+      _(ext).must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
+      ext.skip_leading_rows = 1
+      ext.autodetect = true
     end
 
     table_id = "pets_#{SecureRandom.hex(4)}"
     table = dataset.create_table table_id do |tbl|
-      tbl.external = csv_table
+      tbl.external = external_data
     end
 
     _(table).must_be :external?
@@ -62,10 +63,11 @@ describe Google::Cloud::Bigquery::Table, :external, :bigquery do
     ]
   end
 
-  it "creates a table pointing to external data (with schema)" do
-    csv_table = dataset.external file.to_gs_url do |csv|
-      csv.skip_leading_rows = 1
-      csv.schema do |s|
+  it "creates a table pointing to external CSV (with schema)" do
+    external_data = dataset.external file.to_gs_url do |ext|
+      _(ext).must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
+      ext.skip_leading_rows = 1
+      ext.schema do |s|
         s.integer   "id",    description: "id description",    mode: :required
         s.string    "name",  description: "name description",  mode: :required
         s.string    "breed", description: "breed description", mode: :required
@@ -74,7 +76,7 @@ describe Google::Cloud::Bigquery::Table, :external, :bigquery do
 
     table_id = "pets_#{SecureRandom.hex(4)}"
     table = dataset.create_table table_id do |tbl|
-      tbl.external = csv_table
+      tbl.external = external_data
     end
 
     _(table).must_be :external?
@@ -89,5 +91,42 @@ describe Google::Cloud::Bigquery::Table, :external, :bigquery do
       { id: 5, name: "ryan", breed: "golden retriever?" },
       { id: 6, name: "stephen", breed: "idkanycatbreeds" }
     ]
+  end
+
+  it "creates a table pointing to external hive partitioning parquet (with AUTO)" do
+    gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+    source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+
+    external_data = dataset.external gcs_uri, format: :parquet do |ext|
+      ext.hive_partitioning_mode = "AUTO"
+      ext.hive_partitioning_require_partition_filter = true
+      ext.hive_partitioning_source_uri_prefix = source_uri_prefix
+    end
+
+    _(external_data).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+    _(external_data.format).must_equal "PARQUET"
+    _(external_data.parquet?).must_equal true
+    _(external_data.hive_partitioning_mode).must_equal "AUTO"
+    _(external_data.hive_partitioning_require_partition_filter?).must_equal true
+    _(external_data.hive_partitioning_source_uri_prefix).must_equal source_uri_prefix
+
+    table_id = "hive_#{SecureRandom.hex(4)}"
+    table = dataset.create_table table_id do |tbl|
+      tbl.external = external_data
+    end
+
+    _(table).must_be :external?
+    _(table.external).wont_be :nil?
+    _(table.external).must_be :frozen?
+    _(table.external).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+    _(table.external.format).must_equal "PARQUET"
+    _(table.external.parquet?).must_equal true
+    _(table.external.hive_partitioning_mode).must_equal "AUTO"
+    _(table.external.hive_partitioning_require_partition_filter?).must_equal true
+    _(table.external.hive_partitioning_source_uri_prefix).must_equal source_uri_prefix
+
+    data = dataset.query "SELECT * FROM #{table_id} WHERE dt = '2020-11-15' LIMIT 3"
+    _(data.count).must_equal 3
+    _(data.first[:name]).must_equal "Alabama"
   end
 end

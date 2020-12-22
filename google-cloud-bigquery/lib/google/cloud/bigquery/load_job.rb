@@ -37,8 +37,8 @@ module Google
       #   bigquery = Google::Cloud::Bigquery.new
       #   dataset = bigquery.dataset "my_dataset"
       #
-      #   gs_url = "gs://my-bucket/file-name.csv"
-      #   load_job = dataset.load_job "my_new_table", gs_url do |schema|
+      #   gcs_uri = "gs://my-bucket/file-name.csv"
+      #   load_job = dataset.load_job "my_new_table", gcs_uri do |schema|
       #     schema.string "first_name", mode: :required
       #     schema.record "cities_lived", mode: :repeated do |nested_schema|
       #       nested_schema.string "place", mode: :required
@@ -1412,9 +1412,9 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+          #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
           #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.format = "parquet"
           #     job.hive_partitioning_mode = "AUTO"
           #     job.hive_partitioning_source_uri_prefix = source_uri_prefix
@@ -1451,9 +1451,9 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+          #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
           #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.format = "parquet"
           #     job.hive_partitioning_mode = "AUTO"
           #     job.hive_partitioning_source_uri_prefix = source_uri_prefix
@@ -1488,8 +1488,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://my-bucket/file-name.csv"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   gcs_uri = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.schema do |schema|
           #       schema.integer "my_table_id", mode: :required
           #       schema.string "my_table_data", mode: :required
@@ -1529,8 +1529,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://my-bucket/file-name.csv"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   gcs_uri = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.schema do |schema|
           #       schema.integer "my_table_id", mode: :required
           #       schema.string "my_table_data", mode: :required
@@ -1570,8 +1570,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://my-bucket/file-name.csv"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   gcs_uri = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.schema do |schema|
           #       schema.integer "my_table_id", mode: :required
           #       schema.string "my_table_data", mode: :required
@@ -1611,8 +1611,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://my-bucket/file-name.csv"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   gcs_uri = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.schema do |schema|
           #       schema.integer "my_table_id", mode: :required
           #       schema.string "my_table_data", mode: :required
@@ -1653,8 +1653,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://my-bucket/file-name.csv"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   gcs_uri = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.time_partitioning_type = "DAY"
           #   end
           #
@@ -1692,8 +1692,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://my-bucket/file-name.csv"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   gcs_uri = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.time_partitioning_type  = "DAY"
           #     job.time_partitioning_field = "dob"
           #     job.schema do |schema|
@@ -1728,8 +1728,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://my-bucket/file-name.csv"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   gcs_uri = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.time_partitioning_type = "DAY"
           #     job.time_partitioning_expiration = 86_400
           #   end
@@ -1788,8 +1788,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://my-bucket/file-name.csv"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   gcs_uri = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.time_partitioning_type  = "DAY"
           #     job.time_partitioning_field = "dob"
           #     job.schema do |schema|
