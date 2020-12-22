@@ -223,6 +223,28 @@ module Google
         end
 
         ##
+        # Checks if the source format is ORC.
+        #
+        # @return [Boolean] `true` when the source format is `ORC`,
+        #   `false` otherwise.
+        #
+        def orc?
+          val = @gapi.configuration.load.source_format
+          val == "ORC"
+        end
+
+        ##
+        # Checks if the source format is Parquet.
+        #
+        # @return [Boolean] `true` when the source format is `PARQUET`,
+        #   `false` otherwise.
+        #
+        def parquet?
+          val = @gapi.configuration.load.source_format
+          val == "PARQUET"
+        end
+
+        ##
         # Checks if the load operation accepts rows that are missing trailing
         # optional columns. The missing values are treated as nulls. If `false`,
         # records with missing trailing columns are treated as bad records, and
@@ -1393,9 +1415,9 @@ module Google
           ##
           # Sets the mode of hive partitioning to use when reading data. The following modes are supported:
           #
-          #   1. `AUTO`: automatically infer partition key name(s) and type(s).
-          #   2. `STRINGS`: automatically infer partition key name(s). All types are interpreted as strings.
-          #   3. `CUSTOM`: partition key schema is encoded in the source URI prefix.
+          #   1. `auto`: automatically infer partition key name(s) and type(s).
+          #   2. `strings`: automatically infer partition key name(s). All types are interpreted as strings.
+          #   3. `custom`: partition key schema is encoded in the source URI prefix.
           #
           # Not all storage formats support hive partitioning. Requesting hive partitioning on an unsupported format
           # will lead to an error. Currently supported types include: `avro`, `csv`, `json`, `orc` and `parquet`.
@@ -1415,8 +1437,8 @@ module Google
           #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
           #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
           #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
-          #     job.format = "parquet"
-          #     job.hive_partitioning_mode = "AUTO"
+          #     job.format = :parquet
+          #     job.hive_partitioning_mode = :auto
           #     job.hive_partitioning_source_uri_prefix = source_uri_prefix
           #   end
           #
@@ -1454,8 +1476,8 @@ module Google
           #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
           #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
           #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
-          #     job.format = "parquet"
-          #     job.hive_partitioning_mode = "AUTO"
+          #     job.format = :parquet
+          #     job.hive_partitioning_mode = :auto
           #     job.hive_partitioning_source_uri_prefix = source_uri_prefix
           #   end
           #

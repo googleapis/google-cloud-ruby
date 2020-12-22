@@ -284,18 +284,19 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :updater, :storage, :mock_
     job_gapi = load_job_url_gapi table_gapi.table_reference, gcs_uri, hive_partitioning_options: hive_partitioning_options
     job_gapi.configuration.load.source_format = "PARQUET"
     mock.expect :insert_job,
-                load_job_resp_gapi(table, gcs_uri, hive_partitioning_options: hive_partitioning_options),
+                load_job_resp_gapi(table, gcs_uri, source_format: "PARQUET", hive_partitioning_options: hive_partitioning_options),
                 [project, job_gapi]
     dataset.service.mocked_service = mock
 
     job = dataset.load_job table_id, gcs_uri do |j|
       j.format = "parquet"
-      j.hive_partitioning_mode = "AUTO"
+      j.hive_partitioning_mode = :auto
       j.hive_partitioning_source_uri_prefix = source_uri_prefix
     end
     mock.verify
 
     _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.parquet?).must_equal true
     _(job.hive_partitioning?).must_equal true
     _(job.hive_partitioning_mode).must_equal "AUTO"
     _(job.hive_partitioning_require_partition_filter?).must_equal false

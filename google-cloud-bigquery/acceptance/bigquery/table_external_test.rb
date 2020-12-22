@@ -92,13 +92,13 @@ describe Google::Cloud::Bigquery::Table, :external, :bigquery do
       { id: 6, name: "stephen", breed: "idkanycatbreeds" }
     ]
   end
-
+focus
   it "creates a table pointing to external hive partitioning parquet (with AUTO)" do
     gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
     source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
 
     external_data = dataset.external gcs_uri, format: :parquet do |ext|
-      ext.hive_partitioning_mode = "AUTO"
+      ext.hive_partitioning_mode = :auto
       ext.hive_partitioning_require_partition_filter = true
       ext.hive_partitioning_source_uri_prefix = source_uri_prefix
     end

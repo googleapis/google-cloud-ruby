@@ -974,9 +974,16 @@ class MockBigquery < Minitest::Spec
     )
   end
 
-  def load_job_resp_gapi table, load_url, job_id: "job_9876543210", location: "US", labels: nil, hive_partitioning_options: nil
+  def load_job_resp_gapi table,
+                         load_url,
+                         job_id: "job_9876543210",
+                         location: "US",
+                         labels: nil,
+                         source_format: nil,
+                         hive_partitioning_options: nil
     hash = random_job_hash job_id, location: location
     hash["configuration"]["load"] = {
+      "sourceFormat" => source_format,
       "sourceUris" => [load_url],
       "destinationTable" => {
         "projectId" => table.project_id,
