@@ -32,8 +32,6 @@ module Google
         #
         #     LOCATION here refers to GCP Locations:
         #     https://cloud.google.com/about/locations/
-        #     INSIGHT_TYPE_ID refers to supported insight types:
-        #     https://cloud.google.com/recommender/docs/insights/insight-types.)
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of results to return from this request.  Non-positive
@@ -113,8 +111,6 @@ module Google
         #
         #     LOCATION here refers to GCP Locations:
         #     https://cloud.google.com/about/locations/
-        #     RECOMMENDER_ID refers to supported recommenders:
-        #     https://cloud.google.com/recommender/docs/recommenders.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of results to return from this request.  Non-positive
