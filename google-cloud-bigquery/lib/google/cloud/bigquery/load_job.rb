@@ -112,8 +112,7 @@ module Google
         #   `false` otherwise.
         #
         def iso8859_1?
-          val = @gapi.configuration.load.encoding
-          val == "ISO-8859-1"
+          @gapi.configuration.load.encoding == "ISO-8859-1"
         end
 
         ##
@@ -195,8 +194,7 @@ module Google
         #   `NEWLINE_DELIMITED_JSON`, `false` otherwise.
         #
         def json?
-          val = @gapi.configuration.load.source_format
-          val == "NEWLINE_DELIMITED_JSON"
+          @gapi.configuration.load.source_format == "NEWLINE_DELIMITED_JSON"
         end
 
         ##
@@ -218,8 +216,7 @@ module Google
         #   `false` otherwise.
         #
         def backup?
-          val = @gapi.configuration.load.source_format
-          val == "DATASTORE_BACKUP"
+          @gapi.configuration.load.source_format == "DATASTORE_BACKUP"
         end
 
         ##
@@ -229,8 +226,7 @@ module Google
         #   `false` otherwise.
         #
         def orc?
-          val = @gapi.configuration.load.source_format
-          val == "ORC"
+          @gapi.configuration.load.source_format == "ORC"
         end
 
         ##
@@ -240,8 +236,7 @@ module Google
         #   `false` otherwise.
         #
         def parquet?
-          val = @gapi.configuration.load.source_format
-          val == "PARQUET"
+          @gapi.configuration.load.source_format == "PARQUET"
         end
 
         ##
@@ -400,28 +395,16 @@ module Google
         end
 
         ###
-        # Whether queries over this table require a partition filter that can be used for partition elimination to be
-        # specified. Note that this field should only be true when creating a permanent external table or querying a
-        # temporary external table.
-        #
-        # @see https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs Loading externally partitioned data
-        #
-        # @return [Boolean] `true` when queries over this table require a partition filter, or `false` otherwise.
-        #
-        # @!group Attributes
-        #
-        def hive_partitioning_require_partition_filter?
-          return false unless hive_partitioning?
-          !@gapi.configuration.load.hive_partitioning_options.require_partition_filter.nil?
-        end
-
-        ###
         # The common prefix for all source uris when hive partition detection is requested. The prefix must end
-        # immediately before the partition key encoding begins. For example, consider files following this data layout.
-        # `gs://bucket/path_to_table/dt=2019-01-01/country=BR/id=7/file.avro`
-        # `gs://bucket/path_to_table/dt=2018-12-31/country=CA/id=3/file.avro` When hive partitioning is requested with
-        # either `AUTO` or `STRINGS` mode, the common prefix can be either of `gs://bucket/path_to_table` or
-        # `gs://bucket/path_to_table/` (trailing slash does not matter).
+        # immediately before the partition key encoding begins. For example, consider files following this data layout:
+        #
+        # ```
+        # gs://bucket/path_to_table/dt=2019-01-01/country=BR/id=7/file.avro
+        # gs://bucket/path_to_table/dt=2018-12-31/country=CA/id=3/file.avro
+        # ```
+        #
+        # When hive partitioning is requested with either `AUTO` or `STRINGS` mode, the common prefix can be either of
+        # `gs://bucket/path_to_table` or `gs://bucket/path_to_table/` (trailing slash does not matter).
         #
         # @see https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs Loading externally partitioned data
         #
@@ -1448,18 +1431,22 @@ module Google
           # @!group Attributes
           #
           def hive_partitioning_mode= mode
-            mode = mode.to_s.upcase if mode
             @gapi.configuration.load.hive_partitioning_options ||= Google::Apis::BigqueryV2::HivePartitioningOptions.new
-            @gapi.configuration.load.hive_partitioning_options.mode = mode.upcase
+            @gapi.configuration.load.hive_partitioning_options.mode = mode.to_s.upcase
           end
 
           ##
           # Sets the common prefix for all source uris when hive partition detection is requested. The prefix must end
           # immediately before the partition key encoding begins. For example, consider files following this data
-          # layout. `gs://bucket/path_to_table/dt=2019-01-01/country=BR/id=7/file.avro`
-          # `gs://bucket/path_to_table/dt=2018-12-31/country=CA/id=3/file.avro` When hive partitioning is requested with
-          # either `AUTO` or `STRINGS` mode, the common prefix can be either of `gs://bucket/path_to_table` or
-          # `gs://bucket/path_to_table/` (trailing slash does not matter).
+          # layout:
+          #
+          # ```
+          # gs://bucket/path_to_table/dt=2019-01-01/country=BR/id=7/file.avro
+          # gs://bucket/path_to_table/dt=2018-12-31/country=CA/id=3/file.avro
+          # ```
+          #
+          # When hive partitioning is requested with either `AUTO` or `STRINGS` mode, the common prefix can be either of
+          # `gs://bucket/path_to_table` or `gs://bucket/path_to_table/` (trailing slash does not matter).
           #
           # See {#hive_partitioning_mode=}.
           #

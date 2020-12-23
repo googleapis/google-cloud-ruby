@@ -104,6 +104,7 @@ describe Google::Cloud::Bigquery::Table, :external, :bigquery do
     end
 
     _(external_data).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+    _(external_data).wont_be :frozen?
     _(external_data.format).must_equal "PARQUET"
     _(external_data.parquet?).must_equal true
     _(external_data.hive_partitioning?).must_equal true

@@ -736,7 +736,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
     _(job.hive_partitioning?).must_equal false
     _(job.hive_partitioning_mode).must_be_nil
-    _(job.hive_partitioning_require_partition_filter?).must_equal false
     _(job.hive_partitioning_source_uri_prefix).must_be_nil
 
     _(job.range_partitioning?).must_equal false

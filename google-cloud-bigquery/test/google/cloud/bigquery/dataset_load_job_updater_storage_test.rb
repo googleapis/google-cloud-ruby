@@ -299,7 +299,6 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :updater, :storage, :mock_
     _(job.parquet?).must_equal true
     _(job.hive_partitioning?).must_equal true
     _(job.hive_partitioning_mode).must_equal "AUTO"
-    _(job.hive_partitioning_require_partition_filter?).must_equal false
     _(job.hive_partitioning_source_uri_prefix).must_equal source_uri_prefix
   end
 

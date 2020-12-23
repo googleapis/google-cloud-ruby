@@ -719,15 +719,14 @@ module Google
           #   external_data.hive_partitioning_source_uri_prefix #=> source_uri_prefix
           #
           def hive_partitioning_mode= mode
-            mode = mode.to_s.upcase if mode
             @gapi.hive_partitioning_options ||= Google::Apis::BigqueryV2::HivePartitioningOptions.new
-            @gapi.hive_partitioning_options.mode = mode.upcase
+            @gapi.hive_partitioning_options.mode = mode.to_s.upcase
           end
 
           ###
-          # Whether queries over this table require a partition filter that can be used for partition elimination to be
-          # specified. Note that this field should only be true when creating a permanent external table or querying a
-          # temporary external table.
+          # Whether queries over the table using this external data source require a partition filter that can be used
+          # for partition elimination to be specified. Note that this field should only be true when creating a
+          # permanent external table or querying a temporary external table.
           #
           # @return [Boolean] `true` when queries over this table require a partition filter, or `false` otherwise.
           #
@@ -788,10 +787,15 @@ module Google
           ###
           # The common prefix for all source uris when hive partition detection is requested. The prefix must end
           # immediately before the partition key encoding begins. For example, consider files following this data
-          # layout. `gs://bucket/path_to_table/dt=2019-01-01/country=BR/id=7/file.avro`
-          # `gs://bucket/path_to_table/dt=2018-12-31/country=CA/id=3/file.avro` When hive partitioning is requested with
-          # either `AUTO` or `STRINGS` mode, the common prefix can be either of `gs://bucket/path_to_table` or
-          # `gs://bucket/path_to_table/` (trailing slash does not matter).
+          # layout:
+          #
+          # ```
+          # gs://bucket/path_to_table/dt=2019-01-01/country=BR/id=7/file.avro
+          # gs://bucket/path_to_table/dt=2018-12-31/country=CA/id=3/file.avro
+          # ```
+          #
+          # When hive partitioning is requested with either `AUTO` or `STRINGS` mode, the common prefix can be either of
+          # `gs://bucket/path_to_table` or `gs://bucket/path_to_table/` (trailing slash does not matter).
           #
           # @return [String, nil] The common prefix for all source uris, or `nil` if not set.
           #
@@ -820,10 +824,15 @@ module Google
           ##
           # Sets the common prefix for all source uris when hive partition detection is requested. The prefix must end
           # immediately before the partition key encoding begins. For example, consider files following this data
-          # layout. `gs://bucket/path_to_table/dt=2019-01-01/country=BR/id=7/file.avro`
-          # `gs://bucket/path_to_table/dt=2018-12-31/country=CA/id=3/file.avro` When hive partitioning is requested with
-          # either `AUTO` or `STRINGS` mode, the common prefix can be either of `gs://bucket/path_to_table` or
-          # `gs://bucket/path_to_table/` (trailing slash does not matter).
+          # layout:
+          #
+          # ```
+          # gs://bucket/path_to_table/dt=2019-01-01/country=BR/id=7/file.avro
+          # gs://bucket/path_to_table/dt=2018-12-31/country=CA/id=3/file.avro
+          # ```
+          #
+          # When hive partitioning is requested with either `AUTO` or `STRINGS` mode, the common prefix can be either of
+          # `gs://bucket/path_to_table` or `gs://bucket/path_to_table/` (trailing slash does not matter).
           #
           # See {#format}, {#hive_partitioning_mode=} and {#hive_partitioning_require_partition_filter=}.
           #
