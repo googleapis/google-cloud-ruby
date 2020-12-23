@@ -27,181 +27,81 @@ module Google
             ##
             # Create a fully-qualified Insight resource string.
             #
-            # @overload insight_path(project:, location:, insight_type:, insight:)
-            #   The resource will be in the following format:
+            # The resource will be in the following format:
             #
-            #   `projects/{project}/locations/{location}/insightTypes/{insight_type}/insights/{insight}`
+            # `projects/{project}/locations/{location}/insightTypes/{insight_type}/insights/{insight}`
             #
-            #   @param project [String]
-            #   @param location [String]
-            #   @param insight_type [String]
-            #   @param insight [String]
-            #
-            # @overload insight_path(billing_account:, location:, insight_type:, insight:)
-            #   The resource will be in the following format:
-            #
-            #   `billingAccounts/{billing_account}/locations/{location}/insightTypes/{insight_type}/insights/{insight}`
-            #
-            #   @param billing_account [String]
-            #   @param location [String]
-            #   @param insight_type [String]
-            #   @param insight [String]
+            # @param project [String]
+            # @param location [String]
+            # @param insight_type [String]
+            # @param insight [String]
             #
             # @return [::String]
-            def insight_path **args
-              resources = {
-                "insight:insight_type:location:project"         => (proc do |project:, location:, insight_type:, insight:|
-                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-                  raise ::ArgumentError, "insight_type cannot contain /" if insight_type.to_s.include? "/"
+            def insight_path project:, location:, insight_type:, insight:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "insight_type cannot contain /" if insight_type.to_s.include? "/"
 
-                  "projects/#{project}/locations/#{location}/insightTypes/#{insight_type}/insights/#{insight}"
-                end),
-                "billing_account:insight:insight_type:location" => (proc do |billing_account:, location:, insight_type:, insight:|
-                  raise ::ArgumentError, "billing_account cannot contain /" if billing_account.to_s.include? "/"
-                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-                  raise ::ArgumentError, "insight_type cannot contain /" if insight_type.to_s.include? "/"
-
-                  "billingAccounts/#{billing_account}/locations/#{location}/insightTypes/#{insight_type}/insights/#{insight}"
-                end)
-              }
-
-              resource = resources[args.keys.sort.join(":")]
-              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
-              resource.call(**args)
+              "projects/#{project}/locations/#{location}/insightTypes/#{insight_type}/insights/#{insight}"
             end
 
             ##
             # Create a fully-qualified InsightType resource string.
             #
-            # @overload insight_type_path(project:, location:, insight_type:)
-            #   The resource will be in the following format:
+            # The resource will be in the following format:
             #
-            #   `projects/{project}/locations/{location}/insightTypes/{insight_type}`
+            # `projects/{project}/locations/{location}/insightTypes/{insight_type}`
             #
-            #   @param project [String]
-            #   @param location [String]
-            #   @param insight_type [String]
-            #
-            # @overload insight_type_path(billing_account:, location:, insight_type:)
-            #   The resource will be in the following format:
-            #
-            #   `billingAccounts/{billing_account}/locations/{location}/insightTypes/{insight_type}`
-            #
-            #   @param billing_account [String]
-            #   @param location [String]
-            #   @param insight_type [String]
+            # @param project [String]
+            # @param location [String]
+            # @param insight_type [String]
             #
             # @return [::String]
-            def insight_type_path **args
-              resources = {
-                "insight_type:location:project"         => (proc do |project:, location:, insight_type:|
-                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+            def insight_type_path project:, location:, insight_type:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
-                  "projects/#{project}/locations/#{location}/insightTypes/#{insight_type}"
-                end),
-                "billing_account:insight_type:location" => (proc do |billing_account:, location:, insight_type:|
-                  raise ::ArgumentError, "billing_account cannot contain /" if billing_account.to_s.include? "/"
-                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-
-                  "billingAccounts/#{billing_account}/locations/#{location}/insightTypes/#{insight_type}"
-                end)
-              }
-
-              resource = resources[args.keys.sort.join(":")]
-              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
-              resource.call(**args)
+              "projects/#{project}/locations/#{location}/insightTypes/#{insight_type}"
             end
 
             ##
             # Create a fully-qualified Recommendation resource string.
             #
-            # @overload recommendation_path(project:, location:, recommender:, recommendation:)
-            #   The resource will be in the following format:
+            # The resource will be in the following format:
             #
-            #   `projects/{project}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}`
+            # `projects/{project}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}`
             #
-            #   @param project [String]
-            #   @param location [String]
-            #   @param recommender [String]
-            #   @param recommendation [String]
-            #
-            # @overload recommendation_path(billing_account:, location:, recommender:, recommendation:)
-            #   The resource will be in the following format:
-            #
-            #   `billingAccounts/{billing_account}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}`
-            #
-            #   @param billing_account [String]
-            #   @param location [String]
-            #   @param recommender [String]
-            #   @param recommendation [String]
+            # @param project [String]
+            # @param location [String]
+            # @param recommender [String]
+            # @param recommendation [String]
             #
             # @return [::String]
-            def recommendation_path **args
-              resources = {
-                "location:project:recommendation:recommender"         => (proc do |project:, location:, recommender:, recommendation:|
-                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-                  raise ::ArgumentError, "recommender cannot contain /" if recommender.to_s.include? "/"
+            def recommendation_path project:, location:, recommender:, recommendation:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "recommender cannot contain /" if recommender.to_s.include? "/"
 
-                  "projects/#{project}/locations/#{location}/recommenders/#{recommender}/recommendations/#{recommendation}"
-                end),
-                "billing_account:location:recommendation:recommender" => (proc do |billing_account:, location:, recommender:, recommendation:|
-                  raise ::ArgumentError, "billing_account cannot contain /" if billing_account.to_s.include? "/"
-                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-                  raise ::ArgumentError, "recommender cannot contain /" if recommender.to_s.include? "/"
-
-                  "billingAccounts/#{billing_account}/locations/#{location}/recommenders/#{recommender}/recommendations/#{recommendation}"
-                end)
-              }
-
-              resource = resources[args.keys.sort.join(":")]
-              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
-              resource.call(**args)
+              "projects/#{project}/locations/#{location}/recommenders/#{recommender}/recommendations/#{recommendation}"
             end
 
             ##
             # Create a fully-qualified Recommender resource string.
             #
-            # @overload recommender_path(project:, location:, recommender:)
-            #   The resource will be in the following format:
+            # The resource will be in the following format:
             #
-            #   `projects/{project}/locations/{location}/recommenders/{recommender}`
+            # `projects/{project}/locations/{location}/recommenders/{recommender}`
             #
-            #   @param project [String]
-            #   @param location [String]
-            #   @param recommender [String]
-            #
-            # @overload recommender_path(billing_account:, location:, recommender:)
-            #   The resource will be in the following format:
-            #
-            #   `billingAccounts/{billing_account}/locations/{location}/recommenders/{recommender}`
-            #
-            #   @param billing_account [String]
-            #   @param location [String]
-            #   @param recommender [String]
+            # @param project [String]
+            # @param location [String]
+            # @param recommender [String]
             #
             # @return [::String]
-            def recommender_path **args
-              resources = {
-                "location:project:recommender"         => (proc do |project:, location:, recommender:|
-                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+            def recommender_path project:, location:, recommender:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
-                  "projects/#{project}/locations/#{location}/recommenders/#{recommender}"
-                end),
-                "billing_account:location:recommender" => (proc do |billing_account:, location:, recommender:|
-                  raise ::ArgumentError, "billing_account cannot contain /" if billing_account.to_s.include? "/"
-                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-
-                  "billingAccounts/#{billing_account}/locations/#{location}/recommenders/#{recommender}"
-                end)
-              }
-
-              resource = resources[args.keys.sort.join(":")]
-              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
-              resource.call(**args)
+              "projects/#{project}/locations/#{location}/recommenders/#{recommender}"
             end
 
             extend self
