@@ -105,7 +105,7 @@ module Google
         if emulator_host
           credentials = :this_channel_is_insecure
         else
-          credentials ||= default_credentials(scope: scope)
+          credentials ||= default_credentials scope: scope
           unless credentials.is_a? Google::Auth::Credentials
             credentials = Spanner::Credentials.new credentials, scope: scope
           end
