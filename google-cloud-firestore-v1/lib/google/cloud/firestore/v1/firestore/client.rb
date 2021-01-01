@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -142,12 +142,12 @@ module Google
                   retry_codes:   [14, 13, 4]
                 }
 
-                default_config.rpcs.partition_query.timeout = 300.0
+                default_config.rpcs.partition_query.timeout = 60.0
                 default_config.rpcs.partition_query.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [14, 13, 4]
+                  retry_codes:   [14]
                 }
 
                 default_config.rpcs.write.timeout = 86_400.0
