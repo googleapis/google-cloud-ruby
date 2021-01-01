@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ module Google
       #
       # ## About NotebookService
       #
-      # API v1beta1 service for Cloud AI Platform Notebooks.
+      # API service for Cloud AI Platform Notebooks.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta1`.
