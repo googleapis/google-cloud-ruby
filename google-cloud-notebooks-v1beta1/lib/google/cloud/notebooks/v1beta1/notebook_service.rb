@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ module Google
     module Notebooks
       module V1beta1
         ##
-        # API v1beta1 service for Cloud AI Platform Notebooks.
+        # API service for Cloud AI Platform Notebooks.
         #
         # To load this service and instantiate a client:
         #

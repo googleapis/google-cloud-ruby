@@ -20,7 +20,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :status_message, :string, 5
       optional :requested_cancellation, :bool, 6
       optional :api_version, :string, 7
-      optional :endpoint, :string, 8
     end
     add_message "google.cloud.notebooks.v1beta1.ListInstancesRequest" do
       optional :parent, :string, 1
@@ -80,7 +79,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.notebooks.v1beta1.IsInstanceUpgradeableResponse" do
       optional :upgradeable, :bool, 1
       optional :upgrade_version, :string, 2
-      optional :upgrade_info, :string, 3
     end
     add_message "google.cloud.notebooks.v1beta1.UpgradeInstanceRequest" do
       optional :name, :string, 1

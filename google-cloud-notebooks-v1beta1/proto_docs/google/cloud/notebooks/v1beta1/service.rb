@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -46,9 +46,6 @@ module Google
         # @!attribute [rw] api_version
         #   @return [::String]
         #     API version used to start the operation.
-        # @!attribute [rw] endpoint
-        #   @return [::String]
-        #     API endpoint name of this operation.
         class OperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -143,8 +140,8 @@ module Google
         #   @return [::Integer]
         #     Required. Count of cores of this accelerator. Note that not all combinations
         #     of `type` and `core_count` are valid. Check [GPUs on
-        #     Compute Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to
-        #     find a valid combination. TPUs are not supported.
+        #     Compute Engine](/compute/docs/gpus/#gpus-list) to find a valid
+        #     combination. TPUs are not supported.
         class SetInstanceAcceleratorRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -157,8 +154,7 @@ module Google
         #     `projects/{project_id}/locations/{location}/instances/{instance_id}`
         # @!attribute [rw] machine_type
         #   @return [::String]
-        #     Required. The [Compute Engine machine
-        #     type](https://cloud.google.com/compute/docs/machine-types).
+        #     Required. The [Compute Engine machine type](/compute/docs/machine-types).
         class SetInstanceMachineTypeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -272,9 +268,6 @@ module Google
         #   @return [::String]
         #     The version this instance will be upgraded to if calling the upgrade
         #     endpoint. This field will only be populated if field upgradeable is true.
-        # @!attribute [rw] upgrade_info
-        #   @return [::String]
-        #     Additional information about upgrade.
         class IsInstanceUpgradeableResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

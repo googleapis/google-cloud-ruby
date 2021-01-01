@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ module Google
           ##
           # Client for the NotebookService service.
           #
-          # API v1beta1 service for Cloud AI Platform Notebooks.
+          # API service for Cloud AI Platform Notebooks.
           #
           class Client
             include Paths
@@ -516,8 +516,8 @@ module Google
             #   @param core_count [::Integer]
             #     Required. Count of cores of this accelerator. Note that not all combinations
             #     of `type` and `core_count` are valid. Check [GPUs on
-            #     Compute Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to
-            #     find a valid combination. TPUs are not supported.
+            #     Compute Engine](/compute/docs/gpus/#gpus-list) to find a valid
+            #     combination. TPUs are not supported.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -587,8 +587,7 @@ module Google
             #     Required. Format:
             #     `projects/{project_id}/locations/{location}/instances/{instance_id}`
             #   @param machine_type [::String]
-            #     Required. The [Compute Engine machine
-            #     type](https://cloud.google.com/compute/docs/machine-types).
+            #     Required. The [Compute Engine machine type](/compute/docs/machine-types).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
