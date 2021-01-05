@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.0 / 2021-01-05
+
+#### Features
+
+* add schema service ([#8413](https://www.github.com/googleapis/google-cloud-ruby/issues/8413))
+
 ### 0.1.2 / 2020-08-10
 
 #### Bug Fixes
