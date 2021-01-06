@@ -1,5 +1,11 @@
 # Release History
 
+### 2.4.1 / 2021-01-06
+
+#### Bug Fixes
+
+* Replace usage of Write.transform with Write.update_transforms
+
 ### 2.4.0 / 2020-11-19
 
 #### Features
