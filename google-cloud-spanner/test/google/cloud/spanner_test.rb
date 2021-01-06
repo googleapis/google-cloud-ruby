@@ -364,20 +364,30 @@ describe Google::Cloud do
       end
     end
 
-    it "allows emulator_host to be set" do
+    it "allows emulator_host to be set with emulator_host and implicit default_project_id" do
       emulator_host = "localhost:4567"
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
-          Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
-            spanner = Google::Cloud::Spanner.new emulator_host: emulator_host
-            _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
-            _(spanner.project).must_equal "project-id"
-            _(spanner.service.credentials).must_equal :this_channel_is_insecure
-            _(spanner.service.host).must_equal emulator_host
-          end
+          spanner = Google::Cloud::Spanner.new emulator_host: emulator_host
+          _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+          _(spanner.project).must_equal "project-id"
+          _(spanner.service.credentials).must_equal :this_channel_is_insecure
+          _(spanner.service.host).must_equal emulator_host
         end
+      end
+    end
+
+    it 'allows emulator_host to be set with emulator_host and project_id' do
+      emulator_host = "localhost:4567"
+      project_id = "arbitrary-string"
+      ENV.stub :[], nil do
+        spanner = Google::Cloud::Spanner.new project_id: project_id, emulator_host: emulator_host
+        _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+        _(spanner.project).must_equal project_id
+        _(spanner.service.credentials).must_equal :this_channel_is_insecure
+        _(spanner.service.host).must_equal emulator_host
       end
     end
 
