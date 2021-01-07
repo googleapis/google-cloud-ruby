@@ -45,8 +45,8 @@ table = bigtable.table("my-instance", "my-table")
 
 entry = table.new_mutation_entry("user-1")
 entry.set_cell(
-  "cf-1",
-  "field-1",
+  "cf1",
+  "field1",
   "XYZ",
   timestamp: Time.now.to_i * 1000 # Time stamp in milli seconds.
 ).delete_cells("cf2", "field02")
