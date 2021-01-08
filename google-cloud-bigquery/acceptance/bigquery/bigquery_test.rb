@@ -148,11 +148,13 @@ describe Google::Cloud::Bigquery, :bigquery do
     _(job.range_partitioning_start).must_be_nil
     _(job.range_partitioning_interval).must_be_nil
     _(job.range_partitioning_end).must_be_nil
+
     _(job.time_partitioning?).must_equal false
     _(job.time_partitioning_type).must_be :nil?
     _(job.time_partitioning_field).must_be :nil?
     _(job.time_partitioning_expiration).must_be :nil?
     _(job.time_partitioning_require_filter?).must_equal false
+
     _(job.clustering?).must_equal false
     _(job.clustering_fields).must_be :nil?
 

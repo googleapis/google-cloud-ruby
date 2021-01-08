@@ -37,8 +37,8 @@ module Google
       #   bigquery = Google::Cloud::Bigquery.new
       #   dataset = bigquery.dataset "my_dataset"
       #
-      #   gs_url = "gs://my-bucket/file-name.csv"
-      #   load_job = dataset.load_job "my_new_table", gs_url do |schema|
+      #   gcs_uri = "gs://my-bucket/file-name.csv"
+      #   load_job = dataset.load_job "my_new_table", gcs_uri do |schema|
       #     schema.string "first_name", mode: :required
       #     schema.record "cities_lived", mode: :repeated do |nested_schema|
       #       nested_schema.string "place", mode: :required
@@ -112,8 +112,7 @@ module Google
         #   `false` otherwise.
         #
         def iso8859_1?
-          val = @gapi.configuration.load.encoding
-          val == "ISO-8859-1"
+          @gapi.configuration.load.encoding == "ISO-8859-1"
         end
 
         ##
@@ -195,8 +194,7 @@ module Google
         #   `NEWLINE_DELIMITED_JSON`, `false` otherwise.
         #
         def json?
-          val = @gapi.configuration.load.source_format
-          val == "NEWLINE_DELIMITED_JSON"
+          @gapi.configuration.load.source_format == "NEWLINE_DELIMITED_JSON"
         end
 
         ##
@@ -218,8 +216,27 @@ module Google
         #   `false` otherwise.
         #
         def backup?
-          val = @gapi.configuration.load.source_format
-          val == "DATASTORE_BACKUP"
+          @gapi.configuration.load.source_format == "DATASTORE_BACKUP"
+        end
+
+        ##
+        # Checks if the source format is ORC.
+        #
+        # @return [Boolean] `true` when the source format is `ORC`,
+        #   `false` otherwise.
+        #
+        def orc?
+          @gapi.configuration.load.source_format == "ORC"
+        end
+
+        ##
+        # Checks if the source format is Parquet.
+        #
+        # @return [Boolean] `true` when the source format is `PARQUET`,
+        #   `false` otherwise.
+        #
+        def parquet?
+          @gapi.configuration.load.source_format == "PARQUET"
         end
 
         ##
@@ -345,6 +362,58 @@ module Google
           Integer @gapi.statistics.load.output_bytes
         rescue StandardError
           nil
+        end
+
+        ###
+        # Checks if hive partitioning options are set.
+        #
+        # @see https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs Loading externally partitioned data
+        #
+        # @return [Boolean] `true` when hive partitioning options are set, or `false` otherwise.
+        #
+        # @!group Attributes
+        #
+        def hive_partitioning?
+          !@gapi.configuration.load.hive_partitioning_options.nil?
+        end
+
+        ###
+        # The mode of hive partitioning to use when reading data. The following modes are supported:
+        #
+        #   1. `AUTO`: automatically infer partition key name(s) and type(s).
+        #   2. `STRINGS`: automatically infer partition key name(s). All types are interpreted as strings.
+        #   3. `CUSTOM`: partition key schema is encoded in the source URI prefix.
+        #
+        # @see https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs Loading externally partitioned data
+        #
+        # @return [String, nil] The mode of hive partitioning, or `nil` if not set.
+        #
+        # @!group Attributes
+        #
+        def hive_partitioning_mode
+          @gapi.configuration.load.hive_partitioning_options.mode if hive_partitioning?
+        end
+
+        ###
+        # The common prefix for all source uris when hive partition detection is requested. The prefix must end
+        # immediately before the partition key encoding begins. For example, consider files following this data layout:
+        #
+        # ```
+        # gs://bucket/path_to_table/dt=2019-01-01/country=BR/id=7/file.avro
+        # gs://bucket/path_to_table/dt=2018-12-31/country=CA/id=3/file.avro
+        # ```
+        #
+        # When hive partitioning is requested with either `AUTO` or `STRINGS` mode, the common prefix can be either of
+        # `gs://bucket/path_to_table` or `gs://bucket/path_to_table/` (trailing slash does not matter).
+        #
+        # @see https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs Loading externally partitioned data
+        #
+        # @return [String, nil] The common prefix for all source uris, or `nil` if not set.
+        #
+        # @!group Attributes
+        #
+        def hive_partitioning_source_uri_prefix
+          @gapi.configuration.load.hive_partitioning_options.source_uri_prefix if hive_partitioning?
         end
 
         ###
@@ -1327,6 +1396,89 @@ module Google
           end
 
           ##
+          # Sets the mode of hive partitioning to use when reading data. The following modes are supported:
+          #
+          #   1. `auto`: automatically infer partition key name(s) and type(s).
+          #   2. `strings`: automatically infer partition key name(s). All types are interpreted as strings.
+          #   3. `custom`: partition key schema is encoded in the source URI prefix.
+          #
+          # Not all storage formats support hive partitioning. Requesting hive partitioning on an unsupported format
+          # will lead to an error. Currently supported types include: `avro`, `csv`, `json`, `orc` and `parquet`.
+          #
+          # See {#format=} and {#hive_partitioning_source_uri_prefix=}.
+          #
+          # @see https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs Loading externally partitioned data
+          #
+          # @param [String, Symbol] mode The mode of hive partitioning to use when reading data.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+          #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
+          #     job.format = :parquet
+          #     job.hive_partitioning_mode = :auto
+          #     job.hive_partitioning_source_uri_prefix = source_uri_prefix
+          #   end
+          #
+          #   load_job.wait_until_done!
+          #   load_job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def hive_partitioning_mode= mode
+            @gapi.configuration.load.hive_partitioning_options ||= Google::Apis::BigqueryV2::HivePartitioningOptions.new
+            @gapi.configuration.load.hive_partitioning_options.mode = mode.to_s.upcase
+          end
+
+          ##
+          # Sets the common prefix for all source uris when hive partition detection is requested. The prefix must end
+          # immediately before the partition key encoding begins. For example, consider files following this data
+          # layout:
+          #
+          # ```
+          # gs://bucket/path_to_table/dt=2019-01-01/country=BR/id=7/file.avro
+          # gs://bucket/path_to_table/dt=2018-12-31/country=CA/id=3/file.avro
+          # ```
+          #
+          # When hive partitioning is requested with either `AUTO` or `STRINGS` mode, the common prefix can be either of
+          # `gs://bucket/path_to_table` or `gs://bucket/path_to_table/` (trailing slash does not matter).
+          #
+          # See {#hive_partitioning_mode=}.
+          #
+          # @see https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs Loading externally partitioned data
+          #
+          # @param [String] source_uri_prefix The common prefix for all source uris.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+          #   source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
+          #     job.format = :parquet
+          #     job.hive_partitioning_mode = :auto
+          #     job.hive_partitioning_source_uri_prefix = source_uri_prefix
+          #   end
+          #
+          #   load_job.wait_until_done!
+          #   load_job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def hive_partitioning_source_uri_prefix= source_uri_prefix
+            @gapi.configuration.load.hive_partitioning_options ||= Google::Apis::BigqueryV2::HivePartitioningOptions.new
+            @gapi.configuration.load.hive_partitioning_options.source_uri_prefix = source_uri_prefix
+          end
+
+          ##
           # Sets the field on which to range partition the table. See [Creating and using integer range partitioned
           # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
           #
@@ -1345,8 +1497,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://my-bucket/file-name.csv"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   gcs_uri = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.schema do |schema|
           #       schema.integer "my_table_id", mode: :required
           #       schema.string "my_table_data", mode: :required
@@ -1386,8 +1538,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://my-bucket/file-name.csv"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   gcs_uri = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.schema do |schema|
           #       schema.integer "my_table_id", mode: :required
           #       schema.string "my_table_data", mode: :required
@@ -1427,8 +1579,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://my-bucket/file-name.csv"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   gcs_uri = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.schema do |schema|
           #       schema.integer "my_table_id", mode: :required
           #       schema.string "my_table_data", mode: :required
@@ -1468,8 +1620,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://my-bucket/file-name.csv"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   gcs_uri = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.schema do |schema|
           #       schema.integer "my_table_id", mode: :required
           #       schema.string "my_table_data", mode: :required
@@ -1510,8 +1662,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://my-bucket/file-name.csv"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   gcs_uri = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.time_partitioning_type = "DAY"
           #   end
           #
@@ -1549,8 +1701,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://my-bucket/file-name.csv"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   gcs_uri = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.time_partitioning_type  = "DAY"
           #     job.time_partitioning_field = "dob"
           #     job.schema do |schema|
@@ -1585,8 +1737,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://my-bucket/file-name.csv"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   gcs_uri = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.time_partitioning_type = "DAY"
           #     job.time_partitioning_expiration = 86_400
           #   end
@@ -1645,8 +1797,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   gs_url = "gs://my-bucket/file-name.csv"
-          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #   gcs_uri = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gcs_uri do |job|
           #     job.time_partitioning_type  = "DAY"
           #     job.time_partitioning_field = "dob"
           #     job.schema do |schema|

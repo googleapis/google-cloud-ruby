@@ -409,21 +409,6 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
      "etag"=>"CKih16GjycICEAE="}
   end
 
-  def load_job_resp_gapi table, load_url, job_id: "job_9876543210", labels: nil
-    hash = random_job_hash job_id
-    hash["configuration"]["load"] = {
-      "sourceUris" => [load_url],
-      "destinationTable" => {
-        "projectId" => table.project_id,
-        "datasetId" => table.dataset_id,
-        "tableId" => table.table_id
-      },
-    }
-    resp = Google::Apis::BigqueryV2::Job.from_json hash.to_json
-    resp.configuration.labels = labels if labels
-    resp
-  end
-
   def success_table_insert_gapi
     Google::Apis::BigqueryV2::InsertAllTableDataResponse.new(
       insert_errors: []
