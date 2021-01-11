@@ -19,4 +19,6 @@ Google::Cloud::Bigtable::V2::Bigtable::Client.configure do |config|
   config.channel_args ||= {}
   config.channel_args["grpc.max_send_message_length"] = -1
   config.channel_args["grpc.max_receive_message_length"] = -1
+  config.channel_args["grpc.keepalive_time_ms"] = 30_000 # Sets 30s as Google Frontends allows keepalive pings at 30s
+  config.channel_args["grpc.keepalive_timeout_ms"] = 10_000 # Conservative timeout at 10s
 end
