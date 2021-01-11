@@ -1,0 +1,11 @@
+{
+    "api_id": "cloudchannel.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-channel-v1/latest",
+    "distribution_name": "google-cloud-channel-v1",
+    "language": "ruby",
+    "name": "cloudchannel",
+    "name_pretty": "Channel Services V1 API",
+    "product_documentation": "https://cloud.google.com/channel",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
