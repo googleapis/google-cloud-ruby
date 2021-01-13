@@ -405,7 +405,7 @@ describe "Buckets Snippets" do
        " set_public_access_prevention_unspecified" do
       bucket.public_access_prevention = :unspecified
       bucket.refresh!
-      refute bucket.public_access_prevention_enforced?
+      _(bucket.public_access_prevention).must_equal "unspecified"
 
       # set_public_access_prevention_enforced
       assert_output "Public access prevention is set to enforced for #{bucket.name}.\n" do
@@ -413,13 +413,13 @@ describe "Buckets Snippets" do
       end
 
       bucket.refresh!
-      assert bucket.public_access_prevention_enforced?
+      _(bucket.public_access_prevention).must_equal "enforced"
 
       # get_public_access_prevention
-      assert_output "Public access prevention is true for #{bucket.name}.\n" do
+      assert_output "Public access prevention is 'enforced' for #{bucket.name}.\n" do
         get_public_access_prevention bucket_name: bucket.name
       end
-      assert bucket.public_access_prevention_enforced?
+      _(bucket.public_access_prevention).must_equal "enforced"
 
       # set_public_access_prevention_unspecified
       assert_output "Public access prevention is 'unspecified' for #{bucket.name}.\n" do
@@ -427,7 +427,7 @@ describe "Buckets Snippets" do
       end
 
       bucket.refresh!
-      refute bucket.public_access_prevention_enforced?
+      _(bucket.public_access_prevention).must_equal "unspecified"
       bucket.public_access_prevention = :unspecified
     end
   end

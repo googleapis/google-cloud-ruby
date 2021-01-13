@@ -21,20 +21,33 @@ describe Google::Cloud::Storage::Bucket, :public_access_prevention, :mock_storag
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
   let(:bucket_user_project) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service, user_project: true }
 
+  it "knows its public_access_prevention value" do
+    _(bucket.public_access_prevention).must_be :nil?
+  end
+
   it "knows its public_access_prevention_enforced? value" do
     _(bucket.public_access_prevention_enforced?).must_equal false
   end
 
   it "updates its public_access_prevention" do
     mock = Minitest::Mock.new
+    mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "unspecified"),
+                [bucket_name, patch_bucket_gapi(public_access_prevention: "unspecified"), predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "enforced"),
                 [bucket_name, patch_bucket_gapi(public_access_prevention: "enforced"), predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
     bucket.service.mocked_service = mock
 
+    _(bucket.public_access_prevention).must_be :nil?
+    _(bucket.public_access_prevention_enforced?).must_equal false
+
+    bucket.public_access_prevention = :unspecified
+
+    _(bucket.public_access_prevention).must_equal "unspecified"
     _(bucket.public_access_prevention_enforced?).must_equal false
 
     bucket.public_access_prevention = :enforced
 
+    _(bucket.public_access_prevention).must_equal "enforced"
     _(bucket.public_access_prevention_enforced?).must_equal true
 
     mock.verify
@@ -42,15 +55,24 @@ describe Google::Cloud::Storage::Bucket, :public_access_prevention, :mock_storag
 
   it "updates its public_access_prevention with user_project set to true" do
     mock = Minitest::Mock.new
+    mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "unspecified"),
+                [bucket_name, patch_bucket_gapi(public_access_prevention: "unspecified"), predefined_acl: nil, predefined_default_object_acl: nil, user_project: "test"]
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "enforced"),
                 [bucket_name, patch_bucket_gapi(public_access_prevention: "enforced"), predefined_acl: nil, predefined_default_object_acl: nil, user_project: "test"]
 
     bucket_user_project.service.mocked_service = mock
 
+    _(bucket_user_project.public_access_prevention).must_be :nil?
+    _(bucket_user_project.public_access_prevention_enforced?).must_equal false
+
+    bucket_user_project.public_access_prevention = :unspecified
+
+    _(bucket_user_project.public_access_prevention).must_equal "unspecified"
     _(bucket_user_project.public_access_prevention_enforced?).must_equal false
 
     bucket_user_project.public_access_prevention = :enforced
 
+    _(bucket_user_project.public_access_prevention).must_equal "enforced"
     _(bucket_user_project.public_access_prevention_enforced?).must_equal true
 
     mock.verify

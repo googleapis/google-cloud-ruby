@@ -22,7 +22,7 @@ def get_public_access_prevention bucket_name:
   storage = Google::Cloud::Storage.new
   bucket  = storage.bucket bucket_name
 
-  puts "Public access prevention is #{bucket.public_access_prevention_enforced?} for #{bucket_name}."
+  puts "Public access prevention is '#{bucket.public_access_prevention}' for #{bucket_name}."
 end
 # [END storage_get_public_access_prevention]
 
