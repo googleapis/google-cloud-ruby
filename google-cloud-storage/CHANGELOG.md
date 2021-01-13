@@ -1,5 +1,18 @@
 # Release History
 
+### 1.30.0 / 2021-01-13
+
+#### Features
+
+* Replace google-api-client with specific client gems
+  * Remove google-api-client
+  * Add google-apis-iamcredentials_v1
+  * Add google-apis-storage_v1
+
+#### Documentation
+
+* Update Bucket#generate_signed_post_policy_v4 documentation
+
 ### 1.29.2 / 2020-12-14
 
 #### Bug Fixes
