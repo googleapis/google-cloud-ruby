@@ -1,5 +1,11 @@
 # Release History
 
+### 2.2.1 / 2021-01-13
+
+#### Documentation
+
+* Use consistent column family and field names in samples
+
 ### 2.2.0 / 2020-11-11
 
 #### Features
