@@ -1,5 +1,11 @@
 # Release History
 
+### 0.1.3 / 2021-01-13
+
+#### Bug Fixes
+
+* Update keepalive configuration
+
 ### 0.1.2 / 2020-08-10
 
 #### Bug Fixes
