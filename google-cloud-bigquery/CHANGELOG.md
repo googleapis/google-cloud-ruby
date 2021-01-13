@@ -1,5 +1,14 @@
 # Release History
 
+### 1.26.0 / 2021-01-13
+
+#### Features
+
+* Add support for Hive Partitioning
+  * Add hive partitioning options to External::DataSource
+  * Add hive partitioning options to LoadJob and LoadJob::Updater
+* Replace google-api-client with google-apis-bigquery_v2
+
 ### 1.25.0 / 2020-11-16
 
 #### Features
