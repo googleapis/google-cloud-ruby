@@ -1,5 +1,12 @@
 # Release History
 
+### 2.3.1 / 2021-01-13
+
+#### Bug Fixes
+
+* Update Subscription#retry_policy=
+  * Remove conditional RPC to fetch full resource before update.
+
 ### 2.3.0 / 2020-11-18
 
 #### Features
