@@ -57,7 +57,7 @@ module Google
       #
       # ## About NotebookService
       #
-      # API service for Cloud AI Platform Notebooks.
+      # API v1beta1 service for Cloud AI Platform Notebooks.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta1`.
