@@ -910,7 +910,7 @@ module Google
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   bucket.public_access_prevention = :enforced
+        #   bucket.public_access_prevention = "enforced"
         #   bucket.public_access_prevention #=> "enforced"
         #
         def public_access_prevention
@@ -932,7 +932,7 @@ module Google
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   bucket.public_access_prevention = :enforced
+        #   bucket.public_access_prevention = "enforced"
         #   bucket.public_access_prevention #=> "enforced"
         #
         # @example Remove Public Access Prevention:
@@ -942,7 +942,7 @@ module Google
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   bucket.public_access_prevention = :unspecified
+        #   bucket.public_access_prevention = "unspecified"
         #   bucket.public_access_prevention #=> "unspecified"
         #
         def public_access_prevention= new_public_access_prevention
@@ -966,7 +966,7 @@ module Google
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   bucket.public_access_prevention = :enforced
+        #   bucket.public_access_prevention = "enforced"
         #   bucket.public_access_prevention_enforced? # true
         #
         def public_access_prevention_enforced?

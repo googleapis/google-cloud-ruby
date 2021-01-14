@@ -40,12 +40,12 @@ describe Google::Cloud::Storage::Bucket, :public_access_prevention, :mock_storag
     _(bucket.public_access_prevention).must_be :nil?
     _(bucket.public_access_prevention_enforced?).must_equal false
 
-    bucket.public_access_prevention = :unspecified
+    bucket.public_access_prevention = "unspecified"
 
     _(bucket.public_access_prevention).must_equal "unspecified"
     _(bucket.public_access_prevention_enforced?).must_equal false
 
-    bucket.public_access_prevention = :enforced
+    bucket.public_access_prevention = "enforced"
 
     _(bucket.public_access_prevention).must_equal "enforced"
     _(bucket.public_access_prevention_enforced?).must_equal true
@@ -65,12 +65,12 @@ describe Google::Cloud::Storage::Bucket, :public_access_prevention, :mock_storag
     _(bucket_user_project.public_access_prevention).must_be :nil?
     _(bucket_user_project.public_access_prevention_enforced?).must_equal false
 
-    bucket_user_project.public_access_prevention = :unspecified
+    bucket_user_project.public_access_prevention = "unspecified"
 
     _(bucket_user_project.public_access_prevention).must_equal "unspecified"
     _(bucket_user_project.public_access_prevention_enforced?).must_equal false
 
-    bucket_user_project.public_access_prevention = :enforced
+    bucket_user_project.public_access_prevention = "enforced"
 
     _(bucket_user_project.public_access_prevention).must_equal "enforced"
     _(bucket_user_project.public_access_prevention_enforced?).must_equal true

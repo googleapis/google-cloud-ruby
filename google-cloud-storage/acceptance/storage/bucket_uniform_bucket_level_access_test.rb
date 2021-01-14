@@ -33,7 +33,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     # always reset the uniform_bucket_level_access and public_access_prevention
     # always reset the bucket permissions
     bucket.uniform_bucket_level_access = false if bucket.uniform_bucket_level_access?
-    bucket.public_access_prevention = :unspecified if bucket.public_access_prevention_enforced?
+    bucket.public_access_prevention = "unspecified" if bucket.public_access_prevention_enforced?
     bucket.default_acl.private!
     bucket.files.all { |f| f.delete rescue nil }
   end
@@ -202,7 +202,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
 
   it "sets public_access_prevention to enforced and is unable to modify bucket ACL rules" do
     refute bucket.public_access_prevention_enforced?
-    bucket.public_access_prevention = :enforced
+    bucket.public_access_prevention = "enforced"
     assert bucket.public_access_prevention_enforced?
     err = expect do
       bucket.acl.public!
@@ -211,9 +211,9 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
 
   it "sets enforced public_access_prevention to nil and is able to modify bucket ACL rules" do
     refute bucket.public_access_prevention_enforced?
-    bucket.public_access_prevention = :enforced
+    bucket.public_access_prevention = "enforced"
     assert bucket.public_access_prevention_enforced?
-    bucket.public_access_prevention = :unspecified
+    bucket.public_access_prevention = "unspecified"
     refute bucket.public_access_prevention_enforced?
     bucket.acl.public!
   end
