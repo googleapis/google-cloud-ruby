@@ -244,8 +244,6 @@ module Google
 
             ##
             # Lookup for a single Account.
-            # Throws "Target not found" if no such account found, or if caller does not
-            # have permissions to access it.
             #
             # @overload get_account(request, options = nil)
             #   Pass arguments to `get_account` via a request object, either of type
@@ -489,7 +487,9 @@ module Google
             #     Required. The account to update.
             #     The account's `name` field is used to identify the account.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The list of fields to be updated. Omitted fields will not be updated.
+            #     Required. The list of fields to be updated. Omitted fields will not be updated.
+            #     To replace the entire entity, use one path with the string "*" to match
+            #     all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::Account]
@@ -670,9 +670,6 @@ module Google
 
             ##
             # Lookup for a single "GA4" Property.
-            #
-            # Throws "Target not found" if no such property found, if property is not
-            # of the type "GA4", or if caller does not have permissions to access it.
             #
             # @overload get_property(request, options = nil)
             #   Pass arguments to `get_property` via a request object, either of type
@@ -993,7 +990,9 @@ module Google
             #     The property's `name` field is used to identify the property to be
             #     updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The list of fields to be updated. Omitted fields will not be updated.
+            #     Required. The list of fields to be updated. Omitted fields will not be updated.
+            #     To replace the entire entity, use one path with the string "*" to match
+            #     all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::Property]
@@ -1774,9 +1773,6 @@ module Google
             ##
             # Lookup for a single WebDataStream
             #
-            # Throws "Target not found" if no such web data stream found, or if the
-            # caller does not have permissions to access it.
-            #
             # @overload get_web_data_stream(request, options = nil)
             #   Pass arguments to `get_web_data_stream` via a request object, either of type
             #   {::Google::Analytics::Admin::V1alpha::GetWebDataStreamRequest} or an equivalent Hash.
@@ -1932,7 +1928,9 @@ module Google
             #     Required. The web stream to update.
             #     The `name` field is used to identify the web stream to be updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The list of fields to be updated. Omitted fields will not be updated.
+            #     Required. The list of fields to be updated. Omitted fields will not be updated.
+            #     To replace the entire entity, use one path with the string "*" to match
+            #     all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::WebDataStream]
@@ -2132,9 +2130,6 @@ module Google
             ##
             # Lookup for a single IosAppDataStream
             #
-            # Throws "Target not found" if no such iOS app data stream found, or if the
-            # caller does not have permissions to access it.
-            #
             # @overload get_ios_app_data_stream(request, options = nil)
             #   Pass arguments to `get_ios_app_data_stream` via a request object, either of type
             #   {::Google::Analytics::Admin::V1alpha::GetIosAppDataStreamRequest} or an equivalent Hash.
@@ -2290,7 +2285,9 @@ module Google
             #     Required. The iOS app stream to update.
             #     The `name` field is used to identify the iOS app stream to be updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The list of fields to be updated. Omitted fields will not be updated.
+            #     Required. The list of fields to be updated. Omitted fields will not be updated.
+            #     To replace the entire entity, use one path with the string "*" to match
+            #     all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::IosAppDataStream]
@@ -2490,9 +2487,6 @@ module Google
             ##
             # Lookup for a single AndroidAppDataStream
             #
-            # Throws "Target not found" if no such android app data stream found, or if
-            # the caller does not have permissions to access it.
-            #
             # @overload get_android_app_data_stream(request, options = nil)
             #   Pass arguments to `get_android_app_data_stream` via a request object, either of type
             #   {::Google::Analytics::Admin::V1alpha::GetAndroidAppDataStreamRequest} or an equivalent Hash.
@@ -2648,7 +2642,9 @@ module Google
             #     Required. The android app stream to update.
             #     The `name` field is used to identify the android app stream to be updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The list of fields to be updated. Omitted fields will not be updated.
+            #     Required. The list of fields to be updated. Omitted fields will not be updated.
+            #     To replace the entire entity, use one path with the string "*" to match
+            #     all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::AndroidAppDataStream]
@@ -2870,7 +2866,6 @@ module Google
             #   @param name [::String]
             #     Required. The name of the settings to lookup.
             #     Format:
-            #
             #     properties/\\{property_id}/webDataStreams/\\{stream_id}/enhancedMeasurementSettings
             #     Example: "properties/1000/webDataStreams/2000/enhancedMeasurementSettings"
             #
@@ -2943,7 +2938,9 @@ module Google
             #     Required. The settings to update.
             #     The `name` field is used to identify the settings to be updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The list of fields to be updated. Omitted fields will not be updated.
+            #     Required. The list of fields to be updated. Omitted fields will not be updated.
+            #     To replace the entire entity, use one path with the string "*" to match
+            #     all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
@@ -3082,7 +3079,9 @@ module Google
             #   @param firebase_link [::Google::Analytics::Admin::V1alpha::FirebaseLink, ::Hash]
             #     Required. The Firebase link to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The list of fields to be updated. Omitted fields will not be updated.
+            #     Required. The list of fields to be updated. Omitted fields will not be updated.
+            #     To replace the entire entity, use one path with the string "*" to match
+            #     all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::FirebaseLink]
@@ -3210,7 +3209,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_firebase_links(parent: nil)
+            # @overload list_firebase_links(parent: nil, page_size: nil, page_token: nil)
             #   Pass arguments to `list_firebase_links` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -3218,12 +3217,22 @@ module Google
             #   @param parent [::String]
             #     Required. Format: properties/\\{property_id}
             #     Example: properties/1234
+            #   @param page_size [::Integer]
+            #     The maximum number of resources to return. The service may return
+            #     fewer than this value, even if there are additional pages.
+            #     If unspecified, at most 50 resources will be returned.
+            #     The maximum value is 200; (higher values will be coerced to the maximum)
+            #   @param page_token [::String]
+            #     A page token, received from a previous `ListFirebaseLinks` call.
+            #     Provide this to retrieve the subsequent page.
+            #     When paginating, all other parameters provided to `ListProperties` must
+            #     match the call that provided the page token.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Analytics::Admin::V1alpha::ListFirebaseLinksResponse]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::FirebaseLink>]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [::Google::Analytics::Admin::V1alpha::ListFirebaseLinksResponse]
+            # @return [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::FirebaseLink>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
@@ -3257,6 +3266,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :list_firebase_links, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_firebase_links, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
@@ -3423,7 +3433,9 @@ module Google
             #   @param google_ads_link [::Google::Analytics::Admin::V1alpha::GoogleAdsLink, ::Hash]
             #     The GoogleAdsLink to update
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The list of fields to be updated. Omitted fields will not be updated.
+            #     Required. The list of fields to be updated. Omitted fields will not be updated.
+            #     To replace the entire entity, use one path with the string "*" to match
+            #     all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::GoogleAdsLink]
