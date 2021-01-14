@@ -9,6 +9,7 @@ AllCops:
     - "Rakefile"
     - "test/**/*"
     - "benchmark/**/*"
+    - "vendor/**/*"
 
 Documentation:
   Enabled: false
