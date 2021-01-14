@@ -1254,7 +1254,7 @@ module Google
             # Each configuration object is of type `Gapic::Config::Method` and includes
             # the following configuration fields:
             #
-            #  *  `timeout` (*type:* `Numeric`) - The call timeout in milliseconds
+            #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
             #  *  `metadata` (*type:* `Hash{Symbol=>String}`) - Additional gRPC headers
             #  *  `retry_policy (*type:* `Hash`) - The retry policy. The policy fields
             #     include the following keys:
