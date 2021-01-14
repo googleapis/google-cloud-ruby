@@ -239,15 +239,6 @@ module Google
 
             # The instance is deleted.
             DELETED = 6
-
-            # The instance is upgrading.
-            UPGRADING = 7
-
-            # The instance is being created.
-            INITIALIZING = 8
-
-            # The instance is getting registered.
-            REGISTERING = 9
           end
 
           # Possible disk types for notebook instances.
@@ -260,9 +251,6 @@ module Google
 
             # SSD persistent disk type.
             PD_SSD = 2
-
-            # Balanced persistent disk type.
-            PD_BALANCED = 3
           end
 
           # Definition of the disk encryption options.

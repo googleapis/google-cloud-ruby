@@ -24,7 +24,7 @@ module Google
     module Notebooks
       module V1beta1
         module NotebookService
-          # API v1beta1 service for Cloud AI Platform Notebooks.
+          # API service for Cloud AI Platform Notebooks.
           class Service
 
             include GRPC::GenericService
