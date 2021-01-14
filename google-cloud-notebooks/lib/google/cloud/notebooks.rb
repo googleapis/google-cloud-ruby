@@ -57,7 +57,7 @@ module Google
       #
       # ## About NotebookService
       #
-      # API v1beta1 service for Cloud AI Platform Notebooks.
+      # API service for Cloud AI Platform Notebooks.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta1`.
@@ -88,8 +88,8 @@ module Google
       #   The library version as recorded in instrumentation and logging.
       # * `interceptors` (*type:* `Array<GRPC::ClientInterceptor>`) -
       #   An array of interceptors that are run before calls are executed.
-      # * `timeout` (*type:* `Integer`) -
-      #   Default timeout in milliseconds.
+      # * `timeout` (*type:* `Numeric`) -
+      #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
       #   Additional gRPC headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
