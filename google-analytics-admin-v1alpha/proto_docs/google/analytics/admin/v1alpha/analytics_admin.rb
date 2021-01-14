@@ -86,7 +86,9 @@ module Google
         #     The account's `name` field is used to identify the account.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     The list of fields to be updated. Omitted fields will not be updated.
+        #     Required. The list of fields to be updated. Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match
+        #     all fields.
         class UpdateAccountRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -184,7 +186,9 @@ module Google
         #     updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     The list of fields to be updated. Omitted fields will not be updated.
+        #     Required. The list of fields to be updated. Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match
+        #     all fields.
         class UpdatePropertyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -456,7 +460,9 @@ module Google
         #     The `name` field is used to identify the web stream to be updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     The list of fields to be updated. Omitted fields will not be updated.
+        #     Required. The list of fields to be updated. Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match
+        #     all fields.
         class UpdateWebDataStreamRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -539,7 +545,9 @@ module Google
         #     The `name` field is used to identify the iOS app stream to be updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     The list of fields to be updated. Omitted fields will not be updated.
+        #     Required. The list of fields to be updated. Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match
+        #     all fields.
         class UpdateIosAppDataStreamRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -622,7 +630,9 @@ module Google
         #     The `name` field is used to identify the android app stream to be updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     The list of fields to be updated. Omitted fields will not be updated.
+        #     Required. The list of fields to be updated. Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match
+        #     all fields.
         class UpdateAndroidAppDataStreamRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -683,7 +693,6 @@ module Google
         #   @return [::String]
         #     Required. The name of the settings to lookup.
         #     Format:
-        #
         #     properties/\\{property_id}/webDataStreams/\\{stream_id}/enhancedMeasurementSettings
         #     Example: "properties/1000/webDataStreams/2000/enhancedMeasurementSettings"
         class GetEnhancedMeasurementSettingsRequest
@@ -698,7 +707,9 @@ module Google
         #     The `name` field is used to identify the settings to be updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     The list of fields to be updated. Omitted fields will not be updated.
+        #     Required. The list of fields to be updated. Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match
+        #     all fields.
         class UpdateEnhancedMeasurementSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -723,7 +734,9 @@ module Google
         #     Required. The Firebase link to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     The list of fields to be updated. Omitted fields will not be updated.
+        #     Required. The list of fields to be updated. Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match
+        #     all fields.
         class UpdateFirebaseLinkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -744,6 +757,18 @@ module Google
         #   @return [::String]
         #     Required. Format: properties/\\{property_id}
         #     Example: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return. The service may return
+        #     fewer than this value, even if there are additional pages.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200; (higher values will be coerced to the maximum)
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListFirebaseLinks` call.
+        #     Provide this to retrieve the subsequent page.
+        #     When paginating, all other parameters provided to `ListProperties` must
+        #     match the call that provided the page token.
         class ListFirebaseLinksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -753,6 +778,12 @@ module Google
         # @!attribute [rw] firebase_links
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::FirebaseLink>]
         #     List of FirebaseLinks. This will have at most one value.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        #     Currently, Google Analytics supports only one FirebaseLink per property,
+        #     so this will never be populated.
         class ListFirebaseLinksResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -788,7 +819,9 @@ module Google
         #     The GoogleAdsLink to update
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     The list of fields to be updated. Omitted fields will not be updated.
+        #     Required. The list of fields to be updated. Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match
+        #     all fields.
         class UpdateGoogleAdsLinkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

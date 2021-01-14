@@ -14,7 +14,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 2, "google.protobuf.Timestamp"
       optional :update_time, :message, 3, "google.protobuf.Timestamp"
       optional :display_name, :string, 4
-      optional :country_code, :string, 5
+      optional :region_code, :string, 5
       optional :deleted, :bool, 6
     end
     add_message "google.analytics.admin.v1alpha.Property" do
@@ -70,19 +70,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :page_views_enabled, :bool, 3
       optional :scrolls_enabled, :bool, 4
       optional :outbound_clicks_enabled, :bool, 5
-      optional :content_views_enabled, :bool, 6
       optional :site_search_enabled, :bool, 7
-      optional :form_interactions_enabled, :bool, 8
       optional :video_engagement_enabled, :bool, 9
       optional :file_downloads_enabled, :bool, 10
-      optional :data_tagged_element_clicks_enabled, :bool, 11
       optional :page_loads_enabled, :bool, 12
       optional :page_changes_enabled, :bool, 13
-      optional :articles_and_blogs_enabled, :bool, 14
-      optional :products_and_ecommerce_enabled, :bool, 15
       optional :search_query_parameter, :string, 16
-      optional :url_query_parameter, :string, 17
-      optional :excluded_domains, :string, 18
+      optional :uri_query_parameter, :string, 17
     end
     add_message "google.analytics.admin.v1alpha.FirebaseLink" do
       optional :name, :string, 1
@@ -91,12 +85,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :maximum_user_access, :enum, 4, "google.analytics.admin.v1alpha.MaximumUserAccess"
     end
     add_message "google.analytics.admin.v1alpha.GlobalSiteTag" do
-      optional :snippet, :string, 1
-      optional :name, :string, 2
+      optional :name, :string, 1
+      optional :snippet, :string, 2
     end
     add_message "google.analytics.admin.v1alpha.GoogleAdsLink" do
       optional :name, :string, 1
-      optional :parent, :string, 2
       optional :customer_id, :string, 3
       optional :can_manage_clients, :bool, 4
       optional :ads_personalization_enabled, :message, 5, "google.protobuf.BoolValue"

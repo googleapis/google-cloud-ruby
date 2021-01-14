@@ -2544,11 +2544,15 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
 
     # Create request parameters for a unary method.
     parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
 
     list_firebase_links_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_firebase_links, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::ListFirebaseLinksRequest, request
       assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
       refute_nil options
     end
 
@@ -2559,32 +2563,37 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use hash object
-      client.list_firebase_links({ parent: parent }) do |response, operation|
-        assert_equal grpc_response, response
+      client.list_firebase_links({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_firebase_links parent: parent do |response, operation|
-        assert_equal grpc_response, response
+      client.list_firebase_links parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_firebase_links ::Google::Analytics::Admin::V1alpha::ListFirebaseLinksRequest.new(parent: parent) do |response, operation|
-        assert_equal grpc_response, response
+      client.list_firebase_links ::Google::Analytics::Admin::V1alpha::ListFirebaseLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_firebase_links({ parent: parent }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
+      client.list_firebase_links({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_firebase_links ::Google::Analytics::Admin::V1alpha::ListFirebaseLinksRequest.new(parent: parent), grpc_options do |response, operation|
-        assert_equal grpc_response, response
+      client.list_firebase_links ::Google::Analytics::Admin::V1alpha::ListFirebaseLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
