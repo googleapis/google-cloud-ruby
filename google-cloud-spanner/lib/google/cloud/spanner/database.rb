@@ -412,6 +412,11 @@ module Google
         #   366 days from the time the request is received. Required.
         #   Once the `expire_time` has passed, Cloud Spanner will delete the
         #   backup and free the resources used by the backup. Required.
+        # @param [Time] version_time Specifies the time to have an externally 
+        #   consistent copy of the database. If no version time is specified, 
+        #   it will be automatically set to the backup create time. The version
+        #   time can be as far in the past as specified by the database earliest
+        #   version time. Optional.
         # @return [Google::Cloud::Spanner::Backup::Job] The job representing
         #   the long-running, asynchronous processing of a backup create
         #   operation.
@@ -422,7 +427,11 @@ module Google
         #   spanner = Google::Cloud::Spanner.new
         #   database = spanner.database "my-instance", "my-database"
         #
-        #   job = database.create_backup "my-backup", Time.now + 36000
+        #   backup_id = "my-backup"
+        #   expire_time = Time.now + (24 * 60 * 60) # 1 day from now
+        #   version_time = Time.now - (24 * 60 * 60) # 1 day ago (optional)
+        #
+        #   job = database.create_backup backup_id, expire_time, version_time
         #
         #   job.done? #=> false
         #   job.reload! # API call
@@ -434,13 +443,14 @@ module Google
         #     backup = job.backup
         #   end
         #
-        def create_backup backup_id, expire_time
+        def create_backup backup_id, expire_time, version_time = nil
           ensure_service!
           grpc = service.create_backup \
             instance_id,
             database_id,
             backup_id,
-            expire_time
+            expire_time,
+            version_time
           Backup::Job.from_grpc grpc, service
         end
 
