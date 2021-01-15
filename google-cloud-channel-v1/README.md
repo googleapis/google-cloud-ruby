@@ -1,6 +1,6 @@
-# Ruby Client for the Channel Services V1 API
+# Ruby Client for the Cloud Channel V1 API
 
-API Client library for the Channel Services V1 API
+API Client library for the Cloud Channel V1 API
 
 You can use Channel Services to manage your relationships with your partners and your customers. Channel Services include a console and APIs to view and provision links between distributors and resellers, customers and entitlements.
 
