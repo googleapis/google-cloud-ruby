@@ -73,12 +73,14 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
   end
   let(:database) { Google::Cloud::Spanner::Database.from_grpc database_grpc, spanner.service }
   let(:expire_time) { Time.now + 36000 }
+  let(:version_time) { Time.now }
 
   it "create a database backup" do
     mock = Minitest::Mock.new
     create_req = {
       database: database_path(instance_id, database_id),
-      expire_time: expire_time
+      expire_time: expire_time,
+      version_time: version_time
     }
     create_res = Gapic::Operation.new(
       job_grpc, mock,
@@ -98,7 +100,7 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
     mock.expect :get_operation, operation_done, [{ name: "1234567890" }, Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
-    job = database.create_backup backup_id, expire_time
+    job = database.create_backup backup_id, expire_time, version_time
 
     _(job).must_be_kind_of Google::Cloud::Spanner::Backup::Job
     _(job).wont_be :done?
@@ -125,7 +127,8 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
     mock = Minitest::Mock.new
     create_req = {
       database: database_path(instance_id, database_id),
-      expire_time: expire_time
+      expire_time: expire_time,
+      version_time: nil
     }
     create_res = Gapic::Operation.new(
       job_grpc, mock,
