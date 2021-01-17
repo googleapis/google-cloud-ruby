@@ -161,6 +161,14 @@ module Google
         end
 
         ##
+        # The timestamp when a consistent copy of the database for the backup was
+        # taken. The version time has microseconds granularity.
+        # @return [Time]
+        def version_time
+          Convert.timestamp_to_time @grpc.version_time unless @grpc.version_time.nil?
+        end
+
+        ##
         # Create time is approximately the time when the backup request was
         # received.
         # @return [Time]
