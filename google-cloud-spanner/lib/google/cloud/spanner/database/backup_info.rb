@@ -84,12 +84,21 @@ module Google
           end
 
           ##
-          # The backup contains an externally consistent copy of
-          # `source_database` at the timestamp specified by `create_time`.
-          # received.
+          # The timestamp indicating the creation of the backup.
           # @return [Time]
           def create_time
             Convert.timestamp_to_time @grpc.create_time
+          end
+
+          ##
+          # The backup contains an externally consistent copy of
+          # `source_database` at the timestamp specified by
+          # the `version_time` received. If no `version_time` was
+          # given during the creation of the backup, the `version_time`
+          # will be the same as the `create_time`.
+          # @return [Time]
+          def version_time
+            Convert.timestamp_to_time @grpc.version_time unless @grpc.version_time.nil?
           end
 
           ##

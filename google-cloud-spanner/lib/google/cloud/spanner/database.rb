@@ -412,8 +412,8 @@ module Google
         #   366 days from the time the request is received. Required.
         #   Once the `expire_time` has passed, Cloud Spanner will delete the
         #   backup and free the resources used by the backup. Required.
-        # @param [Time] version_time Specifies the time to have an externally 
-        #   consistent copy of the database. If no version time is specified, 
+        # @param [Time] version_time Specifies the time to have an externally
+        #   consistent copy of the database. If no version time is specified,
         #   it will be automatically set to the backup create time. The version
         #   time can be as far in the past as specified by the database earliest
         #   version time. Optional.
