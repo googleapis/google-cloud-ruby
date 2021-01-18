@@ -98,7 +98,7 @@ module Google
           # will be the same as the `create_time`.
           # @return [Time]
           def version_time
-            Convert.timestamp_to_time @grpc.version_time unless @grpc.version_time.nil?
+            Convert.timestamp_to_time @grpc.version_time
           end
 
           ##

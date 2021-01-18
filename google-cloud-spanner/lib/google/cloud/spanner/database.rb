@@ -431,7 +431,7 @@ module Google
         #   expire_time = Time.now + (24 * 60 * 60) # 1 day from now
         #   version_time = Time.now - (24 * 60 * 60) # 1 day ago (optional)
         #
-        #   job = database.create_backup backup_id, expire_time, version_time
+        #   job = database.create_backup backup_id, expire_time, version_time: version_time
         #
         #   job.done? #=> false
         #   job.reload! # API call
@@ -443,7 +443,7 @@ module Google
         #     backup = job.backup
         #   end
         #
-        def create_backup backup_id, expire_time, version_time = nil
+        def create_backup backup_id, expire_time, version_time: nil
           ensure_service!
           grpc = service.create_backup \
             instance_id,

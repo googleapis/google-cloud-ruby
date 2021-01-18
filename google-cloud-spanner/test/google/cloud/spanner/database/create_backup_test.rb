@@ -100,7 +100,7 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
     mock.expect :get_operation, operation_done, [{ name: "1234567890" }, Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
-    job = database.create_backup backup_id, expire_time, version_time
+    job = database.create_backup backup_id, expire_time, version_time: version_time
 
     _(job).must_be_kind_of Google::Cloud::Spanner::Backup::Job
     _(job).wont_be :done?

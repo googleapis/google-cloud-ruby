@@ -165,7 +165,7 @@ module Google
         # taken. The version time has microseconds granularity.
         # @return [Time]
         def version_time
-          Convert.timestamp_to_time @grpc.version_time unless @grpc.version_time.nil?
+          Convert.timestamp_to_time @grpc.version_time
         end
 
         ##
