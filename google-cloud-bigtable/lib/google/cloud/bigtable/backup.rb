@@ -328,9 +328,12 @@ module Google
         end
 
         ##
-        # Creates a new table by restoring from a completed backup.
+        # Creates a new table by restoring data from a completed backup. The new table may be created in an instance
+        # different than that of the backup.
         #
         # @param table_id [String] The table ID for the new table. This table must not yet exist. Required.
+        # @param instance [Instance, String] The instance or the ID of the instance for the new table, if different from
+        #   the instance of the backup. Optional.
         #
         # @return [Google::Cloud::Bigtable::Table::RestoreJob] The job representing the long-running, asynchronous
         #   processing of a backup restore table operation.
@@ -356,8 +359,35 @@ module Google
         #     optimized = job.optimize_table_operation_name
         #   end
         #
-        def restore table_id
-          grpc = service.restore_table table_id, instance_id, cluster_id, backup_id
+        # @example Create the table in a different instance.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   instance = bigtable.instance("my-instance")
+        #   cluster = instance.cluster("my-cluster")
+        #
+        #   backup = cluster.backup("my-backup")
+        #
+        #   table_instance = bigtable.instance("my-other-instance")
+        #   job = backup.restore("my-new-table", instance: table_instance)
+        #
+        #   job.wait_until_done!
+        #   job.done? #=> true
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     table = job.table
+        #     optimized = job.optimize_table_operation_name
+        #   end
+        #
+        def restore table_id, instance: nil
+          table_instance_id = instance.respond_to?(:instance_id) ? instance.instance_id : instance
+          grpc = service.restore_table table_id,
+                                       instance_id,
+                                       cluster_id,
+                                       backup_id,
+                                       table_instance_id: table_instance_id
           Table::RestoreJob.from_grpc grpc, service
         end
 

@@ -19,6 +19,7 @@ require "bigtable_helper"
 
 describe Google::Cloud::Bigtable::Table, :bigtable do
   let(:instance) { bigtable_instance }
+  let(:instance_2) { bigtable_instance_2 }
   let(:cluster) { instance.clusters.first }
   let(:table) { bigtable_read_table }
   let(:backup_id) { "test-backup-#{random_str}" }
@@ -34,6 +35,7 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
   it "creates a backup" do
     backup = nil
     restore_table = nil
+    restore_table_2 = nil
     begin
       # create
       job = cluster.create_backup table, backup_id, expire_time
@@ -107,6 +109,7 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
       # Wait 2 minutes so that the RestoreTable API will trigger an optimize restored table operation.
       # https://github.com/googleapis/java-bigtable/blob/33ffd938c06352108ccf7c1e5c970cce27771c72/google-cloud-bigtable/src/test/java/com/google/cloud/bigtable/admin/v2/it/BigtableBackupIT.java#L307-L309
       sleep(120)
+
       restore_job = backup.restore restore_table_id
       _(restore_job).must_be_kind_of Google::Cloud::Bigtable::Table::RestoreJob
       restore_job.wait_until_done!
@@ -114,16 +117,27 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
       restore_table = restore_job.table
       _(restore_table).must_be_kind_of Google::Cloud::Bigtable::Table
       _(restore_table.name).must_equal restore_table_id
+      _(restore_table.instance_id).must_equal instance.instance_id
 
       # optimize
       _(restore_job.optimize_table_operation_name).wont_be :nil?
       _(restore_job.optimize_table_operation_name).must_be_kind_of String
       _(restore_job.optimize_table_operation_name).must_include restore_table_id
+
+      # restore to another instance
+      restore_job = backup.restore restore_table_id, instance: instance_2
+      _(restore_job).must_be_kind_of Google::Cloud::Bigtable::Table::RestoreJob
+      restore_job.wait_until_done!
+      _(restore_job.error).must_be :nil?
+      restore_table = restore_job.table
+      _(restore_table).must_be_kind_of Google::Cloud::Bigtable::Table
+      _(restore_table.name).must_equal restore_table_id
+      _(restore_table.instance_id).must_equal instance_2.instance_id
     ensure
       # delete
       backup.delete if backup
-      # delete
       restore_table.delete if restore_table
+      restore_table_2.delete if restore_table_2
     end
   end
 end

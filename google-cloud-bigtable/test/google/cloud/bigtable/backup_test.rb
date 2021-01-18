@@ -19,6 +19,20 @@ require "helper"
 
 describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
   let(:instance_id) { "test-instance" }
+  let(:instance_id_2) { "test-instance-2" }
+  let(:instance_grpc_2) do
+    Google::Cloud::Bigtable::Admin::V2::Instance.new(
+      instance_hash(
+        name: instance_id_2,
+        display_name: "Test instance 2",
+        state: :READY,
+        type: :PRODUCTION
+      )
+    )
+  end
+  let(:instance_2) do
+    Google::Cloud::Bigtable::Instance.from_grpc instance_grpc_2, nil
+  end
   let(:cluster_id) { "test-cluster" }
   let(:backup_id) { "test-backup" }
   let(:source_table_id) { "test-table-source" }
@@ -153,6 +167,68 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
     bigtable.service.mocked_tables = mock
 
     job = backup.restore target_table_id
+
+    _(job).must_be_kind_of Google::Cloud::Bigtable::Table::RestoreJob
+    _(job).wont_be :done?
+    _(job).wont_be :error?
+    _(job.error).must_be :nil?
+    _(job.table).must_be :nil?
+
+    job.reload!
+    table = job.table
+
+    _(table).wont_be :nil?
+    _(table).must_be_kind_of Google::Cloud::Bigtable::Table
+
+    mock.verify
+  end
+
+  it "restores to a target table in a different instance" do
+    mock = Minitest::Mock.new
+    update_grpc = backup_res.dup
+    update_grpc.expire_time = expire_time_2
+    mock.expect :restore_table,
+                operation_grpc(job_grpc, mock),
+                [
+                  parent: instance_path(instance_id_2),
+                  table_id: target_table_id,
+                  backup: backup_path(instance_id, cluster_id, backup_id)
+                ]
+    mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
+    bigtable.service.mocked_tables = mock
+
+    job = backup.restore target_table_id, instance: instance_2
+
+    _(job).must_be_kind_of Google::Cloud::Bigtable::Table::RestoreJob
+    _(job).wont_be :done?
+    _(job).wont_be :error?
+    _(job.error).must_be :nil?
+    _(job.table).must_be :nil?
+
+    job.reload!
+    table = job.table
+
+    _(table).wont_be :nil?
+    _(table).must_be_kind_of Google::Cloud::Bigtable::Table
+
+    mock.verify
+  end
+
+  it "restores to a target table in a different instance ID" do
+    mock = Minitest::Mock.new
+    update_grpc = backup_res.dup
+    update_grpc.expire_time = expire_time_2
+    mock.expect :restore_table,
+                operation_grpc(job_grpc, mock),
+                [
+                  parent: instance_path(instance_id_2),
+                  table_id: target_table_id,
+                  backup: backup_path(instance_id, cluster_id, backup_id)
+                ]
+    mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
+    bigtable.service.mocked_tables = mock
+
+    job = backup.restore target_table_id, instance: instance_id_2
 
     _(job).must_be_kind_of Google::Cloud::Bigtable::Table::RestoreJob
     _(job).wont_be :done?

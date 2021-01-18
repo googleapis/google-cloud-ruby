@@ -14,13 +14,7 @@ Documentation:
     - "lib/google-cloud-bigtable.rb"
 
 Metrics/ClassLength:
-  Exclude:
-    - "lib/google/cloud/bigtable/chunk_processor.rb"
-    - "lib/google/cloud/bigtable/column_family_map.rb"
-    - "lib/google/cloud/bigtable/instance.rb"
-    - "lib/google/cloud/bigtable/project.rb"
-    - "lib/google/cloud/bigtable/service.rb"
-    - "lib/google/cloud/bigtable/table.rb"
+  Enabled: false
 Metrics/BlockLength:
   Exclude:
     - "google-cloud-bigtable.gemspec"

@@ -57,16 +57,28 @@ module Acceptance
       super
     end
 
+    def bigtable_instance_id
+      $bigtable_instance_id
+    end
+
+    def bigtable_instance_id_2
+      $bigtable_instance_id_2
+    end
+
     def bigtable_instance
       @instance ||= @bigtable.instance($bigtable_instance_id)
+    end
+
+    def bigtable_instance_2
+      @instance_2 ||= @bigtable.instance($bigtable_instance_id_2)
     end
 
     def bigtable_cluster_id
       $bigtable_cluster_id
     end
 
-    def bigtable_instance_id
-      $bigtable_instance_id
+    def bigtable_cluster_id_2
+      $bigtable_cluster_id
     end
 
     def bigtable_cluster_location
@@ -187,9 +199,11 @@ require "date"
 require "securerandom"
 
 $bigtable_instance_id = "google-cloud-ruby-tests"
+$bigtable_instance_id_2 = "google-cloud-ruby-tests-2"
 $bigtable_cluster_location = "us-east1-b"
 $bigtable_cluster_location_2 = "us-east1-c"
 $bigtable_cluster_id = "#{$bigtable_instance_id}-clstr"
+$bigtable_cluster_id_2 = "#{$bigtable_instance_id}-clstr2"
 $bigtable_read_table_id = "r-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(2)}"
 $bigtable_mutation_table_id = "r-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(2)}"
 
@@ -199,14 +213,26 @@ create_test_instance(
   $bigtable_cluster_location
 )
 
+create_test_instance(
+  $bigtable_instance_id_2,
+  $bigtable_cluster_id_2,
+  $bigtable_cluster_location
+)
+
 create_test_table(
   $bigtable_instance_id,
   $bigtable_read_table_id,
   row_count: 5,
   qualifiers: ["field1", "field2"]
 )
-create_test_table($bigtable_instance_id, $bigtable_mutation_table_id)
+create_test_table(
+  $bigtable_instance_id,
+  $bigtable_mutation_table_id
+)
 
 Minitest.after_run do
-  clean_up_bigtable_objects($bigtable_instance_id, $table_list_for_cleanup)
+  clean_up_bigtable_objects(
+    $bigtable_instance_id,
+    $table_list_for_cleanup
+  )
 end
