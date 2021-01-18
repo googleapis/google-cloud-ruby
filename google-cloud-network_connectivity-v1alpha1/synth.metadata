@@ -1,0 +1,30 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "git@github.com:Neenu1995/google-cloud-ruby.git",
+        "sha": "d1aefdee2045edb5ba277d7e46329e3110b41a89"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "61ab0348bd228c942898aee291d677f0afdb888c",
+        "internalRef": "352069361"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "networkconnectivity",
+        "apiVersion": "v1alpha1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ]
+}
