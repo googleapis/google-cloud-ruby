@@ -9,7 +9,7 @@ gem "minitest-focus", "~> 1.1"
 gem "minitest-rg", "~> 5.2"
 gem "autotest-suffix", "~> 1.1"
 gem "redcarpet", "~> 3.0"
-gem "rubocop", "~> 0.64.0"
+gem "rubocop", "~> 1.8"
 gem "simplecov", "~> 0.16"
 gem "codecov", "~> 0.1", require: false
 gem "yard", "~> 0.9"
