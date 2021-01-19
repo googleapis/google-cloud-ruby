@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module WebRisk
-      VERSION = "1.1.1"
+      VERSION = "1.1.2"
     end
   end
 end
