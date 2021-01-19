@@ -19,6 +19,7 @@ describe "Spanner Database Backup", :spanner do
   let(:instance_id) { $spanner_instance_id }
   let(:database_id) { $spanner_database_id }
   let(:expire_time) { Time.now + 36000 }
+  let(:version_time) { Time.now }
 
   it "creates, get, updates, restore and delete a database backup" do
     skip if emulator_enabled?
@@ -28,7 +29,7 @@ describe "Spanner Database Backup", :spanner do
     _(database).wont_be :nil?
 
     # Create
-    job = database.create_backup backup_id, expire_time
+    job = database.create_backup backup_id, expire_time, version_time: version_time
 
     _(job).must_be_kind_of Google::Cloud::Spanner::Backup::Job
     _(job).wont_be :done?
@@ -45,6 +46,7 @@ describe "Spanner Database Backup", :spanner do
     _(backup.instance_id).must_equal instance_id
     _(backup.project_id).must_equal spanner.project
     _(backup.expire_time.to_i).must_equal expire_time.to_i
+    _(backup.version_time.to_i).must_equal version_time.to_i
     _(backup.create_time).must_be_kind_of Time
     _(backup.size_in_bytes).must_be :>, 0
 
@@ -59,6 +61,7 @@ describe "Spanner Database Backup", :spanner do
     _(backup.instance_id).must_equal instance_id
     _(backup.project_id).must_equal spanner.project
     _(backup.expire_time.to_i).must_equal expire_time.to_i
+    _(backup.version_time.to_i).must_equal version_time.to_i
     _(backup.create_time).must_be_kind_of Time
     _(backup.size_in_bytes).must_be :>, 0
 
@@ -103,6 +106,7 @@ describe "Spanner Database Backup", :spanner do
     _(backup_info.source_database_instance_id).must_equal instance_id
     _(backup_info.source_database_id).must_equal database_id
     _(backup_info.create_time).must_be_kind_of Time
+    _(backup_info.version_time.to_i).must_equal version_time.to_i
 
     # Delete
     backup.delete
@@ -125,6 +129,30 @@ describe "Spanner Database Backup", :spanner do
     _(job.error).wont_be :nil?
     _(job.error.code).must_equal 1
     _(job.error.description).must_equal "CANCELLED"
+  end
+
+  it "fails to create a backup with a version time too far in the past" do
+    skip if emulator_enabled?
+
+    backup_id = "#{$spanner_database_id}-version-time-fail"
+    database = spanner.database instance_id, database_id
+    thirty_days_ago = Time.now - (30 * 24 * 60 * 60)
+
+    assert_raises Google::Cloud::InvalidArgumentError do
+      job = database.create_backup backup_id, expire_time, version_time: thirty_days_ago
+    end
+  end
+
+  it "fails to create a backup with a version time in the future" do
+    skip if emulator_enabled?
+
+    backup_id = "#{$spanner_database_id}-version-time-fail"
+    database = spanner.database instance_id, database_id
+    tomorrow = Time.now + (24 * 60 * 60)
+
+    assert_raises Google::Cloud::InvalidArgumentError do
+      job = database.create_backup backup_id, expire_time, version_time: tomorrow
+    end
   end
 
   it "lists and gets database backups" do
