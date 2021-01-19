@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.1 / 2021-01-19
+
+#### Documentation
+
+* Timeout config description correctly gives the units as seconds.
+
 ### 0.5.0 / 2020-09-10
 
 #### Features
