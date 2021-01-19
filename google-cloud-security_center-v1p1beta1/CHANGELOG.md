@@ -4,6 +4,12 @@
 
 * Clarify Finding#event_time description
 
+### 0.4.2 / 2021-01-19
+
+#### Documentation
+
+* Timeout config description correctly gives the units as seconds.
+
 ### 0.4.1 / 2020-09-24
 
 #### Documentation
