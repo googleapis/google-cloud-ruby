@@ -27,11 +27,11 @@ describe Google::Cloud::Bigquery, :bigquery do
   let(:labels) { { "prefix" => prefix } }
   let(:udfs) { [ "return x+1;", "gs://my-bucket/my-lib.js" ] }
   let(:filter) { "labels.prefix:#{prefix}" }
-  let(:dataset_2_id) { "#{prefix}_dataset_2" }
-  let(:dataset_2) do
-    d = bigquery.dataset dataset_2_id
+  let(:dataset_labels_id) { "#{prefix}_dataset_labels" }
+  let(:dataset_labels) do
+    d = bigquery.dataset dataset_labels_id
     if d.nil?
-      d = bigquery.create_dataset dataset_2_id do |ds|
+      d = bigquery.create_dataset dataset_labels_id do |ds|
         ds.labels = labels
       end
     end
@@ -72,7 +72,7 @@ describe Google::Cloud::Bigquery, :bigquery do
   end
 
   before do
-    dataset_2
+    dataset_labels
     table
     view
   end
