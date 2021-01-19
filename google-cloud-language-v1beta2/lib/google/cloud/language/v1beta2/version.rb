@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Language
       module V1beta2
-        VERSION = "0.2.6"
+        VERSION = "0.2.7"
       end
     end
   end
