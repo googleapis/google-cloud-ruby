@@ -1,5 +1,15 @@
 # Release History
 
+### 0.4.0 / 2021-01-20
+
+#### ⚠ BREAKING CHANGES
+
+* **analytics-admin-v1alpha:** Paginate list_firebase_links and update a number of resource fields
+
+#### Features
+
+* Paginate list_firebase_links and update a number of resource fields
+
 ### 0.3.0 / 2020-12-08
 
 #### Features
