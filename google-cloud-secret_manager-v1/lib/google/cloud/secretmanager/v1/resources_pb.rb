@@ -5,6 +5,7 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -14,6 +15,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :replication, :message, 2, "google.cloud.secretmanager.v1.Replication"
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       map :labels, :string, :string, 4
+      oneof :expiration do
+        optional :expire_time, :message, 6, "google.protobuf.Timestamp"
+        optional :ttl, :message, 7, "google.protobuf.Duration"
+      end
     end
     add_message "google.cloud.secretmanager.v1.SecretVersion" do
       optional :name, :string, 1
