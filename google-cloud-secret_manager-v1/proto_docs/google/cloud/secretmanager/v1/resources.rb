@@ -50,6 +50,13 @@ module Google
         #     regular expression: `[\p{Ll}\p{Lo}\p{N}_-]{0,63}`
         #
         #     No more than 64 labels can be assigned to a given resource.
+        # @!attribute [rw] expire_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Timestamp in UTC when the {::Google::Cloud::SecretManager::V1::Secret Secret} is scheduled to expire. This is
+        #     always provided on output, regardless of what was sent on input.
+        # @!attribute [rw] ttl
+        #   @return [::Google::Protobuf::Duration]
+        #     Input only. The TTL for the {::Google::Cloud::SecretManager::V1::Secret Secret}.
         class Secret
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
