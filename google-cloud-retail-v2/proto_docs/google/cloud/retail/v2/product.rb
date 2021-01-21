@@ -26,7 +26,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. Full resource name of the product, such as
-        #     "projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/product_id".
+        #     `projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/product_id`.
         #
         #     The branch ID must be "default_branch".
         # @!attribute [rw] id
@@ -35,7 +35,7 @@ module Google
         #     the final component of {::Google::Cloud::Retail::V2::Product#name name}. For
         #     example, this field is "id_1", if
         #     {::Google::Cloud::Retail::V2::Product#name name} is
-        #     "projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/id_1".
+        #     `projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/id_1`.
         #
         #     This field must be a UTF-8 encoded string with a length limit of 128
         #     characters. Otherwise, an INVALID_ARGUMENT error is returned.

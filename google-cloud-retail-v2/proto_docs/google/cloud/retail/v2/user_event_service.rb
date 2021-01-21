@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent catalog resource name, such as
-        #     "projects/1234/locations/global/catalogs/default_catalog".
+        #     `projects/1234/locations/global/catalogs/default_catalog`.
         # @!attribute [rw] user_event
         #   @return [::Google::Cloud::Retail::V2::UserEvent]
         #     Required. User event to write.
@@ -38,7 +38,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent catalog name, such as
-        #     "projects/1234/locations/global/catalogs/default_catalog".
+        #     `projects/1234/locations/global/catalogs/default_catalog`.
         # @!attribute [rw] user_event
         #   @return [::String]
         #     Required. URL encoded UserEvent proto with a length limit of 2,000,000
@@ -63,7 +63,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent catalog resource name, such as
-        #     "projects/1234/locations/global/catalogs/default_catalog".
+        #     `projects/1234/locations/global/catalogs/default_catalog`.
         # @!attribute [rw] user_event_rejoin_scope
         #   @return [::Google::Cloud::Retail::V2::RejoinUserEventsRequest::UserEventRejoinScope]
         #     The type of the user event rejoin to define the scope and range of the user

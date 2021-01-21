@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent catalog resource name, such as
-        #     "projects/*/locations/global/catalogs/default_catalog/branches/default_branch".
+        #     `projects/*/locations/global/catalogs/default_catalog/branches/default_branch`.
         # @!attribute [rw] product
         #   @return [::Google::Cloud::Retail::V2::Product]
         #     Required. The {::Google::Cloud::Retail::V2::Product Product} to create.
@@ -56,7 +56,7 @@ module Google
         #   @return [::String]
         #     Required. Full resource name of {::Google::Cloud::Retail::V2::Product Product},
         #     such as
-        #     "projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id".
+        #     `projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
         #
         #     If the caller does not have permission to access the
         #     {::Google::Cloud::Retail::V2::Product Product}, regardless of whether or not it
@@ -99,7 +99,7 @@ module Google
         #   @return [::String]
         #     Required. Full resource name of {::Google::Cloud::Retail::V2::Product Product},
         #     such as
-        #     "projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id".
+        #     `projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
         #
         #     If the caller does not have permission to delete the
         #     {::Google::Cloud::Retail::V2::Product Product}, regardless of whether or not it

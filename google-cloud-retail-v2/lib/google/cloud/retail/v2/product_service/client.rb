@@ -185,7 +185,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent catalog resource name, such as
-            #     "projects/*/locations/global/catalogs/default_catalog/branches/default_branch".
+            #     `projects/*/locations/global/catalogs/default_catalog/branches/default_branch`.
             #   @param product [::Google::Cloud::Retail::V2::Product, ::Hash]
             #     Required. The {::Google::Cloud::Retail::V2::Product Product} to create.
             #   @param product_id [::String]
@@ -271,7 +271,7 @@ module Google
             #   @param name [::String]
             #     Required. Full resource name of {::Google::Cloud::Retail::V2::Product Product},
             #     such as
-            #     "projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id".
+            #     `projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
             #
             #     If the caller does not have permission to access the
             #     {::Google::Cloud::Retail::V2::Product Product}, regardless of whether or not it
@@ -427,7 +427,7 @@ module Google
             #   @param name [::String]
             #     Required. Full resource name of {::Google::Cloud::Retail::V2::Product Product},
             #     such as
-            #     "projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id".
+            #     `projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
             #
             #     If the caller does not have permission to delete the
             #     {::Google::Cloud::Retail::V2::Product Product}, regardless of whether or not it
@@ -507,7 +507,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required.
-            #     "projects/1234/locations/global/catalogs/default_catalog/branches/default_branch"
+            #     `projects/1234/locations/global/catalogs/default_catalog/branches/default_branch`
             #
             #     If no updateMask is specified, requires products.create permission.
             #     If updateMask is specified, requires products.update permission.
