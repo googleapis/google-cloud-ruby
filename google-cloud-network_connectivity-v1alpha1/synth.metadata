@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:Neenu1995/google-cloud-ruby.git",
-        "sha": "d1aefdee2045edb5ba277d7e46329e3110b41a89"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "a04f5d462504582da14b6a0c9618009ff5318b5e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "118fbaed3e9f323c814dc248ea127bcb281ce7be",
-        "internalRef": "352605952"
+        "sha": "56df28f70dbfddd90da3c4e38cce2ae3c81162e4",
+        "internalRef": "352973788"
       }
     }
   ],
@@ -26,5 +26,44 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-network_connectivity-v1alpha1.gemspec",
+    "lib/google-cloud-network_connectivity-v1alpha1.rb",
+    "lib/google/cloud/network_connectivity/v1alpha1.rb",
+    "lib/google/cloud/network_connectivity/v1alpha1/hub_service.rb",
+    "lib/google/cloud/network_connectivity/v1alpha1/hub_service/client.rb",
+    "lib/google/cloud/network_connectivity/v1alpha1/hub_service/credentials.rb",
+    "lib/google/cloud/network_connectivity/v1alpha1/hub_service/operations.rb",
+    "lib/google/cloud/network_connectivity/v1alpha1/hub_service/paths.rb",
+    "lib/google/cloud/network_connectivity/v1alpha1/version.rb",
+    "lib/google/cloud/networkconnectivity/v1alpha1/common_pb.rb",
+    "lib/google/cloud/networkconnectivity/v1alpha1/hub_pb.rb",
+    "lib/google/cloud/networkconnectivity/v1alpha1/hub_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/networkconnectivity/v1alpha1/common.rb",
+    "proto_docs/google/cloud/networkconnectivity/v1alpha1/hub.rb",
+    "proto_docs/google/longrunning/operations.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/rpc/status.rb",
+    "test/google/cloud/network_connectivity/v1alpha1/hub_service_operations_test.rb",
+    "test/google/cloud/network_connectivity/v1alpha1/hub_service_paths_test.rb",
+    "test/google/cloud/network_connectivity/v1alpha1/hub_service_test.rb",
+    "test/helper.rb"
   ]
 }
