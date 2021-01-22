@@ -59,6 +59,7 @@ class ::Google::Cloud::Tasks::V2beta2::CloudTasks::ClientTest < Minitest::Test
     filter = "hello world"
     page_size = 42
     page_token = "hello world"
+    read_mask = {}
 
     list_queues_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_queues, name
@@ -67,6 +68,7 @@ class ::Google::Cloud::Tasks::V2beta2::CloudTasks::ClientTest < Minitest::Test
       assert_equal "hello world", request["filter"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["read_mask"]
       refute_nil options
     end
 
@@ -77,35 +79,35 @@ class ::Google::Cloud::Tasks::V2beta2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_queues({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_queues({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_queues parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_queues parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_queues ::Google::Cloud::Tasks::V2beta2::ListQueuesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_queues ::Google::Cloud::Tasks::V2beta2::ListQueuesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_queues({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_queues({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_queues ::Google::Cloud::Tasks::V2beta2::ListQueuesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_queues ::Google::Cloud::Tasks::V2beta2::ListQueuesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -125,11 +127,13 @@ class ::Google::Cloud::Tasks::V2beta2::CloudTasks::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     name = "hello world"
+    read_mask = {}
 
     get_queue_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_queue, name
       assert_kind_of ::Google::Cloud::Tasks::V2beta2::GetQueueRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["read_mask"]
       refute_nil options
     end
 
@@ -140,31 +144,31 @@ class ::Google::Cloud::Tasks::V2beta2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get_queue({ name: name }) do |response, operation|
+      client.get_queue({ name: name, read_mask: read_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_queue name: name do |response, operation|
+      client.get_queue name: name, read_mask: read_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_queue ::Google::Cloud::Tasks::V2beta2::GetQueueRequest.new(name: name) do |response, operation|
+      client.get_queue ::Google::Cloud::Tasks::V2beta2::GetQueueRequest.new(name: name, read_mask: read_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_queue({ name: name }, grpc_options) do |response, operation|
+      client.get_queue({ name: name, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_queue ::Google::Cloud::Tasks::V2beta2::GetQueueRequest.new(name: name), grpc_options do |response, operation|
+      client.get_queue ::Google::Cloud::Tasks::V2beta2::GetQueueRequest.new(name: name, read_mask: read_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
