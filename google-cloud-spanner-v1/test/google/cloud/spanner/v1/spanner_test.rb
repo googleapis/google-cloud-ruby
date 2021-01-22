@@ -819,6 +819,7 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
     session = "hello world"
     transaction_id = "hello world"
     mutations = [{}]
+    return_commit_stats = true
 
     commit_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :commit, name
@@ -827,6 +828,7 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
       assert_equal "hello world", request["transaction_id"]
       assert_equal :transaction_id, request.transaction
       assert_kind_of ::Google::Cloud::Spanner::V1::Mutation, request["mutations"].first
+      assert_equal true, request["return_commit_stats"]
       refute_nil options
     end
 
@@ -837,31 +839,31 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.commit({ session: session, transaction_id: transaction_id, mutations: mutations }) do |response, operation|
+      client.commit({ session: session, transaction_id: transaction_id, mutations: mutations, return_commit_stats: return_commit_stats }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.commit session: session, transaction_id: transaction_id, mutations: mutations do |response, operation|
+      client.commit session: session, transaction_id: transaction_id, mutations: mutations, return_commit_stats: return_commit_stats do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.commit ::Google::Cloud::Spanner::V1::CommitRequest.new(session: session, transaction_id: transaction_id, mutations: mutations) do |response, operation|
+      client.commit ::Google::Cloud::Spanner::V1::CommitRequest.new(session: session, transaction_id: transaction_id, mutations: mutations, return_commit_stats: return_commit_stats) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.commit({ session: session, transaction_id: transaction_id, mutations: mutations }, grpc_options) do |response, operation|
+      client.commit({ session: session, transaction_id: transaction_id, mutations: mutations, return_commit_stats: return_commit_stats }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.commit ::Google::Cloud::Spanner::V1::CommitRequest.new(session: session, transaction_id: transaction_id, mutations: mutations), grpc_options do |response, operation|
+      client.commit ::Google::Cloud::Spanner::V1::CommitRequest.new(session: session, transaction_id: transaction_id, mutations: mutations, return_commit_stats: return_commit_stats), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
