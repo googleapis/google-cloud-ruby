@@ -54,6 +54,15 @@ module Google
         #     HTTP request that is sent to the task's target.
         #
         #     An HTTP task is a task that has {::Google::Cloud::Tasks::V2beta3::HttpRequest HttpRequest} set.
+        # @!attribute [rw] pull_message
+        #   @return [::Google::Cloud::Tasks::V2beta3::PullMessage]
+        #     Pull Message contained in a task in a {::Google::Cloud::Tasks::V2beta3::Queue#type PULL} queue type. This
+        #     payload type cannot be explicitly set through Cloud Tasks API. Its
+        #     purpose, currently is to provide backward compatibility with App Engine
+        #     Task Queue
+        #     [pull](https://cloud.google.com/appengine/docs/standard/java/taskqueue/pull/)
+        #     queues to provide a way to inspect contents of pull tasks through the
+        #     {::Google::Cloud::Tasks::V2beta3::CloudTasks::Client#get_task CloudTasks.GetTask}.
         # @!attribute [rw] schedule_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time when the task is scheduled to be attempted.

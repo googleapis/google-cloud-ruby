@@ -17,8 +17,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :retry_config, :message, 5, "google.cloud.tasks.v2beta3.RetryConfig"
       optional :state, :enum, 6, "google.cloud.tasks.v2beta3.Queue.State"
       optional :purge_time, :message, 7, "google.protobuf.Timestamp"
+      optional :task_ttl, :message, 8, "google.protobuf.Duration"
+      optional :tombstone_ttl, :message, 9, "google.protobuf.Duration"
       optional :stackdriver_logging_config, :message, 10, "google.cloud.tasks.v2beta3.StackdriverLoggingConfig"
       optional :type, :enum, 11, "google.cloud.tasks.v2beta3.Queue.Type"
+      optional :stats, :message, 12, "google.cloud.tasks.v2beta3.QueueStats"
       oneof :queue_type do
         optional :app_engine_http_queue, :message, 3, "google.cloud.tasks.v2beta3.AppEngineHttpQueue"
       end
@@ -49,6 +52,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.tasks.v2beta3.StackdriverLoggingConfig" do
       optional :sampling_ratio, :double, 1
     end
+    add_message "google.cloud.tasks.v2beta3.QueueStats" do
+      optional :tasks_count, :int64, 1
+      optional :oldest_estimated_arrival_time, :message, 2, "google.protobuf.Timestamp"
+      optional :executed_last_minute_count, :int64, 3
+      optional :concurrent_dispatches_count, :int64, 4
+      optional :effective_execution_rate, :double, 5
+    end
   end
 end
 
@@ -62,6 +72,7 @@ module Google
         RateLimits = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.RateLimits").msgclass
         RetryConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.RetryConfig").msgclass
         StackdriverLoggingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.StackdriverLoggingConfig").msgclass
+        QueueStats = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta3.QueueStats").msgclass
       end
     end
   end
