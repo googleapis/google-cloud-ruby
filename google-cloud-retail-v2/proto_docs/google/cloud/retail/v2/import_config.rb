@@ -27,10 +27,11 @@ module Google
         #   @return [::Array<::String>]
         #     Required. Google Cloud Storage URIs to input files. URI can be up to
         #     2000 characters long. URIs can match the full object path (for example,
-        #     gs://bucket/directory/object.json) or a pattern matching one or more
-        #     files, such as gs://bucket/directory/*.json. A request can
+        #     `gs://bucket/directory/object.json`) or a pattern matching one or more
+        #     files, such as `gs://bucket/directory/*.json`. A request can
         #     contain at most 100 files, and each file can be up to 2 GB. See
-        #     [Importing product information](/recommendations-ai/docs/upload-catalog)
+        #     [Importing product
+        #     information](https://cloud.google.com/recommendations-ai/docs/upload-catalog)
         #     for the expected file format and setup instructions.
         # @!attribute [rw] data_schema
         #   @return [::String]
@@ -42,7 +43,7 @@ module Google
         #     per line. Each product must
         #       have a valid {::Google::Cloud::Retail::V2::Product#id Product.id}.
         #     * `product_merchant_center`: See [Importing catalog data from Merchant
-        #       Center](/retail/recommendations-ai/docs/upload-catalog#mc).
+        #       Center](https://cloud.google.com/retail/recommendations-ai/docs/upload-catalog#mc).
         #
         #     Supported values for user events imports:
         #
@@ -84,7 +85,7 @@ module Google
         #     per line. Each product must
         #       have a valid {::Google::Cloud::Retail::V2::Product#id Product.id}.
         #     * `product_merchant_center`: See [Importing catalog data from Merchant
-        #       Center](/retail/recommendations-ai/docs/upload-catalog#mc).
+        #       Center](https://cloud.google.com/retail/recommendations-ai/docs/upload-catalog#mc).
         #
         #     Supported values for user events imports:
         #
@@ -133,7 +134,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required.
-        #     "projects/1234/locations/global/catalogs/default_catalog/branches/default_branch"
+        #     `projects/1234/locations/global/catalogs/default_catalog/branches/default_branch`
         #
         #     If no updateMask is specified, requires products.create permission.
         #     If updateMask is specified, requires products.update permission.
@@ -155,7 +156,7 @@ module Google
         # Request message for the ImportUserEvents request.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. "projects/1234/locations/global/catalogs/default_catalog"
+        #     Required. `projects/1234/locations/global/catalogs/default_catalog`
         # @!attribute [rw] input_config
         #   @return [::Google::Cloud::Retail::V2::UserEventInputConfig]
         #     Required. The desired input location of the data.
