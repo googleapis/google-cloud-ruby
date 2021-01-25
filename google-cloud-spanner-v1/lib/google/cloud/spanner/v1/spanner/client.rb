@@ -686,8 +686,9 @@ module Google
             #     Parameter names and values that bind to placeholders in the SQL string.
             #
             #     A parameter placeholder consists of the `@` character followed by the
-            #     parameter name (for example, `@firstName`). Parameter names can contain
-            #     letters, numbers, and underscores.
+            #     parameter name (for example, `@firstName`). Parameter names must conform
+            #     to the naming requirements of identifiers as specified at
+            #     https://cloud.google.com/spanner/docs/lexical#identifiers.
             #
             #     Parameters can appear anywhere that a literal value is expected.  The same
             #     parameter name can be used more than once, for example:
@@ -820,8 +821,9 @@ module Google
             #     Parameter names and values that bind to placeholders in the SQL string.
             #
             #     A parameter placeholder consists of the `@` character followed by the
-            #     parameter name (for example, `@firstName`). Parameter names can contain
-            #     letters, numbers, and underscores.
+            #     parameter name (for example, `@firstName`). Parameter names must conform
+            #     to the naming requirements of identifiers as specified at
+            #     https://cloud.google.com/spanner/docs/lexical#identifiers.
             #
             #     Parameters can appear anywhere that a literal value is expected.  The same
             #     parameter name can be used more than once, for example:
@@ -1322,6 +1324,12 @@ module Google
             # reasons. If `Commit` returns `ABORTED`, the caller should re-attempt
             # the transaction from the beginning, re-using the same session.
             #
+            # On very rare occasions, `Commit` might return `UNKNOWN`. This can happen,
+            # for example, if the client job experiences a 1+ hour networking failure.
+            # At that point, Cloud Spanner has lost track of the transaction outcome and
+            # we recommend that you perform another read from the database to see the
+            # state of things as they are now.
+            #
             # @overload commit(request, options = nil)
             #   Pass arguments to `commit` via a request object, either of type
             #   {::Google::Cloud::Spanner::V1::CommitRequest} or an equivalent Hash.
@@ -1332,7 +1340,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload commit(session: nil, transaction_id: nil, single_use_transaction: nil, mutations: nil)
+            # @overload commit(session: nil, transaction_id: nil, single_use_transaction: nil, mutations: nil, return_commit_stats: nil)
             #   Pass arguments to `commit` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1355,6 +1363,10 @@ module Google
             #     The mutations to be executed when this transaction commits. All
             #     mutations are applied atomically, in the order they appear in
             #     this list.
+            #   @param return_commit_stats [::Boolean]
+            #     If `true`, then statistics related to the transaction will be included in
+            #     the {::Google::Cloud::Spanner::V1::CommitResponse#commit_stats CommitResponse}. Default value is
+            #     `false`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::CommitResponse]
