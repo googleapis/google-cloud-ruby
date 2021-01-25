@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/tasks/v2beta2/target_pb'
 require 'google/protobuf/duration_pb'
@@ -16,6 +17,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :retry_config, :message, 6, "google.cloud.tasks.v2beta2.RetryConfig"
       optional :state, :enum, 7, "google.cloud.tasks.v2beta2.Queue.State"
       optional :purge_time, :message, 8, "google.protobuf.Timestamp"
+      optional :task_ttl, :message, 9, "google.protobuf.Duration"
+      optional :tombstone_ttl, :message, 10, "google.protobuf.Duration"
+      optional :stats, :message, 16, "google.cloud.tasks.v2beta2.QueueStats"
       oneof :target_type do
         optional :app_engine_http_target, :message, 3, "google.cloud.tasks.v2beta2.AppEngineHttpTarget"
         optional :pull_target, :message, 4, "google.cloud.tasks.v2beta2.PullTarget"
@@ -42,6 +46,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :unlimited_attempts, :bool, 2
       end
     end
+    add_message "google.cloud.tasks.v2beta2.QueueStats" do
+      optional :tasks_count, :int64, 1
+      optional :oldest_estimated_arrival_time, :message, 2, "google.protobuf.Timestamp"
+      optional :executed_last_minute_count, :int64, 3
+      optional :concurrent_dispatches_count, :int64, 4
+      optional :effective_execution_rate, :double, 5
+    end
   end
 end
 
@@ -53,6 +64,7 @@ module Google
         Queue::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta2.Queue.State").enummodule
         RateLimits = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta2.RateLimits").msgclass
         RetryConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta2.RetryConfig").msgclass
+        QueueStats = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2beta2.QueueStats").msgclass
       end
     end
   end

@@ -66,7 +66,7 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.list_queues.timeout = 10.0
+                default_config.rpcs.list_queues.timeout = 20.0
                 default_config.rpcs.list_queues.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     10.0,
@@ -74,7 +74,7 @@ module Google
                   retry_codes:   [14, 4]
                 }
 
-                default_config.rpcs.get_queue.timeout = 10.0
+                default_config.rpcs.get_queue.timeout = 20.0
                 default_config.rpcs.get_queue.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     10.0,
@@ -82,11 +82,11 @@ module Google
                   retry_codes:   [14, 4]
                 }
 
-                default_config.rpcs.create_queue.timeout = 10.0
+                default_config.rpcs.create_queue.timeout = 20.0
 
-                default_config.rpcs.update_queue.timeout = 10.0
+                default_config.rpcs.update_queue.timeout = 20.0
 
-                default_config.rpcs.delete_queue.timeout = 10.0
+                default_config.rpcs.delete_queue.timeout = 20.0
                 default_config.rpcs.delete_queue.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     10.0,
@@ -94,13 +94,13 @@ module Google
                   retry_codes:   [14, 4]
                 }
 
-                default_config.rpcs.purge_queue.timeout = 10.0
+                default_config.rpcs.purge_queue.timeout = 20.0
 
-                default_config.rpcs.pause_queue.timeout = 10.0
+                default_config.rpcs.pause_queue.timeout = 20.0
 
-                default_config.rpcs.resume_queue.timeout = 10.0
+                default_config.rpcs.resume_queue.timeout = 20.0
 
-                default_config.rpcs.get_iam_policy.timeout = 10.0
+                default_config.rpcs.get_iam_policy.timeout = 20.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     10.0,
@@ -108,9 +108,9 @@ module Google
                   retry_codes:   [14, 4]
                 }
 
-                default_config.rpcs.set_iam_policy.timeout = 10.0
+                default_config.rpcs.set_iam_policy.timeout = 20.0
 
-                default_config.rpcs.test_iam_permissions.timeout = 10.0
+                default_config.rpcs.test_iam_permissions.timeout = 20.0
                 default_config.rpcs.test_iam_permissions.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     10.0,
@@ -118,7 +118,7 @@ module Google
                   retry_codes:   [14, 4]
                 }
 
-                default_config.rpcs.list_tasks.timeout = 10.0
+                default_config.rpcs.list_tasks.timeout = 20.0
                 default_config.rpcs.list_tasks.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     10.0,
@@ -126,7 +126,7 @@ module Google
                   retry_codes:   [14, 4]
                 }
 
-                default_config.rpcs.get_task.timeout = 10.0
+                default_config.rpcs.get_task.timeout = 20.0
                 default_config.rpcs.get_task.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     10.0,
@@ -134,9 +134,9 @@ module Google
                   retry_codes:   [14, 4]
                 }
 
-                default_config.rpcs.create_task.timeout = 10.0
+                default_config.rpcs.create_task.timeout = 20.0
 
-                default_config.rpcs.delete_task.timeout = 10.0
+                default_config.rpcs.delete_task.timeout = 20.0
                 default_config.rpcs.delete_task.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     10.0,
@@ -144,15 +144,15 @@ module Google
                   retry_codes:   [14, 4]
                 }
 
-                default_config.rpcs.lease_tasks.timeout = 10.0
+                default_config.rpcs.lease_tasks.timeout = 20.0
 
-                default_config.rpcs.acknowledge_task.timeout = 10.0
+                default_config.rpcs.acknowledge_task.timeout = 20.0
 
-                default_config.rpcs.renew_lease.timeout = 10.0
+                default_config.rpcs.renew_lease.timeout = 20.0
 
-                default_config.rpcs.cancel_lease.timeout = 10.0
+                default_config.rpcs.cancel_lease.timeout = 20.0
 
-                default_config.rpcs.run_task.timeout = 10.0
+                default_config.rpcs.run_task.timeout = 20.0
 
                 default_config
               end
@@ -248,7 +248,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_queues(parent: nil, filter: nil, page_size: nil, page_token: nil)
+            # @overload list_queues(parent: nil, filter: nil, page_size: nil, page_token: nil, read_mask: nil)
             #   Pass arguments to `list_queues` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -285,6 +285,11 @@ module Google
             #     from the previous call to {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#list_queues ListQueues}
             #     method. It is an error to switch the value of the
             #     {::Google::Cloud::Tasks::V2beta2::ListQueuesRequest#filter filter} while iterating through pages.
+            #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Read mask is used for a more granular control over what the API returns.
+            #     If the mask is not present all fields will be returned except
+            #     [Queue.stats]. [Queue.stats] will be returned only if it was  explicitly
+            #     specified in the mask.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Tasks::V2beta2::Queue>]
@@ -345,7 +350,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload get_queue(name: nil)
+            # @overload get_queue(name: nil, read_mask: nil)
             #   Pass arguments to `get_queue` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -353,6 +358,11 @@ module Google
             #   @param name [::String]
             #     Required. The resource name of the queue. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+            #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Read mask is used for a more granular control over what the API returns.
+            #     If the mask is not present all fields will be returned except
+            #     [Queue.stats]. [Queue.stats] will be returned only if it was  explicitly
+            #     specified in the mask.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Queue]
