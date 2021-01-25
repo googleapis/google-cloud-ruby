@@ -32,6 +32,15 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientPathsTest < Minitest:
 
       path = client.insight_path project: "value0", location: "value1", insight_type: "value2", insight: "value3"
       assert_equal "projects/value0/locations/value1/insightTypes/value2/insights/value3", path
+
+      path = client.insight_path billing_account: "value0", location: "value1", insight_type: "value2", insight: "value3"
+      assert_equal "billingAccounts/value0/locations/value1/insightTypes/value2/insights/value3", path
+
+      path = client.insight_path folder: "value0", location: "value1", insight_type: "value2", insight: "value3"
+      assert_equal "folders/value0/locations/value1/insightTypes/value2/insights/value3", path
+
+      path = client.insight_path organization: "value0", location: "value1", insight_type: "value2", insight: "value3"
+      assert_equal "organizations/value0/locations/value1/insightTypes/value2/insights/value3", path
     end
   end
 
@@ -44,6 +53,15 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientPathsTest < Minitest:
 
       path = client.insight_type_path project: "value0", location: "value1", insight_type: "value2"
       assert_equal "projects/value0/locations/value1/insightTypes/value2", path
+
+      path = client.insight_type_path billing_account: "value0", location: "value1", insight_type: "value2"
+      assert_equal "billingAccounts/value0/locations/value1/insightTypes/value2", path
+
+      path = client.insight_type_path folder: "value0", location: "value1", insight_type: "value2"
+      assert_equal "folders/value0/locations/value1/insightTypes/value2", path
+
+      path = client.insight_type_path organization: "value0", location: "value1", insight_type: "value2"
+      assert_equal "organizations/value0/locations/value1/insightTypes/value2", path
     end
   end
 
@@ -56,6 +74,15 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientPathsTest < Minitest:
 
       path = client.recommendation_path project: "value0", location: "value1", recommender: "value2", recommendation: "value3"
       assert_equal "projects/value0/locations/value1/recommenders/value2/recommendations/value3", path
+
+      path = client.recommendation_path billing_account: "value0", location: "value1", recommender: "value2", recommendation: "value3"
+      assert_equal "billingAccounts/value0/locations/value1/recommenders/value2/recommendations/value3", path
+
+      path = client.recommendation_path folder: "value0", location: "value1", recommender: "value2", recommendation: "value3"
+      assert_equal "folders/value0/locations/value1/recommenders/value2/recommendations/value3", path
+
+      path = client.recommendation_path organization: "value0", location: "value1", recommender: "value2", recommendation: "value3"
+      assert_equal "organizations/value0/locations/value1/recommenders/value2/recommendations/value3", path
     end
   end
 
@@ -68,6 +95,15 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientPathsTest < Minitest:
 
       path = client.recommender_path project: "value0", location: "value1", recommender: "value2"
       assert_equal "projects/value0/locations/value1/recommenders/value2", path
+
+      path = client.recommender_path billing_account: "value0", location: "value1", recommender: "value2"
+      assert_equal "billingAccounts/value0/locations/value1/recommenders/value2", path
+
+      path = client.recommender_path folder: "value0", location: "value1", recommender: "value2"
+      assert_equal "folders/value0/locations/value1/recommenders/value2", path
+
+      path = client.recommender_path organization: "value0", location: "value1", recommender: "value2"
+      assert_equal "organizations/value0/locations/value1/recommenders/value2", path
     end
   end
 end

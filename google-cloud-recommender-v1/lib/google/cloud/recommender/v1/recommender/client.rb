@@ -215,6 +215,8 @@ module Google
             #
             #     LOCATION here refers to GCP Locations:
             #     https://cloud.google.com/about/locations/
+            #     INSIGHT_TYPE_ID refers to supported insight types:
+            #     https://cloud.google.com/recommender/docs/insights/insight-types.)
             #   @param page_size [::Integer]
             #     Optional. The maximum number of results to return from this request.  Non-positive
             #     values are ignored. If not specified, the server will determine the number
@@ -446,6 +448,8 @@ module Google
             #
             #     LOCATION here refers to GCP Locations:
             #     https://cloud.google.com/about/locations/
+            #     RECOMMENDER_ID refers to supported recommenders:
+            #     https://cloud.google.com/recommender/docs/recommenders.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of results to return from this request.  Non-positive
             #     values are ignored. If not specified, the server will determine the number
