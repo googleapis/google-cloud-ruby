@@ -1,5 +1,11 @@
 # Release History
 
+### 0.1.4 / 2021-01-26
+
+#### Bug Fixes
+
+* Update default timeout and retry configuration
+
 ### 0.1.3 / 2021-01-13
 
 #### Bug Fixes
