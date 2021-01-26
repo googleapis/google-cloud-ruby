@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2021-01-26
+
+#### Features
+
+* Add option for returning Spanner commit stats
+
 ### 0.2.3 / 2021-01-20
 
 #### Documentation
