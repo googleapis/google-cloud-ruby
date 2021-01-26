@@ -66,8 +66,20 @@ module Google
                 default_config = Client::Configuration.new parent_config
 
                 default_config.rpcs.read_rows.timeout = 43_200.0
+                default_config.rpcs.read_rows.retry_policy = {
+                  initial_delay: 0.01,
+                  max_delay:     60.0,
+                  multiplier:    2,
+                  retry_codes:   []
+                }
 
                 default_config.rpcs.sample_row_keys.timeout = 60.0
+                default_config.rpcs.sample_row_keys.retry_policy = {
+                  initial_delay: 0.01,
+                  max_delay:     60.0,
+                  multiplier:    2,
+                  retry_codes:   []
+                }
 
                 default_config.rpcs.mutate_row.timeout = 60.0
                 default_config.rpcs.mutate_row.retry_policy = {
@@ -78,10 +90,28 @@ module Google
                 }
 
                 default_config.rpcs.mutate_rows.timeout = 600.0
+                default_config.rpcs.mutate_rows.retry_policy = {
+                  initial_delay: 0.01,
+                  max_delay:     60.0,
+                  multiplier:    2,
+                  retry_codes:   []
+                }
 
                 default_config.rpcs.check_and_mutate_row.timeout = 20.0
+                default_config.rpcs.check_and_mutate_row.retry_policy = {
+                  initial_delay: 0.01,
+                  max_delay:     60.0,
+                  multiplier:    2,
+                  retry_codes:   []
+                }
 
                 default_config.rpcs.read_modify_write_row.timeout = 20.0
+                default_config.rpcs.read_modify_write_row.retry_policy = {
+                  initial_delay: 0.01,
+                  max_delay:     60.0,
+                  multiplier:    2,
+                  retry_codes:   []
+                }
 
                 default_config
               end
@@ -772,7 +802,7 @@ module Google
               # Each configuration object is of type `Gapic::Config::Method` and includes
               # the following configuration fields:
               #
-              #  *  `timeout` (*type:* `Numeric`) - The call timeout in milliseconds
+              #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
               #  *  `metadata` (*type:* `Hash{Symbol=>String}`) - Additional gRPC headers
               #  *  `retry_policy (*type:* `Hash`) - The retry policy. The policy fields
               #     include the following keys:
