@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "244b7ae3fec68b2d1a46c2693bc2849dd945f4ec"
+        "sha": "146b9fbd185ff9018f6d3bca573cf8e875db3ab0"
       }
     },
     {
