@@ -70,6 +70,7 @@ module Google
                   initial_delay: 0.01,
                   max_delay:     60.0,
                   multiplier:    2,
+                  retry_codes:   []
                 }
 
                 default_config.rpcs.sample_row_keys.timeout = 60.0
@@ -77,6 +78,7 @@ module Google
                   initial_delay: 0.01,
                   max_delay:     60.0,
                   multiplier:    2,
+                  retry_codes:   []
                 }
 
                 default_config.rpcs.mutate_row.timeout = 60.0
@@ -92,6 +94,7 @@ module Google
                   initial_delay: 0.01,
                   max_delay:     60.0,
                   multiplier:    2,
+                  retry_codes:   []
                 }
 
                 default_config.rpcs.check_and_mutate_row.timeout = 20.0
@@ -99,6 +102,7 @@ module Google
                   initial_delay: 0.01,
                   max_delay:     60.0,
                   multiplier:    2,
+                  retry_codes:   []
                 }
 
                 default_config.rpcs.read_modify_write_row.timeout = 20.0
@@ -106,6 +110,7 @@ module Google
                   initial_delay: 0.01,
                   max_delay:     60.0,
                   multiplier:    2,
+                  retry_codes:   []
                 }
 
                 default_config
