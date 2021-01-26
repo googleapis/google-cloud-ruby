@@ -77,6 +77,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.get_table.timeout = 60.0
@@ -84,6 +85,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.delete_table.timeout = 60.0
@@ -113,6 +115,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.list_snapshots.timeout = 60.0
@@ -130,6 +133,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.update_backup.timeout = 60.0
@@ -141,6 +145,7 @@ module Google
                     initial_delay: 1.0,
                     max_delay:     60.0,
                     multiplier:    2,
+                    retry_codes:   [14, 4]
                   }
 
                   default_config.rpcs.get_iam_policy.timeout = 60.0
