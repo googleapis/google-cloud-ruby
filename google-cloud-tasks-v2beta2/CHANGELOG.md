@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2021-01-26
+
+#### Features
+
+* Support read masks, queue TTLs, and queue stats
+
 ### 0.2.6 / 2021-01-19
 
 #### Documentation
