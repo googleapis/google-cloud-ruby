@@ -4,8 +4,7 @@
 
 #### Features
 
-* Support billing account parameters for path helpers
-* Support for addi forms of insight and recommendation paths
+* Support for additional forms of insight and recommendation paths
 
 #### Documentation
 
