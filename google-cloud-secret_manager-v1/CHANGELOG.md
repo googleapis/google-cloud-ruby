@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 / 2021-01-26
+
+#### Features
+
+* added expire_time and ttl fields to Secret
+
 ### 0.5.1 / 2021-01-19
 
 #### Documentation
