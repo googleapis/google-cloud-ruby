@@ -34,7 +34,7 @@ module Acceptance
     extend Minitest::Spec::DSL
 
     # Register this spec type for when :datastore is used.
-    register_spec_type(self) do |desc, *addl|
+    register_spec_type self do |_desc, *addl|
       addl.include? :datastore
     end
 
@@ -42,8 +42,8 @@ module Acceptance
       result = nil
       reporter.prerecord klass, method_name
       (1..3).each do |try|
-        result = Minitest.run_one_method(klass, method_name)
-        break if (result.passed? || result.skipped?)
+        result = Minitest.run_one_method klass, method_name
+        break if result.passed? || result.skipped?
         puts "Retrying #{klass}##{method_name} (#{try})"
       end
       reporter.record result
