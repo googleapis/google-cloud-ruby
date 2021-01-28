@@ -14,6 +14,7 @@
 
 require "minitest/autorun"
 require "minitest/focus"
+require "minitest/hooks/default"
 require "google/cloud/datastore"
 require "securerandom"
 
@@ -36,9 +37,10 @@ end
 def find_or_save_task_list task_list_key
   tl = datastore.find task_list_key
   if tl.nil?
-    tl = datastore.entity task_list_key
-    datastore.save tl
-    wait_until do
+    wait_until description: "find task_list #{task_list_key.name}" do
+      tl = datastore.entity task_list_key
+      datastore.save tl
+      sleep 5
       tl = datastore.find task_list_key
     end
   end
@@ -48,9 +50,10 @@ end
 def find_or_save_task task_key
   t = datastore.find task_key
   if t.nil?
-    t = task_entity task_key
-    datastore.save t
-    wait_until do
+    wait_until description: "find task #{task_key.name}" do
+      t = task_entity task_key
+      datastore.save t
+      sleep 1
       t = datastore.find task_key
     end
   end
@@ -59,13 +62,14 @@ end
 
 # Keep trying a block of code until the code of block yield a true statement or
 # raise error after timeout
-def wait_until timeout: 30
+def wait_until timeout: 240, description: "execute block"
   t_begin = Time.now
   delay = 1
   loop do
-    sleep delay
     break if yield
-    raise "Timeout after trying for #{timeout} seconds" if (Time.now - t_begin) > timeout
+    print delay
+    sleep delay
+    raise "Timeout attempting to #{description} after #{timeout}s" if (Time.now - t_begin) > timeout
     delay += 1
   end
 end
