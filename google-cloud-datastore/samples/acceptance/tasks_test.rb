@@ -15,7 +15,7 @@
 require_relative "helper"
 require_relative "../tasks"
 
-describe "Datastore task list" do
+describe "Datastore task list", :datastore do
   let(:datastore) { Google::Cloud::Datastore.new }
 
   before do
