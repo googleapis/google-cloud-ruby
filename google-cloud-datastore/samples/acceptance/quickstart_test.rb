@@ -15,7 +15,7 @@
 require_relative "helper"
 require_relative "../quickstart.rb"
 
-describe "Datastore Quickstart" do
+describe "Datastore Quickstart", :datastore do
   let(:datastore) { Google::Cloud::Datastore.new }
   let(:task_name) { "test_task_#{time_plus_random}" }
   let(:task_key) { datastore.key "Task", task_name }

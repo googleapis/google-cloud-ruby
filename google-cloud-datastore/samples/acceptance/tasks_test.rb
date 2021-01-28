@@ -15,18 +15,11 @@
 require_relative "helper"
 require_relative "../tasks"
 
-describe "Datastore task list" do
+describe "Datastore task list", :datastore do
   let(:datastore) { Google::Cloud::Datastore.new }
 
   before do
     delete_tasks
-  end
-
-  def wait_until times: 5, duration: 1
-    times.times do
-      sleep duration
-      return if yield
-    end
   end
 
   def delete_tasks
@@ -36,7 +29,10 @@ describe "Datastore task list" do
 
   it "creates a task" do
     desc = "Test description."
-    id = add_task desc
+    id = nil
+    capture_io do
+      id = add_task desc
+    end
     task = datastore.find "Task", id
     assert task
     assert_equal desc, task["description"]
@@ -48,6 +44,8 @@ describe "Datastore task list" do
     end
     datastore.save task
     id = task.key.id
+    wait_until { datastore.find "Task", id }
+
     mark_done id
     task = datastore.find "Task", id
     assert_equal true, task["done"]
@@ -75,6 +73,8 @@ describe "Datastore task list" do
     end
     datastore.save task
     id = task.key.id
+    wait_until { datastore.find "Task", id }
+
     delete_task id
     task = datastore.find "Task", id
     refute task
