@@ -1275,7 +1275,7 @@ def random_bucket_hash name: "my-bucket",
                        logging_prefix: nil,
                        website_main: nil,
                        website_404: nil,
-                       public_access_prevention: "enforced"
+                       public_access_prevention: nil
   versioning_config = { "enabled" => versioning } if versioning
   iam_configuration = { "publicAccessPrevention" => public_access_prevention } if public_access_prevention
   { "kind" => "storage#bucket",
