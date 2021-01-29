@@ -896,9 +896,9 @@ module Google
         end
 
         ##
-        # Whether the bucket's file IAM configuration enforces Public Access Prevention. Currently, `unspecified` and
+        # The value for Public Access Prevention in the bucket's IAM configuration. Currently, `unspecified` and
         # `enforced` are supported. When set to `enforced`, Public Access Prevention is enforced in the bucket's IAM
-        # configuration. This value can be modified by calling {Bucket#public_access_prevention=}.
+        # configuration. This value can be modified by calling {#public_access_prevention=}.
         #
         # @return [String, nil] Currently, `unspecified` and `enforced` are supported. Returns `nil` if the bucket has
         #    no IAM configuration.
@@ -918,14 +918,14 @@ module Google
         end
 
         ##
-        # Sets whether Public Access Prevention is enforced for this bucket. This value can be queried by calling
-        # {Bucket#public_access_prevention}.
+        # Sets the value for Public Access Prevention in the bucket's IAM configuration. This value can be queried by
+        # calling {#public_access_prevention}.
         #
         # @param [Symbol, String] new_public_access_prevention The bucket's new Public Access Prevention configuration.
         #   Currently, `unspecified` and `enforced` are supported. When set to `enforced`, Public Access
         #   Prevention is enforced in the bucket's IAM configuration.
         #
-        # @example Set Public Access Prevention:
+        # @example Set Public Access Prevention to enforced:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
@@ -935,7 +935,7 @@ module Google
         #   bucket.public_access_prevention = "enforced"
         #   bucket.public_access_prevention #=> "enforced"
         #
-        # @example Remove Public Access Prevention:
+        # @example Set Public Access Prevention to unspecified:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
