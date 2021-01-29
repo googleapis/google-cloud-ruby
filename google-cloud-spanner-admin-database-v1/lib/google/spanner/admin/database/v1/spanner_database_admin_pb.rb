@@ -27,6 +27,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state, :enum, 2, "google.spanner.admin.database.v1.Database.State"
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       optional :restore_info, :message, 4, "google.spanner.admin.database.v1.RestoreInfo"
+      optional :version_retention_period, :string, 6
+      optional :earliest_version_time, :message, 7, "google.protobuf.Timestamp"
     end
     add_enum "google.spanner.admin.database.v1.Database.State" do
       value :STATE_UNSPECIFIED, 0
