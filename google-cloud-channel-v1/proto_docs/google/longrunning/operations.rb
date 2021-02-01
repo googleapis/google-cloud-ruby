@@ -25,7 +25,7 @@ module Google
     #   @return [::String]
     #     The server-assigned name, which is only unique within the same service that
     #     originally returns it. If you use the default HTTP mapping, the
-    #     `name` should have the format of `operations/some/unique/name`.
+    #     `name` should be a resource name ending with `operations/{unique_id}`.
     # @!attribute [rw] metadata
     #   @return [::Google::Protobuf::Any]
     #     Service-specific metadata associated with the operation.  It typically
@@ -35,7 +35,7 @@ module Google
     # @!attribute [rw] done
     #   @return [::Boolean]
     #     If the value is `false`, it means the operation is still in progress.
-    #     If true, the operation is completed, and either `error` or `response` is
+    #     If `true`, the operation is completed, and either `error` or `response` is
     #     available.
     # @!attribute [rw] error
     #   @return [::Google::Rpc::Status]
@@ -67,7 +67,7 @@ module Google
     # The request message for Operations.ListOperations.
     # @!attribute [rw] name
     #   @return [::String]
-    #     The name of the operation collection.
+    #     The name of the operation's parent resource.
     # @!attribute [rw] filter
     #   @return [::String]
     #     The standard list filter.
@@ -108,6 +108,20 @@ module Google
     #   @return [::String]
     #     The name of the operation resource to be deleted.
     class DeleteOperationRequest
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+    end
+
+    # The request message for Operations.WaitOperation.
+    # @!attribute [rw] name
+    #   @return [::String]
+    #     The name of the operation resource to wait on.
+    # @!attribute [rw] timeout
+    #   @return [::Google::Protobuf::Duration]
+    #     The maximum duration to wait before timing out. If left blank, the wait
+    #     will be at most the time permitted by the underlying HTTP/RPC protocol.
+    #     If RPC context deadline is also specified, the shorter one will be used.
+    class WaitOperationRequest
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
     end

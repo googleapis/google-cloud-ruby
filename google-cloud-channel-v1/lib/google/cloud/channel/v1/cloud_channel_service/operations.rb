@@ -103,8 +103,13 @@ module Google
             # Lists operations that match the specified filter in the request. If the
             # server doesn't support this method, it returns `UNIMPLEMENTED`.
             #
-            # NOTE: the `name` binding below allows API services to override the binding
-            # to use different resource name schemes, such as `users/*/operations`.
+            # NOTE: the `name` binding allows API services to override the binding
+            # to use different resource name schemes, such as `users/*/operations`. To
+            # override the binding, API services can add a binding such as
+            # `"/v1/{name=users/*}/operations"` to their service configuration.
+            # For backwards compatibility, the default name includes the operations
+            # collection id, however overriding users must ensure the name binding
+            # is the parent resource, without the operations collection id.
             #
             # @overload list_operations(request, options = nil)
             #   Pass arguments to `list_operations` via a request object, either of type
@@ -122,7 +127,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     The name of the operation collection.
+            #     The name of the operation's parent resource.
             #   @param filter [::String]
             #     The standard list filter.
             #   @param page_size [::Integer]
@@ -391,6 +396,79 @@ module Google
             end
 
             ##
+            # Waits for the specified long-running operation until it is done or reaches
+            # at most a specified timeout, returning the latest state.  If the operation
+            # is already done, the latest state is immediately returned.  If the timeout
+            # specified is greater than the default HTTP/RPC timeout, the HTTP/RPC
+            # timeout is used.  If the server does not support this method, it returns
+            # `google.rpc.Code.UNIMPLEMENTED`.
+            # Note that this method is on a best-effort basis.  It may return the latest
+            # state before the specified timeout (including immediately), meaning even an
+            # immediate response is no guarantee that the operation is done.
+            #
+            # @overload wait_operation(request, options = nil)
+            #   Pass arguments to `wait_operation` via a request object, either of type
+            #   {::Google::Longrunning::WaitOperationRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Longrunning::WaitOperationRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload wait_operation(name: nil, timeout: nil)
+            #   Pass arguments to `wait_operation` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     The name of the operation resource to wait on.
+            #   @param timeout [::Google::Protobuf::Duration, ::Hash]
+            #     The maximum duration to wait before timing out. If left blank, the wait
+            #     will be at most the time permitted by the underlying HTTP/RPC protocol.
+            #     If RPC context deadline is also specified, the shorter one will be used.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def wait_operation request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Longrunning::WaitOperationRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.wait_operation.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Channel::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.wait_operation.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.wait_operation.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @operations_stub.call_rpc :wait_operation, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the Operations API.
             #
             # This class represents the configuration for Operations,
@@ -546,6 +624,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :cancel_operation
+                ##
+                # RPC-specific configuration for `wait_operation`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :wait_operation
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -557,6 +640,8 @@ module Google
                   @delete_operation = ::Gapic::Config::Method.new delete_operation_config
                   cancel_operation_config = parent_rpcs&.cancel_operation if parent_rpcs&.respond_to? :cancel_operation
                   @cancel_operation = ::Gapic::Config::Method.new cancel_operation_config
+                  wait_operation_config = parent_rpcs&.wait_operation if parent_rpcs&.respond_to? :wait_operation
+                  @wait_operation = ::Gapic::Config::Method.new wait_operation_config
 
                   yield self if block_given?
                 end
