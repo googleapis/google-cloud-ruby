@@ -975,6 +975,29 @@ module Google
         end
 
         ##
+        # Whether the value for Public Access Prevention in the bucket's IAM configuration is `unspecified`. The default
+        # is `false`. This value can be modified by calling {Bucket#public_access_prevention=}.
+        #
+        # @return [Boolean] Returns `false` if the bucket has no IAM configuration or if Public Access Prevention is
+        #   not `unspecified` in the IAM configuration. Returns `true` if Public Access Prevention is `unspecified` in
+        #   the IAM configuration.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.public_access_prevention = :unspecified
+        #   bucket.public_access_prevention_unspecified? # true
+        #
+        def public_access_prevention_unspecified?
+          return false unless @gapi.iam_configuration && @gapi.iam_configuration.public_access_prevention
+          @gapi.iam_configuration.public_access_prevention.to_s == "unspecified"
+        end
+
+        ##
         # Updates the bucket with changes made in the given block in a single
         # PATCH request. The following attributes may be set: {#cors},
         # {#logging_bucket=}, {#logging_prefix=}, {#versioning=},

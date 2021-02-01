@@ -215,6 +215,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
       # Verify the setting can be patched to unspecified.
       bucket_pap.public_access_prevention = :unspecified
       refute bucket_pap.public_access_prevention_enforced?
+      assert bucket_pap.public_access_prevention_unspecified?
       _(bucket_pap.public_access_prevention).must_equal "unspecified"
       bucket_pap.acl.public!
     ensure
@@ -261,6 +262,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     bucket.public_access_prevention = :unspecified
     assert bucket.uniform_bucket_level_access?
     refute bucket.public_access_prevention_enforced?
+    assert bucket.public_access_prevention_unspecified?
     _(bucket.public_access_prevention).must_equal "unspecified"
   end
 end

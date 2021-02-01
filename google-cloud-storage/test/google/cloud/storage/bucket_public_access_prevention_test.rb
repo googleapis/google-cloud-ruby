@@ -29,6 +29,10 @@ describe Google::Cloud::Storage::Bucket, :public_access_prevention, :mock_storag
     _(bucket.public_access_prevention_enforced?).must_equal false
   end
 
+  it "knows its public_access_prevention_unspecified? value" do
+    _(bucket.public_access_prevention_unspecified?).must_equal false
+  end
+
   it "updates its public_access_prevention" do
     mock = Minitest::Mock.new
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "unspecified"),
@@ -39,16 +43,19 @@ describe Google::Cloud::Storage::Bucket, :public_access_prevention, :mock_storag
 
     _(bucket.public_access_prevention).must_be :nil?
     _(bucket.public_access_prevention_enforced?).must_equal false
+    _(bucket.public_access_prevention_unspecified?).must_equal false
 
     bucket.public_access_prevention = :unspecified
 
     _(bucket.public_access_prevention).must_equal "unspecified"
     _(bucket.public_access_prevention_enforced?).must_equal false
+    _(bucket.public_access_prevention_unspecified?).must_equal true
 
     bucket.public_access_prevention = :enforced
 
     _(bucket.public_access_prevention).must_equal "enforced"
     _(bucket.public_access_prevention_enforced?).must_equal true
+    _(bucket.public_access_prevention_unspecified?).must_equal false
 
     mock.verify
   end
@@ -64,16 +71,19 @@ describe Google::Cloud::Storage::Bucket, :public_access_prevention, :mock_storag
 
     _(bucket_user_project.public_access_prevention).must_be :nil?
     _(bucket_user_project.public_access_prevention_enforced?).must_equal false
+    _(bucket_user_project.public_access_prevention_unspecified?).must_equal false
 
     bucket_user_project.public_access_prevention = :unspecified
 
     _(bucket_user_project.public_access_prevention).must_equal "unspecified"
     _(bucket_user_project.public_access_prevention_enforced?).must_equal false
+    _(bucket_user_project.public_access_prevention_unspecified?).must_equal true
 
     bucket_user_project.public_access_prevention = :enforced
 
     _(bucket_user_project.public_access_prevention).must_equal "enforced"
     _(bucket_user_project.public_access_prevention_enforced?).must_equal true
+    _(bucket_user_project.public_access_prevention_unspecified?).must_equal false
 
     mock.verify
   end
