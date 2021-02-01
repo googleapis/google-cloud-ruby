@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Document AI uses machine learning on a single cloud-based platform to automatically classify, extract, and enrich data within your documents to unlock insights."
+  gem.description   = "Document AI uses machine learning on a single cloud-based platform to automatically classify, extract, and enrich data within your documents to unlock insights. Note that google-cloud-document_ai-v1beta3 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-document_ai instead. See the readme for more details."
   gem.summary       = "API Client library for the Document AI V1beta3 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
