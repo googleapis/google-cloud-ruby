@@ -295,6 +295,71 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::OperationsTest < Minitest::Test
     end
   end
 
+  def test_wait_operation
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    timeout = {}
+
+    wait_operation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :wait_operation, name
+      assert_kind_of ::Google::Longrunning::WaitOperationRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["timeout"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, wait_operation_client_stub do
+      # Create client
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Operations.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.wait_operation({ name: name, timeout: timeout }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.wait_operation name: name, timeout: timeout do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.wait_operation ::Google::Longrunning::WaitOperationRequest.new(name: name, timeout: timeout) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.wait_operation({ name: name, timeout: timeout }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.wait_operation ::Google::Longrunning::WaitOperationRequest.new(name: name, timeout: timeout), grpc_options do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, wait_operation_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
