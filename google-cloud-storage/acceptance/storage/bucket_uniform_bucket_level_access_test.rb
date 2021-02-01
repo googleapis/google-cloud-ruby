@@ -33,7 +33,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     # always reset the uniform_bucket_level_access and public_access_prevention
     # always reset the bucket permissions
     bucket.uniform_bucket_level_access = false if bucket.uniform_bucket_level_access?
-    bucket.public_access_prevention = "unspecified" if bucket.public_access_prevention_enforced?
+    bucket.public_access_prevention = :unspecified if bucket.public_access_prevention_enforced?
     bucket.default_acl.private!
     bucket.files.all { |f| f.delete rescue nil }
   end
@@ -203,17 +203,19 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   it "creates new bucket with public_access_prevention enforced then sets public_access_prevention to enforced" do
     # Insert a new bucket with Public Access Prevention Enforced.
     bucket_pap = storage.create_bucket "#{$bucket_names[2]}-pap" do |b|
-      b.public_access_prevention = "enforced"
+      b.public_access_prevention = :enforced
     end
     begin
       assert bucket_pap.public_access_prevention_enforced?
+      _(bucket_pap.public_access_prevention).must_equal "enforced"
       # If PAP is enforced on a bucket, making the bucket public fails with a 412.
       expect do
         bucket_pap.acl.public!
       end.must_raise Google::Cloud::FailedPreconditionError
       # Verify the setting can be patched to unspecified.
-      bucket_pap.public_access_prevention = "unspecified"
+      bucket_pap.public_access_prevention = :unspecified
       refute bucket_pap.public_access_prevention_enforced?
+      _(bucket_pap.public_access_prevention).must_equal "unspecified"
       bucket_pap.acl.public!
     ensure
       safe_gcs_execute { bucket_pap.delete } if bucket_pap
@@ -223,7 +225,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   it "raises when creating new bucket with public_access_prevention set to unexpected value" do
     # Insert and Patch requests using unexpected PAP enum values return 400 error.
     expect do
-      bucket_pap = storage.create_bucket "#{$bucket_names[2]}-deleteme" do |b|
+      storage.create_bucket "#{$bucket_names[2]}-deleteme" do |b|
         b.public_access_prevention = "BAD VALUE"
       end
     end.must_raise Google::Cloud::InvalidArgumentError
@@ -232,13 +234,15 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   it "sets public_access_prevention to enforced" do
     # Insert a new bucket with Public Access Prevention Unspecified.
     refute bucket.public_access_prevention_enforced?
+    _(bucket.public_access_prevention).must_be :nil?
     # Insert and Patch requests using unexpected PAP enum values return 400 error.
     expect do
       bucket.public_access_prevention = "BAD VALUE"
     end.must_raise Google::Cloud::InvalidArgumentError
     # Verify the setting can be patched to enforced.
-    bucket.public_access_prevention = "enforced"
+    bucket.public_access_prevention = :enforced
     assert bucket.public_access_prevention_enforced?
+    _(bucket.public_access_prevention).must_equal "enforced"
     # If PAP is enforced on a bucket, making the bucket public fails with a 412.
     expect do
       bucket.acl.public!
@@ -252,9 +256,11 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     bucket.uniform_bucket_level_access = true
     assert bucket.uniform_bucket_level_access?
     assert bucket.public_access_prevention_enforced?
+    _(bucket.public_access_prevention).must_equal "enforced"
     # Modifying PAP on UBLA bucket does not affect UBLA setting.
-    bucket.public_access_prevention = "unspecified"
+    bucket.public_access_prevention = :unspecified
     assert bucket.uniform_bucket_level_access?
     refute bucket.public_access_prevention_enforced?
+    _(bucket.public_access_prevention).must_equal "unspecified"
   end
 end

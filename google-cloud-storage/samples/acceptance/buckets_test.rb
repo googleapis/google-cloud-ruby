@@ -403,7 +403,7 @@ describe "Buckets Snippets" do
   describe "public_access_prevention" do
     it "set_public_access_prevention_enforced, get_public_access_prevention," \
        " set_public_access_prevention_unspecified" do
-      bucket.public_access_prevention = "unspecified"
+      bucket.public_access_prevention = :unspecified
       bucket.refresh!
       _(bucket.public_access_prevention).must_equal "unspecified"
 
@@ -428,7 +428,7 @@ describe "Buckets Snippets" do
 
       bucket.refresh!
       _(bucket.public_access_prevention).must_equal "unspecified"
-      bucket.public_access_prevention = "unspecified"
+      bucket.public_access_prevention = :unspecified
     end
   end
 end

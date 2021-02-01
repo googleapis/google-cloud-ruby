@@ -22,7 +22,7 @@ def set_public_access_prevention_unspecified bucket_name:
   storage = Google::Cloud::Storage.new
   bucket  = storage.bucket bucket_name
 
-  bucket.public_access_prevention = "unspecified"
+  bucket.public_access_prevention = :unspecified
 
   puts "Public access prevention is 'unspecified' for #{bucket_name}."
 end
