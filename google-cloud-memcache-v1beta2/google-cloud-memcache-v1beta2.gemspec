@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Google Cloud Memorystore for Memcached API is used for creating and managing Memcached instances in GCP."
+  gem.description   = "Google Cloud Memorystore for Memcached API is used for creating and managing Memcached instances in GCP. Note that google-cloud-memcache-v1beta2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-memcache instead. See the readme for more details."
   gem.summary       = "API Client library for the Google Cloud Memorystore for Memcached API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
