@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -175,7 +175,7 @@ def analyze_iam_policy scope: "", full_resource_name: ""
   )
   # Do things with the response
   puts response
-  # [END asset_quickstart_sanalyze_iam_policy]
+  # [END asset_quickstart_analyze_iam_policy]
 end
 
 def analyze_iam_policy_longrunning_gcs scope: "", full_resource_name: "", uri: ""
