@@ -14,6 +14,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/spanner/admin/database/v1/backup.proto", :syntax => :proto3) do
     add_message "google.spanner.admin.database.v1.Backup" do
       optional :database, :string, 2
+      optional :version_time, :message, 9, "google.protobuf.Timestamp"
       optional :expire_time, :message, 3, "google.protobuf.Timestamp"
       optional :name, :string, 1
       optional :create_time, :message, 4, "google.protobuf.Timestamp"
@@ -69,6 +70,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.spanner.admin.database.v1.BackupInfo" do
       optional :backup, :string, 1
+      optional :version_time, :message, 4, "google.protobuf.Timestamp"
       optional :create_time, :message, 2, "google.protobuf.Timestamp"
       optional :source_database, :string, 3
     end

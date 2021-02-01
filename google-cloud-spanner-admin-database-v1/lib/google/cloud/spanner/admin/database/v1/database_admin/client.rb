@@ -682,6 +682,8 @@ module Google
                 #
                 #   @param database [::String]
                 #     Required. The database whose schema we wish to get.
+                #     Values are of the form
+                #     `projects/<project>/instances/<instance>/databases/<database>`
                 #
                 # @yield [response, operation] Access the result along with the RPC operation
                 # @yieldparam response [::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlResponse]
@@ -1529,11 +1531,11 @@ module Google
                 #     Here are a few examples:
                 #
                 #       * `done:true` - The operation is complete.
-                #       * `(metadata.@type=type.googleapis.com/google.spanner.admin.database.v1.RestoreDatabaseMetadata) AND` <br/>
-                #         `(metadata.source_type:BACKUP) AND` <br/>
-                #         `(metadata.backup_info.backup:backup_howl) AND` <br/>
-                #         `(metadata.name:restored_howl) AND` <br/>
-                #         `(metadata.progress.start_time < \"2018-03-28T14:50:00Z\") AND` <br/>
+                #       * `(metadata.@type=type.googleapis.com/google.spanner.admin.database.v1.RestoreDatabaseMetadata) AND` \
+                #         `(metadata.source_type:BACKUP) AND` \
+                #         `(metadata.backup_info.backup:backup_howl) AND` \
+                #         `(metadata.name:restored_howl) AND` \
+                #         `(metadata.progress.start_time < \"2018-03-28T14:50:00Z\") AND` \
                 #         `(error:*)` - Return operations where:
                 #         * The operation's metadata type is {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata RestoreDatabaseMetadata}.
                 #         * The database is restored from a backup.
@@ -1658,9 +1660,9 @@ module Google
                 #       * `done:true` - The operation is complete.
                 #       * `metadata.database:prod` - The database the backup was taken from has
                 #          a name containing the string "prod".
-                #       * `(metadata.@type=type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata) AND` <br/>
-                #         `(metadata.name:howl) AND` <br/>
-                #         `(metadata.progress.start_time < \"2018-03-28T14:50:00Z\") AND` <br/>
+                #       * `(metadata.@type=type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata) AND` \
+                #         `(metadata.name:howl) AND` \
+                #         `(metadata.progress.start_time < \"2018-03-28T14:50:00Z\") AND` \
                 #         `(error:*)` - Returns operations where:
                 #         * The operation's metadata type is {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata}.
                 #         * The backup name contains the string "howl".

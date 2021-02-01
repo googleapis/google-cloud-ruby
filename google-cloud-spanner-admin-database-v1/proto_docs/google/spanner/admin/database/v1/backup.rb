@@ -31,6 +31,12 @@ module Google
             #     created. This needs to be in the same instance as the backup.
             #     Values are of the form
             #     `projects/<project>/instances/<instance>/databases/<database>`.
+            # @!attribute [rw] version_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     The backup will contain an externally consistent copy of the database at
+            #     the timestamp specified by `version_time`. If `version_time` is not
+            #     specified, the system will set `version_time` to the `create_time` of the
+            #     backup.
             # @!attribute [rw] expire_time
             #   @return [::Google::Protobuf::Timestamp]
             #     Required for the {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup}
@@ -56,10 +62,9 @@ module Google
             #     `projects/<project>/instances/<instance>`.
             # @!attribute [r] create_time
             #   @return [::Google::Protobuf::Timestamp]
-            #     Output only. The backup will contain an externally consistent
-            #     copy of the database at the timestamp specified by
-            #     `create_time`. `create_time` is approximately the time the
-            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup} request is received.
+            #     Output only. The time the {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup}
+            #     request is received. If the request does not specify `version_time`, the
+            #     `version_time` of the backup will be equivalent to the `create_time`.
             # @!attribute [r] size_bytes
             #   @return [::Integer]
             #     Output only. Size of the backup in bytes.
@@ -295,9 +300,9 @@ module Google
             #       * `done:true` - The operation is complete.
             #       * `metadata.database:prod` - The database the backup was taken from has
             #          a name containing the string "prod".
-            #       * `(metadata.@type=type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata) AND` <br/>
-            #         `(metadata.name:howl) AND` <br/>
-            #         `(metadata.progress.start_time < \"2018-03-28T14:50:00Z\") AND` <br/>
+            #       * `(metadata.@type=type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata) AND` \
+            #         `(metadata.name:howl) AND` \
+            #         `(metadata.progress.start_time < \"2018-03-28T14:50:00Z\") AND` \
             #         `(error:*)` - Returns operations where:
             #         * The operation's metadata type is {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata}.
             #         * The backup name contains the string "howl".
@@ -345,10 +350,17 @@ module Google
             # @!attribute [rw] backup
             #   @return [::String]
             #     Name of the backup.
-            # @!attribute [rw] create_time
+            # @!attribute [rw] version_time
             #   @return [::Google::Protobuf::Timestamp]
             #     The backup contains an externally consistent copy of `source_database` at
-            #     the timestamp specified by `create_time`.
+            #     the timestamp specified by `version_time`. If the
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup} request did not specify
+            #     `version_time`, the `version_time` of the backup is equivalent to the
+            #     `create_time`.
+            # @!attribute [rw] create_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     The time the {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup CreateBackup} request was
+            #     received.
             # @!attribute [rw] source_database
             #   @return [::String]
             #     Name of the database the backup was created from.
