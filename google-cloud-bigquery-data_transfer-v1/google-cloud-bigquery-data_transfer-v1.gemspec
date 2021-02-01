@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Schedules queries and transfers external data from SaaS applications to Google BigQuery on a regular basis."
+  gem.description   = "Schedules queries and transfers external data from SaaS applications to Google BigQuery on a regular basis. Note that google-cloud-bigquery-data_transfer-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-bigquery-data_transfer instead. See the readme for more details."
   gem.summary       = "API Client library for the BigQuery Data Transfer Service V1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
