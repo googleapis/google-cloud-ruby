@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "AI Platform Data Labeling Service lets you work with human labelers to generate highly accurate labels for a collection of data that you can use in machine learning models."
+  gem.description   = "AI Platform Data Labeling Service lets you work with human labelers to generate highly accurate labels for a collection of data that you can use in machine learning models. Note that google-cloud-data_labeling-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-data_labeling instead. See the readme for more details."
   gem.summary       = "API Client library for the AI Platform Data Labeling Service V1beta1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
