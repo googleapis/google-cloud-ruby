@@ -2,7 +2,7 @@
 
 API Client library for the Cloud Vision API
 
-Cloud Vision API allows developers to easily integrate vision detection features within applications, including image labeling, face and landmark detection, optical character recognition (OCR), and tagging of explicit content. Note that google-cloud-vision is a version-specific client library. For most uses, we recommend installing the main client library google-cloud instead. See the readme for more details.
+Cloud Vision API allows developers to easily integrate vision detection features within applications, including image labeling, face and landmark detection, optical character recognition (OCR), and tagging of explicit content.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-vision-v*`.
