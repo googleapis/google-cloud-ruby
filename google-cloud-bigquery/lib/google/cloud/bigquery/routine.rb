@@ -603,6 +603,93 @@ module Google
           update_gapi!
         end
 
+        ###
+        # The JavaScript UDF determinism level. Optional.
+        #
+        # * `DETERMINISTIC` - Deterministic indicates that two calls with the same input to a UDF yield the same output.
+        #   If all JavaScript UDFs are `DETERMINISTIC`, the query result is potentially cachable.
+        # * `NOT_DETERMINISTIC` - Not deterministic indicates that the output of the UDF is not guaranteed to yield the
+        #   same output each time for a given set of inputs. If any JavaScript UDF is `NOT_DETERMINISTIC`, the query
+        #   result is not cacheable.
+        #
+        # Even if a JavaScript UDF is deterministic, many other factors can prevent usage of cached query results.
+        # Example factors include but not limited to: DDL/DML, non-deterministic SQL function calls, update of
+        # referenced tables/views/UDFs or imported JavaScript libraries. SQL UDFs cannot have determinism specified.
+        # Their determinism is automatically determined.
+        #
+        # @return [String, nil] The routine determinism level in upper case, or `nil` if not set or the object is a
+        #   reference (see {#reference?}).
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine"
+        #
+        #   routine.determinism_level #=> "NOT_DETERMINISTIC"
+        #
+        # @!group Attributes
+        #
+        def determinism_level
+          return nil if reference?
+          ensure_full_data!
+          @gapi.determinism_level
+        end
+
+        ##
+        # Updates the JavaScript UDF determinism level. Optional.
+        #
+        # * `DETERMINISTIC` - Deterministic indicates that two calls with the same input to a UDF yield the same output.
+        #   If all JavaScript UDFs are `DETERMINISTIC`, the query result is potentially cachable.
+        # * `NOT_DETERMINISTIC` - Not deterministic indicates that the output of the UDF is not guaranteed to yield the
+        #   same output each time for a given set of inputs. If any JavaScript UDF is `NOT_DETERMINISTIC`, the query
+        #   result is not cacheable.
+        #
+        # @param [String, nil] new_determinism_level The new routine determinism level in upper case.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine"
+        #
+        #   routine.determinism_level #=> "NOT_DETERMINISTIC"
+        #   routine.determinism_level = "DETERMINISTIC"
+        #
+        # @!group Attributes
+        #
+        def determinism_level= new_determinism_level
+          ensure_full_data!
+          @gapi.determinism_level = new_determinism_level
+          update_gapi!
+        end
+
+        ##
+        # Checks if the value of {#determinism_level} is `DETERMINISTIC`. The default is `false`.
+        #
+        # @return [Boolean] `true` when `DETERMINISTIC` and the object is not a reference (see {#reference?}), `false`
+        #   otherwise.
+        #
+        # @!group Attributes
+        #
+        def determinism_level_deterministic?
+          @gapi.determinism_level == "DETERMINISTIC"
+        end
+
+        ##
+        # Checks if the value of {#determinism_level} is `NOT_DETERMINISTIC`. The default is `false`.
+        #
+        # @return [Boolean] `true` when `NOT_DETERMINISTIC` and the object is not a reference (see {#reference?}),
+        #   `false` otherwise.
+        #
+        # @!group Attributes
+        #
+        def determinism_level_not_deterministic?
+          @gapi.determinism_level == "NOT_DETERMINISTIC"
+        end
+
         ##
         # Updates the routine with changes made in the given block in a single update request. The following attributes
         # may be set: {Updater#routine_type=}, {Updater#language=}, {Updater#arguments=}, {Updater#return_type=},

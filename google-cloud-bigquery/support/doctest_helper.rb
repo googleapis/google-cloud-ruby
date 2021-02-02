@@ -1422,7 +1422,8 @@ def random_routine_hash dataset, id = nil, project: "my-project", etag: "etag123
     returnType: { typeKind: "INT64" },
     importedLibraries: ["gs://cloud-samples-data/bigquery/udfs/max-value.js"],
     definitionBody: "x * 3",
-    description: "My routine description"
+    description: "My routine description",
+    determinismLevel: "NOT_DETERMINISTIC"
   }
   h[:etag] = etag if etag
   h[:creationTime] = creation_time if creation_time
