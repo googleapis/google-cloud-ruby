@@ -1,5 +1,12 @@
 # Release History
 
+### 0.3.0 / 2021-02-02
+
+#### Features
+
+* Support point-in-time-recovery fields
+* Use self-signed JWT credentials when possible
+
 ### 0.2.1 / 2021-01-20
 
 #### Documentation
