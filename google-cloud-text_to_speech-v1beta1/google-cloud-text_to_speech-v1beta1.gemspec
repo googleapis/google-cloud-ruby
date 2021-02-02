@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Text-to-Speech converts text or Speech Synthesis Markup Language (SSML) input into audio data of natural human speech."
+  gem.description   = "Text-to-Speech converts text or Speech Synthesis Markup Language (SSML) input into audio data of natural human speech. Note that google-cloud-text_to_speech-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-text_to_speech instead. See the readme for more details."
   gem.summary       = "API Client library for the Cloud Text-to-Speech V1beta1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
