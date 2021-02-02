@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Manages Hadoop-based clusters and jobs on Google Cloud Platform."
+  gem.description   = "Manages Hadoop-based clusters and jobs on Google Cloud Platform. Note that google-cloud-dataproc-v1beta2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-dataproc instead. See the readme for more details."
   gem.summary       = "API Client library for the Cloud Dataproc V1beta2 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
