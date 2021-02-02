@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Google Service Management allows service producers to publish their services on Google Cloud Platform so that they can be discovered and used by service consumers."
+  gem.description   = "Google Service Management allows service producers to publish their services on Google Cloud Platform so that they can be discovered and used by service consumers. Note that google-cloud-service_management-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-service_management instead. See the readme for more details."
   gem.summary       = "API Client library for the Service Management API V1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
