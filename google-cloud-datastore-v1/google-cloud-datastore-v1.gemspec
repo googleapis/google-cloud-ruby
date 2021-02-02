@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Firestore in Datastore mode is a NoSQL document database built for automatic scaling, high performance, and ease of application development."
+  gem.description   = "Firestore in Datastore mode is a NoSQL document database built for automatic scaling, high performance, and ease of application development. Note that google-cloud-datastore-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-datastore instead. See the readme for more details."
   gem.summary       = "API Client library for the Firestore in Datastore mode V1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
