@@ -2,7 +2,7 @@
 
 API Client library for the Cloud Video Intelligence API
 
-Detects objects, explicit content, and scene changes in videos. It also specifies the region for annotation and transcribes speech to text. Supports both asynchronous API and streaming API. Note that google-cloud-video_intelligence is a version-specific client library. For most uses, we recommend installing the main client library google-cloud instead. See the readme for more details.
+Detects objects, explicit content, and scene changes in videos. It also specifies the region for annotation and transcribes speech to text. Supports both asynchronous API and streaming API.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-video_intelligence-v*`.
