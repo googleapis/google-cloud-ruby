@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2021-02-02
+
+#### Features
+
+* Use self-signed JWT credentials when possible
+
 ### 0.6.1 / 2021-01-19
 
 #### Documentation
