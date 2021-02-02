@@ -132,4 +132,58 @@ describe "Asset Quickstart" do
       assert_match(/#{role}/, out)
     end
   end
+
+  describe "analyze_iam_policy" do
+    it "analyzes who has what acccess to the resource" do
+      project = ENV["GOOGLE_CLOUD_PROJECT"]
+      full_resource_name = "//cloudresourcemanager.googleapis.com/projects/#{project}"
+      out, _err = capture_io do
+        analyze_iam_policy(
+          scope:              "projects/#{project}",
+          full_resource_name: full_resource_name
+        )
+      end
+      assert_match(/#{full_resource_name}/, out)
+    end
+  end
+
+  describe "analyze_iam_policy_longrunning_gcs" do
+    it "analyzes who has what acccess to the resource and writes results to gcs" do
+      project = ENV["GOOGLE_CLOUD_PROJECT"]
+      full_resource_name = "//cloudresourcemanager.googleapis.com/projects/#{project}"
+      object_name = "ruby-analysis-samples.json"
+      uri = "gs://#{bucket.name}/#{object_name}"
+      assert_nil bucket.file(uri)
+      out, _err = capture_io do
+        analyze_iam_policy_longrunning_gcs(
+          scope:              "projects/#{project}",
+          full_resource_name: full_resource_name,
+          uri:                uri
+        )
+      end
+      assert_match(/#{uri}/, out)
+      refute_nil bucket.file(object_name)
+    end
+  end
+
+  describe "analyze_iam_policy_longrunning_bigquery" do
+    after do
+      delete_dataset_helper dataset.dataset_id
+    end
+    it "analyzes who has what acccess to the resource and writes results to bigquery" do
+      project = ENV["GOOGLE_CLOUD_PROJECT"]
+      full_resource_name = "//cloudresourcemanager.googleapis.com/projects/#{project}"
+      dataset_relative_name = "projects/#{project}/datasets/#{dataset.dataset_id}"
+      table_prefix = "ruby-analysis-samples"
+      out, _err = capture_io do
+        analyze_iam_policy_longrunning_bigquery(
+          scope:              "projects/#{project}",
+          full_resource_name: full_resource_name,
+          dataset:            dataset_relative_name,
+          table_prefix:       table_prefix
+        )
+      end
+      assert_match(/#{dataset_relative_name}/, out)
+    end
+  end
 end

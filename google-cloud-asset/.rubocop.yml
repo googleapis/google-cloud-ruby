@@ -17,6 +17,10 @@ Metrics/BlockLength:
   Exclude:
     - "samples/**/acceptance/*.rb"
 
+Metrics/MethodLength:
+  Exclude:
+    - "samples/quickstart.rb"
+
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-asset.rb"
