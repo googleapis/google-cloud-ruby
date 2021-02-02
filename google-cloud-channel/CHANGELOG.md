@@ -1,5 +1,11 @@
 # Release History
 
+### 0.1.2 / 2021-02-02
+
+#### Documentation
+
+* Clarify the role of main vs versioned clients in the readme
+
 ### 0.1.1 / 2021-01-15
 
 #### Documentation
