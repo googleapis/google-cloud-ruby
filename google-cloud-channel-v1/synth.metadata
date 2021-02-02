@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "61986f669b2c350e34d332bd55f4d9efee9e84b1"
+        "sha": "ede929c4c37760c903a53cc4916f82bdb54336ea"
       }
     },
     {
@@ -69,6 +69,7 @@
     "proto_docs/google/cloud/channel/v1/service.rb",
     "proto_docs/google/longrunning/operations.rb",
     "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/duration.rb",
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
