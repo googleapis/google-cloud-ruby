@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Manages keys and performs cryptographic operations in a central cloud service, for direct use by other cloud resources and applications."
+  gem.description   = "Manages keys and performs cryptographic operations in a central cloud service, for direct use by other cloud resources and applications. Note that google-cloud-kms-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-kms instead. See the readme for more details."
   gem.summary       = "API Client library for the Cloud Key Management Service (KMS) V1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
