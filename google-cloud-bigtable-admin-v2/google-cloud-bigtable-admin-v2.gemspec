@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Cloud Bigtable is a fully managed, scalable NoSQL database service for large analytical and operational workloads."
+  gem.description   = "Cloud Bigtable is a fully managed, scalable NoSQL database service for large analytical and operational workloads. Note that google-cloud-bigtable-admin-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-bigtable-admin instead. See the readme for more details."
   gem.summary       = "API Client library for the Cloud Bigtable Admin V2 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
