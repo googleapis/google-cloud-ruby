@@ -2030,6 +2030,188 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
     end
   end
 
+  def test_register_subscriber
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Channel::V1::RegisterSubscriberResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    account = "hello world"
+    service_account = "hello world"
+
+    register_subscriber_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :register_subscriber, name
+      assert_kind_of ::Google::Cloud::Channel::V1::RegisterSubscriberRequest, request
+      assert_equal "hello world", request["account"]
+      assert_equal "hello world", request["service_account"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, register_subscriber_client_stub do
+      # Create client
+      client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.register_subscriber({ account: account, service_account: service_account }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.register_subscriber account: account, service_account: service_account do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.register_subscriber ::Google::Cloud::Channel::V1::RegisterSubscriberRequest.new(account: account, service_account: service_account) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.register_subscriber({ account: account, service_account: service_account }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.register_subscriber ::Google::Cloud::Channel::V1::RegisterSubscriberRequest.new(account: account, service_account: service_account), grpc_options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, register_subscriber_client_stub.call_rpc_count
+    end
+  end
+
+  def test_unregister_subscriber
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Channel::V1::UnregisterSubscriberResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    account = "hello world"
+    service_account = "hello world"
+
+    unregister_subscriber_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :unregister_subscriber, name
+      assert_kind_of ::Google::Cloud::Channel::V1::UnregisterSubscriberRequest, request
+      assert_equal "hello world", request["account"]
+      assert_equal "hello world", request["service_account"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, unregister_subscriber_client_stub do
+      # Create client
+      client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.unregister_subscriber({ account: account, service_account: service_account }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.unregister_subscriber account: account, service_account: service_account do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.unregister_subscriber ::Google::Cloud::Channel::V1::UnregisterSubscriberRequest.new(account: account, service_account: service_account) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.unregister_subscriber({ account: account, service_account: service_account }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.unregister_subscriber ::Google::Cloud::Channel::V1::UnregisterSubscriberRequest.new(account: account, service_account: service_account), grpc_options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, unregister_subscriber_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_subscribers
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Channel::V1::ListSubscribersResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    account = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_subscribers_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_subscribers, name
+      assert_kind_of ::Google::Cloud::Channel::V1::ListSubscribersRequest, request
+      assert_equal "hello world", request["account"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_subscribers_client_stub do
+      # Create client
+      client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_subscribers({ account: account, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_subscribers account: account, page_size: page_size, page_token: page_token do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_subscribers ::Google::Cloud::Channel::V1::ListSubscribersRequest.new(account: account, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_subscribers({ account: account, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_subscribers ::Google::Cloud::Channel::V1::ListSubscribersRequest.new(account: account, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_subscribers_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

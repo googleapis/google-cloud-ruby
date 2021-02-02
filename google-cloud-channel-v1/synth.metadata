@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "ede929c4c37760c903a53cc4916f82bdb54336ea"
+        "sha": "9e230e289b02ca29f606e29b7577bbae880c7bce"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "c8bfd324b41ad1f6f65fed124572f92fe116517b",
-        "internalRef": "351218127"
+        "sha": "6ef9eaea379fc1cc0355e06a5a20b594543ee693",
+        "internalRef": "355059873"
       }
     }
   ],
@@ -55,6 +55,7 @@
     "lib/google/cloud/channel/v1/products_pb.rb",
     "lib/google/cloud/channel/v1/service_pb.rb",
     "lib/google/cloud/channel/v1/service_services_pb.rb",
+    "lib/google/cloud/channel/v1/subscriber_event_pb.rb",
     "lib/google/cloud/channel/v1/version.rb",
     "proto_docs/README.md",
     "proto_docs/google/api/field_behavior.rb",
@@ -67,6 +68,7 @@
     "proto_docs/google/cloud/channel/v1/operations.rb",
     "proto_docs/google/cloud/channel/v1/products.rb",
     "proto_docs/google/cloud/channel/v1/service.rb",
+    "proto_docs/google/cloud/channel/v1/subscriber_event.rb",
     "proto_docs/google/longrunning/operations.rb",
     "proto_docs/google/protobuf/any.rb",
     "proto_docs/google/protobuf/duration.rb",

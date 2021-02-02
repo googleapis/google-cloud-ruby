@@ -1007,6 +1007,89 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request Message for RegisterSubscriber.
+        # @!attribute [rw] account
+        #   @return [::String]
+        #     Required. Resource name of the account.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Required. Service account which will provide subscriber access to the
+        #     registered topic.
+        class RegisterSubscriberRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response Message for RegisterSubscriber.
+        # @!attribute [rw] topic
+        #   @return [::String]
+        #     Name of the topic to which the subscriber will listen to.
+        class RegisterSubscriberResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request Message for UnregisterSubscriber.
+        # @!attribute [rw] account
+        #   @return [::String]
+        #     Required. Resource name of the account.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Required. Service account which will be unregistered from getting subscriber access
+        #     to the topic.
+        class UnregisterSubscriberRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response Message for UnregisterSubscriber.
+        # @!attribute [rw] topic
+        #   @return [::String]
+        #     Name of the topic from which the service account subscriber access has been
+        #     removed.
+        class UnregisterSubscriberResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request Message for ListSubscribers.
+        # @!attribute [rw] account
+        #   @return [::String]
+        #     Required. Resource name of the account.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of service accounts to return. The service may return
+        #     fewer than this value.
+        #     If unspecified, at most 100 service accounts will be returned.
+        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListSubscribers` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListSubscribers` must
+        #      match the call that provided the page token.
+        class ListSubscribersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response Message for ListSubscribers.
+        # @!attribute [rw] topic
+        #   @return [::String]
+        #     Name of the topic registered with the reseller.
+        # @!attribute [rw] service_accounts
+        #   @return [::Array<::String>]
+        #     List of service accounts which have subscriber access to the topic.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token that can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListSubscribersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

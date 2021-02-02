@@ -670,6 +670,69 @@ module Google
             # * INVALID_ARGUMENT: Missing or invalid required parameters in the
             # request.
             rpc :ListPurchasableOffers, ::Google::Cloud::Channel::V1::ListPurchasableOffersRequest, ::Google::Cloud::Channel::V1::ListPurchasableOffersResponse
+            # Registers a service account with subscriber privileges on the Cloud Pub/Sub
+            # topic created for this Channel Services account. Once you create a
+            # subscriber, you will get the events as per [SubscriberEvent][google.cloud.channel.v1.SubscriberEvent]
+            #
+            # Possible Error Codes:
+            #
+            # * PERMISSION_DENIED: If the reseller account making the request and the
+            # reseller account being provided are different, or if the impersonated user
+            # is not a super admin.
+            # * INVALID_ARGUMENT: Missing or invalid required parameters in the
+            # request.
+            # * INTERNAL: Any non-user error related to a technical issue in the
+            # backend. In this case, contact Cloud Channel support.
+            # * UNKNOWN: Any non-user error related to a technical issue in
+            # the backend. In this case, contact Cloud Channel support.
+            #
+            # Return Value:
+            # Topic name with service email address registered if successful,
+            # otherwise error is returned.
+            rpc :RegisterSubscriber, ::Google::Cloud::Channel::V1::RegisterSubscriberRequest, ::Google::Cloud::Channel::V1::RegisterSubscriberResponse
+            # Unregisters a service account with subscriber privileges on the Cloud
+            # Pub/Sub topic created for this Channel Services account. If there are no
+            # more service account left with sunbscriber privileges, the topic will be
+            # deleted. You can check this by calling ListSubscribers api.
+            #
+            # Possible Error Codes:
+            #
+            # * PERMISSION_DENIED: If the reseller account making the request and the
+            # reseller account being provided are different, or if the impersonated user
+            # is not a super admin.
+            # * INVALID_ARGUMENT: Missing or invalid required parameters in the
+            # request.
+            # * NOT_FOUND: If the topic resource doesn't exist.
+            # * INTERNAL: Any non-user error related to a technical issue in the
+            # backend. In this case, contact Cloud Channel support.
+            # * UNKNOWN: Any non-user error related to a technical issue in
+            # the backend. In this case, contact Cloud Channel support.
+            #
+            # Return Value:
+            # Topic name from which service email address has been unregistered if
+            # successful, otherwise error is returned. If the service email was already
+            # not associated with the topic, the success response will be returned.
+            rpc :UnregisterSubscriber, ::Google::Cloud::Channel::V1::UnregisterSubscriberRequest, ::Google::Cloud::Channel::V1::UnregisterSubscriberResponse
+            # Lists service accounts with subscriber privileges on the Cloud Pub/Sub
+            # topic created for this Channel Services account.
+            #
+            # Possible Error Codes:
+            #
+            # * PERMISSION_DENIED: If the reseller account making the request and the
+            # reseller account being provided are different, or if the account is not
+            # a super admin.
+            # * INVALID_ARGUMENT: Missing or invalid required parameters in the
+            # request.
+            # * NOT_FOUND: If the topic resource doesn't exist.
+            # * INTERNAL: Any non-user error related to a technical issue in the
+            # backend. In this case, contact Cloud Channel support.
+            # * UNKNOWN: Any non-user error related to a technical issue in
+            # the backend. In this case, contact Cloud Channel support.
+            #
+            # Return Value:
+            # List of service email addresses if successful, otherwise error is
+            # returned.
+            rpc :ListSubscribers, ::Google::Cloud::Channel::V1::ListSubscribersRequest, ::Google::Cloud::Channel::V1::ListSubscribersResponse
           end
 
           Stub = Service.rpc_stub_class
