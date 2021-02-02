@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Web Security Scanner scans your Compute and App Engine apps for common web vulnerabilities."
+  gem.description   = "Web Security Scanner scans your Compute and App Engine apps for common web vulnerabilities. Note that google-cloud-web_security_scanner-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-web_security_scanner instead. See the readme for more details."
   gem.summary       = "API Client library for the Web Security Scanner V1beta API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
