@@ -3143,6 +3143,278 @@ module Google
             end
 
             ##
+            # Registers a service account with subscriber privileges on the Cloud Pub/Sub
+            # topic created for this Channel Services account. Once you create a
+            # subscriber, you will get the events as per {::Google::Cloud::Channel::V1::SubscriberEvent SubscriberEvent}
+            #
+            # Possible Error Codes:
+            #
+            # * PERMISSION_DENIED: If the reseller account making the request and the
+            # reseller account being provided are different, or if the impersonated user
+            # is not a super admin.
+            # * INVALID_ARGUMENT: Missing or invalid required parameters in the
+            # request.
+            # * INTERNAL: Any non-user error related to a technical issue in the
+            # backend. In this case, contact Cloud Channel support.
+            # * UNKNOWN: Any non-user error related to a technical issue in
+            # the backend. In this case, contact Cloud Channel support.
+            #
+            # Return Value:
+            # Topic name with service email address registered if successful,
+            # otherwise error is returned.
+            #
+            # @overload register_subscriber(request, options = nil)
+            #   Pass arguments to `register_subscriber` via a request object, either of type
+            #   {::Google::Cloud::Channel::V1::RegisterSubscriberRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Channel::V1::RegisterSubscriberRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload register_subscriber(account: nil, service_account: nil)
+            #   Pass arguments to `register_subscriber` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param account [::String]
+            #     Required. Resource name of the account.
+            #   @param service_account [::String]
+            #     Required. Service account which will provide subscriber access to the
+            #     registered topic.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Channel::V1::RegisterSubscriberResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Channel::V1::RegisterSubscriberResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def register_subscriber request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Channel::V1::RegisterSubscriberRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.register_subscriber.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Channel::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "account" => request.account
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.register_subscriber.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.register_subscriber.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_channel_service_stub.call_rpc :register_subscriber, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Unregisters a service account with subscriber privileges on the Cloud
+            # Pub/Sub topic created for this Channel Services account. If there are no
+            # more service account left with sunbscriber privileges, the topic will be
+            # deleted. You can check this by calling ListSubscribers api.
+            #
+            # Possible Error Codes:
+            #
+            # * PERMISSION_DENIED: If the reseller account making the request and the
+            # reseller account being provided are different, or if the impersonated user
+            # is not a super admin.
+            # * INVALID_ARGUMENT: Missing or invalid required parameters in the
+            # request.
+            # * NOT_FOUND: If the topic resource doesn't exist.
+            # * INTERNAL: Any non-user error related to a technical issue in the
+            # backend. In this case, contact Cloud Channel support.
+            # * UNKNOWN: Any non-user error related to a technical issue in
+            # the backend. In this case, contact Cloud Channel support.
+            #
+            # Return Value:
+            # Topic name from which service email address has been unregistered if
+            # successful, otherwise error is returned. If the service email was already
+            # not associated with the topic, the success response will be returned.
+            #
+            # @overload unregister_subscriber(request, options = nil)
+            #   Pass arguments to `unregister_subscriber` via a request object, either of type
+            #   {::Google::Cloud::Channel::V1::UnregisterSubscriberRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Channel::V1::UnregisterSubscriberRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload unregister_subscriber(account: nil, service_account: nil)
+            #   Pass arguments to `unregister_subscriber` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param account [::String]
+            #     Required. Resource name of the account.
+            #   @param service_account [::String]
+            #     Required. Service account which will be unregistered from getting subscriber access
+            #     to the topic.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Channel::V1::UnregisterSubscriberResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Channel::V1::UnregisterSubscriberResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def unregister_subscriber request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Channel::V1::UnregisterSubscriberRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.unregister_subscriber.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Channel::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "account" => request.account
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.unregister_subscriber.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.unregister_subscriber.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_channel_service_stub.call_rpc :unregister_subscriber, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists service accounts with subscriber privileges on the Cloud Pub/Sub
+            # topic created for this Channel Services account.
+            #
+            # Possible Error Codes:
+            #
+            # * PERMISSION_DENIED: If the reseller account making the request and the
+            # reseller account being provided are different, or if the account is not
+            # a super admin.
+            # * INVALID_ARGUMENT: Missing or invalid required parameters in the
+            # request.
+            # * NOT_FOUND: If the topic resource doesn't exist.
+            # * INTERNAL: Any non-user error related to a technical issue in the
+            # backend. In this case, contact Cloud Channel support.
+            # * UNKNOWN: Any non-user error related to a technical issue in
+            # the backend. In this case, contact Cloud Channel support.
+            #
+            # Return Value:
+            # List of service email addresses if successful, otherwise error is
+            # returned.
+            #
+            # @overload list_subscribers(request, options = nil)
+            #   Pass arguments to `list_subscribers` via a request object, either of type
+            #   {::Google::Cloud::Channel::V1::ListSubscribersRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Channel::V1::ListSubscribersRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_subscribers(account: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_subscribers` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param account [::String]
+            #     Required. Resource name of the account.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of service accounts to return. The service may return
+            #     fewer than this value.
+            #     If unspecified, at most 100 service accounts will be returned.
+            #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous `ListSubscribers` call.
+            #     Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to `ListSubscribers` must
+            #      match the call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Channel::V1::ListSubscribersResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Channel::V1::ListSubscribersResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def list_subscribers request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Channel::V1::ListSubscribersRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_subscribers.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Channel::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "account" => request.account
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_subscribers.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_subscribers.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_channel_service_stub.call_rpc :list_subscribers, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the CloudChannelService API.
             #
             # This class represents the configuration for CloudChannelService,
@@ -3428,6 +3700,21 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_purchasable_offers
+                ##
+                # RPC-specific configuration for `register_subscriber`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :register_subscriber
+                ##
+                # RPC-specific configuration for `unregister_subscriber`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :unregister_subscriber
+                ##
+                # RPC-specific configuration for `list_subscribers`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_subscribers
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -3491,6 +3778,12 @@ module Google
                   @list_purchasable_skus = ::Gapic::Config::Method.new list_purchasable_skus_config
                   list_purchasable_offers_config = parent_rpcs&.list_purchasable_offers if parent_rpcs&.respond_to? :list_purchasable_offers
                   @list_purchasable_offers = ::Gapic::Config::Method.new list_purchasable_offers_config
+                  register_subscriber_config = parent_rpcs&.register_subscriber if parent_rpcs&.respond_to? :register_subscriber
+                  @register_subscriber = ::Gapic::Config::Method.new register_subscriber_config
+                  unregister_subscriber_config = parent_rpcs&.unregister_subscriber if parent_rpcs&.respond_to? :unregister_subscriber
+                  @unregister_subscriber = ::Gapic::Config::Method.new unregister_subscriber_config
+                  list_subscribers_config = parent_rpcs&.list_subscribers if parent_rpcs&.respond_to? :list_subscribers
+                  @list_subscribers = ::Gapic::Config::Method.new list_subscribers_config
 
                   yield self if block_given?
                 end

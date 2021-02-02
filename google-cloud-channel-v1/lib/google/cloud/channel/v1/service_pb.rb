@@ -267,6 +267,30 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.channel.v1.PurchasableOffer" do
       optional :offer, :message, 1, "google.cloud.channel.v1.Offer"
     end
+    add_message "google.cloud.channel.v1.RegisterSubscriberRequest" do
+      optional :account, :string, 1
+      optional :service_account, :string, 2
+    end
+    add_message "google.cloud.channel.v1.RegisterSubscriberResponse" do
+      optional :topic, :string, 1
+    end
+    add_message "google.cloud.channel.v1.UnregisterSubscriberRequest" do
+      optional :account, :string, 1
+      optional :service_account, :string, 2
+    end
+    add_message "google.cloud.channel.v1.UnregisterSubscriberResponse" do
+      optional :topic, :string, 1
+    end
+    add_message "google.cloud.channel.v1.ListSubscribersRequest" do
+      optional :account, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.cloud.channel.v1.ListSubscribersResponse" do
+      optional :topic, :string, 1
+      repeated :service_accounts, :string, 2
+      optional :next_page_token, :string, 3
+    end
   end
 end
 
@@ -325,6 +349,12 @@ module Google
         ListPurchasableOffersRequest::ChangeOfferPurchase = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListPurchasableOffersRequest.ChangeOfferPurchase").msgclass
         ListPurchasableOffersResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListPurchasableOffersResponse").msgclass
         PurchasableOffer = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.PurchasableOffer").msgclass
+        RegisterSubscriberRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.RegisterSubscriberRequest").msgclass
+        RegisterSubscriberResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.RegisterSubscriberResponse").msgclass
+        UnregisterSubscriberRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.UnregisterSubscriberRequest").msgclass
+        UnregisterSubscriberResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.UnregisterSubscriberResponse").msgclass
+        ListSubscribersRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListSubscribersRequest").msgclass
+        ListSubscribersResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListSubscribersResponse").msgclass
       end
     end
   end
