@@ -170,9 +170,7 @@ def analyze_iam_policy scope: "", full_resource_name: ""
     options:           options
   }
 
-  response = asset_service.analyze_iam_policy(
-    analysis_query: query
-  )
+  response = asset_service.analyze_iam_policy analysis_query: query
   # Do things with the response
   puts response
   # [END asset_quickstart_analyze_iam_policy]
@@ -207,10 +205,7 @@ def analyze_iam_policy_longrunning_gcs scope: "", full_resource_name: "", uri: "
   operation = asset_service.analyze_iam_policy_longrunning(
     analysis_query: query,
     output_config:  output_config
-  ) do |op|
-    # Handle the error.
-    raise op.results.message if op.error?
-  end
+  )
 
   operation.wait_until_done!
   metadata = operation.metadata
@@ -250,10 +245,7 @@ def analyze_iam_policy_longrunning_bigquery scope: "", full_resource_name: "", d
   operation = asset_service.analyze_iam_policy_longrunning(
     analysis_query: query,
     output_config:  output_config
-  ) do |op|
-    # Handle the error.
-    raise op.results.message if op.error?
-  end
+  )
 
   operation.wait_until_done!
   metadata = operation.metadata
