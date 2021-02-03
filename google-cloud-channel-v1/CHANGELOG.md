@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2021-02-03
+
+#### Features
+
+* Add support for Pub/Sub subscribers
+
 ### 0.2.0 / 2021-02-02
 
 #### Features
