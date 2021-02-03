@@ -57,6 +57,14 @@ module Acceptance
       super
     end
 
+    def bigtable_instance_id
+      $bigtable_instance_id
+    end
+
+    def bigtable_instance_id_2
+      $bigtable_instance_id_2
+    end
+
     def bigtable_instance
       @instance ||= bigtable.instance(bigtable_instance_id)
     end

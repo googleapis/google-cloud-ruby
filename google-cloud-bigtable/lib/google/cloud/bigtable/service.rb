@@ -752,17 +752,20 @@ module Google
         # Create a new table by restoring from a completed backup.
         #
         # @param table_id [String] The table ID for the new table. This table must not yet exist.
-        # @param instance_id [String] The instance ID for the source backup. The table will be created in this instance.
+        # @param instance_id [String] The instance ID for the source backup. The table will be created in this instance
+        #   if table_instance_id is not provided.
         # @param cluster_id [String] The cluster ID for the source backup.
         # @param backup_id [String] The backup ID for the source backup.
+        # @param table_instance_id [String] The instance ID for the table, if different from instance_id. Optional.
         #
         # @return [Gapic::Operation] The {Google::Longrunning::Operation#metadata metadata} field type is
         #   {Google::Cloud::Bigtable::Admin::RestoreTableMetadata RestoreTableMetadata}. The
         #   {Google::Longrunning::Operation#response response} type is
         #   {Google::Cloud::Bigtable::Admin::V2::Table Table}, if successful.
         #
-        def restore_table table_id, instance_id, cluster_id, backup_id
-          tables.restore_table parent:   instance_path(instance_id),
+        def restore_table table_id, instance_id, cluster_id, backup_id, table_instance_id: nil
+          table_instance_id ||= instance_id
+          tables.restore_table parent:   instance_path(table_instance_id),
                                table_id: table_id,
                                backup:   backup_path(instance_id, cluster_id, backup_id)
         end
