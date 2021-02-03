@@ -1086,7 +1086,9 @@ module Google
           #   routine = dataset.routine "my_routine"
           #
           #   routine.return_type.type_kind #=> "INT64"
-          #   routine.return_type = "STRING"
+          #   routine.update do |r|
+          #     r.return_type = "STRING"
+          #   end
           #
           def return_type= new_return_type
             @gapi.return_type = StandardSql::DataType.gapi_from_string_or_data_type new_return_type
@@ -1106,9 +1108,11 @@ module Google
           #   dataset = bigquery.dataset "my_dataset"
           #   routine = dataset.routine "my_routine"
           #
-          #   routine.imported_libraries = [
-          #     "gs://cloud-samples-data/bigquery/udfs/max-value.js"
-          #   ]
+          #   routine.update do |r|
+          #     r.imported_libraries = [
+          #       "gs://cloud-samples-data/bigquery/udfs/max-value.js"
+          #     ]
+          #   end
           #
           def imported_libraries= new_imported_libraries
             @gapi.imported_libraries = new_imported_libraries
@@ -1156,10 +1160,41 @@ module Google
           #   routine = dataset.routine "my_routine"
           #
           #   routine.description #=> "My routine description"
-          #   routine.description = "My updated routine description"
+          #   routine.update do |r|
+          #     r.description = "My updated routine description"
+          #   end
           #
           def description= new_description
             @gapi.description = new_description
+          end
+
+          ##
+          # Updates the JavaScript UDF determinism level. Optional.
+          #
+          # * `DETERMINISTIC` - Deterministic indicates that two calls with the same input to a UDF yield the same
+          #   output. If all JavaScript UDFs are `DETERMINISTIC`, the query result is potentially cachable.
+          # * `NOT_DETERMINISTIC` - Not deterministic indicates that the output of the UDF is not guaranteed to yield
+          #   the same output each time for a given set of inputs. If any JavaScript UDF is `NOT_DETERMINISTIC`, the
+          #   query result is not cacheable.
+          #
+          # @param [String, nil] new_determinism_level The new routine determinism level in upper case.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   routine = dataset.routine "my_routine"
+          #
+          #   routine.determinism_level #=> "NOT_DETERMINISTIC"
+          #   routine.update do |r|
+          #     r.determinism_level = "DETERMINISTIC"
+          #   end
+          #
+          # @!group Attributes
+          #
+          def determinism_level= new_determinism_level
+            @gapi.determinism_level = new_determinism_level
           end
 
           def update

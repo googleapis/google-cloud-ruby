@@ -35,6 +35,7 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
   let(:imported_libraries) { ["gs://cloud-samples-data/bigquery/udfs/max-value.js"] }
   let(:body) { "x * 3" }
   let(:description) { "This is my routine" }
+  let(:determinism_level) { "DETERMINISTIC" }
   let(:new_routine_type) { "PROCEDURE" }
   let(:new_language) { "JAVASCRIPT" }
   let(:new_arguments_gapi) do
@@ -73,6 +74,7 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
   let(:new_imported_libraries) { ["gs://cloud-samples-data/bigquery/udfs/max-value-2.js"] }
   let(:new_body) { "x * 4" }
   let(:new_description) { "This is my updated routine" }
+  let(:new_determinism_level) { "NOT_DETERMINISTIC" }
   let(:routine_partial_hash) { random_routine_partial_hash dataset, routine_id }
   let(:routine_partial_gapi) { Google::Apis::BigqueryV2::Routine.from_json routine_partial_hash.to_json }
   let(:routine_hash) { random_routine_hash dataset, routine_id }
@@ -130,7 +132,7 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
 
   it "can reload itself" do
     mock = Minitest::Mock.new
-    routine_hash = random_routine_hash dataset, routine_id, description: new_description
+    routine_hash = random_routine_hash dataset, routine_id, description: new_description, determinism_level: new_determinism_level
     mock.expect :get_routine, Google::Apis::BigqueryV2::Routine.from_json(routine_hash.to_json),
       [project, dataset, routine_id]
     routine.service.mocked_service = mock
@@ -140,6 +142,7 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
     mock.verify
 
     _(routine.description).must_equal new_description
+    _(routine.determinism_level).must_equal new_determinism_level
   end
 
   it "updates its routine_type" do
@@ -290,6 +293,22 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
     _(routine.description).must_equal new_description
   end
 
+  it "updates its determinism_level" do
+    mock = Minitest::Mock.new
+    mock.expect :get_routine, routine_gapi, [routine.project_id, routine.dataset_id, routine.routine_id]
+    updated_routine_gapi = routine_gapi.dup
+    updated_routine_gapi.determinism_level = new_determinism_level
+    mock.expect :update_routine, updated_routine_gapi,
+      [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
+    routine.service.mocked_service = mock
+
+    routine.determinism_level = new_determinism_level
+
+    mock.verify
+
+    _(routine.determinism_level).must_equal new_determinism_level
+  end
+
   it "updates its attributes in a block" do
     mock = Minitest::Mock.new
     mock.expect :get_routine, routine_gapi, [routine.project_id, routine.dataset_id, routine.routine_id]
@@ -301,6 +320,7 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
     updated_routine_gapi.imported_libraries = new_imported_libraries
     updated_routine_gapi.definition_body = new_body
     updated_routine_gapi.description = new_description
+    updated_routine_gapi.determinism_level = new_determinism_level
     mock.expect :update_routine, updated_routine_gapi,
       [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
     routine.service.mocked_service = mock
@@ -313,7 +333,7 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
       r.imported_libraries = new_imported_libraries
       r.description = new_description
       r.body = new_body
-      r.description = new_description
+      r.determinism_level = new_determinism_level
     end
 
     mock.verify
@@ -325,6 +345,7 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
     _(routine.imported_libraries).must_equal new_imported_libraries
     _(routine.body).must_equal new_body
     _(routine.description).must_equal new_description
+    _(routine.determinism_level).must_equal new_determinism_level
   end
 
   it "skips update when no updates are made in a block" do

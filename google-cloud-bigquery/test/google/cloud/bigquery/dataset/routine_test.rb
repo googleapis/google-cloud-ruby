@@ -20,9 +20,9 @@ describe Google::Cloud::Bigquery::Dataset, :routine, :mock_bigquery do
   let(:dataset_gapi) { Google::Apis::BigqueryV2::Dataset.from_json dataset_hash.to_json }
   let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi, bigquery.service }
   let(:routine_id) { "my-routine-id" }
-  let(:routine_hash) { random_routine_hash dataset_id, routine_id }
+  let(:routine_hash) { random_routine_hash dataset_id, routine_id, determinism_level: "DETERMINISTIC" }
   let(:routine_gapi) { Google::Apis::BigqueryV2::Routine.from_json routine_hash.to_json }
-  let(:routine_insert_hash) { random_routine_hash dataset_id, routine_id, etag: nil, creation_time: nil, last_modified_time: nil }
+  let(:routine_insert_hash) { random_routine_hash dataset_id, routine_id, etag: nil, creation_time: nil, last_modified_time: nil, determinism_level: "DETERMINISTIC" }
   let(:routine_insert_gapi) { Google::Apis::BigqueryV2::Routine.from_json routine_insert_hash.to_json }
 
   it "creates a routine" do
@@ -48,6 +48,7 @@ describe Google::Cloud::Bigquery::Dataset, :routine, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     routine = dataset.create_routine routine_id do |r|
+      # Note: This kitchen sink configuration is unrealistic since it includes all attributes.
       r.routine_type = "SCALAR_FUNCTION"
       r.language = "SQL"
       r.arguments = [
@@ -85,6 +86,7 @@ describe Google::Cloud::Bigquery::Dataset, :routine, :mock_bigquery do
       r.imported_libraries = ["gs://cloud-samples-data/bigquery/udfs/max-value.js"]
       r.body = "x * 3"
       r.description = "This is my routine"
+      r.determinism_level = "DETERMINISTIC"
       expect { r.update }.must_raise RuntimeError
       expect { r.delete }.must_raise RuntimeError
       expect { r.reload! }.must_raise RuntimeError
