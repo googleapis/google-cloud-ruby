@@ -4,6 +4,12 @@
 
 * Clarify Finding#event_time description
 
+### 0.5.0 / 2021-02-03
+
+#### Features
+
+* Use self-signed JWT credentials when possible
+
 ### 0.4.2 / 2021-01-19
 
 #### Documentation
