@@ -1,0 +1,11 @@
+{
+    "api_id": "networkconnectivity.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-network_connectivity/latest",
+    "distribution_name": "google-cloud-network_connectivity",
+    "language": "ruby",
+    "name": "networkconnectivity",
+    "name_pretty": "Network Connectivity API",
+    "product_documentation": "https://cloud.google.com/network-connectivity/docs",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
