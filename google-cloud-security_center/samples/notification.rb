@@ -43,8 +43,8 @@ def create_notification_config org_id:, config_id:, pubsub_topic:
     notification_config: notification_config
   )
   puts "Created notification config #{config_id}: #{response}."
-# [END scc_create_notification_config]
-# [END securitycenter_create_notification_config]
+  # [END scc_create_notification_config]
+  # [END securitycenter_create_notification_config]
 end
 
 def update_notification_config org_id:, config_id:, description: nil, pubsub_topic: nil, filter: nil
@@ -88,8 +88,8 @@ def update_notification_config org_id:, config_id:, description: nil, pubsub_top
     update_mask:         update_mask
   )
   puts response
-# [END scc_update_notification_config]
-# [END securitycenter_update_notification_config]
+  # [END scc_update_notification_config]
+  # [END securitycenter_update_notification_config]
 end
 
 def delete_notification_config org_id:, config_id:
@@ -134,8 +134,8 @@ def get_notification_config org_id:, config_id:
 
   response = client.get_notification_config name: config_path
   puts "Notification config fetched: #{response}"
-# [END scc_get_notification_config]
-# [END securitycenter_get_notification_config]
+  # [END scc_get_notification_config]
+  # [END securitycenter_get_notification_config]
 end
 
 def list_notification_configs org_id:
@@ -155,8 +155,8 @@ def list_notification_configs org_id:
       puts element
     end
   end
-# [END scc_list_notification_configs]
-# [END securitycenter_list_notification_configs]
+  # [END scc_list_notification_configs]
+  # [END securitycenter_list_notification_configs]
 end
 
 if $PROGRAM_NAME == __FILE__
