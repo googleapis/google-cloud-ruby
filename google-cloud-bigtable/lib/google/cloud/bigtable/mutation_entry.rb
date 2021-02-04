@@ -15,6 +15,8 @@
 # limitations under the License.
 
 
+require "google/cloud/bigtable/convert"
+
 module Google
   module Cloud
     module Bigtable
@@ -84,8 +86,9 @@ module Google
         # @param qualifier [String] Column qualifier name.
         #   The qualifier of the column into which new data should be written.
         #   Can be any byte string, including an empty string.
-        # @param value [String, Integer] Cell value data.
-        #   The value to be written into the specified cell.
+        # @param value [String, Integer] Cell value data. The value to be written
+        #   into the specified cell. If the argument is an Integer, it will be
+        #   encoded as a 64-bit signed big-endian integer.
         # @param timestamp [Integer] Timestamp value in microseconds.
         #   The timestamp of the cell into which new data should be written.
         #   Use -1 for current Bigtable server time.
@@ -112,7 +115,7 @@ module Google
         #
         def set_cell family, qualifier, value, timestamp: nil
           # If value is integer, covert it to a 64-bit signed big-endian integer.
-          value = [value].pack "q>" if value.is_a? Integer
+          value = Convert.integer_to_signed_be_64 value
           options = {
             family_name:      family,
             column_qualifier: qualifier,
