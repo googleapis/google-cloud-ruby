@@ -4,10 +4,8 @@
 
 #### Features
 
-* Add integer support to RowFilter#value and ValueRange ([#8185](https://www.github.com/googleapis/google-cloud-ruby/issues/8185))
-  * feat(bigtable): Add integer support to RowFilter#value and ValueRange
-  * Encode Integer arguments as 64-bit signed big-endian integer data.
-  * Add Convert unit test
+* Add integer support to RowFilter#value and ValueRange
+  * Encode Integer arguments as 64-bit signed big-endian integer data
 
 ### 2.2.1 / 2021-01-13
 
