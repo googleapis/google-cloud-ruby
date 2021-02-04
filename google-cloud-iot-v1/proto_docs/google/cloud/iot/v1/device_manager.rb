@@ -134,7 +134,8 @@ module Google
         # @!attribute [rw] field_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     The fields of the `Device` resource to be returned in the response. If the
-        #     field mask is unset or empty, all fields are returned.
+        #     field mask is unset or empty, all fields are returned. Fields have to be
+        #     provided in snake_case format, for example: `last_heartbeat_time`.
         class GetDeviceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -186,7 +187,8 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     The fields of the `Device` resource to be returned in the response. The
         #     fields `id` and `num_id` are always returned, along with any
-        #     other fields specified.
+        #     other fields specified in snake_case format, for example:
+        #     `last_heartbeat_time`.
         # @!attribute [rw] gateway_list_options
         #   @return [::Google::Cloud::Iot::V1::GatewayListOptions]
         #     Options related to gateways.
