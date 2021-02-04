@@ -1,5 +1,12 @@
 # Release History
 
+### 2.3.0 / 2021-02-04
+
+#### Features
+
+* Add integer support to RowFilter#value and ValueRange
+  * Encode Integer arguments as 64-bit signed big-endian integer data
+
 ### 2.2.1 / 2021-01-13
 
 #### Documentation
