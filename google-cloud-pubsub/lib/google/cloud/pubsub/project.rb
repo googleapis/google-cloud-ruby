@@ -75,10 +75,14 @@ module Google
         ##
         # Retrieves topic by name.
         #
-        # @param [String] topic_name Name of a topic.
+        # @param [String] topic_name Name of a topic. The value can be a simple
+        #   topic ID (relative name), in which case the current project ID will
+        #   be supplied, or a fully-qualified topic name in the form
+        #   `projects/{project_id}/topics/{topic_id}`.
         # @param [String] project If the topic belongs to a project other than
         #   the one currently connected to, the alternate project ID can be
-        #   specified here. Optional.
+        #   specified here. Optional. Not used if a fully-qualified topic name
+        #   is provided for `topic_name`.
         # @param [Boolean] skip_lookup Optionally create a {Topic} object
         #   without verifying the topic resource exists on the Pub/Sub service.
         #   Calls made on this object will raise errors if the topic resource
@@ -147,7 +151,7 @@ module Google
           ensure_service!
           options = { project: project }
           return Topic.from_name topic_name, service, options if skip_lookup
-          grpc = service.get_topic topic_name
+          grpc = service.get_topic topic_name, options
           Topic.from_grpc grpc, service, async: async
         rescue Google::Cloud::NotFoundError
           nil
@@ -158,7 +162,16 @@ module Google
         ##
         # Creates a new topic.
         #
-        # @param [String] topic_name Name of a topic.
+        # @param [String] topic_name Name of a topic. Required.
+        #   The value can be a simple topic ID (relative name), in which
+        #   case the current project ID will be supplied, or a fully-qualified
+        #   topic name in the form `projects/{project_id}/topics/{topic_id}`.
+        #
+        #   The topic ID (relative name) must start with a letter, and
+        #   contain only letters ([A-Za-z]), numbers ([0-9], dashes (-),
+        #   underscores (_), periods (.), tildes (~), plus (+) or percent
+        #   signs (%). It must be between 3 and 255 characters in length, and
+        #   it must not start with "goog".
         # @param [Hash] labels A hash of user-provided labels associated with
         #   the topic. You can use these to organize and group your topics.
         #   Label keys and values can be no longer than 63 characters, can only
@@ -250,10 +263,14 @@ module Google
         ##
         # Retrieves subscription by name.
         #
-        # @param [String] subscription_name Name of a subscription.
+        # @param [String] subscription_name Name of a subscription. The value can
+        #   be a simple subscription ID, in which case the current project ID
+        #   will be supplied, or a fully-qualified subscription name in the form
+        #   `projects/{project_id}/subscriptions/{subscription_id}`.
         # @param [String] project If the subscription belongs to a project other
         #   than the one currently connected to, the alternate project ID can be
-        #   specified here.
+        #   specified here. Not used if a fully-qualified subscription name is
+        #   provided for `subscription_name`.
         # @param [Boolean] skip_lookup Optionally create a {Subscription} object
         #   without verifying the subscription resource exists on the Pub/Sub
         #   service. Calls made on this object will raise errors if the service
@@ -283,7 +300,7 @@ module Google
           ensure_service!
           options = { project: project }
           return Subscription.from_name subscription_name, service, options if skip_lookup
-          grpc = service.get_subscription subscription_name
+          grpc = service.get_subscription subscription_name, options
           Subscription.from_grpc grpc, service
         rescue Google::Cloud::NotFoundError
           nil

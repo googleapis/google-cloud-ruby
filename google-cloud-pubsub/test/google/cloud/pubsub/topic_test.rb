@@ -74,6 +74,21 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
   end
 
+  it "creates a subscription with fully-qualified subscription path" do
+    new_sub_path = "projects/other-project/subscriptions/new-sub-#{Time.now.to_i}"
+
+    create_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, new_sub_path)
+    mock = Minitest::Mock.new
+    mock.expect :create_subscription, create_res, create_subscription_args(new_sub_path, topic_name)
+    topic.service.mocked_subscriber = mock
+
+    sub = topic.subscribe new_sub_path
+
+    mock.verify
+
+    _(sub.name).must_equal new_sub_path
+  end
+
   it "creates a subscription with create_subscription alias" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
     create_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, new_sub_name)
@@ -311,6 +326,21 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
     _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
     _(sub).wont_be :reference?
     _(sub).must_be :resource?
+  end
+
+  it "gets a subscription with fully-qualified subscription path" do
+    sub_full_path = "projects/other-project/subscriptions/found-sub-#{Time.now.to_i}"
+
+    get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_full_path)
+    mock = Minitest::Mock.new
+    mock.expect :get_subscription, get_res, [subscription: sub_full_path]
+    topic.service.mocked_subscriber = mock
+
+    sub = topic.subscription sub_full_path
+
+    mock.verify
+
+    _(sub.name).must_equal sub_full_path
   end
 
   it "gets a subscription with get_subscription alias" do

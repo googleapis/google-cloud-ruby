@@ -85,10 +85,10 @@ module Google
         end
 
         ##
-        # The name of the topic in the form of
-        # "/projects/project-identifier/topics/topic-name".
+        # The name of the topic.
         #
-        # @return [String]
+        # @return [String] A fully-qualified topic name in the form
+        #   `projects/{project_id}/topics/{topic_id}`.
         #
         def name
           return @resource_name if reference?
@@ -255,11 +255,17 @@ module Google
         ##
         # Creates a new {Subscription} object on the current Topic.
         #
-        # @param [String] subscription_name Name of the new subscription. Must
-        #   start with a letter, and contain only letters ([A-Za-z]), numbers
-        #   ([0-9], dashes (-), underscores (_), periods (.), tildes (~), plus
-        #   (+) or percent signs (%). It must be between 3 and 255 characters in
-        #   length, and it must not start with "goog". Required.
+        # @param [String] subscription_name Name of the new subscription. Required.
+        #   The value can be a simple subscription ID (relative name), in which
+        #   case the current project ID will be supplied, or a fully-qualified
+        #   subscription name in the form
+        #   `projects/{project_id}/subscriptions/{subscription_id}`.
+        #
+        #   The subscription ID (relative name) must start with a letter, and
+        #   contain only letters ([A-Za-z]), numbers ([0-9], dashes (-),
+        #   underscores (_), periods (.), tildes (~), plus (+) or percent
+        #   signs (%). It must be between 3 and 255 characters in length, and
+        #   it must not start with "goog".
         # @param [Integer] deadline The maximum number of seconds after a
         #   subscriber receives a message before the subscriber should
         #   acknowledge the message.
@@ -415,7 +421,11 @@ module Google
         ##
         # Retrieves subscription by name.
         #
-        # @param [String] subscription_name Name of a subscription.
+        # @param [String] subscription_name Name of a subscription. The value
+        #   can be a simple subscription ID (relative name), in which case the
+        #   current project ID will be supplied, or a fully-qualified
+        #   subscription name in the form
+        #   `projects/{project_id}/subscriptions/{subscription_id}`.
         # @param [Boolean] skip_lookup Optionally create a {Subscription} object
         #   without verifying the subscription resource exists on the Pub/Sub
         #   service. Calls made on this object will raise errors if the service

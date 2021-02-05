@@ -124,6 +124,20 @@ describe Google::Cloud::PubSub::Subscription, :mock_pubsub do
     _(snapshot).must_be_kind_of Google::Cloud::PubSub::Snapshot
   end
 
+  it "creates a snapshot with fully-qualified snapshot path" do
+    new_snapshot_path = "projects/other-project/snapshots/new-snapshot-#{Time.now.to_i}"
+    create_res = Google::Cloud::PubSub::V1::Snapshot.new snapshot_hash(subscription_name, new_snapshot_path)
+    mock = Minitest::Mock.new
+    mock.expect :create_snapshot, create_res, [name: snapshot_path(new_snapshot_path), subscription: subscription_path(subscription_name), labels: nil]
+    subscription.service.mocked_subscriber = mock
+
+    snapshot = subscription.create_snapshot new_snapshot_path
+
+    mock.verify
+
+    _(snapshot.name).must_equal new_snapshot_path
+  end
+
   it "creates a snapshot with new_snapshot alias" do
     new_snapshot_name = "new-snapshot-#{Time.now.to_i}"
     create_res = Google::Cloud::PubSub::V1::Snapshot.new snapshot_hash(subscription_name, new_snapshot_name)

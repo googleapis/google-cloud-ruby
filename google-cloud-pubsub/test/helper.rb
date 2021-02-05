@@ -144,7 +144,8 @@ class MockPubsub < Minitest::Spec
     data
   end
 
-  def subscription_hash topic_name, sub_name,
+  def subscription_hash topic_name,
+                        sub_name,
                         deadline = 60,
                         endpoint = "http://example.com/callback",
                         labels: nil,
@@ -255,14 +256,17 @@ class MockPubsub < Minitest::Spec
   end
 
   def topic_path topic_name
+    return topic_name if topic_name.to_s.include? "/"
     "#{project_path}/topics/#{topic_name}"
   end
 
   def subscription_path subscription_name
+    return subscription_name if subscription_name.to_s.include? "/"
     "#{project_path}/subscriptions/#{subscription_name}"
   end
 
   def snapshot_path snapshot_name
+    return snapshot_name if snapshot_name.to_s.include?("/")
     "#{project_path}/snapshots/#{snapshot_name}"
   end
 
