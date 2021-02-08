@@ -479,8 +479,14 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-  def random_routine_hash dataset, id = nil, project_id: nil, etag: "etag123456789", description: "This is my routine", 
-                                             creation_time: time_millis, last_modified_time: time_millis
+  def random_routine_hash dataset,
+                          id = nil,
+                          project_id: nil,
+                          etag: "etag123456789",
+                          description: "This is my routine", 
+                          creation_time: time_millis,
+                          last_modified_time: time_millis,
+                          determinism_level: nil
     id ||= "my_routine"
 
     h = {
@@ -534,6 +540,7 @@ class MockBigquery < Minitest::Spec
       definitionBody: "x * 3",
       description: description
     }
+    h[:determinismLevel] = determinism_level if determinism_level
     h[:etag] = etag if etag
     h[:creationTime] = creation_time if creation_time
     h[:lastModifiedTime] = last_modified_time if last_modified_time
