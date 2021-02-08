@@ -268,6 +268,17 @@ module Acceptance
     end
 
     include Fixtures
+
+    def assert_commit_response resp, commit_options = {}
+       _(resp.timestamp).must_be_kind_of Time
+
+      if commit_options[:return_commit_stats]
+        _(resp.stats).must_be_kind_of Google::Cloud::Spanner::CommitResponse::CommitStats
+        _(resp.stats.mutation_count).must_be :>, 0
+      else
+        _(resp.stats).must_be :nil?
+      end
+    end
   end
 end
 
