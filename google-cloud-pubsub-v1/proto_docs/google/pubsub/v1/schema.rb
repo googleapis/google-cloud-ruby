@@ -34,7 +34,7 @@ module Google
         #     The definition of the schema. This should contain a string representing
         #     the full definition of the schema that is a valid schema definition of
         #     the type specified in `type`.
-        class Schema
+      class Schema
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 

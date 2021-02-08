@@ -92,6 +92,21 @@ module Google
         end
         attr_accessor :mocked_iam
 
+        def schema
+          return mocked_schema if mocked_schema
+          @schema ||= begin
+            V1::SchemaService::Client.new do |config|
+              config.credentials = credentials if credentials
+              config.timeout = timeout if timeout
+              config.endpoint = host if host
+              config.lib_name = "gccl"
+              config.lib_version = Google::Cloud::PubSub::VERSION
+              config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
+            end
+          end
+        end
+        attr_accessor :mocked_schema
+
         ##
         # Gets the configuration of a topic.
         # Since the topic only has the name attribute,
@@ -297,6 +312,75 @@ module Google
           end
         end
 
+        ##
+        # Lists schemas in the current (or given) project.
+        # @param view [String, Symbol, nil] Possible values:
+        #   * `BASIC` - Include the name and type of the schema, but not the definition.
+        #   * `FULL` - Include all Schema object fields.
+        #   The default value is `BASIC`.
+        #
+        def list_schemas view = "BASIC", options = {}
+          schema_view = Google::Cloud::PubSub::V1::SchemaView.const_get view.to_s.upcase
+          paged_enum = schema.list_schemas parent:     project_path(options),
+                                           view:       schema_view,
+                                           page_size:  options[:max],
+                                           page_token: options[:token]
+
+          paged_enum.response
+        end
+
+        ##
+        # Creates a schema in the current (or given) project.
+        def create_schema schema_name, type, definition, options = {}
+          schema = Google::Cloud::PubSub::V1::Schema.new(
+            type:       type,
+            definition: definition
+          )
+          schema.create_schema parent:    project_path(options),
+                               schema:    schema,
+                               schema_id: schema_name
+        end
+
+        ##
+        # Gets the details of a schema.
+        # @param view [String, Symbol, nil] Possible values:
+        #   * `BASIC` - Include the name and type of the schema, but not the definition.
+        #   * `FULL` - Include all Schema object fields.
+        #   The default value is `BASIC`.
+        #
+        def get_schema schema_name, view = "BASIC", options = {}
+          schema_view = Google::Cloud::PubSub::V1::SchemaView.const_get view.to_s.upcase
+          schema.get_schema name: schema_path(schema_name, options),
+                            view: schema_view
+        end
+
+        def delete_schema schema_name
+          schema.delete_schema name: schema_path(schema_name)
+        end
+
+        def validate_schema schema
+          schema.validate_schema parent: project_path(options),
+                                 schema: schema
+        end
+
+        ##
+        # Validates a message against a schema.
+        #
+        # @param schema_name [String] Name of the schema against which to validate.
+        # @param schema [Google::Cloud::PubSub::V1::Schema, Hash] Ad-hoc schema against which to validate
+        # @param message_data [String] Message to validate against the provided `schema_spec`.
+        # @param encoding [Google::Cloud::PubSub::V1::Encoding] The encoding expected for messages
+        #
+        def validate_message schema_name, schema, message_data, encoding, options = {}
+          schema.validate_message parent:   project_path(options),
+                                  name:     schema_path(schema_name, options),
+                                  schema:   schema,
+                                  message:  message_data,
+                                  encoding: encoding
+        end
+
+        # Helper methods
+
         def get_topic_policy topic_name, options = {}
           iam.get_iam_policy resource: topic_path(topic_name, options)
         end
@@ -339,6 +423,11 @@ module Google
         def snapshot_path snapshot_name, options = {}
           return snapshot_name if snapshot_name.nil? || snapshot_name.to_s.include?("/")
           "#{project_path options}/snapshots/#{snapshot_name}"
+        end
+
+        def schema_path schema_name, options = {}
+          return schema_name if schema_name.nil? || schema_name.to_s.include?("/")
+          "#{project_path options}/schemas/#{schema_name}"
         end
 
         def inspect
