@@ -58,8 +58,10 @@ module Google
         end
 
         ##
-        # The name of the snapshot. Format is
-        # `projects/{project}/snapshots/{snap}`.
+        # The name of the snapshot.
+        #
+        # @return [String] A fully-qualified snapshot name in the form
+        #   `projects/{project_id}/snapshots/{snapshot_id}`.
         def name
           @grpc.name
         end

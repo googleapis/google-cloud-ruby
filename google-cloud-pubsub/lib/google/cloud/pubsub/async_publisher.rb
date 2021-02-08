@@ -44,8 +44,8 @@ module Google
       #
       #   topic.async_publisher.stop!
       #
-      # @attr_reader [String] topic_name The name of the topic the messages are published to. In the form of
-      #   "/projects/project-identifier/topics/topic-name".
+      # @attr_reader [String] topic_name The name of the topic the messages are published to. The value is a
+      #   fully-qualified topic name in the form `projects/{project_id}/topics/{topic_id}`.
       # @attr_reader [Integer] max_bytes The maximum size of messages to be collected before the batch is published.
       #   Default is 1,000,000 (1MB).
       # @attr_reader [Integer] max_messages The maximum number of messages to be collected before the batch is

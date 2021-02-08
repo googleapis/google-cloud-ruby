@@ -77,7 +77,9 @@ module Google
         ##
         # The name of the subscription.
         #
-        # @return [String]
+        # @return [String] A fully-qualified subscription name in the form
+        #   `projects/{project_id}/subscriptions/{subscription_id}`.
+        #
         def name
           return @resource_name if reference?
           @grpc.name
@@ -1064,14 +1066,19 @@ module Google
         # * Any messages published to the subscription's topic following the
         #   successful completion of the `create_snapshot` operation.
         #
-        # @param [String, nil] snapshot_name Name of the new snapshot. If the
-        #   name is not provided, the server will assign a random name
-        #   for this snapshot on the same project as the subscription. The
-        #   format is `projects/{project}/snapshots/{snap}`. The name must start
-        #   with a letter, and contain only letters ([A-Za-z]), numbers
-        #   ([0-9], dashes (-), underscores (_), periods (.), tildes (~), plus
-        #   (+) or percent signs (%). It must be between 3 and 255 characters in
-        #   length, and it must not start with "goog". Optional.
+        # @param [String, nil] snapshot_name Name of the new snapshot. Optional.
+        #   If the name is not provided, the server will assign a random name
+        #   for this snapshot on the same project as the subscription.
+        #   The value can be a simple snapshot ID (relative name), in which
+        #   case the current project ID will be supplied, or a fully-qualified
+        #   snapshot name in the form
+        #   `projects/{project_id}/snapshots/{snapshot_id}`.
+        #
+        #   The snapshot ID (relative name) must start with a letter, and
+        #   contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
+        #   underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
+        #   signs (`%`). It must be between 3 and 255 characters in length, and
+        #   it must not start with `goog`.
         # @param [Hash] labels A hash of user-provided labels associated with
         #   the snapshot. You can use these to organize and group your
         #   snapshots. Label keys and values can be no longer than 63
