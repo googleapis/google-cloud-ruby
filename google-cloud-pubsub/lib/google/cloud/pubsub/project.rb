@@ -168,10 +168,10 @@ module Google
         #   topic name in the form `projects/{project_id}/topics/{topic_id}`.
         #
         #   The topic ID (relative name) must start with a letter, and
-        #   contain only letters ([A-Za-z]), numbers ([0-9], dashes (-),
-        #   underscores (_), periods (.), tildes (~), plus (+) or percent
-        #   signs (%). It must be between 3 and 255 characters in length, and
-        #   it must not start with "goog".
+        #   contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
+        #   underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
+        #   signs (`%`). It must be between 3 and 255 characters in length, and
+        #   it must not start with `goog`.
         # @param [Hash] labels A hash of user-provided labels associated with
         #   the topic. You can use these to organize and group your topics.
         #   Label keys and values can be no longer than 63 characters, can only

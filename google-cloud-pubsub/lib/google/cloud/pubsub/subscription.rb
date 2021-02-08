@@ -1075,10 +1075,10 @@ module Google
         #   `projects/{project_id}/snapshots/{snapshot_id}`.
         #
         #   The snapshot ID (relative name) must start with a letter, and
-        #   contain only letters ([A-Za-z]), numbers ([0-9], dashes (-),
-        #   underscores (_), periods (.), tildes (~), plus (+) or percent
-        #   signs (%). It must be between 3 and 255 characters in length, and
-        #   it must not start with "goog".
+        #   contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
+        #   underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
+        #   signs (`%`). It must be between 3 and 255 characters in length, and
+        #   it must not start with `goog`.
         # @param [Hash] labels A hash of user-provided labels associated with
         #   the snapshot. You can use these to organize and group your
         #   snapshots. Label keys and values can be no longer than 63

@@ -262,10 +262,10 @@ module Google
         #   `projects/{project_id}/subscriptions/{subscription_id}`.
         #
         #   The subscription ID (relative name) must start with a letter, and
-        #   contain only letters ([A-Za-z]), numbers ([0-9], dashes (-),
-        #   underscores (_), periods (.), tildes (~), plus (+) or percent
-        #   signs (%). It must be between 3 and 255 characters in length, and
-        #   it must not start with "goog".
+        #   contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
+        #   underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
+        #   signs (`%`). It must be between 3 and 255 characters in length, and
+        #   it must not start with `goog`.
         # @param [Integer] deadline The maximum number of seconds after a
         #   subscriber receives a message before the subscriber should
         #   acknowledge the message.
