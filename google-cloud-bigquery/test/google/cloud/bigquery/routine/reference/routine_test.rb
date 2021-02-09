@@ -147,6 +147,8 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
 
     _(routine.description).must_equal new_description
     _(routine.determinism_level).must_equal new_determinism_level
+    _(routine.determinism_level_deterministic?).must_equal false
+    _(routine.determinism_level_not_deterministic?).must_equal true
   end
 
   it "updates its routine_type" do
@@ -309,6 +311,8 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     mock.verify
 
     _(routine.determinism_level).must_equal new_determinism_level
+    _(routine.determinism_level_deterministic?).must_equal false
+    _(routine.determinism_level_not_deterministic?).must_equal true
   end
 
   it "updates its attributes in a block" do
@@ -348,6 +352,8 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     _(routine.body).must_equal new_body
     _(routine.description).must_equal new_description
     _(routine.determinism_level).must_equal new_determinism_level
+    _(routine.determinism_level_deterministic?).must_equal false
+    _(routine.determinism_level_not_deterministic?).must_equal true
   end
 
   it "skips update when no updates are made in a block" do
