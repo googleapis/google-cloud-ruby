@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.1 / 2021-02-09
+
+#### Documentation
+
+* Clarify field_mask format
+
 ### 0.2.0 / 2021-02-02
 
 #### Features
