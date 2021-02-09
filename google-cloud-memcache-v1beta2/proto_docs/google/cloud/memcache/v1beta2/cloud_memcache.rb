@@ -21,34 +21,35 @@ module Google
   module Cloud
     module Memcache
       module V1beta2
+        # A Memorystore for Memcached instance
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Unique name of the resource in this scope including project and
         #     location using the form:
         #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
         #
-        #     Note: Memcached instances are managed and addressed at regional level so
-        #     location_id here refers to a GCP region; however, users may choose which
-        #     zones Memcached nodes within an instances should be provisioned in.
-        #     Refer to [zones] field for more details.
+        #     Note: Memcached instances are managed and addressed at the regional level
+        #     so `location_id` here refers to a Google Cloud region; however, users may
+        #     choose which zones Memcached nodes should be provisioned in within an
+        #     instance. Refer to {::Google::Cloud::Memcache::V1beta2::Instance#zones zones} field for more details.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Optional. User provided name for the instance only used for display
+        #     User provided name for the instance, which is only used for display
         #     purposes. Cannot be more than 80 characters.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. Resource labels to represent user-provided metadata.
+        #     Resource labels to represent user-provided metadata.
         #     Refer to cloud documentation on labels for more details.
         #     https://cloud.google.com/compute/docs/labeling-resources
         # @!attribute [rw] authorized_network
         #   @return [::String]
-        #     Optional. The full name of the Google Compute Engine
+        #     The full name of the Google Compute Engine
         #     [network](https://cloud.google.com/vpc/docs/vpc) to which the
         #     instance is connected. If left unspecified, the `default` network
         #     will be used.
         # @!attribute [rw] zones
         #   @return [::Array<::String>]
-        #     Optional. Zones where Memcached nodes should be provisioned in.
+        #     Zones in which Memcached nodes should be provisioned.
         #     Memcached nodes will be equally distributed across these zones. If not
         #     provided, the service will by default create nodes in all zones in the
         #     region for the instance.
@@ -60,9 +61,9 @@ module Google
         #     Required. Configuration for Memcached nodes.
         # @!attribute [rw] memcache_version
         #   @return [::Google::Cloud::Memcache::V1beta2::MemcacheVersion]
-        #     Optional. The major version of Memcached software.
+        #     The major version of Memcached software.
         #     If not provided, latest supported version will be used. Currently the
-        #     latest supported major version is MEMCACHE_1_5.
+        #     latest supported major version is `MEMCACHE_1_5`.
         #     The minor version will be automatically determined by our system based on
         #     the latest supported minor version.
         # @!attribute [rw] parameters
@@ -72,7 +73,7 @@ module Google
         # @!attribute [r] memcache_nodes
         #   @return [::Array<::Google::Cloud::Memcache::V1beta2::Instance::Node>]
         #     Output only. List of Memcached nodes.
-        #     Refer to [Node] message for more details.
+        #     Refer to {::Google::Cloud::Memcache::V1beta2::Instance::Node Node} message for more details.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the instance was created.
@@ -90,10 +91,13 @@ module Google
         #     The full version format will be "memcached-1.5.16".
         # @!attribute [rw] instance_messages
         #   @return [::Array<::Google::Cloud::Memcache::V1beta2::Instance::InstanceMessage>]
-        #     List of messages that describe current statuses of memcached instance.
+        #     List of messages that describe the current state of the Memcached instance.
         # @!attribute [r] discovery_endpoint
         #   @return [::String]
-        #     Output only. Endpoint for Discovery API
+        #     Output only. Endpoint for the Discovery API.
+        # @!attribute [r] update_available
+        #   @return [::Boolean]
+        #     Output only. Returns true if there is an update waiting to be applied
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -130,12 +134,14 @@ module Google
           # @!attribute [rw] parameters
           #   @return [::Google::Cloud::Memcache::V1beta2::MemcacheParameters]
           #     User defined parameters currently applied to the node.
+          # @!attribute [r] update_available
+          #   @return [::Boolean]
+          #     Output only. Returns true if there is an update waiting to be applied
           class Node
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Different states of a Memcached node.
-            # LINT.IfChange
             module State
               # Node state is not set.
               STATE_UNSPECIFIED = 0
@@ -183,7 +189,6 @@ module Google
           end
 
           # Different states of a Memcached instance.
-          # LINT.IfChange
           module State
             # State not set.
             STATE_UNSPECIFIED = 0
@@ -213,18 +218,17 @@ module Google
         #     The maximum number of items to return.
         #
         #     If not specified, a default value of 1000 will be used by the service.
-        #     Regardless of the page_size value, the response may include a partial list
-        #     and a caller should only rely on response's
-        #     [next_page_token][CloudMemcache.ListInstancesResponse.next_page_token]
+        #     Regardless of the `page_size` value, the response may include a partial
+        #     list and a caller should only rely on response's
+        #     {::Google::Cloud::Memcache::V1beta2::ListInstancesResponse#next_page_token `next_page_token`}
         #     to determine if there are more instances left to be queried.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     The next_page_token value returned from a previous List request,
-        #     if any.
+        #     The `next_page_token` value returned from a previous List request, if any.
         # @!attribute [rw] filter
         #   @return [::String]
         #     List filter. For example, exclude all Memcached instances with name as
-        #     my-instance by specifying "name != my-instance".
+        #     my-instance by specifying `"name != my-instance"`.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Sort results. Supported values are "name", "name desc" or "" (unsorted).
@@ -279,7 +283,9 @@ module Google
         #     * Must start with a letter.
         #     * Must be between 1-40 characters.
         #     * Must end with a number or a letter.
-        #     * Must be unique within the user project / location
+        #     * Must be unique within the user project / location.
+        #
+        #     If any of the above are not met, the API raises an invalid argument error.
         # @!attribute [rw] resource
         #   @return [::Google::Cloud::Memcache::V1beta2::Instance]
         #     Required. A Memcached [Instance] resource
@@ -292,7 +298,7 @@ module Google
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Mask of fields to update.
-        #      *   `displayName`
+        #      *  `displayName`
         # @!attribute [rw] resource
         #   @return [::Google::Cloud::Memcache::V1beta2::Instance]
         #     Required. A Memcached [Instance] resource.
@@ -305,7 +311,7 @@ module Google
         # Request for {::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#delete_instance DeleteInstance}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Memcached instance resource name in the format:
+        #     Required. Memcached instance resource name in the format:
         #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
         #     where `location_id` refers to a GCP region
         class DeleteInstanceRequest
@@ -320,12 +326,12 @@ module Google
         #     should be applied.
         # @!attribute [rw] node_ids
         #   @return [::Array<::String>]
-        #     Nodes to which we should apply the instance-level parameter group.
+        #     Nodes to which the instance-level parameter group is applied.
         # @!attribute [rw] apply_all
         #   @return [::Boolean]
         #     Whether to apply instance-level parameter group to all nodes. If set to
-        #     true, will explicitly restrict users from specifying any nodes, and apply
-        #     parameter group updates to all nodes within the instance.
+        #     true, users are restricted from specifying individual nodes, and
+        #     `ApplyParameters` updates all nodes within the instance.
         class ApplyParametersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -347,12 +353,33 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request for {::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#apply_software_update ApplySoftwareUpdate}.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Resource name of the Memcached instance for which software update should be
+        #     applied.
+        # @!attribute [rw] node_ids
+        #   @return [::Array<::String>]
+        #     Nodes to which we should apply the update to. Note all the selected nodes
+        #     are updated in parallel.
+        # @!attribute [rw] apply_all
+        #   @return [::Boolean]
+        #     Whether to apply the update to all nodes. If set to
+        #     true, will explicitly restrict users from specifying any nodes, and apply
+        #     software update to all nodes (where applicable) within the instance.
+        class ApplySoftwareUpdateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The unique ID associated with this set of parameters. Users
+        # can use this id to determine if the parameters associated with the instance
+        # differ from the parameters associated with the nodes. A discrepancy between
+        # parameter ids can inform users that they may need to take action to apply
+        # parameters on nodes.
         # @!attribute [r] id
         #   @return [::String]
-        #     Output only. The unique ID associated with this set of parameters. Users
-        #     can use this id to determine if the parameters associated with the instance
-        #     differ from the parameters associated with the nodes and any action needs
-        #     to be taken to apply parameters on nodes.
+        #     Output only.
         # @!attribute [rw] params
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     User defined set of parameters to use in the memcached process.
@@ -371,30 +398,30 @@ module Google
         end
 
         # Represents the metadata of a long-running operation.
-        # @!attribute [rw] create_time
+        # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Time when the operation was created.
-        # @!attribute [rw] end_time
+        #     Output only. Time when the operation was created.
+        # @!attribute [r] end_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Time when the operation finished running.
-        # @!attribute [rw] target
+        #     Output only. Time when the operation finished running.
+        # @!attribute [r] target
         #   @return [::String]
-        #     Server-defined resource path for the target of the operation.
-        # @!attribute [rw] verb
+        #     Output only. Server-defined resource path for the target of the operation.
+        # @!attribute [r] verb
         #   @return [::String]
-        #     Name of the verb executed by the operation.
-        # @!attribute [rw] status_detail
+        #     Output only. Name of the verb executed by the operation.
+        # @!attribute [r] status_detail
         #   @return [::String]
-        #     Human-readable status of the operation, if any.
-        # @!attribute [rw] cancel_requested
+        #     Output only. Human-readable status of the operation, if any.
+        # @!attribute [r] cancel_requested
         #   @return [::Boolean]
-        #     Identifies whether the user has requested cancellation
+        #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
         #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
         #     corresponding to `Code.CANCELLED`.
-        # @!attribute [rw] api_version
+        # @!attribute [r] api_version
         #   @return [::String]
-        #     API version used to start the operation.
+        #     Output only. API version used to start the operation.
         class OperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
