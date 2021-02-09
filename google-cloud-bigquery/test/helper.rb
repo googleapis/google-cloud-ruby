@@ -599,6 +599,12 @@ class MockBigquery < Minitest::Spec
         "endTime" => time_millis,
         "numChildJobs" => 2,
         "parentJobId" => "2222222222",
+        "reservationUsage": [
+          {
+            "name" => "unreserved",
+            "slotMs" => 12345
+          }
+        ],
         "scriptStatistics": {
           "evaluationKind" => "EXPRESSION",
           "stackFrames" => [

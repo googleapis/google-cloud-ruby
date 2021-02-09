@@ -140,6 +140,14 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     _(job.configuration["dryRun"]).must_equal false
   end
 
+  it "knows its reservation usage" do
+    _(job.reservation_usage).must_be_kind_of Array
+    _(job.reservation_usage.count).must_equal 1
+    _(job.reservation_usage[0]).must_be_kind_of Google::Cloud::Bigquery::Job::ReservationUsage
+    _(job.reservation_usage[0].name).must_equal "unreserved"
+    _(job.reservation_usage[0].slot_ms).must_equal 12345
+  end
+
   it "knows its statistics config" do
     _(job.statistics).must_be_kind_of Hash
     _(job.statistics["creationTime"]).wont_be :nil?
