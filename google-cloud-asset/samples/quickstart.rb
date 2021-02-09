@@ -157,17 +157,16 @@ def analyze_iam_policy scope: "", full_resource_name: ""
   # scope = 'SCOPE_OF_THE_QUERY'
   # full_resource_name = 'QUERY_RESOURCE'
   asset_service = Google::Cloud::Asset.asset_service
-  resource_selector = {
-    full_resource_name: full_resource_name
-  }
-  options = {
-    expand_groups:      true,
-    output_group_edges: true
-  }
+
   query = {
     scope:             scope,
-    resource_selector: resource_selector,
-    options:           options
+    resource_selector: {
+      full_resource_name: full_resource_name
+    },
+    options:           {
+      expand_groups:      true,
+      output_group_edges: true
+    }
   }
 
   response = asset_service.analyze_iam_policy analysis_query: query
@@ -184,17 +183,16 @@ def analyze_iam_policy_longrunning_gcs scope: "", full_resource_name: "", uri: "
   # full_resource_name = 'QUERY_RESOURCE'
   # uri = 'OUTPUT_GCS_URI'
   asset_service = Google::Cloud::Asset.asset_service
-  resource_selector = {
-    full_resource_name: full_resource_name
-  }
-  options = {
-    expand_groups:      true,
-    output_group_edges: true
-  }
+
   query = {
     scope:             scope,
-    resource_selector: resource_selector,
-    options:           options
+    resource_selector: {
+      full_resource_name: full_resource_name
+    },
+    options:           {
+      expand_groups:      true,
+      output_group_edges: true
+    }
   }
   output_config = {
     gcs_destination: {
@@ -223,17 +221,16 @@ def analyze_iam_policy_longrunning_bigquery scope: "", full_resource_name: "", d
   # dataset = 'BIGQUERY_DATASET'
   # table_prefix = 'BIGQUERY_TABLE_PREFIX'
   asset_service = Google::Cloud::Asset.asset_service
-  resource_selector = {
-    full_resource_name: full_resource_name
-  }
-  options = {
-    expand_groups:      true,
-    output_group_edges: true
-  }
+
   query = {
     scope:             scope,
-    resource_selector: resource_selector,
-    options:           options
+    resource_selector: {
+      full_resource_name: full_resource_name
+    },
+    options:           {
+      expand_groups:      true,
+      output_group_edges: true
+    }
   }
   output_config = {
     bigquery_destination: {
