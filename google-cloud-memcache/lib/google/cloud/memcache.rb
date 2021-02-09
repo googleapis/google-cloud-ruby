@@ -70,7 +70,7 @@ module Google
       # * As such, Memcached instances are resources of the form:
       #   `/projects/{project_id}/locations/{location_id}/instances/{instance_id}`
       #
-      # Note that location_id must be refering to a GCP `region`; for example:
+      # Note that location_id must be a GCP `region`; for example:
       # * `projects/my-memcached-project/locations/us-central1/instances/my-memcached`
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
