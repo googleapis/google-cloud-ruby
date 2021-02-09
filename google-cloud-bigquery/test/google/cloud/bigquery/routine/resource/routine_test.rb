@@ -135,6 +135,8 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
     _(routine.body).must_equal "x * 3"
     _(routine.description).must_equal description
     _(routine.determinism_level).must_equal determinism_level
+    _(routine.determinism_level_deterministic?).must_equal true
+    _(routine.determinism_level_not_deterministic?).must_equal false
   end
 
   it "can test its existence" do
@@ -335,6 +337,8 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
 
   it "updates its determinism_level" do
     _(routine.determinism_level).must_equal determinism_level
+    _(routine.determinism_level_deterministic?).must_equal true
+    _(routine.determinism_level_not_deterministic?).must_equal false
 
     mock = Minitest::Mock.new
     updated_routine_gapi = routine_gapi.dup
@@ -348,11 +352,15 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
     mock.verify
 
     _(routine.determinism_level).must_equal new_determinism_level
+    _(routine.determinism_level_deterministic?).must_equal false
+    _(routine.determinism_level_not_deterministic?).must_equal true
   end
 
   it "updates its attributes in a block" do
     _(routine.description).must_equal description
     _(routine.determinism_level).must_equal determinism_level
+    _(routine.determinism_level_deterministic?).must_equal true
+    _(routine.determinism_level_not_deterministic?).must_equal false
 
     mock = Minitest::Mock.new
     updated_routine_gapi = routine_gapi.dup
@@ -388,6 +396,9 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
     _(routine.imported_libraries).must_equal new_imported_libraries
     _(routine.body).must_equal new_body
     _(routine.description).must_equal new_description
+    _(routine.determinism_level).must_equal new_determinism_level
+    _(routine.determinism_level_deterministic?).must_equal false
+    _(routine.determinism_level_not_deterministic?).must_equal true
   end
 
   it "skips update when no updates are made in a block" do

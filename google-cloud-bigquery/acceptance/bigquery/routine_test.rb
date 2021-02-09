@@ -252,6 +252,8 @@ describe Google::Cloud::Bigquery, :bigquery do
     _(routine.body).must_equal "return x * 3;"
     _(routine.description).must_equal "my description"
     _(routine.determinism_level).must_equal "DETERMINISTIC"
+    _(routine.determinism_level_deterministic?).must_equal true
+    _(routine.determinism_level_not_deterministic?).must_equal false
 
     arguments = routine.arguments
     _(arguments).must_be_kind_of Array
