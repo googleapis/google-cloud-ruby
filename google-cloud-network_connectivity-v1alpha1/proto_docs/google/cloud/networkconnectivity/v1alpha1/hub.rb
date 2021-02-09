@@ -21,10 +21,10 @@ module Google
   module Cloud
     module NetworkConnectivity
       module V1alpha1
-        # The Connectivity Hub is a hub-and-spoke abstraction for network connectivity
-        # management in Google Cloud. It aims to reduce operational complexity
-        # through a simple, centralized connectivity management model. Here is the
-        # resource message of a Hub.
+        # Network Connectivity Center is a hub-and-spoke abstraction for
+        # network connectivity management in Google Cloud. It reduces
+        # operational complexity through a simple, centralized connectivity management
+        # model. Following is the resource message of a hub.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. The name of a Hub resource.
@@ -48,6 +48,9 @@ module Google
         #     Output only. Google-generated UUID for this resource. This is unique across all Hub
         #     resources. If a Hub resource is deleted and another with the same name is
         #     created, it gets a different unique_id.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::NetworkConnectivity::V1alpha1::State]
+        #     Output only. The current lifecycle state of this Hub.
         class Hub
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -97,6 +100,9 @@ module Google
         #     Output only. Google-generated UUID for this resource. This is unique across all Spoke
         #     resources. If a Spoke resource is deleted and another with the same name is
         #     created, it gets a different unique_id.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::NetworkConnectivity::V1alpha1::State]
+        #     Output only. The current lifecycle state of this Hub.
         class Spoke
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -386,6 +392,22 @@ module Google
         class RouterApplianceInstance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The State enum represents the lifecycle of a Network Connectivity Center
+        # resource.
+        module State
+          # No state information available
+          STATE_UNSPECIFIED = 0
+
+          # The resource's create operation is in progress
+          CREATING = 1
+
+          # The resource is active
+          ACTIVE = 2
+
+          # The resource's Delete operation is in progress
+          DELETING = 3
         end
       end
     end

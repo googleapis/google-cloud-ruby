@@ -20,6 +20,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :description, :string, 5
       repeated :spokes, :string, 6
       optional :unique_id, :string, 8
+      optional :state, :enum, 9, "google.cloud.networkconnectivity.v1alpha1.State"
     end
     add_message "google.cloud.networkconnectivity.v1alpha1.Spoke" do
       optional :name, :string, 1
@@ -32,6 +33,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :linked_interconnect_attachments, :string, 13
       repeated :linked_router_appliance_instances, :message, 14, "google.cloud.networkconnectivity.v1alpha1.RouterApplianceInstance"
       optional :unique_id, :string, 11
+      optional :state, :enum, 15, "google.cloud.networkconnectivity.v1alpha1.State"
     end
     add_message "google.cloud.networkconnectivity.v1alpha1.ListHubsRequest" do
       optional :parent, :string, 1
@@ -98,6 +100,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :ip_address, :string, 3
       optional :network_interface, :string, 2
     end
+    add_enum "google.cloud.networkconnectivity.v1alpha1.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :CREATING, 1
+      value :ACTIVE, 2
+      value :DELETING, 3
+    end
   end
 end
 
@@ -120,6 +128,7 @@ module Google
         UpdateSpokeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1alpha1.UpdateSpokeRequest").msgclass
         DeleteSpokeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1alpha1.DeleteSpokeRequest").msgclass
         RouterApplianceInstance = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1alpha1.RouterApplianceInstance").msgclass
+        State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1alpha1.State").enummodule
       end
     end
   end
