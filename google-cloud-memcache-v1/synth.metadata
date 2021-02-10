@@ -1,0 +1,30 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
+        "sha": "fb88a03f382654b2e7e6fe2223fb6f234b61f9a7"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "614b4fc8969008b086fbd6d3d99dfdb6fcf0a4a1",
+        "internalRef": "356808008"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "memcache",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ]
+}
