@@ -511,7 +511,7 @@ module Google
             #     Required. Resource name of the ProductSet to get.
             #
             #     Format is:
-            #     `projects/PROJECT_ID/locations/LOG_ID/productSets/PRODUCT_SET_ID`
+            #     `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Vision::V1::ProductSet]
@@ -1225,7 +1225,6 @@ module Google
             #     Required. The resource name of the reference image to delete.
             #
             #     Format is:
-            #
             #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID/referenceImages/IMAGE_ID`
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1382,7 +1381,6 @@ module Google
             #     Required. The resource name of the ReferenceImage to get.
             #
             #     Format is:
-            #
             #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID/referenceImages/IMAGE_ID`.
             #
             # @yield [response, operation] Access the result along with the RPC operation

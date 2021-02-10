@@ -127,6 +127,9 @@ module Google
         #     Image content, represented as a stream of bytes.
         #     Note: As with all `bytes` fields, protobuffers use a pure binary
         #     representation, whereas JSON representations use base64.
+        #
+        #     Currently, this field only works for BatchAnnotateImages requests. It does
+        #     not work for AsyncBatchAnnotateImages requests.
         # @!attribute [rw] source
         #   @return [::Google::Cloud::Vision::V1::ImageSource]
         #     Google Cloud Storage image location, or publicly-accessible image
@@ -323,6 +326,12 @@ module Google
 
               # Chin right gonion.
               CHIN_RIGHT_GONION = 34
+
+              # Left cheek center.
+              LEFT_CHEEK_CENTER = 35
+
+              # Right cheek center.
+              RIGHT_CHEEK_CENTER = 36
             end
           end
         end
@@ -789,8 +798,8 @@ module Google
         # A list of requests to annotate files using the BatchAnnotateFiles API.
         # @!attribute [rw] requests
         #   @return [::Array<::Google::Cloud::Vision::V1::AnnotateFileRequest>]
-        #     Required. The list of file annotation requests. Right now we support only one
-        #     AnnotateFileRequest in BatchAnnotateFilesRequest.
+        #     Required. The list of file annotation requests. Right now we support only
+        #     one AnnotateFileRequest in BatchAnnotateFilesRequest.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Optional. Target project and location to make a call.
