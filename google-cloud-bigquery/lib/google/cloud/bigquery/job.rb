@@ -216,6 +216,17 @@ module Google
         end
 
         ##
+        # An array containing the job resource usage breakdown by reservation, if present. Reservation usage statistics
+        # are only reported for jobs that are executed within reservations.  On-demand jobs do not report this data.
+        #
+        # @return [Array<Google::Cloud::Bigquery::Job::ReservationUsage>, nil] The reservation usage, if present.
+        #
+        def reservation_usage
+          return nil unless @gapi.statistics.reservation_usage
+          Array(@gapi.statistics.reservation_usage).map { |g| ReservationUsage.from_gapi g }
+        end
+
+        ##
         # The statistics including stack frames for a child job of a script.
         #
         # @return [Google::Cloud::Bigquery::Job::ScriptStatistics, nil] The script statistics, or `nil` if the job is
@@ -490,6 +501,29 @@ module Google
         end
 
         ##
+        # Represents Job resource usage breakdown by reservation.
+        #
+        # @attr_reader [String] name The reservation name or "unreserved" for on-demand resources usage.
+        # @attr_reader [Fixnum] slot_ms The slot-milliseconds the job spent in the given reservation.
+        #
+        class ReservationUsage
+          attr_reader :name, :slot_ms
+
+          ##
+          # @private Creates a new ReservationUsage instance.
+          def initialize name, slot_ms
+            @name = name
+            @slot_ms = slot_ms
+          end
+
+          ##
+          # @private New ReservationUsage from a statistics.reservation_usage value.
+          def self.from_gapi gapi
+            new gapi.name, gapi.slot_ms
+          end
+        end
+
+        ##
         # Represents statistics for a child job of a script.
         #
         # @attr_reader [String] evaluation_kind Indicates the type of child job. Possible values include `STATEMENT` and
@@ -547,7 +581,7 @@ module Google
           end
 
           ##
-          # @private New ScriptStatistics from a statistics.script_statistics object.
+          # @private New ScriptStatistics from a statistics.script_statistics value.
           def self.from_gapi gapi
             frames = Array(gapi.stack_frames).map { |g| ScriptStackFrame.from_gapi g }
             new gapi.evaluation_kind, frames
