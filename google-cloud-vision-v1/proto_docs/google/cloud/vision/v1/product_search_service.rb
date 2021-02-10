@@ -41,9 +41,9 @@ module Google
         # @!attribute [rw] product_category
         #   @return [::String]
         #     Immutable. The category for the product identified by the reference image. This should
-        #     be either "homegoods-v2", "apparel-v2", or "toys-v2". The legacy categories
-        #     "homegoods", "apparel", and "toys" are still supported, but these should
-        #     not be used for new products.
+        #     be one of "homegoods-v2", "apparel-v2", "toys-v2", "packagedgoods-v1" or
+        #     "general-v1". The legacy categories "homegoods", "apparel", and "toys" are
+        #     still supported, but these should not be used for new products.
         # @!attribute [rw] product_labels
         #   @return [::Array<::Google::Cloud::Vision::V1::Product::KeyValue>]
         #     Key-value pairs that can be attached to a product. At query time,
@@ -119,7 +119,6 @@ module Google
         #     The resource name of the reference image.
         #
         #     Format is:
-        #
         #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID/referenceImages/IMAGE_ID`.
         #
         #     This field is ignored when creating a reference image.
@@ -292,7 +291,7 @@ module Google
         #     Required. Resource name of the ProductSet to get.
         #
         #     Format is:
-        #     `projects/PROJECT_ID/locations/LOG_ID/productSets/PRODUCT_SET_ID`
+        #     `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
         class GetProductSetRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -389,7 +388,6 @@ module Google
         #     Required. The resource name of the ReferenceImage to get.
         #
         #     Format is:
-        #
         #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID/referenceImages/IMAGE_ID`.
         class GetReferenceImageRequest
           include ::Google::Protobuf::MessageExts
@@ -402,7 +400,6 @@ module Google
         #     Required. The resource name of the reference image to delete.
         #
         #     Format is:
-        #
         #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID/referenceImages/IMAGE_ID`
         class DeleteReferenceImageRequest
           include ::Google::Protobuf::MessageExts
