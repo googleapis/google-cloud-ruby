@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2021-02-10
+
+#### Features
+
+* Support LEFT_CHEEK_CENTER and RIGHT_CHEEK_CENTER facial landmark types
+
 ### 0.4.0 / 2021-02-02
 
 #### Features
