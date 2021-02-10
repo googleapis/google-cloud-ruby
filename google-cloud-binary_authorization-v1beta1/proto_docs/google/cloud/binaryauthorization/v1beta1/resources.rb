@@ -21,7 +21,8 @@ module Google
   module Cloud
     module BinaryAuthorization
       module V1beta1
-        # A {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} for container image binary authorization.
+        # A {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} for container
+        # image binary authorization.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name, in the format `projects/*/policy`. There is
@@ -37,7 +38,7 @@ module Google
         #     has no effect when specified inside a global admission policy.
         # @!attribute [rw] admission_whitelist_patterns
         #   @return [::Array<::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionWhitelistPattern>]
-        #     Optional. Admission policy whitelisting. A matching admission request will
+        #     Optional. Admission policy allowlisting. A matching admission request will
         #     always be permitted. This feature is typically used to exclude Google or
         #     third-party infrastructure images from Binary Authorization policies.
         # @!attribute [rw] cluster_admission_rules
@@ -81,11 +82,13 @@ module Google
           end
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionWhitelistPattern admission whitelist pattern} exempts images
-        # from checks by {::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule admission rules}.
+        # An [admission allowlist
+        # pattern][google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern]
+        # exempts images from checks by [admission
+        # rules][google.cloud.binaryauthorization.v1beta1.AdmissionRule].
         # @!attribute [rw] name_pattern
         #   @return [::String]
-        #     An image name pattern to whitelist, in the form `registry/path/to/image`.
+        #     An image name pattern to allow, in the form `registry/path/to/image`.
         #     This supports a trailing `*` as a wildcard, but this is allowed only in
         #     text after the `registry/` part.
         class AdmissionWhitelistPattern
@@ -93,12 +96,14 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule admission rule} specifies either that all container images
-        # used in a pod creation request must be attested to by one or more
-        # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors}, that all pod creations will be allowed, or that all
-        # pod creations will be denied.
+        # An {::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule admission rule}
+        # specifies either that all container images used in a pod creation request
+        # must be attested to by one or more
+        # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors}, that all pod
+        # creations will be allowed, or that all pod creations will be denied.
         #
-        # Images matching an {::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionWhitelistPattern admission whitelist pattern}
+        # Images matching an [admission allowlist
+        # pattern][google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern]
         # are exempted from admission rules and will never block a pod creation.
         # @!attribute [rw] evaluation_mode
         #   @return [::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule::EvaluationMode]
@@ -151,9 +156,9 @@ module Google
           end
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} that attests to container image
-        # artifacts. An existing attestor cannot be modified except where
-        # indicated.
+        # An {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} that attests
+        # to container image artifacts. An existing attestor cannot be modified except
+        # where indicated.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name, in the format:
@@ -173,8 +178,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1beta1::UserOwnedDrydockNote user owned drydock note} references a Drydock
-        # ATTESTATION_AUTHORITY Note created by the user.
+        # An [user owned drydock
+        # note][google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote]
+        # references a Drydock ATTESTATION_AUTHORITY Note created by the user.
         # @!attribute [rw] note_reference
         #   @return [::String]
         #     Required. The Drydock resource name of a ATTESTATION_AUTHORITY Note,
@@ -275,8 +281,9 @@ module Google
           end
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1beta1::AttestorPublicKey attestor public key} that will be used to verify
-        # attestations signed by this attestor.
+        # An [attestor public
+        # key][google.cloud.binaryauthorization.v1beta1.AttestorPublicKey] that will be
+        # used to verify attestations signed by this attestor.
         # @!attribute [rw] comment
         #   @return [::String]
         #     Optional. A descriptive comment. This field may be updated.
