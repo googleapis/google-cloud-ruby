@@ -1,5 +1,13 @@
 # Release History
 
+### 2.3.2 / 2021-02-08
+
+#### Bug Fixes
+
+* Fix project option in Project#topic and Project#subscription
+  * Ensure that project option is used when skip_lookup is false.
+  * Improve documentation of topic_name, subscription_name and snapshot_name.
+
 ### 2.3.1 / 2021-01-13
 
 #### Bug Fixes
