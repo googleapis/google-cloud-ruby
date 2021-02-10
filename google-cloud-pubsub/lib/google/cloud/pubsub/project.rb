@@ -18,6 +18,7 @@ require "google/cloud/pubsub/service"
 require "google/cloud/pubsub/credentials"
 require "google/cloud/pubsub/topic"
 require "google/cloud/pubsub/batch_publisher"
+require "google/cloud/pubsub/schema"
 require "google/cloud/pubsub/snapshot"
 
 module Google
@@ -386,6 +387,59 @@ module Google
         end
         alias find_snapshots snapshots
         alias list_snapshots snapshots
+
+        ##
+        # Retrieves schema by name.
+        #
+        # @param [String] schema_name Name of a schema. The value can
+        #   be a simple schema ID, in which case the current project ID
+        #   will be supplied, or a fully-qualified schema name in the form
+        #   `projects/{project_id}/schemas/{schema_id}`.
+        # @param view [String, Symbol, nil] Possible values:
+        #   * `BASIC` - Include the name and type of the schema, but not the definition.
+        #   * `FULL` - Include all Schema object fields.
+        #   The default value is `BASIC`.
+        # @param [String] project If the schema belongs to a project other
+        #   than the one currently connected to, the alternate project ID can be
+        #   specified here. Not used if a fully-qualified schema name is
+        #   provided for `schema_name`.
+        # @param [Boolean] skip_lookup Optionally create a {Subscription} object
+        #   without verifying the schema resource exists on the Pub/Sub
+        #   service. Calls made on this object will raise errors if the service
+        #   resource does not exist. Default is `false`.
+        #
+        # @return [Google::Cloud::PubSub::Subscription, nil] Returns `nil` if
+        #   the schema does not exist
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   schema = pubsub.schema "my-schema"
+        #   schema.name #=> "projects/my-project/schemas/my-schema"
+        #
+        # @example Skip the lookup against the service with `skip_lookup`:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   # No API call is made to retrieve the schema information.
+        #   schema = pubsub.schema "my-schema", skip_lookup: true
+        #   schema.name #=> "projects/my-project/schemas/my-schema"
+        #
+        def schema schema_name, view: nil, project: nil, skip_lookup: nil
+          ensure_service!
+          options = { project: project }
+          return Schema.from_name schema_name, service, options if skip_lookup
+          view ||= "BASIC"
+          grpc = service.get_schema schema_name, view, options
+          Schema.from_grpc grpc, service
+        rescue Google::Cloud::NotFoundError
+          nil
+        end
+        alias get_schema schema
+        alias find_schema schema
 
         protected
 

@@ -346,9 +346,8 @@ module Google
         # @param view [String, Symbol, nil] Possible values:
         #   * `BASIC` - Include the name and type of the schema, but not the definition.
         #   * `FULL` - Include all Schema object fields.
-        #   The default value is `BASIC`.
         #
-        def get_schema schema_name, view = "BASIC", options = {}
+        def get_schema schema_name, view, options = {}
           schema_view = Google::Cloud::PubSub::V1::SchemaView.const_get view.to_s.upcase
           schema.get_schema name: schema_path(schema_name, options),
                             view: schema_view

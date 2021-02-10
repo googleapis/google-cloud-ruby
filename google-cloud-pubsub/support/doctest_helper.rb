@@ -71,8 +71,12 @@ def mock_pubsub
     pubsub.service.mocked_publisher = Minitest::Mock.new
     pubsub.service.mocked_subscriber = Minitest::Mock.new
     pubsub.service.mocked_iam = Minitest::Mock.new
+    pubsub.service.mocked_schema = Minitest::Mock.new
     if block_given?
-      yield pubsub.service.mocked_publisher, pubsub.service.mocked_subscriber, pubsub.service.mocked_iam
+      yield pubsub.service.mocked_publisher,
+            pubsub.service.mocked_subscriber,
+            pubsub.service.mocked_iam,
+            pubsub.service.mocked_schema
     end
 
     pubsub
@@ -95,6 +99,8 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::PubSub::Project#list_subscriptions"
   doctest.skip "Google::Cloud::PubSub::Project#find_snapshots"
   doctest.skip "Google::Cloud::PubSub::Project#list_snapshots"
+  doctest.skip "Google::Cloud::PubSub::Project#get_schema"
+  doctest.skip "Google::Cloud::PubSub::Project#find_schema"
   doctest.skip "Google::Cloud::PubSub::Subscription#ack"
   doctest.skip "Google::Cloud::PubSub::Subscription#new_snapshot"
   doctest.skip "Google::Cloud::PubSub::Topic#create_subscription"
@@ -216,6 +222,12 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::PubSub::Project#schema" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+    end
+  end
+
   ##
   # ReceivedMessage
 
@@ -288,6 +300,22 @@ YARD::Doctest.configure do |doctest|
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), [Hash]
       mock_subscriber.expect :update_subscription, subscription_resp, [Hash]
+    end
+  end
+
+  ##
+  # Schema
+
+  doctest.before "Google::Cloud::PubSub::Schema" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Schema#delete" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+      mock_schema.expect :delete_schema, nil, [name: schema_path("my-schema")]
     end
   end
 
@@ -769,7 +797,8 @@ def subscription_hash topic_name, sub_name,
                       labels: nil,
                       dead_letter_topic: nil,
                       max_delivery_attempts: nil
-  hsh = { name: subscription_path(sub_name),
+  hsh = {
+    name: subscription_path(sub_name),
     topic: topic_path(topic_name),
     push_config: {
       push_endpoint: endpoint,
@@ -807,10 +836,28 @@ def snapshot_hash topic_name, snapshot_name, labels: nil
     seconds: time.to_i,
     nanos: time.nsec
   }
-  { name: snapshot_path(snapshot_name),
+  {
+    name: snapshot_path(snapshot_name),
     topic: topic_path(topic_name),
     expire_time: timestamp,
     labels: labels
+  }
+end
+
+def schemas_hash num_schemas, token = nil
+  schemas = num_schemas.times.map do
+    schema_hash("schema-#{rand 1000}")
+  end
+  data = { schemas: schemas }
+  data[:next_page_token] = token unless token.nil?
+  data
+end
+
+def schema_hash schema_name, type: "PROTOCOL_BUFFER", definition: "the schema definition"
+  {
+    name: schema_path(schema_name),
+    type: type,
+    definition: definition
   }
 end
 
@@ -847,6 +894,10 @@ def snapshot_path snapshot_name
   "#{project_path}/snapshots/#{snapshot_name}"
 end
 
+def schema_path schema_name
+  "#{project_path}/schemas/#{schema_name}"
+end
+
 def paged_enum_struct response
   OpenStruct.new response: response
 end
@@ -874,6 +925,10 @@ end
 
 def snapshot_resp snapshot_name = "my-snapshot"
   Google::Cloud::PubSub::V1::Snapshot.new snapshot_hash("my-topic", snapshot_name)
+end
+
+def schema_resp schema_name = "my-schema"
+  Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_name)
 end
 
 def policy_resp
