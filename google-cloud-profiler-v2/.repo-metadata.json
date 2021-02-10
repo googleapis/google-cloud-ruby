@@ -1,0 +1,11 @@
+{
+    "api_id": "cloudprofiler.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-profiler-v2/latest",
+    "distribution_name": "google-cloud-profiler-v2",
+    "language": "ruby",
+    "name": "cloudprofiler",
+    "name_pretty": "Cloud Profiler V2 API",
+    "product_documentation": "https://cloud.google.com/profiler/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
