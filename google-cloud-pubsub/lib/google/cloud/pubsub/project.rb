@@ -454,10 +454,11 @@ module Google
         #   underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
         #   signs (`%`). It must be between 3 and 255 characters in length, and
         #   it must not start with `goog`.
-        # @param [String] type The type of the schema. Possible values include:
+        # @param [String] type The type of the schema. Required. Possible values
+        #   include:
         #
-        #   * `PROTOCOL_BUFFER` - A Protocol Buffer schema definition.
-        #   * `AVRO` - An Avro schema definition.
+        #     * `PROTOCOL_BUFFER` - A Protocol Buffer schema definition.
+        #     * `AVRO` - An Avro schema definition.
         # @param [String] definition  The definition of the schema. This should
         #   be a string representing the full definition of the schema that is a
         #   valid schema definition of the type specified in `type`.
