@@ -441,6 +441,92 @@ module Google
         alias get_schema schema
         alias find_schema schema
 
+        ##
+        # Creates a new schema.
+        #
+        # @param [String] schema_name Name of a schema. Required.
+        #   The value can be a simple schema ID (relative name), in which
+        #   case the current project ID will be supplied, or a fully-qualified
+        #   schema name in the form `projects/{project_id}/schemas/{schema_id}`.
+        #
+        #   The schema ID (relative name) must start with a letter, and
+        #   contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
+        #   underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
+        #   signs (`%`). It must be between 3 and 255 characters in length, and
+        #   it must not start with `goog`.
+        # @param [String] type The type of the schema. Possible values include:
+        #
+        #   * `PROTOCOL_BUFFER` - A Protocol Buffer schema definition.
+        #   * `AVRO` - An Avro schema definition.
+        # @param [String] definition  The definition of the schema. This should
+        #   be a string representing the full definition of the schema that is a
+        #   valid schema definition of the type specified in `type`.
+        #
+        # @return [Google::Cloud::PubSub::Schema]
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   definition = "..."
+        #   schema = pubsub.create_schema "my-schema", :avro, definition
+        #   schema.name #=> "projects/my-project/schemas/my-schema"
+        #
+        def create_schema schema_name, type, definition
+          ensure_service!
+          type = type.to_s.upcase
+          grpc = service.create_schema schema_name, type, definition
+          Schema.from_grpc grpc, service
+        end
+        alias new_schema create_schema
+
+        ##
+        # Retrieves a list of schemas for the given project.
+        #
+        # @param view [String, Symbol, nil] The set of fields to return in the response. Possible values:
+        #
+        #     * `BASIC` - Include the `name` and `type` of the schema, but not the `definition`.
+        #     * `FULL` - Include all Schema object fields.
+        #
+        #   The default value is `BASIC`.
+        # @param [String] token A previously-returned page token representing
+        #   part of the larger set of results to view.
+        # @param [Integer] max Maximum number of schemas to return.
+        #
+        # @return [Array<Google::Cloud::PubSub::Schema>] (See
+        #   {Google::Cloud::PubSub::Schema::List})
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   schemas = pubsub.schemas
+        #   schemas.each do |schema|
+        #     puts schema.name
+        #   end
+        #
+        # @example Retrieve all schemas: (See {Schema::List#all})
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   schemas = pubsub.schemas
+        #   schemas.all do |schema|
+        #     puts schema.name
+        #   end
+        #
+        def schemas view: nil, token: nil, max: nil
+          ensure_service!
+          view ||= "BASIC"
+          options = { token: token, max: max }
+          grpc = service.list_schemas view, options
+          Schema::List.from_grpc grpc, service, view, max
+        end
+        alias find_schemas schemas
+        alias list_schemas schemas
+
         protected
 
         ##

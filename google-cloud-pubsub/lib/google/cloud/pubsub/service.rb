@@ -92,9 +92,9 @@ module Google
         end
         attr_accessor :mocked_iam
 
-        def schema
-          return mocked_schema if mocked_schema
-          @schema ||= begin
+        def schemas
+          return mocked_schemas if mocked_schemas
+          @schemas ||= begin
             V1::SchemaService::Client.new do |config|
               config.credentials = credentials if credentials
               config.timeout = timeout if timeout
@@ -105,7 +105,7 @@ module Google
             end
           end
         end
-        attr_accessor :mocked_schema
+        attr_accessor :mocked_schemas
 
         ##
         # Gets the configuration of a topic.
@@ -317,28 +317,27 @@ module Google
         # @param view [String, Symbol, nil] Possible values:
         #   * `BASIC` - Include the name and type of the schema, but not the definition.
         #   * `FULL` - Include all Schema object fields.
-        #   The default value is `BASIC`.
         #
-        def list_schemas view = "BASIC", options = {}
+        def list_schemas view, options = {}
           schema_view = Google::Cloud::PubSub::V1::SchemaView.const_get view.to_s.upcase
-          paged_enum = schema.list_schemas parent:     project_path(options),
-                                           view:       schema_view,
-                                           page_size:  options[:max],
-                                           page_token: options[:token]
+          paged_enum = schemas.list_schemas parent:     project_path(options),
+                                            view:       schema_view,
+                                            page_size:  options[:max],
+                                            page_token: options[:token]
 
           paged_enum.response
         end
 
         ##
         # Creates a schema in the current (or given) project.
-        def create_schema schema_name, type, definition, options = {}
+        def create_schema schema_name, type, definition
           schema = Google::Cloud::PubSub::V1::Schema.new(
             type:       type,
             definition: definition
           )
-          schema.create_schema parent:    project_path(options),
-                               schema:    schema,
-                               schema_id: schema_name
+          schemas.create_schema parent:    project_path,
+                                schema:    schema,
+                                schema_id: schema_path(schema_name)
         end
 
         ##
@@ -349,17 +348,17 @@ module Google
         #
         def get_schema schema_name, view, options = {}
           schema_view = Google::Cloud::PubSub::V1::SchemaView.const_get view.to_s.upcase
-          schema.get_schema name: schema_path(schema_name, options),
-                            view: schema_view
+          schemas.get_schema name: schema_path(schema_name, options),
+                             view: schema_view
         end
 
         def delete_schema schema_name
-          schema.delete_schema name: schema_path(schema_name)
+          schemas.delete_schema name: schema_path(schema_name)
         end
 
         def validate_schema schema
-          schema.validate_schema parent: project_path(options),
-                                 schema: schema
+          schemas.validate_schema parent: project_path(options),
+                                  schema: schema
         end
 
         ##
@@ -371,11 +370,11 @@ module Google
         # @param encoding [Google::Cloud::PubSub::V1::Encoding] The encoding expected for messages
         #
         def validate_message schema_name, schema, message_data, encoding, options = {}
-          schema.validate_message parent:   project_path(options),
-                                  name:     schema_path(schema_name, options),
-                                  schema:   schema,
-                                  message:  message_data,
-                                  encoding: encoding
+          schemas.validate_message parent:   project_path(options),
+                                   name:     schema_path(schema_name, options),
+                                   schema:   schema,
+                                   message:  message_data,
+                                   encoding: encoding
         end
 
         # Helper methods

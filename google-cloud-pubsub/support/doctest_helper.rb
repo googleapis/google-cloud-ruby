@@ -71,12 +71,12 @@ def mock_pubsub
     pubsub.service.mocked_publisher = Minitest::Mock.new
     pubsub.service.mocked_subscriber = Minitest::Mock.new
     pubsub.service.mocked_iam = Minitest::Mock.new
-    pubsub.service.mocked_schema = Minitest::Mock.new
+    pubsub.service.mocked_schemas = Minitest::Mock.new
     if block_given?
       yield pubsub.service.mocked_publisher,
             pubsub.service.mocked_subscriber,
             pubsub.service.mocked_iam,
-            pubsub.service.mocked_schema
+            pubsub.service.mocked_schemas
     end
 
     pubsub
@@ -101,6 +101,9 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::PubSub::Project#list_snapshots"
   doctest.skip "Google::Cloud::PubSub::Project#get_schema"
   doctest.skip "Google::Cloud::PubSub::Project#find_schema"
+  doctest.skip "Google::Cloud::PubSub::Project#new_schema"
+  doctest.skip "Google::Cloud::PubSub::Project#find_schemas"
+  doctest.skip "Google::Cloud::PubSub::Project#list_schemas"
   doctest.skip "Google::Cloud::PubSub::Subscription#ack"
   doctest.skip "Google::Cloud::PubSub::Subscription#new_snapshot"
   doctest.skip "Google::Cloud::PubSub::Topic#create_subscription"
@@ -222,9 +225,23 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::PubSub::Project#create_schema" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      schema = Google::Cloud::PubSub::V1::Schema.new type: "AVRO", definition: "..."
+      mock_schema.expect :create_schema, schema_resp("my-schema"), [parent: project_path, schema: schema, schema_id: schema_path("my-schema")]
+    end
+  end
+
   doctest.before "Google::Cloud::PubSub::Project#schema" do
     mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
       mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Project#schemas" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :list_schemas, list_schemas_resp, [Hash]
+      mock_schema.expect :list_schemas, list_schemas_resp(nil), [Hash]
     end
   end
 
@@ -320,6 +337,16 @@ YARD::Doctest.configure do |doctest|
   end
 
   ##
+  # Schema::List
+
+  doctest.before "Google::Cloud::PubSub::Schema::List" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :list_schemas, list_schemas_resp, [Hash]
+      mock_schema.expect :list_schemas, list_schemas_resp(nil), [Hash]
+    end
+  end
+
+  ##
   # Snapshot
 
   doctest.before "Google::Cloud::PubSub::Snapshot" do
@@ -347,7 +374,6 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :list_snapshots, list_snapshots_resp(nil), [Hash]
     end
   end
-
 
   ##
   # Subscription
@@ -925,6 +951,11 @@ end
 
 def snapshot_resp snapshot_name = "my-snapshot"
   Google::Cloud::PubSub::V1::Snapshot.new snapshot_hash("my-topic", snapshot_name)
+end
+
+def list_schemas_resp token = "next_page_token"
+  response = Google::Cloud::PubSub::V1::ListSchemasResponse.new schemas_hash(3, token)
+  paged_enum_struct response
 end
 
 def schema_resp schema_name = "my-schema"
