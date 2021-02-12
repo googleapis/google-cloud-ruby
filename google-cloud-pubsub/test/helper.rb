@@ -246,6 +246,23 @@ class MockPubsub < Minitest::Spec
     }
   end
 
+  def schemas_hash num_schemas, token = ""
+    schemas = num_schemas.times.map do
+      schema_hash("schema-#{rand 1000}")
+    end
+    data = { schemas: schemas }
+    data[:next_page_token] = token unless token.nil?
+    data
+  end
+
+  def schema_hash schema_name, type: "AVRO", definition: "AVRO schema definition"
+    { name: schema_path(schema_name), type: type, definition: definition }
+  end
+
+  def schema_gapi schema_name
+    schema_hash schema_name
+  end
+
   def rec_message_hash message, id = rand(1000000), delivery_attempt: 10
     {
       ack_id: "ack-id-#{id}",
@@ -281,6 +298,11 @@ class MockPubsub < Minitest::Spec
   def snapshot_path snapshot_name
     return snapshot_name if snapshot_name.to_s.include?("/")
     "#{project_path}/snapshots/#{snapshot_name}"
+  end
+
+  def schema_path schema_name
+    return schema_name if schema_name.to_s.include? "/"
+    "#{project_path}/schemas/#{schema_name}"
   end
 
   def paged_enum_struct response

@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::PubSub::Project, :mock_pubsub do
+describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
   let(:topics_with_token) do
     response = Google::Cloud::PubSub::V1::ListTopicsResponse.new topics_hash(3, "next_page_token")
     paged_enum_struct response
@@ -30,10 +30,6 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
   let(:labels) { { "foo" => "bar" } }
   let(:kms_key) { "projects/a/locations/b/keyRings/c/cryptoKeys/d" }
   let(:persistence_regions) { ["us-west1", "us-west2"] }
-
-  it "knows the project identifier" do
-    _(pubsub.project).must_equal project
-  end
 
   it "creates a topic" do
     new_topic_name = "new-topic-#{Time.now.to_i}"

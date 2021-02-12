@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::PubSub::Project, :mock_pubsub do
+describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
   let(:subscriptions_with_token) do
     response = Google::Cloud::PubSub::V1::ListSubscriptionsResponse.new subscriptions_hash("fake-topic", 3, "next_page_token")
     paged_enum_struct response
