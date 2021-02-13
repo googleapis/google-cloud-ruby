@@ -27,55 +27,62 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
     response = Google::Cloud::PubSub::V1::ListSchemasResponse.new schemas_hash(3, "second_page_token")
     paged_enum_struct response
   end
-  let(:type) { "AVRO" }
+  let(:type) { :AVRO }
   let(:definition) { "AVRO schema definition" }
-focus
+
   it "creates a schema" do
-    new_schema_name = "new-schema-#{Time.now.to_i}"
+    new_schema_id = "new-schema-#{Time.now.to_i}"
 
     create_req = Google::Cloud::PubSub::V1::Schema.new type: type, definition: definition
-    create_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(new_schema_name)
+    create_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(new_schema_id)
     mock = Minitest::Mock.new
-    mock.expect :create_schema, create_res, [parent: project_path, schema: create_req, schema_id: new_schema_name]
+    mock.expect :create_schema, create_res, [parent: project_path, schema: create_req, schema_id: new_schema_id]
     pubsub.service.mocked_schemas = mock
 
-    schema = pubsub.create_schema new_schema_name, type, definition
+    schema = pubsub.create_schema new_schema_id, type, definition
 
     mock.verify
 
-    _(schema.name).must_equal schema_path(new_schema_name)
+    _(schema.name).must_equal schema_path(new_schema_id)
     _(schema.type).must_equal type
     _(schema.definition).must_equal definition
   end
 
-  it "creates a schema with fully-qualified schema path" do
-    new_schema_path = "projects/other-project/schemas/new-schema-#{Time.now.to_i}"
+  it "creates a schema with project option" do
+    project_2 = "other-project"
+    project_2_path = "projects/#{project_2}"
+    new_schema_id = "new-schema-#{Time.now.to_i}"
+    new_schema_path = "#{project_2_path}/topics/#{new_schema_id}"
 
+    create_req = Google::Cloud::PubSub::V1::Schema.new type: type, definition: definition
     create_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(new_schema_path)
     mock = Minitest::Mock.new
-    mock.expect :create_schema, create_res, [name: new_schema_path, labels: nil, kms_key_name: nil, message_storage_policy: nil]
+    mock.expect :create_schema, create_res, [parent: project_2_path, schema: create_req, schema_id: new_schema_id]
     pubsub.service.mocked_schemas = mock
 
-    schema = pubsub.create_schema new_schema_path, type, definition
+    schema = pubsub.new_schema new_schema_id, type, definition, project: project_2
 
     mock.verify
 
     _(schema.name).must_equal new_schema_path
+    _(schema.type).must_equal type
+    _(schema.definition).must_equal definition
   end
 
   it "creates a schema with new_schema_alias" do
-    new_schema_name = "new-schema-#{Time.now.to_i}"
+    new_schema_id = "new-schema-#{Time.now.to_i}"
 
-    create_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(new_schema_name)
+    create_req = Google::Cloud::PubSub::V1::Schema.new type: type, definition: definition
+    create_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(new_schema_id)
     mock = Minitest::Mock.new
-    mock.expect :create_schema, create_res, [name: schema_path(new_schema_name), labels: nil, kms_key_name: nil, message_storage_policy: nil]
+    mock.expect :create_schema, create_res, [parent: project_path, schema: create_req, schema_id: new_schema_id]
     pubsub.service.mocked_schemas = mock
 
-    schema = pubsub.new_schema new_schema_name, type, definition
+    schema = pubsub.new_schema new_schema_id, type, definition
 
     mock.verify
 
-    _(schema.name).must_equal schema_path(new_schema_name)
+    _(schema.name).must_equal schema_path(new_schema_id)
     _(schema.type).must_equal type
     _(schema.definition).must_equal definition
   end

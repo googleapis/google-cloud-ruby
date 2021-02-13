@@ -396,8 +396,8 @@ module Google
         #   will be supplied, or a fully-qualified schema name in the form
         #   `projects/{project_id}/schemas/{schema_id}`.
         # @param view [String, Symbol, nil] Possible values:
-        #   * `BASIC` - Include the name and type of the schema, but not the definition.
-        #   * `FULL` - Include all Schema object fields.
+        #   * `:basic` - Include the name and type of the schema, but not the definition.
+        #   * `:full` - Include all Schema object fields.
         #   The default value is `BASIC`.
         # @param [String] project If the schema belongs to a project other
         #   than the one currently connected to, the alternate project ID can be
@@ -418,6 +418,8 @@ module Google
         #
         #   schema = pubsub.schema "my-schema"
         #   schema.name #=> "projects/my-project/schemas/my-schema"
+        #   schema.type #=> :PROTOCOL_BUFFER
+        #   # schema.definition # nil - Use view: :full to load complete resource.
         #
         # @example Skip the lookup against the service with `skip_lookup`:
         #   require "google/cloud/pubsub"
@@ -425,8 +427,21 @@ module Google
         #   pubsub = Google::Cloud::PubSub.new
         #
         #   # No API call is made to retrieve the schema information.
+        #   # The default project is used in the name.
         #   schema = pubsub.schema "my-schema", skip_lookup: true
         #   schema.name #=> "projects/my-project/schemas/my-schema"
+        #   schema.type #=> nil
+        #   schema.definition #=> nil
+        #
+        # @example Get the schema definition with `view: :full`:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   schema = pubsub.schema "my-schema", view: :full
+        #   schema.name #=> "projects/my-project/schemas/my-schema"
+        #   schema.type #=> :PROTOCOL_BUFFER
+        #   schema.definition # The schema definition
         #
         def schema schema_name, view: nil, project: nil, skip_lookup: nil
           ensure_service!
@@ -444,24 +459,25 @@ module Google
         ##
         # Creates a new schema.
         #
-        # @param [String] schema_name Name of a schema. Required.
-        #   The value can be a simple schema ID (relative name), in which
-        #   case the current project ID will be supplied, or a fully-qualified
-        #   schema name in the form `projects/{project_id}/schemas/{schema_id}`.
+        # @param [String] schema_id The ID to use for the schema, which will
+        #   become the final component of the schema's resource name. Required.
         #
         #   The schema ID (relative name) must start with a letter, and
         #   contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
         #   underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
         #   signs (`%`). It must be between 3 and 255 characters in length, and
         #   it must not start with `goog`.
-        # @param [String] type The type of the schema. Required. Possible values
-        #   include:
+        # @param [String, Symbol] type The type of the schema. Required. Possible
+        #   values are case-insensitive and include:
         #
         #     * `PROTOCOL_BUFFER` - A Protocol Buffer schema definition.
         #     * `AVRO` - An Avro schema definition.
         # @param [String] definition  The definition of the schema. This should
         #   be a string representing the full definition of the schema that is a
         #   valid schema definition of the type specified in `type`.
+        # @param [String] project If the subscription belongs to a project other
+        #   than the one currently connected to, the alternate project ID can be
+        #   specified here.
         #
         # @return [Google::Cloud::PubSub::Schema]
         #
@@ -474,10 +490,10 @@ module Google
         #   schema = pubsub.create_schema "my-schema", :avro, definition
         #   schema.name #=> "projects/my-project/schemas/my-schema"
         #
-        def create_schema schema_name, type, definition
+        def create_schema schema_id, type, definition, project: nil
           ensure_service!
           type = type.to_s.upcase
-          grpc = service.create_schema schema_name, type, definition
+          grpc = service.create_schema schema_id, type, definition, project: project
           Schema.from_grpc grpc, service
         end
         alias new_schema create_schema

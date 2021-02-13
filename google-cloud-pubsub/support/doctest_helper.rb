@@ -104,6 +104,7 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::PubSub::Project#new_schema"
   doctest.skip "Google::Cloud::PubSub::Project#find_schemas"
   doctest.skip "Google::Cloud::PubSub::Project#list_schemas"
+  doctest.skip "Google::Cloud::PubSub::Schema#refresh!"
   doctest.skip "Google::Cloud::PubSub::Subscription#ack"
   doctest.skip "Google::Cloud::PubSub::Subscription#new_snapshot"
   doctest.skip "Google::Cloud::PubSub::Topic#create_subscription"
@@ -228,13 +229,25 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::PubSub::Project#create_schema" do
     mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
       schema = Google::Cloud::PubSub::V1::Schema.new type: "AVRO", definition: "..."
-      mock_schema.expect :create_schema, schema_resp("my-schema"), [parent: project_path, schema: schema, schema_id: schema_path("my-schema")]
+      mock_schema.expect :create_schema, schema_resp("my-schema"), [parent: project_path, schema: schema, schema_id: "my-schema"]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Project#schema" do
     mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
       mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Project#schema@Skip the lookup against the service with `skip_lookup`:" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 2]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Project#schema@Get the schema definition with `view: :full`:" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 2]
     end
   end
 
@@ -333,6 +346,25 @@ YARD::Doctest.configure do |doctest|
     mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
       mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
       mock_schema.expect :delete_schema, nil, [name: schema_path("my-schema")]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Schema#reload!" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 2]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Schema#resource_full?" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 2]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Schema#resource_partial?" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+      mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 2]
     end
   end
 
@@ -879,7 +911,7 @@ def schemas_hash num_schemas, token = nil
   data
 end
 
-def schema_hash schema_name, type: "PROTOCOL_BUFFER", definition: "the schema definition"
+def schema_hash schema_name, type: "PROTOCOL_BUFFER", definition: nil
   {
     name: schema_path(schema_name),
     type: type,
@@ -958,8 +990,8 @@ def list_schemas_resp token = "next_page_token"
   paged_enum_struct response
 end
 
-def schema_resp schema_name = "my-schema"
-  Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_name)
+def schema_resp schema_name = "my-schema", definition: nil
+  Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_name, definition: definition)
 end
 
 def policy_resp

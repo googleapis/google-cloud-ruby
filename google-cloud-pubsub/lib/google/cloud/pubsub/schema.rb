@@ -64,9 +64,10 @@ module Google
         #   * `PROTOCOL_BUFFER` - A Protocol Buffer schema definition.
         #   * `AVRO` - An Avro schema definition.
         #
-        # @return [String] The upper-case type name.
+        # @return [String, nil] The upper-case type name.
         #
         def type
+          return nil if reference?
           @grpc.type
         end
 
@@ -74,14 +75,15 @@ module Google
         # The definition of the schema. This should be a string representing the full definition of the schema that is a
         # valid schema definition of the type specified in {#type}.
         #
-        # @return [String] The schema definition.
+        # @return [String, nil] The schema definition.
         #
         def definition
+          return nil if reference?
           @grpc.definition
         end
 
         ##
-        # Removes an existing schema.
+        # Removes the schema, if it exists.
         #
         # @return [Boolean] Returns `true` if the schema was deleted.
         #
@@ -97,6 +99,131 @@ module Google
           ensure_service!
           service.delete_schema name
           true
+        end
+
+        ##
+        # Reloads the schema with current `FULL` data from the Pub/Sub service.
+        #
+        # @return [Google::Cloud::PubSub::Schema] Returns the reloaded
+        #   schema.
+        #
+        # @example Skip retrieving the schema from the service, then load it:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #   schema = pubsub.schema "my-schema", skip_lookup: true
+        #
+        #   schema.reload!
+        #
+        # @!group Lifecycle
+        #
+        def reload!
+          ensure_service!
+          @grpc = service.get_schema name, "FULL"
+          @reference = nil
+          @exists = nil
+          self
+        end
+        alias refresh! reload!
+
+        ##
+        # Determines whether the schema exists in the Pub/Sub service.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   schema = pubsub.schema "my-schema"
+        #   schema.exists? #=> true
+        #
+        def exists?
+          # Always true if the object is not set as reference
+          return true unless reference?
+          # If we have a value, return it
+          return @exists unless @exists.nil?
+          ensure_grpc! # TODO
+          @exists = true
+        rescue Google::Cloud::NotFoundError
+          @exists = false
+        end
+
+        ##
+        # Determines whether the schema object was created without retrieving the
+        # resource representation from the Pub/Sub service.
+        #
+        # @return [Boolean] `true` when the schema was created without a resource
+        #   representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   schema = pubsub.schema "my-schema", skip_lookup: true
+        #   schema.reference? #=> true
+        #
+        def reference?
+          @grpc.type.nil? || @grpc.type == :TYPE_UNSPECIFIED
+        end
+
+        ##
+        # Determines whether the schema object was created with a resource
+        # representation from the Pub/Sub service.
+        #
+        # @return [Boolean] `true` when the schema was created with a resource
+        #   representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   schema = pubsub.schema "my-schema"
+        #   schema.resource? #=> true
+        #
+        def resource?
+          !reference?
+        end
+
+        ##
+        # Whether the schema was created with a partial resource representation
+        # from the Pub/Sub service.
+        #
+        # @return [Boolean] `true` when the schema was created with a partial
+        #   resource representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #   schema = pubsub.schema "my-schema", view: :basic
+        #
+        #   schema.resource_partial? #=> true
+        #   schema.reload! # Loads the full resource.
+        #   schema.resource_partial? #=> false
+        #
+        def resource_partial?
+          resource? && !resource_full?
+        end
+
+        ##
+        # Whether the schema was created with a full resource representation
+        # from the Pub/Sub service.
+        #
+        # @return [Boolean] `true` when the schema was created with a full
+        #   resource representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #   schema = pubsub.schema "my-schema", view: :full
+        #
+        #   schema.resource_full? #=> true
+        #
+        def resource_full?
+          resource? && !@grpc.definition&.empty?
         end
 
         ##

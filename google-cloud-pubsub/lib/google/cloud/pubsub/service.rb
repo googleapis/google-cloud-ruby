@@ -330,14 +330,14 @@ module Google
 
         ##
         # Creates a schema in the current (or given) project.
-        def create_schema schema_name, type, definition
+        def create_schema schema_id, type, definition, project: nil
           schema = Google::Cloud::PubSub::V1::Schema.new(
             type:       type,
             definition: definition
           )
-          schemas.create_schema parent:    project_path,
+          schemas.create_schema parent:    project_path(project: project),
                                 schema:    schema,
-                                schema_id: schema_path(schema_name)
+                                schema_id: schema_id
         end
 
         ##
