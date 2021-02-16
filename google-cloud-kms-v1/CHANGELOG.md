@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.1 / 2021-02-16
+
+#### Bug Fixes
+
+* No longer retry on internal backend errors
+
 ### 0.4.0 / 2021-02-03
 
 #### Features
