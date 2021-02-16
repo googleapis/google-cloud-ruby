@@ -2,7 +2,7 @@
 
 API Client library for the Area 120 Tables V1alpha1 API
 
-Using the Area120 Tables API, you can query for tables, and update/create/delete rows within tables programmatically.
+Using the Area 120 Tables API, you can query for tables, and update/create/delete rows within tables programmatically.
 
 https://github.com/googleapis/google-cloud-ruby
 
