@@ -65,9 +65,10 @@ module Google
           # @!attribute [rw] specified_amount
           #   @return [::Google::Type::Money]
           #     A specified amount to use as the budget.
-          #     `currency_code` is optional. If specified, it must match the
-          #     currency of the billing account. The `currency_code` is provided on
-          #     output.
+          #     `currency_code` is optional. If specified when creating a budget, it must
+          #     match the currency of the billing account. If specified when updating a
+          #     budget, it must match the existing budget currency_code.
+          #     The `currency_code` is provided on output.
           # @!attribute [rw] last_period_amount
           #   @return [::Google::Cloud::Billing::Budgets::V1beta1::LastPeriodAmount]
           #     Use the last period's actual spend as the budget for the present period.
@@ -137,9 +138,12 @@ module Google
           #     for more details on Pub/Sub roles and permissions.
           # @!attribute [rw] schema_version
           #   @return [::String]
-          #     Optional. The schema version of the notification sent to `pubsub_topic`.
+          #     Optional. Required when
+          #     {::Google::Cloud::Billing::Budgets::V1beta1::AllUpdatesRule#pubsub_topic AllUpdatesRule.pubsub_topic}
+          #     is set. The schema version of the notification sent to
+          #     {::Google::Cloud::Billing::Budgets::V1beta1::AllUpdatesRule#pubsub_topic AllUpdatesRule.pubsub_topic}.
           #     Only "1.0" is accepted. It represents the JSON schema as defined in
-          #     https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications#notification_format
+          #     https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications#notification_format.
           # @!attribute [rw] monitoring_notification_channels
           #   @return [::Array<::String>]
           #     Optional. Targets to send notifications to when a threshold is exceeded.
