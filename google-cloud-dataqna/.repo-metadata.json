@@ -1,0 +1,11 @@
+{
+    "api_id": "dataqna.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-dataqna/latest",
+    "distribution_name": "google-cloud-dataqna",
+    "language": "ruby",
+    "name": "dataqna",
+    "name_pretty": "BigQuery Data QnA API",
+    "product_documentation": "https://cloud.google.com/bigquery/docs/dataqna/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
