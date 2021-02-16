@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.1 / 2021-02-16
+
+#### Documentation
+
+* Update a few field descriptions
+
 ### 0.4.0 / 2021-02-02
 
 #### Features
