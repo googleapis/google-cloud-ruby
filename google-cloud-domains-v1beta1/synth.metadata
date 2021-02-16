@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "0572ec1b56b61cf2b33ea5c8ac4722fbc67181bf"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "fb88a03f382654b2e7e6fe2223fb6f234b61f9a7"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e28aa8570dc86136fe677202c976f4ee00d77f61",
-        "internalRef": "356624136"
+        "sha": "66e0de02e649c5b90f873836bdbc97585d91ed46",
+        "internalRef": "356839170"
       }
     }
   ],
@@ -26,5 +26,45 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-domains-v1beta1.gemspec",
+    "lib/google-cloud-domains-v1beta1.rb",
+    "lib/google/cloud/domains/v1beta1.rb",
+    "lib/google/cloud/domains/v1beta1/domains.rb",
+    "lib/google/cloud/domains/v1beta1/domains/client.rb",
+    "lib/google/cloud/domains/v1beta1/domains/credentials.rb",
+    "lib/google/cloud/domains/v1beta1/domains/operations.rb",
+    "lib/google/cloud/domains/v1beta1/domains/paths.rb",
+    "lib/google/cloud/domains/v1beta1/domains_pb.rb",
+    "lib/google/cloud/domains/v1beta1/domains_services_pb.rb",
+    "lib/google/cloud/domains/v1beta1/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/domains/v1beta1/domains.rb",
+    "proto_docs/google/longrunning/operations.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/duration.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/money.rb",
+    "proto_docs/google/type/postal_address.rb",
+    "test/google/cloud/domains/v1beta1/domains_operations_test.rb",
+    "test/google/cloud/domains/v1beta1/domains_paths_test.rb",
+    "test/google/cloud/domains/v1beta1/domains_test.rb",
+    "test/helper.rb"
   ]
 }
