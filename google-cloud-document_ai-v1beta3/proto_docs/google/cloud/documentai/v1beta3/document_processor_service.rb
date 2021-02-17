@@ -22,6 +22,12 @@ module Google
     module DocumentAI
       module V1beta3
         # Request message for the process document method.
+        # @!attribute [rw] inline_document
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::Document]
+        #     An inline document proto.
+        # @!attribute [rw] raw_document
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::RawDocument]
+        #     A raw document content (bytes).
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The processor resource name.
@@ -37,6 +43,45 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The status of human review on a processed document.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::HumanReviewStatus::State]
+        #     The state of human review on the processing request.
+        # @!attribute [rw] state_message
+        #   @return [::String]
+        #     A message providing more details about the human review state.
+        # @!attribute [rw] human_review_operation
+        #   @return [::String]
+        #     The name of the operation triggered by the processed document. This field
+        #     is populated only when the [state] is [HUMAN_REVIEW_IN_PROGRESS]. It has
+        #     the same response type and metadata as the long running operation returned
+        #     by [ReviewDocument] method.
+        class HumanReviewStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The final state of human review on a processed document.
+          module State
+            # Human review state is unspecified. Most likely due to an internal error.
+            STATE_UNSPECIFIED = 0
+
+            # Human review is skipped for the document. This can happen because human
+            # review is not enabled on the processor or the processing request has
+            # been set to skip this document.
+            SKIPPED = 1
+
+            # Human review validation is triggered and passed, so no review is needed.
+            VALIDATION_PASSED = 2
+
+            # Human review validation is triggered and the document is under review.
+            IN_PROGRESS = 3
+
+            # Some error happened during triggering human review, see the
+            # [state_message] for details.
+            ERROR = 4
+          end
+        end
+
         # Response message for the process document method.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::DocumentAI::V1beta3::Document]
@@ -48,6 +93,9 @@ module Google
         #     review process is not triggered, this field will be empty. It has the same
         #     response type and metadata as the long running operation returned by
         #     ReviewDocument method.
+        # @!attribute [rw] human_review_status
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::HumanReviewStatus]
+        #     The status of human review on the processed document.
         class ProcessResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -63,6 +111,16 @@ module Google
         # @!attribute [rw] output_config
         #   @return [::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest::BatchOutputConfig]
         #     The overall output config for batch process.
+        # @!attribute [rw] input_documents
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::BatchDocumentsInputConfig]
+        #     The input documents for batch process.
+        # @!attribute [rw] document_output_config
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentOutputConfig]
+        #     The overall output config for batch process.
+        # @!attribute [rw] skip_human_review
+        #   @return [::Boolean]
+        #     Whether Human Review feature should be skipped for this request. Default to
+        #     false.
         class BatchProcessRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -138,6 +196,9 @@ module Google
           #     human review process is not triggered, this field will be empty. It has
           #     the same response type and metadata as the long running operation
           #     returned by ReviewDocument method.
+          # @!attribute [rw] human_review_status
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::HumanReviewStatus]
+          #     The status of human review on the processed document.
           class IndividualProcessStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -169,6 +230,9 @@ module Google
         end
 
         # Request message for review document method.
+        # @!attribute [rw] inline_document
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::Document]
+        #     An inline document proto.
         # @!attribute [rw] human_review_config
         #   @return [::String]
         #     Required. The resource name of the HumanReviewConfig that the document will be
@@ -204,7 +268,49 @@ module Google
         # @!attribute [rw] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The last update time of the operation.
+        # @!attribute [rw] common_metadata
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::CommonOperationMetadata]
+        #     The basic metadata of the long running operation.
         class ReviewDocumentOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # State of the longrunning operation.
+          module State
+            # Unspecified state.
+            STATE_UNSPECIFIED = 0
+
+            # Operation is still running.
+            RUNNING = 1
+
+            # Operation is being cancelled.
+            CANCELLING = 2
+
+            # Operation succeeded.
+            SUCCEEDED = 3
+
+            # Operation failed.
+            FAILED = 4
+
+            # Operation is cancelled.
+            CANCELLED = 5
+          end
+        end
+
+        # The common metadata for long running operations.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::CommonOperationMetadata::State]
+        #     The state of the operation.
+        # @!attribute [rw] state_message
+        #   @return [::String]
+        #     A message providing more details about the current state of processing.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The creation time of the operation.
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The last update time of the operation.
+        class CommonOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 

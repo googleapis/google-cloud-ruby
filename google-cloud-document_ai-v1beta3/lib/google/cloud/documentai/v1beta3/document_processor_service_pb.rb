@@ -8,6 +8,7 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/documentai/v1beta3/document_pb'
+require 'google/cloud/documentai/v1beta3/document_io_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
@@ -18,15 +19,35 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :document, :message, 2, "google.cloud.documentai.v1beta3.Document"
       optional :skip_human_review, :bool, 3
+      oneof :source do
+        optional :inline_document, :message, 4, "google.cloud.documentai.v1beta3.Document"
+        optional :raw_document, :message, 5, "google.cloud.documentai.v1beta3.RawDocument"
+      end
+    end
+    add_message "google.cloud.documentai.v1beta3.HumanReviewStatus" do
+      optional :state, :enum, 1, "google.cloud.documentai.v1beta3.HumanReviewStatus.State"
+      optional :state_message, :string, 2
+      optional :human_review_operation, :string, 3
+    end
+    add_enum "google.cloud.documentai.v1beta3.HumanReviewStatus.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :SKIPPED, 1
+      value :VALIDATION_PASSED, 2
+      value :IN_PROGRESS, 3
+      value :ERROR, 4
     end
     add_message "google.cloud.documentai.v1beta3.ProcessResponse" do
       optional :document, :message, 1, "google.cloud.documentai.v1beta3.Document"
       optional :human_review_operation, :string, 2
+      optional :human_review_status, :message, 3, "google.cloud.documentai.v1beta3.HumanReviewStatus"
     end
     add_message "google.cloud.documentai.v1beta3.BatchProcessRequest" do
       optional :name, :string, 1
       repeated :input_configs, :message, 2, "google.cloud.documentai.v1beta3.BatchProcessRequest.BatchInputConfig"
       optional :output_config, :message, 3, "google.cloud.documentai.v1beta3.BatchProcessRequest.BatchOutputConfig"
+      optional :input_documents, :message, 5, "google.cloud.documentai.v1beta3.BatchDocumentsInputConfig"
+      optional :document_output_config, :message, 6, "google.cloud.documentai.v1beta3.DocumentOutputConfig"
+      optional :skip_human_review, :bool, 4
     end
     add_message "google.cloud.documentai.v1beta3.BatchProcessRequest.BatchInputConfig" do
       optional :gcs_source, :string, 1
@@ -49,6 +70,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :status, :message, 2, "google.rpc.Status"
       optional :output_gcs_destination, :string, 3
       optional :human_review_operation, :string, 4
+      optional :human_review_status, :message, 5, "google.cloud.documentai.v1beta3.HumanReviewStatus"
     end
     add_enum "google.cloud.documentai.v1beta3.BatchProcessMetadata.State" do
       value :STATE_UNSPECIFIED, 0
@@ -62,6 +84,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.documentai.v1beta3.ReviewDocumentRequest" do
       optional :human_review_config, :string, 1
       optional :document, :message, 2, "google.cloud.documentai.v1beta3.Document"
+      oneof :source do
+        optional :inline_document, :message, 4, "google.cloud.documentai.v1beta3.Document"
+      end
     end
     add_message "google.cloud.documentai.v1beta3.ReviewDocumentResponse" do
       optional :gcs_destination, :string, 1
@@ -71,8 +96,23 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state_message, :string, 2
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       optional :update_time, :message, 4, "google.protobuf.Timestamp"
+      optional :common_metadata, :message, 5, "google.cloud.documentai.v1beta3.CommonOperationMetadata"
     end
     add_enum "google.cloud.documentai.v1beta3.ReviewDocumentOperationMetadata.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :RUNNING, 1
+      value :CANCELLING, 2
+      value :SUCCEEDED, 3
+      value :FAILED, 4
+      value :CANCELLED, 5
+    end
+    add_message "google.cloud.documentai.v1beta3.CommonOperationMetadata" do
+      optional :state, :enum, 1, "google.cloud.documentai.v1beta3.CommonOperationMetadata.State"
+      optional :state_message, :string, 2
+      optional :create_time, :message, 3, "google.protobuf.Timestamp"
+      optional :update_time, :message, 4, "google.protobuf.Timestamp"
+    end
+    add_enum "google.cloud.documentai.v1beta3.CommonOperationMetadata.State" do
       value :STATE_UNSPECIFIED, 0
       value :RUNNING, 1
       value :CANCELLING, 2
@@ -88,6 +128,8 @@ module Google
     module DocumentAI
       module V1beta3
         ProcessRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ProcessRequest").msgclass
+        HumanReviewStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.HumanReviewStatus").msgclass
+        HumanReviewStatus::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.HumanReviewStatus.State").enummodule
         ProcessResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ProcessResponse").msgclass
         BatchProcessRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.BatchProcessRequest").msgclass
         BatchProcessRequest::BatchInputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.BatchProcessRequest.BatchInputConfig").msgclass
@@ -100,6 +142,8 @@ module Google
         ReviewDocumentResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ReviewDocumentResponse").msgclass
         ReviewDocumentOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ReviewDocumentOperationMetadata").msgclass
         ReviewDocumentOperationMetadata::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ReviewDocumentOperationMetadata.State").enummodule
+        CommonOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.CommonOperationMetadata").msgclass
+        CommonOperationMetadata::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.CommonOperationMetadata.State").enummodule
       end
     end
   end

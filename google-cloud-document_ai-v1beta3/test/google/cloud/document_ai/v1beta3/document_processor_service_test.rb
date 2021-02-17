@@ -55,6 +55,7 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    inline_document = {}
     name = "hello world"
     document = {}
     skip_human_review = true
@@ -62,6 +63,8 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
     process_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :process_document, name
       assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::ProcessRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::Document), request["inline_document"]
+      assert_equal :inline_document, request.source
       assert_equal "hello world", request["name"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::Document), request["document"]
       assert_equal true, request["skip_human_review"]
@@ -75,31 +78,31 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
       end
 
       # Use hash object
-      client.process_document({ name: name, document: document, skip_human_review: skip_human_review }) do |response, operation|
+      client.process_document({ inline_document: inline_document, name: name, document: document, skip_human_review: skip_human_review }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.process_document name: name, document: document, skip_human_review: skip_human_review do |response, operation|
+      client.process_document inline_document: inline_document, name: name, document: document, skip_human_review: skip_human_review do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.process_document ::Google::Cloud::DocumentAI::V1beta3::ProcessRequest.new(name: name, document: document, skip_human_review: skip_human_review) do |response, operation|
+      client.process_document ::Google::Cloud::DocumentAI::V1beta3::ProcessRequest.new(inline_document: inline_document, name: name, document: document, skip_human_review: skip_human_review) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.process_document({ name: name, document: document, skip_human_review: skip_human_review }, grpc_options) do |response, operation|
+      client.process_document({ inline_document: inline_document, name: name, document: document, skip_human_review: skip_human_review }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.process_document ::Google::Cloud::DocumentAI::V1beta3::ProcessRequest.new(name: name, document: document, skip_human_review: skip_human_review), grpc_options do |response, operation|
+      client.process_document ::Google::Cloud::DocumentAI::V1beta3::ProcessRequest.new(inline_document: inline_document, name: name, document: document, skip_human_review: skip_human_review), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -120,6 +123,9 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
     name = "hello world"
     input_configs = [{}]
     output_config = {}
+    input_documents = {}
+    document_output_config = {}
+    skip_human_review = true
 
     batch_process_documents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_process_documents, name
@@ -127,6 +133,9 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
       assert_equal "hello world", request["name"]
       assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest::BatchInputConfig, request["input_configs"].first
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest::BatchOutputConfig), request["output_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::BatchDocumentsInputConfig), request["input_documents"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::DocumentOutputConfig), request["document_output_config"]
+      assert_equal true, request["skip_human_review"]
       refute_nil options
     end
 
@@ -137,35 +146,35 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
       end
 
       # Use hash object
-      client.batch_process_documents({ name: name, input_configs: input_configs, output_config: output_config }) do |response, operation|
+      client.batch_process_documents({ name: name, input_configs: input_configs, output_config: output_config, input_documents: input_documents, document_output_config: document_output_config, skip_human_review: skip_human_review }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_process_documents name: name, input_configs: input_configs, output_config: output_config do |response, operation|
+      client.batch_process_documents name: name, input_configs: input_configs, output_config: output_config, input_documents: input_documents, document_output_config: document_output_config, skip_human_review: skip_human_review do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_process_documents ::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest.new(name: name, input_configs: input_configs, output_config: output_config) do |response, operation|
+      client.batch_process_documents ::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest.new(name: name, input_configs: input_configs, output_config: output_config, input_documents: input_documents, document_output_config: document_output_config, skip_human_review: skip_human_review) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_process_documents({ name: name, input_configs: input_configs, output_config: output_config }, grpc_options) do |response, operation|
+      client.batch_process_documents({ name: name, input_configs: input_configs, output_config: output_config, input_documents: input_documents, document_output_config: document_output_config, skip_human_review: skip_human_review }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_process_documents ::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest.new(name: name, input_configs: input_configs, output_config: output_config), grpc_options do |response, operation|
+      client.batch_process_documents ::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest.new(name: name, input_configs: input_configs, output_config: output_config, input_documents: input_documents, document_output_config: document_output_config, skip_human_review: skip_human_review), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -184,12 +193,15 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    inline_document = {}
     human_review_config = "hello world"
     document = {}
 
     review_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :review_document, name
       assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::ReviewDocumentRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::Document), request["inline_document"]
+      assert_equal :inline_document, request.source
       assert_equal "hello world", request["human_review_config"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::Document), request["document"]
       refute_nil options
@@ -202,35 +214,35 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
       end
 
       # Use hash object
-      client.review_document({ human_review_config: human_review_config, document: document }) do |response, operation|
+      client.review_document({ inline_document: inline_document, human_review_config: human_review_config, document: document }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.review_document human_review_config: human_review_config, document: document do |response, operation|
+      client.review_document inline_document: inline_document, human_review_config: human_review_config, document: document do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.review_document ::Google::Cloud::DocumentAI::V1beta3::ReviewDocumentRequest.new(human_review_config: human_review_config, document: document) do |response, operation|
+      client.review_document ::Google::Cloud::DocumentAI::V1beta3::ReviewDocumentRequest.new(inline_document: inline_document, human_review_config: human_review_config, document: document) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.review_document({ human_review_config: human_review_config, document: document }, grpc_options) do |response, operation|
+      client.review_document({ inline_document: inline_document, human_review_config: human_review_config, document: document }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.review_document ::Google::Cloud::DocumentAI::V1beta3::ReviewDocumentRequest.new(human_review_config: human_review_config, document: document), grpc_options do |response, operation|
+      client.review_document ::Google::Cloud::DocumentAI::V1beta3::ReviewDocumentRequest.new(inline_document: inline_document, human_review_config: human_review_config, document: document), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
