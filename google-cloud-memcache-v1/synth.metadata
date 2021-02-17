@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "fb88a03f382654b2e7e6fe2223fb6f234b61f9a7"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "ec20fd460f707c06e85ae9e4d95dd01dabe26bde"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "614b4fc8969008b086fbd6d3d99dfdb6fcf0a4a1",
-        "internalRef": "356808008"
+        "sha": "8ca872ced04c96c05a36db3d2113d568ac814be8",
+        "internalRef": "357863594"
       }
     }
   ],
@@ -26,5 +26,43 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-memcache-v1.gemspec",
+    "lib/google-cloud-memcache-v1.rb",
+    "lib/google/cloud/memcache/v1.rb",
+    "lib/google/cloud/memcache/v1/cloud_memcache.rb",
+    "lib/google/cloud/memcache/v1/cloud_memcache/client.rb",
+    "lib/google/cloud/memcache/v1/cloud_memcache/credentials.rb",
+    "lib/google/cloud/memcache/v1/cloud_memcache/operations.rb",
+    "lib/google/cloud/memcache/v1/cloud_memcache/paths.rb",
+    "lib/google/cloud/memcache/v1/cloud_memcache_pb.rb",
+    "lib/google/cloud/memcache/v1/cloud_memcache_services_pb.rb",
+    "lib/google/cloud/memcache/v1/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/memcache/v1/cloud_memcache.rb",
+    "proto_docs/google/longrunning/operations.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/duration.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/rpc/status.rb",
+    "test/google/cloud/memcache/v1/cloud_memcache_operations_test.rb",
+    "test/google/cloud/memcache/v1/cloud_memcache_paths_test.rb",
+    "test/google/cloud/memcache/v1/cloud_memcache_test.rb",
+    "test/helper.rb"
   ]
 }
