@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "57006a9acea8d5e2ebf3ab2f81c59c6f648179c4"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "ec20fd460f707c06e85ae9e4d95dd01dabe26bde"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "78f5365656fda2855cf0546080da559d6c2ed3ff",
-        "internalRef": "357293749"
+        "sha": "8ca872ced04c96c05a36db3d2113d568ac814be8",
+        "internalRef": "357863594"
       }
     }
   ],
@@ -26,5 +26,37 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-area120-tables-v1alpha1.gemspec",
+    "lib/google-area120-tables-v1alpha1.rb",
+    "lib/google/area120/tables/v1alpha1.rb",
+    "lib/google/area120/tables/v1alpha1/tables_pb.rb",
+    "lib/google/area120/tables/v1alpha1/tables_service.rb",
+    "lib/google/area120/tables/v1alpha1/tables_service/client.rb",
+    "lib/google/area120/tables/v1alpha1/tables_service/credentials.rb",
+    "lib/google/area120/tables/v1alpha1/tables_service/paths.rb",
+    "lib/google/area120/tables/v1alpha1/tables_services_pb.rb",
+    "lib/google/area120/tables/v1alpha1/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/area120/tables/v1alpha1/tables.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/struct.rb",
+    "test/google/area120/tables/v1alpha1/tables_service_paths_test.rb",
+    "test/google/area120/tables/v1alpha1/tables_service_test.rb",
+    "test/helper.rb"
   ]
 }
