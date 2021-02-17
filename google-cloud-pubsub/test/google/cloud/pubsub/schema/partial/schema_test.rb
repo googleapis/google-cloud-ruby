@@ -14,24 +14,23 @@
 
 require "helper"
 
-describe Google::Cloud::PubSub::Schema, :resource, :mock_pubsub do
+describe Google::Cloud::PubSub::Schema, :partial, :mock_pubsub do
   let(:schema_id) { "my-schema" }
   let(:type) { :AVRO }
-  let(:definition) { "AVRO schema definition" }
-  let(:schema_grpc) { Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id) }
-  let(:schema) { Google::Cloud::PubSub::Schema.from_grpc schema_grpc, pubsub.service, view: :FULL }
+  let(:schema_grpc) { Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id, definition: nil) }
+  let(:schema) { Google::Cloud::PubSub::Schema.from_grpc schema_grpc, pubsub.service, view: :BASIC }
 
   it "knows its attributes" do
     _(schema.name).must_equal schema_path(schema_id)
     _(schema.type).must_equal type
-    _(schema.definition).must_equal definition
+    _(schema.definition).must_equal ""
   end
 
   it "knows its view state" do
     _(schema).wont_be :reference?
     _(schema).must_be :resource?
-    _(schema).wont_be :resource_partial?
-    _(schema).must_be :resource_full?
+    _(schema.resource_partial?).must_equal true
+    _(schema.resource_full?).must_equal false
   end
 
   it "deletes itself" do
@@ -45,33 +44,33 @@ describe Google::Cloud::PubSub::Schema, :resource, :mock_pubsub do
   end
 
   it "reloads itself" do
-    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
+    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id, definition: nil)
     mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 2]
+    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 1]
     pubsub.service.mocked_schemas = mock
 
     schema.reload!
 
     _(schema).wont_be :reference?
     _(schema).must_be :resource?
-    _(schema).wont_be :resource_partial?
-    _(schema).must_be :resource_full?
+    _(schema.resource_partial?).must_equal true
+    _(schema.resource_full?).must_equal false
 
     mock.verify
   end
 
   it "reloads itself with view option" do
-    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id, definition: nil)
+    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
     mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 1]
+    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 2]
     pubsub.service.mocked_schemas = mock
 
-    schema.reload! view: :basic
+    schema.reload! view: :full
 
     _(schema).wont_be :reference?
     _(schema).must_be :resource?
-    _(schema.resource_partial?).must_equal true
-    _(schema.resource_full?).must_equal false
+    _(schema).wont_be :resource_partial?
+    _(schema).must_be :resource_full?
 
     mock.verify
   end

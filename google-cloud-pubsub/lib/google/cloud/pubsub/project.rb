@@ -446,7 +446,7 @@ module Google
         def schema schema_name, view: nil, project: nil, skip_lookup: nil
           ensure_service!
           options = { project: project }
-          return Schema.from_name schema_name, service, options if skip_lookup
+          return Schema.from_name schema_name, view, service, options if skip_lookup
           view ||= :BASIC
           grpc = service.get_schema schema_name, view, options
           Schema.from_grpc grpc, service

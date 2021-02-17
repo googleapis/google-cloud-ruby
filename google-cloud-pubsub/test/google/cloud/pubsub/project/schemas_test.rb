@@ -90,7 +90,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
   it "gets a schema" do
     schema_id = "found-schema"
 
-    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
+    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id, definition: nil)
     mock = Minitest::Mock.new
     mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 1]
     pubsub.service.mocked_schemas = mock
@@ -107,7 +107,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
   it "gets a schema with fully-qualified schema path" do
     schema_full_path = "projects/other-project/schemas/found-schema"
 
-    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_full_path)
+    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_full_path, definition: nil)
     mock = Minitest::Mock.new
     mock.expect :get_schema, get_res, [name: schema_path(schema_full_path), view: 1]
     pubsub.service.mocked_schemas = mock
@@ -122,7 +122,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
   it "gets a schema with get_schema alias" do
     schema_id = "found-schema"
 
-    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
+    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id, definition: nil)
     mock = Minitest::Mock.new
     mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 1]
     pubsub.service.mocked_schemas = mock
@@ -139,7 +139,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
   it "gets a schema with find_schema alias" do
     schema_id = "found-schema"
 
-    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
+    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id, definition: nil)
     mock = Minitest::Mock.new
     mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 1]
     pubsub.service.mocked_schemas = mock
@@ -162,18 +162,75 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
     end
     pubsub.service.mocked_schemas = stub
 
-    schema = pubsub.find_schema not_found_schema_id
+    schema = pubsub.schema not_found_schema_id
     _(schema).must_be :nil?
+  end
+
+  it "gets a schema with view option" do
+    schema_id = "found-schema"
+
+    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
+    mock = Minitest::Mock.new
+    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 2]
+    pubsub.service.mocked_schemas = mock
+
+    schema = pubsub.schema schema_id, view: :full
+
+    mock.verify
+
+    _(schema.name).must_equal schema_path(schema_id)
+    _(schema).wont_be :reference?
+    _(schema).must_be :resource?
+  end
+
+  it "gets a schema with project option" do
+    schema_id = "found-schema"
+
+    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
+    mock = Minitest::Mock.new
+    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 2]
+    pubsub.service.mocked_schemas = mock
+
+    schema = pubsub.schema schema_id, view: :full
+
+    mock.verify
+
+    _(schema.name).must_equal schema_path(schema_id)
+    _(schema).wont_be :reference?
+    _(schema).must_be :resource?
   end
 
   it "gets a schema with skip_lookup option" do
     schema_id = "found-schema"
     # No HTTP mock needed, since the lookup is not made
 
-    schema = pubsub.find_schema schema_id, skip_lookup: true
+    schema = pubsub.schema schema_id, skip_lookup: true
     _(schema.name).must_equal schema_path(schema_id)
     _(schema).must_be :reference?
     _(schema).wont_be :resource?
+  end
+
+  it "gets a schema with skip_lookup and full view option, then schema reloads full view" do
+    schema_id = "found-schema"
+
+    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
+    mock = Minitest::Mock.new
+    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 2]
+    pubsub.service.mocked_schemas = mock
+
+    schema = pubsub.schema schema_id, skip_lookup: true, view: :full
+    _(schema.name).must_equal schema_path(schema_id)
+    _(schema).must_be :reference?
+    _(schema).wont_be :resource?
+
+    schema.reload!
+
+    _(schema).wont_be :reference?
+    _(schema).must_be :resource?
+    _(schema).wont_be :resource_partial?
+    _(schema).must_be :resource_full?
+
+    mock.verify
   end
 
   it "lists schemas" do

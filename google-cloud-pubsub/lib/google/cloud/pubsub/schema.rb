@@ -252,9 +252,9 @@ module Google
 
         ##
         # @private New reference Schema object without making an HTTP request.
-        def self.from_name name, service, options = {}
+        def self.from_name name, view, service, options = {}
           grpc = Google::Cloud::PubSub::V1::Schema.new name: service.schema_path(name, options)
-          from_grpc grpc, service
+          from_grpc grpc, service, view: view
         end
 
         protected
