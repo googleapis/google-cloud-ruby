@@ -395,9 +395,9 @@ module Google
         #   be a simple schema ID, in which case the current project ID
         #   will be supplied, or a fully-qualified schema name in the form
         #   `projects/{project_id}/schemas/{schema_id}`.
-        # @param view [String, Symbol, nil] Possible values:
-        #   * `:basic` - Include the name and type of the schema, but not the definition.
-        #   * `:full` - Include all Schema object fields.
+        # @param view [Symbol, String, nil] Possible values:
+        #   * `:BASIC` - Include the `name` and `type` of the schema, but not the `definition`.
+        #   * `:FULL` - Include all Schema object fields.
         #   The default value is `BASIC`.
         # @param [String] project If the schema belongs to a project other
         #   than the one currently connected to, the alternate project ID can be
@@ -447,7 +447,7 @@ module Google
           ensure_service!
           options = { project: project }
           return Schema.from_name schema_name, service, options if skip_lookup
-          view ||= "BASIC"
+          view ||= :BASIC
           grpc = service.get_schema schema_name, view, options
           Schema.from_grpc grpc, service
         rescue Google::Cloud::NotFoundError
@@ -536,7 +536,7 @@ module Google
         #
         def schemas view: nil, token: nil, max: nil
           ensure_service!
-          view ||= "BASIC"
+          view ||= :BASIC
           options = { token: token, max: max }
           grpc = service.list_schemas view, options
           Schema::List.from_grpc grpc, service, view, max

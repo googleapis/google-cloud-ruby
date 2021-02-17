@@ -88,18 +88,18 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
   end
 
   it "gets a schema" do
-    schema_name = "found-schema"
+    schema_id = "found-schema"
 
-    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_name)
+    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
     mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_name), view: 1]
+    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 1]
     pubsub.service.mocked_schemas = mock
 
-    schema = pubsub.schema schema_name
+    schema = pubsub.schema schema_id
 
     mock.verify
 
-    _(schema.name).must_equal schema_path(schema_name)
+    _(schema.name).must_equal schema_path(schema_id)
     _(schema).wont_be :reference?
     _(schema).must_be :resource?
   end
@@ -120,41 +120,41 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
   end
 
   it "gets a schema with get_schema alias" do
-    schema_name = "found-schema"
+    schema_id = "found-schema"
 
-    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_name)
+    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
     mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_name), view: 1]
+    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 1]
     pubsub.service.mocked_schemas = mock
 
-    schema = pubsub.get_schema schema_name
+    schema = pubsub.get_schema schema_id
 
     mock.verify
 
-    _(schema.name).must_equal schema_path(schema_name)
+    _(schema.name).must_equal schema_path(schema_id)
     _(schema).wont_be :reference?
     _(schema).must_be :resource?
   end
 
   it "gets a schema with find_schema alias" do
-    schema_name = "found-schema"
+    schema_id = "found-schema"
 
-    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_name)
+    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
     mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_name), view: 1]
+    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 1]
     pubsub.service.mocked_schemas = mock
 
-    schema = pubsub.find_schema schema_name
+    schema = pubsub.find_schema schema_id
 
     mock.verify
 
-    _(schema.name).must_equal schema_path(schema_name)
+    _(schema.name).must_equal schema_path(schema_id)
     _(schema).wont_be :reference?
     _(schema).must_be :resource?
   end
 
   it "returns nil when getting an non-existent schema" do
-    not_found_schema_name = "not-found-schema"
+    not_found_schema_id = "not-found-schema"
 
     stub = Object.new
     def stub.get_schema *args
@@ -162,16 +162,16 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
     end
     pubsub.service.mocked_schemas = stub
 
-    schema = pubsub.find_schema not_found_schema_name
+    schema = pubsub.find_schema not_found_schema_id
     _(schema).must_be :nil?
   end
 
   it "gets a schema with skip_lookup option" do
-    schema_name = "found-schema"
+    schema_id = "found-schema"
     # No HTTP mock needed, since the lookup is not made
 
-    schema = pubsub.find_schema schema_name, skip_lookup: true
-    _(schema.name).must_equal schema_path(schema_name)
+    schema = pubsub.find_schema schema_id, skip_lookup: true
+    _(schema.name).must_equal schema_path(schema_id)
     _(schema).must_be :reference?
     _(schema).wont_be :resource?
   end

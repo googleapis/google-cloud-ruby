@@ -351,6 +351,13 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Schema#reload!" do
     mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 1]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Schema#reload!@Use the `view` option to load the full resource:" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
       mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 2]
     end
   end

@@ -43,10 +43,12 @@ module Google
         attr_accessor :grpc
 
         ##
-        # @private Create an empty {Schema} object.
-        def initialize
-          @service = nil
-          @grpc = Google::Cloud::PubSub::V1::Schema.new
+        # @private Create a new Schema instance.
+        def initialize grpc, service, view: nil
+          @grpc = grpc
+          @service = service
+          @exists = nil
+          @view = view || :BASIC
         end
 
         ##
@@ -102,7 +104,12 @@ module Google
         end
 
         ##
-        # Reloads the schema with current `FULL` data from the Pub/Sub service.
+        # Reloads the schema with current data from the Pub/Sub service.
+        #
+        # @param view [Symbol, String, nil] Possible values:
+        #   * `:BASIC` - Include the `name` and `type` of the schema, but not the `definition`.
+        #   * `:FULL` - Include all Schema object fields.
+        #   The default value is `BASIC`.
         #
         # @return [Google::Cloud::PubSub::Schema] Returns the reloaded
         #   schema.
@@ -115,11 +122,22 @@ module Google
         #
         #   schema.reload!
         #
+        # @example Use the `view` option to load the full resource:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #   schema = pubsub.schema "my-schema", view: :basic
+        #   schema.resource_partial? #=> true
+        #
+        #   schema.reload! view: :full
+        #   schema.resource_partial? #=> false
+        #
         # @!group Lifecycle
         #
-        def reload!
+        def reload! view: nil
           ensure_service!
-          @grpc = service.get_schema name, "FULL"
+          @view = view || @view || :BASIC
+          @grpc = service.get_schema name, @view
           @reference = nil
           @exists = nil
           self
@@ -200,7 +218,7 @@ module Google
         #   schema = pubsub.schema "my-schema", view: :basic
         #
         #   schema.resource_partial? #=> true
-        #   schema.reload! # Loads the full resource.
+        #   schema.reload! view: :full # Loads the full resource.
         #   schema.resource_partial? #=> false
         #
         def resource_partial?
@@ -223,16 +241,13 @@ module Google
         #   schema.resource_full? #=> true
         #
         def resource_full?
-          resource? && !@grpc.definition&.empty?
+          resource? && @grpc.definition && !@grpc.definition.empty?
         end
 
         ##
         # @private New Schema from a Google::Cloud::PubSub::V1::Schema object.
-        def self.from_grpc grpc, service
-          new.tap do |f|
-            f.grpc = grpc
-            f.service = service
-          end
+        def self.from_grpc grpc, service, view: nil
+          new grpc, service, view: view
         end
 
         ##
@@ -248,6 +263,13 @@ module Google
         # @private Raise an error unless an active connection to the service is available.
         def ensure_service!
           raise "Must have active connection to service" unless service
+        end
+
+        ##
+        # Ensures a Google::Cloud::PubSub::V1::Schema object exists.
+        def ensure_grpc!
+          ensure_service!
+          reload! if reference?
         end
       end
     end
