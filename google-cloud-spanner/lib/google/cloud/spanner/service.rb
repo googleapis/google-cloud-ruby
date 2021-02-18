@@ -464,11 +464,12 @@ module Google
         end
 
         def create_backup instance_id, database_id, backup_id, expire_time,
-                          call_options: nil
+                          version_time, call_options: nil
           opts = default_options call_options: call_options
           backup = {
             database: database_path(instance_id, database_id),
-            expire_time: expire_time
+            expire_time: expire_time,
+            version_time: version_time
           }
           request = {
             parent:    instance_path(instance_id),
