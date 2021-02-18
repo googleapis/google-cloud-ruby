@@ -185,6 +185,25 @@ module Acceptance
         ITEMS
       end
 
+      def numeric_pk_ddl_statement
+        <<-BOXES
+          CREATE TABLE boxes (
+            id NUMERIC NOT NULL,
+            name STRING(256) NOT NULL,
+          ) PRIMARY KEY (id)
+        BOXES
+      end
+
+      def numeric_composite_pk_ddl_statement
+        <<-BOX_ITEMS
+          CREATE TABLE box_items (
+            id INT64 NOT NULL,
+            box_id NUMERIC NOT NULL,
+            name STRING(256) NOT NULL
+          ) PRIMARY KEY (id, box_id)
+        BOX_ITEMS
+      end
+
       def schema_ddl_statements
         [
           stuffs_ddl_statement,
@@ -192,7 +211,9 @@ module Acceptance
           accounts_ddl_statement,
           lists_ddl_statement,
           items_ddl_statement,
-          commit_timestamp_test_ddl_statement
+          commit_timestamp_test_ddl_statement,
+          numeric_pk_ddl_statement,
+          numeric_composite_pk_ddl_statement
         ]
       end
 
