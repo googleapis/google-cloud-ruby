@@ -92,6 +92,16 @@ module Google
         #     `END_OF_SINGLE_UTTERANCE` event and cease recognition. It will return no
         #     more than one `StreamingRecognitionResult` with the `is_final` flag set to
         #     `true`.
+        #
+        #     The `single_utterance` field can only be used with specified models,
+        #     otherwise an error is thrown. The `model` field in [`RecognitionConfig`][]
+        #     must be set to:
+        #
+        #     * `command_and_search`
+        #     * `phone_call` AND additional field `useEnhanced`=`true`
+        #     * The `model` field is left undefined. In this case the API auto-selects
+        #       a model based on any other parameters that you set in
+        #       `RecognitionConfig`.
         # @!attribute [rw] interim_results
         #   @return [::Boolean]
         #     If `true`, interim results (tentative hypotheses) may be
@@ -346,7 +356,8 @@ module Google
             # wideband is supported. `sample_rate_hertz` must be 16000.
             SPEEX_WITH_HEADER_BYTE = 7
 
-            # MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+            # MP3 audio. MP3 encoding is a Beta feature and only available in
+            # v1p1beta1. Support all standard MP3 bitrates (which range from 32-320
             # kbps). When using this encoding, `sample_rate_hertz` has to match the
             # sample rate of the file being used.
             MP3 = 8
@@ -607,8 +618,8 @@ module Google
         #     Time of the most recent processing update.
         # @!attribute [r] uri
         #   @return [::String]
-        #     The URI of the audio file being transcribed. Empty if the audio was sent
-        #     as byte content.
+        #     Output only. The URI of the audio file being transcribed. Empty if the
+        #     audio was sent as byte content.
         class LongRunningRecognizeMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
