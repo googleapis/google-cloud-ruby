@@ -1,5 +1,3 @@
-require "yaml"
-
 def init
   @object = options.item
   @methods = @object.children.select { |child| child.type == :method }
