@@ -178,11 +178,24 @@ class MockPubsub < Minitest::Spec
       dead_letter_topic: dead_letter_topic,
       max_delivery_attempts: max_delivery_attempts
     } if dead_letter_topic
-    hsh[:retry_policy] = {
-      minimum_backoff: retry_minimum_backoff,
-      maximum_backoff: retry_maximum_backoff
-    } if retry_minimum_backoff || retry_maximum_backoff
+    if retry_minimum_backoff || retry_maximum_backoff
+      hsh[:retry_policy] = retry_policy_hash retry_minimum_backoff, retry_maximum_backoff
+    end
     hsh
+  end
+
+  def retry_policy_hash minimum_backoff, maximum_backoff
+    {
+      minimum_backoff: number_to_duration_hash(minimum_backoff),
+      maximum_backoff: number_to_duration_hash(maximum_backoff)
+    }
+  end
+
+  def retry_policy_grpc minimum_backoff, maximum_backoff
+    Google::Cloud::PubSub::V1::RetryPolicy.new(
+      minimum_backoff: Google::Cloud::PubSub::Convert.number_to_duration(minimum_backoff),
+      maximum_backoff: Google::Cloud::PubSub::Convert.number_to_duration(maximum_backoff)
+    )
   end
 
   def create_subscription_args sub_name,
@@ -272,6 +285,15 @@ class MockPubsub < Minitest::Spec
 
   def paged_enum_struct response
     OpenStruct.new response: response
+  end
+
+  def number_to_duration_hash number
+    return nil if number.nil?
+    duration = Google::Cloud::PubSub::Convert.number_to_duration number
+    {
+      seconds: duration.seconds,
+      nanos: duration.nanos
+    }
   end
 
   # Register this spec type for when :storage is used.

@@ -281,7 +281,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
   end
 
   it "updates retry_minimum_backoff" do
-    retry_policy = Google::Cloud::PubSub::V1::RetryPolicy.new minimum_backoff: new_retry_minimum_backoff, maximum_backoff: retry_maximum_backoff
+    retry_policy = retry_policy_grpc new_retry_minimum_backoff, retry_maximum_backoff
     update_sub = Google::Cloud::PubSub::V1::Subscription.new name: sub_path, retry_policy: retry_policy
     update_mask = Google::Protobuf::FieldMask.new paths: ["retry_policy"]
     mock = Minitest::Mock.new
@@ -297,7 +297,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
   end
 
   it "updates retry_maximum_backoff" do
-    retry_policy = Google::Cloud::PubSub::V1::RetryPolicy.new minimum_backoff: retry_minimum_backoff, maximum_backoff: new_retry_maximum_backoff
+    retry_policy = retry_policy_grpc retry_minimum_backoff, new_retry_maximum_backoff
     update_sub = Google::Cloud::PubSub::V1::Subscription.new name: sub_path, retry_policy: retry_policy
     update_mask = Google::Protobuf::FieldMask.new paths: ["retry_policy"]
     mock = Minitest::Mock.new
@@ -407,7 +407,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       _(subscription).must_be :reference?
       _(subscription).wont_be :resource?
       _(subscription.name).must_equal sub_path
-      retry_policy = Google::Cloud::PubSub::V1::RetryPolicy.new minimum_backoff: new_retry_minimum_backoff, maximum_backoff: retry_maximum_backoff
+      retry_policy = retry_policy_grpc new_retry_minimum_backoff, retry_maximum_backoff
       update_sub = Google::Cloud::PubSub::V1::Subscription.new name: sub_path, retry_policy: retry_policy
       update_mask = Google::Protobuf::FieldMask.new paths: ["retry_policy"]
       mock = Minitest::Mock.new
@@ -427,7 +427,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     it "updates retry_maximum_backoff" do
       _(subscription).must_be :reference?
       _(subscription).wont_be :resource?
-      retry_policy = Google::Cloud::PubSub::V1::RetryPolicy.new minimum_backoff: retry_minimum_backoff, maximum_backoff: new_retry_maximum_backoff
+      retry_policy = retry_policy_grpc retry_minimum_backoff, new_retry_maximum_backoff
       update_sub = Google::Cloud::PubSub::V1::Subscription.new name: sub_path, retry_policy: retry_policy
       update_mask = Google::Protobuf::FieldMask.new paths: ["retry_policy"]
       mock = Minitest::Mock.new

@@ -267,9 +267,8 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
   it "creates a subscription with retry_minimum_backoff and retry_maximum_backoff" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
     create_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, new_sub_name, retry_minimum_backoff: retry_minimum_backoff, retry_maximum_backoff: retry_maximum_backoff)
-    retry_policy_grpc = Google::Cloud::PubSub::V1::RetryPolicy.new minimum_backoff: retry_minimum_backoff, maximum_backoff: retry_maximum_backoff
     mock = Minitest::Mock.new
-    mock.expect :create_subscription, create_res, create_subscription_args(new_sub_name, topic_name, retry_policy: retry_policy_grpc)
+    mock.expect :create_subscription, create_res, create_subscription_args(new_sub_name, topic_name, retry_policy: retry_policy_grpc(retry_minimum_backoff, retry_maximum_backoff))
     topic.service.mocked_subscriber = mock
 
     sub = topic.subscribe new_sub_name, retry_policy: retry_policy
