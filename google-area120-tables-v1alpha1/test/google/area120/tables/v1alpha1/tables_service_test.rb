@@ -170,6 +170,129 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
     end
   end
 
+  def test_get_workspace
+    # Create GRPC objects.
+    grpc_response = ::Google::Area120::Tables::V1alpha1::Workspace.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_workspace_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_workspace, name
+      assert_kind_of ::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_workspace_client_stub do
+      # Create client
+      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_workspace({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_workspace name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_workspace ::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_workspace({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_workspace ::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest.new(name: name), grpc_options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_workspace_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_workspaces
+    # Create GRPC objects.
+    grpc_response = ::Google::Area120::Tables::V1alpha1::ListWorkspacesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    page_size = 42
+    page_token = "hello world"
+
+    list_workspaces_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_workspaces, name
+      assert_kind_of ::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest, request
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_workspaces_client_stub do
+      # Create client
+      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_workspaces({ page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_workspaces page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_workspaces ::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest.new(page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_workspaces({ page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_workspaces ::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest.new(page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_workspaces_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_row
     # Create GRPC objects.
     grpc_response = ::Google::Area120::Tables::V1alpha1::Row.new
@@ -242,6 +365,7 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
     page_size = 42
     page_token = "hello world"
     view = :VIEW_UNSPECIFIED
+    filter = "hello world"
 
     list_rows_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_rows, name
@@ -250,6 +374,7 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal :VIEW_UNSPECIFIED, request["view"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -260,35 +385,35 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
       end
 
       # Use hash object
-      client.list_rows({ parent: parent, page_size: page_size, page_token: page_token, view: view }) do |response, operation|
+      client.list_rows({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_rows parent: parent, page_size: page_size, page_token: page_token, view: view do |response, operation|
+      client.list_rows parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_rows ::Google::Area120::Tables::V1alpha1::ListRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view) do |response, operation|
+      client.list_rows ::Google::Area120::Tables::V1alpha1::ListRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_rows({ parent: parent, page_size: page_size, page_token: page_token, view: view }, grpc_options) do |response, operation|
+      client.list_rows({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_rows ::Google::Area120::Tables::V1alpha1::ListRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), grpc_options do |response, operation|
+      client.list_rows ::Google::Area120::Tables::V1alpha1::ListRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -598,6 +723,66 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
 
       # Verify method calls
       assert_equal 5, delete_row_client_stub.call_rpc_count
+    end
+  end
+
+  def test_batch_delete_rows
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_delete_rows_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :batch_delete_rows, name
+      assert_kind_of ::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal ["hello world"], request["names"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, batch_delete_rows_client_stub do
+      # Create client
+      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.batch_delete_rows({ parent: parent, names: names }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.batch_delete_rows parent: parent, names: names do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.batch_delete_rows ::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest.new(parent: parent, names: names) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.batch_delete_rows({ parent: parent, names: names }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.batch_delete_rows ::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest.new(parent: parent, names: names), grpc_options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, batch_delete_rows_client_stub.call_rpc_count
     end
   end
 

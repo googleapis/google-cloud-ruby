@@ -34,4 +34,28 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientPathsTest < Mini
       assert_equal "tables/value0/rows/value1", path
     end
   end
+
+  def test_table_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.table_path table: "value0"
+      assert_equal "tables/value0", path
+    end
+  end
+
+  def test_workspace_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.workspace_path workspace: "value0"
+      assert_equal "workspaces/value0", path
+    end
+  end
 end

@@ -40,6 +40,10 @@ module Google
         # - Each Table has a collection of {::Google::Area120::Tables::V1alpha1::Row Row}
         #   resources, named `tables/*/rows/*`
         #
+        # - The API has a collection of
+        #   {::Google::Area120::Tables::V1alpha1::Workspace Workspace}
+        #   resources, named `workspaces/*`.
+        #
         # To load this service and instantiate a client:
         #
         #     require "google/area120/tables/v1alpha1/tables_service"

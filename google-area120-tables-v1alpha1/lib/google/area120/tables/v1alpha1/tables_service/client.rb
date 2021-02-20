@@ -36,6 +36,10 @@ module Google
           # - Each Table has a collection of {::Google::Area120::Tables::V1alpha1::Row Row}
           #   resources, named `tables/*/rows/*`
           #
+          # - The API has a collection of
+          #   {::Google::Area120::Tables::V1alpha1::Workspace Workspace}
+          #   resources, named `workspaces/*`.
+          #
           class Client
             include Paths
 
@@ -84,6 +88,10 @@ module Google
 
                 default_config.rpcs.list_tables.timeout = 60.0
 
+                default_config.rpcs.get_workspace.timeout = 60.0
+
+                default_config.rpcs.list_workspaces.timeout = 60.0
+
                 default_config.rpcs.get_row.timeout = 60.0
 
                 default_config.rpcs.list_rows.timeout = 60.0
@@ -97,6 +105,8 @@ module Google
                 default_config.rpcs.batch_update_rows.timeout = 60.0
 
                 default_config.rpcs.delete_row.timeout = 60.0
+
+                default_config.rpcs.batch_delete_rows.timeout = 60.0
 
                 default_config
               end
@@ -322,6 +332,144 @@ module Google
             end
 
             ##
+            # Gets a workspace. Returns NOT_FOUND if the workspace does not exist.
+            #
+            # @overload get_workspace(request, options = nil)
+            #   Pass arguments to `get_workspace` via a request object, either of type
+            #   {::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_workspace(name: nil)
+            #   Pass arguments to `get_workspace` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the workspace to retrieve.
+            #     Format: workspaces/\\{workspace}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Area120::Tables::V1alpha1::Workspace]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Area120::Tables::V1alpha1::Workspace]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def get_workspace request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_workspace.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_workspace.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_workspace.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @tables_service_stub.call_rpc :get_workspace, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists workspaces for the user.
+            #
+            # @overload list_workspaces(request, options = nil)
+            #   Pass arguments to `list_workspaces` via a request object, either of type
+            #   {::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_workspaces(page_size: nil, page_token: nil)
+            #   Pass arguments to `list_workspaces` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param page_size [::Integer]
+            #     The maximum number of workspaces to return. The service may return fewer
+            #     than this value.
+            #
+            #     If unspecified, at most 10 workspaces are returned. The maximum value is
+            #     25; values above 25 are coerced to 25.
+            #   @param page_token [::String]
+            #     A page token, received from a previous `ListWorkspaces` call.
+            #     Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to `ListWorkspaces` must
+            #     match the call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Area120::Tables::V1alpha1::Workspace>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Area120::Tables::V1alpha1::Workspace>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def list_workspaces request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_workspaces.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.list_workspaces.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_workspaces.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @tables_service_stub.call_rpc :list_workspaces, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @tables_service_stub, :list_workspaces, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Gets a row. Returns NOT_FOUND if the row does not exist in the table.
             #
             # @overload get_row(request, options = nil)
@@ -404,7 +552,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_rows(parent: nil, page_size: nil, page_token: nil, view: nil)
+            # @overload list_rows(parent: nil, page_size: nil, page_token: nil, view: nil, filter: nil)
             #   Pass arguments to `list_rows` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -427,6 +575,10 @@ module Google
             #   @param view [::Google::Area120::Tables::V1alpha1::View]
             #     Optional. Column key to use for values in the row.
             #     Defaults to user entered name.
+            #   @param filter [::String]
+            #     Optional. Raw text query to search for in rows of the table.
+            #     Special characters must be escaped. Logical operators and field specific
+            #     filtering not supported.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Area120::Tables::V1alpha1::Row>]
@@ -827,6 +979,78 @@ module Google
             end
 
             ##
+            # Deletes multiple rows.
+            #
+            # @overload batch_delete_rows(request, options = nil)
+            #   Pass arguments to `batch_delete_rows` via a request object, either of type
+            #   {::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload batch_delete_rows(parent: nil, names: nil)
+            #   Pass arguments to `batch_delete_rows` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent table shared by all rows being deleted.
+            #     Format: tables/\\{table}
+            #   @param names [::Array<::String>]
+            #     Required. The names of the rows to delete. All rows must belong to the parent table
+            #     or else the entire batch will fail. A maximum of 500 rows can be deleted
+            #     in a batch.
+            #     Format: tables/\\{table}/rows/\\{row}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def batch_delete_rows request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.batch_delete_rows.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.batch_delete_rows.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.batch_delete_rows.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @tables_service_stub.call_rpc :batch_delete_rows, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the TablesService API.
             #
             # This class represents the configuration for TablesService,
@@ -973,6 +1197,16 @@ module Google
                 #
                 attr_reader :list_tables
                 ##
+                # RPC-specific configuration for `get_workspace`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_workspace
+                ##
+                # RPC-specific configuration for `list_workspaces`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_workspaces
+                ##
                 # RPC-specific configuration for `get_row`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1007,6 +1241,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_row
+                ##
+                # RPC-specific configuration for `batch_delete_rows`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :batch_delete_rows
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1014,6 +1253,10 @@ module Google
                   @get_table = ::Gapic::Config::Method.new get_table_config
                   list_tables_config = parent_rpcs&.list_tables if parent_rpcs&.respond_to? :list_tables
                   @list_tables = ::Gapic::Config::Method.new list_tables_config
+                  get_workspace_config = parent_rpcs&.get_workspace if parent_rpcs&.respond_to? :get_workspace
+                  @get_workspace = ::Gapic::Config::Method.new get_workspace_config
+                  list_workspaces_config = parent_rpcs&.list_workspaces if parent_rpcs&.respond_to? :list_workspaces
+                  @list_workspaces = ::Gapic::Config::Method.new list_workspaces_config
                   get_row_config = parent_rpcs&.get_row if parent_rpcs&.respond_to? :get_row
                   @get_row = ::Gapic::Config::Method.new get_row_config
                   list_rows_config = parent_rpcs&.list_rows if parent_rpcs&.respond_to? :list_rows
@@ -1028,6 +1271,8 @@ module Google
                   @batch_update_rows = ::Gapic::Config::Method.new batch_update_rows_config
                   delete_row_config = parent_rpcs&.delete_row if parent_rpcs&.respond_to? :delete_row
                   @delete_row = ::Gapic::Config::Method.new delete_row_config
+                  batch_delete_rows_config = parent_rpcs&.batch_delete_rows if parent_rpcs&.respond_to? :batch_delete_rows
+                  @batch_delete_rows = ::Gapic::Config::Method.new batch_delete_rows_config
 
                   yield self if block_given?
                 end
