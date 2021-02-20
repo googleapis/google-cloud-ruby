@@ -1,0 +1,11 @@
+{
+    "api_id": "clouderrorreporting.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-error_reporting-v1beta1/latest",
+    "distribution_name": "google-cloud-error_reporting-v1beta1",
+    "language": "ruby",
+    "name": "clouderrorreporting",
+    "name_pretty": "Cloud Error Reporting V1beta1 API",
+    "product_documentation": "https://cloud.google.com/error-reporting",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
