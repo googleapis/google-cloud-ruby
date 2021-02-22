@@ -27,6 +27,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state, :enum, 2, "google.spanner.admin.database.v1.Database.State"
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       optional :restore_info, :message, 4, "google.spanner.admin.database.v1.RestoreInfo"
+      optional :encryption_config, :message, 5, "google.spanner.admin.database.v1.EncryptionConfig"
+      repeated :encryption_info, :message, 8, "google.spanner.admin.database.v1.EncryptionInfo"
       optional :version_retention_period, :string, 6
       optional :earliest_version_time, :message, 7, "google.protobuf.Timestamp"
     end
@@ -49,6 +51,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :create_statement, :string, 2
       repeated :extra_statements, :string, 3
+      optional :encryption_config, :message, 4, "google.spanner.admin.database.v1.EncryptionConfig"
     end
     add_message "google.spanner.admin.database.v1.CreateDatabaseMetadata" do
       optional :database, :string, 1
@@ -89,9 +92,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.spanner.admin.database.v1.RestoreDatabaseRequest" do
       optional :parent, :string, 1
       optional :database_id, :string, 2
+      optional :encryption_config, :message, 4, "google.spanner.admin.database.v1.RestoreDatabaseEncryptionConfig"
       oneof :source do
         optional :backup, :string, 3
       end
+    end
+    add_message "google.spanner.admin.database.v1.RestoreDatabaseEncryptionConfig" do
+      optional :encryption_type, :enum, 1, "google.spanner.admin.database.v1.RestoreDatabaseEncryptionConfig.EncryptionType"
+      optional :kms_key_name, :string, 2
+    end
+    add_enum "google.spanner.admin.database.v1.RestoreDatabaseEncryptionConfig.EncryptionType" do
+      value :ENCRYPTION_TYPE_UNSPECIFIED, 0
+      value :USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION, 1
+      value :GOOGLE_DEFAULT_ENCRYPTION, 2
+      value :CUSTOMER_MANAGED_ENCRYPTION, 3
     end
     add_message "google.spanner.admin.database.v1.RestoreDatabaseMetadata" do
       optional :name, :string, 1
@@ -136,6 +150,8 @@ module Google
             ListDatabaseOperationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListDatabaseOperationsRequest").msgclass
             ListDatabaseOperationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListDatabaseOperationsResponse").msgclass
             RestoreDatabaseRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreDatabaseRequest").msgclass
+            RestoreDatabaseEncryptionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreDatabaseEncryptionConfig").msgclass
+            RestoreDatabaseEncryptionConfig::EncryptionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreDatabaseEncryptionConfig.EncryptionType").enummodule
             RestoreDatabaseMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreDatabaseMetadata").msgclass
             OptimizeRestoredDatabaseMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.OptimizeRestoredDatabaseMetadata").msgclass
             RestoreSourceType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreSourceType").enummodule
