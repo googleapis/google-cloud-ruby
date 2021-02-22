@@ -49,6 +49,10 @@ module Google
       # - Each Table has a collection of Row
       #   resources, named `tables/*/rows/*`
       #
+      # - The API has a collection of
+      #   Workspace
+      #   resources, named `workspaces/*`.
+      #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1alpha1`.
       # @return [TablesService::Client] A client object for the specified version.
