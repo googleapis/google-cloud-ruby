@@ -9,7 +9,6 @@ require 'google/longrunning/operations_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/spanner/admin/database/v1/common_pb'
-require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/spanner/admin/database/v1/backup.proto", :syntax => :proto3) do
     add_message "google.spanner.admin.database.v1.Backup" do
@@ -21,6 +20,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :size_bytes, :int64, 5
       optional :state, :enum, 6, "google.spanner.admin.database.v1.Backup.State"
       repeated :referencing_databases, :string, 7
+      optional :encryption_info, :message, 8, "google.spanner.admin.database.v1.EncryptionInfo"
     end
     add_enum "google.spanner.admin.database.v1.Backup.State" do
       value :STATE_UNSPECIFIED, 0
@@ -31,6 +31,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :backup_id, :string, 2
       optional :backup, :message, 3, "google.spanner.admin.database.v1.Backup"
+      optional :encryption_config, :message, 4, "google.spanner.admin.database.v1.CreateBackupEncryptionConfig"
     end
     add_message "google.spanner.admin.database.v1.CreateBackupMetadata" do
       optional :name, :string, 1
@@ -74,6 +75,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 2, "google.protobuf.Timestamp"
       optional :source_database, :string, 3
     end
+    add_message "google.spanner.admin.database.v1.CreateBackupEncryptionConfig" do
+      optional :encryption_type, :enum, 1, "google.spanner.admin.database.v1.CreateBackupEncryptionConfig.EncryptionType"
+      optional :kms_key_name, :string, 2
+    end
+    add_enum "google.spanner.admin.database.v1.CreateBackupEncryptionConfig.EncryptionType" do
+      value :ENCRYPTION_TYPE_UNSPECIFIED, 0
+      value :USE_DATABASE_ENCRYPTION, 1
+      value :GOOGLE_DEFAULT_ENCRYPTION, 2
+      value :CUSTOMER_MANAGED_ENCRYPTION, 3
+    end
   end
 end
 
@@ -95,6 +106,8 @@ module Google
             ListBackupOperationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListBackupOperationsRequest").msgclass
             ListBackupOperationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListBackupOperationsResponse").msgclass
             BackupInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.BackupInfo").msgclass
+            CreateBackupEncryptionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CreateBackupEncryptionConfig").msgclass
+            CreateBackupEncryptionConfig::EncryptionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CreateBackupEncryptionConfig.EncryptionType").enummodule
           end
         end
       end

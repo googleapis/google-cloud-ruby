@@ -40,6 +40,51 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+
+            # Encryption configuration for a Cloud Spanner database.
+            # @!attribute [rw] kms_key_name
+            #   @return [::String]
+            #     The Cloud KMS key to be used for encrypting and decrypting
+            #     the database. Values are of the form
+            #     `projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>`.
+            class EncryptionConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Encryption information for a Cloud Spanner database or backup.
+            # @!attribute [r] encryption_type
+            #   @return [::Google::Cloud::Spanner::Admin::Database::V1::EncryptionInfo::Type]
+            #     Output only. The type of encryption.
+            # @!attribute [r] encryption_status
+            #   @return [::Google::Rpc::Status]
+            #     Output only. If present, the status of a recent encrypt/decrypt call on
+            #     underlying data for this database or backup. Regardless of status, data is
+            #     always encrypted at rest.
+            # @!attribute [r] kms_key_version
+            #   @return [::String]
+            #     Output only. A Cloud KMS key version that is being used to protect the
+            #     database or backup.
+            class EncryptionInfo
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Possible encryption types.
+              module Type
+                # Encryption type was not specified, though data at rest remains encrypted.
+                TYPE_UNSPECIFIED = 0
+
+                # The data is encrypted at rest with a key that is
+                # fully managed by Google. No key version or status will be populated.
+                # This is the default state.
+                GOOGLE_DEFAULT_ENCRYPTION = 1
+
+                # The data is encrypted at rest with a key that is
+                # managed by the customer. The active version of the key. `kms_key_version`
+                # will be populated, and `encryption_status` may be populated.
+                CUSTOMER_MANAGED_ENCRYPTION = 2
+              end
+            end
           end
         end
       end
