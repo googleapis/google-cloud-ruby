@@ -41,6 +41,34 @@ module Google
               "tables/#{table}/rows/#{row}"
             end
 
+            ##
+            # Create a fully-qualified Table resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `tables/{table}`
+            #
+            # @param table [String]
+            #
+            # @return [::String]
+            def table_path table:
+              "tables/#{table}"
+            end
+
+            ##
+            # Create a fully-qualified Workspace resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `workspaces/{workspace}`
+            #
+            # @param workspace [String]
+            #
+            # @return [::String]
+            def workspace_path workspace:
+              "workspaces/#{workspace}"
+            end
+
             extend self
           end
         end

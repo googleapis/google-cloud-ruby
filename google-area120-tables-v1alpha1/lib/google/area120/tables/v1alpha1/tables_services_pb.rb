@@ -32,6 +32,10 @@ module Google
           #
           # - Each Table has a collection of [Row][google.area120.tables.v1alpha1.Row]
           #   resources, named `tables/*/rows/*`
+          #
+          # - The API has a collection of
+          #   [Workspace][google.area120.tables.v1alpha1.Workspace]
+          #   resources, named `workspaces/*`.
           class Service
 
             include GRPC::GenericService
@@ -44,6 +48,10 @@ module Google
             rpc :GetTable, ::Google::Area120::Tables::V1alpha1::GetTableRequest, ::Google::Area120::Tables::V1alpha1::Table
             # Lists tables for the user.
             rpc :ListTables, ::Google::Area120::Tables::V1alpha1::ListTablesRequest, ::Google::Area120::Tables::V1alpha1::ListTablesResponse
+            # Gets a workspace. Returns NOT_FOUND if the workspace does not exist.
+            rpc :GetWorkspace, ::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest, ::Google::Area120::Tables::V1alpha1::Workspace
+            # Lists workspaces for the user.
+            rpc :ListWorkspaces, ::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest, ::Google::Area120::Tables::V1alpha1::ListWorkspacesResponse
             # Gets a row. Returns NOT_FOUND if the row does not exist in the table.
             rpc :GetRow, ::Google::Area120::Tables::V1alpha1::GetRowRequest, ::Google::Area120::Tables::V1alpha1::Row
             # Lists rows in a table. Returns NOT_FOUND if the table does not exist.
@@ -58,6 +66,8 @@ module Google
             rpc :BatchUpdateRows, ::Google::Area120::Tables::V1alpha1::BatchUpdateRowsRequest, ::Google::Area120::Tables::V1alpha1::BatchUpdateRowsResponse
             # Deletes a row.
             rpc :DeleteRow, ::Google::Area120::Tables::V1alpha1::DeleteRowRequest, ::Google::Protobuf::Empty
+            # Deletes multiple rows.
+            rpc :BatchDeleteRows, ::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class
