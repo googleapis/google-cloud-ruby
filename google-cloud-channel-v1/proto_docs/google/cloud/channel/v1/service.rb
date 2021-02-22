@@ -396,11 +396,6 @@ module Google
         #     Required. The channel partner link to create.
         #     Either channel_partner_link.reseller_cloud_identity_id or domain can be
         #     used to create a link.
-        # @!attribute [rw] domain
-        #   @return [::String]
-        #     Optional. The invited partner's domain. Either domain or
-        #     channel_partner_link.reseller_cloud_identity_id can be used to create a
-        #     link.
         class CreateChannelPartnerLinkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -69,8 +69,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :end_time, :message, 2, "google.protobuf.Timestamp"
     end
     add_message "google.cloud.channel.v1.TransferableSku" do
-      optional :is_commitment, :message, 6, "google.protobuf.BoolValue"
-      optional :commitment_end_timestamp, :message, 7, "google.protobuf.Timestamp"
       optional :transfer_eligibility, :message, 9, "google.cloud.channel.v1.TransferEligibility"
       optional :sku, :message, 11, "google.cloud.channel.v1.Sku"
     end

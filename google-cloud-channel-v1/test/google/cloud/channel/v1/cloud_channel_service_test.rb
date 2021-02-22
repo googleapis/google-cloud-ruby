@@ -1561,14 +1561,12 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
     # Create request parameters for a unary method.
     parent = "hello world"
     channel_partner_link = {}
-    domain = "hello world"
 
     create_channel_partner_link_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_channel_partner_link, name
       assert_kind_of ::Google::Cloud::Channel::V1::CreateChannelPartnerLinkRequest, request
       assert_equal "hello world", request["parent"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Channel::V1::ChannelPartnerLink), request["channel_partner_link"]
-      assert_equal "hello world", request["domain"]
       refute_nil options
     end
 
@@ -1579,31 +1577,31 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.create_channel_partner_link({ parent: parent, channel_partner_link: channel_partner_link, domain: domain }) do |response, operation|
+      client.create_channel_partner_link({ parent: parent, channel_partner_link: channel_partner_link }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_channel_partner_link parent: parent, channel_partner_link: channel_partner_link, domain: domain do |response, operation|
+      client.create_channel_partner_link parent: parent, channel_partner_link: channel_partner_link do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_channel_partner_link ::Google::Cloud::Channel::V1::CreateChannelPartnerLinkRequest.new(parent: parent, channel_partner_link: channel_partner_link, domain: domain) do |response, operation|
+      client.create_channel_partner_link ::Google::Cloud::Channel::V1::CreateChannelPartnerLinkRequest.new(parent: parent, channel_partner_link: channel_partner_link) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_channel_partner_link({ parent: parent, channel_partner_link: channel_partner_link, domain: domain }, grpc_options) do |response, operation|
+      client.create_channel_partner_link({ parent: parent, channel_partner_link: channel_partner_link }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_channel_partner_link ::Google::Cloud::Channel::V1::CreateChannelPartnerLinkRequest.new(parent: parent, channel_partner_link: channel_partner_link, domain: domain), grpc_options do |response, operation|
+      client.create_channel_partner_link ::Google::Cloud::Channel::V1::CreateChannelPartnerLinkRequest.new(parent: parent, channel_partner_link: channel_partner_link), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
