@@ -33,7 +33,7 @@ describe Google::Cloud::Bigquery::Dataset, :ddl_dml, :bigquery do
 
     _(create_job.statement_type).must_equal "CREATE_TABLE"
     _(create_job.ddl_operation_performed).must_equal "CREATE"
-    assert_table_ref create_job.ddl_target_table, table_id
+    assert_table_ref create_job.ddl_target_table, dataset_id, table_id
     _(create_job.num_dml_affected_rows).must_be :nil?
 
     insert_job = dataset.query_job "INSERT #{table_id} (x) VALUES(101),(102)"
@@ -59,13 +59,13 @@ describe Google::Cloud::Bigquery::Dataset, :ddl_dml, :bigquery do
     _(drop_job).wont_be :failed?
     _(drop_job.statement_type).must_equal "DROP_TABLE"
     _(drop_job.ddl_operation_performed).must_equal "DROP"
-    assert_table_ref drop_job.ddl_target_table, table_id, exists: false
+    assert_table_ref drop_job.ddl_target_table, dataset_id, table_id, exists: false
     _(drop_job.num_dml_affected_rows).must_be :nil?
   end
 
   it "creates and populates and drops a table with ddl/dml queries" do
     create_data = dataset.query "CREATE TABLE #{table_id_2} (x INT64)"
-    assert_table_ref create_data.ddl_target_table, table_id_2
+    assert_table_ref create_data.ddl_target_table, dataset_id, table_id_2
     _(create_data.statement_type).must_equal "CREATE_TABLE"
     _(create_data.ddl?).must_equal true
     _(create_data.dml?).must_equal false
@@ -104,15 +104,6 @@ describe Google::Cloud::Bigquery::Dataset, :ddl_dml, :bigquery do
     _(drop_data.statement_type).must_equal "DROP_TABLE"
     _(drop_data.ddl_operation_performed).must_equal "DROP"
     _(drop_data.num_dml_affected_rows).must_be :nil?
-    assert_table_ref drop_data.ddl_target_table, table_id_2, exists: false
-  end
-
-  def assert_table_ref table_ref, table_id, exists: true
-    _(table_ref).must_be_kind_of Google::Cloud::Bigquery::Table
-    _(table_ref.project_id).must_equal bigquery.project
-    _(table_ref.dataset_id).must_equal dataset_id
-    _(table_ref.table_id).must_equal table_id
-    _(table_ref.reference?).must_equal true
-    _(table_ref.exists?).must_equal exists
+    assert_table_ref drop_data.ddl_target_table, dataset_id, table_id_2, exists: false
   end
 end

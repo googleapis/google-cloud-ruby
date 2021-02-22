@@ -227,17 +227,10 @@ class MockBigquery < Minitest::Spec
     id ||= "my_table"
     name ||= "Table Name"
 
-    {
-      "kind" => "bigquery#table",
+    base = random_table_partial_hash dataset, id, name, project_id
+    base.merge({
       "etag" => "etag123456789",
-      "id" => "#{project}:#{dataset}.#{id}",
       "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
-      "tableReference" => {
-        "projectId" => (project_id || project),
-        "datasetId" => dataset,
-        "tableId" => id
-      },
-      "friendlyName" => name,
       "description" => description,
       "schema" => random_schema_hash,
       "numBytes" => "1000", # String per google/google-api-ruby-client#439
@@ -245,7 +238,6 @@ class MockBigquery < Minitest::Spec
       "creationTime" => time_millis,
       "expirationTime" => time_millis,
       "lastModifiedTime" => time_millis,
-      "type" => "TABLE",
       "location" => "US",
       "labels" => { "foo" => "bar" },
       "streamingBuffer" => {
@@ -254,10 +246,10 @@ class MockBigquery < Minitest::Spec
         "oldestEntryTime" => time_millis
       },
       "requirePartitionFilter" => true
-    }
+    })
   end
 
-  def random_table_partial_hash dataset, id = nil, name = nil
+  def random_table_partial_hash dataset, id = nil, name = nil, project_id = nil, type: "TABLE"
     id ||= "my_table"
     name ||= "Table Name"
 
@@ -265,12 +257,12 @@ class MockBigquery < Minitest::Spec
       "kind" => "bigquery#table",
       "id" => "#{project}:#{dataset}.#{id}",
       "tableReference" => {
-        "projectId" => project,
+        "projectId" => (project_id || project),
         "datasetId" => dataset,
         "tableId" => id
       },
       "friendlyName" => name,
-      "type" => "TABLE"
+      "type" => type
     }
   end
 
@@ -351,45 +343,43 @@ class MockBigquery < Minitest::Spec
     id ||= "my_view"
     name ||= "View Name"
 
-    {
-      "kind" => "bigquery#table",
+    base = random_table_partial_hash dataset, id, name, type: "VIEW"
+    base.merge({
       "etag" => "etag123456789",
-      "id" => "#{project}:#{dataset}.#{id}",
       "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
-      "tableReference" => {
-        "projectId" => project,
-        "datasetId" => dataset,
-        "tableId" => id
-      },
-      "friendlyName" => name,
       "description" => description,
       "schema" => random_schema_hash,
       "creationTime" => time_millis,
       "expirationTime" => time_millis,
       "lastModifiedTime" => time_millis,
-      "type" => "VIEW",
       "view" => {
         "query" => "SELECT name, age, score, active FROM `external.publicdata.users`"
       },
       "location" => "US"
-    }
+    })
   end
 
-  def random_view_partial_hash dataset, id = nil, name = nil
-    id ||= "my_view"
-    name ||= "View Name"
+  def random_materialized_view_hash dataset, id = nil, name = nil, description = nil
+    id ||= "my_materialized_view"
+    name ||= "Materialized View Name"
 
-    {
-      "kind" => "bigquery#table",
-      "id" => "#{project}:#{dataset}.#{id}",
-      "tableReference" => {
-        "projectId" => project,
-        "datasetId" => dataset,
-        "tableId" => id
+    base = random_table_partial_hash dataset, id, name, type: "MATERIALIZED_VIEW"
+    base.merge({
+      "etag" => "etag123456789",
+      "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
+      "description" => description,
+      "schema" => random_schema_hash,
+      "creationTime" => time_millis,
+      "expirationTime" => time_millis,
+      "lastModifiedTime" => time_millis,
+      "materializedView" => {
+        "enableRefresh" => true,
+        "lastRefreshTime" => time_millis,
+        "query" => "SELECT name, age, score, active FROM `external.publicdata.users`",
+        "refreshIntervalMs" => 3600000
       },
-      "friendlyName" => name,
-      "type" => "VIEW"
-    }
+      "location" => "US"
+    })
   end
 
   def source_model_json

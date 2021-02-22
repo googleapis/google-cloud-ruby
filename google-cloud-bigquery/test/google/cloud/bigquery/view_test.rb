@@ -39,8 +39,12 @@ describe Google::Cloud::Bigquery::Table, :view, :mock_bigquery do
     _(view).wont_be :query_standard_sql?
     _(view).must_be :query_legacy_sql?
     _(view.query_udfs).must_be :empty?
-    _(view.view?).must_equal true
     _(view.table?).must_equal false
+    _(view.view?).must_equal true
+    _(view.materialized_view?).must_equal false
+    _(view.enable_refresh?).must_be :nil?
+    _(view.last_refresh_time).must_be :nil?
+    _(view.refresh_interval_ms).must_be :nil?
     _(view.location).must_equal location_code
   end
 

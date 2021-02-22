@@ -49,6 +49,7 @@ describe Google::Cloud::Bigquery::Table, :view, :bigquery do
     _(fresh.modified_at).must_be_kind_of Time
     _(fresh.table?).must_equal false
     _(fresh.view?).must_equal true
+    _(fresh.materialized_view?).must_equal false
     #fresh.location.must_equal "US"       TODO why nil? Set in dataset
     _(fresh.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
     _(fresh.headers).must_equal [:url]
