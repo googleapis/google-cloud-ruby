@@ -1,0 +1,60 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.bigquery.datatransfer.v1",
+  "libraryPackage": "::Google::Cloud::Bigquery::DataTransfer::V1",
+  "services": {
+    "DataTransferService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client",
+          "methods": {
+            "GetDataSource": [
+              "get_data_source"
+            ],
+            "ListDataSources": [
+              "list_data_sources"
+            ],
+            "CreateTransferConfig": [
+              "create_transfer_config"
+            ],
+            "UpdateTransferConfig": [
+              "update_transfer_config"
+            ],
+            "DeleteTransferConfig": [
+              "delete_transfer_config"
+            ],
+            "GetTransferConfig": [
+              "get_transfer_config"
+            ],
+            "ListTransferConfigs": [
+              "list_transfer_configs"
+            ],
+            "ScheduleTransferRuns": [
+              "schedule_transfer_runs"
+            ],
+            "StartManualTransferRuns": [
+              "start_manual_transfer_runs"
+            ],
+            "GetTransferRun": [
+              "get_transfer_run"
+            ],
+            "DeleteTransferRun": [
+              "delete_transfer_run"
+            ],
+            "ListTransferRuns": [
+              "list_transfer_runs"
+            ],
+            "ListTransferLogs": [
+              "list_transfer_logs"
+            ],
+            "CheckValidCreds": [
+              "check_valid_creds"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
