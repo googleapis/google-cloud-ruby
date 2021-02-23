@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2021-02-23
+
+#### Features
+
+* Add CMEK fields to backup and database
+
 ### 0.3.0 / 2021-02-02
 
 #### Features
