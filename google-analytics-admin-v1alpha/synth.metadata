@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "ede929c4c37760c903a53cc4916f82bdb54336ea"
+        "sha": "df71474d1844a5eacb39718df70372d19c2a0d35"
       }
     },
     {
@@ -26,40 +26,5 @@
         "generator": "gapic-generator-ruby"
       }
     }
-  ],
-  "generatedFiles": [
-    ".gitignore",
-    ".repo-metadata.json",
-    ".rubocop.yml",
-    ".yardopts",
-    "AUTHENTICATION.md",
-    "CHANGELOG.md",
-    "Gemfile",
-    "LICENSE.md",
-    "README.md",
-    "Rakefile",
-    "google-analytics-admin-v1alpha.gemspec",
-    "lib/google-analytics-admin-v1alpha.rb",
-    "lib/google/analytics/admin/v1alpha.rb",
-    "lib/google/analytics/admin/v1alpha/analytics_admin_pb.rb",
-    "lib/google/analytics/admin/v1alpha/analytics_admin_service.rb",
-    "lib/google/analytics/admin/v1alpha/analytics_admin_service/client.rb",
-    "lib/google/analytics/admin/v1alpha/analytics_admin_service/credentials.rb",
-    "lib/google/analytics/admin/v1alpha/analytics_admin_service/paths.rb",
-    "lib/google/analytics/admin/v1alpha/analytics_admin_services_pb.rb",
-    "lib/google/analytics/admin/v1alpha/resources_pb.rb",
-    "lib/google/analytics/admin/v1alpha/version.rb",
-    "proto_docs/README.md",
-    "proto_docs/google/analytics/admin/v1alpha/analytics_admin.rb",
-    "proto_docs/google/analytics/admin/v1alpha/resources.rb",
-    "proto_docs/google/api/field_behavior.rb",
-    "proto_docs/google/api/resource.rb",
-    "proto_docs/google/protobuf/empty.rb",
-    "proto_docs/google/protobuf/field_mask.rb",
-    "proto_docs/google/protobuf/timestamp.rb",
-    "proto_docs/google/protobuf/wrappers.rb",
-    "test/google/analytics/admin/v1alpha/analytics_admin_service_paths_test.rb",
-    "test/google/analytics/admin/v1alpha/analytics_admin_service_test.rb",
-    "test/helper.rb"
   ]
 }
