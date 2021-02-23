@@ -105,13 +105,13 @@ describe Google::Cloud::Bigquery::Table, :materialized_view, :bigquery do
 
     materialized_view.enable_refresh = true
     materialized_view.refresh_interval_ms = 1800000
-    #materialized_view.query = sum_query_2
+    # materialized_view.query = sum_query_2 # TODO: Google::Cloud::InvalidArgumentError: invalid: Updating materialized view query is not yet supported.
 
     materialized_view.reload!
     _(materialized_view.table_id).must_equal materialized_view_id
     _(materialized_view.enable_refresh?).must_equal true
     _(materialized_view.refresh_interval_ms).must_equal 1800000
-    #_(materialized_view.query).must_equal sum_query_2
+    # _(materialized_view.query).must_equal sum_query_2
 
     # delete
     materialized_view.delete
