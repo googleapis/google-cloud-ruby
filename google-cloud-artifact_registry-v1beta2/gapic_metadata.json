@@ -1,0 +1,81 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.devtools.artifactregistry.v1beta2",
+  "libraryPackage": "::Google::Cloud::ArtifactRegistry::V1beta2",
+  "services": {
+    "ArtifactRegistry": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client",
+          "methods": {
+            "ListRepositories": [
+              "list_repositories"
+            ],
+            "GetRepository": [
+              "get_repository"
+            ],
+            "CreateRepository": [
+              "create_repository"
+            ],
+            "UpdateRepository": [
+              "update_repository"
+            ],
+            "DeleteRepository": [
+              "delete_repository"
+            ],
+            "ListPackages": [
+              "list_packages"
+            ],
+            "GetPackage": [
+              "get_package"
+            ],
+            "DeletePackage": [
+              "delete_package"
+            ],
+            "ListVersions": [
+              "list_versions"
+            ],
+            "GetVersion": [
+              "get_version"
+            ],
+            "DeleteVersion": [
+              "delete_version"
+            ],
+            "ListFiles": [
+              "list_files"
+            ],
+            "GetFile": [
+              "get_file"
+            ],
+            "ListTags": [
+              "list_tags"
+            ],
+            "GetTag": [
+              "get_tag"
+            ],
+            "CreateTag": [
+              "create_tag"
+            ],
+            "UpdateTag": [
+              "update_tag"
+            ],
+            "DeleteTag": [
+              "delete_tag"
+            ],
+            "SetIamPolicy": [
+              "set_iam_policy"
+            ],
+            "GetIamPolicy": [
+              "get_iam_policy"
+            ],
+            "TestIamPermissions": [
+              "test_iam_permissions"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
