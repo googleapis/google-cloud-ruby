@@ -1,0 +1,48 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.spanner.admin.instance.v1",
+  "libraryPackage": "::Google::Cloud::Spanner::Admin::Instance::V1",
+  "services": {
+    "InstanceAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client",
+          "methods": {
+            "ListInstanceConfigs": [
+              "list_instance_configs"
+            ],
+            "GetInstanceConfig": [
+              "get_instance_config"
+            ],
+            "ListInstances": [
+              "list_instances"
+            ],
+            "GetInstance": [
+              "get_instance"
+            ],
+            "CreateInstance": [
+              "create_instance"
+            ],
+            "UpdateInstance": [
+              "update_instance"
+            ],
+            "DeleteInstance": [
+              "delete_instance"
+            ],
+            "SetIamPolicy": [
+              "set_iam_policy"
+            ],
+            "GetIamPolicy": [
+              "get_iam_policy"
+            ],
+            "TestIamPermissions": [
+              "test_iam_permissions"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
