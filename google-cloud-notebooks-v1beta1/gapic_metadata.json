@@ -1,0 +1,75 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.notebooks.v1beta1",
+  "libraryPackage": "::Google::Cloud::Notebooks::V1beta1",
+  "services": {
+    "NotebookService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client",
+          "methods": {
+            "ListInstances": [
+              "list_instances"
+            ],
+            "GetInstance": [
+              "get_instance"
+            ],
+            "CreateInstance": [
+              "create_instance"
+            ],
+            "RegisterInstance": [
+              "register_instance"
+            ],
+            "SetInstanceAccelerator": [
+              "set_instance_accelerator"
+            ],
+            "SetInstanceMachineType": [
+              "set_instance_machine_type"
+            ],
+            "SetInstanceLabels": [
+              "set_instance_labels"
+            ],
+            "DeleteInstance": [
+              "delete_instance"
+            ],
+            "StartInstance": [
+              "start_instance"
+            ],
+            "StopInstance": [
+              "stop_instance"
+            ],
+            "ResetInstance": [
+              "reset_instance"
+            ],
+            "ReportInstanceInfo": [
+              "report_instance_info"
+            ],
+            "IsInstanceUpgradeable": [
+              "is_instance_upgradeable"
+            ],
+            "UpgradeInstance": [
+              "upgrade_instance"
+            ],
+            "UpgradeInstanceInternal": [
+              "upgrade_instance_internal"
+            ],
+            "ListEnvironments": [
+              "list_environments"
+            ],
+            "GetEnvironment": [
+              "get_environment"
+            ],
+            "CreateEnvironment": [
+              "create_environment"
+            ],
+            "DeleteEnvironment": [
+              "delete_environment"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
