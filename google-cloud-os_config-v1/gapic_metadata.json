@@ -1,0 +1,45 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.osconfig.v1",
+  "libraryPackage": "::Google::Cloud::OsConfig::V1",
+  "services": {
+    "OsConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::OsConfig::V1::OsConfigService::Client",
+          "methods": {
+            "ExecutePatchJob": [
+              "execute_patch_job"
+            ],
+            "GetPatchJob": [
+              "get_patch_job"
+            ],
+            "CancelPatchJob": [
+              "cancel_patch_job"
+            ],
+            "ListPatchJobs": [
+              "list_patch_jobs"
+            ],
+            "ListPatchJobInstanceDetails": [
+              "list_patch_job_instance_details"
+            ],
+            "CreatePatchDeployment": [
+              "create_patch_deployment"
+            ],
+            "GetPatchDeployment": [
+              "get_patch_deployment"
+            ],
+            "ListPatchDeployments": [
+              "list_patch_deployments"
+            ],
+            "DeletePatchDeployment": [
+              "delete_patch_deployment"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
