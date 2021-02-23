@@ -1,0 +1,105 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.kms.v1",
+  "libraryPackage": "::Google::Cloud::Kms::V1",
+  "services": {
+    "KeyManagementService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Kms::V1::KeyManagementService::Client",
+          "methods": {
+            "ListKeyRings": [
+              "list_key_rings"
+            ],
+            "ListCryptoKeys": [
+              "list_crypto_keys"
+            ],
+            "ListCryptoKeyVersions": [
+              "list_crypto_key_versions"
+            ],
+            "ListImportJobs": [
+              "list_import_jobs"
+            ],
+            "GetKeyRing": [
+              "get_key_ring"
+            ],
+            "GetCryptoKey": [
+              "get_crypto_key"
+            ],
+            "GetCryptoKeyVersion": [
+              "get_crypto_key_version"
+            ],
+            "GetPublicKey": [
+              "get_public_key"
+            ],
+            "GetImportJob": [
+              "get_import_job"
+            ],
+            "CreateKeyRing": [
+              "create_key_ring"
+            ],
+            "CreateCryptoKey": [
+              "create_crypto_key"
+            ],
+            "CreateCryptoKeyVersion": [
+              "create_crypto_key_version"
+            ],
+            "ImportCryptoKeyVersion": [
+              "import_crypto_key_version"
+            ],
+            "CreateImportJob": [
+              "create_import_job"
+            ],
+            "UpdateCryptoKey": [
+              "update_crypto_key"
+            ],
+            "UpdateCryptoKeyVersion": [
+              "update_crypto_key_version"
+            ],
+            "Encrypt": [
+              "encrypt"
+            ],
+            "Decrypt": [
+              "decrypt"
+            ],
+            "AsymmetricSign": [
+              "asymmetric_sign"
+            ],
+            "AsymmetricDecrypt": [
+              "asymmetric_decrypt"
+            ],
+            "UpdateCryptoKeyPrimaryVersion": [
+              "update_crypto_key_primary_version"
+            ],
+            "DestroyCryptoKeyVersion": [
+              "destroy_crypto_key_version"
+            ],
+            "RestoreCryptoKeyVersion": [
+              "restore_crypto_key_version"
+            ]
+          }
+        }
+      }
+    },
+    "IAMPolicy": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Kms::V1::IAMPolicy::Client",
+          "methods": {
+            "SetIamPolicy": [
+              "set_iam_policy"
+            ],
+            "GetIamPolicy": [
+              "get_iam_policy"
+            ],
+            "TestIamPermissions": [
+              "test_iam_permissions"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
