@@ -1,0 +1,54 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.devtools.clouderrorreporting.v1beta1",
+  "libraryPackage": "::Google::Cloud::ErrorReporting::V1beta1",
+  "services": {
+    "ErrorGroupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Client",
+          "methods": {
+            "GetGroup": [
+              "get_group"
+            ],
+            "UpdateGroup": [
+              "update_group"
+            ]
+          }
+        }
+      }
+    },
+    "ErrorStatsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client",
+          "methods": {
+            "ListGroupStats": [
+              "list_group_stats"
+            ],
+            "ListEvents": [
+              "list_events"
+            ],
+            "DeleteEvents": [
+              "delete_events"
+            ]
+          }
+        }
+      }
+    },
+    "ReportErrorsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::Client",
+          "methods": {
+            "ReportErrorEvent": [
+              "report_error_event"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
