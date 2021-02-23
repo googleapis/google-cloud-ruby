@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "ec20fd460f707c06e85ae9e4d95dd01dabe26bde"
+        "sha": "c830c7d6f7b45ddb90cafc77707b1ecf323e600b"
       }
     },
     {
@@ -26,24 +26,5 @@
         "generator": "gapic-generator-ruby"
       }
     }
-  ],
-  "generatedFiles": [
-    ".gitignore",
-    ".repo-metadata.json",
-    ".rubocop.yml",
-    ".yardopts",
-    "AUTHENTICATION.md",
-    "CHANGELOG.md",
-    "Gemfile",
-    "LICENSE.md",
-    "README.md",
-    "Rakefile",
-    "google-cloud-dataqna.gemspec",
-    "lib/google-cloud-dataqna.rb",
-    "lib/google/cloud/dataqna.rb",
-    "lib/google/cloud/dataqna/version.rb",
-    "test/google/cloud/dataqna/client_test.rb",
-    "test/google/cloud/dataqna/version_test.rb",
-    "test/helper.rb"
   ]
 }
