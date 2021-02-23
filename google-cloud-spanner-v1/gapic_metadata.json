@@ -1,0 +1,63 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.spanner.v1",
+  "libraryPackage": "::Google::Cloud::Spanner::V1",
+  "services": {
+    "Spanner": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Spanner::V1::Spanner::Client",
+          "methods": {
+            "CreateSession": [
+              "create_session"
+            ],
+            "BatchCreateSessions": [
+              "batch_create_sessions"
+            ],
+            "GetSession": [
+              "get_session"
+            ],
+            "ListSessions": [
+              "list_sessions"
+            ],
+            "DeleteSession": [
+              "delete_session"
+            ],
+            "ExecuteSql": [
+              "execute_sql"
+            ],
+            "ExecuteStreamingSql": [
+              "execute_streaming_sql"
+            ],
+            "ExecuteBatchDml": [
+              "execute_batch_dml"
+            ],
+            "Read": [
+              "read"
+            ],
+            "StreamingRead": [
+              "streaming_read"
+            ],
+            "BeginTransaction": [
+              "begin_transaction"
+            ],
+            "Commit": [
+              "commit"
+            ],
+            "Rollback": [
+              "rollback"
+            ],
+            "PartitionQuery": [
+              "partition_query"
+            ],
+            "PartitionRead": [
+              "partition_read"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
