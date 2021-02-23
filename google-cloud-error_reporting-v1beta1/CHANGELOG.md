@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2021-02-23
+
+#### Features
+
+* Support error group resolution status
+
 ### 0.2.0 / 2021-02-02
 
 #### Features
