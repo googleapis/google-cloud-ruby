@@ -1,0 +1,42 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.memcache.v1beta2",
+  "libraryPackage": "::Google::Cloud::Memcache::V1beta2",
+  "services": {
+    "CloudMemcache": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client",
+          "methods": {
+            "ListInstances": [
+              "list_instances"
+            ],
+            "GetInstance": [
+              "get_instance"
+            ],
+            "CreateInstance": [
+              "create_instance"
+            ],
+            "UpdateInstance": [
+              "update_instance"
+            ],
+            "UpdateParameters": [
+              "update_parameters"
+            ],
+            "DeleteInstance": [
+              "delete_instance"
+            ],
+            "ApplyParameters": [
+              "apply_parameters"
+            ],
+            "ApplySoftwareUpdate": [
+              "apply_software_update"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
