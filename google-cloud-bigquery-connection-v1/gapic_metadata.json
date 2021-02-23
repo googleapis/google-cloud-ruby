@@ -1,0 +1,42 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.bigquery.connection.v1",
+  "libraryPackage": "::Google::Cloud::Bigquery::Connection::V1",
+  "services": {
+    "ConnectionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client",
+          "methods": {
+            "CreateConnection": [
+              "create_connection"
+            ],
+            "GetConnection": [
+              "get_connection"
+            ],
+            "ListConnections": [
+              "list_connections"
+            ],
+            "UpdateConnection": [
+              "update_connection"
+            ],
+            "DeleteConnection": [
+              "delete_connection"
+            ],
+            "GetIamPolicy": [
+              "get_iam_policy"
+            ],
+            "SetIamPolicy": [
+              "set_iam_policy"
+            ],
+            "TestIamPermissions": [
+              "test_iam_permissions"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
