@@ -1,0 +1,39 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.recaptchaenterprise.v1",
+  "libraryPackage": "::Google::Cloud::RecaptchaEnterprise::V1",
+  "services": {
+    "RecaptchaEnterpriseService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client",
+          "methods": {
+            "CreateAssessment": [
+              "create_assessment"
+            ],
+            "AnnotateAssessment": [
+              "annotate_assessment"
+            ],
+            "CreateKey": [
+              "create_key"
+            ],
+            "ListKeys": [
+              "list_keys"
+            ],
+            "GetKey": [
+              "get_key"
+            ],
+            "UpdateKey": [
+              "update_key"
+            ],
+            "DeleteKey": [
+              "delete_key"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
