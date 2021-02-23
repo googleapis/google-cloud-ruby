@@ -1,0 +1,87 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.securitycenter.v1",
+  "libraryPackage": "::Google::Cloud::SecurityCenter::V1",
+  "services": {
+    "SecurityCenter": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client",
+          "methods": {
+            "CreateSource": [
+              "create_source"
+            ],
+            "CreateFinding": [
+              "create_finding"
+            ],
+            "CreateNotificationConfig": [
+              "create_notification_config"
+            ],
+            "DeleteNotificationConfig": [
+              "delete_notification_config"
+            ],
+            "GetIamPolicy": [
+              "get_iam_policy"
+            ],
+            "GetNotificationConfig": [
+              "get_notification_config"
+            ],
+            "GetOrganizationSettings": [
+              "get_organization_settings"
+            ],
+            "GetSource": [
+              "get_source"
+            ],
+            "GroupAssets": [
+              "group_assets"
+            ],
+            "GroupFindings": [
+              "group_findings"
+            ],
+            "ListAssets": [
+              "list_assets"
+            ],
+            "ListFindings": [
+              "list_findings"
+            ],
+            "ListNotificationConfigs": [
+              "list_notification_configs"
+            ],
+            "ListSources": [
+              "list_sources"
+            ],
+            "RunAssetDiscovery": [
+              "run_asset_discovery"
+            ],
+            "SetFindingState": [
+              "set_finding_state"
+            ],
+            "SetIamPolicy": [
+              "set_iam_policy"
+            ],
+            "TestIamPermissions": [
+              "test_iam_permissions"
+            ],
+            "UpdateFinding": [
+              "update_finding"
+            ],
+            "UpdateNotificationConfig": [
+              "update_notification_config"
+            ],
+            "UpdateOrganizationSettings": [
+              "update_organization_settings"
+            ],
+            "UpdateSource": [
+              "update_source"
+            ],
+            "UpdateSecurityMarks": [
+              "update_security_marks"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
