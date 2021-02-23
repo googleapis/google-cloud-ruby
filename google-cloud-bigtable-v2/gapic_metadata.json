@@ -1,0 +1,36 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.bigtable.v2",
+  "libraryPackage": "::Google::Cloud::Bigtable::V2",
+  "services": {
+    "Bigtable": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Bigtable::V2::Bigtable::Client",
+          "methods": {
+            "ReadRows": [
+              "read_rows"
+            ],
+            "SampleRowKeys": [
+              "sample_row_keys"
+            ],
+            "MutateRow": [
+              "mutate_row"
+            ],
+            "MutateRows": [
+              "mutate_rows"
+            ],
+            "CheckAndMutateRow": [
+              "check_and_mutate_row"
+            ],
+            "ReadModifyWriteRow": [
+              "read_modify_write_row"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
