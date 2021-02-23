@@ -1,0 +1,171 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.talent.v4beta1",
+  "libraryPackage": "::Google::Cloud::Talent::V4beta1",
+  "services": {
+    "ApplicationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Talent::V4beta1::ApplicationService::Client",
+          "methods": {
+            "CreateApplication": [
+              "create_application"
+            ],
+            "GetApplication": [
+              "get_application"
+            ],
+            "UpdateApplication": [
+              "update_application"
+            ],
+            "DeleteApplication": [
+              "delete_application"
+            ],
+            "ListApplications": [
+              "list_applications"
+            ]
+          }
+        }
+      }
+    },
+    "CompanyService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Talent::V4beta1::CompanyService::Client",
+          "methods": {
+            "CreateCompany": [
+              "create_company"
+            ],
+            "GetCompany": [
+              "get_company"
+            ],
+            "UpdateCompany": [
+              "update_company"
+            ],
+            "DeleteCompany": [
+              "delete_company"
+            ],
+            "ListCompanies": [
+              "list_companies"
+            ]
+          }
+        }
+      }
+    },
+    "Completion": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Talent::V4beta1::Completion::Client",
+          "methods": {
+            "CompleteQuery": [
+              "complete_query"
+            ]
+          }
+        }
+      }
+    },
+    "EventService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Talent::V4beta1::EventService::Client",
+          "methods": {
+            "CreateClientEvent": [
+              "create_client_event"
+            ]
+          }
+        }
+      }
+    },
+    "JobService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Talent::V4beta1::JobService::Client",
+          "methods": {
+            "CreateJob": [
+              "create_job"
+            ],
+            "BatchCreateJobs": [
+              "batch_create_jobs"
+            ],
+            "GetJob": [
+              "get_job"
+            ],
+            "UpdateJob": [
+              "update_job"
+            ],
+            "BatchUpdateJobs": [
+              "batch_update_jobs"
+            ],
+            "DeleteJob": [
+              "delete_job"
+            ],
+            "BatchDeleteJobs": [
+              "batch_delete_jobs"
+            ],
+            "ListJobs": [
+              "list_jobs"
+            ],
+            "SearchJobs": [
+              "search_jobs"
+            ],
+            "SearchJobsForAlert": [
+              "search_jobs_for_alert"
+            ]
+          }
+        }
+      }
+    },
+    "ProfileService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Talent::V4beta1::ProfileService::Client",
+          "methods": {
+            "ListProfiles": [
+              "list_profiles"
+            ],
+            "CreateProfile": [
+              "create_profile"
+            ],
+            "GetProfile": [
+              "get_profile"
+            ],
+            "UpdateProfile": [
+              "update_profile"
+            ],
+            "DeleteProfile": [
+              "delete_profile"
+            ],
+            "SearchProfiles": [
+              "search_profiles"
+            ]
+          }
+        }
+      }
+    },
+    "TenantService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Talent::V4beta1::TenantService::Client",
+          "methods": {
+            "CreateTenant": [
+              "create_tenant"
+            ],
+            "GetTenant": [
+              "get_tenant"
+            ],
+            "UpdateTenant": [
+              "update_tenant"
+            ],
+            "DeleteTenant": [
+              "delete_tenant"
+            ],
+            "ListTenants": [
+              "list_tenants"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
