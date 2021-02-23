@@ -1,0 +1,90 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.recommendationengine.v1beta1",
+  "libraryPackage": "::Google::Cloud::RecommendationEngine::V1beta1",
+  "services": {
+    "CatalogService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client",
+          "methods": {
+            "CreateCatalogItem": [
+              "create_catalog_item"
+            ],
+            "GetCatalogItem": [
+              "get_catalog_item"
+            ],
+            "ListCatalogItems": [
+              "list_catalog_items"
+            ],
+            "UpdateCatalogItem": [
+              "update_catalog_item"
+            ],
+            "DeleteCatalogItem": [
+              "delete_catalog_item"
+            ],
+            "ImportCatalogItems": [
+              "import_catalog_items"
+            ]
+          }
+        }
+      }
+    },
+    "PredictionApiKeyRegistry": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client",
+          "methods": {
+            "CreatePredictionApiKeyRegistration": [
+              "create_prediction_api_key_registration"
+            ],
+            "ListPredictionApiKeyRegistrations": [
+              "list_prediction_api_key_registrations"
+            ],
+            "DeletePredictionApiKeyRegistration": [
+              "delete_prediction_api_key_registration"
+            ]
+          }
+        }
+      }
+    },
+    "PredictionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::RecommendationEngine::V1beta1::PredictionService::Client",
+          "methods": {
+            "Predict": [
+              "predict"
+            ]
+          }
+        }
+      }
+    },
+    "UserEventService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client",
+          "methods": {
+            "WriteUserEvent": [
+              "write_user_event"
+            ],
+            "CollectUserEvent": [
+              "collect_user_event"
+            ],
+            "ListUserEvents": [
+              "list_user_events"
+            ],
+            "PurgeUserEvents": [
+              "purge_user_events"
+            ],
+            "ImportUserEvents": [
+              "import_user_events"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
