@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "fb88a03f382654b2e7e6fe2223fb6f234b61f9a7"
+        "sha": "c830c7d6f7b45ddb90cafc77707b1ecf323e600b"
       }
     },
     {
@@ -38,6 +38,7 @@
     "LICENSE.md",
     "README.md",
     "Rakefile",
+    "gapic_metadata.json",
     "google-cloud-domains-v1beta1.gemspec",
     "lib/google-cloud-domains-v1beta1.rb",
     "lib/google/cloud/domains/v1beta1.rb",
