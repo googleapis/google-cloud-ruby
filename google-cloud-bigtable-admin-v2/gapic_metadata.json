@@ -1,0 +1,150 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.bigtable.admin.v2",
+  "libraryPackage": "::Google::Cloud::Bigtable::Admin::V2",
+  "services": {
+    "BigtableInstanceAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client",
+          "methods": {
+            "CreateInstance": [
+              "create_instance"
+            ],
+            "GetInstance": [
+              "get_instance"
+            ],
+            "ListInstances": [
+              "list_instances"
+            ],
+            "UpdateInstance": [
+              "update_instance"
+            ],
+            "PartialUpdateInstance": [
+              "partial_update_instance"
+            ],
+            "DeleteInstance": [
+              "delete_instance"
+            ],
+            "CreateCluster": [
+              "create_cluster"
+            ],
+            "GetCluster": [
+              "get_cluster"
+            ],
+            "ListClusters": [
+              "list_clusters"
+            ],
+            "UpdateCluster": [
+              "update_cluster"
+            ],
+            "DeleteCluster": [
+              "delete_cluster"
+            ],
+            "CreateAppProfile": [
+              "create_app_profile"
+            ],
+            "GetAppProfile": [
+              "get_app_profile"
+            ],
+            "ListAppProfiles": [
+              "list_app_profiles"
+            ],
+            "UpdateAppProfile": [
+              "update_app_profile"
+            ],
+            "DeleteAppProfile": [
+              "delete_app_profile"
+            ],
+            "GetIamPolicy": [
+              "get_iam_policy"
+            ],
+            "SetIamPolicy": [
+              "set_iam_policy"
+            ],
+            "TestIamPermissions": [
+              "test_iam_permissions"
+            ]
+          }
+        }
+      }
+    },
+    "BigtableTableAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client",
+          "methods": {
+            "CreateTable": [
+              "create_table"
+            ],
+            "CreateTableFromSnapshot": [
+              "create_table_from_snapshot"
+            ],
+            "ListTables": [
+              "list_tables"
+            ],
+            "GetTable": [
+              "get_table"
+            ],
+            "DeleteTable": [
+              "delete_table"
+            ],
+            "ModifyColumnFamilies": [
+              "modify_column_families"
+            ],
+            "DropRowRange": [
+              "drop_row_range"
+            ],
+            "GenerateConsistencyToken": [
+              "generate_consistency_token"
+            ],
+            "CheckConsistency": [
+              "check_consistency"
+            ],
+            "SnapshotTable": [
+              "snapshot_table"
+            ],
+            "GetSnapshot": [
+              "get_snapshot"
+            ],
+            "ListSnapshots": [
+              "list_snapshots"
+            ],
+            "DeleteSnapshot": [
+              "delete_snapshot"
+            ],
+            "CreateBackup": [
+              "create_backup"
+            ],
+            "GetBackup": [
+              "get_backup"
+            ],
+            "UpdateBackup": [
+              "update_backup"
+            ],
+            "DeleteBackup": [
+              "delete_backup"
+            ],
+            "ListBackups": [
+              "list_backups"
+            ],
+            "RestoreTable": [
+              "restore_table"
+            ],
+            "GetIamPolicy": [
+              "get_iam_policy"
+            ],
+            "SetIamPolicy": [
+              "set_iam_policy"
+            ],
+            "TestIamPermissions": [
+              "test_iam_permissions"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
