@@ -30,7 +30,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Google Cloud Memorystore for Memcached",
         "ruby-cloud-description": "Google Cloud Memorystore for Memcached API is used for creating and managing Memcached instances in GCP.",
         "ruby-cloud-env-prefix": "MEMCACHE",
-        "ruby-cloud-wrapper-of": "v1beta2:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.0;v1beta2:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/memorystore/docs/memcached/",
         "ruby-cloud-api-id": "memcache.googleapis.com",
         "ruby-cloud-api-shortname": "memcache",
