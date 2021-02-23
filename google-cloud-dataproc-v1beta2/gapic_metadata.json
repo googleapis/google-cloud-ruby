@@ -1,0 +1,120 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.dataproc.v1beta2",
+  "libraryPackage": "::Google::Cloud::Dataproc::V1beta2",
+  "services": {
+    "AutoscalingPolicyService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client",
+          "methods": {
+            "CreateAutoscalingPolicy": [
+              "create_autoscaling_policy"
+            ],
+            "UpdateAutoscalingPolicy": [
+              "update_autoscaling_policy"
+            ],
+            "GetAutoscalingPolicy": [
+              "get_autoscaling_policy"
+            ],
+            "ListAutoscalingPolicies": [
+              "list_autoscaling_policies"
+            ],
+            "DeleteAutoscalingPolicy": [
+              "delete_autoscaling_policy"
+            ]
+          }
+        }
+      }
+    },
+    "ClusterController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataproc::V1beta2::ClusterController::Client",
+          "methods": {
+            "CreateCluster": [
+              "create_cluster"
+            ],
+            "UpdateCluster": [
+              "update_cluster"
+            ],
+            "DeleteCluster": [
+              "delete_cluster"
+            ],
+            "GetCluster": [
+              "get_cluster"
+            ],
+            "ListClusters": [
+              "list_clusters"
+            ],
+            "DiagnoseCluster": [
+              "diagnose_cluster"
+            ]
+          }
+        }
+      }
+    },
+    "JobController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataproc::V1beta2::JobController::Client",
+          "methods": {
+            "SubmitJob": [
+              "submit_job"
+            ],
+            "SubmitJobAsOperation": [
+              "submit_job_as_operation"
+            ],
+            "GetJob": [
+              "get_job"
+            ],
+            "ListJobs": [
+              "list_jobs"
+            ],
+            "UpdateJob": [
+              "update_job"
+            ],
+            "CancelJob": [
+              "cancel_job"
+            ],
+            "DeleteJob": [
+              "delete_job"
+            ]
+          }
+        }
+      }
+    },
+    "WorkflowTemplateService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client",
+          "methods": {
+            "CreateWorkflowTemplate": [
+              "create_workflow_template"
+            ],
+            "GetWorkflowTemplate": [
+              "get_workflow_template"
+            ],
+            "InstantiateWorkflowTemplate": [
+              "instantiate_workflow_template"
+            ],
+            "InstantiateInlineWorkflowTemplate": [
+              "instantiate_inline_workflow_template"
+            ],
+            "UpdateWorkflowTemplate": [
+              "update_workflow_template"
+            ],
+            "ListWorkflowTemplates": [
+              "list_workflow_templates"
+            ],
+            "DeleteWorkflowTemplate": [
+              "delete_workflow_template"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
