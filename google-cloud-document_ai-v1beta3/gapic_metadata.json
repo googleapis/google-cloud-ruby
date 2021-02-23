@@ -1,0 +1,27 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.documentai.v1beta3",
+  "libraryPackage": "::Google::Cloud::DocumentAI::V1beta3",
+  "services": {
+    "DocumentProcessorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client",
+          "methods": {
+            "ProcessDocument": [
+              "process_document"
+            ],
+            "BatchProcessDocuments": [
+              "batch_process_documents"
+            ],
+            "ReviewDocument": [
+              "review_document"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
