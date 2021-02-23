@@ -1,0 +1,63 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.secrets.v1beta1",
+  "libraryPackage": "::Google::Cloud::SecretManager::V1beta1",
+  "services": {
+    "SecretManagerService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client",
+          "methods": {
+            "ListSecrets": [
+              "list_secrets"
+            ],
+            "CreateSecret": [
+              "create_secret"
+            ],
+            "AddSecretVersion": [
+              "add_secret_version"
+            ],
+            "GetSecret": [
+              "get_secret"
+            ],
+            "UpdateSecret": [
+              "update_secret"
+            ],
+            "DeleteSecret": [
+              "delete_secret"
+            ],
+            "ListSecretVersions": [
+              "list_secret_versions"
+            ],
+            "GetSecretVersion": [
+              "get_secret_version"
+            ],
+            "AccessSecretVersion": [
+              "access_secret_version"
+            ],
+            "DisableSecretVersion": [
+              "disable_secret_version"
+            ],
+            "EnableSecretVersion": [
+              "enable_secret_version"
+            ],
+            "DestroySecretVersion": [
+              "destroy_secret_version"
+            ],
+            "SetIamPolicy": [
+              "set_iam_policy"
+            ],
+            "GetIamPolicy": [
+              "get_iam_policy"
+            ],
+            "TestIamPermissions": [
+              "test_iam_permissions"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
