@@ -1,0 +1,39 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.datastore.v1",
+  "libraryPackage": "::Google::Cloud::Datastore::V1",
+  "services": {
+    "Datastore": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Datastore::V1::Datastore::Client",
+          "methods": {
+            "Lookup": [
+              "lookup"
+            ],
+            "RunQuery": [
+              "run_query"
+            ],
+            "BeginTransaction": [
+              "begin_transaction"
+            ],
+            "Commit": [
+              "commit"
+            ],
+            "Rollback": [
+              "rollback"
+            ],
+            "AllocateIds": [
+              "allocate_ids"
+            ],
+            "ReserveIds": [
+              "reserve_ids"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
