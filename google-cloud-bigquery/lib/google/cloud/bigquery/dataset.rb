@@ -2839,6 +2839,12 @@ module Google
 
           ##
           # @raise [RuntimeError] not implemented
+          def create_materialized_view(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
           def table(*)
             raise "not implemented in #{self.class}"
           end

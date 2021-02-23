@@ -18,11 +18,13 @@ require "uri"
 
 describe Google::Cloud::Bigquery::Table, :materialized_view, :mock_bigquery do
   # Create a materialized_view object with the project's mocked connection object
-  let(:dataset) { "my_dataset" }
+  let(:dataset_id) { "my_dataset" }
   let(:table_id) { "my_materialized_view" }
   let(:table_name) { "My Materialized View" }
   let(:description) { "This is my materialized view" }
-  let(:materialized_view_hash) { random_materialized_view_hash dataset, table_id, table_name, description }
+  let(:etag) { "etag123456789" }
+  let(:query) { "SELECT name, age, score, active FROM `external.publicdata.users`" }
+  let(:materialized_view_hash) { random_materialized_view_hash dataset_id, table_id, table_name, description }
   let(:materialized_view_gapi) { Google::Apis::BigqueryV2::Table.from_json materialized_view_hash.to_json }
   let(:materialized_view) { Google::Cloud::Bigquery::Table.from_gapi materialized_view_gapi,
                                                 bigquery.service }
@@ -36,7 +38,95 @@ describe Google::Cloud::Bigquery::Table, :materialized_view, :mock_bigquery do
     _(materialized_view.materialized_view?).must_equal true
     _(materialized_view.enable_refresh?).must_equal true
     _(materialized_view.last_refresh_time).must_be_close_to ::Time.now, 1
-    _(materialized_view.query).must_equal "SELECT name, age, score, active FROM `external.publicdata.users`"
+    _(materialized_view.query).must_equal query
     _(materialized_view.refresh_interval_ms).must_equal 3600000
+  end
+
+  it "updates enable_refresh" do
+    new_enable_refresh = false
+    mock = Minitest::Mock.new
+    returned_table_gapi = materialized_view_gapi.dup
+    returned_table_gapi.materialized_view.enable_refresh = new_enable_refresh
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(
+      etag: etag,
+      materialized_view: Google::Apis::BigqueryV2::MaterializedViewDefinition.new(
+        enable_refresh: new_enable_refresh
+      )
+    )
+    mock.expect :patch_table, returned_table_gapi, [project, dataset_id, table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
+    mock.expect :get_table, returned_table_gapi, [project, dataset_id, table_id]
+    materialized_view.service.mocked_service = mock
+
+    materialized_view.enable_refresh = new_enable_refresh
+
+    mock.verify
+
+    _(materialized_view.enable_refresh?).must_equal new_enable_refresh
+  end
+
+  it "updates refresh_interval_ms" do
+    new_refresh_interval_ms = 7200000
+    mock = Minitest::Mock.new
+    returned_table_gapi = materialized_view_gapi.dup
+    returned_table_gapi.materialized_view.refresh_interval_ms = new_refresh_interval_ms
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(
+      etag: etag,
+      materialized_view: Google::Apis::BigqueryV2::MaterializedViewDefinition.new(
+        refresh_interval_ms: new_refresh_interval_ms
+      )
+    )
+    mock.expect :patch_table, returned_table_gapi, [project, dataset_id, table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
+    mock.expect :get_table, returned_table_gapi, [project, dataset_id, table_id]
+    materialized_view.service.mocked_service = mock
+
+    materialized_view.refresh_interval_ms = new_refresh_interval_ms
+
+    mock.verify
+
+    _(materialized_view.refresh_interval_ms).must_equal new_refresh_interval_ms
+  end
+
+  it "updates query with query=" do
+    new_query = "SELECT name, age, score, active FROM `external.publicdata.users` LIMIT 10"
+    mock = Minitest::Mock.new
+    returned_table_gapi = materialized_view_gapi.dup
+    returned_table_gapi.materialized_view.query = new_query
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(
+      etag: etag,
+      materialized_view: Google::Apis::BigqueryV2::MaterializedViewDefinition.new(
+        query: new_query
+      )
+    )
+    mock.expect :patch_table, returned_table_gapi, [project, dataset_id, table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
+    mock.expect :get_table, returned_table_gapi, [project, dataset_id, table_id]
+    materialized_view.service.mocked_service = mock
+
+    materialized_view.query = new_query
+
+    mock.verify
+
+    _(materialized_view.query).must_equal new_query
+  end
+
+  it "updates query with set_query" do
+    new_query = "SELECT name, age, score, active FROM `external.publicdata.users` LIMIT 10"
+    mock = Minitest::Mock.new
+    returned_table_gapi = materialized_view_gapi.dup
+    returned_table_gapi.materialized_view.query = new_query
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(
+      etag: etag,
+      materialized_view: Google::Apis::BigqueryV2::MaterializedViewDefinition.new(
+        query: new_query
+      )
+    )
+    mock.expect :patch_table, returned_table_gapi, [project, dataset_id, table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
+    mock.expect :get_table, returned_table_gapi, [project, dataset_id, table_id]
+    materialized_view.service.mocked_service = mock
+
+    materialized_view.set_query new_query
+
+    mock.verify
+
+    _(materialized_view.query).must_equal new_query
   end
 end
