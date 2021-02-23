@@ -1,0 +1,114 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.container.v1",
+  "libraryPackage": "::Google::Cloud::Container::V1",
+  "services": {
+    "ClusterManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Container::V1::ClusterManager::Client",
+          "methods": {
+            "ListClusters": [
+              "list_clusters"
+            ],
+            "GetCluster": [
+              "get_cluster"
+            ],
+            "CreateCluster": [
+              "create_cluster"
+            ],
+            "UpdateCluster": [
+              "update_cluster"
+            ],
+            "UpdateNodePool": [
+              "update_node_pool"
+            ],
+            "SetNodePoolAutoscaling": [
+              "set_node_pool_autoscaling"
+            ],
+            "SetLoggingService": [
+              "set_logging_service"
+            ],
+            "SetMonitoringService": [
+              "set_monitoring_service"
+            ],
+            "SetAddonsConfig": [
+              "set_addons_config"
+            ],
+            "SetLocations": [
+              "set_locations"
+            ],
+            "UpdateMaster": [
+              "update_master"
+            ],
+            "SetMasterAuth": [
+              "set_master_auth"
+            ],
+            "DeleteCluster": [
+              "delete_cluster"
+            ],
+            "ListOperations": [
+              "list_operations"
+            ],
+            "GetOperation": [
+              "get_operation"
+            ],
+            "CancelOperation": [
+              "cancel_operation"
+            ],
+            "GetServerConfig": [
+              "get_server_config"
+            ],
+            "GetJSONWebKeys": [
+              "get_json_web_keys"
+            ],
+            "ListNodePools": [
+              "list_node_pools"
+            ],
+            "GetNodePool": [
+              "get_node_pool"
+            ],
+            "CreateNodePool": [
+              "create_node_pool"
+            ],
+            "DeleteNodePool": [
+              "delete_node_pool"
+            ],
+            "RollbackNodePoolUpgrade": [
+              "rollback_node_pool_upgrade"
+            ],
+            "SetNodePoolManagement": [
+              "set_node_pool_management"
+            ],
+            "SetLabels": [
+              "set_labels"
+            ],
+            "SetLegacyAbac": [
+              "set_legacy_abac"
+            ],
+            "StartIPRotation": [
+              "start_ip_rotation"
+            ],
+            "CompleteIPRotation": [
+              "complete_ip_rotation"
+            ],
+            "SetNodePoolSize": [
+              "set_node_pool_size"
+            ],
+            "SetNetworkPolicy": [
+              "set_network_policy"
+            ],
+            "SetMaintenancePolicy": [
+              "set_maintenance_policy"
+            ],
+            "ListUsableSubnetworks": [
+              "list_usable_subnetworks"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
