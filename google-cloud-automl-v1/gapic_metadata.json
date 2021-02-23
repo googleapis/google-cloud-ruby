@@ -1,0 +1,87 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.automl.v1",
+  "libraryPackage": "::Google::Cloud::AutoML::V1",
+  "services": {
+    "PredictionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AutoML::V1::PredictionService::Client",
+          "methods": {
+            "Predict": [
+              "predict"
+            ],
+            "BatchPredict": [
+              "batch_predict"
+            ]
+          }
+        }
+      }
+    },
+    "AutoMl": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AutoML::V1::AutoML::Client",
+          "methods": {
+            "CreateDataset": [
+              "create_dataset"
+            ],
+            "GetDataset": [
+              "get_dataset"
+            ],
+            "ListDatasets": [
+              "list_datasets"
+            ],
+            "UpdateDataset": [
+              "update_dataset"
+            ],
+            "DeleteDataset": [
+              "delete_dataset"
+            ],
+            "ImportData": [
+              "import_data"
+            ],
+            "ExportData": [
+              "export_data"
+            ],
+            "GetAnnotationSpec": [
+              "get_annotation_spec"
+            ],
+            "CreateModel": [
+              "create_model"
+            ],
+            "GetModel": [
+              "get_model"
+            ],
+            "ListModels": [
+              "list_models"
+            ],
+            "DeleteModel": [
+              "delete_model"
+            ],
+            "UpdateModel": [
+              "update_model"
+            ],
+            "DeployModel": [
+              "deploy_model"
+            ],
+            "UndeployModel": [
+              "undeploy_model"
+            ],
+            "ExportModel": [
+              "export_model"
+            ],
+            "GetModelEvaluation": [
+              "get_model_evaluation"
+            ],
+            "ListModelEvaluations": [
+              "list_model_evaluations"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
