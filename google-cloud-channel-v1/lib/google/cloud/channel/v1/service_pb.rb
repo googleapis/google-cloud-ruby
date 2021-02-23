@@ -122,7 +122,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.channel.v1.CreateChannelPartnerLinkRequest" do
       optional :parent, :string, 1
       optional :channel_partner_link, :message, 2, "google.cloud.channel.v1.ChannelPartnerLink"
-      optional :domain, :string, 3
     end
     add_message "google.cloud.channel.v1.UpdateChannelPartnerLinkRequest" do
       optional :name, :string, 1

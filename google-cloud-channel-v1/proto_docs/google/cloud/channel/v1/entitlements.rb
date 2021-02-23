@@ -203,12 +203,6 @@ module Google
         # TransferableSku represents information a reseller needs to view existing
         # provisioned services for a customer that they do not own.
         # Read-only.
-        # @!attribute [rw] is_commitment
-        #   @return [::Google::Protobuf::BoolValue]
-        #     Whether a transferable SKU is commitment-based or not.
-        # @!attribute [rw] commitment_end_timestamp
-        #   @return [::Google::Protobuf::Timestamp]
-        #     Commitment end timestamp.
         # @!attribute [rw] transfer_eligibility
         #   @return [::Google::Cloud::Channel::V1::TransferEligibility]
         #     Describes the transfer eligibility of a SKU.
