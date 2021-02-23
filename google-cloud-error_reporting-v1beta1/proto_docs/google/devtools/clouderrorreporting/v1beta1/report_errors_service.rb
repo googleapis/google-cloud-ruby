@@ -25,10 +25,11 @@ module Google
         # @!attribute [rw] project_name
         #   @return [::String]
         #     Required. The resource name of the Google Cloud Platform project. Written
-        #     as `projects/` plus the
+        #     as `projects/{projectId}`, where `{projectId}` is the
         #     [Google Cloud Platform project
-        #     ID](https://support.google.com/cloud/answer/6158840). Example:
-        #     `projects/my-project-123`.
+        #     ID](https://support.google.com/cloud/answer/6158840).
+        #
+        #     Example: // `projects/my-project-123`.
         # @!attribute [rw] event
         #   @return [::Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent]
         #     Required. The error event to be reported.

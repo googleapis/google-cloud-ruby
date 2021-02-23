@@ -153,7 +153,7 @@ module Google
             # Service calls
 
             ##
-            # Report an individual error event.
+            # Report an individual error event and record the event to a log.
             #
             # This endpoint accepts **either** an OAuth token,
             # **or** an [API key](https://support.google.com/cloud/answer/6158862)
@@ -161,7 +161,15 @@ module Google
             # a `key` parameter. For example:
             #
             # `POST
-            # https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456`
+            # https://clouderrorreporting.googleapis.com/v1beta1/\\{projectName}/events:report?key=123ABC456`
+            #
+            # **Note:** [Error Reporting](/error-reporting) is a global service built
+            # on Cloud Logging and doesn't analyze logs stored
+            # in regional log buckets or logs routed to other Google Cloud projects.
+            #
+            # For more information, see
+            # [Using Error Reporting with regionalized
+            # logs](/error-reporting/docs/regionalization).
             #
             # @overload report_error_event(request, options = nil)
             #   Pass arguments to `report_error_event` via a request object, either of type
@@ -180,10 +188,11 @@ module Google
             #
             #   @param project_name [::String]
             #     Required. The resource name of the Google Cloud Platform project. Written
-            #     as `projects/` plus the
+            #     as `projects/{projectId}`, where `{projectId}` is the
             #     [Google Cloud Platform project
-            #     ID](https://support.google.com/cloud/answer/6158840). Example:
-            #     `projects/my-project-123`.
+            #     ID](https://support.google.com/cloud/answer/6158840).
+            #
+            #     Example: // `projects/my-project-123`.
             #   @param event [::Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent, ::Hash]
             #     Required. The error event to be reported.
             #

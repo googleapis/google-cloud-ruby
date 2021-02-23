@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The group resource name.
-        #     Example: <code>projects/my-project-123/groups/my-groupid</code>
+        #     Example: <code>projects/my-project-123/groups/CNSgkpnppqKCUw</code>
         # @!attribute [rw] group_id
         #   @return [::String]
         #     Group IDs are unique for a given project. If the same kind of error
@@ -33,6 +33,10 @@ module Google
         # @!attribute [rw] tracking_issues
         #   @return [::Array<::Google::Cloud::ErrorReporting::V1beta1::TrackingIssue>]
         #     Associated tracking issues.
+        # @!attribute [rw] resolution_status
+        #   @return [::Google::Cloud::ErrorReporting::V1beta1::ResolutionStatus]
+        #     Error group's resolution status.
+        #     An unspecified resolution status will be interpreted as OPEN
         class ErrorGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -176,6 +180,27 @@ module Google
         class SourceLocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Resolution status of an error group.
+        module ResolutionStatus
+          # Status is unknown. When left unspecified in requests, it is treated like
+          # OPEN.
+          RESOLUTION_STATUS_UNSPECIFIED = 0
+
+          # The error group is not being addressed. This is the default for
+          # new groups. It is also used for errors re-occurring after marked RESOLVED.
+          OPEN = 1
+
+          # Error Group manually acknowledged, it can have an issue link attached.
+          ACKNOWLEDGED = 2
+
+          # Error Group manually resolved, more events for this group are not expected
+          # to occur.
+          RESOLVED = 3
+
+          # The error group is muted and excluded by default on group stats requests.
+          MUTED = 4
         end
       end
     end
