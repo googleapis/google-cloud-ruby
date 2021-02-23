@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.1 / 2021-02-23
+
+#### Documentation
+
+* Replace "whitelist" with "allowlist" in generated documentation
+
 ### 0.2.0 / 2021-02-02
 
 #### Features
