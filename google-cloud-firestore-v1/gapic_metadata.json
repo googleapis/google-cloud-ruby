@@ -1,0 +1,63 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.firestore.v1",
+  "libraryPackage": "::Google::Cloud::Firestore::V1",
+  "services": {
+    "Firestore": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Firestore::V1::Firestore::Client",
+          "methods": {
+            "GetDocument": [
+              "get_document"
+            ],
+            "ListDocuments": [
+              "list_documents"
+            ],
+            "UpdateDocument": [
+              "update_document"
+            ],
+            "DeleteDocument": [
+              "delete_document"
+            ],
+            "BatchGetDocuments": [
+              "batch_get_documents"
+            ],
+            "BeginTransaction": [
+              "begin_transaction"
+            ],
+            "Commit": [
+              "commit"
+            ],
+            "Rollback": [
+              "rollback"
+            ],
+            "RunQuery": [
+              "run_query"
+            ],
+            "PartitionQuery": [
+              "partition_query"
+            ],
+            "Write": [
+              "write"
+            ],
+            "Listen": [
+              "listen"
+            ],
+            "ListCollectionIds": [
+              "list_collection_ids"
+            ],
+            "BatchWrite": [
+              "batch_write"
+            ],
+            "CreateDocument": [
+              "create_document"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
