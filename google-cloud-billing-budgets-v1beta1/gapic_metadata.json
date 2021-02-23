@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.billing.budgets.v1beta1",
+  "libraryPackage": "::Google::Cloud::Billing::Budgets::V1beta1",
+  "services": {
+    "BudgetService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client",
+          "methods": {
+            "CreateBudget": [
+              "create_budget"
+            ],
+            "UpdateBudget": [
+              "update_budget"
+            ],
+            "GetBudget": [
+              "get_budget"
+            ],
+            "ListBudgets": [
+              "list_budgets"
+            ],
+            "DeleteBudget": [
+              "delete_budget"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
