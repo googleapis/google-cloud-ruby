@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.workflows.v1beta",
+  "libraryPackage": "::Google::Cloud::Workflows::V1beta",
+  "services": {
+    "Workflows": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Workflows::V1beta::Workflows::Client",
+          "methods": {
+            "ListWorkflows": [
+              "list_workflows"
+            ],
+            "GetWorkflow": [
+              "get_workflow"
+            ],
+            "CreateWorkflow": [
+              "create_workflow"
+            ],
+            "DeleteWorkflow": [
+              "delete_workflow"
+            ],
+            "UpdateWorkflow": [
+              "update_workflow"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
