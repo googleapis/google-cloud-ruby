@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2021-02-22
+
+#### Features
+
+* Support for model adaptation
+
 ### 0.4.0 / 2021-02-03
 
 #### Features
