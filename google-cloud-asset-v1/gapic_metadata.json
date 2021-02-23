@@ -1,0 +1,51 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.asset.v1",
+  "libraryPackage": "::Google::Cloud::Asset::V1",
+  "services": {
+    "AssetService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Asset::V1::AssetService::Client",
+          "methods": {
+            "ExportAssets": [
+              "export_assets"
+            ],
+            "BatchGetAssetsHistory": [
+              "batch_get_assets_history"
+            ],
+            "CreateFeed": [
+              "create_feed"
+            ],
+            "GetFeed": [
+              "get_feed"
+            ],
+            "ListFeeds": [
+              "list_feeds"
+            ],
+            "UpdateFeed": [
+              "update_feed"
+            ],
+            "DeleteFeed": [
+              "delete_feed"
+            ],
+            "SearchAllResources": [
+              "search_all_resources"
+            ],
+            "SearchAllIamPolicies": [
+              "search_all_iam_policies"
+            ],
+            "AnalyzeIamPolicy": [
+              "analyze_iam_policy"
+            ],
+            "AnalyzeIamPolicyLongrunning": [
+              "analyze_iam_policy_longrunning"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
