@@ -1,0 +1,99 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.datacatalog.v1",
+  "libraryPackage": "::Google::Cloud::DataCatalog::V1",
+  "services": {
+    "DataCatalog": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client",
+          "methods": {
+            "SearchCatalog": [
+              "search_catalog"
+            ],
+            "CreateEntryGroup": [
+              "create_entry_group"
+            ],
+            "GetEntryGroup": [
+              "get_entry_group"
+            ],
+            "UpdateEntryGroup": [
+              "update_entry_group"
+            ],
+            "DeleteEntryGroup": [
+              "delete_entry_group"
+            ],
+            "ListEntryGroups": [
+              "list_entry_groups"
+            ],
+            "CreateEntry": [
+              "create_entry"
+            ],
+            "UpdateEntry": [
+              "update_entry"
+            ],
+            "DeleteEntry": [
+              "delete_entry"
+            ],
+            "GetEntry": [
+              "get_entry"
+            ],
+            "LookupEntry": [
+              "lookup_entry"
+            ],
+            "ListEntries": [
+              "list_entries"
+            ],
+            "CreateTagTemplate": [
+              "create_tag_template"
+            ],
+            "GetTagTemplate": [
+              "get_tag_template"
+            ],
+            "UpdateTagTemplate": [
+              "update_tag_template"
+            ],
+            "DeleteTagTemplate": [
+              "delete_tag_template"
+            ],
+            "CreateTagTemplateField": [
+              "create_tag_template_field"
+            ],
+            "UpdateTagTemplateField": [
+              "update_tag_template_field"
+            ],
+            "RenameTagTemplateField": [
+              "rename_tag_template_field"
+            ],
+            "DeleteTagTemplateField": [
+              "delete_tag_template_field"
+            ],
+            "CreateTag": [
+              "create_tag"
+            ],
+            "UpdateTag": [
+              "update_tag"
+            ],
+            "DeleteTag": [
+              "delete_tag"
+            ],
+            "ListTags": [
+              "list_tags"
+            ],
+            "SetIamPolicy": [
+              "set_iam_policy"
+            ],
+            "GetIamPolicy": [
+              "get_iam_policy"
+            ],
+            "TestIamPermissions": [
+              "test_iam_permissions"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
