@@ -1,0 +1,84 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.servicedirectory.v1beta1",
+  "libraryPackage": "::Google::Cloud::ServiceDirectory::V1beta1",
+  "services": {
+    "LookupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client",
+          "methods": {
+            "ResolveService": [
+              "resolve_service"
+            ]
+          }
+        }
+      }
+    },
+    "RegistrationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client",
+          "methods": {
+            "CreateNamespace": [
+              "create_namespace"
+            ],
+            "ListNamespaces": [
+              "list_namespaces"
+            ],
+            "GetNamespace": [
+              "get_namespace"
+            ],
+            "UpdateNamespace": [
+              "update_namespace"
+            ],
+            "DeleteNamespace": [
+              "delete_namespace"
+            ],
+            "CreateService": [
+              "create_service"
+            ],
+            "ListServices": [
+              "list_services"
+            ],
+            "GetService": [
+              "get_service"
+            ],
+            "UpdateService": [
+              "update_service"
+            ],
+            "DeleteService": [
+              "delete_service"
+            ],
+            "CreateEndpoint": [
+              "create_endpoint"
+            ],
+            "ListEndpoints": [
+              "list_endpoints"
+            ],
+            "GetEndpoint": [
+              "get_endpoint"
+            ],
+            "UpdateEndpoint": [
+              "update_endpoint"
+            ],
+            "DeleteEndpoint": [
+              "delete_endpoint"
+            ],
+            "GetIamPolicy": [
+              "get_iam_policy"
+            ],
+            "SetIamPolicy": [
+              "set_iam_policy"
+            ],
+            "TestIamPermissions": [
+              "test_iam_permissions"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
