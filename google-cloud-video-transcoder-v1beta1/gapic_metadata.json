@@ -1,0 +1,42 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.video.transcoder.v1beta1",
+  "libraryPackage": "::Google::Cloud::Video::Transcoder::V1beta1",
+  "services": {
+    "TranscoderService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::Client",
+          "methods": {
+            "CreateJob": [
+              "create_job"
+            ],
+            "ListJobs": [
+              "list_jobs"
+            ],
+            "GetJob": [
+              "get_job"
+            ],
+            "DeleteJob": [
+              "delete_job"
+            ],
+            "CreateJobTemplate": [
+              "create_job_template"
+            ],
+            "ListJobTemplates": [
+              "list_job_templates"
+            ],
+            "GetJobTemplate": [
+              "get_job_template"
+            ],
+            "DeleteJobTemplate": [
+              "delete_job_template"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
