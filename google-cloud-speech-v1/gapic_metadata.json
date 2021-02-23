@@ -1,0 +1,27 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.speech.v1",
+  "libraryPackage": "::Google::Cloud::Speech::V1",
+  "services": {
+    "Speech": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Speech::V1::Speech::Client",
+          "methods": {
+            "Recognize": [
+              "recognize"
+            ],
+            "LongRunningRecognize": [
+              "long_running_recognize"
+            ],
+            "StreamingRecognize": [
+              "streaming_recognize"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
