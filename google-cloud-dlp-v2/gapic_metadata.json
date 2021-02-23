@@ -1,0 +1,120 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.privacy.dlp.v2",
+  "libraryPackage": "::Google::Cloud::Dlp::V2",
+  "services": {
+    "DlpService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dlp::V2::DlpService::Client",
+          "methods": {
+            "InspectContent": [
+              "inspect_content"
+            ],
+            "RedactImage": [
+              "redact_image"
+            ],
+            "DeidentifyContent": [
+              "deidentify_content"
+            ],
+            "ReidentifyContent": [
+              "reidentify_content"
+            ],
+            "ListInfoTypes": [
+              "list_info_types"
+            ],
+            "CreateInspectTemplate": [
+              "create_inspect_template"
+            ],
+            "UpdateInspectTemplate": [
+              "update_inspect_template"
+            ],
+            "GetInspectTemplate": [
+              "get_inspect_template"
+            ],
+            "ListInspectTemplates": [
+              "list_inspect_templates"
+            ],
+            "DeleteInspectTemplate": [
+              "delete_inspect_template"
+            ],
+            "CreateDeidentifyTemplate": [
+              "create_deidentify_template"
+            ],
+            "UpdateDeidentifyTemplate": [
+              "update_deidentify_template"
+            ],
+            "GetDeidentifyTemplate": [
+              "get_deidentify_template"
+            ],
+            "ListDeidentifyTemplates": [
+              "list_deidentify_templates"
+            ],
+            "DeleteDeidentifyTemplate": [
+              "delete_deidentify_template"
+            ],
+            "CreateJobTrigger": [
+              "create_job_trigger"
+            ],
+            "UpdateJobTrigger": [
+              "update_job_trigger"
+            ],
+            "HybridInspectJobTrigger": [
+              "hybrid_inspect_job_trigger"
+            ],
+            "GetJobTrigger": [
+              "get_job_trigger"
+            ],
+            "ListJobTriggers": [
+              "list_job_triggers"
+            ],
+            "DeleteJobTrigger": [
+              "delete_job_trigger"
+            ],
+            "ActivateJobTrigger": [
+              "activate_job_trigger"
+            ],
+            "CreateDlpJob": [
+              "create_dlp_job"
+            ],
+            "ListDlpJobs": [
+              "list_dlp_jobs"
+            ],
+            "GetDlpJob": [
+              "get_dlp_job"
+            ],
+            "DeleteDlpJob": [
+              "delete_dlp_job"
+            ],
+            "CancelDlpJob": [
+              "cancel_dlp_job"
+            ],
+            "CreateStoredInfoType": [
+              "create_stored_info_type"
+            ],
+            "UpdateStoredInfoType": [
+              "update_stored_info_type"
+            ],
+            "GetStoredInfoType": [
+              "get_stored_info_type"
+            ],
+            "ListStoredInfoTypes": [
+              "list_stored_info_types"
+            ],
+            "DeleteStoredInfoType": [
+              "delete_stored_info_type"
+            ],
+            "HybridInspectDlpJob": [
+              "hybrid_inspect_dlp_job"
+            ],
+            "FinishDlpJob": [
+              "finish_dlp_job"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
