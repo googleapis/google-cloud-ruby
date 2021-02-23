@@ -1,0 +1,198 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.monitoring.v3",
+  "libraryPackage": "::Google::Cloud::Monitoring::V3",
+  "services": {
+    "AlertPolicyService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Monitoring::V3::AlertPolicyService::Client",
+          "methods": {
+            "ListAlertPolicies": [
+              "list_alert_policies"
+            ],
+            "GetAlertPolicy": [
+              "get_alert_policy"
+            ],
+            "CreateAlertPolicy": [
+              "create_alert_policy"
+            ],
+            "DeleteAlertPolicy": [
+              "delete_alert_policy"
+            ],
+            "UpdateAlertPolicy": [
+              "update_alert_policy"
+            ]
+          }
+        }
+      }
+    },
+    "GroupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Monitoring::V3::GroupService::Client",
+          "methods": {
+            "ListGroups": [
+              "list_groups"
+            ],
+            "GetGroup": [
+              "get_group"
+            ],
+            "CreateGroup": [
+              "create_group"
+            ],
+            "UpdateGroup": [
+              "update_group"
+            ],
+            "DeleteGroup": [
+              "delete_group"
+            ],
+            "ListGroupMembers": [
+              "list_group_members"
+            ]
+          }
+        }
+      }
+    },
+    "MetricService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Monitoring::V3::MetricService::Client",
+          "methods": {
+            "ListMonitoredResourceDescriptors": [
+              "list_monitored_resource_descriptors"
+            ],
+            "GetMonitoredResourceDescriptor": [
+              "get_monitored_resource_descriptor"
+            ],
+            "ListMetricDescriptors": [
+              "list_metric_descriptors"
+            ],
+            "GetMetricDescriptor": [
+              "get_metric_descriptor"
+            ],
+            "CreateMetricDescriptor": [
+              "create_metric_descriptor"
+            ],
+            "DeleteMetricDescriptor": [
+              "delete_metric_descriptor"
+            ],
+            "ListTimeSeries": [
+              "list_time_series"
+            ],
+            "CreateTimeSeries": [
+              "create_time_series"
+            ]
+          }
+        }
+      }
+    },
+    "NotificationChannelService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client",
+          "methods": {
+            "ListNotificationChannelDescriptors": [
+              "list_notification_channel_descriptors"
+            ],
+            "GetNotificationChannelDescriptor": [
+              "get_notification_channel_descriptor"
+            ],
+            "ListNotificationChannels": [
+              "list_notification_channels"
+            ],
+            "GetNotificationChannel": [
+              "get_notification_channel"
+            ],
+            "CreateNotificationChannel": [
+              "create_notification_channel"
+            ],
+            "UpdateNotificationChannel": [
+              "update_notification_channel"
+            ],
+            "DeleteNotificationChannel": [
+              "delete_notification_channel"
+            ],
+            "SendNotificationChannelVerificationCode": [
+              "send_notification_channel_verification_code"
+            ],
+            "GetNotificationChannelVerificationCode": [
+              "get_notification_channel_verification_code"
+            ],
+            "VerifyNotificationChannel": [
+              "verify_notification_channel"
+            ]
+          }
+        }
+      }
+    },
+    "ServiceMonitoringService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client",
+          "methods": {
+            "CreateService": [
+              "create_service"
+            ],
+            "GetService": [
+              "get_service"
+            ],
+            "ListServices": [
+              "list_services"
+            ],
+            "UpdateService": [
+              "update_service"
+            ],
+            "DeleteService": [
+              "delete_service"
+            ],
+            "CreateServiceLevelObjective": [
+              "create_service_level_objective"
+            ],
+            "GetServiceLevelObjective": [
+              "get_service_level_objective"
+            ],
+            "ListServiceLevelObjectives": [
+              "list_service_level_objectives"
+            ],
+            "UpdateServiceLevelObjective": [
+              "update_service_level_objective"
+            ],
+            "DeleteServiceLevelObjective": [
+              "delete_service_level_objective"
+            ]
+          }
+        }
+      }
+    },
+    "UptimeCheckService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Monitoring::V3::UptimeCheckService::Client",
+          "methods": {
+            "ListUptimeCheckConfigs": [
+              "list_uptime_check_configs"
+            ],
+            "GetUptimeCheckConfig": [
+              "get_uptime_check_config"
+            ],
+            "CreateUptimeCheckConfig": [
+              "create_uptime_check_config"
+            ],
+            "UpdateUptimeCheckConfig": [
+              "update_uptime_check_config"
+            ],
+            "DeleteUptimeCheckConfig": [
+              "delete_uptime_check_config"
+            ],
+            "ListUptimeCheckIps": [
+              "list_uptime_check_ips"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
