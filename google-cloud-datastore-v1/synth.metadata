@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "ede929c4c37760c903a53cc4916f82bdb54336ea"
+        "sha": "c830c7d6f7b45ddb90cafc77707b1ecf323e600b"
       }
     },
     {
@@ -26,40 +26,5 @@
         "generator": "gapic-generator-ruby"
       }
     }
-  ],
-  "generatedFiles": [
-    ".gitignore",
-    ".repo-metadata.json",
-    ".rubocop.yml",
-    ".yardopts",
-    "AUTHENTICATION.md",
-    "CHANGELOG.md",
-    "Gemfile",
-    "LICENSE.md",
-    "README.md",
-    "Rakefile",
-    "google-cloud-datastore-v1.gemspec",
-    "lib/google-cloud-datastore-v1.rb",
-    "lib/google/cloud/datastore/v1.rb",
-    "lib/google/cloud/datastore/v1/datastore.rb",
-    "lib/google/cloud/datastore/v1/datastore/client.rb",
-    "lib/google/cloud/datastore/v1/datastore/credentials.rb",
-    "lib/google/cloud/datastore/v1/version.rb",
-    "lib/google/datastore/v1/datastore_pb.rb",
-    "lib/google/datastore/v1/datastore_services_pb.rb",
-    "lib/google/datastore/v1/entity_pb.rb",
-    "lib/google/datastore/v1/query_pb.rb",
-    "proto_docs/README.md",
-    "proto_docs/google/api/field_behavior.rb",
-    "proto_docs/google/api/resource.rb",
-    "proto_docs/google/datastore/v1/datastore.rb",
-    "proto_docs/google/datastore/v1/entity.rb",
-    "proto_docs/google/datastore/v1/query.rb",
-    "proto_docs/google/protobuf/struct.rb",
-    "proto_docs/google/protobuf/timestamp.rb",
-    "proto_docs/google/protobuf/wrappers.rb",
-    "proto_docs/google/type/latlng.rb",
-    "test/google/cloud/datastore/v1/datastore_test.rb",
-    "test/helper.rb"
   ]
 }
