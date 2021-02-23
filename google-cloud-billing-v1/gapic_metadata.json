@@ -1,0 +1,63 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.billing.v1",
+  "libraryPackage": "::Google::Cloud::Billing::V1",
+  "services": {
+    "CloudBilling": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Billing::V1::CloudBilling::Client",
+          "methods": {
+            "GetBillingAccount": [
+              "get_billing_account"
+            ],
+            "ListBillingAccounts": [
+              "list_billing_accounts"
+            ],
+            "UpdateBillingAccount": [
+              "update_billing_account"
+            ],
+            "CreateBillingAccount": [
+              "create_billing_account"
+            ],
+            "ListProjectBillingInfo": [
+              "list_project_billing_info"
+            ],
+            "GetProjectBillingInfo": [
+              "get_project_billing_info"
+            ],
+            "UpdateProjectBillingInfo": [
+              "update_project_billing_info"
+            ],
+            "GetIamPolicy": [
+              "get_iam_policy"
+            ],
+            "SetIamPolicy": [
+              "set_iam_policy"
+            ],
+            "TestIamPermissions": [
+              "test_iam_permissions"
+            ]
+          }
+        }
+      }
+    },
+    "CloudCatalog": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Billing::V1::CloudCatalog::Client",
+          "methods": {
+            "ListServices": [
+              "list_services"
+            ],
+            "ListSkus": [
+              "list_skus"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
