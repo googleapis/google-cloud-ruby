@@ -1,0 +1,192 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.dialogflow.v2",
+  "libraryPackage": "::Google::Cloud::Dialogflow::V2",
+  "services": {
+    "Agents": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::Agents::Client",
+          "methods": {
+            "GetAgent": [
+              "get_agent"
+            ],
+            "SetAgent": [
+              "set_agent"
+            ],
+            "DeleteAgent": [
+              "delete_agent"
+            ],
+            "SearchAgents": [
+              "search_agents"
+            ],
+            "TrainAgent": [
+              "train_agent"
+            ],
+            "ExportAgent": [
+              "export_agent"
+            ],
+            "ImportAgent": [
+              "import_agent"
+            ],
+            "RestoreAgent": [
+              "restore_agent"
+            ],
+            "GetValidationResult": [
+              "get_validation_result"
+            ]
+          }
+        }
+      }
+    },
+    "Contexts": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::Contexts::Client",
+          "methods": {
+            "ListContexts": [
+              "list_contexts"
+            ],
+            "GetContext": [
+              "get_context"
+            ],
+            "CreateContext": [
+              "create_context"
+            ],
+            "UpdateContext": [
+              "update_context"
+            ],
+            "DeleteContext": [
+              "delete_context"
+            ],
+            "DeleteAllContexts": [
+              "delete_all_contexts"
+            ]
+          }
+        }
+      }
+    },
+    "EntityTypes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::EntityTypes::Client",
+          "methods": {
+            "ListEntityTypes": [
+              "list_entity_types"
+            ],
+            "GetEntityType": [
+              "get_entity_type"
+            ],
+            "CreateEntityType": [
+              "create_entity_type"
+            ],
+            "UpdateEntityType": [
+              "update_entity_type"
+            ],
+            "DeleteEntityType": [
+              "delete_entity_type"
+            ],
+            "BatchUpdateEntityTypes": [
+              "batch_update_entity_types"
+            ],
+            "BatchDeleteEntityTypes": [
+              "batch_delete_entity_types"
+            ],
+            "BatchCreateEntities": [
+              "batch_create_entities"
+            ],
+            "BatchUpdateEntities": [
+              "batch_update_entities"
+            ],
+            "BatchDeleteEntities": [
+              "batch_delete_entities"
+            ]
+          }
+        }
+      }
+    },
+    "Environments": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::Environments::Client",
+          "methods": {
+            "ListEnvironments": [
+              "list_environments"
+            ]
+          }
+        }
+      }
+    },
+    "Intents": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::Intents::Client",
+          "methods": {
+            "ListIntents": [
+              "list_intents"
+            ],
+            "GetIntent": [
+              "get_intent"
+            ],
+            "CreateIntent": [
+              "create_intent"
+            ],
+            "UpdateIntent": [
+              "update_intent"
+            ],
+            "DeleteIntent": [
+              "delete_intent"
+            ],
+            "BatchUpdateIntents": [
+              "batch_update_intents"
+            ],
+            "BatchDeleteIntents": [
+              "batch_delete_intents"
+            ]
+          }
+        }
+      }
+    },
+    "SessionEntityTypes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client",
+          "methods": {
+            "ListSessionEntityTypes": [
+              "list_session_entity_types"
+            ],
+            "GetSessionEntityType": [
+              "get_session_entity_type"
+            ],
+            "CreateSessionEntityType": [
+              "create_session_entity_type"
+            ],
+            "UpdateSessionEntityType": [
+              "update_session_entity_type"
+            ],
+            "DeleteSessionEntityType": [
+              "delete_session_entity_type"
+            ]
+          }
+        }
+      }
+    },
+    "Sessions": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::Sessions::Client",
+          "methods": {
+            "DetectIntent": [
+              "detect_intent"
+            ],
+            "StreamingDetectIntent": [
+              "streaming_detect_intent"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
