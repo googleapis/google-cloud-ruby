@@ -1,0 +1,138 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.logging.v2",
+  "libraryPackage": "::Google::Cloud::Logging::V2",
+  "services": {
+    "ConfigServiceV2": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Logging::V2::ConfigService::Client",
+          "methods": {
+            "ListBuckets": [
+              "list_buckets"
+            ],
+            "GetBucket": [
+              "get_bucket"
+            ],
+            "CreateBucket": [
+              "create_bucket"
+            ],
+            "UpdateBucket": [
+              "update_bucket"
+            ],
+            "DeleteBucket": [
+              "delete_bucket"
+            ],
+            "UndeleteBucket": [
+              "undelete_bucket"
+            ],
+            "ListViews": [
+              "list_views"
+            ],
+            "GetView": [
+              "get_view"
+            ],
+            "CreateView": [
+              "create_view"
+            ],
+            "UpdateView": [
+              "update_view"
+            ],
+            "DeleteView": [
+              "delete_view"
+            ],
+            "ListSinks": [
+              "list_sinks"
+            ],
+            "GetSink": [
+              "get_sink"
+            ],
+            "CreateSink": [
+              "create_sink"
+            ],
+            "UpdateSink": [
+              "update_sink"
+            ],
+            "DeleteSink": [
+              "delete_sink"
+            ],
+            "ListExclusions": [
+              "list_exclusions"
+            ],
+            "GetExclusion": [
+              "get_exclusion"
+            ],
+            "CreateExclusion": [
+              "create_exclusion"
+            ],
+            "UpdateExclusion": [
+              "update_exclusion"
+            ],
+            "DeleteExclusion": [
+              "delete_exclusion"
+            ],
+            "GetCmekSettings": [
+              "get_cmek_settings"
+            ],
+            "UpdateCmekSettings": [
+              "update_cmek_settings"
+            ]
+          }
+        }
+      }
+    },
+    "LoggingServiceV2": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Logging::V2::LoggingService::Client",
+          "methods": {
+            "DeleteLog": [
+              "delete_log"
+            ],
+            "WriteLogEntries": [
+              "write_log_entries"
+            ],
+            "ListLogEntries": [
+              "list_log_entries"
+            ],
+            "ListMonitoredResourceDescriptors": [
+              "list_monitored_resource_descriptors"
+            ],
+            "ListLogs": [
+              "list_logs"
+            ],
+            "TailLogEntries": [
+              "tail_log_entries"
+            ]
+          }
+        }
+      }
+    },
+    "MetricsServiceV2": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Logging::V2::MetricsService::Client",
+          "methods": {
+            "ListLogMetrics": [
+              "list_log_metrics"
+            ],
+            "GetLogMetric": [
+              "get_log_metric"
+            ],
+            "CreateLogMetric": [
+              "create_log_metric"
+            ],
+            "UpdateLogMetric": [
+              "update_log_metric"
+            ],
+            "DeleteLogMetric": [
+              "delete_log_metric"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
