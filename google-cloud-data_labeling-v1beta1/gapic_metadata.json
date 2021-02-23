@@ -1,0 +1,120 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.datalabeling.v1beta1",
+  "libraryPackage": "::Google::Cloud::DataLabeling::V1beta1",
+  "services": {
+    "DataLabelingService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client",
+          "methods": {
+            "CreateDataset": [
+              "create_dataset"
+            ],
+            "GetDataset": [
+              "get_dataset"
+            ],
+            "ListDatasets": [
+              "list_datasets"
+            ],
+            "DeleteDataset": [
+              "delete_dataset"
+            ],
+            "ImportData": [
+              "import_data"
+            ],
+            "ExportData": [
+              "export_data"
+            ],
+            "GetDataItem": [
+              "get_data_item"
+            ],
+            "ListDataItems": [
+              "list_data_items"
+            ],
+            "GetAnnotatedDataset": [
+              "get_annotated_dataset"
+            ],
+            "ListAnnotatedDatasets": [
+              "list_annotated_datasets"
+            ],
+            "DeleteAnnotatedDataset": [
+              "delete_annotated_dataset"
+            ],
+            "LabelImage": [
+              "label_image"
+            ],
+            "LabelVideo": [
+              "label_video"
+            ],
+            "LabelText": [
+              "label_text"
+            ],
+            "GetExample": [
+              "get_example"
+            ],
+            "ListExamples": [
+              "list_examples"
+            ],
+            "CreateAnnotationSpecSet": [
+              "create_annotation_spec_set"
+            ],
+            "GetAnnotationSpecSet": [
+              "get_annotation_spec_set"
+            ],
+            "ListAnnotationSpecSets": [
+              "list_annotation_spec_sets"
+            ],
+            "DeleteAnnotationSpecSet": [
+              "delete_annotation_spec_set"
+            ],
+            "CreateInstruction": [
+              "create_instruction"
+            ],
+            "GetInstruction": [
+              "get_instruction"
+            ],
+            "ListInstructions": [
+              "list_instructions"
+            ],
+            "DeleteInstruction": [
+              "delete_instruction"
+            ],
+            "GetEvaluation": [
+              "get_evaluation"
+            ],
+            "SearchEvaluations": [
+              "search_evaluations"
+            ],
+            "SearchExampleComparisons": [
+              "search_example_comparisons"
+            ],
+            "CreateEvaluationJob": [
+              "create_evaluation_job"
+            ],
+            "UpdateEvaluationJob": [
+              "update_evaluation_job"
+            ],
+            "GetEvaluationJob": [
+              "get_evaluation_job"
+            ],
+            "PauseEvaluationJob": [
+              "pause_evaluation_job"
+            ],
+            "ResumeEvaluationJob": [
+              "resume_evaluation_job"
+            ],
+            "DeleteEvaluationJob": [
+              "delete_evaluation_job"
+            ],
+            "ListEvaluationJobs": [
+              "list_evaluation_jobs"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
