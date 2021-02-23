@@ -33,6 +33,8 @@ Style/AsciiComments:
   Enabled: false
 Style/AsciiComments:
   Enabled: false
+Style/AsciiComments:
+  Enabled: false
 Style/CaseEquality:
   Enabled: false
 Style/IfUnlessModifier:
