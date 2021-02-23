@@ -1,5 +1,15 @@
 # Release History
 
+### 0.4.0 / 2021-02-23
+
+#### ⚠ BREAKING CHANGES
+
+* **channel-v1:** Removed unlaunched fields TransferableSku#is_commitment, TransferableSku#commitment_end_timestamp, and CreateChannelPartnerLinkRequest#domain
+
+#### Bug Fixes
+
+* Removed unlaunched fields TransferableSku#is_commitment, TransferableSku#commitment_end_timestamp, and CreateChannelPartnerLinkRequest#domain
+
 ### 0.3.0 / 2021-02-03
 
 #### Features
