@@ -1,0 +1,78 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.security.privateca.v1beta1",
+  "libraryPackage": "::Google::Cloud::Security::PrivateCA::V1beta1",
+  "services": {
+    "CertificateAuthorityService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client",
+          "methods": {
+            "CreateCertificate": [
+              "create_certificate"
+            ],
+            "GetCertificate": [
+              "get_certificate"
+            ],
+            "ListCertificates": [
+              "list_certificates"
+            ],
+            "RevokeCertificate": [
+              "revoke_certificate"
+            ],
+            "UpdateCertificate": [
+              "update_certificate"
+            ],
+            "ActivateCertificateAuthority": [
+              "activate_certificate_authority"
+            ],
+            "CreateCertificateAuthority": [
+              "create_certificate_authority"
+            ],
+            "DisableCertificateAuthority": [
+              "disable_certificate_authority"
+            ],
+            "EnableCertificateAuthority": [
+              "enable_certificate_authority"
+            ],
+            "FetchCertificateAuthorityCsr": [
+              "fetch_certificate_authority_csr"
+            ],
+            "GetCertificateAuthority": [
+              "get_certificate_authority"
+            ],
+            "ListCertificateAuthorities": [
+              "list_certificate_authorities"
+            ],
+            "RestoreCertificateAuthority": [
+              "restore_certificate_authority"
+            ],
+            "ScheduleDeleteCertificateAuthority": [
+              "schedule_delete_certificate_authority"
+            ],
+            "UpdateCertificateAuthority": [
+              "update_certificate_authority"
+            ],
+            "GetCertificateRevocationList": [
+              "get_certificate_revocation_list"
+            ],
+            "ListCertificateRevocationLists": [
+              "list_certificate_revocation_lists"
+            ],
+            "UpdateCertificateRevocationList": [
+              "update_certificate_revocation_list"
+            ],
+            "GetReusableConfig": [
+              "get_reusable_config"
+            ],
+            "ListReusableConfigs": [
+              "list_reusable_configs"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
