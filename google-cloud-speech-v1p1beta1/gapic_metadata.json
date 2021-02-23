@@ -1,0 +1,66 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.speech.v1p1beta1",
+  "libraryPackage": "::Google::Cloud::Speech::V1p1beta1",
+  "services": {
+    "Speech": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Speech::V1p1beta1::Speech::Client",
+          "methods": {
+            "Recognize": [
+              "recognize"
+            ],
+            "LongRunningRecognize": [
+              "long_running_recognize"
+            ],
+            "StreamingRecognize": [
+              "streaming_recognize"
+            ]
+          }
+        }
+      }
+    },
+    "Adaptation": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client",
+          "methods": {
+            "CreatePhraseSet": [
+              "create_phrase_set"
+            ],
+            "GetPhraseSet": [
+              "get_phrase_set"
+            ],
+            "ListPhraseSet": [
+              "list_phrase_set"
+            ],
+            "UpdatePhraseSet": [
+              "update_phrase_set"
+            ],
+            "DeletePhraseSet": [
+              "delete_phrase_set"
+            ],
+            "CreateCustomClass": [
+              "create_custom_class"
+            ],
+            "GetCustomClass": [
+              "get_custom_class"
+            ],
+            "ListCustomClasses": [
+              "list_custom_classes"
+            ],
+            "UpdateCustomClass": [
+              "update_custom_class"
+            ],
+            "DeleteCustomClass": [
+              "delete_custom_class"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
