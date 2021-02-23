@@ -1,0 +1,30 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.datastore.admin.v1",
+  "libraryPackage": "::Google::Cloud::Datastore::Admin::V1",
+  "services": {
+    "DatastoreAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client",
+          "methods": {
+            "ExportEntities": [
+              "export_entities"
+            ],
+            "ImportEntities": [
+              "import_entities"
+            ],
+            "GetIndex": [
+              "get_index"
+            ],
+            "ListIndexes": [
+              "list_indexes"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
