@@ -48,8 +48,8 @@ module Google
       # Create a new client object for CloudMemcache.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Memcache::V1beta2::CloudMemcache::Client](https://googleapis.dev/ruby/google-cloud-memcache-v1beta2/latest/Google/Cloud/Memcache/V1beta2/CloudMemcache/Client.html)
-      # for version V1beta2 of the API.
+      # [Google::Cloud::Memcache::V1::CloudMemcache::Client](https://googleapis.dev/ruby/google-cloud-memcache-v1/latest/Google/Cloud/Memcache/V1/CloudMemcache/Client.html)
+      # for version V1 of the API.
       # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the CloudMemcache service is
       # supported by that API version, and the corresponding gem is available, the
@@ -74,10 +74,10 @@ module Google
       # * `projects/my-memcached-project/locations/us-central1/instances/my-memcached`
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1beta2`.
+      #   Defaults to `:v1`.
       # @return [CloudMemcache::Client] A client object for the specified version.
       #
-      def self.cloud_memcache version: :v1beta2, &block
+      def self.cloud_memcache version: :v1, &block
         require "google/cloud/memcache/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Memcache

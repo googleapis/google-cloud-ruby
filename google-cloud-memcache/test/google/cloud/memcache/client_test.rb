@@ -28,7 +28,7 @@ class Google::Cloud::Memcache::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::Memcache.cloud_memcache do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Memcache::V1beta2::CloudMemcache::Client, client
+      assert_kind_of Google::Cloud::Memcache::V1::CloudMemcache::Client, client
     end
   end
 end
