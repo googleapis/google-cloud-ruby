@@ -1,0 +1,147 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.pubsub.v1",
+  "libraryPackage": "::Google::Cloud::PubSub::V1",
+  "services": {
+    "SchemaService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::PubSub::V1::SchemaService::Client",
+          "methods": {
+            "CreateSchema": [
+              "create_schema"
+            ],
+            "GetSchema": [
+              "get_schema"
+            ],
+            "ListSchemas": [
+              "list_schemas"
+            ],
+            "DeleteSchema": [
+              "delete_schema"
+            ],
+            "ValidateSchema": [
+              "validate_schema"
+            ],
+            "ValidateMessage": [
+              "validate_message"
+            ]
+          }
+        }
+      }
+    },
+    "Publisher": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::PubSub::V1::Publisher::Client",
+          "methods": {
+            "CreateTopic": [
+              "create_topic"
+            ],
+            "UpdateTopic": [
+              "update_topic"
+            ],
+            "Publish": [
+              "publish"
+            ],
+            "GetTopic": [
+              "get_topic"
+            ],
+            "ListTopics": [
+              "list_topics"
+            ],
+            "ListTopicSubscriptions": [
+              "list_topic_subscriptions"
+            ],
+            "ListTopicSnapshots": [
+              "list_topic_snapshots"
+            ],
+            "DeleteTopic": [
+              "delete_topic"
+            ],
+            "DetachSubscription": [
+              "detach_subscription"
+            ]
+          }
+        }
+      }
+    },
+    "Subscriber": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::PubSub::V1::Subscriber::Client",
+          "methods": {
+            "CreateSubscription": [
+              "create_subscription"
+            ],
+            "GetSubscription": [
+              "get_subscription"
+            ],
+            "UpdateSubscription": [
+              "update_subscription"
+            ],
+            "ListSubscriptions": [
+              "list_subscriptions"
+            ],
+            "DeleteSubscription": [
+              "delete_subscription"
+            ],
+            "ModifyAckDeadline": [
+              "modify_ack_deadline"
+            ],
+            "Acknowledge": [
+              "acknowledge"
+            ],
+            "Pull": [
+              "pull"
+            ],
+            "StreamingPull": [
+              "streaming_pull"
+            ],
+            "ModifyPushConfig": [
+              "modify_push_config"
+            ],
+            "GetSnapshot": [
+              "get_snapshot"
+            ],
+            "ListSnapshots": [
+              "list_snapshots"
+            ],
+            "CreateSnapshot": [
+              "create_snapshot"
+            ],
+            "UpdateSnapshot": [
+              "update_snapshot"
+            ],
+            "DeleteSnapshot": [
+              "delete_snapshot"
+            ],
+            "Seek": [
+              "seek"
+            ]
+          }
+        }
+      }
+    },
+    "IAMPolicy": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::PubSub::V1::IAMPolicy::Client",
+          "methods": {
+            "SetIamPolicy": [
+              "set_iam_policy"
+            ],
+            "GetIamPolicy": [
+              "get_iam_policy"
+            ],
+            "TestIamPermissions": [
+              "test_iam_permissions"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
