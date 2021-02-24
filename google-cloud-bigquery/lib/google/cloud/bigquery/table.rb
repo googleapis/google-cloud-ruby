@@ -1180,17 +1180,16 @@ module Google
         end
 
         ##
-        # Updates the query that defines the view or materialized view. See {#view?} and
-        # {#materialized_view?}.
+        # Updates the query that defines the view. (See {#view?}.) Not supported
+        # for materialized views.
         #
-        # This sets the query using standard SQL. Only standard SQL is supported for
-        # materialized views. To specify legacy SQL or to use user-defined function
-        # resources for a view, use (#set_query) instead.
+        # This method sets the query using standard SQL. To specify legacy SQL or
+        # to use user-defined function resources for a view, use (#set_query) instead.
         #
         # @see https://cloud.google.com/bigquery/query-reference BigQuery Query
         #   Reference
         #
-        # @param [String] new_query The query that defines the view or materialized view.
+        # @param [String] new_query The query that defines the view.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -1209,27 +1208,24 @@ module Google
         end
 
         ##
-        # Updates the query that defines the view or materialized view. See {#view?} and
-        # {#materialized_view?}. Only standard SQL is supported for materialized views.
-        # For a view, allows setting of standard vs. legacy SQL and user-defined function
-        # resources.
+        # Updates the query that defines the view. (See {#view?}.) Not supported for
+        # materialized views.
         #
-        # @see https://cloud.google.com/bigquery/query-reference BigQuery Query
-        #   Reference
+        # Allows setting of standard vs. legacy SQL and user-defined function resources.
         #
-        # @param [String] query The query that defines the view or materialized view.
+        # @see https://cloud.google.com/bigquery/query-reference BigQuery Query Reference
+        #
+        # @param [String] query The query that defines the view.
         # @param [Boolean] standard_sql Specifies whether to use BigQuery's
         #   [standard
         #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
-        #   dialect. Not supported for materialized views. Optional.
-        #   The default value is true.
+        #   dialect. Optional. The default value is true.
         # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
         #   [legacy
         #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
-        #   dialect. Not supported for materialized views. Optional.
-        #   The default value is false.
+        #   dialect. Optional. The default value is false.
         # @param [Array<String>, String] udfs User-defined function resources
-        #   used in a legacy SQL query. Not supported for materialized views. Optional.
+        #   used in a legacy SQL query. Optional.
         #
         #   May be either a code resource to load from a Google Cloud Storage URI
         #   (`gs://bucket/path`), or an inline resource that contains code for a
@@ -1259,22 +1255,14 @@ module Google
         # @!group Lifecycle
         #
         def set_query query, standard_sql: nil, legacy_sql: nil, udfs: nil
-          if view?
-            use_legacy_sql = Convert.resolve_legacy_sql standard_sql, legacy_sql
-            @gapi.view = Google::Apis::BigqueryV2::ViewDefinition.new(
-              query:                           query,
-              use_legacy_sql:                  use_legacy_sql,
-              user_defined_function_resources: udfs_gapi(udfs)
-            )
-            patch_gapi! :view
-          elsif materialized_view? # TODO: Remove if not supported?
-            @gapi.materialized_view = Google::Apis::BigqueryV2::MaterializedViewDefinition.new(
-              query: query
-            )
-            patch_gapi! :materialized_view
-          else
-            raise "set_query is not supported for type: #{@gapi.type}"
-          end
+          raise "Updating the query is not supported for Table type: #{@gapi.type}" unless view?
+          use_legacy_sql = Convert.resolve_legacy_sql standard_sql, legacy_sql
+          @gapi.view = Google::Apis::BigqueryV2::ViewDefinition.new(
+            query:                           query,
+            use_legacy_sql:                  use_legacy_sql,
+            user_defined_function_resources: udfs_gapi(udfs)
+          )
+          patch_gapi! :view
         end
 
         ##

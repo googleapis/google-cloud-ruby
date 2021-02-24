@@ -86,47 +86,19 @@ describe Google::Cloud::Bigquery::Table, :materialized_view, :mock_bigquery do
     _(materialized_view.refresh_interval_ms).must_equal new_refresh_interval_ms
   end
 
-  it "updates query with query=" do
+  it "raises if query= is called" do
     new_query = "SELECT name, age, score, active FROM `external.publicdata.users` LIMIT 10"
-    mock = Minitest::Mock.new
-    returned_table_gapi = materialized_view_gapi.dup
-    returned_table_gapi.materialized_view.query = new_query
-    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(
-      etag: etag,
-      materialized_view: Google::Apis::BigqueryV2::MaterializedViewDefinition.new(
-        query: new_query
-      )
-    )
-    mock.expect :patch_table, returned_table_gapi, [project, dataset_id, table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
-    mock.expect :get_table, returned_table_gapi, [project, dataset_id, table_id]
-    materialized_view.service.mocked_service = mock
+    err = expect { materialized_view.set_query new_query }.must_raise RuntimeError
+    _(err.message).must_equal "Updating the query is not supported for Table type: MATERIALIZED_VIEW"
 
-    materialized_view.query = new_query
-
-    mock.verify
-
-    _(materialized_view.query).must_equal new_query
+    _(materialized_view.query).must_equal query
   end
 
-  it "updates query with set_query" do
+  it "raises if set_query is called" do
     new_query = "SELECT name, age, score, active FROM `external.publicdata.users` LIMIT 10"
-    mock = Minitest::Mock.new
-    returned_table_gapi = materialized_view_gapi.dup
-    returned_table_gapi.materialized_view.query = new_query
-    patch_table_gapi = Google::Apis::BigqueryV2::Table.new(
-      etag: etag,
-      materialized_view: Google::Apis::BigqueryV2::MaterializedViewDefinition.new(
-        query: new_query
-      )
-    )
-    mock.expect :patch_table, returned_table_gapi, [project, dataset_id, table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
-    mock.expect :get_table, returned_table_gapi, [project, dataset_id, table_id]
-    materialized_view.service.mocked_service = mock
+    err = expect { materialized_view.set_query new_query }.must_raise RuntimeError
+    _(err.message).must_equal "Updating the query is not supported for Table type: MATERIALIZED_VIEW"
 
-    materialized_view.set_query new_query
-
-    mock.verify
-
-    _(materialized_view.query).must_equal new_query
+    _(materialized_view.query).must_equal query
   end
 end
