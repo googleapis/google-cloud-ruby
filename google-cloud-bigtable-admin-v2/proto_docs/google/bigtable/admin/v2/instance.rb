@@ -130,9 +130,29 @@ module Google
           #     (`CreationOnly`)
           #     The type of storage used by this cluster to serve its
           #     parent instance's tables, unless explicitly overridden.
+          # @!attribute [rw] encryption_config
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::Cluster::EncryptionConfig]
+          #     Immutable. The encryption configuration for CMEK-protected clusters.
           class Cluster
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Cloud Key Management Service (Cloud KMS) settings for a CMEK-protected
+            # cluster.
+            # @!attribute [rw] kms_key_name
+            #   @return [::String]
+            #     Describes the Cloud KMS encryption key that will be used to protect the
+            #     destination Bigtable cluster. The requirements for this key are:
+            #      1) The Cloud Bigtable service account associated with the project that
+            #      contains this cluster must be granted the
+            #      `cloudkms.cryptoKeyEncrypterDecrypter` role on the CMEK key.
+            #      2) Only regional keys can be used and the region of the CMEK key must
+            #      match the region of the cluster.
+            #     3) All clusters within an instance must use the same CMEK key.
+            class EncryptionConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             # Possible states of a cluster.
             module State
@@ -166,7 +186,7 @@ module Google
           #   @return [::String]
           #     (`OutputOnly`)
           #     The unique name of the app profile. Values are of the form
-          #     `projects/<project>/instances/<instance>/appProfiles/[_a-zA-Z0-9][-_.a-zA-Z0-9]*`.
+          #     `projects/{project}/instances/{instance}/appProfiles/[_a-zA-Z0-9][-_.a-zA-Z0-9]*`.
           # @!attribute [rw] etag
           #   @return [::String]
           #     Strongly validated etag for optimistic concurrency control. Preserve the

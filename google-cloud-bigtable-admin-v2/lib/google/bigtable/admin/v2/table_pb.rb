@@ -7,6 +7,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/bigtable/admin/v2/table.proto", :syntax => :proto3) do
     add_message "google.bigtable.admin.v2.RestoreInfo" do
@@ -24,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.bigtable.admin.v2.Table.ClusterState" do
       optional :replication_state, :enum, 1, "google.bigtable.admin.v2.Table.ClusterState.ReplicationState"
+      repeated :encryption_info, :message, 2, "google.bigtable.admin.v2.EncryptionInfo"
     end
     add_enum "google.bigtable.admin.v2.Table.ClusterState.ReplicationState" do
       value :STATE_NOT_KNOWN, 0
@@ -42,6 +44,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :NAME_ONLY, 1
       value :SCHEMA_VIEW, 2
       value :REPLICATION_VIEW, 3
+      value :ENCRYPTION_VIEW, 5
       value :FULL, 4
     end
     add_message "google.bigtable.admin.v2.ColumnFamily" do
@@ -60,6 +63,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.bigtable.admin.v2.GcRule.Union" do
       repeated :rules, :message, 1, "google.bigtable.admin.v2.GcRule"
+    end
+    add_message "google.bigtable.admin.v2.EncryptionInfo" do
+      optional :encryption_type, :enum, 3, "google.bigtable.admin.v2.EncryptionInfo.EncryptionType"
+      optional :encryption_status, :message, 4, "google.rpc.Status"
+      optional :kms_key_version, :string, 2
+    end
+    add_enum "google.bigtable.admin.v2.EncryptionInfo.EncryptionType" do
+      value :ENCRYPTION_TYPE_UNSPECIFIED, 0
+      value :GOOGLE_DEFAULT_ENCRYPTION, 1
+      value :CUSTOMER_MANAGED_ENCRYPTION, 2
     end
     add_message "google.bigtable.admin.v2.Snapshot" do
       optional :name, :string, 1
@@ -83,6 +96,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :end_time, :message, 5, "google.protobuf.Timestamp"
       optional :size_bytes, :int64, 6
       optional :state, :enum, 7, "google.bigtable.admin.v2.Backup.State"
+      optional :encryption_info, :message, 9, "google.bigtable.admin.v2.EncryptionInfo"
     end
     add_enum "google.bigtable.admin.v2.Backup.State" do
       value :STATE_UNSPECIFIED, 0
@@ -117,6 +131,8 @@ module Google
           GcRule = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GcRule").msgclass
           GcRule::Intersection = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GcRule.Intersection").msgclass
           GcRule::Union = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GcRule.Union").msgclass
+          EncryptionInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.EncryptionInfo").msgclass
+          EncryptionInfo::EncryptionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.EncryptionInfo.EncryptionType").enummodule
           Snapshot = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Snapshot").msgclass
           Snapshot::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Snapshot.State").enummodule
           Backup = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Backup").msgclass

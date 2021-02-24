@@ -944,7 +944,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload update_cluster(location: nil, serve_nodes: nil, default_storage_type: nil)
+              # @overload update_cluster(location: nil, serve_nodes: nil, default_storage_type: nil, encryption_config: nil)
               #   Pass arguments to `update_cluster` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -962,6 +962,8 @@ module Google
               #     (`CreationOnly`)
               #     The type of storage used by this cluster to serve its
               #     parent instance's tables, unless explicitly overridden.
+              #   @param encryption_config [::Google::Cloud::Bigtable::Admin::V2::Cluster::EncryptionConfig, ::Hash]
+              #     Immutable. The encryption configuration for CMEK-protected clusters.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]

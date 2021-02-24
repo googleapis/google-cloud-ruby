@@ -621,6 +621,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
     state = :STATE_NOT_KNOWN
     serve_nodes = 42
     default_storage_type = :STORAGE_TYPE_UNSPECIFIED
+    encryption_config = {}
 
     update_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_cluster, name
@@ -630,6 +631,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       assert_equal :STATE_NOT_KNOWN, request["state"]
       assert_equal 42, request["serve_nodes"]
       assert_equal :STORAGE_TYPE_UNSPECIFIED, request["default_storage_type"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::Admin::V2::Cluster::EncryptionConfig), request["encryption_config"]
       refute_nil options
     end
 
@@ -640,35 +642,35 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use hash object
-      client.update_cluster({ name: name, location: location, state: state, serve_nodes: serve_nodes, default_storage_type: default_storage_type }) do |response, operation|
+      client.update_cluster({ name: name, location: location, state: state, serve_nodes: serve_nodes, default_storage_type: default_storage_type, encryption_config: encryption_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_cluster name: name, location: location, state: state, serve_nodes: serve_nodes, default_storage_type: default_storage_type do |response, operation|
+      client.update_cluster name: name, location: location, state: state, serve_nodes: serve_nodes, default_storage_type: default_storage_type, encryption_config: encryption_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_cluster ::Google::Cloud::Bigtable::Admin::V2::Cluster.new(name: name, location: location, state: state, serve_nodes: serve_nodes, default_storage_type: default_storage_type) do |response, operation|
+      client.update_cluster ::Google::Cloud::Bigtable::Admin::V2::Cluster.new(name: name, location: location, state: state, serve_nodes: serve_nodes, default_storage_type: default_storage_type, encryption_config: encryption_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_cluster({ name: name, location: location, state: state, serve_nodes: serve_nodes, default_storage_type: default_storage_type }, grpc_options) do |response, operation|
+      client.update_cluster({ name: name, location: location, state: state, serve_nodes: serve_nodes, default_storage_type: default_storage_type, encryption_config: encryption_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_cluster ::Google::Cloud::Bigtable::Admin::V2::Cluster.new(name: name, location: location, state: state, serve_nodes: serve_nodes, default_storage_type: default_storage_type), grpc_options do |response, operation|
+      client.update_cluster ::Google::Cloud::Bigtable::Admin::V2::Cluster.new(name: name, location: location, state: state, serve_nodes: serve_nodes, default_storage_type: default_storage_type, encryption_config: encryption_config), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
