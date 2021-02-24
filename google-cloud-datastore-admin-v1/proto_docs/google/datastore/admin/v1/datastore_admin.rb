@@ -281,6 +281,33 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # The request for
+          # {::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client#create_index google.datastore.admin.v1.DatastoreAdmin.CreateIndex}.
+          # @!attribute [rw] project_id
+          #   @return [::String]
+          #     Project ID against which to make the request.
+          # @!attribute [rw] index
+          #   @return [::Google::Cloud::Datastore::Admin::V1::Index]
+          #     The index to create. The name and state fields are output only and will be
+          #     ignored. Single property indexes cannot be created or deleted.
+          class CreateIndexRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client#delete_index google.datastore.admin.v1.DatastoreAdmin.DeleteIndex}.
+          # @!attribute [rw] project_id
+          #   @return [::String]
+          #     Project ID against which to make the request.
+          # @!attribute [rw] index_id
+          #   @return [::String]
+          #     The resource ID of the index to delete.
+          class DeleteIndexRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The request for {::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client#get_index google.datastore.admin.v1.DatastoreAdmin.GetIndex}.
           # @!attribute [rw] project_id
           #   @return [::String]

@@ -16,6 +16,12 @@
             "ImportEntities": [
               "import_entities"
             ],
+            "CreateIndex": [
+              "create_index"
+            ],
+            "DeleteIndex": [
+              "delete_index"
+            ],
             "GetIndex": [
               "get_index"
             ],
