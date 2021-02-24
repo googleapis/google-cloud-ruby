@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.0 / 2021-02-24
+
+#### Features
+
+* Include the google-cloud-memcache-v1 client, and connect to the V1 API backend by default
+
 ### 0.1.2 / 2021-02-02
 
 #### Documentation
