@@ -176,6 +176,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :date_value, :message, 3, "google.type.Date"
         optional :datetime_value, :message, 4, "google.type.DateTime"
         optional :address_value, :message, 5, "google.type.PostalAddress"
+        optional :boolean_value, :bool, 6
       end
     end
     add_message "google.cloud.documentai.v1beta3.Document.EntityRelation" do
