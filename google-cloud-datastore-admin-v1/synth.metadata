@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "c830c7d6f7b45ddb90cafc77707b1ecf323e600b"
+        "sha": "0b1cef6e1d017857956ae480e1255615af576b51"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
-        "internalRef": "326288259"
+        "sha": "cc4a85665e5118be2472eefadf28e6deb2aafb88",
+        "internalRef": "359094122"
       }
     }
   ],
@@ -50,11 +50,13 @@
     "lib/google/datastore/admin/v1/datastore_admin_pb.rb",
     "lib/google/datastore/admin/v1/datastore_admin_services_pb.rb",
     "lib/google/datastore/admin/v1/index_pb.rb",
+    "lib/google/datastore/admin/v1/migration_pb.rb",
     "proto_docs/README.md",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/datastore/admin/v1/datastore_admin.rb",
     "proto_docs/google/datastore/admin/v1/index.rb",
+    "proto_docs/google/datastore/admin/v1/migration.rb",
     "proto_docs/google/longrunning/operations.rb",
     "proto_docs/google/protobuf/any.rb",
     "proto_docs/google/protobuf/duration.rb",

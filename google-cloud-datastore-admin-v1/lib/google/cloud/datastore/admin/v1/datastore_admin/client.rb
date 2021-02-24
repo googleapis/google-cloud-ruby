@@ -128,6 +128,10 @@ module Google
 
                   default_config.rpcs.import_entities.timeout = 60.0
 
+                  default_config.rpcs.create_index.timeout = 60.0
+
+                  default_config.rpcs.delete_index.timeout = 60.0
+
                   default_config.rpcs.get_index.timeout = 60.0
                   default_config.rpcs.get_index.retry_policy = {
                     initial_delay: 0.1,
@@ -431,6 +435,168 @@ module Google
               end
 
               ##
+              # Creates the specified index.
+              # A newly created index's initial state is `CREATING`. On completion of the
+              # returned {::Google::Longrunning::Operation google.longrunning.Operation}, the state will be `READY`.
+              # If the index already exists, the call will return an `ALREADY_EXISTS`
+              # status.
+              #
+              # During index creation, the process could result in an error, in which
+              # case the index will move to the `ERROR` state. The process can be recovered
+              # by fixing the data that caused the error, removing the index with
+              # {::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client#delete_index delete}, then
+              # re-creating the index with [create]
+              # [google.datastore.admin.v1.DatastoreAdmin.CreateIndex].
+              #
+              # Indexes with a single property cannot be created.
+              #
+              # @overload create_index(request, options = nil)
+              #   Pass arguments to `create_index` via a request object, either of type
+              #   {::Google::Cloud::Datastore::Admin::V1::CreateIndexRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Datastore::Admin::V1::CreateIndexRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload create_index(project_id: nil, index: nil)
+              #   Pass arguments to `create_index` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param project_id [::String]
+              #     Project ID against which to make the request.
+              #   @param index [::Google::Cloud::Datastore::Admin::V1::Index, ::Hash]
+              #     The index to create. The name and state fields are output only and will be
+              #     ignored. Single property indexes cannot be created or deleted.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              def create_index request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Datastore::Admin::V1::CreateIndexRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.create_index.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Datastore::Admin::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {
+                  "project_id" => request.project_id
+                }
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.create_index.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.create_index.retry_policy
+                options.apply_defaults metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @datastore_admin_stub.call_rpc :create_index, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes an existing index.
+              # An index can only be deleted if it is in a `READY` or `ERROR` state. On
+              # successful execution of the request, the index will be in a `DELETING`
+              # {::Google::Cloud::Datastore::Admin::V1::Index::State state}. And on completion of the
+              # returned {::Google::Longrunning::Operation google.longrunning.Operation}, the index will be removed.
+              #
+              # During index deletion, the process could result in an error, in which
+              # case the index will move to the `ERROR` state. The process can be recovered
+              # by fixing the data that caused the error, followed by calling
+              # {::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client#delete_index delete} again.
+              #
+              # @overload delete_index(request, options = nil)
+              #   Pass arguments to `delete_index` via a request object, either of type
+              #   {::Google::Cloud::Datastore::Admin::V1::DeleteIndexRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Datastore::Admin::V1::DeleteIndexRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload delete_index(project_id: nil, index_id: nil)
+              #   Pass arguments to `delete_index` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param project_id [::String]
+              #     Project ID against which to make the request.
+              #   @param index_id [::String]
+              #     The resource ID of the index to delete.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              def delete_index request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Datastore::Admin::V1::DeleteIndexRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.delete_index.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Datastore::Admin::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {
+                  "project_id" => request.project_id,
+                  "index_id"   => request.index_id
+                }
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.delete_index.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.delete_index.retry_policy
+                options.apply_defaults metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @datastore_admin_stub.call_rpc :delete_index, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Gets an index.
               #
               # @overload get_index(request, options = nil)
@@ -721,6 +887,16 @@ module Google
                   #
                   attr_reader :import_entities
                   ##
+                  # RPC-specific configuration for `create_index`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_index
+                  ##
+                  # RPC-specific configuration for `delete_index`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_index
+                  ##
                   # RPC-specific configuration for `get_index`
                   # @return [::Gapic::Config::Method]
                   #
@@ -737,6 +913,10 @@ module Google
                     @export_entities = ::Gapic::Config::Method.new export_entities_config
                     import_entities_config = parent_rpcs&.import_entities if parent_rpcs&.respond_to? :import_entities
                     @import_entities = ::Gapic::Config::Method.new import_entities_config
+                    create_index_config = parent_rpcs&.create_index if parent_rpcs&.respond_to? :create_index
+                    @create_index = ::Gapic::Config::Method.new create_index_config
+                    delete_index_config = parent_rpcs&.delete_index if parent_rpcs&.respond_to? :delete_index
+                    @delete_index = ::Gapic::Config::Method.new delete_index_config
                     get_index_config = parent_rpcs&.get_index if parent_rpcs&.respond_to? :get_index
                     @get_index = ::Gapic::Config::Method.new get_index_config
                     list_indexes_config = parent_rpcs&.list_indexes if parent_rpcs&.respond_to? :list_indexes
