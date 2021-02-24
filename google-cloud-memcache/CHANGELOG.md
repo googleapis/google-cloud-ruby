@@ -1,5 +1,15 @@
 # Release History
 
+### 0.2.0 / 2021-02-24
+
+#### ⚠ BREAKING CHANGES
+
+* **memcache:** Connect to the V1 API backend by default
+
+#### Features
+
+* Connect to the V1 API backend by default
+
 ### 0.1.2 / 2021-02-02
 
 #### Documentation
