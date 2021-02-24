@@ -509,7 +509,7 @@ module Google
           #     page where it was found.
           # @!attribute [rw] id
           #   @return [::String]
-          #     Canonical id. This will be a unique value in the entity list
+          #     Optional. Canonical id. This will be a unique value in the entity list
           #     for this document.
           # @!attribute [rw] normalized_value
           #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Entity::NormalizedValue]
@@ -556,6 +556,10 @@ module Google
             #
             #     https:
             #     github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto
+            # @!attribute [rw] boolean_value
+            #   @return [::Boolean]
+            #     Boolean value. Can be used for entities with binary values, or for
+            #     checkboxes.
             # @!attribute [rw] text
             #   @return [::String]
             #     Required. Normalized entity value stored as a string. This field is populated for
@@ -651,7 +655,8 @@ module Google
             # Represents a weak reference to a page element within a document.
             # @!attribute [rw] page
             #   @return [::Integer]
-            #     Required. Index into the {::Google::Cloud::DocumentAI::V1beta3::Document#pages Document.pages} element
+            #     Required. Index into the {::Google::Cloud::DocumentAI::V1beta3::Document#pages Document.pages} element, for example using
+            #     [Document.pages][page_refs.page] to locate the related page element.
             # @!attribute [rw] layout_type
             #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::PageAnchor::PageRef::LayoutType]
             #     Optional. The type of the layout element that is being referenced if any.
