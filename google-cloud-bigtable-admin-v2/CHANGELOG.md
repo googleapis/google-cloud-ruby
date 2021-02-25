@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2021-02-25
+
+#### Features
+
+* Support for Customer Managed Encryption Keys on clusters
+
 ### 0.3.0 / 2021-02-02
 
 #### Features
