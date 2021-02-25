@@ -186,6 +186,8 @@ module Acceptance
       end
 
       def numeric_pk_ddl_statement
+        return if emulator_enabled?
+
         <<-BOXES
           CREATE TABLE boxes (
             id NUMERIC NOT NULL,
@@ -195,6 +197,8 @@ module Acceptance
       end
 
       def numeric_composite_pk_ddl_statement
+        return if emulator_enabled?
+
         <<-BOX_ITEMS
           CREATE TABLE box_items (
             id INT64 NOT NULL,
@@ -214,7 +218,7 @@ module Acceptance
           commit_timestamp_test_ddl_statement,
           numeric_pk_ddl_statement,
           numeric_composite_pk_ddl_statement
-        ]
+        ].compact
       end
 
       def stuffs_table_types
