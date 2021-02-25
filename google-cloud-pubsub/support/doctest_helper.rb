@@ -670,6 +670,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::PubSub::Topic#schema_" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      this_topic = topic_resp "my-topic", schema_settings: { schema: schema_path("my-schema"), encoding: :JSON }
+      mock_publisher.expect :get_topic, this_topic, [Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::PubSub::Topic#delete" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, [Hash]
@@ -827,7 +834,7 @@ def topics_hash num_topics, token = ""
   data
 end
 
-def topic_resp topic_name = "my-topic", kms_key_name: nil, persistence_regions: nil
+def topic_resp topic_name = "my-topic", kms_key_name: nil, persistence_regions: nil, schema_settings: nil
   topic = Google::Cloud::PubSub::V1::Topic.new name: topic_path(topic_name),
                                                kms_key_name: kms_key_name
   if persistence_regions
@@ -835,6 +842,7 @@ def topic_resp topic_name = "my-topic", kms_key_name: nil, persistence_regions: 
       allowed_persistence_regions: persistence_regions
     )
   end
+  topic.schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema_settings if schema_settings
   topic
 end
 

@@ -19,7 +19,16 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
   let(:labels) { { "foo" => "bar" } }
   let(:kms_key_name) { "projects/a/locations/b/keyRings/c/cryptoKeys/d" }
   let(:persistence_regions) { ["us-central1", "us-central2"] }
-  let(:topic_grpc) { Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name, labels: labels, kms_key_name: kms_key_name, persistence_regions: persistence_regions) }
+  let(:schema_name) { schema_path("my-schema") }
+  let(:schema_encoding) { :JSON }
+  let(:topic_hsh) do
+    topic_hash topic_name,
+               labels: labels,
+               kms_key_name: kms_key_name,
+               persistence_regions: persistence_regions,
+               schema_settings: { schema: schema_name, encoding: schema_encoding }
+  end
+  let(:topic_grpc) { Google::Cloud::PubSub::V1::Topic.new topic_hsh }
   let(:topic) { Google::Cloud::PubSub::Topic.from_grpc topic_grpc, pubsub.service }
 
   it "is not reference when created with an HTTP method" do
@@ -41,6 +50,11 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
 
   it "accesses persistence_regions without making an API call" do
     _(topic.persistence_regions).must_equal persistence_regions
+  end
+
+  it "accesses schema_settings without making an API call" do
+    _(topic.schema_name).must_equal schema_name
+    _(topic.schema_encoding).must_equal schema_encoding
   end
 
   describe "reference topic" do
@@ -111,7 +125,24 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
       mock.verify
     end
 
-    describe "no MessageStoragePolicy" do
+    it "accesses schema_settings by making an API call" do
+      _(topic).must_be :reference?
+      _(topic).wont_be :resource?
+
+      mock = Minitest::Mock.new
+      mock.expect :get_topic, topic_grpc, [topic: topic_path(topic_name)]
+      topic.service.mocked_publisher = mock
+
+      _(topic.schema_name).must_equal schema_name
+      _(topic.schema_encoding).must_equal schema_encoding
+
+      _(topic).wont_be :reference?
+      _(topic).must_be :resource?
+
+      mock.verify
+    end
+
+    describe "no SchemaSettings" do
       let(:topic_grpc) { Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name, labels: labels) }
 
       it "accesses persistence_regions by making an API call" do
@@ -122,7 +153,8 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
         mock.expect :get_topic, topic_grpc, [topic: topic_path(topic_name)]
         topic.service.mocked_publisher = mock
 
-        _(topic.persistence_regions).must_be :empty?
+        _(topic.schema_name).must_be :nil?
+        _(topic.schema_encoding).must_be :nil?
 
         _(topic).wont_be :reference?
         _(topic).must_be :resource?

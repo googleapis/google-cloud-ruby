@@ -75,20 +75,5 @@ focus
     expect do 
       pubsub.create_topic topic_name_2, schema_name: schema_name, schema_encoding: :json
     end.must_raise Google::Cloud::NotFoundError
-
-    topic_2 = pubsub.create_topic topic_name_2
-    _(topic_2.schema_name).must_be :nil?
-    _(topic_2.schema_encoding).must_be :nil?
-
-    topic_2.schema_name = schema_name
-    _(topic_2.schema_name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
-    _(topic_2.schema_encoding).must_equal :ENCODING_UNSPECIFIED
-
-    topic_2.schema_encoding = :BINARY
-    _(topic_2.schema_name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
-    _(topic_2.schema_encoding).must_equal :BINARY
-
-    topic_2 = pubsub.topic topic_2.name
-    _(topic_2.schema_name).must_be :nil?
   end
 end

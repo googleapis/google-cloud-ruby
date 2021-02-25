@@ -50,6 +50,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.labels).must_be :frozen?
     _(topic.kms_key).must_be :empty?
     _(topic.persistence_regions).must_be :empty?
+    _(topic.schema_name).must_be :nil?
+    _(topic.schema_encoding).must_be :nil?
   end
 
   it "creates a topic with fully-qualified topic path" do
@@ -84,6 +86,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.labels).must_be :frozen?
     _(topic.kms_key).must_be :empty?
     _(topic.persistence_regions).must_be :empty?
+    _(topic.schema_name).must_be :nil?
+    _(topic.schema_encoding).must_be :nil?
   end
 
   it "creates a topic with labels" do
@@ -103,6 +107,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.labels).must_be :frozen?
     _(topic.kms_key).must_be :empty?
     _(topic.persistence_regions).must_be :empty?
+    _(topic.schema_name).must_be :nil?
+    _(topic.schema_encoding).must_be :nil?
   end
 
   it "creates a topic with kms_key" do
@@ -122,6 +128,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.labels).must_be :frozen?
     _(topic.kms_key).must_equal kms_key
     _(topic.persistence_regions).must_be :empty?
+    _(topic.schema_name).must_be :nil?
+    _(topic.schema_encoding).must_be :nil?
   end
 
   it "creates a topic with persistence_regions" do
@@ -142,8 +150,10 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.labels).must_be :frozen?
     _(topic.kms_key).must_be :empty?
     _(topic.persistence_regions).must_equal persistence_regions
+    _(topic.schema_name).must_be :nil?
+    _(topic.schema_encoding).must_be :nil?
   end
-focus
+
   it "creates a topic with schema_name and schema_encoding" do
     new_topic_name = "new-topic-#{Time.now.to_i}"
 
@@ -164,6 +174,20 @@ focus
     _(topic.kms_key).must_be :empty?
     _(topic.schema_name).must_equal schema_path(schema_name)
     _(topic.schema_encoding).must_equal schema_encoding
+  end
+
+  it "raises when creating a topic with schema_name but without schema_encoding" do
+    err = expect do
+      topic = pubsub.create_topic "new-topic", schema_name: schema_name
+    end.must_raise ArgumentError
+    _(err.message).must_equal "Schema settings must include both schema_name and schema_encoding."
+  end
+
+  it "raises when creating a topic without schema_name but with schema_encoding" do
+    err = expect do
+      topic = pubsub.create_topic "new-topic", schema_encoding: schema_encoding
+    end.must_raise ArgumentError
+    _(err.message).must_equal "Schema settings must include both schema_name and schema_encoding."
   end
 
   it "gets a topic" do
