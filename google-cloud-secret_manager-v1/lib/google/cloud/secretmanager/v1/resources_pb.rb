@@ -15,6 +15,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :replication, :message, 2, "google.cloud.secretmanager.v1.Replication"
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       map :labels, :string, :string, 4
+      repeated :topics, :message, 5, "google.cloud.secretmanager.v1.Topic"
       oneof :expiration do
         optional :expire_time, :message, 6, "google.protobuf.Timestamp"
         optional :ttl, :message, 7, "google.protobuf.Duration"
@@ -71,6 +72,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus" do
       optional :kms_key_version_name, :string, 1
     end
+    add_message "google.cloud.secretmanager.v1.Topic" do
+      optional :name, :string, 1
+    end
     add_message "google.cloud.secretmanager.v1.SecretPayload" do
       optional :data, :bytes, 1
     end
@@ -94,6 +98,7 @@ module Google
         ReplicationStatus::UserManagedStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus").msgclass
         ReplicationStatus::UserManagedStatus::ReplicaStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus").msgclass
         CustomerManagedEncryptionStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus").msgclass
+        Topic = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secretmanager.v1.Topic").msgclass
         SecretPayload = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secretmanager.v1.SecretPayload").msgclass
       end
     end
