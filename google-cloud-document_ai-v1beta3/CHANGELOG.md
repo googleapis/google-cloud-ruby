@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2021-02-25
+
+#### Features
+
+* Support boolean normalized values
+
 ### 0.3.0 / 2021-02-17
 
 #### Features
