@@ -202,6 +202,18 @@ module Google
         #   * `:threads` (Hash) The number of threads to create to handle concurrent calls by the publisher:
         #     * `:publish` (Integer) The number of threads used to publish messages. Default is 2.
         #     * `:callback` (Integer) The number of threads to handle the published messages' callbacks. Default is 4.
+        # @param [String] schema_name The name of the schema that messages
+        #   published should be validated against. Optional. The value can be a
+        #   simple schema ID (relative name), in which case the current project
+        #   ID will be supplied, or a fully-qualified schema name in the form
+        #   `projects/{project_id}/schemas/{schema_id}`. If provided,
+        #   `schema_encoding` must also be provided.
+        # @param [String, Symbol] schema_encoding The encoding of messages validated
+        #   against the schema identified by `schema_name`. Optional. Values include:
+        #
+        #   * `JSON` - JSON encoding.
+        #   * `BINARY` - Binary encoding, as defined by the schema type. For some
+        #     schema types, binary encoding may not be available.
         #
         # @return [Google::Cloud::PubSub::Topic]
         #
@@ -211,12 +223,20 @@ module Google
         #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.create_topic "my-topic"
         #
-        def create_topic topic_name, labels: nil, kms_key: nil, persistence_regions: nil, async: nil
+        def create_topic topic_name,
+                         labels: nil,
+                         kms_key: nil,
+                         persistence_regions: nil,
+                         async: nil,
+                         schema_name: nil,
+                         schema_encoding: nil
           ensure_service!
           grpc = service.create_topic topic_name,
                                       labels:              labels,
                                       kms_key_name:        kms_key,
-                                      persistence_regions: persistence_regions
+                                      persistence_regions: persistence_regions,
+                                      schema_name:         schema_name,
+                                      schema_encoding:     schema_encoding
           Topic.from_grpc grpc, service, async: async
         end
         alias new_topic create_topic

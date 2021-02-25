@@ -129,18 +129,35 @@ module Google
 
         ##
         # Creates the given topic with the given name.
-        def create_topic topic_name, labels: nil, kms_key_name: nil, persistence_regions: nil, options: {}
+        def create_topic topic_name,
+                         labels: nil,
+                         kms_key_name: nil,
+                         persistence_regions: nil,
+                         schema_name: nil,
+                         schema_encoding: nil,
+                         options: {}
           if persistence_regions
-            message_storage_policy = {
+            message_storage_policy = Google::Cloud::PubSub::V1::MessageStoragePolicy.new(
               allowed_persistence_regions: Array(persistence_regions)
-            }
+            )
+          end
+
+          if schema_name || schema_encoding
+            unless schema_name && schema_encoding
+              raise ArgumentError, "Schema settings must include both schema_name and schema_encoding."
+            end
+            schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new(
+              schema:   schema_path(schema_name),
+              encoding: schema_encoding.to_s.upcase
+            )
           end
 
           publisher.create_topic \
             name:                   topic_path(topic_name, options),
             labels:                 labels,
             kms_key_name:           kms_key_name,
-            message_storage_policy: message_storage_policy
+            message_storage_policy: message_storage_policy,
+            schema_settings:        schema_settings
         end
 
         def update_topic topic_obj, *fields
