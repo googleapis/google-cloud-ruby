@@ -30,6 +30,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
   let(:labels) { { "foo" => "bar" } }
   let(:kms_key) { "projects/a/locations/b/keyRings/c/cryptoKeys/d" }
   let(:persistence_regions) { ["us-west1", "us-west2"] }
+  let(:schema_name) { "my-schema" }
+  let(:schema_encoding) { :JSON }
 
   it "creates a topic" do
     new_topic_name = "new-topic-#{Time.now.to_i}"
@@ -141,14 +143,15 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.kms_key).must_be :empty?
     _(topic.persistence_regions).must_equal persistence_regions
   end
-
+focus
   it "creates a topic with schema_name and schema_encoding" do
     new_topic_name = "new-topic-#{Time.now.to_i}"
 
-    create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name, persistence_regions: persistence_regions)
+    schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema: schema_path(schema_name), encoding: schema_encoding
+    create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
+    create_res.schema_settings = schema_settings
     mock = Minitest::Mock.new
-    message_storage_policy = Google::Cloud::PubSub::V1::SchemaSettings.new schema: schema_name, encoding: schema_encoding
-    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: message_storage_policy, schema_settings: nil]
+    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: schema_settings]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name, schema_name: schema_name, schema_encoding: schema_encoding
@@ -159,7 +162,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.labels).must_be :empty?
     _(topic.labels).must_be :frozen?
     _(topic.kms_key).must_be :empty?
-    _(topic.persistence_regions).must_equal persistence_regions
+    _(topic.schema_name).must_equal schema_path(schema_name)
+    _(topic.schema_encoding).must_equal schema_encoding
   end
 
   it "gets a topic" do

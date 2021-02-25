@@ -17,23 +17,10 @@ require "pubsub_helper"
 # This test is a ruby version of gcloud-node's pubsub test.
 
 describe Google::Cloud::PubSub::Schema, :pubsub do
-  def retrieve_topic topic_name
-    pubsub.get_topic(topic_name) || pubsub.create_topic(topic_name)
-  end
-
-  def retrieve_subscription topic, subscription_name
-    topic.get_subscription(subscription_name) ||
-      topic.subscribe(subscription_name)
-  end
-
-  def retrieve_snapshot project, subscription, snapshot_name
-    existing = project.snapshots.detect { |s| s.name.split("/").last == snapshot_name }
-    existing || subscription.create_snapshot(snapshot_name)
-  end
-
   let(:topic_name) { $topic_names[10] }
+  let(:topic_name_2) { $topic_names[11] }
   let(:schema_name) { $schema_names[0] }
-  let :schema_definition_hash do
+  let :definition_hash do
     {
       "type" => "record",
       "name" => "State",
@@ -53,16 +40,55 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
       ]
     }
   end
-  let(:schema_definition) { definition_hash.to_json }
+  let(:definition) { definition_hash.to_json }
 focus
   it "should create, list, get, use and delete a schema" do
-    schema = pubsub.create_schema schema_name, :avro, schema_definition
+    schema = pubsub.create_schema schema_name, :avro, definition
     _(schema).must_be_kind_of Google::Cloud::PubSub::Schema
+    _(schema.name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
+    _(schema.type).must_equal :AVRO
+    _(schema.definition).must_equal definition
+
+    schema = pubsub.schema schema_name, view: :full
+    _(schema).must_be_kind_of Google::Cloud::PubSub::Schema
+    _(schema.name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
+    _(schema.type).must_equal :AVRO
+    _(schema.definition).must_equal definition
 
     topic = pubsub.create_topic topic_name, schema_name: schema_name, schema_encoding: :json
+    _(topic.schema_name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
+    _(topic.schema_encoding).must_equal :JSON
 
-    _(topic).must_be_kind_of Google::Cloud::PubSub::Topic
-    topic = pubsub.topic(topic.name)
-    _(topic).wont_be :nil?
+    topic = pubsub.topic topic.name
+    _(topic.schema_name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
+    _(topic.schema_encoding).must_equal :JSON
+
+    schema.delete
+
+    schema = pubsub.schema schema_name
+    _(schema).must_be :nil?
+
+    topic = pubsub.topic topic.name
+    _(topic.schema_name).must_equal "_deleted-schema_"
+    _(topic.schema_encoding).must_equal :JSON
+
+    expect do 
+      pubsub.create_topic topic_name_2, schema_name: schema_name, schema_encoding: :json
+    end.must_raise Google::Cloud::NotFoundError
+
+    topic_2 = pubsub.create_topic topic_name_2
+    _(topic_2.schema_name).must_be :nil?
+    _(topic_2.schema_encoding).must_be :nil?
+
+    topic_2.schema_name = schema_name
+    _(topic_2.schema_name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
+    _(topic_2.schema_encoding).must_equal :ENCODING_UNSPECIFIED
+
+    topic_2.schema_encoding = :BINARY
+    _(topic_2.schema_name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
+    _(topic_2.schema_encoding).must_equal :BINARY
+
+    topic_2 = pubsub.topic topic_2.name
+    _(topic_2.schema_name).must_be :nil?
   end
 end

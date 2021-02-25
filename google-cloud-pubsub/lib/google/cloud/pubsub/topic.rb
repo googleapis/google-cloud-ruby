@@ -234,6 +234,114 @@ module Google
         end
 
         ##
+        # The name of the schema that messages published should be validated against, if schema settings are configured
+        # for the topic. The value is a fully-qualified schema name in the form
+        # `projects/{project_id}/schemas/{schema_id}`. If present, {#schema_encoding} should also be present. The value
+        # of this field will be `_deleted-schema_` if the schema has been deleted.
+        #
+        # Makes an API call to retrieve the schema settings when called on a reference object. See {#reference?}.
+        #
+        # @return [String, nil] The schema name, or `nil` if schema settings are not configured for the topic.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #
+        #   topic.schema_name #=> "projects/my-project/schemas/my-schema"
+        #
+        def schema_name
+          ensure_grpc!
+          @grpc.schema_settings&.schema
+        end
+
+        ##
+        # Sets the name of the schema that messages published should be validated against. The value can be a simple
+        # schema ID (relative name), in which case the current project ID will be supplied, or a fully-qualified schema
+        # name in the form `projects/{project_id}/schemas/{schema_id}`. If present, {#schema_encoding} should also be
+        # present.
+        #
+        # Makes an API call to retrieve the schema settings when called on a reference object. See {#reference?}.
+        #
+        # @param [String] new_schema_name
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #
+        #   topic.schema_name = "other-schema"
+        #
+        def schema_name= new_schema_name
+          ensure_grpc!
+          schema_settings = @grpc.schema_settings || Google::Cloud::PubSub::V1::SchemaSettings.new
+          schema_settings.schema = service.schema_path new_schema_name
+          update_grpc = Google::Cloud::PubSub::V1::Topic.new name: name, schema_settings: schema_settings
+          @grpc = service.update_topic update_grpc, :schema_settings
+          @resource_name = nil
+        end
+
+        ##
+        # The encoding of messages validated against the schema identified by {#schema_name}. If present, {#schema_name}
+        # should also be present. Values include:
+        #
+        # * `JSON` - JSON encoding.
+        # * `BINARY` - Binary encoding, as defined by the schema type. For some schema types, binary encoding may not be
+        #   available.
+        #
+        # Makes an API call to retrieve the schema settings when called on a reference object. See {#reference?}.
+        #
+        # @return [Symbol, nil] The schema encoding, or `nil` if schema settings are not configured for the topic.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #
+        #   topic.schema_encoding #=> :JSON
+        #
+        def schema_encoding
+          ensure_grpc!
+          @grpc.schema_settings&.encoding
+        end
+
+        ##
+        # Sets the encoding of messages validated against the schema identified by {#schema_name}. If present,
+        # {#schema_name} should also be present. Values include:
+        #
+        # * `JSON` - JSON encoding.
+        # * `BINARY` - Binary encoding, as defined by the schema type. For some schema types, binary encoding may not be
+        #   available.
+        #
+        # Makes an API call to retrieve the schema settings when called on a reference object. See {#reference?}.
+        #
+        # @param [String] new_schema_encoding
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #
+        #   topic.schema_encoding = :BINARY
+        #
+        def schema_encoding= new_schema_encoding
+          ensure_grpc!
+          schema_settings = @grpc.schema_settings || Google::Cloud::PubSub::V1::SchemaSettings.new
+          schema_settings.encoding = new_schema_encoding.to_s.upcase
+          update_grpc = Google::Cloud::PubSub::V1::Topic.new name: name, schema_settings: schema_settings
+          @grpc = service.update_topic update_grpc, :schema_settings
+          @resource_name = nil
+        end
+
+        ##
         # Permanently deletes the topic.
         #
         # @return [Boolean] Returns `true` if the topic was deleted.

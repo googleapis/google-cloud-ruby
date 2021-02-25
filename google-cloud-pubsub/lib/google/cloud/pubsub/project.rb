@@ -193,15 +193,19 @@ module Google
         #
         #   Hash keys and values may include the following:
         #
-        #   * `:max_bytes` (Integer) The maximum size of messages to be collected before the batch is published. Default
-        #     is 1,000,000 (1MB).
-        #   * `:max_messages` (Integer) The maximum number of messages to be collected before the batch is published.
-        #     Default is 100.
-        #   * `:interval` (Numeric) The number of seconds to collect messages before the batch is published. Default is
-        #     0.01.
-        #   * `:threads` (Hash) The number of threads to create to handle concurrent calls by the publisher:
-        #     * `:publish` (Integer) The number of threads used to publish messages. Default is 2.
-        #     * `:callback` (Integer) The number of threads to handle the published messages' callbacks. Default is 4.
+        #   * `:max_bytes` (Integer) The maximum size of messages to be collected
+        #     before the batch is published. Default is 1,000,000 (1MB).
+        #   * `:max_messages` (Integer) The maximum number of messages to be
+        #     collected before the batch is published. Default is 100.
+        #   * `:interval` (Numeric) The number of seconds to collect messages before
+        #     the batch is published. Default is 0.01.
+        #   * `:threads` (Hash) The number of threads to create to handle concurrent
+        #     calls by the publisher:
+        #
+        #     * `:publish` (Integer) The number of threads used to publish messages.
+        #       Default is 2.
+        #     * `:callback` (Integer) The number of threads to handle the published
+        #       messages' callbacks. Default is 4.
         # @param [String] schema_name The name of the schema that messages
         #   published should be validated against. Optional. The value can be a
         #   simple schema ID (relative name), in which case the current project
