@@ -373,7 +373,11 @@ module Google
           schemas.delete_schema name: schema_path(schema_name)
         end
 
-        def validate_schema schema
+        def validate_schema type, definition, options = {}
+          schema = Google::Cloud::PubSub::V1::Schema.new(
+            type:       type,
+            definition: definition
+          )
           schemas.validate_schema parent: project_path(options),
                                   schema: schema
         end

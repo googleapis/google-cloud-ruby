@@ -29,6 +29,62 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
   end
   let(:type) { :AVRO }
   let(:definition) { "AVRO schema definition" }
+  let(:project_2) { "other-project" }
+  let(:project_2_path) { "projects/#{project_2}" }
+
+  it "validates a schema" do
+    validate_req = Google::Cloud::PubSub::V1::Schema.new type: type, definition: definition
+    validate_res = Google::Cloud::PubSub::V1::ValidateSchemaResponse.new
+    mock = Minitest::Mock.new
+    mock.expect :validate_schema, validate_res, [parent: project_path, schema: validate_req]
+    pubsub.service.mocked_schemas = mock
+
+    res = pubsub.valid_schema? type, definition
+
+    mock.verify
+
+    _(res).must_equal true
+  end
+
+  it "validates a schema with project option" do
+    validate_req = Google::Cloud::PubSub::V1::Schema.new type: type, definition: definition
+    validate_res = Google::Cloud::PubSub::V1::ValidateSchemaResponse.new
+    mock = Minitest::Mock.new
+    mock.expect :validate_schema, validate_res, [parent: project_2_path, schema: validate_req]
+    pubsub.service.mocked_schemas = mock
+
+    res = pubsub.valid_schema? type, definition, project: project_2
+
+    mock.verify
+
+    _(res).must_equal true
+  end
+
+  it "validates a schema with validate_schema alias" do
+    validate_req = Google::Cloud::PubSub::V1::Schema.new type: type, definition: definition
+    validate_res = Google::Cloud::PubSub::V1::ValidateSchemaResponse.new
+    mock = Minitest::Mock.new
+    mock.expect :validate_schema, validate_res, [parent: project_path, schema: validate_req]
+    pubsub.service.mocked_schemas = mock
+
+    res = pubsub.validate_schema type, definition
+
+    mock.verify
+
+    _(res).must_equal true
+  end
+
+  it "validates an invalid schema" do
+    stub = Object.new
+    def stub.validate_schema *args
+      raise Google::Cloud::InvalidArgumentError.new("Request contains an invalid argument.")
+    end
+    pubsub.service.mocked_schemas = stub
+
+    res = pubsub.valid_schema? :TYPE_UNSPECIFIED, nil
+
+    _(res).must_equal false
+  end
 
   it "creates a schema" do
     new_schema_id = "new-schema-#{Time.now.to_i}"
@@ -49,8 +105,6 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
   end
 
   it "creates a schema with project option" do
-    project_2 = "other-project"
-    project_2_path = "projects/#{project_2}"
     new_schema_id = "new-schema-#{Time.now.to_i}"
     new_schema_path = "#{project_2_path}/topics/#{new_schema_id}"
 
@@ -69,7 +123,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
     _(schema.definition).must_equal definition
   end
 
-  it "creates a schema with new_schema_alias" do
+  it "creates a schema with new_schema alias" do
     new_schema_id = "new-schema-#{Time.now.to_i}"
 
     create_req = Google::Cloud::PubSub::V1::Schema.new type: type, definition: definition

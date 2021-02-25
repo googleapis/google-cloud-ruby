@@ -496,12 +496,12 @@ module Google
         #
         #     * `PROTOCOL_BUFFER` - A Protocol Buffer schema definition.
         #     * `AVRO` - An Avro schema definition.
-        # @param [String] definition  The definition of the schema. This should
-        #   be a string representing the full definition of the schema that is a
-        #   valid schema definition of the type specified in `type`.
+        # @param [String] definition  The definition of the schema. Required. This
+        #   should be a string representing the full definition of the schema that
+        #   is a valid schema definition of the type specified in `type`.
         # @param [String] project If the subscription belongs to a project other
         #   than the one currently connected to, the alternate project ID can be
-        #   specified here.
+        #   specified here. Optional.
         #
         # @return [Google::Cloud::PubSub::Schema]
         #
@@ -567,6 +567,41 @@ module Google
         end
         alias find_schemas schemas
         alias list_schemas schemas
+
+        ##
+        # Validates a schema type and definition.
+        #
+        # @param [String, Symbol] type The type of the schema. Required. Possible
+        #   values are case-insensitive and include:
+        #
+        #     * `PROTOCOL_BUFFER` - A Protocol Buffer schema definition.
+        #     * `AVRO` - An Avro schema definition.
+        # @param [String] definition  The definition of the schema. Required. This
+        #   should be a string representing the full definition of the schema that
+        #   is a valid schema definition of the type specified in `type`.
+        # @param [String] project If the subscription belongs to a project other
+        #   than the one currently connected to, the alternate project ID can be
+        #   specified here. Optional.
+        #
+        # @return [Boolean] `true` if the schema is valid, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   definition = "..."
+        #   pubsub.validate_schema :avro, definition #=> true
+        #
+        def valid_schema? type, definition, project: nil
+          ensure_service!
+          type = type.to_s.upcase
+          service.validate_schema type, definition, project: project # return type is empty
+          true
+        rescue Google::Cloud::InvalidArgumentError
+          false
+        end
+        alias validate_schema valid_schema?
 
         protected
 

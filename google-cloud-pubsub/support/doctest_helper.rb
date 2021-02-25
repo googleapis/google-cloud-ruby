@@ -104,6 +104,7 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::PubSub::Project#new_schema"
   doctest.skip "Google::Cloud::PubSub::Project#find_schemas"
   doctest.skip "Google::Cloud::PubSub::Project#list_schemas"
+  doctest.skip "Google::Cloud::PubSub::Project#validate_schema"
   doctest.skip "Google::Cloud::PubSub::Schema#refresh!"
   doctest.skip "Google::Cloud::PubSub::Subscription#ack"
   doctest.skip "Google::Cloud::PubSub::Subscription#new_snapshot"
@@ -255,6 +256,13 @@ YARD::Doctest.configure do |doctest|
     mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
       mock_schema.expect :list_schemas, list_schemas_resp, [Hash]
       mock_schema.expect :list_schemas, list_schemas_resp(nil), [Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Project#valid_schema?" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      schema = Google::Cloud::PubSub::V1::Schema.new type: "AVRO", definition: "..."
+      mock_schema.expect :validate_schema, schema_resp("my-schema"), [parent: project_path, schema: schema]
     end
   end
 

@@ -41,8 +41,13 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
     }
   end
   let(:definition) { definition_hash.to_json }
-focus
-  it "should create, list, get, use and delete a schema" do
+
+  it "should validate, create, list, get, use and delete a schema" do
+    _(pubsub.valid_schema?(:avro, definition)).must_equal true
+    _(pubsub.valid_schema?(:TYPE_UNSPECIFIED, definition)).must_equal false
+    _(pubsub.valid_schema?(:avro, nil)).must_equal false
+    _(pubsub.valid_schema?(:avro, { "BAD_VALUE" => nil }.to_json)).must_equal false
+
     schema = pubsub.create_schema schema_name, :avro, definition
     _(schema).must_be_kind_of Google::Cloud::PubSub::Schema
     _(schema.name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"

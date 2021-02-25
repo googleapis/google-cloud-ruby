@@ -68,23 +68,23 @@ module Acceptance
       addl.include? :pubsub
     end
 
-    # def self.run_one_method klass, method_name, reporter
-    #   reported_result = nil
-    #   reporter.prerecord klass, method_name
-    #   (1..3).each do |try|
-    #     result = Minitest.run_one_method(klass, method_name)
-    #     if result.passed? || result.skipped?
-    #       reported_result = result
-    #       break
-    #     elsif try == 1
-    #       # Capture the first failure or error, since later second-order errors may hide it. Typically these are due to
-    #       # uniqueness constraints: Google::Cloud::AlreadyExistsError: 6:Resource already exists in the project
-    #       reported_result = result
-    #     end
-    #     puts "#{klass}##{method_name} (failed attempt: #{try})"
-    #   end
-    #   reporter.record reported_result
-    # end
+    def self.run_one_method klass, method_name, reporter
+      reported_result = nil
+      reporter.prerecord klass, method_name
+      (1..3).each do |try|
+        result = Minitest.run_one_method(klass, method_name)
+        if result.passed? || result.skipped?
+          reported_result = result
+          break
+        elsif try == 1
+          # Capture the first failure or error, since later second-order errors may hide it. Typically these are due to
+          # uniqueness constraints: Google::Cloud::AlreadyExistsError: 6:Resource already exists in the project
+          reported_result = result
+        end
+        puts "#{klass}##{method_name} (failed attempt: #{try})"
+      end
+      reporter.record reported_result
+    end
   end
 end
 
