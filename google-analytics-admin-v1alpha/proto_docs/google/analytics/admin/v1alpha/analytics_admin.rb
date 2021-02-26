@@ -86,9 +86,9 @@ module Google
         #     The account's `name` field is used to identify the account.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Omitted fields will not be updated.
-        #     To replace the entire entity, use one path with the string "*" to match
-        #     all fields.
+        #     Required. The list of fields to be updated. Field names must be in snake case
+        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+        #     the entire entity, use one path with the string "*" to match all fields.
         class UpdateAccountRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -186,9 +186,9 @@ module Google
         #     updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Omitted fields will not be updated.
-        #     To replace the entire entity, use one path with the string "*" to match
-        #     all fields.
+        #     Required. The list of fields to be updated. Field names must be in snake case
+        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+        #     the entire entity, use one path with the string "*" to match all fields.
         class UpdatePropertyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -460,9 +460,9 @@ module Google
         #     The `name` field is used to identify the web stream to be updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Omitted fields will not be updated.
-        #     To replace the entire entity, use one path with the string "*" to match
-        #     all fields.
+        #     Required. The list of fields to be updated. Field names must be in snake case
+        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+        #     the entire entity, use one path with the string "*" to match all fields.
         class UpdateWebDataStreamRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -545,9 +545,9 @@ module Google
         #     The `name` field is used to identify the iOS app stream to be updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Omitted fields will not be updated.
-        #     To replace the entire entity, use one path with the string "*" to match
-        #     all fields.
+        #     Required. The list of fields to be updated. Field names must be in snake case
+        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+        #     the entire entity, use one path with the string "*" to match all fields.
         class UpdateIosAppDataStreamRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -630,9 +630,9 @@ module Google
         #     The `name` field is used to identify the android app stream to be updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Omitted fields will not be updated.
-        #     To replace the entire entity, use one path with the string "*" to match
-        #     all fields.
+        #     Required. The list of fields to be updated. Field names must be in snake case
+        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+        #     the entire entity, use one path with the string "*" to match all fields.
         class UpdateAndroidAppDataStreamRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -707,9 +707,9 @@ module Google
         #     The `name` field is used to identify the settings to be updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Omitted fields will not be updated.
-        #     To replace the entire entity, use one path with the string "*" to match
-        #     all fields.
+        #     Required. The list of fields to be updated. Field names must be in snake case
+        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+        #     the entire entity, use one path with the string "*" to match all fields.
         class UpdateEnhancedMeasurementSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -734,9 +734,9 @@ module Google
         #     Required. The Firebase link to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Omitted fields will not be updated.
-        #     To replace the entire entity, use one path with the string "*" to match
-        #     all fields.
+        #     Required. The list of fields to be updated. Field names must be in snake case
+        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+        #     the entire entity, use one path with the string "*" to match all fields.
         class UpdateFirebaseLinkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -819,9 +819,9 @@ module Google
         #     The GoogleAdsLink to update
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Omitted fields will not be updated.
-        #     To replace the entire entity, use one path with the string "*" to match
-        #     all fields.
+        #     Required. The list of fields to be updated. Field names must be in snake case
+        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+        #     the entire entity, use one path with the string "*" to match all fields.
         class UpdateGoogleAdsLinkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -138,7 +138,15 @@ module Google
             rpc :DeleteIosAppDataStream, ::Google::Analytics::Admin::V1alpha::DeleteIosAppDataStreamRequest, ::Google::Protobuf::Empty
             # Updates an iOS app stream on a property.
             rpc :UpdateIosAppDataStream, ::Google::Analytics::Admin::V1alpha::UpdateIosAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::IosAppDataStream
-            # Creates an iOS app data stream with the specified location and attributes.
+            # Creates an iOS app stream with the specified location and attributes.
+            #
+            # Note that an iOS app stream must be linked to a Firebase app to receive
+            # traffic.
+            #
+            # To create a working app stream, make sure your property is linked to a
+            # Firebase project. Then, use the Firebase API to create a Firebase app,
+            # which will also create an appropriate data stream in Analytics (may take up
+            # to 24 hours).
             rpc :CreateIosAppDataStream, ::Google::Analytics::Admin::V1alpha::CreateIosAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::IosAppDataStream
             # Returns child iOS app data streams under the specified parent property.
             #
@@ -151,7 +159,15 @@ module Google
             rpc :DeleteAndroidAppDataStream, ::Google::Analytics::Admin::V1alpha::DeleteAndroidAppDataStreamRequest, ::Google::Protobuf::Empty
             # Updates an android app stream on a property.
             rpc :UpdateAndroidAppDataStream, ::Google::Analytics::Admin::V1alpha::UpdateAndroidAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream
-            # Creates an android app stream with the specified location and attributes.
+            # Creates an Android app stream with the specified location and attributes.
+            #
+            # Note that an Android app stream must be linked to a Firebase app to receive
+            # traffic.
+            #
+            # To create a working app stream, make sure your property is linked to a
+            # Firebase project. Then, use the Firebase API to create a Firebase app,
+            # which will also create an appropriate data stream in Analytics (may take up
+            # to 24 hours).
             rpc :CreateAndroidAppDataStream, ::Google::Analytics::Admin::V1alpha::CreateAndroidAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream
             # Returns child android app streams under the specified parent property.
             #

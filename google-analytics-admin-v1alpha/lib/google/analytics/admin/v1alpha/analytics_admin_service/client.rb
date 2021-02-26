@@ -493,9 +493,9 @@ module Google
             #     Required. The account to update.
             #     The account's `name` field is used to identify the account.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Omitted fields will not be updated.
-            #     To replace the entire entity, use one path with the string "*" to match
-            #     all fields.
+            #     Required. The list of fields to be updated. Field names must be in snake case
+            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+            #     the entire entity, use one path with the string "*" to match all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::Account]
@@ -996,9 +996,9 @@ module Google
             #     The property's `name` field is used to identify the property to be
             #     updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Omitted fields will not be updated.
-            #     To replace the entire entity, use one path with the string "*" to match
-            #     all fields.
+            #     Required. The list of fields to be updated. Field names must be in snake case
+            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+            #     the entire entity, use one path with the string "*" to match all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::Property]
@@ -1934,9 +1934,9 @@ module Google
             #     Required. The web stream to update.
             #     The `name` field is used to identify the web stream to be updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Omitted fields will not be updated.
-            #     To replace the entire entity, use one path with the string "*" to match
-            #     all fields.
+            #     Required. The list of fields to be updated. Field names must be in snake case
+            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+            #     the entire entity, use one path with the string "*" to match all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::WebDataStream]
@@ -2291,9 +2291,9 @@ module Google
             #     Required. The iOS app stream to update.
             #     The `name` field is used to identify the iOS app stream to be updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Omitted fields will not be updated.
-            #     To replace the entire entity, use one path with the string "*" to match
-            #     all fields.
+            #     Required. The list of fields to be updated. Field names must be in snake case
+            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+            #     the entire entity, use one path with the string "*" to match all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::IosAppDataStream]
@@ -2341,7 +2341,15 @@ module Google
             end
 
             ##
-            # Creates an iOS app data stream with the specified location and attributes.
+            # Creates an iOS app stream with the specified location and attributes.
+            #
+            # Note that an iOS app stream must be linked to a Firebase app to receive
+            # traffic.
+            #
+            # To create a working app stream, make sure your property is linked to a
+            # Firebase project. Then, use the Firebase API to create a Firebase app,
+            # which will also create an appropriate data stream in Analytics (may take up
+            # to 24 hours).
             #
             # @overload create_ios_app_data_stream(request, options = nil)
             #   Pass arguments to `create_ios_app_data_stream` via a request object, either of type
@@ -2648,9 +2656,9 @@ module Google
             #     Required. The android app stream to update.
             #     The `name` field is used to identify the android app stream to be updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Omitted fields will not be updated.
-            #     To replace the entire entity, use one path with the string "*" to match
-            #     all fields.
+            #     Required. The list of fields to be updated. Field names must be in snake case
+            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+            #     the entire entity, use one path with the string "*" to match all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::AndroidAppDataStream]
@@ -2698,7 +2706,15 @@ module Google
             end
 
             ##
-            # Creates an android app stream with the specified location and attributes.
+            # Creates an Android app stream with the specified location and attributes.
+            #
+            # Note that an Android app stream must be linked to a Firebase app to receive
+            # traffic.
+            #
+            # To create a working app stream, make sure your property is linked to a
+            # Firebase project. Then, use the Firebase API to create a Firebase app,
+            # which will also create an appropriate data stream in Analytics (may take up
+            # to 24 hours).
             #
             # @overload create_android_app_data_stream(request, options = nil)
             #   Pass arguments to `create_android_app_data_stream` via a request object, either of type
@@ -2944,9 +2960,9 @@ module Google
             #     Required. The settings to update.
             #     The `name` field is used to identify the settings to be updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Omitted fields will not be updated.
-            #     To replace the entire entity, use one path with the string "*" to match
-            #     all fields.
+            #     Required. The list of fields to be updated. Field names must be in snake case
+            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+            #     the entire entity, use one path with the string "*" to match all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
@@ -3085,9 +3101,9 @@ module Google
             #   @param firebase_link [::Google::Analytics::Admin::V1alpha::FirebaseLink, ::Hash]
             #     Required. The Firebase link to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Omitted fields will not be updated.
-            #     To replace the entire entity, use one path with the string "*" to match
-            #     all fields.
+            #     Required. The list of fields to be updated. Field names must be in snake case
+            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+            #     the entire entity, use one path with the string "*" to match all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::FirebaseLink]
@@ -3439,9 +3455,9 @@ module Google
             #   @param google_ads_link [::Google::Analytics::Admin::V1alpha::GoogleAdsLink, ::Hash]
             #     The GoogleAdsLink to update
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Omitted fields will not be updated.
-            #     To replace the entire entity, use one path with the string "*" to match
-            #     all fields.
+            #     Required. The list of fields to be updated. Field names must be in snake case
+            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+            #     the entire entity, use one path with the string "*" to match all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::GoogleAdsLink]
