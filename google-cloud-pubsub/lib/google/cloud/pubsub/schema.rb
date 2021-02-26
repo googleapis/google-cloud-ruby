@@ -85,6 +85,35 @@ module Google
         end
 
         ##
+        # Validates a message against a schema.
+        #
+        # @param message_data [String] Message to validate against the provided `schema_spec`.
+        # @param encoding [Symbol, String] The encoding of the message validated against the schema. Values include:
+        #
+        #   * `JSON` - JSON encoding.
+        #   * `BINARY` - Binary encoding, as defined by the schema type. For some schema types, binary encoding may not
+        #     be available.
+        #
+        # @return [Boolean] Returns `true` if the message validiation succeeds, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #   schema = pubsub.schema "my-schema"
+        #
+        #   message_data = { "name" => "Alaska", "post_abbr" => "AK" }.to_json
+        #   schema.validate_message message_data, :json
+        #
+        def validate_message message_data, encoding
+          encoding = encoding.to_s.upcase
+          service.validate_message message_data, encoding, schema_name: name
+          true
+        rescue Google::Cloud::InvalidArgumentError
+          false
+        end
+
+        ##
         # Removes the schema, if it exists.
         #
         # @return [Boolean] Returns `true` if the schema was deleted.

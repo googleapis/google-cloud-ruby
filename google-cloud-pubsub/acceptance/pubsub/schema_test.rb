@@ -41,25 +41,44 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
     }
   end
   let(:definition) { definition_hash.to_json }
+  let(:message_data) { { "name" => "Alaska", "post_abbr" => "AK" }.to_json }
+  let(:message_data_invalid) { { "BAD_VALUE" => nil }.to_json }
 
-  it "should validate, create, list, get, use and delete a schema" do
-    _(pubsub.valid_schema?(:avro, definition)).must_equal true
-    _(pubsub.valid_schema?(:TYPE_UNSPECIFIED, definition)).must_equal false
-    _(pubsub.valid_schema?(:avro, nil)).must_equal false
-    _(pubsub.valid_schema?(:avro, { "BAD_VALUE" => nil }.to_json)).must_equal false
+  it "should validate schema, create, list, get, validate message with, create topic with, and delete a schema" do
+    # validate schema
+    _(pubsub.valid_schema? :avro, definition).must_equal true
+    _(pubsub.valid_schema? :TYPE_UNSPECIFIED, definition).must_equal false
+    _(pubsub.valid_schema? :avro, nil).must_equal false
+    _(pubsub.valid_schema? :avro, { "BAD_VALUE" => nil }.to_json).must_equal false
 
+    # create
     schema = pubsub.create_schema schema_name, :avro, definition
     _(schema).must_be_kind_of Google::Cloud::PubSub::Schema
     _(schema.name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
     _(schema.type).must_equal :AVRO
     _(schema.definition).must_equal definition
 
+    # list
+    schemas = pubsub.schemas view: :full
+    _(schemas).wont_be :empty?
+    schema = schemas.first
+    _(schema).must_be_kind_of Google::Cloud::PubSub::Schema
+    _(schema.name).wont_be :nil?
+    _(schema.type).wont_be :nil?
+    _(schema.definition).wont_be :nil?
+
+    # get
     schema = pubsub.schema schema_name, view: :full
     _(schema).must_be_kind_of Google::Cloud::PubSub::Schema
     _(schema.name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
     _(schema.type).must_equal :AVRO
     _(schema.definition).must_equal definition
 
+    # validate message
+    _(schema.validate_message message_data, :json).must_equal true
+    _(schema.validate_message message_data_invalid, :json).must_equal false
+
+    # create topic with schema
     topic = pubsub.create_topic topic_name, schema_name: schema_name, schema_encoding: :json
     _(topic.schema_name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
     _(topic.schema_encoding).must_equal :JSON
@@ -68,6 +87,7 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
     _(topic.schema_name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
     _(topic.schema_encoding).must_equal :JSON
 
+    # delete
     schema.delete
 
     schema = pubsub.schema schema_name

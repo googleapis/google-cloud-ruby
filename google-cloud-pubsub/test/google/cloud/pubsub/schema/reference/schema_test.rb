@@ -17,6 +17,9 @@ require "helper"
 describe Google::Cloud::PubSub::Schema, :reference, :mock_pubsub do
   let(:schema_id) { "my-schema" }
   let(:schema) { Google::Cloud::PubSub::Schema.from_name schema_id, :BASIC, pubsub.service }
+  let(:message_data) { { "name" => "Alaska", "post_abbr" => "AK" }.to_json }
+  let(:message_data_invalid) { { "BAD_VALUE" => nil }.to_json }
+  let(:encoding) { :JSON }
 
   it "knows its attributes" do
     _(schema.name).must_equal schema_path(schema_id)
@@ -29,6 +32,27 @@ describe Google::Cloud::PubSub::Schema, :reference, :mock_pubsub do
     _(schema).wont_be :resource?
     _(schema).wont_be :resource_partial?
     _(schema.resource_full?).must_equal false
+  end
+
+  it "validates a message" do
+    mock = Minitest::Mock.new
+    res = Google::Cloud::PubSub::V1::ValidateMessageResponse.new # always empty
+    mock.expect :validate_message, res, [parent: project_path, name: schema_path(schema_id), schema: nil, message: message_data, encoding: encoding.to_s]
+    pubsub.service.mocked_schemas = mock
+
+    _(schema.validate_message message_data, encoding).must_equal true
+
+    mock.verify
+  end
+
+  it "validates an invalid message" do
+    stub = Object.new
+    def stub.validate_message *args
+      raise Google::Cloud::InvalidArgumentError.new("Request contains an invalid argument.")
+    end
+    pubsub.service.mocked_schemas = stub
+
+    _(schema.validate_message message_data, encoding).must_equal false
   end
 
   it "deletes itself" do

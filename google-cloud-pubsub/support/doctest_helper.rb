@@ -383,6 +383,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::PubSub::Schema#validate_message" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+      message_data = { "name" => "Alaska", "post_abbr" => "AK" }.to_json
+      mock_schema.expect :validate_message, nil, [parent: project_path, name: schema_path("my-schema"), schema: nil, message: message_data, encoding: "JSON"]
+    end
+  end
+
   ##
   # Schema::List
 

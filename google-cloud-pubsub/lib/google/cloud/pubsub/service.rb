@@ -385,14 +385,22 @@ module Google
         ##
         # Validates a message against a schema.
         #
-        # @param schema_name [String] Name of the schema against which to validate.
-        # @param schema [Google::Cloud::PubSub::V1::Schema, Hash] Ad-hoc schema against which to validate
         # @param message_data [String] Message to validate against the provided `schema_spec`.
-        # @param encoding [Google::Cloud::PubSub::V1::Encoding] The encoding expected for messages
+        # @param encoding [Google::Cloud::PubSub::V1::Encoding] The encoding expected for messages.
+        # @param schema_name [String] Name of the schema against which to validate.
+        # @param project [String] Name of the project if not the default project.
+        # @param type [String] Ad-hoc schema type against which to validate.
+        # @param definition [String] Ad-hoc schema definition against which to validate.
         #
-        def validate_message schema_name, schema, message_data, encoding, options = {}
-          schemas.validate_message parent:   project_path(options),
-                                   name:     schema_path(schema_name, options),
+        def validate_message message_data, encoding, schema_name: nil, project: nil, type: nil, definition: nil
+          if type && definition
+            schema = Google::Cloud::PubSub::V1::Schema.new(
+              type:       type,
+              definition: definition
+            )
+          end
+          schemas.validate_message parent:   project_path(project: project),
+                                   name:     schema_path(schema_name),
                                    schema:   schema,
                                    message:  message_data,
                                    encoding: encoding
