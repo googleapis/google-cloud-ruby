@@ -28,6 +28,13 @@ module Google
   module Cloud
     module Compute
       module V1
+        # To load this service and instantiate a REST client:
+        #
+        #     require "google/cloud/compute/v1/interconnect_locations"
+        #     client = ::Google::Cloud::Compute::V1::InterconnectLocations::Rest::Client.new
+        #
+        module InterconnectLocations
+        end
       end
     end
   end

@@ -28,6 +28,13 @@ module Google
   module Cloud
     module Compute
       module V1
+        # To load this service and instantiate a REST client:
+        #
+        #     require "google/cloud/compute/v1/accelerator_types"
+        #     client = ::Google::Cloud::Compute::V1::AcceleratorTypes::Rest::Client.new
+        #
+        module AcceleratorTypes
+        end
       end
     end
   end

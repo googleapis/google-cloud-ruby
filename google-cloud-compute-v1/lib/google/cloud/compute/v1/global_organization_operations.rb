@@ -28,6 +28,13 @@ module Google
   module Cloud
     module Compute
       module V1
+        # To load this service and instantiate a REST client:
+        #
+        #     require "google/cloud/compute/v1/global_organization_operations"
+        #     client = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client.new
+        #
+        module GlobalOrganizationOperations
+        end
       end
     end
   end

@@ -28,6 +28,13 @@ module Google
   module Cloud
     module Compute
       module V1
+        # To load this service and instantiate a REST client:
+        #
+        #     require "google/cloud/compute/v1/region_target_http_proxies"
+        #     client = ::Google::Cloud::Compute::V1::RegionTargetHttpProxies::Rest::Client.new
+        #
+        module RegionTargetHttpProxies
+        end
       end
     end
   end

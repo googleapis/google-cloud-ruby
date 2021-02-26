@@ -28,6 +28,13 @@ module Google
   module Cloud
     module Compute
       module V1
+        # To load this service and instantiate a REST client:
+        #
+        #     require "google/cloud/compute/v1/global_forwarding_rules"
+        #     client = ::Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::Client.new
+        #
+        module GlobalForwardingRules
+        end
       end
     end
   end

@@ -201,7 +201,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -276,7 +276,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -361,7 +361,7 @@ module Google
                 response = @client_stub.make_get_request(
                   uri:     uri,
                   params:  query_string_params,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::InstanceAggregatedList.decode_json response.body, ignore_unknown_fields: true
 
@@ -438,7 +438,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -511,7 +511,7 @@ module Google
                 response = @client_stub.make_delete_request(
                   uri:     uri,
                   params:  query_string_params,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -588,7 +588,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   params:  query_string_params,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -663,7 +663,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   params:  query_string_params,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -729,7 +729,7 @@ module Google
                 (uri, _body, _query_string_params) = transcode_get request
                 response = @client_stub.make_get_request(
                   uri:     uri,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Instance.decode_json response.body, ignore_unknown_fields: true
 
@@ -800,7 +800,7 @@ module Google
                 response = @client_stub.make_get_request(
                   uri:     uri,
                   params:  query_string_params,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::GuestAttributes.decode_json response.body, ignore_unknown_fields: true
 
@@ -869,7 +869,7 @@ module Google
                 response = @client_stub.make_get_request(
                   uri:     uri,
                   params:  query_string_params,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Policy.decode_json response.body, ignore_unknown_fields: true
 
@@ -935,7 +935,7 @@ module Google
                 (uri, _body, _query_string_params) = transcode_get_screenshot request
                 response = @client_stub.make_get_request(
                   uri:     uri,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Screenshot.decode_json response.body, ignore_unknown_fields: true
 
@@ -1010,7 +1010,7 @@ module Google
                 response = @client_stub.make_get_request(
                   uri:     uri,
                   params:  query_string_params,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::SerialPortOutput.decode_json response.body, ignore_unknown_fields: true
 
@@ -1076,7 +1076,7 @@ module Google
                 (uri, _body, _query_string_params) = transcode_get_shielded_instance_identity request
                 response = @client_stub.make_get_request(
                   uri:     uri,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::ShieldedInstanceIdentity.decode_json response.body, ignore_unknown_fields: true
 
@@ -1156,7 +1156,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -1241,7 +1241,7 @@ module Google
                 response = @client_stub.make_get_request(
                   uri:     uri,
                   params:  query_string_params,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::InstanceList.decode_json response.body, ignore_unknown_fields: true
 
@@ -1328,7 +1328,7 @@ module Google
                 response = @client_stub.make_get_request(
                   uri:     uri,
                   params:  query_string_params,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::InstanceListReferrers.decode_json response.body, ignore_unknown_fields: true
 
@@ -1403,7 +1403,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -1476,7 +1476,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   params:  query_string_params,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -1551,7 +1551,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   params:  query_string_params,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -1628,7 +1628,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   params:  query_string_params,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -1697,7 +1697,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Policy.decode_json response.body, ignore_unknown_fields: true
 
@@ -1772,7 +1772,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -1847,7 +1847,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -1922,7 +1922,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -1997,7 +1997,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -2072,7 +2072,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -2147,7 +2147,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -2222,7 +2222,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -2297,7 +2297,7 @@ module Google
                 response = @client_stub.make_patch_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -2372,7 +2372,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -2438,7 +2438,7 @@ module Google
                 (uri, _body, _query_string_params) = transcode_simulate_maintenance_event request
                 response = @client_stub.make_post_request(
                   uri:     uri,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -2511,7 +2511,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   params:  query_string_params,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -2586,7 +2586,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -2659,7 +2659,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   params:  query_string_params,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -2728,7 +2728,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::TestPermissionsResponse.decode_json response.body, ignore_unknown_fields: true
 
@@ -2807,7 +2807,7 @@ module Google
                 response = @client_stub.make_put_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -2884,7 +2884,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -2959,7 +2959,7 @@ module Google
                 response = @client_stub.make_patch_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -3036,7 +3036,7 @@ module Google
                 response = @client_stub.make_patch_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -3111,7 +3111,7 @@ module Google
                 response = @client_stub.make_patch_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 

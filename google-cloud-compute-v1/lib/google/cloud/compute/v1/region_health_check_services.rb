@@ -28,6 +28,13 @@ module Google
   module Cloud
     module Compute
       module V1
+        # To load this service and instantiate a REST client:
+        #
+        #     require "google/cloud/compute/v1/region_health_check_services"
+        #     client = ::Google::Cloud::Compute::V1::RegionHealthCheckServices::Rest::Client.new
+        #
+        module RegionHealthCheckServices
+        end
       end
     end
   end

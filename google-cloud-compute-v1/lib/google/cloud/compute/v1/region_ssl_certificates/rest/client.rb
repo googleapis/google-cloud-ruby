@@ -197,7 +197,7 @@ module Google
                 response = @client_stub.make_delete_request(
                   uri:     uri,
                   params:  query_string_params,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -263,7 +263,7 @@ module Google
                 (uri, _body, _query_string_params) = transcode_get request
                 response = @client_stub.make_get_request(
                   uri:     uri,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::SslCertificate.decode_json response.body, ignore_unknown_fields: true
 
@@ -336,7 +336,7 @@ module Google
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
@@ -421,7 +421,7 @@ module Google
                 response = @client_stub.make_get_request(
                   uri:     uri,
                   params:  query_string_params,
-                  options: options,
+                  options: options
                 )
                 result = ::Google::Cloud::Compute::V1::SslCertificateList.decode_json response.body, ignore_unknown_fields: true
 

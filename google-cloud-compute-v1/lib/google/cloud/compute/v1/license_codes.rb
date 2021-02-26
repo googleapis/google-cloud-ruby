@@ -28,6 +28,13 @@ module Google
   module Cloud
     module Compute
       module V1
+        # To load this service and instantiate a REST client:
+        #
+        #     require "google/cloud/compute/v1/license_codes"
+        #     client = ::Google::Cloud::Compute::V1::LicenseCodes::Rest::Client.new
+        #
+        module LicenseCodes
+        end
       end
     end
   end

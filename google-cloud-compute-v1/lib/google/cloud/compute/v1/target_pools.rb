@@ -28,6 +28,13 @@ module Google
   module Cloud
     module Compute
       module V1
+        # To load this service and instantiate a REST client:
+        #
+        #     require "google/cloud/compute/v1/target_pools"
+        #     client = ::Google::Cloud::Compute::V1::TargetPools::Rest::Client.new
+        #
+        module TargetPools
+        end
       end
     end
   end

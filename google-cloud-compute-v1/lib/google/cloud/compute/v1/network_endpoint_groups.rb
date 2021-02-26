@@ -28,6 +28,13 @@ module Google
   module Cloud
     module Compute
       module V1
+        # To load this service and instantiate a REST client:
+        #
+        #     require "google/cloud/compute/v1/network_endpoint_groups"
+        #     client = ::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::Client.new
+        #
+        module NetworkEndpointGroups
+        end
       end
     end
   end
