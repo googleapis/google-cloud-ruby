@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "pubsub_helper"
+require "avro"
 
 # This test is a ruby version of gcloud-node's pubsub test.
 
@@ -43,6 +44,19 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
   let(:definition) { definition_hash.to_json }
   let(:message_data) { { "name" => "Alaska", "post_abbr" => "AK" }.to_json }
   let(:message_data_invalid) { { "BAD_VALUE" => nil }.to_json }
+focus
+  it "should publish an AVRO message to a topic with an AVRO schema" do
+    file = File.open('sightings.avro', 'wb')
+    schema = Avro::Schema.parse definition
+    writer = Avro::IO::DatumWriter.new(schema)
+    dw = Avro::DataFile::Writer.new(file, writer, schema)
+    dw << { "name" => "Alaska", "post_abbr" => "AK" }
+    dw.close
+    file = File.open('sightings.avro', 'r+')
+    reader = Avro::IO::DatumReader.new(nil, schema)
+    dr = Avro::DataFile::Reader.new(file, reader)
+    dr.each { |record| p record }
+  end
 
   it "should validate schema, create, list, get, validate message with, create topic with, and delete a schema" do
     # validate schema
