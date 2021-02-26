@@ -161,7 +161,7 @@ describe "Spanner Client", :types, :numeric, :spanner do
 
   it "writes and queries NULL array of numeric" do
     skip if emulator_enabled?
-    
+
     id = SecureRandom.int64
     db.upsert table_name, { id: id, numerics: nil }
     results = db.execute_sql "SELECT id, numerics FROM #{table_name} WHERE id = @id", params: { id: id }
@@ -169,5 +169,36 @@ describe "Spanner Client", :types, :numeric, :spanner do
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal({ id: :INT64, numerics: [:NUMERIC] })
     _(results.rows.first.to_h).must_equal({ id: id, numerics: nil })
+  end
+
+  it "writes and queries primary key as a numeric" do
+    skip if emulator_enabled?
+
+    id = BigDecimal(SecureRandom.int64)
+    db.upsert "boxes", { id: id, name: "box-1" }
+
+    results = db.read "boxes", [:id, :name], keys: id
+
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :NUMERIC, name: :STRING })
+    _(results.rows.first.to_h).must_equal({ id: id, name: "box-1" })
+  end
+
+  it "writes and queries composite numeric primary key" do
+    skip if emulator_enabled?
+
+    id = SecureRandom.int64
+    box_id = BigDecimal(SecureRandom.int64)
+
+    db.upsert "box_items", { id: id, box_id: box_id, name: "box-item-1" }
+
+    results = db.execute_sql(
+      "SELECT id, box_id, name FROM box_items WHERE id = @id AND box_id = @box_id",
+      params: { id: id, box_id: box_id }
+    )
+
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, box_id: :NUMERIC, name: :STRING })
+    _(results.rows.first.to_h).must_equal({ id: id, box_id: box_id, name: "box-item-1" })
   end
 end
