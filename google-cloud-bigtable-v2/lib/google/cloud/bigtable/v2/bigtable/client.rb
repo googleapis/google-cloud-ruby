@@ -60,7 +60,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -68,49 +68,49 @@ module Google
                 default_config.rpcs.read_rows.timeout = 43_200.0
                 default_config.rpcs.read_rows.retry_policy = {
                   initial_delay: 0.01,
-                  max_delay:     60.0,
-                  multiplier:    2,
-                  retry_codes:   []
+              max_delay: 60.0,
+              multiplier: 2,
+              retry_codes: []
                 }
 
                 default_config.rpcs.sample_row_keys.timeout = 60.0
                 default_config.rpcs.sample_row_keys.retry_policy = {
                   initial_delay: 0.01,
-                  max_delay:     60.0,
-                  multiplier:    2,
-                  retry_codes:   []
+              max_delay: 60.0,
+              multiplier: 2,
+              retry_codes: []
                 }
 
                 default_config.rpcs.mutate_row.timeout = 60.0
                 default_config.rpcs.mutate_row.retry_policy = {
                   initial_delay: 0.01,
-                  max_delay:     60.0,
-                  multiplier:    2,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 2,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.mutate_rows.timeout = 600.0
                 default_config.rpcs.mutate_rows.retry_policy = {
                   initial_delay: 0.01,
-                  max_delay:     60.0,
-                  multiplier:    2,
-                  retry_codes:   []
+              max_delay: 60.0,
+              multiplier: 2,
+              retry_codes: []
                 }
 
                 default_config.rpcs.check_and_mutate_row.timeout = 20.0
                 default_config.rpcs.check_and_mutate_row.retry_policy = {
                   initial_delay: 0.01,
-                  max_delay:     60.0,
-                  multiplier:    2,
-                  retry_codes:   []
+              max_delay: 60.0,
+              multiplier: 2,
+              retry_codes: []
                 }
 
                 default_config.rpcs.read_modify_write_row.timeout = 20.0
                 default_config.rpcs.read_modify_write_row.retry_policy = {
                   initial_delay: 0.01,
-                  max_delay:     60.0,
-                  multiplier:    2,
-                  retry_codes:   []
+              max_delay: 60.0,
+              multiplier: 2,
+              retry_codes: []
                 }
 
                 default_config
@@ -179,7 +179,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -775,7 +775,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -796,7 +796,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -852,17 +852,17 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  read_rows_config = parent_rpcs&.read_rows if parent_rpcs&.respond_to? :read_rows
+                  read_rows_config = parent_rpcs.read_rows if parent_rpcs.respond_to? :read_rows
                   @read_rows = ::Gapic::Config::Method.new read_rows_config
-                  sample_row_keys_config = parent_rpcs&.sample_row_keys if parent_rpcs&.respond_to? :sample_row_keys
+                  sample_row_keys_config = parent_rpcs.sample_row_keys if parent_rpcs.respond_to? :sample_row_keys
                   @sample_row_keys = ::Gapic::Config::Method.new sample_row_keys_config
-                  mutate_row_config = parent_rpcs&.mutate_row if parent_rpcs&.respond_to? :mutate_row
+                  mutate_row_config = parent_rpcs.mutate_row if parent_rpcs.respond_to? :mutate_row
                   @mutate_row = ::Gapic::Config::Method.new mutate_row_config
-                  mutate_rows_config = parent_rpcs&.mutate_rows if parent_rpcs&.respond_to? :mutate_rows
+                  mutate_rows_config = parent_rpcs.mutate_rows if parent_rpcs.respond_to? :mutate_rows
                   @mutate_rows = ::Gapic::Config::Method.new mutate_rows_config
-                  check_and_mutate_row_config = parent_rpcs&.check_and_mutate_row if parent_rpcs&.respond_to? :check_and_mutate_row
+                  check_and_mutate_row_config = parent_rpcs.check_and_mutate_row if parent_rpcs.respond_to? :check_and_mutate_row
                   @check_and_mutate_row = ::Gapic::Config::Method.new check_and_mutate_row_config
-                  read_modify_write_row_config = parent_rpcs&.read_modify_write_row if parent_rpcs&.respond_to? :read_modify_write_row
+                  read_modify_write_row_config = parent_rpcs.read_modify_write_row if parent_rpcs.respond_to? :read_modify_write_row
                   @read_modify_write_row = ::Gapic::Config::Method.new read_modify_write_row_config
 
                   yield self if block_given?

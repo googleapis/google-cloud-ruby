@@ -115,7 +115,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.read_rows ::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit), grpc_options do |response, operation|
+      client.read_rows(::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -190,7 +190,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.sample_row_keys ::Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new(table_name: table_name, app_profile_id: app_profile_id), grpc_options do |response, operation|
+      client.sample_row_keys(::Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new(table_name: table_name, app_profile_id: app_profile_id), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse, r
@@ -257,7 +257,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.mutate_row ::Google::Cloud::Bigtable::V2::MutateRowRequest.new(table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations), grpc_options do |response, operation|
+      client.mutate_row(::Google::Cloud::Bigtable::V2::MutateRowRequest.new(table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -331,7 +331,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.mutate_rows ::Google::Cloud::Bigtable::V2::MutateRowsRequest.new(table_name: table_name, app_profile_id: app_profile_id, entries: entries), grpc_options do |response, operation|
+      client.mutate_rows(::Google::Cloud::Bigtable::V2::MutateRowsRequest.new(table_name: table_name, app_profile_id: app_profile_id, entries: entries), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowsResponse, r
@@ -402,7 +402,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.check_and_mutate_row ::Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest.new(table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations), grpc_options do |response, operation|
+      client.check_and_mutate_row(::Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest.new(table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -466,7 +466,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.read_modify_write_row ::Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest.new(table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules), grpc_options do |response, operation|
+      client.read_modify_write_row(::Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest.new(table_name: table_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
