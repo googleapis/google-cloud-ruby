@@ -97,7 +97,7 @@ class ::Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::ClientTest
       end
 
       # Use protobuf object with options
-      client.create_job ::Google::Cloud::Video::Transcoder::V1beta1::CreateJobRequest.new(parent: parent, job: job), grpc_options do |response, operation|
+      client.create_job(::Google::Cloud::Video::Transcoder::V1beta1::CreateJobRequest.new(parent: parent, job: job), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -163,7 +163,7 @@ class ::Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::ClientTest
       end
 
       # Use protobuf object with options
-      client.list_jobs ::Google::Cloud::Video::Transcoder::V1beta1::ListJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_jobs(::Google::Cloud::Video::Transcoder::V1beta1::ListJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -222,7 +222,7 @@ class ::Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::ClientTest
       end
 
       # Use protobuf object with options
-      client.get_job ::Google::Cloud::Video::Transcoder::V1beta1::GetJobRequest.new(name: name), grpc_options do |response, operation|
+      client.get_job(::Google::Cloud::Video::Transcoder::V1beta1::GetJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -280,7 +280,7 @@ class ::Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::ClientTest
       end
 
       # Use protobuf object with options
-      client.delete_job ::Google::Cloud::Video::Transcoder::V1beta1::DeleteJobRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_job(::Google::Cloud::Video::Transcoder::V1beta1::DeleteJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -342,7 +342,7 @@ class ::Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::ClientTest
       end
 
       # Use protobuf object with options
-      client.create_job_template ::Google::Cloud::Video::Transcoder::V1beta1::CreateJobTemplateRequest.new(parent: parent, job_template: job_template, job_template_id: job_template_id), grpc_options do |response, operation|
+      client.create_job_template(::Google::Cloud::Video::Transcoder::V1beta1::CreateJobTemplateRequest.new(parent: parent, job_template: job_template, job_template_id: job_template_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -408,7 +408,7 @@ class ::Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::ClientTest
       end
 
       # Use protobuf object with options
-      client.list_job_templates ::Google::Cloud::Video::Transcoder::V1beta1::ListJobTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_job_templates(::Google::Cloud::Video::Transcoder::V1beta1::ListJobTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -467,7 +467,7 @@ class ::Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::ClientTest
       end
 
       # Use protobuf object with options
-      client.get_job_template ::Google::Cloud::Video::Transcoder::V1beta1::GetJobTemplateRequest.new(name: name), grpc_options do |response, operation|
+      client.get_job_template(::Google::Cloud::Video::Transcoder::V1beta1::GetJobTemplateRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -525,7 +525,7 @@ class ::Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::ClientTest
       end
 
       # Use protobuf object with options
-      client.delete_job_template ::Google::Cloud::Video::Transcoder::V1beta1::DeleteJobTemplateRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_job_template(::Google::Cloud::Video::Transcoder::V1beta1::DeleteJobTemplateRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
