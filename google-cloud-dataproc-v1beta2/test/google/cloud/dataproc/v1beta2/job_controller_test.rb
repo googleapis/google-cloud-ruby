@@ -101,7 +101,7 @@ class ::Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.submit_job ::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id), grpc_options do |response, operation|
+      client.submit_job(::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -169,7 +169,7 @@ class ::Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.submit_job_as_operation ::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id), grpc_options do |response, operation|
+      client.submit_job_as_operation(::Google::Cloud::Dataproc::V1beta2::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -232,7 +232,7 @@ class ::Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.get_job ::Google::Cloud::Dataproc::V1beta2::GetJobRequest.new(project_id: project_id, region: region, job_id: job_id), grpc_options do |response, operation|
+      client.get_job(::Google::Cloud::Dataproc::V1beta2::GetJobRequest.new(project_id: project_id, region: region, job_id: job_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -306,7 +306,7 @@ class ::Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_jobs ::Google::Cloud::Dataproc::V1beta2::ListJobsRequest.new(project_id: project_id, region: region, page_size: page_size, page_token: page_token, cluster_name: cluster_name, job_state_matcher: job_state_matcher, filter: filter), grpc_options do |response, operation|
+      client.list_jobs(::Google::Cloud::Dataproc::V1beta2::ListJobsRequest.new(project_id: project_id, region: region, page_size: page_size, page_token: page_token, cluster_name: cluster_name, job_state_matcher: job_state_matcher, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -373,7 +373,7 @@ class ::Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.update_job ::Google::Cloud::Dataproc::V1beta2::UpdateJobRequest.new(project_id: project_id, region: region, job_id: job_id, job: job, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_job(::Google::Cloud::Dataproc::V1beta2::UpdateJobRequest.new(project_id: project_id, region: region, job_id: job_id, job: job, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -435,7 +435,7 @@ class ::Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.cancel_job ::Google::Cloud::Dataproc::V1beta2::CancelJobRequest.new(project_id: project_id, region: region, job_id: job_id), grpc_options do |response, operation|
+      client.cancel_job(::Google::Cloud::Dataproc::V1beta2::CancelJobRequest.new(project_id: project_id, region: region, job_id: job_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -497,7 +497,7 @@ class ::Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.delete_job ::Google::Cloud::Dataproc::V1beta2::DeleteJobRequest.new(project_id: project_id, region: region, job_id: job_id), grpc_options do |response, operation|
+      client.delete_job(::Google::Cloud::Dataproc::V1beta2::DeleteJobRequest.new(project_id: project_id, region: region, job_id: job_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

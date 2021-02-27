@@ -105,7 +105,7 @@ class ::Google::Cloud::Dataproc::V1beta2::ClusterController::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.create_cluster ::Google::Cloud::Dataproc::V1beta2::CreateClusterRequest.new(project_id: project_id, region: region, cluster: cluster, request_id: request_id), grpc_options do |response, operation|
+      client.create_cluster(::Google::Cloud::Dataproc::V1beta2::CreateClusterRequest.new(project_id: project_id, region: region, cluster: cluster, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -180,7 +180,7 @@ class ::Google::Cloud::Dataproc::V1beta2::ClusterController::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.update_cluster ::Google::Cloud::Dataproc::V1beta2::UpdateClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster: cluster, graceful_decommission_timeout: graceful_decommission_timeout, update_mask: update_mask, request_id: request_id), grpc_options do |response, operation|
+      client.update_cluster(::Google::Cloud::Dataproc::V1beta2::UpdateClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster: cluster, graceful_decommission_timeout: graceful_decommission_timeout, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -251,7 +251,7 @@ class ::Google::Cloud::Dataproc::V1beta2::ClusterController::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.delete_cluster ::Google::Cloud::Dataproc::V1beta2::DeleteClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id), grpc_options do |response, operation|
+      client.delete_cluster(::Google::Cloud::Dataproc::V1beta2::DeleteClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -314,7 +314,7 @@ class ::Google::Cloud::Dataproc::V1beta2::ClusterController::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.get_cluster ::Google::Cloud::Dataproc::V1beta2::GetClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name), grpc_options do |response, operation|
+      client.get_cluster(::Google::Cloud::Dataproc::V1beta2::GetClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -384,7 +384,7 @@ class ::Google::Cloud::Dataproc::V1beta2::ClusterController::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.list_clusters ::Google::Cloud::Dataproc::V1beta2::ListClustersRequest.new(project_id: project_id, region: region, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_clusters(::Google::Cloud::Dataproc::V1beta2::ListClustersRequest.new(project_id: project_id, region: region, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -451,7 +451,7 @@ class ::Google::Cloud::Dataproc::V1beta2::ClusterController::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.diagnose_cluster ::Google::Cloud::Dataproc::V1beta2::DiagnoseClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name), grpc_options do |response, operation|
+      client.diagnose_cluster(::Google::Cloud::Dataproc::V1beta2::DiagnoseClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

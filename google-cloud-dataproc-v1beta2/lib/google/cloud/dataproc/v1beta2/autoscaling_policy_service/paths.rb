@@ -54,7 +54,7 @@ module Google
 
                   "projects/#{project}/locations/#{location}/autoscalingPolicies/#{autoscaling_policy}"
                 end),
-                "autoscaling_policy:project:region"   => (proc do |project:, region:, autoscaling_policy:|
+                "autoscaling_policy:project:region" => (proc do |project:, region:, autoscaling_policy:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
                   raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
 
