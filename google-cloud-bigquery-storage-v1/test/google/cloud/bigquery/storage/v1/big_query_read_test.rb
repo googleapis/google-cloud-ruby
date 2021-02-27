@@ -99,7 +99,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.create_read_session ::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest.new(parent: parent, read_session: read_session, max_stream_count: max_stream_count), grpc_options do |response, operation|
+      client.create_read_session(::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest.new(parent: parent, read_session: read_session, max_stream_count: max_stream_count), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -171,7 +171,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.read_rows ::Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest.new(read_stream: read_stream, offset: offset), grpc_options do |response, operation|
+      client.read_rows(::Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest.new(read_stream: read_stream, offset: offset), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse, r
@@ -234,7 +234,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.split_read_stream ::Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest.new(name: name, fraction: fraction), grpc_options do |response, operation|
+      client.split_read_stream(::Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest.new(name: name, fraction: fraction), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
