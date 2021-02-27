@@ -105,7 +105,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_queues ::Google::Cloud::Tasks::V2::ListQueuesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_queues(::Google::Cloud::Tasks::V2::ListQueuesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -164,7 +164,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_queue ::Google::Cloud::Tasks::V2::GetQueueRequest.new(name: name), grpc_options do |response, operation|
+      client.get_queue(::Google::Cloud::Tasks::V2::GetQueueRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -224,7 +224,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_queue ::Google::Cloud::Tasks::V2::CreateQueueRequest.new(parent: parent, queue: queue), grpc_options do |response, operation|
+      client.create_queue(::Google::Cloud::Tasks::V2::CreateQueueRequest.new(parent: parent, queue: queue), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -284,7 +284,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_queue ::Google::Cloud::Tasks::V2::UpdateQueueRequest.new(queue: queue, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_queue(::Google::Cloud::Tasks::V2::UpdateQueueRequest.new(queue: queue, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -342,7 +342,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_queue ::Google::Cloud::Tasks::V2::DeleteQueueRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_queue(::Google::Cloud::Tasks::V2::DeleteQueueRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -400,7 +400,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.purge_queue ::Google::Cloud::Tasks::V2::PurgeQueueRequest.new(name: name), grpc_options do |response, operation|
+      client.purge_queue(::Google::Cloud::Tasks::V2::PurgeQueueRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -458,7 +458,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.pause_queue ::Google::Cloud::Tasks::V2::PauseQueueRequest.new(name: name), grpc_options do |response, operation|
+      client.pause_queue(::Google::Cloud::Tasks::V2::PauseQueueRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -516,7 +516,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.resume_queue ::Google::Cloud::Tasks::V2::ResumeQueueRequest.new(name: name), grpc_options do |response, operation|
+      client.resume_queue(::Google::Cloud::Tasks::V2::ResumeQueueRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -576,7 +576,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
+      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -636,7 +636,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
+      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -696,7 +696,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
+      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -764,7 +764,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_tasks ::Google::Cloud::Tasks::V2::ListTasksRequest.new(parent: parent, response_view: response_view, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_tasks(::Google::Cloud::Tasks::V2::ListTasksRequest.new(parent: parent, response_view: response_view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -825,7 +825,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_task ::Google::Cloud::Tasks::V2::GetTaskRequest.new(name: name, response_view: response_view), grpc_options do |response, operation|
+      client.get_task(::Google::Cloud::Tasks::V2::GetTaskRequest.new(name: name, response_view: response_view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -887,7 +887,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_task ::Google::Cloud::Tasks::V2::CreateTaskRequest.new(parent: parent, task: task, response_view: response_view), grpc_options do |response, operation|
+      client.create_task(::Google::Cloud::Tasks::V2::CreateTaskRequest.new(parent: parent, task: task, response_view: response_view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -945,7 +945,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_task ::Google::Cloud::Tasks::V2::DeleteTaskRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_task(::Google::Cloud::Tasks::V2::DeleteTaskRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1005,7 +1005,7 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.run_task ::Google::Cloud::Tasks::V2::RunTaskRequest.new(name: name, response_view: response_view), grpc_options do |response, operation|
+      client.run_task(::Google::Cloud::Tasks::V2::RunTaskRequest.new(name: name, response_view: response_view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
