@@ -47,7 +47,7 @@ module Google
             # @return [::String]
             def build_path **args
               resources = {
-                "build:project"          => (proc do |project:, build:|
+                "build:project" => (proc do |project:, build:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/builds/#{build}"
