@@ -60,7 +60,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -68,17 +68,17 @@ module Google
                 default_config.rpcs.list_clusters.timeout = 20.0
                 default_config.rpcs.list_clusters.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_cluster.timeout = 20.0
                 default_config.rpcs.get_cluster.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_cluster.timeout = 45.0
@@ -104,25 +104,25 @@ module Google
                 default_config.rpcs.delete_cluster.timeout = 20.0
                 default_config.rpcs.delete_cluster.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_operations.timeout = 20.0
                 default_config.rpcs.list_operations.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_operation.timeout = 20.0
                 default_config.rpcs.get_operation.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.cancel_operation.timeout = 45.0
@@ -130,25 +130,25 @@ module Google
                 default_config.rpcs.get_server_config.timeout = 20.0
                 default_config.rpcs.get_server_config.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_node_pools.timeout = 20.0
                 default_config.rpcs.list_node_pools.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_node_pool.timeout = 20.0
                 default_config.rpcs.get_node_pool.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_node_pool.timeout = 45.0
@@ -156,9 +156,9 @@ module Google
                 default_config.rpcs.delete_node_pool.timeout = 20.0
                 default_config.rpcs.delete_node_pool.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.rollback_node_pool_upgrade.timeout = 45.0
@@ -182,17 +182,17 @@ module Google
                 default_config.rpcs.list_usable_subnetworks.timeout = 20.0
                 default_config.rpcs.list_usable_subnetworks.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_locations.timeout = 20.0
                 default_config.rpcs.list_locations.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config
@@ -261,7 +261,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -3114,7 +3114,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -3135,7 +3135,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -3326,71 +3326,71 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  list_clusters_config = parent_rpcs&.list_clusters if parent_rpcs&.respond_to? :list_clusters
+                  list_clusters_config = parent_rpcs.list_clusters if parent_rpcs.respond_to? :list_clusters
                   @list_clusters = ::Gapic::Config::Method.new list_clusters_config
-                  get_cluster_config = parent_rpcs&.get_cluster if parent_rpcs&.respond_to? :get_cluster
+                  get_cluster_config = parent_rpcs.get_cluster if parent_rpcs.respond_to? :get_cluster
                   @get_cluster = ::Gapic::Config::Method.new get_cluster_config
-                  create_cluster_config = parent_rpcs&.create_cluster if parent_rpcs&.respond_to? :create_cluster
+                  create_cluster_config = parent_rpcs.create_cluster if parent_rpcs.respond_to? :create_cluster
                   @create_cluster = ::Gapic::Config::Method.new create_cluster_config
-                  update_cluster_config = parent_rpcs&.update_cluster if parent_rpcs&.respond_to? :update_cluster
+                  update_cluster_config = parent_rpcs.update_cluster if parent_rpcs.respond_to? :update_cluster
                   @update_cluster = ::Gapic::Config::Method.new update_cluster_config
-                  update_node_pool_config = parent_rpcs&.update_node_pool if parent_rpcs&.respond_to? :update_node_pool
+                  update_node_pool_config = parent_rpcs.update_node_pool if parent_rpcs.respond_to? :update_node_pool
                   @update_node_pool = ::Gapic::Config::Method.new update_node_pool_config
-                  set_node_pool_autoscaling_config = parent_rpcs&.set_node_pool_autoscaling if parent_rpcs&.respond_to? :set_node_pool_autoscaling
+                  set_node_pool_autoscaling_config = parent_rpcs.set_node_pool_autoscaling if parent_rpcs.respond_to? :set_node_pool_autoscaling
                   @set_node_pool_autoscaling = ::Gapic::Config::Method.new set_node_pool_autoscaling_config
-                  set_logging_service_config = parent_rpcs&.set_logging_service if parent_rpcs&.respond_to? :set_logging_service
+                  set_logging_service_config = parent_rpcs.set_logging_service if parent_rpcs.respond_to? :set_logging_service
                   @set_logging_service = ::Gapic::Config::Method.new set_logging_service_config
-                  set_monitoring_service_config = parent_rpcs&.set_monitoring_service if parent_rpcs&.respond_to? :set_monitoring_service
+                  set_monitoring_service_config = parent_rpcs.set_monitoring_service if parent_rpcs.respond_to? :set_monitoring_service
                   @set_monitoring_service = ::Gapic::Config::Method.new set_monitoring_service_config
-                  set_addons_config_config = parent_rpcs&.set_addons_config if parent_rpcs&.respond_to? :set_addons_config
+                  set_addons_config_config = parent_rpcs.set_addons_config if parent_rpcs.respond_to? :set_addons_config
                   @set_addons_config = ::Gapic::Config::Method.new set_addons_config_config
-                  set_locations_config = parent_rpcs&.set_locations if parent_rpcs&.respond_to? :set_locations
+                  set_locations_config = parent_rpcs.set_locations if parent_rpcs.respond_to? :set_locations
                   @set_locations = ::Gapic::Config::Method.new set_locations_config
-                  update_master_config = parent_rpcs&.update_master if parent_rpcs&.respond_to? :update_master
+                  update_master_config = parent_rpcs.update_master if parent_rpcs.respond_to? :update_master
                   @update_master = ::Gapic::Config::Method.new update_master_config
-                  set_master_auth_config = parent_rpcs&.set_master_auth if parent_rpcs&.respond_to? :set_master_auth
+                  set_master_auth_config = parent_rpcs.set_master_auth if parent_rpcs.respond_to? :set_master_auth
                   @set_master_auth = ::Gapic::Config::Method.new set_master_auth_config
-                  delete_cluster_config = parent_rpcs&.delete_cluster if parent_rpcs&.respond_to? :delete_cluster
+                  delete_cluster_config = parent_rpcs.delete_cluster if parent_rpcs.respond_to? :delete_cluster
                   @delete_cluster = ::Gapic::Config::Method.new delete_cluster_config
-                  list_operations_config = parent_rpcs&.list_operations if parent_rpcs&.respond_to? :list_operations
+                  list_operations_config = parent_rpcs.list_operations if parent_rpcs.respond_to? :list_operations
                   @list_operations = ::Gapic::Config::Method.new list_operations_config
-                  get_operation_config = parent_rpcs&.get_operation if parent_rpcs&.respond_to? :get_operation
+                  get_operation_config = parent_rpcs.get_operation if parent_rpcs.respond_to? :get_operation
                   @get_operation = ::Gapic::Config::Method.new get_operation_config
-                  cancel_operation_config = parent_rpcs&.cancel_operation if parent_rpcs&.respond_to? :cancel_operation
+                  cancel_operation_config = parent_rpcs.cancel_operation if parent_rpcs.respond_to? :cancel_operation
                   @cancel_operation = ::Gapic::Config::Method.new cancel_operation_config
-                  get_server_config_config = parent_rpcs&.get_server_config if parent_rpcs&.respond_to? :get_server_config
+                  get_server_config_config = parent_rpcs.get_server_config if parent_rpcs.respond_to? :get_server_config
                   @get_server_config = ::Gapic::Config::Method.new get_server_config_config
-                  list_node_pools_config = parent_rpcs&.list_node_pools if parent_rpcs&.respond_to? :list_node_pools
+                  list_node_pools_config = parent_rpcs.list_node_pools if parent_rpcs.respond_to? :list_node_pools
                   @list_node_pools = ::Gapic::Config::Method.new list_node_pools_config
-                  get_json_web_keys_config = parent_rpcs&.get_json_web_keys if parent_rpcs&.respond_to? :get_json_web_keys
+                  get_json_web_keys_config = parent_rpcs.get_json_web_keys if parent_rpcs.respond_to? :get_json_web_keys
                   @get_json_web_keys = ::Gapic::Config::Method.new get_json_web_keys_config
-                  get_node_pool_config = parent_rpcs&.get_node_pool if parent_rpcs&.respond_to? :get_node_pool
+                  get_node_pool_config = parent_rpcs.get_node_pool if parent_rpcs.respond_to? :get_node_pool
                   @get_node_pool = ::Gapic::Config::Method.new get_node_pool_config
-                  create_node_pool_config = parent_rpcs&.create_node_pool if parent_rpcs&.respond_to? :create_node_pool
+                  create_node_pool_config = parent_rpcs.create_node_pool if parent_rpcs.respond_to? :create_node_pool
                   @create_node_pool = ::Gapic::Config::Method.new create_node_pool_config
-                  delete_node_pool_config = parent_rpcs&.delete_node_pool if parent_rpcs&.respond_to? :delete_node_pool
+                  delete_node_pool_config = parent_rpcs.delete_node_pool if parent_rpcs.respond_to? :delete_node_pool
                   @delete_node_pool = ::Gapic::Config::Method.new delete_node_pool_config
-                  rollback_node_pool_upgrade_config = parent_rpcs&.rollback_node_pool_upgrade if parent_rpcs&.respond_to? :rollback_node_pool_upgrade
+                  rollback_node_pool_upgrade_config = parent_rpcs.rollback_node_pool_upgrade if parent_rpcs.respond_to? :rollback_node_pool_upgrade
                   @rollback_node_pool_upgrade = ::Gapic::Config::Method.new rollback_node_pool_upgrade_config
-                  set_node_pool_management_config = parent_rpcs&.set_node_pool_management if parent_rpcs&.respond_to? :set_node_pool_management
+                  set_node_pool_management_config = parent_rpcs.set_node_pool_management if parent_rpcs.respond_to? :set_node_pool_management
                   @set_node_pool_management = ::Gapic::Config::Method.new set_node_pool_management_config
-                  set_labels_config = parent_rpcs&.set_labels if parent_rpcs&.respond_to? :set_labels
+                  set_labels_config = parent_rpcs.set_labels if parent_rpcs.respond_to? :set_labels
                   @set_labels = ::Gapic::Config::Method.new set_labels_config
-                  set_legacy_abac_config = parent_rpcs&.set_legacy_abac if parent_rpcs&.respond_to? :set_legacy_abac
+                  set_legacy_abac_config = parent_rpcs.set_legacy_abac if parent_rpcs.respond_to? :set_legacy_abac
                   @set_legacy_abac = ::Gapic::Config::Method.new set_legacy_abac_config
-                  start_ip_rotation_config = parent_rpcs&.start_ip_rotation if parent_rpcs&.respond_to? :start_ip_rotation
+                  start_ip_rotation_config = parent_rpcs.start_ip_rotation if parent_rpcs.respond_to? :start_ip_rotation
                   @start_ip_rotation = ::Gapic::Config::Method.new start_ip_rotation_config
-                  complete_ip_rotation_config = parent_rpcs&.complete_ip_rotation if parent_rpcs&.respond_to? :complete_ip_rotation
+                  complete_ip_rotation_config = parent_rpcs.complete_ip_rotation if parent_rpcs.respond_to? :complete_ip_rotation
                   @complete_ip_rotation = ::Gapic::Config::Method.new complete_ip_rotation_config
-                  set_node_pool_size_config = parent_rpcs&.set_node_pool_size if parent_rpcs&.respond_to? :set_node_pool_size
+                  set_node_pool_size_config = parent_rpcs.set_node_pool_size if parent_rpcs.respond_to? :set_node_pool_size
                   @set_node_pool_size = ::Gapic::Config::Method.new set_node_pool_size_config
-                  set_network_policy_config = parent_rpcs&.set_network_policy if parent_rpcs&.respond_to? :set_network_policy
+                  set_network_policy_config = parent_rpcs.set_network_policy if parent_rpcs.respond_to? :set_network_policy
                   @set_network_policy = ::Gapic::Config::Method.new set_network_policy_config
-                  set_maintenance_policy_config = parent_rpcs&.set_maintenance_policy if parent_rpcs&.respond_to? :set_maintenance_policy
+                  set_maintenance_policy_config = parent_rpcs.set_maintenance_policy if parent_rpcs.respond_to? :set_maintenance_policy
                   @set_maintenance_policy = ::Gapic::Config::Method.new set_maintenance_policy_config
-                  list_usable_subnetworks_config = parent_rpcs&.list_usable_subnetworks if parent_rpcs&.respond_to? :list_usable_subnetworks
+                  list_usable_subnetworks_config = parent_rpcs.list_usable_subnetworks if parent_rpcs.respond_to? :list_usable_subnetworks
                   @list_usable_subnetworks = ::Gapic::Config::Method.new list_usable_subnetworks_config
-                  list_locations_config = parent_rpcs&.list_locations if parent_rpcs&.respond_to? :list_locations
+                  list_locations_config = parent_rpcs.list_locations if parent_rpcs.respond_to? :list_locations
                   @list_locations = ::Gapic::Config::Method.new list_locations_config
 
                   yield self if block_given?
