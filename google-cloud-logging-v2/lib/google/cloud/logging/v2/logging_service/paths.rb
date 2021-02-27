@@ -90,17 +90,17 @@ module Google
             # @return [::String]
             def log_path **args
               resources = {
-                "log:project"         => (proc do |project:, log:|
+                "log:project" => (proc do |project:, log:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/logs/#{log}"
                 end),
-                "log:organization"    => (proc do |organization:, log:|
+                "log:organization" => (proc do |organization:, log:|
                   raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
                   "organizations/#{organization}/logs/#{log}"
                 end),
-                "folder:log"          => (proc do |folder:, log:|
+                "folder:log" => (proc do |folder:, log:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/logs/#{log}"

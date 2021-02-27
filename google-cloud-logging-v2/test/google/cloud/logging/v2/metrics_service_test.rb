@@ -103,7 +103,7 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_log_metrics ::Google::Cloud::Logging::V2::ListLogMetricsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_log_metrics(::Google::Cloud::Logging::V2::ListLogMetricsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_log_metric ::Google::Cloud::Logging::V2::GetLogMetricRequest.new(metric_name: metric_name), grpc_options do |response, operation|
+      client.get_log_metric(::Google::Cloud::Logging::V2::GetLogMetricRequest.new(metric_name: metric_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -222,7 +222,7 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_log_metric ::Google::Cloud::Logging::V2::CreateLogMetricRequest.new(parent: parent, metric: metric), grpc_options do |response, operation|
+      client.create_log_metric(::Google::Cloud::Logging::V2::CreateLogMetricRequest.new(parent: parent, metric: metric), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -282,7 +282,7 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_log_metric ::Google::Cloud::Logging::V2::UpdateLogMetricRequest.new(metric_name: metric_name, metric: metric), grpc_options do |response, operation|
+      client.update_log_metric(::Google::Cloud::Logging::V2::UpdateLogMetricRequest.new(metric_name: metric_name, metric: metric), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -340,7 +340,7 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_log_metric ::Google::Cloud::Logging::V2::DeleteLogMetricRequest.new(metric_name: metric_name), grpc_options do |response, operation|
+      client.delete_log_metric(::Google::Cloud::Logging::V2::DeleteLogMetricRequest.new(metric_name: metric_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
