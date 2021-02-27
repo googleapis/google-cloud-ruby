@@ -394,8 +394,9 @@ module Google
             # Return Value:
             # List of {::Google::Cloud::Channel::V1::CloudIdentityCustomerAccount CloudIdentityCustomerAccount} resources for the domain.
             # List may be empty.
+            #
             # Note: in the v1alpha1 version of the API, a NOT_FOUND error is returned if
-            # no {::Google::Cloud::Channel::V1::CloudIdentityCustomerAccount CloudIdentityCustomerAccount} resource match the domain.
+            # no {::Google::Cloud::Channel::V1::CloudIdentityCustomerAccount CloudIdentityCustomerAccount} resources match the domain.
             #
             # @overload check_cloud_identity_accounts_exist(request, options = nil)
             #   Pass arguments to `check_cloud_identity_accounts_exist` via a request object, either of type
