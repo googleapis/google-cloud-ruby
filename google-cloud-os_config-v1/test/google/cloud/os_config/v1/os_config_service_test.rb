@@ -109,7 +109,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.execute_patch_job ::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new(parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout), grpc_options do |response, operation|
+      client.execute_patch_job(::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new(parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -167,7 +167,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_patch_job ::Google::Cloud::OsConfig::V1::GetPatchJobRequest.new(name: name), grpc_options do |response, operation|
+      client.get_patch_job(::Google::Cloud::OsConfig::V1::GetPatchJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -225,7 +225,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.cancel_patch_job ::Google::Cloud::OsConfig::V1::CancelPatchJobRequest.new(name: name), grpc_options do |response, operation|
+      client.cancel_patch_job(::Google::Cloud::OsConfig::V1::CancelPatchJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -293,7 +293,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_patch_jobs ::Google::Cloud::OsConfig::V1::ListPatchJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options do |response, operation|
+      client.list_patch_jobs(::Google::Cloud::OsConfig::V1::ListPatchJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -362,7 +362,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_patch_job_instance_details ::Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options do |response, operation|
+      client.list_patch_job_instance_details(::Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -425,7 +425,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.create_patch_deployment ::Google::Cloud::OsConfig::V1::CreatePatchDeploymentRequest.new(parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment), grpc_options do |response, operation|
+      client.create_patch_deployment(::Google::Cloud::OsConfig::V1::CreatePatchDeploymentRequest.new(parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -483,7 +483,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_patch_deployment ::Google::Cloud::OsConfig::V1::GetPatchDeploymentRequest.new(name: name), grpc_options do |response, operation|
+      client.get_patch_deployment(::Google::Cloud::OsConfig::V1::GetPatchDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -549,7 +549,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_patch_deployments ::Google::Cloud::OsConfig::V1::ListPatchDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_patch_deployments(::Google::Cloud::OsConfig::V1::ListPatchDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -608,7 +608,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.delete_patch_deployment ::Google::Cloud::OsConfig::V1::DeletePatchDeploymentRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_patch_deployment(::Google::Cloud::OsConfig::V1::DeletePatchDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
