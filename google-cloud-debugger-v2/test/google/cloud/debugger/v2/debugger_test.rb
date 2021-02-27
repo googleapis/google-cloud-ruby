@@ -99,7 +99,7 @@ class ::Google::Cloud::Debugger::V2::Debugger::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.set_breakpoint ::Google::Cloud::Debugger::V2::SetBreakpointRequest.new(debuggee_id: debuggee_id, breakpoint: breakpoint, client_version: client_version), grpc_options do |response, operation|
+      client.set_breakpoint(::Google::Cloud::Debugger::V2::SetBreakpointRequest.new(debuggee_id: debuggee_id, breakpoint: breakpoint, client_version: client_version), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -161,7 +161,7 @@ class ::Google::Cloud::Debugger::V2::Debugger::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_breakpoint ::Google::Cloud::Debugger::V2::GetBreakpointRequest.new(debuggee_id: debuggee_id, breakpoint_id: breakpoint_id, client_version: client_version), grpc_options do |response, operation|
+      client.get_breakpoint(::Google::Cloud::Debugger::V2::GetBreakpointRequest.new(debuggee_id: debuggee_id, breakpoint_id: breakpoint_id, client_version: client_version), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -223,7 +223,7 @@ class ::Google::Cloud::Debugger::V2::Debugger::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_breakpoint ::Google::Cloud::Debugger::V2::DeleteBreakpointRequest.new(debuggee_id: debuggee_id, breakpoint_id: breakpoint_id, client_version: client_version), grpc_options do |response, operation|
+      client.delete_breakpoint(::Google::Cloud::Debugger::V2::DeleteBreakpointRequest.new(debuggee_id: debuggee_id, breakpoint_id: breakpoint_id, client_version: client_version), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -293,7 +293,7 @@ class ::Google::Cloud::Debugger::V2::Debugger::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_breakpoints ::Google::Cloud::Debugger::V2::ListBreakpointsRequest.new(debuggee_id: debuggee_id, include_all_users: include_all_users, include_inactive: include_inactive, action: action, strip_results: strip_results, wait_token: wait_token, client_version: client_version), grpc_options do |response, operation|
+      client.list_breakpoints(::Google::Cloud::Debugger::V2::ListBreakpointsRequest.new(debuggee_id: debuggee_id, include_all_users: include_all_users, include_inactive: include_inactive, action: action, strip_results: strip_results, wait_token: wait_token, client_version: client_version), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -355,7 +355,7 @@ class ::Google::Cloud::Debugger::V2::Debugger::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_debuggees ::Google::Cloud::Debugger::V2::ListDebuggeesRequest.new(project: project, include_inactive: include_inactive, client_version: client_version), grpc_options do |response, operation|
+      client.list_debuggees(::Google::Cloud::Debugger::V2::ListDebuggeesRequest.new(project: project, include_inactive: include_inactive, client_version: client_version), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

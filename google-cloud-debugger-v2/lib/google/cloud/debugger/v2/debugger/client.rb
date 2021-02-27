@@ -69,7 +69,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -79,33 +79,33 @@ module Google
                 default_config.rpcs.get_breakpoint.timeout = 600.0
                 default_config.rpcs.get_breakpoint.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_breakpoint.timeout = 600.0
                 default_config.rpcs.delete_breakpoint.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_breakpoints.timeout = 600.0
                 default_config.rpcs.list_breakpoints.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_debuggees.timeout = 600.0
                 default_config.rpcs.list_debuggees.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config
@@ -174,7 +174,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -317,7 +317,7 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
-                "debuggee_id"   => request.debuggee_id,
+                "debuggee_id" => request.debuggee_id,
                 "breakpoint_id" => request.breakpoint_id
               }
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
@@ -389,7 +389,7 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
-                "debuggee_id"   => request.debuggee_id,
+                "debuggee_id" => request.debuggee_id,
                 "breakpoint_id" => request.breakpoint_id
               }
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
@@ -653,7 +653,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -674,7 +674,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -725,15 +725,15 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  set_breakpoint_config = parent_rpcs&.set_breakpoint if parent_rpcs&.respond_to? :set_breakpoint
+                  set_breakpoint_config = parent_rpcs.set_breakpoint if parent_rpcs.respond_to? :set_breakpoint
                   @set_breakpoint = ::Gapic::Config::Method.new set_breakpoint_config
-                  get_breakpoint_config = parent_rpcs&.get_breakpoint if parent_rpcs&.respond_to? :get_breakpoint
+                  get_breakpoint_config = parent_rpcs.get_breakpoint if parent_rpcs.respond_to? :get_breakpoint
                   @get_breakpoint = ::Gapic::Config::Method.new get_breakpoint_config
-                  delete_breakpoint_config = parent_rpcs&.delete_breakpoint if parent_rpcs&.respond_to? :delete_breakpoint
+                  delete_breakpoint_config = parent_rpcs.delete_breakpoint if parent_rpcs.respond_to? :delete_breakpoint
                   @delete_breakpoint = ::Gapic::Config::Method.new delete_breakpoint_config
-                  list_breakpoints_config = parent_rpcs&.list_breakpoints if parent_rpcs&.respond_to? :list_breakpoints
+                  list_breakpoints_config = parent_rpcs.list_breakpoints if parent_rpcs.respond_to? :list_breakpoints
                   @list_breakpoints = ::Gapic::Config::Method.new list_breakpoints_config
-                  list_debuggees_config = parent_rpcs&.list_debuggees if parent_rpcs&.respond_to? :list_debuggees
+                  list_debuggees_config = parent_rpcs.list_debuggees if parent_rpcs.respond_to? :list_debuggees
                   @list_debuggees = ::Gapic::Config::Method.new list_debuggees_config
 
                   yield self if block_given?
