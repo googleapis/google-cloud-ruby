@@ -735,7 +735,7 @@ module Google
         end
 
         ##
-        # Checks if the table's type is "TABLE".
+        # Checks if the table's type is `TABLE`.
         #
         # @return [Boolean, nil] `true` when the type is `TABLE`, `false`
         #   otherwise, if the object is a resource (see {#resource?}); `nil` if
@@ -749,7 +749,7 @@ module Google
         end
 
         ##
-        # Checks if the table's type is "VIEW", indicating that the table
+        # Checks if the table's type is `VIEW`, indicating that the table
         # represents a BigQuery logical view. See {Dataset#create_view}.
         #
         # @see https://cloud.google.com/bigquery/docs/views Creating views
@@ -766,7 +766,7 @@ module Google
         end
 
         ##
-        # Checks if the table's type is "MATERIALIZED_VIEW", indicating that
+        # Checks if the table's type is `MATERIALIZED_VIEW`, indicating that
         # the table represents a BigQuery materialized view.
         # See {Dataset#create_materialized_view}.
         #
@@ -784,7 +784,7 @@ module Google
         end
 
         ##
-        # Checks if the table's type is "EXTERNAL", indicating that the table
+        # Checks if the table's type is `EXTERNAL`, indicating that the table
         # represents an External Data Source. See {#external?} and
         # {External::DataSource}.
         #
