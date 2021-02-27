@@ -60,7 +60,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -68,9 +68,9 @@ module Google
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14]
                 }
 
                 default_config
@@ -139,7 +139,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -931,7 +931,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -952,7 +952,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -1023,23 +1023,23 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  get_agent_config = parent_rpcs&.get_agent if parent_rpcs&.respond_to? :get_agent
+                  get_agent_config = parent_rpcs.get_agent if parent_rpcs.respond_to? :get_agent
                   @get_agent = ::Gapic::Config::Method.new get_agent_config
-                  set_agent_config = parent_rpcs&.set_agent if parent_rpcs&.respond_to? :set_agent
+                  set_agent_config = parent_rpcs.set_agent if parent_rpcs.respond_to? :set_agent
                   @set_agent = ::Gapic::Config::Method.new set_agent_config
-                  delete_agent_config = parent_rpcs&.delete_agent if parent_rpcs&.respond_to? :delete_agent
+                  delete_agent_config = parent_rpcs.delete_agent if parent_rpcs.respond_to? :delete_agent
                   @delete_agent = ::Gapic::Config::Method.new delete_agent_config
-                  search_agents_config = parent_rpcs&.search_agents if parent_rpcs&.respond_to? :search_agents
+                  search_agents_config = parent_rpcs.search_agents if parent_rpcs.respond_to? :search_agents
                   @search_agents = ::Gapic::Config::Method.new search_agents_config
-                  train_agent_config = parent_rpcs&.train_agent if parent_rpcs&.respond_to? :train_agent
+                  train_agent_config = parent_rpcs.train_agent if parent_rpcs.respond_to? :train_agent
                   @train_agent = ::Gapic::Config::Method.new train_agent_config
-                  export_agent_config = parent_rpcs&.export_agent if parent_rpcs&.respond_to? :export_agent
+                  export_agent_config = parent_rpcs.export_agent if parent_rpcs.respond_to? :export_agent
                   @export_agent = ::Gapic::Config::Method.new export_agent_config
-                  import_agent_config = parent_rpcs&.import_agent if parent_rpcs&.respond_to? :import_agent
+                  import_agent_config = parent_rpcs.import_agent if parent_rpcs.respond_to? :import_agent
                   @import_agent = ::Gapic::Config::Method.new import_agent_config
-                  restore_agent_config = parent_rpcs&.restore_agent if parent_rpcs&.respond_to? :restore_agent
+                  restore_agent_config = parent_rpcs.restore_agent if parent_rpcs.respond_to? :restore_agent
                   @restore_agent = ::Gapic::Config::Method.new restore_agent_config
-                  get_validation_result_config = parent_rpcs&.get_validation_result if parent_rpcs&.respond_to? :get_validation_result
+                  get_validation_result_config = parent_rpcs.get_validation_result if parent_rpcs.respond_to? :get_validation_result
                   @get_validation_result = ::Gapic::Config::Method.new get_validation_result_config
 
                   yield self if block_given?

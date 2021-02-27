@@ -103,7 +103,7 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_contexts ::Google::Cloud::Dialogflow::V2::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_contexts(::Google::Cloud::Dialogflow::V2::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_context ::Google::Cloud::Dialogflow::V2::GetContextRequest.new(name: name), grpc_options do |response, operation|
+      client.get_context(::Google::Cloud::Dialogflow::V2::GetContextRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -222,7 +222,7 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_context ::Google::Cloud::Dialogflow::V2::CreateContextRequest.new(parent: parent, context: context), grpc_options do |response, operation|
+      client.create_context(::Google::Cloud::Dialogflow::V2::CreateContextRequest.new(parent: parent, context: context), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -282,7 +282,7 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_context ::Google::Cloud::Dialogflow::V2::UpdateContextRequest.new(context: context, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_context(::Google::Cloud::Dialogflow::V2::UpdateContextRequest.new(context: context, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -340,7 +340,7 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_context ::Google::Cloud::Dialogflow::V2::DeleteContextRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_context(::Google::Cloud::Dialogflow::V2::DeleteContextRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -398,7 +398,7 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_all_contexts ::Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest.new(parent: parent), grpc_options do |response, operation|
+      client.delete_all_contexts(::Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

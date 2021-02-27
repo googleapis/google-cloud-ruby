@@ -95,7 +95,7 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_agent ::Google::Cloud::Dialogflow::V2::GetAgentRequest.new(parent: parent), grpc_options do |response, operation|
+      client.get_agent(::Google::Cloud::Dialogflow::V2::GetAgentRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -155,7 +155,7 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.set_agent ::Google::Cloud::Dialogflow::V2::SetAgentRequest.new(agent: agent, update_mask: update_mask), grpc_options do |response, operation|
+      client.set_agent(::Google::Cloud::Dialogflow::V2::SetAgentRequest.new(agent: agent, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,7 +213,7 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_agent ::Google::Cloud::Dialogflow::V2::DeleteAgentRequest.new(parent: parent), grpc_options do |response, operation|
+      client.delete_agent(::Google::Cloud::Dialogflow::V2::DeleteAgentRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -279,7 +279,7 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.search_agents ::Google::Cloud::Dialogflow::V2::SearchAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.search_agents(::Google::Cloud::Dialogflow::V2::SearchAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -342,7 +342,7 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.train_agent ::Google::Cloud::Dialogflow::V2::TrainAgentRequest.new(parent: parent), grpc_options do |response, operation|
+      client.train_agent(::Google::Cloud::Dialogflow::V2::TrainAgentRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -407,7 +407,7 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.export_agent ::Google::Cloud::Dialogflow::V2::ExportAgentRequest.new(parent: parent, agent_uri: agent_uri), grpc_options do |response, operation|
+      client.export_agent(::Google::Cloud::Dialogflow::V2::ExportAgentRequest.new(parent: parent, agent_uri: agent_uri), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -473,7 +473,7 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.import_agent ::Google::Cloud::Dialogflow::V2::ImportAgentRequest.new(parent: parent, agent_uri: agent_uri), grpc_options do |response, operation|
+      client.import_agent(::Google::Cloud::Dialogflow::V2::ImportAgentRequest.new(parent: parent, agent_uri: agent_uri), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -539,7 +539,7 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.restore_agent ::Google::Cloud::Dialogflow::V2::RestoreAgentRequest.new(parent: parent, agent_uri: agent_uri), grpc_options do |response, operation|
+      client.restore_agent(::Google::Cloud::Dialogflow::V2::RestoreAgentRequest.new(parent: parent, agent_uri: agent_uri), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -600,7 +600,7 @@ class ::Google::Cloud::Dialogflow::V2::Agents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_validation_result ::Google::Cloud::Dialogflow::V2::GetValidationResultRequest.new(parent: parent, language_code: language_code), grpc_options do |response, operation|
+      client.get_validation_result(::Google::Cloud::Dialogflow::V2::GetValidationResultRequest.new(parent: parent, language_code: language_code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

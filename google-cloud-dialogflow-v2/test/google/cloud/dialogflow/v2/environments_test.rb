@@ -103,7 +103,7 @@ class ::Google::Cloud::Dialogflow::V2::Environments::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_environments ::Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_environments(::Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

@@ -48,7 +48,7 @@ module Google
             # @return [::String]
             def session_path **args
               resources = {
-                "project:session"                  => (proc do |project:, session:|
+                "project:session" => (proc do |project:, session:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/agent/sessions/#{session}"
@@ -93,7 +93,7 @@ module Google
             # @return [::String]
             def session_entity_type_path **args
               resources = {
-                "entity_type:project:session"                  => (proc do |project:, session:, entity_type:|
+                "entity_type:project:session" => (proc do |project:, session:, entity_type:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
                   raise ::ArgumentError, "session cannot contain /" if session.to_s.include? "/"
 
