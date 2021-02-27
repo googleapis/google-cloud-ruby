@@ -59,7 +59,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -67,49 +67,49 @@ module Google
                 default_config.rpcs.create_cluster.timeout = 300.0
                 default_config.rpcs.create_cluster.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.update_cluster.timeout = 300.0
                 default_config.rpcs.update_cluster.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.delete_cluster.timeout = 300.0
                 default_config.rpcs.delete_cluster.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.get_cluster.timeout = 300.0
                 default_config.rpcs.get_cluster.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [13, 4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [13, 4, 14]
                 }
 
                 default_config.rpcs.list_clusters.timeout = 300.0
                 default_config.rpcs.list_clusters.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [13, 4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [13, 4, 14]
                 }
 
                 default_config.rpcs.diagnose_cluster.timeout = 300.0
                 default_config.rpcs.diagnose_cluster.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config
@@ -178,7 +178,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -276,7 +276,7 @@ module Google
 
               header_params = {
                 "project_id" => request.project_id,
-                "region"     => request.region
+                "region" => request.region
               }
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -426,8 +426,8 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
-                "project_id"   => request.project_id,
-                "region"       => request.region,
+                "project_id" => request.project_id,
+                "region" => request.region,
                 "cluster_name" => request.cluster_name
               }
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
@@ -517,8 +517,8 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
-                "project_id"   => request.project_id,
-                "region"       => request.region,
+                "project_id" => request.project_id,
+                "region" => request.region,
                 "cluster_name" => request.cluster_name
               }
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
@@ -591,8 +591,8 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
-                "project_id"   => request.project_id,
-                "region"       => request.region,
+                "project_id" => request.project_id,
+                "region" => request.region,
                 "cluster_name" => request.cluster_name
               }
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
@@ -687,7 +687,7 @@ module Google
 
               header_params = {
                 "project_id" => request.project_id,
-                "region"     => request.region
+                "region" => request.region
               }
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -765,8 +765,8 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
-                "project_id"   => request.project_id,
-                "region"       => request.region,
+                "project_id" => request.project_id,
+                "region" => request.region,
                 "cluster_name" => request.cluster_name
               }
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
@@ -879,7 +879,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -900,7 +900,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -956,17 +956,17 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  create_cluster_config = parent_rpcs&.create_cluster if parent_rpcs&.respond_to? :create_cluster
+                  create_cluster_config = parent_rpcs.create_cluster if parent_rpcs.respond_to? :create_cluster
                   @create_cluster = ::Gapic::Config::Method.new create_cluster_config
-                  update_cluster_config = parent_rpcs&.update_cluster if parent_rpcs&.respond_to? :update_cluster
+                  update_cluster_config = parent_rpcs.update_cluster if parent_rpcs.respond_to? :update_cluster
                   @update_cluster = ::Gapic::Config::Method.new update_cluster_config
-                  delete_cluster_config = parent_rpcs&.delete_cluster if parent_rpcs&.respond_to? :delete_cluster
+                  delete_cluster_config = parent_rpcs.delete_cluster if parent_rpcs.respond_to? :delete_cluster
                   @delete_cluster = ::Gapic::Config::Method.new delete_cluster_config
-                  get_cluster_config = parent_rpcs&.get_cluster if parent_rpcs&.respond_to? :get_cluster
+                  get_cluster_config = parent_rpcs.get_cluster if parent_rpcs.respond_to? :get_cluster
                   @get_cluster = ::Gapic::Config::Method.new get_cluster_config
-                  list_clusters_config = parent_rpcs&.list_clusters if parent_rpcs&.respond_to? :list_clusters
+                  list_clusters_config = parent_rpcs.list_clusters if parent_rpcs.respond_to? :list_clusters
                   @list_clusters = ::Gapic::Config::Method.new list_clusters_config
-                  diagnose_cluster_config = parent_rpcs&.diagnose_cluster if parent_rpcs&.respond_to? :diagnose_cluster
+                  diagnose_cluster_config = parent_rpcs.diagnose_cluster if parent_rpcs.respond_to? :diagnose_cluster
                   @diagnose_cluster = ::Gapic::Config::Method.new diagnose_cluster_config
 
                   yield self if block_given?
