@@ -62,7 +62,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -72,25 +72,25 @@ module Google
                 default_config.rpcs.delete_scan_config.timeout = 600.0
                 default_config.rpcs.delete_scan_config.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_scan_config.timeout = 600.0
                 default_config.rpcs.get_scan_config.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_scan_configs.timeout = 600.0
                 default_config.rpcs.list_scan_configs.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_scan_config.timeout = 600.0
@@ -100,17 +100,17 @@ module Google
                 default_config.rpcs.get_scan_run.timeout = 600.0
                 default_config.rpcs.get_scan_run.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_scan_runs.timeout = 600.0
                 default_config.rpcs.list_scan_runs.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.stop_scan_run.timeout = 600.0
@@ -118,33 +118,33 @@ module Google
                 default_config.rpcs.list_crawled_urls.timeout = 600.0
                 default_config.rpcs.list_crawled_urls.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_finding.timeout = 600.0
                 default_config.rpcs.get_finding.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_findings.timeout = 600.0
                 default_config.rpcs.list_findings.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_finding_type_stats.timeout = 600.0
                 default_config.rpcs.list_finding_type_stats.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config
@@ -213,7 +213,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -1250,7 +1250,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1271,7 +1271,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -1362,31 +1362,31 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  create_scan_config_config = parent_rpcs&.create_scan_config if parent_rpcs&.respond_to? :create_scan_config
+                  create_scan_config_config = parent_rpcs.create_scan_config if parent_rpcs.respond_to? :create_scan_config
                   @create_scan_config = ::Gapic::Config::Method.new create_scan_config_config
-                  delete_scan_config_config = parent_rpcs&.delete_scan_config if parent_rpcs&.respond_to? :delete_scan_config
+                  delete_scan_config_config = parent_rpcs.delete_scan_config if parent_rpcs.respond_to? :delete_scan_config
                   @delete_scan_config = ::Gapic::Config::Method.new delete_scan_config_config
-                  get_scan_config_config = parent_rpcs&.get_scan_config if parent_rpcs&.respond_to? :get_scan_config
+                  get_scan_config_config = parent_rpcs.get_scan_config if parent_rpcs.respond_to? :get_scan_config
                   @get_scan_config = ::Gapic::Config::Method.new get_scan_config_config
-                  list_scan_configs_config = parent_rpcs&.list_scan_configs if parent_rpcs&.respond_to? :list_scan_configs
+                  list_scan_configs_config = parent_rpcs.list_scan_configs if parent_rpcs.respond_to? :list_scan_configs
                   @list_scan_configs = ::Gapic::Config::Method.new list_scan_configs_config
-                  update_scan_config_config = parent_rpcs&.update_scan_config if parent_rpcs&.respond_to? :update_scan_config
+                  update_scan_config_config = parent_rpcs.update_scan_config if parent_rpcs.respond_to? :update_scan_config
                   @update_scan_config = ::Gapic::Config::Method.new update_scan_config_config
-                  start_scan_run_config = parent_rpcs&.start_scan_run if parent_rpcs&.respond_to? :start_scan_run
+                  start_scan_run_config = parent_rpcs.start_scan_run if parent_rpcs.respond_to? :start_scan_run
                   @start_scan_run = ::Gapic::Config::Method.new start_scan_run_config
-                  get_scan_run_config = parent_rpcs&.get_scan_run if parent_rpcs&.respond_to? :get_scan_run
+                  get_scan_run_config = parent_rpcs.get_scan_run if parent_rpcs.respond_to? :get_scan_run
                   @get_scan_run = ::Gapic::Config::Method.new get_scan_run_config
-                  list_scan_runs_config = parent_rpcs&.list_scan_runs if parent_rpcs&.respond_to? :list_scan_runs
+                  list_scan_runs_config = parent_rpcs.list_scan_runs if parent_rpcs.respond_to? :list_scan_runs
                   @list_scan_runs = ::Gapic::Config::Method.new list_scan_runs_config
-                  stop_scan_run_config = parent_rpcs&.stop_scan_run if parent_rpcs&.respond_to? :stop_scan_run
+                  stop_scan_run_config = parent_rpcs.stop_scan_run if parent_rpcs.respond_to? :stop_scan_run
                   @stop_scan_run = ::Gapic::Config::Method.new stop_scan_run_config
-                  list_crawled_urls_config = parent_rpcs&.list_crawled_urls if parent_rpcs&.respond_to? :list_crawled_urls
+                  list_crawled_urls_config = parent_rpcs.list_crawled_urls if parent_rpcs.respond_to? :list_crawled_urls
                   @list_crawled_urls = ::Gapic::Config::Method.new list_crawled_urls_config
-                  get_finding_config = parent_rpcs&.get_finding if parent_rpcs&.respond_to? :get_finding
+                  get_finding_config = parent_rpcs.get_finding if parent_rpcs.respond_to? :get_finding
                   @get_finding = ::Gapic::Config::Method.new get_finding_config
-                  list_findings_config = parent_rpcs&.list_findings if parent_rpcs&.respond_to? :list_findings
+                  list_findings_config = parent_rpcs.list_findings if parent_rpcs.respond_to? :list_findings
                   @list_findings = ::Gapic::Config::Method.new list_findings_config
-                  list_finding_type_stats_config = parent_rpcs&.list_finding_type_stats if parent_rpcs&.respond_to? :list_finding_type_stats
+                  list_finding_type_stats_config = parent_rpcs.list_finding_type_stats if parent_rpcs.respond_to? :list_finding_type_stats
                   @list_finding_type_stats = ::Gapic::Config::Method.new list_finding_type_stats_config
 
                   yield self if block_given?
