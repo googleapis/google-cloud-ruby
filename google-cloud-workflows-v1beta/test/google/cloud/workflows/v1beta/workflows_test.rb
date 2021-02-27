@@ -107,7 +107,7 @@ class ::Google::Cloud::Workflows::V1beta::Workflows::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_workflows ::Google::Cloud::Workflows::V1beta::ListWorkflowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_workflows(::Google::Cloud::Workflows::V1beta::ListWorkflowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -166,7 +166,7 @@ class ::Google::Cloud::Workflows::V1beta::Workflows::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_workflow ::Google::Cloud::Workflows::V1beta::GetWorkflowRequest.new(name: name), grpc_options do |response, operation|
+      client.get_workflow(::Google::Cloud::Workflows::V1beta::GetWorkflowRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -232,7 +232,7 @@ class ::Google::Cloud::Workflows::V1beta::Workflows::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_workflow ::Google::Cloud::Workflows::V1beta::CreateWorkflowRequest.new(parent: parent, workflow: workflow, workflow_id: workflow_id), grpc_options do |response, operation|
+      client.create_workflow(::Google::Cloud::Workflows::V1beta::CreateWorkflowRequest.new(parent: parent, workflow: workflow, workflow_id: workflow_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -295,7 +295,7 @@ class ::Google::Cloud::Workflows::V1beta::Workflows::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_workflow ::Google::Cloud::Workflows::V1beta::DeleteWorkflowRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_workflow(::Google::Cloud::Workflows::V1beta::DeleteWorkflowRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -360,7 +360,7 @@ class ::Google::Cloud::Workflows::V1beta::Workflows::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_workflow ::Google::Cloud::Workflows::V1beta::UpdateWorkflowRequest.new(workflow: workflow, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_workflow(::Google::Cloud::Workflows::V1beta::UpdateWorkflowRequest.new(workflow: workflow, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
