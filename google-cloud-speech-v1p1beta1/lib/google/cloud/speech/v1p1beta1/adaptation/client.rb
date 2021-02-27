@@ -60,7 +60,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -131,7 +131,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -972,7 +972,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -993,7 +993,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -1069,25 +1069,25 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  create_phrase_set_config = parent_rpcs&.create_phrase_set if parent_rpcs&.respond_to? :create_phrase_set
+                  create_phrase_set_config = parent_rpcs.create_phrase_set if parent_rpcs.respond_to? :create_phrase_set
                   @create_phrase_set = ::Gapic::Config::Method.new create_phrase_set_config
-                  get_phrase_set_config = parent_rpcs&.get_phrase_set if parent_rpcs&.respond_to? :get_phrase_set
+                  get_phrase_set_config = parent_rpcs.get_phrase_set if parent_rpcs.respond_to? :get_phrase_set
                   @get_phrase_set = ::Gapic::Config::Method.new get_phrase_set_config
-                  list_phrase_set_config = parent_rpcs&.list_phrase_set if parent_rpcs&.respond_to? :list_phrase_set
+                  list_phrase_set_config = parent_rpcs.list_phrase_set if parent_rpcs.respond_to? :list_phrase_set
                   @list_phrase_set = ::Gapic::Config::Method.new list_phrase_set_config
-                  update_phrase_set_config = parent_rpcs&.update_phrase_set if parent_rpcs&.respond_to? :update_phrase_set
+                  update_phrase_set_config = parent_rpcs.update_phrase_set if parent_rpcs.respond_to? :update_phrase_set
                   @update_phrase_set = ::Gapic::Config::Method.new update_phrase_set_config
-                  delete_phrase_set_config = parent_rpcs&.delete_phrase_set if parent_rpcs&.respond_to? :delete_phrase_set
+                  delete_phrase_set_config = parent_rpcs.delete_phrase_set if parent_rpcs.respond_to? :delete_phrase_set
                   @delete_phrase_set = ::Gapic::Config::Method.new delete_phrase_set_config
-                  create_custom_class_config = parent_rpcs&.create_custom_class if parent_rpcs&.respond_to? :create_custom_class
+                  create_custom_class_config = parent_rpcs.create_custom_class if parent_rpcs.respond_to? :create_custom_class
                   @create_custom_class = ::Gapic::Config::Method.new create_custom_class_config
-                  get_custom_class_config = parent_rpcs&.get_custom_class if parent_rpcs&.respond_to? :get_custom_class
+                  get_custom_class_config = parent_rpcs.get_custom_class if parent_rpcs.respond_to? :get_custom_class
                   @get_custom_class = ::Gapic::Config::Method.new get_custom_class_config
-                  list_custom_classes_config = parent_rpcs&.list_custom_classes if parent_rpcs&.respond_to? :list_custom_classes
+                  list_custom_classes_config = parent_rpcs.list_custom_classes if parent_rpcs.respond_to? :list_custom_classes
                   @list_custom_classes = ::Gapic::Config::Method.new list_custom_classes_config
-                  update_custom_class_config = parent_rpcs&.update_custom_class if parent_rpcs&.respond_to? :update_custom_class
+                  update_custom_class_config = parent_rpcs.update_custom_class if parent_rpcs.respond_to? :update_custom_class
                   @update_custom_class = ::Gapic::Config::Method.new update_custom_class_config
-                  delete_custom_class_config = parent_rpcs&.delete_custom_class if parent_rpcs&.respond_to? :delete_custom_class
+                  delete_custom_class_config = parent_rpcs.delete_custom_class if parent_rpcs.respond_to? :delete_custom_class
                   @delete_custom_class = ::Gapic::Config::Method.new delete_custom_class_config
 
                   yield self if block_given?

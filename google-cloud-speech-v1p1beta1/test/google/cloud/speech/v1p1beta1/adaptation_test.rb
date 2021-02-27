@@ -99,7 +99,7 @@ class ::Google::Cloud::Speech::V1p1beta1::Adaptation::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.create_phrase_set ::Google::Cloud::Speech::V1p1beta1::CreatePhraseSetRequest.new(parent: parent, phrase_set_id: phrase_set_id, phrase_set: phrase_set), grpc_options do |response, operation|
+      client.create_phrase_set(::Google::Cloud::Speech::V1p1beta1::CreatePhraseSetRequest.new(parent: parent, phrase_set_id: phrase_set_id, phrase_set: phrase_set), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -157,7 +157,7 @@ class ::Google::Cloud::Speech::V1p1beta1::Adaptation::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_phrase_set ::Google::Cloud::Speech::V1p1beta1::GetPhraseSetRequest.new(name: name), grpc_options do |response, operation|
+      client.get_phrase_set(::Google::Cloud::Speech::V1p1beta1::GetPhraseSetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -223,7 +223,7 @@ class ::Google::Cloud::Speech::V1p1beta1::Adaptation::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_phrase_set ::Google::Cloud::Speech::V1p1beta1::ListPhraseSetRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_phrase_set(::Google::Cloud::Speech::V1p1beta1::ListPhraseSetRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -284,7 +284,7 @@ class ::Google::Cloud::Speech::V1p1beta1::Adaptation::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.update_phrase_set ::Google::Cloud::Speech::V1p1beta1::UpdatePhraseSetRequest.new(phrase_set: phrase_set, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_phrase_set(::Google::Cloud::Speech::V1p1beta1::UpdatePhraseSetRequest.new(phrase_set: phrase_set, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -342,7 +342,7 @@ class ::Google::Cloud::Speech::V1p1beta1::Adaptation::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.delete_phrase_set ::Google::Cloud::Speech::V1p1beta1::DeletePhraseSetRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_phrase_set(::Google::Cloud::Speech::V1p1beta1::DeletePhraseSetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -404,7 +404,7 @@ class ::Google::Cloud::Speech::V1p1beta1::Adaptation::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.create_custom_class ::Google::Cloud::Speech::V1p1beta1::CreateCustomClassRequest.new(parent: parent, custom_class_id: custom_class_id, custom_class: custom_class), grpc_options do |response, operation|
+      client.create_custom_class(::Google::Cloud::Speech::V1p1beta1::CreateCustomClassRequest.new(parent: parent, custom_class_id: custom_class_id, custom_class: custom_class), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -462,7 +462,7 @@ class ::Google::Cloud::Speech::V1p1beta1::Adaptation::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_custom_class ::Google::Cloud::Speech::V1p1beta1::GetCustomClassRequest.new(name: name), grpc_options do |response, operation|
+      client.get_custom_class(::Google::Cloud::Speech::V1p1beta1::GetCustomClassRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -528,7 +528,7 @@ class ::Google::Cloud::Speech::V1p1beta1::Adaptation::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_custom_classes ::Google::Cloud::Speech::V1p1beta1::ListCustomClassesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_custom_classes(::Google::Cloud::Speech::V1p1beta1::ListCustomClassesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -589,7 +589,7 @@ class ::Google::Cloud::Speech::V1p1beta1::Adaptation::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.update_custom_class ::Google::Cloud::Speech::V1p1beta1::UpdateCustomClassRequest.new(custom_class: custom_class, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_custom_class(::Google::Cloud::Speech::V1p1beta1::UpdateCustomClassRequest.new(custom_class: custom_class, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -647,7 +647,7 @@ class ::Google::Cloud::Speech::V1p1beta1::Adaptation::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.delete_custom_class ::Google::Cloud::Speech::V1p1beta1::DeleteCustomClassRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_custom_class(::Google::Cloud::Speech::V1p1beta1::DeleteCustomClassRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
