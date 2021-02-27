@@ -147,6 +147,10 @@ module Google
         #     For Regular Offers with a trial period, the regular pricing goes into
         #     effect when trial period ends, or if paid service is started before the end
         #     of the trial period.
+        # @!attribute [rw] billing_account
+        #   @return [::String]
+        #     Reseller Billing account to charge after an offer transaction.
+        #     Only present for Google Cloud Platform offers.
         class Plan
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

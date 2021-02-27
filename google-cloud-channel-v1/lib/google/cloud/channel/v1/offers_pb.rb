@@ -50,6 +50,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :payment_type, :enum, 2, "google.cloud.channel.v1.PaymentType"
       optional :payment_cycle, :message, 3, "google.cloud.channel.v1.Period"
       optional :trial_period, :message, 4, "google.cloud.channel.v1.Period"
+      optional :billing_account, :string, 5
     end
     add_message "google.cloud.channel.v1.PriceByResource" do
       optional :resource_type, :enum, 1, "google.cloud.channel.v1.ResourceType"
