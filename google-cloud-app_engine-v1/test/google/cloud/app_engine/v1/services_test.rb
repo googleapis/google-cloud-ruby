@@ -103,7 +103,7 @@ class ::Google::Cloud::AppEngine::V1::Services::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_services ::Google::Cloud::AppEngine::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_services(::Google::Cloud::AppEngine::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class ::Google::Cloud::AppEngine::V1::Services::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_service ::Google::Cloud::AppEngine::V1::GetServiceRequest.new(name: name), grpc_options do |response, operation|
+      client.get_service(::Google::Cloud::AppEngine::V1::GetServiceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -230,7 +230,7 @@ class ::Google::Cloud::AppEngine::V1::Services::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_service ::Google::Cloud::AppEngine::V1::UpdateServiceRequest.new(name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic), grpc_options do |response, operation|
+      client.update_service(::Google::Cloud::AppEngine::V1::UpdateServiceRequest.new(name: name, service: service, update_mask: update_mask, migrate_traffic: migrate_traffic), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -293,7 +293,7 @@ class ::Google::Cloud::AppEngine::V1::Services::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_service ::Google::Cloud::AppEngine::V1::DeleteServiceRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_service(::Google::Cloud::AppEngine::V1::DeleteServiceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

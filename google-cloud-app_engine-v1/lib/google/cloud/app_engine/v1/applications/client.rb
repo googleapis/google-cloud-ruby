@@ -58,7 +58,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -129,7 +129,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -536,7 +536,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -557,7 +557,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -603,13 +603,13 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  get_application_config = parent_rpcs&.get_application if parent_rpcs&.respond_to? :get_application
+                  get_application_config = parent_rpcs.get_application if parent_rpcs.respond_to? :get_application
                   @get_application = ::Gapic::Config::Method.new get_application_config
-                  create_application_config = parent_rpcs&.create_application if parent_rpcs&.respond_to? :create_application
+                  create_application_config = parent_rpcs.create_application if parent_rpcs.respond_to? :create_application
                   @create_application = ::Gapic::Config::Method.new create_application_config
-                  update_application_config = parent_rpcs&.update_application if parent_rpcs&.respond_to? :update_application
+                  update_application_config = parent_rpcs.update_application if parent_rpcs.respond_to? :update_application
                   @update_application = ::Gapic::Config::Method.new update_application_config
-                  repair_application_config = parent_rpcs&.repair_application if parent_rpcs&.respond_to? :repair_application
+                  repair_application_config = parent_rpcs.repair_application if parent_rpcs.respond_to? :repair_application
                   @repair_application = ::Gapic::Config::Method.new repair_application_config
 
                   yield self if block_given?

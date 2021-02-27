@@ -103,7 +103,7 @@ class ::Google::Cloud::AppEngine::V1::DomainMappings::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_domain_mappings ::Google::Cloud::AppEngine::V1::ListDomainMappingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_domain_mappings(::Google::Cloud::AppEngine::V1::ListDomainMappingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class ::Google::Cloud::AppEngine::V1::DomainMappings::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_domain_mapping ::Google::Cloud::AppEngine::V1::GetDomainMappingRequest.new(name: name), grpc_options do |response, operation|
+      client.get_domain_mapping(::Google::Cloud::AppEngine::V1::GetDomainMappingRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -228,7 +228,7 @@ class ::Google::Cloud::AppEngine::V1::DomainMappings::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.create_domain_mapping ::Google::Cloud::AppEngine::V1::CreateDomainMappingRequest.new(parent: parent, domain_mapping: domain_mapping, override_strategy: override_strategy), grpc_options do |response, operation|
+      client.create_domain_mapping(::Google::Cloud::AppEngine::V1::CreateDomainMappingRequest.new(parent: parent, domain_mapping: domain_mapping, override_strategy: override_strategy), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -295,7 +295,7 @@ class ::Google::Cloud::AppEngine::V1::DomainMappings::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.update_domain_mapping ::Google::Cloud::AppEngine::V1::UpdateDomainMappingRequest.new(name: name, domain_mapping: domain_mapping, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_domain_mapping(::Google::Cloud::AppEngine::V1::UpdateDomainMappingRequest.new(name: name, domain_mapping: domain_mapping, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -358,7 +358,7 @@ class ::Google::Cloud::AppEngine::V1::DomainMappings::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.delete_domain_mapping ::Google::Cloud::AppEngine::V1::DeleteDomainMappingRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_domain_mapping(::Google::Cloud::AppEngine::V1::DeleteDomainMappingRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -103,7 +103,7 @@ class ::Google::Cloud::AppEngine::V1::AuthorizedDomains::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_authorized_domains ::Google::Cloud::AppEngine::V1::ListAuthorizedDomainsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_authorized_domains(::Google::Cloud::AppEngine::V1::ListAuthorizedDomainsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
