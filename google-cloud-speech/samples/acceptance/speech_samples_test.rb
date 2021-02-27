@@ -14,7 +14,7 @@
 
 
 require_relative "helper"
-require_relative "../speech_samples.rb"
+require_relative "../speech_samples"
 
 describe "Google Cloud Speech API samples" do
   parallelize_me!

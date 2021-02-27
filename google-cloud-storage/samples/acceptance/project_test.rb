@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../storage_get_service_account.rb"
+require_relative "../storage_get_service_account"
 
 describe "Storage Quickstart" do
   let(:project) { Google::Cloud::Storage.new }

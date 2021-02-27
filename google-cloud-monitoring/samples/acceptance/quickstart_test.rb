@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../quickstart.rb"
+require_relative "../quickstart"
 
 describe "quickstart", :monitoring do
   it "writes time series data that can be read back" do

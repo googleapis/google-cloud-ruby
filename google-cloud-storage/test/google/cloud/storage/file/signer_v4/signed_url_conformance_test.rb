@@ -14,7 +14,7 @@
 
 require "helper"
 require "json"
-require_relative "../../../../../../conformance/v1/proto/google/cloud/conformance/storage/v1/tests_pb.rb"
+require_relative "../../../../../../conformance/v1/proto/google/cloud/conformance/storage/v1/tests_pb"
 
 class SignedUrlConformanceTest < MockStorage
   def setup

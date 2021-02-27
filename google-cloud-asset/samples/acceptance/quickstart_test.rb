@@ -14,7 +14,7 @@
 
 require "google/cloud/pubsub"
 
-require_relative "helper.rb"
+require_relative "helper"
 require_relative "../quickstart"
 
 describe "Asset Quickstart" do

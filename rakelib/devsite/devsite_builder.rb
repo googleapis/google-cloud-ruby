@@ -1,6 +1,6 @@
-require_relative "repo_metadata.rb"
-require_relative "gem_version_doc.rb"
-require_relative "yard_builder.rb"
+require_relative "repo_metadata"
+require_relative "gem_version_doc"
+require_relative "yard_builder"
 
 class DevsiteBuilder < YardBuilder
   def initialize master_dir = "."

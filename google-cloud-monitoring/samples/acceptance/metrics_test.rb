@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../metrics.rb"
+require_relative "../metrics"
 
 describe "metrics", :monitoring do
   let(:metric_type) { "custom.googleapis.com/my_metric_#{random_id}" }

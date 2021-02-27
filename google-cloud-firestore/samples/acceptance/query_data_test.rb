@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative "helper.rb"
-require_relative "../query_data.rb"
+require_relative "helper"
+require_relative "../query_data"
 
 describe "Google Cloud Firestore API samples - Query Data" do
   before :all do

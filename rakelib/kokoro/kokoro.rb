@@ -4,8 +4,8 @@ require "json"
 require "net/http"
 require "open3"
 
-require_relative "command.rb"
-require_relative "kokoro_builder.rb"
+require_relative "command"
+require_relative "kokoro_builder"
 
 class Kokoro < Command
   # Normally true. Set to false temporarily when releases are frozen.

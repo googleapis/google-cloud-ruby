@@ -6,6 +6,6 @@ Rake::TestTask.new "test" do |t|
 end
 
 task :create_fixtures do
-  require_relative "acceptance/helper.rb"
+  require_relative "acceptance/helper"
   create_fixtures_bucket
 end

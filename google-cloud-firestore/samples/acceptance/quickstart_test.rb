@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative "helper.rb"
-require_relative "../quickstart.rb"
+require_relative "helper"
+require_relative "../quickstart"
 
 describe "Google Cloud Firestore API samples - Quickstart" do
   before :all do

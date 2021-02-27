@@ -1,5 +1,5 @@
 require "json"
-require_relative "repo_doc_common.rb"
+require_relative "repo_doc_common"
 
 class RepoMetadata < RepoDocCommon
   def initialize data

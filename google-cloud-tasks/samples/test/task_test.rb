@@ -15,7 +15,7 @@
 require "minitest/autorun"
 require "rack/test"
 require "google/cloud/tasks"
-require_relative "../create_http_task.rb"
+require_relative "../create_http_task"
 
 describe "CloudTasks" do
   include Rack::Test::Methods

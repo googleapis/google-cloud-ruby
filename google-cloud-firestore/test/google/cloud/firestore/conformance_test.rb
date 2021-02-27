@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require "helper.rb"
-require_relative "../../../../conformance/v1/proto/google/cloud/conformance/firestore/v1/tests_pb.rb"
+require_relative "../../../../conformance/v1/proto/google/cloud/conformance/firestore/v1/tests_pb"
 
 ##
 # This suite of unit tests is dynamically generated from the contents of
