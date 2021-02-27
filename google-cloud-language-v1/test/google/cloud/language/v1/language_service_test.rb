@@ -97,7 +97,7 @@ class ::Google::Cloud::Language::V1::LanguageService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.analyze_sentiment ::Google::Cloud::Language::V1::AnalyzeSentimentRequest.new(document: document, encoding_type: encoding_type), grpc_options do |response, operation|
+      client.analyze_sentiment(::Google::Cloud::Language::V1::AnalyzeSentimentRequest.new(document: document, encoding_type: encoding_type), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -157,7 +157,7 @@ class ::Google::Cloud::Language::V1::LanguageService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.analyze_entities ::Google::Cloud::Language::V1::AnalyzeEntitiesRequest.new(document: document, encoding_type: encoding_type), grpc_options do |response, operation|
+      client.analyze_entities(::Google::Cloud::Language::V1::AnalyzeEntitiesRequest.new(document: document, encoding_type: encoding_type), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,7 +217,7 @@ class ::Google::Cloud::Language::V1::LanguageService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.analyze_entity_sentiment ::Google::Cloud::Language::V1::AnalyzeEntitySentimentRequest.new(document: document, encoding_type: encoding_type), grpc_options do |response, operation|
+      client.analyze_entity_sentiment(::Google::Cloud::Language::V1::AnalyzeEntitySentimentRequest.new(document: document, encoding_type: encoding_type), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -277,7 +277,7 @@ class ::Google::Cloud::Language::V1::LanguageService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.analyze_syntax ::Google::Cloud::Language::V1::AnalyzeSyntaxRequest.new(document: document, encoding_type: encoding_type), grpc_options do |response, operation|
+      client.analyze_syntax(::Google::Cloud::Language::V1::AnalyzeSyntaxRequest.new(document: document, encoding_type: encoding_type), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -335,7 +335,7 @@ class ::Google::Cloud::Language::V1::LanguageService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.classify_text ::Google::Cloud::Language::V1::ClassifyTextRequest.new(document: document), grpc_options do |response, operation|
+      client.classify_text(::Google::Cloud::Language::V1::ClassifyTextRequest.new(document: document), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -397,7 +397,7 @@ class ::Google::Cloud::Language::V1::LanguageService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.annotate_text ::Google::Cloud::Language::V1::AnnotateTextRequest.new(document: document, features: features, encoding_type: encoding_type), grpc_options do |response, operation|
+      client.annotate_text(::Google::Cloud::Language::V1::AnnotateTextRequest.new(document: document, features: features, encoding_type: encoding_type), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
