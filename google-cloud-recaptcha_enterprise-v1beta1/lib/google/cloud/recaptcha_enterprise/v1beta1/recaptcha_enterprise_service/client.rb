@@ -60,7 +60,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -145,7 +145,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -741,7 +741,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -762,7 +762,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -823,19 +823,19 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  create_assessment_config = parent_rpcs&.create_assessment if parent_rpcs&.respond_to? :create_assessment
+                  create_assessment_config = parent_rpcs.create_assessment if parent_rpcs.respond_to? :create_assessment
                   @create_assessment = ::Gapic::Config::Method.new create_assessment_config
-                  annotate_assessment_config = parent_rpcs&.annotate_assessment if parent_rpcs&.respond_to? :annotate_assessment
+                  annotate_assessment_config = parent_rpcs.annotate_assessment if parent_rpcs.respond_to? :annotate_assessment
                   @annotate_assessment = ::Gapic::Config::Method.new annotate_assessment_config
-                  create_key_config = parent_rpcs&.create_key if parent_rpcs&.respond_to? :create_key
+                  create_key_config = parent_rpcs.create_key if parent_rpcs.respond_to? :create_key
                   @create_key = ::Gapic::Config::Method.new create_key_config
-                  list_keys_config = parent_rpcs&.list_keys if parent_rpcs&.respond_to? :list_keys
+                  list_keys_config = parent_rpcs.list_keys if parent_rpcs.respond_to? :list_keys
                   @list_keys = ::Gapic::Config::Method.new list_keys_config
-                  get_key_config = parent_rpcs&.get_key if parent_rpcs&.respond_to? :get_key
+                  get_key_config = parent_rpcs.get_key if parent_rpcs.respond_to? :get_key
                   @get_key = ::Gapic::Config::Method.new get_key_config
-                  update_key_config = parent_rpcs&.update_key if parent_rpcs&.respond_to? :update_key
+                  update_key_config = parent_rpcs.update_key if parent_rpcs.respond_to? :update_key
                   @update_key = ::Gapic::Config::Method.new update_key_config
-                  delete_key_config = parent_rpcs&.delete_key if parent_rpcs&.respond_to? :delete_key
+                  delete_key_config = parent_rpcs.delete_key if parent_rpcs.respond_to? :delete_key
                   @delete_key = ::Gapic::Config::Method.new delete_key_config
 
                   yield self if block_given?
