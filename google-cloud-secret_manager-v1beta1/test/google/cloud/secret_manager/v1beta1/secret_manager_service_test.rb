@@ -103,7 +103,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.list_secrets ::Google::Cloud::SecretManager::V1beta1::ListSecretsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_secrets(::Google::Cloud::SecretManager::V1beta1::ListSecretsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -166,7 +166,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.create_secret ::Google::Cloud::SecretManager::V1beta1::CreateSecretRequest.new(parent: parent, secret_id: secret_id, secret: secret), grpc_options do |response, operation|
+      client.create_secret(::Google::Cloud::SecretManager::V1beta1::CreateSecretRequest.new(parent: parent, secret_id: secret_id, secret: secret), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -226,7 +226,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.add_secret_version ::Google::Cloud::SecretManager::V1beta1::AddSecretVersionRequest.new(parent: parent, payload: payload), grpc_options do |response, operation|
+      client.add_secret_version(::Google::Cloud::SecretManager::V1beta1::AddSecretVersionRequest.new(parent: parent, payload: payload), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -284,7 +284,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.get_secret ::Google::Cloud::SecretManager::V1beta1::GetSecretRequest.new(name: name), grpc_options do |response, operation|
+      client.get_secret(::Google::Cloud::SecretManager::V1beta1::GetSecretRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -344,7 +344,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.update_secret ::Google::Cloud::SecretManager::V1beta1::UpdateSecretRequest.new(secret: secret, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_secret(::Google::Cloud::SecretManager::V1beta1::UpdateSecretRequest.new(secret: secret, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -402,7 +402,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.delete_secret ::Google::Cloud::SecretManager::V1beta1::DeleteSecretRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_secret(::Google::Cloud::SecretManager::V1beta1::DeleteSecretRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -468,7 +468,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.list_secret_versions ::Google::Cloud::SecretManager::V1beta1::ListSecretVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_secret_versions(::Google::Cloud::SecretManager::V1beta1::ListSecretVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -527,7 +527,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.get_secret_version ::Google::Cloud::SecretManager::V1beta1::GetSecretVersionRequest.new(name: name), grpc_options do |response, operation|
+      client.get_secret_version(::Google::Cloud::SecretManager::V1beta1::GetSecretVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -585,7 +585,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.access_secret_version ::Google::Cloud::SecretManager::V1beta1::AccessSecretVersionRequest.new(name: name), grpc_options do |response, operation|
+      client.access_secret_version(::Google::Cloud::SecretManager::V1beta1::AccessSecretVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -643,7 +643,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.disable_secret_version ::Google::Cloud::SecretManager::V1beta1::DisableSecretVersionRequest.new(name: name), grpc_options do |response, operation|
+      client.disable_secret_version(::Google::Cloud::SecretManager::V1beta1::DisableSecretVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -701,7 +701,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.enable_secret_version ::Google::Cloud::SecretManager::V1beta1::EnableSecretVersionRequest.new(name: name), grpc_options do |response, operation|
+      client.enable_secret_version(::Google::Cloud::SecretManager::V1beta1::EnableSecretVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -759,7 +759,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.destroy_secret_version ::Google::Cloud::SecretManager::V1beta1::DestroySecretVersionRequest.new(name: name), grpc_options do |response, operation|
+      client.destroy_secret_version(::Google::Cloud::SecretManager::V1beta1::DestroySecretVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -819,7 +819,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
+      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -879,7 +879,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
+      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -939,7 +939,7 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
+      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
