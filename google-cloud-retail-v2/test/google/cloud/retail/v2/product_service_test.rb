@@ -99,7 +99,7 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_product ::Google::Cloud::Retail::V2::CreateProductRequest.new(parent: parent, product: product, product_id: product_id), grpc_options do |response, operation|
+      client.create_product(::Google::Cloud::Retail::V2::CreateProductRequest.new(parent: parent, product: product, product_id: product_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -157,7 +157,7 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_product ::Google::Cloud::Retail::V2::GetProductRequest.new(name: name), grpc_options do |response, operation|
+      client.get_product(::Google::Cloud::Retail::V2::GetProductRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,7 +217,7 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_product ::Google::Cloud::Retail::V2::UpdateProductRequest.new(product: product, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_product(::Google::Cloud::Retail::V2::UpdateProductRequest.new(product: product, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -275,7 +275,7 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_product ::Google::Cloud::Retail::V2::DeleteProductRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_product(::Google::Cloud::Retail::V2::DeleteProductRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -343,7 +343,7 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.import_products ::Google::Cloud::Retail::V2::ImportProductsRequest.new(parent: parent, input_config: input_config, errors_config: errors_config, update_mask: update_mask), grpc_options do |response, operation|
+      client.import_products(::Google::Cloud::Retail::V2::ImportProductsRequest.new(parent: parent, input_config: input_config, errors_config: errors_config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

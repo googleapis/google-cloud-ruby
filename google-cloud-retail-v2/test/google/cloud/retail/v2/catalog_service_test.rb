@@ -103,7 +103,7 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_catalogs ::Google::Cloud::Retail::V2::ListCatalogsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_catalogs(::Google::Cloud::Retail::V2::ListCatalogsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -164,7 +164,7 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_catalog ::Google::Cloud::Retail::V2::UpdateCatalogRequest.new(catalog: catalog, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_catalog(::Google::Cloud::Retail::V2::UpdateCatalogRequest.new(catalog: catalog, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
