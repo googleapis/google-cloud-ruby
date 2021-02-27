@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-app_engine.rb"
-
-Style/AsciiComments:
-  Enabled: false
