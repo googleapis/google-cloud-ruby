@@ -97,7 +97,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_dataset ::Google::Cloud::AutoML::V1beta1::CreateDatasetRequest.new(parent: parent, dataset: dataset), grpc_options do |response, operation|
+      client.create_dataset(::Google::Cloud::AutoML::V1beta1::CreateDatasetRequest.new(parent: parent, dataset: dataset), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -155,7 +155,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_dataset ::Google::Cloud::AutoML::V1beta1::GetDatasetRequest.new(name: name), grpc_options do |response, operation|
+      client.get_dataset(::Google::Cloud::AutoML::V1beta1::GetDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -223,7 +223,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_datasets ::Google::Cloud::AutoML::V1beta1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_datasets(::Google::Cloud::AutoML::V1beta1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -284,7 +284,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_dataset ::Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_dataset(::Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -346,7 +346,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_dataset ::Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_dataset(::Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -411,7 +411,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.import_data ::Google::Cloud::AutoML::V1beta1::ImportDataRequest.new(name: name, input_config: input_config), grpc_options do |response, operation|
+      client.import_data(::Google::Cloud::AutoML::V1beta1::ImportDataRequest.new(name: name, input_config: input_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -476,7 +476,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.export_data ::Google::Cloud::AutoML::V1beta1::ExportDataRequest.new(name: name, output_config: output_config), grpc_options do |response, operation|
+      client.export_data(::Google::Cloud::AutoML::V1beta1::ExportDataRequest.new(name: name, output_config: output_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -535,7 +535,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_annotation_spec ::Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest.new(name: name), grpc_options do |response, operation|
+      client.get_annotation_spec(::Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -595,7 +595,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_table_spec ::Google::Cloud::AutoML::V1beta1::GetTableSpecRequest.new(name: name, field_mask: field_mask), grpc_options do |response, operation|
+      client.get_table_spec(::Google::Cloud::AutoML::V1beta1::GetTableSpecRequest.new(name: name, field_mask: field_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -665,7 +665,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_table_specs ::Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest.new(parent: parent, field_mask: field_mask, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_table_specs(::Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest.new(parent: parent, field_mask: field_mask, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -726,7 +726,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_table_spec ::Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest.new(table_spec: table_spec, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_table_spec(::Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest.new(table_spec: table_spec, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -786,7 +786,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_column_spec ::Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest.new(name: name, field_mask: field_mask), grpc_options do |response, operation|
+      client.get_column_spec(::Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest.new(name: name, field_mask: field_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -856,7 +856,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_column_specs ::Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest.new(parent: parent, field_mask: field_mask, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_column_specs(::Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest.new(parent: parent, field_mask: field_mask, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -917,7 +917,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_column_spec ::Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest.new(column_spec: column_spec, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_column_spec(::Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest.new(column_spec: column_spec, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -981,7 +981,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_model ::Google::Cloud::AutoML::V1beta1::CreateModelRequest.new(parent: parent, model: model), grpc_options do |response, operation|
+      client.create_model(::Google::Cloud::AutoML::V1beta1::CreateModelRequest.new(parent: parent, model: model), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1040,7 +1040,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_model ::Google::Cloud::AutoML::V1beta1::GetModelRequest.new(name: name), grpc_options do |response, operation|
+      client.get_model(::Google::Cloud::AutoML::V1beta1::GetModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1108,7 +1108,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_models ::Google::Cloud::AutoML::V1beta1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_models(::Google::Cloud::AutoML::V1beta1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1171,7 +1171,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_model ::Google::Cloud::AutoML::V1beta1::DeleteModelRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_model(::Google::Cloud::AutoML::V1beta1::DeleteModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1237,7 +1237,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.deploy_model ::Google::Cloud::AutoML::V1beta1::DeployModelRequest.new(image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name), grpc_options do |response, operation|
+      client.deploy_model(::Google::Cloud::AutoML::V1beta1::DeployModelRequest.new(image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata, name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1300,7 +1300,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.undeploy_model ::Google::Cloud::AutoML::V1beta1::UndeployModelRequest.new(name: name), grpc_options do |response, operation|
+      client.undeploy_model(::Google::Cloud::AutoML::V1beta1::UndeployModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1365,7 +1365,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.export_model ::Google::Cloud::AutoML::V1beta1::ExportModelRequest.new(name: name, output_config: output_config), grpc_options do |response, operation|
+      client.export_model(::Google::Cloud::AutoML::V1beta1::ExportModelRequest.new(name: name, output_config: output_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1430,7 +1430,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.export_evaluated_examples ::Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest.new(name: name, output_config: output_config), grpc_options do |response, operation|
+      client.export_evaluated_examples(::Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest.new(name: name, output_config: output_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1489,7 +1489,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_model_evaluation ::Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest.new(name: name), grpc_options do |response, operation|
+      client.get_model_evaluation(::Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1557,7 +1557,7 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_model_evaluations ::Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_model_evaluations(::Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

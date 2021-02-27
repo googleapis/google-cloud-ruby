@@ -99,7 +99,7 @@ class ::Google::Cloud::AutoML::V1beta1::PredictionService::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.predict ::Google::Cloud::AutoML::V1beta1::PredictRequest.new(name: name, payload: payload, params: params), grpc_options do |response, operation|
+      client.predict(::Google::Cloud::AutoML::V1beta1::PredictRequest.new(name: name, payload: payload, params: params), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -167,7 +167,7 @@ class ::Google::Cloud::AutoML::V1beta1::PredictionService::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.batch_predict ::Google::Cloud::AutoML::V1beta1::BatchPredictRequest.new(name: name, input_config: input_config, output_config: output_config, params: params), grpc_options do |response, operation|
+      client.batch_predict(::Google::Cloud::AutoML::V1beta1::BatchPredictRequest.new(name: name, input_config: input_config, output_config: output_config, params: params), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
