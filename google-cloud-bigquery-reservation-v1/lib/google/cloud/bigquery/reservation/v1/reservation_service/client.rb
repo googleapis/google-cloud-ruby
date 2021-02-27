@@ -75,7 +75,7 @@ module Google
                   parent_config = while namespace.any?
                                     parent_name = namespace.join "::"
                                     parent_const = const_get parent_name
-                                    break parent_const.configure if parent_const&.respond_to? :configure
+                                    break parent_const.configure if parent_const.respond_to? :configure
                                     namespace.pop
                                   end
                   default_config = Client::Configuration.new parent_config
@@ -85,25 +85,25 @@ module Google
                   default_config.rpcs.list_reservations.timeout = 60.0
                   default_config.rpcs.list_reservations.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [4, 14]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.get_reservation.timeout = 60.0
                   default_config.rpcs.get_reservation.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [4, 14]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.delete_reservation.timeout = 60.0
                   default_config.rpcs.delete_reservation.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [4, 14]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.update_reservation.timeout = 60.0
@@ -113,25 +113,25 @@ module Google
                   default_config.rpcs.list_capacity_commitments.timeout = 60.0
                   default_config.rpcs.list_capacity_commitments.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [4, 14]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.get_capacity_commitment.timeout = 60.0
                   default_config.rpcs.get_capacity_commitment.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [4, 14]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.delete_capacity_commitment.timeout = 60.0
                   default_config.rpcs.delete_capacity_commitment.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [4, 14]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.update_capacity_commitment.timeout = 60.0
@@ -145,25 +145,25 @@ module Google
                   default_config.rpcs.list_assignments.timeout = 60.0
                   default_config.rpcs.list_assignments.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [4, 14]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.delete_assignment.timeout = 60.0
                   default_config.rpcs.delete_assignment.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [4, 14]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.search_assignments.timeout = 60.0
                   default_config.rpcs.search_assignments.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [4, 14]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.move_assignment.timeout = 60.0
@@ -171,9 +171,9 @@ module Google
                   default_config.rpcs.get_bi_reservation.timeout = 60.0
                   default_config.rpcs.get_bi_reservation.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [4, 14]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.update_bi_reservation.timeout = 60.0
@@ -244,7 +244,7 @@ module Google
                 enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                          @config.endpoint == Client.configure.endpoint &&
                                          !@config.endpoint.split(".").first.include?("-")
-                credentials ||= Credentials.default scope:                  @config.scope,
+                credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(String) || credentials.is_a?(Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
@@ -1808,7 +1808,7 @@ module Google
                 config_attr :scope,         nil, ::String, ::Array, nil
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
-                config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+                config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
                 config_attr :interceptors,  nil, ::Array, nil
                 config_attr :timeout,       nil, ::Numeric, nil
                 config_attr :metadata,      nil, ::Hash, nil
@@ -1829,7 +1829,7 @@ module Google
                 def rpcs
                   @rpcs ||= begin
                     parent_rpcs = nil
-                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                     Rpcs.new parent_rpcs
                   end
                 end
@@ -1950,43 +1950,43 @@ module Google
 
                   # @private
                   def initialize parent_rpcs = nil
-                    create_reservation_config = parent_rpcs&.create_reservation if parent_rpcs&.respond_to? :create_reservation
+                    create_reservation_config = parent_rpcs.create_reservation if parent_rpcs.respond_to? :create_reservation
                     @create_reservation = ::Gapic::Config::Method.new create_reservation_config
-                    list_reservations_config = parent_rpcs&.list_reservations if parent_rpcs&.respond_to? :list_reservations
+                    list_reservations_config = parent_rpcs.list_reservations if parent_rpcs.respond_to? :list_reservations
                     @list_reservations = ::Gapic::Config::Method.new list_reservations_config
-                    get_reservation_config = parent_rpcs&.get_reservation if parent_rpcs&.respond_to? :get_reservation
+                    get_reservation_config = parent_rpcs.get_reservation if parent_rpcs.respond_to? :get_reservation
                     @get_reservation = ::Gapic::Config::Method.new get_reservation_config
-                    delete_reservation_config = parent_rpcs&.delete_reservation if parent_rpcs&.respond_to? :delete_reservation
+                    delete_reservation_config = parent_rpcs.delete_reservation if parent_rpcs.respond_to? :delete_reservation
                     @delete_reservation = ::Gapic::Config::Method.new delete_reservation_config
-                    update_reservation_config = parent_rpcs&.update_reservation if parent_rpcs&.respond_to? :update_reservation
+                    update_reservation_config = parent_rpcs.update_reservation if parent_rpcs.respond_to? :update_reservation
                     @update_reservation = ::Gapic::Config::Method.new update_reservation_config
-                    create_capacity_commitment_config = parent_rpcs&.create_capacity_commitment if parent_rpcs&.respond_to? :create_capacity_commitment
+                    create_capacity_commitment_config = parent_rpcs.create_capacity_commitment if parent_rpcs.respond_to? :create_capacity_commitment
                     @create_capacity_commitment = ::Gapic::Config::Method.new create_capacity_commitment_config
-                    list_capacity_commitments_config = parent_rpcs&.list_capacity_commitments if parent_rpcs&.respond_to? :list_capacity_commitments
+                    list_capacity_commitments_config = parent_rpcs.list_capacity_commitments if parent_rpcs.respond_to? :list_capacity_commitments
                     @list_capacity_commitments = ::Gapic::Config::Method.new list_capacity_commitments_config
-                    get_capacity_commitment_config = parent_rpcs&.get_capacity_commitment if parent_rpcs&.respond_to? :get_capacity_commitment
+                    get_capacity_commitment_config = parent_rpcs.get_capacity_commitment if parent_rpcs.respond_to? :get_capacity_commitment
                     @get_capacity_commitment = ::Gapic::Config::Method.new get_capacity_commitment_config
-                    delete_capacity_commitment_config = parent_rpcs&.delete_capacity_commitment if parent_rpcs&.respond_to? :delete_capacity_commitment
+                    delete_capacity_commitment_config = parent_rpcs.delete_capacity_commitment if parent_rpcs.respond_to? :delete_capacity_commitment
                     @delete_capacity_commitment = ::Gapic::Config::Method.new delete_capacity_commitment_config
-                    update_capacity_commitment_config = parent_rpcs&.update_capacity_commitment if parent_rpcs&.respond_to? :update_capacity_commitment
+                    update_capacity_commitment_config = parent_rpcs.update_capacity_commitment if parent_rpcs.respond_to? :update_capacity_commitment
                     @update_capacity_commitment = ::Gapic::Config::Method.new update_capacity_commitment_config
-                    split_capacity_commitment_config = parent_rpcs&.split_capacity_commitment if parent_rpcs&.respond_to? :split_capacity_commitment
+                    split_capacity_commitment_config = parent_rpcs.split_capacity_commitment if parent_rpcs.respond_to? :split_capacity_commitment
                     @split_capacity_commitment = ::Gapic::Config::Method.new split_capacity_commitment_config
-                    merge_capacity_commitments_config = parent_rpcs&.merge_capacity_commitments if parent_rpcs&.respond_to? :merge_capacity_commitments
+                    merge_capacity_commitments_config = parent_rpcs.merge_capacity_commitments if parent_rpcs.respond_to? :merge_capacity_commitments
                     @merge_capacity_commitments = ::Gapic::Config::Method.new merge_capacity_commitments_config
-                    create_assignment_config = parent_rpcs&.create_assignment if parent_rpcs&.respond_to? :create_assignment
+                    create_assignment_config = parent_rpcs.create_assignment if parent_rpcs.respond_to? :create_assignment
                     @create_assignment = ::Gapic::Config::Method.new create_assignment_config
-                    list_assignments_config = parent_rpcs&.list_assignments if parent_rpcs&.respond_to? :list_assignments
+                    list_assignments_config = parent_rpcs.list_assignments if parent_rpcs.respond_to? :list_assignments
                     @list_assignments = ::Gapic::Config::Method.new list_assignments_config
-                    delete_assignment_config = parent_rpcs&.delete_assignment if parent_rpcs&.respond_to? :delete_assignment
+                    delete_assignment_config = parent_rpcs.delete_assignment if parent_rpcs.respond_to? :delete_assignment
                     @delete_assignment = ::Gapic::Config::Method.new delete_assignment_config
-                    search_assignments_config = parent_rpcs&.search_assignments if parent_rpcs&.respond_to? :search_assignments
+                    search_assignments_config = parent_rpcs.search_assignments if parent_rpcs.respond_to? :search_assignments
                     @search_assignments = ::Gapic::Config::Method.new search_assignments_config
-                    move_assignment_config = parent_rpcs&.move_assignment if parent_rpcs&.respond_to? :move_assignment
+                    move_assignment_config = parent_rpcs.move_assignment if parent_rpcs.respond_to? :move_assignment
                     @move_assignment = ::Gapic::Config::Method.new move_assignment_config
-                    get_bi_reservation_config = parent_rpcs&.get_bi_reservation if parent_rpcs&.respond_to? :get_bi_reservation
+                    get_bi_reservation_config = parent_rpcs.get_bi_reservation if parent_rpcs.respond_to? :get_bi_reservation
                     @get_bi_reservation = ::Gapic::Config::Method.new get_bi_reservation_config
-                    update_bi_reservation_config = parent_rpcs&.update_bi_reservation if parent_rpcs&.respond_to? :update_bi_reservation
+                    update_bi_reservation_config = parent_rpcs.update_bi_reservation if parent_rpcs.respond_to? :update_bi_reservation
                     @update_bi_reservation = ::Gapic::Config::Method.new update_bi_reservation_config
 
                     yield self if block_given?
