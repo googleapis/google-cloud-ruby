@@ -97,7 +97,7 @@ class ::Google::Cloud::DataQnA::V1alpha::QuestionService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.get_question ::Google::Cloud::DataQnA::V1alpha::GetQuestionRequest.new(name: name, read_mask: read_mask), grpc_options do |response, operation|
+      client.get_question(::Google::Cloud::DataQnA::V1alpha::GetQuestionRequest.new(name: name, read_mask: read_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -157,7 +157,7 @@ class ::Google::Cloud::DataQnA::V1alpha::QuestionService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.create_question ::Google::Cloud::DataQnA::V1alpha::CreateQuestionRequest.new(parent: parent, question: question), grpc_options do |response, operation|
+      client.create_question(::Google::Cloud::DataQnA::V1alpha::CreateQuestionRequest.new(parent: parent, question: question), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,7 +217,7 @@ class ::Google::Cloud::DataQnA::V1alpha::QuestionService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.execute_question ::Google::Cloud::DataQnA::V1alpha::ExecuteQuestionRequest.new(name: name, interpretation_index: interpretation_index), grpc_options do |response, operation|
+      client.execute_question(::Google::Cloud::DataQnA::V1alpha::ExecuteQuestionRequest.new(name: name, interpretation_index: interpretation_index), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -275,7 +275,7 @@ class ::Google::Cloud::DataQnA::V1alpha::QuestionService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.get_user_feedback ::Google::Cloud::DataQnA::V1alpha::GetUserFeedbackRequest.new(name: name), grpc_options do |response, operation|
+      client.get_user_feedback(::Google::Cloud::DataQnA::V1alpha::GetUserFeedbackRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -335,7 +335,7 @@ class ::Google::Cloud::DataQnA::V1alpha::QuestionService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.update_user_feedback ::Google::Cloud::DataQnA::V1alpha::UpdateUserFeedbackRequest.new(user_feedback: user_feedback, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_user_feedback(::Google::Cloud::DataQnA::V1alpha::UpdateUserFeedbackRequest.new(user_feedback: user_feedback, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
