@@ -99,7 +99,7 @@ class ::Google::Cloud::Profiler::V2::ProfilerService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.create_profile ::Google::Cloud::Profiler::V2::CreateProfileRequest.new(parent: parent, deployment: deployment, profile_type: profile_type), grpc_options do |response, operation|
+      client.create_profile(::Google::Cloud::Profiler::V2::CreateProfileRequest.new(parent: parent, deployment: deployment, profile_type: profile_type), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -159,7 +159,7 @@ class ::Google::Cloud::Profiler::V2::ProfilerService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.create_offline_profile ::Google::Cloud::Profiler::V2::CreateOfflineProfileRequest.new(parent: parent, profile: profile), grpc_options do |response, operation|
+      client.create_offline_profile(::Google::Cloud::Profiler::V2::CreateOfflineProfileRequest.new(parent: parent, profile: profile), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -219,7 +219,7 @@ class ::Google::Cloud::Profiler::V2::ProfilerService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.update_profile ::Google::Cloud::Profiler::V2::UpdateProfileRequest.new(profile: profile, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_profile(::Google::Cloud::Profiler::V2::UpdateProfileRequest.new(profile: profile, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
