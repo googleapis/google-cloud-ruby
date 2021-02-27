@@ -61,7 +61,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -71,65 +71,65 @@ module Google
                 default_config.rpcs.search_catalog.timeout = 60.0
                 default_config.rpcs.search_catalog.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.get_entry_group.timeout = 60.0
                 default_config.rpcs.get_entry_group.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.list_entry_groups.timeout = 60.0
                 default_config.rpcs.list_entry_groups.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.get_entry.timeout = 60.0
                 default_config.rpcs.get_entry.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.lookup_entry.timeout = 60.0
                 default_config.rpcs.lookup_entry.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.list_entries.timeout = 60.0
                 default_config.rpcs.list_entries.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.list_tags.timeout = 60.0
                 default_config.rpcs.list_tags.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.get_iam_policy.timeout = 60.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config
@@ -198,7 +198,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -2463,7 +2463,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -2484,7 +2484,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -2645,59 +2645,59 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  search_catalog_config = parent_rpcs&.search_catalog if parent_rpcs&.respond_to? :search_catalog
+                  search_catalog_config = parent_rpcs.search_catalog if parent_rpcs.respond_to? :search_catalog
                   @search_catalog = ::Gapic::Config::Method.new search_catalog_config
-                  create_entry_group_config = parent_rpcs&.create_entry_group if parent_rpcs&.respond_to? :create_entry_group
+                  create_entry_group_config = parent_rpcs.create_entry_group if parent_rpcs.respond_to? :create_entry_group
                   @create_entry_group = ::Gapic::Config::Method.new create_entry_group_config
-                  get_entry_group_config = parent_rpcs&.get_entry_group if parent_rpcs&.respond_to? :get_entry_group
+                  get_entry_group_config = parent_rpcs.get_entry_group if parent_rpcs.respond_to? :get_entry_group
                   @get_entry_group = ::Gapic::Config::Method.new get_entry_group_config
-                  update_entry_group_config = parent_rpcs&.update_entry_group if parent_rpcs&.respond_to? :update_entry_group
+                  update_entry_group_config = parent_rpcs.update_entry_group if parent_rpcs.respond_to? :update_entry_group
                   @update_entry_group = ::Gapic::Config::Method.new update_entry_group_config
-                  delete_entry_group_config = parent_rpcs&.delete_entry_group if parent_rpcs&.respond_to? :delete_entry_group
+                  delete_entry_group_config = parent_rpcs.delete_entry_group if parent_rpcs.respond_to? :delete_entry_group
                   @delete_entry_group = ::Gapic::Config::Method.new delete_entry_group_config
-                  list_entry_groups_config = parent_rpcs&.list_entry_groups if parent_rpcs&.respond_to? :list_entry_groups
+                  list_entry_groups_config = parent_rpcs.list_entry_groups if parent_rpcs.respond_to? :list_entry_groups
                   @list_entry_groups = ::Gapic::Config::Method.new list_entry_groups_config
-                  create_entry_config = parent_rpcs&.create_entry if parent_rpcs&.respond_to? :create_entry
+                  create_entry_config = parent_rpcs.create_entry if parent_rpcs.respond_to? :create_entry
                   @create_entry = ::Gapic::Config::Method.new create_entry_config
-                  update_entry_config = parent_rpcs&.update_entry if parent_rpcs&.respond_to? :update_entry
+                  update_entry_config = parent_rpcs.update_entry if parent_rpcs.respond_to? :update_entry
                   @update_entry = ::Gapic::Config::Method.new update_entry_config
-                  delete_entry_config = parent_rpcs&.delete_entry if parent_rpcs&.respond_to? :delete_entry
+                  delete_entry_config = parent_rpcs.delete_entry if parent_rpcs.respond_to? :delete_entry
                   @delete_entry = ::Gapic::Config::Method.new delete_entry_config
-                  get_entry_config = parent_rpcs&.get_entry if parent_rpcs&.respond_to? :get_entry
+                  get_entry_config = parent_rpcs.get_entry if parent_rpcs.respond_to? :get_entry
                   @get_entry = ::Gapic::Config::Method.new get_entry_config
-                  lookup_entry_config = parent_rpcs&.lookup_entry if parent_rpcs&.respond_to? :lookup_entry
+                  lookup_entry_config = parent_rpcs.lookup_entry if parent_rpcs.respond_to? :lookup_entry
                   @lookup_entry = ::Gapic::Config::Method.new lookup_entry_config
-                  list_entries_config = parent_rpcs&.list_entries if parent_rpcs&.respond_to? :list_entries
+                  list_entries_config = parent_rpcs.list_entries if parent_rpcs.respond_to? :list_entries
                   @list_entries = ::Gapic::Config::Method.new list_entries_config
-                  create_tag_template_config = parent_rpcs&.create_tag_template if parent_rpcs&.respond_to? :create_tag_template
+                  create_tag_template_config = parent_rpcs.create_tag_template if parent_rpcs.respond_to? :create_tag_template
                   @create_tag_template = ::Gapic::Config::Method.new create_tag_template_config
-                  get_tag_template_config = parent_rpcs&.get_tag_template if parent_rpcs&.respond_to? :get_tag_template
+                  get_tag_template_config = parent_rpcs.get_tag_template if parent_rpcs.respond_to? :get_tag_template
                   @get_tag_template = ::Gapic::Config::Method.new get_tag_template_config
-                  update_tag_template_config = parent_rpcs&.update_tag_template if parent_rpcs&.respond_to? :update_tag_template
+                  update_tag_template_config = parent_rpcs.update_tag_template if parent_rpcs.respond_to? :update_tag_template
                   @update_tag_template = ::Gapic::Config::Method.new update_tag_template_config
-                  delete_tag_template_config = parent_rpcs&.delete_tag_template if parent_rpcs&.respond_to? :delete_tag_template
+                  delete_tag_template_config = parent_rpcs.delete_tag_template if parent_rpcs.respond_to? :delete_tag_template
                   @delete_tag_template = ::Gapic::Config::Method.new delete_tag_template_config
-                  create_tag_template_field_config = parent_rpcs&.create_tag_template_field if parent_rpcs&.respond_to? :create_tag_template_field
+                  create_tag_template_field_config = parent_rpcs.create_tag_template_field if parent_rpcs.respond_to? :create_tag_template_field
                   @create_tag_template_field = ::Gapic::Config::Method.new create_tag_template_field_config
-                  update_tag_template_field_config = parent_rpcs&.update_tag_template_field if parent_rpcs&.respond_to? :update_tag_template_field
+                  update_tag_template_field_config = parent_rpcs.update_tag_template_field if parent_rpcs.respond_to? :update_tag_template_field
                   @update_tag_template_field = ::Gapic::Config::Method.new update_tag_template_field_config
-                  rename_tag_template_field_config = parent_rpcs&.rename_tag_template_field if parent_rpcs&.respond_to? :rename_tag_template_field
+                  rename_tag_template_field_config = parent_rpcs.rename_tag_template_field if parent_rpcs.respond_to? :rename_tag_template_field
                   @rename_tag_template_field = ::Gapic::Config::Method.new rename_tag_template_field_config
-                  delete_tag_template_field_config = parent_rpcs&.delete_tag_template_field if parent_rpcs&.respond_to? :delete_tag_template_field
+                  delete_tag_template_field_config = parent_rpcs.delete_tag_template_field if parent_rpcs.respond_to? :delete_tag_template_field
                   @delete_tag_template_field = ::Gapic::Config::Method.new delete_tag_template_field_config
-                  create_tag_config = parent_rpcs&.create_tag if parent_rpcs&.respond_to? :create_tag
+                  create_tag_config = parent_rpcs.create_tag if parent_rpcs.respond_to? :create_tag
                   @create_tag = ::Gapic::Config::Method.new create_tag_config
-                  update_tag_config = parent_rpcs&.update_tag if parent_rpcs&.respond_to? :update_tag
+                  update_tag_config = parent_rpcs.update_tag if parent_rpcs.respond_to? :update_tag
                   @update_tag = ::Gapic::Config::Method.new update_tag_config
-                  delete_tag_config = parent_rpcs&.delete_tag if parent_rpcs&.respond_to? :delete_tag
+                  delete_tag_config = parent_rpcs.delete_tag if parent_rpcs.respond_to? :delete_tag
                   @delete_tag = ::Gapic::Config::Method.new delete_tag_config
-                  list_tags_config = parent_rpcs&.list_tags if parent_rpcs&.respond_to? :list_tags
+                  list_tags_config = parent_rpcs.list_tags if parent_rpcs.respond_to? :list_tags
                   @list_tags = ::Gapic::Config::Method.new list_tags_config
-                  set_iam_policy_config = parent_rpcs&.set_iam_policy if parent_rpcs&.respond_to? :set_iam_policy
+                  set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
                   @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
-                  get_iam_policy_config = parent_rpcs&.get_iam_policy if parent_rpcs&.respond_to? :get_iam_policy
+                  get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                   @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
-                  test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
+                  test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                   @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
                   yield self if block_given?
