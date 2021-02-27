@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-policy_troubleshooter.rb"
-
-Style/AsciiComments:
-  Enabled: false
