@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-text_to_speech.rb"
-
-Style/AsciiComments:
-  Enabled: false
