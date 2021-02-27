@@ -107,7 +107,7 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_instances ::Google::Cloud::Memcache::V1beta2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_instances(::Google::Cloud::Memcache::V1beta2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -166,7 +166,7 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.get_instance ::Google::Cloud::Memcache::V1beta2::GetInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.get_instance(::Google::Cloud::Memcache::V1beta2::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -232,7 +232,7 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.create_instance ::Google::Cloud::Memcache::V1beta2::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, resource: resource), grpc_options do |response, operation|
+      client.create_instance(::Google::Cloud::Memcache::V1beta2::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, resource: resource), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -297,7 +297,7 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.update_instance ::Google::Cloud::Memcache::V1beta2::UpdateInstanceRequest.new(update_mask: update_mask, resource: resource), grpc_options do |response, operation|
+      client.update_instance(::Google::Cloud::Memcache::V1beta2::UpdateInstanceRequest.new(update_mask: update_mask, resource: resource), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -364,7 +364,7 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.update_parameters ::Google::Cloud::Memcache::V1beta2::UpdateParametersRequest.new(name: name, update_mask: update_mask, parameters: parameters), grpc_options do |response, operation|
+      client.update_parameters(::Google::Cloud::Memcache::V1beta2::UpdateParametersRequest.new(name: name, update_mask: update_mask, parameters: parameters), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -427,7 +427,7 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.delete_instance ::Google::Cloud::Memcache::V1beta2::DeleteInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_instance(::Google::Cloud::Memcache::V1beta2::DeleteInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -494,7 +494,7 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.apply_parameters ::Google::Cloud::Memcache::V1beta2::ApplyParametersRequest.new(name: name, node_ids: node_ids, apply_all: apply_all), grpc_options do |response, operation|
+      client.apply_parameters(::Google::Cloud::Memcache::V1beta2::ApplyParametersRequest.new(name: name, node_ids: node_ids, apply_all: apply_all), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -561,7 +561,7 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.apply_software_update ::Google::Cloud::Memcache::V1beta2::ApplySoftwareUpdateRequest.new(instance: instance, node_ids: node_ids, apply_all: apply_all), grpc_options do |response, operation|
+      client.apply_software_update(::Google::Cloud::Memcache::V1beta2::ApplySoftwareUpdateRequest.new(instance: instance, node_ids: node_ids, apply_all: apply_all), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
