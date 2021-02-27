@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-managed_identities.rb"
-
-Style/AsciiComments:
-  Enabled: false
