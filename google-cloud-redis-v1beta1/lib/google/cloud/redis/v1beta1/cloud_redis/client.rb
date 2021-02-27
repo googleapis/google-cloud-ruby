@@ -74,7 +74,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -163,7 +163,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -983,7 +983,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1004,7 +1004,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -1075,23 +1075,23 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  list_instances_config = parent_rpcs&.list_instances if parent_rpcs&.respond_to? :list_instances
+                  list_instances_config = parent_rpcs.list_instances if parent_rpcs.respond_to? :list_instances
                   @list_instances = ::Gapic::Config::Method.new list_instances_config
-                  get_instance_config = parent_rpcs&.get_instance if parent_rpcs&.respond_to? :get_instance
+                  get_instance_config = parent_rpcs.get_instance if parent_rpcs.respond_to? :get_instance
                   @get_instance = ::Gapic::Config::Method.new get_instance_config
-                  create_instance_config = parent_rpcs&.create_instance if parent_rpcs&.respond_to? :create_instance
+                  create_instance_config = parent_rpcs.create_instance if parent_rpcs.respond_to? :create_instance
                   @create_instance = ::Gapic::Config::Method.new create_instance_config
-                  update_instance_config = parent_rpcs&.update_instance if parent_rpcs&.respond_to? :update_instance
+                  update_instance_config = parent_rpcs.update_instance if parent_rpcs.respond_to? :update_instance
                   @update_instance = ::Gapic::Config::Method.new update_instance_config
-                  upgrade_instance_config = parent_rpcs&.upgrade_instance if parent_rpcs&.respond_to? :upgrade_instance
+                  upgrade_instance_config = parent_rpcs.upgrade_instance if parent_rpcs.respond_to? :upgrade_instance
                   @upgrade_instance = ::Gapic::Config::Method.new upgrade_instance_config
-                  import_instance_config = parent_rpcs&.import_instance if parent_rpcs&.respond_to? :import_instance
+                  import_instance_config = parent_rpcs.import_instance if parent_rpcs.respond_to? :import_instance
                   @import_instance = ::Gapic::Config::Method.new import_instance_config
-                  export_instance_config = parent_rpcs&.export_instance if parent_rpcs&.respond_to? :export_instance
+                  export_instance_config = parent_rpcs.export_instance if parent_rpcs.respond_to? :export_instance
                   @export_instance = ::Gapic::Config::Method.new export_instance_config
-                  failover_instance_config = parent_rpcs&.failover_instance if parent_rpcs&.respond_to? :failover_instance
+                  failover_instance_config = parent_rpcs.failover_instance if parent_rpcs.respond_to? :failover_instance
                   @failover_instance = ::Gapic::Config::Method.new failover_instance_config
-                  delete_instance_config = parent_rpcs&.delete_instance if parent_rpcs&.respond_to? :delete_instance
+                  delete_instance_config = parent_rpcs.delete_instance if parent_rpcs.respond_to? :delete_instance
                   @delete_instance = ::Gapic::Config::Method.new delete_instance_config
 
                   yield self if block_given?
