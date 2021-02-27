@@ -117,7 +117,7 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.list_group_stats ::Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_group_stats(::Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -190,7 +190,7 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.list_events ::Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_events(::Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -249,7 +249,7 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.delete_events ::Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest.new(project_name: project_name), grpc_options do |response, operation|
+      client.delete_events(::Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest.new(project_name: project_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
