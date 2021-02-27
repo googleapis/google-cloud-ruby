@@ -103,7 +103,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.list_databases ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_databases(::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -172,7 +172,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.create_database ::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest.new(parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config), grpc_options do |response, operation|
+      client.create_database(::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest.new(parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -231,7 +231,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.get_database ::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseRequest.new(name: name), grpc_options do |response, operation|
+      client.get_database(::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -297,7 +297,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.update_database_ddl ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest.new(database: database, statements: statements, operation_id: operation_id), grpc_options do |response, operation|
+      client.update_database_ddl(::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest.new(database: database, statements: statements, operation_id: operation_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -356,7 +356,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.drop_database ::Google::Cloud::Spanner::Admin::Database::V1::DropDatabaseRequest.new(database: database), grpc_options do |response, operation|
+      client.drop_database(::Google::Cloud::Spanner::Admin::Database::V1::DropDatabaseRequest.new(database: database), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -414,7 +414,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.get_database_ddl ::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlRequest.new(database: database), grpc_options do |response, operation|
+      client.get_database_ddl(::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlRequest.new(database: database), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -474,7 +474,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
+      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -534,7 +534,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
+      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -594,7 +594,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
+      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -662,7 +662,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.create_backup ::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup, encryption_config: encryption_config), grpc_options do |response, operation|
+      client.create_backup(::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup, encryption_config: encryption_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -721,7 +721,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.get_backup ::Google::Cloud::Spanner::Admin::Database::V1::GetBackupRequest.new(name: name), grpc_options do |response, operation|
+      client.get_backup(::Google::Cloud::Spanner::Admin::Database::V1::GetBackupRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -781,7 +781,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.update_backup ::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupRequest.new(backup: backup, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_backup(::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupRequest.new(backup: backup, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -839,7 +839,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.delete_backup ::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_backup(::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -907,7 +907,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.list_backups ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_backups(::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -977,7 +977,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.restore_database ::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config), grpc_options do |response, operation|
+      client.restore_database(::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1046,7 +1046,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.list_database_operations ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_database_operations(::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1115,7 +1115,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.list_backup_operations ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_backup_operations(::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
