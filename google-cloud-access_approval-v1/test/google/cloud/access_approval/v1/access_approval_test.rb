@@ -105,7 +105,7 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.list_approval_requests ::Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_approval_requests(::Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -164,7 +164,7 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.get_approval_request ::Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage.new(name: name), grpc_options do |response, operation|
+      client.get_approval_request(::Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -224,7 +224,7 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.approve_approval_request ::Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage.new(name: name, expire_time: expire_time), grpc_options do |response, operation|
+      client.approve_approval_request(::Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage.new(name: name, expire_time: expire_time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -282,7 +282,7 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.dismiss_approval_request ::Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage.new(name: name), grpc_options do |response, operation|
+      client.dismiss_approval_request(::Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -340,7 +340,7 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.get_access_approval_settings ::Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage.new(name: name), grpc_options do |response, operation|
+      client.get_access_approval_settings(::Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -400,7 +400,7 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.update_access_approval_settings ::Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage.new(settings: settings, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_access_approval_settings(::Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage.new(settings: settings, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -458,7 +458,7 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.delete_access_approval_settings ::Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage.new(name: name), grpc_options do |response, operation|
+      client.delete_access_approval_settings(::Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
