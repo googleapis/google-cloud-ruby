@@ -99,7 +99,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_clusters ::Google::Cloud::Container::V1::ListClustersRequest.new(project_id: project_id, zone: zone, parent: parent), grpc_options do |response, operation|
+      client.list_clusters(::Google::Cloud::Container::V1::ListClustersRequest.new(project_id: project_id, zone: zone, parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -163,7 +163,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_cluster ::Google::Cloud::Container::V1::GetClusterRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, name: name), grpc_options do |response, operation|
+      client.get_cluster(::Google::Cloud::Container::V1::GetClusterRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -227,7 +227,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.create_cluster ::Google::Cloud::Container::V1::CreateClusterRequest.new(project_id: project_id, zone: zone, cluster: cluster, parent: parent), grpc_options do |response, operation|
+      client.create_cluster(::Google::Cloud::Container::V1::CreateClusterRequest.new(project_id: project_id, zone: zone, cluster: cluster, parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -293,7 +293,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.update_cluster ::Google::Cloud::Container::V1::UpdateClusterRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, update: update, name: name), grpc_options do |response, operation|
+      client.update_cluster(::Google::Cloud::Container::V1::UpdateClusterRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, update: update, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -369,7 +369,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.update_node_pool ::Google::Cloud::Container::V1::UpdateNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, name: name, locations: locations, workload_metadata_config: workload_metadata_config, upgrade_settings: upgrade_settings), grpc_options do |response, operation|
+      client.update_node_pool(::Google::Cloud::Container::V1::UpdateNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, name: name, locations: locations, workload_metadata_config: workload_metadata_config, upgrade_settings: upgrade_settings), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -437,7 +437,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.set_node_pool_autoscaling ::Google::Cloud::Container::V1::SetNodePoolAutoscalingRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, autoscaling: autoscaling, name: name), grpc_options do |response, operation|
+      client.set_node_pool_autoscaling(::Google::Cloud::Container::V1::SetNodePoolAutoscalingRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, autoscaling: autoscaling, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -503,7 +503,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.set_logging_service ::Google::Cloud::Container::V1::SetLoggingServiceRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, logging_service: logging_service, name: name), grpc_options do |response, operation|
+      client.set_logging_service(::Google::Cloud::Container::V1::SetLoggingServiceRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, logging_service: logging_service, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -569,7 +569,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.set_monitoring_service ::Google::Cloud::Container::V1::SetMonitoringServiceRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, monitoring_service: monitoring_service, name: name), grpc_options do |response, operation|
+      client.set_monitoring_service(::Google::Cloud::Container::V1::SetMonitoringServiceRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, monitoring_service: monitoring_service, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -635,7 +635,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.set_addons_config ::Google::Cloud::Container::V1::SetAddonsConfigRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, addons_config: addons_config, name: name), grpc_options do |response, operation|
+      client.set_addons_config(::Google::Cloud::Container::V1::SetAddonsConfigRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, addons_config: addons_config, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -701,7 +701,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.set_locations ::Google::Cloud::Container::V1::SetLocationsRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, locations: locations, name: name), grpc_options do |response, operation|
+      client.set_locations(::Google::Cloud::Container::V1::SetLocationsRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, locations: locations, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -767,7 +767,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.update_master ::Google::Cloud::Container::V1::UpdateMasterRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, master_version: master_version, name: name), grpc_options do |response, operation|
+      client.update_master(::Google::Cloud::Container::V1::UpdateMasterRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, master_version: master_version, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -835,7 +835,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.set_master_auth ::Google::Cloud::Container::V1::SetMasterAuthRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, action: action, update: update, name: name), grpc_options do |response, operation|
+      client.set_master_auth(::Google::Cloud::Container::V1::SetMasterAuthRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, action: action, update: update, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -899,7 +899,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.delete_cluster ::Google::Cloud::Container::V1::DeleteClusterRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, name: name), grpc_options do |response, operation|
+      client.delete_cluster(::Google::Cloud::Container::V1::DeleteClusterRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -961,7 +961,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_operations ::Google::Cloud::Container::V1::ListOperationsRequest.new(project_id: project_id, zone: zone, parent: parent), grpc_options do |response, operation|
+      client.list_operations(::Google::Cloud::Container::V1::ListOperationsRequest.new(project_id: project_id, zone: zone, parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1025,7 +1025,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_operation ::Google::Cloud::Container::V1::GetOperationRequest.new(project_id: project_id, zone: zone, operation_id: operation_id, name: name), grpc_options do |response, operation|
+      client.get_operation(::Google::Cloud::Container::V1::GetOperationRequest.new(project_id: project_id, zone: zone, operation_id: operation_id, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1089,7 +1089,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.cancel_operation ::Google::Cloud::Container::V1::CancelOperationRequest.new(project_id: project_id, zone: zone, operation_id: operation_id, name: name), grpc_options do |response, operation|
+      client.cancel_operation(::Google::Cloud::Container::V1::CancelOperationRequest.new(project_id: project_id, zone: zone, operation_id: operation_id, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1151,7 +1151,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_server_config ::Google::Cloud::Container::V1::GetServerConfigRequest.new(project_id: project_id, zone: zone, name: name), grpc_options do |response, operation|
+      client.get_server_config(::Google::Cloud::Container::V1::GetServerConfigRequest.new(project_id: project_id, zone: zone, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1209,7 +1209,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_json_web_keys ::Google::Cloud::Container::V1::GetJSONWebKeysRequest.new(parent: parent), grpc_options do |response, operation|
+      client.get_json_web_keys(::Google::Cloud::Container::V1::GetJSONWebKeysRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1273,7 +1273,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_node_pools ::Google::Cloud::Container::V1::ListNodePoolsRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, parent: parent), grpc_options do |response, operation|
+      client.list_node_pools(::Google::Cloud::Container::V1::ListNodePoolsRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1339,7 +1339,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_node_pool ::Google::Cloud::Container::V1::GetNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, name: name), grpc_options do |response, operation|
+      client.get_node_pool(::Google::Cloud::Container::V1::GetNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1405,7 +1405,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.create_node_pool ::Google::Cloud::Container::V1::CreateNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool: node_pool, parent: parent), grpc_options do |response, operation|
+      client.create_node_pool(::Google::Cloud::Container::V1::CreateNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool: node_pool, parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1471,7 +1471,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.delete_node_pool ::Google::Cloud::Container::V1::DeleteNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, name: name), grpc_options do |response, operation|
+      client.delete_node_pool(::Google::Cloud::Container::V1::DeleteNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1537,7 +1537,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.rollback_node_pool_upgrade ::Google::Cloud::Container::V1::RollbackNodePoolUpgradeRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, name: name), grpc_options do |response, operation|
+      client.rollback_node_pool_upgrade(::Google::Cloud::Container::V1::RollbackNodePoolUpgradeRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1605,7 +1605,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.set_node_pool_management ::Google::Cloud::Container::V1::SetNodePoolManagementRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, management: management, name: name), grpc_options do |response, operation|
+      client.set_node_pool_management(::Google::Cloud::Container::V1::SetNodePoolManagementRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, management: management, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1673,7 +1673,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.set_labels ::Google::Cloud::Container::V1::SetLabelsRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, resource_labels: resource_labels, label_fingerprint: label_fingerprint, name: name), grpc_options do |response, operation|
+      client.set_labels(::Google::Cloud::Container::V1::SetLabelsRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, resource_labels: resource_labels, label_fingerprint: label_fingerprint, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1739,7 +1739,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.set_legacy_abac ::Google::Cloud::Container::V1::SetLegacyAbacRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, enabled: enabled, name: name), grpc_options do |response, operation|
+      client.set_legacy_abac(::Google::Cloud::Container::V1::SetLegacyAbacRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, enabled: enabled, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1805,7 +1805,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.start_ip_rotation ::Google::Cloud::Container::V1::StartIPRotationRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, name: name, rotate_credentials: rotate_credentials), grpc_options do |response, operation|
+      client.start_ip_rotation(::Google::Cloud::Container::V1::StartIPRotationRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, name: name, rotate_credentials: rotate_credentials), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1869,7 +1869,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.complete_ip_rotation ::Google::Cloud::Container::V1::CompleteIPRotationRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, name: name), grpc_options do |response, operation|
+      client.complete_ip_rotation(::Google::Cloud::Container::V1::CompleteIPRotationRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1937,7 +1937,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.set_node_pool_size ::Google::Cloud::Container::V1::SetNodePoolSizeRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_count: node_count, name: name), grpc_options do |response, operation|
+      client.set_node_pool_size(::Google::Cloud::Container::V1::SetNodePoolSizeRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_count: node_count, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2003,7 +2003,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.set_network_policy ::Google::Cloud::Container::V1::SetNetworkPolicyRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, network_policy: network_policy, name: name), grpc_options do |response, operation|
+      client.set_network_policy(::Google::Cloud::Container::V1::SetNetworkPolicyRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, network_policy: network_policy, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2069,7 +2069,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.set_maintenance_policy ::Google::Cloud::Container::V1::SetMaintenancePolicyRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, maintenance_policy: maintenance_policy, name: name), grpc_options do |response, operation|
+      client.set_maintenance_policy(::Google::Cloud::Container::V1::SetMaintenancePolicyRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, maintenance_policy: maintenance_policy, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2137,7 +2137,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_usable_subnetworks ::Google::Cloud::Container::V1::ListUsableSubnetworksRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_usable_subnetworks(::Google::Cloud::Container::V1::ListUsableSubnetworksRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
