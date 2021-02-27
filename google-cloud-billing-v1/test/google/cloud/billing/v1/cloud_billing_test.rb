@@ -95,7 +95,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_billing_account ::Google::Cloud::Billing::V1::GetBillingAccountRequest.new(name: name), grpc_options do |response, operation|
+      client.get_billing_account(::Google::Cloud::Billing::V1::GetBillingAccountRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -161,7 +161,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_billing_accounts ::Google::Cloud::Billing::V1::ListBillingAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter), grpc_options do |response, operation|
+      client.list_billing_accounts(::Google::Cloud::Billing::V1::ListBillingAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -224,7 +224,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_billing_account ::Google::Cloud::Billing::V1::UpdateBillingAccountRequest.new(name: name, account: account, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_billing_account(::Google::Cloud::Billing::V1::UpdateBillingAccountRequest.new(name: name, account: account, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -282,7 +282,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_billing_account ::Google::Cloud::Billing::V1::CreateBillingAccountRequest.new(billing_account: billing_account), grpc_options do |response, operation|
+      client.create_billing_account(::Google::Cloud::Billing::V1::CreateBillingAccountRequest.new(billing_account: billing_account), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -348,7 +348,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_project_billing_info ::Google::Cloud::Billing::V1::ListProjectBillingInfoRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_project_billing_info(::Google::Cloud::Billing::V1::ListProjectBillingInfoRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -407,7 +407,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_project_billing_info ::Google::Cloud::Billing::V1::GetProjectBillingInfoRequest.new(name: name), grpc_options do |response, operation|
+      client.get_project_billing_info(::Google::Cloud::Billing::V1::GetProjectBillingInfoRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -467,7 +467,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_project_billing_info ::Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest.new(name: name, project_billing_info: project_billing_info), grpc_options do |response, operation|
+      client.update_project_billing_info(::Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest.new(name: name, project_billing_info: project_billing_info), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -527,7 +527,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
+      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -587,7 +587,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
+      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -647,7 +647,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
+      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
