@@ -99,7 +99,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.create_reservation ::Google::Cloud::Bigquery::Reservation::V1::CreateReservationRequest.new(parent: parent, reservation_id: reservation_id, reservation: reservation), grpc_options do |response, operation|
+      client.create_reservation(::Google::Cloud::Bigquery::Reservation::V1::CreateReservationRequest.new(parent: parent, reservation_id: reservation_id, reservation: reservation), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -165,7 +165,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.list_reservations ::Google::Cloud::Bigquery::Reservation::V1::ListReservationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_reservations(::Google::Cloud::Bigquery::Reservation::V1::ListReservationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -224,7 +224,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.get_reservation ::Google::Cloud::Bigquery::Reservation::V1::GetReservationRequest.new(name: name), grpc_options do |response, operation|
+      client.get_reservation(::Google::Cloud::Bigquery::Reservation::V1::GetReservationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -282,7 +282,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.delete_reservation ::Google::Cloud::Bigquery::Reservation::V1::DeleteReservationRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_reservation(::Google::Cloud::Bigquery::Reservation::V1::DeleteReservationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -342,7 +342,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.update_reservation ::Google::Cloud::Bigquery::Reservation::V1::UpdateReservationRequest.new(reservation: reservation, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_reservation(::Google::Cloud::Bigquery::Reservation::V1::UpdateReservationRequest.new(reservation: reservation, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -404,7 +404,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.create_capacity_commitment ::Google::Cloud::Bigquery::Reservation::V1::CreateCapacityCommitmentRequest.new(parent: parent, capacity_commitment: capacity_commitment, enforce_single_admin_project_per_org: enforce_single_admin_project_per_org), grpc_options do |response, operation|
+      client.create_capacity_commitment(::Google::Cloud::Bigquery::Reservation::V1::CreateCapacityCommitmentRequest.new(parent: parent, capacity_commitment: capacity_commitment, enforce_single_admin_project_per_org: enforce_single_admin_project_per_org), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -470,7 +470,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.list_capacity_commitments ::Google::Cloud::Bigquery::Reservation::V1::ListCapacityCommitmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_capacity_commitments(::Google::Cloud::Bigquery::Reservation::V1::ListCapacityCommitmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -529,7 +529,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.get_capacity_commitment ::Google::Cloud::Bigquery::Reservation::V1::GetCapacityCommitmentRequest.new(name: name), grpc_options do |response, operation|
+      client.get_capacity_commitment(::Google::Cloud::Bigquery::Reservation::V1::GetCapacityCommitmentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -587,7 +587,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.delete_capacity_commitment ::Google::Cloud::Bigquery::Reservation::V1::DeleteCapacityCommitmentRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_capacity_commitment(::Google::Cloud::Bigquery::Reservation::V1::DeleteCapacityCommitmentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -647,7 +647,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.update_capacity_commitment ::Google::Cloud::Bigquery::Reservation::V1::UpdateCapacityCommitmentRequest.new(capacity_commitment: capacity_commitment, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_capacity_commitment(::Google::Cloud::Bigquery::Reservation::V1::UpdateCapacityCommitmentRequest.new(capacity_commitment: capacity_commitment, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -707,7 +707,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.split_capacity_commitment ::Google::Cloud::Bigquery::Reservation::V1::SplitCapacityCommitmentRequest.new(name: name, slot_count: slot_count), grpc_options do |response, operation|
+      client.split_capacity_commitment(::Google::Cloud::Bigquery::Reservation::V1::SplitCapacityCommitmentRequest.new(name: name, slot_count: slot_count), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -767,7 +767,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.merge_capacity_commitments ::Google::Cloud::Bigquery::Reservation::V1::MergeCapacityCommitmentsRequest.new(parent: parent, capacity_commitment_ids: capacity_commitment_ids), grpc_options do |response, operation|
+      client.merge_capacity_commitments(::Google::Cloud::Bigquery::Reservation::V1::MergeCapacityCommitmentsRequest.new(parent: parent, capacity_commitment_ids: capacity_commitment_ids), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -827,7 +827,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.create_assignment ::Google::Cloud::Bigquery::Reservation::V1::CreateAssignmentRequest.new(parent: parent, assignment: assignment), grpc_options do |response, operation|
+      client.create_assignment(::Google::Cloud::Bigquery::Reservation::V1::CreateAssignmentRequest.new(parent: parent, assignment: assignment), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -893,7 +893,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.list_assignments ::Google::Cloud::Bigquery::Reservation::V1::ListAssignmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_assignments(::Google::Cloud::Bigquery::Reservation::V1::ListAssignmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -952,7 +952,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.delete_assignment ::Google::Cloud::Bigquery::Reservation::V1::DeleteAssignmentRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_assignment(::Google::Cloud::Bigquery::Reservation::V1::DeleteAssignmentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1020,7 +1020,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.search_assignments ::Google::Cloud::Bigquery::Reservation::V1::SearchAssignmentsRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.search_assignments(::Google::Cloud::Bigquery::Reservation::V1::SearchAssignmentsRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1081,7 +1081,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.move_assignment ::Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest.new(name: name, destination_id: destination_id), grpc_options do |response, operation|
+      client.move_assignment(::Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest.new(name: name, destination_id: destination_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1139,7 +1139,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.get_bi_reservation ::Google::Cloud::Bigquery::Reservation::V1::GetBiReservationRequest.new(name: name), grpc_options do |response, operation|
+      client.get_bi_reservation(::Google::Cloud::Bigquery::Reservation::V1::GetBiReservationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1199,7 +1199,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use protobuf object with options
-      client.update_bi_reservation ::Google::Cloud::Bigquery::Reservation::V1::UpdateBiReservationRequest.new(bi_reservation: bi_reservation, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_bi_reservation(::Google::Cloud::Bigquery::Reservation::V1::UpdateBiReservationRequest.new(bi_reservation: bi_reservation, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
