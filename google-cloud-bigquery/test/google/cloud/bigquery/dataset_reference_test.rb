@@ -114,6 +114,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
     _(table.table_id).must_equal table_id
     _(table).must_be :table?
     _(table).wont_be :view?
+    _(table).wont_be :materialized_view?
   end
 
   it "can create a empty view" do
@@ -144,6 +145,38 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
     _(table.query_udfs).must_be :empty?
     _(table).must_be :view?
     _(table).wont_be :table?
+    _(table).wont_be :materialized_view?
+  end
+
+  it "can create a materialized view" do
+    mock = Minitest::Mock.new
+    insert_view = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: view_id
+      ),
+      materialized_view: Google::Apis::BigqueryV2::MaterializedViewDefinition.new(
+        enable_refresh: false,
+        query: query,
+        refresh_interval_ms: 3_600_000
+      )
+    )
+    return_view = create_materialized_view_gapi view_id, insert_view.materialized_view
+    mock.expect :insert_table, return_view, [project, dataset_id, insert_view]
+    dataset.service.mocked_service = mock
+
+    table = dataset.create_materialized_view view_id, query, enable_refresh: false, refresh_interval_ms: 3_600_000
+
+    mock.verify
+
+    _(table).must_be_kind_of Google::Cloud::Bigquery::Table
+    _(table.table_id).must_equal view_id
+    _(table.query).must_equal query
+    _(table).wont_be :query_standard_sql?
+    _(table).wont_be :query_legacy_sql?
+    _(table.query_udfs).must_be :nil?
+    _(table).wont_be :table?
+    _(table).wont_be :view?
+    _(table).must_be :materialized_view?
   end
 
   it "lists tables" do
@@ -210,6 +243,15 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
 
     Google::Apis::BigqueryV2::Table.from_json(hash.to_json).tap do |v|
       v.view = view
+    end
+  end
+
+  def create_materialized_view_gapi id, view, name = nil, description = nil
+    hash = random_table_hash dataset_id, id, name, description
+    hash["type"] = "MATERIALIZED_VIEW"
+
+    Google::Apis::BigqueryV2::Table.from_json(hash.to_json).tap do |v|
+      v.materialized_view = view
     end
   end
 

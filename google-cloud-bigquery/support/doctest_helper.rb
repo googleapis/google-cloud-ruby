@@ -226,6 +226,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Dataset#create_materialized_view" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :insert_table, view_full_gapi, ["my-project", "my_dataset", Google::Apis::BigqueryV2::Table]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigquery::Dataset#delete" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]

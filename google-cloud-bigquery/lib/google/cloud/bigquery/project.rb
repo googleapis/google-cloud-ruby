@@ -981,8 +981,7 @@ module Google
         # @param [String] description A user-friendly description of the
         #   dataset.
         # @param [Integer] expiration The default lifetime of all tables in the
-        #   dataset, in milliseconds. The minimum value is 3600000 milliseconds
-        #   (one hour).
+        #   dataset, in milliseconds. The minimum value is `3_600_000` (one hour).
         # @param [String] location The geographic location where the dataset
         #   should reside. Possible values include `EU` and `US`. The default
         #   value is `US`.

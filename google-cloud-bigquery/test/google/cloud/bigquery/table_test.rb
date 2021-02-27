@@ -47,8 +47,15 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     _(table.api_url).must_equal api_url
     _(table.bytes_count).must_equal 1000
     _(table.rows_count).must_equal 100
+    _(table.query_standard_sql?).must_be :nil?
+    _(table.query_legacy_sql?).must_be :nil?
+    _(table.query_udfs).must_be :nil?
     _(table.table?).must_equal true
     _(table.view?).must_equal false
+    _(table.materialized_view?).must_equal false
+    _(table.enable_refresh?).must_be :nil?
+    _(table.last_refresh_time).must_be :nil?
+    _(table.refresh_interval_ms).must_be :nil?
     _(table.location).must_equal location_code
     _(table.labels).must_equal labels
     _(table.labels).must_be :frozen?

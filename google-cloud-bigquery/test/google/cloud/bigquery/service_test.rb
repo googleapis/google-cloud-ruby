@@ -19,7 +19,7 @@ describe Google::Cloud::Bigquery::Service do
   let(:project_id) { "my-project" }
   let(:client) { "authorization client" }
   let(:retries) { 3 }
-  let(:timeout) { 30000 }
+  let(:timeout) { 30_000 }
   let(:host) { "example.com" }
   let(:quota_project) { "my-quota-project" }
   let(:dataset_id) { "my_dataset" }

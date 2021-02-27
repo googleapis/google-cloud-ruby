@@ -37,22 +37,6 @@ describe Google::Cloud::Bigquery, :bigquery do
     end
     d
   end
-  let(:table_id) { "bigquery_table" }
-  let(:table) do
-    t = dataset.table table_id
-    if t.nil?
-      t = dataset.create_table table_id
-    end
-    t
-  end
-  let(:view_id) { "bigquery_view" }
-  let(:view) do
-    t = dataset.table view_id
-    if t.nil?
-      t = dataset.create_view view_id, publicdata_query
-    end
-    t
-  end
   let(:dataset_with_access_id) { "#{prefix}_dataset_with_access" }
   let(:model_id) { "model_#{SecureRandom.hex(4)}" }
   let :model_sql do
@@ -72,9 +56,8 @@ describe Google::Cloud::Bigquery, :bigquery do
   end
 
   before do
+    dataset
     dataset_labels
-    table
-    view
   end
 
   it "should get its project service account email" do

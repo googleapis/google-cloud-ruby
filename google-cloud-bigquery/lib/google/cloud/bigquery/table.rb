@@ -37,16 +37,16 @@ module Google
       # repeated fields.
       #
       # The Table class can also represent a
-      # [view](https://cloud.google.com/bigquery/docs/views), which is a virtual
-      # table defined by a SQL query. BigQuery's views are logical views, not
-      # materialized views, which means that the query that defines the view is
-      # re-executed every time the view is queried. Queries are billed according
-      # to the total amount of data in all table fields referenced directly or
-      # indirectly by the top-level query. (See {#view?}, {#query}, {#query=},
-      # and {Dataset#create_view}.)
+      # [logical view](https://cloud.google.com/bigquery/docs/views), which is a virtual
+      # table defined by a SQL query (see {#view?} and {Dataset#create_view}); or a
+      # [materialized view](https://cloud.google.com/bigquery/docs/materialized-views-intro),
+      # which is a precomputed view that periodically caches results of a query for increased
+      # performance and efficiency (see {#materialized_view?} and {Dataset#create_materialized_view}).
       #
       # @see https://cloud.google.com/bigquery/docs/loading-data#loading_denormalized_nested_and_repeated_data
       #   Loading denormalized, nested, and repeated data
+      # @see https://cloud.google.com/bigquery/docs/views Creating views
+      # @see https://cloud.google.com/bigquery/docs/materialized-views-intro Introduction to materialized views
       #
       # @example
       #   require "google/cloud/bigquery"
@@ -77,7 +77,7 @@ module Google
       #   }
       #   table.insert row
       #
-      # @example Creating a BigQuery view:
+      # @example Creating a logical view:
       #   require "google/cloud/bigquery"
       #
       #   bigquery = Google::Cloud::Bigquery.new
@@ -85,6 +85,15 @@ module Google
       #   view = dataset.create_view "my_view",
       #            "SELECT name, age FROM `my_project.my_dataset.my_table`"
       #   view.view? # true
+      #
+      # @example Creating a materialized view:
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #   dataset = bigquery.dataset "my_dataset"
+      #   view = dataset.create_materialized_view "my_materialized_view",
+      #                                           "SELECT name, age FROM `my_project.my_dataset.my_table`"
+      #   view.materialized_view? # true
       #
       class Table
         ##
@@ -726,7 +735,7 @@ module Google
         end
 
         ##
-        # Checks if the table's type is "TABLE".
+        # Checks if the table's type is `TABLE`.
         #
         # @return [Boolean, nil] `true` when the type is `TABLE`, `false`
         #   otherwise, if the object is a resource (see {#resource?}); `nil` if
@@ -740,8 +749,10 @@ module Google
         end
 
         ##
-        # Checks if the table's type is "VIEW", indicating that the table
-        # represents a BigQuery view. See {Dataset#create_view}.
+        # Checks if the table's type is `VIEW`, indicating that the table
+        # represents a BigQuery logical view. See {Dataset#create_view}.
+        #
+        # @see https://cloud.google.com/bigquery/docs/views Creating views
         #
         # @return [Boolean, nil] `true` when the type is `VIEW`, `false`
         #   otherwise, if the object is a resource (see {#resource?}); `nil` if
@@ -755,7 +766,25 @@ module Google
         end
 
         ##
-        # Checks if the table's type is "EXTERNAL", indicating that the table
+        # Checks if the table's type is `MATERIALIZED_VIEW`, indicating that
+        # the table represents a BigQuery materialized view.
+        # See {Dataset#create_materialized_view}.
+        #
+        # @see https://cloud.google.com/bigquery/docs/materialized-views-intro Introduction to materialized views
+        #
+        # @return [Boolean, nil] `true` when the type is `MATERIALIZED_VIEW`,
+        #   `false` otherwise, if the object is a resource (see {#resource?});
+        #   `nil` if the object is a reference (see {#reference?}).
+        #
+        # @!group Attributes
+        #
+        def materialized_view?
+          return nil if reference?
+          @gapi.type == "MATERIALIZED_VIEW"
+        end
+
+        ##
+        # Checks if the table's type is `EXTERNAL`, indicating that the table
         # represents an External Data Source. See {#external?} and
         # {External::DataSource}.
         #
@@ -1138,21 +1167,24 @@ module Google
         end
 
         ##
-        # The query that executes each time the view is loaded.
+        # The query that defines the view or materialized view. See {#view?} and
+        # {#materialized_view?}.
         #
-        # @return [String] The query that defines the view.
+        # @return [String, nil] The query that defines the view or materialized_view;
+        #   or `nil` if not a view or materialized view.
         #
         # @!group Attributes
         #
         def query
-          @gapi.view&.query
+          view? ? @gapi.view&.query : @gapi.materialized_view&.query
         end
 
         ##
-        # Updates the query that executes each time the view is loaded.
+        # Updates the query that defines the view. (See {#view?}.) Not supported
+        # for materialized views.
         #
-        # This sets the query using standard SQL. To specify legacy SQL or to
-        # use user-defined function resources use (#set_query) instead.
+        # This method sets the query using standard SQL. To specify legacy SQL or
+        # to use user-defined function resources for a view, use (#set_query) instead.
         #
         # @see https://cloud.google.com/bigquery/query-reference BigQuery Query
         #   Reference
@@ -1167,7 +1199,7 @@ module Google
         #   view = dataset.table "my_view"
         #
         #   view.query = "SELECT first_name FROM " \
-        #                  "`my_project.my_dataset.my_table`"
+        #                "`my_project.my_dataset.my_table`"
         #
         # @!group Lifecycle
         #
@@ -1176,12 +1208,12 @@ module Google
         end
 
         ##
-        # Updates the query that executes each time the view is loaded. Allows
-        # setting of standard vs. legacy SQL and user-defined function
-        # resources.
+        # Updates the query that defines the view. (See {#view?}.) Not supported for
+        # materialized views.
         #
-        # @see https://cloud.google.com/bigquery/query-reference BigQuery Query
-        #   Reference
+        # Allows setting of standard vs. legacy SQL and user-defined function resources.
+        #
+        # @see https://cloud.google.com/bigquery/query-reference BigQuery Query Reference
         #
         # @param [String] query The query that defines the view.
         # @param [Boolean] standard_sql Specifies whether to use BigQuery's
@@ -1193,11 +1225,12 @@ module Google
         #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
         #   dialect. Optional. The default value is false.
         # @param [Array<String>, String] udfs User-defined function resources
-        #   used in a legacy SQL query. May be either a code resource to load from
-        #   a Google Cloud Storage URI (`gs://bucket/path`), or an inline resource
-        #   that contains code for a user-defined function (UDF). Providing an
-        #   inline code resource is equivalent to providing a URI for a file
-        #   containing the same code.
+        #   used in a legacy SQL query. Optional.
+        #
+        #   May be either a code resource to load from a Google Cloud Storage URI
+        #   (`gs://bucket/path`), or an inline resource that contains code for a
+        #   user-defined function (UDF). Providing an inline code resource is equivalent
+        #   to providing a URI for a file containing the same code.
         #
         #   This parameter is used for defining User Defined Function (UDF)
         #   resources only when using legacy SQL. Users of standard SQL should
@@ -1208,7 +1241,7 @@ module Google
         #   standard SQL - Differences in user-defined JavaScript
         #   functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_user-defined_javascript_functions)
         #
-        # @example
+        # @example Update a view:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -1216,12 +1249,13 @@ module Google
         #   view = dataset.table "my_view"
         #
         #   view.set_query "SELECT first_name FROM " \
-        #                    "`my_project.my_dataset.my_table`",
+        #                  "`my_project.my_dataset.my_table`",
         #                  standard_sql: true
         #
         # @!group Lifecycle
         #
         def set_query query, standard_sql: nil, legacy_sql: nil, udfs: nil
+          raise "Updating the query is not supported for Table type: #{@gapi.type}" unless view?
           use_legacy_sql = Convert.resolve_legacy_sql standard_sql, legacy_sql
           @gapi.view = Google::Apis::BigqueryV2::ViewDefinition.new(
             query:                           query,
@@ -1232,26 +1266,28 @@ module Google
         end
 
         ##
-        # Checks if the view's query is using legacy sql.
+        # Checks if the view's query is using legacy sql. See {#view?}.
         #
-        # @return [Boolean] `true` when legacy sql is used, `false` otherwise.
+        # @return [Boolean] `true` when legacy sql is used, `false` otherwise; or `nil` if not a logical view.
         #
         # @!group Attributes
         #
         def query_legacy_sql?
+          return nil unless @gapi.view
           val = @gapi.view.use_legacy_sql
           return true if val.nil?
           val
         end
 
         ##
-        # Checks if the view's query is using standard sql.
+        # Checks if the view's query is using standard sql. See {#view?}.
         #
         # @return [Boolean] `true` when standard sql is used, `false` otherwise.
         #
         # @!group Attributes
         #
         def query_standard_sql?
+          return nil unless @gapi.view
           !query_legacy_sql?
         end
 
@@ -1263,16 +1299,90 @@ module Google
         # equivalent to providing a URI for a file containing the same code. See
         # [User-Defined
         # Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        # See {#view?}.
         #
-        # @return [Array<String>] An array containing Google Cloud Storage URIs
-        #   and/or inline source code.
+        # @return [Array<String>, nil] An array containing Google Cloud Storage URIs
+        #   and/or inline source code, or `nil` if not a logical view.
         #
         # @!group Attributes
         #
         def query_udfs
+          return nil unless @gapi.view
           udfs_gapi = @gapi.view.user_defined_function_resources
           return [] if udfs_gapi.nil?
           Array(udfs_gapi).map { |udf| udf.inline_code || udf.resource_uri }
+        end
+
+        ##
+        # Whether automatic refresh of the materialized view is enabled. When true,
+        # the materialized view is updated when the base table is updated. The default
+        # value is true. See {#materialized_view?}.
+        #
+        # @return [Boolean, nil] `true` when automatic refresh is enabled, `false` otherwise;
+        #   or `nil` if not a materialized view.
+        #
+        # @!group Attributes
+        #
+        def enable_refresh?
+          return nil unless @gapi.materialized_view
+          val = @gapi.materialized_view.enable_refresh
+          return true if val.nil?
+          val
+        end
+
+        ##
+        # Sets whether automatic refresh of the materialized view is enabled. When true,
+        # the materialized view is updated when the base table is updated. See {#materialized_view?}.
+        #
+        # @param [Boolean] new_enable_refresh `true` when automatic refresh is enabled, `false` otherwise.
+        #
+        # @!group Attributes
+        #
+        def enable_refresh= new_enable_refresh
+          @gapi.materialized_view = Google::Apis::BigqueryV2::MaterializedViewDefinition.new(
+            enable_refresh: new_enable_refresh
+          )
+          patch_gapi! :materialized_view
+        end
+
+        ##
+        # The time when the materialized view was last modified.
+        # See {#materialized_view?}.
+        #
+        # @return [Time, nil] The time, or `nil` if not present or not a materialized view.
+        #
+        # @!group Attributes
+        #
+        def last_refresh_time
+          Convert.millis_to_time @gapi.materialized_view&.last_refresh_time
+        end
+
+        ##
+        # The maximum frequency in milliseconds at which the materialized view will be refreshed.
+        # See {#materialized_view?}.
+        #
+        # @return [Integer, nil] The maximum frequency in milliseconds;
+        #   or `nil` if not a materialized view.
+        #
+        # @!group Attributes
+        #
+        def refresh_interval_ms
+          @gapi.materialized_view&.refresh_interval_ms
+        end
+
+        ##
+        # Sets the maximum frequency at which the materialized view will be refreshed.
+        # See {#materialized_view?}.
+        #
+        # @param [Integer] new_refresh_interval_ms The maximum frequency in milliseconds.
+        #
+        # @!group Attributes
+        #
+        def refresh_interval_ms= new_refresh_interval_ms
+          @gapi.materialized_view = Google::Apis::BigqueryV2::MaterializedViewDefinition.new(
+            refresh_interval_ms: new_refresh_interval_ms
+          )
+          patch_gapi! :materialized_view
         end
 
         ##
