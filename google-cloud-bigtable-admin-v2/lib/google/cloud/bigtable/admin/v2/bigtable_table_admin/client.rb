@@ -65,7 +65,7 @@ module Google
                   parent_config = while namespace.any?
                                     parent_name = namespace.join "::"
                                     parent_const = const_get parent_name
-                                    break parent_const.configure if parent_const&.respond_to? :configure
+                                    break parent_const.configure if parent_const.respond_to? :configure
                                     namespace.pop
                                   end
                   default_config = Client::Configuration.new parent_config
@@ -75,17 +75,17 @@ module Google
                   default_config.rpcs.list_tables.timeout = 60.0
                   default_config.rpcs.list_tables.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.get_table.timeout = 60.0
                   default_config.rpcs.get_table.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.delete_table.timeout = 60.0
@@ -97,33 +97,33 @@ module Google
                   default_config.rpcs.generate_consistency_token.timeout = 60.0
                   default_config.rpcs.generate_consistency_token.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.check_consistency.timeout = 60.0
                   default_config.rpcs.check_consistency.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.get_snapshot.timeout = 60.0
                   default_config.rpcs.get_snapshot.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_snapshots.timeout = 60.0
                   default_config.rpcs.list_snapshots.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.delete_snapshot.timeout = 60.0
@@ -131,9 +131,9 @@ module Google
                   default_config.rpcs.get_backup.timeout = 60.0
                   default_config.rpcs.get_backup.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.update_backup.timeout = 60.0
@@ -143,17 +143,17 @@ module Google
                   default_config.rpcs.list_backups.timeout = 60.0
                   default_config.rpcs.list_backups.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.get_iam_policy.timeout = 60.0
                   default_config.rpcs.get_iam_policy.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.set_iam_policy.timeout = 60.0
@@ -161,9 +161,9 @@ module Google
                   default_config.rpcs.test_iam_permissions.timeout = 60.0
                   default_config.rpcs.test_iam_permissions.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config
@@ -232,7 +232,7 @@ module Google
                 enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                          @config.endpoint == Client.configure.endpoint &&
                                          !@config.endpoint.split(".").first.include?("-")
-                credentials ||= Credentials.default scope:                  @config.scope,
+                credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(String) || credentials.is_a?(Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
@@ -2098,7 +2098,7 @@ module Google
                 config_attr :scope,         nil, ::String, ::Array, nil
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
-                config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+                config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
                 config_attr :interceptors,  nil, ::Array, nil
                 config_attr :timeout,       nil, ::Numeric, nil
                 config_attr :metadata,      nil, ::Hash, nil
@@ -2119,7 +2119,7 @@ module Google
                 def rpcs
                   @rpcs ||= begin
                     parent_rpcs = nil
-                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                     Rpcs.new parent_rpcs
                   end
                 end
@@ -2255,49 +2255,49 @@ module Google
 
                   # @private
                   def initialize parent_rpcs = nil
-                    create_table_config = parent_rpcs&.create_table if parent_rpcs&.respond_to? :create_table
+                    create_table_config = parent_rpcs.create_table if parent_rpcs.respond_to? :create_table
                     @create_table = ::Gapic::Config::Method.new create_table_config
-                    create_table_from_snapshot_config = parent_rpcs&.create_table_from_snapshot if parent_rpcs&.respond_to? :create_table_from_snapshot
+                    create_table_from_snapshot_config = parent_rpcs.create_table_from_snapshot if parent_rpcs.respond_to? :create_table_from_snapshot
                     @create_table_from_snapshot = ::Gapic::Config::Method.new create_table_from_snapshot_config
-                    list_tables_config = parent_rpcs&.list_tables if parent_rpcs&.respond_to? :list_tables
+                    list_tables_config = parent_rpcs.list_tables if parent_rpcs.respond_to? :list_tables
                     @list_tables = ::Gapic::Config::Method.new list_tables_config
-                    get_table_config = parent_rpcs&.get_table if parent_rpcs&.respond_to? :get_table
+                    get_table_config = parent_rpcs.get_table if parent_rpcs.respond_to? :get_table
                     @get_table = ::Gapic::Config::Method.new get_table_config
-                    delete_table_config = parent_rpcs&.delete_table if parent_rpcs&.respond_to? :delete_table
+                    delete_table_config = parent_rpcs.delete_table if parent_rpcs.respond_to? :delete_table
                     @delete_table = ::Gapic::Config::Method.new delete_table_config
-                    modify_column_families_config = parent_rpcs&.modify_column_families if parent_rpcs&.respond_to? :modify_column_families
+                    modify_column_families_config = parent_rpcs.modify_column_families if parent_rpcs.respond_to? :modify_column_families
                     @modify_column_families = ::Gapic::Config::Method.new modify_column_families_config
-                    drop_row_range_config = parent_rpcs&.drop_row_range if parent_rpcs&.respond_to? :drop_row_range
+                    drop_row_range_config = parent_rpcs.drop_row_range if parent_rpcs.respond_to? :drop_row_range
                     @drop_row_range = ::Gapic::Config::Method.new drop_row_range_config
-                    generate_consistency_token_config = parent_rpcs&.generate_consistency_token if parent_rpcs&.respond_to? :generate_consistency_token
+                    generate_consistency_token_config = parent_rpcs.generate_consistency_token if parent_rpcs.respond_to? :generate_consistency_token
                     @generate_consistency_token = ::Gapic::Config::Method.new generate_consistency_token_config
-                    check_consistency_config = parent_rpcs&.check_consistency if parent_rpcs&.respond_to? :check_consistency
+                    check_consistency_config = parent_rpcs.check_consistency if parent_rpcs.respond_to? :check_consistency
                     @check_consistency = ::Gapic::Config::Method.new check_consistency_config
-                    snapshot_table_config = parent_rpcs&.snapshot_table if parent_rpcs&.respond_to? :snapshot_table
+                    snapshot_table_config = parent_rpcs.snapshot_table if parent_rpcs.respond_to? :snapshot_table
                     @snapshot_table = ::Gapic::Config::Method.new snapshot_table_config
-                    get_snapshot_config = parent_rpcs&.get_snapshot if parent_rpcs&.respond_to? :get_snapshot
+                    get_snapshot_config = parent_rpcs.get_snapshot if parent_rpcs.respond_to? :get_snapshot
                     @get_snapshot = ::Gapic::Config::Method.new get_snapshot_config
-                    list_snapshots_config = parent_rpcs&.list_snapshots if parent_rpcs&.respond_to? :list_snapshots
+                    list_snapshots_config = parent_rpcs.list_snapshots if parent_rpcs.respond_to? :list_snapshots
                     @list_snapshots = ::Gapic::Config::Method.new list_snapshots_config
-                    delete_snapshot_config = parent_rpcs&.delete_snapshot if parent_rpcs&.respond_to? :delete_snapshot
+                    delete_snapshot_config = parent_rpcs.delete_snapshot if parent_rpcs.respond_to? :delete_snapshot
                     @delete_snapshot = ::Gapic::Config::Method.new delete_snapshot_config
-                    create_backup_config = parent_rpcs&.create_backup if parent_rpcs&.respond_to? :create_backup
+                    create_backup_config = parent_rpcs.create_backup if parent_rpcs.respond_to? :create_backup
                     @create_backup = ::Gapic::Config::Method.new create_backup_config
-                    get_backup_config = parent_rpcs&.get_backup if parent_rpcs&.respond_to? :get_backup
+                    get_backup_config = parent_rpcs.get_backup if parent_rpcs.respond_to? :get_backup
                     @get_backup = ::Gapic::Config::Method.new get_backup_config
-                    update_backup_config = parent_rpcs&.update_backup if parent_rpcs&.respond_to? :update_backup
+                    update_backup_config = parent_rpcs.update_backup if parent_rpcs.respond_to? :update_backup
                     @update_backup = ::Gapic::Config::Method.new update_backup_config
-                    delete_backup_config = parent_rpcs&.delete_backup if parent_rpcs&.respond_to? :delete_backup
+                    delete_backup_config = parent_rpcs.delete_backup if parent_rpcs.respond_to? :delete_backup
                     @delete_backup = ::Gapic::Config::Method.new delete_backup_config
-                    list_backups_config = parent_rpcs&.list_backups if parent_rpcs&.respond_to? :list_backups
+                    list_backups_config = parent_rpcs.list_backups if parent_rpcs.respond_to? :list_backups
                     @list_backups = ::Gapic::Config::Method.new list_backups_config
-                    restore_table_config = parent_rpcs&.restore_table if parent_rpcs&.respond_to? :restore_table
+                    restore_table_config = parent_rpcs.restore_table if parent_rpcs.respond_to? :restore_table
                     @restore_table = ::Gapic::Config::Method.new restore_table_config
-                    get_iam_policy_config = parent_rpcs&.get_iam_policy if parent_rpcs&.respond_to? :get_iam_policy
+                    get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                     @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
-                    set_iam_policy_config = parent_rpcs&.set_iam_policy if parent_rpcs&.respond_to? :set_iam_policy
+                    set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
                     @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
-                    test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
+                    test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
                     yield self if block_given?
