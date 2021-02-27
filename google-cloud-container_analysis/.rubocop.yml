@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-container_analysis.rb"
-
-Style/AsciiComments:
-  Enabled: false
