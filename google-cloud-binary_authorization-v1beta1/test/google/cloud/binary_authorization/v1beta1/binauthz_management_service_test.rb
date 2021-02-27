@@ -95,7 +95,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
       end
 
       # Use protobuf object with options
-      client.get_policy ::Google::Cloud::BinaryAuthorization::V1beta1::GetPolicyRequest.new(name: name), grpc_options do |response, operation|
+      client.get_policy(::Google::Cloud::BinaryAuthorization::V1beta1::GetPolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -153,7 +153,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
       end
 
       # Use protobuf object with options
-      client.update_policy ::Google::Cloud::BinaryAuthorization::V1beta1::UpdatePolicyRequest.new(policy: policy), grpc_options do |response, operation|
+      client.update_policy(::Google::Cloud::BinaryAuthorization::V1beta1::UpdatePolicyRequest.new(policy: policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,7 +215,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
       end
 
       # Use protobuf object with options
-      client.create_attestor ::Google::Cloud::BinaryAuthorization::V1beta1::CreateAttestorRequest.new(parent: parent, attestor_id: attestor_id, attestor: attestor), grpc_options do |response, operation|
+      client.create_attestor(::Google::Cloud::BinaryAuthorization::V1beta1::CreateAttestorRequest.new(parent: parent, attestor_id: attestor_id, attestor: attestor), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -273,7 +273,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
       end
 
       # Use protobuf object with options
-      client.get_attestor ::Google::Cloud::BinaryAuthorization::V1beta1::GetAttestorRequest.new(name: name), grpc_options do |response, operation|
+      client.get_attestor(::Google::Cloud::BinaryAuthorization::V1beta1::GetAttestorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -331,7 +331,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
       end
 
       # Use protobuf object with options
-      client.update_attestor ::Google::Cloud::BinaryAuthorization::V1beta1::UpdateAttestorRequest.new(attestor: attestor), grpc_options do |response, operation|
+      client.update_attestor(::Google::Cloud::BinaryAuthorization::V1beta1::UpdateAttestorRequest.new(attestor: attestor), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -397,7 +397,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
       end
 
       # Use protobuf object with options
-      client.list_attestors ::Google::Cloud::BinaryAuthorization::V1beta1::ListAttestorsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_attestors(::Google::Cloud::BinaryAuthorization::V1beta1::ListAttestorsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -456,7 +456,7 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
       end
 
       # Use protobuf object with options
-      client.delete_attestor ::Google::Cloud::BinaryAuthorization::V1beta1::DeleteAttestorRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_attestor(::Google::Cloud::BinaryAuthorization::V1beta1::DeleteAttestorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
