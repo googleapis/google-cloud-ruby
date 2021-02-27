@@ -97,7 +97,7 @@ class ::Google::Cloud::Trace::V2::TraceService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_write_spans ::Google::Cloud::Trace::V2::BatchWriteSpansRequest.new(name: name, spans: spans), grpc_options do |response, operation|
+      client.batch_write_spans(::Google::Cloud::Trace::V2::BatchWriteSpansRequest.new(name: name, spans: spans), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -181,7 +181,7 @@ class ::Google::Cloud::Trace::V2::TraceService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_span ::Google::Cloud::Trace::V2::Span.new(name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind), grpc_options do |response, operation|
+      client.create_span(::Google::Cloud::Trace::V2::Span.new(name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
