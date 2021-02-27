@@ -121,7 +121,7 @@ class ::Google::Analytics::Data::V1alpha::AnalyticsData::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.run_report ::Google::Analytics::Data::V1alpha::RunReportRequest.new(entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, offset: offset, limit: limit, metric_aggregations: metric_aggregations, dimension_filter: dimension_filter, metric_filter: metric_filter, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota), grpc_options do |response, operation|
+      client.run_report(::Google::Analytics::Data::V1alpha::RunReportRequest.new(entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, offset: offset, limit: limit, metric_aggregations: metric_aggregations, dimension_filter: dimension_filter, metric_filter: metric_filter, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -199,7 +199,7 @@ class ::Google::Analytics::Data::V1alpha::AnalyticsData::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.run_pivot_report ::Google::Analytics::Data::V1alpha::RunPivotReportRequest.new(entity: entity, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, pivots: pivots, date_ranges: date_ranges, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota), grpc_options do |response, operation|
+      client.run_pivot_report(::Google::Analytics::Data::V1alpha::RunPivotReportRequest.new(entity: entity, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, pivots: pivots, date_ranges: date_ranges, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -259,7 +259,7 @@ class ::Google::Analytics::Data::V1alpha::AnalyticsData::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.batch_run_reports ::Google::Analytics::Data::V1alpha::BatchRunReportsRequest.new(entity: entity, requests: requests), grpc_options do |response, operation|
+      client.batch_run_reports(::Google::Analytics::Data::V1alpha::BatchRunReportsRequest.new(entity: entity, requests: requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -319,7 +319,7 @@ class ::Google::Analytics::Data::V1alpha::AnalyticsData::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.batch_run_pivot_reports ::Google::Analytics::Data::V1alpha::BatchRunPivotReportsRequest.new(entity: entity, requests: requests), grpc_options do |response, operation|
+      client.batch_run_pivot_reports(::Google::Analytics::Data::V1alpha::BatchRunPivotReportsRequest.new(entity: entity, requests: requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -377,7 +377,7 @@ class ::Google::Analytics::Data::V1alpha::AnalyticsData::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.get_metadata ::Google::Analytics::Data::V1alpha::GetMetadataRequest.new(name: name), grpc_options do |response, operation|
+      client.get_metadata(::Google::Analytics::Data::V1alpha::GetMetadataRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -451,7 +451,7 @@ class ::Google::Analytics::Data::V1alpha::AnalyticsData::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.run_realtime_report ::Google::Analytics::Data::V1alpha::RunRealtimeReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, limit: limit, dimension_filter: dimension_filter, metric_filter: metric_filter, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota), grpc_options do |response, operation|
+      client.run_realtime_report(::Google::Analytics::Data::V1alpha::RunRealtimeReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, limit: limit, dimension_filter: dimension_filter, metric_filter: metric_filter, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
