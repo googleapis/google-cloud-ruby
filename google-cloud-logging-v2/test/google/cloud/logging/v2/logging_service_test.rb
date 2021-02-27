@@ -95,7 +95,7 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_log ::Google::Cloud::Logging::V2::DeleteLogRequest.new(log_name: log_name), grpc_options do |response, operation|
+      client.delete_log(::Google::Cloud::Logging::V2::DeleteLogRequest.new(log_name: log_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -163,7 +163,7 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.write_log_entries ::Google::Cloud::Logging::V2::WriteLogEntriesRequest.new(log_name: log_name, resource: resource, labels: labels, entries: entries, partial_success: partial_success, dry_run: dry_run), grpc_options do |response, operation|
+      client.write_log_entries(::Google::Cloud::Logging::V2::WriteLogEntriesRequest.new(log_name: log_name, resource: resource, labels: labels, entries: entries, partial_success: partial_success, dry_run: dry_run), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -233,7 +233,7 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_log_entries ::Google::Cloud::Logging::V2::ListLogEntriesRequest.new(resource_names: resource_names, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_log_entries(::Google::Cloud::Logging::V2::ListLogEntriesRequest.new(resource_names: resource_names, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -298,7 +298,7 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_monitored_resource_descriptors ::Google::Cloud::Logging::V2::ListMonitoredResourceDescriptorsRequest.new(page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_monitored_resource_descriptors(::Google::Cloud::Logging::V2::ListMonitoredResourceDescriptorsRequest.new(page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -363,7 +363,7 @@ class ::Google::Cloud::Logging::V2::LoggingService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_logs ::Google::Cloud::Logging::V2::ListLogsRequest.new(parent: parent, page_size: page_size, page_token: page_token, resource_names: resource_names), grpc_options do |response, operation|
+      client.list_logs(::Google::Cloud::Logging::V2::ListLogsRequest.new(parent: parent, page_size: page_size, page_token: page_token, resource_names: resource_names), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -89,13 +89,13 @@ module Google
             # @return [::String]
             def cmek_settings_path **args
               resources = {
-                "project"         => (proc do |project:|
+                "project" => (proc do |project:|
                   "projects/#{project}/cmekSettings"
                 end),
-                "organization"    => (proc do |organization:|
+                "organization" => (proc do |organization:|
                   "organizations/#{organization}/cmekSettings"
                 end),
-                "folder"          => (proc do |folder:|
+                "folder" => (proc do |folder:|
                   "folders/#{folder}/cmekSettings"
                 end),
                 "billing_account" => (proc do |billing_account:|
@@ -198,19 +198,19 @@ module Google
             # @return [::String]
             def log_bucket_path **args
               resources = {
-                "bucket:location:project"         => (proc do |project:, location:, bucket:|
+                "bucket:location:project" => (proc do |project:, location:, bucket:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "projects/#{project}/locations/#{location}/buckets/#{bucket}"
                 end),
-                "bucket:location:organization"    => (proc do |organization:, location:, bucket:|
+                "bucket:location:organization" => (proc do |organization:, location:, bucket:|
                   raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "organizations/#{organization}/locations/#{location}/buckets/#{bucket}"
                 end),
-                "bucket:folder:location"          => (proc do |folder:, location:, bucket:|
+                "bucket:folder:location" => (proc do |folder:, location:, bucket:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
@@ -267,17 +267,17 @@ module Google
             # @return [::String]
             def log_exclusion_path **args
               resources = {
-                "exclusion:project"         => (proc do |project:, exclusion:|
+                "exclusion:project" => (proc do |project:, exclusion:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/exclusions/#{exclusion}"
                 end),
-                "exclusion:organization"    => (proc do |organization:, exclusion:|
+                "exclusion:organization" => (proc do |organization:, exclusion:|
                   raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
                   "organizations/#{organization}/exclusions/#{exclusion}"
                 end),
-                "exclusion:folder"          => (proc do |folder:, exclusion:|
+                "exclusion:folder" => (proc do |folder:, exclusion:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/exclusions/#{exclusion}"
@@ -332,17 +332,17 @@ module Google
             # @return [::String]
             def log_sink_path **args
               resources = {
-                "project:sink"         => (proc do |project:, sink:|
+                "project:sink" => (proc do |project:, sink:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/sinks/#{sink}"
                 end),
-                "organization:sink"    => (proc do |organization:, sink:|
+                "organization:sink" => (proc do |organization:, sink:|
                   raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
                   "organizations/#{organization}/sinks/#{sink}"
                 end),
-                "folder:sink"          => (proc do |folder:, sink:|
+                "folder:sink" => (proc do |folder:, sink:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/sinks/#{sink}"
@@ -405,21 +405,21 @@ module Google
             # @return [::String]
             def log_view_path **args
               resources = {
-                "bucket:location:project:view"         => (proc do |project:, location:, bucket:, view:|
+                "bucket:location:project:view" => (proc do |project:, location:, bucket:, view:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
                   raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
 
                   "projects/#{project}/locations/#{location}/buckets/#{bucket}/views/#{view}"
                 end),
-                "bucket:location:organization:view"    => (proc do |organization:, location:, bucket:, view:|
+                "bucket:location:organization:view" => (proc do |organization:, location:, bucket:, view:|
                   raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
                   raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
 
                   "organizations/#{organization}/locations/#{location}/buckets/#{bucket}/views/#{view}"
                 end),
-                "bucket:folder:location:view"          => (proc do |folder:, location:, bucket:, view:|
+                "bucket:folder:location:view" => (proc do |folder:, location:, bucket:, view:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
                   raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"

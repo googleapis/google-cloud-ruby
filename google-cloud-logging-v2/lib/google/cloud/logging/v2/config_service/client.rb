@@ -60,7 +60,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -68,17 +68,17 @@ module Google
                 default_config.rpcs.list_sinks.timeout = 60.0
                 default_config.rpcs.list_sinks.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 13, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.get_sink.timeout = 60.0
                 default_config.rpcs.get_sink.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 13, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.create_sink.timeout = 120.0
@@ -86,33 +86,33 @@ module Google
                 default_config.rpcs.update_sink.timeout = 60.0
                 default_config.rpcs.update_sink.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 13, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.delete_sink.timeout = 60.0
                 default_config.rpcs.delete_sink.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 13, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.list_exclusions.timeout = 60.0
                 default_config.rpcs.list_exclusions.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 13, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.get_exclusion.timeout = 60.0
                 default_config.rpcs.get_exclusion.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 13, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.create_exclusion.timeout = 120.0
@@ -122,9 +122,9 @@ module Google
                 default_config.rpcs.delete_exclusion.timeout = 60.0
                 default_config.rpcs.delete_exclusion.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 13, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 13, 14]
                 }
 
                 default_config
@@ -193,7 +193,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -2176,7 +2176,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -2197,7 +2197,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -2338,51 +2338,51 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  list_buckets_config = parent_rpcs&.list_buckets if parent_rpcs&.respond_to? :list_buckets
+                  list_buckets_config = parent_rpcs.list_buckets if parent_rpcs.respond_to? :list_buckets
                   @list_buckets = ::Gapic::Config::Method.new list_buckets_config
-                  get_bucket_config = parent_rpcs&.get_bucket if parent_rpcs&.respond_to? :get_bucket
+                  get_bucket_config = parent_rpcs.get_bucket if parent_rpcs.respond_to? :get_bucket
                   @get_bucket = ::Gapic::Config::Method.new get_bucket_config
-                  create_bucket_config = parent_rpcs&.create_bucket if parent_rpcs&.respond_to? :create_bucket
+                  create_bucket_config = parent_rpcs.create_bucket if parent_rpcs.respond_to? :create_bucket
                   @create_bucket = ::Gapic::Config::Method.new create_bucket_config
-                  update_bucket_config = parent_rpcs&.update_bucket if parent_rpcs&.respond_to? :update_bucket
+                  update_bucket_config = parent_rpcs.update_bucket if parent_rpcs.respond_to? :update_bucket
                   @update_bucket = ::Gapic::Config::Method.new update_bucket_config
-                  delete_bucket_config = parent_rpcs&.delete_bucket if parent_rpcs&.respond_to? :delete_bucket
+                  delete_bucket_config = parent_rpcs.delete_bucket if parent_rpcs.respond_to? :delete_bucket
                   @delete_bucket = ::Gapic::Config::Method.new delete_bucket_config
-                  undelete_bucket_config = parent_rpcs&.undelete_bucket if parent_rpcs&.respond_to? :undelete_bucket
+                  undelete_bucket_config = parent_rpcs.undelete_bucket if parent_rpcs.respond_to? :undelete_bucket
                   @undelete_bucket = ::Gapic::Config::Method.new undelete_bucket_config
-                  list_views_config = parent_rpcs&.list_views if parent_rpcs&.respond_to? :list_views
+                  list_views_config = parent_rpcs.list_views if parent_rpcs.respond_to? :list_views
                   @list_views = ::Gapic::Config::Method.new list_views_config
-                  get_view_config = parent_rpcs&.get_view if parent_rpcs&.respond_to? :get_view
+                  get_view_config = parent_rpcs.get_view if parent_rpcs.respond_to? :get_view
                   @get_view = ::Gapic::Config::Method.new get_view_config
-                  create_view_config = parent_rpcs&.create_view if parent_rpcs&.respond_to? :create_view
+                  create_view_config = parent_rpcs.create_view if parent_rpcs.respond_to? :create_view
                   @create_view = ::Gapic::Config::Method.new create_view_config
-                  update_view_config = parent_rpcs&.update_view if parent_rpcs&.respond_to? :update_view
+                  update_view_config = parent_rpcs.update_view if parent_rpcs.respond_to? :update_view
                   @update_view = ::Gapic::Config::Method.new update_view_config
-                  delete_view_config = parent_rpcs&.delete_view if parent_rpcs&.respond_to? :delete_view
+                  delete_view_config = parent_rpcs.delete_view if parent_rpcs.respond_to? :delete_view
                   @delete_view = ::Gapic::Config::Method.new delete_view_config
-                  list_sinks_config = parent_rpcs&.list_sinks if parent_rpcs&.respond_to? :list_sinks
+                  list_sinks_config = parent_rpcs.list_sinks if parent_rpcs.respond_to? :list_sinks
                   @list_sinks = ::Gapic::Config::Method.new list_sinks_config
-                  get_sink_config = parent_rpcs&.get_sink if parent_rpcs&.respond_to? :get_sink
+                  get_sink_config = parent_rpcs.get_sink if parent_rpcs.respond_to? :get_sink
                   @get_sink = ::Gapic::Config::Method.new get_sink_config
-                  create_sink_config = parent_rpcs&.create_sink if parent_rpcs&.respond_to? :create_sink
+                  create_sink_config = parent_rpcs.create_sink if parent_rpcs.respond_to? :create_sink
                   @create_sink = ::Gapic::Config::Method.new create_sink_config
-                  update_sink_config = parent_rpcs&.update_sink if parent_rpcs&.respond_to? :update_sink
+                  update_sink_config = parent_rpcs.update_sink if parent_rpcs.respond_to? :update_sink
                   @update_sink = ::Gapic::Config::Method.new update_sink_config
-                  delete_sink_config = parent_rpcs&.delete_sink if parent_rpcs&.respond_to? :delete_sink
+                  delete_sink_config = parent_rpcs.delete_sink if parent_rpcs.respond_to? :delete_sink
                   @delete_sink = ::Gapic::Config::Method.new delete_sink_config
-                  list_exclusions_config = parent_rpcs&.list_exclusions if parent_rpcs&.respond_to? :list_exclusions
+                  list_exclusions_config = parent_rpcs.list_exclusions if parent_rpcs.respond_to? :list_exclusions
                   @list_exclusions = ::Gapic::Config::Method.new list_exclusions_config
-                  get_exclusion_config = parent_rpcs&.get_exclusion if parent_rpcs&.respond_to? :get_exclusion
+                  get_exclusion_config = parent_rpcs.get_exclusion if parent_rpcs.respond_to? :get_exclusion
                   @get_exclusion = ::Gapic::Config::Method.new get_exclusion_config
-                  create_exclusion_config = parent_rpcs&.create_exclusion if parent_rpcs&.respond_to? :create_exclusion
+                  create_exclusion_config = parent_rpcs.create_exclusion if parent_rpcs.respond_to? :create_exclusion
                   @create_exclusion = ::Gapic::Config::Method.new create_exclusion_config
-                  update_exclusion_config = parent_rpcs&.update_exclusion if parent_rpcs&.respond_to? :update_exclusion
+                  update_exclusion_config = parent_rpcs.update_exclusion if parent_rpcs.respond_to? :update_exclusion
                   @update_exclusion = ::Gapic::Config::Method.new update_exclusion_config
-                  delete_exclusion_config = parent_rpcs&.delete_exclusion if parent_rpcs&.respond_to? :delete_exclusion
+                  delete_exclusion_config = parent_rpcs.delete_exclusion if parent_rpcs.respond_to? :delete_exclusion
                   @delete_exclusion = ::Gapic::Config::Method.new delete_exclusion_config
-                  get_cmek_settings_config = parent_rpcs&.get_cmek_settings if parent_rpcs&.respond_to? :get_cmek_settings
+                  get_cmek_settings_config = parent_rpcs.get_cmek_settings if parent_rpcs.respond_to? :get_cmek_settings
                   @get_cmek_settings = ::Gapic::Config::Method.new get_cmek_settings_config
-                  update_cmek_settings_config = parent_rpcs&.update_cmek_settings if parent_rpcs&.respond_to? :update_cmek_settings
+                  update_cmek_settings_config = parent_rpcs.update_cmek_settings if parent_rpcs.respond_to? :update_cmek_settings
                   @update_cmek_settings = ::Gapic::Config::Method.new update_cmek_settings_config
 
                   yield self if block_given?
