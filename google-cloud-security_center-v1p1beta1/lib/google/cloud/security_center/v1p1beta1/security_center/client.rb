@@ -60,7 +60,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -76,81 +76,81 @@ module Google
                 default_config.rpcs.get_iam_policy.timeout = 60.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_notification_config.timeout = 60.0
                 default_config.rpcs.get_notification_config.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_organization_settings.timeout = 60.0
                 default_config.rpcs.get_organization_settings.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_source.timeout = 60.0
                 default_config.rpcs.get_source.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.group_assets.timeout = 480.0
                 default_config.rpcs.group_assets.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.group_findings.timeout = 480.0
                 default_config.rpcs.group_findings.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_assets.timeout = 480.0
                 default_config.rpcs.list_assets.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_findings.timeout = 480.0
                 default_config.rpcs.list_findings.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_notification_configs.timeout = 60.0
                 default_config.rpcs.list_notification_configs.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_sources.timeout = 60.0
                 default_config.rpcs.list_sources.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.run_asset_discovery.timeout = 60.0
@@ -162,9 +162,9 @@ module Google
                 default_config.rpcs.test_iam_permissions.timeout = 60.0
                 default_config.rpcs.test_iam_permissions.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_finding.timeout = 60.0
@@ -243,7 +243,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -2488,7 +2488,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -2509,7 +2509,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -2650,51 +2650,51 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  create_source_config = parent_rpcs&.create_source if parent_rpcs&.respond_to? :create_source
+                  create_source_config = parent_rpcs.create_source if parent_rpcs.respond_to? :create_source
                   @create_source = ::Gapic::Config::Method.new create_source_config
-                  create_finding_config = parent_rpcs&.create_finding if parent_rpcs&.respond_to? :create_finding
+                  create_finding_config = parent_rpcs.create_finding if parent_rpcs.respond_to? :create_finding
                   @create_finding = ::Gapic::Config::Method.new create_finding_config
-                  create_notification_config_config = parent_rpcs&.create_notification_config if parent_rpcs&.respond_to? :create_notification_config
+                  create_notification_config_config = parent_rpcs.create_notification_config if parent_rpcs.respond_to? :create_notification_config
                   @create_notification_config = ::Gapic::Config::Method.new create_notification_config_config
-                  delete_notification_config_config = parent_rpcs&.delete_notification_config if parent_rpcs&.respond_to? :delete_notification_config
+                  delete_notification_config_config = parent_rpcs.delete_notification_config if parent_rpcs.respond_to? :delete_notification_config
                   @delete_notification_config = ::Gapic::Config::Method.new delete_notification_config_config
-                  get_iam_policy_config = parent_rpcs&.get_iam_policy if parent_rpcs&.respond_to? :get_iam_policy
+                  get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                   @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
-                  get_notification_config_config = parent_rpcs&.get_notification_config if parent_rpcs&.respond_to? :get_notification_config
+                  get_notification_config_config = parent_rpcs.get_notification_config if parent_rpcs.respond_to? :get_notification_config
                   @get_notification_config = ::Gapic::Config::Method.new get_notification_config_config
-                  get_organization_settings_config = parent_rpcs&.get_organization_settings if parent_rpcs&.respond_to? :get_organization_settings
+                  get_organization_settings_config = parent_rpcs.get_organization_settings if parent_rpcs.respond_to? :get_organization_settings
                   @get_organization_settings = ::Gapic::Config::Method.new get_organization_settings_config
-                  get_source_config = parent_rpcs&.get_source if parent_rpcs&.respond_to? :get_source
+                  get_source_config = parent_rpcs.get_source if parent_rpcs.respond_to? :get_source
                   @get_source = ::Gapic::Config::Method.new get_source_config
-                  group_assets_config = parent_rpcs&.group_assets if parent_rpcs&.respond_to? :group_assets
+                  group_assets_config = parent_rpcs.group_assets if parent_rpcs.respond_to? :group_assets
                   @group_assets = ::Gapic::Config::Method.new group_assets_config
-                  group_findings_config = parent_rpcs&.group_findings if parent_rpcs&.respond_to? :group_findings
+                  group_findings_config = parent_rpcs.group_findings if parent_rpcs.respond_to? :group_findings
                   @group_findings = ::Gapic::Config::Method.new group_findings_config
-                  list_assets_config = parent_rpcs&.list_assets if parent_rpcs&.respond_to? :list_assets
+                  list_assets_config = parent_rpcs.list_assets if parent_rpcs.respond_to? :list_assets
                   @list_assets = ::Gapic::Config::Method.new list_assets_config
-                  list_findings_config = parent_rpcs&.list_findings if parent_rpcs&.respond_to? :list_findings
+                  list_findings_config = parent_rpcs.list_findings if parent_rpcs.respond_to? :list_findings
                   @list_findings = ::Gapic::Config::Method.new list_findings_config
-                  list_notification_configs_config = parent_rpcs&.list_notification_configs if parent_rpcs&.respond_to? :list_notification_configs
+                  list_notification_configs_config = parent_rpcs.list_notification_configs if parent_rpcs.respond_to? :list_notification_configs
                   @list_notification_configs = ::Gapic::Config::Method.new list_notification_configs_config
-                  list_sources_config = parent_rpcs&.list_sources if parent_rpcs&.respond_to? :list_sources
+                  list_sources_config = parent_rpcs.list_sources if parent_rpcs.respond_to? :list_sources
                   @list_sources = ::Gapic::Config::Method.new list_sources_config
-                  run_asset_discovery_config = parent_rpcs&.run_asset_discovery if parent_rpcs&.respond_to? :run_asset_discovery
+                  run_asset_discovery_config = parent_rpcs.run_asset_discovery if parent_rpcs.respond_to? :run_asset_discovery
                   @run_asset_discovery = ::Gapic::Config::Method.new run_asset_discovery_config
-                  set_finding_state_config = parent_rpcs&.set_finding_state if parent_rpcs&.respond_to? :set_finding_state
+                  set_finding_state_config = parent_rpcs.set_finding_state if parent_rpcs.respond_to? :set_finding_state
                   @set_finding_state = ::Gapic::Config::Method.new set_finding_state_config
-                  set_iam_policy_config = parent_rpcs&.set_iam_policy if parent_rpcs&.respond_to? :set_iam_policy
+                  set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
                   @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
-                  test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
+                  test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                   @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
-                  update_finding_config = parent_rpcs&.update_finding if parent_rpcs&.respond_to? :update_finding
+                  update_finding_config = parent_rpcs.update_finding if parent_rpcs.respond_to? :update_finding
                   @update_finding = ::Gapic::Config::Method.new update_finding_config
-                  update_notification_config_config = parent_rpcs&.update_notification_config if parent_rpcs&.respond_to? :update_notification_config
+                  update_notification_config_config = parent_rpcs.update_notification_config if parent_rpcs.respond_to? :update_notification_config
                   @update_notification_config = ::Gapic::Config::Method.new update_notification_config_config
-                  update_organization_settings_config = parent_rpcs&.update_organization_settings if parent_rpcs&.respond_to? :update_organization_settings
+                  update_organization_settings_config = parent_rpcs.update_organization_settings if parent_rpcs.respond_to? :update_organization_settings
                   @update_organization_settings = ::Gapic::Config::Method.new update_organization_settings_config
-                  update_source_config = parent_rpcs&.update_source if parent_rpcs&.respond_to? :update_source
+                  update_source_config = parent_rpcs.update_source if parent_rpcs.respond_to? :update_source
                   @update_source = ::Gapic::Config::Method.new update_source_config
-                  update_security_marks_config = parent_rpcs&.update_security_marks if parent_rpcs&.respond_to? :update_security_marks
+                  update_security_marks_config = parent_rpcs.update_security_marks if parent_rpcs.respond_to? :update_security_marks
                   @update_security_marks = ::Gapic::Config::Method.new update_security_marks_config
 
                   yield self if block_given?

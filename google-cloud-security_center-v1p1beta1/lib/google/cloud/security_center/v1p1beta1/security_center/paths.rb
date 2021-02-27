@@ -111,7 +111,7 @@ module Google
             # @return [::String]
             def security_marks_path **args
               resources = {
-                "asset:organization"          => (proc do |organization:, asset:|
+                "asset:organization" => (proc do |organization:, asset:|
                   raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
                   "organizations/#{organization}/assets/#{asset}/securityMarks"
