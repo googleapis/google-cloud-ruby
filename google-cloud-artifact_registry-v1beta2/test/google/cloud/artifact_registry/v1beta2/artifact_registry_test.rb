@@ -103,7 +103,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.list_repositories ::Google::Cloud::ArtifactRegistry::V1beta2::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_repositories(::Google::Cloud::ArtifactRegistry::V1beta2::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.get_repository ::Google::Cloud::ArtifactRegistry::V1beta2::GetRepositoryRequest.new(name: name), grpc_options do |response, operation|
+      client.get_repository(::Google::Cloud::ArtifactRegistry::V1beta2::GetRepositoryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -228,7 +228,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.create_repository ::Google::Cloud::ArtifactRegistry::V1beta2::CreateRepositoryRequest.new(parent: parent, repository_id: repository_id, repository: repository), grpc_options do |response, operation|
+      client.create_repository(::Google::Cloud::ArtifactRegistry::V1beta2::CreateRepositoryRequest.new(parent: parent, repository_id: repository_id, repository: repository), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -289,7 +289,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.update_repository ::Google::Cloud::ArtifactRegistry::V1beta2::UpdateRepositoryRequest.new(repository: repository, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_repository(::Google::Cloud::ArtifactRegistry::V1beta2::UpdateRepositoryRequest.new(repository: repository, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -351,7 +351,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.delete_repository ::Google::Cloud::ArtifactRegistry::V1beta2::DeleteRepositoryRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_repository(::Google::Cloud::ArtifactRegistry::V1beta2::DeleteRepositoryRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -418,7 +418,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.list_packages ::Google::Cloud::ArtifactRegistry::V1beta2::ListPackagesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_packages(::Google::Cloud::ArtifactRegistry::V1beta2::ListPackagesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -477,7 +477,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.get_package ::Google::Cloud::ArtifactRegistry::V1beta2::GetPackageRequest.new(name: name), grpc_options do |response, operation|
+      client.get_package(::Google::Cloud::ArtifactRegistry::V1beta2::GetPackageRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -539,7 +539,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.delete_package ::Google::Cloud::ArtifactRegistry::V1beta2::DeletePackageRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_package(::Google::Cloud::ArtifactRegistry::V1beta2::DeletePackageRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -608,7 +608,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.list_versions ::Google::Cloud::ArtifactRegistry::V1beta2::ListVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), grpc_options do |response, operation|
+      client.list_versions(::Google::Cloud::ArtifactRegistry::V1beta2::ListVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -669,7 +669,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.get_version ::Google::Cloud::ArtifactRegistry::V1beta2::GetVersionRequest.new(name: name, view: view), grpc_options do |response, operation|
+      client.get_version(::Google::Cloud::ArtifactRegistry::V1beta2::GetVersionRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -733,7 +733,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.delete_version ::Google::Cloud::ArtifactRegistry::V1beta2::DeleteVersionRequest.new(name: name, force: force), grpc_options do |response, operation|
+      client.delete_version(::Google::Cloud::ArtifactRegistry::V1beta2::DeleteVersionRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -802,7 +802,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.list_files ::Google::Cloud::ArtifactRegistry::V1beta2::ListFilesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_files(::Google::Cloud::ArtifactRegistry::V1beta2::ListFilesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -861,7 +861,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.get_file ::Google::Cloud::ArtifactRegistry::V1beta2::GetFileRequest.new(name: name), grpc_options do |response, operation|
+      client.get_file(::Google::Cloud::ArtifactRegistry::V1beta2::GetFileRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -929,7 +929,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.list_tags ::Google::Cloud::ArtifactRegistry::V1beta2::ListTagsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_tags(::Google::Cloud::ArtifactRegistry::V1beta2::ListTagsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -988,7 +988,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.get_tag ::Google::Cloud::ArtifactRegistry::V1beta2::GetTagRequest.new(name: name), grpc_options do |response, operation|
+      client.get_tag(::Google::Cloud::ArtifactRegistry::V1beta2::GetTagRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1050,7 +1050,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.create_tag ::Google::Cloud::ArtifactRegistry::V1beta2::CreateTagRequest.new(parent: parent, tag_id: tag_id, tag: tag), grpc_options do |response, operation|
+      client.create_tag(::Google::Cloud::ArtifactRegistry::V1beta2::CreateTagRequest.new(parent: parent, tag_id: tag_id, tag: tag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1110,7 +1110,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.update_tag ::Google::Cloud::ArtifactRegistry::V1beta2::UpdateTagRequest.new(tag: tag, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_tag(::Google::Cloud::ArtifactRegistry::V1beta2::UpdateTagRequest.new(tag: tag, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1168,7 +1168,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.delete_tag ::Google::Cloud::ArtifactRegistry::V1beta2::DeleteTagRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_tag(::Google::Cloud::ArtifactRegistry::V1beta2::DeleteTagRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1228,7 +1228,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
+      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1288,7 +1288,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
+      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1348,7 +1348,7 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::ClientTest <
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
+      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
