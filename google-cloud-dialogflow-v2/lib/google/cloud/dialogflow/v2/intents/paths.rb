@@ -64,7 +64,7 @@ module Google
             # @return [::String]
             def context_path **args
               resources = {
-                "context:project:session"                  => (proc do |project:, session:, context:|
+                "context:project:session" => (proc do |project:, session:, context:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
                   raise ::ArgumentError, "session cannot contain /" if session.to_s.include? "/"
 
