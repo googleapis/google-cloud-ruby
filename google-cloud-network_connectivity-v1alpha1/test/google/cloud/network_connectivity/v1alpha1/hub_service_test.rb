@@ -107,7 +107,7 @@ class ::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.list_hubs ::Google::Cloud::NetworkConnectivity::V1alpha1::ListHubsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_hubs(::Google::Cloud::NetworkConnectivity::V1alpha1::ListHubsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -166,7 +166,7 @@ class ::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.get_hub ::Google::Cloud::NetworkConnectivity::V1alpha1::GetHubRequest.new(name: name), grpc_options do |response, operation|
+      client.get_hub(::Google::Cloud::NetworkConnectivity::V1alpha1::GetHubRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -234,7 +234,7 @@ class ::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.create_hub ::Google::Cloud::NetworkConnectivity::V1alpha1::CreateHubRequest.new(parent: parent, hub_id: hub_id, hub: hub, request_id: request_id), grpc_options do |response, operation|
+      client.create_hub(::Google::Cloud::NetworkConnectivity::V1alpha1::CreateHubRequest.new(parent: parent, hub_id: hub_id, hub: hub, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -301,7 +301,7 @@ class ::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.update_hub ::Google::Cloud::NetworkConnectivity::V1alpha1::UpdateHubRequest.new(update_mask: update_mask, hub: hub, request_id: request_id), grpc_options do |response, operation|
+      client.update_hub(::Google::Cloud::NetworkConnectivity::V1alpha1::UpdateHubRequest.new(update_mask: update_mask, hub: hub, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -366,7 +366,7 @@ class ::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.delete_hub ::Google::Cloud::NetworkConnectivity::V1alpha1::DeleteHubRequest.new(name: name, request_id: request_id), grpc_options do |response, operation|
+      client.delete_hub(::Google::Cloud::NetworkConnectivity::V1alpha1::DeleteHubRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -437,7 +437,7 @@ class ::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.list_spokes ::Google::Cloud::NetworkConnectivity::V1alpha1::ListSpokesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_spokes(::Google::Cloud::NetworkConnectivity::V1alpha1::ListSpokesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -496,7 +496,7 @@ class ::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.get_spoke ::Google::Cloud::NetworkConnectivity::V1alpha1::GetSpokeRequest.new(name: name), grpc_options do |response, operation|
+      client.get_spoke(::Google::Cloud::NetworkConnectivity::V1alpha1::GetSpokeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -564,7 +564,7 @@ class ::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.create_spoke ::Google::Cloud::NetworkConnectivity::V1alpha1::CreateSpokeRequest.new(parent: parent, spoke_id: spoke_id, spoke: spoke, request_id: request_id), grpc_options do |response, operation|
+      client.create_spoke(::Google::Cloud::NetworkConnectivity::V1alpha1::CreateSpokeRequest.new(parent: parent, spoke_id: spoke_id, spoke: spoke, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -631,7 +631,7 @@ class ::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.update_spoke ::Google::Cloud::NetworkConnectivity::V1alpha1::UpdateSpokeRequest.new(update_mask: update_mask, spoke: spoke, request_id: request_id), grpc_options do |response, operation|
+      client.update_spoke(::Google::Cloud::NetworkConnectivity::V1alpha1::UpdateSpokeRequest.new(update_mask: update_mask, spoke: spoke, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -696,7 +696,7 @@ class ::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.delete_spoke ::Google::Cloud::NetworkConnectivity::V1alpha1::DeleteSpokeRequest.new(name: name, request_id: request_id), grpc_options do |response, operation|
+      client.delete_spoke(::Google::Cloud::NetworkConnectivity::V1alpha1::DeleteSpokeRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
