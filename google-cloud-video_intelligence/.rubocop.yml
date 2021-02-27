@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-video_intelligence.rb"
-
-Style/AsciiComments:
-  Enabled: false
