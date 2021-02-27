@@ -103,7 +103,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.inspect_content ::Google::Cloud::Dlp::V2::InspectContentRequest.new(parent: parent, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, location_id: location_id), grpc_options do |response, operation|
+      client.inspect_content(::Google::Cloud::Dlp::V2::InspectContentRequest.new(parent: parent, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, location_id: location_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -171,7 +171,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.redact_image ::Google::Cloud::Dlp::V2::RedactImageRequest.new(parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item), grpc_options do |response, operation|
+      client.redact_image(::Google::Cloud::Dlp::V2::RedactImageRequest.new(parent: parent, location_id: location_id, inspect_config: inspect_config, image_redaction_configs: image_redaction_configs, include_findings: include_findings, byte_item: byte_item), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -241,7 +241,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.deidentify_content ::Google::Cloud::Dlp::V2::DeidentifyContentRequest.new(parent: parent, deidentify_config: deidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, deidentify_template_name: deidentify_template_name, location_id: location_id), grpc_options do |response, operation|
+      client.deidentify_content(::Google::Cloud::Dlp::V2::DeidentifyContentRequest.new(parent: parent, deidentify_config: deidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, deidentify_template_name: deidentify_template_name, location_id: location_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -311,7 +311,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.reidentify_content ::Google::Cloud::Dlp::V2::ReidentifyContentRequest.new(parent: parent, reidentify_config: reidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, reidentify_template_name: reidentify_template_name, location_id: location_id), grpc_options do |response, operation|
+      client.reidentify_content(::Google::Cloud::Dlp::V2::ReidentifyContentRequest.new(parent: parent, reidentify_config: reidentify_config, inspect_config: inspect_config, item: item, inspect_template_name: inspect_template_name, reidentify_template_name: reidentify_template_name, location_id: location_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -375,7 +375,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_info_types ::Google::Cloud::Dlp::V2::ListInfoTypesRequest.new(parent: parent, language_code: language_code, filter: filter, location_id: location_id), grpc_options do |response, operation|
+      client.list_info_types(::Google::Cloud::Dlp::V2::ListInfoTypesRequest.new(parent: parent, language_code: language_code, filter: filter, location_id: location_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -439,7 +439,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_inspect_template ::Google::Cloud::Dlp::V2::CreateInspectTemplateRequest.new(parent: parent, inspect_template: inspect_template, template_id: template_id, location_id: location_id), grpc_options do |response, operation|
+      client.create_inspect_template(::Google::Cloud::Dlp::V2::CreateInspectTemplateRequest.new(parent: parent, inspect_template: inspect_template, template_id: template_id, location_id: location_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -501,7 +501,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_inspect_template ::Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest.new(name: name, inspect_template: inspect_template, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_inspect_template(::Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest.new(name: name, inspect_template: inspect_template, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -559,7 +559,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_inspect_template ::Google::Cloud::Dlp::V2::GetInspectTemplateRequest.new(name: name), grpc_options do |response, operation|
+      client.get_inspect_template(::Google::Cloud::Dlp::V2::GetInspectTemplateRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -629,7 +629,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_inspect_templates ::Google::Cloud::Dlp::V2::ListInspectTemplatesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id), grpc_options do |response, operation|
+      client.list_inspect_templates(::Google::Cloud::Dlp::V2::ListInspectTemplatesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -688,7 +688,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_inspect_template ::Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_inspect_template(::Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -752,7 +752,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_deidentify_template ::Google::Cloud::Dlp::V2::CreateDeidentifyTemplateRequest.new(parent: parent, deidentify_template: deidentify_template, template_id: template_id, location_id: location_id), grpc_options do |response, operation|
+      client.create_deidentify_template(::Google::Cloud::Dlp::V2::CreateDeidentifyTemplateRequest.new(parent: parent, deidentify_template: deidentify_template, template_id: template_id, location_id: location_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -814,7 +814,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_deidentify_template ::Google::Cloud::Dlp::V2::UpdateDeidentifyTemplateRequest.new(name: name, deidentify_template: deidentify_template, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_deidentify_template(::Google::Cloud::Dlp::V2::UpdateDeidentifyTemplateRequest.new(name: name, deidentify_template: deidentify_template, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -872,7 +872,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_deidentify_template ::Google::Cloud::Dlp::V2::GetDeidentifyTemplateRequest.new(name: name), grpc_options do |response, operation|
+      client.get_deidentify_template(::Google::Cloud::Dlp::V2::GetDeidentifyTemplateRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -942,7 +942,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_deidentify_templates ::Google::Cloud::Dlp::V2::ListDeidentifyTemplatesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id), grpc_options do |response, operation|
+      client.list_deidentify_templates(::Google::Cloud::Dlp::V2::ListDeidentifyTemplatesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1001,7 +1001,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_deidentify_template ::Google::Cloud::Dlp::V2::DeleteDeidentifyTemplateRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_deidentify_template(::Google::Cloud::Dlp::V2::DeleteDeidentifyTemplateRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1065,7 +1065,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_job_trigger ::Google::Cloud::Dlp::V2::CreateJobTriggerRequest.new(parent: parent, job_trigger: job_trigger, trigger_id: trigger_id, location_id: location_id), grpc_options do |response, operation|
+      client.create_job_trigger(::Google::Cloud::Dlp::V2::CreateJobTriggerRequest.new(parent: parent, job_trigger: job_trigger, trigger_id: trigger_id, location_id: location_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1127,7 +1127,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_job_trigger ::Google::Cloud::Dlp::V2::UpdateJobTriggerRequest.new(name: name, job_trigger: job_trigger, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_job_trigger(::Google::Cloud::Dlp::V2::UpdateJobTriggerRequest.new(name: name, job_trigger: job_trigger, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1187,7 +1187,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.hybrid_inspect_job_trigger ::Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest.new(name: name, hybrid_item: hybrid_item), grpc_options do |response, operation|
+      client.hybrid_inspect_job_trigger(::Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest.new(name: name, hybrid_item: hybrid_item), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1245,7 +1245,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_job_trigger ::Google::Cloud::Dlp::V2::GetJobTriggerRequest.new(name: name), grpc_options do |response, operation|
+      client.get_job_trigger(::Google::Cloud::Dlp::V2::GetJobTriggerRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1317,7 +1317,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_job_triggers ::Google::Cloud::Dlp::V2::ListJobTriggersRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, location_id: location_id), grpc_options do |response, operation|
+      client.list_job_triggers(::Google::Cloud::Dlp::V2::ListJobTriggersRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, filter: filter, location_id: location_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1376,7 +1376,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_job_trigger ::Google::Cloud::Dlp::V2::DeleteJobTriggerRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_job_trigger(::Google::Cloud::Dlp::V2::DeleteJobTriggerRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1434,7 +1434,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.activate_job_trigger ::Google::Cloud::Dlp::V2::ActivateJobTriggerRequest.new(name: name), grpc_options do |response, operation|
+      client.activate_job_trigger(::Google::Cloud::Dlp::V2::ActivateJobTriggerRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1499,7 +1499,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_dlp_job ::Google::Cloud::Dlp::V2::CreateDlpJobRequest.new(parent: parent, inspect_job: inspect_job, job_id: job_id, location_id: location_id), grpc_options do |response, operation|
+      client.create_dlp_job(::Google::Cloud::Dlp::V2::CreateDlpJobRequest.new(parent: parent, inspect_job: inspect_job, job_id: job_id, location_id: location_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1573,7 +1573,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_dlp_jobs ::Google::Cloud::Dlp::V2::ListDlpJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, type: type, order_by: order_by, location_id: location_id), grpc_options do |response, operation|
+      client.list_dlp_jobs(::Google::Cloud::Dlp::V2::ListDlpJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, type: type, order_by: order_by, location_id: location_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1632,7 +1632,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_dlp_job ::Google::Cloud::Dlp::V2::GetDlpJobRequest.new(name: name), grpc_options do |response, operation|
+      client.get_dlp_job(::Google::Cloud::Dlp::V2::GetDlpJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1690,7 +1690,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_dlp_job ::Google::Cloud::Dlp::V2::DeleteDlpJobRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_dlp_job(::Google::Cloud::Dlp::V2::DeleteDlpJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1748,7 +1748,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.cancel_dlp_job ::Google::Cloud::Dlp::V2::CancelDlpJobRequest.new(name: name), grpc_options do |response, operation|
+      client.cancel_dlp_job(::Google::Cloud::Dlp::V2::CancelDlpJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1812,7 +1812,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_stored_info_type ::Google::Cloud::Dlp::V2::CreateStoredInfoTypeRequest.new(parent: parent, config: config, stored_info_type_id: stored_info_type_id, location_id: location_id), grpc_options do |response, operation|
+      client.create_stored_info_type(::Google::Cloud::Dlp::V2::CreateStoredInfoTypeRequest.new(parent: parent, config: config, stored_info_type_id: stored_info_type_id, location_id: location_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1874,7 +1874,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_stored_info_type ::Google::Cloud::Dlp::V2::UpdateStoredInfoTypeRequest.new(name: name, config: config, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_stored_info_type(::Google::Cloud::Dlp::V2::UpdateStoredInfoTypeRequest.new(name: name, config: config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1932,7 +1932,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_stored_info_type ::Google::Cloud::Dlp::V2::GetStoredInfoTypeRequest.new(name: name), grpc_options do |response, operation|
+      client.get_stored_info_type(::Google::Cloud::Dlp::V2::GetStoredInfoTypeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2002,7 +2002,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_stored_info_types ::Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id), grpc_options do |response, operation|
+      client.list_stored_info_types(::Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest.new(parent: parent, page_token: page_token, page_size: page_size, order_by: order_by, location_id: location_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2061,7 +2061,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_stored_info_type ::Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_stored_info_type(::Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2121,7 +2121,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.hybrid_inspect_dlp_job ::Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest.new(name: name, hybrid_item: hybrid_item), grpc_options do |response, operation|
+      client.hybrid_inspect_dlp_job(::Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest.new(name: name, hybrid_item: hybrid_item), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2179,7 +2179,7 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.finish_dlp_job ::Google::Cloud::Dlp::V2::FinishDlpJobRequest.new(name: name), grpc_options do |response, operation|
+      client.finish_dlp_job(::Google::Cloud::Dlp::V2::FinishDlpJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
