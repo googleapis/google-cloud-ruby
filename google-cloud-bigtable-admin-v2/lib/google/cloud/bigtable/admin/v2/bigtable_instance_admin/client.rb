@@ -63,7 +63,7 @@ module Google
                   parent_config = while namespace.any?
                                     parent_name = namespace.join "::"
                                     parent_const = const_get parent_name
-                                    break parent_const.configure if parent_const&.respond_to? :configure
+                                    break parent_const.configure if parent_const.respond_to? :configure
                                     namespace.pop
                                   end
                   default_config = Client::Configuration.new parent_config
@@ -73,33 +73,33 @@ module Google
                   default_config.rpcs.get_instance.timeout = 60.0
                   default_config.rpcs.get_instance.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_instances.timeout = 60.0
                   default_config.rpcs.list_instances.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.update_instance.timeout = 60.0
                   default_config.rpcs.update_instance.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.partial_update_instance.timeout = 60.0
                   default_config.rpcs.partial_update_instance.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.delete_instance.timeout = 60.0
@@ -109,25 +109,25 @@ module Google
                   default_config.rpcs.get_cluster.timeout = 60.0
                   default_config.rpcs.get_cluster.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_clusters.timeout = 60.0
                   default_config.rpcs.list_clusters.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.update_cluster.timeout = 60.0
                   default_config.rpcs.update_cluster.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.delete_cluster.timeout = 60.0
@@ -137,25 +137,25 @@ module Google
                   default_config.rpcs.get_app_profile.timeout = 60.0
                   default_config.rpcs.get_app_profile.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_app_profiles.timeout = 60.0
                   default_config.rpcs.list_app_profiles.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.update_app_profile.timeout = 60.0
                   default_config.rpcs.update_app_profile.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.delete_app_profile.timeout = 60.0
@@ -163,9 +163,9 @@ module Google
                   default_config.rpcs.get_iam_policy.timeout = 60.0
                   default_config.rpcs.get_iam_policy.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.set_iam_policy.timeout = 60.0
@@ -173,9 +173,9 @@ module Google
                   default_config.rpcs.test_iam_permissions.timeout = 60.0
                   default_config.rpcs.test_iam_permissions.retry_policy = {
                     initial_delay: 1.0,
-                    max_delay:     60.0,
-                    multiplier:    2,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 2,
+                retry_codes: [14, 4]
                   }
 
                   default_config
@@ -244,7 +244,7 @@ module Google
                 enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                          @config.endpoint == Client.configure.endpoint &&
                                          !@config.endpoint.split(".").first.include?("-")
-                credentials ||= Credentials.default scope:                  @config.scope,
+                credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(String) || credentials.is_a?(Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
@@ -1754,7 +1754,7 @@ module Google
                 config_attr :scope,         nil, ::String, ::Array, nil
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
-                config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+                config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
                 config_attr :interceptors,  nil, ::Array, nil
                 config_attr :timeout,       nil, ::Numeric, nil
                 config_attr :metadata,      nil, ::Hash, nil
@@ -1775,7 +1775,7 @@ module Google
                 def rpcs
                   @rpcs ||= begin
                     parent_rpcs = nil
-                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                     Rpcs.new parent_rpcs
                   end
                 end
@@ -1896,43 +1896,43 @@ module Google
 
                   # @private
                   def initialize parent_rpcs = nil
-                    create_instance_config = parent_rpcs&.create_instance if parent_rpcs&.respond_to? :create_instance
+                    create_instance_config = parent_rpcs.create_instance if parent_rpcs.respond_to? :create_instance
                     @create_instance = ::Gapic::Config::Method.new create_instance_config
-                    get_instance_config = parent_rpcs&.get_instance if parent_rpcs&.respond_to? :get_instance
+                    get_instance_config = parent_rpcs.get_instance if parent_rpcs.respond_to? :get_instance
                     @get_instance = ::Gapic::Config::Method.new get_instance_config
-                    list_instances_config = parent_rpcs&.list_instances if parent_rpcs&.respond_to? :list_instances
+                    list_instances_config = parent_rpcs.list_instances if parent_rpcs.respond_to? :list_instances
                     @list_instances = ::Gapic::Config::Method.new list_instances_config
-                    update_instance_config = parent_rpcs&.update_instance if parent_rpcs&.respond_to? :update_instance
+                    update_instance_config = parent_rpcs.update_instance if parent_rpcs.respond_to? :update_instance
                     @update_instance = ::Gapic::Config::Method.new update_instance_config
-                    partial_update_instance_config = parent_rpcs&.partial_update_instance if parent_rpcs&.respond_to? :partial_update_instance
+                    partial_update_instance_config = parent_rpcs.partial_update_instance if parent_rpcs.respond_to? :partial_update_instance
                     @partial_update_instance = ::Gapic::Config::Method.new partial_update_instance_config
-                    delete_instance_config = parent_rpcs&.delete_instance if parent_rpcs&.respond_to? :delete_instance
+                    delete_instance_config = parent_rpcs.delete_instance if parent_rpcs.respond_to? :delete_instance
                     @delete_instance = ::Gapic::Config::Method.new delete_instance_config
-                    create_cluster_config = parent_rpcs&.create_cluster if parent_rpcs&.respond_to? :create_cluster
+                    create_cluster_config = parent_rpcs.create_cluster if parent_rpcs.respond_to? :create_cluster
                     @create_cluster = ::Gapic::Config::Method.new create_cluster_config
-                    get_cluster_config = parent_rpcs&.get_cluster if parent_rpcs&.respond_to? :get_cluster
+                    get_cluster_config = parent_rpcs.get_cluster if parent_rpcs.respond_to? :get_cluster
                     @get_cluster = ::Gapic::Config::Method.new get_cluster_config
-                    list_clusters_config = parent_rpcs&.list_clusters if parent_rpcs&.respond_to? :list_clusters
+                    list_clusters_config = parent_rpcs.list_clusters if parent_rpcs.respond_to? :list_clusters
                     @list_clusters = ::Gapic::Config::Method.new list_clusters_config
-                    update_cluster_config = parent_rpcs&.update_cluster if parent_rpcs&.respond_to? :update_cluster
+                    update_cluster_config = parent_rpcs.update_cluster if parent_rpcs.respond_to? :update_cluster
                     @update_cluster = ::Gapic::Config::Method.new update_cluster_config
-                    delete_cluster_config = parent_rpcs&.delete_cluster if parent_rpcs&.respond_to? :delete_cluster
+                    delete_cluster_config = parent_rpcs.delete_cluster if parent_rpcs.respond_to? :delete_cluster
                     @delete_cluster = ::Gapic::Config::Method.new delete_cluster_config
-                    create_app_profile_config = parent_rpcs&.create_app_profile if parent_rpcs&.respond_to? :create_app_profile
+                    create_app_profile_config = parent_rpcs.create_app_profile if parent_rpcs.respond_to? :create_app_profile
                     @create_app_profile = ::Gapic::Config::Method.new create_app_profile_config
-                    get_app_profile_config = parent_rpcs&.get_app_profile if parent_rpcs&.respond_to? :get_app_profile
+                    get_app_profile_config = parent_rpcs.get_app_profile if parent_rpcs.respond_to? :get_app_profile
                     @get_app_profile = ::Gapic::Config::Method.new get_app_profile_config
-                    list_app_profiles_config = parent_rpcs&.list_app_profiles if parent_rpcs&.respond_to? :list_app_profiles
+                    list_app_profiles_config = parent_rpcs.list_app_profiles if parent_rpcs.respond_to? :list_app_profiles
                     @list_app_profiles = ::Gapic::Config::Method.new list_app_profiles_config
-                    update_app_profile_config = parent_rpcs&.update_app_profile if parent_rpcs&.respond_to? :update_app_profile
+                    update_app_profile_config = parent_rpcs.update_app_profile if parent_rpcs.respond_to? :update_app_profile
                     @update_app_profile = ::Gapic::Config::Method.new update_app_profile_config
-                    delete_app_profile_config = parent_rpcs&.delete_app_profile if parent_rpcs&.respond_to? :delete_app_profile
+                    delete_app_profile_config = parent_rpcs.delete_app_profile if parent_rpcs.respond_to? :delete_app_profile
                     @delete_app_profile = ::Gapic::Config::Method.new delete_app_profile_config
-                    get_iam_policy_config = parent_rpcs&.get_iam_policy if parent_rpcs&.respond_to? :get_iam_policy
+                    get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                     @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
-                    set_iam_policy_config = parent_rpcs&.set_iam_policy if parent_rpcs&.respond_to? :set_iam_policy
+                    set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
                     @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
-                    test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
+                    test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
                     yield self if block_given?

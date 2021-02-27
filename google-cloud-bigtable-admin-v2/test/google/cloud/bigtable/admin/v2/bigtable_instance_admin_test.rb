@@ -105,7 +105,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.create_instance ::Google::Cloud::Bigtable::Admin::V2::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, clusters: clusters), grpc_options do |response, operation|
+      client.create_instance(::Google::Cloud::Bigtable::Admin::V2::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, clusters: clusters), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -164,7 +164,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_instance ::Google::Cloud::Bigtable::Admin::V2::GetInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.get_instance(::Google::Cloud::Bigtable::Admin::V2::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -224,7 +224,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.list_instances ::Google::Cloud::Bigtable::Admin::V2::ListInstancesRequest.new(parent: parent, page_token: page_token), grpc_options do |response, operation|
+      client.list_instances(::Google::Cloud::Bigtable::Admin::V2::ListInstancesRequest.new(parent: parent, page_token: page_token), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -290,7 +290,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.update_instance ::Google::Cloud::Bigtable::Admin::V2::Instance.new(name: name, display_name: display_name, state: state, type: type, labels: labels), grpc_options do |response, operation|
+      client.update_instance(::Google::Cloud::Bigtable::Admin::V2::Instance.new(name: name, display_name: display_name, state: state, type: type, labels: labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -354,7 +354,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.partial_update_instance ::Google::Cloud::Bigtable::Admin::V2::PartialUpdateInstanceRequest.new(instance: instance, update_mask: update_mask), grpc_options do |response, operation|
+      client.partial_update_instance(::Google::Cloud::Bigtable::Admin::V2::PartialUpdateInstanceRequest.new(instance: instance, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -413,7 +413,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.delete_instance ::Google::Cloud::Bigtable::Admin::V2::DeleteInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_instance(::Google::Cloud::Bigtable::Admin::V2::DeleteInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -479,7 +479,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.create_cluster ::Google::Cloud::Bigtable::Admin::V2::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster), grpc_options do |response, operation|
+      client.create_cluster(::Google::Cloud::Bigtable::Admin::V2::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -538,7 +538,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_cluster ::Google::Cloud::Bigtable::Admin::V2::GetClusterRequest.new(name: name), grpc_options do |response, operation|
+      client.get_cluster(::Google::Cloud::Bigtable::Admin::V2::GetClusterRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -598,7 +598,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.list_clusters ::Google::Cloud::Bigtable::Admin::V2::ListClustersRequest.new(parent: parent, page_token: page_token), grpc_options do |response, operation|
+      client.list_clusters(::Google::Cloud::Bigtable::Admin::V2::ListClustersRequest.new(parent: parent, page_token: page_token), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -670,7 +670,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.update_cluster ::Google::Cloud::Bigtable::Admin::V2::Cluster.new(name: name, location: location, state: state, serve_nodes: serve_nodes, default_storage_type: default_storage_type, encryption_config: encryption_config), grpc_options do |response, operation|
+      client.update_cluster(::Google::Cloud::Bigtable::Admin::V2::Cluster.new(name: name, location: location, state: state, serve_nodes: serve_nodes, default_storage_type: default_storage_type, encryption_config: encryption_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -729,7 +729,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.delete_cluster ::Google::Cloud::Bigtable::Admin::V2::DeleteClusterRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_cluster(::Google::Cloud::Bigtable::Admin::V2::DeleteClusterRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -793,7 +793,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.create_app_profile ::Google::Cloud::Bigtable::Admin::V2::CreateAppProfileRequest.new(parent: parent, app_profile_id: app_profile_id, app_profile: app_profile, ignore_warnings: ignore_warnings), grpc_options do |response, operation|
+      client.create_app_profile(::Google::Cloud::Bigtable::Admin::V2::CreateAppProfileRequest.new(parent: parent, app_profile_id: app_profile_id, app_profile: app_profile, ignore_warnings: ignore_warnings), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -851,7 +851,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_app_profile ::Google::Cloud::Bigtable::Admin::V2::GetAppProfileRequest.new(name: name), grpc_options do |response, operation|
+      client.get_app_profile(::Google::Cloud::Bigtable::Admin::V2::GetAppProfileRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -917,7 +917,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.list_app_profiles ::Google::Cloud::Bigtable::Admin::V2::ListAppProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_app_profiles(::Google::Cloud::Bigtable::Admin::V2::ListAppProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -984,7 +984,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.update_app_profile ::Google::Cloud::Bigtable::Admin::V2::UpdateAppProfileRequest.new(app_profile: app_profile, update_mask: update_mask, ignore_warnings: ignore_warnings), grpc_options do |response, operation|
+      client.update_app_profile(::Google::Cloud::Bigtable::Admin::V2::UpdateAppProfileRequest.new(app_profile: app_profile, update_mask: update_mask, ignore_warnings: ignore_warnings), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1045,7 +1045,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.delete_app_profile ::Google::Cloud::Bigtable::Admin::V2::DeleteAppProfileRequest.new(name: name, ignore_warnings: ignore_warnings), grpc_options do |response, operation|
+      client.delete_app_profile(::Google::Cloud::Bigtable::Admin::V2::DeleteAppProfileRequest.new(name: name, ignore_warnings: ignore_warnings), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1105,7 +1105,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
+      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1165,7 +1165,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
+      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1225,7 +1225,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
+      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
