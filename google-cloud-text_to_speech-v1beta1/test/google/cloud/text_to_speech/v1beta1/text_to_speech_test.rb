@@ -95,7 +95,7 @@ class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.list_voices ::Google::Cloud::TextToSpeech::V1beta1::ListVoicesRequest.new(language_code: language_code), grpc_options do |response, operation|
+      client.list_voices(::Google::Cloud::TextToSpeech::V1beta1::ListVoicesRequest.new(language_code: language_code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -159,7 +159,7 @@ class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.synthesize_speech ::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing), grpc_options do |response, operation|
+      client.synthesize_speech(::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
