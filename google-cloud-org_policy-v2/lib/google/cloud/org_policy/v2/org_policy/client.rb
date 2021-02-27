@@ -79,7 +79,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -87,57 +87,57 @@ module Google
                 default_config.rpcs.list_constraints.timeout = 60.0
                 default_config.rpcs.list_constraints.retry_policy = {
                   initial_delay: 1.0,
-                  max_delay:     10.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 10.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_policies.timeout = 60.0
                 default_config.rpcs.list_policies.retry_policy = {
                   initial_delay: 1.0,
-                  max_delay:     10.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 10.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_policy.timeout = 60.0
                 default_config.rpcs.get_policy.retry_policy = {
                   initial_delay: 1.0,
-                  max_delay:     10.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 10.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_effective_policy.timeout = 60.0
                 default_config.rpcs.get_effective_policy.retry_policy = {
                   initial_delay: 1.0,
-                  max_delay:     10.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 10.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_policy.timeout = 60.0
                 default_config.rpcs.create_policy.retry_policy = {
                   initial_delay: 1.0,
-                  max_delay:     10.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 10.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_policy.timeout = 60.0
                 default_config.rpcs.update_policy.retry_policy = {
                   initial_delay: 1.0,
-                  max_delay:     10.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 10.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_policy.timeout = 60.0
                 default_config.rpcs.delete_policy.retry_policy = {
                   initial_delay: 1.0,
-                  max_delay:     10.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 10.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config
@@ -206,7 +206,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -839,7 +839,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -860,7 +860,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -921,19 +921,19 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  list_constraints_config = parent_rpcs&.list_constraints if parent_rpcs&.respond_to? :list_constraints
+                  list_constraints_config = parent_rpcs.list_constraints if parent_rpcs.respond_to? :list_constraints
                   @list_constraints = ::Gapic::Config::Method.new list_constraints_config
-                  list_policies_config = parent_rpcs&.list_policies if parent_rpcs&.respond_to? :list_policies
+                  list_policies_config = parent_rpcs.list_policies if parent_rpcs.respond_to? :list_policies
                   @list_policies = ::Gapic::Config::Method.new list_policies_config
-                  get_policy_config = parent_rpcs&.get_policy if parent_rpcs&.respond_to? :get_policy
+                  get_policy_config = parent_rpcs.get_policy if parent_rpcs.respond_to? :get_policy
                   @get_policy = ::Gapic::Config::Method.new get_policy_config
-                  get_effective_policy_config = parent_rpcs&.get_effective_policy if parent_rpcs&.respond_to? :get_effective_policy
+                  get_effective_policy_config = parent_rpcs.get_effective_policy if parent_rpcs.respond_to? :get_effective_policy
                   @get_effective_policy = ::Gapic::Config::Method.new get_effective_policy_config
-                  create_policy_config = parent_rpcs&.create_policy if parent_rpcs&.respond_to? :create_policy
+                  create_policy_config = parent_rpcs.create_policy if parent_rpcs.respond_to? :create_policy
                   @create_policy = ::Gapic::Config::Method.new create_policy_config
-                  update_policy_config = parent_rpcs&.update_policy if parent_rpcs&.respond_to? :update_policy
+                  update_policy_config = parent_rpcs.update_policy if parent_rpcs.respond_to? :update_policy
                   @update_policy = ::Gapic::Config::Method.new update_policy_config
-                  delete_policy_config = parent_rpcs&.delete_policy if parent_rpcs&.respond_to? :delete_policy
+                  delete_policy_config = parent_rpcs.delete_policy if parent_rpcs.respond_to? :delete_policy
                   @delete_policy = ::Gapic::Config::Method.new delete_policy_config
 
                   yield self if block_given?
