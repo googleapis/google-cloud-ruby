@@ -105,7 +105,7 @@ class ::Google::Cloud::AppEngine::V1::Versions::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_versions ::Google::Cloud::AppEngine::V1::ListVersionsRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_versions(::Google::Cloud::AppEngine::V1::ListVersionsRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -166,7 +166,7 @@ class ::Google::Cloud::AppEngine::V1::Versions::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_version ::Google::Cloud::AppEngine::V1::GetVersionRequest.new(name: name, view: view), grpc_options do |response, operation|
+      client.get_version(::Google::Cloud::AppEngine::V1::GetVersionRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -230,7 +230,7 @@ class ::Google::Cloud::AppEngine::V1::Versions::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_version ::Google::Cloud::AppEngine::V1::CreateVersionRequest.new(parent: parent, version: version), grpc_options do |response, operation|
+      client.create_version(::Google::Cloud::AppEngine::V1::CreateVersionRequest.new(parent: parent, version: version), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -297,7 +297,7 @@ class ::Google::Cloud::AppEngine::V1::Versions::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_version ::Google::Cloud::AppEngine::V1::UpdateVersionRequest.new(name: name, version: version, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_version(::Google::Cloud::AppEngine::V1::UpdateVersionRequest.new(name: name, version: version, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -360,7 +360,7 @@ class ::Google::Cloud::AppEngine::V1::Versions::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_version ::Google::Cloud::AppEngine::V1::DeleteVersionRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_version(::Google::Cloud::AppEngine::V1::DeleteVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

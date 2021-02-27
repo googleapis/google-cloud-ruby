@@ -105,7 +105,7 @@ class ::Google::Cloud::AppEngine::V1::Firewall::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_ingress_rules ::Google::Cloud::AppEngine::V1::ListIngressRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, matching_address: matching_address), grpc_options do |response, operation|
+      client.list_ingress_rules(::Google::Cloud::AppEngine::V1::ListIngressRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, matching_address: matching_address), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -166,7 +166,7 @@ class ::Google::Cloud::AppEngine::V1::Firewall::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_update_ingress_rules ::Google::Cloud::AppEngine::V1::BatchUpdateIngressRulesRequest.new(name: name, ingress_rules: ingress_rules), grpc_options do |response, operation|
+      client.batch_update_ingress_rules(::Google::Cloud::AppEngine::V1::BatchUpdateIngressRulesRequest.new(name: name, ingress_rules: ingress_rules), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -226,7 +226,7 @@ class ::Google::Cloud::AppEngine::V1::Firewall::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_ingress_rule ::Google::Cloud::AppEngine::V1::CreateIngressRuleRequest.new(parent: parent, rule: rule), grpc_options do |response, operation|
+      client.create_ingress_rule(::Google::Cloud::AppEngine::V1::CreateIngressRuleRequest.new(parent: parent, rule: rule), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -284,7 +284,7 @@ class ::Google::Cloud::AppEngine::V1::Firewall::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_ingress_rule ::Google::Cloud::AppEngine::V1::GetIngressRuleRequest.new(name: name), grpc_options do |response, operation|
+      client.get_ingress_rule(::Google::Cloud::AppEngine::V1::GetIngressRuleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -346,7 +346,7 @@ class ::Google::Cloud::AppEngine::V1::Firewall::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_ingress_rule ::Google::Cloud::AppEngine::V1::UpdateIngressRuleRequest.new(name: name, rule: rule, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_ingress_rule(::Google::Cloud::AppEngine::V1::UpdateIngressRuleRequest.new(name: name, rule: rule, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -404,7 +404,7 @@ class ::Google::Cloud::AppEngine::V1::Firewall::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_ingress_rule ::Google::Cloud::AppEngine::V1::DeleteIngressRuleRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_ingress_rule(::Google::Cloud::AppEngine::V1::DeleteIngressRuleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -103,7 +103,7 @@ class ::Google::Cloud::AppEngine::V1::Instances::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_instances ::Google::Cloud::AppEngine::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_instances(::Google::Cloud::AppEngine::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class ::Google::Cloud::AppEngine::V1::Instances::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_instance ::Google::Cloud::AppEngine::V1::GetInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.get_instance(::Google::Cloud::AppEngine::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -224,7 +224,7 @@ class ::Google::Cloud::AppEngine::V1::Instances::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_instance ::Google::Cloud::AppEngine::V1::DeleteInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_instance(::Google::Cloud::AppEngine::V1::DeleteInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -289,7 +289,7 @@ class ::Google::Cloud::AppEngine::V1::Instances::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.debug_instance ::Google::Cloud::AppEngine::V1::DebugInstanceRequest.new(name: name, ssh_key: ssh_key), grpc_options do |response, operation|
+      client.debug_instance(::Google::Cloud::AppEngine::V1::DebugInstanceRequest.new(name: name, ssh_key: ssh_key), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
