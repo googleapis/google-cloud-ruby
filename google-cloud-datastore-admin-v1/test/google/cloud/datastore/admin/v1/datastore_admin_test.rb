@@ -105,7 +105,7 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.export_entities ::Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest.new(project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix), grpc_options do |response, operation|
+      client.export_entities(::Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest.new(project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -174,7 +174,7 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.import_entities ::Google::Cloud::Datastore::Admin::V1::ImportEntitiesRequest.new(project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter), grpc_options do |response, operation|
+      client.import_entities(::Google::Cloud::Datastore::Admin::V1::ImportEntitiesRequest.new(project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -239,7 +239,7 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.create_index ::Google::Cloud::Datastore::Admin::V1::CreateIndexRequest.new(project_id: project_id, index: index), grpc_options do |response, operation|
+      client.create_index(::Google::Cloud::Datastore::Admin::V1::CreateIndexRequest.new(project_id: project_id, index: index), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -304,7 +304,7 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.delete_index ::Google::Cloud::Datastore::Admin::V1::DeleteIndexRequest.new(project_id: project_id, index_id: index_id), grpc_options do |response, operation|
+      client.delete_index(::Google::Cloud::Datastore::Admin::V1::DeleteIndexRequest.new(project_id: project_id, index_id: index_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -365,7 +365,7 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.get_index ::Google::Cloud::Datastore::Admin::V1::GetIndexRequest.new(project_id: project_id, index_id: index_id), grpc_options do |response, operation|
+      client.get_index(::Google::Cloud::Datastore::Admin::V1::GetIndexRequest.new(project_id: project_id, index_id: index_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -433,7 +433,7 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.list_indexes ::Google::Cloud::Datastore::Admin::V1::ListIndexesRequest.new(project_id: project_id, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_indexes(::Google::Cloud::Datastore::Admin::V1::ListIndexesRequest.new(project_id: project_id, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
