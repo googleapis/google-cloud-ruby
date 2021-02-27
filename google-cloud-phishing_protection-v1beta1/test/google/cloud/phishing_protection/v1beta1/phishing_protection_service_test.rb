@@ -97,7 +97,7 @@ class ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::C
       end
 
       # Use protobuf object with options
-      client.report_phishing ::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new(parent: parent, uri: uri), grpc_options do |response, operation|
+      client.report_phishing(::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new(parent: parent, uri: uri), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
