@@ -96,7 +96,7 @@ module Google
             # @return [::String]
             def uptime_check_config_path **args
               resources = {
-                "project:uptime_check_config"      => (proc do |project:, uptime_check_config:|
+                "project:uptime_check_config" => (proc do |project:, uptime_check_config:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/uptimeCheckConfigs/#{uptime_check_config}"
@@ -106,7 +106,7 @@ module Google
 
                   "organizations/#{organization}/uptimeCheckConfigs/#{uptime_check_config}"
                 end),
-                "folder:uptime_check_config"       => (proc do |folder:, uptime_check_config:|
+                "folder:uptime_check_config" => (proc do |folder:, uptime_check_config:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/uptimeCheckConfigs/#{uptime_check_config}"

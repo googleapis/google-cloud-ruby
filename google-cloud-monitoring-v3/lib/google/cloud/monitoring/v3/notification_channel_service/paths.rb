@@ -68,7 +68,7 @@ module Google
             # @return [::String]
             def notification_channel_path **args
               resources = {
-                "notification_channel:project"      => (proc do |project:, notification_channel:|
+                "notification_channel:project" => (proc do |project:, notification_channel:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/notificationChannels/#{notification_channel}"
@@ -78,7 +78,7 @@ module Google
 
                   "organizations/#{organization}/notificationChannels/#{notification_channel}"
                 end),
-                "folder:notification_channel"       => (proc do |folder:, notification_channel:|
+                "folder:notification_channel" => (proc do |folder:, notification_channel:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/notificationChannels/#{notification_channel}"
@@ -120,7 +120,7 @@ module Google
             # @return [::String]
             def notification_channel_descriptor_path **args
               resources = {
-                "channel_descriptor:project"      => (proc do |project:, channel_descriptor:|
+                "channel_descriptor:project" => (proc do |project:, channel_descriptor:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/notificationChannelDescriptors/#{channel_descriptor}"
@@ -130,7 +130,7 @@ module Google
 
                   "organizations/#{organization}/notificationChannelDescriptors/#{channel_descriptor}"
                 end),
-                "channel_descriptor:folder"       => (proc do |folder:, channel_descriptor:|
+                "channel_descriptor:folder" => (proc do |folder:, channel_descriptor:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/notificationChannelDescriptors/#{channel_descriptor}"

@@ -54,7 +54,7 @@ module Google
             # @return [::String]
             def alert_policy_path **args
               resources = {
-                "alert_policy:project"      => (proc do |project:, alert_policy:|
+                "alert_policy:project" => (proc do |project:, alert_policy:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/alertPolicies/#{alert_policy}"
@@ -64,7 +64,7 @@ module Google
 
                   "organizations/#{organization}/alertPolicies/#{alert_policy}"
                 end),
-                "alert_policy:folder"       => (proc do |folder:, alert_policy:|
+                "alert_policy:folder" => (proc do |folder:, alert_policy:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/alertPolicies/#{alert_policy}"
@@ -109,7 +109,7 @@ module Google
             # @return [::String]
             def alert_policy_condition_path **args
               resources = {
-                "alert_policy:condition:project"      => (proc do |project:, alert_policy:, condition:|
+                "alert_policy:condition:project" => (proc do |project:, alert_policy:, condition:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
                   raise ::ArgumentError, "alert_policy cannot contain /" if alert_policy.to_s.include? "/"
 
@@ -121,7 +121,7 @@ module Google
 
                   "organizations/#{organization}/alertPolicies/#{alert_policy}/conditions/#{condition}"
                 end),
-                "alert_policy:condition:folder"       => (proc do |folder:, alert_policy:, condition:|
+                "alert_policy:condition:folder" => (proc do |folder:, alert_policy:, condition:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
                   raise ::ArgumentError, "alert_policy cannot contain /" if alert_policy.to_s.include? "/"
 

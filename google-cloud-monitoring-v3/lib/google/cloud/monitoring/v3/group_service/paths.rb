@@ -68,7 +68,7 @@ module Google
             # @return [::String]
             def group_path **args
               resources = {
-                "group:project"      => (proc do |project:, group:|
+                "group:project" => (proc do |project:, group:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/groups/#{group}"
@@ -78,7 +78,7 @@ module Google
 
                   "organizations/#{organization}/groups/#{group}"
                 end),
-                "folder:group"       => (proc do |folder:, group:|
+                "folder:group" => (proc do |folder:, group:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/groups/#{group}"

@@ -103,7 +103,7 @@ class ::Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.list_uptime_check_configs ::Google::Cloud::Monitoring::V3::ListUptimeCheckConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_uptime_check_configs(::Google::Cloud::Monitoring::V3::ListUptimeCheckConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class ::Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.get_uptime_check_config ::Google::Cloud::Monitoring::V3::GetUptimeCheckConfigRequest.new(name: name), grpc_options do |response, operation|
+      client.get_uptime_check_config(::Google::Cloud::Monitoring::V3::GetUptimeCheckConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -222,7 +222,7 @@ class ::Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.create_uptime_check_config ::Google::Cloud::Monitoring::V3::CreateUptimeCheckConfigRequest.new(parent: parent, uptime_check_config: uptime_check_config), grpc_options do |response, operation|
+      client.create_uptime_check_config(::Google::Cloud::Monitoring::V3::CreateUptimeCheckConfigRequest.new(parent: parent, uptime_check_config: uptime_check_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -282,7 +282,7 @@ class ::Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.update_uptime_check_config ::Google::Cloud::Monitoring::V3::UpdateUptimeCheckConfigRequest.new(update_mask: update_mask, uptime_check_config: uptime_check_config), grpc_options do |response, operation|
+      client.update_uptime_check_config(::Google::Cloud::Monitoring::V3::UpdateUptimeCheckConfigRequest.new(update_mask: update_mask, uptime_check_config: uptime_check_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -340,7 +340,7 @@ class ::Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.delete_uptime_check_config ::Google::Cloud::Monitoring::V3::DeleteUptimeCheckConfigRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_uptime_check_config(::Google::Cloud::Monitoring::V3::DeleteUptimeCheckConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -404,7 +404,7 @@ class ::Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.list_uptime_check_ips ::Google::Cloud::Monitoring::V3::ListUptimeCheckIpsRequest.new(page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_uptime_check_ips(::Google::Cloud::Monitoring::V3::ListUptimeCheckIpsRequest.new(page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

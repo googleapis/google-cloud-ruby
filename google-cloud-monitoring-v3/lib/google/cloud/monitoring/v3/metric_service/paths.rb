@@ -68,7 +68,7 @@ module Google
             # @return [::String]
             def metric_descriptor_path **args
               resources = {
-                "metric_descriptor:project"      => (proc do |project:, metric_descriptor:|
+                "metric_descriptor:project" => (proc do |project:, metric_descriptor:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/metricDescriptors/#{metric_descriptor}"
@@ -78,7 +78,7 @@ module Google
 
                   "organizations/#{organization}/metricDescriptors/#{metric_descriptor}"
                 end),
-                "folder:metric_descriptor"       => (proc do |folder:, metric_descriptor:|
+                "folder:metric_descriptor" => (proc do |folder:, metric_descriptor:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/metricDescriptors/#{metric_descriptor}"
@@ -120,7 +120,7 @@ module Google
             # @return [::String]
             def monitored_resource_descriptor_path **args
               resources = {
-                "monitored_resource_descriptor:project"      => (proc do |project:, monitored_resource_descriptor:|
+                "monitored_resource_descriptor:project" => (proc do |project:, monitored_resource_descriptor:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/monitoredResourceDescriptors/#{monitored_resource_descriptor}"
@@ -130,7 +130,7 @@ module Google
 
                   "organizations/#{organization}/monitoredResourceDescriptors/#{monitored_resource_descriptor}"
                 end),
-                "folder:monitored_resource_descriptor"       => (proc do |folder:, monitored_resource_descriptor:|
+                "folder:monitored_resource_descriptor" => (proc do |folder:, monitored_resource_descriptor:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/monitoredResourceDescriptors/#{monitored_resource_descriptor}"
