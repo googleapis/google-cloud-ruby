@@ -109,7 +109,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.translate_text ::Google::Cloud::Translate::V3::TranslateTextRequest.new(contents: contents, mime_type: mime_type, source_language_code: source_language_code, target_language_code: target_language_code, parent: parent, model: model, glossary_config: glossary_config, labels: labels), grpc_options do |response, operation|
+      client.translate_text(::Google::Cloud::Translate::V3::TranslateTextRequest.new(contents: contents, mime_type: mime_type, source_language_code: source_language_code, target_language_code: target_language_code, parent: parent, model: model, glossary_config: glossary_config, labels: labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -176,7 +176,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.detect_language ::Google::Cloud::Translate::V3::DetectLanguageRequest.new(parent: parent, model: model, content: content, mime_type: mime_type, labels: labels), grpc_options do |response, operation|
+      client.detect_language(::Google::Cloud::Translate::V3::DetectLanguageRequest.new(parent: parent, model: model, content: content, mime_type: mime_type, labels: labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -238,7 +238,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.get_supported_languages ::Google::Cloud::Translate::V3::GetSupportedLanguagesRequest.new(parent: parent, display_language_code: display_language_code, model: model), grpc_options do |response, operation|
+      client.get_supported_languages(::Google::Cloud::Translate::V3::GetSupportedLanguagesRequest.new(parent: parent, display_language_code: display_language_code, model: model), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -314,7 +314,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.batch_translate_text ::Google::Cloud::Translate::V3::BatchTranslateTextRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, models: models, input_configs: input_configs, output_config: output_config, glossaries: glossaries, labels: labels), grpc_options do |response, operation|
+      client.batch_translate_text(::Google::Cloud::Translate::V3::BatchTranslateTextRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, models: models, input_configs: input_configs, output_config: output_config, glossaries: glossaries, labels: labels), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -379,7 +379,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.create_glossary ::Google::Cloud::Translate::V3::CreateGlossaryRequest.new(parent: parent, glossary: glossary), grpc_options do |response, operation|
+      client.create_glossary(::Google::Cloud::Translate::V3::CreateGlossaryRequest.new(parent: parent, glossary: glossary), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -448,7 +448,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.list_glossaries ::Google::Cloud::Translate::V3::ListGlossariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options do |response, operation|
+      client.list_glossaries(::Google::Cloud::Translate::V3::ListGlossariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -507,7 +507,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.get_glossary ::Google::Cloud::Translate::V3::GetGlossaryRequest.new(name: name), grpc_options do |response, operation|
+      client.get_glossary(::Google::Cloud::Translate::V3::GetGlossaryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -569,7 +569,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.delete_glossary ::Google::Cloud::Translate::V3::DeleteGlossaryRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_glossary(::Google::Cloud::Translate::V3::DeleteGlossaryRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
