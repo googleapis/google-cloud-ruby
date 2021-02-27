@@ -24,9 +24,7 @@ def get_entity_type_ids project_id:, display_name:
 
   selected_entity_types = entity_types.select { |entity_type| entity_type.display_name == display_name }
 
-  entity_type_ids = selected_entity_types.map { |entity_type| entity_type.name.split("/").last }
-
-  entity_type_ids
+  selected_entity_types.map { |entity_type| entity_type.name.split("/").last }
 end
 
 def clean_entity_types project_id:, display_name:
@@ -46,9 +44,7 @@ def get_intent_ids project_id:, display_name:
 
   selected_intents = intents.select { |intent| intent.display_name == display_name }
 
-  intent_ids = selected_intents.map { |intent| intent.name.split("/").last }
-
-  intent_ids
+  selected_intents.map { |intent| intent.name.split("/").last }
 end
 
 def clean_intents project_id:, display_name:

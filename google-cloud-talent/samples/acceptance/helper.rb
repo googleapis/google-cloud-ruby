@@ -137,12 +137,10 @@ end
 
 def timed_retry
   5.times do
-    begin
-      return yield
-    rescue StandardError => e
-      puts "\n#{e} Gonna try again"
-      sleep 5
-    end
+    return yield
+  rescue StandardError => e
+    puts "\n#{e} Gonna try again"
+    sleep 5
   end
   raise Google::Cloud::NotFoundError
 end

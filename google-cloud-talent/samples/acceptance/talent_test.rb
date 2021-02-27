@@ -80,7 +80,7 @@ describe "Job Search Samples" do
                                  address,
                                  language_code
       end
-      matches = out.scan(/\sname:\s\"([^\"]*)\"/).flatten
+      matches = out.scan(/\sname:\s"([^"]*)"/).flatten
       assert_equal matches.size, 2
       matches.each { |job_match| assert get_job_helper(job_match) }
     end

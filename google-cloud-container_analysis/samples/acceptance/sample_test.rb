@@ -32,22 +32,20 @@ describe "Container Analysis API samples" do
   before do
     test_name = name.tr " ", "-"
     uuid = SecureRandom.uuid
-    @image_url = "https://gcr.io/" + test_name + "/" + uuid
+    @image_url = "https://gcr.io/#{test_name}/#{uuid}"
     @project_id = ENV["GOOGLE_CLOUD_PROJECT"]
     @try_limit = 10
     @sleep_time = 1
-    @subscription_id = "occurrence-subscription-" + uuid
+    @subscription_id = "occurrence-subscription-#{uuid}"
     @uuid = uuid
     @note_ids_to_delete = []
   end
 
   after do
     @note_ids_to_delete.each do |note_id|
-      begin
-        delete_note project_id: @project_id, note_id: note_id
-      rescue StandardError
-        puts "Failed to delete #{note_id}"
-      end
+      delete_note project_id: @project_id, note_id: note_id
+    rescue StandardError
+      puts "Failed to delete #{note_id}"
     end
   end
 

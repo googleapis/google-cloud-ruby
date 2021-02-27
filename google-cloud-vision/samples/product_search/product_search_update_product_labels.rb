@@ -30,7 +30,7 @@ def product_search_update_product_labels project_id = "your-project-id",
   }
 
   client.update_product product:     product,
-                        update_mask: { "paths": ["product_labels"] }
+                        update_mask: { paths: ["product_labels"] }
 end
 # [END vision_product_search_update_product_labels]
 
