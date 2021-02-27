@@ -107,7 +107,7 @@ class ::Google::Cloud::Gaming::V1::RealmsService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_realms ::Google::Cloud::Gaming::V1::ListRealmsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_realms(::Google::Cloud::Gaming::V1::ListRealmsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -166,7 +166,7 @@ class ::Google::Cloud::Gaming::V1::RealmsService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_realm ::Google::Cloud::Gaming::V1::GetRealmRequest.new(name: name), grpc_options do |response, operation|
+      client.get_realm(::Google::Cloud::Gaming::V1::GetRealmRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -232,7 +232,7 @@ class ::Google::Cloud::Gaming::V1::RealmsService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_realm ::Google::Cloud::Gaming::V1::CreateRealmRequest.new(parent: parent, realm_id: realm_id, realm: realm), grpc_options do |response, operation|
+      client.create_realm(::Google::Cloud::Gaming::V1::CreateRealmRequest.new(parent: parent, realm_id: realm_id, realm: realm), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -295,7 +295,7 @@ class ::Google::Cloud::Gaming::V1::RealmsService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_realm ::Google::Cloud::Gaming::V1::DeleteRealmRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_realm(::Google::Cloud::Gaming::V1::DeleteRealmRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -360,7 +360,7 @@ class ::Google::Cloud::Gaming::V1::RealmsService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_realm ::Google::Cloud::Gaming::V1::UpdateRealmRequest.new(realm: realm, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_realm(::Google::Cloud::Gaming::V1::UpdateRealmRequest.new(realm: realm, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -423,7 +423,7 @@ class ::Google::Cloud::Gaming::V1::RealmsService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.preview_realm_update ::Google::Cloud::Gaming::V1::PreviewRealmUpdateRequest.new(realm: realm, update_mask: update_mask, preview_time: preview_time), grpc_options do |response, operation|
+      client.preview_realm_update(::Google::Cloud::Gaming::V1::PreviewRealmUpdateRequest.new(realm: realm, update_mask: update_mask, preview_time: preview_time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

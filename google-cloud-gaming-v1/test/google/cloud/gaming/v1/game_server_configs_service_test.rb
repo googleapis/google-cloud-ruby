@@ -107,7 +107,7 @@ class ::Google::Cloud::Gaming::V1::GameServerConfigsService::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.list_game_server_configs ::Google::Cloud::Gaming::V1::ListGameServerConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_game_server_configs(::Google::Cloud::Gaming::V1::ListGameServerConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -166,7 +166,7 @@ class ::Google::Cloud::Gaming::V1::GameServerConfigsService::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.get_game_server_config ::Google::Cloud::Gaming::V1::GetGameServerConfigRequest.new(name: name), grpc_options do |response, operation|
+      client.get_game_server_config(::Google::Cloud::Gaming::V1::GetGameServerConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -232,7 +232,7 @@ class ::Google::Cloud::Gaming::V1::GameServerConfigsService::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.create_game_server_config ::Google::Cloud::Gaming::V1::CreateGameServerConfigRequest.new(parent: parent, config_id: config_id, game_server_config: game_server_config), grpc_options do |response, operation|
+      client.create_game_server_config(::Google::Cloud::Gaming::V1::CreateGameServerConfigRequest.new(parent: parent, config_id: config_id, game_server_config: game_server_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -295,7 +295,7 @@ class ::Google::Cloud::Gaming::V1::GameServerConfigsService::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.delete_game_server_config ::Google::Cloud::Gaming::V1::DeleteGameServerConfigRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_game_server_config(::Google::Cloud::Gaming::V1::DeleteGameServerConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

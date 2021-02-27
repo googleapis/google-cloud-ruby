@@ -107,7 +107,7 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.list_game_server_deployments ::Google::Cloud::Gaming::V1::ListGameServerDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_game_server_deployments(::Google::Cloud::Gaming::V1::ListGameServerDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -166,7 +166,7 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.get_game_server_deployment ::Google::Cloud::Gaming::V1::GetGameServerDeploymentRequest.new(name: name), grpc_options do |response, operation|
+      client.get_game_server_deployment(::Google::Cloud::Gaming::V1::GetGameServerDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -232,7 +232,7 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.create_game_server_deployment ::Google::Cloud::Gaming::V1::CreateGameServerDeploymentRequest.new(parent: parent, deployment_id: deployment_id, game_server_deployment: game_server_deployment), grpc_options do |response, operation|
+      client.create_game_server_deployment(::Google::Cloud::Gaming::V1::CreateGameServerDeploymentRequest.new(parent: parent, deployment_id: deployment_id, game_server_deployment: game_server_deployment), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -295,7 +295,7 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.delete_game_server_deployment ::Google::Cloud::Gaming::V1::DeleteGameServerDeploymentRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_game_server_deployment(::Google::Cloud::Gaming::V1::DeleteGameServerDeploymentRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -360,7 +360,7 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.update_game_server_deployment ::Google::Cloud::Gaming::V1::UpdateGameServerDeploymentRequest.new(game_server_deployment: game_server_deployment, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_game_server_deployment(::Google::Cloud::Gaming::V1::UpdateGameServerDeploymentRequest.new(game_server_deployment: game_server_deployment, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -419,7 +419,7 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.get_game_server_deployment_rollout ::Google::Cloud::Gaming::V1::GetGameServerDeploymentRolloutRequest.new(name: name), grpc_options do |response, operation|
+      client.get_game_server_deployment_rollout(::Google::Cloud::Gaming::V1::GetGameServerDeploymentRolloutRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -483,7 +483,7 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.update_game_server_deployment_rollout ::Google::Cloud::Gaming::V1::UpdateGameServerDeploymentRolloutRequest.new(rollout: rollout, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_game_server_deployment_rollout(::Google::Cloud::Gaming::V1::UpdateGameServerDeploymentRolloutRequest.new(rollout: rollout, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -546,7 +546,7 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.preview_game_server_deployment_rollout ::Google::Cloud::Gaming::V1::PreviewGameServerDeploymentRolloutRequest.new(rollout: rollout, update_mask: update_mask, preview_time: preview_time), grpc_options do |response, operation|
+      client.preview_game_server_deployment_rollout(::Google::Cloud::Gaming::V1::PreviewGameServerDeploymentRolloutRequest.new(rollout: rollout, update_mask: update_mask, preview_time: preview_time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -604,7 +604,7 @@ class ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.fetch_deployment_state ::Google::Cloud::Gaming::V1::FetchDeploymentStateRequest.new(name: name), grpc_options do |response, operation|
+      client.fetch_deployment_state(::Google::Cloud::Gaming::V1::FetchDeploymentStateRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

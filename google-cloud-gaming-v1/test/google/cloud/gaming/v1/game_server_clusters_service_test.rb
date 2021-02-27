@@ -107,7 +107,7 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.list_game_server_clusters ::Google::Cloud::Gaming::V1::ListGameServerClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_game_server_clusters(::Google::Cloud::Gaming::V1::ListGameServerClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -166,7 +166,7 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.get_game_server_cluster ::Google::Cloud::Gaming::V1::GetGameServerClusterRequest.new(name: name), grpc_options do |response, operation|
+      client.get_game_server_cluster(::Google::Cloud::Gaming::V1::GetGameServerClusterRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -232,7 +232,7 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.create_game_server_cluster ::Google::Cloud::Gaming::V1::CreateGameServerClusterRequest.new(parent: parent, game_server_cluster_id: game_server_cluster_id, game_server_cluster: game_server_cluster), grpc_options do |response, operation|
+      client.create_game_server_cluster(::Google::Cloud::Gaming::V1::CreateGameServerClusterRequest.new(parent: parent, game_server_cluster_id: game_server_cluster_id, game_server_cluster: game_server_cluster), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -297,7 +297,7 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.preview_create_game_server_cluster ::Google::Cloud::Gaming::V1::PreviewCreateGameServerClusterRequest.new(parent: parent, game_server_cluster_id: game_server_cluster_id, game_server_cluster: game_server_cluster, preview_time: preview_time), grpc_options do |response, operation|
+      client.preview_create_game_server_cluster(::Google::Cloud::Gaming::V1::PreviewCreateGameServerClusterRequest.new(parent: parent, game_server_cluster_id: game_server_cluster_id, game_server_cluster: game_server_cluster, preview_time: preview_time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -359,7 +359,7 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.delete_game_server_cluster ::Google::Cloud::Gaming::V1::DeleteGameServerClusterRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_game_server_cluster(::Google::Cloud::Gaming::V1::DeleteGameServerClusterRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -420,7 +420,7 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.preview_delete_game_server_cluster ::Google::Cloud::Gaming::V1::PreviewDeleteGameServerClusterRequest.new(name: name, preview_time: preview_time), grpc_options do |response, operation|
+      client.preview_delete_game_server_cluster(::Google::Cloud::Gaming::V1::PreviewDeleteGameServerClusterRequest.new(name: name, preview_time: preview_time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -484,7 +484,7 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.update_game_server_cluster ::Google::Cloud::Gaming::V1::UpdateGameServerClusterRequest.new(game_server_cluster: game_server_cluster, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_game_server_cluster(::Google::Cloud::Gaming::V1::UpdateGameServerClusterRequest.new(game_server_cluster: game_server_cluster, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -547,7 +547,7 @@ class ::Google::Cloud::Gaming::V1::GameServerClustersService::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.preview_update_game_server_cluster ::Google::Cloud::Gaming::V1::PreviewUpdateGameServerClusterRequest.new(game_server_cluster: game_server_cluster, update_mask: update_mask, preview_time: preview_time), grpc_options do |response, operation|
+      client.preview_update_game_server_cluster(::Google::Cloud::Gaming::V1::PreviewUpdateGameServerClusterRequest.new(game_server_cluster: game_server_cluster, update_mask: update_mask, preview_time: preview_time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
