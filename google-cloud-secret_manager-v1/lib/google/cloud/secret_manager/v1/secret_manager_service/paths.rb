@@ -74,6 +74,23 @@ module Google
               "projects/#{project}/secrets/#{secret}/versions/#{secret_version}"
             end
 
+            ##
+            # Create a fully-qualified Topic resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/topics/{topic}`
+            #
+            # @param project [String]
+            # @param topic [String]
+            #
+            # @return [::String]
+            def topic_path project:, topic:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/topics/#{topic}"
+            end
+
             extend self
           end
         end
