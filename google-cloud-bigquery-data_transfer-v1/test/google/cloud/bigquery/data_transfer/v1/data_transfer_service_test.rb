@@ -95,7 +95,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
       end
 
       # Use protobuf object with options
-      client.get_data_source ::Google::Cloud::Bigquery::DataTransfer::V1::GetDataSourceRequest.new(name: name), grpc_options do |response, operation|
+      client.get_data_source(::Google::Cloud::Bigquery::DataTransfer::V1::GetDataSourceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -161,7 +161,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
       end
 
       # Use protobuf object with options
-      client.list_data_sources ::Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_data_sources(::Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -228,7 +228,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
       end
 
       # Use protobuf object with options
-      client.create_transfer_config ::Google::Cloud::Bigquery::DataTransfer::V1::CreateTransferConfigRequest.new(parent: parent, transfer_config: transfer_config, authorization_code: authorization_code, version_info: version_info, service_account_name: service_account_name), grpc_options do |response, operation|
+      client.create_transfer_config(::Google::Cloud::Bigquery::DataTransfer::V1::CreateTransferConfigRequest.new(parent: parent, transfer_config: transfer_config, authorization_code: authorization_code, version_info: version_info, service_account_name: service_account_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -294,7 +294,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
       end
 
       # Use protobuf object with options
-      client.update_transfer_config ::Google::Cloud::Bigquery::DataTransfer::V1::UpdateTransferConfigRequest.new(transfer_config: transfer_config, authorization_code: authorization_code, update_mask: update_mask, version_info: version_info, service_account_name: service_account_name), grpc_options do |response, operation|
+      client.update_transfer_config(::Google::Cloud::Bigquery::DataTransfer::V1::UpdateTransferConfigRequest.new(transfer_config: transfer_config, authorization_code: authorization_code, update_mask: update_mask, version_info: version_info, service_account_name: service_account_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -352,7 +352,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
       end
 
       # Use protobuf object with options
-      client.delete_transfer_config ::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferConfigRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_transfer_config(::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -410,7 +410,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
       end
 
       # Use protobuf object with options
-      client.get_transfer_config ::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferConfigRequest.new(name: name), grpc_options do |response, operation|
+      client.get_transfer_config(::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -478,7 +478,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
       end
 
       # Use protobuf object with options
-      client.list_transfer_configs ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsRequest.new(parent: parent, data_source_ids: data_source_ids, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_transfer_configs(::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsRequest.new(parent: parent, data_source_ids: data_source_ids, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -541,7 +541,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
       end
 
       # Use protobuf object with options
-      client.schedule_transfer_runs ::Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsRequest.new(parent: parent, start_time: start_time, end_time: end_time), grpc_options do |response, operation|
+      client.schedule_transfer_runs(::Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsRequest.new(parent: parent, start_time: start_time, end_time: end_time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -602,7 +602,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
       end
 
       # Use protobuf object with options
-      client.start_manual_transfer_runs ::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest.new(parent: parent, requested_time_range: requested_time_range), grpc_options do |response, operation|
+      client.start_manual_transfer_runs(::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest.new(parent: parent, requested_time_range: requested_time_range), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -660,7 +660,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
       end
 
       # Use protobuf object with options
-      client.get_transfer_run ::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferRunRequest.new(name: name), grpc_options do |response, operation|
+      client.get_transfer_run(::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferRunRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -718,7 +718,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
       end
 
       # Use protobuf object with options
-      client.delete_transfer_run ::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferRunRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_transfer_run(::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferRunRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -788,7 +788,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
       end
 
       # Use protobuf object with options
-      client.list_transfer_runs ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest.new(parent: parent, states: states, page_token: page_token, page_size: page_size, run_attempt: run_attempt), grpc_options do |response, operation|
+      client.list_transfer_runs(::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest.new(parent: parent, states: states, page_token: page_token, page_size: page_size, run_attempt: run_attempt), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -857,7 +857,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
       end
 
       # Use protobuf object with options
-      client.list_transfer_logs ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsRequest.new(parent: parent, page_token: page_token, page_size: page_size, message_types: message_types), grpc_options do |response, operation|
+      client.list_transfer_logs(::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsRequest.new(parent: parent, page_token: page_token, page_size: page_size, message_types: message_types), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -916,7 +916,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
       end
 
       # Use protobuf object with options
-      client.check_valid_creds ::Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsRequest.new(name: name), grpc_options do |response, operation|
+      client.check_valid_creds(::Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
