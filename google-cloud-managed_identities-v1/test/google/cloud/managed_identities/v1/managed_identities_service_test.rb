@@ -103,7 +103,7 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
       end
 
       # Use protobuf object with options
-      client.create_microsoft_ad_domain ::Google::Cloud::ManagedIdentities::V1::CreateMicrosoftAdDomainRequest.new(parent: parent, domain_name: domain_name, domain: domain), grpc_options do |response, operation|
+      client.create_microsoft_ad_domain(::Google::Cloud::ManagedIdentities::V1::CreateMicrosoftAdDomainRequest.new(parent: parent, domain_name: domain_name, domain: domain), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
       end
 
       # Use protobuf object with options
-      client.reset_admin_password ::Google::Cloud::ManagedIdentities::V1::ResetAdminPasswordRequest.new(name: name), grpc_options do |response, operation|
+      client.reset_admin_password(::Google::Cloud::ManagedIdentities::V1::ResetAdminPasswordRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -232,7 +232,7 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
       end
 
       # Use protobuf object with options
-      client.list_domains ::Google::Cloud::ManagedIdentities::V1::ListDomainsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_domains(::Google::Cloud::ManagedIdentities::V1::ListDomainsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -291,7 +291,7 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
       end
 
       # Use protobuf object with options
-      client.get_domain ::Google::Cloud::ManagedIdentities::V1::GetDomainRequest.new(name: name), grpc_options do |response, operation|
+      client.get_domain(::Google::Cloud::ManagedIdentities::V1::GetDomainRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -355,7 +355,7 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
       end
 
       # Use protobuf object with options
-      client.update_domain ::Google::Cloud::ManagedIdentities::V1::UpdateDomainRequest.new(update_mask: update_mask, domain: domain), grpc_options do |response, operation|
+      client.update_domain(::Google::Cloud::ManagedIdentities::V1::UpdateDomainRequest.new(update_mask: update_mask, domain: domain), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -418,7 +418,7 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
       end
 
       # Use protobuf object with options
-      client.delete_domain ::Google::Cloud::ManagedIdentities::V1::DeleteDomainRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_domain(::Google::Cloud::ManagedIdentities::V1::DeleteDomainRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -483,7 +483,7 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
       end
 
       # Use protobuf object with options
-      client.attach_trust ::Google::Cloud::ManagedIdentities::V1::AttachTrustRequest.new(name: name, trust: trust), grpc_options do |response, operation|
+      client.attach_trust(::Google::Cloud::ManagedIdentities::V1::AttachTrustRequest.new(name: name, trust: trust), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -550,7 +550,7 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
       end
 
       # Use protobuf object with options
-      client.reconfigure_trust ::Google::Cloud::ManagedIdentities::V1::ReconfigureTrustRequest.new(name: name, target_domain_name: target_domain_name, target_dns_ip_addresses: target_dns_ip_addresses), grpc_options do |response, operation|
+      client.reconfigure_trust(::Google::Cloud::ManagedIdentities::V1::ReconfigureTrustRequest.new(name: name, target_domain_name: target_domain_name, target_dns_ip_addresses: target_dns_ip_addresses), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -615,7 +615,7 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
       end
 
       # Use protobuf object with options
-      client.detach_trust ::Google::Cloud::ManagedIdentities::V1::DetachTrustRequest.new(name: name, trust: trust), grpc_options do |response, operation|
+      client.detach_trust(::Google::Cloud::ManagedIdentities::V1::DetachTrustRequest.new(name: name, trust: trust), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -680,7 +680,7 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
       end
 
       # Use protobuf object with options
-      client.validate_trust ::Google::Cloud::ManagedIdentities::V1::ValidateTrustRequest.new(name: name, trust: trust), grpc_options do |response, operation|
+      client.validate_trust(::Google::Cloud::ManagedIdentities::V1::ValidateTrustRequest.new(name: name, trust: trust), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
