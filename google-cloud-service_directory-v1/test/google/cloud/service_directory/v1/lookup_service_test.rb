@@ -99,7 +99,7 @@ class ::Google::Cloud::ServiceDirectory::V1::LookupService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.resolve_service ::Google::Cloud::ServiceDirectory::V1::ResolveServiceRequest.new(name: name, max_endpoints: max_endpoints, endpoint_filter: endpoint_filter), grpc_options do |response, operation|
+      client.resolve_service(::Google::Cloud::ServiceDirectory::V1::ResolveServiceRequest.new(name: name, max_endpoints: max_endpoints, endpoint_filter: endpoint_filter), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

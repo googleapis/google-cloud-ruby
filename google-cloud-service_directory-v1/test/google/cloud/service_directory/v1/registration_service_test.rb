@@ -99,7 +99,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.create_namespace ::Google::Cloud::ServiceDirectory::V1::CreateNamespaceRequest.new(parent: parent, namespace_id: namespace_id, namespace: namespace), grpc_options do |response, operation|
+      client.create_namespace(::Google::Cloud::ServiceDirectory::V1::CreateNamespaceRequest.new(parent: parent, namespace_id: namespace_id, namespace: namespace), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -169,7 +169,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.list_namespaces ::Google::Cloud::ServiceDirectory::V1::ListNamespacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_namespaces(::Google::Cloud::ServiceDirectory::V1::ListNamespacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -228,7 +228,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.get_namespace ::Google::Cloud::ServiceDirectory::V1::GetNamespaceRequest.new(name: name), grpc_options do |response, operation|
+      client.get_namespace(::Google::Cloud::ServiceDirectory::V1::GetNamespaceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -288,7 +288,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.update_namespace ::Google::Cloud::ServiceDirectory::V1::UpdateNamespaceRequest.new(namespace: namespace, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_namespace(::Google::Cloud::ServiceDirectory::V1::UpdateNamespaceRequest.new(namespace: namespace, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -346,7 +346,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.delete_namespace ::Google::Cloud::ServiceDirectory::V1::DeleteNamespaceRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_namespace(::Google::Cloud::ServiceDirectory::V1::DeleteNamespaceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -408,7 +408,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.create_service ::Google::Cloud::ServiceDirectory::V1::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service), grpc_options do |response, operation|
+      client.create_service(::Google::Cloud::ServiceDirectory::V1::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -478,7 +478,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.list_services ::Google::Cloud::ServiceDirectory::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_services(::Google::Cloud::ServiceDirectory::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -537,7 +537,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.get_service ::Google::Cloud::ServiceDirectory::V1::GetServiceRequest.new(name: name), grpc_options do |response, operation|
+      client.get_service(::Google::Cloud::ServiceDirectory::V1::GetServiceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -597,7 +597,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.update_service ::Google::Cloud::ServiceDirectory::V1::UpdateServiceRequest.new(service: service, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_service(::Google::Cloud::ServiceDirectory::V1::UpdateServiceRequest.new(service: service, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -655,7 +655,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.delete_service ::Google::Cloud::ServiceDirectory::V1::DeleteServiceRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_service(::Google::Cloud::ServiceDirectory::V1::DeleteServiceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -717,7 +717,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.create_endpoint ::Google::Cloud::ServiceDirectory::V1::CreateEndpointRequest.new(parent: parent, endpoint_id: endpoint_id, endpoint: endpoint), grpc_options do |response, operation|
+      client.create_endpoint(::Google::Cloud::ServiceDirectory::V1::CreateEndpointRequest.new(parent: parent, endpoint_id: endpoint_id, endpoint: endpoint), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -787,7 +787,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.list_endpoints ::Google::Cloud::ServiceDirectory::V1::ListEndpointsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_endpoints(::Google::Cloud::ServiceDirectory::V1::ListEndpointsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -846,7 +846,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.get_endpoint ::Google::Cloud::ServiceDirectory::V1::GetEndpointRequest.new(name: name), grpc_options do |response, operation|
+      client.get_endpoint(::Google::Cloud::ServiceDirectory::V1::GetEndpointRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -906,7 +906,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.update_endpoint ::Google::Cloud::ServiceDirectory::V1::UpdateEndpointRequest.new(endpoint: endpoint, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_endpoint(::Google::Cloud::ServiceDirectory::V1::UpdateEndpointRequest.new(endpoint: endpoint, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -964,7 +964,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.delete_endpoint ::Google::Cloud::ServiceDirectory::V1::DeleteEndpointRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_endpoint(::Google::Cloud::ServiceDirectory::V1::DeleteEndpointRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1024,7 +1024,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
+      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1084,7 +1084,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
+      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1144,7 +1144,7 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
+      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
