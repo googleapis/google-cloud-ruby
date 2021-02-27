@@ -97,7 +97,7 @@ class ::Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.create_tenant ::Google::Cloud::Talent::V4beta1::CreateTenantRequest.new(parent: parent, tenant: tenant), grpc_options do |response, operation|
+      client.create_tenant(::Google::Cloud::Talent::V4beta1::CreateTenantRequest.new(parent: parent, tenant: tenant), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -155,7 +155,7 @@ class ::Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.get_tenant ::Google::Cloud::Talent::V4beta1::GetTenantRequest.new(name: name), grpc_options do |response, operation|
+      client.get_tenant(::Google::Cloud::Talent::V4beta1::GetTenantRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,7 +215,7 @@ class ::Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.update_tenant ::Google::Cloud::Talent::V4beta1::UpdateTenantRequest.new(tenant: tenant, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_tenant(::Google::Cloud::Talent::V4beta1::UpdateTenantRequest.new(tenant: tenant, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -273,7 +273,7 @@ class ::Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.delete_tenant ::Google::Cloud::Talent::V4beta1::DeleteTenantRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_tenant(::Google::Cloud::Talent::V4beta1::DeleteTenantRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -339,7 +339,7 @@ class ::Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.list_tenants ::Google::Cloud::Talent::V4beta1::ListTenantsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_tenants(::Google::Cloud::Talent::V4beta1::ListTenantsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

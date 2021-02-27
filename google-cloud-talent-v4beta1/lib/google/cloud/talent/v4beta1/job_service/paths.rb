@@ -53,7 +53,7 @@ module Google
 
                   "projects/#{project}/tenants/#{tenant}/companies/#{company}"
                 end),
-                "company:project"        => (proc do |project:, company:|
+                "company:project" => (proc do |project:, company:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/companies/#{company}"
@@ -94,7 +94,7 @@ module Google
 
                   "projects/#{project}/tenants/#{tenant}/jobs/#{job}"
                 end),
-                "job:project"        => (proc do |project:, job:|
+                "job:project" => (proc do |project:, job:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/jobs/#{job}"
