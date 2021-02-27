@@ -61,7 +61,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -69,73 +69,73 @@ module Google
                 default_config.rpcs.create_topic.timeout = 60.0
                 default_config.rpcs.create_topic.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.update_topic.timeout = 60.0
                 default_config.rpcs.update_topic.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.publish.timeout = 60.0
                 default_config.rpcs.publish.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [10, 1, 13, 8, 2, 14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [10, 1, 13, 8, 2, 14, 4]
                 }
 
                 default_config.rpcs.get_topic.timeout = 60.0
                 default_config.rpcs.get_topic.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [2, 10, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.list_topics.timeout = 60.0
                 default_config.rpcs.list_topics.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [2, 10, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.list_topic_subscriptions.timeout = 60.0
                 default_config.rpcs.list_topic_subscriptions.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [2, 10, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.list_topic_snapshots.timeout = 60.0
                 default_config.rpcs.list_topic_snapshots.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [2, 10, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.delete_topic.timeout = 60.0
                 default_config.rpcs.delete_topic.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.detach_subscription.timeout = 60.0
                 default_config.rpcs.detach_subscription.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config
@@ -204,7 +204,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -981,7 +981,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1002,7 +1002,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -1073,23 +1073,23 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  create_topic_config = parent_rpcs&.create_topic if parent_rpcs&.respond_to? :create_topic
+                  create_topic_config = parent_rpcs.create_topic if parent_rpcs.respond_to? :create_topic
                   @create_topic = ::Gapic::Config::Method.new create_topic_config
-                  update_topic_config = parent_rpcs&.update_topic if parent_rpcs&.respond_to? :update_topic
+                  update_topic_config = parent_rpcs.update_topic if parent_rpcs.respond_to? :update_topic
                   @update_topic = ::Gapic::Config::Method.new update_topic_config
-                  publish_config = parent_rpcs&.publish if parent_rpcs&.respond_to? :publish
+                  publish_config = parent_rpcs.publish if parent_rpcs.respond_to? :publish
                   @publish = ::Gapic::Config::Method.new publish_config
-                  get_topic_config = parent_rpcs&.get_topic if parent_rpcs&.respond_to? :get_topic
+                  get_topic_config = parent_rpcs.get_topic if parent_rpcs.respond_to? :get_topic
                   @get_topic = ::Gapic::Config::Method.new get_topic_config
-                  list_topics_config = parent_rpcs&.list_topics if parent_rpcs&.respond_to? :list_topics
+                  list_topics_config = parent_rpcs.list_topics if parent_rpcs.respond_to? :list_topics
                   @list_topics = ::Gapic::Config::Method.new list_topics_config
-                  list_topic_subscriptions_config = parent_rpcs&.list_topic_subscriptions if parent_rpcs&.respond_to? :list_topic_subscriptions
+                  list_topic_subscriptions_config = parent_rpcs.list_topic_subscriptions if parent_rpcs.respond_to? :list_topic_subscriptions
                   @list_topic_subscriptions = ::Gapic::Config::Method.new list_topic_subscriptions_config
-                  list_topic_snapshots_config = parent_rpcs&.list_topic_snapshots if parent_rpcs&.respond_to? :list_topic_snapshots
+                  list_topic_snapshots_config = parent_rpcs.list_topic_snapshots if parent_rpcs.respond_to? :list_topic_snapshots
                   @list_topic_snapshots = ::Gapic::Config::Method.new list_topic_snapshots_config
-                  delete_topic_config = parent_rpcs&.delete_topic if parent_rpcs&.respond_to? :delete_topic
+                  delete_topic_config = parent_rpcs.delete_topic if parent_rpcs.respond_to? :delete_topic
                   @delete_topic = ::Gapic::Config::Method.new delete_topic_config
-                  detach_subscription_config = parent_rpcs&.detach_subscription if parent_rpcs&.respond_to? :detach_subscription
+                  detach_subscription_config = parent_rpcs.detach_subscription if parent_rpcs.respond_to? :detach_subscription
                   @detach_subscription = ::Gapic::Config::Method.new detach_subscription_config
 
                   yield self if block_given?

@@ -105,7 +105,7 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_topic ::Google::Cloud::PubSub::V1::Topic.new(name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs), grpc_options do |response, operation|
+      client.create_topic(::Google::Cloud::PubSub::V1::Topic.new(name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -165,7 +165,7 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_topic ::Google::Cloud::PubSub::V1::UpdateTopicRequest.new(topic: topic, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_topic(::Google::Cloud::PubSub::V1::UpdateTopicRequest.new(topic: topic, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -225,7 +225,7 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.publish ::Google::Cloud::PubSub::V1::PublishRequest.new(topic: topic, messages: messages), grpc_options do |response, operation|
+      client.publish(::Google::Cloud::PubSub::V1::PublishRequest.new(topic: topic, messages: messages), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -283,7 +283,7 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_topic ::Google::Cloud::PubSub::V1::GetTopicRequest.new(topic: topic), grpc_options do |response, operation|
+      client.get_topic(::Google::Cloud::PubSub::V1::GetTopicRequest.new(topic: topic), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -349,7 +349,7 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_topics ::Google::Cloud::PubSub::V1::ListTopicsRequest.new(project: project, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_topics(::Google::Cloud::PubSub::V1::ListTopicsRequest.new(project: project, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -412,7 +412,7 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_topic_subscriptions ::Google::Cloud::PubSub::V1::ListTopicSubscriptionsRequest.new(topic: topic, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_topic_subscriptions(::Google::Cloud::PubSub::V1::ListTopicSubscriptionsRequest.new(topic: topic, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -474,7 +474,7 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_topic_snapshots ::Google::Cloud::PubSub::V1::ListTopicSnapshotsRequest.new(topic: topic, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_topic_snapshots(::Google::Cloud::PubSub::V1::ListTopicSnapshotsRequest.new(topic: topic, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -532,7 +532,7 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_topic ::Google::Cloud::PubSub::V1::DeleteTopicRequest.new(topic: topic), grpc_options do |response, operation|
+      client.delete_topic(::Google::Cloud::PubSub::V1::DeleteTopicRequest.new(topic: topic), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -590,7 +590,7 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.detach_subscription ::Google::Cloud::PubSub::V1::DetachSubscriptionRequest.new(subscription: subscription), grpc_options do |response, operation|
+      client.detach_subscription(::Google::Cloud::PubSub::V1::DetachSubscriptionRequest.new(subscription: subscription), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -58,7 +58,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -129,7 +129,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -681,7 +681,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -702,7 +702,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -758,17 +758,17 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  create_schema_config = parent_rpcs&.create_schema if parent_rpcs&.respond_to? :create_schema
+                  create_schema_config = parent_rpcs.create_schema if parent_rpcs.respond_to? :create_schema
                   @create_schema = ::Gapic::Config::Method.new create_schema_config
-                  get_schema_config = parent_rpcs&.get_schema if parent_rpcs&.respond_to? :get_schema
+                  get_schema_config = parent_rpcs.get_schema if parent_rpcs.respond_to? :get_schema
                   @get_schema = ::Gapic::Config::Method.new get_schema_config
-                  list_schemas_config = parent_rpcs&.list_schemas if parent_rpcs&.respond_to? :list_schemas
+                  list_schemas_config = parent_rpcs.list_schemas if parent_rpcs.respond_to? :list_schemas
                   @list_schemas = ::Gapic::Config::Method.new list_schemas_config
-                  delete_schema_config = parent_rpcs&.delete_schema if parent_rpcs&.respond_to? :delete_schema
+                  delete_schema_config = parent_rpcs.delete_schema if parent_rpcs.respond_to? :delete_schema
                   @delete_schema = ::Gapic::Config::Method.new delete_schema_config
-                  validate_schema_config = parent_rpcs&.validate_schema if parent_rpcs&.respond_to? :validate_schema
+                  validate_schema_config = parent_rpcs.validate_schema if parent_rpcs.respond_to? :validate_schema
                   @validate_schema = ::Gapic::Config::Method.new validate_schema_config
-                  validate_message_config = parent_rpcs&.validate_message if parent_rpcs&.respond_to? :validate_message
+                  validate_message_config = parent_rpcs.validate_message if parent_rpcs.respond_to? :validate_message
                   @validate_message = ::Gapic::Config::Method.new validate_message_config
 
                   yield self if block_given?
