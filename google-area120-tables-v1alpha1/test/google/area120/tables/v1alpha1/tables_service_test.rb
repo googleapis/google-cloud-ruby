@@ -95,7 +95,7 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.get_table ::Google::Area120::Tables::V1alpha1::GetTableRequest.new(name: name), grpc_options do |response, operation|
+      client.get_table(::Google::Area120::Tables::V1alpha1::GetTableRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -159,7 +159,7 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.list_tables ::Google::Area120::Tables::V1alpha1::ListTablesRequest.new(page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_tables(::Google::Area120::Tables::V1alpha1::ListTablesRequest.new(page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -218,7 +218,7 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.get_workspace ::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest.new(name: name), grpc_options do |response, operation|
+      client.get_workspace(::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -282,7 +282,7 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.list_workspaces ::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest.new(page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_workspaces(::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest.new(page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -343,7 +343,7 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.get_row ::Google::Area120::Tables::V1alpha1::GetRowRequest.new(name: name, view: view), grpc_options do |response, operation|
+      client.get_row(::Google::Area120::Tables::V1alpha1::GetRowRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -413,7 +413,7 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.list_rows ::Google::Area120::Tables::V1alpha1::ListRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter), grpc_options do |response, operation|
+      client.list_rows(::Google::Area120::Tables::V1alpha1::ListRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -476,7 +476,7 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.create_row ::Google::Area120::Tables::V1alpha1::CreateRowRequest.new(parent: parent, row: row, view: view), grpc_options do |response, operation|
+      client.create_row(::Google::Area120::Tables::V1alpha1::CreateRowRequest.new(parent: parent, row: row, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -536,7 +536,7 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.batch_create_rows ::Google::Area120::Tables::V1alpha1::BatchCreateRowsRequest.new(parent: parent, requests: requests), grpc_options do |response, operation|
+      client.batch_create_rows(::Google::Area120::Tables::V1alpha1::BatchCreateRowsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -598,7 +598,7 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.update_row ::Google::Area120::Tables::V1alpha1::UpdateRowRequest.new(row: row, update_mask: update_mask, view: view), grpc_options do |response, operation|
+      client.update_row(::Google::Area120::Tables::V1alpha1::UpdateRowRequest.new(row: row, update_mask: update_mask, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -658,7 +658,7 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.batch_update_rows ::Google::Area120::Tables::V1alpha1::BatchUpdateRowsRequest.new(parent: parent, requests: requests), grpc_options do |response, operation|
+      client.batch_update_rows(::Google::Area120::Tables::V1alpha1::BatchUpdateRowsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -716,7 +716,7 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.delete_row ::Google::Area120::Tables::V1alpha1::DeleteRowRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_row(::Google::Area120::Tables::V1alpha1::DeleteRowRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -776,7 +776,7 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.batch_delete_rows ::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest.new(parent: parent, names: names), grpc_options do |response, operation|
+      client.batch_delete_rows(::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest.new(parent: parent, names: names), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
