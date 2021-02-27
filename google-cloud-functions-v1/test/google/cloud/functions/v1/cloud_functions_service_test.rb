@@ -103,7 +103,7 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.list_functions ::Google::Cloud::Functions::V1::ListFunctionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_functions(::Google::Cloud::Functions::V1::ListFunctionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.get_function ::Google::Cloud::Functions::V1::GetFunctionRequest.new(name: name), grpc_options do |response, operation|
+      client.get_function(::Google::Cloud::Functions::V1::GetFunctionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -226,7 +226,7 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.create_function ::Google::Cloud::Functions::V1::CreateFunctionRequest.new(location: location, function: function), grpc_options do |response, operation|
+      client.create_function(::Google::Cloud::Functions::V1::CreateFunctionRequest.new(location: location, function: function), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -291,7 +291,7 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.update_function ::Google::Cloud::Functions::V1::UpdateFunctionRequest.new(function: function, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_function(::Google::Cloud::Functions::V1::UpdateFunctionRequest.new(function: function, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -354,7 +354,7 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.delete_function ::Google::Cloud::Functions::V1::DeleteFunctionRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_function(::Google::Cloud::Functions::V1::DeleteFunctionRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -415,7 +415,7 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.call_function ::Google::Cloud::Functions::V1::CallFunctionRequest.new(name: name, data: data), grpc_options do |response, operation|
+      client.call_function(::Google::Cloud::Functions::V1::CallFunctionRequest.new(name: name, data: data), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -473,7 +473,7 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.generate_upload_url ::Google::Cloud::Functions::V1::GenerateUploadUrlRequest.new(parent: parent), grpc_options do |response, operation|
+      client.generate_upload_url(::Google::Cloud::Functions::V1::GenerateUploadUrlRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -533,7 +533,7 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.generate_download_url ::Google::Cloud::Functions::V1::GenerateDownloadUrlRequest.new(name: name, version_id: version_id), grpc_options do |response, operation|
+      client.generate_download_url(::Google::Cloud::Functions::V1::GenerateDownloadUrlRequest.new(name: name, version_id: version_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -593,7 +593,7 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
+      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -653,7 +653,7 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
+      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -713,7 +713,7 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
+      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
