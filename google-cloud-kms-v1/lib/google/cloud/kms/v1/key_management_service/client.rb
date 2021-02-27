@@ -71,7 +71,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -79,89 +79,89 @@ module Google
                 default_config.rpcs.list_key_rings.timeout = 60.0
                 default_config.rpcs.list_key_rings.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_crypto_keys.timeout = 60.0
                 default_config.rpcs.list_crypto_keys.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_crypto_key_versions.timeout = 60.0
                 default_config.rpcs.list_crypto_key_versions.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_import_jobs.timeout = 60.0
                 default_config.rpcs.list_import_jobs.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_key_ring.timeout = 60.0
                 default_config.rpcs.get_key_ring.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_crypto_key.timeout = 60.0
                 default_config.rpcs.get_crypto_key.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_crypto_key_version.timeout = 60.0
                 default_config.rpcs.get_crypto_key_version.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_public_key.timeout = 60.0
                 default_config.rpcs.get_public_key.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_import_job.timeout = 60.0
                 default_config.rpcs.get_import_job.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_key_ring.timeout = 60.0
                 default_config.rpcs.create_key_ring.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_crypto_key.timeout = 60.0
                 default_config.rpcs.create_crypto_key.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_crypto_key_version.timeout = 60.0
@@ -171,81 +171,81 @@ module Google
                 default_config.rpcs.create_import_job.timeout = 60.0
                 default_config.rpcs.create_import_job.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_crypto_key.timeout = 60.0
                 default_config.rpcs.update_crypto_key.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_crypto_key_version.timeout = 60.0
                 default_config.rpcs.update_crypto_key_version.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.encrypt.timeout = 60.0
                 default_config.rpcs.encrypt.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.decrypt.timeout = 60.0
                 default_config.rpcs.decrypt.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.asymmetric_sign.timeout = 60.0
                 default_config.rpcs.asymmetric_sign.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.asymmetric_decrypt.timeout = 60.0
                 default_config.rpcs.asymmetric_decrypt.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_crypto_key_primary_version.timeout = 60.0
                 default_config.rpcs.update_crypto_key_primary_version.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.destroy_crypto_key_version.timeout = 60.0
                 default_config.rpcs.destroy_crypto_key_version.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.restore_crypto_key_version.timeout = 60.0
                 default_config.rpcs.restore_crypto_key_version.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config
@@ -314,7 +314,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -2281,7 +2281,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -2302,7 +2302,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -2443,51 +2443,51 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  list_key_rings_config = parent_rpcs&.list_key_rings if parent_rpcs&.respond_to? :list_key_rings
+                  list_key_rings_config = parent_rpcs.list_key_rings if parent_rpcs.respond_to? :list_key_rings
                   @list_key_rings = ::Gapic::Config::Method.new list_key_rings_config
-                  list_crypto_keys_config = parent_rpcs&.list_crypto_keys if parent_rpcs&.respond_to? :list_crypto_keys
+                  list_crypto_keys_config = parent_rpcs.list_crypto_keys if parent_rpcs.respond_to? :list_crypto_keys
                   @list_crypto_keys = ::Gapic::Config::Method.new list_crypto_keys_config
-                  list_crypto_key_versions_config = parent_rpcs&.list_crypto_key_versions if parent_rpcs&.respond_to? :list_crypto_key_versions
+                  list_crypto_key_versions_config = parent_rpcs.list_crypto_key_versions if parent_rpcs.respond_to? :list_crypto_key_versions
                   @list_crypto_key_versions = ::Gapic::Config::Method.new list_crypto_key_versions_config
-                  list_import_jobs_config = parent_rpcs&.list_import_jobs if parent_rpcs&.respond_to? :list_import_jobs
+                  list_import_jobs_config = parent_rpcs.list_import_jobs if parent_rpcs.respond_to? :list_import_jobs
                   @list_import_jobs = ::Gapic::Config::Method.new list_import_jobs_config
-                  get_key_ring_config = parent_rpcs&.get_key_ring if parent_rpcs&.respond_to? :get_key_ring
+                  get_key_ring_config = parent_rpcs.get_key_ring if parent_rpcs.respond_to? :get_key_ring
                   @get_key_ring = ::Gapic::Config::Method.new get_key_ring_config
-                  get_crypto_key_config = parent_rpcs&.get_crypto_key if parent_rpcs&.respond_to? :get_crypto_key
+                  get_crypto_key_config = parent_rpcs.get_crypto_key if parent_rpcs.respond_to? :get_crypto_key
                   @get_crypto_key = ::Gapic::Config::Method.new get_crypto_key_config
-                  get_crypto_key_version_config = parent_rpcs&.get_crypto_key_version if parent_rpcs&.respond_to? :get_crypto_key_version
+                  get_crypto_key_version_config = parent_rpcs.get_crypto_key_version if parent_rpcs.respond_to? :get_crypto_key_version
                   @get_crypto_key_version = ::Gapic::Config::Method.new get_crypto_key_version_config
-                  get_public_key_config = parent_rpcs&.get_public_key if parent_rpcs&.respond_to? :get_public_key
+                  get_public_key_config = parent_rpcs.get_public_key if parent_rpcs.respond_to? :get_public_key
                   @get_public_key = ::Gapic::Config::Method.new get_public_key_config
-                  get_import_job_config = parent_rpcs&.get_import_job if parent_rpcs&.respond_to? :get_import_job
+                  get_import_job_config = parent_rpcs.get_import_job if parent_rpcs.respond_to? :get_import_job
                   @get_import_job = ::Gapic::Config::Method.new get_import_job_config
-                  create_key_ring_config = parent_rpcs&.create_key_ring if parent_rpcs&.respond_to? :create_key_ring
+                  create_key_ring_config = parent_rpcs.create_key_ring if parent_rpcs.respond_to? :create_key_ring
                   @create_key_ring = ::Gapic::Config::Method.new create_key_ring_config
-                  create_crypto_key_config = parent_rpcs&.create_crypto_key if parent_rpcs&.respond_to? :create_crypto_key
+                  create_crypto_key_config = parent_rpcs.create_crypto_key if parent_rpcs.respond_to? :create_crypto_key
                   @create_crypto_key = ::Gapic::Config::Method.new create_crypto_key_config
-                  create_crypto_key_version_config = parent_rpcs&.create_crypto_key_version if parent_rpcs&.respond_to? :create_crypto_key_version
+                  create_crypto_key_version_config = parent_rpcs.create_crypto_key_version if parent_rpcs.respond_to? :create_crypto_key_version
                   @create_crypto_key_version = ::Gapic::Config::Method.new create_crypto_key_version_config
-                  import_crypto_key_version_config = parent_rpcs&.import_crypto_key_version if parent_rpcs&.respond_to? :import_crypto_key_version
+                  import_crypto_key_version_config = parent_rpcs.import_crypto_key_version if parent_rpcs.respond_to? :import_crypto_key_version
                   @import_crypto_key_version = ::Gapic::Config::Method.new import_crypto_key_version_config
-                  create_import_job_config = parent_rpcs&.create_import_job if parent_rpcs&.respond_to? :create_import_job
+                  create_import_job_config = parent_rpcs.create_import_job if parent_rpcs.respond_to? :create_import_job
                   @create_import_job = ::Gapic::Config::Method.new create_import_job_config
-                  update_crypto_key_config = parent_rpcs&.update_crypto_key if parent_rpcs&.respond_to? :update_crypto_key
+                  update_crypto_key_config = parent_rpcs.update_crypto_key if parent_rpcs.respond_to? :update_crypto_key
                   @update_crypto_key = ::Gapic::Config::Method.new update_crypto_key_config
-                  update_crypto_key_version_config = parent_rpcs&.update_crypto_key_version if parent_rpcs&.respond_to? :update_crypto_key_version
+                  update_crypto_key_version_config = parent_rpcs.update_crypto_key_version if parent_rpcs.respond_to? :update_crypto_key_version
                   @update_crypto_key_version = ::Gapic::Config::Method.new update_crypto_key_version_config
-                  encrypt_config = parent_rpcs&.encrypt if parent_rpcs&.respond_to? :encrypt
+                  encrypt_config = parent_rpcs.encrypt if parent_rpcs.respond_to? :encrypt
                   @encrypt = ::Gapic::Config::Method.new encrypt_config
-                  decrypt_config = parent_rpcs&.decrypt if parent_rpcs&.respond_to? :decrypt
+                  decrypt_config = parent_rpcs.decrypt if parent_rpcs.respond_to? :decrypt
                   @decrypt = ::Gapic::Config::Method.new decrypt_config
-                  asymmetric_sign_config = parent_rpcs&.asymmetric_sign if parent_rpcs&.respond_to? :asymmetric_sign
+                  asymmetric_sign_config = parent_rpcs.asymmetric_sign if parent_rpcs.respond_to? :asymmetric_sign
                   @asymmetric_sign = ::Gapic::Config::Method.new asymmetric_sign_config
-                  asymmetric_decrypt_config = parent_rpcs&.asymmetric_decrypt if parent_rpcs&.respond_to? :asymmetric_decrypt
+                  asymmetric_decrypt_config = parent_rpcs.asymmetric_decrypt if parent_rpcs.respond_to? :asymmetric_decrypt
                   @asymmetric_decrypt = ::Gapic::Config::Method.new asymmetric_decrypt_config
-                  update_crypto_key_primary_version_config = parent_rpcs&.update_crypto_key_primary_version if parent_rpcs&.respond_to? :update_crypto_key_primary_version
+                  update_crypto_key_primary_version_config = parent_rpcs.update_crypto_key_primary_version if parent_rpcs.respond_to? :update_crypto_key_primary_version
                   @update_crypto_key_primary_version = ::Gapic::Config::Method.new update_crypto_key_primary_version_config
-                  destroy_crypto_key_version_config = parent_rpcs&.destroy_crypto_key_version if parent_rpcs&.respond_to? :destroy_crypto_key_version
+                  destroy_crypto_key_version_config = parent_rpcs.destroy_crypto_key_version if parent_rpcs.respond_to? :destroy_crypto_key_version
                   @destroy_crypto_key_version = ::Gapic::Config::Method.new destroy_crypto_key_version_config
-                  restore_crypto_key_version_config = parent_rpcs&.restore_crypto_key_version if parent_rpcs&.respond_to? :restore_crypto_key_version
+                  restore_crypto_key_version_config = parent_rpcs.restore_crypto_key_version if parent_rpcs.respond_to? :restore_crypto_key_version
                   @restore_crypto_key_version = ::Gapic::Config::Method.new restore_crypto_key_version_config
 
                   yield self if block_given?
