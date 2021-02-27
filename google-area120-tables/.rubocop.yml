@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-area120-tables.rb"
-
-Style/AsciiComments:
-  Enabled: false
