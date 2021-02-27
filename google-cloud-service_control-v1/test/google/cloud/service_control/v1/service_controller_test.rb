@@ -99,7 +99,7 @@ class ::Google::Cloud::ServiceControl::V1::ServiceController::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.check ::Google::Cloud::ServiceControl::V1::CheckRequest.new(service_name: service_name, operation: operation, service_config_id: service_config_id), grpc_options do |response, operation|
+      client.check(::Google::Cloud::ServiceControl::V1::CheckRequest.new(service_name: service_name, operation: operation, service_config_id: service_config_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -161,7 +161,7 @@ class ::Google::Cloud::ServiceControl::V1::ServiceController::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.report ::Google::Cloud::ServiceControl::V1::ReportRequest.new(service_name: service_name, operations: operations, service_config_id: service_config_id), grpc_options do |response, operation|
+      client.report(::Google::Cloud::ServiceControl::V1::ReportRequest.new(service_name: service_name, operations: operations, service_config_id: service_config_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -99,7 +99,7 @@ class ::Google::Cloud::ServiceControl::V1::QuotaController::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.allocate_quota ::Google::Cloud::ServiceControl::V1::AllocateQuotaRequest.new(service_name: service_name, allocate_operation: allocate_operation, service_config_id: service_config_id), grpc_options do |response, operation|
+      client.allocate_quota(::Google::Cloud::ServiceControl::V1::AllocateQuotaRequest.new(service_name: service_name, allocate_operation: allocate_operation, service_config_id: service_config_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
