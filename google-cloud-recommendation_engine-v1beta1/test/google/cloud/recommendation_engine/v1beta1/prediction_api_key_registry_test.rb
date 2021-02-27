@@ -97,7 +97,7 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::
       end
 
       # Use protobuf object with options
-      client.create_prediction_api_key_registration ::Google::Cloud::RecommendationEngine::V1beta1::CreatePredictionApiKeyRegistrationRequest.new(parent: parent, prediction_api_key_registration: prediction_api_key_registration), grpc_options do |response, operation|
+      client.create_prediction_api_key_registration(::Google::Cloud::RecommendationEngine::V1beta1::CreatePredictionApiKeyRegistrationRequest.new(parent: parent, prediction_api_key_registration: prediction_api_key_registration), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -163,7 +163,7 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::
       end
 
       # Use protobuf object with options
-      client.list_prediction_api_key_registrations ::Google::Cloud::RecommendationEngine::V1beta1::ListPredictionApiKeyRegistrationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_prediction_api_key_registrations(::Google::Cloud::RecommendationEngine::V1beta1::ListPredictionApiKeyRegistrationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -222,7 +222,7 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::
       end
 
       # Use protobuf object with options
-      client.delete_prediction_api_key_registration ::Google::Cloud::RecommendationEngine::V1beta1::DeletePredictionApiKeyRegistrationRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_prediction_api_key_registration(::Google::Cloud::RecommendationEngine::V1beta1::DeletePredictionApiKeyRegistrationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

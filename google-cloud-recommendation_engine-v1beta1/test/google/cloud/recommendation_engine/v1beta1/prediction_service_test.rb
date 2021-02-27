@@ -113,7 +113,7 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionService::ClientT
       end
 
       # Use protobuf object with options
-      client.predict ::Google::Cloud::RecommendationEngine::V1beta1::PredictRequest.new(name: name, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, dry_run: dry_run, params: params, labels: labels), grpc_options do |response, operation|
+      client.predict(::Google::Cloud::RecommendationEngine::V1beta1::PredictRequest.new(name: name, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, dry_run: dry_run, params: params, labels: labels), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
