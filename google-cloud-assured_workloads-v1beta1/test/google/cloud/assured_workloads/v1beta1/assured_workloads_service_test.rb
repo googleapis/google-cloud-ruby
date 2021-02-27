@@ -103,7 +103,7 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Clien
       end
 
       # Use protobuf object with options
-      client.create_workload ::Google::Cloud::AssuredWorkloads::V1beta1::CreateWorkloadRequest.new(parent: parent, workload: workload, external_id: external_id), grpc_options do |response, operation|
+      client.create_workload(::Google::Cloud::AssuredWorkloads::V1beta1::CreateWorkloadRequest.new(parent: parent, workload: workload, external_id: external_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -164,7 +164,7 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Clien
       end
 
       # Use protobuf object with options
-      client.update_workload ::Google::Cloud::AssuredWorkloads::V1beta1::UpdateWorkloadRequest.new(workload: workload, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_workload(::Google::Cloud::AssuredWorkloads::V1beta1::UpdateWorkloadRequest.new(workload: workload, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -224,7 +224,7 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Clien
       end
 
       # Use protobuf object with options
-      client.delete_workload ::Google::Cloud::AssuredWorkloads::V1beta1::DeleteWorkloadRequest.new(name: name, etag: etag), grpc_options do |response, operation|
+      client.delete_workload(::Google::Cloud::AssuredWorkloads::V1beta1::DeleteWorkloadRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -282,7 +282,7 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Clien
       end
 
       # Use protobuf object with options
-      client.get_workload ::Google::Cloud::AssuredWorkloads::V1beta1::GetWorkloadRequest.new(name: name), grpc_options do |response, operation|
+      client.get_workload(::Google::Cloud::AssuredWorkloads::V1beta1::GetWorkloadRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -350,7 +350,7 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Clien
       end
 
       # Use protobuf object with options
-      client.list_workloads ::Google::Cloud::AssuredWorkloads::V1beta1::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options do |response, operation|
+      client.list_workloads(::Google::Cloud::AssuredWorkloads::V1beta1::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
