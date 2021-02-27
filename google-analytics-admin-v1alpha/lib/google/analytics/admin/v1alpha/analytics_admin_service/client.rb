@@ -60,7 +60,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -68,9 +68,9 @@ module Google
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
                   initial_delay: 1.0,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 2]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14, 2]
                 }
 
                 default_config.rpcs.get_account.timeout = 60.0
@@ -229,7 +229,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -3808,7 +3808,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -3829,7 +3829,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -4095,101 +4095,101 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  get_account_config = parent_rpcs&.get_account if parent_rpcs&.respond_to? :get_account
+                  get_account_config = parent_rpcs.get_account if parent_rpcs.respond_to? :get_account
                   @get_account = ::Gapic::Config::Method.new get_account_config
-                  list_accounts_config = parent_rpcs&.list_accounts if parent_rpcs&.respond_to? :list_accounts
+                  list_accounts_config = parent_rpcs.list_accounts if parent_rpcs.respond_to? :list_accounts
                   @list_accounts = ::Gapic::Config::Method.new list_accounts_config
-                  delete_account_config = parent_rpcs&.delete_account if parent_rpcs&.respond_to? :delete_account
+                  delete_account_config = parent_rpcs.delete_account if parent_rpcs.respond_to? :delete_account
                   @delete_account = ::Gapic::Config::Method.new delete_account_config
-                  update_account_config = parent_rpcs&.update_account if parent_rpcs&.respond_to? :update_account
+                  update_account_config = parent_rpcs.update_account if parent_rpcs.respond_to? :update_account
                   @update_account = ::Gapic::Config::Method.new update_account_config
-                  provision_account_ticket_config = parent_rpcs&.provision_account_ticket if parent_rpcs&.respond_to? :provision_account_ticket
+                  provision_account_ticket_config = parent_rpcs.provision_account_ticket if parent_rpcs.respond_to? :provision_account_ticket
                   @provision_account_ticket = ::Gapic::Config::Method.new provision_account_ticket_config
-                  list_account_summaries_config = parent_rpcs&.list_account_summaries if parent_rpcs&.respond_to? :list_account_summaries
+                  list_account_summaries_config = parent_rpcs.list_account_summaries if parent_rpcs.respond_to? :list_account_summaries
                   @list_account_summaries = ::Gapic::Config::Method.new list_account_summaries_config
-                  get_property_config = parent_rpcs&.get_property if parent_rpcs&.respond_to? :get_property
+                  get_property_config = parent_rpcs.get_property if parent_rpcs.respond_to? :get_property
                   @get_property = ::Gapic::Config::Method.new get_property_config
-                  list_properties_config = parent_rpcs&.list_properties if parent_rpcs&.respond_to? :list_properties
+                  list_properties_config = parent_rpcs.list_properties if parent_rpcs.respond_to? :list_properties
                   @list_properties = ::Gapic::Config::Method.new list_properties_config
-                  create_property_config = parent_rpcs&.create_property if parent_rpcs&.respond_to? :create_property
+                  create_property_config = parent_rpcs.create_property if parent_rpcs.respond_to? :create_property
                   @create_property = ::Gapic::Config::Method.new create_property_config
-                  delete_property_config = parent_rpcs&.delete_property if parent_rpcs&.respond_to? :delete_property
+                  delete_property_config = parent_rpcs.delete_property if parent_rpcs.respond_to? :delete_property
                   @delete_property = ::Gapic::Config::Method.new delete_property_config
-                  update_property_config = parent_rpcs&.update_property if parent_rpcs&.respond_to? :update_property
+                  update_property_config = parent_rpcs.update_property if parent_rpcs.respond_to? :update_property
                   @update_property = ::Gapic::Config::Method.new update_property_config
-                  get_user_link_config = parent_rpcs&.get_user_link if parent_rpcs&.respond_to? :get_user_link
+                  get_user_link_config = parent_rpcs.get_user_link if parent_rpcs.respond_to? :get_user_link
                   @get_user_link = ::Gapic::Config::Method.new get_user_link_config
-                  batch_get_user_links_config = parent_rpcs&.batch_get_user_links if parent_rpcs&.respond_to? :batch_get_user_links
+                  batch_get_user_links_config = parent_rpcs.batch_get_user_links if parent_rpcs.respond_to? :batch_get_user_links
                   @batch_get_user_links = ::Gapic::Config::Method.new batch_get_user_links_config
-                  list_user_links_config = parent_rpcs&.list_user_links if parent_rpcs&.respond_to? :list_user_links
+                  list_user_links_config = parent_rpcs.list_user_links if parent_rpcs.respond_to? :list_user_links
                   @list_user_links = ::Gapic::Config::Method.new list_user_links_config
-                  audit_user_links_config = parent_rpcs&.audit_user_links if parent_rpcs&.respond_to? :audit_user_links
+                  audit_user_links_config = parent_rpcs.audit_user_links if parent_rpcs.respond_to? :audit_user_links
                   @audit_user_links = ::Gapic::Config::Method.new audit_user_links_config
-                  create_user_link_config = parent_rpcs&.create_user_link if parent_rpcs&.respond_to? :create_user_link
+                  create_user_link_config = parent_rpcs.create_user_link if parent_rpcs.respond_to? :create_user_link
                   @create_user_link = ::Gapic::Config::Method.new create_user_link_config
-                  batch_create_user_links_config = parent_rpcs&.batch_create_user_links if parent_rpcs&.respond_to? :batch_create_user_links
+                  batch_create_user_links_config = parent_rpcs.batch_create_user_links if parent_rpcs.respond_to? :batch_create_user_links
                   @batch_create_user_links = ::Gapic::Config::Method.new batch_create_user_links_config
-                  update_user_link_config = parent_rpcs&.update_user_link if parent_rpcs&.respond_to? :update_user_link
+                  update_user_link_config = parent_rpcs.update_user_link if parent_rpcs.respond_to? :update_user_link
                   @update_user_link = ::Gapic::Config::Method.new update_user_link_config
-                  batch_update_user_links_config = parent_rpcs&.batch_update_user_links if parent_rpcs&.respond_to? :batch_update_user_links
+                  batch_update_user_links_config = parent_rpcs.batch_update_user_links if parent_rpcs.respond_to? :batch_update_user_links
                   @batch_update_user_links = ::Gapic::Config::Method.new batch_update_user_links_config
-                  delete_user_link_config = parent_rpcs&.delete_user_link if parent_rpcs&.respond_to? :delete_user_link
+                  delete_user_link_config = parent_rpcs.delete_user_link if parent_rpcs.respond_to? :delete_user_link
                   @delete_user_link = ::Gapic::Config::Method.new delete_user_link_config
-                  batch_delete_user_links_config = parent_rpcs&.batch_delete_user_links if parent_rpcs&.respond_to? :batch_delete_user_links
+                  batch_delete_user_links_config = parent_rpcs.batch_delete_user_links if parent_rpcs.respond_to? :batch_delete_user_links
                   @batch_delete_user_links = ::Gapic::Config::Method.new batch_delete_user_links_config
-                  get_web_data_stream_config = parent_rpcs&.get_web_data_stream if parent_rpcs&.respond_to? :get_web_data_stream
+                  get_web_data_stream_config = parent_rpcs.get_web_data_stream if parent_rpcs.respond_to? :get_web_data_stream
                   @get_web_data_stream = ::Gapic::Config::Method.new get_web_data_stream_config
-                  delete_web_data_stream_config = parent_rpcs&.delete_web_data_stream if parent_rpcs&.respond_to? :delete_web_data_stream
+                  delete_web_data_stream_config = parent_rpcs.delete_web_data_stream if parent_rpcs.respond_to? :delete_web_data_stream
                   @delete_web_data_stream = ::Gapic::Config::Method.new delete_web_data_stream_config
-                  update_web_data_stream_config = parent_rpcs&.update_web_data_stream if parent_rpcs&.respond_to? :update_web_data_stream
+                  update_web_data_stream_config = parent_rpcs.update_web_data_stream if parent_rpcs.respond_to? :update_web_data_stream
                   @update_web_data_stream = ::Gapic::Config::Method.new update_web_data_stream_config
-                  create_web_data_stream_config = parent_rpcs&.create_web_data_stream if parent_rpcs&.respond_to? :create_web_data_stream
+                  create_web_data_stream_config = parent_rpcs.create_web_data_stream if parent_rpcs.respond_to? :create_web_data_stream
                   @create_web_data_stream = ::Gapic::Config::Method.new create_web_data_stream_config
-                  list_web_data_streams_config = parent_rpcs&.list_web_data_streams if parent_rpcs&.respond_to? :list_web_data_streams
+                  list_web_data_streams_config = parent_rpcs.list_web_data_streams if parent_rpcs.respond_to? :list_web_data_streams
                   @list_web_data_streams = ::Gapic::Config::Method.new list_web_data_streams_config
-                  get_ios_app_data_stream_config = parent_rpcs&.get_ios_app_data_stream if parent_rpcs&.respond_to? :get_ios_app_data_stream
+                  get_ios_app_data_stream_config = parent_rpcs.get_ios_app_data_stream if parent_rpcs.respond_to? :get_ios_app_data_stream
                   @get_ios_app_data_stream = ::Gapic::Config::Method.new get_ios_app_data_stream_config
-                  delete_ios_app_data_stream_config = parent_rpcs&.delete_ios_app_data_stream if parent_rpcs&.respond_to? :delete_ios_app_data_stream
+                  delete_ios_app_data_stream_config = parent_rpcs.delete_ios_app_data_stream if parent_rpcs.respond_to? :delete_ios_app_data_stream
                   @delete_ios_app_data_stream = ::Gapic::Config::Method.new delete_ios_app_data_stream_config
-                  update_ios_app_data_stream_config = parent_rpcs&.update_ios_app_data_stream if parent_rpcs&.respond_to? :update_ios_app_data_stream
+                  update_ios_app_data_stream_config = parent_rpcs.update_ios_app_data_stream if parent_rpcs.respond_to? :update_ios_app_data_stream
                   @update_ios_app_data_stream = ::Gapic::Config::Method.new update_ios_app_data_stream_config
-                  create_ios_app_data_stream_config = parent_rpcs&.create_ios_app_data_stream if parent_rpcs&.respond_to? :create_ios_app_data_stream
+                  create_ios_app_data_stream_config = parent_rpcs.create_ios_app_data_stream if parent_rpcs.respond_to? :create_ios_app_data_stream
                   @create_ios_app_data_stream = ::Gapic::Config::Method.new create_ios_app_data_stream_config
-                  list_ios_app_data_streams_config = parent_rpcs&.list_ios_app_data_streams if parent_rpcs&.respond_to? :list_ios_app_data_streams
+                  list_ios_app_data_streams_config = parent_rpcs.list_ios_app_data_streams if parent_rpcs.respond_to? :list_ios_app_data_streams
                   @list_ios_app_data_streams = ::Gapic::Config::Method.new list_ios_app_data_streams_config
-                  get_android_app_data_stream_config = parent_rpcs&.get_android_app_data_stream if parent_rpcs&.respond_to? :get_android_app_data_stream
+                  get_android_app_data_stream_config = parent_rpcs.get_android_app_data_stream if parent_rpcs.respond_to? :get_android_app_data_stream
                   @get_android_app_data_stream = ::Gapic::Config::Method.new get_android_app_data_stream_config
-                  delete_android_app_data_stream_config = parent_rpcs&.delete_android_app_data_stream if parent_rpcs&.respond_to? :delete_android_app_data_stream
+                  delete_android_app_data_stream_config = parent_rpcs.delete_android_app_data_stream if parent_rpcs.respond_to? :delete_android_app_data_stream
                   @delete_android_app_data_stream = ::Gapic::Config::Method.new delete_android_app_data_stream_config
-                  update_android_app_data_stream_config = parent_rpcs&.update_android_app_data_stream if parent_rpcs&.respond_to? :update_android_app_data_stream
+                  update_android_app_data_stream_config = parent_rpcs.update_android_app_data_stream if parent_rpcs.respond_to? :update_android_app_data_stream
                   @update_android_app_data_stream = ::Gapic::Config::Method.new update_android_app_data_stream_config
-                  create_android_app_data_stream_config = parent_rpcs&.create_android_app_data_stream if parent_rpcs&.respond_to? :create_android_app_data_stream
+                  create_android_app_data_stream_config = parent_rpcs.create_android_app_data_stream if parent_rpcs.respond_to? :create_android_app_data_stream
                   @create_android_app_data_stream = ::Gapic::Config::Method.new create_android_app_data_stream_config
-                  list_android_app_data_streams_config = parent_rpcs&.list_android_app_data_streams if parent_rpcs&.respond_to? :list_android_app_data_streams
+                  list_android_app_data_streams_config = parent_rpcs.list_android_app_data_streams if parent_rpcs.respond_to? :list_android_app_data_streams
                   @list_android_app_data_streams = ::Gapic::Config::Method.new list_android_app_data_streams_config
-                  get_enhanced_measurement_settings_config = parent_rpcs&.get_enhanced_measurement_settings if parent_rpcs&.respond_to? :get_enhanced_measurement_settings
+                  get_enhanced_measurement_settings_config = parent_rpcs.get_enhanced_measurement_settings if parent_rpcs.respond_to? :get_enhanced_measurement_settings
                   @get_enhanced_measurement_settings = ::Gapic::Config::Method.new get_enhanced_measurement_settings_config
-                  update_enhanced_measurement_settings_config = parent_rpcs&.update_enhanced_measurement_settings if parent_rpcs&.respond_to? :update_enhanced_measurement_settings
+                  update_enhanced_measurement_settings_config = parent_rpcs.update_enhanced_measurement_settings if parent_rpcs.respond_to? :update_enhanced_measurement_settings
                   @update_enhanced_measurement_settings = ::Gapic::Config::Method.new update_enhanced_measurement_settings_config
-                  create_firebase_link_config = parent_rpcs&.create_firebase_link if parent_rpcs&.respond_to? :create_firebase_link
+                  create_firebase_link_config = parent_rpcs.create_firebase_link if parent_rpcs.respond_to? :create_firebase_link
                   @create_firebase_link = ::Gapic::Config::Method.new create_firebase_link_config
-                  update_firebase_link_config = parent_rpcs&.update_firebase_link if parent_rpcs&.respond_to? :update_firebase_link
+                  update_firebase_link_config = parent_rpcs.update_firebase_link if parent_rpcs.respond_to? :update_firebase_link
                   @update_firebase_link = ::Gapic::Config::Method.new update_firebase_link_config
-                  delete_firebase_link_config = parent_rpcs&.delete_firebase_link if parent_rpcs&.respond_to? :delete_firebase_link
+                  delete_firebase_link_config = parent_rpcs.delete_firebase_link if parent_rpcs.respond_to? :delete_firebase_link
                   @delete_firebase_link = ::Gapic::Config::Method.new delete_firebase_link_config
-                  list_firebase_links_config = parent_rpcs&.list_firebase_links if parent_rpcs&.respond_to? :list_firebase_links
+                  list_firebase_links_config = parent_rpcs.list_firebase_links if parent_rpcs.respond_to? :list_firebase_links
                   @list_firebase_links = ::Gapic::Config::Method.new list_firebase_links_config
-                  get_global_site_tag_config = parent_rpcs&.get_global_site_tag if parent_rpcs&.respond_to? :get_global_site_tag
+                  get_global_site_tag_config = parent_rpcs.get_global_site_tag if parent_rpcs.respond_to? :get_global_site_tag
                   @get_global_site_tag = ::Gapic::Config::Method.new get_global_site_tag_config
-                  create_google_ads_link_config = parent_rpcs&.create_google_ads_link if parent_rpcs&.respond_to? :create_google_ads_link
+                  create_google_ads_link_config = parent_rpcs.create_google_ads_link if parent_rpcs.respond_to? :create_google_ads_link
                   @create_google_ads_link = ::Gapic::Config::Method.new create_google_ads_link_config
-                  update_google_ads_link_config = parent_rpcs&.update_google_ads_link if parent_rpcs&.respond_to? :update_google_ads_link
+                  update_google_ads_link_config = parent_rpcs.update_google_ads_link if parent_rpcs.respond_to? :update_google_ads_link
                   @update_google_ads_link = ::Gapic::Config::Method.new update_google_ads_link_config
-                  delete_google_ads_link_config = parent_rpcs&.delete_google_ads_link if parent_rpcs&.respond_to? :delete_google_ads_link
+                  delete_google_ads_link_config = parent_rpcs.delete_google_ads_link if parent_rpcs.respond_to? :delete_google_ads_link
                   @delete_google_ads_link = ::Gapic::Config::Method.new delete_google_ads_link_config
-                  list_google_ads_links_config = parent_rpcs&.list_google_ads_links if parent_rpcs&.respond_to? :list_google_ads_links
+                  list_google_ads_links_config = parent_rpcs.list_google_ads_links if parent_rpcs.respond_to? :list_google_ads_links
                   @list_google_ads_links = ::Gapic::Config::Method.new list_google_ads_links_config
-                  get_data_sharing_settings_config = parent_rpcs&.get_data_sharing_settings if parent_rpcs&.respond_to? :get_data_sharing_settings
+                  get_data_sharing_settings_config = parent_rpcs.get_data_sharing_settings if parent_rpcs.respond_to? :get_data_sharing_settings
                   @get_data_sharing_settings = ::Gapic::Config::Method.new get_data_sharing_settings_config
 
                   yield self if block_given?

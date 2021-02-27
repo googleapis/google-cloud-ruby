@@ -95,7 +95,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.get_account ::Google::Analytics::Admin::V1alpha::GetAccountRequest.new(name: name), grpc_options do |response, operation|
+      client.get_account(::Google::Analytics::Admin::V1alpha::GetAccountRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -161,7 +161,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.list_accounts ::Google::Analytics::Admin::V1alpha::ListAccountsRequest.new(page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options do |response, operation|
+      client.list_accounts(::Google::Analytics::Admin::V1alpha::ListAccountsRequest.new(page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -220,7 +220,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.delete_account ::Google::Analytics::Admin::V1alpha::DeleteAccountRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_account(::Google::Analytics::Admin::V1alpha::DeleteAccountRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -280,7 +280,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.update_account ::Google::Analytics::Admin::V1alpha::UpdateAccountRequest.new(account: account, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_account(::Google::Analytics::Admin::V1alpha::UpdateAccountRequest.new(account: account, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -340,7 +340,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.provision_account_ticket ::Google::Analytics::Admin::V1alpha::ProvisionAccountTicketRequest.new(account: account, redirect_uri: redirect_uri), grpc_options do |response, operation|
+      client.provision_account_ticket(::Google::Analytics::Admin::V1alpha::ProvisionAccountTicketRequest.new(account: account, redirect_uri: redirect_uri), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -404,7 +404,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.list_account_summaries ::Google::Analytics::Admin::V1alpha::ListAccountSummariesRequest.new(page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_account_summaries(::Google::Analytics::Admin::V1alpha::ListAccountSummariesRequest.new(page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -463,7 +463,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.get_property ::Google::Analytics::Admin::V1alpha::GetPropertyRequest.new(name: name), grpc_options do |response, operation|
+      client.get_property(::Google::Analytics::Admin::V1alpha::GetPropertyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -531,7 +531,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.list_properties ::Google::Analytics::Admin::V1alpha::ListPropertiesRequest.new(filter: filter, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options do |response, operation|
+      client.list_properties(::Google::Analytics::Admin::V1alpha::ListPropertiesRequest.new(filter: filter, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -590,7 +590,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.create_property ::Google::Analytics::Admin::V1alpha::CreatePropertyRequest.new(property: property), grpc_options do |response, operation|
+      client.create_property(::Google::Analytics::Admin::V1alpha::CreatePropertyRequest.new(property: property), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -648,7 +648,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.delete_property ::Google::Analytics::Admin::V1alpha::DeletePropertyRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_property(::Google::Analytics::Admin::V1alpha::DeletePropertyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -708,7 +708,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.update_property ::Google::Analytics::Admin::V1alpha::UpdatePropertyRequest.new(property: property, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_property(::Google::Analytics::Admin::V1alpha::UpdatePropertyRequest.new(property: property, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -766,7 +766,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.get_user_link ::Google::Analytics::Admin::V1alpha::GetUserLinkRequest.new(name: name), grpc_options do |response, operation|
+      client.get_user_link(::Google::Analytics::Admin::V1alpha::GetUserLinkRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -826,7 +826,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.batch_get_user_links ::Google::Analytics::Admin::V1alpha::BatchGetUserLinksRequest.new(parent: parent, names: names), grpc_options do |response, operation|
+      client.batch_get_user_links(::Google::Analytics::Admin::V1alpha::BatchGetUserLinksRequest.new(parent: parent, names: names), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -892,7 +892,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.list_user_links ::Google::Analytics::Admin::V1alpha::ListUserLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_user_links(::Google::Analytics::Admin::V1alpha::ListUserLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -959,7 +959,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.audit_user_links ::Google::Analytics::Admin::V1alpha::AuditUserLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.audit_user_links(::Google::Analytics::Admin::V1alpha::AuditUserLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1022,7 +1022,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.create_user_link ::Google::Analytics::Admin::V1alpha::CreateUserLinkRequest.new(parent: parent, notify_new_user: notify_new_user, user_link: user_link), grpc_options do |response, operation|
+      client.create_user_link(::Google::Analytics::Admin::V1alpha::CreateUserLinkRequest.new(parent: parent, notify_new_user: notify_new_user, user_link: user_link), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1084,7 +1084,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.batch_create_user_links ::Google::Analytics::Admin::V1alpha::BatchCreateUserLinksRequest.new(parent: parent, notify_new_users: notify_new_users, requests: requests), grpc_options do |response, operation|
+      client.batch_create_user_links(::Google::Analytics::Admin::V1alpha::BatchCreateUserLinksRequest.new(parent: parent, notify_new_users: notify_new_users, requests: requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1142,7 +1142,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.update_user_link ::Google::Analytics::Admin::V1alpha::UpdateUserLinkRequest.new(user_link: user_link), grpc_options do |response, operation|
+      client.update_user_link(::Google::Analytics::Admin::V1alpha::UpdateUserLinkRequest.new(user_link: user_link), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1202,7 +1202,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.batch_update_user_links ::Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksRequest.new(parent: parent, requests: requests), grpc_options do |response, operation|
+      client.batch_update_user_links(::Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1260,7 +1260,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.delete_user_link ::Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_user_link(::Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1320,7 +1320,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.batch_delete_user_links ::Google::Analytics::Admin::V1alpha::BatchDeleteUserLinksRequest.new(parent: parent, requests: requests), grpc_options do |response, operation|
+      client.batch_delete_user_links(::Google::Analytics::Admin::V1alpha::BatchDeleteUserLinksRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1378,7 +1378,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.get_web_data_stream ::Google::Analytics::Admin::V1alpha::GetWebDataStreamRequest.new(name: name), grpc_options do |response, operation|
+      client.get_web_data_stream(::Google::Analytics::Admin::V1alpha::GetWebDataStreamRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1436,7 +1436,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.delete_web_data_stream ::Google::Analytics::Admin::V1alpha::DeleteWebDataStreamRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_web_data_stream(::Google::Analytics::Admin::V1alpha::DeleteWebDataStreamRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1496,7 +1496,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.update_web_data_stream ::Google::Analytics::Admin::V1alpha::UpdateWebDataStreamRequest.new(web_data_stream: web_data_stream, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_web_data_stream(::Google::Analytics::Admin::V1alpha::UpdateWebDataStreamRequest.new(web_data_stream: web_data_stream, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1556,7 +1556,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.create_web_data_stream ::Google::Analytics::Admin::V1alpha::CreateWebDataStreamRequest.new(web_data_stream: web_data_stream, parent: parent), grpc_options do |response, operation|
+      client.create_web_data_stream(::Google::Analytics::Admin::V1alpha::CreateWebDataStreamRequest.new(web_data_stream: web_data_stream, parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1622,7 +1622,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.list_web_data_streams ::Google::Analytics::Admin::V1alpha::ListWebDataStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_web_data_streams(::Google::Analytics::Admin::V1alpha::ListWebDataStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1681,7 +1681,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.get_ios_app_data_stream ::Google::Analytics::Admin::V1alpha::GetIosAppDataStreamRequest.new(name: name), grpc_options do |response, operation|
+      client.get_ios_app_data_stream(::Google::Analytics::Admin::V1alpha::GetIosAppDataStreamRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1739,7 +1739,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.delete_ios_app_data_stream ::Google::Analytics::Admin::V1alpha::DeleteIosAppDataStreamRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_ios_app_data_stream(::Google::Analytics::Admin::V1alpha::DeleteIosAppDataStreamRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1799,7 +1799,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.update_ios_app_data_stream ::Google::Analytics::Admin::V1alpha::UpdateIosAppDataStreamRequest.new(ios_app_data_stream: ios_app_data_stream, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_ios_app_data_stream(::Google::Analytics::Admin::V1alpha::UpdateIosAppDataStreamRequest.new(ios_app_data_stream: ios_app_data_stream, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1859,7 +1859,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.create_ios_app_data_stream ::Google::Analytics::Admin::V1alpha::CreateIosAppDataStreamRequest.new(ios_app_data_stream: ios_app_data_stream, parent: parent), grpc_options do |response, operation|
+      client.create_ios_app_data_stream(::Google::Analytics::Admin::V1alpha::CreateIosAppDataStreamRequest.new(ios_app_data_stream: ios_app_data_stream, parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1925,7 +1925,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.list_ios_app_data_streams ::Google::Analytics::Admin::V1alpha::ListIosAppDataStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_ios_app_data_streams(::Google::Analytics::Admin::V1alpha::ListIosAppDataStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1984,7 +1984,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.get_android_app_data_stream ::Google::Analytics::Admin::V1alpha::GetAndroidAppDataStreamRequest.new(name: name), grpc_options do |response, operation|
+      client.get_android_app_data_stream(::Google::Analytics::Admin::V1alpha::GetAndroidAppDataStreamRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2042,7 +2042,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.delete_android_app_data_stream ::Google::Analytics::Admin::V1alpha::DeleteAndroidAppDataStreamRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_android_app_data_stream(::Google::Analytics::Admin::V1alpha::DeleteAndroidAppDataStreamRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2102,7 +2102,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.update_android_app_data_stream ::Google::Analytics::Admin::V1alpha::UpdateAndroidAppDataStreamRequest.new(android_app_data_stream: android_app_data_stream, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_android_app_data_stream(::Google::Analytics::Admin::V1alpha::UpdateAndroidAppDataStreamRequest.new(android_app_data_stream: android_app_data_stream, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2162,7 +2162,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.create_android_app_data_stream ::Google::Analytics::Admin::V1alpha::CreateAndroidAppDataStreamRequest.new(android_app_data_stream: android_app_data_stream, parent: parent), grpc_options do |response, operation|
+      client.create_android_app_data_stream(::Google::Analytics::Admin::V1alpha::CreateAndroidAppDataStreamRequest.new(android_app_data_stream: android_app_data_stream, parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2228,7 +2228,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.list_android_app_data_streams ::Google::Analytics::Admin::V1alpha::ListAndroidAppDataStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_android_app_data_streams(::Google::Analytics::Admin::V1alpha::ListAndroidAppDataStreamsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2287,7 +2287,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.get_enhanced_measurement_settings ::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest.new(name: name), grpc_options do |response, operation|
+      client.get_enhanced_measurement_settings(::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2347,7 +2347,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.update_enhanced_measurement_settings ::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest.new(enhanced_measurement_settings: enhanced_measurement_settings, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_enhanced_measurement_settings(::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest.new(enhanced_measurement_settings: enhanced_measurement_settings, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2407,7 +2407,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.create_firebase_link ::Google::Analytics::Admin::V1alpha::CreateFirebaseLinkRequest.new(parent: parent, firebase_link: firebase_link), grpc_options do |response, operation|
+      client.create_firebase_link(::Google::Analytics::Admin::V1alpha::CreateFirebaseLinkRequest.new(parent: parent, firebase_link: firebase_link), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2467,7 +2467,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.update_firebase_link ::Google::Analytics::Admin::V1alpha::UpdateFirebaseLinkRequest.new(firebase_link: firebase_link, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_firebase_link(::Google::Analytics::Admin::V1alpha::UpdateFirebaseLinkRequest.new(firebase_link: firebase_link, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2525,7 +2525,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.delete_firebase_link ::Google::Analytics::Admin::V1alpha::DeleteFirebaseLinkRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_firebase_link(::Google::Analytics::Admin::V1alpha::DeleteFirebaseLinkRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2591,7 +2591,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.list_firebase_links ::Google::Analytics::Admin::V1alpha::ListFirebaseLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_firebase_links(::Google::Analytics::Admin::V1alpha::ListFirebaseLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2650,7 +2650,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.get_global_site_tag ::Google::Analytics::Admin::V1alpha::GetGlobalSiteTagRequest.new(name: name), grpc_options do |response, operation|
+      client.get_global_site_tag(::Google::Analytics::Admin::V1alpha::GetGlobalSiteTagRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2710,7 +2710,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.create_google_ads_link ::Google::Analytics::Admin::V1alpha::CreateGoogleAdsLinkRequest.new(parent: parent, google_ads_link: google_ads_link), grpc_options do |response, operation|
+      client.create_google_ads_link(::Google::Analytics::Admin::V1alpha::CreateGoogleAdsLinkRequest.new(parent: parent, google_ads_link: google_ads_link), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2770,7 +2770,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.update_google_ads_link ::Google::Analytics::Admin::V1alpha::UpdateGoogleAdsLinkRequest.new(google_ads_link: google_ads_link, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_google_ads_link(::Google::Analytics::Admin::V1alpha::UpdateGoogleAdsLinkRequest.new(google_ads_link: google_ads_link, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2828,7 +2828,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.delete_google_ads_link ::Google::Analytics::Admin::V1alpha::DeleteGoogleAdsLinkRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_google_ads_link(::Google::Analytics::Admin::V1alpha::DeleteGoogleAdsLinkRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2894,7 +2894,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.list_google_ads_links ::Google::Analytics::Admin::V1alpha::ListGoogleAdsLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_google_ads_links(::Google::Analytics::Admin::V1alpha::ListGoogleAdsLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2953,7 +2953,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.get_data_sharing_settings ::Google::Analytics::Admin::V1alpha::GetDataSharingSettingsRequest.new(name: name), grpc_options do |response, operation|
+      client.get_data_sharing_settings(::Google::Analytics::Admin::V1alpha::GetDataSharingSettingsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
