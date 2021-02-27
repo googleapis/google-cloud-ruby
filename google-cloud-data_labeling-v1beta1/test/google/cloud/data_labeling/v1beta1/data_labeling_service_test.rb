@@ -97,7 +97,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.create_dataset ::Google::Cloud::DataLabeling::V1beta1::CreateDatasetRequest.new(parent: parent, dataset: dataset), grpc_options do |response, operation|
+      client.create_dataset(::Google::Cloud::DataLabeling::V1beta1::CreateDatasetRequest.new(parent: parent, dataset: dataset), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -155,7 +155,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_dataset ::Google::Cloud::DataLabeling::V1beta1::GetDatasetRequest.new(name: name), grpc_options do |response, operation|
+      client.get_dataset(::Google::Cloud::DataLabeling::V1beta1::GetDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -223,7 +223,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.list_datasets ::Google::Cloud::DataLabeling::V1beta1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_datasets(::Google::Cloud::DataLabeling::V1beta1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -282,7 +282,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.delete_dataset ::Google::Cloud::DataLabeling::V1beta1::DeleteDatasetRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_dataset(::Google::Cloud::DataLabeling::V1beta1::DeleteDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -348,7 +348,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.import_data ::Google::Cloud::DataLabeling::V1beta1::ImportDataRequest.new(name: name, input_config: input_config, user_email_address: user_email_address), grpc_options do |response, operation|
+      client.import_data(::Google::Cloud::DataLabeling::V1beta1::ImportDataRequest.new(name: name, input_config: input_config, user_email_address: user_email_address), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -419,7 +419,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.export_data ::Google::Cloud::DataLabeling::V1beta1::ExportDataRequest.new(name: name, annotated_dataset: annotated_dataset, filter: filter, output_config: output_config, user_email_address: user_email_address), grpc_options do |response, operation|
+      client.export_data(::Google::Cloud::DataLabeling::V1beta1::ExportDataRequest.new(name: name, annotated_dataset: annotated_dataset, filter: filter, output_config: output_config, user_email_address: user_email_address), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -478,7 +478,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_data_item ::Google::Cloud::DataLabeling::V1beta1::GetDataItemRequest.new(name: name), grpc_options do |response, operation|
+      client.get_data_item(::Google::Cloud::DataLabeling::V1beta1::GetDataItemRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -546,7 +546,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.list_data_items ::Google::Cloud::DataLabeling::V1beta1::ListDataItemsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_data_items(::Google::Cloud::DataLabeling::V1beta1::ListDataItemsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -605,7 +605,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_annotated_dataset ::Google::Cloud::DataLabeling::V1beta1::GetAnnotatedDatasetRequest.new(name: name), grpc_options do |response, operation|
+      client.get_annotated_dataset(::Google::Cloud::DataLabeling::V1beta1::GetAnnotatedDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -673,7 +673,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.list_annotated_datasets ::Google::Cloud::DataLabeling::V1beta1::ListAnnotatedDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_annotated_datasets(::Google::Cloud::DataLabeling::V1beta1::ListAnnotatedDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -732,7 +732,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.delete_annotated_dataset ::Google::Cloud::DataLabeling::V1beta1::DeleteAnnotatedDatasetRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_annotated_dataset(::Google::Cloud::DataLabeling::V1beta1::DeleteAnnotatedDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -801,7 +801,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.label_image ::Google::Cloud::DataLabeling::V1beta1::LabelImageRequest.new(image_classification_config: image_classification_config, parent: parent, basic_config: basic_config, feature: feature), grpc_options do |response, operation|
+      client.label_image(::Google::Cloud::DataLabeling::V1beta1::LabelImageRequest.new(image_classification_config: image_classification_config, parent: parent, basic_config: basic_config, feature: feature), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -871,7 +871,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.label_video ::Google::Cloud::DataLabeling::V1beta1::LabelVideoRequest.new(video_classification_config: video_classification_config, parent: parent, basic_config: basic_config, feature: feature), grpc_options do |response, operation|
+      client.label_video(::Google::Cloud::DataLabeling::V1beta1::LabelVideoRequest.new(video_classification_config: video_classification_config, parent: parent, basic_config: basic_config, feature: feature), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -941,7 +941,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.label_text ::Google::Cloud::DataLabeling::V1beta1::LabelTextRequest.new(text_classification_config: text_classification_config, parent: parent, basic_config: basic_config, feature: feature), grpc_options do |response, operation|
+      client.label_text(::Google::Cloud::DataLabeling::V1beta1::LabelTextRequest.new(text_classification_config: text_classification_config, parent: parent, basic_config: basic_config, feature: feature), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1002,7 +1002,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_example ::Google::Cloud::DataLabeling::V1beta1::GetExampleRequest.new(name: name, filter: filter), grpc_options do |response, operation|
+      client.get_example(::Google::Cloud::DataLabeling::V1beta1::GetExampleRequest.new(name: name, filter: filter), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1070,7 +1070,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.list_examples ::Google::Cloud::DataLabeling::V1beta1::ListExamplesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_examples(::Google::Cloud::DataLabeling::V1beta1::ListExamplesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1131,7 +1131,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.create_annotation_spec_set ::Google::Cloud::DataLabeling::V1beta1::CreateAnnotationSpecSetRequest.new(parent: parent, annotation_spec_set: annotation_spec_set), grpc_options do |response, operation|
+      client.create_annotation_spec_set(::Google::Cloud::DataLabeling::V1beta1::CreateAnnotationSpecSetRequest.new(parent: parent, annotation_spec_set: annotation_spec_set), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1189,7 +1189,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_annotation_spec_set ::Google::Cloud::DataLabeling::V1beta1::GetAnnotationSpecSetRequest.new(name: name), grpc_options do |response, operation|
+      client.get_annotation_spec_set(::Google::Cloud::DataLabeling::V1beta1::GetAnnotationSpecSetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1257,7 +1257,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.list_annotation_spec_sets ::Google::Cloud::DataLabeling::V1beta1::ListAnnotationSpecSetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_annotation_spec_sets(::Google::Cloud::DataLabeling::V1beta1::ListAnnotationSpecSetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1316,7 +1316,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.delete_annotation_spec_set ::Google::Cloud::DataLabeling::V1beta1::DeleteAnnotationSpecSetRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_annotation_spec_set(::Google::Cloud::DataLabeling::V1beta1::DeleteAnnotationSpecSetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1380,7 +1380,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.create_instruction ::Google::Cloud::DataLabeling::V1beta1::CreateInstructionRequest.new(parent: parent, instruction: instruction), grpc_options do |response, operation|
+      client.create_instruction(::Google::Cloud::DataLabeling::V1beta1::CreateInstructionRequest.new(parent: parent, instruction: instruction), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1439,7 +1439,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_instruction ::Google::Cloud::DataLabeling::V1beta1::GetInstructionRequest.new(name: name), grpc_options do |response, operation|
+      client.get_instruction(::Google::Cloud::DataLabeling::V1beta1::GetInstructionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1507,7 +1507,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.list_instructions ::Google::Cloud::DataLabeling::V1beta1::ListInstructionsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_instructions(::Google::Cloud::DataLabeling::V1beta1::ListInstructionsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1566,7 +1566,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.delete_instruction ::Google::Cloud::DataLabeling::V1beta1::DeleteInstructionRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_instruction(::Google::Cloud::DataLabeling::V1beta1::DeleteInstructionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1624,7 +1624,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_evaluation ::Google::Cloud::DataLabeling::V1beta1::GetEvaluationRequest.new(name: name), grpc_options do |response, operation|
+      client.get_evaluation(::Google::Cloud::DataLabeling::V1beta1::GetEvaluationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1692,7 +1692,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.search_evaluations ::Google::Cloud::DataLabeling::V1beta1::SearchEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.search_evaluations(::Google::Cloud::DataLabeling::V1beta1::SearchEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1759,7 +1759,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.search_example_comparisons ::Google::Cloud::DataLabeling::V1beta1::SearchExampleComparisonsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.search_example_comparisons(::Google::Cloud::DataLabeling::V1beta1::SearchExampleComparisonsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1820,7 +1820,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.create_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::CreateEvaluationJobRequest.new(parent: parent, job: job), grpc_options do |response, operation|
+      client.create_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::CreateEvaluationJobRequest.new(parent: parent, job: job), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1880,7 +1880,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.update_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::UpdateEvaluationJobRequest.new(evaluation_job: evaluation_job, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::UpdateEvaluationJobRequest.new(evaluation_job: evaluation_job, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1938,7 +1938,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::GetEvaluationJobRequest.new(name: name), grpc_options do |response, operation|
+      client.get_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::GetEvaluationJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1996,7 +1996,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.pause_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::PauseEvaluationJobRequest.new(name: name), grpc_options do |response, operation|
+      client.pause_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::PauseEvaluationJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2054,7 +2054,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.resume_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::ResumeEvaluationJobRequest.new(name: name), grpc_options do |response, operation|
+      client.resume_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::ResumeEvaluationJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2112,7 +2112,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.delete_evaluation_job ::Google::Cloud::DataLabeling::V1beta1::DeleteEvaluationJobRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_evaluation_job(::Google::Cloud::DataLabeling::V1beta1::DeleteEvaluationJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2180,7 +2180,7 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.list_evaluation_jobs ::Google::Cloud::DataLabeling::V1beta1::ListEvaluationJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_evaluation_jobs(::Google::Cloud::DataLabeling::V1beta1::ListEvaluationJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
