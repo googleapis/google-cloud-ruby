@@ -99,7 +99,7 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
       end
 
       # Use protobuf object with options
-      client.create_connection ::Google::Cloud::Bigquery::Connection::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection), grpc_options do |response, operation|
+      client.create_connection(::Google::Cloud::Bigquery::Connection::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -157,7 +157,7 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
       end
 
       # Use protobuf object with options
-      client.get_connection ::Google::Cloud::Bigquery::Connection::V1::GetConnectionRequest.new(name: name), grpc_options do |response, operation|
+      client.get_connection(::Google::Cloud::Bigquery::Connection::V1::GetConnectionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -223,7 +223,7 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
       end
 
       # Use protobuf object with options
-      client.list_connections ::Google::Cloud::Bigquery::Connection::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_connections(::Google::Cloud::Bigquery::Connection::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -286,7 +286,7 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
       end
 
       # Use protobuf object with options
-      client.update_connection ::Google::Cloud::Bigquery::Connection::V1::UpdateConnectionRequest.new(name: name, connection: connection, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_connection(::Google::Cloud::Bigquery::Connection::V1::UpdateConnectionRequest.new(name: name, connection: connection, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -344,7 +344,7 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
       end
 
       # Use protobuf object with options
-      client.delete_connection ::Google::Cloud::Bigquery::Connection::V1::DeleteConnectionRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_connection(::Google::Cloud::Bigquery::Connection::V1::DeleteConnectionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -404,7 +404,7 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
       end
 
       # Use protobuf object with options
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
+      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -464,7 +464,7 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
       end
 
       # Use protobuf object with options
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
+      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -524,7 +524,7 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
+      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
