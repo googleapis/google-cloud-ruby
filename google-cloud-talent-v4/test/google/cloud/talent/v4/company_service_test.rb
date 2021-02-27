@@ -97,7 +97,7 @@ class ::Google::Cloud::Talent::V4::CompanyService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_company ::Google::Cloud::Talent::V4::CreateCompanyRequest.new(parent: parent, company: company), grpc_options do |response, operation|
+      client.create_company(::Google::Cloud::Talent::V4::CreateCompanyRequest.new(parent: parent, company: company), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -155,7 +155,7 @@ class ::Google::Cloud::Talent::V4::CompanyService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_company ::Google::Cloud::Talent::V4::GetCompanyRequest.new(name: name), grpc_options do |response, operation|
+      client.get_company(::Google::Cloud::Talent::V4::GetCompanyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,7 +215,7 @@ class ::Google::Cloud::Talent::V4::CompanyService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_company ::Google::Cloud::Talent::V4::UpdateCompanyRequest.new(company: company, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_company(::Google::Cloud::Talent::V4::UpdateCompanyRequest.new(company: company, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -273,7 +273,7 @@ class ::Google::Cloud::Talent::V4::CompanyService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_company ::Google::Cloud::Talent::V4::DeleteCompanyRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_company(::Google::Cloud::Talent::V4::DeleteCompanyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -341,7 +341,7 @@ class ::Google::Cloud::Talent::V4::CompanyService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_companies ::Google::Cloud::Talent::V4::ListCompaniesRequest.new(parent: parent, page_token: page_token, page_size: page_size, require_open_jobs: require_open_jobs), grpc_options do |response, operation|
+      client.list_companies(::Google::Cloud::Talent::V4::ListCompaniesRequest.new(parent: parent, page_token: page_token, page_size: page_size, require_open_jobs: require_open_jobs), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

@@ -60,7 +60,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -70,9 +70,9 @@ module Google
                 default_config.rpcs.get_company.timeout = 30.0
                 default_config.rpcs.get_company.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_company.timeout = 30.0
@@ -80,17 +80,17 @@ module Google
                 default_config.rpcs.delete_company.timeout = 30.0
                 default_config.rpcs.delete_company.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_companies.timeout = 30.0
                 default_config.rpcs.list_companies.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config
@@ -159,7 +159,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -638,7 +638,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -659,7 +659,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -710,15 +710,15 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  create_company_config = parent_rpcs&.create_company if parent_rpcs&.respond_to? :create_company
+                  create_company_config = parent_rpcs.create_company if parent_rpcs.respond_to? :create_company
                   @create_company = ::Gapic::Config::Method.new create_company_config
-                  get_company_config = parent_rpcs&.get_company if parent_rpcs&.respond_to? :get_company
+                  get_company_config = parent_rpcs.get_company if parent_rpcs.respond_to? :get_company
                   @get_company = ::Gapic::Config::Method.new get_company_config
-                  update_company_config = parent_rpcs&.update_company if parent_rpcs&.respond_to? :update_company
+                  update_company_config = parent_rpcs.update_company if parent_rpcs.respond_to? :update_company
                   @update_company = ::Gapic::Config::Method.new update_company_config
-                  delete_company_config = parent_rpcs&.delete_company if parent_rpcs&.respond_to? :delete_company
+                  delete_company_config = parent_rpcs.delete_company if parent_rpcs.respond_to? :delete_company
                   @delete_company = ::Gapic::Config::Method.new delete_company_config
-                  list_companies_config = parent_rpcs&.list_companies if parent_rpcs&.respond_to? :list_companies
+                  list_companies_config = parent_rpcs.list_companies if parent_rpcs.respond_to? :list_companies
                   @list_companies = ::Gapic::Config::Method.new list_companies_config
 
                   yield self if block_given?
