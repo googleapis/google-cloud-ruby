@@ -80,7 +80,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -88,9 +88,9 @@ module Google
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
                   initial_delay: 1.0,
-                  max_delay:     10.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+                max_delay: 10.0,
+                multiplier: 1.3,
+                retry_codes: [14]
                 }
 
                 default_config.rpcs.provision_cloud_identity.timeout = 60.0
@@ -181,7 +181,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -3463,7 +3463,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -3484,7 +3484,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -3675,71 +3675,71 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  list_customers_config = parent_rpcs&.list_customers if parent_rpcs&.respond_to? :list_customers
+                  list_customers_config = parent_rpcs.list_customers if parent_rpcs.respond_to? :list_customers
                   @list_customers = ::Gapic::Config::Method.new list_customers_config
-                  get_customer_config = parent_rpcs&.get_customer if parent_rpcs&.respond_to? :get_customer
+                  get_customer_config = parent_rpcs.get_customer if parent_rpcs.respond_to? :get_customer
                   @get_customer = ::Gapic::Config::Method.new get_customer_config
-                  check_cloud_identity_accounts_exist_config = parent_rpcs&.check_cloud_identity_accounts_exist if parent_rpcs&.respond_to? :check_cloud_identity_accounts_exist
+                  check_cloud_identity_accounts_exist_config = parent_rpcs.check_cloud_identity_accounts_exist if parent_rpcs.respond_to? :check_cloud_identity_accounts_exist
                   @check_cloud_identity_accounts_exist = ::Gapic::Config::Method.new check_cloud_identity_accounts_exist_config
-                  create_customer_config = parent_rpcs&.create_customer if parent_rpcs&.respond_to? :create_customer
+                  create_customer_config = parent_rpcs.create_customer if parent_rpcs.respond_to? :create_customer
                   @create_customer = ::Gapic::Config::Method.new create_customer_config
-                  update_customer_config = parent_rpcs&.update_customer if parent_rpcs&.respond_to? :update_customer
+                  update_customer_config = parent_rpcs.update_customer if parent_rpcs.respond_to? :update_customer
                   @update_customer = ::Gapic::Config::Method.new update_customer_config
-                  delete_customer_config = parent_rpcs&.delete_customer if parent_rpcs&.respond_to? :delete_customer
+                  delete_customer_config = parent_rpcs.delete_customer if parent_rpcs.respond_to? :delete_customer
                   @delete_customer = ::Gapic::Config::Method.new delete_customer_config
-                  provision_cloud_identity_config = parent_rpcs&.provision_cloud_identity if parent_rpcs&.respond_to? :provision_cloud_identity
+                  provision_cloud_identity_config = parent_rpcs.provision_cloud_identity if parent_rpcs.respond_to? :provision_cloud_identity
                   @provision_cloud_identity = ::Gapic::Config::Method.new provision_cloud_identity_config
-                  list_entitlements_config = parent_rpcs&.list_entitlements if parent_rpcs&.respond_to? :list_entitlements
+                  list_entitlements_config = parent_rpcs.list_entitlements if parent_rpcs.respond_to? :list_entitlements
                   @list_entitlements = ::Gapic::Config::Method.new list_entitlements_config
-                  list_transferable_skus_config = parent_rpcs&.list_transferable_skus if parent_rpcs&.respond_to? :list_transferable_skus
+                  list_transferable_skus_config = parent_rpcs.list_transferable_skus if parent_rpcs.respond_to? :list_transferable_skus
                   @list_transferable_skus = ::Gapic::Config::Method.new list_transferable_skus_config
-                  list_transferable_offers_config = parent_rpcs&.list_transferable_offers if parent_rpcs&.respond_to? :list_transferable_offers
+                  list_transferable_offers_config = parent_rpcs.list_transferable_offers if parent_rpcs.respond_to? :list_transferable_offers
                   @list_transferable_offers = ::Gapic::Config::Method.new list_transferable_offers_config
-                  get_entitlement_config = parent_rpcs&.get_entitlement if parent_rpcs&.respond_to? :get_entitlement
+                  get_entitlement_config = parent_rpcs.get_entitlement if parent_rpcs.respond_to? :get_entitlement
                   @get_entitlement = ::Gapic::Config::Method.new get_entitlement_config
-                  create_entitlement_config = parent_rpcs&.create_entitlement if parent_rpcs&.respond_to? :create_entitlement
+                  create_entitlement_config = parent_rpcs.create_entitlement if parent_rpcs.respond_to? :create_entitlement
                   @create_entitlement = ::Gapic::Config::Method.new create_entitlement_config
-                  change_parameters_config = parent_rpcs&.change_parameters if parent_rpcs&.respond_to? :change_parameters
+                  change_parameters_config = parent_rpcs.change_parameters if parent_rpcs.respond_to? :change_parameters
                   @change_parameters = ::Gapic::Config::Method.new change_parameters_config
-                  change_renewal_settings_config = parent_rpcs&.change_renewal_settings if parent_rpcs&.respond_to? :change_renewal_settings
+                  change_renewal_settings_config = parent_rpcs.change_renewal_settings if parent_rpcs.respond_to? :change_renewal_settings
                   @change_renewal_settings = ::Gapic::Config::Method.new change_renewal_settings_config
-                  change_offer_config = parent_rpcs&.change_offer if parent_rpcs&.respond_to? :change_offer
+                  change_offer_config = parent_rpcs.change_offer if parent_rpcs.respond_to? :change_offer
                   @change_offer = ::Gapic::Config::Method.new change_offer_config
-                  start_paid_service_config = parent_rpcs&.start_paid_service if parent_rpcs&.respond_to? :start_paid_service
+                  start_paid_service_config = parent_rpcs.start_paid_service if parent_rpcs.respond_to? :start_paid_service
                   @start_paid_service = ::Gapic::Config::Method.new start_paid_service_config
-                  suspend_entitlement_config = parent_rpcs&.suspend_entitlement if parent_rpcs&.respond_to? :suspend_entitlement
+                  suspend_entitlement_config = parent_rpcs.suspend_entitlement if parent_rpcs.respond_to? :suspend_entitlement
                   @suspend_entitlement = ::Gapic::Config::Method.new suspend_entitlement_config
-                  cancel_entitlement_config = parent_rpcs&.cancel_entitlement if parent_rpcs&.respond_to? :cancel_entitlement
+                  cancel_entitlement_config = parent_rpcs.cancel_entitlement if parent_rpcs.respond_to? :cancel_entitlement
                   @cancel_entitlement = ::Gapic::Config::Method.new cancel_entitlement_config
-                  activate_entitlement_config = parent_rpcs&.activate_entitlement if parent_rpcs&.respond_to? :activate_entitlement
+                  activate_entitlement_config = parent_rpcs.activate_entitlement if parent_rpcs.respond_to? :activate_entitlement
                   @activate_entitlement = ::Gapic::Config::Method.new activate_entitlement_config
-                  transfer_entitlements_config = parent_rpcs&.transfer_entitlements if parent_rpcs&.respond_to? :transfer_entitlements
+                  transfer_entitlements_config = parent_rpcs.transfer_entitlements if parent_rpcs.respond_to? :transfer_entitlements
                   @transfer_entitlements = ::Gapic::Config::Method.new transfer_entitlements_config
-                  transfer_entitlements_to_google_config = parent_rpcs&.transfer_entitlements_to_google if parent_rpcs&.respond_to? :transfer_entitlements_to_google
+                  transfer_entitlements_to_google_config = parent_rpcs.transfer_entitlements_to_google if parent_rpcs.respond_to? :transfer_entitlements_to_google
                   @transfer_entitlements_to_google = ::Gapic::Config::Method.new transfer_entitlements_to_google_config
-                  list_channel_partner_links_config = parent_rpcs&.list_channel_partner_links if parent_rpcs&.respond_to? :list_channel_partner_links
+                  list_channel_partner_links_config = parent_rpcs.list_channel_partner_links if parent_rpcs.respond_to? :list_channel_partner_links
                   @list_channel_partner_links = ::Gapic::Config::Method.new list_channel_partner_links_config
-                  get_channel_partner_link_config = parent_rpcs&.get_channel_partner_link if parent_rpcs&.respond_to? :get_channel_partner_link
+                  get_channel_partner_link_config = parent_rpcs.get_channel_partner_link if parent_rpcs.respond_to? :get_channel_partner_link
                   @get_channel_partner_link = ::Gapic::Config::Method.new get_channel_partner_link_config
-                  create_channel_partner_link_config = parent_rpcs&.create_channel_partner_link if parent_rpcs&.respond_to? :create_channel_partner_link
+                  create_channel_partner_link_config = parent_rpcs.create_channel_partner_link if parent_rpcs.respond_to? :create_channel_partner_link
                   @create_channel_partner_link = ::Gapic::Config::Method.new create_channel_partner_link_config
-                  update_channel_partner_link_config = parent_rpcs&.update_channel_partner_link if parent_rpcs&.respond_to? :update_channel_partner_link
+                  update_channel_partner_link_config = parent_rpcs.update_channel_partner_link if parent_rpcs.respond_to? :update_channel_partner_link
                   @update_channel_partner_link = ::Gapic::Config::Method.new update_channel_partner_link_config
-                  list_products_config = parent_rpcs&.list_products if parent_rpcs&.respond_to? :list_products
+                  list_products_config = parent_rpcs.list_products if parent_rpcs.respond_to? :list_products
                   @list_products = ::Gapic::Config::Method.new list_products_config
-                  list_skus_config = parent_rpcs&.list_skus if parent_rpcs&.respond_to? :list_skus
+                  list_skus_config = parent_rpcs.list_skus if parent_rpcs.respond_to? :list_skus
                   @list_skus = ::Gapic::Config::Method.new list_skus_config
-                  list_offers_config = parent_rpcs&.list_offers if parent_rpcs&.respond_to? :list_offers
+                  list_offers_config = parent_rpcs.list_offers if parent_rpcs.respond_to? :list_offers
                   @list_offers = ::Gapic::Config::Method.new list_offers_config
-                  list_purchasable_skus_config = parent_rpcs&.list_purchasable_skus if parent_rpcs&.respond_to? :list_purchasable_skus
+                  list_purchasable_skus_config = parent_rpcs.list_purchasable_skus if parent_rpcs.respond_to? :list_purchasable_skus
                   @list_purchasable_skus = ::Gapic::Config::Method.new list_purchasable_skus_config
-                  list_purchasable_offers_config = parent_rpcs&.list_purchasable_offers if parent_rpcs&.respond_to? :list_purchasable_offers
+                  list_purchasable_offers_config = parent_rpcs.list_purchasable_offers if parent_rpcs.respond_to? :list_purchasable_offers
                   @list_purchasable_offers = ::Gapic::Config::Method.new list_purchasable_offers_config
-                  register_subscriber_config = parent_rpcs&.register_subscriber if parent_rpcs&.respond_to? :register_subscriber
+                  register_subscriber_config = parent_rpcs.register_subscriber if parent_rpcs.respond_to? :register_subscriber
                   @register_subscriber = ::Gapic::Config::Method.new register_subscriber_config
-                  unregister_subscriber_config = parent_rpcs&.unregister_subscriber if parent_rpcs&.respond_to? :unregister_subscriber
+                  unregister_subscriber_config = parent_rpcs.unregister_subscriber if parent_rpcs.respond_to? :unregister_subscriber
                   @unregister_subscriber = ::Gapic::Config::Method.new unregister_subscriber_config
-                  list_subscribers_config = parent_rpcs&.list_subscribers if parent_rpcs&.respond_to? :list_subscribers
+                  list_subscribers_config = parent_rpcs.list_subscribers if parent_rpcs.respond_to? :list_subscribers
                   @list_subscribers = ::Gapic::Config::Method.new list_subscribers_config
 
                   yield self if block_given?
