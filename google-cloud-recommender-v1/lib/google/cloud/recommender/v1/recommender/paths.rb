@@ -70,7 +70,7 @@ module Google
             # @return [::String]
             def insight_path **args
               resources = {
-                "insight:insight_type:location:project"         => (proc do |project:, location:, insight_type:, insight:|
+                "insight:insight_type:location:project" => (proc do |project:, location:, insight_type:, insight:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
                   raise ::ArgumentError, "insight_type cannot contain /" if insight_type.to_s.include? "/"
@@ -84,14 +84,14 @@ module Google
 
                   "billingAccounts/#{billing_account}/locations/#{location}/insightTypes/#{insight_type}/insights/#{insight}"
                 end),
-                "folder:insight:insight_type:location"          => (proc do |folder:, location:, insight_type:, insight:|
+                "folder:insight:insight_type:location" => (proc do |folder:, location:, insight_type:, insight:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
                   raise ::ArgumentError, "insight_type cannot contain /" if insight_type.to_s.include? "/"
 
                   "folders/#{folder}/locations/#{location}/insightTypes/#{insight_type}/insights/#{insight}"
                 end),
-                "insight:insight_type:location:organization"    => (proc do |organization:, location:, insight_type:, insight:|
+                "insight:insight_type:location:organization" => (proc do |organization:, location:, insight_type:, insight:|
                   raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
                   raise ::ArgumentError, "insight_type cannot contain /" if insight_type.to_s.include? "/"
@@ -147,7 +147,7 @@ module Google
             # @return [::String]
             def insight_type_path **args
               resources = {
-                "insight_type:location:project"         => (proc do |project:, location:, insight_type:|
+                "insight_type:location:project" => (proc do |project:, location:, insight_type:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
@@ -159,13 +159,13 @@ module Google
 
                   "billingAccounts/#{billing_account}/locations/#{location}/insightTypes/#{insight_type}"
                 end),
-                "folder:insight_type:location"          => (proc do |folder:, location:, insight_type:|
+                "folder:insight_type:location" => (proc do |folder:, location:, insight_type:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "folders/#{folder}/locations/#{location}/insightTypes/#{insight_type}"
                 end),
-                "insight_type:location:organization"    => (proc do |organization:, location:, insight_type:|
+                "insight_type:location:organization" => (proc do |organization:, location:, insight_type:|
                   raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
@@ -224,7 +224,7 @@ module Google
             # @return [::String]
             def recommendation_path **args
               resources = {
-                "location:project:recommendation:recommender"         => (proc do |project:, location:, recommender:, recommendation:|
+                "location:project:recommendation:recommender" => (proc do |project:, location:, recommender:, recommendation:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
                   raise ::ArgumentError, "recommender cannot contain /" if recommender.to_s.include? "/"
@@ -238,14 +238,14 @@ module Google
 
                   "billingAccounts/#{billing_account}/locations/#{location}/recommenders/#{recommender}/recommendations/#{recommendation}"
                 end),
-                "folder:location:recommendation:recommender"          => (proc do |folder:, location:, recommender:, recommendation:|
+                "folder:location:recommendation:recommender" => (proc do |folder:, location:, recommender:, recommendation:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
                   raise ::ArgumentError, "recommender cannot contain /" if recommender.to_s.include? "/"
 
                   "folders/#{folder}/locations/#{location}/recommenders/#{recommender}/recommendations/#{recommendation}"
                 end),
-                "location:organization:recommendation:recommender"    => (proc do |organization:, location:, recommender:, recommendation:|
+                "location:organization:recommendation:recommender" => (proc do |organization:, location:, recommender:, recommendation:|
                   raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
                   raise ::ArgumentError, "recommender cannot contain /" if recommender.to_s.include? "/"
@@ -301,7 +301,7 @@ module Google
             # @return [::String]
             def recommender_path **args
               resources = {
-                "location:project:recommender"         => (proc do |project:, location:, recommender:|
+                "location:project:recommender" => (proc do |project:, location:, recommender:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
@@ -313,13 +313,13 @@ module Google
 
                   "billingAccounts/#{billing_account}/locations/#{location}/recommenders/#{recommender}"
                 end),
-                "folder:location:recommender"          => (proc do |folder:, location:, recommender:|
+                "folder:location:recommender" => (proc do |folder:, location:, recommender:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "folders/#{folder}/locations/#{location}/recommenders/#{recommender}"
                 end),
-                "location:organization:recommender"    => (proc do |organization:, location:, recommender:|
+                "location:organization:recommender" => (proc do |organization:, location:, recommender:|
                   raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 

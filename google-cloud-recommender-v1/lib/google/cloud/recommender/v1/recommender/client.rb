@@ -63,7 +63,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -71,17 +71,17 @@ module Google
                 default_config.rpcs.list_insights.timeout = 60.0
                 default_config.rpcs.list_insights.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_insight.timeout = 60.0
                 default_config.rpcs.get_insight.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.mark_insight_accepted.timeout = 60.0
@@ -89,17 +89,17 @@ module Google
                 default_config.rpcs.list_recommendations.timeout = 60.0
                 default_config.rpcs.list_recommendations.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_recommendation.timeout = 60.0
                 default_config.rpcs.get_recommendation.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.mark_recommendation_claimed.timeout = 60.0
@@ -174,7 +174,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -923,7 +923,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -944,7 +944,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -1010,21 +1010,21 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  list_insights_config = parent_rpcs&.list_insights if parent_rpcs&.respond_to? :list_insights
+                  list_insights_config = parent_rpcs.list_insights if parent_rpcs.respond_to? :list_insights
                   @list_insights = ::Gapic::Config::Method.new list_insights_config
-                  get_insight_config = parent_rpcs&.get_insight if parent_rpcs&.respond_to? :get_insight
+                  get_insight_config = parent_rpcs.get_insight if parent_rpcs.respond_to? :get_insight
                   @get_insight = ::Gapic::Config::Method.new get_insight_config
-                  mark_insight_accepted_config = parent_rpcs&.mark_insight_accepted if parent_rpcs&.respond_to? :mark_insight_accepted
+                  mark_insight_accepted_config = parent_rpcs.mark_insight_accepted if parent_rpcs.respond_to? :mark_insight_accepted
                   @mark_insight_accepted = ::Gapic::Config::Method.new mark_insight_accepted_config
-                  list_recommendations_config = parent_rpcs&.list_recommendations if parent_rpcs&.respond_to? :list_recommendations
+                  list_recommendations_config = parent_rpcs.list_recommendations if parent_rpcs.respond_to? :list_recommendations
                   @list_recommendations = ::Gapic::Config::Method.new list_recommendations_config
-                  get_recommendation_config = parent_rpcs&.get_recommendation if parent_rpcs&.respond_to? :get_recommendation
+                  get_recommendation_config = parent_rpcs.get_recommendation if parent_rpcs.respond_to? :get_recommendation
                   @get_recommendation = ::Gapic::Config::Method.new get_recommendation_config
-                  mark_recommendation_claimed_config = parent_rpcs&.mark_recommendation_claimed if parent_rpcs&.respond_to? :mark_recommendation_claimed
+                  mark_recommendation_claimed_config = parent_rpcs.mark_recommendation_claimed if parent_rpcs.respond_to? :mark_recommendation_claimed
                   @mark_recommendation_claimed = ::Gapic::Config::Method.new mark_recommendation_claimed_config
-                  mark_recommendation_succeeded_config = parent_rpcs&.mark_recommendation_succeeded if parent_rpcs&.respond_to? :mark_recommendation_succeeded
+                  mark_recommendation_succeeded_config = parent_rpcs.mark_recommendation_succeeded if parent_rpcs.respond_to? :mark_recommendation_succeeded
                   @mark_recommendation_succeeded = ::Gapic::Config::Method.new mark_recommendation_succeeded_config
-                  mark_recommendation_failed_config = parent_rpcs&.mark_recommendation_failed if parent_rpcs&.respond_to? :mark_recommendation_failed
+                  mark_recommendation_failed_config = parent_rpcs.mark_recommendation_failed if parent_rpcs.respond_to? :mark_recommendation_failed
                   @mark_recommendation_failed = ::Gapic::Config::Method.new mark_recommendation_failed_config
 
                   yield self if block_given?
