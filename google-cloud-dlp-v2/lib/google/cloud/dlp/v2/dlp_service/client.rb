@@ -68,7 +68,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -76,41 +76,41 @@ module Google
                 default_config.rpcs.inspect_content.timeout = 300.0
                 default_config.rpcs.inspect_content.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.redact_image.timeout = 300.0
                 default_config.rpcs.redact_image.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.deidentify_content.timeout = 300.0
                 default_config.rpcs.deidentify_content.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.reidentify_content.timeout = 300.0
                 default_config.rpcs.reidentify_content.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_info_types.timeout = 300.0
                 default_config.rpcs.list_info_types.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_inspect_template.timeout = 300.0
@@ -120,25 +120,25 @@ module Google
                 default_config.rpcs.get_inspect_template.timeout = 300.0
                 default_config.rpcs.get_inspect_template.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_inspect_templates.timeout = 300.0
                 default_config.rpcs.list_inspect_templates.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_inspect_template.timeout = 300.0
                 default_config.rpcs.delete_inspect_template.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_deidentify_template.timeout = 300.0
@@ -148,25 +148,25 @@ module Google
                 default_config.rpcs.get_deidentify_template.timeout = 300.0
                 default_config.rpcs.get_deidentify_template.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_deidentify_templates.timeout = 300.0
                 default_config.rpcs.list_deidentify_templates.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_deidentify_template.timeout = 300.0
                 default_config.rpcs.delete_deidentify_template.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_job_trigger.timeout = 300.0
@@ -178,25 +178,25 @@ module Google
                 default_config.rpcs.get_job_trigger.timeout = 300.0
                 default_config.rpcs.get_job_trigger.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_job_triggers.timeout = 300.0
                 default_config.rpcs.list_job_triggers.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_job_trigger.timeout = 300.0
                 default_config.rpcs.delete_job_trigger.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.activate_job_trigger.timeout = 300.0
@@ -206,25 +206,25 @@ module Google
                 default_config.rpcs.list_dlp_jobs.timeout = 300.0
                 default_config.rpcs.list_dlp_jobs.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_dlp_job.timeout = 300.0
                 default_config.rpcs.get_dlp_job.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_dlp_job.timeout = 300.0
                 default_config.rpcs.delete_dlp_job.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.cancel_dlp_job.timeout = 300.0
@@ -236,25 +236,25 @@ module Google
                 default_config.rpcs.get_stored_info_type.timeout = 300.0
                 default_config.rpcs.get_stored_info_type.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_stored_info_types.timeout = 300.0
                 default_config.rpcs.list_stored_info_types.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_stored_info_type.timeout = 300.0
                 default_config.rpcs.delete_stored_info_type.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.hybrid_inspect_dlp_job.timeout = 300.0
@@ -327,7 +327,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -3361,7 +3361,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -3382,7 +3382,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -3578,73 +3578,73 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  inspect_content_config = parent_rpcs&.inspect_content if parent_rpcs&.respond_to? :inspect_content
+                  inspect_content_config = parent_rpcs.inspect_content if parent_rpcs.respond_to? :inspect_content
                   @inspect_content = ::Gapic::Config::Method.new inspect_content_config
-                  redact_image_config = parent_rpcs&.redact_image if parent_rpcs&.respond_to? :redact_image
+                  redact_image_config = parent_rpcs.redact_image if parent_rpcs.respond_to? :redact_image
                   @redact_image = ::Gapic::Config::Method.new redact_image_config
-                  deidentify_content_config = parent_rpcs&.deidentify_content if parent_rpcs&.respond_to? :deidentify_content
+                  deidentify_content_config = parent_rpcs.deidentify_content if parent_rpcs.respond_to? :deidentify_content
                   @deidentify_content = ::Gapic::Config::Method.new deidentify_content_config
-                  reidentify_content_config = parent_rpcs&.reidentify_content if parent_rpcs&.respond_to? :reidentify_content
+                  reidentify_content_config = parent_rpcs.reidentify_content if parent_rpcs.respond_to? :reidentify_content
                   @reidentify_content = ::Gapic::Config::Method.new reidentify_content_config
-                  list_info_types_config = parent_rpcs&.list_info_types if parent_rpcs&.respond_to? :list_info_types
+                  list_info_types_config = parent_rpcs.list_info_types if parent_rpcs.respond_to? :list_info_types
                   @list_info_types = ::Gapic::Config::Method.new list_info_types_config
-                  create_inspect_template_config = parent_rpcs&.create_inspect_template if parent_rpcs&.respond_to? :create_inspect_template
+                  create_inspect_template_config = parent_rpcs.create_inspect_template if parent_rpcs.respond_to? :create_inspect_template
                   @create_inspect_template = ::Gapic::Config::Method.new create_inspect_template_config
-                  update_inspect_template_config = parent_rpcs&.update_inspect_template if parent_rpcs&.respond_to? :update_inspect_template
+                  update_inspect_template_config = parent_rpcs.update_inspect_template if parent_rpcs.respond_to? :update_inspect_template
                   @update_inspect_template = ::Gapic::Config::Method.new update_inspect_template_config
-                  get_inspect_template_config = parent_rpcs&.get_inspect_template if parent_rpcs&.respond_to? :get_inspect_template
+                  get_inspect_template_config = parent_rpcs.get_inspect_template if parent_rpcs.respond_to? :get_inspect_template
                   @get_inspect_template = ::Gapic::Config::Method.new get_inspect_template_config
-                  list_inspect_templates_config = parent_rpcs&.list_inspect_templates if parent_rpcs&.respond_to? :list_inspect_templates
+                  list_inspect_templates_config = parent_rpcs.list_inspect_templates if parent_rpcs.respond_to? :list_inspect_templates
                   @list_inspect_templates = ::Gapic::Config::Method.new list_inspect_templates_config
-                  delete_inspect_template_config = parent_rpcs&.delete_inspect_template if parent_rpcs&.respond_to? :delete_inspect_template
+                  delete_inspect_template_config = parent_rpcs.delete_inspect_template if parent_rpcs.respond_to? :delete_inspect_template
                   @delete_inspect_template = ::Gapic::Config::Method.new delete_inspect_template_config
-                  create_deidentify_template_config = parent_rpcs&.create_deidentify_template if parent_rpcs&.respond_to? :create_deidentify_template
+                  create_deidentify_template_config = parent_rpcs.create_deidentify_template if parent_rpcs.respond_to? :create_deidentify_template
                   @create_deidentify_template = ::Gapic::Config::Method.new create_deidentify_template_config
-                  update_deidentify_template_config = parent_rpcs&.update_deidentify_template if parent_rpcs&.respond_to? :update_deidentify_template
+                  update_deidentify_template_config = parent_rpcs.update_deidentify_template if parent_rpcs.respond_to? :update_deidentify_template
                   @update_deidentify_template = ::Gapic::Config::Method.new update_deidentify_template_config
-                  get_deidentify_template_config = parent_rpcs&.get_deidentify_template if parent_rpcs&.respond_to? :get_deidentify_template
+                  get_deidentify_template_config = parent_rpcs.get_deidentify_template if parent_rpcs.respond_to? :get_deidentify_template
                   @get_deidentify_template = ::Gapic::Config::Method.new get_deidentify_template_config
-                  list_deidentify_templates_config = parent_rpcs&.list_deidentify_templates if parent_rpcs&.respond_to? :list_deidentify_templates
+                  list_deidentify_templates_config = parent_rpcs.list_deidentify_templates if parent_rpcs.respond_to? :list_deidentify_templates
                   @list_deidentify_templates = ::Gapic::Config::Method.new list_deidentify_templates_config
-                  delete_deidentify_template_config = parent_rpcs&.delete_deidentify_template if parent_rpcs&.respond_to? :delete_deidentify_template
+                  delete_deidentify_template_config = parent_rpcs.delete_deidentify_template if parent_rpcs.respond_to? :delete_deidentify_template
                   @delete_deidentify_template = ::Gapic::Config::Method.new delete_deidentify_template_config
-                  create_job_trigger_config = parent_rpcs&.create_job_trigger if parent_rpcs&.respond_to? :create_job_trigger
+                  create_job_trigger_config = parent_rpcs.create_job_trigger if parent_rpcs.respond_to? :create_job_trigger
                   @create_job_trigger = ::Gapic::Config::Method.new create_job_trigger_config
-                  update_job_trigger_config = parent_rpcs&.update_job_trigger if parent_rpcs&.respond_to? :update_job_trigger
+                  update_job_trigger_config = parent_rpcs.update_job_trigger if parent_rpcs.respond_to? :update_job_trigger
                   @update_job_trigger = ::Gapic::Config::Method.new update_job_trigger_config
-                  hybrid_inspect_job_trigger_config = parent_rpcs&.hybrid_inspect_job_trigger if parent_rpcs&.respond_to? :hybrid_inspect_job_trigger
+                  hybrid_inspect_job_trigger_config = parent_rpcs.hybrid_inspect_job_trigger if parent_rpcs.respond_to? :hybrid_inspect_job_trigger
                   @hybrid_inspect_job_trigger = ::Gapic::Config::Method.new hybrid_inspect_job_trigger_config
-                  get_job_trigger_config = parent_rpcs&.get_job_trigger if parent_rpcs&.respond_to? :get_job_trigger
+                  get_job_trigger_config = parent_rpcs.get_job_trigger if parent_rpcs.respond_to? :get_job_trigger
                   @get_job_trigger = ::Gapic::Config::Method.new get_job_trigger_config
-                  list_job_triggers_config = parent_rpcs&.list_job_triggers if parent_rpcs&.respond_to? :list_job_triggers
+                  list_job_triggers_config = parent_rpcs.list_job_triggers if parent_rpcs.respond_to? :list_job_triggers
                   @list_job_triggers = ::Gapic::Config::Method.new list_job_triggers_config
-                  delete_job_trigger_config = parent_rpcs&.delete_job_trigger if parent_rpcs&.respond_to? :delete_job_trigger
+                  delete_job_trigger_config = parent_rpcs.delete_job_trigger if parent_rpcs.respond_to? :delete_job_trigger
                   @delete_job_trigger = ::Gapic::Config::Method.new delete_job_trigger_config
-                  activate_job_trigger_config = parent_rpcs&.activate_job_trigger if parent_rpcs&.respond_to? :activate_job_trigger
+                  activate_job_trigger_config = parent_rpcs.activate_job_trigger if parent_rpcs.respond_to? :activate_job_trigger
                   @activate_job_trigger = ::Gapic::Config::Method.new activate_job_trigger_config
-                  create_dlp_job_config = parent_rpcs&.create_dlp_job if parent_rpcs&.respond_to? :create_dlp_job
+                  create_dlp_job_config = parent_rpcs.create_dlp_job if parent_rpcs.respond_to? :create_dlp_job
                   @create_dlp_job = ::Gapic::Config::Method.new create_dlp_job_config
-                  list_dlp_jobs_config = parent_rpcs&.list_dlp_jobs if parent_rpcs&.respond_to? :list_dlp_jobs
+                  list_dlp_jobs_config = parent_rpcs.list_dlp_jobs if parent_rpcs.respond_to? :list_dlp_jobs
                   @list_dlp_jobs = ::Gapic::Config::Method.new list_dlp_jobs_config
-                  get_dlp_job_config = parent_rpcs&.get_dlp_job if parent_rpcs&.respond_to? :get_dlp_job
+                  get_dlp_job_config = parent_rpcs.get_dlp_job if parent_rpcs.respond_to? :get_dlp_job
                   @get_dlp_job = ::Gapic::Config::Method.new get_dlp_job_config
-                  delete_dlp_job_config = parent_rpcs&.delete_dlp_job if parent_rpcs&.respond_to? :delete_dlp_job
+                  delete_dlp_job_config = parent_rpcs.delete_dlp_job if parent_rpcs.respond_to? :delete_dlp_job
                   @delete_dlp_job = ::Gapic::Config::Method.new delete_dlp_job_config
-                  cancel_dlp_job_config = parent_rpcs&.cancel_dlp_job if parent_rpcs&.respond_to? :cancel_dlp_job
+                  cancel_dlp_job_config = parent_rpcs.cancel_dlp_job if parent_rpcs.respond_to? :cancel_dlp_job
                   @cancel_dlp_job = ::Gapic::Config::Method.new cancel_dlp_job_config
-                  create_stored_info_type_config = parent_rpcs&.create_stored_info_type if parent_rpcs&.respond_to? :create_stored_info_type
+                  create_stored_info_type_config = parent_rpcs.create_stored_info_type if parent_rpcs.respond_to? :create_stored_info_type
                   @create_stored_info_type = ::Gapic::Config::Method.new create_stored_info_type_config
-                  update_stored_info_type_config = parent_rpcs&.update_stored_info_type if parent_rpcs&.respond_to? :update_stored_info_type
+                  update_stored_info_type_config = parent_rpcs.update_stored_info_type if parent_rpcs.respond_to? :update_stored_info_type
                   @update_stored_info_type = ::Gapic::Config::Method.new update_stored_info_type_config
-                  get_stored_info_type_config = parent_rpcs&.get_stored_info_type if parent_rpcs&.respond_to? :get_stored_info_type
+                  get_stored_info_type_config = parent_rpcs.get_stored_info_type if parent_rpcs.respond_to? :get_stored_info_type
                   @get_stored_info_type = ::Gapic::Config::Method.new get_stored_info_type_config
-                  list_stored_info_types_config = parent_rpcs&.list_stored_info_types if parent_rpcs&.respond_to? :list_stored_info_types
+                  list_stored_info_types_config = parent_rpcs.list_stored_info_types if parent_rpcs.respond_to? :list_stored_info_types
                   @list_stored_info_types = ::Gapic::Config::Method.new list_stored_info_types_config
-                  delete_stored_info_type_config = parent_rpcs&.delete_stored_info_type if parent_rpcs&.respond_to? :delete_stored_info_type
+                  delete_stored_info_type_config = parent_rpcs.delete_stored_info_type if parent_rpcs.respond_to? :delete_stored_info_type
                   @delete_stored_info_type = ::Gapic::Config::Method.new delete_stored_info_type_config
-                  hybrid_inspect_dlp_job_config = parent_rpcs&.hybrid_inspect_dlp_job if parent_rpcs&.respond_to? :hybrid_inspect_dlp_job
+                  hybrid_inspect_dlp_job_config = parent_rpcs.hybrid_inspect_dlp_job if parent_rpcs.respond_to? :hybrid_inspect_dlp_job
                   @hybrid_inspect_dlp_job = ::Gapic::Config::Method.new hybrid_inspect_dlp_job_config
-                  finish_dlp_job_config = parent_rpcs&.finish_dlp_job if parent_rpcs&.respond_to? :finish_dlp_job
+                  finish_dlp_job_config = parent_rpcs.finish_dlp_job if parent_rpcs.respond_to? :finish_dlp_job
                   @finish_dlp_job = ::Gapic::Config::Method.new finish_dlp_job_config
 
                   yield self if block_given?
