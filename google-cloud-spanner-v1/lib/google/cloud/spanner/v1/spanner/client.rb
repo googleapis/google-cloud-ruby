@@ -63,7 +63,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -71,49 +71,49 @@ module Google
                 default_config.rpcs.create_session.timeout = 30.0
                 default_config.rpcs.create_session.retry_policy = {
                   initial_delay: 0.25,
-                  max_delay:     32.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 32.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.batch_create_sessions.timeout = 60.0
                 default_config.rpcs.batch_create_sessions.retry_policy = {
                   initial_delay: 0.25,
-                  max_delay:     32.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 32.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.get_session.timeout = 30.0
                 default_config.rpcs.get_session.retry_policy = {
                   initial_delay: 0.25,
-                  max_delay:     32.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 32.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.list_sessions.timeout = 3600.0
                 default_config.rpcs.list_sessions.retry_policy = {
                   initial_delay: 0.25,
-                  max_delay:     32.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 32.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.delete_session.timeout = 30.0
                 default_config.rpcs.delete_session.retry_policy = {
                   initial_delay: 0.25,
-                  max_delay:     32.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 32.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.execute_sql.timeout = 30.0
                 default_config.rpcs.execute_sql.retry_policy = {
                   initial_delay: 0.25,
-                  max_delay:     32.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 32.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.execute_streaming_sql.timeout = 3600.0
@@ -121,17 +121,17 @@ module Google
                 default_config.rpcs.execute_batch_dml.timeout = 30.0
                 default_config.rpcs.execute_batch_dml.retry_policy = {
                   initial_delay: 0.25,
-                  max_delay:     32.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 32.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.read.timeout = 30.0
                 default_config.rpcs.read.retry_policy = {
                   initial_delay: 0.25,
-                  max_delay:     32.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 32.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.streaming_read.timeout = 3600.0
@@ -139,41 +139,41 @@ module Google
                 default_config.rpcs.begin_transaction.timeout = 30.0
                 default_config.rpcs.begin_transaction.retry_policy = {
                   initial_delay: 0.25,
-                  max_delay:     32.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 32.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.commit.timeout = 3600.0
                 default_config.rpcs.commit.retry_policy = {
                   initial_delay: 0.25,
-                  max_delay:     32.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 32.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.rollback.timeout = 30.0
                 default_config.rpcs.rollback.retry_policy = {
                   initial_delay: 0.25,
-                  max_delay:     32.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 32.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.partition_query.timeout = 30.0
                 default_config.rpcs.partition_query.retry_policy = {
                   initial_delay: 0.25,
-                  max_delay:     32.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 32.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.partition_read.timeout = 30.0
                 default_config.rpcs.partition_read.retry_policy = {
                   initial_delay: 0.25,
-                  max_delay:     32.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 32.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config
@@ -242,7 +242,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -1800,7 +1800,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1821,7 +1821,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -1922,35 +1922,35 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  create_session_config = parent_rpcs&.create_session if parent_rpcs&.respond_to? :create_session
+                  create_session_config = parent_rpcs.create_session if parent_rpcs.respond_to? :create_session
                   @create_session = ::Gapic::Config::Method.new create_session_config
-                  batch_create_sessions_config = parent_rpcs&.batch_create_sessions if parent_rpcs&.respond_to? :batch_create_sessions
+                  batch_create_sessions_config = parent_rpcs.batch_create_sessions if parent_rpcs.respond_to? :batch_create_sessions
                   @batch_create_sessions = ::Gapic::Config::Method.new batch_create_sessions_config
-                  get_session_config = parent_rpcs&.get_session if parent_rpcs&.respond_to? :get_session
+                  get_session_config = parent_rpcs.get_session if parent_rpcs.respond_to? :get_session
                   @get_session = ::Gapic::Config::Method.new get_session_config
-                  list_sessions_config = parent_rpcs&.list_sessions if parent_rpcs&.respond_to? :list_sessions
+                  list_sessions_config = parent_rpcs.list_sessions if parent_rpcs.respond_to? :list_sessions
                   @list_sessions = ::Gapic::Config::Method.new list_sessions_config
-                  delete_session_config = parent_rpcs&.delete_session if parent_rpcs&.respond_to? :delete_session
+                  delete_session_config = parent_rpcs.delete_session if parent_rpcs.respond_to? :delete_session
                   @delete_session = ::Gapic::Config::Method.new delete_session_config
-                  execute_sql_config = parent_rpcs&.execute_sql if parent_rpcs&.respond_to? :execute_sql
+                  execute_sql_config = parent_rpcs.execute_sql if parent_rpcs.respond_to? :execute_sql
                   @execute_sql = ::Gapic::Config::Method.new execute_sql_config
-                  execute_streaming_sql_config = parent_rpcs&.execute_streaming_sql if parent_rpcs&.respond_to? :execute_streaming_sql
+                  execute_streaming_sql_config = parent_rpcs.execute_streaming_sql if parent_rpcs.respond_to? :execute_streaming_sql
                   @execute_streaming_sql = ::Gapic::Config::Method.new execute_streaming_sql_config
-                  execute_batch_dml_config = parent_rpcs&.execute_batch_dml if parent_rpcs&.respond_to? :execute_batch_dml
+                  execute_batch_dml_config = parent_rpcs.execute_batch_dml if parent_rpcs.respond_to? :execute_batch_dml
                   @execute_batch_dml = ::Gapic::Config::Method.new execute_batch_dml_config
-                  read_config = parent_rpcs&.read if parent_rpcs&.respond_to? :read
+                  read_config = parent_rpcs.read if parent_rpcs.respond_to? :read
                   @read = ::Gapic::Config::Method.new read_config
-                  streaming_read_config = parent_rpcs&.streaming_read if parent_rpcs&.respond_to? :streaming_read
+                  streaming_read_config = parent_rpcs.streaming_read if parent_rpcs.respond_to? :streaming_read
                   @streaming_read = ::Gapic::Config::Method.new streaming_read_config
-                  begin_transaction_config = parent_rpcs&.begin_transaction if parent_rpcs&.respond_to? :begin_transaction
+                  begin_transaction_config = parent_rpcs.begin_transaction if parent_rpcs.respond_to? :begin_transaction
                   @begin_transaction = ::Gapic::Config::Method.new begin_transaction_config
-                  commit_config = parent_rpcs&.commit if parent_rpcs&.respond_to? :commit
+                  commit_config = parent_rpcs.commit if parent_rpcs.respond_to? :commit
                   @commit = ::Gapic::Config::Method.new commit_config
-                  rollback_config = parent_rpcs&.rollback if parent_rpcs&.respond_to? :rollback
+                  rollback_config = parent_rpcs.rollback if parent_rpcs.respond_to? :rollback
                   @rollback = ::Gapic::Config::Method.new rollback_config
-                  partition_query_config = parent_rpcs&.partition_query if parent_rpcs&.respond_to? :partition_query
+                  partition_query_config = parent_rpcs.partition_query if parent_rpcs.respond_to? :partition_query
                   @partition_query = ::Gapic::Config::Method.new partition_query_config
-                  partition_read_config = parent_rpcs&.partition_read if parent_rpcs&.respond_to? :partition_read
+                  partition_read_config = parent_rpcs.partition_read if parent_rpcs.respond_to? :partition_read
                   @partition_read = ::Gapic::Config::Method.new partition_read_config
 
                   yield self if block_given?
