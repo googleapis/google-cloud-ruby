@@ -20,12 +20,12 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 2.4"
+  gem.required_ruby_version = ">= 2.5"
 
   gem.add_dependency "google-cloud-core", "~> 1.5"
   gem.add_dependency "google-cloud-document_ai-v1beta3", "~> 0.0"
 
-  gem.add_development_dependency "google-style", "~> 1.24.0"
+  gem.add_development_dependency "google-style", "~> 1.25.1"
   gem.add_development_dependency "minitest", "~> 5.14"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"
