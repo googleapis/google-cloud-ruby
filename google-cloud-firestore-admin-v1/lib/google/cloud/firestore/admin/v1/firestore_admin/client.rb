@@ -62,7 +62,7 @@ module Google
                   parent_config = while namespace.any?
                                     parent_name = namespace.join "::"
                                     parent_const = const_get parent_name
-                                    break parent_const.configure if parent_const&.respond_to? :configure
+                                    break parent_const.configure if parent_const.respond_to? :configure
                                     namespace.pop
                                   end
                   default_config = Client::Configuration.new parent_config
@@ -72,33 +72,33 @@ module Google
                   default_config.rpcs.list_indexes.timeout = 60.0
                   default_config.rpcs.list_indexes.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [14, 13, 4]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14, 13, 4]
                   }
 
                   default_config.rpcs.get_index.timeout = 60.0
                   default_config.rpcs.get_index.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [14, 13, 4]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14, 13, 4]
                   }
 
                   default_config.rpcs.delete_index.timeout = 60.0
                   default_config.rpcs.delete_index.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [14, 13, 4]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14, 13, 4]
                   }
 
                   default_config.rpcs.get_field.timeout = 60.0
                   default_config.rpcs.get_field.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [14, 13, 4]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14, 13, 4]
                   }
 
                   default_config.rpcs.update_field.timeout = 60.0
@@ -106,9 +106,9 @@ module Google
                   default_config.rpcs.list_fields.timeout = 60.0
                   default_config.rpcs.list_fields.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [14, 13, 4]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14, 13, 4]
                   }
 
                   default_config.rpcs.export_documents.timeout = 60.0
@@ -181,7 +181,7 @@ module Google
                 enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                          @config.endpoint == Client.configure.endpoint &&
                                          !@config.endpoint.split(".").first.include?("-")
-                credentials ||= Credentials.default scope:                  @config.scope,
+                credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(String) || credentials.is_a?(Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
@@ -987,7 +987,7 @@ module Google
                 config_attr :scope,         nil, ::String, ::Array, nil
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
-                config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+                config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
                 config_attr :interceptors,  nil, ::Array, nil
                 config_attr :timeout,       nil, ::Numeric, nil
                 config_attr :metadata,      nil, ::Hash, nil
@@ -1008,7 +1008,7 @@ module Google
                 def rpcs
                   @rpcs ||= begin
                     parent_rpcs = nil
-                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                     Rpcs.new parent_rpcs
                   end
                 end
@@ -1079,23 +1079,23 @@ module Google
 
                   # @private
                   def initialize parent_rpcs = nil
-                    create_index_config = parent_rpcs&.create_index if parent_rpcs&.respond_to? :create_index
+                    create_index_config = parent_rpcs.create_index if parent_rpcs.respond_to? :create_index
                     @create_index = ::Gapic::Config::Method.new create_index_config
-                    list_indexes_config = parent_rpcs&.list_indexes if parent_rpcs&.respond_to? :list_indexes
+                    list_indexes_config = parent_rpcs.list_indexes if parent_rpcs.respond_to? :list_indexes
                     @list_indexes = ::Gapic::Config::Method.new list_indexes_config
-                    get_index_config = parent_rpcs&.get_index if parent_rpcs&.respond_to? :get_index
+                    get_index_config = parent_rpcs.get_index if parent_rpcs.respond_to? :get_index
                     @get_index = ::Gapic::Config::Method.new get_index_config
-                    delete_index_config = parent_rpcs&.delete_index if parent_rpcs&.respond_to? :delete_index
+                    delete_index_config = parent_rpcs.delete_index if parent_rpcs.respond_to? :delete_index
                     @delete_index = ::Gapic::Config::Method.new delete_index_config
-                    get_field_config = parent_rpcs&.get_field if parent_rpcs&.respond_to? :get_field
+                    get_field_config = parent_rpcs.get_field if parent_rpcs.respond_to? :get_field
                     @get_field = ::Gapic::Config::Method.new get_field_config
-                    update_field_config = parent_rpcs&.update_field if parent_rpcs&.respond_to? :update_field
+                    update_field_config = parent_rpcs.update_field if parent_rpcs.respond_to? :update_field
                     @update_field = ::Gapic::Config::Method.new update_field_config
-                    list_fields_config = parent_rpcs&.list_fields if parent_rpcs&.respond_to? :list_fields
+                    list_fields_config = parent_rpcs.list_fields if parent_rpcs.respond_to? :list_fields
                     @list_fields = ::Gapic::Config::Method.new list_fields_config
-                    export_documents_config = parent_rpcs&.export_documents if parent_rpcs&.respond_to? :export_documents
+                    export_documents_config = parent_rpcs.export_documents if parent_rpcs.respond_to? :export_documents
                     @export_documents = ::Gapic::Config::Method.new export_documents_config
-                    import_documents_config = parent_rpcs&.import_documents if parent_rpcs&.respond_to? :import_documents
+                    import_documents_config = parent_rpcs.import_documents if parent_rpcs.respond_to? :import_documents
                     @import_documents = ::Gapic::Config::Method.new import_documents_config
 
                     yield self if block_given?
