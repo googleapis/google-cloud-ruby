@@ -107,7 +107,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.search_catalog ::Google::Cloud::DataCatalog::V1::SearchCatalogRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options do |response, operation|
+      client.search_catalog(::Google::Cloud::DataCatalog::V1::SearchCatalogRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -170,7 +170,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_entry_group ::Google::Cloud::DataCatalog::V1::CreateEntryGroupRequest.new(parent: parent, entry_group_id: entry_group_id, entry_group: entry_group), grpc_options do |response, operation|
+      client.create_entry_group(::Google::Cloud::DataCatalog::V1::CreateEntryGroupRequest.new(parent: parent, entry_group_id: entry_group_id, entry_group: entry_group), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -230,7 +230,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_entry_group ::Google::Cloud::DataCatalog::V1::GetEntryGroupRequest.new(name: name, read_mask: read_mask), grpc_options do |response, operation|
+      client.get_entry_group(::Google::Cloud::DataCatalog::V1::GetEntryGroupRequest.new(name: name, read_mask: read_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -290,7 +290,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_entry_group ::Google::Cloud::DataCatalog::V1::UpdateEntryGroupRequest.new(entry_group: entry_group, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_entry_group(::Google::Cloud::DataCatalog::V1::UpdateEntryGroupRequest.new(entry_group: entry_group, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -350,7 +350,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_entry_group ::Google::Cloud::DataCatalog::V1::DeleteEntryGroupRequest.new(name: name, force: force), grpc_options do |response, operation|
+      client.delete_entry_group(::Google::Cloud::DataCatalog::V1::DeleteEntryGroupRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -416,7 +416,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_entry_groups ::Google::Cloud::DataCatalog::V1::ListEntryGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_entry_groups(::Google::Cloud::DataCatalog::V1::ListEntryGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -479,7 +479,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_entry ::Google::Cloud::DataCatalog::V1::CreateEntryRequest.new(parent: parent, entry_id: entry_id, entry: entry), grpc_options do |response, operation|
+      client.create_entry(::Google::Cloud::DataCatalog::V1::CreateEntryRequest.new(parent: parent, entry_id: entry_id, entry: entry), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -539,7 +539,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_entry ::Google::Cloud::DataCatalog::V1::UpdateEntryRequest.new(entry: entry, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_entry(::Google::Cloud::DataCatalog::V1::UpdateEntryRequest.new(entry: entry, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -597,7 +597,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_entry ::Google::Cloud::DataCatalog::V1::DeleteEntryRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_entry(::Google::Cloud::DataCatalog::V1::DeleteEntryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -655,7 +655,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_entry ::Google::Cloud::DataCatalog::V1::GetEntryRequest.new(name: name), grpc_options do |response, operation|
+      client.get_entry(::Google::Cloud::DataCatalog::V1::GetEntryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -714,7 +714,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.lookup_entry ::Google::Cloud::DataCatalog::V1::LookupEntryRequest.new(linked_resource: linked_resource), grpc_options do |response, operation|
+      client.lookup_entry(::Google::Cloud::DataCatalog::V1::LookupEntryRequest.new(linked_resource: linked_resource), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -782,7 +782,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_entries ::Google::Cloud::DataCatalog::V1::ListEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options do |response, operation|
+      client.list_entries(::Google::Cloud::DataCatalog::V1::ListEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -845,7 +845,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_tag_template ::Google::Cloud::DataCatalog::V1::CreateTagTemplateRequest.new(parent: parent, tag_template_id: tag_template_id, tag_template: tag_template), grpc_options do |response, operation|
+      client.create_tag_template(::Google::Cloud::DataCatalog::V1::CreateTagTemplateRequest.new(parent: parent, tag_template_id: tag_template_id, tag_template: tag_template), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -903,7 +903,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_tag_template ::Google::Cloud::DataCatalog::V1::GetTagTemplateRequest.new(name: name), grpc_options do |response, operation|
+      client.get_tag_template(::Google::Cloud::DataCatalog::V1::GetTagTemplateRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -963,7 +963,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_tag_template ::Google::Cloud::DataCatalog::V1::UpdateTagTemplateRequest.new(tag_template: tag_template, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_tag_template(::Google::Cloud::DataCatalog::V1::UpdateTagTemplateRequest.new(tag_template: tag_template, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1023,7 +1023,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_tag_template ::Google::Cloud::DataCatalog::V1::DeleteTagTemplateRequest.new(name: name, force: force), grpc_options do |response, operation|
+      client.delete_tag_template(::Google::Cloud::DataCatalog::V1::DeleteTagTemplateRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1085,7 +1085,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_tag_template_field ::Google::Cloud::DataCatalog::V1::CreateTagTemplateFieldRequest.new(parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field), grpc_options do |response, operation|
+      client.create_tag_template_field(::Google::Cloud::DataCatalog::V1::CreateTagTemplateFieldRequest.new(parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1147,7 +1147,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_tag_template_field ::Google::Cloud::DataCatalog::V1::UpdateTagTemplateFieldRequest.new(name: name, tag_template_field: tag_template_field, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_tag_template_field(::Google::Cloud::DataCatalog::V1::UpdateTagTemplateFieldRequest.new(name: name, tag_template_field: tag_template_field, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1207,7 +1207,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.rename_tag_template_field ::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldRequest.new(name: name, new_tag_template_field_id: new_tag_template_field_id), grpc_options do |response, operation|
+      client.rename_tag_template_field(::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldRequest.new(name: name, new_tag_template_field_id: new_tag_template_field_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1267,7 +1267,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_tag_template_field ::Google::Cloud::DataCatalog::V1::DeleteTagTemplateFieldRequest.new(name: name, force: force), grpc_options do |response, operation|
+      client.delete_tag_template_field(::Google::Cloud::DataCatalog::V1::DeleteTagTemplateFieldRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1327,7 +1327,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_tag ::Google::Cloud::DataCatalog::V1::CreateTagRequest.new(parent: parent, tag: tag), grpc_options do |response, operation|
+      client.create_tag(::Google::Cloud::DataCatalog::V1::CreateTagRequest.new(parent: parent, tag: tag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1387,7 +1387,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_tag ::Google::Cloud::DataCatalog::V1::UpdateTagRequest.new(tag: tag, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_tag(::Google::Cloud::DataCatalog::V1::UpdateTagRequest.new(tag: tag, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1445,7 +1445,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_tag ::Google::Cloud::DataCatalog::V1::DeleteTagRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_tag(::Google::Cloud::DataCatalog::V1::DeleteTagRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1511,7 +1511,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_tags ::Google::Cloud::DataCatalog::V1::ListTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_tags(::Google::Cloud::DataCatalog::V1::ListTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1572,7 +1572,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
+      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1632,7 +1632,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
+      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1692,7 +1692,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
+      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
