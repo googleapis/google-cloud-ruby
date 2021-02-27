@@ -95,7 +95,7 @@ class ::Google::Cloud::Debugger::V2::Controller::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.register_debuggee ::Google::Cloud::Debugger::V2::RegisterDebuggeeRequest.new(debuggee: debuggee), grpc_options do |response, operation|
+      client.register_debuggee(::Google::Cloud::Debugger::V2::RegisterDebuggeeRequest.new(debuggee: debuggee), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -157,7 +157,7 @@ class ::Google::Cloud::Debugger::V2::Controller::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_active_breakpoints ::Google::Cloud::Debugger::V2::ListActiveBreakpointsRequest.new(debuggee_id: debuggee_id, wait_token: wait_token, success_on_timeout: success_on_timeout), grpc_options do |response, operation|
+      client.list_active_breakpoints(::Google::Cloud::Debugger::V2::ListActiveBreakpointsRequest.new(debuggee_id: debuggee_id, wait_token: wait_token, success_on_timeout: success_on_timeout), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,7 +217,7 @@ class ::Google::Cloud::Debugger::V2::Controller::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_active_breakpoint ::Google::Cloud::Debugger::V2::UpdateActiveBreakpointRequest.new(debuggee_id: debuggee_id, breakpoint: breakpoint), grpc_options do |response, operation|
+      client.update_active_breakpoint(::Google::Cloud::Debugger::V2::UpdateActiveBreakpointRequest.new(debuggee_id: debuggee_id, breakpoint: breakpoint), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
