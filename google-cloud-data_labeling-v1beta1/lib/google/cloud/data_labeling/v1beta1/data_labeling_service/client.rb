@@ -60,7 +60,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -70,25 +70,25 @@ module Google
                 default_config.rpcs.get_dataset.timeout = 30.0
                 default_config.rpcs.get_dataset.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_datasets.timeout = 30.0
                 default_config.rpcs.list_datasets.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_dataset.timeout = 30.0
                 default_config.rpcs.delete_dataset.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.import_data.timeout = 30.0
@@ -96,41 +96,41 @@ module Google
                 default_config.rpcs.export_data.timeout = 30.0
                 default_config.rpcs.export_data.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_data_item.timeout = 30.0
                 default_config.rpcs.get_data_item.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_data_items.timeout = 30.0
                 default_config.rpcs.list_data_items.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_annotated_dataset.timeout = 30.0
                 default_config.rpcs.get_annotated_dataset.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_annotated_datasets.timeout = 30.0
                 default_config.rpcs.list_annotated_datasets.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.label_image.timeout = 30.0
@@ -142,17 +142,17 @@ module Google
                 default_config.rpcs.get_example.timeout = 30.0
                 default_config.rpcs.get_example.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_examples.timeout = 30.0
                 default_config.rpcs.list_examples.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_annotation_spec_set.timeout = 30.0
@@ -160,25 +160,25 @@ module Google
                 default_config.rpcs.get_annotation_spec_set.timeout = 30.0
                 default_config.rpcs.get_annotation_spec_set.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_annotation_spec_sets.timeout = 30.0
                 default_config.rpcs.list_annotation_spec_sets.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_annotation_spec_set.timeout = 30.0
                 default_config.rpcs.delete_annotation_spec_set.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_instruction.timeout = 30.0
@@ -186,41 +186,41 @@ module Google
                 default_config.rpcs.get_instruction.timeout = 30.0
                 default_config.rpcs.get_instruction.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_instructions.timeout = 30.0
                 default_config.rpcs.list_instructions.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_instruction.timeout = 30.0
                 default_config.rpcs.delete_instruction.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_evaluation.timeout = 30.0
                 default_config.rpcs.get_evaluation.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_evaluations.timeout = 30.0
                 default_config.rpcs.search_evaluations.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_example_comparisons.timeout = 30.0
@@ -232,9 +232,9 @@ module Google
                 default_config.rpcs.get_evaluation_job.timeout = 30.0
                 default_config.rpcs.get_evaluation_job.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.pause_evaluation_job.timeout = 30.0
@@ -244,17 +244,17 @@ module Google
                 default_config.rpcs.delete_evaluation_job.timeout = 30.0
                 default_config.rpcs.delete_evaluation_job.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_evaluation_jobs.timeout = 30.0
                 default_config.rpcs.list_evaluation_jobs.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config
@@ -323,7 +323,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -3002,7 +3002,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -3023,7 +3023,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -3219,73 +3219,73 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  create_dataset_config = parent_rpcs&.create_dataset if parent_rpcs&.respond_to? :create_dataset
+                  create_dataset_config = parent_rpcs.create_dataset if parent_rpcs.respond_to? :create_dataset
                   @create_dataset = ::Gapic::Config::Method.new create_dataset_config
-                  get_dataset_config = parent_rpcs&.get_dataset if parent_rpcs&.respond_to? :get_dataset
+                  get_dataset_config = parent_rpcs.get_dataset if parent_rpcs.respond_to? :get_dataset
                   @get_dataset = ::Gapic::Config::Method.new get_dataset_config
-                  list_datasets_config = parent_rpcs&.list_datasets if parent_rpcs&.respond_to? :list_datasets
+                  list_datasets_config = parent_rpcs.list_datasets if parent_rpcs.respond_to? :list_datasets
                   @list_datasets = ::Gapic::Config::Method.new list_datasets_config
-                  delete_dataset_config = parent_rpcs&.delete_dataset if parent_rpcs&.respond_to? :delete_dataset
+                  delete_dataset_config = parent_rpcs.delete_dataset if parent_rpcs.respond_to? :delete_dataset
                   @delete_dataset = ::Gapic::Config::Method.new delete_dataset_config
-                  import_data_config = parent_rpcs&.import_data if parent_rpcs&.respond_to? :import_data
+                  import_data_config = parent_rpcs.import_data if parent_rpcs.respond_to? :import_data
                   @import_data = ::Gapic::Config::Method.new import_data_config
-                  export_data_config = parent_rpcs&.export_data if parent_rpcs&.respond_to? :export_data
+                  export_data_config = parent_rpcs.export_data if parent_rpcs.respond_to? :export_data
                   @export_data = ::Gapic::Config::Method.new export_data_config
-                  get_data_item_config = parent_rpcs&.get_data_item if parent_rpcs&.respond_to? :get_data_item
+                  get_data_item_config = parent_rpcs.get_data_item if parent_rpcs.respond_to? :get_data_item
                   @get_data_item = ::Gapic::Config::Method.new get_data_item_config
-                  list_data_items_config = parent_rpcs&.list_data_items if parent_rpcs&.respond_to? :list_data_items
+                  list_data_items_config = parent_rpcs.list_data_items if parent_rpcs.respond_to? :list_data_items
                   @list_data_items = ::Gapic::Config::Method.new list_data_items_config
-                  get_annotated_dataset_config = parent_rpcs&.get_annotated_dataset if parent_rpcs&.respond_to? :get_annotated_dataset
+                  get_annotated_dataset_config = parent_rpcs.get_annotated_dataset if parent_rpcs.respond_to? :get_annotated_dataset
                   @get_annotated_dataset = ::Gapic::Config::Method.new get_annotated_dataset_config
-                  list_annotated_datasets_config = parent_rpcs&.list_annotated_datasets if parent_rpcs&.respond_to? :list_annotated_datasets
+                  list_annotated_datasets_config = parent_rpcs.list_annotated_datasets if parent_rpcs.respond_to? :list_annotated_datasets
                   @list_annotated_datasets = ::Gapic::Config::Method.new list_annotated_datasets_config
-                  delete_annotated_dataset_config = parent_rpcs&.delete_annotated_dataset if parent_rpcs&.respond_to? :delete_annotated_dataset
+                  delete_annotated_dataset_config = parent_rpcs.delete_annotated_dataset if parent_rpcs.respond_to? :delete_annotated_dataset
                   @delete_annotated_dataset = ::Gapic::Config::Method.new delete_annotated_dataset_config
-                  label_image_config = parent_rpcs&.label_image if parent_rpcs&.respond_to? :label_image
+                  label_image_config = parent_rpcs.label_image if parent_rpcs.respond_to? :label_image
                   @label_image = ::Gapic::Config::Method.new label_image_config
-                  label_video_config = parent_rpcs&.label_video if parent_rpcs&.respond_to? :label_video
+                  label_video_config = parent_rpcs.label_video if parent_rpcs.respond_to? :label_video
                   @label_video = ::Gapic::Config::Method.new label_video_config
-                  label_text_config = parent_rpcs&.label_text if parent_rpcs&.respond_to? :label_text
+                  label_text_config = parent_rpcs.label_text if parent_rpcs.respond_to? :label_text
                   @label_text = ::Gapic::Config::Method.new label_text_config
-                  get_example_config = parent_rpcs&.get_example if parent_rpcs&.respond_to? :get_example
+                  get_example_config = parent_rpcs.get_example if parent_rpcs.respond_to? :get_example
                   @get_example = ::Gapic::Config::Method.new get_example_config
-                  list_examples_config = parent_rpcs&.list_examples if parent_rpcs&.respond_to? :list_examples
+                  list_examples_config = parent_rpcs.list_examples if parent_rpcs.respond_to? :list_examples
                   @list_examples = ::Gapic::Config::Method.new list_examples_config
-                  create_annotation_spec_set_config = parent_rpcs&.create_annotation_spec_set if parent_rpcs&.respond_to? :create_annotation_spec_set
+                  create_annotation_spec_set_config = parent_rpcs.create_annotation_spec_set if parent_rpcs.respond_to? :create_annotation_spec_set
                   @create_annotation_spec_set = ::Gapic::Config::Method.new create_annotation_spec_set_config
-                  get_annotation_spec_set_config = parent_rpcs&.get_annotation_spec_set if parent_rpcs&.respond_to? :get_annotation_spec_set
+                  get_annotation_spec_set_config = parent_rpcs.get_annotation_spec_set if parent_rpcs.respond_to? :get_annotation_spec_set
                   @get_annotation_spec_set = ::Gapic::Config::Method.new get_annotation_spec_set_config
-                  list_annotation_spec_sets_config = parent_rpcs&.list_annotation_spec_sets if parent_rpcs&.respond_to? :list_annotation_spec_sets
+                  list_annotation_spec_sets_config = parent_rpcs.list_annotation_spec_sets if parent_rpcs.respond_to? :list_annotation_spec_sets
                   @list_annotation_spec_sets = ::Gapic::Config::Method.new list_annotation_spec_sets_config
-                  delete_annotation_spec_set_config = parent_rpcs&.delete_annotation_spec_set if parent_rpcs&.respond_to? :delete_annotation_spec_set
+                  delete_annotation_spec_set_config = parent_rpcs.delete_annotation_spec_set if parent_rpcs.respond_to? :delete_annotation_spec_set
                   @delete_annotation_spec_set = ::Gapic::Config::Method.new delete_annotation_spec_set_config
-                  create_instruction_config = parent_rpcs&.create_instruction if parent_rpcs&.respond_to? :create_instruction
+                  create_instruction_config = parent_rpcs.create_instruction if parent_rpcs.respond_to? :create_instruction
                   @create_instruction = ::Gapic::Config::Method.new create_instruction_config
-                  get_instruction_config = parent_rpcs&.get_instruction if parent_rpcs&.respond_to? :get_instruction
+                  get_instruction_config = parent_rpcs.get_instruction if parent_rpcs.respond_to? :get_instruction
                   @get_instruction = ::Gapic::Config::Method.new get_instruction_config
-                  list_instructions_config = parent_rpcs&.list_instructions if parent_rpcs&.respond_to? :list_instructions
+                  list_instructions_config = parent_rpcs.list_instructions if parent_rpcs.respond_to? :list_instructions
                   @list_instructions = ::Gapic::Config::Method.new list_instructions_config
-                  delete_instruction_config = parent_rpcs&.delete_instruction if parent_rpcs&.respond_to? :delete_instruction
+                  delete_instruction_config = parent_rpcs.delete_instruction if parent_rpcs.respond_to? :delete_instruction
                   @delete_instruction = ::Gapic::Config::Method.new delete_instruction_config
-                  get_evaluation_config = parent_rpcs&.get_evaluation if parent_rpcs&.respond_to? :get_evaluation
+                  get_evaluation_config = parent_rpcs.get_evaluation if parent_rpcs.respond_to? :get_evaluation
                   @get_evaluation = ::Gapic::Config::Method.new get_evaluation_config
-                  search_evaluations_config = parent_rpcs&.search_evaluations if parent_rpcs&.respond_to? :search_evaluations
+                  search_evaluations_config = parent_rpcs.search_evaluations if parent_rpcs.respond_to? :search_evaluations
                   @search_evaluations = ::Gapic::Config::Method.new search_evaluations_config
-                  search_example_comparisons_config = parent_rpcs&.search_example_comparisons if parent_rpcs&.respond_to? :search_example_comparisons
+                  search_example_comparisons_config = parent_rpcs.search_example_comparisons if parent_rpcs.respond_to? :search_example_comparisons
                   @search_example_comparisons = ::Gapic::Config::Method.new search_example_comparisons_config
-                  create_evaluation_job_config = parent_rpcs&.create_evaluation_job if parent_rpcs&.respond_to? :create_evaluation_job
+                  create_evaluation_job_config = parent_rpcs.create_evaluation_job if parent_rpcs.respond_to? :create_evaluation_job
                   @create_evaluation_job = ::Gapic::Config::Method.new create_evaluation_job_config
-                  update_evaluation_job_config = parent_rpcs&.update_evaluation_job if parent_rpcs&.respond_to? :update_evaluation_job
+                  update_evaluation_job_config = parent_rpcs.update_evaluation_job if parent_rpcs.respond_to? :update_evaluation_job
                   @update_evaluation_job = ::Gapic::Config::Method.new update_evaluation_job_config
-                  get_evaluation_job_config = parent_rpcs&.get_evaluation_job if parent_rpcs&.respond_to? :get_evaluation_job
+                  get_evaluation_job_config = parent_rpcs.get_evaluation_job if parent_rpcs.respond_to? :get_evaluation_job
                   @get_evaluation_job = ::Gapic::Config::Method.new get_evaluation_job_config
-                  pause_evaluation_job_config = parent_rpcs&.pause_evaluation_job if parent_rpcs&.respond_to? :pause_evaluation_job
+                  pause_evaluation_job_config = parent_rpcs.pause_evaluation_job if parent_rpcs.respond_to? :pause_evaluation_job
                   @pause_evaluation_job = ::Gapic::Config::Method.new pause_evaluation_job_config
-                  resume_evaluation_job_config = parent_rpcs&.resume_evaluation_job if parent_rpcs&.respond_to? :resume_evaluation_job
+                  resume_evaluation_job_config = parent_rpcs.resume_evaluation_job if parent_rpcs.respond_to? :resume_evaluation_job
                   @resume_evaluation_job = ::Gapic::Config::Method.new resume_evaluation_job_config
-                  delete_evaluation_job_config = parent_rpcs&.delete_evaluation_job if parent_rpcs&.respond_to? :delete_evaluation_job
+                  delete_evaluation_job_config = parent_rpcs.delete_evaluation_job if parent_rpcs.respond_to? :delete_evaluation_job
                   @delete_evaluation_job = ::Gapic::Config::Method.new delete_evaluation_job_config
-                  list_evaluation_jobs_config = parent_rpcs&.list_evaluation_jobs if parent_rpcs&.respond_to? :list_evaluation_jobs
+                  list_evaluation_jobs_config = parent_rpcs.list_evaluation_jobs if parent_rpcs.respond_to? :list_evaluation_jobs
                   @list_evaluation_jobs = ::Gapic::Config::Method.new list_evaluation_jobs_config
 
                   yield self if block_given?
