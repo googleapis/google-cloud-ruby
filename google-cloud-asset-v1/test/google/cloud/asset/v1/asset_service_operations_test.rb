@@ -105,7 +105,7 @@ class ::Google::Cloud::Asset::V1::AssetService::OperationsTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_operations ::Google::Longrunning::ListOperationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_operations(::Google::Longrunning::ListOperationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -168,7 +168,7 @@ class ::Google::Cloud::Asset::V1::AssetService::OperationsTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_operation ::Google::Longrunning::GetOperationRequest.new(name: name), grpc_options do |response, operation|
+      client.get_operation(::Google::Longrunning::GetOperationRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -227,7 +227,7 @@ class ::Google::Cloud::Asset::V1::AssetService::OperationsTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_operation ::Google::Longrunning::DeleteOperationRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_operation(::Google::Longrunning::DeleteOperationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -285,7 +285,7 @@ class ::Google::Cloud::Asset::V1::AssetService::OperationsTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.cancel_operation ::Google::Longrunning::CancelOperationRequest.new(name: name), grpc_options do |response, operation|
+      client.cancel_operation(::Google::Longrunning::CancelOperationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -349,7 +349,7 @@ class ::Google::Cloud::Asset::V1::AssetService::OperationsTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.wait_operation ::Google::Longrunning::WaitOperationRequest.new(name: name, timeout: timeout), grpc_options do |response, operation|
+      client.wait_operation(::Google::Longrunning::WaitOperationRequest.new(name: name, timeout: timeout), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
