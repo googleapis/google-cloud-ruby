@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-security-private_ca.rb"
-
-Style/AsciiComments:
-  Enabled: false
