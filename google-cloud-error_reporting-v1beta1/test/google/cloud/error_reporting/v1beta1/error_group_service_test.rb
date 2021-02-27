@@ -95,7 +95,7 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_group ::Google::Cloud::ErrorReporting::V1beta1::GetGroupRequest.new(group_name: group_name), grpc_options do |response, operation|
+      client.get_group(::Google::Cloud::ErrorReporting::V1beta1::GetGroupRequest.new(group_name: group_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -153,7 +153,7 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.update_group ::Google::Cloud::ErrorReporting::V1beta1::UpdateGroupRequest.new(group: group), grpc_options do |response, operation|
+      client.update_group(::Google::Cloud::ErrorReporting::V1beta1::UpdateGroupRequest.new(group: group), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

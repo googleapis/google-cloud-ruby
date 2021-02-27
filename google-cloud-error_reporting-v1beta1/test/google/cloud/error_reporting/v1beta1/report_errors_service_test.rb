@@ -97,7 +97,7 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.report_error_event ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventRequest.new(project_name: project_name, event: event), grpc_options do |response, operation|
+      client.report_error_event(::Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventRequest.new(project_name: project_name, event: event), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
