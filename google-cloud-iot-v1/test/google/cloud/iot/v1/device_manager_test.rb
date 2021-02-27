@@ -97,7 +97,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_device_registry ::Google::Cloud::Iot::V1::CreateDeviceRegistryRequest.new(parent: parent, device_registry: device_registry), grpc_options do |response, operation|
+      client.create_device_registry(::Google::Cloud::Iot::V1::CreateDeviceRegistryRequest.new(parent: parent, device_registry: device_registry), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -155,7 +155,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_device_registry ::Google::Cloud::Iot::V1::GetDeviceRegistryRequest.new(name: name), grpc_options do |response, operation|
+      client.get_device_registry(::Google::Cloud::Iot::V1::GetDeviceRegistryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,7 +215,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_device_registry ::Google::Cloud::Iot::V1::UpdateDeviceRegistryRequest.new(device_registry: device_registry, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_device_registry(::Google::Cloud::Iot::V1::UpdateDeviceRegistryRequest.new(device_registry: device_registry, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -273,7 +273,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_device_registry ::Google::Cloud::Iot::V1::DeleteDeviceRegistryRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_device_registry(::Google::Cloud::Iot::V1::DeleteDeviceRegistryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -339,7 +339,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_device_registries ::Google::Cloud::Iot::V1::ListDeviceRegistriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_device_registries(::Google::Cloud::Iot::V1::ListDeviceRegistriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -400,7 +400,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_device ::Google::Cloud::Iot::V1::CreateDeviceRequest.new(parent: parent, device: device), grpc_options do |response, operation|
+      client.create_device(::Google::Cloud::Iot::V1::CreateDeviceRequest.new(parent: parent, device: device), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -460,7 +460,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_device ::Google::Cloud::Iot::V1::GetDeviceRequest.new(name: name, field_mask: field_mask), grpc_options do |response, operation|
+      client.get_device(::Google::Cloud::Iot::V1::GetDeviceRequest.new(name: name, field_mask: field_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -520,7 +520,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_device ::Google::Cloud::Iot::V1::UpdateDeviceRequest.new(device: device, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_device(::Google::Cloud::Iot::V1::UpdateDeviceRequest.new(device: device, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -578,7 +578,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_device ::Google::Cloud::Iot::V1::DeleteDeviceRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_device(::Google::Cloud::Iot::V1::DeleteDeviceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -652,7 +652,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_devices ::Google::Cloud::Iot::V1::ListDevicesRequest.new(parent: parent, device_num_ids: device_num_ids, device_ids: device_ids, field_mask: field_mask, gateway_list_options: gateway_list_options, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_devices(::Google::Cloud::Iot::V1::ListDevicesRequest.new(parent: parent, device_num_ids: device_num_ids, device_ids: device_ids, field_mask: field_mask, gateway_list_options: gateway_list_options, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -715,7 +715,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.modify_cloud_to_device_config ::Google::Cloud::Iot::V1::ModifyCloudToDeviceConfigRequest.new(name: name, version_to_update: version_to_update, binary_data: binary_data), grpc_options do |response, operation|
+      client.modify_cloud_to_device_config(::Google::Cloud::Iot::V1::ModifyCloudToDeviceConfigRequest.new(name: name, version_to_update: version_to_update, binary_data: binary_data), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -775,7 +775,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_device_config_versions ::Google::Cloud::Iot::V1::ListDeviceConfigVersionsRequest.new(name: name, num_versions: num_versions), grpc_options do |response, operation|
+      client.list_device_config_versions(::Google::Cloud::Iot::V1::ListDeviceConfigVersionsRequest.new(name: name, num_versions: num_versions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -835,7 +835,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_device_states ::Google::Cloud::Iot::V1::ListDeviceStatesRequest.new(name: name, num_states: num_states), grpc_options do |response, operation|
+      client.list_device_states(::Google::Cloud::Iot::V1::ListDeviceStatesRequest.new(name: name, num_states: num_states), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -895,7 +895,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
+      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -955,7 +955,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
+      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1015,7 +1015,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
+      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1077,7 +1077,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.send_command_to_device ::Google::Cloud::Iot::V1::SendCommandToDeviceRequest.new(name: name, binary_data: binary_data, subfolder: subfolder), grpc_options do |response, operation|
+      client.send_command_to_device(::Google::Cloud::Iot::V1::SendCommandToDeviceRequest.new(name: name, binary_data: binary_data, subfolder: subfolder), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1139,7 +1139,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.bind_device_to_gateway ::Google::Cloud::Iot::V1::BindDeviceToGatewayRequest.new(parent: parent, gateway_id: gateway_id, device_id: device_id), grpc_options do |response, operation|
+      client.bind_device_to_gateway(::Google::Cloud::Iot::V1::BindDeviceToGatewayRequest.new(parent: parent, gateway_id: gateway_id, device_id: device_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1201,7 +1201,7 @@ class ::Google::Cloud::Iot::V1::DeviceManager::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.unbind_device_from_gateway ::Google::Cloud::Iot::V1::UnbindDeviceFromGatewayRequest.new(parent: parent, gateway_id: gateway_id, device_id: device_id), grpc_options do |response, operation|
+      client.unbind_device_from_gateway(::Google::Cloud::Iot::V1::UnbindDeviceFromGatewayRequest.new(parent: parent, gateway_id: gateway_id, device_id: device_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
