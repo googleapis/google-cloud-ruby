@@ -99,7 +99,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.lookup ::Google::Cloud::Datastore::V1::LookupRequest.new(project_id: project_id, read_options: read_options, keys: keys), grpc_options do |response, operation|
+      client.lookup(::Google::Cloud::Datastore::V1::LookupRequest.new(project_id: project_id, read_options: read_options, keys: keys), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -164,7 +164,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.run_query ::Google::Cloud::Datastore::V1::RunQueryRequest.new(project_id: project_id, partition_id: partition_id, read_options: read_options, query: query), grpc_options do |response, operation|
+      client.run_query(::Google::Cloud::Datastore::V1::RunQueryRequest.new(project_id: project_id, partition_id: partition_id, read_options: read_options, query: query), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -224,7 +224,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.begin_transaction ::Google::Cloud::Datastore::V1::BeginTransactionRequest.new(project_id: project_id, transaction_options: transaction_options), grpc_options do |response, operation|
+      client.begin_transaction(::Google::Cloud::Datastore::V1::BeginTransactionRequest.new(project_id: project_id, transaction_options: transaction_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -289,7 +289,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.commit ::Google::Cloud::Datastore::V1::CommitRequest.new(project_id: project_id, mode: mode, transaction: transaction, mutations: mutations), grpc_options do |response, operation|
+      client.commit(::Google::Cloud::Datastore::V1::CommitRequest.new(project_id: project_id, mode: mode, transaction: transaction, mutations: mutations), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -349,7 +349,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.rollback ::Google::Cloud::Datastore::V1::RollbackRequest.new(project_id: project_id, transaction: transaction), grpc_options do |response, operation|
+      client.rollback(::Google::Cloud::Datastore::V1::RollbackRequest.new(project_id: project_id, transaction: transaction), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -409,7 +409,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.allocate_ids ::Google::Cloud::Datastore::V1::AllocateIdsRequest.new(project_id: project_id, keys: keys), grpc_options do |response, operation|
+      client.allocate_ids(::Google::Cloud::Datastore::V1::AllocateIdsRequest.new(project_id: project_id, keys: keys), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -471,7 +471,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.reserve_ids ::Google::Cloud::Datastore::V1::ReserveIdsRequest.new(project_id: project_id, database_id: database_id, keys: keys), grpc_options do |response, operation|
+      client.reserve_ids(::Google::Cloud::Datastore::V1::ReserveIdsRequest.new(project_id: project_id, database_id: database_id, keys: keys), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
