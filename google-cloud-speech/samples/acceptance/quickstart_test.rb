@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../quickstart.rb"
+require_relative "../quickstart"
 
 describe "Speech Quickstart" do
   parallelize_me!

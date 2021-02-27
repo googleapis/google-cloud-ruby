@@ -13,12 +13,12 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../storage_activate_hmac_key.rb"
-require_relative "../storage_create_hmac_key.rb"
-require_relative "../storage_deactivate_hmac_key.rb"
-require_relative "../storage_delete_hmac_key.rb"
-require_relative "../storage_get_hmac_key.rb"
-require_relative "../storage_list_hmac_keys.rb"
+require_relative "../storage_activate_hmac_key"
+require_relative "../storage_create_hmac_key"
+require_relative "../storage_deactivate_hmac_key"
+require_relative "../storage_delete_hmac_key"
+require_relative "../storage_get_hmac_key"
+require_relative "../storage_list_hmac_keys"
 
 # HMAC key tests are mocked due to the very limited quota of keys per project.
 describe "HMAC Snippets" do

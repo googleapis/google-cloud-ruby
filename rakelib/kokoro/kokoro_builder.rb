@@ -1,6 +1,6 @@
 require "erb"
 
-require_relative "command.rb"
+require_relative "command"
 
 class KokoroBuilder < Command
   attr_reader :ruby_versions, :gems

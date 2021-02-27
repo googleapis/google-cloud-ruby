@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../data_model.rb"
+require_relative "../data_model"
 
 describe "Google Cloud Firestore API samples - Data Model" do
   before :all do

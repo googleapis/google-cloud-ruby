@@ -13,8 +13,8 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../delete_data.rb"
-require_relative "../get_data.rb"
+require_relative "../delete_data"
+require_relative "../get_data"
 
 describe "Google Cloud Firestore API samples - Delete Data" do
   before do

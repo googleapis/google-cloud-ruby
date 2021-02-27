@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "helper.rb"
-require_relative "../../../../conformance/v2/proto/google/cloud/conformance/bigtable/v2/tests_pb.rb"
+require "helper"
+require_relative "../../../../conformance/v2/proto/google/cloud/conformance/bigtable/v2/tests_pb"
 
 ##
 # This suite of unit tests is dynamically generated from the contents of

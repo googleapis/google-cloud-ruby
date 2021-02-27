@@ -58,16 +58,14 @@ end
 
 def retry_resource_exhaustion
   5.times do
-    begin
-      yield
-      return
-    rescue Google::Cloud::ResourceExhaustedError => e
-      puts "\n#{e} Gonna try again"
-      sleep rand(1..3)
-    rescue StandardError => e
-      puts "\n#{e}"
-      return
-    end
+    yield
+    return
+  rescue Google::Cloud::ResourceExhaustedError => e
+    puts "\n#{e} Gonna try again"
+    sleep rand(1..3)
+  rescue StandardError => e
+    puts "\n#{e}"
+    return
   end
   raise Google::Cloud::ResourceExhaustedError, "Maybe take a break from creating and deleting buckets for a bit"
 end

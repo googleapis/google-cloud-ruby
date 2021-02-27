@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative "helper.rb"
-require_relative "../get_data.rb"
-require_relative "../paginate_data.rb"
+require_relative "helper"
+require_relative "../get_data"
+require_relative "../paginate_data"
 
 describe "Google Cloud Firestore API samples - Paginate Data" do
   before :all do

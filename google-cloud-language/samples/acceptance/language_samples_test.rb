@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../language_samples.rb"
+require_relative "../language_samples"
 
 describe "Language Snippets" do
   parallelize_me!

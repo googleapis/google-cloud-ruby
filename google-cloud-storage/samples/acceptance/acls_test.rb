@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../acls.rb"
+require_relative "../acls"
 
 describe "ACL Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
