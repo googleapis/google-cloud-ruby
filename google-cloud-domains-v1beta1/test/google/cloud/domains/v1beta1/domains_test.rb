@@ -97,7 +97,7 @@ class ::Google::Cloud::Domains::V1beta1::Domains::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.search_domains ::Google::Cloud::Domains::V1beta1::SearchDomainsRequest.new(query: query, location: location), grpc_options do |response, operation|
+      client.search_domains(::Google::Cloud::Domains::V1beta1::SearchDomainsRequest.new(query: query, location: location), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -157,7 +157,7 @@ class ::Google::Cloud::Domains::V1beta1::Domains::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.retrieve_register_parameters ::Google::Cloud::Domains::V1beta1::RetrieveRegisterParametersRequest.new(domain_name: domain_name, location: location), grpc_options do |response, operation|
+      client.retrieve_register_parameters(::Google::Cloud::Domains::V1beta1::RetrieveRegisterParametersRequest.new(domain_name: domain_name, location: location), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -229,7 +229,7 @@ class ::Google::Cloud::Domains::V1beta1::Domains::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.register_domain ::Google::Cloud::Domains::V1beta1::RegisterDomainRequest.new(parent: parent, registration: registration, domain_notices: domain_notices, contact_notices: contact_notices, yearly_price: yearly_price, validate_only: validate_only), grpc_options do |response, operation|
+      client.register_domain(::Google::Cloud::Domains::V1beta1::RegisterDomainRequest.new(parent: parent, registration: registration, domain_notices: domain_notices, contact_notices: contact_notices, yearly_price: yearly_price, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -298,7 +298,7 @@ class ::Google::Cloud::Domains::V1beta1::Domains::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_registrations ::Google::Cloud::Domains::V1beta1::ListRegistrationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options do |response, operation|
+      client.list_registrations(::Google::Cloud::Domains::V1beta1::ListRegistrationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -357,7 +357,7 @@ class ::Google::Cloud::Domains::V1beta1::Domains::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_registration ::Google::Cloud::Domains::V1beta1::GetRegistrationRequest.new(name: name), grpc_options do |response, operation|
+      client.get_registration(::Google::Cloud::Domains::V1beta1::GetRegistrationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -421,7 +421,7 @@ class ::Google::Cloud::Domains::V1beta1::Domains::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_registration ::Google::Cloud::Domains::V1beta1::UpdateRegistrationRequest.new(registration: registration, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_registration(::Google::Cloud::Domains::V1beta1::UpdateRegistrationRequest.new(registration: registration, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -488,7 +488,7 @@ class ::Google::Cloud::Domains::V1beta1::Domains::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.configure_management_settings ::Google::Cloud::Domains::V1beta1::ConfigureManagementSettingsRequest.new(registration: registration, management_settings: management_settings, update_mask: update_mask), grpc_options do |response, operation|
+      client.configure_management_settings(::Google::Cloud::Domains::V1beta1::ConfigureManagementSettingsRequest.new(registration: registration, management_settings: management_settings, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -557,7 +557,7 @@ class ::Google::Cloud::Domains::V1beta1::Domains::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.configure_dns_settings ::Google::Cloud::Domains::V1beta1::ConfigureDnsSettingsRequest.new(registration: registration, dns_settings: dns_settings, update_mask: update_mask, validate_only: validate_only), grpc_options do |response, operation|
+      client.configure_dns_settings(::Google::Cloud::Domains::V1beta1::ConfigureDnsSettingsRequest.new(registration: registration, dns_settings: dns_settings, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -628,7 +628,7 @@ class ::Google::Cloud::Domains::V1beta1::Domains::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.configure_contact_settings ::Google::Cloud::Domains::V1beta1::ConfigureContactSettingsRequest.new(registration: registration, contact_settings: contact_settings, update_mask: update_mask, contact_notices: contact_notices, validate_only: validate_only), grpc_options do |response, operation|
+      client.configure_contact_settings(::Google::Cloud::Domains::V1beta1::ConfigureContactSettingsRequest.new(registration: registration, contact_settings: contact_settings, update_mask: update_mask, contact_notices: contact_notices, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -691,7 +691,7 @@ class ::Google::Cloud::Domains::V1beta1::Domains::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.export_registration ::Google::Cloud::Domains::V1beta1::ExportRegistrationRequest.new(name: name), grpc_options do |response, operation|
+      client.export_registration(::Google::Cloud::Domains::V1beta1::ExportRegistrationRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -754,7 +754,7 @@ class ::Google::Cloud::Domains::V1beta1::Domains::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_registration ::Google::Cloud::Domains::V1beta1::DeleteRegistrationRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_registration(::Google::Cloud::Domains::V1beta1::DeleteRegistrationRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -813,7 +813,7 @@ class ::Google::Cloud::Domains::V1beta1::Domains::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.retrieve_authorization_code ::Google::Cloud::Domains::V1beta1::RetrieveAuthorizationCodeRequest.new(registration: registration), grpc_options do |response, operation|
+      client.retrieve_authorization_code(::Google::Cloud::Domains::V1beta1::RetrieveAuthorizationCodeRequest.new(registration: registration), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -871,7 +871,7 @@ class ::Google::Cloud::Domains::V1beta1::Domains::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.reset_authorization_code ::Google::Cloud::Domains::V1beta1::ResetAuthorizationCodeRequest.new(registration: registration), grpc_options do |response, operation|
+      client.reset_authorization_code(::Google::Cloud::Domains::V1beta1::ResetAuthorizationCodeRequest.new(registration: registration), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
