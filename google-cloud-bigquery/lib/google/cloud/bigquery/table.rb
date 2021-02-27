@@ -1358,7 +1358,7 @@ module Google
         end
 
         ##
-        # The maximum frequency at which the materialized view will be refreshed.
+        # The maximum frequency in milliseconds at which the materialized view will be refreshed.
         # The default value is `1800000` (30 minutes). See {#materialized_view?}.
         #
         # @return [Integer, nil] The maximum frequency in milliseconds;

@@ -74,7 +74,7 @@ describe Google::Cloud::Bigquery::Table, :materialized_view, :bigquery do
     materialized_view = dataset.create_materialized_view materialized_view_id,
                                                          sum_query,
                                                          enable_refresh: false,
-                                                         refresh_interval_ms: 3600000
+                                                         refresh_interval_ms: 3_600_000
 
     _(materialized_view).must_be_kind_of  Google::Cloud::Bigquery::Table
     _(materialized_view.id).must_equal "#{bigquery.project}:#{dataset.dataset_id}.#{materialized_view.table_id}"
@@ -99,17 +99,17 @@ describe Google::Cloud::Bigquery::Table, :materialized_view, :bigquery do
     _(materialized_view.enable_refresh?).must_equal false
     _(materialized_view.last_refresh_time).must_be :nil?
     _(materialized_view.query).must_equal sum_query
-    _(materialized_view.refresh_interval_ms).must_equal 3600000
+    _(materialized_view.refresh_interval_ms).must_equal 3_600_000
     
     # update
 
     materialized_view.enable_refresh = true
-    materialized_view.refresh_interval_ms = 1800000
+    materialized_view.refresh_interval_ms = 1_800_000
 
     materialized_view.reload!
     _(materialized_view.table_id).must_equal materialized_view_id
     _(materialized_view.enable_refresh?).must_equal true
-    _(materialized_view.refresh_interval_ms).must_equal 1800000
+    _(materialized_view.refresh_interval_ms).must_equal 1_800_000
 
     # delete
     materialized_view.delete

@@ -157,14 +157,14 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
       materialized_view: Google::Apis::BigqueryV2::MaterializedViewDefinition.new(
         enable_refresh: false,
         query: query,
-        refresh_interval_ms: 3600000
+        refresh_interval_ms: 3_600_000
       )
     )
     return_view = create_materialized_view_gapi view_id, insert_view.materialized_view
     mock.expect :insert_table, return_view, [project, dataset_id, insert_view]
     dataset.service.mocked_service = mock
 
-    table = dataset.create_materialized_view view_id, query, enable_refresh: false, refresh_interval_ms: 3600000
+    table = dataset.create_materialized_view view_id, query, enable_refresh: false, refresh_interval_ms: 3_600_000
 
     mock.verify
 

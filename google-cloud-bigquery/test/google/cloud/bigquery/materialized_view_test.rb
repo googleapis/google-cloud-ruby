@@ -39,7 +39,7 @@ describe Google::Cloud::Bigquery::Table, :materialized_view, :mock_bigquery do
     _(materialized_view.enable_refresh?).must_equal true
     _(materialized_view.last_refresh_time).must_be_close_to ::Time.now, 1
     _(materialized_view.query).must_equal query
-    _(materialized_view.refresh_interval_ms).must_equal 3600000
+    _(materialized_view.refresh_interval_ms).must_equal 3_600_000
   end
 
   it "updates enable_refresh" do
@@ -65,7 +65,7 @@ describe Google::Cloud::Bigquery::Table, :materialized_view, :mock_bigquery do
   end
 
   it "updates refresh_interval_ms" do
-    new_refresh_interval_ms = 7200000
+    new_refresh_interval_ms = 7_200_000
     mock = Minitest::Mock.new
     returned_table_gapi = materialized_view_gapi.dup
     returned_table_gapi.materialized_view.refresh_interval_ms = new_refresh_interval_ms

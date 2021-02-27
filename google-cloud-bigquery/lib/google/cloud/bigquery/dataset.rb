@@ -733,8 +733,8 @@ module Google
         # @param [String] description A user-friendly description of the table.
         # @param [Boolean] enable_refresh Enable automatic refresh of the materialized view when the base table is
         #   updated. Optional. The default value is true.
-        # @param [Integer] refresh_interval_ms The maximum frequency at which this materialized view will be
-        #   refreshed. Optional. The default value is `1800000` (30 minutes).
+        # @param [Integer] refresh_interval_ms The maximum frequency in milliseconds at which this materialized view
+        #   will be refreshed. Optional. The default value is `1_800_000` (30 minutes).
         #
         # @return [Google::Cloud::Bigquery::Table] A new table object.
         #

@@ -376,7 +376,7 @@ class MockBigquery < Minitest::Spec
         "enableRefresh" => true,
         "lastRefreshTime" => time_millis,
         "query" => "SELECT name, age, score, active FROM `external.publicdata.users`",
-        "refreshIntervalMs" => 3600000
+        "refreshIntervalMs" => 3_600_000
       },
       "location" => "US"
     })
@@ -870,7 +870,7 @@ class MockBigquery < Minitest::Spec
       dry_run: nil,
       max_results: nil,
       query: "SELECT * FROM `some_project.some_dataset.users`",
-      timeout_ms: 10000,
+      timeout_ms: 10_000,
       use_query_cache: true,
       use_legacy_sql: false,
     )
