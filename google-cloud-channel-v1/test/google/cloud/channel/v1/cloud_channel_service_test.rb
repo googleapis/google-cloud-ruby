@@ -103,7 +103,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_customers ::Google::Cloud::Channel::V1::ListCustomersRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_customers(::Google::Cloud::Channel::V1::ListCustomersRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.get_customer ::Google::Cloud::Channel::V1::GetCustomerRequest.new(name: name), grpc_options do |response, operation|
+      client.get_customer(::Google::Cloud::Channel::V1::GetCustomerRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -222,7 +222,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.check_cloud_identity_accounts_exist ::Google::Cloud::Channel::V1::CheckCloudIdentityAccountsExistRequest.new(parent: parent, domain: domain), grpc_options do |response, operation|
+      client.check_cloud_identity_accounts_exist(::Google::Cloud::Channel::V1::CheckCloudIdentityAccountsExistRequest.new(parent: parent, domain: domain), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -282,7 +282,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.create_customer ::Google::Cloud::Channel::V1::CreateCustomerRequest.new(parent: parent, customer: customer), grpc_options do |response, operation|
+      client.create_customer(::Google::Cloud::Channel::V1::CreateCustomerRequest.new(parent: parent, customer: customer), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -342,7 +342,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.update_customer ::Google::Cloud::Channel::V1::UpdateCustomerRequest.new(customer: customer, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_customer(::Google::Cloud::Channel::V1::UpdateCustomerRequest.new(customer: customer, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -400,7 +400,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.delete_customer ::Google::Cloud::Channel::V1::DeleteCustomerRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_customer(::Google::Cloud::Channel::V1::DeleteCustomerRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -468,7 +468,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.provision_cloud_identity ::Google::Cloud::Channel::V1::ProvisionCloudIdentityRequest.new(customer: customer, cloud_identity_info: cloud_identity_info, user: user, validate_only: validate_only), grpc_options do |response, operation|
+      client.provision_cloud_identity(::Google::Cloud::Channel::V1::ProvisionCloudIdentityRequest.new(customer: customer, cloud_identity_info: cloud_identity_info, user: user, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -535,7 +535,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_entitlements ::Google::Cloud::Channel::V1::ListEntitlementsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_entitlements(::Google::Cloud::Channel::V1::ListEntitlementsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -609,7 +609,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_transferable_skus ::Google::Cloud::Channel::V1::ListTransferableSkusRequest.new(cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, auth_token: auth_token, language_code: language_code), grpc_options do |response, operation|
+      client.list_transferable_skus(::Google::Cloud::Channel::V1::ListTransferableSkusRequest.new(cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, auth_token: auth_token, language_code: language_code), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -683,7 +683,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_transferable_offers ::Google::Cloud::Channel::V1::ListTransferableOffersRequest.new(cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code), grpc_options do |response, operation|
+      client.list_transferable_offers(::Google::Cloud::Channel::V1::ListTransferableOffersRequest.new(cloud_identity_id: cloud_identity_id, parent: parent, page_size: page_size, page_token: page_token, sku: sku, language_code: language_code), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -742,7 +742,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.get_entitlement ::Google::Cloud::Channel::V1::GetEntitlementRequest.new(name: name), grpc_options do |response, operation|
+      client.get_entitlement(::Google::Cloud::Channel::V1::GetEntitlementRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -808,7 +808,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.create_entitlement ::Google::Cloud::Channel::V1::CreateEntitlementRequest.new(parent: parent, entitlement: entitlement, request_id: request_id), grpc_options do |response, operation|
+      client.create_entitlement(::Google::Cloud::Channel::V1::CreateEntitlementRequest.new(parent: parent, entitlement: entitlement, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -877,7 +877,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.change_parameters ::Google::Cloud::Channel::V1::ChangeParametersRequest.new(name: name, parameters: parameters, request_id: request_id, purchase_order_id: purchase_order_id), grpc_options do |response, operation|
+      client.change_parameters(::Google::Cloud::Channel::V1::ChangeParametersRequest.new(name: name, parameters: parameters, request_id: request_id, purchase_order_id: purchase_order_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -944,7 +944,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.change_renewal_settings ::Google::Cloud::Channel::V1::ChangeRenewalSettingsRequest.new(name: name, renewal_settings: renewal_settings, request_id: request_id), grpc_options do |response, operation|
+      client.change_renewal_settings(::Google::Cloud::Channel::V1::ChangeRenewalSettingsRequest.new(name: name, renewal_settings: renewal_settings, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1015,7 +1015,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.change_offer ::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id), grpc_options do |response, operation|
+      client.change_offer(::Google::Cloud::Channel::V1::ChangeOfferRequest.new(name: name, offer: offer, parameters: parameters, purchase_order_id: purchase_order_id, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1080,7 +1080,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.start_paid_service ::Google::Cloud::Channel::V1::StartPaidServiceRequest.new(name: name, request_id: request_id), grpc_options do |response, operation|
+      client.start_paid_service(::Google::Cloud::Channel::V1::StartPaidServiceRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1145,7 +1145,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.suspend_entitlement ::Google::Cloud::Channel::V1::SuspendEntitlementRequest.new(name: name, request_id: request_id), grpc_options do |response, operation|
+      client.suspend_entitlement(::Google::Cloud::Channel::V1::SuspendEntitlementRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1210,7 +1210,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.cancel_entitlement ::Google::Cloud::Channel::V1::CancelEntitlementRequest.new(name: name, request_id: request_id), grpc_options do |response, operation|
+      client.cancel_entitlement(::Google::Cloud::Channel::V1::CancelEntitlementRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1275,7 +1275,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.activate_entitlement ::Google::Cloud::Channel::V1::ActivateEntitlementRequest.new(name: name, request_id: request_id), grpc_options do |response, operation|
+      client.activate_entitlement(::Google::Cloud::Channel::V1::ActivateEntitlementRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1344,7 +1344,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.transfer_entitlements ::Google::Cloud::Channel::V1::TransferEntitlementsRequest.new(parent: parent, entitlements: entitlements, auth_token: auth_token, request_id: request_id), grpc_options do |response, operation|
+      client.transfer_entitlements(::Google::Cloud::Channel::V1::TransferEntitlementsRequest.new(parent: parent, entitlements: entitlements, auth_token: auth_token, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1411,7 +1411,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.transfer_entitlements_to_google ::Google::Cloud::Channel::V1::TransferEntitlementsToGoogleRequest.new(parent: parent, entitlements: entitlements, request_id: request_id), grpc_options do |response, operation|
+      client.transfer_entitlements_to_google(::Google::Cloud::Channel::V1::TransferEntitlementsToGoogleRequest.new(parent: parent, entitlements: entitlements, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1480,7 +1480,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_channel_partner_links ::Google::Cloud::Channel::V1::ListChannelPartnerLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), grpc_options do |response, operation|
+      client.list_channel_partner_links(::Google::Cloud::Channel::V1::ListChannelPartnerLinksRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1541,7 +1541,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.get_channel_partner_link ::Google::Cloud::Channel::V1::GetChannelPartnerLinkRequest.new(name: name, view: view), grpc_options do |response, operation|
+      client.get_channel_partner_link(::Google::Cloud::Channel::V1::GetChannelPartnerLinkRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1601,7 +1601,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.create_channel_partner_link ::Google::Cloud::Channel::V1::CreateChannelPartnerLinkRequest.new(parent: parent, channel_partner_link: channel_partner_link), grpc_options do |response, operation|
+      client.create_channel_partner_link(::Google::Cloud::Channel::V1::CreateChannelPartnerLinkRequest.new(parent: parent, channel_partner_link: channel_partner_link), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1663,7 +1663,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.update_channel_partner_link ::Google::Cloud::Channel::V1::UpdateChannelPartnerLinkRequest.new(name: name, channel_partner_link: channel_partner_link, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_channel_partner_link(::Google::Cloud::Channel::V1::UpdateChannelPartnerLinkRequest.new(name: name, channel_partner_link: channel_partner_link, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1731,7 +1731,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_products ::Google::Cloud::Channel::V1::ListProductsRequest.new(account: account, page_size: page_size, page_token: page_token, language_code: language_code), grpc_options do |response, operation|
+      client.list_products(::Google::Cloud::Channel::V1::ListProductsRequest.new(account: account, page_size: page_size, page_token: page_token, language_code: language_code), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1802,7 +1802,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_skus ::Google::Cloud::Channel::V1::ListSkusRequest.new(parent: parent, account: account, page_size: page_size, page_token: page_token, language_code: language_code), grpc_options do |response, operation|
+      client.list_skus(::Google::Cloud::Channel::V1::ListSkusRequest.new(parent: parent, account: account, page_size: page_size, page_token: page_token, language_code: language_code), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1873,7 +1873,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_offers ::Google::Cloud::Channel::V1::ListOffersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code), grpc_options do |response, operation|
+      client.list_offers(::Google::Cloud::Channel::V1::ListOffersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, language_code: language_code), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1945,7 +1945,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_purchasable_skus ::Google::Cloud::Channel::V1::ListPurchasableSkusRequest.new(create_entitlement_purchase: create_entitlement_purchase, customer: customer, page_size: page_size, page_token: page_token, language_code: language_code), grpc_options do |response, operation|
+      client.list_purchasable_skus(::Google::Cloud::Channel::V1::ListPurchasableSkusRequest.new(create_entitlement_purchase: create_entitlement_purchase, customer: customer, page_size: page_size, page_token: page_token, language_code: language_code), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2017,7 +2017,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_purchasable_offers ::Google::Cloud::Channel::V1::ListPurchasableOffersRequest.new(create_entitlement_purchase: create_entitlement_purchase, customer: customer, page_size: page_size, page_token: page_token, language_code: language_code), grpc_options do |response, operation|
+      client.list_purchasable_offers(::Google::Cloud::Channel::V1::ListPurchasableOffersRequest.new(create_entitlement_purchase: create_entitlement_purchase, customer: customer, page_size: page_size, page_token: page_token, language_code: language_code), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2078,7 +2078,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.register_subscriber ::Google::Cloud::Channel::V1::RegisterSubscriberRequest.new(account: account, service_account: service_account), grpc_options do |response, operation|
+      client.register_subscriber(::Google::Cloud::Channel::V1::RegisterSubscriberRequest.new(account: account, service_account: service_account), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2138,7 +2138,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.unregister_subscriber ::Google::Cloud::Channel::V1::UnregisterSubscriberRequest.new(account: account, service_account: service_account), grpc_options do |response, operation|
+      client.unregister_subscriber(::Google::Cloud::Channel::V1::UnregisterSubscriberRequest.new(account: account, service_account: service_account), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2200,7 +2200,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_subscribers ::Google::Cloud::Channel::V1::ListSubscribersRequest.new(account: account, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_subscribers(::Google::Cloud::Channel::V1::ListSubscribersRequest.new(account: account, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
