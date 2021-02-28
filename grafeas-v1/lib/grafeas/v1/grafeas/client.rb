@@ -71,7 +71,7 @@ module Grafeas
             parent_config = while namespace.any?
                               parent_name = namespace.join "::"
                               parent_const = const_get parent_name
-                              break parent_const.configure if parent_const&.respond_to? :configure
+                              break parent_const.configure if parent_const.respond_to? :configure
                               namespace.pop
                             end
             default_config = Client::Configuration.new parent_config
@@ -79,25 +79,25 @@ module Grafeas
             default_config.rpcs.get_occurrence.timeout = 30.0
             default_config.rpcs.get_occurrence.retry_policy = {
               initial_delay: 0.1,
-              max_delay:     60.0,
-              multiplier:    1.3,
-              retry_codes:   [14, 4]
+          max_delay: 60.0,
+          multiplier: 1.3,
+          retry_codes: [14, 4]
             }
 
             default_config.rpcs.list_occurrences.timeout = 30.0
             default_config.rpcs.list_occurrences.retry_policy = {
               initial_delay: 0.1,
-              max_delay:     60.0,
-              multiplier:    1.3,
-              retry_codes:   [14, 4]
+          max_delay: 60.0,
+          multiplier: 1.3,
+          retry_codes: [14, 4]
             }
 
             default_config.rpcs.delete_occurrence.timeout = 30.0
             default_config.rpcs.delete_occurrence.retry_policy = {
               initial_delay: 0.1,
-              max_delay:     60.0,
-              multiplier:    1.3,
-              retry_codes:   [14, 4]
+          max_delay: 60.0,
+          multiplier: 1.3,
+          retry_codes: [14, 4]
             }
 
             default_config.rpcs.create_occurrence.timeout = 30.0
@@ -109,33 +109,33 @@ module Grafeas
             default_config.rpcs.get_occurrence_note.timeout = 30.0
             default_config.rpcs.get_occurrence_note.retry_policy = {
               initial_delay: 0.1,
-              max_delay:     60.0,
-              multiplier:    1.3,
-              retry_codes:   [14, 4]
+          max_delay: 60.0,
+          multiplier: 1.3,
+          retry_codes: [14, 4]
             }
 
             default_config.rpcs.get_note.timeout = 30.0
             default_config.rpcs.get_note.retry_policy = {
               initial_delay: 0.1,
-              max_delay:     60.0,
-              multiplier:    1.3,
-              retry_codes:   [14, 4]
+          max_delay: 60.0,
+          multiplier: 1.3,
+          retry_codes: [14, 4]
             }
 
             default_config.rpcs.list_notes.timeout = 30.0
             default_config.rpcs.list_notes.retry_policy = {
               initial_delay: 0.1,
-              max_delay:     60.0,
-              multiplier:    1.3,
-              retry_codes:   [14, 4]
+          max_delay: 60.0,
+          multiplier: 1.3,
+          retry_codes: [14, 4]
             }
 
             default_config.rpcs.delete_note.timeout = 30.0
             default_config.rpcs.delete_note.retry_policy = {
               initial_delay: 0.1,
-              max_delay:     60.0,
-              multiplier:    1.3,
-              retry_codes:   [14, 4]
+          max_delay: 60.0,
+          multiplier: 1.3,
+          retry_codes: [14, 4]
             }
 
             default_config.rpcs.create_note.timeout = 30.0
@@ -147,9 +147,9 @@ module Grafeas
             default_config.rpcs.list_note_occurrences.timeout = 30.0
             default_config.rpcs.list_note_occurrences.retry_policy = {
               initial_delay: 0.1,
-              max_delay:     60.0,
-              multiplier:    1.3,
-              retry_codes:   [14, 4]
+          max_delay: 60.0,
+          multiplier: 1.3,
+          retry_codes: [14, 4]
             }
 
             default_config
@@ -1303,7 +1303,7 @@ module Grafeas
           config_attr :scope,         nil, ::String, ::Array, nil
           config_attr :lib_name,      nil, ::String, nil
           config_attr :lib_version,   nil, ::String, nil
-          config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+          config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
           config_attr :interceptors,  nil, ::Array, nil
           config_attr :timeout,       nil, ::Numeric, nil
           config_attr :metadata,      nil, ::Hash, nil
@@ -1324,7 +1324,7 @@ module Grafeas
           def rpcs
             @rpcs ||= begin
               parent_rpcs = nil
-              parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+              parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
               Rpcs.new parent_rpcs
             end
           end
@@ -1420,33 +1420,33 @@ module Grafeas
 
             # @private
             def initialize parent_rpcs = nil
-              get_occurrence_config = parent_rpcs&.get_occurrence if parent_rpcs&.respond_to? :get_occurrence
+              get_occurrence_config = parent_rpcs.get_occurrence if parent_rpcs.respond_to? :get_occurrence
               @get_occurrence = ::Gapic::Config::Method.new get_occurrence_config
-              list_occurrences_config = parent_rpcs&.list_occurrences if parent_rpcs&.respond_to? :list_occurrences
+              list_occurrences_config = parent_rpcs.list_occurrences if parent_rpcs.respond_to? :list_occurrences
               @list_occurrences = ::Gapic::Config::Method.new list_occurrences_config
-              delete_occurrence_config = parent_rpcs&.delete_occurrence if parent_rpcs&.respond_to? :delete_occurrence
+              delete_occurrence_config = parent_rpcs.delete_occurrence if parent_rpcs.respond_to? :delete_occurrence
               @delete_occurrence = ::Gapic::Config::Method.new delete_occurrence_config
-              create_occurrence_config = parent_rpcs&.create_occurrence if parent_rpcs&.respond_to? :create_occurrence
+              create_occurrence_config = parent_rpcs.create_occurrence if parent_rpcs.respond_to? :create_occurrence
               @create_occurrence = ::Gapic::Config::Method.new create_occurrence_config
-              batch_create_occurrences_config = parent_rpcs&.batch_create_occurrences if parent_rpcs&.respond_to? :batch_create_occurrences
+              batch_create_occurrences_config = parent_rpcs.batch_create_occurrences if parent_rpcs.respond_to? :batch_create_occurrences
               @batch_create_occurrences = ::Gapic::Config::Method.new batch_create_occurrences_config
-              update_occurrence_config = parent_rpcs&.update_occurrence if parent_rpcs&.respond_to? :update_occurrence
+              update_occurrence_config = parent_rpcs.update_occurrence if parent_rpcs.respond_to? :update_occurrence
               @update_occurrence = ::Gapic::Config::Method.new update_occurrence_config
-              get_occurrence_note_config = parent_rpcs&.get_occurrence_note if parent_rpcs&.respond_to? :get_occurrence_note
+              get_occurrence_note_config = parent_rpcs.get_occurrence_note if parent_rpcs.respond_to? :get_occurrence_note
               @get_occurrence_note = ::Gapic::Config::Method.new get_occurrence_note_config
-              get_note_config = parent_rpcs&.get_note if parent_rpcs&.respond_to? :get_note
+              get_note_config = parent_rpcs.get_note if parent_rpcs.respond_to? :get_note
               @get_note = ::Gapic::Config::Method.new get_note_config
-              list_notes_config = parent_rpcs&.list_notes if parent_rpcs&.respond_to? :list_notes
+              list_notes_config = parent_rpcs.list_notes if parent_rpcs.respond_to? :list_notes
               @list_notes = ::Gapic::Config::Method.new list_notes_config
-              delete_note_config = parent_rpcs&.delete_note if parent_rpcs&.respond_to? :delete_note
+              delete_note_config = parent_rpcs.delete_note if parent_rpcs.respond_to? :delete_note
               @delete_note = ::Gapic::Config::Method.new delete_note_config
-              create_note_config = parent_rpcs&.create_note if parent_rpcs&.respond_to? :create_note
+              create_note_config = parent_rpcs.create_note if parent_rpcs.respond_to? :create_note
               @create_note = ::Gapic::Config::Method.new create_note_config
-              batch_create_notes_config = parent_rpcs&.batch_create_notes if parent_rpcs&.respond_to? :batch_create_notes
+              batch_create_notes_config = parent_rpcs.batch_create_notes if parent_rpcs.respond_to? :batch_create_notes
               @batch_create_notes = ::Gapic::Config::Method.new batch_create_notes_config
-              update_note_config = parent_rpcs&.update_note if parent_rpcs&.respond_to? :update_note
+              update_note_config = parent_rpcs.update_note if parent_rpcs.respond_to? :update_note
               @update_note = ::Gapic::Config::Method.new update_note_config
-              list_note_occurrences_config = parent_rpcs&.list_note_occurrences if parent_rpcs&.respond_to? :list_note_occurrences
+              list_note_occurrences_config = parent_rpcs.list_note_occurrences if parent_rpcs.respond_to? :list_note_occurrences
               @list_note_occurrences = ::Gapic::Config::Method.new list_note_occurrences_config
 
               yield self if block_given?
