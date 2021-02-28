@@ -73,7 +73,8 @@ module Google
         # Alias to the Google Client API module
         API = Google::Apis::CloudresourcemanagerV1
 
-        attr_reader :etag, :roles
+        attr_reader :etag
+        attr_reader :roles
 
         ##
         # @private Creates a Policy object.

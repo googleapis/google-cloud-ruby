@@ -19,12 +19,12 @@ describe Google::Cloud do
   describe "#resource_manager" do
     it "calls out to Google::Cloud.resource_manager" do
       gcloud = Google::Cloud.new
-      stubbed_resource_manager = ->(keyfile, scope: nil, retries: nil, timeout: nil, host: nil) {
+      stubbed_resource_manager = ->(keyfile, options) {
         keyfile.must_be :nil?
-        scope.must_be :nil?
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        options[:scope].must_be :nil?
+        options[:retries].must_be :nil?
+        options[:timeout].must_be :nil?
+        options[:host].must_be :nil?
         "resource_manager-manager-object-empty"
       }
       Google::Cloud.stub :resource_manager, stubbed_resource_manager do
@@ -35,12 +35,12 @@ describe Google::Cloud do
 
     it "passes project and keyfile to Google::Cloud.resource_manager" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_resource_manager = ->(keyfile, scope: nil, retries: nil, timeout: nil, host: nil) {
+      stubbed_resource_manager = ->(keyfile, options) {
         keyfile.must_equal "keyfile-path"
-        scope.must_be :nil?
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        options[:scope].must_be :nil?
+        options[:retries].must_be :nil?
+        options[:timeout].must_be :nil?
+        options[:host].must_be :nil?
         "resource_manager-manager-object"
       }
       Google::Cloud.stub :resource_manager, stubbed_resource_manager do
@@ -51,12 +51,12 @@ describe Google::Cloud do
 
     it "passes project and keyfile and options to Google::Cloud.resource_manager" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_resource_manager = ->(keyfile, scope: nil, retries: nil, timeout: nil, host: nil) {
+      stubbed_resource_manager = ->(keyfile, options) {
         keyfile.must_equal "keyfile-path"
-        scope.must_equal "http://example.com/scope"
-        retries.must_equal 5
-        timeout.must_equal 60
-        host.must_be :nil?
+        options[:scope].must_equal "http://example.com/scope"
+        options[:retries].must_equal 5
+        options[:timeout].must_equal 60
+        options[:host].must_be :nil?
         "resource_manager-manager-object-scoped"
       }
       Google::Cloud.stub :resource_manager, stubbed_resource_manager do
@@ -88,16 +88,16 @@ describe Google::Cloud do
     end
 
     it "uses provided project_id and keyfile" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, options = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        options[:scope].must_be :nil?
         "resource_manager-credentials"
       }
-      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
+      stubbed_service = ->(credentials, options) {
         credentials.must_equal "resource_manager-credentials"
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        options[:retries].must_be :nil?
+        options[:timeout].must_be :nil?
+        options[:host].must_be :nil?
         "resource-manager-service"
       }
 
@@ -140,16 +140,16 @@ describe Google::Cloud do
     end
 
     it "uses provided credentials" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, options = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        options[:scope].must_be :nil?
         "resource_manager-credentials"
       }
-      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
+      stubbed_service = ->(credentials, options) {
         credentials.must_equal "resource_manager-credentials"
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        options[:retries].must_be :nil?
+        options[:timeout].must_be :nil?
+        options[:host].must_be :nil?
         "resource-manager-service"
       }
 
@@ -170,16 +170,16 @@ describe Google::Cloud do
     end
 
     it "uses provided keyfile alias" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, options = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        options[:scope].must_be :nil?
         "resource_manager-credentials"
       }
-      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
+      stubbed_service = ->(credentials, options) {
         credentials.must_equal "resource_manager-credentials"
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        options[:retries].must_be :nil?
+        options[:timeout].must_be :nil?
+        options[:host].must_be :nil?
         "resource-manager-service"
       }
 
@@ -200,11 +200,11 @@ describe Google::Cloud do
     end
 
     it "uses provided endpoint" do
-      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
+      stubbed_service = ->(credentials, options) {
         credentials.must_equal default_credentials
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_equal "rm-endpoint2.example.com"
+        options[:retries].must_be :nil?
+        options[:timeout].must_be :nil?
+        options[:host].must_equal "rm-endpoint2.example.com"
         "resource-manager-service"
       }
 
@@ -227,16 +227,16 @@ describe Google::Cloud do
     end
 
     it "uses shared config for project and keyfile" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, options = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        options[:scope].must_be :nil?
         "resource_manager-credentials"
       }
-      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
+      stubbed_service = ->(credentials, options) {
         credentials.must_equal "resource_manager-credentials"
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        options[:retries].must_be :nil?
+        options[:timeout].must_be :nil?
+        options[:host].must_be :nil?
         "resource-manager-service"
       }
 
@@ -263,16 +263,16 @@ describe Google::Cloud do
     end
 
     it "uses shared config for project_id and credentials" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, options = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        options[:scope].must_be :nil?
         "resource_manager-credentials"
       }
-      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
+      stubbed_service = ->(credentials, options) {
         credentials.must_equal "resource_manager-credentials"
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        options[:retries].must_be :nil?
+        options[:timeout].must_be :nil?
+        options[:host].must_be :nil?
         "resource-manager-service"
       }
 
@@ -299,16 +299,16 @@ describe Google::Cloud do
     end
 
     it "uses resource_manager config for project and keyfile" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, options = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        options[:scope].must_be :nil?
         "resource_manager-credentials"
       }
-      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
+      stubbed_service = ->(credentials, options) {
         credentials.must_equal "resource_manager-credentials"
-        retries.must_equal 3
-        timeout.must_equal 42
-        host.must_be :nil?
+        options[:retries].must_equal 3
+        options[:timeout].must_equal 42
+        options[:host].must_be :nil?
         "resource-manager-service"
       }
 
@@ -336,16 +336,16 @@ describe Google::Cloud do
     end
 
     it "uses resource_manager config for project_id and credentials" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, options = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        options[:scope].must_be :nil?
         "resource_manager-credentials"
       }
-      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
+      stubbed_service = ->(credentials, options) {
         credentials.must_equal "resource_manager-credentials"
-        retries.must_equal 3
-        timeout.must_equal 42
-        host.must_be :nil?
+        options[:retries].must_equal 3
+        options[:timeout].must_equal 42
+        options[:host].must_be :nil?
         "resource-manager-service"
       }
 
@@ -373,16 +373,16 @@ describe Google::Cloud do
     end
 
     it "uses resource_manager config for endpoint" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, options = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        options[:scope].must_be :nil?
         "resource_manager-credentials"
       }
-      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
+      stubbed_service = ->(credentials, options) {
         credentials.must_equal "resource_manager-credentials"
-        retries.must_equal 3
-        timeout.must_equal 42
-        host.must_equal "rm-endpoint2.example.com"
+        options[:retries].must_equal 3
+        options[:timeout].must_equal 42
+        options[:host].must_equal "rm-endpoint2.example.com"
         "resource-manager-service"
       }
 
@@ -411,16 +411,16 @@ describe Google::Cloud do
     end
 
     it "uses resource_manager config for quota project" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, options = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        options[:scope].must_be :nil?
         "resource_manager-credentials"
       }
-      stubbed_service = ->(credentials, retries: nil, timeout: nil, host: nil, quota_project: nil) {
+      stubbed_service = ->(credentials, options) {
         credentials.must_equal "resource_manager-credentials"
-        retries.must_equal 3
-        timeout.must_equal 42
-        quota_project.must_equal "project-id-2"
+        options[:retries].must_equal 3
+        options[:timeout].must_equal 42
+        options[:quota_project].must_equal "project-id-2"
         "resource-manager-service"
       }
 

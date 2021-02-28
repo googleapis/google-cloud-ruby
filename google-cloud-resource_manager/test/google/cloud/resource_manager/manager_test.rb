@@ -311,6 +311,6 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     projects = count.times.map { random_project_gapi }
     hash = { projects: projects }
     hash[:next_page_token] = token unless token.nil?
-    Google::Apis::CloudresourcemanagerV1::ListProjectsResponse.new hash
+    Google::Apis::CloudresourcemanagerV1::ListProjectsResponse.new(**hash)
   end
 end
