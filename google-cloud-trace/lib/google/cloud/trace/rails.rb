@@ -191,13 +191,13 @@ module Google
               Trace::Credentials.new credentials
             end
           rescue Exception => e
-            STDOUT.puts "Note: Google::Cloud::Trace is disabled because " \
+            $stdout.puts "Note: Google::Cloud::Trace is disabled because " \
               "it failed to authorize with the service. (#{e.message})"
             return false
           end
 
           if project_id.to_s.empty?
-            STDOUT.puts "Note: Google::Cloud::Trace is disabled because " \
+            $stdout.puts "Note: Google::Cloud::Trace is disabled because " \
               "the project ID could not be determined."
             return false
           end

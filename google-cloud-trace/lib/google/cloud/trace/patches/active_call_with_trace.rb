@@ -41,5 +41,5 @@ module GRPC
   end
 
   # Patch GRPC::ActiveCall#request_response method
-  ::GRPC::ActiveCall.send(:prepend, ActiveCallWithTrace)
+  ::GRPC::ActiveCall.prepend ActiveCallWithTrace
 end

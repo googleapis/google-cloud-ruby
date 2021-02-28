@@ -40,9 +40,14 @@ module Google
         # end
         # ```
 
-        def initialize app, enable_cross_project_tracing: false
-          super(app)
+        def initialize app, opts = {}, enable_cross_project_tracing: false
+          # Allow enable_cross_project_tracing to be passed in either in an
+          # options hash or as a keyword argument. This may seem redundant, but
+          # it's necessary to work around a Faraday bug where the `new` class
+          # method doesn't pass down keyword arguments correctly under Ruby 3.
+          enable_cross_project_tracing = opts[:enable_cross_project_tracing] if opts.key? :enable_cross_project_tracing
           @enable_cross_project_tracing = enable_cross_project_tracing || false
+          super app
         end
 
         ##
@@ -114,9 +119,8 @@ module Google
         ##
         # @private Add X-Cloud-Trace-Context for request header
         def add_trace_context_header env
-          if (trace_ctx = Stackdriver::Core::TraceContext.get)
-            env[:request_headers]["X-Cloud-Trace-Context"] = trace_ctx.to_string
-          end
+          trace_ctx = Stackdriver::Core::TraceContext.get
+          env[:request_headers]["X-Cloud-Trace-Context"] = trace_ctx.to_string if trace_ctx
         end
       end
     end

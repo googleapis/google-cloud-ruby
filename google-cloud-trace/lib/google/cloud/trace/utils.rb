@@ -32,7 +32,7 @@ module Google
 
           # sometimes this gets called with time as a float or
           # int. Coerce into a time object, and move on.
-          time = Time.at(time) if time.is_a? Numeric
+          time = Time.at time if time.is_a? Numeric
 
           raise ArgumentError unless time.is_a? Time
 

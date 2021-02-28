@@ -27,7 +27,10 @@ module Google
       # @private
       #
       class Service
-        attr_accessor :project, :credentials, :timeout, :host
+        attr_accessor :project
+        attr_accessor :credentials
+        attr_accessor :timeout
+        attr_accessor :host
 
         ##
         # Creates a new Service instance.

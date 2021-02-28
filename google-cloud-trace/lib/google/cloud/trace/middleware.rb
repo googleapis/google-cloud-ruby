@@ -154,7 +154,7 @@ module Google
         def initialize app, service: nil, **kwargs
           @app = app
 
-          load_config kwargs
+          load_config(**kwargs)
 
           if service
             @service = service
@@ -203,7 +203,7 @@ module Google
         # @return [Stackdriver::Core::TraceContext] The trace context.
         #
         def get_trace_context env
-          Stackdriver::Core::TraceContext.parse_rack_env(env) do |tc|
+          Stackdriver::Core::TraceContext.parse_rack_env env do |tc|
             if tc.sampled?.nil?
               sampler = configuration.sampler ||
                         Google::Cloud::Trace::TimeSampler.default
@@ -240,12 +240,11 @@ module Google
         # @param [Hash] env The Rack environment.
         #
         def send_trace trace, env
-          if @service && trace.trace_context.sampled?
-            begin
-              @service.patch_traces trace
-            rescue StandardError => ex
-              handle_error ex, logger: env["rack.logger"]
-            end
+          return unless @service && trace.trace_context.sampled?
+          begin
+            @service.patch_traces trace
+          rescue StandardError => e
+            handle_error e, logger: env["rack.logger"]
           end
         end
 
