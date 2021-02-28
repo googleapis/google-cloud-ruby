@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-workflows.rb"
-
-Style/AsciiComments:
-  Enabled: false
