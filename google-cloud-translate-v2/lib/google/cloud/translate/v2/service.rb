@@ -127,11 +127,9 @@ module Google
 
           ##
           # Make a request and apply incremental backoff
-          def execute
+          def execute &block
             backoff = Backoff.new retries: retries
-            backoff.execute do
-              yield
-            end
+            backoff.execute(&block)
           rescue Faraday::ConnectionFailed
             raise Google::Cloud::ResourceExhaustedError
           end

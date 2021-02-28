@@ -16,12 +16,18 @@ Metrics/BlockLength:
   Exclude:
     - "google-cloud-translate-v2.gemspec"
     - "Rakefile"
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - "lib/google/cloud/translate/v2.rb"
 Metrics/LineLength:
   Exclude:
     - "google-cloud-translate-v2.gemspec"
 Metrics/MethodLength:
   Exclude:
     - "lib/google/cloud/translate-v2.rb"
+Metrics/PerceivedComplexity:
+  Exclude:
+    - "lib/google/cloud/translate/v2.rb"
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-translate-v2.rb"
