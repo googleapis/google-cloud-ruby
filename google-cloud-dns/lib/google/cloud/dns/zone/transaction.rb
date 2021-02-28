@@ -162,10 +162,10 @@ module Google
           #     end
           #   end
           #
-          def modify name, type
+          def modify name, type, &block
             existing = @zone.records(name, type).all.to_a
             updated = existing.map(&:dup)
-            updated.each { |r| yield r }
+            updated.each(&block)
             @additions += updated
             @deletions += existing
           end

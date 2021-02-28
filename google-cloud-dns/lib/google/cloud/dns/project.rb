@@ -86,42 +86,42 @@ module Google
         # Maximum allowed number of zones in the project.
         def zones_quota
           reload! if @gapi.nil?
-          @gapi.quota.managed_zones if @gapi.quota
+          @gapi.quota&.managed_zones
         end
 
         ##
         # Maximum allowed number of data entries per record.
         def data_per_record
           reload! if @gapi.nil?
-          @gapi.quota.resource_records_per_rrset if @gapi.quota
+          @gapi.quota&.resource_records_per_rrset
         end
 
         ##
         # Maximum allowed number of records to add per change.
         def additions_per_change
           reload! if @gapi.nil?
-          @gapi.quota.rrset_additions_per_change if @gapi.quota
+          @gapi.quota&.rrset_additions_per_change
         end
 
         ##
         # Maximum allowed number of records to delete per change.
         def deletions_per_change
           reload! if @gapi.nil?
-          @gapi.quota.rrset_deletions_per_change if @gapi.quota
+          @gapi.quota&.rrset_deletions_per_change
         end
 
         ##
         # Maximum allowed number of records per zone in the project.
         def records_per_zone
           reload! if @gapi.nil?
-          @gapi.quota.rrsets_per_managed_zone if @gapi.quota
+          @gapi.quota&.rrsets_per_managed_zone
         end
 
         ##
         # Maximum allowed total bytes size for all the data in one change.
         def total_data_per_change
           reload! if @gapi.nil?
-          @gapi.quota.total_rrdata_size_per_change if @gapi.quota
+          @gapi.quota&.total_rrdata_size_per_change
         end
 
         ##

@@ -12,20 +12,8 @@ AllCops:
 Documentation:
   Enabled: false
 
-Layout/AlignHash:
-  Enabled: false
 Metrics/ClassLength:
   Enabled: false
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-dns.rb"
-Style/IfUnlessModifier:
-  Enabled: false
-Style/MethodCallWithArgsParentheses:
-  Enabled: false
-Style/NumericPredicate:
-  Enabled: false
-Style/SafeNavigation:
-  Enabled: false
-Style/WordArray:
-  Enabled: false
