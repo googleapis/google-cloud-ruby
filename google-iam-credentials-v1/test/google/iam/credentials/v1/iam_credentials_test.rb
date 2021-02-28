@@ -101,7 +101,7 @@ class ::Google::Iam::Credentials::V1::IAMCredentials::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.generate_access_token ::Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new(name: name, delegates: delegates, scope: scope, lifetime: lifetime), grpc_options do |response, operation|
+      client.generate_access_token(::Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new(name: name, delegates: delegates, scope: scope, lifetime: lifetime), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -165,7 +165,7 @@ class ::Google::Iam::Credentials::V1::IAMCredentials::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.generate_id_token ::Google::Iam::Credentials::V1::GenerateIdTokenRequest.new(name: name, delegates: delegates, audience: audience, include_email: include_email), grpc_options do |response, operation|
+      client.generate_id_token(::Google::Iam::Credentials::V1::GenerateIdTokenRequest.new(name: name, delegates: delegates, audience: audience, include_email: include_email), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -227,7 +227,7 @@ class ::Google::Iam::Credentials::V1::IAMCredentials::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.sign_blob ::Google::Iam::Credentials::V1::SignBlobRequest.new(name: name, delegates: delegates, payload: payload), grpc_options do |response, operation|
+      client.sign_blob(::Google::Iam::Credentials::V1::SignBlobRequest.new(name: name, delegates: delegates, payload: payload), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -289,7 +289,7 @@ class ::Google::Iam::Credentials::V1::IAMCredentials::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.sign_jwt ::Google::Iam::Credentials::V1::SignJwtRequest.new(name: name, delegates: delegates, payload: payload), grpc_options do |response, operation|
+      client.sign_jwt(::Google::Iam::Credentials::V1::SignJwtRequest.new(name: name, delegates: delegates, payload: payload), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
