@@ -434,10 +434,10 @@ module Google
           str = data.strip
           return str if ::File.file? str
           json = begin
-                   ::JSON.parse str
-                 rescue ::StandardError
-                   nil
-                 end
+            ::JSON.parse str
+          rescue ::StandardError
+            nil
+          end
           return json if json.is_a? ::Hash
         end
         nil
@@ -489,7 +489,7 @@ module Google
       ##
       # @private A validator that allows all values
       #
-      OPEN_VALIDATOR = ::Proc.new { true }
+      OPEN_VALIDATOR = proc { true }
 
       ##
       # @private a list of key names that are technically illegal because
