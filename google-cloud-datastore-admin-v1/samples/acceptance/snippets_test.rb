@@ -45,29 +45,27 @@ describe "Firestore in Datastore mode Admin V1 samples" do
   end
 
   it "entities_export, entities_import" do
-    begin
-      op = nil
-      out, _err = capture_io do
-        op = entities_export project_id: project_id, output_url_prefix: output_url_prefix
-      end
-      assert_includes out, "Entities were exported"
-      assert op
-      assert op.response
-      assert_equal "#{output_url_prefix}/#{storage_file_prefix}.overall_export_metadata", op.response.output_url
+    op = nil
+    out, _err = capture_io do
+      op = entities_export project_id: project_id, output_url_prefix: output_url_prefix
+    end
+    assert_includes out, "Entities were exported"
+    assert op
+    assert op.response
+    assert_equal "#{output_url_prefix}/#{storage_file_prefix}.overall_export_metadata", op.response.output_url
 
-      out, _err = capture_io do
-        entities_import project_id: project_id, input_url: op.response.output_url
-      end
-      assert_includes out, "Entities were imported"
-    ensure
-      # cleanup: delete exported objects
-      require "google/cloud/storage"
-      storage = Google::Cloud::Storage.new
-      files = storage.bucket(storage_bucket_name).files prefix: storage_file_prefix
-      files.each do |f|
-        f.delete
-        puts "Deleted: #{f.name}"
-      end
+    out, _err = capture_io do
+      entities_import project_id: project_id, input_url: op.response.output_url
+    end
+    assert_includes out, "Entities were imported"
+  ensure
+    # cleanup: delete exported objects
+    require "google/cloud/storage"
+    storage = Google::Cloud::Storage.new
+    files = storage.bucket(storage_bucket_name).files prefix: storage_file_prefix
+    files.each do |f|
+      f.delete
+      puts "Deleted: #{f.name}"
     end
   end
 end

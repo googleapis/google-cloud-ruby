@@ -21,13 +21,11 @@ require "google/cloud/security_center"
 def retry_resource_exhaustion
   last_error = nil
   5.times do
-    begin
-      return yield
-    rescue Google::Cloud::ResourceExhaustedError => e
-      last_error = e
-      puts "\n#{e} Gonna try again"
-      sleep rand(1..5)
-    end
+    return yield
+  rescue Google::Cloud::ResourceExhaustedError => e
+    last_error = e
+    puts "\n#{e} Gonna try again"
+    sleep rand(1..5)
   end
   raise last_error
 end
