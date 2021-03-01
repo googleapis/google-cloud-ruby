@@ -109,7 +109,7 @@ class ::Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceService::Cli
       end
 
       # Use protobuf object with options
-      client.annotate_video ::Google::Cloud::VideoIntelligence::V1beta2::AnnotateVideoRequest.new(input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id), grpc_options do |response, operation|
+      client.annotate_video(::Google::Cloud::VideoIntelligence::V1beta2::AnnotateVideoRequest.new(input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
