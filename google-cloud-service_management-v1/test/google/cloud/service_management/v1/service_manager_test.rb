@@ -105,7 +105,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.list_services ::Google::Cloud::ServiceManagement::V1::ListServicesRequest.new(producer_project_id: producer_project_id, page_size: page_size, page_token: page_token, consumer_id: consumer_id), grpc_options do |response, operation|
+      client.list_services(::Google::Cloud::ServiceManagement::V1::ListServicesRequest.new(producer_project_id: producer_project_id, page_size: page_size, page_token: page_token, consumer_id: consumer_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -164,7 +164,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.get_service ::Google::Cloud::ServiceManagement::V1::GetServiceRequest.new(service_name: service_name), grpc_options do |response, operation|
+      client.get_service(::Google::Cloud::ServiceManagement::V1::GetServiceRequest.new(service_name: service_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -226,7 +226,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.create_service ::Google::Cloud::ServiceManagement::V1::CreateServiceRequest.new(service: service), grpc_options do |response, operation|
+      client.create_service(::Google::Cloud::ServiceManagement::V1::CreateServiceRequest.new(service: service), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -289,7 +289,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.delete_service ::Google::Cloud::ServiceManagement::V1::DeleteServiceRequest.new(service_name: service_name), grpc_options do |response, operation|
+      client.delete_service(::Google::Cloud::ServiceManagement::V1::DeleteServiceRequest.new(service_name: service_name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -352,7 +352,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.undelete_service ::Google::Cloud::ServiceManagement::V1::UndeleteServiceRequest.new(service_name: service_name), grpc_options do |response, operation|
+      client.undelete_service(::Google::Cloud::ServiceManagement::V1::UndeleteServiceRequest.new(service_name: service_name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -419,7 +419,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.list_service_configs ::Google::Cloud::ServiceManagement::V1::ListServiceConfigsRequest.new(service_name: service_name, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_service_configs(::Google::Cloud::ServiceManagement::V1::ListServiceConfigsRequest.new(service_name: service_name, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -482,7 +482,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.get_service_config ::Google::Cloud::ServiceManagement::V1::GetServiceConfigRequest.new(service_name: service_name, config_id: config_id, view: view), grpc_options do |response, operation|
+      client.get_service_config(::Google::Cloud::ServiceManagement::V1::GetServiceConfigRequest.new(service_name: service_name, config_id: config_id, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -542,7 +542,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.create_service_config ::Google::Cloud::ServiceManagement::V1::CreateServiceConfigRequest.new(service_name: service_name, service_config: service_config), grpc_options do |response, operation|
+      client.create_service_config(::Google::Cloud::ServiceManagement::V1::CreateServiceConfigRequest.new(service_name: service_name, service_config: service_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -608,7 +608,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.submit_config_source ::Google::Cloud::ServiceManagement::V1::SubmitConfigSourceRequest.new(service_name: service_name, config_source: config_source, validate_only: validate_only), grpc_options do |response, operation|
+      client.submit_config_source(::Google::Cloud::ServiceManagement::V1::SubmitConfigSourceRequest.new(service_name: service_name, config_source: config_source, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -677,7 +677,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.list_service_rollouts ::Google::Cloud::ServiceManagement::V1::ListServiceRolloutsRequest.new(service_name: service_name, page_token: page_token, page_size: page_size, filter: filter), grpc_options do |response, operation|
+      client.list_service_rollouts(::Google::Cloud::ServiceManagement::V1::ListServiceRolloutsRequest.new(service_name: service_name, page_token: page_token, page_size: page_size, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -738,7 +738,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.get_service_rollout ::Google::Cloud::ServiceManagement::V1::GetServiceRolloutRequest.new(service_name: service_name, rollout_id: rollout_id), grpc_options do |response, operation|
+      client.get_service_rollout(::Google::Cloud::ServiceManagement::V1::GetServiceRolloutRequest.new(service_name: service_name, rollout_id: rollout_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -802,7 +802,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.create_service_rollout ::Google::Cloud::ServiceManagement::V1::CreateServiceRolloutRequest.new(service_name: service_name, rollout: rollout), grpc_options do |response, operation|
+      client.create_service_rollout(::Google::Cloud::ServiceManagement::V1::CreateServiceRolloutRequest.new(service_name: service_name, rollout: rollout), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -863,7 +863,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.generate_config_report ::Google::Cloud::ServiceManagement::V1::GenerateConfigReportRequest.new(new_config: new_config, old_config: old_config), grpc_options do |response, operation|
+      client.generate_config_report(::Google::Cloud::ServiceManagement::V1::GenerateConfigReportRequest.new(new_config: new_config, old_config: old_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -927,7 +927,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.enable_service ::Google::Cloud::ServiceManagement::V1::EnableServiceRequest.new(service_name: service_name, consumer_id: consumer_id), grpc_options do |response, operation|
+      client.enable_service(::Google::Cloud::ServiceManagement::V1::EnableServiceRequest.new(service_name: service_name, consumer_id: consumer_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -992,7 +992,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.disable_service ::Google::Cloud::ServiceManagement::V1::DisableServiceRequest.new(service_name: service_name, consumer_id: consumer_id), grpc_options do |response, operation|
+      client.disable_service(::Google::Cloud::ServiceManagement::V1::DisableServiceRequest.new(service_name: service_name, consumer_id: consumer_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
