@@ -72,7 +72,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -80,17 +80,17 @@ module Google
                 default_config.rpcs.list_repositories.timeout = 30.0
                 default_config.rpcs.list_repositories.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.get_repository.timeout = 30.0
                 default_config.rpcs.get_repository.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.create_repository.timeout = 30.0
@@ -100,89 +100,89 @@ module Google
                 default_config.rpcs.delete_repository.timeout = 30.0
                 default_config.rpcs.delete_repository.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.list_packages.timeout = 30.0
                 default_config.rpcs.list_packages.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.get_package.timeout = 30.0
                 default_config.rpcs.get_package.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.delete_package.timeout = 30.0
                 default_config.rpcs.delete_package.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.list_versions.timeout = 30.0
                 default_config.rpcs.list_versions.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.get_version.timeout = 30.0
                 default_config.rpcs.get_version.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.delete_version.timeout = 30.0
                 default_config.rpcs.delete_version.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.list_files.timeout = 30.0
                 default_config.rpcs.list_files.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.get_file.timeout = 30.0
                 default_config.rpcs.get_file.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.list_tags.timeout = 30.0
                 default_config.rpcs.list_tags.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.get_tag.timeout = 30.0
                 default_config.rpcs.get_tag.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.create_tag.timeout = 30.0
@@ -192,17 +192,17 @@ module Google
                 default_config.rpcs.delete_tag.timeout = 30.0
                 default_config.rpcs.delete_tag.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.get_iam_policy.timeout = 30.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.test_iam_permissions.timeout = 30.0
@@ -273,7 +273,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -1882,7 +1882,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1903,7 +1903,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -2034,47 +2034,47 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  list_repositories_config = parent_rpcs&.list_repositories if parent_rpcs&.respond_to? :list_repositories
+                  list_repositories_config = parent_rpcs.list_repositories if parent_rpcs.respond_to? :list_repositories
                   @list_repositories = ::Gapic::Config::Method.new list_repositories_config
-                  get_repository_config = parent_rpcs&.get_repository if parent_rpcs&.respond_to? :get_repository
+                  get_repository_config = parent_rpcs.get_repository if parent_rpcs.respond_to? :get_repository
                   @get_repository = ::Gapic::Config::Method.new get_repository_config
-                  create_repository_config = parent_rpcs&.create_repository if parent_rpcs&.respond_to? :create_repository
+                  create_repository_config = parent_rpcs.create_repository if parent_rpcs.respond_to? :create_repository
                   @create_repository = ::Gapic::Config::Method.new create_repository_config
-                  update_repository_config = parent_rpcs&.update_repository if parent_rpcs&.respond_to? :update_repository
+                  update_repository_config = parent_rpcs.update_repository if parent_rpcs.respond_to? :update_repository
                   @update_repository = ::Gapic::Config::Method.new update_repository_config
-                  delete_repository_config = parent_rpcs&.delete_repository if parent_rpcs&.respond_to? :delete_repository
+                  delete_repository_config = parent_rpcs.delete_repository if parent_rpcs.respond_to? :delete_repository
                   @delete_repository = ::Gapic::Config::Method.new delete_repository_config
-                  list_packages_config = parent_rpcs&.list_packages if parent_rpcs&.respond_to? :list_packages
+                  list_packages_config = parent_rpcs.list_packages if parent_rpcs.respond_to? :list_packages
                   @list_packages = ::Gapic::Config::Method.new list_packages_config
-                  get_package_config = parent_rpcs&.get_package if parent_rpcs&.respond_to? :get_package
+                  get_package_config = parent_rpcs.get_package if parent_rpcs.respond_to? :get_package
                   @get_package = ::Gapic::Config::Method.new get_package_config
-                  delete_package_config = parent_rpcs&.delete_package if parent_rpcs&.respond_to? :delete_package
+                  delete_package_config = parent_rpcs.delete_package if parent_rpcs.respond_to? :delete_package
                   @delete_package = ::Gapic::Config::Method.new delete_package_config
-                  list_versions_config = parent_rpcs&.list_versions if parent_rpcs&.respond_to? :list_versions
+                  list_versions_config = parent_rpcs.list_versions if parent_rpcs.respond_to? :list_versions
                   @list_versions = ::Gapic::Config::Method.new list_versions_config
-                  get_version_config = parent_rpcs&.get_version if parent_rpcs&.respond_to? :get_version
+                  get_version_config = parent_rpcs.get_version if parent_rpcs.respond_to? :get_version
                   @get_version = ::Gapic::Config::Method.new get_version_config
-                  delete_version_config = parent_rpcs&.delete_version if parent_rpcs&.respond_to? :delete_version
+                  delete_version_config = parent_rpcs.delete_version if parent_rpcs.respond_to? :delete_version
                   @delete_version = ::Gapic::Config::Method.new delete_version_config
-                  list_files_config = parent_rpcs&.list_files if parent_rpcs&.respond_to? :list_files
+                  list_files_config = parent_rpcs.list_files if parent_rpcs.respond_to? :list_files
                   @list_files = ::Gapic::Config::Method.new list_files_config
-                  get_file_config = parent_rpcs&.get_file if parent_rpcs&.respond_to? :get_file
+                  get_file_config = parent_rpcs.get_file if parent_rpcs.respond_to? :get_file
                   @get_file = ::Gapic::Config::Method.new get_file_config
-                  list_tags_config = parent_rpcs&.list_tags if parent_rpcs&.respond_to? :list_tags
+                  list_tags_config = parent_rpcs.list_tags if parent_rpcs.respond_to? :list_tags
                   @list_tags = ::Gapic::Config::Method.new list_tags_config
-                  get_tag_config = parent_rpcs&.get_tag if parent_rpcs&.respond_to? :get_tag
+                  get_tag_config = parent_rpcs.get_tag if parent_rpcs.respond_to? :get_tag
                   @get_tag = ::Gapic::Config::Method.new get_tag_config
-                  create_tag_config = parent_rpcs&.create_tag if parent_rpcs&.respond_to? :create_tag
+                  create_tag_config = parent_rpcs.create_tag if parent_rpcs.respond_to? :create_tag
                   @create_tag = ::Gapic::Config::Method.new create_tag_config
-                  update_tag_config = parent_rpcs&.update_tag if parent_rpcs&.respond_to? :update_tag
+                  update_tag_config = parent_rpcs.update_tag if parent_rpcs.respond_to? :update_tag
                   @update_tag = ::Gapic::Config::Method.new update_tag_config
-                  delete_tag_config = parent_rpcs&.delete_tag if parent_rpcs&.respond_to? :delete_tag
+                  delete_tag_config = parent_rpcs.delete_tag if parent_rpcs.respond_to? :delete_tag
                   @delete_tag = ::Gapic::Config::Method.new delete_tag_config
-                  set_iam_policy_config = parent_rpcs&.set_iam_policy if parent_rpcs&.respond_to? :set_iam_policy
+                  set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
                   @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
-                  get_iam_policy_config = parent_rpcs&.get_iam_policy if parent_rpcs&.respond_to? :get_iam_policy
+                  get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                   @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
-                  test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
+                  test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                   @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
                   yield self if block_given?
