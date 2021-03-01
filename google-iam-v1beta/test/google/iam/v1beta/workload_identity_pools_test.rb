@@ -105,7 +105,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_workload_identity_pools ::Google::Iam::V1beta::ListWorkloadIdentityPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options do |response, operation|
+      client.list_workload_identity_pools(::Google::Iam::V1beta::ListWorkloadIdentityPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -164,7 +164,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_workload_identity_pool ::Google::Iam::V1beta::GetWorkloadIdentityPoolRequest.new(name: name), grpc_options do |response, operation|
+      client.get_workload_identity_pool(::Google::Iam::V1beta::GetWorkloadIdentityPoolRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -230,7 +230,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_workload_identity_pool ::Google::Iam::V1beta::CreateWorkloadIdentityPoolRequest.new(parent: parent, workload_identity_pool: workload_identity_pool, workload_identity_pool_id: workload_identity_pool_id), grpc_options do |response, operation|
+      client.create_workload_identity_pool(::Google::Iam::V1beta::CreateWorkloadIdentityPoolRequest.new(parent: parent, workload_identity_pool: workload_identity_pool, workload_identity_pool_id: workload_identity_pool_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -295,7 +295,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_workload_identity_pool ::Google::Iam::V1beta::UpdateWorkloadIdentityPoolRequest.new(workload_identity_pool: workload_identity_pool, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_workload_identity_pool(::Google::Iam::V1beta::UpdateWorkloadIdentityPoolRequest.new(workload_identity_pool: workload_identity_pool, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -358,7 +358,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_workload_identity_pool ::Google::Iam::V1beta::DeleteWorkloadIdentityPoolRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_workload_identity_pool(::Google::Iam::V1beta::DeleteWorkloadIdentityPoolRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -421,7 +421,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.undelete_workload_identity_pool ::Google::Iam::V1beta::UndeleteWorkloadIdentityPoolRequest.new(name: name), grpc_options do |response, operation|
+      client.undelete_workload_identity_pool(::Google::Iam::V1beta::UndeleteWorkloadIdentityPoolRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -490,7 +490,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_workload_identity_pool_providers ::Google::Iam::V1beta::ListWorkloadIdentityPoolProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options do |response, operation|
+      client.list_workload_identity_pool_providers(::Google::Iam::V1beta::ListWorkloadIdentityPoolProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -549,7 +549,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_workload_identity_pool_provider ::Google::Iam::V1beta::GetWorkloadIdentityPoolProviderRequest.new(name: name), grpc_options do |response, operation|
+      client.get_workload_identity_pool_provider(::Google::Iam::V1beta::GetWorkloadIdentityPoolProviderRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -615,7 +615,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_workload_identity_pool_provider ::Google::Iam::V1beta::CreateWorkloadIdentityPoolProviderRequest.new(parent: parent, workload_identity_pool_provider: workload_identity_pool_provider, workload_identity_pool_provider_id: workload_identity_pool_provider_id), grpc_options do |response, operation|
+      client.create_workload_identity_pool_provider(::Google::Iam::V1beta::CreateWorkloadIdentityPoolProviderRequest.new(parent: parent, workload_identity_pool_provider: workload_identity_pool_provider, workload_identity_pool_provider_id: workload_identity_pool_provider_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -680,7 +680,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_workload_identity_pool_provider ::Google::Iam::V1beta::UpdateWorkloadIdentityPoolProviderRequest.new(workload_identity_pool_provider: workload_identity_pool_provider, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_workload_identity_pool_provider(::Google::Iam::V1beta::UpdateWorkloadIdentityPoolProviderRequest.new(workload_identity_pool_provider: workload_identity_pool_provider, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -743,7 +743,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_workload_identity_pool_provider ::Google::Iam::V1beta::DeleteWorkloadIdentityPoolProviderRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_workload_identity_pool_provider(::Google::Iam::V1beta::DeleteWorkloadIdentityPoolProviderRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -806,7 +806,7 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.undelete_workload_identity_pool_provider ::Google::Iam::V1beta::UndeleteWorkloadIdentityPoolProviderRequest.new(name: name), grpc_options do |response, operation|
+      client.undelete_workload_identity_pool_provider(::Google::Iam::V1beta::UndeleteWorkloadIdentityPoolProviderRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

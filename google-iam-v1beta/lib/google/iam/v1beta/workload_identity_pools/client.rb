@@ -59,7 +59,7 @@ module Google
               parent_config = while namespace.any?
                                 parent_name = namespace.join "::"
                                 parent_const = const_get parent_name
-                                break parent_const.configure if parent_const&.respond_to? :configure
+                                break parent_const.configure if parent_const.respond_to? :configure
                                 namespace.pop
                               end
               default_config = Client::Configuration.new parent_config
@@ -67,97 +67,97 @@ module Google
               default_config.rpcs.list_workload_identity_pools.timeout = 60.0
               default_config.rpcs.list_workload_identity_pools.retry_policy = {
                 initial_delay: 1.0,
-                max_delay:     10.0,
-                multiplier:    1.3,
-                retry_codes:   [14, 4]
+            max_delay: 10.0,
+            multiplier: 1.3,
+            retry_codes: [14, 4]
               }
 
               default_config.rpcs.get_workload_identity_pool.timeout = 60.0
               default_config.rpcs.get_workload_identity_pool.retry_policy = {
                 initial_delay: 1.0,
-                max_delay:     10.0,
-                multiplier:    1.3,
-                retry_codes:   [14, 4]
+            max_delay: 10.0,
+            multiplier: 1.3,
+            retry_codes: [14, 4]
               }
 
               default_config.rpcs.create_workload_identity_pool.timeout = 60.0
               default_config.rpcs.create_workload_identity_pool.retry_policy = {
                 initial_delay: 1.0,
-                max_delay:     10.0,
-                multiplier:    1.3,
-                retry_codes:   [14, 4]
+            max_delay: 10.0,
+            multiplier: 1.3,
+            retry_codes: [14, 4]
               }
 
               default_config.rpcs.update_workload_identity_pool.timeout = 60.0
               default_config.rpcs.update_workload_identity_pool.retry_policy = {
                 initial_delay: 1.0,
-                max_delay:     10.0,
-                multiplier:    1.3,
-                retry_codes:   [14, 4]
+            max_delay: 10.0,
+            multiplier: 1.3,
+            retry_codes: [14, 4]
               }
 
               default_config.rpcs.delete_workload_identity_pool.timeout = 60.0
               default_config.rpcs.delete_workload_identity_pool.retry_policy = {
                 initial_delay: 1.0,
-                max_delay:     10.0,
-                multiplier:    1.3,
-                retry_codes:   [14, 4]
+            max_delay: 10.0,
+            multiplier: 1.3,
+            retry_codes: [14, 4]
               }
 
               default_config.rpcs.undelete_workload_identity_pool.timeout = 60.0
               default_config.rpcs.undelete_workload_identity_pool.retry_policy = {
                 initial_delay: 1.0,
-                max_delay:     10.0,
-                multiplier:    1.3,
-                retry_codes:   [14, 4]
+            max_delay: 10.0,
+            multiplier: 1.3,
+            retry_codes: [14, 4]
               }
 
               default_config.rpcs.list_workload_identity_pool_providers.timeout = 60.0
               default_config.rpcs.list_workload_identity_pool_providers.retry_policy = {
                 initial_delay: 1.0,
-                max_delay:     10.0,
-                multiplier:    1.3,
-                retry_codes:   [14, 4]
+            max_delay: 10.0,
+            multiplier: 1.3,
+            retry_codes: [14, 4]
               }
 
               default_config.rpcs.get_workload_identity_pool_provider.timeout = 60.0
               default_config.rpcs.get_workload_identity_pool_provider.retry_policy = {
                 initial_delay: 1.0,
-                max_delay:     10.0,
-                multiplier:    1.3,
-                retry_codes:   [14, 4]
+            max_delay: 10.0,
+            multiplier: 1.3,
+            retry_codes: [14, 4]
               }
 
               default_config.rpcs.create_workload_identity_pool_provider.timeout = 60.0
               default_config.rpcs.create_workload_identity_pool_provider.retry_policy = {
                 initial_delay: 1.0,
-                max_delay:     10.0,
-                multiplier:    1.3,
-                retry_codes:   [14, 4]
+            max_delay: 10.0,
+            multiplier: 1.3,
+            retry_codes: [14, 4]
               }
 
               default_config.rpcs.update_workload_identity_pool_provider.timeout = 60.0
               default_config.rpcs.update_workload_identity_pool_provider.retry_policy = {
                 initial_delay: 1.0,
-                max_delay:     10.0,
-                multiplier:    1.3,
-                retry_codes:   [14, 4]
+            max_delay: 10.0,
+            multiplier: 1.3,
+            retry_codes: [14, 4]
               }
 
               default_config.rpcs.delete_workload_identity_pool_provider.timeout = 60.0
               default_config.rpcs.delete_workload_identity_pool_provider.retry_policy = {
                 initial_delay: 1.0,
-                max_delay:     10.0,
-                multiplier:    1.3,
-                retry_codes:   [14, 4]
+            max_delay: 10.0,
+            multiplier: 1.3,
+            retry_codes: [14, 4]
               }
 
               default_config.rpcs.undelete_workload_identity_pool_provider.timeout = 60.0
               default_config.rpcs.undelete_workload_identity_pool_provider.retry_policy = {
                 initial_delay: 1.0,
-                max_delay:     10.0,
-                multiplier:    1.3,
-                retry_codes:   [14, 4]
+            max_delay: 10.0,
+            multiplier: 1.3,
+            retry_codes: [14, 4]
               }
 
               default_config
@@ -226,7 +226,7 @@ module Google
             enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                      @config.endpoint == Client.configure.endpoint &&
                                      !@config.endpoint.split(".").first.include?("-")
-            credentials ||= Credentials.default scope:                  @config.scope,
+            credentials ||= Credentials.default scope: @config.scope,
                                                 enable_self_signed_jwt: enable_self_signed_jwt
             if credentials.is_a?(String) || credentials.is_a?(Hash)
               credentials = Credentials.new credentials, scope: @config.scope
@@ -1227,7 +1227,7 @@ module Google
             config_attr :scope,         nil, ::String, ::Array, nil
             config_attr :lib_name,      nil, ::String, nil
             config_attr :lib_version,   nil, ::String, nil
-            config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+            config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
             config_attr :interceptors,  nil, ::Array, nil
             config_attr :timeout,       nil, ::Numeric, nil
             config_attr :metadata,      nil, ::Hash, nil
@@ -1248,7 +1248,7 @@ module Google
             def rpcs
               @rpcs ||= begin
                 parent_rpcs = nil
-                parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                 Rpcs.new parent_rpcs
               end
             end
@@ -1334,29 +1334,29 @@ module Google
 
               # @private
               def initialize parent_rpcs = nil
-                list_workload_identity_pools_config = parent_rpcs&.list_workload_identity_pools if parent_rpcs&.respond_to? :list_workload_identity_pools
+                list_workload_identity_pools_config = parent_rpcs.list_workload_identity_pools if parent_rpcs.respond_to? :list_workload_identity_pools
                 @list_workload_identity_pools = ::Gapic::Config::Method.new list_workload_identity_pools_config
-                get_workload_identity_pool_config = parent_rpcs&.get_workload_identity_pool if parent_rpcs&.respond_to? :get_workload_identity_pool
+                get_workload_identity_pool_config = parent_rpcs.get_workload_identity_pool if parent_rpcs.respond_to? :get_workload_identity_pool
                 @get_workload_identity_pool = ::Gapic::Config::Method.new get_workload_identity_pool_config
-                create_workload_identity_pool_config = parent_rpcs&.create_workload_identity_pool if parent_rpcs&.respond_to? :create_workload_identity_pool
+                create_workload_identity_pool_config = parent_rpcs.create_workload_identity_pool if parent_rpcs.respond_to? :create_workload_identity_pool
                 @create_workload_identity_pool = ::Gapic::Config::Method.new create_workload_identity_pool_config
-                update_workload_identity_pool_config = parent_rpcs&.update_workload_identity_pool if parent_rpcs&.respond_to? :update_workload_identity_pool
+                update_workload_identity_pool_config = parent_rpcs.update_workload_identity_pool if parent_rpcs.respond_to? :update_workload_identity_pool
                 @update_workload_identity_pool = ::Gapic::Config::Method.new update_workload_identity_pool_config
-                delete_workload_identity_pool_config = parent_rpcs&.delete_workload_identity_pool if parent_rpcs&.respond_to? :delete_workload_identity_pool
+                delete_workload_identity_pool_config = parent_rpcs.delete_workload_identity_pool if parent_rpcs.respond_to? :delete_workload_identity_pool
                 @delete_workload_identity_pool = ::Gapic::Config::Method.new delete_workload_identity_pool_config
-                undelete_workload_identity_pool_config = parent_rpcs&.undelete_workload_identity_pool if parent_rpcs&.respond_to? :undelete_workload_identity_pool
+                undelete_workload_identity_pool_config = parent_rpcs.undelete_workload_identity_pool if parent_rpcs.respond_to? :undelete_workload_identity_pool
                 @undelete_workload_identity_pool = ::Gapic::Config::Method.new undelete_workload_identity_pool_config
-                list_workload_identity_pool_providers_config = parent_rpcs&.list_workload_identity_pool_providers if parent_rpcs&.respond_to? :list_workload_identity_pool_providers
+                list_workload_identity_pool_providers_config = parent_rpcs.list_workload_identity_pool_providers if parent_rpcs.respond_to? :list_workload_identity_pool_providers
                 @list_workload_identity_pool_providers = ::Gapic::Config::Method.new list_workload_identity_pool_providers_config
-                get_workload_identity_pool_provider_config = parent_rpcs&.get_workload_identity_pool_provider if parent_rpcs&.respond_to? :get_workload_identity_pool_provider
+                get_workload_identity_pool_provider_config = parent_rpcs.get_workload_identity_pool_provider if parent_rpcs.respond_to? :get_workload_identity_pool_provider
                 @get_workload_identity_pool_provider = ::Gapic::Config::Method.new get_workload_identity_pool_provider_config
-                create_workload_identity_pool_provider_config = parent_rpcs&.create_workload_identity_pool_provider if parent_rpcs&.respond_to? :create_workload_identity_pool_provider
+                create_workload_identity_pool_provider_config = parent_rpcs.create_workload_identity_pool_provider if parent_rpcs.respond_to? :create_workload_identity_pool_provider
                 @create_workload_identity_pool_provider = ::Gapic::Config::Method.new create_workload_identity_pool_provider_config
-                update_workload_identity_pool_provider_config = parent_rpcs&.update_workload_identity_pool_provider if parent_rpcs&.respond_to? :update_workload_identity_pool_provider
+                update_workload_identity_pool_provider_config = parent_rpcs.update_workload_identity_pool_provider if parent_rpcs.respond_to? :update_workload_identity_pool_provider
                 @update_workload_identity_pool_provider = ::Gapic::Config::Method.new update_workload_identity_pool_provider_config
-                delete_workload_identity_pool_provider_config = parent_rpcs&.delete_workload_identity_pool_provider if parent_rpcs&.respond_to? :delete_workload_identity_pool_provider
+                delete_workload_identity_pool_provider_config = parent_rpcs.delete_workload_identity_pool_provider if parent_rpcs.respond_to? :delete_workload_identity_pool_provider
                 @delete_workload_identity_pool_provider = ::Gapic::Config::Method.new delete_workload_identity_pool_provider_config
-                undelete_workload_identity_pool_provider_config = parent_rpcs&.undelete_workload_identity_pool_provider if parent_rpcs&.respond_to? :undelete_workload_identity_pool_provider
+                undelete_workload_identity_pool_provider_config = parent_rpcs.undelete_workload_identity_pool_provider if parent_rpcs.respond_to? :undelete_workload_identity_pool_provider
                 @undelete_workload_identity_pool_provider = ::Gapic::Config::Method.new undelete_workload_identity_pool_provider_config
 
                 yield self if block_given?
