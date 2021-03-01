@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 / 2021-03-01
+
+#### Features
+
+* Support publishing to PubSub when control plane operations occur on a secret
+
 ### 0.7.0 / 2021-02-03
 
 #### Features
