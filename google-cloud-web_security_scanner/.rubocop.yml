@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-web_security_scanner.rb"
-
-Style/AsciiComments:
-  Enabled: false
