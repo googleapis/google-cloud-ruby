@@ -101,7 +101,7 @@ class ::Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::ClientTest < Min
       end
 
       # Use protobuf object with options
-      client.suggest_queries ::Google::Cloud::DataQnA::V1alpha::SuggestQueriesRequest.new(parent: parent, scopes: scopes, query: query, suggestion_types: suggestion_types), grpc_options do |response, operation|
+      client.suggest_queries(::Google::Cloud::DataQnA::V1alpha::SuggestQueriesRequest.new(parent: parent, scopes: scopes, query: query, suggestion_types: suggestion_types), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
