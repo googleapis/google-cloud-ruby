@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.1 / 2021-03-01
+
+#### Documentation
+
+* Clarify field name formats, and note that app streams must be linked to a Firebase app
+
 ### 0.5.0 / 2021-02-02
 
 #### Features
