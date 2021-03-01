@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-secret_manager.rb"
-
-Style/AsciiComments:
-  Enabled: false
