@@ -103,7 +103,7 @@ class ::Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_jobs ::Google::Cloud::Scheduler::V1::ListJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_jobs(::Google::Cloud::Scheduler::V1::ListJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class ::Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_job ::Google::Cloud::Scheduler::V1::GetJobRequest.new(name: name), grpc_options do |response, operation|
+      client.get_job(::Google::Cloud::Scheduler::V1::GetJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -222,7 +222,7 @@ class ::Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.create_job ::Google::Cloud::Scheduler::V1::CreateJobRequest.new(parent: parent, job: job), grpc_options do |response, operation|
+      client.create_job(::Google::Cloud::Scheduler::V1::CreateJobRequest.new(parent: parent, job: job), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -282,7 +282,7 @@ class ::Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.update_job ::Google::Cloud::Scheduler::V1::UpdateJobRequest.new(job: job, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_job(::Google::Cloud::Scheduler::V1::UpdateJobRequest.new(job: job, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -340,7 +340,7 @@ class ::Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.delete_job ::Google::Cloud::Scheduler::V1::DeleteJobRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_job(::Google::Cloud::Scheduler::V1::DeleteJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -398,7 +398,7 @@ class ::Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.pause_job ::Google::Cloud::Scheduler::V1::PauseJobRequest.new(name: name), grpc_options do |response, operation|
+      client.pause_job(::Google::Cloud::Scheduler::V1::PauseJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -456,7 +456,7 @@ class ::Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.resume_job ::Google::Cloud::Scheduler::V1::ResumeJobRequest.new(name: name), grpc_options do |response, operation|
+      client.resume_job(::Google::Cloud::Scheduler::V1::ResumeJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -514,7 +514,7 @@ class ::Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.run_job ::Google::Cloud::Scheduler::V1::RunJobRequest.new(name: name), grpc_options do |response, operation|
+      client.run_job(::Google::Cloud::Scheduler::V1::RunJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
