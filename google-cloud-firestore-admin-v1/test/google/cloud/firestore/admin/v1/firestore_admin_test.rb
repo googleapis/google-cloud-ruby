@@ -101,7 +101,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.create_index ::Google::Cloud::Firestore::Admin::V1::CreateIndexRequest.new(parent: parent, index: index), grpc_options do |response, operation|
+      client.create_index(::Google::Cloud::Firestore::Admin::V1::CreateIndexRequest.new(parent: parent, index: index), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -170,7 +170,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.list_indexes ::Google::Cloud::Firestore::Admin::V1::ListIndexesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_indexes(::Google::Cloud::Firestore::Admin::V1::ListIndexesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -229,7 +229,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.get_index ::Google::Cloud::Firestore::Admin::V1::GetIndexRequest.new(name: name), grpc_options do |response, operation|
+      client.get_index(::Google::Cloud::Firestore::Admin::V1::GetIndexRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -287,7 +287,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.delete_index ::Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_index(::Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -345,7 +345,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.get_field ::Google::Cloud::Firestore::Admin::V1::GetFieldRequest.new(name: name), grpc_options do |response, operation|
+      client.get_field(::Google::Cloud::Firestore::Admin::V1::GetFieldRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -409,7 +409,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.update_field ::Google::Cloud::Firestore::Admin::V1::UpdateFieldRequest.new(field: field, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_field(::Google::Cloud::Firestore::Admin::V1::UpdateFieldRequest.new(field: field, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -478,7 +478,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.list_fields ::Google::Cloud::Firestore::Admin::V1::ListFieldsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_fields(::Google::Cloud::Firestore::Admin::V1::ListFieldsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -545,7 +545,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.export_documents ::Google::Cloud::Firestore::Admin::V1::ExportDocumentsRequest.new(name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix), grpc_options do |response, operation|
+      client.export_documents(::Google::Cloud::Firestore::Admin::V1::ExportDocumentsRequest.new(name: name, collection_ids: collection_ids, output_uri_prefix: output_uri_prefix), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -612,7 +612,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.import_documents ::Google::Cloud::Firestore::Admin::V1::ImportDocumentsRequest.new(name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix), grpc_options do |response, operation|
+      client.import_documents(::Google::Cloud::Firestore::Admin::V1::ImportDocumentsRequest.new(name: name, collection_ids: collection_ids, input_uri_prefix: input_uri_prefix), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
