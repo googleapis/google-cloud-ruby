@@ -95,7 +95,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_occurrence ::Grafeas::V1::GetOccurrenceRequest.new(name: name), grpc_options do |response, operation|
+      client.get_occurrence(::Grafeas::V1::GetOccurrenceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -163,7 +163,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_occurrences ::Grafeas::V1::ListOccurrencesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_occurrences(::Grafeas::V1::ListOccurrencesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -222,7 +222,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_occurrence ::Grafeas::V1::DeleteOccurrenceRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_occurrence(::Grafeas::V1::DeleteOccurrenceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -282,7 +282,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_occurrence ::Grafeas::V1::CreateOccurrenceRequest.new(parent: parent, occurrence: occurrence), grpc_options do |response, operation|
+      client.create_occurrence(::Grafeas::V1::CreateOccurrenceRequest.new(parent: parent, occurrence: occurrence), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -342,7 +342,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_create_occurrences ::Grafeas::V1::BatchCreateOccurrencesRequest.new(parent: parent, occurrences: occurrences), grpc_options do |response, operation|
+      client.batch_create_occurrences(::Grafeas::V1::BatchCreateOccurrencesRequest.new(parent: parent, occurrences: occurrences), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -404,7 +404,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_occurrence ::Grafeas::V1::UpdateOccurrenceRequest.new(name: name, occurrence: occurrence, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_occurrence(::Grafeas::V1::UpdateOccurrenceRequest.new(name: name, occurrence: occurrence, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -462,7 +462,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_occurrence_note ::Grafeas::V1::GetOccurrenceNoteRequest.new(name: name), grpc_options do |response, operation|
+      client.get_occurrence_note(::Grafeas::V1::GetOccurrenceNoteRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -520,7 +520,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_note ::Grafeas::V1::GetNoteRequest.new(name: name), grpc_options do |response, operation|
+      client.get_note(::Grafeas::V1::GetNoteRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -588,7 +588,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_notes ::Grafeas::V1::ListNotesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_notes(::Grafeas::V1::ListNotesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -647,7 +647,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_note ::Grafeas::V1::DeleteNoteRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_note(::Grafeas::V1::DeleteNoteRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -709,7 +709,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_note ::Grafeas::V1::CreateNoteRequest.new(parent: parent, note_id: note_id, note: note), grpc_options do |response, operation|
+      client.create_note(::Grafeas::V1::CreateNoteRequest.new(parent: parent, note_id: note_id, note: note), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -769,7 +769,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_create_notes ::Grafeas::V1::BatchCreateNotesRequest.new(parent: parent, notes: notes), grpc_options do |response, operation|
+      client.batch_create_notes(::Grafeas::V1::BatchCreateNotesRequest.new(parent: parent, notes: notes), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -831,7 +831,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_note ::Grafeas::V1::UpdateNoteRequest.new(name: name, note: note, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_note(::Grafeas::V1::UpdateNoteRequest.new(name: name, note: note, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -899,7 +899,7 @@ class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_note_occurrences ::Grafeas::V1::ListNoteOccurrencesRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_note_occurrences(::Grafeas::V1::ListNoteOccurrencesRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
