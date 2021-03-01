@@ -97,7 +97,7 @@ class ::Google::Cloud::Retail::V2::UserEventService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.write_user_event ::Google::Cloud::Retail::V2::WriteUserEventRequest.new(parent: parent, user_event: user_event), grpc_options do |response, operation|
+      client.write_user_event(::Google::Cloud::Retail::V2::WriteUserEventRequest.new(parent: parent, user_event: user_event), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -161,7 +161,7 @@ class ::Google::Cloud::Retail::V2::UserEventService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.collect_user_event ::Google::Cloud::Retail::V2::CollectUserEventRequest.new(parent: parent, user_event: user_event, uri: uri, ets: ets), grpc_options do |response, operation|
+      client.collect_user_event(::Google::Cloud::Retail::V2::CollectUserEventRequest.new(parent: parent, user_event: user_event, uri: uri, ets: ets), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -227,7 +227,7 @@ class ::Google::Cloud::Retail::V2::UserEventService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.purge_user_events ::Google::Cloud::Retail::V2::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force), grpc_options do |response, operation|
+      client.purge_user_events(::Google::Cloud::Retail::V2::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -294,7 +294,7 @@ class ::Google::Cloud::Retail::V2::UserEventService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.import_user_events ::Google::Cloud::Retail::V2::ImportUserEventsRequest.new(parent: parent, input_config: input_config, errors_config: errors_config), grpc_options do |response, operation|
+      client.import_user_events(::Google::Cloud::Retail::V2::ImportUserEventsRequest.new(parent: parent, input_config: input_config, errors_config: errors_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -359,7 +359,7 @@ class ::Google::Cloud::Retail::V2::UserEventService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.rejoin_user_events ::Google::Cloud::Retail::V2::RejoinUserEventsRequest.new(parent: parent, user_event_rejoin_scope: user_event_rejoin_scope), grpc_options do |response, operation|
+      client.rejoin_user_events(::Google::Cloud::Retail::V2::RejoinUserEventsRequest.new(parent: parent, user_event_rejoin_scope: user_event_rejoin_scope), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
