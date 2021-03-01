@@ -187,7 +187,7 @@ module Google
             # @return [::String]
             def user_link_path **args
               resources = {
-                "account:user_link"  => (proc do |account:, user_link:|
+                "account:user_link" => (proc do |account:, user_link:|
                   raise ::ArgumentError, "account cannot contain /" if account.to_s.include? "/"
 
                   "accounts/#{account}/userLinks/#{user_link}"
