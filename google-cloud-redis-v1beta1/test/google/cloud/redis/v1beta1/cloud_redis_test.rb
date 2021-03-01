@@ -103,7 +103,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_instances ::Google::Cloud::Redis::V1beta1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_instances(::Google::Cloud::Redis::V1beta1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_instance ::Google::Cloud::Redis::V1beta1::GetInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.get_instance(::Google::Cloud::Redis::V1beta1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -228,7 +228,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_instance ::Google::Cloud::Redis::V1beta1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), grpc_options do |response, operation|
+      client.create_instance(::Google::Cloud::Redis::V1beta1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -293,7 +293,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_instance ::Google::Cloud::Redis::V1beta1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance), grpc_options do |response, operation|
+      client.update_instance(::Google::Cloud::Redis::V1beta1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -358,7 +358,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.upgrade_instance ::Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest.new(name: name, redis_version: redis_version), grpc_options do |response, operation|
+      client.upgrade_instance(::Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest.new(name: name, redis_version: redis_version), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -423,7 +423,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.import_instance ::Google::Cloud::Redis::V1beta1::ImportInstanceRequest.new(name: name, input_config: input_config), grpc_options do |response, operation|
+      client.import_instance(::Google::Cloud::Redis::V1beta1::ImportInstanceRequest.new(name: name, input_config: input_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -488,7 +488,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.export_instance ::Google::Cloud::Redis::V1beta1::ExportInstanceRequest.new(name: name, output_config: output_config), grpc_options do |response, operation|
+      client.export_instance(::Google::Cloud::Redis::V1beta1::ExportInstanceRequest.new(name: name, output_config: output_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -553,7 +553,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.failover_instance ::Google::Cloud::Redis::V1beta1::FailoverInstanceRequest.new(name: name, data_protection_mode: data_protection_mode), grpc_options do |response, operation|
+      client.failover_instance(::Google::Cloud::Redis::V1beta1::FailoverInstanceRequest.new(name: name, data_protection_mode: data_protection_mode), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -616,7 +616,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_instance ::Google::Cloud::Redis::V1beta1::DeleteInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_instance(::Google::Cloud::Redis::V1beta1::DeleteInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
