@@ -97,7 +97,7 @@ class ::Google::Cloud::Speech::V1::Speech::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.recognize ::Google::Cloud::Speech::V1::RecognizeRequest.new(config: config, audio: audio), grpc_options do |response, operation|
+      client.recognize(::Google::Cloud::Speech::V1::RecognizeRequest.new(config: config, audio: audio), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -161,7 +161,7 @@ class ::Google::Cloud::Speech::V1::Speech::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.long_running_recognize ::Google::Cloud::Speech::V1::LongRunningRecognizeRequest.new(config: config, audio: audio), grpc_options do |response, operation|
+      client.long_running_recognize(::Google::Cloud::Speech::V1::LongRunningRecognizeRequest.new(config: config, audio: audio), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
