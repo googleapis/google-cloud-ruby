@@ -105,7 +105,7 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_insights ::Google::Cloud::Recommender::V1::ListInsightsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options do |response, operation|
+      client.list_insights(::Google::Cloud::Recommender::V1::ListInsightsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -164,7 +164,7 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_insight ::Google::Cloud::Recommender::V1::GetInsightRequest.new(name: name), grpc_options do |response, operation|
+      client.get_insight(::Google::Cloud::Recommender::V1::GetInsightRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -226,7 +226,7 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.mark_insight_accepted ::Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options do |response, operation|
+      client.mark_insight_accepted(::Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -294,7 +294,7 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_recommendations ::Google::Cloud::Recommender::V1::ListRecommendationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options do |response, operation|
+      client.list_recommendations(::Google::Cloud::Recommender::V1::ListRecommendationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -353,7 +353,7 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_recommendation ::Google::Cloud::Recommender::V1::GetRecommendationRequest.new(name: name), grpc_options do |response, operation|
+      client.get_recommendation(::Google::Cloud::Recommender::V1::GetRecommendationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -415,7 +415,7 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.mark_recommendation_claimed ::Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options do |response, operation|
+      client.mark_recommendation_claimed(::Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -477,7 +477,7 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.mark_recommendation_succeeded ::Google::Cloud::Recommender::V1::MarkRecommendationSucceededRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options do |response, operation|
+      client.mark_recommendation_succeeded(::Google::Cloud::Recommender::V1::MarkRecommendationSucceededRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -539,7 +539,7 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.mark_recommendation_failed ::Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options do |response, operation|
+      client.mark_recommendation_failed(::Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest.new(name: name, state_metadata: state_metadata, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
