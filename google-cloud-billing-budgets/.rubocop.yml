@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-billing-budgets.rb"
-
-Style/AsciiComments:
-  Enabled: false
