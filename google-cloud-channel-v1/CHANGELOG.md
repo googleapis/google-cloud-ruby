@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2021-03-01
+
+#### Features
+
+* Support setting a billing account for an offer payment plan
+
 ### 0.4.0 / 2021-02-23
 
 #### Bug Fixes
