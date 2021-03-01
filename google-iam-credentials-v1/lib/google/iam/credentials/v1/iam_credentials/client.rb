@@ -68,7 +68,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -76,33 +76,33 @@ module Google
                 default_config.rpcs.generate_access_token.timeout = 60.0
                 default_config.rpcs.generate_access_token.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.generate_id_token.timeout = 60.0
                 default_config.rpcs.generate_id_token.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.sign_blob.timeout = 60.0
                 default_config.rpcs.sign_blob.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.sign_jwt.timeout = 60.0
                 default_config.rpcs.sign_jwt.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config
@@ -171,7 +171,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -622,7 +622,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -643,7 +643,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -689,13 +689,13 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  generate_access_token_config = parent_rpcs&.generate_access_token if parent_rpcs&.respond_to? :generate_access_token
+                  generate_access_token_config = parent_rpcs.generate_access_token if parent_rpcs.respond_to? :generate_access_token
                   @generate_access_token = ::Gapic::Config::Method.new generate_access_token_config
-                  generate_id_token_config = parent_rpcs&.generate_id_token if parent_rpcs&.respond_to? :generate_id_token
+                  generate_id_token_config = parent_rpcs.generate_id_token if parent_rpcs.respond_to? :generate_id_token
                   @generate_id_token = ::Gapic::Config::Method.new generate_id_token_config
-                  sign_blob_config = parent_rpcs&.sign_blob if parent_rpcs&.respond_to? :sign_blob
+                  sign_blob_config = parent_rpcs.sign_blob if parent_rpcs.respond_to? :sign_blob
                   @sign_blob = ::Gapic::Config::Method.new sign_blob_config
-                  sign_jwt_config = parent_rpcs&.sign_jwt if parent_rpcs&.respond_to? :sign_jwt
+                  sign_jwt_config = parent_rpcs.sign_jwt if parent_rpcs.respond_to? :sign_jwt
                   @sign_jwt = ::Gapic::Config::Method.new sign_jwt_config
 
                   yield self if block_given?
