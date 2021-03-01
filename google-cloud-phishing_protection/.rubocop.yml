@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-phishing_protection.rb"
-
-Style/AsciiComments:
-  Enabled: false
