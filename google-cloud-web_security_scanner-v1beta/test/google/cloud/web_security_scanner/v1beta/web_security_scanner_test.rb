@@ -97,7 +97,7 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::ClientTes
       end
 
       # Use protobuf object with options
-      client.create_scan_config ::Google::Cloud::WebSecurityScanner::V1beta::CreateScanConfigRequest.new(parent: parent, scan_config: scan_config), grpc_options do |response, operation|
+      client.create_scan_config(::Google::Cloud::WebSecurityScanner::V1beta::CreateScanConfigRequest.new(parent: parent, scan_config: scan_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -155,7 +155,7 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::ClientTes
       end
 
       # Use protobuf object with options
-      client.delete_scan_config ::Google::Cloud::WebSecurityScanner::V1beta::DeleteScanConfigRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_scan_config(::Google::Cloud::WebSecurityScanner::V1beta::DeleteScanConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,7 +213,7 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::ClientTes
       end
 
       # Use protobuf object with options
-      client.get_scan_config ::Google::Cloud::WebSecurityScanner::V1beta::GetScanConfigRequest.new(name: name), grpc_options do |response, operation|
+      client.get_scan_config(::Google::Cloud::WebSecurityScanner::V1beta::GetScanConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -279,7 +279,7 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::ClientTes
       end
 
       # Use protobuf object with options
-      client.list_scan_configs ::Google::Cloud::WebSecurityScanner::V1beta::ListScanConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_scan_configs(::Google::Cloud::WebSecurityScanner::V1beta::ListScanConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -340,7 +340,7 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::ClientTes
       end
 
       # Use protobuf object with options
-      client.update_scan_config ::Google::Cloud::WebSecurityScanner::V1beta::UpdateScanConfigRequest.new(scan_config: scan_config, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_scan_config(::Google::Cloud::WebSecurityScanner::V1beta::UpdateScanConfigRequest.new(scan_config: scan_config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -398,7 +398,7 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::ClientTes
       end
 
       # Use protobuf object with options
-      client.start_scan_run ::Google::Cloud::WebSecurityScanner::V1beta::StartScanRunRequest.new(name: name), grpc_options do |response, operation|
+      client.start_scan_run(::Google::Cloud::WebSecurityScanner::V1beta::StartScanRunRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -456,7 +456,7 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::ClientTes
       end
 
       # Use protobuf object with options
-      client.get_scan_run ::Google::Cloud::WebSecurityScanner::V1beta::GetScanRunRequest.new(name: name), grpc_options do |response, operation|
+      client.get_scan_run(::Google::Cloud::WebSecurityScanner::V1beta::GetScanRunRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -522,7 +522,7 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::ClientTes
       end
 
       # Use protobuf object with options
-      client.list_scan_runs ::Google::Cloud::WebSecurityScanner::V1beta::ListScanRunsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_scan_runs(::Google::Cloud::WebSecurityScanner::V1beta::ListScanRunsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -581,7 +581,7 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::ClientTes
       end
 
       # Use protobuf object with options
-      client.stop_scan_run ::Google::Cloud::WebSecurityScanner::V1beta::StopScanRunRequest.new(name: name), grpc_options do |response, operation|
+      client.stop_scan_run(::Google::Cloud::WebSecurityScanner::V1beta::StopScanRunRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -647,7 +647,7 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::ClientTes
       end
 
       # Use protobuf object with options
-      client.list_crawled_urls ::Google::Cloud::WebSecurityScanner::V1beta::ListCrawledUrlsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_crawled_urls(::Google::Cloud::WebSecurityScanner::V1beta::ListCrawledUrlsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -706,7 +706,7 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::ClientTes
       end
 
       # Use protobuf object with options
-      client.get_finding ::Google::Cloud::WebSecurityScanner::V1beta::GetFindingRequest.new(name: name), grpc_options do |response, operation|
+      client.get_finding(::Google::Cloud::WebSecurityScanner::V1beta::GetFindingRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -774,7 +774,7 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::ClientTes
       end
 
       # Use protobuf object with options
-      client.list_findings ::Google::Cloud::WebSecurityScanner::V1beta::ListFindingsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_findings(::Google::Cloud::WebSecurityScanner::V1beta::ListFindingsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -833,7 +833,7 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::ClientTes
       end
 
       # Use protobuf object with options
-      client.list_finding_type_stats ::Google::Cloud::WebSecurityScanner::V1beta::ListFindingTypeStatsRequest.new(parent: parent), grpc_options do |response, operation|
+      client.list_finding_type_stats(::Google::Cloud::WebSecurityScanner::V1beta::ListFindingTypeStatsRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
