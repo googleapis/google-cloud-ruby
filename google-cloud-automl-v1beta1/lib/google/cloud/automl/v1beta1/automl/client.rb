@@ -73,7 +73,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -83,17 +83,17 @@ module Google
                 default_config.rpcs.get_dataset.timeout = 5.0
                 default_config.rpcs.get_dataset.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_datasets.timeout = 5.0
                 default_config.rpcs.list_datasets.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_dataset.timeout = 5.0
@@ -101,9 +101,9 @@ module Google
                 default_config.rpcs.delete_dataset.timeout = 5.0
                 default_config.rpcs.delete_dataset.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.import_data.timeout = 5.0
@@ -113,25 +113,25 @@ module Google
                 default_config.rpcs.get_annotation_spec.timeout = 5.0
                 default_config.rpcs.get_annotation_spec.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_table_spec.timeout = 5.0
                 default_config.rpcs.get_table_spec.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_table_specs.timeout = 5.0
                 default_config.rpcs.list_table_specs.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_table_spec.timeout = 5.0
@@ -139,17 +139,17 @@ module Google
                 default_config.rpcs.get_column_spec.timeout = 5.0
                 default_config.rpcs.get_column_spec.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_column_specs.timeout = 5.0
                 default_config.rpcs.list_column_specs.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_column_spec.timeout = 5.0
@@ -159,25 +159,25 @@ module Google
                 default_config.rpcs.get_model.timeout = 5.0
                 default_config.rpcs.get_model.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_models.timeout = 5.0
                 default_config.rpcs.list_models.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_model.timeout = 5.0
                 default_config.rpcs.delete_model.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.deploy_model.timeout = 5.0
@@ -191,9 +191,9 @@ module Google
                 default_config.rpcs.get_model_evaluation.timeout = 5.0
                 default_config.rpcs.get_model_evaluation.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_model_evaluations.timeout = 5.0
@@ -264,7 +264,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -2151,7 +2151,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -2172,7 +2172,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -2318,53 +2318,53 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  create_dataset_config = parent_rpcs&.create_dataset if parent_rpcs&.respond_to? :create_dataset
+                  create_dataset_config = parent_rpcs.create_dataset if parent_rpcs.respond_to? :create_dataset
                   @create_dataset = ::Gapic::Config::Method.new create_dataset_config
-                  get_dataset_config = parent_rpcs&.get_dataset if parent_rpcs&.respond_to? :get_dataset
+                  get_dataset_config = parent_rpcs.get_dataset if parent_rpcs.respond_to? :get_dataset
                   @get_dataset = ::Gapic::Config::Method.new get_dataset_config
-                  list_datasets_config = parent_rpcs&.list_datasets if parent_rpcs&.respond_to? :list_datasets
+                  list_datasets_config = parent_rpcs.list_datasets if parent_rpcs.respond_to? :list_datasets
                   @list_datasets = ::Gapic::Config::Method.new list_datasets_config
-                  update_dataset_config = parent_rpcs&.update_dataset if parent_rpcs&.respond_to? :update_dataset
+                  update_dataset_config = parent_rpcs.update_dataset if parent_rpcs.respond_to? :update_dataset
                   @update_dataset = ::Gapic::Config::Method.new update_dataset_config
-                  delete_dataset_config = parent_rpcs&.delete_dataset if parent_rpcs&.respond_to? :delete_dataset
+                  delete_dataset_config = parent_rpcs.delete_dataset if parent_rpcs.respond_to? :delete_dataset
                   @delete_dataset = ::Gapic::Config::Method.new delete_dataset_config
-                  import_data_config = parent_rpcs&.import_data if parent_rpcs&.respond_to? :import_data
+                  import_data_config = parent_rpcs.import_data if parent_rpcs.respond_to? :import_data
                   @import_data = ::Gapic::Config::Method.new import_data_config
-                  export_data_config = parent_rpcs&.export_data if parent_rpcs&.respond_to? :export_data
+                  export_data_config = parent_rpcs.export_data if parent_rpcs.respond_to? :export_data
                   @export_data = ::Gapic::Config::Method.new export_data_config
-                  get_annotation_spec_config = parent_rpcs&.get_annotation_spec if parent_rpcs&.respond_to? :get_annotation_spec
+                  get_annotation_spec_config = parent_rpcs.get_annotation_spec if parent_rpcs.respond_to? :get_annotation_spec
                   @get_annotation_spec = ::Gapic::Config::Method.new get_annotation_spec_config
-                  get_table_spec_config = parent_rpcs&.get_table_spec if parent_rpcs&.respond_to? :get_table_spec
+                  get_table_spec_config = parent_rpcs.get_table_spec if parent_rpcs.respond_to? :get_table_spec
                   @get_table_spec = ::Gapic::Config::Method.new get_table_spec_config
-                  list_table_specs_config = parent_rpcs&.list_table_specs if parent_rpcs&.respond_to? :list_table_specs
+                  list_table_specs_config = parent_rpcs.list_table_specs if parent_rpcs.respond_to? :list_table_specs
                   @list_table_specs = ::Gapic::Config::Method.new list_table_specs_config
-                  update_table_spec_config = parent_rpcs&.update_table_spec if parent_rpcs&.respond_to? :update_table_spec
+                  update_table_spec_config = parent_rpcs.update_table_spec if parent_rpcs.respond_to? :update_table_spec
                   @update_table_spec = ::Gapic::Config::Method.new update_table_spec_config
-                  get_column_spec_config = parent_rpcs&.get_column_spec if parent_rpcs&.respond_to? :get_column_spec
+                  get_column_spec_config = parent_rpcs.get_column_spec if parent_rpcs.respond_to? :get_column_spec
                   @get_column_spec = ::Gapic::Config::Method.new get_column_spec_config
-                  list_column_specs_config = parent_rpcs&.list_column_specs if parent_rpcs&.respond_to? :list_column_specs
+                  list_column_specs_config = parent_rpcs.list_column_specs if parent_rpcs.respond_to? :list_column_specs
                   @list_column_specs = ::Gapic::Config::Method.new list_column_specs_config
-                  update_column_spec_config = parent_rpcs&.update_column_spec if parent_rpcs&.respond_to? :update_column_spec
+                  update_column_spec_config = parent_rpcs.update_column_spec if parent_rpcs.respond_to? :update_column_spec
                   @update_column_spec = ::Gapic::Config::Method.new update_column_spec_config
-                  create_model_config = parent_rpcs&.create_model if parent_rpcs&.respond_to? :create_model
+                  create_model_config = parent_rpcs.create_model if parent_rpcs.respond_to? :create_model
                   @create_model = ::Gapic::Config::Method.new create_model_config
-                  get_model_config = parent_rpcs&.get_model if parent_rpcs&.respond_to? :get_model
+                  get_model_config = parent_rpcs.get_model if parent_rpcs.respond_to? :get_model
                   @get_model = ::Gapic::Config::Method.new get_model_config
-                  list_models_config = parent_rpcs&.list_models if parent_rpcs&.respond_to? :list_models
+                  list_models_config = parent_rpcs.list_models if parent_rpcs.respond_to? :list_models
                   @list_models = ::Gapic::Config::Method.new list_models_config
-                  delete_model_config = parent_rpcs&.delete_model if parent_rpcs&.respond_to? :delete_model
+                  delete_model_config = parent_rpcs.delete_model if parent_rpcs.respond_to? :delete_model
                   @delete_model = ::Gapic::Config::Method.new delete_model_config
-                  deploy_model_config = parent_rpcs&.deploy_model if parent_rpcs&.respond_to? :deploy_model
+                  deploy_model_config = parent_rpcs.deploy_model if parent_rpcs.respond_to? :deploy_model
                   @deploy_model = ::Gapic::Config::Method.new deploy_model_config
-                  undeploy_model_config = parent_rpcs&.undeploy_model if parent_rpcs&.respond_to? :undeploy_model
+                  undeploy_model_config = parent_rpcs.undeploy_model if parent_rpcs.respond_to? :undeploy_model
                   @undeploy_model = ::Gapic::Config::Method.new undeploy_model_config
-                  export_model_config = parent_rpcs&.export_model if parent_rpcs&.respond_to? :export_model
+                  export_model_config = parent_rpcs.export_model if parent_rpcs.respond_to? :export_model
                   @export_model = ::Gapic::Config::Method.new export_model_config
-                  export_evaluated_examples_config = parent_rpcs&.export_evaluated_examples if parent_rpcs&.respond_to? :export_evaluated_examples
+                  export_evaluated_examples_config = parent_rpcs.export_evaluated_examples if parent_rpcs.respond_to? :export_evaluated_examples
                   @export_evaluated_examples = ::Gapic::Config::Method.new export_evaluated_examples_config
-                  get_model_evaluation_config = parent_rpcs&.get_model_evaluation if parent_rpcs&.respond_to? :get_model_evaluation
+                  get_model_evaluation_config = parent_rpcs.get_model_evaluation if parent_rpcs.respond_to? :get_model_evaluation
                   @get_model_evaluation = ::Gapic::Config::Method.new get_model_evaluation_config
-                  list_model_evaluations_config = parent_rpcs&.list_model_evaluations if parent_rpcs&.respond_to? :list_model_evaluations
+                  list_model_evaluations_config = parent_rpcs.list_model_evaluations if parent_rpcs.respond_to? :list_model_evaluations
                   @list_model_evaluations = ::Gapic::Config::Method.new list_model_evaluations_config
 
                   yield self if block_given?
