@@ -97,7 +97,7 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
       end
 
       # Use protobuf object with options
-      client.create_assessment ::Google::Cloud::RecaptchaEnterprise::V1::CreateAssessmentRequest.new(parent: parent, assessment: assessment), grpc_options do |response, operation|
+      client.create_assessment(::Google::Cloud::RecaptchaEnterprise::V1::CreateAssessmentRequest.new(parent: parent, assessment: assessment), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -157,7 +157,7 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
       end
 
       # Use protobuf object with options
-      client.annotate_assessment ::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest.new(name: name, annotation: annotation), grpc_options do |response, operation|
+      client.annotate_assessment(::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest.new(name: name, annotation: annotation), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,7 +217,7 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
       end
 
       # Use protobuf object with options
-      client.create_key ::Google::Cloud::RecaptchaEnterprise::V1::CreateKeyRequest.new(parent: parent, key: key), grpc_options do |response, operation|
+      client.create_key(::Google::Cloud::RecaptchaEnterprise::V1::CreateKeyRequest.new(parent: parent, key: key), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -283,7 +283,7 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
       end
 
       # Use protobuf object with options
-      client.list_keys ::Google::Cloud::RecaptchaEnterprise::V1::ListKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_keys(::Google::Cloud::RecaptchaEnterprise::V1::ListKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -342,7 +342,7 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
       end
 
       # Use protobuf object with options
-      client.get_key ::Google::Cloud::RecaptchaEnterprise::V1::GetKeyRequest.new(name: name), grpc_options do |response, operation|
+      client.get_key(::Google::Cloud::RecaptchaEnterprise::V1::GetKeyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -402,7 +402,7 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
       end
 
       # Use protobuf object with options
-      client.update_key ::Google::Cloud::RecaptchaEnterprise::V1::UpdateKeyRequest.new(key: key, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_key(::Google::Cloud::RecaptchaEnterprise::V1::UpdateKeyRequest.new(key: key, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -460,7 +460,7 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
       end
 
       # Use protobuf object with options
-      client.delete_key ::Google::Cloud::RecaptchaEnterprise::V1::DeleteKeyRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_key(::Google::Cloud::RecaptchaEnterprise::V1::DeleteKeyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
