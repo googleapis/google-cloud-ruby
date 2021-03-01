@@ -97,7 +97,7 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.create_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest.new(parent: parent, dashboard: dashboard), grpc_options do |response, operation|
+      client.create_dashboard(::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest.new(parent: parent, dashboard: dashboard), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -163,7 +163,7 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.list_dashboards ::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_dashboards(::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -222,7 +222,7 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.get_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest.new(name: name), grpc_options do |response, operation|
+      client.get_dashboard(::Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -280,7 +280,7 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.delete_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_dashboard(::Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -338,7 +338,7 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest 
       end
 
       # Use protobuf object with options
-      client.update_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest.new(dashboard: dashboard), grpc_options do |response, operation|
+      client.update_dashboard(::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest.new(dashboard: dashboard), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
