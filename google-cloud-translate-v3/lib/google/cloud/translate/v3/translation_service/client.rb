@@ -60,7 +60,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -72,9 +72,9 @@ module Google
                 default_config.rpcs.get_supported_languages.timeout = 600.0
                 default_config.rpcs.get_supported_languages.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.batch_translate_text.timeout = 600.0
@@ -84,25 +84,25 @@ module Google
                 default_config.rpcs.list_glossaries.timeout = 600.0
                 default_config.rpcs.list_glossaries.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_glossary.timeout = 600.0
                 default_config.rpcs.get_glossary.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_glossary.timeout = 600.0
                 default_config.rpcs.delete_glossary.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config
@@ -171,7 +171,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -1026,7 +1026,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1047,7 +1047,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -1113,21 +1113,21 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  translate_text_config = parent_rpcs&.translate_text if parent_rpcs&.respond_to? :translate_text
+                  translate_text_config = parent_rpcs.translate_text if parent_rpcs.respond_to? :translate_text
                   @translate_text = ::Gapic::Config::Method.new translate_text_config
-                  detect_language_config = parent_rpcs&.detect_language if parent_rpcs&.respond_to? :detect_language
+                  detect_language_config = parent_rpcs.detect_language if parent_rpcs.respond_to? :detect_language
                   @detect_language = ::Gapic::Config::Method.new detect_language_config
-                  get_supported_languages_config = parent_rpcs&.get_supported_languages if parent_rpcs&.respond_to? :get_supported_languages
+                  get_supported_languages_config = parent_rpcs.get_supported_languages if parent_rpcs.respond_to? :get_supported_languages
                   @get_supported_languages = ::Gapic::Config::Method.new get_supported_languages_config
-                  batch_translate_text_config = parent_rpcs&.batch_translate_text if parent_rpcs&.respond_to? :batch_translate_text
+                  batch_translate_text_config = parent_rpcs.batch_translate_text if parent_rpcs.respond_to? :batch_translate_text
                   @batch_translate_text = ::Gapic::Config::Method.new batch_translate_text_config
-                  create_glossary_config = parent_rpcs&.create_glossary if parent_rpcs&.respond_to? :create_glossary
+                  create_glossary_config = parent_rpcs.create_glossary if parent_rpcs.respond_to? :create_glossary
                   @create_glossary = ::Gapic::Config::Method.new create_glossary_config
-                  list_glossaries_config = parent_rpcs&.list_glossaries if parent_rpcs&.respond_to? :list_glossaries
+                  list_glossaries_config = parent_rpcs.list_glossaries if parent_rpcs.respond_to? :list_glossaries
                   @list_glossaries = ::Gapic::Config::Method.new list_glossaries_config
-                  get_glossary_config = parent_rpcs&.get_glossary if parent_rpcs&.respond_to? :get_glossary
+                  get_glossary_config = parent_rpcs.get_glossary if parent_rpcs.respond_to? :get_glossary
                   @get_glossary = ::Gapic::Config::Method.new get_glossary_config
-                  delete_glossary_config = parent_rpcs&.delete_glossary if parent_rpcs&.respond_to? :delete_glossary
+                  delete_glossary_config = parent_rpcs.delete_glossary if parent_rpcs.respond_to? :delete_glossary
                   @delete_glossary = ::Gapic::Config::Method.new delete_glossary_config
 
                   yield self if block_given?
