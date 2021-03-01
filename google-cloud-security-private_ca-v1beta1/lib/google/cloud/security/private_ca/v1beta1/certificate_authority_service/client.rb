@@ -62,7 +62,7 @@ module Google
                   parent_config = while namespace.any?
                                     parent_name = namespace.join "::"
                                     parent_const = const_get parent_name
-                                    break parent_const.configure if parent_const&.respond_to? :configure
+                                    break parent_const.configure if parent_const.respond_to? :configure
                                     namespace.pop
                                   end
                   default_config = Client::Configuration.new parent_config
@@ -70,9 +70,9 @@ module Google
                   default_config.timeout = 60.0
                   default_config.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [2, 14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [2, 14, 4]
                   }
 
                   default_config
@@ -141,7 +141,7 @@ module Google
                 enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                          @config.endpoint == Client.configure.endpoint &&
                                          !@config.endpoint.split(".").first.include?("-")
-                credentials ||= Credentials.default scope:                  @config.scope,
+                credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(String) || credentials.is_a?(Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
@@ -1870,7 +1870,7 @@ module Google
                 config_attr :scope,         nil, ::String, ::Array, nil
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
-                config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+                config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
                 config_attr :interceptors,  nil, ::Array, nil
                 config_attr :timeout,       nil, ::Numeric, nil
                 config_attr :metadata,      nil, ::Hash, nil
@@ -1891,7 +1891,7 @@ module Google
                 def rpcs
                   @rpcs ||= begin
                     parent_rpcs = nil
-                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                     Rpcs.new parent_rpcs
                   end
                 end
@@ -2017,45 +2017,45 @@ module Google
 
                   # @private
                   def initialize parent_rpcs = nil
-                    create_certificate_config = parent_rpcs&.create_certificate if parent_rpcs&.respond_to? :create_certificate
+                    create_certificate_config = parent_rpcs.create_certificate if parent_rpcs.respond_to? :create_certificate
                     @create_certificate = ::Gapic::Config::Method.new create_certificate_config
-                    get_certificate_config = parent_rpcs&.get_certificate if parent_rpcs&.respond_to? :get_certificate
+                    get_certificate_config = parent_rpcs.get_certificate if parent_rpcs.respond_to? :get_certificate
                     @get_certificate = ::Gapic::Config::Method.new get_certificate_config
-                    list_certificates_config = parent_rpcs&.list_certificates if parent_rpcs&.respond_to? :list_certificates
+                    list_certificates_config = parent_rpcs.list_certificates if parent_rpcs.respond_to? :list_certificates
                     @list_certificates = ::Gapic::Config::Method.new list_certificates_config
-                    revoke_certificate_config = parent_rpcs&.revoke_certificate if parent_rpcs&.respond_to? :revoke_certificate
+                    revoke_certificate_config = parent_rpcs.revoke_certificate if parent_rpcs.respond_to? :revoke_certificate
                     @revoke_certificate = ::Gapic::Config::Method.new revoke_certificate_config
-                    update_certificate_config = parent_rpcs&.update_certificate if parent_rpcs&.respond_to? :update_certificate
+                    update_certificate_config = parent_rpcs.update_certificate if parent_rpcs.respond_to? :update_certificate
                     @update_certificate = ::Gapic::Config::Method.new update_certificate_config
-                    activate_certificate_authority_config = parent_rpcs&.activate_certificate_authority if parent_rpcs&.respond_to? :activate_certificate_authority
+                    activate_certificate_authority_config = parent_rpcs.activate_certificate_authority if parent_rpcs.respond_to? :activate_certificate_authority
                     @activate_certificate_authority = ::Gapic::Config::Method.new activate_certificate_authority_config
-                    create_certificate_authority_config = parent_rpcs&.create_certificate_authority if parent_rpcs&.respond_to? :create_certificate_authority
+                    create_certificate_authority_config = parent_rpcs.create_certificate_authority if parent_rpcs.respond_to? :create_certificate_authority
                     @create_certificate_authority = ::Gapic::Config::Method.new create_certificate_authority_config
-                    disable_certificate_authority_config = parent_rpcs&.disable_certificate_authority if parent_rpcs&.respond_to? :disable_certificate_authority
+                    disable_certificate_authority_config = parent_rpcs.disable_certificate_authority if parent_rpcs.respond_to? :disable_certificate_authority
                     @disable_certificate_authority = ::Gapic::Config::Method.new disable_certificate_authority_config
-                    enable_certificate_authority_config = parent_rpcs&.enable_certificate_authority if parent_rpcs&.respond_to? :enable_certificate_authority
+                    enable_certificate_authority_config = parent_rpcs.enable_certificate_authority if parent_rpcs.respond_to? :enable_certificate_authority
                     @enable_certificate_authority = ::Gapic::Config::Method.new enable_certificate_authority_config
-                    fetch_certificate_authority_csr_config = parent_rpcs&.fetch_certificate_authority_csr if parent_rpcs&.respond_to? :fetch_certificate_authority_csr
+                    fetch_certificate_authority_csr_config = parent_rpcs.fetch_certificate_authority_csr if parent_rpcs.respond_to? :fetch_certificate_authority_csr
                     @fetch_certificate_authority_csr = ::Gapic::Config::Method.new fetch_certificate_authority_csr_config
-                    get_certificate_authority_config = parent_rpcs&.get_certificate_authority if parent_rpcs&.respond_to? :get_certificate_authority
+                    get_certificate_authority_config = parent_rpcs.get_certificate_authority if parent_rpcs.respond_to? :get_certificate_authority
                     @get_certificate_authority = ::Gapic::Config::Method.new get_certificate_authority_config
-                    list_certificate_authorities_config = parent_rpcs&.list_certificate_authorities if parent_rpcs&.respond_to? :list_certificate_authorities
+                    list_certificate_authorities_config = parent_rpcs.list_certificate_authorities if parent_rpcs.respond_to? :list_certificate_authorities
                     @list_certificate_authorities = ::Gapic::Config::Method.new list_certificate_authorities_config
-                    restore_certificate_authority_config = parent_rpcs&.restore_certificate_authority if parent_rpcs&.respond_to? :restore_certificate_authority
+                    restore_certificate_authority_config = parent_rpcs.restore_certificate_authority if parent_rpcs.respond_to? :restore_certificate_authority
                     @restore_certificate_authority = ::Gapic::Config::Method.new restore_certificate_authority_config
-                    schedule_delete_certificate_authority_config = parent_rpcs&.schedule_delete_certificate_authority if parent_rpcs&.respond_to? :schedule_delete_certificate_authority
+                    schedule_delete_certificate_authority_config = parent_rpcs.schedule_delete_certificate_authority if parent_rpcs.respond_to? :schedule_delete_certificate_authority
                     @schedule_delete_certificate_authority = ::Gapic::Config::Method.new schedule_delete_certificate_authority_config
-                    update_certificate_authority_config = parent_rpcs&.update_certificate_authority if parent_rpcs&.respond_to? :update_certificate_authority
+                    update_certificate_authority_config = parent_rpcs.update_certificate_authority if parent_rpcs.respond_to? :update_certificate_authority
                     @update_certificate_authority = ::Gapic::Config::Method.new update_certificate_authority_config
-                    get_certificate_revocation_list_config = parent_rpcs&.get_certificate_revocation_list if parent_rpcs&.respond_to? :get_certificate_revocation_list
+                    get_certificate_revocation_list_config = parent_rpcs.get_certificate_revocation_list if parent_rpcs.respond_to? :get_certificate_revocation_list
                     @get_certificate_revocation_list = ::Gapic::Config::Method.new get_certificate_revocation_list_config
-                    list_certificate_revocation_lists_config = parent_rpcs&.list_certificate_revocation_lists if parent_rpcs&.respond_to? :list_certificate_revocation_lists
+                    list_certificate_revocation_lists_config = parent_rpcs.list_certificate_revocation_lists if parent_rpcs.respond_to? :list_certificate_revocation_lists
                     @list_certificate_revocation_lists = ::Gapic::Config::Method.new list_certificate_revocation_lists_config
-                    update_certificate_revocation_list_config = parent_rpcs&.update_certificate_revocation_list if parent_rpcs&.respond_to? :update_certificate_revocation_list
+                    update_certificate_revocation_list_config = parent_rpcs.update_certificate_revocation_list if parent_rpcs.respond_to? :update_certificate_revocation_list
                     @update_certificate_revocation_list = ::Gapic::Config::Method.new update_certificate_revocation_list_config
-                    get_reusable_config_config = parent_rpcs&.get_reusable_config if parent_rpcs&.respond_to? :get_reusable_config
+                    get_reusable_config_config = parent_rpcs.get_reusable_config if parent_rpcs.respond_to? :get_reusable_config
                     @get_reusable_config = ::Gapic::Config::Method.new get_reusable_config_config
-                    list_reusable_configs_config = parent_rpcs&.list_reusable_configs if parent_rpcs&.respond_to? :list_reusable_configs
+                    list_reusable_configs_config = parent_rpcs.list_reusable_configs if parent_rpcs.respond_to? :list_reusable_configs
                     @list_reusable_configs = ::Gapic::Config::Method.new list_reusable_configs_config
 
                     yield self if block_given?
