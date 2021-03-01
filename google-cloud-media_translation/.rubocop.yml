@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-media_translation.rb"
-
-Style/AsciiComments:
-  Enabled: false
