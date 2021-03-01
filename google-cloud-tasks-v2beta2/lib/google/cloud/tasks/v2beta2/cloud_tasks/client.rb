@@ -61,7 +61,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -69,17 +69,17 @@ module Google
                 default_config.rpcs.list_queues.timeout = 20.0
                 default_config.rpcs.list_queues.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     10.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 10.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_queue.timeout = 20.0
                 default_config.rpcs.get_queue.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     10.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 10.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_queue.timeout = 20.0
@@ -89,9 +89,9 @@ module Google
                 default_config.rpcs.delete_queue.timeout = 20.0
                 default_config.rpcs.delete_queue.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     10.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 10.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.purge_queue.timeout = 20.0
@@ -103,9 +103,9 @@ module Google
                 default_config.rpcs.get_iam_policy.timeout = 20.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     10.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 10.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.set_iam_policy.timeout = 20.0
@@ -113,25 +113,25 @@ module Google
                 default_config.rpcs.test_iam_permissions.timeout = 20.0
                 default_config.rpcs.test_iam_permissions.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     10.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 10.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_tasks.timeout = 20.0
                 default_config.rpcs.list_tasks.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     10.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 10.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_task.timeout = 20.0
                 default_config.rpcs.get_task.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     10.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 10.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_task.timeout = 20.0
@@ -139,9 +139,9 @@ module Google
                 default_config.rpcs.delete_task.timeout = 20.0
                 default_config.rpcs.delete_task.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     10.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 10.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.lease_tasks.timeout = 20.0
@@ -220,7 +220,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -2145,7 +2145,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -2166,7 +2166,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -2292,45 +2292,45 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  list_queues_config = parent_rpcs&.list_queues if parent_rpcs&.respond_to? :list_queues
+                  list_queues_config = parent_rpcs.list_queues if parent_rpcs.respond_to? :list_queues
                   @list_queues = ::Gapic::Config::Method.new list_queues_config
-                  get_queue_config = parent_rpcs&.get_queue if parent_rpcs&.respond_to? :get_queue
+                  get_queue_config = parent_rpcs.get_queue if parent_rpcs.respond_to? :get_queue
                   @get_queue = ::Gapic::Config::Method.new get_queue_config
-                  create_queue_config = parent_rpcs&.create_queue if parent_rpcs&.respond_to? :create_queue
+                  create_queue_config = parent_rpcs.create_queue if parent_rpcs.respond_to? :create_queue
                   @create_queue = ::Gapic::Config::Method.new create_queue_config
-                  update_queue_config = parent_rpcs&.update_queue if parent_rpcs&.respond_to? :update_queue
+                  update_queue_config = parent_rpcs.update_queue if parent_rpcs.respond_to? :update_queue
                   @update_queue = ::Gapic::Config::Method.new update_queue_config
-                  delete_queue_config = parent_rpcs&.delete_queue if parent_rpcs&.respond_to? :delete_queue
+                  delete_queue_config = parent_rpcs.delete_queue if parent_rpcs.respond_to? :delete_queue
                   @delete_queue = ::Gapic::Config::Method.new delete_queue_config
-                  purge_queue_config = parent_rpcs&.purge_queue if parent_rpcs&.respond_to? :purge_queue
+                  purge_queue_config = parent_rpcs.purge_queue if parent_rpcs.respond_to? :purge_queue
                   @purge_queue = ::Gapic::Config::Method.new purge_queue_config
-                  pause_queue_config = parent_rpcs&.pause_queue if parent_rpcs&.respond_to? :pause_queue
+                  pause_queue_config = parent_rpcs.pause_queue if parent_rpcs.respond_to? :pause_queue
                   @pause_queue = ::Gapic::Config::Method.new pause_queue_config
-                  resume_queue_config = parent_rpcs&.resume_queue if parent_rpcs&.respond_to? :resume_queue
+                  resume_queue_config = parent_rpcs.resume_queue if parent_rpcs.respond_to? :resume_queue
                   @resume_queue = ::Gapic::Config::Method.new resume_queue_config
-                  get_iam_policy_config = parent_rpcs&.get_iam_policy if parent_rpcs&.respond_to? :get_iam_policy
+                  get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                   @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
-                  set_iam_policy_config = parent_rpcs&.set_iam_policy if parent_rpcs&.respond_to? :set_iam_policy
+                  set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
                   @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
-                  test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
+                  test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                   @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
-                  list_tasks_config = parent_rpcs&.list_tasks if parent_rpcs&.respond_to? :list_tasks
+                  list_tasks_config = parent_rpcs.list_tasks if parent_rpcs.respond_to? :list_tasks
                   @list_tasks = ::Gapic::Config::Method.new list_tasks_config
-                  get_task_config = parent_rpcs&.get_task if parent_rpcs&.respond_to? :get_task
+                  get_task_config = parent_rpcs.get_task if parent_rpcs.respond_to? :get_task
                   @get_task = ::Gapic::Config::Method.new get_task_config
-                  create_task_config = parent_rpcs&.create_task if parent_rpcs&.respond_to? :create_task
+                  create_task_config = parent_rpcs.create_task if parent_rpcs.respond_to? :create_task
                   @create_task = ::Gapic::Config::Method.new create_task_config
-                  delete_task_config = parent_rpcs&.delete_task if parent_rpcs&.respond_to? :delete_task
+                  delete_task_config = parent_rpcs.delete_task if parent_rpcs.respond_to? :delete_task
                   @delete_task = ::Gapic::Config::Method.new delete_task_config
-                  lease_tasks_config = parent_rpcs&.lease_tasks if parent_rpcs&.respond_to? :lease_tasks
+                  lease_tasks_config = parent_rpcs.lease_tasks if parent_rpcs.respond_to? :lease_tasks
                   @lease_tasks = ::Gapic::Config::Method.new lease_tasks_config
-                  acknowledge_task_config = parent_rpcs&.acknowledge_task if parent_rpcs&.respond_to? :acknowledge_task
+                  acknowledge_task_config = parent_rpcs.acknowledge_task if parent_rpcs.respond_to? :acknowledge_task
                   @acknowledge_task = ::Gapic::Config::Method.new acknowledge_task_config
-                  renew_lease_config = parent_rpcs&.renew_lease if parent_rpcs&.respond_to? :renew_lease
+                  renew_lease_config = parent_rpcs.renew_lease if parent_rpcs.respond_to? :renew_lease
                   @renew_lease = ::Gapic::Config::Method.new renew_lease_config
-                  cancel_lease_config = parent_rpcs&.cancel_lease if parent_rpcs&.respond_to? :cancel_lease
+                  cancel_lease_config = parent_rpcs.cancel_lease if parent_rpcs.respond_to? :cancel_lease
                   @cancel_lease = ::Gapic::Config::Method.new cancel_lease_config
-                  run_task_config = parent_rpcs&.run_task if parent_rpcs&.respond_to? :run_task
+                  run_task_config = parent_rpcs.run_task if parent_rpcs.respond_to? :run_task
                   @run_task = ::Gapic::Config::Method.new run_task_config
 
                   yield self if block_given?
