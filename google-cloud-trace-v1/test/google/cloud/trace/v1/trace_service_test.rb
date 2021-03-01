@@ -113,7 +113,7 @@ class ::Google::Cloud::Trace::V1::TraceService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_traces ::Google::Cloud::Trace::V1::ListTracesRequest.new(project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_traces(::Google::Cloud::Trace::V1::ListTracesRequest.new(project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -174,7 +174,7 @@ class ::Google::Cloud::Trace::V1::TraceService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_trace ::Google::Cloud::Trace::V1::GetTraceRequest.new(project_id: project_id, trace_id: trace_id), grpc_options do |response, operation|
+      client.get_trace(::Google::Cloud::Trace::V1::GetTraceRequest.new(project_id: project_id, trace_id: trace_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -234,7 +234,7 @@ class ::Google::Cloud::Trace::V1::TraceService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.patch_traces ::Google::Cloud::Trace::V1::PatchTracesRequest.new(project_id: project_id, traces: traces), grpc_options do |response, operation|
+      client.patch_traces(::Google::Cloud::Trace::V1::PatchTracesRequest.new(project_id: project_id, traces: traces), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
