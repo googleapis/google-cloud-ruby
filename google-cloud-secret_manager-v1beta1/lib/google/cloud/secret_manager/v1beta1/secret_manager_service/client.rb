@@ -66,7 +66,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -90,9 +90,9 @@ module Google
                 default_config.rpcs.access_secret_version.timeout = 60.0
                 default_config.rpcs.access_secret_version.retry_policy = {
                   initial_delay: 1.0,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 2]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 2]
                 }
 
                 default_config.rpcs.disable_secret_version.timeout = 60.0
@@ -173,7 +173,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -1360,7 +1360,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1381,7 +1381,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -1482,35 +1482,35 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  list_secrets_config = parent_rpcs&.list_secrets if parent_rpcs&.respond_to? :list_secrets
+                  list_secrets_config = parent_rpcs.list_secrets if parent_rpcs.respond_to? :list_secrets
                   @list_secrets = ::Gapic::Config::Method.new list_secrets_config
-                  create_secret_config = parent_rpcs&.create_secret if parent_rpcs&.respond_to? :create_secret
+                  create_secret_config = parent_rpcs.create_secret if parent_rpcs.respond_to? :create_secret
                   @create_secret = ::Gapic::Config::Method.new create_secret_config
-                  add_secret_version_config = parent_rpcs&.add_secret_version if parent_rpcs&.respond_to? :add_secret_version
+                  add_secret_version_config = parent_rpcs.add_secret_version if parent_rpcs.respond_to? :add_secret_version
                   @add_secret_version = ::Gapic::Config::Method.new add_secret_version_config
-                  get_secret_config = parent_rpcs&.get_secret if parent_rpcs&.respond_to? :get_secret
+                  get_secret_config = parent_rpcs.get_secret if parent_rpcs.respond_to? :get_secret
                   @get_secret = ::Gapic::Config::Method.new get_secret_config
-                  update_secret_config = parent_rpcs&.update_secret if parent_rpcs&.respond_to? :update_secret
+                  update_secret_config = parent_rpcs.update_secret if parent_rpcs.respond_to? :update_secret
                   @update_secret = ::Gapic::Config::Method.new update_secret_config
-                  delete_secret_config = parent_rpcs&.delete_secret if parent_rpcs&.respond_to? :delete_secret
+                  delete_secret_config = parent_rpcs.delete_secret if parent_rpcs.respond_to? :delete_secret
                   @delete_secret = ::Gapic::Config::Method.new delete_secret_config
-                  list_secret_versions_config = parent_rpcs&.list_secret_versions if parent_rpcs&.respond_to? :list_secret_versions
+                  list_secret_versions_config = parent_rpcs.list_secret_versions if parent_rpcs.respond_to? :list_secret_versions
                   @list_secret_versions = ::Gapic::Config::Method.new list_secret_versions_config
-                  get_secret_version_config = parent_rpcs&.get_secret_version if parent_rpcs&.respond_to? :get_secret_version
+                  get_secret_version_config = parent_rpcs.get_secret_version if parent_rpcs.respond_to? :get_secret_version
                   @get_secret_version = ::Gapic::Config::Method.new get_secret_version_config
-                  access_secret_version_config = parent_rpcs&.access_secret_version if parent_rpcs&.respond_to? :access_secret_version
+                  access_secret_version_config = parent_rpcs.access_secret_version if parent_rpcs.respond_to? :access_secret_version
                   @access_secret_version = ::Gapic::Config::Method.new access_secret_version_config
-                  disable_secret_version_config = parent_rpcs&.disable_secret_version if parent_rpcs&.respond_to? :disable_secret_version
+                  disable_secret_version_config = parent_rpcs.disable_secret_version if parent_rpcs.respond_to? :disable_secret_version
                   @disable_secret_version = ::Gapic::Config::Method.new disable_secret_version_config
-                  enable_secret_version_config = parent_rpcs&.enable_secret_version if parent_rpcs&.respond_to? :enable_secret_version
+                  enable_secret_version_config = parent_rpcs.enable_secret_version if parent_rpcs.respond_to? :enable_secret_version
                   @enable_secret_version = ::Gapic::Config::Method.new enable_secret_version_config
-                  destroy_secret_version_config = parent_rpcs&.destroy_secret_version if parent_rpcs&.respond_to? :destroy_secret_version
+                  destroy_secret_version_config = parent_rpcs.destroy_secret_version if parent_rpcs.respond_to? :destroy_secret_version
                   @destroy_secret_version = ::Gapic::Config::Method.new destroy_secret_version_config
-                  set_iam_policy_config = parent_rpcs&.set_iam_policy if parent_rpcs&.respond_to? :set_iam_policy
+                  set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
                   @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
-                  get_iam_policy_config = parent_rpcs&.get_iam_policy if parent_rpcs&.respond_to? :get_iam_policy
+                  get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                   @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
-                  test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
+                  test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                   @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
                   yield self if block_given?
