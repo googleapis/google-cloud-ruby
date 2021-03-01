@@ -54,12 +54,12 @@ module Google
             # @return [::String]
             def feed_path **args
               resources = {
-                "feed:project"      => (proc do |project:, feed:|
+                "feed:project" => (proc do |project:, feed:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/feeds/#{feed}"
                 end),
-                "feed:folder"       => (proc do |folder:, feed:|
+                "feed:folder" => (proc do |folder:, feed:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/feeds/#{feed}"

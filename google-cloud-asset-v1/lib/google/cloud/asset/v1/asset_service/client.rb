@@ -60,7 +60,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -70,9 +70,9 @@ module Google
                 default_config.rpcs.batch_get_assets_history.timeout = 60.0
                 default_config.rpcs.batch_get_assets_history.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_feed.timeout = 60.0
@@ -80,17 +80,17 @@ module Google
                 default_config.rpcs.get_feed.timeout = 60.0
                 default_config.rpcs.get_feed.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_feeds.timeout = 60.0
                 default_config.rpcs.list_feeds.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_feed.timeout = 60.0
@@ -98,33 +98,33 @@ module Google
                 default_config.rpcs.delete_feed.timeout = 60.0
                 default_config.rpcs.delete_feed.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_all_resources.timeout = 15.0
                 default_config.rpcs.search_all_resources.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_all_iam_policies.timeout = 15.0
                 default_config.rpcs.search_all_iam_policies.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.analyze_iam_policy.timeout = 300.0
                 default_config.rpcs.analyze_iam_policy.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.analyze_iam_policy_longrunning.timeout = 60.0
@@ -195,7 +195,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -1291,7 +1291,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1312,7 +1312,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -1393,27 +1393,27 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  export_assets_config = parent_rpcs&.export_assets if parent_rpcs&.respond_to? :export_assets
+                  export_assets_config = parent_rpcs.export_assets if parent_rpcs.respond_to? :export_assets
                   @export_assets = ::Gapic::Config::Method.new export_assets_config
-                  batch_get_assets_history_config = parent_rpcs&.batch_get_assets_history if parent_rpcs&.respond_to? :batch_get_assets_history
+                  batch_get_assets_history_config = parent_rpcs.batch_get_assets_history if parent_rpcs.respond_to? :batch_get_assets_history
                   @batch_get_assets_history = ::Gapic::Config::Method.new batch_get_assets_history_config
-                  create_feed_config = parent_rpcs&.create_feed if parent_rpcs&.respond_to? :create_feed
+                  create_feed_config = parent_rpcs.create_feed if parent_rpcs.respond_to? :create_feed
                   @create_feed = ::Gapic::Config::Method.new create_feed_config
-                  get_feed_config = parent_rpcs&.get_feed if parent_rpcs&.respond_to? :get_feed
+                  get_feed_config = parent_rpcs.get_feed if parent_rpcs.respond_to? :get_feed
                   @get_feed = ::Gapic::Config::Method.new get_feed_config
-                  list_feeds_config = parent_rpcs&.list_feeds if parent_rpcs&.respond_to? :list_feeds
+                  list_feeds_config = parent_rpcs.list_feeds if parent_rpcs.respond_to? :list_feeds
                   @list_feeds = ::Gapic::Config::Method.new list_feeds_config
-                  update_feed_config = parent_rpcs&.update_feed if parent_rpcs&.respond_to? :update_feed
+                  update_feed_config = parent_rpcs.update_feed if parent_rpcs.respond_to? :update_feed
                   @update_feed = ::Gapic::Config::Method.new update_feed_config
-                  delete_feed_config = parent_rpcs&.delete_feed if parent_rpcs&.respond_to? :delete_feed
+                  delete_feed_config = parent_rpcs.delete_feed if parent_rpcs.respond_to? :delete_feed
                   @delete_feed = ::Gapic::Config::Method.new delete_feed_config
-                  search_all_resources_config = parent_rpcs&.search_all_resources if parent_rpcs&.respond_to? :search_all_resources
+                  search_all_resources_config = parent_rpcs.search_all_resources if parent_rpcs.respond_to? :search_all_resources
                   @search_all_resources = ::Gapic::Config::Method.new search_all_resources_config
-                  search_all_iam_policies_config = parent_rpcs&.search_all_iam_policies if parent_rpcs&.respond_to? :search_all_iam_policies
+                  search_all_iam_policies_config = parent_rpcs.search_all_iam_policies if parent_rpcs.respond_to? :search_all_iam_policies
                   @search_all_iam_policies = ::Gapic::Config::Method.new search_all_iam_policies_config
-                  analyze_iam_policy_config = parent_rpcs&.analyze_iam_policy if parent_rpcs&.respond_to? :analyze_iam_policy
+                  analyze_iam_policy_config = parent_rpcs.analyze_iam_policy if parent_rpcs.respond_to? :analyze_iam_policy
                   @analyze_iam_policy = ::Gapic::Config::Method.new analyze_iam_policy_config
-                  analyze_iam_policy_longrunning_config = parent_rpcs&.analyze_iam_policy_longrunning if parent_rpcs&.respond_to? :analyze_iam_policy_longrunning
+                  analyze_iam_policy_longrunning_config = parent_rpcs.analyze_iam_policy_longrunning if parent_rpcs.respond_to? :analyze_iam_policy_longrunning
                   @analyze_iam_policy_longrunning = ::Gapic::Config::Method.new analyze_iam_policy_longrunning_config
 
                   yield self if block_given?

@@ -107,7 +107,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.export_assets ::Google::Cloud::Asset::V1::ExportAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config), grpc_options do |response, operation|
+      client.export_assets(::Google::Cloud::Asset::V1::ExportAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -172,7 +172,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_get_assets_history ::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new(parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window), grpc_options do |response, operation|
+      client.batch_get_assets_history(::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new(parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -234,7 +234,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_feed ::Google::Cloud::Asset::V1::CreateFeedRequest.new(parent: parent, feed_id: feed_id, feed: feed), grpc_options do |response, operation|
+      client.create_feed(::Google::Cloud::Asset::V1::CreateFeedRequest.new(parent: parent, feed_id: feed_id, feed: feed), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -292,7 +292,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_feed ::Google::Cloud::Asset::V1::GetFeedRequest.new(name: name), grpc_options do |response, operation|
+      client.get_feed(::Google::Cloud::Asset::V1::GetFeedRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -350,7 +350,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_feeds ::Google::Cloud::Asset::V1::ListFeedsRequest.new(parent: parent), grpc_options do |response, operation|
+      client.list_feeds(::Google::Cloud::Asset::V1::ListFeedsRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -410,7 +410,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_feed ::Google::Cloud::Asset::V1::UpdateFeedRequest.new(feed: feed, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_feed(::Google::Cloud::Asset::V1::UpdateFeedRequest.new(feed: feed, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -468,7 +468,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_feed ::Google::Cloud::Asset::V1::DeleteFeedRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_feed(::Google::Cloud::Asset::V1::DeleteFeedRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -540,7 +540,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.search_all_resources ::Google::Cloud::Asset::V1::SearchAllResourcesRequest.new(scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options do |response, operation|
+      client.search_all_resources(::Google::Cloud::Asset::V1::SearchAllResourcesRequest.new(scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -609,7 +609,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.search_all_iam_policies ::Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.search_all_iam_policies(::Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -670,7 +670,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.analyze_iam_policy ::Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest.new(analysis_query: analysis_query, execution_timeout: execution_timeout), grpc_options do |response, operation|
+      client.analyze_iam_policy(::Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest.new(analysis_query: analysis_query, execution_timeout: execution_timeout), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -734,7 +734,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.analyze_iam_policy_longrunning ::Google::Cloud::Asset::V1::AnalyzeIamPolicyLongrunningRequest.new(analysis_query: analysis_query, output_config: output_config), grpc_options do |response, operation|
+      client.analyze_iam_policy_longrunning(::Google::Cloud::Asset::V1::AnalyzeIamPolicyLongrunningRequest.new(analysis_query: analysis_query, output_config: output_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
