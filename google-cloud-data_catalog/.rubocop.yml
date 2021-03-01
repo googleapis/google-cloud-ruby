@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-data_catalog.rb"
-
-Style/AsciiComments:
-  Enabled: false
