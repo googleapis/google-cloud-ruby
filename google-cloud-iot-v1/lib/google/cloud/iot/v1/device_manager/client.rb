@@ -60,7 +60,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -70,9 +70,9 @@ module Google
                 default_config.rpcs.get_device_registry.timeout = 120.0
                 default_config.rpcs.get_device_registry.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_device_registry.timeout = 120.0
@@ -80,17 +80,17 @@ module Google
                 default_config.rpcs.delete_device_registry.timeout = 120.0
                 default_config.rpcs.delete_device_registry.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_device_registries.timeout = 120.0
                 default_config.rpcs.list_device_registries.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_device.timeout = 120.0
@@ -98,9 +98,9 @@ module Google
                 default_config.rpcs.get_device.timeout = 120.0
                 default_config.rpcs.get_device.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_device.timeout = 120.0
@@ -108,41 +108,41 @@ module Google
                 default_config.rpcs.delete_device.timeout = 120.0
                 default_config.rpcs.delete_device.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_devices.timeout = 120.0
                 default_config.rpcs.list_devices.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.modify_cloud_to_device_config.timeout = 120.0
                 default_config.rpcs.modify_cloud_to_device_config.retry_policy = {
                   initial_delay: 1.0,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4, 8]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4, 8]
                 }
 
                 default_config.rpcs.list_device_config_versions.timeout = 120.0
                 default_config.rpcs.list_device_config_versions.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_device_states.timeout = 120.0
                 default_config.rpcs.list_device_states.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.set_iam_policy.timeout = 120.0
@@ -154,9 +154,9 @@ module Google
                 default_config.rpcs.send_command_to_device.timeout = 120.0
                 default_config.rpcs.send_command_to_device.retry_policy = {
                   initial_delay: 1.0,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4, 8]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4, 8]
                 }
 
                 default_config.rpcs.bind_device_to_gateway.timeout = 120.0
@@ -229,7 +229,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -1751,7 +1751,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1772,7 +1772,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -1893,43 +1893,43 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  create_device_registry_config = parent_rpcs&.create_device_registry if parent_rpcs&.respond_to? :create_device_registry
+                  create_device_registry_config = parent_rpcs.create_device_registry if parent_rpcs.respond_to? :create_device_registry
                   @create_device_registry = ::Gapic::Config::Method.new create_device_registry_config
-                  get_device_registry_config = parent_rpcs&.get_device_registry if parent_rpcs&.respond_to? :get_device_registry
+                  get_device_registry_config = parent_rpcs.get_device_registry if parent_rpcs.respond_to? :get_device_registry
                   @get_device_registry = ::Gapic::Config::Method.new get_device_registry_config
-                  update_device_registry_config = parent_rpcs&.update_device_registry if parent_rpcs&.respond_to? :update_device_registry
+                  update_device_registry_config = parent_rpcs.update_device_registry if parent_rpcs.respond_to? :update_device_registry
                   @update_device_registry = ::Gapic::Config::Method.new update_device_registry_config
-                  delete_device_registry_config = parent_rpcs&.delete_device_registry if parent_rpcs&.respond_to? :delete_device_registry
+                  delete_device_registry_config = parent_rpcs.delete_device_registry if parent_rpcs.respond_to? :delete_device_registry
                   @delete_device_registry = ::Gapic::Config::Method.new delete_device_registry_config
-                  list_device_registries_config = parent_rpcs&.list_device_registries if parent_rpcs&.respond_to? :list_device_registries
+                  list_device_registries_config = parent_rpcs.list_device_registries if parent_rpcs.respond_to? :list_device_registries
                   @list_device_registries = ::Gapic::Config::Method.new list_device_registries_config
-                  create_device_config = parent_rpcs&.create_device if parent_rpcs&.respond_to? :create_device
+                  create_device_config = parent_rpcs.create_device if parent_rpcs.respond_to? :create_device
                   @create_device = ::Gapic::Config::Method.new create_device_config
-                  get_device_config = parent_rpcs&.get_device if parent_rpcs&.respond_to? :get_device
+                  get_device_config = parent_rpcs.get_device if parent_rpcs.respond_to? :get_device
                   @get_device = ::Gapic::Config::Method.new get_device_config
-                  update_device_config = parent_rpcs&.update_device if parent_rpcs&.respond_to? :update_device
+                  update_device_config = parent_rpcs.update_device if parent_rpcs.respond_to? :update_device
                   @update_device = ::Gapic::Config::Method.new update_device_config
-                  delete_device_config = parent_rpcs&.delete_device if parent_rpcs&.respond_to? :delete_device
+                  delete_device_config = parent_rpcs.delete_device if parent_rpcs.respond_to? :delete_device
                   @delete_device = ::Gapic::Config::Method.new delete_device_config
-                  list_devices_config = parent_rpcs&.list_devices if parent_rpcs&.respond_to? :list_devices
+                  list_devices_config = parent_rpcs.list_devices if parent_rpcs.respond_to? :list_devices
                   @list_devices = ::Gapic::Config::Method.new list_devices_config
-                  modify_cloud_to_device_config_config = parent_rpcs&.modify_cloud_to_device_config if parent_rpcs&.respond_to? :modify_cloud_to_device_config
+                  modify_cloud_to_device_config_config = parent_rpcs.modify_cloud_to_device_config if parent_rpcs.respond_to? :modify_cloud_to_device_config
                   @modify_cloud_to_device_config = ::Gapic::Config::Method.new modify_cloud_to_device_config_config
-                  list_device_config_versions_config = parent_rpcs&.list_device_config_versions if parent_rpcs&.respond_to? :list_device_config_versions
+                  list_device_config_versions_config = parent_rpcs.list_device_config_versions if parent_rpcs.respond_to? :list_device_config_versions
                   @list_device_config_versions = ::Gapic::Config::Method.new list_device_config_versions_config
-                  list_device_states_config = parent_rpcs&.list_device_states if parent_rpcs&.respond_to? :list_device_states
+                  list_device_states_config = parent_rpcs.list_device_states if parent_rpcs.respond_to? :list_device_states
                   @list_device_states = ::Gapic::Config::Method.new list_device_states_config
-                  set_iam_policy_config = parent_rpcs&.set_iam_policy if parent_rpcs&.respond_to? :set_iam_policy
+                  set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
                   @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
-                  get_iam_policy_config = parent_rpcs&.get_iam_policy if parent_rpcs&.respond_to? :get_iam_policy
+                  get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                   @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
-                  test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
+                  test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                   @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
-                  send_command_to_device_config = parent_rpcs&.send_command_to_device if parent_rpcs&.respond_to? :send_command_to_device
+                  send_command_to_device_config = parent_rpcs.send_command_to_device if parent_rpcs.respond_to? :send_command_to_device
                   @send_command_to_device = ::Gapic::Config::Method.new send_command_to_device_config
-                  bind_device_to_gateway_config = parent_rpcs&.bind_device_to_gateway if parent_rpcs&.respond_to? :bind_device_to_gateway
+                  bind_device_to_gateway_config = parent_rpcs.bind_device_to_gateway if parent_rpcs.respond_to? :bind_device_to_gateway
                   @bind_device_to_gateway = ::Gapic::Config::Method.new bind_device_to_gateway_config
-                  unbind_device_from_gateway_config = parent_rpcs&.unbind_device_from_gateway if parent_rpcs&.respond_to? :unbind_device_from_gateway
+                  unbind_device_from_gateway_config = parent_rpcs.unbind_device_from_gateway if parent_rpcs.respond_to? :unbind_device_from_gateway
                   @unbind_device_from_gateway = ::Gapic::Config::Method.new unbind_device_from_gateway_config
 
                   yield self if block_given?
