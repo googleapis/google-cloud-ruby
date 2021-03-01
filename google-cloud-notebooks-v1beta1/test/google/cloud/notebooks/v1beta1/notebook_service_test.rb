@@ -103,7 +103,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.list_instances ::Google::Cloud::Notebooks::V1beta1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_instances(::Google::Cloud::Notebooks::V1beta1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.get_instance ::Google::Cloud::Notebooks::V1beta1::GetInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.get_instance(::Google::Cloud::Notebooks::V1beta1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -228,7 +228,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.create_instance ::Google::Cloud::Notebooks::V1beta1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), grpc_options do |response, operation|
+      client.create_instance(::Google::Cloud::Notebooks::V1beta1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -293,7 +293,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.register_instance ::Google::Cloud::Notebooks::V1beta1::RegisterInstanceRequest.new(parent: parent, instance_id: instance_id), grpc_options do |response, operation|
+      client.register_instance(::Google::Cloud::Notebooks::V1beta1::RegisterInstanceRequest.new(parent: parent, instance_id: instance_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -360,7 +360,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.set_instance_accelerator ::Google::Cloud::Notebooks::V1beta1::SetInstanceAcceleratorRequest.new(name: name, type: type, core_count: core_count), grpc_options do |response, operation|
+      client.set_instance_accelerator(::Google::Cloud::Notebooks::V1beta1::SetInstanceAcceleratorRequest.new(name: name, type: type, core_count: core_count), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -425,7 +425,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.set_instance_machine_type ::Google::Cloud::Notebooks::V1beta1::SetInstanceMachineTypeRequest.new(name: name, machine_type: machine_type), grpc_options do |response, operation|
+      client.set_instance_machine_type(::Google::Cloud::Notebooks::V1beta1::SetInstanceMachineTypeRequest.new(name: name, machine_type: machine_type), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -490,7 +490,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.set_instance_labels ::Google::Cloud::Notebooks::V1beta1::SetInstanceLabelsRequest.new(name: name, labels: labels), grpc_options do |response, operation|
+      client.set_instance_labels(::Google::Cloud::Notebooks::V1beta1::SetInstanceLabelsRequest.new(name: name, labels: labels), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -553,7 +553,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.delete_instance ::Google::Cloud::Notebooks::V1beta1::DeleteInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_instance(::Google::Cloud::Notebooks::V1beta1::DeleteInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -616,7 +616,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.start_instance ::Google::Cloud::Notebooks::V1beta1::StartInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.start_instance(::Google::Cloud::Notebooks::V1beta1::StartInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -679,7 +679,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.stop_instance ::Google::Cloud::Notebooks::V1beta1::StopInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.stop_instance(::Google::Cloud::Notebooks::V1beta1::StopInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -742,7 +742,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.reset_instance ::Google::Cloud::Notebooks::V1beta1::ResetInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.reset_instance(::Google::Cloud::Notebooks::V1beta1::ResetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -809,7 +809,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.report_instance_info ::Google::Cloud::Notebooks::V1beta1::ReportInstanceInfoRequest.new(name: name, vm_id: vm_id, metadata: metadata), grpc_options do |response, operation|
+      client.report_instance_info(::Google::Cloud::Notebooks::V1beta1::ReportInstanceInfoRequest.new(name: name, vm_id: vm_id, metadata: metadata), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -868,7 +868,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.is_instance_upgradeable ::Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableRequest.new(notebook_instance: notebook_instance), grpc_options do |response, operation|
+      client.is_instance_upgradeable(::Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableRequest.new(notebook_instance: notebook_instance), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -930,7 +930,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.upgrade_instance ::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.upgrade_instance(::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -995,7 +995,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.upgrade_instance_internal ::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceInternalRequest.new(name: name, vm_id: vm_id), grpc_options do |response, operation|
+      client.upgrade_instance_internal(::Google::Cloud::Notebooks::V1beta1::UpgradeInstanceInternalRequest.new(name: name, vm_id: vm_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1062,7 +1062,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.list_environments ::Google::Cloud::Notebooks::V1beta1::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_environments(::Google::Cloud::Notebooks::V1beta1::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1121,7 +1121,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.get_environment ::Google::Cloud::Notebooks::V1beta1::GetEnvironmentRequest.new(name: name), grpc_options do |response, operation|
+      client.get_environment(::Google::Cloud::Notebooks::V1beta1::GetEnvironmentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1187,7 +1187,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.create_environment ::Google::Cloud::Notebooks::V1beta1::CreateEnvironmentRequest.new(parent: parent, environment_id: environment_id, environment: environment), grpc_options do |response, operation|
+      client.create_environment(::Google::Cloud::Notebooks::V1beta1::CreateEnvironmentRequest.new(parent: parent, environment_id: environment_id, environment: environment), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1250,7 +1250,7 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::ClientTest < Minites
       end
 
       # Use protobuf object with options
-      client.delete_environment ::Google::Cloud::Notebooks::V1beta1::DeleteEnvironmentRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_environment(::Google::Cloud::Notebooks::V1beta1::DeleteEnvironmentRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
