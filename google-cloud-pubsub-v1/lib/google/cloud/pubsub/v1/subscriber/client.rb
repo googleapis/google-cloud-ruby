@@ -62,7 +62,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -70,129 +70,129 @@ module Google
                 default_config.rpcs.create_subscription.timeout = 60.0
                 default_config.rpcs.create_subscription.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [2, 10, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.get_subscription.timeout = 60.0
                 default_config.rpcs.get_subscription.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [2, 10, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.update_subscription.timeout = 60.0
                 default_config.rpcs.update_subscription.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.list_subscriptions.timeout = 60.0
                 default_config.rpcs.list_subscriptions.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [2, 10, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.delete_subscription.timeout = 60.0
                 default_config.rpcs.delete_subscription.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.modify_ack_deadline.timeout = 60.0
                 default_config.rpcs.modify_ack_deadline.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.acknowledge.timeout = 60.0
                 default_config.rpcs.acknowledge.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.pull.timeout = 60.0
                 default_config.rpcs.pull.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [2, 10, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.streaming_pull.timeout = 900.0
                 default_config.rpcs.streaming_pull.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 8, 10, 13, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 8, 10, 13, 14]
                 }
 
                 default_config.rpcs.modify_push_config.timeout = 60.0
                 default_config.rpcs.modify_push_config.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.get_snapshot.timeout = 60.0
                 default_config.rpcs.get_snapshot.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [2, 10, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.list_snapshots.timeout = 60.0
                 default_config.rpcs.list_snapshots.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [2, 10, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.create_snapshot.timeout = 60.0
                 default_config.rpcs.create_snapshot.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.update_snapshot.timeout = 60.0
                 default_config.rpcs.update_snapshot.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.delete_snapshot.timeout = 60.0
                 default_config.rpcs.delete_snapshot.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.seek.timeout = 60.0
                 default_config.rpcs.seek.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [2, 10, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [2, 10, 14]
                 }
 
                 default_config
@@ -261,7 +261,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -1683,7 +1683,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1704,7 +1704,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -1810,37 +1810,37 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  create_subscription_config = parent_rpcs&.create_subscription if parent_rpcs&.respond_to? :create_subscription
+                  create_subscription_config = parent_rpcs.create_subscription if parent_rpcs.respond_to? :create_subscription
                   @create_subscription = ::Gapic::Config::Method.new create_subscription_config
-                  get_subscription_config = parent_rpcs&.get_subscription if parent_rpcs&.respond_to? :get_subscription
+                  get_subscription_config = parent_rpcs.get_subscription if parent_rpcs.respond_to? :get_subscription
                   @get_subscription = ::Gapic::Config::Method.new get_subscription_config
-                  update_subscription_config = parent_rpcs&.update_subscription if parent_rpcs&.respond_to? :update_subscription
+                  update_subscription_config = parent_rpcs.update_subscription if parent_rpcs.respond_to? :update_subscription
                   @update_subscription = ::Gapic::Config::Method.new update_subscription_config
-                  list_subscriptions_config = parent_rpcs&.list_subscriptions if parent_rpcs&.respond_to? :list_subscriptions
+                  list_subscriptions_config = parent_rpcs.list_subscriptions if parent_rpcs.respond_to? :list_subscriptions
                   @list_subscriptions = ::Gapic::Config::Method.new list_subscriptions_config
-                  delete_subscription_config = parent_rpcs&.delete_subscription if parent_rpcs&.respond_to? :delete_subscription
+                  delete_subscription_config = parent_rpcs.delete_subscription if parent_rpcs.respond_to? :delete_subscription
                   @delete_subscription = ::Gapic::Config::Method.new delete_subscription_config
-                  modify_ack_deadline_config = parent_rpcs&.modify_ack_deadline if parent_rpcs&.respond_to? :modify_ack_deadline
+                  modify_ack_deadline_config = parent_rpcs.modify_ack_deadline if parent_rpcs.respond_to? :modify_ack_deadline
                   @modify_ack_deadline = ::Gapic::Config::Method.new modify_ack_deadline_config
-                  acknowledge_config = parent_rpcs&.acknowledge if parent_rpcs&.respond_to? :acknowledge
+                  acknowledge_config = parent_rpcs.acknowledge if parent_rpcs.respond_to? :acknowledge
                   @acknowledge = ::Gapic::Config::Method.new acknowledge_config
-                  pull_config = parent_rpcs&.pull if parent_rpcs&.respond_to? :pull
+                  pull_config = parent_rpcs.pull if parent_rpcs.respond_to? :pull
                   @pull = ::Gapic::Config::Method.new pull_config
-                  streaming_pull_config = parent_rpcs&.streaming_pull if parent_rpcs&.respond_to? :streaming_pull
+                  streaming_pull_config = parent_rpcs.streaming_pull if parent_rpcs.respond_to? :streaming_pull
                   @streaming_pull = ::Gapic::Config::Method.new streaming_pull_config
-                  modify_push_config_config = parent_rpcs&.modify_push_config if parent_rpcs&.respond_to? :modify_push_config
+                  modify_push_config_config = parent_rpcs.modify_push_config if parent_rpcs.respond_to? :modify_push_config
                   @modify_push_config = ::Gapic::Config::Method.new modify_push_config_config
-                  get_snapshot_config = parent_rpcs&.get_snapshot if parent_rpcs&.respond_to? :get_snapshot
+                  get_snapshot_config = parent_rpcs.get_snapshot if parent_rpcs.respond_to? :get_snapshot
                   @get_snapshot = ::Gapic::Config::Method.new get_snapshot_config
-                  list_snapshots_config = parent_rpcs&.list_snapshots if parent_rpcs&.respond_to? :list_snapshots
+                  list_snapshots_config = parent_rpcs.list_snapshots if parent_rpcs.respond_to? :list_snapshots
                   @list_snapshots = ::Gapic::Config::Method.new list_snapshots_config
-                  create_snapshot_config = parent_rpcs&.create_snapshot if parent_rpcs&.respond_to? :create_snapshot
+                  create_snapshot_config = parent_rpcs.create_snapshot if parent_rpcs.respond_to? :create_snapshot
                   @create_snapshot = ::Gapic::Config::Method.new create_snapshot_config
-                  update_snapshot_config = parent_rpcs&.update_snapshot if parent_rpcs&.respond_to? :update_snapshot
+                  update_snapshot_config = parent_rpcs.update_snapshot if parent_rpcs.respond_to? :update_snapshot
                   @update_snapshot = ::Gapic::Config::Method.new update_snapshot_config
-                  delete_snapshot_config = parent_rpcs&.delete_snapshot if parent_rpcs&.respond_to? :delete_snapshot
+                  delete_snapshot_config = parent_rpcs.delete_snapshot if parent_rpcs.respond_to? :delete_snapshot
                   @delete_snapshot = ::Gapic::Config::Method.new delete_snapshot_config
-                  seek_config = parent_rpcs&.seek if parent_rpcs&.respond_to? :seek
+                  seek_config = parent_rpcs.seek if parent_rpcs.respond_to? :seek
                   @seek = ::Gapic::Config::Method.new seek_config
 
                   yield self if block_given?

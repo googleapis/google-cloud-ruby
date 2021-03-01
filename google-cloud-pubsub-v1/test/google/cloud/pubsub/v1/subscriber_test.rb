@@ -119,7 +119,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_subscription ::Google::Cloud::PubSub::V1::Subscription.new(name: name, topic: topic, push_config: push_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached), grpc_options do |response, operation|
+      client.create_subscription(::Google::Cloud::PubSub::V1::Subscription.new(name: name, topic: topic, push_config: push_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -177,7 +177,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_subscription ::Google::Cloud::PubSub::V1::GetSubscriptionRequest.new(subscription: subscription), grpc_options do |response, operation|
+      client.get_subscription(::Google::Cloud::PubSub::V1::GetSubscriptionRequest.new(subscription: subscription), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -237,7 +237,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_subscription ::Google::Cloud::PubSub::V1::UpdateSubscriptionRequest.new(subscription: subscription, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_subscription(::Google::Cloud::PubSub::V1::UpdateSubscriptionRequest.new(subscription: subscription, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -303,7 +303,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_subscriptions ::Google::Cloud::PubSub::V1::ListSubscriptionsRequest.new(project: project, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_subscriptions(::Google::Cloud::PubSub::V1::ListSubscriptionsRequest.new(project: project, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -362,7 +362,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_subscription ::Google::Cloud::PubSub::V1::DeleteSubscriptionRequest.new(subscription: subscription), grpc_options do |response, operation|
+      client.delete_subscription(::Google::Cloud::PubSub::V1::DeleteSubscriptionRequest.new(subscription: subscription), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -424,7 +424,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.modify_ack_deadline ::Google::Cloud::PubSub::V1::ModifyAckDeadlineRequest.new(subscription: subscription, ack_ids: ack_ids, ack_deadline_seconds: ack_deadline_seconds), grpc_options do |response, operation|
+      client.modify_ack_deadline(::Google::Cloud::PubSub::V1::ModifyAckDeadlineRequest.new(subscription: subscription, ack_ids: ack_ids, ack_deadline_seconds: ack_deadline_seconds), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -484,7 +484,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.acknowledge ::Google::Cloud::PubSub::V1::AcknowledgeRequest.new(subscription: subscription, ack_ids: ack_ids), grpc_options do |response, operation|
+      client.acknowledge(::Google::Cloud::PubSub::V1::AcknowledgeRequest.new(subscription: subscription, ack_ids: ack_ids), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -546,7 +546,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.pull ::Google::Cloud::PubSub::V1::PullRequest.new(subscription: subscription, return_immediately: return_immediately, max_messages: max_messages), grpc_options do |response, operation|
+      client.pull(::Google::Cloud::PubSub::V1::PullRequest.new(subscription: subscription, return_immediately: return_immediately, max_messages: max_messages), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -708,7 +708,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.modify_push_config ::Google::Cloud::PubSub::V1::ModifyPushConfigRequest.new(subscription: subscription, push_config: push_config), grpc_options do |response, operation|
+      client.modify_push_config(::Google::Cloud::PubSub::V1::ModifyPushConfigRequest.new(subscription: subscription, push_config: push_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -766,7 +766,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_snapshot ::Google::Cloud::PubSub::V1::GetSnapshotRequest.new(snapshot: snapshot), grpc_options do |response, operation|
+      client.get_snapshot(::Google::Cloud::PubSub::V1::GetSnapshotRequest.new(snapshot: snapshot), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -832,7 +832,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_snapshots ::Google::Cloud::PubSub::V1::ListSnapshotsRequest.new(project: project, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_snapshots(::Google::Cloud::PubSub::V1::ListSnapshotsRequest.new(project: project, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -895,7 +895,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_snapshot ::Google::Cloud::PubSub::V1::CreateSnapshotRequest.new(name: name, subscription: subscription, labels: labels), grpc_options do |response, operation|
+      client.create_snapshot(::Google::Cloud::PubSub::V1::CreateSnapshotRequest.new(name: name, subscription: subscription, labels: labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -955,7 +955,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_snapshot ::Google::Cloud::PubSub::V1::UpdateSnapshotRequest.new(snapshot: snapshot, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_snapshot(::Google::Cloud::PubSub::V1::UpdateSnapshotRequest.new(snapshot: snapshot, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1013,7 +1013,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_snapshot ::Google::Cloud::PubSub::V1::DeleteSnapshotRequest.new(snapshot: snapshot), grpc_options do |response, operation|
+      client.delete_snapshot(::Google::Cloud::PubSub::V1::DeleteSnapshotRequest.new(snapshot: snapshot), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1074,7 +1074,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.seek ::Google::Cloud::PubSub::V1::SeekRequest.new(subscription: subscription, time: time), grpc_options do |response, operation|
+      client.seek(::Google::Cloud::PubSub::V1::SeekRequest.new(subscription: subscription, time: time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

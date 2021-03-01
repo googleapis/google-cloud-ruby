@@ -96,7 +96,7 @@ module Google
 
                   "projects/#{project}/topics/#{topic}"
                 end),
-                ""              => (proc do
+                "" => (proc do
                   "_deleted-topic_"
                 end)
               }

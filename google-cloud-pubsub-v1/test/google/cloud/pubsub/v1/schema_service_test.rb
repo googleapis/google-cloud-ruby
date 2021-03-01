@@ -99,7 +99,7 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_schema ::Google::Cloud::PubSub::V1::CreateSchemaRequest.new(parent: parent, schema: schema, schema_id: schema_id), grpc_options do |response, operation|
+      client.create_schema(::Google::Cloud::PubSub::V1::CreateSchemaRequest.new(parent: parent, schema: schema, schema_id: schema_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -159,7 +159,7 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_schema ::Google::Cloud::PubSub::V1::GetSchemaRequest.new(name: name, view: view), grpc_options do |response, operation|
+      client.get_schema(::Google::Cloud::PubSub::V1::GetSchemaRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -227,7 +227,7 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_schemas ::Google::Cloud::PubSub::V1::ListSchemasRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_schemas(::Google::Cloud::PubSub::V1::ListSchemasRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -286,7 +286,7 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_schema ::Google::Cloud::PubSub::V1::DeleteSchemaRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_schema(::Google::Cloud::PubSub::V1::DeleteSchemaRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -346,7 +346,7 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.validate_schema ::Google::Cloud::PubSub::V1::ValidateSchemaRequest.new(parent: parent, schema: schema), grpc_options do |response, operation|
+      client.validate_schema(::Google::Cloud::PubSub::V1::ValidateSchemaRequest.new(parent: parent, schema: schema), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -411,7 +411,7 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.validate_message ::Google::Cloud::PubSub::V1::ValidateMessageRequest.new(parent: parent, name: name, message: message, encoding: encoding), grpc_options do |response, operation|
+      client.validate_message(::Google::Cloud::PubSub::V1::ValidateMessageRequest.new(parent: parent, name: name, message: message, encoding: encoding), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
