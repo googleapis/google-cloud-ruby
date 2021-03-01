@@ -95,7 +95,7 @@ class ::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::ClientTest < Minite
       end
 
       # Use protobuf object with options
-      client.troubleshoot_iam_policy ::Google::Cloud::PolicyTroubleshooter::V1::TroubleshootIamPolicyRequest.new(access_tuple: access_tuple), grpc_options do |response, operation|
+      client.troubleshoot_iam_policy(::Google::Cloud::PolicyTroubleshooter::V1::TroubleshootIamPolicyRequest.new(access_tuple: access_tuple), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
