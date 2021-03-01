@@ -99,7 +99,7 @@ class ::Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.compute_threat_list_diff ::Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest.new(threat_type: threat_type, version_token: version_token, constraints: constraints), grpc_options do |response, operation|
+      client.compute_threat_list_diff(::Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest.new(threat_type: threat_type, version_token: version_token, constraints: constraints), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -159,7 +159,7 @@ class ::Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.search_uris ::Google::Cloud::WebRisk::V1beta1::SearchUrisRequest.new(uri: uri, threat_types: threat_types), grpc_options do |response, operation|
+      client.search_uris(::Google::Cloud::WebRisk::V1beta1::SearchUrisRequest.new(uri: uri, threat_types: threat_types), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -219,7 +219,7 @@ class ::Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.search_hashes ::Google::Cloud::WebRisk::V1beta1::SearchHashesRequest.new(hash_prefix: hash_prefix, threat_types: threat_types), grpc_options do |response, operation|
+      client.search_hashes(::Google::Cloud::WebRisk::V1beta1::SearchHashesRequest.new(hash_prefix: hash_prefix, threat_types: threat_types), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
