@@ -95,7 +95,7 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_posix_account ::Google::Cloud::OsLogin::V1::DeletePosixAccountRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_posix_account(::Google::Cloud::OsLogin::V1::DeletePosixAccountRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -153,7 +153,7 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_ssh_public_key ::Google::Cloud::OsLogin::V1::DeleteSshPublicKeyRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_ssh_public_key(::Google::Cloud::OsLogin::V1::DeleteSshPublicKeyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,7 +215,7 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_login_profile ::Google::Cloud::OsLogin::V1::GetLoginProfileRequest.new(name: name, project_id: project_id, system_id: system_id), grpc_options do |response, operation|
+      client.get_login_profile(::Google::Cloud::OsLogin::V1::GetLoginProfileRequest.new(name: name, project_id: project_id, system_id: system_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -273,7 +273,7 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_ssh_public_key ::Google::Cloud::OsLogin::V1::GetSshPublicKeyRequest.new(name: name), grpc_options do |response, operation|
+      client.get_ssh_public_key(::Google::Cloud::OsLogin::V1::GetSshPublicKeyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -335,7 +335,7 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.import_ssh_public_key ::Google::Cloud::OsLogin::V1::ImportSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key, project_id: project_id), grpc_options do |response, operation|
+      client.import_ssh_public_key(::Google::Cloud::OsLogin::V1::ImportSshPublicKeyRequest.new(parent: parent, ssh_public_key: ssh_public_key, project_id: project_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -397,7 +397,7 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_ssh_public_key ::Google::Cloud::OsLogin::V1::UpdateSshPublicKeyRequest.new(name: name, ssh_public_key: ssh_public_key, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_ssh_public_key(::Google::Cloud::OsLogin::V1::UpdateSshPublicKeyRequest.new(name: name, ssh_public_key: ssh_public_key, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
