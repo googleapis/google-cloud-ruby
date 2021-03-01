@@ -107,7 +107,7 @@ class ::Google::Cloud::Talent::V4beta1::ProfileService::ClientTest < Minitest::T
       end
 
       # Use protobuf object with options
-      client.list_profiles ::Google::Cloud::Talent::V4beta1::ListProfilesRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size, read_mask: read_mask), grpc_options do |response, operation|
+      client.list_profiles(::Google::Cloud::Talent::V4beta1::ListProfilesRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -168,7 +168,7 @@ class ::Google::Cloud::Talent::V4beta1::ProfileService::ClientTest < Minitest::T
       end
 
       # Use protobuf object with options
-      client.create_profile ::Google::Cloud::Talent::V4beta1::CreateProfileRequest.new(parent: parent, profile: profile), grpc_options do |response, operation|
+      client.create_profile(::Google::Cloud::Talent::V4beta1::CreateProfileRequest.new(parent: parent, profile: profile), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -226,7 +226,7 @@ class ::Google::Cloud::Talent::V4beta1::ProfileService::ClientTest < Minitest::T
       end
 
       # Use protobuf object with options
-      client.get_profile ::Google::Cloud::Talent::V4beta1::GetProfileRequest.new(name: name), grpc_options do |response, operation|
+      client.get_profile(::Google::Cloud::Talent::V4beta1::GetProfileRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -286,7 +286,7 @@ class ::Google::Cloud::Talent::V4beta1::ProfileService::ClientTest < Minitest::T
       end
 
       # Use protobuf object with options
-      client.update_profile ::Google::Cloud::Talent::V4beta1::UpdateProfileRequest.new(profile: profile, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_profile(::Google::Cloud::Talent::V4beta1::UpdateProfileRequest.new(profile: profile, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -344,7 +344,7 @@ class ::Google::Cloud::Talent::V4beta1::ProfileService::ClientTest < Minitest::T
       end
 
       # Use protobuf object with options
-      client.delete_profile ::Google::Cloud::Talent::V4beta1::DeleteProfileRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_profile(::Google::Cloud::Talent::V4beta1::DeleteProfileRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -424,7 +424,7 @@ class ::Google::Cloud::Talent::V4beta1::ProfileService::ClientTest < Minitest::T
       end
 
       # Use protobuf object with options
-      client.search_profiles ::Google::Cloud::Talent::V4beta1::SearchProfilesRequest.new(parent: parent, request_metadata: request_metadata, profile_query: profile_query, page_size: page_size, page_token: page_token, offset: offset, disable_spell_check: disable_spell_check, order_by: order_by, case_sensitive_sort: case_sensitive_sort, histogram_queries: histogram_queries, result_set_id: result_set_id, strict_keywords_search: strict_keywords_search), grpc_options do |response, operation|
+      client.search_profiles(::Google::Cloud::Talent::V4beta1::SearchProfilesRequest.new(parent: parent, request_metadata: request_metadata, profile_query: profile_query, page_size: page_size, page_token: page_token, offset: offset, disable_spell_check: disable_spell_check, order_by: order_by, case_sensitive_sort: case_sensitive_sort, histogram_queries: histogram_queries, result_set_id: result_set_id, strict_keywords_search: strict_keywords_search), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

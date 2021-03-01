@@ -97,7 +97,7 @@ class ::Google::Cloud::Talent::V4beta1::EventService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.create_client_event ::Google::Cloud::Talent::V4beta1::CreateClientEventRequest.new(parent: parent, client_event: client_event), grpc_options do |response, operation|
+      client.create_client_event(::Google::Cloud::Talent::V4beta1::CreateClientEventRequest.new(parent: parent, client_event: client_event), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
